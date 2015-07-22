@@ -1,3 +1,11 @@
+---
+layout:     post
+title:      Servo developer tools overview
+date:       2015-07-22 12:00:00
+summary:    Overview of the Servo development environment
+categories:
+---
+
 # Servo developer tools overview
 
 [Servo](https://github.com/servo/servo) is a new web browser engine. It is one of the largest Rust-based projects, but the total Rust code is still dwarfed by the size of the code provided in native C and C++ libraries. This post is an overview of how we have structured our development environment in order to integrate the Cargo build system, with its "many small and distributed dependencies" model with our needs to provide many additional features not often found in smaller Rust-only projects.
@@ -9,6 +17,7 @@
 ### mach bootstrap
 
 The steps that mach will handle before issuing a normal `cargo build` command are:
+
 * Downloading the correct versions of the cargo and rustc tools. Servo uses many unstable features in Rust, most problematically those that change pretty frequently. We also test the edges of feature compatibility and so are the first ones to notice many changes that did not at first seem as if they would break anyone. Further, we build a custom version of the tools that additionally supports cross-compilation targeting Android (and ARM in the near future). A random local install of the Rust toolchain is pretty unlikely to work with Servo.
 
 * Updating git submodules. Some of Servo's dependencies cannot be downloaded as Cargo dependencies because they need to be directly referenced in the build process, and Cargo adds a hash that makes it difficult to locate those files. For such code, we add them as submodules.
@@ -18,8 +27,11 @@ The steps that mach will handle before issuing a normal `cargo build` command ar
 The build itself also verifies that the user has explicitly requested either a `dev` or `release` build --- the Servo dev build is debuggable but quite slow, and it's not clear which build should be the default.
 
 Additionally, there's the question of _which_ `cargo build` to run. Servo has three different "toplevel" Cargo.toml files.
+
 * `components/servo/Cargo.toml` is used to build an executable binary named `servo` and is used on Linux and OSX. There are also horrible linker hacks in place that will cause an Android-targeted build to instead produce a file named `servo` that is actually an APK file that can be loaded onto Android devices.
+
 * `ports/gonk/Cargo.toml` produces a binary that can run on the Firefox OS Boot2Gecko mobile platform.
+
 * `ports/cef/Cargo.toml` produces a shared library that can be loaded within the Chromium Embedding Framework to provide a hostable web rendering engine.
 
 The presence of these three different toplevel binaries and the curious directory structure means that mach also provides a `run` command that will execute the correct binary with any provided arguments.
