@@ -6,8 +6,6 @@ summary:    Overview of the Servo development environment
 categories:
 ---
 
-# Servo developer tools overview
-
 [Servo](https://github.com/servo/servo) is a new web browser engine. It is one of the largest Rust-based projects, but the total Rust code is still dwarfed by the size of the code provided in native C and C++ libraries. This post is an overview of how we have structured our development environment in order to integrate the Cargo build system, with its "many small and distributed dependencies" model with our needs to provide many additional features not often found in smaller Rust-only projects.
 
 ## Mach
