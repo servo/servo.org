@@ -40,7 +40,7 @@ Servo has several testing tools that can be executed via mach.
 
 * `mach tidy` will verify that there are no trivial syntactic errors in source files. It checks for valid license headers in each file, no tab characters, no trailing whitespaces, etc.
 
-* `mach test-ref` will run the Servo-specific reference tests. These tests render a pair of web pages that implement the same final layout using different CSS features to images. If the images are not pixel-identically, the test fails.
+* `mach test-ref` will run the Servo-specific reference tests. These tests render a pair of web pages that implement the same final layout using different CSS features to images. If the images are not pixel-identical, the test fails.
 
 * `mach test-wpt` runs the cross-browser W3C Web Platform Tests, which primarily test DOM features.
 
