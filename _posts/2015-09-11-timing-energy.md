@@ -135,9 +135,9 @@ In most cases, these short-lived tasks are not bottlenecks and not critical w.r.
 
 ### perf-rainbow-hard
 
-![perf-rainbow-hard-l4](timing-energy-figs/prh-raw-l4.png "Raw time and energy sums for perf-rainbow-hard with 4 layout threads.")
+![perf-rainbow-hard-l4]({{ site.url }}/images/timing-energy-figs/prh-raw-l4.png "Raw time and energy sums for perf-rainbow-hard with 4 layout threads.")
 
-![perf-rainbow-hard-ts-l4-t1](timing-energy-figs/prh-ts_l4_trial_1.png "Time series for perf-rainbow-hard with 4 layout threads.")
+![perf-rainbow-hard-ts-l4-t1]({{ site.url }}/images/timing-energy-figs/prh-ts_l4_trial_1.png "Time series for perf-rainbow-hard with 4 layout threads.")
 
 `ScriptNetworkEvent` makes a strong appearance in `perf-rainbow-hard.html` (737 distinct events) because the file is unusually large - about 6 MB.
 Black bars in the time series denote the beginning and end of each event, but most are indistinguishable here.
@@ -155,9 +155,9 @@ The total runtime for this execution is 2.09 seconds, consuming 35.07 Joules of 
 
 ### Wikipedia
 
-![wikipedia-l4](timing-energy-figs/w-raw-l4.png "Raw time and energy sums for a Wikipedia page with 4 layout threads.")
+![wikipedia-l4]({{ site.url }}/images/timing-energy-figs/w-raw-l4.png "Raw time and energy sums for a Wikipedia page with 4 layout threads.")
 
-![wikipedia-ts-l4-t1](timing-energy-figs/w-ts_l4_trial_1.png "Time series for a Wikipedia page with 4 layout threads.")
+![wikipedia-ts-l4-t1]({{ site.url }}/images/timing-energy-figs/w-ts_l4_trial_1.png "Time series for a Wikipedia page with 4 layout threads.")
 
 Looking at the column chart for our Wikipedia page, we see that a lower fraction of the total time is spent in `ScriptNetworkEvent` and a higher fraction is spent in layout tasks.
 Still, the page is fairly large at about 320 KB, plus another 1.2 MB of additional images and CSS files.
