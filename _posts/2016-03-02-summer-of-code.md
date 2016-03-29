@@ -18,7 +18,7 @@ of Code ideas are [here][gsoc-servo]. Applications need not be confined to these
 something else you want to work on let us know.
 
 
-Applications for Rails Girls Summer of Code are accepted from late February to March 15th. See
+Applications for Rails Girls Summer of Code are accepted from late February to April 10th. See
 [here][rgsoc-eligible] for eligibility. The coding period is from July to September.
 
 Applications for Google Summer of Code are from 14-25th March. See [here][gsoc-eligible] for
