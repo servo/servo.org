@@ -14,7 +14,7 @@ have created packages for macOS and Linux; Windows and Android packages should
 be available soon.
 
 Binary packages and installation instructions are available at
-[download.servo.org](http://download.servo.org/index.html).
+[https://servo-builds.s3.amazonaws.com/index.html](https://servo-builds.s3.amazonaws.com/index.html).
 
 When you first run Servo, you see a new tab page containing a selection of
 sites that Servo renders well and some tech demos. A
