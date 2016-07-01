@@ -14,7 +14,7 @@ have created packages for macOS and Linux (64-bit); Windows and Android packages
 be available soon.
 
 Binary packages and installation instructions are available at
-[https://servo-builds.s3.amazonaws.com/index.html](https://servo-builds.s3.amazonaws.com/index.html).
+[https://download.servo.org/](https://download.servo.org/).
 
 When you first run Servo, you see a new tab page containing a selection of
 sites that Servo renders well and some tech demos. A
