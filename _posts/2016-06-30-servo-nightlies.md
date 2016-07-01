@@ -10,7 +10,7 @@ Nightly builds of the Servo web rendering engine are now available! To make
 the Servo engine easy to interact with, we are bundling an HTML-based browser
 UI. While our engine is not yet fully web compatible, we want to give a larger
 audience the chance to start experimenting with and contributing to Servo. We
-have created packages for macOS and Linux (64 Bit); Windows and Android packages should
+have created packages for macOS and Linux (64-bit); Windows and Android packages should
 be available soon.
 
 Binary packages and installation instructions are available at
