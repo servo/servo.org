@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Wrapping up Google Summer of Code 2016
-date:       2016-06-30 20:00:00
+date:       2016-09-28 20:00:00
 summary:    Summaries of Servo's GSoC projects
 categories:
 ---
