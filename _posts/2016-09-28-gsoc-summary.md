@@ -12,7 +12,7 @@ under the mentorship of [jdm](https://github.com/jdm/), while Zhen Zhang ([izgzh
 implemented missing support for files, blobs, and [related APIs](http://dev.w3.org/2006/webapi/FileAPI/) under
 the direction of [Manishearth](https://github.com/Manishearth/). Let's see how they did!
 
-# ServiceWorker support
+## ServiceWorker support
 
 Three months is not enough time for a single student to implement the entire set of features
 defined by the [ServiceWorker specification](https://w3c.github.io/ServiceWorker/), so the goal
@@ -33,7 +33,7 @@ as part of GSoC; please check it out! His mentor was very pleased with Rahul's w
 course of the summer - it was a large, complex task, and he tackled it with enthusiasm and diligence.
 Congratulations on completing the project, and thank you for your efforts, Rahul!
 
-# File/Blob support
+## File/Blob support
 
 The second project by [Zhen Zhang](https://github.com/izgzhen) was to implement most of
 [the File specification](https://w3c.github.io/FileAPI/). The scope of the project included things like
