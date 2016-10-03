@@ -8,8 +8,9 @@ categories:
 This year Servo had two students working on projects as part of the Google Summer of Code program.
 Rahul Sharma ([creativcoder](https://github.com/creativcoder)) tackled the daunting project of
 implementing initial support for the new [ServiceWorker API](https://w3c.github.io/ServiceWorker/),
-while Zhen Zhang ([izgzhen](https://github.com/izgzhen)) implemented missing support for files,
-blobs, and [related APIs](http://dev.w3.org/2006/webapi/FileAPI/). Let's see how they did!
+under the mentorship of [jdm](https://github.com/jdm/), while Zhen Zhang ([izgzhen](https://github.com/izgzhen))
+implemented missing support for files, blobs, and [related APIs](http://dev.w3.org/2006/webapi/FileAPI/) under
+the direction of [Manishearth](https://github.com/Manishearth/). Let's see how they did!
 
 # ServiceWorker support
 
@@ -25,29 +26,29 @@ event. Notable pull requests include:
 coordinating ServiceWorker instances
 
 Rahul put together a [full writeup](https://github.com/creativcoder/gsoc16) of his activities
-as part of GSoC; please check it out! His mentor (jdm) was very pleased with Rahul's work over the
+as part of GSoC; please check it out! His mentor was very pleased with Rahul's work over the
 course of the summer - it was a large, complex task, and he tackled it with enthusiasm and diligence.
 Congratulations on completing the project, and thank you for your efforts, Rahul!
 
 # File/Blob support
 
 The second project by [Zhen Zhang](https://github.com/izgzhen) was to implement most of
-[the File specification](w3c.github.io/FileAPI/). The scope of the project included things like
+[the File specification](https://w3c.github.io/FileAPI/). The scope of the project included things like
 file upload form controls, manipulating files from the DOM, and the creation/management of blob
-URIs. As of now, almost all of the spec is implemented, except for the ability to construct and
+URIs. As of now almost all of the spec is implemented, except for the ability to construct and
 serialize `Blob`s to/from `ArrayBuffer`s (due to the lack of `ArrayBuffer` bindings at the time),
 `URL.createFor`, and handling fragments in blob URIs.
 
 Notable pull requests include:
 
 * The [`File`](https://github.com/servo/servo/pull/11076) and [`Blob`](https://github.com/servo/servo/pull/11716) DOM APIs
-* [Filepicker](https://github.com/servo/servo/pull/11717) integration, from tinyfiledialog
-* Support for [on-disk-file-backed `Blob`s](https://github.com/servo/servo/pull/11221)
+* [Filepicker](https://github.com/servo/servo/pull/11717) integration, using the `tinyfiledialog` library
+* Support for [on-disk file-backed `Blob`s](https://github.com/servo/servo/pull/11221)
 * [Storing](https://github.com/servo/servo/pull/11534) and [loading](https://github.com/servo/servo/pull/11536) Blob URIs
 * [Reference counting](https://github.com/servo/servo/pull/11875) logic for the blob store
 
 Status updates and design docs live in [this repo](https://github.com/izgzhen/gsoc-file-support).
 The [midterm summary](https://github.com/izgzhen/gsoc-file-support/blob/master/notes/midterm.md)
 is a particularly good read, as it explains the preliminary design for the refcounted blob store.
-Zhen was quite fun to work with; and showed lots of initiative in exploring solutions.
+Zhen was quite fun to work with, and showed lots of initiative in exploring solutions.
 Thank you for your help, Zhen!
