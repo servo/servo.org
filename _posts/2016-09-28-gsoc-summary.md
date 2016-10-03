@@ -19,7 +19,10 @@ defined by the [ServiceWorker specification](https://w3c.github.io/ServiceWorker
 of this project was to implement the fundamental pieces required for sharing workers between
 multiple pages, along with the related DOM APIs for registering and interacting with the
 workers, and finally enabling interception of network requests to support the worker's `fetch`
-event. Notable pull requests include:
+event.
+
+Notable pull requests include:
+
 * network request [interception](https://github.com/servo/servo/commit/3766cd167365187bfabbb00f5dc41ba923fe23d4)
 * the DOM API for [registration](https://github.com/servo/servo/commit/15a2064c0d7b468724b43d1cb6157d506ad19093)
 * a [new thread](https://github.com/servo/servo/commit/1e6293ea1d06120c9f3488d7d32c24d8d92df6b1) for
