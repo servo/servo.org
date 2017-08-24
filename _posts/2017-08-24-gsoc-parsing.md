@@ -1,8 +1,8 @@
 ---
-layout: post
-title:  "Off main thread HTML parsing in Servo"
-date:   2017-08-24 00:11:57 +0530
-summary: GSOC wrap-up: Async HTML parser project
+layout:     post
+title:      Off main thread HTML parsing in Servo
+date:       2017-08-24 00:11:57 +0530
+summary:    GSOC wrap-up: Async HTML parser project
 categories:
 ---
 
