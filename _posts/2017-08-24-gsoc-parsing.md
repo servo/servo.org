@@ -2,7 +2,7 @@
 layout:     post
 title:      Off main thread HTML parsing in Servo
 date:       2017-08-24 00:11:57 +0530
-summary:    GSOC wrap-up: Async HTML parser project
+summary:    "GSOC wrap-up: Async HTML parser project"
 categories:
 ---
 
@@ -24,7 +24,7 @@ html5ever has a type called `TreeBuilder`, which implements this trait. The Tree
 
 With me so far? Good. The key to parallelizing HTML parsing is realizing that the task of creating tree ops is independent from the task of *actually* executing them to construct the DOM tree. Therefore, tokenization and tree op creation can happen on a separate thread, while the tree construction can be done on the main thread itself.
 
-![Example image](https://cynicaldevil.github.io/blog/assets/parsing_diagram.png){:class="img-responsive"}
+![Example image](https://cynicaldevil.github.io/assets/parsing_diagram.png){:class="img-responsive"}
 
 ### The Process
 The first step I took was to decouple tree op creation from tree construction. Previously, tree ops were executed as soon as they were created. This involved the creation of a new [TreeSink](https://github.com/servo/servo/blob/270d445f27631ee6388f837545a5440f50e0cafb/components/script/dom/servoparser/async_html.rs#L512), which instead of executing them directly, created a [representation](hhttps://github.com/servo/servo/blob/270d445f27631ee6388f837545a5440f50e0cafb/components/script/dom/servoparser/async_html.rs#L59-L105) of a tree op, containing all relevant data. For the time being, I sent the tree op to a `process_op` function as soon as it was created, whereupon it was executed.
