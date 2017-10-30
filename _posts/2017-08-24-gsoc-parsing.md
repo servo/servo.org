@@ -61,3 +61,4 @@ This was a really fun project; I got solve lots of cool problems, and also learn
 
 I would like to thank my mentor [Anthony Ramine](https://twitter.com/nokusu), who was absolutely amazing to work with, and [Josh Matthews](https://twitter.com/lastontheboat), who helped me a lot when I was still a rookie looking to contribute to the project.
 
+_This post was translated to Russian by [Vlad Brown](http://howtorecover.me/). Check out the translated version [here](http://howtorecover.me/vyvod-osnovnoi-vetkoi-analiza-html-v-servo)._
