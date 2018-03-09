@@ -12,7 +12,7 @@ Coming in to 2018, we see virtual and augmented reality devices transitioning fr
 
 [![Servo 6DOF A-Blast from September 2017](https://img.youtube.com/vi/QJPkID53AYc/0.jpg)](https://www.youtube.com/watch?v=QJPkID53AYc)
 
-What does this look like concretely? The first thing we will do is get Servo implementing the [GeckoView](https://wiki.mozilla.org/Mobile/GeckoView ) API, working inside one of our existing mobile browser shell apps, and working with a ton of VR and AR devices so that it can run hand-in-hand with our existing use of Gecko in our Mixed Reality Browser. Like our WebXR iOS Viewer (https://blog.mozvr.com/experimenting-with-ar-and-the-web-on-ios/ ), this will give us a platform where we can experiment, drive standards forward, and build compelling pilot experiences. 
+What does this look like concretely? The first thing we will do is get Servo implementing the [GeckoView](https://wiki.mozilla.org/Mobile/GeckoView ) API, working inside one of our existing mobile browser shell apps, and working with a ton of VR and AR devices so that it can run hand-in-hand with our existing use of Gecko in our Mixed Reality Browser. Like our [WebXR iOS Viewer](https://blog.mozvr.com/experimenting-with-ar-and-the-web-on-ios/ ), this will give us a platform where we can experiment, drive standards forward, and build compelling pilot experiences. 
 
 Some of the experiments we’re looking to invest more in during 2018:
 
