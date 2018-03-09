@@ -2,7 +2,7 @@
 layout:     post
 title:      Mozilla’s Servo team joining Mixed Reality
 date:       2018-03-09 12:00:00 +0530
-summary:    "GSOC wrap-up: Async HTML parser project"
+summary:    "Mozilla's Servo team joining Mixed Reality"
 categories:
 ---
 
