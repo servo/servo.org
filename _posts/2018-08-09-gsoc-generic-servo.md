@@ -8,9 +8,9 @@
  
 ## Introduction
 
-I am Peter Hrvola (retep007) [Twitter](https://twitter.com/retep007) [Github](https://github.com/retep007). During my GSoC project, I have been working on investigating the monolithic nature of Servo's script crate and prototyping separation to smaller crates. My goal was to improve the use of resources during compilation. Current debug build consumes over 5GB of memory and takes 347s.
+I am Peter Hrvola (retep007) [Twitter](https://twitter.com/retep007) [Github](https://github.com/retep007). During my Google Summer of Code (GSoC) project, I have been working on investigating the monolithic nature of Servo's script crate and prototyping separation to smaller crates. My goal was to improve the use of resources during compilation. Current debug build consumes over 5GB of memory and takes 347s.
 
-The solution introduces a *TypeHolder* trait which contains associated types, and makes many structures in the script crate generic over this new trait. This allows the generic structs to refer to the new trait's associated types, while the actual concrete types can be extracted into a separate crate. Testing shows significant improvement in memory consumption (25% lower) and build time (33% faster).
+The solution introduces a *TypeHolder* trait which contains associated types, and makes many structures in the script crate generic over this new trait. This allows the generic structs to refer to the new trait's associated types, while the actual concrete types can be extracted into a separate crate. Testing shows significant improvement in memory consumption (25% lower) and build time (27% faster).
 
 ## The process
 
@@ -63,16 +63,27 @@ Due to lack of Rust support for generic static variables at many places I had to
 
 I have done testing on MacBook Pro 2015, High Sierra, 2,7 GHz i5 dual core, 16 GB RAM using `/usr/bin/time cargo build`, which shows maximal memory usage during compilation. Results may vary depending on build machine.
 
+Cargo recompiles only crates that have been modified and crates that depend on modified crates. I have separated script crate to script and script_servoparser. We have taken three samples. One for original Servo. Two after separation I have made. For separated script crate compilation times were measured for each crate separately. Only one crate was modified at a time. However, change in script crate also forces recompilation of script_servoparser.
+
 Resources were measured in this way:
 
 1. compile full servo
-2. modify Attr.rs file and ServoParser.rs files so I force recompilatiion of crates. After separation Attr.rs and ServoParser.rs are in different crates.
+2. modify files
 3. measure resources used to build a full servo
 
-|           | Servo with multiple script crates | Servo with one script crate |
-| --------- | ------------- | -------------------------- |
-| RAM       | 3.74GB        | 5.1GB                      |
-| Real time | 231s          | 347s                       |
+Unchanged Servo:
+
+|           | Servo |
+| --------- | ------------- |
+| RAM       | 5.1GB | 
+| Real time | 3:49m |
+
+Servo after separation to two crates:
+
+| | Modified script crate | Modified script_servoparser crate |
+| - | - | - |
+| RAM | 3.74 GB | 2 GB |
+| Real time | 2:56m | 1:48m |
 
 As we can see in the table above, resource usage during compilation has drastically changed. The main reason is that because of a large number of generic structures which postpone parts of compilation to later monomorphization. In future, actual separation of dom structs to upstream crates will lower this number even more. In the current version, only six dom structs were moved outside the script crate.
 
