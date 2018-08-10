@@ -5,7 +5,7 @@ date:       2018-08-09 00:30:00
 summary:    A summary of the work to separate one very large crate into smaller ones
 categories:
 ---
- 
+
 ## Introduction
 
 I am Peter Hrvola (retep007) [Twitter](https://twitter.com/retep007) [Github](https://github.com/retep007). During my Google Summer of Code (GSoC) project, I have been working on investigating the monolithic nature of Servo's script crate and prototyping separation to smaller crates. My goal was to improve the use of resources during compilation. Current debug build consumes over 5GB of memory and takes 347s.
