@@ -10,7 +10,7 @@
 
 I am Peter Hrvola (retep007) [Twitter](https://twitter.com/retep007) [Github](https://github.com/retep007). During my GSoC project, I have been working on investigating the monolithic nature of Servo's script crate and prototyping separation to smaller crates. My goal was to improve the use of resources during compilation. Current debug build consumes over 5GB of memory and takes 347s.
 
-The solution introduces a *TypeHolder* trait which contains associated types, and makes many structures in the script crate generic over this new trait. This allows the generic structs to refer to the new trait's associated types, while the actual concrete types can be extracted into a separate crate. Testing shows significant improvement in memory consumption 25% and time 33%.
+The solution introduces a *TypeHolder* trait which contains associated types, and makes many structures in the script crate generic over this new trait. This allows the generic structs to refer to the new trait's associated types, while the actual concrete types can be extracted into a separate crate. Testing shows significant improvement in memory consumption (25% lower) and build time (33% faster).
 
 ## The process
 
