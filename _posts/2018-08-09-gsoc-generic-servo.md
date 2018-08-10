@@ -1,10 +1,10 @@
 ---
- layout:     post
- title:      GSoC wrap-up: Splitting Servo's script crate
- date:       2018-08-09 00:30:00
- summary:    A summary of the work to separate one very large crate into smaller ones
- categories:
- ---
+layout:     post
+title:      GSoC wrap-up: Splitting Servo's script crate
+date:       2018-08-09 00:30:00
+summary:    A summary of the work to separate one very large crate into smaller ones
+categories:
+---
  
 ## Introduction
 
