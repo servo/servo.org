@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      RGSoC wrap-up: Supporting Responsive Images in Servo
+title:      RGSoC wrap-up - Supporting Responsive Images in Servo
 date:       2018-10-23 00:30:00
 summary:    Our experience of contributing to Servo
 categories: 
