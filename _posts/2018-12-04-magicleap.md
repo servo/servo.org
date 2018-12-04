@@ -9,8 +9,8 @@ categories:
 ## Introduction
 
 We now have nightly releases of Servo for the Magic Leap One augmented reality headset.
-You can head over to https://download.servo.org/, install the application, and browse the
-web in a virtual browser.
+You can head over to [https://download.servo.org/](https://download.servo.org/), install the
+application, and browse the web in a virtual browser.
 
 ![Magic Leap Servo]({{ site.url }}/images/magicleap-servo.jpg "Magic Leap Servo")
 
@@ -43,7 +43,7 @@ which provide users with 3D virtual visual and audio environments that interact 
 the world around them.
 
 The Magic Leap and Lumin Runtime SDKs are available from
-https://creator.magicleap.com/ for Mac and Windows platforms.
+[https://creator.magicleap.com/](https://creator.magicleap.com/) for Mac and Windows platforms.
 
 ## Building the Servo library
 
@@ -125,11 +125,11 @@ download page.
 ## Summary
 
 The pull request that added Magic Leap support to Servo is
-https://github.com/servo/servo/pull/21985 which adds about 1600 lines
-to Servo, mostly in the build scripts and the Magic Leap application.
-Work on the Magic Leap port of Servo started in early September 2018,
-and the pull request was merged at the end of October, so took about
-two person-months.
+[https://github.com/servo/servo/pull/21985](https://github.com/servo/servo/pull/21985)
+which adds about 1600 lines to Servo, mostly in the build scripts and
+the Magic Leap application. Work on the Magic Leap port of Servo started
+in early September 2018, and the pull request was merged at the end of October,
+so took about two person-months.
 
 Much of the port was straightforward, due to the maturity of the Rust
 cross-compilation and build tools, and the use of common open-source
