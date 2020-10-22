@@ -21,3 +21,9 @@ preview-build:
 		--buildDrafts \
 		--buildFuture \
 		--minify
+
+update-governance:
+	TMPDIR=$$(mktemp -d) ;\
+	git clone git@github.com:servo/project.git $$TMPDIR ;\
+	rsync -r $$TMPDIR/governance/CHARTER.md $$TMPDIR/governance/tsc content/governance/ ;\
+	ls $$TMPDIR
