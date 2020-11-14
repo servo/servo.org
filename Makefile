@@ -9,7 +9,7 @@ serve: yarn
 		--disableFastRender
 
 clean:
-	rm -rf resources/ node_modules/
+	rm -rf resources/ node_modules/ public/
 
 production-build:
 	hugo \
