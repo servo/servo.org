@@ -10,3 +10,16 @@ cross-browser automated tests, and core team members have co-edited new
 standards that have been adopted by other browsers. As a result, the Servo
 project helps drive the entire web platform forward while building on a
 platform of reusable, modular technologies that implement web standards.
+
+## Support and donations
+
+Interested in helping out the Servo Project? Please do! You could [write code](https://github.com/servo/servo/)
+or documentation, test nightlies and filing issues, or [donate](https://crowdfunding.lfx.linuxfoundation.org/projects/servo)
+to help cover the project’s CI and hosting costs. If you know a company that would like to
+support the Servo Project, please get in touch: <a href="mailto:contact@servo.org">contact@servo.org</a>.
+
+## Contact
+
+* Zulip: https://servo.zulipchat.com
+* Github discussion: https://github.com/servo/servo/discussions
+* Email: <a href="mailto:contact@servo.org">contact@servo.org</a>
