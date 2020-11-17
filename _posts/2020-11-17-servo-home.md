@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Servo’s new home
-date:       2020-08-10 00:30:00
+date:       2020-11-17 00:30:00
 summary:    Servo has left the Mozilla nest.
 categories:
 ---
