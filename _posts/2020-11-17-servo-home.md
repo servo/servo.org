@@ -6,7 +6,7 @@ summary:    Servo has left the Mozilla nest.
 categories:
 ---
 
-The Servo Project is excited to announce that it has found a new home with the Linux Foundation. Servo was incubated inside Mozilla, and served as the proof that important web components such as CSS and rendering could be implemented in Rust, with all its safety, concurrency and speed. Now it's time for Servo to leave the nest!
+The [Servo Project](https://servo.org) is excited to announce that it has found a new home with the Linux Foundation. Servo was incubated inside Mozilla, and served as the proof that important web components such as CSS and rendering could be implemented in Rust, with all its safety, concurrency and speed. Now it's time for Servo to leave the nest!
 
 This move comes with a change in project governance: the Servo Project gains a board and a technical steering committee to help guide the project’s future (see https://github.com/servo/project/ for more details).
 
