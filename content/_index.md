@@ -8,5 +8,5 @@ support the Servo Project, please get in touch: <a href="mailto:info@servo.org">
 ## Contact
 
 * Zulip: https://servo.zulipchat.com
-* Github discussion: https://github.com/servo/servo/discussions
+* GitHub discussion: https://github.com/servo/servo/discussions
 * Email: <a href="mailto:info@servo.org">info@servo.org</a>
