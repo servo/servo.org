@@ -25,5 +25,5 @@ preview-build:
 update-governance:
 	TMPDIR=$$(mktemp -d) ;\
 	git clone git@github.com:servo/project.git $$TMPDIR ;\
-	rsync -r $$TMPDIR/governance/CHARTER.md $$TMPDIR/governance/tsc content/governance/ ;\
+	rsync -r $$TMPDIR/governance/CHARTER.md $$TMPDIR/governance/tsc $$TMPDIR/governance/board content/governance/ ;\
 	ls $$TMPDIR
