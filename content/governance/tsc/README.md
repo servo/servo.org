@@ -11,7 +11,6 @@ Current members:
 - [Connor Brewster](https://github.com/cbrewster)
 - [Cheng-You Bai](https://github.com/cybai)
 - [Diane Hosfelt](https://github.com/avadacatavra)
-- [Dzmitry Malyshau](https://github.com/kvark)
 - [Emilio Cobos Álvarez](https://github.com/emilio)
 - [Fernando Jiménez Moreno](https://github.com/ferjm)
 - [Gregory Terzian](https://github.com/gterzian)
