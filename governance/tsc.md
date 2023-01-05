@@ -1,3 +1,8 @@
+---
+layout: default.html
+title: Technical Steering Committee
+---
+
 # Servo Technical Steering Committee
 
 The TSC is responsible for technical oversight of the Servo Project, as laid out in the [charter](../CHARTER.md).

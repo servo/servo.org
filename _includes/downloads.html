@@ -1,9 +1,3 @@
-{{ $home   := site.BaseURL }}
-{{ $here   := .RelPermalink }}
-{{ $title  := site.Title }}
-{{ $logo   := site.Params.logos.navbar }}
-{{ $menu   := site.Menus.main }}
-{{ $social := site.Params.social }}
 <section class="section">
   <div class="container">
     <div class="content">
@@ -22,17 +16,19 @@
         Servo just yet! Now that we’ve released our first developer preview,
         we’ll be investing in formal security audits and improving our security
         practices using both existing libraries and Rust – more information
-        coming soon!  </p>
+        coming soon!
+      </p>
       <div class="downloads">
-        {{ range site.Params.download  }}
+        {% for download in downloads %}
         <p>
           <div class="buttons has-addons">
-            <a class="button is-primary" href="https://download.servo.org/{{.href}}">{{.name}}</a>
-            <a class="button" href="https://download.servo.org/{{.sha256}}">sha256</a>
+            <a class="button is-primary" href="https://download.servo.org/{{download.href}}">{{download.name}}</a>
+            <a class="button" href="https://download.servo.org/{{download.sha256}}">sha256</a>
           </div>
         </p>
-        {{ end }}
+        {% endfor %}
       </div>
     </div>
   </div>
 </section>
+
