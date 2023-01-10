@@ -1,3 +1,8 @@
+---
+layout: default.html
+title: Technical Charter
+---
+
 # Technical Charter (the "Charter") for Servo Project a Series of LF Projects, LLC
 
 *Adopted September 16, 2020*

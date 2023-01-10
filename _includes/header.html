@@ -1,0 +1,25 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="{{ '/' | url }}">
+        <img src="{{ site.logo | url }}" alt="{{ title }}">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      {% for link in menu %}
+        {% assign pagedir = page.url %}
+        <a class="navbar-item{% if link.url == pagedir %} is-active{% endif %}" href="{{ link.url | url }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>
+          {{ link.title }}
+        </a>
+      {% endfor %}
+      {% include "social-buttons.html" %}
+    </div>
+  </div>
+</nav>
