@@ -46,10 +46,17 @@ jobs:
           HEAD_REF: ${{ github.head_ref }}
         run: |
           echo "Preview link: https://servo.org/$HEAD_REF/" >> $GITHUB_STEP_SUMMARY
-      - name: Comment PR
-        env:
-          HEAD_REF: ${{ github.head_ref }}
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          message: |
-            Preview link: https://servo.org/$HEAD_REF/
+
+  add_preview_link:
+   runs-on: ubuntu-latest
+   name: Comment preview link in the PR
+   steps:
+     - name: Checkout
+       uses: actions/checkout@v3
+     - name: Comment PR
+       env:
+         HEAD_REF: ${{ github.head_ref }}
+       uses: thollander/actions-comment-pull-request@v2j
+       with:
+         message: |
+           Preview link: https://servo.org/$HEAD_REF/
