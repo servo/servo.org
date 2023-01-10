@@ -42,8 +42,5 @@ jobs:
           publish_dir: ./_site
           keep_files: true
       - name: Add deploy link
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          message: |
-            Preview link https://servo.org/${{ github.head_ref }}/
+        run: |
+          echo "Preview link https://servo.org/${{ github.head_ref }}/" >> $GITHUB_STEP_SUMMARY
