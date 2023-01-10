@@ -31,9 +31,6 @@ jobs:
         run: npm run sass
       - name: Eleventy
         run: |
-          cp -f _data/site.json /tmp/site.json
-          jq '.base_url = "https://servo.github.io"' \
-            /tmp/site.json > _data/site.json
           npx eleventy \
             --output='_site/${{ github.head_ref }}' \
             --pathprefix='/servo.org/${{ github.head_ref }}'
