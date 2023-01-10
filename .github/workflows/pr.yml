@@ -33,7 +33,7 @@ jobs:
         run: |
           npx eleventy \
             --output='_site/${{ github.head_ref }}' \
-            --pathprefix='/servo.org/${{ github.head_ref }}'
+            --pathprefix='/${{ github.head_ref }}/'
           LC_TIME=C date > '_site/${{ github.head_ref }}/.stamp'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -42,24 +42,7 @@ jobs:
           publish_dir: ./_site
           keep_files: true
       - name: Add deploy link
-        uses: actions/github-script@v2
+        uses: thollander/actions-comment-pull-request@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { data: pr } = await github.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-            });
-
-            // Site preview link already added.
-            const marker = '\n\n----\n\nSite preview: ';
-            if (pr.body && pr.body.indexOf(marker) != -1)
-              return;
-
-            await github.pulls.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: pr.number,
-              body: pr.body + marker + 'https://servo.github.io/servo.org/${{ github.head_ref }}/',
-            });
+          message: |
+            Preview link https://servo.org/${{ github.head_ref }}/
