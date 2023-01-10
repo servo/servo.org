@@ -41,6 +41,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           keep_files: true
-      - name: Add deploy link
+      - name: Deploy link
+        env:
+          HEAD_REF: ${{ github.head_ref }}
         run: |
-          echo "Preview link" >> $GITHUB_STEP_SUMMARY
+          echo "Preview link: https://servo.org/$HEAD_REF/" >> $GITHUB_STEP_SUMMARY
