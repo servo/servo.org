@@ -2,6 +2,8 @@ const MarkdownIt = require("markdown-it");
 const MarkdownItAnchor = require("markdown-it-anchor");
 
 module.exports = function(eleventyConfig) {
+  eleventyConfig.setTemplateFormats(["pdf"]);
+
   eleventyConfig.addPassthroughCopy({"assets/img": "img"});
   eleventyConfig.addPassthroughCopy({"assets/svg": "svg"});
 
