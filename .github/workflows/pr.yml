@@ -2,14 +2,17 @@ name: build-pr
 
 on:
   pull_request:
-    branches:
-      - master
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency: preview-${{ github.ref }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Setup Node
         uses: actions/setup-node@v1
@@ -30,39 +33,11 @@ jobs:
       - name: Sass
         run: npm run sass
       - name: Eleventy
+        env:
+          PR_NUMBER: ${{ github.event.number }}
         run: |
-          cp -f _data/site.json /tmp/site.json
-          jq '.base_url = "https://servo.github.io"' \
-            /tmp/site.json > _data/site.json
-          npx eleventy \
-            --output='_site/${{ github.head_ref }}' \
-            --pathprefix='/servo.org/${{ github.head_ref }}'
-          LC_TIME=C date > '_site/${{ github.head_ref }}/.stamp'
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+          npx eleventy --output='_site/' --pathprefix='/servo.org/pr-preview/pr-$PR_NUMBER/'
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-          keep_files: true
-      - name: Add deploy link
-        uses: actions/github-script@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { data: pr } = await github.pulls.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-            });
-
-            // Site preview link already added.
-            const marker = '\n\n----\n\nSite preview: ';
-            if (pr.body && pr.body.indexOf(marker) != -1)
-              return;
-
-            await github.pulls.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: pr.number,
-              body: pr.body + marker + 'https://servo.github.io/servo.org/${{ github.head_ref }}/',
-            });
+          source-dir: ./_site
