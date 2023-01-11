@@ -91,10 +91,10 @@ The progress of the project can be tracked in the [GitHub project](https://githu
 ## Conclusion
 WebGPU implementation in Servo supports all of the [Austin's samples](https://austineng.github.io/webgpu-samples/). Thanks to CYBAI and Josh, Servo now supports dynamic import of modules and thus accept GLSL shaders. Here are a few samples of what Servo is capable of rendering at 60fps:
 
-![Fractal Cube](/images/webgpu-fractal-cube.gif)
+![Fractal Cube]({{ site.url }}/img/blog/webgpu-fractal-cube.gif)
 
-![Instanced Cube](/images/webgpu-instanced-cube.gif)
+![Instanced Cube]({{ site.url }}/img/blog/webgpu-instanced-cube.gif)
 
-![Compute Boids](/images/webgpu-compute-boids.gif)
+![Compute Boids]({{ site.url }}/img/blog/webgpu-compute-boids.gif)
 
 I would like to thank Dzmitry and Josh for guiding me throughout the project and a big shoutout to the WebGPU and Servo community for doing such awesome work! I had a great experience contributing to Servo and WebGPU. I started as a complete beginner to Rust, graphics and browser internals, but learned a lot during the course of this project. I urge all WebGPU users and graphics enthusiasts out there to test their projects on Servo and help us improve the implementation and the API as well :)

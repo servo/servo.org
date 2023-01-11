@@ -17,12 +17,12 @@ Imagine you want to open a website containing a wide high resolution image in yo
 
 1. Your image size gets scaled down to fit the new screen size. But you may now want a different image instead of the older one, which emphasises just the main portion of the original image. (For eg, a cropped image with just the center part) 
 
-![Desktop view!](/images/view_laptop.jpg)
+![Desktop view!]({{ site.url }}/img/blog/view_laptop.jpg)
 <div><em>Image 1. View on Desktop</em></div>
 <br/>
 <br/>
 
-![Phone view!](/images/view_phone.jpg)
+![Phone view!]({{ site.url }}/img/blog/view_phone.jpg)
 <div ><em>Image 2. View on Phone</em></div>
 <br/>
 <br/>
@@ -31,7 +31,7 @@ Solution: Responsive images solves this by supplying a list of image sources in 
 
 2. Considering the above solution is implemented and you have a list of images, we would now want to load only the specific lower density image which matches the size of the phone and discard downloading the other images to waste unnecessary bandwidth. Thus if there is phone 1 and phone 2 with different screen sizes we would be loading 2 different images. Illustrated below :
 
-![Phone view!](/images/view_phone2.jpeg)
+![Phone view!]({{ site.url }}/img/blog/view_phone2.jpeg)
 <div ><em>Image 3. Phone X and Phone Y should load different images</em></div>
 <br/>
 <br/>
@@ -42,7 +42,7 @@ To summarise, responsive images is the capability of the browser engine to displ
 
 Here is a demo - 
 <br/>
-![Gif!](/images/responsive_images.gif)
+![Gif!]({{ site.url }}/img/blog/responsive_images.gif)
 <div ><em>Gif 1. Responsive images</em></div>
 
 ## How all this was accomplished
@@ -67,13 +67,13 @@ For the test - tests/wpt/web-platform-tests/html/semantics/embedded-content/the-
 In this test, there are 8 different image elements, each of which has the same green coloured square box - /images/green-256x256.png but with different x values and different sizes. So before the implementation of the code, there was a single box which could be seen. But now with passing tests, all the different sized boxes are visible.
 
 
-![Phone view!](/images/test1.jpeg)
+![Phone view!]({{ site.url }}/img/blog/test1.jpeg)
 <div ><em>Image 4. Results before the tests passed</em></div>
 
 <br/>
 <br/>
 
-![Phone view!](/images/test2.jpeg)
+![Phone view!]({{ site.url }}/img/blog/test2.jpeg)
 <div><em>Image 5. Passing test results</em></div>
 
 

@@ -12,7 +12,7 @@ We now have nightly releases of Servo for the Magic Leap One augmented reality h
 You can head over to [https://download.servo.org/](https://download.servo.org/), install the
 application, and browse the web in a virtual browser.
 
-![Magic Leap Servo]({{ site.url }}/images/magicleap-servo.jpg "Magic Leap Servo")
+![Magic Leap Servo]({{ site.url }}/img/blog/magicleap-servo.jpg "Magic Leap Servo")
 
 This is a developer preview release, designed for as a testbed for future products,
 and as a venue for experimenting with UI design. What should the web look like in augmented
@@ -75,7 +75,7 @@ the build scripts of Servo, SpiderMonkey and OpenSSL all contain code
 to guess the directory layout of the Android SDK, which needs to be
 undone when building for Magic Leap.
 
-![Debugging in vscode]({{ site.url }}/images/magicleap-vscode.png "Debugging in vscode")
+![Debugging in vscode]({{ site.url }}/img/blog/magicleap-vscode.png "Debugging in vscode")
 
 One thing that just worked turned out to be debugging Rust code on the
 Magic Leap device. Magic Leap supports the Visual Studio Code IDE, and
@@ -100,7 +100,7 @@ Landscape applications can be designed using the Lumin Runtime Editor,
 which gives a visual presentation of the various UI components in the
 scene graph.
 
-![Lumin Runtime Editor]({{ site.url }}/images/magicleap-lre.png "Lumin Runtime Editor")
+![Lumin Runtime Editor]({{ site.url }}/img/blog/magicleap-lre.png "Lumin Runtime Editor")
 
 The most important object in Servo's scene graph is the `content`
 node, since it is a `Quad` that can contain a 2D resource. One of the
