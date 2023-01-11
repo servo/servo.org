@@ -1,5 +1,6 @@
 ---
 layout:     post
+tags:       blog
 title:      GSoC wrap-up - Implementing WebGPU in Servo
 date:       2020-08-30 00:30:00
 summary:    A walk through the implementation of WebGPU in Servo

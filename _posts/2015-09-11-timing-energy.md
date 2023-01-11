@@ -1,5 +1,6 @@
 ---
 layout:     post
+tags:       blog
 title:      Fine-grained timing and energy profiling in Servo
 date:       2015-09-11 12:00:00
 summary:    Profiling Servo task and workload behavior

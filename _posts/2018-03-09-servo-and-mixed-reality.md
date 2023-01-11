@@ -1,7 +1,8 @@
 ---
 layout:     post
+tags:       blog
 title:      Mozilla’s Servo team joining Mixed Reality
-date:       2018-03-09 12:00:00 +0530
+date:       2018-03-09
 summary:    "Mozilla's Servo team joining Mixed Reality"
 categories:
 ---

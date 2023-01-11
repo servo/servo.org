@@ -1,5 +1,6 @@
 ---
 layout:     post
+tags:       blog
 title:      Experience porting Servo to the Magic Leap One
 date:       2018-12-04 15:00:00
 summary:    We now have nightly releases of Servo for Magic Leap, this post describes the process of making them

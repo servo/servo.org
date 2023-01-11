@@ -1,5 +1,6 @@
 ---
 layout:     post
+tags:       blog
 title:      Servo and Summer of Code
 date:       2016-03-02 20:30:00
 summary:    Get a chance to work on a substantial project in Servo this summer!

@@ -1,5 +1,6 @@
 ---
 layout:     post
+tags:       blog
 title:      Servo Nightly Builds Available
 date:       2016-06-30 20:00:00
 summary:    Try out the new Servo nightly builds

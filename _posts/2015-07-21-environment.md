@@ -1,5 +1,6 @@
 ---
 layout:     post
+tags:       blog
 title:      Servo developer tools overview
 date:       2015-07-22 12:00:00
 summary:    Overview of the Servo development environment

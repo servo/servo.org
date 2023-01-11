@@ -1,5 +1,6 @@
 ---
 layout:     post
+tags:       blog
 title:      Custom Elements in Servo
 date:       2017-08-24 20:00:00
 summary:    Summary of the Custom Element GSoC Project.
