@@ -2,7 +2,7 @@
 layout:     post
 tags:       blog
 title:      Off main thread HTML parsing in Servo
-date:       2017-08-24
+date:       2017-08-23
 summary:    "GSOC wrap-up: Async HTML parser project"
 categories:
 ---
