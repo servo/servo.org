@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Week In Servo 60</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="This Week In Servo 60">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">This Week In Servo 60</h1>
+<p class="subtitle"><span class="grey-light">(2016-04-18)</span> What's up with Servo for the week of 11 Apr 2016 - 18 Apr 2016</p>
+
+<div class="has-top-margin">
+  <p>In the <a href="https://github.com/pulls?page=1&amp;q=is%3Apr+is%3Amerged+closed%3A2016-04-11..2016-04-18+user%3Aservo">last week</a>, we landed 120 PRs in the Servo organization’s repositories.</p>
+<p>We have <a href="https://groups.google.com/forum/#!topic/mozilla.dev.servo/WwG0Rmh84Bg">cancelled</a> the weekly meeting. In order to ensure we still make the same or more information available, This Week in Servo will be extended to include planning/status information, call out any other ad-hoc meetings that occur during the week, and mention any notable threads on the mailing list.</p>
+<h3 id="planning-and-status" tabindex="-1">Planning and Status <a class="header-anchor" href="#planning-and-status">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Our overall <a href="https://github.com/servo/servo/wiki/Roadmap">roadmap</a> and <a href="https://docs.google.com/document/d/1JMOtVkRtb-s7auoQdnX810HGglkMK054LTXOo0_rdrU/pub">quarterly goals</a> are available online.</p>
+<p>This week’s status updates are <a href="http://statusupdates.dev.mozaws.net/project/servo">here</a>.</p>
+<h3 id="notable-additions" tabindex="-1">Notable Additions <a class="header-anchor" href="#notable-additions">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li>KiChjang <a href="https://github.com/servo/servo/pull/10189">implemented</a> the CORS Preflight Fetch algorithm</li>
+<li>mbrubeck <a href="https://github.com/servo/servo/pull/10655">fixed</a> some margin collapse code in layout</li>
+<li>larsberg <a href="https://github.com/servo/saltfs/pull/320">added</a> a Windows buildbot</li>
+<li>notriddle <a href="https://github.com/servo/servo/pull/10637">avoided</a> propagation of floated layout elements into or out of absolutely positioned ones</li>
+<li>mrobinson <a href="https://github.com/servo/webrender/pull/261">removed</a> the concept of stacking levels for display lists</li>
+<li>edunham <a href="https://github.com/servo/servo/pull/10590">packaged</a> up our <code>tidy</code> script and published it to PyPi</li>
+<li>ajeffrey <a href="https://github.com/servo/servo/pull/10587">added</a> panic messages to failures</li>
+<li>fitzgen <a href="https://github.com/servo/servo/pull/10589">made</a> the profiling data take the <code>stdout</code> lock to avoid jumbled output</li>
+<li>manish <a href="https://github.com/servo/servo/pull/10585">upgraded</a> the Rust compiler to 2016-04-12</li>
+<li>bholley <a href="https://github.com/servo/servo/pull/10582">avoided</a> in-memory movement of Gecko style structs</li>
+<li>manish <a href="https://github.com/servo/servo/pull/10572">reduced</a> the number of threads Servo uses just for panic handling</li>
+<li>izgzhen <a href="https://github.com/servo/servo/pull/10538">implemented</a> the first parts of <code>window.performance.timing</code></li>
+<li>danlrobertson <a href="https://github.com/servo/servo/pull/10178">implemented</a> flexbox reordering</li>
+<li>pcwalton <a href="https://github.com/servo/servo/pull/10458">disallowed</a> margins from collapsing through block formatting contexts in layout</li>
+<li>kaksmet <a href="https://github.com/servo/servo/pull/10496">fixed</a> sandboxing on OSX</li>
+<li>frewsxcv implemented <a href="https://github.com/servo/servo/pull/10510"><code>rowIndex</code></a> and <a href="https://github.com/servo/servo/pull/10558"><code>sectionRowIndex</code></a> on <code>&lt;tr&gt;</code></li>
+<li>nox continued the SpiderMonkey update, <code>./mach test-css</code> now passes on the <a href="https://github.com/servo/servo/compare/smup"><code>smup</code></a> branch</li>
+<li>yoava333 <a href="https://github.com/servo/rust-url/pull/185">corrected</a> a Windows panic when resolving file URLs</li>
+<li>jack <a href="https://github.com/servo/servo/pull/10445">toggled</a> more SpiderMonkey options that improve performance on JS benchmarks</li>
+<li>dzbarsky <a href="https://github.com/servo/servo/pull/10373">enabled</a> a huge swath of WebGL conformance tests after a heroic struggle</li>
+<li>DDEFISHER <a href="https://github.com/servo/servo/pull/10328">implemented</a> support for responding to basic HTTP authorization requests</li>
+<li>perlun <a href="https://github.com/servo/servo/pull/10617">extracted</a> the monolithic parts of our Mako-based code generation into separate Python files</li>
+</ul>
+<h3 id="new-contributors" tabindex="-1">New Contributors <a class="header-anchor" href="#new-contributors">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li><a href="https://github.com/askeing">Askeing Yen (fyen)</a></li>
+<li><a href="https://github.com/xudifsd">Di Xu</a></li>
+<li><a href="https://github.com/Liamsi">Ismail Khoffi</a></li>
+<li><a href="https://github.com/Shiroy">Antoine Wacheux</a></li>
+<li><a href="https://github.com/sliz1">Stephen (Ziyun) Li</a></li>
+<li><a href="https://github.com/zwn">Zbynek Winkler</a></li>
+<li><a href="https://github.com/izgzhen">Zhen Zhang</a></li>
+<li><a href="https://github.com/akhan7">Ahmad Saad Khan</a></li>
+</ul>
+<h3 id="get-involved" tabindex="-1">Get Involved <a class="header-anchor" href="#get-involved">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Interested in helping build a web browser? Take a look at our <a href="https://starters.servo.org/">curated list</a> of issues that are good for new contributors!</p>
+<h3 id="screenshot" tabindex="-1">Screenshot <a class="header-anchor" href="#screenshot">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>The University of Szeged team continues their awesome work on WebBluetooth support, with a neat <a href="http://szeged.github.io/servo/">demo video</a>!</p>
+<h3 id="meetings-and-mailing-list" tabindex="-1">Meetings and Mailing List <a class="header-anchor" href="#meetings-and-mailing-list">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Last week, we had a <a href="https://github.com/servo/servo/wiki/Meeting-Devtools-Servo-2">meeting</a> with the Firefox developer tools team discussing protocol plans, Devtools.html, architectural design, and some potential future features brainstorming.</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

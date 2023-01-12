@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Week In Servo 29</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="This Week In Servo 29">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">This Week In Servo 29</h1>
+<p class="subtitle"><span class="grey-light">(2015-04-02)</span> What's up with Servo for the weeks of 12 Mar- 2 April 2015</p>
+
+<div class="has-top-margin">
+  <p>In the past three weeks, we merged 170 pull requests.</p>
+<p>Servo has another browser chrome! Say hello to <a href="https://github.com/glennw/servo-shell">servo-shell</a>,
+an interface written with HTML, leveraging the
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Using_the_Browser_API"><code>mozbrowser</code> API</a>.</p>
+<p><img src="https://raw.githubusercontent.com/glennw/servo-shell/master/screenshots/shell.png" alt="Screenshot of servo-shell on http://github.com"></p>
+<p><a href="https://github.com/glennw/servo-shell#how-do-i-use-it">Try it out</a>! At the most recent meeting, we discussed making this the default UI for <code>./mach run</code>.</p>
+<p><a href="https://github.com/servo/html5ever">html5ever</a> celebrated its first birthday! Keegan published a <a href="http://mainisusuallyafunction.blogspot.com/2015/03/html5ever-project-update-one-year.html">project update</a> with some plans for the future.
+h5e’s newest sibling is <a href="https://github.com/kmcallister/tendril#readme">tendril</a>, a multitalented string type!</p>
+<p>If your favorite website looks wrong in Servo, you can help us figure out why! Glenn wrote up a detailed guide on <a href="https://github.com/servo/servo/wiki/Getting-started-with-layout">getting started working on Servo’s layout code</a>, with some useful tips for minimizing test cases. We are also working on automatic minimization via “<a href="https://github.com/servo/servo/issues/5260">abstract reftests</a>”.</p>
+<p>###Notable additions</p>
+<ul>
+<li>We landed a <a href="https://github.com/servo/servo/pull/5256">Rust upgrade</a></li>
+<li>Glenn <a href="https://github.com/servo/servo/pull/5281">implemented a subset of the mozbrowser APIs</a>
+and used these to make <a href="https://github.com/glennw/servo-shell">servo-shell</a> work. This required
+<a href="https://github.com/servo/servo/pull/5205">a</a> <a href="https://github.com/servo/servo/pull/5205">ton</a>
+<a href="https://github.com/servo/servo/pull/5205">of</a> <a href="https://github.com/servo/servo/pull/5249">iframe</a>
+<a href="https://github.com/servo/servo/pull/5248">fixes</a>.</li>
+<li>Patrick implemented <a href="https://github.com/servo/servo/pull/5400">CSS transitions</a></li>
+<li>Keegan pushed a <a href="https://github.com/servo/html5ever/pull/114">rebased, remixed version</a> of Clark’s <a href="https://github.com/servo/html5ever/pull/60">zero-copy
+html5ever patch</a>. With this PR, html5ever can locate tags and
+attributes in an input stream at 80 MB/s while keeping whole-process memory
+consumption to a few MB.</li>
+<li>Nicholas <a href="https://github.com/servo/servo/pull/5193">added support for fine-grained memory reporting</a>,
+along with a <a href="https://github.com/servo/servo/pull/5284">tree-like prettified output</a></li>
+<li>Chris Paris landed <code>innerHTML</code> <a href="https://github.com/servo/servo/pull/5029">getter</a>
+and <a href="https://github.com/servo/servo/pull/4888">setter</a> implementations that use
+html5ever.</li>
+<li>Mátyás added <a href="https://github.com/servo/servo/pull/5302">stroke</a> and <a href="https://github.com/servo/servo/pull/5185"><code>arc()</code></a>
+support to canvas, along  with many other APIs</li>
+<li>Diego implemented <a href="https://github.com/servo/servo/pull/5231">the <code>drawImage</code> API for canvas</a></li>
+<li>Matt McCoy <a href="https://github.com/servo/servo/pull/5299">added support for HTTP compression</a></li>
+<li>Yodalee <a href="https://github.com/servo/servo/pull/5469">implemented <code>TextEncoder</code></a></li>
+<li>Sebastian <a href="https://github.com/servo/servo/pull/5306">implemented <code>StorageEvent</code></a></li>
+<li>Zack added <a href="https://github.com/servo/servo/pull/5217">a shim for <code>localStorage</code></a></li>
+<li>Ms2ger implemented <a href="https://github.com/servo/servo/pull/5436">a safer replacement for <code>Vec&lt;Root&lt;T&gt;&gt;</code></a></li>
+<li>Manishearth added support for <a href="https://github.com/servo/servo/pull/5298">simple userscripts</a></li>
+<li>Jack fixed a <a href="https://github.com/servo/servo/pull/5228">memory leak in the flowtree</a></li>
+<li>hsavala made console.log messages <a href="https://github.com/servo/servo/pull/5229">appear in remote Firefox consoles</a></li>
+<li>Tetsuharu added support for <a href="https://github.com/servo/servo/pull/5346">unrestricted floating point WebIDL values</a></li>
+<li>Thiago implemented partial support for <a href="https://github.com/servo/servo/pull/5181">interacting with worker globals via remote devtools</a></li>
+</ul>
+<p>###New contributors</p>
+<ul>
+<li><a href="https://github.com/bdero">Brandon DeRosier</a></li>
+<li><a href="https://github.com/doublec">Chris Double</a></li>
+<li><a href="https://github.com/cojennin">Connor Jennings</a></li>
+<li><a href="https://github.com/GreenRecycleBin">Daniel Le</a></li>
+<li><a href="https://github.com/zerokarmaleft">Edward Cho</a></li>
+<li><a href="https://github.com/ehegnes">Eric Hegnes</a></li>
+<li><a href="https://github.com/hirschenberger">Falco Hirschenberger</a></li>
+<li><a href="https://github.com/hsvalava">Himaja</a></li>
+<li><a href="https://github.com/kylc">Kyle Cesare</a></li>
+<li><a href="https://github.com/mschroeder">Martin Schröder</a></li>
+<li><a href="https://github.com/ienzam">Md. Enzam Hossain</a></li>
+<li><a href="https://github.com/genkku">Mikko Vanhatalo</a></li>
+<li><a href="https://github.com/leavengood">Ryan Leavengood</a></li>
+<li><a href="https://github.com/snf">Sebastian N. Fernandez</a></li>
+<li><a href="https://github.com/gfxmonk">Tim Cuthbertson</a></li>
+</ul>
+<p>###Screenshots</p>
+<p>A visualization of parallel layout on servo-shell + <a href="http://www.reddit.com/r/rust">/r/rust</a>:</p>
+<p><img src="http://i.imgur.com/23Snav3.png" alt="Demonstration of parallel layout in servo-shell"></p>
+<p>The colored boxes indicate which CPU core performed layout for each document node. The box
+around the active tab spinner is askew, because the spinner is a still image styled with
+<a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_transforms"><code>transform: rotate(...)</code></a>.</p>
+<p>###Meetings</p>
+<p>We had meetings on <a href="https://github.com/servo/servo/wiki/Meeting-2015-03-16">March
+16th</a> and <a href="https://github.com/servo/servo/wiki/Meeting-2015-03-30">March
+30th</a>. We discussed
+servo-shell, getting the PR queue under control, and restricting non-standard
+APIs like <code>&lt;iframe mozbrowser&gt;</code>. We also talked about the status of Servo on
+Android; there are now “nightly” APK builds but they <a href="https://github.com/servo/servo/issues/5145">don’t work
+yet</a>.</p>
+<p>We’ve had a lot of discussions recently about the project’s goals and plans for
+Q2. After months of landing new features at an incredible rate, Q2 is going to
+focus more on details: performance improvements, fixing compatibility bugs, and
+paying down technical debt. We’d like to find websites / create demos that
+showcase Servo’s advantages in a way that’s relevant to users.</p>
+<p>We’re also going to work on security. This means finding and fixing issues, but
+also documenting what we don’t fix yet. Josh is going to upgrade our ancient
+version of SpiderMonkey, which is important for security and for the future of
+Servo in general.</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

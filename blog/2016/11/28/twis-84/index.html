@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>These Weeks In Servo 84</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="These Weeks In Servo 84">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">These Weeks In Servo 84</h1>
+<p class="subtitle"><span class="grey-light">(2016-11-28)</span> What's up with Servo for the weeks of 14 Nov 2016 - 28 Nov 2016</p>
+
+<div class="has-top-margin">
+  <p>In the <a href="https://github.com/pulls?page=1&amp;q=is%3Apr+is%3Amerged+closed%3A2016-11-14..2016-11-28+user%3Aservo">last two weeks</a>, we landed 200 PRs in the Servo organization’s repositories. This number is slightly lower than our recent average due to some pretty bad intermittent test failure problems on our build machines and the long US holiday break. We’re working on solutions to the intermittent problem right now.</p>
+<p>The rust-url integration into Firefox just <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1151899">landed</a>! Manish and Valentin Gosu have been working on this for a long time, and with some work from Ted and Nathan, it’s now available behind a flag. It will probably be some time before it reaches full compatibility with all of the specialized and internal things that Firefox does with URLs and can be used by default, but this is a huge first step and the largest integration of Rust code into Firefox to date.</p>
+<h3 id="planning-and-status" tabindex="-1">Planning and Status <a class="header-anchor" href="#planning-and-status">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Our overall <a href="https://github.com/servo/servo/wiki/Roadmap">roadmap</a> is available online and now includes the Q4 plans and tentative outline of some ideas for 2017. Please check it out and provide feedback!</p>
+<p>This week’s status updates are <a href="http://statusupdates.dev.mozaws.net/project/servo">here</a>. This service is shutting down immediately, and we will have to move to a new status update mechanism next week.</p>
+<h3 id="notable-additions" tabindex="-1">Notable Additions <a class="header-anchor" href="#notable-additions">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li>kvark <a href="https://github.com/servo/webrender/pull/604">added</a> GPU marker support to WebRender</li>
+<li>razican <a href="https://github.com/servo/servo/pull/14383">implemented</a> <code>column-rule-style</code> for Stylo</li>
+<li>nox <a href="https://github.com/servo/servo/pull/14381">migrated</a> the Servo build to cargo workspaces</li>
+<li>ms2ger <a href="https://github.com/servo/servo/pull/14360">removed</a> the legacy network stack</li>
+<li>chenpighead <a href="https://github.com/servo/servo/pull/14358">implemented</a> <code>webkit-text-fill-color</code> and <code>webkit-text-stroke</code> for Stylo</li>
+<li>mrobinson <a href="https://github.com/servo/webrender/pull/590">added</a> an API for scrolling individual layers in WebRender</li>
+<li>heycam <a href="https://github.com/servo/servo/pull/14340">implemented</a> <code>StyleSheet.disabled</code> in CSSOM</li>
+<li>stshine <a href="https://github.com/servo/servo/pull/14341">fixed</a> scroll to top</li>
+<li>upsuper <a href="https://github.com/servo/servo/pull/14330">implemented</a> access to <code>CSSStyleRule</code> for Stylo</li>
+<li>glennw <a href="https://github.com/servo/webrender/pull/583">changed</a> the font platforms to work with device pixels directly</li>
+<li>emilio <a href="https://github.com/servo/rust-bindgen/pull/288">improved</a> handling of derived types inside namespaces in rust-bindgen</li>
+<li>nox <a href="https://github.com/servo/servo/pull/14284">switched</a> to the <code>FnvHasher</code> in <code>http_loader::load</code> to reduce load from the default hasher</li>
+<li>connorimes <a href="https://github.com/servo/servo/pull/14272">fixed</a> energy profiling</li>
+<li>kvark <a href="https://github.com/servo/webrender/pull/569">switched</a> the WebRender mask generator to work on tiles</li>
+<li>nical <a href="https://github.com/servo/webrender/pull/566">added</a> reference counting to images in WebRender to avoid extra copies</li>
+<li>heycam <a href="https://github.com/servo/servo/pull/14256">optimized</a> the rule tree’s garbage collection to look at the free list size</li>
+<li>vvuk <a href="https://github.com/servo/webrender/pull/563">compiled</a> the shaders into WebRender to avoid requirement of a res directory</li>
+<li>vvuk <a href="https://github.com/servo/servo/pull/14249">added</a> a <code>-Z wr-record</code> to enable WebRender display list recording</li>
+<li>fitzgen <a href="https://github.com/servo/rust-bindgen/pull/264">added</a> IR debug output to rust-bindgen</li>
+<li>emilio <a href="https://github.com/servo/saltfs/pull/536">added</a> support for per-repo reviewers to homu</li>
+<li>manishearth <a href="https://github.com/servo/servo/pull/14190">added</a> support for immutable CSSOM</li>
+<li>canaltinova <a href="https://github.com/servo/servo/pull/14189">implemented</a> the <code>border-image</code> CSS shorthand</li>
+<li>ms2ger <a href="https://github.com/servo/servo/pull/14172">moved</a> the servo binary to the <code>ports</code> directory</li>
+<li>mrobinson <a href="https://github.com/servo/webrender/pull/552">flattened</a> the display list API</li>
+<li>metajack <a href="https://github.com/servo/servo/pull/14039">fixed</a> <code>test-wpt</code> and <code>test-css</code> on Windows</li>
+<li>emilio <a href="https://github.com/servo/servo/pull/13641">changed</a> to the rayon library for parallel layout and styling</li>
+<li>stshine <a href="https://github.com/servo/servo/pull/13418">implemented</a> the <code>Location.replace</code> API</li>
+<li>creativcoder <a href="https://github.com/servo/servo/pull/13574">added</a> a job queue for processing Service Worker jobs</li>
+<li>gterzian <a href="https://github.com/servo/servo/pull/14192">made</a> the width media query work</li>
+<li>asajefrrey <a href="https://github.com/servo/servo/pull/14211">made</a> similar origin documents share the same script thread</li>
+</ul>
+<h3 id="new-contributors" tabindex="-1">New Contributors <a class="header-anchor" href="#new-contributors">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li><a href="https://github.com/AgostonSzepessy">Agoston Szepessy</a></li>
+<li><a href="https://github.com/kvark">Dzmitry Malyshau</a></li>
+<li><a href="https://github.com/staktrace">Kartikaya Gupta</a></li>
+<li><a href="https://github.com/linclark">Lin Clark</a></li>
+<li><a href="https://github.com/zakorgy">Zakor Gyula</a></li>
+<li><a href="https://github.com/bbansalWolfPack">Bhavya Bansal</a></li>
+<li><a href="https://github.com/BorisChiou">Boris Chiou</a></li>
+<li><a href="https://github.com/jcdyer">J. Cliff Dyer</a></li>
+<li><a href="https://github.com/jerodsanto">Jerod Santo</a></li>
+<li><a href="https://github.com/razican">Razican</a></li>
+</ul>
+<p>Interested in helping build a web browser? Take a look at our <a href="https://starters.servo.org/">curated list</a> of issues that are good for new contributors!</p>
+<h3 id="screenshot" tabindex="-1">Screenshot <a class="header-anchor" href="#screenshot">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>No screenshots.</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

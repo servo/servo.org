@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience porting Servo to the Magic Leap One</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="Experience porting Servo to the Magic Leap One">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">Experience porting Servo to the Magic Leap One</h1>
+<p class="subtitle"><span class="grey-light">(2018-12-04)</span> We now have nightly releases of Servo for Magic Leap, this post describes the process of making them</p>
+
+<div class="has-top-margin">
+  <h2 id="introduction" tabindex="-1">Introduction <a class="header-anchor" href="#introduction">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We now have nightly releases of Servo for the Magic Leap One augmented reality headset.
+You can head over to <a href="https://download.servo.org/">https://download.servo.org/</a>, install the
+application, and browse the web in a virtual browser.</p>
+<p><img src="/img/blog/magicleap-servo.jpg" alt="Magic Leap Servo" title="Magic Leap Servo"></p>
+<p>This is a developer preview release, designed for as a testbed for future products,
+and as a venue for experimenting with UI design. What should the web look like in augmented
+reality? We hope to use Servo to find out!</p>
+<p>We are providing these nightly snapshots to encourage other developers to experiment with
+AR web experiences. There are still many missing features, such as immersive or 3D content,
+many types of user input, media, or a stable embedding API. We hope you forgive the rough edges.</p>
+<p>This blog post will describe the experience of porting Servo to a new architecture,
+and is intended for system developers.</p>
+<h2 id="magic-leap-under-the-hood" tabindex="-1">Magic Leap under the hood <a class="header-anchor" href="#magic-leap-under-the-hood">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>The Magic Leap software development kit (SDK) is based on commonly-used open-source
+technologies. In particular, it uses the clang compiler and the gcc toolchain
+for support tools such as <code>ld</code>, <code>objcopy</code>, <code>ranlib</code> and friends.</p>
+<p>The architecture is 64-bit ARM, using the same application binary interface as Android.
+Together these give the target as being <code>aarch64-linux-android</code>, the same as for many
+64-bit Android devices. Unlike Android, Magic Leap applications are
+native programs, and do not require a Java Native Interface (JNI) to the OS.</p>
+<p>Magic Leap provides a lot of support for developing AR applications, in the form of
+the Lumin Runtime APIs, which include 3D scene descriptions, UI elements, input events
+including device placement and orientation in 3D space, and rendering to displays
+which provide users with 3D virtual visual and audio environments that interact with
+the world around them.</p>
+<p>The Magic Leap and Lumin Runtime SDKs are available from
+<a href="https://creator.magicleap.com/">https://creator.magicleap.com/</a> for Mac and Windows platforms.</p>
+<h2 id="building-the-servo-library" tabindex="-1">Building the Servo library <a class="header-anchor" href="#building-the-servo-library">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>The Magic Leap library is built using <code>./mach build --magicleap</code>,
+which under the hood calls <code>cargo build --target=aarch64-linux-android</code>. For most of the Servo library and its
+dependencies, this just works, but there are a couple of corner cases:
+C/C++ libraries and crates with special treatment for Android.</p>
+<p>Some of Servo’s dependencies are crates which link against C/C++
+libraries, notably <code>openssl-sys</code> and <code>mozjs-sys</code>. Each of these
+libraries uses slightly different build environments (such as Make,
+CMake or Autoconf, often with custom build scripts). The challenge for
+software like Servo that uses many such libraries is to find a
+configuration which will work for all the dependencies. This comes
+down to finding the right settings for environment variables such as
+<code>$CFLAGS</code>, and is complicated by cross-compiling the libraries which
+often means ensuring that the Magic Leap libraries are included, not
+the host libraries.</p>
+<p>The other main source of issues with the build is that since Magic
+Leap uses the same ABI as Android, its target is
+<code>aarch64-linux-android</code>, which is the same as for 64-bit ARM Android
+devices. As a result, many crates which need special treatment for
+Android (for example for JNI or to use <code>libandroid</code>) will treat the
+Magic Leap build as an Android build rather than a Linux build. Some
+care is needed to undo all of this special treatment. For example,
+the build scripts of Servo, SpiderMonkey and OpenSSL all contain code
+to guess the directory layout of the Android SDK, which needs to be
+undone when building for Magic Leap.</p>
+<p><img src="/img/blog/magicleap-vscode.png" alt="Debugging in vscode" title="Debugging in vscode"></p>
+<p>One thing that just worked turned out to be debugging Rust code on the
+Magic Leap device. Magic Leap supports the Visual Studio Code IDE, and
+remote debugging of code running natively. It was great to see the
+debugging working out of the box for Rust code as well as it did for C++.</p>
+<h2 id="building-the-magic-leap-application" tabindex="-1">Building the Magic Leap application <a class="header-anchor" href="#building-the-magic-leap-application">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>The first release of Servo for Magic Leap comes with a rudimentary
+application for browsing 2D web content. This is missing many
+features, such as immersive 3D content, audio or video media, or user
+input by anything other than the controller.</p>
+<p>Magic Leap applications come in two flavors: universe applications,
+which are immersive experiences that have complete control over the
+device, and landscape applications, which co-exist and present the
+user with a blended experience where each application presents part of
+a virtual scene. Currently, Servo is a landscape application, though
+we expect to add a universe application for immersive web content.</p>
+<p>Landscape applications can be designed using the Lumin Runtime Editor,
+which gives a visual presentation of the various UI components in the
+scene graph.</p>
+<p><img src="/img/blog/magicleap-lre.png" alt="Lumin Runtime Editor" title="Lumin Runtime Editor"></p>
+<p>The most important object in Servo’s scene graph is the <code>content</code>
+node, since it is a <code>Quad</code> that can contain a 2D resource. One of the
+kinds of resource that a <code>Quad</code> can contain is an EGL context, that
+Servo uses to render web content. The runtime editor generates C++
+code that can be included in an application to render and access the
+scene graph; Servo uses this to access the content node, and the EGL
+context it contains.</p>
+<p>The other hooks that the Magic Leap Servo application uses are for
+events such as moving the laser pointer, which are mapped to mouse
+events, a heartbeat for animations or other effects which must be
+performed on the main thread, and a logger which bridges Rust’s logging
+API to Lumin’s.</p>
+<p>The Magic Leap application is built each night by Servo’s CI system,
+using the Mac builders since there is no Linux SDK for Magic
+Leap. This builds the Servo library, and packages it is a Magic Leap
+application, which is hosted on S3 and linked to from the Servo
+download page.</p>
+<h2 id="summary" tabindex="-1">Summary <a class="header-anchor" href="#summary">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>The pull request that added Magic Leap support to Servo is
+<a href="https://github.com/servo/servo/pull/21985">https://github.com/servo/servo/pull/21985</a>
+which adds about 1600 lines to Servo, mostly in the build scripts and
+the Magic Leap application. Work on the Magic Leap port of Servo started
+in early September 2018, and the pull request was merged at the end of October,
+so took about two person-months.</p>
+<p>Much of the port was straightforward, due to the maturity of the Rust
+cross-compilation and build tools, and the use of common open-source
+technologies in the Magic Leap platform. Lumin OS contains many
+innovative features in its treatment of blending physical and virtual
+3D environments, but it is built on a solid open-source foundation,
+which makes porting a complex application like Servo relatively
+straightforward.</p>
+<p>Servo is now making its first steps onto the Magic Leap One, and is
+available for download and experimentation. Come try it out, and help
+us design the immersive web!</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

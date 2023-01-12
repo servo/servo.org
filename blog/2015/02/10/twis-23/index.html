@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Week In Servo 23</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="This Week In Servo 23">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">This Week In Servo 23</h1>
+<p class="subtitle"><span class="grey-light">(2015-02-10)</span> What's up with Servo for the week of 4 - 10 Feb 2015</p>
+
+<div class="has-top-margin">
+  <p>This week, we merged 42 pull requests</p>
+<p>Work on Windows support has started, in part. We’re tracking progress <a href="https://github.com/servo/servo/issues/1908#issuecomment-73711409">here</a>, let us know in IRC if you want to help out!</p>
+<h3 id="notable-additions" tabindex="-1">Notable additions <a class="header-anchor" href="#notable-additions">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li>Ms2ger made some JS safety improvements:
+<ul>
+<li>Adding the <a href="https://github.com/servo/servo/pull/4836"><code>Unrooted&lt;T&gt;</code></a> JS pointer to be used when we’re holding a pointer to an untraced JS value</li>
+<li>Avoiding <a href="https://github.com/servo/servo/pull/4850"><code>Deref</code> for <code>Root</code> till we get something akin to <code>DerefMove</code></a></li>
+<li>Switching the parser to <a href="https://github.com/servo/servo/pull/4818"><code>JS&lt;Node&gt;</code></a></li>
+</ul>
+</li>
+<li>Manish <a href="https://github.com/servo/servo/pull/4864">fixed the Gonk build</a></li>
+<li>Josh added support for <a href="https://github.com/servo/servo/pull/4854">firing events from dedicated workers to their corresponding <code>Worker</code> object</a></li>
+<li>Shing <a href="https://github.com/servo/servo/pull/4702">added support for using a hostfile via the <code>$HOST_FILE</code> environment variable</a></li>
+</ul>
+<h3 id="new-contributors" tabindex="-1">New contributors <a class="header-anchor" href="#new-contributors">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li><a href="https://github.com/zertyuiop">zertyuiop</a></li>
+</ul>
+<h3 id="screenshots" tabindex="-1">Screenshots <a class="header-anchor" href="#screenshots">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>This is Servo running on the Flame (Firefox OS):</p>
+<p><img src="https://pbs.twimg.com/media/B9biIRSCUAA96ti.jpg" alt=""></p>
+<p><img src="https://pbs.twimg.com/media/B9biH-yCUAAPkuL.jpg" alt=""></p>
+<p>This is running directly on top of Gonk (which is why I can’t take an actual screenshot).</p>
+<p>If you have a Flame (or other Firefox OS device) and want to try this out, steps for the build can be found <a href="https://github.com/servo/servo/pull/4864">here</a>. Note that the B2G clone and build will take a sizeable amount of space on your machine (~17GB). We’re considering distributing a small prebuilt package with all the headers and libraries, however there might be licensing issues.</p>
+<p>If you want to try it out without a build, ask Manishearth in IRC for the binaries (needs a rooted phone. Flames on v188 nightly are rooted by default).</p>
+<h3 id="meeting" tabindex="-1">Meeting <a class="header-anchor" href="#meeting">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p><a href="https://github.com/servo/servo/wiki/Meeting-2015-02-09">Minutes</a></p>
+<ul>
+<li>Servo’s hiring! <a href="https://etherpad.mozilla.org/iiCg0nahOa">Details</a> talk to Jack or Lars if you want to know more</li>
+<li>Rust upgrade: It appears to be that we’re stuck in the state of perpetual rustup.</li>
+<li>We’re going to make all of our dependencies track rustc nightly, to make it easier for others to use (and to make Rust upgrades easier)</li>
+<li>Cookies landed!</li>
+<li>Windows support: A couple of people are interested in working on this, we discussed some issues. More <a href="https://github.com/servo/servo/issues/1908#issuecomment-73711409">here</a>.</li>
+<li>Async DOM APIs: We’d like to propose some new DOM APIs that call into layout in an asynchronous manner, however we probably don’t have the expertise/people power to do this now.</li>
+</ul>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

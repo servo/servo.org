@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servo developer tools overview</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="Servo developer tools overview">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">Servo developer tools overview</h1>
+<p class="subtitle"><span class="grey-light">(2015-07-22)</span> Overview of the Servo development environment</p>
+
+<div class="has-top-margin">
+  <p><a href="https://github.com/servo/servo">Servo</a> is a new web browser engine. It is one of the largest Rust-based projects, but the total Rust code is still dwarfed by the size of the code provided in native C and C++ libraries. This post is an overview of how we have structured our development environment in order to integrate the Cargo build system, with its “many small and distributed dependencies” model with our needs to provide many additional features not often found in smaller Rust-only projects.</p>
+<h2 id="mach" tabindex="-1">Mach <a class="header-anchor" href="#mach">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/mach">Mach</a> is a python driver program that provides a frontend to Servo’s development environment that both reduces the number of steps required and integrates our various tools into a single frontend harness. Similar to its purpose in the Firefox build, we use it to centralize and simplify the number of commands that a developer has to perform.</p>
+<h3 id="mach-bootstrap" tabindex="-1">mach bootstrap <a class="header-anchor" href="#mach-bootstrap">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>The steps that mach will handle before issuing a normal <code>cargo build</code> command are:</p>
+<ul>
+<li>
+<p>Downloading the correct versions of the cargo and rustc tools. Servo uses many unstable features in Rust, most problematically those that change pretty frequently. We also test the edges of feature compatibility and so are the first ones to notice many changes that did not at first seem as if they would break anyone. Further, we build a custom version of the tools that additionally supports cross-compilation targeting Android (and ARM in the near future). A random local install of the Rust toolchain is pretty unlikely to work with Servo.</p>
+</li>
+<li>
+<p>Updating git submodules. Some of Servo’s dependencies cannot be downloaded as Cargo dependencies because they need to be directly referenced in the build process, and Cargo adds a hash that makes it difficult to locate those files. For such code, we add them as submodules.</p>
+</li>
+</ul>
+<h3 id="mach-build-%26-run" tabindex="-1">mach build &amp; run <a class="header-anchor" href="#mach-build-%26-run">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>The build itself also verifies that the user has explicitly requested either a <code>dev</code> or <code>release</code> build — the Servo dev build is debuggable but quite slow, and it’s not clear which build should be the default.</p>
+<p>Additionally, there’s the question of <em>which</em> <code>cargo build</code> to run. Servo has three different “toplevel” Cargo.toml files.</p>
+<ul>
+<li>
+<p><code>components/servo/Cargo.toml</code> is used to build an executable binary named <code>servo</code> and is used on Linux and OSX. There are also horrible linker hacks in place that will cause an Android-targeted build to instead produce a file named <code>servo</code> that is actually an APK file that can be loaded onto Android devices.</p>
+</li>
+<li>
+<p><code>ports/gonk/Cargo.toml</code> produces a binary that can run on the Firefox OS Boot2Gecko mobile platform.</p>
+</li>
+<li>
+<p><code>ports/cef/Cargo.toml</code> produces a shared library that can be loaded within the Chromium Embedding Framework to provide a hostable web rendering engine.</p>
+</li>
+</ul>
+<p>The presence of these three different toplevel binaries and the curious directory structure means that mach also provides a <code>run</code> command that will execute the correct binary with any provided arguments.</p>
+<h3 id="mach-test" tabindex="-1">mach test <a class="header-anchor" href="#mach-test">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Servo has several testing tools that can be executed via mach.</p>
+<ul>
+<li>
+<p><code>mach tidy</code> will verify that there are no trivial syntactic errors in source files. It checks for valid license headers in each file, no tab characters, no trailing whitespaces, etc.</p>
+</li>
+<li>
+<p><code>mach test-ref</code> will run the Servo-specific reference tests. These tests render a pair of web pages that implement the same final layout using different CSS features to images. If the images are not pixel-identical, the test fails.</p>
+</li>
+<li>
+<p><code>mach test-wpt</code> runs the cross-browser W3C Web Platform Tests, which primarily test DOM features.</p>
+</li>
+<li>
+<p><code>mach test-css</code> runs the cross-browser CSS WG reference tests, which are a version of the reference tests that are intended to work across many browsers.</p>
+</li>
+<li>
+<p><code>mach test-unit</code> runs the Rust unit tests embedded in Servo crates. We do not have many of these, except for basic tests of per-crate functionality, as we rely on the WPT and CSS tests for most of our coverage. Philosophically, we prefer to write and upstream a cross-browser test where one does not exist instead of writing a Servo-specific test.</p>
+</li>
+</ul>
+<h2 id="cargo" tabindex="-1">cargo <a class="header-anchor" href="#cargo">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>While the code that we have written for Servo is primarily in Rust, we estimate that at least 2/3 of the code that will run inside of Servo will be written in C/C++, even when we ship. From the SpiderMonkey JavaScript engine to the Skia and Azure/Moz2D graphics pipeline to WebRTC, media extensions, and proprietary video codecs, there is a huge portion of the browser that is integrated and wrapped into Servo, rather than rewritten. For each of these projects, we have a crate that has a <code>build.rs</code> file that performs the custom build steps to produce a static library and then produce a Rust <code>rlib</code> file to link into Servo.</p>
+<p>The rest of Servo is a significant amount of code (~150k lines of Rust; ~250k if you include autogenerated DOM bindings), but follows the standard conventions of Cargo and Rust as far as producing crates. For the many crates within the Servo repo, we simply have a <code>Cargo.toml</code> file next to a <code>lib.rs</code> that defines the module structure. When we break them out into a separate GitHub repository, though, we follow the convention of a toplevel <code>Cargo.toml</code> file with a <code>src</code> directory that holds all of the Rust code.</p>
+<p><img src="https://raw.githubusercontent.com/maxsnew/cargo-dot/master/etc/servo.png" alt="Servo's dependency graph" title="Servo dependency graph"></p>
+<h3 id="updating-dependencies" tabindex="-1">Updating dependencies <a class="header-anchor" href="#updating-dependencies">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Since there are three toplevel <code>Cargo.toml</code> files, there are correspondingly three <code>Cargo.lock</code> files. This configuration makes the already challenging updates of dependencies even moreso. We have added a command, <code>mach update-cargo -p {package} --precise {version}</code> to handle updates across all three of the lockfiles. While running this command without any arguments does attempt to upgrade all dependencies to the highest SemVer-compatible versions, in practice that operation is unlikely to work, due to a mixture of:</p>
+<ul>
+<li>
+<p>git-only dependencies, which do not have a version number</p>
+</li>
+<li>
+<p>Dependencies with different version constraints on a common dependency, resulting in two copies of a library and conflicting types</p>
+</li>
+<li>
+<p>Hidden Rust compiler version dependencies</p>
+</li>
+</ul>
+<h2 id="things-we%E2%80%99d-like-to-fix-in-the-future" tabindex="-1">Things we’d like to fix in the future <a class="header-anchor" href="#things-we%E2%80%99d-like-to-fix-in-the-future">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>It would be great if there was a <a href="https://github.com/servo/servo/issues/5973">single Cargo.toml</a> file and it was at the toplevel of the Servo repo. It’s confusing to people familiar with Rust projects, who go looking for a Cargo.toml file and can’t find them.</p>
+<p>Cross-compilation to Android with linker hacks feels a bit awkward. We’d like to clean that up, remove the submodule that performs that linker hackery, and have a more clean/consistent feel to our cross-targeted builds.</p>
+<p>Managing the dependencies — particularly if there is a cross-repo update like a Rust upgrade — is both a real pain and requires network access in order to clone the dependency that you would like to edit. The proposed <a href="https://github.com/rust-lang/cargo/issues/1545"><code>cargo clone</code></a> command would be a huge help here.</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

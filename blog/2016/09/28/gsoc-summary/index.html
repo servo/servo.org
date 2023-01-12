@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wrapping up Google Summer of Code 2016</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="Wrapping up Google Summer of Code 2016">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">Wrapping up Google Summer of Code 2016</h1>
+<p class="subtitle"><span class="grey-light">(2016-09-28)</span> Summaries of Servo's GSoC projects</p>
+
+<div class="has-top-margin">
+  <p>This year Servo had two students working on projects as part of the Google Summer of Code program.
+Rahul Sharma (<a href="https://github.com/creativcoder">creativcoder</a>) tackled the daunting project of
+implementing initial support for the new <a href="https://w3c.github.io/ServiceWorker/">ServiceWorker API</a>,
+under the mentorship of <a href="https://github.com/jdm/">jdm</a>, while Zhen Zhang (<a href="https://github.com/izgzhen">izgzhen</a>)
+implemented missing support for files, blobs, and <a href="http://dev.w3.org/2006/webapi/FileAPI/">related APIs</a> under
+the direction of <a href="https://github.com/Manishearth/">Manishearth</a>. Let’s see how they did!</p>
+<h2 id="serviceworker-support" tabindex="-1">ServiceWorker support <a class="header-anchor" href="#serviceworker-support">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Three months is not enough time for a single student to implement the entire set of features
+defined by the <a href="https://w3c.github.io/ServiceWorker/">ServiceWorker specification</a>, so the goal
+of this project was to implement the fundamental pieces required for sharing workers between
+multiple pages, along with the related DOM APIs for registering and interacting with the
+workers, and finally enabling interception of network requests to support the worker’s <code>fetch</code>
+event.</p>
+<p>Notable pull requests include:</p>
+<ul>
+<li>network request <a href="https://github.com/servo/servo/commit/3766cd167365187bfabbb00f5dc41ba923fe23d4">interception</a></li>
+<li>the DOM API for <a href="https://github.com/servo/servo/commit/15a2064c0d7b468724b43d1cb6157d506ad19093">registration</a></li>
+<li>a <a href="https://github.com/servo/servo/commit/1e6293ea1d06120c9f3488d7d32c24d8d92df6b1">new thread</a> for
+coordinating ServiceWorker instances</li>
+</ul>
+<p>Rahul put together a <a href="https://github.com/creativcoder/gsoc16">full writeup</a> of his activities
+as part of GSoC; please check it out! His mentor was very pleased with Rahul’s work over the
+course of the summer - it was a large, complex task, and he tackled it with enthusiasm and diligence.
+Congratulations on completing the project, and thank you for your efforts, Rahul!</p>
+<h2 id="file%2Fblob-support" tabindex="-1">File/Blob support <a class="header-anchor" href="#file%2Fblob-support">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>The second project by <a href="https://github.com/izgzhen">Zhen Zhang</a> was to implement most of
+<a href="https://w3c.github.io/FileAPI/">the File specification</a>. The scope of the project included things like
+file upload form controls, manipulating files from the DOM, and the creation/management of blob
+URIs. As of now almost all of the spec is implemented, except for the ability to construct and
+serialize <code>Blob</code>s to/from <code>ArrayBuffer</code>s (due to the lack of <code>ArrayBuffer</code> bindings at the time),
+<code>URL.createFor</code>, and handling fragments in blob URIs.</p>
+<p>Notable pull requests include:</p>
+<ul>
+<li>The <a href="https://github.com/servo/servo/pull/11076"><code>File</code></a> and <a href="https://github.com/servo/servo/pull/11716"><code>Blob</code></a> DOM APIs</li>
+<li><a href="https://github.com/servo/servo/pull/11717">Filepicker</a> integration, using the <code>tinyfiledialog</code> library</li>
+<li>Support for <a href="https://github.com/servo/servo/pull/11221">on-disk file-backed <code>Blob</code>s</a></li>
+<li><a href="https://github.com/servo/servo/pull/11534">Storing</a> and <a href="https://github.com/servo/servo/pull/11536">loading</a> Blob URIs</li>
+<li><a href="https://github.com/servo/servo/pull/11875">Reference counting</a> logic for the blob store</li>
+</ul>
+<p>Status updates and design docs live in <a href="https://github.com/izgzhen/gsoc-file-support">this repo</a>.
+The <a href="https://github.com/izgzhen/gsoc-file-support/blob/master/notes/midterm.md">midterm summary</a>
+is a particularly good read, as it explains the preliminary design for the refcounted blob store.
+Zhen was quite fun to work with, and showed lots of initiative in exploring solutions.
+Thank you for your help, Zhen!</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xml:base="https://servo.org" xmlns="http://www.w3.org/2005/Atom">
+  <title>Servo Blog</title>
+  <subtitle>All the entries in the Servo blog.</subtitle>
+  <link href="https://servo.org/blog/feed.xml" rel="self"/>
+  <link href="https://servo.org"/>
+  <updated>2020-11-17T00:30:00Z</updated>
+  <id>https://servo.org</id>
+  <author>
+    <name>Servo Team</name>
+    <email>info@servo.org</email>
+  </author>
+  <entry>
+    <title>Servo’s new home</title>
+    <link href="https://servo.org/blog/2020/11/17/servo-home/"/>
+    <updated>2020-11-17T00:30:00Z</updated>
+    <id>https://servo.org/blog/2020/11/17/servo-home/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;The &lt;a href=&quot;https://servo.org/&quot;&gt;Servo Project&lt;/a&gt; is excited to announce that it has found a new home with the Linux Foundation. Servo was incubated inside Mozilla, and served as the proof that important web components such as CSS and rendering could be implemented in Rust, with all its safety, concurrency and speed. Now it’s time for Servo to leave the nest!&lt;/p&gt;
+&lt;p&gt;This move comes with a change in project governance: the Servo Project gains a board and a technical steering committee to help guide the project’s future (see &lt;a href=&quot;https://github.com/servo/project/&quot;&gt;github.com/servo/project/&lt;/a&gt; for more details).&lt;/p&gt;
+&lt;p&gt;Servo’s high-level goals remain unchanged: to provide a high-performance, safe rendering engine for embedding in other applications. It is the responsibility of the technical steering committee to provide direction for these goals and enable the wider Servo community to make meaningful contributions that advance this mission.&lt;/p&gt;
+&lt;p&gt;As a result of these changes, it is now easier than ever before to contribute to Servo’s future. Whether by &lt;a href=&quot;https://github.com/servo/servo/&quot;&gt;writing code or documentation&lt;/a&gt;, &lt;a href=&quot;https://download.servo.org/&quot;&gt;testing nightlies&lt;/a&gt; and filing issues, or &lt;a href=&quot;https://crowdfunding.lfx.linuxfoundation.org/projects/servo&quot;&gt;donating&lt;/a&gt; to help cover the project’s new CI and hosting costs, every bit helps. If you know a company that would like to support the Servo Project, please &lt;a href=&quot;mailto:info@servo.org&quot;&gt;get in touch&lt;/a&gt; as we will be rolling out a formal membership program to support the future of the project.&lt;/p&gt;
+&lt;p&gt;We also have a new home for discussions, help and general conversation, at the &lt;a href=&quot;https://servo.zulipchat.com/&quot;&gt;Servo Zulip&lt;/a&gt;. We hope to see you there, and look forward to building the future of embeddable web rendering engines with you in our new home!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>GSoC wrap-up - Implementing WebGPU in Servo</title>
+    <link href="https://servo.org/blog/2020/08/30/gsoc-webgpu/"/>
+    <updated>2020-08-30T00:30:00Z</updated>
+    <id>https://servo.org/blog/2020/08/30/gsoc-webgpu/</id>
+    <content xml:lang="en" type="html">&lt;h2 id=&quot;introduction&quot; tabindex=&quot;-1&quot;&gt;Introduction &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#introduction&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Hello everyone! I am Kunal(&lt;a href=&quot;https://github.com/kunalmohan&quot;&gt;@kunalmohan&lt;/a&gt;), an undergrad student at Indian Institute of Technology Roorkee, India. As a part of Google Summer of Code(GSoC) 2020, I worked on implementing WebGPU in Servo under the mentorship of Mr. Dzmitry Malyshau(&lt;a href=&quot;https://github.com/kvark&quot;&gt;@kvark&lt;/a&gt;). I devoted the past 3 months working on ways to bring the API to fruition in Servo, so that Servo is able to run the existing examples and pass the Conformance Test Suite(CTS). This is going to be a brief account of how I started with the project, what challenges I faced, and how I overcame them.&lt;/p&gt;
+&lt;h2 id=&quot;what-is-webgpu%3F&quot; tabindex=&quot;-1&quot;&gt;What is WebGPU? &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#what-is-webgpu%3F&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;WebGPU is a future web standard, cross-platform graphics API aimed to make GPU capabilities more accessible on the web. WebGPU is designed from the ground up to efficiently map to the Vulkan, Direct3D 12, and Metal native GPU APIs. A native implementation of the API in Rust is developed in the &lt;a href=&quot;https://github.com/gfx-rs/wgpu&quot;&gt;wgpu project&lt;/a&gt;. Servo implementation of the API uses this crate.&lt;/p&gt;
+&lt;h2 id=&quot;the-project&quot; tabindex=&quot;-1&quot;&gt;The Project &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#the-project&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;At the start of the project the implementation was in a pretty raw state- Servo was only able to accept shaders as SPIRV binary and ran just the compute example. I had the following tasks in front of me:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implement the various &lt;a href=&quot;https://gpuweb.github.io/gpuweb/#idl-index&quot;&gt;DOM interfaces&lt;/a&gt; that build up the API.&lt;/li&gt;
+&lt;li&gt;Setup a proper Id rotation for the GPU resources.&lt;/li&gt;
+&lt;li&gt;Integrate WebGPU with WebRender for presenting the rendering to HTML canvas.&lt;/li&gt;
+&lt;li&gt;Setup proper model model for async error recording.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The final goal was to be able to run the live examples at &lt;a href=&quot;https://austineng.github.io/webgpu-samples/&quot;&gt;https://austineng.github.io/webgpu-samples/&lt;/a&gt; and pass a fair amount of the CTS.&lt;/p&gt;
+&lt;h2 id=&quot;implementation&quot; tabindex=&quot;-1&quot;&gt;Implementation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#implementation&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Since Servo is a multi-process browser, GPU is accessed from a different process(server-side) than the one running the page content and scripts(content process). For better performance and asynchronous behaviour, we have a separate wgpu thread for each content process.&lt;/p&gt;
+&lt;p&gt;Setting up a proper Id rotation for the GPU resources was our first priority. I had to ensure that each Id generated was unique. This meant sharing the &lt;a href=&quot;https://github.com/servo/servo/blob/a5a21a59addae0df6d9e050f17d44399db04fec3/components/script/dom/identityhub.rs#L56-L67&quot;&gt;Identity Hub&lt;/a&gt; among all threads via &lt;code&gt;Arc&lt;/code&gt; and &lt;code&gt;Mutex&lt;/code&gt;. For recycling the Ids, wgpu exposes an &lt;code&gt;IdentityHandler&lt;/code&gt; trait that must be implemented on the server-side interface of the browser and wgpu. This facilitates the following: when wgpu detects that an object has been dropped by the user (which is some time after the actual drop/garbage collection), wgpu calls the trait methods that are responsible for releasing the Id. In our case they send a message to the content process to free the Id and make it available for reuse.&lt;/p&gt;
+&lt;p&gt;Implementing the DOM Interfaces was pretty straight forward. A DOM object is just an opaque handle to an actual GPU resource. Whenever a method, that performs an operation, is called on a DOM object there are 2 things to be done- convert the IDL types to wgpu types. And send a message to the server to perform the operation. Most of the validation is done within wgpu.&lt;/p&gt;
+&lt;h2 id=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;Presentation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#presentation&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;WebGPU textures can be rendered to HTML canvas via &lt;code&gt;GPUCanvasContext&lt;/code&gt;, which can be obtained from &lt;code&gt;canvas.getContext(&#39;gpupresent&#39;)&lt;/code&gt;. All rendered images are served to WebRender as &lt;code&gt;ExternalImages&lt;/code&gt; for rendering purpose. This is done via an async software presentation path. Each new &lt;code&gt;GPUCanvasContext&lt;/code&gt; object is assigned a new &lt;code&gt;ExternalImageId&lt;/code&gt; and a new swap chain is assigned a new &lt;code&gt;ImageKey&lt;/code&gt;. Since WebGPU threads are spawned on-demand, an image handler for WebGPU is initialized at startup, stored in &lt;code&gt;Constellation&lt;/code&gt;, and supplied to threads at the time of spawn. Each time &lt;code&gt;GPUSwapChain.getCurrentTexture()&lt;/code&gt; is called the canvas is marked as dirty which is then flushed at the time of reflow. At the time of flush, a message is sent to the wgpu server to update the image data provided to WebRender. The following happens after this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The contents of the rendered texture are copied to a buffer.&lt;/li&gt;
+&lt;li&gt;Buffer is mapped asynchronously for read.&lt;/li&gt;
+&lt;li&gt;The data read from the buffer is copied to a staging area in &lt;a href=&quot;https://github.com/servo/servo/blob/669b16f2c054bd038b7a3c69985076607e140b7f/components/webgpu/lib.rs#L1353-L1365&quot;&gt;&lt;code&gt;PresentionData&lt;/code&gt;&lt;/a&gt;. &lt;code&gt;PresentationData&lt;/code&gt; stores the data and all the required machinery for this async presentation belt.&lt;/li&gt;
+&lt;li&gt;When WebRender wants to read the data, it locks on the data to prevent it from being altered during read. Data is served in the form of raw bytes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The above process is not the best one, but the only option available to us for now. This also causes a few empty frames to be rendered at the start.
+A good thing, though, is that this works on all platforms and is a great fallback path while we’ll be adding hardware accelerate presentation in the future.&lt;/p&gt;
+&lt;h2 id=&quot;buffer-mapping&quot; tabindex=&quot;-1&quot;&gt;Buffer Mapping &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#buffer-mapping&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When the user issues an async buffer map operation, the operation is queued on the server-side and all devices polled at a regular interval of 100ms for the same. As soon as the map operation is complete, data is read and sent to the content process where it is stored in the Heap. The user can read and edit this data by accessing it’s subranges via &lt;code&gt;GPUBuffer.getMappedRange()&lt;/code&gt; which returns &lt;code&gt;ExternalArrayBuffer&lt;/code&gt; pointing to the data in the Heap. On unmap, all the &lt;code&gt;ExternalArrayBuffer&lt;/code&gt;s are detached, and if the buffer was mapped for write, data sent back to server for write to the actual resource.&lt;/p&gt;
+&lt;h2 id=&quot;error-reporting&quot; tabindex=&quot;-1&quot;&gt;Error Reporting &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#error-reporting&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;To achieve maximum efficiency, WebGPU supports an asynchronous error model. The implementation keeps a stack of &lt;code&gt;ErrorScope&lt;/code&gt;s that are responsible for capturing the errors that occur during operations performed in their scope. The user is responsible for pushing and popping an &lt;code&gt;ErrorScope&lt;/code&gt; in the stack. Popping an &lt;code&gt;ErrorScope&lt;/code&gt; returns a promise that is resolved to null if all the operations were successfull, otherwise it resolves to the first error that occurred.&lt;/p&gt;
+&lt;p&gt;When an operation is issued, &lt;code&gt;scope_id&lt;/code&gt; of the &lt;code&gt;ErrorScope&lt;/code&gt; on the top of the stack is sent to the server with it and operation-count of the scope is incremented. The result of the operation can be described by the enum-&lt;/p&gt;
+&lt;pre class=&quot;language-rust&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;token type-definition class-name&quot;&gt;WebGPUOpResult&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token class-name&quot;&gt;ValidationError&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token class-name&quot;&gt;OutOfMemoryError&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;    &lt;span class=&quot;token class-name&quot;&gt;Success&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br /&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On receiving the result, we decrement the operation-count of the &lt;code&gt;ErrorScope&lt;/code&gt; with the given &lt;code&gt;scope_id&lt;/code&gt;. We further have 3 cases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The result is &lt;code&gt;Success&lt;/code&gt;. Do nothing.&lt;/li&gt;
+&lt;li&gt;The result is an error and the &lt;code&gt;ErrorFilter&lt;/code&gt; matches the error. We record this error in the &lt;a href=&quot;https://github.com/servo/servo/blob/669b16f2c054bd038b7a3c69985076607e140b7f/components/script/dom/gpudevice.rs#L85-L91&quot;&gt;&lt;code&gt;ErrorScopeInfo&lt;/code&gt;&lt;/a&gt;, and if the &lt;code&gt;ErrorScope&lt;/code&gt; has been popped by the user, resolve the promise with it.&lt;/li&gt;
+&lt;li&gt;The result is an error but the &lt;code&gt;ErrorFilter&lt;/code&gt; does not match the error. In this case, we find the nearest parent &lt;code&gt;ErrorScope&lt;/code&gt; with the matching filter and record the error in it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After the result is processed, we try to remove the &lt;code&gt;ErrorScope&lt;/code&gt; from the stack- the user should have called &lt;code&gt;popErrorScope()&lt;/code&gt; on the scope and the operation-count of the scope should be 0.&lt;/p&gt;
+&lt;p&gt;In case there are no error scopes on the stack or if &lt;code&gt;ErrorFilter&lt;/code&gt; of none of the &lt;code&gt;ErrorScope&lt;/code&gt;s match the error, the error is fired as an &lt;a href=&quot;https://gpuweb.github.io/gpuweb/#gpuuncapturederrorevent&quot;&gt;&lt;code&gt;GPUUncapturedErrorEvent&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;conformance-test-suite&quot; tabindex=&quot;-1&quot;&gt;Conformance Test Suite &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#conformance-test-suite&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Conformance Test Suite is required for checking the accuracy of the implementation of the API and can be found &lt;a href=&quot;https://github.com/gpuweb/cts&quot;&gt;here&lt;/a&gt;. Servo vendors it’s own copy of the CTS which, currently, needs to be updated manually for the latest changes. Here are a few statistics of the tests:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;14/36 pass completely&lt;/li&gt;
+&lt;li&gt;5/36 have majority of subtests passing&lt;/li&gt;
+&lt;li&gt;17/36 fail/crash/timeout&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The wgpu team is actively working on improving the validation.&lt;/p&gt;
+&lt;h2 id=&quot;unfinished-business&quot; tabindex=&quot;-1&quot;&gt;Unfinished business &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#unfinished-business&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;A major portion of the project that was proposed has been completed, but there’s still work left to do. These are a few things that I was unable to cover under the proposed timeline:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Profiling and benchmarking the implementation against the WebGL implementation of Servo.&lt;/li&gt;
+&lt;li&gt;Handle canvas resize event smoothly.&lt;/li&gt;
+&lt;li&gt;Support Error recording on Workers.&lt;/li&gt;
+&lt;li&gt;Support WGSL shaders.&lt;/li&gt;
+&lt;li&gt;Pass the remaining tests in the CTS.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;important-links&quot; tabindex=&quot;-1&quot;&gt;Important Links &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#important-links&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The WebGPU specification can be found &lt;a href=&quot;https://gpuweb.github.io/gpuweb/&quot;&gt;here&lt;/a&gt;.
+The PRs that I made as a part of the project can be accessed via the following links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/pulls?q=is%3Apr+author%3Akunalmohan+created%3A%3E2020-05-05+merged%3A%3C2020-08-31+&quot;&gt;Servo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/gfx-rs/wgpu/pulls?q=is%3Apr+author%3Akunalmohan+created%3A%3E2020-05-05+merged%3A%3C2020-08-31+&quot;&gt;wgpu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/gpuweb/gpuweb/pulls?q=is%3Apr+author%3Akunalmohan+created%3A%3E2020-05-05+merged%3A%3C2020-08-31+&quot;&gt;WebGPU Specification&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The progress of the project can be tracked in the &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;GitHub project&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;Conclusion &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#conclusion&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;WebGPU implementation in Servo supports all of the &lt;a href=&quot;https://austineng.github.io/webgpu-samples/&quot;&gt;Austin’s samples&lt;/a&gt;. Thanks to CYBAI and Josh, Servo now supports dynamic import of modules and thus accept GLSL shaders. Here are a few samples of what Servo is capable of rendering at 60fps:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-fractal-cube.gif&quot; alt=&quot;Fractal Cube&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-instanced-cube.gif&quot; alt=&quot;Instanced Cube&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-compute-boids.gif&quot; alt=&quot;Compute Boids&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;I would like to thank Dzmitry and Josh for guiding me throughout the project and a big shoutout to the WebGPU and Servo community for doing such awesome work! I had a great experience contributing to Servo and WebGPU. I started as a complete beginner to Rust, graphics and browser internals, but learned a lot during the course of this project. I urge all WebGPU users and graphics enthusiasts out there to test their projects on Servo and help us improve the implementation and the API as well :)&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>This Week In Servo 135</title>
+    <link href="https://servo.org/blog/2020/08/10/twis-135/"/>
+    <updated>2020-08-10T00:30:00Z</updated>
+    <id>https://servo.org/blog/2020/08/10/twis-135/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;In the &lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2020-07-27..2020-08-10+user%3Aservo+&quot;&gt;past two weeks&lt;/a&gt;,
+we merged 108 PRs in the Servo organization’s repositories.&lt;/p&gt;
+&lt;p&gt;The latest nightly builds for common platforms are available at &lt;a href=&quot;https://download.servo.org/&quot;&gt;download.servo.org&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Last week we released &lt;a href=&quot;https://www.microsoft.com/p/firefox-reality/9npq78m7nb0r&quot;&gt;Firefox Reality v1.2&lt;/a&gt;, which includes a smoother
+developer tools experience, along with support for Unity WebXR content and self-signed SSL certificates. See the
+&lt;a href=&quot;https://github.com/servo/servo/wiki/Firefox-Reality-release-notes&quot;&gt;full release notes&lt;/a&gt; for more information about the new release.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/27658/89798375-19568080-dafa-11ea-8bd3-d47a85741ed5.png&quot; alt=&quot;Image of unity webxr content&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#planning-and-status&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2020.&lt;/p&gt;
+&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#exciting-works-in-progress&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;paulrouget is &lt;a href=&quot;https://github.com/servo/servo/pull/27556&quot;&gt;adding&lt;/a&gt; bookmarks to Firefox Reality.&lt;/li&gt;
+&lt;li&gt;Manishearth is &lt;a href=&quot;https://github.com/servo/servo/pull/27488&quot;&gt;implementing&lt;/a&gt; basic table support in the new Layout 2020 engine.&lt;/li&gt;
+&lt;li&gt;jdm is &lt;a href=&quot;https://github.com/servo/servo/pull/27474&quot;&gt;making&lt;/a&gt; it easy to create builds that integrate AddressSanitizer.&lt;/li&gt;
+&lt;li&gt;pcwalton is &lt;a href=&quot;https://github.com/servo/servo/pull/27539&quot;&gt;implementing&lt;/a&gt; support for CSS floats in the new Layout 2020 engine.&lt;/li&gt;
+&lt;li&gt;kunalmohan is &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;implementing&lt;/a&gt; the draft WebGPU specification.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#notable-additions&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;h5 id=&quot;new-layout-engine&quot; tabindex=&quot;-1&quot;&gt;New layout engine &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#new-layout-engine&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/26447&quot;&gt;made&lt;/a&gt; &lt;code&gt;&amp;lt;br&amp;gt;&lt;/code&gt; elements break lines.&lt;/li&gt;
+&lt;li&gt;Manishearth &lt;a href=&quot;https://github.com/servo/servo/pull/27388&quot;&gt;implemented&lt;/a&gt; support for the &lt;code&gt;clip&lt;/code&gt; CSS property.&lt;/li&gt;
+&lt;li&gt;Manishearth &lt;a href=&quot;https://github.com/servo/servo/pull/27399&quot;&gt;fixed&lt;/a&gt; the behaviour of the &lt;code&gt;inset&lt;/code&gt; CSS property for absolutely positioned elements.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;non-layout-changes&quot; tabindex=&quot;-1&quot;&gt;Non-layout changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#non-layout-changes&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27402&quot;&gt;added&lt;/a&gt; the WebGPU conformance test suite to Servo’s automated tests.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27403&quot;&gt;improved&lt;/a&gt; the macOS nightly GStreamer packaging.&lt;/li&gt;
+&lt;li&gt;nicoabie &lt;a href=&quot;https://github.com/servo/rust-mozjs/pull/520&quot;&gt;made&lt;/a&gt; a SpiderMonkey Rust binding API more resilient.&lt;/li&gt;
+&lt;li&gt;utsavoze &lt;a href=&quot;https://github.com/servo/servo/pull/27413&quot;&gt;added&lt;/a&gt; support for &lt;code&gt;mouseenter&lt;/code&gt; and &lt;code&gt;mouseleave&lt;/code&gt; DOM events.&lt;/li&gt;
+&lt;li&gt;avr1254 &lt;a href=&quot;https://github.com/servo/servo/pull/27420&quot;&gt;removed&lt;/a&gt; some unnecessary UTF-8 to UTF-16 conversions when interacting with SpiderMonkey.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27425&quot;&gt;implemented&lt;/a&gt; &lt;code&gt;preserveDrawbingBuffer&lt;/code&gt; support in WebGL code.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27438&quot;&gt;added&lt;/a&gt; a crash reporting UI to Firefox Reality.&lt;/li&gt;
+&lt;li&gt;mustafapc19 &lt;a href=&quot;https://github.com/servo/servo/pull/27443&quot;&gt;implemented&lt;/a&gt; the &lt;code&gt;Console.clear&lt;/code&gt; DOM API.&lt;/li&gt;
+&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27447&quot;&gt;fixed&lt;/a&gt; a WebGPU crash related to the &lt;code&gt;GPUErrorScope&lt;/code&gt; API, and &lt;a href=&quot;https://github.com/servo/servo/pull/27536&quot;&gt;improved&lt;/a&gt; the reporting behaviour to match the specification.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27448&quot;&gt;fixed&lt;/a&gt; a source of WebGL texture corruption in WebXR.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27456&quot;&gt;added&lt;/a&gt; infrastructure to the GStreamer plugin to allow live-streaming 360 degree videos of Hubs rooms to Youtube.&lt;/li&gt;
+&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27480&quot;&gt;improved&lt;/a&gt; the error reporting behaviour of the WebGPU API.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27487&quot;&gt;update&lt;/a&gt; the WebXR Layers implementation to match the latest specification.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27491&quot;&gt;improved&lt;/a&gt; the Firefox Reality preferences panel to highlight specific experimental features.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27530&quot;&gt;fixed&lt;/a&gt; a crash when playing media in Firefox Reality.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27506&quot;&gt;fixed&lt;/a&gt; a source of memory corruption in the C++ embedding layer.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27512&quot;&gt;avoided&lt;/a&gt; pancking when a devtools client disconnects unexpectedly.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/webxr/pull/191&quot;&gt;made&lt;/a&gt; it easier to test AR web content in desktop builds.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#new-contributors&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/nosark&quot;&gt;Kyle Nosar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Monty0045&quot;&gt;Wyatt Turner&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/mustafapc19&quot;&gt;mustafapc19&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>This Week In Servo 134</title>
+    <link href="https://servo.org/blog/2020/07/27/twis-134/"/>
+    <updated>2020-07-27T00:30:00Z</updated>
+    <id>https://servo.org/blog/2020/07/27/twis-134/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;In the &lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2020-07-20..2020-07-27+user%3Aservo+&quot;&gt;past week&lt;/a&gt;,
+we merged 69 PRs in the Servo organization’s repositories.&lt;/p&gt;
+&lt;p&gt;The latest nightly builds for common platforms are available at &lt;a href=&quot;https://download.servo.org/&quot;&gt;download.servo.org&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Servo has been successfully &lt;a href=&quot;https://blog.mozvr.com/a-browser-plugin-for-unity/&quot;&gt;integrated&lt;/a&gt; into 3d Unity scenes as a 2d browser plugin.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=NoEzDAYlflE&quot;&gt;&lt;img src=&quot;https://img.youtube.com/vi/NoEzDAYlflE/0.jpg&quot; alt=&quot;Servo in the Unity editor&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Our macOS nightly builds last week panicked on launch due to missing shared libraries. That issue has been fixed.&lt;/p&gt;
+&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/27/twis-134/#planning-and-status&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2020.&lt;/p&gt;
+&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/27/twis-134/#exciting-works-in-progress&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;philip-lamb is &lt;a href=&quot;https://github.com/MozillaReality/servo-unity/&quot;&gt;creating&lt;/a&gt; a Unity embedding for Servo.&lt;/li&gt;
+&lt;li&gt;pcwalton is &lt;a href=&quot;https://github.com/servo/servo/pull/27216&quot;&gt;implementing&lt;/a&gt; support for CSS floats in the new Layout 2020 engine.&lt;/li&gt;
+&lt;li&gt;kunalmohan is &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;implementing&lt;/a&gt; the draft WebGPU specification.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/27/twis-134/#notable-additions&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;AhibshekSharma102 and gterzian &lt;a href=&quot;https://github.com/servo/servo/pull/26710&quot;&gt;made&lt;/a&gt; large external JS scripts compile on a background thread.&lt;/li&gt;
+&lt;li&gt;pcwalton &lt;a href=&quot;https://github.com/servo/servo/pull/27216&quot;&gt;implemented&lt;/a&gt; core float layout algorithms in the Layout 2020 engine.&lt;/li&gt;
+&lt;li&gt;avr1254 &lt;a href=&quot;https://github.com/servo/servo/pull/272990&quot;&gt;standardized&lt;/a&gt; some navigation-related algorithms for forms and anchors.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27304&quot;&gt;made&lt;/a&gt; the UWP devtools server use a fixed port instead of a random one.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27313&quot;&gt;updated&lt;/a&gt; the XRWebGLLayer interface to match the WebXR specification.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27316&quot;&gt;fixed&lt;/a&gt; a WebXR rendering regression on the HoloLens 2 that affected Babylon.js and Unity WebXR content.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27325&quot;&gt;made&lt;/a&gt; it possible for WebXR URLs opened via the &lt;code&gt;fxrmin://&lt;/code&gt; protocol to launch immersive mode immediately on document load.&lt;/li&gt;
+&lt;li&gt;utsavoza &lt;a href=&quot;https://github.com/servo/mozjs/pull/256&quot;&gt;allowed&lt;/a&gt; SpiderMonkey to build with the most recent macOS SDK.&lt;/li&gt;
+&lt;li&gt;SimonSapin &lt;a href=&quot;https://github.com/servo/servo/pull/27385&quot;&gt;added&lt;/a&gt; support for &lt;code&gt;display: list-item&lt;/code&gt; in the Layout 2020 engine.&lt;/li&gt;
+&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27389&quot;&gt;implemented&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/27329&quot;&gt;multiple&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/27348&quot;&gt;missing features&lt;/a&gt; of the WebGPU specification.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27368&quot;&gt;fixed&lt;/a&gt; a regression reported in the UWP certification process for allowed APIs.&lt;/li&gt;
+&lt;li&gt;Manishearth &lt;a href=&quot;https://github.com/servo/servo/pull/27339&quot;&gt;implemented&lt;/a&gt; part of aligning flexboxes in Layout 2020.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/webxr/pull/186&quot;&gt;fixed&lt;/a&gt; a regression in exiting immersive mode.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/27/twis-134/#new-contributors&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/AbhishekSharma102&quot;&gt;AbhishekSharma102&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>This Week In Servo 133</title>
+    <link href="https://servo.org/blog/2020/07/20/twis-133/"/>
+    <updated>2020-07-20T00:30:00Z</updated>
+    <id>https://servo.org/blog/2020/07/20/twis-133/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;In the &lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2020-07-13..2020-07-20+user%3Aservo+&quot;&gt;past week&lt;/a&gt;,
+we merged 62 PRs in the Servo organization’s repositories.&lt;/p&gt;
+&lt;p&gt;The latest nightly builds for common platforms are available at &lt;a href=&quot;https://download.servo.org/&quot;&gt;download.servo.org&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We now have a collection of &lt;a href=&quot;https://github.com/servo/servo/blob/master/docs/hololens.md&quot;&gt;tips &amp;amp; tricks&lt;/a&gt; for using Firefox Reality on the HoloLens 2.&lt;/p&gt;
+&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/20/twis-133/#planning-and-status&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2020.&lt;/p&gt;
+&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/20/twis-133/#exciting-works-in-progress&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;pcwalton is &lt;a href=&quot;https://github.com/servo/servo/pull/27216&quot;&gt;implementing&lt;/a&gt; support for CSS floats in the new Layout 2020 engine.&lt;/li&gt;
+&lt;li&gt;AbhishekSharma102 and gterzian are &lt;a href=&quot;https://github.com/servo/servo/pull/26710&quot;&gt;making&lt;/a&gt; some JS scripts compile off the main thread.&lt;/li&gt;
+&lt;li&gt;kunalmohan is &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;implementing&lt;/a&gt; the draft WebGPU specification.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/20/twis-133/#notable-additions&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/webxr/pull/184&quot;&gt;avoided&lt;/a&gt; a GL error when exiting immersive mode.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27295&quot;&gt;implemented&lt;/a&gt; support for streaming from webxr content to the GStreamer plugin embedding.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27300&quot;&gt;fixed&lt;/a&gt; an issue with websocket HTTP requests, enabling Mozilla Hubs to load.&lt;/li&gt;
+&lt;li&gt;ferjm &lt;a href=&quot;https://github.com/servo/media/pull/373&quot;&gt;fixed&lt;/a&gt; a regression preventing getUserMedia and other MediaStream APIs from working.&lt;/li&gt;
+&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27285&quot;&gt;implemented&lt;/a&gt; error scopes for WebGPU.&lt;/li&gt;
+&lt;li&gt;avr1254 &lt;a href=&quot;https://github.com/servo/servo/pull/27255&quot;&gt;added&lt;/a&gt; the missing &lt;code&gt;relList&lt;/code&gt; DOM attribute for HTMLFormElement.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27250&quot;&gt;improved&lt;/a&gt; the behaviour of dismissing an on-screen keyboard in Firefox Reality.&lt;/li&gt;
+&lt;li&gt;cybai &lt;a href=&quot;https://github.com/servo/servo/pull/27026&quot;&gt;implemented&lt;/a&gt; support for dynamic module imports.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/20/twis-133/#new-contributors&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/avr1254&quot;&gt;Arjun Ramachandrula&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>This Week In Servo 132</title>
+    <link href="https://servo.org/blog/2020/07/13/twis-132/"/>
+    <updated>2020-07-13T00:30:00Z</updated>
+    <id>https://servo.org/blog/2020/07/13/twis-132/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;In the &lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2020-07-06..2020-07-13+user%3Aservo+&quot;&gt;past week&lt;/a&gt;,
+we merged 64 PRs in the Servo organization’s repositories.&lt;/p&gt;
+&lt;p&gt;The latest nightly builds for common platforms are available at &lt;a href=&quot;https://download.servo.org/&quot;&gt;download.servo.org&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Servo now has the ability to record 360 degree videos of immersive web content like &lt;a href=&quot;http://rawcdn.githack.com/mrdoob/three.js/master/examples/webxr_vr_rollercoaster.html&quot;&gt;this three.js rollercoaster&lt;/a&gt;:
+&lt;a href=&quot;http://www.youtube.com/watch?v=buivCKjTtbk&quot; title=&quot;360 rollercoaster video&quot;&gt;&lt;img src=&quot;http://img.youtube.com/vi/buivCKjTtbk/0.jpg&quot; alt=&quot;360 rollercoaster video&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/13/twis-132/#planning-and-status&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2020.&lt;/p&gt;
+&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/13/twis-132/#exciting-works-in-progress&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;pcwalton is &lt;a href=&quot;https://github.com/servo/servo/pull/27216&quot;&gt;implementing&lt;/a&gt; support for CSS floats in the new Layout 2020 engine.&lt;/li&gt;
+&lt;li&gt;AbhishekSharma102 and gterzian are &lt;a href=&quot;https://github.com/servo/servo/pull/26710&quot;&gt;making&lt;/a&gt; some JS scripts compile off the main thread.&lt;/li&gt;
+&lt;li&gt;cybai and jdm are &lt;a href=&quot;https://github.com/servo/servo/pull/27026&quot;&gt;implementing&lt;/a&gt; dynamic module script imports.&lt;/li&gt;
+&lt;li&gt;kunalmohan is &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;implementing&lt;/a&gt; the draft WebGPU specification.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/13/twis-132/#notable-additions&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27229&quot;&gt;updated&lt;/a&gt; the developer tools server to support recent nightly Firefox versions.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27227&quot;&gt;fixed&lt;/a&gt; a bug preventing some DOM interfaces like XRInputSourceArray from being iterated.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27224&quot;&gt;implemented&lt;/a&gt; support for &lt;a href=&quot;https://github.com/servo/webxr/pull/181&quot;&gt;recording&lt;/a&gt; immersive WebXR content as 360 degree videos.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/rust-ammonia/rust-content-security-policy/pull/30&quot;&gt;fixed&lt;/a&gt; a bug causing over-zealous CSP blocking.&lt;/li&gt;
+&lt;li&gt;ferjm &lt;a href=&quot;https://github.com/servo/servo/pull/27152&quot;&gt;implemented&lt;/a&gt; the &lt;code&gt;MediaDevices.enumerateDevices&lt;/code&gt; &lt;a href=&quot;https://github.com/servo/media/pull/368&quot;&gt;media&lt;/a&gt; API.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/media/pull/370&quot;&gt;removed&lt;/a&gt; a panic when HRTF audio is requested.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27177&quot;&gt;fixed&lt;/a&gt; a bug preventing the &lt;code&gt;fxr://&lt;/code&gt; protocol handler from working in Firefox Reality.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/font-kit/pull/156&quot;&gt;worked around&lt;/a&gt; a permission error when requesting system fonts under UWP, also avoiding a &lt;a href=&quot;https://github.com/servo/servo/pull/27184&quot;&gt;panic&lt;/a&gt; when using the &lt;code&gt;fillText&lt;/code&gt; API.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27142&quot;&gt;fixed&lt;/a&gt; a bug in GL context initialization for the gstreamer plugin that renders Servo content.&lt;/li&gt;
+&lt;li&gt;mbrubeck &lt;a href=&quot;https://github.com/servo/rust-smallvec/pull/213&quot;&gt;avoided&lt;/a&gt; leaking memory in the &lt;code&gt;smallvec&lt;/code&gt; crate when panicking during &lt;code&gt;insert_many&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27164&quot;&gt;replaced&lt;/a&gt; the websocket backend, allowing SSL websockets to work on Windows as a result.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/13/twis-132/#new-contributors&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;No new contributors this week.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>This Week In Servo 131</title>
+    <link href="https://servo.org/blog/2020/07/06/twis-131/"/>
+    <updated>2020-07-06T00:30:00Z</updated>
+    <id>https://servo.org/blog/2020/07/06/twis-131/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Welcome back everyone - it’s been a year without written updates, but we’re getting this train back on track! Servo hasn’t been
+dormant in that time; the biggest news was the public release of &lt;a href=&quot;https://www.microsoft.com/en-ca/p/firefox-reality/9npq78m7nb0r?rtc=1&amp;amp;activetab=pivot:overviewtab&quot;&gt;Firefox Reality&lt;/a&gt;
+(built on Servo technology) in the Microsoft store.&lt;/p&gt;
+&lt;p&gt;In the &lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2020-06-30..2020-07-06+user%3Aservo+&quot;&gt;past week&lt;/a&gt;,
+we merged 44 PRs in the Servo organization’s repositories.&lt;/p&gt;
+&lt;p&gt;The latest nightly builds for common platforms are available at &lt;a href=&quot;https://download.servo.org/&quot;&gt;download.servo.org&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/06/twis-131/#planning-and-status&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2020.&lt;/p&gt;
+&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/06/twis-131/#exciting-works-in-progress&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;jdm is &lt;a href=&quot;https://github.com/servo/servo/pull/27164&quot;&gt;replacing&lt;/a&gt; the websocket backend.&lt;/li&gt;
+&lt;li&gt;cybai and jdm are &lt;a href=&quot;https://github.com/servo/servo/pull/27026&quot;&gt;implementing&lt;/a&gt; dynamic module script imports.&lt;/li&gt;
+&lt;li&gt;kunalmohan is &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;implementing&lt;/a&gt; the draft WebGPU specification.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/06/twis-131/#notable-additions&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;SimonSapin &lt;a href=&quot;https://github.com/servo/rust-smallvec/pull/228&quot;&gt;fixed&lt;/a&gt; a source of Undefined Behaviour in the &lt;code&gt;smallvec&lt;/code&gt; crate.&lt;/li&gt;
+&lt;li&gt;muodov &lt;a href=&quot;https://github.com/servo/servo/pull/27174&quot;&gt;improved&lt;/a&gt; the compatibility of invalid form elements with the HTML specification, and &lt;a href=&quot;https://github.com/servo/servo/pull/27100&quot;&gt;added&lt;/a&gt;
+the missing &lt;code&gt;requestSubmit&lt;/code&gt; API.&lt;/li&gt;
+&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27173&quot;&gt;implemented&lt;/a&gt; GPUQueue APIs for WebGPU, and &lt;a href=&quot;https://github.com/servo/servo/pull/27154&quot;&gt;avoided&lt;/a&gt;
+synchronous updates, and &lt;a href=&quot;https://github.com/servo/servo/pull/27126&quot;&gt;implemented&lt;/a&gt; the getMappedRange API for GPUBuffer.&lt;/li&gt;
+&lt;li&gt;alaryso &lt;a href=&quot;https://github.com/servo/servo/pull/27169&quot;&gt;fixed&lt;/a&gt; a bug preventing running tests when using rust-analyzer.&lt;/li&gt;
+&lt;li&gt;alaryso &lt;a href=&quot;https://github.com/servo/servo/pull/27163&quot;&gt;avoided&lt;/a&gt; a panic in pages that perform layout queries on disconnected iframes.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27149&quot;&gt;integrated&lt;/a&gt; virtual keyboard support for text inputs into Firefox Reality, as well as &lt;a href=&quot;https://github.com/servo/servo/pull/27114&quot;&gt;added&lt;/a&gt;
+support for keyboard events.&lt;/li&gt;
+&lt;li&gt;Manishearth &lt;a href=&quot;https://github.com/servo/servo/pull/27143&quot;&gt;implemented&lt;/a&gt; WebAudio node types for reading and writing MediaStreams.&lt;/li&gt;
+&lt;li&gt;gterzian &lt;a href=&quot;https://github.com/servo/servo/pull/27016&quot;&gt;improved&lt;/a&gt; the responsiveness of the browser when shutting down.&lt;/li&gt;
+&lt;li&gt;utsavoza &lt;a href=&quot;https://github.com/servo/servo/pull/27104&quot;&gt;updated&lt;/a&gt; the referrer policy implementation to match the updated specification.&lt;/li&gt;
+&lt;li&gt;ferjm &lt;a href=&quot;https://github.com/servo/servo/pull/26752&quot;&gt;implemented&lt;/a&gt; support for WebRTC data channels.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/06/twis-131/#new-contributors&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/muodov&quot;&gt;Maxim Tsoy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Media stack Mid-Year review</title>
+    <link href="https://servo.org/blog/2019/07/09/media-update-h1-2019/"/>
+    <updated>2019-07-09T00:00:00Z</updated>
+    <id>https://servo.org/blog/2019/07/09/media-update-h1-2019/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;We recently closed the first half of 2019 and with that it is time to look back and do a quick summary of what the media team has achieved during this 6 months period.&lt;/p&gt;
+&lt;p&gt;Looking at some stats, we merged 87 Pull Requests, we opened 56 issues, we closed 42 issues and we welcomed 13 new amazing contributors to the media stack.&lt;/p&gt;
+&lt;h3 id=&quot;a%2Fv-playback&quot; tabindex=&quot;-1&quot;&gt;A/V playback &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#a%2Fv-playback&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;These are some of the selected A/V playback related H1 acomplishments&lt;/p&gt;
+&lt;h4 id=&quot;media-cache-and-improved-seeking&quot; tabindex=&quot;-1&quot;&gt;Media cache and improved seeking &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#media-cache-and-improved-seeking&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;We significally &lt;a href=&quot;https://github.com/servo/servo/pull/22692&quot;&gt;improved&lt;/a&gt; the seeking experience of audio and video files by implementing preloading and buffering support and a media cache.&lt;/p&gt;
+&lt;iframe title=&quot;vimeo-player&quot; src=&quot;https://player.vimeo.com/video/311414154&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;h4 id=&quot;basic-media-controls&quot; tabindex=&quot;-1&quot;&gt;Basic media controls &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#basic-media-controls&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;After a few months of work we got &lt;a href=&quot;https://github.com/servo/servo/pull/22743&quot;&gt;partial support for the Shadow DOM API&lt;/a&gt;, which gave us the opportunity to implement our first basic set of &lt;a href=&quot;https://github.com/servo/servo/pull/23208&quot;&gt;media controls&lt;/a&gt;.&lt;/p&gt;
+&lt;img src=&quot;https://s3.amazonaws.com/media-p.slid.es/uploads/105177/images/6275339/Jun-19-2019_17-11-57.gif&quot; alt=&quot;media controls&quot; width=&quot;640&quot; /&gt;
+&lt;p&gt;The UI is not perfect, among other things, because we still have no way to render a progress or volume bar properly, as that depends on the &lt;code&gt;input type=&amp;quot;range&amp;quot;&amp;gt;&lt;/code&gt; layout, which so far is rendered as a simple text box instead of the usual slider with a thumb.&lt;/p&gt;
+&lt;h4 id=&quot;gstreamer-backend-for-magicleap&quot; tabindex=&quot;-1&quot;&gt;GStreamer backend for MagicLeap &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#gstreamer-backend-for-magicleap&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;Another great achievement by &lt;a href=&quot;https://github.com/xclaesse&quot;&gt;Xavier Claessens&lt;/a&gt; from &lt;a href=&quot;https://www.collabora.com/&quot;&gt;Collabora&lt;/a&gt; has been the GStreamer backend for &lt;a href=&quot;https://www.magicleap.com/&quot;&gt;Magic Leap&lt;/a&gt;. The work is not completely done yet, but as you can see on the animation below, he already managed to paint a full screen video on the Magic Leap device.&lt;/p&gt;
+&lt;img src=&quot;https://s3.amazonaws.com/media-p.slid.es/uploads/105177/images/6274304/Jun-19-2019_13-12-31.gif&quot; alt=&quot;magic leap video&quot; width=&quot;640&quot; /&gt;
+&lt;h4 id=&quot;hardware-accelerated-decoding&quot; tabindex=&quot;-1&quot;&gt;Hardware accelerated decoding &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#hardware-accelerated-decoding&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;One of the most wanted features that we have been working on for almost a year and that has recently landed is hardware accelerated decoding.&lt;/p&gt;
+&lt;p&gt;Thanks to the excellent and constant work from the &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalian&lt;/a&gt; &lt;a href=&quot;https://github.com/ceyusa&quot;&gt;Víctor Jáquez&lt;/a&gt;, Servo recently gained &lt;a href=&quot;https://github.com/servo/servo/pull/23483&quot;&gt;support for hardware-accelerated media playback&lt;/a&gt;, which means lower CPU usage, better battery life and better thermal behaviour, among other goodies.&lt;/p&gt;
+&lt;p&gt;We only have support on Linux and Android (EGL and Wayland) so far. Support for other platforms is on the roadmap.&lt;/p&gt;
+&lt;p&gt;&lt;video src=&quot;https://s3.amazonaws.com/media-p.slid.es/videos/105177/rzteE40V/hwacceleration.mp4&quot; width=&quot;640&quot; controls=&quot;&quot;&gt;&lt;/video&gt;&lt;/p&gt;
+&lt;p&gt;The numbers we are getting are already pretty nice. You might not be able to see it clearly on the video, but the renderer CPU time for the non hardware accelerated playback is ~8ms, compared to the ~1ms of CPU time that we get with the accelerated version.&lt;/p&gt;
+&lt;h4 id=&quot;improved-web-compatibility-of-our-media-elements-implementation&quot; tabindex=&quot;-1&quot;&gt;Improved web compatibility of our media elements implementation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#improved-web-compatibility-of-our-media-elements-implementation&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;We also got a bunch of other smaller features that significantly improved the web compatibility of our media elements.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/ferjm&quot;&gt;ferjm&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/22399&quot;&gt;added&lt;/a&gt; support for the HTMLMediaElement &lt;code&gt;poster&lt;/code&gt; frame attribute&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/swarnimarun&quot;&gt;swarnimarun&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/23236&quot;&gt;implemented&lt;/a&gt; support for the HTMLMediaElement &lt;code&gt;loop&lt;/code&gt; attribute&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/jackxbritton&quot;&gt;jackxbritton&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/23188&quot;&gt;implemented&lt;/a&gt; the HTMLMediaElement &lt;code&gt;crossorigin&lt;/code&gt; attribute logic.&lt;/li&gt;
+&lt;li&gt;Servo got the ability to &lt;a href=&quot;https://github.com/servo/servo/pull/22347&quot;&gt;mute and unmute&lt;/a&gt; as well as controlling the &lt;a href=&quot;https://github.com/servo/servo/pull/22324&quot;&gt;volume&lt;/a&gt; of audio and video playback thanks to &lt;a href=&quot;https://github.com/stevesweetney&quot;&gt;stevesweetney&lt;/a&gt; and &lt;a href=&quot;https://github.com/lucasfantacuci&quot;&gt;lucasfantacuci&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/sreeise&quot;&gt;sreeise&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/22622&quot;&gt;implemented&lt;/a&gt; the AudioTrack, VideoTrack, AudioTrackList and VideoTrackList interfaces.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/georgeroman&quot;&gt;georgeroman&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/22449&quot;&gt;coded&lt;/a&gt; the required changes to allow changing the playback rate of audio and video files.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/georgeroman&quot;&gt;georgeroman&lt;/a&gt;, again, &lt;a href=&quot;https://github.com/servo/media/pull/232&quot;&gt;implemented&lt;/a&gt; support for the HTMLMediaElement &lt;code&gt;canPlayType&lt;/code&gt; function.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/dlrobertson&quot;&gt;dlrobertson&lt;/a&gt; paved the way for timed text tracks support by implementing the basics of the &lt;a href=&quot;https://github.com/servo/servo/pull/22392&quot;&gt;TextTrack API&lt;/a&gt; and the &lt;a href=&quot;https://github.com/servo/servo/pull/22563&quot;&gt;HTMLTrackElement interface&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;webaudio&quot; tabindex=&quot;-1&quot;&gt;WebAudio &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#webaudio&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;We also got a few additions on the WebAudio land.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/PurpleHairEngineer&quot;&gt;PurpleHairEngineer&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/media/pull/243&quot;&gt;implemented&lt;/a&gt; the StereoPannerNode backend.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/collares&quot;&gt;collares&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/22648&quot;&gt;implemented&lt;/a&gt; the DOM side of the ChannelSplitterNode.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Akhilesh1996&quot;&gt;Akhilesh1996&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/23259&quot;&gt;implemented&lt;/a&gt; the AudioParam setValueCurveAtTime function.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/snarasi6&quot;&gt;snarasi6&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/23279&quot;&gt;implemented&lt;/a&gt; the deprecated setPosition and setOrientation AudioListener methods.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;webrtc&quot; tabindex=&quot;-1&quot;&gt;WebRTC &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#webrtc&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/jdm&quot;&gt;jdm&lt;/a&gt;’s and &lt;a href=&quot;https://github.com/jdm&quot;&gt;Manishearth&lt;/a&gt;’s work, Servo has now the foundations of a &lt;a href=&quot;https://github.com/servo/servo/pull/23377&quot;&gt;WebRTC implementation&lt;/a&gt; and it is able to perform a 2-way calling with audio and video playback coming from the &lt;a href=&quot;https://github.com/servo/servo/pull/22780&quot;&gt;getUserMedia API&lt;/a&gt;.&lt;/p&gt;
+&lt;iframe src=&quot;https://player.vimeo.com/video/328247783&quot; width=&quot;640&quot; height=&quot;392&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;h2 id=&quot;next-steps&quot; tabindex=&quot;-1&quot;&gt;Next steps &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#next-steps&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;That’s &lt;strong&gt;not&lt;/strong&gt; all folks!&lt;/em&gt; We have exciting plans for the second half of 2019.&lt;/p&gt;
+&lt;h4 id=&quot;a%2Fv-playback-1&quot; tabindex=&quot;-1&quot;&gt;A/V playback &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#a%2Fv-playback-1&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;On the A/V playback land, we want to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Focus on adding hardware accelerated playback on Windows and OSX.&lt;/li&gt;
+&lt;li&gt;Add support for fullscreen playback.&lt;/li&gt;
+&lt;li&gt;Add support for 360 video.&lt;/li&gt;
+&lt;li&gt;Improve the existing media controls by, for instance, implementing a nicer layout for the &lt;code&gt;&amp;lt;input type=&amp;quot;range&amp;quot;&amp;gt;&lt;/code&gt; element, with a proper slider and a thumb, so we can have progress and volume bars.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;webaudio-1&quot; tabindex=&quot;-1&quot;&gt;WebAudio &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#webaudio-1&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;For WebAudio there are plans to make some architectural improvements related to the timeline and the graph traversals.&lt;/p&gt;
+&lt;p&gt;We would also love to work on the MediaElementAudioSourceNode implementation.&lt;/p&gt;
+&lt;h4 id=&quot;webrtc-1&quot; tabindex=&quot;-1&quot;&gt;WebRTC &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#webrtc-1&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;For WebRTC, data channels are on the roadmap for the second half.&lt;/p&gt;
+&lt;p&gt;We currently support the playback of a single stream of audio and video simultaneously, so allowing the playback of multiple simulatenous streams of each type is also something that we would like to get during the following months.&lt;/p&gt;
+&lt;h4 id=&quot;others&quot; tabindex=&quot;-1&quot;&gt;Others &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#others&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;There were also plans to implement support for a global mute feature, and I am happy to say, that &lt;a href=&quot;https://github.com/khodzha&quot;&gt;khodza&lt;/a&gt; already &lt;a href=&quot;https://github.com/servo/media/pull/271&quot;&gt;got this done&lt;/a&gt; right at the start of the second half.&lt;/p&gt;
+&lt;p&gt;Finally, we have been trying to get Youtube to work on Servo, but it turned out to be a difficult task because of non-media related issues (i.e. layout or web compatibility issues), so we decided to adjust the goal and focus on embedded Youtube support instead.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>This Week In Servo 130</title>
+    <link href="https://servo.org/blog/2019/06/03/twis-130/"/>
+    <updated>2019-06-03T00:30:00Z</updated>
+    <id>https://servo.org/blog/2019/06/03/twis-130/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;In the &lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2019-04-30..2019-06-03+user%3Aservo+&quot;&gt;past month&lt;/a&gt;,
+we merged 208 PRs in the Servo organization’s repositories.&lt;/p&gt;
+&lt;p&gt;Windows nightlies are temporarily &lt;a href=&quot;https://github.com/servo/servo/issues/23348&quot;&gt;broken&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/06/03/twis-130/#planning-and-status&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2019.&lt;/p&gt;
+&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/06/03/twis-130/#exciting-works-in-progress&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;ferjm is &lt;a href=&quot;https://github.com/servo/servo/pull/23208&quot;&gt;adding media controls&lt;/a&gt; to video elements.&lt;/li&gt;
+&lt;li&gt;ceyusa is implementing &lt;a href=&quot;https://github.com/servo/servo/pull/23483&quot;&gt;hardware accelerated video playback&lt;/a&gt; for Linux.&lt;/li&gt;
+&lt;li&gt;jdm is adding &lt;a href=&quot;https://github.com/servo/servo/pull/23468&quot;&gt;Windows arm64 support&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;georgeroman is enabling &lt;a href=&quot;https://github.com/servo/servo/pull/23443&quot;&gt;automated tests for WebDriver&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;paul is embedding Servo inside &lt;a href=&quot;https://github.com/paulrouget/HLServo&quot;&gt;a HoloLens app&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure&gt;
+&lt;img src=&quot;https://irccloud.mozilla.com/file/TfDvjrCP/s.jpg&quot; /&gt;
+&lt;figcaption&gt;An early success rendering a website in the HoloLens emulator.&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/06/03/twis-130/#notable-additions&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Manish &lt;a href=&quot;https://github.com/servo/servo/pull/234850&quot;&gt;added&lt;/a&gt; foundations of automated testing of WebXR.&lt;/li&gt;
+&lt;li&gt;Eijebong &lt;a href=&quot;https://github.com/servo/servo/pull/23459&quot;&gt;implemented&lt;/a&gt; type-safe DOM APIs that interact with JS Promises.&lt;/li&gt;
+&lt;li&gt;jdm and paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/23457&quot;&gt;upgraded&lt;/a&gt; glutin to 0.21.&lt;/li&gt;
+&lt;li&gt;maharsh312 &lt;a href=&quot;https://github.com/servo/servo/pull/23381&quot;&gt;implemented&lt;/a&gt; most of the missing OffscreenCanvas APIs.&lt;/li&gt;
+&lt;li&gt;ferjm &lt;a href=&quot;https://github.com/servo/media/pull/260&quot;&gt;added&lt;/a&gt; support for simultaneous playback of audio and video streams.&lt;/li&gt;
+&lt;li&gt;Darkspirit &lt;a href=&quot;https://github.com/servo/servo/pull/23347&quot;&gt;updated&lt;/a&gt; various network security data files (HSTS, PSL, CAs).&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/22856&quot;&gt;added&lt;/a&gt; support for running Servo on Windows via ANGLE.&lt;/li&gt;
+&lt;li&gt;Manishearth &lt;a href=&quot;https://github.com/servo/servo/pull/23342&quot;&gt;made&lt;/a&gt; receiving streams through WebRTC possible.&lt;/li&gt;
+&lt;li&gt;pylbrecht &lt;a href=&quot;https://github.com/servo/servo/pull/23322&quot;&gt;implemented&lt;/a&gt; resource timing for synchronous network requests.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/rust-webvr/pull/74&quot;&gt;fixed&lt;/a&gt; a problem preventing transitioning into Daydream VR.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/23300&quot;&gt;improved&lt;/a&gt; the ergonomics of testing Magic Leap builds.&lt;/li&gt;
+&lt;li&gt;codehag &lt;a href=&quot;https://github.com/servo/servo/pull/23296&quot;&gt;implemented&lt;/a&gt; support for using a remote web console from Firefox with Servo’s content.&lt;/li&gt;
+&lt;li&gt;PurpleHairEngineer &lt;a href=&quot;https://github.com/servo/servo/pull/23281&quot;&gt;implemented&lt;/a&gt; the StereoPannerNode WebAudio API.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/23163&quot;&gt;upgraded&lt;/a&gt; the JavaScript engine.&lt;/li&gt;
+&lt;li&gt;tdelacour &lt;a href=&quot;https://github.com/servo/servo/pull/23272&quot;&gt;improved&lt;/a&gt; the type-safety of text input code that switches between UTF-8 and UTF-16 strings.&lt;/li&gt;
+&lt;li&gt;ceyusa &lt;a href=&quot;https://github.com/servo/media/pull/241&quot;&gt;created&lt;/a&gt; an API for providing hardware-accelerated GL video playback.&lt;/li&gt;
+&lt;li&gt;mmatyas &lt;a href=&quot;https://github.com/servo/servo/pull/23226&quot;&gt;implemented&lt;/a&gt; support for compressed textures in WebGL.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/21780&quot;&gt;upgraded&lt;/a&gt; the NDK in use for Android builds.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/06/03/twis-130/#new-contributors&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/jeremy-ir&quot;&gt;Jeremy Ir&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/marcinwiacek&quot;&gt;Marcin Wiącek&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/PurpleHairEngineer&quot;&gt;Maria Sable&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/mboros1&quot;&gt;Martin Boros&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/petemoore&quot;&gt;Pete Moore&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/nehalem501&quot;&gt;Tomek LECOCQ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/will-bartlett&quot;&gt;William Bartlett&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/ffwff&quot;&gt;ffwff&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>This Week In Servo 129</title>
+    <link href="https://servo.org/blog/2019/04/30/twis-129/"/>
+    <updated>2019-04-30T00:30:00Z</updated>
+    <id>https://servo.org/blog/2019/04/30/twis-129/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;In the [past week](&lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2019-04-22..2019-04-30&quot;&gt;https://github.com/pulls?utf8=✓&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2019-04-22..2019-04-30&lt;/a&gt;
++user%3Aservo+),
+we merged 68 PRs in the Servo organization’s repositories.&lt;/p&gt;
+&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/04/30/twis-129/#planning-and-status&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2019.&lt;/p&gt;
+&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/04/30/twis-129/#exciting-works-in-progress&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;ferjm is &lt;a href=&quot;https://github.com/servo/servo/pull/23208&quot;&gt;adding media controls&lt;/a&gt; to video elements.&lt;/li&gt;
+&lt;li&gt;Manishearth is implementing the &lt;a href=&quot;https://github.com/servo/servo/pull/23292&quot;&gt;WebXR input APIs&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;mmatyas is adding support for &lt;a href=&quot;https://github.com/servo/servo/pull/23226&quot;&gt;compressed WebGL textures&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/04/30/twis-129/#notable-additions&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;ferjm &lt;a href=&quot;https://github.com/servo/servo/pull/22743&quot;&gt;implemented&lt;/a&gt; enough Shadow DOM support to build user agent widgets include media controls.&lt;/li&gt;
+&lt;li&gt;miller-time &lt;a href=&quot;https://github.com/servo/servo/pull/23090&quot;&gt;standardized&lt;/a&gt; the use of referrers in fetch requests.&lt;/li&gt;
+&lt;li&gt;krk &lt;a href=&quot;https://github.com/servo/servo/pull/23200&quot;&gt;added&lt;/a&gt; a build-time validation that the DOM inheritance hierarchy matches the WebIDL hierarchy.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/23233&quot;&gt;redesigned&lt;/a&gt; part of the embedding API to separate per-window from per-application APIs.&lt;/li&gt;
+&lt;li&gt;AZWN &lt;a href=&quot;https://github.com/servo/servo/pull/23253&quot;&gt;created&lt;/a&gt; an API for using the type system to represent important properties of the JS engine.&lt;/li&gt;
+&lt;li&gt;Akhilesh1996 &lt;a href=&quot;https://github.com/servo/servo/pull/23259&quot;&gt;implemented&lt;/a&gt; the setValueCurveAtTime Web Audio API.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/23256&quot;&gt;transitioned&lt;/a&gt; the Windows build to rely on clang-cl instead of the MSVC compiler.&lt;/li&gt;
+&lt;li&gt;snarasi6 &lt;a href=&quot;https://github.com/servo/servo/pull/23279&quot;&gt;implemented&lt;/a&gt; the setPosition and setOrientation Web Audio APIs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/04/30/twis-129/#new-contributors&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Akhilesh1996&quot;&gt;Akhilesh V&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/swarnimarun&quot;&gt;Swarnim Arun&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/snarasi6&quot;&gt;snarasi6&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
+</content>
+  </entry>
+</feed>

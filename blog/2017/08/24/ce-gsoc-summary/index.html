@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Elements in Servo</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="Custom Elements in Servo">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">Custom Elements in Servo</h1>
+<p class="subtitle"><span class="grey-light">(2017-08-24)</span> Summary of the Custom Element GSoC Project.</p>
+
+<div class="has-top-margin">
+  <p>This summer <a href="https://github.com/cbrewster/">I</a> had the pleasure of implementing <a href="https://html.spec.whatwg.org/multipage/#custom-elements">Custom Elements</a> in Servo under the mentorship of
+<a href="https://github.com/jdm/">jdm</a>.</p>
+<h2 id="introduction" tabindex="-1">Introduction <a class="header-anchor" href="#introduction">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Custom Elements are an exciting development for the Web Platform. They are apart of the
+<a href="https://www.webcomponents.org/introduction/">Web Components</a> APIs. The goal is to allow web developers to create reusable web components with
+first-class support from the browser. The Custom Element portion of Web Components allows for
+elements with custom names and behaviors to be defined and used via HTML tags.</p>
+<p>For example, a developer could create a custom element called <code>fancy-button</code> which has special
+behavior (for example, ripples from material design). This element is reusable and can be used
+directly in HTML:</p>
+<pre><code>&lt;fancy-button&gt;My Cool Button&lt;/fancy-button&gt;
+</code></pre>
+<p>For examples of cool web components check out <a href="https://www.webcomponents.org/">webcomponents.org</a>.</p>
+<p>While using these APIs directly is very powerful, new web frameworks are emerging that harness the
+power of Web Component APIs and give developers even more power. One major contender with frontend
+web frameworks is <a href="https://www.polymer-project.org/">Polymer</a>. The Polymer framework builds on top of Web Components and removes
+boilerplate and makes using web components easier.</p>
+<p>Another exciting framework using Custom Elements is <a href="https://aframe.io/">A-Frame</a> (supported by Mozilla). A-Frame is a
+<a href="https://webvr.info/">WebVR</a> framework that allows developers to create entire Virtual Reality experiences using HTML
+elements and javascript. There has been some recent work in getting WebVR and A-Frame functional in
+Servo. Implementing Custom Elements removes the need for Servo to rely on a polyfill.</p>
+<p>For more information on what Custom Elements are and how to use them, I would suggest reading
+<a href="https://developers.google.com/web/fundamentals/architecture/building-components/customelements?hl=en">Custom Elements v1: Reusable Web Components</a>.</p>
+<h2 id="implementation" tabindex="-1">Implementation <a class="header-anchor" href="#implementation">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Before I began the implementation of Custom Elements, I broke down the spec into a few major pieces.</p>
+<ul>
+<li>The <code>CustomElementRegistry</code></li>
+<li>Custom element creation</li>
+<li>Custom element reactions</li>
+</ul>
+<p>The <code>CustomElementRegistry</code> keeps track of all the defined custom elements for a single <code>window</code>.
+The registry is where you go to define new custom elements and later Servo will use the registry
+to lookup definitions give a possible custom element name. The bulk of the work in this section of
+the implementation was validating custom element definitions.</p>
+<p>Custom element creation is the process of taking a custom element definition and running the
+defined constructor on a <code>HTMLElement</code> or the element extends. This can happen either when a new
+element is created, or after an element has been created via an upgrade reaction.</p>
+<p>The final portion is triggering custom element reactions. There are two types of reactions:</p>
+<ol>
+<li>Callback reactions</li>
+<li>Upgrade reactions</li>
+</ol>
+<p>Callback reactions fire when custom elements:</p>
+<ul>
+<li>are connected from the DOM tree</li>
+<li>are disconnected from the DOM tree</li>
+<li>are adopted into a new document</li>
+<li>have an attribute that is modified</li>
+</ul>
+<p>When the reactions are triggered, the corresponding lifecycle method of the Custom Element is
+called. This allows the developer to implement custom behavior when any of these lifecycle events
+occur.</p>
+<p>Upgrade reactions are used to take a non-customized element and make it customized by running
+the defined constructor. There is quite a bit of trickery going on behind the scenes to make all of
+this work. I wrote a post about <a href="https://cbrewster.github.io/2017/06/08/custom-element-upgrades/">custom element upgrades</a> explaining how they work and why they are
+needed.</p>
+<p>I used Gecko’s partial implementation of Custom Elements as a reference for a few parts of my
+implementation. This became extrememly useful whenever I had to use the SpiderMonkey API.</p>
+<h2 id="roadblocks" tabindex="-1">Roadblocks <a class="header-anchor" href="#roadblocks">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>As with any project, it is difficult to foresee big issues until you actually start writing the
+implementation. Most parts of the spec were straightforward and did not yield any trouble while
+I was writing the implementation; however, there were a few difficulties and unexpected problems
+that presented themselves.</p>
+<p>One major pain-point was working with the SpiderMonkey API. This was more due to my lack of
+experience with the SpiderMonkey API. I had to learn how <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Compartments">compartments</a> work and how to debug
+panics coming from SpiderMonkey. <a href="https://github.com/bzbarsky">bzbarsky</a> was extremely helpful during this process; they helped
+me step through each issue and understand what I was doing wrong.</p>
+<p>While I was in the midst of writing the implementation, I found out about the <code>HTMLConstructor</code>
+attribute. I had missed this part of the spec during the planning phase. The <code>HTMLConstructor</code>
+WebIDL attribute marks certain HTML elements that can be extended and generates a custom constructor
+for each that allows custom element constructors to work (read more about this in <a href="https://cbrewster.github.io/2017/06/08/custom-element-upgrades/">custom element
+upgrades</a>).</p>
+<h2 id="notable-pull-requests" tabindex="-1">Notable Pull Requests <a class="header-anchor" href="#notable-pull-requests">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<ul>
+<li><a href="https://github.com/servo/servo/pull/17112">Implement custom element registry</a></li>
+<li><a href="https://github.com/servo/servo/pull/17381">Custom element creation</a></li>
+<li><a href="https://github.com/servo/servo/pull/17614">Implement custom element reactions</a></li>
+<li><a href="https://github.com/servo/servo/pull/17935">Custom element upgrades</a></li>
+</ul>
+<h2 id="conclusions" tabindex="-1">Conclusions <a class="header-anchor" href="#conclusions">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>I enjoyed working on this project this summer and hope to continue my involvement with the Servo
+project. I have a <a href="https://github.com/cbrewster/gsoc2017">gsoc repository</a> that contains a list of all my GSoC issues, PRs, and blog posts.
+I want to extend a huge thanks to my mentor <a href="https://github.com/jdm/">jdm</a> and to <a href="https://github.com/bzbarsky">bzbarsky</a> for helping me work through
+issues when using SpiderMonkey.</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

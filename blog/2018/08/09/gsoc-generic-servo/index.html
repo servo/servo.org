@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSoC wrap-up - Splitting Servo&#39;s script crate</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="GSoC wrap-up - Splitting Servo's script crate">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">GSoC wrap-up - Splitting Servo's script crate</h1>
+<p class="subtitle"><span class="grey-light">(2018-08-09)</span> A summary of the work to separate one very large crate into smaller ones</p>
+
+<div class="has-top-margin">
+  <h2 id="introduction" tabindex="-1">Introduction <a class="header-anchor" href="#introduction">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>I am Peter Hrvola (retep007) <a href="https://twitter.com/retep007">Twitter</a> <a href="https://github.com/retep007">Github</a>. During my Google Summer of Code (GSoC) project, I have been working on investigating the monolithic nature of Servo’s script crate and prototyping separation to smaller crates. My goal was to improve the use of resources during compilation. Current debug build consumes over 5GB of memory and takes 347s.</p>
+<p>The solution introduces a <em>TypeHolder</em> trait which contains associated types, and makes many structures in the script crate generic over this new trait. This allows the generic structs to refer to the new trait’s associated types, while the actual concrete types can be extracted into a separate crate. Testing shows significant improvement in memory consumption (25% lower) and build time (27% faster).</p>
+<h2 id="the-process" tabindex="-1">The process <a class="header-anchor" href="#the-process">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>For prototyping, I have been using two repositories. One contains a stripped-down, <a href="https://github.com/retep007/servo">minimal script crate</a> with only a few implementations of complex script types and no build-time code generation. This minimal script crate was used to investigate ideas. The second repository is a <a href="https://github.com/retep007/servo-1">complete fork</a> of the entire Servo repository to ensure that the ideas could actually work in Servo itself.</p>
+<p>I have started to work on project very early. During community bonding period I wanted to make a few small pull requests to separate some isolated parts of script crate. As it turned out, there is no low hanging fruit in script crate. I have quickly encountered many unexpected issues, so I continuously moved to the original plan.</p>
+<p>All original ideas for investigation can be found in <a href="https://docs.google.com/document/d/1uZDmzuQZM4dTklR3ksrAnMgCWCkfJjtRl-rbQ7-54Gc/edit?usp=sharing">GSoC project proposal</a>. However, during the first week of coding, I have experienced many issues and come up with something that is more or less a combination of all three proposed ideas.</p>
+<p>The biggest problem that caused most of the troubles and pain is that Rust at the time of doing this project did not support generic consts <a href="https://github.com/rust-lang/rust/issues/44580">RFC</a>.</p>
+<p>After two months of solving errors, I have been finally able to compile full servo and take some measurements about which I talk later in this blog post.</p>
+<p>The original GSoC project assignment was to prototype ways of splitting script crate, but since results were quite promising and I had a month of coding left I started to prepare a PR to Servo master. During the prototyping period, I have made a few ugly hacks to speed up development. To properly fix these hacks, I needed to modify the <a href="https://github.com/servo/servo/pull/21371/files#diff-60d01595cff328c165842fea9e4ccbc2">build-time code generation</a> to generate generic code that used the TypeHolder trait, as well as find replacements for <a href="https://github.com/servo/servo/pull/21371/files#diff-6c9eb9831bece73e53b647b302e4f9b8">thread local variables</a> that needed to store generic values.</p>
+<h2 id="how-it-works" tabindex="-1">How it works <a class="header-anchor" href="#how-it-works">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>The final idea of separation is based on using the <a href="https://github.com/servo/servo/pull/21371/files#diff-12c9bc2e114f0cc3677b5a3b11349eaf">TypeHolderTrait</a>. TypeHolderTrait is a trait with type parameters for every WebIDL interface that we want to extract from the script crate. <em>TypeHolderTrait</em> itself is defined in script crate with all type parameter traits. However, it is <a href="https://github.com/servo/servo/pull/21371/files#diff-3092ed761ed8d9f72f5f0298b15b77d8R142">implemented</a> outside of the script crate so it can provide concrete types. TypeHolder enables us to use constructs like static methods in script crate. Later, we use TypeHolder as type parameter for structs and methods that require access to external types. Let’s have origial dom struct like DOMParser:</p>
+<pre class="language-rust"><code class="language-rust"><span class="token keyword">struct</span> <span class="token type-definition class-name">DOMParser</span> <span class="token punctuation">{</span><br>    <span class="token keyword">fn</span> <span class="token function-definition function">new_inherited</span><span class="token punctuation">(</span>window<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">Window</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token class-name">DOMParser</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <br><br>    <span class="token keyword">fn</span> <span class="token function-definition function">new</span><span class="token punctuation">(</span>window<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">Window</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token class-name">DomRoot</span><span class="token operator">&lt;</span><span class="token class-name">DOMParser</span><span class="token operator">></span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br><br>    <span class="token keyword">pub</span> <span class="token keyword">fn</span> <span class="token function-definition function">Constructor</span><span class="token punctuation">(</span>window<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">Window</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token class-name">Fallible</span><span class="token operator">&lt;</span><span class="token class-name">DomRoot</span><span class="token operator">&lt;</span><span class="token class-name">DOMParser</span><span class="token operator">>></span> <span class="token punctuation">{</span><span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<p>This struct definition is removed from <em>script</em> crate. The DOMParserTrait with public methods is created and added as associated type to <em>TypeHolderTrait</em> which can than be used in place of original DOMParser type.</p>
+<pre class="language-rust"><code class="language-rust"><span class="token keyword">trait</span> <span class="token type-definition class-name">TypeHolderTrait</span> <span class="token punctuation">{</span><br>    <span class="token keyword">type</span> <span class="token type-definition class-name">DomParser</span><span class="token punctuation">:</span> <span class="token class-name">DomParserTrait</span><span class="token operator">&lt;</span><span class="token keyword">Self</span><span class="token operator">></span><br><span class="token punctuation">}</span><br><br><br><span class="token keyword">trait</span> <span class="token type-definition class-name">DOMParserTrait</span><span class="token operator">&lt;</span><span class="token constant">TH</span><span class="token punctuation">:</span> <span class="token class-name">TypeHolderTrait</span><span class="token operator">></span><span class="token punctuation">:</span> <span class="token class-name">DOMParserMethods</span><span class="token operator">&lt;</span><span class="token constant">TH</span><span class="token operator">></span> <span class="token punctuation">{</span><br>    <span class="token keyword">fn</span> <span class="token function-definition function">Constructor</span><span class="token punctuation">(</span>window<span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token class-name">Window</span><span class="token operator">&lt;</span><span class="token constant">TH</span><span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token class-name">Fallible</span><span class="token operator">&lt;</span><span class="token class-name">DomRoot</span><span class="token operator">&lt;</span><span class="token constant">TH</span><span class="token punctuation">::</span><span class="token class-name">DOMParser</span><span class="token operator">>></span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><br></code></pre>
+<h2 id="effects-on-servo" tabindex="-1">Effects on Servo <a class="header-anchor" href="#effects-on-servo">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Modifications in final PR should have only minimal effects on Servo speed. However, the codebase has undergone big surgery: over 12000 modified lines 🏥! The most intrusive change is to use TypeHolder where it is required. It turns out that TypeHolder is needed in a lot of places. Leading cause of such a large number of changes is mainly <em>GlobalScope</em> which is used all around the codebase and needs to be generic.</p>
+<p>Due to lack of Rust support for generic static variables at many places I had to modify the code to use initialization methods to fill static variables early during program initialization. For example, in Bindings, I have added an <em>InitTypeHolded</em> function which replaces the content of mutable static variables with appropriate function calls.</p>
+<h2 id="speeeeed-%F0%9F%9A%80" tabindex="-1">Speeeeed 🚀 <a class="header-anchor" href="#speeeeed-%F0%9F%9A%80">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>I have done testing on MacBook Pro 2015, High Sierra, 2,7 GHz i5 dual core, 16 GB RAM using <code>/usr/bin/time cargo build</code>, which shows maximal memory usage during compilation. Results may vary depending on build machine.</p>
+<p>Cargo recompiles only crates that have been modified and crates that depend on modified crates. I have separated script crate to script and script_servoparser. We have taken three samples. One for original Servo. Two after separation I have made. For separated script crate compilation times were measured for each crate separately. Only one crate was modified at a time. However, change in script crate also forces recompilation of script_servoparser.</p>
+<p>Resources were measured in this way:</p>
+<ol>
+<li>compile full servo</li>
+<li>modify files</li>
+<li>measure resources used to build a full servo</li>
+</ol>
+<p>Unchanged Servo:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Servo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAM</td>
+<td>5.1GB</td>
+</tr>
+<tr>
+<td>Real time</td>
+<td>3:49m</td>
+</tr>
+</tbody>
+</table>
+<p>Servo after separation to two crates:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Modified script crate</th>
+<th>Modified script_servoparser crate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAM</td>
+<td>3.74 GB</td>
+<td>2 GB</td>
+</tr>
+<tr>
+<td>Real time</td>
+<td>2:56m</td>
+<td>1:48m</td>
+</tr>
+</tbody>
+</table>
+<p>As we can see in the table above, resource usage during compilation has drastically changed. The main reason is that because of a large number of generic structures which postpone parts of compilation to later monomorphization. In future, actual separation of dom structs to upstream crates will lower this number even more. In the current version, only six dom structs were moved outside the script crate.</p>
+<h2 id="future-work" tabindex="-1">Future work <a class="header-anchor" href="#future-work">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>At the time of writing this post, there is still continuous work on modifying generic Servo before creating a PR.</p>
+<p>Things left to be done:</p>
+<ol>
+<li>Fix tests</li>
+<li>Performance optimization</li>
+<li>Polish PR</li>
+</ol>
+<h2 id="important-links" tabindex="-1">Important links <a class="header-anchor" href="#important-links">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<ul>
+<li><a href="https://github.com/servo/servo/pull/21371">Pull request to Servo</a></li>
+<li><a href="https://docs.google.com/document/d/1uZDmzuQZM4dTklR3ksrAnMgCWCkfJjtRl-rbQ7-54Gc/edit?usp=sharing">GSoC project proposal</a>)</li>
+<li><a href="https://paper.dropbox.com/doc/Script-Trait-types--AJwd82loCgoigvnx2NGK7G1mAQ-BKKNiTpqoTSvd502snFlu">Document with TypeHolder idea</a></li>
+</ul>
+<h2 id="conclusion" tabindex="-1">Conclusion <a class="header-anchor" href="#conclusion">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Working on a project for two months without successful compilation and having compiler yelling that you have made 34174 mistakes is a bit scary. However, they say that the more mistakes you make, the more you learn. I guess I have made a lot of mistakes and I have learned a ton as I have constantly been pushing the Rust-lang to its limits in large Servo codebase. All in all, this was an awesome project, and I enjoyed it very much.</p>
+<p>I would like to thank my mentor <a href="https://twitter.com/lastontheboat">Josh Bowman-Matthews (jdm)</a> for this opportunity. It was such a pleasure to work with him.</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

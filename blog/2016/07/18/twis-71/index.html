@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>These Weeks In Servo 71</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="These Weeks In Servo 71">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">These Weeks In Servo 71</h1>
+<p class="subtitle"><span class="grey-light">(2016-07-18)</span> What's up with Servo for the weeks of 04 July 2016 - 18 July 2016</p>
+
+<div class="has-top-margin">
+  <p>In the <a href="https://github.com/pulls?page=1&amp;q=is%3Apr+is%3Amerged+closed%3A2016-07-04..2016-07-18+user%3Aservo">last two weeks</a>, we landed 173 PRs in the Servo organization’s repositories.</p>
+<p>We have gotten great feedback and many new contributors from the <a href="https://blog.servo.org/2016/06/30/servo-nightlies/">release</a> of initial Servo Nightly builds. Hopefully we can continue that as we <a href="https://github.com/servo/servo/issues/12125">launch</a> Windows builds this week!</p>
+<p>In addition to the <a href="http://doc.servo.org/servo/css-properties.html">list of CSS properties</a> that Servo supports, we now also automatically generate a <a href="http://doc.servo.org/servo/apis.html">list of DOM APIs</a> that are implemented.</p>
+<h3 id="planning-and-status" tabindex="-1">Planning and Status <a class="header-anchor" href="#planning-and-status">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Our overall <a href="https://github.com/servo/servo/wiki/Roadmap">roadmap</a> is available online and now includes the initial Q3 plans. From now on, we plan to include the quarterly plan with a high-level breakdown in the roadmap page.</p>
+<p>This week’s status updates are <a href="http://statusupdates.dev.mozaws.net/project/servo">here</a>.</p>
+<h3 id="notable-additions" tabindex="-1">Notable Additions <a class="header-anchor" href="#notable-additions">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li>xidorn <a href="https://github.com/servo/rust-bindgen/pull/15">ensured</a> our Rust bindings generator work better with MSVC</li>
+<li>Andrew Mackenzie <a href="https://github.com/servo/servo/pull/12461">added</a> keyboard shortcuts to quit</li>
+<li>jdm <a href="https://github.com/servo/rust-mozjs/pull/277">improved</a> our inlining on some DOM bindings - <a href="https://github.com/servo/servo/pull/12438">twice</a>!</li>
+<li>shinglyu <a href="https://github.com/servo/servo/pull/12442">added</a> <code>page-break-before/after</code> for Stylo</li>
+<li>stshine <a href="https://github.com/servo/servo/pull/12371">fixed</a> the treatment of <code>flex-flow</code> during float calculation</li>
+<li>emilio <a href="https://github.com/servo/rust-bindgen/pull/14">got</a> our Rust bindings generator building with stable Rust</li>
+<li>emilio also <a href="https://github.com/servo/servo/pull/12339">implemented</a> dirtyness tracking for Stylo</li>
+<li>SimonSapin <a href="https://github.com/servo/servo/pull/12319">got</a> geckolib building with stable Rust</li>
+<li>aneesh <a href="https://github.com/servo/saltfs/pull/432">added</a> tests of the download code on our arm32 builder</li>
+<li>cbrewster <a href="https://github.com/servo/servo/pull/12277">made</a> network listener runnables cancellable</li>
+<li>imperio <a href="https://github.com/servo/saltfs/pull/428">added</a> the final infrastructure bits required for video tag metadata support</li>
+<li>izgzhen <a href="https://github.com/servo/servo/pull/12378">implemented</a> <code>FileID</code> validity checking for blob URLs</li>
+<li>Steve Melia <a href="https://github.com/servo/servo/pull/11781">added</a> basic support for the <code>:active</code> selector</li>
+<li>Aravind Gollakota <a href="https://github.com/servo/servo/pull/11978">added</a> <code>origin</code> and <code>same-origin</code> referrer policies, as well as the <a href="https://github.com/servo/servo/pull/12441">Referrer-Policy</a> header.</li>
+<li>johannhof <a href="https://github.com/servo/servo/pull/12050">switched</a> Servo to use the faster Brotli crate</li>
+<li>manish <a href="https://github.com/servo/servo/pull/12003">ensured</a> we don’t panic when <code>&lt;img&gt;</code> fails to parse its <code>src</code></li>
+<li>cbrewster <a href="https://github.com/servo/servo/pull/12137">made</a> Servo on macOS properly handle case-sensitive file systems</li>
+<li>canaltinova <a href="https://github.com/servo/servo/pull/12416">implemented</a> the <code>referrer</code> property on the <code>Document</code> object</li>
+<li>Ms2ger <a href="https://github.com/servo/servo/pull/12353">implemented</a> the missing <code>Exposed</code> WebIDL annotation</li>
+<li>jdm <a href="https://github.com/servo/servo/pull/11950">fixed</a> keyboard input for non-QWERTY layouts</li>
+<li>emilio <a href="https://github.com/servo/servo/pull/12118">implemented</a> basic CSS keyframe animation</li>
+<li>notriddle <a href="https://github.com/servo/servo/pull/11873">added</a> support for CSS animations using rotation</li>
+</ul>
+<h3 id="new-contributors" tabindex="-1">New Contributors <a class="header-anchor" href="#new-contributors">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li><a href="https://github.com/andrewdavidmackenzie">Andrew Mackenzie</a></li>
+<li><a href="https://github.com/scorpil">Andrew Savchyn</a></li>
+<li><a href="https://github.com/aravind-pg">Aravind Gollakota</a></li>
+<li><a href="https://github.com/ChangWanHong">Changwan Hong</a></li>
+<li><a href="https://github.com/gpoesia">Gabriel Poesia</a></li>
+<li><a href="https://github.com/hgallagher1993">Hugh Gallagher</a></li>
+<li><a href="https://github.com/woshilapin">Jean SIMARD</a></li>
+<li><a href="https://github.com/jeenalee">Jeena Lee</a></li>
+<li><a href="https://github.com/ice9js">Kuba Birecki</a></li>
+<li><a href="https://github.com/malisas">Malisa Smith</a></li>
+<li><a href="https://github.com/tallowen">Owen Coutts</a></li>
+<li><a href="https://github.com/pierre-alain-b">Pierre-Alain Bandinelli</a></li>
+<li><a href="https://github.com/sjmelia">Steve Melia</a></li>
+<li><a href="https://github.com/tshepang">Tshepang Lekhonkhobe</a></li>
+<li><a href="https://github.com/upsuper">Xidorn Quan</a></li>
+<li><a href="https://github.com/gozala">Irakli Gozalishvili</a></li>
+<li><a href="https://github.com/sappharx">Vincent Sisk</a></li>
+<li><a href="https://github.com/zeusintuivo">zeusintuivo</a></li>
+</ul>
+<p>Interested in helping build a web browser? Take a look at our <a href="https://starters.servo.org/">curated list</a> of issues that are good for new contributors!</p>
+<h3 id="screenshot" tabindex="-1">Screenshot <a class="header-anchor" href="#screenshot">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Servo now <a href="https://twitter.com/JasonWeathersby/status/751474501058228224/">supports</a> CSS keyframe animations:
+<video src="https://pbs.twimg.com/tweet_video/Cm3Fdi_XEAAexuF.mp4" type="video/mp4"></video></p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

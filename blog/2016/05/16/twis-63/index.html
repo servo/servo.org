@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Week In Servo 63</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="This Week In Servo 63">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">This Week In Servo 63</h1>
+<p class="subtitle"><span class="grey-light">(2016-05-16)</span> What's up with Servo for the week of 09 May 2016 - 16 May 2016</p>
+
+<div class="has-top-margin">
+  <p>In the <a href="https://github.com/pulls?page=1&amp;q=is%3Apr+is%3Amerged+closed%3A2016-05-06..2016-05-16+user%3Aservo">last week</a>, we landed 156 PRs in the Servo organization’s repositories.</p>
+<p>Emily Dunham has been working on an org-wide <a href="http://servo.github.io/servo-org-stats/">report</a> of the contributor metrics. It’s looking good already, but there is still a lot of fun python work to do on the <a href="https://github.com/servo/servo-org-stats">scripts</a>, for those who want to make sure we’re not counting things incorrectly!</p>
+<h3 id="planning-and-status" tabindex="-1">Planning and Status <a class="header-anchor" href="#planning-and-status">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Our overall <a href="https://github.com/servo/servo/wiki/Roadmap">roadmap</a> and <a href="https://docs.google.com/document/d/1JMOtVkRtb-s7auoQdnX810HGglkMK054LTXOo0_rdrU/pub">quarterly goals</a> are available online.</p>
+<p>This week’s status updates are <a href="http://statusupdates.dev.mozaws.net/project/servo">here</a>.</p>
+<h3 id="notable-additions" tabindex="-1">Notable Additions <a class="header-anchor" href="#notable-additions">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li>nox <a href="https://github.com/servo/servo/pull/11208">fixed</a> all the warnings on Windows</li>
+<li>mbrubeck <a href="https://github.com/servo/servo/pull/11207">added</a> support for <code>vertical-align</code> in geckolib</li>
+<li>paul <a href="https://github.com/servo/servo/pull/11200">made</a> Servo no longer always quit when the Escape key is pressed</li>
+<li>larsberg <a href="https://github.com/servo/saltfs/pull/373">added</a> initial builder support for more “zealous” SpiderMonkey GC configurations</li>
+<li>jack <a href="https://github.com/servo/servo/pull/11143">improved</a> our build time by adding <code>ccache</code> support to skia and azure</li>
+<li>larsberg <a href="https://github.com/servo/saltfs/pull/370">enabled</a> caching on Windows builds, taking them down from 50 minutes to 15</li>
+<li>kaksmet <a href="https://github.com/servo/servo/pull/11109">made</a> <code>text-align: justify</code> safe for incremental layout</li>
+<li>ms2ger <a href="https://github.com/servo/rust-selectors/pull/86">added</a> support for Gecko’s string atoms in rust-selectors</li>
+<li>ddefisher <a href="https://github.com/servo/servo/pull/11072">implemented</a> several WebGL functions</li>
+<li>pcwalton <a href="https://github.com/servo/glutin/pull/85">improved</a> window resize performance on MacOS</li>
+<li>rzambre <a href="https://github.com/servo/servo/pull/10995">implemented</a> the ability to log profiling output to a CSV file</li>
+<li>shinglyu <a href="https://github.com/servo/servo/pull/10987">added</a> support for <code>*-reverse</code> flex directions for flexbox</li>
+<li>mmatyas <a href="https://github.com/servo/servo/pull/10916">enabled</a> the use of <code>NEON</code> instructions on ARM and AArch64</li>
+<li>dzbarsky <a href="https://github.com/servo/servo/pull/10668">implemented</a> the readPixels WebGL API</li>
+<li>asajeffrey <a href="https://github.com/servo/servo/pull/11140">made</a> the WebDriver server wait for pages to load before continuing</li>
+<li>jdm <a href="https://github.com/servo/servo/pull/11113">fixed</a> a garbage collection hazard</li>
+<li>connorgbrewster <a href="https://github.com/servo/servo/pull/11044">merged</a> the redundant-yet-awkwardly-intertwined Page and BrowsingContext types</li>
+<li>kichjang <a href="https://github.com/servo/servo/pull/10953">implemented</a> text/plain form encoding</li>
+<li>broesamle <a href="https://github.com/servo/servo/pull/10903">fixed</a> a panick on reddit</li>
+</ul>
+<h3 id="new-contributors" tabindex="-1">New Contributors <a class="header-anchor" href="#new-contributors">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li><a href="https://github.com/rzambre">Rohit Zambre</a></li>
+<li><a href="https://github.com/Zaggy1024">Zaggy1024</a></li>
+<li><a href="https://github.com/aeischeid">aeischeid</a></li>
+</ul>
+<h3 id="get-involved" tabindex="-1">Get Involved <a class="header-anchor" href="#get-involved">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Interested in helping build a web browser? Take a look at our <a href="https://starters.servo.org/">curated list</a> of issues that are good for new contributors!</p>
+<h3 id="screenshot" tabindex="-1">Screenshot <a class="header-anchor" href="#screenshot">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>A trace of loading <a href="http://CNN.com">CNN.com</a>’s 356 web fonts using the snazzy new HTML-based profiler:</p>
+<p><img src="https://cloud.githubusercontent.com/assets/27658/15360109/f094ecc6-1cd1-11e6-85d7-9237a3d94511.png" alt="Profiler HTML output"></p>
+<p>Servo’s new application icon:</p>
+<p><img src="/img/blog/servo-icon-dock.jpeg" alt="Servo application in the OS X dock"></p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Week In Servo 67</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="This Week In Servo 67">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">This Week In Servo 67</h1>
+<p class="subtitle"><span class="grey-light">(2016-06-13)</span> What's up with Servo for the week of 06 June 2016 - 13 June 2016</p>
+
+<div class="has-top-margin">
+  <p>In the <a href="https://github.com/pulls?page=1&amp;q=is%3Apr+is%3Amerged+closed%3A2016-06-06..2016-06-13+user%3Aservo">last week</a>, we landed 85 PRs in the Servo organization’s repositories.</p>
+<p>That number is a bit low this week, due to some issues with our CI machines (especially the OSX boxes) that have hurt our landing speed. Most of the staff are in London this week for the Mozilla All Hands meeting, but we’ll try to look at it.</p>
+<h3 id="planning-and-status" tabindex="-1">Planning and Status <a class="header-anchor" href="#planning-and-status">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Our overall <a href="https://github.com/servo/servo/wiki/Roadmap">roadmap</a> and <a href="https://docs.google.com/document/d/1JMOtVkRtb-s7auoQdnX810HGglkMK054LTXOo0_rdrU/pub">quarterly goals</a> are available online.</p>
+<p>This week’s status updates are <a href="http://statusupdates.dev.mozaws.net/project/servo">here</a>.</p>
+<h3 id="notable-additions" tabindex="-1">Notable Additions <a class="header-anchor" href="#notable-additions">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li>glennw <a href="https://github.com/servo/gleam/pull/86">upgraded</a> our GL API usage to rely on more GLES3 features</li>
+<li>ms2ger <a href="https://github.com/servo/servo/pull/11736">removed</a> some usage of <code>transmute</code></li>
+<li>nox <a href="https://github.com/servo/euclid/pull/139">removed</a> some of the dependencies on crates that are very fragile to rust nightly changes</li>
+<li>nox <a href="https://github.com/servo/servo/pull/11702">reduced</a> the number of fonts that we load unconditionally</li>
+<li>larsberg <a href="https://github.com/servo/servo/pull/11691">added</a> the ability to open web pages in Servo on Android</li>
+<li>anderco <a href="https://github.com/servo/webrender/pull/285">fixed</a> some box shadow issues</li>
+<li>ajeffrey <a href="https://github.com/servo/servo/pull/11644">implemented</a> the beginnings of the top level browsing context</li>
+<li>izgzhen <a href="https://github.com/servo/servo/pull/11552">improved</a> the implementation and tests for the file manager thread</li>
+<li>edunham <a href="https://github.com/servo/servo/pull/11210">expanded</a> the <code>./mach package</code> command to handle desktop platforms</li>
+<li>daoshengmu <a href="https://github.com/servo/servo/pull/11168">implemented</a> <code>TexSubImage2d</code> for WebGL</li>
+<li>pcwalton <a href="https://github.com/servo/servo/pull/11715">fixed</a> an issue with receiving mouse events while scrolling in certain situations</li>
+<li>danlrobertson <a href="https://github.com/servo/mozjs/pull/80">continued</a> the quest to build Servo on FreeBSD</li>
+<li>manishearth <a href="https://github.com/servo/servo/pull/11556">reimplemented</a> XMLHttpRequest in terms of the <a href="https://fetch.spec.whatwg.org/">Fetch</a> specification</li>
+<li>kevgs <a href="https://github.com/servo/servo/pull/11548">corrected</a> a spec-incompatibility in <code>Document.defaultView</code></li>
+<li>fduraffourg <a href="https://github.com/servo/servo/pull/11513">added</a> a mechanism to update the list of public suffixes</li>
+<li>farodin91 <a href="https://github.com/servo/servo/pull/11214">enabled</a> using <code>WindowProxy</code> types in WebIDL</li>
+<li>bobthekingofegypt <a href="https://github.com/servo/servo/pull/10382">prevented</a> some unnecesary echoes of websocket quit messages</li>
+</ul>
+<h3 id="new-contributors" tabindex="-1">New Contributors <a class="header-anchor" href="#new-contributors">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>There were <em>no</em> new contributors this week.</p>
+<p>Interested in helping build a web browser? Take a look at our <a href="https://starters.servo.org/">curated list</a> of issues that are good for new contributors!</p>
+<h3 id="screenshot" tabindex="-1">Screenshot <a class="header-anchor" href="#screenshot">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>No screenshots this week.</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servo Continues Pushing Forward</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="Servo Continues Pushing Forward">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">Servo Continues Pushing Forward</h1>
+<p class="subtitle"><span class="grey-light">(2015-05-01)</span> An update from Adenilson Cavalcanti and Lars Bergstrom</p>
+
+<div class="has-top-margin">
+  <p>Servo is a new prototype web browser layout engine written in Rust that was launched by Mozilla in 2012 with a new architecture to achieve high parallelism on components like layout and painting.</p>
+<p>It has been progressing at an amazing pace, with over 120 CSS properties currently supported, and work is ongoing to implement the remaining properties. For a full list of the current set of CSS properties with initial support in Servo, check out the Google Docs spreadsheet <a href="https://t.co/iVE4oMofy8">servo team is using to track development</a>.</p>
+<p>The current supported properties allow Servo to be mostly operational on static sites like Wikipedia and GitHub, with a surprisingly small code footprint. It has only about 126K lines of Rust code, and the Rust compiler and libraries are about 360K lines. For comparison, in 2014 Blink had about 700K lines of C++ code, and WebKit had around 1.3M lines, including platform specific code.</p>
+<p>Another exciting development is <a href="https://github.com/glennw/servo-shell">servo-shell,</a> which allows the implementation and customization of a WebBrowser using only Javascript and CSS. It’s essentially a <a href="http://motive.co.nz/glossary/chrome.php">browser chrome</a> that uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Using_the_Browser_API">mozbrowser APIs</a> (i.e. iFrame extensions) running on top of Servo and provides the ability to separate the browser content from loaded pages, which has led to fairly good performance so far.</p>
+<p>Finally, Rust (the programming language used to implement Servo) is approaching the 1.0 launch and a big group of people are ready to <a href="http://www.meetup.com/Rust-Bay-Area/events/221743903/">celebrate the occasion in San Francisco</a>.</p>
+<h2 id="improving-debugging-and-testing" tabindex="-1">Improving Debugging and Testing <a class="header-anchor" href="#improving-debugging-and-testing">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>One of the most challenging parts of developing a browser engine from scratch is re-implementing all of the CSS features, because they often have complicated interactions. For a developer to solve any layout rendering bugs they run into, they must first inspect the graphical representation of the DOM tree to see if it is correct. In case of Servo, the DOM tree will generate a FlowTree and DisplayLists while performing layout and rendering, compared to WebKit and Blink, which uses a RenderTree as graphical representation (and features DumpRenderTree tool for accessing the RenderTree). Debugging support was improved remarkably with addition of the ability to dump <a href="https://github.com/servo/servo/pull/5728">Optimized display lists</a>, <a href="https://github.com/servo/servo/pull/4995">Flow tree,</a> and <a href="https://github.com/servo/servo/pull/5062">Display List,</a> as well as the implementation of <a href="https://github.com/servo/servo/commit/618f56410db1f18ce05744e45e8f9651152d9ae2">reflow events debugging</a>, which can be used to inform developers when and why a layout was recalculated.</p>
+<p><a href="https://github.com/servo/servo/pull/5636">Integration of the Firefox timeline</a> has recently been started on Servo. This is a tool that allows <a href="https://developer.mozilla.org/en-US/docs/Tools/Timeline">tracking of operations performed by the web engine</a> and is useful for debugging and profiling a site. Additionally, W3C organization has created a test suite to help in verifying CSS features across browsers, which enhances interoperability. Servo now has support for <a href="https://github.com/servo/servo/pull/5421">running these W3C</a> CSS tests.</p>
+<h2 id="additional-servo-highlights" tabindex="-1">Additional Servo Highlights <a class="header-anchor" href="#additional-servo-highlights">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<h3 id="general-developments" tabindex="-1">General Developments <a class="header-anchor" href="#general-developments">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li>Servo was ported to <a href="https://developer.mozilla.org/en-US/Firefox_OS/Platform/Gonk">Gonk</a> (the low level layer of Firefox OS) last February.</li>
+<li>Servo has some state of the art components (e.g. HTML5 parser, CSS parser) implemented in Rust as independent libraries, which may be beneficial to integrate with Firefox. <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1135640">Work has started on this integration</a>, but whether the image decoder or the URL parser will be integrated first is undefined at this time.</li>
+<li>WebGL <a href="https://github.com/servo/servo/pull/5652">implementation</a> has begun.</li>
+<li>Another cool feature is the visualization of <a href="https://github.com/servo/servo/pull/4969">parallel painting</a>, where Servo executes in a mode in which tiles rendered by each distinct thread will have an overlay rendered on top of it. This makes it possible to visualize Servo’s parallel painting.</li>
+<li>Support for <a href="https://github.com/servo/servo/pull/5366">displaying a placeholder</a> when an image <a href="https://github.com/servo/servo/pull/5783">link is broken</a>.</li>
+<li>Cookies are now <a href="https://github.com/servo/servo/pull/4519">supported</a> as well as <a href="https://github.com/servo/servo/pull/4741">SSL certification</a> verification. These allow users to login to most websites that have user accounts.</li>
+<li>Providing the ability to embed Servo on applications in the future is important, and work on this subject is progressing. Instead of creating a new API for developers, the community decided to use the <a href="https://bitbucket.org/chromiumembedded/cef">Chromium Embedded Framework</a> (CEF): an API that is quite successful and stable. Servo has a CEF-like API that provides the ability to embed a Servo-powered webview on native apps, as demonstrated by <a href="https://github.com/pcwalton/miniservo-mac">Miniservo on Mac</a> and <a href="https://github.com/glennw/miniservo-gtk">Linux.</a> Work on supporting the API has been progressing well.</li>
+</ul>
+<h3 id="improved-html%2Fcss-support" tabindex="-1">Improved HTML/CSS Support <a class="header-anchor" href="#improved-html%2Fcss-support">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li><a href="https://github.com/servo/servo/pull/4036">CSS opacity</a>, <a href="https://github.com/servo/servo/pull/4475">text-shadow</a> and <a href="https://github.com/servo/servo/pull/4020">border-radius</a> were implemented.</li>
+<li>Rendering of <a href="https://github.com/servo/servo/pull/4324">groove/ridge</a>, <a href="https://github.com/servo/servo/pull/4437">inset/outset</a> and <a href="https://github.com/servo/servo/commit/0e24194d81820664be0e521fa9d22df6494e197d">border</a> <a href="https://github.com/servo/servo/commit/92f4ab6394ed40245b33b7f8131ca4b415f7ed64">coloring</a> was fixed.</li>
+<li><a href="https://github.com/servo/servo/pull/5546">CSS Blur filter</a> (together with parsing of filter calculated properties) is supported.</li>
+<li><a href="https://github.com/servo/servo/pull/4557">CSS filters</a> are now supported.</li>
+<li>CSS transitions <a href="https://github.com/servo/servo/pull/5400">are now supported,</a> as well as <a href="https://github.com/servo/servo/pull/5133">image-rendering</a> and <a href="https://github.com/servo/servo/pull/4888">innerHTML setter</a> on Servo.</li>
+<li>The Canvas API is progressing, with <a href="https://github.com/servo/servo/pull/5020">Canvas pixel manipulation</a>, <a href="https://github.com/servo/servo/pull/5185">support for arc()</a>, <a href="https://github.com/servo/servo/pull/5433/">support for drawImage</a> and <a href="https://github.com/servo/servo/pull/5016">other operations</a>. Now, rendering <a href="https://github.com/servo/servo/pull/4623">basic SVGs</a> like <a href="https://i.imgur.com/K2Gwkh2.png">the SVG tiger</a> is possible.</li>
+</ul>
+<h2 id="the-road-ahead" tabindex="-1">The Road Ahead <a class="header-anchor" href="#the-road-ahead">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>As you can see, Servo has advanced remarkably in the last few months by implementing many new features that benefit both Servo developers as well as future users. It is moving at a fast pace, implementing support for several of the web features needed by any modern browser engine while proving that Rust, as a systems-level programing language, is up to the task of writing a web engine from scratch.</p>
+<p>Are you interested in contributing to Servo or just curious to give it a try? Visit the <a href="https://github.com/servo/servo">project site,</a> or feel free to chat with the developers on #servo on the <a href="https://wiki.mozilla.org/IRC#Project_Channels">mozilla IRC server</a>.</p>
+<p><small>This post was originally published on the <a href="http://blogs.s-osg.org/servo-continues-pushing-forward/">Samsung OSG Blog</a>, which is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</small></p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fine-grained timing and energy profiling in Servo</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="Fine-grained timing and energy profiling in Servo">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">Fine-grained timing and energy profiling in Servo</h1>
+<p class="subtitle"><span class="grey-light">(2015-09-11)</span> Profiling Servo task and workload behavior</p>
+
+<div class="has-top-margin">
+  <p>My name is <a href="http://people.cs.uchicago.edu/~ckimes/">Connor Imes</a>, and this summer I have been working as a Research Assistant with Mozilla’s Servo team.
+In this post I will introduce you to fine-grained timing and energy profiling in Servo.</p>
+<h2 id="power-and-energy" tabindex="-1">Power and Energy <a class="header-anchor" href="#power-and-energy">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Let’s first clarify the difference between power and energy.
+I can go into great detail about what <em>energy</em> actually is, but I find it easiest to think of <a href="https://en.wikipedia.org/wiki/Electrical_energy">electrical energy</a> in this context as a consumable resource.
+A <a href="https://en.wikipedia.org/wiki/Joule">Joule</a> is the SI unit of energy.
+<em>Power</em> is the rate at which energy is used, measured in <a href="https://en.wikipedia.org/wiki/Watt">Watts</a> - Joules per second.</p>
+<p>Now consider that you have a task to perform on a computer which requires a fixed amount of work.
+Completing work fast requires more power than completing it slowly.
+In a perfect world we could trade that fixed amount of work for a fixed amount of energy, and the power would scale at a 1:1 ratio with the speed increase.
+For <a href="https://en.wikipedia.org/wiki/CPU_power_dissipation">reasons</a> I won’t go into, electrical circuits don’t actually work like that - running faster requires increasingly more power, which costs more energy.</p>
+<h2 id="why-do-you-care%3F" tabindex="-1">Why do You Care? <a class="header-anchor" href="#why-do-you-care%3F">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>You probably don’t notice when applications behave well, but you certainly take note when they run slowly or ruin your battery life, right?
+Many software systems, like Servo, are subject to timing and energy constraints - they need to provide good performance and minimize energy consumption.</p>
+<p>Timing and energy management is especially important on low-performance/low-power systems, like cell phones and tablets.
+Developers haven’t always paid much attention to this problem - they just configure their software to run as fast as possible.
+Until recently, this approach has worked well for achieving both good performance and low energy consumption.
+Unfortunately, this no longer the case on a lot of modern hardware.
+It is also not likely to work well in the future, particularly on the parallel architectures that Servo is designed to take advantage of.</p>
+<p>It may seem counter-intuitive to want to run slower, but some things happen so fast that users would never notice the difference.
+This presents us with the opportunity to <em>trade</em> performance for energy savings.</p>
+<h2 id="goals" tabindex="-1">Goals <a class="header-anchor" href="#goals">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>The “pie in the sky” dream is that we can deploy Servo on any system and achieve desired performance with minimal energy consumption.
+Before we can implement anything like that, we must first understand Servo’s behavior, which brings us to the goals of this work:</p>
+<ol>
+<li>Identify configurable settings and components in Servo that can be manipulated to affect application behavior.</li>
+<li>Instrument Servo to capture fine-grained timing and energy data.</li>
+<li>Execute Servo in various configurations with different workloads and observe/quantify how the behavior changes.</li>
+</ol>
+<h2 id="challenges" tabindex="-1">Challenges <a class="header-anchor" href="#challenges">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<h3 id="capturing-energy-data" tabindex="-1">Capturing Energy Data <a class="header-anchor" href="#capturing-energy-data">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Modern power/energy sensors have relatively low refresh rates - usually not more than a few updates per second, often worse.
+Such intervals are insufficient for capturing data when tasks complete in millisecond or sub-millisecond time frames.
+The best we can do without bulky and expensive equipment or too much performance overhead is to use estimates based on hardware counters.</p>
+<p>Power/energy sensors are also not consistent across hardware or software platforms.
+Different hardware has different (if any) power/energy monitoring components.
+Even for a particular hardware setup, the interfaces for accessing the sensors are not standard across operating systems, requiring platform-specific code.</p>
+<p>Furthermore, sensors instrument either specific components of a system or the system as a whole.
+For example, the Intel <a href="https://en.wikipedia.org/wiki/Model-specific_register">Model-Specific Register</a> (MSR) provides energy estimates for core and uncore components, the GPU, and DRAM.
+Other components like the disk, screen, and network interface are not included, even though they also draw power.
+On the other hand, using an external sensor provides data for the complete system but doesn’t tell us specifically where the energy is being used.</p>
+<h3 id="parallelism" tabindex="-1">Parallelism <a class="header-anchor" href="#parallelism">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Servo is designed to perform work in parallel, meaning system resources are shared between concurrent tasks.
+Since we don’t manage fine-grained resource scheduling, power/energy data cannot be easily attributed to an individual task unless it is the only task running.
+We can time parallel tasks separately but only capture energy for the shared resources as a whole.</p>
+<h3 id="test-pages" tabindex="-1">Test Pages <a class="header-anchor" href="#test-pages">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Servo’s capabilities are still under development, but we need sufficiently complex pages for a useful analysis.
+For our experiments, we selected a couple of pages from the set that Servo can completely load.</p>
+<h2 id="approach" tabindex="-1">Approach <a class="header-anchor" href="#approach">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>To record timing and energy data, we introduce a <a href="https://github.com/libheartbeats/heartbeats-simple">simplified version</a> of the <a href="https://github.com/libheartbeats/heartbeats">Heartbeats API</a>.
+The new version integrates better with Rust and shifts the burden of capturing timing and energy results to the developer, which is required for recording data from parallel tasks and for cross-platform compatibility.
+Heartbeats store timing and energy history and compute performance and power metrics.
+Instructions for enabling Heartbeats and energy monitoring are in the <a href="https://github.com/servo/servo/tree/master/components/profile">profile crate</a>.</p>
+<p>The <a href="https://github.com/energymon/energymon">energymon</a> project supports reading energy data from various sources using a common C interface.
+We add Rust bindings and abstractions over this interface.
+However, we currently only enable this capability with the <code>energy-profiling</code> feature in Servo since energy monitoring is platform-specific and not universally available.</p>
+<p>We run our experiments on a Lenovo Thinkpad X1 Carbon (3rd Gen) with a dual core <a href="http://ark.intel.com/products/85215/Intel-Core-i7-5600U-Processor-4M-Cache-up-to-3_20-GHz">i7-5600U CPU</a> running Ubuntu Linux 15.04 with kernel 4.2.0-040200rc6-generic.
+We read energy estimates from the Intel MSR using the <a href="https://01.org/blogs/tlcounts/2014/running-average-power-limit-%E2%80%93-rapl">Running Average Power Limit</a> (RAPL) <a href="https://lwn.net/Articles/545745/">sysfs interface</a>.
+The MSR has a refresh interval of about 1 millisecond.</p>
+<p>Servo provides various configuration options, including but not limited to:</p>
+<ul>
+<li>CPU or GPU painting</li>
+<li>tile size</li>
+<li>number of paint threads</li>
+<li>number of layout threads</li>
+</ul>
+<p>Varying the number of layout threads seems to have the biggest impact on performance, so we focus on this configuration option for these experiments.
+We start with a synthetic webpage called <code>perf-rainbow-hard.html</code> which is included in Servo’s <code>tests/html</code> directory.
+We then test a real <a href="https://en.wikipedia.org/wiki/Corona_%28satellite%29">Wikipedia</a> page (offline for now).
+For both pages, we vary the number of layout threads from 1-8 and average the results over 4 trials.
+All other settings are the defaults.</p>
+<h2 id="results" tabindex="-1">Results <a class="header-anchor" href="#results">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We present data in two types of plots.</p>
+<p>The first plot type is a column chart that naively sums up the time and energy recorded for each profiler category, averaged over the 4 trials (errors bars are included).
+Recall that tasks run in parallel, even sometimes within a single category.
+Energy may be counted more than once and the total times will be longer than the wall clock completion time.
+This plot just gives us an indication of where time and energy are being spent in Servo.
+The X axis lists the different categories.
+The left Y axis is the total time in milliseconds; the right Y axis is the total energy in Joules.</p>
+<p>The second plot type is a time series of the profiler categories’ activity for a single trial.
+Broken horizontal bars indicate when a profiler category is active, and a power curve is plotted over them.
+Here we can visualize the order of events and how time is really being spent for different workloads.
+We can also correlate tasks with energy consumption by seeing which concurrently running tasks draw more power.
+The X axis is the elapsed time in milliseconds since the profiler was initialized.
+The left Y axis lists the profiler categories; the right Y axis is the power in Watts for the red power curve.</p>
+<p>There are a few important profiler categories we will encounter:</p>
+<ul>
+<li><code>ApplicationHeartbeat</code> is a recurring task that captures energy results for the entire execution.</li>
+<li><code>LayoutPerform</code> wraps all layout tasks (it is double counting), but will clearly indicate the significance of layout operations.</li>
+<li><code>ScriptNetworkEvent</code> reads blocks of data up to 8 KB in size from the source - the disk in this case.</li>
+</ul>
+<p>We will also see that some of the instrumented tasks never run or take so little time that they don’t record energy data.
+In most cases, these short-lived tasks are not bottlenecks and not critical w.r.t time and energy.</p>
+<h3 id="perf-rainbow-hard" tabindex="-1">perf-rainbow-hard <a class="header-anchor" href="#perf-rainbow-hard">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p><img src="/img/blog/timing-energy-figs/prh-raw-l4.png" alt="perf-rainbow-hard-l4" title="Raw time and energy sums for perf-rainbow-hard with 4 layout threads."></p>
+<p><img src="/img/blog/timing-energy-figs/prh-ts_l4_trial_1.png" alt="perf-rainbow-hard-ts-l4-t1" title="Time series for perf-rainbow-hard with 4 layout threads."></p>
+<p><code>ScriptNetworkEvent</code> makes a strong appearance in <code>perf-rainbow-hard.html</code> (737 distinct events) because the file is unusually large - about 6 MB.
+Black bars in the time series denote the beginning and end of each event, but most are indistinguishable here.
+Power is usually lower during this period since I/O is not CPU-intensive and the disk is not instrumented by the energy monitor.</p>
+<p><code>LayoutPerform</code> also uses a significant amount of time and energy.
+Notice how the power increases during this period.
+<code>LayoutStyleRecalc</code> uses the majority of the layout time, followed by <code>LayoutMain</code> and <code>LayoutDispListBuild</code>, with a few other tasks mixed in.</p>
+<p>The execution completes with a <code>ScriptConstellationMsg</code>.
+This callback from the <code>constellation</code> component is likely a notification that graphics rendering is complete.
+I would hypothesize that some type of cleanup work is being performed, but further investigation is required to know for sure.</p>
+<p>The total runtime for this execution is 2.09 seconds, consuming 35.07 Joules of energy for an average power of 16.74 Watts.</p>
+<h3 id="wikipedia" tabindex="-1">Wikipedia <a class="header-anchor" href="#wikipedia">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p><img src="/img/blog/timing-energy-figs/w-raw-l4.png" alt="wikipedia-l4" title="Raw time and energy sums for a Wikipedia page with 4 layout threads."></p>
+<p><img src="/img/blog/timing-energy-figs/w-ts_l4_trial_1.png" alt="wikipedia-ts-l4-t1" title="Time series for a Wikipedia page with 4 layout threads."></p>
+<p>Looking at the column chart for our Wikipedia page, we see that a lower fraction of the total time is spent in <code>ScriptNetworkEvent</code> and a higher fraction is spent in layout tasks.
+Still, the page is fairly large at about 320 KB, plus another 1.2 MB of additional images and CSS files.</p>
+<p>The time series shows us that the total runtime is much less than perf-rainbow, which also means there are fewer energy samples in <code>ApplicationHeartbeat</code> to draw the power curve with.
+Speaking of power, it doesn’t spike to 20 Watts like perf-rainbow did.
+This page results in more repetitive layout tasks, possibly caused by additional script events.</p>
+<p>The total runtime for this execution is 0.86 seconds, consuming 12.63 Joules of energy for an average power of 14.71 Watts.</p>
+<h2 id="conclusions" tabindex="-1">Conclusions <a class="header-anchor" href="#conclusions">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We found that using 4 layout threads provided consistent behavior on our test system, which seems reasonable given that it has 4 virtual cores.
+Single trials of other configurations sometimes beat using 4 layout threads in total runtime and energy consumption, but not consistently.
+Even if some configurations can sometimes do better, the importance of predictability should not be ignored.</p>
+<p>We should also acknowledge the overhead of profiling.
+Memory overhead is small relative to the entire application, but there are disturbances to task timing.
+Timing and energy readings require system calls and access to hardware resources which introduce operating system overhead and interference in the processor caches.
+Combined with issuing a heartbeat, this overhead becomes more pronounced for extremely short-lived tasks.</p>
+<p>Heartbeats are designed in-part to be used as a runtime feedback mechanism, but we would not use them for such short-lived tasks.
+If needed, heartbeats could be issued every <code>N</code> task events while specifying <code>N</code> as the amount of work for a particular heartbeat.</p>
+<p>In some cases, there is a non-trivial amount of variability in timing behavior between trials.
+While we can attribute some of this to profiling overhead, short runtimes and interference from other jobs running on the system also contribute to this unpredictability.
+Real software has to deal with these challenges.</p>
+<p>This post has been a preliminary investigation into timing and energy behavior in Servo, but is not a complete analysis.
+Further instrumentation and testing is needed before we can draw more scientifically sound conclusions.
+We invite you to examine these results further, and to try out profiling for yourself.</p>
+<h2 id="future-work" tabindex="-1">Future Work <a class="header-anchor" href="#future-work">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<h3 id="short-term" tabindex="-1">Short Term <a class="header-anchor" href="#short-term">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Want to help?
+There is still plenty of work to do, much of which Servo’s volunteer community can help with.</p>
+<p>For starters, profiling is still incomplete - more components and tasks should be added to the profiler so we can better understand Servo’s behavior as a whole.</p>
+<p>We also need more energy monitor implementations, especially for sensors in common use today.
+This will be particularly important for ARM devices running Linux or Android given that ARM chips have been shown to expose more interesting timing/energy tradeoff spaces.
+Current energy monitor implementations are written in C, but contributors can write new <a href="https://crates.io/crates/energy-monitor"><code>EnergyMonitor</code></a> trait implementations in Rust if they choose.
+Servo’s <a href="https://github.com/servo/servo/blob/master/components/profile_traits/energy.rs">energy module</a> can also be refactored for more modularity in substituting energy monitors.</p>
+<h3 id="long-term" tabindex="-1">Long Term <a class="header-anchor" href="#long-term">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Web pages present widely varying workloads depending on their content.
+To provide more predictable behavior, Servo needs to make assumptions or derive characteristics about pages before (or early during) processing.
+It can then make more informed decisions when it is eventually able to configure itself at runtime.</p>
+<p>With more complete timing and energy data, we can construct performance/power <em>models</em> for different hardware and workloads.
+This is a prerequisite for implementing a <em>feedback</em> control mechanism in Servo for meeting performance or power goals.
+Enter a utility like <a href="http://poet.cs.uchicago.edu/">POET</a>, which is designed to accept a performance goal and minimize energy consumption by manipulating system resources or application settings at runtime.
+POET uses a behavior model along with a feedback control loop to provide soft real-time guarantees while achieving near-minimal energy consumption.</p>
+<h2 id="acknowledgments" tabindex="-1">Acknowledgments <a class="header-anchor" href="#acknowledgments">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>This work would not have been possible without the talented and passionate people at Mozilla Research, especially the core Servo team and volunteer contributors.
+Thank you, and keep rockin’ the free web!</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This Week In Servo 30</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="/img/servo-color-negative-no-container.png" alt="This Week In Servo 30">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md" target="_blank">
+          How to start
+        </a>
+      
+        
+        <a class="navbar-item" href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md" target="_blank">
+          Contributing
+        </a>
+      
+        
+        <a class="navbar-item" href="/blog/">
+          Blog
+        </a>
+      
+        
+        <a class="navbar-item" href="/governance/">
+          Governance
+        </a>
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="container has-top-margin">
+        <div class="content">
+          
+<h1 class="title">This Week In Servo 30</h1>
+<p class="subtitle"><span class="grey-light">(2015-04-09)</span> What's up with Servo for the weeks of 2 - 9 April 2015</p>
+
+<div class="has-top-margin">
+  <p>In the past week, we merged 66 pull requests</p>
+<p>We now use <a href="http://github.com/barosl/homu">homu</a> to queue pull requests and coordinate with buildbot, in place of <a href="https://github.com/graydon/bors">bors</a>. Homu is a bit more efficient when it comes to API usage, and responds immediately to changes (bors needs to wait till it can hit the queue again after three minutes). It’s also got a bunch of other useful features like prioritization and efficient usage of build machines when retrying on a failure. You can <a href="http://huonw.github.io/blog/2015/03/rust-infrastructure-can-be-your-infrastructure/">try it out</a> for yourself!</p>
+<p>Last week’s post <a href="https://news.ycombinator.com/item?id=9313182">was discussed on Hacker News</a>.</p>
+<p>###Notable additions</p>
+<ul>
+<li>James <a href="https://github.com/servo/servo/pull/5421">added support</a> for running the <a href="https://github.com/w3c/csswg-test">W3C CSS tests</a>. This PR had commits so large that it broke GitHub and consequently our CI.</li>
+<li>Lars and Manish switched the infrastructure to use homu instead of bors, with much help from Barosl.</li>
+<li>Anthony made <a href="https://github.com/servo/servo/pull/5490">tons</a> <a href="https://github.com/servo/servo/pull/5503">of</a> <a href="https://github.com/servo/servo/pull/5507">DOM</a> <a href="https://github.com/servo/servo/pull/5541">improvements</a> <a href="https://github.com/servo/servo/pull/5573">and</a> <a href="https://github.com/servo/servo/pull/5575">additions</a> <a href="https://github.com/servo/servo/pull/5578">in</a> <a href="https://github.com/servo/servo/pull/5590">his</a> <a href="https://github.com/servo/servo/pull/5609">first</a> <a href="https://github.com/servo/servo/pull/5611">week</a>. This is probably a new record for Servo!</li>
+<li>Simon <a href="https://github.com/servo/servo/pull/5574">moved unit tests to their own crate</a>. Alongside <a href="https://github.com/servo/servo/pull/5542">Matt’s improvements <code>./mach test-unit</code></a>, unit test compile time has now been reduced by 96%!</li>
+<li>Josh landed <a href="https://github.com/servo/servo/pull/5415">some barebones webdriver support</a>. The Webdriver library was written by James and can be found <a href="https://github.com/jgraham/webdriver-rust">here</a></li>
+<li>Diego added support for <a href="https://github.com/servo/servo/pull/5433/">HTML images in Canvas <code>drawImage()</code></a></li>
+<li>Mátyás  added support for Canvas <a href="https://github.com/servo/servo/pull/5562"><code>lineWidth</code></a>, <a href="https://github.com/servo/servo/pull/5563"><code>globalAlpha</code></a> and <a href="https://github.com/servo/servo/pull/5613"><code>miterLimit</code></a></li>
+<li>Ms2ger <a href="https://github.com/servo/servo/pull/5569">added support for <code>object</code> in WebIDL</a></li>
+<li>Patrick <a href="https://github.com/servo/servo/pull/5587">improved positioning of list images</a></li>
+<li>Matt <a href="https://github.com/servo/servo/pull/5461">implemented the <code>:focus</code> selector and <code>element.focus()</code> method</a></li>
+</ul>
+<p>###New contributors</p>
+<ul>
+<li><a href="https://github.com/chimeracoder">Aditya Mukerjee</a></li>
+<li><a href="https://github.com/aneeshusa">Aneesh Agrawal</a></li>
+<li><a href="https://github.com/nox">Anthony Ramine</a></li>
+<li><a href="https://github.com/dhodder">Dave Hodder</a></li>
+<li><a href="https://github.com/jagtalon">Jag Talon</a></li>
+<li><a href="https://github.com/xfq">Xue Fuqiao</a></li>
+<li><a href="https://github.com/nmzaheer">Muhammad Zaheer</a></li>
+</ul>
+<p>###Meeting</p>
+<p><a href="https://github.com/servo/servo/wiki/Meeting-2015-04-06">Minutes</a></p>
+<p>We had some issues with James’ CSS test PR breaking GitHub’s API, and the fallout on our CI. At the time of writing, the issue seems fixed. There were a couple of annoucements regarding the switch to homu and the new CSS tests, along with some discussion on the growing pull request backlog. We’re moving all our submodules to <a href="http://crates.io">crates.io</a>, with many of them running on Rust beta – please help if you can!</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog/">Back</a>
+</div>
+
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="is-size-6 has-text-light has-text-weight-light">
+      &copy; 2023 The Servo Project Developers
+    </p>
+    <p>Copyright © Servo Project a Series of LF Projects, LLC. LF Projects, LLC is an affiliate of the <a href="https://www.linuxfoundation.org">Linux Foundation</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+    <p><a href="https://www.linuxfoundation.org"><img src="/img/lf-logo.png" alt="Linux Foundation logo" width="112"></a></p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>
