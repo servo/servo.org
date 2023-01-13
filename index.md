@@ -14,6 +14,6 @@ get in touch: <a href="mailto:info@servo.org">info@servo.org</a>.
 ## Contact
 
 * Zulip: <https://servo.zulipchat.com>
-* GitHub discussion: <https://github.com/servo/servo/discussion>
+* GitHub discussion: <https://github.com/servo/servo/discussions>
 * Email: <info@servo.org>
 
