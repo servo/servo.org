@@ -1,34 +1,87 @@
-<section class="section">
-  <div class="container">
-    <div class="content">
-      <h2 id="download">
-        Downloads
-        <a class="headline-hash" href="#download">
-          <span class="icon hashlink">
-            <i class="fas fa-link"></i>
-          </span>
-        </a>
-      </h2>
-      <p>
-        These pre-built nightly snapshots allow developers to try Servo and
-        <a href="https://github.com/servo/servo/issues/new">report issues</a>
-        without building Servo locally. Please don’t log into your bank with
-        Servo just yet! Now that we’ve released our first developer preview,
-        we’ll be investing in formal security audits and improving our security
-        practices using both existing libraries and Rust – more information
-        coming soon!
-      </p>
-      <div class="downloads">
-        {% for download in downloads %}
+<div class="container">
+  <div class="content">
+    <div class="columns">
+      <div class="column">
         <p>
-          <div class="buttons has-addons">
-            <a class="button is-primary" href="https://download.servo.org/{{download.href}}">{{download.name}}</a>
-            <a class="button" href="https://download.servo.org/{{download.sha256}}">sha256</a>
-          </div>
+          These pre-built nightly snapshots allow developers to try Servo and
+          <a href="https://github.com/servo/servo/issues/new">report issues</a> without
+          <a href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md">building Servo locally</a>.
+          <strong>Please don’t log into your bank with Servo just yet!</strong>
+          Now that we’ve released our first developer preview,
+          we’ll be investing in formal security audits and improving our security
+          practices using both existing libraries and Rust – more information
+          coming soon!
         </p>
-        {% endfor %}
+      </div>
+      <div class="column">
+        <div class="downloads">
+          {% for download in downloads %}
+          <p>
+            <div class="buttons has-addons">
+              <a class="button is-primary" href="https://download.servo.org/{{download.href}}">{{download.name}}</a>
+              <span class="button is-static" id="date-{{download.key}}">?</span>
+              <a class="button" href="https://download.servo.org/{{download.sha256}}">sha256</a>
+            </div>
+          </p>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>
+<script type="text/javascript">
+  window.onload = load_build_info;
 
+  function load_build_info() {
+      var builds = [
+        {% for download in downloads %}
+          ["{{ download.key }}", "{{ download.href }}" ],
+        {% endfor %}
+      ];
+
+      builds.forEach(function (item, index) {
+          load_build_date("date-" + item[0], item[1]);
+      });
+  }
+
+  function load_build_date(id, prefix) {
+      var url = "https://servo-builds2.s3.amazonaws.com/?list-type=2&prefix=" + prefix;
+      get_request(url, function (text) {
+          var xml = parse_xml(text);
+          var contents_tag = xml.getElementsByTagName("Contents")[0];
+          var last_modified_tag = contents_tag.getElementsByTagName("LastModified")[0];
+
+          var last_modified = last_modified_tag.textContent;
+          var last_modified_date = last_modified.split("T")[0];
+
+          var el = document.getElementById(id);
+          el.innerText = last_modified_date;
+          el.title = last_modified;
+      });
+  }
+
+  function get_request(url, callback) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+          if (xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200) {
+              callback(xhttp.responseText);
+          }
+      };
+      xhttp.open("GET", url, true);
+      xhttp.send();
+  }
+
+  function parse_xml(text) {
+      if (window.DOMParser) {
+          var parser = new DOMParser();
+          var xml_doc = parser.parseFromString(text, "text/xml");
+          return xml_doc;
+      } else {
+          // Internet Explorer
+          var xml_doc = new ActiveXObject("Microsoft.XMLDOM");
+          xml_doc.async = false;
+          xml_doc.loadXML(text);
+          return xml_doc;
+      }
+  }
+</script>
