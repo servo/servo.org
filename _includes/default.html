@@ -4,11 +4,30 @@
   <body class="is-page">
     <main class="is-main">
       {% include "header.html" %}
-      <div class="container has-top-margin">
-        <div class="content">
-          {{ content }}
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <aside class="menu box">
+            <p class="menu-label">
+              {{ title }}
+            </p>
+            {% for link in menu %}
+              {% assign pagedir = page.url %}
+              {% if link.url == pagedir %}
+                {% if link.subpages %}
+                  <ul class="menu-list">
+                    {% for sublink in link.subpages %}
+                    <li><a href="{{ sublink.url | url }}">{{ sublink.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </aside>
+          <div class="content">
+            {{ content }}
+          </div>
         </div>
-      </div>
+      </section>
     </main>
     {% include "footer.html" %}
   </body>

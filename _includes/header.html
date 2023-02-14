@@ -15,9 +15,31 @@
     <div class="navbar-menu" id="navbar-menu">
       {% for link in menu %}
         {% assign pagedir = page.url %}
-        <a class="navbar-item{% if link.url == pagedir %} is-active{% endif %}" href="{{ link.url | url }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>
-          {{ link.title }}
-        </a>
+        {% if link.subpages %}
+          {% capture subpage-is-active %}
+            {% for sublink in link.subpages %}
+              {% if sublink.url == pagedir %}
+                is-active
+              {% endif %}
+            {% endfor %}
+          {% endcapture %}
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link{% if link.url == pagedir %} is-active {% endif %}{{ subpage-is-active }}" href="{{ link.url | url }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>
+              {{ link.title }}
+            </a>
+            <div class="navbar-dropdown">
+              {% for sublink in link.subpages %}
+                <a class="navbar-item{% if sublink.url == pagedir %} is-active{% endif %}" href="{{ sublink.url | url }}"{% if sublink.url contains 'http://' or sublink.url contains 'https://' %} target="_blank"{% endif %}>
+                  {{ sublink.title }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <a class="navbar-item{% if link.url == pagedir %} is-active{% endif %}" href="{{ link.url | url }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>
+            {{ link.title }}
+          </a>
+        {% endif %}
       {% endfor %}
       {% include "social-buttons.html" %}
     </div>
