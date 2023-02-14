@@ -36,4 +36,10 @@ module.exports = function(eleventyConfig) {
       return i++ < 10;
     });
   })
+  eleventyConfig.addCollection("frontpageBlogPosts", (collectionApi) => {
+    let i =0;
+    return collectionApi.getFilteredByTag("blog").reverse().filter((item) => {
+      return i++ < 2;
+    });
+  })
 }

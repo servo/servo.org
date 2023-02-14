@@ -14,74 +14,9 @@
         </p>
       </div>
       <div class="column">
-        <div class="downloads">
-          {% for download in downloads %}
-          <p>
-            <div class="buttons has-addons">
-              <a class="button is-primary" href="https://download.servo.org/{{download.href}}">{{download.name}}</a>
-              <span class="button is-static" id="date-{{download.key}}">?</span>
-              <a class="button" href="https://download.servo.org/{{download.sha256}}">sha256</a>
-            </div>
-          </p>
-          {% endfor %}
-        </div>
+        {% include "downloads-list.html" %}
+        {% include "downloads-script.html" %}
       </div>
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  window.onload = load_build_info;
-
-  function load_build_info() {
-      var builds = [
-        {% for download in downloads %}
-          ["{{ download.key }}", "{{ download.href }}" ],
-        {% endfor %}
-      ];
-
-      builds.forEach(function (item, index) {
-          load_build_date("date-" + item[0], item[1]);
-      });
-  }
-
-  function load_build_date(id, prefix) {
-      var url = "https://servo-builds2.s3.amazonaws.com/?list-type=2&prefix=" + prefix;
-      get_request(url, function (text) {
-          var xml = parse_xml(text);
-          var contents_tag = xml.getElementsByTagName("Contents")[0];
-          var last_modified_tag = contents_tag.getElementsByTagName("LastModified")[0];
-
-          var last_modified = last_modified_tag.textContent;
-          var last_modified_date = last_modified.split("T")[0];
-
-          var el = document.getElementById(id);
-          el.innerText = last_modified_date;
-          el.title = last_modified;
-      });
-  }
-
-  function get_request(url, callback) {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
-          if (xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200) {
-              callback(xhttp.responseText);
-          }
-      };
-      xhttp.open("GET", url, true);
-      xhttp.send();
-  }
-
-  function parse_xml(text) {
-      if (window.DOMParser) {
-          var parser = new DOMParser();
-          var xml_doc = parser.parseFromString(text, "text/xml");
-          return xml_doc;
-      } else {
-          // Internet Explorer
-          var xml_doc = new ActiveXObject("Microsoft.XMLDOM");
-          xml_doc.async = false;
-          xml_doc.loadXML(text);
-          return xml_doc;
-      }
-  }
-</script>

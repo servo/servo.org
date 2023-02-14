@@ -3,6 +3,9 @@ layout: download.html
 title: Download
 ---
 
+<div class="columns">
+  <div class="column">
+
 ## macOS Instructions
 
 * Click the macOS download button above to download the latest build
@@ -11,6 +14,9 @@ title: Download
 * Double-click on `Servo.app` to run Servo
 
 **Note**: `Servo.app` is not currently signed, so Mac users may have a popup saying "Servo can’t be opened because it is from an unidentified developer." If the popup lacks a "proceed anyway" option, close it then right-click `Servo.app` and click "Open." This time the popup will have an option to proceed opening the application.
+
+  </div>
+  <div class="column">
 
 ## Linux Instructions
 
@@ -29,3 +35,5 @@ title: Download
 
 **Solution**: make sure that you have GStreamer version 1.16 (or greater) and gst-plugins-bad version 1.16 (or greater)
 
+  </div>
+</div>

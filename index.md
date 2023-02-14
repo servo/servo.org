@@ -1,19 +1,35 @@
 ---
 layout: home.html
-title: Servo
+title: Home
 ---
 
-## Support and donations
-
-Interested in helping out the Servo Project? Please do! You could [write code](https://github.com/servo/servo/)
-or documentation, test nightlies and file issues, or [donate](https://crowdfunding.lfx.linuxfoundation.org/projects/servo)
-to help cover the project’s CI and hosting costs. If you know a company that would like to
-support the Servo Project, please have a look at our [Participation Agreement](governance/participation-agreement.pdf)
-get in touch: <a href="mailto:info@servo.org">info@servo.org</a>.
+<div class="columns">
+  <div class="column">
 
 ## Contact
 
-* Zulip: <https://servo.zulipchat.com>
-* GitHub discussion: <https://github.com/servo/servo/discussions>
+* Zulip chat: <https://servo.zulipchat.com/>
+* GitHub discussions: <https://github.com/servo/servo/discussions>
 * Email: <info@servo.org>
+* Mastodon: <https://floss.social/@servo>
+* Twitter: <https://twitter.com/ServoDev>
+
+  </div>
+  <div class="column">
+
+## Downloads
+
+{% include "downloads-list.html" %}
+
+  </div>
+  <div class="column">
+
+## Sponsorship
+
+You can support the project's infrastructure (CI) and hosting costs by donating to the [LFX crowdfunding page for Servo](https://crowdfunding.lfx.linuxfoundation.org/projects/servo).
+
+For more information about how to sponsor the project, visit the [**sponsorship page**]({{ '/sponsorship/' | url }}).
+
+  </div>
+</div>
 

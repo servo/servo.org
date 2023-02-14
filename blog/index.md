@@ -18,7 +18,7 @@ pagination:
 {% for post in posts %}
 <div class="has-top-margin">
   <h2 class="title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
-  <p class="subtitle"><span class="grey-light">({{ post.data.date | date: "%Y-%m-%d" }})</span> {{ post.data.summary }}</p>
+  <p class="subtitle"><span class="tag is-dark">{{ post.data.date | date: "%Y-%m-%d" }}</span> {{ post.data.summary }}</p>
 </div>
 
 {% endfor %}
