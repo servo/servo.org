@@ -3,7 +3,7 @@ layout:     post
 tags:       blog
 title:      Making it easier to contribute to Servo
 date:       2023-03-16
-summary:    Improvements to how we run tests, yielding faster builds and fewer failures due to flaky tests.
+summary:    Improvements to how we run tests, yielding faster builds and fewer failures due to flaky tests
 categories:
 ---
 
