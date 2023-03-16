@@ -21,7 +21,9 @@ Making builds faster doesn’t directly make tests less flaky, but it *does* red
 
 Our main [try and merge builds](https://github.com/servo/servo/actions/workflows/main.yml) often took three or four hours to complete, because [our GitHub org](https://github.com/servo) was limited to 20 concurrent runners. Since we also split the Web Platform Tests into 20 concurrent jobs, some of those jobs would almost always get starved by other jobs, like Windows unit tests or nightly WPT updates.
 
-<aside style="margin-left: 1em;">In practice, each item in [the build queue](https://build.servo.org/homu/queue/servo) actually took twice as long as that, because we were inadvertently kicking off two builds, but we’ve fixed that in [#29197](https://github.com/servo/servo/pull/29197).</aside>
+<aside style="margin-left: 1em;">
+
+In practice, each item in [the build queue](https://build.servo.org/homu/queue/servo) actually took twice as long as that, because we were inadvertently kicking off two builds, but we’ve fixed that in [#29197](https://github.com/servo/servo/pull/29197).</aside>
 
 We reached out to GitHub about this, and they were kind enough to increase our free runner limit to 60 concurrent jobs, cutting our build times to a consistent two hours.
 
