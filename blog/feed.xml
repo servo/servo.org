@@ -4,12 +4,77 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2023-02-03T00:00:00Z</updated>
+  <updated>2023-03-16T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>Making it easier to contribute to Servo</title>
+    <link href="https://servo.org/blog/2023/03/16/making-easier-to-contribute/"/>
+    <updated>2023-03-16T00:00:00Z</updated>
+    <id>https://servo.org/blog/2023/03/16/making-easier-to-contribute/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Back in January, flaky tests were a serious problem for Servo’s development. Each build failure caused by flaky tests would delay merging a pull request by over two hours, and some changes took as many as seven tries to merge! But since then, we’ve made a bunch of improvements to how we run tests, which should make contributing to Servo a lot easier.&lt;/p&gt;
+&lt;h2 id=&quot;what-is-a-flaky-test%3F&quot; tabindex=&quot;-1&quot;&gt;What is a flaky test? &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/03/16/making-easier-to-contribute/#what-is-a-flaky-test%3F&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Servo is tested against the &lt;a href=&quot;https://web-platform-tests.org/&quot;&gt;Web Platform Tests&lt;/a&gt;, a suite of over 30,000 tests shared with all of the major web engines. Each test can pass, fail, crash, or time out, and if a test has subtests, each subtest can have its own result. Passing is not always the expected outcome: for example, we would expect most tests for unimplemented features to fail.&lt;/p&gt;
+&lt;p&gt;Flaky tests are tests that yield the expected outcome sometimes and an unexpected outcome other times, causing intermittent build failures. Tests can be flaky due to how they were written, or problems with the machines that run those tests, but often they flake due to Servo bugs. Regardless of the cause, we want to avoid letting flaky tests affect people doing unrelated work.&lt;/p&gt;
+&lt;h2 id=&quot;faster-build-times&quot; tabindex=&quot;-1&quot;&gt;Faster build times &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/03/16/making-easier-to-contribute/#faster-build-times&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Making builds faster doesn’t directly make tests less flaky, but it &lt;em&gt;does&lt;/em&gt; reduce the delays that flaky tests can cause.&lt;/p&gt;
+&lt;p&gt;Our main &lt;a href=&quot;https://github.com/servo/servo/actions/workflows/main.yml&quot;&gt;try and merge builds&lt;/a&gt; often took three or four hours to complete, because &lt;a href=&quot;https://github.com/servo&quot;&gt;our GitHub org&lt;/a&gt; was limited to 20 concurrent runners. Since we also split the Web Platform Tests into 20 concurrent jobs, some of those jobs would almost always get starved by other jobs, like Windows unit tests or nightly WPT updates.&lt;/p&gt;
+&lt;aside style=&quot;margin-left: 1em;&quot;&gt;
+&lt;p&gt;In practice, each item in &lt;a href=&quot;https://build.servo.org/homu/queue/servo&quot;&gt;the build queue&lt;/a&gt; actually took twice as long as that, because we were inadvertently kicking off two builds, but we’ve fixed that in &lt;a href=&quot;https://github.com/servo/servo/pull/29197&quot;&gt;#29197&lt;/a&gt;.&lt;/p&gt;&lt;/aside&gt;&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;We reached out to GitHub about this, and they were kind enough to increase our free runner limit to 60 concurrent jobs, cutting our build times to a consistent two hours.&lt;/p&gt;
+&lt;p&gt;In the future, it may be worth adding some caching of the Cargo and target directories across builds, but the slowest parts of our builds by far are the Windows and macOS jobs. While neither of them run the Web Platform Tests yet, even just compiling and running unit tests takes over 90 minutes, making them almost always the critical path.&lt;/p&gt;
+&lt;p&gt;We are hoping this will improve with initiatives like &lt;a href=&quot;https://github.blog/2023-03-01-github-actions-introducing-faster-github-hosted-x64-macos-runners/&quot;&gt;GitHub’s upcoming “XL” macOS runners&lt;/a&gt;, and in the longer term it may be worth setting up some dedicated runners of our own.&lt;/p&gt;
+&lt;h2 id=&quot;support-for-multiple-expectations&quot; tabindex=&quot;-1&quot;&gt;Support for multiple expectations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/03/16/making-easier-to-contribute/#support-for-multiple-expectations&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We were previously only able to handle flaky tests by marking them as intermittent, that is, creating an issue with the test name in the title and the label &lt;a href=&quot;https://github.com/servo/servo/issues?q=label%3AI-intermittent&quot;&gt;I-intermittent&lt;/a&gt;. This means we treat &lt;em&gt;any&lt;/em&gt; result as expected when deciding whether or not the build should succeed, which is a very coarse approach, and it means the list of intermittent tests isn’t version controlled.&lt;/p&gt;
+&lt;p&gt;But as of &lt;a href=&quot;https://github.com/servo/servo/pull/29339&quot;&gt;#29339&lt;/a&gt;, we can now give tests a set of expected outcomes in the metadata files! Note that the typical outcome, if any, &lt;a href=&quot;http://web-platform-tests.org/tools/wptrunner/docs/expectation.html#web-platform-tests-metadata&quot;&gt;should go first&lt;/a&gt;, but the order doesn’t really matter in practice.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# tests/wpt/metadata/path/to/test.html.ini
+[test.html]
+  [subtest that only fails]
+    expected: FAIL
+
+  [subtest that occasionally times out]
+    expected: [PASS, TIMEOUT]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the future, it may be worth migrating the existing intermittent issues to expectations like this.&lt;/p&gt;
+&lt;h2 id=&quot;retrying-tests-with-unexpected-results&quot; tabindex=&quot;-1&quot;&gt;Retrying tests with unexpected results &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/03/16/making-easier-to-contribute/#retrying-tests-with-unexpected-results&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Sometimes the causes of flakiness can affect many or even all tests, like bugs causing some reftest screenshots to be completely white, or overloaded test runners causing some tests to time out.&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/servo/servo/pull/29370&quot;&gt;#29370&lt;/a&gt;, we now retry tests that yield unexpected results. If a test yields the expected result on the second try, we ignore it when deciding whether or not the build should succeed. This can make builds a little slower, but it should be outweighed by our recent improvements to build times.&lt;/p&gt;
+&lt;p&gt;In the future, it may be worth adopting some more advanced retry techniques. For example, &lt;a href=&quot;https://chromium.googlesource.com/chromium/src/+/9539073eb08b163ffa375bec280e7043ee4cbb19/docs/infra/cq.md&quot;&gt;Chromium’s retry strategy&lt;/a&gt; includes retrying the entire “shard” of tests to reproduce the test environment more accurately, and retrying tests both with and without the pull request to help “exonerate” the changes. These techniques require considerably more resources though, and they are generally only viable if we can &lt;a href=&quot;https://servo.org/sponsorship/&quot;&gt;fund our own dedicated test runners&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;result-comments&quot; tabindex=&quot;-1&quot;&gt;Result comments &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/03/16/making-easier-to-contribute/#result-comments&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;As of &lt;a href=&quot;https://github.com/servo/servo/pull/29315&quot;&gt;#29315&lt;/a&gt;, when a try or merge build finishes, we now post a comment on the pull request with a clear breakdown of the unexpected results:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Flaky unexpected results&lt;/strong&gt; are those that were unexpected at first, but expected on retry&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stable unexpected results that are known to be intermittent&lt;/strong&gt; are those that were unexpected, but ignored due to being &lt;a href=&quot;https://github.com/servo/servo/issues?q=label%3AI-intermittent&quot;&gt;marked as intermittent&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stable unexpected results&lt;/strong&gt; are those that caused the build to fail&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;intermittent-dashboard&quot; tabindex=&quot;-1&quot;&gt;Intermittent dashboard &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/03/16/making-easier-to-contribute/#intermittent-dashboard&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;To ensure that flaky tests can be discovered and fixed even if they are mitigated by retries, we’ve created an &lt;a href=&quot;https://build.servo.org/intermittent-tracker/&quot;&gt;intermittent dashboard&lt;/a&gt; that all unexpected results get reported to.&lt;/p&gt;
+&lt;p&gt;Each result includes the test and subtest, the expected and actual outcomes, any test output, plus metadata like the commit and a link to the build. You can filter the data to a specific test or field value, and the dashboard automatically points out when all of the visible results have something in common, which can help us analyse the failures and identify patterns.&lt;/p&gt;
+&lt;p&gt;For example, here we can see that all of the unexpected failures for one of the HTML parsing tests have the same assertion failure on the same subtest, but are not limited to one pull request:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/intermittent-dashboard.png&quot; alt=&quot;screenshot of intermittent dashboard, filtered by test (/html/syntax/parsing/DOMContentLoaded-defer.html) and actual outcome (FAIL)&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;In the future, we plan to &lt;a href=&quot;https://github.com/servo/intermittent-tracker/pull/6#issuecomment-1422599056&quot;&gt;further develop&lt;/a&gt; the dashboard, including adding more interesting views of the data like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;which tests flake the most (within some recent period like 30 days)&lt;/li&gt;
+&lt;li&gt;which tests are starting to flake (newly seen or quickly spiking)&lt;/li&gt;
+&lt;li&gt;which tests are &lt;a href=&quot;https://github.com/servo/servo/issues?q=label%3AI-intermittent&quot;&gt;marked as intermittent&lt;/a&gt; but haven’t flaked recently&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Servo 2023 Roadmap</title>
     <link href="https://servo.org/blog/2023/02/03/servo-2023-roadmap/"/>
@@ -421,101 +486,6 @@ support for keyboard events.&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/muodov&quot;&gt;Maxim Tsoy&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Media stack Mid-Year review</title>
-    <link href="https://servo.org/blog/2019/07/09/media-update-h1-2019/"/>
-    <updated>2019-07-09T00:00:00Z</updated>
-    <id>https://servo.org/blog/2019/07/09/media-update-h1-2019/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;We recently closed the first half of 2019 and with that it is time to look back and do a quick summary of what the media team has achieved during this 6 months period.&lt;/p&gt;
-&lt;p&gt;Looking at some stats, we merged 87 Pull Requests, we opened 56 issues, we closed 42 issues and we welcomed 13 new amazing contributors to the media stack.&lt;/p&gt;
-&lt;h3 id=&quot;a%2Fv-playback&quot; tabindex=&quot;-1&quot;&gt;A/V playback &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#a%2Fv-playback&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;These are some of the selected A/V playback related H1 acomplishments&lt;/p&gt;
-&lt;h4 id=&quot;media-cache-and-improved-seeking&quot; tabindex=&quot;-1&quot;&gt;Media cache and improved seeking &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#media-cache-and-improved-seeking&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;We significally &lt;a href=&quot;https://github.com/servo/servo/pull/22692&quot;&gt;improved&lt;/a&gt; the seeking experience of audio and video files by implementing preloading and buffering support and a media cache.&lt;/p&gt;
-&lt;iframe title=&quot;vimeo-player&quot; src=&quot;https://player.vimeo.com/video/311414154&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;h4 id=&quot;basic-media-controls&quot; tabindex=&quot;-1&quot;&gt;Basic media controls &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#basic-media-controls&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;After a few months of work we got &lt;a href=&quot;https://github.com/servo/servo/pull/22743&quot;&gt;partial support for the Shadow DOM API&lt;/a&gt;, which gave us the opportunity to implement our first basic set of &lt;a href=&quot;https://github.com/servo/servo/pull/23208&quot;&gt;media controls&lt;/a&gt;.&lt;/p&gt;
-&lt;img src=&quot;https://s3.amazonaws.com/media-p.slid.es/uploads/105177/images/6275339/Jun-19-2019_17-11-57.gif&quot; alt=&quot;media controls&quot; width=&quot;640&quot; /&gt;
-&lt;p&gt;The UI is not perfect, among other things, because we still have no way to render a progress or volume bar properly, as that depends on the &lt;code&gt;input type=&amp;quot;range&amp;quot;&amp;gt;&lt;/code&gt; layout, which so far is rendered as a simple text box instead of the usual slider with a thumb.&lt;/p&gt;
-&lt;h4 id=&quot;gstreamer-backend-for-magicleap&quot; tabindex=&quot;-1&quot;&gt;GStreamer backend for MagicLeap &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#gstreamer-backend-for-magicleap&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;Another great achievement by &lt;a href=&quot;https://github.com/xclaesse&quot;&gt;Xavier Claessens&lt;/a&gt; from &lt;a href=&quot;https://www.collabora.com/&quot;&gt;Collabora&lt;/a&gt; has been the GStreamer backend for &lt;a href=&quot;https://www.magicleap.com/&quot;&gt;Magic Leap&lt;/a&gt;. The work is not completely done yet, but as you can see on the animation below, he already managed to paint a full screen video on the Magic Leap device.&lt;/p&gt;
-&lt;img src=&quot;https://s3.amazonaws.com/media-p.slid.es/uploads/105177/images/6274304/Jun-19-2019_13-12-31.gif&quot; alt=&quot;magic leap video&quot; width=&quot;640&quot; /&gt;
-&lt;h4 id=&quot;hardware-accelerated-decoding&quot; tabindex=&quot;-1&quot;&gt;Hardware accelerated decoding &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#hardware-accelerated-decoding&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;One of the most wanted features that we have been working on for almost a year and that has recently landed is hardware accelerated decoding.&lt;/p&gt;
-&lt;p&gt;Thanks to the excellent and constant work from the &lt;a href=&quot;https://www.igalia.com/&quot;&gt;Igalian&lt;/a&gt; &lt;a href=&quot;https://github.com/ceyusa&quot;&gt;Víctor Jáquez&lt;/a&gt;, Servo recently gained &lt;a href=&quot;https://github.com/servo/servo/pull/23483&quot;&gt;support for hardware-accelerated media playback&lt;/a&gt;, which means lower CPU usage, better battery life and better thermal behaviour, among other goodies.&lt;/p&gt;
-&lt;p&gt;We only have support on Linux and Android (EGL and Wayland) so far. Support for other platforms is on the roadmap.&lt;/p&gt;
-&lt;p&gt;&lt;video src=&quot;https://s3.amazonaws.com/media-p.slid.es/videos/105177/rzteE40V/hwacceleration.mp4&quot; width=&quot;640&quot; controls=&quot;&quot;&gt;&lt;/video&gt;&lt;/p&gt;
-&lt;p&gt;The numbers we are getting are already pretty nice. You might not be able to see it clearly on the video, but the renderer CPU time for the non hardware accelerated playback is ~8ms, compared to the ~1ms of CPU time that we get with the accelerated version.&lt;/p&gt;
-&lt;h4 id=&quot;improved-web-compatibility-of-our-media-elements-implementation&quot; tabindex=&quot;-1&quot;&gt;Improved web compatibility of our media elements implementation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#improved-web-compatibility-of-our-media-elements-implementation&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;We also got a bunch of other smaller features that significantly improved the web compatibility of our media elements.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/servo/ferjm&quot;&gt;ferjm&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/22399&quot;&gt;added&lt;/a&gt; support for the HTMLMediaElement &lt;code&gt;poster&lt;/code&gt; frame attribute&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/swarnimarun&quot;&gt;swarnimarun&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/23236&quot;&gt;implemented&lt;/a&gt; support for the HTMLMediaElement &lt;code&gt;loop&lt;/code&gt; attribute&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/jackxbritton&quot;&gt;jackxbritton&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/23188&quot;&gt;implemented&lt;/a&gt; the HTMLMediaElement &lt;code&gt;crossorigin&lt;/code&gt; attribute logic.&lt;/li&gt;
-&lt;li&gt;Servo got the ability to &lt;a href=&quot;https://github.com/servo/servo/pull/22347&quot;&gt;mute and unmute&lt;/a&gt; as well as controlling the &lt;a href=&quot;https://github.com/servo/servo/pull/22324&quot;&gt;volume&lt;/a&gt; of audio and video playback thanks to &lt;a href=&quot;https://github.com/stevesweetney&quot;&gt;stevesweetney&lt;/a&gt; and &lt;a href=&quot;https://github.com/lucasfantacuci&quot;&gt;lucasfantacuci&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/sreeise&quot;&gt;sreeise&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/22622&quot;&gt;implemented&lt;/a&gt; the AudioTrack, VideoTrack, AudioTrackList and VideoTrackList interfaces.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/georgeroman&quot;&gt;georgeroman&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/22449&quot;&gt;coded&lt;/a&gt; the required changes to allow changing the playback rate of audio and video files.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/georgeroman&quot;&gt;georgeroman&lt;/a&gt;, again, &lt;a href=&quot;https://github.com/servo/media/pull/232&quot;&gt;implemented&lt;/a&gt; support for the HTMLMediaElement &lt;code&gt;canPlayType&lt;/code&gt; function.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/dlrobertson&quot;&gt;dlrobertson&lt;/a&gt; paved the way for timed text tracks support by implementing the basics of the &lt;a href=&quot;https://github.com/servo/servo/pull/22392&quot;&gt;TextTrack API&lt;/a&gt; and the &lt;a href=&quot;https://github.com/servo/servo/pull/22563&quot;&gt;HTMLTrackElement interface&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;webaudio&quot; tabindex=&quot;-1&quot;&gt;WebAudio &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#webaudio&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;We also got a few additions on the WebAudio land.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/PurpleHairEngineer&quot;&gt;PurpleHairEngineer&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/media/pull/243&quot;&gt;implemented&lt;/a&gt; the StereoPannerNode backend.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/collares&quot;&gt;collares&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/22648&quot;&gt;implemented&lt;/a&gt; the DOM side of the ChannelSplitterNode.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/Akhilesh1996&quot;&gt;Akhilesh1996&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/23259&quot;&gt;implemented&lt;/a&gt; the AudioParam setValueCurveAtTime function.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/snarasi6&quot;&gt;snarasi6&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/23279&quot;&gt;implemented&lt;/a&gt; the deprecated setPosition and setOrientation AudioListener methods.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;webrtc&quot; tabindex=&quot;-1&quot;&gt;WebRTC &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#webrtc&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/jdm&quot;&gt;jdm&lt;/a&gt;’s and &lt;a href=&quot;https://github.com/jdm&quot;&gt;Manishearth&lt;/a&gt;’s work, Servo has now the foundations of a &lt;a href=&quot;https://github.com/servo/servo/pull/23377&quot;&gt;WebRTC implementation&lt;/a&gt; and it is able to perform a 2-way calling with audio and video playback coming from the &lt;a href=&quot;https://github.com/servo/servo/pull/22780&quot;&gt;getUserMedia API&lt;/a&gt;.&lt;/p&gt;
-&lt;iframe src=&quot;https://player.vimeo.com/video/328247783&quot; width=&quot;640&quot; height=&quot;392&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;h2 id=&quot;next-steps&quot; tabindex=&quot;-1&quot;&gt;Next steps &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#next-steps&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;That’s &lt;strong&gt;not&lt;/strong&gt; all folks!&lt;/em&gt; We have exciting plans for the second half of 2019.&lt;/p&gt;
-&lt;h4 id=&quot;a%2Fv-playback-1&quot; tabindex=&quot;-1&quot;&gt;A/V playback &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#a%2Fv-playback-1&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;On the A/V playback land, we want to:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Focus on adding hardware accelerated playback on Windows and OSX.&lt;/li&gt;
-&lt;li&gt;Add support for fullscreen playback.&lt;/li&gt;
-&lt;li&gt;Add support for 360 video.&lt;/li&gt;
-&lt;li&gt;Improve the existing media controls by, for instance, implementing a nicer layout for the &lt;code&gt;&amp;lt;input type=&amp;quot;range&amp;quot;&amp;gt;&lt;/code&gt; element, with a proper slider and a thumb, so we can have progress and volume bars.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;webaudio-1&quot; tabindex=&quot;-1&quot;&gt;WebAudio &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#webaudio-1&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;For WebAudio there are plans to make some architectural improvements related to the timeline and the graph traversals.&lt;/p&gt;
-&lt;p&gt;We would also love to work on the MediaElementAudioSourceNode implementation.&lt;/p&gt;
-&lt;h4 id=&quot;webrtc-1&quot; tabindex=&quot;-1&quot;&gt;WebRTC &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#webrtc-1&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;For WebRTC, data channels are on the roadmap for the second half.&lt;/p&gt;
-&lt;p&gt;We currently support the playback of a single stream of audio and video simultaneously, so allowing the playback of multiple simulatenous streams of each type is also something that we would like to get during the following months.&lt;/p&gt;
-&lt;h4 id=&quot;others&quot; tabindex=&quot;-1&quot;&gt;Others &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2019/07/09/media-update-h1-2019/#others&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;There were also plans to implement support for a global mute feature, and I am happy to say, that &lt;a href=&quot;https://github.com/khodzha&quot;&gt;khodza&lt;/a&gt; already &lt;a href=&quot;https://github.com/servo/media/pull/271&quot;&gt;got this done&lt;/a&gt; right at the start of the second half.&lt;/p&gt;
-&lt;p&gt;Finally, we have been trying to get Youtube to work on Servo, but it turned out to be a difficult task because of non-media related issues (i.e. layout or web compatibility issues), so we decided to adjust the goal and focus on embedded Youtube support instead.&lt;/p&gt;
 </content>
   </entry>
 </feed>
