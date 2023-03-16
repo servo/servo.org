@@ -71,7 +71,7 @@ Each result includes the test and subtest, the expected and actual outcomes, any
 
 For example, here we can see that all of the unexpected failures for one of the HTML parsing tests have the same assertion failure on the same subtest, but are not limited to one pull request:
 
-![screenshot of intermittent dashboard, filtered by test (/html/syntax/parsing/DOMContentLoaded-defer.html) and actual outcome (FAIL)](https://bucket.daz.cat/30163373bd65eb0c.png)
+![screenshot of intermittent dashboard, filtered by test (/html/syntax/parsing/DOMContentLoaded-defer.html) and actual outcome (FAIL)]({{ site.url }}/img/blog/intermittent-dashboard.png)
 
 In the future, we plan to [further develop](https://github.com/servo/intermittent-tracker/pull/6#issuecomment-1422599056) the dashboard, including adding more interesting views of the data like:
 
