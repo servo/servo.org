@@ -4,12 +4,33 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2023-03-16T00:00:00Z</updated>
+  <updated>2023-04-13T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>Layout 2013 and Layout 2020</title>
+    <link href="https://servo.org/blog/2023/04/13/layout-2013-vs-2020/"/>
+    <updated>2023-04-13T00:00:00Z</updated>
+    <id>https://servo.org/blog/2023/04/13/layout-2013-vs-2020/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Servo currently has two independent layout engines, known as Layout 2013 and Layout 2020, which are named after when they began development. Layout 2020 was designed to fix several shortcomings in Layout 2013, but it’s not yet enabled by default, and this raises the question: which layout engine should Servo use going forward?&lt;/p&gt;
+&lt;p&gt;To answer this question, we analysed the two layout engines and found differences in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;their approaches to parallelism&lt;/li&gt;
+&lt;li&gt;the ways they manage trees of boxes and fragments&lt;/li&gt;
+&lt;li&gt;their relationships with WebRender&lt;/li&gt;
+&lt;li&gt;the degrees to which their architectures reflect CSS specs&lt;/li&gt;
+&lt;li&gt;the completeness of their implementations of CSS features&lt;/li&gt;
+&lt;li&gt;the difficulty in supporting &lt;a href=&quot;https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report&quot;&gt;complex features like floats&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more details, check out &lt;a href=&quot;https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report&quot;&gt;our report&lt;/a&gt;, but in short, we believe &lt;strong&gt;Layout 2020 is the best layout engine for Servo going forward&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;To give us more confidence in this choice with some practical experience, we’ve started implementing some smaller features in Layout 2020, like &lt;a href=&quot;https://github.com/servo/servo/pull/29504&quot;&gt;&amp;lt;iframe&amp;gt;&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/29594&quot;&gt;min/max width and height&lt;/a&gt;, sticky positioning, and ‘text-indent’. We will also start building and testing Layout 2020 (as well as Layout 2013) on &lt;a href=&quot;https://github.com/servo/servo/actions&quot;&gt;CI&lt;/a&gt; in the near future.&lt;/p&gt;
+&lt;p&gt;We will continue to maintain Layout 2013 for now, but we hope that completing many of these features, plus some more complex ones like counters and vertical writing modes, will give us the experience we need to decide whether we want to commit to Layout 2020 and remove Layout 2013 from the tree.&lt;/p&gt;
+&lt;p&gt;We would love to have you with us on this journey, and we hope that after this transition period, together we can tackle the most challenging parts of Servo’s CSS2 story, like floats and incremental layout!&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Making it easier to contribute to Servo</title>
     <link href="https://servo.org/blog/2023/03/16/making-easier-to-contribute/"/>
@@ -433,57 +454,6 @@ we merged 64 PRs in the Servo organization’s repositories.&lt;/p&gt;
       &lt;/a&gt;&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;No new contributors this week.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>This Week In Servo 131</title>
-    <link href="https://servo.org/blog/2020/07/06/twis-131/"/>
-    <updated>2020-07-06T00:30:00Z</updated>
-    <id>https://servo.org/blog/2020/07/06/twis-131/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;Welcome back everyone - it’s been a year without written updates, but we’re getting this train back on track! Servo hasn’t been
-dormant in that time; the biggest news was the public release of &lt;a href=&quot;https://www.microsoft.com/en-ca/p/firefox-reality/9npq78m7nb0r?rtc=1&amp;amp;activetab=pivot:overviewtab&quot;&gt;Firefox Reality&lt;/a&gt;
-(built on Servo technology) in the Microsoft store.&lt;/p&gt;
-&lt;p&gt;In the &lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2020-06-30..2020-07-06+user%3Aservo+&quot;&gt;past week&lt;/a&gt;,
-we merged 44 PRs in the Servo organization’s repositories.&lt;/p&gt;
-&lt;p&gt;The latest nightly builds for common platforms are available at &lt;a href=&quot;https://download.servo.org/&quot;&gt;download.servo.org&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/06/twis-131/#planning-and-status&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2020.&lt;/p&gt;
-&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/06/twis-131/#exciting-works-in-progress&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;jdm is &lt;a href=&quot;https://github.com/servo/servo/pull/27164&quot;&gt;replacing&lt;/a&gt; the websocket backend.&lt;/li&gt;
-&lt;li&gt;cybai and jdm are &lt;a href=&quot;https://github.com/servo/servo/pull/27026&quot;&gt;implementing&lt;/a&gt; dynamic module script imports.&lt;/li&gt;
-&lt;li&gt;kunalmohan is &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;implementing&lt;/a&gt; the draft WebGPU specification.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/06/twis-131/#notable-additions&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;SimonSapin &lt;a href=&quot;https://github.com/servo/rust-smallvec/pull/228&quot;&gt;fixed&lt;/a&gt; a source of Undefined Behaviour in the &lt;code&gt;smallvec&lt;/code&gt; crate.&lt;/li&gt;
-&lt;li&gt;muodov &lt;a href=&quot;https://github.com/servo/servo/pull/27174&quot;&gt;improved&lt;/a&gt; the compatibility of invalid form elements with the HTML specification, and &lt;a href=&quot;https://github.com/servo/servo/pull/27100&quot;&gt;added&lt;/a&gt;
-the missing &lt;code&gt;requestSubmit&lt;/code&gt; API.&lt;/li&gt;
-&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27173&quot;&gt;implemented&lt;/a&gt; GPUQueue APIs for WebGPU, and &lt;a href=&quot;https://github.com/servo/servo/pull/27154&quot;&gt;avoided&lt;/a&gt;
-synchronous updates, and &lt;a href=&quot;https://github.com/servo/servo/pull/27126&quot;&gt;implemented&lt;/a&gt; the getMappedRange API for GPUBuffer.&lt;/li&gt;
-&lt;li&gt;alaryso &lt;a href=&quot;https://github.com/servo/servo/pull/27169&quot;&gt;fixed&lt;/a&gt; a bug preventing running tests when using rust-analyzer.&lt;/li&gt;
-&lt;li&gt;alaryso &lt;a href=&quot;https://github.com/servo/servo/pull/27163&quot;&gt;avoided&lt;/a&gt; a panic in pages that perform layout queries on disconnected iframes.&lt;/li&gt;
-&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27149&quot;&gt;integrated&lt;/a&gt; virtual keyboard support for text inputs into Firefox Reality, as well as &lt;a href=&quot;https://github.com/servo/servo/pull/27114&quot;&gt;added&lt;/a&gt;
-support for keyboard events.&lt;/li&gt;
-&lt;li&gt;Manishearth &lt;a href=&quot;https://github.com/servo/servo/pull/27143&quot;&gt;implemented&lt;/a&gt; WebAudio node types for reading and writing MediaStreams.&lt;/li&gt;
-&lt;li&gt;gterzian &lt;a href=&quot;https://github.com/servo/servo/pull/27016&quot;&gt;improved&lt;/a&gt; the responsiveness of the browser when shutting down.&lt;/li&gt;
-&lt;li&gt;utsavoza &lt;a href=&quot;https://github.com/servo/servo/pull/27104&quot;&gt;updated&lt;/a&gt; the referrer policy implementation to match the updated specification.&lt;/li&gt;
-&lt;li&gt;ferjm &lt;a href=&quot;https://github.com/servo/servo/pull/26752&quot;&gt;implemented&lt;/a&gt; support for WebRTC data channels.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/06/twis-131/#new-contributors&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/muodov&quot;&gt;Maxim Tsoy&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
 </content>

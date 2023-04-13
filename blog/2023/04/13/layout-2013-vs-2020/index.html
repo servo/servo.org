@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Blog - Servo, the parallel browser engine</title>
-  <meta property="og:title" content="Blog - Servo, the parallel browser engine">
+  <title>Layout 2013 and Layout 2020 - Servo, the parallel browser engine</title>
+  <meta property="og:title" content="Layout 2013 and Layout 2020 - Servo, the parallel browser engine">
   
 
   <meta name="description" content="Servo is an independent, modular, embeddable web rendering engine written in Rust">
@@ -18,7 +18,7 @@
   <meta property="og:image:alt" content="Servo logo">
   <meta property="og:logo" content="/img/servo-symbol-color-no-container.png">
   <meta property="og:description" content="Servo is an independent, modular, embeddable web rendering engine written in Rust">
-  <meta property="og:url" content="/blog/10/">
+  <meta property="og:url" content="/blog/2023/04/13/layout-2013-vs-2020/">
 
   <link rel="stylesheet" href="/css/style.css">
   <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
@@ -32,7 +32,7 @@
   <div class="container">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-        <img src="/img/servo-color-negative-no-container.png" alt="Blog">
+        <img src="/img/servo-color-negative-no-container.png" alt="Layout 2013 and Layout 2020">
       </a>
 
       <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
@@ -152,7 +152,7 @@
         <div class="container">
           <aside class="menu box">
             <p class="menu-label">
-              Blog
+              Layout 2013 and Layout 2020
             </p>
             
               
@@ -172,55 +172,30 @@
             
           </aside>
           <div class="content">
-            <div style="float: right;">
-  <a href="/blog/feed.xml"><span class="icon"><i class="fas fa-rss"></i></span> Feed</a>
-</div>
-<h1 id="blog" tabindex="-1">Blog <a class="header-anchor" href="#blog">
-        <span class="icon hashlink"><i class="fas fa-link"></i></span>
-      </a></h1>
+            
+<h1 class="title">Layout 2013 and Layout 2020</h1>
+<p class="subtitle"><span class="tag is-dark">2023-04-13</span> Overview of the effort to rewrite Servo’s layout engine, and our proposal for layout in Servo going forward.</p>
+
 <div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2016/02/29/twis-53/">This Week In Servo 53</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2016-02-29</span> What's up with Servo for the week of 22 Feb 2016 - 29 Feb 2016</p>
+  <p>Servo currently has two independent layout engines, known as Layout 2013 and Layout 2020, which are named after when they began development. Layout 2020 was designed to fix several shortcomings in Layout 2013, but it’s not yet enabled by default, and this raises the question: which layout engine should Servo use going forward?</p>
+<p>To answer this question, we analysed the two layout engines and found differences in:</p>
+<ul>
+<li>their approaches to parallelism</li>
+<li>the ways they manage trees of boxes and fragments</li>
+<li>their relationships with WebRender</li>
+<li>the degrees to which their architectures reflect CSS specs</li>
+<li>the completeness of their implementations of CSS features</li>
+<li>the difficulty in supporting <a href="https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report">complex features like floats</a></li>
+</ul>
+<p>For more details, check out <a href="https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report">our report</a>, but in short, we believe <strong>Layout 2020 is the best layout engine for Servo going forward</strong>.</p>
+<p>To give us more confidence in this choice with some practical experience, we’ve started implementing some smaller features in Layout 2020, like <a href="https://github.com/servo/servo/pull/29504">&lt;iframe&gt;</a>, <a href="https://github.com/servo/servo/pull/29594">min/max width and height</a>, sticky positioning, and ‘text-indent’. We will also start building and testing Layout 2020 (as well as Layout 2013) on <a href="https://github.com/servo/servo/actions">CI</a> in the near future.</p>
+<p>We will continue to maintain Layout 2013 for now, but we hope that completing many of these features, plus some more complex ones like counters and vertical writing modes, will give us the experience we need to decide whether we want to commit to Layout 2020 and remove Layout 2013 from the tree.</p>
+<p>We would love to have you with us on this journey, and we hope that after this transition period, together we can tackle the most challenging parts of Servo’s CSS2 story, like floats and incremental layout!</p>
+
 </div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2016/02/22/twis-52/">This Week In Servo 52</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2016-02-22</span> What's up with Servo for the week of 15 Feb 2016 - 22 Feb 2016</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2016/02/15/twis-51/">This Week In Servo 51</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2016-02-15</span> What's up with Servo for the week of 08 Feb 2016 - 15 Feb 2016</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2016/02/08/twis-50/">This Week In Servo 50</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2016-02-08</span> What's up with Servo for the week of 01 Feb 2016 - 08 Feb 2016</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2016/02/01/twis-49/">This Week In Servo 49</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2016-02-01</span> What's up with Servo for the week of 25 Jan 2016 - 01 Feb 2016</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2016/01/25/twis-48/">These Weeks In Servo 48</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2016-01-25</span> What's up with Servo for the weeks of 11 Jan 2016 - 25 Jan 2016</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2016/01/11/twis-47/">This Week In Servo 47</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2016-01-11</span> What's up with Servo for the week of 04 Jan 2016 - 11 Jan 2016</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2016/01/04/twis-46/">This Week In Servo 46</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2016-01-04</span> What's up with Servo for the week of 28 Dec 2015 - 04 Jan 2016</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2015/12/28/twis-45/">This Weeks In Servo 45</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2015-12-28</span> What's up with Servo for the week of 21 Dec 2015 - 28 Dec 2015</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2015/12/21/twis-44/">These Weeks In Servo 44</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2015-12-21</span> What's up with Servo for the weeks of 30 Nov 2015 - 21 Dec 2015</p>
-</div>
+
 <div class="has-top-margin buttons has-addons">
-<a class="button" href="/blog/9/">Previous</a>
-<a class="button" href="/blog/11/">Next</a>
+  <a class="button" href="/blog/">Back</a>
 </div>
 
           </div>
