@@ -240,37 +240,31 @@
   window.onload = load_build_info;
 
   function load_build_info() {
-      var builds = [
-        
-          ["windows-exe", "nightly/windows-msvc/servo-latest.exe" ],
-        
-          ["windows-zip", "nightly/windows-msvc/servo-latest.zip" ],
-        
-          ["mac", "nightly/mac/servo-latest.dmg" ],
-        
-          ["linux", "nightly/linux/servo-latest.tar.gz" ],
-        
-      ];
+      var url = "https://api.github.com/repos/servo/servo-nightly-builds/releases/latest";
+      get_request(url, function (text) {
+          var release = JSON.parse(text);
+          var builds = [
+            
+              "windows-exe",
+            
+              "windows-zip",
+            
+              "mac",
+            
+              "linux",
+            
+          ];
 
-      builds.forEach(function (item, index) {
-          load_build_date("date-" + item[0], item[1]);
+          for (const build of builds) {
+            set_build_date(build, release.tag_name);
+          }
       });
   }
 
-  function load_build_date(id, prefix) {
-      var url = "https://servo-builds2.s3.amazonaws.com/?list-type=2&prefix=" + prefix;
-      get_request(url, function (text) {
-          var xml = parse_xml(text);
-          var contents_tag = xml.getElementsByTagName("Contents")[0];
-          var last_modified_tag = contents_tag.getElementsByTagName("LastModified")[0];
-
-          var last_modified = last_modified_tag.textContent;
-          var last_modified_date = last_modified.split("T")[0];
-
-          var el = document.getElementById(id);
-          el.innerText = last_modified_date;
-          el.title = last_modified;
-      });
+  function set_build_date(build, build_date) {
+      var el = document.getElementById('date-' + build);
+      el.innerText = build_date;
+      el.title = build_date;
   }
 
   function get_request(url, callback) {
@@ -282,20 +276,6 @@
       };
       xhttp.open("GET", url, true);
       xhttp.send();
-  }
-
-  function parse_xml(text) {
-      if (window.DOMParser) {
-          var parser = new DOMParser();
-          var xml_doc = parser.parseFromString(text, "text/xml");
-          return xml_doc;
-      } else {
-          // Internet Explorer
-          var xml_doc = new ActiveXObject("Microsoft.XMLDOM");
-          xml_doc.async = false;
-          xml_doc.loadXML(text);
-          return xml_doc;
-      }
   }
 </script>
 
