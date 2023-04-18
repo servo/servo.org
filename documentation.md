@@ -11,3 +11,7 @@ Some documentation about the Servo project can be found:
 * (for the `servo` crate) at [doc.servo.org](https://doc.servo.org/servo/index.html)
 * on the [GitHub wiki](https://github.com/servo/servo/wiki)
 
+## Reports
+
+* [Servo Layout Engines Report](https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report) (March 2023)
+
