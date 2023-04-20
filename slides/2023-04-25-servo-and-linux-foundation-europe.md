@@ -7,6 +7,8 @@ title: Servo Slides Template
 
 # Servo and Linux Foundation Europe
 
+## Servo TSC Meeting April 2023
+
 25 Apr 2023
 
 -----
@@ -36,21 +38,23 @@ title: Servo Slides Template
 
 ## Linux Foundation Europe
 
-<div style="font-size: 0.9em;">
-
 * Brussels (Belgium) based non-profit, established in September 2022.
 * LF US is the parent company which owns LF Europe.
-  * LF US members can become LF Europe members without paying extra money.
 * Goal: Intra- and inter-regional open source and open standard collaboration in Europe, with both public and private sectors as well as individual contributors.
 
-</div>
+Note:
+  * LF US members can become LF Europe members without paying extra money.
 
 ----
 
 ### LF Europe projects
 
-* [OpenWallet Foundation](https://openwallet.foundation/): A consortium of companies and non-profit organisations collaborating to drive global adoption of open, secure and interoperable digital wallet solutions.
-* [Sylva](https://gitlab.com/sylva-projects/sylva): A telco-related project aiming to release a cloud software framework that would follow EU regulations with respect to security.
+* [OpenWallet Foundation](https://openwallet.foundation/)
+* [Sylva](https://gitlab.com/sylva-projects/sylva)
+
+Note:
+  * OpenWallet Foundation: A consortium of companies and non-profit organisations collaborating to drive global adoption of open, secure and interoperable digital wallet solutions.
+  * Sylva: A telco-related project aiming to release a cloud software framework that would follow EU regulations with respect to security.
 
 -----
 
@@ -58,27 +62,35 @@ title: Servo Slides Template
 
 ----
 
-### Why?
+### Better visibility and increased marketing
 
-* **Better visibility and increased marketing** — LF Europe currently has only two projects, and Servo will be the third, so we expect that LF Europe will be able to dedicate more time and resources towards Servo.
-
-----
-
-### Why?
-
-* **Funding potential** — Servo has been with LF US since 2020, but hasn't been able to attract new funding beyond the one company supporting Servo through the LF board. We hope this could improve with LF Europe creating opportunities for new sponsors to join. We also have plans to look for funding in Europe (including European Union grants) and other regions like Asia.
+* LF Europe currently has only two projects, and Servo will be the third.
+* We expect that LF Europe will be able to dedicate more time and resources towards Servo.
 
 ----
 
-### Why?
+### Funding potential
 
-* **Market access** — There's a large embedded device industry in Europe, with many users that could benefit from a project like Servo. Some of these companies are members or LF Europe and might be willing to sponsor projects under that umbrella.
+* Servo has been with LF US since 2020, but hasn't been able to attract new funding.
+* We hope this could improve with LF Europe creating opportunities for new sponsors to join.
+* We also have plans to look for funding in Europe (including European Union grants) and other regions.
+
+Note:
+  * Only one company supporting Servo through the LF board.
 
 ----
 
-### Why?
+### Market access
 
-* **Independence** — Main web rendering engines are controlled by US corporations (Apple, Google, and Mozilla). Having an independent non-US web engine might help to attract more companies from the rest of the world.
+* There's a large embedded device industry in Europe, with many users that could benefit from a project like Servo.
+* Some of these companies are members or LF Europe and might be willing to sponsor projects under that umbrella.
+
+----
+
+### Independence
+
+* Main web rendering engines are controlled by US corporations (Apple, Google, and Mozilla).
+* Having an independent non-US web engine might help to attract more companies from the rest of the world.
 
 ----
 
