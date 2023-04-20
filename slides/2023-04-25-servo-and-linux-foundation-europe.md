@@ -43,7 +43,8 @@ title: Servo Slides Template
 * Goal: Intra- and inter-regional open source and open standard collaboration in Europe, with both public and private sectors as well as individual contributors.
 
 Note:
-  * LF US members can become LF Europe members without paying extra money.
+
+* LF US members can become LF Europe members without paying extra money.
 
 ----
 
@@ -53,8 +54,9 @@ Note:
 * [Sylva](https://gitlab.com/sylva-projects/sylva)
 
 Note:
-  * OpenWallet Foundation: A consortium of companies and non-profit organisations collaborating to drive global adoption of open, secure and interoperable digital wallet solutions.
-  * Sylva: A telco-related project aiming to release a cloud software framework that would follow EU regulations with respect to security.
+
+* OpenWallet Foundation: A consortium of companies and non-profit organisations collaborating to drive global adoption of open, secure and interoperable digital wallet solutions.
+* Sylva: A telco-related project aiming to release a cloud software framework that would follow EU regulations with respect to security.
 
 -----
 
@@ -76,7 +78,8 @@ Note:
 * We also have plans to look for funding in Europe (including European Union grants) and other regions.
 
 Note:
-  * Only one company supporting Servo through the LF board.
+
+* Only one company supporting Servo through the LF board.
 
 ----
 
