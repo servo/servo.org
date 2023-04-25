@@ -1,6 +1,6 @@
 ---
 layout: slides.html
-title: Servo Slides Template
+title: Servo and Linux Foundation Europe
 ---
 
 <!-- .slide: class="cover" -->
