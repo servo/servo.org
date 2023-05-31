@@ -28,7 +28,7 @@ Servo's roadmap is defined in the project wiki: <https://github.com/servo/servo/
 
 ## Presentations
 
-* [Servo in 2023](https://www.youtube.com/watch?v=9Q4yNlbfiYk&t=18225s) by Martin Robinson (May 2023)
+* [Servo in 2023](https://www.youtube.com/watch?v=IdHvHoAO5oo) by Martin Robinson (May 2023)
 * [Streaming video from WebXR content using Servo](https://www.youtube.com/watch?v=rAWeW6Q5Cuw) by Alan Jeffrey (May 2021)
 * [Servo](https://www.youtube.com/watch?v=epEQ-9VAY_4) by Alan Jeffrey (Mar 2021)
 * [What I Talk About When I Talk About Running on the Web](https://www.youtube.com/watch?v=M6uUB-gawRs) by Jack Moffitt (July 2017 at PolyConf)
