@@ -4,12 +4,68 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2023-04-13T00:00:00Z</updated>
+  <updated>2023-05-31T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>Adding support for ‘outline’ properties</title>
+    <link href="https://servo.org/blog/2023/05/31/adding-support-for-outline-properties/"/>
+    <updated>2023-05-31T00:00:00Z</updated>
+    <id>https://servo.org/blog/2023/05/31/adding-support-for-outline-properties/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;As mentioned in &lt;a href=&quot;https://servo.org/blog/2023/04/13/layout-2013-vs-2020/&quot;&gt;our last blog post&lt;/a&gt;, we’re currently working on selecting a layout engine for Servo between the original Layout 2013 and the newer Layout 2020.&lt;/p&gt;
+&lt;p&gt;Our plan has been to start by implementing some small features in Layout 2020, to help us decide whether to switch to the new layout engine, and in turn tackle more complex features like floats. One of these features was ‘outline’, which is now supported in the new engine.&lt;/p&gt;
+&lt;p&gt;A few days ago, we landed support for ‘outline’ and ‘outline-offset’. These properties are now fully supported in Servo, with two minor caveats:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/pull/29718&quot;&gt;Snap border and outline widths at computed-value time&lt;/a&gt; — this is blocked on a Stylo upgrade to avoid diverging from Firefox&lt;/li&gt;
+&lt;li&gt;The ‘outline-style’ value ‘auto’ currently works like ‘solid’ — this is allowed by the spec, but we may be able to do something better here, like rounding the corners of the outline or matching the platform style&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The impact of this feature is most noticeable in the focus styles for links and input fields. For example, the User Agent stylesheet already applies ‘outline: thin dotted’ to ‘a:focus’, so clicking the first link in&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Lorem ipsum &amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;dolor sit amet&amp;lt;/a&amp;gt;,
+consectetur &amp;lt;a href=&amp;quot;#&amp;quot;&amp;gt;adipiscing elit&amp;lt;/a&amp;gt;.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;now yields&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/servo-outline.png&quot; alt=&quot;Text with two links where the first one is focused so it has a thin outline around it&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;implementation&quot; tabindex=&quot;-1&quot;&gt;Implementation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/05/31/adding-support-for-outline-properties/#implementation&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The bulk of the feature was implemented in &lt;a href=&quot;https://github.com/servo/servo/pull/29695&quot;&gt;#29695&lt;/a&gt; (‘outline’) and &lt;a href=&quot;https://github.com/servo/servo/pull/29702&quot;&gt;#29702&lt;/a&gt; (‘outline-offset’):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;In &lt;code&gt;{longhands,shorthands}/outline.mako.rs&lt;/code&gt;, we enable ‘outline-offset’, ‘outline-color’, and ‘outline’ in Layout 2020, and remove the pref gates for ‘outline-style’ and ‘outline-width’, allowing those properties to be resolved and queried&lt;/li&gt;
+&lt;li&gt;In &lt;code&gt;BoxFragment::build_stacking_context_tree_for_children&lt;/code&gt;, we check ‘outline-width’ and (if non-zero) push a &lt;code&gt;StackingContextFragment&lt;/code&gt; to remind ourselves to paint an outline for the box fragment when building its display list&lt;/li&gt;
+&lt;li&gt;In &lt;code&gt;StackingContext::build_display_list&lt;/code&gt;, we search for those reminders and paint the necessary outlines, but only after all other kinds of content in the stacking context (“out-of-band”)&lt;/li&gt;
+&lt;li&gt;In &lt;code&gt;BuilderForBoxFragment::build&lt;/code&gt;, we now need to handle requests to paint the &lt;code&gt;Outline&lt;/code&gt;, not just the &lt;code&gt;BlockBackgroundsAndBorders&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;In &lt;code&gt;BuilderForBoxFragment::build_outline&lt;/code&gt;, we paint the outline by creating a &lt;code&gt;BorderDisplayItem&lt;/code&gt; in WebRender, while taking the ‘outline-offset’ into account&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We also improved the shorthand serialisation in &lt;a href=&quot;https://github.com/servo/servo/pull/29708&quot;&gt;#29708&lt;/a&gt;, by replacing the &lt;code&gt;#[derive(ToCss)]&lt;/code&gt; for ‘outline’ with a custom impl that returns ‘auto’ in the case where all of the longhands are set to initial values.&lt;/p&gt;
+&lt;h2 id=&quot;tests-and-spec-issues&quot; tabindex=&quot;-1&quot;&gt;Tests and spec issues &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/05/31/adding-support-for-outline-properties/#tests-and-spec-issues&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The spec allows outlines to be painted either &lt;a href=&quot;https://drafts.csswg.org/css-position-4/#in-band-outline&quot;&gt;in-band&lt;/a&gt;, such that other elements can obscure them, or &lt;a href=&quot;https://drafts.csswg.org/css-position-4/#out-of-band-outline&quot;&gt;out-of-band&lt;/a&gt;, on top of all other content in the stacking context. We chose the latter, because it’s the recommended approach for accessibility and matches other browsers.&lt;/p&gt;
+&lt;p&gt;For example, the magenta element below overlaps the blue border of the previous element, but not the out-of-band cyan outline:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div style=&amp;quot;
+    outline: 5px solid cyan;
+    border: 5px solid blue;
+&amp;quot;&amp;gt;Lorem ipsum&amp;lt;/div&amp;gt;
+&amp;lt;div style=&amp;quot;
+    background: magenta;
+    margin-top: -15px;
+    width: 50px;
+    height: 50px;
+&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/servo-outline-painting.png&quot; alt=&quot;Painting order is blue border, then magenta background, then “Lorem ipsum” and cyan outline&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;‘outline’ already has good test coverage, though during our implementation we added &lt;a href=&quot;https://github.com/servo/servo/pull/29686&quot;&gt;one new test&lt;/a&gt; to check that ‘background-clip’ works as expected with ‘border-radius’, which affects both borders and outlines in Servo.&lt;/p&gt;
+&lt;p&gt;We’ve also filed two spec issues:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8786&quot;&gt;Negative outline-offset is not interoperable and spec is not clear&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8788&quot;&gt;Should outline-offset be a longhand of outline?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As always, despite ‘outline’ being a well-known property that has long been implemented by all of the major engines, with every new implementation comes new opportunities to clarify specs and improve test coverage. Building features like ‘outline’ helps the web platform as much as it helps Servo.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Layout 2013 and Layout 2020</title>
     <link href="https://servo.org/blog/2023/04/13/layout-2013-vs-2020/"/>
@@ -405,55 +461,6 @@ we merged 62 PRs in the Servo organization’s repositories.&lt;/p&gt;
       &lt;/a&gt;&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/avr1254&quot;&gt;Arjun Ramachandrula&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>This Week In Servo 132</title>
-    <link href="https://servo.org/blog/2020/07/13/twis-132/"/>
-    <updated>2020-07-13T00:30:00Z</updated>
-    <id>https://servo.org/blog/2020/07/13/twis-132/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;In the &lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2020-07-06..2020-07-13+user%3Aservo+&quot;&gt;past week&lt;/a&gt;,
-we merged 64 PRs in the Servo organization’s repositories.&lt;/p&gt;
-&lt;p&gt;The latest nightly builds for common platforms are available at &lt;a href=&quot;https://download.servo.org/&quot;&gt;download.servo.org&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Servo now has the ability to record 360 degree videos of immersive web content like &lt;a href=&quot;http://rawcdn.githack.com/mrdoob/three.js/master/examples/webxr_vr_rollercoaster.html&quot;&gt;this three.js rollercoaster&lt;/a&gt;:
-&lt;a href=&quot;http://www.youtube.com/watch?v=buivCKjTtbk&quot; title=&quot;360 rollercoaster video&quot;&gt;&lt;img src=&quot;http://img.youtube.com/vi/buivCKjTtbk/0.jpg&quot; alt=&quot;360 rollercoaster video&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/13/twis-132/#planning-and-status&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2020.&lt;/p&gt;
-&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/13/twis-132/#exciting-works-in-progress&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;pcwalton is &lt;a href=&quot;https://github.com/servo/servo/pull/27216&quot;&gt;implementing&lt;/a&gt; support for CSS floats in the new Layout 2020 engine.&lt;/li&gt;
-&lt;li&gt;AbhishekSharma102 and gterzian are &lt;a href=&quot;https://github.com/servo/servo/pull/26710&quot;&gt;making&lt;/a&gt; some JS scripts compile off the main thread.&lt;/li&gt;
-&lt;li&gt;cybai and jdm are &lt;a href=&quot;https://github.com/servo/servo/pull/27026&quot;&gt;implementing&lt;/a&gt; dynamic module script imports.&lt;/li&gt;
-&lt;li&gt;kunalmohan is &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;implementing&lt;/a&gt; the draft WebGPU specification.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/13/twis-132/#notable-additions&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27229&quot;&gt;updated&lt;/a&gt; the developer tools server to support recent nightly Firefox versions.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27227&quot;&gt;fixed&lt;/a&gt; a bug preventing some DOM interfaces like XRInputSourceArray from being iterated.&lt;/li&gt;
-&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27224&quot;&gt;implemented&lt;/a&gt; support for &lt;a href=&quot;https://github.com/servo/webxr/pull/181&quot;&gt;recording&lt;/a&gt; immersive WebXR content as 360 degree videos.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/rust-ammonia/rust-content-security-policy/pull/30&quot;&gt;fixed&lt;/a&gt; a bug causing over-zealous CSP blocking.&lt;/li&gt;
-&lt;li&gt;ferjm &lt;a href=&quot;https://github.com/servo/servo/pull/27152&quot;&gt;implemented&lt;/a&gt; the &lt;code&gt;MediaDevices.enumerateDevices&lt;/code&gt; &lt;a href=&quot;https://github.com/servo/media/pull/368&quot;&gt;media&lt;/a&gt; API.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/media/pull/370&quot;&gt;removed&lt;/a&gt; a panic when HRTF audio is requested.&lt;/li&gt;
-&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27177&quot;&gt;fixed&lt;/a&gt; a bug preventing the &lt;code&gt;fxr://&lt;/code&gt; protocol handler from working in Firefox Reality.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/font-kit/pull/156&quot;&gt;worked around&lt;/a&gt; a permission error when requesting system fonts under UWP, also avoiding a &lt;a href=&quot;https://github.com/servo/servo/pull/27184&quot;&gt;panic&lt;/a&gt; when using the &lt;code&gt;fillText&lt;/code&gt; API.&lt;/li&gt;
-&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27142&quot;&gt;fixed&lt;/a&gt; a bug in GL context initialization for the gstreamer plugin that renders Servo content.&lt;/li&gt;
-&lt;li&gt;mbrubeck &lt;a href=&quot;https://github.com/servo/rust-smallvec/pull/213&quot;&gt;avoided&lt;/a&gt; leaking memory in the &lt;code&gt;smallvec&lt;/code&gt; crate when panicking during &lt;code&gt;insert_many&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27164&quot;&gt;replaced&lt;/a&gt; the websocket backend, allowing SSL websockets to work on Windows as a result.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/13/twis-132/#new-contributors&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;No new contributors this week.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
 </content>
