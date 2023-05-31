@@ -29,7 +29,7 @@ title: Download
 
 **Error**: `./servo: error while loading shared libraries: libgstwebrtc-1.0.so.0: cannot open shared object file: No such file or directory`
 
-**Solution**: `sudo apt install libgstreamer-plugins-bad1.0`
+**Solution**: `sudo apt install libgstreamer-plugins-bad1.0-0`
 
 **Error**: `./servo: symbol lookup error: ./servo: undefined symbol: gst_webrtc_data_channel_state_get_type`
 
