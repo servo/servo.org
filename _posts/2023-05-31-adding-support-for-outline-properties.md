@@ -17,7 +17,7 @@ A few days ago, we landed support for ‘outline’ and ‘outline-offset’. Th
 
 The impact of this feature is most noticeable in the focus styles for links and input fields. For example, the User Agent stylesheet already applies ‘outline: thin dotted’ to ‘a:focus’, so clicking the first link in
 
-```
+```html
 Lorem ipsum <a href="#">dolor sit amet</a>,
 consectetur <a href="#">adipiscing elit</a>.
 ```
@@ -44,7 +44,7 @@ The spec allows outlines to be painted either [in-band](https://drafts.csswg.org
 
 For example, the magenta element below overlaps the blue border of the previous element, but not the out-of-band cyan outline:
 
-```
+```html
 <div style="
     outline: 5px solid cyan;
     border: 5px solid blue;
