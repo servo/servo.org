@@ -28,6 +28,7 @@ Servo's roadmap is defined in the project wiki: <https://github.com/servo/servo/
 
 ## Presentations
 
+* [Servo 2023](https://www.youtube.com/watch?v=pfk8s5OD99A) by Delan Azabani (Jun 2023)
 * [Servo in 2023](https://www.youtube.com/watch?v=IdHvHoAO5oo) by Martin Robinson (May 2023)
 * [Streaming video from WebXR content using Servo](https://www.youtube.com/watch?v=rAWeW6Q5Cuw) by Alan Jeffrey (May 2021)
 * [Servo](https://www.youtube.com/watch?v=epEQ-9VAY_4) by Alan Jeffrey (Mar 2021)
