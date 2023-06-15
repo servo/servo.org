@@ -11,5 +11,5 @@ Current members of the TSC can be found in the [servo/project repository on GitH
 
 The TSC can form subcommittees for detailed discussion of issues. Currently there are no active subcommittees.
 
-Servo is a [Linux Foundation Community Project](https://www.linuxfoundation.org/projects).
+Servo is a [Linux Foundation Europe Project](https://linuxfoundation.eu/en/projects).
 
