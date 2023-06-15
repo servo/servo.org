@@ -22,9 +22,9 @@ By donating to the [**LFX crowdfunding page for Servo**](https://crowdfunding.lf
 
 The purpose of the Servo Project Fund is to raise, budget, and spend funds in support of the Servo Project.
 
-The Fund is governed by the Directed Fund’s Governing Board at the Linux Foundation. The Board is composed of Members, together with representation from the Linux Foundation and the Technical Steering Committee.
+The Fund is governed by the Directed Fund’s Governing Board at the Linux Foundation Europe. The Board is composed of Members, together with representation from the Linux Foundation Europe and the Technical Steering Committee.
 
-There are currently no members of the Linux Foundation Directed Fund’s Governing Board.
+There are currently no members of the Linux Foundation Europe Directed Fund’s Governing Board.
 
 If your organization is interested in becoming a member, please contact us at <join@servo.org> or enroll at the [Linux Foundation member enrollment page](https://enrollment.lfx.linuxfoundation.org/?project=servo).
 
