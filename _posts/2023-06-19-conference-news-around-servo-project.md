@@ -7,7 +7,7 @@ summary:    A bit about the Servo project's presence in recent and upcoming even
 categories:
 ---
 
-In May 2023, Martin Robinson from the Servo project team had the chance to participate in [**RustNL 2023**](https://2023.rustnl.org/) conference in Amsterdam. There he gave a [lighting talk about Servo project](https://www.youtube.com/watch?v=IdHvHoAO5oo) and the current plans. In addition, he participated in some follow up discussions about Servo and how some UI frameworks in the Rust ecosystem are exploring the possibility to use it.
+In May of 2023, Martin Robinson from the Servo project team had the chance to participate in the [**RustNL 2023**](https://2023.rustnl.org/) conference in Amsterdam. There he gave a [lighting talk about the Servo project](https://www.youtube.com/watch?v=IdHvHoAO5oo) and its current plans. In addition, he participated in some follow up discussions exploring the possibility of using Servo in various Rust application frameworks.
 
 In the first week of June 2023, the Servo project team participated in the [**Web Engines Hackfest 2023**](https://webengineshackfest.org/2023/). Delan Azabani gave a [talk about the Servo project](https://www.youtube.com/watch?v=pfk8s5OD99A), diving into the details of the team's work in the first half of the year and its plans for the second half. The talk provided some valuable insights into running some Servo [demos](https://demo.servo.org/) as well as the status of floats and the evolution of the layout system. In addition, there were some engaging discussions around the future of the shared style crate in Gecko and Servo.
 
