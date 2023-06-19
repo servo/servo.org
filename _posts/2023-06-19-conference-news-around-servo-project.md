@@ -3,7 +3,7 @@ layout:     post
 tags:       blog
 title:      Conference news
 date:       2023-06-19
-summary:    After the project reactivation early this year, Servo project is getting some presence in different events.
+summary:    A bit about the Servo project's presence in recent and upcoming events
 categories:
 ---
 
