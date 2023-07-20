@@ -9,19 +9,25 @@ categories:
 
 With over 52000 tests and nearly two million subtests, the [Web Platform Tests](https://web-platform-tests.org) are one of the most important parts of the web’s interoperability and compatibility story. Servo has long used the WPT to catch regressions and [flakiness](/blog/2023/03/16/making-easier-to-contribute/), but the suite has also played a role in our [layout engine migration](/blog/2023/04/13/layout-2013-vs-2020/) and guiding our way towards CSS2 conformance.
 
-You can find Servo on
+<style>
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+</style>
 
-## [wpt.fyi](https://wpt.fyi),
+<div class="_runin"><p>You can find Servo on </p><h2><a href="https://wpt.fyi">wpt.fyi</a></h2><p>, a dashboard for all browsers integrated with the Web Platform Tests.</p></div>
 
-a dashboard for all browsers integrated with the Web Platform Tests, by clicking <span style="font-size: 87.5%;">EDIT</span>, <span style="font-size: 87.5%;">ADD PRODUCT</span>, choosing Servo, then clicking <span style="font-size: 87.5%;">SUBMIT</span>.
+To see pass rates for Servo, click <span style="font-size: 87.5%;">EDIT</span>, <span style="font-size: 87.5%;">ADD PRODUCT</span>, choose Servo, then click <span style="font-size: 87.5%;">SUBMIT</span>.
 
 While fyi is not so great for tracking progress over time (though definitely [possible](https://wpt.fyi/runs?label=master&product=servo)), it has been very helpful for drilling down from specs to sections, tests, and subtests. This has made it easier for us to decide what to work on next.
 
-But the key to this was our
+<div class="_runin"><p>But the key to this was our </p><h2><a href="https://wpt.servo.org">Servo WPT dashboard</a></h2><p>.</p></div>
 
-## [Servo WPT dashboard](https://wpt.servo.org),
-
-which you can find at [wpt.servo.org](https://wpt.servo.org), or a simplified version on [our about page](/about/).
+The full dashboard can be found at [wpt.servo.org](https://wpt.servo.org), and there’s a simplified version on [our about page](/about/).
 
 Built in April, the dashboard has since tracked Servo’s pass rate over time, not just over the suite as a whole but also over several *focus areas*:
 
