@@ -20,6 +20,10 @@ Servo is written in [**Rust**](https://www.rust-lang.org/), taking advantage of 
 
 Since its creation in 2012, Servo has contributed to W3C and WHATWG web standards, reporting specification issues and submitting new cross-browser automated tests, and core team members have co-edited new standards that have been adopted by other browsers. As a result, the Servo project helps drive the entire web platform forward, while building on a platform of reusable, modular technologies that implement web standards.
 
+## WPT progress
+
+<iframe src="https://wpt.servo.org/?embed" scrolling="no" style="width: 100%; height: 411px;"></iframe>
+
 ## Roadmap
 
 Servo's roadmap is defined in the project wiki: <https://github.com/servo/servo/wiki/Roadmap>
