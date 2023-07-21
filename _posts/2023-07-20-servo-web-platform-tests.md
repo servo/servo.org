@@ -68,10 +68,16 @@ Over the last three months, we’ve halved the gap with legacy or better in seve
 
 We’re two thirds of the way to legacy in floats (31.5pp → 10.8pp) and floats-clear (48.3pp → 3.3pp(!)):
 
-<img src="/img/blog/wpt-dashboard-floats.png" style="width: 50%;"><img src="/img/blog/wpt-dashboard-floats-clear.png" style="width: 50%;">
+<img src="{{ '/img/blog/wpt-dashboard-floats.png' | url }}"
+    alt="floats: 18 (legacy 50) on 1 april, 23 (legacy 52) on 15 june, 33 on 17 june, 37 (legacy 53) on 18 july, 42 on 19 july"
+    style="width: 50%;"><img src="{{ '/img/blog/wpt-dashboard-floats-clear.png' | url }}"
+    alt="floats-clear: 18 (legacy 66) on 1 april, 20 (legacy 67) on 15 june, 51 on 16 june, 57 on 22 june, 63 on 1 july, 64 on 20 july"
+    style="width: 50%;">
 
 And in the CSS2 positioning tests, we’ve surpassed legacy and built a healthy 5.5pp lead:
 
-<img src="/img/blog/wpt-dashboard-positioning.png" style="width: 50%;">
+<img src="{{ '/img/blog/wpt-dashboard-positioning.png' | url }}"
+    alt="positioning: 77.7 (legacy 80.9) on 1 april, 81.7 (legacy 81.1) on 13 april, 85.7 on 1 july, 86.6 on 20 july"
+    style="width: 50%;">
 
 Over time, as our pass rates improve, we’ll continue [adding new focus areas](https://github.com/servo/internal-wpt-dashboard/blob/461c573885c17f42687fb26131fe8ccd4213b826/process-wpt-results.js), and with the web platform continuously evolving, we probably won’t run out of areas any time soon.
