@@ -27,7 +27,7 @@ While fyi is not so great for tracking progress over time (though definitely [po
 
 <div class="_runin"><p>But the key to this was our </p><h2><a href="https://wpt.servo.org">Servo WPT dashboard</a></h2><p>.</p></div>
 
-The full dashboard can be found at [wpt.servo.org](https://wpt.servo.org), and there’s a simplified version on [our about page](/about/).
+The full dashboard can be found at [wpt.servo.org](https://wpt.servo.org), and there’s a simplified version [on our about page](/about/#wpt-pass-rates).
 
 Built in April, the dashboard has since tracked Servo’s pass rate over time, not just over the suite as a whole but also over several *focus areas*:
 
