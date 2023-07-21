@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Blog - Servo, the parallel browser engine</title>
-  <meta property="og:title" content="Blog - Servo, the parallel browser engine">
+  <title>Servo and the Web Platform Tests - Servo, the parallel browser engine</title>
+  <meta property="og:title" content="Servo and the Web Platform Tests - Servo, the parallel browser engine">
   
 
   <meta name="description" content="Servo is an independent, modular, embeddable web rendering engine written in Rust">
@@ -18,7 +18,7 @@
   <meta property="og:image:alt" content="Servo logo">
   <meta property="og:logo" content="/img/servo-symbol-color-no-container.png">
   <meta property="og:description" content="Servo is an independent, modular, embeddable web rendering engine written in Rust">
-  <meta property="og:url" content="/blog/6/">
+  <meta property="og:url" content="/blog/2023/07/20/servo-web-platform-tests/">
 
   <link rel="stylesheet" href="/css/style.css">
   <link rel="shortcut icon" href="/img/servo-symbol-color-no-container.png">
@@ -32,7 +32,7 @@
   <div class="container">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-        <img src="/img/servo-color-negative-no-container.png" alt="Blog">
+        <img src="/img/servo-color-negative-no-container.png" alt="Servo and the Web Platform Tests">
       </a>
 
       <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
@@ -166,7 +166,7 @@
         <div class="container">
           <aside class="menu box">
             <p class="menu-label">
-              Blog
+              Servo and the Web Platform Tests
             </p>
             
               
@@ -186,55 +186,76 @@
             
           </aside>
           <div class="content">
-            <div style="float: right;">
-  <a href="/blog/feed.xml"><span class="icon"><i class="fas fa-rss"></i></span> Feed</a>
-</div>
-<h1 id="blog" tabindex="-1">Blog <a class="header-anchor" href="#blog">
-        <span class="icon hashlink"><i class="fas fa-link"></i></span>
-      </a></h1>
+            
+<h1 class="title">Servo and the Web Platform Tests</h1>
+<p class="subtitle"><span class="tag is-dark">2023-07-20</span> How we use the Web Platform Tests to guide Servo’s development.</p>
+
 <div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2017/02/27/twis-93/">These Weeks In Servo 93</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2017-02-27</span> What's up with Servo for the weeks of 13 Feb 2017 - 27 Feb 2017</p>
+  <p>With over 52000 tests and nearly two million subtests, the <a href="https://web-platform-tests.org">Web Platform Tests</a> are one of the most important parts of the web’s interoperability and compatibility story. Servo has long used the WPT to catch regressions and <a href="/blog/2023/03/16/making-easier-to-contribute/">flakiness</a>, but the suite has also played a role in our <a href="/blog/2023/04/13/layout-2013-vs-2020/">layout engine migration</a> and guiding our way towards CSS2 conformance.</p>
+<style>
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+</style>
+<div class="_runin"><p>You can find Servo on </p><h2><a href="https://wpt.fyi">wpt.fyi</a></h2><p>, a dashboard for all browsers integrated with the Web Platform Tests.</p></div>
+<p>To see the pass rates for Servo, follow <a href="https://wpt.fyi/results/?label=master&amp;label=experimental&amp;product=servo">this direct link</a>, or click <span style="font-size: 87.5%;">EDIT</span>, <span style="font-size: 87.5%;">ADD PRODUCT</span>, choose Servo, then click <span style="font-size: 87.5%;">SUBMIT</span>.</p>
+<p>While fyi is not so great for tracking progress over time (though definitely <a href="https://wpt.fyi/runs?label=master&amp;product=servo">possible</a>), it has been very helpful for drilling down from specs to sections, tests, and subtests. This has made it easier for us to decide what to work on next.</p>
+<div class="_runin"><p>But the key to this was our </p><h2><a href="https://wpt.servo.org">Servo WPT dashboard</a></h2><p>.</p></div>
+<p>The full dashboard can be found at <a href="https://wpt.servo.org">wpt.servo.org</a>, and there’s a simplified version <a href="/about/#wpt-pass-rates">on our about page</a>.</p>
+<p>Built in April, the dashboard has since tracked Servo’s pass rate over time, not just over the suite as a whole but also over several <em>focus areas</em>:</p>
+<table style="width: auto;">
+<tr>
+<td>
+<ul>
+<li>CSS overall
+    <ul>
+    <li>our CSS2 focus areas →
+    <li>CSS position module
+    <li>CSS flexbox module
+    <li>CSSOM
+    </ul>
+</ul>
+<td>
+<ul>
+<li>abspos
+<li>box-display
+<li>floats
+<li>floats-clear
+<li>linebox
+<li>margin-padding-clear
+<li>normal-flow
+<li>positioning
+</ul>
+</table>
+<p>The dashboard has data for both our <a href="/blog/2023/04/13/layout-2013-vs-2020/">legacy and new layout engines</a>, which made it easy to see where the new engine most needed catching up.</p>
+<p>Over the last three months, we’ve halved the gap with legacy or better in several of those areas:</p>
+<ul>
+<li>CSS overall (7.7pp → 3.7pp)</li>
+<li>our CSS2 focus areas (19.0pp → 8.2pp)</li>
+<li>margin-padding-clear (33.0pp → 10.3pp)</li>
+<li>CSS flexbox module (10.5pp → 3.1pp)</li>
+<li>CSS position module (2.5pp → 0.2pp(!))</li>
+</ul>
+<p>We’re two thirds of the way to legacy in floats (31.5pp → 10.8pp) and floats-clear (48.3pp → 3.3pp(!)):</p>
+<p><img src="/img/blog/wpt-dashboard-floats.png"
+    alt="floats: 18 (legacy 50) on 1 april, 23 (legacy 52) on 15 june, 33 on 17 june, 37 (legacy 53) on 18 july, 42 on 19 july"
+    style="width: 50%;"><img src="/img/blog/wpt-dashboard-floats-clear.png"
+    alt="floats-clear: 18 (legacy 66) on 1 april, 20 (legacy 67) on 15 june, 51 on 16 june, 57 on 22 june, 63 on 1 july, 64 on 20 july"
+    style="width: 50%;"></p>
+<p>And in the CSS2 positioning tests, we’ve surpassed legacy and built a healthy 5.5pp lead:</p>
+<p><img src="/img/blog/wpt-dashboard-positioning.png"
+    alt="positioning: 77.7 (legacy 80.9) on 1 april, 81.7 (legacy 81.1) on 13 april, 85.7 on 1 july, 86.6 on 20 july"
+    style="width: 50%;"></p>
+<p>Over time, as our pass rates improve or people start working on new things, we’ll continue <a href="https://github.com/servo/internal-wpt-dashboard/blob/461c573885c17f42687fb26131fe8ccd4213b826/process-wpt-results.js">adding new focus areas</a>, and with the web platform continuously evolving, we probably won’t run out of areas any time soon.</p>
+
 </div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2017/02/13/twis-92/">This Week In Servo 92</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2017-02-13</span> What's up with Servo for the week of 6 Feb 2017 - 13 Feb 2017</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2017/02/06/twis-91/">This Week In Servo 91</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2017-02-06</span> What's up with Servo for the week of 30 Jan 2017 - 6 Feb 2017</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2017/01/30/twis-90/">This Week In Servo 90</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2017-01-30</span> What's up with Servo for the week of 23 Jan 2017 - 30 Jan 2017</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2017/01/23/twis-89/">This Week In Servo 89</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2017-01-23</span> What's up with Servo for the week of 16 Jan 2017 - 23 Jan 2017</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2017/01/16/twis-88/">This Week In Servo 88</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2017-01-16</span> What's up with Servo for the weeks of 9 Jan 2017 - 16 Jan 2017</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2017/01/09/twis-87/">These Weeks In Servo 87</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2017-01-09</span> What's up with Servo for the weeks of 2 Jan 2017 - 9 Jan 2017</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2017/01/02/twis-86/">These Weeks In Servo 86</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2017-01-02</span> What's up with Servo for the weeks of 19 Dec 2016 - 2 Jan 2017</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2016/12/19/twis-85/">These Weeks In Servo 85</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2016-12-19</span> What's up with Servo for the weeks of 28 Nov 2016 - 19 Dec 2016</p>
-</div>
-<div class="has-top-margin">
-  <h2 class="title"><a href="/blog/2016/11/28/twis-84/">These Weeks In Servo 84</a></h2>
-  <p class="subtitle"><span class="tag is-dark">2016-11-28</span> What's up with Servo for the weeks of 14 Nov 2016 - 28 Nov 2016</p>
-</div>
+
 <div class="has-top-margin buttons has-addons">
-<a class="button" href="/blog/5/">Previous</a>
-<a class="button" href="/blog/7/">Next</a>
+  <a class="button" href="/blog/">Back</a>
 </div>
 
           </div>

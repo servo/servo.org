@@ -4,12 +4,73 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2023-06-19T00:00:00Z</updated>
+  <updated>2023-07-20T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>Servo and the Web Platform Tests</title>
+    <link href="https://servo.org/blog/2023/07/20/servo-web-platform-tests/"/>
+    <updated>2023-07-20T00:00:00Z</updated>
+    <id>https://servo.org/blog/2023/07/20/servo-web-platform-tests/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;With over 52000 tests and nearly two million subtests, the &lt;a href=&quot;https://web-platform-tests.org/&quot;&gt;Web Platform Tests&lt;/a&gt; are one of the most important parts of the web’s interoperability and compatibility story. Servo has long used the WPT to catch regressions and &lt;a href=&quot;https://servo.org/blog/2023/03/16/making-easier-to-contribute/&quot;&gt;flakiness&lt;/a&gt;, but the suite has also played a role in our &lt;a href=&quot;https://servo.org/blog/2023/04/13/layout-2013-vs-2020/&quot;&gt;layout engine migration&lt;/a&gt; and guiding our way towards CSS2 conformance.&lt;/p&gt;
+&lt;style&gt;
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin &gt; p,
+    ._runin &gt; h2 {
+        display: inline;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;_runin&quot;&gt;&lt;p&gt;You can find Servo on &lt;/p&gt;&lt;h2&gt;&lt;a href=&quot;https://wpt.fyi/&quot;&gt;wpt.fyi&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;, a dashboard for all browsers integrated with the Web Platform Tests.&lt;/p&gt;&lt;/div&gt;
+&lt;p&gt;To see the pass rates for Servo, follow &lt;a href=&quot;https://wpt.fyi/results/?label=master&amp;amp;label=experimental&amp;amp;product=servo&quot;&gt;this direct link&lt;/a&gt;, or click &lt;span style=&quot;font-size: 87.5%;&quot;&gt;EDIT&lt;/span&gt;, &lt;span style=&quot;font-size: 87.5%;&quot;&gt;ADD PRODUCT&lt;/span&gt;, choose Servo, then click &lt;span style=&quot;font-size: 87.5%;&quot;&gt;SUBMIT&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;While fyi is not so great for tracking progress over time (though definitely &lt;a href=&quot;https://wpt.fyi/runs?label=master&amp;amp;product=servo&quot;&gt;possible&lt;/a&gt;), it has been very helpful for drilling down from specs to sections, tests, and subtests. This has made it easier for us to decide what to work on next.&lt;/p&gt;
+&lt;div class=&quot;_runin&quot;&gt;&lt;p&gt;But the key to this was our &lt;/p&gt;&lt;h2&gt;&lt;a href=&quot;https://wpt.servo.org/&quot;&gt;Servo WPT dashboard&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;p&gt;The full dashboard can be found at &lt;a href=&quot;https://wpt.servo.org/&quot;&gt;wpt.servo.org&lt;/a&gt;, and there’s a simplified version &lt;a href=&quot;https://servo.org/about/#wpt-pass-rates&quot;&gt;on our about page&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Built in April, the dashboard has since tracked Servo’s pass rate over time, not just over the suite as a whole but also over several &lt;em&gt;focus areas&lt;/em&gt;:&lt;/p&gt;
+&lt;table style=&quot;width: auto;&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;ul&gt;
+&lt;li&gt;CSS overall
+    &lt;ul&gt;
+    &lt;li&gt;our CSS2 focus areas →
+    &lt;/li&gt;&lt;li&gt;CSS position module
+    &lt;/li&gt;&lt;li&gt;CSS flexbox module
+    &lt;/li&gt;&lt;li&gt;CSSOM
+    &lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/td&gt;&lt;td&gt;
+&lt;ul&gt;
+&lt;li&gt;abspos
+&lt;/li&gt;&lt;li&gt;box-display
+&lt;/li&gt;&lt;li&gt;floats
+&lt;/li&gt;&lt;li&gt;floats-clear
+&lt;/li&gt;&lt;li&gt;linebox
+&lt;/li&gt;&lt;li&gt;margin-padding-clear
+&lt;/li&gt;&lt;li&gt;normal-flow
+&lt;/li&gt;&lt;li&gt;positioning
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;p&gt;The dashboard has data for both our &lt;a href=&quot;https://servo.org/blog/2023/04/13/layout-2013-vs-2020/&quot;&gt;legacy and new layout engines&lt;/a&gt;, which made it easy to see where the new engine most needed catching up.&lt;/p&gt;
+&lt;p&gt;Over the last three months, we’ve halved the gap with legacy or better in several of those areas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CSS overall (7.7pp → 3.7pp)&lt;/li&gt;
+&lt;li&gt;our CSS2 focus areas (19.0pp → 8.2pp)&lt;/li&gt;
+&lt;li&gt;margin-padding-clear (33.0pp → 10.3pp)&lt;/li&gt;
+&lt;li&gt;CSS flexbox module (10.5pp → 3.1pp)&lt;/li&gt;
+&lt;li&gt;CSS position module (2.5pp → 0.2pp(!))&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We’re two thirds of the way to legacy in floats (31.5pp → 10.8pp) and floats-clear (48.3pp → 3.3pp(!)):&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/wpt-dashboard-floats.png&quot; alt=&quot;floats: 18 (legacy 50) on 1 april, 23 (legacy 52) on 15 june, 33 on 17 june, 37 (legacy 53) on 18 july, 42 on 19 july&quot; style=&quot;width: 50%;&quot; /&gt;&lt;img src=&quot;https://servo.org/img/blog/wpt-dashboard-floats-clear.png&quot; alt=&quot;floats-clear: 18 (legacy 66) on 1 april, 20 (legacy 67) on 15 june, 51 on 16 june, 57 on 22 june, 63 on 1 july, 64 on 20 july&quot; style=&quot;width: 50%;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;And in the CSS2 positioning tests, we’ve surpassed legacy and built a healthy 5.5pp lead:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/wpt-dashboard-positioning.png&quot; alt=&quot;positioning: 77.7 (legacy 80.9) on 1 april, 81.7 (legacy 81.1) on 13 april, 85.7 on 1 july, 86.6 on 20 july&quot; style=&quot;width: 50%;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Over time, as our pass rates improve or people start working on new things, we’ll continue &lt;a href=&quot;https://github.com/servo/internal-wpt-dashboard/blob/461c573885c17f42687fb26131fe8ccd4213b826/process-wpt-results.js&quot;&gt;adding new focus areas&lt;/a&gt;, and with the web platform continuously evolving, we probably won’t run out of areas any time soon.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Conference news</title>
     <link href="https://servo.org/blog/2023/06/19/conference-news/"/>
@@ -379,57 +440,6 @@ developer tools experience, along with support for Unity WebXR content and self-
 &lt;li&gt;&lt;a href=&quot;https://github.com/nosark&quot;&gt;Kyle Nosar&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/Monty0045&quot;&gt;Wyatt Turner&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/mustafapc19&quot;&gt;mustafapc19&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>This Week In Servo 134</title>
-    <link href="https://servo.org/blog/2020/07/27/twis-134/"/>
-    <updated>2020-07-27T00:30:00Z</updated>
-    <id>https://servo.org/blog/2020/07/27/twis-134/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;In the &lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2020-07-20..2020-07-27+user%3Aservo+&quot;&gt;past week&lt;/a&gt;,
-we merged 69 PRs in the Servo organization’s repositories.&lt;/p&gt;
-&lt;p&gt;The latest nightly builds for common platforms are available at &lt;a href=&quot;https://download.servo.org/&quot;&gt;download.servo.org&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Servo has been successfully &lt;a href=&quot;https://blog.mozvr.com/a-browser-plugin-for-unity/&quot;&gt;integrated&lt;/a&gt; into 3d Unity scenes as a 2d browser plugin.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=NoEzDAYlflE&quot;&gt;&lt;img src=&quot;https://img.youtube.com/vi/NoEzDAYlflE/0.jpg&quot; alt=&quot;Servo in the Unity editor&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Our macOS nightly builds last week panicked on launch due to missing shared libraries. That issue has been fixed.&lt;/p&gt;
-&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/27/twis-134/#planning-and-status&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2020.&lt;/p&gt;
-&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/27/twis-134/#exciting-works-in-progress&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;philip-lamb is &lt;a href=&quot;https://github.com/MozillaReality/servo-unity/&quot;&gt;creating&lt;/a&gt; a Unity embedding for Servo.&lt;/li&gt;
-&lt;li&gt;pcwalton is &lt;a href=&quot;https://github.com/servo/servo/pull/27216&quot;&gt;implementing&lt;/a&gt; support for CSS floats in the new Layout 2020 engine.&lt;/li&gt;
-&lt;li&gt;kunalmohan is &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;implementing&lt;/a&gt; the draft WebGPU specification.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/27/twis-134/#notable-additions&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;AhibshekSharma102 and gterzian &lt;a href=&quot;https://github.com/servo/servo/pull/26710&quot;&gt;made&lt;/a&gt; large external JS scripts compile on a background thread.&lt;/li&gt;
-&lt;li&gt;pcwalton &lt;a href=&quot;https://github.com/servo/servo/pull/27216&quot;&gt;implemented&lt;/a&gt; core float layout algorithms in the Layout 2020 engine.&lt;/li&gt;
-&lt;li&gt;avr1254 &lt;a href=&quot;https://github.com/servo/servo/pull/272990&quot;&gt;standardized&lt;/a&gt; some navigation-related algorithms for forms and anchors.&lt;/li&gt;
-&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27304&quot;&gt;made&lt;/a&gt; the UWP devtools server use a fixed port instead of a random one.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27313&quot;&gt;updated&lt;/a&gt; the XRWebGLLayer interface to match the WebXR specification.&lt;/li&gt;
-&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27316&quot;&gt;fixed&lt;/a&gt; a WebXR rendering regression on the HoloLens 2 that affected Babylon.js and Unity WebXR content.&lt;/li&gt;
-&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27325&quot;&gt;made&lt;/a&gt; it possible for WebXR URLs opened via the &lt;code&gt;fxrmin://&lt;/code&gt; protocol to launch immersive mode immediately on document load.&lt;/li&gt;
-&lt;li&gt;utsavoza &lt;a href=&quot;https://github.com/servo/mozjs/pull/256&quot;&gt;allowed&lt;/a&gt; SpiderMonkey to build with the most recent macOS SDK.&lt;/li&gt;
-&lt;li&gt;SimonSapin &lt;a href=&quot;https://github.com/servo/servo/pull/27385&quot;&gt;added&lt;/a&gt; support for &lt;code&gt;display: list-item&lt;/code&gt; in the Layout 2020 engine.&lt;/li&gt;
-&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27389&quot;&gt;implemented&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/27329&quot;&gt;multiple&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/pull/27348&quot;&gt;missing features&lt;/a&gt; of the WebGPU specification.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27368&quot;&gt;fixed&lt;/a&gt; a regression reported in the UWP certification process for allowed APIs.&lt;/li&gt;
-&lt;li&gt;Manishearth &lt;a href=&quot;https://github.com/servo/servo/pull/27339&quot;&gt;implemented&lt;/a&gt; part of aligning flexboxes in Layout 2020.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/webxr/pull/186&quot;&gt;fixed&lt;/a&gt; a regression in exiting immersive mode.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/07/27/twis-134/#new-contributors&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/AbhishekSharma102&quot;&gt;AbhishekSharma102&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
 </content>
