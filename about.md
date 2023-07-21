@@ -22,7 +22,7 @@ Since its creation in 2012, Servo has contributed to W3C and WHATWG web standard
 
 ## WPT pass rates
 
-The chart below tracks our pass rates in several *focus areas* of the [Web Platform Tests](http://web-platform-tests.org/), as well as the whole CSS and WPT test suites. To drill down the pass rates under a focus area, see the [Servo runs on wpt.fyi](https://wpt.fyi/runs?label=master&product=servo), or for more details and [legacy layout](/blog/2023/04/13/layout-2013-vs-2020/) scores, see our full WPT dashboard at [wpt.servo.org](https://wpt.servo.org).
+The chart below tracks our pass rates in several *focus areas* of the [Web Platform Tests](http://web-platform-tests.org/), as well as the whole CSS and WPT test suites. To drill down the pass rates under a focus area, see the [Servo results on wpt.fyi](https://wpt.fyi/runs?label=master&product=servo), or for more details and [legacy layout](/blog/2023/04/13/layout-2013-vs-2020/) scores, see our full WPT dashboard at [wpt.servo.org](https://wpt.servo.org).
 
 <iframe src="https://wpt.servo.org/?embed" scrolling="no" style="width: 100%; height: 411px;"></iframe>
 
