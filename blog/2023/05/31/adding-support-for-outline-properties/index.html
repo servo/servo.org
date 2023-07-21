@@ -199,9 +199,8 @@
 <li>The ‘outline-style’ value ‘auto’ currently works like ‘solid’ — this is allowed by the spec, but we may be able to do something better here, like rounding the corners of the outline or matching the platform style</li>
 </ul>
 <p>The impact of this feature is most noticeable in the focus styles for links and input fields. For example, the User Agent stylesheet already applies ‘outline: thin dotted’ to ‘a:focus’, so clicking the first link in</p>
-<pre><code>Lorem ipsum &lt;a href=&quot;#&quot;&gt;dolor sit amet&lt;/a&gt;,
-consectetur &lt;a href=&quot;#&quot;&gt;adipiscing elit&lt;/a&gt;.
-</code></pre>
+<pre class="language-html"><code class="language-html">Lorem ipsum <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>dolor sit amet<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>,
+consectetur <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>adipiscing elit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>.</code></pre>
 <p>now yields</p>
 <p><img src="/img/blog/servo-outline.png" alt="Text with two links where the first one is focused so it has a thin outline around it"></p>
 <h2 id="implementation" tabindex="-1">Implementation <a class="header-anchor" href="#implementation">
@@ -221,17 +220,16 @@ consectetur &lt;a href=&quot;#&quot;&gt;adipiscing elit&lt;/a&gt;.
       </a></h2>
 <p>The spec allows outlines to be painted either <a href="https://drafts.csswg.org/css-position-4/#in-band-outline">in-band</a>, such that other elements can obscure them, or <a href="https://drafts.csswg.org/css-position-4/#out-of-band-outline">out-of-band</a>, on top of all other content in the stacking context. We chose the latter, because it’s the recommended approach for accessibility and matches other browsers.</p>
 <p>For example, the magenta element below overlaps the blue border of the previous element, but not the out-of-band cyan outline:</p>
-<pre><code>&lt;div style=&quot;
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>
     outline: 5px solid cyan;
     border: 5px solid blue;
-&quot;&gt;Lorem ipsum&lt;/div&gt;
-&lt;div style=&quot;
+<span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>Lorem ipsum<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>
     background: magenta;
     margin-top: -15px;
     width: 50px;
     height: 50px;
-&quot;&gt;&lt;/div&gt;
-</code></pre>
+<span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
 <p><img src="/img/blog/servo-outline-painting.png" alt="Painting order is blue border, then magenta background, then “Lorem ipsum” and cyan outline"></p>
 <p>‘outline’ already has good test coverage, though during our implementation we added <a href="https://github.com/servo/servo/pull/29686">one new test</a> to check that ‘background-clip’ works as expected with ‘border-radius’, which affects both borders and outlines in Servo.</p>
 <p>We’ve also filed two spec issues:</p>

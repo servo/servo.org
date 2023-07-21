@@ -237,7 +237,11 @@ A good thing, though, is that this works on all platforms and is a great fallbac
       </a></h2>
 <p>To achieve maximum efficiency, WebGPU supports an asynchronous error model. The implementation keeps a stack of <code>ErrorScope</code>s that are responsible for capturing the errors that occur during operations performed in their scope. The user is responsible for pushing and popping an <code>ErrorScope</code> in the stack. Popping an <code>ErrorScope</code> returns a promise that is resolved to null if all the operations were successfull, otherwise it resolves to the first error that occurred.</p>
 <p>When an operation is issued, <code>scope_id</code> of the <code>ErrorScope</code> on the top of the stack is sent to the server with it and operation-count of the scope is incremented. The result of the operation can be described by the enum-</p>
-<pre class="language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">enum</span> <span class="token type-definition class-name">WebGPUOpResult</span> <span class="token punctuation">{</span><br>    <span class="token class-name">ValidationError</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>    <span class="token class-name">OutOfMemoryError</span><span class="token punctuation">,</span><br>    <span class="token class-name">Success</span><span class="token punctuation">,</span><br><span class="token punctuation">}</span></code></pre>
+<pre class="language-rust"><code class="language-rust"><span class="token keyword">pub</span> <span class="token keyword">enum</span> <span class="token type-definition class-name">WebGPUOpResult</span> <span class="token punctuation">{</span>
+    <span class="token class-name">ValidationError</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token class-name">OutOfMemoryError</span><span class="token punctuation">,</span>
+    <span class="token class-name">Success</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span></code></pre>
 <p>On receiving the result, we decrement the operation-count of the <code>ErrorScope</code> with the given <code>scope_id</code>. We further have 3 cases:</p>
 <ul>
 <li>The result is <code>Success</code>. Do nothing.</li>
