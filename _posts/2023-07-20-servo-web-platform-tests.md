@@ -80,4 +80,4 @@ And in the CSS2 positioning tests, we’ve surpassed legacy and built a healthy 
     alt="positioning: 77.7 (legacy 80.9) on 1 april, 81.7 (legacy 81.1) on 13 april, 85.7 on 1 july, 86.6 on 20 july"
     style="width: 50%;">
 
-Over time, as our pass rates improve, we’ll continue [adding new focus areas](https://github.com/servo/internal-wpt-dashboard/blob/461c573885c17f42687fb26131fe8ccd4213b826/process-wpt-results.js), and with the web platform continuously evolving, we probably won’t run out of areas any time soon.
+Over time, as our pass rates improve or people start working on new things, we’ll continue [adding new focus areas](https://github.com/servo/internal-wpt-dashboard/blob/461c573885c17f42687fb26131fe8ccd4213b826/process-wpt-results.js), and with the web platform continuously evolving, we probably won’t run out of areas any time soon.
