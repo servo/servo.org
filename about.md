@@ -20,17 +20,17 @@ Servo is written in [**Rust**](https://www.rust-lang.org/), taking advantage of 
 
 Since its creation in 2012, Servo has contributed to W3C and WHATWG web standards, reporting specification issues and submitting new cross-browser automated tests, and core team members have co-edited new standards that have been adopted by other browsers. As a result, the Servo project helps drive the entire web platform forward, while building on a platform of reusable, modular technologies that implement web standards.
 
-## WPT pass rates
-
-The chart below tracks our pass rates in several *focus areas* of the [Web Platform Tests](http://web-platform-tests.org/), as well as the whole CSS and WPT test suites. To drill down the pass rates under a focus area, see the [Servo results on wpt.fyi](https://wpt.fyi/runs?label=master&product=servo), or for more details and [legacy layout](/blog/2023/04/13/layout-2013-vs-2020/) scores, see our full WPT dashboard at [wpt.servo.org](https://wpt.servo.org).
-
-<iframe src="https://wpt.servo.org/?embed" scrolling="no" style="width: 100%; height: 411px;"></iframe>
-
 ## Roadmap
 
 Servo's roadmap is defined in the project wiki: <https://github.com/servo/servo/wiki/Roadmap>
 
 ![Servo 2023 Roadmap. Project reactivation Q1-Q4. Project outreach Q1-Q4. Main dependencies upgrade Q1-Q3. Layout engine selection Q1-Q2. Progress towards basic CSS2 support Q3-Q4. Explore Android support Q3-Q4. Embeddable web engine experiments Q4.]({{ '/img/blog/servo-2023-roadmap.png' | url}})
+
+## WPT pass rates
+
+The chart below tracks our pass rates in several *focus areas* of the [Web Platform Tests](http://web-platform-tests.org/), as well as the whole CSS and WPT test suites. To drill down the pass rates under a focus area, see the [Servo results on wpt.fyi](https://wpt.fyi/runs?label=master&product=servo), or for more details and [legacy layout](/blog/2023/04/13/layout-2013-vs-2020/) scores, see our full WPT dashboard at [wpt.servo.org](https://wpt.servo.org).
+
+<iframe src="https://wpt.servo.org/?embed" scrolling="no" style="width: 100%; height: 411px;"></iframe>
 
 ## Presentations
 
