@@ -21,7 +21,7 @@ With over 52000 tests and nearly two million subtests, the [Web Platform Tests](
 
 <div class="_runin"><p>You can find Servo on </p><h2><a href="https://wpt.fyi">wpt.fyi</a></h2><p>, a dashboard for all browsers integrated with the Web Platform Tests.</p></div>
 
-To see pass rates for Servo, click <span style="font-size: 87.5%;">EDIT</span>, <span style="font-size: 87.5%;">ADD PRODUCT</span>, choose Servo, then click <span style="font-size: 87.5%;">SUBMIT</span>.
+To see the pass rates for Servo, follow [this direct link](https://wpt.fyi/results/?label=master&label=experimental&product=servo), or click <span style="font-size: 87.5%;">EDIT</span>, <span style="font-size: 87.5%;">ADD PRODUCT</span>, choose Servo, then click <span style="font-size: 87.5%;">SUBMIT</span>.
 
 While fyi is not so great for tracking progress over time (though definitely [possible](https://wpt.fyi/runs?label=master&product=servo)), it has been very helpful for drilling down from specs to sections, tests, and subtests. This has made it easier for us to decide what to work on next.
 
