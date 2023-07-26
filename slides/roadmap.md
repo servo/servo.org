@@ -23,7 +23,7 @@ title: Servo Roadmap
   <div style="padding: 0.2em; grid-column: 1 / 3; grid-row: 4; background: #42be65; text-align: center; border-radius: 0.3em; margin: 0.1em;">Main dependencies upgrade</div>
   <div style="padding: 0.2em; grid-column: 1 / 3; grid-row: 5; background: #1192e8; text-align: center; border-radius: 0.3em; margin: 0.1em;">Progress towards basic CSS2 support</div>
   <div style="padding: 0.2em; grid-column: 3 / 5; grid-row: 5; background: #009d9a; text-align: center; border-radius: 0.3em; margin: 0.1em;">Improve CSS support</div>
-  <div style="padding: 0.2em; grid-column: 2 / 3; grid-row: 6; background: #42be65; text-align: center; border-radius: 0.3em; margin: 0.1em;">Identify main areas of work to focus layout efforst in 2024</div>
+  <div style="padding: 0.2em; grid-column: 2 / 3; grid-row: 6; background: #42be65; text-align: center; border-radius: 0.3em; margin: 0.1em;">Identify main areas of work to focus layout efforts in 2024</div>
   <div style="padding: 0.2em; grid-column: 1 / 3; grid-row: 7; background: #1192e8; text-align: center; border-radius: 0.3em; margin: 0.1em;">Explore Android support</div>
   <div style="padding: 0.2em; grid-column: 3 / 5; grid-row: 7; background: #009d9a; text-align: center; border-radius: 0.3em; margin: 0.1em;">Complete Android support</div>
   <div style="padding: 0.2em; grid-column: 1 / 3; grid-row: 8; background: #42be65; text-align: center; border-radius: 0.3em; margin: 0.1em;">Embeddable web engine experiments</div>
