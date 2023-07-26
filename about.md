@@ -24,7 +24,7 @@ Since its creation in 2012, Servo has contributed to W3C and WHATWG web standard
 
 Servo's roadmap is defined in the project wiki: <https://github.com/servo/servo/wiki/Roadmap>
 
-![Servo 2023 Roadmap. Project reactivation Q1-Q4. Project outreach Q1-Q4. Main dependencies upgrade Q1-Q3. Layout engine selection Q1-Q2. Progress towards basic CSS2 support Q3-Q4. Explore Android support Q3-Q4. Embeddable web engine experiments Q4.]({{ '/img/blog/servo-2023-roadmap.png' | url}})
+![Servo H2’23-H1’24 Roadmap. Project reactivation (community & governance) [Q3'23-Q4'23]. Project outreach (collaborators, partners, sponsors, etc.) [Q3'23-Q2'24]. Main dependencies upgrade (WebRender, Stylo, etc.) [Q3'23-Q4'23]. Progress towards basic CSS2 support [Q3'23-Q4'23]. Explore Android support [Q3'23-Q4'23]. Embeddable web engine experiments (e.g. Tauri) [Q3'23-Q4'23]. Demos [Q3'23-Q4'23]. Identify main areas of work to focus layout efforst in 2024 [Q4'23]. Project maintenance and outreach [Q1'24-Q2'24]. Improve CSS support [Q1'24-Q2'24]. Complete Android support [Q1'24-Q2'24].]({{ '/img/servo-h2-23-h1-24-roadmap.png' | url}})
 
 ## WPT pass rates
 
