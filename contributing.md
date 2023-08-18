@@ -11,6 +11,13 @@ If you want to start contributing to Servo, check out [`CONTRIBUTING.md`](https:
 
 You can search for and/or report any issues you run into on the [GitHub issue tracker](https://github.com/servo/servo/issues).
 
+## Questions? Contact us!
+
+* Ask questions in [Servo Zulip chat](https://servo.zulipchat.com/)
+* Start a discussion on [GitHub](https://github.com/servo/servo/discussions)
+* Tag us on [Mastodon](https://floss.social/@servo) and [Twitter](https://twitter.com/ServoDev)
+* Contact us via email at <info@servo.org>
+
 ## Collaborators
 
 After demonstrated competence at both writing and reviewing code for a component of Servo, we will consider granting merge and (formal) review privileges to new members. If you're interested, please ask a member of the TSC, and they will verify with an appropriate super-reviewer before granting these privileges.
