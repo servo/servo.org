@@ -9,6 +9,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy({"assets/img": "img"});
   eleventyConfig.addPassthroughCopy({"assets/svg": "svg"});
+  eleventyConfig.addPassthroughCopy({"assets/videos": "videos"});
   eleventyConfig.addPassthroughCopy({"node_modules/reveal.js/dist": "reveal.js/dist"});
   eleventyConfig.addPassthroughCopy({"node_modules/reveal.js/plugin": "reveal.js/plugin"});
   eleventyConfig.addPassthroughCopy({"slides": "slides"});
