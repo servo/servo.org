@@ -1,27 +1,48 @@
 ---
-layout: slides.html
+layout: slides-new.html
 title: Servo
 ---
 
 <!-- .slide: class="cover" -->
 
-# Servo
-## The Parallel Browser Engine
+<img src="/img/servo-color-negative-no-container.svg" style="width: 50%; margin-bottom: 1em;" alt="Servo logo" />
 
-<div style="display: grid; grid-template-columns: auto auto; grid-gap: 1em; place-items: center;">
+<h4>
+  The
+  <span style="color: #4fc066;">embeddable</span>,
+  <span style="color: #209e9b;">independent</span>,
+  <span style="color: #f03278;">memory-safe</span>,
+  <span style="color: #f68243;">modular</span>,
+  <span style="color: #faae30;">parallel</span>
+  Web Rendering Engine
+  <br>
+</h4>
 
-<div style="font-size: 0.5em;">
+<div style="font-size: 0.5em; float: left; padding-top: 1em; text-align: left; width: 50%;">
+
+<div style="width: 50px; height: 10px; background: #712b97; margin-bottom: 20px;"></div>
+
+Servo is a **web rendering engine** written in Rust, WebGL and WebGPU capable, and adaptable to desktop, mobile, and embedded applications.
+
+</div>
+
+<div style="font-size: 0.5em; float: left; padding-top: 1em; text-align: left; width: 30%; margin-left: 20%;">
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+<span>https://**servo.org**</span>
+
+<img src="/img/servo-qr.png" style="width: 50%; margin: 0;" alt="QR code with Servo logo pointing to servo.org website" />
+
+</div>
+
+-----
+
 
 * Website: [servo.org](https://servo.org)
 * Chat: [servo.zulipchat.com](https://servo.zulipchat.com/)
 * Repository: [github.com/servo/servo](https://github.com/servo/servo)
 * Email: <info@servo.org>
-
-</div>
-
-<img src="/img/servo-qr.png" style="width: 40%;" alt="QR code with Servo logo pointing to servo.org website" />
-
-</div>
 
 -----
 
@@ -60,10 +81,10 @@ Note:
 
 <div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1em; font-size: 0.5em; grid-gap: 0.1em; padding: 0.1em; background: white; margin: 1em;">
 
-  <div style="background: #121619; text-align: center; font-size: 0.8em; grid-area: 1/1/10;">Q3'23</div>
-  <div style="background: #121619; text-align: center; font-size: 0.8em; grid-area: 1/2/10;">Q4'23</div>
-  <div style="background: #121619; text-align: center; font-size: 0.8em; grid-area: 1/3/10;">Q1'24</div>
-  <div style="background: #121619; text-align: center; font-size: 0.8em; grid-area: 1/4/10;">Q2'24</div>
+  <div style="background: #121329; text-align: center; font-size: 0.8em; grid-area: 1/1/10;">Q3'23</div>
+  <div style="background: #121329; text-align: center; font-size: 0.8em; grid-area: 1/2/10;">Q4'23</div>
+  <div style="background: #121329; text-align: center; font-size: 0.8em; grid-area: 1/3/10;">Q1'24</div>
+  <div style="background: #121329; text-align: center; font-size: 0.8em; grid-area: 1/4/10;">Q2'24</div>
   <div style="padding: 0.2em; grid-column: 1 / 3; grid-row: 2; background: #42be65; text-align: center; border-radius: 0.3em; margin: 0.1em;">Project reactivation</div>
   <div style="padding: 0.2em; grid-column: 3 / 5; grid-row: 2; background: #1192e8; text-align: center; border-radius: 0.3em; margin: 0.1em;">Project maintenance and outreach</div>
   <div style="padding: 0.2em; grid-column: 1 / 3; grid-row: 3; background: #009d9a; text-align: center; border-radius: 0.3em; margin: 0.1em;">Project outreach</div>
