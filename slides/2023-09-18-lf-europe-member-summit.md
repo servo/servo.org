@@ -5,7 +5,7 @@ title: Servo
 
 <!-- .slide: class="cover" -->
 
-<img src="/img/slides/servo-color-negative-no-container-600.png" style="margin: 2em;" alt="Servo logo" />
+<img src="/img/servo-color-negative-no-container-600.png" style="margin: 2em;" alt="Servo logo" />
 
 <h4 style="line-height: 1.4">
   The
