@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xml:base="https://servo.org" xmlns="http://www.w3.org/2005/Atom">
+  <title>Servo Blog</title>
+  <subtitle>All the entries in the Servo blog.</subtitle>
+  <link href="https://servo.org/blog/feed.xml" rel="self"/>
+  <link href="https://servo.org"/>
+  <updated>2023-07-20T00:00:00Z</updated>
+  <id>https://servo.org</id>
+  <author>
+    <name>Servo Team</name>
+    <email>info@servo.org</email>
+  </author>
+  <entry>
+    <title>Servo and the Web Platform Tests</title>
+    <link href="https://servo.org/servo-new-slides/blog/2023/07/20/servo-web-platform-tests/"/>
+    <updated>2023-07-20T00:00:00Z</updated>
+    <id>https://servo.org/servo-new-slides/blog/2023/07/20/servo-web-platform-tests/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;With over 52000 tests and nearly two million subtests, the &lt;a href=&quot;https://web-platform-tests.org/&quot;&gt;Web Platform Tests&lt;/a&gt; are one of the most important parts of the web’s interoperability and compatibility story. Servo has long used the WPT to catch regressions and &lt;a href=&quot;https://servo.org/blog/2023/03/16/making-easier-to-contribute/&quot;&gt;flakiness&lt;/a&gt;, but the suite has also played a role in our &lt;a href=&quot;https://servo.org/blog/2023/04/13/layout-2013-vs-2020/&quot;&gt;layout engine migration&lt;/a&gt; and guiding our way towards CSS2 conformance.&lt;/p&gt;
+&lt;style&gt;
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin &gt; p,
+    ._runin &gt; h2 {
+        display: inline;
+    }
+&lt;/style&gt;
+&lt;div class=&quot;_runin&quot;&gt;&lt;p&gt;You can find Servo on &lt;/p&gt;&lt;h2&gt;&lt;a href=&quot;https://wpt.fyi/&quot;&gt;wpt.fyi&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;, a dashboard for all browsers integrated with the Web Platform Tests.&lt;/p&gt;&lt;/div&gt;
+&lt;p&gt;To see the pass rates for Servo, follow &lt;a href=&quot;https://wpt.fyi/results/?label=master&amp;amp;label=experimental&amp;amp;product=servo&quot;&gt;this direct link&lt;/a&gt;, or click &lt;span style=&quot;font-size: 87.5%;&quot;&gt;EDIT&lt;/span&gt;, &lt;span style=&quot;font-size: 87.5%;&quot;&gt;ADD PRODUCT&lt;/span&gt;, choose Servo, then click &lt;span style=&quot;font-size: 87.5%;&quot;&gt;SUBMIT&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;While fyi is not so great for tracking progress over time (though definitely &lt;a href=&quot;https://wpt.fyi/runs?label=master&amp;amp;product=servo&quot;&gt;possible&lt;/a&gt;), it has been very helpful for drilling down from specs to sections, tests, and subtests. This has made it easier for us to decide what to work on next.&lt;/p&gt;
+&lt;div class=&quot;_runin&quot;&gt;&lt;p&gt;But the key to this was our &lt;/p&gt;&lt;h2&gt;&lt;a href=&quot;https://wpt.servo.org/&quot;&gt;Servo WPT dashboard&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;p&gt;The full dashboard can be found at &lt;a href=&quot;https://wpt.servo.org/&quot;&gt;wpt.servo.org&lt;/a&gt;, and there’s a simplified version &lt;a href=&quot;https://servo.org/about/#wpt-pass-rates&quot;&gt;on our about page&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Built in April, the dashboard has since tracked Servo’s pass rate over time, not just over the suite as a whole but also over several &lt;em&gt;focus areas&lt;/em&gt;:&lt;/p&gt;
+&lt;table style=&quot;width: auto;&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;ul&gt;
+&lt;li&gt;CSS overall
+    &lt;ul&gt;
+    &lt;li&gt;our CSS2 focus areas →
+    &lt;/li&gt;&lt;li&gt;CSS position module
+    &lt;/li&gt;&lt;li&gt;CSS flexbox module
+    &lt;/li&gt;&lt;li&gt;CSSOM
+    &lt;/li&gt;&lt;/ul&gt;
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/td&gt;&lt;td&gt;
+&lt;ul&gt;
+&lt;li&gt;abspos
+&lt;/li&gt;&lt;li&gt;box-display
+&lt;/li&gt;&lt;li&gt;floats
+&lt;/li&gt;&lt;li&gt;floats-clear
+&lt;/li&gt;&lt;li&gt;linebox
+&lt;/li&gt;&lt;li&gt;margin-padding-clear
+&lt;/li&gt;&lt;li&gt;normal-flow
+&lt;/li&gt;&lt;li&gt;positioning
+&lt;/li&gt;&lt;/ul&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;p&gt;The dashboard has data for both our &lt;a href=&quot;https://servo.org/blog/2023/04/13/layout-2013-vs-2020/&quot;&gt;legacy and new layout engines&lt;/a&gt;, which made it easy to see where the new engine most needed catching up.&lt;/p&gt;
+&lt;p&gt;Over the last three months, we’ve halved the gap with legacy or better in several of those areas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CSS overall (7.7pp → 3.7pp)&lt;/li&gt;
+&lt;li&gt;our CSS2 focus areas (19.0pp → 8.2pp)&lt;/li&gt;
+&lt;li&gt;margin-padding-clear (33.0pp → 10.3pp)&lt;/li&gt;
+&lt;li&gt;CSS flexbox module (10.5pp → 3.1pp)&lt;/li&gt;
+&lt;li&gt;CSS position module (2.5pp → 0.2pp(!))&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We’re two thirds of the way to legacy in floats (31.5pp → 10.8pp) and floats-clear (48.3pp → 3.3pp(!)):&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/servo-new-slides/img/blog/wpt-dashboard-floats.png&quot; alt=&quot;floats: 18 (legacy 50) on 1 april, 23 (legacy 52) on 15 june, 33 on 17 june, 37 (legacy 53) on 18 july, 42 on 19 july&quot; style=&quot;width: 50%;&quot; /&gt;&lt;img src=&quot;https://servo.org/servo-new-slides/img/blog/wpt-dashboard-floats-clear.png&quot; alt=&quot;floats-clear: 18 (legacy 66) on 1 april, 20 (legacy 67) on 15 june, 51 on 16 june, 57 on 22 june, 63 on 1 july, 64 on 20 july&quot; style=&quot;width: 50%;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;And in the CSS2 positioning tests, we’ve surpassed legacy and built a healthy 5.5pp lead:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/servo-new-slides/img/blog/wpt-dashboard-positioning.png&quot; alt=&quot;positioning: 77.7 (legacy 80.9) on 1 april, 81.7 (legacy 81.1) on 13 april, 85.7 on 1 july, 86.6 on 20 july&quot; style=&quot;width: 50%;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Over time, as our pass rates improve or people start working on new things, we’ll continue &lt;a href=&quot;https://github.com/servo/internal-wpt-dashboard/blob/461c573885c17f42687fb26131fe8ccd4213b826/process-wpt-results.js&quot;&gt;adding new focus areas&lt;/a&gt;, and with the web platform continuously evolving, we probably won’t run out of areas any time soon.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Conference news</title>
+    <link href="https://servo.org/servo-new-slides/blog/2023/06/19/conference-news/"/>
+    <updated>2023-06-19T00:00:00Z</updated>
+    <id>https://servo.org/servo-new-slides/blog/2023/06/19/conference-news/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;In May of 2023, Martin Robinson from the Servo project team had the chance to participate in the &lt;a href=&quot;https://2023.rustnl.org/&quot;&gt;&lt;strong&gt;RustNL 2023&lt;/strong&gt;&lt;/a&gt; conference in Amsterdam. There he gave a &lt;a href=&quot;https://www.youtube.com/watch?v=IdHvHoAO5oo&quot;&gt;lighting talk about the Servo project&lt;/a&gt; and its current plans. In addition, he participated in some follow up discussions exploring the possibility of using Servo in various Rust application frameworks.&lt;/p&gt;
+&lt;p&gt;In the first week of June 2023, the Servo project team participated in the &lt;a href=&quot;https://webengineshackfest.org/2023/&quot;&gt;&lt;strong&gt;Web Engines Hackfest 2023&lt;/strong&gt;&lt;/a&gt;. Delan Azabani gave a &lt;a href=&quot;https://www.youtube.com/watch?v=pfk8s5OD99A&quot;&gt;talk about the Servo project&lt;/a&gt;, diving into the details of the team’s work in the first half of the year and its plans for the second half. The talk provided some valuable insights into running some Servo &lt;a href=&quot;https://demo.servo.org/&quot;&gt;demos&lt;/a&gt; as well as the status of floats and the evolution of the layout system. In addition, there were some engaging discussions around the future of the shared style crate in Gecko and Servo.&lt;/p&gt;
+&lt;p&gt;At the same event there was also a &lt;a href=&quot;https://github.com/Igalia/webengineshackfest/issues/16&quot;&gt;breakout session about Servo&lt;/a&gt; where various topics were addressed, such how to coordinate development efforts between Mozilla and Gecko on the shared webrender and style crates. Of particular interest was the implementation and challenges of a new embedding API for Servo. Lastly, there was a discussion about simplifying the contribution process to the Servo project, with a focus on making it more beginner-friendly and enabling a broader participation from interested individuals. You can find the &lt;a href=&quot;https://github.com/Igalia/webengineshackfest/wiki/2023-Servo&quot;&gt;session notes online&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Around the end of  June, Servo will attend the &lt;a href=&quot;https://events.linuxfoundation.org/embedded-open-source-summit/&quot;&gt;&lt;strong&gt;Embedded Open Source Summit&lt;/strong&gt;&lt;/a&gt; in Prague. If you are participating in this event, feel free to &lt;a href=&quot;mailto:info@servo.org&quot;&gt;contact us&lt;/a&gt; with any questions about the project status and our plans for the future.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Adding support for ‘outline’ properties</title>
+    <link href="https://servo.org/servo-new-slides/blog/2023/05/31/adding-support-for-outline-properties/"/>
+    <updated>2023-05-31T00:00:00Z</updated>
+    <id>https://servo.org/servo-new-slides/blog/2023/05/31/adding-support-for-outline-properties/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;As mentioned in &lt;a href=&quot;https://servo.org/blog/2023/04/13/layout-2013-vs-2020/&quot;&gt;our last blog post&lt;/a&gt;, we’re currently working on selecting a layout engine for Servo between the original Layout 2013 and the newer Layout 2020.&lt;/p&gt;
+&lt;p&gt;Our plan has been to start by implementing some small features in Layout 2020, to help us decide whether to switch to the new layout engine, and in turn tackle more complex features like floats. One of these features was ‘outline’, which is now supported in the new engine.&lt;/p&gt;
+&lt;p&gt;A few days ago, we landed support for ‘outline’ and ‘outline-offset’. These properties are now fully supported in Servo, with two minor caveats:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/pull/29718&quot;&gt;Snap border and outline widths at computed-value time&lt;/a&gt; — this is blocked on a Stylo upgrade to avoid diverging from Firefox&lt;/li&gt;
+&lt;li&gt;The ‘outline-style’ value ‘auto’ currently works like ‘solid’ — this is allowed by the spec, but we may be able to do something better here, like rounding the corners of the outline or matching the platform style&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The impact of this feature is most noticeable in the focus styles for links and input fields. For example, the User Agent stylesheet already applies ‘outline: thin dotted’ to ‘a:focus’, so clicking the first link in&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;Lorem ipsum &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;a&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;#&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;dolor sit amet&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;,
+consectetur &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;a&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;#&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;adipiscing elit&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;now yields&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/servo-new-slides/img/blog/servo-outline.png&quot; alt=&quot;Text with two links where the first one is focused so it has a thin outline around it&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;implementation&quot; tabindex=&quot;-1&quot;&gt;Implementation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2023/05/31/adding-support-for-outline-properties/#implementation&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The bulk of the feature was implemented in &lt;a href=&quot;https://github.com/servo/servo/pull/29695&quot;&gt;#29695&lt;/a&gt; (‘outline’) and &lt;a href=&quot;https://github.com/servo/servo/pull/29702&quot;&gt;#29702&lt;/a&gt; (‘outline-offset’):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;In &lt;code&gt;{longhands,shorthands}/outline.mako.rs&lt;/code&gt;, we enable ‘outline-offset’, ‘outline-color’, and ‘outline’ in Layout 2020, and remove the pref gates for ‘outline-style’ and ‘outline-width’, allowing those properties to be resolved and queried&lt;/li&gt;
+&lt;li&gt;In &lt;code&gt;BoxFragment::build_stacking_context_tree_for_children&lt;/code&gt;, we check ‘outline-width’ and (if non-zero) push a &lt;code&gt;StackingContextFragment&lt;/code&gt; to remind ourselves to paint an outline for the box fragment when building its display list&lt;/li&gt;
+&lt;li&gt;In &lt;code&gt;StackingContext::build_display_list&lt;/code&gt;, we search for those reminders and paint the necessary outlines, but only after all other kinds of content in the stacking context (“out-of-band”)&lt;/li&gt;
+&lt;li&gt;In &lt;code&gt;BuilderForBoxFragment::build&lt;/code&gt;, we now need to handle requests to paint the &lt;code&gt;Outline&lt;/code&gt;, not just the &lt;code&gt;BlockBackgroundsAndBorders&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;In &lt;code&gt;BuilderForBoxFragment::build_outline&lt;/code&gt;, we paint the outline by creating a &lt;code&gt;BorderDisplayItem&lt;/code&gt; in WebRender, while taking the ‘outline-offset’ into account&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We also improved the shorthand serialisation in &lt;a href=&quot;https://github.com/servo/servo/pull/29708&quot;&gt;#29708&lt;/a&gt;, by replacing the &lt;code&gt;#[derive(ToCss)]&lt;/code&gt; for ‘outline’ with a custom impl that returns ‘auto’ in the case where all of the longhands are set to initial values.&lt;/p&gt;
+&lt;h2 id=&quot;tests-and-spec-issues&quot; tabindex=&quot;-1&quot;&gt;Tests and spec issues &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2023/05/31/adding-support-for-outline-properties/#tests-and-spec-issues&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The spec allows outlines to be painted either &lt;a href=&quot;https://drafts.csswg.org/css-position-4/#in-band-outline&quot;&gt;in-band&lt;/a&gt;, such that other elements can obscure them, or &lt;a href=&quot;https://drafts.csswg.org/css-position-4/#out-of-band-outline&quot;&gt;out-of-band&lt;/a&gt;, on top of all other content in the stacking context. We chose the latter, because it’s the recommended approach for accessibility and matches other browsers.&lt;/p&gt;
+&lt;p&gt;For example, the magenta element below overlaps the blue border of the previous element, but not the out-of-band cyan outline:&lt;/p&gt;
+&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt; &lt;span class=&quot;token special-attr&quot;&gt;&lt;span class=&quot;token attr-name&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;
+    outline: 5px solid cyan;
+    border: 5px solid blue;
+&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Lorem ipsum&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt; &lt;span class=&quot;token special-attr&quot;&gt;&lt;span class=&quot;token attr-name&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;
+    background: magenta;
+    margin-top: -15px;
+    width: 50px;
+    height: 50px;
+&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/servo-new-slides/img/blog/servo-outline-painting.png&quot; alt=&quot;Painting order is blue border, then magenta background, then “Lorem ipsum” and cyan outline&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;‘outline’ already has good test coverage, though during our implementation we added &lt;a href=&quot;https://github.com/servo/servo/pull/29686&quot;&gt;one new test&lt;/a&gt; to check that ‘background-clip’ works as expected with ‘border-radius’, which affects both borders and outlines in Servo.&lt;/p&gt;
+&lt;p&gt;We’ve also filed two spec issues:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8786&quot;&gt;Negative outline-offset is not interoperable and spec is not clear&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8788&quot;&gt;Should outline-offset be a longhand of outline?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As always, despite ‘outline’ being a well-known property that has long been implemented by all of the major engines, with every new implementation comes new opportunities to clarify specs and improve test coverage. Building features like ‘outline’ helps the web platform as much as it helps Servo.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Layout 2013 and Layout 2020</title>
+    <link href="https://servo.org/servo-new-slides/blog/2023/04/13/layout-2013-vs-2020/"/>
+    <updated>2023-04-13T00:00:00Z</updated>
+    <id>https://servo.org/servo-new-slides/blog/2023/04/13/layout-2013-vs-2020/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Servo currently has two independent layout engines, known as Layout 2013 and Layout 2020, which are named after when they began development. Layout 2020 was designed to fix several shortcomings in Layout 2013, but it’s not yet enabled by default, and this raises the question: which layout engine should Servo use going forward?&lt;/p&gt;
+&lt;p&gt;To answer this question, we analysed the two layout engines and found differences in:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;their approaches to parallelism&lt;/li&gt;
+&lt;li&gt;the ways they manage trees of boxes and fragments&lt;/li&gt;
+&lt;li&gt;their relationships with WebRender&lt;/li&gt;
+&lt;li&gt;the degrees to which their architectures reflect CSS specs&lt;/li&gt;
+&lt;li&gt;the completeness of their implementations of CSS features&lt;/li&gt;
+&lt;li&gt;the difficulty in supporting &lt;a href=&quot;https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report&quot;&gt;complex features like floats&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more details, check out &lt;a href=&quot;https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report&quot;&gt;our report&lt;/a&gt;, but in short, we believe &lt;strong&gt;Layout 2020 is the best layout engine for Servo going forward&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;To give us more confidence in this choice with some practical experience, we’ve started implementing some smaller features in Layout 2020, like &lt;a href=&quot;https://github.com/servo/servo/pull/29504&quot;&gt;&amp;lt;iframe&amp;gt;&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/29594&quot;&gt;min/max width and height&lt;/a&gt;, sticky positioning, and ‘text-indent’. We will also start building and testing Layout 2020 (as well as Layout 2013) on &lt;a href=&quot;https://github.com/servo/servo/actions&quot;&gt;CI&lt;/a&gt; in the near future.&lt;/p&gt;
+&lt;p&gt;We will continue to maintain Layout 2013 for now, but we hope that completing many of these features, plus some more complex ones like counters and vertical writing modes, will give us the experience we need to decide whether we want to commit to Layout 2020 and remove Layout 2013 from the tree.&lt;/p&gt;
+&lt;p&gt;We would love to have you with us on this journey, and we hope that after this transition period, together we can tackle the most challenging parts of Servo’s CSS2 story, like floats and incremental layout!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Making it easier to contribute to Servo</title>
+    <link href="https://servo.org/servo-new-slides/blog/2023/03/16/making-easier-to-contribute/"/>
+    <updated>2023-03-16T00:00:00Z</updated>
+    <id>https://servo.org/servo-new-slides/blog/2023/03/16/making-easier-to-contribute/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Back in January, flaky tests were a serious problem for Servo’s development. Each build failure caused by flaky tests would delay merging a pull request by over two hours, and some changes took as many as seven tries to merge! But since then, we’ve made a bunch of improvements to how we run tests, which should make contributing to Servo a lot easier.&lt;/p&gt;
+&lt;h2 id=&quot;what-is-a-flaky-test%3F&quot; tabindex=&quot;-1&quot;&gt;What is a flaky test? &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2023/03/16/making-easier-to-contribute/#what-is-a-flaky-test%3F&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Servo is tested against the &lt;a href=&quot;https://web-platform-tests.org/&quot;&gt;Web Platform Tests&lt;/a&gt;, a suite of over 30,000 tests shared with all of the major web engines. Each test can pass, fail, crash, or time out, and if a test has subtests, each subtest can have its own result. Passing is not always the expected outcome: for example, we would expect most tests for unimplemented features to fail.&lt;/p&gt;
+&lt;p&gt;Flaky tests are tests that yield the expected outcome sometimes and an unexpected outcome other times, causing intermittent build failures. Tests can be flaky due to how they were written, or problems with the machines that run those tests, but often they flake due to Servo bugs. Regardless of the cause, we want to avoid letting flaky tests affect people doing unrelated work.&lt;/p&gt;
+&lt;h2 id=&quot;faster-build-times&quot; tabindex=&quot;-1&quot;&gt;Faster build times &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2023/03/16/making-easier-to-contribute/#faster-build-times&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Making builds faster doesn’t directly make tests less flaky, but it &lt;em&gt;does&lt;/em&gt; reduce the delays that flaky tests can cause.&lt;/p&gt;
+&lt;p&gt;Our main &lt;a href=&quot;https://github.com/servo/servo/actions/workflows/main.yml&quot;&gt;try and merge builds&lt;/a&gt; often took three or four hours to complete, because &lt;a href=&quot;https://github.com/servo&quot;&gt;our GitHub org&lt;/a&gt; was limited to 20 concurrent runners. Since we also split the Web Platform Tests into 20 concurrent jobs, some of those jobs would almost always get starved by other jobs, like Windows unit tests or nightly WPT updates.&lt;/p&gt;
+&lt;aside style=&quot;margin-left: 1em;&quot;&gt;
+&lt;p&gt;In practice, each item in &lt;a href=&quot;https://build.servo.org/homu/queue/servo&quot;&gt;the build queue&lt;/a&gt; actually took twice as long as that, because we were inadvertently kicking off two builds, but we’ve fixed that in &lt;a href=&quot;https://github.com/servo/servo/pull/29197&quot;&gt;#29197&lt;/a&gt;.&lt;/p&gt;&lt;/aside&gt;&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;We reached out to GitHub about this, and they were kind enough to increase our free runner limit to 60 concurrent jobs, cutting our build times to a consistent two hours.&lt;/p&gt;
+&lt;p&gt;In the future, it may be worth adding some caching of the Cargo and target directories across builds, but the slowest parts of our builds by far are the Windows and macOS jobs. While neither of them run the Web Platform Tests yet, even just compiling and running unit tests takes over 90 minutes, making them almost always the critical path.&lt;/p&gt;
+&lt;p&gt;We are hoping this will improve with initiatives like &lt;a href=&quot;https://github.blog/2023-03-01-github-actions-introducing-faster-github-hosted-x64-macos-runners/&quot;&gt;GitHub’s upcoming “XL” macOS runners&lt;/a&gt;, and in the longer term it may be worth setting up some dedicated runners of our own.&lt;/p&gt;
+&lt;h2 id=&quot;support-for-multiple-expectations&quot; tabindex=&quot;-1&quot;&gt;Support for multiple expectations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2023/03/16/making-easier-to-contribute/#support-for-multiple-expectations&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We were previously only able to handle flaky tests by marking them as intermittent, that is, creating an issue with the test name in the title and the label &lt;a href=&quot;https://github.com/servo/servo/issues?q=label%3AI-intermittent&quot;&gt;I-intermittent&lt;/a&gt;. This means we treat &lt;em&gt;any&lt;/em&gt; result as expected when deciding whether or not the build should succeed, which is a very coarse approach, and it means the list of intermittent tests isn’t version controlled.&lt;/p&gt;
+&lt;p&gt;But as of &lt;a href=&quot;https://github.com/servo/servo/pull/29339&quot;&gt;#29339&lt;/a&gt;, we can now give tests a set of expected outcomes in the metadata files! Note that the typical outcome, if any, &lt;a href=&quot;http://web-platform-tests.org/tools/wptrunner/docs/expectation.html#web-platform-tests-metadata&quot;&gt;should go first&lt;/a&gt;, but the order doesn’t really matter in practice.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# tests/wpt/metadata/path/to/test.html.ini
+[test.html]
+  [subtest that only fails]
+    expected: FAIL
+
+  [subtest that occasionally times out]
+    expected: [PASS, TIMEOUT]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the future, it may be worth migrating the existing intermittent issues to expectations like this.&lt;/p&gt;
+&lt;h2 id=&quot;retrying-tests-with-unexpected-results&quot; tabindex=&quot;-1&quot;&gt;Retrying tests with unexpected results &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2023/03/16/making-easier-to-contribute/#retrying-tests-with-unexpected-results&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Sometimes the causes of flakiness can affect many or even all tests, like bugs causing some reftest screenshots to be completely white, or overloaded test runners causing some tests to time out.&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/servo/servo/pull/29370&quot;&gt;#29370&lt;/a&gt;, we now retry tests that yield unexpected results. If a test yields the expected result on the second try, we ignore it when deciding whether or not the build should succeed. This can make builds a little slower, but it should be outweighed by our recent improvements to build times.&lt;/p&gt;
+&lt;p&gt;In the future, it may be worth adopting some more advanced retry techniques. For example, &lt;a href=&quot;https://chromium.googlesource.com/chromium/src/+/9539073eb08b163ffa375bec280e7043ee4cbb19/docs/infra/cq.md&quot;&gt;Chromium’s retry strategy&lt;/a&gt; includes retrying the entire “shard” of tests to reproduce the test environment more accurately, and retrying tests both with and without the pull request to help “exonerate” the changes. These techniques require considerably more resources though, and they are generally only viable if we can &lt;a href=&quot;https://servo.org/sponsorship/&quot;&gt;fund our own dedicated test runners&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;result-comments&quot; tabindex=&quot;-1&quot;&gt;Result comments &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2023/03/16/making-easier-to-contribute/#result-comments&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;As of &lt;a href=&quot;https://github.com/servo/servo/pull/29315&quot;&gt;#29315&lt;/a&gt;, when a try or merge build finishes, we now post a comment on the pull request with a clear breakdown of the unexpected results:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Flaky unexpected results&lt;/strong&gt; are those that were unexpected at first, but expected on retry&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stable unexpected results that are known to be intermittent&lt;/strong&gt; are those that were unexpected, but ignored due to being &lt;a href=&quot;https://github.com/servo/servo/issues?q=label%3AI-intermittent&quot;&gt;marked as intermittent&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stable unexpected results&lt;/strong&gt; are those that caused the build to fail&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;intermittent-dashboard&quot; tabindex=&quot;-1&quot;&gt;Intermittent dashboard &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2023/03/16/making-easier-to-contribute/#intermittent-dashboard&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;To ensure that flaky tests can be discovered and fixed even if they are mitigated by retries, we’ve created an &lt;a href=&quot;https://build.servo.org/intermittent-tracker/&quot;&gt;intermittent dashboard&lt;/a&gt; that all unexpected results get reported to.&lt;/p&gt;
+&lt;p&gt;Each result includes the test and subtest, the expected and actual outcomes, any test output, plus metadata like the commit and a link to the build. You can filter the data to a specific test or field value, and the dashboard automatically points out when all of the visible results have something in common, which can help us analyse the failures and identify patterns.&lt;/p&gt;
+&lt;p&gt;For example, here we can see that all of the unexpected failures for one of the HTML parsing tests have the same assertion failure on the same subtest, but are not limited to one pull request:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/servo-new-slides/img/blog/intermittent-dashboard.png&quot; alt=&quot;screenshot of intermittent dashboard, filtered by test (/html/syntax/parsing/DOMContentLoaded-defer.html) and actual outcome (FAIL)&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;In the future, we plan to &lt;a href=&quot;https://github.com/servo/intermittent-tracker/pull/6#issuecomment-1422599056&quot;&gt;further develop&lt;/a&gt; the dashboard, including adding more interesting views of the data like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;which tests flake the most (within some recent period like 30 days)&lt;/li&gt;
+&lt;li&gt;which tests are starting to flake (newly seen or quickly spiking)&lt;/li&gt;
+&lt;li&gt;which tests are &lt;a href=&quot;https://github.com/servo/servo/issues?q=label%3AI-intermittent&quot;&gt;marked as intermittent&lt;/a&gt; but haven’t flaked recently&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Servo 2023 Roadmap</title>
+    <link href="https://servo.org/servo-new-slides/blog/2023/02/03/servo-2023-roadmap/"/>
+    <updated>2023-02-03T00:00:00Z</updated>
+    <id>https://servo.org/servo-new-slides/blog/2023/02/03/servo-2023-roadmap/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;As we move forward with our &lt;a href=&quot;https://servo.org/blog/2023/01/16/servo-2023/&quot;&gt;renewed project activity&lt;/a&gt;, we would like to share more details about our plans for 2023. We’ve recently published the Servo 2023 roadmap on the &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;project wiki&lt;/a&gt;, and our community and governance and technical plans are outlined below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/servo-new-slides/img/blog/servo-2023-roadmap.png&quot; alt=&quot;Servo 2023 Roadmap. Project reactivation Q1-Q4. Project outreach Q1-Q4. Main dependencies upgrade Q1-Q3. Layout engine selection Q1-Q2. Progress towards basic CSS2 support Q3-Q4. Explore Android support Q3-Q4. Embeddable web engine experiments Q4.&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;community-and-governance&quot; tabindex=&quot;-1&quot;&gt;Community and governance &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2023/02/03/servo-2023-roadmap/#community-and-governance&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We’re restarting all the usual activities, including PR triage and review, public communications about the project, and arranging &lt;a href=&quot;https://servo.org/governance/&quot;&gt;TSC&lt;/a&gt; meetings. We will also make some outreach efforts in order to attract more collaborators, partners, and potential sponsors interested in working, participating, and funding the project.&lt;/p&gt;
+&lt;h2 id=&quot;technical&quot; tabindex=&quot;-1&quot;&gt;Technical &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2023/02/03/servo-2023-roadmap/#technical&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We want to upgrade the main dependencies of Servo, like WebRender and Stylo, to get them up to date. We will also analyse the status of the two layout engines in Servo, and select one of them for continued development. Our plan is to then work towards basic CSS2 conformance.&lt;/p&gt;
+&lt;p&gt;Regarding platform support, we would like to explore the possibility of supporting Android. We would also like to experiment with making Servo a practical embeddable web rendering engine.&lt;/p&gt;
+&lt;p&gt;As with any software project, this roadmap will evolve over time, but we’ll keep you posted. We hope you’ll join us in making it happen.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Servo to Advance in 2023</title>
+    <link href="https://servo.org/servo-new-slides/blog/2023/01/16/servo-2023/"/>
+    <updated>2023-01-16T00:00:00Z</updated>
+    <id>https://servo.org/servo-new-slides/blog/2023/01/16/servo-2023/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;We would like to share some exciting news about the &lt;a href=&quot;https://servo.org/&quot;&gt;Servo project&lt;/a&gt;. This year, thanks to new external funding, a team of developers will be actively working on Servo. The first task is to reactivate the project and the community around it, so we can attract new collaborators and sponsors for the project.&lt;/p&gt;
+&lt;p&gt;The focus for 2023 is to improve the situation of the layout system in Servo, with the initial goal of getting basic CSS2 layout working. Given the renewed activity in the project, we will keep you posted with more updates throughout the year. Stay tuned!&lt;/p&gt;
+&lt;h2 id=&quot;about-servo&quot; tabindex=&quot;-1&quot;&gt;About Servo &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2023/01/16/servo-2023/#about-servo&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Created by Mozilla Research in 2012, the Servo project is a Research &amp;amp; Development effort meant to create an independent, modular, embeddable web engine that allows developers to deliver content and applications using web standards.  Servo is an experimental browser engine written in Rust, taking advantage of the memory safety properties and concurrency features of the language.  Stewardship of Servo &lt;a href=&quot;https://servo.org/blog/2020/11/17/servo-home/&quot;&gt;moved from Mozilla Research to the Linux Foundation in 2020&lt;/a&gt;, where its mission remains unchanged.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Servo’s new home</title>
+    <link href="https://servo.org/servo-new-slides/blog/2020/11/17/servo-home/"/>
+    <updated>2020-11-17T00:30:00Z</updated>
+    <id>https://servo.org/servo-new-slides/blog/2020/11/17/servo-home/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;The &lt;a href=&quot;https://servo.org/&quot;&gt;Servo Project&lt;/a&gt; is excited to announce that it has found a new home with the Linux Foundation. Servo was incubated inside Mozilla, and served as the proof that important web components such as CSS and rendering could be implemented in Rust, with all its safety, concurrency and speed. Now it’s time for Servo to leave the nest!&lt;/p&gt;
+&lt;p&gt;This move comes with a change in project governance: the Servo Project gains a board and a technical steering committee to help guide the project’s future (see &lt;a href=&quot;https://github.com/servo/project/&quot;&gt;github.com/servo/project/&lt;/a&gt; for more details).&lt;/p&gt;
+&lt;p&gt;Servo’s high-level goals remain unchanged: to provide a high-performance, safe rendering engine for embedding in other applications. It is the responsibility of the technical steering committee to provide direction for these goals and enable the wider Servo community to make meaningful contributions that advance this mission.&lt;/p&gt;
+&lt;p&gt;As a result of these changes, it is now easier than ever before to contribute to Servo’s future. Whether by &lt;a href=&quot;https://github.com/servo/servo/&quot;&gt;writing code or documentation&lt;/a&gt;, &lt;a href=&quot;https://download.servo.org/&quot;&gt;testing nightlies&lt;/a&gt; and filing issues, or &lt;a href=&quot;https://crowdfunding.lfx.linuxfoundation.org/projects/servo&quot;&gt;donating&lt;/a&gt; to help cover the project’s new CI and hosting costs, every bit helps. If you know a company that would like to support the Servo Project, please &lt;a href=&quot;mailto:info@servo.org&quot;&gt;get in touch&lt;/a&gt; as we will be rolling out a formal membership program to support the future of the project.&lt;/p&gt;
+&lt;p&gt;We also have a new home for discussions, help and general conversation, at the &lt;a href=&quot;https://servo.zulipchat.com/&quot;&gt;Servo Zulip&lt;/a&gt;. We hope to see you there, and look forward to building the future of embeddable web rendering engines with you in our new home!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>GSoC wrap-up - Implementing WebGPU in Servo</title>
+    <link href="https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/"/>
+    <updated>2020-08-30T00:30:00Z</updated>
+    <id>https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/</id>
+    <content xml:lang="en" type="html">&lt;h2 id=&quot;introduction&quot; tabindex=&quot;-1&quot;&gt;Introduction &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/#introduction&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Hello everyone! I am Kunal(&lt;a href=&quot;https://github.com/kunalmohan&quot;&gt;@kunalmohan&lt;/a&gt;), an undergrad student at Indian Institute of Technology Roorkee, India. As a part of Google Summer of Code(GSoC) 2020, I worked on implementing WebGPU in Servo under the mentorship of Mr. Dzmitry Malyshau(&lt;a href=&quot;https://github.com/kvark&quot;&gt;@kvark&lt;/a&gt;). I devoted the past 3 months working on ways to bring the API to fruition in Servo, so that Servo is able to run the existing examples and pass the Conformance Test Suite(CTS). This is going to be a brief account of how I started with the project, what challenges I faced, and how I overcame them.&lt;/p&gt;
+&lt;h2 id=&quot;what-is-webgpu%3F&quot; tabindex=&quot;-1&quot;&gt;What is WebGPU? &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/#what-is-webgpu%3F&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;WebGPU is a future web standard, cross-platform graphics API aimed to make GPU capabilities more accessible on the web. WebGPU is designed from the ground up to efficiently map to the Vulkan, Direct3D 12, and Metal native GPU APIs. A native implementation of the API in Rust is developed in the &lt;a href=&quot;https://github.com/gfx-rs/wgpu&quot;&gt;wgpu project&lt;/a&gt;. Servo implementation of the API uses this crate.&lt;/p&gt;
+&lt;h2 id=&quot;the-project&quot; tabindex=&quot;-1&quot;&gt;The Project &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/#the-project&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;At the start of the project the implementation was in a pretty raw state- Servo was only able to accept shaders as SPIRV binary and ran just the compute example. I had the following tasks in front of me:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implement the various &lt;a href=&quot;https://gpuweb.github.io/gpuweb/#idl-index&quot;&gt;DOM interfaces&lt;/a&gt; that build up the API.&lt;/li&gt;
+&lt;li&gt;Setup a proper Id rotation for the GPU resources.&lt;/li&gt;
+&lt;li&gt;Integrate WebGPU with WebRender for presenting the rendering to HTML canvas.&lt;/li&gt;
+&lt;li&gt;Setup proper model model for async error recording.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The final goal was to be able to run the live examples at &lt;a href=&quot;https://austineng.github.io/webgpu-samples/&quot;&gt;https://austineng.github.io/webgpu-samples/&lt;/a&gt; and pass a fair amount of the CTS.&lt;/p&gt;
+&lt;h2 id=&quot;implementation&quot; tabindex=&quot;-1&quot;&gt;Implementation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/#implementation&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Since Servo is a multi-process browser, GPU is accessed from a different process(server-side) than the one running the page content and scripts(content process). For better performance and asynchronous behaviour, we have a separate wgpu thread for each content process.&lt;/p&gt;
+&lt;p&gt;Setting up a proper Id rotation for the GPU resources was our first priority. I had to ensure that each Id generated was unique. This meant sharing the &lt;a href=&quot;https://github.com/servo/servo/blob/a5a21a59addae0df6d9e050f17d44399db04fec3/components/script/dom/identityhub.rs#L56-L67&quot;&gt;Identity Hub&lt;/a&gt; among all threads via &lt;code&gt;Arc&lt;/code&gt; and &lt;code&gt;Mutex&lt;/code&gt;. For recycling the Ids, wgpu exposes an &lt;code&gt;IdentityHandler&lt;/code&gt; trait that must be implemented on the server-side interface of the browser and wgpu. This facilitates the following: when wgpu detects that an object has been dropped by the user (which is some time after the actual drop/garbage collection), wgpu calls the trait methods that are responsible for releasing the Id. In our case they send a message to the content process to free the Id and make it available for reuse.&lt;/p&gt;
+&lt;p&gt;Implementing the DOM Interfaces was pretty straight forward. A DOM object is just an opaque handle to an actual GPU resource. Whenever a method, that performs an operation, is called on a DOM object there are 2 things to be done- convert the IDL types to wgpu types. And send a message to the server to perform the operation. Most of the validation is done within wgpu.&lt;/p&gt;
+&lt;h2 id=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;Presentation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/#presentation&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;WebGPU textures can be rendered to HTML canvas via &lt;code&gt;GPUCanvasContext&lt;/code&gt;, which can be obtained from &lt;code&gt;canvas.getContext(&#39;gpupresent&#39;)&lt;/code&gt;. All rendered images are served to WebRender as &lt;code&gt;ExternalImages&lt;/code&gt; for rendering purpose. This is done via an async software presentation path. Each new &lt;code&gt;GPUCanvasContext&lt;/code&gt; object is assigned a new &lt;code&gt;ExternalImageId&lt;/code&gt; and a new swap chain is assigned a new &lt;code&gt;ImageKey&lt;/code&gt;. Since WebGPU threads are spawned on-demand, an image handler for WebGPU is initialized at startup, stored in &lt;code&gt;Constellation&lt;/code&gt;, and supplied to threads at the time of spawn. Each time &lt;code&gt;GPUSwapChain.getCurrentTexture()&lt;/code&gt; is called the canvas is marked as dirty which is then flushed at the time of reflow. At the time of flush, a message is sent to the wgpu server to update the image data provided to WebRender. The following happens after this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The contents of the rendered texture are copied to a buffer.&lt;/li&gt;
+&lt;li&gt;Buffer is mapped asynchronously for read.&lt;/li&gt;
+&lt;li&gt;The data read from the buffer is copied to a staging area in &lt;a href=&quot;https://github.com/servo/servo/blob/669b16f2c054bd038b7a3c69985076607e140b7f/components/webgpu/lib.rs#L1353-L1365&quot;&gt;&lt;code&gt;PresentionData&lt;/code&gt;&lt;/a&gt;. &lt;code&gt;PresentationData&lt;/code&gt; stores the data and all the required machinery for this async presentation belt.&lt;/li&gt;
+&lt;li&gt;When WebRender wants to read the data, it locks on the data to prevent it from being altered during read. Data is served in the form of raw bytes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The above process is not the best one, but the only option available to us for now. This also causes a few empty frames to be rendered at the start.
+A good thing, though, is that this works on all platforms and is a great fallback path while we’ll be adding hardware accelerate presentation in the future.&lt;/p&gt;
+&lt;h2 id=&quot;buffer-mapping&quot; tabindex=&quot;-1&quot;&gt;Buffer Mapping &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/#buffer-mapping&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When the user issues an async buffer map operation, the operation is queued on the server-side and all devices polled at a regular interval of 100ms for the same. As soon as the map operation is complete, data is read and sent to the content process where it is stored in the Heap. The user can read and edit this data by accessing it’s subranges via &lt;code&gt;GPUBuffer.getMappedRange()&lt;/code&gt; which returns &lt;code&gt;ExternalArrayBuffer&lt;/code&gt; pointing to the data in the Heap. On unmap, all the &lt;code&gt;ExternalArrayBuffer&lt;/code&gt;s are detached, and if the buffer was mapped for write, data sent back to server for write to the actual resource.&lt;/p&gt;
+&lt;h2 id=&quot;error-reporting&quot; tabindex=&quot;-1&quot;&gt;Error Reporting &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/#error-reporting&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;To achieve maximum efficiency, WebGPU supports an asynchronous error model. The implementation keeps a stack of &lt;code&gt;ErrorScope&lt;/code&gt;s that are responsible for capturing the errors that occur during operations performed in their scope. The user is responsible for pushing and popping an &lt;code&gt;ErrorScope&lt;/code&gt; in the stack. Popping an &lt;code&gt;ErrorScope&lt;/code&gt; returns a promise that is resolved to null if all the operations were successfull, otherwise it resolves to the first error that occurred.&lt;/p&gt;
+&lt;p&gt;When an operation is issued, &lt;code&gt;scope_id&lt;/code&gt; of the &lt;code&gt;ErrorScope&lt;/code&gt; on the top of the stack is sent to the server with it and operation-count of the scope is incremented. The result of the operation can be described by the enum-&lt;/p&gt;
+&lt;pre class=&quot;language-rust&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;token type-definition class-name&quot;&gt;WebGPUOpResult&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token class-name&quot;&gt;ValidationError&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token class-name&quot;&gt;OutOfMemoryError&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token class-name&quot;&gt;Success&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On receiving the result, we decrement the operation-count of the &lt;code&gt;ErrorScope&lt;/code&gt; with the given &lt;code&gt;scope_id&lt;/code&gt;. We further have 3 cases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The result is &lt;code&gt;Success&lt;/code&gt;. Do nothing.&lt;/li&gt;
+&lt;li&gt;The result is an error and the &lt;code&gt;ErrorFilter&lt;/code&gt; matches the error. We record this error in the &lt;a href=&quot;https://github.com/servo/servo/blob/669b16f2c054bd038b7a3c69985076607e140b7f/components/script/dom/gpudevice.rs#L85-L91&quot;&gt;&lt;code&gt;ErrorScopeInfo&lt;/code&gt;&lt;/a&gt;, and if the &lt;code&gt;ErrorScope&lt;/code&gt; has been popped by the user, resolve the promise with it.&lt;/li&gt;
+&lt;li&gt;The result is an error but the &lt;code&gt;ErrorFilter&lt;/code&gt; does not match the error. In this case, we find the nearest parent &lt;code&gt;ErrorScope&lt;/code&gt; with the matching filter and record the error in it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After the result is processed, we try to remove the &lt;code&gt;ErrorScope&lt;/code&gt; from the stack- the user should have called &lt;code&gt;popErrorScope()&lt;/code&gt; on the scope and the operation-count of the scope should be 0.&lt;/p&gt;
+&lt;p&gt;In case there are no error scopes on the stack or if &lt;code&gt;ErrorFilter&lt;/code&gt; of none of the &lt;code&gt;ErrorScope&lt;/code&gt;s match the error, the error is fired as an &lt;a href=&quot;https://gpuweb.github.io/gpuweb/#gpuuncapturederrorevent&quot;&gt;&lt;code&gt;GPUUncapturedErrorEvent&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;conformance-test-suite&quot; tabindex=&quot;-1&quot;&gt;Conformance Test Suite &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/#conformance-test-suite&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Conformance Test Suite is required for checking the accuracy of the implementation of the API and can be found &lt;a href=&quot;https://github.com/gpuweb/cts&quot;&gt;here&lt;/a&gt;. Servo vendors it’s own copy of the CTS which, currently, needs to be updated manually for the latest changes. Here are a few statistics of the tests:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;14/36 pass completely&lt;/li&gt;
+&lt;li&gt;5/36 have majority of subtests passing&lt;/li&gt;
+&lt;li&gt;17/36 fail/crash/timeout&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The wgpu team is actively working on improving the validation.&lt;/p&gt;
+&lt;h2 id=&quot;unfinished-business&quot; tabindex=&quot;-1&quot;&gt;Unfinished business &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/#unfinished-business&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;A major portion of the project that was proposed has been completed, but there’s still work left to do. These are a few things that I was unable to cover under the proposed timeline:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Profiling and benchmarking the implementation against the WebGL implementation of Servo.&lt;/li&gt;
+&lt;li&gt;Handle canvas resize event smoothly.&lt;/li&gt;
+&lt;li&gt;Support Error recording on Workers.&lt;/li&gt;
+&lt;li&gt;Support WGSL shaders.&lt;/li&gt;
+&lt;li&gt;Pass the remaining tests in the CTS.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;important-links&quot; tabindex=&quot;-1&quot;&gt;Important Links &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/#important-links&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The WebGPU specification can be found &lt;a href=&quot;https://gpuweb.github.io/gpuweb/&quot;&gt;here&lt;/a&gt;.
+The PRs that I made as a part of the project can be accessed via the following links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/pulls?q=is%3Apr+author%3Akunalmohan+created%3A%3E2020-05-05+merged%3A%3C2020-08-31+&quot;&gt;Servo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/gfx-rs/wgpu/pulls?q=is%3Apr+author%3Akunalmohan+created%3A%3E2020-05-05+merged%3A%3C2020-08-31+&quot;&gt;wgpu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/gpuweb/gpuweb/pulls?q=is%3Apr+author%3Akunalmohan+created%3A%3E2020-05-05+merged%3A%3C2020-08-31+&quot;&gt;WebGPU Specification&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The progress of the project can be tracked in the &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;GitHub project&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;Conclusion &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/30/gsoc-webgpu/#conclusion&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;WebGPU implementation in Servo supports all of the &lt;a href=&quot;https://austineng.github.io/webgpu-samples/&quot;&gt;Austin’s samples&lt;/a&gt;. Thanks to CYBAI and Josh, Servo now supports dynamic import of modules and thus accept GLSL shaders. Here are a few samples of what Servo is capable of rendering at 60fps:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-fractal-cube.gif&quot; alt=&quot;Fractal Cube&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-instanced-cube.gif&quot; alt=&quot;Instanced Cube&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-compute-boids.gif&quot; alt=&quot;Compute Boids&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;I would like to thank Dzmitry and Josh for guiding me throughout the project and a big shoutout to the WebGPU and Servo community for doing such awesome work! I had a great experience contributing to Servo and WebGPU. I started as a complete beginner to Rust, graphics and browser internals, but learned a lot during the course of this project. I urge all WebGPU users and graphics enthusiasts out there to test their projects on Servo and help us improve the implementation and the API as well :)&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>This Week In Servo 135</title>
+    <link href="https://servo.org/servo-new-slides/blog/2020/08/10/twis-135/"/>
+    <updated>2020-08-10T00:30:00Z</updated>
+    <id>https://servo.org/servo-new-slides/blog/2020/08/10/twis-135/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;In the &lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2020-07-27..2020-08-10+user%3Aservo+&quot;&gt;past two weeks&lt;/a&gt;,
+we merged 108 PRs in the Servo organization’s repositories.&lt;/p&gt;
+&lt;p&gt;The latest nightly builds for common platforms are available at &lt;a href=&quot;https://download.servo.org/&quot;&gt;download.servo.org&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Last week we released &lt;a href=&quot;https://www.microsoft.com/p/firefox-reality/9npq78m7nb0r&quot;&gt;Firefox Reality v1.2&lt;/a&gt;, which includes a smoother
+developer tools experience, along with support for Unity WebXR content and self-signed SSL certificates. See the
+&lt;a href=&quot;https://github.com/servo/servo/wiki/Firefox-Reality-release-notes&quot;&gt;full release notes&lt;/a&gt; for more information about the new release.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/27658/89798375-19568080-dafa-11ea-8bd3-d47a85741ed5.png&quot; alt=&quot;Image of unity webxr content&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/10/twis-135/#planning-and-status&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2020.&lt;/p&gt;
+&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/10/twis-135/#exciting-works-in-progress&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;paulrouget is &lt;a href=&quot;https://github.com/servo/servo/pull/27556&quot;&gt;adding&lt;/a&gt; bookmarks to Firefox Reality.&lt;/li&gt;
+&lt;li&gt;Manishearth is &lt;a href=&quot;https://github.com/servo/servo/pull/27488&quot;&gt;implementing&lt;/a&gt; basic table support in the new Layout 2020 engine.&lt;/li&gt;
+&lt;li&gt;jdm is &lt;a href=&quot;https://github.com/servo/servo/pull/27474&quot;&gt;making&lt;/a&gt; it easy to create builds that integrate AddressSanitizer.&lt;/li&gt;
+&lt;li&gt;pcwalton is &lt;a href=&quot;https://github.com/servo/servo/pull/27539&quot;&gt;implementing&lt;/a&gt; support for CSS floats in the new Layout 2020 engine.&lt;/li&gt;
+&lt;li&gt;kunalmohan is &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;implementing&lt;/a&gt; the draft WebGPU specification.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/10/twis-135/#notable-additions&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;h5 id=&quot;new-layout-engine&quot; tabindex=&quot;-1&quot;&gt;New layout engine &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/10/twis-135/#new-layout-engine&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/26447&quot;&gt;made&lt;/a&gt; &lt;code&gt;&amp;lt;br&amp;gt;&lt;/code&gt; elements break lines.&lt;/li&gt;
+&lt;li&gt;Manishearth &lt;a href=&quot;https://github.com/servo/servo/pull/27388&quot;&gt;implemented&lt;/a&gt; support for the &lt;code&gt;clip&lt;/code&gt; CSS property.&lt;/li&gt;
+&lt;li&gt;Manishearth &lt;a href=&quot;https://github.com/servo/servo/pull/27399&quot;&gt;fixed&lt;/a&gt; the behaviour of the &lt;code&gt;inset&lt;/code&gt; CSS property for absolutely positioned elements.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;non-layout-changes&quot; tabindex=&quot;-1&quot;&gt;Non-layout changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/10/twis-135/#non-layout-changes&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27402&quot;&gt;added&lt;/a&gt; the WebGPU conformance test suite to Servo’s automated tests.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27403&quot;&gt;improved&lt;/a&gt; the macOS nightly GStreamer packaging.&lt;/li&gt;
+&lt;li&gt;nicoabie &lt;a href=&quot;https://github.com/servo/rust-mozjs/pull/520&quot;&gt;made&lt;/a&gt; a SpiderMonkey Rust binding API more resilient.&lt;/li&gt;
+&lt;li&gt;utsavoze &lt;a href=&quot;https://github.com/servo/servo/pull/27413&quot;&gt;added&lt;/a&gt; support for &lt;code&gt;mouseenter&lt;/code&gt; and &lt;code&gt;mouseleave&lt;/code&gt; DOM events.&lt;/li&gt;
+&lt;li&gt;avr1254 &lt;a href=&quot;https://github.com/servo/servo/pull/27420&quot;&gt;removed&lt;/a&gt; some unnecessary UTF-8 to UTF-16 conversions when interacting with SpiderMonkey.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27425&quot;&gt;implemented&lt;/a&gt; &lt;code&gt;preserveDrawbingBuffer&lt;/code&gt; support in WebGL code.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27438&quot;&gt;added&lt;/a&gt; a crash reporting UI to Firefox Reality.&lt;/li&gt;
+&lt;li&gt;mustafapc19 &lt;a href=&quot;https://github.com/servo/servo/pull/27443&quot;&gt;implemented&lt;/a&gt; the &lt;code&gt;Console.clear&lt;/code&gt; DOM API.&lt;/li&gt;
+&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27447&quot;&gt;fixed&lt;/a&gt; a WebGPU crash related to the &lt;code&gt;GPUErrorScope&lt;/code&gt; API, and &lt;a href=&quot;https://github.com/servo/servo/pull/27536&quot;&gt;improved&lt;/a&gt; the reporting behaviour to match the specification.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27448&quot;&gt;fixed&lt;/a&gt; a source of WebGL texture corruption in WebXR.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27456&quot;&gt;added&lt;/a&gt; infrastructure to the GStreamer plugin to allow live-streaming 360 degree videos of Hubs rooms to Youtube.&lt;/li&gt;
+&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27480&quot;&gt;improved&lt;/a&gt; the error reporting behaviour of the WebGPU API.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27487&quot;&gt;update&lt;/a&gt; the WebXR Layers implementation to match the latest specification.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27491&quot;&gt;improved&lt;/a&gt; the Firefox Reality preferences panel to highlight specific experimental features.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27530&quot;&gt;fixed&lt;/a&gt; a crash when playing media in Firefox Reality.&lt;/li&gt;
+&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27506&quot;&gt;fixed&lt;/a&gt; a source of memory corruption in the C++ embedding layer.&lt;/li&gt;
+&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27512&quot;&gt;avoided&lt;/a&gt; pancking when a devtools client disconnects unexpectedly.&lt;/li&gt;
+&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/webxr/pull/191&quot;&gt;made&lt;/a&gt; it easier to test AR web content in desktop builds.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/servo-new-slides/blog/2020/08/10/twis-135/#new-contributors&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/nosark&quot;&gt;Kyle Nosar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Monty0045&quot;&gt;Wyatt Turner&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/mustafapc19&quot;&gt;mustafapc19&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
+</content>
+  </entry>
+</feed>
