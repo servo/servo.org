@@ -30,7 +30,7 @@ Linux Foundation Europe Member Summit 2023
 
 </div>
 
-<img src="/img/lf-europe-logo.png" style="width: 200px; position: absolute; left: -120px;" alt="Linux Foundation Europe logo" />
+<img src="/img/lf-europe-logo.png" style="width: 200px; position: absolute; left: -120px; top: 626px;" alt="Linux Foundation Europe logo" />
 
 -----
 
@@ -41,6 +41,8 @@ Linux Foundation Europe Member Summit 2023
 ## What's Servo?
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
 ----
 
@@ -58,6 +60,8 @@ written in **Rust**,
 **WebGL** and **WebGPU** capable,  
 and adaptable to **desktop**, **mobile**,  
 and **embedded** applications.
+
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
 ----
 
@@ -78,11 +82,14 @@ and **embedded** applications.
 
 <br>
 
-<div style="font-size: 50%; margin-top: 4em;">
+<div style="font-size: 50%; margin-top: 4em; text-align: right;">
 
 [Picture by Lin Clark](https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/)
 
 </div>
+
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
 
 ----
 
@@ -98,8 +105,10 @@ and **embedded** applications.
 <img src="/img/rust-logo-blk-300.png" alt="Rust logo" style="background: white; padding: 1em; width: 200px;" />
 </div>
 
-* <strong><span style="color: #f03278;">Memory-safe</span></strong>: Fewer vulnerabilities
+* <strong><span style="color: #f03278;">Memory safety</span></strong>: Fewer vulnerabilities
 * <strong><span style="color: #faae30;">Concurrency</span></strong>: Faster & more energy-efficient
+
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
 ----
 
@@ -117,36 +126,27 @@ and **embedded** applications.
 
 </div>
 
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
 ----
 
 <!-- .slide: style="text-align: left;" -->
 
 <br>
 
-<h3 style="line-height: 1.4;">WebGPU</h3>
+<h3 style="line-height: 1.4;" onclick="document.getElementById('webgpuiframe').contentWindow.location.reload()">WebGPU</h3>
 
 <div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 <div style="text-align: center;">
 
-<iframe width="600px" height="500px" src="/slides/webgpu-game-of-life.html"></iframe>
+<iframe id="webgpuiframe" width="600px" height="500px" src="/slides/webgpu-game-of-life.html"></iframe>
 
 </div>
 
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
 ----
-
-<!--
-
-TODO: Not sure about this slide
-
-### Examples
-
-More examples at <demo.servo.org>
-
-TODO: demo.servo.org screenshot or iframe
-
--->
-
 
 <!-- .slide: style="text-align: left;" -->
 
@@ -184,6 +184,8 @@ TODO: demo.servo.org screenshot or iframe
 
 </div>
 
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
 ----
 
 
@@ -213,6 +215,8 @@ TODO: demo.servo.org screenshot or iframe
 [PinePhone Pro screenshot by Capyloon](https://floss.social/@capyloon@fosstodon.org/111032248649111871)
 
 </div>
+
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
 ----
 
@@ -244,6 +248,7 @@ Other applications
 
 </div>
 
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
 -----
 
@@ -262,8 +267,9 @@ Other applications
 * **Modular** <!-- .element: style="color: #f68243;" -->
 * **Parallel** <!-- .element: style="color: #faae30;" -->
 
------
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
+-----
 
 <!-- .slide: style="text-align: left;" -->
 
@@ -277,6 +283,8 @@ Other applications
 * Applications that use **WebGL, WebGPU or CSS-based ones**
 * Basis for Rust-based **native UI frameworks**
 
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
 -----
 
 
@@ -287,6 +295,8 @@ Other applications
 ## Status
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
 ----
 
@@ -304,6 +314,8 @@ Other applications
 
 </div>
 
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
 ----
 
 <!-- .slide: style="text-align: left;" -->
@@ -314,7 +326,9 @@ Other applications
 
 <div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
-<img src="/img/wpt.png" alt="Chart from wpt.servo.org showing progress since April 2023 in the CSS2 focus areas comparing the new Servo layout engine with the legacy one. The new engine went up from 63% to 78% in that period. The legacy engine is stable around 83%." />
+<img src="/img/wpt.png" style="margin-left: 50px; margin-top: 0px;" alt="Chart from wpt.servo.org showing progress since April 2023 in the CSS2 focus areas comparing the new Servo layout engine with the legacy one. The new engine went up from 63% to 78% in that period. The legacy engine is stable around 83%." />
+
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
 ----
 
@@ -332,6 +346,8 @@ Other applications
 * Complete **Android support**
 * Demos of **embedded applications**
 
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
 -----
 
 
@@ -347,6 +363,8 @@ Other applications
 * Chat: [servo.zulipchat.com](https://servo.zulipchat.com/)
 * Email: <join@servo.org>
 
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
 -----
 
 <!-- .slide: class="last" style="text-align: left;" -->
@@ -358,9 +376,13 @@ Other applications
 
 https://**servo.org**
 
+<span>https://floss.social/<strong>@servo</strong></span>
+
+<span>https://twitter.com/<strong>ServoDev</strong></span>
+
 </div>
 
-<img src="/img/servo-qr.png" style="width: 20%; margin-left: 10em;" alt="QR code with Servo logo pointing to servo.org website" />
+<img src="/img/servo-qr.png" style="width: 20%; margin-left: 3em;" alt="QR code with Servo logo pointing to servo.org website" />
 
 <div style="text-align: center;">
 
