@@ -32,6 +32,8 @@ Linux Foundation Europe Member Summit 2023
 
 <img src="/img/lf-europe-logo.png" style="width: 200px; position: absolute; left: -120px; top: 626px;" alt="Linux Foundation Europe logo" />
 
+<img src="/img/igalia.png" style="width: 200px; position: absolute; right: -100px; top: 597px;" alt="Linux Foundation Europe logo" />
+
 -----
 
 <!-- .slide: style="text-align: left;" -->
