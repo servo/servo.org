@@ -68,7 +68,7 @@ and **embedded** applications.
 
 <h3 style="line-height: 1.4;">Web Rendering Engine</h3>
 
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 <div style="font-size: 50%; text-align: center;">
 
@@ -92,7 +92,7 @@ and **embedded** applications.
 
 <h3 style="line-height: 1.4;">Rust Programming Language</h3>
 
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 <div style="text-align: center;">
 <img src="/img/rust-logo-blk-300.png" alt="Rust logo" style="background: white; padding: 1em; width: 200px;" />
@@ -109,7 +109,7 @@ and **embedded** applications.
 
 <h3 style="line-height: 1.4;">WebGL</h3>
 
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 <div style="text-align: center;">
 
@@ -125,7 +125,7 @@ and **embedded** applications.
 
 <h3 style="line-height: 1.4;">WebGPU</h3>
 
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 <div style="text-align: center;">
 
@@ -154,7 +154,7 @@ TODO: demo.servo.org screenshot or iframe
 
 <h3 style="line-height: 1.4;">Desktop</h3>
 
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 <div style="position: absolute; left: -100px; right: -150px;">
 
@@ -194,7 +194,7 @@ TODO: demo.servo.org screenshot or iframe
 <h3 style="line-height: 1.4; display: inline-block;">Mobile</h3>
 <div style="display: inline-block; line-height: 1.4; margin-left: 2em; margin-top: 0.3em;">Android & Linux (PinePhone Pro)</div>
 
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 <div style="float: left; width: 45%; margin: 1.5%; height: 450px; text-align: center;">
 
@@ -223,7 +223,7 @@ TODO: demo.servo.org screenshot or iframe
 
 <h3 style="line-height: 1.4;">Embedded applications</h3>
 
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 <div style="float: left; text-align: center; width: 45%;">
 
@@ -256,11 +256,11 @@ Other applications
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-* <span style="color: #4fc066;">Embeddable</span>
-* <span style="color: #209e9b;">Independent</span>
-* <span style="color: #f03278;">Memory-safe</span>
-* <span style="color: #f68243;">Modular</span>
-* <span style="color: #faae30;">Parallel</span>
+* **Embeddable** <!-- .element: style="color: #4fc066;" -->
+* **Independent** <!-- .element: style="color: #209e9b;" -->
+* **Memory-safe** <!-- .element: style="color: #f03278;" -->
+* **Modular** <!-- .element: style="color: #f68243;" -->
+* **Parallel** <!-- .element: style="color: #faae30;" -->
 
 -----
 
@@ -296,7 +296,7 @@ Other applications
 
 <h3 style="line-height: 1.4;">2023 Roadmap</h3>
 
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 <div style="position: absolute; left: -100px; right: -150px;">
 
@@ -312,7 +312,7 @@ Other applications
 
 <h3 style="line-height: 1.4;">WPT Progress</h3>
 
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 <img src="/img/wpt.png" alt="Chart from wpt.servo.org showing progress since April 2023 in the CSS2 focus areas comparing the new Servo layout engine with the legacy one. The new engine went up from 63% to 78% in that period. The legacy engine is stable around 83%." />
 
@@ -325,12 +325,12 @@ Other applications
 
 <h3 style="line-height: 1.4;">2024 Plan</h3>
 
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
-* Project maintenance and outreach
-* Improve CSS support
-* Complete Android support
-* Demos of embedded applications
+* Project **maintenance** and **outreach**
+* **Improve CSS support**
+* Complete **Android support**
+* Demos of **embedded applications**
 
 -----
 
