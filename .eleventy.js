@@ -40,7 +40,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("frontpageBlogPosts", (collectionApi) => {
     let i =0;
     return collectionApi.getFilteredByTag("blog").reverse().filter((item) => {
-      return i++ < 2;
+      return i++ < 4;
     });
   })
 }
