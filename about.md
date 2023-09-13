@@ -44,4 +44,7 @@ The chart below tracks our pass rates in several *focus areas* of the [Web Platf
 * [Servo: Building a Parallel Browser](https://www.youtube.com/watch?v=7q9vIMXSTzc) by Jack Moffitt (Jan 2015 at linux.conf.au)
 * [Servo: Designing and Implementing a Parallel Browser](https://www.youtube.com/watch?v=67QP8t-89VM) by Jack Moffitt (Oct 2013 at Strange Loop)
 
+## Logo
+
+Servo logo can be found at <https://github.com/servo/project/tree/master/logo>.
 
