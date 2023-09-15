@@ -4,12 +4,77 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2023-07-20T00:00:00Z</updated>
+  <updated>2023-09-15T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>This month in Servo: upcoming events, new browser UI, and more!</title>
+    <link href="https://servo.org/blog/2023/09/15/upcoming-events-and-new-browser-ui/"/>
+    <updated>2023-09-15T00:00:00Z</updated>
+    <id>https://servo.org/blog/2023/09/15/upcoming-events-and-new-browser-ui/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Servo has had some exciting changes land in our nightly builds over the last month:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;as of 2023-08-09, we now use &lt;strong&gt;rustls&lt;/strong&gt; instead of OpenSSL (&lt;a href=&quot;https://github.com/servo/servo/pull/30025&quot;&gt;#30025&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2023-08-21, our experimental &lt;strong&gt;WebGPU&lt;/strong&gt; support was updated (&lt;a href=&quot;https://github.com/servo/servo/pull/29795&quot;&gt;#29795&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30359&quot;&gt;#30359&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2023-08-26, we can now build on &lt;strong&gt;ARM32&lt;/strong&gt; in addition to ARM64 (&lt;a href=&quot;https://github.com/servo/servo/pull/30204&quot;&gt;#30204&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2023-09-01, CSS &lt;strong&gt;floats&lt;/strong&gt; are now supported again (&lt;a href=&quot;https://github.com/servo/servo/pull/30243&quot;&gt;#30243&lt;/a&gt; et al)&lt;/li&gt;
+&lt;li&gt;as of 2023-09-05, &lt;strong&gt;‘white-space: nowrap’&lt;/strong&gt; is now supported again (&lt;a href=&quot;https://github.com/servo/servo/pull/30259&quot;&gt;#30259&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2023-09-07, we have an improved &lt;strong&gt;crash error page&lt;/strong&gt; (&lt;a href=&quot;https://github.com/servo/servo/pull/30290&quot;&gt;#30290&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2023-09-15, our &lt;strong&gt;new browser UI&lt;/strong&gt; is enabled by default (&lt;a href=&quot;https://github.com/servo/servo/issues/30049&quot;&gt;#30049&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;style&gt;
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    .figl:not(#specificity),
+    .figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    .figl {
+        float: left;
+    }
+    .figr {
+        float: right;
+    }
+    .figl &gt; a &gt; img,
+    .figr &gt; a &gt; img {
+        width: 17em;
+        max-width: max-content;
+    }
+    .figw &gt; a &gt; img {
+        width: 33em;
+        max-width: 100%;
+    }
+&lt;/style&gt;
+&lt;figure class=&quot;figr&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/webgpu-game-of-life.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-game-of-life.png&quot; alt=&quot;WebGPU game of life, showing a 32x32 grid where the living cells are shaded with a rainbow texture&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;While our &lt;strong&gt;WebGPU&lt;/strong&gt; support is still very much experimental (&lt;code&gt;--pref dom.webgpu.enabled&lt;/code&gt;), it now passes over 5000 more tests in the &lt;a href=&quot;https://github.com/gpuweb/cts&quot;&gt;Conformance Test Suite&lt;/a&gt;, after an upgrade from wgpu 0.6 (2020) to 0.16 (2023) and the addition of GPUSupportedFeatures. A few WebGPU demos now run too, notably those that don’t require &lt;a href=&quot;https://github.com/servo/servo/blob/0b86d6579823d0786b37cee86eaaf3ce6bd8aa7d/components/script/dom/htmlcanvaselement.rs#L98-L110&quot;&gt;changing the width or height on the fly&lt;/a&gt;, such as the &lt;a href=&quot;https://sagudev.github.io/briefcase/first-webgpu/9-endgame.html&quot;&gt;Conway’s Game of Life&lt;/a&gt; built in &lt;a href=&quot;https://codelabs.developers.google.com/your-first-webgpu-app&quot;&gt;Your first WebGPU app&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Both of these were contributed by &lt;a href=&quot;https://github.com/sagudev&quot;&gt;Samson @sagudev&lt;/a&gt;, who has also done a lot of work on our DOM bindings, SpiderMonkey integration, and CI workflows, and we’re pleased to now have them join Servo as a reviewer too!&lt;/p&gt;
+&lt;figure class=&quot;figl&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/floats-wikipedia.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/floats-wikipedia.png&quot; alt=&quot;Wikipedia article for Servo, showing article text flowing around the floating infobox on the right&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
+&lt;p&gt;On the CSS front, &lt;strong&gt;floats&lt;/strong&gt; and &lt;strong&gt;‘white-space: nowrap’&lt;/strong&gt; were previously only supported in our legacy layout engine (&lt;code&gt;--legacy-layout&lt;/code&gt;), but now they are supported again, and better than ever before! Floats in particular are one of the trickiest parts of CSS2, and our legacy version had many bugs that were essentially unfixable due to the &lt;a href=&quot;https://servo.org/blog/2023/04/13/layout-2013-vs-2020/&quot;&gt;legacy layout architecture&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Sometimes Servo crashes due to bugs or unimplemented features, and Rust helps us ensure that they almost always happen &lt;em&gt;safely&lt;/em&gt; by panicking, but there’s still a lot we can do to improve the user experience while surfacing those panics, especially on platforms without stdio like Windows.&lt;/p&gt;
+&lt;p&gt;Our new &lt;strong&gt;crash error page&lt;/strong&gt; shows the panic message and stack trace, instead of a confusing “unexpected scheme” error, and allows the user to reload the page. Note that not all crashes are handled gracefully yet — more work is needed to allow recovery from crashes in style and layout.&lt;/p&gt;
+&lt;figure class=&quot;figw&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/crash-error-page.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/crash-error-page.png&quot; alt=&quot;Servo’s new crash error page, showing a fake panic!() inserted at the start of Document::Write&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
+&lt;p&gt;Servo’s example browser — the nightly version of Servo you can download and run — now has a location bar! This &lt;strong&gt;new browser UI&lt;/strong&gt;, or “minibrowser” mode, is now enabled by default, though you can disable it with &lt;code&gt;--no-minibrowser&lt;/code&gt; if you run into any problems. See also &lt;a href=&quot;https://github.com/servo/servo/issues/30049&quot;&gt;#30049&lt;/a&gt; for known issues with the minibrowser.&lt;/p&gt;
+&lt;figure class=&quot;figw&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/new-browser-ui.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/new-browser-ui.png&quot; alt=&quot;Servo’s new browser UI, showing a toolbar with a location field and go button&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;upcoming-events&quot; tabindex=&quot;-1&quot;&gt;Upcoming events &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/09/15/upcoming-events-and-new-browser-ui/#upcoming-events&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;September is also a big month for Servo as a project! We have &lt;a href=&quot;https://linuxfoundation.eu/newsroom/servo-web-rendering-engine-joins-linux-foundation-europe&quot;&gt;joined Linux Foundation Europe&lt;/a&gt;, and we’re also attending several events in Bilbao, Spain, and Shanghai, China.&lt;/p&gt;
+&lt;p&gt;Servo will be at the &lt;a href=&quot;https://events.linuxfoundation.org/lf-europe-member-summit/program/schedule/&quot;&gt;LF Europe Member Summit&lt;/a&gt; in Bilbao, with a &lt;a href=&quot;https://lfeuropems2023.sched.com/event/1PCHu&quot;&gt;brief project update&lt;/a&gt; on &lt;strong&gt;18 September&lt;/strong&gt; at &lt;strong&gt;10:45 local time&lt;/strong&gt; (08:45 UTC), and the &lt;a href=&quot;https://events.linuxfoundation.org/open-source-summit-europe/&quot;&gt;Open Source Summit Europe&lt;/a&gt;, with Manuel Rego &lt;a href=&quot;https://osseu2023.sched.com/event/1OGkc&quot;&gt;speaking about Servo&lt;/a&gt; on &lt;strong&gt;21 September&lt;/strong&gt; at &lt;strong&gt;11:55 local time&lt;/strong&gt; (09:55 UTC).&lt;/p&gt;
+&lt;p&gt;At both events, we will also have a booth where you can play with Servo on a real device and ask us questions about the project, all day from &lt;strong&gt;18 September&lt;/strong&gt; through &lt;strong&gt;21 September&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The following week, you can find us at the &lt;a href=&quot;https://www.gosim.org/#events&quot;&gt;GOSIM&lt;/a&gt; &lt;a href=&quot;https://workshop2023.gosim.org/&quot;&gt;workshop&lt;/a&gt; and &lt;a href=&quot;https://conference2023.gosim.org/&quot;&gt;conference&lt;/a&gt; in Shanghai, with Martin Robinson presenting one workshop and one talk:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://workshop2023.gosim.org/schedule#mobile&quot;&gt;&lt;strong&gt;You can work on the web platform!&lt;/strong&gt;&lt;/a&gt; — an introduction to hacking on Servo, on &lt;strong&gt;24 September&lt;/strong&gt; at &lt;strong&gt;13:45 local time&lt;/strong&gt; (05:45 UTC)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://conference2023.gosim.org/schedule#mobile&quot;&gt;&lt;strong&gt;Servo: a web view from somewhere else&lt;/strong&gt;&lt;/a&gt; — a case for embeddable web engine diversity and Servo’s role in improving that, on &lt;strong&gt;26 September&lt;/strong&gt; at &lt;strong&gt;14:45 local time&lt;/strong&gt; (06:45 UTC)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Servo and the Web Platform Tests</title>
     <link href="https://servo.org/blog/2023/07/20/servo-web-platform-tests/"/>
@@ -370,78 +435,6 @@ The PRs that I made as a part of the project can be accessed via the following l
 &lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-instanced-cube.gif&quot; alt=&quot;Instanced Cube&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-compute-boids.gif&quot; alt=&quot;Compute Boids&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;I would like to thank Dzmitry and Josh for guiding me throughout the project and a big shoutout to the WebGPU and Servo community for doing such awesome work! I had a great experience contributing to Servo and WebGPU. I started as a complete beginner to Rust, graphics and browser internals, but learned a lot during the course of this project. I urge all WebGPU users and graphics enthusiasts out there to test their projects on Servo and help us improve the implementation and the API as well :)&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>This Week In Servo 135</title>
-    <link href="https://servo.org/blog/2020/08/10/twis-135/"/>
-    <updated>2020-08-10T00:30:00Z</updated>
-    <id>https://servo.org/blog/2020/08/10/twis-135/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;In the &lt;a href=&quot;https://github.com/pulls?utf8=%E2%9C%93&amp;amp;q=is%3Apr+is%3Amerged+closed%3A2020-07-27..2020-08-10+user%3Aservo+&quot;&gt;past two weeks&lt;/a&gt;,
-we merged 108 PRs in the Servo organization’s repositories.&lt;/p&gt;
-&lt;p&gt;The latest nightly builds for common platforms are available at &lt;a href=&quot;https://download.servo.org/&quot;&gt;download.servo.org&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Last week we released &lt;a href=&quot;https://www.microsoft.com/p/firefox-reality/9npq78m7nb0r&quot;&gt;Firefox Reality v1.2&lt;/a&gt;, which includes a smoother
-developer tools experience, along with support for Unity WebXR content and self-signed SSL certificates. See the
-&lt;a href=&quot;https://github.com/servo/servo/wiki/Firefox-Reality-release-notes&quot;&gt;full release notes&lt;/a&gt; for more information about the new release.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://user-images.githubusercontent.com/27658/89798375-19568080-dafa-11ea-8bd3-d47a85741ed5.png&quot; alt=&quot;Image of unity webxr content&quot; /&gt;&lt;/p&gt;
-&lt;h3 id=&quot;planning-and-status&quot; tabindex=&quot;-1&quot;&gt;Planning and Status &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#planning-and-status&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;roadmap&lt;/a&gt; is available online, including the team’s plans for 2020.&lt;/p&gt;
-&lt;p&gt;This week’s status updates are &lt;a href=&quot;https://build.servo.org/standups/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&quot;exciting-works-in-progress&quot; tabindex=&quot;-1&quot;&gt;Exciting works in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#exciting-works-in-progress&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;paulrouget is &lt;a href=&quot;https://github.com/servo/servo/pull/27556&quot;&gt;adding&lt;/a&gt; bookmarks to Firefox Reality.&lt;/li&gt;
-&lt;li&gt;Manishearth is &lt;a href=&quot;https://github.com/servo/servo/pull/27488&quot;&gt;implementing&lt;/a&gt; basic table support in the new Layout 2020 engine.&lt;/li&gt;
-&lt;li&gt;jdm is &lt;a href=&quot;https://github.com/servo/servo/pull/27474&quot;&gt;making&lt;/a&gt; it easy to create builds that integrate AddressSanitizer.&lt;/li&gt;
-&lt;li&gt;pcwalton is &lt;a href=&quot;https://github.com/servo/servo/pull/27539&quot;&gt;implementing&lt;/a&gt; support for CSS floats in the new Layout 2020 engine.&lt;/li&gt;
-&lt;li&gt;kunalmohan is &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;implementing&lt;/a&gt; the draft WebGPU specification.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;notable-additions&quot; tabindex=&quot;-1&quot;&gt;Notable Additions &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#notable-additions&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;h5 id=&quot;new-layout-engine&quot; tabindex=&quot;-1&quot;&gt;New layout engine &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#new-layout-engine&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h5&gt;
-&lt;ul&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/26447&quot;&gt;made&lt;/a&gt; &lt;code&gt;&amp;lt;br&amp;gt;&lt;/code&gt; elements break lines.&lt;/li&gt;
-&lt;li&gt;Manishearth &lt;a href=&quot;https://github.com/servo/servo/pull/27388&quot;&gt;implemented&lt;/a&gt; support for the &lt;code&gt;clip&lt;/code&gt; CSS property.&lt;/li&gt;
-&lt;li&gt;Manishearth &lt;a href=&quot;https://github.com/servo/servo/pull/27399&quot;&gt;fixed&lt;/a&gt; the behaviour of the &lt;code&gt;inset&lt;/code&gt; CSS property for absolutely positioned elements.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;non-layout-changes&quot; tabindex=&quot;-1&quot;&gt;Non-layout changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#non-layout-changes&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27402&quot;&gt;added&lt;/a&gt; the WebGPU conformance test suite to Servo’s automated tests.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27403&quot;&gt;improved&lt;/a&gt; the macOS nightly GStreamer packaging.&lt;/li&gt;
-&lt;li&gt;nicoabie &lt;a href=&quot;https://github.com/servo/rust-mozjs/pull/520&quot;&gt;made&lt;/a&gt; a SpiderMonkey Rust binding API more resilient.&lt;/li&gt;
-&lt;li&gt;utsavoze &lt;a href=&quot;https://github.com/servo/servo/pull/27413&quot;&gt;added&lt;/a&gt; support for &lt;code&gt;mouseenter&lt;/code&gt; and &lt;code&gt;mouseleave&lt;/code&gt; DOM events.&lt;/li&gt;
-&lt;li&gt;avr1254 &lt;a href=&quot;https://github.com/servo/servo/pull/27420&quot;&gt;removed&lt;/a&gt; some unnecessary UTF-8 to UTF-16 conversions when interacting with SpiderMonkey.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27425&quot;&gt;implemented&lt;/a&gt; &lt;code&gt;preserveDrawbingBuffer&lt;/code&gt; support in WebGL code.&lt;/li&gt;
-&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27438&quot;&gt;added&lt;/a&gt; a crash reporting UI to Firefox Reality.&lt;/li&gt;
-&lt;li&gt;mustafapc19 &lt;a href=&quot;https://github.com/servo/servo/pull/27443&quot;&gt;implemented&lt;/a&gt; the &lt;code&gt;Console.clear&lt;/code&gt; DOM API.&lt;/li&gt;
-&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27447&quot;&gt;fixed&lt;/a&gt; a WebGPU crash related to the &lt;code&gt;GPUErrorScope&lt;/code&gt; API, and &lt;a href=&quot;https://github.com/servo/servo/pull/27536&quot;&gt;improved&lt;/a&gt; the reporting behaviour to match the specification.&lt;/li&gt;
-&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27448&quot;&gt;fixed&lt;/a&gt; a source of WebGL texture corruption in WebXR.&lt;/li&gt;
-&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27456&quot;&gt;added&lt;/a&gt; infrastructure to the GStreamer plugin to allow live-streaming 360 degree videos of Hubs rooms to Youtube.&lt;/li&gt;
-&lt;li&gt;kunalmohan &lt;a href=&quot;https://github.com/servo/servo/pull/27480&quot;&gt;improved&lt;/a&gt; the error reporting behaviour of the WebGPU API.&lt;/li&gt;
-&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/servo/pull/27487&quot;&gt;update&lt;/a&gt; the WebXR Layers implementation to match the latest specification.&lt;/li&gt;
-&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27491&quot;&gt;improved&lt;/a&gt; the Firefox Reality preferences panel to highlight specific experimental features.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27530&quot;&gt;fixed&lt;/a&gt; a crash when playing media in Firefox Reality.&lt;/li&gt;
-&lt;li&gt;paulrouget &lt;a href=&quot;https://github.com/servo/servo/pull/27506&quot;&gt;fixed&lt;/a&gt; a source of memory corruption in the C++ embedding layer.&lt;/li&gt;
-&lt;li&gt;jdm &lt;a href=&quot;https://github.com/servo/servo/pull/27512&quot;&gt;avoided&lt;/a&gt; pancking when a devtools client disconnects unexpectedly.&lt;/li&gt;
-&lt;li&gt;asajeffrey &lt;a href=&quot;https://github.com/servo/webxr/pull/191&quot;&gt;made&lt;/a&gt; it easier to test AR web content in desktop builds.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New Contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/10/twis-135/#new-contributors&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/nosark&quot;&gt;Kyle Nosar&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/Monty0045&quot;&gt;Wyatt Turner&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/mustafapc19&quot;&gt;mustafapc19&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Interested in helping build a web browser? Take a look at our &lt;a href=&quot;https://starters.servo.org/&quot;&gt;curated list&lt;/a&gt; of issues that are good for new contributors!&lt;/p&gt;
 </content>
   </entry>
 </feed>
