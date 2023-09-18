@@ -46,12 +46,12 @@ Open Source Summit Europe 2023
 
 <img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
-0.- Introduction  
-1.- What's Servo? (and what's not)  
-2.- Servo features  
-3.- Status  
-4.- Plans  
-5.- Conclusion
+* Introduction
+* What's Servo? (and what's not)
+* Servo features
+* Status
+* Plans
+* Conclusion
 
 -----
 
