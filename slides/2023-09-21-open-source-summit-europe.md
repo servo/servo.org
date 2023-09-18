@@ -573,7 +573,7 @@ Other applications
 
 <div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
-<img src="/img/wpt.png" style="margin-left: 50px; margin-top: 0px;" alt="Chart from wpt.servo.org showing progress in /css/CSS2/floats/ folder since April comparing the new Servo layout engine with the legacy one. The new engine went up from 17% to 76% in that period. The legacy engine moved from 47% to 53%." />
+<img src="/img/wpt-floats.png" style="margin-left: 50px; margin-top: 0px;" alt="Chart from wpt.servo.org showing progress in /css/CSS2/floats/ folder since April comparing the new Servo layout engine with the legacy one. The new engine went up from 17% to 76% in that period. The legacy engine moved from 47% to 53%." />
 
 <div style="font-size: 50%; margin-top: -0.5em; text-align: right;">
 
