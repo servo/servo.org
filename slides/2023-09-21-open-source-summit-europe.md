@@ -824,7 +824,7 @@ Other applications
 
 <br>
 
-<h2 style="line-height: 1.4;">Join the project</h2>
+<h3 style="line-height: 1.4;">Join the project</h3>
 
 <div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
