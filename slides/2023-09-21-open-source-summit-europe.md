@@ -419,7 +419,7 @@ Other applications
 * **Rust** programming language
 * Borrow checker and ownership system
 * Built-in safe concurrent data structures
-* **Eliminate vulnerabilities** related to **memory** (e.g. *use-after-free*) and **concurrency** (e.g. race conditions)
+* **Eliminate vulnerabilities** related to **memory** (e.g. *use-after-free*) and **concurrency** (e.g. data races)
 
 ----
 
