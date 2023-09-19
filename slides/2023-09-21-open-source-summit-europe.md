@@ -68,7 +68,7 @@ Open Source Summit Europe 2023
 * **CSS Working Group** member since 2017
 * **Servo** Technical Steering Committee (TSC) chair
 
-<div style="text-align: center; padding: 1em;">
+<div style="text-align: center;">
 
 <img src="/img/igalia.png" style="width: 300px;" alt="Igalia logo" />
 
