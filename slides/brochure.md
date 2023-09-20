@@ -23,7 +23,7 @@ title: Servo
 
 <div style="width: 50px; height: 10px; background: #712b97; margin-bottom: 20px;"></div>
 
-Servo is a **web rendering engine** written in Rust, WebGL and WebGPU capable, and adaptable to desktop, mobile, and embedded applications.
+Servo is a **web rendering engine** written in Rust, with WebGL and WebGPU support, and adaptable to desktop, mobile, and embedded applications.
 
 -----
 

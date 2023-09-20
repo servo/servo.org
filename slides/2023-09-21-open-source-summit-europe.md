@@ -101,7 +101,7 @@ Open Source Summit Europe 2023
 Servo is  
 a **web rendering engine**  
 written in **Rust**,  
-**WebGL** and **WebGPU** capable,  
+with **WebGL** and **WebGPU** support,  
 and adaptable to **desktop**, **mobile**,  
 and **embedded** applications.
 
