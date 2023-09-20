@@ -5,7 +5,9 @@ title: Servo
 
 <!-- .slide: class="cover" -->
 
-<img src="/img/servo-color-negative-no-container-600.png" style="margin: 2em;" alt="Servo logo" />
+<img src="/img/servo-color-negative-no-container-600.png" style="margin: 2em; margin-bottom: 1em;" alt="Servo logo" />
+
+<h2>Servo Web Rendering Engine Reboot</h2>
 
 <h4 style="line-height: 1.4">
   The
@@ -18,7 +20,7 @@ title: Servo
   <br>
 </h4>
 
-<div style="font-size: 60%; margin-top: 4em;">
+<div style="font-size: 60%; margin-top: 0em;">
 
 Manuel Rego (he/him) <rego@igalia.com>
 
