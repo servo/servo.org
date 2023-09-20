@@ -55,6 +55,8 @@ Open Source Summit Europe 2023
 * Plans
 * Conclusion
 
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
 -----
 
 <!-- .slide: style="text-align: left;" -->
@@ -70,11 +72,30 @@ Open Source Summit Europe 2023
 * **CSS Working Group** member since 2017
 * **Servo** Technical Steering Committee (TSC) chair
 
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
+----
+
+<!-- .slide: style="text-align: left;" -->
+
+<br>
+
+## About Igalia
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+* **Open Source Consultancy** founded in 2001
+* 140 people, fully remote (25 countires)
+* **Flat structure** (cooperative like model)
+* Top contributors to **Chromium, WebKit and Gecko**
+
 <div style="text-align: center;">
 
 <img src="/img/igalia.png" style="width: 300px;" alt="Igalia logo" />
 
 </div>
+
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
 -----
 
@@ -524,7 +545,7 @@ Other applications
 <div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 * **WebRender** has been upgraded to mid 2021
-* **Stylo** has upgrade is at ~50% (landing in batches)
+* **Stylo** upgrade is at ~50% (landing in batches)
 * **SpiderMonkey** hasn't been upgraded yet
 
 <img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
@@ -798,8 +819,8 @@ Other applications
 <div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
 * **Renewed project activity** has been successful
-* **New layout engine** is paving the path for more feature support and better interoperability
 * **Great progress** during 2023 in many areas
+* **New layout engine** is paving the path for more features support and better interoperability
 * **Servo is still an experimental** and big project with lots of work everywhere
 
 <img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
