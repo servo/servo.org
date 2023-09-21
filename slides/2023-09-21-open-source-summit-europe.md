@@ -529,7 +529,7 @@ Other applications
 
 <div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
-* **Blog pots** with updates around the project: <https://servo.org/blog/>
+* **Blog posts** with updates around the project: <https://servo.org/blog/>
 * **Events**: RustNL, Web Engines Hackfest, Embedded Open Source Summit, W3C TPAC, Linux Foundation Europe Member Summit, Open Source Summit Europe, GOSIM
 
 <img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
