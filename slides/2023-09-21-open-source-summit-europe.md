@@ -84,6 +84,8 @@ Open Source Summit Europe 2023
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
+<img src="/img/birthday.png" alt="Birthday cake" style="position: absolute; right: 0; top: 3.3em;" />
+
 * **Open Source Consultancy** founded in 2001
 * 140 people, fully remote (25 countires)
 * **Flat structure** (cooperative like model)
@@ -546,7 +548,7 @@ Other applications
 
 * **WebRender** has been upgraded to mid 2021
 * **Stylo** upgrade is at ~50% (landing in batches)
-* **SpiderMonkey** hasn't been upgraded yet
+* **SpiderMonkey** has ~~not~~ been upgraded ~~yet~~!
 
 <img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
