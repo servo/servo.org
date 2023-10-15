@@ -1,6 +1,6 @@
 ---
 layout: slides-new.html
-title: Servo 2023 Reboot - EclipseCon 2023
+title: Servo @ EclipseCon 2023
 ---
 
 <!-- .slide: class="cover" -->
