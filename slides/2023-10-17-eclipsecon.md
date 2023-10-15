@@ -26,16 +26,6 @@ Rakhi Sharma (She/her) <atbrakhi@igalia.com>
 
 <!-- .slide: style="text-align: left;" -->
 
-<h3 style="line-height: 1.4;">What's Servo</h3>
-
-<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 10px;"></div>
-
-<br>
-
-----
-
-<!-- .slide: style="text-align: left;" -->
-
 <br>
 
 ## What's Servo?
@@ -55,7 +45,7 @@ and **embedded** applications.
 
 <div style="font-size: 100%; text-align: center;">
 
-<img src="/img/hands.jpg" alt="" style="background: white; padding: 1em; width: 500px; margin: 3em 0;" />
+<img src="/img/hands.jpg" alt="An image of a handshake where one hand represents Rust and the other Servo" style="background: white; padding: 1em; width: 500px; margin: 3em 0;" />
 
 </div>
 
@@ -159,6 +149,7 @@ Other applications
 <img src="/img/delta-chat.png" alt="Delta Chat logo" style="width: 150px;" />
 
 <img src="/img/webxdc.png" alt="webxdc logo" style="width: 150px;" />
+<img src="/img/onirologo.svg" alt="oniro logo" style="width: 350px;" />
 
 </div>
 
