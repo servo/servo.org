@@ -127,6 +127,18 @@ PinePhone Pro screenshot by Capyloon<br>https://floss.social/@capyloon@fosstodon
 
 <!-- .slide: style="text-align: left;" -->
 
+<h3 style="line-height: 1.4;">Servo Embedding</h3>
+
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 50px;"></div>
+
+* Previous decade has seen great decrease in the diversity of web engines
+* Embedded web engine space is even less diverse
+* WPE (WebKit) and CEF (Chromium) are the only major players
+
+----
+
+<!-- .slide: style="text-align: left;" -->
+
 <br>
 
 <h3 style="line-height: 1.4;">Embedded applications</h3>
