@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: top text"
-date:       2023-10-24
-summary:    bottom text
+title:      "This month in Servo: CSS filters, testing changes, Tauri, and more!"
+date:       2023-10-25
+summary:    Catch up on our recent conference talks, embedding news, and debugging and testing changes, plus nightly updates around media queries, the DOM, upgrades, CSS filters, and canvas performance.
 categories:
 ---
 
@@ -96,17 +96,6 @@ Sometimes the best source of ideas for improving Servo is to focus on a real-wor
     </figcaption>
 </figure>
 
-<div class="_runin"><p>Servo has long aimed to become an </p><h2>embeddable web engine</h2><p>, and our next step on this journey will be supported by a grant from <a href="https://nlnet.nl">NLNet</a>!
-Over the next few months, we will be collaborating with the developers of <a href="https://tauri.app">Tauri</a> to make Servo available as a webview backend.</p></div>
-
-Tauri is a framework for building desktop apps that combine a web frontend with a Rust backend, and work is already ongoing to expand it to mobile apps and other backend languages.
-But unlike say, Electron or React Native, Tauri is both frontend-agnostic and engine-agnostic, allowing you to use any frontend tooling you like and whichever web engine makes the most sense for your users.
-
-At the moment, Tauri supports webkit2gtk (WebKit) on Linux, WebView2 (Chromium) on Windows, and WKWebView (WebKit) on macOS and iOS, in each case leveraging the system webview where possible.
-With this project to add support for Servo in Tauri, we hope to make embedding Servo easier than ever.
-
-For more details, subscribe to our tracking issue [#30593](https://github.com/servo/servo/issues/30593).
-
 <figure class="_figr"><a href="{{ '/img/blog/try-job-labels.png' | url }}"><img src="{{ '/img/blog/try-job-labels.png' | url }}"
     alt="GitHub pull request label menu, with the new try job labels (T-full, T-linux-wpt-2013, T-linux-wpt-2020, T-macos, T-windows)"></a></figure>
 
@@ -123,7 +112,18 @@ You can now **run try jobs by adding labels** to your pull requests ([@mrobinson
 You can even add multiple labels!
 For more details, see [CONTRIBUTING.md](https://github.com/servo/servo/blob/master/CONTRIBUTING.md).
 
-<div class="_runin" style="clear: both;"><p>This was a big month for Servo at </p><h2>conferences and events</h2><p> too! You can catch up on the talks here:</p></div>
+<div class="_runin" style="clear: both;"><p>Servo has long aimed to become an </p><h2>embeddable web engine</h2><p>, and our next step on this journey will be supported by a grant from <a href="https://nlnet.nl">NLNet</a>!
+Over the next few months, we will be collaborating with the developers of <a href="https://tauri.app">Tauri</a> to make Servo available as a webview backend.</p></div>
+
+Tauri is a framework for building desktop apps that combine a web frontend with a Rust backend, and work is already ongoing to expand it to mobile apps and other backend languages.
+But unlike say, Electron or React Native, Tauri is both frontend-agnostic and engine-agnostic, allowing you to use any frontend tooling you like and whichever web engine makes the most sense for your users.
+
+At the moment, Tauri supports webkit2gtk (WebKit) on Linux, WebView2 (Chromium) on Windows, and WKWebView (WebKit) on macOS and iOS, in each case leveraging the system webview where possible.
+With this project to add support for Servo in Tauri, we hope to make embedding Servo easier than ever.
+
+For more details, subscribe to our tracking issue [#30593](https://github.com/servo/servo/issues/30593).
+
+<div class="_runin"><p>This was a big month for Servo at </p><h2>conferences and events</h2><p> too! You can catch up on our recent talks here:</p></div>
 
 * on 18 September, [**Servo project update**](https://www.youtube.com/watch?v=J4qedc-0pjs&t=2356s) by Manuel Rego, at [LF Europe Member Summit](https://lfeuropems2023.sched.com/event/1PCHu)
 * on 21 September, [**Servo Web Rendering Engine Reboot**](https://www.youtube.com/watch?v=9lkIX5ryZZ4) by Manuel Rego, at [Open Source Summit Europe](https://osseu2023.sched.com/event/1OGkc)
