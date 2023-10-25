@@ -118,8 +118,8 @@ For more details, subscribe to our tracking issue [#30593](https://github.com/se
 
 <div class="_runin"><p>This was a big month for Servo at </p><h2>conferences and events</h2><p> too! You can catch up on our recent talks here:</p></div>
 
-* on 18 September, [**Servo project update**](https://www.youtube.com/watch?v=J4qedc-0pjs&t=2356s) by Manuel Rego, at [LF Europe Member Summit](https://lfeuropems2023.sched.com/event/1PCHu)
-* on 21 September, [**Servo Web Rendering Engine Reboot**](https://www.youtube.com/watch?v=9lkIX5ryZZ4) by Manuel Rego, at [Open Source Summit Europe](https://osseu2023.sched.com/event/1OGkc)
-* on 24 September, [**You can work on the web platform!**](https://www.bilibili.com/video/BV1Hw411r7Q6/) by Martin Robinson, an introduction to hacking on Servo at [GOSIM workshop 2023](https://workshop2023.gosim.org/schedule#mobile)
-* on 26 September, [**Servo: a web view from somewhere else**](???) by Martin Robinson, a case for embeddable web engine diversity and Servo’s role in improving that at [GOSIM conference 2023](https://conference2023.gosim.org/schedule#mobile)
-* on ?? ?????????, [**?????**](???) by Rakhi Sharma, at [EclipseCon 2023](https://www.eclipsecon.org/2023/)
+* on 18 September, [**Servo project update**](https://www.youtube.com/watch?v=J4qedc-0pjs&t=2356s), by Manuel Rego at [LF Europe Member Summit](https://lfeuropems2023.sched.com/event/1PCHu)
+* on 21 September, [**Servo Web Rendering Engine Reboot**](https://www.youtube.com/watch?v=9lkIX5ryZZ4), by Manuel Rego at [Open Source Summit Europe](https://osseu2023.sched.com/event/1OGkc)
+* on 24 September, [**You can work on the web platform!**](https://www.bilibili.com/video/BV1Hw411r7Q6/), by Martin Robinson at [GOSIM workshop 2023](https://workshop2023.gosim.org/schedule#mobile)
+* on 26 September, **Servo: a web view from somewhere else** (video pending), by Martin Robinson at [GOSIM conference 2023](https://conference2023.gosim.org/schedule#mobile)
+* on 17 October, [**Servo**](https://servo.org/slides/2023-10-17-eclipsecon/), by Rakhi Sharma at [EclipseCon 2023](https://www.eclipsecon.org/2023/)
