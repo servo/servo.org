@@ -4,12 +4,131 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2023-09-15T00:00:00Z</updated>
+  <updated>2023-10-25T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>This month in Servo: CSS filters, testing changes, Tauri, and more!</title>
+    <link href="https://servo.org/blog/2023/10/25/css-filters-testing-tauri/"/>
+    <updated>2023-10-25T00:00:00Z</updated>
+    <id>https://servo.org/blog/2023/10/25/css-filters-testing-tauri/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Servo has had some exciting changes land in our nightly builds over the last month:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;as of 2023-09-23, &lt;strong&gt;‘@media (resolution)’&lt;/strong&gt; queries are now supported (&lt;a href=&quot;https://github.com/sagudev&quot;&gt;@sagudev&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30406&quot;&gt;#30406&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2023-09-28, the &lt;strong&gt;‘dir’ attribute getter&lt;/strong&gt; now behaves correctly (&lt;a href=&quot;https://github.com/EnnuiL&quot;&gt;@EnnuiL&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30435&quot;&gt;#30435&lt;/a&gt;)
+&lt;ul&gt;
+&lt;li&gt;this fixes &lt;strong&gt;over 12000 subtests&lt;/strong&gt; in the HTML test suite!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;style&gt;
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig &gt; ._flex {
+        display: flex;
+    }
+    ._fig._min {
+        width: min-content;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+    }
+    ._figr {
+        float: right;
+    }
+    .figl &gt; a &gt; img,
+    .figr &gt; a &gt; img {
+        width: 17em;
+        max-width: max-content;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin &gt; p,
+    ._runin &gt; h2 {
+        display: inline;
+    }
+&lt;/style&gt;
+&lt;p&gt;Much of the recent work on Servo has been around upgrading the components we share with Firefox:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SpiderMonkey&lt;/strong&gt; — upgraded from 107 to 115 (&lt;a href=&quot;https://github.com/sagudev&quot;&gt;@sagudev&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/mozjs/pull/408&quot;&gt;mozjs#408&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30379&quot;&gt;#30379&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stylo&lt;/strong&gt; — upgrade continues, with another 65 commits now landed in Servo (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30421&quot;&gt;#30421&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;WebRender&lt;/strong&gt; — upgraded to &lt;a href=&quot;https://github.com/servo/servo/pull/30323&quot;&gt;May 2021&lt;/a&gt;, now fixing regressions and preparing for more breaking changes:
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&quot;_none&quot;&gt;as of 2023-09-19,&lt;/span&gt; we’ve fixed a scrolling regression in &lt;strong&gt;Acid2&lt;/strong&gt; and other quirks mode pages (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30375&quot;&gt;#30375&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;span class=&quot;_none&quot;&gt;as of 2023-09-21,&lt;/span&gt; we’ve fixed a major &lt;strong&gt;WebGL&lt;/strong&gt; regression related to tile cache invalidation (&lt;a href=&quot;https://github.com/mukilan&quot;&gt;@mukilan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30390&quot;&gt;#30390&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;span class=&quot;_none&quot;&gt;as of 2023-10-04,&lt;/span&gt; pinch zoom is now handled in Servo, preparing us for its removal from WebRender (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30446&quot;&gt;#30446&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30459&quot;&gt;#30459&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sometimes the best source of ideas for improving Servo is to focus on a real-world app.
+&lt;a href=&quot;https://github.com/EnnuiL&quot;&gt;Ennui @EnnuiL&lt;/a&gt; is doing exactly that with &lt;a href=&quot;https://orteil.dashnet.org/cookieclicker/&quot;&gt;Cookie Clicker&lt;/a&gt;, a 2013 idle game that relies on CSS positioning, transitions, transforms, filters, and 2D canvases.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;as of 2023-10-05, the &lt;strong&gt;CSS ‘drop-shadow()‘ filter&lt;/strong&gt; is now supported (&lt;a href=&quot;https://github.com/EnnuiL&quot;&gt;@EnnuiL&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30439&quot;&gt;#30439&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2023-10-10, CSS filters are now correctly &lt;strong&gt;clipped by ‘overflow: hidden’&lt;/strong&gt; (&lt;a href=&quot;https://github.com/EnnuiL&quot;&gt;@EnnuiL&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30517&quot;&gt;#30517&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2023-10-19, &lt;strong&gt;drawImage()&lt;/strong&gt; on a 2D canvas now uses shared memory for performance (&lt;a href=&quot;https://github.com/EnnuiL&quot;&gt;@EnnuiL&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30544&quot;&gt;#30544&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;her work continues in &lt;a href=&quot;https://github.com/servo/servo/issues/30535&quot;&gt;#30535&lt;/a&gt;, with an analysis of Servo’s performance issues under Cookie Clicker&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;_fig&quot;&gt;
+    &lt;div class=&quot;_flex&quot;&gt;
+        &lt;a href=&quot;https://servo.org/img/blog/drop-shadow-filter-before.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/drop-shadow-filter-before.png&quot; alt=&quot;Cookie Clicker on Servo 2023-10-04, without the drop-shadow() filter&quot; /&gt;&lt;/a&gt;
+        &lt;a href=&quot;https://servo.org/img/blog/drop-shadow-filter-after.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/drop-shadow-filter-after.png&quot; alt=&quot;Cookie Clicker on Servo 2023-10-05, now with the drop-shadow() filter&quot; /&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;figcaption&gt;
+        left: Cookie Clicker as of 2023-10-04
+        &lt;br /&gt;right: Cookie Clicker as of 2023-10-05
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;div class=&quot;_runin&quot;&gt;&lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;There have also been some changes to our internals that affect &lt;/p&gt;&lt;h2&gt;contributing to Servo&lt;/h2&gt;&lt;p&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Debug assertions&lt;/strong&gt; are now enabled everywhere except for official nightly releases (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30509&quot;&gt;#30509&lt;/a&gt;).
+This includes both debug (&lt;code&gt;-d --dev&lt;/code&gt;) and release (&lt;code&gt;-r --release&lt;/code&gt;) builds locally, as well as try jobs and most other builds on CI.
+For more details, see &lt;a href=&quot;https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md&quot;&gt;HACKING_QUICKSTART.md&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;With debug assertions enabled, you can use &lt;a href=&quot;https://doc.rust-lang.org/std/macro.debug_assert.html&quot;&gt;debug_assert!()&lt;/a&gt; to panic when an invariant is violated, much like you would use &lt;a href=&quot;https://source.chromium.org/chromium/chromium/src/+/main:base/check.h;drc=95330f60656455a82d816e24907ed67b99cb8720&quot;&gt;DCHECK()&lt;/a&gt; in Chromium, or for more complex checks, you can wrap code in &lt;code&gt;#[cfg(debug_assertions)]&lt;/code&gt; or &lt;code&gt;if cfg!(debug_assertions) {}&lt;/code&gt;.
+Note that panicking in official releases — where &lt;code&gt;cfg!(debug_assertions)&lt;/code&gt; is false — is still verboten in general, and those panics should almost always warn and/or gracefully recover instead.&lt;/p&gt;
+&lt;div class=&quot;_runin&quot; style=&quot;clear: both;&quot;&gt;&lt;p&gt;Servo has long aimed to become an &lt;/p&gt;&lt;h2&gt;embeddable web engine&lt;/h2&gt;&lt;p&gt;, and our next step on this journey will be supported by a grant from &lt;a href=&quot;https://nlnet.nl/project/Tauri-Servo/&quot;&gt;NLNet&lt;/a&gt;!
+Over the next few months, we will be collaborating with the developers of &lt;a href=&quot;https://tauri.app/&quot;&gt;Tauri&lt;/a&gt; to make Servo available as a webview backend.&lt;/p&gt;&lt;/div&gt;
+&lt;p&gt;Tauri is a framework for building desktop apps that combine a web frontend with a Rust backend, and work is already ongoing to expand it to mobile apps and other backend languages.
+But unlike say, Electron or React Native, Tauri is both frontend-agnostic and engine-agnostic, allowing you to use any frontend tooling you like and whichever web engine makes the most sense for your users.&lt;/p&gt;
+&lt;p&gt;At the moment, Tauri supports webkit2gtk (WebKit) on Linux, WebView2 (Chromium) on Windows, and WKWebView (WebKit) on macOS and iOS, in each case leveraging the system webview where possible.
+With this project to add support for Servo in Tauri, we hope to make embedding Servo easier than ever.&lt;/p&gt;
+&lt;p&gt;For more details, subscribe to our tracking issue &lt;a href=&quot;https://github.com/servo/servo/issues/30593&quot;&gt;#30593&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;_runin&quot;&gt;&lt;p&gt;This was a big month for Servo at &lt;/p&gt;&lt;h2&gt;conferences and events&lt;/h2&gt;&lt;p&gt; too! You can catch up on our recent talks here:&lt;/p&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;on 18 September, &lt;a href=&quot;https://www.youtube.com/watch?v=J4qedc-0pjs&amp;amp;t=2356s&quot;&gt;&lt;strong&gt;Servo project update&lt;/strong&gt;&lt;/a&gt;, by Manuel Rego at &lt;a href=&quot;https://lfeuropems2023.sched.com/event/1PCHu&quot;&gt;LF Europe Member Summit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;on 21 September, &lt;a href=&quot;https://www.youtube.com/watch?v=9lkIX5ryZZ4&quot;&gt;&lt;strong&gt;Servo Web Rendering Engine Reboot&lt;/strong&gt;&lt;/a&gt;, by Manuel Rego at &lt;a href=&quot;https://osseu2023.sched.com/event/1OGkc&quot;&gt;Open Source Summit Europe&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;on 24 September, &lt;a href=&quot;https://www.bilibili.com/video/BV1Hw411r7Q6/&quot;&gt;&lt;strong&gt;You can work on the web platform!&lt;/strong&gt;&lt;/a&gt;, by Martin Robinson at &lt;a href=&quot;https://workshop2023.gosim.org/schedule#mobile&quot;&gt;GOSIM workshop 2023&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;on 26 September, &lt;strong&gt;Servo: a web view from somewhere else&lt;/strong&gt; (video pending), by Martin Robinson at &lt;a href=&quot;https://conference2023.gosim.org/schedule#mobile&quot;&gt;GOSIM conference 2023&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;on 17 October, &lt;a href=&quot;https://servo.org/slides/2023-10-17-eclipsecon/&quot;&gt;&lt;strong&gt;Servo&lt;/strong&gt;&lt;/a&gt;, by Rakhi Sharma at &lt;a href=&quot;https://www.eclipsecon.org/2023/&quot;&gt;EclipseCon 2023&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>This month in Servo: upcoming events, new browser UI, and more!</title>
     <link href="https://servo.org/blog/2023/09/15/upcoming-events-and-new-browser-ui/"/>
@@ -329,112 +448,6 @@ consectetur &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token t
 &lt;p&gt;Servo’s high-level goals remain unchanged: to provide a high-performance, safe rendering engine for embedding in other applications. It is the responsibility of the technical steering committee to provide direction for these goals and enable the wider Servo community to make meaningful contributions that advance this mission.&lt;/p&gt;
 &lt;p&gt;As a result of these changes, it is now easier than ever before to contribute to Servo’s future. Whether by &lt;a href=&quot;https://github.com/servo/servo/&quot;&gt;writing code or documentation&lt;/a&gt;, &lt;a href=&quot;https://download.servo.org/&quot;&gt;testing nightlies&lt;/a&gt; and filing issues, or &lt;a href=&quot;https://crowdfunding.lfx.linuxfoundation.org/projects/servo&quot;&gt;donating&lt;/a&gt; to help cover the project’s new CI and hosting costs, every bit helps. If you know a company that would like to support the Servo Project, please &lt;a href=&quot;mailto:info@servo.org&quot;&gt;get in touch&lt;/a&gt; as we will be rolling out a formal membership program to support the future of the project.&lt;/p&gt;
 &lt;p&gt;We also have a new home for discussions, help and general conversation, at the &lt;a href=&quot;https://servo.zulipchat.com/&quot;&gt;Servo Zulip&lt;/a&gt;. We hope to see you there, and look forward to building the future of embeddable web rendering engines with you in our new home!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>GSoC wrap-up - Implementing WebGPU in Servo</title>
-    <link href="https://servo.org/blog/2020/08/30/gsoc-webgpu/"/>
-    <updated>2020-08-30T00:30:00Z</updated>
-    <id>https://servo.org/blog/2020/08/30/gsoc-webgpu/</id>
-    <content xml:lang="en" type="html">&lt;h2 id=&quot;introduction&quot; tabindex=&quot;-1&quot;&gt;Introduction &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#introduction&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Hello everyone! I am Kunal(&lt;a href=&quot;https://github.com/kunalmohan&quot;&gt;@kunalmohan&lt;/a&gt;), an undergrad student at Indian Institute of Technology Roorkee, India. As a part of Google Summer of Code(GSoC) 2020, I worked on implementing WebGPU in Servo under the mentorship of Mr. Dzmitry Malyshau(&lt;a href=&quot;https://github.com/kvark&quot;&gt;@kvark&lt;/a&gt;). I devoted the past 3 months working on ways to bring the API to fruition in Servo, so that Servo is able to run the existing examples and pass the Conformance Test Suite(CTS). This is going to be a brief account of how I started with the project, what challenges I faced, and how I overcame them.&lt;/p&gt;
-&lt;h2 id=&quot;what-is-webgpu%3F&quot; tabindex=&quot;-1&quot;&gt;What is WebGPU? &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#what-is-webgpu%3F&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;WebGPU is a future web standard, cross-platform graphics API aimed to make GPU capabilities more accessible on the web. WebGPU is designed from the ground up to efficiently map to the Vulkan, Direct3D 12, and Metal native GPU APIs. A native implementation of the API in Rust is developed in the &lt;a href=&quot;https://github.com/gfx-rs/wgpu&quot;&gt;wgpu project&lt;/a&gt;. Servo implementation of the API uses this crate.&lt;/p&gt;
-&lt;h2 id=&quot;the-project&quot; tabindex=&quot;-1&quot;&gt;The Project &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#the-project&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;At the start of the project the implementation was in a pretty raw state- Servo was only able to accept shaders as SPIRV binary and ran just the compute example. I had the following tasks in front of me:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Implement the various &lt;a href=&quot;https://gpuweb.github.io/gpuweb/#idl-index&quot;&gt;DOM interfaces&lt;/a&gt; that build up the API.&lt;/li&gt;
-&lt;li&gt;Setup a proper Id rotation for the GPU resources.&lt;/li&gt;
-&lt;li&gt;Integrate WebGPU with WebRender for presenting the rendering to HTML canvas.&lt;/li&gt;
-&lt;li&gt;Setup proper model model for async error recording.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The final goal was to be able to run the live examples at &lt;a href=&quot;https://austineng.github.io/webgpu-samples/&quot;&gt;https://austineng.github.io/webgpu-samples/&lt;/a&gt; and pass a fair amount of the CTS.&lt;/p&gt;
-&lt;h2 id=&quot;implementation&quot; tabindex=&quot;-1&quot;&gt;Implementation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#implementation&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Since Servo is a multi-process browser, GPU is accessed from a different process(server-side) than the one running the page content and scripts(content process). For better performance and asynchronous behaviour, we have a separate wgpu thread for each content process.&lt;/p&gt;
-&lt;p&gt;Setting up a proper Id rotation for the GPU resources was our first priority. I had to ensure that each Id generated was unique. This meant sharing the &lt;a href=&quot;https://github.com/servo/servo/blob/a5a21a59addae0df6d9e050f17d44399db04fec3/components/script/dom/identityhub.rs#L56-L67&quot;&gt;Identity Hub&lt;/a&gt; among all threads via &lt;code&gt;Arc&lt;/code&gt; and &lt;code&gt;Mutex&lt;/code&gt;. For recycling the Ids, wgpu exposes an &lt;code&gt;IdentityHandler&lt;/code&gt; trait that must be implemented on the server-side interface of the browser and wgpu. This facilitates the following: when wgpu detects that an object has been dropped by the user (which is some time after the actual drop/garbage collection), wgpu calls the trait methods that are responsible for releasing the Id. In our case they send a message to the content process to free the Id and make it available for reuse.&lt;/p&gt;
-&lt;p&gt;Implementing the DOM Interfaces was pretty straight forward. A DOM object is just an opaque handle to an actual GPU resource. Whenever a method, that performs an operation, is called on a DOM object there are 2 things to be done- convert the IDL types to wgpu types. And send a message to the server to perform the operation. Most of the validation is done within wgpu.&lt;/p&gt;
-&lt;h2 id=&quot;presentation&quot; tabindex=&quot;-1&quot;&gt;Presentation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#presentation&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;WebGPU textures can be rendered to HTML canvas via &lt;code&gt;GPUCanvasContext&lt;/code&gt;, which can be obtained from &lt;code&gt;canvas.getContext(&#39;gpupresent&#39;)&lt;/code&gt;. All rendered images are served to WebRender as &lt;code&gt;ExternalImages&lt;/code&gt; for rendering purpose. This is done via an async software presentation path. Each new &lt;code&gt;GPUCanvasContext&lt;/code&gt; object is assigned a new &lt;code&gt;ExternalImageId&lt;/code&gt; and a new swap chain is assigned a new &lt;code&gt;ImageKey&lt;/code&gt;. Since WebGPU threads are spawned on-demand, an image handler for WebGPU is initialized at startup, stored in &lt;code&gt;Constellation&lt;/code&gt;, and supplied to threads at the time of spawn. Each time &lt;code&gt;GPUSwapChain.getCurrentTexture()&lt;/code&gt; is called the canvas is marked as dirty which is then flushed at the time of reflow. At the time of flush, a message is sent to the wgpu server to update the image data provided to WebRender. The following happens after this:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The contents of the rendered texture are copied to a buffer.&lt;/li&gt;
-&lt;li&gt;Buffer is mapped asynchronously for read.&lt;/li&gt;
-&lt;li&gt;The data read from the buffer is copied to a staging area in &lt;a href=&quot;https://github.com/servo/servo/blob/669b16f2c054bd038b7a3c69985076607e140b7f/components/webgpu/lib.rs#L1353-L1365&quot;&gt;&lt;code&gt;PresentionData&lt;/code&gt;&lt;/a&gt;. &lt;code&gt;PresentationData&lt;/code&gt; stores the data and all the required machinery for this async presentation belt.&lt;/li&gt;
-&lt;li&gt;When WebRender wants to read the data, it locks on the data to prevent it from being altered during read. Data is served in the form of raw bytes.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The above process is not the best one, but the only option available to us for now. This also causes a few empty frames to be rendered at the start.
-A good thing, though, is that this works on all platforms and is a great fallback path while we’ll be adding hardware accelerate presentation in the future.&lt;/p&gt;
-&lt;h2 id=&quot;buffer-mapping&quot; tabindex=&quot;-1&quot;&gt;Buffer Mapping &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#buffer-mapping&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;When the user issues an async buffer map operation, the operation is queued on the server-side and all devices polled at a regular interval of 100ms for the same. As soon as the map operation is complete, data is read and sent to the content process where it is stored in the Heap. The user can read and edit this data by accessing it’s subranges via &lt;code&gt;GPUBuffer.getMappedRange()&lt;/code&gt; which returns &lt;code&gt;ExternalArrayBuffer&lt;/code&gt; pointing to the data in the Heap. On unmap, all the &lt;code&gt;ExternalArrayBuffer&lt;/code&gt;s are detached, and if the buffer was mapped for write, data sent back to server for write to the actual resource.&lt;/p&gt;
-&lt;h2 id=&quot;error-reporting&quot; tabindex=&quot;-1&quot;&gt;Error Reporting &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#error-reporting&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;To achieve maximum efficiency, WebGPU supports an asynchronous error model. The implementation keeps a stack of &lt;code&gt;ErrorScope&lt;/code&gt;s that are responsible for capturing the errors that occur during operations performed in their scope. The user is responsible for pushing and popping an &lt;code&gt;ErrorScope&lt;/code&gt; in the stack. Popping an &lt;code&gt;ErrorScope&lt;/code&gt; returns a promise that is resolved to null if all the operations were successfull, otherwise it resolves to the first error that occurred.&lt;/p&gt;
-&lt;p&gt;When an operation is issued, &lt;code&gt;scope_id&lt;/code&gt; of the &lt;code&gt;ErrorScope&lt;/code&gt; on the top of the stack is sent to the server with it and operation-count of the scope is incremented. The result of the operation can be described by the enum-&lt;/p&gt;
-&lt;pre class=&quot;language-rust&quot;&gt;&lt;code class=&quot;language-rust&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;token type-definition class-name&quot;&gt;WebGPUOpResult&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;token class-name&quot;&gt;ValidationError&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token class-name&quot;&gt;OutOfMemoryError&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;token class-name&quot;&gt;Success&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;On receiving the result, we decrement the operation-count of the &lt;code&gt;ErrorScope&lt;/code&gt; with the given &lt;code&gt;scope_id&lt;/code&gt;. We further have 3 cases:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The result is &lt;code&gt;Success&lt;/code&gt;. Do nothing.&lt;/li&gt;
-&lt;li&gt;The result is an error and the &lt;code&gt;ErrorFilter&lt;/code&gt; matches the error. We record this error in the &lt;a href=&quot;https://github.com/servo/servo/blob/669b16f2c054bd038b7a3c69985076607e140b7f/components/script/dom/gpudevice.rs#L85-L91&quot;&gt;&lt;code&gt;ErrorScopeInfo&lt;/code&gt;&lt;/a&gt;, and if the &lt;code&gt;ErrorScope&lt;/code&gt; has been popped by the user, resolve the promise with it.&lt;/li&gt;
-&lt;li&gt;The result is an error but the &lt;code&gt;ErrorFilter&lt;/code&gt; does not match the error. In this case, we find the nearest parent &lt;code&gt;ErrorScope&lt;/code&gt; with the matching filter and record the error in it.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;After the result is processed, we try to remove the &lt;code&gt;ErrorScope&lt;/code&gt; from the stack- the user should have called &lt;code&gt;popErrorScope()&lt;/code&gt; on the scope and the operation-count of the scope should be 0.&lt;/p&gt;
-&lt;p&gt;In case there are no error scopes on the stack or if &lt;code&gt;ErrorFilter&lt;/code&gt; of none of the &lt;code&gt;ErrorScope&lt;/code&gt;s match the error, the error is fired as an &lt;a href=&quot;https://gpuweb.github.io/gpuweb/#gpuuncapturederrorevent&quot;&gt;&lt;code&gt;GPUUncapturedErrorEvent&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;conformance-test-suite&quot; tabindex=&quot;-1&quot;&gt;Conformance Test Suite &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#conformance-test-suite&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Conformance Test Suite is required for checking the accuracy of the implementation of the API and can be found &lt;a href=&quot;https://github.com/gpuweb/cts&quot;&gt;here&lt;/a&gt;. Servo vendors it’s own copy of the CTS which, currently, needs to be updated manually for the latest changes. Here are a few statistics of the tests:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;14/36 pass completely&lt;/li&gt;
-&lt;li&gt;5/36 have majority of subtests passing&lt;/li&gt;
-&lt;li&gt;17/36 fail/crash/timeout&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The wgpu team is actively working on improving the validation.&lt;/p&gt;
-&lt;h2 id=&quot;unfinished-business&quot; tabindex=&quot;-1&quot;&gt;Unfinished business &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#unfinished-business&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;A major portion of the project that was proposed has been completed, but there’s still work left to do. These are a few things that I was unable to cover under the proposed timeline:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Profiling and benchmarking the implementation against the WebGL implementation of Servo.&lt;/li&gt;
-&lt;li&gt;Handle canvas resize event smoothly.&lt;/li&gt;
-&lt;li&gt;Support Error recording on Workers.&lt;/li&gt;
-&lt;li&gt;Support WGSL shaders.&lt;/li&gt;
-&lt;li&gt;Pass the remaining tests in the CTS.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;important-links&quot; tabindex=&quot;-1&quot;&gt;Important Links &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#important-links&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The WebGPU specification can be found &lt;a href=&quot;https://gpuweb.github.io/gpuweb/&quot;&gt;here&lt;/a&gt;.
-The PRs that I made as a part of the project can be accessed via the following links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/pulls?q=is%3Apr+author%3Akunalmohan+created%3A%3E2020-05-05+merged%3A%3C2020-08-31+&quot;&gt;Servo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/gfx-rs/wgpu/pulls?q=is%3Apr+author%3Akunalmohan+created%3A%3E2020-05-05+merged%3A%3C2020-08-31+&quot;&gt;wgpu&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/gpuweb/gpuweb/pulls?q=is%3Apr+author%3Akunalmohan+created%3A%3E2020-05-05+merged%3A%3C2020-08-31+&quot;&gt;WebGPU Specification&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The progress of the project can be tracked in the &lt;a href=&quot;https://github.com/servo/servo/projects/24&quot;&gt;GitHub project&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;conclusion&quot; tabindex=&quot;-1&quot;&gt;Conclusion &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2020/08/30/gsoc-webgpu/#conclusion&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;WebGPU implementation in Servo supports all of the &lt;a href=&quot;https://austineng.github.io/webgpu-samples/&quot;&gt;Austin’s samples&lt;/a&gt;. Thanks to CYBAI and Josh, Servo now supports dynamic import of modules and thus accept GLSL shaders. Here are a few samples of what Servo is capable of rendering at 60fps:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-fractal-cube.gif&quot; alt=&quot;Fractal Cube&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-instanced-cube.gif&quot; alt=&quot;Instanced Cube&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-compute-boids.gif&quot; alt=&quot;Compute Boids&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;I would like to thank Dzmitry and Josh for guiding me throughout the project and a big shoutout to the WebGPU and Servo community for doing such awesome work! I had a great experience contributing to Servo and WebGPU. I started as a complete beginner to Rust, graphics and browser internals, but learned a lot during the course of this project. I urge all WebGPU users and graphics enthusiasts out there to test their projects on Servo and help us improve the implementation and the API as well :)&lt;/p&gt;
 </content>
   </entry>
 </feed>
