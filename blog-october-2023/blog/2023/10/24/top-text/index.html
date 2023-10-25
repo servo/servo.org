@@ -222,6 +222,17 @@
     ._fig > ._flex {
         display: flex;
     }
+    ._fig._min {
+        width: min-content;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
     ._runin {
         margin-bottom: 1em;
     }
@@ -262,8 +273,30 @@
         <br>right: Cookie Clicker as of 2023-10-05
     </figcaption>
 </figure>
-<div class="_runin"><p>Servo has long aimed to become an </p><h2>embeddable web engine</h2><p>, and our next step on this journey will be supported by a grant from <a href="https://nlnet.nl">NLNet</a>.
-Over the next few months, we will be collaborating with the developers of [Tauri](https://tauri.app) to make Servo available as a webview backend for their framework. Tauri is […]</p></div>
+<div class="_runin"><p>Servo has long aimed to become an </p><h2>embeddable web engine</h2><p>, and our next step on this journey will be supported by a grant from <a href="https://nlnet.nl">NLNet</a>!
+Over the next few months, we will be collaborating with the developers of <a href="https://tauri.app">Tauri</a> to make Servo available as a webview backend.</p></div>
+<p>Tauri is a framework for building desktop apps that combine a web frontend with a Rust backend, and work is already ongoing to expand it to mobile apps and other backend languages.
+But unlike say, Electron or React Native, Tauri is both frontend-agnostic and engine-agnostic, allowing you to use any frontend tooling you like and whichever web engine makes the most sense for your users.</p>
+<p>At the moment, Tauri supports webkit2gtk (WebKit) on Linux, WebView2 (Chromium) on Windows, and WKWebView (WebKit) on macOS and iOS, in each case leveraging the system webview where possible.
+With this project to add support for Servo in Tauri, we hope to make embedding Servo easier than ever.</p>
+<p>For more details, subscribe to our tracking issue <a href="https://github.com/servo/servo/issues/30593">#30593</a>.</p>
+<div class="_runin"><p>There have also been some changes to our internals that affect </p><h2>contributing to Servo</h2><p>.</p></div>
+<p><strong>Debug assertions</strong> are now enabled everywhere except for official nightly releases (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/30509">#30509</a>).
+This includes both debug (<code>-d --dev</code>) and release (<code>-r --release</code>) builds locally, as well as try jobs and most other builds on CI.
+For more details, see <a href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md">HACKING_QUICKSTART.md</a>.</p>
+<p>With debug assertions enabled, you can use <a href="https://doc.rust-lang.org/std/macro.debug_assert.html">debug_assert!()</a> to panic when an invariant is violated, much like you would use <a href="https://source.chromium.org/chromium/chromium/src/+/main:base/check.h;drc=95330f60656455a82d816e24907ed67b99cb8720">DCHECK()</a> in Chromium, or for more complex checks, you can wrap code in <code>#[cfg(debug_assertions)]</code> or <code>if cfg!(debug_assertions) {}</code>.
+Note that panicking in official releases — where <code>cfg!(debug_assertions)</code> is false — is still verboten in general, and those panics should almost always warn and/or gracefully recover instead.</p>
+<p>You can now <strong>run try jobs by adding labels</strong> to your pull requests (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30383">#30383</a>), in addition to the current method where you mention <a href="https://github.com/bors-servo">@bors-servo</a> in a comment.
+You can even add multiple labels!
+For more details, see <a href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
+<div class="_runin"><p>This was a big month for Servo at </p><h2>conferences and events</h2><p> too! You can catch up on the talks here:</p></div>
+<ul>
+<li>on 18 September, <a href="https://www.youtube.com/watch?v=J4qedc-0pjs&amp;t=2356s"><strong>Servo project update</strong></a> by Manuel Rego, at <a href="https://lfeuropems2023.sched.com/event/1PCHu">LF Europe Member Summit</a></li>
+<li>on 21 September, <a href="https://www.youtube.com/watch?v=9lkIX5ryZZ4"><strong>Servo Web Rendering Engine Reboot</strong></a> by Manuel Rego, at <a href="https://osseu2023.sched.com/event/1OGkc">Open Source Summit Europe</a></li>
+<li>on 24 September, <a href="https://www.bilibili.com/video/BV1Hw411r7Q6/"><strong>You can work on the web platform!</strong></a> by Martin Robinson, an introduction to hacking on Servo at <a href="https://workshop2023.gosim.org/schedule#mobile">GOSIM workshop 2023</a></li>
+<li>on 26 September, <a href="???"><strong>Servo: a web view from somewhere else</strong></a> by Martin Robinson, a case for embeddable web engine diversity and Servo’s role in improving that at <a href="https://conference2023.gosim.org/schedule#mobile">GOSIM conference 2023</a></li>
+<li>on ?? ???, <a href="???"><strong>???</strong></a> by Rakhi Sharma, at <a href="https://www.eclipsecon.org/2023/">EclipseCon 2023</a></li>
+</ul>
 
 </div>
 
