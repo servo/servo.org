@@ -70,7 +70,7 @@ Much of the recent work on Servo has been around upgrading the components we sha
 
 * **SpiderMonkey** — upgraded from 107 to 115 ([@sagudev](https://github.com/sagudev), [mozjs#408](https://github.com/servo/mozjs/pull/408), [#30379](https://github.com/servo/servo/pull/30379))
 * **Stylo** — upgrade continues, with another 65 commits now landed in Servo ([@Loirooriol](https://github.com/Loirooriol), [#30421](https://github.com/servo/servo/pull/30421))
-* **WebRender** — upgraded to [May 2021]([#30323](https://github.com/servo/servo/pull/30323)), now fixing regressions and preparing for more breaking changes:
+* **WebRender** — upgraded to [May 2021](https://github.com/servo/servo/pull/30323), now fixing regressions and preparing for more breaking changes:
     * <span class=_none>as of 2023-09-19,</span> we’ve fixed a scrolling regression in **Acid2** and other quirks mode pages ([@mrobinson](https://github.com/mrobinson), [#30375](https://github.com/servo/servo/pull/30375))
     * <span class=_none>as of 2023-09-21,</span> we’ve fixed a major **WebGL** regression related to tile cache invalidation ([@mukilan](https://github.com/mukilan), [#30390](https://github.com/servo/servo/pull/30390))
     * <span class=_none>as of 2023-10-04,</span> pinch zoom is now handled in Servo, preparing us for its removal from WebRender ([@mrobinson](https://github.com/mrobinson), [#30446](https://github.com/servo/servo/pull/30446), [#30459](https://github.com/servo/servo/pull/30459))
