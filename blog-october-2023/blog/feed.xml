@@ -25,6 +25,12 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;style&gt;
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
     ._none {
         display: none;
     }
@@ -46,6 +52,21 @@
         text-align: left;
         width: max-content;
         max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+    }
+    ._figr {
+        float: right;
+    }
+    .figl &gt; a &gt; img,
+    .figr &gt; a &gt; img {
+        width: 17em;
+        max-width: max-content;
     }
     ._runin {
         margin-bottom: 1em;
@@ -92,7 +113,8 @@ But unlike say, Electron or React Native, Tauri is both frontend-agnostic and en
 &lt;p&gt;At the moment, Tauri supports webkit2gtk (WebKit) on Linux, WebView2 (Chromium) on Windows, and WKWebView (WebKit) on macOS and iOS, in each case leveraging the system webview where possible.
 With this project to add support for Servo in Tauri, we hope to make embedding Servo easier than ever.&lt;/p&gt;
 &lt;p&gt;For more details, subscribe to our tracking issue &lt;a href=&quot;https://github.com/servo/servo/issues/30593&quot;&gt;#30593&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&quot;_runin&quot;&gt;&lt;p&gt;There have also been some changes to our internals that affect &lt;/p&gt;&lt;h2&gt;contributing to Servo&lt;/h2&gt;&lt;p&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;figure class=&quot;_figr&quot;&gt;&lt;a href=&quot;https://servo.org/blog-october-2023/img/blog/try-job-labels.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-october-2023/img/blog/try-job-labels.png&quot; alt=&quot;GitHub pull request label menu, with the new try job labels (T-full, T-linux-wpt-2013, T-linux-wpt-2020, T-macos, T-windows)&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
+&lt;div class=&quot;_runin&quot;&gt;&lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;There have also been some changes to our internals that affect &lt;/p&gt;&lt;h2&gt;contributing to Servo&lt;/h2&gt;&lt;p&gt;.&lt;/p&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;Debug assertions&lt;/strong&gt; are now enabled everywhere except for official nightly releases (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30509&quot;&gt;#30509&lt;/a&gt;).
 This includes both debug (&lt;code&gt;-d --dev&lt;/code&gt;) and release (&lt;code&gt;-r --release&lt;/code&gt;) builds locally, as well as try jobs and most other builds on CI.
 For more details, see &lt;a href=&quot;https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md&quot;&gt;HACKING_QUICKSTART.md&lt;/a&gt;.&lt;/p&gt;
@@ -101,7 +123,7 @@ Note that panicking in official releases — where &lt;code&gt;cfg!(debug_assert
 &lt;p&gt;You can now &lt;strong&gt;run try jobs by adding labels&lt;/strong&gt; to your pull requests (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30383&quot;&gt;#30383&lt;/a&gt;), in addition to the current method where you mention &lt;a href=&quot;https://github.com/bors-servo&quot;&gt;@bors-servo&lt;/a&gt; in a comment.
 You can even add multiple labels!
 For more details, see &lt;a href=&quot;https://github.com/servo/servo/blob/master/CONTRIBUTING.md&quot;&gt;CONTRIBUTING.md&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&quot;_runin&quot;&gt;&lt;p&gt;This was a big month for Servo at &lt;/p&gt;&lt;h2&gt;conferences and events&lt;/h2&gt;&lt;p&gt; too! You can catch up on the talks here:&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;_runin&quot; style=&quot;clear: both;&quot;&gt;&lt;p&gt;This was a big month for Servo at &lt;/p&gt;&lt;h2&gt;conferences and events&lt;/h2&gt;&lt;p&gt; too! You can catch up on the talks here:&lt;/p&gt;&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;on 18 September, &lt;a href=&quot;https://www.youtube.com/watch?v=J4qedc-0pjs&amp;amp;t=2356s&quot;&gt;&lt;strong&gt;Servo project update&lt;/strong&gt;&lt;/a&gt; by Manuel Rego, at &lt;a href=&quot;https://lfeuropems2023.sched.com/event/1PCHu&quot;&gt;LF Europe Member Summit&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;on 21 September, &lt;a href=&quot;https://www.youtube.com/watch?v=9lkIX5ryZZ4&quot;&gt;&lt;strong&gt;Servo Web Rendering Engine Reboot&lt;/strong&gt;&lt;/a&gt; by Manuel Rego, at &lt;a href=&quot;https://osseu2023.sched.com/event/1OGkc&quot;&gt;Open Source Summit Europe&lt;/a&gt;&lt;/li&gt;
