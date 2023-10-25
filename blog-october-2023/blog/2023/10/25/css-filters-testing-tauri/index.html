@@ -294,17 +294,12 @@
         <br>right: Cookie Clicker as of 2023-10-05
     </figcaption>
 </figure>
-<figure class="_figr"><a href="/blog-october-2023/img/blog/try-job-labels.png"><img src="/blog-october-2023/img/blog/try-job-labels.png"
-    alt="GitHub pull request label menu, with the new try job labels (T-full, T-linux-wpt-2013, T-linux-wpt-2020, T-macos, T-windows)"></a></figure>
 <div class="_runin"><p><span class="_floatmin"></span>There have also been some changes to our internals that affect </p><h2>contributing to Servo</h2><p>.</p></div>
 <p><strong>Debug assertions</strong> are now enabled everywhere except for official nightly releases (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/30509">#30509</a>).
 This includes both debug (<code>-d --dev</code>) and release (<code>-r --release</code>) builds locally, as well as try jobs and most other builds on CI.
 For more details, see <a href="https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md">HACKING_QUICKSTART.md</a>.</p>
 <p>With debug assertions enabled, you can use <a href="https://doc.rust-lang.org/std/macro.debug_assert.html">debug_assert!()</a> to panic when an invariant is violated, much like you would use <a href="https://source.chromium.org/chromium/chromium/src/+/main:base/check.h;drc=95330f60656455a82d816e24907ed67b99cb8720">DCHECK()</a> in Chromium, or for more complex checks, you can wrap code in <code>#[cfg(debug_assertions)]</code> or <code>if cfg!(debug_assertions) {}</code>.
 Note that panicking in official releases — where <code>cfg!(debug_assertions)</code> is false — is still verboten in general, and those panics should almost always warn and/or gracefully recover instead.</p>
-<p>You can now <strong>run try jobs by adding labels</strong> to your pull requests (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30383">#30383</a>), in addition to the current method where you mention <a href="https://github.com/bors-servo">@bors-servo</a> in a comment.
-You can even add multiple labels!
-For more details, see <a href="https://github.com/servo/servo/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
 <div class="_runin" style="clear: both;"><p>Servo has long aimed to become an </p><h2>embeddable web engine</h2><p>, and our next step on this journey will be supported by a grant from <a href="https://nlnet.nl">NLNet</a>!
 Over the next few months, we will be collaborating with the developers of <a href="https://tauri.app">Tauri</a> to make Servo available as a webview backend.</p></div>
 <p>Tauri is a framework for building desktop apps that combine a web frontend with a Rust backend, and work is already ongoing to expand it to mobile apps and other backend languages.
