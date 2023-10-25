@@ -96,9 +96,6 @@ Sometimes the best source of ideas for improving Servo is to focus on a real-wor
     </figcaption>
 </figure>
 
-<figure class="_figr"><a href="{{ '/img/blog/try-job-labels.png' | url }}"><img src="{{ '/img/blog/try-job-labels.png' | url }}"
-    alt="GitHub pull request label menu, with the new try job labels (T-full, T-linux-wpt-2013, T-linux-wpt-2020, T-macos, T-windows)"></a></figure>
-
 <div class="_runin"><p><span class="_floatmin"></span>There have also been some changes to our internals that affect </p><h2>contributing to Servo</h2><p>.</p></div>
 
 **Debug assertions** are now enabled everywhere except for official nightly releases ([@delan](https://github.com/delan), [#30509](https://github.com/servo/servo/pull/30509)).
@@ -107,10 +104,6 @@ For more details, see [HACKING_QUICKSTART.md](https://github.com/servo/servo/blo
 
 With debug assertions enabled, you can use [debug_assert!()](https://doc.rust-lang.org/std/macro.debug_assert.html) to panic when an invariant is violated, much like you would use [DCHECK()](https://source.chromium.org/chromium/chromium/src/+/main:base/check.h;drc=95330f60656455a82d816e24907ed67b99cb8720) in Chromium, or for more complex checks, you can wrap code in `#[cfg(debug_assertions)]` or `if cfg!(debug_assertions) {}`.
 Note that panicking in official releases — where `cfg!(debug_assertions)` is false — is still verboten in general, and those panics should almost always warn and/or gracefully recover instead.
-
-You can now **run try jobs by adding labels** to your pull requests ([@mrobinson](https://github.com/mrobinson), [#30383](https://github.com/servo/servo/pull/30383)), in addition to the current method where you mention [@bors-servo](https://github.com/bors-servo) in a comment.
-You can even add multiple labels!
-For more details, see [CONTRIBUTING.md](https://github.com/servo/servo/blob/master/CONTRIBUTING.md).
 
 <div class="_runin" style="clear: both;"><p>Servo has long aimed to become an </p><h2>embeddable web engine</h2><p>, and our next step on this journey will be supported by a grant from <a href="https://nlnet.nl">NLNet</a>!
 Over the next few months, we will be collaborating with the developers of <a href="https://tauri.app">Tauri</a> to make Servo available as a webview backend.</p></div>
