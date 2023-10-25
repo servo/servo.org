@@ -3,7 +3,7 @@ layout:     post
 tags:       blog
 title:      "This month in Servo: CSS filters, testing changes, Tauri, and more!"
 date:       2023-10-25
-summary:    Catch up on our recent conference talks, embedding news, and debugging and testing changes, plus nightly updates around media queries, the DOM, upgrades, CSS filters, and canvas performance.
+summary:    Catch up on our recent conference talks, embedding news, and testing changes, plus nightly updates around media queries, the DOM, upgrades, CSS filters, and canvas performance.
 categories:
 ---
 
