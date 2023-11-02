@@ -34,7 +34,7 @@ The chart below tracks our pass rates in several *focus areas* of the [Web Platf
 
 ## Presentations
 
-* [You Can Work on the Web Patform!](https://www.bilibili.com/video/BV1Hw411r7Q6/) by Martin Robinson (Sep 2023)
+* [You Can Work on the Web Patform!](https://youtu.be/RugzThWcjn4) by Martin Robinson (Sep 2023)
 * [Servo Web Rendering Engine Reboot](https://youtu.be/9lkIX5ryZZ4) by Manuel Rego (Sep 2023)
 * [Servo Update Linux Foundation Europe Member Summit 2023](https://youtu.be/J4qedc-0pjs?si=_LKCgZrrUTpM4mn7&t=2356) by Manuel Rego (Sep 2023)
 * [Servo 2023](https://www.youtube.com/watch?v=pfk8s5OD99A) by Delan Azabani (Jun 2023)
