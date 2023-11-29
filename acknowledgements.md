@@ -5,6 +5,10 @@ title: Acknowledgements
 
 # Acknowledgements
 
+Servo Project has got some funding through grants thanks to the following organizations:
+* [NLnet Foundation](https://nlnet.nl/project/Servo/)
+  <img src="{{ '/img/nlnet-logo.png' | url}}" alt="NLnet Foundation logo" style="vertical-align: middle; margin: 15px; width: 100px;" />
+
 Servo Project uses some free services provided by different companies:
 
 * Repositories and CI infrastructure (<https://github.com/servo>) are hosted by [GitHub](https://github.com/).
