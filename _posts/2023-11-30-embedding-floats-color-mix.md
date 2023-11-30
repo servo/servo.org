@@ -3,7 +3,7 @@ layout:     post
 tags:       blog
 title:      "This month in Servo: better floats, :has(), color-mix(), and more!"
 date:       2023-11-30
-summary:    Sneak peek of our embedding effort, changes to pull requests, plus nightly updates to browser UI, floats, inline layout, CSS, Rust, and crash fixes.
+summary:    Sneak peek into our embedding effort, changes to pull requests, plus nightly updates to browser UI, floats, inline layout, CSS, and tooling.
 categories:
 ---
 
