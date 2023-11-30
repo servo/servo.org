@@ -18,6 +18,5 @@ fi
 < runs.tsv sed -En '1!{H;x;s/\n//;p;x;};s/\t.*//;s/$/\t/;h' \
 | while read -r from to updated; do
   printf '>>> %s\n' "$updated" | rg --color=always .  # make it red
-  git -C "$1" log --pretty=$'tformat:%H\t%s' $from..$to \
-  | sed -E 's@([^\t]+)\t(.*[(]#([^)]+)[)].*)@\1\thttps://github.com/servo/servo/pull/\3\t\2@'
+  ./list-commits-between.sh "$1" $from $to
 done
