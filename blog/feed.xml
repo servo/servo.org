@@ -4,12 +4,147 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2023-11-06T00:00:00Z</updated>
+  <updated>2023-11-30T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>This month in Servo: better floats, :has(), color-mix(), and more!</title>
+    <link href="https://servo.org/blog/2023/11/30/embedding-floats-color-mix/"/>
+    <updated>2023-11-30T00:00:00Z</updated>
+    <id>https://servo.org/blog/2023/11/30/embedding-floats-color-mix/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;November has been another exciting month for Servo!&lt;/p&gt;
+&lt;p&gt;Our nightly example browser, servoshell, is now easier to navigate, &lt;strong&gt;accepting URLs without http:// or https://&lt;/strong&gt; both in the location bar and on the command line (&lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;, &lt;a href=&quot;https://servo.org/blog/2023/11/30/embedding-floats-color-mix/30148&quot;&gt;#30148&lt;/a&gt;), and should no longer lock up when run with &lt;code&gt;--no-minibrowser&lt;/code&gt; (&lt;a href=&quot;https://github.com/wusyong&quot;&gt;@wusyong&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30598&quot;&gt;#30598&lt;/a&gt;).
+Local paths can also be given on the command line, and are still preferred when the path points to a file that exists.&lt;/p&gt;
+&lt;p&gt;Work is now underway to &lt;a href=&quot;https://servo.org/blog/2023/10/26/css-filters-testing-tauri/#embeddable-web-engine&quot;&gt;improve our embedding story&lt;/a&gt; and prepare Servo for integration with &lt;a href=&quot;https://tauri.app/&quot;&gt;Tauri&lt;/a&gt;, starting with &lt;strong&gt;precompiled &lt;a href=&quot;https://en.wikipedia.org/wiki/ANGLE_(software)&quot;&gt;ANGLE&lt;/a&gt;&lt;/strong&gt; for faster initial builds (&lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;), better support for &lt;strong&gt;offscreen rendering&lt;/strong&gt; (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30767&quot;&gt;#30767&lt;/a&gt;), and support for &lt;strong&gt;multiple webviews&lt;/strong&gt; (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30648&quot;&gt;#30648&lt;/a&gt;).
+These changes haven’t landed yet, but once they do, apps will be able to open, move, resize, and interleave Servo with other widgets.&lt;/p&gt;
+&lt;figure class=&quot;_fig&quot;&gt;
+&lt;div class=&quot;_flex&quot;&gt;
+    &lt;a href=&quot;https://servo.org/img/blog/servoshell-mdi.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/servoshell-mdi.png&quot; alt=&quot;servoshell with a multiple-document interface, showing three overlapping egui windows of different sizes inside a native window&quot; /&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;figcaption&gt;
+&lt;p&gt;A very early prototype of a Servo-based multiple-document interface (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30785&quot;&gt;#30785&lt;/a&gt;), taking advantage of upcoming embedding improvements to interleave Servo with &lt;a href=&quot;https://www.egui.rs/&quot;&gt;egui&lt;/a&gt; windows.&lt;/p&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h2 id=&quot;floats-and-inline-layout&quot; tabindex=&quot;-1&quot;&gt;Floats and inline layout &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/11/30/embedding-floats-color-mix/#floats-and-inline-layout&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We’ve made several improvements to Servo’s inline layout system, which handles the flow and wrapping of text, images, and inline blocks, delivering welcome bumps to our &lt;a href=&quot;https://servo.org/blog/2023/07/20/servo-web-platform-tests/&quot;&gt;WPT&lt;/a&gt; pass rates (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/mukilan&quot;&gt;@mukilan&lt;/a&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;61.4% in the CSS2 &lt;code&gt;linebox&lt;/code&gt; test suite (+2.8pp), with better handling of line heights and forced line breaks (&lt;a href=&quot;https://github.com/servo/servo/pull/30519&quot;&gt;#30519&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;78.9% in &lt;code&gt;floats&lt;/code&gt; (+1.0pp) and 73.3% in &lt;code&gt;floats-clear&lt;/code&gt; (+0.5pp), by allowing trailing whitespace to overlap with floats (&lt;a href=&quot;https://github.com/servo/servo/pull/30586&quot;&gt;#30586&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;78.1% in &lt;code&gt;normal-flow&lt;/code&gt; (+1.1pp), by fixing inlines split by boxes and paving the way for fragments that span boxes (&lt;a href=&quot;https://github.com/servo/servo/pull/30608&quot;&gt;#30608&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;82.2% in &lt;code&gt;floats&lt;/code&gt; (a further +3.3pp), by fixing the fragmentation of unbreakable fragments that span multiple boxes (&lt;a href=&quot;https://github.com/servo/servo/pull/30628&quot;&gt;#30628&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;css-updates&quot; tabindex=&quot;-1&quot;&gt;CSS updates &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/11/30/embedding-floats-color-mix/#css-updates&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Several components and dependencies have been upgraded, the biggest being &lt;strong&gt;Stylo&lt;/strong&gt;, our Rust-based CSS engine that is now part of Firefox.
+We’ve caught up with upstream Stylo by 311 commits, bringing our CSS support from August 2022 to June 2023 (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30646&quot;&gt;#30646&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30681&quot;&gt;#30681&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30692&quot;&gt;#30692&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30748&quot;&gt;#30748&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30770&quot;&gt;#30770&lt;/a&gt;), and bumped &lt;strong&gt;cssparser&lt;/strong&gt; to 0.31.2 (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30771&quot;&gt;#30771&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;As a result, Servo now passes 60.5% of the CSSOM test suite (+3.3pp).
+We also no longer incorrectly transition properties that are inherently “discrete” (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30565&quot;&gt;#30565&lt;/a&gt;), passing a further (net) 294 test cases.&lt;/p&gt;
+&lt;p&gt;Thanks to the recent work on Stylo by Mozilla and others, Servo now supports the &lt;strong&gt;:has() selector&lt;/strong&gt;, as well as the &lt;strong&gt;color-mix()&lt;/strong&gt; and &lt;strong&gt;new color spaces&lt;/strong&gt; from &lt;a href=&quot;https://drafts.csswg.org/css-color-4/&quot;&gt;CSS Color 4&lt;/a&gt; (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30752&quot;&gt;#30752&lt;/a&gt;)!
+These new color features allow authors to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;select colors from wider gamuts than in sRGB (&lt;code&gt;display-p3&lt;/code&gt;, &lt;code&gt;a98-rgb&lt;/code&gt;, &lt;code&gt;prophoto-rgb&lt;/code&gt;, &lt;code&gt;rec2020&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;mix colors as if mixing intensities of colored light in real life (&lt;code&gt;srgb-linear&lt;/code&gt;, &lt;code&gt;xyz&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;select a variety of colors with consistent perceived lightness (&lt;code&gt;oklab&lt;/code&gt;, &lt;code&gt;lab&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;select colors with consistent perceived lightness and hue (&lt;code&gt;oklch&lt;/code&gt;, &lt;code&gt;lch&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;_fig&quot;&gt;
+&lt;iframe src=&quot;https://bucket.daz.cat/work/igalia/servo/5.html&quot; id=&quot;_color_mix_demo&quot;&gt;&lt;/iframe&gt;
+&lt;figcaption&gt;
+&lt;p&gt;The results of mixing &lt;code&gt;lime&lt;/code&gt; and &lt;code&gt;blue&lt;/code&gt; in a variety of CSS color spaces, based on &lt;a href=&quot;https://codepen.io/web-dot-dev/full/MWBXVLV&quot;&gt;a demo&lt;/a&gt; from &lt;a href=&quot;https://developer.chrome.com/articles/css-color-mix/&quot;&gt;this post&lt;/a&gt;. The background color is the same as this blog post mixed with 10% white, or &lt;code&gt;color-mix(in oklch, #121619, white 10%)&lt;/code&gt;.&lt;/p&gt;
+&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h2 id=&quot;dependency-upgrades&quot; tabindex=&quot;-1&quot;&gt;Dependency upgrades &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/11/30/embedding-floats-color-mix/#dependency-upgrades&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Our upgrade efforts also affect the tooling Servo uses.
+Servo now builds on Ubuntu 22.04 (&lt;a href=&quot;https://github.com/mukilan&quot;&gt;@mukilan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30162&quot;&gt;#30162&lt;/a&gt;) and macOS 13 on CI, which in turn has made upgrading LLVM and Python (for mach) more urgent.
+As a result, we’ve started upgrading Python from 3.10 to 3.12 (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/mukilan&quot;&gt;@mukilan&lt;/a&gt;, &lt;a href=&quot;https://github.com/sagudev&quot;&gt;@sagudev&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30638&quot;&gt;#30638&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30645&quot;&gt;#30645&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30659&quot;&gt;#30659&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30685&quot;&gt;#30685&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;But the biggest impact on our ability to keep our dependencies up to date comes from our &lt;strong&gt;Rust version&lt;/strong&gt;.
+Many pre-version-1 libraries, even in our transitive dependencies, bump their &lt;abbr title=&quot;minimum supported Rust version&quot;&gt;MSRV&lt;/abbr&gt; quite aggressively, sometimes even requiring a nightly compiler.
+First, we migrated from Rust nightly-2023-02-01 to nightly-03-18 (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30630&quot;&gt;#30630&lt;/a&gt;), which in turn allowed us to upgrade our network stack (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30612&quot;&gt;#30612&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30660&quot;&gt;#30660&lt;/a&gt;).
+Since then, we’ve started eliminating our usage of unstable Rust features (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30745&quot;&gt;#30745&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30742&quot;&gt;#30742&lt;/a&gt;), which should make future Rust upgrades easier.&lt;/p&gt;
+&lt;h2 id=&quot;pull-requests&quot; tabindex=&quot;-1&quot;&gt;Pull requests &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/11/30/embedding-floats-color-mix/#pull-requests&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;figure class=&quot;_figr&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/try-job-labels.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/try-job-labels.png&quot; alt=&quot;GitHub pull request label menu, with the new try job labels (T-full, T-linux-wpt-2013, T-linux-wpt-2020, T-macos, T-windows)&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;You can now &lt;strong&gt;run try jobs by adding labels&lt;/strong&gt; to your pull requests (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30383&quot;&gt;#30383&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30647&quot;&gt;#30647&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30650&quot;&gt;#30650&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30756&quot;&gt;#30756&lt;/a&gt;).
+You can even add multiple labels!
+The old method, where you mention &lt;a href=&quot;https://github.com/bors-servo&quot;&gt;@bors-servo&lt;/a&gt; in a comment, has been removed (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30712&quot;&gt;#30712&lt;/a&gt;), making your pull requests less likely to get spammed with job failures when you post comments on them.
+For more details, see &lt;a href=&quot;https://github.com/servo/servo/blob/master/CONTRIBUTING.md&quot;&gt;CONTRIBUTING.md&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;stability&quot; tabindex=&quot;-1&quot;&gt;Stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/11/30/embedding-floats-color-mix/#stability&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We’ve fixed a panic when no font is found for a run of text, printing a warning instead (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30581&quot;&gt;#30581&lt;/a&gt;), as well as a panic when creating stacking contexts with zero scale (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30713&quot;&gt;#30713&lt;/a&gt;).
+In general, Servo should never panic outside of debug assertions.&lt;/p&gt;
+&lt;p&gt;We’ve also fixed a bug where paint worklets may access thread-local storage after a script thread gets destroyed (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30671&quot;&gt;#30671&lt;/a&gt;), which caused intermittent panics in 74 tests.&lt;/p&gt;
+&lt;style&gt;
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig &gt; ._flex {
+        display: flex;
+    }
+    ._fig._min {
+        width: min-content;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+    }
+    ._figr {
+        float: right;
+    }
+    .figl &gt; iframe,
+    .figr &gt; iframe,
+    .figl &gt; a &gt; img,
+    .figr &gt; a &gt; img {
+        width: 17em;
+        max-width: max-content;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin &gt; p,
+    ._runin &gt; h2 {
+        display: inline;
+    }
+    #_color_mix_demo {
+        margin: 0 auto;
+        display: block;
+        height: min(calc(100vh - 9em), 400px);
+        width: min(100%, 33em);
+    }
+&lt;/style&gt;
+</content>
+  </entry>
   <entry>
     <title>Servo announces grant from the NLnet Foundation</title>
     <link href="https://servo.org/blog/2023/11/06/nlgrant-announcement/"/>
@@ -143,7 +278,7 @@ This includes both debug (&lt;code&gt;-d --dev&lt;/code&gt;) and release (&lt;co
 For more details, see &lt;a href=&quot;https://github.com/servo/servo/blob/a3d2f0c586e97e26906bd2327395186bf140f49b/docs/HACKING_QUICKSTART.md#building-servo&quot;&gt;HACKING_QUICKSTART.md&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;With debug assertions enabled, you can use &lt;a href=&quot;https://doc.rust-lang.org/std/macro.debug_assert.html&quot;&gt;debug_assert!()&lt;/a&gt; to panic when an invariant is violated, much like you would use &lt;a href=&quot;https://source.chromium.org/chromium/chromium/src/+/main:base/check.h;drc=95330f60656455a82d816e24907ed67b99cb8720&quot;&gt;DCHECK()&lt;/a&gt; in Chromium, or for more complex checks, you can wrap code in &lt;code&gt;#[cfg(debug_assertions)]&lt;/code&gt; or &lt;code&gt;if cfg!(debug_assertions) {}&lt;/code&gt;.
 Note that panicking in official releases — where &lt;code&gt;cfg!(debug_assertions)&lt;/code&gt; is false — is still verboten in general, and those panics should almost always warn and/or gracefully recover instead.&lt;/p&gt;
-&lt;div class=&quot;_runin&quot; style=&quot;clear: both;&quot;&gt;&lt;p&gt;Servo has long aimed to become an &lt;/p&gt;&lt;h2&gt;embeddable web engine&lt;/h2&gt;&lt;p&gt;, and our next step on this journey will be supported by a grant from &lt;a href=&quot;https://nlnet.nl/project/Tauri-Servo/&quot;&gt;NLNet&lt;/a&gt;!
+&lt;div class=&quot;_runin&quot; style=&quot;clear: both;&quot;&gt;&lt;p&gt;Servo has long aimed to become an &lt;/p&gt;&lt;h2 id=&quot;embeddable-web-engine&quot;&gt;embeddable web engine&lt;/h2&gt;&lt;p&gt;, and our next step on this journey will be supported by a grant from &lt;a href=&quot;https://nlnet.nl/project/Tauri-Servo/&quot;&gt;NLNet&lt;/a&gt;!
 Over the next few months, we will be collaborating with the developers of &lt;a href=&quot;https://tauri.app/&quot;&gt;Tauri&lt;/a&gt; to make Servo available as a webview backend.&lt;/p&gt;&lt;/div&gt;
 &lt;p&gt;Tauri is a framework for building desktop apps that combine a web frontend with a Rust backend, and work is already ongoing to expand it to mobile apps and other backend languages.
 But unlike say, Electron or React Native, Tauri is both frontend-agnostic and engine-agnostic, allowing you to use any frontend tooling you like and whichever web engine makes the most sense for your users.&lt;/p&gt;
@@ -454,19 +589,6 @@ consectetur &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token t
 &lt;p&gt;We want to upgrade the main dependencies of Servo, like WebRender and Stylo, to get them up to date. We will also analyse the status of the two layout engines in Servo, and select one of them for continued development. Our plan is to then work towards basic CSS2 conformance.&lt;/p&gt;
 &lt;p&gt;Regarding platform support, we would like to explore the possibility of supporting Android. We would also like to experiment with making Servo a practical embeddable web rendering engine.&lt;/p&gt;
 &lt;p&gt;As with any software project, this roadmap will evolve over time, but we’ll keep you posted. We hope you’ll join us in making it happen.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Servo to Advance in 2023</title>
-    <link href="https://servo.org/blog/2023/01/16/servo-2023/"/>
-    <updated>2023-01-16T00:00:00Z</updated>
-    <id>https://servo.org/blog/2023/01/16/servo-2023/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;We would like to share some exciting news about the &lt;a href=&quot;https://servo.org/&quot;&gt;Servo project&lt;/a&gt;. This year, thanks to new external funding, a team of developers will be actively working on Servo. The first task is to reactivate the project and the community around it, so we can attract new collaborators and sponsors for the project.&lt;/p&gt;
-&lt;p&gt;The focus for 2023 is to improve the situation of the layout system in Servo, with the initial goal of getting basic CSS2 layout working. Given the renewed activity in the project, we will keep you posted with more updates throughout the year. Stay tuned!&lt;/p&gt;
-&lt;h2 id=&quot;about-servo&quot; tabindex=&quot;-1&quot;&gt;About Servo &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/01/16/servo-2023/#about-servo&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Created by Mozilla Research in 2012, the Servo project is a Research &amp;amp; Development effort meant to create an independent, modular, embeddable web engine that allows developers to deliver content and applications using web standards.  Servo is an experimental browser engine written in Rust, taking advantage of the memory safety properties and concurrency features of the language.  Stewardship of Servo &lt;a href=&quot;https://servo.org/blog/2020/11/17/servo-home/&quot;&gt;moved from Mozilla Research to the Linux Foundation in 2020&lt;/a&gt;, where its mission remains unchanged.&lt;/p&gt;
 </content>
   </entry>
 </feed>
