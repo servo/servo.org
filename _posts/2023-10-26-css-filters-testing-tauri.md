@@ -105,7 +105,7 @@ For more details, see [HACKING_QUICKSTART.md](https://github.com/servo/servo/blo
 With debug assertions enabled, you can use [debug_assert!()](https://doc.rust-lang.org/std/macro.debug_assert.html) to panic when an invariant is violated, much like you would use [DCHECK()](https://source.chromium.org/chromium/chromium/src/+/main:base/check.h;drc=95330f60656455a82d816e24907ed67b99cb8720) in Chromium, or for more complex checks, you can wrap code in `#[cfg(debug_assertions)]` or `if cfg!(debug_assertions) {}`.
 Note that panicking in official releases — where `cfg!(debug_assertions)` is false — is still verboten in general, and those panics should almost always warn and/or gracefully recover instead.
 
-<div class="_runin" style="clear: both;"><p>Servo has long aimed to become an </p><h2>embeddable web engine</h2><p>, and our next step on this journey will be supported by a grant from <a href="https://nlnet.nl/project/Tauri-Servo/">NLNet</a>!
+<div class="_runin" style="clear: both;"><p>Servo has long aimed to become an </p><h2 id="embeddable-web-engine">embeddable web engine</h2><p>, and our next step on this journey will be supported by a grant from <a href="https://nlnet.nl/project/Tauri-Servo/">NLNet</a>!
 Over the next few months, we will be collaborating with the developers of <a href="https://tauri.app">Tauri</a> to make Servo available as a webview backend.</p></div>
 
 Tauri is a framework for building desktop apps that combine a web frontend with a Rust backend, and work is already ongoing to expand it to mobile apps and other backend languages.
