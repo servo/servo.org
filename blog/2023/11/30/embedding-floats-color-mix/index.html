@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>This month in Servo: better floats, :has(), color-mix(), and more! - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine</title>
-  <meta property="og:title" content="This month in Servo: better floats, :has(), color-mix(), and more! - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine">
+  <title>This month in Servo: better floats, color-mix(), try job labels, and more! - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine</title>
+  <meta property="og:title" content="This month in Servo: better floats, color-mix(), try job labels, and more! - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine">
   
 
   <meta name="description" content="Servo is an independent, modular, embeddable web rendering engine written in Rust">
@@ -32,7 +32,7 @@
   <div class="container">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-        <img src="/img/servo-color-negative-no-container.png" alt="This month in Servo: better floats, :has(), color-mix(), and more!">
+        <img src="/img/servo-color-negative-no-container.png" alt="This month in Servo: better floats, color-mix(), try job labels, and more!">
       </a>
 
       <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
@@ -176,7 +176,7 @@
         <div class="container">
           <aside class="menu box">
             <p class="menu-label">
-              This month in Servo: better floats, :has(), color-mix(), and more!
+              This month in Servo: better floats, color-mix(), try job labels, and more!
             </p>
             
               
@@ -197,11 +197,16 @@
           </aside>
           <div class="content">
             
-<h1 class="title">This month in Servo: better floats, :has(), color-mix(), and more!</h1>
+<h1 class="title">This month in Servo: better floats, color-mix(), try job labels, and more!</h1>
 <p class="subtitle"><span class="tag is-dark">2023-11-30</span> Sneak peek into our embedding effort, changes to pull requests, plus nightly updates to browser UI, floats, inline layout, CSS, and tooling.</p>
 
 <div class="has-top-margin">
-  <p>November has been another exciting month for Servo!</p>
+  <aside class="_correction">
+<p><strong>Correction (2023-12-04)</strong></p>
+<p><a href="https://github.com/servo/servo.org/pull/126">An earlier version</a> of this post said that Servo now supports the <strong>:has() selector</strong>, but this was incorrect.
+While some of the code implementing the feature has landed, it is <a href="https://github.com/servo/servo/blob/7bcb25c85c98c367c6423ebc0fed964dd08cad56/components/selectors/parser.rs#L276-L279">not yet enabled</a>.</p>
+</aside>
+<p>November has been another exciting month for Servo!</p>
 <p>Our nightly example browser, servoshell, is now easier to navigate, <strong>accepting URLs without http:// or https://</strong> both in the location bar and on the command line (<a href="https://github.com/atbrakhi">@atbrakhi</a>, <a href="30148">#30148</a>), and should no longer lock up when run with <code>--no-minibrowser</code> (<a href="https://github.com/wusyong">@wusyong</a>, <a href="https://github.com/servo/servo/pull/30598">#30598</a>).
 Local paths can also be given on the command line, and are still preferred when the path points to a file that exists.</p>
 <p>Work is now underway to <a href="/blog/2023/10/26/css-filters-testing-tauri/#embeddable-web-engine">improve our embedding story</a> and prepare Servo for integration with <a href="https://tauri.app">Tauri</a>, starting with <strong>precompiled <a href="https://en.wikipedia.org/wiki/ANGLE_(software)">ANGLE</a></strong> for faster initial builds (<a href="https://github.com/atbrakhi">@atbrakhi</a>), better support for <strong>offscreen rendering</strong> (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/30767">#30767</a>), and support for <strong>multiple webviews</strong> (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/30648">#30648</a>).
@@ -232,7 +237,7 @@ These changes haven’t landed yet, but once they do, apps will be able to open,
 We’ve caught up with upstream Stylo by 311 commits, bringing our CSS support from August 2022 to June 2023 (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30646">#30646</a>, <a href="https://github.com/servo/servo/pull/30681">#30681</a>, <a href="https://github.com/servo/servo/pull/30692">#30692</a>, <a href="https://github.com/servo/servo/pull/30748">#30748</a>, <a href="https://github.com/servo/servo/pull/30770">#30770</a>), and bumped <strong>cssparser</strong> to 0.31.2 (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/30771">#30771</a>).</p>
 <p>As a result, Servo now passes 60.5% of the CSSOM test suite (+3.3pp).
 We also no longer incorrectly transition properties that are inherently “discrete” (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/30565">#30565</a>), passing a further (net) 294 test cases.</p>
-<p>Thanks to the recent work on Stylo by Mozilla and others, Servo now supports the <strong>:has() selector</strong>, as well as the <strong>color-mix()</strong> and <strong>new color spaces</strong> from <a href="https://drafts.csswg.org/css-color-4/">CSS Color 4</a> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/30752">#30752</a>)!
+<p>Thanks to the recent work on Stylo by Mozilla and others, Servo now supports <strong>color-mix()</strong> and the <strong>new color spaces</strong> from <a href="https://drafts.csswg.org/css-color-4/">CSS Color 4</a> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/30752">#30752</a>)!
 These new color features allow authors to:</p>
 <ul>
 <li>select colors from wider gamuts than in sRGB (<code>display-p3</code>, <code>a98-rgb</code>, <code>prophoto-rgb</code>, <code>rec2020</code>)</li>
@@ -329,6 +334,12 @@ In general, Servo should never panic outside of debug assertions.</p>
         display: block;
         height: min(calc(100vh - 9em), 400px);
         width: min(100%, 33em);
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
     }
 </style>
 
