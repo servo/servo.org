@@ -1,11 +1,19 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: better floats, :has(), color-mix(), and more!"
+title:      "This month in Servo: better floats, color-mix(), try job labels, and more!"
 date:       2023-11-30
 summary:    Sneak peek into our embedding effort, changes to pull requests, plus nightly updates to browser UI, floats, inline layout, CSS, and tooling.
 categories:
 ---
+
+<aside class="_correction">
+
+**Correction (2023-12-04)**
+
+[An earlier version](https://github.com/servo/servo.org/pull/126) of this post said that Servo now supports the **:has() selector**, but this was incorrect.
+While some of the code implementing the feature has landed, it is [not yet enabled](https://github.com/servo/servo/blob/7bcb25c85c98c367c6423ebc0fed964dd08cad56/components/selectors/parser.rs#L276-L279).
+</aside>
 
 November has been another exciting month for Servo!
 
@@ -44,7 +52,7 @@ We’ve caught up with upstream Stylo by 311 commits, bringing our CSS support f
 As a result, Servo now passes 60.5% of the CSSOM test suite (+3.3pp).
 We also no longer incorrectly transition properties that are inherently “discrete” ([@Loirooriol](https://github.com/Loirooriol), [#30565](https://github.com/servo/servo/pull/30565)), passing a further (net) 294 test cases.
 
-Thanks to the recent work on Stylo by Mozilla and others, Servo now supports the **:has() selector**, as well as the **color-mix()** and **new color spaces** from [CSS Color 4](https://drafts.csswg.org/css-color-4/) ([@Loirooriol](https://github.com/Loirooriol), [#30752](https://github.com/servo/servo/pull/30752))!
+Thanks to the recent work on Stylo by Mozilla and others, Servo now supports **color-mix()** and the **new color spaces** from [CSS Color 4](https://drafts.csswg.org/css-color-4/) ([@Loirooriol](https://github.com/Loirooriol), [#30752](https://github.com/servo/servo/pull/30752))!
 These new color features allow authors to:
 - select colors from wider gamuts than in sRGB (`display-p3`, `a98-rgb`, `prophoto-rgb`, `rec2020`)
 - mix colors as if mixing intensities of colored light in real life (`srgb-linear`, `xyz`)
@@ -145,5 +153,11 @@ We’ve also fixed a bug where paint worklets may access thread-local storage af
         display: block;
         height: min(calc(100vh - 9em), 400px);
         width: min(100%, 33em);
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
     }
 </style>
