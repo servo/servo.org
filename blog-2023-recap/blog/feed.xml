@@ -17,8 +17,8 @@
     <id>https://servo.org/blog-2023-recap/blog/2023/12/15/this-year-in-servo/</id>
     <content xml:lang="en" type="html">&lt;!--
 pull requests
-- 2023: 1042 = 41*25+17 https://github.com/servo/servo/pulls?page=42&amp;q=is%3Apr+is%3Amerged+sort%3Aupdated-desc
-- 2022: 223 https://www.azabani.com/talks/2023-06-05-servo-2023/#5
+- 2023: 1037 (see contributors section)
+- 2022: 215 (see contributors section)
 
 commits
 - 2023: 2485 (git log --pretty=format:$&#39;%h&#92;t%cd&#39; | rg &#39; 2023 &#39; | wc -l)
@@ -57,219 +57,100 @@ oldest 2023	newest 2023	delta oldest	legacy layout	delta legacy	suite
 71.7	78.1	6.4	87.5	-9.4	normal-flow
 49.2	55.5	6.3	58.0	-2.5	WPT
 
-contributors
-- excluding stylo backports
-    - https://github.com/servo/servo/pulls?q=backport+several+style+changes+from+gecko
-    - https://github.com/servo/servo/pull/30770.patch
-    - https://github.com/servo/servo/pull/30748.patch
-    - https://github.com/servo/servo/pull/30692.patch
-    - https://github.com/servo/servo/pull/30681.patch
-    - https://github.com/servo/servo/pull/30646.patch
-    - https://github.com/servo/servo/pull/30421.patch
-    - https://github.com/servo/servo/pull/30108.patch
-    - https://github.com/servo/servo/pull/30104.patch - squashed
-    - https://github.com/servo/servo/pull/30099.patch - squashed
-    - https://github.com/servo/servo/pull/29848.patch - squashed
-    - https://github.com/servo/servo/pull/29816.patch - squashed
-    - https://github.com/servo/servo/pull/29772.patch - squashed
-    - https://github.com/servo/servo/pull/29748.patch - squashed
+## contributors
 
-$ set -- https://github.com/servo/servo/pull/30770.patch https://github.com/servo/servo/pull/30748.patch https://github.com/servo/servo/pull/30692.patch https://github.com/servo/servo/pull/30681.patch https://github.com/servo/servo/pull/30646.patch https://github.com/servo/servo/pull/30421.patch https://github.com/servo/servo/pull/30108.patch
+list pull requests that merged in 2022 and 2023
+$ tools/list-pull-request-contributors.sh servo/servo &#39;2022-.*&#39; | tee 2022.json
+$ tools/list-pull-request-contributors.sh servo/servo &#39;2023-.*&#39; | tee 2023.json
+$ &lt; 2022.json jq -s length
+215
+$ &lt; 2023.json jq -s length
+1037
 
-## attempt 1
+contributors in 2022
+$ &lt; 2022.json jq -r .user.login | sort -u | wc -l
+22
+$ &lt; 2022.json jq -r .user.login | sort | uniq -c | sort -nr
+    124 dependabot[bot]
+     26 servo-wpt-sync
+     23 jdm
+      5 yvt
+      5 striezel
+      5 michaelgrigoryan25
+      4 teymour-aldridge
+      3 s-maurice
+      3 CYBAI
+      3 atouchet
+      2 wusyong
+      2 negator
+      1 thomas992
+      1 saschanaz
+      1 sagudev
+      1 rick68
+      1 nlefler
+      1 myersg86
+      1 mrl5
+      1 MichaelMcDonnell
+      1 EnnuiL
+      1 BurtonQin
 
-get commit hashes out of github mbox patch
-$ ( set -euo pipefail; for i; do curl -fsSL &quot;$i&quot; | rg &#39;^From [0-9a-f]{40} Mon Sep 17 00:00:00 2001$&#39;; done | tee stylo | wc -l )
-561
-
-filter those hashes out of the 2023 commit history
-$ git log --pretty=format:$&#39;%H&#92;t%cd&#92;t%cE&#92;t%aE&#92;t%s&#39; | rg &#39; 2023 &#39; | rg -v &#39;^(&#39;&quot;$(printf &#92;%s &quot;$(&lt; stylo cut -d&#39; &#39; -f2)&quot; | tr &#92;&#92;n &#39;|&#39;)&quot;&#39;)&#92;t&#39; | wc -l
-2485
-
-unfortunately that didn’t do anything, because the commit hashes change when landed
-$ git log --pretty=format:$&#39;%H&#92;t%cd&#92;t%cE&#92;t%aE&#92;t%s&#39; | rg &#39; 2023 &#39; | wc -l
-2485
-
-## attempt 2
-
-download github mbox patches in advance
-$ ( set -euo pipefail; for i; do printf &#92;%s&#92;&#92;n &quot;$i&quot;; curl -fsSLO &quot;$i&quot;; done )
-
-experimentally double-check what characters need to be escaped for ripgrep
-$ echo &#92;&lt; | rg &#92;&lt;
-$ echo &#92;&gt; | rg &#92;&gt;
-$ echo &#92;# | rg &#92;#
-$ echo &#92;% | rg &#92;%
-$ echo &#92;= | rg &#92;=
-$ echo &#92;! | rg &#92;!
-$ ( set -euo pipefail; for i; do i=${i##*/}; i=${i%.patch}
-    &lt; $i.patch sed -En &#39;/^Subject: &#92;[PATCH [0-9]+&#92;/[0-9]+&#92;] (.*)$/{s//&#92;1/;p;}&#39; | tr -d &#39;a-zA-Z0-9 :,`&#39;&#92;&#39;&#39;&#92;n&lt;&gt;/_@&quot;#%=!-&#39;; done | sed &#39;s/./&amp;&#92;n/g&#39; | sort -u | tr -d &#92;&#92;n; echo )
-()*+.[]{|}
-
-find contiguous chunks of subject lines, checking that we have exactly one match each time
-$ ( set -euo pipefail; for i; do i=${i##*/}; i=${i%.patch}
-    pretty=format:$&#39;%H&#92;t%cd&#92;t%cE&#92;t%aE&#92;t%s&#39;
-    pattern=$(&lt; $i.patch sed -En &#39;/^Subject: &#92;[PATCH [0-9]+&#92;/[0-9]+&#92;] (.*)$/{s//&#92;1/;s/[]()*+.&#92;[{|}^$&#92;&#92;]/&#92;&#92;&amp;/g;s/^/^([^&#92;&#92;t]+&#92;&#92;t){4}/;s/$/.*/;p;}&#39; | tac | tee /dev/null; : /dev/stderr)
-    printf &#39;#%s = %s matches&#92;n&#39; $i &quot;$(git log --pretty=&quot;$pretty&quot; | rg -Uc -- &quot;$pattern&quot;)&quot;; done )
-#30770 = 1 matches
-#30748 = 1 matches
-#30692 = 1 matches
-#30681 = 1 matches
-#30646 = 1 matches
-#30421 = 1 matches
-#30108 = 1 matches
-
-find contiguous chunks of subject lines, saving the commit hashes to a file
-$ ( set -euo pipefail; for i; do i=${i##*/}; i=${i%.patch}
-    pretty=format:$&#39;%H&#92;t%cd&#92;t%cE&#92;t%aE&#92;t%s&#39;
-    pattern=$(&lt; $i.patch sed -En &#39;/^Subject: &#92;[PATCH [0-9]+&#92;/[0-9]+&#92;] (.*)$/{s//&#92;1/;s/[]()*+.&#92;[{|}^$&#92;&#92;]/&#92;&#92;&amp;/g;s/^/^([^&#92;&#92;t]+&#92;&#92;t){4}/;s/$/.*/;p;}&#39; | tac | tee /dev/null; : /dev/stderr)
-    git log --pretty=&quot;$pretty&quot; | rg -U -- &quot;$pattern&quot;; done ) &gt; stylo
-
-check that the total commit count is still 561
-$ wc -l stylo
-561
-
-find authors that may be the same person
-$ git log --pretty=format:$&#39;%H&#92;t%cd&#92;t%cE&#92;t%aE&#92;t%aN&#39; | rg &#39; 202[23] &#39; | rg -v &#39;^(&#39;&quot;$(printf &#92;%s &quot;$(cat stylo)&quot; | tr &#92;&#92;n &#39;|&#39;)&quot;&#39;)&#92;t&#39; | cut -f4,5 | sort -u | sort -k2,2
-infra@servo.org	bors-servo
-servo-ops@mozilla.com	bors-servo
-56165400+michaelgrigoryan25@users.noreply.github.com	Michael G
-56165400+michaelgrigoryan25@users.noreply.github.com	Michael Grigoryan
-56165400+michaelgrigoryan25@users.noreply.github.com	michaelgrigoryan25
-16504129+sagudev@users.noreply.github.com	sagu
-16504129+sagudev@users.noreply.github.com	sagudev
-16504129+sagudev@users.noreply.github.com	Samson
-notifications@reasoning.page	Teymour Aldridge
-teymour@reasoning.page	Teymour Aldridge
-120558797+captainhaddock18@users.noreply.github.com	THARAK HEGDE
-fabrice@capyloon.org	The Capyloon Team
-15304293+thesecretmaster@users.noreply.github.com	thesecretmaster
-31554741+thomas992@users.noreply.github.com	Thomas Hansen
-tmg@fastmail.com	Thomas Gardner
-tlin@mozilla.com	Ting-Yu Lin
-dvt.tnhn.krlbs@icloud.com	Tuna
-110025628+varundhand@users.noreply.github.com	Varun Dhand
-paricbat@email.cz	Veronika Bušů
-paricbat@email.cz	Veronika Horáčků
-josh+wptsync@joshmatthews.net	WPT Sync Bot
-wusyong9104@gmail.com	Wu Yu Wei
-me@upsuper.org	Xidorn Quan
-13811862+thechampagne@users.noreply.github.com	XXIV
-yashsajwan12345@gmail.com	Yash Sajwan
-yutaro.ono.418@gmail.com	Yutaro Ohno
-wusyong9104@gmail.com	Yu-Wei Wu
-i@yvt.jp	yvt
-
-add authors that seem to be the same person to .mailmap
-$ &gt;&gt; .mailmap echo &#39;&lt;atbrakhi@igalia.com&gt; atbrakhi &lt;atbrakhi@gmail.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;atbrakhi@igalia.com&gt; atbrakhi &lt;atbrakhi@igalia.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;atbrakhi@igalia.com&gt; Atbrakhi &lt;94557773+atbrakhi@users.noreply.github.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;atbrakhi@igalia.com&gt; Atbrakhi &lt;atbrakhi@igalia.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;atbrakhi@igalia.com&gt; Rakhi Sharma &lt;atbrakhi@gmail.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;cyb.ai.815@gmail.com&gt; cybai &lt;cyb.ai.815@gmail.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;cyb.ai.815@gmail.com&gt; cybai (Haku) &lt;cyb.ai.815@gmail.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;dazabani@igalia.com&gt; Delan Azabani &lt;dazabani@igalia.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;dazabani@igalia.com&gt; Delan Azabani &lt;delan@azabani.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;mrobinson@igalia.com&gt; Martin Robinson &lt;mrobinson@igalia.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;mrobinson@igalia.com&gt; Martin Robinson &lt;mrobinson@webkit.org&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;56165400+michaelgrigoryan25@users.noreply.github.com&gt; Michael Grigoryan &lt;56165400+michaelgrigoryan25@users.noreply.github.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;56165400+michaelgrigoryan25@users.noreply.github.com&gt; michaelgrigoryan25 &lt;56165400+michaelgrigoryan25@users.noreply.github.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;mukilan@igalia.com&gt; Mukilan Thiyagarajan &lt;me@mukilan.in&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;mukilan@igalia.com&gt; Mukilan Thiyagarajan &lt;mukilan@igalia.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;mukilan@igalia.com&gt; Mukilan Thiyagarajan &lt;mukilan.thiagarajan@gmail.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;mukilan@igalia.com&gt; Mukilan Thiyagarajan &lt;mukilanthiagarajan@gmail.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;16504129+sagudev@users.noreply.github.com&gt; sagudev &lt;16504129+sagudev@users.noreply.github.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;16504129+sagudev@users.noreply.github.com&gt; sagudev &lt;you@example.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;16504129+sagudev@users.noreply.github.com&gt; Samson &lt;16504129+sagudev@users.noreply.github.com&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;paricbat@email.cz&gt; Veronika Bušů &lt;paricbat@email.cz&gt;&#39;
-$ &gt;&gt; .mailmap echo &#39;&lt;paricbat@email.cz&gt; Veronika Horáčků &lt;paricbat@email.cz&gt;&#39;
-
-count unique author emails, filtering those hashes out of the 2023 commit history
-$ git log --pretty=format:$&#39;%H&#92;t%cd&#92;t%cE&#92;t%aE&#39; | rg &#39; 2023 &#39; | rg -v &#39;^(&#39;&quot;$(printf &#92;%s &quot;$(cat stylo)&quot; | tr &#92;&#92;n &#39;|&#39;)&quot;&#39;)&#92;t&#39; | cut -f4 | sort | uniq -c | sort -rn
-    424 infra@servo.org
-    321 49699333+dependabot[bot]@users.noreply.github.com
-    265 mrobinson@igalia.com
-    189 obrufau@igalia.com
-    141 emilio@crisal.io
-     90 16504129+sagudev@users.noreply.github.com
-     82 dazabani@igalia.com
-     54 josh+wptsync@joshmatthews.net
-     49 mukilan@igalia.com
-     32 josh@joshmatthews.net
-     23 pu.stshine@gmail.com
-     23 atbrakhi@igalia.com
-     23 56165400+michaelgrigoryan25@users.noreply.github.com
-     22 alextouchet@outlook.com
-     14 32481905+servo-wpt-sync@users.noreply.github.com
-     13 boris.chiou@gmail.com
-     13 98276492+2shiori17@users.noreply.github.com
-     10 cyb.ai.815@gmail.com
-      9 85590273+EnnuiL@users.noreply.github.com
-      8 mats@mozilla.com
-      7 yuweiwu@pm.me
-      7 yutaro.ono.418@gmail.com
-      7 fabrice@desre.org
-      6 jkew@mozilla.com
-      5 emcdonough@mozilla.com
-      5 alanxiao211@gmail.com
-      4 tmg@fastmail.com
-      4 rego@igalia.com
-      4 mh+mozilla@glandium.org
-      4 johnsonac.3300@gmail.com
-      3 i@yvt.jp
-      3 federico@gnome.org
-      3 fabrice@capyloon.org
-      3 canaltinova@gmail.com
-      2 tlin@mozilla.com
-      2 ss77995ss@gmail.com
-      2 soniasingla.1812@gmail.com
-      2 paricbat@email.cz
-      2 mwoodrow@mozilla.com
-      2 moonset20@gmail.com
-      2 michelle@masterwayz.nl
-      2 iversmage@gmail.com
-      2 andreu@andreubotella.com
-      2 12537668+MendyBerger@users.noreply.github.com
-      2 120558797+captainhaddock18@users.noreply.github.com
-      1 yashsajwan12345@gmail.com
-      1 tamird@gmail.com
-      1 stransky@redhat.com
-      1 spohl.mozilla.bugs@gmail.com
-      1 requestdg@gmail.com
-      1 reidswan@outlook.com
-      1 phil.git@eden.net.nz
-      1 pcwalton@mimiga.net
-      1 nsilva@mozilla.com
-      1 nipung271@gmail.com
-      1 nico@nicoburns.com
-      1 neia@ikeran.org
-      1 mreschenberg@mozilla.com
-      1 me@upsuper.org
-      1 lamoure6@msu.edu
-      1 ivan.ukhov@gmail.com
-      1 hwopenharmony@gmail.com
-      1 dvt.tnhn.krlbs@icloud.com
-      1 coreyf@rwell.org
-      1 cadubentzen@gmail.com
-      1 bfreist@soundhound.com
-      1 barret@brennie.ca
-      1 91363480+joshua-holmes@users.noreply.github.com
-      1 9028220+bc-universe@users.noreply.github.com
-      1 68819302+obsidianical@users.noreply.github.com
-      1 6543@obermui.de
-      1 62263315+tipowol@users.noreply.github.com
-      1 2792687+gterzian@users.noreply.github.com
-      1 15304293+thesecretmaster@users.noreply.github.com
-      1 13811862+thechampagne@users.noreply.github.com
-      1 1322294+shanehandley@users.noreply.github.com
-      1 110025628+varundhand@users.noreply.github.com
-
-this still has serious problems
-- before mid-july, we landed patches with bors-servo &lt;infra@servo.org&gt; (homu)
-- before 2023, we landed patches with bors-servo &lt;servo-ops@mozilla.com&gt;
-- merging authors by hand is a pain
-
-wait. why am i even doing contributor analysis over commit authors? i can just do it over github users that opened pull requests, which solves all of these problems
+contributors in 2023
+$ &lt; 2023.json jq -r .user.login | sort -u | wc -l
+53
+$ &lt; 2023.json jq -r .user.login | sort | uniq -c | sort -nr
+    321 dependabot[bot]
+    260 mrobinson
+     73 Loirooriol
+     71 sagudev
+     68 servo-wpt-sync
+     47 mukilan
+     45 delan
+     23 atbrakhi
+     22 atouchet
+     10 fabricedesre
+      9 stshine
+      9 EnnuiL
+      8 wusyong
+      7 ohno418
+      7 jdm
+      5 CYBAI
+      4 mrego
+      4 michaelgrigoryan25
+      3 emilio
+      3 2shiori17
+      2 yvt
+      2 switchpiggy
+      2 ss77995ss
+      2 paricbat
+      2 chansuke
+      1 Yash-Sajwan24
+      1 varundhand
+      1 tipowol
+      1 thesecretmaster
+      1 thechampagne
+      1 tamird
+      1 shanehandley
+      1 seasonmac
+      1 schrottkatze
+      1 reidswan
+      1 nipunG314
+      1 nicoburns
+      1 Mifom
+      1 MendyBerger
+      1 joshua-holmes
+      1 IvanUkhov
+      1 gterzian
+      1 frewsxcv
+      1 federicomenaquintero
+      1 dvtkrlbs
+      1 captainhaddock18
+      1 cadubentzen
+      1 ben-freist
+      1 bc-universe
+      1 atomgardner
+      1 AnthonyJ3
+      1 andreubotella
+      1 6543
 --&gt;
 </content>
   </entry>
