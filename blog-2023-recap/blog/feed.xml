@@ -129,27 +129,80 @@ check that the total commit count is still 561
 $ wc -l stylo
 561
 
+find authors that may be the same person
+$ git log --pretty=format:$&#39;%H&#92;t%cd&#92;t%cE&#92;t%aE&#92;t%aN&#39; | rg &#39; 202[23] &#39; | rg -v &#39;^(&#39;&quot;$(printf &#92;%s &quot;$(cat stylo)&quot; | tr &#92;&#92;n &#39;|&#39;)&quot;&#39;)&#92;t&#39; | cut -f4,5 | sort -u | sort -k2,2
+infra@servo.org	bors-servo
+servo-ops@mozilla.com	bors-servo
+56165400+michaelgrigoryan25@users.noreply.github.com	Michael G
+56165400+michaelgrigoryan25@users.noreply.github.com	Michael Grigoryan
+56165400+michaelgrigoryan25@users.noreply.github.com	michaelgrigoryan25
+16504129+sagudev@users.noreply.github.com	sagu
+16504129+sagudev@users.noreply.github.com	sagudev
+16504129+sagudev@users.noreply.github.com	Samson
+notifications@reasoning.page	Teymour Aldridge
+teymour@reasoning.page	Teymour Aldridge
+120558797+captainhaddock18@users.noreply.github.com	THARAK HEGDE
+fabrice@capyloon.org	The Capyloon Team
+15304293+thesecretmaster@users.noreply.github.com	thesecretmaster
+31554741+thomas992@users.noreply.github.com	Thomas Hansen
+tmg@fastmail.com	Thomas Gardner
+tlin@mozilla.com	Ting-Yu Lin
+dvt.tnhn.krlbs@icloud.com	Tuna
+110025628+varundhand@users.noreply.github.com	Varun Dhand
+paricbat@email.cz	Veronika Bušů
+paricbat@email.cz	Veronika Horáčků
+josh+wptsync@joshmatthews.net	WPT Sync Bot
+wusyong9104@gmail.com	Wu Yu Wei
+me@upsuper.org	Xidorn Quan
+13811862+thechampagne@users.noreply.github.com	XXIV
+yashsajwan12345@gmail.com	Yash Sajwan
+yutaro.ono.418@gmail.com	Yutaro Ohno
+wusyong9104@gmail.com	Yu-Wei Wu
+i@yvt.jp	yvt
+
+add authors that seem to be the same person to .mailmap
+$ &gt;&gt; .mailmap echo &#39;&lt;atbrakhi@igalia.com&gt; atbrakhi &lt;atbrakhi@gmail.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;atbrakhi@igalia.com&gt; atbrakhi &lt;atbrakhi@igalia.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;atbrakhi@igalia.com&gt; Atbrakhi &lt;94557773+atbrakhi@users.noreply.github.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;atbrakhi@igalia.com&gt; Atbrakhi &lt;atbrakhi@igalia.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;atbrakhi@igalia.com&gt; Rakhi Sharma &lt;atbrakhi@gmail.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;cyb.ai.815@gmail.com&gt; cybai &lt;cyb.ai.815@gmail.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;cyb.ai.815@gmail.com&gt; cybai (Haku) &lt;cyb.ai.815@gmail.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;dazabani@igalia.com&gt; Delan Azabani &lt;dazabani@igalia.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;dazabani@igalia.com&gt; Delan Azabani &lt;delan@azabani.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;mrobinson@igalia.com&gt; Martin Robinson &lt;mrobinson@igalia.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;mrobinson@igalia.com&gt; Martin Robinson &lt;mrobinson@webkit.org&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;56165400+michaelgrigoryan25@users.noreply.github.com&gt; Michael Grigoryan &lt;56165400+michaelgrigoryan25@users.noreply.github.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;56165400+michaelgrigoryan25@users.noreply.github.com&gt; michaelgrigoryan25 &lt;56165400+michaelgrigoryan25@users.noreply.github.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;mukilan@igalia.com&gt; Mukilan Thiyagarajan &lt;me@mukilan.in&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;mukilan@igalia.com&gt; Mukilan Thiyagarajan &lt;mukilan@igalia.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;mukilan@igalia.com&gt; Mukilan Thiyagarajan &lt;mukilan.thiagarajan@gmail.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;mukilan@igalia.com&gt; Mukilan Thiyagarajan &lt;mukilanthiagarajan@gmail.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;16504129+sagudev@users.noreply.github.com&gt; sagudev &lt;16504129+sagudev@users.noreply.github.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;16504129+sagudev@users.noreply.github.com&gt; sagudev &lt;you@example.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;16504129+sagudev@users.noreply.github.com&gt; Samson &lt;16504129+sagudev@users.noreply.github.com&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;paricbat@email.cz&gt; Veronika Bušů &lt;paricbat@email.cz&gt;&#39;
+$ &gt;&gt; .mailmap echo &#39;&lt;paricbat@email.cz&gt; Veronika Horáčků &lt;paricbat@email.cz&gt;&#39;
+
 count unique author emails, filtering those hashes out of the 2023 commit history
 $ git log --pretty=format:$&#39;%H&#92;t%cd&#92;t%cE&#92;t%aE&#39; | rg &#39; 2023 &#39; | rg -v &#39;^(&#39;&quot;$(printf &#92;%s &quot;$(cat stylo)&quot; | tr &#92;&#92;n &#39;|&#39;)&quot;&#39;)&#92;t&#39; | cut -f4 | sort | uniq -c | sort -rn
     424 infra@servo.org
     321 49699333+dependabot[bot]@users.noreply.github.com
-    261 mrobinson@igalia.com
+    265 mrobinson@igalia.com
     189 obrufau@igalia.com
     141 emilio@crisal.io
-     89 16504129+sagudev@users.noreply.github.com
-     72 dazabani@igalia.com
+     90 16504129+sagudev@users.noreply.github.com
+     82 dazabani@igalia.com
      54 josh+wptsync@joshmatthews.net
+     49 mukilan@igalia.com
      32 josh@joshmatthews.net
      23 pu.stshine@gmail.com
+     23 atbrakhi@igalia.com
      23 56165400+michaelgrigoryan25@users.noreply.github.com
-     22 mukilan@igalia.com
-     22 me@mukilan.in
      22 alextouchet@outlook.com
-     19 atbrakhi@igalia.com
      14 32481905+servo-wpt-sync@users.noreply.github.com
      13 boris.chiou@gmail.com
      13 98276492+2shiori17@users.noreply.github.com
-     10 delan@azabani.com
      10 cyb.ai.815@gmail.com
       9 85590273+EnnuiL@users.noreply.github.com
       8 mats@mozilla.com
@@ -161,10 +214,8 @@ $ git log --pretty=format:$&#39;%H&#92;t%cd&#92;t%cE&#92;t%aE&#39; | rg &#39; 20
       5 alanxiao211@gmail.com
       4 tmg@fastmail.com
       4 rego@igalia.com
-      4 mrobinson@webkit.org
       4 mh+mozilla@glandium.org
       4 johnsonac.3300@gmail.com
-      3 mukilanthiagarajan@gmail.com
       3 i@yvt.jp
       3 federico@gnome.org
       3 fabrice@capyloon.org
@@ -174,16 +225,12 @@ $ git log --pretty=format:$&#39;%H&#92;t%cd&#92;t%cE&#92;t%aE&#39; | rg &#39; 20
       2 soniasingla.1812@gmail.com
       2 paricbat@email.cz
       2 mwoodrow@mozilla.com
-      2 mukilan.thiagarajan@gmail.com
       2 moonset20@gmail.com
       2 michelle@masterwayz.nl
       2 iversmage@gmail.com
-      2 atbrakhi@gmail.com
       2 andreu@andreubotella.com
-      2 94557773+atbrakhi@users.noreply.github.com
       2 12537668+MendyBerger@users.noreply.github.com
       2 120558797+captainhaddock18@users.noreply.github.com
-      1 you@example.com
       1 yashsajwan12345@gmail.com
       1 tamird@gmail.com
       1 stransky@redhat.com
@@ -217,7 +264,12 @@ $ git log --pretty=format:$&#39;%H&#92;t%cd&#92;t%cE&#92;t%aE&#39; | rg &#39; 20
       1 1322294+shanehandley@users.noreply.github.com
       1 110025628+varundhand@users.noreply.github.com
 
-before mid-july, we landed patches with homu (bors-servo &lt;infra@servo.org&gt;), so we need to extract authors some other way
+this still has serious problems
+- before mid-july, we landed patches with bors-servo &lt;infra@servo.org&gt; (homu)
+- before 2023, we landed patches with bors-servo &lt;servo-ops@mozilla.com&gt;
+- merging authors by hand is a pain
+
+wait. why am i even doing contributor analysis over commit authors? i can just do it over github users that opened pull requests, which solves all of these problems
 --&gt;
 </content>
   </entry>
