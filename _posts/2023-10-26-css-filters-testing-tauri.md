@@ -78,7 +78,7 @@ Much of the recent work on Servo has been around upgrading the components we sha
 Sometimes the best source of ideas for improving Servo is to focus on a real-world app.
 [Ennui @EnnuiL](https://github.com/EnnuiL) is doing exactly that with [Cookie Clicker](https://orteil.dashnet.org/cookieclicker/), a 2013 idle game that relies on CSS positioning, transitions, transforms, filters, and 2D canvases.
 
-* as of 2023-10-05, the **CSS ‘drop-shadow()‘ filter** is now supported ([@EnnuiL](https://github.com/EnnuiL), [#30439](https://github.com/servo/servo/pull/30439))
+* as of 2023-10-05, the **CSS ‘drop-shadow()’ filter** is now supported ([@EnnuiL](https://github.com/EnnuiL), [#30439](https://github.com/servo/servo/pull/30439))
 * as of 2023-10-10, CSS filters are now correctly **clipped by ‘overflow: hidden’** ([@EnnuiL](https://github.com/EnnuiL), [#30517](https://github.com/servo/servo/pull/30517))
 * as of 2023-10-19, **drawImage()** on a 2D canvas now uses shared memory for performance ([@EnnuiL](https://github.com/EnnuiL), [#30544](https://github.com/servo/servo/pull/30544))
 * her work continues in [#30535](https://github.com/servo/servo/issues/30535), with an analysis of Servo’s performance issues under Cookie Clicker

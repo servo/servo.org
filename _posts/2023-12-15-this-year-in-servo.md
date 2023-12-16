@@ -58,8 +58,8 @@ reviewers
 - copy($$("#team-members li[data-bulk-actions-id]").map(x => x.dataset.bulkActionsId).sort().join("\n"))
 
 commits
-- 2023: 2485 (git log --pretty=format:$'%h\t%cd' | rg ' 2023 ' | wc -l)
 - 2022: 523 (git log --pretty=format:$'%h\t%cd' | rg ' 2022 ' | wc -l)
+- 2023: 2485 (git log --pretty=format:$'%h\t%cd' | rg ' 2023 ' | wc -l)
 
 for wpt pass rates and all other analysis, see assets/img/blog/recap-2023.ods
 -->
