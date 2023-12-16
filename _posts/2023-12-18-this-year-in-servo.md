@@ -18,7 +18,7 @@ This year, to date, we’ve had **53 unique contributors** (+140% over 22 last y
 
 Individual contributors are important for the health of the project, and of the pull requests made by humans (rather than our [friendly](https://github.com/servo-wpt-sync) [bots](https://github.com/dependabot)), 30% were by people outside Igalia, and 18% were by non-reviewers.
 
-Servo now supports offscreen rendering, now has experimental WebGPU support (`--pref dom.webgpu.enabled`), and is now listed on [wpt.fyi](https://wpt.fyi) (click <span style="font-variant-caps: all-small-caps;">Edit</span> to add Servo).
+Servo now supports offscreen rendering, its experimental WebGPU support (`--pref dom.webgpu.enabled`) has been updated, and Servo is now listed on [wpt.fyi](https://wpt.fyi) again (click <span style="font-variant-caps: all-small-caps;">Edit</span> to add Servo).
 
 [Our new layout engine]({{ '/blog/2023/04/13/layout-2013-vs-2020/' | url }}) is now proving its strengths, with support for iframes, floats, stacking context improvements, inline layout improvements, margin collapsing, ‘position: sticky’, ‘min-width’ and ‘min-height’, ‘max-width’ and ‘max-height’, ‘align-content’, ‘justify-content’, ‘white-space’, ‘text-indent’, ‘text-align: justify’, [‘outline’ and ‘outline-offset’]({{ '/blog/2023/05/31/adding-support-for-outline-properties/' | url }}), and ‘filter: drop-shadow()’.
 
