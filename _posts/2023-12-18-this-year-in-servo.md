@@ -16,9 +16,11 @@ Servo is well and truly back.
 <span class="_floatmin"></span>
 This year, to date, we’ve had **53 unique contributors** (+140% over 22 last year), landing **1037 pull requests** (+382% over 215) and 2485 commits (+375% over 523), and that’s just in [our main repo](https://github.com/servo/servo)!
 
-Individual contributors are important for the health of the project, and of the pull requests made by humans (rather than our [friendly](https://github.com/servo-wpt-sync) [bots](https://github.com/dependabot)), 30% were by people outside Igalia, and 18% were by non-reviewers.
+Individual contributors are especially important for the health of the project, and of the pull requests made by humans (rather than our [friendly](https://github.com/servo-wpt-sync) [bots](https://github.com/dependabot)), 30% were by people outside Igalia, and 18% were by non-reviewers.
 
-Servo now supports offscreen rendering, its experimental WebGPU support (`--pref dom.webgpu.enabled`) has been updated, and Servo is now listed on [wpt.fyi](https://wpt.fyi) again (click <span style="font-variant-caps: all-small-caps;">Edit</span> to add Servo).
+Servo has been featured in [six conference talks]({{ '/about/' | url }}) this year, including at [RustNL](https://www.youtube.com/watch?v=IdHvHoAO5oo), [Web Engines Hackfest](https://www.youtube.com/watch?v=pfk8s5OD99A), [LF Europe Member Summit](https://www.youtube.com/watch?v=J4qedc-0pjs&t=2356s), [Open Source Summit Europe](https://youtu.be/9lkIX5ryZZ4), [GOSIM Workshop](https://youtu.be/RugzThWcjn4), and [GOSIM Conference](https://www.youtube.com/watch?v=lx70W83Bxtc).
+
+Servo now has a usable “minibrowser” UI, now supports offscreen rendering, its experimental WebGPU support (`--pref dom.webgpu.enabled`) has been updated, and Servo is now listed on [wpt.fyi](https://wpt.fyi) again (click <span style="font-variant-caps: all-small-caps;">Edit</span> to add Servo).
 
 [Our new layout engine]({{ '/blog/2023/04/13/layout-2013-vs-2020/' | url }}) is now proving its strengths, with support for iframes, floats, stacking context improvements, inline layout improvements, margin collapsing, ‘position: sticky’, ‘min-width’ and ‘min-height’, ‘max-width’ and ‘max-height’, ‘align-content’, ‘justify-content’, ‘white-space’, ‘text-indent’, ‘text-align: justify’, [‘outline’ and ‘outline-offset’]({{ '/blog/2023/05/31/adding-support-for-outline-properties/' | url }}), and ‘filter: drop-shadow()’.
 
@@ -34,6 +36,9 @@ Whereas legacy layout was only ever able to reach 53.9% in the floats tests and 
 
 <span class="_floatmin" style="clear: both;"></span>
 [Next year](https://github.com/servo/servo/wiki/Roadmap/106e95887c3d9768f791a4e0501ba5c89abe9636), our funding will go towards maintaining Servo, releasing nightlies on Android, finishing our integration with Tauri (thanks to NLNet), and implementing tables and better support for floats and non-Latin text (thanks to NLNet).
+
+Servo will also be at [FOSDEM 2024](https://fosdem.org/2024/), with Rakhi Sharma speaking about [embedding Servo in Rust projects](https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/) on **3 February** at **16:45 local time** (15:45 UTC).
+See you there!
 
 There’s a lot more we would like to do, so if you or a company you know are interested in sponsoring the development of an embeddable, independent, memory-safe, modular, parallel web rendering engine, we want to hear from you!
 Head over to [our sponsorship page]({{ '/sponsorship/' | url }}), or email [join@servo.org](mailto:join@servo.org) for enquiries.
