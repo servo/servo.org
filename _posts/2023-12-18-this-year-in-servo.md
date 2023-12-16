@@ -10,13 +10,13 @@ categories:
 Servo is well and truly back.
 
 <figure class="_figr _default"><a href="{{ '/img/blog/recap-2023-contributors.png' | url }}"><img src="{{ '/img/blog/recap-2023-contributors.png' | url }}"
-    alt="Pie chart: 12% by non-Igalia reviewers, 39% by Igalia reviewers, 5% by non-reviewer Igalians, 7% by neither, 37% by bots"></a>
+    alt="Bar chart: 453 (44%) by Igalia, 195 (19%) by non-Igalia, 389 (37%) by bots"></a>
 <figcaption>Contributors to <a href="https://github.com/servo/servo">servo/servo</a> in 2023.</figcaption></figure>
 
 <span class="_floatmin"></span>
 This year, to date, we’ve had **53 unique contributors** (+140% over 22 last year), landing **1037 pull requests** (+382% over 215) and 2485 commits (+375% over 523), and that’s just in [our main repo](https://github.com/servo/servo)!
 
-Individual contributors are important for the health of the project, and of the pull requests made by humans (rather than our [friendly](https://github.com/servo-wpt-sync) [bots](https://github.com/dependabot)), 30% were by people outside Igalia, 18% were by non-reviewers, and over 10% were made by people who were neither.
+Individual contributors are important for the health of the project, and of the pull requests made by humans (rather than our [friendly](https://github.com/servo-wpt-sync) [bots](https://github.com/dependabot)), 30% were by people outside Igalia, and 18% were by non-reviewers.
 
 Servo now supports offscreen rendering, now has experimental WebGPU support (`--pref dom.webgpu.enabled`), and is now listed on [wpt.fyi](https://wpt.fyi) (click <span style="font-variant-caps: all-small-caps;">Edit</span> to add Servo).
 
