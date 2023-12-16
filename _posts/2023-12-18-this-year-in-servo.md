@@ -33,10 +33,10 @@ Whereas legacy layout was only ever able to reach 53.9% in the floats tests and 
 [Acid1](http://acid1.acidtests.org) now passes in the new layout engine, and we’ve also surpassed legacy layout in the **CSS2 abspos (by 50.0pp)**, CSS2 positioning (by 6.5pp), and CSS Position (by 4.4pp) test suites, while making big strides in others, like the **CSSOM tests (+13.1pp)** and key parts of the **CSS2 test suite (+15.8pp)**.
 
 <span class="_floatmin" style="clear: both;"></span>
-[Next year](https://github.com/servo/servo/wiki/Roadmap/106e95887c3d9768f791a4e0501ba5c89abe9636), our funding will go towards maintaining Servo (thanks to LF Europe), releasing nightlies on Android (LF Europe), finishing our integration with Tauri (NLNet), and implementing tables and better support for floats and non-Latin text (NLNet).
+[Next year](https://github.com/servo/servo/wiki/Roadmap/106e95887c3d9768f791a4e0501ba5c89abe9636), our funding will go towards maintaining Servo, releasing nightlies on Android, finishing our integration with Tauri (thanks to NLNet), and implementing tables and better support for floats and non-Latin text (thanks to NLNet).
 
 There’s a lot more we would like to do, so if you or a company you know are interested in sponsoring the development of an embeddable, independent, memory-safe, modular, parallel web rendering engine, we want to hear from you!
-Head over to [our LFX crowdfunding page](https://crowdfunding.lfx.linuxfoundation.org/projects/servo), or email [join@servo.org](mailto:join@servo.org) for enquiries.
+Head over to [our sponsorship page]({{ '/sponsorship/' | url }}), or email [join@servo.org](mailto:join@servo.org) for enquiries.
 
 In a decade that many people feared would become the nadir of browser engine diversity, we hope we can help change that with Servo.
 
