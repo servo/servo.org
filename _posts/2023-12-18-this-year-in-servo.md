@@ -120,6 +120,7 @@ for wpt pass rates and all other analysis, see assets/img/blog/recap-2023.ods
     ._figl._default > a > img,
     ._figr._default > a > img {
         width: auto;
+        max-width: 100%;
     }
     ._runin {
         margin-bottom: 1em;
