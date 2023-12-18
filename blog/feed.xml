@@ -4,12 +4,131 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2023-11-30T00:00:00Z</updated>
+  <updated>2023-12-18T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>This year in Servo: over 1000 pull requests and beyond</title>
+    <link href="https://servo.org/blog/2023/12/18/this-year-in-servo/"/>
+    <updated>2023-12-18T00:00:00Z</updated>
+    <id>https://servo.org/blog/2023/12/18/this-year-in-servo/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Servo is well and truly back.&lt;/p&gt;
+&lt;figure class=&quot;_figr _default&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/recap-2023-contributors.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/recap-2023-contributors.png&quot; alt=&quot;Bar chart: 453 (44%) by Igalia, 195 (19%) by non-Igalia, 389 (37%) by bots&quot; /&gt;&lt;/a&gt;
+&lt;figcaption&gt;Contributors to &lt;a href=&quot;https://github.com/servo/servo&quot;&gt;servo/servo&lt;/a&gt; in 2023.&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;
+This year, to date, we’ve had &lt;strong&gt;53 unique contributors&lt;/strong&gt; (+140% over 22 last year), landing &lt;strong&gt;1037 pull requests&lt;/strong&gt; (+382% over 215) and 2485 commits (+375% over 523), and that’s just in &lt;a href=&quot;https://github.com/servo/servo&quot;&gt;our main repo&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Individual contributors are especially important for the health of the project, and of the pull requests made by humans (rather than our &lt;a href=&quot;https://github.com/servo-wpt-sync&quot;&gt;friendly&lt;/a&gt; &lt;a href=&quot;https://github.com/dependabot&quot;&gt;bots&lt;/a&gt;), 30% were by people outside Igalia, and 18% were by non-reviewers.&lt;/p&gt;
+&lt;p&gt;Servo has been featured in &lt;a href=&quot;https://servo.org/about/&quot;&gt;six conference talks&lt;/a&gt; this year, including at &lt;a href=&quot;https://www.youtube.com/watch?v=IdHvHoAO5oo&quot;&gt;RustNL&lt;/a&gt;, &lt;a href=&quot;https://www.youtube.com/watch?v=pfk8s5OD99A&quot;&gt;Web Engines Hackfest&lt;/a&gt;, &lt;a href=&quot;https://www.youtube.com/watch?v=J4qedc-0pjs&amp;amp;t=2356s&quot;&gt;LF Europe Member Summit&lt;/a&gt;, &lt;a href=&quot;https://youtu.be/9lkIX5ryZZ4&quot;&gt;Open Source Summit Europe&lt;/a&gt;, &lt;a href=&quot;https://youtu.be/RugzThWcjn4&quot;&gt;GOSIM Workshop&lt;/a&gt;, and &lt;a href=&quot;https://www.youtube.com/watch?v=lx70W83Bxtc&quot;&gt;GOSIM Conference&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Servo now has a usable “minibrowser” UI, now supports offscreen rendering, its experimental WebGPU support (&lt;code&gt;--pref dom.webgpu.enabled&lt;/code&gt;) has been updated, and Servo is now listed on &lt;a href=&quot;https://wpt.fyi/&quot;&gt;wpt.fyi&lt;/a&gt; again (click &lt;span style=&quot;font-variant-caps: all-small-caps;&quot;&gt;Edit&lt;/span&gt; to add Servo).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/blog/2023/04/13/layout-2013-vs-2020/&quot;&gt;Our new layout engine&lt;/a&gt; is now proving its strengths, with support for iframes, floats, stacking context improvements, inline layout improvements, margin collapsing, ‘position: sticky’, ‘min-width’ and ‘min-height’, ‘max-width’ and ‘max-height’, ‘align-content’, ‘justify-content’, ‘white-space’, ‘text-indent’, ‘text-align: justify’, &lt;a href=&quot;https://servo.org/blog/2023/05/31/adding-support-for-outline-properties/&quot;&gt;‘outline’ and ‘outline-offset’&lt;/a&gt;, and ‘filter: drop-shadow()’.&lt;/p&gt;
+&lt;figure class=&quot;_figl _default&quot; style=&quot;clear: both;&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/recap-2023-wpt.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/recap-2023-wpt.png&quot; alt=&quot;Bar chart: 17% + 64pp in floats, 18% + 55pp in floats-clear, 63% + 15pp in key CSS2 tests, 80% + 14pp in abspos, 34% + 14pp in CSS position module, 67% + 13pp in margin-padding-clear, 49% + 13pp in CSSOM, 51% + 10pp in all CSS tests, 49% + 6pp in all WPT tests&quot; /&gt;&lt;/a&gt;
+&lt;figcaption style=&quot;max-width: 25em; margin: 0 auto;&quot;&gt;Pass rates in parts of the &lt;a href=&quot;https://web-platform-tests.org/&quot;&gt;Web Platform Tests&lt;/a&gt; with our new layout engine, showing the improvement we’ve made since the &lt;a href=&quot;https://servo.org/blog/2023/07/20/servo-web-platform-tests/&quot;&gt;start of our data&lt;/a&gt; in April 2023.&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;span class=&quot;_floatmin&quot; style=&quot;clear: right;&quot;&gt;&lt;/span&gt;
+&lt;a href=&quot;https://github.com/dbaron/inlines-and-floats&quot;&gt;Floats are notoriously tricky&lt;/a&gt;, to the point we found them &lt;a href=&quot;https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report&quot;&gt;impossible to implement correctly&lt;/a&gt; in our legacy layout engine, but thanks to the move from eager to opportunistic parallelism, they are now supported fairly well.
+Whereas legacy layout was only ever able to reach 53.9% in the floats tests and 68.2% in floats-clear, we’re now at &lt;strong&gt;82.2% in floats&lt;/strong&gt; (+28.3pp over legacy) and &lt;strong&gt;73.3% in floats-clear&lt;/strong&gt; (+5.1pp over legacy).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://acid1.acidtests.org/&quot;&gt;Acid1&lt;/a&gt; now passes in the new layout engine, and we’ve also surpassed legacy layout in the &lt;strong&gt;CSS2 abspos (by 50.0pp)&lt;/strong&gt;, CSS2 positioning (by 6.5pp), and CSS Position (by 4.4pp) test suites, while making big strides in others, like the &lt;strong&gt;CSSOM tests (+13.1pp)&lt;/strong&gt; and key parts of the &lt;strong&gt;CSS2 test suite (+15.8pp)&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;_floatmin&quot; style=&quot;clear: both;&quot;&gt;&lt;/span&gt;
+&lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap/106e95887c3d9768f791a4e0501ba5c89abe9636&quot;&gt;Next year&lt;/a&gt;, our funding will go towards maintaining Servo, releasing nightlies on Android, finishing our integration with Tauri (thanks to NLNet), and implementing tables and better support for floats and non-Latin text (thanks to NLNet).&lt;/p&gt;
+&lt;p&gt;Servo will also be at &lt;a href=&quot;https://fosdem.org/2024/&quot;&gt;FOSDEM 2024&lt;/a&gt;, with Rakhi Sharma speaking about &lt;a href=&quot;https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/&quot;&gt;embedding Servo in Rust projects&lt;/a&gt; on &lt;strong&gt;3 February&lt;/strong&gt; at &lt;strong&gt;16:45 local time&lt;/strong&gt; (15:45 UTC).
+See you there!&lt;/p&gt;
+&lt;p&gt;There’s a lot more we would like to do, so if you or a company you know are interested in sponsoring the development of an embeddable, independent, memory-safe, modular, parallel web rendering engine, we want to hear from you!
+Head over to &lt;a href=&quot;https://servo.org/sponsorship/&quot;&gt;our sponsorship page&lt;/a&gt;, or email &lt;a href=&quot;mailto:join@servo.org&quot;&gt;join@servo.org&lt;/a&gt; for enquiries.&lt;/p&gt;
+&lt;p&gt;In a decade that many people feared would become the nadir of browser engine diversity, we hope we can help change that with Servo.&lt;/p&gt;
+&lt;!--
+pull request data
+$ tools/list-pull-requests.sh servo/servo &#39;2022-.*&#39; | tee 2022.json
+$ tools/list-pull-requests.sh servo/servo &#39;2023-.*&#39; | tee 2023.json
+
+pull requests
+- 2022: 215 (&lt; 2022.json jq -s length)
+- 2023: 1037 (&lt; 2023.json jq -s length)
+
+contributors
+- 2022: 22 (&lt; 2022.json jq -r .user.login | sort | uniq -c | sort -nr | wc -l)
+- 2023: 53 (&lt; 2023.json jq -r .user.login | sort | uniq -c | sort -nr | wc -l)
+
+reviewers
+- https://github.com/orgs/servo/teams/developers
+- copy($$(&quot;#team-members li[data-bulk-actions-id]&quot;).map(x =&gt; x.dataset.bulkActionsId).sort().join(&quot;&#92;n&quot;))
+
+commits
+- 2022: 523 (git log --pretty=format:$&#39;%h&#92;t%cd&#39; | rg &#39; 2022 &#39; | wc -l)
+- 2023: 2485 (git log --pretty=format:$&#39;%h&#92;t%cd&#39; | rg &#39; 2023 &#39; | wc -l)
+
+for wpt pass rates and all other analysis, see assets/img/blog/recap-2023.ods
+--&gt;
+&lt;style&gt;
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig &gt; ._flex {
+        display: flex;
+    }
+    ._fig._min {
+        width: min-content;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+    }
+    ._figr {
+        float: right;
+    }
+    ._figl &gt; iframe,
+    ._figr &gt; iframe,
+    ._figl &gt; a &gt; img,
+    ._figr &gt; a &gt; img {
+        width: 17em;
+        max-width: max-content;
+    }
+    ._figl._default &gt; iframe,
+    ._figr._default &gt; iframe,
+    ._figl._default &gt; a &gt; img,
+    ._figr._default &gt; a &gt; img {
+        width: auto;
+        max-width: 100%;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin &gt; p,
+    ._runin &gt; h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+&lt;/style&gt;
+</content>
+  </entry>
   <entry>
     <title>This month in Servo: better floats, color-mix(), try job labels, and more!</title>
     <link href="https://servo.org/blog/2023/11/30/embedding-floats-color-mix/"/>
@@ -268,7 +387,7 @@ In general, Servo should never panic outside of debug assertions.&lt;/p&gt;
 &lt;p&gt;Sometimes the best source of ideas for improving Servo is to focus on a real-world app.
 &lt;a href=&quot;https://github.com/EnnuiL&quot;&gt;Ennui @EnnuiL&lt;/a&gt; is doing exactly that with &lt;a href=&quot;https://orteil.dashnet.org/cookieclicker/&quot;&gt;Cookie Clicker&lt;/a&gt;, a 2013 idle game that relies on CSS positioning, transitions, transforms, filters, and 2D canvases.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;as of 2023-10-05, the &lt;strong&gt;CSS ‘drop-shadow()‘ filter&lt;/strong&gt; is now supported (&lt;a href=&quot;https://github.com/EnnuiL&quot;&gt;@EnnuiL&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30439&quot;&gt;#30439&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2023-10-05, the &lt;strong&gt;CSS ‘drop-shadow()’ filter&lt;/strong&gt; is now supported (&lt;a href=&quot;https://github.com/EnnuiL&quot;&gt;@EnnuiL&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30439&quot;&gt;#30439&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;as of 2023-10-10, CSS filters are now correctly &lt;strong&gt;clipped by ‘overflow: hidden’&lt;/strong&gt; (&lt;a href=&quot;https://github.com/EnnuiL&quot;&gt;@EnnuiL&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30517&quot;&gt;#30517&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;as of 2023-10-19, &lt;strong&gt;drawImage()&lt;/strong&gt; on a 2D canvas now uses shared memory for performance (&lt;a href=&quot;https://github.com/EnnuiL&quot;&gt;@EnnuiL&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30544&quot;&gt;#30544&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;her work continues in &lt;a href=&quot;https://github.com/servo/servo/issues/30535&quot;&gt;#30535&lt;/a&gt;, with an analysis of Servo’s performance issues under Cookie Clicker&lt;/li&gt;
@@ -510,7 +629,7 @@ consectetur &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token t
 &lt;li&gt;their relationships with WebRender&lt;/li&gt;
 &lt;li&gt;the degrees to which their architectures reflect CSS specs&lt;/li&gt;
 &lt;li&gt;the completeness of their implementations of CSS features&lt;/li&gt;
-&lt;li&gt;the difficulty in supporting &lt;a href=&quot;https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report&quot;&gt;complex features like floats&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;the difficulty in supporting &lt;a href=&quot;https://github.com/dbaron/inlines-and-floats&quot;&gt;complex features like floats&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;For more details, check out &lt;a href=&quot;https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report&quot;&gt;our report&lt;/a&gt;, but in short, we believe &lt;strong&gt;Layout 2020 is the best layout engine for Servo going forward&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;To give us more confidence in this choice with some practical experience, we’ve started implementing some smaller features in Layout 2020, like &lt;a href=&quot;https://github.com/servo/servo/pull/29504&quot;&gt;&amp;lt;iframe&amp;gt;&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/29594&quot;&gt;min/max width and height&lt;/a&gt;, sticky positioning, and ‘text-indent’. We will also start building and testing Layout 2020 (as well as Layout 2013) on &lt;a href=&quot;https://github.com/servo/servo/actions&quot;&gt;CI&lt;/a&gt; in the near future.&lt;/p&gt;
@@ -581,25 +700,6 @@ consectetur &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token t
 &lt;li&gt;which tests are starting to flake (newly seen or quickly spiking)&lt;/li&gt;
 &lt;li&gt;which tests are &lt;a href=&quot;https://github.com/servo/servo/issues?q=label%3AI-intermittent&quot;&gt;marked as intermittent&lt;/a&gt; but haven’t flaked recently&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Servo 2023 Roadmap</title>
-    <link href="https://servo.org/blog/2023/02/03/servo-2023-roadmap/"/>
-    <updated>2023-02-03T00:00:00Z</updated>
-    <id>https://servo.org/blog/2023/02/03/servo-2023-roadmap/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;As we move forward with our &lt;a href=&quot;https://servo.org/blog/2023/01/16/servo-2023/&quot;&gt;renewed project activity&lt;/a&gt;, we would like to share more details about our plans for 2023. We’ve recently published the Servo 2023 roadmap on the &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;project wiki&lt;/a&gt;, and our community and governance and technical plans are outlined below.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/servo-2023-roadmap.png&quot; alt=&quot;Servo 2023 Roadmap. Project reactivation Q1-Q4. Project outreach Q1-Q4. Main dependencies upgrade Q1-Q3. Layout engine selection Q1-Q2. Progress towards basic CSS2 support Q3-Q4. Explore Android support Q3-Q4. Embeddable web engine experiments Q4.&quot; /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;community-and-governance&quot; tabindex=&quot;-1&quot;&gt;Community and governance &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/02/03/servo-2023-roadmap/#community-and-governance&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We’re restarting all the usual activities, including PR triage and review, public communications about the project, and arranging &lt;a href=&quot;https://servo.org/governance/&quot;&gt;TSC&lt;/a&gt; meetings. We will also make some outreach efforts in order to attract more collaborators, partners, and potential sponsors interested in working, participating, and funding the project.&lt;/p&gt;
-&lt;h2 id=&quot;technical&quot; tabindex=&quot;-1&quot;&gt;Technical &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/02/03/servo-2023-roadmap/#technical&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We want to upgrade the main dependencies of Servo, like WebRender and Stylo, to get them up to date. We will also analyse the status of the two layout engines in Servo, and select one of them for continued development. Our plan is to then work towards basic CSS2 conformance.&lt;/p&gt;
-&lt;p&gt;Regarding platform support, we would like to explore the possibility of supporting Android. We would also like to experiment with making Servo a practical embeddable web rendering engine.&lt;/p&gt;
-&lt;p&gt;As with any software project, this roadmap will evolve over time, but we’ll keep you posted. We hope you’ll join us in making it happen.&lt;/p&gt;
 </content>
   </entry>
 </feed>
