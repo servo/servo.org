@@ -4,42 +4,45 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2023-12-18T00:00:00Z</updated>
+  <updated>2024-01-19T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
   <entry>
-    <title>Embedding update</title>
-    <link href="https://servo.org/blog-embedding-update/blog/2023/12/18/embedding-update/"/>
-    <updated>2023-12-18T00:00:00Z</updated>
-    <id>https://servo.org/blog-embedding-update/blog/2023/12/18/embedding-update/</id>
+    <title>Tauri update: embedding prototype, offscreen rendering, multiple webviews, and more!</title>
+    <link href="https://servo.org/blog-embedding-update/blog/2024/01/19/embedding-update/"/>
+    <updated>2024-01-19T00:00:00Z</updated>
+    <id>https://servo.org/blog-embedding-update/blog/2024/01/19/embedding-update/</id>
     <content xml:lang="en" type="html">&lt;p&gt;&lt;a href=&quot;https://servo.org/blog-embedding-update/blog/2023/11/30/embedding-floats-color-mix/&quot;&gt;Back in November&lt;/a&gt;, we highlighted our ongoing efforts to make Servo more embeddable, and today we are a few steps closer!&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://tauri.app/&quot;&gt;Tauri&lt;/a&gt; is a framework for building desktop apps that combine a web frontend with a Rust backend, and work is already ongoing to expand it to mobile apps and other backend languages.
-But unlike say, Electron or React Native, Tauri is both frontend-agnostic and engine-agnostic, allowing you to use any frontend tooling you like and whichever web engine makes the most sense for your users.&lt;/p&gt;
+But unlike say, Electron or React Native, Tauri is both engine-agnostic and frontend-agnostic, allowing you to use any frontend tooling you like and whichever web engine makes the most sense for your users.&lt;/p&gt;
 &lt;p&gt;To integrate Servo with Tauri, we need to add &lt;strong&gt;support for Servo in &lt;a href=&quot;https://github.com/tauri-apps/wry&quot;&gt;WRY&lt;/a&gt;&lt;/strong&gt;, the underlying webview library, and the developers of Tauri have created a proof of concept doing exactly that!
-While this is definitely not production-ready yet, you can play around with it by checking out the &lt;a href=&quot;https://github.com/tauri-apps/wry/tree/servo-wry-demo&quot;&gt;servo-wry-demo&lt;/a&gt; branch (&lt;a href=&quot;https://servo.org/blog-embedding-update/blog/2023/12/18/embedding-update/9ff362bd61df5ddced53db32366a8ab93622b56d&quot;&gt;permalink&lt;/a&gt;) and following the README.&lt;/p&gt;
-&lt;figure class=&quot;_fig&quot;&gt;
+While this is definitely not production-ready yet, you can play around with it by checking out the &lt;a href=&quot;https://github.com/tauri-apps/wry/tree/servo-wry-demo&quot;&gt;servo-wry-demo&lt;/a&gt; branch (&lt;a href=&quot;https://github.com/tauri-apps/wry/tree/305220efbe4e8b5813543a7b8f5d8e0a8abb7fbc&quot;&gt;permalink&lt;/a&gt;) and following the README.&lt;/p&gt;
+&lt;figure class=&quot;_fig&quot; id=&quot;_wry_demo_fig&quot;&gt;
 &lt;iframe src=&quot;https://servo.org/blog-embedding-update/img/blog/embedding-2024-01/demo-with-decorations-too.html&quot; id=&quot;_wry_demo&quot;&gt;&lt;/iframe&gt;
 &lt;/figure&gt;
-&lt;p&gt;Working with the Tauri team has been invaluable for Servo too, because they’ve used their experience integrating with other embeddable webviews to guide changes on the Servo side.&lt;/p&gt;
+&lt;p&gt;While servoshell, &lt;a href=&quot;https://servo.org/blog-embedding-update/blog/2023/09/15/upcoming-events-and-new-browser-ui/&quot;&gt;our example browser&lt;/a&gt;, continues to be the “reference” for embedding Servo, this has its limitations in that servoshell’s needs are often simpler than those of a general-purpose embeddable webview.
+For example, the “minibrowser” UI needs the ability to reserve space at the top of the window, and hook the presenting of new frames to do extra drawing, but it doesn’t currently need multiple webviews.&lt;/p&gt;
+&lt;p&gt;This is where working with the Tauri team has been especially invaluable for Servo — they’ve used their experience integrating with other embeddable webviews to guide changes on the Servo side.
+Early changes include making it possible to &lt;strong&gt;position Servo webviews&lt;/strong&gt; anywhere within a native window (&lt;a href=&quot;https://github.com/wusyong&quot;&gt;@wusyong&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30088&quot;&gt;#30088&lt;/a&gt;), and give them &lt;strong&gt;translucent or transparent backgrounds&lt;/strong&gt; (&lt;a href=&quot;https://github.com/wusyong&quot;&gt;@wusyong&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30488&quot;&gt;#30488&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Support for &lt;strong&gt;multiple webviews&lt;/strong&gt; in one window is needed for parity with the other WRY backends.
 Servo currently has a fairly pervasive assumption that only one webview is active at a time.
-We’ve found almost all of the places where this assumption was made (@delan, #30648), and now we’re breaking those findings into changes that can actually be reviewed and landed (@delan, #30840, #30841, #30842).&lt;/p&gt;
+We’ve found almost all of the places where this assumption was made (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30648&quot;&gt;#30648&lt;/a&gt;), and now we’re breaking those findings into changes that can actually be reviewed and landed (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30840&quot;&gt;#30840&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30841&quot;&gt;#30841&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30842&quot;&gt;#30842&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;Support for &lt;strong&gt;multiple windows&lt;/strong&gt; sounds similar, but it’s a lot harder.
 Servo handles user input and drawing with a component known for historical reasons as the “compositor”.
 Since the constellation — the heart of Servo — is currently associated with exactly one compositor, and the compositor is currently tightly coupled with the event loop of exactly one window, supporting multiple windows will require some big architectural changes.
-@paulrouget’s extensive research and prior work on making Servo embeddable will prove especially helpful.&lt;/p&gt;
+&lt;a href=&quot;https://github.com/paulrouget&quot;&gt;@paulrouget&lt;/a&gt;’s extensive research and prior work on making Servo embeddable will prove especially helpful.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Offscreen rendering&lt;/strong&gt; is critical for integrating Servo with apps containing non-Servo components.
-For example, you might have a native app that uses Servo for online help or an OAuth flow, or a game that uses Servo for purchases or social features, or […]. &lt;!-- ??? third example --&gt;
-We can now draw Servo to an offscreen framebuffer and let the app decide how to present it (@delan, #30767), rather than assuming control of the whole window, and servoshell now uses this ability except when the minibrowser is disabled (&lt;code&gt;--no-minibrowser&lt;/code&gt;).&lt;/p&gt;
+For example, you might have a native app that uses Servo for online help or an OAuth flow, or a game that uses Servo for purchases or social features.
+We can now draw Servo to an offscreen framebuffer and let the app decide how to present it (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30767&quot;&gt;#30767&lt;/a&gt;), rather than assuming control of the whole window, and servoshell now uses this ability except when the minibrowser is disabled (&lt;code&gt;--no-minibrowser&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Precompiling &lt;a href=&quot;https://github.com/servo/mozangle&quot;&gt;mozangle&lt;/a&gt;&lt;/strong&gt; and &lt;a href=&quot;https://github.com/servo/mozjs&quot;&gt;&lt;strong&gt;mozjs&lt;/strong&gt;&lt;/a&gt; would improve developer experience by reducing initial build times.
-We can now build the C++ parts of mozangle as a dynamic library (.so/.dylib/.dll) on Linux and macOS (@atbrakhi, mozangle#71), though more work is needed distribute and make use of them.&lt;/p&gt;
+We can now build the C++ parts of mozangle as a dynamic library (.so/.dylib/.dll) on Linux and macOS (&lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/mozangle/pull/71&quot;&gt;mozangle#71&lt;/a&gt;), though more work is needed to distribute and make use of them.&lt;/p&gt;
 &lt;p&gt;We’re exploring two approaches to precompiling mozjs.
-The easier approach is to build the C++ parts as a static library (.a/.lib) and cache the generated Rust bindings (@wusyong, mozjs#439).
-Building a dynamic library (@atbrakhi, mozjs#432) will be more difficult, but it should reduce build times even further.&lt;/p&gt;
-&lt;p&gt;Many thanks to &lt;a href=&quot;https://nlnet.nl/&quot;&gt;&lt;strong&gt;NLnet&lt;/strong&gt;&lt;/a&gt; for &lt;a href=&quot;https://nlnet.nl/project/Servo/&quot;&gt;sponsoring this work&lt;/a&gt;.&lt;/p&gt;
+The easier approach is to build the C++ parts as a static library (.a/.lib) and cache the generated Rust bindings (&lt;a href=&quot;https://github.com/wusyong&quot;&gt;@wusyong&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/mozjs/issues/439&quot;&gt;mozjs#439&lt;/a&gt;).
+Building a dynamic library (&lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/mozjs/pull/432&quot;&gt;mozjs#432&lt;/a&gt;) will be more difficult, but it should reduce build times even further.&lt;/p&gt;
+&lt;p&gt;Many thanks to &lt;a href=&quot;https://nlnet.nl/&quot;&gt;&lt;strong&gt;NLnet&lt;/strong&gt;&lt;/a&gt; for &lt;a href=&quot;https://nlnet.nl/project/Tauri-Servo/&quot;&gt;sponsoring this work&lt;/a&gt;.&lt;/p&gt;
 &lt;style&gt;
     /* guaranteed minimum width for first paragraph after a float */
     ._floatmin {
@@ -105,6 +108,9 @@ Building a dynamic library (@atbrakhi, mozjs#432) will be more difficult, but it
         margin: 1em auto;
         border-bottom: 1px solid;
         padding-bottom: 1em;
+    }
+    #_wry_demo_fig:not(#specificity) {
+        width: 100%;
     }
     #_wry_demo {
         margin: 0 auto;
