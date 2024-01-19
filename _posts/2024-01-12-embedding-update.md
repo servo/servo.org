@@ -13,7 +13,7 @@ categories:
 But unlike say, Electron or React Native, Tauri is both frontend-agnostic and engine-agnostic, allowing you to use any frontend tooling you like and whichever web engine makes the most sense for your users.
 
 To integrate Servo with Tauri, we need to add **support for Servo in [WRY](https://github.com/tauri-apps/wry)**, the underlying webview library, and the developers of Tauri have created a proof of concept doing exactly that!
-While this is definitely not production-ready yet, you can play around with it by checking out the [servo-wry-demo](https://github.com/tauri-apps/wry/tree/servo-wry-demo) branch ([permalink](9ff362bd61df5ddced53db32366a8ab93622b56d)) and following the README.
+While this is definitely not production-ready yet, you can play around with it by checking out the [servo-wry-demo](https://github.com/tauri-apps/wry/tree/servo-wry-demo) branch ([permalink](https://github.com/tauri-apps/wry/tree/305220efbe4e8b5813543a7b8f5d8e0a8abb7fbc)) and following the README.
 
 <figure class=_fig id=_wry_demo_fig>
 <iframe src="{{ '/img/blog/embedding-2024-01/demo-with-decorations-too.html' | url }}"
@@ -24,27 +24,27 @@ While servoshell, [our example browser]({{ '/blog/2023/09/15/upcoming-events-and
 For example, the “minibrowser” UI needs the ability to reserve space at the top of the window, and hook the presenting of new frames to do extra drawing, but it doesn’t currently need multiple webviews.
 
 This is where working with the Tauri team has been especially invaluable for Servo — they’ve used their experience integrating with other embeddable webviews to guide changes on the Servo side.
-Early changes include making it possible to **position Servo webviews** anywhere within a native window (@wusyong, #30088), and give them **translucent or transparent backgrounds** (@wusyong, #30488).
+Early changes include making it possible to **position Servo webviews** anywhere within a native window ([@wusyong](https://github.com/wusyong), [#30088](https://github.com/servo/servo/pull/30088)), and give them **translucent or transparent backgrounds** ([@wusyong](https://github.com/wusyong), [#30488](https://github.com/servo/servo/pull/30488)).
 
 Support for **multiple webviews** in one window is needed for parity with the other WRY backends.
 Servo currently has a fairly pervasive assumption that only one webview is active at a time.
-We’ve found almost all of the places where this assumption was made (@delan, #30648), and now we’re breaking those findings into changes that can actually be reviewed and landed (@delan, #30840, #30841, #30842).
+We’ve found almost all of the places where this assumption was made ([@delan](https://github.com/delan), [#30648](https://github.com/servo/servo/pull/30648)), and now we’re breaking those findings into changes that can actually be reviewed and landed ([@delan](https://github.com/delan), [#30840](https://github.com/servo/servo/pull/30840), [#30841](https://github.com/servo/servo/pull/30841), [#30842](https://github.com/servo/servo/pull/30842)).
 
 Support for **multiple windows** sounds similar, but it’s a lot harder.
 Servo handles user input and drawing with a component known for historical reasons as the “compositor”.
 Since the constellation — the heart of Servo — is currently associated with exactly one compositor, and the compositor is currently tightly coupled with the event loop of exactly one window, supporting multiple windows will require some big architectural changes.
-@paulrouget’s extensive research and prior work on making Servo embeddable will prove especially helpful.
+[@paulrouget](https://github.com/paulrouget)’s extensive research and prior work on making Servo embeddable will prove especially helpful.
 
 **Offscreen rendering** is critical for integrating Servo with apps containing non-Servo components.
 For example, you might have a native app that uses Servo for online help or an OAuth flow, or a game that uses Servo for purchases or social features.
-We can now draw Servo to an offscreen framebuffer and let the app decide how to present it (@delan, #30767), rather than assuming control of the whole window, and servoshell now uses this ability except when the minibrowser is disabled (`--no-minibrowser`).
+We can now draw Servo to an offscreen framebuffer and let the app decide how to present it ([@delan](https://github.com/delan), [#30767](https://github.com/servo/servo/pull/30767)), rather than assuming control of the whole window, and servoshell now uses this ability except when the minibrowser is disabled (`--no-minibrowser`).
 
 **Precompiling [mozangle](https://github.com/servo/mozangle)** and [**mozjs**](https://github.com/servo/mozjs) would improve developer experience by reducing initial build times.
-We can now build the C++ parts of mozangle as a dynamic library (.so/.dylib/.dll) on Linux and macOS (@atbrakhi, mozangle#71), though more work is needed to distribute and make use of them.
+We can now build the C++ parts of mozangle as a dynamic library (.so/.dylib/.dll) on Linux and macOS ([@atbrakhi](https://github.com/atbrakhi), [mozangle#71](https://github.com/servo/mozangle/pull/71)), though more work is needed to distribute and make use of them.
 
 We’re exploring two approaches to precompiling mozjs.
-The easier approach is to build the C++ parts as a static library (.a/.lib) and cache the generated Rust bindings (@wusyong, mozjs#439).
-Building a dynamic library (@atbrakhi, mozjs#432) will be more difficult, but it should reduce build times even further.
+The easier approach is to build the C++ parts as a static library (.a/.lib) and cache the generated Rust bindings ([@wusyong](https://github.com/wusyong), [mozjs#439](https://github.com/servo/mozjs/issues/439)).
+Building a dynamic library ([@atbrakhi](https://github.com/atbrakhi), [mozjs#432](https://github.com/servo/mozjs/pull/432)) will be more difficult, but it should reduce build times even further.
 
 Many thanks to [**NLnet**](https://nlnet.nl) for [sponsoring this work](https://nlnet.nl/project/Tauri-Servo/).
 
