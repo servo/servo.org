@@ -2,7 +2,7 @@
 layout:     post
 tags:       blog
 title:      "Tauri update: embedding prototype, offscreen rendering, multiple webviews, and more!"
-date:       2023-12-18
+date:       2024-01-19
 summary:    "Overview of the embedding improvements we’ve landed as part of our collaboration with Tauri."
 categories:
 ---
