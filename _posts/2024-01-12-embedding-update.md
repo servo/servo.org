@@ -15,12 +15,16 @@ But unlike say, Electron or React Native, Tauri is both frontend-agnostic and en
 To integrate Servo with Tauri, we need to add **support for Servo in [WRY](https://github.com/tauri-apps/wry)**, the underlying webview library, and the developers of Tauri have created a proof of concept doing exactly that!
 While this is definitely not production-ready yet, you can play around with it by checking out the [servo-wry-demo](https://github.com/tauri-apps/wry/tree/servo-wry-demo) branch ([permalink](9ff362bd61df5ddced53db32366a8ab93622b56d)) and following the README.
 
-<figure class=_fig>
+<figure class=_fig id=_wry_demo_fig>
 <iframe src="{{ '/img/blog/embedding-2024-01/demo-with-decorations-too.html' | url }}"
         id=_wry_demo></iframe>
 </figure>
 
-Working with the Tauri team has been invaluable for Servo too, because they’ve used their experience integrating with other embeddable webviews to guide changes on the Servo side.
+While servoshell, [our example browser]({{ '/blog/2023/09/15/upcoming-events-and-new-browser-ui/' | url }}), continues to be the “reference” for embedding Servo, this has its limitations in that servoshell’s needs are often simpler than those of a general-purpose embeddable webview.
+For example, the “minibrowser” UI needs the ability to reserve space at the top of the window, and hook the presenting of new frames to do extra drawing, but it doesn’t currently need multiple webviews.
+
+This is where working with the Tauri team has been especially invaluable for Servo — they’ve used their experience integrating with other embeddable webviews to guide changes on the Servo side.
+Early changes include making it possible to **position Servo webviews** anywhere within a native window (@wusyong, #30088), and give them **translucent or transparent backgrounds** (@wusyong, #30488).
 
 Support for **multiple webviews** in one window is needed for parity with the other WRY backends.
 Servo currently has a fairly pervasive assumption that only one webview is active at a time.
@@ -32,17 +36,17 @@ Since the constellation — the heart of Servo — is currently associated with 
 @paulrouget’s extensive research and prior work on making Servo embeddable will prove especially helpful.
 
 **Offscreen rendering** is critical for integrating Servo with apps containing non-Servo components.
-For example, you might have a native app that uses Servo for online help or an OAuth flow, or a game that uses Servo for purchases or social features, or [...]. <!-- ??? third example -->
+For example, you might have a native app that uses Servo for online help or an OAuth flow, or a game that uses Servo for purchases or social features.
 We can now draw Servo to an offscreen framebuffer and let the app decide how to present it (@delan, #30767), rather than assuming control of the whole window, and servoshell now uses this ability except when the minibrowser is disabled (`--no-minibrowser`).
 
 **Precompiling [mozangle](https://github.com/servo/mozangle)** and [**mozjs**](https://github.com/servo/mozjs) would improve developer experience by reducing initial build times.
-We can now build the C++ parts of mozangle as a dynamic library (.so/.dylib/.dll) on Linux and macOS (@atbrakhi, mozangle#71), though more work is needed distribute and make use of them.
+We can now build the C++ parts of mozangle as a dynamic library (.so/.dylib/.dll) on Linux and macOS (@atbrakhi, mozangle#71), though more work is needed to distribute and make use of them.
 
 We’re exploring two approaches to precompiling mozjs.
 The easier approach is to build the C++ parts as a static library (.a/.lib) and cache the generated Rust bindings (@wusyong, mozjs#439).
 Building a dynamic library (@atbrakhi, mozjs#432) will be more difficult, but it should reduce build times even further.
 
-Many thanks to [**NLnet**](https://nlnet.nl) for [sponsoring this work](https://nlnet.nl/project/Servo/).
+Many thanks to [**NLnet**](https://nlnet.nl) for [sponsoring this work](https://nlnet.nl/project/Tauri-Servo/).
 
 <style>
     /* guaranteed minimum width for first paragraph after a float */
@@ -109,6 +113,9 @@ Many thanks to [**NLnet**](https://nlnet.nl) for [sponsoring this work](https://
         margin: 1em auto;
         border-bottom: 1px solid;
         padding-bottom: 1em;
+    }
+    #_wry_demo_fig:not(#specificity) {
+        width: 100%;
     }
     #_wry_demo {
         margin: 0 auto;
