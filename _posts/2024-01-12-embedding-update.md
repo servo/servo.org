@@ -1,16 +1,16 @@
 ---
 layout:     post
 tags:       blog
-title:      "Embedding update"
+title:      "Tauri update: embedding prototype, offscreen rendering, multiple webviews, and more!"
 date:       2023-12-18
-summary:    "ao!! wrrrrao!!"
+summary:    "Overview of the embedding improvements we’ve landed as part of our collaboration with Tauri."
 categories:
 ---
 
 [Back in November]({{ '/blog/2023/11/30/embedding-floats-color-mix/' | url }}), we highlighted our ongoing efforts to make Servo more embeddable, and today we are a few steps closer!
 
 [Tauri](https://tauri.app) is a framework for building desktop apps that combine a web frontend with a Rust backend, and work is already ongoing to expand it to mobile apps and other backend languages.
-But unlike say, Electron or React Native, Tauri is both frontend-agnostic and engine-agnostic, allowing you to use any frontend tooling you like and whichever web engine makes the most sense for your users.
+But unlike say, Electron or React Native, Tauri is both engine-agnostic and frontend-agnostic, allowing you to use any frontend tooling you like and whichever web engine makes the most sense for your users.
 
 To integrate Servo with Tauri, we need to add **support for Servo in [WRY](https://github.com/tauri-apps/wry)**, the underlying webview library, and the developers of Tauri have created a proof of concept doing exactly that!
 While this is definitely not production-ready yet, you can play around with it by checking out the [servo-wry-demo](https://github.com/tauri-apps/wry/tree/servo-wry-demo) branch ([permalink](https://github.com/tauri-apps/wry/tree/305220efbe4e8b5813543a7b8f5d8e0a8abb7fbc)) and following the README.
