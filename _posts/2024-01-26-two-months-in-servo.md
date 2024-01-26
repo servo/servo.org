@@ -13,17 +13,17 @@ Servo has had some exciting changes land in our nightly builds over the last mon
 - as of 2023-12-27, ‘text-align: justify’ is now supported (@mrobinson, #30807, #30866)
 - as of 2024-01-09, ‘line-height’ and ‘vertical-align’ are now moderately supported (@mrobinson, #30902)
 
-We’ve started working on support for **sticky positioning** and **tables** in the new layout engine, with some very early sticky positioning code landing in 2023-11-30 (@mrobinson, #30686), the CSS tables tests now enabled (@mrobinson, #31131), and rudimentary table layout landing in 2024-01-20 under the `layout.tables.enabled` pref (@mrobinson, @Loirooriol, #31121).
+We’ve started working on support for **sticky positioning** and **tables** in the new layout engine, with some very early sticky positioning code landing in 2023-11-30 (@mrobinson, #30686), the CSS tables tests now enabled (@mrobinson, #31131), and rudimentary table layout landing in 2024-01-20 under the `layout.tables.enabled` pref (@mrobinson, @Loirooriol, @Manishearth, #30799, #30868, #31121).
 
-We have also made big strides in our WPT pass rates:
+Geometry in our new layout engine is now being migrated from floating-point coordinates (`f32`) to fixed-point coordinates (`i32` × 1/60) (@atbrakhi, #30825, #30894, #31135), similar to other engines like WebKit and Blink.
+While floating-point geometry was thought to be better for transformation-heavy content like SVG, the fact that larger values are less precise than smaller values causes a variety of rendering problems and test failures (#29819).
+
+As a result of these changes, we’ve made big strides in our WPT pass rates:
 
 - **CSS2 floats** (+3.3pp to 84.9%) and **floats-clear** (+5.6pp to 78.9%) continue to surge
 - we now surpass legacy layout in the **CSS2 linebox** tests (**61.1% → 87.9%**, legacy 86.4%)
 - we now surpass legacy layout in the **css-flexbox** tests (49.5% → 52.7%, legacy 52.2%)
 - we’ve closed 76% of the gap in **key CSS2 tests** (79.2% → 82.2%, legacy 83.1%)
-
-Geometry in our new layout engine is now being migrated from floating-point coordinates (`f32`) to fixed-point coordinates (`i32` × 1/60) (@atbrakhi, #30825, #30894, #31135), similar to other engines like WebKit and Blink.
-While floating-point geometry was thought to be better for transformation-heavy content like SVG, the fact that larger values are less precise than smaller values causes a variety of rendering problems and test failures (#29819).
 
 ## servoshell and stability changes
 
@@ -60,7 +60,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         - DONE tables
         - inline
         - DONE Au
-    - DONE wpt
+        - DONE wpt
     - DONE minibrowser
     - xtermjs
     - android
@@ -110,7 +110,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         +++ e7c412e7cae750c0eeb6374e14bbf8442eb2cacd	https://github.com/servo/servo/pull/30829	Remove clean_rmeta from crown test (#30829)
             +++ a326a60c1646cde1a8b34b70d7f632b341644d0a	https://github.com/servo/servo/pull/30805	Minibrowser: Add Back and Forward navigation (#30805)
         +++ 8ded1072ceda45e8f8b7716f5779c63996d7e653	https://github.com/servo/servo/pull/30823	Re-use the TextMetrics data structure in the Layout 2020 fragment tree (#30823)
-        +++ f0b41623286a010cb021cd2debfa6b1be3b36b5d	https://github.com/servo/servo/pull/30799	Add initial support for table box tree construction (#30799)
+            +++ f0b41623286a010cb021cd2debfa6b1be3b36b5d	https://github.com/servo/servo/pull/30799	Add initial support for table box tree construction (#30799)
             +++ 63701b338cd807dc237be4f3f0771a1fff933f09	https://github.com/servo/servo/pull/30820	Fix the upload docs action after renaming `master` to `main` (#30820)
             +++ ea8cd36f0d0c4485b0872774661de34c439d35c0	https://github.com/servo/servo/pull/30518	Fix the location url that reverts to the old value while loading (#30518)
             +++ 23add0c1e5c9cbdf0301b891d265e363d049532b	Rename the `master` branch to `main`
