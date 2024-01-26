@@ -55,6 +55,7 @@ We’ve also made some dev changes:
 - we now target **Rust 1.74** stable, marking the first time ever we have built without unstable features (@mrobinson, #30831)
 - we now require **Python 3.10** (@mrobinson, #31088), and you no longer need to install virtualenv (@frewsxcv, #30377)
 - we’ve fixed problems building Servo on **Ubuntu 20.04** (@mrobinson, #31019) and **NixOS 23.05+** (@delan, #31052, #31055)
+- we now support **Visual Studio 2022** on Windows (@mrobinson, #31148), the same version that rustup installs by default
 
 ### Linux build issues
 
@@ -203,7 +204,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
             +++ 9654363c187ee549b82bca8c4e3098e4c20c7287	https://github.com/servo/servo/pull/30639	script: Start replacing `time` with `std::time` and `chrono`  (#30639)
         >>> 2024-01-18T06:17:19Z
             +++ 580062228bb083ccdc2144a43491bc4f916c57ad	https://github.com/servo/servo/pull/31079	Replace time with std::time in components/net (#31079)
-        +++ d86e713a9cb5be2555d63bd477d47d440fa8c832	https://github.com/servo/servo/pull/31092	build: Clean up post-build copy of Windows DLLs (#31092)
+            +++ d86e713a9cb5be2555d63bd477d47d440fa8c832	https://github.com/servo/servo/pull/31092	build: Clean up post-build copy of Windows DLLs (#31092)
             +++ f76982e2e7f411e2e2fd8e6dbfe92a080acefc54	https://github.com/servo/servo/pull/31087	script: Use FLoat32Array in XRRay (#31087)
             +++ 6a7b450478f69d9d83b0936a0ab28ac2d94761d4	https://github.com/servo/servo/pull/31076	use FLoat32Array in XRRigidTransform (#31076)
         >>> 2024-01-19T06:05:45Z
@@ -221,7 +222,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         +++ 5d7e2a823985a8314b10dc363eb191c0d4330424	https://github.com/servo/servo/pull/31123	Implement Event.composedPath (#31123)
         +++ 54fb381a0a4c070bac75e9f602bf905fa101194d	https://github.com/servo/servo/pull/31133	layout: Convert layout internal display to inline for replaced elements (#31133)
         +++ 7de0486e2e67a17e4cdcc881c7f3bd3fd1a66fb6	https://github.com/servo/servo/pull/31161	layout: Count word separators as justification opportunities when trimming whitespace (#31161)
-        +++ dc2df7b02767004f0900055d985ecfc6cd874c9a	https://github.com/servo/servo/pull/31148	build: Add support for Visual Studio 2022 and VC143 DLLs (#31148)
+            +++ dc2df7b02767004f0900055d985ecfc6cd874c9a	https://github.com/servo/servo/pull/31148	build: Add support for Visual Studio 2022 and VC143 DLLs (#31148)
             +++ 45af1198aa05882d6433642c45d1cd329f145782	https://github.com/servo/servo/pull/31135	Layout: use `Au` in `ContentSizes`  (#31135)
         >>> 2024-01-25T06:07:31Z
         +++ eb95703325aeb48d5f56a8da5b258bad608dd632	https://github.com/servo/servo/pull/30842	constellation: focusing and closing webviews (#30842)
