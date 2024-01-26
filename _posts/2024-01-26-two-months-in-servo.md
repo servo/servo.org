@@ -54,7 +54,7 @@ We’ve also made some dev changes:
 - the default branch in [our main repo](https://github.com/servo/servo) is now `main` (@mrobinson, @atouchet, 23add0c1e5c9c, #30877)
 - we now target **Rust 1.74** stable, marking the first time ever we have built without unstable features (@mrobinson, #30831)
 - we now require **Python 3.10** (@mrobinson, #31088), and you no longer need to install virtualenv (@frewsxcv, #30377)
-- we’ve fixed problems building Servo on **Ubuntu 20.04** (@mrobinson, #31019) and **NixOS 23.05+** (@delan, #31052, #31055)
+- we’ve fixed problems building Servo on **Ubuntu 20.04** (@mrobinson, #31019) and **NixOS** (@delan, #31052, #31055, #30987)
 - we now support **Visual Studio 2022** on Windows (@mrobinson, #31148), the same version that rustup installs by default
 
 ### Linux build issues
@@ -173,7 +173,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
             +++ 65cbc95d38819e9b3d5870953015a9e7963a0ace	https://github.com/servo/servo/pull/30927	Replace time with std::time in components/devtools (#30927)
         +++ 0dbba9b6ffe0507011337c27c2709f6c4cebe1c0	https://github.com/servo/servo/pull/30973	Download Windows GStreamer dependencies from GitHub (#30973)
         >>> 2024-01-05T06:16:06Z
-        +++ c219204084b8f8a747ebd37ec75472c1b7e97411	https://github.com/servo/servo/pull/30987	Fix crown on NixOS (#30987)
+            +++ c219204084b8f8a747ebd37ec75472c1b7e97411	https://github.com/servo/servo/pull/30987	Fix crown on NixOS (#30987)
             +++ 90a9300f698aa266db47b336f3fcd7d6680b4d65	https://github.com/servo/servo/pull/30896	Script: ensure child JS runtimes are dropped before parent (#30896)
         >>> 2024-01-08T06:07:00Z
             +++ 79a0f76d26d43c7f6e38a60fbe2ec6bed1510543	https://github.com/servo/servo/pull/31019	Fix the build on Ubuntu 20.04 (#31019)
