@@ -15,7 +15,7 @@ Servo has had some exciting changes land in our nightly builds over the last mon
 
 We’ve started working on support for **sticky positioning** and **tables** in the new layout engine, with some very early sticky positioning code landing in 2023-11-30 (@mrobinson, #30686), the CSS tables tests now enabled (@mrobinson, #31131), and rudimentary table layout landing in 2024-01-20 under the `layout.tables.enabled` pref (@mrobinson, @Loirooriol, @Manishearth, #30799, #30868, #31121).
 
-Geometry in our new layout engine is now being migrated from floating-point coordinates (`f32`) to fixed-point coordinates (`i32` × 1/60) (@atbrakhi, #30825, #30894, #31135), similar to other engines like WebKit and Blink.
+Geometry in our new layout engine is now being migrated from floating-point coordinates (`f32`) to **fixed-point coordinates** (`i32` × 1/60) (@atbrakhi, #30825, #30894, #31135), similar to other engines like WebKit and Blink.
 While floating-point geometry was thought to be better for transformation-heavy content like SVG, the fact that larger values are less precise than smaller values causes a variety of rendering problems and test failures (#29819).
 
 As a result of these changes, we’ve made big strides in our WPT pass rates:
@@ -29,14 +29,14 @@ As a result of these changes, we’ve made big strides in our WPT pass rates:
 
 **WebGPU** has been updated from 0.17 to 0.18 (@sagudev, #30926, #30954), and **ANGLE** has been updated from [April 2019](https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/3729) to [August 2023](https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/5359) (@sagudev, #30546).
 
-Servo’s example browser now has Back and Forward buttons (@atbrakhi, #30805), and no longer shows the incorrect location when navigation takes a long time (@atbrakhi, #30518).
+Servo’s example browser now has **Back and Forward buttons** (@atbrakhi, #30805), and no longer shows the incorrect location when navigation takes a long time (@atbrakhi, #30518).
 
 Many stability improvements have landed, including fixes for a crash in inline layout (@atbrakhi, #30897), three WebGPU-related crashes (@lucasMontenegro, @gterzian, @Taym95, #30888, #30989, #31002), a crash in the PerformanceResourceTiming API (@delan, #31063), and several crashes due to script runtimes being dropped in the wrong order (@gterzian, #30896).
 
 ## Dev changes
 
 - the default branch in [our main repo](https://github.com/servo/servo) is now `main` (@mrobinson, @atouchet, 23add0c1e5c9c, #30877)
-- we now target Rust 1.74 stable, marking the first time ever we have built without unstable features (@mrobinson, #30831)
+- we now target **Rust 1.74** stable, marking the first time ever we have built without unstable features (@mrobinson, #30831)
 - we now use Python’s built-in venv feature, so you no longer need to install virtualenv (@frewsxcv, #30377)
 
 ### Linux build issues
