@@ -61,7 +61,7 @@ Several crates have been moved into [our main repo](https://github.com/servo/ser
 
 We’ve also made some dev changes:
 
-- the default branch in [our main repo](https://github.com/servo/servo) is now `main` ([@mrobinson](https://github.com/mrobinson), [@atouchet](https://github.com/atouchet), 23add0c1e5c9c, [#30877](https://github.com/servo/servo/pull/30877))
+- the default branch in [our main repo](https://github.com/servo/servo) is now `main` ([@mrobinson](https://github.com/mrobinson), [@atouchet](https://github.com/atouchet), [23add0c1e5c9c](https://github.com/servo/servo/commit/23add0c1e5c9cbdf0301b891d265e363d049532b), [#30877](https://github.com/servo/servo/pull/30877))
 - we now target **Rust 1.74** stable, marking the first time ever we have built without unstable features ([@mrobinson](https://github.com/mrobinson), [#30831](https://github.com/servo/servo/pull/30831))
 - we now require **Python 3.10** ([@mrobinson](https://github.com/mrobinson), [#31088](https://github.com/servo/servo/pull/31088)), and you no longer need to install virtualenv ([@frewsxcv](https://github.com/frewsxcv), [#30377](https://github.com/servo/servo/pull/30377))
 - we’ve fixed problems building Servo on **Ubuntu 20.04** ([@mrobinson](https://github.com/mrobinson), [#31019](https://github.com/servo/servo/pull/31019)) and **NixOS** ([@delan](https://github.com/delan), [#31052](https://github.com/servo/servo/pull/31052), [#31055](https://github.com/servo/servo/pull/31055), [#30987](https://github.com/servo/servo/pull/30987))
