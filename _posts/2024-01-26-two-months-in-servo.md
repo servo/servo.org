@@ -22,11 +22,22 @@ We have also made big strides in our WPT pass rates:
 - we now surpass legacy layout in the **css-flexbox** tests (49.5% → 52.7%, legacy 52.2%)
 - we’ve closed 76% of the gap in **key CSS2 tests** (79.2% → 82.2%, legacy 83.1%)
 
+Geometry in our new layout engine is now being migrated from floating-point coordinates (`f32`) to fixed-point coordinates (`i32` × 1/60) (@atbrakhi, #30825, #30894, #31135), similar to other engines like WebKit and Blink.
+While floating-point geometry was thought to be better for transformation-heavy content like SVG, the fact that larger values are less precise than smaller values causes a variety of rendering problems and test failures (#29819).
+
+## servoshell and stability changes
+
+Servo’s example browser now has Back and Forward buttons (@atbrakhi, #30805), and no longer shows the incorrect location when navigation takes a long time (@atbrakhi, #30518).
+
 Many stability improvements have landed, including fixes for a crash in inline layout (@atbrakhi, #30897), three WebGPU-related crashes (@lucasMontenegro, @gterzian, @Taym95, #30888, #30989, #31002), a crash in the PerformanceResourceTiming API (@delan, #31063), and several crashes due to script runtimes being dropped in the wrong order (@gterzian, #30896).
 
-The default branch in [our main repo](https://github.com/servo/servo) is now `main` (@atouchet, #30877).
+## Dev changes
 
-## Linux build issues
+- the default branch in [our main repo](https://github.com/servo/servo) is now `main` (@mrobinson, @atouchet, 23add0c1e5c9c, #30877)
+- we now target Rust 1.74 stable, marking the first time ever we have built without unstable features (@mrobinson, #30831)
+- we now use Python’s built-in venv feature, so you no longer need to install virtualenv (@frewsxcv, #30377)
+
+### Linux build issues
 
 Several people have reported problems building Servo on newer Linux distro versions, particularly [with clang 15](https://github.com/servo/servo/issues/31059) or [with clang 16](https://github.com/servo/servo/issues/30587).
 While we’re still working on fixing the underlying issues, there are some workarounds.
@@ -48,14 +59,18 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         - DONE sticky
         - DONE tables
         - inline
-        - Au
+        - DONE Au
     - DONE wpt
-    - webgpu
+    - DONE minibrowser
     - xtermjs
     - android
     - updates
+        - angle
+        - webgpu
     - DONE stability
     - dev
+        - DONE nix
+        - DONE rust stable
 -->
 
 <!--
@@ -82,31 +97,31 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         >>> 2023-12-01T05:53:38Z
         +++ f1c291853e331329271efba52a03ba5049e8358b	https://github.com/servo/servo/pull/30740	Stop sending " " to linebreaker for replaced content (#30740)
         >>> 2023-12-02T06:08:38Z
-        +++ 604979e367faa6aa09805e8fa0223b8883ea009d	https://github.com/servo/servo/pull/30508	Replace script_plugins with a clippy like rustc driver (named crown) (#30508)
+            +++ 604979e367faa6aa09805e8fa0223b8883ea009d	https://github.com/servo/servo/pull/30508	Replace script_plugins with a clippy like rustc driver (named crown) (#30508)
         +++ cdbd60fe53f64f08efcf9715c4655e38cd1d7ddd	https://github.com/servo/servo/pull/30800	Extend character-based soft wrap prevention to before atomics (#30800)
         >>> 2023-12-03T05:57:33Z
         >>> 2023-12-04T06:02:05Z
         >>> 2023-12-11T05:28:33Z
         warning: not reachable from default branch: 2668a0a43a19643922409e623880558dedfb4b98
         +++ e2743c61414f5d9cc0cd2d41dcc5c1d29f0b2d17	https://github.com/servo/servo/pull/30546	Bump mozangle to 0.5.0 (#30546)
-        +++ 117d59d393cf7926063e8723934fec97fd61d713	https://github.com/servo/servo/pull/30377	Replace virtualenv with Python's built-in venv (#30377)
-        +++ 7e82c5c957821f1328484e90becec0cfb5572938	https://github.com/servo/servo/pull/30831	Compile Servo with the latest version of rust stable (#30831)
+            +++ 117d59d393cf7926063e8723934fec97fd61d713	https://github.com/servo/servo/pull/30377	Replace virtualenv with Python's built-in venv (#30377)
+            +++ 7e82c5c957821f1328484e90becec0cfb5572938	https://github.com/servo/servo/pull/30831	Compile Servo with the latest version of rust stable (#30831)
         +++ bbc35b682f0fb926364e5800d20f77bba944a020	https://github.com/servo/servo/pull/30830	Remove thinlto servobuild.config option (#30830)
         +++ e7c412e7cae750c0eeb6374e14bbf8442eb2cacd	https://github.com/servo/servo/pull/30829	Remove clean_rmeta from crown test (#30829)
-        +++ a326a60c1646cde1a8b34b70d7f632b341644d0a	https://github.com/servo/servo/pull/30805	Minibrowser: Add Back and Forward navigation (#30805)
+            +++ a326a60c1646cde1a8b34b70d7f632b341644d0a	https://github.com/servo/servo/pull/30805	Minibrowser: Add Back and Forward navigation (#30805)
         +++ 8ded1072ceda45e8f8b7716f5779c63996d7e653	https://github.com/servo/servo/pull/30823	Re-use the TextMetrics data structure in the Layout 2020 fragment tree (#30823)
         +++ f0b41623286a010cb021cd2debfa6b1be3b36b5d	https://github.com/servo/servo/pull/30799	Add initial support for table box tree construction (#30799)
-        +++ 63701b338cd807dc237be4f3f0771a1fff933f09	https://github.com/servo/servo/pull/30820	Fix the upload docs action after renaming `master` to `main` (#30820)
-        +++ ea8cd36f0d0c4485b0872774661de34c439d35c0	https://github.com/servo/servo/pull/30518	Fix the location url that reverts to the old value while loading (#30518)
-        +++ 23add0c1e5c9cbdf0301b891d265e363d049532b	Rename the `master` branch to `main`
+            +++ 63701b338cd807dc237be4f3f0771a1fff933f09	https://github.com/servo/servo/pull/30820	Fix the upload docs action after renaming `master` to `main` (#30820)
+            +++ ea8cd36f0d0c4485b0872774661de34c439d35c0	https://github.com/servo/servo/pull/30518	Fix the location url that reverts to the old value while loading (#30518)
+            +++ 23add0c1e5c9cbdf0301b891d265e363d049532b	Rename the `master` branch to `main`
         >>> 2023-12-12T06:15:50Z
         +++ 1105eb66e9ce43f0f2ea6c6b5cea5e72394eee3f	https://github.com/servo/servo/pull/30848	Use os version in taplo cache-key & setuptools 65 in py3.8 (#30848)
-        +++ 9f7afe595a11d32859b45bf3bf2fd36ee5ae46e7	https://github.com/servo/servo/pull/30836	Update mozjs (#30836)
-        +++ a315bec4ed73c7c0ef89f120c8f52e2609f9028b	https://github.com/servo/servo/pull/30825	Use app units in replaced elements (#30825)
+            +++ 9f7afe595a11d32859b45bf3bf2fd36ee5ae46e7	https://github.com/servo/servo/pull/30836	Update mozjs (#30836)
+            +++ a315bec4ed73c7c0ef89f120c8f52e2609f9028b	https://github.com/servo/servo/pull/30825	Use app units in replaced elements (#30825)
         >>> 2023-12-13T06:06:44Z
-        +++ 17f3c45d4ff597dc1e179d89784bb5f57b4c03d7	https://github.com/servo/servo/pull/30767	Add initial support for offscreen rendering (#30767)
-        +++ 97e6c72f5767e1cd754c82317a21aa222c5d968b	https://github.com/servo/servo/pull/30840	Add multiview feature flag in compositing and constellation (#30840)
-        +++ 8a226fdb1975ae1df8d1a673eb3dca9f2bb771aa	https://github.com/servo/servo/pull/30841	constellation: notify embedder when events are hit-tested to browsers (#30841)
+            +++ 17f3c45d4ff597dc1e179d89784bb5f57b4c03d7	https://github.com/servo/servo/pull/30767	Add initial support for offscreen rendering (#30767)
+            +++ 97e6c72f5767e1cd754c82317a21aa222c5d968b	https://github.com/servo/servo/pull/30840	Add multiview feature flag in compositing and constellation (#30840)
+            +++ 8a226fdb1975ae1df8d1a673eb3dca9f2bb771aa	https://github.com/servo/servo/pull/30841	constellation: notify embedder when events are hit-tested to browsers (#30841)
         >>> 2023-12-14T06:16:19Z
         >>> 2023-12-27T06:06:58Z
         +++ 7973cb64586d94a6987562fe6f180ac29ef0e971	https://github.com/servo/servo/pull/30926	Update wgpu to 0.18.1 (#30926)
@@ -173,7 +188,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         +++ 8e5f28839cde6b9ee5cd7cb4f8c27ff0ae10a86c	https://github.com/servo/servo/pull/31120	Revert "Replace time with std::time in components/net (#31079)" (#31120)
         >>> 2024-01-20T06:04:40Z
             +++ fc31e69f79a68408fdd376a52942587a8fca9170	https://github.com/servo/servo/pull/31121	layout: Add *very* basic support for table layout (#31121)
-        +++ 3d520f266800e0035c429ddf2a3b45922f502ebd	https://github.com/servo/servo/pull/30894	Use App units in flow layout (#30894)
+            +++ 3d520f266800e0035c429ddf2a3b45922f502ebd	https://github.com/servo/servo/pull/30894	Use App units in flow layout (#30894)
             +++ 734eb469549db22b070d86bb13a8bd167d5d1e8e	https://github.com/servo/servo/pull/31131	wpt: Unskip the `css-tables suite (#31131)
         +++ 9d2c102fa0cc034b2bde51d27cd6c0e7f3cafa30	https://github.com/servo/servo/pull/31106	Use FLoat32Array in GamepadPose (#31106)
         >>> 2024-01-21T06:06:07Z
@@ -185,7 +200,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         +++ 54fb381a0a4c070bac75e9f602bf905fa101194d	https://github.com/servo/servo/pull/31133	layout: Convert layout internal display to inline for replaced elements (#31133)
         +++ 7de0486e2e67a17e4cdcc881c7f3bd3fd1a66fb6	https://github.com/servo/servo/pull/31161	layout: Count word separators as justification opportunities when trimming whitespace (#31161)
         +++ dc2df7b02767004f0900055d985ecfc6cd874c9a	https://github.com/servo/servo/pull/31148	build: Add support for Visual Studio 2022 and VC143 DLLs (#31148)
-        +++ 45af1198aa05882d6433642c45d1cd329f145782	https://github.com/servo/servo/pull/31135	Layout: use `Au` in `ContentSizes`  (#31135)
+            +++ 45af1198aa05882d6433642c45d1cd329f145782	https://github.com/servo/servo/pull/31135	Layout: use `Au` in `ContentSizes`  (#31135)
         >>> 2024-01-25T06:07:31Z
         +++ eb95703325aeb48d5f56a8da5b258bad608dd632	https://github.com/servo/servo/pull/30842	constellation: focusing and closing webviews (#30842)
 -->
