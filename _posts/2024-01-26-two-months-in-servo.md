@@ -38,7 +38,9 @@ Many stability improvements have landed, including fixes for a crash in inline l
 
 The intermittent macOS build failures on CI should now be fixed (@mrobinson, #30975).
 
-The long-term effort to simplify how Servo is built continues (@mrobinson, #31075), and we’ve also replaced the `time` crate with `chrono` and `std::time` in much of Servo (@Taym95, @augustebaum, #30927, #31020, #30639, #31079).
+Servo now has some preliminary Android build support (@mukilan, #31086), though more work needs to be done before Servo will run on Android.
+
+The long-term effort to simplify how Servo is built continues (@mrobinson, #31075), and we’ve replaced the `time` crate with `chrono` and `std::time` in much of Servo (@Taym95, @augustebaum, #30927, #31020, #30639, #31079).
 We have also started migrating our DOM bindings to use typed arrays where possible (@gterzian, #30990, #31077, #31087, #31076, #31106), as part of an effort to **reduce our unsafe code surface** (#30889, #30862).
 
 Several crates have been moved into [our main repo](https://github.com/servo/servo):
@@ -85,9 +87,9 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
     - DONE minibrowser
     - DONE stability
     - ci
-        - macOS
-        - android
-    - health
+        - DONE macOS
+        - DONE android
+    - DONE health
     - dev
         - DONE nix
         - DONE rust stable
@@ -214,7 +216,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         >>> 2024-01-21T06:06:07Z
         >>> 2024-01-22T06:08:36Z
         >>> 2024-01-23T06:22:19Z
-        +++ d7de206dbd459e8c8bf121f73755d12569c6cc55	https://github.com/servo/servo/pull/31086	Preliminary Android build support (#31086)
+            +++ d7de206dbd459e8c8bf121f73755d12569c6cc55	https://github.com/servo/servo/pull/31086	Preliminary Android build support (#31086)
         >>> 2024-01-24T06:17:36Z
         +++ 5d7e2a823985a8314b10dc363eb191c0d4330424	https://github.com/servo/servo/pull/31123	Implement Event.composedPath (#31123)
         +++ 54fb381a0a4c070bac75e9f602bf905fa101194d	https://github.com/servo/servo/pull/31133	layout: Convert layout internal display to inline for replaced elements (#31133)
