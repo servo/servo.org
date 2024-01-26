@@ -7,12 +7,18 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+<figure class="_figr"><a href="{{ '/img/blog/layout-2020-justify.png' | url }}"><img src="{{ '/img/blog/layout-2020-justify.png' | url }}"
+    alt="Servo nightly showing support for ‘text-align-last’, ‘text-align: justify’, ‘vertical-align: baseline’, and ‘position: sticky’"></a></figure>
+
 Servo has had some exciting changes land in our nightly builds over the last month:
 
 - as of 2023-12-27, the ‘text-align-last’ property is now supported (@mrobinson, #30905)
 - as of 2023-12-27, ‘text-align: justify’ is now supported (@mrobinson, #30807, #30866)
 - as of 2024-01-09, ‘line-height’ and ‘vertical-align’ are now moderately supported (@mrobinson, #30902)
 - as of 2024-01-24, ‘Event#composedPath()’ is now supported (@gterzian, #31123)
+
+<figure class="_figl"><a href="{{ '/img/blog/layout-2020-tables.png' | url }}"><img src="{{ '/img/blog/layout-2020-tables.png' | url }}"
+    alt="Servo nightly showing rudimentary support for table layouts when the pref is enabled"></a></figure>
 
 We’ve started working on support for **sticky positioning** and **tables** in the new layout engine, with some very early sticky positioning code landing in 2023-11-30 (@mrobinson, #30686), the CSS tables tests now enabled (@mrobinson, #31131), and rudimentary table layout landing in 2024-01-20 under the `layout.tables.enabled` pref (@mrobinson, @Loirooriol, @Manishearth, #30799, #30868, #31121).
 
@@ -30,6 +36,9 @@ As a result of these changes, we’ve made big strides in our WPT pass rates:
 
 **GStreamer** has been updated from 0.15 to 0.21 (@mrobinson, #30750), fixing long-standing breakage of video playback.
 **WebGPU** has been updated from 0.17 to 0.18 (@sagudev, #30926, #30954), and **ANGLE** has been updated from [April 2019](https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/3729) to [August 2023](https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/5359) (@sagudev, #30546).
+
+<figure class="_figr"><a href="{{ '/img/blog/back-forward.png' | url }}"><img src="{{ '/img/blog/back-forward.png' | url }}"
+    alt="Servo nightly showing Back and Forward buttons in the minibrowser"></a></figure>
 
 Servo’s example browser now has **Back and Forward buttons** (@atbrakhi, #30805), and no longer shows the incorrect location when navigation takes a long time (@atbrakhi, #30518).
 
@@ -588,11 +597,11 @@ warning: not reachable from default branch: 2668a0a43a19643922409e623880558dedfb
     ._figr {
         float: right;
     }
-    .figl > iframe,
-    .figr > iframe,
-    .figl > a > img,
-    .figr > a > img {
-        width: 17em;
+    ._figl > iframe,
+    ._figr > iframe,
+    ._figl > a > img,
+    ._figr > a > img {
+        width: 21em;
         max-width: max-content;
     }
     ._runin {
