@@ -11,12 +11,30 @@ missing() { >&2 echo "fatal: $1 not found"; exit 1; }
 > /dev/null command -v git || missing git
 cd -- "$(dirname -- "${0:a}")"
 
+# Fetch the default branch, so we can warn if commits aren’t reachable from it.
+git -C "$1" fetch https://github.com/servo/servo.git
+default_branch_head=$(cut -f 1 "$1/.git/FETCH_HEAD")
+
 if ! [ -e runs.json ]; then
   gh api '/repos/servo/servo/actions/workflows/nightly.yml/runs?status=success&per_page=100' > runs.json
 fi
 < runs.json jq -r '.workflow_runs[] | "\(.head_sha)\t\(.updated_at)"' | tac > runs.tsv
 < runs.tsv sed -En '1!{H;x;s/\n//;p;x;};s/\t.*//;s/$/\t/;h' \
 | while read -r from to updated; do
-  printf '>>> %s\n' "$updated" | rg --color=always .  # make it red
+  printf '>>> %s\n' "$updated" | rg .  # make it red if stdout is a tty
+
+  # Sometimes we build a nightly from something other than the default branch,
+  # so we may not have the commits locally.
+  ./fetch-commit-if-needed.sh "$1" $from
+  ./fetch-commit-if-needed.sh "$1" $to
+
+  # Warn if we find a nightly that seems to have been built from outside the
+  # default branch. That nightly may contain changes that disappear in the next
+  # nightly, or depending on how far back it forked, it may be missing changes
+  # from previous nightlies.
+  if ! git -C "$1" merge-base --is-ancestor $to $default_branch_head; then
+    >&2 echo "warning: not reachable from default branch: $to"
+  fi
+
   ./list-commits-between.sh "$1" $from $to
 done
