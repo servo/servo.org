@@ -52,6 +52,7 @@ We’ve also made some dev changes:
 - the default branch in [our main repo](https://github.com/servo/servo) is now `main` (@mrobinson, @atouchet, 23add0c1e5c9c, #30877)
 - we now target **Rust 1.74** stable, marking the first time ever we have built without unstable features (@mrobinson, #30831)
 - we now use Python’s built-in venv feature, so you no longer need to install virtualenv (@frewsxcv, #30377)
+- we’ve fixed problems building Servo on Ubuntu 20.04 (@mrobinson, #31019) and NixOS 23.05+ (@delan, #31052, #31055)
 
 ### Linux build issues
 
@@ -172,7 +173,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         +++ c219204084b8f8a747ebd37ec75472c1b7e97411	https://github.com/servo/servo/pull/30987	Fix crown on NixOS (#30987)
             +++ 90a9300f698aa266db47b336f3fcd7d6680b4d65	https://github.com/servo/servo/pull/30896	Script: ensure child JS runtimes are dropped before parent (#30896)
         >>> 2024-01-08T06:07:00Z
-        +++ 79a0f76d26d43c7f6e38a60fbe2ec6bed1510543	https://github.com/servo/servo/pull/31019	Fix the build on Ubuntu 20.04 (#31019)
+            +++ 79a0f76d26d43c7f6e38a60fbe2ec6bed1510543	https://github.com/servo/servo/pull/31019	Fix the build on Ubuntu 20.04 (#31019)
         +++ 9a1d7aabd71fe82c9420abdc33a6a9ba0f8eac52	https://github.com/servo/servo/pull/31003	bootstrap: Adding more output when installing dependencies (#31003)
             +++ 7fa4ea9740edccc93672d8cc428f6e9d4575a036	https://github.com/servo/servo/pull/30750	Upgrade media / GStreamer / GLib (#30750) 0.15 -> 0.21
         >>> 2024-01-09T06:16:45Z
@@ -183,11 +184,11 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
             +++ fddc4a430fca591152c69f0793ab946dcdc81617	https://github.com/servo/servo/pull/31002	Fix failed request for adapter when not available (#31002)
         >>> 2024-01-11T06:08:02Z
             +++ 92196d985dceb0ca708b097e2a847b255d8387c8	https://github.com/servo/servo/pull/31020	Replace time with std::time in components/metrics & components/shared (#31020)
-        +++ 17ffbbdd11b47d577bdfe4318c36bcb5de365b18	https://github.com/servo/servo/pull/31052	Nix: bump nixpkgs to nixos-23.05 (except gnumake) (#31052)
+            +++ 17ffbbdd11b47d577bdfe4318c36bcb5de365b18	https://github.com/servo/servo/pull/31052	Nix: bump nixpkgs to nixos-23.05 (except gnumake) (#31052)
         >>> 2024-01-12T06:07:36Z
             +++ e145c512347807cdf44537fdfa83f2a5dda05b5a	https://github.com/servo/servo/pull/30990	WebIDL: use FLoat32Array  (#30990)
             +++ 90f70e3408e1d4b3f378e50f9f051cb00c77c446	https://github.com/servo/servo/pull/31063	Fix underflow in PerformanceResourceTiming API (#31063)
-        +++ 1f1cf1499d1e249c58fb3ac8986e62cf0d796497	https://github.com/servo/servo/pull/31055	Nix: bump nixpkgs to nixos-unstable (#31055)
+            +++ 1f1cf1499d1e249c58fb3ac8986e62cf0d796497	https://github.com/servo/servo/pull/31055	Nix: bump nixpkgs to nixos-unstable (#31055)
         >>> 2024-01-13T06:04:19Z
             +++ abb54f7832682bad1545b307a545a7ba977ef209	https://github.com/servo/servo/pull/31075	build: Don't add the `neon` feature for arm and aarch64 (#31075)
         >>> 2024-01-14T06:05:53Z
