@@ -22,7 +22,7 @@
 &lt;li&gt;as of 2024-01-09, ‘line-height’ and ‘vertical-align’ are now moderately supported (@mrobinson, #30902)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;We’ve started working on support for &lt;strong&gt;sticky positioning&lt;/strong&gt; and &lt;strong&gt;tables&lt;/strong&gt; in the new layout engine, with some very early sticky positioning code landing in 2023-11-30 (@mrobinson, #30686), the CSS tables tests now enabled (@mrobinson, #31131), and rudimentary table layout landing in 2024-01-20 under the &lt;code&gt;layout.tables.enabled&lt;/code&gt; pref (@mrobinson, @Loirooriol, @Manishearth, #30799, #30868, #31121).&lt;/p&gt;
-&lt;p&gt;Geometry in our new layout engine is now being migrated from floating-point coordinates (&lt;code&gt;f32&lt;/code&gt;) to fixed-point coordinates (&lt;code&gt;i32&lt;/code&gt; × 1/60) (@atbrakhi, #30825, #30894, #31135), similar to other engines like WebKit and Blink.
+&lt;p&gt;Geometry in our new layout engine is now being migrated from floating-point coordinates (&lt;code&gt;f32&lt;/code&gt;) to &lt;strong&gt;fixed-point coordinates&lt;/strong&gt; (&lt;code&gt;i32&lt;/code&gt; × 1/60) (@atbrakhi, #30825, #30894, #31135), similar to other engines like WebKit and Blink.
 While floating-point geometry was thought to be better for transformation-heavy content like SVG, the fact that larger values are less precise than smaller values causes a variety of rendering problems and test failures (#29819).&lt;/p&gt;
 &lt;p&gt;As a result of these changes, we’ve made big strides in our WPT pass rates:&lt;/p&gt;
 &lt;ul&gt;
@@ -35,14 +35,14 @@ While floating-point geometry was thought to be better for transformation-heavy 
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;WebGPU&lt;/strong&gt; has been updated from 0.17 to 0.18 (@sagudev, #30926, #30954), and &lt;strong&gt;ANGLE&lt;/strong&gt; has been updated from &lt;a href=&quot;https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/3729&quot;&gt;April 2019&lt;/a&gt; to &lt;a href=&quot;https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/5359&quot;&gt;August 2023&lt;/a&gt; (@sagudev, #30546).&lt;/p&gt;
-&lt;p&gt;Servo’s example browser now has Back and Forward buttons (@atbrakhi, #30805), and no longer shows the incorrect location when navigation takes a long time (@atbrakhi, #30518).&lt;/p&gt;
+&lt;p&gt;Servo’s example browser now has &lt;strong&gt;Back and Forward buttons&lt;/strong&gt; (@atbrakhi, #30805), and no longer shows the incorrect location when navigation takes a long time (@atbrakhi, #30518).&lt;/p&gt;
 &lt;p&gt;Many stability improvements have landed, including fixes for a crash in inline layout (@atbrakhi, #30897), three WebGPU-related crashes (@lucasMontenegro, @gterzian, @Taym95, #30888, #30989, #31002), a crash in the PerformanceResourceTiming API (@delan, #31063), and several crashes due to script runtimes being dropped in the wrong order (@gterzian, #30896).&lt;/p&gt;
 &lt;h2 id=&quot;dev-changes&quot; tabindex=&quot;-1&quot;&gt;Dev changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-january-2024/blog/2024/01/26/two-months-in-servo/#dev-changes&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;the default branch in &lt;a href=&quot;https://github.com/servo/servo&quot;&gt;our main repo&lt;/a&gt; is now &lt;code&gt;main&lt;/code&gt; (@mrobinson, @atouchet, 23add0c1e5c9c, #30877)&lt;/li&gt;
-&lt;li&gt;we now target Rust 1.74 stable, marking the first time ever we have built without unstable features (@mrobinson, #30831)&lt;/li&gt;
+&lt;li&gt;we now target &lt;strong&gt;Rust 1.74&lt;/strong&gt; stable, marking the first time ever we have built without unstable features (@mrobinson, #30831)&lt;/li&gt;
 &lt;li&gt;we now use Python’s built-in venv feature, so you no longer need to install virtualenv (@frewsxcv, #30377)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;linux-build-issues&quot; tabindex=&quot;-1&quot;&gt;Linux build issues &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-january-2024/blog/2024/01/26/two-months-in-servo/#linux-build-issues&quot;&gt;
