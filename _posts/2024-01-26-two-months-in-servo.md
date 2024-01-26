@@ -53,8 +53,8 @@ We’ve also made some dev changes:
 
 - the default branch in [our main repo](https://github.com/servo/servo) is now `main` (@mrobinson, @atouchet, 23add0c1e5c9c, #30877)
 - we now target **Rust 1.74** stable, marking the first time ever we have built without unstable features (@mrobinson, #30831)
-- we now use Python’s built-in venv feature, so you no longer need to install virtualenv (@frewsxcv, #30377)
-- we’ve fixed problems building Servo on Ubuntu 20.04 (@mrobinson, #31019) and NixOS 23.05+ (@delan, #31052, #31055)
+- we now require **Python 3.10** (@mrobinson, #31088), and you no longer need to install virtualenv (@frewsxcv, #30377)
+- we’ve fixed problems building Servo on **Ubuntu 20.04** (@mrobinson, #31019) and **NixOS 23.05+** (@delan, #31052, #31055)
 
 ### Linux build issues
 
@@ -197,7 +197,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         >>> 2024-01-15T06:10:05Z
         >>> 2024-01-16T06:18:19Z
             +++ efa38c67fe6bdec751739bb3a0a6d159f2b695c8	https://github.com/servo/servo/pull/31091	ci: Remove the nightly-rust workflow (#31091)
-        +++ 0d240b8713fb5cd933d348e668ab02a53859282b	https://github.com/servo/servo/pull/31088	deps: Raise the Python requirement to 3.10 (#31088)
+            +++ 0d240b8713fb5cd933d348e668ab02a53859282b	https://github.com/servo/servo/pull/31088	deps: Raise the Python requirement to 3.10 (#31088)
         >>> 2024-01-17T06:09:03Z
             +++ 8c53a8c745ab2a5b660d6f170e74b4fecca189c1	https://github.com/servo/servo/pull/31077	use FLoat32Array in XRView (#31077)
             +++ 9654363c187ee549b82bca8c4e3098e4c20c7287	https://github.com/servo/servo/pull/30639	script: Start replacing `time` with `std::time` and `chrono`  (#30639)
