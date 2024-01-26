@@ -39,6 +39,7 @@ Many stability improvements have landed, including fixes for a crash in inline l
 The intermittent macOS build failures on CI should now be fixed (@mrobinson, #30975).
 
 The long-term effort to simplify how Servo is built continues (@mrobinson, #31075), and we’ve also replaced the `time` crate with `chrono` and `std::time` in much of Servo (@Taym95, @augustebaum, #30927, #31020, #30639, #31079).
+We have also started migrating our DOM bindings to use typed arrays where possible (@gterzian, #30990, #31077, #31087, #31076, #31106), as part of an effort to **reduce our unsafe code surface** (#30889, #30862).
 
 Several crates have been moved into [our main repo](https://github.com/servo/servo):
 
@@ -76,13 +77,16 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         - inline
         - DONE Au
         - DONE wpt
-    - DONE minibrowser
     - xtermjs
-    - android
     - updates
         - DONE angle
         - DONE webgpu
+    - DONE minibrowser
     - DONE stability
+    - ci
+        - macOS
+        - android
+    - health
     - dev
         - DONE nix
         - DONE rust stable
@@ -181,7 +185,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
             +++ 92196d985dceb0ca708b097e2a847b255d8387c8	https://github.com/servo/servo/pull/31020	Replace time with std::time in components/metrics & components/shared (#31020)
         +++ 17ffbbdd11b47d577bdfe4318c36bcb5de365b18	https://github.com/servo/servo/pull/31052	Nix: bump nixpkgs to nixos-23.05 (except gnumake) (#31052)
         >>> 2024-01-12T06:07:36Z
-        +++ e145c512347807cdf44537fdfa83f2a5dda05b5a	https://github.com/servo/servo/pull/30990	WebIDL: use FLoat32Array  (#30990)
+            +++ e145c512347807cdf44537fdfa83f2a5dda05b5a	https://github.com/servo/servo/pull/30990	WebIDL: use FLoat32Array  (#30990)
             +++ 90f70e3408e1d4b3f378e50f9f051cb00c77c446	https://github.com/servo/servo/pull/31063	Fix underflow in PerformanceResourceTiming API (#31063)
         +++ 1f1cf1499d1e249c58fb3ac8986e62cf0d796497	https://github.com/servo/servo/pull/31055	Nix: bump nixpkgs to nixos-unstable (#31055)
         >>> 2024-01-13T06:04:19Z
@@ -192,20 +196,20 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
             +++ efa38c67fe6bdec751739bb3a0a6d159f2b695c8	https://github.com/servo/servo/pull/31091	ci: Remove the nightly-rust workflow (#31091)
         +++ 0d240b8713fb5cd933d348e668ab02a53859282b	https://github.com/servo/servo/pull/31088	deps: Raise the Python requirement to 3.10 (#31088)
         >>> 2024-01-17T06:09:03Z
-        +++ 8c53a8c745ab2a5b660d6f170e74b4fecca189c1	https://github.com/servo/servo/pull/31077	use FLoat32Array in XRView (#31077)
+            +++ 8c53a8c745ab2a5b660d6f170e74b4fecca189c1	https://github.com/servo/servo/pull/31077	use FLoat32Array in XRView (#31077)
             +++ 9654363c187ee549b82bca8c4e3098e4c20c7287	https://github.com/servo/servo/pull/30639	script: Start replacing `time` with `std::time` and `chrono`  (#30639)
         >>> 2024-01-18T06:17:19Z
             +++ 580062228bb083ccdc2144a43491bc4f916c57ad	https://github.com/servo/servo/pull/31079	Replace time with std::time in components/net (#31079)
         +++ d86e713a9cb5be2555d63bd477d47d440fa8c832	https://github.com/servo/servo/pull/31092	build: Clean up post-build copy of Windows DLLs (#31092)
-        +++ f76982e2e7f411e2e2fd8e6dbfe92a080acefc54	https://github.com/servo/servo/pull/31087	script: Use FLoat32Array in XRRay (#31087)
-        +++ 6a7b450478f69d9d83b0936a0ab28ac2d94761d4	https://github.com/servo/servo/pull/31076	use FLoat32Array in XRRigidTransform (#31076)
+            +++ f76982e2e7f411e2e2fd8e6dbfe92a080acefc54	https://github.com/servo/servo/pull/31087	script: Use FLoat32Array in XRRay (#31087)
+            +++ 6a7b450478f69d9d83b0936a0ab28ac2d94761d4	https://github.com/servo/servo/pull/31076	use FLoat32Array in XRRigidTransform (#31076)
         >>> 2024-01-19T06:05:45Z
             +++ 8e5f28839cde6b9ee5cd7cb4f8c27ff0ae10a86c	https://github.com/servo/servo/pull/31120	Revert "Replace time with std::time in components/net (#31079)" (#31120)
         >>> 2024-01-20T06:04:40Z
             +++ fc31e69f79a68408fdd376a52942587a8fca9170	https://github.com/servo/servo/pull/31121	layout: Add *very* basic support for table layout (#31121)
             +++ 3d520f266800e0035c429ddf2a3b45922f502ebd	https://github.com/servo/servo/pull/30894	Use App units in flow layout (#30894)
             +++ 734eb469549db22b070d86bb13a8bd167d5d1e8e	https://github.com/servo/servo/pull/31131	wpt: Unskip the `css-tables suite (#31131)
-        +++ 9d2c102fa0cc034b2bde51d27cd6c0e7f3cafa30	https://github.com/servo/servo/pull/31106	Use FLoat32Array in GamepadPose (#31106)
+            +++ 9d2c102fa0cc034b2bde51d27cd6c0e7f3cafa30	https://github.com/servo/servo/pull/31106	Use FLoat32Array in GamepadPose (#31106)
         >>> 2024-01-21T06:06:07Z
         >>> 2024-01-22T06:08:36Z
         >>> 2024-01-23T06:22:19Z
