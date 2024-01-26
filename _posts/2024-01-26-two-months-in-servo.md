@@ -12,6 +12,7 @@ Servo has had some exciting changes land in our nightly builds over the last mon
 - as of 2023-12-27, the ‘text-align-last’ property is now supported (@mrobinson, #30905)
 - as of 2023-12-27, ‘text-align: justify’ is now supported (@mrobinson, #30807, #30866)
 - as of 2024-01-09, ‘line-height’ and ‘vertical-align’ are now moderately supported (@mrobinson, #30902)
+- as of 2024-01-24, ‘Event#composedPath()’ is now supported (@gterzian, #31123)
 
 We’ve started working on support for **sticky positioning** and **tables** in the new layout engine, with some very early sticky positioning code landing in 2023-11-30 (@mrobinson, #30686), the CSS tables tests now enabled (@mrobinson, #31131), and rudimentary table layout landing in 2024-01-20 under the `layout.tables.enabled` pref (@mrobinson, @Loirooriol, @Manishearth, #30799, #30868, #31121).
 
@@ -219,7 +220,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         >>> 2024-01-23T06:22:19Z
             +++ d7de206dbd459e8c8bf121f73755d12569c6cc55	https://github.com/servo/servo/pull/31086	Preliminary Android build support (#31086)
         >>> 2024-01-24T06:17:36Z
-        +++ 5d7e2a823985a8314b10dc363eb191c0d4330424	https://github.com/servo/servo/pull/31123	Implement Event.composedPath (#31123)
+            +++ 5d7e2a823985a8314b10dc363eb191c0d4330424	https://github.com/servo/servo/pull/31123	Implement Event.composedPath (#31123)
         +++ 54fb381a0a4c070bac75e9f602bf905fa101194d	https://github.com/servo/servo/pull/31133	layout: Convert layout internal display to inline for replaced elements (#31133)
         +++ 7de0486e2e67a17e4cdcc881c7f3bd3fd1a66fb6	https://github.com/servo/servo/pull/31161	layout: Count word separators as justification opportunities when trimming whitespace (#31161)
             +++ dc2df7b02767004f0900055d985ecfc6cd874c9a	https://github.com/servo/servo/pull/31148	build: Add support for Visual Studio 2022 and VC143 DLLs (#31148)
