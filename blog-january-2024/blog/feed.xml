@@ -34,12 +34,22 @@ While floating-point geometry was thought to be better for transformation-heavy 
 &lt;h2 id=&quot;updates%2C-servoshell%2C-and-stability&quot; tabindex=&quot;-1&quot;&gt;Updates, servoshell, and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-january-2024/blog/2024/01/26/two-months-in-servo/#updates%2C-servoshell%2C-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;WebGPU&lt;/strong&gt; has been updated from 0.17 to 0.18 (@sagudev, #30926, #30954), and &lt;strong&gt;ANGLE&lt;/strong&gt; has been updated from &lt;a href=&quot;https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/3729&quot;&gt;April 2019&lt;/a&gt; to &lt;a href=&quot;https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/5359&quot;&gt;August 2023&lt;/a&gt; (@sagudev, #30546).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;GStreamer&lt;/strong&gt; has been updated from 0.15 to 0.21 (@mrobinson, #30750), fixing long-standing breakage of video playback.
+&lt;strong&gt;WebGPU&lt;/strong&gt; has been updated from 0.17 to 0.18 (@sagudev, #30926, #30954), and &lt;strong&gt;ANGLE&lt;/strong&gt; has been updated from &lt;a href=&quot;https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/3729&quot;&gt;April 2019&lt;/a&gt; to &lt;a href=&quot;https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/5359&quot;&gt;August 2023&lt;/a&gt; (@sagudev, #30546).&lt;/p&gt;
 &lt;p&gt;Servo’s example browser now has &lt;strong&gt;Back and Forward buttons&lt;/strong&gt; (@atbrakhi, #30805), and no longer shows the incorrect location when navigation takes a long time (@atbrakhi, #30518).&lt;/p&gt;
 &lt;p&gt;Many stability improvements have landed, including fixes for a crash in inline layout (@atbrakhi, #30897), three WebGPU-related crashes (@lucasMontenegro, @gterzian, @Taym95, #30888, #30989, #31002), a crash in the PerformanceResourceTiming API (@delan, #31063), and several crashes due to script runtimes being dropped in the wrong order (@gterzian, #30896).&lt;/p&gt;
-&lt;h2 id=&quot;dev-changes&quot; tabindex=&quot;-1&quot;&gt;Dev changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-january-2024/blog/2024/01/26/two-months-in-servo/#dev-changes&quot;&gt;
+&lt;h2 id=&quot;ci%2C-code-health%2C-and-dev-changes&quot; tabindex=&quot;-1&quot;&gt;CI, code health, and dev changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-january-2024/blog/2024/01/26/two-months-in-servo/#ci%2C-code-health%2C-and-dev-changes&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The intermittent macOS build failures on CI should now be fixed (@mrobinson, #30975).&lt;/p&gt;
+&lt;p&gt;The long-term effort to simplify how Servo is built continues (@mrobinson, #31075), and we’ve also replaced the &lt;code&gt;time&lt;/code&gt; crate with &lt;code&gt;chrono&lt;/code&gt; and &lt;code&gt;std::time&lt;/code&gt; in much of Servo (@Taym95, @augustebaum, #30927, #31020, #30639, #31079).&lt;/p&gt;
+&lt;p&gt;Several crates have been moved into &lt;a href=&quot;https://github.com/servo/servo&quot;&gt;our main repo&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;hyper_serde&lt;/code&gt; (&lt;a href=&quot;https://github.com/servo/hyper_serde&quot;&gt;servo/hyper_serde&lt;/a&gt;) was moved to &lt;code&gt;components/hyper_serde&lt;/code&gt; (@mrobinson, #30803)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;device&lt;/code&gt; (&lt;a href=&quot;https://github.com/servo/devices&quot;&gt;servo/devices&lt;/a&gt;) was merged into &lt;code&gt;components/bluetooth&lt;/code&gt; (@mrobinson, #30974)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;blurmac&lt;/code&gt; (&lt;a href=&quot;https://github.com/servo/devices&quot;&gt;servo/devices&lt;/a&gt;) was moved to &lt;code&gt;third_party/blurmac&lt;/code&gt; (@mrobinson, #30974)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We’ve also made some dev changes:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;the default branch in &lt;a href=&quot;https://github.com/servo/servo&quot;&gt;our main repo&lt;/a&gt; is now &lt;code&gt;main&lt;/code&gt; (@mrobinson, @atouchet, 23add0c1e5c9c, #30877)&lt;/li&gt;
 &lt;li&gt;we now target &lt;strong&gt;Rust 1.74&lt;/strong&gt; stable, marking the first time ever we have built without unstable features (@mrobinson, #30831)&lt;/li&gt;
@@ -138,7 +148,7 @@ All you need to do is install Nix, and &lt;code&gt;export MACH_USE_NIX=&lt;/code
             +++ 256ab5353b9145dbda103ec48cf4d10f32f6912a	https://github.com/servo/servo/pull/30888	These changes fix #30843 (#30888) Fix a crash in WebGPU when WebGPU is disabled
             +++ e4aed3d06a8a1ef6e7af142f02be95ce2a3065cb	https://github.com/servo/servo/pull/30877	Update branch name to main (#30877)
             +++ ccf0b739dfca312a65002c443fb09537aa27225b	https://github.com/servo/servo/pull/30807	Add basic support for `text-align: justify` (#30807)
-        +++ 569c4a8823369678870e1b5f50a2c484d32fb687	https://github.com/servo/servo/pull/30803	Integrate hyper_serde into Servo source (#30803)
+            +++ 569c4a8823369678870e1b5f50a2c484d32fb687	https://github.com/servo/servo/pull/30803	Integrate hyper_serde into Servo source (#30803)
         &gt;&gt;&gt; 2023-12-28T06:04:45Z
         &gt;&gt;&gt; 2023-12-29T06:03:36Z
             +++ e79171ec01199ba7100c0ad90576a6ec5705d80c	https://github.com/servo/servo/pull/30954	Update WebGPU CTS (#30954)
@@ -148,10 +158,10 @@ All you need to do is install Nix, and &lt;code&gt;export MACH_USE_NIX=&lt;/code
         &gt;&gt;&gt; 2024-01-02T06:15:51Z
         +++ 7964a4f582d5697e0ea55203dd4ec25d69dbed97	https://github.com/servo/servo/pull/30963	Unfork and upgrade jemallocator (#30963)
         &gt;&gt;&gt; 2024-01-03T06:11:55Z
-        +++ 3353db71d232ed3e6108950e21a6dba6360e6d57	https://github.com/servo/servo/pull/30975	Fail gracefully when DMG smoketest fails (#30975)
+            +++ 3353db71d232ed3e6108950e21a6dba6360e6d57	https://github.com/servo/servo/pull/30975	Fail gracefully when DMG smoketest fails (#30975)
         &gt;&gt;&gt; 2024-01-04T06:14:15Z
             +++ f44ff83c20b82d1f3272d9389563e30f0d3c9700	https://github.com/servo/servo/pull/30989	WebGPU: always send exit message to script before exiting (#30989)
-        +++ 65cbc95d38819e9b3d5870953015a9e7963a0ace	https://github.com/servo/servo/pull/30927	Replace time with std::time in components/devtools (#30927)
+            +++ 65cbc95d38819e9b3d5870953015a9e7963a0ace	https://github.com/servo/servo/pull/30927	Replace time with std::time in components/devtools (#30927)
         +++ 0dbba9b6ffe0507011337c27c2709f6c4cebe1c0	https://github.com/servo/servo/pull/30973	Download Windows GStreamer dependencies from GitHub (#30973)
         &gt;&gt;&gt; 2024-01-05T06:16:06Z
         +++ c219204084b8f8a747ebd37ec75472c1b7e97411	https://github.com/servo/servo/pull/30987	Fix crown on NixOS (#30987)
@@ -159,37 +169,37 @@ All you need to do is install Nix, and &lt;code&gt;export MACH_USE_NIX=&lt;/code
         &gt;&gt;&gt; 2024-01-08T06:07:00Z
         +++ 79a0f76d26d43c7f6e38a60fbe2ec6bed1510543	https://github.com/servo/servo/pull/31019	Fix the build on Ubuntu 20.04 (#31019)
         +++ 9a1d7aabd71fe82c9420abdc33a6a9ba0f8eac52	https://github.com/servo/servo/pull/31003	bootstrap: Adding more output when installing dependencies (#31003)
-        +++ 7fa4ea9740edccc93672d8cc428f6e9d4575a036	https://github.com/servo/servo/pull/30750	Upgrade media / GStreamer / GLib (#30750) 0.15 -&gt; 0.21
+            +++ 7fa4ea9740edccc93672d8cc428f6e9d4575a036	https://github.com/servo/servo/pull/30750	Upgrade media / GStreamer / GLib (#30750) 0.15 -&gt; 0.21
         &gt;&gt;&gt; 2024-01-09T06:16:45Z
             +++ aa073c3dcaffe30c7a6e272ba4ef5121c090f1bf	https://github.com/servo/servo/pull/30902	layout: Implement support for `line-height` and `vertical-align` (#30902)
         &gt;&gt;&gt; 2024-01-10T06:16:53Z
             +++ 94a3c49a807626ecddb7f062e6856e9e0d66baca	https://github.com/servo/servo/pull/31001	Allow building with Nix on Linux distros other than NixOS (#31001)
-        +++ 6a804cd775e3976103269ac54ae997a3accc8618	https://github.com/servo/servo/pull/30974	Integrate the `devices` respository (#30974)
+            +++ 6a804cd775e3976103269ac54ae997a3accc8618	https://github.com/servo/servo/pull/30974	Integrate the `devices` respository (#30974)
             +++ fddc4a430fca591152c69f0793ab946dcdc81617	https://github.com/servo/servo/pull/31002	Fix failed request for adapter when not available (#31002)
         &gt;&gt;&gt; 2024-01-11T06:08:02Z
-        +++ 92196d985dceb0ca708b097e2a847b255d8387c8	https://github.com/servo/servo/pull/31020	Replace time with std::time in components/metrics &amp; components/shared (#31020)
+            +++ 92196d985dceb0ca708b097e2a847b255d8387c8	https://github.com/servo/servo/pull/31020	Replace time with std::time in components/metrics &amp; components/shared (#31020)
         +++ 17ffbbdd11b47d577bdfe4318c36bcb5de365b18	https://github.com/servo/servo/pull/31052	Nix: bump nixpkgs to nixos-23.05 (except gnumake) (#31052)
         &gt;&gt;&gt; 2024-01-12T06:07:36Z
         +++ e145c512347807cdf44537fdfa83f2a5dda05b5a	https://github.com/servo/servo/pull/30990	WebIDL: use FLoat32Array  (#30990)
             +++ 90f70e3408e1d4b3f378e50f9f051cb00c77c446	https://github.com/servo/servo/pull/31063	Fix underflow in PerformanceResourceTiming API (#31063)
         +++ 1f1cf1499d1e249c58fb3ac8986e62cf0d796497	https://github.com/servo/servo/pull/31055	Nix: bump nixpkgs to nixos-unstable (#31055)
         &gt;&gt;&gt; 2024-01-13T06:04:19Z
-        +++ abb54f7832682bad1545b307a545a7ba977ef209	https://github.com/servo/servo/pull/31075	build: Don&#39;t add the `neon` feature for arm and aarch64 (#31075)
+            +++ abb54f7832682bad1545b307a545a7ba977ef209	https://github.com/servo/servo/pull/31075	build: Don&#39;t add the `neon` feature for arm and aarch64 (#31075)
         &gt;&gt;&gt; 2024-01-14T06:05:53Z
         &gt;&gt;&gt; 2024-01-15T06:10:05Z
         &gt;&gt;&gt; 2024-01-16T06:18:19Z
-        +++ efa38c67fe6bdec751739bb3a0a6d159f2b695c8	https://github.com/servo/servo/pull/31091	ci: Remove the nightly-rust workflow (#31091)
+            +++ efa38c67fe6bdec751739bb3a0a6d159f2b695c8	https://github.com/servo/servo/pull/31091	ci: Remove the nightly-rust workflow (#31091)
         +++ 0d240b8713fb5cd933d348e668ab02a53859282b	https://github.com/servo/servo/pull/31088	deps: Raise the Python requirement to 3.10 (#31088)
         &gt;&gt;&gt; 2024-01-17T06:09:03Z
         +++ 8c53a8c745ab2a5b660d6f170e74b4fecca189c1	https://github.com/servo/servo/pull/31077	use FLoat32Array in XRView (#31077)
-        +++ 9654363c187ee549b82bca8c4e3098e4c20c7287	https://github.com/servo/servo/pull/30639	script: Start replacing `time` with `std::time` and `chrono`  (#30639)
+            +++ 9654363c187ee549b82bca8c4e3098e4c20c7287	https://github.com/servo/servo/pull/30639	script: Start replacing `time` with `std::time` and `chrono`  (#30639)
         &gt;&gt;&gt; 2024-01-18T06:17:19Z
-        +++ 580062228bb083ccdc2144a43491bc4f916c57ad	https://github.com/servo/servo/pull/31079	Replace time with std::time in components/net (#31079)
+            +++ 580062228bb083ccdc2144a43491bc4f916c57ad	https://github.com/servo/servo/pull/31079	Replace time with std::time in components/net (#31079)
         +++ d86e713a9cb5be2555d63bd477d47d440fa8c832	https://github.com/servo/servo/pull/31092	build: Clean up post-build copy of Windows DLLs (#31092)
         +++ f76982e2e7f411e2e2fd8e6dbfe92a080acefc54	https://github.com/servo/servo/pull/31087	script: Use FLoat32Array in XRRay (#31087)
         +++ 6a7b450478f69d9d83b0936a0ab28ac2d94761d4	https://github.com/servo/servo/pull/31076	use FLoat32Array in XRRigidTransform (#31076)
         &gt;&gt;&gt; 2024-01-19T06:05:45Z
-        +++ 8e5f28839cde6b9ee5cd7cb4f8c27ff0ae10a86c	https://github.com/servo/servo/pull/31120	Revert &quot;Replace time with std::time in components/net (#31079)&quot; (#31120)
+            +++ 8e5f28839cde6b9ee5cd7cb4f8c27ff0ae10a86c	https://github.com/servo/servo/pull/31120	Revert &quot;Replace time with std::time in components/net (#31079)&quot; (#31120)
         &gt;&gt;&gt; 2024-01-20T06:04:40Z
             +++ fc31e69f79a68408fdd376a52942587a8fca9170	https://github.com/servo/servo/pull/31121	layout: Add *very* basic support for table layout (#31121)
             +++ 3d520f266800e0035c429ddf2a3b45922f502ebd	https://github.com/servo/servo/pull/30894	Use App units in flow layout (#30894)
