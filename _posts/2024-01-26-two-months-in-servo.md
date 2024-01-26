@@ -25,7 +25,9 @@ As a result of these changes, we’ve made big strides in our WPT pass rates:
 - we now surpass legacy layout in the **css-flexbox** tests (49.5% → 52.7%, legacy 52.2%)
 - we’ve closed 76% of the gap in **key CSS2 tests** (79.2% → 82.2%, legacy 83.1%)
 
-## servoshell and stability changes
+## Updates, servoshell, and stability
+
+**WebGPU** has been updated from 0.17 to 0.18 (@sagudev, #30926, #30954), and **ANGLE** has been updated from [April 2019](https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/3729) to [August 2023](https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/5359) (@sagudev, #30546).
 
 Servo’s example browser now has Back and Forward buttons (@atbrakhi, #30805), and no longer shows the incorrect location when navigation takes a long time (@atbrakhi, #30518).
 
@@ -65,8 +67,8 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
     - xtermjs
     - android
     - updates
-        - angle
-        - webgpu
+        - DONE angle
+        - DONE webgpu
     - DONE stability
     - dev
         - DONE nix
@@ -103,7 +105,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         >>> 2023-12-04T06:02:05Z
         >>> 2023-12-11T05:28:33Z
         warning: not reachable from default branch: 2668a0a43a19643922409e623880558dedfb4b98
-        +++ e2743c61414f5d9cc0cd2d41dcc5c1d29f0b2d17	https://github.com/servo/servo/pull/30546	Bump mozangle to 0.5.0 (#30546)
+            +++ e2743c61414f5d9cc0cd2d41dcc5c1d29f0b2d17	https://github.com/servo/servo/pull/30546	Bump mozangle to 0.5.0 (#30546)
             +++ 117d59d393cf7926063e8723934fec97fd61d713	https://github.com/servo/servo/pull/30377	Replace virtualenv with Python's built-in venv (#30377)
             +++ 7e82c5c957821f1328484e90becec0cfb5572938	https://github.com/servo/servo/pull/30831	Compile Servo with the latest version of rust stable (#30831)
         +++ bbc35b682f0fb926364e5800d20f77bba944a020	https://github.com/servo/servo/pull/30830	Remove thinlto servobuild.config option (#30830)
@@ -124,7 +126,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
             +++ 8a226fdb1975ae1df8d1a673eb3dca9f2bb771aa	https://github.com/servo/servo/pull/30841	constellation: notify embedder when events are hit-tested to browsers (#30841)
         >>> 2023-12-14T06:16:19Z
         >>> 2023-12-27T06:06:58Z
-        +++ 7973cb64586d94a6987562fe6f180ac29ef0e971	https://github.com/servo/servo/pull/30926	Update wgpu to 0.18.1 (#30926)
+            +++ 7973cb64586d94a6987562fe6f180ac29ef0e971	https://github.com/servo/servo/pull/30926	Update wgpu to 0.18.1 (#30926)
         +++ 1f0f50b22bb43e965febf31f5a436113f2958725	https://github.com/servo/servo/pull/30912	Customizable wpt options and profile in workflows (#30912)
             +++ 81f5157522ae320068515571a371aa3b72de0cfa	https://github.com/servo/servo/pull/30868	Add support for table fixups (#30868)
             +++ 709d00583fb28fb668f10eab1f2f16f07c331078	https://github.com/servo/servo/pull/30866	layout: Make all word separators justification opportunities (#30866)
@@ -137,7 +139,7 @@ All you need to do is install Nix, and `export MACH_USE_NIX=` to your environmen
         +++ 569c4a8823369678870e1b5f50a2c484d32fb687	https://github.com/servo/servo/pull/30803	Integrate hyper_serde into Servo source (#30803)
         >>> 2023-12-28T06:04:45Z
         >>> 2023-12-29T06:03:36Z
-        +++ e79171ec01199ba7100c0ad90576a6ec5705d80c	https://github.com/servo/servo/pull/30954	Update WebGPU CTS (#30954)
+            +++ e79171ec01199ba7100c0ad90576a6ec5705d80c	https://github.com/servo/servo/pull/30954	Update WebGPU CTS (#30954)
         >>> 2023-12-30T06:12:29Z
         >>> 2023-12-31T06:14:24Z
         >>> 2024-01-01T06:08:41Z
