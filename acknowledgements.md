@@ -17,3 +17,6 @@ Servo Project uses some free services provided by different companies:
 * Chat tool (<https://servo.zulipchat.com/>) is provided by [Zulip](https://zulip.com/).
   <img src="{{ '/img/zulip-logo.png' | url}}" alt="Zulip logo" style="vertical-align: middle; margin: 15px; width: 100px;" />
 
+*  [AWS Open Source](https://aws.amazon.com/opensource/) is providing promotional credits to cover our infrastructure costs.
+  <img src="{{ '/img/aws-logo.png' | url}}" alt="AWS logo" style="vertical-align: middle; margin: 15px; width: 100px;" />
+
