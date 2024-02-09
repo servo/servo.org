@@ -34,6 +34,7 @@ The chart below tracks our pass rates in several *focus areas* of the [Web Platf
 
 ## Presentations
 
+* [Embedding Servo in Rust projects](https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/) by Rakhi Sharma (Feb 2024)
 * [Servo: A Web View From Somewhere Else](https://www.youtube.com/watch?v=lx70W83Bxtc) by Martin Robinson (Sep 2023)
 * [You Can Work on the Web Platform!](https://youtu.be/RugzThWcjn4) by Martin Robinson (Sep 2023)
 * [Servo Web Rendering Engine Reboot](https://youtu.be/9lkIX5ryZZ4) by Manuel Rego (Sep 2023)
