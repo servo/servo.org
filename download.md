@@ -35,5 +35,9 @@ title: Download
 
 **Solution**: make sure that you have GStreamer version 1.16 (or greater) and gst-plugins-bad version 1.16 (or greater)
 
+**Error**: `./servo: error while loading shared libraries: libunwind-x86_64.so.8: cannot open shared object file: No such file or directory`
+
+**Solution**: make sure that you have libunwind installed
+
   </div>
 </div>
