@@ -26,7 +26,7 @@ title: Home
 
 ## Sponsorship
 
-You can support the project's infrastructure (CI) and hosting costs by donating to the [LFX crowdfunding page for Servo](https://crowdfunding.lfx.linuxfoundation.org/projects/servo).
+You can support the project's infrastructure (CI) and hosting costs by donating to the [Servo Open Collective](https://opencollective.com/servo).
 
 For more information about how to sponsor the project, visit the [**sponsorship page**]({{ '/sponsorship/' | url }}).
 

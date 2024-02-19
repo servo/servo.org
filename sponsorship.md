@@ -7,7 +7,7 @@ title: Sponsorship
 
 You can support the development of Servo project in different ways.
 
-By donating to the [**LFX crowdfunding page for Servo**](https://crowdfunding.lfx.linuxfoundation.org/projects/servo), you can support the project's infrastructure and hosting costs. The money there is used to keep the project up and running, including CI bots and related hardware requirements for the project.
+By donating to the [**Servo Open Collective**](https://opencollective.com/servo), you can support the project's infrastructure and hosting costs. The money there is used to keep the project up and running, including CI bots and related hardware requirements for the project.
 
 <div class="hero is-info is-small">
   <div class="hero-body">
