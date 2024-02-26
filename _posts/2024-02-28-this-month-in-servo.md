@@ -143,6 +143,82 @@ Servo has had some exciting changes land in our nightly builds over the last mon
 -->
 
 <!--
+https://wpt.servo.org
+((data, ...dates) => {
+	const stride = data.area_keys.length;
+	const rows = dates.map(expectedDate => data.scores.find(([date]) => date == expectedDate));
+	rows.forEach((row, i) => {
+		if (row.length != 3 + stride + 2 + stride) throw "schema change? bad length";
+		if (row[0] != dates[i]) throw "unreachable! incorrect date in [0]";
+		if (!/^[0-9a-f]{9}$/.test(row[1])) throw "schema change? expected commit hash in [1]";
+		if (!/^0[.]0[.]1-[0-9a-f]{7}$/.test(row[2])) throw "schema change? expected version in [2]";
+		if (!/^[0-9a-f]{9}$/.test(row[3+stride])) throw "schema change? expected commit hash in [3+stride]";
+		if (!/^0[.]0[.]1-[0-9a-f]{7}$/.test(row[4+stride])) throw "schema change? expected version in [4+stride]";
+	});
+	const areas = data.area_keys.map((key, i) => ({key, results: rows.map((row, j) => ({
+		date: dates[j],
+		legacy: row[3+i],
+		servo: row[5+stride+i],
+	}))}));
+	console.log(">>> areas", areas);
+	const analysis = areas
+		.map(({key, results: [p, q]}) => ({
+			key,
+			regressionWas: p.legacy - p.servo,
+			regressionNow: q.legacy - q.servo,
+			legacyWas: p.legacy,
+			legacyNow: q.legacy,
+			servoWas: p.servo,
+			servoNow: q.servo,
+		}))
+		.map(({key, regressionWas, regressionNow, legacyWas, legacyNow, servoWas, servoNow}) => ({
+			key, regressionWas, regressionNow, legacyWas, legacyNow, servoWas, servoNow,
+			legacyDelta: delta(legacyWas, legacyNow),
+			servoDelta: delta(servoWas, servoNow),
+			regressionDelta: delta(regressionWas, regressionNow),
+		}));
+	console.log(">>> analysis", analysis);
+	const deltaAnalysisText = analysis
+		.sort((p,q) => q.servoDelta.pp - p.servoDelta.pp)
+		.map(({key, servoDelta, servoNow}) => `${key} (${sgn(servoDelta.pp)}${servoDelta.pp.toFixed(1)}pp to ${(servoNow/10).toFixed(1)}%)\n`);
+	console.log(`>>> top deltas (servo, pp):\n${deltaAnalysisText.join("")}`);
+	const regressionAnalysisText = analysis
+		.filter(({regressionWas}) => regressionWas >= 0)
+		.sort((p,q) => p.regressionDelta.percent - q.regressionDelta.percent)
+		.map(({key, regressionDelta, regressionWas, regressionNow}) => `${key} (${regressionDelta.percent.toFixed(1)}% from ${(regressionWas/10).toFixed(1)}pp to ${(regressionNow/10).toFixed(1)}pp)\n`);
+	console.log(`>>> top cuts in legacy regression (%):\n${regressionAnalysisText.join("")}`);
+	function sgn(x) { return x < 0 ? '−' : '+'; }
+	function delta(p,q) { return {pp: (q-p)/10, percent: 100*(q-p)/p}; }
+})(await (await fetch("scores.json")).json(), "2024-01-25", "2024-02-26")
+>>> top deltas (servo, pp):
+normal-flow (+8.2pp to 86.6%)
+cssom (+4.6pp to 66.1%)
+abspos (+3.6pp to 98.2%)
+csstext (+3.2pp to 47.2%)
+css2 (+3.1pp to 84.8%)
+floats (+2.6pp to 85.1%)
+floats-clear (+2.4pp to 81.2%)
+csstable (+2.4pp to 33.0%)
+linebox (+2.0pp to 89.0%)
+css (+1.3pp to 63.6%)
+all (+1.0pp to 56.3%)
+csspos (+0.5pp to 48.7%)
+margin-padding-clear (+0.3pp to 80.4%)
+positioning (+0.3pp to 88.5%)
+cssflex (+0.3pp to 53.0%)
+box-display (+0.0pp to 74.4%)
+debugger eval code:59:13
+>>> top cuts in legacy regression (%):
+css2 (-300.0% from 0.9pp to -1.8pp)
+css (-111.1% from 0.9pp to -0.1pp)
+normal-flow (-89.5% from 8.6pp to 0.9pp)
+csstable (-30.0% from 6.0pp to 4.2pp)
+all (-23.8% from 2.1pp to 1.6pp)
+margin-padding-clear (-1.0% from 9.7pp to 9.6pp)
+box-display (0.0% from 6.7pp to 6.7pp)
+-->
+
+<!--
 $ tools/list-commits-by-nightly.sh ~/code/servo 2>&1 | tee /dev/stderr | xclip -sel clip
 From https://github.com/servo/servo
  * branch                  HEAD       -> FETCH_HEAD
