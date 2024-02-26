@@ -18,7 +18,53 @@ Servo has had some exciting changes land in our nightly builds over the last mon
     - space jam
 - externals
 - mach try
-- commits in nightlies 2024-01-25 through 2024-02-26
+- commits marked !!! in nightlies 2024-01-25 through 2024-02-26
+    >>> 2024-01-25T06:07:31Z
+    >>> 2024-01-26T06:17:05Z
+    >>> 2024-01-27T06:16:06Z
+    !!! a5c512808a0fd58a46220c2651003143add87543	https://github.com/servo/servo/pull/31141	Matrix in CI and `mach try` with presets (#31141)
+    >>> 2024-01-28T06:10:48Z
+    >>> 2024-01-29T06:19:13Z
+    >>> 2024-01-30T11:05:07Z
+    !!! 7d1b19c865855101561dd2030631feed2409a96d	https://github.com/servo/servo/pull/31201	Add support for cellpadding attribute (#31201)
+    >>> 2024-01-31T06:11:28Z
+    !!! a07ad85eaa8d918c12244da61e07ff6822326abe	https://github.com/servo/servo/pull/31224	dependencies: Upgrade surfman to 0.9 (#31224)
+    !!! 7f0d0830e779f37da8aa7f7025edcebe57b2db26	https://github.com/servo/servo/pull/31212	deps: Stop vendoring WebRender (#31212)
+    >>> 2024-02-01T06:11:43Z
+    >>> 2024-02-02T06:15:54Z
+    >>> 2024-02-03T06:19:50Z
+    >>> 2024-02-04T06:07:47Z
+    >>> 2024-02-05T06:07:59Z
+    >>> 2024-02-07T06:16:45Z
+    >>> 2024-02-08T06:10:45Z
+    >>> 2024-02-09T06:18:23Z
+    !!! f6b81a97f39a157347adc13d312e2ee5fad881d3	https://github.com/servo/servo/pull/31292	layout: Use `BoxFragment` border widths for display list generation (#31292)
+    >>> 2024-02-10T06:08:27Z
+    >>> 2024-02-11T06:21:18Z
+    !!! 19667e117ad1e47d76a93ff7b028f712a672c234	https://github.com/servo/servo/pull/31277	layout: Respond to shorthand property requests with real values (#31277)
+    !!! 35fb95ca8586f404795c3f5fae4d975d8d5a7ef4	https://github.com/servo/servo/pull/31246	layout: Start work on table row height and vertical-align (#31246)
+    !!! ee32212437795d938808430fb1a990727dbfbd81	https://github.com/servo/servo/pull/31306	Update mozangle and mozjs in order to use bindgen 0.69.4 (#31306)
+    >>> 2024-02-12T06:09:41Z
+    !!! cdc3c369f0bbc338c20df5b50ecaa9b6781aea65	https://github.com/servo/servo/pull/31254	layout: Implement support for font fallback (#31254)
+    >>> 2024-02-13T06:16:55Z
+    >>> 2024-02-14T06:16:51Z
+    >>> 2024-02-15T06:18:22Z
+    !!! 123854faeedfb61415f0beac93531500137a7d01	https://github.com/servo/servo/pull/31318	Support the parsing of image/svg+xml elements (#31318)
+    >>> 2024-02-16T06:08:03Z
+    >>> 2024-02-17T06:16:24Z
+    >>> 2024-02-20T06:09:45Z
+    !!! c999d4546c7dbfee670da38553dd95929c05b82b	https://github.com/servo/servo/pull/31200	Implement non-XR Gamepad discovery and input (#31200)
+    >>> 2024-02-21T06:10:25Z
+    !!! 02ae1f448ef3cae3cd0a58dbd145a741b8561f5b	https://github.com/servo/servo/pull/31341	layout: Add support for table rows, columns, rowgroups and colgroups (#31341)
+    >>> 2024-02-22T06:15:41Z
+    >>> 2024-02-23T06:20:06Z
+    !!! d8b326528b3d0646ef08714b87958f701cf89c88	https://github.com/servo/servo/pull/31396	layout: Add initial support for `text-transform` (#31396)
+    >>> 2024-02-24T06:18:05Z
+    !!! 38d2ad95928c4b5c1feac2e615724445d2ec9474	https://github.com/servo/servo/pull/31388	Support <div align="..."> and <center> on inline layout (#31388)
+    !!! 9c0561536d37f64c028d67648091a314b5b88f6f	https://github.com/servo/servo/pull/31346	script: Do not run layout in a thread (#31346)
+    >>> 2024-02-25T07:06:59Z
+    >>> 2024-02-26T06:08:38Z
+- commits marked +++ in nightlies 2024-01-25 through 2024-02-26
     >>> 2024-01-25T06:07:31Z
     +++ eb95703325aeb48d5f56a8da5b258bad608dd632	https://github.com/servo/servo/pull/30842	constellation: focusing and closing webviews (#30842)
     >>> 2024-01-26T06:17:05Z
@@ -27,7 +73,6 @@ Servo has had some exciting changes land in our nightly builds over the last mon
     +++ bb04c97f15728d14a146f29fa1bc4d23ee96ec49	https://github.com/servo/servo/pull/31164	Use Int8array, int16array, uint16array, int32array & uint32array in WebIDL (#31164)
     >>> 2024-01-27T06:16:06Z
     +++ 1876b492518bed60382b6c4f95c1af0a934f6af1	https://github.com/servo/servo/pull/31166	layout: Add support for table `border-spacing` (#31166)
-    !!! a5c512808a0fd58a46220c2651003143add87543	https://github.com/servo/servo/pull/31141	Matrix in CI and `mach try` with presets (#31141)
     >>> 2024-01-28T06:10:48Z
     +++ bc211f8ff387ea59bc8af7bb7394c7be7ca69597	https://github.com/servo/servo/pull/31184	gfx: Rename `WebrenderSurfman` to `RenderingContext` and move to `gfx` (#31184)
     +++ bbe505e52b611e682c6f3b34411a07c00a34f2b7	https://github.com/servo/servo/pull/31187	layout: Round `clientTop`, etc queries to pixels properly (#31187)
@@ -37,11 +82,8 @@ Servo has had some exciting changes land in our nightly builds over the last mon
     >>> 2024-01-30T11:05:07Z
     +++ 38d9245726c5d6d912fca1bda579f9f5fa96bbfa	https://github.com/servo/servo/pull/31210	Don't use cached client_rect() when a reflow is needed (#31210)
     +++ 742d3ed97f8e439a5807dbbfece6c23935525bce	https://github.com/servo/servo/pull/31167	Make HeapFloat32Array generic (#31167)
-    !!! 7d1b19c865855101561dd2030631feed2409a96d	https://github.com/servo/servo/pull/31201	Add support for cellpadding attribute (#31201)
     >>> 2024-01-31T06:11:28Z
-    !!! a07ad85eaa8d918c12244da61e07ff6822326abe	https://github.com/servo/servo/pull/31224	dependencies: Upgrade surfman to 0.9 (#31224)
     +++ 967925c119f7af5131e4857aadeeaafb66f5fa33	https://github.com/servo/servo/pull/31189	webidlg: Handle `Float64Array` as a `TypedArray` rather than a raw `JSObject` (#31189)
-    !!! 7f0d0830e779f37da8aa7f7025edcebe57b2db26	https://github.com/servo/servo/pull/31212	deps: Stop vendoring WebRender (#31212)
     >>> 2024-02-01T06:11:43Z
     >>> 2024-02-02T06:15:54Z
     +++ f27227b1db5d29918d5cbf2b8a6ba31545431dd0	https://github.com/servo/servo/pull/31231	Make Android build optional on Nix (#31231)
@@ -62,17 +104,12 @@ Servo has had some exciting changes land in our nightly builds over the last mon
     +++ 38b11afb22b31002200d02e955e969bcda9c121c	https://github.com/servo/servo/pull/31281	bootstrap: More resiliently install Deiban-like platform dependencies (#31281)
     +++ ba1803d30ad822250ac9827f35331250cec5fbf6	https://github.com/servo/servo/pull/31276	Fix ./mach bootstrap failure in debian (#31276)
     >>> 2024-02-09T06:18:23Z
-    !!! f6b81a97f39a157347adc13d312e2ee5fad881d3	https://github.com/servo/servo/pull/31292	layout: Use `BoxFragment` border widths for display list generation (#31292)
     +++ 5facf436f6835aa53a500ae99168b8a00ed4802c	https://github.com/servo/servo/pull/31290	mach: Make `./mach try` a little friendlier (#31290)
     >>> 2024-02-10T06:08:27Z
     +++ f2adcc3a12cb2e05fb650955a7756fd2fda48896	https://github.com/servo/servo/pull/31299	Fix CSSStyleDeclaration's item() to provide properties instead of values (#31299)
     >>> 2024-02-11T06:21:18Z
-    !!! 19667e117ad1e47d76a93ff7b028f712a672c234	https://github.com/servo/servo/pull/31277	layout: Respond to shorthand property requests with real values (#31277)
     +++ 0342d6beb006e402f393df46d1ebb82eb0578462	https://github.com/servo/servo/pull/31297	<hr> elements are expected to have a default overflow:hidden (#31297)
-    !!! 35fb95ca8586f404795c3f5fae4d975d8d5a7ef4	https://github.com/servo/servo/pull/31246	layout: Start work on table row height and vertical-align (#31246)
-    !!! ee32212437795d938808430fb1a990727dbfbd81	https://github.com/servo/servo/pull/31306	Update mozangle and mozjs in order to use bindgen 0.69.4 (#31306)
     >>> 2024-02-12T06:09:41Z
-    !!! cdc3c369f0bbc338c20df5b50ecaa9b6781aea65	https://github.com/servo/servo/pull/31254	layout: Implement support for font fallback (#31254)
     >>> 2024-02-13T06:16:55Z
     >>> 2024-02-14T06:16:51Z
     +++ 07c709624684e9d77c34a935c40db695b35f9073	https://github.com/servo/servo/pull/31337	Include border-spacing gutters in compute_inline_content_sizes (#31337)
@@ -80,7 +117,6 @@ Servo has had some exciting changes land in our nightly builds over the last mon
     >>> 2024-02-15T06:18:22Z
     +++ 61e778c8e8fb3ef49a69423a4b955724d43bee8f	https://github.com/servo/servo/pull/31351	style: Add a `static_prefs` implementation (#31351)
     +++ 14a2c43c75181f9697ffb920e88e01fe9bc9739d	https://github.com/servo/servo/pull/31349	style: Reduce Servo's diff with upstream `to_shmem` (#31349)
-    !!! 123854faeedfb61415f0beac93531500137a7d01	https://github.com/servo/servo/pull/31318	Support the parsing of image/svg+xml elements (#31318)
     >>> 2024-02-16T06:08:03Z
     >>> 2024-02-17T06:16:24Z
     +++ 328c376ff15c0776e453989468f19670ffc9032d	https://github.com/servo/servo/pull/31317	WebIDL: Use Uint8ClampedArray instead of raw JSObject in bindings (#31317)
@@ -91,22 +127,17 @@ Servo has had some exciting changes land in our nightly builds over the last mon
     >>> 2024-02-20T06:09:45Z
     +++ b9935188927b5ab294ae8bf68a848d254e66aa28	https://github.com/servo/servo/pull/31374	Check for XML and XMLS namespace  during 'locating a namespace' (#31374)
     +++ a726bb0fe1880b7309c100dcc4b4a7c4d6e418ad	https://github.com/servo/servo/pull/31377	Update FUNDING.yml (#31377)
-    !!! c999d4546c7dbfee670da38553dd95929c05b82b	https://github.com/servo/servo/pull/31200	Implement non-XR Gamepad discovery and input (#31200)
     >>> 2024-02-21T06:10:25Z
-    !!! 02ae1f448ef3cae3cd0a58dbd145a741b8561f5b	https://github.com/servo/servo/pull/31341	layout: Add support for table rows, columns, rowgroups and colgroups (#31341)
     +++ 2fa76916d35b178a1427fb0af831c5925e7ecea9	https://github.com/servo/servo/pull/31365	Revert as many changes to selectors from upstream as possible (#31365)
     >>> 2024-02-22T06:15:41Z
     >>> 2024-02-23T06:20:06Z
-    !!! d8b326528b3d0646ef08714b87958f701cf89c88	https://github.com/servo/servo/pull/31396	layout: Add initial support for `text-transform` (#31396)
     +++ f60e5e767b5002e9a440cf5d6e63f462d3e85a8e	https://github.com/servo/servo/pull/31408	Revert remaining Stylo changes (#31408)
     +++ 1c2de6dd1d31304187dd9b2e5767681fe16cd68f	https://github.com/servo/servo/pull/31387	Revert changes to servo_arc, style_derive, and style_traits (#31387)
     >>> 2024-02-24T06:18:05Z
     +++ 0d4e4748c432e1ce1555e2f4ebb759c631038313	https://github.com/servo/servo/pull/31418	layout: Place absolutes in IFCs at their hypothetical static position (#31418)
     +++ 41a41b3d8f176e441f5b7157c9e811fd845eedf5	https://github.com/servo/servo/pull/31412	Treat video elements as replaced content and render the current frame. (#31412)
-    !!! 38d2ad95928c4b5c1feac2e615724445d2ec9474	https://github.com/servo/servo/pull/31388	Support <div align="..."> and <center> on inline layout (#31388)
     +++ b182bdfa52db348fb0e9c1dcec66c0ad6e96b325	https://github.com/servo/servo/pull/31413	Fix crash when closing window containing video element (#31413)
     +++ e078a9981768d7523abba57b6e86f4874dcbf2fd	https://github.com/servo/servo/pull/31411	style: Remove dependency on servo_config (was #31409) (#31411)
-    !!! 9c0561536d37f64c028d67648091a314b5b88f6f	https://github.com/servo/servo/pull/31346	script: Do not run layout in a thread (#31346)
     >>> 2024-02-25T07:06:59Z
     >>> 2024-02-26T06:08:38Z
 -->
