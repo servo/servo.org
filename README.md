@@ -10,6 +10,7 @@ Note that the list of nightly builds is cached in tools/runs.json, so if it exis
 Make sure your Servo checkout is on the main branch, and that the branch is up to date. Then run the script below, passing it the path to your checkout:
 
 ```sh
+$ rm tools/runs.json  # Optional: clear CI history cache
 $ tools/list-commits-by-nightly.sh /path/to/servo
 ```
 
