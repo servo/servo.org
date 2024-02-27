@@ -39,6 +39,8 @@ Together with inline layout for **&lt;div align> and &lt;center>** (@Loirooriol,
 
 We’ve also landed several DOM geometry improvements, including **correct rounding** (@mrobinson, [#31187](https://github.com/servo/servo/pull/31187)) and **layout invalidation** (@Loirooriol, [#31210](https://github.com/servo/servo/pull/31210), [#31219](https://github.com/servo/servo/pull/31219)) for clientLeft, clientTop, clientWidth, and clientHeight, as well as **correct dimensions for preloaded Image objects** (@syvb, [#31253](https://github.com/servo/servo/pull/31253)).
 
+As of 2024-02-24, we support **videos with autoplay** (@jdm, [#31412](https://github.com/servo/servo/pull/31412)), and windows containing **videos no longer crash** when closed (@jdm, [#31413](https://github.com/servo/servo/pull/31413)).
+
 ## Embedding, code health, and dev changes
 
 We’ve landed a few embedding improvements:
@@ -194,8 +196,8 @@ We’ve also made some other dev changes:
         +++ 1c2de6dd1d31304187dd9b2e5767681fe16cd68f	https://github.com/servo/servo/pull/31387	Revert changes to servo_arc, style_derive, and style_traits (#31387)
     >>> 2024-02-24T06:18:05Z
     +++ 0d4e4748c432e1ce1555e2f4ebb759c631038313	https://github.com/servo/servo/pull/31418	layout: Place absolutes in IFCs at their hypothetical static position (#31418)
-    +++ 41a41b3d8f176e441f5b7157c9e811fd845eedf5	https://github.com/servo/servo/pull/31412	Treat video elements as replaced content and render the current frame. (#31412)
-    +++ b182bdfa52db348fb0e9c1dcec66c0ad6e96b325	https://github.com/servo/servo/pull/31413	Fix crash when closing window containing video element (#31413)
+        +++ 41a41b3d8f176e441f5b7157c9e811fd845eedf5	https://github.com/servo/servo/pull/31412	Treat video elements as replaced content and render the current frame. (#31412)
+        +++ b182bdfa52db348fb0e9c1dcec66c0ad6e96b325	https://github.com/servo/servo/pull/31413	Fix crash when closing window containing video element (#31413)
         +++ e078a9981768d7523abba57b6e86f4874dcbf2fd	https://github.com/servo/servo/pull/31411	style: Remove dependency on servo_config (was #31409) (#31411)
     >>> 2024-02-25T07:06:59Z
     >>> 2024-02-26T06:08:38Z
