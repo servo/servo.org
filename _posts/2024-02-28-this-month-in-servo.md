@@ -39,7 +39,12 @@ Together with inline layout for **&lt;div align> and &lt;center>** (@Loirooriol,
 
 We’ve also landed several DOM geometry improvements, including **correct rounding** (@mrobinson, [#31187](https://github.com/servo/servo/pull/31187)) and **layout invalidation** (@Loirooriol, [#31210](https://github.com/servo/servo/pull/31210), [#31219](https://github.com/servo/servo/pull/31219)) for clientLeft, clientTop, clientWidth, and clientHeight, as well as **correct dimensions for preloaded Image objects** (@syvb, [#31253](https://github.com/servo/servo/pull/31253)).
 
-## CI, code health, and dev changes
+## Embedding, code health, and dev changes
+
+We’ve landed a few embedding improvements:
+
+- we’ve removed several mandatory `WindowMethods` relating to OpenGL video playback (@mrobinson, [#31209](https://github.com/servo/servo/pull/31209))
+- we’ve removed `webrender_surfman`, and `WebrenderSurfman` is now in `gfx` as `RenderingContext` (@mrobinson, [#31184](https://github.com/servo/servo/pull/31184))
 
 We’ve finished migrating our DOM bindings to use typed arrays where possible (@Taym95, [#31145](https://github.com/servo/servo/pull/31145), [#31164](https://github.com/servo/servo/pull/31164), [#31167](https://github.com/servo/servo/pull/31167), [#31189](https://github.com/servo/servo/pull/31189), [#31202](https://github.com/servo/servo/pull/31202), [#31317](https://github.com/servo/servo/pull/31317), [#31325](https://github.com/servo/servo/pull/31325)), as part of an effort to **reduce our unsafe code surface** ([#30889](https://github.com/servo/servo/issues/30889), [#30862](https://github.com/servo/servo/issues/30862)).
 
@@ -51,10 +56,11 @@ See [#31059](https://github.com/servo/servo/issues/31059) for more details, incl
 
 We’ve also made some other dev changes:
 
-<!-- - you can now use `mach try` to test your branch on CI (@sagudev, @mrobinson, [#31141](https://github.com/servo/servo/pull/31141), [#31290](https://github.com/servo/servo/pull/31290)) — docs coming soon -->
 - we’ve removed the unmaintained **libsimpleservo C API** (@mrobinson, [#31172](https://github.com/servo/servo/pull/31172)), though we are open to adding a new C API someday
 - we’ve added support for building Servo on **Asahi Linux** (@arrynfr, [#31207](https://github.com/servo/servo/pull/31207))
 - we’ve fixed problems building Servo on **Debian** (@mrobinson, @atbrakhi, [#31281](https://github.com/servo/servo/pull/31281), [#31276](https://github.com/servo/servo/pull/31276)) and **NixOS** (@syvb, [#31231](https://github.com/servo/servo/pull/31231))
+- we’ve fixed failures when **starting multiple CI try jobs** at once (@mrobinson, [#31347](https://github.com/servo/servo/pull/31347))
+- we’ve made several improvements to **mach try** for starting CI try jobs (@sagudev, @mrobinson, [#31141](https://github.com/servo/servo/pull/31141), [#31290](https://github.com/servo/servo/pull/31290))
 
 <!--
 - fosdem backannounce
@@ -126,7 +132,7 @@ We’ve also made some other dev changes:
     >>> 2024-01-27T06:16:06Z
         +++ 1876b492518bed60382b6c4f95c1af0a934f6af1	https://github.com/servo/servo/pull/31166	layout: Add support for table `border-spacing` (#31166)
     >>> 2024-01-28T06:10:48Z
-    +++ bc211f8ff387ea59bc8af7bb7394c7be7ca69597	https://github.com/servo/servo/pull/31184	gfx: Rename `WebrenderSurfman` to `RenderingContext` and move to `gfx` (#31184)
+        +++ bc211f8ff387ea59bc8af7bb7394c7be7ca69597	https://github.com/servo/servo/pull/31184	gfx: Rename `WebrenderSurfman` to `RenderingContext` and move to `gfx` (#31184)
         +++ bbe505e52b611e682c6f3b34411a07c00a34f2b7	https://github.com/servo/servo/pull/31187	layout: Round `clientTop`, etc queries to pixels properly (#31187)
         +++ bbba83927890b706d48e4cc5fe24671e595e39d7	https://github.com/servo/servo/pull/31172	Remove the libsimpleservo C API (#31172)
     >>> 2024-01-29T06:19:13Z
@@ -143,7 +149,7 @@ We’ve also made some other dev changes:
     >>> 2024-02-03T06:19:50Z
         +++ 436e949296890b5388af4d5a48cf139ceaa2cc58	https://github.com/servo/servo/pull/31253	layout: return None bounding box when no nodes found (#31253)
     >>> 2024-02-04T06:07:47Z
-    +++ d7d0451424faf1bf9c705068bea1aa8cf582d6ad	https://github.com/servo/servo/pull/31209	libservo: Handle GL video decoding setup internally (#31209)
+        +++ d7d0451424faf1bf9c705068bea1aa8cf582d6ad	https://github.com/servo/servo/pull/31209	libservo: Handle GL video decoding setup internally (#31209)
     >>> 2024-02-05T06:07:59Z
     >>> 2024-02-07T06:16:45Z
     +++ d8958f96933e3691c10ff1347e71735b933f9398	https://github.com/servo/servo/pull/31270	android: disable JIT in SM to workaround #31134 (#31270)
@@ -173,7 +179,7 @@ We’ve also made some other dev changes:
     >>> 2024-02-16T06:08:03Z
     >>> 2024-02-17T06:16:24Z
         +++ 328c376ff15c0776e453989468f19670ffc9032d	https://github.com/servo/servo/pull/31317	WebIDL: Use Uint8ClampedArray instead of raw JSObject in bindings (#31317)
-    +++ 7e9be5ae9f9a1bc5856fe51b6193b1e7ef58c985	https://github.com/servo/servo/pull/31347	ci: Merge similar try jobs when possible (#31347)
+        +++ 7e9be5ae9f9a1bc5856fe51b6193b1e7ef58c985	https://github.com/servo/servo/pull/31347	ci: Merge similar try jobs when possible (#31347)
         +++ 9a6973d629a6560367db8542cc958a41a1c83902	https://github.com/servo/servo/pull/31358	style: Remove dependency on servo_url (#31358)
         +++ c3e3e72cf29ce6daacebf8da4d4f175a54babd0d	https://github.com/servo/servo/pull/31325	WebIDL: Use ArrayBufferViewU8 instead of raw JSObject in bindings (#31325)
         +++ aeb2503fdb277d9462cdd6901837fea11cd08bf9	https://github.com/servo/servo/pull/31363	style: Reduce diff with upstream derive_common and malloc_size_of (#31363)
