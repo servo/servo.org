@@ -51,6 +51,13 @@ Since the web platform almost always requires layout to run synchronously with s
 To make these forks easier to update, we’ve &lt;strong&gt;split WebRender and Stylo out of &lt;a href=&quot;https://github.com/servo/servo&quot;&gt;our main repo&lt;/a&gt;&lt;/strong&gt; (@mrobinson, @delan, &lt;a href=&quot;https://github.com/servo/servo/pull/31212&quot;&gt;#31212&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31351&quot;&gt;#31351&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31349&quot;&gt;#31349&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31358&quot;&gt;#31358&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31363&quot;&gt;#31363&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31365&quot;&gt;#31365&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31408&quot;&gt;#31408&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31387&quot;&gt;#31387&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31411&quot;&gt;#31411&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31350&quot;&gt;#31350&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;We’ve fixed one of the blockers for building Servo with clang 16 (@mrobinson, &lt;a href=&quot;https://github.com/servo/servo/pull/31306&quot;&gt;#31306&lt;/a&gt;), but a blocker for clang 15 still remains.
 See &lt;a href=&quot;https://github.com/servo/servo/issues/31059&quot;&gt;#31059&lt;/a&gt; for more details, including how to build Servo against clang 14.&lt;/p&gt;
+&lt;p&gt;We’ve also made some other dev changes:&lt;/p&gt;
+&lt;!-- - you can now use `mach try` to test your branch on CI (@sagudev, @mrobinson, [#31141](https://github.com/servo/servo/pull/31141), [#31290](https://github.com/servo/servo/pull/31290)) — docs coming soon --&gt;
+&lt;ul&gt;
+&lt;li&gt;we’ve removed the unmaintained &lt;strong&gt;libsimpleservo C API&lt;/strong&gt; (@mrobinson, &lt;a href=&quot;https://github.com/servo/servo/pull/31172&quot;&gt;#31172&lt;/a&gt;), though we are open to adding a new C API someday&lt;/li&gt;
+&lt;li&gt;we’ve added support for building Servo on &lt;strong&gt;Asahi Linux&lt;/strong&gt; (@arrynfr, &lt;a href=&quot;https://github.com/servo/servo/pull/31207&quot;&gt;#31207&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;we’ve fixed problems building Servo on &lt;strong&gt;Debian&lt;/strong&gt; (@mrobinson, @atbrakhi, &lt;a href=&quot;https://github.com/servo/servo/pull/31281&quot;&gt;#31281&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31276&quot;&gt;#31276&lt;/a&gt;) and &lt;strong&gt;NixOS&lt;/strong&gt; (@syvb, &lt;a href=&quot;https://github.com/servo/servo/pull/31231&quot;&gt;#31231&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;!--
 - fosdem backannounce
     - plus https://blogs.igalia.com/mrego/servo-at-fosdem-2024/
@@ -69,7 +76,7 @@ See &lt;a href=&quot;https://github.com/servo/servo/issues/31059&quot;&gt;#31059
     &gt;&gt;&gt; 2024-01-25T06:07:31Z
     &gt;&gt;&gt; 2024-01-26T06:17:05Z
     &gt;&gt;&gt; 2024-01-27T06:16:06Z
-    !!! a5c512808a0fd58a46220c2651003143add87543	https://github.com/servo/servo/pull/31141	Matrix in CI and `mach try` with presets (#31141)
+        !!! a5c512808a0fd58a46220c2651003143add87543	https://github.com/servo/servo/pull/31141	Matrix in CI and `mach try` with presets (#31141)
     &gt;&gt;&gt; 2024-01-28T06:10:48Z
     &gt;&gt;&gt; 2024-01-29T06:19:13Z
     &gt;&gt;&gt; 2024-01-30T11:05:07Z
@@ -123,9 +130,9 @@ See &lt;a href=&quot;https://github.com/servo/servo/issues/31059&quot;&gt;#31059
     &gt;&gt;&gt; 2024-01-28T06:10:48Z
     +++ bc211f8ff387ea59bc8af7bb7394c7be7ca69597	https://github.com/servo/servo/pull/31184	gfx: Rename `WebrenderSurfman` to `RenderingContext` and move to `gfx` (#31184)
         +++ bbe505e52b611e682c6f3b34411a07c00a34f2b7	https://github.com/servo/servo/pull/31187	layout: Round `clientTop`, etc queries to pixels properly (#31187)
-    +++ bbba83927890b706d48e4cc5fe24671e595e39d7	https://github.com/servo/servo/pull/31172	Remove the libsimpleservo C API (#31172)
+        +++ bbba83927890b706d48e4cc5fe24671e595e39d7	https://github.com/servo/servo/pull/31172	Remove the libsimpleservo C API (#31172)
     &gt;&gt;&gt; 2024-01-29T06:19:13Z
-    +++ 271176094d82654c4f471e5865d9f7be66dc937d	https://github.com/servo/servo/pull/31207	Update build script to support asahi linux (#31207)
+        +++ 271176094d82654c4f471e5865d9f7be66dc937d	https://github.com/servo/servo/pull/31207	Update build script to support asahi linux (#31207)
     &gt;&gt;&gt; 2024-01-30T11:05:07Z
         +++ 38d9245726c5d6d912fca1bda579f9f5fa96bbfa	https://github.com/servo/servo/pull/31210	Don&#39;t use cached client_rect() when a reflow is needed (#31210)
         +++ 742d3ed97f8e439a5807dbbfece6c23935525bce	https://github.com/servo/servo/pull/31167	Make HeapFloat32Array generic (#31167)
@@ -134,7 +141,7 @@ See &lt;a href=&quot;https://github.com/servo/servo/issues/31059&quot;&gt;#31059
         +++ 967925c119f7af5131e4857aadeeaafb66f5fa33	https://github.com/servo/servo/pull/31189	webidlg: Handle `Float64Array` as a `TypedArray` rather than a raw `JSObject` (#31189)
     &gt;&gt;&gt; 2024-02-01T06:11:43Z
     &gt;&gt;&gt; 2024-02-02T06:15:54Z
-    +++ f27227b1db5d29918d5cbf2b8a6ba31545431dd0	https://github.com/servo/servo/pull/31231	Make Android build optional on Nix (#31231)
+        +++ f27227b1db5d29918d5cbf2b8a6ba31545431dd0	https://github.com/servo/servo/pull/31231	Make Android build optional on Nix (#31231)
     &gt;&gt;&gt; 2024-02-03T06:19:50Z
         +++ 436e949296890b5388af4d5a48cf139ceaa2cc58	https://github.com/servo/servo/pull/31253	layout: return None bounding box when no nodes found (#31253)
     &gt;&gt;&gt; 2024-02-04T06:07:47Z
@@ -149,10 +156,10 @@ See &lt;a href=&quot;https://github.com/servo/servo/issues/31059&quot;&gt;#31059
         +++ b2ae3928ab55a6c50d7c4eb0f6ed686c1667ff53	https://github.com/servo/servo/pull/31258	canvas2d: Implement `.reset()` (#31258)
     &gt;&gt;&gt; 2024-02-08T06:10:45Z
         +++ 20404a72c0f068771a04e492d3343d4d6ad2ecf3	https://github.com/servo/servo/pull/31268	script: implement navigator.hardwareConcurrency (#31268)
-    +++ 38b11afb22b31002200d02e955e969bcda9c121c	https://github.com/servo/servo/pull/31281	bootstrap: More resiliently install Deiban-like platform dependencies (#31281)
-    +++ ba1803d30ad822250ac9827f35331250cec5fbf6	https://github.com/servo/servo/pull/31276	Fix ./mach bootstrap failure in debian (#31276)
+        +++ 38b11afb22b31002200d02e955e969bcda9c121c	https://github.com/servo/servo/pull/31281	bootstrap: More resiliently install Deiban-like platform dependencies (#31281)
+        +++ ba1803d30ad822250ac9827f35331250cec5fbf6	https://github.com/servo/servo/pull/31276	Fix ./mach bootstrap failure in debian (#31276)
     &gt;&gt;&gt; 2024-02-09T06:18:23Z
-    +++ 5facf436f6835aa53a500ae99168b8a00ed4802c	https://github.com/servo/servo/pull/31290	mach: Make `./mach try` a little friendlier (#31290)
+        +++ 5facf436f6835aa53a500ae99168b8a00ed4802c	https://github.com/servo/servo/pull/31290	mach: Make `./mach try` a little friendlier (#31290)
     &gt;&gt;&gt; 2024-02-10T06:08:27Z
     +++ f2adcc3a12cb2e05fb650955a7756fd2fda48896	https://github.com/servo/servo/pull/31299	Fix CSSStyleDeclaration&#39;s item() to provide properties instead of values (#31299)
     &gt;&gt;&gt; 2024-02-11T06:21:18Z
