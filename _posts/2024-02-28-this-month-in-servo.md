@@ -9,15 +9,13 @@ categories:
 
 Servo has had some exciting changes land in our nightly builds over the last month:
 
-- as of 2024-01-30, we support the **&lt;table cellpadding> attribute** (@Loirooriol, [#31201](https://github.com/servo/servo/pull/31201)), fixing 7 tests and 24 subtests
-- as of 2024-02-11, you can look up **shorthands in getComputedStyle()** (@sebsebmc, [#31277](https://github.com/servo/servo/pull/31277)), fixing <!-- 26 tests and --> 549 subtests
-- as of 2024-02-11, we support **‘vertical-align’ in table cells** (@mrobinson, @Loirooriol, [#31246](https://github.com/servo/servo/pull/31246))<!--, fixing 11 tests and 19 subtests -->
-- as of 2024-02-15, we accept SVG with the **image/svg+xml mime type** (@KiChjang, [#31318](https://github.com/servo/servo/pull/31318)), fixing <!-- 10 tests and --> 103 subtests
-- as of 2024-02-20, we support non-XR **game controllers with the Gamepad API** (@msub2, [#31200](https://github.com/servo/servo/pull/31200)), fixing 61 subtests
-- as of 2024-02-21, we support **table rows, columns, and row/column groups** (@mrobinson, @Loirooriol, [#31341](https://github.com/servo/servo/pull/31341)), fixing <!-- 10 tests and --> 5888 subtests
-- as of 2024-02-23, we have basic support for **‘text-transform’** (@mrobinson, [#31396](https://github.com/servo/servo/pull/31396)), fixing 87 tests
+- as of 2024-02-07, you can **console.log() symbols and large arrays** without crashing (@syvb, [#31241](https://github.com/servo/servo/pull/31241), [#31267](https://github.com/servo/servo/pull/31267))
+- as of 2024-02-08, we support **navigator.hardwareConcurrency** (@syvb, [#31268](https://github.com/servo/servo/pull/31268))
+- as of 2024-02-11, you can look up **shorthands in getComputedStyle()** (@sebsebmc, [#31277](https://github.com/servo/servo/pull/31277))<!-- , fixing 26 tests and 549 subtests -->
+- as of 2024-02-15, we accept SVG with the **image/svg+xml mime type** (@KiChjang, [#31318](https://github.com/servo/servo/pull/31318))<!-- , fixing 10 tests and 103 subtests -->
+- as of 2024-02-20, we support non-XR **game controllers with the Gamepad API** (@msub2, [#31200](https://github.com/servo/servo/pull/31200))<!--, fixing 61 subtests -->
+- as of 2024-02-23, we have basic support for **‘text-transform’** (@mrobinson, [#31396](https://github.com/servo/servo/pull/31396))<!--, fixing 87 tests -->
   <br>— except ‘full-width’, ‘full-size-kana’, grapheme clusters, and language-specific transforms
-- as of 2024-02-24, we support inline layout for **&lt;div align> and &lt;center>** (@Loirooriol, [#31388](https://github.com/servo/servo/pull/31388))
 
 As of 2024-02-12, we have basic support for **font fallback** (@mrobinson, [#31254](https://github.com/servo/servo/pull/31254))!
 This is especially important for pages that mix text from different languages.
@@ -26,6 +24,18 @@ If you encounter text that still fails to display, be sure to check your install
 
 As of 2024-02-24, **layout now runs in the script thread**, rather than in a dedicated layout thread (@mrobinson, @jdm, [#31346](https://github.com/servo/servo/pull/31346)), though it can still spawn worker threads to parallelise layout work.
 Since the web platform almost always requires layout to run synchronously with script, this should allow us to make layout simpler and more reliable without regressing performance.
+
+Our experimental **tables support** (`--pref layout.tables.enabled`) has vastly improved:
+
+- as of 2024-01-26, we compute **table column widths** (@mrobinson, @Loiroriol, [#31165](https://github.com/servo/servo/pull/31165))
+- as of 2024-01-30, we support the **&lt;table cellpadding> attribute** (@Loirooriol, [#31201](https://github.com/servo/servo/pull/31201))<!--, fixing 7 tests and 24 subtests -->
+- as of 2024-02-11, we support **‘vertical-align’ in table cells** (@mrobinson, @Loirooriol, [#31246](https://github.com/servo/servo/pull/31246))<!--, fixing 11 tests and 19 subtests -->
+- as of <!-- 2024-01-27 --> 2024-02-14, we support **‘border-spacing’ on tables** (@mrobinson, @Loirooriol, [#31166](https://github.com/servo/servo/pull/31166), [#31337](https://github.com/servo/servo/pull/31337))
+- as of 2024-02-21, we support **rows, columns, and row/column groups** (@mrobinson, @Loirooriol, [#31341](https://github.com/servo/servo/pull/31341))<!-- , fixing 10 tests and 5888 subtests -->
+
+Together with supporting inline layout for **&lt;div align> and &lt;center>** (@Loirooriol, [#31388](https://github.com/servo/servo/pull/31388)) in 2024-02-24, we now render the classic [Space Jam](https://www.spacejam.com/1996/) website correctly when tables are enabled!
+
+We’ve also landed several DOM geometry improvements, including **correct rounding** (@mrobinson, [#31187](https://github.com/servo/servo/pull/31187)) and **layout invalidation** (@Loirooriol, [#31210](https://github.com/servo/servo/pull/31210), [#31219](https://github.com/servo/servo/pull/31219)) for clientLeft, clientTop, clientWidth, and clientHeight, as well as **correct dimensions for preloaded Image objects** (@syvb, [#31253](https://github.com/servo/servo/pull/31253)).
 
 <!--
 - fosdem backannounce
@@ -91,39 +101,40 @@ Since the web platform almost always requires layout to run synchronously with s
     >>> 2024-01-25T06:07:31Z
     +++ eb95703325aeb48d5f56a8da5b258bad608dd632	https://github.com/servo/servo/pull/30842	constellation: focusing and closing webviews (#30842)
     >>> 2024-01-26T06:17:05Z
-    +++ d68c7e7881b5c92d0b03c1b43990da26f3771615	https://github.com/servo/servo/pull/31165	layout: Implement computation of table column widths (#31165)
+        +++ d68c7e7881b5c92d0b03c1b43990da26f3771615	https://github.com/servo/servo/pull/31165	layout: Implement computation of table column widths (#31165)
     +++ 094f7845b151a54d318b40711119d1b86be75076	https://github.com/servo/servo/pull/31146	layout: Shape text only once (#31146)
     +++ bb04c97f15728d14a146f29fa1bc4d23ee96ec49	https://github.com/servo/servo/pull/31164	Use Int8array, int16array, uint16array, int32array & uint32array in WebIDL (#31164)
     >>> 2024-01-27T06:16:06Z
-    +++ 1876b492518bed60382b6c4f95c1af0a934f6af1	https://github.com/servo/servo/pull/31166	layout: Add support for table `border-spacing` (#31166)
+        +++ 1876b492518bed60382b6c4f95c1af0a934f6af1	https://github.com/servo/servo/pull/31166	layout: Add support for table `border-spacing` (#31166)
     >>> 2024-01-28T06:10:48Z
     +++ bc211f8ff387ea59bc8af7bb7394c7be7ca69597	https://github.com/servo/servo/pull/31184	gfx: Rename `WebrenderSurfman` to `RenderingContext` and move to `gfx` (#31184)
-    +++ bbe505e52b611e682c6f3b34411a07c00a34f2b7	https://github.com/servo/servo/pull/31187	layout: Round `clientTop`, etc queries to pixels properly (#31187)
+        +++ bbe505e52b611e682c6f3b34411a07c00a34f2b7	https://github.com/servo/servo/pull/31187	layout: Round `clientTop`, etc queries to pixels properly (#31187)
     +++ bbba83927890b706d48e4cc5fe24671e595e39d7	https://github.com/servo/servo/pull/31172	Remove the libsimpleservo C API (#31172)
     >>> 2024-01-29T06:19:13Z
     +++ 271176094d82654c4f471e5865d9f7be66dc937d	https://github.com/servo/servo/pull/31207	Update build script to support asahi linux (#31207)
     >>> 2024-01-30T11:05:07Z
-    +++ 38d9245726c5d6d912fca1bda579f9f5fa96bbfa	https://github.com/servo/servo/pull/31210	Don't use cached client_rect() when a reflow is needed (#31210)
+        +++ 38d9245726c5d6d912fca1bda579f9f5fa96bbfa	https://github.com/servo/servo/pull/31210	Don't use cached client_rect() when a reflow is needed (#31210)
     +++ 742d3ed97f8e439a5807dbbfece6c23935525bce	https://github.com/servo/servo/pull/31167	Make HeapFloat32Array generic (#31167)
     >>> 2024-01-31T06:11:28Z
+        +++ a4cc0c563eb4ff391ae4d5a64f147b8062531b07	https://github.com/servo/servo/pull/31219	Allow using cached client_rect() for paint-only reflow (#31219)
     +++ 967925c119f7af5131e4857aadeeaafb66f5fa33	https://github.com/servo/servo/pull/31189	webidlg: Handle `Float64Array` as a `TypedArray` rather than a raw `JSObject` (#31189)
     >>> 2024-02-01T06:11:43Z
     >>> 2024-02-02T06:15:54Z
     +++ f27227b1db5d29918d5cbf2b8a6ba31545431dd0	https://github.com/servo/servo/pull/31231	Make Android build optional on Nix (#31231)
     >>> 2024-02-03T06:19:50Z
-    +++ 436e949296890b5388af4d5a48cf139ceaa2cc58	https://github.com/servo/servo/pull/31253	layout: return None bounding box when no nodes found (#31253)
+        +++ 436e949296890b5388af4d5a48cf139ceaa2cc58	https://github.com/servo/servo/pull/31253	layout: return None bounding box when no nodes found (#31253)
     >>> 2024-02-04T06:07:47Z
     +++ d7d0451424faf1bf9c705068bea1aa8cf582d6ad	https://github.com/servo/servo/pull/31209	libservo: Handle GL video decoding setup internally (#31209)
     >>> 2024-02-05T06:07:59Z
     >>> 2024-02-07T06:16:45Z
     +++ d8958f96933e3691c10ff1347e71735b933f9398	https://github.com/servo/servo/pull/31270	android: disable JIT in SM to workaround #31134 (#31270)
-    +++ 036bca69ae90a84a414e9543c51e29c3bbe1dfac	https://github.com/servo/servo/pull/31267	Fix crash on large console log (#31267)
+        +++ 036bca69ae90a84a414e9543c51e29c3bbe1dfac	https://github.com/servo/servo/pull/31267	Fix crash on large console log (#31267)
     +++ 7f13316f24aa2ca90ac1adb47aaa1da15f60f638	https://github.com/servo/servo/pull/31230	layout: Collect both start and end baselines for fragments (#31230)
-    +++ 50c930866be9410e0e9234206683d28463a55ede	https://github.com/servo/servo/pull/31241	Make console methods take `any` instead of `string` (#31241)
+        +++ 50c930866be9410e0e9234206683d28463a55ede	https://github.com/servo/servo/pull/31241	Make console methods take `any` instead of `string` (#31241)
     +++ 4758ffabcabe901fd17c11d4eeafb7e35eb9cc12	https://github.com/servo/servo/pull/31255	Initial overview of webxr initialization (#31255)
     +++ b2ae3928ab55a6c50d7c4eb0f6ed686c1667ff53	https://github.com/servo/servo/pull/31258	canvas2d: Implement `.reset()` (#31258)
     >>> 2024-02-08T06:10:45Z
-    +++ 20404a72c0f068771a04e492d3343d4d6ad2ecf3	https://github.com/servo/servo/pull/31268	script: implement navigator.hardwareConcurrency (#31268)
+        +++ 20404a72c0f068771a04e492d3343d4d6ad2ecf3	https://github.com/servo/servo/pull/31268	script: implement navigator.hardwareConcurrency (#31268)
     +++ 38b11afb22b31002200d02e955e969bcda9c121c	https://github.com/servo/servo/pull/31281	bootstrap: More resiliently install Deiban-like platform dependencies (#31281)
     +++ ba1803d30ad822250ac9827f35331250cec5fbf6	https://github.com/servo/servo/pull/31276	Fix ./mach bootstrap failure in debian (#31276)
     >>> 2024-02-09T06:18:23Z
@@ -135,7 +146,7 @@ Since the web platform almost always requires layout to run synchronously with s
     >>> 2024-02-12T06:09:41Z
     >>> 2024-02-13T06:16:55Z
     >>> 2024-02-14T06:16:51Z
-    +++ 07c709624684e9d77c34a935c40db695b35f9073	https://github.com/servo/servo/pull/31337	Include border-spacing gutters in compute_inline_content_sizes (#31337)
+        +++ 07c709624684e9d77c34a935c40db695b35f9073	https://github.com/servo/servo/pull/31337	Include border-spacing gutters in compute_inline_content_sizes (#31337)
     +++ 9be989146d5b958cafcc930385e63595a885cb20	https://github.com/servo/servo/pull/31202	WebIDL: Use `ArrayBuffer` instead of raw `JSObject` in bindings (#31202)
     >>> 2024-02-15T06:18:22Z
     +++ 61e778c8e8fb3ef49a69423a4b955724d43bee8f	https://github.com/servo/servo/pull/31351	style: Add a `static_prefs` implementation (#31351)
@@ -307,7 +318,7 @@ From https://github.com/servo/servo
     091653417a35229439277285e19abfaf6f9d7383	https://github.com/servo/servo/pull/31178	use app unit in replaced elements (#31178)
 >>> 2024-01-31T06:11:28Z
     b2f73723f881889650304107676c110efb5ec5cd	https://github.com/servo/servo/pull/31227	build(deps): bump profiling from 1.0.13 to 1.0.14 (#31227)
-    a4cc0c563eb4ff391ae4d5a64f147b8062531b07	https://github.com/servo/servo/pull/31219	Allow using cached client_rect() for paint-only reflow (#31219)
++++ a4cc0c563eb4ff391ae4d5a64f147b8062531b07	https://github.com/servo/servo/pull/31219	Allow using cached client_rect() for paint-only reflow (#31219)
 !!! a07ad85eaa8d918c12244da61e07ff6822326abe	https://github.com/servo/servo/pull/31224	dependencies: Upgrade surfman to 0.9 (#31224)
     e7268931655b39b78c53b2f2f1a6bc8cbface83f	https://github.com/servo/servo/pull/31225	mach: Error out sooner with Python < 3.10 (#31225)
     f7ead9bcb6fca650b797a9ac53a2de13c882d86c	https://github.com/servo/servo/pull/31221	Lint layout_2013 with clippy (#31221)
