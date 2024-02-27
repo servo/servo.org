@@ -43,20 +43,26 @@ Since the web platform almost always requires layout to run synchronously with s
 &lt;/ul&gt;
 &lt;p&gt;Together with inline layout for &lt;strong&gt;&amp;lt;div align&amp;gt; and &amp;lt;center&amp;gt;&lt;/strong&gt; (@Loirooriol, &lt;a href=&quot;https://github.com/servo/servo/pull/31388&quot;&gt;#31388&lt;/a&gt;) landing in 2024-02-24, we now render the classic &lt;strong&gt;&lt;a href=&quot;https://www.spacejam.com/1996/&quot;&gt;Space Jam&lt;/a&gt;&lt;/strong&gt; website correctly when tables are enabled!&lt;/p&gt;
 &lt;p&gt;We’ve also landed several DOM geometry improvements, including &lt;strong&gt;correct rounding&lt;/strong&gt; (@mrobinson, &lt;a href=&quot;https://github.com/servo/servo/pull/31187&quot;&gt;#31187&lt;/a&gt;) and &lt;strong&gt;layout invalidation&lt;/strong&gt; (@Loirooriol, &lt;a href=&quot;https://github.com/servo/servo/pull/31210&quot;&gt;#31210&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31219&quot;&gt;#31219&lt;/a&gt;) for clientLeft, clientTop, clientWidth, and clientHeight, as well as &lt;strong&gt;correct dimensions for preloaded Image objects&lt;/strong&gt; (@syvb, &lt;a href=&quot;https://github.com/servo/servo/pull/31253&quot;&gt;#31253&lt;/a&gt;).&lt;/p&gt;
-&lt;h2 id=&quot;ci%2C-code-health%2C-and-dev-changes&quot; tabindex=&quot;-1&quot;&gt;CI, code health, and dev changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-february-2024/blog/2024/02/28/this-month-in-servo/#ci%2C-code-health%2C-and-dev-changes&quot;&gt;
+&lt;h2 id=&quot;embedding%2C-code-health%2C-and-dev-changes&quot; tabindex=&quot;-1&quot;&gt;Embedding, code health, and dev changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-february-2024/blog/2024/02/28/this-month-in-servo/#embedding%2C-code-health%2C-and-dev-changes&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We’ve landed a few embedding improvements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;we’ve removed several mandatory &lt;code&gt;WindowMethods&lt;/code&gt; relating to OpenGL video playback (@mrobinson, &lt;a href=&quot;https://github.com/servo/servo/pull/31209&quot;&gt;#31209&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;we’ve removed &lt;code&gt;webrender_surfman&lt;/code&gt;, and &lt;code&gt;WebrenderSurfman&lt;/code&gt; is now in &lt;code&gt;gfx&lt;/code&gt; as &lt;code&gt;RenderingContext&lt;/code&gt; (@mrobinson, &lt;a href=&quot;https://github.com/servo/servo/pull/31184&quot;&gt;#31184&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;We’ve finished migrating our DOM bindings to use typed arrays where possible (@Taym95, &lt;a href=&quot;https://github.com/servo/servo/pull/31145&quot;&gt;#31145&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31164&quot;&gt;#31164&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31167&quot;&gt;#31167&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31189&quot;&gt;#31189&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31202&quot;&gt;#31202&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31317&quot;&gt;#31317&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31325&quot;&gt;#31325&lt;/a&gt;), as part of an effort to &lt;strong&gt;reduce our unsafe code surface&lt;/strong&gt; (&lt;a href=&quot;https://github.com/servo/servo/issues/30889&quot;&gt;#30889&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/issues/30862&quot;&gt;#30862&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/servo/webrender&quot;&gt;WebRender&lt;/a&gt; and &lt;a href=&quot;https://github.com/servo/stylo&quot;&gt;Stylo&lt;/a&gt; are two major components of Servo that have been adopted by Firefox, making Servo’s versions of them a downstream fork.
 To make these forks easier to update, we’ve &lt;strong&gt;split WebRender and Stylo out of &lt;a href=&quot;https://github.com/servo/servo&quot;&gt;our main repo&lt;/a&gt;&lt;/strong&gt; (@mrobinson, @delan, &lt;a href=&quot;https://github.com/servo/servo/pull/31212&quot;&gt;#31212&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31351&quot;&gt;#31351&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31349&quot;&gt;#31349&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31358&quot;&gt;#31358&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31363&quot;&gt;#31363&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31365&quot;&gt;#31365&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31408&quot;&gt;#31408&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31387&quot;&gt;#31387&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31411&quot;&gt;#31411&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31350&quot;&gt;#31350&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;We’ve fixed one of the blockers for building Servo with clang 16 (@mrobinson, &lt;a href=&quot;https://github.com/servo/servo/pull/31306&quot;&gt;#31306&lt;/a&gt;), but a blocker for clang 15 still remains.
 See &lt;a href=&quot;https://github.com/servo/servo/issues/31059&quot;&gt;#31059&lt;/a&gt; for more details, including how to build Servo against clang 14.&lt;/p&gt;
 &lt;p&gt;We’ve also made some other dev changes:&lt;/p&gt;
-&lt;!-- - you can now use `mach try` to test your branch on CI (@sagudev, @mrobinson, [#31141](https://github.com/servo/servo/pull/31141), [#31290](https://github.com/servo/servo/pull/31290)) — docs coming soon --&gt;
 &lt;ul&gt;
 &lt;li&gt;we’ve removed the unmaintained &lt;strong&gt;libsimpleservo C API&lt;/strong&gt; (@mrobinson, &lt;a href=&quot;https://github.com/servo/servo/pull/31172&quot;&gt;#31172&lt;/a&gt;), though we are open to adding a new C API someday&lt;/li&gt;
 &lt;li&gt;we’ve added support for building Servo on &lt;strong&gt;Asahi Linux&lt;/strong&gt; (@arrynfr, &lt;a href=&quot;https://github.com/servo/servo/pull/31207&quot;&gt;#31207&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;we’ve fixed problems building Servo on &lt;strong&gt;Debian&lt;/strong&gt; (@mrobinson, @atbrakhi, &lt;a href=&quot;https://github.com/servo/servo/pull/31281&quot;&gt;#31281&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31276&quot;&gt;#31276&lt;/a&gt;) and &lt;strong&gt;NixOS&lt;/strong&gt; (@syvb, &lt;a href=&quot;https://github.com/servo/servo/pull/31231&quot;&gt;#31231&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;we’ve fixed failures when &lt;strong&gt;starting multiple CI try jobs&lt;/strong&gt; at once (@mrobinson, &lt;a href=&quot;https://github.com/servo/servo/pull/31347&quot;&gt;#31347&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;we’ve made several improvements to &lt;strong&gt;mach try&lt;/strong&gt; for starting CI try jobs (@sagudev, @mrobinson, &lt;a href=&quot;https://github.com/servo/servo/pull/31141&quot;&gt;#31141&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31290&quot;&gt;#31290&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!--
 - fosdem backannounce
@@ -128,7 +134,7 @@ See &lt;a href=&quot;https://github.com/servo/servo/issues/31059&quot;&gt;#31059
     &gt;&gt;&gt; 2024-01-27T06:16:06Z
         +++ 1876b492518bed60382b6c4f95c1af0a934f6af1	https://github.com/servo/servo/pull/31166	layout: Add support for table `border-spacing` (#31166)
     &gt;&gt;&gt; 2024-01-28T06:10:48Z
-    +++ bc211f8ff387ea59bc8af7bb7394c7be7ca69597	https://github.com/servo/servo/pull/31184	gfx: Rename `WebrenderSurfman` to `RenderingContext` and move to `gfx` (#31184)
+        +++ bc211f8ff387ea59bc8af7bb7394c7be7ca69597	https://github.com/servo/servo/pull/31184	gfx: Rename `WebrenderSurfman` to `RenderingContext` and move to `gfx` (#31184)
         +++ bbe505e52b611e682c6f3b34411a07c00a34f2b7	https://github.com/servo/servo/pull/31187	layout: Round `clientTop`, etc queries to pixels properly (#31187)
         +++ bbba83927890b706d48e4cc5fe24671e595e39d7	https://github.com/servo/servo/pull/31172	Remove the libsimpleservo C API (#31172)
     &gt;&gt;&gt; 2024-01-29T06:19:13Z
@@ -145,7 +151,7 @@ See &lt;a href=&quot;https://github.com/servo/servo/issues/31059&quot;&gt;#31059
     &gt;&gt;&gt; 2024-02-03T06:19:50Z
         +++ 436e949296890b5388af4d5a48cf139ceaa2cc58	https://github.com/servo/servo/pull/31253	layout: return None bounding box when no nodes found (#31253)
     &gt;&gt;&gt; 2024-02-04T06:07:47Z
-    +++ d7d0451424faf1bf9c705068bea1aa8cf582d6ad	https://github.com/servo/servo/pull/31209	libservo: Handle GL video decoding setup internally (#31209)
+        +++ d7d0451424faf1bf9c705068bea1aa8cf582d6ad	https://github.com/servo/servo/pull/31209	libservo: Handle GL video decoding setup internally (#31209)
     &gt;&gt;&gt; 2024-02-05T06:07:59Z
     &gt;&gt;&gt; 2024-02-07T06:16:45Z
     +++ d8958f96933e3691c10ff1347e71735b933f9398	https://github.com/servo/servo/pull/31270	android: disable JIT in SM to workaround #31134 (#31270)
@@ -175,7 +181,7 @@ See &lt;a href=&quot;https://github.com/servo/servo/issues/31059&quot;&gt;#31059
     &gt;&gt;&gt; 2024-02-16T06:08:03Z
     &gt;&gt;&gt; 2024-02-17T06:16:24Z
         +++ 328c376ff15c0776e453989468f19670ffc9032d	https://github.com/servo/servo/pull/31317	WebIDL: Use Uint8ClampedArray instead of raw JSObject in bindings (#31317)
-    +++ 7e9be5ae9f9a1bc5856fe51b6193b1e7ef58c985	https://github.com/servo/servo/pull/31347	ci: Merge similar try jobs when possible (#31347)
+        +++ 7e9be5ae9f9a1bc5856fe51b6193b1e7ef58c985	https://github.com/servo/servo/pull/31347	ci: Merge similar try jobs when possible (#31347)
         +++ 9a6973d629a6560367db8542cc958a41a1c83902	https://github.com/servo/servo/pull/31358	style: Remove dependency on servo_url (#31358)
         +++ c3e3e72cf29ce6daacebf8da4d4f175a54babd0d	https://github.com/servo/servo/pull/31325	WebIDL: Use ArrayBufferViewU8 instead of raw JSObject in bindings (#31325)
         +++ aeb2503fdb277d9462cdd6901837fea11cd08bf9	https://github.com/servo/servo/pull/31363	style: Reduce diff with upstream derive_common and malloc_size_of (#31363)
