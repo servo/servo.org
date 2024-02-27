@@ -206,6 +206,7 @@
   <p>Servo has had some exciting changes land in our nightly builds over the last month:</p>
 <ul>
 <li>as of 2024-02-07, you can <strong>console.log() symbols and large arrays</strong> without crashing (@syvb, <a href="https://github.com/servo/servo/pull/31241">#31241</a>, <a href="https://github.com/servo/servo/pull/31267">#31267</a>)</li>
+<li>as of 2024-02-07, we support <strong>CanvasRenderingContext2D.reset()</strong> (@syvb, <a href="https://github.com/servo/servo/pull/31258">#31258</a>)</li>
 <li>as of 2024-02-08, we support <strong>navigator.hardwareConcurrency</strong> (@syvb, <a href="https://github.com/servo/servo/pull/31268">#31268</a>)</li>
 <li>as of 2024-02-11, you can look up <strong>shorthands in getComputedStyle()</strong> (@sebsebmc, <a href="https://github.com/servo/servo/pull/31277">#31277</a>)<!-- , fixing 26 tests and 549 subtests --></li>
 <li>as of 2024-02-15, we accept SVG with the <strong>image/svg+xml mime type</strong> (@KiChjang, <a href="https://github.com/servo/servo/pull/31318">#31318</a>)<!-- , fixing 10 tests and 103 subtests --></li>
@@ -229,6 +230,7 @@ Since the web platform almost always requires layout to run synchronously with s
 </ul>
 <p>Together with supporting inline layout for <strong>&lt;div align&gt; and &lt;center&gt;</strong> (@Loirooriol, <a href="https://github.com/servo/servo/pull/31388">#31388</a>) in 2024-02-24, we now render the classic <a href="https://www.spacejam.com/1996/">Space Jam</a> website correctly when tables are enabled!</p>
 <p>We’ve also landed several DOM geometry improvements, including <strong>correct rounding</strong> (@mrobinson, <a href="https://github.com/servo/servo/pull/31187">#31187</a>) and <strong>layout invalidation</strong> (@Loirooriol, <a href="https://github.com/servo/servo/pull/31210">#31210</a>, <a href="https://github.com/servo/servo/pull/31219">#31219</a>) for clientLeft, clientTop, clientWidth, and clientHeight, as well as <strong>correct dimensions for preloaded Image objects</strong> (@syvb, <a href="https://github.com/servo/servo/pull/31253">#31253</a>).</p>
+<p>We’ve finished migrating our DOM bindings to use typed arrays where possible (@Taym95, <a href="https://github.com/servo/servo/pull/31145">#31145</a>, <a href="https://github.com/servo/servo/pull/31164">#31164</a>, <a href="https://github.com/servo/servo/pull/31167">#31167</a>, <a href="https://github.com/servo/servo/pull/31189">#31189</a>, <a href="https://github.com/servo/servo/pull/31202">#31202</a>, <a href="https://github.com/servo/servo/pull/31317">#31317</a>, <a href="https://github.com/servo/servo/pull/31325">#31325</a>), as part of an effort to <strong>reduce our unsafe code surface</strong> (<a href="https://github.com/servo/servo/issues/30889">#30889</a>, <a href="https://github.com/servo/servo/issues/30862">#30862</a>).</p>
 <!--
 - fosdem backannounce
     - plus https://blogs.igalia.com/mrego/servo-at-fosdem-2024/
@@ -239,8 +241,8 @@ Since the web platform almost always requires layout to run synchronously with s
 - layout
     - DONE chinese font fallback
     - DONE run layout in script thread
-    - tables
-    - space jam
+    - DONE tables
+    - DONE space jam
 - externals
 - mach try
 - commits marked !!! in nightlies 2024-01-25 through 2024-02-26
@@ -295,7 +297,7 @@ Since the web platform almost always requires layout to run synchronously with s
     >>> 2024-01-26T06:17:05Z
         +++ d68c7e7881b5c92d0b03c1b43990da26f3771615	https://github.com/servo/servo/pull/31165	layout: Implement computation of table column widths (#31165)
     +++ 094f7845b151a54d318b40711119d1b86be75076	https://github.com/servo/servo/pull/31146	layout: Shape text only once (#31146)
-    +++ bb04c97f15728d14a146f29fa1bc4d23ee96ec49	https://github.com/servo/servo/pull/31164	Use Int8array, int16array, uint16array, int32array & uint32array in WebIDL (#31164)
+        +++ bb04c97f15728d14a146f29fa1bc4d23ee96ec49	https://github.com/servo/servo/pull/31164	Use Int8array, int16array, uint16array, int32array & uint32array in WebIDL (#31164)
     >>> 2024-01-27T06:16:06Z
         +++ 1876b492518bed60382b6c4f95c1af0a934f6af1	https://github.com/servo/servo/pull/31166	layout: Add support for table `border-spacing` (#31166)
     >>> 2024-01-28T06:10:48Z
@@ -306,10 +308,10 @@ Since the web platform almost always requires layout to run synchronously with s
     +++ 271176094d82654c4f471e5865d9f7be66dc937d	https://github.com/servo/servo/pull/31207	Update build script to support asahi linux (#31207)
     >>> 2024-01-30T11:05:07Z
         +++ 38d9245726c5d6d912fca1bda579f9f5fa96bbfa	https://github.com/servo/servo/pull/31210	Don't use cached client_rect() when a reflow is needed (#31210)
-    +++ 742d3ed97f8e439a5807dbbfece6c23935525bce	https://github.com/servo/servo/pull/31167	Make HeapFloat32Array generic (#31167)
+        +++ 742d3ed97f8e439a5807dbbfece6c23935525bce	https://github.com/servo/servo/pull/31167	Make HeapFloat32Array generic (#31167)
     >>> 2024-01-31T06:11:28Z
         +++ a4cc0c563eb4ff391ae4d5a64f147b8062531b07	https://github.com/servo/servo/pull/31219	Allow using cached client_rect() for paint-only reflow (#31219)
-    +++ 967925c119f7af5131e4857aadeeaafb66f5fa33	https://github.com/servo/servo/pull/31189	webidlg: Handle `Float64Array` as a `TypedArray` rather than a raw `JSObject` (#31189)
+        +++ 967925c119f7af5131e4857aadeeaafb66f5fa33	https://github.com/servo/servo/pull/31189	webidlg: Handle `Float64Array` as a `TypedArray` rather than a raw `JSObject` (#31189)
     >>> 2024-02-01T06:11:43Z
     >>> 2024-02-02T06:15:54Z
     +++ f27227b1db5d29918d5cbf2b8a6ba31545431dd0	https://github.com/servo/servo/pull/31231	Make Android build optional on Nix (#31231)
@@ -324,7 +326,7 @@ Since the web platform almost always requires layout to run synchronously with s
     +++ 7f13316f24aa2ca90ac1adb47aaa1da15f60f638	https://github.com/servo/servo/pull/31230	layout: Collect both start and end baselines for fragments (#31230)
         +++ 50c930866be9410e0e9234206683d28463a55ede	https://github.com/servo/servo/pull/31241	Make console methods take `any` instead of `string` (#31241)
     +++ 4758ffabcabe901fd17c11d4eeafb7e35eb9cc12	https://github.com/servo/servo/pull/31255	Initial overview of webxr initialization (#31255)
-    +++ b2ae3928ab55a6c50d7c4eb0f6ed686c1667ff53	https://github.com/servo/servo/pull/31258	canvas2d: Implement `.reset()` (#31258)
+        +++ b2ae3928ab55a6c50d7c4eb0f6ed686c1667ff53	https://github.com/servo/servo/pull/31258	canvas2d: Implement `.reset()` (#31258)
     >>> 2024-02-08T06:10:45Z
         +++ 20404a72c0f068771a04e492d3343d4d6ad2ecf3	https://github.com/servo/servo/pull/31268	script: implement navigator.hardwareConcurrency (#31268)
     +++ 38b11afb22b31002200d02e955e969bcda9c121c	https://github.com/servo/servo/pull/31281	bootstrap: More resiliently install Deiban-like platform dependencies (#31281)
@@ -339,16 +341,16 @@ Since the web platform almost always requires layout to run synchronously with s
     >>> 2024-02-13T06:16:55Z
     >>> 2024-02-14T06:16:51Z
         +++ 07c709624684e9d77c34a935c40db695b35f9073	https://github.com/servo/servo/pull/31337	Include border-spacing gutters in compute_inline_content_sizes (#31337)
-    +++ 9be989146d5b958cafcc930385e63595a885cb20	https://github.com/servo/servo/pull/31202	WebIDL: Use `ArrayBuffer` instead of raw `JSObject` in bindings (#31202)
+        +++ 9be989146d5b958cafcc930385e63595a885cb20	https://github.com/servo/servo/pull/31202	WebIDL: Use `ArrayBuffer` instead of raw `JSObject` in bindings (#31202)
     >>> 2024-02-15T06:18:22Z
     +++ 61e778c8e8fb3ef49a69423a4b955724d43bee8f	https://github.com/servo/servo/pull/31351	style: Add a `static_prefs` implementation (#31351)
     +++ 14a2c43c75181f9697ffb920e88e01fe9bc9739d	https://github.com/servo/servo/pull/31349	style: Reduce Servo's diff with upstream `to_shmem` (#31349)
     >>> 2024-02-16T06:08:03Z
     >>> 2024-02-17T06:16:24Z
-    +++ 328c376ff15c0776e453989468f19670ffc9032d	https://github.com/servo/servo/pull/31317	WebIDL: Use Uint8ClampedArray instead of raw JSObject in bindings (#31317)
+        +++ 328c376ff15c0776e453989468f19670ffc9032d	https://github.com/servo/servo/pull/31317	WebIDL: Use Uint8ClampedArray instead of raw JSObject in bindings (#31317)
     +++ 7e9be5ae9f9a1bc5856fe51b6193b1e7ef58c985	https://github.com/servo/servo/pull/31347	ci: Merge similar try jobs when possible (#31347)
     +++ 9a6973d629a6560367db8542cc958a41a1c83902	https://github.com/servo/servo/pull/31358	style: Remove dependency on servo_url (#31358)
-    +++ c3e3e72cf29ce6daacebf8da4d4f175a54babd0d	https://github.com/servo/servo/pull/31325	WebIDL: Use ArrayBufferViewU8 instead of raw JSObject in bindings (#31325)
+        +++ c3e3e72cf29ce6daacebf8da4d4f175a54babd0d	https://github.com/servo/servo/pull/31325	WebIDL: Use ArrayBufferViewU8 instead of raw JSObject in bindings (#31325)
     +++ aeb2503fdb277d9462cdd6901837fea11cd08bf9	https://github.com/servo/servo/pull/31363	style: Reduce diff with upstream derive_common and malloc_size_of (#31363)
     >>> 2024-02-20T06:09:45Z
     +++ b9935188927b5ab294ae8bf68a848d254e66aa28	https://github.com/servo/servo/pull/31374	Check for XML and XMLS namespace  during 'locating a namespace' (#31374)
