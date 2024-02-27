@@ -9,11 +9,34 @@ categories:
 
 Servo has had some exciting changes land in our nightly builds over the last month:
 
+- as of 2024-01-30, we support the **&lt;table cellpadding> attribute** (@Loirooriol, [#31201](https://github.com/servo/servo/pull/31201)), fixing 7 tests and 24 subtests
+- as of 2024-02-11, you can look up **shorthands in getComputedStyle()** (@sebsebmc, [#31277](https://github.com/servo/servo/pull/31277)), fixing <!-- 26 tests and --> 549 subtests
+- as of 2024-02-11, we support **‘vertical-align’ in table cells** (@mrobinson, @Loirooriol, [#31246](https://github.com/servo/servo/pull/31246))<!--, fixing 11 tests and 19 subtests -->
+- as of 2024-02-15, we accept SVG with the **image/svg+xml mime type** (@KiChjang, [#31318](https://github.com/servo/servo/pull/31318)), fixing <!-- 10 tests and --> 103 subtests
+- as of 2024-02-20, we support non-XR **game controllers with the Gamepad API** (@msub2, [#31200](https://github.com/servo/servo/pull/31200)), fixing 61 subtests
+- as of 2024-02-21, we support **table rows, columns, and row/column groups** (@mrobinson, @Loirooriol, [#31341](https://github.com/servo/servo/pull/31341)), fixing <!-- 10 tests and --> 5888 subtests
+- as of 2024-02-23, we have basic support for **‘text-transform’** (@mrobinson, [#31396](https://github.com/servo/servo/pull/31396)), fixing 87 tests
+  <br>— except ‘full-width’, ‘full-size-kana’, grapheme clusters, and language-specific transforms
+- as of 2024-02-24, we support inline layout for **&lt;div align> and &lt;center>** (@Loirooriol, [#31388](https://github.com/servo/servo/pull/31388))
+
+As of 2024-02-12, we have basic support for **font fallback** (@mrobinson, [#31254](https://github.com/servo/servo/pull/31254))!
+This is especially important for pages that mix text from different languages.
+More work is needed to support shaping across element boundaries and shaping complex scripts like Arabic, but the current version should be enough for Chinese, Japanese, and Korean.
+If you encounter text that still fails to display, be sure to check your installed fonts against the page styles and Servo’s default font lists ([Windows](https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/windows/font_list.rs), [macOS](https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/macos/font_list.rs), [Linux](https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/freetype/font_list.rs)).
+
+As of 2024-02-24, **layout now runs in the script thread**, rather than in a dedicated layout thread (@mrobinson, @jdm, [#31346](https://github.com/servo/servo/pull/31346)), though it can still spawn worker threads to parallelise layout work.
+Since the web platform almost always requires layout to run synchronously with script, this should allow us to make layout simpler and more reliable without regressing performance.
+
 <!--
+- fosdem backannounce
+    - plus https://blogs.igalia.com/mrego/servo-at-fosdem-2024/
+- ossna announce
 - wpt
+    - as of 2024-02-26, surpassed legacy in /css/ (63.6% vs 63.5%)
+    - as of 2024-02-09, surpassed legacy in key CSS2 tests (84.2% vs 82.8%)
 - layout
-    - chinese font fallback
-    - run layout in script thread
+    - DONE chinese font fallback
+    - DONE run layout in script thread
     - tables
     - space jam
 - externals
@@ -26,7 +49,7 @@ Servo has had some exciting changes land in our nightly builds over the last mon
     >>> 2024-01-28T06:10:48Z
     >>> 2024-01-29T06:19:13Z
     >>> 2024-01-30T11:05:07Z
-    !!! 7d1b19c865855101561dd2030631feed2409a96d	https://github.com/servo/servo/pull/31201	Add support for cellpadding attribute (#31201)
+        !!! 7d1b19c865855101561dd2030631feed2409a96d	https://github.com/servo/servo/pull/31201	Add support for cellpadding attribute (#31201)
     >>> 2024-01-31T06:11:28Z
     !!! a07ad85eaa8d918c12244da61e07ff6822326abe	https://github.com/servo/servo/pull/31224	dependencies: Upgrade surfman to 0.9 (#31224)
     !!! 7f0d0830e779f37da8aa7f7025edcebe57b2db26	https://github.com/servo/servo/pull/31212	deps: Stop vendoring WebRender (#31212)
@@ -41,27 +64,27 @@ Servo has had some exciting changes land in our nightly builds over the last mon
     !!! f6b81a97f39a157347adc13d312e2ee5fad881d3	https://github.com/servo/servo/pull/31292	layout: Use `BoxFragment` border widths for display list generation (#31292)
     >>> 2024-02-10T06:08:27Z
     >>> 2024-02-11T06:21:18Z
-    !!! 19667e117ad1e47d76a93ff7b028f712a672c234	https://github.com/servo/servo/pull/31277	layout: Respond to shorthand property requests with real values (#31277)
-    !!! 35fb95ca8586f404795c3f5fae4d975d8d5a7ef4	https://github.com/servo/servo/pull/31246	layout: Start work on table row height and vertical-align (#31246)
+        !!! 19667e117ad1e47d76a93ff7b028f712a672c234	https://github.com/servo/servo/pull/31277	layout: Respond to shorthand property requests with real values (#31277)
+        !!! 35fb95ca8586f404795c3f5fae4d975d8d5a7ef4	https://github.com/servo/servo/pull/31246	layout: Start work on table row height and vertical-align (#31246)
     !!! ee32212437795d938808430fb1a990727dbfbd81	https://github.com/servo/servo/pull/31306	Update mozangle and mozjs in order to use bindgen 0.69.4 (#31306)
     >>> 2024-02-12T06:09:41Z
-    !!! cdc3c369f0bbc338c20df5b50ecaa9b6781aea65	https://github.com/servo/servo/pull/31254	layout: Implement support for font fallback (#31254)
+        !!! cdc3c369f0bbc338c20df5b50ecaa9b6781aea65	https://github.com/servo/servo/pull/31254	layout: Implement support for font fallback (#31254)
     >>> 2024-02-13T06:16:55Z
     >>> 2024-02-14T06:16:51Z
     >>> 2024-02-15T06:18:22Z
-    !!! 123854faeedfb61415f0beac93531500137a7d01	https://github.com/servo/servo/pull/31318	Support the parsing of image/svg+xml elements (#31318)
+        !!! 123854faeedfb61415f0beac93531500137a7d01	https://github.com/servo/servo/pull/31318	Support the parsing of image/svg+xml elements (#31318)
     >>> 2024-02-16T06:08:03Z
     >>> 2024-02-17T06:16:24Z
     >>> 2024-02-20T06:09:45Z
-    !!! c999d4546c7dbfee670da38553dd95929c05b82b	https://github.com/servo/servo/pull/31200	Implement non-XR Gamepad discovery and input (#31200)
+        !!! c999d4546c7dbfee670da38553dd95929c05b82b	https://github.com/servo/servo/pull/31200	Implement non-XR Gamepad discovery and input (#31200)
     >>> 2024-02-21T06:10:25Z
-    !!! 02ae1f448ef3cae3cd0a58dbd145a741b8561f5b	https://github.com/servo/servo/pull/31341	layout: Add support for table rows, columns, rowgroups and colgroups (#31341)
+        !!! 02ae1f448ef3cae3cd0a58dbd145a741b8561f5b	https://github.com/servo/servo/pull/31341	layout: Add support for table rows, columns, rowgroups and colgroups (#31341)
     >>> 2024-02-22T06:15:41Z
     >>> 2024-02-23T06:20:06Z
-    !!! d8b326528b3d0646ef08714b87958f701cf89c88	https://github.com/servo/servo/pull/31396	layout: Add initial support for `text-transform` (#31396)
+        !!! d8b326528b3d0646ef08714b87958f701cf89c88	https://github.com/servo/servo/pull/31396	layout: Add initial support for `text-transform` (#31396)
     >>> 2024-02-24T06:18:05Z
-    !!! 38d2ad95928c4b5c1feac2e615724445d2ec9474	https://github.com/servo/servo/pull/31388	Support <div align="..."> and <center> on inline layout (#31388)
-    !!! 9c0561536d37f64c028d67648091a314b5b88f6f	https://github.com/servo/servo/pull/31346	script: Do not run layout in a thread (#31346)
+        !!! 38d2ad95928c4b5c1feac2e615724445d2ec9474	https://github.com/servo/servo/pull/31388	Support <div align="..."> and <center> on inline layout (#31388)
+        !!! 9c0561536d37f64c028d67648091a314b5b88f6f	https://github.com/servo/servo/pull/31346	script: Do not run layout in a thread (#31346)
     >>> 2024-02-25T07:06:59Z
     >>> 2024-02-26T06:08:38Z
 - commits marked +++ in nightlies 2024-01-25 through 2024-02-26
@@ -140,6 +163,26 @@ Servo has had some exciting changes land in our nightly builds over the last mon
     +++ e078a9981768d7523abba57b6e86f4874dcbf2fd	https://github.com/servo/servo/pull/31411	style: Remove dependency on servo_config (was #31409) (#31411)
     >>> 2024-02-25T07:06:59Z
     >>> 2024-02-26T06:08:38Z
+-->
+
+<!--
+$ fixcounts() { curl -fsSLO "https://github.com/servo/servo/pull/$1.patch" && printf '%s tests and %s subtests\n' "$(< "$1.patch" rg '^---|^[+][+][+] /dev/null' | rg -B1 /dev/null | rg '[.]ini$' | wc -l)" "$(< "$1.patch" rg '^-' | rg FAIL | wc -l)"; }
+$ fixcounts 31277
+26 tests and 549 subtests
+$ fixcounts 31318
+10 tests and 103 subtests
+$ fixcounts 31396
+87 tests and 121 subtests
+$ fixcounts 31200
+0 tests and 61 subtests
+$ fixcounts 31292
+73 tests and 73 subtests
+$ fixcounts 31201
+7 tests and 24 subtests
+$ fixcounts 31341
+10 tests and 5888 subtests
+$ fixcounts 31246
+11 tests and 19 subtests
 -->
 
 <!--
