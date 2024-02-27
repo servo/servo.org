@@ -7,12 +7,13 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-Servo has had some exciting changes land in our nightly builds over the last month:
+A couple of weeks ago, Servo surpassed its legacy layout engine in a core set of CSS2 test suites (84.2% vs 82.8% in legacy), but now we’ve **surpassed legacy in the whole CSS test suite** (63.6% vs 63.5%) as well!
+How did we get there?
 
 - as of 2024-02-07, you can **console.log() symbols and large arrays** without crashing (@syvb, [#31241](https://github.com/servo/servo/pull/31241), [#31267](https://github.com/servo/servo/pull/31267))
 - as of 2024-02-07, we support **CanvasRenderingContext2D.reset()** (@syvb, [#31258](https://github.com/servo/servo/pull/31258))
 - as of 2024-02-08, we support **navigator.hardwareConcurrency** (@syvb, [#31268](https://github.com/servo/servo/pull/31268))
-- as of 2024-02-11, you can look up **shorthands in getComputedStyle()** (@sebsebmc, [#31277](https://github.com/servo/servo/pull/31277))<!-- , fixing 26 tests and 549 subtests -->
+- as of 2024-02-11, you can look up **shorthands like ‘margin’ in getComputedStyle()** (@sebsebmc, [#31277](https://github.com/servo/servo/pull/31277))<!-- , fixing 26 tests and 549 subtests -->
 - as of 2024-02-15, we accept SVG with the **image/svg+xml mime type** (@KiChjang, [#31318](https://github.com/servo/servo/pull/31318))<!-- , fixing 10 tests and 103 subtests -->
 - as of 2024-02-20, we support non-XR **game controllers with the Gamepad API** (@msub2, [#31200](https://github.com/servo/servo/pull/31200))<!--, fixing 61 subtests -->
 - as of 2024-02-23, we have basic support for **‘text-transform’** (@mrobinson, [#31396](https://github.com/servo/servo/pull/31396))<!--, fixing 87 tests -->
@@ -34,19 +35,27 @@ Our experimental **tables support** (`--pref layout.tables.enabled`) has vastly 
 - as of <!-- 2024-01-27 --> 2024-02-14, we support **‘border-spacing’ on tables** (@mrobinson, @Loirooriol, [#31166](https://github.com/servo/servo/pull/31166), [#31337](https://github.com/servo/servo/pull/31337))
 - as of 2024-02-21, we support **rows, columns, and row/column groups** (@mrobinson, @Loirooriol, [#31341](https://github.com/servo/servo/pull/31341))<!-- , fixing 10 tests and 5888 subtests -->
 
-Together with supporting inline layout for **&lt;div align> and &lt;center>** (@Loirooriol, [#31388](https://github.com/servo/servo/pull/31388)) in 2024-02-24, we now render the classic [Space Jam](https://www.spacejam.com/1996/) website correctly when tables are enabled!
+Together with inline layout for **&lt;div align> and &lt;center>** (@Loirooriol, [#31388](https://github.com/servo/servo/pull/31388)) landing in 2024-02-24, we now render the classic **[Space Jam](https://www.spacejam.com/1996/)** website correctly when tables are enabled!
 
 We’ve also landed several DOM geometry improvements, including **correct rounding** (@mrobinson, [#31187](https://github.com/servo/servo/pull/31187)) and **layout invalidation** (@Loirooriol, [#31210](https://github.com/servo/servo/pull/31210), [#31219](https://github.com/servo/servo/pull/31219)) for clientLeft, clientTop, clientWidth, and clientHeight, as well as **correct dimensions for preloaded Image objects** (@syvb, [#31253](https://github.com/servo/servo/pull/31253)).
 
+## CI, code health, and dev changes
+
 We’ve finished migrating our DOM bindings to use typed arrays where possible (@Taym95, [#31145](https://github.com/servo/servo/pull/31145), [#31164](https://github.com/servo/servo/pull/31164), [#31167](https://github.com/servo/servo/pull/31167), [#31189](https://github.com/servo/servo/pull/31189), [#31202](https://github.com/servo/servo/pull/31202), [#31317](https://github.com/servo/servo/pull/31317), [#31325](https://github.com/servo/servo/pull/31325)), as part of an effort to **reduce our unsafe code surface** ([#30889](https://github.com/servo/servo/issues/30889), [#30862](https://github.com/servo/servo/issues/30862)).
+
+[WebRender](https://github.com/servo/webrender) and [Stylo](https://github.com/servo/stylo) are two major components of Servo that have been adopted by Firefox, making Servo’s versions of them a downstream fork.
+To make these forks easier to update, we’ve **split WebRender and Stylo out of [our main repo](https://github.com/servo/servo)** (@mrobinson, @delan, [#31212](https://github.com/servo/servo/pull/31212), [#31351](https://github.com/servo/servo/pull/31351), [#31349](https://github.com/servo/servo/pull/31349), [#31358](https://github.com/servo/servo/pull/31358), [#31363](https://github.com/servo/servo/pull/31363), [#31365](https://github.com/servo/servo/pull/31365), [#31408](https://github.com/servo/servo/pull/31408), [#31387](https://github.com/servo/servo/pull/31387), [#31411](https://github.com/servo/servo/pull/31411), [#31350](https://github.com/servo/servo/pull/31350)).
+
+We’ve fixed one of the blockers for building Servo with clang 16 (@mrobinson, [#31306](https://github.com/servo/servo/pull/31306)), but a blocker for clang 15 still remains.
+See [#31059](https://github.com/servo/servo/issues/31059) for more details, including how to build Servo against clang 14.
 
 <!--
 - fosdem backannounce
     - plus https://blogs.igalia.com/mrego/servo-at-fosdem-2024/
 - ossna announce
 - wpt
-    - as of 2024-02-26, surpassed legacy in /css/ (63.6% vs 63.5%)
-    - as of 2024-02-09, surpassed legacy in key CSS2 tests (84.2% vs 82.8%)
+    - DONE as of 2024-02-26, surpassed legacy in /css/ (63.6% vs 63.5%)
+    - DONE as of 2024-02-09, surpassed legacy in key CSS2 tests (84.2% vs 82.8%)
 - layout
     - DONE chinese font fallback
     - DONE run layout in script thread
@@ -65,7 +74,7 @@ We’ve finished migrating our DOM bindings to use typed arrays where possible (
         !!! 7d1b19c865855101561dd2030631feed2409a96d	https://github.com/servo/servo/pull/31201	Add support for cellpadding attribute (#31201)
     >>> 2024-01-31T06:11:28Z
     !!! a07ad85eaa8d918c12244da61e07ff6822326abe	https://github.com/servo/servo/pull/31224	dependencies: Upgrade surfman to 0.9 (#31224)
-    !!! 7f0d0830e779f37da8aa7f7025edcebe57b2db26	https://github.com/servo/servo/pull/31212	deps: Stop vendoring WebRender (#31212)
+        !!! 7f0d0830e779f37da8aa7f7025edcebe57b2db26	https://github.com/servo/servo/pull/31212	deps: Stop vendoring WebRender (#31212)
     >>> 2024-02-01T06:11:43Z
     >>> 2024-02-02T06:15:54Z
     >>> 2024-02-03T06:19:50Z
@@ -79,7 +88,7 @@ We’ve finished migrating our DOM bindings to use typed arrays where possible (
     >>> 2024-02-11T06:21:18Z
         !!! 19667e117ad1e47d76a93ff7b028f712a672c234	https://github.com/servo/servo/pull/31277	layout: Respond to shorthand property requests with real values (#31277)
         !!! 35fb95ca8586f404795c3f5fae4d975d8d5a7ef4	https://github.com/servo/servo/pull/31246	layout: Start work on table row height and vertical-align (#31246)
-    !!! ee32212437795d938808430fb1a990727dbfbd81	https://github.com/servo/servo/pull/31306	Update mozangle and mozjs in order to use bindgen 0.69.4 (#31306)
+        !!! ee32212437795d938808430fb1a990727dbfbd81	https://github.com/servo/servo/pull/31306	Update mozangle and mozjs in order to use bindgen 0.69.4 (#31306)
     >>> 2024-02-12T06:09:41Z
         !!! cdc3c369f0bbc338c20df5b50ecaa9b6781aea65	https://github.com/servo/servo/pull/31254	layout: Implement support for font fallback (#31254)
     >>> 2024-02-13T06:16:55Z
@@ -102,10 +111,10 @@ We’ve finished migrating our DOM bindings to use typed arrays where possible (
     >>> 2024-02-26T06:08:38Z
 - commits marked +++ in nightlies 2024-01-25 through 2024-02-26
     >>> 2024-01-25T06:07:31Z
-    +++ eb95703325aeb48d5f56a8da5b258bad608dd632	https://github.com/servo/servo/pull/30842	constellation: focusing and closing webviews (#30842)
+    --- +++ eb95703325aeb48d5f56a8da5b258bad608dd632	https://github.com/servo/servo/pull/30842	constellation: focusing and closing webviews (#30842)
     >>> 2024-01-26T06:17:05Z
         +++ d68c7e7881b5c92d0b03c1b43990da26f3771615	https://github.com/servo/servo/pull/31165	layout: Implement computation of table column widths (#31165)
-    +++ 094f7845b151a54d318b40711119d1b86be75076	https://github.com/servo/servo/pull/31146	layout: Shape text only once (#31146)
+    --- +++ 094f7845b151a54d318b40711119d1b86be75076	https://github.com/servo/servo/pull/31146	layout: Shape text only once (#31146)
         +++ bb04c97f15728d14a146f29fa1bc4d23ee96ec49	https://github.com/servo/servo/pull/31164	Use Int8array, int16array, uint16array, int32array & uint32array in WebIDL (#31164)
     >>> 2024-01-27T06:16:06Z
         +++ 1876b492518bed60382b6c4f95c1af0a934f6af1	https://github.com/servo/servo/pull/31166	layout: Add support for table `border-spacing` (#31166)
@@ -152,29 +161,29 @@ We’ve finished migrating our DOM bindings to use typed arrays where possible (
         +++ 07c709624684e9d77c34a935c40db695b35f9073	https://github.com/servo/servo/pull/31337	Include border-spacing gutters in compute_inline_content_sizes (#31337)
         +++ 9be989146d5b958cafcc930385e63595a885cb20	https://github.com/servo/servo/pull/31202	WebIDL: Use `ArrayBuffer` instead of raw `JSObject` in bindings (#31202)
     >>> 2024-02-15T06:18:22Z
-    +++ 61e778c8e8fb3ef49a69423a4b955724d43bee8f	https://github.com/servo/servo/pull/31351	style: Add a `static_prefs` implementation (#31351)
-    +++ 14a2c43c75181f9697ffb920e88e01fe9bc9739d	https://github.com/servo/servo/pull/31349	style: Reduce Servo's diff with upstream `to_shmem` (#31349)
+        +++ 61e778c8e8fb3ef49a69423a4b955724d43bee8f	https://github.com/servo/servo/pull/31351	style: Add a `static_prefs` implementation (#31351)
+        +++ 14a2c43c75181f9697ffb920e88e01fe9bc9739d	https://github.com/servo/servo/pull/31349	style: Reduce Servo's diff with upstream `to_shmem` (#31349)
     >>> 2024-02-16T06:08:03Z
     >>> 2024-02-17T06:16:24Z
         +++ 328c376ff15c0776e453989468f19670ffc9032d	https://github.com/servo/servo/pull/31317	WebIDL: Use Uint8ClampedArray instead of raw JSObject in bindings (#31317)
     +++ 7e9be5ae9f9a1bc5856fe51b6193b1e7ef58c985	https://github.com/servo/servo/pull/31347	ci: Merge similar try jobs when possible (#31347)
-    +++ 9a6973d629a6560367db8542cc958a41a1c83902	https://github.com/servo/servo/pull/31358	style: Remove dependency on servo_url (#31358)
+        +++ 9a6973d629a6560367db8542cc958a41a1c83902	https://github.com/servo/servo/pull/31358	style: Remove dependency on servo_url (#31358)
         +++ c3e3e72cf29ce6daacebf8da4d4f175a54babd0d	https://github.com/servo/servo/pull/31325	WebIDL: Use ArrayBufferViewU8 instead of raw JSObject in bindings (#31325)
-    +++ aeb2503fdb277d9462cdd6901837fea11cd08bf9	https://github.com/servo/servo/pull/31363	style: Reduce diff with upstream derive_common and malloc_size_of (#31363)
+        +++ aeb2503fdb277d9462cdd6901837fea11cd08bf9	https://github.com/servo/servo/pull/31363	style: Reduce diff with upstream derive_common and malloc_size_of (#31363)
     >>> 2024-02-20T06:09:45Z
     +++ b9935188927b5ab294ae8bf68a848d254e66aa28	https://github.com/servo/servo/pull/31374	Check for XML and XMLS namespace  during 'locating a namespace' (#31374)
     +++ a726bb0fe1880b7309c100dcc4b4a7c4d6e418ad	https://github.com/servo/servo/pull/31377	Update FUNDING.yml (#31377)
     >>> 2024-02-21T06:10:25Z
-    +++ 2fa76916d35b178a1427fb0af831c5925e7ecea9	https://github.com/servo/servo/pull/31365	Revert as many changes to selectors from upstream as possible (#31365)
+        +++ 2fa76916d35b178a1427fb0af831c5925e7ecea9	https://github.com/servo/servo/pull/31365	Revert as many changes to selectors from upstream as possible (#31365)
     >>> 2024-02-22T06:15:41Z
     >>> 2024-02-23T06:20:06Z
-    +++ f60e5e767b5002e9a440cf5d6e63f462d3e85a8e	https://github.com/servo/servo/pull/31408	Revert remaining Stylo changes (#31408)
-    +++ 1c2de6dd1d31304187dd9b2e5767681fe16cd68f	https://github.com/servo/servo/pull/31387	Revert changes to servo_arc, style_derive, and style_traits (#31387)
+        +++ f60e5e767b5002e9a440cf5d6e63f462d3e85a8e	https://github.com/servo/servo/pull/31408	Revert remaining Stylo changes (#31408)
+        +++ 1c2de6dd1d31304187dd9b2e5767681fe16cd68f	https://github.com/servo/servo/pull/31387	Revert changes to servo_arc, style_derive, and style_traits (#31387)
     >>> 2024-02-24T06:18:05Z
     +++ 0d4e4748c432e1ce1555e2f4ebb759c631038313	https://github.com/servo/servo/pull/31418	layout: Place absolutes in IFCs at their hypothetical static position (#31418)
     +++ 41a41b3d8f176e441f5b7157c9e811fd845eedf5	https://github.com/servo/servo/pull/31412	Treat video elements as replaced content and render the current frame. (#31412)
     +++ b182bdfa52db348fb0e9c1dcec66c0ad6e96b325	https://github.com/servo/servo/pull/31413	Fix crash when closing window containing video element (#31413)
-    +++ e078a9981768d7523abba57b6e86f4874dcbf2fd	https://github.com/servo/servo/pull/31411	style: Remove dependency on servo_config (was #31409) (#31411)
+        +++ e078a9981768d7523abba57b6e86f4874dcbf2fd	https://github.com/servo/servo/pull/31411	style: Remove dependency on servo_config (was #31409) (#31411)
     >>> 2024-02-25T07:06:59Z
     >>> 2024-02-26T06:08:38Z
 -->
