@@ -20,7 +20,7 @@ More on how we got there in a bit, but first let’s talk about new API support:
 - as of 2024-02-11, you can look up **shorthands like ‘margin’ in getComputedStyle()** ([@sebsebmc](https://github.com/sebsebmc), [#31277](https://github.com/servo/servo/pull/31277))
 - as of 2024-02-15, we accept SVG with the **image/svg+xml mime type** ([@KiChjang](https://github.com/KiChjang), [#31318](https://github.com/servo/servo/pull/31318))
 - as of 2024-02-20, we support non-XR **game controllers with the Gamepad API** ([@msub2](https://github.com/msub2), [#31200](https://github.com/servo/servo/pull/31200))
-- as of 2024-02-23, we have basic support for **‘text-transform’** ([@mrobinson](https://github.com/mrobinson), [#31396](https://github.com/servo/servo/pull/31396))
+- as of 2024-02-23, we have basic support for **‘text-transform’** ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#31396](https://github.com/servo/servo/pull/31396))
   <br>— except ‘full-width’, ‘full-size-kana’, grapheme clusters, and language-specific transforms
 
 As of 2024-02-12, we have basic support for **font fallback** ([@mrobinson](https://github.com/mrobinson), [#31254](https://github.com/servo/servo/pull/31254))!
@@ -79,9 +79,9 @@ We’ve also made some other dev changes:
 - we’ve removed the unmaintained **libsimpleservo C API** ([@mrobinson](https://github.com/mrobinson), [#31172](https://github.com/servo/servo/pull/31172)), though we’re open to adding a new C API someday
 - we’ve upgraded **surfman** such that it **no longer depends on winit** ([@mrobinson](https://github.com/mrobinson), [#31224](https://github.com/servo/servo/pull/31224))
 - we’ve added support for building Servo on **Asahi Linux** ([@arrynfr](https://github.com/arrynfr), [#31207](https://github.com/servo/servo/pull/31207))
-- we’ve fixed problems building Servo on **Debian** ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#31281](https://github.com/servo/servo/pull/31281), [#31276](https://github.com/servo/servo/pull/31276)) and **NixOS** ([[@syvb](https://github.com/syvb)](https://github.com/syvb), [#31231](https://github.com/servo/servo/pull/31231))
-- we’ve fixed failures when **starting multiple CI try jobs** at once ([[@mrobinson](https://github.com/mrobinson)](https://github.com/mrobinson), [#31347](https://github.com/servo/servo/pull/31347))
-- we’ve made several improvements to **mach try** for starting CI try jobs ([[@sagudev](https://github.com/sagudev)](https://github.com/sagudev), [[@mrobinson](https://github.com/mrobinson)](https://github.com/mrobinson), [#31141](https://github.com/servo/servo/pull/31141), [#31290](https://github.com/servo/servo/pull/31290))
+- we’ve fixed problems building Servo on **Debian** ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#31281](https://github.com/servo/servo/pull/31281), [#31276](https://github.com/servo/servo/pull/31276)) and **NixOS** ([@syvb](https://github.com/syvb), [#31231](https://github.com/servo/servo/pull/31231))
+- we’ve fixed failures when **starting multiple CI try jobs** at once ([@mrobinson](https://github.com/mrobinson), [#31347](https://github.com/servo/servo/pull/31347))
+- we’ve made several improvements to **mach try** for starting CI try jobs ([@sagudev](https://github.com/sagudev), [@mrobinson](https://github.com/mrobinson), [#31141](https://github.com/servo/servo/pull/31141), [#31290](https://github.com/servo/servo/pull/31290))
 
 <!--
 - outreachy
