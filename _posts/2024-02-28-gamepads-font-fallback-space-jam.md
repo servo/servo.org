@@ -83,13 +83,26 @@ We’ve also made some other dev changes:
 - we’ve fixed failures when **starting multiple CI try jobs** at once ([@mrobinson](https://github.com/mrobinson), [#31347](https://github.com/servo/servo/pull/31347))
 - we’ve made several improvements to **mach try** for starting CI try jobs ([@sagudev](https://github.com/sagudev), [@mrobinson](https://github.com/mrobinson), [#31141](https://github.com/servo/servo/pull/31141), [#31290](https://github.com/servo/servo/pull/31290))
 
+## Conference talks
+
+Rakhi Sharma will [**speak about Servo’s achievements**](https://ossna2024.sched.com/event/1aBNF/a-year-of-servo-reboot-where-are-we-now-rakhi-sharma-igalia) at [Open Source Summit North America](https://events.linuxfoundation.org/open-source-summit-north-america/) on **16 April 2024** at **14:15 local time** (21:15 UTC).
+In the meantime, check out Rakhi’s recent talk [*Embedding Servo in Rust projects*](https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/), which she gave at [FOSDEM 2024](https://fosdem.org/2024/) on 3 February 2024:
+
+<figure class="_fig">
+    <video controls>
+        <source src="https://video.fosdem.org/2024/h1308/fosdem-2024-2321-embedding-servo-in-rust-projects.av1.webm" type='video/webm; codecs="av01.0.08M.08.0.110.01.01.01.0"' />
+        <source src="https://video.fosdem.org/2024/h1308/fosdem-2024-2321-embedding-servo-in-rust-projects.mp4" type='video/mp4' />
+        <p><a href="https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/">Embedding Servo in Rust projects</a> by Rakhi Sharma at FOSDEM 2024</p>
+    </video>
+</figure>
+
 <!--
 - outreachy
 - open collective
 - github sponsors
-- fosdem backannounce
+- DONE fosdem backannounce
     - plus https://blogs.igalia.com/mrego/servo-at-fosdem-2024/
-- ossna announce
+- DONE ossna announce
 - wpt
     - DONE as of 2024-02-26, surpassed legacy in /css/ (63.6% vs 63.5%)
     - DONE as of 2024-02-09, surpassed legacy in key CSS2 tests (84.2% vs 82.8%)
@@ -99,7 +112,7 @@ We’ve also made some other dev changes:
     - DONE tables
     - DONE space jam
 - externals
-- mach try
+- DONE mach try
 - commits marked !!! in nightlies 2024-01-25 through 2024-02-26
     >>> 2024-01-25T06:07:31Z
     >>> 2024-01-26T06:17:05Z
@@ -582,10 +595,12 @@ From https://github.com/servo/servo
     ._figr {
         float: right;
     }
-    ._figl > iframe,
-    ._figr > iframe,
     ._figl > figcaption,
     ._figr > figcaption,
+    ._figl > iframe,
+    ._figr > iframe,
+    ._figl > video,
+    ._figr > video,
     ._figl > a > img,
     ._figr > a > img {
         width: 21em;
