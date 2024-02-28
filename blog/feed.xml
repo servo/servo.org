@@ -4,12 +4,161 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2024-01-26T00:00:00Z</updated>
+  <updated>2024-02-28T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>This month in Servo: gamepad support, font fallback, Space Jam, and more!</title>
+    <link href="https://servo.org/blog/2024/02/28/gamepads-font-fallback-space-jam/"/>
+    <updated>2024-02-28T00:00:00Z</updated>
+    <id>https://servo.org/blog/2024/02/28/gamepads-font-fallback-space-jam/</id>
+    <content xml:lang="en" type="html">&lt;figure class=&quot;_figr&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/font-fallback.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/font-fallback.png&quot; alt=&quot;Servo nightly showing Chinese, Japanese, and Korean Wikipedia with working font fallback&quot; /&gt;&lt;/a&gt;
+&lt;figcaption&gt;Font fallback now works for Chinese, Japanese, and Korean.&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;https://wpt.servo.org/&quot;&gt;A couple of weeks ago&lt;/a&gt;, Servo surpassed its legacy layout engine in a core set of CSS2 test suites (84.2% vs 82.8% in legacy), but now we’ve &lt;strong&gt;surpassed legacy in the whole CSS test suite&lt;/strong&gt; (63.6% vs 63.5%) as well!
+More on how we got there in a bit, but first let’s talk about new API support:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;as of 2024-02-07, you can safely &lt;strong&gt;console.log() symbols and large arrays&lt;/strong&gt; (&lt;a href=&quot;https://github.com/syvb&quot;&gt;@syvb&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31241&quot;&gt;#31241&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31267&quot;&gt;#31267&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-07, we support &lt;strong&gt;CanvasRenderingContext2D.reset()&lt;/strong&gt; (&lt;a href=&quot;https://github.com/syvb&quot;&gt;@syvb&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31258&quot;&gt;#31258&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-08, we support &lt;strong&gt;navigator.hardwareConcurrency&lt;/strong&gt; (&lt;a href=&quot;https://github.com/syvb&quot;&gt;@syvb&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31268&quot;&gt;#31268&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-11, you can look up &lt;strong&gt;shorthands like ‘margin’ in getComputedStyle()&lt;/strong&gt; (&lt;a href=&quot;https://github.com/sebsebmc&quot;&gt;@sebsebmc&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31277&quot;&gt;#31277&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-15, we accept SVG with the &lt;strong&gt;image/svg+xml mime type&lt;/strong&gt; (&lt;a href=&quot;https://github.com/KiChjang&quot;&gt;@KiChjang&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31318&quot;&gt;#31318&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-20, we support non-XR &lt;strong&gt;game controllers with the Gamepad API&lt;/strong&gt; (&lt;a href=&quot;https://github.com/msub2&quot;&gt;@msub2&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31200&quot;&gt;#31200&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-23, we have basic support for &lt;strong&gt;‘text-transform’&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31396&quot;&gt;#31396&lt;/a&gt;)
+&lt;br /&gt;— except ‘full-width’, ‘full-size-kana’, grapheme clusters, and language-specific transforms&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As of 2024-02-12, we have basic support for &lt;strong&gt;font fallback&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31254&quot;&gt;#31254&lt;/a&gt;)!
+This is especially important for pages that mix text from different languages.
+More work is needed to support shaping across element boundaries and shaping complex scripts like Arabic, but the current version should be enough for Chinese, Japanese, and Korean.
+If you encounter text that still fails to display, be sure to check your installed fonts against the page styles and Servo’s default font lists (&lt;a href=&quot;https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/windows/font_list.rs&quot;&gt;Windows&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/macos/font_list.rs&quot;&gt;macOS&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/freetype/font_list.rs&quot;&gt;Linux&lt;/a&gt;).&lt;/p&gt;
+&lt;figure class=&quot;_figl&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/space-jam.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/space-jam.png&quot; alt=&quot;Servo nightly showing the Space Jam (1996) website with its table-based menu correctly laid out&quot; /&gt;&lt;/a&gt;
+&lt;figcaption&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.spacejam.com/1996/&quot;&gt;Space Jam (1996)&lt;/a&gt; now has correct layout with &lt;code&gt;--pref layout.tables.enabled&lt;/code&gt;.&lt;/p&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;As of 2024-02-24, &lt;strong&gt;layout now runs in the script thread&lt;/strong&gt;, rather than in a dedicated layout thread (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/jdm&quot;&gt;@jdm&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31346&quot;&gt;#31346&lt;/a&gt;), though it can still spawn worker threads to parallelise layout work.
+Since the web platform almost always requires layout to run synchronously with script, this should allow us to make layout simpler and more reliable without regressing performance.&lt;/p&gt;
+&lt;p&gt;Our experimental &lt;strong&gt;tables support&lt;/strong&gt; (&lt;code&gt;--pref layout.tables.enabled&lt;/code&gt;) has vastly improved:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;as of 2024-01-26, we compute &lt;strong&gt;table column widths&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/Loiroriol&quot;&gt;@Loiroriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31165&quot;&gt;#31165&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-01-30, we support the &lt;strong&gt;&amp;lt;table cellpadding&amp;gt; attribute&lt;/strong&gt; (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31201&quot;&gt;#31201&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-11, we support &lt;strong&gt;‘vertical-align’ in table cells&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31246&quot;&gt;#31246&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of &lt;!-- 2024-01-27 --&gt; 2024-02-14, we support &lt;strong&gt;‘border-spacing’ on tables&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31166&quot;&gt;#31166&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31337&quot;&gt;#31337&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-21, we support &lt;strong&gt;rows, columns, and row/column groups&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31341&quot;&gt;#31341&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Together with inline layout for &lt;strong&gt;&amp;lt;div align&amp;gt; and &amp;lt;center&amp;gt;&lt;/strong&gt; (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31388&quot;&gt;#31388&lt;/a&gt;) landing in 2024-02-24, we now render the classic &lt;strong&gt;&lt;a href=&quot;https://www.spacejam.com/1996/&quot;&gt;Space Jam&lt;/a&gt;&lt;/strong&gt; website correctly when tables are enabled!&lt;/p&gt;
+&lt;p&gt;As of 2024-02-24, we support &lt;strong&gt;videos with autoplay&lt;/strong&gt; (&lt;a href=&quot;https://github.com/jdm&quot;&gt;@jdm&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31412&quot;&gt;#31412&lt;/a&gt;), and windows containing &lt;strong&gt;videos no longer crash&lt;/strong&gt; when closed (&lt;a href=&quot;https://github.com/jdm&quot;&gt;@jdm&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31413&quot;&gt;#31413&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Many layout and CSS bugs have also been fixed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;as of 2024-01-28, correct &lt;strong&gt;rounding of clientLeft, clientTop, clientWidth, and clientHeight&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31187&quot;&gt;#31187&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-01-30, correct &lt;strong&gt;cache invalidation of client{Left,Top,Width,Height} after reflow&lt;/strong&gt; (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31210&quot;&gt;#31210&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31219&quot;&gt;#31219&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-03, correct &lt;strong&gt;width and height for preloaded Image objects&lt;/strong&gt; (&lt;a href=&quot;https://github.com/syvb&quot;&gt;@syvb&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31253&quot;&gt;#31253&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-07, correct &lt;strong&gt;[...spreading] and indexing[0] of style objects&lt;/strong&gt; (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31299&quot;&gt;#31299&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-09, correct &lt;strong&gt;border widths in fragmented inlines&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31292&quot;&gt;#31292&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-11, correct &lt;strong&gt;UA styles for &amp;lt;hr&amp;gt;&lt;/strong&gt; (&lt;a href=&quot;https://github.com/sebsebmc&quot;&gt;@sebsebmc&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31297&quot;&gt;#31297&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;as of 2024-02-24, correct &lt;strong&gt;positioning of absolutes with ‘inset: auto’&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31418&quot;&gt;#31418&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;embedding%2C-code-health%2C-and-dev-changes&quot; tabindex=&quot;-1&quot;&gt;Embedding, code health, and dev changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/02/28/gamepads-font-fallback-space-jam/#embedding%2C-code-health%2C-and-dev-changes&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We’ve landed a few embedding improvements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;we’ve removed several mandatory &lt;code&gt;WindowMethods&lt;/code&gt; relating to OpenGL video playback (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31209&quot;&gt;#31209&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;we’ve removed &lt;code&gt;webrender_surfman&lt;/code&gt;, and &lt;code&gt;WebrenderSurfman&lt;/code&gt; is now in &lt;code&gt;gfx&lt;/code&gt; as &lt;code&gt;RenderingContext&lt;/code&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31184&quot;&gt;#31184&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We’ve finished migrating our DOM bindings to use typed arrays where possible (&lt;a href=&quot;https://github.com/Taym95&quot;&gt;@Taym95&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31145&quot;&gt;#31145&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31164&quot;&gt;#31164&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31167&quot;&gt;#31167&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31189&quot;&gt;#31189&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31202&quot;&gt;#31202&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31317&quot;&gt;#31317&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31325&quot;&gt;#31325&lt;/a&gt;), as part of an effort to &lt;strong&gt;reduce our unsafe code surface&lt;/strong&gt; (&lt;a href=&quot;https://github.com/servo/servo/issues/30889&quot;&gt;#30889&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/issues/30862&quot;&gt;#30862&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/servo/webrender&quot;&gt;WebRender&lt;/a&gt; and &lt;a href=&quot;https://github.com/servo/stylo&quot;&gt;Stylo&lt;/a&gt; are two major components of Servo that have been adopted by Firefox, making Servo’s versions of them a downstream fork.
+To make these forks easier to update, we’ve &lt;strong&gt;split WebRender and Stylo out of &lt;a href=&quot;https://github.com/servo/servo&quot;&gt;our main repo&lt;/a&gt;&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31212&quot;&gt;#31212&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31351&quot;&gt;#31351&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31349&quot;&gt;#31349&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31358&quot;&gt;#31358&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31363&quot;&gt;#31363&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31365&quot;&gt;#31365&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31408&quot;&gt;#31408&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31387&quot;&gt;#31387&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31411&quot;&gt;#31411&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31350&quot;&gt;#31350&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;We’ve fixed one of the blockers for building Servo with clang 16 (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31306&quot;&gt;#31306&lt;/a&gt;), but a blocker for clang 15 still remains.
+See &lt;a href=&quot;https://github.com/servo/servo/issues/31059&quot;&gt;#31059&lt;/a&gt; for more details, including how to build Servo against clang 14.&lt;/p&gt;
+&lt;p&gt;We’ve also made some other dev changes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;we’ve removed the unmaintained &lt;strong&gt;libsimpleservo C API&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31172&quot;&gt;#31172&lt;/a&gt;), though we’re open to adding a new C API someday&lt;/li&gt;
+&lt;li&gt;we’ve upgraded &lt;strong&gt;surfman&lt;/strong&gt; such that it &lt;strong&gt;no longer depends on winit&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31224&quot;&gt;#31224&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;we’ve added support for building Servo on &lt;strong&gt;Asahi Linux&lt;/strong&gt; (&lt;a href=&quot;https://github.com/arrynfr&quot;&gt;@arrynfr&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31207&quot;&gt;#31207&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;we’ve fixed problems building Servo on &lt;strong&gt;Debian&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31281&quot;&gt;#31281&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31276&quot;&gt;#31276&lt;/a&gt;) and &lt;strong&gt;NixOS&lt;/strong&gt; (&lt;a href=&quot;https://github.com/syvb&quot;&gt;@syvb&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31231&quot;&gt;#31231&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;we’ve fixed failures when &lt;strong&gt;starting multiple CI try jobs&lt;/strong&gt; at once (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31347&quot;&gt;#31347&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;we’ve made several improvements to &lt;strong&gt;mach try&lt;/strong&gt; for starting CI try jobs (&lt;a href=&quot;https://github.com/sagudev&quot;&gt;@sagudev&lt;/a&gt;, &lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31141&quot;&gt;#31141&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31290&quot;&gt;#31290&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;conference-talks&quot; tabindex=&quot;-1&quot;&gt;Conference talks &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/02/28/gamepads-font-fallback-space-jam/#conference-talks&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Rakhi Sharma will &lt;a href=&quot;https://ossna2024.sched.com/event/1aBNF/a-year-of-servo-reboot-where-are-we-now-rakhi-sharma-igalia&quot;&gt;&lt;strong&gt;speak about Servo’s achievements&lt;/strong&gt;&lt;/a&gt; at &lt;a href=&quot;https://events.linuxfoundation.org/open-source-summit-north-america/&quot;&gt;Open Source Summit North America&lt;/a&gt; on &lt;strong&gt;16 April 2024&lt;/strong&gt; at &lt;strong&gt;14:15 local time&lt;/strong&gt; (21:15 UTC).&lt;/p&gt;
+&lt;p&gt;In the meantime, check out Rakhi’s recent talk &lt;a href=&quot;https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/&quot;&gt;&lt;em&gt;Embedding Servo in Rust projects&lt;/em&gt;&lt;/a&gt;, which she gave at &lt;a href=&quot;https://fosdem.org/2024/&quot;&gt;FOSDEM 2024&lt;/a&gt; on 3 February 2024.
+Here you’ll learn about the state of the art around embedding Servo and Stylo, including a walkthrough of our example browser &lt;em&gt;servoshell&lt;/em&gt;, our ongoing effort to &lt;a href=&quot;https://servo.org/blog/2024/01/19/embedding-update/&quot;&gt;integrate Servo with Tauri&lt;/a&gt;, and a sneak peek into how Stylo might someday be usable with &lt;a href=&quot;https://dioxuslabs.com/&quot;&gt;Dioxus&lt;/a&gt;:&lt;/p&gt;
+&lt;figure class=&quot;_fig&quot;&gt;
+    &lt;video controls=&quot;&quot;&gt;
+        &lt;source src=&quot;https://video.fosdem.org/2024/h1308/fosdem-2024-2321-embedding-servo-in-rust-projects.av1.webm&quot; type=&quot;video/webm; codecs=&amp;quot;av01.0.08M.08.0.110.01.01.01.0&amp;quot;&quot; /&gt;
+        &lt;source src=&quot;https://video.fosdem.org/2024/h1308/fosdem-2024-2321-embedding-servo-in-rust-projects.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+        &lt;p&gt;&lt;a href=&quot;https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/&quot;&gt;Embedding Servo in Rust projects&lt;/a&gt; by Rakhi Sharma at FOSDEM 2024&lt;/p&gt;
+    &lt;/video&gt;
+&lt;/figure&gt;
+&lt;style&gt;
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig &gt; ._flex {
+        display: flex;
+    }
+    ._fig._min {
+        width: min-content;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+    }
+    ._figr {
+        float: right;
+    }
+    ._figl &gt; figcaption,
+    ._figr &gt; figcaption,
+    ._figl &gt; iframe,
+    ._figr &gt; iframe,
+    ._figl &gt; video,
+    ._figr &gt; video,
+    ._figl &gt; a &gt; img,
+    ._figr &gt; a &gt; img {
+        width: 21em;
+        max-width: 100%;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin &gt; p,
+    ._runin &gt; h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+&lt;/style&gt;
+</content>
+  </entry>
   <entry>
     <title>Two months in Servo: better inline layout, stable Rust, and more!</title>
     <link href="https://servo.org/blog/2024/01/26/two-months-in-servo/"/>
@@ -800,60 +949,6 @@ With this project to add support for Servo in Tauri, we hope to make embedding S
 &lt;p&gt;In the first week of June 2023, the Servo project team participated in the &lt;a href=&quot;https://webengineshackfest.org/2023/&quot;&gt;&lt;strong&gt;Web Engines Hackfest 2023&lt;/strong&gt;&lt;/a&gt;. Delan Azabani gave a &lt;a href=&quot;https://www.youtube.com/watch?v=pfk8s5OD99A&quot;&gt;talk about the Servo project&lt;/a&gt;, diving into the details of the team’s work in the first half of the year and its plans for the second half. The talk provided some valuable insights into running some Servo &lt;a href=&quot;https://demo.servo.org/&quot;&gt;demos&lt;/a&gt; as well as the status of floats and the evolution of the layout system. In addition, there were some engaging discussions around the future of the shared style crate in Gecko and Servo.&lt;/p&gt;
 &lt;p&gt;At the same event there was also a &lt;a href=&quot;https://github.com/Igalia/webengineshackfest/issues/16&quot;&gt;breakout session about Servo&lt;/a&gt; where various topics were addressed, such how to coordinate development efforts between Mozilla and Gecko on the shared webrender and style crates. Of particular interest was the implementation and challenges of a new embedding API for Servo. Lastly, there was a discussion about simplifying the contribution process to the Servo project, with a focus on making it more beginner-friendly and enabling a broader participation from interested individuals. You can find the &lt;a href=&quot;https://github.com/Igalia/webengineshackfest/wiki/2023-Servo&quot;&gt;session notes online&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Around the end of  June, Servo will attend the &lt;a href=&quot;https://events.linuxfoundation.org/embedded-open-source-summit/&quot;&gt;&lt;strong&gt;Embedded Open Source Summit&lt;/strong&gt;&lt;/a&gt; in Prague. If you are participating in this event, feel free to &lt;a href=&quot;mailto:info@servo.org&quot;&gt;contact us&lt;/a&gt; with any questions about the project status and our plans for the future.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Adding support for ‘outline’ properties</title>
-    <link href="https://servo.org/blog/2023/05/31/adding-support-for-outline-properties/"/>
-    <updated>2023-05-31T00:00:00Z</updated>
-    <id>https://servo.org/blog/2023/05/31/adding-support-for-outline-properties/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;As mentioned in &lt;a href=&quot;https://servo.org/blog/2023/04/13/layout-2013-vs-2020/&quot;&gt;our last blog post&lt;/a&gt;, we’re currently working on selecting a layout engine for Servo between the original Layout 2013 and the newer Layout 2020.&lt;/p&gt;
-&lt;p&gt;Our plan has been to start by implementing some small features in Layout 2020, to help us decide whether to switch to the new layout engine, and in turn tackle more complex features like floats. One of these features was ‘outline’, which is now supported in the new engine.&lt;/p&gt;
-&lt;p&gt;A few days ago, we landed support for ‘outline’ and ‘outline-offset’. These properties are now fully supported in Servo, with two minor caveats:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/pull/29718&quot;&gt;Snap border and outline widths at computed-value time&lt;/a&gt; — this is blocked on a Stylo upgrade to avoid diverging from Firefox&lt;/li&gt;
-&lt;li&gt;The ‘outline-style’ value ‘auto’ currently works like ‘solid’ — this is allowed by the spec, but we may be able to do something better here, like rounding the corners of the outline or matching the platform style&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The impact of this feature is most noticeable in the focus styles for links and input fields. For example, the User Agent stylesheet already applies ‘outline: thin dotted’ to ‘a:focus’, so clicking the first link in&lt;/p&gt;
-&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;Lorem ipsum &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;a&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;#&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;dolor sit amet&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;,
-consectetur &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;a&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;#&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;adipiscing elit&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;.&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;now yields&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/servo-outline.png&quot; alt=&quot;Text with two links where the first one is focused so it has a thin outline around it&quot; /&gt;&lt;/p&gt;
-&lt;h2 id=&quot;implementation&quot; tabindex=&quot;-1&quot;&gt;Implementation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/05/31/adding-support-for-outline-properties/#implementation&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The bulk of the feature was implemented in &lt;a href=&quot;https://github.com/servo/servo/pull/29695&quot;&gt;#29695&lt;/a&gt; (‘outline’) and &lt;a href=&quot;https://github.com/servo/servo/pull/29702&quot;&gt;#29702&lt;/a&gt; (‘outline-offset’):&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;In &lt;code&gt;{longhands,shorthands}/outline.mako.rs&lt;/code&gt;, we enable ‘outline-offset’, ‘outline-color’, and ‘outline’ in Layout 2020, and remove the pref gates for ‘outline-style’ and ‘outline-width’, allowing those properties to be resolved and queried&lt;/li&gt;
-&lt;li&gt;In &lt;code&gt;BoxFragment::build_stacking_context_tree_for_children&lt;/code&gt;, we check ‘outline-width’ and (if non-zero) push a &lt;code&gt;StackingContextFragment&lt;/code&gt; to remind ourselves to paint an outline for the box fragment when building its display list&lt;/li&gt;
-&lt;li&gt;In &lt;code&gt;StackingContext::build_display_list&lt;/code&gt;, we search for those reminders and paint the necessary outlines, but only after all other kinds of content in the stacking context (“out-of-band”)&lt;/li&gt;
-&lt;li&gt;In &lt;code&gt;BuilderForBoxFragment::build&lt;/code&gt;, we now need to handle requests to paint the &lt;code&gt;Outline&lt;/code&gt;, not just the &lt;code&gt;BlockBackgroundsAndBorders&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;In &lt;code&gt;BuilderForBoxFragment::build_outline&lt;/code&gt;, we paint the outline by creating a &lt;code&gt;BorderDisplayItem&lt;/code&gt; in WebRender, while taking the ‘outline-offset’ into account&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;We also improved the shorthand serialisation in &lt;a href=&quot;https://github.com/servo/servo/pull/29708&quot;&gt;#29708&lt;/a&gt;, by replacing the &lt;code&gt;#[derive(ToCss)]&lt;/code&gt; for ‘outline’ with a custom impl that returns ‘auto’ in the case where all of the longhands are set to initial values.&lt;/p&gt;
-&lt;h2 id=&quot;tests-and-spec-issues&quot; tabindex=&quot;-1&quot;&gt;Tests and spec issues &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/05/31/adding-support-for-outline-properties/#tests-and-spec-issues&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The spec allows outlines to be painted either &lt;a href=&quot;https://drafts.csswg.org/css-position-4/#in-band-outline&quot;&gt;in-band&lt;/a&gt;, such that other elements can obscure them, or &lt;a href=&quot;https://drafts.csswg.org/css-position-4/#out-of-band-outline&quot;&gt;out-of-band&lt;/a&gt;, on top of all other content in the stacking context. We chose the latter, because it’s the recommended approach for accessibility and matches other browsers.&lt;/p&gt;
-&lt;p&gt;For example, the magenta element below overlaps the blue border of the previous element, but not the out-of-band cyan outline:&lt;/p&gt;
-&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt; &lt;span class=&quot;token special-attr&quot;&gt;&lt;span class=&quot;token attr-name&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;
-    outline: 5px solid cyan;
-    border: 5px solid blue;
-&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Lorem ipsum&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
-&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt; &lt;span class=&quot;token special-attr&quot;&gt;&lt;span class=&quot;token attr-name&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;
-    background: magenta;
-    margin-top: -15px;
-    width: 50px;
-    height: 50px;
-&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&quot;https://servo.org/img/blog/servo-outline-painting.png&quot; alt=&quot;Painting order is blue border, then magenta background, then “Lorem ipsum” and cyan outline&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;‘outline’ already has good test coverage, though during our implementation we added &lt;a href=&quot;https://github.com/servo/servo/pull/29686&quot;&gt;one new test&lt;/a&gt; to check that ‘background-clip’ works as expected with ‘border-radius’, which affects both borders and outlines in Servo.&lt;/p&gt;
-&lt;p&gt;We’ve also filed two spec issues:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8786&quot;&gt;Negative outline-offset is not interoperable and spec is not clear&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/8788&quot;&gt;Should outline-offset be a longhand of outline?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;As always, despite ‘outline’ being a well-known property that has long been implemented by all of the major engines, with every new implementation comes new opportunities to clarify specs and improve test coverage. Building features like ‘outline’ helps the web platform as much as it helps Servo.&lt;/p&gt;
 </content>
   </entry>
 </feed>
