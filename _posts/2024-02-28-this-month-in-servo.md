@@ -37,16 +37,17 @@ Our experimental **tables support** (`--pref layout.tables.enabled`) has vastly 
 
 Together with inline layout for **&lt;div align> and &lt;center>** (@Loirooriol, [#31388](https://github.com/servo/servo/pull/31388)) landing in 2024-02-24, we now render the classic **[Space Jam](https://www.spacejam.com/1996/)** website correctly when tables are enabled!
 
-We’ve also landed several DOM geometry improvements, including **correct rounding** (@mrobinson, [#31187](https://github.com/servo/servo/pull/31187)) and **correct values after reflow** (@Loirooriol, [#31210](https://github.com/servo/servo/pull/31210), [#31219](https://github.com/servo/servo/pull/31219)) for **clientLeft**, **clientTop**, **clientWidth**, and **clientHeight**, as well as **correct dimensions for preloaded Image objects** (@syvb, [#31253](https://github.com/servo/servo/pull/31253)).
-
 As of 2024-02-24, we support **videos with autoplay** (@jdm, [#31412](https://github.com/servo/servo/pull/31412)), and windows containing **videos no longer crash** when closed (@jdm, [#31413](https://github.com/servo/servo/pull/31413)).
 
 Many layout and CSS bugs have also been fixed:
 
-- as of 2024-02-07, **incorrect \[\.\.\.spreading] and indexing\[0] style objects** (@Loirooriol, [#31299](https://github.com/servo/servo/pull/31299))
-- as of 2024-02-09, **incorrect border widths in fragmented inlines** (@mrobinson, [#31292](https://github.com/servo/servo/pull/31292))
-- as of 2024-02-11, **incorrect UA styles for &lt;hr>** (@sebsebmc, [#31297](https://github.com/servo/servo/pull/31297))
-- as of 2024-02-24, **incorrect positioning of absolutes with ‘inset: auto’** (@mrobinson, [#31418](https://github.com/servo/servo/pull/31418))
+- as of 2024-01-28, correct **rounding of clientLeft, clientTop, clientWidth, and clientHeight** (@mrobinson, [#31187](https://github.com/servo/servo/pull/31187))
+- as of 2024-01-30, correct **cache invalidation of client{Left,Top,Width,Height} after reflow** (@Loirooriol, [#31210](https://github.com/servo/servo/pull/31210), [#31219](https://github.com/servo/servo/pull/31219))
+- as of 2024-02-03, correct **width and height for preloaded Image objects** (@syvb, [#31253](https://github.com/servo/servo/pull/31253))
+- as of 2024-02-07, correct **\[\.\.\.spreading] and indexing\[0] of style objects** (@Loirooriol, [#31299](https://github.com/servo/servo/pull/31299))
+- as of 2024-02-09, correct **border widths in fragmented inlines** (@mrobinson, [#31292](https://github.com/servo/servo/pull/31292))
+- as of 2024-02-11, correct **UA styles for &lt;hr>** (@sebsebmc, [#31297](https://github.com/servo/servo/pull/31297))
+- as of 2024-02-24, correct **positioning of absolutes with ‘inset: auto’** (@mrobinson, [#31418](https://github.com/servo/servo/pull/31418))
 
 ## Embedding, code health, and dev changes
 
