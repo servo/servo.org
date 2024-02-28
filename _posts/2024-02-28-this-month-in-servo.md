@@ -37,9 +37,16 @@ Our experimental **tables support** (`--pref layout.tables.enabled`) has vastly 
 
 Together with inline layout for **&lt;div align> and &lt;center>** (@Loirooriol, [#31388](https://github.com/servo/servo/pull/31388)) landing in 2024-02-24, we now render the classic **[Space Jam](https://www.spacejam.com/1996/)** website correctly when tables are enabled!
 
-We’ve also landed several DOM geometry improvements, including **correct rounding** (@mrobinson, [#31187](https://github.com/servo/servo/pull/31187)) and **layout invalidation** (@Loirooriol, [#31210](https://github.com/servo/servo/pull/31210), [#31219](https://github.com/servo/servo/pull/31219)) for clientLeft, clientTop, clientWidth, and clientHeight, as well as **correct dimensions for preloaded Image objects** (@syvb, [#31253](https://github.com/servo/servo/pull/31253)).
+We’ve also landed several DOM geometry improvements, including **correct rounding** (@mrobinson, [#31187](https://github.com/servo/servo/pull/31187)) and **correct values after reflow** (@Loirooriol, [#31210](https://github.com/servo/servo/pull/31210), [#31219](https://github.com/servo/servo/pull/31219)) for **clientLeft**, **clientTop**, **clientWidth**, and **clientHeight**, as well as **correct dimensions for preloaded Image objects** (@syvb, [#31253](https://github.com/servo/servo/pull/31253)).
 
 As of 2024-02-24, we support **videos with autoplay** (@jdm, [#31412](https://github.com/servo/servo/pull/31412)), and windows containing **videos no longer crash** when closed (@jdm, [#31413](https://github.com/servo/servo/pull/31413)).
+
+Many layout and CSS bugs have also been fixed:
+
+- as of 2024-02-07, **incorrect \[\.\.\.spreading] and indexing\[0] style objects** (@Loirooriol, [#31299](https://github.com/servo/servo/pull/31299))
+- as of 2024-02-09, **incorrect border widths in fragmented inlines** (@mrobinson, [#31292](https://github.com/servo/servo/pull/31292))
+- as of 2024-02-11, **incorrect UA styles for &lt;hr>** (@sebsebmc, [#31297](https://github.com/servo/servo/pull/31297))
+- as of 2024-02-24, **incorrect positioning of absolutes with ‘inset: auto’** (@mrobinson, [#31418](https://github.com/servo/servo/pull/31418))
 
 ## Embedding, code health, and dev changes
 
@@ -58,7 +65,8 @@ See [#31059](https://github.com/servo/servo/issues/31059) for more details, incl
 
 We’ve also made some other dev changes:
 
-- we’ve removed the unmaintained **libsimpleservo C API** (@mrobinson, [#31172](https://github.com/servo/servo/pull/31172)), though we are open to adding a new C API someday
+- we’ve removed the unmaintained **libsimpleservo C API** (@mrobinson, [#31172](https://github.com/servo/servo/pull/31172)), though we’re open to adding a new C API someday
+- we’ve upgraded **surfman** such that it **no longer depends on winit** (@mrobinson, [#31224](https://github.com/servo/servo/pull/31224))
 - we’ve added support for building Servo on **Asahi Linux** (@arrynfr, [#31207](https://github.com/servo/servo/pull/31207))
 - we’ve fixed problems building Servo on **Debian** (@mrobinson, @atbrakhi, [#31281](https://github.com/servo/servo/pull/31281), [#31276](https://github.com/servo/servo/pull/31276)) and **NixOS** (@syvb, [#31231](https://github.com/servo/servo/pull/31231))
 - we’ve fixed failures when **starting multiple CI try jobs** at once (@mrobinson, [#31347](https://github.com/servo/servo/pull/31347))
@@ -88,7 +96,7 @@ We’ve also made some other dev changes:
     >>> 2024-01-30T11:05:07Z
         !!! 7d1b19c865855101561dd2030631feed2409a96d	https://github.com/servo/servo/pull/31201	Add support for cellpadding attribute (#31201)
     >>> 2024-01-31T06:11:28Z
-    !!! a07ad85eaa8d918c12244da61e07ff6822326abe	https://github.com/servo/servo/pull/31224	dependencies: Upgrade surfman to 0.9 (#31224)
+        !!! a07ad85eaa8d918c12244da61e07ff6822326abe	https://github.com/servo/servo/pull/31224	dependencies: Upgrade surfman to 0.9 (#31224)
         !!! 7f0d0830e779f37da8aa7f7025edcebe57b2db26	https://github.com/servo/servo/pull/31212	deps: Stop vendoring WebRender (#31212)
     >>> 2024-02-01T06:11:43Z
     >>> 2024-02-02T06:15:54Z
@@ -98,7 +106,7 @@ We’ve also made some other dev changes:
     >>> 2024-02-07T06:16:45Z
     >>> 2024-02-08T06:10:45Z
     >>> 2024-02-09T06:18:23Z
-    !!! f6b81a97f39a157347adc13d312e2ee5fad881d3	https://github.com/servo/servo/pull/31292	layout: Use `BoxFragment` border widths for display list generation (#31292)
+        !!! f6b81a97f39a157347adc13d312e2ee5fad881d3	https://github.com/servo/servo/pull/31292	layout: Use `BoxFragment` border widths for display list generation (#31292)
     >>> 2024-02-10T06:08:27Z
     >>> 2024-02-11T06:21:18Z
         !!! 19667e117ad1e47d76a93ff7b028f712a672c234	https://github.com/servo/servo/pull/31277	layout: Respond to shorthand property requests with real values (#31277)
@@ -156,9 +164,9 @@ We’ve also made some other dev changes:
     >>> 2024-02-07T06:16:45Z
     +++ d8958f96933e3691c10ff1347e71735b933f9398	https://github.com/servo/servo/pull/31270	android: disable JIT in SM to workaround #31134 (#31270)
         +++ 036bca69ae90a84a414e9543c51e29c3bbe1dfac	https://github.com/servo/servo/pull/31267	Fix crash on large console log (#31267)
-    +++ 7f13316f24aa2ca90ac1adb47aaa1da15f60f638	https://github.com/servo/servo/pull/31230	layout: Collect both start and end baselines for fragments (#31230)
+    --- +++ 7f13316f24aa2ca90ac1adb47aaa1da15f60f638	https://github.com/servo/servo/pull/31230	layout: Collect both start and end baselines for fragments (#31230)
         +++ 50c930866be9410e0e9234206683d28463a55ede	https://github.com/servo/servo/pull/31241	Make console methods take `any` instead of `string` (#31241)
-    +++ 4758ffabcabe901fd17c11d4eeafb7e35eb9cc12	https://github.com/servo/servo/pull/31255	Initial overview of webxr initialization (#31255)
+    --- +++ 4758ffabcabe901fd17c11d4eeafb7e35eb9cc12	https://github.com/servo/servo/pull/31255	Initial overview of webxr initialization (#31255)
         +++ b2ae3928ab55a6c50d7c4eb0f6ed686c1667ff53	https://github.com/servo/servo/pull/31258	canvas2d: Implement `.reset()` (#31258)
     >>> 2024-02-08T06:10:45Z
         +++ 20404a72c0f068771a04e492d3343d4d6ad2ecf3	https://github.com/servo/servo/pull/31268	script: implement navigator.hardwareConcurrency (#31268)
@@ -167,9 +175,9 @@ We’ve also made some other dev changes:
     >>> 2024-02-09T06:18:23Z
         +++ 5facf436f6835aa53a500ae99168b8a00ed4802c	https://github.com/servo/servo/pull/31290	mach: Make `./mach try` a little friendlier (#31290)
     >>> 2024-02-10T06:08:27Z
-    +++ f2adcc3a12cb2e05fb650955a7756fd2fda48896	https://github.com/servo/servo/pull/31299	Fix CSSStyleDeclaration's item() to provide properties instead of values (#31299)
+        +++ f2adcc3a12cb2e05fb650955a7756fd2fda48896	https://github.com/servo/servo/pull/31299	Fix CSSStyleDeclaration's item() to provide properties instead of values (#31299)
     >>> 2024-02-11T06:21:18Z
-    +++ 0342d6beb006e402f393df46d1ebb82eb0578462	https://github.com/servo/servo/pull/31297	<hr> elements are expected to have a default overflow:hidden (#31297)
+        +++ 0342d6beb006e402f393df46d1ebb82eb0578462	https://github.com/servo/servo/pull/31297	<hr> elements are expected to have a default overflow:hidden (#31297)
     >>> 2024-02-12T06:09:41Z
     >>> 2024-02-13T06:16:55Z
     >>> 2024-02-14T06:16:51Z
@@ -186,8 +194,8 @@ We’ve also made some other dev changes:
         +++ c3e3e72cf29ce6daacebf8da4d4f175a54babd0d	https://github.com/servo/servo/pull/31325	WebIDL: Use ArrayBufferViewU8 instead of raw JSObject in bindings (#31325)
         +++ aeb2503fdb277d9462cdd6901837fea11cd08bf9	https://github.com/servo/servo/pull/31363	style: Reduce diff with upstream derive_common and malloc_size_of (#31363)
     >>> 2024-02-20T06:09:45Z
-    +++ b9935188927b5ab294ae8bf68a848d254e66aa28	https://github.com/servo/servo/pull/31374	Check for XML and XMLS namespace  during 'locating a namespace' (#31374)
-    +++ a726bb0fe1880b7309c100dcc4b4a7c4d6e418ad	https://github.com/servo/servo/pull/31377	Update FUNDING.yml (#31377)
+        +++ b9935188927b5ab294ae8bf68a848d254e66aa28	https://github.com/servo/servo/pull/31374	Check for XML and XMLS namespace  during 'locating a namespace' (#31374)
+    --- +++ a726bb0fe1880b7309c100dcc4b4a7c4d6e418ad	https://github.com/servo/servo/pull/31377	Update FUNDING.yml (#31377)
     >>> 2024-02-21T06:10:25Z
         +++ 2fa76916d35b178a1427fb0af831c5925e7ecea9	https://github.com/servo/servo/pull/31365	Revert as many changes to selectors from upstream as possible (#31365)
     >>> 2024-02-22T06:15:41Z
@@ -195,7 +203,7 @@ We’ve also made some other dev changes:
         +++ f60e5e767b5002e9a440cf5d6e63f462d3e85a8e	https://github.com/servo/servo/pull/31408	Revert remaining Stylo changes (#31408)
         +++ 1c2de6dd1d31304187dd9b2e5767681fe16cd68f	https://github.com/servo/servo/pull/31387	Revert changes to servo_arc, style_derive, and style_traits (#31387)
     >>> 2024-02-24T06:18:05Z
-    +++ 0d4e4748c432e1ce1555e2f4ebb759c631038313	https://github.com/servo/servo/pull/31418	layout: Place absolutes in IFCs at their hypothetical static position (#31418)
+        +++ 0d4e4748c432e1ce1555e2f4ebb759c631038313	https://github.com/servo/servo/pull/31418	layout: Place absolutes in IFCs at their hypothetical static position (#31418)
         +++ 41a41b3d8f176e441f5b7157c9e811fd845eedf5	https://github.com/servo/servo/pull/31412	Treat video elements as replaced content and render the current frame. (#31412)
         +++ b182bdfa52db348fb0e9c1dcec66c0ad6e96b325	https://github.com/servo/servo/pull/31413	Fix crash when closing window containing video element (#31413)
         +++ e078a9981768d7523abba57b6e86f4874dcbf2fd	https://github.com/servo/servo/pull/31411	style: Remove dependency on servo_config (was #31409) (#31411)
