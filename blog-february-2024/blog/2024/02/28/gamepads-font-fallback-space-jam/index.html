@@ -203,10 +203,13 @@
 <p class="subtitle"><span class="tag is-dark">2024-02-28</span> Big strides in tables and layout architecture, a new CSS2 milestone, dev changes in WebRender and Stylo, plus console, canvas, and CSSOM improvements.</p>
 
 <div class="has-top-margin">
-  <p><a href="https://wpt.servo.org">A couple of weeks ago</a>, Servo surpassed its legacy layout engine in a core set of CSS2 test suites (84.2% vs 82.8% in legacy), but now we’ve <strong>surpassed legacy in the whole CSS test suite</strong> (63.6% vs 63.5%) as well!
-How did we get there?</p>
+  <figure class="_figr"><a href="/blog-february-2024/img/blog/font-fallback.png"><img src="/blog-february-2024/img/blog/font-fallback.png"
+    alt="Servo nightly showing Chinese, Japanese, and Korean Wikipedia with working font fallback"></a>
+<figcaption>Font fallback now works for Chinese, Japanese, and Korean.</figcaption></figure>
+<p><a href="https://wpt.servo.org">A couple of weeks ago</a>, Servo surpassed its legacy layout engine in a core set of CSS2 test suites (84.2% vs 82.8% in legacy), but now we’ve <strong>surpassed legacy in the whole CSS test suite</strong> (63.6% vs 63.5%) as well!
+More on how we got there in a bit, but first let’s talk about new API support:</p>
 <ul>
-<li>as of 2024-02-07, you can <strong>console.log() symbols and large arrays</strong> without crashing (<a href="https://github.com/syvb">@syvb</a>, <a href="https://github.com/servo/servo/pull/31241">#31241</a>, <a href="https://github.com/servo/servo/pull/31267">#31267</a>)</li>
+<li>as of 2024-02-07, you can safely <strong>console.log() symbols and large arrays</strong> (<a href="https://github.com/syvb">@syvb</a>, <a href="https://github.com/servo/servo/pull/31241">#31241</a>, <a href="https://github.com/servo/servo/pull/31267">#31267</a>)</li>
 <li>as of 2024-02-07, we support <strong>CanvasRenderingContext2D.reset()</strong> (<a href="https://github.com/syvb">@syvb</a>, <a href="https://github.com/servo/servo/pull/31258">#31258</a>)</li>
 <li>as of 2024-02-08, we support <strong>navigator.hardwareConcurrency</strong> (<a href="https://github.com/syvb">@syvb</a>, <a href="https://github.com/servo/servo/pull/31268">#31268</a>)</li>
 <li>as of 2024-02-11, you can look up <strong>shorthands like ‘margin’ in getComputedStyle()</strong> (<a href="https://github.com/sebsebmc">@sebsebmc</a>, <a href="https://github.com/servo/servo/pull/31277">#31277</a>)</li>
@@ -219,6 +222,10 @@ How did we get there?</p>
 This is especially important for pages that mix text from different languages.
 More work is needed to support shaping across element boundaries and shaping complex scripts like Arabic, but the current version should be enough for Chinese, Japanese, and Korean.
 If you encounter text that still fails to display, be sure to check your installed fonts against the page styles and Servo’s default font lists (<a href="https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/windows/font_list.rs">Windows</a>, <a href="https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/macos/font_list.rs">macOS</a>, <a href="https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/freetype/font_list.rs">Linux</a>).</p>
+<figure class="_figl"><a href="/blog-february-2024/img/blog/space-jam.png"><img src="/blog-february-2024/img/blog/space-jam.png"
+    alt="Servo nightly showing the Space Jam (1996) website with its table-based menu correctly laid out"></a>
+<figcaption>
+<p><a href="https://www.spacejam.com/1996/">Space Jam (1996)</a> now has correct layout with <code>--pref layout.tables.enabled</code>.</figcaption></figure></p>
 <p>As of 2024-02-24, <strong>layout now runs in the script thread</strong>, rather than in a dedicated layout thread (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/servo/servo/pull/31346">#31346</a>), though it can still spawn worker threads to parallelise layout work.
 Since the web platform almost always requires layout to run synchronously with script, this should allow us to make layout simpler and more reliable without regressing performance.</p>
 <p>Our experimental <strong>tables support</strong> (<code>--pref layout.tables.enabled</code>) has vastly improved:</p>
@@ -760,10 +767,12 @@ From https://github.com/servo/servo
     }
     ._figl > iframe,
     ._figr > iframe,
+    ._figl > figcaption,
+    ._figr > figcaption,
     ._figl > a > img,
     ._figr > a > img {
         width: 21em;
-        max-width: max-content;
+        max-width: 100%;
     }
     ._runin {
         margin-bottom: 1em;
