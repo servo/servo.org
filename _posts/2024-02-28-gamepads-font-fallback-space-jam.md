@@ -74,6 +74,9 @@ We’ve also made some other dev changes:
 - we’ve made several improvements to **mach try** for starting CI try jobs ([[@sagudev](https://github.com/sagudev)](https://github.com/sagudev), [[@mrobinson](https://github.com/mrobinson)](https://github.com/mrobinson), [#31141](https://github.com/servo/servo/pull/31141), [#31290](https://github.com/servo/servo/pull/31290))
 
 <!--
+- outreachy
+- open collective
+- github sponsors
 - fosdem backannounce
     - plus https://blogs.igalia.com/mrego/servo-at-fosdem-2024/
 - ossna announce
