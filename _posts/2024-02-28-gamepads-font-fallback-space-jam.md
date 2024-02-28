@@ -86,7 +86,9 @@ We’ve also made some other dev changes:
 ## Conference talks
 
 Rakhi Sharma will [**speak about Servo’s achievements**](https://ossna2024.sched.com/event/1aBNF/a-year-of-servo-reboot-where-are-we-now-rakhi-sharma-igalia) at [Open Source Summit North America](https://events.linuxfoundation.org/open-source-summit-north-america/) on **16 April 2024** at **14:15 local time** (21:15 UTC).
-In the meantime, check out Rakhi’s recent talk [*Embedding Servo in Rust projects*](https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/), which she gave at [FOSDEM 2024](https://fosdem.org/2024/) on 3 February 2024:
+
+In the meantime, check out Rakhi’s recent talk [*Embedding Servo in Rust projects*](https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/), which she gave at [FOSDEM 2024](https://fosdem.org/2024/) on 3 February 2024.
+Here you’ll learn about the state of the art around embedding Servo and Stylo, including a walkthrough of our example browser *servoshell*, our ongoing effort to [integrate Servo with Tauri]({{ '/blog/2024/01/19/embedding-update/' | url }}), and a sneak peek into how Stylo might someday be usable with [Dioxus](https://dioxuslabs.com):
 
 <figure class="_fig">
     <video controls>
