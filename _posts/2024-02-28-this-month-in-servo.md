@@ -13,10 +13,10 @@ How did we get there?
 - as of 2024-02-07, you can **console.log() symbols and large arrays** without crashing (@syvb, [#31241](https://github.com/servo/servo/pull/31241), [#31267](https://github.com/servo/servo/pull/31267))
 - as of 2024-02-07, we support **CanvasRenderingContext2D.reset()** (@syvb, [#31258](https://github.com/servo/servo/pull/31258))
 - as of 2024-02-08, we support **navigator.hardwareConcurrency** (@syvb, [#31268](https://github.com/servo/servo/pull/31268))
-- as of 2024-02-11, you can look up **shorthands like ‘margin’ in getComputedStyle()** (@sebsebmc, [#31277](https://github.com/servo/servo/pull/31277))<!-- , fixing 26 tests and 549 subtests -->
-- as of 2024-02-15, we accept SVG with the **image/svg+xml mime type** (@KiChjang, [#31318](https://github.com/servo/servo/pull/31318))<!-- , fixing 10 tests and 103 subtests -->
-- as of 2024-02-20, we support non-XR **game controllers with the Gamepad API** (@msub2, [#31200](https://github.com/servo/servo/pull/31200))<!--, fixing 61 subtests -->
-- as of 2024-02-23, we have basic support for **‘text-transform’** (@mrobinson, [#31396](https://github.com/servo/servo/pull/31396))<!--, fixing 87 tests -->
+- as of 2024-02-11, you can look up **shorthands like ‘margin’ in getComputedStyle()** (@sebsebmc, [#31277](https://github.com/servo/servo/pull/31277))
+- as of 2024-02-15, we accept SVG with the **image/svg+xml mime type** (@KiChjang, [#31318](https://github.com/servo/servo/pull/31318))
+- as of 2024-02-20, we support non-XR **game controllers with the Gamepad API** (@msub2, [#31200](https://github.com/servo/servo/pull/31200))
+- as of 2024-02-23, we have basic support for **‘text-transform’** (@mrobinson, [#31396](https://github.com/servo/servo/pull/31396))
   <br>— except ‘full-width’, ‘full-size-kana’, grapheme clusters, and language-specific transforms
 
 As of 2024-02-12, we have basic support for **font fallback** (@mrobinson, [#31254](https://github.com/servo/servo/pull/31254))!
@@ -30,10 +30,10 @@ Since the web platform almost always requires layout to run synchronously with s
 Our experimental **tables support** (`--pref layout.tables.enabled`) has vastly improved:
 
 - as of 2024-01-26, we compute **table column widths** (@mrobinson, @Loiroriol, [#31165](https://github.com/servo/servo/pull/31165))
-- as of 2024-01-30, we support the **&lt;table cellpadding> attribute** (@Loirooriol, [#31201](https://github.com/servo/servo/pull/31201))<!--, fixing 7 tests and 24 subtests -->
-- as of 2024-02-11, we support **‘vertical-align’ in table cells** (@mrobinson, @Loirooriol, [#31246](https://github.com/servo/servo/pull/31246))<!--, fixing 11 tests and 19 subtests -->
+- as of 2024-01-30, we support the **&lt;table cellpadding> attribute** (@Loirooriol, [#31201](https://github.com/servo/servo/pull/31201))
+- as of 2024-02-11, we support **‘vertical-align’ in table cells** (@mrobinson, @Loirooriol, [#31246](https://github.com/servo/servo/pull/31246))
 - as of <!-- 2024-01-27 --> 2024-02-14, we support **‘border-spacing’ on tables** (@mrobinson, @Loirooriol, [#31166](https://github.com/servo/servo/pull/31166), [#31337](https://github.com/servo/servo/pull/31337))
-- as of 2024-02-21, we support **rows, columns, and row/column groups** (@mrobinson, @Loirooriol, [#31341](https://github.com/servo/servo/pull/31341))<!-- , fixing 10 tests and 5888 subtests -->
+- as of 2024-02-21, we support **rows, columns, and row/column groups** (@mrobinson, @Loirooriol, [#31341](https://github.com/servo/servo/pull/31341))
 
 Together with inline layout for **&lt;div align> and &lt;center>** (@Loirooriol, [#31388](https://github.com/servo/servo/pull/31388)) landing in 2024-02-24, we now render the classic **[Space Jam](https://www.spacejam.com/1996/)** website correctly when tables are enabled!
 
