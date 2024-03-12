@@ -1,6 +1,7 @@
 ---
 layout: default.html
 title: Code of Conduct
+note: If you modify this file, please keep this file in sync with https://github.com/servo/servo/blob/main/CODE_OF_CONDUCT.md.
 ---
 
 # Code of Conduct
