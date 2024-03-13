@@ -26,7 +26,7 @@ title: Home
 
 ## Sponsorship
 
-You can support the project's infrastructure (CI) and hosting costs by donating to the [Servo Open Collective](https://opencollective.com/servo).
+You can now help fund the Servo project by [**sponsoring us on GitHub**](https://github.com/sponsors/servo) or [**Open Collective**](https://opencollective.com/servo).
 
 For more information about how to sponsor the project, visit the [**sponsorship page**]({{ '/sponsorship/' | url }}).
 
