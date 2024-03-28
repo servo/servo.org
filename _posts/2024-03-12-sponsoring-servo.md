@@ -3,7 +3,7 @@ layout:     post
 tags:       blog
 title:      "You can now sponsor Servo on GitHub and Open Collective!"
 date:       2024-03-12
-summary:    
+summary:    Be sure to update your recurring donations, because we will stop taking donations on LFX soon.
 categories:
 ---
 
