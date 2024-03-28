@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>This Week In Servo 25 - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine</title>
+  <meta property="og:title" content="This Week In Servo 25 - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine">
+  
+
+  
+  <meta name="description" content="What&#39;s up with Servo for the week of 18 - 24 Feb 2015">
+  <meta name="og:description" content="What&#39;s up with Servo for the week of 18 - 24 Feb 2015">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/blog-march-2024/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/blog-march-2024/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/blog-march-2024/blog/2015/02/24/twis-25/">
+
+  <link rel="stylesheet" href="/blog-march-2024/css/style.css">
+  <link rel="shortcut icon" href="/blog-march-2024/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog-march-2024/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/blog-march-2024/">
+        <img src="/blog-march-2024/img/servo-color-negative-no-container.png" alt="This Week In Servo 25">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              Get Involved
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/blog-march-2024/contributing/">
+                  Contributing
+                </a>
+              
+                <a class="navbar-item" href="https://github.com/servo/servo/wiki" target="_blank">
+                  Wiki
+                </a>
+              
+                <a class="navbar-item" href="https://wpt.servo.org/" target="_blank">
+                  WPT pass rates
+                </a>
+              
+                <a class="navbar-item" href="/blog-march-2024/coc/">
+                  Code of Conduct
+                </a>
+              
+            </div>
+          </div>
+        
+      
+        
+        
+          <a class="navbar-item" href="/blog-march-2024/download/">
+            Download
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="/blog-march-2024/blog/">
+            Blog
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="https://demo.servo.org/" target="_blank">
+            Demos
+          </a>
+        
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              About
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/blog-march-2024/about/">
+                  About Servo
+                </a>
+              
+                <a class="navbar-item" href="/blog-march-2024/governance/">
+                  Governance
+                </a>
+              
+                <a class="navbar-item" href="/blog-march-2024/sponsorship/">
+                  Sponsorship
+                </a>
+              
+                <a class="navbar-item" href="/blog-march-2024/acknowledgements/">
+                  Acknowledgements
+                </a>
+              
+            </div>
+          </div>
+        
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <aside class="menu box">
+            <p class="menu-label">
+              This Week In Servo 25
+            </p>
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+          </aside>
+          <div class="content">
+            
+<h1 class="title">This Week In Servo 25</h1>
+<p class="subtitle"><span class="tag is-dark">2015-02-24</span> What's up with Servo for the week of 18 - 24 Feb 2015</p>
+
+<div class="has-top-margin">
+  <p>This week, we merged 60 pull requests.</p>
+<p>Selector matching has been extracted into an independent library! You can see it <a href="https://github.com/servo/rust-selectors">here</a>.</p>
+<p>We now have automation set up for our Gonk (Firefox OS) port, and gate on it.</p>
+<h3 id="notable-additions" tabindex="-1">Notable additions <a class="header-anchor" href="#notable-additions">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li>Chris Paris landed <a href="https://github.com/servo/html5ever/pull/91">fragment parsing in html5ever</a>
+and implemented the <a href="https://github.com/servo/servo/pull/4888">innerHTML setter in Servo</a>.</li>
+<li>Jack Moffitt added a <a href="https://github.com/servo/servo/pull/4969">visualization</a> of parallelization in effect when rendering pages.</li>
+<li>Manish and Lars <a href="https://github.com/servo/servo/pull/4991">added <code>./mach build-gonk</code> to automate building for Firefox OS</a></li>
+<li>Edit Balint implemented <a href="https://github.com/servo/servo/pull/5020">canvas pixel manipulation</a>.</li>
+<li>Nick Nethercote improved the state of <a href="https://github.com/servo/servo/pull/4894">memory profiling</a> on Linux.</li>
+<li>Simon Sapin extracted CSS selector matching into an <a href="https://github.com/servo/servo/pull/5010">independent library</a>.</li>
+<li>Patrick Walton implemented a bunch of missing <a href="https://github.com/servo/servo/pull/5016">canvas operations</a></li>
+<li>Andreas <a href="https://github.com/servo/rust-azure/pull/145">improved rust-azure’s <code>stroke-options</code></a> and <a href="https://github.com/servo/servo/pull/4977">landed it in Servo</a></li>
+<li>Ms2ger <a href="https://github.com/servo/servo/pull/5055">updated web-platform-tests</a> and <a href="https://github.com/servo/servo/pull/4980">enabled the <code>DOMEvents</code> tests</a></li>
+<li>Nathan Froyd <a href="https://github.com/servo/servo/pull/5047">added support for invoking <code>rr</code> from mach</a></li>
+<li>Shing Lyu <a href="https://github.com/servo/servo/pull/4870">added activation behavior to anchors, fixing a papercut</a></li>
+</ul>
+<h3 id="screenshots" tabindex="-1">Screenshots <a class="header-anchor" href="#screenshots">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p><a href="https://github.com/servo/servo/pull/4969">Parallel painting, visualized</a>:</p>
+<p><img src="https://cloud.githubusercontent.com/assets/28357/6275199/7bd6e788-b83a-11e4-89cb-a74f360272f2.png" alt=""></p>
+<h3 id="new-contributors" tabindex="-1">New contributors <a class="header-anchor" href="#new-contributors">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li><a href="https://github.com/andreasgal">Andreas Gal</a></li>
+<li><a href="https://github.com/pkondzior">Paweł Kondzior</a></li>
+</ul>
+<h3 id="meeting" tabindex="-1">Meeting <a class="header-anchor" href="#meeting">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p><a href="https://github.com/servo/servo/wiki/Meeting-2015-02-23">Minutes</a></p>
+<ul>
+<li>Rust in Gecko: We’re slowly figuring out what we need to do (and have a <a href="https://github.com/servo/servo/wiki/Meeting-2015-02-23">tracking bug</a>). Some more candidates for a Rust component in Gecko are an MP4 demultiplexer, and a replacement of safe browsing code.</li>
+<li>Selector matching is now in a new library</li>
+<li><code>./mach build-gonk</code> works. At the moment it needs a build of B2G, which is huge (and requires a device), but we’re working on packaging up the necessary bits which are relatively small.</li>
+</ul>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog-march-2024/blog/">Back</a>
+</div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+  <div class="container" style="text-align: center;">
+    <a href="/blog-march-2024/coc/">Code of Conduct</a> |
+    Contact: <a href="mailto:info@servo.org">info@servo.org</a>,
+    <a href="https://servo.zulipchat.com/">Zulip Chat</a>,
+    <a href="https://github.com/servo/servo/discussions">GitHub Discussions</a>,
+    <a href="https://floss.social/@servo">Mastodon</a>,
+    <a href="https://twitter.com/ServoDev">Twitter</a>
+  </div>
+  <div class="container" style="text-align: center; font-size: 0.875em;">
+    <p><a href="https://linuxfoundation.eu"><img src="/blog-march-2024/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250" style="margin: 1em;"></a></p>
+    <p>&copy; 2024 The Servo Project Developers</p>
+    <p>Copyright &copy; Servo is a project of <a href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>
