@@ -213,9 +213,120 @@
 <p>Servo is also <strong>participating in Outreachy</strong> for the first time since 201x!
 Outreachy is a three-month paid (7000 USD) remote internship program that runs twice a year, with a special focus on open source software.</p>
 <p>To select interns for Outreachy, there was a <em>contribution period</em> that is now coming to a close, during which contributors have landed a wide range of improvements.</p>
-<p>The biggest area was in code health (@eerii, @sandeepB3, @mnaibei, @maureenblack, @Aaryakhandelwal, @zawwz, @oluwatobiss, @azharcodeit, @jahielkomu, @MunishMummadi, @six-shot, @RustAndMetal, @Rhea-Eve, @richarddushime, @ektuu, #31567, #31566, #31549, #31521, #31512, #31508, #31592, #31587, #31565, #31568, #31582, #31551, #31563, #31562, #31560, #31608, #31548, #31564, #31617, #31611, #31612, #31610, #31627, #31623, #31625, #31647, #31643, #31640, #31626, #31632, #31628, #31654, #31685, #31719, #31710, #31712, #31769, #31759, #31717, #31758, #31738, #31745, #31755, #31708, #31644, #31735, #31793, #31797, #31778, #31776, #31770, #31813, #31811, #31791, #31800, #31801, #31823, #31784, #31818, #31837, #31827, #31888, #31877, #31876, #31834, #31865, #31853, #31863, #31864, #31852, #31843, #31850, #31849, #31907, #31908, #31906, #31891, #31900, #31898, #31893, #31867, #31890, #31878), where we have now fixed almost all of our rustdoc (@mrobinson, #31575) and clippy errors (@mrobinson, #31500, #31669), fixed tests (@azharcodeit, #31534), cleaned up our dependencies (@MunishMummadi, #31537), and improved our docs (@jahielkomu, #31718).</p>
+<!--
+$ > 2024.json tools/list-pull-requests.sh servo/servo '2024-.*'
+$ < 2024.json jq -s '["clippy", "rustdoc"] as $keywords | sort_by(.merged_at) | map({number, title, author: .user.login}) | map(select([.number] | inside('"$(< _posts/2024-03-29-this-month-in-servo.md | rg '^[*][*][*]' | rg -o '[(]#[0-9]+[)]' | rg -o '[0-9]+' | jq -sc | tee /dev/stderr)"'))) | map(select(.author != "mrobinson"))' | node -e 'pulls = require("fs").readFileSync("/dev/stdin",{encoding:"utf-8"}); pulls = JSON.parse(pulls); rules = [{key:"generated code",patterns:[/generated code/i]},{key:"clippy",patterns:[/clippy/i]},{key:"rustdoc",patterns:[/rustdoc/i,/rusdoc:/]}]; rules.map(rule => { console.log(`\n>>> ${rule.key}`); predicate = pull => rule.patterns.some(pattern => pattern.test(pull.title)); filteredPulls = pulls.filter(predicate); pulls = pulls.filter(pull => !predicate(pull)); report(filteredPulls); }); console.log("\n>>> rest"); report(pulls); function report(filteredPulls) { console.log(filteredPulls.map(pull => `${pull.author} (#${pull.number}) ${pull.title}`).join("\n")); console.log([...new Set([...filteredPulls.map(pull => `@${pull.author}`), ...filteredPulls.map(pull => `#${pull.number}`)]), ].join(", ")); }'
+[31567,31566,31549,31517,31521,31512,31508,31592,31587,31585,31565,31568,31583,31582,31534,31551,31537,31563,31562,31560,31608,31548,31564,31617,31611,31612,31610,31627,31623,31625,31647,31643,31640,31626,31632,31628,31654,31669,31685,31668,31721,31670,31719,31718,31710,31712,31769,31759,31717,31758,31738,31745,31755,31708,31644,31735,31793,31797,31778,31776,31770,31813,31811,31711,31791,31800,31801,31823,31784,31818,31837,31827,31888,31877,31876,31834,31865,31853,31863,31864,31852,31843,31850,31844,31849,31907,31908,31906,31891,31900,31898,31893,31867,31890,31878]
+
+>>> generated code
+eerii (#31721) clippy: Fix warnings in generated code
+eerii (#31711) Remove repeated imports from generated code
+eerii (#31844) clippy: Fix remaining warnings in generated code
+@eerii, #31721, #31711, #31844
+
+>>> clippy
+mnaibei (#31508) Fix several clippy warnings in components/hyper_serde
+mnaibei (#31512) Fix several clippy warnings in components/bluetooth
+sandeepB3 (#31549) Fix clippy warnings in `components/rand`
+eerii (#31566) clippy: fix warnings in components/bluetooth
+eerii (#31567) clippy: fix warnings on modules outside components
+eerii (#31560) clippy: fix warnings in components/gfx
+eerii (#31562) clippy: fix warnings in components/config*
+eerii (#31563) clippy: fix warnings in components/canvas
+zawwz (#31551) Fix clippy warnings in components/shared/net/request.rs
+eerii (#31568) clippy: fix warnings in various modules in components
+eerii (#31565) clippy: fix warnings in components/shared
+eerii (#31564) clippy: fix warnings in components/net
+mnaibei (#31548) Fix more clippy warnings in `components/shared/net`
+eerii (#31612) clippy: Fix warnings in `components/layout`
+eerii (#31610) clippy: Fix warnings in `components/constellation`
+eerii (#31611) clippy: Fix warnings in `components/layout_2020`
+eerii (#31627) clippy: Fix warnings in `components/shared`
+mnaibei (#31623) Fix clippy warnings in `components/third_party`
+eerii (#31628) clippy: Fix assorted warnings in `components/`
+eerii (#31626) clippy: Fix warnings in `components/net`
+RustAndMetal (#31710) clippy: Fix some warnings in `gfx`, `layout_2020`, and `script`
+six-shot (#31719) clippy: Fix some warnings in the `script` crate
+six-shot (#31735) clippy: Fix some warnings in `components/script`
+oluwatobiss (#31758) clippy: Fix dereferenced warning in `components/script`
+richarddushime (#31717) clippy: Fix many warnings in `components/script`
+six-shot (#31759) clippy: Fix clippy Problems in components/scripts
+jahielkomu (#31769) clippy: Fix warnings in `components/script/textinput.rs`
+oluwatobiss (#31770) clippy: Fix dereferenced warnings in `components/script`
+oluwatobiss (#31776) clippy: Fix `needless_return` warnings in `components/script`
+six-shot (#31778) clippy: Fix some clippy problems in `components/script`
+oluwatobiss (#31793) clippy: Fix `redundant_field_names` warnings in `components/script`
+Aaryakhandelwal (#31801) Clippy: Fixed clippy warnings in components/script/dom
+Aaryakhandelwal (#31800) Clippy: Fixed warnings in htmlimageelement.rs
+eerii (#31791) clippy: fix `result_unit_err` warnings
+oluwatobiss (#31811) clippy: Fix `needless_borrowed_reference` warnings in `components/script`
+oluwatobiss (#31813) clippy: Fix `needless_borrow` warnings in `components/script`
+jahielkomu (#31784) Fix some clippy warnings in `components/script/webdriver_handlers.rs`
+oluwatobiss (#31823) clippy: Fix `unnecessary_cast` warnings in `components/script`
+oluwatobiss (#31837) clippy: Fix `explicit_auto_deref` warnings in `components/script`
+Aaryakhandelwal (#31818) Clippy: Fixed some clippy warnings
+oluwatobiss (#31827) clippy: Fix `default_constructed_unit_structs` warnings in `components`
+ektuu (#31849)  clippy: Fix some warnings in `components/script`
+Aaryakhandelwal (#31850) clippy: Use `matches!` and dereferencing in match statements in `components/script`
+six-shot (#31843) clippy: Fix some clippy warnings in `components/script`
+oluwatobiss (#31852) clippy: Fix `collapsible_if` warnings in `components/script`
+Aaryakhandelwal (#31864) clippy: Fix warnings about dereferencing immutable references in `components/script`
+Aaryakhandelwal (#31863) clippy: Fix the `unneeded return` statement warnings in `components/script`
+oluwatobiss (#31853) clippy: Fix `collapsible_else_if` warnings in `components/script`
+ektuu (#31865) clippy: Fix some warnings in `components/script`
+ektuu (#31834)  clippy: Map to an error type instead of using allowing `result_unit_err` in `components/url`
+oluwatobiss (#31876) clippy: Fix `single_match` warnings in `components/script`
+oluwatobiss (#31877) clippy: Fix `clone_on_copy` warnings in `components/script`
+ektuu (#31888) clippy: Fix some warnings in `components/script`
+jahielkomu (#31878) clippy: Fix some warnings in `components/script/timers.rs`
+six-shot (#31890) clippy: Fix various warnings in `components/script/dom`
+Aaryakhandelwal (#31867) clippy: Fix warnings in `components/script/dom/request.rs`
+six-shot (#31893) clippy:Fix clippy problems in components/scripts/binding
+oluwatobiss (#31898) clippy: Fix `unnecessary_lazy_evaluations` warnings in `components`
+oluwatobiss (#31900) clippy: Fix `op_ref` warnings in `components/script`
+six-shot (#31891) clippy: Fix clippy problems in `components/script/dom`
+oluwatobiss (#31906) clippy: Fix `option_map_unit_fn` warnings in `components/script`
+azharcodeit (#31908) clippy: Remove `let` bindings in `components/script/dom`
+six-shot (#31907) clippy:fix various clippy problems in components/scripts
+@mnaibei, @sandeepB3, @eerii, @zawwz, @RustAndMetal, @six-shot, @oluwatobiss, @richarddushime, @jahielkomu, @Aaryakhandelwal, @ektuu, @azharcodeit, #31508, #31512, #31549, #31566, #31567, #31560, #31562, #31563, #31551, #31568, #31565, #31564, #31548, #31612, #31610, #31611, #31627, #31623, #31628, #31626, #31710, #31719, #31735, #31758, #31717, #31759, #31769, #31770, #31776, #31778, #31793, #31801, #31800, #31791, #31811, #31813, #31784, #31823, #31837, #31818, #31827, #31849, #31850, #31843, #31852, #31864, #31863, #31853, #31865, #31834, #31876, #31877, #31888, #31878, #31890, #31867, #31893, #31898, #31900, #31891, #31906, #31908, #31907
+
+>>> rustdoc
+Aaryakhandelwal (#31582) Fix rustdoc errors in `components/shared`
+sandeepB3 (#31587) Fix rustdoc warnings in `components/layout_2020`
+maureenblack (#31592) Fix rustdoc warnings in `components/layout 2020/positioned.rs`
+mnaibei (#31617) Fix rustdoc errors in `components/script/dom`
+oluwatobiss (#31625) rustdoc: Fix `StackingContextFragment` error in `components/layout_2020/display_list`
+azharcodeit (#31632) rustdoc: Fix warnings in `components/script/dom`
+Aaryakhandelwal (#31640) rustdoc: Fix warnings in `components/layout_2020`
+oluwatobiss (#31643) rusdoc: Fix `idl` warning in components/script/dom/bindings
+Aaryakhandelwal (#31647) rustdoc: Fix warnings in `components/layout_2020`
+jahielkomu (#31654) rustdoc: Fix errors in `components` and `ports`
+Rhea-Eve (#31712) rustdoc: Fix two warnings in `components/layout_2020`
+ektuu (#31644) rustdoc: Fix some typos in `components/layout_2020/table/mod.rs`
+Aaryakhandelwal (#31708) rustdoc: Fix warning in `components/layout_2020`
+oluwatobiss (#31755) rustdoc: Fix `bare_urls` warning in `components/script`
+oluwatobiss (#31745) rustdoc: Fix broken link to `FontFace` in `components/gfx`
+azharcodeit (#31738) rustdoc: fix warnings in `components/layout_2020/table`
+@Aaryakhandelwal, @sandeepB3, @maureenblack, @mnaibei, @oluwatobiss, @azharcodeit, @jahielkomu, @Rhea-Eve, @ektuu, #31582, #31587, #31592, #31617, #31625, #31632, #31640, #31643, #31647, #31654, #31712, #31644, #31708, #31755, #31745, #31738
+
+>>> rest
+DONE eerii (#31521) Move convert_* functions into gpuconvert.rs
+DONE eerii (#31517) Use thread pool to decode image
+DONE MunishMummadi (#31537) Update phf_codegen and phf_shared to 0.11
+DONE azharcodeit (#31534) Fix inheritance.sub.html WPT to work on Servo
+DONE six-shot (#31583) Adjust the language used in some of the documentation
+DONE eerii (#31585) Make image decoding thread pool the size of the system's CPUs
+DONE eerii (#31608) Fix unused import left in #31564
+DONE richarddushime (#31668) fonts: Add Noto Sans CJK fonts to the Linux fallback list
+DONE MunishMummadi (#31685) gfx: Rename cache_total_advance_and_word_seperators to cache_total_advance_and_word_separators
+DONE jahielkomu (#31718) docs: Improve and reformat `HACKING_QUICKSTART.md`
+DONE sandeepB3 (#31670) fonts: Consider Tertiary Ideographic Plane to be CJK
+DONE sandeepB3 (#31797) minibrowser: fix unused import: `InnerResponse` warning
+@eerii, @MunishMummadi, @azharcodeit, @six-shot, @richarddushime, @jahielkomu, @sandeepB3, #31521, #31517, #31537, #31534, #31583, #31585, #31608, #31668, #31685, #31718, #31670, #31797
+-->
+<p>The biggest area was in code health (@eerii, @MunishMummadi, @sandeepB3, #31521, #31537, #31608, #31685, #31670), where we have now fixed almost all of our rustdoc (@Aaryakhandelwal, @sandeepB3, @maureenblack, @mnaibei, @oluwatobiss, @azharcodeit, @jahielkomu, @Rhea-Eve, @ektuu, #31582, #31587, #31592, #31617, #31625, #31632, #31640, #31643, #31647, #31654, #31712, #31644, #31708, #31755, #31745, #31738) and clippy errors (@mnaibei, @sandeepB3, @eerii, @zawwz, @RustAndMetal, @six-shot, @oluwatobiss, @richarddushime, @jahielkomu, @Aaryakhandelwal, @ektuu, @azharcodeit, #31508, #31512, #31549, #31566, #31567, #31560, #31562, #31563, #31551, #31568, #31565, #31564, #31548, #31612, #31610, #31611, #31627, #31623, #31628, #31626, #31710, #31719, #31735, #31758, #31717, #31759, #31769, #31770, #31776, #31778, #31793, #31801, #31800, #31791, #31811, #31813, #31784, #31823, #31837, #31818, #31827, #31849, #31850, #31843, #31852, #31864, #31863, #31853, #31865, #31834, #31876, #31877, #31888, #31878, #31890, #31867, #31893, #31898, #31900, #31891, #31906, #31908, #31907).</p>
 <p>One contributor went further, cleaning up the codegen for our DOM bindings (@eerii, #31721, #31711, #31844) and even improving our image decoding by replacing per-image threads with a thread pool (@eerii, #31517, #31585)!
-Outreachy contributors also improved support for CJK font fallback (@richarddushime, @sandeepB3, #31668, #31670),</p>
+Outreachy contributors also landed improvements to our docs (@six-shot, @jahielkomu, #31583, #31718), CJK font fallback (@richarddushime, @sandeepB3, #31668, #31670), and the Web Platform Tests (@azharcodeit, #31534).</p>
 <!--
 - DONE outreachy
     - DONE thread pool image decoding #31517 #31585
@@ -391,7 +502,7 @@ From https://github.com/servo/servo
 *** f64409dbfb66d0ed5ca24d8186662b407a94abc5	https://github.com/servo/servo/pull/31592	Fix rustdoc warnings in `components/layout 2020/positioned.rs` (#31592)
 0768bba5b9077e375f850bd917611f01ff7cdd4b	https://github.com/servo/servo/pull/31584	fix: resolved warnings related to deprecated method chrono::NaiveDateTime::timestamp_millis (#31584)
 *** 81e6bd962bb78cd195dc7f4f00ab4f31288ff4a9	https://github.com/servo/servo/pull/31587	Fix rustdoc warnings in `components/layout_2020` (#31587)
-+++ 48f9db9bc501c063560472a995ff9d59e158758a	https://github.com/servo/servo/pull/31585	Make image decoding thread pool the size of the system's CPUs (#31585)
+*** 48f9db9bc501c063560472a995ff9d59e158758a	https://github.com/servo/servo/pull/31585	Make image decoding thread pool the size of the system's CPUs (#31585)
 *** 43f44965cda8751e04195bf4c4f298147907843f	https://github.com/servo/servo/pull/31565	clippy: fix warnings in components/shared (#31565)
 *** 3a5ca785d3ecc1fd6cb5a519cf1a91ac61e15c8c	https://github.com/servo/servo/pull/31568	clippy: fix warnings in various modules in components (#31568)
 19f1f2a8f4a18b17fc9c4ce80df831a339ce91f0	https://github.com/servo/servo/pull/31569	Extract generated finalizers into generic helper functions. (#31569)
