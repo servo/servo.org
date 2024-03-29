@@ -68,13 +68,17 @@ To select interns for Outreachy, there was a *contribution period* that is now c
 
 <!--
 $ > 2024.json tools/list-pull-requests.sh servo/servo '2024-.*'
-$ < 2024.json jq -s '["clippy", "rustdoc"] as $keywords | sort_by(.merged_at) | map({number, title, author: .user.login}) | map(select([.number] | inside('"$(< _posts/2024-03-29-this-month-in-servo.md | rg '^[*][*][*]' | rg -o '[(]#[0-9]+[)]' | rg -o '[0-9]+' | jq -sc | tee /dev/stderr)"'))) | map(select(.author != "mrobinson"))' | node -e 'pulls = require("fs").readFileSync("/dev/stdin",{encoding:"utf-8"}); pulls = JSON.parse(pulls); rules = [{key:"generated code",patterns:[/generated code/i]},{key:"clippy",patterns:[/clippy/i]},{key:"rustdoc",patterns:[/rustdoc/i,/rusdoc:/]}]; rules.map(rule => { console.log(`\n>>> ${rule.key}`); predicate = pull => rule.patterns.some(pattern => pattern.test(pull.title)); filteredPulls = pulls.filter(predicate); pulls = pulls.filter(pull => !predicate(pull)); report(filteredPulls); }); console.log("\n>>> rest"); report(pulls); function report(filteredPulls) { console.log(filteredPulls.map(pull => `${pull.author} (#${pull.number}) ${pull.title}`).join("\n")); console.log([...new Set([...filteredPulls.map(pull => `@${pull.author}`), ...filteredPulls.map(pull => `#${pull.number}`)]), ].join(", ")); }'
-[31567,31566,31549,31517,31521,31512,31508,31592,31587,31585,31565,31568,31583,31582,31534,31551,31537,31563,31562,31560,31608,31548,31564,31617,31611,31612,31610,31627,31623,31625,31647,31643,31640,31626,31632,31628,31654,31669,31685,31668,31721,31670,31719,31718,31710,31712,31769,31759,31717,31758,31738,31745,31755,31708,31644,31735,31793,31797,31778,31776,31770,31813,31811,31711,31791,31800,31801,31823,31784,31819,31818,31837,31827,31888,31877,31876,31834,31865,31853,31863,31864,31852,31843,31850,31844,31849,31907,31908,31906,31891,31900,31898,31893,31867,31890,31878]
+$ < 2024.json jq -s '["clippy", "rustdoc"] as $keywords | sort_by(.merged_at) | map({number, title, author: .user.login}) | map(select([.number] | inside('"$(< _posts/2024-03-29-this-month-in-servo.md | rg '^ *[*][*][*]' | rg -o '[(]#[0-9]+[)]' | rg -o '[0-9]+' | jq -sc | tee /dev/stderr)"'))) | map(select(.author != "mrobinson"))' | node -e 'pulls = require("fs").readFileSync("/dev/stdin",{encoding:"utf-8"}); pulls = JSON.parse(pulls); rules = [{key:"tooling",patterns:[/Add RUSTC env to clippy command/]},{key:"generated code",patterns:[/generated code/i]},{key:"clippy",patterns:[/clippy/i]},{key:"rustdoc",patterns:[/rustdoc/i,/rusdoc:/]}]; rules.map(rule => { console.log(`\n>>> ${rule.key}`); predicate = pull => rule.patterns.some(pattern => pattern.test(pull.title)); filteredPulls = pulls.filter(predicate); pulls = pulls.filter(pull => !predicate(pull)); report(filteredPulls); }); console.log("\n>>> rest"); report(pulls); function report(filteredPulls) { console.log(filteredPulls.map(pull => `${pull.author} (#${pull.number}) ${pull.title}`).join("\n")); console.log([...new Set([...filteredPulls.map(pull => `@${pull.author}`), ...filteredPulls.map(pull => `#${pull.number}`)]), ].join(", ")); }'
+[31567,31566,31549,31517,31521,31512,31508,31592,31587,31585,31565,31568,31583,31582,31534,31551,31537,31563,31562,31560,31608,31548,31564,31617,31611,31612,31610,31627,31623,31625,31647,31643,31640,31626,31632,31628,31654,31669,31694,31685,31668,31721,31670,31719,31718,31710,31712,31769,31759,31717,31758,31738,31745,31755,31708,31644,31735,31793,31797,31778,31776,31770,31813,31811,31711,31791,31800,31801,31823,31784,31819,31818,31837,31827,31888,31877,31876,31834,31865,31853,31863,31864,31852,31843,31850,31844,31849,31907,31908,31906,31891,31900,31898,31893,31867,31890,31878]
+
+>>> tooling
+DONE eerii (#31694) Add RUSTC env to clippy command
+@eerii, #31694
 
 >>> generated code
-eerii (#31721) clippy: Fix warnings in generated code
-eerii (#31711) Remove repeated imports from generated code
-eerii (#31844) clippy: Fix remaining warnings in generated code
+DONE eerii (#31721) clippy: Fix warnings in generated code
+DONE eerii (#31711) Remove repeated imports from generated code
+DONE eerii (#31844) clippy: Fix remaining warnings in generated code
 @eerii, #31721, #31711, #31844
 
 >>> clippy
@@ -181,7 +185,7 @@ DONE sandeepB3 (#31797) minibrowser: fix unused import: `InnerResponse` warning
 
 The biggest area of improvement was in code health (@eerii, @MunishMummadi, @sandeepB3, #31521, #31537, #31608, #31685, #31670), where we have now fixed almost all of our rustdoc (@Aaryakhandelwal, @sandeepB3, @maureenblack, @mnaibei, @oluwatobiss, @azharcodeit, @jahielkomu, @Rhea-Eve, @ektuu, #31582, #31587, #31592, #31617, #31625, #31632, #31640, #31643, #31647, #31654, #31712, #31644, #31708, #31755, #31745, #31738) and clippy errors (@mnaibei, @sandeepB3, @eerii, @zawwz, @RustAndMetal, @six-shot, @oluwatobiss, @richarddushime, @jahielkomu, @Aaryakhandelwal, @ektuu, @azharcodeit, #31508, #31512, #31549, #31566, #31567, #31560, #31562, #31563, #31551, #31568, #31565, #31564, #31548, #31612, #31610, #31611, #31627, #31623, #31628, #31626, #31710, #31719, #31735, #31758, #31717, #31759, #31769, #31770, #31776, #31778, #31793, #31801, #31800, #31791, #31811, #31813, #31819, #31784, #31823, #31837, #31818, #31827, #31849, #31850, #31843, #31852, #31864, #31863, #31853, #31865, #31834, #31876, #31877, #31888, #31878, #31890, #31867, #31893, #31898, #31900, #31891, #31906, #31908, #31907).
 
-One contributor went further, cleaning up the codegen for our DOM bindings (@eerii, #31721, #31711, #31844) and even improving our image decoding by replacing per-image threads with a thread pool (@eerii, #31517, #31585)!
+One contributor went further, cleaning up the codegen for our DOM bindings (@eerii, #31721, #31711, #31844), improving our dev tooling (@eerii, #31694), and even improving our image decoding by replacing per-image threads with a thread pool (@eerii, #31517, #31585)!
 Outreachy contributors also landed improvements to our docs (@six-shot, @jahielkomu, #31583, #31718), CJK font fallback (@richarddushime, @sandeepB3, #31668, #31670), and the Web Platform Tests (@azharcodeit, #31534).
 
 <!--
@@ -449,8 +453,8 @@ ac24cd61395f6a9646efe1da13ba5674eea59e7e	https://github.com/servo/servo/pull/316
     +++ 99c14c83ed0e2412bb17f0f58251bf4786550c22	https://github.com/servo/servo/pull/31660	Obey white-space when intrinsically sizing an IFC (#31660)
 74b5f798cd22fa6b8911cdab2561efcf87cf0041	https://github.com/servo/servo/pull/31693	Add issue templates (#31693)
     *** a8791ddcbcdfd0e8e0f0f87cf5920b6e580ed717	https://github.com/servo/servo/pull/31669	clippy: Fix remaining warnings in `gfx` for MacOS (#31669)
-cb3ae70340d413f3487fac2531bf2b4abe18233f	https://github.com/servo/servo/pull/31694	Add RUSTC env to clippy command (#31694)
-3fdbde94cff38ee7aeb624616a4abffa870d2589	https://github.com/servo/servo/pull/31691	Escaped reporting (#31691)
+    *** cb3ae70340d413f3487fac2531bf2b4abe18233f	https://github.com/servo/servo/pull/31694	Add RUSTC env to clippy command (#31694)
++++ 3fdbde94cff38ee7aeb624616a4abffa870d2589	https://github.com/servo/servo/pull/31691	Escaped reporting (#31691)
     *** 55250dd8a6317df875ff4931dd090d7a968b88e9	https://github.com/servo/servo/pull/31685	Fix typo: changed seperator to separator (#31685)
 884d02495712d4cc0cafb26443ff5b1bf7e92f5b	https://github.com/servo/servo/pull/31687	Add gstreamer plugins good/ugly for better codec support (#31687)
     *** 68b82e6d6133c8213cdad09b240d7a69227cc82a	https://github.com/servo/servo/pull/31668	fonts: Add Noto Sans CJK fonts to the Linux fallback list (#31668)
@@ -460,7 +464,7 @@ cb3ae70340d413f3487fac2531bf2b4abe18233f	https://github.com/servo/servo/pull/316
     1a46529560b26b3d76e614287e3646632e259290	https://github.com/servo/servo/pull/31709	build(deps): bump Stylo from `7dd8840` to `2c775e4` (#31709)
     52c2b1e3a8f57af9885bbc52037fc1cad42f7dae	https://github.com/servo/servo/pull/31715	Sync WPT with upstream (17-03-2024) (#31715)
     +++ d2dcb20beac29eabce02ea59b4944585d5b48a7c	https://github.com/servo/servo/pull/31635	Implement console.count/countReset (#31635)
-f98975bbbe7cd8cf55f172dae96f8cbc79c0e479	https://github.com/servo/servo/pull/31714	Update raw lags path for WPT import (#31714)
+    f98975bbbe7cd8cf55f172dae96f8cbc79c0e479	https://github.com/servo/servo/pull/31714	Update raw lags path for WPT import (#31714)
 >>> 2024-03-19T06:24:09Z
     228f4fb2fcf54e54edc2bbd1dbf8acd5a086c485	https://github.com/servo/servo/pull/31743	build(deps): bump syn from 2.0.52 to 2.0.53 (#31743)
     d6d903c5a11bafe7a23d15c7fd94d87dff6e3ac6	https://github.com/servo/servo/pull/31742	build(deps): bump brotli from 3.4.0 to 3.5.0 (#31742)
