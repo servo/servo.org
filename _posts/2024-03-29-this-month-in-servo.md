@@ -7,12 +7,47 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-Servo has had some exciting changes land:
+Remember how last month, we surpassed our legacy layout engine in the CSS test suites?
+This month, we’re proud to share that Servo has **surpassed legacy in the whole suite of Web Platform Tests** as well!
+This includes some big strides in **CSS tables** (+30.4pp to 62.9%), **CSS2 margin-padding-clear** (+13.2pp to 93.6%), and **CSS2 box-display** (+10.0pp to 84.4%).
+
+More on how we got there in a bit, but first let’s talk about new API support:
 
 - as of 2024-02-29, we support the **font property on CanvasRenderingContext2D** (@syvb, #31436)
 - as of 2024-03-02, we support **&lt;meta http-equiv="Refresh">** (@syvb, #31468)
 - as of 2024-03-16, we have basic support for the **getClientRects() method on Element** (@mrobinson, #31696)
 - as of 2024-03-18, we support **console.count() and console.countReset()** (@syvb, #31635)
+
+<!--
+wpt analysis
+
+>>> top deltas (servo, pp):
+csstable (30.4pp to 62.9%)
+margin-padding-clear (13.2pp to 93.6%)
+box-display (10.0pp to 84.4%)
+css (8.5pp to 64.6%)
+floats-clear (8.4pp to 89.6%)
+css2 (7.0pp to 77.2%)
+normal-flow (4.9pp to 91.5%)
+all (4.4pp to 56.9%)
+floats (4.1pp to 89.2%)
+linebox (2.5pp to 91.1%)
+csstext (2.4pp to 48.9%)
+cssflex (1.0pp to 54.0%)
+cssom (0.5pp to 65.4%)
+positioning (0.0pp to 88.5%)
+csspos (-1.3pp to 47.1%)
+abspos (-7.2pp to 91.0%)
+
+>>> top cuts in legacy regression (%):
+css (-Infinity% from 0.0pp to -3.2pp)
+csstable (-709.5% from 4.2pp to -25.6pp)
+normal-flow (-544.4% from 0.9pp to -4.0pp)
+css2 (-388.2% from 1.7pp to -4.9pp)
+box-display (-149.3% from 6.7pp to -3.3pp)
+margin-padding-clear (-137.5% from 9.6pp to -3.6pp)
+all (-100.0% from 1.6pp to 0.0pp)
+-->
 
 Servo is also **participating in Outreachy** for the first time since 201x!
 Outreachy is a three-month paid (7000 USD) remote internship program that runs twice a year, with a special focus on open source software.
