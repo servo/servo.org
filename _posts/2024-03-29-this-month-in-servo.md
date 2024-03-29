@@ -29,7 +29,9 @@ More on how we got there in a bit, but first let’s talk about new API support:
 - as of 2024-03-27, we support **WOFF2 web fonts** (@mrobinson, #31879)
 - as of 2024-03-27, we support the obsolete **&lt;pre width> attribute** (@bplaat, #31792)
 
-**Tables are enabled by default** as of 2024-03-08 (@Loirooriol, #31470), along with many improvements to style invalidation (@mrobinson, #31857), inline layout (@mrobinson, @atbrakhi, @Loirooriol, #31519, #31636, #31641, #31681, #31660, #31896), and table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831).
+**Tables are enabled by default** as of 2024-03-08 (@Loirooriol, #31470), you can now **transform &lt;iframe> and &lt;img>** (and other inline replaced elements) without wrapping them in a container (@mrobinson, #31833), and **‘text-align: justify’ now takes ‘text-indent’ into account** (@mrobinson, #31777).
+
+We’ve also landed improvements to style invalidation (@mrobinson, #31857), inline layout (@mrobinson, @atbrakhi, @Loirooriol, #31519, #31636, #31641, #31681, #31660, #31896), and table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831).
 
 Servo now stops loading videos and other media after encountering decode errors (@frereit, #31748), and our docs and dev tooling have been updated to ensure **support for WebM and AV1** (@delan, #31687).
 
@@ -56,6 +58,11 @@ To keep things from getting too noisy, @delan likes to use the event logging con
 
 <code style="word-wrap: break-word;">RUST_LOG='warn,servoshell<,servoshell>,constellation<,servoshell<winit@DeviceEvent=off,servoshell<winit@MainEventsCleared=off,servoshell<winit@NewEvents(WaitCancelled)=off,servoshell<winit@RedrawEventsCleared=off,servoshell<winit@RedrawRequested=off,servoshell<winit@UserEvent=off,servoshell<winit@WindowEvent(CursorMoved)=off,servoshell<winit@WindowEvent(AxisMotion)=off,servoshell<servo@EventDelivered=off,servoshell<servo@ReadyToPresent=off,servoshell>servo@Idle=off,servoshell>servo@MouseWindowMoveEventClass=off,constellation<compositor@ForwardEvent(MouseMoveEvent)=off,constellation<unknown@LogEntry=off,constellation<compositor@ReadyToPresent=off,constellation<script@LogEntry=off,servoshell<winit@WindowEvent(Moved)=off'</code>
 </aside>
+
+## Embedding and dev changes
+
+Servo had a pervasive but confusing concept of webviews or pipelines being “visible”, which actually controls whether script runs timers at a heavily limited rate and the compositor pauses animations.
+We’ve replaced this with the more concrete (but inverted) concept of a webview being “throttled” (@delan, #31816), including in our embedding API, where `WebViewVisibilityChanged` has been replaced with `SetWebViewThrottled` (@delan, #31815).
 
 <!--
 wpt analysis
@@ -238,8 +245,8 @@ Outreachy contributors also landed improvements to our docs (@six-shot, @jahielk
     - DONE synthetic/correct small caps #31435
     - DONE line-through on macos #31756
     - DONE text-shadow #31734
-    - fix justify with text-indent #31777
-    - fix transforming inline replaced elements (iframe, img) #31833
+    - DONE fix justify with text-indent #31777
+    - DONE fix transforming inline replaced elements (iframe, img) #31833
     - tables
         - DONE enabled by default #31470
         - DONE row height distribution #31421
@@ -257,8 +264,8 @@ Outreachy contributors also landed improvements to our docs (@six-shot, @jahielk
     - DONE codec support #31687
     - DONE abort load on decode error #31748
 - embedding and multiview
-    - feature flag #31541
-    - visible to throttled #31815
+    - SKIP feature flag #31541
+    - DONE visible to throttled #31815
 - servoshell
     - DONE logging #31439
     - DONE gap #31774
@@ -279,7 +286,7 @@ Outreachy contributors also landed improvements to our docs (@six-shot, @jahielk
     - cssom css layers no longer crash #31481
     - animation tick rate in wpt #31561
 - dev
-    - stylo #31350
+    - DONE stylo #31350
     - DONE tracing #31659 #31657
     - rustfmt stable #31441
     - faster taplo (mach fmt) on macos #31452
@@ -549,12 +556,12 @@ ac24cd61395f6a9646efe1da13ba5674eea59e7e	https://github.com/servo/servo/pull/316
 +++ 94d2f2183afaa3410f678447be6b1863537662ee	https://github.com/servo/servo/pull/31774	servoshell: fix gap between minibrowser toolbar and webview (#31774)
     *** 02a0cdd6faf80b77c6b066120bc2927c963affe3	https://github.com/servo/servo/pull/31770	clippy: Fix dereferenced warnings (#31770)
 >>> 2024-03-22T06:22:40Z
-+++ 0b863de8468ad2526bd9131243fd18cb3ba8b100	https://github.com/servo/servo/pull/31815	Rework “visible” to “throttled” in embedder-to-constellation + jniapi (#31815)
+    +++ 0b863de8468ad2526bd9131243fd18cb3ba8b100	https://github.com/servo/servo/pull/31815	Rework “visible” to “throttled” in embedder-to-constellation + jniapi (#31815)
     49c6f9e463582c8687a9e3674db7fac740bdad68	https://github.com/servo/servo/pull/31814	Update some dependencies (#31814)
     *** 3e63f8d6ee0dbd7934a0cb05753820676b89c61d	https://github.com/servo/servo/pull/31813	clippy: Fix needless borrow warnings (#31813)
     *** 694e86ecffb882f6d5934eb620257e9fceddbca8	https://github.com/servo/servo/pull/31811	clippy: Fix dereferencing a tuple pattern warnings (#31811)
 *** b22281d94f230c455142b73576904fdec2d1140a	https://github.com/servo/servo/pull/31802	Fix WPT reference no_red_3x3_monospace_table-ref.xht (#31802)
-+++ 841bd917840fe976646bab3923c0b54b62683040	https://github.com/servo/servo/pull/31777	layout: Take into account `text-indent` for justification (#31777)
+    +++ 841bd917840fe976646bab3923c0b54b62683040	https://github.com/servo/servo/pull/31777	layout: Take into account `text-indent` for justification (#31777)
 +++ 755701f4f6a961cc76bdef02a96843727e86dd9a	https://github.com/servo/servo/pull/31805	crown: Do not warn about crown for rustdoc or clippy (#31805)
 +++ 32a2b060738df8ce343e79ef71563018b8189187	https://github.com/servo/servo/pull/31810	Update fontsan to 0.5.2 (#31810)
     *** 8c7e9a15e1d63f99a887f4c78638017e31eed7a0	https://github.com/servo/servo/pull/31711	Remove repeated imports from generated code (#31711)
@@ -575,7 +582,7 @@ ea62a5e24f5c9a3b7c0588506f7a38de9ddbcd67	https://github.com/servo/servo/pull/317
 *** 77f5175efcf764edb3bf93a20a10e10ac981308a	https://github.com/servo/servo/pull/31822	removed  mutable compile warnings (#31822)
 +++ 99bad9d9b8110f6f7354b6a0e8132e969a38751e	https://github.com/servo/servo/pull/31821	Bump fontsan version (#31821)
     34dd38b4cbe0f35000c45683d0c65daa78a15644	https://github.com/servo/servo/pull/31817	Replace `remutex` with `parking_lot`'s `ReentrantMutex` (#31817)
-+++ 8882507ad06b598fb43d8542c67ad76daeda739c	https://github.com/servo/servo/pull/31816	Rework “visible” to “throttled” in constellation + script + compositor (#31816)
+    +++ 8882507ad06b598fb43d8542c67ad76daeda739c	https://github.com/servo/servo/pull/31816	Rework “visible” to “throttled” in constellation + script + compositor (#31816)
     *** 9b26dca141159ddc75266de9ef5a54f537450921	https://github.com/servo/servo/pull/31819	Fixed the .clone() warnings. (#31819)
 +++ 95e69fe4ffce23708608855720961741344bee07	https://github.com/servo/servo/pull/31794	layout: use `Au` in `BoxFragment` (#31794)
 >>> 2024-03-24T06:10:23Z
@@ -636,7 +643,7 @@ ea62a5e24f5c9a3b7c0588506f7a38de9ddbcd67	https://github.com/servo/servo/pull/317
     65db6e3b08daa21bc8cc73614896a1a08005b12d	https://github.com/servo/servo/pull/31895	wpt: Limit the console output sent to the intermittent tracker (#31895)
     *** bb7778774d4bdc6a0f787331e22e36baf027277b	https://github.com/servo/servo/pull/31893	clippy:Fix clippy problems in components/scripts/binding (#31893)
     *** 1f31609952a428ba7c877a7eed3f0ea4df2026f8	https://github.com/servo/servo/pull/31867	clippy: Fix warnings in `components/script/dom/request.rs` (#31867)
-+++ b8c82c1ab00dc8d3738523b60afd9cdcf548e83c	https://github.com/servo/servo/pull/31833	layout: Allow transforming inline replaced elements (#31833)
+    +++ b8c82c1ab00dc8d3738523b60afd9cdcf548e83c	https://github.com/servo/servo/pull/31833	layout: Allow transforming inline replaced elements (#31833)
     *** 15cb9dd5fcdee81c80c5c19b12bb50504754c2ad	https://github.com/servo/servo/pull/31890	clippy: Fix various warnings in `components/script/dom` (#31890)
     *** 29f796a1ded8cf14ebae3b351bc6ec618a5c822f	https://github.com/servo/servo/pull/31878	clippy: Fix some warnings in `components/script/timers.rs` (#31878)
 +++ 9b50a6be776ab3223f130deb471d89f6313670d3	https://github.com/servo/servo/pull/31889	Update mozjs to include https://github.com/servo/mozjs/commit/0172cf4b1e7049a70af5bf9f3c953ff48d6744d6 (#31889)
