@@ -29,6 +29,10 @@ More on how we got there in a bit, but first let’s talk about new API support:
 - as of 2024-03-27, we support **WOFF2 web fonts** (@mrobinson, #31879)
 - as of 2024-03-27, we support the obsolete **&lt;pre width> attribute** (@bplaat, #31792)
 
+<figure class="_figr"><a href="http://invalid"><img src="http://invalid" width="640" height="720"
+    alt="[TODO table of demos for new layout features, including synthetic small-caps, box-shadow, conical-gradient, text-shadow, line-through?, transformed &lt;img>]"></a>
+<figcaption>[TODO caption]</figcaption></figure>
+
 **Tables are enabled by default** as of 2024-03-08 (@Loirooriol, #31470), you can now **transform &lt;iframe> and &lt;img>** (and other inline replaced elements) without wrapping them in a container (@mrobinson, #31833), and **‘text-align: justify’ now takes ‘text-indent’ into account** (@mrobinson, #31777).
 
 We’ve also landed improvements to style invalidation (@mrobinson, #31857), inline layout (@mrobinson, @atbrakhi, @Loirooriol, #31519, #31636, #31641, #31681, #31660, #31896), and table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831).
@@ -51,6 +55,10 @@ For example:
   `RUST_LOG='servoshell,servoshell<=off,servoshell>=off,servoshell<winit@WindowEvent(Moved)'`
 
 To learn more about the RUST_LOG syntax, see the [env_logger docs](https://docs.rs/env_logger/0.10.2/env_logger/#enabling-logging), and for the full list of event log targets, see [ports/servoshell/tracing.rs](https://github.com/servo/servo/blob/2d5a1cd02ee0c3196875dc52ca55a150a63cc29f/ports/servoshell/tracing.rs) and [components/constellation/tracing.rs](https://github.com/servo/servo/blob/2d5a1cd02ee0c3196875dc52ca55a150a63cc29f/components/constellation/tracing.rs).
+
+<figure class="_fig"><a href="http://invalid"><img src="http://invalid" width="1280" height="720"
+    alt="[TODO comparison of event tracing with and without runtime filtering, maybe as two gifs side by side]"></a>
+<figcaption>[TODO caption]</figcaption></figure>
 
 <aside class="_note">
 
