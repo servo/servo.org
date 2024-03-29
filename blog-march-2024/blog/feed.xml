@@ -36,7 +36,7 @@ This includes some big strides in &lt;strong&gt;CSS tables&lt;/strong&gt; (+30.4
 &lt;li&gt;as of 2024-03-27, we support &lt;strong&gt;WOFF2 web fonts&lt;/strong&gt; (@mrobinson, #31879)&lt;/li&gt;
 &lt;li&gt;as of 2024-03-27, we support the obsolete &lt;strong&gt;&amp;lt;pre width&amp;gt; attribute&lt;/strong&gt; (@bplaat, #31792)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Tables are enabled by default&lt;/strong&gt; as of 2024-03-08 (@Loirooriol, #31470), along with many improvements to table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31596, #31586, #31606, #31661, #31619, #31650, #31704) and inline layout (@Loirooriol, @mrobinson, #31636, #31641, #31660).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tables are enabled by default&lt;/strong&gt; as of 2024-03-08 (@Loirooriol, #31470), along with many improvements to table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31596, #31586, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831), inline layout (@Loirooriol, @mrobinson, #31636, #31641, #31660), and style invalidation (@mrobinson, #31857).&lt;/p&gt;
 &lt;!--
 wpt analysis
 
@@ -226,6 +226,8 @@ Outreachy contributors also landed improvements to our docs (@six-shot, @jahielk
     - inline layout docs #31519
     - table layout docs #31535
     - Au #31395 #31794
+- media playback
+    - abort load on decode error #31748
 - embedding and multiview
     - feature flag #31541
     - visible to throttled #31815
@@ -241,6 +243,7 @@ Outreachy contributors also landed improvements to our docs (@six-shot, @jahielk
     - webrender - needed to reimpl scrolling/zooming?
         - compositor waiting - affects flakiness #31523
         - compositor shutdown - affects flakiness #31733
+    - mozjs spidermonkey 115.9 #31757
 - crashes and robustness
     - surfman egl #31431
     - video poster #31447
@@ -528,12 +531,12 @@ ac24cd61395f6a9646efe1da13ba5674eea59e7e	https://github.com/servo/servo/pull/316
 f5c4988dcb320bd92555d756790576ae36d74f81	https://github.com/servo/servo/pull/31808	Use C-ABI for JNI functions (#31808)
     *** da696b7e57fd4fbf615b3853ac48cf522e87e098	https://github.com/servo/servo/pull/31791	clippy: fix `result_unit_err` warnings (#31791)
 ea62a5e24f5c9a3b7c0588506f7a38de9ddbcd67	https://github.com/servo/servo/pull/31720	Use --locked when building in CI (#31720)
-ecabdc2583f8e82f39600c2b5d1ca81a7219f235	https://github.com/servo/servo/pull/31803	Don&#39;t trim leading whitespace of anonymous table cells (#31803)
+    +++ ecabdc2583f8e82f39600c2b5d1ca81a7219f235	https://github.com/servo/servo/pull/31803	Don&#39;t trim leading whitespace of anonymous table cells (#31803)
 *** ce0d4564694eb0d5d8baccd53377e387ea303e95	https://github.com/servo/servo/pull/31799	clipping: Fix some warnings in `components/script/dom` (#31799)
-4b408a37246f02c27ea70f6eec0d2c790be35e00	https://github.com/servo/servo/pull/31757	Update mozjs to use SM 115.9 (#31757)
++++ 4b408a37246f02c27ea70f6eec0d2c790be35e00	https://github.com/servo/servo/pull/31757	Update mozjs to use SM 115.9 (#31757)
     *** 7cdff9dd064268796bcc6071646a0496607ed5a3	https://github.com/servo/servo/pull/31800	Clippy: Fixed warnings in htmlimageelement.rs (#31800)
     *** da3288dd00c16f6c4ac18cd3b6ba87a2917978d1	https://github.com/servo/servo/pull/31801	Clippy: Fixed clippy warnings in components/script/dom (#31801)
-5c0199b5687a5c0c1b2fe82235ca609c7d9ea614	https://github.com/servo/servo/pull/31771	Net: fold websocket and http tokio runtime into one (#31771)
++++ 5c0199b5687a5c0c1b2fe82235ca609c7d9ea614	https://github.com/servo/servo/pull/31771	Net: fold websocket and http tokio runtime into one (#31771)
 &gt;&gt;&gt; 2024-03-23T06:12:59Z
     e22b61c935dcc9bfa1455c86a0a8a68fca6e4ee6	https://github.com/servo/servo/pull/31829	build(deps): bump libz-sys from 1.1.15 to 1.1.16 (#31829)
 +++ cb275e086c215b6da741c7918cd9683a134eb24f	https://github.com/servo/servo/pull/31809	Implement StaticRange (#31809)
@@ -551,24 +554,24 @@ ecabdc2583f8e82f39600c2b5d1ca81a7219f235	https://github.com/servo/servo/pull/318
     *** 3c05b58221a2b5c879d31d355087a905de6494d8	https://github.com/servo/servo/pull/31837	clippy: Fix `explicit_auto_deref` warnings in `components/script` (#31837)
     3fc157338e20936b8446c4685a477fad4169d92a	https://github.com/servo/servo/pull/31826	remove unused code (#31826)
 &gt;&gt;&gt; 2024-03-25T06:05:44Z
-58081579e9a537ba6bd71bcdcb2b066e14e037b8	https://github.com/servo/servo/pull/31841	WebIDL: Remove `JSObject` from `Document::NamedGetter` (#31841)
++++ 58081579e9a537ba6bd71bcdcb2b066e14e037b8	https://github.com/servo/servo/pull/31841	WebIDL: Remove `JSObject` from `Document::NamedGetter` (#31841)
     *** 1ab38fcd3f01fa0dd35f5275f26158bdf8f4f329	https://github.com/servo/servo/pull/31827	clippy: Fix `default_constructed_unit_structs` warnings in `components` (#31827)
 &gt;&gt;&gt; 2024-03-27T06:13:22Z
     *** 92b557867c199472ce42a2f5b99676c485ed2ae1	https://github.com/servo/servo/pull/31888	clippy: fixed some warnings in components/script (#31888)
     +++ 8dece05980a4ec46b06505e511f8b158d4c0fe3b	https://github.com/servo/servo/pull/31879	fonts: Add support for WOFF2 and properly load web fonts from @imports (#31879)
     *** b55d0a20532b915dee395f8c448ac832ed36b7d4	https://github.com/servo/servo/pull/31877	clippy: Fix clone-on-copy warnings (#31877)
-5f7baf31c2097a02d8ddb370d6131d2703413010	https://github.com/servo/servo/pull/31748	dom: Abort media element load on decode errors (#31748)
++++ 5f7baf31c2097a02d8ddb370d6131d2703413010	https://github.com/servo/servo/pull/31748	dom: Abort media element load on decode errors (#31748)
     4da9d39ccaa57a879cc9d586b7c940d274e8cba7	https://github.com/servo/servo/pull/31883	build(deps): bump autocfg from 1.1.0 to 1.2.0 (#31883)
     2649e4d4b26d8c7a93d1a481fbf92b0f39a90c6d	https://github.com/servo/servo/pull/31886	build(deps): bump chrono from 0.4.35 to 0.4.36 (#31886)
     a05c0a9a31b6283a8c4dd352938afc07a69b2fa6	https://github.com/servo/servo/pull/31885	build(deps): bump itoa from 1.0.10 to 1.0.11 (#31885)
     17e9a534f11723c5219bbb75029b000db946c779	https://github.com/servo/servo/pull/31881	build(deps): bump serde_json from 1.0.114 to 1.0.115 (#31881)
-bf3798bbde8131a5336ad6987adb15d2dd0f5490	https://github.com/servo/servo/pull/31857	layout: More conservatively replace Stylist&#39;s Device (#31857)
+    +++ bf3798bbde8131a5336ad6987adb15d2dd0f5490	https://github.com/servo/servo/pull/31857	layout: More conservatively replace Stylist&#39;s Device (#31857)
     *** b71de9256911e1e29006cf1c1a782bda5c4c8968	https://github.com/servo/servo/pull/31876	clippy: Fix single_match warnings (#31876)
-d16f259e1d3c7b8c0c0f4692af41ba2e41085e23	https://github.com/servo/servo/pull/31862	Fix table with rows but no column (#31862)
+    +++ d16f259e1d3c7b8c0c0f4692af41ba2e41085e23	https://github.com/servo/servo/pull/31862	Fix table with rows but no column (#31862)
     *** 68b0be6dc7a22ad743687bc963d4b9806391eaaa	https://github.com/servo/servo/pull/31834	 clippy: Map to an error type instead of using allowing `result_unit_err` in `components/url` (#31834)
-2463017c49373373d6af5e6a9f616abd486cd4d6	https://github.com/servo/servo/pull/31874	tidy: Make sure to run WPT lints when `--all` is passed to tidy (#31874)
+    2463017c49373373d6af5e6a9f616abd486cd4d6	https://github.com/servo/servo/pull/31874	tidy: Make sure to run WPT lints when `--all` is passed to tidy (#31874)
     *** 188f3caff168a217b0cff3641cb2dbff232cea1c	https://github.com/servo/servo/pull/31865	clippy: fix some warnings in components/script (#31865)
-58f170c97ab0715d7ca4833f7ec17d80f435d627	https://github.com/servo/servo/pull/31873	Update python detection in codegen (#31873)
+    58f170c97ab0715d7ca4833f7ec17d80f435d627	https://github.com/servo/servo/pull/31873	Update python detection in codegen (#31873)
     *** f8a2eaea4741408c73efc5c0ad467eae96d2e799	https://github.com/servo/servo/pull/31853	clippy: Fix collapsible_else_if warnings (#31853)
     *** d814d0553981777c01409d545e5c1c335b8eb7f4	https://github.com/servo/servo/pull/31863	fixed the `unneeded return` statement warnings. (#31863)
     *** f7669b5238ce9e2a94495472bf77f67b0e311cd8	https://github.com/servo/servo/pull/31864	fixes dereferencing on an immutable reference (#31864)
@@ -580,18 +583,18 @@ d16f259e1d3c7b8c0c0f4692af41ba2e41085e23	https://github.com/servo/servo/pull/318
     e9483887792362220aa547c46f1644df8f81d0e1	https://github.com/servo/servo/pull/31856	build(deps): bump syn from 2.0.53 to 2.0.55 (#31856)
     5ee4480660f2123d767df4253f4ae173e5495405	https://github.com/servo/servo/pull/31854	build(deps): bump prettyplease from 0.2.16 to 0.2.17 (#31854)
     5bf9ac3e54726cfaa2393327be77667a3166aecd	https://github.com/servo/servo/pull/31855	build(deps): bump fastrand from 2.0.1 to 2.0.2 (#31855)
-e77dc3684236ad6693b8df6131f2ba8f99bbef2f	https://github.com/servo/servo/pull/31705	Pick the first or last baseline as appropriate (#31705)
+    +++ e77dc3684236ad6693b8df6131f2ba8f99bbef2f	https://github.com/servo/servo/pull/31705	Pick the first or last baseline as appropriate (#31705)
     *** a53632c0e5fe223ca1c39a088ee46f49bb355243	https://github.com/servo/servo/pull/31852	clippy: Fix collapsible_if warnings (#31852)
     *** 3d10dbae32149515dc839d69bc2ba14f12b45251	https://github.com/servo/servo/pull/31843	clippy: Fix some clippy warnings in `components/script` (#31843)
 +++ 97144ddf7104fd2cf8c1947db7f0d432754f37f5	https://github.com/servo/servo/pull/31792	script: Add pre element obsolete width attribute support (#31792)
     *** bd39e03eeb3d369e8189135326c733bbe5a3bb10	https://github.com/servo/servo/pull/31850	changed `match` to &#39;matches!&#39; (#31850)
     *** 9a76dd9325794346163e858831abb97de4b41e41	https://github.com/servo/servo/pull/31844	clippy: Fix remaining warnings in generated code (#31844)
     *** d8adeb1b44cd99563e29309c31dcc9a008951a63	https://github.com/servo/servo/pull/31849	 clippy: Fix some warnings in `components/script` (#31849)
-dbe3cb8a3c169020ba6e61390c9ae6d4725aa0ae	https://github.com/servo/servo/pull/31831	Don&#39;t update row baseline if cell is empty (#31831)
+    +++ dbe3cb8a3c169020ba6e61390c9ae6d4725aa0ae	https://github.com/servo/servo/pull/31831	Don&#39;t update row baseline if cell is empty (#31831)
 +++ c50df5ccbea192cfd39dd7071dc92c32d6b281cb	https://github.com/servo/servo/pull/31825	nix build: replace `fetchCargoTarball` with `importCargoLock` (#31825)
 &gt;&gt;&gt; 2024-03-28T06:16:10Z
     *** 072b892706e9f39a2cb3559c610509cae00ab5cc	https://github.com/servo/servo/pull/31907	clippy:fix various clippy problems in components/scripts  (#31907)
-1c8c287f01757488733f5df501461bf1b74ca163	https://github.com/servo/servo/pull/31880	WebIDL: Replace `NonNull&lt;JSObject&gt;` in `xmlhttprequest` (#31880)
++++ 1c8c287f01757488733f5df501461bf1b74ca163	https://github.com/servo/servo/pull/31880	WebIDL: Replace `NonNull&lt;JSObject&gt;` in `xmlhttprequest` (#31880)
     *** ff95ce5abd5eb108d40ff77fa6319eafbc520dd7	https://github.com/servo/servo/pull/31908	fix: omitted the `let` bindings (#31908)
     *** da76ebabe9359c6f815f16adc81af7f11bb3265c	https://github.com/servo/servo/pull/31906	clippy: Fix option_map_unit_fn warnings (#31906)
     *** a5bcae212a175d89507bffba7c57313b2cc9b3ab	https://github.com/servo/servo/pull/31891	clippy: Fix clippy problems in `components/script/dom` (#31891)
