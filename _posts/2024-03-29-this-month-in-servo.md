@@ -29,7 +29,7 @@ More on how we got there in a bit, but first let’s talk about new API support:
 - as of 2024-03-27, we support **WOFF2 web fonts** (@mrobinson, #31879)
 - as of 2024-03-27, we support the obsolete **&lt;pre width> attribute** (@bplaat, #31792)
 
-**Tables are enabled by default** as of 2024-03-08 (@Loirooriol, #31470), along with many improvements to table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31596, #31586, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831), inline layout (@Loirooriol, @mrobinson, #31636, #31641, #31660), and style invalidation (@mrobinson, #31857).
+**Tables are enabled by default** as of 2024-03-08 (@Loirooriol, #31470), along with many improvements to table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831), inline layout (@Loirooriol, @mrobinson, #31636, #31641, #31660), and style invalidation (@mrobinson, #31857).
 
 <!--
 wpt analysis
@@ -224,7 +224,7 @@ Outreachy contributors also landed improvements to our docs (@six-shot, @jahielk
     - enabled more css tests #31469
     - inline layout docs #31519
     - table layout docs #31535
-    - Au #31395 #31794
+    - Au #31395 #31621 #31794
 - media playback
     - abort load on decode error #31748
 - embedding and multiview
@@ -239,7 +239,8 @@ Outreachy contributors also landed improvements to our docs (@six-shot, @jahielk
 - upgrades
     - stylo 2023-07-23 #31437
     - stylo 2023-09-01 #31609
-    - webrender - needed to reimpl scrolling/zooming?
+    - webrender 0.64 #31486
+        - needed to reimpl scrolling/zooming?
         - compositor waiting - affects flakiness #31523
         - compositor shutdown - affects flakiness #31733
     - mozjs spidermonkey 115.9 #31757
@@ -372,10 +373,10 @@ From https://github.com/servo/servo
     *** 3a5ca785d3ecc1fd6cb5a519cf1a91ac61e15c8c	https://github.com/servo/servo/pull/31568	clippy: fix warnings in various modules in components (#31568)
 19f1f2a8f4a18b17fc9c4ce80df831a339ce91f0	https://github.com/servo/servo/pull/31569	Extract generated finalizers into generic helper functions. (#31569)
     *** 0327d4638bdb3c95315c143dfcc94d8195fb5fae	https://github.com/servo/servo/pull/31583	Adjust the language used in some of the documentation (#31583)
-+++ 7e8a1503ba6f3c4d99ffed90e65746d63a65ac8d	https://github.com/servo/servo/pull/31535	layout: Add documentation about table layout (#31535)
+    +++ 7e8a1503ba6f3c4d99ffed90e65746d63a65ac8d	https://github.com/servo/servo/pull/31535	layout: Add documentation about table layout (#31535)
     *** dd6c929cc6baaea4a385c8c2cc5dc5f3236e8c06	https://github.com/servo/servo/pull/31582	Fix rustdoc errors in `components/shared` (#31582)
-6b5a5147f8ce927fc8765e0ab5b447faa8744cd4	https://github.com/servo/servo/pull/31536	Obey table cell's box-sizing (#31536)
-    49ae9bb4422b6d72ebbeb67b59e9ac734e8363b5	https://github.com/servo/servo/pull/31578	layout: Fix the pseudo for anonymous tables (#31578)
+    +++ 6b5a5147f8ce927fc8765e0ab5b447faa8744cd4	https://github.com/servo/servo/pull/31536	Obey table cell's box-sizing (#31536)
+    +++ 49ae9bb4422b6d72ebbeb67b59e9ac734e8363b5	https://github.com/servo/servo/pull/31578	layout: Fix the pseudo for anonymous tables (#31578)
     *** a5a0e1cb3c339f9314777ebe18c88ca7c933b2c0	https://github.com/servo/servo/pull/31534	Fix inheritance.sub.html WPT to work on Servo (#31534)
     *** 07485798032bf4703e405a1d756435b4135b63f9	https://github.com/servo/servo/pull/31551	Fix clippy warnings in components/shared/net/request.rs (#31551)
     *** 52c4f57085eee5e9a6525fd0a9d380f55e8b1a88	https://github.com/servo/servo/pull/31537	Update phf_codegen and phf_shared to 0.11 (#31537)
@@ -399,12 +400,12 @@ f44cefa8166955776c442c7636a159f8e582b469	https://github.com/servo/servo/pull/315
     45344dca2b6fc6afcbadc83dd3c87b57fa775524	https://github.com/servo/servo/pull/31601	font_cache: Handle filtering `@font-face` rules in Servo (#31601)
     *** b03411f56771dfb45ec4c8a3d9888caac65abaf9	https://github.com/servo/servo/pull/31611	clippy: Fix warnings in `components/layout_2020` (#31611)
     +++ 1d1f239ecc8bccef7869425f1fb4925fecf0e2c1	https://github.com/servo/servo/pull/31597	layout: Enable rendering of `conical-gradient` and `repeating-conical-gradient` (#31597)
-de7b9bed858aff460b19c75dd3a5337aebc650f9	https://github.com/servo/servo/pull/31613	Take spaces into account in the max-content size of an IFC (#31613)
+    +++ de7b9bed858aff460b19c75dd3a5337aebc650f9	https://github.com/servo/servo/pull/31613	Take spaces into account in the max-content size of an IFC (#31613)
     *** a6e25d555beec2c454c03f9ca0f5c4047d538b2d	https://github.com/servo/servo/pull/31612	clippy: Fix warnings in `components/layout` (#31612)
     *** 7f1ef4c7fe7d68b08894eb0e944448505178f79d	https://github.com/servo/servo/pull/31610	clippy: Fix warnings in `components/constellation` (#31610)
-11c16adcd184dd5bc98ad946ac05e942d335f0a3	https://github.com/servo/servo/pull/31602	Use libc::malloc_size on apple (#31602)
+    11c16adcd184dd5bc98ad946ac05e942d335f0a3	https://github.com/servo/servo/pull/31602	Use libc::malloc_size on apple (#31602)
 >>> 2024-03-13T06:14:05Z
-0fda14263a206d99792fcfbec6a5f6dfdb5ff337	https://github.com/servo/servo/pull/31621	layout: make `margin` in `pbm` use app unit (#31621)
++++ 0fda14263a206d99792fcfbec6a5f6dfdb5ff337	https://github.com/servo/servo/pull/31621	layout: make `margin` in `pbm` use app unit (#31621)
 0b4b544910030c672020fee7fd1ba2cbad8410ab	https://github.com/servo/servo/pull/31633	Update FUNDING.yml (#31633)
     5febb3031337f7ee989fe3be80a4f3fdf0bf933c	https://github.com/servo/servo/pull/31631	build(deps): bump proc-macro2 from 1.0.78 to 1.0.79 (#31631)
     ed20f4f11a201b5d062b9cad5622a3e214379cea	https://github.com/servo/servo/pull/31630	build(deps): bump anyhow from 1.0.80 to 1.0.81 (#31630)
@@ -430,7 +431,7 @@ da609076c32abcc3d3267cb663dbae861b2dfba7	https://github.com/servo/servo/pull/316
     *** 03d64d0675d4d1878232829293e7fdacaec5844e	https://github.com/servo/servo/pull/31628	clippy: Fix assorted warnings in `components/` (#31628)
 >>> 2024-03-15T06:15:11Z
     +++ bc4f1c217d28ce972632ab42090d741c76b67e3b	https://github.com/servo/servo/pull/31682	Implement HTMLStyleElement.disabled attribute (#31682)
-ad37a54f59f4eef2c8f815a3a59ab7d928b2946f	https://github.com/servo/servo/pull/31486	dependencies: Upgrade to WebRender 0.64 (#31486)
++++ ad37a54f59f4eef2c8f815a3a59ab7d928b2946f	https://github.com/servo/servo/pull/31486	dependencies: Upgrade to WebRender 0.64 (#31486)
     4597aeae5f9b1d76d6af664afdbb72647908e907	https://github.com/servo/servo/pull/31674	build(deps): bump smallbitvec from 2.5.1 to 2.5.2 (#31674)
     2afc117c44fffb3dc9b82c30bbc121a502349dd7	https://github.com/servo/servo/pull/31672	build(deps): bump system-deps from 6.2.0 to 6.2.1 (#31672)
 +++ ed99128132eeed2aefea4a0e0a87e6eb0b14bd12	https://github.com/servo/servo/pull/31659	constellation: allow event tracing to be configured with RUST_LOG (#31659)
@@ -446,7 +447,7 @@ b1debf20689949c0acfb06efca70f7fd34dc0854	https://github.com/servo/servo/pull/316
     +++ 82128d38385708d80a29dc3a6808be943dda6f9b	https://github.com/servo/servo/pull/31704	Don't null out the baselines of anonymous tables (#31704)
 d211cfc97870f436485b35a357a66ff4824cc3d5	https://github.com/servo/servo/pull/31697	documentation: Add instructions for creating a shallow clone of the Servo repository (#31697)
     30db7a9a5f59032321fb0ed0b5e9e2fbdf567b2a	https://github.com/servo/servo/pull/31703	build(deps): bump tokio-test from 0.4.3 to 0.4.4 (#31703)
-8a6481c3411543a79b7fdc2fdb191dfa85c33111	https://github.com/servo/servo/pull/31700	clippy: Fix warnings in `components/script` (#31700)
+*** 8a6481c3411543a79b7fdc2fdb191dfa85c33111	https://github.com/servo/servo/pull/31700	clippy: Fix warnings in `components/script` (#31700)
     +++ 47a4ce467fd146681e9debc7de7bb0f1f4184b7e	https://github.com/servo/servo/pull/31696	layout: Add basic support for `getClientRects()` queries (#31696)
     3f3820b3dc425c1e7f89a8091318d73fce4f04c9	https://github.com/servo/servo/pull/31702	build(deps): bump tokio-stream from 0.1.14 to 0.1.15 (#31702)
     94b68ccb0c9e465a97ff2948a9da7c84e64d63f1	https://github.com/servo/servo/pull/31701	build(deps): bump h2 from 0.3.24 to 0.3.25 (#31701)
