@@ -29,9 +29,9 @@ More on how we got there in a bit, but first let’s talk about new API support:
 - as of 2024-03-27, we support **WOFF2 web fonts** (@mrobinson, #31879)
 - as of 2024-03-27, we support the obsolete **&lt;pre width> attribute** (@bplaat, #31792)
 
-**Tables are enabled by default** as of 2024-03-08 (@Loirooriol, #31470), along with many improvements to style invalidation (@mrobinson, #31857), inline layout (@Loirooriol, @mrobinson, #31636, #31641, #31660), and table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831).
+**Tables are enabled by default** as of 2024-03-08 (@Loirooriol, #31470), along with many improvements to style invalidation (@mrobinson, #31857), inline layout (@mrobinson, @atbrakhi, @Loirooriol, #31519, #31636, #31641, #31681, #31660, #31896), and table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831).
 
-Servo now stops loading videos and other media after encountering decode errors (@frereit, #31748), and our docs and dev tooling have been updated to ensure support for WebM and AV1 (@delan, #31687).
+Servo now stops loading videos and other media after encountering decode errors (@frereit, #31748), and our docs and dev tooling have been updated to ensure **support for WebM and AV1** (@delan, #31687).
 
 Our dependency upgrades surge forward, with **WebRender now fully caught up with upstream** (@mrobinson, @mukilan, #31486), **Stylo** bumped from June 2023 to September 2023 (@Loirooriol, #31437, #31609), and **SpiderMonkey updated to 115.9** (@sagudev, #31757).
 
@@ -242,16 +242,16 @@ Outreachy contributors also landed improvements to our docs (@six-shot, @jahielk
     - fix transforming inline replaced elements (iframe, img) #31833
     - tables
         - DONE enabled by default #31470
-        - row height distribution #31421
-        - correct sizing in flow layout #31455 (count!)
-        - intrinsic sizing #31506
-    - inline layout
-        - min-content spaces before atomic inline #31896
-        - white-space pre-wrap hang #31681
-        - white-space intrinsic sizing ifc #31660
+        - DONE row height distribution #31421
+        - DONE correct sizing in flow layout #31455 (count!)
+        - DONE intrinsic sizing #31506
+    - DONE inline layout
+        - DONE min-content spaces before atomic inline #31896
+        - DONE white-space pre-wrap hang #31681
+        - DONE white-space intrinsic sizing ifc #31660
     - enabled more css tests #31469
-    - inline layout docs #31519
-    - table layout docs #31535
+    - DONE inline layout docs #31519
+    - DONE table layout docs #31535
     - Au #31395 #31621 #31794
 - media playback
     - DONE codec support #31687
@@ -280,7 +280,7 @@ Outreachy contributors also landed improvements to our docs (@six-shot, @jahielk
     - animation tick rate in wpt #31561
 - dev
     - stylo #31350
-    - tracing #31659 #31657
+    - DONE tracing #31659 #31657
     - rustfmt stable #31441
     - faster taplo (mach fmt) on macos #31452
     - tidy whatwg replacement #31449
