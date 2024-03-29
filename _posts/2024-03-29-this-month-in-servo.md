@@ -48,6 +48,8 @@ For example:
 - to trace only winit window moved events in servoshell, plus all ordinary servoshell logs at trace level:<br>
   `RUST_LOG='servoshell,servoshell<=off,servoshell>=off,servoshell<winit@WindowEvent(Moved)'`
 
+To learn more about the RUST_LOG syntax, see the [env_logger docs](https://docs.rs/env_logger/0.10.2/env_logger/#enabling-logging), and for the full list of event log targets, see [ports/servoshell/tracing.rs](https://github.com/servo/servo/blob/2d5a1cd02ee0c3196875dc52ca55a150a63cc29f/ports/servoshell/tracing.rs) and [components/constellation/tracing.rs](https://github.com/servo/servo/blob/2d5a1cd02ee0c3196875dc52ca55a150a63cc29f/components/constellation/tracing.rs).
+
 <aside class="_note">
 
 To keep things from getting too noisy, @delan likes to use the event logging config below:
