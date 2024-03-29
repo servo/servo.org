@@ -260,13 +260,17 @@ Outreachy is a three-month paid (7000 USD) remote internship program that runs t
 To select interns for Outreachy, there was a <em>contribution period</em> that is now coming to a close, during which contributors have landed a wide range of improvements.</p>
 <!--
 $ > 2024.json tools/list-pull-requests.sh servo/servo '2024-.*'
-$ < 2024.json jq -s '["clippy", "rustdoc"] as $keywords | sort_by(.merged_at) | map({number, title, author: .user.login}) | map(select([.number] | inside('"$(< _posts/2024-03-29-this-month-in-servo.md | rg '^[*][*][*]' | rg -o '[(]#[0-9]+[)]' | rg -o '[0-9]+' | jq -sc | tee /dev/stderr)"'))) | map(select(.author != "mrobinson"))' | node -e 'pulls = require("fs").readFileSync("/dev/stdin",{encoding:"utf-8"}); pulls = JSON.parse(pulls); rules = [{key:"generated code",patterns:[/generated code/i]},{key:"clippy",patterns:[/clippy/i]},{key:"rustdoc",patterns:[/rustdoc/i,/rusdoc:/]}]; rules.map(rule => { console.log(`\n>>> ${rule.key}`); predicate = pull => rule.patterns.some(pattern => pattern.test(pull.title)); filteredPulls = pulls.filter(predicate); pulls = pulls.filter(pull => !predicate(pull)); report(filteredPulls); }); console.log("\n>>> rest"); report(pulls); function report(filteredPulls) { console.log(filteredPulls.map(pull => `${pull.author} (#${pull.number}) ${pull.title}`).join("\n")); console.log([...new Set([...filteredPulls.map(pull => `@${pull.author}`), ...filteredPulls.map(pull => `#${pull.number}`)]), ].join(", ")); }'
-[31567,31566,31549,31517,31521,31512,31508,31592,31587,31585,31565,31568,31583,31582,31534,31551,31537,31563,31562,31560,31608,31548,31564,31617,31611,31612,31610,31627,31623,31625,31647,31643,31640,31626,31632,31628,31654,31669,31685,31668,31721,31670,31719,31718,31710,31712,31769,31759,31717,31758,31738,31745,31755,31708,31644,31735,31793,31797,31778,31776,31770,31813,31811,31711,31791,31800,31801,31823,31784,31819,31818,31837,31827,31888,31877,31876,31834,31865,31853,31863,31864,31852,31843,31850,31844,31849,31907,31908,31906,31891,31900,31898,31893,31867,31890,31878]
+$ < 2024.json jq -s '["clippy", "rustdoc"] as $keywords | sort_by(.merged_at) | map({number, title, author: .user.login}) | map(select([.number] | inside('"$(< _posts/2024-03-29-this-month-in-servo.md | rg '^ *[*][*][*]' | rg -o '[(]#[0-9]+[)]' | rg -o '[0-9]+' | jq -sc | tee /dev/stderr)"'))) | map(select(.author != "mrobinson"))' | node -e 'pulls = require("fs").readFileSync("/dev/stdin",{encoding:"utf-8"}); pulls = JSON.parse(pulls); rules = [{key:"tooling",patterns:[/Add RUSTC env to clippy command/]},{key:"generated code",patterns:[/generated code/i]},{key:"clippy",patterns:[/clippy/i]},{key:"rustdoc",patterns:[/rustdoc/i,/rusdoc:/]}]; rules.map(rule => { console.log(`\n>>> ${rule.key}`); predicate = pull => rule.patterns.some(pattern => pattern.test(pull.title)); filteredPulls = pulls.filter(predicate); pulls = pulls.filter(pull => !predicate(pull)); report(filteredPulls); }); console.log("\n>>> rest"); report(pulls); function report(filteredPulls) { console.log(filteredPulls.map(pull => `${pull.author} (#${pull.number}) ${pull.title}`).join("\n")); console.log([...new Set([...filteredPulls.map(pull => `@${pull.author}`), ...filteredPulls.map(pull => `#${pull.number}`)]), ].join(", ")); }'
+[31567,31566,31549,31517,31521,31512,31508,31592,31587,31585,31565,31568,31583,31582,31534,31551,31537,31563,31562,31560,31608,31548,31564,31617,31611,31612,31610,31627,31623,31625,31647,31643,31640,31626,31632,31628,31654,31669,31694,31685,31668,31721,31670,31719,31718,31710,31712,31769,31759,31717,31758,31738,31745,31755,31708,31644,31735,31793,31797,31778,31776,31770,31813,31811,31711,31791,31800,31801,31823,31784,31819,31818,31837,31827,31888,31877,31876,31834,31865,31853,31863,31864,31852,31843,31850,31844,31849,31907,31908,31906,31891,31900,31898,31893,31867,31890,31878]
+
+>>> tooling
+DONE eerii (#31694) Add RUSTC env to clippy command
+@eerii, #31694
 
 >>> generated code
-eerii (#31721) clippy: Fix warnings in generated code
-eerii (#31711) Remove repeated imports from generated code
-eerii (#31844) clippy: Fix remaining warnings in generated code
+DONE eerii (#31721) clippy: Fix warnings in generated code
+DONE eerii (#31711) Remove repeated imports from generated code
+DONE eerii (#31844) clippy: Fix remaining warnings in generated code
 @eerii, #31721, #31711, #31844
 
 >>> clippy
@@ -371,7 +375,7 @@ DONE sandeepB3 (#31797) minibrowser: fix unused import: `InnerResponse` warning
 @eerii, @MunishMummadi, @azharcodeit, @six-shot, @richarddushime, @jahielkomu, @sandeepB3, #31521, #31517, #31537, #31534, #31583, #31585, #31608, #31668, #31685, #31718, #31670, #31797
 -->
 <p>The biggest area of improvement was in code health (@eerii, @MunishMummadi, @sandeepB3, #31521, #31537, #31608, #31685, #31670), where we have now fixed almost all of our rustdoc (@Aaryakhandelwal, @sandeepB3, @maureenblack, @mnaibei, @oluwatobiss, @azharcodeit, @jahielkomu, @Rhea-Eve, @ektuu, #31582, #31587, #31592, #31617, #31625, #31632, #31640, #31643, #31647, #31654, #31712, #31644, #31708, #31755, #31745, #31738) and clippy errors (@mnaibei, @sandeepB3, @eerii, @zawwz, @RustAndMetal, @six-shot, @oluwatobiss, @richarddushime, @jahielkomu, @Aaryakhandelwal, @ektuu, @azharcodeit, #31508, #31512, #31549, #31566, #31567, #31560, #31562, #31563, #31551, #31568, #31565, #31564, #31548, #31612, #31610, #31611, #31627, #31623, #31628, #31626, #31710, #31719, #31735, #31758, #31717, #31759, #31769, #31770, #31776, #31778, #31793, #31801, #31800, #31791, #31811, #31813, #31819, #31784, #31823, #31837, #31818, #31827, #31849, #31850, #31843, #31852, #31864, #31863, #31853, #31865, #31834, #31876, #31877, #31888, #31878, #31890, #31867, #31893, #31898, #31900, #31891, #31906, #31908, #31907).</p>
-<p>One contributor went further, cleaning up the codegen for our DOM bindings (@eerii, #31721, #31711, #31844) and even improving our image decoding by replacing per-image threads with a thread pool (@eerii, #31517, #31585)!
+<p>One contributor went further, cleaning up the codegen for our DOM bindings (@eerii, #31721, #31711, #31844), improving our dev tooling (@eerii, #31694), and even improving our image decoding by replacing per-image threads with a thread pool (@eerii, #31517, #31585)!
 Outreachy contributors also landed improvements to our docs (@six-shot, @jahielkomu, #31583, #31718), CJK font fallback (@richarddushime, @sandeepB3, #31668, #31670), and the Web Platform Tests (@azharcodeit, #31534).</p>
 <!--
 - DONE outreachy
@@ -637,8 +641,8 @@ ac24cd61395f6a9646efe1da13ba5674eea59e7e	https://github.com/servo/servo/pull/316
     +++ 99c14c83ed0e2412bb17f0f58251bf4786550c22	https://github.com/servo/servo/pull/31660	Obey white-space when intrinsically sizing an IFC (#31660)
 74b5f798cd22fa6b8911cdab2561efcf87cf0041	https://github.com/servo/servo/pull/31693	Add issue templates (#31693)
     *** a8791ddcbcdfd0e8e0f0f87cf5920b6e580ed717	https://github.com/servo/servo/pull/31669	clippy: Fix remaining warnings in `gfx` for MacOS (#31669)
-cb3ae70340d413f3487fac2531bf2b4abe18233f	https://github.com/servo/servo/pull/31694	Add RUSTC env to clippy command (#31694)
-3fdbde94cff38ee7aeb624616a4abffa870d2589	https://github.com/servo/servo/pull/31691	Escaped reporting (#31691)
+    *** cb3ae70340d413f3487fac2531bf2b4abe18233f	https://github.com/servo/servo/pull/31694	Add RUSTC env to clippy command (#31694)
++++ 3fdbde94cff38ee7aeb624616a4abffa870d2589	https://github.com/servo/servo/pull/31691	Escaped reporting (#31691)
     *** 55250dd8a6317df875ff4931dd090d7a968b88e9	https://github.com/servo/servo/pull/31685	Fix typo: changed seperator to separator (#31685)
 884d02495712d4cc0cafb26443ff5b1bf7e92f5b	https://github.com/servo/servo/pull/31687	Add gstreamer plugins good/ugly for better codec support (#31687)
     *** 68b82e6d6133c8213cdad09b240d7a69227cc82a	https://github.com/servo/servo/pull/31668	fonts: Add Noto Sans CJK fonts to the Linux fallback list (#31668)
@@ -648,7 +652,7 @@ cb3ae70340d413f3487fac2531bf2b4abe18233f	https://github.com/servo/servo/pull/316
     1a46529560b26b3d76e614287e3646632e259290	https://github.com/servo/servo/pull/31709	build(deps): bump Stylo from `7dd8840` to `2c775e4` (#31709)
     52c2b1e3a8f57af9885bbc52037fc1cad42f7dae	https://github.com/servo/servo/pull/31715	Sync WPT with upstream (17-03-2024) (#31715)
     +++ d2dcb20beac29eabce02ea59b4944585d5b48a7c	https://github.com/servo/servo/pull/31635	Implement console.count/countReset (#31635)
-f98975bbbe7cd8cf55f172dae96f8cbc79c0e479	https://github.com/servo/servo/pull/31714	Update raw lags path for WPT import (#31714)
+    f98975bbbe7cd8cf55f172dae96f8cbc79c0e479	https://github.com/servo/servo/pull/31714	Update raw lags path for WPT import (#31714)
 >>> 2024-03-19T06:24:09Z
     228f4fb2fcf54e54edc2bbd1dbf8acd5a086c485	https://github.com/servo/servo/pull/31743	build(deps): bump syn from 2.0.52 to 2.0.53 (#31743)
     d6d903c5a11bafe7a23d15c7fd94d87dff6e3ac6	https://github.com/servo/servo/pull/31742	build(deps): bump brotli from 3.4.0 to 3.5.0 (#31742)
@@ -679,18 +683,18 @@ f98975bbbe7cd8cf55f172dae96f8cbc79c0e479	https://github.com/servo/servo/pull/317
     *** 36d9ab8b283dc18863ee0515acf5fafb2a84f458	https://github.com/servo/servo/pull/31755	rustdoc: Convert url text to anchor link (#31755)
 +++ 05d9373bc5dab94d6ae8309c341db6b7d76e5a0e	https://github.com/servo/servo/pull/31733	compositor: Handle synchronous messages while shutting down (#31733)
     +++ 2ec995a56fdba9a5978fd74bee91e298fa9617bd	https://github.com/servo/servo/pull/31734	layout: Enable `text-shadow` (#31734)
-8cf47e6009a9b2e1f9e7f8639f83cc47c247877f	https://github.com/servo/servo/pull/31750	bootstrap: Make unknown distro instructions more helpful (#31750)
+    8cf47e6009a9b2e1f9e7f8639f83cc47c247877f	https://github.com/servo/servo/pull/31750	bootstrap: Make unknown distro instructions more helpful (#31750)
     *** 2a02f94d7649d45f09eff9f27263f20c10502ec8	https://github.com/servo/servo/pull/31708	rustdoc: Correct unresolved link to `handle_cell. (#31708)
     *** 03c11f7907dedd7e6c76167172349db6d19844d7	https://github.com/servo/servo/pull/31644	rustdoc: Fix some typos in `components/layout_2020/table/mod.rs` (#31644)
     *** 06a021db552c1d2f8899484f7c1143424c387eef	https://github.com/servo/servo/pull/31735	clippy: Fix some warnings in `components/script` (#31735)
     291fbce434f804c2ce51d2b966bab4c472d9ecf3	https://github.com/servo/servo/pull/31740	build(deps): bump gilrs from 0.10.4 to 0.10.6 (#31740)
-c25069161d868169ef684632c8b2c601f9b9d6ee	https://github.com/servo/servo/pull/31695	Add pseudo async Create*PipelineAsync methods (#31695)
++++ c25069161d868169ef684632c8b2c601f9b9d6ee	https://github.com/servo/servo/pull/31695	Add pseudo async Create*PipelineAsync methods (#31695)
 >>> 2024-03-21T06:10:43Z
     *** 2789e9887666a05695778bd9d822616985b40dbc	https://github.com/servo/servo/pull/31793	clippy: Fix redundant field names warnings (#31793)
     f55d1d288e4ede7da3090e853a0a0f6aab42c113	https://github.com/servo/servo/pull/31798	build(deps): bump smallvec from 1.13.1 to 1.13.2 (#31798)
     *** efba769fa3997f2917d54a29b2b24872bf607bc5	https://github.com/servo/servo/pull/31797	fixed unused import warning in minibrowser (#31797)
-63d7af54d1d0d651f1996808e59a65dd9490e26e	https://github.com/servo/servo/pull/31790	Ignore stylo crates in dependabot.yml (#31790)
-b3dc5c6958f64dcf1a886f293852726d3d0b9d37	https://github.com/servo/servo/pull/31737	Attempt using version of Stylo with -x-lang enabled (#31737)
+    63d7af54d1d0d651f1996808e59a65dd9490e26e	https://github.com/servo/servo/pull/31790	Ignore stylo crates in dependabot.yml (#31790)
+*** b3dc5c6958f64dcf1a886f293852726d3d0b9d37	https://github.com/servo/servo/pull/31737	Attempt using version of Stylo with -x-lang enabled (#31737)
     *** 058319aa0b9dbf1916dd87f27171bccd051be3e3	https://github.com/servo/servo/pull/31778	clippy: Fix some clippy problems in `components/script` (#31778)
     3651b650c48ba8cf1b8f00f4be9705ac11b68a8c	https://github.com/servo/servo/pull/31788	build(deps): bump rustix from 0.38.31 to 0.38.32 (#31788)
     e16b87db14dbd281e73f90a16d85b8ae0f040db9	https://github.com/servo/servo/pull/31789	build(deps): bump webxr from `614420b` to `88fd368` (#31789)
@@ -704,16 +708,16 @@ b3dc5c6958f64dcf1a886f293852726d3d0b9d37	https://github.com/servo/servo/pull/317
     49c6f9e463582c8687a9e3674db7fac740bdad68	https://github.com/servo/servo/pull/31814	Update some dependencies (#31814)
     *** 3e63f8d6ee0dbd7934a0cb05753820676b89c61d	https://github.com/servo/servo/pull/31813	clippy: Fix needless borrow warnings (#31813)
     *** 694e86ecffb882f6d5934eb620257e9fceddbca8	https://github.com/servo/servo/pull/31811	clippy: Fix dereferencing a tuple pattern warnings (#31811)
-b22281d94f230c455142b73576904fdec2d1140a	https://github.com/servo/servo/pull/31802	Fix WPT reference no_red_3x3_monospace_table-ref.xht (#31802)
+*** b22281d94f230c455142b73576904fdec2d1140a	https://github.com/servo/servo/pull/31802	Fix WPT reference no_red_3x3_monospace_table-ref.xht (#31802)
 +++ 841bd917840fe976646bab3923c0b54b62683040	https://github.com/servo/servo/pull/31777	layout: Take into account `text-indent` for justification (#31777)
-755701f4f6a961cc76bdef02a96843727e86dd9a	https://github.com/servo/servo/pull/31805	crown: Do not warn about crown for rustdoc or clippy (#31805)
-32a2b060738df8ce343e79ef71563018b8189187	https://github.com/servo/servo/pull/31810	Update fontsan to 0.5.2 (#31810)
++++ 755701f4f6a961cc76bdef02a96843727e86dd9a	https://github.com/servo/servo/pull/31805	crown: Do not warn about crown for rustdoc or clippy (#31805)
++++ 32a2b060738df8ce343e79ef71563018b8189187	https://github.com/servo/servo/pull/31810	Update fontsan to 0.5.2 (#31810)
     *** 8c7e9a15e1d63f99a887f4c78638017e31eed7a0	https://github.com/servo/servo/pull/31711	Remove repeated imports from generated code (#31711)
 f5c4988dcb320bd92555d756790576ae36d74f81	https://github.com/servo/servo/pull/31808	Use C-ABI for JNI functions (#31808)
     *** da696b7e57fd4fbf615b3853ac48cf522e87e098	https://github.com/servo/servo/pull/31791	clippy: fix `result_unit_err` warnings (#31791)
 ea62a5e24f5c9a3b7c0588506f7a38de9ddbcd67	https://github.com/servo/servo/pull/31720	Use --locked when building in CI (#31720)
 ecabdc2583f8e82f39600c2b5d1ca81a7219f235	https://github.com/servo/servo/pull/31803	Don't trim leading whitespace of anonymous table cells (#31803)
-ce0d4564694eb0d5d8baccd53377e387ea303e95	https://github.com/servo/servo/pull/31799	clipping: Fix some warnings in `components/script/dom` (#31799)
+*** ce0d4564694eb0d5d8baccd53377e387ea303e95	https://github.com/servo/servo/pull/31799	clipping: Fix some warnings in `components/script/dom` (#31799)
 4b408a37246f02c27ea70f6eec0d2c790be35e00	https://github.com/servo/servo/pull/31757	Update mozjs to use SM 115.9 (#31757)
     *** 7cdff9dd064268796bcc6071646a0496607ed5a3	https://github.com/servo/servo/pull/31800	Clippy: Fixed warnings in htmlimageelement.rs (#31800)
     *** da3288dd00c16f6c4ac18cd3b6ba87a2917978d1	https://github.com/servo/servo/pull/31801	Clippy: Fixed clippy warnings in components/script/dom (#31801)
@@ -723,23 +727,23 @@ ce0d4564694eb0d5d8baccd53377e387ea303e95	https://github.com/servo/servo/pull/317
 +++ cb275e086c215b6da741c7918cd9683a134eb24f	https://github.com/servo/servo/pull/31809	Implement StaticRange (#31809)
     *** bae77671f85481503ab563c20ed488cf883436fa	https://github.com/servo/servo/pull/31823	clippy: Fix `unnecessary_cast` warnings in `components/script` (#31823)
     *** 3e9b8089381492edeb0992c93776d39bf1df2607	https://github.com/servo/servo/pull/31784	Fix some clippy warnings in `components/script/webdriver_handlers.rs` (#31784)
-77f5175efcf764edb3bf93a20a10e10ac981308a	https://github.com/servo/servo/pull/31822	removed  mutable compile warnings (#31822)
-99bad9d9b8110f6f7354b6a0e8132e969a38751e	https://github.com/servo/servo/pull/31821	Bump fontsan version (#31821)
-34dd38b4cbe0f35000c45683d0c65daa78a15644	https://github.com/servo/servo/pull/31817	Replace `remutex` with `parking_lot`'s `ReentrantMutex` (#31817)
-8882507ad06b598fb43d8542c67ad76daeda739c	https://github.com/servo/servo/pull/31816	Rework “visible” to “throttled” in constellation + script + compositor (#31816)
+*** 77f5175efcf764edb3bf93a20a10e10ac981308a	https://github.com/servo/servo/pull/31822	removed  mutable compile warnings (#31822)
++++ 99bad9d9b8110f6f7354b6a0e8132e969a38751e	https://github.com/servo/servo/pull/31821	Bump fontsan version (#31821)
+    34dd38b4cbe0f35000c45683d0c65daa78a15644	https://github.com/servo/servo/pull/31817	Replace `remutex` with `parking_lot`'s `ReentrantMutex` (#31817)
++++ 8882507ad06b598fb43d8542c67ad76daeda739c	https://github.com/servo/servo/pull/31816	Rework “visible” to “throttled” in constellation + script + compositor (#31816)
     *** 9b26dca141159ddc75266de9ef5a54f537450921	https://github.com/servo/servo/pull/31819	Fixed the .clone() warnings. (#31819)
 +++ 95e69fe4ffce23708608855720961741344bee07	https://github.com/servo/servo/pull/31794	layout: use `Au` in `BoxFragment` (#31794)
 >>> 2024-03-24T06:10:23Z
-0a771169b82744ce2427c906c6162546285c6889	https://github.com/servo/servo/pull/31842	fix redundant closure (#31842)
+*** 0a771169b82744ce2427c906c6162546285c6889	https://github.com/servo/servo/pull/31842	fix redundant closure (#31842)
     *** 566fd475d92a6e11f70af18171a2f8bf9b80da68	https://github.com/servo/servo/pull/31818	Clippy: Fixed some clippy warnings (#31818)
     *** 3c05b58221a2b5c879d31d355087a905de6494d8	https://github.com/servo/servo/pull/31837	clippy: Fix `explicit_auto_deref` warnings in `components/script` (#31837)
-3fc157338e20936b8446c4685a477fad4169d92a	https://github.com/servo/servo/pull/31826	remove unused code (#31826)
+    3fc157338e20936b8446c4685a477fad4169d92a	https://github.com/servo/servo/pull/31826	remove unused code (#31826)
 >>> 2024-03-25T06:05:44Z
 58081579e9a537ba6bd71bcdcb2b066e14e037b8	https://github.com/servo/servo/pull/31841	WebIDL: Remove `JSObject` from `Document::NamedGetter` (#31841)
     *** 1ab38fcd3f01fa0dd35f5275f26158bdf8f4f329	https://github.com/servo/servo/pull/31827	clippy: Fix `default_constructed_unit_structs` warnings in `components` (#31827)
 >>> 2024-03-27T06:13:22Z
     *** 92b557867c199472ce42a2f5b99676c485ed2ae1	https://github.com/servo/servo/pull/31888	clippy: fixed some warnings in components/script (#31888)
-+++ 8dece05980a4ec46b06505e511f8b158d4c0fe3b	https://github.com/servo/servo/pull/31879	fonts: Add support for WOFF2 and properly load web fonts from @imports (#31879)
+    +++ 8dece05980a4ec46b06505e511f8b158d4c0fe3b	https://github.com/servo/servo/pull/31879	fonts: Add support for WOFF2 and properly load web fonts from @imports (#31879)
     *** b55d0a20532b915dee395f8c448ac832ed36b7d4	https://github.com/servo/servo/pull/31877	clippy: Fix clone-on-copy warnings (#31877)
 5f7baf31c2097a02d8ddb370d6131d2703413010	https://github.com/servo/servo/pull/31748	dom: Abort media element load on decode errors (#31748)
     4da9d39ccaa57a879cc9d586b7c940d274e8cba7	https://github.com/servo/servo/pull/31883	build(deps): bump autocfg from 1.1.0 to 1.2.0 (#31883)
