@@ -14,9 +14,14 @@ This includes some big strides in **CSS tables** (+30.4pp to 62.9%), **CSS2 marg
 More on how we got there in a bit, but first let’s talk about new API support:
 
 - as of 2024-02-29, we support the **font property on CanvasRenderingContext2D** (@syvb, #31436)
+- as of 2024-02-29, we support **[synthetic](https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-small-caps) ‘font-variant: small-caps’** (@mrobinson, #31435)
 - as of 2024-03-02, we support **&lt;meta http-equiv="Refresh">** (@syvb, #31468)
+- as of 2024-03-08, **tables are enabled by default** (@Loirooriol, #31470)
+- as of 2024-03-08, we support the **‘box-shadow’ property** (@mrobinson, #31453)
 - as of 2024-03-16, we have basic support for the **getClientRects() method on Element** (@mrobinson, #31696)
 - as of 2024-03-18, we support **console.count() and console.countReset()** (@syvb, #31635)
+- as of 2024-03-20, we support the **‘text-shadow’ property** (@mrobinson, #31734)
+- as of 2024-03-20, we support **‘text-decoration: line-through’ on macOS** (@mrobinson, #31756)
 
 <!--
 wpt analysis
@@ -189,14 +194,14 @@ Outreachy contributors also landed improvements to our docs (@six-shot, @jahielk
     - DONE rudimentary getClientRects #31696
     - DONE console.count/countReset #31635
 - layout
-    - box-shadow #31453 (count!)
-    - synthetic/correct small caps #31435
-    - line-through on macos #31756
-    - text-shadow #31734
+    - DONE box-shadow #31453 (count!)
+    - DONE synthetic/correct small caps #31435
+    - DONE line-through on macos #31756
+    - DONE text-shadow #31734
     - fix justify with text-indent #31777
     - fix transforming inline replaced elements (iframe, img) #31833
     - tables
-        - enabled by default #31470
+        - DONE enabled by default #31470
         - row height distribution #31421
         - correct sizing in flow layout #31455 (count!)
         - intrinsic sizing #31506
