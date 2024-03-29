@@ -29,7 +29,31 @@ More on how we got there in a bit, but first let’s talk about new API support:
 - as of 2024-03-27, we support **WOFF2 web fonts** (@mrobinson, #31879)
 - as of 2024-03-27, we support the obsolete **&lt;pre width> attribute** (@bplaat, #31792)
 
-**Tables are enabled by default** as of 2024-03-08 (@Loirooriol, #31470), along with many improvements to table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831), inline layout (@Loirooriol, @mrobinson, #31636, #31641, #31660), and style invalidation (@mrobinson, #31857).
+**Tables are enabled by default** as of 2024-03-08 (@Loirooriol, #31470), along with many improvements to style invalidation (@mrobinson, #31857), inline layout (@Loirooriol, @mrobinson, #31636, #31641, #31660), and table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831).
+
+Servo now stops loading videos and other media after encountering decode errors (@frereit, #31748), and our docs and dev tooling have been updated to ensure support for WebM and AV1 (@delan, #31687).
+
+Our dependency upgrades surge forward, with **WebRender now fully caught up with upstream** (@mrobinson, @mukilan, #31486), **Stylo** bumped from June 2023 to September 2023 (@Loirooriol, #31437, #31609), and **SpiderMonkey updated to 115.9** (@sagudev, #31757).
+
+## servoshell and debug logging
+
+servoshell has had a good amount of love this month, with a new **loading spinner** (@frereit, #31713) and a **rendering glitch under the location bar now fixed** (@delan, #31774).
+**Logging in servoshell is no longer mixed with libservo** (@delan, #31439), with the RUST_LOG prefix now being `servoshell::` instead of `servo::`.
+
+Speaking of RUST_LOG, you can now **filter event logging in servoshell and the constellation at runtime** (@delan, #31657, #31659), with the new RUST_LOG prefixes `servoshell<winit@`, `servoshell<servo@`, `servoshell>servo@`, `constellation<compositor@`, `constellation<script@`, and `constellation<layout@`.
+For example:
+
+- to trace all events in the constellation from layout, plus all events from the compositor other than ReadyToPresent:<br>
+  `RUST_LOG='constellation<layout@,constellation<compositor@,constellation<compositor@ReadyToPresent=off'`
+- to trace only winit window moved events in servoshell, plus all ordinary servoshell logs at trace level:<br>
+  `RUST_LOG='servoshell,servoshell<=off,servoshell>=off,servoshell<winit@WindowEvent(Moved)'`
+
+<aside class="_note">
+
+To keep things from getting too noisy, @delan likes to use the event logging config below:
+
+<code style="word-wrap: break-word;">RUST_LOG='warn,servoshell<,servoshell>,constellation<,servoshell<winit@DeviceEvent=off,servoshell<winit@MainEventsCleared=off,servoshell<winit@NewEvents(WaitCancelled)=off,servoshell<winit@RedrawEventsCleared=off,servoshell<winit@RedrawRequested=off,servoshell<winit@UserEvent=off,servoshell<winit@WindowEvent(CursorMoved)=off,servoshell<winit@WindowEvent(AxisMotion)=off,servoshell<servo@EventDelivered=off,servoshell<servo@ReadyToPresent=off,servoshell>servo@Idle=off,servoshell>servo@MouseWindowMoveEventClass=off,constellation<compositor@ForwardEvent(MouseMoveEvent)=off,constellation<unknown@LogEntry=off,constellation<compositor@ReadyToPresent=off,constellation<script@LogEntry=off,servoshell<winit@WindowEvent(Moved)=off'</code>
+</aside>
 
 <!--
 wpt analysis
@@ -61,6 +85,8 @@ box-display (-149.3% from 6.7pp to -3.3pp)
 margin-padding-clear (-137.5% from 9.6pp to -3.6pp)
 all (-100.0% from 1.6pp to 0.0pp)
 -->
+
+## Outreachy
 
 Servo is also **participating in Outreachy** for the first time since 201x!
 Outreachy is a three-month paid (7000 USD) remote internship program that runs twice a year, with a special focus on open source software.
@@ -226,24 +252,25 @@ Outreachy contributors also landed improvements to our docs (@six-shot, @jahielk
     - table layout docs #31535
     - Au #31395 #31621 #31794
 - media playback
-    - abort load on decode error #31748
+    - DONE codec support #31687
+    - DONE abort load on decode error #31748
 - embedding and multiview
     - feature flag #31541
     - visible to throttled #31815
 - servoshell
-    - logging #31439
-    - gap #31774
-    - loading spinner #31713
+    - DONE logging #31439
+    - DONE gap #31774
+    - DONE loading spinner #31713
 - android
     - fix rendering in emulators #31727
 - upgrades
-    - stylo 2023-07-23 #31437
-    - stylo 2023-09-01 #31609
-    - webrender 0.64 #31486
+    - DONE stylo 2023-07-23 #31437
+    - DONE stylo 2023-09-01 #31609
+    - DONE webrender 0.64 #31486
         - needed to reimpl scrolling/zooming?
         - compositor waiting - affects flakiness #31523
         - compositor shutdown - affects flakiness #31733
-    - mozjs spidermonkey 115.9 #31757
+    - DONE mozjs spidermonkey 115.9 #31757
 - crashes and robustness
     - surfman egl #31431
     - video poster #31447
@@ -434,14 +461,14 @@ da609076c32abcc3d3267cb663dbae861b2dfba7	https://github.com/servo/servo/pull/316
 +++ ad37a54f59f4eef2c8f815a3a59ab7d928b2946f	https://github.com/servo/servo/pull/31486	dependencies: Upgrade to WebRender 0.64 (#31486)
     4597aeae5f9b1d76d6af664afdbb72647908e907	https://github.com/servo/servo/pull/31674	build(deps): bump smallbitvec from 2.5.1 to 2.5.2 (#31674)
     2afc117c44fffb3dc9b82c30bbc121a502349dd7	https://github.com/servo/servo/pull/31672	build(deps): bump system-deps from 6.2.0 to 6.2.1 (#31672)
-+++ ed99128132eeed2aefea4a0e0a87e6eb0b14bd12	https://github.com/servo/servo/pull/31659	constellation: allow event tracing to be configured with RUST_LOG (#31659)
+    +++ ed99128132eeed2aefea4a0e0a87e6eb0b14bd12	https://github.com/servo/servo/pull/31659	constellation: allow event tracing to be configured with RUST_LOG (#31659)
     +++ b30b79a93af92d5a67215a85f14038f64ffef4fb	https://github.com/servo/servo/pull/31661	Cleanup UA styles for anonymous table rows and cells (#31661)
 e5fbb3d48781765745f5fcc007e469f048e9ebd7	https://github.com/servo/servo/pull/31658	fonts: Add `FontIdentifier` and `LocalFontIdentifier` (#31658)
 b1debf20689949c0acfb06efca70f7fd34dc0854	https://github.com/servo/servo/pull/31656	fix: missing thread name when spawning (#31656)
     +++ 78fe461ff28ea800994686b68878d4825016b5f3	https://github.com/servo/servo/pull/31619	layout: Properly parent table-row and table-row-group (#31619)
     +++ 0e78c8114b2a43df04d75dc1decf01e06992262f	https://github.com/servo/servo/pull/31650	Allow finishing anonymous inline-table at the end of inline elements (#31650)
     +++ 871a9bf677525293d6a3ac46b55660aaee02281b	https://github.com/servo/servo/pull/31641	layout: IFCs should not always be marked as containing floats (#31641)
-+++ eaa800c8dd78eb5c6865bb80778a2f6996915714	https://github.com/servo/servo/pull/31657	servoshell: allow event tracing to be configured with RUST_LOG (#31657)
+    +++ eaa800c8dd78eb5c6865bb80778a2f6996915714	https://github.com/servo/servo/pull/31657	servoshell: allow event tracing to be configured with RUST_LOG (#31657)
 >>> 2024-03-16T06:14:06Z
 8cfc6a1898d02eb1df9c13c3c410747cb1e0b412	https://github.com/servo/servo/pull/31707	Updated comment with 'layout_traits' to 'script_layout_interface' (#31707)
     +++ 82128d38385708d80a29dc3a6808be943dda6f9b	https://github.com/servo/servo/pull/31704	Don't null out the baselines of anonymous tables (#31704)
@@ -460,7 +487,7 @@ ac24cd61395f6a9646efe1da13ba5674eea59e7e	https://github.com/servo/servo/pull/316
     *** cb3ae70340d413f3487fac2531bf2b4abe18233f	https://github.com/servo/servo/pull/31694	Add RUSTC env to clippy command (#31694)
 +++ 3fdbde94cff38ee7aeb624616a4abffa870d2589	https://github.com/servo/servo/pull/31691	Escaped reporting (#31691)
     *** 55250dd8a6317df875ff4931dd090d7a968b88e9	https://github.com/servo/servo/pull/31685	Fix typo: changed seperator to separator (#31685)
-884d02495712d4cc0cafb26443ff5b1bf7e92f5b	https://github.com/servo/servo/pull/31687	Add gstreamer plugins good/ugly for better codec support (#31687)
++++ 884d02495712d4cc0cafb26443ff5b1bf7e92f5b	https://github.com/servo/servo/pull/31687	Add gstreamer plugins good/ugly for better codec support (#31687)
     *** 68b82e6d6133c8213cdad09b240d7a69227cc82a	https://github.com/servo/servo/pull/31668	fonts: Add Noto Sans CJK fonts to the Linux fallback list (#31668)
 >>> 2024-03-17T06:07:23Z
 >>> 2024-03-18T06:08:22Z
@@ -675,5 +702,11 @@ ea62a5e24f5c9a3b7c0588506f7a38de9ddbcd67	https://github.com/servo/servo/pull/317
         margin: 1em auto;
         border-bottom: 1px solid;
         padding-bottom: 1em;
+    }
+    ._note {
+        margin: 1em 1em;
+        border-left: 1px solid;
+        padding-left: 1em;
+        opacity: 0.75;
     }
 </style>
