@@ -22,6 +22,9 @@ More on how we got there in a bit, but first let’s talk about new API support:
 - as of 2024-03-18, we support **console.count() and console.countReset()** (@syvb, #31635)
 - as of 2024-03-20, we support the **‘text-shadow’ property** (@mrobinson, #31734)
 - as of 2024-03-20, we support **‘text-decoration: line-through’ on macOS** (@mrobinson, #31756)
+- as of 2024-03-23, we support **StaticRange and AbstractRange** (@nipunG314, @cathiechen, #25466, #31756)
+- as of 2024-03-27, we support **WOFF2 web fonts** (@mrobinson, #31879)
+- as of 2024-03-27, we support the obsolete **&lt;pre width> attribute** (@bplaat, #31792)
 
 <!--
 wpt analysis
@@ -523,7 +526,7 @@ ce0d4564694eb0d5d8baccd53377e387ea303e95	https://github.com/servo/servo/pull/317
 5c0199b5687a5c0c1b2fe82235ca609c7d9ea614	https://github.com/servo/servo/pull/31771	Net: fold websocket and http tokio runtime into one (#31771)
 >>> 2024-03-23T06:12:59Z
     e22b61c935dcc9bfa1455c86a0a8a68fca6e4ee6	https://github.com/servo/servo/pull/31829	build(deps): bump libz-sys from 1.1.15 to 1.1.16 (#31829)
-cb275e086c215b6da741c7918cd9683a134eb24f	https://github.com/servo/servo/pull/31809	Implement StaticRange (#31809)
++++ cb275e086c215b6da741c7918cd9683a134eb24f	https://github.com/servo/servo/pull/31809	Implement StaticRange (#31809)
 *** bae77671f85481503ab563c20ed488cf883436fa	https://github.com/servo/servo/pull/31823	clippy: Fix `unnecessary_cast` warnings in `components/script` (#31823)
 *** 3e9b8089381492edeb0992c93776d39bf1df2607	https://github.com/servo/servo/pull/31784	Fix some clippy warnings in `components/script/webdriver_handlers.rs` (#31784)
 77f5175efcf764edb3bf93a20a10e10ac981308a	https://github.com/servo/servo/pull/31822	removed  mutable compile warnings (#31822)
@@ -542,7 +545,7 @@ cb275e086c215b6da741c7918cd9683a134eb24f	https://github.com/servo/servo/pull/318
 *** 1ab38fcd3f01fa0dd35f5275f26158bdf8f4f329	https://github.com/servo/servo/pull/31827	clippy: Fix `default_constructed_unit_structs` warnings in `components` (#31827)
 >>> 2024-03-27T06:13:22Z
 *** 92b557867c199472ce42a2f5b99676c485ed2ae1	https://github.com/servo/servo/pull/31888	clippy: fixed some warnings in components/script (#31888)
-8dece05980a4ec46b06505e511f8b158d4c0fe3b	https://github.com/servo/servo/pull/31879	fonts: Add support for WOFF2 and properly load web fonts from @imports (#31879)
++++ 8dece05980a4ec46b06505e511f8b158d4c0fe3b	https://github.com/servo/servo/pull/31879	fonts: Add support for WOFF2 and properly load web fonts from @imports (#31879)
 *** b55d0a20532b915dee395f8c448ac832ed36b7d4	https://github.com/servo/servo/pull/31877	clippy: Fix clone-on-copy warnings (#31877)
 5f7baf31c2097a02d8ddb370d6131d2703413010	https://github.com/servo/servo/pull/31748	dom: Abort media element load on decode errors (#31748)
     4da9d39ccaa57a879cc9d586b7c940d274e8cba7	https://github.com/servo/servo/pull/31883	build(deps): bump autocfg from 1.1.0 to 1.2.0 (#31883)
@@ -570,7 +573,7 @@ d16f259e1d3c7b8c0c0f4692af41ba2e41085e23	https://github.com/servo/servo/pull/318
 e77dc3684236ad6693b8df6131f2ba8f99bbef2f	https://github.com/servo/servo/pull/31705	Pick the first or last baseline as appropriate (#31705)
 *** a53632c0e5fe223ca1c39a088ee46f49bb355243	https://github.com/servo/servo/pull/31852	clippy: Fix collapsible_if warnings (#31852)
 *** 3d10dbae32149515dc839d69bc2ba14f12b45251	https://github.com/servo/servo/pull/31843	clippy: Fix some clippy warnings in `components/script` (#31843)
-97144ddf7104fd2cf8c1947db7f0d432754f37f5	https://github.com/servo/servo/pull/31792	script: Add pre element obsolete width attribute support (#31792)
++++ 97144ddf7104fd2cf8c1947db7f0d432754f37f5	https://github.com/servo/servo/pull/31792	script: Add pre element obsolete width attribute support (#31792)
 *** bd39e03eeb3d369e8189135326c733bbe5a3bb10	https://github.com/servo/servo/pull/31850	changed `match` to 'matches!' (#31850)
 *** 9a76dd9325794346163e858831abb97de4b41e41	https://github.com/servo/servo/pull/31844	clippy: Fix remaining warnings in generated code (#31844)
 *** d8adeb1b44cd99563e29309c31dcc9a008951a63	https://github.com/servo/servo/pull/31849	 clippy: Fix some warnings in `components/script` (#31849)
