@@ -56,7 +56,6 @@ all (-100.0% from 1.6pp to 0.0pp)
 
 Servo is also **participating in Outreachy** for the first time since 201x!
 Outreachy is a three-month paid (7000 USD) remote internship program that runs twice a year, with a special focus on open source software.
-
 To select interns for Outreachy, there was a *contribution period* that is now coming to a close, during which contributors have landed a wide range of improvements.
 
 <!--
@@ -171,7 +170,7 @@ DONE sandeepB3 (#31797) minibrowser: fix unused import: `InnerResponse` warning
 @eerii, @MunishMummadi, @azharcodeit, @six-shot, @richarddushime, @jahielkomu, @sandeepB3, #31521, #31517, #31537, #31534, #31583, #31585, #31608, #31668, #31685, #31718, #31670, #31797
 -->
 
-The biggest area was in code health (@eerii, @MunishMummadi, @sandeepB3, #31521, #31537, #31608, #31685, #31670), where we have now fixed almost all of our rustdoc (@Aaryakhandelwal, @sandeepB3, @maureenblack, @mnaibei, @oluwatobiss, @azharcodeit, @jahielkomu, @Rhea-Eve, @ektuu, #31582, #31587, #31592, #31617, #31625, #31632, #31640, #31643, #31647, #31654, #31712, #31644, #31708, #31755, #31745, #31738) and clippy errors (@mnaibei, @sandeepB3, @eerii, @zawwz, @RustAndMetal, @six-shot, @oluwatobiss, @richarddushime, @jahielkomu, @Aaryakhandelwal, @ektuu, @azharcodeit, #31508, #31512, #31549, #31566, #31567, #31560, #31562, #31563, #31551, #31568, #31565, #31564, #31548, #31612, #31610, #31611, #31627, #31623, #31628, #31626, #31710, #31719, #31735, #31758, #31717, #31759, #31769, #31770, #31776, #31778, #31793, #31801, #31800, #31791, #31811, #31813, #31784, #31823, #31837, #31818, #31827, #31849, #31850, #31843, #31852, #31864, #31863, #31853, #31865, #31834, #31876, #31877, #31888, #31878, #31890, #31867, #31893, #31898, #31900, #31891, #31906, #31908, #31907).
+The biggest area of improvement was in code health (@eerii, @MunishMummadi, @sandeepB3, #31521, #31537, #31608, #31685, #31670), where we have now fixed almost all of our rustdoc (@Aaryakhandelwal, @sandeepB3, @maureenblack, @mnaibei, @oluwatobiss, @azharcodeit, @jahielkomu, @Rhea-Eve, @ektuu, #31582, #31587, #31592, #31617, #31625, #31632, #31640, #31643, #31647, #31654, #31712, #31644, #31708, #31755, #31745, #31738) and clippy errors (@mnaibei, @sandeepB3, @eerii, @zawwz, @RustAndMetal, @six-shot, @oluwatobiss, @richarddushime, @jahielkomu, @Aaryakhandelwal, @ektuu, @azharcodeit, #31508, #31512, #31549, #31566, #31567, #31560, #31562, #31563, #31551, #31568, #31565, #31564, #31548, #31612, #31610, #31611, #31627, #31623, #31628, #31626, #31710, #31719, #31735, #31758, #31717, #31759, #31769, #31770, #31776, #31778, #31793, #31801, #31800, #31791, #31811, #31813, #31784, #31823, #31837, #31818, #31827, #31849, #31850, #31843, #31852, #31864, #31863, #31853, #31865, #31834, #31876, #31877, #31888, #31878, #31890, #31867, #31893, #31898, #31900, #31891, #31906, #31908, #31907).
 
 One contributor went further, cleaning up the codegen for our DOM bindings (@eerii, #31721, #31711, #31844) and even improving our image decoding by replacing per-image threads with a thread pool (@eerii, #31517, #31585)!
 Outreachy contributors also landed improvements to our docs (@six-shot, @jahielkomu, #31583, #31718), CJK font fallback (@richarddushime, @sandeepB3, #31668, #31670), and the Web Platform Tests (@azharcodeit, #31534).
