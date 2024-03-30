@@ -4,17 +4,17 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2024-03-29T00:00:00Z</updated>
+  <updated>2024-03-30T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
   <entry>
-    <title>This month in Servo: and more!</title>
-    <link href="https://servo.org/blog-march-2024/blog/2024/03/29/this-month-in-servo/"/>
-    <updated>2024-03-29T00:00:00Z</updated>
-    <id>https://servo.org/blog-march-2024/blog/2024/03/29/this-month-in-servo/</id>
+    <title>This month in Servo: tables, WOFF2, Outreachy, and more!</title>
+    <link href="https://servo.org/blog-march-2024/blog/2024/03/30/tables-woff2-outreachy/"/>
+    <updated>2024-03-30T00:00:00Z</updated>
+    <id>https://servo.org/blog-march-2024/blog/2024/03/30/tables-woff2-outreachy/</id>
     <content xml:lang="en" type="html">&lt;figure class=&quot;_figr&quot;&gt;&lt;a href=&quot;https://servo.org/blog-march-2024/img/blog/new-in-march-2023.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-march-2024/img/blog/new-in-march-2023.png&quot; alt=&quot;Servo nightly showing a table with ‘box-shadow’ and WOFF2 web fonts, containing demos of several other new features&quot; style=&quot;width: calc(626px * 0.75);&quot; /&gt;&lt;/a&gt;
 &lt;figcaption style=&quot;width: calc(626px * 0.75);&quot;&gt;Servo now supports tables, box and text shadows, setting fonts on 2D canvases, synthetic small caps, conic and repeating conic gradients, and WOFF2 web fonts.&lt;/figcaption&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;This month, after surpassing our legacy layout engine in the CSS test suites, we’re proud to share that Servo has &lt;strong&gt;surpassed legacy in the whole suite of Web Platform Tests&lt;/strong&gt; as well!&lt;/p&gt;
@@ -42,7 +42,7 @@
 &lt;p&gt;Servo no longer crashes when &lt;strong&gt;&amp;lt;video poster&amp;gt; fails to load&lt;/strong&gt; (@sebsebmc, #31447), when interacting with &lt;strong&gt;CSS layers&lt;/strong&gt; in the CSSOM (@Loirooriol, #31481).&lt;/p&gt;
 &lt;p&gt;We’ve also landed improvements to style invalidation (@mrobinson, #31857), inline layout (@mrobinson, @atbrakhi, @Loirooriol, #31519, #31636, #31641, #31681, #31660, #31896), and table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831).&lt;/p&gt;
 &lt;p&gt;As a result of the work done on Servo this month, we’ve made some big strides in &lt;a href=&quot;https://wpt.servo.org/&quot;&gt;our pass rates&lt;/a&gt; for &lt;strong&gt;CSS tables&lt;/strong&gt; (+30.4pp to 62.9%), &lt;strong&gt;CSS2 margin-padding-clear&lt;/strong&gt; (+13.2pp to 93.6%), and &lt;strong&gt;CSS2 box-display&lt;/strong&gt; (+10.0pp to 84.4%).&lt;/p&gt;
-&lt;h2 id=&quot;servoshell-and-debug-logging&quot; tabindex=&quot;-1&quot;&gt;servoshell and debug logging &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-march-2024/blog/2024/03/29/this-month-in-servo/#servoshell-and-debug-logging&quot;&gt;
+&lt;h2 id=&quot;servoshell-and-debug-logging&quot; tabindex=&quot;-1&quot;&gt;servoshell and debug logging &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-march-2024/blog/2024/03/30/tables-woff2-outreachy/#servoshell-and-debug-logging&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;servoshell has had a good amount of love this month, with a new &lt;strong&gt;loading spinner&lt;/strong&gt; (@frereit, #31713) and a &lt;strong&gt;rendering glitch under the location bar now fixed&lt;/strong&gt; (@delan, #31774).
@@ -64,7 +64,7 @@ For example:&lt;/p&gt;
 &lt;p&gt;To keep things from getting too noisy, @delan likes to use the event logging config below:&lt;/p&gt;
 &lt;p&gt;&lt;code style=&quot;word-wrap: break-word;&quot;&gt;RUST_LOG=‘warn,servoshell&amp;lt;,servoshell&amp;gt;,constellation&amp;lt;,servoshell&amp;lt;winit@DeviceEvent=off,servoshell&amp;lt;winit@MainEventsCleared=off,servoshell&amp;lt;winit@NewEvents(Poll)=off,servoshell&amp;lt;winit@NewEvents(WaitCancelled)=off,servoshell&amp;lt;winit@RedrawEventsCleared=off,servoshell&amp;lt;winit@RedrawRequested=off,servoshell&amp;lt;winit@UserEvent=off,servoshell&amp;lt;winit@WindowEvent(CursorMoved)=off,servoshell&amp;lt;winit@WindowEvent(AxisMotion)=off,servoshell&amp;lt;servo@EventDelivered=off,servoshell&amp;lt;servo@ReadyToPresent=off,servoshell&amp;gt;servo@Idle=off,servoshell&amp;gt;servo@MouseWindowMoveEventClass=off,constellation&amp;lt;compositor@LogEntry=off,constellation&amp;lt;compositor@ForwardEvent(MouseMoveEvent)=off,constellation&amp;lt;compositor@ReadyToPresent=off,constellation&amp;lt;compositor@TickAnimation=off,constellation&amp;lt;script@LogEntry=off,servoshell&amp;lt;winit@WindowEvent(Moved)=off’&lt;/code&gt;&lt;/p&gt;
 &lt;/aside&gt;
-&lt;h2 id=&quot;embedding-and-dev-changes&quot; tabindex=&quot;-1&quot;&gt;Embedding and dev changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-march-2024/blog/2024/03/29/this-month-in-servo/#embedding-and-dev-changes&quot;&gt;
+&lt;h2 id=&quot;embedding-and-dev-changes&quot; tabindex=&quot;-1&quot;&gt;Embedding and dev changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-march-2024/blog/2024/03/30/tables-woff2-outreachy/#embedding-and-dev-changes&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We’ve now defined a simple policy for reporting security vulnerabilities (@mrego, #31622), though this is subject to change once Servo is no longer purely experimental.&lt;/p&gt;
@@ -106,7 +106,7 @@ box-display (-149.3% from 6.7pp to -3.3pp)
 margin-padding-clear (-137.5% from 9.6pp to -3.6pp)
 all (-100.0% from 1.6pp to 0.0pp)
 --&gt;
-&lt;h2 id=&quot;outreachy&quot; tabindex=&quot;-1&quot;&gt;Outreachy &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-march-2024/blog/2024/03/29/this-month-in-servo/#outreachy&quot;&gt;
+&lt;h2 id=&quot;outreachy&quot; tabindex=&quot;-1&quot;&gt;Outreachy &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-march-2024/blog/2024/03/30/tables-woff2-outreachy/#outreachy&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Servo is also &lt;strong&gt;participating in Outreachy&lt;/strong&gt; for the first time since 201x!
