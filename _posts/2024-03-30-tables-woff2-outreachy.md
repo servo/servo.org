@@ -62,7 +62,7 @@ To learn more about the RUST_LOG syntax, see the [env_logger docs](https://docs.
 <figure class="_fig" style="width: 100%;"><div style="display: flex; flex-flow: row nowrap; justify-content: center;">
     <video autoplay loop src="{{ '/img/blog/runtime-event-tracing-before.webm' | url }}" style="max-width: 50%;"></video>
     <video autoplay loop src="{{ '/img/blog/runtime-event-tracing-after.webm' | url }}" style="max-width: 50%;"></video>
-</div><figcaption>[TODO comparison of event tracing with and without runtime filtering, maybe as two gifs side by side]</figcaption></figure>
+</div><figcaption>Comparison of event tracing with and without runtime filtering</figcaption></figure>
 
 <aside class="_note">
 
