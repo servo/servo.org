@@ -7,7 +7,7 @@ summary:    Beginning of the end of legacy layout, runtime filtering of event lo
 categories:
 ---
 
-<figure class="_figr"><a href="{{ '/img/blog/new-in-march-2023.png' | url }}"><img src="{{ '/img/blog/new-in-march-2023.png' | url }}"
+<figure class="_figr" style="max-width: 100%;"><a href="{{ '/img/blog/new-in-march-2023.png' | url }}"><img src="{{ '/img/blog/new-in-march-2023.png' | url }}"
     alt="Servo nightly showing a table with ‘box-shadow’ and WOFF2 web fonts, containing demos of several other new features"
     style="width: calc(626px * 0.75);"></a>
 <figcaption style="width: calc(626px * 0.75);">Servo now supports tables, box and text shadows, setting fonts on 2D canvases, synthetic small caps, conic and repeating conic gradients, and WOFF2 web fonts.</figcaption></figure>
