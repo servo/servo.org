@@ -22,9 +22,8 @@ More on how we got there in a bit, but first let’s talk about new API support:
 - as of 2024-02-29, we support the **font property on CanvasRenderingContext2D** (@syvb, #31436)
 - as of 2024-02-29, we support **[synthetic](https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-small-caps) ‘font-variant: small-caps’** (@mrobinson, #31435)
 - as of 2024-03-02, we support **&lt;meta http-equiv="Refresh">** (@syvb, #31468)
-- as of 2024-03-08, **tables are enabled by default** (@Loirooriol, #31470)
 - as of 2024-03-08, we support the **‘box-shadow’ property** (@mrobinson, #31453)
-- as of 2024-03-12, we support **‘conical-gradient’ and ‘repeating-conical-gradient’** (@mrobinson, #31597)
+- as of 2024-03-12, we support **‘conic-gradient’ and ‘repeating-conic-gradient’** (@mrobinson, #31597)
 - as of 2024-03-15, we support the **&lt;style disabled> attribute** (@Loirooriol, #31682)
 - as of 2024-03-16, we have basic support for the **getClientRects() method on Element** (@mrobinson, #31696)
 - as of 2024-03-18, we support **console.count() and console.countReset()** (@syvb, #31635)
@@ -51,9 +50,9 @@ Speaking of RUST_LOG, you can now **filter event logging in servoshell and the c
 For example:
 
 - to trace all events in the constellation from layout, plus all events from the compositor other than ReadyToPresent:<br>
-  `RUST_LOG='constellation<layout@,constellation<compositor@,constellation<compositor@ReadyToPresent=off'`
+  <code style="word-wrap: break-word;">RUST_LOG='constellation<layout@,constellation<compositor@,constellation<compositor@ReadyToPresent=off'</code>
 - to trace only winit window moved events in servoshell, plus all ordinary servoshell logs at trace level:<br>
-  `RUST_LOG='servoshell,servoshell<=off,servoshell>=off,servoshell<winit@WindowEvent(Moved)'`
+  <code style="word-wrap: break-word;">RUST_LOG='servoshell,servoshell<=off,servoshell>=off,servoshell<winit@WindowEvent(Moved)'</code>
 
 To learn more about the RUST_LOG syntax, see the [env_logger docs](https://docs.rs/env_logger/0.10.2/env_logger/#enabling-logging), and for the full list of event log targets, see [ports/servoshell/tracing.rs](https://github.com/servo/servo/blob/2d5a1cd02ee0c3196875dc52ca55a150a63cc29f/ports/servoshell/tracing.rs) and [components/constellation/tracing.rs](https://github.com/servo/servo/blob/2d5a1cd02ee0c3196875dc52ca55a150a63cc29f/components/constellation/tracing.rs).
 
@@ -66,7 +65,7 @@ To learn more about the RUST_LOG syntax, see the [env_logger docs](https://docs.
 
 To keep things from getting too noisy, @delan likes to use the event logging config below:
 
-<code style="word-wrap: break-word;">RUST_LOG='warn,servoshell<,servoshell>,constellation<,servoshell<winit@DeviceEvent=off,servoshell<winit@MainEventsCleared=off,servoshell<winit@NewEvents(WaitCancelled)=off,servoshell<winit@RedrawEventsCleared=off,servoshell<winit@RedrawRequested=off,servoshell<winit@UserEvent=off,servoshell<winit@WindowEvent(CursorMoved)=off,servoshell<winit@WindowEvent(AxisMotion)=off,servoshell<servo@EventDelivered=off,servoshell<servo@ReadyToPresent=off,servoshell>servo@Idle=off,servoshell>servo@MouseWindowMoveEventClass=off,constellation<compositor@ForwardEvent(MouseMoveEvent)=off,constellation<unknown@LogEntry=off,constellation<compositor@ReadyToPresent=off,constellation<script@LogEntry=off,servoshell<winit@WindowEvent(Moved)=off'</code>
+<code style="word-wrap: break-word;">RUST_LOG='warn,servoshell<,servoshell>,constellation<,servoshell<winit@DeviceEvent=off,servoshell<winit@MainEventsCleared=off,servoshell<winit@NewEvents(Poll)=off,servoshell<winit@NewEvents(WaitCancelled)=off,servoshell<winit@RedrawEventsCleared=off,servoshell<winit@RedrawRequested=off,servoshell<winit@UserEvent=off,servoshell<winit@WindowEvent(CursorMoved)=off,servoshell<winit@WindowEvent(AxisMotion)=off,servoshell<servo@EventDelivered=off,servoshell<servo@ReadyToPresent=off,servoshell>servo@Idle=off,servoshell>servo@MouseWindowMoveEventClass=off,constellation<compositor@LogEntry=off,constellation<compositor@ForwardEvent(MouseMoveEvent)=off,constellation<compositor@ReadyToPresent=off,constellation<compositor@TickAnimation=off,constellation<script@LogEntry=off,servoshell<winit@WindowEvent(Moved)=off'</code>
 </aside>
 
 ## Embedding and dev changes
