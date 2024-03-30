@@ -17,30 +17,28 @@
     <id>https://servo.org/blog-march-2024/blog/2024/03/29/this-month-in-servo/</id>
     <content xml:lang="en" type="html">&lt;figure class=&quot;_figr&quot;&gt;&lt;a href=&quot;https://servo.org/blog-march-2024/img/blog/new-in-march-2023.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-march-2024/img/blog/new-in-march-2023.png&quot; alt=&quot;Servo nightly showing a table with ‘box-shadow’ and WOFF2 web fonts, containing demos of several other new features&quot; style=&quot;width: calc(626px * 0.75);&quot; /&gt;&lt;/a&gt;
 &lt;figcaption style=&quot;width: calc(626px * 0.75);&quot;&gt;Servo now supports tables, box and text shadows, setting fonts on 2D canvases, synthetic small caps, conic and repeating conic gradients, and WOFF2 web fonts.&lt;/figcaption&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;Remember how last month, we surpassed our legacy layout engine in the CSS test suites?
-This month, we’re proud to share that Servo has &lt;strong&gt;surpassed legacy in the whole suite of Web Platform Tests&lt;/strong&gt; as well!
-This includes some big strides in &lt;strong&gt;CSS tables&lt;/strong&gt; (+30.4pp to 62.9%), &lt;strong&gt;CSS2 margin-padding-clear&lt;/strong&gt; (+13.2pp to 93.6%), and &lt;strong&gt;CSS2 box-display&lt;/strong&gt; (+10.0pp to 84.4%).&lt;/p&gt;
-&lt;p&gt;More on how we got there in a bit, but first let’s talk about new API support:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;This month, after surpassing our legacy layout engine in the CSS test suites, we’re proud to share that Servo has &lt;strong&gt;surpassed legacy in the whole suite of Web Platform Tests&lt;/strong&gt; as well!&lt;/p&gt;
+&lt;p&gt;Servo now supports &lt;strong&gt;WOFF2 web fonts&lt;/strong&gt; (@mrobinson, #31879), &lt;strong&gt;‘box-shadow’&lt;/strong&gt; (@mrobinson, #31453), &lt;strong&gt;‘text-shadow’&lt;/strong&gt; (@mrobinson, #31734), &lt;strong&gt;‘conic-gradient()’&lt;/strong&gt; and &lt;strong&gt;‘repeating-conic-gradient()’&lt;/strong&gt; (@mrobinson, #31597), and &lt;strong&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-small-caps&quot;&gt;synthetic&lt;/a&gt; small caps&lt;/strong&gt; (@mrobinson, #31435).
+&lt;strong&gt;‘text-decoration: line-through’&lt;/strong&gt; is also supported on macOS now (@mrobinson, #31756).&lt;/p&gt;
+&lt;p&gt;In other layout news, &lt;strong&gt;tables are now enabled by default&lt;/strong&gt; (@Loirooriol, #31470), you can now &lt;strong&gt;transform &amp;lt;iframe&amp;gt; and &amp;lt;img&amp;gt;&lt;/strong&gt; (and other inline replaced elements) without wrapping them in a container (@mrobinson, #31833), we now have full support for &lt;strong&gt;&amp;lt;div align&amp;gt; and &amp;lt;center&amp;gt;&lt;/strong&gt; (@Loirooriol, #31423), and &lt;strong&gt;‘text-align: justify’&lt;/strong&gt; now takes &lt;strong&gt;‘text-indent’&lt;/strong&gt; into account (@mrobinson, #31777).&lt;/p&gt;
+&lt;p&gt;You can now &lt;strong&gt;set the &lt;code&gt;font&lt;/code&gt; on 2D canvases&lt;/strong&gt; (@syvb, #31436), and use several other APIs:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;as of 2024-02-27, we support &lt;strong&gt;block layout for &amp;lt;div align&amp;gt; and &amp;lt;center&amp;gt;&lt;/strong&gt; (@Loirooriol, #31423)&lt;/li&gt;
-&lt;li&gt;as of 2024-02-29, we support the &lt;strong&gt;font property on CanvasRenderingContext2D&lt;/strong&gt; (@syvb, #31436)&lt;/li&gt;
-&lt;li&gt;as of 2024-02-29, we support &lt;strong&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-small-caps&quot;&gt;synthetic&lt;/a&gt; ‘font-variant: small-caps’&lt;/strong&gt; (@mrobinson, #31435)&lt;/li&gt;
-&lt;li&gt;as of 2024-03-02, we support &lt;strong&gt;&amp;lt;meta http-equiv=“Refresh”&amp;gt;&lt;/strong&gt; (@syvb, #31468)&lt;/li&gt;
-&lt;li&gt;as of 2024-03-08, we support the &lt;strong&gt;‘box-shadow’ property&lt;/strong&gt; (@mrobinson, #31453)&lt;/li&gt;
-&lt;li&gt;as of 2024-03-12, we support &lt;strong&gt;‘conic-gradient’ and ‘repeating-conic-gradient’&lt;/strong&gt; (@mrobinson, #31597)&lt;/li&gt;
-&lt;li&gt;as of 2024-03-15, we support the &lt;strong&gt;&amp;lt;style disabled&amp;gt; attribute&lt;/strong&gt; (@Loirooriol, #31682)&lt;/li&gt;
-&lt;li&gt;as of 2024-03-16, we have basic support for the &lt;strong&gt;getClientRects() method on Element&lt;/strong&gt; (@mrobinson, #31696)&lt;/li&gt;
-&lt;li&gt;as of 2024-03-18, we support &lt;strong&gt;console.count() and console.countReset()&lt;/strong&gt; (@syvb, #31635)&lt;/li&gt;
-&lt;li&gt;as of 2024-03-20, we support the &lt;strong&gt;‘text-shadow’ property&lt;/strong&gt; (@mrobinson, #31734)&lt;/li&gt;
-&lt;li&gt;as of 2024-03-20, we support &lt;strong&gt;‘text-decoration: line-through’ on macOS&lt;/strong&gt; (@mrobinson, #31756)&lt;/li&gt;
-&lt;li&gt;as of 2024-03-23, we support &lt;strong&gt;StaticRange and AbstractRange&lt;/strong&gt; (@nipunG314, @cathiechen, #25466, #31756)&lt;/li&gt;
-&lt;li&gt;as of 2024-03-27, we support &lt;strong&gt;WOFF2 web fonts&lt;/strong&gt; (@mrobinson, #31879)&lt;/li&gt;
-&lt;li&gt;as of 2024-03-27, we support the obsolete &lt;strong&gt;&amp;lt;pre width&amp;gt; attribute&lt;/strong&gt; (@bplaat, #31792)&lt;/li&gt;
+&lt;li&gt;as of 2024-03-02, &lt;strong&gt;&amp;lt;meta http-equiv=&amp;quot;Refresh&amp;quot;&amp;gt;&lt;/strong&gt; (@syvb, #31468)&lt;/li&gt;
+&lt;li&gt;as of 2024-03-15, &lt;strong&gt;&amp;lt;style disabled&amp;gt;&lt;/strong&gt; (@Loirooriol, #31682)&lt;/li&gt;
+&lt;li&gt;as of 2024-03-16, basic support for &lt;strong&gt;getClientRects()&lt;/strong&gt; (@mrobinson, #31696)&lt;/li&gt;
+&lt;li&gt;as of 2024-03-18, &lt;strong&gt;console.count()&lt;/strong&gt; and &lt;strong&gt;console.countReset()&lt;/strong&gt; (@syvb, #31635)&lt;/li&gt;
+&lt;li&gt;as of 2024-03-23, &lt;strong&gt;StaticRange&lt;/strong&gt; and &lt;strong&gt;AbstractRange&lt;/strong&gt; (@nipunG314, @cathiechen, #25466, #31756)&lt;/li&gt;
+&lt;li&gt;as of 2024-03-27, the obsolete &lt;strong&gt;&amp;lt;pre width&amp;gt;&lt;/strong&gt; attribute (@bplaat, #31792)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Tables are enabled by default&lt;/strong&gt; as of 2024-03-08 (@Loirooriol, #31470), you can now &lt;strong&gt;transform &amp;lt;iframe&amp;gt; and &amp;lt;img&amp;gt;&lt;/strong&gt; (and other inline replaced elements) without wrapping them in a container (@mrobinson, #31833), and &lt;strong&gt;‘text-align: justify’ now takes ‘text-indent’ into account&lt;/strong&gt; (@mrobinson, #31777).&lt;/p&gt;
-&lt;p&gt;We’ve also landed improvements to style invalidation (@mrobinson, #31857), inline layout (@mrobinson, @atbrakhi, @Loirooriol, #31519, #31636, #31641, #31681, #31660, #31896), and table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831).&lt;/p&gt;
+&lt;p&gt;Our dependency upgrades have also surged forward:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/webrender&quot;&gt;&lt;strong&gt;WebRender&lt;/strong&gt;&lt;/a&gt; is now fully caught up with upstream (@mrobinson, @mukilan, #31486)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/stylo&quot;&gt;&lt;strong&gt;Stylo&lt;/strong&gt;&lt;/a&gt; has been updated to September 2023 (@Loirooriol, #31437, #31609)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/mozjs&quot;&gt;&lt;strong&gt;SpiderMonkey&lt;/strong&gt;&lt;/a&gt; has been bumped to 115.9 (@sagudev, #31757)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Servo now stops loading videos and other media after encountering decode errors (@frereit, #31748), and our docs and dev tooling have been updated to ensure &lt;strong&gt;support for WebM and AV1&lt;/strong&gt; (@delan, #31687).&lt;/p&gt;
-&lt;p&gt;Our dependency upgrades surge forward, with &lt;strong&gt;WebRender now fully caught up with upstream&lt;/strong&gt; (@mrobinson, @mukilan, #31486), &lt;strong&gt;Stylo&lt;/strong&gt; bumped from June 2023 to September 2023 (@Loirooriol, #31437, #31609), and &lt;strong&gt;SpiderMonkey updated to 115.9&lt;/strong&gt; (@sagudev, #31757).&lt;/p&gt;
+&lt;p&gt;We’ve also landed improvements to style invalidation (@mrobinson, #31857), inline layout (@mrobinson, @atbrakhi, @Loirooriol, #31519, #31636, #31641, #31681, #31660, #31896), and table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831).&lt;/p&gt;
+&lt;p&gt;As a result of the work done on Servo this month, we’ve made some big strides in &lt;a href=&quot;https://wpt.servo.org/&quot;&gt;our pass rates&lt;/a&gt; for &lt;strong&gt;CSS tables&lt;/strong&gt; (+30.4pp to 62.9%), &lt;strong&gt;CSS2 margin-padding-clear&lt;/strong&gt; (+13.2pp to 93.6%), and &lt;strong&gt;CSS2 box-display&lt;/strong&gt; (+10.0pp to 84.4%).&lt;/p&gt;
 &lt;h2 id=&quot;servoshell-and-debug-logging&quot; tabindex=&quot;-1&quot;&gt;servoshell and debug logging &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-march-2024/blog/2024/03/29/this-month-in-servo/#servoshell-and-debug-logging&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
