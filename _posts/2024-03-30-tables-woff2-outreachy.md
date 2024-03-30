@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
-date:       2024-03-29
-summary:    ao!! wrrrrao!!
+title:      "This month in Servo: tables, WOFF2, Outreachy, and more!"
+date:       2024-03-30
+summary:    Beginning of the end of legacy layout, runtime filtering of event logs, plus console, canvas, WebGPU, DOM, and CSS improvements.
 categories:
 ---
 
