@@ -7,7 +7,12 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-Remember how last month, we surpassed our legacy layout engine in the CSS test suites?
+<figure class="_figr"><a href="{{ '/img/blog/new-in-march-2023.png' | url }}"><img src="{{ '/img/blog/new-in-march-2023.png' | url }}"
+    alt="Servo nightly showing a table with ‘box-shadow’ and WOFF2 web fonts, containing demos of several other new features"
+    style="width: calc(626px * 0.75);"></a>
+<figcaption style="width: calc(626px * 0.75);">Servo now supports tables, box and text shadows, setting fonts on 2D canvases, synthetic small caps, conic and repeating conic gradients, and WOFF2 web fonts.</figcaption></figure>
+
+<span class=_floatmin></span>Remember how last month, we surpassed our legacy layout engine in the CSS test suites?
 This month, we’re proud to share that Servo has **surpassed legacy in the whole suite of Web Platform Tests** as well!
 This includes some big strides in **CSS tables** (+30.4pp to 62.9%), **CSS2 margin-padding-clear** (+13.2pp to 93.6%), and **CSS2 box-display** (+10.0pp to 84.4%).
 
@@ -28,10 +33,6 @@ More on how we got there in a bit, but first let’s talk about new API support:
 - as of 2024-03-23, we support **StaticRange and AbstractRange** (@nipunG314, @cathiechen, #25466, #31756)
 - as of 2024-03-27, we support **WOFF2 web fonts** (@mrobinson, #31879)
 - as of 2024-03-27, we support the obsolete **&lt;pre width> attribute** (@bplaat, #31792)
-
-<figure class="_figr"><a href="http://invalid"><img src="http://invalid" width="640" height="720"
-    alt="[TODO table of demos for new layout features, including synthetic small-caps, box-shadow, conical-gradient, text-shadow, line-through?, transformed &lt;img>]"></a>
-<figcaption>[TODO caption]</figcaption></figure>
 
 **Tables are enabled by default** as of 2024-03-08 (@Loirooriol, #31470), you can now **transform &lt;iframe> and &lt;img>** (and other inline replaced elements) without wrapping them in a container (@mrobinson, #31833), and **‘text-align: justify’ now takes ‘text-indent’ into account** (@mrobinson, #31777).
 
@@ -56,9 +57,10 @@ For example:
 
 To learn more about the RUST_LOG syntax, see the [env_logger docs](https://docs.rs/env_logger/0.10.2/env_logger/#enabling-logging), and for the full list of event log targets, see [ports/servoshell/tracing.rs](https://github.com/servo/servo/blob/2d5a1cd02ee0c3196875dc52ca55a150a63cc29f/ports/servoshell/tracing.rs) and [components/constellation/tracing.rs](https://github.com/servo/servo/blob/2d5a1cd02ee0c3196875dc52ca55a150a63cc29f/components/constellation/tracing.rs).
 
-<figure class="_fig"><a href="http://invalid"><img src="http://invalid" width="1280" height="720"
-    alt="[TODO comparison of event tracing with and without runtime filtering, maybe as two gifs side by side]"></a>
-<figcaption>[TODO caption]</figcaption></figure>
+<figure class="_fig" style="width: 100%;"><div style="display: flex; flex-flow: row nowrap; justify-content: center;">
+    <video autoplay loop src="{{ '/img/blog/runtime-event-tracing-before.webm' | url }}" style="max-width: 50%;"></video>
+    <video autoplay loop src="{{ '/img/blog/runtime-event-tracing-after.webm' | url }}" style="max-width: 50%;"></video>
+</div><figcaption>[TODO comparison of event tracing with and without runtime filtering, maybe as two gifs side by side]</figcaption></figure>
 
 <aside class="_note">
 
