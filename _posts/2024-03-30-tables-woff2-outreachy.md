@@ -100,6 +100,11 @@ Two contributors worked together to pave the way for language-specific behaviour
 
 If you are interested in an Outreachy internship, applications for the next round [open in August 2024](https://www.outreachy.org/docs/community/#outreachy-schedule), so be sure to put that in your calendar!
 
+## Conferences and events
+
+Rakhi Sharma will be in Seattle on **16 April 2024**, [speaking about Servo’s achievements](https://ossna2024.sched.com/event/1aBNF/a-year-of-servo-reboot-where-are-we-now-rakhi-sharma-igalia) at [Open Source Summit North America](https://events.linuxfoundation.org/open-source-summit-north-america/) at **14:15 local time** (21:15 UTC), then meeting up at the [Seattle Rust User Group](https://www.meetup.com/seattle-rust-user-group/events/299908469/) at **18:00 local time** (01:00 UTC).
+See you there!
+
 <style>
     /* guaranteed minimum width for first paragraph after a float */
     ._floatmin {
