@@ -91,7 +91,7 @@ Last but not least, NixOS users can rejoice, as **nix-shell will no longer break
 
 ## Outreachy
 
-Servo is also **participating in Outreachy** for the first time since 201x!
+Servo is also **participating in Outreachy** this year!
 Outreachy is a three-month paid (7000 USD) remote internship program that runs twice a year, with a special focus on open source software.
 To select interns for Outreachy, there was a *contribution period* that is now coming to a close, during which contributors have landed a wide range of improvements.
 
