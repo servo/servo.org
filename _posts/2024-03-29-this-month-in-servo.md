@@ -12,34 +12,33 @@ categories:
     style="width: calc(626px * 0.75);"></a>
 <figcaption style="width: calc(626px * 0.75);">Servo now supports tables, box and text shadows, setting fonts on 2D canvases, synthetic small caps, conic and repeating conic gradients, and WOFF2 web fonts.</figcaption></figure>
 
-<span class=_floatmin></span>Remember how last month, we surpassed our legacy layout engine in the CSS test suites?
-This month, we’re proud to share that Servo has **surpassed legacy in the whole suite of Web Platform Tests** as well!
-This includes some big strides in **CSS tables** (+30.4pp to 62.9%), **CSS2 margin-padding-clear** (+13.2pp to 93.6%), and **CSS2 box-display** (+10.0pp to 84.4%).
+<span class=_floatmin></span>This month, after surpassing our legacy layout engine in the CSS test suites, we’re proud to share that Servo has **surpassed legacy in the whole suite of Web Platform Tests** as well!
 
-More on how we got there in a bit, but first let’s talk about new API support:
+Servo now supports **WOFF2 web fonts** (@mrobinson, #31879), **‘box-shadow’** (@mrobinson, #31453), **‘text-shadow’** (@mrobinson, #31734), **‘conic-gradient()’** and **‘repeating-conic-gradient()’** (@mrobinson, #31597), and **[synthetic](https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-small-caps) small caps** (@mrobinson, #31435).
+**‘text-decoration: line-through’** is also supported on macOS now (@mrobinson, #31756).
 
-- as of 2024-02-27, we support **block layout for &lt;div align> and &lt;center>** (@Loirooriol, #31423)
-- as of 2024-02-29, we support the **font property on CanvasRenderingContext2D** (@syvb, #31436)
-- as of 2024-02-29, we support **[synthetic](https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-small-caps) ‘font-variant: small-caps’** (@mrobinson, #31435)
-- as of 2024-03-02, we support **&lt;meta http-equiv="Refresh">** (@syvb, #31468)
-- as of 2024-03-08, we support the **‘box-shadow’ property** (@mrobinson, #31453)
-- as of 2024-03-12, we support **‘conic-gradient’ and ‘repeating-conic-gradient’** (@mrobinson, #31597)
-- as of 2024-03-15, we support the **&lt;style disabled> attribute** (@Loirooriol, #31682)
-- as of 2024-03-16, we have basic support for the **getClientRects() method on Element** (@mrobinson, #31696)
-- as of 2024-03-18, we support **console.count() and console.countReset()** (@syvb, #31635)
-- as of 2024-03-20, we support the **‘text-shadow’ property** (@mrobinson, #31734)
-- as of 2024-03-20, we support **‘text-decoration: line-through’ on macOS** (@mrobinson, #31756)
-- as of 2024-03-23, we support **StaticRange and AbstractRange** (@nipunG314, @cathiechen, #25466, #31756)
-- as of 2024-03-27, we support **WOFF2 web fonts** (@mrobinson, #31879)
-- as of 2024-03-27, we support the obsolete **&lt;pre width> attribute** (@bplaat, #31792)
+In other layout news, **tables are now enabled by default** (@Loirooriol, #31470), you can now **transform &lt;iframe> and &lt;img>** (and other inline replaced elements) without wrapping them in a container (@mrobinson, #31833), we now have full support for **&lt;div align> and &lt;center>** (@Loirooriol, #31423), and **‘text-align: justify’** now takes **‘text-indent’** into account (@mrobinson, #31777).
 
-**Tables are enabled by default** as of 2024-03-08 (@Loirooriol, #31470), you can now **transform &lt;iframe> and &lt;img>** (and other inline replaced elements) without wrapping them in a container (@mrobinson, #31833), and **‘text-align: justify’ now takes ‘text-indent’ into account** (@mrobinson, #31777).
+You can now **set the `font` on 2D canvases** (@syvb, #31436), and use several other APIs:
 
-We’ve also landed improvements to style invalidation (@mrobinson, #31857), inline layout (@mrobinson, @atbrakhi, @Loirooriol, #31519, #31636, #31641, #31681, #31660, #31896), and table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831).
+- as of 2024-03-02, **&lt;meta http-equiv=&quot;Refresh&quot;>** (@syvb, #31468)
+- as of 2024-03-15, **&lt;style disabled>** (@Loirooriol, #31682)
+- as of 2024-03-16, basic support for **getClientRects()** (@mrobinson, #31696)
+- as of 2024-03-18, **console.count()** and **console.countReset()** (@syvb, #31635)
+- as of 2024-03-23, **StaticRange** and **AbstractRange** (@nipunG314, @cathiechen, #25466, #31756)
+- as of 2024-03-27, the obsolete **&lt;pre width>** attribute (@bplaat, #31792)
+
+Our dependency upgrades have also surged forward:
+
+- [**WebRender**](https://github.com/servo/webrender) is now fully caught up with upstream (@mrobinson, @mukilan, #31486)
+- [**Stylo**](https://github.com/servo/stylo) has been updated to September 2023 (@Loirooriol, #31437, #31609)
+- [**SpiderMonkey**](https://github.com/servo/mozjs) has been bumped to 115.9 (@sagudev, #31757)
 
 Servo now stops loading videos and other media after encountering decode errors (@frereit, #31748), and our docs and dev tooling have been updated to ensure **support for WebM and AV1** (@delan, #31687).
 
-Our dependency upgrades surge forward, with **WebRender now fully caught up with upstream** (@mrobinson, @mukilan, #31486), **Stylo** bumped from June 2023 to September 2023 (@Loirooriol, #31437, #31609), and **SpiderMonkey updated to 115.9** (@sagudev, #31757).
+We’ve also landed improvements to style invalidation (@mrobinson, #31857), inline layout (@mrobinson, @atbrakhi, @Loirooriol, #31519, #31636, #31641, #31681, #31660, #31896), and table layout (@Loirooriol, @mrobinson, #31430, #31421, #31455, #31487, #31480, #31484, #31506, #31535, #31536, #31578, #31596, #31586, #31613, #31606, #31661, #31619, #31650, #31704, #31803, #31862, #31705, #31831).
+
+As a result of the work done on Servo this month, we’ve made some big strides in [our pass rates](https://wpt.servo.org) for **CSS tables** (+30.4pp to 62.9%), **CSS2 margin-padding-clear** (+13.2pp to 93.6%), and **CSS2 box-display** (+10.0pp to 84.4%).
 
 ## servoshell and debug logging
 
