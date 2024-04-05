@@ -73,4 +73,26 @@ A clean-up of script consists of the following:
 
 An example of this is the work replacing the use of `jsapi::JSObject`, a kind of wrapper around a pointer to an untyped JS object, with higher-level and typed concepts. A recently completed part of this work was related to Servo's implementation of WebGPU: The [previous code](https://github.com/servo/servo/blob/5c1723c9833c133e1af641533293e63d8723f8d3/components/script/dom/gpubuffer.rs#L288) would return a `JSObject` from a Web platform operation to SpiderMonkey, after having obtained this object [using a low-level and unsafe SpiderMonkey API call](https://github.com/servo/servo/blob/5c1723c9833c133e1af641533293e63d8723f8d3/components/script/dom/gpubuffer.rs#L321). The [current code](https://github.com/servo/servo/blob/9be989146d5b958cafcc930385e63595a885cb20/components/script/dom/gpubuffer.rs#L289) works instead with [higher-level and safe concepts](https://github.com/servo/servo/blob/9be989146d5b958cafcc930385e63595a885cb20/components/script/dom/gpubuffer.rs#L320) hiding the use of low-level and unsafe SpiderMonkey APIs. The result is code that is easier to use and contribute to, because it does not require fiddling with unsafe and SpiderMonkey specific concepts, that is less coupled to SpiderMonkey, because the coupling is [centralized](https://github.com/servo/servo/blob/c94d5842db11330ff32b0dd2b8ce036c53b410bb/components/script/dom/bindings/typedarrays.rs#L164) in one place and hidden from the rest, and that is closer to the WebGPU and Web IDL specs, because [they deal](https://gpuweb.github.io/gpuweb/#ref-for-dom-gpubuffer-getmappedrange) not with an object but with an ArrayBuffer(Web IDL only rarely deals with objects as opposed to more specific types).
 
+Other examples can be found in the related issues that have been closed:
+- [WedIDL: bring dom/bindings/typedarray further in line with spec](https://github.com/servo/servo/issues/31319)
+- [WebIDL: use TypedArray](https://github.com/servo/servo/issues/31064)
+- [Remove create_typed_array from dom/bindings](https://github.com/servo/servo/issues/31050)
+- [WebIDL: use FLoat32Array in GamePad](https://github.com/servo/servo/issues/31049)
+- [WebIDL: use FLoat32Array in XRRay](https://github.com/servo/servo/issues/31048)
+- [WebIDL: use FLoat32Array in XRRigidTransform](https://github.com/servo/servo/issues/31047)
+- [WebIDL: use FLoat32Array in XRView](https://github.com/servo/servo/issues/31046)
+- [WebIDL impl: remove unsafe JSObject from return value of Document::NamedGetter](https://github.com/servo/servo/issues/30890)
+
 As this work continues, an increasing amount of SpiderMonkey specifics will be moved to [`components/script/dom/bindings`](https://github.com/servo/servo/tree/58081579e9a537ba6bd71bcdcb2b066e14e037b8/components/script/dom/bindings), which will make it possible to enumerate what we are doing with our script engine, and to start investigating how this could be expressed through a generic interface: one that any bindings layer to a script execution engine could implement to integrate with Servo.
+
+### Open issues
+
+- [Modular JS/execution engine](https://github.com/servo/servo/issues/30863)
+- [WebIDL impl: Replace use of NonNull<JSObject>](https://github.com/servo/servo/issues/30889)
+- [WebIDL impl: remove unsafe JSObject when returning a ReadableStream](https://github.com/servo/servo/issues/30891)
+- [WebIDL impl: remove unsafe JSObject from WebGLExtensionWrapper](https://github.com/servo/servo/issues/30892)
+- [Support FinalizationRegistry](https://github.com/servo/servo/issues/31072)
+
+--------
+
+Thank you for reading. This report was written by [Gregory Terzian](https://github.com/gterzian). Questions and comments can be made by opening an issue at [the original repo](https://github.com/gterzian/spidermonkey_servo). 
