@@ -95,4 +95,4 @@ As this work continues, an increasing amount of SpiderMonkey specifics will be m
 
 --------
 
-Thank you for reading. This report was written by [Gregory Terzian](https://github.com/gterzian). Questions and comments can be made by opening an issue at [the original repo](https://github.com/gterzian/spidermonkey_servo). 
+Thank you for reading. This report was written by [Gregory Terzian](https://github.com/gterzian). Questions and comments can be made by opening an issue at [the original repo](https://github.com/gterzian/spidermonkey_servo), or by [reaching out on Zulip](https://servo.zulipchat.com). 
