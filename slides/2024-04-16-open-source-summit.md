@@ -1,0 +1,292 @@
+---
+layout: slides-new.html
+title: Servo @ Open Source Summit NA 2024
+---
+<!-- .slide: class="cover" -->
+
+<img src="/img/servo-color-negative-no-container-600.png" style="margin: 2em;" alt="Servo logo" />
+
+<h4 style="line-height: 1.4">
+  The
+  <span style="color: #4fc066;">embeddable</span>,
+  <span style="color: #209e9b;">independent</span>,
+  <span style="color: #f03278;">memory-safe</span>,
+  <span style="color: #f68243;">modular</span>,
+  <span style="color: #faae30;">parallel</span>
+  web rendering engine
+  <br>
+</h4>
+<div style="font-size: 60%; margin-top: 4em;">
+
+Rakhi Sharma (She/her) <atbrakhi@igalia.com>
+
+</div>
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## About me
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+* **Open Source Engineer** working on Servo
+* **Igalia** Web Platform Team
+* **Servo** Technical Steering Committee (TSC) member
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## About Igalia
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+* **Open Source Consultancy** founded in 2001
+* 140 people, fully remote (25 countires)
+* **Flat structure** (cooperative like model)
+* Top contributors to **Chromium, WebKit and Gecko**
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+<br>
+
+## What's Servo?
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+Servo is  
+a **web rendering engine**  
+written in **Rust**,  
+with **WebGL** and **WebGPU** support,  
+and adaptable to **desktop**, **mobile**,  
+and **embedded** applications.
+
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Servo's Journey So Far
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+2012: Started at Mozilla
+
+2020: Mozilla's layoffs impacted the Servo team
+
+2020: Joined Linux Foundation
+
+2022: Talks about restarting Servo, but how?
+
+2023: Team formed and restarted at Igalia
+
+-----
+<img src="/img/2024-02-fosdem-servo.jpg" alt="What is the status of servo? Is it alive? Is it dead?" />
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Servo in 2023
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+* Restarted the Project/Maintainence/Outreach
+* Layout Engine, CSS2 Support
+* Built [internal WPT](https://wpt.servo.org) and [Servo demos](https://demo.servo.org)
+* Embedding, Minibrowser
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Restarting Servo
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+*
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Choosing a layout Engine for the Future
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+*
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Test and Demos, where and why?
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+*
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Servo on Android.
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+*
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Embedding Servo
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+* 
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Minibrowser
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+*
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Tauri - NLNet - Servo
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+<figure class=_fig id=_wry_demo_fig>
+<iframe src="/img/blog/embedding-2024-01/demo-with-decorations-too.html" id=_wry_demo></iframe>
+</figure>
+
+-----
+
+<!-- .slide: style="text-align: left;" -->
+
+## Dioxus (Stylo-Blitz)
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+Use Stylo for CSS styles and selectors matching
+<img src="/img/2024-02-fosdem-dioxus.png" alt="stylo-dioxus" />
+
+-----
+
+<!-- .slide: style="text-align: left;" -->
+
+## KDAB QT
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+*
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Servo and Outreachy internship
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+*
+
+-----
+
+<!-- .slide: style="text-align: left;" -->
+
+## Year 2024
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+*
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Future Roadmap
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+*
+
+-----
+
+<!-- .slide: class="last" -->
+
+## Thanks
+<div style="font-size: 60%; margin-bottom: 4em;">
+
+Rakhi Sharma (She/her) <atbrakhi@igalia.com>
+
+</div>
+
+<style>
+    /* guaranteed minimum width for first paragraph after a float */
+    .
+_floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig > ._flex {
+        display: flex;
+    }
+    ._fig._min {
+        width: min-content;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+    }
+    ._figr {
+        float: right;
+    }
+    ._figl > iframe,
+    ._figr > iframe,
+    ._figl > a > img,
+    ._figr > a > img {
+        width: 17em;
+        max-width: max-content;
+    }
+    ._figl._default > iframe,
+    ._figr._default > iframe,
+    ._figl._default > a > img,
+    ._figr._default > a > img {
+        width: auto;
+        max-width: 100%;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+    #_wry_demo_fig:not(#specificity) {
+        width: 100%;
+    }
+    #_wry_demo {
+        margin: 0 auto;
+        display: block;
+        height: min(calc(100vh - 9em), 400px);
+        width: 100%;
+    }
+</style>
