@@ -7,12 +7,6 @@ summary:    Overview of Servo's report on its integration of SpiderMonkey.
 categories:
 ---
 
-
-# Servo and SpiderMonkey
-
-
-## Introduction
-
 As a Web engine, Servo embeds another engine for its script execution capabilities(Javascript and Wasm): [Spidermonkey](https://spidermonkey.dev/).
 One of the goals of Servo is modularity, and the question of how modular it really was with regards to those capabilities came-up.
 For example, how easy would it be for Servo to use Chrome's V8 engine?
@@ -49,7 +43,8 @@ Note that the safe and higher-level constructs that replace low-level SpiderMonk
 But, by centralizing these calls, and hiding them from the rest of the codebase, it becomes possible to enumerate what Servo is exactly doing with SpiderMonkey, and to start thinking about a second layer of abstraction: one that would hide the underlying script engine.
 An existing, and encouraging, example of such a layer comes from React Native in the form of its [Javascript Interface(JSI)](https://reactnative.dev/docs/the-new-architecture/landing-page#fast-javascriptnative-interfacing).
 
-### Call to action
+## Call to action
+
 If you are interested in contributing to these efforts, good places to start are the below open issues: 
 
 - [Modular JS/execution engine](https://github.com/servo/servo/issues/30863)
