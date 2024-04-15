@@ -114,7 +114,7 @@ and **embedded** applications.
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## Servo Demos, where?
+## Servo Demos
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
@@ -125,7 +125,7 @@ and **embedded** applications.
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## Internal WPT dashboard?
+## Internal WPT dashboard
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
@@ -192,7 +192,7 @@ and **embedded** applications.
 
 * font fallback
 * `<div align>`, `<center>`, sticky positioning
-* text-align-last, text-align: justify’, vertical-align
+* text-align-last, text-align: justify, vertical-align
 * Migration from floating-point coordinates (f32) to fixed-point coordinates (Au)
 
 -----
@@ -275,7 +275,7 @@ Use Stylo for CSS styles and selectors matching
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## Servo on Android.
+## Servo on Android
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
