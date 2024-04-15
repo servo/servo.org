@@ -4,12 +4,64 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2024-03-30T00:00:00Z</updated>
+  <updated>2024-04-15T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>Servo and SpiderMonkey</title>
+    <link href="https://servo.org/blog/2024/04/15/spidermonkey/"/>
+    <updated>2024-04-15T00:00:00Z</updated>
+    <id>https://servo.org/blog/2024/04/15/spidermonkey/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;As a web engine, Servo embeds another engine for its script execution capabilities, including both JavaScript and Wasm: &lt;a href=&quot;https://spidermonkey.dev/&quot;&gt;SpiderMonkey&lt;/a&gt;.
+One of the goals of Servo is modularity, and the question of how modular it really was with regards to those capabilities came up.
+For example, how easy would it be for Servo to use Chrome’s V8 engine, or the next big script engine?
+To answer that question, we’ve written a &lt;a href=&quot;https://github.com/servo/servo/wiki/Servo-and-SpiderMonkey-Report&quot;&gt;short report&lt;/a&gt; analysing the relationship between Servo and SpiderMonkey.&lt;/p&gt;
+&lt;h2 id=&quot;the-problem&quot; tabindex=&quot;-1&quot;&gt;The problem &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/04/15/spidermonkey/#the-problem&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Running a webpage happens inside the &lt;a href=&quot;https://github.com/servo/servo/tree/main/components/script&quot;&gt;&lt;code&gt;script&lt;/code&gt;&lt;/a&gt; component of Servo; the loading process &lt;a href=&quot;https://github.com/servo/servo/blob/d9f067e998671d16a0274c2a7c8227fec96a4607/components/script/script_thread.rs#L3192&quot;&gt;starts there&lt;/a&gt;, and the page continues to run its &lt;a href=&quot;https://html.spec.whatwg.org/multipage/#event-loop-processing-model&quot;&gt;HTML event loop&lt;/a&gt; there.
+By its very nature, executing a script from within a webpage requires an integration between the script engine and the web engine that surrounds it.
+Anything shared between the two, including the DOM itself and any other construct calling from one into the other, needs to be integrated somehow, and much but not all of that is done via &lt;a href=&quot;https://webidl.spec.whatwg.org/#introduction&quot;&gt;WebIDL&lt;/a&gt;.
+For example, an integration area that is left for web and script engines to implement as they see fit is that with a garbage collector (see example &lt;a href=&quot;https://github.com/servo/mozjs/blob/8603cbf35781ea8f2d57e4822a2b874f56a53914/mozjs-sys/src/jsgc.rs#L87&quot;&gt;in Rust for SpiderMonkey&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;The need to integrate can result in tight coupling, but the classic ways of increasing &lt;a href=&quot;https://en.wikipedia.org/wiki/Modularity&quot;&gt;modularity&lt;/a&gt; — abstractions and interfaces — can be applied here as well, and that is where we found Servo lacking in some ways, but also on the right path.
+Servo already comes with abstractions and interfaces for &lt;a href=&quot;https://github.com/servo/servo/tree/d9f067e998671d16a0274c2a7c8227fec96a4607/components/script/dom/bindings&quot;&gt;a large surface area&lt;/a&gt; of its &lt;a href=&quot;https://github.com/servo/mozjs&quot;&gt;integration with SpiderMonkey&lt;/a&gt;, providing ease of use and clarity while preserving boundaries between the two.
+Other parts of that integration rely on direct, and unsafe, calls into the &lt;a href=&quot;https://github.com/servo/mozjs/tree/8603cbf35781ea8f2d57e4822a2b874f56a53914/mozjs-sys/src&quot;&gt;low-level SpiderMonkey APIs&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;the-solution&quot; tabindex=&quot;-1&quot;&gt;The solution &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/04/15/spidermonkey/#the-solution&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The low-hanging fruit consists of removing these direct calls into low-level SpiderMonkey APIs, replacing them with safe and higher-level constructs.
+Work on this has started, through a combination of efforts from maintainers and the enthusiasm of community members: &lt;a href=&quot;https://github.com/eerii&quot;&gt;eri&lt;/a&gt;, &lt;a href=&quot;https://github.com/tannal&quot;&gt;tannal&lt;/a&gt;, and &lt;a href=&quot;https://github.com/Taym95&quot;&gt;Taym Haddadi&lt;/a&gt;.
+These efforts have already resulted in the closing of several issues:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/31319&quot;&gt;WedIDL: bring dom/bindings/typedarray further in line with spec&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/31064&quot;&gt;WebIDL: use TypedArray&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/31050&quot;&gt;Remove create_typed_array from dom/bindings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/31049&quot;&gt;WebIDL: use Float32Array in GamePad&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/31048&quot;&gt;WebIDL: use Float32Array in XRRay&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/31047&quot;&gt;WebIDL: use Float32Array in XRRigidTransform&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/31046&quot;&gt;WebIDL: use Float32Array in XRView&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/30890&quot;&gt;WebIDL impl: remove unsafe JSObject from return value of Document::NamedGetter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note that the safer higher-level constructs that replace low-level SpiderMonkey API calls are still &lt;a href=&quot;https://github.com/servo/servo/blob/d9f067e998671d16a0274c2a7c8227fec96a4607/components/script/dom/bindings/buffer_source.rs&quot;&gt;internally tightly coupled&lt;/a&gt; to SpiderMonkey.
+By centralizing these calls, and hiding them from the rest of the codebase, it becomes possible to enumerate what exactly Servo is doing with SpiderMonkey, and to start thinking about a second layer of abstraction: one that would hide the underlying script engine.
+An existing, and encouraging, example of such a layer comes from React Native in the form of its &lt;a href=&quot;https://reactnative.dev/docs/the-new-architecture/landing-page#fast-javascriptnative-interfacing&quot;&gt;JavaScript Interface (JSI)&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;call-to-action&quot; tabindex=&quot;-1&quot;&gt;Call to action &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/04/15/spidermonkey/#call-to-action&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;If you are interested in contributing to these efforts, the issues below are good places to start:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/30863&quot;&gt;Modular JS/execution engine&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/30891&quot;&gt;WebIDL impl: remove unsafe JSObject when returning a ReadableStream&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/30892&quot;&gt;WebIDL impl: remove unsafe JSObject from WebGLExtensionWrapper&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/31072&quot;&gt;Support FinalizationRegistry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/30889&quot;&gt;WebIDL impl: Replace use of NonNull&lt;JSObject&gt;&lt;/JSObject&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For more details, read &lt;a href=&quot;https://github.com/servo/servo/wiki/Servo-and-SpiderMonkey-Report&quot;&gt;the full report&lt;/a&gt; on our wiki.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>This month in Servo: tables, WOFF2, Outreachy, and more!</title>
     <link href="https://servo.org/blog/2024/03/30/tables-woff2-outreachy/"/>
@@ -1056,71 +1108,6 @@ With this project to add support for Servo in Tauri, we hope to make embedding S
 &lt;li&gt;on 24 September, &lt;a href=&quot;https://www.bilibili.com/video/BV1Hw411r7Q6/&quot;&gt;&lt;strong&gt;You can work on the web platform!&lt;/strong&gt;&lt;/a&gt;, by Martin Robinson at &lt;a href=&quot;https://workshop2023.gosim.org/schedule#mobile&quot;&gt;GOSIM workshop 2023&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;on 26 September, &lt;strong&gt;Servo: a web view from somewhere else&lt;/strong&gt; (video pending), by Martin Robinson at &lt;a href=&quot;https://conference2023.gosim.org/schedule#mobile&quot;&gt;GOSIM conference 2023&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;on 17 October, &lt;a href=&quot;https://servo.org/slides/2023-10-17-eclipsecon/&quot;&gt;&lt;strong&gt;Servo&lt;/strong&gt;&lt;/a&gt;, by Rakhi Sharma at &lt;a href=&quot;https://www.eclipsecon.org/2023/&quot;&gt;EclipseCon 2023&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>This month in Servo: upcoming events, new browser UI, and more!</title>
-    <link href="https://servo.org/blog/2023/09/15/upcoming-events-and-new-browser-ui/"/>
-    <updated>2023-09-15T00:00:00Z</updated>
-    <id>https://servo.org/blog/2023/09/15/upcoming-events-and-new-browser-ui/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;Servo has had some exciting changes land in our nightly builds over the last month:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;as of 2023-08-09, we now use &lt;strong&gt;rustls&lt;/strong&gt; instead of OpenSSL (&lt;a href=&quot;https://github.com/servo/servo/pull/30025&quot;&gt;#30025&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;as of 2023-08-21, our experimental &lt;strong&gt;WebGPU&lt;/strong&gt; support was updated (&lt;a href=&quot;https://github.com/servo/servo/pull/29795&quot;&gt;#29795&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30359&quot;&gt;#30359&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;as of 2023-08-26, we can now build on &lt;strong&gt;ARM32&lt;/strong&gt; in addition to ARM64 (&lt;a href=&quot;https://github.com/servo/servo/pull/30204&quot;&gt;#30204&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;as of 2023-09-01, CSS &lt;strong&gt;floats&lt;/strong&gt; are now supported again (&lt;a href=&quot;https://github.com/servo/servo/pull/30243&quot;&gt;#30243&lt;/a&gt; et al)&lt;/li&gt;
-&lt;li&gt;as of 2023-09-05, &lt;strong&gt;‘white-space: nowrap’&lt;/strong&gt; is now supported again (&lt;a href=&quot;https://github.com/servo/servo/pull/30259&quot;&gt;#30259&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;as of 2023-09-07, we have an improved &lt;strong&gt;crash error page&lt;/strong&gt; (&lt;a href=&quot;https://github.com/servo/servo/pull/30290&quot;&gt;#30290&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;as of 2023-09-15, our &lt;strong&gt;new browser UI&lt;/strong&gt; is enabled by default (&lt;a href=&quot;https://github.com/servo/servo/issues/30049&quot;&gt;#30049&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;style&gt;
-    /* guaranteed minimum width for first paragraph after a float */
-    ._floatmin {
-        display: block;
-        width: 13em;
-        overflow: hidden;
-    }
-    .figl:not(#specificity),
-    .figr:not(#specificity) {
-        margin: 0 1em 1em;
-    }
-    .figl {
-        float: left;
-    }
-    .figr {
-        float: right;
-    }
-    .figl &gt; a &gt; img,
-    .figr &gt; a &gt; img {
-        width: 17em;
-        max-width: max-content;
-    }
-    .figw &gt; a &gt; img {
-        width: 33em;
-        max-width: 100%;
-    }
-&lt;/style&gt;
-&lt;figure class=&quot;figr&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/webgpu-game-of-life.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/webgpu-game-of-life.png&quot; alt=&quot;WebGPU game of life, showing a 32x32 grid where the living cells are shaded with a rainbow texture&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;While our &lt;strong&gt;WebGPU&lt;/strong&gt; support is still very much experimental (&lt;code&gt;--pref dom.webgpu.enabled&lt;/code&gt;), it now passes over 5000 more tests in the &lt;a href=&quot;https://github.com/gpuweb/cts&quot;&gt;Conformance Test Suite&lt;/a&gt;, after an upgrade from wgpu 0.6 (2020) to 0.16 (2023) and the addition of GPUSupportedFeatures. A few WebGPU demos now run too, notably those that don’t require &lt;a href=&quot;https://github.com/servo/servo/blob/0b86d6579823d0786b37cee86eaaf3ce6bd8aa7d/components/script/dom/htmlcanvaselement.rs#L98-L110&quot;&gt;changing the width or height on the fly&lt;/a&gt;, such as the &lt;a href=&quot;https://sagudev.github.io/briefcase/first-webgpu/9-endgame.html&quot;&gt;Conway’s Game of Life&lt;/a&gt; built in &lt;a href=&quot;https://codelabs.developers.google.com/your-first-webgpu-app&quot;&gt;Your first WebGPU app&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Both of these were contributed by &lt;a href=&quot;https://github.com/sagudev&quot;&gt;Samson @sagudev&lt;/a&gt;, who has also done a lot of work on our DOM bindings, SpiderMonkey integration, and CI workflows, and we’re pleased to now have them join Servo as a reviewer too!&lt;/p&gt;
-&lt;figure class=&quot;figl&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/floats-wikipedia.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/floats-wikipedia.png&quot; alt=&quot;Wikipedia article for Servo, showing article text flowing around the floating infobox on the right&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
-&lt;p&gt;On the CSS front, &lt;strong&gt;floats&lt;/strong&gt; and &lt;strong&gt;‘white-space: nowrap’&lt;/strong&gt; were previously only supported in our legacy layout engine (&lt;code&gt;--legacy-layout&lt;/code&gt;), but now they are supported again, and better than ever before! Floats in particular are one of the trickiest parts of CSS2, and our legacy version had many bugs that were essentially unfixable due to the &lt;a href=&quot;https://servo.org/blog/2023/04/13/layout-2013-vs-2020/&quot;&gt;legacy layout architecture&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Sometimes Servo crashes due to bugs or unimplemented features, and Rust helps us ensure that they almost always happen &lt;em&gt;safely&lt;/em&gt; by panicking, but there’s still a lot we can do to improve the user experience while surfacing those panics, especially on platforms without stdio like Windows.&lt;/p&gt;
-&lt;p&gt;Our new &lt;strong&gt;crash error page&lt;/strong&gt; shows the panic message and stack trace, instead of a confusing “unexpected scheme” error, and allows the user to reload the page. Note that not all crashes are handled gracefully yet — more work is needed to allow recovery from crashes in style and layout.&lt;/p&gt;
-&lt;figure class=&quot;figw&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/crash-error-page.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/crash-error-page.png&quot; alt=&quot;Servo’s new crash error page, showing a fake panic!() inserted at the start of Document::Write&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
-&lt;p&gt;Servo’s example browser — the nightly version of Servo you can download and run — now has a location bar! This &lt;strong&gt;new browser UI&lt;/strong&gt;, or “minibrowser” mode, is now enabled by default, though you can disable it with &lt;code&gt;--no-minibrowser&lt;/code&gt; if you run into any problems. See also &lt;a href=&quot;https://github.com/servo/servo/issues/30049&quot;&gt;#30049&lt;/a&gt; for known issues with the minibrowser.&lt;/p&gt;
-&lt;figure class=&quot;figw&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/new-browser-ui.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/new-browser-ui.png&quot; alt=&quot;Servo’s new browser UI, showing a toolbar with a location field and go button&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;upcoming-events&quot; tabindex=&quot;-1&quot;&gt;Upcoming events &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2023/09/15/upcoming-events-and-new-browser-ui/#upcoming-events&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;September is also a big month for Servo as a project! We have &lt;a href=&quot;https://linuxfoundation.eu/newsroom/servo-web-rendering-engine-joins-linux-foundation-europe&quot;&gt;joined Linux Foundation Europe&lt;/a&gt;, and we’re also attending several events in Bilbao, Spain, and Shanghai, China.&lt;/p&gt;
-&lt;p&gt;Servo will be at the &lt;a href=&quot;https://events.linuxfoundation.org/lf-europe-member-summit/program/schedule/&quot;&gt;LF Europe Member Summit&lt;/a&gt; in Bilbao, with a &lt;a href=&quot;https://lfeuropems2023.sched.com/event/1PCHu&quot;&gt;brief project update&lt;/a&gt; on &lt;strong&gt;18 September&lt;/strong&gt; at &lt;strong&gt;10:45 local time&lt;/strong&gt; (08:45 UTC), and the &lt;a href=&quot;https://events.linuxfoundation.org/open-source-summit-europe/&quot;&gt;Open Source Summit Europe&lt;/a&gt;, with Manuel Rego &lt;a href=&quot;https://osseu2023.sched.com/event/1OGkc&quot;&gt;speaking about Servo&lt;/a&gt; on &lt;strong&gt;21 September&lt;/strong&gt; at &lt;strong&gt;11:55 local time&lt;/strong&gt; (09:55 UTC).&lt;/p&gt;
-&lt;p&gt;At both events, we will also have a booth where you can play with Servo on a real device and ask us questions about the project, all day from &lt;strong&gt;18 September&lt;/strong&gt; through &lt;strong&gt;21 September&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;The following week, you can find us at the &lt;a href=&quot;https://www.gosim.org/#events&quot;&gt;GOSIM&lt;/a&gt; &lt;a href=&quot;https://workshop2023.gosim.org/&quot;&gt;workshop&lt;/a&gt; and &lt;a href=&quot;https://conference2023.gosim.org/&quot;&gt;conference&lt;/a&gt; in Shanghai, with Martin Robinson presenting one workshop and one talk:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://workshop2023.gosim.org/schedule#mobile&quot;&gt;&lt;strong&gt;You can work on the web platform!&lt;/strong&gt;&lt;/a&gt; — an introduction to hacking on Servo, on &lt;strong&gt;24 September&lt;/strong&gt; at &lt;strong&gt;13:45 local time&lt;/strong&gt; (05:45 UTC)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://conference2023.gosim.org/schedule#mobile&quot;&gt;&lt;strong&gt;Servo: a web view from somewhere else&lt;/strong&gt;&lt;/a&gt; — a case for embeddable web engine diversity and Servo’s role in improving that, on &lt;strong&gt;26 September&lt;/strong&gt; at &lt;strong&gt;14:45 local time&lt;/strong&gt; (06:45 UTC)&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>
