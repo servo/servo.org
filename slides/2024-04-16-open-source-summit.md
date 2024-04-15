@@ -81,6 +81,15 @@ and **embedded** applications.
 -----
 <!-- .slide: style="text-align: left;" -->
 
+## Servo's Restart Announcement
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+<img src="/img/2024-04-16-OSS-NA-servo-announcement.png" alt="image showing the announcement `Servo to Advance in 2023`" />
+-----
+<img src="/img/2024-02-fosdem-servo.jpg" alt="What is the status of servo? Is it alive? Is it dead?" />
+-----
+<!-- .slide: style="text-align: left;" -->
+
 ## Servo in 2023
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
@@ -93,7 +102,7 @@ and **embedded** applications.
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## Restarting Servo in 2023
+## Restarting Servo
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 <img src="/img/2024-04-16-OSS-NA-github-graph.png"alt="Github activity graph" />
@@ -101,36 +110,26 @@ and **embedded** applications.
 * 2485 commits (+375% over 523 in 2022)
 * 1037 pull requests (+382% over 215 in 2022)
 * 53 unique contributors (+140% over 22 in 2022),
------
-<!-- .slide: style="text-align: left;" -->
-
-## Choosing a layout Engine for the Future
-
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
-
-* Layout 2013(legacy) Vs Layout2020(started in 2020)
-* [Servo Layout Engines Report](https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report)
-* Moving forward with Layout2020
 
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## Servo Demos, where and why?
+## Servo Demos, where?
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-* Building https://demo.servo.org/
+* https://demo.servo.org/
 
 <img src="/img/2024-04-16-OSS-NA-demo3.png" alt="servo demo https://demo.servo.org/" />
 
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## internal WPT dashboard?
+## Internal WPT dashboard?
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
- * Building https://wpt.servo.org/
+ * Internal WPT https://wpt.servo.org/
 
 <div style="float: left; width: 45%; margin: 1.5%; height: 250px; text-align: center;">
   <img src="/img/2024-04-16-OSS-NA-wpt2.png" alt="wpt https://wpt.servo.org/" />
@@ -142,11 +141,60 @@ and **embedded** applications.
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## Servo on Android.
+## Choosing a layout Engine
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-<img src="/img/2024-04-16-OSS-NA-android.jpeg" style="width: 20%;" alt="Using Servo in KDAB QT" />
+* Layout 2013 (legacy) vs Layout2020 (started in 2020)
+* [Servo Layout Engines Report](https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report)
+* Moving forward with Layout2020
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Layout: Support for Floats
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+<div style="float: left; width: 85%; text-align: center;">
+  <img src="/img/2024-04-16-OSS-NA-floats-wpt.png" alt="image showing wpt score for floats in servo layout" />
+</div>
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Layout: Support for Tables
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<div style="float: left; width: 15%; height:40%; margin: 1.5%; text-align: center;">
+<!-- Enabled by default -->
+</div>
+<div style="float: left; width: 50%; height:50%; margin-bottom: 1%; text-align: center;">
+  <img src="/img/2024-04-16-OSS-NA-spacejam.png"  alt="picture of spacejam website running on servo" />
+</div>
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Layout: WPT for Tables
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+<div style="float: left; width: 85%; text-align: center;">
+  <img src="/img/2024-04-16-OSS-NA-table-wpt.png" alt="image showing wpt score for tables in servo layout" />
+</div>
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Layout: Many more
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+* font fallback
+* `<div align>`, `<center>`, sticky positioning
+* text-align-last, text-align: justify’, vertical-align
+* Migration from floating-point coordinates (f32) to fixed-point coordinates (Au)
+
 -----
 <!-- .slide: style="text-align: left;" -->
 
@@ -154,7 +202,10 @@ and **embedded** applications.
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-*
+* Start getting applications using Servo
+* Applications can use Servo to render web content
+* Provide good API for embedders
+* Servo on embedded devices (e.g. Raspberry Pi)
 
 -----
 <!-- .slide: style="text-align: left;" -->
@@ -163,7 +214,7 @@ and **embedded** applications.
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-<img src="/img/2024-02-fosdem-minibrowser.png" alt="Servo minibrowser" />
+<img src="/img/2024-02-fosdem-minibrowser.png" alt="image showing Servo minibrowser" />
 -----
 <!-- .slide: style="text-align: left;" -->
 
@@ -171,7 +222,7 @@ and **embedded** applications.
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 Run servo with --no-minibrowser
 
-<img src="/img/2024-02-fosdem-minibrowser.png" alt="Servo minibrowser" />
+<img src="/img/2024-02-fosdem-minibrowser.png" alt="image showing Servo running without minibrowser" />
 
 
 -----
@@ -193,7 +244,7 @@ Thank you NLnet for sponsoring this collboration
 ## Dioxus (Stylo-Blitz)
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 Use Stylo for CSS styles and selectors matching
-<img src="/img/2024-02-fosdem-dioxus.png" alt="stylo-dioxus" />
+<img src="/img/2024-02-fosdem-dioxus.png" alt="image showing stylo-dioxus experiment"/>
 
 -----
 
@@ -203,26 +254,27 @@ Use Stylo for CSS styles and selectors matching
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-<img src="/img/2024-04-16-OSS-NA-KDAB.png" style="width: 70%;" alt="Using Servo in KDAB QT" />
+<img src="/img/2024-04-16-OSS-NA-KDAB.png" style="width: 70%;" alt="image showing Servo running using KDAB QT" />
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## Servo and Outreachy internship
+## Servo on Android.
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-*
+<img src="/img/2024-04-16-OSS-NA-android.jpeg" style="width: 20%;" alt="image showing servo running on Android" />
 
------
-<img src="/img/2024-02-fosdem-servo.jpg" alt="What is the status of servo? Is it alive? Is it dead?" />
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## Year 2024
+## Servo and Outreachy
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-*
+* Servo participated in Outreachy this year
+* Outreachy is a 3 month paid remote internship program
+* Many new contributors during contribution phase
+* Helping improve code health, layout and docs
 
 -----
 <!-- .slide: style="text-align: left;" -->
@@ -231,7 +283,7 @@ Use Stylo for CSS styles and selectors matching
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-*
+<img src="/img/2024-04-16-OSS-NA-2024-roadmap.png" alt="Servo’s roadmap for 2024" />
 
 -----
 
