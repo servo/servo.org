@@ -262,7 +262,19 @@ Use Stylo for CSS styles and selectors matching
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-<img src="/img/2024-04-16-OSS-NA-android.jpeg" style="width: 20%;" alt="image showing servo running on Android" />
+
+<div style="float: left; width: 45%; margin: 1.5%; height: 250px; text-align: center;">
+
+  * Support for x86_64 images
+
+  * Servo running in Android emulators
+
+  * Preliminary Android build support
+
+</div>
+<div style="float: left; width: 45%; margin-left: 1.5%; height: 550px; text-align: center;">
+ <img src="/img/2024-04-16-OSS-NA-android.jpeg" alt="image showing servo running on Android" />
+</div>
 
 -----
 <!-- .slide: style="text-align: left;" -->
