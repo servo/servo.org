@@ -2,8 +2,8 @@
 layout:     post
 tags:       blog
 title:      Servo and SpiderMonkey
-date:       2024-04-11
-summary:    Overview of Servo's report on its integration of SpiderMonkey.
+date:       2024-04-15
+summary:    A new report on Servo’s integration with SpiderMonkey, and our proposal for improving its modularity.
 categories:
 ---
 
