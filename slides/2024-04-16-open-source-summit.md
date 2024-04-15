@@ -79,8 +79,6 @@ and **embedded** applications.
 2023: Team formed and restarted at Igalia
 
 -----
-<img src="/img/2024-02-fosdem-servo.jpg" alt="What is the status of servo? Is it alive? Is it dead?" />
------
 <!-- .slide: style="text-align: left;" -->
 
 ## Servo in 2023
@@ -95,12 +93,14 @@ and **embedded** applications.
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## Restarting Servo
+## Restarting Servo in 2023
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+<img src="/img/2024-04-16-OSS-NA-github-graph.png"alt="Github activity graph" />
 
-*
-
+* 2485 commits (+375% over 523 in 2022)
+* 1037 pull requests (+382% over 215 in 2022)
+* 53 unique contributors (+140% over 22 in 2022),
 -----
 <!-- .slide: style="text-align: left;" -->
 
@@ -108,16 +108,36 @@ and **embedded** applications.
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-*
+* Layout 2013(legacy) Vs Layout2020(started in 2020)
+* [Servo Layout Engines Report](https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report)
+* Moving forward with Layout2020
 
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## Test and Demos, where and why?
+## Servo Demos, where and why?
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-*
+* Building https://demo.servo.org/
+
+<img src="/img/2024-04-16-OSS-NA-demo3.png" alt="servo demo https://demo.servo.org/" />
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## internal WPT dashboard?
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+ * Building https://wpt.servo.org/
+
+<div style="float: left; width: 45%; margin: 1.5%; height: 250px; text-align: center;">
+  <img src="/img/2024-04-16-OSS-NA-wpt2.png" alt="wpt https://wpt.servo.org/" />
+</div>
+<div style="float: left; width: 45%; margin: 1.5%; height: 250px; text-align: center;">
+  <img src="/img/2024-04-16-OSS-NA-wpt1.png" alt="wpt https://wpt.servo.org/" />
+</div>
 
 -----
 <!-- .slide: style="text-align: left;" -->
@@ -126,8 +146,7 @@ and **embedded** applications.
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-*
-
+<img src="/img/2024-04-16-OSS-NA-android.jpeg" style="width: 20%;" alt="Using Servo in KDAB QT" />
 -----
 <!-- .slide: style="text-align: left;" -->
 
@@ -135,7 +154,7 @@ and **embedded** applications.
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-* 
+*
 
 -----
 <!-- .slide: style="text-align: left;" -->
@@ -144,14 +163,25 @@ and **embedded** applications.
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-*
+<img src="/img/2024-02-fosdem-minibrowser.png" alt="Servo minibrowser" />
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## Tauri - NLNet - Servo
+## No-Minibrowser
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+Run servo with --no-minibrowser
+
+<img src="/img/2024-02-fosdem-minibrowser.png" alt="Servo minibrowser" />
+
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## Collaboration with Tauri
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
+Thank you NLnet for sponsoring this collboration
 <figure class=_fig id=_wry_demo_fig>
 <iframe src="/img/blog/embedding-2024-01/demo-with-decorations-too.html" id=_wry_demo></iframe>
 </figure>
@@ -173,7 +203,7 @@ Use Stylo for CSS styles and selectors matching
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-*
+<img src="/img/2024-04-16-OSS-NA-KDAB.png" style="width: 70%;" alt="Using Servo in KDAB QT" />
 -----
 <!-- .slide: style="text-align: left;" -->
 
@@ -184,7 +214,8 @@ Use Stylo for CSS styles and selectors matching
 *
 
 -----
-
+<img src="/img/2024-02-fosdem-servo.jpg" alt="What is the status of servo? Is it alive? Is it dead?" />
+-----
 <!-- .slide: style="text-align: left;" -->
 
 ## Year 2024
