@@ -208,6 +208,9 @@ and **embedded** applications.
 * Servo on embedded devices (e.g. Raspberry Pi)
 
 -----
+<img src="/img/2024-02-fosdem-servo-embedding.jpg" alt="Can we embed servo?" />
+
+-----
 <!-- .slide: style="text-align: left;" -->
 
 ## Minibrowser
@@ -222,7 +225,7 @@ and **embedded** applications.
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 Run servo with --no-minibrowser
 
-<img src="/img/2024-02-fosdem-minibrowser.png" alt="image showing Servo running without minibrowser" />
+<img src="/img/2024-04-16-OSS-NA-no-minibrowser.png" style="width:60%; text-align:center;" alt="image showing Servo running without minibrowser" />
 
 
 -----
@@ -265,11 +268,11 @@ Use Stylo for CSS styles and selectors matching
 
 <div style="float: left; width: 45%; margin: 1.5%; height: 250px; text-align: center;">
 
-  * Support for x86_64 images
+  * Preliminary Android build support
 
   * Servo running in Android emulators
 
-  * Preliminary Android build support
+  * Support for x86_64 images
 
 </div>
 <div style="float: left; width: 45%; margin-left: 1.5%; height: 550px; text-align: center;">
