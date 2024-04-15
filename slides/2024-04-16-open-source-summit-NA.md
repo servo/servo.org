@@ -236,6 +236,7 @@ Run servo with --no-minibrowser
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
 Thank you NLnet for sponsoring this collboration
+
 <figure class=_fig id=_wry_demo_fig>
 <iframe src="/img/blog/embedding-2024-01/demo-with-decorations-too.html" id=_wry_demo></iframe>
 </figure>
@@ -246,7 +247,9 @@ Thank you NLnet for sponsoring this collboration
 
 ## Dioxus (Stylo-Blitz)
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
 Use Stylo for CSS styles and selectors matching
+
 <img src="/img/2024-02-fosdem-dioxus.png" alt="image showing stylo-dioxus experiment"/>
 
 -----
@@ -257,7 +260,18 @@ Use Stylo for CSS styles and selectors matching
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-<img src="/img/2024-04-16-OSS-NA-KDAB.png" style="width: 70%;" alt="image showing Servo running using KDAB QT" />
+<div style="float: left; width: 40%;">
+
+  * Servo inside Qt, using KDAB's CXX-Qt library as bridge
+
+  * CXX-Qt is a safe interop between Rust and Qt
+
+</div>
+<div style="float: right; width: 55%; margin-top: 3%;">
+ <img src="/img/2024-04-16-OSS-NA-KDAB.png" alt="image showing Servo running using KDAB QT" />
+</div>
+
+
 -----
 <!-- .slide: style="text-align: left;" -->
 
