@@ -316,6 +316,23 @@ Use Stylo for CSS styles and selectors matching
 
 -----
 
+<!-- .slide: style="text-align: left;" -->
+
+## Support Servo
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+https://opencollective.com/servo
+https://github.com/sponsors/servo
+
+<div style="float: left; width: 45%; margin:1.5%;">
+ <img src="/img/sponsor-on-open-collective.png" alt="Sponsor Servo on Open Collective" />
+</div>
+<div style="float: left; width: 45%; margin-top:4.5%; text-align:center;">
+ <img src="/img/sponsor-on-github.png" alt="Sponsor Servo on github" />
+</div>
+
+-----
 <!-- .slide: class="last" -->
 
 ## Thanks
