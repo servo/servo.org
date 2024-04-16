@@ -248,9 +248,6 @@ Thank you NLnet for sponsoring this collboration
 
 -----
 <!-- .slide: style="text-align: left;" -->
-<!-- ## Wry <> Servo -->
-
-<!-- <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div> -->
 
 [Built only with HTML, CSS, JS](https://github.com/atbrakhi/wry)
 
