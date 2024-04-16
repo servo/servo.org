@@ -31,18 +31,7 @@ Rakhi Sharma (She/her) <atbrakhi@igalia.com>
 * **Open Source Engineer** working on Servo
 * **Igalia** Web Platform Team
 * **Servo** Technical Steering Committee (TSC) member
-
------
-<!-- .slide: style="text-align: left;" -->
-
-## About Igalia
-
-<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
-
-* **Open Source Consultancy** founded in 2001
-* 140 people, fully remote (25 countires)
-* **Flat structure** (cooperative like model)
-* Top contributors to **Chromium, WebKit and Gecko**
+* **atbrakhi** on internet
 
 -----
 <!-- .slide: style="text-align: left;" -->
@@ -75,6 +64,18 @@ and **embedded** applications.
 2022: Talks about restarting Servo, but how?
 
 2023: Team formed and restarted at Igalia
+
+-----
+<!-- .slide: style="text-align: left;" -->
+
+## About Igalia
+
+<div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
+
+* **Open Source Consultancy** founded in 2001
+* 140 people, fully remote (25 countires)
+* **Flat structure** (cooperative like model)
+* Top contributors to **Chromium, WebKit and Gecko**
 
 -----
 <!-- .slide: style="text-align: left;" -->
