@@ -60,8 +60,6 @@ with **WebGL** and **WebGPU** support,
 and adaptable to **desktop**, **mobile**,  
 and **embedded** applications.
 
-<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
-
 -----
 <!-- .slide: style="text-align: left;" -->
 
