@@ -33,6 +33,7 @@ $ < 2023.json jq -r .user.login | sort | uniq -c | sort -nr
     const stride = data.area_keys.length;
     const rows = dates.map(expectedDate => data.scores.find(([date]) => date == expectedDate));
     rows.forEach((row, i) => {
+        if (row == null) throw `no results for ${dates[i]}!`;
         if (row.length != 3 + stride + 2 + stride) throw "schema change? bad length";
         if (row[0] != dates[i]) throw "unreachable! incorrect date in [0]";
         if (!/^[0-9a-f]{9}$/.test(row[1])) throw "schema change? expected commit hash in [1]";
