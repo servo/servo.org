@@ -8,6 +8,17 @@ categories:
 ---
 
 <!--
+- sponsors
+- wpt
+- upgrades
+    - stylo
+- qt
+- book
+- outreachy
+- conferences
+-->
+
+<!--
 fromDate = "2024-03-29";
 toDate = "2024-04-23";
 
