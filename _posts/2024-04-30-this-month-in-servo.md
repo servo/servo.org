@@ -7,6 +7,18 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+- as of 2024-04-02, `files` setter on HTMLInputElement (@shanehandley, #31934)
+- as of 2024-04-03, ‘baseline-source’ (@MunishMummadi, #31904, #31913)
+- as of 2024-04-05, ‘ex’ units in CSS (@mrobinson, #31966)
+- as of 2024-04-05, `onSubmittedWorkDone` method on GPUQueue (@sagudev, #31772)
+- as of 2024-04-05, &lt;video> without `autoplay`, when the page provides its own controls (@eerii, media#419, #32001)
+- as of 2024-04-08, `deleteRow(-1)` on empty HTMLTableElement (@shanehandley, #32009)
+- as of 2024-04-12, ElementInternals and attachInternals (@pshaughn, @cathiechen, #25705, #31980)
+- as of 2024-04-16, ‘background-attachment: fixed’ (@mrobinson, #32068)
+- as of 2024-04-16, &lt;object> with image data URLs (@mrobinson, #32069)
+- as of 2024-04-18, ‘clear’ on &lt;br> elements (@mrobinson, #32094)
+- as of 2024-04-23, basic support for ‘list-style-position: outside’ (@mrobinson, @Loirooriol, #32114)
+
 <!--
 - sponsors
     - $1164/month opencollective, including $1000/month from one anonymous donor
@@ -15,19 +27,19 @@ categories:
     - $184/month github
         - 100+5+1+15+1+5+5+5+5+1+5+5+1+10+5+5+5+5
         - “monthly estimated income” stat is consistent with this
-- api
-    - video without autoplay (@eerii, media#419, servo#32001)
-    - files setter on HTMLInputElement (@shanehandley, #31934)
-    - onSubmittedWorkDone method on GPUQueue (@sagudev, #31772)
-    - HTMLTableElement removeRow(-1) (@shanehandley, #32009)
-    - ElementInternals and attachInternals (@pshaughn, @cathiechen, #25705, #31980)
-- css
-    - basic support for ‘list-style-position’ (@mrobinson, @Loirooriol, #32114)
-    - ‘baseline-source’ (@MunishMummadi, #31904, #31913)
-    - ‘ex’ units (@mrobinson, #31966)
-    - ‘background-attachment: fixed’ (@mrobinson, #32068)
-    - <object> with image data url (@mrobinson, #32069)
-    - ‘clear’ on <br> (@mrobinson, #32094)
+- DONE api
+    - DONE video without autoplay (@eerii, media#419, servo#32001)
+    - DONE files setter on HTMLInputElement (@shanehandley, #31934)
+    - DONE onSubmittedWorkDone method on GPUQueue (@sagudev, #31772)
+    - DONE HTMLTableElement deleteRow(-1) (@shanehandley, #32009)
+    - DONE ElementInternals and attachInternals (@pshaughn, @cathiechen, #25705, #31980)
+- DONE css
+    - DONE basic support for ‘list-style-position’ (@mrobinson, @Loirooriol, #32114)
+    - DONE ‘baseline-source’ (@MunishMummadi, #31904, #31913)
+    - DONE ‘ex’ units (@mrobinson, #31966)
+    - DONE ‘background-attachment: fixed’ (@mrobinson, #32068)
+    - DONE <object> with image data url (@mrobinson, #32069)
+    - DONE ‘clear’ on <br> (@mrobinson, #32094)
 - rendering
     - white-space:pre-wrap intrinsic sizing (@Loirooriol, #31930)
     - fix scrolling to top when transforms change (@mrobinson, #31892)
