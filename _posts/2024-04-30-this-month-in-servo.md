@@ -53,6 +53,10 @@ We’ve also landed several other rendering improvements:
 - fixed some (but not all) HTTP 400 errors when sending requests to nginx (@philip-lamb, #32024, #32093)
 - fixed ‘min-height’ and ‘max-height’ on elements with ‘float’ (@Loirooriol, #32057)
 
+Big changes are coming to Servo’s **font loading and rendering**, thanks to @mrobinson’s font system redesign RFC (#32033).
+Work has already started on this (@mrobinson, @mukilan, #32034, #32038, #32100, #32101, #32115), with the eventual goal of making font data **zero-copy readable from multiple threads**.
+This in turn will fix several major issues with font caching, including cached font data leaking over time and between pages, unnecessary loading from disk, and unnecessary copying to layout.
+
 ## Embedding and dev changes
 
 Servo’s docs are moving to [**The Servo Book**](https://book.servo.org)!
@@ -100,8 +104,8 @@ On a very fast machine (see above), the savings will be more modest, at least un
 - wpt
 - upgrades
     - stylo (@Loirooriol, #31932, #31991, #32032, #32066, #32089)
-- font system rework (@mrobinson, #32033, #32038, #32100, #32101, #32115)
-    - platform-independent font data loading (@mrobinson, #32034)
+- DONE font system rework (@mrobinson, #32033, #32038, #32100, #32101, #32115)
+    - DONE platform-independent font data loading (@mrobinson, #32034)
 - qt
 - ~DONE book
 - dev
