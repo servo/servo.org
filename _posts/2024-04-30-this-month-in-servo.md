@@ -78,7 +78,7 @@ As always, use of these funds will be decided transparently in the Technical Ste
 - wpt
 - upgrades
     - stylo (@Loirooriol, #31932, #31991, #32032, #32066, #32089)
-- font system rework (@mrobinson, #32033, #32038, #32100, #32101)
+- font system rework (@mrobinson, #32033, #32038, #32100, #32101, #32115)
     - platform-independent font data loading (@mrobinson, #32034)
 - qt
 - book
@@ -89,6 +89,7 @@ As always, use of these funds will be decided transparently in the Technical Ste
     - webgpu cts flakiness (#31952)
     - macos flakiness (@mrobinson, #32005)
     - nix-shell without etc/shell.nix (@delan, #32035)
+    - android aarch64 (@mukilan, #32137)
 - outreachy
     - & ‘baseline-source’ (@MunishMummadi, #31904, #31913)
     - & video without autoplay (@eerii, media#419, servo#32001)
@@ -322,6 +323,12 @@ From https://github.com/servo/servo
     25b182c372427e798954b814b0f1a0875ab43f98	https://github.com/servo/servo/pull/32120	fix(user-timing): fix clearing marks/measures by name (#32120)
     f9e154af5543063e4a168b92948d1009c73f2bf3	https://github.com/servo/servo/pull/32125	Fix InsertRule to use the right CssRuleTypes (#32125)
 ?o  67f239d1bab9e866539ea4ef76a1d40bcbeb7d53	https://github.com/servo/servo/pull/32126	clippy: fix several lint warns (#32126)
+>>> 2024-04-24T06:11:08Z
+    22729446270c4a748f3020ccf09570a1412e2df9	https://github.com/servo/servo/pull/32139	build(deps): bump freetype from 0.7.1 to 0.7.2 (#32139)
+    2781728e90ef6301974874b49ba066ca97c05fec	https://github.com/servo/servo/pull/32140	build(deps): bump rustix from 0.38.33 to 0.38.34 (#32140)
+    925d9420364c62c5781dd77bef35546bba536abe	https://github.com/servo/servo/pull/32138	build(deps): bump winapi-util from 0.1.6 to 0.1.7 (#32138)
++++ 3b1bbc1aaf194c6344de24949bf09108de997e06	https://github.com/servo/servo/pull/32137	android: add CI build for aarch64 (#32137)
++++ de47dfe5c106984efb996fe0989d59180187624f	https://github.com/servo/servo/pull/32115	fonts: Merge multiple methods into `PlatformFont::descriptor()` (#32115)
 -->
 
 <style>
