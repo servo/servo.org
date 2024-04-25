@@ -30,17 +30,20 @@ This smashed our first two goals, and is a respectable part of the way towards o
 We are still receiving donations from **19 people** on LFX, and we’re working on transferring the balance to our new fund, but we will stop accepting donations there soon — **please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo)**.
 As always, use of these funds will be decided transparently in the Technical Steering Committee, starting with the TSC meeting [on 29 April](https://github.com/servo/project/issues/85).
 
+Servo now supports several new features in its nightly builds:
+
 - as of 2024-04-02, `files` setter on HTMLInputElement (@shanehandley, #31934)
-- as of 2024-04-03, ‘baseline-source’ (@MunishMummadi, #31904, #31913)
-- as of 2024-04-05, ‘ex’ units in CSS (@mrobinson, #31966)
+- as of 2024-04-05, **‘ex’ units** in CSS (@mrobinson, #31966)
 - as of 2024-04-05, `onSubmittedWorkDone` method on GPUQueue (@sagudev, #31772)
-- as of 2024-04-05, &lt;video> without `autoplay`, when the page provides its own controls (@eerii, media#419, #32001)
 - as of 2024-04-08, `deleteRow(-1)` on empty HTMLTableElement (@shanehandley, #32009)
-- as of 2024-04-12, ElementInternals and attachInternals (@pshaughn, @cathiechen, #25705, #31980)
-- as of 2024-04-16, ‘background-attachment: fixed’ (@mrobinson, #32068)
-- as of 2024-04-16, &lt;object> with image data URLs (@mrobinson, #32069)
-- as of 2024-04-18, ‘clear’ on &lt;br> elements (@mrobinson, #32094)
-- as of 2024-04-23, basic support for ‘list-style-position: outside’ (@mrobinson, @Loirooriol, #32114)
+- as of 2024-04-12, **ElementInternals** and **attachInternals** (@pshaughn, @cathiechen, #25705, #31980)
+- as of 2024-04-16, **‘background-attachment: fixed’** (@mrobinson, #32068)
+- as of 2024-04-16, **&lt;object>** with **image data URLs** (@mrobinson, #32069)
+- as of 2024-04-18, **‘clear’** property on **&lt;br>** elements (@mrobinson, #32094)
+- as of 2024-04-23, basic support for **‘list-style-position: outside’** (@mrobinson, @Loirooriol, #32114)
+
+As of 2024-04-05, we now support **non-autoplay &lt;video>** (@eerii, media#419, #32001), as long as the page provides its own controls, as well as the **‘baseline-source’** property (@MunishMummadi, #31904, #31913).
+Both of these contributors started out as Outreachy participants, and we’re thrilled to see their continued work on improving Servo.
 
 <!--
 - DONE sponsors
