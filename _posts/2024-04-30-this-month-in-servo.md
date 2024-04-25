@@ -47,11 +47,12 @@ Both of these contributors started out as Outreachy participants, and we’re th
 
 We’ve also landed several other rendering improvements:
 
-- elements or frames no longer scroll to top when transforms change (@mrobinson, #31892)
-- fixed intrinsic sizing of inline content containing ‘pre-wrap’ (@Loirooriol, #31930)
-- fixed margin collapsing with indefinite percentages or non-zero height (@Loirooriol, #32059, #32060)
-- fixed some (but not all) HTTP 400 errors when sending requests to nginx (@philip-lamb, #32024, #32093)
-- fixed ‘min-height’ and ‘max-height’ on elements with ‘float’ (@Loirooriol, #32057)
+- **Stylo** has been updated to **March 2024** (@Loirooriol, #31932, #31991, #32032, #32066, #32089)
+- elements or frames **no longer scroll to top** when transforms change (@mrobinson, #31892)
+- fixed **intrinsic sizing** of inline content containing **‘pre-wrap’** (@Loirooriol, #31930)
+- fixed **margin collapsing** with indefinite percentages or non-zero height (@Loirooriol, #32059, #32060)
+- fixed some (but not all) **HTTP 400** errors when sending requests to nginx (@philip-lamb, #32024, #32093)
+- fixed **‘min-height’** and **‘max-height’** on elements with **‘float’** (@Loirooriol, #32057)
 
 Our font rendering has improved, with support for selecting the correct weight and style in **indexed fonts (.ttc)** on Linux (@mukilan, @mrobinson, #32127), as well as support for **emoji font fallback** on macOS (@mrobinson, #32122).
 Note that color emoji are not yet supported.
@@ -59,6 +60,8 @@ Note that color emoji are not yet supported.
 Other big changes are coming to Servo’s font loading and rendering, thanks to @mrobinson’s **font system redesign** RFC (#32033).
 Work has already started on this (@mrobinson, @mukilan, #32034, #32038, #32100, #32101, #32115), with the eventual goal of making font data **zero-copy readable from multiple threads**.
 This in turn will fix several major issues with font caching, including cached font data leaking over time and between pages, unnecessary loading from disk, and unnecessary copying to layout.
+
+We’ve also started simplifying the script–layout interface (@mrobinson, #31937, #32081), since [layout was merged into the script thread]({{ '/blog/2024/02/28/gamepads-font-fallback-space-jam/' | url }}), and script can now call into layout without IPC.
 
 ## Embedding and dev changes
 
@@ -109,8 +112,8 @@ As for CI, our experimental Android build now supports aarch64 (@mukilan, #32137
     - DONE fix for emoji font fallback on macos, except for color (@mrobinson, #32122)
     - DONE fix for selecting the correct weight/style in indexed fonts (ttc) on linux (@mukilan, @mrobinson, #32127)
 - wpt
-- upgrades
-    - stylo (@Loirooriol, #31932, #31991, #32032, #32066, #32089)
+- DONE upgrades
+    - DONE stylo (@Loirooriol, #31932, #31991, #32032, #32066, #32089)
 - DONE font system rework (@mrobinson, #32033, #32038, #32100, #32101, #32115)
     - DONE platform-independent font data loading (@mrobinson, #32034)
 - qt
@@ -183,7 +186,7 @@ As for CI, our experimental Android build now supports aarch64 (@mukilan, #32137
             - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T080407Z.html
                 - mozjs_sys build script (run) 183.11, mozangle build script (run) 186.81
     - multiple webviews (@wusyong, @delan, @atbrakhi, #31417, #32067)
-    - layout thread (@mrobinson, #31937, #32081)
+    - DONE layout thread (@mrobinson, #31937, #32081)
     - DONE webgpu cts flakiness (#31952)
     - DONE macos flakiness (@mrobinson, #32005)
     - DONE nix-shell without etc/shell.nix (@delan, #32035)
