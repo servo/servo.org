@@ -53,7 +53,10 @@ We’ve also landed several other rendering improvements:
 - fixed some (but not all) HTTP 400 errors when sending requests to nginx (@philip-lamb, #32024, #32093)
 - fixed ‘min-height’ and ‘max-height’ on elements with ‘float’ (@Loirooriol, #32057)
 
-Big changes are coming to Servo’s **font loading and rendering**, thanks to @mrobinson’s font system redesign RFC (#32033).
+Our font rendering has improved, with support for selecting the correct weight and style in **indexed fonts (.ttc)** on Linux (@mukilan, @mrobinson, #32127), as well as support for **emoji font fallback** on macOS (@mrobinson, #32122).
+Note that color emoji are not yet supported.
+
+Other big changes are coming to Servo’s font loading and rendering, thanks to @mrobinson’s **font system redesign** RFC (#32033).
 Work has already started on this (@mrobinson, @mukilan, #32034, #32038, #32100, #32101, #32115), with the eventual goal of making font data **zero-copy readable from multiple threads**.
 This in turn will fix several major issues with font caching, including cached font data leaking over time and between pages, unnecessary loading from disk, and unnecessary copying to layout.
 
@@ -67,6 +70,10 @@ The first two compile some very large C++ libraries in their build scripts — S
 
 mozjs_sys now uses a **prebuilt version of SpiderMonkey** by default (@wusyong, @sagudev, mozjs#450, #31824), **cutting clean build times by over 100 seconds** on a quad-core CPU with SMT.
 On a very fast machine (see above), the savings will be more modest, at least until we [do the same for mozangle](https://github.com/servo/mozangle/pull/71#issuecomment-1878567207).
+
+If you use NixOS, or any Linux distro with Nix, you can now get a shell with all of the tools and dependencies needed to build and run Servo by typing `nix-shell` (@delan, #32035), without also needing to type `etc/shell.nix`.
+
+As for CI, our experimental Android build now supports aarch64 (@mukilan, #32137), in addition to Android on armv7, x86_64, and i686, and we’ve improved flakiness in the WebGPU tests (@sagudev, #31952) and macOS builds (@mrobinson, #32005).
 
 <!--
 - DONE sponsors
@@ -93,14 +100,14 @@ On a very fast machine (see above), the savings will be more modest, at least un
     - DONE ‘background-attachment: fixed’ (@mrobinson, #32068)
     - DONE <object> with image data url (@mrobinson, #32069)
     - DONE ‘clear’ on <br> (@mrobinson, #32094)
-- rendering
+- DONE rendering
     - DONE white-space:pre-wrap intrinsic sizing (@Loirooriol, #31930)
     - DONE fix scrolling to top when transforms change (@mrobinson, #31892)
     - DONE fix http 400 from nginx, though host is still broken (@philip-lamb, #32024, #32093)
     - DONE fixes for margin collapsing (@Loirooriol, #32059, #32060)
     - DONE fix for ‘min-height’ and ‘max-height’ on floats (@Loirooriol, #32057)
-    - fix for emoji font fallback on macos, except for color (@mrobinson, #32122)
-    - fix for selecting the correct weight/style in indexed fonts (ttc) on linux (@mukilan, @mrobinson, #32127)
+    - DONE fix for emoji font fallback on macos, except for color (@mrobinson, #32122)
+    - DONE fix for selecting the correct weight/style in indexed fonts (ttc) on linux (@mukilan, @mrobinson, #32127)
 - wpt
 - upgrades
     - stylo (@Loirooriol, #31932, #31991, #32032, #32066, #32089)
@@ -177,13 +184,13 @@ On a very fast machine (see above), the savings will be more modest, at least un
                 - mozjs_sys build script (run) 183.11, mozangle build script (run) 186.81
     - multiple webviews (@wusyong, @delan, @atbrakhi, #31417, #32067)
     - layout thread (@mrobinson, #31937, #32081)
-    - webgpu cts flakiness (#31952)
-    - macos flakiness (@mrobinson, #32005)
-    - nix-shell without etc/shell.nix (@delan, #32035)
-    - android aarch64 (@mukilan, #32137)
+    - DONE webgpu cts flakiness (#31952)
+    - DONE macos flakiness (@mrobinson, #32005)
+    - DONE nix-shell without etc/shell.nix (@delan, #32035)
+    - DONE android aarch64 (@mukilan, #32137)
 - outreachy
-    - & ‘baseline-source’ (@MunishMummadi, #31904, #31913)
-    - & video without autoplay (@eerii, media#419, servo#32001)
+    - DONE & ‘baseline-source’ (@MunishMummadi, #31904, #31913)
+    - DONE & video without autoplay (@eerii, media#419, servo#32001)
 - conferences
 -->
 
