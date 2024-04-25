@@ -53,14 +53,16 @@ We’ve also landed several other rendering improvements:
 - fixed some (but not all) HTTP 400 errors when sending requests to nginx (@philip-lamb, #32024, #32093)
 - fixed ‘min-height’ and ‘max-height’ on elements with ‘float’ (@Loirooriol, #32057)
 
+## Embedding and dev changes
+
+Servo’s docs are moving to [**The Servo Book**](https://book.servo.org)!
+We’ve been working on unifying our in-tree docs and the wiki, and a very early version of this is now available.
+
 Three of the slowest crates in the Servo build process are **mozjs_sys**, **mozangle**, and **script**, each taking over a minute to build even on a very fast machine (AMD 7950X).
 The first two compile some very large C++ libraries in their build scripts — SpiderMonkey and ANGLE respectively — and the third blocks on the first two.
 
 mozjs_sys now uses a **prebuilt version of SpiderMonkey** by default (@wusyong, @sagudev, mozjs#450, #31824), **cutting clean build times by over 100 seconds** on a quad-core CPU with SMT.
 On a very fast machine (see above), the savings will be more modest, at least until we [do the same for mozangle](https://github.com/servo/mozangle/pull/71#issuecomment-1878567207).
-
-Servo’s docs are moving to [**The Servo Book**](https://book.servo.org)!
-We’ve been working on unifying our in-tree docs and the wiki, and a very early version of this is now available.
 
 <!--
 - DONE sponsors
