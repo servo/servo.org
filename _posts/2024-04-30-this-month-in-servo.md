@@ -45,6 +45,15 @@ Servo now supports several new features in its nightly builds:
 As of 2024-04-05, we now support **non-autoplay &lt;video>** (@eerii, media#419, #32001), as long as the page provides its own controls, as well as the **‘baseline-source’** property (@MunishMummadi, #31904, #31913).
 Both of these contributors started out as Outreachy participants, and we’re thrilled to see their continued work on improving Servo.
 
+Three of the slowest crates in the Servo build process are **mozjs_sys**, **mozangle**, and **script**, each taking over a minute to build even on a very fast machine (AMD 7950X).
+The first two compile some very large C++ libraries in their build scripts — SpiderMonkey and ANGLE respectively — and the third blocks on the first two.
+
+mozjs_sys now uses a **prebuilt version of SpiderMonkey** by default (@wusyong, @sagudev, mozjs#450, #31824), **cutting clean build times by over 100 seconds** on a quad-core CPU with SMT.
+On a very fast machine (see above), the savings will be more modest, at least until we [do the same for mozangle](https://github.com/servo/mozangle/pull/71#issuecomment-1878567207).
+
+Servo’s docs are moving to [**The Servo Book**](https://book.servo.org)!
+We’ve been working on unifying our in-tree docs and the wiki, and a very early version of this is now available.
+
 <!--
 - DONE sponsors
     - open collective: $1578.75, $1164/month, including $1000/month from one anonymous donor
@@ -84,9 +93,74 @@ Both of these contributors started out as Outreachy participants, and we’re th
 - font system rework (@mrobinson, #32033, #32038, #32100, #32101, #32115)
     - platform-independent font data loading (@mrobinson, #32034)
 - qt
-- book
+- ~DONE book
 - dev
-    - prebuilt spidermonkey (@wusyong, @sagudev, mozjs#450, #31824)
+    - DONE prebuilt spidermonkey (@wusyong, @sagudev, mozjs#450, #31824)
+        - 1440406e91684771bb810ead6ac5ae710f55f3ea (main):
+            - rm -Rf target/debug
+            - nice ./mach build -d  1135.75s user 179.67s system 706% cpu 3:06.10 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T060608Z.html
+                - mozjs_sys build script (run) 4.03, mozangle build script (run) 74.25
+        - 31e0b33e73fbbe262dd3f442f90f76fd56065a1d (#31824~)
+            - rm -Rf target/debug
+            - nice ./mach build -d  2288.59s user 198.56s system 1224% cpu 3:23.08 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T061004Z.html
+            - rm -Rf target/debug
+            - nice ./mach build -d  2299.47s user 200.60s system 1274% cpu 3:16.22 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T062212Z.html
+                - mozjs_sys build script (run) 79.89, mozangle build script (run) 26.53(?!)
+            - ( set -o nullglob; for i in script mozjs mozjs_sys; do rm -Rfv target/debug/{build,incremental}/$i-* target/debug/deps/{,lib}$i-*; done )
+            - nice ./mach build -d  1120.20s user 59.49s system 767% cpu 2:33.74 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T062957Z.html
+            - ( set -o nullglob; for i in script mozjs mozjs_sys; do rm -Rfv target/debug/{build,incremental}/$i-* target/debug/deps/{,lib}$i-*; done )
+            - MOZJS_FROM_SOURCE=1 nice ./mach build -d  1127.79s user 59.67s system 769% cpu 2:34.34 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T063305Z.html
+        - 1440406e91684771bb810ead6ac5ae710f55f3ea (main)
+            - rm -Rf target/debug
+            - nice ./mach build -d  1151.51s user 180.74s system 712% cpu 3:06.97 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T063749Z.html
+            - ( set -o nullglob; for i in script mozjs mozjs_sys; do rm -Rfv target/debug/{build,incremental}/$i-* target/debug/deps/{,lib}$i-*; done )
+            - nice ./mach build -d  133.03s user 16.29s system 152% cpu 1:37.80 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T065127Z.html
+            - ( set -o nullglob; for i in script mozjs mozjs_sys; do rm -Rfv target/debug/{build,incremental}/$i-* target/debug/deps/{,lib}$i-*; done )
+            - MOZJS_FROM_SOURCE=1 nice ./mach build -d  1148.86s user 61.59s system 774% cpu 2:36.37 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T065409Z.html
+            - rm -Rf target/debug
+            - MOZJS_FROM_SOURCE=1 nice ./mach build -d  2305.98s user 233.66s system 1145% cpu 3:41.67 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T065820Z.html
+                - mozjs_sys build script (run) 85.18, mozangle build script (run) 109.47
+            - ( set -o nullglob; for i in script mozjs mozjs_sys mozangle; do rm -Rfv target/debug/{build,incremental}/$i-* target/debug/deps/{,lib}$i-*; done )
+            - nice ./mach build -d  296.80s user 52.98s system 219% cpu 2:39.27 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T070936Z.html
+                - mozjs_sys build script (run) 2.72, mozangle build script (run) 60.8
+            - ( set -o nullglob; for i in script mozjs mozjs_sys mozangle; do rm -Rfv target/debug/{build,incremental}/$i-* target/debug/deps/{,lib}$i-*; done )
+            - nice ./mach build -d  264.83s user 51.95s system 201% cpu 2:37.45 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T071336Z.html
+                - mozjs_sys build script (run) 2.45, mozangle build script (run) 61.93
+            - ( set -o nullglob; for i in script mozjs mozjs_sys mozangle; do rm -Rfv target/debug/{build,incremental}/$i-* target/debug/deps/{,lib}$i-*; done )
+            - MOZJS_FROM_SOURCE=1 nice ./mach build -d  1311.46s user 103.05s system 755% cpu 3:07.22 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T071833Z.html
+                - mozjs_sys build script (run) 66.94, mozangle build script (run) 90.68
+            - ( set -o nullglob; for i in script mozjs mozjs_sys mozangle; do rm -Rfv target/debug/{build,incremental}/$i-* target/debug/deps/{,lib}$i-*; done )
+            - MOZJS_FROM_SOURCE=1 nice ./mach build -d  1282.49s user 101.69s system 745% cpu 3:05.67 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T072336Z.html
+                - mozjs_sys build script (run) 62.73, mozangle build script (run) 89.6
+            - ( set -o nullglob; for i in script mozjs mozjs_sys mozangle; do rm -Rfv target/debug/{build,incremental}/$i-* target/debug/deps/{,lib}$i-*; done )
+            - MOZJS_FROM_SOURCE=1 taskset -c 12-15,28-31 nice ./mach build -d  1209.04s user 100.57s system 504% cpu 4:19.47 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T072957Z.html
+                - mozjs_sys build script (run) 161.53, mozangle build script (run) 160.43
+            - ( set -o nullglob; for i in script mozjs mozjs_sys mozangle; do rm -Rfv target/debug/{build,incremental}/$i-* target/debug/deps/{,lib}$i-*; done )
+            - taskset -c 12-15,28-31 nice ./mach build -d  318.58s user 51.03s system 226% cpu 2:43.13 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T074159Z.html
+                - mozjs_sys build script (run) 2.49, mozangle build script (run) 63.78
+            - rm -Rf target/debug
+            - taskset -c 12-15,28-31 nice ./mach build -d  1014.52s user 140.40s system 455% cpu 4:13.31 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T075515Z.html
+                - mozjs_sys build script (run) 2.74, mozangle build script (run) 84.64
+            - rm -Rf target/debug
+            - MOZJS_FROM_SOURCE=1 taskset -c 12-15,28-31 nice ./mach build -d  1957.74s user 194.81s system 604% cpu 5:56.37 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T080407Z.html
+                - mozjs_sys build script (run) 183.11, mozangle build script (run) 186.81
     - multiple webviews (@wusyong, @delan, @atbrakhi, #31417, #32067)
     - layout thread (@mrobinson, #31937, #32081)
     - webgpu cts flakiness (#31952)
