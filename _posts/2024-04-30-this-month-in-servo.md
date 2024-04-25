@@ -1,11 +1,34 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
+title:      "This month in Servo: Acid2, Servo Book, and more!"
 date:       2024-04-30
 summary:    ao!! wrrrrao!!
 categories:
 ---
+
+<figure class="_figr" style="max-width: 100%;"><a href="{{ '/img/servo-acid2-202404.png' | url }}"><img src="{{ '/img/servo-acid2-202404.png' | url }}"
+    alt="???"></a>
+<figcaption>???</figcaption></figure>
+
+[Back in November]({{ '/blog/2023/11/30/embedding-floats-color-mix/' | url }}), Servo’s new layout engine passed [Acid1](http://acid1.acidtests.org), and this month, thanks to a bug-squashing sprint by @mrobinson and @Loirooriol, we now pass [Acid2](https://acid2.acidtests.org)!
+
+<span class=_floatmin></span>We would also like to thank you all for your generous support!
+Since we moved to Open Collective and GitHub Sponsors in March, we have received **1578 USD** (after fees), including **1348 USD/month** (before fees) in recurring donations.
+This smashed our first two goals, and is a respectable part of the way towards our next goal of 10000 USD/month.
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 1348 / 10000); padding-left: 0.5em;"><strong>1348</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 1348 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="1348" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
+We are still receiving donations from **19 people** on LFX, and we’re working on transferring the balance to our new fund, but we will stop accepting donations there soon — **please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo)**.
+As always, use of these funds will be decided transparently in the Technical Steering Committee, starting with the TSC meeting [on 29 April](https://github.com/servo/project/issues/85).
 
 - as of 2024-04-02, `files` setter on HTMLInputElement (@shanehandley, #31934)
 - as of 2024-04-03, ‘baseline-source’ (@MunishMummadi, #31904, #31913)
@@ -20,13 +43,17 @@ categories:
 - as of 2024-04-23, basic support for ‘list-style-position: outside’ (@mrobinson, @Loirooriol, #32114)
 
 <!--
-- sponsors
-    - $1164/month opencollective, including $1000/month from one anonymous donor
+- DONE sponsors
+    - open collective: $1578.75, $1164/month, including $1000/month from one anonymous donor
+        - 22 recurring donors: 5+5+5+25+10+5+10+5+5+5+10+1+25+5+5+3+5+5+10+5+5+5
         - need to calculate manually or scrape :(
-        - 5+5+5+25+10+5+10+5+5+5+10+1+25+5+5+3+5+5+10+5+5+5
-    - $184/month github
-        - 100+5+1+15+1+5+5+5+5+1+5+5+1+10+5+5+5+5
+    - github sponsors: $285.47(?), $184/month
+        - 18 recurring donors: 100+5+1+15+1+5+5+5+5+1+5+5+1+10+5+5+5+5
         - “monthly estimated income” stat is consistent with this
+    - lfx: $2464, $277/month
+        - 19 recurring donors: 10+100+5+5+10+10+10+10+25+5+15+12+5+10+10+10+10+5+10
+        - need to calculate manually or scrape :(
+- DONE acid2
 - DONE api
     - DONE video without autoplay (@eerii, media#419, servo#32001)
     - DONE files setter on HTMLInputElement (@shanehandley, #31934)
