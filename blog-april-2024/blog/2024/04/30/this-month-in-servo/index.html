@@ -235,6 +235,14 @@ As always, use of these funds will be decided transparently in the Technical Ste
 </ul>
 <p>As of 2024-04-05, we now support <strong>non-autoplay &lt;video&gt;</strong> (@eerii, media#419, #32001), as long as the page provides its own controls, as well as the <strong>‘baseline-source’</strong> property (@MunishMummadi, #31904, #31913).
 Both of these contributors started out as Outreachy participants, and we’re thrilled to see their continued work on improving Servo.</p>
+<p>We’ve also landed several other rendering improvements:</p>
+<ul>
+<li>elements or frames no longer scroll to top when transforms change (@mrobinson, #31892)</li>
+<li>fixed intrinsic sizing of inline content containing ‘pre-wrap’ (@Loirooriol, #31930)</li>
+<li>fixed margin collapsing with indefinite percentages or non-zero height (@Loirooriol, #32059, #32060)</li>
+<li>fixed some (but not all) HTTP 400 errors when sending requests to nginx (@philip-lamb, #32024, #32093)</li>
+<li>fixed ‘min-height’ and ‘max-height’ on elements with ‘float’ (@Loirooriol, #32057)</li>
+</ul>
 <p>Three of the slowest crates in the Servo build process are <strong>mozjs_sys</strong>, <strong>mozangle</strong>, and <strong>script</strong>, each taking over a minute to build even on a very fast machine (AMD 7950X).
 The first two compile some very large C++ libraries in their build scripts — SpiderMonkey and ANGLE respectively — and the third blocks on the first two.</p>
 <p>mozjs_sys now uses a <strong>prebuilt version of SpiderMonkey</strong> by default (@wusyong, @sagudev, mozjs#450, #31824), <strong>cutting clean build times by over 100 seconds</strong> on a quad-core CPU with SMT.
@@ -267,11 +275,11 @@ We’ve been working on unifying our in-tree docs and the wiki, and a very early
     - DONE <object> with image data url (@mrobinson, #32069)
     - DONE ‘clear’ on <br> (@mrobinson, #32094)
 - rendering
-    - white-space:pre-wrap intrinsic sizing (@Loirooriol, #31930)
-    - fix scrolling to top when transforms change (@mrobinson, #31892)
-    - fix http 400 from nginx, though host is still broken (@philip-lamb, #32024, #32093)
-    - fixes for margin collapsing (@Loirooriol, #32059, #32060)
-    - fix for ‘min-height’ and ‘max-height’ on floats (@Loirooriol, #32057)
+    - DONE white-space:pre-wrap intrinsic sizing (@Loirooriol, #31930)
+    - DONE fix scrolling to top when transforms change (@mrobinson, #31892)
+    - DONE fix http 400 from nginx, though host is still broken (@philip-lamb, #32024, #32093)
+    - DONE fixes for margin collapsing (@Loirooriol, #32059, #32060)
+    - DONE fix for ‘min-height’ and ‘max-height’ on floats (@Loirooriol, #32057)
     - fix for emoji font fallback on macos, except for color (@mrobinson, #32122)
     - fix for selecting the correct weight/style in indexed fonts (ttc) on linux (@mukilan, @mrobinson, #32127)
 - wpt
