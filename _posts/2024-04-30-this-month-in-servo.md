@@ -65,6 +65,8 @@ We’ve also started simplifying the script–layout interface (@mrobinson, #319
 
 ## Embedding and dev changes
 
+Servo now supports multiple concurrent webviews (@wusyong, @delan, @atbrakhi, #31417, #32067)! […]
+
 Servo’s docs are moving to [**The Servo Book**](https://book.servo.org)!
 We’ve been working on unifying our in-tree docs and the wiki, and a very early version of this is now available.
 
@@ -185,7 +187,7 @@ As for CI, our experimental Android build now supports aarch64 (@mukilan, #32137
             - MOZJS_FROM_SOURCE=1 taskset -c 12-15,28-31 nice ./mach build -d  1957.74s user 194.81s system 604% cpu 5:56.37 total
             - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T080407Z.html
                 - mozjs_sys build script (run) 183.11, mozangle build script (run) 186.81
-    - multiple webviews (@wusyong, @delan, @atbrakhi, #31417, #32067)
+    - ~DONE multiple webviews (@wusyong, @delan, @atbrakhi, #31417, #32067)
     - DONE layout thread (@mrobinson, #31937, #32081)
     - DONE webgpu cts flakiness (#31952)
     - DONE macos flakiness (@mrobinson, #32005)
