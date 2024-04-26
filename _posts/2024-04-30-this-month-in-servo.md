@@ -80,6 +80,14 @@ If you use NixOS, or any Linux distro with Nix, you can now get a shell with all
 
 As for CI, our experimental Android build now supports aarch64 (@mukilan, #32137), in addition to Android on armv7, x86_64, and i686, and we’ve improved flakiness in the WebGPU tests (@sagudev, #31952) and macOS builds (@mrobinson, #32005).
 
+## Conferences and events
+
+Earlier this month, Rakhi Sharma gave her talk [**A year of Servo reboot: where are we now?**](https://servo.org/slides/2024-04-16-open-source-summit-NA/) at [Open Source Summit North America](https://events.linuxfoundation.org/open-source-summit-north-america/) ([slides](https://servo.org/slides/2024-04-16-open-source-summit-NA/); recording available soon) and at the [Seattle Rust User Group](https://www.meetup.com/Seattle-Rust-Meetup/) ([slides](https://servo.org/slides/2024-04-16-seattle-rust-user-group/)).
+
+In the Netherlands, Gregory Terzian will be presenting **Modular Servo: Three Paths Forward** at the [GOSIM Conference 2024](https://europe2024.gosim.org/schedule#mobile-and-web-app), on **6 May** at **15:10 local time** (13:10 UTC).
+That’s the **same venue as [RustNL 2024](https://2024.rustnl.org)**, just one day earlier, and you can also find Gregory, Rakhi, and Nico at RustNL afterwards.
+See you there!
+
 <!--
 - DONE sponsors
     - open collective: $1578.75, $1164/month, including $1000/month from one anonymous donor
@@ -196,7 +204,7 @@ As for CI, our experimental Android build now supports aarch64 (@mukilan, #32137
 - outreachy
     - DONE & ‘baseline-source’ (@MunishMummadi, #31904, #31913)
     - DONE & video without autoplay (@eerii, media#419, servo#32001)
-- conferences
+- DONE conferences
 -->
 
 <!--
