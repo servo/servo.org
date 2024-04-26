@@ -22,6 +22,7 @@ Note that Acid2 is only designed to work at 1x dpi, so if you have a HiDPI monit
 We would also like to thank you all for your generous support!
 Since we moved to [Open Collective](https://opencollective.com/servo) and [GitHub Sponsors](https://github.com/sponsors/servo) in March, we have received **1578 USD** (after fees), including **1348 USD/month** (before fees) in recurring donations.
 This smashed our first two goals, and is a respectable part of the way towards our next goal of 10000 USD/month.
+For more details, see our [Sponsorship]({{ '/sponsorship/' | url }}) page and [announcement post]({{ '/blog/2024/03/12/sponsoring-servo/' | url }}).
 
 <figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
     <div style="position: relative; text-align: right;">
