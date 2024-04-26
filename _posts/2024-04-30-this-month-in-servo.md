@@ -66,7 +66,11 @@ We’ve also started simplifying the script–layout interface (@mrobinson, #319
 
 ## Embedding and dev changes
 
-Servo now supports **multiple concurrent webviews** (@wusyong, @delan, @atbrakhi, #31417, #32067)!
+<figure class="_figl"><a href="{{ '/img/blog/cxx-qt-servo-webview.png' | url }}"><img src="{{ '/img/blog/cxx-qt-servo-webview.png' | url }}"
+    alt="???"></a>
+<figcaption>???</figcaption></figure>
+
+<span class=_floatmin></span>Servo now supports **multiple concurrent webviews** (@wusyong, @delan, @atbrakhi, #31417, #32067)!
 This is a big step towards making Servo a viable embedded webview, and we will soon use it to implement tabbed browsing in servoshell (@delan, #31545).
 
 A prototype for **integrating Servo with Qt** was built by @ahayzen-kdab and @vimpostor and [shown at Embedded World 2024](https://www.kdab.com/kdab-at-embedded-world-2024/).
