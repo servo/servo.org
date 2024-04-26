@@ -14,6 +14,11 @@ categories:
 
 <span class=_floatmin></span>[Back in November]({{ '/blog/2023/11/30/embedding-floats-color-mix/' | url }}), Servo’s new layout engine passed [Acid1](http://acid1.acidtests.org), and this month, thanks to a bug-squashing sprint by @mrobinson and @Loirooriol, we now pass [Acid2](https://acid2.acidtests.org)!
 
+<aside class="_note">
+
+Note that Acid2 is only designed to work at 1x dpi, so if you have a HiDPI monitor, be sure to run servoshell with `--device-pixel-ratio 1` to avoid a red pattern over the eyes.
+</aside>
+
 We would also like to thank you all for your generous support!
 Since we moved to Open Collective and GitHub Sponsors in March, we have received **1578 USD** (after fees), including **1348 USD/month** (before fees) in recurring donations.
 This smashed our first two goals, and is a respectable part of the way towards our next goal of 10000 USD/month.
