@@ -36,6 +36,13 @@ This smashed our first two goals, and is a respectable part of the way towards o
 We are still receiving donations from **19 people** on LFX, and we’re working on transferring the balance to our new fund, but we will stop accepting donations there soon — **please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo)**.
 As always, use of these funds will be decided transparently in the Technical Steering Committee, starting with the TSC meeting [on 29 April](https://github.com/servo/project/issues/85).
 
+<figure class="_figl"><a href="{{ '/img/blog/servo-book.png' | url }}"><img src="{{ '/img/blog/servo-book.png' | url }}"
+    alt="The Servo book, a book much like the Rust book"></a>
+</figure>
+
+<span class=_floatmin></span>Servo’s docs are moving to [**The Servo Book**](https://book.servo.org)!
+We’ve been working on unifying our in-tree docs and the wiki, and a very early version of this is now available.
+
 Servo now supports several new features in its nightly builds:
 
 - as of 2024-04-02, `files` setter on HTMLInputElement (@shanehandley, #31934)
@@ -71,19 +78,16 @@ We’ve also started simplifying the script–layout interface (@mrobinson, #319
 
 ## Embedding and dev changes
 
-<figure class="_figl"><a href="{{ '/img/blog/cxx-qt-servo-webview.png' | url }}"><img src="{{ '/img/blog/cxx-qt-servo-webview.png' | url }}"
+<figure class="_figr"><a href="{{ '/img/blog/cxx-qt-servo-webview.png' | url }}"><img src="{{ '/img/blog/cxx-qt-servo-webview.png' | url }}"
     alt="Servo running in a Qt app via CXX-Qt"></a>
 <figcaption>The prototype shows that Servo can be integrated with a Qt app via <a href="https://github.com/KDAB/cxx-qt">CXX-Qt</a>.</figcaption></figure>
 
-<span class=_floatmin></span>Servo now supports **multiple concurrent webviews** (@wusyong, @delan, @atbrakhi, #31417, #32067)!
-This is a big step towards making Servo a viable embedded webview, and we will soon use it to implement tabbed browsing in servoshell (@delan, #31545).
-
-A prototype for **integrating Servo with Qt** was built by @ahayzen-kdab and @vimpostor and [shown at Embedded World 2024](https://www.kdab.com/kdab-at-embedded-world-2024/).
+<span class=_floatmin></span>A prototype for **integrating Servo with Qt** was built by @ahayzen-kdab and @vimpostor and [shown at Embedded World 2024](https://www.kdab.com/kdab-at-embedded-world-2024/).
 We’re looking forward to incorporating their feedback from this to improve Servo’s embedding API.
 For more details, check out [their GitHub repo](https://github.com/KDABLabs/cxx-qt-servo-webview) and [*Embedding the Servo Web Engine in Qt*](https://www.kdab.com/embedding-servo-in-qt/).
 
-Servo’s docs are moving to [**The Servo Book**](https://book.servo.org)!
-We’ve been working on unifying our in-tree docs and the wiki, and a very early version of this is now available.
+Servo now supports **multiple concurrent webviews** (@wusyong, @delan, @atbrakhi, #31417, #32067)!
+This is a big step towards making Servo a viable embedded webview, and we will soon use it to implement tabbed browsing in servoshell (@delan, #31545).
 
 Three of the slowest crates in the Servo build process are **mozjs_sys**, **mozangle**, and **script**.
 The first two compile some very large C++ libraries in their build scripts — SpiderMonkey and ANGLE respectively — and the third blocks on the first two.
