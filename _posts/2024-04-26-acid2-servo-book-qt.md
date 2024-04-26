@@ -12,7 +12,7 @@ categories:
     alt="Servo nightly, now rendering Acid2 perfectly"></a>
 <figcaption>Servo now renders Acid2 perfectly, but like all browsers, only at 1x dpi.</figcaption></figure>
 
-<span class=_floatmin></span>[Back in November]({{ '/blog/2023/11/30/embedding-floats-color-mix/' | url }}), Servo’s new layout engine passed [Acid1](http://acid1.acidtests.org), and this month, thanks to a bug-squashing sprint by [@mrobinson](https://github.com/mrobinson) and [@Loirooriol](https://github.com/Loirooriol), we now pass [Acid2](https://acid2.acidtests.org)!
+<span class=_floatmin></span>[Back in November]({{ '/blog/2023/11/30/embedding-floats-color-mix/' | url }}), Servo’s new layout engine passed [Acid1](http://acid1.acidtests.org), and this month, thanks to a bug-squashing sprint by [@mrobinson](http://github.com/mrobinson) and [@Loirooriol](https://github.com/Loirooriol), we now pass [Acid2](https://acid2.acidtests.org)!
 
 <aside class="_note">
 
