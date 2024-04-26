@@ -80,11 +80,13 @@ For more details, check out [their GitHub repo](https://github.com/KDABLabs/cxx-
 Servo’s docs are moving to [**The Servo Book**](https://book.servo.org)!
 We’ve been working on unifying our in-tree docs and the wiki, and a very early version of this is now available.
 
-Three of the slowest crates in the Servo build process are **mozjs_sys**, **mozangle**, and **script**, each taking over a minute to build even on a very fast machine (AMD 7950X).
+Three of the slowest crates in the Servo build process are **mozjs_sys**, **mozangle**, and **script**.
 The first two compile some very large C++ libraries in their build scripts — SpiderMonkey and ANGLE respectively — and the third blocks on the first two.
+They can account for over two minutes of build time, even on a very fast machine (AMD 7950X), and a breaking change in newer versions of GNU Make (mozjs#375) can make mozjs_sys take **over eight minutes** to build!
 
-mozjs_sys now uses a **prebuilt version of SpiderMonkey** by default (@wusyong, @sagudev, mozjs#450, #31824), **cutting clean build times by over 100 seconds** on a quad-core CPU with SMT.
-On a very fast machine (see above), the savings will be more modest, at least until we [do the same for mozangle](https://github.com/servo/mozangle/pull/71#issuecomment-1878567207).
+mozjs_sys now uses a **prebuilt version of SpiderMonkey** by default (@wusyong, @sagudev, mozjs#450, #31824), **cutting clean build times by over seven minutes** on a very fast machine (see above).
+On Linux with Nix (the package manager), where we run an unaffected version of GNU Make, it can still save over 100 seconds on a quad-core CPU with SMT.
+Further savings will be possible once we [do the same for mozangle](https://github.com/servo/mozangle/pull/71#issuecomment-1878567207).
 
 If you use NixOS, or any Linux distro with Nix, you can now get a shell with all of the tools and dependencies needed to build and run Servo by typing `nix-shell` (@delan, #32035), without also needing to type `etc/shell.nix`.
 
@@ -205,6 +207,19 @@ See you there!
             - MOZJS_FROM_SOURCE=1 taskset -c 12-15,28-31 nice ./mach build -d  1957.74s user 194.81s system 604% cpu 5:56.37 total
             - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T080407Z.html
                 - mozjs_sys build script (run) 183.11, mozangle build script (run) 186.81
+        - 1440406e91684771bb810ead6ac5ae710f55f3ea (main) with gnumake 4.4.1
+            - rm -Rf target/debug
+            - MOZJS_FROM_SOURCE=1 nice ./mach build -d  1656.16s user 208.33s system 290% cpu 10:42.18 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240426T055815Z.html
+                - mozjs_sys build script (run) 529.84, mozangle build script (run) 75.94
+            - rm -Rf target/debug
+            - MOZJS_FROM_SOURCE=1 taskset -c 12-15,28-31 nice ./mach build -d  1522.85s user 169.87s system 239% cpu 11:46.89 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240426T061159Z.html
+                - mozjs_sys build script (run) 539.41, mozangle build script (run) 92.25
+            - rm -Rf target/debug
+            - taskset -c 12-15,28-31 nice ./mach build -d  1003.56s user 138.71s system 453% cpu 4:11.93 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240426T062517Z.html
+                - mozjs_sys build script (run) 3.01, mozangle build script (run) 85.43
     - ~DONE multiple webviews (@wusyong, @delan, @atbrakhi, #31417, #32067)
     - DONE layout thread (@mrobinson, #31937, #32081)
     - DONE webgpu cts flakiness (#31952)
