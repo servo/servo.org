@@ -7,13 +7,14 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-<figure class="_figr" style="max-width: 100%;"><a href="{{ '/img/servo-acid2-202404.png' | url }}"><img src="{{ '/img/servo-acid2-202404.png' | url }}"
+<figure class="_figr"><a href="{{ '/img/servo-acid2-202404.png' | url }}"><img src="{{ '/img/servo-acid2-202404.png' | url }}"
+    style="width: auto;"
     alt="???"></a>
 <figcaption>???</figcaption></figure>
 
-[Back in November]({{ '/blog/2023/11/30/embedding-floats-color-mix/' | url }}), Servo’s new layout engine passed [Acid1](http://acid1.acidtests.org), and this month, thanks to a bug-squashing sprint by @mrobinson and @Loirooriol, we now pass [Acid2](https://acid2.acidtests.org)!
+<span class=_floatmin></span>[Back in November]({{ '/blog/2023/11/30/embedding-floats-color-mix/' | url }}), Servo’s new layout engine passed [Acid1](http://acid1.acidtests.org), and this month, thanks to a bug-squashing sprint by @mrobinson and @Loirooriol, we now pass [Acid2](https://acid2.acidtests.org)!
 
-<span class=_floatmin></span>We would also like to thank you all for your generous support!
+We would also like to thank you all for your generous support!
 Since we moved to Open Collective and GitHub Sponsors in March, we have received **1578 USD** (after fees), including **1348 USD/month** (before fees) in recurring donations.
 This smashed our first two goals, and is a respectable part of the way towards our next goal of 10000 USD/month.
 
@@ -482,9 +483,11 @@ From https://github.com/servo/servo
     }
     ._figl {
         float: left;
+        max-width: 100%;
     }
     ._figr {
         float: right;
+        max-width: 100%;
     }
     ._figl > figcaption,
     ._figr > figcaption,
