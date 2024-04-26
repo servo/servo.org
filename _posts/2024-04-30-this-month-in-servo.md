@@ -9,8 +9,8 @@ categories:
 
 <figure class="_figr"><a href="{{ '/img/servo-acid2-202404.png' | url }}"><img src="{{ '/img/servo-acid2-202404.png' | url }}"
     style="width: auto;"
-    alt="???"></a>
-<figcaption>???</figcaption></figure>
+    alt="Servo nightly, now rendering Acid2 perfectly"></a>
+<figcaption>Servo now renders Acid2 perfectly, but like all browsers, only at 1x dpi.</figcaption></figure>
 
 <span class=_floatmin></span>[Back in November]({{ '/blog/2023/11/30/embedding-floats-color-mix/' | url }}), Servo’s new layout engine passed [Acid1](http://acid1.acidtests.org), and this month, thanks to a bug-squashing sprint by @mrobinson and @Loirooriol, we now pass [Acid2](https://acid2.acidtests.org)!
 
@@ -72,8 +72,8 @@ We’ve also started simplifying the script–layout interface (@mrobinson, #319
 ## Embedding and dev changes
 
 <figure class="_figl"><a href="{{ '/img/blog/cxx-qt-servo-webview.png' | url }}"><img src="{{ '/img/blog/cxx-qt-servo-webview.png' | url }}"
-    alt="???"></a>
-<figcaption>???</figcaption></figure>
+    alt="Servo running in a Qt app via CXX-Qt"></a>
+<figcaption>The prototype shows that Servo can be integrated with a Qt app via <a href="https://github.com/KDAB/cxx-qt">CXX-Qt</a>.</figcaption></figure>
 
 <span class=_floatmin></span>Servo now supports **multiple concurrent webviews** (@wusyong, @delan, @atbrakhi, #31417, #32067)!
 This is a big step towards making Servo a viable embedded webview, and we will soon use it to implement tabbed browsing in servoshell (@delan, #31545).
