@@ -2,7 +2,7 @@
 layout:     post
 tags:       blog
 title:      "This month in Servo: Acid2 redux, Servo book, Qt demo, and more!"
-date:       2024-04-30
+date:       2024-04-26
 summary:    A new layout milestone, revamped docs, faster builds, plus embedding, video, fonts, WebGPU, and CSS improvements.
 categories:
 ---
