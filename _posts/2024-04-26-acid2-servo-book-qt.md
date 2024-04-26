@@ -12,7 +12,7 @@ categories:
     alt="Servo nightly, now rendering Acid2 perfectly"></a>
 <figcaption>Servo now renders Acid2 perfectly, but like all browsers, only at 1x dpi.</figcaption></figure>
 
-<span class=_floatmin></span>[Back in November]({{ '/blog/2023/11/30/embedding-floats-color-mix/' | url }}), Servo’s new layout engine passed [Acid1](http://acid1.acidtests.org), and this month, thanks to a bug-squashing sprint by @mrobinson and @Loirooriol, we now pass [Acid2](https://acid2.acidtests.org)!
+<span class=_floatmin></span>[Back in November]({{ '/blog/2023/11/30/embedding-floats-color-mix/' | url }}), Servo’s new layout engine passed [Acid1](http://acid1.acidtests.org), and this month, thanks to a bug-squashing sprint by [@mrobinson](https://github.com/mrobinson) and [@Loirooriol](https://github.com/Loirooriol), we now pass [Acid2](https://acid2.acidtests.org)!
 
 <aside class="_note">
 
@@ -40,41 +40,41 @@ As always, use of these funds will be decided transparently in the Technical Ste
     alt="The Servo book, a book much like the Rust book"></a>
 </figure>
 
-<span class=_floatmin></span>Servo’s docs are moving to [**the Servo book**](https://book.servo.org), and a very early version of this is now online (@delan, servo/book)!
+<span class=_floatmin></span>Servo’s docs are moving to [**the Servo book**](https://book.servo.org), and a very early version of this is now online ([@delan](https://github.com/delan), [servo/book](https://github.com/servo/book))!
 The goal is to unify our many sources of documentation, including the [hacking quickstart guide](https://github.com/servo/servo/blob/81c4f2ae7a0b605befae652c0feeea03caba6292/docs/HACKING_QUICKSTART.md), [building Servo page](https://github.com/servo/servo/wiki/Building/e04d7a194b59fad65fbd3eefb7aab12ae3a60eba), [Servo design page](https://github.com/servo/servo/wiki/Design/0941531122361aac8c88d582aa640ec689cdcdd1), and [other in-tree docs and wiki pages](https://book.servo.org/hacking/older-versions.html), into a book that’s richer and easier to search and navigate.
 
 Servo now supports several new features in its nightly builds:
 
-- as of 2024-04-02, `files` setter on HTMLInputElement (@shanehandley, #31934)
-- as of 2024-04-05, **‘ex’ units** in CSS (@mrobinson, #31966)
-- as of 2024-04-05, `onSubmittedWorkDone` method on GPUQueue (@sagudev, #31772)
-- as of 2024-04-08, `deleteRow(-1)` on empty HTMLTableElement (@shanehandley, #32009)
-- as of 2024-04-12, **ElementInternals** and **attachInternals** (@pshaughn, @cathiechen, #25705, #31980)
-- as of 2024-04-16, **‘background-attachment: fixed’** (@mrobinson, #32068)
-- as of 2024-04-16, **&lt;object>** with **image data URLs** (@mrobinson, #32069)
-- as of 2024-04-18, **‘clear’** property on **&lt;br>** elements (@mrobinson, #32094)
-- as of 2024-04-23, basic support for **‘list-style-position: outside’** (@mrobinson, @Loirooriol, #32114)
+- as of 2024-04-02, `files` setter on HTMLInputElement ([@shanehandley](https://github.com/shanehandley), [#31934](https://github.com/servo/servo/pull/31934))
+- as of 2024-04-05, **‘ex’ units** in CSS ([@mrobinson](https://github.com/mrobinson), [#31966](https://github.com/servo/servo/pull/31966))
+- as of 2024-04-05, `onSubmittedWorkDone` method on GPUQueue ([@sagudev](https://github.com/sagudev), [#31772](https://github.com/servo/servo/pull/31772))
+- as of 2024-04-08, `deleteRow(-1)` on empty HTMLTableElement ([@shanehandley](https://github.com/shanehandley), [#32009](https://github.com/servo/servo/pull/32009))
+- as of 2024-04-12, **ElementInternals** and **attachInternals** ([@pshaughn](https://github.com/pshaughn), [@cathiechen](https://github.com/cathiechen), [#25705](https://github.com/servo/servo/pull/25705), [#31980](https://github.com/servo/servo/pull/31980))
+- as of 2024-04-16, **‘background-attachment: fixed’** ([@mrobinson](https://github.com/mrobinson), [#32068](https://github.com/servo/servo/pull/32068))
+- as of 2024-04-16, **&lt;object>** with **image data URLs** ([@mrobinson](https://github.com/mrobinson), [#32069](https://github.com/servo/servo/pull/32069))
+- as of 2024-04-18, **‘clear’** property on **&lt;br>** elements ([@mrobinson](https://github.com/mrobinson), [#32094](https://github.com/servo/servo/pull/32094))
+- as of 2024-04-23, basic support for **‘list-style-position: outside’** ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#32114](https://github.com/servo/servo/pull/32114))
 
-As of 2024-04-05, we now support **non-autoplay &lt;video>** (@eerii, media#419, #32001), as long as the page provides its own controls, as well as the **‘baseline-source’** property (@MunishMummadi, #31904, #31913).
+As of 2024-04-05, we now support **non-autoplay &lt;video>** ([@eerii](https://github.com/eerii), [media#419](https://github.com/servo/media/pull/419), [#32001](https://github.com/servo/servo/pull/32001)), as long as the page provides its own controls, as well as the **‘baseline-source’** property ([@MunishMummadi](https://github.com/MunishMummadi), [#31904](https://github.com/servo/servo/pull/31904), [#31913](https://github.com/servo/servo/pull/31913)).
 Both of these contributors started out as Outreachy participants, and we’re thrilled to see their continued work on improving Servo.
 
 We’ve also landed several other rendering improvements:
 
-- **Stylo** is now fully caught up with upstream (@Loirooriol, #31932, #31991, #32032, #32066, #32089, #32128)
-- elements or frames **no longer scroll to top** when transforms change (@mrobinson, #31892)
-- fixed **intrinsic sizing** of inline content containing **‘pre-wrap’** (@Loirooriol, #31930)
-- fixed **margin collapsing** with indefinite percentages or non-zero height (@Loirooriol, #32059, #32060)
-- fixed some (but not all) **HTTP 400** errors when sending requests to nginx (@philip-lamb, #32024, #32093)
-- fixed **‘min-height’** and **‘max-height’** on elements with **‘float’** (@Loirooriol, #32057)
+- **Stylo** is now fully caught up with upstream ([@Loirooriol](https://github.com/Loirooriol), [#31932](https://github.com/servo/servo/pull/31932), [#31991](https://github.com/servo/servo/pull/31991), [#32032](https://github.com/servo/servo/pull/32032), [#32066](https://github.com/servo/servo/pull/32066), [#32089](https://github.com/servo/servo/pull/32089), [#32128](https://github.com/servo/servo/pull/32128))
+- elements or frames **no longer scroll to top** when transforms change ([@mrobinson](https://github.com/mrobinson), [#31892](https://github.com/servo/servo/pull/31892))
+- fixed **intrinsic sizing** of inline content containing **‘pre-wrap’** ([@Loirooriol](https://github.com/Loirooriol), [#31930](https://github.com/servo/servo/pull/31930))
+- fixed **margin collapsing** with indefinite percentages or non-zero height ([@Loirooriol](https://github.com/Loirooriol), [#32059](https://github.com/servo/servo/pull/32059), [#32060](https://github.com/servo/servo/pull/32060))
+- fixed some (but not all) **HTTP 400** errors when sending requests to nginx ([@philip-lamb](https://github.com/philip-lamb), [#32024](https://github.com/servo/servo/pull/32024), [#32093](https://github.com/servo/servo/pull/32093))
+- fixed **‘min-height’** and **‘max-height’** on elements with **‘float’** ([@Loirooriol](https://github.com/Loirooriol), [#32057](https://github.com/servo/servo/pull/32057))
 
-Our font rendering has improved, with support for selecting the correct weight and style in **indexed fonts (.ttc)** on Linux (@mukilan, @mrobinson, #32127), as well as support for **emoji font fallback** on macOS (@mrobinson, #32122).
+Our font rendering has improved, with support for selecting the correct weight and style in **indexed fonts (.ttc)** on Linux ([@mukilan](https://github.com/mukilan), [@mrobinson](https://github.com/mrobinson), [#32127](https://github.com/servo/servo/pull/32127)), as well as support for **emoji font fallback** on macOS ([@mrobinson](https://github.com/mrobinson), [#32122](https://github.com/servo/servo/pull/32122)).
 Note that color emoji are not yet supported.
 
-Other big changes are coming to Servo’s font loading and rendering, thanks to @mrobinson’s **font system redesign** RFC (#32033).
-Work has already started on this (@mrobinson, @mukilan, #32034, #32038, #32100, #32101, #32115), with the eventual goal of making font data **zero-copy readable from multiple threads**.
+Other big changes are coming to Servo’s font loading and rendering, thanks to [@mrobinson](https://github.com/mrobinson)’s **font system redesign** RFC ([#32033](https://github.com/servo/servo/issues/32033)).
+Work has already started on this ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#32034](https://github.com/servo/servo/pull/32034), [#32038](https://github.com/servo/servo/pull/32038), [#32100](https://github.com/servo/servo/pull/32100), [#32101](https://github.com/servo/servo/pull/32101), [#32115](https://github.com/servo/servo/pull/32115)), with the eventual goal of making font data **zero-copy readable from multiple threads**.
 This in turn will fix several major issues with font caching, including cached font data leaking over time and between pages, unnecessary loading from disk, and unnecessary copying to layout.
 
-We’ve also started simplifying the script–layout interface (@mrobinson, #31937, #32081), since [layout was merged into the script thread]({{ '/blog/2024/02/28/gamepads-font-fallback-space-jam/' | url }}), and script can now call into layout without IPC.
+We’ve also started simplifying the script–layout interface ([@mrobinson](https://github.com/mrobinson), [#31937](https://github.com/servo/servo/pull/31937), [#32081](https://github.com/servo/servo/pull/32081)), since [layout was merged into the script thread]({{ '/blog/2024/02/28/gamepads-font-fallback-space-jam/' | url }}), and script can now call into layout without IPC.
 
 ## Embedding and dev changes
 
@@ -82,24 +82,24 @@ We’ve also started simplifying the script–layout interface (@mrobinson, #319
     alt="Servo running in a Qt app via CXX-Qt"></a>
 <figcaption>The prototype shows that Servo can be integrated with a Qt app via <a href="https://github.com/KDAB/cxx-qt">CXX-Qt</a>.</figcaption></figure>
 
-<span class=_floatmin></span>A prototype for **integrating Servo with Qt** was built by @ahayzen-kdab and @vimpostor and [shown at Embedded World 2024](https://www.kdab.com/kdab-at-embedded-world-2024/).
+<span class=_floatmin></span>A prototype for **integrating Servo with Qt** was built by [@ahayzen-kdab](https://github.com/ahayzen-kdab) and [@vimpostor](https://github.com/vimpostor) and [shown at Embedded World 2024](https://www.kdab.com/kdab-at-embedded-world-2024/).
 We’re looking forward to incorporating their feedback from this to improve Servo’s embedding API.
 For more details, check out [their GitHub repo](https://github.com/KDABLabs/cxx-qt-servo-webview) and [*Embedding the Servo Web Engine in Qt*](https://www.kdab.com/embedding-servo-in-qt/).
 
-Servo now supports **multiple concurrent webviews** (@wusyong, @delan, @atbrakhi, #31417, #32067)!
-This is a big step towards making Servo a viable embedded webview, and we will soon use it to implement tabbed browsing in servoshell (@delan, #31545).
+Servo now supports **multiple concurrent webviews** ([@wusyong](https://github.com/wusyong), [@delan](https://github.com/delan), [@atbrakhi](https://github.com/atbrakhi), [#31417](https://github.com/servo/servo/pull/31417), [#32067](https://github.com/servo/servo/pull/32067))!
+This is a big step towards making Servo a viable embedded webview, and we will soon use it to implement tabbed browsing in servoshell ([@delan](https://github.com/delan), [#31545](https://github.com/servo/servo/pull/31545)).
 
 Three of the slowest crates in the Servo build process are **mozjs_sys**, **mozangle**, and **script**.
 The first two compile some very large C++ libraries in their build scripts — SpiderMonkey and ANGLE respectively — and the third blocks on the first two.
-They can account for over two minutes of build time, even on a very fast machine (AMD 7950X), and a breaking change in newer versions of GNU Make (mozjs#375) can make mozjs_sys take **over eight minutes** to build!
+They can account for over two minutes of build time, even on a very fast machine (AMD 7950X), and a breaking change in newer versions of GNU Make ([mozjs#375](https://github.com/servo/mozjs/issues/375)) can make mozjs_sys take **over eight minutes** to build!
 
-mozjs_sys now uses a **prebuilt version of SpiderMonkey** by default (@wusyong, @sagudev, mozjs#450, #31824), **cutting clean build times by over seven minutes** on a very fast machine (see above).
+mozjs_sys now uses a **prebuilt version of SpiderMonkey** by default ([@wusyong](https://github.com/wusyong), [@sagudev](https://github.com/sagudev), [mozjs#450](https://github.com/servo/mozjs/pull/450), [#31824](https://github.com/servo/servo/pull/31824)), **cutting clean build times by over seven minutes** on a very fast machine (see above).
 On Linux with Nix (the package manager), where we run an unaffected version of GNU Make, it can still save over 100 seconds on a quad-core CPU with SMT.
 Further savings will be possible once we [do the same for mozangle](https://github.com/servo/mozangle/pull/71#issuecomment-1878567207).
 
-If you use NixOS, or any Linux distro with Nix, you can now get a shell with all of the tools and dependencies needed to build and run Servo by typing `nix-shell` (@delan, #32035), without also needing to type `etc/shell.nix`.
+If you use NixOS, or any Linux distro with Nix, you can now get a shell with all of the tools and dependencies needed to build and run Servo by typing `nix-shell` ([@delan](https://github.com/delan), [#32035](https://github.com/servo/servo/pull/32035)), without also needing to type `etc/shell.nix`.
 
-As for CI, our experimental Android build now supports aarch64 (@mukilan, #32137), in addition to Android on armv7, x86_64, and i686, and we’ve improved flakiness in the WebGPU tests (@sagudev, #31952) and macOS builds (@mrobinson, #32005).
+As for CI, our experimental Android build now supports aarch64 ([@mukilan](https://github.com/mukilan), [#32137](https://github.com/servo/servo/pull/32137)), in addition to Android on armv7, x86_64, and i686, and we’ve improved flakiness in the WebGPU tests ([@sagudev](https://github.com/sagudev), [#31952](https://github.com/servo/servo/pull/31952)) and macOS builds ([@mrobinson](https://github.com/mrobinson), [#32005](https://github.com/servo/servo/pull/32005)).
 
 ## Conferences and events
 
