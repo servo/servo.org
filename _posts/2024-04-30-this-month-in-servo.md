@@ -40,8 +40,8 @@ As always, use of these funds will be decided transparently in the Technical Ste
     alt="The Servo book, a book much like the Rust book"></a>
 </figure>
 
-<span class=_floatmin></span>Servo’s docs are moving to [**The Servo Book**](https://book.servo.org)!
-We’ve been working on unifying our in-tree docs and the wiki, and a very early version of this is now available.
+<span class=_floatmin></span>Servo’s docs are moving to [**the Servo book**](https://book.servo.org), and a very early version of this is now online (@delan, servo/book)!
+The goal is to unify our many sources of documentation, including the [hacking quickstart guide](https://github.com/servo/servo/blob/81c4f2ae7a0b605befae652c0feeea03caba6292/docs/HACKING_QUICKSTART.md), [building Servo page](https://github.com/servo/servo/wiki/Building/e04d7a194b59fad65fbd3eefb7aab12ae3a60eba), [Servo design page](https://github.com/servo/servo/wiki/Design/0941531122361aac8c88d582aa640ec689cdcdd1), and [other in-tree docs and wiki pages](https://book.servo.org/hacking/older-versions.html), into a book that’s richer and easier to search and navigate.
 
 Servo now supports several new features in its nightly builds:
 
@@ -60,7 +60,7 @@ Both of these contributors started out as Outreachy participants, and we’re th
 
 We’ve also landed several other rendering improvements:
 
-- **Stylo** has been updated to **March 2024** (@Loirooriol, #31932, #31991, #32032, #32066, #32089)
+- **Stylo** is now fully caught up with upstream (@Loirooriol, #31932, #31991, #32032, #32066, #32089, #32128)
 - elements or frames **no longer scroll to top** when transforms change (@mrobinson, #31892)
 - fixed **intrinsic sizing** of inline content containing **‘pre-wrap’** (@Loirooriol, #31930)
 - fixed **margin collapsing** with indefinite percentages or non-zero height (@Loirooriol, #32059, #32060)
