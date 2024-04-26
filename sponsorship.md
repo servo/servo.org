@@ -5,9 +5,20 @@ title: Sponsorship
 
 # Sponsorship
 
-You can support the development of Servo project in different ways.
+You can now help fund the Servo project by [sponsoring us on GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo).
 
-By donating via [**GitHub Sponsors**](https://github.com/sponsors/servo) or the [**Servo Open Collective**](https://opencollective.com/servo), you can support the project's infrastructure and hosting costs. The money there is used to keep the project up and running, including CI bots and related hardware requirements for the project.
+<aside class="_note">
+
+Note that we will stop accepting donations [on LFX](https://crowdfunding.lfx.linuxfoundation.org/projects/servo) soon.
+Any funds left over will also be transferred to the Servo project, but recurring donations will be cancelled, so if you would like to continue your recurring donation, please do so on GitHub or Open Collective.
+</aside>
+
+Both one-time and monthly donations are appreciated, and over 80% of the amount will go directly towards improving Servo.
+The way the funds are used is decided in public via the Technical Steering Committee, but to give you a sense of scale…
+
+- at **100 USD/month**, we can cover the costs of our website and other core infrastructure
+- at **1,000 USD/month**, we can set up dedicated servers for faster Windows and macOS builds, better test coverage and reliability, and new techniques like fuzzing and performance testing
+- at **10,000 USD/month**, we can sponsor a developer to make Servo their top priority
 
 <div class="hero is-info is-small">
   <div class="hero-body">
@@ -28,3 +39,11 @@ There are currently no members of the Linux Foundation Europe Directed Fund’s 
 
 If your organization is interested in becoming a member, please contact us at <join@servo.org> or enroll at the [Linux Foundation member enrollment page](https://enrollment.lfx.linuxfoundation.org/?project=servo).
 
+<style>
+  ._note {
+    margin: 1em 1em;
+    border-left: 1px solid;
+    padding-left: 1em;
+    opacity: 0.75;
+  }
+</style>

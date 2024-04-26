@@ -7,6 +7,16 @@ summary:    Be sure to update your recurring donations, because we will stop tak
 categories:
 ---
 
+<aside class="_correction">
+
+**Correction (2024-04-26)**
+
+[An earlier version](https://github.com/servo/servo.org/pull/139) of this post said that over 94% of amounts donated to Servo go directly to the project, with only 6% in fees, but this was incorrect.
+The actual fees depend on the payment method and the amount you donate, but in most cases they are between 10% and 20%.
+
+We are still working on clarifying the exact rules about fees with our crowdfunding platforms, so check our [Sponsorship]({{ '/sponsorship/' | url }}) page for the latest information.
+</aside>
+
 <figure class="_figr"><a href="https://github.com/sponsors/servo"><img src="{{ '/img/blog/sponsor-on-github.png' | url }}"
     alt="Servo’s donation page on GitHub Sponsors"></a>
 <br><a href="https://opencollective.com/servo"><img src="{{ '/img/blog/sponsor-on-open-collective.png' | url }}"
@@ -25,7 +35,7 @@ In both cases, donations are handled by [Open Source Collective](https://opencol
 
 **We will stop accepting donations [on LFX](https://crowdfunding.lfx.linuxfoundation.org/projects/servo) soon.** Any funds left over will also be transferred to the Servo project, but recurring donations will be cancelled, so if you would like to continue your recurring donation, please do so on GitHub or Open Collective.
 
-Both one-time and monthly donations are appreciated, and **over 94%** of the amount will go directly towards improving Servo, with the remaining 6% going to processing fees. The way the funds are used is decided in public via the [Technical Steering Committee](https://servo.org/governance/), but to give you a sense of scale…
+Both one-time and monthly donations are appreciated, and **over 80%** of the amount will go directly towards improving Servo. The way the funds are used is decided in public via the [Technical Steering Committee](https://servo.org/governance/), but to give you a sense of scale…
 
 <ul style="max-width: 45em;">
 <li>at <strong>100 USD/month</strong>, we can cover the costs of our website and other core infrastructure
