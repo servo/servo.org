@@ -203,11 +203,12 @@
 <p class="subtitle"><span class="tag is-dark">2024-04-30</span> ao!! wrrrrao!!</p>
 
 <div class="has-top-margin">
-  <figure class="_figr" style="max-width: 100%;"><a href="/blog-april-2024/img/servo-acid2-202404.png"><img src="/blog-april-2024/img/servo-acid2-202404.png"
+  <figure class="_figr"><a href="/blog-april-2024/img/servo-acid2-202404.png"><img src="/blog-april-2024/img/servo-acid2-202404.png"
+    style="width: auto;"
     alt="???"></a>
 <figcaption>???</figcaption></figure>
-<p><a href="/blog-april-2024/blog/2023/11/30/embedding-floats-color-mix/">Back in November</a>, Servo’s new layout engine passed <a href="http://acid1.acidtests.org">Acid1</a>, and this month, thanks to a bug-squashing sprint by @mrobinson and @Loirooriol, we now pass <a href="https://acid2.acidtests.org">Acid2</a>!</p>
-<p><span class=_floatmin></span>We would also like to thank you all for your generous support!
+<p><span class=_floatmin></span><a href="/blog-april-2024/blog/2023/11/30/embedding-floats-color-mix/">Back in November</a>, Servo’s new layout engine passed <a href="http://acid1.acidtests.org">Acid1</a>, and this month, thanks to a bug-squashing sprint by @mrobinson and @Loirooriol, we now pass <a href="https://acid2.acidtests.org">Acid2</a>!</p>
+<p>We would also like to thank you all for your generous support!
 Since we moved to Open Collective and GitHub Sponsors in March, we have received <strong>1578 USD</strong> (after fees), including <strong>1348 USD/month</strong> (before fees) in recurring donations.
 This smashed our first two goals, and is a respectable part of the way towards our next goal of 10000 USD/month.</p>
 <figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
@@ -253,17 +254,22 @@ This in turn will fix several major issues with font caching, including cached f
 <h2 id="embedding-and-dev-changes" tabindex="-1">Embedding and dev changes <a class="header-anchor" href="#embedding-and-dev-changes">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>Servo now supports <strong>multiple concurrent webviews</strong> (@wusyong, @delan, @atbrakhi, #31417, #32067)!
+<figure class="_figl"><a href="/blog-april-2024/img/blog/cxx-qt-servo-webview.png"><img src="/blog-april-2024/img/blog/cxx-qt-servo-webview.png"
+    alt="???"></a>
+<figcaption>???</figcaption></figure>
+<p><span class=_floatmin></span>Servo now supports <strong>multiple concurrent webviews</strong> (@wusyong, @delan, @atbrakhi, #31417, #32067)!
 This is a big step towards making Servo a viable embedded webview, and we will soon use it to implement tabbed browsing in servoshell (@delan, #31545).</p>
 <p>A prototype for <strong>integrating Servo with Qt</strong> was built by @ahayzen-kdab and @vimpostor and <a href="https://www.kdab.com/kdab-at-embedded-world-2024/">shown at Embedded World 2024</a>.
 We’re looking forward to incorporating their feedback from this to improve Servo’s embedding API.
 For more details, check out <a href="https://github.com/KDABLabs/cxx-qt-servo-webview">their GitHub repo</a> and <a href="https://www.kdab.com/embedding-servo-in-qt/"><em>Embedding the Servo Web Engine in Qt</em></a>.</p>
 <p>Servo’s docs are moving to <a href="https://book.servo.org"><strong>The Servo Book</strong></a>!
 We’ve been working on unifying our in-tree docs and the wiki, and a very early version of this is now available.</p>
-<p>Three of the slowest crates in the Servo build process are <strong>mozjs_sys</strong>, <strong>mozangle</strong>, and <strong>script</strong>, each taking over a minute to build even on a very fast machine (AMD 7950X).
-The first two compile some very large C++ libraries in their build scripts — SpiderMonkey and ANGLE respectively — and the third blocks on the first two.</p>
-<p>mozjs_sys now uses a <strong>prebuilt version of SpiderMonkey</strong> by default (@wusyong, @sagudev, mozjs#450, #31824), <strong>cutting clean build times by over 100 seconds</strong> on a quad-core CPU with SMT.
-On a very fast machine (see above), the savings will be more modest, at least until we <a href="https://github.com/servo/mozangle/pull/71#issuecomment-1878567207">do the same for mozangle</a>.</p>
+<p>Three of the slowest crates in the Servo build process are <strong>mozjs_sys</strong>, <strong>mozangle</strong>, and <strong>script</strong>.
+The first two compile some very large C++ libraries in their build scripts — SpiderMonkey and ANGLE respectively — and the third blocks on the first two.
+They can account for over two minutes of build time, even on a very fast machine (AMD 7950X), and a breaking change in newer versions of GNU Make (mozjs#375) can make mozjs_sys take <strong>over eight minutes</strong> to build!</p>
+<p>mozjs_sys now uses a <strong>prebuilt version of SpiderMonkey</strong> by default (@wusyong, @sagudev, mozjs#450, #31824), <strong>cutting clean build times by over seven minutes</strong> on a very fast machine (see above).
+On Linux with Nix (the package manager), where we run an unaffected version of GNU Make, it can still save over 100 seconds on a quad-core CPU with SMT.
+Further savings will be possible once we <a href="https://github.com/servo/mozangle/pull/71#issuecomment-1878567207">do the same for mozangle</a>.</p>
 <p>If you use NixOS, or any Linux distro with Nix, you can now get a shell with all of the tools and dependencies needed to build and run Servo by typing <code>nix-shell</code> (@delan, #32035), without also needing to type <code>etc/shell.nix</code>.</p>
 <p>As for CI, our experimental Android build now supports aarch64 (@mukilan, #32137), in addition to Android on armv7, x86_64, and i686, and we’ve improved flakiness in the WebGPU tests (@sagudev, #31952) and macOS builds (@mrobinson, #32005).</p>
 <h2 id="conferences-and-events" tabindex="-1">Conferences and events <a class="header-anchor" href="#conferences-and-events">
@@ -380,6 +386,19 @@ See you there!</p>
             - MOZJS_FROM_SOURCE=1 taskset -c 12-15,28-31 nice ./mach build -d  1957.74s user 194.81s system 604% cpu 5:56.37 total
             - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240425T080407Z.html
                 - mozjs_sys build script (run) 183.11, mozangle build script (run) 186.81
+        - 1440406e91684771bb810ead6ac5ae710f55f3ea (main) with gnumake 4.4.1
+            - rm -Rf target/debug
+            - MOZJS_FROM_SOURCE=1 nice ./mach build -d  1656.16s user 208.33s system 290% cpu 10:42.18 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240426T055815Z.html
+                - mozjs_sys build script (run) 529.84, mozangle build script (run) 75.94
+            - rm -Rf target/debug
+            - MOZJS_FROM_SOURCE=1 taskset -c 12-15,28-31 nice ./mach build -d  1522.85s user 169.87s system 239% cpu 11:46.89 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240426T061159Z.html
+                - mozjs_sys build script (run) 539.41, mozangle build script (run) 92.25
+            - rm -Rf target/debug
+            - taskset -c 12-15,28-31 nice ./mach build -d  1003.56s user 138.71s system 453% cpu 4:11.93 total
+            - /cuffs/code/servo/target/cargo-timings/cargo-timing-20240426T062517Z.html
+                - mozjs_sys build script (run) 3.01, mozangle build script (run) 85.43
     - ~DONE multiple webviews (@wusyong, @delan, @atbrakhi, #31417, #32067)
     - DONE layout thread (@mrobinson, #31937, #32081)
     - DONE webgpu cts flakiness (#31952)
@@ -659,9 +678,11 @@ From https://github.com/servo/servo
     }
     ._figl {
         float: left;
+        max-width: 100%;
     }
     ._figr {
         float: right;
+        max-width: 100%;
     }
     ._figl > figcaption,
     ._figr > figcaption,
