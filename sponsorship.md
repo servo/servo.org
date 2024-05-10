@@ -47,6 +47,8 @@ The fees for donations on Open Collective depend on how much you donate in a sin
 - Donating at least **50 USD** at a time ensures that **over 90%** goes to Servo
 - Donating with Stripe is almost always better for Servo than donating with PayPal
 
+<figure class="_donation_fees">
+
 | Fees for... | 5 USD | 10 USD | 20 USD | 50 USD | 100 USD | 1000 USD |
 |---|---|---|---|---|---|---|
 | Stripe (ACH) |
@@ -55,6 +57,7 @@ The fees for donations on Open Collective depend on how much you donate in a sin
 | Stripe (card, worst case) |
 | PayPal (USA) |
 | PayPal (international) |
+</figure>
 
 The exact fees for donations on GitHub Sponsors are still being worked out with GitHub, but we’ll post them here once we know.
 
@@ -113,6 +116,23 @@ The exact fees for donations on GitHub Sponsors are still being worked out with 
     border-left: 1px solid;
     padding-left: 1em;
     opacity: 0.75;
+  }
+  ._donation_fees {
+    overflow-x: auto;
+  }
+  ._donation_fees table {
+    width: max-content;
+  }
+  ._donation_fees tr > *:not(#specificity) {
+    text-align: left;
+  }
+  ._donation_fees tr > *:nth-child(1) {
+    /* Freeze the first cell of each row. */
+    position: sticky;
+    left: 0;
+    /* Hide other cells that overlap when scrolling. */
+    background: #121619;
+    z-index: 1;
   }
   ._fee {
     opacity: 0.75;
