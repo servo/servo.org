@@ -41,13 +41,25 @@ If your organization is interested in becoming a member, please contact us at <j
 
 ## Donation fees
 
+Donating via GitHub Sponsors is better for Servo than donating via Open Collective.
+**96%** of the amount you donate goes to Servo, unless you are sponsoring us on behalf of a GitHub organization, where a fee will be added on top of the amount during checkout.
+Either way, **over 90%** goes to Servo.
+
+<figure class="_donation_fees" id="_github_sponsors_fees">
+
+| Fees for sponsoring... | 5 USD | 10 USD | 20 USD | 50 USD | 100 USD | 1000 USD |
+|---|---|---|---|---|---|---|
+| as an individual on GitHub |
+| on behalf of a GitHub org |
+</figure>
+
 The fees for donations on Open Collective depend on how much you donate in a single transaction, and what payment method you use:
 
 - Donating at least **5 USD** at a time ensures that **over 80%** goes to Servo
 - Donating at least **50 USD** at a time ensures that **over 90%** goes to Servo
 - Donating with Stripe is almost always better for Servo than donating with PayPal
 
-<figure class="_donation_fees">
+<figure class="_donation_fees" id="_open_collective_fees">
 
 | Fees for... | 5 USD | 10 USD | 20 USD | 50 USD | 100 USD | 1000 USD |
 |---|---|---|---|---|---|---|
@@ -59,11 +71,13 @@ The fees for donations on Open Collective depend on how much you donate in a sin
 | PayPal (international) |
 </figure>
 
-The exact fees for donations on GitHub Sponsors are still being worked out with GitHub, but we’ll post them here once we know.
-
 <script>
   const hostFee = x => 0.04 * x;
-  const fees = {
+  const donorCheckoutSurcharges = {
+    "as an individual on GitHub": x => 0,
+    "on behalf of a GitHub org": x => 0.06 * x,
+  };
+  const paymentProcessorFees = {
     // Stripe for USA merchants
     // <https://stripe.com/us/pricing>
     // - > Payments > Bank debits and transfers (for ACH)
@@ -86,14 +100,40 @@ The exact fees for donations on GitHub Sponsors are still being worked out with 
     "PayPal (USA)": x => 49 + 0.0349 * x,
     "PayPal (international)": x => 49 + (0.0349 + 0.015) * x,
   };
+  function updateGithubSponsorsTable() {
+    const table = document.querySelector("#_github_sponsors_fees table");
+    const exampleDonations = [...table.rows[0].cells].slice(1)
+      .map(x => parseInt(x.textContent, 10) * 100);
+    for (const row of [...table.rows].slice(1)) {
+      const donor = row.cells[0].textContent;
+      for (const [i, donation] of exampleDonations.entries()) {
+        const surcharge = donorCheckoutSurcharges[donor](donation);
+        const total = donation + surcharge;
+        const fee = surcharge + hostFee(donation); // not hostFee(total)!
+        const net = total - fee;
+        const totalText = (Math.ceil(total) / 100).toFixed(2);
+        const feeText = (Math.ceil(fee) / 100).toFixed(2);
+        const netText = (Math.ceil(net) / 100).toFixed(2);
+        const feePercentText = (100 * fee / total).toFixed(1);
+        const netPercentText = (100 * net / total).toFixed(1);
+        const totalClass = surcharge > 0 ? "_total _has_surcharge" : "_total";
+        const netClass = net / total >= 0.96 ? "_net _net96" : "_net";
+        row.cells[i + 1].innerHTML = `
+          <span class="${totalClass}">${totalText}</span>
+          <br><span class="_fee">− ${feeText} (${feePercentText}%)</span>
+          <br><strong class="${netClass}">= ${netText} (${netPercentText}%)</strong>
+        `;
+      }
+    }
+  }
   function updateOpenCollectiveTable() {
-    const table = document.querySelector("table");
+    const table = document.querySelector("#_open_collective_fees table");
     const exampleDonations = [...table.rows[0].cells].slice(1)
       .map(x => parseInt(x.textContent, 10) * 100);
     for (const row of [...table.rows].slice(1)) {
       const paymentProcessor = row.cells[0].textContent;
       for (const [i, donation] of exampleDonations.entries()) {
-        const fee = fees[paymentProcessor](donation) + hostFee(donation);
+        const fee = paymentProcessorFees[paymentProcessor](donation) + hostFee(donation);
         const net = donation - fee;
         const feeText = (Math.ceil(fee) / 100).toFixed(2);
         const netText = (Math.ceil(net) / 100).toFixed(2);
@@ -107,6 +147,7 @@ The exact fees for donations on GitHub Sponsors are still being worked out with 
       }
     }
   }
+  updateGithubSponsorsTable();
   updateOpenCollectiveTable();
 </script>
 
@@ -134,13 +175,20 @@ The exact fees for donations on GitHub Sponsors are still being worked out with 
     background: #121619;
     z-index: 1;
   }
+  ._total {
+    opacity: 0.75;
+  }
+  ._has_surcharge {
+    opacity: 1;
+    color: #FAAE30;
+  }
   ._fee {
     opacity: 0.75;
   }
   ._net {
     opacity: 0.75;
   }
-  ._net90 {
+  ._net96, ._net90 {
     opacity: 1;
     color: #42BF64;
   }
