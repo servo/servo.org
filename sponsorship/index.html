@@ -233,13 +233,51 @@ The way the funds are used is decided in public via the Technical Steering Commi
 <h2 id="donation-fees" tabindex="-1">Donation fees <a class="header-anchor" href="#donation-fees">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>Donating via GitHub Sponsors is better for Servo than donating via Open Collective.
+<strong>96%</strong> of the amount you donate goes to Servo, unless you are sponsoring us on behalf of a GitHub organization, where a fee will be added on top of the amount during checkout.
+Either way, <strong>over 90%</strong> goes to Servo.</p>
+<figure class="_donation_fees" id="_github_sponsors_fees">
+<table>
+<thead>
+<tr>
+<th>Fees for sponsoring…</th>
+<th>5 USD</th>
+<th>10 USD</th>
+<th>20 USD</th>
+<th>50 USD</th>
+<th>100 USD</th>
+<th>1000 USD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>as an individual on GitHub</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>on behalf of a GitHub org</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</figure>
 <p>The fees for donations on Open Collective depend on how much you donate in a single transaction, and what payment method you use:</p>
 <ul>
 <li>Donating at least <strong>5 USD</strong> at a time ensures that <strong>over 80%</strong> goes to Servo</li>
 <li>Donating at least <strong>50 USD</strong> at a time ensures that <strong>over 90%</strong> goes to Servo</li>
 <li>Donating with Stripe is almost always better for Servo than donating with PayPal</li>
 </ul>
-<figure class="_donation_fees">
+<figure class="_donation_fees" id="_open_collective_fees">
 <table>
 <thead>
 <tr>
@@ -310,10 +348,13 @@ The way the funds are used is decided in public via the Technical Steering Commi
 </tbody>
 </table>
 </figure>
-<p>The exact fees for donations on GitHub Sponsors are still being worked out with GitHub, but we’ll post them here once we know.</p>
 <script>
   const hostFee = x => 0.04 * x;
-  const fees = {
+  const donorCheckoutSurcharges = {
+    "as an individual on GitHub": x => 0,
+    "on behalf of a GitHub org": x => 0.06 * x,
+  };
+  const paymentProcessorFees = {
     // Stripe for USA merchants
     // <https://stripe.com/us/pricing>
     // - > Payments > Bank debits and transfers (for ACH)
@@ -336,14 +377,40 @@ The way the funds are used is decided in public via the Technical Steering Commi
     "PayPal (USA)": x => 49 + 0.0349 * x,
     "PayPal (international)": x => 49 + (0.0349 + 0.015) * x,
   };
+  function updateGithubSponsorsTable() {
+    const table = document.querySelector("#_github_sponsors_fees table");
+    const exampleDonations = [...table.rows[0].cells].slice(1)
+      .map(x => parseInt(x.textContent, 10) * 100);
+    for (const row of [...table.rows].slice(1)) {
+      const donor = row.cells[0].textContent;
+      for (const [i, donation] of exampleDonations.entries()) {
+        const surcharge = donorCheckoutSurcharges[donor](donation);
+        const total = donation + surcharge;
+        const fee = surcharge + hostFee(donation); // not hostFee(total)!
+        const net = total - fee;
+        const totalText = (Math.ceil(total) / 100).toFixed(2);
+        const feeText = (Math.ceil(fee) / 100).toFixed(2);
+        const netText = (Math.ceil(net) / 100).toFixed(2);
+        const feePercentText = (100 * fee / total).toFixed(1);
+        const netPercentText = (100 * net / total).toFixed(1);
+        const totalClass = surcharge > 0 ? "_total _has_surcharge" : "_total";
+        const netClass = net / total >= 0.96 ? "_net _net96" : "_net";
+        row.cells[i + 1].innerHTML = `
+          <span class="${totalClass}">${totalText}</span>
+          <br><span class="_fee">− ${feeText} (${feePercentText}%)</span>
+          <br><strong class="${netClass}">= ${netText} (${netPercentText}%)</strong>
+        `;
+      }
+    }
+  }
   function updateOpenCollectiveTable() {
-    const table = document.querySelector("table");
+    const table = document.querySelector("#_open_collective_fees table");
     const exampleDonations = [...table.rows[0].cells].slice(1)
       .map(x => parseInt(x.textContent, 10) * 100);
     for (const row of [...table.rows].slice(1)) {
       const paymentProcessor = row.cells[0].textContent;
       for (const [i, donation] of exampleDonations.entries()) {
-        const fee = fees[paymentProcessor](donation) + hostFee(donation);
+        const fee = paymentProcessorFees[paymentProcessor](donation) + hostFee(donation);
         const net = donation - fee;
         const feeText = (Math.ceil(fee) / 100).toFixed(2);
         const netText = (Math.ceil(net) / 100).toFixed(2);
@@ -357,6 +424,7 @@ The way the funds are used is decided in public via the Technical Steering Commi
       }
     }
   }
+  updateGithubSponsorsTable();
   updateOpenCollectiveTable();
 </script>
 <style>
@@ -383,13 +451,20 @@ The way the funds are used is decided in public via the Technical Steering Commi
     background: #121619;
     z-index: 1;
   }
+  ._total {
+    opacity: 0.75;
+  }
+  ._has_surcharge {
+    opacity: 1;
+    color: #FAAE30;
+  }
   ._fee {
     opacity: 0.75;
   }
   ._net {
     opacity: 0.75;
   }
-  ._net90 {
+  ._net96, ._net90 {
     opacity: 1;
     color: #42BF64;
   }
