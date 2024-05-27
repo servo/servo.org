@@ -7,6 +7,16 @@ summary:    your text here
 categories:
 ---
 
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 1630 / 10000); padding-left: 0.5em;"><strong>1630</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 1630 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="1630" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
 <!--
 - donations 1630/month
   - open collective 10+5+10+5+5+5+1000+5+5+10+5+5+3+5+5+25+1+20+5+5+10+5+10+25+5+5 = 1199/month
