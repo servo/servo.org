@@ -24,6 +24,9 @@
     &lt;/div&gt;
     &lt;progress value=&quot;1630&quot; max=&quot;10000&quot; style=&quot;transform: scale(3); transform-origin: top left; width: calc(100% / 3);&quot;&gt;&lt;/progress&gt;
 &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;The font system rework in Servo continues, with both new features and correctness and efficiency improvements.&lt;/p&gt;
+&lt;p&gt;Servo now supports the ‘font-weight’, ‘font-style’, ‘font-stretch’, and ‘unicode-range’ descriptors in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly prioritising matches against their weights and styles (@mrobinson, @mukilan, #32366).&lt;/p&gt;
+&lt;p&gt;We also now support font fallback on OpenHarmony (@jschwe, #32141), and bitmap color emoji on Linux and macOS (@mrobinson, #32203, #32278). Note that on macOS, we only support the sbix format (like in Apple Color Emoji), not CBDT (like in Noto Color Emoji). More work is needed to support Microsoft’s layered COLR format.&lt;/p&gt;
 &lt;!--
 - donations 1630/month
   - open collective 10+5+10+5+5+5+1000+5+5+10+5+5+3+5+5+25+1+20+5+5+10+5+10+25+5+5 = 1199/month
@@ -80,16 +83,17 @@ cssom (0.0pp to 65.4%)
   - wgpu 31995, wgpu 0.20 32173
   - servoshell - egui, etc 31278
 - fonts
-  - windows font loading 32115
-  - ‘weight’, ‘style’, ‘stretch’, ‘unicode-range’, plus composite fonts 32164
+  - DONE ‘weight’, ‘style’, ‘stretch’, ‘unicode-range’, plus composite fonts 32164
+  - DONE sbix color emoji (apple bitmap) 32203
+  - DONE Support bitmap fonts support (color emojis) for FreeType platforms 32278
+  - DONE add support for the full CSS font matching algorithm 32366
+  - DONE font fallback on openharmony 32141
   - improve line-height correctness when font fallback happens 32165
-  - Support bitmap fonts support (color emojis) for FreeType platforms 32278
-  - fonts are no longer duplicated per layout thread (cross-thread FontContext) 32303
-  - removing stylesheets now deactivates the web fonts they included 32346
-  - add support for the full CSS font matching algorithm 32366
-  - font fallback on openharmony 32141
-  - shared fontcontext saving 40 megs of memory 32205
-  - sbix color emoji (apple bitmap) 32203
+  - font data
+    - fonts are no longer duplicated per layout thread (cross-thread FontContext) 32303
+    - removing stylesheets now deactivates the web fonts they included 32346
+    - shared fontcontext saving 40 megs of memory 32205
+  - windows font loading 32115
 - embedding
   - sync constellation and compositor 32163
 - reliability
