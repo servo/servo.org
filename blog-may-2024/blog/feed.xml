@@ -24,6 +24,21 @@
     &lt;/div&gt;
     &lt;progress value=&quot;1630&quot; max=&quot;10000&quot; style=&quot;transform: scale(3); transform-origin: top left; width: calc(100% / 3);&quot;&gt;&lt;/progress&gt;
 &lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;Servo has made some big strides in the Web Platform Tests:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;90.8% (+1.6pp) in the &lt;strong&gt;CSS2 floats&lt;/strong&gt; tests&lt;/li&gt;
+&lt;li&gt;68.7% (+5.7pp) in the &lt;strong&gt;CSS2 and CSS tables&lt;/strong&gt; tests&lt;/li&gt;
+&lt;li&gt;53.3% (+4.0pp) in the &lt;strong&gt;CSS text&lt;/strong&gt; tests&lt;/li&gt;
+&lt;li&gt;48.8% (+3.3pp) in the &lt;strong&gt;CSS position&lt;/strong&gt; tests&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We now support the &lt;strong&gt;‘ch’&lt;/strong&gt; and &lt;strong&gt;‘ic’ font-relative units&lt;/strong&gt; (@andreubotella, #32171), &lt;strong&gt;aborting fetch()&lt;/strong&gt; with AbortController and AbortSignal (@syvb, #31361), and several DOM properties:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;value&lt;/code&gt;, &lt;code&gt;min&lt;/code&gt;, &lt;code&gt;max&lt;/code&gt;, &lt;code&gt;low&lt;/code&gt;, &lt;code&gt;high&lt;/code&gt;, and &lt;code&gt;optimum&lt;/code&gt; on HTMLMeterElement (@shanehandley, #32230)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;autofocus&lt;/code&gt; on HTMLElement and SVGElement, via HTMLOrSVGElement (@nolanlawson, #32170)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;role&lt;/code&gt; and 43 other ARIA string properties on Element (@nolanlawson, #32080)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We’ve also landed the first patch towards making Servo’s &lt;strong&gt;event loop comply with the HTML spec&lt;/strong&gt; (@gterzian, #31505).
+This will hopefully address some complex timing issues between the renderer and other kinds of tasks like requestAnimationFrame and ResizeObserver callbacks.&lt;/p&gt;
 &lt;p&gt;The font system rework in Servo continues, with both new features and correctness and efficiency improvements.&lt;/p&gt;
 &lt;p&gt;Servo now supports the ‘font-weight’, ‘font-style’, ‘font-stretch’, and ‘unicode-range’ descriptors in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly prioritising matches against their weights and styles (@mrobinson, @mukilan, #32366).&lt;/p&gt;
 &lt;p&gt;We also now support font fallback on OpenHarmony (@jschwe, #32141), and bitmap color emoji on Linux and macOS (@mrobinson, #32203, #32278). Note that on macOS, we only support the sbix format (like in Apple Color Emoji), not CBDT (like in Noto Color Emoji). More work is needed to support Microsoft’s layered COLR format.&lt;/p&gt;
@@ -53,18 +68,20 @@ normal-flow (0.0pp to 94.0%)
 positioning (0.0pp to 90.1%)
 cssom (0.0pp to 65.4%)
 
+- ai policy
 - donations
   - runners proposal?
+- wpt
 - api support
-  - CSSOM shorthands 32149
-  - aria string reflection on element 32080
-  - idl reflection for autofocus 32170
-  - ‘ch’ and ‘ic’ units 32171
-  - AbortController/AbortSignal 31361
+  - SKIP (legacy only) CSSOM shorthands 32149
+  - DONE aria string reflection on element 32080
+  - DONE idl reflection for autofocus 32170
+  - DONE ‘ch’ and ‘ic’ units 32171
+  - DONE AbortController/AbortSignal 31361
 - dom
-  - the start of a large effort to bring Servo&#39;s event loop closer to the HTML event loop specification 31505
-  - improve parsing of floating point numbers in some DOM APIs z
-  - `&lt;meter&gt;` elements now support more DOM APIs 32230
+  - DONE the start of a large effort to bring Servo&#39;s event loop closer to the HTML event loop specification 31505
+  - improve parsing of floating point numbers in some DOM APIs 32272
+  - DONE `&lt;meter&gt;` elements now support more DOM APIs 32230
 - layout
   - correct sizing for floating tables 32150
   - ‘start’, ‘end’, ‘space-evenly’ 31724
