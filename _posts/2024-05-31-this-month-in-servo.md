@@ -17,6 +17,22 @@ categories:
     <progress value="1630" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
 </div></figure>
 
+Servo has made some big strides in the Web Platform Tests:
+
+- 90.8% (+1.6pp) in the **CSS2 floats** tests
+- 68.7% (+5.7pp) in the **CSS2 and CSS tables** tests
+- 53.3% (+4.0pp) in the **CSS text** tests
+- 48.8% (+3.3pp) in the **CSS position** tests
+
+We now support the **‘ch’** and **‘ic’ font-relative units** (@andreubotella, #32171), **aborting fetch()** with AbortController and AbortSignal (@syvb, #31361), and several DOM properties:
+
+- `value`, `min`, `max`, `low`, `high`, and `optimum` on HTMLMeterElement (@shanehandley, #32230)
+- `autofocus` on HTMLElement and SVGElement, via HTMLOrSVGElement (@nolanlawson, #32170)
+- `role` and 43 other ARIA string properties on Element (@nolanlawson, #32080)
+
+We’ve also landed the first patch towards making Servo’s **event loop comply with the HTML spec** (@gterzian, #31505).
+This will hopefully address some complex timing issues between the renderer and other kinds of tasks like requestAnimationFrame and ResizeObserver callbacks.
+
 The font system rework in Servo continues, with both new features and correctness and efficiency improvements.
 
 Servo now supports the ‘font-weight’, ‘font-style’, ‘font-stretch’, and ‘unicode-range’ descriptors in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly prioritising matches against their weights and styles (@mrobinson, @mukilan, #32366).
@@ -49,18 +65,20 @@ normal-flow (0.0pp to 94.0%)
 positioning (0.0pp to 90.1%)
 cssom (0.0pp to 65.4%)
 
+- ai policy
 - donations
   - runners proposal?
+- wpt
 - api support
-  - CSSOM shorthands 32149
-  - aria string reflection on element 32080
-  - idl reflection for autofocus 32170
-  - ‘ch’ and ‘ic’ units 32171
-  - AbortController/AbortSignal 31361
+  - SKIP (legacy only) CSSOM shorthands 32149
+  - DONE aria string reflection on element 32080
+  - DONE idl reflection for autofocus 32170
+  - DONE ‘ch’ and ‘ic’ units 32171
+  - DONE AbortController/AbortSignal 31361
 - dom
-  - the start of a large effort to bring Servo's event loop closer to the HTML event loop specification 31505
-  - improve parsing of floating point numbers in some DOM APIs z
-  - `<meter>` elements now support more DOM APIs 32230
+  - DONE the start of a large effort to bring Servo's event loop closer to the HTML event loop specification 31505
+  - improve parsing of floating point numbers in some DOM APIs 32272
+  - DONE `<meter>` elements now support more DOM APIs 32230
 - layout
   - correct sizing for floating tables 32150
   - ‘start’, ‘end’, ‘space-evenly’ 31724
