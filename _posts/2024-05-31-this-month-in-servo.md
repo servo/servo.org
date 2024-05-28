@@ -17,14 +17,23 @@ categories:
     <progress value="1630" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
 </div></figure>
 
-Servo has made some big strides in the Web Platform Tests:
+Servo now supports several CSS features in its nightly builds:
+
+- as of 2024-04-29, **‘start’**, **‘end’**, and **‘space-evenly’** values in **‘align-content’** and **‘justify-content’** (@nicoburns, #31724)
+- as of 2024-04-30, **‘white-space-collapse’**, **‘text-wrap-mode’**, and the new **‘white-space’** shorthand (@Loirooriol, #32146)
+- as of 2024-05-03, **‘ch’** and **‘ic’ font-relative units** (@andreubotella, #32171)
+- as of 2024-05-19, basic support for **‘border-collapse’** (@mrobinson, @Loirooriol, #32309)
+- as of 2024-05-22, **‘empty-cells’** (@Loirooriol, #32331)
+- as of 2024-05-22, **‘visibility: collapse’** on table parts (@Loirooriol, @mrobinson, #32333)
+
+Together with correct sizing for **floating tables** (@Loirooriol, #32150) and **empty list items** (@mrobinson, @Loirooriol, #32152), Servo has made some big strides in the Web Platform Tests this month:
 
 - 90.8% (+1.6pp) in the **CSS2 floats** tests
 - 68.7% (+5.7pp) in the **CSS2 and CSS tables** tests
 - 53.3% (+4.0pp) in the **CSS text** tests
 - 48.8% (+3.3pp) in the **CSS position** tests
 
-We now support the **‘ch’** and **‘ic’ font-relative units** (@andreubotella, #32171), **aborting fetch()** with AbortController and AbortSignal (@syvb, #31361), and several DOM properties:
+We now support **aborting fetch()** with AbortController and AbortSignal (@syvb, #31361), and several DOM properties:
 
 - `value`, `min`, `max`, `low`, `high`, and `optimum` on HTMLMeterElement (@shanehandley, #32230)
 - `autofocus` on HTMLElement and SVGElement, via HTMLOrSVGElement (@nolanlawson, #32170)
@@ -79,21 +88,21 @@ cssom (0.0pp to 65.4%)
   - DONE the start of a large effort to bring Servo's event loop closer to the HTML event loop specification 31505
   - improve parsing of floating point numbers in some DOM APIs 32272
   - DONE `<meter>` elements now support more DOM APIs 32230
-- layout
-  - correct sizing for floating tables 32150
-  - ‘start’, ‘end’, ‘space-evenly’ 31724
-  - correct sizing for empty list items 32152
-  - ‘white-space’ shorthand 32146
-  - naive border collapse implementation for tables 32309
-  - implement `visibility: collapse` on table parts 32333
-  - implement `empty-cells` for tables parts 32331
+- DONE layout
+  - DONE correct sizing for floating tables 32150
+  - DONE ‘start’, ‘end’, ‘space-evenly’ 31724
+  - DONE correct sizing for empty list items 32152
+  - DONE ‘white-space’ shorthand 32146
+  - DONE naive border collapse implementation for tables 32309
+  - DONE implement `visibility: collapse` on table parts 32333
+  - DONE implement `empty-cells` for tables parts 32331
 - webgpu
   - a thread is now used to poll devices 32266
   - webgpu: Use safe callbacks & try_recv_timeout 32008
   - webgpu: Move errorscopes to WGPU thread 32304
 - upgrades
-  - stylo 32128
-  - stylo html5ever xml5ever 32145
+  - SKIP (already in last month’s update) stylo 32128
+  - SKIP (not really a stylo upgrade) stylo html5ever xml5ever 32145
   - wgpu 31995, wgpu 0.20 32173
   - servoshell - egui, etc 31278
 - fonts
