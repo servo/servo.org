@@ -7,16 +7,6 @@ summary:    your text here
 categories:
 ---
 
-<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
-    <div style="position: relative; text-align: right;">
-        <div style="position: absolute; margin-left: calc(100% * 1630 / 10000); padding-left: 0.5em;"><strong>1630</strong> USD/month</div>
-        <div style="position: absolute; margin-left: calc(100% * 1630 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
-        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
-        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
-    </div>
-    <progress value="1630" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
-</div></figure>
-
 Servo now supports several CSS features in its nightly builds:
 
 - as of 2024-04-29, **‘start’**, **‘end’**, and **‘space-evenly’** values in **‘align-content’** and **‘justify-content’** (@nicoburns, #31724)
@@ -48,6 +38,29 @@ Servo now supports the ‘font-weight’, ‘font-style’, ‘font-stretch’, 
 
 We also now support font fallback on OpenHarmony (@jschwe, #32141), and bitmap color emoji on Linux and macOS (@mrobinson, #32203, #32278). Note that on macOS, we only support the sbix format (like in Apple Color Emoji), not CBDT (like in Noto Color Emoji). More work is needed to support Microsoft’s layered COLR format.
 
+## Donations
+
+Thanks again for your generous support!
+We are now receiving **1630 USD/month** (+20.9% over April) in recurring donations.
+We are still receiving donations from **15 people** on LFX, and we’re working on transferring the balance to our new fund, but we will stop accepting donations there soon — **please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo)**.
+
+As always, use of these funds will be decided transparently in the Technical Steering Committee.
+[Our first proposal](https://github.com/servo/project/issues/88#issuecomment-2134485100) hopes to spend some of these funds on a **dedicated CI server**, which should make tryjobs and merge builds much faster!
+
+We’ve also updated our [Sponsorship page]({{ '/sponsorship/' | url }}) with advice about how to make your donations most effective.
+In short, donating via GitHub Sponsors is the best option, with 96% of the amount going to Servo in almost all cases.
+Donations on Open Collective give Servo around 80% to 90%, depending on the amount and payment method.
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 1630 / 10000); padding-left: 0.5em;"><strong>1630</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 1630 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="1630" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
 <!--
 - donations 1630/month
   - open collective 10+5+10+5+5+5+1000+5+5+10+5+5+3+5+5+25+1+20+5+5+10+5+10+25+5+5 = 1199/month
@@ -75,9 +88,10 @@ positioning (0.0pp to 90.1%)
 cssom (0.0pp to 65.4%)
 
 - ai policy
-- donations
-  - runners proposal?
-- wpt
+- DONE donations
+  - DONE lfx
+  - DONE runners proposal?
+- DONE wpt
 - api support
   - SKIP (legacy only) CSSOM shorthands 32149
   - DONE aria string reflection on element 32080
