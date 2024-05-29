@@ -16,13 +16,6 @@ Servo now supports several CSS features in its nightly builds:
 - as of 2024-05-22, **‘empty-cells’** (@Loirooriol, #32331)
 - as of 2024-05-22, **‘visibility: collapse’** on table parts (@Loirooriol, @mrobinson, #32333)
 
-Together with correct sizing for **floating tables** (@Loirooriol, #32150) and **empty list items** (@mrobinson, @Loirooriol, #32152), as well as correct **‘line-height’ based on the first font** (@mrobinson, #32165), Servo has made some big strides in the Web Platform Tests this month:
-
-- 90.8% (+1.6pp) in the **CSS2 floats** tests
-- 68.7% (+5.7pp) in the **CSS2 and CSS tables** tests
-- 53.3% (+4.0pp) in the **CSS text** tests
-- 48.8% (+3.3pp) in the **CSS position** tests
-
 We now support **aborting fetch()** with AbortController and AbortSignal (@syvb, #31361), and several DOM properties:
 
 - `value`, `min`, `max`, `low`, `high`, and `optimum` on HTMLMeterElement (@shanehandley, #32230)
@@ -32,6 +25,15 @@ We now support **aborting fetch()** with AbortController and AbortSignal (@syvb,
 We’ve also landed the first patch towards making Servo’s **event loop comply with the HTML spec** (@gterzian, #31505).
 This will hopefully address some complex timing issues between the renderer and other kinds of tasks like requestAnimationFrame and ResizeObserver callbacks.
 
+Together with correct sizing for **floating tables** (@Loirooriol, #32150) and **empty list items** (@mrobinson, @Loirooriol, #32152), as well as correct **‘line-height’ based on the first font** (@mrobinson, #32165), Servo has made some big strides in the Web Platform Tests this month:
+
+- 90.8% (+1.6pp) in the **CSS2 floats** tests
+- 68.7% (+5.7pp) in the **CSS2 and CSS tables** tests
+- 53.3% (+4.0pp) in the **CSS text** tests
+- 48.8% (+3.3pp) in the **CSS position** tests
+
+## Font system
+
 Servo now supports the **‘font-weight’**, **‘font-style’**, **‘font-stretch’**, and **‘unicode-range’ descriptors** in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly selecting the nearest weights and styles (@mrobinson, @mukilan, #32366).
 
 We also now support **font fallback on OpenHarmony** (@jschwe, #32141), and **bitmap color emoji** on Linux and macOS (@mrobinson, #32203, #32278).
@@ -40,9 +42,11 @@ Note that the layered `COLR` format is not yet supported, and that on macOS, we 
 Our [font system rework](https://github.com/servo/servo/issues/32033) continues, **saving up to 40 MB of memory** when loading servo.org by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can **clobber fonts with the same name** in other documents (@mrobinson, @mukilan, #32303), and a bug where the **font cache leaks unused web fonts** (@mrobinson, @mukilan, #32346).
 
-Servo should no longer cause intermittent errors and **panics when exiting** (@mrobinson, #32207), and **ShowWebView** no longer fails if sent too quickly after a webview is created (@wusyong, #32163).
+## Other changes
 
 Servo for Android **now builds on aarch64** (@mukilan, #32137), **no longer crashes on startup** (@mukilan, #32273), and now supports the **SpiderMonkey JIT on 64-bit builds** (@mukilan, #31134).
+
+Servo should no longer cause intermittent errors and **panics when exiting** (@mrobinson, #32207), and **ShowWebView** no longer fails if sent too quickly after a webview is created (@wusyong, #32163).
 
 We’ve also landed several dev changes:
 
