@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+ HEAD_REF: ${{ github.head_ref }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,9 +37,9 @@ jobs:
       - name: Eleventy
         run: |
           npx eleventy \
-            --output='_site/${{ github.head_ref }}' \
-            --pathprefix='/${{ github.head_ref }}/'
-          LC_TIME=C date > '_site/${{ github.head_ref }}/.stamp'
+            --output='_site/${{ env.HEAD_REF }}' \
+            --pathprefix='/${{ env.HEAD_REF }}/'
+          LC_TIME=C date > '_site/${{ env.HEAD_REF }}/.stamp'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -44,10 +47,8 @@ jobs:
           publish_dir: ./_site
           keep_files: true
       - name: Deploy link
-        env:
-          HEAD_REF: ${{ github.head_ref }}
         run: |
-          echo "Preview link: https://servo.org/$HEAD_REF/" >> $GITHUB_STEP_SUMMARY
+          echo "Preview link: https://servo.org/${{ env.HEAD_REF }}/" >> $GITHUB_STEP_SUMMARY
 
   add_preview_link:
    runs-on: ubuntu-latest
@@ -60,4 +61,4 @@ jobs:
        uses: thollander/actions-comment-pull-request@v2
        with:
          message: |
-           Preview link: https://servo.org/${{ github.head_ref }}/
+           Preview link: https://servo.org/${{ env.HEAD_REF }}/
