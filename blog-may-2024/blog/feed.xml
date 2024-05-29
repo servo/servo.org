@@ -44,6 +44,7 @@ This will hopefully address some complex timing issues between the renderer and 
 Note that the layered &lt;code&gt;COLR&lt;/code&gt; format is not yet supported, and that on macOS, we currently only support &lt;code&gt;sbix&lt;/code&gt; (like in Apple Color Emoji), not &lt;code&gt;CBDT&lt;/code&gt; (like in Noto Color Emoji).&lt;/p&gt;
 &lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/issues/32033&quot;&gt;font system rework&lt;/a&gt; continues, &lt;strong&gt;saving up to 40 MB of memory&lt;/strong&gt; when loading &lt;a href=&quot;http://servo.org/&quot;&gt;servo.org&lt;/a&gt; by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can &lt;strong&gt;clobber fonts with the same name&lt;/strong&gt; in other documents (@mrobinson, @mukilan, #32303), and a bug where the &lt;strong&gt;font cache leaks unused web fonts&lt;/strong&gt; (@mrobinson, @mukilan, #32346).&lt;/p&gt;
+&lt;p&gt;Servo should no longer cause intermittent errors and &lt;strong&gt;panics when exiting&lt;/strong&gt; (@mrobinson, #32207), and &lt;strong&gt;ShowWebView&lt;/strong&gt; no longer fails if sent too quickly after a webview is created (@wusyong, #32163).&lt;/p&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-may-2024/blog/2024/05/31/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -134,10 +135,10 @@ cssom (0.0pp to 65.4%)
     - DONE removing stylesheets now deactivates the web fonts they included 32346
     - DONE shared fontcontext saving 40 megs of memory 32205
   - SKIP windows font loading 32115
-- embedding
-  - sync constellation and compositor 32163
-- reliability
-  - compositor shutdown 32207
+- DONE embedding
+  - DONE sync constellation and compositor 32163
+- DONE reliability
+  - DONE compositor shutdown 32207
 - au
   - Au is used in HoistedSharedFragment 32288
 - dev changes
@@ -145,7 +146,7 @@ cssom (0.0pp to 65.4%)
   - android uses jemalloc again 32273
   - android aarch64 JIT reenabled 32284
   - mach bootstrap --skip-platform 32176
-  - windows build issue 32170
+  - windows build issue 32301
   - sccache re-enabled for CI builds 32330
   - fixed a bug in `./mach bootstrap --skip-platform` 32341
   - fixed an issue that made the Servo build crash on Windows Server 2019 32353

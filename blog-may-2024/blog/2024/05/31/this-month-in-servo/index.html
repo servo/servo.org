@@ -232,6 +232,7 @@ This will hopefully address some complex timing issues between the renderer and 
 Note that the layered <code>COLR</code> format is not yet supported, and that on macOS, we currently only support <code>sbix</code> (like in Apple Color Emoji), not <code>CBDT</code> (like in Noto Color Emoji).</p>
 <p>Our <a href="https://github.com/servo/servo/issues/32033">font system rework</a> continues, <strong>saving up to 40 MB of memory</strong> when loading <a href="http://servo.org">servo.org</a> by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can <strong>clobber fonts with the same name</strong> in other documents (@mrobinson, @mukilan, #32303), and a bug where the <strong>font cache leaks unused web fonts</strong> (@mrobinson, @mukilan, #32346).</p>
+<p>Servo should no longer cause intermittent errors and <strong>panics when exiting</strong> (@mrobinson, #32207), and <strong>ShowWebView</strong> no longer fails if sent too quickly after a webview is created (@wusyong, #32163).</p>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -322,10 +323,10 @@ cssom (0.0pp to 65.4%)
     - DONE removing stylesheets now deactivates the web fonts they included 32346
     - DONE shared fontcontext saving 40 megs of memory 32205
   - SKIP windows font loading 32115
-- embedding
-  - sync constellation and compositor 32163
-- reliability
-  - compositor shutdown 32207
+- DONE embedding
+  - DONE sync constellation and compositor 32163
+- DONE reliability
+  - DONE compositor shutdown 32207
 - au
   - Au is used in HoistedSharedFragment 32288
 - dev changes
@@ -333,7 +334,7 @@ cssom (0.0pp to 65.4%)
   - android uses jemalloc again 32273
   - android aarch64 JIT reenabled 32284
   - mach bootstrap --skip-platform 32176
-  - windows build issue 32170
+  - windows build issue 32301
   - sccache re-enabled for CI builds 32330
   - fixed a bug in `./mach bootstrap --skip-platform` 32341
   - fixed an issue that made the Servo build crash on Windows Server 2019 32353
