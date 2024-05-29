@@ -42,6 +42,8 @@ We’ve fixed a bug where web fonts in one document can **clobber fonts with the
 
 Servo should no longer cause intermittent errors and **panics when exiting** (@mrobinson, #32207), and **ShowWebView** no longer fails if sent too quickly after a webview is created (@wusyong, #32163).
 
+Servo for Android **now builds on aarch64** (@mukilan, #32137), **no longer crashes on startup** (@mukilan, #32273), and now supports the **SpiderMonkey JIT on 64-bit builds** (@mukilan, #31134).
+
 ## Donations
 
 Thanks again for your generous support!
@@ -142,9 +144,9 @@ cssom (0.0pp to 65.4%)
 - au
   - Au is used in HoistedSharedFragment 32288
 - dev changes
-  - android aarch64 32137
-  - android uses jemalloc again 32273
-  - android aarch64 JIT reenabled 32284
+  - DONE android aarch64 32137
+  - DONE android uses jemalloc again 32273
+  - DONE android aarch64 JIT reenabled 32284
   - mach bootstrap --skip-platform 32176
   - windows build issue 32301
   - sccache re-enabled for CI builds 32330
