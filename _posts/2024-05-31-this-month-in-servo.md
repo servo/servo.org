@@ -40,6 +40,8 @@ Note that the layered `COLR` format is not yet supported, and that on macOS, we 
 Our [font system rework](https://github.com/servo/servo/issues/32033) continues, **saving up to 40 MB of memory** when loading servo.org by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can **clobber fonts with the same name** in other documents (@mrobinson, @mukilan, #32303), and a bug where the **font cache leaks unused web fonts** (@mrobinson, @mukilan, #32346).
 
+Servo should no longer cause intermittent errors and **panics when exiting** (@mrobinson, #32207), and **ShowWebView** no longer fails if sent too quickly after a webview is created (@wusyong, #32163).
+
 ## Donations
 
 Thanks again for your generous support!
@@ -133,10 +135,10 @@ cssom (0.0pp to 65.4%)
     - DONE removing stylesheets now deactivates the web fonts they included 32346
     - DONE shared fontcontext saving 40 megs of memory 32205
   - SKIP windows font loading 32115
-- embedding
-  - sync constellation and compositor 32163
-- reliability
-  - compositor shutdown 32207
+- DONE embedding
+  - DONE sync constellation and compositor 32163
+- DONE reliability
+  - DONE compositor shutdown 32207
 - au
   - Au is used in HoistedSharedFragment 32288
 - dev changes
@@ -144,7 +146,7 @@ cssom (0.0pp to 65.4%)
   - android uses jemalloc again 32273
   - android aarch64 JIT reenabled 32284
   - mach bootstrap --skip-platform 32176
-  - windows build issue 32170
+  - windows build issue 32301
   - sccache re-enabled for CI builds 32330
   - fixed a bug in `./mach bootstrap --skip-platform` 32341
   - fixed an issue that made the Servo build crash on Windows Server 2019 32353
