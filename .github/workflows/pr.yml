@@ -32,11 +32,13 @@ jobs:
       - name: Sass Reveal.js
         run: npm run sass-revealjs
       - name: Eleventy
+        env:
+          HEAD_REF: ${{ github.head_ref }}
         run: |
           npx eleventy \
-            --output='_site/${{ github.head_ref }}' \
-            --pathprefix='/${{ github.head_ref }}/'
-          LC_TIME=C date > '_site/${{ github.head_ref }}/.stamp'
+            --output='_site/$HEAD_REF' \
+            --pathprefix='/$HEAD_REF/'
+          LC_TIME=C date > '_site/$HEAD_REF/.stamp'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -57,7 +59,9 @@ jobs:
      - name: Checkout
        uses: actions/checkout@v3
      - name: Comment PR
+       env:
+         HEAD_REF: ${{ github.head_ref }}
        uses: thollander/actions-comment-pull-request@v2
        with:
          message: |
-           Preview link: https://servo.org/${{ github.head_ref }}/
+           Preview link: https://servo.org/$HEAD_REF/
