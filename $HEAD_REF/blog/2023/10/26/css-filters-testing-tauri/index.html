@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>This month in Servo: CSS filters, testing changes, Tauri, and more! - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine</title>
+  <meta property="og:title" content="This month in Servo: CSS filters, testing changes, Tauri, and more! - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine">
+  
+
+  
+  <meta name="description" content="Catch up on our recent conference talks, embedding news, and testing changes, plus nightly updates around media queries, the DOM, upgrades, CSS filters, and canvas performance.">
+  <meta name="og:description" content="Catch up on our recent conference talks, embedding news, and testing changes, plus nightly updates around media queries, the DOM, upgrades, CSS filters, and canvas performance.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/$HEAD_REF/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/$HEAD_REF/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/$HEAD_REF/blog/2023/10/26/css-filters-testing-tauri/">
+
+  <link rel="stylesheet" href="/$HEAD_REF/css/style.css">
+  <link rel="shortcut icon" href="/$HEAD_REF/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/$HEAD_REF/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/$HEAD_REF/">
+        <img src="/$HEAD_REF/img/servo-color-negative-no-container.png" alt="This month in Servo: CSS filters, testing changes, Tauri, and more!">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              Get Involved
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/$HEAD_REF/contributing/">
+                  Contributing
+                </a>
+              
+                <a class="navbar-item" href="https://github.com/servo/servo/wiki" target="_blank">
+                  Wiki
+                </a>
+              
+                <a class="navbar-item" href="https://wpt.servo.org/" target="_blank">
+                  WPT pass rates
+                </a>
+              
+                <a class="navbar-item" href="/$HEAD_REF/coc/">
+                  Code of Conduct
+                </a>
+              
+            </div>
+          </div>
+        
+      
+        
+        
+          <a class="navbar-item" href="/$HEAD_REF/download/">
+            Download
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="/$HEAD_REF/blog/">
+            Blog
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="https://demo.servo.org/" target="_blank">
+            Demos
+          </a>
+        
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              About
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/$HEAD_REF/about/">
+                  About Servo
+                </a>
+              
+                <a class="navbar-item" href="/$HEAD_REF/governance/">
+                  Governance
+                </a>
+              
+                <a class="navbar-item" href="/$HEAD_REF/sponsorship/">
+                  Sponsorship
+                </a>
+              
+                <a class="navbar-item" href="/$HEAD_REF/acknowledgements/">
+                  Acknowledgements
+                </a>
+              
+            </div>
+          </div>
+        
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <aside class="menu box">
+            <p class="menu-label">
+              This month in Servo: CSS filters, testing changes, Tauri, and more!
+            </p>
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+          </aside>
+          <div class="content">
+            
+<h1 class="title">This month in Servo: CSS filters, testing changes, Tauri, and more!</h1>
+<p class="subtitle"><span class="tag is-dark">2023-10-26</span> Catch up on our recent conference talks, embedding news, and testing changes, plus nightly updates around media queries, the DOM, upgrades, CSS filters, and canvas performance.</p>
+
+<div class="has-top-margin">
+  <p>Servo has had some exciting changes land in our nightly builds over the last month:</p>
+<ul>
+<li>as of 2023-09-23, <strong>‘@media (resolution)’</strong> queries are now supported (<a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/servo/servo/pull/30406">#30406</a>)</li>
+<li>as of 2023-09-28, the <strong>‘dir’ attribute getter</strong> now behaves correctly (<a href="https://github.com/EnnuiL">@EnnuiL</a>, <a href="https://github.com/servo/servo/pull/30435">#30435</a>)
+<ul>
+<li>this fixes <strong>over 12000 subtests</strong> in the HTML test suite!</li>
+</ul>
+</li>
+</ul>
+<style>
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig > ._flex {
+        display: flex;
+    }
+    ._fig._min {
+        width: min-content;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+    }
+    ._figr {
+        float: right;
+    }
+    .figl > a > img,
+    .figr > a > img {
+        width: 17em;
+        max-width: max-content;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+</style>
+<p>Much of the recent work on Servo has been around upgrading the components we share with Firefox:</p>
+<ul>
+<li><strong>SpiderMonkey</strong> — upgraded from 107 to 115 (<a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/servo/mozjs/pull/408">mozjs#408</a>, <a href="https://github.com/servo/servo/pull/30379">#30379</a>)</li>
+<li><strong>Stylo</strong> — upgrade continues, with another 65 commits now landed in Servo (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/30421">#30421</a>)</li>
+<li><strong>WebRender</strong> — upgraded to <a href="https://github.com/servo/servo/pull/30323">May 2021</a>, now fixing regressions and preparing for more breaking changes:
+<ul>
+<li><span class=_none>as of 2023-09-19,</span> we’ve fixed a scrolling regression in <strong>Acid2</strong> and other quirks mode pages (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30375">#30375</a>)</li>
+<li><span class=_none>as of 2023-09-21,</span> we’ve fixed a major <strong>WebGL</strong> regression related to tile cache invalidation (<a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/30390">#30390</a>)</li>
+<li><span class=_none>as of 2023-10-04,</span> pinch zoom is now handled in Servo, preparing us for its removal from WebRender (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30446">#30446</a>, <a href="https://github.com/servo/servo/pull/30459">#30459</a>)</li>
+</ul>
+</li>
+</ul>
+<p>Sometimes the best source of ideas for improving Servo is to focus on a real-world app.
+<a href="https://github.com/EnnuiL">Ennui @EnnuiL</a> is doing exactly that with <a href="https://orteil.dashnet.org/cookieclicker/">Cookie Clicker</a>, a 2013 idle game that relies on CSS positioning, transitions, transforms, filters, and 2D canvases.</p>
+<ul>
+<li>as of 2023-10-05, the <strong>CSS ‘drop-shadow()’ filter</strong> is now supported (<a href="https://github.com/EnnuiL">@EnnuiL</a>, <a href="https://github.com/servo/servo/pull/30439">#30439</a>)</li>
+<li>as of 2023-10-10, CSS filters are now correctly <strong>clipped by ‘overflow: hidden’</strong> (<a href="https://github.com/EnnuiL">@EnnuiL</a>, <a href="https://github.com/servo/servo/pull/30517">#30517</a>)</li>
+<li>as of 2023-10-19, <strong>drawImage()</strong> on a 2D canvas now uses shared memory for performance (<a href="https://github.com/EnnuiL">@EnnuiL</a>, <a href="https://github.com/servo/servo/pull/30544">#30544</a>)</li>
+<li>her work continues in <a href="https://github.com/servo/servo/issues/30535">#30535</a>, with an analysis of Servo’s performance issues under Cookie Clicker</li>
+</ul>
+<figure class="_fig">
+    <div class="_flex">
+        <a href="/$HEAD_REF/img/blog/drop-shadow-filter-before.png"><img src="/$HEAD_REF/img/blog/drop-shadow-filter-before.png"
+            alt="Cookie Clicker on Servo 2023-10-04, without the drop-shadow() filter"></a>
+        <a href="/$HEAD_REF/img/blog/drop-shadow-filter-after.png"><img src="/$HEAD_REF/img/blog/drop-shadow-filter-after.png"
+            alt="Cookie Clicker on Servo 2023-10-05, now with the drop-shadow() filter"></a>
+    </div>
+    <figcaption>
+        left: Cookie Clicker as of 2023-10-04
+        <br>right: Cookie Clicker as of 2023-10-05
+    </figcaption>
+</figure>
+<div class="_runin"><p><span class="_floatmin"></span>There have also been some changes to our internals that affect </p><h2>contributing to Servo</h2><p>.</p></div>
+<p><strong>Debug assertions</strong> are now enabled everywhere except for official nightly releases (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/30509">#30509</a>).
+This includes both debug (<code>-d --dev</code>) and release (<code>-r --release</code>) builds locally, as well as try jobs and most other builds on CI.
+For more details, see <a href="https://github.com/servo/servo/blob/a3d2f0c586e97e26906bd2327395186bf140f49b/docs/HACKING_QUICKSTART.md#building-servo">HACKING_QUICKSTART.md</a>.</p>
+<p>With debug assertions enabled, you can use <a href="https://doc.rust-lang.org/std/macro.debug_assert.html">debug_assert!()</a> to panic when an invariant is violated, much like you would use <a href="https://source.chromium.org/chromium/chromium/src/+/main:base/check.h;drc=95330f60656455a82d816e24907ed67b99cb8720">DCHECK()</a> in Chromium, or for more complex checks, you can wrap code in <code>#[cfg(debug_assertions)]</code> or <code>if cfg!(debug_assertions) {}</code>.
+Note that panicking in official releases — where <code>cfg!(debug_assertions)</code> is false — is still verboten in general, and those panics should almost always warn and/or gracefully recover instead.</p>
+<div class="_runin" style="clear: both;"><p>Servo has long aimed to become an </p><h2 id="embeddable-web-engine">embeddable web engine</h2><p>, and our next step on this journey will be supported by a grant from <a href="https://nlnet.nl/project/Tauri-Servo/">NLNet</a>!
+Over the next few months, we will be collaborating with the developers of <a href="https://tauri.app">Tauri</a> to make Servo available as a webview backend.</p></div>
+<p>Tauri is a framework for building desktop apps that combine a web frontend with a Rust backend, and work is already ongoing to expand it to mobile apps and other backend languages.
+But unlike say, Electron or React Native, Tauri is both frontend-agnostic and engine-agnostic, allowing you to use any frontend tooling you like and whichever web engine makes the most sense for your users.</p>
+<p>At the moment, Tauri supports webkit2gtk (WebKit) on Linux, WebView2 (Chromium) on Windows, and WKWebView (WebKit) on macOS and iOS, in each case leveraging the system webview where possible.
+With this project to add support for Servo in Tauri, we hope to make embedding Servo easier than ever.</p>
+<p>For more details, subscribe to our tracking issue <a href="https://github.com/servo/servo/issues/30593">#30593</a>.</p>
+<div class="_runin"><p>This was a big month for Servo at </p><h2>conferences and events</h2><p> too! You can catch up on our recent talks here:</p></div>
+<ul>
+<li>on 18 September, <a href="https://www.youtube.com/watch?v=J4qedc-0pjs&amp;t=2356s"><strong>Servo project update</strong></a>, by Manuel Rego at <a href="https://lfeuropems2023.sched.com/event/1PCHu">LF Europe Member Summit</a></li>
+<li>on 21 September, <a href="https://www.youtube.com/watch?v=9lkIX5ryZZ4"><strong>Servo Web Rendering Engine Reboot</strong></a>, by Manuel Rego at <a href="https://osseu2023.sched.com/event/1OGkc">Open Source Summit Europe</a></li>
+<li>on 24 September, <a href="https://www.bilibili.com/video/BV1Hw411r7Q6/"><strong>You can work on the web platform!</strong></a>, by Martin Robinson at <a href="https://workshop2023.gosim.org/schedule#mobile">GOSIM workshop 2023</a></li>
+<li>on 26 September, <strong>Servo: a web view from somewhere else</strong> (video pending), by Martin Robinson at <a href="https://conference2023.gosim.org/schedule#mobile">GOSIM conference 2023</a></li>
+<li>on 17 October, <a href="https://servo.org/slides/2023-10-17-eclipsecon/"><strong>Servo</strong></a>, by Rakhi Sharma at <a href="https://www.eclipsecon.org/2023/">EclipseCon 2023</a></li>
+</ul>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/$HEAD_REF/blog/">Back</a>
+</div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+  <div class="container" style="text-align: center;">
+    <a href="/$HEAD_REF/coc/">Code of Conduct</a> |
+    Contact: <a href="mailto:info@servo.org">info@servo.org</a>,
+    <a href="https://servo.zulipchat.com/">Zulip Chat</a>,
+    <a href="https://github.com/servo/servo/discussions">GitHub Discussions</a>,
+    <a href="https://floss.social/@servo">Mastodon</a>,
+    <a href="https://twitter.com/ServoDev">Twitter</a>
+  </div>
+  <div class="container" style="text-align: center; font-size: 0.875em;">
+    <p><a href="https://linuxfoundation.eu"><img src="/$HEAD_REF/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250" style="margin: 1em;"></a></p>
+    <p>&copy; 2024 The Servo Project Developers</p>
+    <p>Copyright &copy; Servo is a project of <a href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>
