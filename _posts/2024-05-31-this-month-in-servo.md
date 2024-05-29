@@ -16,7 +16,7 @@ Servo now supports several CSS features in its nightly builds:
 - as of 2024-05-22, **‘empty-cells’** (@Loirooriol, #32331)
 - as of 2024-05-22, **‘visibility: collapse’** on table parts (@Loirooriol, @mrobinson, #32333)
 
-Together with correct sizing for **floating tables** (@Loirooriol, #32150) and **empty list items** (@mrobinson, @Loirooriol, #32152), Servo has made some big strides in the Web Platform Tests this month:
+Together with correct sizing for **floating tables** (@Loirooriol, #32150) and **empty list items** (@mrobinson, @Loirooriol, #32152), as well as correct **‘line-height’ based on the first font** (@mrobinson, #32165), Servo has made some big strides in the Web Platform Tests this month:
 
 - 90.8% (+1.6pp) in the **CSS2 floats** tests
 - 68.7% (+5.7pp) in the **CSS2 and CSS tables** tests
@@ -36,6 +36,9 @@ Servo now supports the **‘font-weight’**, **‘font-style’**, **‘font-st
 
 We also now support **font fallback on OpenHarmony** (@jschwe, #32141), and **bitmap color emoji** on Linux and macOS (@mrobinson, #32203, #32278).
 Note that the layered `COLR` format is not yet supported, and that on macOS, we currently only support `sbix` (like in Apple Color Emoji), not `CBDT` (like in Noto Color Emoji).
+
+Our [font system rework](https://github.com/servo/servo/issues/32033) continues, **saving up to 40 MB of memory** when loading servo.org by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
+We’ve fixed a bug where web fonts in one document can **clobber fonts with the same name** in other documents (@mrobinson, @mukilan, #32303), and a bug where the **font cache leaks unused web fonts** (@mrobinson, @mukilan, #32346).
 
 ## Donations
 
@@ -118,18 +121,18 @@ cssom (0.0pp to 65.4%)
   - SKIP (not really a stylo upgrade) stylo html5ever xml5ever 32145
   - wgpu 31995, wgpu 0.20 32173
   - servoshell - egui, etc 31278
-- fonts
+- DONE fonts
   - DONE ‘weight’, ‘style’, ‘stretch’, ‘unicode-range’, plus composite fonts 32164
   - DONE sbix color emoji (apple bitmap) 32203
   - DONE Support bitmap fonts support (color emojis) for FreeType platforms 32278
   - DONE add support for the full CSS font matching algorithm 32366
   - DONE font fallback on openharmony 32141
-  - improve line-height correctness when font fallback happens 32165
-  - font data
-    - fonts are no longer duplicated per layout thread (cross-thread FontContext) 32303
-    - removing stylesheets now deactivates the web fonts they included 32346
-    - shared fontcontext saving 40 megs of memory 32205
-  - windows font loading 32115
+  - DONE improve line-height correctness when font fallback happens 32165
+  - DONE font data
+    - DONE fonts are no longer duplicated per layout thread (cross-thread FontContext) 32303
+    - DONE removing stylesheets now deactivates the web fonts they included 32346
+    - DONE shared fontcontext saving 40 megs of memory 32205
+  - SKIP windows font loading 32115
 - embedding
   - sync constellation and compositor 32163
 - reliability
