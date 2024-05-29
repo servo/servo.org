@@ -7,7 +7,11 @@ summary:    your text here
 categories:
 ---
 
-Servo now supports several CSS features in its nightly builds:
+<figure class="_figr" style="clear: right;"><a href="{{ '/img/blog/ic-units.png' | url }}"><img src="{{ '/img/blog/ic-units.png' | url }}"
+    alt="servoshell with three boxes arranged around a large water radical (水), each the same size as that character by being 1ic x 1ic."></a>
+<figcaption>‘ic’ units are now supported.</figcaption></figure>
+
+<span class=_floatmin></span>Servo now supports several CSS features in its nightly builds:
 
 - as of 2024-04-29, **‘start’**, **‘end’**, and **‘space-evenly’** values in **‘align-content’** and **‘justify-content’** (@nicoburns, #31724)
 - as of 2024-04-30, **‘white-space-collapse’**, **‘text-wrap-mode’**, and the new **‘white-space’** shorthand (@Loirooriol, #32146)
@@ -16,7 +20,11 @@ Servo now supports several CSS features in its nightly builds:
 - as of 2024-05-22, **‘empty-cells’** (@Loirooriol, #32331)
 - as of 2024-05-22, **‘visibility: collapse’** on table parts (@Loirooriol, @mrobinson, #32333)
 
-Several DOM properties are now supported:
+<figure class="_figl"><a href="{{ '/img/blog/empty-cells.png' | url }}"><img src="{{ '/img/blog/empty-cells.png' | url }}"
+    alt="Two pixel art smileys made from table cells, one with magenta eyes and background"></a>
+<figcaption>Left: ‘empty-cells: show’.<br>Right: ‘empty-cells: hide’.</figcaption></figure>
+
+<span class=_floatmin></span>Several DOM properties are now supported:
 
 - `value`, `min`, `max`, `low`, `high`, and `optimum` on HTMLMeterElement (@shanehandley, #32230)
 - `autofocus` on HTMLElement and SVGElement, via HTMLOrSVGElement (@nolanlawson, #32170)
@@ -34,6 +42,17 @@ Together with correct sizing for **floating tables** (@Loirooriol, #32150) and *
 
 ## Font system
 
+<figure class=_figr>
+
+|   | `sbix` | `CBDT` | `COLR` |
+|---|---|---|---|
+| Windows | ❌︎ | ❌︎ | ❌︎ |
+| macOS | ✅ | ❌︎ | ❌︎ |
+| Linux | ❌︎ | ✅ | ❌︎ |
+
+<figcaption>Overview of color emoji support by format and platform.</figcaption>
+</figure>
+
 Servo now supports the **‘font-weight’**, **‘font-style’**, **‘font-stretch’**, and **‘unicode-range’ descriptors** in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly selecting the nearest weights and styles (@mrobinson, @mukilan, #32366).
 
 We also now support **font fallback on OpenHarmony** (@jschwe, #32141), and **bitmap color emoji** on Linux and macOS (@mrobinson, #32203, #32278).
@@ -41,6 +60,10 @@ Note that the layered `COLR` format is not yet supported, and that on macOS, we 
 
 Our [font system rework](https://github.com/servo/servo/issues/32033) continues, **saving up to 40 MB of memory** when loading servo.org by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can **clobber fonts with the same name** in other documents (@mrobinson, @mukilan, #32303), and a bug where the **font cache leaks unused web fonts** (@mrobinson, @mukilan, #32346).
+
+<figure class="_figl"><a href="{{ '/img/blog/servoshell-status-bar.png' | url }}"><img src="{{ '/img/blog/servoshell-status-bar.png' | url }}"
+    alt="servoshell showing the URL of a hovered link at the bottom of the window."></a>
+<figcaption>servoshell now shows the URL of hovered links near the bottom of the window.</figcaption></figure>
 
 ## servoshell
 
