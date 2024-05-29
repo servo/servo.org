@@ -42,6 +42,10 @@ Note that the layered `COLR` format is not yet supported, and that on macOS, we 
 Our [font system rework](https://github.com/servo/servo/issues/32033) continues, **saving up to 40 MB of memory** when loading servo.org by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can **clobber fonts with the same name** in other documents (@mrobinson, @mukilan, #32303), and a bug where the **font cache leaks unused web fonts** (@mrobinson, @mukilan, #32346).
 
+## servoshell
+
+servoshell now **handles all known keycodes**, passing them to Servo where appropriate (@Nopey, #32228), goes back and forward when **pressing the mouse side buttons** (@Nopey, #32283), and shows the link URL in a **status tooltip when hovering over links** (@iterminatorheart, @atbrakhi, #32011).
+
 ## Other changes
 
 Servo for Android **now builds on aarch64** (@mukilan, #32137), **no longer crashes on startup** (@mukilan, #32273), and now supports the **SpiderMonkey JIT on 64-bit builds** (@mukilan, #31134).
@@ -151,9 +155,9 @@ cssom (0.0pp to 65.4%)
   - DONE sync constellation and compositor 32163
 - DONE reliability
   - DONE compositor shutdown 32207
-- au
-  - Au is used in HoistedSharedFragment 32288
-- dev changes
+- SKIP au
+  - SKIP Au is used in HoistedSharedFragment 32288
+- DONE dev changes
   - DONE android aarch64 32137
   - DONE android uses jemalloc again 32273
   - DONE android aarch64 JIT reenabled 32284
@@ -162,10 +166,10 @@ cssom (0.0pp to 65.4%)
   - SKIP sccache re-enabled for CI builds 32330
   - SKIP fixed a bug in `./mach bootstrap --skip-platform` 32341
   - DONE fixed an issue that made the Servo build crash on Windows Server 2019 32352
-- servoshell
-  - cursor: None is now supported and winit key support expanded in servoshell 32228
-  - The back and forward mouse buttons now work properly 32283
-  - status tooltips added 32011
+- DONE servoshell
+  - DONE cursor: None is now supported and winit key support expanded in servoshell 32228
+  - DONE The back and forward mouse buttons now work properly 32283
+  - DONE status tooltips added 32011
 - conferences
   - rakhi talk (x2?)
     - RustNL 7-9 may
