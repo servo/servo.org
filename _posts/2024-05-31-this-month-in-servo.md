@@ -16,7 +16,7 @@ Servo now supports several CSS features in its nightly builds:
 - as of 2024-05-22, **‘empty-cells’** (@Loirooriol, #32331)
 - as of 2024-05-22, **‘visibility: collapse’** on table parts (@Loirooriol, @mrobinson, #32333)
 
-We now support **aborting fetch()** with AbortController and AbortSignal (@syvb, #31361), and several DOM properties:
+Several DOM properties are now supported:
 
 - `value`, `min`, `max`, `low`, `high`, and `optimum` on HTMLMeterElement (@shanehandley, #32230)
 - `autofocus` on HTMLElement and SVGElement, via HTMLOrSVGElement (@nolanlawson, #32170)
