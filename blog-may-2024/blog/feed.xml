@@ -24,7 +24,7 @@
 &lt;li&gt;as of 2024-05-22, &lt;strong&gt;‘empty-cells’&lt;/strong&gt; (@Loirooriol, #32331)&lt;/li&gt;
 &lt;li&gt;as of 2024-05-22, &lt;strong&gt;‘visibility: collapse’&lt;/strong&gt; on table parts (@Loirooriol, @mrobinson, #32333)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Together with correct sizing for &lt;strong&gt;floating tables&lt;/strong&gt; (@Loirooriol, #32150) and &lt;strong&gt;empty list items&lt;/strong&gt; (@mrobinson, @Loirooriol, #32152), Servo has made some big strides in the Web Platform Tests this month:&lt;/p&gt;
+&lt;p&gt;Together with correct sizing for &lt;strong&gt;floating tables&lt;/strong&gt; (@Loirooriol, #32150) and &lt;strong&gt;empty list items&lt;/strong&gt; (@mrobinson, @Loirooriol, #32152), and correct &lt;strong&gt;‘line-height’ based on the first font&lt;/strong&gt; (@mrobinson, #32165), Servo has made some big strides in the Web Platform Tests this month:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;90.8% (+1.6pp) in the &lt;strong&gt;CSS2 floats&lt;/strong&gt; tests&lt;/li&gt;
 &lt;li&gt;68.7% (+5.7pp) in the &lt;strong&gt;CSS2 and CSS tables&lt;/strong&gt; tests&lt;/li&gt;
@@ -42,6 +42,8 @@ This will hopefully address some complex timing issues between the renderer and 
 &lt;p&gt;Servo now supports the &lt;strong&gt;‘font-weight’&lt;/strong&gt;, &lt;strong&gt;‘font-style’&lt;/strong&gt;, &lt;strong&gt;‘font-stretch’&lt;/strong&gt;, and &lt;strong&gt;‘unicode-range’ descriptors&lt;/strong&gt; in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly selecting the nearest weights and styles (@mrobinson, @mukilan, #32366).&lt;/p&gt;
 &lt;p&gt;We also now support &lt;strong&gt;font fallback on OpenHarmony&lt;/strong&gt; (@jschwe, #32141), and &lt;strong&gt;bitmap color emoji&lt;/strong&gt; on Linux and macOS (@mrobinson, #32203, #32278).
 Note that the layered &lt;code&gt;COLR&lt;/code&gt; format is not yet supported, and that on macOS, we currently only support &lt;code&gt;sbix&lt;/code&gt; (like in Apple Color Emoji), not &lt;code&gt;CBDT&lt;/code&gt; (like in Noto Color Emoji).&lt;/p&gt;
+&lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/issues/32033&quot;&gt;font system rework&lt;/a&gt; continues, &lt;strong&gt;saving up to 40 MB of memory&lt;/strong&gt; when loading &lt;a href=&quot;http://servo.org/&quot;&gt;servo.org&lt;/a&gt; by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
+We’ve fixed a bug where web fonts in one document can &lt;strong&gt;clobber fonts with the same name&lt;/strong&gt; in other documents (@mrobinson, @mukilan, #32303), and a bug where the &lt;strong&gt;font cache leaks unused web fonts&lt;/strong&gt; (@mrobinson, @mukilan, #32346).&lt;/p&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-may-2024/blog/2024/05/31/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -120,18 +122,18 @@ cssom (0.0pp to 65.4%)
   - SKIP (not really a stylo upgrade) stylo html5ever xml5ever 32145
   - wgpu 31995, wgpu 0.20 32173
   - servoshell - egui, etc 31278
-- fonts
+- DONE fonts
   - DONE ‘weight’, ‘style’, ‘stretch’, ‘unicode-range’, plus composite fonts 32164
   - DONE sbix color emoji (apple bitmap) 32203
   - DONE Support bitmap fonts support (color emojis) for FreeType platforms 32278
   - DONE add support for the full CSS font matching algorithm 32366
   - DONE font fallback on openharmony 32141
-  - improve line-height correctness when font fallback happens 32165
-  - font data
-    - fonts are no longer duplicated per layout thread (cross-thread FontContext) 32303
-    - removing stylesheets now deactivates the web fonts they included 32346
-    - shared fontcontext saving 40 megs of memory 32205
-  - windows font loading 32115
+  - DONE improve line-height correctness when font fallback happens 32165
+  - DONE font data
+    - DONE fonts are no longer duplicated per layout thread (cross-thread FontContext) 32303
+    - DONE removing stylesheets now deactivates the web fonts they included 32346
+    - DONE shared fontcontext saving 40 megs of memory 32205
+  - SKIP windows font loading 32115
 - embedding
   - sync constellation and compositor 32163
 - reliability
