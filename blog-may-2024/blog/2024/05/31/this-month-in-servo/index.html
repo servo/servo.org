@@ -212,13 +212,6 @@
 <li>as of 2024-05-22, <strong>‘empty-cells’</strong> (@Loirooriol, #32331)</li>
 <li>as of 2024-05-22, <strong>‘visibility: collapse’</strong> on table parts (@Loirooriol, @mrobinson, #32333)</li>
 </ul>
-<p>Together with correct sizing for <strong>floating tables</strong> (@Loirooriol, #32150) and <strong>empty list items</strong> (@mrobinson, @Loirooriol, #32152), as well as correct <strong>‘line-height’ based on the first font</strong> (@mrobinson, #32165), Servo has made some big strides in the Web Platform Tests this month:</p>
-<ul>
-<li>90.8% (+1.6pp) in the <strong>CSS2 floats</strong> tests</li>
-<li>68.7% (+5.7pp) in the <strong>CSS2 and CSS tables</strong> tests</li>
-<li>53.3% (+4.0pp) in the <strong>CSS text</strong> tests</li>
-<li>48.8% (+3.3pp) in the <strong>CSS position</strong> tests</li>
-</ul>
 <p>We now support <strong>aborting fetch()</strong> with AbortController and AbortSignal (@syvb, #31361), and several DOM properties:</p>
 <ul>
 <li><code>value</code>, <code>min</code>, <code>max</code>, <code>low</code>, <code>high</code>, and <code>optimum</code> on HTMLMeterElement (@shanehandley, #32230)</li>
@@ -227,13 +220,26 @@
 </ul>
 <p>We’ve also landed the first patch towards making Servo’s <strong>event loop comply with the HTML spec</strong> (@gterzian, #31505).
 This will hopefully address some complex timing issues between the renderer and other kinds of tasks like requestAnimationFrame and ResizeObserver callbacks.</p>
+<p>Together with correct sizing for <strong>floating tables</strong> (@Loirooriol, #32150) and <strong>empty list items</strong> (@mrobinson, @Loirooriol, #32152), as well as correct <strong>‘line-height’ based on the first font</strong> (@mrobinson, #32165), Servo has made some big strides in the Web Platform Tests this month:</p>
+<ul>
+<li>90.8% (+1.6pp) in the <strong>CSS2 floats</strong> tests</li>
+<li>68.7% (+5.7pp) in the <strong>CSS2 and CSS tables</strong> tests</li>
+<li>53.3% (+4.0pp) in the <strong>CSS text</strong> tests</li>
+<li>48.8% (+3.3pp) in the <strong>CSS position</strong> tests</li>
+</ul>
+<h2 id="font-system" tabindex="-1">Font system <a class="header-anchor" href="#font-system">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
 <p>Servo now supports the <strong>‘font-weight’</strong>, <strong>‘font-style’</strong>, <strong>‘font-stretch’</strong>, and <strong>‘unicode-range’ descriptors</strong> in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly selecting the nearest weights and styles (@mrobinson, @mukilan, #32366).</p>
 <p>We also now support <strong>font fallback on OpenHarmony</strong> (@jschwe, #32141), and <strong>bitmap color emoji</strong> on Linux and macOS (@mrobinson, #32203, #32278).
 Note that the layered <code>COLR</code> format is not yet supported, and that on macOS, we currently only support <code>sbix</code> (like in Apple Color Emoji), not <code>CBDT</code> (like in Noto Color Emoji).</p>
 <p>Our <a href="https://github.com/servo/servo/issues/32033">font system rework</a> continues, <strong>saving up to 40 MB of memory</strong> when loading <a href="http://servo.org">servo.org</a> by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can <strong>clobber fonts with the same name</strong> in other documents (@mrobinson, @mukilan, #32303), and a bug where the <strong>font cache leaks unused web fonts</strong> (@mrobinson, @mukilan, #32346).</p>
-<p>Servo should no longer cause intermittent errors and <strong>panics when exiting</strong> (@mrobinson, #32207), and <strong>ShowWebView</strong> no longer fails if sent too quickly after a webview is created (@wusyong, #32163).</p>
+<h2 id="other-changes" tabindex="-1">Other changes <a class="header-anchor" href="#other-changes">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
 <p>Servo for Android <strong>now builds on aarch64</strong> (@mukilan, #32137), <strong>no longer crashes on startup</strong> (@mukilan, #32273), and now supports the <strong>SpiderMonkey JIT on 64-bit builds</strong> (@mukilan, #31134).</p>
+<p>Servo should no longer cause intermittent errors and <strong>panics when exiting</strong> (@mrobinson, #32207), and <strong>ShowWebView</strong> no longer fails if sent too quickly after a webview is created (@wusyong, #32163).</p>
 <p>We’ve also landed several dev changes:</p>
 <ul>
 <li>You can now pass <code>--skip-platform</code> to <code>mach bootstrap</code> to <strong>install taplo and crown only</strong> (@mrobinson, #32176)</li>
