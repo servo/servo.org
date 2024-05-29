@@ -44,6 +44,12 @@ Servo should no longer cause intermittent errors and **panics when exiting** (@m
 
 Servo for Android **now builds on aarch64** (@mukilan, #32137), **no longer crashes on startup** (@mukilan, #32273), and now supports the **SpiderMonkey JIT on 64-bit builds** (@mukilan, #31134).
 
+We’ve also landed several dev changes:
+
+- You can now pass `--skip-platform` to `mach bootstrap` to **install taplo and crown only** (@mrobinson, #32176)
+- `mach build` **no longer fails on Windows** due to `STATUS_DLL_NOT_FOUND` in crown (@sagudev, #32301)
+- `mach build` **no longer fails on Windows Server 2019** due to `UnsupportedPlatform` in notifypy (@delan, #32352)
+
 ## Donations
 
 Thanks again for your generous support!
@@ -147,11 +153,11 @@ cssom (0.0pp to 65.4%)
   - DONE android aarch64 32137
   - DONE android uses jemalloc again 32273
   - DONE android aarch64 JIT reenabled 32284
-  - mach bootstrap --skip-platform 32176
-  - windows build issue 32301
-  - sccache re-enabled for CI builds 32330
-  - fixed a bug in `./mach bootstrap --skip-platform` 32341
-  - fixed an issue that made the Servo build crash on Windows Server 2019 32353
+  - DONE mach bootstrap --skip-platform 32176
+  - DONE windows build issue 32301
+  - SKIP sccache re-enabled for CI builds 32330
+  - SKIP fixed a bug in `./mach bootstrap --skip-platform` 32341
+  - DONE fixed an issue that made the Servo build crash on Windows Server 2019 32352
 - servoshell
   - cursor: None is now supported and winit key support expanded in servoshell 32228
   - The back and forward mouse buttons now work properly 32283
