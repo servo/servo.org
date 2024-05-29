@@ -32,11 +32,10 @@ We now support **aborting fetch()** with AbortController and AbortSignal (@syvb,
 We’ve also landed the first patch towards making Servo’s **event loop comply with the HTML spec** (@gterzian, #31505).
 This will hopefully address some complex timing issues between the renderer and other kinds of tasks like requestAnimationFrame and ResizeObserver callbacks.
 
-The font system rework in Servo continues, with both new features and correctness and efficiency improvements.
+Servo now supports the **‘font-weight’**, **‘font-style’**, **‘font-stretch’**, and **‘unicode-range’ descriptors** in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly selecting the nearest weights and styles (@mrobinson, @mukilan, #32366).
 
-Servo now supports the ‘font-weight’, ‘font-style’, ‘font-stretch’, and ‘unicode-range’ descriptors in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly prioritising matches against their weights and styles (@mrobinson, @mukilan, #32366).
-
-We also now support font fallback on OpenHarmony (@jschwe, #32141), and bitmap color emoji on Linux and macOS (@mrobinson, #32203, #32278). Note that on macOS, we only support the sbix format (like in Apple Color Emoji), not CBDT (like in Noto Color Emoji). More work is needed to support Microsoft’s layered COLR format.
+We also now support **font fallback on OpenHarmony** (@jschwe, #32141), and **bitmap color emoji** on Linux and macOS (@mrobinson, #32203, #32278).
+Note that the layered `COLR` format is not yet supported, and that on macOS, we currently only support `sbix` (like in Apple Color Emoji), not `CBDT` (like in Noto Color Emoji).
 
 ## Donations
 
