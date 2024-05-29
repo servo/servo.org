@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+ HEAD_REF: ${{ github.head_ref }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -32,13 +35,11 @@ jobs:
       - name: Sass Reveal.js
         run: npm run sass-revealjs
       - name: Eleventy
-        env:
-          HEAD_REF: ${{ github.head_ref }}
         run: |
           npx eleventy \
-            --output='_site/$HEAD_REF' \
-            --pathprefix='/$HEAD_REF/'
-          LC_TIME=C date > '_site/$HEAD_REF/.stamp'
+            --output='_site/${{ env.HEAD_REF }}' \
+            --pathprefix='/${{ env.HEAD_REF }}/'
+          LC_TIME=C date > '_site/${{ env.HEAD_REF }}/.stamp'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -46,10 +47,8 @@ jobs:
           publish_dir: ./_site
           keep_files: true
       - name: Deploy link
-        env:
-          HEAD_REF: ${{ github.head_ref }}
         run: |
-          echo "Preview link: https://servo.org/$HEAD_REF/" >> $GITHUB_STEP_SUMMARY
+          echo "Preview link: https://servo.org/${{ env.HEAD_REF }}/" >> $GITHUB_STEP_SUMMARY
 
   add_preview_link:
    runs-on: ubuntu-latest
@@ -59,9 +58,7 @@ jobs:
      - name: Checkout
        uses: actions/checkout@v3
      - name: Comment PR
-       env:
-         HEAD_REF: ${{ github.head_ref }}
        uses: thollander/actions-comment-pull-request@v2
        with:
          message: |
-           Preview link: https://servo.org/$HEAD_REF/
+           Preview link: https://servo.org/${{ env.HEAD_REF }}/
