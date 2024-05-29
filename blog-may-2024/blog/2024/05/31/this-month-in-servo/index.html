@@ -203,7 +203,10 @@
 <p class="subtitle"><span class="tag is-dark">2024-05-31</span> your text here</p>
 
 <div class="has-top-margin">
-  <p>Servo now supports several CSS features in its nightly builds:</p>
+  <figure class="_figr" style="clear: right;"><a href="/blog-may-2024/img/blog/ic-units.png"><img src="/blog-may-2024/img/blog/ic-units.png"
+    alt="servoshell with three boxes arranged around a large water radical (水), each the same size as that character by being 1ic x 1ic."></a>
+<figcaption>‘ic’ units are now supported.</figcaption></figure>
+<p><span class=_floatmin></span>Servo now supports several CSS features in its nightly builds:</p>
 <ul>
 <li>as of 2024-04-29, <strong>‘start’</strong>, <strong>‘end’</strong>, and <strong>‘space-evenly’</strong> values in <strong>‘align-content’</strong> and <strong>‘justify-content’</strong> (@nicoburns, #31724)</li>
 <li>as of 2024-04-30, <strong>‘white-space-collapse’</strong>, <strong>‘text-wrap-mode’</strong>, and the new <strong>‘white-space’</strong> shorthand (@Loirooriol, #32146)</li>
@@ -212,7 +215,10 @@
 <li>as of 2024-05-22, <strong>‘empty-cells’</strong> (@Loirooriol, #32331)</li>
 <li>as of 2024-05-22, <strong>‘visibility: collapse’</strong> on table parts (@Loirooriol, @mrobinson, #32333)</li>
 </ul>
-<p>Several DOM properties are now supported:</p>
+<figure class="_figl"><a href="/blog-may-2024/img/blog/empty-cells.png"><img src="/blog-may-2024/img/blog/empty-cells.png"
+    alt="Two pixel art smileys made from table cells, one with magenta eyes and background"></a>
+<figcaption>Left: ‘empty-cells: show’.<br>Right: ‘empty-cells: hide’.</figcaption></figure>
+<p><span class=_floatmin></span>Several DOM properties are now supported:</p>
 <ul>
 <li><code>value</code>, <code>min</code>, <code>max</code>, <code>low</code>, <code>high</code>, and <code>optimum</code> on HTMLMeterElement (@shanehandley, #32230)</li>
 <li><code>autofocus</code> on HTMLElement and SVGElement, via HTMLOrSVGElement (@nolanlawson, #32170)</li>
@@ -230,11 +236,47 @@ This will hopefully address some complex timing issues between the renderer and 
 <h2 id="font-system" tabindex="-1">Font system <a class="header-anchor" href="#font-system">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<figure class=_figr>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>sbix</code></th>
+<th><code>CBDT</code></th>
+<th><code>COLR</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td>❌︎</td>
+<td>❌︎</td>
+<td>❌︎</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>✅</td>
+<td>❌︎</td>
+<td>❌︎</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>❌︎</td>
+<td>✅</td>
+<td>❌︎</td>
+</tr>
+</tbody>
+</table>
+<figcaption>Overview of color emoji support by format and platform.</figcaption>
+</figure>
 <p>Servo now supports the <strong>‘font-weight’</strong>, <strong>‘font-style’</strong>, <strong>‘font-stretch’</strong>, and <strong>‘unicode-range’ descriptors</strong> in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly selecting the nearest weights and styles (@mrobinson, @mukilan, #32366).</p>
 <p>We also now support <strong>font fallback on OpenHarmony</strong> (@jschwe, #32141), and <strong>bitmap color emoji</strong> on Linux and macOS (@mrobinson, #32203, #32278).
 Note that the layered <code>COLR</code> format is not yet supported, and that on macOS, we currently only support <code>sbix</code> (like in Apple Color Emoji), not <code>CBDT</code> (like in Noto Color Emoji).</p>
 <p>Our <a href="https://github.com/servo/servo/issues/32033">font system rework</a> continues, <strong>saving up to 40 MB of memory</strong> when loading <a href="http://servo.org">servo.org</a> by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can <strong>clobber fonts with the same name</strong> in other documents (@mrobinson, @mukilan, #32303), and a bug where the <strong>font cache leaks unused web fonts</strong> (@mrobinson, @mukilan, #32346).</p>
+<figure class="_figl"><a href="/blog-may-2024/img/blog/servoshell-status-bar.png"><img src="/blog-may-2024/img/blog/servoshell-status-bar.png"
+    alt="servoshell showing the URL of a hovered link at the bottom of the window."></a>
+<figcaption>servoshell now shows the URL of hovered links near the bottom of the window.</figcaption></figure>
 <h2 id="servoshell" tabindex="-1">servoshell <a class="header-anchor" href="#servoshell">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
