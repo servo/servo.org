@@ -118,6 +118,13 @@ Donations on Open Collective give Servo around 80% to 90%, depending on the amou
     <progress value="1630" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
 </div></figure>
 
+## Conference talks
+
+Recordings are now available for two of our most recent talks:
+
+- [**A year of Servo reboot: where are we now?**](https://www.youtube.com/watch?v=RdtlD_7JAs8) ([slides](https://servo.org/slides/2024-04-16-open-source-summit-NA/)) by Rakhi Sharma, at [Open Source Summit North America](https://events.linuxfoundation.org/open-source-summit-north-america/)
+- [**Modular Servo: Three Paths Forward**](https://www.youtube.com/watch?v=EA_1jxzR85M) (slides available soon) by Gregory Terzian, at [GOSIM Conference 2024](https://europe2024.gosim.org/schedule#mobile-and-web-app)
+
 <!--
 - donations 1630/month
   - open collective 10+5+10+5+5+5+1000+5+5+10+5+5+3+5+5+25+1+20+5+5+10+5+10+25+5+5 = 1199/month
@@ -144,18 +151,18 @@ normal-flow (0.0pp to 94.0%)
 positioning (0.0pp to 90.1%)
 cssom (0.0pp to 65.4%)
 
-- ai policy
+- SKIP (not yet resolved) ai policy
 - DONE donations
   - DONE lfx
   - DONE runners proposal?
 - DONE wpt
-- api support
+- DONE api support
   - SKIP (legacy only) CSSOM shorthands 32149
   - DONE aria string reflection on element 32080
   - DONE idl reflection for autofocus 32170
   - DONE ‘ch’ and ‘ic’ units 32171
   - DONE AbortController/AbortSignal 31361
-- dom
+- DONE dom
   - DONE the start of a large effort to bring Servo's event loop closer to the HTML event loop specification 31505
   - improve parsing of floating point numbers in some DOM APIs 32272
   - DONE `<meter>` elements now support more DOM APIs 32230
@@ -175,7 +182,7 @@ cssom (0.0pp to 65.4%)
   - SKIP (already in last month’s update) stylo 32128
   - SKIP (not really a stylo upgrade) stylo html5ever xml5ever 32145
   - wgpu 31995, wgpu 0.20 32173
-  - servoshell - egui, etc 31278
+  - DONE servoshell - egui, etc 31278
 - DONE fonts
   - DONE ‘weight’, ‘style’, ‘stretch’, ‘unicode-range’, plus composite fonts 32164
   - DONE sbix color emoji (apple bitmap) 32203
@@ -207,10 +214,10 @@ cssom (0.0pp to 65.4%)
   - DONE cursor: None is now supported and winit key support expanded in servoshell 32228
   - DONE The back and forward mouse buttons now work properly 32283
   - DONE status tooltips added 32011
-- conferences
-  - rakhi talk (x2?)
-    - RustNL 7-9 may
-  - gregory gosim https://www.youtube.com/watch?v=EA_1jxzR85M
+- DONE conferences
+  - DONE rakhi talk (x2?)
+    - DONE RustNL 7-9 may
+  - DONE gregory gosim https://www.youtube.com/watch?v=EA_1jxzR85M
 
 >>> 2024-04-24T06:11:08Z
     22729446270c4a748f3020ccf09570a1412e2df9	https://github.com/servo/servo/pull/32139	build(deps): bump freetype from 0.7.1 to 0.7.2 (#32139)
