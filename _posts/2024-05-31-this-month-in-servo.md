@@ -58,7 +58,7 @@ Together with correct sizing for **floating tables** (@Loirooriol, #32150) and *
 <figcaption>Overview of Servo’s current color emoji support by format and platform.</figcaption>
 </figure>
 
-Servo now supports the **‘font-weight’**, **‘font-style’**, **‘font-stretch’**, and **‘unicode-range’ descriptors** in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly selecting the nearest weights and styles (@mrobinson, @mukilan, #32366).
+<span class=_floatmin></span>Servo now supports the **‘font-weight’**, **‘font-style’**, **‘font-stretch’**, and **‘unicode-range’ descriptors** in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly selecting the nearest weights and styles (@mrobinson, @mukilan, #32366).
 
 We also now support **font fallback on OpenHarmony** (@jschwe, #32141), and **bitmap color emoji** on Linux and macOS (@mrobinson, #32203, #32278).
 Note that the layered `COLR` format is not yet supported, and that on macOS, we currently only support `sbix` (like in Apple Color Emoji), not `CBDT` (like in Noto Color Emoji).
@@ -66,15 +66,13 @@ Note that the layered `COLR` format is not yet supported, and that on macOS, we 
 Our [font system rework](https://github.com/servo/servo/issues/32033) continues, **saving up to 40 MB of memory** when loading servo.org by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can **clobber fonts with the same name** in other documents (@mrobinson, @mukilan, #32303), and a bug where the **font cache leaks unused web fonts** (@mrobinson, @mukilan, #32346).
 
-<figure class="_figl"><a href="{{ '/img/blog/servoshell-status-bar.png' | url }}"><img src="{{ '/img/blog/servoshell-status-bar.png' | url }}"
+## Other changes
+
+<figure class="_figr"><a href="{{ '/img/blog/servoshell-status-bar.png' | url }}"><img src="{{ '/img/blog/servoshell-status-bar.png' | url }}"
     alt="servoshell showing the URL of a hovered link at the bottom of the window."></a>
 <figcaption>servoshell now shows the URL of hovered links near the bottom of the window.</figcaption></figure>
 
-## servoshell
-
-servoshell now **handles all known keycodes**, passing them to Servo where appropriate (@Nopey, #32228), goes back and forward when **pressing the mouse side buttons** (@Nopey, #32283), and shows the link URL in a **status tooltip when hovering over links** (@iterminatorheart, @atbrakhi, #32011).
-
-## Other changes
+<span class=_floatmin></span>servoshell now **handles all known keycodes**, passing them to Servo where appropriate (@Nopey, #32228), goes back and forward when **pressing the mouse side buttons** (@Nopey, #32283), and shows the link URL in a **status tooltip when hovering over links** (@iterminatorheart, @atbrakhi, #32011).
 
 Servo for Android **now builds on aarch64** (@mukilan, #32137), **no longer crashes on startup** (@mukilan, #32273), and now supports the **SpiderMonkey JIT on 64-bit builds** (@mukilan, #31134).
 
