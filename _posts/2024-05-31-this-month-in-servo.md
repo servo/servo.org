@@ -45,7 +45,7 @@ Together with correct sizing for **floating tables** (@Loirooriol, #32150) and *
 - 53.3% (+4.0pp) in the **CSS text** tests
 - 48.8% (+3.3pp) in the **CSS position** tests
 
-## Font system
+## Font system changes
 
 <figure class=_figr>
 
@@ -66,13 +66,24 @@ Note that the layered `COLR` format is not yet supported, and that on macOS, we 
 Our [font system rework](https://github.com/servo/servo/issues/32033) continues, **saving up to 40 MB of memory** when loading servo.org by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can **clobber fonts with the same name** in other documents (@mrobinson, @mukilan, #32303), and a bug where the **font cache leaks unused web fonts** (@mrobinson, @mukilan, #32346).
 
-## Other changes
+## servoshell changes
 
 <figure class="_figr"><a href="{{ '/img/blog/servoshell-status-bar.png' | url }}"><img src="{{ '/img/blog/servoshell-status-bar.png' | url }}"
     alt="servoshell showing the URL of a hovered link at the bottom of the window."></a>
 <figcaption>servoshell now shows the URL of hovered links near the bottom of the window.</figcaption></figure>
 
 <span class=_floatmin></span>servoshell now **handles all known keycodes**, passing them to Servo where appropriate (@Nopey, #32228), goes back and forward when **pressing the mouse side buttons** (@Nopey, #32283), and shows the link URL in a **status tooltip when hovering over links** (@iterminatorheart, @atbrakhi, #32011).
+
+Adding support for the mouse side buttons required a winit upgrade, but we ultimately ended up embarking on a three-month overhaul to upgrade a bunch of other deps (@Nopey, @mrobinson, #31278), including egui, glow, nix, raqote, font-kit, harfbuzz-sys, core-graphics, core-text, raw-window-handle, and jni (@delan, @mrobinson, @mukilan, #32216)!
+
+This in turn involved upgrading those deps in surfman (@Nopey, surfman#275, surfman#280, surfman#283), font-kit (@Nopey, font-kit#234), and webrender (@Nopey, webrender#4838), as well as several improvements being contributed upstream:
+
+- servoshell no longer throws **spurious GL_INVALID_ENUM errors on Windows** (@Nopey, emilk/egui#3994)
+- harfbuzz now builds on Windows when using clang-cl (@Nopey, harfbuzz/harfbuzz#4585, rust-harfbuzz#248, rust-harfbuzz#253)
+- egui_glow no longer has to depend on an outdated version of raw-window-handle (@Nopey, emilk/egui#4036)
+- raqote now depends on the latest version of font-kit (@Nopey, jrmuizel/raqote#200)
+
+## Other changes
 
 Servo for Android **now builds on aarch64** (@mukilan, #32137), **no longer crashes on startup** (@mukilan, #32273), and now supports the **SpiderMonkey JIT on 64-bit builds** (@mukilan, #31134).
 
