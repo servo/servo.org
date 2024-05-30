@@ -76,3 +76,12 @@ $ < 2023.json jq -r .user.login | sort | uniq -c | sort -nr
     function delta(p,q) { return {pp: (q-p)/10, percent: 100*(q-p)/p}; }
 })(await (await fetch("scores.json")).json(), fromDate, toDate)
 ```
+
+## How to linkify GitHub handles and pull requests when finishing a post
+
+To avoid false positives, be sure to step through each replacement rather than using Replace All.
+
+- Replace `@([0-9A-Za-z_.-]+)` with `[@$1](https://github.com/$1)`
+- Replace ` #([0-9]+)` with ` [#$1](https://github.com/servo/servo/pull/$1)`
+- Replace ` ([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1#$2](https://github.com/servo/$1/pull/$2)`
+- Replace ` ([0-9A-Za-z_.-]+)/([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1/$2#$3](https://github.com/$1/$2/pull/$3)`
