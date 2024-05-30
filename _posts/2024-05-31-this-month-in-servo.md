@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
-date:       2024-05-31
-summary:    your text here
+title:      "This month in Servo: new CSS units, color emoji, servoshell, and more!"
+date:       2024-05-30
+summary:    Big changes to the font system and servoshell, plus improvements to flexbox, tables, DOM support, and the embedding API.
 categories:
 ---
 
