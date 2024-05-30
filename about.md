@@ -34,6 +34,7 @@ The chart below tracks our pass rates in several *focus areas* of the [Web Platf
 
 ## Presentations
 
+* [Modular Servo: Three Paths Forward](https://www.youtube.com/watch?v=EA_1jxzR85M) by Gregory Terzian (May 2024)
 * [Meet Servo](https://servo.org/slides/2024-04-16-seattle-rust-user-group/) by Rakhi Sharma (Apr 2024)
 * [A Year of Servo Reboot: Where Are We Now?](https://youtu.be/RdtlD_7JAs8) by Rakhi Sharma (Apr 2024)
 * [Embedding Servo in Rust projects](https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/) by Rakhi Sharma (Feb 2024)
