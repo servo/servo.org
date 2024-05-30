@@ -13,7 +13,7 @@ categories:
 
 <span class=_floatmin></span>Servo now supports several CSS features in its nightly builds:
 
-- as of 2024-04-29, **‘start’**, **‘end’**, and **‘space-evenly’** values in **‘align-content’** and **‘justify-content’** (@nicoburns, #31724)
+- as of 2024-04-29, **‘start’**, **‘end’**, and **‘space-evenly’** values in **‘align-content’** and **‘justify-content’** (@nicoburns, #31724), in flexbox layouts when the experimental feature is enabled (`--pref layout.flexbox.enabled`)
 - as of 2024-04-30, **‘white-space-collapse’**, **‘text-wrap-mode’**, and the new **‘white-space’** shorthand (@Loirooriol, #32146)
 - as of 2024-05-03, **‘ch’** and **‘ic’ font-relative units** (@andreubotella, #32171)
 - as of 2024-05-19, basic support for **‘border-collapse’** (@mrobinson, @Loirooriol, #32309)
@@ -24,11 +24,16 @@ categories:
     alt="Two pixel art smileys made from table cells, one with magenta eyes and background"></a>
 <figcaption>Left: ‘empty-cells: show’.<br>Right: ‘empty-cells: hide’.</figcaption></figure>
 
-<span class=_floatmin></span>Several DOM properties are now supported:
+<span class=_floatmin></span>Several DOM properties are now accessible, which should improve compatibility with scripts even though their effects are not yet implemented:
 
 - `value`, `min`, `max`, `low`, `high`, and `optimum` on HTMLMeterElement (@shanehandley, #32230)
 - `autofocus` on HTMLElement and SVGElement, via HTMLOrSVGElement (@nolanlawson, #32170)
 - `role` and 43 other ARIA string properties on Element (@nolanlawson, #32080)
+
+<!--
+data:text/html,<meter value=.5>
+data:text/html,<input autofocus><script>setInterval(()=>{document.title=document.activeElement},100)</script>
+-->
 
 We’ve also landed the first patch towards making Servo’s **event loop comply with the HTML spec** (@gterzian, #31505).
 This will hopefully address some complex timing issues between the renderer and other kinds of tasks like requestAnimationFrame and ResizeObserver callbacks.
@@ -50,7 +55,7 @@ Together with correct sizing for **floating tables** (@Loirooriol, #32150) and *
 | macOS | ✅ | ❌︎ | ❌︎ |
 | Linux | ❌︎ | ✅ | ❌︎ |
 
-<figcaption>Overview of color emoji support by format and platform.</figcaption>
+<figcaption>Overview of Servo’s current color emoji support by format and platform.</figcaption>
 </figure>
 
 Servo now supports the **‘font-weight’**, **‘font-style’**, **‘font-stretch’**, and **‘unicode-range’ descriptors** in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly selecting the nearest weights and styles (@mrobinson, @mukilan, #32366).
