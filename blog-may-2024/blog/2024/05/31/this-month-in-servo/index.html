@@ -237,7 +237,7 @@ This will hopefully address some complex timing issues between the renderer and 
 <li>53.3% (+4.0pp) in the <strong>CSS text</strong> tests</li>
 <li>48.8% (+3.3pp) in the <strong>CSS position</strong> tests</li>
 </ul>
-<h2 id="font-system" tabindex="-1">Font system <a class="header-anchor" href="#font-system">
+<h2 id="font-system-changes" tabindex="-1">Font system changes <a class="header-anchor" href="#font-system-changes">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <figure class=_figr>
@@ -278,13 +278,24 @@ This will hopefully address some complex timing issues between the renderer and 
 Note that the layered <code>COLR</code> format is not yet supported, and that on macOS, we currently only support <code>sbix</code> (like in Apple Color Emoji), not <code>CBDT</code> (like in Noto Color Emoji).</p>
 <p>Our <a href="https://github.com/servo/servo/issues/32033">font system rework</a> continues, <strong>saving up to 40 MB of memory</strong> when loading <a href="http://servo.org">servo.org</a> by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can <strong>clobber fonts with the same name</strong> in other documents (@mrobinson, @mukilan, #32303), and a bug where the <strong>font cache leaks unused web fonts</strong> (@mrobinson, @mukilan, #32346).</p>
-<h2 id="other-changes" tabindex="-1">Other changes <a class="header-anchor" href="#other-changes">
+<h2 id="servoshell-changes" tabindex="-1">servoshell changes <a class="header-anchor" href="#servoshell-changes">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <figure class="_figr"><a href="/blog-may-2024/img/blog/servoshell-status-bar.png"><img src="/blog-may-2024/img/blog/servoshell-status-bar.png"
     alt="servoshell showing the URL of a hovered link at the bottom of the window."></a>
 <figcaption>servoshell now shows the URL of hovered links near the bottom of the window.</figcaption></figure>
 <p><span class=_floatmin></span>servoshell now <strong>handles all known keycodes</strong>, passing them to Servo where appropriate (@Nopey, #32228), goes back and forward when <strong>pressing the mouse side buttons</strong> (@Nopey, #32283), and shows the link URL in a <strong>status tooltip when hovering over links</strong> (@iterminatorheart, @atbrakhi, #32011).</p>
+<p>Adding support for the mouse side buttons required a winit upgrade, but we ultimately ended up embarking on a three-month overhaul to upgrade a bunch of other deps (@Nopey, @mrobinson, #31278), including egui, glow, nix, raqote, font-kit, harfbuzz-sys, core-graphics, core-text, raw-window-handle, and jni (@delan, @mrobinson, @mukilan, #32216)!</p>
+<p>This in turn involved upgrading those deps in surfman (@Nopey, surfman#275, surfman#280, surfman#283), font-kit (@Nopey, font-kit#234), and webrender (@Nopey, webrender#4838), as well as several improvements being contributed upstream:</p>
+<ul>
+<li>servoshell no longer throws <strong>spurious GL_INVALID_ENUM errors on Windows</strong> (@Nopey, emilk/egui#3994)</li>
+<li>harfbuzz now builds on Windows when using clang-cl (@Nopey, harfbuzz/harfbuzz#4585, rust-harfbuzz#248, rust-harfbuzz#253)</li>
+<li>egui_glow no longer has to depend on an outdated version of raw-window-handle (@Nopey, emilk/egui#4036)</li>
+<li>raqote now depends on the latest version of font-kit (@Nopey, jrmuizel/raqote#200)</li>
+</ul>
+<h2 id="other-changes" tabindex="-1">Other changes <a class="header-anchor" href="#other-changes">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
 <p>Servo for Android <strong>now builds on aarch64</strong> (@mukilan, #32137), <strong>no longer crashes on startup</strong> (@mukilan, #32273), and now supports the <strong>SpiderMonkey JIT on 64-bit builds</strong> (@mukilan, #31134).</p>
 <p>Servo should no longer cause intermittent errors and <strong>panics when exiting</strong> (@mrobinson, #32207), and <strong>ShowWebView</strong> no longer fails if sent too quickly after a webview is created (@wusyong, #32163).</p>
 <p>We’ve also landed several dev changes:</p>

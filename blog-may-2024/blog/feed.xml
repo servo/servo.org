@@ -47,7 +47,7 @@ This will hopefully address some complex timing issues between the renderer and 
 &lt;li&gt;53.3% (+4.0pp) in the &lt;strong&gt;CSS text&lt;/strong&gt; tests&lt;/li&gt;
 &lt;li&gt;48.8% (+3.3pp) in the &lt;strong&gt;CSS position&lt;/strong&gt; tests&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;font-system&quot; tabindex=&quot;-1&quot;&gt;Font system &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-may-2024/blog/2024/05/31/this-month-in-servo/#font-system&quot;&gt;
+&lt;h2 id=&quot;font-system-changes&quot; tabindex=&quot;-1&quot;&gt;Font system changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-may-2024/blog/2024/05/31/this-month-in-servo/#font-system-changes&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;figure class=&quot;_figr&quot;&gt;
@@ -88,12 +88,23 @@ This will hopefully address some complex timing issues between the renderer and 
 Note that the layered &lt;code&gt;COLR&lt;/code&gt; format is not yet supported, and that on macOS, we currently only support &lt;code&gt;sbix&lt;/code&gt; (like in Apple Color Emoji), not &lt;code&gt;CBDT&lt;/code&gt; (like in Noto Color Emoji).&lt;/p&gt;
 &lt;p&gt;Our &lt;a href=&quot;https://github.com/servo/servo/issues/32033&quot;&gt;font system rework&lt;/a&gt; continues, &lt;strong&gt;saving up to 40 MB of memory&lt;/strong&gt; when loading &lt;a href=&quot;http://servo.org/&quot;&gt;servo.org&lt;/a&gt; by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
 We’ve fixed a bug where web fonts in one document can &lt;strong&gt;clobber fonts with the same name&lt;/strong&gt; in other documents (@mrobinson, @mukilan, #32303), and a bug where the &lt;strong&gt;font cache leaks unused web fonts&lt;/strong&gt; (@mrobinson, @mukilan, #32346).&lt;/p&gt;
-&lt;h2 id=&quot;other-changes&quot; tabindex=&quot;-1&quot;&gt;Other changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-may-2024/blog/2024/05/31/this-month-in-servo/#other-changes&quot;&gt;
+&lt;h2 id=&quot;servoshell-changes&quot; tabindex=&quot;-1&quot;&gt;servoshell changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-may-2024/blog/2024/05/31/this-month-in-servo/#servoshell-changes&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;figure class=&quot;_figr&quot;&gt;&lt;a href=&quot;https://servo.org/blog-may-2024/img/blog/servoshell-status-bar.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-may-2024/img/blog/servoshell-status-bar.png&quot; alt=&quot;servoshell showing the URL of a hovered link at the bottom of the window.&quot; /&gt;&lt;/a&gt;
 &lt;figcaption&gt;servoshell now shows the URL of hovered links near the bottom of the window.&lt;/figcaption&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;servoshell now &lt;strong&gt;handles all known keycodes&lt;/strong&gt;, passing them to Servo where appropriate (@Nopey, #32228), goes back and forward when &lt;strong&gt;pressing the mouse side buttons&lt;/strong&gt; (@Nopey, #32283), and shows the link URL in a &lt;strong&gt;status tooltip when hovering over links&lt;/strong&gt; (@iterminatorheart, @atbrakhi, #32011).&lt;/p&gt;
+&lt;p&gt;Adding support for the mouse side buttons required a winit upgrade, but we ultimately ended up embarking on a three-month overhaul to upgrade a bunch of other deps (@Nopey, @mrobinson, #31278), including egui, glow, nix, raqote, font-kit, harfbuzz-sys, core-graphics, core-text, raw-window-handle, and jni (@delan, @mrobinson, @mukilan, #32216)!&lt;/p&gt;
+&lt;p&gt;This in turn involved upgrading those deps in surfman (@Nopey, surfman#275, surfman#280, surfman#283), font-kit (@Nopey, font-kit#234), and webrender (@Nopey, webrender#4838), as well as several improvements being contributed upstream:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;servoshell no longer throws &lt;strong&gt;spurious GL_INVALID_ENUM errors on Windows&lt;/strong&gt; (@Nopey, emilk/egui#3994)&lt;/li&gt;
+&lt;li&gt;harfbuzz now builds on Windows when using clang-cl (@Nopey, harfbuzz/harfbuzz#4585, rust-harfbuzz#248, rust-harfbuzz#253)&lt;/li&gt;
+&lt;li&gt;egui_glow no longer has to depend on an outdated version of raw-window-handle (@Nopey, emilk/egui#4036)&lt;/li&gt;
+&lt;li&gt;raqote now depends on the latest version of font-kit (@Nopey, jrmuizel/raqote#200)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;other-changes&quot; tabindex=&quot;-1&quot;&gt;Other changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-may-2024/blog/2024/05/31/this-month-in-servo/#other-changes&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Servo for Android &lt;strong&gt;now builds on aarch64&lt;/strong&gt; (@mukilan, #32137), &lt;strong&gt;no longer crashes on startup&lt;/strong&gt; (@mukilan, #32273), and now supports the &lt;strong&gt;SpiderMonkey JIT on 64-bit builds&lt;/strong&gt; (@mukilan, #31134).&lt;/p&gt;
 &lt;p&gt;Servo should no longer cause intermittent errors and &lt;strong&gt;panics when exiting&lt;/strong&gt; (@mrobinson, #32207), and &lt;strong&gt;ShowWebView&lt;/strong&gt; no longer fails if sent too quickly after a webview is created (@wusyong, #32163).&lt;/p&gt;
 &lt;p&gt;We’ve also landed several dev changes:&lt;/p&gt;
