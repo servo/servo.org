@@ -208,7 +208,7 @@
 <figcaption>‘ic’ units are now supported.</figcaption></figure>
 <p><span class=_floatmin></span>Servo now supports several CSS features in its nightly builds:</p>
 <ul>
-<li>as of 2024-04-29, <strong>‘start’</strong>, <strong>‘end’</strong>, and <strong>‘space-evenly’</strong> values in <strong>‘align-content’</strong> and <strong>‘justify-content’</strong> (@nicoburns, #31724)</li>
+<li>as of 2024-04-29, <strong>‘start’</strong>, <strong>‘end’</strong>, and <strong>‘space-evenly’</strong> values in <strong>‘align-content’</strong> and <strong>‘justify-content’</strong> (@nicoburns, #31724), in flexbox layouts when the experimental feature is enabled (<code>--pref layout.flexbox.enabled</code>)</li>
 <li>as of 2024-04-30, <strong>‘white-space-collapse’</strong>, <strong>‘text-wrap-mode’</strong>, and the new <strong>‘white-space’</strong> shorthand (@Loirooriol, #32146)</li>
 <li>as of 2024-05-03, <strong>‘ch’</strong> and <strong>‘ic’ font-relative units</strong> (@andreubotella, #32171)</li>
 <li>as of 2024-05-19, basic support for <strong>‘border-collapse’</strong> (@mrobinson, @Loirooriol, #32309)</li>
@@ -218,12 +218,16 @@
 <figure class="_figl"><a href="/blog-may-2024/img/blog/empty-cells.png"><img src="/blog-may-2024/img/blog/empty-cells.png"
     alt="Two pixel art smileys made from table cells, one with magenta eyes and background"></a>
 <figcaption>Left: ‘empty-cells: show’.<br>Right: ‘empty-cells: hide’.</figcaption></figure>
-<p><span class=_floatmin></span>Several DOM properties are now supported:</p>
+<p><span class=_floatmin></span>Several DOM properties are now accessible, which should improve compatibility with scripts even though their effects are not yet implemented:</p>
 <ul>
 <li><code>value</code>, <code>min</code>, <code>max</code>, <code>low</code>, <code>high</code>, and <code>optimum</code> on HTMLMeterElement (@shanehandley, #32230)</li>
 <li><code>autofocus</code> on HTMLElement and SVGElement, via HTMLOrSVGElement (@nolanlawson, #32170)</li>
 <li><code>role</code> and 43 other ARIA string properties on Element (@nolanlawson, #32080)</li>
 </ul>
+<!--
+data:text/html,<meter value=.5>
+data:text/html,<input autofocus><script>setInterval(()=>{document.title=document.activeElement},100)</script>
+-->
 <p>We’ve also landed the first patch towards making Servo’s <strong>event loop comply with the HTML spec</strong> (@gterzian, #31505).
 This will hopefully address some complex timing issues between the renderer and other kinds of tasks like requestAnimationFrame and ResizeObserver callbacks.</p>
 <p>Together with correct sizing for <strong>floating tables</strong> (@Loirooriol, #32150) and <strong>empty list items</strong> (@mrobinson, @Loirooriol, #32152), as well as correct <strong>‘line-height’ based on the first font</strong> (@mrobinson, #32165), Servo has made some big strides in the Web Platform Tests this month:</p>
@@ -267,7 +271,7 @@ This will hopefully address some complex timing issues between the renderer and 
 </tr>
 </tbody>
 </table>
-<figcaption>Overview of color emoji support by format and platform.</figcaption>
+<figcaption>Overview of Servo’s current color emoji support by format and platform.</figcaption>
 </figure>
 <p>Servo now supports the <strong>‘font-weight’</strong>, <strong>‘font-style’</strong>, <strong>‘font-stretch’</strong>, and <strong>‘unicode-range’ descriptors</strong> in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly selecting the nearest weights and styles (@mrobinson, @mukilan, #32366).</p>
 <p>We also now support <strong>font fallback on OpenHarmony</strong> (@jschwe, #32141), and <strong>bitmap color emoji</strong> on Linux and macOS (@mrobinson, #32203, #32278).
