@@ -123,7 +123,7 @@ Donations on Open Collective give Servo around 80% to 90%, depending on the amou
 Recordings are now available for two of our most recent talks:
 
 - [**A year of Servo reboot: where are we now?**](https://www.youtube.com/watch?v=RdtlD_7JAs8) ([slides](https://servo.org/slides/2024-04-16-open-source-summit-NA/)) by Rakhi Sharma, at [Open Source Summit North America](https://events.linuxfoundation.org/open-source-summit-north-america/)
-- [**Modular Servo: Three Paths Forward**](https://www.youtube.com/watch?v=EA_1jxzR85M) (slides available soon) by Gregory Terzian, at [GOSIM Conference 2024](https://europe2024.gosim.org/schedule#mobile-and-web-app)
+- [**Modular Servo: Three Paths Forward**](https://www.youtube.com/watch?v=EA_1jxzR85M) ([slides](/slides/2024-05-06-modular-servo.pdf)) by Gregory Terzian, at [GOSIM Conference 2024](https://europe2024.gosim.org/schedule#mobile-and-web-app)
 
 <!--
 - donations 1630/month
