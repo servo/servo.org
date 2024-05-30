@@ -13,12 +13,12 @@ categories:
 
 <span class=_floatmin></span>Servo now supports several CSS features in its nightly builds:
 
-- as of 2024-04-29, **‘start’**, **‘end’**, and **‘space-evenly’** values in **‘align-content’** and **‘justify-content’** (@nicoburns, #31724), in flexbox layouts when the experimental feature is enabled (`--pref layout.flexbox.enabled`)
-- as of 2024-04-30, **‘white-space-collapse’**, **‘text-wrap-mode’**, and the new **‘white-space’** shorthand (@Loirooriol, #32146)
-- as of 2024-05-03, **‘ch’** and **‘ic’ font-relative units** (@andreubotella, #32171)
-- as of 2024-05-19, basic support for **‘border-collapse’** (@mrobinson, @Loirooriol, #32309)
-- as of 2024-05-22, **‘empty-cells’** (@Loirooriol, #32331)
-- as of 2024-05-22, **‘visibility: collapse’** on table parts (@Loirooriol, @mrobinson, #32333)
+- as of 2024-04-29, **‘start’**, **‘end’**, and **‘space-evenly’** values in **‘align-content’** and **‘justify-content’** ([@nicoburns](https://github.com/nicoburns), [#31724](https://github.com/servo/servo/pull/31724)), in flexbox layouts when the experimental feature is enabled (`--pref layout.flexbox.enabled`)
+- as of 2024-04-30, **‘white-space-collapse’**, **‘text-wrap-mode’**, and the new **‘white-space’** shorthand ([@Loirooriol](https://github.com/Loirooriol), [#32146](https://github.com/servo/servo/pull/32146))
+- as of 2024-05-03, **‘ch’** and **‘ic’ font-relative units** ([@andreubotella](https://github.com/andreubotella), [#32171](https://github.com/servo/servo/pull/32171))
+- as of 2024-05-19, basic support for **‘border-collapse’** ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#32309](https://github.com/servo/servo/pull/32309))
+- as of 2024-05-22, **‘empty-cells’** ([@Loirooriol](https://github.com/Loirooriol), [#32331](https://github.com/servo/servo/pull/32331))
+- as of 2024-05-22, **‘visibility: collapse’** on table parts ([@Loirooriol](https://github.com/Loirooriol), [@mrobinson](https://github.com/mrobinson), [#32333](https://github.com/servo/servo/pull/32333))
 
 <figure class="_figl"><a href="{{ '/img/blog/empty-cells.png' | url }}"><img src="{{ '/img/blog/empty-cells.png' | url }}"
     alt="Two pixel art smileys made from table cells, one with magenta eyes and background"></a>
@@ -26,14 +26,14 @@ categories:
 
 <span class=_floatmin></span>Several DOM properties are now accessible, which should improve compatibility with scripts even though their effects are not yet implemented:
 
-- `value`, `min`, `max`, `low`, `high`, and `optimum` on HTMLMeterElement (@shanehandley, #32230)
-- `autofocus` on HTMLElement and SVGElement, via HTMLOrSVGElement (@nolanlawson, #32170)
-- `role` and 43 other ARIA string properties on Element (@nolanlawson, #32080)
+- `value`, `min`, `max`, `low`, `high`, and `optimum` on HTMLMeterElement ([@shanehandley](https://github.com/shanehandley), [#32230](https://github.com/servo/servo/pull/32230))
+- `autofocus` on HTMLElement and SVGElement, via HTMLOrSVGElement ([@nolanlawson](https://github.com/nolanlawson), [#32170](https://github.com/servo/servo/pull/32170))
+- `role` and 43 other ARIA string properties on Element ([@nolanlawson](https://github.com/nolanlawson), [#32080](https://github.com/servo/servo/pull/32080))
 
-We’ve also landed the first patch towards making Servo’s **event loop comply with the HTML spec** (@gterzian, #31505).
+We’ve also landed the first patch towards making Servo’s **event loop comply with the HTML spec** ([@gterzian](https://github.com/gterzian), [#31505](https://github.com/servo/servo/pull/31505)).
 This will hopefully address some complex timing issues between the renderer and other kinds of tasks like requestAnimationFrame and ResizeObserver callbacks.
 
-Together with correct sizing for **floating tables** (@Loirooriol, #32150) and **empty list items** (@mrobinson, @Loirooriol, #32152), as well as correct **‘line-height’ based on the first font** (@mrobinson, #32165), Servo has made some big strides in the Web Platform Tests this month:
+Together with correct sizing for **floating tables** ([@Loirooriol](https://github.com/Loirooriol), [#32150](https://github.com/servo/servo/pull/32150)) and **empty list items** ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#32152](https://github.com/servo/servo/pull/32152)), as well as correct **‘line-height’ based on the first font** ([@mrobinson](https://github.com/mrobinson), [#32165](https://github.com/servo/servo/pull/32165)), Servo has made some big strides in the Web Platform Tests this month:
 
 - 90.8% (+1.6pp) in the **CSS2 floats** tests
 - 68.7% (+5.7pp) in the **CSS2 and CSS tables** tests
@@ -53,13 +53,13 @@ Together with correct sizing for **floating tables** (@Loirooriol, #32150) and *
 <figcaption>Overview of Servo’s current color emoji support by format and platform.</figcaption>
 </figure>
 
-<span class=_floatmin></span>Servo now supports the **‘font-weight’**, **‘font-style’**, **‘font-stretch’**, and **‘unicode-range’ descriptors** in @font-face, correctly matching fonts split by ‘unicode-range’ (@mrobinson, @mukilan, #32164) and correctly selecting the nearest weights and styles (@mrobinson, @mukilan, #32366).
+<span class=_floatmin></span>Servo now supports the **‘font-weight’**, **‘font-style’**, **‘font-stretch’**, and **‘unicode-range’ descriptors** in [@font-face](https://github.com/font-face), correctly matching fonts split by ‘unicode-range’ ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#32164](https://github.com/servo/servo/pull/32164)) and correctly selecting the nearest weights and styles ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#32366](https://github.com/servo/servo/pull/32366)).
 
-We also now support **font fallback on OpenHarmony** (@jschwe, #32141), and **bitmap color emoji** on Linux and macOS (@mrobinson, #32203, #32278).
+We also now support **font fallback on OpenHarmony** ([@jschwe](https://github.com/jschwe), [#32141](https://github.com/servo/servo/pull/32141)), and **bitmap color emoji** on Linux and macOS ([@mrobinson](https://github.com/mrobinson), [#32203](https://github.com/servo/servo/pull/32203), [#32278](https://github.com/servo/servo/pull/32278)).
 Note that the layered `COLR` format is not yet supported, and that on macOS, we currently only support `sbix` (like in Apple Color Emoji), not `CBDT` (like in Noto Color Emoji).
 
-Our [font system rework](https://github.com/servo/servo/issues/32033) continues, **saving up to 40 MB of memory** when loading servo.org by sharing font data and metadata across threads (@mrobinson, @mukilan, #32205).
-We’ve fixed a bug where web fonts in one document can **clobber fonts with the same name** in other documents (@mrobinson, @mukilan, #32303), and a bug where the **font cache leaks unused web fonts** (@mrobinson, @mukilan, #32346).
+Our [font system rework](https://github.com/servo/servo/issues/32033) continues, **saving up to 40 MB of memory** when loading servo.org by sharing font data and metadata across threads ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#32205](https://github.com/servo/servo/pull/32205)).
+We’ve fixed a bug where web fonts in one document can **clobber fonts with the same name** in other documents ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#32303](https://github.com/servo/servo/pull/32303)), and a bug where the **font cache leaks unused web fonts** ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#32346](https://github.com/servo/servo/pull/32346)).
 
 ## servoshell changes
 
@@ -67,28 +67,28 @@ We’ve fixed a bug where web fonts in one document can **clobber fonts with the
     alt="servoshell showing the URL of a hovered link at the bottom of the window."></a>
 <figcaption>servoshell now shows the URL of hovered links near the bottom of the window.</figcaption></figure>
 
-<span class=_floatmin></span>servoshell now **handles all known keycodes**, passing them to Servo where appropriate (@Nopey, #32228), goes back and forward when **pressing the mouse side buttons** (@Nopey, #32283), and shows the link URL in a **status tooltip when hovering over links** (@iterminatorheart, @atbrakhi, #32011).
+<span class=_floatmin></span>servoshell now **handles all known keycodes**, passing them to Servo where appropriate ([@Nopey](https://github.com/Nopey), [#32228](https://github.com/servo/servo/pull/32228)), goes back and forward when **pressing the mouse side buttons** ([@Nopey](https://github.com/Nopey), [#32283](https://github.com/servo/servo/pull/32283)), and shows the link URL in a **status tooltip when hovering over links** ([@iterminatorheart](https://github.com/iterminatorheart), [@atbrakhi](https://github.com/atbrakhi), [#32011](https://github.com/servo/servo/pull/32011)).
 
-Adding support for the mouse side buttons required a winit upgrade, but we ultimately ended up embarking on a three-month overhaul to upgrade a bunch of other deps (@Nopey, @mrobinson, #31278), including egui, glow, nix, raqote, font-kit, harfbuzz-sys, core-graphics, core-text, raw-window-handle, and jni (@delan, @mrobinson, @mukilan, #32216)!
+Adding support for the mouse side buttons required a winit upgrade, but we ultimately ended up embarking on a three-month overhaul to upgrade a bunch of other deps ([@Nopey](https://github.com/Nopey), [@mrobinson](https://github.com/mrobinson), [#31278](https://github.com/servo/servo/pull/31278)), including egui, glow, nix, raqote, font-kit, harfbuzz-sys, core-graphics, core-text, raw-window-handle, and jni ([@delan](https://github.com/delan), [@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#32216](https://github.com/servo/servo/pull/32216))!
 
-This in turn involved upgrading those deps in surfman (@Nopey, surfman#275, surfman#280, surfman#283), font-kit (@Nopey, font-kit#234), and webrender (@Nopey, webrender#4838), as well as several improvements being contributed upstream:
+This in turn involved upgrading those deps in surfman ([@Nopey](https://github.com/Nopey), [surfman#275](https://github.com/servo/surfman/pull/275), [surfman#280](https://github.com/servo/surfman/pull/280), [surfman#283](https://github.com/servo/surfman/pull/283)), font-kit ([@Nopey](https://github.com/Nopey), [font-kit#234](https://github.com/servo/font-kit/pull/234)), and webrender ([@Nopey](https://github.com/Nopey), [webrender#4838](https://github.com/servo/webrender/pull/4838)), as well as several improvements being contributed upstream:
 
-- servoshell no longer throws **spurious GL_INVALID_ENUM errors on Windows** (@Nopey, emilk/egui#3994)
-- harfbuzz now builds on Windows when using clang-cl (@Nopey, harfbuzz/harfbuzz#4585, rust-harfbuzz#248, rust-harfbuzz#253)
-- egui_glow no longer has to depend on an outdated version of raw-window-handle (@Nopey, emilk/egui#4036)
-- raqote now depends on the latest version of font-kit (@Nopey, jrmuizel/raqote#200)
+- servoshell no longer throws **spurious GL_INVALID_ENUM errors on Windows** ([@Nopey](https://github.com/Nopey), [emilk/egui#3994](https://github.com/emilk/egui/pull/3994))
+- harfbuzz now builds on Windows when using clang-cl ([@Nopey](https://github.com/Nopey), [harfbuzz/harfbuzz#4585](https://github.com/harfbuzz/harfbuzz/pull/4585), [rust-harfbuzz#248](https://github.com/servo/rust-harfbuzz/pull/248), [rust-harfbuzz#253](https://github.com/servo/rust-harfbuzz/pull/253))
+- egui_glow no longer has to depend on an outdated version of raw-window-handle ([@Nopey](https://github.com/Nopey), [emilk/egui#4036](https://github.com/emilk/egui/pull/4036))
+- raqote now depends on the latest version of font-kit ([@Nopey](https://github.com/Nopey), [jrmuizel/raqote#200](https://github.com/jrmuizel/raqote/pull/200))
 
 ## Other changes
 
-Servo for Android **now builds on aarch64** (@mukilan, #32137), **no longer crashes on startup** (@mukilan, #32273), and now supports the **SpiderMonkey JIT on 64-bit builds** (@mukilan, #31134).
+Servo for Android **now builds on aarch64** ([@mukilan](https://github.com/mukilan), [#32137](https://github.com/servo/servo/pull/32137)), **no longer crashes on startup** ([@mukilan](https://github.com/mukilan), [#32273](https://github.com/servo/servo/pull/32273)), and now supports the **SpiderMonkey JIT on 64-bit builds** ([@mukilan](https://github.com/mukilan), [#31134](https://github.com/servo/servo/pull/31134)).
 
-Servo should no longer cause intermittent errors and **panics when exiting** (@mrobinson, #32207), and **ShowWebView** no longer fails if sent too quickly after a webview is created (@wusyong, #32163).
+Servo should no longer cause intermittent errors and **panics when exiting** ([@mrobinson](https://github.com/mrobinson), [#32207](https://github.com/servo/servo/pull/32207)), and **ShowWebView** no longer fails if sent too quickly after a webview is created ([@wusyong](https://github.com/wusyong), [#32163](https://github.com/servo/servo/pull/32163)).
 
 We’ve also landed several dev changes:
 
-- You can now pass `--skip-platform` to `mach bootstrap` to **install taplo and crown only** (@mrobinson, #32176)
-- `mach build` **no longer fails on Windows** due to `STATUS_DLL_NOT_FOUND` in crown (@sagudev, #32301)
-- `mach build` **no longer fails on Windows Server 2019** due to `UnsupportedPlatform` in notifypy (@delan, #32352)
+- You can now pass `--skip-platform` to `mach bootstrap` to **install taplo and crown only** ([@mrobinson](https://github.com/mrobinson), [#32176](https://github.com/servo/servo/pull/32176))
+- `mach build` **no longer fails on Windows** due to `STATUS_DLL_NOT_FOUND` in crown ([@sagudev](https://github.com/sagudev), [#32301](https://github.com/servo/servo/pull/32301))
+- `mach build` **no longer fails on Windows Server 2019** due to `UnsupportedPlatform` in notifypy ([@delan](https://github.com/delan), [#32352](https://github.com/servo/servo/pull/32352))
 
 ## Donations
 
