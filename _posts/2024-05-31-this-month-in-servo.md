@@ -121,7 +121,7 @@ Recordings are now available for three recent talks about Servo:
 - [**Modular Servo: Three Paths Forward**](https://www.youtube.com/watch?v=EA_1jxzR85M) ([slides](/files/2024-05-06-modular-servo.pdf)) by Gregory Terzian, at [GOSIM Conference 2024](https://europe2024.gosim.org/schedule#mobile-and-web-app)
 - A talk that discusses [**porting Servo to OpenHarmony OS**](https://www.youtube.com/watch?v=MOhxXhUmgPM) ([slides](/files/2024-05-06-openharmony-os-for-next-gen-mobile.pdf)) by Jonathan Schwender, at [GOSIM Conference 2024](https://europe2024.gosim.org/schedule#mobile-and-web-app)
 
-We’ll also be running a [**Servo breakout session**](https://github.com/Igalia/webengineshackfest/issues/28) at the [Web Engines Hackfest 2024](https://webengineshackfest.org) in A Coruña on **4 June** at **15:00 local time** (09:00 UTC).
+We’ll also be running a [**Servo breakout session**](https://github.com/Igalia/webengineshackfest/issues/28) at the [Web Engines Hackfest 2024](https://webengineshackfest.org) in A Coruña on **4 June** at **15:00 local time** (13:00 UTC).
 **Remote participation is welcome!**
 
 <style>
