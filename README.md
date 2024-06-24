@@ -17,8 +17,14 @@ $ tools/list-commits-by-nightly.sh /path/to/servo
 ## How to list this year’s pull request contributors
 
 ```sh
-$ > 2023.json tools/list-pull-requests.sh servo/servo '2023-.*'
+$ > 2023.json tools/list-pull-requests.sh servo/servo 2023 2023
 $ < 2023.json jq -r .user.login | sort | uniq -c | sort -nr
+```
+
+Or for some other range of dates:
+
+```sh
+$ > pull-requests.json tools/list-pull-requests.sh servo/servo 2023-03-16 2024-03-16
 ```
 
 ## How to analyse WPT pass rate improvements
