@@ -43,6 +43,15 @@ i=1; while :; do
   #  (c) in .updated_at order >:(
   gh api '/repos/'"$org_repo_slug"'/pulls?state=closed&sort=updated&direction=desc&per_page=100&page='$i > out.json
 
+  # Filter the results by the given .merged_at range.
+  #
+  # Note that in both jq scripts, we compare date strings lexicographically,
+  # which is safe for RFC 3339 timestamps. Converting them to instants with
+  # `fromdateiso8601` means the $from_date and $to_date expansion code above
+  # would need to know which years are leap years or have leap seconds.
+  jq -r --arg from_date "$from_date" --arg to_date "$to_date" \
+    '.[] | select($from_date <= .merged_at and .merged_at <= $to_date)' out.json
+
   # If .updated_at was always equal to .merged_at, then the results would indeed
   # be in .merged_at order, but .updated_at can be greater than .merged_at if it
   # gets bumped by comments or branch deletions, sometimes *years* later. As a
@@ -61,15 +70,6 @@ i=1; while :; do
   if [ "$(jq -r --arg from_date "$from_date" 'map(select(.updated_at < $from_date)) | length' out.json)" -gt 0 ]; then
     >&2 echo done
     break
-  else
-    # Filter the results by the given .merged_at range.
-    #
-    # Note that in both jq scripts, we compare date strings lexicographically,
-    # which is safe for RFC 3339 timestamps. Converting them to instants with
-    # `fromdateiso8601` means the $from_date and $to_date expansion code above
-    # would need to know which years are leap years or have leap seconds.
-    jq -r --arg from_date "$from_date" --arg to_date "$to_date" \
-      '.[] | select($from_date <= .merged_at and .merged_at <= $to_date)' out.json
   fi
 
   i=$((i+1))
