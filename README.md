@@ -91,3 +91,24 @@ To avoid false positives, be sure to step through each replacement rather than u
 - Replace ` #([0-9]+)` with ` [#$1](https://github.com/servo/servo/pull/$1)`
 - Replace ` ([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1#$2](https://github.com/servo/$1/pull/$2)`
 - Replace ` ([0-9A-Za-z_.-]+)/([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1/$2#$3](https://github.com/$1/$2/pull/$3)`
+
+## Triaging commits in nightlies for monthly updates
+
+Generally we want to include...
+
+- gecko upgrades (stylo, webrender, mozjs)
+- web-facing changes
+- DX-affecting CI changes
+- MSRV and Rust edition changes
+- platform support changes
+- platform bustage fixes
+- crash fixes
+
+And generally we want to exclude...
+
+- dependabot updates (“build(deps)”)
+- WPT imports (“Update web-platform-tests”)
+- lint and warning fixes
+- other CI changes
+- refactors (unless large-scale)
+- dependency cleanups
