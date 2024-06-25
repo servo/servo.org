@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>This month in Servo: gamepad support, font fallback, Space Jam, and more! - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine</title>
+  <meta property="og:title" content="This month in Servo: gamepad support, font fallback, Space Jam, and more! - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine">
+  
+
+  
+  <meta name="description" content="Big strides in tables and layout architecture, a new CSS2 milestone, dev changes in WebRender and Stylo, plus console, canvas, and CSSOM improvements.">
+  <meta name="og:description" content="Big strides in tables and layout architecture, a new CSS2 milestone, dev changes in WebRender and Stylo, plus console, canvas, and CSSOM improvements.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/blog-june-2024/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/blog-june-2024/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/blog-june-2024/blog/2024/02/28/gamepads-font-fallback-space-jam/">
+
+  <link rel="stylesheet" href="/blog-june-2024/css/style.css">
+  <link rel="shortcut icon" href="/blog-june-2024/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog-june-2024/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/blog-june-2024/">
+        <img src="/blog-june-2024/img/servo-color-negative-no-container.png" alt="This month in Servo: gamepad support, font fallback, Space Jam, and more!">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              Get Involved
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/blog-june-2024/contributing/">
+                  Contributing
+                </a>
+              
+                <a class="navbar-item" href="https://github.com/servo/servo/wiki" target="_blank">
+                  Wiki
+                </a>
+              
+                <a class="navbar-item" href="https://wpt.servo.org/" target="_blank">
+                  WPT pass rates
+                </a>
+              
+                <a class="navbar-item" href="/blog-june-2024/coc/">
+                  Code of Conduct
+                </a>
+              
+            </div>
+          </div>
+        
+      
+        
+        
+          <a class="navbar-item" href="/blog-june-2024/download/">
+            Download
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="/blog-june-2024/blog/">
+            Blog
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="https://demo.servo.org/" target="_blank">
+            Demos
+          </a>
+        
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              About
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/blog-june-2024/about/">
+                  About Servo
+                </a>
+              
+                <a class="navbar-item" href="/blog-june-2024/governance/">
+                  Governance
+                </a>
+              
+                <a class="navbar-item" href="/blog-june-2024/sponsorship/">
+                  Sponsorship
+                </a>
+              
+                <a class="navbar-item" href="/blog-june-2024/acknowledgements/">
+                  Acknowledgements
+                </a>
+              
+            </div>
+          </div>
+        
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <aside class="menu box">
+            <p class="menu-label">
+              This month in Servo: gamepad support, font fallback, Space Jam, and more!
+            </p>
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+          </aside>
+          <div class="content">
+            
+<h1 class="title">This month in Servo: gamepad support, font fallback, Space Jam, and more!</h1>
+<p class="subtitle"><span class="tag is-dark">2024-02-28</span> Big strides in tables and layout architecture, a new CSS2 milestone, dev changes in WebRender and Stylo, plus console, canvas, and CSSOM improvements.</p>
+
+<div class="has-top-margin">
+  <figure class="_figr"><a href="/blog-june-2024/img/blog/font-fallback.png"><img src="/blog-june-2024/img/blog/font-fallback.png"
+    alt="Servo nightly showing Chinese, Japanese, and Korean Wikipedia with working font fallback"></a>
+<figcaption>Font fallback now works for Chinese, Japanese, and Korean.</figcaption></figure>
+<p><a href="https://wpt.servo.org">A couple of weeks ago</a>, Servo surpassed its legacy layout engine in a core set of CSS2 test suites (84.2% vs 82.8% in legacy), but now we’ve <strong>surpassed legacy in the whole CSS test suite</strong> (63.6% vs 63.5%) as well!
+More on how we got there in a bit, but first let’s talk about new API support:</p>
+<ul>
+<li>as of 2024-02-07, you can safely <strong>console.log() symbols and large arrays</strong> (<a href="https://github.com/syvb">@syvb</a>, <a href="https://github.com/servo/servo/pull/31241">#31241</a>, <a href="https://github.com/servo/servo/pull/31267">#31267</a>)</li>
+<li>as of 2024-02-07, we support <strong>CanvasRenderingContext2D.reset()</strong> (<a href="https://github.com/syvb">@syvb</a>, <a href="https://github.com/servo/servo/pull/31258">#31258</a>)</li>
+<li>as of 2024-02-08, we support <strong>navigator.hardwareConcurrency</strong> (<a href="https://github.com/syvb">@syvb</a>, <a href="https://github.com/servo/servo/pull/31268">#31268</a>)</li>
+<li>as of 2024-02-11, you can look up <strong>shorthands like ‘margin’ in getComputedStyle()</strong> (<a href="https://github.com/sebsebmc">@sebsebmc</a>, <a href="https://github.com/servo/servo/pull/31277">#31277</a>)</li>
+<li>as of 2024-02-15, we accept SVG with the <strong>image/svg+xml mime type</strong> (<a href="https://github.com/KiChjang">@KiChjang</a>, <a href="https://github.com/servo/servo/pull/31318">#31318</a>)</li>
+<li>as of 2024-02-20, we support non-XR <strong>game controllers with the Gamepad API</strong> (<a href="https://github.com/msub2">@msub2</a>, <a href="https://github.com/servo/servo/pull/31200">#31200</a>)</li>
+<li>as of 2024-02-23, we have basic support for <strong>‘text-transform’</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/atbrakhi">@atbrakhi</a>, <a href="https://github.com/servo/servo/pull/31396">#31396</a>)
+<br>— except ‘full-width’, ‘full-size-kana’, grapheme clusters, and language-specific transforms</li>
+</ul>
+<p>As of 2024-02-12, we have basic support for <strong>font fallback</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31254">#31254</a>)!
+This is especially important for pages that mix text from different languages.
+More work is needed to support shaping across element boundaries and shaping complex scripts like Arabic, but the current version should be enough for Chinese, Japanese, and Korean.
+If you encounter text that still fails to display, be sure to check your installed fonts against the page styles and Servo’s default font lists (<a href="https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/windows/font_list.rs">Windows</a>, <a href="https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/macos/font_list.rs">macOS</a>, <a href="https://github.com/servo/servo/blob/304ab9b09c0beace5ac08c073c957060621d4056/components/gfx/platform/freetype/font_list.rs">Linux</a>).</p>
+<figure class="_figl"><a href="/blog-june-2024/img/blog/space-jam.png"><img src="/blog-june-2024/img/blog/space-jam.png"
+    alt="Servo nightly showing the Space Jam (1996) website with its table-based menu correctly laid out"></a>
+<figcaption>
+<p><a href="https://www.spacejam.com/1996/">Space Jam (1996)</a> now has correct layout with <code>--pref layout.tables.enabled</code>.</figcaption></figure></p>
+<p>As of 2024-02-24, <strong>layout now runs in the script thread</strong>, rather than in a dedicated layout thread (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/servo/servo/pull/31346">#31346</a>), though it can still spawn worker threads to parallelise layout work.
+Since the web platform almost always requires layout to run synchronously with script, this should allow us to make layout simpler and more reliable without regressing performance.</p>
+<p>Our experimental <strong>tables support</strong> (<code>--pref layout.tables.enabled</code>) has vastly improved:</p>
+<ul>
+<li>as of 2024-01-26, we compute <strong>table column widths</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/Loiroriol">@Loiroriol</a>, <a href="https://github.com/servo/servo/pull/31165">#31165</a>)</li>
+<li>as of 2024-01-30, we support the <strong>&lt;table cellpadding&gt; attribute</strong> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/31201">#31201</a>)</li>
+<li>as of 2024-02-11, we support <strong>‘vertical-align’ in table cells</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/31246">#31246</a>)</li>
+<li>as of <!-- 2024-01-27 --> 2024-02-14, we support <strong>‘border-spacing’ on tables</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/31166">#31166</a>, <a href="https://github.com/servo/servo/pull/31337">#31337</a>)</li>
+<li>as of 2024-02-21, we support <strong>rows, columns, and row/column groups</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/31341">#31341</a>)</li>
+</ul>
+<p>Together with inline layout for <strong>&lt;div align&gt; and &lt;center&gt;</strong> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/31388">#31388</a>) landing in 2024-02-24, we now render the classic <strong><a href="https://www.spacejam.com/1996/">Space Jam</a></strong> website correctly when tables are enabled!</p>
+<p>As of 2024-02-24, we support <strong>videos with autoplay</strong> (<a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/servo/servo/pull/31412">#31412</a>), and windows containing <strong>videos no longer crash</strong> when closed (<a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/servo/servo/pull/31413">#31413</a>).</p>
+<p>Many layout and CSS bugs have also been fixed:</p>
+<ul>
+<li>as of 2024-01-28, correct <strong>rounding of clientLeft, clientTop, clientWidth, and clientHeight</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31187">#31187</a>)</li>
+<li>as of 2024-01-30, correct <strong>cache invalidation of client{Left,Top,Width,Height} after reflow</strong> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/31210">#31210</a>, <a href="https://github.com/servo/servo/pull/31219">#31219</a>)</li>
+<li>as of 2024-02-03, correct <strong>width and height for preloaded Image objects</strong> (<a href="https://github.com/syvb">@syvb</a>, <a href="https://github.com/servo/servo/pull/31253">#31253</a>)</li>
+<li>as of 2024-02-07, correct <strong>[...spreading] and indexing[0] of style objects</strong> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/31299">#31299</a>)</li>
+<li>as of 2024-02-09, correct <strong>border widths in fragmented inlines</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31292">#31292</a>)</li>
+<li>as of 2024-02-11, correct <strong>UA styles for &lt;hr&gt;</strong> (<a href="https://github.com/sebsebmc">@sebsebmc</a>, <a href="https://github.com/servo/servo/pull/31297">#31297</a>)</li>
+<li>as of 2024-02-24, correct <strong>positioning of absolutes with ‘inset: auto’</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31418">#31418</a>)</li>
+</ul>
+<h2 id="embedding%2C-code-health%2C-and-dev-changes" tabindex="-1">Embedding, code health, and dev changes <a class="header-anchor" href="#embedding%2C-code-health%2C-and-dev-changes">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We’ve landed a few embedding improvements:</p>
+<ul>
+<li>we’ve removed several mandatory <code>WindowMethods</code> relating to OpenGL video playback (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31209">#31209</a>)</li>
+<li>we’ve removed <code>webrender_surfman</code>, and <code>WebrenderSurfman</code> is now in <code>gfx</code> as <code>RenderingContext</code> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31184">#31184</a>)</li>
+</ul>
+<p>We’ve finished migrating our DOM bindings to use typed arrays where possible (<a href="https://github.com/Taym95">@Taym95</a>, <a href="https://github.com/servo/servo/pull/31145">#31145</a>, <a href="https://github.com/servo/servo/pull/31164">#31164</a>, <a href="https://github.com/servo/servo/pull/31167">#31167</a>, <a href="https://github.com/servo/servo/pull/31189">#31189</a>, <a href="https://github.com/servo/servo/pull/31202">#31202</a>, <a href="https://github.com/servo/servo/pull/31317">#31317</a>, <a href="https://github.com/servo/servo/pull/31325">#31325</a>), as part of an effort to <strong>reduce our unsafe code surface</strong> (<a href="https://github.com/servo/servo/issues/30889">#30889</a>, <a href="https://github.com/servo/servo/issues/30862">#30862</a>).</p>
+<p><a href="https://github.com/servo/webrender">WebRender</a> and <a href="https://github.com/servo/stylo">Stylo</a> are two major components of Servo that have been adopted by Firefox, making Servo’s versions of them a downstream fork.
+To make these forks easier to update, we’ve <strong>split WebRender and Stylo out of <a href="https://github.com/servo/servo">our main repo</a></strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/31212">#31212</a>, <a href="https://github.com/servo/servo/pull/31351">#31351</a>, <a href="https://github.com/servo/servo/pull/31349">#31349</a>, <a href="https://github.com/servo/servo/pull/31358">#31358</a>, <a href="https://github.com/servo/servo/pull/31363">#31363</a>, <a href="https://github.com/servo/servo/pull/31365">#31365</a>, <a href="https://github.com/servo/servo/pull/31408">#31408</a>, <a href="https://github.com/servo/servo/pull/31387">#31387</a>, <a href="https://github.com/servo/servo/pull/31411">#31411</a>, <a href="https://github.com/servo/servo/pull/31350">#31350</a>).</p>
+<p>We’ve fixed one of the blockers for building Servo with clang 16 (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31306">#31306</a>), but a blocker for clang 15 still remains.
+See <a href="https://github.com/servo/servo/issues/31059">#31059</a> for more details, including how to build Servo against clang 14.</p>
+<p>We’ve also made some other dev changes:</p>
+<ul>
+<li>we’ve removed the unmaintained <strong>libsimpleservo C API</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31172">#31172</a>), though we’re open to adding a new C API someday</li>
+<li>we’ve upgraded <strong>surfman</strong> such that it <strong>no longer depends on winit</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31224">#31224</a>)</li>
+<li>we’ve added support for building Servo on <strong>Asahi Linux</strong> (<a href="https://github.com/arrynfr">@arrynfr</a>, <a href="https://github.com/servo/servo/pull/31207">#31207</a>)</li>
+<li>we’ve fixed problems building Servo on <strong>Debian</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/atbrakhi">@atbrakhi</a>, <a href="https://github.com/servo/servo/pull/31281">#31281</a>, <a href="https://github.com/servo/servo/pull/31276">#31276</a>) and <strong>NixOS</strong> (<a href="https://github.com/syvb">@syvb</a>, <a href="https://github.com/servo/servo/pull/31231">#31231</a>)</li>
+<li>we’ve fixed failures when <strong>starting multiple CI try jobs</strong> at once (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31347">#31347</a>)</li>
+<li>we’ve made several improvements to <strong>mach try</strong> for starting CI try jobs (<a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31141">#31141</a>, <a href="https://github.com/servo/servo/pull/31290">#31290</a>)</li>
+</ul>
+<h2 id="conference-talks" tabindex="-1">Conference talks <a class="header-anchor" href="#conference-talks">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Rakhi Sharma will <a href="https://ossna2024.sched.com/event/1aBNF/a-year-of-servo-reboot-where-are-we-now-rakhi-sharma-igalia"><strong>speak about Servo’s achievements</strong></a> at <a href="https://events.linuxfoundation.org/open-source-summit-north-america/">Open Source Summit North America</a> on <strong>16 April 2024</strong> at <strong>14:15 local time</strong> (21:15 UTC).</p>
+<p>In the meantime, check out Rakhi’s recent talk <a href="https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/"><em>Embedding Servo in Rust projects</em></a>, which she gave at <a href="https://fosdem.org/2024/">FOSDEM 2024</a> on 3 February 2024.
+Here you’ll learn about the state of the art around embedding Servo and Stylo, including a walkthrough of our example browser <em>servoshell</em>, our ongoing effort to <a href="/blog-june-2024/blog/2024/01/19/embedding-update/">integrate Servo with Tauri</a>, and a sneak peek into how Stylo might someday be usable with <a href="https://dioxuslabs.com">Dioxus</a>:</p>
+<figure class="_fig">
+    <video controls>
+        <source src="https://video.fosdem.org/2024/h1308/fosdem-2024-2321-embedding-servo-in-rust-projects.av1.webm" type='video/webm; codecs="av01.0.08M.08.0.110.01.01.01.0"' />
+        <source src="https://video.fosdem.org/2024/h1308/fosdem-2024-2321-embedding-servo-in-rust-projects.mp4" type='video/mp4' />
+        <p><a href="https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/">Embedding Servo in Rust projects</a> by Rakhi Sharma at FOSDEM 2024</p>
+    </video>
+</figure>
+<style>
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig > ._flex {
+        display: flex;
+    }
+    ._fig._min {
+        width: min-content;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+    }
+    ._figr {
+        float: right;
+    }
+    ._figl > figcaption,
+    ._figr > figcaption,
+    ._figl > iframe,
+    ._figr > iframe,
+    ._figl > video,
+    ._figr > video,
+    ._figl > a > img,
+    ._figr > a > img {
+        width: 21em;
+        max-width: 100%;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+</style>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog-june-2024/blog/">Back</a>
+</div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+  <div class="container" style="text-align: center;">
+    <a href="/blog-june-2024/coc/">Code of Conduct</a> |
+    Contact: <a href="mailto:info@servo.org">info@servo.org</a>,
+    <a href="https://servo.zulipchat.com/">Zulip Chat</a>,
+    <a href="https://github.com/servo/servo/discussions">GitHub Discussions</a>,
+    <a href="https://floss.social/@servo">Mastodon</a>,
+    <a href="https://twitter.com/ServoDev">Twitter</a>
+  </div>
+  <div class="container" style="text-align: center; font-size: 0.875em;">
+    <p><a href="https://linuxfoundation.eu"><img src="/blog-june-2024/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250" style="margin: 1em;"></a></p>
+    <p>&copy; 2024 The Servo Project Developers</p>
+    <p>Copyright &copy; Servo is a project of <a href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>
