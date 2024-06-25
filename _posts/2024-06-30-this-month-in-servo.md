@@ -11,16 +11,28 @@ categories:
 - ai policy
 - donations
 - upgrade mozjs 32510 stylo 32334
-- layout input 32365 break-spaces 32388
-- getComputedStyle width/height 32437
-- fonts spaces 32442 reflow 32455 leak 32545 windows 32499 ohos 32555 fallback 32463 32286 (+ emoji vs, monochrome emoji windows)
+- ResizeObserver 31108
+- HTMLImageElement decode() 31269
+- layout
+    - input 32365
+    - break-spaces 32388
+    - inline padding/border 32486
+    - abspos tables 32447
+    - table column width colspan 32458
+    - getComputedStyle width/height 32437
+    - offset queries tables/cells 32448
+    - <col span> in colgroup 32467
+    - collapse with rowspan 32469
+    - prepare for shaping across inline boxes 32483
+- fonts spaces 32442 reflow 32455 leak 32545 windows 32499 ohos 32555 fallback 32463 32286 (+ emoji vs, monochrome emoji windows) emoji vs/ep 32493
+- meta http-equiv parsing 32508
 - devtools 32475 32509
-- webgpu gles windows/linux 32452 backend pref dom.webgpu.wgpu_backend 32410
+- webgpu gles windows/linux 32452 backend pref dom.webgpu.wgpu_backend 32410 device lost no errors 32354
 - minibrowser fullscreen 32425 status 32518
     - servoshell split 32457
 - rust msrv 32217 edition 32544
 - panic multiprocess 32571
-- android busted 32532
+- android busted 32532 url bar 32422 start of merge into servoshell 32533
 - mac busted 32504
 - nixos busted 32567
 - openharmony 32507
@@ -82,8 +94,8 @@ categories:
     b178a2b6e2312a74f4a72781789c45a31ac164a7	https://github.com/servo/servo/pull/32462	build(deps): bump xkeysym from 0.2.0 to 0.2.1 (#32462)
     333630ae705bab3f3e309ac817c439f7fffd74c3	https://github.com/servo/servo/pull/32461	build(deps): bump cc from 1.0.98 to 1.0.99 (#32461)
     ceb6bc6743d3641960d7e42a943efafcb81fbf2e	https://github.com/servo/servo/pull/32460	build(deps): bump dtoa-short from 0.3.4 to 0.3.5 (#32460)
-d10d01757d3a69f0f7ac1635a72981c52708f8aa	https://github.com/servo/servo/pull/32458	Don't shrink table columns when handling cells with greater spanning (#32458)
-674edb4df06413cbfcb78b22457ae287647641ca	https://github.com/servo/servo/pull/32447	layout: Properly size absolutely positioned tables (#32447)
++   d10d01757d3a69f0f7ac1635a72981c52708f8aa	https://github.com/servo/servo/pull/32458	Don't shrink table columns when handling cells with greater spanning (#32458)
++   674edb4df06413cbfcb78b22457ae287647641ca	https://github.com/servo/servo/pull/32447	layout: Properly size absolutely positioned tables (#32447)
     764021751dc13fdc5db68c9f18cce69938dadb05	https://github.com/servo/servo/pull/32456	Add a workaround for actions/runner-images#10001 (#32456)
     bd14541b99fa8c324d7118d6d86149ae10a8e1a1	https://github.com/servo/servo/pull/32446	build(deps): bump xml5ever from 0.18.0 to 0.18.1 (#32446)
     ff73a5158a7cdf0093d9b0d2992e868ca32cd3c3	https://github.com/servo/servo/pull/32444	build(deps): bump etagere from 0.2.11 to 0.2.12 (#32444)
@@ -97,14 +109,14 @@ d10d01757d3a69f0f7ac1635a72981c52708f8aa	https://github.com/servo/servo/pull/324
 >>> 2024-06-11T06:02:47Z
     98057799aca2e82945419562ac634de942b1cc50	https://github.com/servo/servo/pull/32472	build(deps): bump regex-automata from 0.4.6 to 0.4.7 (#32472)
     59806309c9ead5e3a116926cb59eb5b71c5c16d5	https://github.com/servo/servo/pull/32470	build(deps): bump regex-syntax from 0.8.3 to 0.8.4 (#32470)
-f4c9b310d509155ec207f99426d9ba22dd8a06fd	https://github.com/servo/servo/pull/32448	layout: Take into account `display: table` etc in offset* queries (#32448)
++   f4c9b310d509155ec207f99426d9ba22dd8a06fd	https://github.com/servo/servo/pull/32448	layout: Take into account `display: table` etc in offset* queries (#32448)
 +   35bbcc0d9519411dd1112dece8df19ddca51276c	https://github.com/servo/servo/pull/32455	script: Remove explicit reflow for web font loads (#32455)
-e6ea4a9c298c02138938c27851ccf9cca0523f67	https://github.com/servo/servo/pull/32422	Android: fix url resolution (#32422)
-6f414df867cb8aea02dbc7009000096c17eeb3ab	https://github.com/servo/servo/pull/32467	Fix and unify 'span' attribute for table columns (#32467)
++   e6ea4a9c298c02138938c27851ccf9cca0523f67	https://github.com/servo/servo/pull/32422	Android: fix url resolution (#32422)
++   6f414df867cb8aea02dbc7009000096c17eeb3ab	https://github.com/servo/servo/pull/32467	Fix and unify 'span' attribute for table columns (#32467)
     712f751d48ee7ec49f61484f5682a575ec49c402	https://github.com/servo/servo/pull/32466	gfx: font_list: Fix OpenHarmony build (#32466)
 +   a91faa7207b203033c7cb6ea62e6541cec07cf58	https://github.com/servo/servo/pull/32453	Fix missing alpha value when using CompositeTarget::Fbo (#32453)
 >>> 2024-06-12T06:02:11Z
-b4e41d872789206a618ff729dc6f9fa8065cabd0	https://github.com/servo/servo/pull/32469	Fix table track offsets when there is `visibility: collapse` (#32469)
++   b4e41d872789206a618ff729dc6f9fa8065cabd0	https://github.com/servo/servo/pull/32469	Fix table track offsets when there is `visibility: collapse` (#32469)
     3c06536cb67984d1f4822ea4cbf6618016b0e4ec	https://github.com/servo/servo/pull/32476	clippy: fix some leftover warnings in components/net (#32476)
     55d067091c3ff472524ae23650b60baf2fa63026	https://github.com/servo/servo/pull/32481	build(deps): bump regex from 1.10.4 to 1.10.5 (#32481)
     c4528a5da83973ab502d055914a11fe8e80b150e	https://github.com/servo/servo/pull/32480	build(deps): bump surfman from 0.9.3 to 0.9.4 (#32480)
@@ -116,14 +128,14 @@ b4e41d872789206a618ff729dc6f9fa8065cabd0	https://github.com/servo/servo/pull/324
 +   370fbf0331d73ae95ea29e67305aa86065c3604b	https://github.com/servo/servo/pull/32475	DevTools: Display tabs and processes (#32475)
 +   699f6960f5d58005f426bf349ad2e61101fb7747	https://github.com/servo/servo/pull/32425	minibrowser: Disables urlbar when in fullscreen (#32425)
 >>> 2024-06-14T06:01:54Z
-bae9f6d84424accb9db8d82ebf1ef087b7b400f6	https://github.com/servo/servo/pull/32483	layout: Linebreak the entire InlineFormattingContext at once (#32483)
++   bae9f6d84424accb9db8d82ebf1ef087b7b400f6	https://github.com/servo/servo/pull/32483	layout: Linebreak the entire InlineFormattingContext at once (#32483)
     43a7dd5da08d01234805c1298469f883a362f55d	https://github.com/servo/servo/pull/32478	build(deps): bump url from 2.5.0 to 2.5.1 (#32478)
     d4ead7f85e6507a167a5dc84acbcfa47ec977e17	https://github.com/servo/servo/pull/32491	build(deps): bump memchr from 2.7.2 to 2.7.3 (#32491)
     c755c1415772084c641793889cdcb6de2525f2b2	https://github.com/servo/servo/pull/32489	build(deps): bump backtrace from 0.3.72 to 0.3.73 (#32489)
     801a15a9a1b059b442f61be4e06aa761c0cf7e09	https://github.com/servo/servo/pull/32490	build(deps): bump httparse from 1.9.2 to 1.9.3 (#32490)
 +   3ccc79c5e7241ba43f26048badd8bafcf62b2230	https://github.com/servo/servo/pull/32463	fonts: Merge Noto fallback lists (#32463)
     996715fe10590450743c7f8854bc07a4eb52b852	https://github.com/servo/servo/pull/32468	Signed-off-by: Rexiel Scarlet <37258415+Rexcrazy804@users.noreply.github.com> (#32468)
-1d048f4f6a147ab1f81893f370df3447b18075ec	https://github.com/servo/servo/pull/31269	Implement HTMLImageElement decode (#31269)
++   1d048f4f6a147ab1f81893f370df3447b18075ec	https://github.com/servo/servo/pull/31269	Implement HTMLImageElement decode (#31269)
     43df0a48ee3b7786c86d6f000e5f6acc990b61de	https://github.com/servo/servo/pull/32484	mach: Use `cargo rustc` instead of `cargo build` (#32484)
 >>> 2024-06-15T06:01:23Z
     8eed3b442b214f678b80dbcc7dca07eeaa1e26ff	https://github.com/servo/servo/pull/32495	Update WebIDL.py (#32495)
@@ -135,7 +147,7 @@ bae9f6d84424accb9db8d82ebf1ef087b7b400f6	https://github.com/servo/servo/pull/324
 +   ff4cd4af960b2f0c506cf3a53336d4ffe56ac988	https://github.com/servo/servo/pull/32457	Split servoshell into Desktop and common part (#32457)
 >>> 2024-06-16T06:03:10Z
     7982f0dc27cad98057a0a953cca76e2b86aa37ed	https://github.com/servo/servo/pull/32500	build: Fix build warnings on Windows (#32500)
-6b6872831ccc83e37dc9a8b1842c125606943d69	https://github.com/servo/servo/pull/32508	htmlmetaelement: improve parsing of meta http-equiv (#32508)
++   6b6872831ccc83e37dc9a8b1842c125606943d69	https://github.com/servo/servo/pull/32508	htmlmetaelement: improve parsing of meta http-equiv (#32508)
 >>> 2024-06-17T06:04:38Z
 +   8b35c4094a44e3d47ebfa5c7ff11b15ec6b22b05	https://github.com/servo/servo/pull/31429	Add `--with-asan` (#31429)
 +   f0191c0a75a2a8ed82e13eeaa5f0c38ce0131cb2	https://github.com/servo/servo/pull/32510	Bump mozjs (#32510)
@@ -143,44 +155,44 @@ bae9f6d84424accb9db8d82ebf1ef087b7b400f6	https://github.com/servo/servo/pull/324
 >>> 2024-06-18T06:03:22Z
 +   79cd87a3c3faf1be7ecfd99cb489c8094be7ea3f	https://github.com/servo/servo/pull/32532	Fix android build on Fedora 40. (#32532)
     be290533c4c6c14547e1d5d3435f089ffd1972de	https://github.com/servo/servo/pull/32528	build(deps): bump derive_more from 0.99.17 to 0.99.18 (#32528)
-3d78d60619cb1eda22f4473c91c45cc6a7907244	https://github.com/servo/servo/pull/31108	implement basic infra for ResizeObserver (#31108)
++   3d78d60619cb1eda22f4473c91c45cc6a7907244	https://github.com/servo/servo/pull/31108	implement basic infra for ResizeObserver (#31108)
     3c1c395dfc60ca202834f9c708fffda71606bf1a	https://github.com/servo/servo/pull/32527	Restore accidentally deleted suppression file and suppress intentional leak in stylo #32223 (#32527)
     6a3ccb656d4b74d2e3df14b746f21d67c8ba2029	https://github.com/servo/servo/pull/32526	build(deps): bump httparse from 1.9.3 to 1.9.4 (#32526)
     c3648e3eab0272358e846ebb02290b5bb90f18f3	https://github.com/servo/servo/pull/32524	build(deps): bump etagere from 0.2.12 to 0.2.13 (#32524)
     83b4dcf444f2fd98cc31abca2ad422f4727f6c6b	https://github.com/servo/servo/pull/32522	build(deps): bump gilrs-core from 0.5.11 to 0.5.12 (#32522)
     fe5faf0dedff1b767e39daff67b256c4f957ef8f	https://github.com/servo/servo/pull/32521	build(deps): bump rustfix from 0.8.2 to 0.8.4 (#32521)
-cbc9304c2002fb0d5c8cdade39eddfe117b12053	https://github.com/servo/servo/pull/32354	webgpu: Implement device lost (#32354)
++   cbc9304c2002fb0d5c8cdade39eddfe117b12053	https://github.com/servo/servo/pull/32354	webgpu: Implement device lost (#32354)
 +   3381f2a70442aa6a6c31a0bc4a4c3601299631f5	https://github.com/servo/servo/pull/32507	Add OpenHarmony support to mach and CI (#32507)
 +   bea181f5d52c8ac088328f72dc36ef503a5420a9	https://github.com/servo/servo/pull/32511	asan: Add a leak suppression file with known false positives (#32511)
 +   2c0d0d57b100ea08824839a2d52beb2b3f1448fc	https://github.com/servo/servo/pull/32499	fonts: Fix loading SFNT tables on Windows (#32499)
     e902d63732e96f71c86bae159786e12b18876b3c	https://github.com/servo/servo/pull/32516	deps: Switch from `winapi` to `windows_sys` in Servo code (#32516)
 >>> 2024-06-19T06:02:17Z
-24906e1c21b69af0d70091c5541cdf133f2591ea	https://github.com/servo/servo/pull/32533	Move android port code to servoshell (#32533)
-6f64a5afadf551540fb533ba209063fca039c6bc	https://github.com/servo/servo/pull/32546	Mark some ResizeObserver tests as flaky (#32546)
++   24906e1c21b69af0d70091c5541cdf133f2591ea	https://github.com/servo/servo/pull/32533	Move android port code to servoshell (#32533)
+    6f64a5afadf551540fb533ba209063fca039c6bc	https://github.com/servo/servo/pull/32546	Mark some ResizeObserver tests as flaky (#32546)
     eaf9055745e45eaff0a6a64e3e474f51fe5a8c97	https://github.com/servo/servo/pull/32547	build(deps): bump miniz_oxide from 0.7.3 to 0.7.4 (#32547)
     946e41e59d4693915726be043f27765ebac4a26d	https://github.com/servo/servo/pull/32515	ci: Use a servo.org email address for the servo-wpt-sync GitHub bot (#32515)
-70982dfa5aaf176a46308aa4075128e8edd53da2	https://github.com/servo/servo/pull/32486	layout: Allocate inline box start space on segment (#32486)
-63889b732f59a0cfe1271c9340aca4d4c565575b	https://github.com/servo/servo/pull/32537	fix: codegen on callback (#32537)
++   70982dfa5aaf176a46308aa4075128e8edd53da2	https://github.com/servo/servo/pull/32486	layout: Allocate inline box start space on segment (#32486)
+    63889b732f59a0cfe1271c9340aca4d4c565575b	https://github.com/servo/servo/pull/32537	fix: codegen on callback (#32537)
     d4db08113dc945e4094f7e545d4a0119d386f152	https://github.com/servo/servo/pull/32523	build(deps): bump android_logger from 0.13.3 to 0.14.1 (#32523)
     668b8df9dae219657d420c76b6133ef2e4165429	https://github.com/servo/servo/pull/32529	build(deps): bump polling from 3.7.1 to 3.7.2 (#32529)
 +   fef1337da0f5bfed27225972e33d8c94d38bfbb3	https://github.com/servo/servo/pull/32545	fonts: Clean up WebRender web fonts when they are no longer used (#32545)
 +   bd15a4fbd803d2a7d73f440efd741d98f7cc72a6	https://github.com/servo/servo/pull/32518	servoshell: Reset link status when loading a new document (#32518)
-1d2949f2b3daa3861cdc3e519f4ae6a6e3b8aaf1	https://github.com/servo/servo/pull/32543	CI: Cache cargo-deny (#32543)
+    1d2949f2b3daa3861cdc3e519f4ae6a6e3b8aaf1	https://github.com/servo/servo/pull/32543	CI: Cache cargo-deny (#32543)
 +   4a7f3bac7cadff129d15e3b0a6471a7ed3c4aaa4	https://github.com/servo/servo/pull/32544	Use workspace definitions for all crates and update to the 2021 edition (#32544)
     42b09d483fbcc79345844d34b88b3ff4ae7a9735	https://github.com/servo/servo/pull/32540	mach: fix test-tidy to not skip `Cargo.lock` (#32540)
-57b64d8123535858f96796602906b4d02c7d4e4a	https://github.com/servo/servo/pull/32493	fonts: Respect emoji variation selector when selecting fonts (#32493)
++   57b64d8123535858f96796602906b4d02c7d4e4a	https://github.com/servo/servo/pull/32493	fonts: Respect emoji variation selector when selecting fonts (#32493)
 >>> 2024-06-20T05:57:46Z
     256c55eb8125bb9ec2bcfa78fd0e000c54a48666	https://github.com/servo/servo/pull/32565	build(deps): bump the gstreamer-related group with 22 updates (#32565)
     cd2ab36759dc58acdeb2b8321c38b7345b524a63	https://github.com/servo/servo/pull/32556	Rename `gfx` to `fonts` (#32556)
-9f8118abc7fd9aba49e422cf13b5243e3b582fdc	https://github.com/servo/servo/pull/32564	servoshell: Clean up keyboard event conversion a little (#32564)
+    9f8118abc7fd9aba49e422cf13b5243e3b582fdc	https://github.com/servo/servo/pull/32564	servoshell: Clean up keyboard event conversion a little (#32564)
     6a48c72a6285783e0b8192a18bcff3e626d7149b	https://github.com/servo/servo/pull/32563	dependabot: Combine more GStreamer / GLib-related crates (#32563)
     c4c86af49619423015ea7b429c8aa0ff722ca046	https://github.com/servo/servo/pull/32562	build(deps): bump idna from 1.0.0 to 1.0.1 (#32562)
     9615abac7eadf45af451a4f7fe079c20dafae41e	https://github.com/servo/servo/pull/32560	build(deps): bump bytemuck from 1.16.0 to 1.16.1 (#32560)
     7aecd6f12669afb283285b89ed8095eb704342fa	https://github.com/servo/servo/pull/32559	build(deps): bump gio-sys from 0.19.5 to 0.19.8 (#32559)
     137ded3e30616557eed3b368d4bf3f79ef3cc980	https://github.com/servo/servo/pull/32558	build(deps): bump gobject-sys from 0.19.5 to 0.19.8 (#32558)
     7edf9e3d79f938094eb6811001b78ccb7006288f	https://github.com/servo/servo/pull/32557	build(deps): bump the gstreamer-related group with 3 updates (#32557)
-e74075255bfef3f55acdfb4866fc2e0a9f5a9583	https://github.com/servo/servo/pull/32539	layout: Flatten inline box storage in InlineFormattingContexts (#32539)
-48035141966c907ee7cdd0cd73d55da0d3f866a0	https://github.com/servo/servo/pull/32551	mach: fix test-tidy to handle missing merge commit (#32551)
+    e74075255bfef3f55acdfb4866fc2e0a9f5a9583	https://github.com/servo/servo/pull/32539	layout: Flatten inline box storage in InlineFormattingContexts (#32539)
+    48035141966c907ee7cdd0cd73d55da0d3f866a0	https://github.com/servo/servo/pull/32551	mach: fix test-tidy to handle missing merge commit (#32551)
 >>> 2024-06-21T05:58:30Z
 +   44064b14392838fd7da148000b58c9a3cc07d4e7	https://github.com/servo/servo/pull/32365	layout: Add very basic support for showing text in input boxes (#32365)
     3d6accbbe3a33ea5e3c621ae3c291a0f35fcba73	https://github.com/servo/servo/pull/32573	android: Remove serde-json build-dependency (#32573)
@@ -188,13 +200,13 @@ e74075255bfef3f55acdfb4866fc2e0a9f5a9583	https://github.com/servo/servo/pull/325
 +   64b872ec0d7c0f6e53dadb01968576569d91f8d0	https://github.com/servo/servo/pull/32568	add codeowners file, set gterzian as owner for components/script (#32568)
 +   7957d11b5d8ffff1475a08f449d18bd0415f80ef	https://github.com/servo/servo/pull/32555	ohos: Add fallback font for serif (#32555)
 +   cc1c31ef3f018946c8a7c2244fcc1d062600e11c	https://github.com/servo/servo/pull/32567	crown: remove references to workspace manifest (#32567)
-bf99cf7f30e9c7ea0e879068773155ce18dfd0c0	https://github.com/servo/servo/pull/32520	Proper GPUDevice cleanup (#32520)
+    bf99cf7f30e9c7ea0e879068773155ce18dfd0c0	https://github.com/servo/servo/pull/32520	Proper GPUDevice cleanup (#32520)
 >>> 2024-06-22T06:02:49Z
     130eef300bb71febf715683211323c1b551f5313	https://github.com/servo/servo/pull/32579	build(deps): bump syn from 2.0.66 to 2.0.67 (#32579)
     56d475999359e35934e889deb4566ea06c195d92	https://github.com/servo/servo/pull/32577	build(deps): bump proc-macro2 from 1.0.85 to 1.0.86 (#32577)
     a084813a1ff2cf4ccc37f5f539563e45ff9e53d4	https://github.com/servo/servo/pull/32578	build(deps): bump displaydoc from 0.2.4 to 0.2.5 (#32578)
 +   5eb88134488872f4ef1e5f0fcccf18bef47d83cf	https://github.com/servo/servo/pull/32509	DevTools: Implement watcher actor (#32509)
-26c585a0c5d6e459e8f02517cb1231a1b7a9345f	https://github.com/servo/servo/pull/32349	use app unit in box_fragement (#32349)
+    26c585a0c5d6e459e8f02517cb1231a1b7a9345f	https://github.com/servo/servo/pull/32349	use app unit in box_fragement (#32349)
     66edef806579fd0b386f4ceba473e6a9f7d0ca34	https://github.com/servo/servo/pull/32487	layout: Simplify `Contents` a little (#32487)
 >>> 2024-06-23T06:01:40Z
 >>> 2024-06-24T05:59:57Z
