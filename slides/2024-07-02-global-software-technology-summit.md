@@ -7,19 +7,11 @@ title: "Servo: a web rendering engine for the future"
 
 <img src="/img/servo-color-negative-no-container-600.png" style="margin: 2em; margin-bottom: 1em;" alt="Servo logo" />
 
-<h2>A web rendering engine for the future</h2>
+<h2>A web rendering engine<br>for the future 🔮</h2>
 
-<div style="font-size: 60%; margin-top: 0em;">
+<p style="font-weight: 700; font-size: 80%; margin: 1em; margin-top: 2em;">Manuel Rego (he/him) &nbsp;&nbsp;<a href="mailto:rego@igalia.com"><code>rego@igalia.com</code></a></p>
 
-Manuel Rego (he/him) <rego@igalia.com>
-
-</div>
-
-<div style="font-size: 50%;">
-
-Global Software Technology Summit 2024
-
-</div>
+<p style="font-weight: 700; font-size: 60%;">Global Software Technology Summit 2024</p>
 
 <img src="/img/lf-europe-logo.png" style="width: 200px; position: absolute; left: -120px; top: 626px;" alt="Linux Foundation Europe logo" />
 
@@ -59,7 +51,7 @@ Global Software Technology Summit 2024
 * **Igalia** Web Platform Team
 * **Web engines hacker** with experience in Chromium/Blink and Safari/WebKit
 * **CSS Working Group** member since 2017
-* **Servo** Technical Steering Committee (TSC) chair
+* **Servo** Technical Steering Committee (TSC) chair since 2023
 
 <img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
@@ -76,7 +68,7 @@ Global Software Technology Summit 2024
 * **Open Source Consultancy** founded in 2001
 * 140 people, fully remote (25 countires)
 * **Flat structure** (cooperative like model)
-* Top contributors to **Chromium, WebKit and Gecko**
+* Top contributors to **Chromium, WebKit, Gecko and Servo**
 
 <div style="text-align: center;">
 
@@ -108,12 +100,12 @@ Global Software Technology Summit 2024
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-Servo is  
-a **web rendering engine**  
-written in **Rust**,  
-with **WebGL** and **WebGPU** support,  
-and adaptable to **desktop**, **mobile**,  
-and **embedded** applications.
+<div>Servo is</div>
+<div class="fragment">a <strong>web rendering engine</strong></div>
+<div class="fragment">written in <strong>Rust</strong>,</div>
+<div class="fragment">with <strong>WebGL</strong> and <strong>WebGPU</strong> support,</div>
+<div class="fragment">and adaptable to <strong>desktop</strong>, <strong>mobile</strong>,</div>
+<div class="fragment">and <strong>embedded</strong> applications.</div>
 
 <img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
@@ -133,7 +125,7 @@ and **embedded** applications.
 
 </div>
 
-* Blink (Chrome), Gecko (Firefox), WebKit (Safari)
+* **Blink** (Chrome), **Gecko** (Firefox), **WebKit** (Safari)
 * Huge projects: **millions lines of code**
 * Big teams: >100 engineers
 
@@ -241,7 +233,7 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 * 2020-2023: Linux Foundation
 * 2023-: **Linux Foundation Europe**
 
-<div style="text-align: center; padding: 0.5em;">
+<div style="text-align: center; padding: 1em;">
 
 <img src="/img/lf-europe-logo.png" style="width: 400px;" alt="Linux Foundation Europe logo" />
 
@@ -268,10 +260,10 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 <div style="font-size: smaller;">
 
 | | 2022 | 2023 | 2024 H1 |
-|---|---|---|---|
-| PRs (total) | 215 | 1094 | 1152 |
-| PRs (no bots) | 65 | 673 | 711 |
-| Contributors | 20 | 54 | 73 |
+|---|---:|---:|---:|
+| **PRs (total)** | 215 | 1094 | 1152 |
+| **PRs (no bots)** | 65 | 673 | 711 |
+| **Contributors** | 20 | 54 | 73 |
 
 </div>
 
@@ -341,7 +333,7 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 <div style="width: 50px; height: 10px; background: #faae30; margin-bottom: 20px;"></div>
 
 <div style="text-align: center;">
-  <video autoplay loop muted style="width: 80%;">
+  <video id="servo-chromium-video" autoplay loop muted style="width: 80%;">
     <source src="/img/servo-chromium-video.webm" type="video/webm">
   </video>
 </div>
@@ -380,7 +372,7 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 
 <div style="text-align: center;">
 
-<iframe src="/img/blog/embedding-2024-01/demo-with-decorations-too.html" style="width: 90vw; height: 40vh; margin: 0;"></iframe>
+<iframe src="/img/blog/embedding-2024-01/demo-with-decorations-too.html" style="width: 800px; height: 420px; margin: 0;"></iframe>
 
 <p style="margin-top: 0;">Tauri using Servo underneath</p>
 
@@ -419,7 +411,7 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 <div style="width: 50px; height: 10px; background: #f68243; margin-bottom: 20px;"></div>
 
 * Several Servo modules (**crates**) are popular in the **Rust ecosystem**
-* **Firefox** uses some Servo modules:
+* 🦊 **Firefox** uses some Servo modules:
   * rust-cssparser
   * Stylo
   * WebRender
@@ -669,7 +661,7 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 
 <br>
 
-<h3 style="line-height: 1.4;">A rendering engine for the future</h3>
+<h3 style="line-height: 1.4;">A rendering engine for the future 🔮</h3>
 
 <div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
@@ -726,12 +718,17 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 
 <div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
-* GitHub: https://github.com/servo
-* Chat: [servo.zulipchat.com](https://servo.zulipchat.com/)
-* Email: <join@servo.org>
+* GitHub: <a href="https://github.com/servo"><code>github.com/servo</code></a>
+* Chat: <a href="https://servo.zulipchat.com/"><code>servo.zulipchat.com</code></a>
+* Email: <a href="mailto:join@servo.org"><code>join@servo.org</code></a>
 * Sponsor: [GitHub](https://github.com/sponsors/servo) & [Open Collective](https://opencollective.com/servo)
 
-Looking into **growing the community around the project**
+<div style="text-align: center; margin: 1em;">
+
+Looking into **growing the community  
+around the project**
+
+</div>
 
 <img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
@@ -741,14 +738,14 @@ Looking into **growing the community around the project**
 
 <br>
 
-<div style="float: left;">
+<div style="float: left; font-size: 80%;">
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-https://**servo.org**
+<a href="https://servo.org" style="color: #4fc066;"><code>https://</code><code style="font-weight: 700;">servo.org</code></a>
 
-<span>https://floss.social/<strong>@servo</strong></span>
+<a href="https://floss.social/@servo" style="color: #4fc066;"><code>https://floss.social/</code><code style="font-weight: 700;">@servo</code></a>
 
-<span>https://twitter.com/<strong>ServoDev</strong></span>
+<a href="https://twitter.com/ServoDev" style="color: #4fc066;"><code>https://twitter.com/</code><code style="font-weight: 700;">ServoDev</code></a>
 
 </div>
 
