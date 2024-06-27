@@ -15,8 +15,6 @@ Servo has had some exciting changes land in our nightly builds over the last mon
 - as of 2024-06-18, we now support **ResizeObserver** (@gterzian, #31108)
 - as of 2024-06-21, we now **render text in input fields** (@mrobinson, #32365)
 
-Servo now builds with **Rust 1.78** (@sagudev, #32217) and we’ve migrated to **Rust 2021** (@mrobinson, #32544), **SpiderMonkey 115.13** (@sagudev, #32510), and **Stylo 2024-05-15** (@Loirooriol, #32334).
-
 WebGPU can now run on **OpenGL ES on Windows and Linux** (@hieudo-dev, #32452), **no longer records errors after losing a device** (@sagudev, #32347), and you can now **select a WebGPU backend with `--pref dom.webgpu.wgpu_backend=`**.
 
 ## Fonts and emoji
@@ -29,6 +27,11 @@ We’ve reworked our font fallback algorithm to enable **emoji in text presentat
 
 Webfont performance is improving, with Servo no longer starting a **layout reflow every time a webfont loads** (@mrobinson, #32455) and no longer **leaking resources in WebRender** (@mrobinson, @mukilan, #32545).
 We’ve also fixed a bug where spaces near emoji are too wide (@mrobinson, @atbrakhi, #32442), fixed a shaping bug on Windows (@mrobinson, #32499), and improved our fallback font lists (@mrobinson, @jschwe, #32463, #32555).
+
+## Embedding and dev changes
+
+Servo now builds with **Rust 1.78** (@sagudev, #32217) and we’ve migrated to **Rust 2021** (@mrobinson, #32544), **SpiderMonkey 115.13** (@sagudev, #32510), and **Stylo 2024-05-15** (@Loirooriol, #32334).
+Thanks to the compiler upgrade, **`mach doc` no longer hangs** (@delan, #32413), and **[our API docs](https://doc.servo.org) are now live again**, and **[libservo API docs](https://doc.servo.org/servo/) are now available too** (@wusyong, #32429), having previously been shadowed by an empty docs page for the servoshell bin crate.
 
 ## Donations
 
@@ -111,7 +114,7 @@ margin-padding-clear (0.0pp to 96.7%)
 - mac busted 32504
 - nixos busted 32567
 - openharmony 32507
-- docs libservo 32429
+- DONE docs libservo 32429
 - compositor transparent 32453 layout direct 32377
 - codeowners 32568
 - asan build 31429 32511
