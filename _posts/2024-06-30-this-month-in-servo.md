@@ -7,9 +7,31 @@ summary:    Your text here.
 categories:
 ---
 
+## Donations
+
+Thanks again for your generous support!
+We are now receiving **2229 USD/month** (+36.7% over April) in recurring donations.
+We are still receiving donations from **15 people** on LFX, and we’re working on transferring the balance to our new fund, but we will stop accepting donations there soon — **please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo)**.
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 2229 / 10000); padding-left: 0.5em;"><strong>2229</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 2229 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="2229" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
+As always, use of these funds will be decided transparently in the Technical Steering Committee.
+For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
+
 <!--
 - ai policy
-- donations
+- donations 2229.50/month
+    - 1391.50/month opencollective
+    - 691.00/month github
+    - 147.00/month lfx
 - upgrade mozjs 32510 stylo 32334
 - ResizeObserver 31108
 - HTMLImageElement decode() 31269
