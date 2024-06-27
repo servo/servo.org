@@ -17,6 +17,9 @@ Servo has had some exciting changes land in our nightly builds over the last mon
 
 WebGPU can now run on **OpenGL ES on Windows and Linux** (@hieudo-dev, #32452), **no longer records errors after losing a device** (@sagudev, #32347), and you can now **select a WebGPU backend with `--pref dom.webgpu.wgpu_backend=`**.
 
+servoshell can now go **fullscreen without showing the location bar** (@Nylme, #32425), and no longer **leaves the status bar behind when navigating** (@webbeef, #32518).
+We’ve also started building **servoshell on OpenHarmony** in CI (@jschwe, #32507), started merging our Android build into servoshell (@jschwe, #32533), and refactored servoshell’s desktop-only code (@jschwe, #32457).
+
 ## Fonts and emoji
 
 Every emoji in Unicode has two variants: an **emoji presentation** (color or graphic) and a **text presentation** (monochrome).
@@ -115,17 +118,19 @@ margin-padding-clear (0.0pp to 96.7%)
     - DONE gles windows/linux 32452
     - DONE backend pref dom.webgpu.wgpu_backend 32410
     - DONE device lost no errors 32354
-- minibrowser fullscreen 32425 status 32518
-    - servoshell split 32457
+- DONE servoshell
+    - DONE fullscreen 32425
+    - DONE status 32518
+    - DONE servoshell split 32457
 - DONE rust msrv 32217 edition 32544
 - DONE panic multiprocess 32571
-- android
+- DONE android
     - DONE busted 32532
-    - url bar 32422
-    - start of merge into servoshell 32533
+    - SKIP url bar 32422
+    - DONE start of merge into servoshell 32533
 - DONE mac busted 32504
 - DONE nixos busted 32567
-- openharmony 32507
+- DONE openharmony 32507
 - DONE docs libservo 32429
 - compositor transparent 32453 layout direct 32377
 - codeowners 32568
