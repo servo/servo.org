@@ -39,7 +39,7 @@ In short, for the time being, anything you contribute to the Servo project **mus
 Servo now builds with **Rust 1.78** (@sagudev, #32217) and we’ve migrated to **Rust 2021** (@mrobinson, #32544), **SpiderMonkey 115.13** (@sagudev, #32510), and **Stylo 2024-05-15** (@Loirooriol, #32334).
 Thanks to the compiler upgrade, **`mach doc` no longer hangs** (@delan, #32413), **[our API docs](https://doc.servo.org) are now live again**, and **[libservo API docs](https://doc.servo.org/servo/) are now available too** (@wusyong, #32429), having previously been shadowed by an empty docs page for the servoshell bin crate.
 
-Outreachy intern @eerii is showing our Firefox-compatible devtools some love, landing support for **listing tabs and processes** (@eerii, @fabricedesre, #32475) and **running code in the Console tab** (@eerii, #32509).
+Outreachy intern @eerii is showing our [**Firefox-compatible devtools**](https://book.servo.org/running-servoshell.html) some love, landing support for **listing tabs and processes** (@eerii, @fabricedesre, #32475) and **running code in the Console tab** (@eerii, #32509).
 
 You can now **build Servo with AddressSanitizer** via `mach build --with-asan` (@sagudev, #31429), which will help us find and fix memory safety violations.
 
