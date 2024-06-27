@@ -7,6 +7,27 @@ summary:    Your text here.
 categories:
 ---
 
+Servo has had some exciting changes land in our nightly builds over the last month:
+
+- as of 2024-05-31, we now support **‘white-space-collapse: break-spaces’** (@mrobinson, @atbrakhi, #32388)
+- as of 2024-06-11, we now support **&lt;col span> in &lt;colgroup>** (@Loirooriol, #32467)
+- as of 2024-06-14, we now support the **decode method on HTMLImageElement** (@Taym95, #31269)
+- as of 2024-06-18, we now support **ResizeObserver** (@gterzian, #31108)
+- as of 2024-06-21, we now **render text in input fields** (@mrobinson, #32365)
+
+Servo now builds with **Rust 1.78** (@sagudev, #32217) and we’ve migrated to **Rust 2021** (@mrobinson, #32544), **SpiderMonkey 115.13** (@sagudev, #32510), and **Stylo 2024-05-15** (@Loirooriol, #32334).
+
+## Fonts and emoji
+
+Every emoji in Unicode has two variants: an **emoji presentation** (color or graphic) and a **text presentation** (monochrome).
+You can select one or the other by appending the **variation selectors** [U+FE0F](https://charming.daz.cat/#FE0F) or [U+FE0E](https://charming.daz.cat/#FE0E) respectively, and the default presentation is controlled by the [**Emoji_Presentation**](https://www.unicode.org/reports/tr51/tr51-25.html#Emoji_Properties_and_Data_Files) property.
+Most emoji default to emoji presentation, but not all of them, and bugs in handling that property are often why characters like [<span style=font-size:150%;line-height:1rem>™</span>](https://charming.daz.cat/#2122) and [<span style=font-size:150%;line-height:1rem>↔</span>](https://charming.daz.cat/#2194) become emoji when they shouldn’t.
+
+We’ve reworked our font fallback algorithm to enable **emoji in text presentation on Windows** (@mrobinson, #32286) and correctly handle **emoji variation selectors** and **Emoji_Presentation** (@mrobinson, @atbrakhi, @mukilan, #32493).
+
+Webfont performance is improving, with Servo no longer starting a **layout reflow every time a webfont loads** (@mrobinson, #32455) and no longer **leaking resources in WebRender** (@mrobinson, @mukilan, #32545).
+We’ve also fixed a bug where spaces near emoji are too wide (@mrobinson, @atbrakhi, #32442), fixed a shaping bug on Windows (@mrobinson, #32499), and improved our fallback font lists (@mrobinson, @jschwe, #32463, #32555).
+
 ## Donations
 
 Thanks again for your generous support!
@@ -27,32 +48,59 @@ As always, use of these funds will be decided transparently in the Technical Ste
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
 <!--
+fromDate = "2024-05-26"
+toDate = "2024-06-26"
+>>> top deltas (servo, pp):
+csstext (5.3pp to 58.4%)
+csstable (2.7pp to 71.2%)
+floats-clear (2.4pp to 93.8%)
+box-display (2.2pp to 86.6%)
+css (1.1pp to 66.4%)
+all (0.6pp to 57.6%)
+cssom (0.6pp to 65.6%)
+css2 (0.5pp to 79.4%)
+linebox (0.5pp to 94.3%)
+normal-flow (0.4pp to 94.2%)
+cssflex (0.3pp to 54.8%)
+positioning (0.2pp to 90.3%)
+csspos (0.1pp to 48.9%)
+abspos (0.0pp to 91.0%)
+floats (0.0pp to 90.8%)
+margin-padding-clear (0.0pp to 96.7%)
+
 - ai policy
-- donations 2229.50/month
+- DONE donations 2229.50/month
     - 1391.50/month opencollective
     - 691.00/month github
     - 147.00/month lfx
-- upgrade mozjs 32510 stylo 32334
-- ResizeObserver 31108
-- HTMLImageElement decode() 31269
+- DONE upgrade mozjs 32510 stylo 32334
+- DONE ResizeObserver 31108
+- DONE HTMLImageElement decode() 31269
 - layout
-    - input 32365
-    - break-spaces 32388
+    - DONE input 32365
+    - DONE break-spaces 32388
     - inline padding/border 32486
     - abspos tables 32447
     - table column width colspan 32458
     - getComputedStyle width/height 32437
     - offset queries tables/cells 32448
-    - <col span> in colgroup 32467
+    - DONE <col span> in colgroup 32467
     - collapse with rowspan 32469
     - prepare for shaping across inline boxes 32483
-- fonts spaces 32442 reflow 32455 leak 32545 windows 32499 ohos 32555 fallback 32463 32286 (+ emoji vs, monochrome emoji windows) emoji vs/ep 32493
+- DONE fonts
+    - DONE spaces 32442
+    - DONE reflow 32455
+    - DONE leak 32545
+    - DONE windows 32499
+    - DONE ohos 32555
+    - DONE fallback 32463 32286 (+ emoji vs, monochrome emoji windows)
+    - DONE emoji vs/ep 32493
 - meta http-equiv parsing 32508
 - devtools 32475 32509
 - webgpu gles windows/linux 32452 backend pref dom.webgpu.wgpu_backend 32410 device lost no errors 32354
 - minibrowser fullscreen 32425 status 32518
     - servoshell split 32457
-- rust msrv 32217 edition 32544
+- DONE rust msrv 32217 edition 32544
 - panic multiprocess 32571
 - android busted 32532 url bar 32422 start of merge into servoshell 32533
 - mac busted 32504
