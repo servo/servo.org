@@ -17,6 +17,8 @@ Servo has had some exciting changes land in our nightly builds over the last mon
 
 Servo now builds with **Rust 1.78** (@sagudev, #32217) and we’ve migrated to **Rust 2021** (@mrobinson, #32544), **SpiderMonkey 115.13** (@sagudev, #32510), and **Stylo 2024-05-15** (@Loirooriol, #32334).
 
+WebGPU can now run on **OpenGL ES on Windows and Linux** (@hieudo-dev, #32452), **no longer records errors after losing a device** (@sagudev, #32347), and you can now **select a WebGPU backend with `--pref dom.webgpu.wgpu_backend=`**.
+
 ## Fonts and emoji
 
 Every emoji in Unicode has two variants: an **emoji presentation** (color or graphic) and a **text presentation** (monochrome).
@@ -97,7 +99,10 @@ margin-padding-clear (0.0pp to 96.7%)
     - DONE emoji vs/ep 32493
 - meta http-equiv parsing 32508
 - devtools 32475 32509
-- webgpu gles windows/linux 32452 backend pref dom.webgpu.wgpu_backend 32410 device lost no errors 32354
+- DONE webgpu
+    - DONE gles windows/linux 32452
+    - DONE backend pref dom.webgpu.wgpu_backend 32410
+    - DONE device lost no errors 32354
 - minibrowser fullscreen 32425 status 32518
     - servoshell split 32457
 - DONE rust msrv 32217 edition 32544
