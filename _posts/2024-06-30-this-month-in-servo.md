@@ -33,6 +33,10 @@ We’ve also fixed a bug where spaces near emoji are too wide (@mrobinson, @atbr
 Servo now builds with **Rust 1.78** (@sagudev, #32217) and we’ve migrated to **Rust 2021** (@mrobinson, #32544), **SpiderMonkey 115.13** (@sagudev, #32510), and **Stylo 2024-05-15** (@Loirooriol, #32334).
 Thanks to the compiler upgrade, **`mach doc` no longer hangs** (@delan, #32413), and **[our API docs](https://doc.servo.org) are now live again**, and **[libservo API docs](https://doc.servo.org/servo/) are now available too** (@wusyong, #32429), having previously been shadowed by an empty docs page for the servoshell bin crate.
 
+Outreachy intern @eerii is showing our Firefox-compatible devtools some love, landing support for **listing tabs and processes** (@eerii, @fabricedesre, #32475) and **running code in the Console tab** (@eerii, #32509).
+
+We’ve fixed a panic in multiprocess mode (@mukilan, #32571) and several busted builds, including **cross-compiling on macOS** (@jschwe, #32504), **building on NixOS** (@mukilan, #32567), and **building for Android on Fedora** (@jschwe, #32532).
+
 ## Donations
 
 Thanks again for your generous support!
@@ -101,7 +105,7 @@ margin-padding-clear (0.0pp to 96.7%)
     - DONE fallback 32463 32286 (+ emoji vs, monochrome emoji windows)
     - DONE emoji vs/ep 32493
 - meta http-equiv parsing 32508
-- devtools 32475 32509
+- DONE devtools 32475 32509
 - DONE webgpu
     - DONE gles windows/linux 32452
     - DONE backend pref dom.webgpu.wgpu_backend 32410
@@ -109,10 +113,13 @@ margin-padding-clear (0.0pp to 96.7%)
 - minibrowser fullscreen 32425 status 32518
     - servoshell split 32457
 - DONE rust msrv 32217 edition 32544
-- panic multiprocess 32571
-- android busted 32532 url bar 32422 start of merge into servoshell 32533
-- mac busted 32504
-- nixos busted 32567
+- DONE panic multiprocess 32571
+- android
+    - DONE busted 32532
+    - url bar 32422
+    - start of merge into servoshell 32533
+- DONE mac busted 32504
+- DONE nixos busted 32567
 - openharmony 32507
 - DONE docs libservo 32429
 - compositor transparent 32453 layout direct 32377
