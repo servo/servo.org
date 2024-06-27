@@ -21,7 +21,7 @@ WebGPU can now run on **OpenGL ES on Windows and Linux** (@hieudo-dev, #32452), 
 
 Every emoji in Unicode has two variants: an **emoji presentation** (color or graphic) and a **text presentation** (monochrome).
 You can select one or the other by appending the **variation selectors** [U+FE0F](https://charming.daz.cat/#FE0F) or [U+FE0E](https://charming.daz.cat/#FE0E) respectively, and the default presentation is controlled by the [**Emoji_Presentation**](https://www.unicode.org/reports/tr51/tr51-25.html#Emoji_Properties_and_Data_Files) property.
-Most emoji default to emoji presentation, but not all of them, and bugs in handling that property are often why characters like [<span style=font-size:150%;line-height:1rem>™</span>](https://charming.daz.cat/#2122) and [<span style=font-size:150%;line-height:1rem>↔</span>](https://charming.daz.cat/#2194) become emoji when they shouldn’t.
+Most emoji default to emoji presentation, but not all of them, and bugs in handling that property are often why characters like [<span style=font-size:150%;line-height:1rem>™</span>](https://charming.daz.cat/#2122) and [<span style=font-size:150%;line-height:1rem>↔</span>](https://charming.daz.cat/#2194) get displayed as emoji when they shouldn’t.
 
 We’ve reworked our font fallback algorithm to enable **emoji in text presentation on Windows** (@mrobinson, #32286) and correctly handle **emoji variation selectors** and **Emoji_Presentation** (@mrobinson, @atbrakhi, @mukilan, #32493).
 
@@ -31,7 +31,7 @@ We’ve also fixed a bug where spaces near emoji are too wide (@mrobinson, @atbr
 ## Embedding and dev changes
 
 Servo now builds with **Rust 1.78** (@sagudev, #32217) and we’ve migrated to **Rust 2021** (@mrobinson, #32544), **SpiderMonkey 115.13** (@sagudev, #32510), and **Stylo 2024-05-15** (@Loirooriol, #32334).
-Thanks to the compiler upgrade, **`mach doc` no longer hangs** (@delan, #32413), and **[our API docs](https://doc.servo.org) are now live again**, and **[libservo API docs](https://doc.servo.org/servo/) are now available too** (@wusyong, #32429), having previously been shadowed by an empty docs page for the servoshell bin crate.
+Thanks to the compiler upgrade, **`mach doc` no longer hangs** (@delan, #32413), **[our API docs](https://doc.servo.org) are now live again**, and **[libservo API docs](https://doc.servo.org/servo/) are now available too** (@wusyong, #32429), having previously been shadowed by an empty docs page for the servoshell bin crate.
 
 Outreachy intern @eerii is showing our Firefox-compatible devtools some love, landing support for **listing tabs and processes** (@eerii, @fabricedesre, #32475) and **running code in the Console tab** (@eerii, #32509).
 
