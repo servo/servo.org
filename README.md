@@ -91,3 +91,69 @@ To avoid false positives, be sure to step through each replacement rather than u
 - Replace ` #([0-9]+)` with ` [#$1](https://github.com/servo/servo/pull/$1)`
 - Replace ` ([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1#$2](https://github.com/servo/$1/pull/$2)`
 - Replace ` ([0-9A-Za-z_.-]+)/([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1/$2#$3](https://github.com/$1/$2/pull/$3)`
+
+## Triaging commits in nightlies for monthly updates
+
+Generally we want to include...
+
+- gecko upgrades (stylo, webrender, mozjs)
+- web-facing changes
+- DX-affecting CI changes
+- MSRV and Rust edition changes
+- platform support changes
+- platform bustage fixes
+- crash fixes
+
+And generally we want to exclude...
+
+- dependabot updates (“build(deps)”)
+- WPT imports (“Update web-platform-tests”)
+- lint and warning fixes
+- other CI changes
+- refactors (unless large-scale)
+- dependency cleanups
+
+## How to calculate monthly recurring donations
+
+OpenCollective:
+
+- Go to <https://opencollective.com/dashboard/servo/incoming-contributions?limit=100&status=ACTIVE&status=ERROR&type=RECURRING>
+- Make sure there is a column with “month” or “year”, because some table filters hide that column
+- Run this code in devtools:
+```js
+$$("table tbody tr")
+    .map(tr => [...tr.cells][2].innerText.match(/[$](\S+)\s*USD\s*[/]\s*(\S+)/))
+    .map(match => match && [+match[1].replace(/[.,]/g, ""), match[2]])
+        .map(([cents, period]) => cents / {month:1,year:12}[period])
+        .reduce((result, cents) => result + cents, 0)
+```
+- The result is USD cents/month
+
+GitHub:
+
+- Go to <https://github.com/sponsors/servo/dashboard/your_sponsors>
+- Run this code in devtools:
+```js
+seen = new Set; centsPerMonth = 0
+```
+- Click through each page of the table and run this code in devtools:
+```js
+centsPerMonth += $$("table tbody tr")
+    .map(tr => [...tr.cells])
+    .map(cells => [cells[1].querySelector("a").href, cells])
+    .filter(([donorHref, cells]) => !seen.has(donorHref))
+    .map(([donorHref, cells]) => (seen.add(donorHref), cells))
+    .map(cells => cells.slice(2,4).map(td => td.innerText).join(" "))
+    .map(text => text.match(/[$](\S+)\s*(.+)/))
+    .map(match => [100 * match[1], match[2].replace(/ [(]custom[)]/, "")])
+    .filter(([cents, period]) => period != "One time")
+    .map(([cents, period]) => cents / {Monthly:1}[period])
+    .reduce((result, cents) => result + cents, 0)
+```
+- After running it on every page, the result is USD cents/month
+
+LFX:
+
+- Go to <https://crowdfunding.lfx.linuxfoundation.org/projects/e98e012f-479e-45d0-8781-4d7f616baa9d/financial>
+    - You may need to open it in private browsing to avoid getting a 404, not sure why
+- Manually add up the amounts for one month, stopping when you see the same donor repeated
