@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
+title:      "This month in Servo: text fields, better emoji, devtools, and more!"
 date:       2024-06-30
-summary:    Your text here.
+summary:    Plus font rendering performance, OpenHarmony and AddressSanitizer builds, and a new AI policy.
 categories:
 ---
 
