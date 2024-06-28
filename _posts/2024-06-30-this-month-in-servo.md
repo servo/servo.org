@@ -10,7 +10,7 @@ categories:
 <figure class="_figr"><a href="{{ '/img/blog/june-2024.png' | url }}"><img src="{{ '/img/blog/june-2024.png' | url }}"
     alt="servoshell showing three demos: spaces at the end of each line take up space under ‘white-space-collapse: break-spaces’, measuring the size of the viewport with a ResizeObserver, and a focused text field with a visible value, where the space after the emoji now has normal width"></a></figure>
 
-Servo has had some exciting changes land in our nightly builds over the last month:
+<span class=_floatmin></span>Servo has had some exciting changes land in our nightly builds over the last month:
 
 - as of 2024-05-31, we now support **‘white-space-collapse: break-spaces’** (@mrobinson, @atbrakhi, #32388)
 - as of 2024-06-11, we now support **&lt;col span> in &lt;colgroup>** (@Loirooriol, #32467)
@@ -24,7 +24,7 @@ Servo has had some exciting changes land in our nightly builds over the last mon
     alt="Table rendered by Servo with three columns (default, with VS15, and with VS16), comparing the behaviour of three emoji with Emoji_Presentation=Yes (🐕, 🐶, 🐾) and three emoji with Emoji_Presentation=No (☺, ™, ↔)"></a>
 <figcaption>On platforms with color emoji support, we now correctly follow Unicode’s rules for when to use color emoji. This table also uses &lt;col&#xA0;span> in a &lt;colgroup>.</figcaption></figure>
 
-WebGPU can now run on **OpenGL ES on Windows and Linux** (@hieudo-dev, #32452), **no longer records errors after losing a device** (@sagudev, #32347), and you can now **select a WebGPU backend with `--pref dom.webgpu.wgpu_backend=`**.
+<span class=_floatmin></span>WebGPU can now run on **OpenGL ES on Windows and Linux** (@hieudo-dev, #32452), **no longer records errors after losing a device** (@sagudev, #32347), and you can now **select a WebGPU backend with `--pref dom.webgpu.wgpu_backend=`**.
 
 servoshell can now go **fullscreen without showing the location bar** (@Nylme, #32425), and no longer **leaves the status bar behind when navigating** (@webbeef, #32518).
 We’ve also started building **servoshell on OpenHarmony** in CI (@jschwe, #32507), started merging our Android build into servoshell (@jschwe, #32533), and refactored servoshell’s desktop-only code (@jschwe, #32457).
