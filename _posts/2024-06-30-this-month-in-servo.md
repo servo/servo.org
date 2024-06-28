@@ -31,7 +31,7 @@ We’ve also started building **servoshell on OpenHarmony** in CI (@jschwe, #325
 
 ## Fonts and emoji
 
-Every emoji in Unicode has two variants: an **emoji presentation** (color or graphic) and a **text presentation** (monochrome).
+Unicode emoji often come in two variants: an **emoji presentation** (color or graphic) and a **text presentation** (monochrome).
 You can select one or the other by appending the **variation selectors** [U+FE0F](https://charming.daz.cat/#FE0F) or [U+FE0E](https://charming.daz.cat/#FE0E) respectively, and the default presentation is controlled by the [**Emoji_Presentation**](https://www.unicode.org/reports/tr51/tr51-25.html#Emoji_Properties_and_Data_Files) property.
 Most emoji default to emoji presentation, but not all of them, and bugs in handling that property are often why characters like [<span style=font-size:150%;line-height:1rem>™</span>](https://charming.daz.cat/#2122) and [<span style=font-size:150%;line-height:1rem>↔</span>](https://charming.daz.cat/#2194) get displayed as emoji when they shouldn’t.
 
