@@ -77,6 +77,11 @@ We are still receiving donations from **15 people** on LFX, and we’re working 
 As always, use of these funds will be decided transparently in the Technical Steering Committee.
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
+## Conferences and blogs
+
+- [**Fixing Servo’s Event Loop**](https://medium.com/@polyglot_factotum/fixing-servos-event-loop-490c0fd74f8d) — Gregory Terzian blogged about using [TLA+](https://en.wikipedia.org/wiki/TLA%2B) to guide and verify our work on implementing the HTML event loop in Servo
+- [**Blitz: a truly modular, hackable web renderer**](https://www.youtube.com/watch?v=QRuYyG_CmMU) ([slides](https://webengineshackfest.org/2024/slides/blitz_a_truly_modular_hackable_web_renderer_by_nico_burns.pdf)) — Nico Burns spoke at the [Web Engines Hackfest 2024](https://webengineshackfest.org/2024/) about building a new kind of Servo-based web renderer for [Dioxus](https://dioxuslabs.com), without any JavaScript runtime
+
 <!--
 fromDate = "2024-05-26"
 toDate = "2024-06-26"
