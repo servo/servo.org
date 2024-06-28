@@ -12,8 +12,10 @@ Servo has had some exciting changes land in our nightly builds over the last mon
 - as of 2024-05-31, we now support **‘white-space-collapse: break-spaces’** (@mrobinson, @atbrakhi, #32388)
 - as of 2024-06-11, we now support **&lt;col span> in &lt;colgroup>** (@Loirooriol, #32467)
 - as of 2024-06-14, we now support the **decode method on HTMLImageElement** (@Taym95, #31269)
-- as of 2024-06-18, we now support **ResizeObserver** (@gterzian, #31108)
+- as of 2024-06-18, we now have initial support for **ResizeObserver** (@gterzian, #31108)
+    - to enable this experimental feature, run servoshell with `--pref dom.resize_observer.enabled`
 - as of 2024-06-21, we now **render text in input fields** (@mrobinson, #32365)
+    - note that editing is still very limited, and the caret and selection are not yet rendered
 
 WebGPU can now run on **OpenGL ES on Windows and Linux** (@hieudo-dev, #32452), **no longer records errors after losing a device** (@sagudev, #32347), and you can now **select a WebGPU backend with `--pref dom.webgpu.wgpu_backend=`**.
 
@@ -39,7 +41,7 @@ In short, for the time being, anything you contribute to the Servo project **mus
 Servo now builds with **Rust 1.78** (@sagudev, #32217) and we’ve migrated to **Rust 2021** (@mrobinson, #32544), **SpiderMonkey 115.13** (@sagudev, #32510), and **Stylo 2024-05-15** (@Loirooriol, #32334).
 Thanks to the compiler upgrade, **`mach doc` no longer hangs** (@delan, #32413), **[our API docs](https://doc.servo.org) are now live again**, and **[libservo API docs](https://doc.servo.org/servo/) are now available too** (@wusyong, #32429), having previously been shadowed by an empty docs page for the servoshell bin crate.
 
-Outreachy intern @eerii is showing our [**Firefox-compatible devtools**](https://book.servo.org/running-servoshell.html) some love, landing support for **listing tabs and processes** (@eerii, @fabricedesre, #32475) and **running code in the Console tab** (@eerii, #32509).
+Outreachy intern @eerii is showing our [**Firefox-compatible devtools**](https://book.servo.org/running-servoshell.html) some much needed love, landing support for **listing tabs and processes** (@eerii, @fabricedesre, #32475) and **running code in the Console tab** (@eerii, #32509).
 
 You can now **build Servo with AddressSanitizer** via `mach build --with-asan` (@sagudev, #31429), which will help us find and fix memory safety violations.
 
@@ -48,7 +50,7 @@ We’ve fixed a panic in multiprocess mode (@mukilan, #32571) and several busted
 ## Donations
 
 Thanks again for your generous support!
-We are now receiving **2229 USD/month** (+36.7% over April) in recurring donations.
+We are now receiving **2229 USD/month** (+36.7% over May) in recurring donations.
 We are still receiving donations from **15 people** on LFX, and we’re working on transferring the balance to our new fund, but we will stop accepting donations there soon — **please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo)**.
 
 <figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
@@ -326,9 +328,6 @@ margin-padding-clear (0.0pp to 96.7%)
     }
     ._fig > ._flex {
         display: flex;
-    }
-    ._fig._min {
-        width: min-content;
     }
     ._fig table {
         text-align: initial;
