@@ -12,22 +12,22 @@ categories:
 
 <span class=_floatmin></span>Servo has had some exciting changes land in our nightly builds over the last month:
 
-- as of 2024-05-31, we now support **‘white-space-collapse: break-spaces’** (@mrobinson, @atbrakhi, #32388)
-- as of 2024-06-11, we now support **&lt;col span> in &lt;colgroup>** (@Loirooriol, #32467)
-- as of 2024-06-14, we now support the **decode method on HTMLImageElement** (@Taym95, #31269)
-- as of 2024-06-18, we now have initial support for **ResizeObserver** (@gterzian, #31108)
+- as of 2024-05-31, we now support **‘white-space-collapse: break-spaces’** ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#32388](https://github.com/servo/servo/pull/32388))
+- as of 2024-06-11, we now support **&lt;col span> in &lt;colgroup>** ([@Loirooriol](https://github.com/Loirooriol), [#32467](https://github.com/servo/servo/pull/32467))
+- as of 2024-06-14, we now support the **decode method on HTMLImageElement** ([@Taym95](https://github.com/Taym95), [#31269](https://github.com/servo/servo/pull/31269))
+- as of 2024-06-18, we now have initial support for **ResizeObserver** ([@gterzian](https://github.com/gterzian), [#31108](https://github.com/servo/servo/pull/31108))
     - to enable this experimental feature, run servoshell with `--pref dom.resize_observer.enabled`
-- as of 2024-06-21, we now **render text in input fields** (@mrobinson, #32365)
+- as of 2024-06-21, we now **render text in input fields** ([@mrobinson](https://github.com/mrobinson), [#32365](https://github.com/servo/servo/pull/32365))
     - note that editing is still very limited, and the caret and selection are not yet rendered
 
 <figure class="_figl"><a href="{{ '/img/blog/emoji-presentation.png' | url }}"><img src="{{ '/img/blog/emoji-presentation.png' | url }}"
     alt="Table rendered by Servo with three columns (default, with VS15, and with VS16), comparing the behaviour of three emoji with Emoji_Presentation=Yes (🐕, 🐶, 🐾) and three emoji with Emoji_Presentation=No (☺, ™, ↔)"></a>
 <figcaption>On platforms with color emoji support, we now correctly follow Unicode’s rules for when to use color emoji. This table also uses &lt;col&#xA0;span> in a &lt;colgroup>.</figcaption></figure>
 
-<span class=_floatmin></span>WebGPU can now run on **OpenGL ES on Windows and Linux** (@hieudo-dev, #32452), **no longer records errors after losing a device** (@sagudev, #32347), and you can now **select a WebGPU backend with `--pref dom.webgpu.wgpu_backend=`**.
+<span class=_floatmin></span>WebGPU can now run on **OpenGL ES on Windows and Linux** ([@hieudo-dev](https://github.com/hieudo-dev), [#32452](https://github.com/servo/servo/pull/32452)), **no longer records errors after losing a device** ([@sagudev](https://github.com/sagudev), [#32347](https://github.com/servo/servo/pull/32347)), and you can now **select a WebGPU backend with `--pref dom.webgpu.wgpu_backend=`**.
 
-servoshell can now go **fullscreen without showing the location bar** (@Nylme, #32425), and no longer **leaves the status bar behind when navigating** (@webbeef, #32518).
-We’ve also started building **servoshell on OpenHarmony** in CI (@jschwe, #32507), started merging our Android build into servoshell (@jschwe, #32533), and refactored servoshell’s desktop-only code (@jschwe, #32457).
+servoshell can now go **fullscreen without showing the location bar** ([@Nylme](https://github.com/Nylme), [#32425](https://github.com/servo/servo/pull/32425)), and no longer **leaves the status bar behind when navigating** ([@webbeef](https://github.com/webbeef), [#32518](https://github.com/servo/servo/pull/32518)).
+We’ve also started building **servoshell on OpenHarmony** in CI ([@jschwe](https://github.com/jschwe), [#32507](https://github.com/servo/servo/pull/32507)), started merging our Android build into servoshell ([@jschwe](https://github.com/jschwe), [#32533](https://github.com/servo/servo/pull/32533)), and refactored servoshell’s desktop-only code ([@jschwe](https://github.com/jschwe), [#32457](https://github.com/servo/servo/pull/32457)).
 
 ## Fonts and emoji
 
@@ -35,28 +35,28 @@ Unicode emoji often come in two variants: an **emoji presentation** (color or gr
 You can select one or the other by appending the **variation selectors** [U+FE0F](https://charming.daz.cat/#FE0F) or [U+FE0E](https://charming.daz.cat/#FE0E) respectively, and the default presentation is controlled by the [**Emoji_Presentation**](https://www.unicode.org/reports/tr51/tr51-25.html#Emoji_Properties_and_Data_Files) property.
 Most emoji default to emoji presentation, but not all of them, and bugs in handling that property are often why characters like [<span style=font-size:150%;line-height:1rem>™</span>](https://charming.daz.cat/#2122) and [<span style=font-size:150%;line-height:1rem>↔</span>](https://charming.daz.cat/#2194) get displayed as emoji when they shouldn’t.
 
-We’ve reworked our font fallback algorithm to enable **emoji in text presentation on Windows** (@mrobinson, #32286) and correctly handle **emoji variation selectors** and **Emoji_Presentation** (@mrobinson, @atbrakhi, @mukilan, #32493).
+We’ve reworked our font fallback algorithm to enable **emoji in text presentation on Windows** ([@mrobinson](https://github.com/mrobinson), [#32286](https://github.com/servo/servo/pull/32286)) and correctly handle **emoji variation selectors** and **Emoji_Presentation** ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [@mukilan](https://github.com/mukilan), [#32493](https://github.com/servo/servo/pull/32493)).
 
-Webfont performance is improving, with Servo no longer starting a **layout reflow every time a webfont loads** (@mrobinson, #32455) and no longer **leaking resources in WebRender** (@mrobinson, @mukilan, #32545).
-We’ve also fixed a bug where spaces near emoji are too wide (@mrobinson, @atbrakhi, #32442), fixed a shaping bug on Windows (@mrobinson, #32499), and improved our fallback font lists (@mrobinson, @jschwe, #32463, #32555).
+Webfont performance is improving, with Servo no longer starting a **layout reflow every time a webfont loads** ([@mrobinson](https://github.com/mrobinson), [#32455](https://github.com/servo/servo/pull/32455)) and no longer **leaking resources in WebRender** ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#32545](https://github.com/servo/servo/pull/32545)).
+We’ve also fixed a bug where spaces near emoji are too wide ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#32442](https://github.com/servo/servo/pull/32442)), fixed a shaping bug on Windows ([@mrobinson](https://github.com/mrobinson), [#32499](https://github.com/servo/servo/pull/32499)), and improved our fallback font lists ([@mrobinson](https://github.com/mrobinson), [@jschwe](https://github.com/jschwe), [#32463](https://github.com/servo/servo/pull/32463), [#32555](https://github.com/servo/servo/pull/32555)).
 
 ## Embedding and dev changes
 
-Servo now has an [**AI contributions policy**](https://github.com/servo/servo/blob/FIXME/CONTRIBUTING.md) (@mrobinson, @delan, #32287).
+Servo now has an [**AI contributions policy**](https://github.com/servo/servo/blob/FIXME/CONTRIBUTING.md) ([@mrobinson](https://github.com/mrobinson), [@delan](https://github.com/delan), [#32287](https://github.com/servo/servo/pull/32287)).
 In short, for the time being, anything you contribute to the Servo project **must not contain content generated by large language models** or other probabilistic tools.
 
 <figure class="_figr"><a href="{{ '/img/blog/devtools-june-2024.png' | url }}"><img src="{{ '/img/blog/devtools-june-2024.png' | url }}"
     alt="Firefox devtools connected to Servo, with a hello world printed by a document.write() call in the Console tab"></a>
 <figcaption>You can now use Firefox devtools to evaluate JavaScript in Servo, but messages from the Console API are not yet visible.</figcaption></figure>
 
-<span class=_floatmin></span>Servo now builds with **Rust 1.78** (@sagudev, #32217) and we’ve migrated to **Rust 2021** (@mrobinson, #32544), **SpiderMonkey 115.13** (@sagudev, #32510), and **Stylo 2024-05-15** (@Loirooriol, #32334).
-Thanks to the compiler upgrade, **`mach doc` no longer hangs** (@delan, #32413), **[our API docs](https://doc.servo.org) are now live again**, and **[libservo API docs](https://doc.servo.org/servo/) are now available too** (@wusyong, #32429), having previously been shadowed by an empty docs page for the servoshell bin crate.
+<span class=_floatmin></span>Servo now builds with **Rust 1.78** ([@sagudev](https://github.com/sagudev), [#32217](https://github.com/servo/servo/pull/32217)) and we’ve migrated to **Rust 2021** ([@mrobinson](https://github.com/mrobinson), [#32544](https://github.com/servo/servo/pull/32544)), **SpiderMonkey 115.13** ([@sagudev](https://github.com/sagudev), [#32510](https://github.com/servo/servo/pull/32510)), and **Stylo 2024-05-15** ([@Loirooriol](https://github.com/Loirooriol), [#32334](https://github.com/servo/servo/pull/32334)).
+Thanks to the compiler upgrade, **`mach doc` no longer hangs** ([@delan](https://github.com/delan), [#32413](https://github.com/servo/servo/pull/32413)), **[our API docs](https://doc.servo.org) are now live again**, and **[libservo API docs](https://doc.servo.org/servo/) are now available too** ([@wusyong](https://github.com/wusyong), [#32429](https://github.com/servo/servo/pull/32429)), having previously been shadowed by an empty docs page for the servoshell bin crate.
 
-You can now **build Servo with AddressSanitizer** via `mach build --with-asan` (@sagudev, #31429), which will help us find and fix memory safety violations.
+You can now **build Servo with AddressSanitizer** via `mach build --with-asan` ([@sagudev](https://github.com/sagudev), [#31429](https://github.com/servo/servo/pull/31429)), which will help us find and fix memory safety violations.
 
-Outreachy intern @eerii is showing our [**Firefox-compatible devtools**](https://book.servo.org/running-servoshell.html) some much needed love, landing support for **listing tabs and processes** (@eerii, @fabricedesre, #32475) and **running code in the Console tab** (@eerii, #32509).
+Outreachy intern [@eerii](https://github.com/eerii) is showing our [**Firefox-compatible devtools**](https://book.servo.org/running-servoshell.html) some much needed love, landing support for **listing tabs and processes** ([@eerii](https://github.com/eerii), [@fabricedesre](https://github.com/fabricedesre), [#32475](https://github.com/servo/servo/pull/32475)) and **running code in the Console tab** ([@eerii](https://github.com/eerii), [#32509](https://github.com/servo/servo/pull/32509)).
 
-We’ve fixed a panic in multiprocess mode (@mukilan, #32571) and several busted builds, including **cross-compiling on macOS** (@jschwe, #32504), **building on NixOS** (@mukilan, #32567), and **building for Android on Fedora** (@jschwe, #32532).
+We’ve fixed a panic in multiprocess mode ([@mukilan](https://github.com/mukilan), [#32571](https://github.com/servo/servo/pull/32571)) and several busted builds, including **cross-compiling on macOS** ([@jschwe](https://github.com/jschwe), [#32504](https://github.com/servo/servo/pull/32504)), **building on NixOS** ([@mukilan](https://github.com/mukilan), [#32567](https://github.com/servo/servo/pull/32567)), and **building for Android on Fedora** ([@jschwe](https://github.com/jschwe), [#32532](https://github.com/servo/servo/pull/32532)).
 
 ## Donations
 
