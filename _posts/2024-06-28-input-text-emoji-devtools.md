@@ -21,7 +21,7 @@ categories:
     - note that editing is still very limited, and the caret and selection are not yet rendered
 
 <figure class="_figl"><a href="{{ '/img/blog/emoji-presentation.png' | url }}"><img src="{{ '/img/blog/emoji-presentation.png' | url }}"
-    alt="Table rendered by Servo with three columns (default, with VS15, and with VS16), comparing the behaviour of three emoji with Emoji_Presentation=Yes (🐕, 🐶, 🐾) and three emoji with Emoji_Presentation=No (☺, ™, ↔)"></a>
+    alt="Table rendered by Servo with three columns (default, with VS15, and with VS16), comparing the behaviour of three emoji with Emoji_Presentation=Yes (🐕, 🐈, 🦜) and three emoji with Emoji_Presentation=No (☺, ™, ↔)"></a>
 <figcaption>On platforms with color emoji support, we now correctly follow Unicode’s rules for when to use color emoji. This table also uses &lt;col&#xA0;span> in a &lt;colgroup>.</figcaption></figure>
 
 <span class=_floatmin></span>WebGPU can now run on **OpenGL ES on Windows and Linux** ([@hieudo-dev](https://github.com/hieudo-dev), [#32452](https://github.com/servo/servo/pull/32452)), **no longer records errors after losing a device** ([@sagudev](https://github.com/sagudev), [#32347](https://github.com/servo/servo/pull/32347)), and you can now **select a WebGPU backend with `--pref dom.webgpu.wgpu_backend=`**.
