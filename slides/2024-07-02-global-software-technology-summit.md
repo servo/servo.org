@@ -121,7 +121,7 @@ title: "Servo: a web rendering engine for the future"
 
 <div style="font-size: 50%; text-align: center;">
 
-<img src="/img/web-rendering-engine.png" alt="Image showing a HTML and CSS file with an arrow that shows some text and cat pictures on a screen" style="background: white; padding: 1em; width: 600px; margin: 0.5em 0 2em;" />
+<img src="/img/web-rendering-engine.png" alt="Image showing a HTML and CSS file with an arrow that shows some text and cat pictures on a screen" style="background: white; padding: 1em; width: 600px; margin: 0.5em 0 1em;" />
 
 </div>
 
@@ -131,7 +131,7 @@ title: "Servo: a web rendering engine for the future"
 
 <br>
 
-<div style="font-size: 40%; margin-top: 3.2em; text-align: right;">
+<div style="font-size: 40%; margin-top: 1.3em; text-align: right;">
 
 <a href="https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/">
 Picture by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/</code></a>
@@ -198,12 +198,11 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 
 <div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
-* A web browser.  
-  Servo is a **web rendering engine**
-* A production ready rendering engine.  
-  Servo is **experimental**
-* An engine to browse the general web.  
-  Servo can render a **controlled environment**
+<ul>
+  <li class="fragment">A web browser.<br>Servo is a <strong>web rendering engine</strong></li>
+  <li class="fragment">A production ready web rendering engine.<br>Servo is <strong>experimental</strong></li>
+  <li class="fragment">An engine to browse the general web.<br>Servo can render a <strong>controlled environment</strong></li>
+</ul>
 
 <img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
@@ -282,9 +281,7 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 * Main web engines are managed  
   by **big corporations** (Apple, Google, Mozilla)
 * Funding comes from **Google Search & Ads**
-* Servo:
-  * **Open governance** at LF Europe
-  * Managed by the **TSC** (Technical Steering Committee)
+* Servo: Managed by the **TSC** (Technical Steering Committee) at LF Europe
 
 <img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
@@ -476,6 +473,8 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 
 </div>
 
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
 ----
 
 <!-- .slide: style="text-align: left;" -->
@@ -501,6 +500,26 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
   June 2024
 
 </div>
+
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
+
+----
+
+<!-- .slide: style="text-align: left;" -->
+
+<br>
+
+<h3 style="line-height: 1.4;">Wikipedia</h3>
+
+<div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
+
+<div style="text-align: center;">
+
+<iframe src="https://en.wikipedia.org/wiki/Servo_(software)" style="width: 1000px; height: 450px; margin: 0;"></iframe>
+
+</div>
+
+<img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
 -----
 
@@ -661,7 +680,7 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 
 <br>
 
-<h3 style="line-height: 1.4;">A rendering engine for the future 🔮</h3>
+<h3 style="line-height: 1.4;">A web engine for the future 🔮</h3>
 
 <div style="width: 50px; height: 10px; background: #4fc066; margin-bottom: 20px;"></div>
 
