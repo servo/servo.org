@@ -261,9 +261,9 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 
 | | 2022 | 2023 | 2024 H1 |
 |---|---:|---:|---:|
-| **PRs (total)** | 215 | 1094 | 1152 |
-| **PRs (no bots)** | 65 | 673 | 711 |
-| **Contributors** | 20 | 54 | 73 |
+| **PRs (total)** | 215 | 1094 | 1192 |
+| **PRs (no bots)** | 65 | 673 | 734 |
+| **Contributors** | 20 | 54 | 75 |
 
 </div>
 
