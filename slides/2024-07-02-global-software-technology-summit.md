@@ -184,7 +184,7 @@ Pictures by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org
 <br>
 <br>
 
-<p style="text-align: center;">JavaScript engine: <strong>SpiderMonkey</strong> (C++)</p>
+<p class="fragment" style="text-align: center;">JavaScript engine: <strong>SpiderMonkey</strong> (C++)</p>
 
 <img src="/img/servo-color-negative-no-container-600.png" style="width: 150px; position: absolute; left: -120px; top: 633px;" alt="Servo logo" />
 
