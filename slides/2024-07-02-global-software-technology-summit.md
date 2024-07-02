@@ -1,6 +1,6 @@
 ---
 layout: slides-new-servo.html
-title: "Servo: a web rendering engine for the future"
+title: "Servo: a web rendering engine for the future 🔮"
 ---
 
 <!-- .slide: class="cover" -->
