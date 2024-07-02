@@ -131,7 +131,7 @@ title: "Servo: a web rendering engine for the future"
 
 <br>
 
-<div style="font-size: 40%; margin-top: 1.3em; text-align: right;">
+<div style="font-size: 40%; margin-top: 3.8em; text-align: right;">
 
 <a href="https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/">
 Picture by Lin Clark<br><code style="font-size: 75%;">https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/</code></a>
