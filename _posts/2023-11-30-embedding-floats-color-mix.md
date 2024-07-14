@@ -86,7 +86,7 @@ Since then, we’ve started eliminating our usage of unstable Rust features ([@m
 <span class="_floatmin"></span>You can now **run try jobs by adding labels** to your pull requests ([@mrobinson](https://github.com/mrobinson), [#30383](https://github.com/servo/servo/pull/30383), [#30647](https://github.com/servo/servo/pull/30647), [#30650](https://github.com/servo/servo/pull/30650), [#30756](https://github.com/servo/servo/pull/30756)).
 You can even add multiple labels!
 The old method, where you mention [@bors-servo](https://github.com/bors-servo) in a comment, has been removed ([@mrobinson](https://github.com/mrobinson), [#30712](https://github.com/servo/servo/pull/30712)), making your pull requests less likely to get spammed with job failures when you post comments on them.
-For more details, see [CONTRIBUTING.md](https://github.com/servo/servo/blob/master/CONTRIBUTING.md).
+For more details, see [Contributing to Servo](https://book.servo.org/contributing.html).
 
 ## Stability
 
