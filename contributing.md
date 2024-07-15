@@ -7,7 +7,7 @@ title: Contributing
 
 The official Servo project repository is on GitHub: <https://github.com/servo/servo>
 
-If you want to start contributing to Servo, check out [`CONTRIBUTING.md`](https://github.com/servo/servo/blob/master/CONTRIBUTING.md), and see [`HACKING_QUICKSTART.md`](https://github.com/servo/servo/blob/master/docs/HACKING_QUICKSTART.md) for more details on how to build and run the project.
+If you want to start contributing to Servo, check out [Contributing to Servo](https://book.servo.org/contributing.html), and see [Hacking on Servo](https://book.servo.org/hacking/mach.html) for more details on how to build and run the project.
 
 You can search for and/or report any issues you run into on the [GitHub issue tracker](https://github.com/servo/servo/issues).
 
