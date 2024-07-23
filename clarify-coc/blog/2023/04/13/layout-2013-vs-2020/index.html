@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Layout 2013 and Layout 2020 - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine</title>
+  <meta property="og:title" content="Layout 2013 and Layout 2020 - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine">
+  
+
+  
+  <meta name="description" content="Overview of the effort to rewrite Servo’s layout engine, and our proposal for layout in Servo going forward.">
+  <meta name="og:description" content="Overview of the effort to rewrite Servo’s layout engine, and our proposal for layout in Servo going forward.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/clarify-coc/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/clarify-coc/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/clarify-coc/blog/2023/04/13/layout-2013-vs-2020/">
+
+  <link rel="stylesheet" href="/clarify-coc/css/style.css">
+  <link rel="shortcut icon" href="/clarify-coc/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/clarify-coc/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/clarify-coc/">
+        <img src="/clarify-coc/img/servo-color-negative-no-container.png" alt="Layout 2013 and Layout 2020">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              Get Involved
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/clarify-coc/contributing/">
+                  Contributing
+                </a>
+              
+                <a class="navbar-item" href="https://book.servo.org" target="_blank">
+                  Servo Book
+                </a>
+              
+                <a class="navbar-item" href="https://wpt.servo.org/" target="_blank">
+                  WPT pass rates
+                </a>
+              
+                <a class="navbar-item" href="/clarify-coc/coc/">
+                  Code of Conduct
+                </a>
+              
+            </div>
+          </div>
+        
+      
+        
+        
+          <a class="navbar-item" href="/clarify-coc/download/">
+            Download
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="/clarify-coc/blog/">
+            Blog
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="https://demo.servo.org/" target="_blank">
+            Demos
+          </a>
+        
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              About
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/clarify-coc/about/">
+                  About Servo
+                </a>
+              
+                <a class="navbar-item" href="/clarify-coc/governance/">
+                  Governance
+                </a>
+              
+                <a class="navbar-item" href="/clarify-coc/sponsorship/">
+                  Sponsorship
+                </a>
+              
+                <a class="navbar-item" href="/clarify-coc/acknowledgements/">
+                  Acknowledgements
+                </a>
+              
+            </div>
+          </div>
+        
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <aside class="menu box">
+            <p class="menu-label">
+              Layout 2013 and Layout 2020
+            </p>
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+          </aside>
+          <div class="content">
+            
+<h1 class="title">Layout 2013 and Layout 2020</h1>
+<p class="subtitle"><span class="tag is-dark">2023-04-13</span> Overview of the effort to rewrite Servo’s layout engine, and our proposal for layout in Servo going forward.</p>
+
+<div class="has-top-margin">
+  <p>Servo currently has two independent layout engines, known as Layout 2013 and Layout 2020, which are named after when they began development. Layout 2020 was designed to fix several shortcomings in Layout 2013, but it’s not yet enabled by default, and this raises the question: which layout engine should Servo use going forward?</p>
+<p>To answer this question, we analysed the two layout engines and found differences in:</p>
+<ul>
+<li>their approaches to parallelism</li>
+<li>the ways they manage trees of boxes and fragments</li>
+<li>their relationships with WebRender</li>
+<li>the degrees to which their architectures reflect CSS specs</li>
+<li>the completeness of their implementations of CSS features</li>
+<li>the difficulty in supporting <a href="https://github.com/dbaron/inlines-and-floats">complex features like floats</a></li>
+</ul>
+<p>For more details, check out <a href="https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report">our report</a>, but in short, we believe <strong>Layout 2020 is the best layout engine for Servo going forward</strong>.</p>
+<p>To give us more confidence in this choice with some practical experience, we’ve started implementing some smaller features in Layout 2020, like <a href="https://github.com/servo/servo/pull/29504">&lt;iframe&gt;</a>, <a href="https://github.com/servo/servo/pull/29594">min/max width and height</a>, sticky positioning, and ‘text-indent’. We will also start building and testing Layout 2020 (as well as Layout 2013) on <a href="https://github.com/servo/servo/actions">CI</a> in the near future.</p>
+<p>We will continue to maintain Layout 2013 for now, but we hope that completing many of these features, plus some more complex ones like counters and vertical writing modes, will give us the experience we need to decide whether we want to commit to Layout 2020 and remove Layout 2013 from the tree.</p>
+<p>We would love to have you with us on this journey, and we hope that after this transition period, together we can tackle the most challenging parts of Servo’s CSS2 story, like floats and incremental layout!</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/clarify-coc/blog/">Back</a>
+</div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+  <div class="container" style="text-align: center;">
+    <a href="/clarify-coc/coc/">Code of Conduct</a> |
+    Contact: <a href="mailto:info@servo.org">info@servo.org</a>,
+    <a href="https://servo.zulipchat.com/">Zulip Chat</a>,
+    <a href="https://github.com/servo/servo/discussions">GitHub Discussions</a>,
+    <a href="https://floss.social/@servo">Mastodon</a>,
+    <a href="https://twitter.com/ServoDev">Twitter</a>
+  </div>
+  <div class="container" style="text-align: center; font-size: 0.875em;">
+    <p><a href="https://linuxfoundation.eu"><img src="/clarify-coc/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250" style="margin: 1em;"></a></p>
+    <p>&copy; 2024 The Servo Project Developers</p>
+    <p>Copyright &copy; Servo is a project of <a href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>
