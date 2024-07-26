@@ -113,6 +113,10 @@ And generally we want to exclude...
 - refactors (unless large-scale)
 - dependency cleanups
 
+## Hints for writing about changes
+
+- Always check the correct names of people and API features
+
 ## How to calculate monthly recurring donations
 
 OpenCollective:
