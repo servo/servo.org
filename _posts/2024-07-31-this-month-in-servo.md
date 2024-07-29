@@ -8,6 +8,13 @@ categories:
 ---
 
 <!--
+- donations
+    - thanks.dev now enabled
+    - total monthly 2955/month (+32.6%)
+        - opencollective 1591.83/month
+        - github 1217.00/month
+        - lfx 147.00/month
+    - lfx transferred, still closing
 - api support
     - commas in <font face> 32622
     - document.{visibilityState,hidden} 32635

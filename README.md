@@ -121,7 +121,8 @@ And generally we want to exclude...
 
 OpenCollective:
 
-- Go to <https://opencollective.com/dashboard/servo/incoming-contributions?limit=100&status=ACTIVE&status=ERROR&type=RECURRING>
+- Go to <https://opencollective.com/dashboard/servo/incoming-contributions?limit=1000&status=ACTIVE&status=ERROR&type=RECURRING>
+- Make sure there is only one page of results; if there are more pages, we’ll need to update the process like we did for GitHub
 - Make sure there is a column with “month” or “year”, because some table filters hide that column
 - Run this code in devtools:
 ```js
