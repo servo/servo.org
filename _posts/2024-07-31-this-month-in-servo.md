@@ -7,13 +7,30 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+Servo has had some exciting changes land in our nightly builds over the last month:
+
 - as of 2024-06-26, we now support **document.fonts.ready** (@mukilan, @mrobinson, #32576)
 - as of 2024-06-27, we now support **commas in &lt;font face>** (@mrobinson, #32622)
 - as of 2024-07-03, we now support the **getCompilationInfo() method on GPUShaderModule** (@sagudev, #32642)
 - as of 2024-07-08, we now support window.**customElements.getName** (@keithamus, #32715)
+- as of 2024-07-09, we now render **&lt;caption> in tables** (@mrobinson, @Loirooriol, @mukilan, #32657, #32695)
 - as of 2024-07-13, we now support **document.visibilityState** and **document.hidden** (@wusyong, #32635)
 - as of 2024-07-18, we now support the **measureText() method on CanvasRenderingContext2D** (@chocolate-pie, #32704)
 - as of 2024-07-23, we now support **URL.parse()** (@shanehandley, #32819)
+- as of 2024-07-25, we now support the **‘aspect-ratio’ property on replaced elements** like &lt;img> (@valadaptive, #32800, #32803)
+
+## Rendering changes
+
+For **replaced elements** like &lt;img> and &lt;canvas>, the **‘min-width’**, **‘max-width’**, **‘min-height’**, and **‘max-height’** properties now **respect the aspect ratio** of the element (@valadaptive, #32777), and you can now change that aspect ratio with the **‘aspect-ratio’ property** (@valadaptive, #32800, #32803).
+
+**Parallel table layout** is now enabled (@mrobinson, #32477), spreading the work for laying out rows and their columns over all available CPU cores.
+This change is a great example of the strengths of [Rayon](https://crates.io/crates/rayon) and the opportunistic parallelism in Servo’s layout engine.
+
+We‘ve also made progress on our new **flexbox layout engine** (`--pref layout.flexbox.enabled`), landing support for:
+
+- **‘min-height’** and **‘max-height’** on row containers (@delan, @mrobinson, @mukilan, #32785)
+- setting **‘align-items’** or **‘align-self’** to **‘baseline’**, **‘first baseline’**, or **‘last baseline’** (@delan, @mrobinson, @mukilan, @nicoburns, #32787, #32790)
+- **baseline alignment** of row containers with their siblings (@mrobinson, @mukilan, @delan, #32841, #32810)
 
 <!--
 - donations
@@ -35,14 +52,14 @@ categories:
     - console logging 32727
     - protocol pcap parser 32684
 - rendering
-    - replaced aspect ratio min/max width/height 32777
-    - replaced ‘aspect-ratio’ property 32800 32803
-    - table parallel layout 32477
-    - table <caption> layout 32657 32695
-    - flex min/max cross container size 32785
-    - flex ‘align-self: [ first | last ]? && baseline’ 32787
-    - flex item/container baselines 32841
-    - flex refactors 32790 32810
+    - DONE replaced aspect ratio min/max width/height 32777
+    - DONE replaced ‘aspect-ratio’ property 32800 32803
+    - DONE table parallel layout 32477
+    - DONE table <caption> layout 32657 32695
+    - DONE flex min/max cross container size 32785
+    - DONE flex ‘align-self: [ first | last ]? && baseline’ 32787
+    - DONE flex item/container baselines 32841
+    - DONE flex refactors 32790 32810
 - fonts
     - generic font families 32673
 - upgrades
