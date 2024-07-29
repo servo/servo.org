@@ -7,6 +7,14 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+- as of 2024-06-26, we now support **document.fonts.ready** (@mukilan, @mrobinson, #32576)
+- as of 2024-06-27, we now support **commas in &lt;font face>** (@mrobinson, #32622)
+- as of 2024-07-03, we now support the **getCompilationInfo() method on GPUShaderModule** (@sagudev, #32642)
+- as of 2024-07-08, we now support window.**customElements.getName** (@keithamus, #32715)
+- as of 2024-07-13, we now support **document.visibilityState** and **document.hidden** (@wusyong, #32635)
+- as of 2024-07-18, we now support the **measureText() method on CanvasRenderingContext2D** (@chocolate-pie, #32704)
+- as of 2024-07-23, we now support **URL.parse()** (@shanehandley, #32819)
+
 <!--
 - donations
     - thanks.dev now enabled
@@ -15,14 +23,14 @@ categories:
         - github 1217.00/month
         - lfx 147.00/month
     - lfx transferred, still closing
-- api support
-    - commas in <font face> 32622
-    - document.{visibilityState,hidden} 32635
-    - CanvasRenderingContext2D measureText 32704
-    - URL.parse 32819
-    - window.customElements.getName 32715
-    - FontFaceSet 32576
-    - webgpu ShaderCompilationInfo (GPUShaderModule getCompilationInfo) 32642
+- DONE api support
+    - DONE commas in <font face> 32622
+    - DONE document.{visibilityState,hidden} 32635
+    - DONE CanvasRenderingContext2D measureText 32704
+    - DONE URL.parse 32819
+    - DONE window.customElements.getName 32715
+    - DONE FontFaceSet 32576
+    - DONE webgpu ShaderCompilationInfo (GPUShaderModule getCompilationInfo) 32642
 - devtools
     - console logging 32727
     - protocol pcap parser 32684
