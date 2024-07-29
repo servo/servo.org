@@ -34,14 +34,35 @@ We‘ve also made progress on our new **flexbox layout engine** (`--pref layout.
 
 Note that our flexbox layout support is still very early, since ‘flex-direction: column’ is not yet supported.
 
+## Donations
+
+Thanks again for your generous support!
+We are now receiving **2955 USD/month** (+32.6% over June) in recurring donations.
+
+We are still receiving donations from **14 people** on LFX, but we will stop accepting donations there soon — **please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo)**.
+In the meantime, we’ve transferred **2723 USD** of donations from LFX to our Open Collective account.
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 2955 / 10000); padding-left: 0.5em;"><strong>2955</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 2955 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="2955" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
+As always, use of these funds will be decided transparently in the Technical Steering Committee, starting with our updated proposal for a [dedicated server for CI runners](https://github.com/servo/project/issues/94#issuecomment-2252262955) (@delan, @sagudev, @nicoburns).
+For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
+
 <!--
 - donations
     - thanks.dev now enabled
-    - total monthly 2955/month (+32.6%)
+    - DONE total monthly 2955/month (+32.6%)
         - opencollective 1591.83/month
         - github 1217.00/month
         - lfx 147.00/month
-    - lfx transferred, still closing
+    - DONE lfx transferred, still closing
 - DONE api support
     - DONE commas in <font face> 32622
     - DONE document.{visibilityState,hidden} 32635
@@ -89,6 +110,7 @@ Note that our flexbox layout support is still very early, since ‘flex-directio
     - media player event timing 32643
     - mozjs crash 32786
 - verso
+- rego conference talk
 
 >>> 2024-06-25T06:03:57Z
     6738902d45920e0d9225fd9e926ab4169aa432e8	https://github.com/servo/servo/pull/32591	build(deps): bump lazy_static from 1.4.0 to 1.5.0 (#32591)
