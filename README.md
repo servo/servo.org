@@ -1,5 +1,16 @@
 # Servo.org website
 
+- [How to start a local dev server](#how-to-start-a-local-dev-server)
+- [How to list commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly)
+- [How to list this year’s pull request contributors](#how-to-list-this-years-pull-request-contributors)
+- [How to analyse WPT pass rate improvements](#how-to-analyse-wpt-pass-rate-improvements)
+- [How to linkify GitHub handles and pull requests when finishing a post](#how-to-linkify-github-handles-and-pull-requests-when-finishing-a-post)
+- [How to calculate monthly recurring donations](#how-to-calculate-monthly-recurring-donations)
+- [Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates)
+- [Hints for writing about changes](#hints-for-writing-about-changes)
+
+## How to start a local dev server
+
 1. `npm install`
 2. `npm run start`
 
@@ -92,31 +103,6 @@ To avoid false positives, be sure to step through each replacement rather than u
 - Replace ` ([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1#$2](https://github.com/servo/$1/pull/$2)`
 - Replace ` ([0-9A-Za-z_.-]+)/([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1/$2#$3](https://github.com/$1/$2/pull/$3)`
 
-## Triaging commits in nightlies for monthly updates
-
-Generally we want to include...
-
-- gecko upgrades (stylo, webrender, mozjs)
-- web-facing changes
-- DX-affecting CI changes
-- MSRV and Rust edition changes
-- platform support changes
-- platform bustage fixes
-- crash fixes
-
-And generally we want to exclude...
-
-- dependabot updates (“build(deps)”)
-- WPT imports (“Update web-platform-tests”)
-- lint and warning fixes
-- other CI changes
-- refactors (unless large-scale)
-- dependency cleanups
-
-## Hints for writing about changes
-
-- Always check the correct names of people and API features
-
 ## How to calculate monthly recurring donations
 
 OpenCollective:
@@ -162,3 +148,34 @@ LFX:
 - Go to <https://crowdfunding.lfx.linuxfoundation.org/projects/e98e012f-479e-45d0-8781-4d7f616baa9d/financial>
     - You may need to open it in private browsing to avoid getting a 404, not sure why
 - Manually add up the amounts for one month, stopping when you see the same donor repeated
+
+## Triaging commits in nightlies for monthly updates
+
+Generally we want to include...
+
+- gecko upgrades (stylo, webrender, mozjs)
+- web-facing changes
+- DX-affecting CI changes
+- MSRV and Rust edition changes
+- platform support changes
+- platform bustage fixes
+- crash fixes
+
+And generally we want to exclude...
+
+- dependabot updates (“build(deps)”)
+- WPT imports (“Update web-platform-tests”)
+- lint and warning fixes
+- other CI changes
+- refactors (unless large-scale)
+- dependency cleanups
+
+## Hints for writing about changes
+
+**Always check the correct names of people and API features.** People like it when their names are spelled correctly, of course, but sometimes authors refer to API features by incorrect names. When in doubt, check the spec. For example, [servo#32642](https://github.com/servo/servo/pull/32642) says “ShaderCompilationInfo” in the title, but the interface is actually [GPUCompilationInfo](https://developer.mozilla.org/en-US/docs/Web/API/GPUCompilationInfo), returned by the [getCompilationInfo() method on GPUShaderModule](https://developer.mozilla.org/en-US/docs/Web/API/GPUShaderModule/getCompilationInfo).
+
+**Check for partial implementations.** Sometimes a patch appears to implement an API feature, but the feature may actually be incomplete. If support is not complete or mostly complete, describe only what is supported or use phrases like “partial”, “basic”, or “initial support”. For example, the title of [servo#32576](https://github.com/servo/servo/pull/32576) suggests that it implements FontFaceSet, but the description and diff explains that only document.fonts.ready is actually implemented.
+
+**Check for experimental implementations.** Sometimes a patch appears to implement an API feature, but the feature is gated by a pref. If the user needs to enable a pref to use a feature, make sure you mention that. For example, [servo#31108](https://github.com/servo/servo/pull/31108) implements ResizeObserver, but the user needs to run servoshell with `--pref dom.resize_observer.enabled` ([June 2024](https://servo.org/blog/2024/06/28/input-text-emoji-devtools/)).
+
+**Check for disabled implementations.** Sometimes a patch appears to implement an API feature, but the feature is still completely disabled. In this case, it may not be worth writing about the feature at all, unless a lot of work went into the patch. For example, [servo#30752](https://github.com/servo/servo/pull/30752) implements some :has() selector features, but the feature is completely disabled ([November 2023](https://servo.org/blog/2023/11/30/embedding-floats-color-mix/)).
