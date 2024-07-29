@@ -8,6 +8,7 @@
 - [How to calculate monthly recurring donations](#how-to-calculate-monthly-recurring-donations)
 - [Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates)
 - [Hints for writing about changes](#hints-for-writing-about-changes)
+- [Corrections](#corrections)
 
 ## How to start a local dev server
 
@@ -174,8 +175,17 @@ And generally we want to exclude...
 
 **Always check the correct names of people and API features.** People like it when their names are spelled correctly, of course, but sometimes authors refer to API features by incorrect names. When in doubt, check the spec. For example, [servo#32642](https://github.com/servo/servo/pull/32642) says “ShaderCompilationInfo” in the title, but the interface is actually [GPUCompilationInfo](https://developer.mozilla.org/en-US/docs/Web/API/GPUCompilationInfo), returned by the [getCompilationInfo() method on GPUShaderModule](https://developer.mozilla.org/en-US/docs/Web/API/GPUShaderModule/getCompilationInfo).
 
+**Always check for patches with co-authors.** Look for a “Co-authored-by” lines in the pull request description, as well as in the descriptions of commits with multiple avatars in the commits tab. If a commit has a “Co-authored-by” line, it will have multiple avatars, but a commit can also have multiple avatars for other reasons, like the committer being different from the author. For example, [servo#32576](https://github.com/servo/servo/pull/32576) has a co-author in both the pull request description and the description of [its only commit](https://github.com/servo/servo/pull/32576/commits/5f19babbae505de98fd95f60717c89d554e6f078).
+
 **Check for partial implementations.** Sometimes a patch appears to implement an API feature, but the feature may actually be incomplete. If support is not complete or mostly complete, describe only what is supported or use phrases like “partial”, “basic”, or “initial support”. For example, the title of [servo#32576](https://github.com/servo/servo/pull/32576) suggests that it implements FontFaceSet, but the description and diff explains that only document.fonts.ready is actually implemented.
 
 **Check for experimental implementations.** Sometimes a patch appears to implement an API feature, but the feature is gated by a pref. If the user needs to enable a pref to use a feature, make sure you mention that. For example, [servo#31108](https://github.com/servo/servo/pull/31108) implements ResizeObserver, but the user needs to run servoshell with `--pref dom.resize_observer.enabled` ([June 2024](https://servo.org/blog/2024/06/28/input-text-emoji-devtools/)).
 
 **Check for disabled implementations.** Sometimes a patch appears to implement an API feature, but the feature is still completely disabled. In this case, it may not be worth writing about the feature at all, unless a lot of work went into the patch. For example, [servo#30752](https://github.com/servo/servo/pull/30752) implements some :has() selector features, but the feature is completely disabled ([November 2023](https://servo.org/blog/2023/11/30/embedding-floats-color-mix/)).
+
+## Corrections
+
+When we make mistakes, we issue corrections on the blog and on social media.
+
+- [**November 2023**](https://servo.org/blog/2023/11/30/embedding-floats-color-mix/) — [An earlier version](https://github.com/servo/servo.org/pull/126) of this post said that Servo now supports the :has() selector, but this was incorrect. While some of the code implementing the feature has landed, it is [not yet enabled](https://github.com/servo/servo/blob/7bcb25c85c98c367c6423ebc0fed964dd08cad56/components/selectors/parser.rs#L276-L279).
+- [**March 2024**](https://servo.org/blog/2024/03/12/sponsoring-servo/) — [An earlier version](https://github.com/servo/servo.org/pull/139) of this post said that over 94% of amounts donated to Servo go directly to the project, with only 6% in fees, but this was incorrect. The actual fees depend on the payment method and the amount you donate, but in most cases they are between 10% and 20%. We are still working on clarifying the exact rules about fees with our crowdfunding platforms, so check our [Sponsorship](https://servo.org/sponsorship/) page for the latest information.
