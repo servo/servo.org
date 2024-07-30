@@ -10,7 +10,6 @@ categories:
 Servo has had some exciting changes land in our nightly builds over the last month:
 
 - as of 2024-06-26, we now support **document.fonts.ready** (@mukilan, @mrobinson, #32576)
-- as of 2024-06-27, we now support **commas in &lt;font face>** (@mrobinson, #32622)
 - as of 2024-07-03, we now support the **getCompilationInfo() method on GPUShaderModule** (@sagudev, #32642)
 - as of 2024-07-08, we now support window.**customElements.getName** (@keithamus, #32715)
 - as of 2024-07-09, we now render **&lt;caption> in tables** (@mrobinson, @Loirooriol, @mukilan, #32657, #32695)
@@ -18,6 +17,13 @@ Servo has had some exciting changes land in our nightly builds over the last mon
 - as of 2024-07-18, we now support the **measureText() method on CanvasRenderingContext2D** (@chocolate-pie, #32704)
 - as of 2024-07-23, we now support **URL.parse()** (@shanehandley, #32819)
 - as of 2024-07-25, we now support the **‘aspect-ratio’ property on replaced elements** like &lt;img> (@valadaptive, #32800, #32803)
+
+We’ve landed support for **generic font families** like ‘sans-serif’ and ‘monospace’ (@mrobinson, @mukilan, #32673), as well as **commas in &lt;font face>** (@mrobinson, #32622) and fixes for font matching on Android and OpenHarmony (@jschwe, #32725, #32731).
+
+servoshell now has experimental **OpenHarmony support** (@jschwe, #32594), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
+We’ve also landed **directory listings** for local files (@Bobulous, @mrobinson, #32580), made the location bar behave more consistently on Android (@jschwe, #32586), and servoshell no longer quits when you press Escape (@mrego, #32603).
+
+When debugging in Servo [with the **Firefox devtools**](https://book.servo.org/running-servoshell.html), you can now see **console messages** from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new **devtools protocol analyzer** (@eerii, #32684).
 
 ## Rendering changes
 
@@ -72,8 +78,8 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE FontFaceSet 32576
     - DONE webgpu ShaderCompilationInfo (GPUShaderModule getCompilationInfo) 32642
 - devtools
-    - console logging 32727
-    - protocol pcap parser 32684
+    - DONE console logging 32727
+    - DONE protocol pcap parser 32684
 - rendering
     - DONE replaced aspect ratio min/max width/height 32777
     - DONE replaced ‘aspect-ratio’ property 32800 32803
@@ -84,17 +90,18 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE flex item/container baselines 32841
     - DONE flex refactors 32790 32810
 - fonts
-    - generic font families 32673
+    - DONE generic font families 32673
+    - DONE ohos fonts 32725 32731
 - upgrades
     - stylo 2024-07-16 32474 32812
     - now upstreaming to stylo! nico patch
     - nixpkgs cargo-deny 32842
     - egui 32683
 - servoshell
-    - local directory listings 32580
-    - esc no longer quits 32603
-    - android location bar logic 32586
-    - openharmony support 32594
+    - DONE local directory listings 32580
+    - DONE esc no longer quits 32603
+    - DONE android location bar logic 32586
+    - DONE openharmony support 32594
 - binary size
     - cargo production-stripped 32651
     - compile without layout_2013 32759
@@ -211,7 +218,7 @@ aae66cc33cdf4d4a83de5d17f86c8074e82812f0	https://github.com/servo/servo/pull/326
 +   77e9e3deba3925e8024719a6c3c54fbd4dddee7a	https://github.com/servo/servo/pull/32673	fonts: Add support for generic font families and font size configuration (#32673)
 956b7f62e066f7f01a785a328a05f0f06d70f602	https://github.com/servo/servo/pull/32694	Avoid unnecessary clones for URLs (#32694)
     d9b99723f59c7ea665f293151476b75fb9381d9e	https://github.com/servo/servo/pull/32729	Remove unused ToWebRender implementation (#32729)
-8cd1e22f8dc624deb80de9a730a21ef8d8cc503e	https://github.com/servo/servo/pull/32725	android/ohos: fonts: Ignore ascii case when searching for font family (#32725)
++   8cd1e22f8dc624deb80de9a730a21ef8d8cc503e	https://github.com/servo/servo/pull/32725	android/ohos: fonts: Ignore ascii case when searching for font family (#32725)
 +   89944bd330c1e46a6f406c9aa36e5118ddd06902	https://github.com/servo/servo/pull/32695	layout: Improve layout of table captions (#32695)
     2888193cfe3d1b3317984324add07a5e4e4228dc	https://github.com/servo/servo/pull/32726	DevTools: Replace camel case variable names (#32726)
     b243457ccc6cd5a2dab58d9c9ff8b6fee1db6a20	https://github.com/servo/servo/pull/32724	ci: fix security issue in try job workflow (#32724)
@@ -298,7 +305,7 @@ b471f6473f2564f0a32664b36139b0ae5d02655c	https://github.com/servo/servo/pull/328
     835e4f49262e179a4b646cf82de74cc6c1cd3523	https://github.com/servo/servo/pull/32833	build(deps): bump pathfinder_simd from 0.5.3 to 0.5.4 (#32833)
     47d702edc3895ff0137075588b820afe230c8048	https://github.com/servo/servo/pull/32830	build(deps): bump syn from 2.0.71 to 2.0.72 (#32830)
     753dedbeba1cbe39be45b802f6275c103ce2a41a	https://github.com/servo/servo/pull/32831	build(deps): bump arrayref from 0.3.7 to 0.3.8 (#32831)
-f040b821a3c6f0079912d156c3b5349b505fc8e0	https://github.com/servo/servo/pull/32731	ohos: Detect installed fonts (#32731)
++   f040b821a3c6f0079912d156c3b5349b505fc8e0	https://github.com/servo/servo/pull/32731	ohos: Detect installed fonts (#32731)
 b5482e34c017c64fae6f5c1db41880d826546a46	https://github.com/servo/servo/pull/32829	compositor: propagate scroll events across pipelines (#32829)
 +   45eabad16971e51394a2050ec16966c1bbefa8ff	https://github.com/servo/servo/pull/32819	Implement URL::parse() (#32819)
 a007baa4cf6791cb42e2d7ec46eb9cc803f24b29	https://github.com/servo/servo/pull/32828	deps: switch to `tikv-jemallocator` crates in Cargo.toml (#32828)
