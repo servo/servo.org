@@ -24,16 +24,10 @@
 &lt;li&gt;as of 2024-07-13, we now support &lt;strong&gt;document.visibilityState&lt;/strong&gt; and &lt;strong&gt;document.hidden&lt;/strong&gt; (@wusyong, #32635)&lt;/li&gt;
 &lt;li&gt;as of 2024-07-18, we now support the &lt;strong&gt;measureText() method on CanvasRenderingContext2D&lt;/strong&gt; (@chocolate-pie, #32704)&lt;/li&gt;
 &lt;li&gt;as of 2024-07-23, we now support &lt;strong&gt;URL.parse()&lt;/strong&gt; (@shanehandley, #32819)&lt;/li&gt;
-&lt;li&gt;as of 2024-07-25, we now support the &lt;strong&gt;‘aspect-ratio’ property on replaced elements&lt;/strong&gt; like &amp;lt;img&amp;gt; (@valadaptive, #32800, #32803)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;We’ve landed support for &lt;strong&gt;generic font families&lt;/strong&gt; like ‘sans-serif’ and ‘monospace’ (@mrobinson, @mukilan, #32673), as well as &lt;strong&gt;commas in &amp;lt;font face&amp;gt;&lt;/strong&gt; (@mrobinson, #32622) and fixes for font matching on Android and OpenHarmony (@jschwe, #32725, #32731).&lt;/p&gt;
-&lt;p&gt;servoshell now has experimental &lt;strong&gt;OpenHarmony support&lt;/strong&gt; (@jschwe, #32594), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
-We’ve also landed &lt;strong&gt;directory listings&lt;/strong&gt; for local files (@Bobulous, @mrobinson, #32580), made the location bar behave more consistently on Android (@jschwe, #32586), and servoshell no longer quits when you press Escape (@mrego, #32603).&lt;/p&gt;
-&lt;p&gt;When debugging in Servo &lt;a href=&quot;https://book.servo.org/running-servoshell.html&quot;&gt;with the &lt;strong&gt;Firefox devtools&lt;/strong&gt;&lt;/a&gt;, you can now see &lt;strong&gt;console messages&lt;/strong&gt; from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new &lt;strong&gt;devtools protocol analyzer&lt;/strong&gt; (@eerii, #32684).&lt;/p&gt;
 &lt;h2 id=&quot;rendering-changes&quot; tabindex=&quot;-1&quot;&gt;Rendering changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-july-2024/blog/2024/07/30/this-month-in-servo/#rendering-changes&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;For &lt;strong&gt;replaced elements&lt;/strong&gt; like &amp;lt;img&amp;gt; and &amp;lt;canvas&amp;gt;, the &lt;strong&gt;‘min-width’&lt;/strong&gt;, &lt;strong&gt;‘max-width’&lt;/strong&gt;, &lt;strong&gt;‘min-height’&lt;/strong&gt;, and &lt;strong&gt;‘max-height’&lt;/strong&gt; properties now &lt;strong&gt;respect the aspect ratio&lt;/strong&gt; of the element (@valadaptive, #32777), and you can now change that aspect ratio with the &lt;strong&gt;‘aspect-ratio’ property&lt;/strong&gt; (@valadaptive, #32800, #32803).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Parallel table layout&lt;/strong&gt; is now enabled (@mrobinson, #32477), spreading the work for laying out rows and their columns over all available CPU cores.
 This change is a great example of the strengths of &lt;a href=&quot;https://crates.io/crates/rayon&quot;&gt;Rayon&lt;/a&gt; and the opportunistic parallelism in Servo’s layout engine.&lt;/p&gt;
 &lt;p&gt;We‘ve also made progress on our new &lt;strong&gt;flexbox layout engine&lt;/strong&gt; (&lt;code&gt;--pref layout.flexbox.enabled&lt;/code&gt;), landing support for:&lt;/p&gt;
@@ -43,6 +37,14 @@ This change is a great example of the strengths of &lt;a href=&quot;https://crat
 &lt;li&gt;&lt;strong&gt;baseline alignment&lt;/strong&gt; of row containers with their siblings (@mrobinson, @mukilan, @delan, #32841, #32810)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Note that our flexbox layout support is still very early, since ‘flex-direction: column’ is not yet supported.&lt;/p&gt;
+&lt;p&gt;We’ve landed support for &lt;strong&gt;generic font families&lt;/strong&gt; like ‘sans-serif’ and ‘monospace’ (@mrobinson, @mukilan, #32673), as well as &lt;strong&gt;commas in &amp;lt;font face&amp;gt;&lt;/strong&gt; (@mrobinson, #32622) and fixes for font matching on Android and OpenHarmony (@jschwe, #32725, #32731).&lt;/p&gt;
+&lt;p&gt;For &lt;strong&gt;replaced elements&lt;/strong&gt; like &amp;lt;img&amp;gt; and &amp;lt;canvas&amp;gt;, the &lt;strong&gt;‘min-width’&lt;/strong&gt;, &lt;strong&gt;‘max-width’&lt;/strong&gt;, &lt;strong&gt;‘min-height’&lt;/strong&gt;, and &lt;strong&gt;‘max-height’&lt;/strong&gt; properties now &lt;strong&gt;respect the aspect ratio&lt;/strong&gt; of the element (@valadaptive, #32777), and you can now change that aspect ratio with the &lt;strong&gt;‘aspect-ratio’ property&lt;/strong&gt; (@valadaptive, #32800, #32803).&lt;/p&gt;
+&lt;h2 id=&quot;servoshell-and-devtools&quot; tabindex=&quot;-1&quot;&gt;servoshell and devtools &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-july-2024/blog/2024/07/30/this-month-in-servo/#servoshell-and-devtools&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;servoshell now has experimental &lt;strong&gt;OpenHarmony support&lt;/strong&gt; (@jschwe, #32594), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
+We’ve also landed &lt;strong&gt;directory listings&lt;/strong&gt; for local files (@Bobulous, @mrobinson, #32580), made the location bar behave more consistently on Android (@jschwe, #32586), and servoshell no longer quits when you press Escape (@mrego, #32603).&lt;/p&gt;
+&lt;p&gt;When debugging in Servo &lt;a href=&quot;https://book.servo.org/running-servoshell.html&quot;&gt;with the &lt;strong&gt;Firefox devtools&lt;/strong&gt;&lt;/a&gt;, you can now see &lt;strong&gt;console messages&lt;/strong&gt; from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new &lt;strong&gt;devtools protocol analyzer&lt;/strong&gt; (@eerii, #32684).&lt;/p&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-july-2024/blog/2024/07/30/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
