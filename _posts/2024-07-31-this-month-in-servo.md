@@ -74,6 +74,11 @@ If you’re working on DOM code, you can enable it again with `./mach build --us
 When contributing to Servo, **your commits must now be [“signed off”](https://developercertificate.org)**, which is essentially a promise that you own (or are allowed to contribute) the code in your patch.
 If the DCO check fails, click Details for help on signing off your commits.
 
+<aside class="_note">
+
+Note that this is **not** a contributor license agreement (CLA), which would allow Servo to become closed source someday, nor is it a copyright assignment.
+</aside>
+
 ## Donations
 
 Thanks again for your generous support!
