@@ -16,18 +16,8 @@ Servo has had some exciting changes land in our nightly builds over the last mon
 - as of 2024-07-13, we now support **document.visibilityState** and **document.hidden** (@wusyong, #32635)
 - as of 2024-07-18, we now support the **measureText() method on CanvasRenderingContext2D** (@chocolate-pie, #32704)
 - as of 2024-07-23, we now support **URL.parse()** (@shanehandley, #32819)
-- as of 2024-07-25, we now support the **‘aspect-ratio’ property on replaced elements** like &lt;img> (@valadaptive, #32800, #32803)
-
-We’ve landed support for **generic font families** like ‘sans-serif’ and ‘monospace’ (@mrobinson, @mukilan, #32673), as well as **commas in &lt;font face>** (@mrobinson, #32622) and fixes for font matching on Android and OpenHarmony (@jschwe, #32725, #32731).
-
-servoshell now has experimental **OpenHarmony support** (@jschwe, #32594), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
-We’ve also landed **directory listings** for local files (@Bobulous, @mrobinson, #32580), made the location bar behave more consistently on Android (@jschwe, #32586), and servoshell no longer quits when you press Escape (@mrego, #32603).
-
-When debugging in Servo [with the **Firefox devtools**](https://book.servo.org/running-servoshell.html), you can now see **console messages** from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new **devtools protocol analyzer** (@eerii, #32684).
 
 ## Rendering changes
-
-For **replaced elements** like &lt;img> and &lt;canvas>, the **‘min-width’**, **‘max-width’**, **‘min-height’**, and **‘max-height’** properties now **respect the aspect ratio** of the element (@valadaptive, #32777), and you can now change that aspect ratio with the **‘aspect-ratio’ property** (@valadaptive, #32800, #32803).
 
 **Parallel table layout** is now enabled (@mrobinson, #32477), spreading the work for laying out rows and their columns over all available CPU cores.
 This change is a great example of the strengths of [Rayon](https://crates.io/crates/rayon) and the opportunistic parallelism in Servo’s layout engine.
@@ -39,6 +29,17 @@ We‘ve also made progress on our new **flexbox layout engine** (`--pref layout.
 - **baseline alignment** of row containers with their siblings (@mrobinson, @mukilan, @delan, #32841, #32810)
 
 Note that our flexbox layout support is still very early, since ‘flex-direction: column’ is not yet supported.
+
+We’ve landed support for **generic font families** like ‘sans-serif’ and ‘monospace’ (@mrobinson, @mukilan, #32673), as well as **commas in &lt;font face>** (@mrobinson, #32622) and fixes for font matching on Android and OpenHarmony (@jschwe, #32725, #32731).
+
+For **replaced elements** like &lt;img> and &lt;canvas>, the **‘min-width’**, **‘max-width’**, **‘min-height’**, and **‘max-height’** properties now **respect the aspect ratio** of the element (@valadaptive, #32777), and you can now change that aspect ratio with the **‘aspect-ratio’ property** (@valadaptive, #32800, #32803).
+
+## Devtools and servoshell
+
+When debugging in Servo [with the **Firefox devtools**](https://book.servo.org/running-servoshell.html), you can now see **console messages** from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new **devtools protocol analyzer** (@eerii, #32684).
+
+servoshell now has experimental **OpenHarmony support** (@jschwe, #32594), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
+We’ve also landed **directory listings** for local files (@Bobulous, @mrobinson, #32580), made the location bar behave more consistently on Android (@jschwe, #32586), and servoshell no longer quits when you press Escape (@mrego, #32603).
 
 ## Donations
 
