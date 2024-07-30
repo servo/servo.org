@@ -28,7 +28,10 @@ We‘ve also made progress on our new **flexbox layout engine** (`--pref layout.
 - setting **‘align-items’** or **‘align-self’** to **‘baseline’**, **‘first baseline’**, or **‘last baseline’** (@delan, @mrobinson, @mukilan, @nicoburns, #32787, #32790)
 - **baseline alignment** of row containers with their siblings (@mrobinson, @mukilan, @delan, #32841, #32810)
 
+<aside class="_note">
+
 Note that our flexbox layout support is still very early, since ‘flex-direction: column’ is not yet supported.
+</aside>
 
 We’ve landed support for **generic font families** like ‘sans-serif’ and ‘monospace’ (@mrobinson, @mukilan, #32673), as well as **commas in &lt;font face>** (@mrobinson, #32622) and fixes for font matching on Android and OpenHarmony (@jschwe, #32725, #32731).
 
