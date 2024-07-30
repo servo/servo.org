@@ -39,7 +39,7 @@ This change is a great example of the strengths of &lt;a href=&quot;https://crat
 &lt;p&gt;Note that our flexbox layout support is still very early, since ‘flex-direction: column’ is not yet supported.&lt;/p&gt;
 &lt;p&gt;We’ve landed support for &lt;strong&gt;generic font families&lt;/strong&gt; like ‘sans-serif’ and ‘monospace’ (@mrobinson, @mukilan, #32673), as well as &lt;strong&gt;commas in &amp;lt;font face&amp;gt;&lt;/strong&gt; (@mrobinson, #32622) and fixes for font matching on Android and OpenHarmony (@jschwe, #32725, #32731).&lt;/p&gt;
 &lt;p&gt;For &lt;strong&gt;replaced elements&lt;/strong&gt; like &amp;lt;img&amp;gt; and &amp;lt;canvas&amp;gt;, the &lt;strong&gt;‘min-width’&lt;/strong&gt;, &lt;strong&gt;‘max-width’&lt;/strong&gt;, &lt;strong&gt;‘min-height’&lt;/strong&gt;, and &lt;strong&gt;‘max-height’&lt;/strong&gt; properties now &lt;strong&gt;respect the aspect ratio&lt;/strong&gt; of the element (@valadaptive, #32777), and you can now change that aspect ratio with the &lt;strong&gt;‘aspect-ratio’ property&lt;/strong&gt; (@valadaptive, #32800, #32803).&lt;/p&gt;
-&lt;h2 id=&quot;devtools-and-servoshell&quot; tabindex=&quot;-1&quot;&gt;Devtools and servoshell &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-july-2024/blog/2024/07/30/this-month-in-servo/#devtools-and-servoshell&quot;&gt;
+&lt;h2 id=&quot;devtools-and-servoshell-changes&quot; tabindex=&quot;-1&quot;&gt;Devtools and servoshell changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-july-2024/blog/2024/07/30/this-month-in-servo/#devtools-and-servoshell-changes&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;When debugging in Servo &lt;a href=&quot;https://book.servo.org/running-servoshell.html&quot;&gt;with the &lt;strong&gt;Firefox devtools&lt;/strong&gt;&lt;/a&gt;, you can now see &lt;strong&gt;console messages&lt;/strong&gt; from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new &lt;strong&gt;devtools protocol analyzer&lt;/strong&gt; (@eerii, #32684).&lt;/p&gt;
@@ -80,6 +80,17 @@ Here’s how much they save on Linux (amd64):&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/figure&gt;
+&lt;h2 id=&quot;changes-for-servo-developers&quot; tabindex=&quot;-1&quot;&gt;Changes for Servo developers &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-july-2024/blog/2024/07/30/this-month-in-servo/#changes-for-servo-developers&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;figure class=&quot;_figr&quot;&gt;&lt;a href=&quot;https://servo.org/blog-july-2024/img/blog/dco-check.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-july-2024/img/blog/dco-check.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;
+&lt;a href=&quot;https://book.servo.org/&quot;&gt;&lt;strong&gt;The Servo book&lt;/strong&gt;&lt;/a&gt; is now the place to go for Servo’s documentation (@delan, #32743).
+It includes our architecture and design docs, a link to our API docs, as well as docs on building, running, testing, debugging, and profiling Servo.&lt;/p&gt;
+&lt;p&gt;Servo now builds without the &lt;code&gt;crown&lt;/code&gt; linter by default (@jschwe, #32494), simplifying the build process in some cases.
+If you’re working on DOM code, you can enable it again with &lt;code&gt;./mach build --use-crown&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;When contributing to Servo, &lt;strong&gt;your commits must now be &lt;a href=&quot;https://developercertificate.org/&quot;&gt;“signed off”&lt;/a&gt;&lt;/strong&gt;, which is essentially a promise that you own (or are allowed to contribute) the code in your patch.
+If the DCO check fails, click Details for help on signing off your commits.&lt;/p&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-july-2024/blog/2024/07/30/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -106,6 +117,7 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-july-2024/
         - github 1217.00/month
         - lfx 147.00/month
     - DONE lfx transferred, still closing
+    - ci runners
 - DONE api support
     - DONE commas in &lt;font face&gt; 32622
     - DONE document.{visibilityState,hidden} 32635
@@ -143,13 +155,12 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-july-2024/
     - DONE cargo production-stripped 32651
     - DONE compile without layout_2013 32759
 - dev
-    - crown optional 32494
-    - mach bootstrap --skip-static-analysis 32587
-    - DONE? ai contributions 32287
-    - android signing key 32721
-    - book 32743
-    - ci runners
-    - dco signoff?
+    - DONE crown optional 32494
+    - SKIP mach bootstrap --skip-static-analysis 32587
+    - DONE LAST MONTH ai contributions 32287
+    - SKIP android signing key 32721
+    - DONE book 32743
+    - DONE dco signoff
 - reliability
     - media player event timing 32643
     - mozjs crash 32786

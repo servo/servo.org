@@ -227,7 +227,7 @@ This change is a great example of the strengths of <a href="https://crates.io/cr
 <p>Note that our flexbox layout support is still very early, since ‘flex-direction: column’ is not yet supported.</p>
 <p>We’ve landed support for <strong>generic font families</strong> like ‘sans-serif’ and ‘monospace’ (@mrobinson, @mukilan, #32673), as well as <strong>commas in &lt;font face&gt;</strong> (@mrobinson, #32622) and fixes for font matching on Android and OpenHarmony (@jschwe, #32725, #32731).</p>
 <p>For <strong>replaced elements</strong> like &lt;img&gt; and &lt;canvas&gt;, the <strong>‘min-width’</strong>, <strong>‘max-width’</strong>, <strong>‘min-height’</strong>, and <strong>‘max-height’</strong> properties now <strong>respect the aspect ratio</strong> of the element (@valadaptive, #32777), and you can now change that aspect ratio with the <strong>‘aspect-ratio’ property</strong> (@valadaptive, #32800, #32803).</p>
-<h2 id="devtools-and-servoshell" tabindex="-1">Devtools and servoshell <a class="header-anchor" href="#devtools-and-servoshell">
+<h2 id="devtools-and-servoshell-changes" tabindex="-1">Devtools and servoshell changes <a class="header-anchor" href="#devtools-and-servoshell-changes">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p>When debugging in Servo <a href="https://book.servo.org/running-servoshell.html">with the <strong>Firefox devtools</strong></a>, you can now see <strong>console messages</strong> from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new <strong>devtools protocol analyzer</strong> (@eerii, #32684).</p>
@@ -268,6 +268,18 @@ Here’s how much they save on Linux (amd64):</p>
 </tbody>
 </table>
 </figure>
+<h2 id="changes-for-servo-developers" tabindex="-1">Changes for Servo developers <a class="header-anchor" href="#changes-for-servo-developers">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<figure class="_figr"><a href="/blog-july-2024/img/blog/dco-check.png"><img src="/blog-july-2024/img/blog/dco-check.png"
+    alt=""></a></figure>
+<p><span class=_floatmin></span>
+<a href="https://book.servo.org"><strong>The Servo book</strong></a> is now the place to go for Servo’s documentation (@delan, #32743).
+It includes our architecture and design docs, a link to our API docs, as well as docs on building, running, testing, debugging, and profiling Servo.</p>
+<p>Servo now builds without the <code>crown</code> linter by default (@jschwe, #32494), simplifying the build process in some cases.
+If you’re working on DOM code, you can enable it again with <code>./mach build --use-crown</code>.</p>
+<p>When contributing to Servo, <strong>your commits must now be <a href="https://developercertificate.org">“signed off”</a></strong>, which is essentially a promise that you own (or are allowed to contribute) the code in your patch.
+If the DCO check fails, click Details for help on signing off your commits.</p>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -294,6 +306,7 @@ For more details, head to our <a href="/blog-july-2024/sponsorship/">Sponsorship
         - github 1217.00/month
         - lfx 147.00/month
     - DONE lfx transferred, still closing
+    - ci runners
 - DONE api support
     - DONE commas in <font face> 32622
     - DONE document.{visibilityState,hidden} 32635
@@ -331,13 +344,12 @@ For more details, head to our <a href="/blog-july-2024/sponsorship/">Sponsorship
     - DONE cargo production-stripped 32651
     - DONE compile without layout_2013 32759
 - dev
-    - crown optional 32494
-    - mach bootstrap --skip-static-analysis 32587
-    - DONE? ai contributions 32287
-    - android signing key 32721
-    - book 32743
-    - ci runners
-    - dco signoff?
+    - DONE crown optional 32494
+    - SKIP mach bootstrap --skip-static-analysis 32587
+    - DONE LAST MONTH ai contributions 32287
+    - SKIP android signing key 32721
+    - DONE book 32743
+    - DONE dco signoff
 - reliability
     - media player event timing 32643
     - mozjs crash 32786
