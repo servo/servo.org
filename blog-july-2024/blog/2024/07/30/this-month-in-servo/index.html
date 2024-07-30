@@ -233,6 +233,41 @@ This change is a great example of the strengths of <a href="https://crates.io/cr
 <p>When debugging in Servo <a href="https://book.servo.org/running-servoshell.html">with the <strong>Firefox devtools</strong></a>, you can now see <strong>console messages</strong> from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new <strong>devtools protocol analyzer</strong> (@eerii, #32684).</p>
 <p>servoshell now has experimental <strong>OpenHarmony support</strong> (@jschwe, #32594), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
 We’ve also landed <strong>directory listings</strong> for local files (@Bobulous, @mrobinson, #32580), made the location bar behave more consistently on Android (@jschwe, #32586), and servoshell no longer quits when you press Escape (@mrego, #32603).</p>
+<p>To reduce servoshell’s binary size, we now build our nightly releases with <strong>ThinLTO</strong> (@jschwe, #32651), and you can go even further by building Servo <strong>without debug symbols</strong> (@jschwe, #32651) or <strong>without the legacy layout engine</strong> (@jschwe, #32759).
+Note that these builds use the <code>production</code> profile in Cargo, not the <code>release</code> profile.
+Here’s how much they save on Linux (amd64):</p>
+<figure class="_fig">
+<table>
+<thead>
+<tr>
+<th>Version and build config</th>
+<th><code>servo</code> binary size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Before #32651</td>
+<td>126364k</td>
+</tr>
+<tr>
+<td>With #32651</td>
+<td>110111k (−12.8%)</td>
+</tr>
+<tr>
+<td>With #32651<br>• Without debug symbols</td>
+<td>102878k (−18.5%)</td>
+</tr>
+<tr>
+<td>With #32759<br>• Without <code>layout_2013</code></td>
+<td>107652k (−14.8%)</td>
+</tr>
+<tr>
+<td>With #32759<br>• Without debug symbols<br>• Without <code>layout_2013</code></td>
+<td>100886k (−20.1%)</td>
+</tr>
+</tbody>
+</table>
+</figure>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -293,8 +328,8 @@ For more details, head to our <a href="/blog-july-2024/sponsorship/">Sponsorship
     - DONE android location bar logic 32586
     - DONE openharmony support 32594
 - binary size
-    - cargo production-stripped 32651
-    - compile without layout_2013 32759
+    - DONE cargo production-stripped 32651
+    - DONE compile without layout_2013 32759
 - dev
     - crown optional 32494
     - mach bootstrap --skip-static-analysis 32587

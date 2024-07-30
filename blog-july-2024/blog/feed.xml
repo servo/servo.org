@@ -45,6 +45,41 @@ This change is a great example of the strengths of &lt;a href=&quot;https://crat
 &lt;p&gt;When debugging in Servo &lt;a href=&quot;https://book.servo.org/running-servoshell.html&quot;&gt;with the &lt;strong&gt;Firefox devtools&lt;/strong&gt;&lt;/a&gt;, you can now see &lt;strong&gt;console messages&lt;/strong&gt; from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new &lt;strong&gt;devtools protocol analyzer&lt;/strong&gt; (@eerii, #32684).&lt;/p&gt;
 &lt;p&gt;servoshell now has experimental &lt;strong&gt;OpenHarmony support&lt;/strong&gt; (@jschwe, #32594), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
 We’ve also landed &lt;strong&gt;directory listings&lt;/strong&gt; for local files (@Bobulous, @mrobinson, #32580), made the location bar behave more consistently on Android (@jschwe, #32586), and servoshell no longer quits when you press Escape (@mrego, #32603).&lt;/p&gt;
+&lt;p&gt;To reduce servoshell’s binary size, we now build our nightly releases with &lt;strong&gt;ThinLTO&lt;/strong&gt; (@jschwe, #32651), and you can go even further by building Servo &lt;strong&gt;without debug symbols&lt;/strong&gt; (@jschwe, #32651) or &lt;strong&gt;without the legacy layout engine&lt;/strong&gt; (@jschwe, #32759).
+Note that these builds use the &lt;code&gt;production&lt;/code&gt; profile in Cargo, not the &lt;code&gt;release&lt;/code&gt; profile.
+Here’s how much they save on Linux (amd64):&lt;/p&gt;
+&lt;figure class=&quot;_fig&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Version and build config&lt;/th&gt;
+&lt;th&gt;&lt;code&gt;servo&lt;/code&gt; binary size&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Before #32651&lt;/td&gt;
+&lt;td&gt;126364k&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;With #32651&lt;/td&gt;
+&lt;td&gt;110111k (−12.8%)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;With #32651&lt;br /&gt;• Without debug symbols&lt;/td&gt;
+&lt;td&gt;102878k (−18.5%)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;With #32759&lt;br /&gt;• Without &lt;code&gt;layout_2013&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;107652k (−14.8%)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;With #32759&lt;br /&gt;• Without debug symbols&lt;br /&gt;• Without &lt;code&gt;layout_2013&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;100886k (−20.1%)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/figure&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-july-2024/blog/2024/07/30/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -105,8 +140,8 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-july-2024/
     - DONE android location bar logic 32586
     - DONE openharmony support 32594
 - binary size
-    - cargo production-stripped 32651
-    - compile without layout_2013 32759
+    - DONE cargo production-stripped 32651
+    - DONE compile without layout_2013 32759
 - dev
     - crown optional 32494
     - mach bootstrap --skip-static-analysis 32587
