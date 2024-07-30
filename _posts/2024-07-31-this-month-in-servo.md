@@ -41,6 +41,21 @@ When debugging in Servo [with the **Firefox devtools**](https://book.servo.org/r
 servoshell now has experimental **OpenHarmony support** (@jschwe, #32594), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
 We’ve also landed **directory listings** for local files (@Bobulous, @mrobinson, #32580), made the location bar behave more consistently on Android (@jschwe, #32586), and servoshell no longer quits when you press Escape (@mrego, #32603).
 
+To reduce servoshell’s binary size, we now build our nightly releases with **ThinLTO** (@jschwe, #32651), and you can go even further by building Servo **without debug symbols** (@jschwe, #32651) or **without the legacy layout engine** (@jschwe, #32759).
+Note that these builds use the `production` profile in Cargo, not the `release` profile.
+Here’s how much they save on Linux (amd64):
+
+<figure class="_fig">
+
+| Version and build config | `servo` binary size |
+|---|---|
+| Before #32651 | 126364k |
+| With #32651 | 110111k (−12.8%) |
+| With #32651<br>• Without debug symbols | 102878k (−18.5%) |
+| With #32759<br>• Without `layout_2013` | 107652k (−14.8%) |
+| With #32759<br>• Without debug symbols<br>• Without `layout_2013` | 100886k (−20.1%) |
+</figure>
+
 ## Donations
 
 Thanks again for your generous support!
@@ -104,8 +119,8 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE android location bar logic 32586
     - DONE openharmony support 32594
 - binary size
-    - cargo production-stripped 32651
-    - compile without layout_2013 32759
+    - DONE cargo production-stripped 32651
+    - DONE compile without layout_2013 32759
 - dev
     - crown optional 32494
     - mach bootstrap --skip-static-analysis 32587
