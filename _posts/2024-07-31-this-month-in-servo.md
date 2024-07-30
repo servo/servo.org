@@ -34,7 +34,7 @@ We’ve landed support for **generic font families** like ‘sans-serif’ and �
 
 For **replaced elements** like &lt;img> and &lt;canvas>, the **‘min-width’**, **‘max-width’**, **‘min-height’**, and **‘max-height’** properties now **respect the aspect ratio** of the element (@valadaptive, #32777), and you can now change that aspect ratio with the **‘aspect-ratio’ property** (@valadaptive, #32800, #32803).
 
-## Devtools and servoshell
+## Devtools and servoshell changes
 
 When debugging in Servo [with the **Firefox devtools**](https://book.servo.org/running-servoshell.html), you can now see **console messages** from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new **devtools protocol analyzer** (@eerii, #32684).
 
@@ -55,6 +55,21 @@ Here’s how much they save on Linux (amd64):
 | With #32759<br>• Without `layout_2013` | 107652k (−14.8%) |
 | With #32759<br>• Without debug symbols<br>• Without `layout_2013` | 100886k (−20.1%) |
 </figure>
+
+## Changes for Servo developers
+
+<figure class="_figr"><a href="{{ '/img/blog/dco-check.png' | url }}"><img src="{{ '/img/blog/dco-check.png' | url }}"
+    alt=""></a></figure>
+
+<span class=_floatmin></span>
+[**The Servo book**](https://book.servo.org) is now the place to go for Servo’s documentation (@delan, #32743).
+It includes our architecture and design docs, a link to our API docs, as well as docs on building, running, testing, debugging, and profiling Servo.
+
+Servo now builds without the `crown` linter by default (@jschwe, #32494), simplifying the build process in some cases.
+If you’re working on DOM code, you can enable it again with `./mach build --use-crown`.
+
+When contributing to Servo, **your commits must now be [“signed off”](https://developercertificate.org)**, which is essentially a promise that you own (or are allowed to contribute) the code in your patch.
+If the DCO check fails, click Details for help on signing off your commits.
 
 ## Donations
 
@@ -85,6 +100,7 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
         - github 1217.00/month
         - lfx 147.00/month
     - DONE lfx transferred, still closing
+    - ci runners
 - DONE api support
     - DONE commas in <font face> 32622
     - DONE document.{visibilityState,hidden} 32635
@@ -122,13 +138,12 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE cargo production-stripped 32651
     - DONE compile without layout_2013 32759
 - dev
-    - crown optional 32494
-    - mach bootstrap --skip-static-analysis 32587
-    - DONE? ai contributions 32287
-    - android signing key 32721
-    - book 32743
-    - ci runners
-    - dco signoff?
+    - DONE crown optional 32494
+    - SKIP mach bootstrap --skip-static-analysis 32587
+    - DONE LAST MONTH ai contributions 32287
+    - SKIP android signing key 32721
+    - DONE book 32743
+    - DONE dco signoff
 - reliability
     - media player event timing 32643
     - mozjs crash 32786
