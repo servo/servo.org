@@ -100,6 +100,12 @@ In the meantime, we’ve transferred **2723 USD** of donations from LFX to our O
 As always, use of these funds will be decided transparently in the Technical Steering Committee, starting with our updated proposal for a [dedicated server for CI runners](https://github.com/servo/project/issues/94#issuecomment-2252262955) (@delan, @sagudev, @nicoburns).
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
+## Conferences and blogs
+
+- [**Servo: A web rendering engine for the future**](https://www.youtube.com/watch?v=SamA5Oz-G5w) ([slides](https://servo.org/slides/2024-07-02-global-software-technology-summit/)) — Manuel Rego spoke at the [Global Software Technology Summit 2024](https://huawei-events.de/en/gsts24.htm) about the status and long-term vision of the Servo project
+- [**Verso: A new browser based on Servo**](https://wusyong.github.io/posts/verso-0-1/) — Wu Yu Wei wrote about their plans to build a more polished Servo-based browser while improving Servo’s architecture
+- [**Verso: Writing its own compositor part 1**](https://wusyong.github.io/posts/verso-compositor-part1/) — Wu Yu Wei uses Verso as a sandbox to explore how we might rework Servo’s compositor to support multiple windows
+
 <!--
 - donations
     - thanks.dev now enabled
@@ -155,8 +161,8 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 - reliability
     - media player event timing 32643
     - mozjs crash 32786
-- verso
-- rego conference talk
+- DONE verso
+- DONE rego conference talk
 
 >>> 2024-06-25T06:03:57Z
     6738902d45920e0d9225fd9e926ab4169aa432e8	https://github.com/servo/servo/pull/32591	build(deps): bump lazy_static from 1.4.0 to 1.5.0 (#32591)
