@@ -123,6 +123,14 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 - [**Verso: Writing its own compositor part 1**](https://wusyong.github.io/posts/verso-compositor-part1/) — Wu Yu Wei uses Verso as a sandbox to explore how we might rework Servo’s compositor to support multiple windows
 - [**Halfway point**](https://conflor.es/blog/03_halfway_point) — Eri wrote about repairing Servo’s devtools support, from planning to selecting tabs to finding resources and now the console, as part of their Outreachy internship
 
+## Alan Jeffrey (1967–2024)
+
+[Alan Jeffrey](https://web.archive.org/web/20240714161830/https://asaj.org/), an early member of the Servo team and a key part of helping the Servo project find a new life outside of Mozilla, passed away on 4 July.
+
+His research has furthered a wide range of fields, including concurrent and distributed systems, programming languages, formal verification, software semantics, typesetting, protocol security, and circuit design.
+
+Alan’s family have also written about his kindness, curiosity, and persistence [on his LinkedIn page](https://www.linkedin.com/feed/update/activity:7215033040614436865/).
+
 <!--
 - donations
     - thanks.dev now enabled
