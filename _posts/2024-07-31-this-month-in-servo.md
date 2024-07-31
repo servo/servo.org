@@ -7,15 +7,19 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-Servo has had some exciting changes land in our nightly builds over the last month:
+<figure class="_figr"><a href="{{ '/img/blog/july-2024.png' | url }}"><img src="{{ '/img/blog/july-2024.png' | url }}"
+    alt="Servo nightly showing a table with a caption, containing demos of several other new features"></a></figure>
 
-- as of 2024-06-26, we now support **document.fonts.ready** (@mukilan, @mrobinson, #32576)
-- as of 2024-07-03, we now support the **getCompilationInfo() method on GPUShaderModule** (@sagudev, #32642)
-- as of 2024-07-08, we now support window.**customElements.getName** (@keithamus, #32715)
-- as of 2024-07-09, we now render **&lt;caption> in tables** (@mrobinson, @Loirooriol, @mukilan, #32657, #32695)
-- as of 2024-07-13, we now support **document.visibilityState** and **document.hidden** (@wusyong, #32635)
-- as of 2024-07-18, we now support the **measureText() method on CanvasRenderingContext2D** (@chocolate-pie, #32704)
-- as of 2024-07-23, we now support **URL.parse()** (@shanehandley, #32819)
+<span class=_floatmin></span>
+Servo has had several new features land in our nightly builds over the last month:
+
+- as of 2024-06-27, **document.fonts.ready** (@mukilan, @mrobinson, #32576)
+- as of 2024-07-03, the **getCompilationInfo() method on GPUShaderModule** (@sagudev, #32642)
+- as of 2024-07-08, window.**customElements.getName** (@keithamus, #32715)
+- as of 2024-07-09, **&lt;caption> in tables** (@mrobinson, @Loirooriol, @mukilan, #32657, #32695)
+- as of 2024-07-13, **document.visibilityState** and **document.hidden** (@wusyong, #32635)
+- as of 2024-07-18, the **measureText() method on CanvasRenderingContext2D** (@chocolate-pie, #32704)
+- as of 2024-07-23, **URL.parse()** (@shanehandley, #32819)
 
 ## Rendering changes
 
@@ -39,16 +43,16 @@ For **replaced elements** like &lt;img> and &lt;canvas>, the **‘min-width’**
 
 ## Devtools and servoshell changes
 
+<figure class="_figl"><a href="{{ '/img/blog/devtools-july-2024.png' | url }}"><img src="{{ '/img/blog/devtools-july-2024.png' | url }}"
+    alt="Firefox devtools connected to Servo, showing several console errors"></a></figure>
+
+<span class=_floatmin></span>
 When debugging in Servo [with the **Firefox devtools**](https://book.servo.org/running-servoshell.html), you can now see **console messages** from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new **devtools protocol analyzer** (@eerii, #32684).
 
 servoshell now has experimental **OpenHarmony support** (@jschwe, #32594), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
 We’ve also landed **directory listings** for local files (@Bobulous, @mrobinson, #32580), made the location bar behave more consistently on Android (@jschwe, #32586), and servoshell no longer quits when you press Escape (@mrego, #32603).
 
-To reduce servoshell’s binary size, we now build our nightly releases with **ThinLTO** (@jschwe, #32651), and you can go even further by building Servo **without debug symbols** (@jschwe, #32651) or **without the legacy layout engine** (@jschwe, #32759).
-Note that these builds use the `production` profile in Cargo, not the `release` profile.
-Here’s how much they save on Linux (amd64):
-
-<figure class="_fig">
+<figure class="_figr">
 
 | Version and build config | `servo` binary size |
 |---|---|
@@ -59,10 +63,17 @@ Here’s how much they save on Linux (amd64):
 | With #32759<br>• Without debug symbols<br>• Without `layout_2013` | 100886k (−20.1%) |
 </figure>
 
+<span class=_floatmin></span>
+To reduce servoshell’s binary size, we now build our nightly releases with **ThinLTO** (@jschwe, #32651), and you can go even further by building Servo **without debug symbols** (@jschwe, #32651) or **without the legacy layout engine** (@jschwe, #32759).
+Note that these builds use the `production` profile in Cargo, not the `release` profile.
+See the table nearby for how much they save on Linux (amd64).
+
+<div style=clear:both></div>
+
 ## Changes for Servo developers
 
 <figure class="_figr"><a href="{{ '/img/blog/dco-check.png' | url }}"><img src="{{ '/img/blog/dco-check.png' | url }}"
-    alt=""></a></figure>
+    alt="GitHub checks popup showing the “DCO” check failing and a link to “Details”"></a></figure>
 
 <span class=_floatmin></span>
 [**The Servo book**](https://book.servo.org) is now the place to go for Servo’s documentation (@delan, #32743).
