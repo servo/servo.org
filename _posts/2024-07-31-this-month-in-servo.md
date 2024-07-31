@@ -26,15 +26,11 @@ Servo has had several new features land in our nightly builds over the last mont
 **Parallel table layout** is now enabled (@mrobinson, #32477), spreading the work for laying out rows and their columns over all available CPU cores.
 This change is a great example of the strengths of [Rayon](https://crates.io/crates/rayon) and the opportunistic parallelism in Servo’s layout engine.
 
-We‘ve also made progress on our new **flexbox layout engine** (`--pref layout.flexbox.enabled`), landing support for:
-
-- **‘min-height’** and **‘max-height’** on row containers (@delan, @mrobinson, @mukilan, #32785)
-- setting **‘align-items’** or **‘align-self’** to **‘baseline’**, **‘first baseline’**, or **‘last baseline’** (@delan, @mrobinson, @mukilan, @nicoburns, #32787, #32790)
-- **baseline alignment** of row containers with their siblings (@mrobinson, @mukilan, @delan, #32841, #32810)
+We‘ve also made progress on our new **flexbox layout engine** (`--pref layout.flexbox.enabled`), landing support for **‘min-height’** and **‘max-height’** on row containers (@delan, @mrobinson, @mukilan, #32785), as well as **baseline alignment of row containers** with their siblings (@mrobinson, @mukilan, @delan, #32841, #32810) and for their items by setting **‘align-items’** or **‘align-self’** to **‘baseline’**, **‘first baseline’**, or **‘last baseline’** (@delan, @mrobinson, @mukilan, @nicoburns, #32787, #32790).
 
 <aside class="_note">
 
-Note that our flexbox layout support is still very early, since ‘flex-direction: column’ is not yet supported.
+Note that our flexbox layout support is still very much experimental, and missing major functionality such as ‘flex-direction: column’.
 </aside>
 
 We’ve landed support for **generic font families** like ‘sans-serif’ and ‘monospace’ (@mrobinson, @mukilan, #32673), as well as **commas in &lt;font face>** (@mrobinson, #32622) and fixes for font matching on Android and OpenHarmony (@jschwe, #32725, #32731).
