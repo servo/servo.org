@@ -48,7 +48,7 @@ When debugging in Servo [with the **Firefox devtools**](https://book.servo.org/r
 servoshell now has experimental **OpenHarmony support** (@jschwe, #32594), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
 We’ve also landed **directory listings** for local files (@Bobulous, @mrobinson, #32580), made the location bar behave more consistently on Android (@jschwe, #32586), and servoshell no longer quits when you press Escape (@mrego, #32603).
 
-<figure class="_figr">
+<figure class="_figr"><div style="text-align: left;">
 
 | Version and build config | `servo` binary size |
 |---|---|
@@ -57,7 +57,7 @@ We’ve also landed **directory listings** for local files (@Bobulous, @mrobinso
 | With #32651<br>• Without debug symbols | 102878k (−18.5%) |
 | With #32759<br>• Without `layout_2013` | 107652k (−14.8%) |
 | With #32759<br>• Without debug symbols<br>• Without `layout_2013` | 100886k (−20.1%) |
-</figure>
+</div></figure>
 
 <span class=_floatmin></span>
 To reduce servoshell’s binary size, we now build our nightly releases with **ThinLTO** (@jschwe, #32651), and you can go even further by building Servo **without debug symbols** (@jschwe, #32651) or **without the legacy layout engine** (@jschwe, #32759).
