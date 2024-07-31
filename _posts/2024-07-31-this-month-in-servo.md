@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
-date:       2024-07-30
-summary:    ao!! wrrrrao!!
+title:      "This month in Servo: console logging, parallel tables, OpenXR, and more!"
+date:       2024-07-31
+summary:    Servo’s unique parallel layout engine just got even better.
 categories:
 ---
 
