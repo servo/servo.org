@@ -203,42 +203,40 @@
 <p class="subtitle"><span class="tag is-dark">2024-07-30</span> ao!! wrrrrao!!</p>
 
 <div class="has-top-margin">
-  <p>Servo has had some exciting changes land in our nightly builds over the last month:</p>
+  <figure class="_figr"><a href="/blog-july-2024/img/blog/july-2024.png"><img src="/blog-july-2024/img/blog/july-2024.png"
+    alt="Servo nightly showing a table with a caption, containing demos of several other new features"></a></figure>
+<p><span class=_floatmin></span>
+Servo has had several new features land in our nightly builds over the last month:</p>
 <ul>
-<li>as of 2024-06-26, we now support <strong>document.fonts.ready</strong> (@mukilan, @mrobinson, #32576)</li>
-<li>as of 2024-07-03, we now support the <strong>getCompilationInfo() method on GPUShaderModule</strong> (@sagudev, #32642)</li>
-<li>as of 2024-07-08, we now support window.<strong>customElements.getName</strong> (@keithamus, #32715)</li>
-<li>as of 2024-07-09, we now render <strong>&lt;caption&gt; in tables</strong> (@mrobinson, @Loirooriol, @mukilan, #32657, #32695)</li>
-<li>as of 2024-07-13, we now support <strong>document.visibilityState</strong> and <strong>document.hidden</strong> (@wusyong, #32635)</li>
-<li>as of 2024-07-18, we now support the <strong>measureText() method on CanvasRenderingContext2D</strong> (@chocolate-pie, #32704)</li>
-<li>as of 2024-07-23, we now support <strong>URL.parse()</strong> (@shanehandley, #32819)</li>
+<li>as of 2024-06-27, <strong>document.fonts.ready</strong> (@mukilan, @mrobinson, #32576)</li>
+<li>as of 2024-07-03, the <strong>getCompilationInfo() method on GPUShaderModule</strong> (@sagudev, #32642)</li>
+<li>as of 2024-07-08, window.<strong>customElements.getName</strong> (@keithamus, #32715)</li>
+<li>as of 2024-07-09, <strong>&lt;caption&gt; in tables</strong> (@mrobinson, @Loirooriol, @mukilan, #32657, #32695)</li>
+<li>as of 2024-07-13, <strong>document.visibilityState</strong> and <strong>document.hidden</strong> (@wusyong, #32635)</li>
+<li>as of 2024-07-18, the <strong>measureText() method on CanvasRenderingContext2D</strong> (@chocolate-pie, #32704)</li>
+<li>as of 2024-07-23, <strong>URL.parse()</strong> (@shanehandley, #32819)</li>
 </ul>
 <h2 id="rendering-changes" tabindex="-1">Rendering changes <a class="header-anchor" href="#rendering-changes">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p><strong>Parallel table layout</strong> is now enabled (@mrobinson, #32477), spreading the work for laying out rows and their columns over all available CPU cores.
 This change is a great example of the strengths of <a href="https://crates.io/crates/rayon">Rayon</a> and the opportunistic parallelism in Servo’s layout engine.</p>
-<p>We‘ve also made progress on our new <strong>flexbox layout engine</strong> (<code>--pref layout.flexbox.enabled</code>), landing support for:</p>
-<ul>
-<li><strong>‘min-height’</strong> and <strong>‘max-height’</strong> on row containers (@delan, @mrobinson, @mukilan, #32785)</li>
-<li>setting <strong>‘align-items’</strong> or <strong>‘align-self’</strong> to <strong>‘baseline’</strong>, <strong>‘first baseline’</strong>, or <strong>‘last baseline’</strong> (@delan, @mrobinson, @mukilan, @nicoburns, #32787, #32790)</li>
-<li><strong>baseline alignment</strong> of row containers with their siblings (@mrobinson, @mukilan, @delan, #32841, #32810)</li>
-</ul>
+<p>We‘ve also made progress on our new <strong>flexbox layout engine</strong> (<code>--pref layout.flexbox.enabled</code>), landing support for <strong>‘min-height’</strong> and <strong>‘max-height’</strong> on row containers (@delan, @mrobinson, @mukilan, #32785), as well as <strong>baseline alignment of row containers</strong> with their siblings (@mrobinson, @mukilan, @delan, #32841, #32810) and for their items by setting <strong>‘align-items’</strong> or <strong>‘align-self’</strong> to <strong>‘baseline’</strong>, <strong>‘first baseline’</strong>, or <strong>‘last baseline’</strong> (@delan, @mrobinson, @mukilan, @nicoburns, #32787, #32790).</p>
 <aside class="_note">
-<p>Note that our flexbox layout support is still very early, since ‘flex-direction: column’ is not yet supported.</p>
+<p>Note that our flexbox layout support is still very much experimental, and missing major functionality such as ‘flex-direction: column’.</p>
 </aside>
 <p>We’ve landed support for <strong>generic font families</strong> like ‘sans-serif’ and ‘monospace’ (@mrobinson, @mukilan, #32673), as well as <strong>commas in &lt;font face&gt;</strong> (@mrobinson, #32622) and fixes for font matching on Android and OpenHarmony (@jschwe, #32725, #32731).</p>
 <p>For <strong>replaced elements</strong> like &lt;img&gt; and &lt;canvas&gt;, the <strong>‘min-width’</strong>, <strong>‘max-width’</strong>, <strong>‘min-height’</strong>, and <strong>‘max-height’</strong> properties now <strong>respect the aspect ratio</strong> of the element (@valadaptive, #32777), and you can now change that aspect ratio with the <strong>‘aspect-ratio’ property</strong> (@valadaptive, #32800, #32803).</p>
 <h2 id="devtools-and-servoshell-changes" tabindex="-1">Devtools and servoshell changes <a class="header-anchor" href="#devtools-and-servoshell-changes">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>When debugging in Servo <a href="https://book.servo.org/running-servoshell.html">with the <strong>Firefox devtools</strong></a>, you can now see <strong>console messages</strong> from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new <strong>devtools protocol analyzer</strong> (@eerii, #32684).</p>
+<figure class="_figl"><a href="/blog-july-2024/img/blog/devtools-july-2024.png"><img src="/blog-july-2024/img/blog/devtools-july-2024.png"
+    alt="Firefox devtools connected to Servo, showing several console errors"></a></figure>
+<p><span class=_floatmin></span>
+When debugging in Servo <a href="https://book.servo.org/running-servoshell.html">with the <strong>Firefox devtools</strong></a>, you can now see <strong>console messages</strong> from the page (@eerii, #32727), and you can even debug the devtools connection itself with our new <strong>devtools protocol analyzer</strong> (@eerii, #32684).</p>
 <p>servoshell now has experimental <strong>OpenHarmony support</strong> (@jschwe, #32594), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
 We’ve also landed <strong>directory listings</strong> for local files (@Bobulous, @mrobinson, #32580), made the location bar behave more consistently on Android (@jschwe, #32586), and servoshell no longer quits when you press Escape (@mrego, #32603).</p>
-<p>To reduce servoshell’s binary size, we now build our nightly releases with <strong>ThinLTO</strong> (@jschwe, #32651), and you can go even further by building Servo <strong>without debug symbols</strong> (@jschwe, #32651) or <strong>without the legacy layout engine</strong> (@jschwe, #32759).
-Note that these builds use the <code>production</code> profile in Cargo, not the <code>release</code> profile.
-Here’s how much they save on Linux (amd64):</p>
-<figure class="_fig">
+<figure class="_figr"><div style="text-align: left;">
 <table>
 <thead>
 <tr>
@@ -269,12 +267,17 @@ Here’s how much they save on Linux (amd64):</p>
 </tr>
 </tbody>
 </table>
-</figure>
+</div></figure>
+<p><span class=_floatmin></span>
+To reduce servoshell’s binary size, we now build our nightly releases with <strong>ThinLTO</strong> (@jschwe, #32651), and you can go even further by building Servo <strong>without debug symbols</strong> (@jschwe, #32651) or <strong>without the legacy layout engine</strong> (@jschwe, #32759).
+Note that these builds use the <code>production</code> profile in Cargo, not the <code>release</code> profile.
+See the table nearby for how much they save on Linux (amd64).</p>
+<div style=clear:both></div>
 <h2 id="changes-for-servo-developers" tabindex="-1">Changes for Servo developers <a class="header-anchor" href="#changes-for-servo-developers">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <figure class="_figr"><a href="/blog-july-2024/img/blog/dco-check.png"><img src="/blog-july-2024/img/blog/dco-check.png"
-    alt=""></a></figure>
+    alt="GitHub checks popup showing the “DCO” check failing and a link to “Details”"></a></figure>
 <p><span class=_floatmin></span>
 <a href="https://book.servo.org"><strong>The Servo book</strong></a> is now the place to go for Servo’s documentation (@delan, #32743).
 It includes our architecture and design docs, a link to our API docs, as well as docs on building, running, testing, debugging, and profiling Servo.</p>
@@ -315,6 +318,12 @@ Our updated proposal for a <a href="https://github.com/servo/project/issues/94#i
 <li><a href="https://wusyong.github.io/posts/verso-compositor-part1/"><strong>Verso: Writing its own compositor part 1</strong></a> — Wu Yu Wei uses Verso as a sandbox to explore how we might rework Servo’s compositor to support multiple windows</li>
 <li><a href="https://conflor.es/blog/03_halfway_point"><strong>Halfway point</strong></a> — Eri wrote about repairing Servo’s devtools support, from planning to selecting tabs to finding resources and now the console, as part of their Outreachy internship</li>
 </ul>
+<h2 id="alan-jeffrey-(1967%E2%80%932024)" tabindex="-1">Alan Jeffrey (1967–2024) <a class="header-anchor" href="#alan-jeffrey-(1967%E2%80%932024)">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><a href="https://web.archive.org/web/20240714161830/https://asaj.org/">Alan Jeffrey</a>, an early member of the Servo team and a key part of helping the Servo project find a new life outside of Mozilla, passed away on 4 July.</p>
+<p>His research has furthered a wide range of fields, including concurrent and distributed systems, programming languages, formal verification, software semantics, typesetting, protocol security, and circuit design.</p>
+<p>Alan’s family have also written about his kindness, curiosity, and persistence <a href="https://www.linkedin.com/feed/update/activity:7215033040614436865/">on his LinkedIn page</a>.</p>
 <!--
 - donations
     - thanks.dev now enabled
