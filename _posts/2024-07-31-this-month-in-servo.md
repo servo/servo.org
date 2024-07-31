@@ -84,6 +84,9 @@ Note that this is **not** a contributor license agreement (CLA), which would all
 Thanks again for your generous support!
 We are now receiving **2955 USD/month** (+32.6% over June) in recurring donations.
 
+Servo is now on [thanks.dev](https://thanks.dev), and already **three GitHub orgs** that depend on Servo are sponsoring us there.
+If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
+
 We are still receiving donations from **14 people** on LFX, but we will stop accepting donations there soon — **please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo)**.
 In the meantime, we’ve transferred **2723 USD** of donations from LFX to our Open Collective account.
 
@@ -97,7 +100,9 @@ In the meantime, we’ve transferred **2723 USD** of donations from LFX to our O
     <progress value="2955" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
 </div></figure>
 
-As always, use of these funds will be decided transparently in the Technical Steering Committee, starting with our updated proposal for a [dedicated server for CI runners](https://github.com/servo/project/issues/94#issuecomment-2252262955) (@delan, @sagudev, @nicoburns).
+As always, use of these funds will be decided transparently in the Technical Steering Committee.
+Our updated proposal for a [dedicated server for CI runners](https://github.com/servo/project/issues/94#issuecomment-2252262955) (@delan, @sagudev, @nicoburns) was accepted, which should reduce build times significantly, and this is just the start!
+
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
 ## Conferences and blogs
