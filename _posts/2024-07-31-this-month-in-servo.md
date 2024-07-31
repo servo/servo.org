@@ -7,10 +7,12 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-<figure class="_figr"><a href="{{ '/img/blog/july-2024.png' | url }}"><img src="{{ '/img/blog/july-2024.png' | url }}"
-    alt="Servo nightly showing a table with a caption, containing demos of several other new features"></a></figure>
+<figure class="_figr"><a href="{{ '/img/blog/quest-3-passthrough.png' | url }}"><img src="{{ '/img/blog/quest-3-passthrough.png' | url }}"
+    alt="Servo displaying WebXR content on a Quest 3 in Quest Link mode"></a>
+<figcaption>WebXR screenshot: Daniel Adams (<a href="https://twitter.com/msub2official/status/1818533316477251669">Twitter</a>)</figcaption></figure>
 
 <span class=_floatmin></span>
+
 Servo has had several new features land in our nightly builds over the last month:
 
 - as of 2024-06-27, **document.fonts.ready** (@mukilan, @mrobinson, #32576)
@@ -21,8 +23,15 @@ Servo has had several new features land in our nightly builds over the last mont
 - as of 2024-07-18, the **measureText() method on CanvasRenderingContext2D** (@chocolate-pie, #32704)
 - as of 2024-07-23, **URL.parse()** (@shanehandley, #32819)
 
+We’ve also landed an experimental **OpenXR backend** (@msub2, #32817), allowing Servo to display WebXR content on actual headsets like the **Quest 3** in Quest Link mode.
+You can enable it with `--pref dom.webxr.openxr.enabled`, though the backend currently only works on Windows.
+
 ## Rendering changes
 
+<figure class="_figr"><a href="{{ '/img/blog/july-2024.png' | url }}"><img src="{{ '/img/blog/july-2024.png' | url }}"
+    alt="Servo nightly showing a table with a caption, containing demos of several other new features"></a></figure>
+
+<span class=_floatmin></span>
 **Parallel table layout** is now enabled (@mrobinson, #32477), spreading the work for laying out rows and their columns over all available CPU cores.
 This change is a great example of the strengths of [Rayon](https://crates.io/crates/rayon) and the opportunistic parallelism in Servo’s layout engine.
 
