@@ -105,6 +105,7 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 - [**Servo: A web rendering engine for the future**](https://www.youtube.com/watch?v=SamA5Oz-G5w) ([slides](https://servo.org/slides/2024-07-02-global-software-technology-summit/)) — Manuel Rego spoke at the [Global Software Technology Summit 2024](https://huawei-events.de/en/gsts24.htm) about the status and long-term vision of the Servo project
 - [**Verso: A new browser based on Servo**](https://wusyong.github.io/posts/verso-0-1/) — Wu Yu Wei wrote about their plans to build a more polished Servo-based browser while improving Servo’s architecture
 - [**Verso: Writing its own compositor part 1**](https://wusyong.github.io/posts/verso-compositor-part1/) — Wu Yu Wei uses Verso as a sandbox to explore how we might rework Servo’s compositor to support multiple windows
+- [**Halfway point**](https://conflor.es/blog/03_halfway_point) — Eri wrote about repairing Servo’s devtools support, from planning to selecting tabs to finding resources and now the console, as part of their Outreachy internship
 
 <!--
 - donations
