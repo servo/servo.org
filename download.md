@@ -13,7 +13,17 @@ title: Download
 * Drag `Servo.app` to the Applications folder
 * Double-click on `Servo.app` to run Servo
 
-**Note**: `Servo.app` is not currently signed, so Mac users may have a popup saying "Servo can’t be opened because it is from an unidentified developer." If the popup lacks a "proceed anyway" option, close it then right-click `Servo.app` and click "Open." This time the popup will have an option to proceed opening the application.
+### Troubleshooting
+
+*Note*: `Servo.app` is not currently signed, Mac users may be unable to open the application.
+
+**Error**: Dialogue stating "Servo can’t be opened because it is from an unidentified developer."
+
+**Solution**: Right-click `Servo.app` and choose "Open." The dialogue may now allow Servo to be opened.
+
+**Error**: Dialogue stating '“Servo.app” Not Opened'
+
+**Solution** Dismiss the dialogue with "Done" and remove the quarantine attribute from Servo: `xattr -r -d com.apple.quarantine /Applications/Servo.app`
 
   </div>
   <div class="column">
