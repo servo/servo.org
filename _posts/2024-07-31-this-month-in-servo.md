@@ -9,10 +9,9 @@ categories:
 
 <figure class="_figr"><a href="{{ '/img/blog/quest-3-passthrough.png' | url }}"><img src="{{ '/img/blog/quest-3-passthrough.png' | url }}"
     alt="Servo displaying WebXR content on a Quest 3 in Quest Link mode"></a>
-<figcaption>WebXR screenshot: Daniel Adams (<a href="https://twitter.com/msub2official/status/1818533316477251669">Twitter</a>)</figcaption></figure>
+<figcaption>Figure 1: Servo can now render to XR headsets via OpenXR. Image: Daniel Adams (<a href="https://twitter.com/msub2official/status/1818533316477251669">Twitter</a>)</figcaption></figure>
 
 <span class=_floatmin></span>
-
 Servo has had several new features land in our nightly builds over the last month:
 
 - as of 2024-06-27, **document.fonts.ready** ([@mukilan](https://github.com/mukilan), [@mrobinson](https://github.com/mrobinson), [#32576](https://github.com/servo/servo/pull/32576))
@@ -26,12 +25,12 @@ Servo has had several new features land in our nightly builds over the last mont
 We’ve also landed an experimental **OpenXR backend** ([@msub2](https://github.com/msub2), [#32817](https://github.com/servo/servo/pull/32817)), allowing Servo to display WebXR content on actual headsets like the **Quest 3** in Quest Link mode.
 You can enable it with `--pref dom.webxr.openxr.enabled`, though the backend currently only works on Windows.
 
-## Rendering changes
+<figure class="_figl"><a href="{{ '/img/blog/july-2024.png' | url }}"><img src="{{ '/img/blog/july-2024.png' | url }}"
+    alt="Servo nightly showing a table with a caption, containing demos of several other new features"></a>
+<figcaption>Figure 2: a table with a caption, containing demos of several other new features.</figcaption></figure>
 
-<figure class="_figr"><a href="{{ '/img/blog/july-2024.png' | url }}"><img src="{{ '/img/blog/july-2024.png' | url }}"
-    alt="Servo nightly showing a table with a caption, containing demos of several other new features"></a></figure>
+## <span class=_floatmin></span>Rendering changes
 
-<span class=_floatmin></span>
 **Parallel table layout** is now enabled ([@mrobinson](https://github.com/mrobinson), [#32477](https://github.com/servo/servo/pull/32477)), spreading the work for laying out rows and their columns over all available CPU cores.
 This change is a great example of the strengths of [Rayon](https://crates.io/crates/rayon) and the opportunistic parallelism in Servo’s layout engine.
 
@@ -46,18 +45,18 @@ We’ve landed support for **generic font families** like ‘sans-serif’ and �
 
 For **replaced elements** like &lt;img> and &lt;canvas>, the **‘min-width’**, **‘max-width’**, **‘min-height’**, and **‘max-height’** properties now **respect the aspect ratio** of the element ([@valadaptive](https://github.com/valadaptive), [#32777](https://github.com/servo/servo/pull/32777)), and you can now change that aspect ratio with the **‘aspect-ratio’ property** ([@valadaptive](https://github.com/valadaptive), [#32800](https://github.com/servo/servo/pull/32800), [#32803](https://github.com/servo/servo/pull/32803)).
 
-## Devtools and servoshell changes
+<figure class="_figr"><a href="{{ '/img/blog/devtools-july-2024.png' | url }}"><img src="{{ '/img/blog/devtools-july-2024.png' | url }}"
+    alt="Firefox devtools connected to Servo, showing several console errors"></a>
+<figcaption>Figure 3: console logging is now supported when using the Firefox devtools.</figcaption></figure>
 
-<figure class="_figl"><a href="{{ '/img/blog/devtools-july-2024.png' | url }}"><img src="{{ '/img/blog/devtools-july-2024.png' | url }}"
-    alt="Firefox devtools connected to Servo, showing several console errors"></a></figure>
+## <span class=_floatmin></span>Devtools and servoshell changes
 
-<span class=_floatmin></span>
-When debugging in Servo [with the **Firefox devtools**](https://book.servo.org/running-servoshell.html), you can now see **console messages** from the page ([@eerii](https://github.com/eerii), [#32727](https://github.com/servo/servo/pull/32727)), and you can even debug the devtools connection itself with our new **devtools protocol analyzer** ([@eerii](https://github.com/eerii), [#32684](https://github.com/servo/servo/pull/32684)).
+When debugging in Servo [with the **Firefox devtools**](https://book.servo.org/running-servoshell.html), you can now see **console messages** from the page ([@eerii](https://github.com/eerii), [#32727](https://github.com/servo/servo/pull/32727)), as shown in *Figure 3*, and you can even debug the devtools connection itself with our new **devtools protocol analyzer** ([@eerii](https://github.com/eerii), [#32684](https://github.com/servo/servo/pull/32684)).
 
 servoshell now has experimental **OpenHarmony support** ([@jschwe](https://github.com/jschwe), [#32594](https://github.com/servo/servo/pull/32594)), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
 We’ve also landed **directory listings** for local files ([@Bobulous](https://github.com/Bobulous), [@mrobinson](https://github.com/mrobinson), [#32580](https://github.com/servo/servo/pull/32580)), made the location bar behave more consistently on Android ([@jschwe](https://github.com/jschwe), [#32586](https://github.com/servo/servo/pull/32586)), and servoshell no longer quits when you press Escape ([@mrego](https://github.com/mrego), [#32603](https://github.com/servo/servo/pull/32603)).
 
-<figure class="_figr"><div style="text-align: left;">
+<figure class="_figr" style="clear: right;"><div style="text-align: left;">
 
 | Version and build config | `servo` binary size |
 |---|---|
@@ -66,29 +65,28 @@ We’ve also landed **directory listings** for local files ([@Bobulous](https://
 | With [#32651](https://github.com/servo/servo/pull/32651)<br>• Without debug symbols | 102878k (−18.5%) |
 | With [#32759](https://github.com/servo/servo/pull/32759)<br>• Without `layout_2013` | 107652k (−14.8%) |
 | With [#32759](https://github.com/servo/servo/pull/32759)<br>• Without debug symbols<br>• Without `layout_2013` | 100886k (−20.1%) |
-</div></figure>
+</div>
+<figcaption>Figure 4: servoshell binary size improvements on Linux (amd64).</figcaption></figure>
 
 <span class=_floatmin></span>
 To reduce servoshell’s binary size, we now build our nightly releases with **ThinLTO** ([@jschwe](https://github.com/jschwe), [#32651](https://github.com/servo/servo/pull/32651)), and you can go even further by building Servo **without debug symbols** ([@jschwe](https://github.com/jschwe), [#32651](https://github.com/servo/servo/pull/32651)) or **without the legacy layout engine** ([@jschwe](https://github.com/jschwe), [#32759](https://github.com/servo/servo/pull/32759)).
 Note that these builds use the `production` profile in Cargo, not the `release` profile.
-See the table nearby for how much they save on Linux (amd64).
-
-<div style=clear:both></div>
 
 ## Changes for Servo developers
 
-<figure class="_figr"><a href="{{ '/img/blog/dco-check.png' | url }}"><img src="{{ '/img/blog/dco-check.png' | url }}"
-    alt="GitHub checks popup showing the “DCO” check failing and a link to “Details”"></a></figure>
-
-<span class=_floatmin></span>
 [**The Servo book**](https://book.servo.org) is now the place to go for Servo’s documentation ([@delan](https://github.com/delan), [#32743](https://github.com/servo/servo/pull/32743)).
 It includes our architecture and design docs, a link to our API docs, as well as docs on building, running, testing, debugging, and profiling Servo.
 
 Servo now builds without the `crown` linter by default ([@jschwe](https://github.com/jschwe), [#32494](https://github.com/servo/servo/pull/32494)), simplifying the build process in some cases.
 If you’re working on DOM code, you can enable it again with `./mach build --use-crown`.
 
+<figure class="_figr" style="clear: right;"><a href="{{ '/img/blog/dco-check.png' | url }}"><img src="{{ '/img/blog/dco-check.png' | url }}"
+    alt="GitHub checks popup showing the “DCO” check failing and a link to “Details”"></a>
+<figcaption>Figure 5: the DCO check will now fail unless you sign off your commits.</figcaption></figure>
+
+<span class=_floatmin></span>
 When contributing to Servo, **your commits must now be [“signed off”](https://developercertificate.org)**, which is essentially a promise that you own (or are allowed to contribute) the code in your patch.
-If the DCO check fails, click Details for help on signing off your commits.
+If the DCO check fails, click Details for help on signing off your commits (*Figure 5*).
 
 <aside class="_note">
 
