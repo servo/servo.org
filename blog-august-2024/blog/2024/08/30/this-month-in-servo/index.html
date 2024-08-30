@@ -218,6 +218,25 @@
 <p>We’ve also made significant progress on our <strong>flexbox layout engine</strong>, including support for the <strong>‘gap’ property</strong> (@Loirooriol, #32891), <strong>‘align-content: stretch’</strong> (@mrobinson, @Loirooriol, #32906, #32913), and the <strong>‘start’</strong> and <strong>‘end’</strong> values on <strong>‘align-items’</strong> and <strong>‘align-self’</strong> (@mrobinson, @Loirooriol, #33032).</p>
 <p><strong>‘position: relative’</strong> is now supported on flex items (@mrobinson, #33151), <strong>‘z-index’ always creates stacking contexts</strong> for flex items (@mrobinson, #32961), and we now give flex items and flex containers their correct <strong>intrinsic sizes</strong> (@delan, @mrobinson, @mukilan, #32854).</p>
 <p>With basic support for <strong>‘flex-direction: column’</strong> and <strong>‘column-reverse’</strong> (@mrobinson, @Loirooriol, #33031, #33068) landing too, […]</p>
+<h2 id="engine-reliability" tabindex="-1">Engine reliability <a class="header-anchor" href="#engine-reliability">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>August has been a huge month for squashing <strong>crash bugs</strong> in Servo, including on real-world websites.</p>
+<p>We’ve fixed crashes when rendering <strong>floats near tables</strong> in <a href="https://html.spec.whatwg.org">the HTML spec</a> (@Wuelle, #33098), <strong>removed unnecessary explicit reflows</strong> that were causing crashes on w3schools<!-- no link -->.com (@jdm, #33067), and <strong>made the HTML parser re-entrant</strong> (@jdm, #32820, #33056, html5ever#548), fixing crashes on kilonova<!-- no link -->.ro ([issue] #32454), tweakers<!-- no link -->.net ([issue] #32744), and many other sites.
+Several other crashes have also been fixed:</p>
+<ul>
+<li>crashes when <strong>resizing windows with WebGL</strong> on macOS (@jdm, #33124)</li>
+<li>crashes when rendering text with <strong>extremely long grapheme clusters</strong> (@crbrz, #33074)</li>
+<li>crashes when rendering text with <strong>tabs in certain fonts</strong> (@mrobinson, #32979)</li>
+<li>crashes in the parser <strong>after calling window.stop()</strong> (@Taym95, #33173)</li>
+<li>crashes when <strong>passing some values to console.log()</strong> (@jdm, #33085)</li>
+<li>crashes when <strong>parsing some &lt;img srcset&gt; values</strong> (@NotnaKO, #32980)</li>
+<li>crashes when <strong>parsing some HTTP header values</strong> (@ToBinio, #32973)</li>
+<li>crashes when <strong>setting window.opener</strong> in certain situations (@Taym95, #33002, #33122)</li>
+<li>intermittent crashes in WRSceneBuilder <strong>when exiting Servo</strong> (@Taym95, #32897)</li>
+</ul>
+<p>We’ve fixed a bunch of <strong>BorrowError</strong> crashes under SpiderMonkey GC (@jdm, #33133, [issue] #24115, [issue] #32646), and we’re now working towards preventing this class of bugs with static analysis (@jdm, #33144).</p>
+<p>Servo no longer <strong>leaks the DOM Window object</strong> when navigating (@ede1998, @rhetenor, #32773), and servoshell now <strong><a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_04_03_01">terminates abnormally</a> when panicking</strong> on Unix (@mrobinson, #32947), ensuring <a href="https://book.servo.org/hacking/testing.html">web tests</a> correctly record their test results as “CRASH”.</p>
 <!--
 - donations 3077/month (+4.1%)
     - opencollective 1637.00/month
@@ -272,24 +291,24 @@
     - windows text/image rendering fixes 33045 33177
     - windows --output to png fix 32914
     - musl? background hang monitor 33153
-- rendering/crashes
-    - html parser reentrancy! 32820 33056
-    - forced reflows 33067
-- crashes and reliability
-    - panics now look like crashes in tests 32947
-    - gc borrow hazards 33133
-        - static analysis 33144
-    - resizing window macos 33124
-    - large grapheme clusters 33074
-    - tabs with certain fonts 32979
-    - aborting parser 33173
-    - console.log 33085
-    - srcset 32980
-    - set() method on Headers 32973
-    - window.opener setter 33002 33122
-    - table layout 33098
-    - webrender shutdown 32897
-    - leak CreateProxyWindowHandler 32773
+- DONE rendering/crashes
+    - DONE html parser reentrancy! 32820 33056
+    - DONE forced reflows 33067
+- DONE crashes and reliability
+    - DONE panics now look like crashes in tests 32947
+    - DONE gc borrow hazards 33133
+        - DONE static analysis 33144
+    - DONE resizing window macos 33124
+    - DONE large grapheme clusters 33074
+    - DONE tabs with certain fonts 32979
+    - DONE aborting parser 33173
+    - DONE console.log 33085
+    - DONE srcset 32980
+    - DONE set() method on Headers 32973
+    - DONE window.opener setter 33002 33122
+    - DONE table layout 33098
+    - DONE webrender shutdown 32897
+    - DONE leak CreateProxyWindowHandler 32773
 - bustage
     - nixpkgs 32945
     - spaces windows 32936

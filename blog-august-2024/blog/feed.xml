@@ -30,6 +30,25 @@
 &lt;p&gt;We’ve also made significant progress on our &lt;strong&gt;flexbox layout engine&lt;/strong&gt;, including support for the &lt;strong&gt;‘gap’ property&lt;/strong&gt; (@Loirooriol, #32891), &lt;strong&gt;‘align-content: stretch’&lt;/strong&gt; (@mrobinson, @Loirooriol, #32906, #32913), and the &lt;strong&gt;‘start’&lt;/strong&gt; and &lt;strong&gt;‘end’&lt;/strong&gt; values on &lt;strong&gt;‘align-items’&lt;/strong&gt; and &lt;strong&gt;‘align-self’&lt;/strong&gt; (@mrobinson, @Loirooriol, #33032).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;‘position: relative’&lt;/strong&gt; is now supported on flex items (@mrobinson, #33151), &lt;strong&gt;‘z-index’ always creates stacking contexts&lt;/strong&gt; for flex items (@mrobinson, #32961), and we now give flex items and flex containers their correct &lt;strong&gt;intrinsic sizes&lt;/strong&gt; (@delan, @mrobinson, @mukilan, #32854).&lt;/p&gt;
 &lt;p&gt;With basic support for &lt;strong&gt;‘flex-direction: column’&lt;/strong&gt; and &lt;strong&gt;‘column-reverse’&lt;/strong&gt; (@mrobinson, @Loirooriol, #33031, #33068) landing too, […]&lt;/p&gt;
+&lt;h2 id=&quot;engine-reliability&quot; tabindex=&quot;-1&quot;&gt;Engine reliability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-august-2024/blog/2024/08/30/this-month-in-servo/#engine-reliability&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;August has been a huge month for squashing &lt;strong&gt;crash bugs&lt;/strong&gt; in Servo, including on real-world websites.&lt;/p&gt;
+&lt;p&gt;We’ve fixed crashes when rendering &lt;strong&gt;floats near tables&lt;/strong&gt; in &lt;a href=&quot;https://html.spec.whatwg.org/&quot;&gt;the HTML spec&lt;/a&gt; (@Wuelle, #33098), &lt;strong&gt;removed unnecessary explicit reflows&lt;/strong&gt; that were causing crashes on w3schools&lt;!-- no link --&gt;.com (@jdm, #33067), and &lt;strong&gt;made the HTML parser re-entrant&lt;/strong&gt; (@jdm, #32820, #33056, html5ever#548), fixing crashes on kilonova&lt;!-- no link --&gt;.ro ([issue] #32454), tweakers&lt;!-- no link --&gt;.net ([issue] #32744), and many other sites.
+Several other crashes have also been fixed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;crashes when &lt;strong&gt;resizing windows with WebGL&lt;/strong&gt; on macOS (@jdm, #33124)&lt;/li&gt;
+&lt;li&gt;crashes when rendering text with &lt;strong&gt;extremely long grapheme clusters&lt;/strong&gt; (@crbrz, #33074)&lt;/li&gt;
+&lt;li&gt;crashes when rendering text with &lt;strong&gt;tabs in certain fonts&lt;/strong&gt; (@mrobinson, #32979)&lt;/li&gt;
+&lt;li&gt;crashes in the parser &lt;strong&gt;after calling window.stop()&lt;/strong&gt; (@Taym95, #33173)&lt;/li&gt;
+&lt;li&gt;crashes when &lt;strong&gt;passing some values to console.log()&lt;/strong&gt; (@jdm, #33085)&lt;/li&gt;
+&lt;li&gt;crashes when &lt;strong&gt;parsing some &amp;lt;img srcset&amp;gt; values&lt;/strong&gt; (@NotnaKO, #32980)&lt;/li&gt;
+&lt;li&gt;crashes when &lt;strong&gt;parsing some HTTP header values&lt;/strong&gt; (@ToBinio, #32973)&lt;/li&gt;
+&lt;li&gt;crashes when &lt;strong&gt;setting window.opener&lt;/strong&gt; in certain situations (@Taym95, #33002, #33122)&lt;/li&gt;
+&lt;li&gt;intermittent crashes in WRSceneBuilder &lt;strong&gt;when exiting Servo&lt;/strong&gt; (@Taym95, #32897)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We’ve fixed a bunch of &lt;strong&gt;BorrowError&lt;/strong&gt; crashes under SpiderMonkey GC (@jdm, #33133, [issue] #24115, [issue] #32646), and we’re now working towards preventing this class of bugs with static analysis (@jdm, #33144).&lt;/p&gt;
+&lt;p&gt;Servo no longer &lt;strong&gt;leaks the DOM Window object&lt;/strong&gt; when navigating (@ede1998, @rhetenor, #32773), and servoshell now &lt;strong&gt;&lt;a href=&quot;https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_04_03_01&quot;&gt;terminates abnormally&lt;/a&gt; when panicking&lt;/strong&gt; on Unix (@mrobinson, #32947), ensuring &lt;a href=&quot;https://book.servo.org/hacking/testing.html&quot;&gt;web tests&lt;/a&gt; correctly record their test results as “CRASH”.&lt;/p&gt;
 &lt;!--
 - donations 3077/month (+4.1%)
     - opencollective 1637.00/month
@@ -84,24 +103,24 @@
     - windows text/image rendering fixes 33045 33177
     - windows --output to png fix 32914
     - musl? background hang monitor 33153
-- rendering/crashes
-    - html parser reentrancy! 32820 33056
-    - forced reflows 33067
-- crashes and reliability
-    - panics now look like crashes in tests 32947
-    - gc borrow hazards 33133
-        - static analysis 33144
-    - resizing window macos 33124
-    - large grapheme clusters 33074
-    - tabs with certain fonts 32979
-    - aborting parser 33173
-    - console.log 33085
-    - srcset 32980
-    - set() method on Headers 32973
-    - window.opener setter 33002 33122
-    - table layout 33098
-    - webrender shutdown 32897
-    - leak CreateProxyWindowHandler 32773
+- DONE rendering/crashes
+    - DONE html parser reentrancy! 32820 33056
+    - DONE forced reflows 33067
+- DONE crashes and reliability
+    - DONE panics now look like crashes in tests 32947
+    - DONE gc borrow hazards 33133
+        - DONE static analysis 33144
+    - DONE resizing window macos 33124
+    - DONE large grapheme clusters 33074
+    - DONE tabs with certain fonts 32979
+    - DONE aborting parser 33173
+    - DONE console.log 33085
+    - DONE srcset 32980
+    - DONE set() method on Headers 32973
+    - DONE window.opener setter 33002 33122
+    - DONE table layout 33098
+    - DONE webrender shutdown 32897
+    - DONE leak CreateProxyWindowHandler 32773
 - bustage
     - nixpkgs 32945
     - spaces windows 32936
