@@ -31,7 +31,7 @@
 Note that the &lt;code&gt;dir=auto&lt;/code&gt; value is not yet supported.&lt;/p&gt;
 &lt;p&gt;We’ve also made significant progress on our &lt;strong&gt;flexbox layout engine&lt;/strong&gt;, including support for the &lt;strong&gt;‘gap’ property&lt;/strong&gt; (@Loirooriol, #32891), &lt;strong&gt;‘align-content: stretch’&lt;/strong&gt; (@mrobinson, @Loirooriol, #32906, #32913), and the &lt;strong&gt;‘start’&lt;/strong&gt; and &lt;strong&gt;‘end’&lt;/strong&gt; values on &lt;strong&gt;‘align-items’&lt;/strong&gt; and &lt;strong&gt;‘align-self’&lt;/strong&gt; (@mrobinson, @Loirooriol, #33032).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;‘position: relative’&lt;/strong&gt; is now supported on flex items (@mrobinson, #33151), &lt;strong&gt;‘z-index’ always creates stacking contexts&lt;/strong&gt; for flex items (@mrobinson, #32961), and we now give flex items and flex containers their correct &lt;strong&gt;intrinsic sizes&lt;/strong&gt; (@delan, @mrobinson, @mukilan, #32854).&lt;/p&gt;
-&lt;p&gt;With basic support for &lt;strong&gt;‘flex-direction: column’&lt;/strong&gt; and &lt;strong&gt;‘column-reverse’&lt;/strong&gt; (@mrobinson, @Loirooriol, #33031, #33068) landing too, […]&lt;/p&gt;
+&lt;p&gt;With basic support for &lt;strong&gt;‘flex-direction: column’&lt;/strong&gt; and &lt;strong&gt;‘column-reverse’&lt;/strong&gt; (@mrobinson, @Loirooriol, #33031, #33068) landing too, our layout engine is now complete enough to have &lt;strong&gt;flexbox enabled by default&lt;/strong&gt; (@mrobinson, #33186)!&lt;/p&gt;
 &lt;p&gt;Servo now runs on &lt;strong&gt;SpiderMonkey 128&lt;/strong&gt; (@sagudev, @jschwe, #32769, #32882, #32951, #33048), &lt;strong&gt;WebRender 0.65&lt;/strong&gt; (@mrobinson, #32930, #33073), and &lt;strong&gt;wgpu 22.0&lt;/strong&gt; (@sagudev, #32827, #32873, #32981, #33209), and we now build with &lt;strong&gt;Rust 1.80.1&lt;/strong&gt; (@Hmikihiro, @sagudev, #32896, #33008).&lt;/p&gt;
 &lt;h2 id=&quot;servoshell&quot; tabindex=&quot;-1&quot;&gt;servoshell &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-august-2024/blog/2024/08/30/this-month-in-servo/#servoshell&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
@@ -57,6 +57,11 @@ Several other crashes have also been fixed:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;We’ve fixed a bunch of &lt;strong&gt;BorrowError&lt;/strong&gt; crashes under SpiderMonkey GC (@jdm, #33133, [issue] #24115, [issue] #32646), and we’re now working towards preventing this class of bugs with static analysis (@jdm, #33144).&lt;/p&gt;
 &lt;p&gt;Servo no longer &lt;strong&gt;leaks the DOM Window object&lt;/strong&gt; when navigating (@ede1998, @rhetenor, #32773), and servoshell now &lt;strong&gt;&lt;a href=&quot;https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_04_03_01&quot;&gt;terminates abnormally&lt;/a&gt; when panicking&lt;/strong&gt; on Unix (@mrobinson, #32947), ensuring &lt;a href=&quot;https://book.servo.org/hacking/testing.html&quot;&gt;web tests&lt;/a&gt; correctly record their test results as “CRASH”.&lt;/p&gt;
+&lt;h2 id=&quot;changes-for-servo-developers&quot; tabindex=&quot;-1&quot;&gt;Changes for Servo developers &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-august-2024/blog/2024/08/30/this-month-in-servo/#changes-for-servo-developers&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Servo now has &lt;strong&gt;new CI runners&lt;/strong&gt; for Windows builds (@delan, #33081), thanks to your donations, &lt;strong&gt;cutting Windows-only build times by 70%&lt;/strong&gt;!
+We’re not stopping at Windows though, and with new runners for Linux builds just around the corner, your WPT try builds will soon be a lot faster.&lt;/p&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-august-2024/blog/2024/08/30/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -77,11 +82,11 @@ If you use Servo libraries like &lt;a href=&quot;https://crates.io/crates/url/re
 &lt;p&gt;As always, use of these funds will be decided transparently in the Technical Steering Committee.
 For more details, head to our &lt;a href=&quot;https://servo.org/blog-august-2024/sponsorship/&quot;&gt;Sponsorship page&lt;/a&gt;.&lt;/p&gt;
 &lt;!--
-- donations 3077/month (+4.1%)
+- DONE donations 3077/month (+4.1%)
     - DONE opencollective 1637.00/month
     - DONE github 1313.00/month
     - DONE lfx 127.00/month (10+10+10+10+10+10+25+5+12+5+10+10)
-    - self-hosted ci runners
+    - DONE self-hosted ci runners
 - upgrades
     - DONE mozjs 115 → 128 32769 32882 32951 33048
     - DONE webrender 0.64 → 0.65 32930 33073
@@ -93,7 +98,7 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-august-202
     - DONE wav playback 32924
     - DONE cross-origin redirects 32996
     - ‘clip-path: [&lt;basic-shape&gt; || &lt;shape-box&gt;]’ 33107
-    - flex
+    - DONE flex
         - DONE column mode 33031 33068
         - DONE ‘gap’ 32891
         - DONE ‘align-content: stretch’ 32906
@@ -102,7 +107,7 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-august-202
         - DONE intrinsic sizes 32854
         - DONE ‘z-index’ stacking context fix 32961
         - DONE subpixel fix 32913
-        - flexbox enabled by default 33186
+        - DONE flexbox enabled by default 33186
     - DONE bidi
         - DONE physical geometry 33030
         - DONE ‘writing-mode’ access 33082
@@ -134,7 +139,7 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-august-202
     - watch out! mediafire fix.rar 33201
     - clippy ci 33150
     - faster build-then-run on macos 32928
-    - self-hosted ci runners windows 33081
+    - DONE self-hosted ci runners windows 33081
 - platform support
     - windows text/image rendering fixes 33045 33177
     - windows --output to png fix 32914
