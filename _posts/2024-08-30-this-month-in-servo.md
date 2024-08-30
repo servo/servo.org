@@ -26,7 +26,7 @@ We’ve also made significant progress on our **flexbox layout engine**, includi
 
 **‘position: relative’** is now supported on flex items (@mrobinson, #33151), **‘z-index’ always creates stacking contexts** for flex items (@mrobinson, #32961), and we now give flex items and flex containers their correct **intrinsic sizes** (@delan, @mrobinson, @mukilan, #32854).
 
-With basic support for **‘flex-direction: column’** and **‘column-reverse’** (@mrobinson, @Loirooriol, #33031, #33068) landing too, […]
+With basic support for **‘flex-direction: column’** and **‘column-reverse’** (@mrobinson, @Loirooriol, #33031, #33068) landing too, our layout engine is now complete enough to have **flexbox enabled by default** (@mrobinson, #33186)!
 
 Servo now runs on **SpiderMonkey 128** (@sagudev, @jschwe, #32769, #32882, #32951, #33048), **WebRender 0.65** (@mrobinson, #32930, #33073), and **wgpu 22.0** (@sagudev, #32827, #32873, #32981, #33209), and we now build with **Rust 1.80.1** (@Hmikihiro, @sagudev, #32896, #33008).
 
@@ -56,6 +56,11 @@ We’ve fixed a bunch of **BorrowError** crashes under SpiderMonkey GC (@jdm, #3
 
 Servo no longer **leaks the DOM Window object** when navigating (@ede1998, @rhetenor, #32773), and servoshell now **[terminates abnormally](https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_04_03_01) when panicking** on Unix (@mrobinson, #32947), ensuring [web tests](https://book.servo.org/hacking/testing.html) correctly record their test results as “CRASH”.
 
+## Changes for Servo developers
+
+Servo now has **new CI runners** for Windows builds (@delan, #33081), thanks to your donations, **cutting Windows-only build times by 70%**!
+We’re not stopping at Windows though, and with new runners for Linux builds just around the corner, your WPT try builds will soon be a lot faster.
+
 ## Donations
 
 Thanks again for your generous support!
@@ -79,11 +84,11 @@ As always, use of these funds will be decided transparently in the Technical Ste
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
 <!--
-- donations 3077/month (+4.1%)
+- DONE donations 3077/month (+4.1%)
     - DONE opencollective 1637.00/month
     - DONE github 1313.00/month
     - DONE lfx 127.00/month (10+10+10+10+10+10+25+5+12+5+10+10)
-    - self-hosted ci runners
+    - DONE self-hosted ci runners
 - upgrades
     - DONE mozjs 115 → 128 32769 32882 32951 33048
     - DONE webrender 0.64 → 0.65 32930 33073
@@ -95,7 +100,7 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE wav playback 32924
     - DONE cross-origin redirects 32996
     - ‘clip-path: [<basic-shape> || <shape-box>]’ 33107
-    - flex
+    - DONE flex
         - DONE column mode 33031 33068
         - DONE ‘gap’ 32891
         - DONE ‘align-content: stretch’ 32906
@@ -104,7 +109,7 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
         - DONE intrinsic sizes 32854
         - DONE ‘z-index’ stacking context fix 32961
         - DONE subpixel fix 32913
-        - flexbox enabled by default 33186
+        - DONE flexbox enabled by default 33186
     - DONE bidi
         - DONE physical geometry 33030
         - DONE ‘writing-mode’ access 33082
@@ -136,7 +141,7 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - watch out! mediafire fix.rar 33201
     - clippy ci 33150
     - faster build-then-run on macos 32928
-    - self-hosted ci runners windows 33081
+    - DONE self-hosted ci runners windows 33081
 - platform support
     - windows text/image rendering fixes 33045 33177
     - windows --output to png fix 32914
