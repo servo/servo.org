@@ -7,10 +7,14 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+<figure class="_figr"><a href="{{ '/img/blog/features-august-2024.png' | url }}"><img src="{{ '/img/blog/features-august-2024.png' | url }}"
+    alt="Servo nightly with a flexbox-based table of new features including textarea text, ‘border-image’, structuredClone(), crypto.randomUUID(), ‘clip-path’, and flexbox properties themselves"></a>
+<figcaption>A flexbox-based table showcasing some of Servo’s new features this month.</figcaption></figure>
+
 Servo has had several new features land in our nightly builds over the last month:
 
-- as of 2024-07-27, basic support for the **show() method on HTMLDialogElement** (@lukewarlow, #32681)
-- as of 2024-07-29, we now support the **type property on HTMLFieldSetElement** (@shanehandley, #32869)
+- as of 2024-07-27, basic support for **show() on HTMLDialogElement** (@lukewarlow, #32681)
+- as of 2024-07-29, the **type property on HTMLFieldSetElement** (@shanehandley, #32869)
 - as of 2024-07-31, we now support **rendering text typed in &lt;textarea>** (@mrobinson, #32886)
 - as of 2024-07-31, we now support the **‘border-image’** property (@mrobinson, #32874)
 - as of 2024-08-02, **unsafe-eval** and **wasm-unsafe-eval** CSP [sources](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources) (@chocolate-pie, #32893)
@@ -32,7 +36,7 @@ Note that the `dir=auto` value is not yet supported.
 
 <figure class="_figl"><a href="{{ '/img/blog/servoshell-august-2024.png' | url }}"><img src="{{ '/img/blog/servoshell-august-2024.png' | url }}"
     alt="Servo nightly showing a toolbar with icons on the buttons, one tab open with the title “Servo - New Tab”, and a location bar that reads “servo:newtab”"></a>
-<figcaption>servoshell now has a more elegant toolbar, tabbed browsing, and a clean but useful new tab page.</figcaption></figure>
+<figcaption>servoshell now has a more elegant toolbar, tabbed browsing, and a clean but useful “new tab” page.</figcaption></figure>
 
 ## <span class=_floatmin></span>servoshell
 
