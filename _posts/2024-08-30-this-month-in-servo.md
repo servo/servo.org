@@ -30,6 +30,11 @@ With basic support for **‘flex-direction: column’** and **‘column-reverse�
 
 Servo now runs on **SpiderMonkey 128** (@sagudev, @jschwe, #32769, #32882, #32951, #33048), **WebRender 0.65** (@mrobinson, #32930, #33073), and **wgpu 22.0** (@sagudev, #32827, #32873, #32981, #33209), and we now build with **Rust 1.80.1** (@Hmikihiro, @sagudev, #32896, #33008).
 
+## servoshell
+
+Servo’s reference browser now has a **redesigned toolbar** (@Melchizedek6809, 33179) and **tabbed browsing** (@webbeef, @Wuelle, #33100, #33229)!
+This includes a slick **new tab page**, taking advantage of a new API that lets Servo embedders register **custom protocol handlers** (@webbeef, #33104).
+
 ## Engine reliability
 
 August has been a huge month for squashing **crash bugs** in Servo, including on real-world websites.
@@ -117,16 +122,16 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - non-tree-structural pseudo-classes 33165
     - webxr enabled by default 33245
 - embedding
-    - custom protocol handlers 33104
+    - DONE custom protocol handlers 33104
     - additional webrender surfaces 32933
 - devtools
     - html tree 32655
     - text nodes? 32884
     - attributes 32888
     - style inspector and computed tab 33025
-- servoshell
-    - redesigned toolbar 33179
-    - tabs 33100 33229
+- DONE servoshell
+    - DONE redesigned toolbar 33179
+    - DONE tabs 33100 33229
 - dev
     - watch out! mediafire fix.rar 33201
     - clippy ci 33150
