@@ -48,11 +48,34 @@ We’ve fixed a bunch of **BorrowError** crashes under SpiderMonkey GC (@jdm, #3
 
 Servo no longer **leaks the DOM Window object** when navigating (@ede1998, @rhetenor, #32773), and servoshell now **[terminates abnormally](https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_04_03_01) when panicking** on Unix (@mrobinson, #32947), ensuring [web tests](https://book.servo.org/hacking/testing.html) correctly record their test results as “CRASH”.
 
+## Donations
+
+Thanks again for your generous support!
+We are now receiving **3077 USD/month** (+4.1% over July) in recurring donations.
+This includes donations from **12 people** on LFX, but we will stop accepting donations there soon — **please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo)**.
+
+Servo is also on [thanks.dev](https://thanks.dev), and already **three GitHub orgs** that depend on Servo are sponsoring us there.
+If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 3077 / 10000); padding-left: 0.5em;"><strong>3077</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 3077 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="3077" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
+As always, use of these funds will be decided transparently in the Technical Steering Committee.
+For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
+
 <!--
 - donations 3077/month (+4.1%)
-    - opencollective 1637.00/month
-    - github 1313.00/month
-    - lfx 127.00/month (10+10+10+10+10+10+25+5+12+5+10+10)
+    - DONE opencollective 1637.00/month
+    - DONE github 1313.00/month
+    - DONE lfx 127.00/month (10+10+10+10+10+10+25+5+12+5+10+10)
+    - self-hosted ci runners
 - upgrades
     - DONE mozjs 115 → 128 32769 32882 32951 33048
     - DONE webrender 0.64 → 0.65 32930 33073
