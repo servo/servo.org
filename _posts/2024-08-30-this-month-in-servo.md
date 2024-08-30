@@ -25,6 +25,27 @@ We’ve also made significant progress on our **flexbox layout engine**, includi
 
 With basic support for **‘flex-direction: column’** and **‘column-reverse’** (@mrobinson, @Loirooriol, #33031, #33068) landing too, […]
 
+## Engine reliability
+
+August has been a huge month for squashing **crash bugs** in Servo, including on real-world websites.
+
+We’ve fixed crashes when rendering **floats near tables** in [the HTML spec](https://html.spec.whatwg.org) (@Wuelle, #33098), **removed unnecessary explicit reflows** that were causing crashes on w3schools<!-- no link -->.com (@jdm, #33067), and **made the HTML parser re-entrant** (@jdm, #32820, #33056, html5ever#548), fixing crashes on kilonova<!-- no link -->.ro ([issue] #32454), tweakers<!-- no link -->.net ([issue] #32744), and many other sites.
+Several other crashes have also been fixed:
+
+- crashes when **resizing windows with WebGL** on macOS (@jdm, #33124)
+- crashes when rendering text with **extremely long grapheme clusters** (@crbrz, #33074)
+- crashes when rendering text with **tabs in certain fonts** (@mrobinson, #32979)
+- crashes in the parser **after calling window.stop()** (@Taym95, #33173)
+- crashes when **passing some values to console.log()** (@jdm, #33085)
+- crashes when **parsing some &lt;img srcset> values** (@NotnaKO, #32980)
+- crashes when **parsing some HTTP header values** (@ToBinio, #32973)
+- crashes when **setting window.opener** in certain situations (@Taym95, #33002, #33122)
+- intermittent crashes in WRSceneBuilder **when exiting Servo** (@Taym95, #32897)
+
+We’ve fixed a bunch of **BorrowError** crashes under SpiderMonkey GC (@jdm, #33133, [issue] #24115, [issue] #32646), and we’re now working towards preventing this class of bugs with static analysis (@jdm, #33144).
+
+Servo no longer **leaks the DOM Window object** when navigating (@ede1998, @rhetenor, #32773), and servoshell now **[terminates abnormally](https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_04_03_01) when panicking** on Unix (@mrobinson, #32947), ensuring [web tests](https://book.servo.org/hacking/testing.html) correctly record their test results as “CRASH”.
+
 <!--
 - donations 3077/month (+4.1%)
     - opencollective 1637.00/month
@@ -79,24 +100,24 @@ With basic support for **‘flex-direction: column’** and **‘column-reverse�
     - windows text/image rendering fixes 33045 33177
     - windows --output to png fix 32914
     - musl? background hang monitor 33153
-- rendering/crashes
-    - html parser reentrancy! 32820 33056
-    - forced reflows 33067
-- crashes and reliability
-    - panics now look like crashes in tests 32947
-    - gc borrow hazards 33133
-        - static analysis 33144
-    - resizing window macos 33124
-    - large grapheme clusters 33074
-    - tabs with certain fonts 32979
-    - aborting parser 33173
-    - console.log 33085
-    - srcset 32980
-    - set() method on Headers 32973
-    - window.opener setter 33002 33122
-    - table layout 33098
-    - webrender shutdown 32897
-    - leak CreateProxyWindowHandler 32773
+- DONE rendering/crashes
+    - DONE html parser reentrancy! 32820 33056
+    - DONE forced reflows 33067
+- DONE crashes and reliability
+    - DONE panics now look like crashes in tests 32947
+    - DONE gc borrow hazards 33133
+        - DONE static analysis 33144
+    - DONE resizing window macos 33124
+    - DONE large grapheme clusters 33074
+    - DONE tabs with certain fonts 32979
+    - DONE aborting parser 33173
+    - DONE console.log 33085
+    - DONE srcset 32980
+    - DONE set() method on Headers 32973
+    - DONE window.opener setter 33002 33122
+    - DONE table layout 33098
+    - DONE webrender shutdown 32897
+    - DONE leak CreateProxyWindowHandler 32773
 - bustage
     - nixpkgs 32945
     - spaces windows 32936
