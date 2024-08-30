@@ -7,6 +7,24 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+Servo has had several new features land in our nightly builds over the last month:
+
+- as of 2024-07-27, basic support for the **show() method on HTMLDialogElement** (@lukewarlow, #32681)
+- as of 2024-07-29, we now support the **type property on HTMLFieldSetElement** (@shanehandley, #32869)
+- as of 2024-07-31, we now support **rendering text typed in &lt;textarea>** (@mrobinson, #32886)
+- as of 2024-07-31, we now support the **‘border-image’** property (@mrobinson, #32874)
+- as of 2024-08-02, **unsafe-eval** and **wasm-unsafe-eval** CSP [sources](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources) (@chocolate-pie, #32893)
+- as of 2024-08-04, we now support playback of **WAV audio files** (@Melchizedek6809, #32924)
+- as of 2024-08-09, we now support the **structuredClone()** API (@Taym95, #32960)
+- as of 2024-08-13, we now support navigating through **cross-origin redirects** (@jdm, #32996)
+- as of 2024-08-23, we now support the **crypto.randomUUID()** API (@webbeef, #33158)
+
+We’ve also made significant progress on our **flexbox layout engine**, including support for the **‘gap’ property** (@Loirooriol, #32891), **‘align-content: stretch’** (@mrobinson, @Loirooriol, #32906, #32913), and the **‘start’** and **‘end’** values on **‘align-items’** and **‘align-self’** (@mrobinson, @Loirooriol, #33032).
+
+**‘position: relative’** is now supported on flex items (@mrobinson, #33151), **‘z-index’ always creates stacking contexts** for flex items (@mrobinson, #32961), and we now give flex items and flex containers their correct **intrinsic sizes** (@delan, @mrobinson, @mukilan, #32854).
+
+With basic support for **‘flex-direction: column’** and **‘column-reverse’** (@mrobinson, @Loirooriol, #33031, #33068) landing too, […]
+
 <!--
 - donations 3077/month (+4.1%)
     - opencollective 1637.00/month
@@ -19,31 +37,32 @@ categories:
         - better exception handling 32925
     - rust 1.78.0 → 1.80.1 32896 33008
 - rendering
-    - typing in textarea 32886
-    - wav playback 32924
-    - cross-origin redirects 32996
+    - DONE typing in textarea 32886
+    - DONE wav playback 32924
+    - DONE cross-origin redirects 32996
     - flex
-        - column mode 33031 33068
-        - ‘gap’ 32891
-        - ‘align-content: stretch’ 32906
-        - ‘align-(items|content): (start|end)’ 33032
-        - ‘position: relative’ 33151
-        - ‘z-index’ stacking context fix 32961
-        - subpixel fix 32913
+        - DONE column mode 33031 33068
+        - DONE ‘gap’ 32891
+        - DONE ‘align-content: stretch’ 32906
+        - DONE ‘align-(items|content): (start|end)’ 33032
+        - DONE ‘position: relative’ 33151
+        - DONE intrinsic sizes 32854
+        - DONE ‘z-index’ stacking context fix 32961
+        - DONE subpixel fix 32913
     - bidi
         - physical geometry 33030
         - ‘writing-mode’ access 33082
         - basic support for dir attribute and ‘unicode-bidi’ 33148
-    - ‘border-image’ 32874
-    - structuredClone() 32960
-    - crypto.randomUUID() 33158
+    - DONE ‘border-image’ 32874
+    - DONE structuredClone() 32960
+    - DONE crypto.randomUUID() 33158
     - webaudio IIRFilterNode 33001
     - webxr XRInputSource.gamepad 32860
     - webxr XRBoundedReferenceSpace 33176
     - webgpu createComputePipelineAsync() createRenderPipelineAsync() 32636
-    - csp unsafe-eval wasm-unsafe-eval 32893
-    - basic support for show() method on HTMLDialogElement 32681
-    - type property on HTMLFieldSetElement 32869
+    - DONE csp unsafe-eval wasm-unsafe-eval 32893
+    - DONE basic support for show() method on HTMLDialogElement 32681
+    - DONE type property on HTMLFieldSetElement 32869
 - embedding
     - custom protocol handlers 33104
     - additional webrender surfaces 32933
@@ -116,7 +135,7 @@ categories:
     976850d92de1dfcf80a06428f9491fa64241f347	https://github.com/servo/servo/pull/32875	Fix debugmozjs compilation (#32875)
 +   d132a0273d17a140a916bb4c73cdb1d81fee1d2d	https://github.com/servo/servo/pull/32769	Update mozjs (SpiderMonkey) to 128.0 (#32769)
 >>> 2024-07-31T06:02:33Z
-f86493cd7ef78a0a7bbe78f0047cd695d4f956e2	https://github.com/servo/servo/pull/32890	Enable flexbox for css-align tests (#32890)
+    f86493cd7ef78a0a7bbe78f0047cd695d4f956e2	https://github.com/servo/servo/pull/32890	Enable flexbox for css-align tests (#32890)
     c69d59259e06490de002e00c084a5b59e1c14e7f	https://github.com/servo/servo/pull/32894	build(deps): bump ppv-lite86 from 0.2.17 to 0.2.19 (#32894)
     506096222fe127a7b10974c1cf49580f08276db0	https://github.com/servo/servo/pull/32895	build(deps): bump toml_datetime from 0.6.7 to 0.6.8 (#32895)
 +   a64f75b62f3cd1c12219dbb44ac40c1104de63ef	https://github.com/servo/servo/pull/32886	layout: Fix display of new text in `textarea` elements (#32886)
@@ -138,7 +157,7 @@ f86493cd7ef78a0a7bbe78f0047cd695d4f956e2	https://github.com/servo/servo/pull/328
     69a716a4ce1518aced772b2f343edf13e6e0144c	https://github.com/servo/servo/pull/32919	build(deps): bump bytes from 1.7.0 to 1.7.1 (#32919)
     3699aa0c185a38b682dfd916e99e2d0f0347f28b	https://github.com/servo/servo/pull/32916	build(deps): bump serde_json from 1.0.121 to 1.0.122 (#32916)
     72b3fd56e165f80b92ba35b787d4aa7899f6cc8c	https://github.com/servo/servo/pull/32910	script: Fix two build warnings about unused imports (#32910)
-974c9dc89a70ff341c19d751a8d7c00c81989dea	https://github.com/servo/servo/pull/32854	layout: Compute intrinsic sizes for flex items and flex containers (#32854)
++   974c9dc89a70ff341c19d751a8d7c00c81989dea	https://github.com/servo/servo/pull/32854	layout: Compute intrinsic sizes for flex items and flex containers (#32854)
     7495ba20a51fb2bea033d115e98db5ea07e68a4b	https://github.com/servo/servo/pull/32909	Select servo feature on servo_arc (#32909)
 >>> 2024-08-04T06:06:53Z
 +   7c2c383bb1fb15dfeea1e0f33af2e42b407af4e1	https://github.com/servo/servo/pull/32914	Fix save to image on Windows (#32914)
