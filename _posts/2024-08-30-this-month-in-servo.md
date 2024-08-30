@@ -30,7 +30,11 @@ The biggest flexbox features that landed this month are the **‘gap’ property
 We’re now working on support for **bidirectional text**, with architectural changes to the fragment tree (@mrobinson, #33030) and ‘writing-mode’ interfaces (@mrobinson, @atbrakhi, #33082), and now partial support for the **‘unicode-bidi’ property** and the **dir attribute** (@mrobinson, @atbrakhi, #33148).
 Note that the `dir=auto` value is not yet supported.
 
-## servoshell
+<figure class="_figl"><a href="{{ '/img/blog/servoshell-august-2024.png' | url }}"><img src="{{ '/img/blog/servoshell-august-2024.png' | url }}"
+    alt="Servo nightly showing a toolbar with icons on the buttons, one tab open with the title “Servo - New Tab”, and a location bar that reads “servo:newtab”"></a>
+<figcaption>servoshell now has a more elegant toolbar, tabbed browsing, and a clean but useful new tab page.</figcaption></figure>
+
+## <span class=_floatmin></span>servoshell
 
 Servo’s reference browser now has a **redesigned toolbar** (@Melchizedek6809, 33179) and **tabbed browsing** (@webbeef, @Wuelle, #33100, #33229)!
 This includes a slick **new tab page**, taking advantage of a new API that lets Servo embedders register **custom protocol handlers** (@webbeef, #33104).
