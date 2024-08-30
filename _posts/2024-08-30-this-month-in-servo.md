@@ -19,6 +19,9 @@ Servo has had several new features land in our nightly builds over the last mont
 - as of 2024-08-13, we now support navigating through **cross-origin redirects** (@jdm, #32996)
 - as of 2024-08-23, we now support the **crypto.randomUUID()** API (@webbeef, #33158)
 
+We’re now working on support for **bidirectional text**, with architectural changes to the fragment tree (@mrobinson, #33030) and ‘writing-mode’ interfaces (@mrobinson, @atbrakhi, #33082), and now partial support for the **‘unicode-bidi’ property** and the **dir attribute** (@mrobinson, @atbrakhi, #33148).
+Note that the `dir=auto` value is not yet supported.
+
 We’ve also made significant progress on our **flexbox layout engine**, including support for the **‘gap’ property** (@Loirooriol, #32891), **‘align-content: stretch’** (@mrobinson, @Loirooriol, #32906, #32913), and the **‘start’** and **‘end’** values on **‘align-items’** and **‘align-self’** (@mrobinson, @Loirooriol, #33032).
 
 **‘position: relative’** is now supported on flex items (@mrobinson, #33151), **‘z-index’ always creates stacking contexts** for flex items (@mrobinson, #32961), and we now give flex items and flex containers their correct **intrinsic sizes** (@delan, @mrobinson, @mukilan, #32854).
@@ -95,10 +98,10 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
         - DONE intrinsic sizes 32854
         - DONE ‘z-index’ stacking context fix 32961
         - DONE subpixel fix 32913
-    - bidi
-        - physical geometry 33030
-        - ‘writing-mode’ access 33082
-        - basic support for dir attribute and ‘unicode-bidi’ 33148
+    - DONE bidi
+        - DONE physical geometry 33030
+        - DONE ‘writing-mode’ access 33082
+        - DONE basic support for dir attribute and ‘unicode-bidi’ 33148
     - DONE ‘border-image’ 32874
     - DONE structuredClone() 32960
     - DONE crypto.randomUUID() 33158
