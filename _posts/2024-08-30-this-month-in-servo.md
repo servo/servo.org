@@ -19,16 +19,16 @@ Servo has had several new features land in our nightly builds over the last mont
 - as of 2024-08-13, we now support navigating through **cross-origin redirects** (@jdm, #32996)
 - as of 2024-08-23, we now support the **crypto.randomUUID()** API (@webbeef, #33158)
 
-We’re now working on support for **bidirectional text**, with architectural changes to the fragment tree (@mrobinson, #33030) and ‘writing-mode’ interfaces (@mrobinson, @atbrakhi, #33082), and now partial support for the **‘unicode-bidi’ property** and the **dir attribute** (@mrobinson, @atbrakhi, #33148).
-Note that the `dir=auto` value is not yet supported.
+We’ve upgraded Servo to **SpiderMonkey 128** (@sagudev, @jschwe, #32769, #32882, #32951, #33048), **WebRender 0.65** (@mrobinson, #32930, #33073), **wgpu 22.0** (@sagudev, #32827, #32873, #32981, #33209), and **Rust 1.80.1** (@Hmikihiro, @sagudev, #32896, #33008).
 
-We’ve also made significant progress on our **flexbox layout engine**, including support for the **‘gap’ property** (@Loirooriol, #32891), **‘align-content: stretch’** (@mrobinson, @Loirooriol, #32906, #32913), and the **‘start’** and **‘end’** values on **‘align-items’** and **‘align-self’** (@mrobinson, @Loirooriol, #33032).
+**WebXR** (@msub2, #33245) and **flexbox** (@mrobinson, #33186) are now **enabled by default!**
+
+The biggest flexbox features that landed this month are the **‘gap’ property** (@Loirooriol, #32891), **‘align-content: stretch’** (@mrobinson, @Loirooriol, #32906, #32913), and the **‘start’** and **‘end’** values on **‘align-items’** and **‘align-self’** (@mrobinson, @Loirooriol, #33032), as well as basic support for **‘flex-direction: column’** and **‘column-reverse’** (@mrobinson, @Loirooriol, #33031, #33068).
 
 **‘position: relative’** is now supported on flex items (@mrobinson, #33151), **‘z-index’ always creates stacking contexts** for flex items (@mrobinson, #32961), and we now give flex items and flex containers their correct **intrinsic sizes** (@delan, @mrobinson, @mukilan, #32854).
 
-With basic support for **‘flex-direction: column’** and **‘column-reverse’** (@mrobinson, @Loirooriol, #33031, #33068) landing too, our layout engine is now complete enough to have **flexbox enabled by default** (@mrobinson, #33186)!
-
-Servo now runs on **SpiderMonkey 128** (@sagudev, @jschwe, #32769, #32882, #32951, #33048), **WebRender 0.65** (@mrobinson, #32930, #33073), and **wgpu 22.0** (@sagudev, #32827, #32873, #32981, #33209), and we now build with **Rust 1.80.1** (@Hmikihiro, @sagudev, #32896, #33008).
+We’re now working on support for **bidirectional text**, with architectural changes to the fragment tree (@mrobinson, #33030) and ‘writing-mode’ interfaces (@mrobinson, @atbrakhi, #33082), and now partial support for the **‘unicode-bidi’ property** and the **dir attribute** (@mrobinson, @atbrakhi, #33148).
+Note that the `dir=auto` value is not yet supported.
 
 ## servoshell
 
@@ -125,7 +125,7 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE basic support for show() method on HTMLDialogElement 32681
     - DONE type property on HTMLFieldSetElement 32869
     - non-tree-structural pseudo-classes 33165
-    - webxr enabled by default 33245
+    - DONE webxr enabled by default 33245
 - embedding
     - DONE custom protocol handlers 33104
     - additional webrender surfaces 32933
