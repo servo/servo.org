@@ -25,6 +25,8 @@ We’ve also made significant progress on our **flexbox layout engine**, includi
 
 With basic support for **‘flex-direction: column’** and **‘column-reverse’** (@mrobinson, @Loirooriol, #33031, #33068) landing too, […]
 
+Servo now runs on **SpiderMonkey 128** (@sagudev, @jschwe, #32769, #32882, #32951, #33048), **WebRender 0.65** (@mrobinson, #32930, #33073), and **wgpu 22.0** (@sagudev, #32827, #32873, #32981), and we now build with **Rust 1.80.1** (@Hmikihiro, @sagudev, #32896, #33008).
+
 ## Engine reliability
 
 August has been a huge month for squashing **crash bugs** in Servo, including on real-world websites.
@@ -52,11 +54,11 @@ Servo no longer **leaks the DOM Window object** when navigating (@ede1998, @rhet
     - github 1313.00/month
     - lfx 127.00/month (10+10+10+10+10+10+25+5+12+5+10+10)
 - upgrades
-    - mozjs 115 → 128 32769 32882 32951 33048
-    - webrender 0.64 → 0.65 32930 33073
-    - wgpu 22 32827 32873 32981
+    - DONE mozjs 115 → 128 32769 32882 32951 33048
+    - DONE webrender 0.64 → 0.65 32930 33073
+    - DONE wgpu 22 32827 32873 32981
         - better exception handling 32925
-    - rust 1.78.0 → 1.80.1 32896 33008
+    - DONE rust 1.78.0 → 1.80.1 32896 33008
 - rendering
     - DONE typing in textarea 32886
     - DONE wav playback 32924
