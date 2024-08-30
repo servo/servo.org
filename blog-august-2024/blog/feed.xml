@@ -32,7 +32,7 @@ Note that the &lt;code&gt;dir=auto&lt;/code&gt; value is not yet supported.&lt;/
 &lt;p&gt;We’ve also made significant progress on our &lt;strong&gt;flexbox layout engine&lt;/strong&gt;, including support for the &lt;strong&gt;‘gap’ property&lt;/strong&gt; (@Loirooriol, #32891), &lt;strong&gt;‘align-content: stretch’&lt;/strong&gt; (@mrobinson, @Loirooriol, #32906, #32913), and the &lt;strong&gt;‘start’&lt;/strong&gt; and &lt;strong&gt;‘end’&lt;/strong&gt; values on &lt;strong&gt;‘align-items’&lt;/strong&gt; and &lt;strong&gt;‘align-self’&lt;/strong&gt; (@mrobinson, @Loirooriol, #33032).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;‘position: relative’&lt;/strong&gt; is now supported on flex items (@mrobinson, #33151), &lt;strong&gt;‘z-index’ always creates stacking contexts&lt;/strong&gt; for flex items (@mrobinson, #32961), and we now give flex items and flex containers their correct &lt;strong&gt;intrinsic sizes&lt;/strong&gt; (@delan, @mrobinson, @mukilan, #32854).&lt;/p&gt;
 &lt;p&gt;With basic support for &lt;strong&gt;‘flex-direction: column’&lt;/strong&gt; and &lt;strong&gt;‘column-reverse’&lt;/strong&gt; (@mrobinson, @Loirooriol, #33031, #33068) landing too, […]&lt;/p&gt;
-&lt;p&gt;Servo now runs on &lt;strong&gt;SpiderMonkey 128&lt;/strong&gt; (@sagudev, @jschwe, #32769, #32882, #32951, #33048), &lt;strong&gt;WebRender 0.65&lt;/strong&gt; (@mrobinson, #32930, #33073), and &lt;strong&gt;wgpu 22.0&lt;/strong&gt; (@sagudev, #32827, #32873, #32981), and we now build with &lt;strong&gt;Rust 1.80.1&lt;/strong&gt; (@Hmikihiro, @sagudev, #32896, #33008).&lt;/p&gt;
+&lt;p&gt;Servo now runs on &lt;strong&gt;SpiderMonkey 128&lt;/strong&gt; (@sagudev, @jschwe, #32769, #32882, #32951, #33048), &lt;strong&gt;WebRender 0.65&lt;/strong&gt; (@mrobinson, #32930, #33073), and &lt;strong&gt;wgpu 22.0&lt;/strong&gt; (@sagudev, #32827, #32873, #32981, #33209), and we now build with &lt;strong&gt;Rust 1.80.1&lt;/strong&gt; (@Hmikihiro, @sagudev, #32896, #33008).&lt;/p&gt;
 &lt;h2 id=&quot;engine-reliability&quot; tabindex=&quot;-1&quot;&gt;Engine reliability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-august-2024/blog/2024/08/30/this-month-in-servo/#engine-reliability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -80,13 +80,14 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-august-202
 - upgrades
     - DONE mozjs 115 → 128 32769 32882 32951 33048
     - DONE webrender 0.64 → 0.65 32930 33073
-    - DONE wgpu 22 32827 32873 32981
+    - DONE wgpu 22 32827 32873 32981 33209
         - better exception handling 32925
     - DONE rust 1.78.0 → 1.80.1 32896 33008
 - rendering
     - DONE typing in textarea 32886
     - DONE wav playback 32924
     - DONE cross-origin redirects 32996
+    - ‘clip-path: [&lt;basic-shape&gt; || &lt;shape-box&gt;]’ 33107
     - flex
         - DONE column mode 33031 33068
         - DONE ‘gap’ 32891
@@ -96,6 +97,7 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-august-202
         - DONE intrinsic sizes 32854
         - DONE ‘z-index’ stacking context fix 32961
         - DONE subpixel fix 32913
+        - flexbox enabled by default 33186
     - DONE bidi
         - DONE physical geometry 33030
         - DONE ‘writing-mode’ access 33082
@@ -110,6 +112,8 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-august-202
     - DONE csp unsafe-eval wasm-unsafe-eval 32893
     - DONE basic support for show() method on HTMLDialogElement 32681
     - DONE type property on HTMLFieldSetElement 32869
+    - non-tree-structural pseudo-classes 33165
+    - webxr enabled by default 33245
 - embedding
     - custom protocol handlers 33104
     - additional webrender surfaces 32933
@@ -118,10 +122,14 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-august-202
     - text nodes? 32884
     - attributes 32888
     - style inspector and computed tab 33025
+- servoshell
+    - redesigned toolbar 33179
+    - tabs 33100 33229
 - dev
     - watch out! mediafire fix.rar 33201
     - clippy ci 33150
     - faster build-then-run on macos 32928
+    - self-hosted ci runners windows 33081
 - platform support
     - windows text/image rendering fixes 33045 33177
     - windows --output to png fix 32914
@@ -147,8 +155,10 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-august-202
 - bustage
     - nixpkgs 32945
     - spaces windows 32936
+    - non-ascii windows 32949
     - ci android 32907 32927
     - building for ohos 33029
+    - macos apple silicon 33190 33200
 - cleanups
     - lazy_static 33046 33047 33049 33060 33065 33078
     - once_cell 33080
@@ -208,7 +218,7 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-august-202
     7495ba20a51fb2bea033d115e98db5ea07e68a4b	https://github.com/servo/servo/pull/32909	Select servo feature on servo_arc (#32909)
 &gt;&gt;&gt; 2024-08-04T06:06:53Z
 +   7c2c383bb1fb15dfeea1e0f33af2e42b407af4e1	https://github.com/servo/servo/pull/32914	Fix save to image on Windows (#32914)
-bb176514c64b50011ee0be5cfb10f0cbce48cd93	https://github.com/servo/servo/pull/32926	Pass AppInfo to OpenXrDiscovery (#32926)
+    bb176514c64b50011ee0be5cfb10f0cbce48cd93	https://github.com/servo/servo/pull/32926	Pass AppInfo to OpenXrDiscovery (#32926)
 +   f3fe11c382d85f47f2adf3099a3b92c4202c52f1	https://github.com/servo/servo/pull/32924	Enabled WAV decoding support in gstreamer (#32924)
 f3bec0aed386615e850b9e24b74c697624c32bce	https://github.com/servo/servo/pull/32923	bindings: Convert certain Exceptions into Promise rejections (#32923)
 +   fd832816572e26cafb8207d3710bd704f2617758	https://github.com/servo/servo/pull/32860	Implement WebXR Gamepads Module (#32860)
@@ -242,8 +252,8 @@ f3bec0aed386615e850b9e24b74c697624c32bce	https://github.com/servo/servo/pull/329
 68f4b359c53b241e0ef82b640e84d8de70cfb805	https://github.com/servo/servo/pull/32950	Add exception to rejection logic in `generic_call` (#32950)
 +   1d464a576a6506196ff10e2c5bbee1969272fc54	https://github.com/servo/servo/pull/32906	layout: Add support for `align-content: stretch` (#32906)
 +   3800922cde6f1c5698a931183de9dbcd3d5d7e4e	https://github.com/servo/servo/pull/32897	Fix panic in Webrender during shutdown (#32897)
-28430bad0e7a4d4c11710d61fbaf1c598bffa87d	https://github.com/servo/servo/pull/32949	Fix visual_studio.py to call vswhere with -utf8 (#32949)
-3f339d6856283dc4839f6378df5df1ddbedcb5d6	https://github.com/servo/servo/pull/32946	webrender_traits: update closure in with_front_buffer to FnOnce (#32946)
++   28430bad0e7a4d4c11710d61fbaf1c598bffa87d	https://github.com/servo/servo/pull/32949	Fix visual_studio.py to call vswhere with -utf8 (#32949)
+    3f339d6856283dc4839f6378df5df1ddbedcb5d6	https://github.com/servo/servo/pull/32946	webrender_traits: update closure in with_front_buffer to FnOnce (#32946)
     23df681479e20d099abae2852c2107b395fb09a1	https://github.com/servo/servo/pull/32942	build(deps): bump winapi-util from 0.1.8 to 0.1.9 (#32942)
 &gt;&gt;&gt; 2024-08-08T06:07:41Z
     1379cd5779657774a14303ff26269df2a03bb3aa	https://github.com/servo/servo/pull/32965	build(deps): bump tempfile from 3.11.0 to 3.12.0 (#32965)
@@ -406,7 +416,7 @@ fb22dfb3738089e1fea55bde65f0a4effa865958	https://github.com/servo/servo/pull/331
     0afcb83e9f13bdaeb0ef01b4809ed298b9f24ac0	https://github.com/servo/servo/pull/33077	Print reason when tests are skipped. (#33077)
 &gt;&gt;&gt; 2024-08-25T06:05:02Z
     6caaa0c955fa7535554d50e46c1eb91bc2d2ba3b	https://github.com/servo/servo/pull/33178	Update web-platform-tests to revision b&#39;d988aeeb33edc4d452899921799b8bed69fff65d&#39; (#33178)
-7582afebeca965f8d12a6594284969ee55f6742f	https://github.com/servo/servo/pull/33165	script: Update list of non-TS pseudo classes supported by Servo (#33165)
++   7582afebeca965f8d12a6594284969ee55f6742f	https://github.com/servo/servo/pull/33165	script: Update list of non-TS pseudo classes supported by Servo (#33165)
 +   ad45fa0a196a5d8f9655c41afc6b5b42570f5340	https://github.com/servo/servo/pull/32980	script: Fix panic in `htmlimageelement.rs` using `str::find()` to find character boundaries. (#32980)
 e85491b5fc0ccbedfa312b82edf37d8e1cecc780	https://github.com/servo/servo/pull/33163	Allow prefs to be overridden from a file and set WPT-specific prefs from file (#33163)
 &gt;&gt;&gt; 2024-08-26T06:09:38Z
@@ -417,6 +427,69 @@ e0e562137ce8d985c5bda8e65add5edb8409c25f	https://github.com/servo/servo/pull/331
 +   6357998ede902de7fb75354283f4fabbc141c28c	https://github.com/servo/servo/pull/33025	DevTools: Inspect node styles (#33025)
     67e2bb0ee6039e98f361e33617c0401a52963daf	https://github.com/servo/servo/pull/33174	script: fix `querySelector` returning the root (#33174)
 +   c79d9e68a39bc6c2ff396f8cb843d3d9abb01b1f	https://github.com/servo/servo/pull/33177	Use webrender `UploadMethod::Immediate` with ANGLE (#33177)
+&gt;&gt;&gt; 2024-08-27T06:07:55Z
+    ba4e081e8eddf8bee186a19a15f3f5dfe9c62dc9	https://github.com/servo/servo/pull/33196	build(deps): bump serde from 1.0.208 to 1.0.209 (#33196)
+    f84da1521a76371c8f3a6fd7815e7e9a4ad3384a	https://github.com/servo/servo/pull/33198	build(deps): bump fastrand from 2.1.0 to 2.1.1 (#33198)
+    4b8ca674fc0eac3eb2ece389ee6274f39326d91a	https://github.com/servo/servo/pull/33197	build(deps): bump syn from 2.0.75 to 2.0.76 (#33197)
+    00ba0dfa2efcb4bf64448765fbb98a9eacdf476b	https://github.com/servo/servo/pull/33194	build(deps): bump libz-sys from 1.1.19 to 1.1.20 (#33194)
+    806d960d3820967c4c841561b34306ec25ab7514	https://github.com/servo/servo/pull/33195	build(deps): bump serde_json from 1.0.125 to 1.0.127 (#33195)
+    cdedb57aee1e92255ec9af6f8bce774cfa12166a	https://github.com/servo/servo/pull/33193	build(deps): bump cc from 1.1.14 to 1.1.15 (#33193)
+    8f14f7bee628009f5a1a45d92e677a7d8584cc12	https://github.com/servo/servo/pull/33192	build(deps): bump flate2 from 1.0.32 to 1.0.33 (#33192)
++   7b7020a8d429d4b58bcaf09615cdc246becfcfe5	https://github.com/servo/servo/pull/33186	layout: Enable flexbox by default on non-legacy layout (#33186)
+b6d5ac09b0b2acbb0f5b00232e53d0111a159063	https://github.com/servo/servo/pull/33114	mach: introduce `BuildTarget` abstraction (#33114)
+4397d8a02156a009d16d8b79796b1e54ca635624	https://github.com/servo/servo/pull/33187	Add `dom.allow_scripts_to_close_windows` pref. (#33187)
++   0e6b55c71d8e782d626afb34042cf41b9c2021b5	https://github.com/servo/servo/pull/33179	Redesigned minibrowser toolbar to use icons instead of text (#33179)
+    e5caa725da54e58aa2e545f2a975def10d943ec5	https://github.com/servo/servo/pull/33175	Fix a memory leak in `components/script/script_runtime.rs` and add more leak suppressions (#33175)
+&gt;&gt;&gt; 2024-08-28T05:55:51Z
+    6de7848aff46920e1f8235ed3bd57aae7f350c26	https://github.com/servo/servo/pull/33218	android: Remove unused imports in android.rs (#33218)
+    2037884469bae64c993d1e54d988e58f254a6b62	https://github.com/servo/servo/pull/33215	Fix clippy wanings in layout (#33215)
++   12661c1920a14c29b84e005ff4a3564bedcfa821	https://github.com/servo/servo/pull/33209	Update wgpu (#33209)
++   1b48bd18aa855cc966869dd81530aa0da3eea4f3	https://github.com/servo/servo/pull/33100	Basic tab strip for the minibrowser (#33100)
+    a0ff57cea1675e7ec9ee8657d80024a110a0092a	https://github.com/servo/servo/pull/33214	build(deps): bump bytemuck from 1.17.0 to 1.17.1 (#33214)
+    87027d2e5c02b51fea0cb49c1cd4ba4f85debd3a	https://github.com/servo/servo/pull/33210	Remove measurement of layout query wait time (#33210)
+    50eb69a7e0f9d70d9c395eadb03fb7bbe2ae6724	https://github.com/servo/servo/pull/33208	Allow creating a `ContentSizes` from `Au` (#33208)
+    dbd0a79b3e45b60a29d26c0af20297ab260f2a8b	https://github.com/servo/servo/pull/33207	Allow caching `IndependentFormattingContext::inline_content_sizes()` (#33207)
+253723409022546475240b04843ed19ad321d847	https://github.com/servo/servo/pull/33206	ohos: Add FFI-APIs to navigate back and forward (#33206)
++   658df79d8885a337f5d5172fb8c2dc4d391cc6c8	https://github.com/servo/servo/pull/33081	CI: use self-hosted runners for Windows build jobs (#33081)
+5d43d88b6c335bf786de910dacb5e898d51b961b	https://github.com/servo/servo/pull/33203	Respect min/max constraints in the block axis of block containers (#33203)
++   fef44620cc58fca454138ce77f56d49ef96bf670	https://github.com/servo/servo/pull/33200	Fixed build error on macos (#33200)
+    173b6f183c6db86c68eb430b06a548f9e47264dc	https://github.com/servo/servo/pull/33202	wpt: check for wpt-prefs.json in &quot;./servo&quot; sub-directory (#33202)
+7fce24f9d54a015db7ee813fc16c74d2feacbb12	https://github.com/servo/servo/pull/33154	webgpu: Sync `GPUBuffer` (#33154)
++   bb5926b3291877fb47d44ea376881c2d52701bbf	https://github.com/servo/servo/pull/33190	mach: Do not manually install toolchain for non-cross builds (#33190)
+&gt;&gt;&gt; 2024-08-29T06:01:33Z
+c69acd184826b87d29a91c78b149cd413dec29bd	https://github.com/servo/servo/pull/33239	Fix run_dromaeo.py (#33239)
+    b2a9184ddc48085ea5e89429740efce11d196837	https://github.com/servo/servo/pull/33238	build(deps): bump euclid from 0.22.10 to 0.22.11 (#33238)
+    3d0c4f9ea8b552ef277befbeda80b739c514f52f	https://github.com/servo/servo/pull/33234	build(deps): bump filetime from 0.2.24 to 0.2.25 (#33234)
+    1e47361537067f157619864ca4303236c58c4918	https://github.com/servo/servo/pull/33233	build(deps): bump webxr from `06cf810` to `7656508` (#33233)
+    0a9fe1beb21a52d245a148f6478aa274a23262ad	https://github.com/servo/servo/pull/33232	build(deps): bump rustix from 0.38.34 to 0.38.35 (#33232)
+    64b31b6e6a49c40bbc2acc3874f040bcd6846a92	https://github.com/servo/servo/pull/33231	build(deps): bump webrender from `c0bcdd0` to `8468e81` (#33231)
+    87f437d23035fe8cc01e14ed42cdb04abc65aa6a	https://github.com/servo/servo/pull/33230	fix clippy warning for clamp pattern in `webgl_thread` (#33230)
++   7c4ba51f51febe36dda0a11a1403c5804c18746a	https://github.com/servo/servo/pull/33229	Don&#39;t allow minibrowser tab titles to be empty (#33229)
+    ef42ac0dfc6bef95e2e25487bd4346bf52f2dc80	https://github.com/servo/servo/pull/33227	Fix several clippy warnings in components/devtools (#33227)
++   590527176e7c03648fcce797604d3e12da0c2c99	https://github.com/servo/servo/pull/33107	layout: Add initial support for `clip-path: [&lt;basic-shape&gt; || &lt;shape-box&gt;]` (#33107)
+    f810983fd21dfa8b54e55e5068e87e6ab4dc7395	https://github.com/servo/servo/pull/33226	Remove unused import (#33226)
+fe4401000065185b4d4feca4bffc5dc469848b4a	https://github.com/servo/servo/pull/33205	mach: Extract binary select into common_command_arguments (#33205)
+    b29b614775b562cc57d420d29ea190d5bafef014	https://github.com/servo/servo/pull/33224	ci: Use Servo&#39;s `wpt` repository for WPT export (#33224)
+bb5547a5d05b1f002d9cce3197cfb9cdcb71d33c	https://github.com/servo/servo/pull/33162	Fix panic in parser-reentrancy-customelement.window.js (#33162)
+9639d36550a47bc66efcea2f05117efc318ad3c4	https://github.com/servo/servo/pull/33211	Remove `width` and `height` presentational hints for `&lt;canvas&gt;` (#33211)
+    a6b9640c99da121641dd63765835ab55aa1d378d	https://github.com/servo/servo/pull/33222	compositor: Do not parse the Cargo.lock file while building (#33222)
+    5092cece7a7b2962fdc961183c00f5f146ed0b78	https://github.com/servo/servo/pull/33220	wpt: fix the path to wpt-prefs.json on WPT runner (#33220)
+&gt;&gt;&gt; 2024-08-30T05:56:52Z
+    13cbcf614ace35ef5178ba62ec87fcad8e8e4622	https://github.com/servo/servo/pull/33253	build(deps): bump ohos-sys from 0.2.2 to 0.3.0 (#33253)
+4bf941bc8a0eff281da668dbe550fb52c0e7a983	https://github.com/servo/servo/pull/33248	Fix automatic minimum size for column flexbox (#33248)
+9ea02fa4b46e92c00d3efa252e36681729d385a0	https://github.com/servo/servo/pull/33252	Fix minibrowser scroll by keyboard (#33252)
+99bd6afa81adc81b90b723fa8673f5992e7af722	https://github.com/servo/servo/pull/33225	Pass keyboard events to WebView on Windows (#33225)
+8dd40ed2bd4411d73ca1661803635345c2d9c3c1	https://github.com/servo/servo/pull/33247	mach: Add `test-speedometer` command and `--bmf-output` to speedometer and dromaeo (#33247)
+0643aa47089838353e80f6fd509cbe70d13af271	https://github.com/servo/servo/pull/33240	Handle aspect ratios in `ReplacedContent::inline_content_sizes` (#33240)
+    3f93de7f5494191ee659de9b5a340b329a25879b	https://github.com/servo/servo/pull/33250	layout: Stop using `unicode-segmentation`  in layout (#33250)
+93abdf7cb56fa9db6aa160d63e8773292c5e7520	https://github.com/servo/servo/pull/33204	layout: Add an indefinite containing block for intrinsic sizing (#33204)
+46dbe4ce320eb99e851dd422f624615e18c39e15	https://github.com/servo/servo/pull/33242	Obey min and max cross sizes of flex items (#33242)
+59c74c874a082dc2c4652747d768498c2d03d3ee	https://github.com/servo/servo/pull/33241	Obey `min-block-size` and `max-block-size` in floats (#33241)
+    e8d0f85f52c9b9c15fe8d8970a4bb7efb48e345f	https://github.com/servo/servo/pull/33246	Bump xi_unicode to latest version (#33246)
+    65c2e75379a4c79ff815267c23353fa5898325c7	https://github.com/servo/servo/pull/33228	ci: Fix the WPT export job after the repository change (#33228)
+    89421b70ada45d32ba0d5cfb0e921b5f459bf74f	https://github.com/servo/servo/pull/33236	build(deps): bump rustc_version from 0.4.0 to 0.4.1 (#33236)
++   5ffdce9aee9314e10474263513bc8cb2b73f9412	https://github.com/servo/servo/pull/33245	servoshell: Enable OpenXR by default and remove old WebVR prefs, adjust XrDiscovery initialization (#33245)
+    1aff31fd963bb139843574cd73158ac0c0a4a430	https://github.com/servo/servo/pull/33243	wpt: fix path to wpt-prefs.json (#33243)
 --&gt;
 &lt;style&gt;
     /* guaranteed minimum width for first paragraph after a float */
