@@ -75,6 +75,8 @@ Several other crashes have also been fixed:
 - crashes when **parsing some &lt;img srcset> values** (@NotnaKO, #32980)
 - crashes when **parsing some HTTP header values** (@ToBinio, #32973)
 - crashes when **setting window.opener** in certain situations (@Taym95, #33002, #33122)
+- crashes when **removing iframes** from documents (@newmoneybigbucks, #32782)
+- crashes when **calling new AudioContext()** with unsupported options (@Taym95, #33023)
 - intermittent crashes in WRSceneBuilder **when exiting Servo** (@Taym95, #32897)
 
 We’ve fixed a bunch of **BorrowError** crashes under SpiderMonkey GC (@jdm, #33133, [issue] #24115, [issue] #32646), and we’re now working towards preventing this class of bugs with static analysis (@jdm, #33144).
@@ -194,8 +196,8 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE window.opener setter 33002 33122
     - DONE table layout 33098
     - DONE webrender shutdown 32897
-    - iframe removed 32782
-    - new AudioContext() with unsupported sampleRate 33023
+    - DONE iframe removed 32782
+    - DONE new AudioContext() with unsupported sampleRate 33023
     - DONE leak CreateProxyWindowHandler 32773
 - bustage
     - nixpkgs 32945
