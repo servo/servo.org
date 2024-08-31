@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
-date:       2024-08-30
-summary:    ao!! wrrrrao!!
+title:      "This month in Servo: tabbed browsing, Windows buffs, devtools, and more!"
+date:       2024-08-31
+summary:    Flexbox and WebXR are now enabled by default.
 categories:
 ---
 
