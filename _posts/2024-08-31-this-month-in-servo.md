@@ -63,6 +63,10 @@ We now **run clippy in CI** (@sagudev, #33150), together with the existing tidy 
 Servo now has **new CI runners** for Windows builds (@delan, #33081), thanks to your donations, **cutting Windows-only build times by 70%**!
 We’re not stopping at Windows though, and with new runners for Linux builds just around the corner, your WPT try builds will soon be a lot faster.
 
+We’ve been running some **triage meetings** to investigate GitHub issues and coordinate our work on them.
+The next Servo issue triage meeting is on **2 September at 10:00 UTC**.
+For more details, see [issue] project#99.
+
 ## Engine reliability
 
 August has been a huge month for squashing **crash bugs** in Servo, including on real-world websites.
