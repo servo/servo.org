@@ -54,9 +54,9 @@ Some features are crucial to the browser but not visible to users. Multi-process
 
 ## Acknowledgment
 
-This work is sponsored by [NLNet](https://nlnet.nl/) and the [Next Generation Internet initiative](https://ngi.eu/). We are grateful the European Commission shares the same vision to push a better and more open browser ecosystem.
+This work is [sponsored](https://nlnet.nl/project/Servo-Multibrowsing/) by [NLNet](https://nlnet.nl/) and the [Next Generation Internet initiative](https://ngi.eu/). We are grateful the European Commission shares the same vision to push a better and more open browser ecosystem.
 
-<figure class="_fig"><img src="{{ '/img/nlnet-logo.png' | url }}" alt="NGI Logo" style="vertical-align: middle; margin: 15px; width: 100px;">
+<figure class="_fig"><img src="{{ '/img/nlnet-logo.png' | url }}" alt="NLNet Logo" style="vertical-align: middle; margin: 15px; width: 100px;">
   <img src="{{ '/img/blog/NGI-logo.png' | url }}" alt="NGI Logo" style="vertical-align: middle; margin: 15px; width: 100px;"></figure>
 
 <style>
