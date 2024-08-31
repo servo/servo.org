@@ -51,6 +51,9 @@ This includes a slick **new tab page**, taking advantage of a new API that lets 
 
 Servo now runs better on Windows, with keyboard navigation now fixed (@crbrz, #33252), `--output` to PNG also fixed (@crbrz, #32914), and fixes for some font- and GPU-related bugs (@crbrz, #33045, #33177), which were causing misaligned glyphs with incorrect colors on servo<!-- no link -->.org ([issue] #32459) and duckduckgo<!-- no link -->.com ([issue] #33094), and corrupted images on wikipedia<!-- no link -->.org ([issue] #33170).
 
+Our **devtools support** is becoming very capable after @eerii’s final month of work on their internship project, with Servo now supporting the **HTML tree** (@eerii, #32655, #32884, #32888) and the **Styles and Computed panels** (@eerii, #33025).
+Stay tuned for a more in-depth post about the Servo devtools!
+
 ## Changes for Servo developers
 
 Running servoshell immediately after building it is now **several seconds faster on macOS** (@mrobinson, #32928).
@@ -161,11 +164,11 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 - embedding
     - DONE custom protocol handlers 33104
     - additional webrender surfaces 32933
-- devtools
-    - html tree 32655
-    - text nodes? 32884
-    - attributes 32888
-    - style inspector and computed tab 33025
+- DONE devtools
+    - DONE html tree 32655
+    - DONE text nodes? 32884
+    - DONE attributes 32888
+    - DONE style inspector and computed tab 33025
 - DONE servoshell
     - DONE redesigned toolbar 33179
     - DONE tabs 33100 33229
