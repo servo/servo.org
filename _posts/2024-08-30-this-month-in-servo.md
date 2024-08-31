@@ -25,7 +25,11 @@ Servo has had several new features land in our nightly builds over the last mont
 
 We’ve upgraded Servo to **SpiderMonkey 128** (@sagudev, @jschwe, #32769, #32882, #32951, #33048), **WebRender 0.65** (@mrobinson, #32930, #33073), **wgpu 22.0** (@sagudev, #32827, #32873, #32981, #33209), and **Rust 1.80.1** (@Hmikihiro, @sagudev, #32896, #33008).
 
-**WebXR** (@msub2, #33245) and **flexbox** (@mrobinson, #33186) are now **enabled by default!**
+**WebXR** (@msub2, #33245) and **flexbox** (@mrobinson, #33186) are now **enabled by default**, and web APIs that return promises now correctly **reject the promise on failure**, rather than throwing an exception (@sagudev, #32923, #32950).
+
+To get there, we revamped our **WebXR API**, landing support for **Gamepad** (@msub2, #32860), and updates to **hand input** (@msub2, #32958), XRBoundedReferenceSpace (@msub2, #33176), XRFrame (@msub2, #33102), XRInputSource (@msub2, #33155), XRPose (@msub2, #33146), XRSession (@msub2, #33007, #33059), XRTargetRayMode (#33155), XRView (@msub2, #33007, #33145), and XRWebGLLayer (@msub2, #33157).
+
+And to top it all off, you can now call **makeXRCompatible() on WebGL2RenderingContext** (@msub2, #33097), not just on WebGLRenderingContext.
 
 The biggest flexbox features that landed this month are the **‘gap’ property** (@Loirooriol, #32891), **‘align-content: stretch’** (@mrobinson, @Loirooriol, #32906, #32913), and the **‘start’** and **‘end’** values on **‘align-items’** and **‘align-self’** (@mrobinson, @Loirooriol, #33032), as well as basic support for **‘flex-direction: column’** and **‘column-reverse’** (@mrobinson, @Loirooriol, #33031, #33068).
 
@@ -38,10 +42,21 @@ Note that the `dir=auto` value is not yet supported.
     alt="Servo nightly showing a toolbar with icons on the buttons, one tab open with the title “Servo - New Tab”, and a location bar that reads “servo:newtab”"></a>
 <figcaption>servoshell now has a more elegant toolbar, tabbed browsing, and a clean but useful “new tab” page.</figcaption></figure>
 
-## <span class=_floatmin></span>servoshell
+## <span class=_floatmin></span>Beyond the engine
 
-Servo’s reference browser now has a **redesigned toolbar** (@Melchizedek6809, 33179) and **tabbed browsing** (@webbeef, @Wuelle, #33100, #33229)!
+[Servo-the-browser](https://book.servo.org/running-servoshell.html) now has a **redesigned toolbar** (@Melchizedek6809, 33179) and **tabbed browsing** (@webbeef, @Wuelle, #33100, #33229)!
 This includes a slick **new tab page**, taking advantage of a new API that lets Servo embedders register **custom protocol handlers** (@webbeef, #33104).
+
+Servo now runs better on Windows, with keyboard navigation now fixed (@crbrz, #33252), `--output` to PNG also fixed (@crbrz, #32914), and fixes for some font- and GPU-related bugs (@crbrz, #33045, #33177), which were causing misaligned glyphs with incorrect colors on servo<!-- no link -->.org ([issue] #32459) and duckduckgo<!-- no link -->.com ([issue] #33094), and corrupted images on wikipedia<!-- no link -->.org ([issue] #33170).
+
+## Changes for Servo developers
+
+Running servoshell immediately after building it is now **several seconds faster on macOS** (@mrobinson, #32928).
+
+We now **run clippy in CI** (@sagudev, #33150), together with the existing tidy checks in a dedicated linting job.
+
+Servo now has **new CI runners** for Windows builds (@delan, #33081), thanks to your donations, **cutting Windows-only build times by 70%**!
+We’re not stopping at Windows though, and with new runners for Linux builds just around the corner, your WPT try builds will soon be a lot faster.
 
 ## Engine reliability
 
@@ -63,11 +78,6 @@ Several other crashes have also been fixed:
 We’ve fixed a bunch of **BorrowError** crashes under SpiderMonkey GC (@jdm, #33133, [issue] #24115, [issue] #32646), and we’re now working towards preventing this class of bugs with static analysis (@jdm, #33144).
 
 Servo no longer **leaks the DOM Window object** when navigating (@ede1998, @rhetenor, #32773), and servoshell now **[terminates abnormally](https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_04_03_01) when panicking** on Unix (@mrobinson, #32947), ensuring [web tests](https://book.servo.org/hacking/testing.html) correctly record their test results as “CRASH”.
-
-## Changes for Servo developers
-
-Servo now has **new CI runners** for Windows builds (@delan, #33081), thanks to your donations, **cutting Windows-only build times by 70%**!
-We’re not stopping at Windows though, and with new runners for Linux builds just around the corner, your WPT try builds will soon be a lot faster.
 
 ## Donations
 
@@ -125,9 +135,19 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE ‘border-image’ 32874
     - DONE structuredClone() 32960
     - DONE crypto.randomUUID() 33158
+    - DONE promise rejection 32923 32950
     - webaudio IIRFilterNode 33001
-    - webxr XRInputSource.gamepad 32860
-    - webxr XRBoundedReferenceSpace 33176
+    - DONE webxr XRInputSource.gamepad 32860
+    - DONE webxr XRBoundedReferenceSpace 33176
+    - DONE webxr XRSession.interactionMode XRView.isFirstPersonObserver 33007
+    - DONE webxr hand input XRFrame XRHandJoint XRHand XRJointSpace 32958
+    - DONE webxr XRSession 33059
+    - DONE webxr makeXRCompatible now works on WebGL2RenderingContext 33097
+    - DONE webxr recommendedViewportScale requestViewportScale XRView 33145
+    - DONE webxr predictedDisplayTime XRFrame 33102
+    - DONE webxr fixedFoveation getNativeFramebufferScaleFactor 33157
+    - DONE webxr XRTargetRayMode XRInputSource 33155
+    - DONE webxr XRPose 33146
     - webgpu createComputePipelineAsync() createRenderPipelineAsync() 32636
     - DONE csp unsafe-eval wasm-unsafe-eval 32893
     - DONE basic support for show() method on HTMLDialogElement 32681
@@ -147,14 +167,15 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE tabs 33100 33229
 - dev
     - watch out! mediafire fix.rar 33201
-    - clippy ci 33150
-    - faster build-then-run on macos 32928
+    - DONE clippy ci 33150
+    - DONE faster build-then-run on macos 32928
     - DONE self-hosted ci runners windows 33081
 - platform support
-    - windows text/image rendering fixes 33045 33177
-    - windows --output to png fix 32914
+    - DONE windows text/image rendering fixes 33045 33177
+    - DONE windows --output to png fix 32914
     - musl? background hang monitor 33153
 - DONE rendering/crashes
+    - document ordering 32574
     - DONE html parser reentrancy! 32820 33056
     - DONE forced reflows 33067
 - DONE crashes and reliability
@@ -171,6 +192,8 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE window.opener setter 33002 33122
     - DONE table layout 33098
     - DONE webrender shutdown 32897
+    - iframe removed 32782
+    - new AudioContext() with unsupported sampleRate 33023
     - DONE leak CreateProxyWindowHandler 32773
 - bustage
     - nixpkgs 32945
@@ -240,7 +263,7 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 +   7c2c383bb1fb15dfeea1e0f33af2e42b407af4e1	https://github.com/servo/servo/pull/32914	Fix save to image on Windows (#32914)
     bb176514c64b50011ee0be5cfb10f0cbce48cd93	https://github.com/servo/servo/pull/32926	Pass AppInfo to OpenXrDiscovery (#32926)
 +   f3fe11c382d85f47f2adf3099a3b92c4202c52f1	https://github.com/servo/servo/pull/32924	Enabled WAV decoding support in gstreamer (#32924)
-f3bec0aed386615e850b9e24b74c697624c32bce	https://github.com/servo/servo/pull/32923	bindings: Convert certain Exceptions into Promise rejections (#32923)
++   f3bec0aed386615e850b9e24b74c697624c32bce	https://github.com/servo/servo/pull/32923	bindings: Convert certain Exceptions into Promise rejections (#32923)
 +   fd832816572e26cafb8207d3710bd704f2617758	https://github.com/servo/servo/pull/32860	Implement WebXR Gamepads Module (#32860)
     0672eca7496bd54001e4625f7987d3e4053a3914	https://github.com/servo/servo/pull/32917	build(deps): bump malloc_size_of_derive from 0.1.2 to 0.1.3 (#32917)
 >>> 2024-08-05T06:07:48Z
@@ -269,7 +292,7 @@ f3bec0aed386615e850b9e24b74c697624c32bce	https://github.com/servo/servo/pull/329
 +   c9fbe018f18d1cff8a4b30261ea4b1e981ef435b	https://github.com/servo/servo/pull/32947	testing: Trigger a crash more reliably when panicking and hard fail is active (#32947)
     89d20fc40116e9a35ed4fe2b5ee07e0382babc19	https://github.com/servo/servo/pull/32953	build(deps): bump toml_datetime from 0.6.7 to 0.6.8 (#32953)
     49aa129d22a8d9c61aceb638e9c58f7ff79b512b	https://github.com/servo/servo/pull/32952	build(deps): bump scc from 2.1.8 to 2.1.9 (#32952)
-68f4b359c53b241e0ef82b640e84d8de70cfb805	https://github.com/servo/servo/pull/32950	Add exception to rejection logic in `generic_call` (#32950)
++   68f4b359c53b241e0ef82b640e84d8de70cfb805	https://github.com/servo/servo/pull/32950	Add exception to rejection logic in `generic_call` (#32950)
 +   1d464a576a6506196ff10e2c5bbee1969272fc54	https://github.com/servo/servo/pull/32906	layout: Add support for `align-content: stretch` (#32906)
 +   3800922cde6f1c5698a931183de9dbcd3d5d7e4e	https://github.com/servo/servo/pull/32897	Fix panic in Webrender during shutdown (#32897)
 +   28430bad0e7a4d4c11710d61fbaf1c598bffa87d	https://github.com/servo/servo/pull/32949	Fix visual_studio.py to call vswhere with -utf8 (#32949)
@@ -279,7 +302,7 @@ f3bec0aed386615e850b9e24b74c697624c32bce	https://github.com/servo/servo/pull/329
     1379cd5779657774a14303ff26269df2a03bb3aa	https://github.com/servo/servo/pull/32965	build(deps): bump tempfile from 3.11.0 to 3.12.0 (#32965)
     db23bc7b121e85c79ab5fb93a55f9b751352e542	https://github.com/servo/servo/pull/32964	build(deps): bump object from 0.36.2 to 0.36.3 (#32964)
     206d515c32b4541be59d8a0f1f88c5b7ca2ffa25	https://github.com/servo/servo/pull/32963	build(deps): bump cc from 1.1.7 to 1.1.8 (#32963)
-3fca6e015f1f0e9e375a87d41f37fe56720cfaa5	https://github.com/servo/servo/pull/32782	script: Properly handle removed iframes in `GlobalScope::get_referrer` (#32782)
++   3fca6e015f1f0e9e375a87d41f37fe56720cfaa5	https://github.com/servo/servo/pull/32782	script: Properly handle removed iframes in `GlobalScope::get_referrer` (#32782)
     9cb0e74cdca0c42b8c47a555de24eb1caffbca14	https://github.com/servo/servo/pull/32959	Update web-platform-tests to revision b'3634d5a63f2fa3969616396d95537c91c3348fe5' (#32959)
 +   3c271fb2989fa838473ab006397c7a9d8c3b4b21	https://github.com/servo/servo/pull/32896	Update to rust 1.80.0 (#32896)
 >>> 2024-08-09T06:15:38Z
@@ -288,11 +311,11 @@ f3bec0aed386615e850b9e24b74c697624c32bce	https://github.com/servo/servo/pull/329
 +   8fab6911d16577bf98f5179dab7e0d75e57bc5ba	https://github.com/servo/servo/pull/32973	script: dont unwrap in header set (#32973)
 +   b8cf0cf9afa03d5e2ba3f8a4727e4de00ab63eb2	https://github.com/servo/servo/pull/32636	webgpu: Implement proper async pipeline creation and GPUPipelineError (#32636)
 +   08eb4faf4d2805283137a19739b092cd7ddff600	https://github.com/servo/servo/pull/32960	Initial structuredClone implementation (#32960)
-f989d3776eca7c4a21f03a406a11c1b1228b285e	https://github.com/servo/servo/pull/32966	separate Queue&Device Id (#32966)
+    f989d3776eca7c4a21f03a406a11c1b1228b285e	https://github.com/servo/servo/pull/32966	separate Queue&Device Id (#32966)
     a5df51ea56dd7116b5fb95acd9c88f123bdebbfc	https://github.com/servo/servo/pull/32956	Refine crown annotations for HTML parser. (#32956)
 >>> 2024-08-10T06:15:44Z
     2ebb71f08a9e2521a2fd277c2bc2b54b9e21dd8d	https://github.com/servo/servo/pull/32991	Set the cfg properly for the production-stripped profile (#32991)
-a1d3649f7c282aec9220ab67b203297fe33e5a07	https://github.com/servo/servo/pull/32574	Fix ordering of documents (#32574)
++   a1d3649f7c282aec9220ab67b203297fe33e5a07	https://github.com/servo/servo/pull/32574	Fix ordering of documents (#32574)
     c6a6319502c3df4bf401d394a27854aa1f267658	https://github.com/servo/servo/pull/32982	build(deps): bump windows-sys from 0.52.0 to 0.59.0 (#32982)
     4eae4e29fa92d1684e5a1dcff1d4a12020a284af	https://github.com/servo/servo/pull/32984	Fix incorrect target_os value. (#32984)
 >>> 2024-08-11T06:01:54Z
@@ -328,10 +351,10 @@ a1d3649f7c282aec9220ab67b203297fe33e5a07	https://github.com/servo/servo/pull/325
 +   8582678e4b97818629d5039a28b7fc6de0b23a9d	https://github.com/servo/servo/pull/32913	Properly handle subpixel units when dividing space between flex lines (#32913)
     5d6840873a53c57432ee6f48338d5c5261f12905	https://github.com/servo/servo/pull/33026	clippy: Fix missing indentation in comments and remove on unecessary cast (#33026)
     ea5cf751696ec8c24e7303b042d534a32c2a9a24	https://github.com/servo/servo/pull/33003	clippy: Fix various clippy warnings throughout the code  (#33003)
-0d137d276a3a2ad3749750c0e34ebbfd91511106	https://github.com/servo/servo/pull/33007	webxr: Add missing IDL members from AR Module (#33007)
++   0d137d276a3a2ad3749750c0e34ebbfd91511106	https://github.com/servo/servo/pull/33007	webxr: Add missing IDL members from AR Module (#33007)
 >>> 2024-08-15T06:08:05Z
 +   a6638c195242105ec4cf840dd435d68a08c93843	https://github.com/servo/servo/pull/33048	Update mozjs and use release libz-sys (#33048)
-825d6f10e9cc837219aaa4db480405a31c5388a7	https://github.com/servo/servo/pull/32958	webxr: Update hand input to match latest spec (#32958)
++   825d6f10e9cc837219aaa4db480405a31c5388a7	https://github.com/servo/servo/pull/32958	webxr: Update hand input to match latest spec (#32958)
     057873c94a016b00d205f342d8929eb50365ac91	https://github.com/servo/servo/pull/33054	Remove unused constant from `components/net/fetch/methods.rs` (#33054)
     c438bfddd0528c3b3b0e5775be151d5d8c3e873e	https://github.com/servo/servo/pull/33053	build(deps): bump indexmap from 2.3.0 to 2.4.0 (#33053)
     6b0680c779bdb744f22cf572458cbd7810a147ee	https://github.com/servo/servo/pull/33052	build(deps): bump web-sys from 0.3.69 to 0.3.70 (#33052)
@@ -346,7 +369,7 @@ a1d3649f7c282aec9220ab67b203297fe33e5a07	https://github.com/servo/servo/pull/325
     380348e4df8211838680dedb76c117f101ee9bba	https://github.com/servo/servo/pull/33041	build(deps): bump tower-service from 0.3.2 to 0.3.3 (#33041)
 >>> 2024-08-16T06:12:08Z
 +   4cc1b6854616ae5f4b2455aedcd3e1fe9251a6a1	https://github.com/servo/servo/pull/33078	Remove lazy static (#33078)
-4b3ed4b68489342f41693243b25711079070dcd1	https://github.com/servo/servo/pull/33076	 ohos: Fix log filtering (#33076)
+    4b3ed4b68489342f41693243b25711079070dcd1	https://github.com/servo/servo/pull/33076	 ohos: Fix log filtering (#33076)
 +   69185c4af156e66c2b69de1dbb7ff9faf10fd5aa	https://github.com/servo/servo/pull/33056	Ensure parsers initiated from DOMParser always complete. (#33056)
 +   3cc91e655f4119d15fa226cabe8e2f66be3d3c58	https://github.com/servo/servo/pull/33067	Remove many explicit reflow calls (#33067)
     a34920b6058016f026c2b710224b9227826fcf85	https://github.com/servo/servo/pull/33072	fix(clippy): Clippy suggestions in components/script/dom/* (#33072)
@@ -355,14 +378,14 @@ a1d3649f7c282aec9220ab67b203297fe33e5a07	https://github.com/servo/servo/pull/325
     bcfc642f2f7a0b0e329230637a914fc7b3fc1999	https://github.com/servo/servo/pull/33069	build(deps): bump cc from 1.1.11 to 1.1.12 (#33069)
     e4d0af8d9120d8172c270becd81e1c25c51ba478	https://github.com/servo/servo/pull/33066	build(deps): bump serde from 1.0.207 to 1.0.208 (#33066)
 +   016ff5dfa67d05b5c5d1d3fc42bf9f4fbeb537c1	https://github.com/servo/servo/pull/33065	Replace lazy_static crate with `std::sync::LazyLock` in layout and config (#33065)
-c01b733523085bb9365601c252b7b49154383631	https://github.com/servo/servo/pull/33062	Update codegen for GetOpener:inRealms in Bindings.conf (#33062)
+    c01b733523085bb9365601c252b7b49154383631	https://github.com/servo/servo/pull/33062	Update codegen for GetOpener:inRealms in Bindings.conf (#33062)
 +   86c4e014b40805ba7048f6357e4276680d3a7451	https://github.com/servo/servo/pull/33060	Replace the lazy_static crate with `std::sync::LazyLock` in components/shared (#33060)
 +   8f82b2a7cbc086a6e939c9e0c3a7a3e11e512df5	https://github.com/servo/servo/pull/33045	Use FontInstanceFlags::SUBPIXEL_POSITION for font instances on Windows (#33045)
-97c84b6127bbe56821f8db661e88400cd646526c	https://github.com/servo/servo/pull/32858	ohos/android: Redirect stdout/stderr to `log` sink (#32858)
-353ceb0ffb7aa48bede60e031872218ebaaba839	https://github.com/servo/servo/pull/33058	Update WebXR WPT expectations (#33058)
+    97c84b6127bbe56821f8db661e88400cd646526c	https://github.com/servo/servo/pull/32858	ohos/android: Redirect stdout/stderr to `log` sink (#32858)
+    353ceb0ffb7aa48bede60e031872218ebaaba839	https://github.com/servo/servo/pull/33058	Update WebXR WPT expectations (#33058)
 +   8159f032880e72accba54ce3175062423fcdeef0	https://github.com/servo/servo/pull/33032	layout: Support `start` and `end` values for flexbox `align-self` (#33032)
 >>> 2024-08-17T06:09:14Z
-20273b062af969152635306c3df2a3a1364ac4d1	https://github.com/servo/servo/pull/33059	webxr: Update XRSession to latest spec (#33059)
++   20273b062af969152635306c3df2a3a1364ac4d1	https://github.com/servo/servo/pull/33059	webxr: Update XRSession to latest spec (#33059)
     f0045a76866f2d56d6a01aaf93ec20177dad778a	https://github.com/servo/servo/pull/33095	remove usage of legacy numeric operations in script (#33095)
     09cac6430bfc98dace01ccf2a0af40c2420a4d19	https://github.com/servo/servo/pull/33091	build(deps): bump libc from 0.2.155 to 0.2.156 (#33091)
     842bd607d42b116b4f717f42c4c3ee81f9fd86e8	https://github.com/servo/servo/pull/33086	build(deps): bump bytemuck_derive from 1.7.0 to 1.7.1 (#33086)
@@ -379,13 +402,13 @@ c01b733523085bb9365601c252b7b49154383631	https://github.com/servo/servo/pull/330
 +   ce5ebbcf7772afdb82d1cdaf318c3ebd6cee3a10	https://github.com/servo/servo/pull/33073	legacy-layout: Fix display list building after WebRender upgrade (#33073)
 +   6816d11f887ea0f72943d900654c999d763772b5	https://github.com/servo/servo/pull/33080	replace once_cell (#33080)
 >>> 2024-08-18T06:03:02Z
-db312319ae89989a94d2047b04d3d58809e8887b	https://github.com/servo/servo/pull/33101	fix: Replace callargs_is_constructing with is_constructing method (#33101)
+    db312319ae89989a94d2047b04d3d58809e8887b	https://github.com/servo/servo/pull/33101	fix: Replace callargs_is_constructing with is_constructing method (#33101)
 >>> 2024-08-19T06:08:41Z
     e078353bf01aebe5703b29c68ac59304cf6414f7	https://github.com/servo/servo/pull/33112	Fix race in WebXR WPT test setup (#33112)
     a50e6a503e48da26fb270eb54d869bd515557da7	https://github.com/servo/servo/pull/33109	Remove unnecessary `unsafe` block (#33109)
-a24e92778afd60c775b5145a4ad7dc260fa94b62	https://github.com/servo/servo/pull/33023	fix: add error handling to BaseAudioContext::new_inherited (#33023)
-1ef3e107bd194fdf0ca1da66d9167046538366d7	https://github.com/servo/servo/pull/33097	Add makeXRCompatible for WebGL2, update WebXR WPT expectations (#33097)
-280063eee2662a1bea925310652f4e9922051afe	https://github.com/servo/servo/pull/33096	Make string formatting more consistent in `CodegenRust.py` (#33096)
++   a24e92778afd60c775b5145a4ad7dc260fa94b62	https://github.com/servo/servo/pull/33023	fix: add error handling to BaseAudioContext::new_inherited (#33023)
++   1ef3e107bd194fdf0ca1da66d9167046538366d7	https://github.com/servo/servo/pull/33097	Add makeXRCompatible for WebGL2, update WebXR WPT expectations (#33097)
+    280063eee2662a1bea925310652f4e9922051afe	https://github.com/servo/servo/pull/33096	Make string formatting more consistent in `CodegenRust.py` (#33096)
     6aee84f0d10e3484b6113907f1b51e7dfe77f0bc	https://github.com/servo/servo/pull/33103	Update data-url to 0.3 (#33103)
 >>> 2024-08-20T06:07:56Z
 +   91adf39de78626df8c04c89261c4a925e8e7f689	https://github.com/servo/servo/pull/33122	Fix panic in embedded-opener-remove-frame (#33122)
@@ -397,31 +420,31 @@ a24e92778afd60c775b5145a4ad7dc260fa94b62	https://github.com/servo/servo/pull/330
     54cb8d9a366ae0b425d3961a644a830b43dda896	https://github.com/servo/servo/pull/33126	build(deps): bump tokio from 1.39.2 to 1.39.3 (#33126)
     c5d3c29b7959f3f836a5a69bbd367664c86c1a86	https://github.com/servo/servo/pull/33125	build(deps): bump arrayvec from 0.7.4 to 0.7.6 (#33125)
 +   b3280fe07113b89c38b58b1a7c6a8031a9b998ff	https://github.com/servo/servo/pull/33124	Update surfman to fix macOS webgl crashes. (#33124)
-94ff89a5e4c1c99118b6240845bb283d58ebb149	https://github.com/servo/servo/pull/33009	webgpu: Sync various parts of spec (#33009)
+    94ff89a5e4c1c99118b6240845bb283d58ebb149	https://github.com/servo/servo/pull/33009	webgpu: Sync various parts of spec (#33009)
     f45c98496e0e473b404fe898ba7ef184c8a46b33	https://github.com/servo/servo/pull/33120	Upgrade font-kit, raqote, and stop using `dirs-next` (#33120)
 +   2f6745c0c68388460bde8f5167c45b6f78316cd8	https://github.com/servo/servo/pull/33068	layout: Layout for column flex-basis and minimum automatic size determination (#33068)
 +   2a31fddc0b6f3ae89bd36cff3be1062e54c4a64c	https://github.com/servo/servo/pull/33074	Refactor `GlyphStore::iter_glyphs_for_byte_range` without recursion (#33074)
     d59a7f62f8f49c810a6d42b154d39bb8440eb11e	https://github.com/servo/servo/pull/33116	Update web-platform-tests to revision b'ebe057a1153d34042bac1ff3dc944220876f69ec' (#33116)
 b5fe99ba5dd548b4e9d5b5afc3e798fe4811a5fe	https://github.com/servo/servo/pull/33115	wpt-tests-to-run -> wpt-args and make them last so they can override already provide (#33115)
 84b5b6442491560d46807967026bb5ef3a86fcbf	https://github.com/servo/servo/pull/33111	Fix incorrect documentation and add `track_caller` to DomRefCell methods (#33111)
-3576c02ae29180cc06fc2f6f4396a2f68c3ca1b5	https://github.com/servo/servo/pull/33113	ohos: Remove custom touch history code (#33113)
+    3576c02ae29180cc06fc2f6f4396a2f68c3ca1b5	https://github.com/servo/servo/pull/33113	ohos: Remove custom touch history code (#33113)
 >>> 2024-08-21T06:05:01Z
-8e224cb4d3730899eba2f01c26cb1bd43caa8812	https://github.com/servo/servo/pull/33145	webxr: Update XRView to latest spec (#33145)
++   8e224cb4d3730899eba2f01c26cb1bd43caa8812	https://github.com/servo/servo/pull/33145	webxr: Update XRView to latest spec (#33145)
     75b817cca38b40b00041e1b2767222d471cff669	https://github.com/servo/servo/pull/33143	build(deps): bump unicode-xid from 0.2.4 to 0.2.5 (#33143)
     1492624bb5a9f593b85b3b7debfca446f0a7cfdc	https://github.com/servo/servo/pull/33142	build(deps): bump unicode-properties from 0.1.1 to 0.1.2 (#33142)
 +   bc5235827f655fc3aeedb18afe0d82451d41308f	https://github.com/servo/servo/pull/33133	Various borrow hazard fixes (#33133)
 c00cd1326a5a0ec0caf40cc619389b6ba49da381	https://github.com/servo/servo/pull/33135	Take into account the intrinsic block size when computing the main size of a column flex container (#33135)
-cf98d8d7ece88f74b7617bb9481f25cad1491134	https://github.com/servo/servo/pull/33134	Update url setters test result (#33134)
-7e4979c8520576286adb4f52ef5d1d247d27f229	https://github.com/servo/servo/pull/33102	webxr: Update XRFrame to latest spec (#33102)
+    cf98d8d7ece88f74b7617bb9481f25cad1491134	https://github.com/servo/servo/pull/33134	Update url setters test result (#33134)
++   7e4979c8520576286adb4f52ef5d1d247d27f229	https://github.com/servo/servo/pull/33102	webxr: Update XRFrame to latest spec (#33102)
 >>> 2024-08-22T06:03:22Z
-562d32c0519d58052cea681a696546fd4818bd3a	https://github.com/servo/servo/pull/33157	webxr: Update XRWebGLLayer interface to latest spec (#33157)
++   562d32c0519d58052cea681a696546fd4818bd3a	https://github.com/servo/servo/pull/33157	webxr: Update XRWebGLLayer interface to latest spec (#33157)
     cde10241c32208fbce0cb87f2d6a6deeca2c74a4	https://github.com/servo/servo/pull/33141	build(deps): bump flate2 from 1.0.31 to 1.0.32 (#33141)
 +   0e56241c1be52efd52e7ba4c999fec0bf29ce2de	https://github.com/servo/servo/pull/33153	background_hang_monitor: Add musl compatibility (#33153)
-7501e3e12fca16d906b88608363db768b29f822d	https://github.com/servo/servo/pull/33155	webxr: Update XRInputSource interface to latest spec (#33155)
++   7501e3e12fca16d906b88608363db768b29f822d	https://github.com/servo/servo/pull/33155	webxr: Update XRInputSource interface to latest spec (#33155)
 +   56280c62425bcf9478e613d26bca8704a898b5b1	https://github.com/servo/servo/pull/33148	layout: Add initial support for bidirectional text (BiDi) (#33148)
-65bd5a3b9982c9af453fe97134e4f91e55b1df19	https://github.com/servo/servo/pull/33147	webgpu: Align `writeBuffer` with spec (#33147)
+    65bd5a3b9982c9af453fe97134e4f91e55b1df19	https://github.com/servo/servo/pull/33147	webgpu: Align `writeBuffer` with spec (#33147)
 +   3b8c638a845ac21cb42a87434130dbd8e7b5107e	https://github.com/servo/servo/pull/33098	Fix floating point errors in table layout (#33098)
-fb22dfb3738089e1fea55bde65f0a4effa865958	https://github.com/servo/servo/pull/33146	webxr: Update XRPose interface to latest spec (#33146)
++   fb22dfb3738089e1fea55bde65f0a4effa865958	https://github.com/servo/servo/pull/33146	webxr: Update XRPose interface to latest spec (#33146)
 >>> 2024-08-23T06:09:10Z
     e956b53827e6c4ad6d3c2b0d9281dfc0e37b89d9	https://github.com/servo/servo/pull/33149	layout: Clean up inline layout data structures (#33149)
 +   60ef6bc46125d34e492a4294622e2791f3c619b5	https://github.com/servo/servo/pull/33144	Start marking functions that can transitively trigger a GC (#33144)
