@@ -11,7 +11,7 @@ categories:
     alt="Servo nightly with a flexbox-based table of new features including textarea text, ‘border-image’, structuredClone(), crypto.randomUUID(), ‘clip-path’, and flexbox properties themselves"></a>
 <figcaption>A flexbox-based table showcasing some of Servo’s new features this month.</figcaption></figure>
 
-Servo has had several new features land in our nightly builds over the last month:
+<span class=_floatmin></span>Servo has had several new features land in our nightly builds over the last month:
 
 - as of 2024-07-27, basic support for **show() on HTMLDialogElement** ([@lukewarlow](https://github.com/lukewarlow), [#32681](https://github.com/servo/servo/pull/32681))
 - as of 2024-07-29, the **type property on HTMLFieldSetElement** ([@shanehandley](https://github.com/shanehandley), [#32869](https://github.com/servo/servo/pull/32869))
