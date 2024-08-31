@@ -13,31 +13,31 @@ categories:
 
 Servo has had several new features land in our nightly builds over the last month:
 
-- as of 2024-07-27, basic support for **show() on HTMLDialogElement** (@lukewarlow, #32681)
-- as of 2024-07-29, the **type property on HTMLFieldSetElement** (@shanehandley, #32869)
-- as of 2024-07-31, we now support **rendering text typed in &lt;textarea>** (@mrobinson, #32886)
-- as of 2024-07-31, we now support the **‘border-image’** property (@mrobinson, #32874)
-- as of 2024-08-02, **unsafe-eval** and **wasm-unsafe-eval** CSP [sources](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources) (@chocolate-pie, #32893)
-- as of 2024-08-04, we now support playback of **WAV audio files** (@Melchizedek6809, #32924)
-- as of 2024-08-09, we now support the **structuredClone()** API (@Taym95, #32960)
-- as of 2024-08-12, we now support **IIRFilterNode** in Web Audio (@msub2, #33001)
-- as of 2024-08-13, we now support navigating through **cross-origin redirects** (@jdm, #32996)
-- as of 2024-08-23, we now support the **crypto.randomUUID()** API (@webbeef, #33158)
-- as of 2024-08-29, the **‘clip-path’** property, except path(), polygon(), shape(), or url() values (@chocolate-pie, #33107)
+- as of 2024-07-27, basic support for **show() on HTMLDialogElement** ([@lukewarlow](https://github.com/lukewarlow), [#32681](https://github.com/servo/servo/pull/32681))
+- as of 2024-07-29, the **type property on HTMLFieldSetElement** ([@shanehandley](https://github.com/shanehandley), [#32869](https://github.com/servo/servo/pull/32869))
+- as of 2024-07-31, we now support **rendering text typed in &lt;textarea>** ([@mrobinson](https://github.com/mrobinson), [#32886](https://github.com/servo/servo/pull/32886))
+- as of 2024-07-31, we now support the **‘border-image’** property ([@mrobinson](https://github.com/mrobinson), [#32874](https://github.com/servo/servo/pull/32874))
+- as of 2024-08-02, **unsafe-eval** and **wasm-unsafe-eval** CSP [sources](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources) ([@chocolate-pie](https://github.com/chocolate-pie), [#32893](https://github.com/servo/servo/pull/32893))
+- as of 2024-08-04, we now support playback of **WAV audio files** ([@Melchizedek6809](https://github.com/Melchizedek6809), [#32924](https://github.com/servo/servo/pull/32924))
+- as of 2024-08-09, we now support the **structuredClone()** API ([@Taym95](https://github.com/Taym95), [#32960](https://github.com/servo/servo/pull/32960))
+- as of 2024-08-12, we now support **IIRFilterNode** in Web Audio ([@msub2](https://github.com/msub2), [#33001](https://github.com/servo/servo/pull/33001))
+- as of 2024-08-13, we now support navigating through **cross-origin redirects** ([@jdm](https://github.com/jdm), [#32996](https://github.com/servo/servo/pull/32996))
+- as of 2024-08-23, we now support the **crypto.randomUUID()** API ([@webbeef](https://github.com/webbeef), [#33158](https://github.com/servo/servo/pull/33158))
+- as of 2024-08-29, the **‘clip-path’** property, except path(), polygon(), shape(), or url() values ([@chocolate-pie](https://github.com/chocolate-pie), [#33107](https://github.com/servo/servo/pull/33107))
 
-We’ve upgraded Servo to **SpiderMonkey 128** (@sagudev, @jschwe, #32769, #32882, #32951, #33048), **WebRender 0.65** (@mrobinson, #32930, #33073), **wgpu 22.0** (@sagudev, #32827, #32873, #32981, #33209), and **Rust 1.80.1** (@Hmikihiro, @sagudev, #32896, #33008).
+We’ve upgraded Servo to **SpiderMonkey 128** ([@sagudev](https://github.com/sagudev), [@jschwe](https://github.com/jschwe), [#32769](https://github.com/servo/servo/pull/32769), [#32882](https://github.com/servo/servo/pull/32882), [#32951](https://github.com/servo/servo/pull/32951), [#33048](https://github.com/servo/servo/pull/33048)), **WebRender 0.65** ([@mrobinson](https://github.com/mrobinson), [#32930](https://github.com/servo/servo/pull/32930), [#33073](https://github.com/servo/servo/pull/33073)), **wgpu 22.0** ([@sagudev](https://github.com/sagudev), [#32827](https://github.com/servo/servo/pull/32827), [#32873](https://github.com/servo/servo/pull/32873), [#32981](https://github.com/servo/servo/pull/32981), [#33209](https://github.com/servo/servo/pull/33209)), and **Rust 1.80.1** ([@Hmikihiro](https://github.com/Hmikihiro), [@sagudev](https://github.com/sagudev), [#32896](https://github.com/servo/servo/pull/32896), [#33008](https://github.com/servo/servo/pull/33008)).
 
-**WebXR** (@msub2, #33245) and **flexbox** (@mrobinson, #33186) are now **enabled by default**, and web APIs that return promises now correctly **reject the promise on failure**, rather than throwing an exception (@sagudev, #32923, #32950).
+**WebXR** ([@msub2](https://github.com/msub2), [#33245](https://github.com/servo/servo/pull/33245)) and **flexbox** ([@mrobinson](https://github.com/mrobinson), [#33186](https://github.com/servo/servo/pull/33186)) are now **enabled by default**, and web APIs that return promises now correctly **reject the promise on failure**, rather than throwing an exception ([@sagudev](https://github.com/sagudev), [#32923](https://github.com/servo/servo/pull/32923), [#32950](https://github.com/servo/servo/pull/32950)).
 
-To get there, we revamped our **WebXR API**, landing support for **Gamepad** (@msub2, #32860), and updates to **hand input** (@msub2, #32958), XRBoundedReferenceSpace (@msub2, #33176), XRFrame (@msub2, #33102), XRInputSource (@msub2, #33155), XRPose (@msub2, #33146), XRSession (@msub2, #33007, #33059), XRTargetRayMode (#33155), XRView (@msub2, #33007, #33145), and XRWebGLLayer (@msub2, #33157).
+To get there, we revamped our **WebXR API**, landing support for **Gamepad** ([@msub2](https://github.com/msub2), [#32860](https://github.com/servo/servo/pull/32860)), and updates to **hand input** ([@msub2](https://github.com/msub2), [#32958](https://github.com/servo/servo/pull/32958)), XRBoundedReferenceSpace ([@msub2](https://github.com/msub2), [#33176](https://github.com/servo/servo/pull/33176)), XRFrame ([@msub2](https://github.com/msub2), [#33102](https://github.com/servo/servo/pull/33102)), XRInputSource ([@msub2](https://github.com/msub2), [#33155](https://github.com/servo/servo/pull/33155)), XRPose ([@msub2](https://github.com/msub2), [#33146](https://github.com/servo/servo/pull/33146)), XRSession ([@msub2](https://github.com/msub2), [#33007](https://github.com/servo/servo/pull/33007), [#33059](https://github.com/servo/servo/pull/33059)), XRTargetRayMode (#33155), XRView ([@msub2](https://github.com/msub2), [#33007](https://github.com/servo/servo/pull/33007), [#33145](https://github.com/servo/servo/pull/33145)), and XRWebGLLayer ([@msub2](https://github.com/msub2), [#33157](https://github.com/servo/servo/pull/33157)).
 
-And to top it all off, you can now call **makeXRCompatible() on WebGL2RenderingContext** (@msub2, #33097), not just on WebGLRenderingContext.
+And to top it all off, you can now call **makeXRCompatible() on WebGL2RenderingContext** ([@msub2](https://github.com/msub2), [#33097](https://github.com/servo/servo/pull/33097)), not just on WebGLRenderingContext.
 
-The biggest flexbox features that landed this month are the **‘gap’ property** (@Loirooriol, #32891), **‘align-content: stretch’** (@mrobinson, @Loirooriol, #32906, #32913), and the **‘start’** and **‘end’** values on **‘align-items’** and **‘align-self’** (@mrobinson, @Loirooriol, #33032), as well as basic support for **‘flex-direction: column’** and **‘column-reverse’** (@mrobinson, @Loirooriol, #33031, #33068).
+The biggest flexbox features that landed this month are the **‘gap’ property** ([@Loirooriol](https://github.com/Loirooriol), [#32891](https://github.com/servo/servo/pull/32891)), **‘align-content: stretch’** ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#32906](https://github.com/servo/servo/pull/32906), [#32913](https://github.com/servo/servo/pull/32913)), and the **‘start’** and **‘end’** values on **‘align-items’** and **‘align-self’** ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#33032](https://github.com/servo/servo/pull/33032)), as well as basic support for **‘flex-direction: column’** and **‘column-reverse’** ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#33031](https://github.com/servo/servo/pull/33031), [#33068](https://github.com/servo/servo/pull/33068)).
 
-**‘position: relative’** is now supported on flex items (@mrobinson, #33151), **‘z-index’ always creates stacking contexts** for flex items (@mrobinson, #32961), and we now give flex items and flex containers their correct **intrinsic sizes** (@delan, @mrobinson, @mukilan, #32854).
+**‘position: relative’** is now supported on flex items ([@mrobinson](https://github.com/mrobinson), [#33151](https://github.com/servo/servo/pull/33151)), **‘z-index’ always creates stacking contexts** for flex items ([@mrobinson](https://github.com/mrobinson), [#32961](https://github.com/servo/servo/pull/32961)), and we now give flex items and flex containers their correct **intrinsic sizes** ([@delan](https://github.com/delan), [@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#32854](https://github.com/servo/servo/pull/32854)).
 
-We’re now working on support for **bidirectional text**, with architectural changes to the fragment tree (@mrobinson, #33030) and ‘writing-mode’ interfaces (@mrobinson, @atbrakhi, #33082), and now partial support for the **‘unicode-bidi’ property** and the **dir attribute** (@mrobinson, @atbrakhi, #33148).
+We’re now working on support for **bidirectional text**, with architectural changes to the fragment tree ([@mrobinson](https://github.com/mrobinson), [#33030](https://github.com/servo/servo/pull/33030)) and ‘writing-mode’ interfaces ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#33082](https://github.com/servo/servo/pull/33082)), and now partial support for the **‘unicode-bidi’ property** and the **dir attribute** ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#33148](https://github.com/servo/servo/pull/33148)).
 Note that the `dir=auto` value is not yet supported.
 
 <figure class="_figl"><a href="{{ '/img/blog/servoshell-august-2024.png' | url }}"><img src="{{ '/img/blog/servoshell-august-2024.png' | url }}"
@@ -46,49 +46,49 @@ Note that the `dir=auto` value is not yet supported.
 
 ## <span class=_floatmin></span>Beyond the engine
 
-[Servo-the-browser](https://book.servo.org/running-servoshell.html) now has a **redesigned toolbar** (@Melchizedek6809, 33179) and **tabbed browsing** (@webbeef, @Wuelle, #33100, #33229)!
-This includes a slick **new tab page**, taking advantage of a new API that lets Servo embedders register **custom protocol handlers** (@webbeef, #33104).
+[Servo-the-browser](https://book.servo.org/running-servoshell.html) now has a **redesigned toolbar** ([@Melchizedek6809](https://github.com/Melchizedek6809), 33179) and **tabbed browsing** ([@webbeef](https://github.com/webbeef), [@Wuelle](https://github.com/Wuelle), [#33100](https://github.com/servo/servo/pull/33100), [#33229](https://github.com/servo/servo/pull/33229))!
+This includes a slick **new tab page**, taking advantage of a new API that lets Servo embedders register **custom protocol handlers** ([@webbeef](https://github.com/webbeef), [#33104](https://github.com/servo/servo/pull/33104)).
 
-Servo now runs better on Windows, with keyboard navigation now fixed (@crbrz, #33252), `--output` to PNG also fixed (@crbrz, #32914), and fixes for some font- and GPU-related bugs (@crbrz, #33045, #33177), which were causing misaligned glyphs with incorrect colors on servo<!-- no link -->.org ([issue] #32459) and duckduckgo<!-- no link -->.com ([issue] #33094), and corrupted images on wikipedia<!-- no link -->.org ([issue] #33170).
+Servo now runs better on Windows, with keyboard navigation now fixed ([@crbrz](https://github.com/crbrz), [#33252](https://github.com/servo/servo/pull/33252)), `--output` to PNG also fixed ([@crbrz](https://github.com/crbrz), [#32914](https://github.com/servo/servo/pull/32914)), and fixes for some font- and GPU-related bugs ([@crbrz](https://github.com/crbrz), [#33045](https://github.com/servo/servo/pull/33045), [#33177](https://github.com/servo/servo/pull/33177)), which were causing misaligned glyphs with incorrect colors on servo<!-- no link -->.org ([#32459](https://github.com/servo/servo/issues/32459)) and duckduckgo<!-- no link -->.com ([#33094](https://github.com/servo/servo/issues/33094)), and corrupted images on wikipedia<!-- no link -->.org ([#33170](https://github.com/servo/servo/issues/33170)).
 
-Our **devtools support** is becoming very capable after @eerii’s final month of work on their internship project, with Servo now supporting the **HTML tree** (@eerii, #32655, #32884, #32888) and the **Styles and Computed panels** (@eerii, #33025).
+Our **devtools support** is becoming very capable after [@eerii](https://github.com/eerii)’s final month of work on their internship project, with Servo now supporting the **HTML tree** ([@eerii](https://github.com/eerii), [#32655](https://github.com/servo/servo/pull/32655), [#32884](https://github.com/servo/servo/pull/32884), [#32888](https://github.com/servo/servo/pull/32888)) and the **Styles and Computed panels** ([@eerii](https://github.com/eerii), [#33025](https://github.com/servo/servo/pull/33025)).
 Stay tuned for a more in-depth post about the Servo devtools!
 
 ## Changes for Servo developers
 
-Running servoshell immediately after building it is now **several seconds faster on macOS** (@mrobinson, #32928).
+Running servoshell immediately after building it is now **several seconds faster on macOS** ([@mrobinson](https://github.com/mrobinson), [#32928](https://github.com/servo/servo/pull/32928)).
 
-We now **run clippy in CI** (@sagudev, #33150), together with the existing tidy checks in a dedicated linting job.
+We now **run clippy in CI** ([@sagudev](https://github.com/sagudev), [#33150](https://github.com/servo/servo/pull/33150)), together with the existing tidy checks in a dedicated linting job.
 
-Servo now has **new CI runners** for Windows builds (@delan, #33081), thanks to your donations, **cutting Windows-only build times by 70%**!
+Servo now has **new CI runners** for Windows builds ([@delan](https://github.com/delan), [#33081](https://github.com/servo/servo/pull/33081)), thanks to your donations, **cutting Windows-only build times by 70%**!
 We’re not stopping at Windows though, and with new runners for Linux builds just around the corner, your WPT try builds will soon be a lot faster.
 
 We’ve been running some **triage meetings** to investigate GitHub issues and coordinate our work on them.
 The next Servo issue triage meeting is on **2 September at 10:00 UTC**.
-For more details, see [issue] project#99.
+For more details, see [project#99](https://github.com/servo/project/issues/99).
 
 ## Engine reliability
 
 August has been a huge month for squashing **crash bugs** in Servo, including on real-world websites.
 
-We’ve fixed crashes when rendering **floats near tables** in [the HTML spec](https://html.spec.whatwg.org) (@Wuelle, #33098), **removed unnecessary explicit reflows** that were causing crashes on w3schools<!-- no link -->.com (@jdm, #33067), and **made the HTML parser re-entrant** (@jdm, #32820, #33056, html5ever#548), fixing crashes on kilonova<!-- no link -->.ro ([issue] #32454), tweakers<!-- no link -->.net ([issue] #32744), and many other sites.
+We’ve fixed crashes when rendering **floats near tables** in [the HTML spec](https://html.spec.whatwg.org) ([@Wuelle](https://github.com/Wuelle), [#33098](https://github.com/servo/servo/pull/33098)), **removed unnecessary explicit reflows** that were causing crashes on w3schools<!-- no link -->.com ([@jdm](https://github.com/jdm), [#33067](https://github.com/servo/servo/pull/33067)), and **made the HTML parser re-entrant** ([@jdm](https://github.com/jdm), [#32820](https://github.com/servo/servo/pull/32820), [#33056](https://github.com/servo/servo/pull/33056), [html5ever#548](https://github.com/servo/html5ever/pull/548)), fixing crashes on kilonova<!-- no link -->.ro ([#32454](https://github.com/servo/servo/issues/32454)), tweakers<!-- no link -->.net ([#32744](https://github.com/servo/servo/issues/32744)), and many other sites.
 Several other crashes have also been fixed:
 
-- crashes when **resizing windows with WebGL** on macOS (@jdm, #33124)
-- crashes when rendering text with **extremely long grapheme clusters** (@crbrz, #33074)
-- crashes when rendering text with **tabs in certain fonts** (@mrobinson, #32979)
-- crashes in the parser **after calling window.stop()** (@Taym95, #33173)
-- crashes when **passing some values to console.log()** (@jdm, #33085)
-- crashes when **parsing some &lt;img srcset> values** (@NotnaKO, #32980)
-- crashes when **parsing some HTTP header values** (@ToBinio, #32973)
-- crashes when **setting window.opener** in certain situations (@Taym95, #33002, #33122)
-- crashes when **removing iframes** from documents (@newmoneybigbucks, #32782)
-- crashes when **calling new AudioContext()** with unsupported options (@Taym95, #33023)
-- intermittent crashes in WRSceneBuilder **when exiting Servo** (@Taym95, #32897)
+- crashes when **resizing windows with WebGL** on macOS ([@jdm](https://github.com/jdm), [#33124](https://github.com/servo/servo/pull/33124))
+- crashes when rendering text with **extremely long grapheme clusters** ([@crbrz](https://github.com/crbrz), [#33074](https://github.com/servo/servo/pull/33074))
+- crashes when rendering text with **tabs in certain fonts** ([@mrobinson](https://github.com/mrobinson), [#32979](https://github.com/servo/servo/pull/32979))
+- crashes in the parser **after calling window.stop()** ([@Taym95](https://github.com/Taym95), [#33173](https://github.com/servo/servo/pull/33173))
+- crashes when **passing some values to console.log()** ([@jdm](https://github.com/jdm), [#33085](https://github.com/servo/servo/pull/33085))
+- crashes when **parsing some &lt;img srcset> values** ([@NotnaKO](https://github.com/NotnaKO), [#32980](https://github.com/servo/servo/pull/32980))
+- crashes when **parsing some HTTP header values** ([@ToBinio](https://github.com/ToBinio), [#32973](https://github.com/servo/servo/pull/32973))
+- crashes when **setting window.opener** in certain situations ([@Taym95](https://github.com/Taym95), [#33002](https://github.com/servo/servo/pull/33002), [#33122](https://github.com/servo/servo/pull/33122))
+- crashes when **removing iframes** from documents ([@newmoneybigbucks](https://github.com/newmoneybigbucks), [#32782](https://github.com/servo/servo/pull/32782))
+- crashes when **calling new AudioContext()** with unsupported options ([@Taym95](https://github.com/Taym95), [#33023](https://github.com/servo/servo/pull/33023))
+- intermittent crashes in WRSceneBuilder **when exiting Servo** ([@Taym95](https://github.com/Taym95), [#32897](https://github.com/servo/servo/pull/32897))
 
-We’ve fixed a bunch of **BorrowError** crashes under SpiderMonkey GC (@jdm, #33133, [issue] #24115, [issue] #32646), and we’re now working towards preventing this class of bugs with static analysis (@jdm, #33144).
+We’ve fixed a bunch of **BorrowError** crashes under SpiderMonkey GC ([@jdm](https://github.com/jdm), [#33133](https://github.com/servo/servo/pull/33133), [#24115](https://github.com/servo/servo/issues/24115), [#32646](https://github.com/servo/servo/issues/32646)), and we’re now working towards preventing this class of bugs with static analysis ([@jdm](https://github.com/jdm), [#33144](https://github.com/servo/servo/pull/33144)).
 
-Servo no longer **leaks the DOM Window object** when navigating (@ede1998, @rhetenor, #32773), and servoshell now **[terminates abnormally](https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_04_03_01) when panicking** on Unix (@mrobinson, #32947), ensuring [web tests](https://book.servo.org/hacking/testing.html) correctly record their test results as “CRASH”.
+Servo no longer **leaks the DOM Window object** when navigating ([@ede1998](https://github.com/ede1998), [@rhetenor](https://github.com/rhetenor), [#32773](https://github.com/servo/servo/pull/32773)), and servoshell now **[terminates abnormally](https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_04_03_01) when panicking** on Unix ([@mrobinson](https://github.com/mrobinson), [#32947](https://github.com/servo/servo/pull/32947)), ensuring [web tests](https://book.servo.org/hacking/testing.html) correctly record their test results as “CRASH”.
 
 ## Donations
 
