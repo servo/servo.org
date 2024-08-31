@@ -20,8 +20,10 @@ Servo has had several new features land in our nightly builds over the last mont
 - as of 2024-08-02, **unsafe-eval** and **wasm-unsafe-eval** CSP [sources](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources) (@chocolate-pie, #32893)
 - as of 2024-08-04, we now support playback of **WAV audio files** (@Melchizedek6809, #32924)
 - as of 2024-08-09, we now support the **structuredClone()** API (@Taym95, #32960)
+- as of 2024-08-12, we now support **IIRFilterNode** in Web Audio (@msub2, #33001)
 - as of 2024-08-13, we now support navigating through **cross-origin redirects** (@jdm, #32996)
 - as of 2024-08-23, we now support the **crypto.randomUUID()** API (@webbeef, #33158)
+- as of 2024-08-29, the **‘clip-path’** property, except path(), polygon(), shape(), or url() values (@chocolate-pie, #33107)
 
 We’ve upgraded Servo to **SpiderMonkey 128** (@sagudev, @jschwe, #32769, #32882, #32951, #33048), **WebRender 0.65** (@mrobinson, #32930, #33073), **wgpu 22.0** (@sagudev, #32827, #32873, #32981, #33209), and **Rust 1.80.1** (@Hmikihiro, @sagudev, #32896, #33008).
 
@@ -117,7 +119,7 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE typing in textarea 32886
     - DONE wav playback 32924
     - DONE cross-origin redirects 32996
-    - ‘clip-path: [<basic-shape> || <shape-box>]’ 33107
+    - DONE ‘clip-path: [<basic-shape> || <shape-box>]’ 33107
     - DONE flex
         - DONE column mode 33031 33068
         - DONE ‘gap’ 32891
@@ -136,7 +138,7 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE structuredClone() 32960
     - DONE crypto.randomUUID() 33158
     - DONE promise rejection 32923 32950
-    - webaudio IIRFilterNode 33001
+    - DONE webaudio IIRFilterNode 33001
     - DONE webxr XRInputSource.gamepad 32860
     - DONE webxr XRBoundedReferenceSpace 33176
     - DONE webxr XRSession.interactionMode XRView.isFirstPersonObserver 33007
