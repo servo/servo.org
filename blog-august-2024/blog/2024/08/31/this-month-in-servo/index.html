@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>This month in Servo: tabbed browsing, Windows buffs, devtools, and more! - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine</title>
+  <meta property="og:title" content="This month in Servo: tabbed browsing, Windows buffs, devtools, and more! - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine">
+  
+
+  
+  <meta name="description" content="Flexbox and WebXR are now enabled by default.">
+  <meta name="og:description" content="Flexbox and WebXR are now enabled by default.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/blog-august-2024/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/blog-august-2024/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/blog-august-2024/blog/2024/08/31/this-month-in-servo/">
+
+  <link rel="stylesheet" href="/blog-august-2024/css/style.css">
+  <link rel="shortcut icon" href="/blog-august-2024/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog-august-2024/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/blog-august-2024/">
+        <img src="/blog-august-2024/img/servo-color-negative-no-container.png" alt="This month in Servo: tabbed browsing, Windows buffs, devtools, and more!">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              Get Involved
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/blog-august-2024/contributing/">
+                  Contributing
+                </a>
+              
+                <a class="navbar-item" href="https://book.servo.org" target="_blank">
+                  Servo Book
+                </a>
+              
+                <a class="navbar-item" href="https://wpt.servo.org/" target="_blank">
+                  WPT pass rates
+                </a>
+              
+                <a class="navbar-item" href="/blog-august-2024/coc/">
+                  Code of Conduct
+                </a>
+              
+            </div>
+          </div>
+        
+      
+        
+        
+          <a class="navbar-item" href="/blog-august-2024/download/">
+            Download
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="/blog-august-2024/blog/">
+            Blog
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="https://demo.servo.org/" target="_blank">
+            Demos
+          </a>
+        
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              About
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/blog-august-2024/about/">
+                  About Servo
+                </a>
+              
+                <a class="navbar-item" href="/blog-august-2024/governance/">
+                  Governance
+                </a>
+              
+                <a class="navbar-item" href="/blog-august-2024/sponsorship/">
+                  Sponsorship
+                </a>
+              
+                <a class="navbar-item" href="/blog-august-2024/acknowledgements/">
+                  Acknowledgements
+                </a>
+              
+            </div>
+          </div>
+        
+      
+      <div class="navbar-end">
+  
+    <div class="navbar-item">
+      <a class="button is-github-color" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+        <span>GitHub</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-mastodon-color" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+        <span>Mastodon</span>
+      </a>
+    </div>
+  
+    <div class="navbar-item">
+      <a class="button is-twitter-color" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+        <span>Twitter</span>
+      </a>
+    </div>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <aside class="menu box">
+            <p class="menu-label">
+              This month in Servo: tabbed browsing, Windows buffs, devtools, and more!
+            </p>
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+          </aside>
+          <div class="content">
+            
+<h1 class="title">This month in Servo: tabbed browsing, Windows buffs, devtools, and more!</h1>
+<p class="subtitle"><span class="tag is-dark">2024-08-31</span> Flexbox and WebXR are now enabled by default.</p>
+
+<div class="has-top-margin">
+  <figure class="_figr"><a href="/blog-august-2024/img/blog/features-august-2024.png"><img src="/blog-august-2024/img/blog/features-august-2024.png"
+    alt="Servo nightly with a flexbox-based table of new features including textarea text, ‘border-image’, structuredClone(), crypto.randomUUID(), ‘clip-path’, and flexbox properties themselves"></a>
+<figcaption>A flexbox-based table showcasing some of Servo’s new features this month.</figcaption></figure>
+<p>Servo has had several new features land in our nightly builds over the last month:</p>
+<ul>
+<li>as of 2024-07-27, basic support for <strong>show() on HTMLDialogElement</strong> (@lukewarlow, #32681)</li>
+<li>as of 2024-07-29, the <strong>type property on HTMLFieldSetElement</strong> (@shanehandley, #32869)</li>
+<li>as of 2024-07-31, we now support <strong>rendering text typed in &lt;textarea&gt;</strong> (@mrobinson, #32886)</li>
+<li>as of 2024-07-31, we now support the <strong>‘border-image’</strong> property (@mrobinson, #32874)</li>
+<li>as of 2024-08-02, <strong>unsafe-eval</strong> and <strong>wasm-unsafe-eval</strong> CSP <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources">sources</a> (@chocolate-pie, #32893)</li>
+<li>as of 2024-08-04, we now support playback of <strong>WAV audio files</strong> (@Melchizedek6809, #32924)</li>
+<li>as of 2024-08-09, we now support the <strong>structuredClone()</strong> API (@Taym95, #32960)</li>
+<li>as of 2024-08-12, we now support <strong>IIRFilterNode</strong> in Web Audio (@msub2, #33001)</li>
+<li>as of 2024-08-13, we now support navigating through <strong>cross-origin redirects</strong> (@jdm, #32996)</li>
+<li>as of 2024-08-23, we now support the <strong>crypto.randomUUID()</strong> API (@webbeef, #33158)</li>
+<li>as of 2024-08-29, the <strong>‘clip-path’</strong> property, except path(), polygon(), shape(), or url() values (@chocolate-pie, #33107)</li>
+</ul>
+<p>We’ve upgraded Servo to <strong>SpiderMonkey 128</strong> (@sagudev, @jschwe, #32769, #32882, #32951, #33048), <strong>WebRender 0.65</strong> (@mrobinson, #32930, #33073), <strong>wgpu 22.0</strong> (@sagudev, #32827, #32873, #32981, #33209), and <strong>Rust 1.80.1</strong> (@Hmikihiro, @sagudev, #32896, #33008).</p>
+<p><strong>WebXR</strong> (@msub2, #33245) and <strong>flexbox</strong> (@mrobinson, #33186) are now <strong>enabled by default</strong>, and web APIs that return promises now correctly <strong>reject the promise on failure</strong>, rather than throwing an exception (@sagudev, #32923, #32950).</p>
+<p>To get there, we revamped our <strong>WebXR API</strong>, landing support for <strong>Gamepad</strong> (@msub2, #32860), and updates to <strong>hand input</strong> (@msub2, #32958), XRBoundedReferenceSpace (@msub2, #33176), XRFrame (@msub2, #33102), XRInputSource (@msub2, #33155), XRPose (@msub2, #33146), XRSession (@msub2, #33007, #33059), XRTargetRayMode (#33155), XRView (@msub2, #33007, #33145), and XRWebGLLayer (@msub2, #33157).</p>
+<p>And to top it all off, you can now call <strong>makeXRCompatible() on WebGL2RenderingContext</strong> (@msub2, #33097), not just on WebGLRenderingContext.</p>
+<p>The biggest flexbox features that landed this month are the <strong>‘gap’ property</strong> (@Loirooriol, #32891), <strong>‘align-content: stretch’</strong> (@mrobinson, @Loirooriol, #32906, #32913), and the <strong>‘start’</strong> and <strong>‘end’</strong> values on <strong>‘align-items’</strong> and <strong>‘align-self’</strong> (@mrobinson, @Loirooriol, #33032), as well as basic support for <strong>‘flex-direction: column’</strong> and <strong>‘column-reverse’</strong> (@mrobinson, @Loirooriol, #33031, #33068).</p>
+<p><strong>‘position: relative’</strong> is now supported on flex items (@mrobinson, #33151), <strong>‘z-index’ always creates stacking contexts</strong> for flex items (@mrobinson, #32961), and we now give flex items and flex containers their correct <strong>intrinsic sizes</strong> (@delan, @mrobinson, @mukilan, #32854).</p>
+<p>We’re now working on support for <strong>bidirectional text</strong>, with architectural changes to the fragment tree (@mrobinson, #33030) and ‘writing-mode’ interfaces (@mrobinson, @atbrakhi, #33082), and now partial support for the <strong>‘unicode-bidi’ property</strong> and the <strong>dir attribute</strong> (@mrobinson, @atbrakhi, #33148).
+Note that the <code>dir=auto</code> value is not yet supported.</p>
+<figure class="_figl"><a href="/blog-august-2024/img/blog/servoshell-august-2024.png"><img src="/blog-august-2024/img/blog/servoshell-august-2024.png"
+    alt="Servo nightly showing a toolbar with icons on the buttons, one tab open with the title “Servo - New Tab”, and a location bar that reads “servo:newtab”"></a>
+<figcaption>servoshell now has a more elegant toolbar, tabbed browsing, and a clean but useful “new tab” page.</figcaption></figure>
+<h2 id="beyond-the-engine" tabindex="-1"><span class=_floatmin></span>Beyond the engine <a class="header-anchor" href="#beyond-the-engine">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><a href="https://book.servo.org/running-servoshell.html">Servo-the-browser</a> now has a <strong>redesigned toolbar</strong> (@Melchizedek6809, 33179) and <strong>tabbed browsing</strong> (@webbeef, @Wuelle, #33100, #33229)!
+This includes a slick <strong>new tab page</strong>, taking advantage of a new API that lets Servo embedders register <strong>custom protocol handlers</strong> (@webbeef, #33104).</p>
+<p>Servo now runs better on Windows, with keyboard navigation now fixed (@crbrz, #33252), <code>--output</code> to PNG also fixed (@crbrz, #32914), and fixes for some font- and GPU-related bugs (@crbrz, #33045, #33177), which were causing misaligned glyphs with incorrect colors on servo<!-- no link -->.org ([issue] #32459) and duckduckgo<!-- no link -->.com ([issue] #33094), and corrupted images on wikipedia<!-- no link -->.org ([issue] #33170).</p>
+<p>Our <strong>devtools support</strong> is becoming very capable after @eerii’s final month of work on their internship project, with Servo now supporting the <strong>HTML tree</strong> (@eerii, #32655, #32884, #32888) and the <strong>Styles and Computed panels</strong> (@eerii, #33025).
+Stay tuned for a more in-depth post about the Servo devtools!</p>
+<h2 id="changes-for-servo-developers" tabindex="-1">Changes for Servo developers <a class="header-anchor" href="#changes-for-servo-developers">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Running servoshell immediately after building it is now <strong>several seconds faster on macOS</strong> (@mrobinson, #32928).</p>
+<p>We now <strong>run clippy in CI</strong> (@sagudev, #33150), together with the existing tidy checks in a dedicated linting job.</p>
+<p>Servo now has <strong>new CI runners</strong> for Windows builds (@delan, #33081), thanks to your donations, <strong>cutting Windows-only build times by 70%</strong>!
+We’re not stopping at Windows though, and with new runners for Linux builds just around the corner, your WPT try builds will soon be a lot faster.</p>
+<h2 id="engine-reliability" tabindex="-1">Engine reliability <a class="header-anchor" href="#engine-reliability">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>August has been a huge month for squashing <strong>crash bugs</strong> in Servo, including on real-world websites.</p>
+<p>We’ve fixed crashes when rendering <strong>floats near tables</strong> in <a href="https://html.spec.whatwg.org">the HTML spec</a> (@Wuelle, #33098), <strong>removed unnecessary explicit reflows</strong> that were causing crashes on w3schools<!-- no link -->.com (@jdm, #33067), and <strong>made the HTML parser re-entrant</strong> (@jdm, #32820, #33056, html5ever#548), fixing crashes on kilonova<!-- no link -->.ro ([issue] #32454), tweakers<!-- no link -->.net ([issue] #32744), and many other sites.
+Several other crashes have also been fixed:</p>
+<ul>
+<li>crashes when <strong>resizing windows with WebGL</strong> on macOS (@jdm, #33124)</li>
+<li>crashes when rendering text with <strong>extremely long grapheme clusters</strong> (@crbrz, #33074)</li>
+<li>crashes when rendering text with <strong>tabs in certain fonts</strong> (@mrobinson, #32979)</li>
+<li>crashes in the parser <strong>after calling window.stop()</strong> (@Taym95, #33173)</li>
+<li>crashes when <strong>passing some values to console.log()</strong> (@jdm, #33085)</li>
+<li>crashes when <strong>parsing some &lt;img srcset&gt; values</strong> (@NotnaKO, #32980)</li>
+<li>crashes when <strong>parsing some HTTP header values</strong> (@ToBinio, #32973)</li>
+<li>crashes when <strong>setting window.opener</strong> in certain situations (@Taym95, #33002, #33122)</li>
+<li>crashes when <strong>removing iframes</strong> from documents (@newmoneybigbucks, #32782)</li>
+<li>crashes when <strong>calling new AudioContext()</strong> with unsupported options (@Taym95, #33023)</li>
+<li>intermittent crashes in WRSceneBuilder <strong>when exiting Servo</strong> (@Taym95, #32897)</li>
+</ul>
+<p>We’ve fixed a bunch of <strong>BorrowError</strong> crashes under SpiderMonkey GC (@jdm, #33133, [issue] #24115, [issue] #32646), and we’re now working towards preventing this class of bugs with static analysis (@jdm, #33144).</p>
+<p>Servo no longer <strong>leaks the DOM Window object</strong> when navigating (@ede1998, @rhetenor, #32773), and servoshell now <strong><a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/V2_chap02.html#tag_16_04_03_01">terminates abnormally</a> when panicking</strong> on Unix (@mrobinson, #32947), ensuring <a href="https://book.servo.org/hacking/testing.html">web tests</a> correctly record their test results as “CRASH”.</p>
+<h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Thanks again for your generous support!
+We are now receiving <strong>3077 USD/month</strong> (+4.1% over July) in recurring donations.
+This includes donations from <strong>12 people</strong> on LFX, but we will stop accepting donations there soon — <strong>please move your recurring donations to <a href="https://github.com/sponsors/servo">GitHub</a> or <a href="https://opencollective.com/servo">Open Collective</a></strong>.</p>
+<p>Servo is also on <a href="https://thanks.dev">thanks.dev</a>, and already <strong>three GitHub orgs</strong> that depend on Servo are sponsoring us there.
+If you use Servo libraries like <a href="https://crates.io/crates/url/reverse_dependencies">url</a>, <a href="https://crates.io/crates/html5ever/reverse_dependencies">html5ever</a>, <a href="https://crates.io/crates/selectors/reverse_dependencies">selectors</a>, or <a href="https://crates.io/crates/cssparser/reverse_dependencies">cssparser</a>, signing up for <a href="https://thanks.dev">thanks.dev</a> could be a good way for you (or your employer) to give back to the community.</p>
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 3077 / 10000); padding-left: 0.5em;"><strong>3077</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 3077 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="3077" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+<p>As always, use of these funds will be decided transparently in the Technical Steering Committee.
+For more details, head to our <a href="/blog-august-2024/sponsorship/">Sponsorship page</a>.</p>
+<style>
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig > ._flex {
+        display: flex;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+        max-width: 100%;
+    }
+    ._figr {
+        float: right;
+        max-width: 100%;
+    }
+    ._figl > figcaption,
+    ._figr > figcaption,
+    ._figl > iframe,
+    ._figr > iframe,
+    ._figl > video,
+    ._figr > video,
+    ._figl > a > img,
+    ._figr > a > img {
+        width: 21em;
+        max-width: 100%;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+    ._note {
+        margin: 1em 1em;
+        border-left: 1px solid;
+        padding-left: 1em;
+        opacity: 0.75;
+    }
+</style>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog-august-2024/blog/">Back</a>
+</div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+  <div class="container" style="text-align: center;">
+    <a href="/blog-august-2024/coc/">Code of Conduct</a> |
+    Contact: <a href="mailto:info@servo.org">info@servo.org</a>,
+    <a href="https://servo.zulipchat.com/">Zulip Chat</a>,
+    <a href="https://github.com/servo/servo/discussions">GitHub Discussions</a>,
+    <a href="https://floss.social/@servo">Mastodon</a>,
+    <a href="https://twitter.com/ServoDev">Twitter</a>
+  </div>
+  <div class="container" style="text-align: center; font-size: 0.875em;">
+    <p><a href="https://linuxfoundation.eu"><img src="/blog-august-2024/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250" style="margin: 1em;"></a></p>
+    <p>&copy; 2024 The Servo Project Developers</p>
+    <p>Copyright &copy; Servo is a project of <a href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>
