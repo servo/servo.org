@@ -3,12 +3,12 @@ layout:     post
 tags:       blog
 title:      "Building a browser using Servo as a web engine!"
 date:       2024-08-27
-summary:    It's time to build a web browser based on Servo!
+summary:    Let's build another web browser based on Servo!
 categories:
 ---
 
 
-As a web engine, Servo primarily handles everything around scripting and layout. Despite having [servoshell](https://github.com/servo/servo/tree/main/ports/servoshell) as a minimum browser reference, it didn’t explore beyond basic functionalities and the test harness for the [web platform test](https://wpt.servo.org/). But fortunately, the Servo community did try to push it bit by bit. The servo shell itself got a [new browser UI](https://servo.org/blog/2023/09/15/upcoming-events-and-new-browser-ui/) from [Egui](https://www.egui.rs/) last year. The [Tauri](https://tauri.app/) community also attempted to [embed](https://servo.org/blog/2024/01/19/embedding-update/) Servo as a backend for proof of concept. This year, [@wusyong](https://github.com/wusyong) created the [Verso](https://github.com/versotile-org/verso) project as an experiment to explore full browser story for Servo. In this post, we will explain what we try to achieve, what we found, and what’s next for building a browser using Servo as a web engine.
+As a web engine, Servo primarily handles everything around scripting and layout. It has a [servoshell](https://github.com/servo/servo/tree/main/ports/servoshell) as a minimum browser reference. Right now it's mostly used for demo purpose and testing harness for the [web platform test](https://wpt.servo.org/). But fortunately, the Servo community did try to push it bit by bit. The servo shell itself got a [new browser UI](https://servo.org/blog/2023/09/15/upcoming-events-and-new-browser-ui/) from [Egui](https://www.egui.rs/) last year. The [Tauri](https://tauri.app/) community also attempted to [embed](https://servo.org/blog/2024/01/19/embedding-update/) Servo as a backend for proof of concept. This year, [@wusyong](https://github.com/wusyong) created the [Verso](https://github.com/versotile-org/verso) project as an experiment to explore more browser features for Servo. In this post, we will explain what we try to achieve, what we found, and what’s next for building a browser using Servo as a web engine.
 
 ## Multi-view
 
@@ -46,7 +46,7 @@ We are preparing a site, [arewebrowseryet.com](https://servo.zulipchat.com/#narr
 
 #### Script triage
 
-There’s a [script triage meeting](https://github.com/servo/project/issues/99) bi-weekly to triage any issues around the script crate and more. Once we get the statistics of supported WebAPIs, we can find the most popular ones that haven’t been implemented or fixed yet. We are already fixing some issues around loading the order and re-implementing [ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) in Rust. If you are interested in implementing WebAPIs in Servo, feel free to join the meeting and listen.
+There’s a [servo triage meeting](https://github.com/servo/project/issues/99) bi-weekly to triage any issues around the script crate and more. Once we get the statistics of supported WebAPIs, we can find the most popular ones that haven’t been implemented or fixed yet. We are already fixing some issues around loading the order and re-implementing [ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) in Rust. If you are interested in implementing WebAPIs in Servo, feel free to join the meeting and listen.
 
 #### Multi-process and Sandbox
 
