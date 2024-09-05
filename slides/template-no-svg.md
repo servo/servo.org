@@ -1,5 +1,5 @@
 ---
-layout: slides.html
+layout: slides-no-svg.html
 title: Servo Slides Template
 ---
 
