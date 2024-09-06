@@ -23,7 +23,7 @@ A webview is a term abstracted from the [top-level browsing context](https://doc
 This is what people refer to as a web page.
 With multi-view support, we can create multiple web pages as tabs in a single window.
 Most importantly, we can draw our UI with additional webviews.
-The main reason we want to write UI using Servo itself is that we can dogfood our own stack and verify that it can meet the practical requirements <!-- of what? or remove “the” -->, such as prompt windows, context menus, file selectors, and more.
+The main reason we want to write UI using Servo itself is that we can dogfood our own stack and verify that it can meet practical requirements, such as prompt windows, context menus, file selectors, and more.
 
 Basic multi-view support was reviewed and merged into Servo earlier this year thanks to [@delan](https://github.com/delan) ([#30840](https://github.com/servo/servo/pull/30840), [#30841](https://github.com/servo/servo/pull/30841), [#30842](https://github.com/servo/servo/pull/30842)).
 Verso refined that into a specific type called [WebView](https://docs.versotile.org/verso/webview/struct.WebView.html).
@@ -36,7 +36,9 @@ The result of the [showcase](https://github.com/versotile-org/verso?tab=readme-o
 <figcaption>Figure 1: Verso window displaying two different webviews. One for UI, the other for webpage.</figcaption></figure>
 
 For now, the inter-process communication is done via Servo’s existing channel messages like [EmbedderMsg](https://doc.servo.org/embedder_traits/enum.EmbedderMsg.html) and [EmbedderEvent](https://doc.servo.org/compositing/windowing/enum.EmbedderEvent.html).
-We are looking to improve the IPC mechanism with more granular control <!-- over what? -->.
+We are looking to improve the IPC mechanism with more granular control over DOM elements.
+So, the panel UI can be updated based on the status of web pages.
+One example is when the page URL is changed and the navigation bar needs to be updated.
 There are some candidates for this, such as [WebDriverCommandMsg](https://doc.servo.org/script_traits/enum.WebDriverCommandMsg.html).
 [@webbeef](https://github.com/webbeef) also started a discussion about [defining custom elements](https://github.com/servo/servo/discussions/32883) like `<web-view>` for better ergonomics.
 Overall, improving IPC will be the next target to research after initial multi-view support.
