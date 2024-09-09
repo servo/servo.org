@@ -90,8 +90,7 @@ If you are interested in implementing web APIs in Servo, feel free to join the n
 
 Some features are crucial to the browser but not visible to users.
 Multi-process architecture and sandboxing belong to this category.
-Both of these are implemented in Servo to some extent, but are not enabled by default <!-- is this true for both? i know it’s true for multiprocess, but what about sandboxing? -->.
-They also only support Linux and macOS for now <!-- is this true for both? i know it’s true for sandboxing, but what about multiprocess? -->.
+Both of these are implemented in Servo to some extent, but only on Linux and macOS right now, and neither of the features are enabled by default.
 
 We would like to improve these features and validate them in CI workflows.
 In the meantime, we are looking for people who can extend our sandbox to Windows via [Named Pipes](https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipes) and [AppContainer Isolation](https://learn.microsoft.com/en-us/windows/win32/secauthz/appcontainer-isolation).
