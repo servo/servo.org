@@ -62,8 +62,8 @@ For more details, see [this series of blog posts](https://wusyong.github.io/post
 
 There is still room for improvement.
 For example, WebRender currently [only supports rendering a single “document”](https://github.com/servo/webrender/blob/0.64/webrender/src/renderer/mod.rs#L1228).
-This means this document has to constantly update different display lists to show on other windows, which may cause race conditions and let unintended webview display on the wrong window in a slip second.
-<!-- why is this not a problem in Firefox? -->
+Unless we create multiple WebRender instances, like Firefox does, we have one WebRender document that has to constantly update all of its display lists to show on all of our windows.
+This could potentially lead to race conditions where a webview may draw to the wrong window for a split second.
 
 There are also different OpenGL versions across multiple platforms, which can be challenging to configure and link.
 Verso is experimenting with using [Glutin](https://docs.rs/glutin/latest/glutin/) for better configuration and attempting to get closer to the general Rust ecosystem.
