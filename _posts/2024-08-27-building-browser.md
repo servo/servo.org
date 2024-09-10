@@ -13,7 +13,7 @@ For embedding use cases, the [Tauri](https://tauri.app) community experimented w
 We have a reference browser in the form of [servoshell](https://github.com/servo/servo/tree/main/ports/servoshell), which has historically been used as a minimal example and as a test harness for the [Web Platform Tests](https://wpt.servo.org).
 Nevertheless, the Servo community has steadily worked towards making it a browser in its own right, starting with [our new browser UI]({{ '/blog/2023/09/15/upcoming-events-and-new-browser-ui/' | url }}) based on [egui](https://www.egui.rs) last year.
 
-This year, [@wusyong](https://github.com/wusyong) created the [Verso](https://github.com/versotile-org/verso) project as a way to explore the features Servo needs to power a robust web browser.
+This year, [@wusyong](https://github.com/wusyong), a member of [Servo TSC](https://servo.org/governance/), created the [Verso](https://github.com/versotile-org/verso) project as a way to explore the features Servo needs to power a robust web browser.
 In this post, we’ll explain what we tried to achieve, what we found, and what’s next for building a browser using Servo as a web engine.
 
 ## Multi-view
@@ -40,7 +40,7 @@ We are looking to improve the IPC mechanism with more granular control over DOM 
 So, the panel UI can be updated based on the status of web pages.
 One example is when the page URL is changed and the navigation bar needs to be updated.
 There are some candidates for this, such as [WebDriverCommandMsg](https://doc.servo.org/script_traits/enum.WebDriverCommandMsg.html).
-[@webbeef](https://github.com/webbeef) also started a discussion about [defining custom elements](https://github.com/servo/servo/discussions/32883) like `<web-view>` for better ergonomics.
+[@webbeef](https://github.com/webbeef) also started a discussion about [defining custom elements](https://github.com/servo/servo/discussions/32883) like `<webview>` for better ergonomics.
 Overall, improving IPC will be the next target to research after initial multi-view support.
 We will also define more specific webview types to satisfy different purposes in the future.
 
@@ -74,9 +74,10 @@ With multi-view and multi-window support as the fundamental building blocks, we 
 At the same time, Servo is a huge project, with many potential improvements still to come, so we want to reflect on our progress and decide on our priorities.
 Here are some directions that are worth pursuing.
 
-### Are we browser yet?
+### Benchmarking and metrics
 
-We are building a page, [arewebrowseryet.com](https://servo.zulipchat.com/#narrow/stream/263398-general/topic/arewebrowseryet.2Ecom), in the hope of gathering the strength of the community to help us display the statistics of supported CSS properties and web APIs in Servo by [popularity order](https://chromestatus.com/metrics/css/popularity) and benchmark results such as jetstream2 and speedometer3.
+We want to gather the strength of the community to help us clear out the statistics of supported CSS properties and web APIs in Servo by [popularity order](https://chromestatus.com/metrics/css/popularity) and benchmark results such as jetstream2 and speedometer3.
+[@sagudev](https://github.com/sagudev) already started [a subset of jetstream3](https://speedometer-9x8.pages.dev/) to experiment.
 We hope this will eventually give newcomers a better overview of Servo.
 
 ### Script triage
