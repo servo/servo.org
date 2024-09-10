@@ -31,7 +31,7 @@ From there, any function that owns webviews can decide how to present them depen
 In a Verso window, two webviews are created at the moment—one for [handling regular web pages](https://docs.versotile.org/verso/window/struct.Window.html#method.handle_servo_messages_with_webview) and the other for [handling the UI](https://docs.versotile.org/verso/window/struct.Window.html#method.handle_servo_messages_with_panel), which is currently called the Panel.
 The result of the [showcase](https://github.com/versotile-org/verso?tab=readme-ov-file#verso) in Verso’s README.md looks like this:
 
-<figure class="_fig"><a href="{{ '/img/blog/crt-demo.gif' | url }}"><img src="{{ '/img/blog/crt-demo.gif' | url }}"
+<figure class="_fig"><a href="{{ '/img/blog/verso-crt-demo.webp' | url }}"><img src="{{ '/img/blog/verso-crt-demo.webp' | url }}"
     alt="Verso displaying ASCII texts with CRT style"></a>
 <figcaption>Figure 1: Verso window displaying two different webviews. One for UI, the other for webpage.</figcaption></figure>
 
