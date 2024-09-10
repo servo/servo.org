@@ -2,7 +2,7 @@
 layout:     post
 tags:       blog
 title:      "Building a browser using Servo as a web engine!"
-date:       2024-08-27
+date:       2024-09-10
 summary:    Let's build another web browser based on Servo!
 categories:
 ---
