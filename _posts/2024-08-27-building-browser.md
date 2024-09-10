@@ -32,8 +32,8 @@ In a Verso window, two webviews are created at the moment—one for [handling re
 The result of the [showcase](https://github.com/versotile-org/verso?tab=readme-ov-file#verso) in Verso’s README.md looks like this:
 
 <figure class="_fig"><a href="{{ '/img/blog/verso-crt-demo.webp' | url }}"><img src="{{ '/img/blog/verso-crt-demo.webp' | url }}"
-    alt="Verso displaying ASCII texts with CRT style"></a>
-<figcaption>Figure 1: Verso window displaying two different webviews. One for UI, the other for webpage.</figcaption></figure>
+    alt="Verso displaying ASCII text in a CRT style"></a>
+<figcaption>Figure 1: Verso window displaying two different webviews. One for the UI, the other for the web page.</figcaption></figure>
 
 For now, the inter-process communication is done via Servo’s existing channel messages like [EmbedderMsg](https://doc.servo.org/embedder_traits/enum.EmbedderMsg.html) and [EmbedderEvent](https://doc.servo.org/compositing/windowing/enum.EmbedderEvent.html).
 We are looking to improve the IPC mechanism with more granular control over DOM elements.
@@ -58,7 +58,7 @@ For more details, see [this series of blog posts](https://wusyong.github.io/post
 
 <figure class="_fig"><a href="{{ '/img/blog/multiwindow.png' | url }}"><img src="{{ '/img/blog/multiwindow.png' | url }}"
     alt="Verso displaying two windows"></a>
-<figcaption>Figure 2: Verso creates two different windows with same OpenGL context.</figcaption></figure>
+<figcaption>Figure 2: Verso creates two separate windows with the same OpenGL context.</figcaption></figure>
 
 There is still room for improvement.
 For example, WebRender currently [only supports rendering a single “document”](https://github.com/servo/webrender/blob/0.64/webrender/src/renderer/mod.rs#L1228).
