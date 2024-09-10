@@ -8,10 +8,10 @@ categories:
 ---
 
 As a web engine, Servo primarily handles everything around scripting and layout.
-For embedding use cases, the [Tauri](https://tauri.app) community experimented with [adding a new Servo backend](https://servo.org/blog/2024/01/19/embedding-update/), but Servo can also be used to build a browser.
+For embedding use cases, the [Tauri](https://tauri.app) community experimented with [adding a new Servo backend]({{ '/blog/2024/01/19/embedding-update/' | url }}), but Servo can also be used to build a browser.
 
 We have a reference browser in the form of [servoshell](https://github.com/servo/servo/tree/main/ports/servoshell), which has historically been used as a minimal example and as a test harness for the [Web Platform Tests](https://wpt.servo.org).
-Nevertheless, the Servo community has steadily worked towards making it a browser in its own right, starting with [our new browser UI](https://servo.org/blog/2023/09/15/upcoming-events-and-new-browser-ui/) based on [egui](https://www.egui.rs) last year.
+Nevertheless, the Servo community has steadily worked towards making it a browser in its own right, starting with [our new browser UI]({{ '/blog/2023/09/15/upcoming-events-and-new-browser-ui/' | url }}) based on [egui](https://www.egui.rs) last year.
 
 This year, [@wusyong](https://github.com/wusyong) created the [Verso](https://github.com/versotile-org/verso) project as a way to explore the features Servo needs to power a robust web browser.
 In this post, we’ll explain what we tried to achieve, what we found, and what’s next for building a browser using Servo as a web engine.
