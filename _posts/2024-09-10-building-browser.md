@@ -76,7 +76,7 @@ Here are some directions that are worth pursuing.
 
 ### Benchmarking and metrics
 
-We want to gather the strength of the community to help us clear out the statistics of supported CSS properties and web APIs in Servo by [popularity order](https://chromestatus.com/metrics/css/popularity) and benchmark results such as jetstream2 and speedometer3.
+We want to gather the strength of the community to help us track the statistics of supported CSS properties and web APIs in Servo by [popularity order](https://chromestatus.com/metrics/css/popularity) and benchmark results such as jetstream2 and speedometer3.
 [@sagudev](https://github.com/sagudev) already started [a subset of speedometer3](https://servospeedometer.netlify.app/) to experiment.
 We hope this will eventually give newcomers a better overview of Servo.
 
