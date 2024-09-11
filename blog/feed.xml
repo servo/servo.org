@@ -4,12 +4,171 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2024-08-31T00:00:00Z</updated>
+  <updated>2024-09-11T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>Building a browser using Servo as a web engine!</title>
+    <link href="https://servo.org/blog/2024/09/11/building-browser/"/>
+    <updated>2024-09-11T00:00:00Z</updated>
+    <id>https://servo.org/blog/2024/09/11/building-browser/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;As a web engine, Servo primarily handles everything around scripting and layout.
+For embedding use cases, the &lt;a href=&quot;https://tauri.app/&quot;&gt;Tauri&lt;/a&gt; community experimented with &lt;a href=&quot;https://servo.org/blog/2024/01/19/embedding-update/&quot;&gt;adding a new Servo backend&lt;/a&gt;, but Servo can also be used to build a browser.&lt;/p&gt;
+&lt;p&gt;We have a reference browser in the form of &lt;a href=&quot;https://github.com/servo/servo/tree/main/ports/servoshell&quot;&gt;servoshell&lt;/a&gt;, which has historically been used as a minimal example and as a test harness for the &lt;a href=&quot;https://wpt.servo.org/&quot;&gt;Web Platform Tests&lt;/a&gt;.
+Nevertheless, the Servo community has steadily worked towards making it a browser in its own right, starting with &lt;a href=&quot;https://servo.org/blog/2023/09/15/upcoming-events-and-new-browser-ui/&quot;&gt;our new browser UI&lt;/a&gt; based on &lt;a href=&quot;https://www.egui.rs/&quot;&gt;egui&lt;/a&gt; last year.&lt;/p&gt;
+&lt;p&gt;This year, &lt;a href=&quot;https://github.com/wusyong&quot;&gt;@wusyong&lt;/a&gt;, a member of &lt;a href=&quot;https://servo.org/governance/&quot;&gt;Servo TSC&lt;/a&gt;, created the &lt;a href=&quot;https://github.com/versotile-org/verso&quot;&gt;Verso&lt;/a&gt; project as a way to explore the features Servo needs to power a robust web browser.
+In this post, we’ll explain what we tried to achieve, what we found, and what’s next for building a browser using Servo as a web engine.&lt;/p&gt;
+&lt;h2 id=&quot;multi-view&quot; tabindex=&quot;-1&quot;&gt;Multi-view &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/09/11/building-browser/#multi-view&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Of course, the first major feature we want to achieve is multiple webviews.
+A webview is a term abstracted from the &lt;a href=&quot;https://doc.servo.org/servo/struct.TopLevelBrowsingContextId.html&quot;&gt;top-level browsing context&lt;/a&gt;.
+This is what people refer to as a web page.
+With multi-view support, we can create multiple web pages as tabs in a single window.
+Most importantly, we can draw our UI with additional webviews.
+The main reason we want to write UI using Servo itself is that we can dogfood our own stack and verify that it can meet practical requirements, such as prompt windows, context menus, file selectors, and more.&lt;/p&gt;
+&lt;p&gt;Basic multi-view support was reviewed and merged into Servo earlier this year thanks to &lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt; (&lt;a href=&quot;https://github.com/servo/servo/pull/30840&quot;&gt;#30840&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30841&quot;&gt;#30841&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30842&quot;&gt;#30842&lt;/a&gt;).
+Verso refined that into a specific type called &lt;a href=&quot;https://docs.versotile.org/verso/webview/struct.WebView.html&quot;&gt;WebView&lt;/a&gt;.
+From there, any function that owns webviews can decide how to present them depending on their IDs.
+In a Verso window, two webviews are created at the moment—one for &lt;a href=&quot;https://docs.versotile.org/verso/window/struct.Window.html#method.handle_servo_messages_with_webview&quot;&gt;handling regular web pages&lt;/a&gt; and the other for &lt;a href=&quot;https://docs.versotile.org/verso/window/struct.Window.html#method.handle_servo_messages_with_panel&quot;&gt;handling the UI&lt;/a&gt;, which is currently called the Panel.
+The result of the &lt;a href=&quot;https://github.com/versotile-org/verso?tab=readme-ov-file#verso&quot;&gt;showcase&lt;/a&gt; in Verso’s &lt;a href=&quot;http://readme.md/&quot;&gt;README.md&lt;/a&gt; looks like this:&lt;/p&gt;
+&lt;figure class=&quot;_fig&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/verso-crt-demo.webp&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/verso-crt-demo.webp&quot; alt=&quot;Verso displaying ASCII text in a CRT style&quot; /&gt;&lt;/a&gt;
+&lt;figcaption&gt;Figure 1: Verso window displaying two different webviews. One for the UI, the other for the web page.&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;For now, the inter-process communication is done via Servo’s existing channel messages like &lt;a href=&quot;https://doc.servo.org/embedder_traits/enum.EmbedderMsg.html&quot;&gt;EmbedderMsg&lt;/a&gt; and &lt;a href=&quot;https://doc.servo.org/compositing/windowing/enum.EmbedderEvent.html&quot;&gt;EmbedderEvent&lt;/a&gt;.
+We are looking to improve the IPC mechanism with more granular control over DOM elements.
+So, the panel UI can be updated based on the status of web pages.
+One example is when the page URL is changed and the navigation bar needs to be updated.
+There are some candidates for this, such as &lt;a href=&quot;https://doc.servo.org/script_traits/enum.WebDriverCommandMsg.html&quot;&gt;WebDriverCommandMsg&lt;/a&gt;.
+&lt;a href=&quot;https://github.com/webbeef&quot;&gt;@webbeef&lt;/a&gt; also started a discussion about &lt;a href=&quot;https://github.com/servo/servo/discussions/32883&quot;&gt;defining custom elements&lt;/a&gt; like &lt;code&gt;&amp;lt;webview&amp;gt;&lt;/code&gt; for better ergonomics.
+Overall, improving IPC will be the next target to research after initial multi-view support.
+We will also define more specific webview types to satisfy different purposes in the future.&lt;/p&gt;
+&lt;h2 id=&quot;multi-window&quot; tabindex=&quot;-1&quot;&gt;Multi-window &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/09/11/building-browser/#multi-window&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The other prominent feature after multi-view is the ability to support multiple windows.
+This one wasn’t planned at first, but because it affects too many components, we ended up resolving them together from the ground up.&lt;/p&gt;
+&lt;p&gt;Servo uses &lt;a href=&quot;https://github.com/servo/webrender&quot;&gt;WebRender&lt;/a&gt;, based on OpenGL, to render its layout.
+To support multiple windows, we need to support multiple OpenGL surfaces.
+One approach would be to create separate OpenGL contexts for each window.
+But since our implementations of WebGL, WebGPU, and WebXR are all tied to a single WebRender instance, which in turn only supports a single OpenGL context for now, we chose to use a single context with multiple surfaces.
+This alternative approach could potentially use less memory and spawn fewer threads.
+For more details, see &lt;a href=&quot;https://wusyong.github.io/posts/verso-compositor-part3/&quot;&gt;this series of blog posts&lt;/a&gt; by &lt;a href=&quot;https://github.com/wusyong&quot;&gt;@wusyong&lt;/a&gt;.&lt;/p&gt;
+&lt;figure class=&quot;_fig&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/multiwindow.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/multiwindow.png&quot; alt=&quot;Verso displaying two windows&quot; /&gt;&lt;/a&gt;
+&lt;figcaption&gt;Figure 2: Verso creates two separate windows with the same OpenGL context.&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;There is still room for improvement.
+For example, WebRender currently &lt;a href=&quot;https://github.com/servo/webrender/blob/0.64/webrender/src/renderer/mod.rs#L1228&quot;&gt;only supports rendering a single “document”&lt;/a&gt;.
+Unless we create multiple WebRender instances, like Firefox does, we have one WebRender document that has to constantly update all of its display lists to show on all of our windows.
+This could potentially lead to race conditions where a webview may draw to the wrong window for a split second.&lt;/p&gt;
+&lt;p&gt;There are also different OpenGL versions across multiple platforms, which can be challenging to configure and link.
+Verso is experimenting with using &lt;a href=&quot;https://docs.rs/glutin/latest/glutin/&quot;&gt;Glutin&lt;/a&gt; for better configuration and attempting to get closer to the general Rust ecosystem.&lt;/p&gt;
+&lt;h2 id=&quot;what%E2%80%99s-next%3F&quot; tabindex=&quot;-1&quot;&gt;What’s next? &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/09/11/building-browser/#what%E2%80%99s-next%3F&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;With multi-view and multi-window support as the fundamental building blocks, we could create more UI elements to keep pushing the envelope of our browser and embedding research.
+At the same time, Servo is a huge project, with many potential improvements still to come, so we want to reflect on our progress and decide on our priorities.
+Here are some directions that are worth pursuing.&lt;/p&gt;
+&lt;h3 id=&quot;benchmarking-and-metrics&quot; tabindex=&quot;-1&quot;&gt;Benchmarking and metrics &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/09/11/building-browser/#benchmarking-and-metrics&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;We want to gather the strength of the community to help us track the statistics of supported CSS properties and web APIs in Servo by &lt;a href=&quot;https://chromestatus.com/metrics/css/popularity&quot;&gt;popularity order&lt;/a&gt; and benchmark results such as jetstream2 and speedometer3.
+&lt;a href=&quot;https://github.com/sagudev&quot;&gt;@sagudev&lt;/a&gt; already started &lt;a href=&quot;https://servospeedometer.netlify.app/&quot;&gt;a subset of speedometer3&lt;/a&gt; to experiment.
+We hope this will eventually give newcomers a better overview of Servo.&lt;/p&gt;
+&lt;h3 id=&quot;script-triage&quot; tabindex=&quot;-1&quot;&gt;Script triage &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/09/11/building-browser/#script-triage&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;There’s a &lt;a href=&quot;https://github.com/servo/project/issues/100&quot;&gt;Servo triage meeting&lt;/a&gt; every two weeks to triage any issues around the script crate and more.
+Once we get the statistics of supported web APIs, we can find the most popular ones that haven’t been implemented or fixed yet.
+We are already fixing some issues around loading the order and re-implementing &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream&quot;&gt;ReadableStream&lt;/a&gt; in Rust.
+If you are interested in implementing web APIs in Servo, feel free to join the next meeting.&lt;/p&gt;
+&lt;h3 id=&quot;multi-process-and-sandboxing&quot; tabindex=&quot;-1&quot;&gt;Multi-process and sandboxing &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/09/11/building-browser/#multi-process-and-sandboxing&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Some features are crucial to the browser but not visible to users.
+Multi-process architecture and sandboxing belong to this category.
+Both of these are implemented in Servo to some extent, but only on Linux and macOS right now, and neither of the features are enabled by default.&lt;/p&gt;
+&lt;p&gt;We would like to improve these features and validate them in CI workflows.
+In the meantime, we are looking for people who can extend our sandbox to Windows via &lt;a href=&quot;https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipes&quot;&gt;Named Pipes&lt;/a&gt; and &lt;a href=&quot;https://learn.microsoft.com/en-us/windows/win32/secauthz/appcontainer-isolation&quot;&gt;AppContainer Isolation&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;acknowledgments&quot; tabindex=&quot;-1&quot;&gt;Acknowledgments &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/09/11/building-browser/#acknowledgments&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This work was &lt;a href=&quot;https://nlnet.nl/project/Servo-Multibrowsing/&quot;&gt;sponsored&lt;/a&gt; by &lt;a href=&quot;https://nlnet.nl/&quot;&gt;NLNet&lt;/a&gt; and the &lt;a href=&quot;https://ngi.eu/&quot;&gt;Next Generation Internet initiative&lt;/a&gt;.
+We are grateful the European Commission shares the same vision for a better and more open browser ecosystem.&lt;/p&gt;
+&lt;figure class=&quot;_fig&quot;&gt;&lt;img src=&quot;https://servo.org/img/nlnet-logo.png&quot; alt=&quot;NLNet Logo&quot; style=&quot;vertical-align: middle; margin: 15px; width: 100px;&quot; /&gt;
+  &lt;img src=&quot;https://servo.org/img/blog/NGI-logo.png&quot; alt=&quot;NGI Logo&quot; style=&quot;vertical-align: middle; margin: 15px; width: 100px;&quot; /&gt;&lt;/figure&gt;
+&lt;style&gt;
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig &gt; ._flex {
+        display: flex;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+        max-width: 100%;
+    }
+    ._figr {
+        float: right;
+        max-width: 100%;
+    }
+    ._figl &gt; figcaption,
+    ._figr &gt; figcaption,
+    ._figl &gt; iframe,
+    ._figr &gt; iframe,
+    ._figl &gt; video,
+    ._figr &gt; video,
+    ._figl &gt; a &gt; img,
+    ._figr &gt; a &gt; img {
+        width: 21em;
+        max-width: 100%;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin &gt; p,
+    ._runin &gt; h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+    ._note {
+        margin: 1em 1em;
+        border-left: 1px solid;
+        padding-left: 1em;
+        opacity: 0.75;
+    }
+&lt;/style&gt;
+</content>
+  </entry>
   <entry>
     <title>This month in Servo: tabbed browsing, Windows buffs, devtools, and more!</title>
     <link href="https://servo.org/blog/2024/08/31/this-month-in-servo/"/>
@@ -1309,135 +1468,6 @@ Here you’ll learn about the state of the art around embedding Servo and Stylo,
     ._figr &gt; a &gt; img {
         width: 21em;
         max-width: 100%;
-    }
-    ._runin {
-        margin-bottom: 1em;
-    }
-    ._runin &gt; p,
-    ._runin &gt; h2 {
-        display: inline;
-    }
-    ._correction {
-        max-width: 33em;
-        margin: 1em auto;
-        border-bottom: 1px solid;
-        padding-bottom: 1em;
-    }
-&lt;/style&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Two months in Servo: better inline layout, stable Rust, and more!</title>
-    <link href="https://servo.org/blog/2024/01/26/two-months-in-servo/"/>
-    <updated>2024-01-26T00:00:00Z</updated>
-    <id>https://servo.org/blog/2024/01/26/two-months-in-servo/</id>
-    <content xml:lang="en" type="html">&lt;figure class=&quot;_figr&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/layout-2020-justify.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/layout-2020-justify.png&quot; alt=&quot;Servo nightly showing support for ‘text-align-last’, ‘text-align: justify’, ‘vertical-align: baseline’, and ‘position: sticky’&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
-&lt;p&gt;Servo has had some exciting changes land in our nightly builds over the last month:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;as of 2023-12-27, the ‘text-align-last’ property is now supported (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30905&quot;&gt;#30905&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;as of 2023-12-27, ‘text-align: justify’ is now supported (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30807&quot;&gt;#30807&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30866&quot;&gt;#30866&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;as of 2024-01-09, ‘line-height’ and ‘vertical-align’ are now moderately supported (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30902&quot;&gt;#30902&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;as of 2024-01-24, ‘Event#composedPath()’ is now supported (&lt;a href=&quot;https://github.com/gterzian&quot;&gt;@gterzian&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31123&quot;&gt;#31123&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;_figl&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/layout-2020-tables.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/layout-2020-tables.png&quot; alt=&quot;Servo nightly showing rudimentary support for table layouts when the pref is enabled&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
-&lt;p&gt;We’ve started working on support for &lt;strong&gt;sticky positioning&lt;/strong&gt; and &lt;strong&gt;tables&lt;/strong&gt; in the new layout engine, with some very early sticky positioning code landing in 2023-11-30 (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30686&quot;&gt;#30686&lt;/a&gt;), the CSS tables tests now enabled (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31131&quot;&gt;#31131&lt;/a&gt;), and rudimentary table layout landing in 2024-01-20 under the &lt;code&gt;layout.tables.enabled&lt;/code&gt; pref (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/Manishearth&quot;&gt;@Manishearth&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30799&quot;&gt;#30799&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30868&quot;&gt;#30868&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31121&quot;&gt;#31121&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;Geometry in our new layout engine is now being migrated from floating-point coordinates (&lt;code&gt;f32&lt;/code&gt;) to &lt;strong&gt;fixed-point coordinates&lt;/strong&gt; (&lt;code&gt;i32&lt;/code&gt; × 1/60) (&lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30825&quot;&gt;#30825&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30894&quot;&gt;#30894&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31135&quot;&gt;#31135&lt;/a&gt;), similar to other engines like WebKit and Blink.
-While floating-point geometry was thought to be better for transformation-heavy content like SVG, the fact that larger values are less precise than smaller values causes a variety of rendering problems and test failures (&lt;a href=&quot;https://github.com/servo/servo/issues/29819&quot;&gt;#29819&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;As a result of these changes, we’ve made big strides in our WPT pass rates:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;CSS2 floats&lt;/strong&gt; (+3.3pp to 84.9%) and &lt;strong&gt;floats-clear&lt;/strong&gt; (+5.6pp to 78.9%) continue to surge&lt;/li&gt;
-&lt;li&gt;we now surpass legacy layout in the &lt;strong&gt;CSS2 linebox&lt;/strong&gt; tests (&lt;strong&gt;61.1% → 87.9%&lt;/strong&gt;, legacy 86.4%)&lt;/li&gt;
-&lt;li&gt;we now surpass legacy layout in the &lt;strong&gt;css-flexbox&lt;/strong&gt; tests (49.5% → 52.7%, legacy 52.2%)&lt;/li&gt;
-&lt;li&gt;we’ve closed 76% of the gap in &lt;strong&gt;key CSS2 tests&lt;/strong&gt; (79.2% → 82.2%, legacy 83.1%)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;updates%2C-servoshell%2C-and-stability&quot; tabindex=&quot;-1&quot;&gt;Updates, servoshell, and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/01/26/two-months-in-servo/#updates%2C-servoshell%2C-and-stability&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;GStreamer&lt;/strong&gt; has been updated from 0.15 to 0.21 (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30750&quot;&gt;#30750&lt;/a&gt;), fixing long-standing breakage of video playback.
-&lt;strong&gt;WebGPU&lt;/strong&gt; has been updated from 0.17 to 0.18 (&lt;a href=&quot;https://github.com/sagudev&quot;&gt;@sagudev&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30926&quot;&gt;#30926&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30954&quot;&gt;#30954&lt;/a&gt;), and &lt;strong&gt;ANGLE&lt;/strong&gt; has been updated from &lt;a href=&quot;https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/3729&quot;&gt;April 2019&lt;/a&gt; to &lt;a href=&quot;https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/5359&quot;&gt;August 2023&lt;/a&gt; (&lt;a href=&quot;https://github.com/sagudev&quot;&gt;@sagudev&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30546&quot;&gt;#30546&lt;/a&gt;).&lt;/p&gt;
-&lt;figure class=&quot;_figr&quot;&gt;&lt;a href=&quot;https://servo.org/img/blog/back-forward.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/back-forward.png&quot; alt=&quot;Servo nightly showing Back and Forward buttons in the minibrowser&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
-&lt;p&gt;Servo’s example browser now has &lt;strong&gt;Back and Forward buttons&lt;/strong&gt; (&lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30805&quot;&gt;#30805&lt;/a&gt;), and no longer shows the incorrect location when navigation takes a long time (&lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30518&quot;&gt;#30518&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;Many stability improvements have landed, including fixes for a crash in inline layout (&lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30897&quot;&gt;#30897&lt;/a&gt;), three WebGPU-related crashes (&lt;a href=&quot;https://github.com/lucasMontenegro&quot;&gt;@lucasMontenegro&lt;/a&gt;, &lt;a href=&quot;https://github.com/gterzian&quot;&gt;@gterzian&lt;/a&gt;, &lt;a href=&quot;https://github.com/Taym95&quot;&gt;@Taym95&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30888&quot;&gt;#30888&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30989&quot;&gt;#30989&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31002&quot;&gt;#31002&lt;/a&gt;), a crash in the PerformanceResourceTiming API (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31063&quot;&gt;#31063&lt;/a&gt;), and several crashes due to script runtimes being dropped in the wrong order (&lt;a href=&quot;https://github.com/gterzian&quot;&gt;@gterzian&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30896&quot;&gt;#30896&lt;/a&gt;).&lt;/p&gt;
-&lt;h2 id=&quot;ci%2C-code-health%2C-and-dev-changes&quot; tabindex=&quot;-1&quot;&gt;CI, code health, and dev changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/01/26/two-months-in-servo/#ci%2C-code-health%2C-and-dev-changes&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;The intermittent macOS build failures on CI should now be fixed (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30975&quot;&gt;#30975&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;Servo now has some preliminary Android build support (&lt;a href=&quot;https://github.com/mukilan&quot;&gt;@mukilan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31086&quot;&gt;#31086&lt;/a&gt;), though more work needs to be done before Servo will run on Android.&lt;/p&gt;
-&lt;p&gt;The long-term effort to simplify how Servo is built continues (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31075&quot;&gt;#31075&lt;/a&gt;), and we’ve replaced the &lt;code&gt;time&lt;/code&gt; crate with &lt;code&gt;chrono&lt;/code&gt; and &lt;code&gt;std::time&lt;/code&gt; in much of Servo (&lt;a href=&quot;https://github.com/Taym95&quot;&gt;@Taym95&lt;/a&gt;, &lt;a href=&quot;https://github.com/augustebaum&quot;&gt;@augustebaum&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30927&quot;&gt;#30927&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31020&quot;&gt;#31020&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30639&quot;&gt;#30639&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31079&quot;&gt;#31079&lt;/a&gt;).
-We have also started migrating our DOM bindings to use typed arrays where possible (&lt;a href=&quot;https://github.com/gterzian&quot;&gt;@gterzian&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30990&quot;&gt;#30990&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31077&quot;&gt;#31077&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31087&quot;&gt;#31087&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31076&quot;&gt;#31076&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31106&quot;&gt;#31106&lt;/a&gt;), as part of an effort to &lt;strong&gt;reduce our unsafe code surface&lt;/strong&gt; (&lt;a href=&quot;https://github.com/servo/servo/issues/30889&quot;&gt;#30889&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/issues/30862&quot;&gt;#30862&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;Several crates have been moved into &lt;a href=&quot;https://github.com/servo/servo&quot;&gt;our main repo&lt;/a&gt;:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;hyper_serde&lt;/code&gt; (&lt;a href=&quot;https://github.com/servo/hyper_serde&quot;&gt;servo/hyper_serde&lt;/a&gt;) was moved to &lt;code&gt;components/hyper_serde&lt;/code&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30803&quot;&gt;#30803&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;device&lt;/code&gt; (&lt;a href=&quot;https://github.com/servo/devices&quot;&gt;servo/devices&lt;/a&gt;) was merged into &lt;code&gt;components/bluetooth&lt;/code&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30974&quot;&gt;#30974&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;blurmac&lt;/code&gt; (&lt;a href=&quot;https://github.com/servo/devices&quot;&gt;servo/devices&lt;/a&gt;) was moved to &lt;code&gt;third_party/blurmac&lt;/code&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30974&quot;&gt;#30974&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We’ve also made some dev changes:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;the default branch in &lt;a href=&quot;https://github.com/servo/servo&quot;&gt;our main repo&lt;/a&gt; is now &lt;code&gt;main&lt;/code&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/atouchet&quot;&gt;@atouchet&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/commit/23add0c1e5c9cbdf0301b891d265e363d049532b&quot;&gt;23add0c1e5c9c&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30877&quot;&gt;#30877&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;we now target &lt;strong&gt;Rust 1.74&lt;/strong&gt; stable, marking the first time ever we have built without unstable features (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30831&quot;&gt;#30831&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;we now require &lt;strong&gt;Python 3.10&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31088&quot;&gt;#31088&lt;/a&gt;), and you no longer need to install virtualenv (&lt;a href=&quot;https://github.com/frewsxcv&quot;&gt;@frewsxcv&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30377&quot;&gt;#30377&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;we’ve fixed problems building Servo on &lt;strong&gt;Ubuntu 20.04&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31019&quot;&gt;#31019&lt;/a&gt;) and &lt;strong&gt;NixOS&lt;/strong&gt; (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31052&quot;&gt;#31052&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31055&quot;&gt;#31055&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/30987&quot;&gt;#30987&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;we now support &lt;strong&gt;Visual Studio 2022&lt;/strong&gt; on Windows (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31148&quot;&gt;#31148&lt;/a&gt;), the same version that rustup installs by default&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;linux-build-issues&quot; tabindex=&quot;-1&quot;&gt;Linux build issues &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2024/01/26/two-months-in-servo/#linux-build-issues&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Several people have reported problems building Servo on newer Linux distro versions, particularly &lt;a href=&quot;https://github.com/servo/servo/issues/31059&quot;&gt;with clang 15&lt;/a&gt; or &lt;a href=&quot;https://github.com/servo/servo/issues/30587&quot;&gt;with clang 16&lt;/a&gt;.
-While we’re still working on fixing the underlying issues, there are some workarounds.
-If your distro lets you install older versions of clang with a package like &lt;code&gt;clang-14&lt;/code&gt;, you can tell Servo to use it with:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;export CC=/usr/bin/clang-14
-export CXX=/usr/bin/clang++-14
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Alternatively you can try our new Nix-based dev environment, which should now work on any Linux distro (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/31001&quot;&gt;#31001&lt;/a&gt;).
-&lt;a href=&quot;https://nixos.org/manual/nix/stable/&quot;&gt;Nix&lt;/a&gt; is a package manager with some unusual benefits.
-Servo can use Nix to find the correct versions of all of its compilers and build dependencies without needing you to install them or run &lt;code&gt;mach bootstrap&lt;/code&gt;.
-All you need to do is install Nix, and &lt;code&gt;export MACH_USE_NIX=&lt;/code&gt; to your environment.
-&lt;a href=&quot;https://github.com/servo/servo/wiki/Building#nix-on-other-distros&quot;&gt;See the wiki&lt;/a&gt; for more details!&lt;/p&gt;
-&lt;style&gt;
-    /* guaranteed minimum width for first paragraph after a float */
-    ._floatmin {
-        display: block;
-        width: 13em;
-        overflow: hidden;
-    }
-    ._none {
-        display: none;
-    }
-    ._fig:not(#specificity) {
-        width: 33em;
-        max-width: 100%;
-        margin: 1em auto;
-    }
-    ._fig &gt; ._flex {
-        display: flex;
-    }
-    ._fig._min {
-        width: min-content;
-    }
-    ._fig table {
-        text-align: initial;
-    }
-    ._fig figcaption._notes {
-        text-align: left;
-        width: max-content;
-        max-width: 100%;
-    }
-    ._figl:not(#specificity),
-    ._figr:not(#specificity) {
-        margin: 0 1em 1em;
-    }
-    ._figl {
-        float: left;
-    }
-    ._figr {
-        float: right;
-    }
-    ._figl &gt; iframe,
-    ._figr &gt; iframe,
-    ._figl &gt; a &gt; img,
-    ._figr &gt; a &gt; img {
-        width: 21em;
-        max-width: max-content;
     }
     ._runin {
         margin-bottom: 1em;
