@@ -93,7 +93,7 @@ Linux Foundation Europe Member Summit 2024
 
 <img style="margin-block: 0; height: 14em;" src="/img/servo-android-2024-09.jpg" alt="Screenshot of Servo running on Android opening servo.org homepage" />
 
-<blockquote style="background: rgba(0, 0, 0, 0.75); position: relative; top: -4em; font-size: 80%;">
+<blockquote style="background: rgba(0, 0, 0, 0.75); position: relative; top: -4em; font-size: 80%; width: 70%; padding-inline: 20px;">
 Android
 </blockquote>
 
@@ -103,7 +103,7 @@ Android
 
 <img style="margin-block: 0; height: 14em;" src="/img/servo-openharmony-2024-09.jpg" alt="Screenshot of Servo running on OpenHarmony opening Servo's wikipedia page" />
 
-<blockquote style="background: rgba(0, 0, 0, 0.75); position: relative; top: -4em; font-size: 80%;">
+<blockquote style="background: rgba(0, 0, 0, 0.75); position: relative; top: -4em; font-size: 80%; width: 70%; padding-inline: 20px;">
 OpenHarmony
 </blockquote>
 
