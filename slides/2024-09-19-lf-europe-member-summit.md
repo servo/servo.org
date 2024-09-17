@@ -112,7 +112,7 @@ OpenHarmony
 
 ----
 
-### Embedding examples 🔗
+### Usage examples 🔗
 
 <div style="float: left; margin-left: 2em;">
 <a href="https://github.com/tauri-apps/wry/tree/servo-wry-demo">
@@ -159,9 +159,12 @@ OpenHarmony
 
 ### Highlights ✨
 
-* **Independent**: Open governance
-* **Performant**: Web content parallelization
-* **Secure**: Rust language
+* **Independent**:  
+  Open governance
+* **Performant**:  
+  Web content parallelization
+* **Secure**:  
+  Rust language
 
 </div>
 
@@ -169,8 +172,10 @@ OpenHarmony
 
 ### Plan 📆
 
-* Growing a **healthy ecosystem**
-* Multiple organizations **joining efforts**
+* Growing a  
+  **healthy ecosystem**
+* Multiple organizations  
+  **joining efforts**
 * Public and private sector **funding**
 
 </div>
