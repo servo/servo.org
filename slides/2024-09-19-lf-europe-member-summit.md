@@ -36,7 +36,7 @@ Linux Foundation Europe Member Summit 2024
 
 ----
 
-<video autoplay>
+<video autoplay controls loop muted>
   <source src="/img/servoshell-2024-09.webm" type="video/webm">
   <p>Servoshell (the Servo mini browser) browsing servo.org, and opening a new tab to browse frontpage of en.wikipedia.org. The video finished coming back to the first tab and loading servo.org homepage again.</p>
 </video>
