@@ -52,8 +52,6 @@ Linux Foundation Europe Member Summit 2024
 
 ----
 
-<!-- TODO: Update chart on Thursday's morning -->
-
 <img src="/img/github-2024-09.png" style="padding: 1em 0.5em; background: white; height: 300px;" alt="Contributors graph from https://github.com/servo/servo/graphs/contributors showing a very slow period from mid-2020 to end of 2023, and a bigger activity in 2023 & 2024." />
 
 <div style="font-size: smaller;">
