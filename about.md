@@ -34,6 +34,7 @@ The chart below tracks our pass rates in several *focus areas* of the [Web Platf
 
 ## Presentations
 
+* [Servo Project Updates at Linux Foundation Europe Member Summit 2024](https://servo.org/slides/2024-09-19-lf-europe-member-summit/) by Manuel Rego (Sep 2024)
 * [Servo: A Web Rendering Engine For The Future 🔮](https://www.youtube.com/watch?v=SamA5Oz-G5w) by Manuel Rego (July 2024)
 * [Modular Servo: Three Paths Forward](https://www.youtube.com/watch?v=EA_1jxzR85M) by Gregory Terzian (May 2024)
 * [Meet Servo](https://servo.org/slides/2024-04-16-seattle-rust-user-group/) by Rakhi Sharma (Apr 2024)
