@@ -8,6 +8,11 @@ categories:
 ---
 
 <!--
+- donations
+    - opencollective 2005.00/month
+    - github 2022.00/month
+    - lfx 120/month (11 donors)
+    - thanks.dev (11 donors)
 - new features
     - ‘table-layout: fixed’ 33384 33442
     - ‘object-fit’ and ‘object-position’ 33479
@@ -354,6 +359,30 @@ this month:
     1346643727336485b8ee19b3db6d4a28366e89f1	https://github.com/servo/servo/pull/33549	Assert that we don't get malformed ContentSizes in tables (#33549)
     7fdaccde5501283708503e9a64efa578ac9ae7f7	https://github.com/servo/servo/pull/33512	ohos: Support product flavors (#33512)
 -->
+
+## Donations
+
+Thanks again for your generous support!
+We are now receiving **4147 USD/month** (+34.7% over July) in recurring donations.
+This includes donations from **12 people** on LFX, but we will stop accepting donations there soon — **please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo)**.
+
+Servo is also on [thanks.dev](https://thanks.dev), and already **eleven GitHub users** that depend on Servo are sponsoring us there.
+If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 4147 / 10000); padding-left: 0.5em;"><strong>4147</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 4147 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="4147" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
+<!-- TODO: self-hosted runners and outreachy -->
+
+As always, use of these funds will be decided transparently in the Technical Steering Committee.
+For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
 <style>
     /* guaranteed minimum width for first paragraph after a float */
