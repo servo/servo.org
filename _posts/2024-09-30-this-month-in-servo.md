@@ -61,17 +61,17 @@ categories:
     - faster uploads to webrender 33387
 - webxr
     - reference space reset events 33460
-- servoshell
-    - nightly builds for android aarch64 33435
-    - gamepads now enabled by default 33466
-    - better navigation on android 33294
-    - windows keyboard input and scrolling 33225 33252
-    - fixed hidpi 33529
-    - now supports ohos 33295
-    - tab mouse x/+/middle-click 33244
-    - tab keyboard shortcuts 33319
-    - tab empty titles 33354 33391
-    - location when switching tabs 33316
+- DONE servoshell
+    - DONE nightly builds for android aarch64 33435
+    - DONE gamepads now enabled by default 33466
+    - DONE better navigation on android 33294
+    - DONE windows keyboard input and scrolling 33225 33252
+    - DONE fixed hidpi 33529
+    - DONE now supports ohos 33295
+    - DONE tab mouse x/+/middle-click 33244
+    - DONE tab keyboard shortcuts 33319
+    - DONE tab empty titles 33354 33391
+    - DONE location when switching tabs 33316
 - ohos
     - back forward 33206 33511
     - ffi vsync 33117
@@ -378,6 +378,15 @@ Our table layout has improved, with support for **width** and **height presentat
 
 We’ve also started working on the intrinsic sizing keywords **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** (@Loirooriol, #33492).
 Before we can support them, though, we needed to land patches to calculate intrinsic sizes, including for **percent units** (@Loirooriol, #33204), **aspect ratios** of replaced elements (@Loirooriol, #33240), **column flex containers** (@Loirooriol, #33299), and **‘white-space’** (@Loirooriol, #33343).
+
+## Beyond the engine
+
+You can now **download [the Servo browser](https://book.servo.org/running-servoshell.html) for Android** on [servo.org](https://servo.org) (@mukilan, #33435)!
+servoshell now **supports gamepads by default** (@msub2, #33466), **builds for OpenHarmony** (@mukilan, #33295), and has **better navigation on Android** (@msub2, #33294).
+
+**Tabbed browsing** on desktop platforms has become a lot more polished, with visible **close and new tab buttons** (@Melchizedek6809, #33244), **key bindings for switching tabs** (@Melchizedek6809, #33319), as well as better handling of **empty tab titles** (@Melchizedek6809, #33354, #33391) and the **location bar** (@webbeef, #33316).
+
+We’ve also fixed **several HiDPI bugs** in servoshell (@mukilan, #33529), as well as **keyboard input** and scrolling on Windows (@crbrz, #33225, #33252).
 
 ## Donations
 
