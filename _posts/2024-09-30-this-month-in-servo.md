@@ -24,21 +24,21 @@ categories:
     - DONE <ul type> and <ul compact> 33303
     - SKIP <q cite> 33307
 - rendering
-    - right-to-left support (except floats) 33375
+    - DONE right-to-left support (except floats) 33375
     - absolute descendants of atomic inlines 33336
     - min/max-block-size block containers 33203
     - min/max-block-size floats 33241
-    - start work on min-content|max-content|fit-content|stretch 33492
+    - DONE start work on min-content|max-content|fit-content|stretch 33492
     - correct ‘white-space: break-spaces’ with ‘word-break: keep-all’ 33376
     - ‘position: relative’ on <caption> 33426
     - more correct CustomEvent 33481
     - more correct requestAnimationForm delivery 33395
     - canvas width height? 33211
-- intrinsic sizes (min/max-content)
-    - block size for percentage descendants 33204
-    - replaced aspect ratio 33240
-    - column flex containers 33299
-    - ‘white-space: nowrap’ 33343
+- DONE intrinsic sizes (min/max-content)
+    - DONE block size for percentage descendants 33204
+    - DONE replaced aspect ratio 33240
+    - DONE column flex containers 33299
+    - DONE ‘white-space: nowrap’ 33343
 - tables
     - width and height attributes on table-related elements 33405 33425
     - better handling of extra <col> and <colgroup> 33451
@@ -366,10 +366,14 @@ Servo has had several new features land in our nightly builds over the last mont
 - as of 2024-09-10, we now support **console.timeLog()** (@simonwuelker, #33377)
 - as of 2024-09-10, we now support the **encodeInto() method on TextEncoder** (@webbeef, #33360)
 - as of 2024-09-10, we now support **&lt;link rel=prefetch>** (@simonwuelker, #33345)
+- as of 2024-09-12, we now support **right-to-left languages**, except for floats (@mrobinson, @atbrakhi, #33375)
 - as of 2024-09-14, we now support **‘table-layout: fixed’** (@Loirooriol, #33384, #33442)
 - as of 2024-09-19, we now support the **‘object-fit’** and **‘object-position’** properties (@mrobinson, @Loirooriol, #33479)
 - as of 2024-09-19, **Crypto.getRandomValues()** can now take **BigInt64Array** or **BigUint64Array** (@msub2, #33485)
 - as of 2024-09-25, we now support **innerText** and **outerText on HTMLElement** (@Melchizedek6809, #33312)
+
+We’ve started working on the intrinsic sizing keywords **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** (@Loirooriol, #33492).
+Before we can support them, though, we needed to land patches to calculate intrinsic sizes, including for **percent units** (@Loirooriol, #33204), **aspect ratios** of replaced elements (@Loirooriol, #33240), **column flex containers** (@Loirooriol, #33299), and **‘white-space’** (@Loirooriol, #33343).
 
 ## Donations
 
