@@ -54,7 +54,7 @@ categories:
     - DONE correct baselines 33347
     - DONE absolute descendants of flex containers 33346
 - webgpu
-    - texture formats 33504
+    - SKIP(reverted) texture formats 33504
     - GPUBuffer 33154
     - destroy() method on GPUTexture 33534
     - pipeline-overridable constants in GPUProgrammableStage 33291
@@ -77,16 +77,16 @@ categories:
     - ffi vsync 33117
     - webgl 33257
 - perf
-    - faster window resizing 33297
-    - faster test shaping on windows 33123
-    - shared memory font data 33530
+    - DONE faster window resizing 33297
+    - DONE faster test shaping on windows 33123
+    - DONE shared memory font data 33530
     - mach test-speedometer headless 33187 33247
     - start(?) of splitting up script crate 33169
     - experimental tracing support with perfetto 33188 33301
     - ...and hitrace 33324
     - ...and tracing events 33189 33417 33436
     - profiling build profile 33432 book#22
-    - fixed excessive document title updates 33286
+    - DONE fixed excessive document title updates 33287
 - upgrades
     - stylo 2024-09-02 33370 33472
     - wgpu 33266 33357 33506
@@ -97,9 +97,9 @@ categories:
     - duration underflow on finsandfoamfreediving.com 33341
     - devtools 33305 33381
     - large table column widths 33424
-- ci
-    - self-hosted linux 33321 33389
-    - self-hosted fixes 33283 33308 33315 33373 33471
+- DONE ci
+    - DONE self-hosted linux 33321 33389
+    - DONE self-hosted fixes 33283 33308 33315 33373 33471 33596
 
 untriaged from last month:
 >>> 2024-08-26T06:09:38Z
@@ -378,6 +378,16 @@ Our table layout has improved, with support for **width** and **height presentat
 
 We’ve also started working on the intrinsic sizing keywords **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** (@Loirooriol, #33492).
 Before we can support them, though, we needed to land patches to calculate intrinsic sizes, including for **percent units** (@Loirooriol, #33204), **aspect ratios** of replaced elements (@Loirooriol, #33240), **column flex containers** (@Loirooriol, #33299), and **‘white-space’** (@Loirooriol, #33343).
+
+## Performance and reliability
+
+Servo now **sends font data over shared memory** (@mrobinson, #33530), saving a huge amount of time over sending font data over IPC channels.
+
+We now debounce resize events for **faster window resizing** (@simonwuelker, #33297), limit **document title updates** (@simonwuelker, #33287), and use DirectWrite kerning info for **faster text shaping on Windows** (@crbrz, #33123).
+
+Contributors to Servo can now enjoy faster **self-hosted CI runners** for our **Linux builds** (@delan, #33321, #33389), cutting a typical **Linux-only build** from over half an hour to **under 8 minutes**, and a typical **[T-full](https://book.servo.org/contributing.html#running-tests-in-pull-requests) try job** from over an hour to **under 42 minutes**.
+
+We’ve now started exploring self-hosted macOS runners (@delan, ci-runners#3), and in the meantime we’ve landed several fixes for self-hosted build failures (@delan, @sagudev, #33283, #33308, #33315, #33373, #33471, #33596).
 
 ## Beyond the engine
 
