@@ -13,16 +13,16 @@ categories:
     - github 2022.00/month
     - lfx 120/month (11 donors)
     - thanks.dev (11 donors)
-- new features
-    - ‘table-layout: fixed’ 33384 33442
-    - ‘object-fit’ and ‘object-position’ 33479
-    - innerText and outerText 33312
-    - console.timeLog 33377
-    - encodeInto() method on TextEncoder 33360
-    - Crypto.getRandomValues() now accepts BigInt64 and BigUint64 33485
-    - <link rel=prefetch> 33345
-    - <ul type> and <ul compact> 33303
-    - <q cite> 33307
+- DONE new features
+    - DONE ‘table-layout: fixed’ 33384 33442
+    - DONE ‘object-fit’ and ‘object-position’ 33479
+    - DONE innerText and outerText 33312
+    - DONE console.timeLog 33377
+    - DONE encodeInto() method on TextEncoder 33360
+    - DONE Crypto.getRandomValues() now accepts BigInt64 and BigUint64 33485
+    - DONE <link rel=prefetch> 33345
+    - DONE <ul type> and <ul compact> 33303
+    - SKIP <q cite> 33307
 - rendering
     - right-to-left support (except floats) 33375
     - absolute descendants of atomic inlines 33336
@@ -359,6 +359,17 @@ this month:
     1346643727336485b8ee19b3db6d4a28366e89f1	https://github.com/servo/servo/pull/33549	Assert that we don't get malformed ContentSizes in tables (#33549)
     7fdaccde5501283708503e9a64efa578ac9ae7f7	https://github.com/servo/servo/pull/33512	ohos: Support product flavors (#33512)
 -->
+
+Servo has had several new features land in our nightly builds over the last month:
+
+- as of 2024-09-10, we now support **&lt;ul type>** and **&lt;ul compact>** (@simonwuelker, #33303)
+- as of 2024-09-10, we now support **console.timeLog()** (@simonwuelker, #33377)
+- as of 2024-09-10, we now support the **encodeInto() method on TextEncoder** (@webbeef, #33360)
+- as of 2024-09-10, we now support **&lt;link rel=prefetch>** (@simonwuelker, #33345)
+- as of 2024-09-14, we now support **‘table-layout: fixed’** (@Loirooriol, #33384, #33442)
+- as of 2024-09-19, we now support the **‘object-fit’** and **‘object-position’** properties (@mrobinson, @Loirooriol, #33479)
+- as of 2024-09-19, **Crypto.getRandomValues()** can now take **BigInt64Array** or **BigUint64Array** (@msub2, #33485)
+- as of 2024-09-25, we now support **innerText** and **outerText on HTMLElement** (@Melchizedek6809, #33312)
 
 ## Donations
 
