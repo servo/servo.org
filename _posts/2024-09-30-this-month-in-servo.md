@@ -53,14 +53,15 @@ categories:
     - DONE replaced aspect ratio 33263
     - DONE correct baselines 33347
     - DONE absolute descendants of flex containers 33346
-- webgpu
+- DONE webgpu
     - SKIP(reverted) texture formats 33504
-    - GPUBuffer 33154
-    - destroy() method on GPUTexture 33534
-    - pipeline-overridable constants in GPUProgrammableStage 33291
-    - faster uploads to webrender 33387
-- webxr
-    - reference space reset events 33460
+    - DONE GPUBuffer 33154
+    - DONE destroy() method on GPUTexture 33534
+    - DONE canvas presentation 33521
+    - DONE pipeline-overridable constants in GPUProgrammableStage 33291
+    - DONE faster uploads to webrender 33387
+- DONE webxr
+    - DONE reference space reset events 33460
 - DONE servoshell
     - DONE nightly builds for android aarch64 33435
     - DONE gamepads now enabled by default 33466
@@ -368,9 +369,10 @@ Servo has had several new features land in our nightly builds over the last mont
 - as of 2024-09-10, we now support **&lt;link rel=prefetch>** (@simonwuelker, #33345)
 - as of 2024-09-12, we now support **right-to-left languages**, except for floats (@mrobinson, @atbrakhi, #33375)
 - as of 2024-09-14, we now support **‘table-layout: fixed’** (@Loirooriol, #33384, #33442)
+- as of 2024-09-17, we now support the **‘reset’ event on XRReferenceSpace** properties (@mrobinson, @Loirooriol, #33479)
 - as of 2024-09-19, we now support the **‘object-fit’** and **‘object-position’** properties (@mrobinson, @Loirooriol, #33479)
 - as of 2024-09-19, **Crypto.getRandomValues()** can now take **BigInt64Array** or **BigUint64Array** (@msub2, #33485)
-- as of 2024-09-25, we now support **innerText** and **outerText on HTMLElement** (@Melchizedek6809, #33312)
+- as of 2024-09-25, we now support **‘innerText’** and **‘outerText’ on HTMLElement** (@Melchizedek6809, #33312)
 
 Servo’s flexbox support continues to mature, with support for **‘align-self: normal’** (@Loirooriol, #33314), plus corrections to **cross-axis percent units** in descendants (@Loirooriol, #33242), **automatic minimum sizes** (@Loirooriol, #33248, #33256), **replaced flex items** (@Loirooriol, #33263), **baseline alignment** (@mrobinson, @Loirooriol, #33347), and **absolute descendants** (@mrobinson, @Loirooriol, #33346).
 
@@ -378,6 +380,8 @@ Our table layout has improved, with support for **width** and **height presentat
 
 We’ve also started working on the intrinsic sizing keywords **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** (@Loirooriol, #33492).
 Before we can support them, though, we needed to land patches to calculate intrinsic sizes, including for **percent units** (@Loirooriol, #33204), **aspect ratios** of replaced elements (@Loirooriol, #33240), **column flex containers** (@Loirooriol, #33299), and **‘white-space’** (@Loirooriol, #33343).
+
+We’ve heavily reworked our **WebGPU support**, with **faster canvas presentation** (@sagudev, #33387), support for **resizing the canvas** (@sagudev, #33521) and the **‘constants’ property on GPUProgrammableStage** (@sagudev, #33291), plus improvements to **GPUBuffer** (@sagudev, #33154) and the **destroy() method on GPUTexture** (@sagudev, #33534).
 
 ## Performance and reliability
 
