@@ -272,16 +272,16 @@
     - back forward 33206 33511
     - ffi vsync 33117
     - webgl 33257
-- perf
+- DONE perf
     - DONE faster window resizing 33297
     - DONE faster test shaping on windows 33123
     - DONE shared memory font data 33530
-    - mach test-speedometer headless 33187 33247
-    - start(?) of splitting up script crate 33169
-    - experimental tracing support with perfetto 33188 33301
-    - ...and hitrace 33324
-    - ...and tracing events 33189 33417 33436
-    - profiling build profile 33432 book#22
+    - SKIP mach test-speedometer headless 33187 33247
+    - DONE start(?) of splitting up script crate 33169
+    - DONE experimental tracing support with perfetto 33188 33301
+    - DONE ...and hitrace 33324
+    - DONE ...and tracing events 33189 33417 33436
+    - DONE profiling build profile 33432 book#22
     - DONE fixed excessive document title updates 33287
 - upgrades
     - stylo 2024-09-02 33370 33472
@@ -575,7 +575,17 @@ Before we can support them, though, we needed to land patches to calculate intri
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p>Servo now <strong>sends font data over shared memory</strong> (@mrobinson, #33530), saving a huge amount of time over sending font data over IPC channels.</p>
-<p>Servo now debounces resize events for <strong>faster window resizing</strong> (@simonwuelker, #33297), debounces <strong>document title updates</strong> (@simonwuelker, #33287), and now uses DirectWrite kerning info for <strong>faster text shaping on Windows</strong> (@crbrz, #33123).</p>
+<p>We now debounce resize events for <strong>faster window resizing</strong> (@simonwuelker, #33297), limit <strong>document title updates</strong> (@simonwuelker, #33287), and use DirectWrite kerning info for <strong>faster text shaping on Windows</strong> (@crbrz, #33123).</p>
+<p>Servo has a new kind of <strong>experimental profiling support</strong> that can send profiling data to <a href="https://ui.perfetto.dev">Perfetto</a> (on all platforms) and <a href="https://github.com/openharmony/hiviewdfx_hitrace">HiTrace</a> (on OpenHarmony) via <a href="https://tracing.rs"><code>tracing</code></a> (@delan, @atbrakhi, #33188, #33301, #33324), and we’ve instrumented Servo with this in several places (@atbrakhi, @delan, #33189, #33417, #33436).
+This is in addition to Servo’s existing <a href="https://book.servo.org/hacking/profiling.html#generating-timelines">HTML-trace-based profiling support</a>.</p>
+<p>We’ve also added a new <code>profiling</code> Cargo profile that builds Servo with the recommended settings for profiling (@delan, #33432).
+For more details on building Servo for profiling, benchmarking, and other perf-related use cases, check out our updated <a href="https://book.servo.org/hacking/building-servo.html#build-profiles">Building Servo</a> chapter (@delan, book#22).</p>
+<h2 id="build-times" tabindex="-1">Build times <a class="header-anchor" href="#build-times">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>The first patch towards <a href="https://github.com/servo/servo/issues/1799"><strong>splitting up our massive <code>script</code> crate</strong></a> has landed (@sagudev, #33169), over ten years since that issue was first opened.</p>
+<p><code>script</code> is the heart of the Servo rendering engine — it contains the HTML event loop plus all of our DOM APIs and their bindings to SpiderMonkey, and the script thread drives the page lifecycle from parsing to style to layout.
+<code>script</code> is also a monolith, with over 170 000 lines of hand-written Rust plus another 520 000 lines of generated Rust, and it has long dominated Servo’s build times to the point of being unwieldy, so it’s very exciting to see that we may be able to change this.</p>
 <p>Contributors to Servo can now enjoy faster <strong>self-hosted CI runners</strong> for our <strong>Linux builds</strong> (@delan, #33321, #33389), cutting a typical <strong>Linux-only build</strong> from over half an hour to <strong>under 8 minutes</strong>, and a typical <strong><a href="https://book.servo.org/contributing.html#running-tests-in-pull-requests">T-full</a> try job</strong> from over an hour to <strong>under 42 minutes</strong>.</p>
 <p>We’ve now started exploring self-hosted macOS runners (@delan, ci-runners#3), and in the meantime we’ve landed several fixes for self-hosted build failures (@delan, @sagudev, #33283, #33308, #33315, #33373, #33471, #33596).</p>
 <h2 id="beyond-the-engine" tabindex="-1">Beyond the engine <a class="header-anchor" href="#beyond-the-engine">
