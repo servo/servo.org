@@ -45,14 +45,14 @@ categories:
     - DONE better ‘border-collapse’ 33452
 - fetch
     - send Accept-Encoding with Range header 33496
-- flexbox
-    - ‘align-self: normal’ 33314
-    - cross-axis percentages in flex items 33242
-    - automatic minimum sizes 33248
-    - automatic minimum sizes ‘aspect-ratio’ 33256
-    - replaced aspect ratio 33263
-    - correct baselines 33347
-    - absolute descendants of flex containers 33346
+- DONE flexbox
+    - DONE ‘align-self: normal’ 33314
+    - DONE cross-axis percentages in flex items 33242
+    - DONE automatic minimum sizes 33248
+    - DONE automatic minimum sizes ‘aspect-ratio’ 33256
+    - DONE replaced aspect ratio 33263
+    - DONE correct baselines 33347
+    - DONE absolute descendants of flex containers 33346
 - webgpu
     - texture formats 33504
     - GPUBuffer 33154
@@ -371,6 +371,8 @@ Servo has had several new features land in our nightly builds over the last mont
 - as of 2024-09-19, we now support the **‘object-fit’** and **‘object-position’** properties (@mrobinson, @Loirooriol, #33479)
 - as of 2024-09-19, **Crypto.getRandomValues()** can now take **BigInt64Array** or **BigUint64Array** (@msub2, #33485)
 - as of 2024-09-25, we now support **innerText** and **outerText on HTMLElement** (@Melchizedek6809, #33312)
+
+Servo’s flexbox support continues to mature, with support for **‘align-self: normal’** (@Loirooriol, #33314), plus corrections to **cross-axis percent units** in descendants (@Loirooriol, #33242), **automatic minimum sizes** (@Loirooriol, #33248, #33256), **replaced flex items** (@Loirooriol, #33263), **baseline alignment** (@mrobinson, @Loirooriol, #33347), and **absolute descendants** (@mrobinson, @Loirooriol, #33346).
 
 Our table layout has improved, with support for **width** and **height presentational attributes** (@Loirooriol, #33405, #33425), as well as better handling of **‘border-collapse’** (@Loirooriol, #33452) and **extra &lt;col> and &lt;colgroup> columns** (@Loirooriol, #33451).
 
