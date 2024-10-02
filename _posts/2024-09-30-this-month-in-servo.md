@@ -39,10 +39,10 @@ categories:
     - DONE replaced aspect ratio 33240
     - DONE column flex containers 33299
     - DONE ‘white-space: nowrap’ 33343
-- tables
-    - width and height attributes on table-related elements 33405 33425
-    - better handling of extra <col> and <colgroup> 33451
-    - better ‘border-collapse’ 33452
+- DONE tables
+    - DONE width and height attributes on table-related elements 33405 33425
+    - DONE better handling of extra <col> and <colgroup> 33451
+    - DONE better ‘border-collapse’ 33452
 - fetch
     - send Accept-Encoding with Range header 33496
 - flexbox
@@ -372,7 +372,9 @@ Servo has had several new features land in our nightly builds over the last mont
 - as of 2024-09-19, **Crypto.getRandomValues()** can now take **BigInt64Array** or **BigUint64Array** (@msub2, #33485)
 - as of 2024-09-25, we now support **innerText** and **outerText on HTMLElement** (@Melchizedek6809, #33312)
 
-We’ve started working on the intrinsic sizing keywords **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** (@Loirooriol, #33492).
+Our table layout has improved, with support for **width** and **height presentational attributes** (@Loirooriol, #33405, #33425), as well as better handling of **‘border-collapse’** (@Loirooriol, #33452) and **extra &lt;col> and &lt;colgroup> columns** (@Loirooriol, #33451).
+
+We’ve also started working on the intrinsic sizing keywords **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** (@Loirooriol, #33492).
 Before we can support them, though, we needed to land patches to calculate intrinsic sizes, including for **percent units** (@Loirooriol, #33204), **aspect ratios** of replaced elements (@Loirooriol, #33240), **column flex containers** (@Loirooriol, #33299), and **‘white-space’** (@Loirooriol, #33343).
 
 ## Donations
