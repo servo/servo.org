@@ -76,16 +76,16 @@ categories:
     - back forward 33206 33511
     - ffi vsync 33117
     - webgl 33257
-- perf
+- DONE perf
     - DONE faster window resizing 33297
     - DONE faster test shaping on windows 33123
     - DONE shared memory font data 33530
-    - mach test-speedometer headless 33187 33247
-    - start(?) of splitting up script crate 33169
-    - experimental tracing support with perfetto 33188 33301
-    - ...and hitrace 33324
-    - ...and tracing events 33189 33417 33436
-    - profiling build profile 33432 book#22
+    - SKIP mach test-speedometer headless 33187 33247
+    - DONE start(?) of splitting up script crate 33169
+    - DONE experimental tracing support with perfetto 33188 33301
+    - DONE ...and hitrace 33324
+    - DONE ...and tracing events 33189 33417 33436
+    - DONE profiling build profile 33432 book#22
     - DONE fixed excessive document title updates 33287
 - upgrades
     - stylo 2024-09-02 33370 33472
@@ -384,6 +384,19 @@ Before we can support them, though, we needed to land patches to calculate intri
 Servo now **sends font data over shared memory** (@mrobinson, #33530), saving a huge amount of time over sending font data over IPC channels.
 
 We now debounce resize events for **faster window resizing** (@simonwuelker, #33297), limit **document title updates** (@simonwuelker, #33287), and use DirectWrite kerning info for **faster text shaping on Windows** (@crbrz, #33123).
+
+Servo has a new kind of **experimental profiling support** that can send profiling data to [Perfetto](https://ui.perfetto.dev) (on all platforms) and [HiTrace](https://github.com/openharmony/hiviewdfx_hitrace) (on OpenHarmony) via [`tracing`](https://tracing.rs) (@delan, @atbrakhi, #33188, #33301, #33324), and we’ve instrumented Servo with this in several places (@atbrakhi, @delan, #33189, #33417, #33436).
+This is in addition to Servo’s existing [HTML-trace-based profiling support](https://book.servo.org/hacking/profiling.html#generating-timelines).
+
+We’ve also added a new `profiling` Cargo profile that builds Servo with the recommended settings for profiling (@delan, #33432).
+For more details on building Servo for profiling, benchmarking, and other perf-related use cases, check out our updated [Building Servo](https://book.servo.org/hacking/building-servo.html#build-profiles) chapter (@delan, book#22).
+
+## Build times
+
+The first patch towards [**splitting up our massive `script` crate**](https://github.com/servo/servo/issues/1799) has landed (@sagudev, #33169), over ten years since that issue was first opened.
+
+`script` is the heart of the Servo rendering engine — it contains the HTML event loop plus all of our DOM APIs and their bindings to SpiderMonkey, and the script thread drives the page lifecycle from parsing to style to layout.
+`script` is also a monolith, with over 170 000 lines of hand-written Rust plus another 520 000 lines of generated Rust, and it has long dominated Servo’s build times to the point of being unwieldy, so it’s very exciting to see that we may be able to change this.
 
 Contributors to Servo can now enjoy faster **self-hosted CI runners** for our **Linux builds** (@delan, #33321, #33389), cutting a typical **Linux-only build** from over half an hour to **under 8 minutes**, and a typical **[T-full](https://book.servo.org/contributing.html#running-tests-in-pull-requests) try job** from over an hour to **under 42 minutes**.
 
