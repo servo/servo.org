@@ -361,7 +361,10 @@ this month:
     7fdaccde5501283708503e9a64efa578ac9ae7f7	https://github.com/servo/servo/pull/33512	ohos: Support product flavors (#33512)
 -->
 
-Servo has had several new features land in our nightly builds over the last month:
+<figure class="_figr"><a href="{{ '/img/blog/september-2024.png' | url }}"><img src="{{ '/img/blog/september-2024.png' | url }}"
+    alt="Servo nightly showing new support for <ul type>, right-to-left layout, ‘table-layout: fixed’, ‘object-fit’, ‘object-position’, crypto.getRandomValues(BigInt64Array) and (BigUint64Array), and innerText and outerText"></a></figure>
+
+<span class=_floatmin></span>Servo has had several new features land in our nightly builds over the last month:
 
 - as of 2024-09-10, we now support **&lt;ul type>** and **&lt;ul compact>** (@simonwuelker, #33303)
 - as of 2024-09-10, we now support **console.timeLog()** (@simonwuelker, #33377)
@@ -407,7 +410,13 @@ Contributors to Servo can now enjoy faster **self-hosted CI runners** for our **
 
 We’ve now started exploring self-hosted macOS runners (@delan, ci-runners#3), and in the meantime we’ve landed several fixes for self-hosted build failures (@delan, @sagudev, #33283, #33308, #33315, #33373, #33471, #33596).
 
-## Beyond the engine
+<figure class="_figl"><a href="{{ '/img/blog/servoshell-tabs-september-2024.png' | url }}"><img src="{{ '/img/blog/servoshell-tabs-september-2024.png' | url }}"
+    alt="servoshell on desktop with improved tabbed browsing UI"></a></figure>
+
+<figure class="_figl" style="clear: left;"><a href="{{ '/img/blog/servoshell-android-september-2024.png' | url }}"><img src="{{ '/img/blog/servoshell-android-september-2024.png' | url }}"
+    alt="servoshell on Android with new navigation UI"></a></figure>
+
+## <span class=_floatmin></span>Beyond the engine
 
 You can now **download [the Servo browser](https://book.servo.org/running-servoshell.html) for Android** on [servo.org](https://servo.org) (@mukilan, #33435)!
 servoshell now **supports gamepads by default** (@msub2, #33466), **builds for OpenHarmony** (@mukilan, #33295), and has **better navigation on Android** (@msub2, #33294).
