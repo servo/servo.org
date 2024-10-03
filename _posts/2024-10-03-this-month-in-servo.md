@@ -59,7 +59,7 @@ We’ve now started exploring self-hosted macOS runners ([@delan](https://github
 <figure class="_figl"><a href="{{ '/img/blog/servoshell-tabs-september-2024.png' | url }}"><img src="{{ '/img/blog/servoshell-tabs-september-2024.png' | url }}"
     alt="servoshell on desktop with improved tabbed browsing UI"></a></figure>
 
-<figure class="_figl" style="clear: left;"><a href="{{ '/img/blog/servoshell-android-september-2024.png' | url }}"><img src="{{ '/img/blog/servoshell-android-september-2024.png' | url }}"
+<figure class="_figl" style="clear: left;"><a href="{{ '/img/blog/servoshell-android-september-2024-full.png' | url }}"><img src="{{ '/img/blog/servoshell-android-september-2024.png' | url }}"
     alt="servoshell on Android with new navigation UI"></a></figure>
 
 ## <span class=_floatmin></span>Beyond the engine
