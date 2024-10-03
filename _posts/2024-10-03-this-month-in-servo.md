@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
-date:       2024-09-30
-summary:    ao!! wrrrrao!!
+title:      "This month in Servo: Android nightlies, right-to-left, WebGPU, and more!"
+date:       2024-10-03
+summary:    Servo builds faster, runs faster, and gamepads are now enabled by default.
 categories:
 ---
 
