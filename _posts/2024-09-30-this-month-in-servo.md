@@ -381,7 +381,8 @@ Our table layout has improved, with support for **width** and **height presentat
 We’ve also started working on the intrinsic sizing keywords **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** (@Loirooriol, #33492).
 Before we can support them, though, we needed to land patches to calculate intrinsic sizes, including for **percent units** (@Loirooriol, #33204), **aspect ratios** of replaced elements (@Loirooriol, #33240), **column flex containers** (@Loirooriol, #33299), and **‘white-space’** (@Loirooriol, #33343).
 
-We’ve heavily reworked our **WebGPU support**, with **faster canvas presentation** (@sagudev, #33387), support for **resizing the canvas** (@sagudev, #33521) and the **‘constants’ property on GPUProgrammableStage** (@sagudev, #33291), plus improvements to **GPUBuffer** (@sagudev, #33154) and the **destroy() method on GPUTexture** (@sagudev, #33534).
+We’ve also worked on our **WebGPU support**, with support for **pipeline-overridable constants** (@sagudev, #33291), and major rework to **GPUBuffer** (@sagudev, #33154) and our **canvas presentation** (@sagudev, #33387).
+As a result, **GPUCanvasContext** now properly supports (re)configuration and resize on **GPUCanvasContext** (@sagudev, #33521), presentation is now faster, and both are now more conformant with the spec.
 
 ## Performance and reliability
 
