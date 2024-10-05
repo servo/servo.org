@@ -16,5 +16,5 @@ if [ "$(git -C "$1" log --pretty=\%D -n 1 "$3")" = grafted ]; then
     exit 1
 fi
 
-git -C "$1" log --pretty=$'tformat:%H\t%s' "$2".."$3" \
+git -C "$1" log --pretty=$'tformat:%H\t%s\t%(trailers:key=co-authored-by,valueonly,separator=%x09)' "$2".."$3" \
 | sed -E 's@([^\t]+)\t(.*[(]#([^)]+)[)].*)@\1\thttps://github.com/servo/servo/pull/\3\t\2@'
