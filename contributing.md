@@ -15,7 +15,7 @@ You can search for and/or report any issues you run into on the [GitHub issue tr
 
 * Ask questions in [Servo Zulip chat](https://servo.zulipchat.com/)
 * Start a discussion on [GitHub](https://github.com/servo/servo/discussions)
-* Tag us on [Mastodon](https://floss.social/@servo) and [Twitter](https://twitter.com/ServoDev)
+* Tag us on [Mastodon](https://floss.social/@servo), [Bluesky](https://bsky.app/profile/servo.org) and [Twitter](https://twitter.com/ServoDev)
 * Contact us via email at <info@servo.org>
 
 ## Collaborators

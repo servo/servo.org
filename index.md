@@ -12,6 +12,7 @@ title: Home
 * GitHub discussions: <https://github.com/servo/servo/discussions>
 * Email: <info@servo.org>
 * Mastodon: <https://floss.social/@servo>
+* Bluesky: <https://bsky.app/profile/servo.org>
 * Twitter: <https://twitter.com/ServoDev>
 
   </div>
