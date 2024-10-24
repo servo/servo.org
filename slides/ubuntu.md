@@ -70,9 +70,10 @@ Rakhi Sharma (She/her) <atbrakhi@igalia.com>
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-Rust and Servo at Mozilla Research
+2012: Rust and Servo Team at Mozilla Research
 
- < insert handsake gif >
+
+ <iframe src="https://giphy.com/embed/ru7IH0oTmfIK6tRTId" width="480" height="398" style="display: block; margin: auto;" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 
 <div style="float: left; width: 30%; margin-inline: 3%;">
 -----
@@ -82,14 +83,14 @@ Rust and Servo at Mozilla Research
 ## Contributions over time
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-<img src="/img/github-2024-09.png" style="padding: 1em 0.5em; background: white; height: 300px;" alt="Contributors graph from https://github.com/servo/servo/graphs/contributors showing a very slow period from mid-2020 to end of 2023, and a bigger activity in 2023 & 2024." />
+<img src="/img/commit-numbers-ubuntu-summit.png" alt="Contributors graph from https://github.com/servo/servo/graphs/contributors showing a very slow period from mid-2020 to end of 2023, and a bigger activity in 2023 & 2024." />
 
 <div style="font-size: 80%; margin-inline: -3.5em; margin-top: 1.5em;">
 
 -----
 <!-- .slide: style="text-align: left;" -->
 
-## What are we upto?
+## What are we up to?
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
@@ -186,10 +187,16 @@ Use Stylo for CSS styles and selectors matching
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-* Flexbox, parllel table, Floats < insert images showcasing different fonts >
-* Right-to-left languages Support < RTL image >
+* Flexbox, parllel table, Floats, Font Fallback
+* Right-to-left languages Support
 
-<div style="float: left; width: 30%; margin-inline: 3%;">
+
+<div style="float: left; margin-left: 1em;">
+<div style="float: left; margin-left: 1em;">
+  <img style="width: 9em; height:11em; margin: 0;" src="/img/blog/features-august-2024.png" alt="Example of Servo rendering arebic wikipedia, showcasing current RLT languages support" />
+  <img style="width: 9em;  height:11em; margin: 0;" src="/img/blog/font-fallback.png" alt="Example of Servo rendering chinese, korean and japanese characters" />
+</div>
+</div>
 
 -----
 
@@ -199,8 +206,9 @@ Use Stylo for CSS styles and selectors matching
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
 * New experimental profiling support
-* Tracing perfetto   < insert image of demo website and the benchmark mesaurements >
-* Servo Benchmarking report on Servo wiki: https://github.com/servo/servo/wiki  < insert image of running the demo and the benchmark mesaurements >
+* Servo Benchmarking report on Servo wiki: https://github.com/servo/servo/wiki
+
+<img src="/img/trace-twgl.jpg" alt="Screenshot of servo's demo benchmarking using tracing perfetto" />
 
 <div style="float: left; width: 30%; margin-inline: 3%;">
 -----
@@ -255,9 +263,7 @@ OpenHarmony
 * Growing a **healthy ecosystem**
 * Multiple organizations  **joining efforts**
 * Public and private sector **funding**
-* OpenHarmony, Benchmarking, CSS Layout
-
-<img src="/img/2024-04-16-OSS-NA-2024-roadmap.png" alt="Servo’s roadmap for 2024" />
+* Performance, Benchmarking, HTML & CSS features
 
 </div>
 <div style="float: left; width: 30%;">
