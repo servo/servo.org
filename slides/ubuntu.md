@@ -193,7 +193,7 @@ Use Stylo for CSS styles and selectors matching
 
 <div style="float: left; margin-left: 1em;">
 <div style="float: left; margin-left: 1em;">
-  <img style="width: 9em; height:11em; margin: 0;" src="/img/blog/features-august-2024.png" alt="Example of Servo rendering arebic wikipedia, showcasing current RLT languages support" />
+  <img style="width: 9em; height:11em; margin: 0;" src="/img/blog/features-august-2024.png" alt="Example of Servo rendering a table using flexbox" />
   <img style="width: 9em;  height:11em; margin: 0;" src="/img/blog/font-fallback.png" alt="Example of Servo rendering chinese, korean and japanese characters" />
 </div>
 </div>
