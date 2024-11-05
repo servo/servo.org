@@ -203,10 +203,13 @@
   <!--
 - wpt <https://wpt.servo.org>
     - 2024-11-04 60% on all of wpt?
+    - 2024-10-31 enabled css-grid tests 34052
 - api features
     - 2024-10-09 `crypto.subtle.generateKey("AES-CBC")` 33628
     - 2024-10-11 toString() method on DOMMatrix and DOMMatrixReadOnly 33792
     - 2024-10-16 fetch metadata headers (‘Sec-Fetch-Site’, ‘Sec-Fetch-Mode’, ‘Sec-Fetch-User’, ‘Sec-Fetch-Dest’) 33830
+    - 2024-10-18 non-ASCII characters in <img srcset> 33873
+    - 2024-10-22 `crypto.subtle.encrypt()` and `decrypt()` for AES-CBC 33795
     - 2024-10-23 `crypto.subtle.generateKey("AES-CTR")` 33963
     - 2024-10-25 ‘transition-behavior: allow-discrete’ 33991
     - 2024-10-27 ‘transition: allow-discrete’ 34005
@@ -222,7 +225,7 @@
         - 2024-10-27 intrinsic contributions 33854
     - flex container intrinsic size with inline margins 33780
     - cyclic percentages in ‘min-width’ and ‘min-height’ 33988
-    - video intrinsic size 31746
+    - video intrinsic size 31746 34069
     - fixed ‘text-wrap-mode: nowrap’ 33848
 - fonts
     - async FontKey and FontInstanceKey 33600
@@ -238,12 +241,13 @@
 - architecture
     - single cross-process compositor api 33619 33660 33817
     - start of gl bindings unification surfman#318 webxr#248 33538 33910 33911
-- servoshell
+- servoshell and embedding
     - servoshell avoid unnecessary redraws 34008
     - servoshell drop --no-minibrowser code path 33677
     - smoother scrolling on macOS (or hidpi?) systems 34063
     - new `--screen-size` option (and `--resolution` is now `--window-size`) 34038
     - location bar updates for redirects (for other embedders too) 34004
+    - embedder-provided resources are now documented 33885
 - upgrades
     - stylo 2024-09-02 → 2024-10-04 33767
 - webgpu
@@ -259,6 +263,7 @@
     - glwindow webxr session crashes on macos 33962
     - gc borrow hazards 33857 33875 33904 33929 33942 33976 34019 34020 33965 33937
     - replaced layout 34006
+    - es modules 33938
 - outreachy
     - clippy 31500
     - cangc 33683 33684
@@ -492,23 +497,23 @@ bd8006afc5b29530bc4eb1d310490a345b8283fc	https://github.com/servo/servo/pull/338
     0a71c736f08fafb68d453133379dcc458fe4ac85	https://github.com/servo/servo/pull/33849	clippy: fix clippy warnings in `components/script` (#33849)	
     30abb99287790c2653821cc469ecd891b89ab57c	https://github.com/servo/servo/pull/33748	clippy: Add safety documentation and clean up unsafe methods (#33748)	
 >>> 2024-10-18T06:07:54Z
-41fd39a128134228e9bf66ffbc6e24fb4063b711	https://github.com/servo/servo/pull/33885	doc(resources): Add documentation to undocumented `embedder_traits::resources::Resource` variants (#33885)	Josh Matthews <josh@joshmatthews.net>
++   41fd39a128134228e9bf66ffbc6e24fb4063b711	https://github.com/servo/servo/pull/33885	doc(resources): Add documentation to undocumented `embedder_traits::resources::Resource` variants (#33885)	Josh Matthews <josh@joshmatthews.net>
     f826698d6e5483f18d13a9f104e0645ee31bb8d9	https://github.com/servo/servo/pull/33891	CanGc fixes in components/script/dom (#33891)	
     9c893c7f4def4ffa635587ea85d5e4c3ba6ecac3	https://github.com/servo/servo/pull/33888	More CanGc fixes (#33888)	
     720d6321707722062647914885e398d4eb1e53c9	https://github.com/servo/servo/pull/33889	build(deps): bump serde_json from 1.0.128 to 1.0.129 (#33889)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     f6a77b905f36958688a3885094fdca02cb5e3815	https://github.com/servo/servo/pull/33886	build(deps): bump rustfix from 0.8.5 to 0.8.6 (#33886)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     781a9613798e567a157ea16244a8147c5b4ed3db	https://github.com/servo/servo/pull/33884	build(deps): bump libc from 0.2.159 to 0.2.160 (#33884)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-4a58616770214ead82da015f375fc5df59ad648c	https://github.com/servo/servo/pull/33882	Fix type mismatches in Router::add_route calls (#33882)	
+    4a58616770214ead82da015f375fc5df59ad648c	https://github.com/servo/servo/pull/33882	Fix type mismatches in Router::add_route calls (#33882)	
     595aab10dccb3603bf60ff25eb45c4715a75ecb9	https://github.com/servo/servo/pull/33878	fix clippy warning in components/script (#33878)	
     cd7b66be58e289faa5a605856500bb1ebd0773bf	https://github.com/servo/servo/pull/33880	CanGc fixes in components/script/dom (#33880)	
-72ff89620bbcc03b1534a092f65e526909df3a4a	https://github.com/servo/servo/pull/33873	Handle multibyte characters in img srcset (#33873)	
++   72ff89620bbcc03b1534a092f65e526909df3a4a	https://github.com/servo/servo/pull/33873	Handle multibyte characters in img srcset (#33873)	
     2d796a27192c86e03cde078a506a0a8c07ca41b6	https://github.com/servo/servo/pull/33868	build(deps): bump uuid from 1.10.0 to 1.11.0 (#33868)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 >>> 2024-10-19T06:08:05Z
 +   a008b6fc73fa0ad36686aa1a523defee07191e84	https://github.com/servo/servo/pull/33875	Fix GC borrow hazard in ResizeObserver::broadcast_active_resize_observations (#33875)	
-73880ee1d0659ffa097a28a6314ef2826db0e30f	https://github.com/servo/servo/pull/33907	Remove BoxFragment::overconstrained (#33907)	
-09fc988d3ab00c54abaaa95ac12d081502ea63d8	https://github.com/servo/servo/pull/33906	Fix resolved value of insets to use margin box instead of content box (#33906)	
+    73880ee1d0659ffa097a28a6314ef2826db0e30f	https://github.com/servo/servo/pull/33907	Remove BoxFragment::overconstrained (#33907)	
+    09fc988d3ab00c54abaaa95ac12d081502ea63d8	https://github.com/servo/servo/pull/33906	Fix resolved value of insets to use margin box instead of content box (#33906)	
     e667d2fa1b9650b2574bf5da481665c3858cd3ec	https://github.com/servo/servo/pull/33905	build(deps): bump serde_json from 1.0.129 to 1.0.130 (#33905)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-70845698f241f634badb9d2482535123edc3b58e	https://github.com/servo/servo/pull/33846	update test expectations for update-rendering (#33846)	
+    70845698f241f634badb9d2482535123edc3b58e	https://github.com/servo/servo/pull/33846	update test expectations for update-rendering (#33846)	
     b85093ad7461122447298d91acd19040c31c42a9	https://github.com/servo/servo/pull/33902	Prevent moving CanGc values between threads/tasks (#33902)	
 +   a58da5aa832a67c827021592fe0397a532491c4c	https://github.com/servo/servo/pull/33538	Update to surfman&webxr without sparkle and use glow 0.15 (#33538)	
     f73ae0414bd7381c5a97b141c706a76634d142fc	https://github.com/servo/servo/pull/33901	build(deps): bump anyhow from 1.0.89 to 1.0.90 (#33901)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -518,7 +523,7 @@ bd8006afc5b29530bc4eb1d310490a345b8283fc	https://github.com/servo/servo/pull/338
     af6154cf630bd498f8b5afbd8a321eb4a45463b6	https://github.com/servo/servo/pull/33892	More files with CanGc fixes (#33892)	
     fde8d72acabb6f8314efe0e66312c02a488a7613	https://github.com/servo/servo/pull/33893	Various CanGc fixes in 8 files (#33893)	
     6b87ecc291b08559cd2bbda8e4902f70a0fd0c7c	https://github.com/servo/servo/pull/33895	Some CanGc fixes in components/script/dom (#33895)	
-e33bae6d0a172de3e652b9b515bda97c6c4f5af2	https://github.com/servo/servo/pull/33866	Use `ROUTER::add_typed_route` instead of `ROUTER::add_route` everywhere (#33866)	
+    e33bae6d0a172de3e652b9b515bda97c6c4f5af2	https://github.com/servo/servo/pull/33866	Use `ROUTER::add_typed_route` instead of `ROUTER::add_route` everywhere (#33866)	
     ff374c1428bbcca76c9ba6f565e7e5ccdbf4fc10	https://github.com/servo/servo/pull/33881	clippy: Rename `RequestId::new()` to `RequestId::next()` and fix one more issue in `servo/lib.rs` (#33881)	
     14cfcda3b3dc8a0421b9dcc5bca8b93a91734bad	https://github.com/servo/servo/pull/33890	build(deps): bump orbclient from 0.3.47 to 0.3.48 (#33890)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>	Mukilan Thiyagarajan <mukilan@igalia.com>
 >>> 2024-10-20T06:08:59Z
@@ -551,11 +556,11 @@ e33bae6d0a172de3e652b9b515bda97c6c4f5af2	https://github.com/servo/servo/pull/338
     66695d2f7ee25782d3edfca32b74ff14bc9faa84	https://github.com/servo/servo/pull/33943	clippy: Fix warnings in subtlecrypto.rs (#33943)	
     2319764a1eaa1a3e15a2a393e5570afe4cffbca1	https://github.com/servo/servo/pull/33922	Refactor positioned layout (#33922)	
     fee927475b6bd13e80a4bdc1712cb3aa04805099	https://github.com/servo/servo/pull/33939	Remove some unused preferences (#33939)	
-45267c9f280708d1af1d60cb1bc3fad4cd71157d	https://github.com/servo/servo/pull/33795	crypto: Implement encrypt/decrypt for AES-CBC + JWK support (#33795)	
++   45267c9f280708d1af1d60cb1bc3fad4cd71157d	https://github.com/servo/servo/pull/33795	crypto: Implement encrypt/decrypt for AES-CBC + JWK support (#33795)	
     397c5adf79dd278d70d27d80cd6deccea2d97bc8	https://github.com/servo/servo/pull/33936	clippy: fix explicit lifetime warning in components\layout_2020\style_ext.rs:320:20 (#33936)	
     c550a70f5c4feda7a1fef22a73038a3e887a5c7f	https://github.com/servo/servo/pull/33935	clippy: fix using clone() warning in components\layout_2020\display_list\mod.rs:1365:25 (#33935)	
 >>> 2024-10-23T06:15:56Z
-6fdd5ce4cb97579991aeb59d20adc9af941c84e2	https://github.com/servo/servo/pull/33938	Ensure compiled script module object remains rooted while it's being passed around. (#33938)	
++   6fdd5ce4cb97579991aeb59d20adc9af941c84e2	https://github.com/servo/servo/pull/33938	Ensure compiled script module object remains rooted while it's being passed around. (#33938)	
     7fbd2a521ee8ec6b21dd67e462da25883ecccabf	https://github.com/servo/servo/pull/33973	CanGc fixes from eventtarget.rs (#33973)	
 +   7b392db02f96fa5f3663c5c9d29eed988efe0030	https://github.com/servo/servo/pull/33963	crypto: Add support for AES-CTR operations (#33963)	
 +   1c26c0335e49761a25167e118a10265b17632690	https://github.com/servo/servo/pull/33950	Implement keyword sizes on absolute/fixed positioned elements (#33950)	
@@ -619,7 +624,7 @@ e33bae6d0a172de3e652b9b515bda97c6c4f5af2	https://github.com/servo/servo/pull/338
     20ce979c4c9669e1cde270afe8fd72aaa7eda9a4	https://github.com/servo/servo/pull/34030	Update some dependencies (#34030)	
 >>> 2024-10-29T06:08:16Z
     a501572971d7ec6761aeab1f8f5dba00158bc1a6	https://github.com/servo/servo/pull/34045	build(deps): bump hilog from 0.1.0 to 0.1.1 (#34045)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-1070f7ac12b0d46c71071a604649c0bfca375f5e	https://github.com/servo/servo/pull/34018	Fix invalid rooting for PropertyDescriptor (#34018)	
+    1070f7ac12b0d46c71071a604649c0bfca375f5e	https://github.com/servo/servo/pull/34018	Fix invalid rooting for PropertyDescriptor (#34018)	
 +   884732dfb25ab8969234c1ec1ef2009b93517974	https://github.com/servo/servo/pull/34048	mach try: Remove `wpt-2013` from `full` and `wpt` (#34048)	
     d3e0efbc21cc4480a4779be36c8a4268e3939cbc	https://github.com/servo/servo/pull/34039	Cleanup: Remove reference to closed issue 7193 (#34039)	
     83cd349163f1599b0dce7ec89f5225f242378618	https://github.com/servo/servo/pull/34047	build(deps): bump libm from 0.2.8 to 0.2.10 (#34047)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -627,9 +632,9 @@ e33bae6d0a172de3e652b9b515bda97c6c4f5af2	https://github.com/servo/servo/pull/338
     7374f20537923e251fdfdfe25ba28e98599bc4ae	https://github.com/servo/servo/pull/34043	build(deps): bump napi-derive-backend-ohos from 1.0.0 to 1.0.1 (#34043)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     8f01f1710c231e8fa9f90c152e7bfab43b5634ff	https://github.com/servo/servo/pull/34042	build(deps): bump fdeflate from 0.3.5 to 0.3.6 (#34042)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     56de90a499c448be4bf3704e29ed1a116134af18	https://github.com/servo/servo/pull/34041	build(deps): bump rustix from 0.38.37 to 0.38.38 (#34041)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-216296840ae30060c3e4d16156f5bd30ef9576e8	https://github.com/servo/servo/pull/34036	Replace uses of SCRIPT_THREAD_ROOT with accessor helpers. (#34036)	
+    216296840ae30060c3e4d16156f5bd30ef9576e8	https://github.com/servo/servo/pull/34036	Replace uses of SCRIPT_THREAD_ROOT with accessor helpers. (#34036)	
 +   1d6ede7b4868c5bd3ea821e0afd5df0bb99911cd	https://github.com/servo/servo/pull/33965	Remove GC hazard when compiling inline event listeners. (#33965)	
-a01d66df5388d11aeb6dbd8ac9ccc84302d394bb	https://github.com/servo/servo/pull/34028	webgpu: Move supported context format to content timeline (#34028)	
+    a01d66df5388d11aeb6dbd8ac9ccc84302d394bb	https://github.com/servo/servo/pull/34028	webgpu: Move supported context format to content timeline (#34028)	
 >>> 2024-10-30T07:43:54Z
     bac1101163a436096fe0b71bed79094658bba3b2	https://github.com/servo/servo/pull/34062	Fix CMake issues on OpenHarmony (#34062)	
 +   7fa548f555310cf4e60ad054f6577fabf57938e0	https://github.com/servo/servo/pull/34034	Implement `SubtleCrypto.digest` (#34034)	
@@ -646,10 +651,10 @@ a01d66df5388d11aeb6dbd8ac9ccc84302d394bb	https://github.com/servo/servo/pull/340
 cf663309782c95166ac56a481c7bde9483284e5f	https://github.com/servo/servo/pull/34072	Fix `test-speedometer` (#34072)	
 +   ade562e4810c534b3dc8189cb60868819d7ee888	https://github.com/servo/servo/pull/34073	Update wgpu to v23 (#34073)	
 +   78ba1613d4b4323c3db4e786ae2c4ae19ba201d8	https://github.com/servo/servo/pull/34063	Improve scrolling speed in servoshell. (#34063)	
-635c10a941a960eb2c54938adbdeea75cc66cba7	https://github.com/servo/servo/pull/34052	Enable css-grid WPT tests (#34052)	
++   635c10a941a960eb2c54938adbdeea75cc66cba7	https://github.com/servo/servo/pull/34052	Enable css-grid WPT tests (#34052)	
 1891c5cfafe5e589d6bf828deb8ea1ad14f70f61	https://github.com/servo/servo/pull/34026	Properly transfer min/max constraints on auto-sized replaced elements (#34026)	
     f12071f77eef0612c16c0f297c29e95929218576	https://github.com/servo/servo/pull/34070	andrdoid: Fix some compiler warnings (#34070)	
-517e8a376ab1d1b7d2bf6c4d8cf0e738101b57cb	https://github.com/servo/servo/pull/34069	Test <video> with width and height attributes but aspect-ratio:auto (#34069)	
++   517e8a376ab1d1b7d2bf6c4d8cf0e738101b57cb	https://github.com/servo/servo/pull/34069	Test <video> with width and height attributes but aspect-ratio:auto (#34069)	
 +   850e59f98ec49dfc72ea9b71f8db7b6292f28d12	https://github.com/servo/servo/pull/34038	servoshell: Allow overriding screen resolution with a command-line argument (#34038)	
     d877962ee8a5003b0a6eec9fb3d16f1b759a9f9e	https://github.com/servo/servo/pull/34067	readme: Fix typos in Android build instructions (#34067)	
 +   ee68dc2589283d9ef37b578b83258d421ec29bcc	https://github.com/servo/servo/pull/33919	Support persisting unminified external stylesheets (#33919)	
