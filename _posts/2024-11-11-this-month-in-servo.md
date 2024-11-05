@@ -13,6 +13,7 @@ categories:
 - api features
     - 2024-10-09 `crypto.subtle.generateKey("AES-CBC")` 33628
     - 2024-10-11 toString() method on DOMMatrix and DOMMatrixReadOnly 33792
+    - 2024-10-16 fetch metadata headers (‘Sec-Fetch-Site’, ‘Sec-Fetch-Mode’, ‘Sec-Fetch-User’, ‘Sec-Fetch-Dest’) 33830
     - 2024-10-23 `crypto.subtle.generateKey("AES-CTR")` 33963
     - 2024-10-25 ‘transition-behavior: allow-discrete’ 33991
     - 2024-10-27 ‘transition: allow-discrete’ 34005
@@ -29,16 +30,20 @@ categories:
     - flex container intrinsic size with inline margins 33780
     - cyclic percentages in ‘min-width’ and ‘min-height’ 33988
     - video intrinsic size 31746
+    - fixed ‘text-wrap-mode: nowrap’ 33848
 - fonts
     - async FontKey and FontInstanceKey 33600
     - first font instance creation 33638
     - memory mapping system fonts on macOS and freetype platforms 33747 mukilan
 - perf
+    - single fetch thread, fixing most errors due to too many file descriptors 33863
     - unmultiply_inplace 33553 33584 33582
     - flexbox layout tracing 33647
     - flexbox caching to avoid unnecessary layouts 33964 33967
+    - avoid recomputing sizes when not using vertical percentages or stretching vertically 33806
+    - fixed log spam when not using experimental `--features tracing` 33845
 - architecture
-    - single cross-process compositor api 33619 33660
+    - single cross-process compositor api 33619 33660 33817
 - servoshell
     - servoshell avoid unnecessary redraws 34008
     - servoshell drop --no-minibrowser code path 33677
@@ -54,6 +59,7 @@ categories:
 - crashes
     - glwindow webxr session crashes on macos 33962
     - gc borrow hazards 33857 33875 33904 33929 33942 33976 34019 34020 33965
+    - replaced layout 34006
 - outreachy
     - clippy 31500
     - cangc 33683 33684
@@ -254,36 +260,36 @@ bd8006afc5b29530bc4eb1d310490a345b8283fc	https://github.com/servo/servo/pull/338
     f6ebb8eaf1e12af4623e903de39e6ddebb4c7757	https://github.com/servo/servo/pull/33839	build(deps): bump bytemuck from 1.18.0 to 1.19.0 (#33839)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     223e01ed9ea3036542cfc54722119b6e7929b158	https://github.com/servo/servo/pull/33838	build(deps): bump wasm-bindgen-futures from 0.4.43 to 0.4.45 (#33838)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     aedad3272652efe8b2a6f76a046fb2398874c033	https://github.com/servo/servo/pull/33837	build(deps): bump async-compression from 0.4.14 to 0.4.15 (#33837)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-b9ed45942d7b22d658955e9bcdd3db0bad1bba99	https://github.com/servo/servo/pull/33806	Avoid recomputing inline_content_sizes() when not needed (#33806)	Martin Robinson <mrobinson@igalia.com>
-821bed1d11c289dfd14026f4edb431a223c9e4d6	https://github.com/servo/servo/pull/33817	Fix headless mode on Windows (#33817)	
-9508b83af6589d661de620dabb6c2bd08c453325	https://github.com/servo/servo/pull/33480	fix intermittency of child-document-raf-order test (#33480)	
++   b9ed45942d7b22d658955e9bcdd3db0bad1bba99	https://github.com/servo/servo/pull/33806	Avoid recomputing inline_content_sizes() when not needed (#33806)	Martin Robinson <mrobinson@igalia.com>
++   821bed1d11c289dfd14026f4edb431a223c9e4d6	https://github.com/servo/servo/pull/33817	Fix headless mode on Windows (#33817)	
+    9508b83af6589d661de620dabb6c2bd08c453325	https://github.com/servo/servo/pull/33480	fix intermittency of child-document-raf-order test (#33480)	
     cfd15dd14df2e8e6374e25c0a579be0404dbb28b	https://github.com/servo/servo/pull/33828	CanGc fixes originating from `gamepadevent.rs` & `stereopannernode.rs` (#33828)	
     2322b22a6bb62b73fe283e52265af6fbe67d2751	https://github.com/servo/servo/pull/33834	CI: temporarily disable self-hosted runners for nightly.yml (#33834)	
     0d3fad156a026c1e3f8595361faa71cf4295cd9a	https://github.com/servo/servo/pull/33833	Add python3-setuptools to ubuntu apt install line (#33833)	
 >>> 2024-10-16T06:08:12Z
-ed959d7a1a2a584803f689ce8d92f7d0c3c0d48b	https://github.com/servo/servo/pull/33830	Implement fetch metadata headers (#33830)	
++   ed959d7a1a2a584803f689ce8d92f7d0c3c0d48b	https://github.com/servo/servo/pull/33830	Implement fetch metadata headers (#33830)	
     a2f81d69c1971f07c2af8633756953ddd70a1bb5	https://github.com/servo/servo/pull/33852	CanGc fixes (#33852)	
     5b8fbb023dfba890c7744e826a077776516131c6	https://github.com/servo/servo/pull/33850	build(deps): bump rustversion from 1.0.17 to 1.0.18 (#33850)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-564478ef0da52d98d93fd6acf2526f9ece9b107f	https://github.com/servo/servo/pull/33844	Remove SizeKeyword, merge it into Size (#33844)	
+    564478ef0da52d98d93fd6acf2526f9ece9b107f	https://github.com/servo/servo/pull/33844	Remove SizeKeyword, merge it into Size (#33844)	
     c37fb2e45300a58e97fcc7d2f00ecf7db1f0fc72	https://github.com/servo/servo/pull/33835	clippy: Fix `type_complexity` warning in `components/script/dom` (#33835)	
     b088a8b8f1aa6f42bdb9061ec58a30249149e7ec	https://github.com/servo/servo/pull/33840	Fix Clippy warning: remove unneeded late initialization of string (#33840)	
     46d6c0c883750de2f57bba8da3eb199b01a9761f	https://github.com/servo/servo/pull/33843	CanGc fixes in components/script/dom (#33843)	
     1e39787573e180801ed70c3f708ebb22631eeeb9	https://github.com/servo/servo/pull/33836	CanGc fixes and checks in multiple files (#33836)	
 >>> 2024-10-17T06:10:55Z
-fc569260d201dd947aff1d9aa2e824c95fa26f2a	https://github.com/servo/servo/pull/33874	ci: Fix the WPT export job again by removing `--break-system-packages` (#33874)	
+    fc569260d201dd947aff1d9aa2e824c95fa26f2a	https://github.com/servo/servo/pull/33874	ci: Fix the WPT export job again by removing `--break-system-packages` (#33874)	
     066d3103bb82c75d6a50138aa5564e1ff9aca468	https://github.com/servo/servo/pull/33870	build(deps): bump async-compression from 0.4.15 to 0.4.16 (#33870)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     133c763e650a60928c288b379cec2e30c142c489	https://github.com/servo/servo/pull/33869	build(deps): bump napi-derive-ohos from 0.0.9 to 1.0.0 (#33869)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     ccac50fc91e61c36698c97beacde8138dfd3de7c	https://github.com/servo/servo/pull/33867	build(deps): bump proc-macro2 from 1.0.87 to 1.0.88 (#33867)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-036e74524a72920ffca6deb4d6a850cf04b31736	https://github.com/servo/servo/pull/33863	net: Start reducing number of IPCs channels used for fetch with a `FetchThread` (#33863)	
++   036e74524a72920ffca6deb4d6a850cf04b31736	https://github.com/servo/servo/pull/33863	net: Start reducing number of IPCs channels used for fetch with a `FetchThread` (#33863)	
 21152673282b7ac03cee5d97d46fe368b379a297	https://github.com/servo/servo/pull/33731	Add missing XRWebGLBinding constructor spec steps (#33731)	
     cde6931f4bcb6832d3fbd37c3930b63e759cc279	https://github.com/servo/servo/pull/33860	clippy: Fix warnings in `components/script/dom` (#33860)	
     a646c850c6f7dcaf64ad286342b654ffdbebd274	https://github.com/servo/servo/pull/33853	clippy: Fix warnings in `components/script/dom` & `components/servo` (#33853)	Mukilan Thiyagarajan <mukilan@igalia.com>
     b0a33d6b0212be325f3c5551869be80904c24892	https://github.com/servo/servo/pull/33865	Some CanGc Fixes (#33865)	
     2b9527262c5700473af6fb2b193f84596bedc0de	https://github.com/servo/servo/pull/33862	CanGc fixes in components/script/dom (#33862)	
-5148b444be5490d0fd9123d7248216856efd568d	https://github.com/servo/servo/pull/33861	Minor cleanup for `Size` after #33844 (#33861)	
+    5148b444be5490d0fd9123d7248216856efd568d	https://github.com/servo/servo/pull/33861	Minor cleanup for `Size` after #33844 (#33861)	
 +   2e0fbfcb951c570cd7fa6f65b9b1c659dc4fba9c	https://github.com/servo/servo/pull/33857	Fix GC borrow hazard in XRInputSourceArray (#33857)	
-fa1f7e5839a35019d5ac2f105a45b555292b74fd	https://github.com/servo/servo/pull/33845	Gate all use of `tracing` behind Cargo feature (#33845)	
-103d3aa7bb6341957c31a1aae4f925068e39e951	https://github.com/servo/servo/pull/33848	Avoid wrapping line at the start of text run with `text-wrap-mode: nowrap` (#33848)	
++   fa1f7e5839a35019d5ac2f105a45b555292b74fd	https://github.com/servo/servo/pull/33845	Gate all use of `tracing` behind Cargo feature (#33845)	
++   103d3aa7bb6341957c31a1aae4f925068e39e951	https://github.com/servo/servo/pull/33848	Avoid wrapping line at the start of text run with `text-wrap-mode: nowrap` (#33848)	
     0a71c736f08fafb68d453133379dcc458fe4ac85	https://github.com/servo/servo/pull/33849	clippy: fix clippy warnings in `components/script` (#33849)	
     30abb99287790c2653821cc469ecd891b89ab57c	https://github.com/servo/servo/pull/33748	clippy: Add safety documentation and clean up unsafe methods (#33748)	
 >>> 2024-10-18T06:07:54Z
@@ -401,7 +407,7 @@ fee927475b6bd13e80a4bdc1712cb3aa04805099	https://github.com/servo/servo/pull/339
 +   faeb31d6c6aed117a76a052e6dd85646398b06b2	https://github.com/servo/servo/pull/33854	Implement keyword sizes for intrinsic contributions (#33854)	
     831a65917a1ffa3f24fcc67ea0955a9d15d7d449	https://github.com/servo/servo/pull/34022	ci: pin python to 3.12 for mac workflows (#34022)	
 +   5d4b5514aa339d115d0ac9e1131eb7bef1d99a0b	https://github.com/servo/servo/pull/34005	Allow parsing `transition-behavior` value in `transition` shorthand (#34005)	
-dfe1c95aa6fe00bb1a251ddc03d760fbb78152d2	https://github.com/servo/servo/pull/34006	Avoid crash in replaced layout, and fix behavior for non-auto aspect-ratio (#34006)	
++   dfe1c95aa6fe00bb1a251ddc03d760fbb78152d2	https://github.com/servo/servo/pull/34006	Avoid crash in replaced layout, and fix behavior for non-auto aspect-ratio (#34006)	
 +   43c8441f6ce0a9f41fbf4ff020454ef120c8dab0	https://github.com/servo/servo/pull/34008	ServoShell: Don't request redrawing again when processing a RedrawRequested event (#34008)	
     600ba602b75bcad884fee75125aaf5a616fb8d91	https://github.com/servo/servo/pull/34009	Limit HtmlOptionsCollection.length setter to 100k elements (#34009)	
     fd6c10048938a21b24a9e67b0cf0e64d5e263614	https://github.com/servo/servo/pull/34003	CanGc fixes in messageport.rs & workerglobalscope.rs (#34003)	
