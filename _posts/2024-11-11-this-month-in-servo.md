@@ -55,7 +55,7 @@ categories:
 - architecture
     - single cross-process compositor api 33619 33660 33817
     - start of gl bindings unification surfman#318 webxr#248 33538 33910 33911
-    - script crate splitting continues 33627
+    - script crate splitting continues 33627 33665
 - servoshell and embedding
     - servoshell avoid unnecessary redraws 34008
     - servoshell drop --no-minibrowser code path 33677
@@ -64,6 +64,7 @@ categories:
     - location bar updates for redirects (for other embedders too) 34004
     - embedder-provided resources are now documented 33885
     - fetching custom protocols 33573
+    - license in installer 33711
 - upgrades
     - stylo 2024-09-02 → 2024-10-04 33767
 - webgpu
@@ -196,18 +197,18 @@ categories:
     38c5ebbf8e52aebe5155c80fa1ea4da81838d7de	https://github.com/servo/servo/pull/33685	clippy: Fix warning in `components/script/dom` (#33685)	Martin Robinson <mrobinson@igalia.com>
     9862df877ddf66ac44355204781fd8bd76c39dff	https://github.com/servo/servo/pull/33705	Fix clamp-like pattern warning in font.rs (#33705)	
     77f7b43548ca8450e663ce456c59a44c723235ec	https://github.com/servo/servo/pull/33690	clippy: Fix large size difference between variants of `ScriptToCompositorMsg` (#33690)	Martin Robinson <mrobinson@igalia.com>
-76cdb0173e853ec28cd7b8b7802b002303fc84b8	https://github.com/servo/servo/pull/33696	Remove dead (and incorrect) logic about vertical overconstrainment (#33696)	
+    76cdb0173e853ec28cd7b8b7802b002303fc84b8	https://github.com/servo/servo/pull/33696	Remove dead (and incorrect) logic about vertical overconstrainment (#33696)	
     72eeebe311c65fcdee2c2f4679a9b0121146429b	https://github.com/servo/servo/pull/33707	Fix large enum variant warning in serviceworker_manager.rs (#33707)	
-dcedfab44fed6b0b330bc60b09f86cb6f094a71c	https://github.com/servo/servo/pull/33711	Attempt to link to MPL-2.0 license page in Windows installer (#33711)	
++   dcedfab44fed6b0b330bc60b09f86cb6f094a71c	https://github.com/servo/servo/pull/33711	Attempt to link to MPL-2.0 license page in Windows installer (#33711)	
     fd8ed6c44dfec60557fef7f0d77cc2c9c1fe8a04	https://github.com/servo/servo/pull/33698	build(deps): bump futures-util from 0.3.30 to 0.3.31 (#33698)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     4a53dd9708049776d0def353714052ce4d001e21	https://github.com/servo/servo/pull/33703	build(deps): bump pin-project from 1.1.5 to 1.1.6 (#33703)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     ad409e644484a03815953d848262aa02fcd898c8	https://github.com/servo/servo/pull/33704	build(deps): bump bytemuck_derive from 1.7.1 to 1.8.0 (#33704)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-457d8a8a5c720fbf5624a95d86ac53f2aee342e8	https://github.com/servo/servo/pull/33531	Bring `http_network_or_cache_fetch` closer to the spec (#33531)	
+    457d8a8a5c720fbf5624a95d86ac53f2aee342e8	https://github.com/servo/servo/pull/33531	Bring `http_network_or_cache_fetch` closer to the spec (#33531)	
 +   fc0d4d8157c71c512817886bc3b8d1adad5d46a9	https://github.com/servo/servo/pull/33628	crypto: Begin SubtleCrypto implementation (#33628)	
 +   66bc430b24a0cb1fe2d51e2b5983ea8833ba22b9	https://github.com/servo/servo/pull/33713	Sorted Bindings.conf alphabetically (#33713)	
     d3c0785d64f0186a31f38308d31c6eee4b577210	https://github.com/servo/servo/pull/33706	Various CanGc fixes in components/script/dom  (#33706)	
-7d931e673af2780f3f62d52cb17324ec2cc68c71	https://github.com/servo/servo/pull/33665	script: Include constructors and static methods in generated DOM traits (#33665)	
-946fa9cdee68bb834a3b75821e8e7f94cf86d31c	https://github.com/servo/servo/pull/33719	ohos: pin version of setup-ohos-sdk action to fix CI (#33719)	
++   7d931e673af2780f3f62d52cb17324ec2cc68c71	https://github.com/servo/servo/pull/33665	script: Include constructors and static methods in generated DOM traits (#33665)	
+    946fa9cdee68bb834a3b75821e8e7f94cf86d31c	https://github.com/servo/servo/pull/33719	ohos: pin version of setup-ohos-sdk action to fix CI (#33719)	
 >>> 2024-10-10T06:03:33Z
     0c4720140fe71eed8760fa7ab1d39e024fc56d27	https://github.com/servo/servo/pull/33757	Fixed some clippy warnings in components/script/dom (#33757)	
     9a8e7f4867c2e6c54dec9cba3b3766f52ba8117f	https://github.com/servo/servo/pull/33771	clippy: Fix warnings in components/script/dom (#33771)	
