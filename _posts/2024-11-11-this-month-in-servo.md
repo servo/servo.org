@@ -62,7 +62,7 @@ categories:
     - smoother scrolling on macOS (or hidpi?) systems 34063
     - new `--screen-size` option (and `--resolution` is now `--window-size`) 34038
     - location bar updates for redirects (for other embedders too) 34004
-    - embedder-provided resources are now documented 33885
+    - embedder-provided resources are now documented 33775 33885
     - fetching custom protocols 33573
     - license in installer 33711
 - upgrades
@@ -236,9 +236,9 @@ f15da16da403b4b5510e7722b555ee0c0c1f3de4	https://github.com/servo/servo/pull/337
 +   091b8ecda0e509cfc49f546294f23180303892d0	https://github.com/servo/servo/pull/33780	layout: Handle inline margins in `layout_for_block_content_size()` (#33780)	
     81ce12b23aab15ecaede17b79ae96c5aac07a28e	https://github.com/servo/servo/pull/33788	build(deps): bump async-compression from 0.4.13 to 0.4.14 (#33788)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     1668b12ded143ee670b80417d38bc3cf5cb46167	https://github.com/servo/servo/pull/33783	Replace some `Point2D::new(0, 0)` instances with `Point2D::zero()` (#33783)	
-b58cee48cefef80417babd76ec087e1219a914b8	https://github.com/servo/servo/pull/33775	doc(resources): `Preferences`, `HstsPreloadList`, `RippyPNG` (#33775)	Martin Robinson <mrobinson@igalia.com>
-fd19409f31c038b5b89c7ed4b73ebabcfd241355	https://github.com/servo/servo/pull/33751	Upgrade to `egui@0.29.1` and `winit@0.30.5` (#33751)	Martin Robinson <mrobinson@igalia.com>
-6b3a316e1bc31aaf4938bc093b5b4c72a7fadf86	https://github.com/servo/servo/pull/33746	Remove most usage of ReentrantMutex in font code (#33746)	
++   b58cee48cefef80417babd76ec087e1219a914b8	https://github.com/servo/servo/pull/33775	doc(resources): `Preferences`, `HstsPreloadList`, `RippyPNG` (#33775)	Martin Robinson <mrobinson@igalia.com>
+    fd19409f31c038b5b89c7ed4b73ebabcfd241355	https://github.com/servo/servo/pull/33751	Upgrade to `egui@0.29.1` and `winit@0.30.5` (#33751)	Martin Robinson <mrobinson@igalia.com>
+    6b3a316e1bc31aaf4938bc093b5b4c72a7fadf86	https://github.com/servo/servo/pull/33746	Remove most usage of ReentrantMutex in font code (#33746)	
     a591778a25b85e236aff9a7966754ac16ce0864f	https://github.com/servo/servo/pull/33709	Improve `Au(0)` constructions (#33709)	
     c6d305fbb32dcda968b5f7501796137252d9d643	https://github.com/servo/servo/pull/33781	fix clippy warnings in codegen (#33781)	
     f9a06d62a2757eefc729f2126a0d50afa919399f	https://github.com/servo/servo/pull/33774	More CanGc fixes: Range, Event, gpu error, Header (#33774)	
