@@ -21,8 +21,10 @@
 - api features
     - 2024-10-09 `crypto.subtle.generateKey(&quot;AES-CBC&quot;)` 33628
     - 2024-10-11 toString() method on DOMMatrix and DOMMatrixReadOnly 33792
+    - 2024-10-23 `crypto.subtle.generateKey(&quot;AES-CTR&quot;)` 33963
     - 2024-10-25 ‘transition-behavior: allow-discrete’ 33991
     - 2024-10-27 ‘transition: allow-discrete’ 34005
+    - 2024-10-27 stub interface for IntersectionObserver 33989
     - 2024-10-30 `crypto.subtle.digest()` 34034
     - 2024-10-30 ‘mix-blend-mode: plus-lighter’ 34057
 - layout
@@ -57,11 +59,15 @@
     - remove iframes from tab list 34032
 - openharmony
     - 2024-10-11 started publishing nightlies 33801
+- crashes
+    - glwindow webxr session crashes on macos 33962
+    - gc borrow hazards 33857 33875 33904 33929 33942 33976 34019 34020 33965
 - outreachy
     - clippy 31500
     - cangc 33683 33684
     - downcasting refactor 33804
     - script codegen 33713
+    - std::mem::take 33959
 - contributors
     - wpt summary 33587
     - `full` and `wpt` no longer test layout 2013. 34048
@@ -283,7 +289,7 @@ fc569260d201dd947aff1d9aa2e824c95fa26f2a	https://github.com/servo/servo/pull/338
     b0a33d6b0212be325f3c5551869be80904c24892	https://github.com/servo/servo/pull/33865	Some CanGc Fixes (#33865)	
     2b9527262c5700473af6fb2b193f84596bedc0de	https://github.com/servo/servo/pull/33862	CanGc fixes in components/script/dom (#33862)	
 5148b444be5490d0fd9123d7248216856efd568d	https://github.com/servo/servo/pull/33861	Minor cleanup for `Size` after #33844 (#33861)	
-2e0fbfcb951c570cd7fa6f65b9b1c659dc4fba9c	https://github.com/servo/servo/pull/33857	Fix GC borrow hazard in XRInputSourceArray (#33857)	
++   2e0fbfcb951c570cd7fa6f65b9b1c659dc4fba9c	https://github.com/servo/servo/pull/33857	Fix GC borrow hazard in XRInputSourceArray (#33857)	
 fa1f7e5839a35019d5ac2f105a45b555292b74fd	https://github.com/servo/servo/pull/33845	Gate all use of `tracing` behind Cargo feature (#33845)	
 103d3aa7bb6341957c31a1aae4f925068e39e951	https://github.com/servo/servo/pull/33848	Avoid wrapping line at the start of text run with `text-wrap-mode: nowrap` (#33848)	
     0a71c736f08fafb68d453133379dcc458fe4ac85	https://github.com/servo/servo/pull/33849	clippy: fix clippy warnings in `components/script` (#33849)	
@@ -301,7 +307,7 @@ fa1f7e5839a35019d5ac2f105a45b555292b74fd	https://github.com/servo/servo/pull/338
 72ff89620bbcc03b1534a092f65e526909df3a4a	https://github.com/servo/servo/pull/33873	Handle multibyte characters in img srcset (#33873)	
     2d796a27192c86e03cde078a506a0a8c07ca41b6	https://github.com/servo/servo/pull/33868	build(deps): bump uuid from 1.10.0 to 1.11.0 (#33868)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
 &gt;&gt;&gt; 2024-10-19T06:08:05Z
-a008b6fc73fa0ad36686aa1a523defee07191e84	https://github.com/servo/servo/pull/33875	Fix GC borrow hazard in ResizeObserver::broadcast_active_resize_observations (#33875)	
++   a008b6fc73fa0ad36686aa1a523defee07191e84	https://github.com/servo/servo/pull/33875	Fix GC borrow hazard in ResizeObserver::broadcast_active_resize_observations (#33875)	
 73880ee1d0659ffa097a28a6314ef2826db0e30f	https://github.com/servo/servo/pull/33907	Remove BoxFragment::overconstrained (#33907)	
 09fc988d3ab00c54abaaa95ac12d081502ea63d8	https://github.com/servo/servo/pull/33906	Fix resolved value of insets to use margin box instead of content box (#33906)	
     e667d2fa1b9650b2574bf5da481665c3858cd3ec	https://github.com/servo/servo/pull/33905	build(deps): bump serde_json from 1.0.129 to 1.0.130 (#33905)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
@@ -320,7 +326,7 @@ e33bae6d0a172de3e652b9b515bda97c6c4f5af2	https://github.com/servo/servo/pull/338
     14cfcda3b3dc8a0421b9dcc5bca8b93a91734bad	https://github.com/servo/servo/pull/33890	build(deps): bump orbclient from 0.3.47 to 0.3.48 (#33890)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;	Mukilan Thiyagarajan &lt;mukilan@igalia.com&gt;
 &gt;&gt;&gt; 2024-10-20T06:08:59Z
     d0d02cd56cb646da1f2193e57561b78d5e4b6bdf	https://github.com/servo/servo/pull/33923	Update web-platform-tests to revision b&#39;5a9d9349a312e12a950d5f4703cd41609a06f242&#39; (#33923)	
-c242822eebb75bcf0b0e10102d3cc49e9044a658	https://github.com/servo/servo/pull/33904	Fix GC borrow hazard in HTMLImageElement::finish_reacting_to_environment_change (#33904)	
++   c242822eebb75bcf0b0e10102d3cc49e9044a658	https://github.com/servo/servo/pull/33904	Fix GC borrow hazard in HTMLImageElement::finish_reacting_to_environment_change (#33904)	
     2af81fb09732fac71c38f4e261e29803f490b0ea	https://github.com/servo/servo/pull/33913	build(deps): bump serde_json from 1.0.130 to 1.0.131 (#33913)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     3eebb60b363f259d00a65318536bca95ba882539	https://github.com/servo/servo/pull/33914	build(deps): bump unicase from 2.7.0 to 2.8.0 (#33914)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     caaa786a8ab67085a963c3d7917871866798e486	https://github.com/servo/servo/pull/33915	build(deps): bump compiletest_rs from 0.11.0 to 0.11.1 (#33915)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
@@ -338,7 +344,7 @@ c75f6627ba0e314d5fb4c4c9230e93cbb1b188e3	https://github.com/servo/servo/pull/337
 &gt;&gt;&gt; 2024-10-22T06:11:00Z
     ebfea9b352ef0ec00ad5213055392668e841a0e9	https://github.com/servo/servo/pull/33958	CanGc fixes in several files (#33958)	
     1bf68567b8608d87e1817066f1dacb27edc5602a	https://github.com/servo/servo/pull/33952	build(deps): bump syn from 2.0.79 to 2.0.82 (#33952)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-aeed5ca3b42e88f0c4d4d5d8448eaadf060204cf	https://github.com/servo/servo/pull/33959	Replaced mem::replace with mem::take for old_min_size (#33959)	
++   aeed5ca3b42e88f0c4d4d5d8448eaadf060204cf	https://github.com/servo/servo/pull/33959	Replaced mem::replace with mem::take for old_min_size (#33959)	
     b4d93dace5ffa93abb5c77bb6b8db6a370edf231	https://github.com/servo/servo/pull/33954	build(deps): bump serde_json from 1.0.131 to 1.0.132 (#33954)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     799735a9fa7850a3bade71caf4708ae6ef62b35b	https://github.com/servo/servo/pull/33955	build(deps): bump async-compression from 0.4.16 to 0.4.17 (#33955)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     99f89f403ad243b9afc010b3c4a524e2a07aa4cc	https://github.com/servo/servo/pull/33953	build(deps): bump flume from 0.11.0 to 0.11.1 (#33953)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
@@ -354,17 +360,17 @@ fee927475b6bd13e80a4bdc1712cb3aa04805099	https://github.com/servo/servo/pull/339
 &gt;&gt;&gt; 2024-10-23T06:15:56Z
 6fdd5ce4cb97579991aeb59d20adc9af941c84e2	https://github.com/servo/servo/pull/33938	Ensure compiled script module object remains rooted while it&#39;s being passed around. (#33938)	
     7fbd2a521ee8ec6b21dd67e462da25883ecccabf	https://github.com/servo/servo/pull/33973	CanGc fixes from eventtarget.rs (#33973)	
-7b392db02f96fa5f3663c5c9d29eed988efe0030	https://github.com/servo/servo/pull/33963	crypto: Add support for AES-CTR operations (#33963)	
++   7b392db02f96fa5f3663c5c9d29eed988efe0030	https://github.com/servo/servo/pull/33963	crypto: Add support for AES-CTR operations (#33963)	
 +   1c26c0335e49761a25167e118a10265b17632690	https://github.com/servo/servo/pull/33950	Implement keyword sizes on absolute/fixed positioned elements (#33950)	
     c5ee573c6d076267bc5e8e7a1f697503bbc643da	https://github.com/servo/servo/pull/33969	build(deps): bump bytes from 1.7.2 to 1.8.0 (#33969)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     8c2f4166b68d8bb446e300cfc84e690b26f39748	https://github.com/servo/servo/pull/33970	build(deps): bump tokio from 1.40.0 to 1.41.0 (#33970)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     061636fb0796453bd181cafb341782b3deed0858	https://github.com/servo/servo/pull/33968	build(deps): bump serde from 1.0.210 to 1.0.212 (#33968)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     09c0c65fe81f43400011bd0e61401b480bed1b07	https://github.com/servo/servo/pull/33966	build(deps): bump proc-macro2 from 1.0.88 to 1.0.89 (#33966)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-78d48ae2fb58e4c2e2a27a21d6e90f81c9fe951b	https://github.com/servo/servo/pull/33929	Fix GC borrow hazard in XRSession::UpdateTargetFrameRate (#33929)	
++   78d48ae2fb58e4c2e2a27a21d6e90f81c9fe951b	https://github.com/servo/servo/pull/33929	Fix GC borrow hazard in XRSession::UpdateTargetFrameRate (#33929)	
 +   01c9ecfe01a06ca509bdaf1d5a77d1a0d0938b2c	https://github.com/servo/servo/pull/33964	layout: Cache content block size contributions (#33964)	Oriol Brufau &lt;obrufau@igalia.com&gt;
     7015e0fb5f1a63ed13a5b07b056036e6e7adbc16	https://github.com/servo/servo/pull/33960	CanGc fixes in `errorevent.rs` (#33960)	
     575e8855294a9ee2094b110a7c1fea868e69251e	https://github.com/servo/servo/pull/33928	Mark promise creation methods with CanGc (#33928)	
-edc304854ff18bc686f8e2adc6cb64cbad181598	https://github.com/servo/servo/pull/33962	Avoid invalid lifetime extension for winit event loop. (#33962)	
++   edc304854ff18bc686f8e2adc6cb64cbad181598	https://github.com/servo/servo/pull/33962	Avoid invalid lifetime extension for winit event loop. (#33962)	
 +   8824c907160852db8162bb2bb83281f10f840ffa	https://github.com/servo/servo/pull/33951	Prevent `stretch` from producing a negative size (#33951)	
     afeaff7f1aaa1950e7597a478b5061ccb5b93686	https://github.com/servo/servo/pull/33956	build(deps): bump prettyplease from 0.2.22 to 0.2.24 (#33956)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
 &gt;&gt;&gt; 2024-10-24T06:04:52Z
@@ -375,8 +381,8 @@ edc304854ff18bc686f8e2adc6cb64cbad181598	https://github.com/servo/servo/pull/339
     9d75862c7d4d4b591983dc7dfeeb3af6cd24468e	https://github.com/servo/servo/pull/33980	build(deps): bump thiserror from 1.0.64 to 1.0.65 (#33980)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     85888efa073d570ebe351b6892b742fb0d3cdb30	https://github.com/servo/servo/pull/33983	build(deps): bump serde from 1.0.212 to 1.0.213 (#33983)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     f4c179915874f8a2ab0aebd41752ddeaca57320b	https://github.com/servo/servo/pull/33979	build(deps): bump wayland-client from 0.31.6 to 0.31.7 (#33979)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-076b37e6aa10fb0dc4d7696ad391243bea8f876a	https://github.com/servo/servo/pull/33942	Resolved potential GC borrow hazards in ModuleTree::append_handler, ModuleTree::append_dynamic_module_handler, and ModuleTree::fetch_module_descendants&#39; (#33942)	Oriol Brufau &lt;obrufau@igalia.com&gt;
-324f42abd71bfe15acc3bf7e56bb8f7d7e4c0c20	https://github.com/servo/servo/pull/33976	Use borrow() to fix GC hazard in stream_chunk (#33976)	
++   076b37e6aa10fb0dc4d7696ad391243bea8f876a	https://github.com/servo/servo/pull/33942	Resolved potential GC borrow hazards in ModuleTree::append_handler, ModuleTree::append_dynamic_module_handler, and ModuleTree::fetch_module_descendants&#39; (#33942)	Oriol Brufau &lt;obrufau@igalia.com&gt;
++   324f42abd71bfe15acc3bf7e56bb8f7d7e4c0c20	https://github.com/servo/servo/pull/33976	Use borrow() to fix GC hazard in stream_chunk (#33976)	
     12e6ec25aa809e3c9b3c99be1cbcc76a5a8e6868	https://github.com/servo/servo/pull/33975	Propagate CanGc when interacting with readable streams. (#33975)	
     f553bda7ebc676c2b7e866fc38b6b52b3fbf4fa2	https://github.com/servo/servo/pull/33971	clippy: Fix warning in `fonts/platform/macos/font_list.rs` (#33971)	
 &gt;&gt;&gt; 2024-10-25T06:11:41Z
@@ -394,21 +400,21 @@ edc304854ff18bc686f8e2adc6cb64cbad181598	https://github.com/servo/servo/pull/339
     12dd79c3e86d4f504fda519fa4aec11fd8721628	https://github.com/servo/servo/pull/33982	build(deps): bump lyon_geom from 1.0.5 to 1.0.6 (#33982)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
 &gt;&gt;&gt; 2024-10-27T06:08:47Z
     63b2f813af05a5d1600354b97901a764507951f5	https://github.com/servo/servo/pull/34029	Update web-platform-tests to revision b&#39;73d6bd0d61f0ad5341d0c2303a7638e3aa12a594&#39; (#34029)	
-53911f4e5a5ec50dae73a5d4d36a80637e267fee	https://github.com/servo/servo/pull/34019	GC hazard fix in customelementregistry.rs (#34019)	
-82c9d413306239a96b5f4ca8fc2612fd55cee501	https://github.com/servo/servo/pull/34020	GC hazard fix in document.rs (#34020)	
++   53911f4e5a5ec50dae73a5d4d36a80637e267fee	https://github.com/servo/servo/pull/34019	GC hazard fix in customelementregistry.rs (#34019)	
++   82c9d413306239a96b5f4ca8fc2612fd55cee501	https://github.com/servo/servo/pull/34020	GC hazard fix in document.rs (#34020)	
     867510b9d8f2f284d9ff2f24a4612663f1b09e9b	https://github.com/servo/servo/pull/34013	build(deps): bump wayland-protocols-plasma from 0.3.4 to 0.3.5 (#34013)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     21906e5d8c43485d8fc277df2576d7d87cc4ac3b	https://github.com/servo/servo/pull/34012	build(deps): bump wayland-protocols-wlr from 0.3.4 to 0.3.5 (#34012)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     8e2a0414e870ffbca620a05ea9a18878e81e6622	https://github.com/servo/servo/pull/34011	build(deps): bump anstyle from 1.0.8 to 1.0.9 (#34011)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-f4ff067387dd44b15a4c5e2f8c075d610021c43f	https://github.com/servo/servo/pull/33990	chore: Update WebGPU CTS (#33990)	
+    f4ff067387dd44b15a4c5e2f8c075d610021c43f	https://github.com/servo/servo/pull/33990	chore: Update WebGPU CTS (#33990)	
 +   faeb31d6c6aed117a76a052e6dd85646398b06b2	https://github.com/servo/servo/pull/33854	Implement keyword sizes for intrinsic contributions (#33854)	
-831a65917a1ffa3f24fcc67ea0955a9d15d7d449	https://github.com/servo/servo/pull/34022	ci: pin python to 3.12 for mac workflows (#34022)	
+    831a65917a1ffa3f24fcc67ea0955a9d15d7d449	https://github.com/servo/servo/pull/34022	ci: pin python to 3.12 for mac workflows (#34022)	
 +   5d4b5514aa339d115d0ac9e1131eb7bef1d99a0b	https://github.com/servo/servo/pull/34005	Allow parsing `transition-behavior` value in `transition` shorthand (#34005)	
 dfe1c95aa6fe00bb1a251ddc03d760fbb78152d2	https://github.com/servo/servo/pull/34006	Avoid crash in replaced layout, and fix behavior for non-auto aspect-ratio (#34006)	
 +   43c8441f6ce0a9f41fbf4ff020454ef120c8dab0	https://github.com/servo/servo/pull/34008	ServoShell: Don&#39;t request redrawing again when processing a RedrawRequested event (#34008)	
-600ba602b75bcad884fee75125aaf5a616fb8d91	https://github.com/servo/servo/pull/34009	Limit HtmlOptionsCollection.length setter to 100k elements (#34009)	
+    600ba602b75bcad884fee75125aaf5a616fb8d91	https://github.com/servo/servo/pull/34009	Limit HtmlOptionsCollection.length setter to 100k elements (#34009)	
     fd6c10048938a21b24a9e67b0cf0e64d5e263614	https://github.com/servo/servo/pull/34003	CanGc fixes in messageport.rs &amp; workerglobalscope.rs (#34003)	
     7ad8822d94f22969af4ebe1130a0050e78fbc21b	https://github.com/servo/servo/pull/34002	cangc fixes in several files + event.rs + rtcpeerconnection.rs (#34002)	
-3b5dc069ae338ebf373471e32874ea8f4ba3ade3	https://github.com/servo/servo/pull/33989	dom: Stub out the `IntersectionObserver` interface (#33989)	
++   3b5dc069ae338ebf373471e32874ea8f4ba3ade3	https://github.com/servo/servo/pull/33989	dom: Stub out the `IntersectionObserver` interface (#33989)	
     1624530ffe38753e0166cdc6c420c784c3f654d8	https://github.com/servo/servo/pull/33999	build(deps): bump encoding_rs from 0.8.34 to 0.8.35 (#33999)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;	Mukilan Thiyagarajan &lt;mukilan@igalia.com&gt;
 &gt;&gt;&gt; 2024-10-28T06:06:59Z
 +   10aa485c0c07b146cbeff21dadfe34f5be6364b9	https://github.com/servo/servo/pull/34032	Devtools: Don&#39;t display iframes in the tab list (#34032)	
@@ -425,7 +431,7 @@ dfe1c95aa6fe00bb1a251ddc03d760fbb78152d2	https://github.com/servo/servo/pull/340
     8f01f1710c231e8fa9f90c152e7bfab43b5634ff	https://github.com/servo/servo/pull/34042	build(deps): bump fdeflate from 0.3.5 to 0.3.6 (#34042)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
     56de90a499c448be4bf3704e29ed1a116134af18	https://github.com/servo/servo/pull/34041	build(deps): bump rustix from 0.38.37 to 0.38.38 (#34041)	dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
 216296840ae30060c3e4d16156f5bd30ef9576e8	https://github.com/servo/servo/pull/34036	Replace uses of SCRIPT_THREAD_ROOT with accessor helpers. (#34036)	
-1d6ede7b4868c5bd3ea821e0afd5df0bb99911cd	https://github.com/servo/servo/pull/33965	Remove GC hazard when compiling inline event listeners. (#33965)	
++   1d6ede7b4868c5bd3ea821e0afd5df0bb99911cd	https://github.com/servo/servo/pull/33965	Remove GC hazard when compiling inline event listeners. (#33965)	
 a01d66df5388d11aeb6dbd8ac9ccc84302d394bb	https://github.com/servo/servo/pull/34028	webgpu: Move supported context format to content timeline (#34028)	
 &gt;&gt;&gt; 2024-10-30T07:43:54Z
 bac1101163a436096fe0b71bed79094658bba3b2	https://github.com/servo/servo/pull/34062	Fix CMake issues on OpenHarmony (#34062)	
