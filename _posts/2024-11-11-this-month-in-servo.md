@@ -12,6 +12,7 @@ categories:
     - 2024-11-04 60% on all of wpt?
     - 2024-10-31 enabled css-grid tests 34052
 - api features
+    - 2024-09-28 better handling of data: urls 33500
     - 2024-10-09 `crypto.subtle.generateKey("AES-CBC")` 33628
     - 2024-10-11 toString() method on DOMMatrix and DOMMatrixReadOnly 33792
     - 2024-10-16 fetch metadata headers (‘Sec-Fetch-Site’, ‘Sec-Fetch-Mode’, ‘Sec-Fetch-User’, ‘Sec-Fetch-Dest’) 33830
@@ -25,11 +26,14 @@ categories:
     - 2024-10-30 ‘mix-blend-mode: plus-lighter’ 34057
 - layout
     - keyword sizes (‘min-content’, ‘max-content’, ‘fit-content’, ‘stretch’)
+        - prelim 33558
+        - enable stretch 33659
         - 2024-10-09 floats 33666
         - 2024-10-11 atomic inlines 33737
         - 2024-10-23 absolute/fixed positioned elements 33950
         - 2024-10-23 prevent ‘stretch’ from being negative 33951
         - 2024-10-27 intrinsic contributions 33854
+    - fixed ‘align-content: <start|end>’ with ‘flex-wrap: wrap-reverse’ 33667
     - flex container intrinsic size with inline margins 33780
     - cyclic percentages in ‘min-width’ and ‘min-height’ 33988
     - video intrinsic size 31746 34069
@@ -44,10 +48,14 @@ categories:
     - flexbox layout tracing 33647
     - flexbox caching to avoid unnecessary layouts 33964 33967
     - avoid recomputing sizes when not using vertical percentages or stretching vertically 33806
+    - avoid recomputing percentage heights of table rows 33575
     - fixed log spam when not using experimental `--features tracing` 33845
+    - faster builds of script crate 33502
+    - fixed small incremental parser updates 33611
 - architecture
     - single cross-process compositor api 33619 33660 33817
     - start of gl bindings unification surfman#318 webxr#248 33538 33910 33911
+    - script crate splitting continues 33627
 - servoshell and embedding
     - servoshell avoid unnecessary redraws 34008
     - servoshell drop --no-minibrowser code path 33677
@@ -55,10 +63,11 @@ categories:
     - new `--screen-size` option (and `--resolution` is now `--window-size`) 34038
     - location bar updates for redirects (for other embedders too) 34004
     - embedder-provided resources are now documented 33885
+    - fetching custom protocols 33573
 - upgrades
     - stylo 2024-09-02 → 2024-10-04 33767
 - webgpu
-    - updated to wgpu v23 34073
+    - updated to wgpu v23 34073 33635
     - fixed bugs where we present old images 33613
 - devtools
     - console firefox 131+ 33661
@@ -66,6 +75,8 @@ categories:
     - persisting unminified external stylesheets 33919
 - openharmony
     - 2024-10-11 started publishing nightlies 33801
+    - can pass arguments to servoshell now 33588
+    - toasts when pages load or panic 33621
 - crashes
     - glwindow webxr session crashes on macos 33962
     - gc borrow hazards 33857 33875 33904 33929 33942 33976 34019 34020 33965 33937
@@ -82,23 +93,23 @@ categories:
     - `full` and `wpt` no longer test layout 2013. 34048
 
 >>> 2024-09-28T06:11:36Z
-c1931ee2cbeb16710388ee7c88e0c209ef1df801	https://github.com/servo/servo/pull/33500	Simplify the data: protocol handler (#33500)	
++   c1931ee2cbeb16710388ee7c88e0c209ef1df801	https://github.com/servo/servo/pull/33500	Simplify the data: protocol handler (#33500)	
     a56c837122e76b243e7fadf3b48215af23f199c6	https://github.com/servo/servo/pull/33574	build(deps): bump syn from 2.0.77 to 2.0.79 (#33574)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     a45ff16c47c83152dd47232b3b08fd9fd6d2e57f	https://github.com/servo/servo/pull/33571	build(deps): bump flate2 from 1.0.33 to 1.0.34 (#33571)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     e1b7f2e95ea61d5827ccb37ea8d4bdbbc2349571	https://github.com/servo/servo/pull/33570	build(deps): bump autocfg from 1.3.0 to 1.4.0 (#33570)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     40627334d7abf1649b7791e7f40ffdb3b2213574	https://github.com/servo/servo/pull/33569	build(deps): bump cc from 1.1.21 to 1.1.22 (#33569)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-057dd1e9eb46749f3e38bf7fbbf05392d8fbe1fd	https://github.com/servo/servo/pull/33558	Make ComputedValuesExt expose keywords for the sizing properties (#33558)	
-c7ef974968c32d58e6fdd3213965c0f88ee6e4a5	https://github.com/servo/servo/pull/33562	fetch: header tweaks to improve compliance with fetch spec (#33562)	
++   057dd1e9eb46749f3e38bf7fbbf05392d8fbe1fd	https://github.com/servo/servo/pull/33558	Make ComputedValuesExt expose keywords for the sizing properties (#33558)	
+    c7ef974968c32d58e6fdd3213965c0f88ee6e4a5	https://github.com/servo/servo/pull/33562	fetch: header tweaks to improve compliance with fetch spec (#33562)	
     f96a62f0cea059677a4f51012bcdf96384485525	https://github.com/servo/servo/pull/33566	Bump sccache-action to v0.0.6 (#33566)	
-c519a2cdb68683e2c9b05e54cfd10e022228fb2c	https://github.com/servo/servo/pull/33565	Fix typo on protocol handlers (#33565)	
-78370fa6d082f60cd6fe41a24e98fa52e90dbf1c	https://github.com/servo/servo/pull/33563	Fix mach run bustage (#33563)	
+    c519a2cdb68683e2c9b05e54cfd10e022228fb2c	https://github.com/servo/servo/pull/33565	Fix typo on protocol handlers (#33565)	
++   78370fa6d082f60cd6fe41a24e98fa52e90dbf1c	https://github.com/servo/servo/pull/33563	Fix mach run bustage (#33563)	
 +   02953d2fb69413f358210770d10d77efc6d015bd	https://github.com/servo/servo/pull/33553	Move unmultiply_inplace to pixels crate (#33553)	
 >>> 2024-09-29T06:07:04Z
-f57ae6005684e0fcc6d3edf96141c6400ac54d45	https://github.com/servo/servo/pull/33573	Let protocol handlers decide if they are fetchable (#33573)	
-5d269a9036a6c0888627778e9102967e58b1ae6a	https://github.com/servo/servo/pull/33577	Simplify the computation of CAPMIN (#33577)	
-d110d8710a7e5e61891810ee7263292b4901a5c8	https://github.com/servo/servo/pull/33575	Don't recompute percentage contribution for table row (#33575)	
++   f57ae6005684e0fcc6d3edf96141c6400ac54d45	https://github.com/servo/servo/pull/33573	Let protocol handlers decide if they are fetchable (#33573)	
+    5d269a9036a6c0888627778e9102967e58b1ae6a	https://github.com/servo/servo/pull/33577	Simplify the computation of CAPMIN (#33577)	
++   d110d8710a7e5e61891810ee7263292b4901a5c8	https://github.com/servo/servo/pull/33575	Don't recompute percentage contribution for table row (#33575)	
 >>> 2024-09-30T06:08:52Z
-58f34ad7a3db8c633871d568bfcef8b094217e3e	https://github.com/servo/servo/pull/33581	Create HttpStatus to safely deal with HTTP responses status. (#33581)	
+    58f34ad7a3db8c633871d568bfcef8b094217e3e	https://github.com/servo/servo/pull/33581	Create HttpStatus to safely deal with HTTP responses status. (#33581)	
     013473f1d5a18f7d99183593ef370045dc58c978	https://github.com/servo/servo/pull/33580	Sync WPT with upstream (29-09-2024) (#33580)	Samson <16504129+sagudev@users.noreply.github.com>
 >>> 2024-10-01T06:07:04Z
 +   022a95a2cd55617538f2dc841de3a76ef12ad8d9	https://github.com/servo/servo/pull/33582	Optimized unmultiply_inplace to remove fp ops (#33582)	
@@ -107,28 +118,28 @@ d110d8710a7e5e61891810ee7263292b4901a5c8	https://github.com/servo/servo/pull/335
     f85ac40a381b48aee5feced5596e96cb2ef24ef9	https://github.com/servo/servo/pull/33592	build(deps): bump tempfile from 3.12.0 to 3.13.0 (#33592)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     d4ea1ae1d120a7b83c0ebfa8cce68de4f980cba8	https://github.com/servo/servo/pull/33590	build(deps): bump once_cell from 1.19.0 to 1.20.1 (#33590)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     3b08efa516fd1041b83b8bc592693b383a039e62	https://github.com/servo/servo/pull/33591	build(deps): bump regex from 1.10.6 to 1.11.0 (#33591)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-96006daf6e6665dac48ef60e16ccaec3b6988744	https://github.com/servo/servo/pull/33502	use rerun-if-changed in script/build.rs (#33502)	Martin Robinson <mrobinson@igalia.com>
++   96006daf6e6665dac48ef60e16ccaec3b6988744	https://github.com/servo/servo/pull/33502	use rerun-if-changed in script/build.rs (#33502)	Martin Robinson <mrobinson@igalia.com>
 +   1ddfde96ce15687dea84be4e55cee3d381177804	https://github.com/servo/servo/pull/33584	Add a benchmark for for `unmultiply_inplace` in `pixels` (#33584)	
 >>> 2024-10-02T05:58:46Z
-e534c7d4610807fb1a93f17085ec6ada61a4a342	https://github.com/servo/servo/pull/33588	ohos: Allow passing arguments to servoshell (#33588)	
-d7da0563d36d8a6dafecb348ce94ff883242f7cb	https://github.com/servo/servo/pull/33612	Remove unneeded comments about suppressed errors. (#33612)	
-c76524e63bee4c00f7b3be26c021e314526f8b3a	https://github.com/servo/servo/pull/33108	Fix panic in webstorage/symbol-props.window.js (#33108)	
++   e534c7d4610807fb1a93f17085ec6ada61a4a342	https://github.com/servo/servo/pull/33588	ohos: Allow passing arguments to servoshell (#33588)	
+    d7da0563d36d8a6dafecb348ce94ff883242f7cb	https://github.com/servo/servo/pull/33612	Remove unneeded comments about suppressed errors. (#33612)	
+    c76524e63bee4c00f7b3be26c021e314526f8b3a	https://github.com/servo/servo/pull/33108	Fix panic in webstorage/symbol-props.window.js (#33108)	
     f3e61885023c9ebd0e0505ba5663f74bea546043	https://github.com/servo/servo/pull/33610	build(deps): bump clap from 4.5.18 to 4.5.19 (#33610)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     d83e5a6e3a544b097cb84690c47fe8005476a1dd	https://github.com/servo/servo/pull/33608	build(deps): bump httparse from 1.9.4 to 1.9.5 (#33608)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     d63d975a2e76558defe8b0055f72e2443a6a5f6f	https://github.com/servo/servo/pull/33607	build(deps): bump cc from 1.1.23 to 1.1.24 (#33607)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     a67e921bfa6b56f77976d7b79b71a99981b42c8e	https://github.com/servo/servo/pull/33606	build(deps): bump unicode-properties from 0.1.2 to 0.1.3 (#33606)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-e0aa288dacbaecfb9df7f4d2ef5ff36bd34c748d	https://github.com/servo/servo/pull/33579	Refactor sizing logic for table measures (#33579)	
+    e0aa288dacbaecfb9df7f4d2ef5ff36bd34c748d	https://github.com/servo/servo/pull/33579	Refactor sizing logic for table measures (#33579)	
 +   abad89a49c1fbad584627deaa7440f50a5cc9912	https://github.com/servo/servo/pull/33600	fonts: Make `FontKey` and `FontInstanceKey` generation asynchronous (#33600)	
-05ecb8eddb3989ffcee51df5c2c86887fee8b7e8	https://github.com/servo/servo/pull/33521	webgpu: renovate gpucanvascontext and webgpu presentation to match the spec (#33521)	
+    05ecb8eddb3989ffcee51df5c2c86887fee8b7e8	https://github.com/servo/servo/pull/33521	webgpu: renovate gpucanvascontext and webgpu presentation to match the spec (#33521)	
     0b2549f4cbf84279580e7792f261da0965d97225	https://github.com/servo/servo/pull/33545	build(deps): bump fdeflate from 0.3.4 to 0.3.5 (#33545)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-5b8f3015c0193008d322b6d87656a5867dfac40e	https://github.com/servo/servo/pull/33598	Add OpenHarmony to supported platforms in Readme. (#33598)	
+    5b8f3015c0193008d322b6d87656a5867dfac40e	https://github.com/servo/servo/pull/33598	Add OpenHarmony to supported platforms in Readme. (#33598)	
     5ee8e2e55b9726015b0cd3d21f4f4f9b084a5b67	https://github.com/servo/servo/pull/33596	CI: increase self-hosted runner timeout from 30 to 120 seconds (#33596)	
 >>> 2024-10-03T06:15:38Z
-c7a4e4f627f0bf331cedc1700ddeb92ffcba4e78	https://github.com/servo/servo/pull/33611	net: Refactor `Decoder` (#33611)	
++   c7a4e4f627f0bf331cedc1700ddeb92ffcba4e78	https://github.com/servo/servo/pull/33611	net: Refactor `Decoder` (#33611)	
     c682172440e2010ddd7e225463e81ddb175ebd81	https://github.com/servo/servo/pull/33623	build(deps): bump async-stream from 0.3.5 to 0.3.6 (#33623)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 +   6d4438808a95f78a2a35e749a8c65e5265b64602	https://github.com/servo/servo/pull/33587	do WPT reports as GitHub job summery (#33587)	Martin Robinson <mrobinson@igalia.com>
     56f0abeb8961bb0481c44cb7cf9f7fedd51d2938	https://github.com/servo/servo/pull/33618	clippy: Fix warnings in components/devtools/actors/inspector (#33618)	
-88dad77483e05560dead8e8d64252e756cea1422	https://github.com/servo/servo/pull/33597	Compositor: add document id to NewWebRenderFrame variant (#33597)	
+    88dad77483e05560dead8e8d64252e756cea1422	https://github.com/servo/servo/pull/33597	Compositor: add document id to NewWebRenderFrame variant (#33597)	
 >>> 2024-10-04T06:12:51Z
     e1eca71cd175dc8662ecf33f7a782eb3d0fe2364	https://github.com/servo/servo/pull/33641	build(deps): bump hilog-sys from 0.1.1 to 0.1.2 (#33641)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     1170124678c0d091681816b6f58993ee14da6935	https://github.com/servo/servo/pull/33640	build(deps): bump async-compression from 0.4.12 to 0.4.13 (#33640)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -136,11 +147,11 @@ c7a4e4f627f0bf331cedc1700ddeb92ffcba4e78	https://github.com/servo/servo/pull/336
 +   f2f5614ad64927aa82aa8937ae14a6086df49d2b	https://github.com/servo/servo/pull/33619	compositor: Create a single cross-process compositor API (#33619)	
     986c3a38a3ae257499c78ce21a50f689faa10c3b	https://github.com/servo/servo/pull/33632	Permitted functions to have too many arguments in components/script/dom (#33632)	
     43d559a1c2510c9244b1592e5ac33f2e8e8732a7	https://github.com/servo/servo/pull/33631	replaced `.map` with `.and_then` and removed `.flatten()` (#33631)	
-634dbd2d7861225181c58416ecda11d04498377e	https://github.com/servo/servo/pull/33627	Replace `ShouldNotImplDomObject` with `NoDomObjectInDomObject` (#33627)	
++   634dbd2d7861225181c58416ecda11d04498377e	https://github.com/servo/servo/pull/33627	Replace `ShouldNotImplDomObject` with `NoDomObjectInDomObject` (#33627)	
     cd803c83419fe90960eac4dfefec062202837ad8	https://github.com/servo/servo/pull/33625	clippy: Fix warning in components/compositing (#33625)	
     163e47766841725201f683495f4506f35fc9614c	https://github.com/servo/servo/pull/33630	Less `allow(crown::unrooted_must_root)` in bindings (#33630)	
 >>> 2024-10-05T05:57:21Z
-20eb9278439b011db278deac65a5e364c4c6d6b3	https://github.com/servo/servo/pull/33635	chore: Update wgpu again (#33635)	Martin Robinson <mrobinson@igalia.com>
+    20eb9278439b011db278deac65a5e364c4c6d6b3	https://github.com/servo/servo/pull/33635	chore: Update wgpu again (#33635)	Martin Robinson <mrobinson@igalia.com>
     57d96653eb46fbb66bd11f54d9129cebcda6ac43	https://github.com/servo/servo/pull/33652	build(deps): bump addr2line from 0.24.1 to 0.24.2 (#33652)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     73a0aef7a4ae4fdd677223683d47742d70f8595b	https://github.com/servo/servo/pull/33651	build(deps): bump object from 0.36.4 to 0.36.5 (#33651)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     37cd910e7993d385636301eebd642cb4e51b9ae8	https://github.com/servo/servo/pull/33650	build(deps): bump gimli from 0.31.0 to 0.31.1 (#33650)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -154,19 +165,19 @@ c7a4e4f627f0bf331cedc1700ddeb92ffcba4e78	https://github.com/servo/servo/pull/336
 +   6e043cd09ed76c0bb4fa92cea2693dc70f42ba52	https://github.com/servo/servo/pull/33613	webgpu: Introduce PresentationId to ensure updates with newer presentation (#33613)	
 >>> 2024-10-07T05:58:26Z
     f8933a57353aeca14a6cbc60b3cb0cf98cab6c5d	https://github.com/servo/servo/pull/33668	Sync WPT with upstream (06-10-2024) (#33668)	Josh Matthews <josh@joshmatthews.net>
-ea84f7b135fa4341908b2000aefe18a6907f2994	https://github.com/servo/servo/pull/33659	Enable `stretch` keyword (#33659)	
++   ea84f7b135fa4341908b2000aefe18a6907f2994	https://github.com/servo/servo/pull/33659	Enable `stretch` keyword (#33659)	
     0a5540f6a49d3873a5a3c54dd0bc2336cf0b2974	https://github.com/servo/servo/pull/33653	clippy: Fix warnings in `components/script` & `components/webgpu` (#33653)	
-ad8ba49d2cca9de554a9baa3c81188da91b7ec13	https://github.com/servo/servo/pull/33658	Skip anonymous blocks for percentage resolution (#33658)	
+    ad8ba49d2cca9de554a9baa3c81188da91b7ec13	https://github.com/servo/servo/pull/33658	Skip anonymous blocks for percentage resolution (#33658)	
 +   719b5aba24e25b41e87751ca1ad1b130229528ae	https://github.com/servo/servo/pull/33647	tools: Improve instrumentation and add it for some layout (#33647)	
 >>> 2024-10-08T06:08:00Z
     d200557434458322260c99747db601c849940ce8	https://github.com/servo/servo/pull/33697	build(deps): bump futures-io from 0.3.30 to 0.3.31 (#33697)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     b4ef1340af893ce351d18d944e3a63f718ed3ce2	https://github.com/servo/servo/pull/33699	build(deps): bump ab_glyph from 0.2.28 to 0.2.29 (#33699)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-7bcc288cd92364ccec376383cdc9d3e56f7e556f	https://github.com/servo/servo/pull/33688	layout: Avoid double negation in `CellLayout::is_empty_for_empty_cells()` (#33688)	
+    7bcc288cd92364ccec376383cdc9d3e56f7e556f	https://github.com/servo/servo/pull/33688	layout: Avoid double negation in `CellLayout::is_empty_for_empty_cells()` (#33688)	
     628ca03a800d4a562bc9d46279e0b7929317c49c	https://github.com/servo/servo/pull/33695	build(deps): bump proc-macro2 from 1.0.86 to 1.0.87 (#33695)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     028026bebe992431ede7c57b7e3065616d859026	https://github.com/servo/servo/pull/33689	Fixed some clippy warnings in components/script and components/devtools (#33689)	
-53d24bb9ea5e3689dd928c1254af55fb2d90f164	https://github.com/servo/servo/pull/33657	fix: disable automatic reseeding (#33657)	
+    53d24bb9ea5e3689dd928c1254af55fb2d90f164	https://github.com/servo/servo/pull/33657	fix: disable automatic reseeding (#33657)	
     2642f3ce338f5750c5cbc8878a29f8dffe832921	https://github.com/servo/servo/pull/33686	fix default implementation warning in components\script\dom\identityhub.rs (#33686)	
-433f48741b03f1ddf25008265138a9d21569e123	https://github.com/servo/servo/pull/33667	Fix `align-content` set to `start` or `end` on flexbox (#33667)	
++   433f48741b03f1ddf25008265138a9d21569e123	https://github.com/servo/servo/pull/33667	Fix `align-content` set to `start` or `end` on flexbox (#33667)	
 +   6aaca118a90913b34551840cf02489ad29ee75ff	https://github.com/servo/servo/pull/33677	Drop support for '--no-minibrowser' mode (#33677)	
     38251fe5e79e66cd4f3753b87a14f5240b665ed1	https://github.com/servo/servo/pull/33664	clippy: Fix collapsible_match warning in components/shared (#33664)	
 >>> 2024-10-09T06:09:25Z
