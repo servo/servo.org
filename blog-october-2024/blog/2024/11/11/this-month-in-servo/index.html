@@ -201,11 +201,15 @@
 
 <div class="has-top-margin">
   <!--
+- wpt <https://wpt.servo.org>
+    - 2024-11-04 60% on all of wpt?
 - api features
+    - 2024-10-09 `crypto.subtle.generateKey("AES-CBC")` 33628
     - 2024-10-11 toString() method on DOMMatrix and DOMMatrixReadOnly 33792
     - 2024-10-25 ‘transition-behavior: allow-discrete’ 33991
     - 2024-10-27 ‘transition: allow-discrete’ 34005
     - 2024-10-30 `crypto.subtle.digest()` 34034
+    - 2024-10-30 ‘mix-blend-mode: plus-lighter’ 34057
 - layout
     - keyword sizes (‘min-content’, ‘max-content’, ‘fit-content’, ‘stretch’)
         - 2024-10-09 floats 33666
@@ -224,19 +228,25 @@
     - unmultiply_inplace 33553 33584 33582
     - flexbox layout tracing 33647
     - flexbox caching to avoid unnecessary layouts 33964 33967
-    - servoshell avoid unnecessary redraws 34008
 - architecture
     - single cross-process compositor api 33619 33660
+- servoshell
+    - servoshell avoid unnecessary redraws 34008
     - servoshell drop --no-minibrowser code path 33677
+    - smoother scrolling on macOS (or hidpi?) systems 34063
+    - new `--screen-size` option (and `--resolution` is now `--window-size`) 34038
 - webgpu
     - fixed bugs where we present old images 33613
 - devtools
     - console firefox 131+ 33661
     - remove iframes from tab list 34032
+- openharmony
+    - 2024-10-11 started publishing nightlies 33801
 - outreachy
     - clippy 31500
     - cangc 33683 33684
     - downcasting refactor 33804
+    - script codegen 33713
 - contributors
     - wpt summary 33587
     - `full` and `wpt` no longer test layout 2013. 34048
@@ -352,8 +362,8 @@ dcedfab44fed6b0b330bc60b09f86cb6f094a71c	https://github.com/servo/servo/pull/337
     4a53dd9708049776d0def353714052ce4d001e21	https://github.com/servo/servo/pull/33703	build(deps): bump pin-project from 1.1.5 to 1.1.6 (#33703)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     ad409e644484a03815953d848262aa02fcd898c8	https://github.com/servo/servo/pull/33704	build(deps): bump bytemuck_derive from 1.7.1 to 1.8.0 (#33704)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 457d8a8a5c720fbf5624a95d86ac53f2aee342e8	https://github.com/servo/servo/pull/33531	Bring `http_network_or_cache_fetch` closer to the spec (#33531)	
-fc0d4d8157c71c512817886bc3b8d1adad5d46a9	https://github.com/servo/servo/pull/33628	crypto: Begin SubtleCrypto implementation (#33628)	
-66bc430b24a0cb1fe2d51e2b5983ea8833ba22b9	https://github.com/servo/servo/pull/33713	Sorted Bindings.conf alphabetically (#33713)	
++   fc0d4d8157c71c512817886bc3b8d1adad5d46a9	https://github.com/servo/servo/pull/33628	crypto: Begin SubtleCrypto implementation (#33628)	
++   66bc430b24a0cb1fe2d51e2b5983ea8833ba22b9	https://github.com/servo/servo/pull/33713	Sorted Bindings.conf alphabetically (#33713)	
     d3c0785d64f0186a31f38308d31c6eee4b577210	https://github.com/servo/servo/pull/33706	Various CanGc fixes in components/script/dom  (#33706)	
 7d931e673af2780f3f62d52cb17324ec2cc68c71	https://github.com/servo/servo/pull/33665	script: Include constructors and static methods in generated DOM traits (#33665)	
 946fa9cdee68bb834a3b75821e8e7f94cf86d31c	https://github.com/servo/servo/pull/33719	ohos: pin version of setup-ohos-sdk action to fix CI (#33719)	
@@ -383,7 +393,7 @@ f15da16da403b4b5510e7722b555ee0c0c1f3de4	https://github.com/servo/servo/pull/337
     4564ce2fcc970d213dc8c109ab8f02a959254046	https://github.com/servo/servo/pull/33793	build(deps): bump wasm-bindgen from 0.2.93 to 0.2.95 (#33793)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 +   091b8ecda0e509cfc49f546294f23180303892d0	https://github.com/servo/servo/pull/33780	layout: Handle inline margins in `layout_for_block_content_size()` (#33780)	
     81ce12b23aab15ecaede17b79ae96c5aac07a28e	https://github.com/servo/servo/pull/33788	build(deps): bump async-compression from 0.4.13 to 0.4.14 (#33788)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-1668b12ded143ee670b80417d38bc3cf5cb46167	https://github.com/servo/servo/pull/33783	Replace some `Point2D::new(0, 0)` instances with `Point2D::zero()` (#33783)	
+    1668b12ded143ee670b80417d38bc3cf5cb46167	https://github.com/servo/servo/pull/33783	Replace some `Point2D::new(0, 0)` instances with `Point2D::zero()` (#33783)	
 b58cee48cefef80417babd76ec087e1219a914b8	https://github.com/servo/servo/pull/33775	doc(resources): `Preferences`, `HstsPreloadList`, `RippyPNG` (#33775)	Martin Robinson <mrobinson@igalia.com>
 fd19409f31c038b5b89c7ed4b73ebabcfd241355	https://github.com/servo/servo/pull/33751	Upgrade to `egui@0.29.1` and `winit@0.30.5` (#33751)	Martin Robinson <mrobinson@igalia.com>
 6b3a316e1bc31aaf4938bc093b5b4c72a7fadf86	https://github.com/servo/servo/pull/33746	Remove most usage of ReentrantMutex in font code (#33746)	
@@ -398,7 +408,7 @@ bd27e64cd846c72db90937c7e0fafa64712ec5df	https://github.com/servo/servo/pull/337
 7cd73ef4a7634b3e8f716451681b708d1dcc6acb	https://github.com/servo/servo/pull/33769	use `ThreadSafeJSContext` instead of `ContextForRequestInterrupt` (#33769)	
 61a930402d5ac1f03530d7506960b8a04cfb974a	https://github.com/servo/servo/pull/33770	Update Servo user agent strings (#33770)	
 >>> 2024-10-11T11:46:23Z
-febe7de0bfa2ae3aa8add6670d712db3145c6438	https://github.com/servo/servo/pull/33801	ohos: publish nightly builds (#33801)	
++   febe7de0bfa2ae3aa8add6670d712db3145c6438	https://github.com/servo/servo/pull/33801	ohos: publish nightly builds (#33801)	
 >>> 2024-10-12T05:57:02Z
     e5e1ef9fb6eb0c225ad69b3a7009a82aac08ba60	https://github.com/servo/servo/pull/33816	Replace CanGc::note() calls with arguments in `components/script` (#33816)	
 a86dcfc6e7e163ebc084d69fedc32a368ef7e202	https://github.com/servo/servo/pull/33802	Unify logic for laying out floats and atomic inlines (#33802)	
@@ -435,8 +445,8 @@ b9ed45942d7b22d658955e9bcdd3db0bad1bba99	https://github.com/servo/servo/pull/338
 821bed1d11c289dfd14026f4edb431a223c9e4d6	https://github.com/servo/servo/pull/33817	Fix headless mode on Windows (#33817)	
 9508b83af6589d661de620dabb6c2bd08c453325	https://github.com/servo/servo/pull/33480	fix intermittency of child-document-raf-order test (#33480)	
     cfd15dd14df2e8e6374e25c0a579be0404dbb28b	https://github.com/servo/servo/pull/33828	CanGc fixes originating from `gamepadevent.rs` & `stereopannernode.rs` (#33828)	
-2322b22a6bb62b73fe283e52265af6fbe67d2751	https://github.com/servo/servo/pull/33834	CI: temporarily disable self-hosted runners for nightly.yml (#33834)	
-0d3fad156a026c1e3f8595361faa71cf4295cd9a	https://github.com/servo/servo/pull/33833	Add python3-setuptools to ubuntu apt install line (#33833)	
+    2322b22a6bb62b73fe283e52265af6fbe67d2751	https://github.com/servo/servo/pull/33834	CI: temporarily disable self-hosted runners for nightly.yml (#33834)	
+    0d3fad156a026c1e3f8595361faa71cf4295cd9a	https://github.com/servo/servo/pull/33833	Add python3-setuptools to ubuntu apt install line (#33833)	
 >>> 2024-10-16T06:08:12Z
 ed959d7a1a2a584803f689ce8d92f7d0c3c0d48b	https://github.com/servo/servo/pull/33830	Implement fetch metadata headers (#33830)	
     a2f81d69c1971f07c2af8633756953ddd70a1bb5	https://github.com/servo/servo/pull/33852	CanGc fixes (#33852)	
@@ -593,7 +603,7 @@ dfe1c95aa6fe00bb1a251ddc03d760fbb78152d2	https://github.com/servo/servo/pull/340
     a501572971d7ec6761aeab1f8f5dba00158bc1a6	https://github.com/servo/servo/pull/34045	build(deps): bump hilog from 0.1.0 to 0.1.1 (#34045)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 1070f7ac12b0d46c71071a604649c0bfca375f5e	https://github.com/servo/servo/pull/34018	Fix invalid rooting for PropertyDescriptor (#34018)	
 +   884732dfb25ab8969234c1ec1ef2009b93517974	https://github.com/servo/servo/pull/34048	mach try: Remove `wpt-2013` from `full` and `wpt` (#34048)	
-d3e0efbc21cc4480a4779be36c8a4268e3939cbc	https://github.com/servo/servo/pull/34039	Cleanup: Remove reference to closed issue 7193 (#34039)	
+    d3e0efbc21cc4480a4779be36c8a4268e3939cbc	https://github.com/servo/servo/pull/34039	Cleanup: Remove reference to closed issue 7193 (#34039)	
     83cd349163f1599b0dce7ec89f5225f242378618	https://github.com/servo/servo/pull/34047	build(deps): bump libm from 0.2.8 to 0.2.10 (#34047)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     5244b0212e766a85caf1eec328acddbe4f9fec66	https://github.com/servo/servo/pull/34044	build(deps): bump napi-derive-ohos from 1.0.0 to 1.0.1 (#34044)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     7374f20537923e251fdfdfe25ba28e98599bc4ae	https://github.com/servo/servo/pull/34043	build(deps): bump napi-derive-backend-ohos from 1.0.0 to 1.0.1 (#34043)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -607,22 +617,22 @@ bac1101163a436096fe0b71bed79094658bba3b2	https://github.com/servo/servo/pull/340
 +   7fa548f555310cf4e60ad054f6577fabf57938e0	https://github.com/servo/servo/pull/34034	Implement `SubtleCrypto.digest` (#34034)	
 +   01820e2a8a28bcf3b8e1b17863984d8f729ca79b	https://github.com/servo/servo/pull/31746	Improve how intrinsic sizes work for videos (#31746)	Josh Matthews <josh@joshmatthews.net>	Oriol Brufau <obrufau@igalia.com>
 43d1601016e03fe83fe9b8a526357de1d5fc4122	https://github.com/servo/servo/pull/34054	Only send mapping back on unmap when MapMode = WRITE (#34054)	
-d5554235febb7b12906b01bf7c170ddb1e7d0bb4	https://github.com/servo/servo/pull/34057	layout: Add support for `mix-blend-mode: plus-lighter` (#34057)	
++   d5554235febb7b12906b01bf7c170ddb1e7d0bb4	https://github.com/servo/servo/pull/34057	layout: Add support for `mix-blend-mode: plus-lighter` (#34057)	
 d17321f53d28cbaeed8c1d0ed0d6e317143e6ab6	https://github.com/servo/servo/pull/34004	fix(constellation): pass resolved URL to embedder (#34004)	
     f8e17b68a604ba511c1c92675e44490f257012c1	https://github.com/servo/servo/pull/34061	build(deps): bump libm from 0.2.10 to 0.2.11 (#34061)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     7a72005802f36dfdc19543d4f3b02fea64d1d21d	https://github.com/servo/servo/pull/34059	build(deps): bump mozangle from 0.5.1 to 0.5.2 (#34059)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     36d9fafde8ab9b8a511a33022c9123f12c433fd3	https://github.com/servo/servo/pull/34058	build(deps): bump serde from 1.0.213 to 1.0.214 (#34058)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-000144f52afa9ecc64649ec1914bf5856f3e916c	https://github.com/servo/servo/pull/34055	Remove size_of_test macro from legacy layout and inline it (#34055)	
+    000144f52afa9ecc64649ec1914bf5856f3e916c	https://github.com/servo/servo/pull/34055	Remove size_of_test macro from legacy layout and inline it (#34055)	
 >>> 2024-10-31T06:08:52Z
 62c79514249ac2c493390e75cd66235bd31942f2	https://github.com/servo/servo/pull/34075	Fix timeout in position-absolute-replaced-minmax.html (#34075)	
 cf663309782c95166ac56a481c7bde9483284e5f	https://github.com/servo/servo/pull/34072	Fix `test-speedometer` (#34072)	
 ade562e4810c534b3dc8189cb60868819d7ee888	https://github.com/servo/servo/pull/34073	Update wgpu to v23 (#34073)	
-78ba1613d4b4323c3db4e786ae2c4ae19ba201d8	https://github.com/servo/servo/pull/34063	Improve scrolling speed in servoshell. (#34063)	
++   78ba1613d4b4323c3db4e786ae2c4ae19ba201d8	https://github.com/servo/servo/pull/34063	Improve scrolling speed in servoshell. (#34063)	
 635c10a941a960eb2c54938adbdeea75cc66cba7	https://github.com/servo/servo/pull/34052	Enable css-grid WPT tests (#34052)	
 1891c5cfafe5e589d6bf828deb8ea1ad14f70f61	https://github.com/servo/servo/pull/34026	Properly transfer min/max constraints on auto-sized replaced elements (#34026)	
-f12071f77eef0612c16c0f297c29e95929218576	https://github.com/servo/servo/pull/34070	andrdoid: Fix some compiler warnings (#34070)	
+    f12071f77eef0612c16c0f297c29e95929218576	https://github.com/servo/servo/pull/34070	andrdoid: Fix some compiler warnings (#34070)	
 517e8a376ab1d1b7d2bf6c4d8cf0e738101b57cb	https://github.com/servo/servo/pull/34069	Test <video> with width and height attributes but aspect-ratio:auto (#34069)	
-850e59f98ec49dfc72ea9b71f8db7b6292f28d12	https://github.com/servo/servo/pull/34038	servoshell: Allow overriding screen resolution with a command-line argument (#34038)	
++   850e59f98ec49dfc72ea9b71f8db7b6292f28d12	https://github.com/servo/servo/pull/34038	servoshell: Allow overriding screen resolution with a command-line argument (#34038)	
 d877962ee8a5003b0a6eec9fb3d16f1b759a9f9e	https://github.com/servo/servo/pull/34067	readme: Fix typos in Android build instructions (#34067)	
 ee68dc2589283d9ef37b578b83258d421ec29bcc	https://github.com/servo/servo/pull/33919	Support persisting unminified external stylesheets (#33919)	
 -->
