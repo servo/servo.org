@@ -12,9 +12,21 @@ categories:
     - async FontKey and FontInstanceKey 33600
     - first font instance creation 33638
     - memory mapping system fonts on macOS and freetype platforms 33747 mukilan
+- perf
+    - unmultiply_inplace 33553 33584 33582
+    - flexbox layout tracing 33647
+- architecture
+    - single cross-process compositor api 33619 33660
+    - servoshell drop --no-minibrowser code path 33677
+- webgpu
+    - fixed bugs where we present old images 33613
+- devtools
+    - console firefox 131+ 33661
 - outreachy
     - clippy 31500
     - cangc 33683
+- contributors
+    - wpt summary 33587
 
 >>> 2024-09-28T06:11:36Z
 c1931ee2cbeb16710388ee7c88e0c209ef1df801	https://github.com/servo/servo/pull/33500	Simplify the data: protocol handler (#33500)	
@@ -27,7 +39,7 @@ c7ef974968c32d58e6fdd3213965c0f88ee6e4a5	https://github.com/servo/servo/pull/335
     f96a62f0cea059677a4f51012bcdf96384485525	https://github.com/servo/servo/pull/33566	Bump sccache-action to v0.0.6 (#33566)	
 c519a2cdb68683e2c9b05e54cfd10e022228fb2c	https://github.com/servo/servo/pull/33565	Fix typo on protocol handlers (#33565)	
 78370fa6d082f60cd6fe41a24e98fa52e90dbf1c	https://github.com/servo/servo/pull/33563	Fix mach run bustage (#33563)	
-02953d2fb69413f358210770d10d77efc6d015bd	https://github.com/servo/servo/pull/33553	Move unmultiply_inplace to pixels crate (#33553)	
++   02953d2fb69413f358210770d10d77efc6d015bd	https://github.com/servo/servo/pull/33553	Move unmultiply_inplace to pixels crate (#33553)	
 >>> 2024-09-29T06:07:04Z
 f57ae6005684e0fcc6d3edf96141c6400ac54d45	https://github.com/servo/servo/pull/33573	Let protocol handlers decide if they are fetchable (#33573)	
 5d269a9036a6c0888627778e9102967e58b1ae6a	https://github.com/servo/servo/pull/33577	Simplify the computation of CAPMIN (#33577)	
@@ -36,14 +48,14 @@ d110d8710a7e5e61891810ee7263292b4901a5c8	https://github.com/servo/servo/pull/335
 58f34ad7a3db8c633871d568bfcef8b094217e3e	https://github.com/servo/servo/pull/33581	Create HttpStatus to safely deal with HTTP responses status. (#33581)	
     013473f1d5a18f7d99183593ef370045dc58c978	https://github.com/servo/servo/pull/33580	Sync WPT with upstream (29-09-2024) (#33580)	Samson <16504129+sagudev@users.noreply.github.com>
 >>> 2024-10-01T06:07:04Z
-022a95a2cd55617538f2dc841de3a76ef12ad8d9	https://github.com/servo/servo/pull/33582	Optimized unmultiply_inplace to remove fp ops (#33582)	
++   022a95a2cd55617538f2dc841de3a76ef12ad8d9	https://github.com/servo/servo/pull/33582	Optimized unmultiply_inplace to remove fp ops (#33582)	
     9864a02232600e143c5cc3467d62e2542cd3b84a	https://github.com/servo/servo/pull/33594	build(deps): bump cc from 1.1.22 to 1.1.23 (#33594)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     e98f59946e783a7d7fd5aede3af46f85829cbb32	https://github.com/servo/servo/pull/33593	build(deps): bump png from 0.17.13 to 0.17.14 (#33593)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     f85ac40a381b48aee5feced5596e96cb2ef24ef9	https://github.com/servo/servo/pull/33592	build(deps): bump tempfile from 3.12.0 to 3.13.0 (#33592)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     d4ea1ae1d120a7b83c0ebfa8cce68de4f980cba8	https://github.com/servo/servo/pull/33590	build(deps): bump once_cell from 1.19.0 to 1.20.1 (#33590)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     3b08efa516fd1041b83b8bc592693b383a039e62	https://github.com/servo/servo/pull/33591	build(deps): bump regex from 1.10.6 to 1.11.0 (#33591)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 96006daf6e6665dac48ef60e16ccaec3b6988744	https://github.com/servo/servo/pull/33502	use rerun-if-changed in script/build.rs (#33502)	Martin Robinson <mrobinson@igalia.com>
-1ddfde96ce15687dea84be4e55cee3d381177804	https://github.com/servo/servo/pull/33584	Add a benchmark for for `unmultiply_inplace` in `pixels` (#33584)	
++   1ddfde96ce15687dea84be4e55cee3d381177804	https://github.com/servo/servo/pull/33584	Add a benchmark for for `unmultiply_inplace` in `pixels` (#33584)	
 >>> 2024-10-02T05:58:46Z
 e534c7d4610807fb1a93f17085ec6ada61a4a342	https://github.com/servo/servo/pull/33588	ohos: Allow passing arguments to servoshell (#33588)	
 d7da0563d36d8a6dafecb348ce94ff883242f7cb	https://github.com/servo/servo/pull/33612	Remove unneeded comments about suppressed errors. (#33612)	
@@ -57,23 +69,23 @@ e0aa288dacbaecfb9df7f4d2ef5ff36bd34c748d	https://github.com/servo/servo/pull/335
 05ecb8eddb3989ffcee51df5c2c86887fee8b7e8	https://github.com/servo/servo/pull/33521	webgpu: renovate gpucanvascontext and webgpu presentation to match the spec (#33521)	
     0b2549f4cbf84279580e7792f261da0965d97225	https://github.com/servo/servo/pull/33545	build(deps): bump fdeflate from 0.3.4 to 0.3.5 (#33545)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 5b8f3015c0193008d322b6d87656a5867dfac40e	https://github.com/servo/servo/pull/33598	Add OpenHarmony to supported platforms in Readme. (#33598)	
-5ee8e2e55b9726015b0cd3d21f4f4f9b084a5b67	https://github.com/servo/servo/pull/33596	CI: increase self-hosted runner timeout from 30 to 120 seconds (#33596)	
+    5ee8e2e55b9726015b0cd3d21f4f4f9b084a5b67	https://github.com/servo/servo/pull/33596	CI: increase self-hosted runner timeout from 30 to 120 seconds (#33596)	
 >>> 2024-10-03T06:15:38Z
 c7a4e4f627f0bf331cedc1700ddeb92ffcba4e78	https://github.com/servo/servo/pull/33611	net: Refactor `Decoder` (#33611)	
     c682172440e2010ddd7e225463e81ddb175ebd81	https://github.com/servo/servo/pull/33623	build(deps): bump async-stream from 0.3.5 to 0.3.6 (#33623)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-6d4438808a95f78a2a35e749a8c65e5265b64602	https://github.com/servo/servo/pull/33587	do WPT reports as GitHub job summery (#33587)	Martin Robinson <mrobinson@igalia.com>
++   6d4438808a95f78a2a35e749a8c65e5265b64602	https://github.com/servo/servo/pull/33587	do WPT reports as GitHub job summery (#33587)	Martin Robinson <mrobinson@igalia.com>
     56f0abeb8961bb0481c44cb7cf9f7fedd51d2938	https://github.com/servo/servo/pull/33618	clippy: Fix warnings in components/devtools/actors/inspector (#33618)	
 88dad77483e05560dead8e8d64252e756cea1422	https://github.com/servo/servo/pull/33597	Compositor: add document id to NewWebRenderFrame variant (#33597)	
 >>> 2024-10-04T06:12:51Z
     e1eca71cd175dc8662ecf33f7a782eb3d0fe2364	https://github.com/servo/servo/pull/33641	build(deps): bump hilog-sys from 0.1.1 to 0.1.2 (#33641)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     1170124678c0d091681816b6f58993ee14da6935	https://github.com/servo/servo/pull/33640	build(deps): bump async-compression from 0.4.12 to 0.4.13 (#33640)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 9fcfe09e5185f05af02f617c4a2bd934c29344dc	https://github.com/servo/servo/pull/33621	ohos: Add toast prompt (#33621)	
-f2f5614ad64927aa82aa8937ae14a6086df49d2b	https://github.com/servo/servo/pull/33619	compositor: Create a single cross-process compositor API (#33619)	
-986c3a38a3ae257499c78ce21a50f689faa10c3b	https://github.com/servo/servo/pull/33632	Permitted functions to have too many arguments in components/script/dom (#33632)	
-43d559a1c2510c9244b1592e5ac33f2e8e8732a7	https://github.com/servo/servo/pull/33631	replaced `.map` with `.and_then` and removed `.flatten()` (#33631)	
++   f2f5614ad64927aa82aa8937ae14a6086df49d2b	https://github.com/servo/servo/pull/33619	compositor: Create a single cross-process compositor API (#33619)	
+    986c3a38a3ae257499c78ce21a50f689faa10c3b	https://github.com/servo/servo/pull/33632	Permitted functions to have too many arguments in components/script/dom (#33632)	
+    43d559a1c2510c9244b1592e5ac33f2e8e8732a7	https://github.com/servo/servo/pull/33631	replaced `.map` with `.and_then` and removed `.flatten()` (#33631)	
 634dbd2d7861225181c58416ecda11d04498377e	https://github.com/servo/servo/pull/33627	Replace `ShouldNotImplDomObject` with `NoDomObjectInDomObject` (#33627)	
     cd803c83419fe90960eac4dfefec062202837ad8	https://github.com/servo/servo/pull/33625	clippy: Fix warning in components/compositing (#33625)	
-163e47766841725201f683495f4506f35fc9614c	https://github.com/servo/servo/pull/33630	Less `allow(crown::unrooted_must_root)` in bindings (#33630)	
+    163e47766841725201f683495f4506f35fc9614c	https://github.com/servo/servo/pull/33630	Less `allow(crown::unrooted_must_root)` in bindings (#33630)	
 >>> 2024-10-05T05:57:21Z
 20eb9278439b011db278deac65a5e364c4c6d6b3	https://github.com/servo/servo/pull/33635	chore: Update wgpu again (#33635)	Martin Robinson <mrobinson@igalia.com>
     57d96653eb46fbb66bd11f54d9129cebcda6ac43	https://github.com/servo/servo/pull/33652	build(deps): bump addr2line from 0.24.1 to 0.24.2 (#33652)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -82,17 +94,17 @@ f2f5614ad64927aa82aa8937ae14a6086df49d2b	https://github.com/servo/servo/pull/336
     4850caeec49b22e9c4e9618185408882ad76832c	https://github.com/servo/servo/pull/33648	clippy: Fix too_many_arguments warnings (#33648)	
 +   2234bc56a54c488d39762060b4dbd3e613c8174b	https://github.com/servo/servo/pull/33638	fonts: Eliminate overhead of first font instance creation (#33638)	
     ec05be6300075bcb9fb22df0c1eb941075e9d454	https://github.com/servo/servo/pull/33646	clippy: Fix `too_many_arguments` in `components/layout_thread_2020` (#33646)	
-48f8ff62363e466905279f34c32770e4af17b3cb	https://github.com/servo/servo/pull/33645	Revert "compositor: Create a single cross-process compositor API (#33619)" (#33645)	
+    48f8ff62363e466905279f34c32770e4af17b3cb	https://github.com/servo/servo/pull/33645	Revert "compositor: Create a single cross-process compositor API (#33619)" (#33645)	
     826e31eaa58bbc6c6542c2e1cb5f7d37a07d2e98	https://github.com/servo/servo/pull/33642	build(deps): bump unicode-bidi from 0.3.15 to 0.3.17 (#33642)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     f55e7778883fba0d02ee7a08a737d701403dcd78	https://github.com/servo/servo/pull/33643	clippy: Fix let binding in components/fonts/font_context.rs (#33643)	
     03b8034f6805a2ffdd0d44f59461dc3948c62565	https://github.com/servo/servo/pull/33633	clippy: Fix several warnings in `components/script` and `components/webgpu` (#33633)	
-6e043cd09ed76c0bb4fa92cea2693dc70f42ba52	https://github.com/servo/servo/pull/33613	webgpu: Introduce PresentationId to ensure updates with newer presentation (#33613)	
++   6e043cd09ed76c0bb4fa92cea2693dc70f42ba52	https://github.com/servo/servo/pull/33613	webgpu: Introduce PresentationId to ensure updates with newer presentation (#33613)	
 >>> 2024-10-07T05:58:26Z
     f8933a57353aeca14a6cbc60b3cb0cf98cab6c5d	https://github.com/servo/servo/pull/33668	Sync WPT with upstream (06-10-2024) (#33668)	Josh Matthews <josh@joshmatthews.net>
 ea84f7b135fa4341908b2000aefe18a6907f2994	https://github.com/servo/servo/pull/33659	Enable `stretch` keyword (#33659)	
     0a5540f6a49d3873a5a3c54dd0bc2336cf0b2974	https://github.com/servo/servo/pull/33653	clippy: Fix warnings in `components/script` & `components/webgpu` (#33653)	
 ad8ba49d2cca9de554a9baa3c81188da91b7ec13	https://github.com/servo/servo/pull/33658	Skip anonymous blocks for percentage resolution (#33658)	
-719b5aba24e25b41e87751ca1ad1b130229528ae	https://github.com/servo/servo/pull/33647	tools: Improve instrumentation and add it for some layout (#33647)	
++   719b5aba24e25b41e87751ca1ad1b130229528ae	https://github.com/servo/servo/pull/33647	tools: Improve instrumentation and add it for some layout (#33647)	
 >>> 2024-10-08T06:08:00Z
     d200557434458322260c99747db601c849940ce8	https://github.com/servo/servo/pull/33697	build(deps): bump futures-io from 0.3.30 to 0.3.31 (#33697)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     b4ef1340af893ce351d18d944e3a63f718ed3ce2	https://github.com/servo/servo/pull/33699	build(deps): bump ab_glyph from 0.2.28 to 0.2.29 (#33699)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -100,9 +112,9 @@ ad8ba49d2cca9de554a9baa3c81188da91b7ec13	https://github.com/servo/servo/pull/336
     628ca03a800d4a562bc9d46279e0b7929317c49c	https://github.com/servo/servo/pull/33695	build(deps): bump proc-macro2 from 1.0.86 to 1.0.87 (#33695)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     028026bebe992431ede7c57b7e3065616d859026	https://github.com/servo/servo/pull/33689	Fixed some clippy warnings in components/script and components/devtools (#33689)	
 53d24bb9ea5e3689dd928c1254af55fb2d90f164	https://github.com/servo/servo/pull/33657	fix: disable automatic reseeding (#33657)	
-2642f3ce338f5750c5cbc8878a29f8dffe832921	https://github.com/servo/servo/pull/33686	fix default implementation warning in components\script\dom\identityhub.rs (#33686)	
+    2642f3ce338f5750c5cbc8878a29f8dffe832921	https://github.com/servo/servo/pull/33686	fix default implementation warning in components\script\dom\identityhub.rs (#33686)	
 433f48741b03f1ddf25008265138a9d21569e123	https://github.com/servo/servo/pull/33667	Fix `align-content` set to `start` or `end` on flexbox (#33667)	
-6aaca118a90913b34551840cf02489ad29ee75ff	https://github.com/servo/servo/pull/33677	Drop support for '--no-minibrowser' mode (#33677)	
++   6aaca118a90913b34551840cf02489ad29ee75ff	https://github.com/servo/servo/pull/33677	Drop support for '--no-minibrowser' mode (#33677)	
     38251fe5e79e66cd4f3753b87a14f5240b665ed1	https://github.com/servo/servo/pull/33664	clippy: Fix collapsible_match warning in components/shared (#33664)	
 >>> 2024-10-09T06:09:25Z
     a2b27012a5e7e312345afc2d79ba995af9f5e68b	https://github.com/servo/servo/pull/33724	clippy: Use `flat_map` instead of `map` in `components/devtools` (#33724)	
@@ -112,16 +124,16 @@ ad8ba49d2cca9de554a9baa3c81188da91b7ec13	https://github.com/servo/servo/pull/336
     3c805cd588f47ab05eb15d6e472c8fa8771ebdf6	https://github.com/servo/servo/pull/33735	build(deps): bump clap from 4.5.19 to 4.5.20 (#33735)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     5c6ac23a7a3b8f161f5602d8ee1181352be04563	https://github.com/servo/servo/pull/33734	build(deps): bump once_cell from 1.20.1 to 1.20.2 (#33734)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     217a9e191752f6e657b71d83b8c71d1cd70d7be6	https://github.com/servo/servo/pull/33733	build(deps): bump futures-executor from 0.3.30 to 0.3.31 (#33733)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-bc84dfbae5d73d9951337411d92885cfdc08d6b9	https://github.com/servo/servo/pull/33729	Fix: Add missing transmute annotations in Castable trait (#33729)	
+    bc84dfbae5d73d9951337411d92885cfdc08d6b9	https://github.com/servo/servo/pull/33729	Fix: Add missing transmute annotations in Castable trait (#33729)	
     e8e51b13735c2ff3e36b80743848dc7e92140731	https://github.com/servo/servo/pull/33730	Clippy: fix clone_on_copy in components\script\dom\cryptokey (#33730)	
     609a6ef0f46f2777c4c3edf0dabef5d233f0044a	https://github.com/servo/servo/pull/33728	fix(clippy): add missing annotations for transmute usage in root.rs (#33728)	
 c1b744b2b2c37cdb119a3d3f761822d22f938339	https://github.com/servo/servo/pull/33666	Implement keyword sizes on floats (#33666)	
 39133a547846ead67be0d8ad7dac026cb318dd2d	https://github.com/servo/servo/pull/33692	Replace CanGc::note() calls with arguments in `components/script/dom` (#33692)	
     38c5ebbf8e52aebe5155c80fa1ea4da81838d7de	https://github.com/servo/servo/pull/33685	clippy: Fix warning in `components/script/dom` (#33685)	Martin Robinson <mrobinson@igalia.com>
-9862df877ddf66ac44355204781fd8bd76c39dff	https://github.com/servo/servo/pull/33705	Fix clamp-like pattern warning in font.rs (#33705)	
+    9862df877ddf66ac44355204781fd8bd76c39dff	https://github.com/servo/servo/pull/33705	Fix clamp-like pattern warning in font.rs (#33705)	
     77f7b43548ca8450e663ce456c59a44c723235ec	https://github.com/servo/servo/pull/33690	clippy: Fix large size difference between variants of `ScriptToCompositorMsg` (#33690)	Martin Robinson <mrobinson@igalia.com>
 76cdb0173e853ec28cd7b8b7802b002303fc84b8	https://github.com/servo/servo/pull/33696	Remove dead (and incorrect) logic about vertical overconstrainment (#33696)	
-72eeebe311c65fcdee2c2f4679a9b0121146429b	https://github.com/servo/servo/pull/33707	Fix large enum variant warning in serviceworker_manager.rs (#33707)	
+    72eeebe311c65fcdee2c2f4679a9b0121146429b	https://github.com/servo/servo/pull/33707	Fix large enum variant warning in serviceworker_manager.rs (#33707)	
 dcedfab44fed6b0b330bc60b09f86cb6f094a71c	https://github.com/servo/servo/pull/33711	Attempt to link to MPL-2.0 license page in Windows installer (#33711)	
     fd8ed6c44dfec60557fef7f0d77cc2c9c1fe8a04	https://github.com/servo/servo/pull/33698	build(deps): bump futures-util from 0.3.30 to 0.3.31 (#33698)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     4a53dd9708049776d0def353714052ce4d001e21	https://github.com/servo/servo/pull/33703	build(deps): bump pin-project from 1.1.5 to 1.1.6 (#33703)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -137,11 +149,11 @@ d3c0785d64f0186a31f38308d31c6eee4b577210	https://github.com/servo/servo/pull/337
     9a8e7f4867c2e6c54dec9cba3b3766f52ba8117f	https://github.com/servo/servo/pull/33771	clippy: Fix warnings in components/script/dom (#33771)	
     67edd5683be8ece49db2049ffd09f9b508b73dd9	https://github.com/servo/servo/pull/33766	build(deps): bump dwrote from 0.11.1 to 0.11.2 (#33766)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     f6ec73bc1d2304020011f508e23d7bfd5db3283c	https://github.com/servo/servo/pull/33764	build(deps): bump bindgen from 0.69.4 to 0.69.5 (#33764)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-9195344b75b4e5fd1cd86671b10df46a956f0fea	https://github.com/servo/servo/pull/33660	compositor: Create a single cross-process compositor API (#33619) (#33660)	
++   9195344b75b4e5fd1cd86671b10df46a956f0fea	https://github.com/servo/servo/pull/33660	compositor: Create a single cross-process compositor API (#33619) (#33660)	
 30cbf01280dc3aa03caeaba11f55808f7ba59cf3	https://github.com/servo/servo/pull/33758	Rename first_contained_child & last_contained_child to first_partially_contained_child & last_partially_contained_child (#33758)	
 5ba8054b69e3f9867cecde89a18bf0f134d6f276	https://github.com/servo/servo/pull/33614	refactor `CGClassConstructHook` to use handwritten constructors (#33614)	
 3eee02869a8a9673a52d807c737e4c203d32b1b7	https://github.com/servo/servo/pull/33715	Fix test timing for all tests using xr_promise_test (#33715)	
-af61b1a1074037a36b803357fb03ea72ee01ae66	https://github.com/servo/servo/pull/33661	DevTools: Fix console in Firefox 131 (#33661)	
++   af61b1a1074037a36b803357fb03ea72ee01ae66	https://github.com/servo/servo/pull/33661	DevTools: Fix console in Firefox 131 (#33661)	
 a6da1daa126705fcb7393d605e4844640e4fefe0	https://github.com/servo/servo/pull/33745	Cleanup FontContext privacy (#33745)	
 4d200a43483296aa57f2c2ddf37bfdbaede346bc	https://github.com/servo/servo/pull/33749	Use `--break-system-packages` when running pip in the WPT export job (#33749)	
 c430645606396a300b57a4d9c909db959486ca4c	https://github.com/servo/servo/pull/33755	ci: pin the ubuntu runner version in lint job. (#33755)	
