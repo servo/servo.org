@@ -243,12 +243,12 @@ fd19409f31c038b5b89c7ed4b73ebabcfd241355	https://github.com/servo/servo/pull/337
     c6d305fbb32dcda968b5f7501796137252d9d643	https://github.com/servo/servo/pull/33781	fix clippy warnings in codegen (#33781)	
     f9a06d62a2757eefc729f2126a0d50afa919399f	https://github.com/servo/servo/pull/33774	More CanGc fixes: Range, Event, gpu error, Header (#33774)	
 +   8c56cbdab207239e4f05b253970e16e75b0a3958	https://github.com/servo/servo/pull/33737	Implement keyword sizes on atomic inlines (#33737)	
-52cddb45bdba037b6016e7183ee68036bc36fbe5	https://github.com/servo/servo/pull/33754	Use `content_box_sizes_and_padding_border_margin_deprecated()` in `FlexItem::new()` (#33754)	
+    52cddb45bdba037b6016e7183ee68036bc36fbe5	https://github.com/servo/servo/pull/33754	Use `contentj_box_sizes_and_padding_border_margin_deprecated()` in `FlexItem::new()` (#33754)	
     6f87c38cda290a46148102b124a82fe786c0bcbe	https://github.com/servo/servo/pull/33762	clippy: Rename various methods and members to conform to naming guidelines (#33762)	
-2805d3ce149fac5786b96d83cdbb2d50583bc75d	https://github.com/servo/servo/pull/33773	Fix writing mode in `content_box_sizes_and_padding_border_margin()` (#33773)	
-bd27e64cd846c72db90937c7e0fafa64712ec5df	https://github.com/servo/servo/pull/33750	fix possible IndexError (#33750)	
+    2805d3ce149fac5786b96d83cdbb2d50583bc75d	https://github.com/servo/servo/pull/33773	Fix writing mode in `content_box_sizes_and_padding_border_margin()` (#33773)	
+    bd27e64cd846c72db90937c7e0fafa64712ec5df	https://github.com/servo/servo/pull/33750	fix possible IndexError (#33750)	
 7cd73ef4a7634b3e8f716451681b708d1dcc6acb	https://github.com/servo/servo/pull/33769	use `ThreadSafeJSContext` instead of `ContextForRequestInterrupt` (#33769)	
-61a930402d5ac1f03530d7506960b8a04cfb974a	https://github.com/servo/servo/pull/33770	Update Servo user agent strings (#33770)	
+    61a930402d5ac1f03530d7506960b8a04cfb974a	https://github.com/servo/servo/pull/33770	Update Servo user agent strings (#33770)	
 >>> 2024-10-11T11:46:23Z
 +   febe7de0bfa2ae3aa8add6670d712db3145c6438	https://github.com/servo/servo/pull/33801	ohos: publish nightly builds (#33801)	
 >>> 2024-10-12T05:57:02Z
