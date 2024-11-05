@@ -8,6 +8,10 @@ categories:
 ---
 
 <!--
+- fonts
+    - async FontKey and FontInstanceKey 33600
+    - first font instance creation 33638
+    - memory mapping system fonts on macOS and freetype platforms 33747 mukilan
 - outreachy
     - clippy 31500
     - cangc 33683
@@ -20,7 +24,7 @@ c1931ee2cbeb16710388ee7c88e0c209ef1df801	https://github.com/servo/servo/pull/335
     40627334d7abf1649b7791e7f40ffdb3b2213574	https://github.com/servo/servo/pull/33569	build(deps): bump cc from 1.1.21 to 1.1.22 (#33569)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 057dd1e9eb46749f3e38bf7fbbf05392d8fbe1fd	https://github.com/servo/servo/pull/33558	Make ComputedValuesExt expose keywords for the sizing properties (#33558)	
 c7ef974968c32d58e6fdd3213965c0f88ee6e4a5	https://github.com/servo/servo/pull/33562	fetch: header tweaks to improve compliance with fetch spec (#33562)	
-f96a62f0cea059677a4f51012bcdf96384485525	https://github.com/servo/servo/pull/33566	Bump sccache-action to v0.0.6 (#33566)	
+    f96a62f0cea059677a4f51012bcdf96384485525	https://github.com/servo/servo/pull/33566	Bump sccache-action to v0.0.6 (#33566)	
 c519a2cdb68683e2c9b05e54cfd10e022228fb2c	https://github.com/servo/servo/pull/33565	Fix typo on protocol handlers (#33565)	
 78370fa6d082f60cd6fe41a24e98fa52e90dbf1c	https://github.com/servo/servo/pull/33563	Fix mach run bustage (#33563)	
 02953d2fb69413f358210770d10d77efc6d015bd	https://github.com/servo/servo/pull/33553	Move unmultiply_inplace to pixels crate (#33553)	
@@ -49,7 +53,7 @@ c76524e63bee4c00f7b3be26c021e314526f8b3a	https://github.com/servo/servo/pull/331
     d63d975a2e76558defe8b0055f72e2443a6a5f6f	https://github.com/servo/servo/pull/33607	build(deps): bump cc from 1.1.23 to 1.1.24 (#33607)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     a67e921bfa6b56f77976d7b79b71a99981b42c8e	https://github.com/servo/servo/pull/33606	build(deps): bump unicode-properties from 0.1.2 to 0.1.3 (#33606)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 e0aa288dacbaecfb9df7f4d2ef5ff36bd34c748d	https://github.com/servo/servo/pull/33579	Refactor sizing logic for table measures (#33579)	
-abad89a49c1fbad584627deaa7440f50a5cc9912	https://github.com/servo/servo/pull/33600	fonts: Make `FontKey` and `FontInstanceKey` generation asynchronous (#33600)	
++   abad89a49c1fbad584627deaa7440f50a5cc9912	https://github.com/servo/servo/pull/33600	fonts: Make `FontKey` and `FontInstanceKey` generation asynchronous (#33600)	
 05ecb8eddb3989ffcee51df5c2c86887fee8b7e8	https://github.com/servo/servo/pull/33521	webgpu: renovate gpucanvascontext and webgpu presentation to match the spec (#33521)	
     0b2549f4cbf84279580e7792f261da0965d97225	https://github.com/servo/servo/pull/33545	build(deps): bump fdeflate from 0.3.4 to 0.3.5 (#33545)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 5b8f3015c0193008d322b6d87656a5867dfac40e	https://github.com/servo/servo/pull/33598	Add OpenHarmony to supported platforms in Readme. (#33598)	
@@ -76,7 +80,7 @@ f2f5614ad64927aa82aa8937ae14a6086df49d2b	https://github.com/servo/servo/pull/336
     73a0aef7a4ae4fdd677223683d47742d70f8595b	https://github.com/servo/servo/pull/33651	build(deps): bump object from 0.36.4 to 0.36.5 (#33651)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     37cd910e7993d385636301eebd642cb4e51b9ae8	https://github.com/servo/servo/pull/33650	build(deps): bump gimli from 0.31.0 to 0.31.1 (#33650)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     4850caeec49b22e9c4e9618185408882ad76832c	https://github.com/servo/servo/pull/33648	clippy: Fix too_many_arguments warnings (#33648)	
-2234bc56a54c488d39762060b4dbd3e613c8174b	https://github.com/servo/servo/pull/33638	fonts: Eliminate overhead of first font instance creation (#33638)	
++   2234bc56a54c488d39762060b4dbd3e613c8174b	https://github.com/servo/servo/pull/33638	fonts: Eliminate overhead of first font instance creation (#33638)	
     ec05be6300075bcb9fb22df0c1eb941075e9d454	https://github.com/servo/servo/pull/33646	clippy: Fix `too_many_arguments` in `components/layout_thread_2020` (#33646)	
 48f8ff62363e466905279f34c32770e4af17b3cb	https://github.com/servo/servo/pull/33645	Revert "compositor: Create a single cross-process compositor API (#33619)" (#33645)	
     826e31eaa58bbc6c6542c2e1cb5f7d37a07d2e98	https://github.com/servo/servo/pull/33642	build(deps): bump unicode-bidi from 0.3.15 to 0.3.17 (#33642)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -150,7 +154,7 @@ ff6523c37e132605c0945bdc49f15b75b0566d2e	https://github.com/servo/servo/pull/337
 c00c6e728ddb82d6cb646eb924a73c4b43a798a4	https://github.com/servo/servo/pull/33792	Implement DOMMatrix `stringifier` (#33792)	
 fc2c77be8363759657b50992b93d08d40f8fbf1b	https://github.com/servo/servo/pull/33794	Use NaN-safe comparisons in DOMQuad::GetBounds (#33794)	
 f15da16da403b4b5510e7722b555ee0c0c1f3de4	https://github.com/servo/servo/pull/33796	Update DOMMatrix::is2D when modifying elements (#33796)	
-0553789d4839c4bf750f386f3f07a71b4a21f38e	https://github.com/servo/servo/pull/33747	fonts: Instantiate system fonts using system font loaders (#33747)	Mukilan Thiyagarajan <mukilan@igalia.com>
++   0553789d4839c4bf750f386f3f07a71b4a21f38e	https://github.com/servo/servo/pull/33747	fonts: Instantiate system fonts using system font loaders (#33747)	Mukilan Thiyagarajan <mukilan@igalia.com>
     4564ce2fcc970d213dc8c109ab8f02a959254046	https://github.com/servo/servo/pull/33793	build(deps): bump wasm-bindgen from 0.2.93 to 0.2.95 (#33793)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 091b8ecda0e509cfc49f546294f23180303892d0	https://github.com/servo/servo/pull/33780	layout: Handle inline margins in `layout_for_block_content_size()` (#33780)	
     81ce12b23aab15ecaede17b79ae96c5aac07a28e	https://github.com/servo/servo/pull/33788	build(deps): bump async-compression from 0.4.13 to 0.4.14 (#33788)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
