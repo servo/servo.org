@@ -9,9 +9,15 @@ categories:
 
 <!--
 - api features
-    - 2024-10-11 ‘min-content’, ‘max-content’, ‘fit-content’, and ‘stretch’ on atomic inlines 33737
     - 2024-10-11 toString() method on DOMMatrix and DOMMatrixReadOnly 33792
-- flexbox
+    - 2024-10-25 ‘transition-behavior: allow-discrete’ 33991
+    - 2024-10-27 ‘transition: allow-discrete’ 34005
+- layout
+    - keyword sizes (‘min-content’, ‘max-content’, ‘fit-content’, ‘stretch’)
+        - 2024-10-09 floats 33666
+        - 2024-10-11 atomic inlines 33737
+        - 2024-10-23 absolute/fixed positioned elements 33950
+        - 2024-10-27 intrinsic contributions 33854
     - flex container intrinsic size with inline margins 33780
 - fonts
     - async FontKey and FontInstanceKey 33600
@@ -27,12 +33,14 @@ categories:
     - fixed bugs where we present old images 33613
 - devtools
     - console firefox 131+ 33661
+    - remove iframes from tab list 34032
 - outreachy
     - clippy 31500
     - cangc 33683 33684
     - downcasting refactor 33804
 - contributors
     - wpt summary 33587
+    - `full` and `wpt` no longer test layout 2013. 34048
 
 >>> 2024-09-28T06:11:36Z
 c1931ee2cbeb16710388ee7c88e0c209ef1df801	https://github.com/servo/servo/pull/33500	Simplify the data: protocol handler (#33500)	
@@ -133,7 +141,7 @@ ad8ba49d2cca9de554a9baa3c81188da91b7ec13	https://github.com/servo/servo/pull/336
     bc84dfbae5d73d9951337411d92885cfdc08d6b9	https://github.com/servo/servo/pull/33729	Fix: Add missing transmute annotations in Castable trait (#33729)	
     e8e51b13735c2ff3e36b80743848dc7e92140731	https://github.com/servo/servo/pull/33730	Clippy: fix clone_on_copy in components\script\dom\cryptokey (#33730)	
     609a6ef0f46f2777c4c3edf0dabef5d233f0044a	https://github.com/servo/servo/pull/33728	fix(clippy): add missing annotations for transmute usage in root.rs (#33728)	
-c1b744b2b2c37cdb119a3d3f761822d22f938339	https://github.com/servo/servo/pull/33666	Implement keyword sizes on floats (#33666)	
++   c1b744b2b2c37cdb119a3d3f761822d22f938339	https://github.com/servo/servo/pull/33666	Implement keyword sizes on floats (#33666)	
     39133a547846ead67be0d8ad7dac026cb318dd2d	https://github.com/servo/servo/pull/33692	Replace CanGc::note() calls with arguments in `components/script/dom` (#33692)	
     38c5ebbf8e52aebe5155c80fa1ea4da81838d7de	https://github.com/servo/servo/pull/33685	clippy: Fix warning in `components/script/dom` (#33685)	Martin Robinson <mrobinson@igalia.com>
     9862df877ddf66ac44355204781fd8bd76c39dff	https://github.com/servo/servo/pull/33705	Fix clamp-like pattern warning in font.rs (#33705)	
@@ -323,7 +331,7 @@ fee927475b6bd13e80a4bdc1712cb3aa04805099	https://github.com/servo/servo/pull/339
 6fdd5ce4cb97579991aeb59d20adc9af941c84e2	https://github.com/servo/servo/pull/33938	Ensure compiled script module object remains rooted while it's being passed around. (#33938)	
     7fbd2a521ee8ec6b21dd67e462da25883ecccabf	https://github.com/servo/servo/pull/33973	CanGc fixes from eventtarget.rs (#33973)	
 7b392db02f96fa5f3663c5c9d29eed988efe0030	https://github.com/servo/servo/pull/33963	crypto: Add support for AES-CTR operations (#33963)	
-1c26c0335e49761a25167e118a10265b17632690	https://github.com/servo/servo/pull/33950	Implement keyword sizes on absolute/fixed positioned elements (#33950)	
++   1c26c0335e49761a25167e118a10265b17632690	https://github.com/servo/servo/pull/33950	Implement keyword sizes on absolute/fixed positioned elements (#33950)	
     c5ee573c6d076267bc5e8e7a1f697503bbc643da	https://github.com/servo/servo/pull/33969	build(deps): bump bytes from 1.7.2 to 1.8.0 (#33969)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     8c2f4166b68d8bb446e300cfc84e690b26f39748	https://github.com/servo/servo/pull/33970	build(deps): bump tokio from 1.40.0 to 1.41.0 (#33970)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     061636fb0796453bd181cafb341782b3deed0858	https://github.com/servo/servo/pull/33968	build(deps): bump serde from 1.0.210 to 1.0.212 (#33968)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -348,7 +356,7 @@ edc304854ff18bc686f8e2adc6cb64cbad181598	https://github.com/servo/servo/pull/339
     12e6ec25aa809e3c9b3c99be1cbcc76a5a8e6868	https://github.com/servo/servo/pull/33975	Propagate CanGc when interacting with readable streams. (#33975)	
     f553bda7ebc676c2b7e866fc38b6b52b3fbf4fa2	https://github.com/servo/servo/pull/33971	clippy: Fix warning in `fonts/platform/macos/font_list.rs` (#33971)	
 >>> 2024-10-25T06:11:41Z
-f05f1b3690d78404c74e829f340c075168b1b609	https://github.com/servo/servo/pull/33991	Implement `transition-behavior` (#33991)	
++   f05f1b3690d78404c74e829f340c075168b1b609	https://github.com/servo/servo/pull/33991	Implement `transition-behavior` (#33991)	
     156840bbadcb01fb0a2f96ab18cbe44f7170701f	https://github.com/servo/servo/pull/34001	build(deps): bump pin-project from 1.1.6 to 1.1.7 (#34001)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     5dd7fe296968c2c1a56b96f5a5d9e4eb561c5a2b	https://github.com/servo/servo/pull/34000	build(deps): bump syn from 2.0.82 to 2.0.85 (#34000)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 52db185568ca4dc49d28211f70b29aedecffaaf0	https://github.com/servo/servo/pull/33967	layout: Avoid layout sometimes when stretching (#33967)	Oriol Brufau <obrufau@igalia.com>
@@ -368,9 +376,9 @@ f05f1b3690d78404c74e829f340c075168b1b609	https://github.com/servo/servo/pull/339
     21906e5d8c43485d8fc277df2576d7d87cc4ac3b	https://github.com/servo/servo/pull/34012	build(deps): bump wayland-protocols-wlr from 0.3.4 to 0.3.5 (#34012)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     8e2a0414e870ffbca620a05ea9a18878e81e6622	https://github.com/servo/servo/pull/34011	build(deps): bump anstyle from 1.0.8 to 1.0.9 (#34011)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 f4ff067387dd44b15a4c5e2f8c075d610021c43f	https://github.com/servo/servo/pull/33990	chore: Update WebGPU CTS (#33990)	
-faeb31d6c6aed117a76a052e6dd85646398b06b2	https://github.com/servo/servo/pull/33854	Implement keyword sizes for intrinsic contributions (#33854)	
++   faeb31d6c6aed117a76a052e6dd85646398b06b2	https://github.com/servo/servo/pull/33854	Implement keyword sizes for intrinsic contributions (#33854)	
 831a65917a1ffa3f24fcc67ea0955a9d15d7d449	https://github.com/servo/servo/pull/34022	ci: pin python to 3.12 for mac workflows (#34022)	
-5d4b5514aa339d115d0ac9e1131eb7bef1d99a0b	https://github.com/servo/servo/pull/34005	Allow parsing `transition-behavior` value in `transition` shorthand (#34005)	
++   5d4b5514aa339d115d0ac9e1131eb7bef1d99a0b	https://github.com/servo/servo/pull/34005	Allow parsing `transition-behavior` value in `transition` shorthand (#34005)	
 dfe1c95aa6fe00bb1a251ddc03d760fbb78152d2	https://github.com/servo/servo/pull/34006	Avoid crash in replaced layout, and fix behavior for non-auto aspect-ratio (#34006)	
 43c8441f6ce0a9f41fbf4ff020454ef120c8dab0	https://github.com/servo/servo/pull/34008	ServoShell: Don't request redrawing again when processing a RedrawRequested event (#34008)	
 600ba602b75bcad884fee75125aaf5a616fb8d91	https://github.com/servo/servo/pull/34009	Limit HtmlOptionsCollection.length setter to 100k elements (#34009)	
@@ -379,13 +387,13 @@ dfe1c95aa6fe00bb1a251ddc03d760fbb78152d2	https://github.com/servo/servo/pull/340
 3b5dc069ae338ebf373471e32874ea8f4ba3ade3	https://github.com/servo/servo/pull/33989	dom: Stub out the `IntersectionObserver` interface (#33989)	
     1624530ffe38753e0166cdc6c420c784c3f654d8	https://github.com/servo/servo/pull/33999	build(deps): bump encoding_rs from 0.8.34 to 0.8.35 (#33999)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>	Mukilan Thiyagarajan <mukilan@igalia.com>
 >>> 2024-10-28T06:06:59Z
-10aa485c0c07b146cbeff21dadfe34f5be6364b9	https://github.com/servo/servo/pull/34032	Devtools: Don't display iframes in the tab list (#34032)	
-ccafda9a5965f2f7253e3b554771398b03e93184	https://github.com/servo/servo/pull/34031	Cargo.toml cleanup (#34031)	
-20ce979c4c9669e1cde270afe8fd72aaa7eda9a4	https://github.com/servo/servo/pull/34030	Update some dependencies (#34030)	
++   10aa485c0c07b146cbeff21dadfe34f5be6364b9	https://github.com/servo/servo/pull/34032	Devtools: Don't display iframes in the tab list (#34032)	
+    ccafda9a5965f2f7253e3b554771398b03e93184	https://github.com/servo/servo/pull/34031	Cargo.toml cleanup (#34031)	
+    20ce979c4c9669e1cde270afe8fd72aaa7eda9a4	https://github.com/servo/servo/pull/34030	Update some dependencies (#34030)	
 >>> 2024-10-29T06:08:16Z
     a501572971d7ec6761aeab1f8f5dba00158bc1a6	https://github.com/servo/servo/pull/34045	build(deps): bump hilog from 0.1.0 to 0.1.1 (#34045)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 1070f7ac12b0d46c71071a604649c0bfca375f5e	https://github.com/servo/servo/pull/34018	Fix invalid rooting for PropertyDescriptor (#34018)	
-884732dfb25ab8969234c1ec1ef2009b93517974	https://github.com/servo/servo/pull/34048	mach try: Remove `wpt-2013` from `full` and `wpt` (#34048)	
++   884732dfb25ab8969234c1ec1ef2009b93517974	https://github.com/servo/servo/pull/34048	mach try: Remove `wpt-2013` from `full` and `wpt` (#34048)	
 d3e0efbc21cc4480a4779be36c8a4268e3939cbc	https://github.com/servo/servo/pull/34039	Cleanup: Remove reference to closed issue 7193 (#34039)	
     83cd349163f1599b0dce7ec89f5225f242378618	https://github.com/servo/servo/pull/34047	build(deps): bump libm from 0.2.8 to 0.2.10 (#34047)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     5244b0212e766a85caf1eec328acddbe4f9fec66	https://github.com/servo/servo/pull/34044	build(deps): bump napi-derive-ohos from 1.0.0 to 1.0.1 (#34044)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
