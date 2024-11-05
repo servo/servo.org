@@ -205,13 +205,17 @@
     - 2024-10-11 toString() method on DOMMatrix and DOMMatrixReadOnly 33792
     - 2024-10-25 ‘transition-behavior: allow-discrete’ 33991
     - 2024-10-27 ‘transition: allow-discrete’ 34005
+    - 2024-10-30 `crypto.subtle.digest()` 34034
 - layout
     - keyword sizes (‘min-content’, ‘max-content’, ‘fit-content’, ‘stretch’)
         - 2024-10-09 floats 33666
         - 2024-10-11 atomic inlines 33737
         - 2024-10-23 absolute/fixed positioned elements 33950
+        - 2024-10-23 prevent ‘stretch’ from being negative 33951
         - 2024-10-27 intrinsic contributions 33854
     - flex container intrinsic size with inline margins 33780
+    - cyclic percentages in ‘min-width’ and ‘min-height’ 33988
+    - video intrinsic size 31746
 - fonts
     - async FontKey and FontInstanceKey 33600
     - first font instance creation 33638
@@ -219,6 +223,8 @@
 - perf
     - unmultiply_inplace 33553 33584 33582
     - flexbox layout tracing 33647
+    - flexbox caching to avoid unnecessary layouts 33964 33967
+    - servoshell avoid unnecessary redraws 34008
 - architecture
     - single cross-process compositor api 33619 33660
     - servoshell drop --no-minibrowser code path 33677
@@ -530,11 +536,11 @@ fee927475b6bd13e80a4bdc1712cb3aa04805099	https://github.com/servo/servo/pull/339
     061636fb0796453bd181cafb341782b3deed0858	https://github.com/servo/servo/pull/33968	build(deps): bump serde from 1.0.210 to 1.0.212 (#33968)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     09c0c65fe81f43400011bd0e61401b480bed1b07	https://github.com/servo/servo/pull/33966	build(deps): bump proc-macro2 from 1.0.88 to 1.0.89 (#33966)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 78d48ae2fb58e4c2e2a27a21d6e90f81c9fe951b	https://github.com/servo/servo/pull/33929	Fix GC borrow hazard in XRSession::UpdateTargetFrameRate (#33929)	
-01c9ecfe01a06ca509bdaf1d5a77d1a0d0938b2c	https://github.com/servo/servo/pull/33964	layout: Cache content block size contributions (#33964)	Oriol Brufau <obrufau@igalia.com>
++   01c9ecfe01a06ca509bdaf1d5a77d1a0d0938b2c	https://github.com/servo/servo/pull/33964	layout: Cache content block size contributions (#33964)	Oriol Brufau <obrufau@igalia.com>
     7015e0fb5f1a63ed13a5b07b056036e6e7adbc16	https://github.com/servo/servo/pull/33960	CanGc fixes in `errorevent.rs` (#33960)	
     575e8855294a9ee2094b110a7c1fea868e69251e	https://github.com/servo/servo/pull/33928	Mark promise creation methods with CanGc (#33928)	
 edc304854ff18bc686f8e2adc6cb64cbad181598	https://github.com/servo/servo/pull/33962	Avoid invalid lifetime extension for winit event loop. (#33962)	
-8824c907160852db8162bb2bb83281f10f840ffa	https://github.com/servo/servo/pull/33951	Prevent `stretch` from producing a negative size (#33951)	
++   8824c907160852db8162bb2bb83281f10f840ffa	https://github.com/servo/servo/pull/33951	Prevent `stretch` from producing a negative size (#33951)	
     afeaff7f1aaa1950e7597a478b5061ccb5b93686	https://github.com/servo/servo/pull/33956	build(deps): bump prettyplease from 0.2.22 to 0.2.24 (#33956)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 >>> 2024-10-24T06:04:52Z
     d74b078c2f7a5d841712b7fe32e93914aad68d18	https://github.com/servo/servo/pull/33981	build(deps): bump anyhow from 1.0.90 to 1.0.91 (#33981)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -552,14 +558,14 @@ edc304854ff18bc686f8e2adc6cb64cbad181598	https://github.com/servo/servo/pull/339
 +   f05f1b3690d78404c74e829f340c075168b1b609	https://github.com/servo/servo/pull/33991	Implement `transition-behavior` (#33991)	
     156840bbadcb01fb0a2f96ab18cbe44f7170701f	https://github.com/servo/servo/pull/34001	build(deps): bump pin-project from 1.1.6 to 1.1.7 (#34001)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     5dd7fe296968c2c1a56b96f5a5d9e4eb561c5a2b	https://github.com/servo/servo/pull/34000	build(deps): bump syn from 2.0.82 to 2.0.85 (#34000)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-52db185568ca4dc49d28211f70b29aedecffaaf0	https://github.com/servo/servo/pull/33967	layout: Avoid layout sometimes when stretching (#33967)	Oriol Brufau <obrufau@igalia.com>
++   52db185568ca4dc49d28211f70b29aedecffaaf0	https://github.com/servo/servo/pull/33967	layout: Avoid layout sometimes when stretching (#33967)	Oriol Brufau <obrufau@igalia.com>
     638b520186f30d66fefa5a687799093dec071306	https://github.com/servo/servo/pull/33998	build(deps): bump pin-project-lite from 0.2.14 to 0.2.15 (#33998)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     7b6a806bed8696a9b3683907130d7bdb2328a64d	https://github.com/servo/servo/pull/33997	build(deps): bump wayland-protocols from 0.32.4 to 0.32.5 (#33997)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     18e9786899a10f7f13454e642b61698711d1a338	https://github.com/servo/servo/pull/33996	build(deps): bump prettyplease from 0.2.24 to 0.2.25 (#33996)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     0efea141cfef2813ad9c58b46769333758990d65	https://github.com/servo/servo/pull/33994	build(deps): bump regex from 1.11.0 to 1.11.1 (#33994)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     cdb09ebfa90288ac788fc5a8308f03bceffd192b	https://github.com/servo/servo/pull/33995	build(deps): bump wayland-cursor from 0.31.6 to 0.31.7 (#33995)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-9ad59d14593ec8255fa2b3151fc1037e2dfc31fb	https://github.com/servo/servo/pull/33988	Consistent resolution of cyclic percentages in min sizing properties (#33988)	
-202cb53d5bc2c5dbed376bca9da4ebc531c1e3f0	https://github.com/servo/servo/pull/33987	add allow(non_camel_case_types) to generated pref structs (#33987)	
++   9ad59d14593ec8255fa2b3151fc1037e2dfc31fb	https://github.com/servo/servo/pull/33988	Consistent resolution of cyclic percentages in min sizing properties (#33988)	
+    202cb53d5bc2c5dbed376bca9da4ebc531c1e3f0	https://github.com/servo/servo/pull/33987	add allow(non_camel_case_types) to generated pref structs (#33987)	
     12dd79c3e86d4f504fda519fa4aec11fd8721628	https://github.com/servo/servo/pull/33982	build(deps): bump lyon_geom from 1.0.5 to 1.0.6 (#33982)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 >>> 2024-10-27T06:08:47Z
     63b2f813af05a5d1600354b97901a764507951f5	https://github.com/servo/servo/pull/34029	Update web-platform-tests to revision b'73d6bd0d61f0ad5341d0c2303a7638e3aa12a594' (#34029)	
@@ -573,7 +579,7 @@ f4ff067387dd44b15a4c5e2f8c075d610021c43f	https://github.com/servo/servo/pull/339
 831a65917a1ffa3f24fcc67ea0955a9d15d7d449	https://github.com/servo/servo/pull/34022	ci: pin python to 3.12 for mac workflows (#34022)	
 +   5d4b5514aa339d115d0ac9e1131eb7bef1d99a0b	https://github.com/servo/servo/pull/34005	Allow parsing `transition-behavior` value in `transition` shorthand (#34005)	
 dfe1c95aa6fe00bb1a251ddc03d760fbb78152d2	https://github.com/servo/servo/pull/34006	Avoid crash in replaced layout, and fix behavior for non-auto aspect-ratio (#34006)	
-43c8441f6ce0a9f41fbf4ff020454ef120c8dab0	https://github.com/servo/servo/pull/34008	ServoShell: Don't request redrawing again when processing a RedrawRequested event (#34008)	
++   43c8441f6ce0a9f41fbf4ff020454ef120c8dab0	https://github.com/servo/servo/pull/34008	ServoShell: Don't request redrawing again when processing a RedrawRequested event (#34008)	
 600ba602b75bcad884fee75125aaf5a616fb8d91	https://github.com/servo/servo/pull/34009	Limit HtmlOptionsCollection.length setter to 100k elements (#34009)	
     fd6c10048938a21b24a9e67b0cf0e64d5e263614	https://github.com/servo/servo/pull/34003	CanGc fixes in messageport.rs & workerglobalscope.rs (#34003)	
     7ad8822d94f22969af4ebe1130a0050e78fbc21b	https://github.com/servo/servo/pull/34002	cangc fixes in several files + event.rs + rtcpeerconnection.rs (#34002)	
@@ -598,8 +604,8 @@ d3e0efbc21cc4480a4779be36c8a4268e3939cbc	https://github.com/servo/servo/pull/340
 a01d66df5388d11aeb6dbd8ac9ccc84302d394bb	https://github.com/servo/servo/pull/34028	webgpu: Move supported context format to content timeline (#34028)	
 >>> 2024-10-30T07:43:54Z
 bac1101163a436096fe0b71bed79094658bba3b2	https://github.com/servo/servo/pull/34062	Fix CMake issues on OpenHarmony (#34062)	
-7fa548f555310cf4e60ad054f6577fabf57938e0	https://github.com/servo/servo/pull/34034	Implement `SubtleCrypto.digest` (#34034)	
-01820e2a8a28bcf3b8e1b17863984d8f729ca79b	https://github.com/servo/servo/pull/31746	Improve how intrinsic sizes work for videos (#31746)	Josh Matthews <josh@joshmatthews.net>	Oriol Brufau <obrufau@igalia.com>
++   7fa548f555310cf4e60ad054f6577fabf57938e0	https://github.com/servo/servo/pull/34034	Implement `SubtleCrypto.digest` (#34034)	
++   01820e2a8a28bcf3b8e1b17863984d8f729ca79b	https://github.com/servo/servo/pull/31746	Improve how intrinsic sizes work for videos (#31746)	Josh Matthews <josh@joshmatthews.net>	Oriol Brufau <obrufau@igalia.com>
 43d1601016e03fe83fe9b8a526357de1d5fc4122	https://github.com/servo/servo/pull/34054	Only send mapping back on unmap when MapMode = WRITE (#34054)	
 d5554235febb7b12906b01bf7c170ddb1e7d0bb4	https://github.com/servo/servo/pull/34057	layout: Add support for `mix-blend-mode: plus-lighter` (#34057)	
 d17321f53d28cbaeed8c1d0ed0d6e317143e6ab6	https://github.com/servo/servo/pull/34004	fix(constellation): pass resolved URL to embedder (#34004)	
