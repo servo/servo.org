@@ -15,22 +15,22 @@ categories:
 - wpt <https://wpt.servo.org>
     - 2024-11-04 60% on all of wpt?
     - 2024-10-31 enabled css-grid tests 34052
-- api features
-    - 2024-09-28 better handling of data: urls 33500
+- DONE api features
+    - DONE 2024-09-28 better handling of data: urls 33500
     - DONE 2024-10-09 `crypto.subtle.generateKey("AES-CBC")` 33628
     - DONE 2024-10-11 toString() method on DOMMatrix and DOMMatrixReadOnly 33792
     - DONE 2024-10-12 `DOMRect.fromRect()` 33798
         - DONE getBounds() method on DOMQuad now handles NaN correctly 33794
         - DONE is2D attribute on DOMMatrix now updates on mutation 33796
-    - 2024-10-16 fetch metadata headers (‘Sec-Fetch-Site’, ‘Sec-Fetch-Mode’, ‘Sec-Fetch-User’, ‘Sec-Fetch-Dest’) 33830
-    - 2024-10-18 non-ASCII characters in <img srcset> 33873
+    - DONE 2024-10-16 fetch metadata headers (‘Sec-Fetch-Site’, ‘Sec-Fetch-Mode’, ‘Sec-Fetch-User’, ‘Sec-Fetch-Dest’) 33830
+    - DONE 2024-10-18 non-ASCII characters in <img srcset> 33873
     - DONE 2024-10-22 `crypto.subtle.encrypt()` and `decrypt()` for AES-CBC 33795
     - DONE 2024-10-23 `crypto.subtle.generateKey("AES-CTR")` 33963
-    - 2024-10-25 ‘transition-behavior: allow-discrete’ 33991
-    - 2024-10-27 ‘transition: allow-discrete’ 34005
-    - 2024-10-27 stub interface for IntersectionObserver 33989
+    - DONE 2024-10-25 ‘transition-behavior: allow-discrete’ 33991
+    - DONE 2024-10-27 ‘transition: allow-discrete’ 34005
+    - DONE 2024-10-27 stub interface for IntersectionObserver 33989
     - DONE 2024-10-30 `crypto.subtle.digest()` 34034
-    - 2024-10-30 ‘mix-blend-mode: plus-lighter’ 34057
+    - DONE 2024-10-30 ‘mix-blend-mode: plus-lighter’ 34057
 - layout
     - keyword sizes (‘min-content’, ‘max-content’, ‘fit-content’, ‘stretch’)
         - prelim 33558
@@ -488,9 +488,13 @@ categories:
 +   ee68dc2589283d9ef37b578b83258d421ec29bcc	https://github.com/servo/servo/pull/33919	Support persisting unminified external stylesheets (#33919)	
 -->
 
-Servo is now implementing the **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API**, starting with full support for **crypto.subtle.digest()** (@simonwuelker, #34034), partial support for **generateKey()** with AES-CBC and AES-CTR (@msub2, #33628, #33963), and partial support for **encrypt()**, and **decrypt()** with AES-CBC (@msub2, #33795).
+Servo now supports **‘mix-blend-mode: plus-lighter’** (@mrobinson, #34057) and **‘transition-behavior: allow-discrete’** (@Loirooriol, #33991), including in the ‘transition’ shorthand (@Loirooriol, #34005), along with the [fetch metadata request headers](https://w3c.github.io/webappsec-fetch-metadata/) **‘Sec-Fetch-Site’**, **‘Sec-Fetch-Mode’**, **‘Sec-Fetch-User’**, and **‘Sec-Fetch-Dest’** (@simonwuelker, #33830).
+
+We’re now implementing the **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API**, starting with full support for **crypto.subtle.digest()** (@simonwuelker, #34034), partial support for **generateKey()** with AES-CBC and AES-CTR (@msub2, #33628, #33963), and partial support for **encrypt()**, and **decrypt()** with AES-CBC (@msub2, #33795).
 
 We’ve also landed a bunch of improvements to our DOM geometry APIs, with DOMMatrix now **supporting toString()** (@simonwuelker, #33792) and **updating `is2D` on mutation** (@simonwuelker, #33796), support for **DOMRect.fromRect()** (@simonwuelker, #33798), and getBounds() on DOMQuad now **handling NaN correctly** (@simonwuelker, #33794).
+
+We now correctly handle **non-ASCII characters in &lt;img srcset>** (@evuez, #33873), correctly handle **data: URLs** in more situations (@webbeef, #33500), and no longer throw an uncaught exception when pages try to use IntersectionObserver (@mrobinson, #33989).
 
 ## Donations
 
