@@ -212,6 +212,9 @@
     - 2024-09-28 better handling of data: urls 33500
     - 2024-10-09 `crypto.subtle.generateKey("AES-CBC")` 33628
     - 2024-10-11 toString() method on DOMMatrix and DOMMatrixReadOnly 33792
+    - 2024-10-12 `DOMRect.fromRect()` 33798
+        - getBounds() method on DOMQuad now handles NaN correctly 33794
+        - is2D attribute on DOMMatrix now updates on mutation 33796
     - 2024-10-16 fetch metadata headers (‘Sec-Fetch-Site’, ‘Sec-Fetch-Mode’, ‘Sec-Fetch-User’, ‘Sec-Fetch-Dest’) 33830
     - 2024-10-18 non-ASCII characters in <img srcset> 33873
     - 2024-10-22 `crypto.subtle.encrypt()` and `decrypt()` for AES-CBC 33795
@@ -235,6 +238,8 @@
     - cyclic percentages in ‘min-width’ and ‘min-height’ 33988
     - video intrinsic size 31746 34069
     - fixed ‘text-wrap-mode: nowrap’ 33848
+- rendering
+    - correct encoding when setting `href` via the DOM 33825
 - fonts
     - async FontKey and FontInstanceKey 33600
     - first font instance creation 33638
@@ -265,7 +270,7 @@
 - upgrades
     - stylo 2024-09-02 → 2024-10-04 33767
 - webgpu
-    - updated to wgpu v23 34073 33635
+    - updated to wgpu v23 34073 33819 33635
     - fixed bugs where we present old images 33613
 - devtools
     - console firefox 131+ 33661
@@ -341,7 +346,7 @@
 >>> 2024-10-04T06:12:51Z
     e1eca71cd175dc8662ecf33f7a782eb3d0fe2364	https://github.com/servo/servo/pull/33641	build(deps): bump hilog-sys from 0.1.1 to 0.1.2 (#33641)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     1170124678c0d091681816b6f58993ee14da6935	https://github.com/servo/servo/pull/33640	build(deps): bump async-compression from 0.4.12 to 0.4.13 (#33640)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-9fcfe09e5185f05af02f617c4a2bd934c29344dc	https://github.com/servo/servo/pull/33621	ohos: Add toast prompt (#33621)	
++   9fcfe09e5185f05af02f617c4a2bd934c29344dc	https://github.com/servo/servo/pull/33621	ohos: Add toast prompt (#33621)	
 +   f2f5614ad64927aa82aa8937ae14a6086df49d2b	https://github.com/servo/servo/pull/33619	compositor: Create a single cross-process compositor API (#33619)	
     986c3a38a3ae257499c78ce21a50f689faa10c3b	https://github.com/servo/servo/pull/33632	Permitted functions to have too many arguments in components/script/dom (#33632)	
     43d559a1c2510c9244b1592e5ac33f2e8e8732a7	https://github.com/servo/servo/pull/33631	replaced `.map` with `.and_then` and removed `.flatten()` (#33631)	
@@ -412,22 +417,22 @@
     67edd5683be8ece49db2049ffd09f9b508b73dd9	https://github.com/servo/servo/pull/33766	build(deps): bump dwrote from 0.11.1 to 0.11.2 (#33766)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     f6ec73bc1d2304020011f508e23d7bfd5db3283c	https://github.com/servo/servo/pull/33764	build(deps): bump bindgen from 0.69.4 to 0.69.5 (#33764)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 +   9195344b75b4e5fd1cd86671b10df46a956f0fea	https://github.com/servo/servo/pull/33660	compositor: Create a single cross-process compositor API (#33619) (#33660)	
-30cbf01280dc3aa03caeaba11f55808f7ba59cf3	https://github.com/servo/servo/pull/33758	Rename first_contained_child & last_contained_child to first_partially_contained_child & last_partially_contained_child (#33758)	
-5ba8054b69e3f9867cecde89a18bf0f134d6f276	https://github.com/servo/servo/pull/33614	refactor `CGClassConstructHook` to use handwritten constructors (#33614)	
-3eee02869a8a9673a52d807c737e4c203d32b1b7	https://github.com/servo/servo/pull/33715	Fix test timing for all tests using xr_promise_test (#33715)	
+    30cbf01280dc3aa03caeaba11f55808f7ba59cf3	https://github.com/servo/servo/pull/33758	Rename first_contained_child & last_contained_child to first_partially_contained_child & last_partially_contained_child (#33758)	
+    5ba8054b69e3f9867cecde89a18bf0f134d6f276	https://github.com/servo/servo/pull/33614	refactor `CGClassConstructHook` to use handwritten constructors (#33614)	
+    3eee02869a8a9673a52d807c737e4c203d32b1b7	https://github.com/servo/servo/pull/33715	Fix test timing for all tests using xr_promise_test (#33715)	
 +   af61b1a1074037a36b803357fb03ea72ee01ae66	https://github.com/servo/servo/pull/33661	DevTools: Fix console in Firefox 131 (#33661)	
-a6da1daa126705fcb7393d605e4844640e4fefe0	https://github.com/servo/servo/pull/33745	Cleanup FontContext privacy (#33745)	
+    a6da1daa126705fcb7393d605e4844640e4fefe0	https://github.com/servo/servo/pull/33745	Cleanup FontContext privacy (#33745)	
     4d200a43483296aa57f2c2ddf37bfdbaede346bc	https://github.com/servo/servo/pull/33749	Use `--break-system-packages` when running pip in the WPT export job (#33749)	
     c430645606396a300b57a4d9c909db959486ca4c	https://github.com/servo/servo/pull/33755	ci: pin the ubuntu runner version in lint job. (#33755)	
     623bcde11132ccd9bcd9b46a1f21a4a55aafe2b0	https://github.com/servo/servo/pull/33744	Fix Clippy warning: Replace map().flatten() with and_then() in http_loader.rs (#33744)	
-7df18aecfe18c6e30adae5632035bb687a537388	https://github.com/servo/servo/pull/33681	Upgrade Android Gradle (#33681)	
-ff6523c37e132605c0945bdc49f15b75b0566d2e	https://github.com/servo/servo/pull/33717	Fix handling of `__Secure-` and `__Host-` Cookie prefixes (#33717)	
+    7df18aecfe18c6e30adae5632035bb687a537388	https://github.com/servo/servo/pull/33681	Upgrade Android Gradle (#33681)	
+    ff6523c37e132605c0945bdc49f15b75b0566d2e	https://github.com/servo/servo/pull/33717	Fix handling of `__Secure-` and `__Host-` Cookie prefixes (#33717)	
 >>> 2024-10-11T05:56:24Z
     88f1d9dd5e09442e1a1806d231dc074b37633716	https://github.com/servo/servo/pull/33782	clippy: Refactor `script/dom/globalscope.rs` to avoid overly complex types (#33782)	
     2b71130a8a95d0c723532d2486493b5db0c9e1b1	https://github.com/servo/servo/pull/33800	Various CanGc fixes (#33800)	
 +   c00c6e728ddb82d6cb646eb924a73c4b43a798a4	https://github.com/servo/servo/pull/33792	Implement DOMMatrix `stringifier` (#33792)	
-fc2c77be8363759657b50992b93d08d40f8fbf1b	https://github.com/servo/servo/pull/33794	Use NaN-safe comparisons in DOMQuad::GetBounds (#33794)	
-f15da16da403b4b5510e7722b555ee0c0c1f3de4	https://github.com/servo/servo/pull/33796	Update DOMMatrix::is2D when modifying elements (#33796)	
++   fc2c77be8363759657b50992b93d08d40f8fbf1b	https://github.com/servo/servo/pull/33794	Use NaN-safe comparisons in DOMQuad::GetBounds (#33794)	
++   f15da16da403b4b5510e7722b555ee0c0c1f3de4	https://github.com/servo/servo/pull/33796	Update DOMMatrix::is2D when modifying elements (#33796)	
 +   0553789d4839c4bf750f386f3f07a71b4a21f38e	https://github.com/servo/servo/pull/33747	fonts: Instantiate system fonts using system font loaders (#33747)	Mukilan Thiyagarajan <mukilan@igalia.com>
     4564ce2fcc970d213dc8c109ab8f02a959254046	https://github.com/servo/servo/pull/33793	build(deps): bump wasm-bindgen from 0.2.93 to 0.2.95 (#33793)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 +   091b8ecda0e509cfc49f546294f23180303892d0	https://github.com/servo/servo/pull/33780	layout: Handle inline margins in `layout_for_block_content_size()` (#33780)	
@@ -444,13 +449,13 @@ f15da16da403b4b5510e7722b555ee0c0c1f3de4	https://github.com/servo/servo/pull/337
     6f87c38cda290a46148102b124a82fe786c0bcbe	https://github.com/servo/servo/pull/33762	clippy: Rename various methods and members to conform to naming guidelines (#33762)	
     2805d3ce149fac5786b96d83cdbb2d50583bc75d	https://github.com/servo/servo/pull/33773	Fix writing mode in `content_box_sizes_and_padding_border_margin()` (#33773)	
     bd27e64cd846c72db90937c7e0fafa64712ec5df	https://github.com/servo/servo/pull/33750	fix possible IndexError (#33750)	
-7cd73ef4a7634b3e8f716451681b708d1dcc6acb	https://github.com/servo/servo/pull/33769	use `ThreadSafeJSContext` instead of `ContextForRequestInterrupt` (#33769)	
+    7cd73ef4a7634b3e8f716451681b708d1dcc6acb	https://github.com/servo/servo/pull/33769	use `ThreadSafeJSContext` instead of `ContextForRequestInterrupt` (#33769)	
     61a930402d5ac1f03530d7506960b8a04cfb974a	https://github.com/servo/servo/pull/33770	Update Servo user agent strings (#33770)	
 >>> 2024-10-11T11:46:23Z
 +   febe7de0bfa2ae3aa8add6670d712db3145c6438	https://github.com/servo/servo/pull/33801	ohos: publish nightly builds (#33801)	
 >>> 2024-10-12T05:57:02Z
     e5e1ef9fb6eb0c225ad69b3a7009a82aac08ba60	https://github.com/servo/servo/pull/33816	Replace CanGc::note() calls with arguments in `components/script` (#33816)	
-a86dcfc6e7e163ebc084d69fedc32a368ef7e202	https://github.com/servo/servo/pull/33802	Unify logic for laying out floats and atomic inlines (#33802)	
+    a86dcfc6e7e163ebc084d69fedc32a368ef7e202	https://github.com/servo/servo/pull/33802	Unify logic for laying out floats and atomic inlines (#33802)	
     0eb8d22d88626ec576e01a2254cbbf70366533ee	https://github.com/servo/servo/pull/33815	build(deps): bump webxr from `845ae9c` to `e3249c3` (#33815)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     3b4a1ab8dd5fd6f613d5778dd8f8c172e6187bdc	https://github.com/servo/servo/pull/33814	build(deps): bump web-sys from 0.3.70 to 0.3.72 (#33814)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     afbfad2f63e26cae1641a777dd3d92a8bc9abb11	https://github.com/servo/servo/pull/33813	build(deps): bump cc from 1.1.28 to 1.1.29 (#33813)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -459,21 +464,21 @@ a86dcfc6e7e163ebc084d69fedc32a368ef7e202	https://github.com/servo/servo/pull/338
     e09362cd3cd00b7d7818dbc25d4a1525e652c7dd	https://github.com/servo/servo/pull/33809	clippy: Fix issues in `components/fonts` and `ports/servoshell` (#33809)	Martin Robinson <mrobinson@igalia.com>
     20a15619f0461bb44e8dfc3e81ff20d9d2d4fd9d	https://github.com/servo/servo/pull/33808	CanGc fixes starting from imagedata.rs (#33808)	Josh Matthews <josh@joshmatthews.net>
 +   27b25e869bc6d8d1b42da655895c27dc3c08f211	https://github.com/servo/servo/pull/33804	content: Replace uses of `downcast`+`is_some`/`is_none` with `is` (#33804)	
-c5899e596dd068360efe3b290203ac7f4c9c3e5a	https://github.com/servo/servo/pull/33798	Implement DOMRect::FromRect (#33798)	
++   c5899e596dd068360efe3b290203ac7f4c9c3e5a	https://github.com/servo/servo/pull/33798	Implement DOMRect::FromRect (#33798)	
     8843a0e400745787faf4a23213cbfdf7e2158c73	https://github.com/servo/servo/pull/33790	clippy: Fix `type_complexity` warnings in `components/script/dom` (#33790)	
-2a6cfbaaf90a2c0f821473ea59c05ea1332d3f1d	https://github.com/servo/servo/pull/33803	Throw NotSupported error and update expected results for XRSession::UpdateRenderState (#33803)	
+    2a6cfbaaf90a2c0f821473ea59c05ea1332d3f1d	https://github.com/servo/servo/pull/33803	Throw NotSupported error and update expected results for XRSession::UpdateRenderState (#33803)	
 >>> 2024-10-14T06:06:27Z
     717baff17b651606e3e7bf53ba20dc00ae996a38	https://github.com/servo/servo/pull/33818	Fixed same_enum_variation clippy warnings in components/script/dom (#33818)	
     fc0835bae3dc28b17e6002e0594d6112517ff61d	https://github.com/servo/servo/pull/33827	CanGc fixes in focusevent.rs oscillartornode.rs response.rs resizeobserversize.rs animationevent.rs (#33827)	
     92f12ff7cda3d3da667d2358ab3867b1dcc5b9a2	https://github.com/servo/servo/pull/33822	Propagate CanGc through dommatrix, dommatrixreadonly, and testbindings (#33822)	
-bdd5fb2e5b12a442a553b708c36adfed5cbf76c3	https://github.com/servo/servo/pull/33825	Use document encoding when parsing url in href setter (#33825)	
++   bdd5fb2e5b12a442a553b708c36adfed5cbf76c3	https://github.com/servo/servo/pull/33825	Use document encoding when parsing url in href setter (#33825)	
     76776bf082982e213f7ae14fdd2885b316716b96	https://github.com/servo/servo/pull/33826	Update web-platform-tests to revision b'c7076ab2397dd3dcf0bb93dc304d05be04cd2a47' (#33826)	
-ded518dfd0a22d6e6b8bec8a59e8498f18124616	https://github.com/servo/servo/pull/33824	Remove some fixed fixmes (#33824)	
-f0285fc7e5c2d834f18f551b10fb46989c565cdf	https://github.com/servo/servo/pull/33823	CI: pin ubuntu 22.04 in WPT Import (#33823)	
-efaba0472a424256fa008d288b870f499b42f2ab	https://github.com/servo/servo/pull/33739	CI: Bump setup-ohos-sdk to v0.1.4 (#33739)	
+    ded518dfd0a22d6e6b8bec8a59e8498f18124616	https://github.com/servo/servo/pull/33824	Remove some fixed fixmes (#33824)	
+    f0285fc7e5c2d834f18f551b10fb46989c565cdf	https://github.com/servo/servo/pull/33823	CI: pin ubuntu 22.04 in WPT Import (#33823)	
+    efaba0472a424256fa008d288b870f499b42f2ab	https://github.com/servo/servo/pull/33739	CI: Bump setup-ohos-sdk to v0.1.4 (#33739)	
     5c0a0d29d0731147f367195ec3b568768c114455	https://github.com/servo/servo/pull/33821	clippy: Fix warnings in `components/script` & `components/script/dom` (#33821)	
     a55f9a37ecc81a0b18731b0e1985c7efa10b01a9	https://github.com/servo/servo/pull/33820	CanGc fixes starting from blob.rs, mediastream.rs, custom_event.rs (#33820)	
-bd8006afc5b29530bc4eb1d310490a345b8283fc	https://github.com/servo/servo/pull/33819	Update wgpu (#33819)	
++   bd8006afc5b29530bc4eb1d310490a345b8283fc	https://github.com/servo/servo/pull/33819	Update wgpu (#33819)	
 >>> 2024-10-15T06:10:13Z
     2f1862aaf5771c3a8416d524c4a6dca1cac4d99e	https://github.com/servo/servo/pull/33842	build(deps): bump cc from 1.1.29 to 1.1.30 (#33842)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     81e8e582df814aa64ff4409e43778196f19ac83b	https://github.com/servo/servo/pull/33841	build(deps): bump profiling from 1.0.15 to 1.0.16 (#33841)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
@@ -501,7 +506,7 @@ bd8006afc5b29530bc4eb1d310490a345b8283fc	https://github.com/servo/servo/pull/338
     133c763e650a60928c288b379cec2e30c142c489	https://github.com/servo/servo/pull/33869	build(deps): bump napi-derive-ohos from 0.0.9 to 1.0.0 (#33869)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     ccac50fc91e61c36698c97beacde8138dfd3de7c	https://github.com/servo/servo/pull/33867	build(deps): bump proc-macro2 from 1.0.87 to 1.0.88 (#33867)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 +   036e74524a72920ffca6deb4d6a850cf04b31736	https://github.com/servo/servo/pull/33863	net: Start reducing number of IPCs channels used for fetch with a `FetchThread` (#33863)	
-21152673282b7ac03cee5d97d46fe368b379a297	https://github.com/servo/servo/pull/33731	Add missing XRWebGLBinding constructor spec steps (#33731)	
+    21152673282b7ac03cee5d97d46fe368b379a297	https://github.com/servo/servo/pull/33731	Add missing XRWebGLBinding constructor spec steps (#33731)	
     cde6931f4bcb6832d3fbd37c3930b63e759cc279	https://github.com/servo/servo/pull/33860	clippy: Fix warnings in `components/script/dom` (#33860)	
     a646c850c6f7dcaf64ad286342b654ffdbebd274	https://github.com/servo/servo/pull/33853	clippy: Fix warnings in `components/script/dom` & `components/servo` (#33853)	Mukilan Thiyagarajan <mukilan@igalia.com>
     b0a33d6b0212be325f3c5551869be80904c24892	https://github.com/servo/servo/pull/33865	Some CanGc Fixes (#33865)	
@@ -663,12 +668,12 @@ bd8006afc5b29530bc4eb1d310490a345b8283fc	https://github.com/servo/servo/pull/338
     36d9fafde8ab9b8a511a33022c9123f12c433fd3	https://github.com/servo/servo/pull/34058	build(deps): bump serde from 1.0.213 to 1.0.214 (#34058)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     000144f52afa9ecc64649ec1914bf5856f3e916c	https://github.com/servo/servo/pull/34055	Remove size_of_test macro from legacy layout and inline it (#34055)	
 >>> 2024-10-31T06:08:52Z
-62c79514249ac2c493390e75cd66235bd31942f2	https://github.com/servo/servo/pull/34075	Fix timeout in position-absolute-replaced-minmax.html (#34075)	
-cf663309782c95166ac56a481c7bde9483284e5f	https://github.com/servo/servo/pull/34072	Fix `test-speedometer` (#34072)	
+    62c79514249ac2c493390e75cd66235bd31942f2	https://github.com/servo/servo/pull/34075	Fix timeout in position-absolute-replaced-minmax.html (#34075)	
+    cf663309782c95166ac56a481c7bde9483284e5f	https://github.com/servo/servo/pull/34072	Fix `test-speedometer` (#34072)	
 +   ade562e4810c534b3dc8189cb60868819d7ee888	https://github.com/servo/servo/pull/34073	Update wgpu to v23 (#34073)	
 +   78ba1613d4b4323c3db4e786ae2c4ae19ba201d8	https://github.com/servo/servo/pull/34063	Improve scrolling speed in servoshell. (#34063)	
 +   635c10a941a960eb2c54938adbdeea75cc66cba7	https://github.com/servo/servo/pull/34052	Enable css-grid WPT tests (#34052)	
-1891c5cfafe5e589d6bf828deb8ea1ad14f70f61	https://github.com/servo/servo/pull/34026	Properly transfer min/max constraints on auto-sized replaced elements (#34026)	
+    1891c5cfafe5e589d6bf828deb8ea1ad14f70f61	https://github.com/servo/servo/pull/34026	Properly transfer min/max constraints on auto-sized replaced elements (#34026)	
     f12071f77eef0612c16c0f297c29e95929218576	https://github.com/servo/servo/pull/34070	andrdoid: Fix some compiler warnings (#34070)	
 +   517e8a376ab1d1b7d2bf6c4d8cf0e738101b57cb	https://github.com/servo/servo/pull/34069	Test <video> with width and height attributes but aspect-ratio:auto (#34069)	
 +   850e59f98ec49dfc72ea9b71f8db7b6292f28d12	https://github.com/servo/servo/pull/34038	servoshell: Allow overriding screen resolution with a command-line argument (#34038)	
