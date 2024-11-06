@@ -488,6 +488,9 @@ categories:
 +   ee68dc2589283d9ef37b578b83258d421ec29bcc	https://github.com/servo/servo/pull/33919	Support persisting unminified external stylesheets (#33919)	
 -->
 
+<figure class="_figr"><a href="{{ '/img/blog/october-2024.png' | url }}"><img src="{{ '/img/blog/october-2024.png' | url }}"
+    alt="Servo nightly showing new support for non-ASCII characters in <img srcset>, ‘transition-behavior: allow-discrete’, ‘mix-blend-mode: plus-lighter’, and ‘width: stretch’"></a></figure>
+
 Servo now supports **‘mix-blend-mode: plus-lighter’** (@mrobinson, #34057) and **‘transition-behavior: allow-discrete’** (@Loirooriol, #33991), including in the ‘transition’ shorthand (@Loirooriol, #34005), along with the [fetch metadata request headers](https://w3c.github.io/webappsec-fetch-metadata/) **‘Sec-Fetch-Site’**, **‘Sec-Fetch-Mode’**, **‘Sec-Fetch-User’**, and **‘Sec-Fetch-Dest’** (@simonwuelker, #33830).
 
 We now have partial support for the CSS size keywords **‘min-content’**, **‘max-content’**, **‘fit-content’**, **‘fit-content()’**, and **‘stretch’** (@Loirooriol, #33558, #33659, #33854, #33951), including in floats (@Loirooriol, #33666), atomic inlines (@Loirooriol, #33737), and elements with ‘position: absolute’ or ‘fixed’ (@Loirooriol, #33950).
