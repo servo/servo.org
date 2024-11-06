@@ -17,19 +17,19 @@ categories:
     - 2024-10-31 enabled css-grid tests 34052
 - api features
     - 2024-09-28 better handling of data: urls 33500
-    - 2024-10-09 `crypto.subtle.generateKey("AES-CBC")` 33628
-    - 2024-10-11 toString() method on DOMMatrix and DOMMatrixReadOnly 33792
-    - 2024-10-12 `DOMRect.fromRect()` 33798
-        - getBounds() method on DOMQuad now handles NaN correctly 33794
-        - is2D attribute on DOMMatrix now updates on mutation 33796
+    - DONE 2024-10-09 `crypto.subtle.generateKey("AES-CBC")` 33628
+    - DONE 2024-10-11 toString() method on DOMMatrix and DOMMatrixReadOnly 33792
+    - DONE 2024-10-12 `DOMRect.fromRect()` 33798
+        - DONE getBounds() method on DOMQuad now handles NaN correctly 33794
+        - DONE is2D attribute on DOMMatrix now updates on mutation 33796
     - 2024-10-16 fetch metadata headers (‘Sec-Fetch-Site’, ‘Sec-Fetch-Mode’, ‘Sec-Fetch-User’, ‘Sec-Fetch-Dest’) 33830
     - 2024-10-18 non-ASCII characters in <img srcset> 33873
-    - 2024-10-22 `crypto.subtle.encrypt()` and `decrypt()` for AES-CBC 33795
-    - 2024-10-23 `crypto.subtle.generateKey("AES-CTR")` 33963
+    - DONE 2024-10-22 `crypto.subtle.encrypt()` and `decrypt()` for AES-CBC 33795
+    - DONE 2024-10-23 `crypto.subtle.generateKey("AES-CTR")` 33963
     - 2024-10-25 ‘transition-behavior: allow-discrete’ 33991
     - 2024-10-27 ‘transition: allow-discrete’ 34005
     - 2024-10-27 stub interface for IntersectionObserver 33989
-    - 2024-10-30 `crypto.subtle.digest()` 34034
+    - DONE 2024-10-30 `crypto.subtle.digest()` 34034
     - 2024-10-30 ‘mix-blend-mode: plus-lighter’ 34057
 - layout
     - keyword sizes (‘min-content’, ‘max-content’, ‘fit-content’, ‘stretch’)
@@ -487,6 +487,10 @@ categories:
     d877962ee8a5003b0a6eec9fb3d16f1b759a9f9e	https://github.com/servo/servo/pull/34067	readme: Fix typos in Android build instructions (#34067)	
 +   ee68dc2589283d9ef37b578b83258d421ec29bcc	https://github.com/servo/servo/pull/33919	Support persisting unminified external stylesheets (#33919)	
 -->
+
+Servo is now implementing the **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API**, starting with full support for **crypto.subtle.digest()** (@simonwuelker, #34034), partial support for **generateKey()** with AES-CBC and AES-CTR (@msub2, #33628, #33963), and partial support for **encrypt()**, and **decrypt()** with AES-CBC (@msub2, #33795).
+
+We’ve also landed a bunch of improvements to our DOM geometry APIs, with DOMMatrix now **supporting toString()** (@simonwuelker, #33792) and **updating `is2D` on mutation** (@simonwuelker, #33796), support for **DOMRect.fromRect()** (@simonwuelker, #33798), and getBounds() on DOMQuad now **handling NaN correctly** (@simonwuelker, #33794).
 
 ## Donations
 
