@@ -32,14 +32,14 @@ categories:
     - DONE 2024-10-30 `crypto.subtle.digest()` 34034
     - DONE 2024-10-30 ‘mix-blend-mode: plus-lighter’ 34057
 - layout
-    - keyword sizes (‘min-content’, ‘max-content’, ‘fit-content’, ‘stretch’)
-        - prelim 33558
-        - enable stretch 33659
-        - 2024-10-09 floats 33666
-        - 2024-10-11 atomic inlines 33737
-        - 2024-10-23 absolute/fixed positioned elements 33950
-        - 2024-10-23 prevent ‘stretch’ from being negative 33951
-        - 2024-10-27 intrinsic contributions 33854
+    - DONE keyword sizes (‘min-content’, ‘max-content’, ‘fit-content’, ‘stretch’)
+        - DONE prelim 33558
+        - DONE enable stretch 33659
+        - DONE 2024-10-09 floats 33666
+        - DONE 2024-10-11 atomic inlines 33737
+        - DONE 2024-10-23 absolute/fixed positioned elements 33950
+        - DONE 2024-10-23 prevent ‘stretch’ from being negative 33951
+        - DONE 2024-10-27 intrinsic contributions 33854
     - fixed ‘align-content: <start|end>’ with ‘flex-wrap: wrap-reverse’ 33667
     - flex container intrinsic size with inline margins 33780
     - cyclic percentages in ‘min-width’ and ‘min-height’ 33988
@@ -490,7 +490,9 @@ categories:
 
 Servo now supports **‘mix-blend-mode: plus-lighter’** (@mrobinson, #34057) and **‘transition-behavior: allow-discrete’** (@Loirooriol, #33991), including in the ‘transition’ shorthand (@Loirooriol, #34005), along with the [fetch metadata request headers](https://w3c.github.io/webappsec-fetch-metadata/) **‘Sec-Fetch-Site’**, **‘Sec-Fetch-Mode’**, **‘Sec-Fetch-User’**, and **‘Sec-Fetch-Dest’** (@simonwuelker, #33830).
 
-We’re now implementing the **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API**, starting with full support for **crypto.subtle.digest()** (@simonwuelker, #34034), partial support for **generateKey()** with AES-CBC and AES-CTR (@msub2, #33628, #33963), and partial support for **encrypt()**, and **decrypt()** with AES-CBC (@msub2, #33795).
+We now have partial support for the CSS size keywords **‘min-content’**, **‘max-content’**, **‘fit-content’**, **‘fit-content()’**, and **‘stretch’** (@Loirooriol, #33558, #33659, #33854, #33951), including in floats (@Loirooriol, #33666), atomic inlines (@Loirooriol, #33737), and elements with ‘position: absolute’ or ‘fixed’ (@Loirooriol, #33950).
+
+We’re implementing the **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API**, starting with full support for **crypto.subtle.digest()** (@simonwuelker, #34034), partial support for **generateKey()** with AES-CBC and AES-CTR (@msub2, #33628, #33963), and partial support for **encrypt()**, and **decrypt()** with AES-CBC (@msub2, #33795).
 
 We’ve also landed a bunch of improvements to our DOM geometry APIs, with DOMMatrix now **supporting toString()** (@simonwuelker, #33792) and **updating `is2D` on mutation** (@simonwuelker, #33796), support for **DOMRect.fromRect()** (@simonwuelker, #33798), and getBounds() on DOMQuad now **handling NaN correctly** (@simonwuelker, #33794).
 
