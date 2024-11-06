@@ -66,11 +66,11 @@ categories:
     - start of gl bindings unification surfman#318 webxr#248 33538 33910 33911
     - script crate splitting continues 33627 33665
 - servoshell and embedding
-    - servoshell avoid unnecessary redraws 34008
-    - servoshell drop --no-minibrowser code path 33677
-    - smoother scrolling on macOS (or hidpi?) systems 34063
-    - new `--screen-size` option (and `--resolution` is now `--window-size`) 34038
-    - location bar updates for redirects (for other embedders too) 34004
+    - DONE servoshell avoid unnecessary redraws 34008
+    - DONE servoshell drop --no-minibrowser code path 33677
+    - DONE smoother scrolling on macOS (or hidpi?) systems 34063
+    - DONE new `--screen-size` option (and `--resolution` is now `--window-size`) 34038
+    - DONE location bar updates for redirects (for other embedders too) 34004
     - embedder-provided resources are now documented 33775 33885
     - fetching custom protocols 33573
     - license in installer 33711
@@ -500,6 +500,18 @@ We’re implementing the **[SubtleCrypto](https://developer.mozilla.org/en-US/do
 We’ve also landed a bunch of improvements to our DOM geometry APIs, with DOMMatrix now **supporting toString()** (@simonwuelker, #33792) and **updating `is2D` on mutation** (@simonwuelker, #33796), support for **DOMRect.fromRect()** (@simonwuelker, #33798), and getBounds() on DOMQuad now **handling NaN correctly** (@simonwuelker, #33794).
 
 We now correctly handle **non-ASCII characters in &lt;img srcset>** (@evuez, #33873), correctly handle **data: URLs** in more situations (@webbeef, #33500), and no longer throw an uncaught exception when pages try to use IntersectionObserver (@mrobinson, #33989).
+
+## Layout and rendering
+
+## Fonts and performance
+
+## servoshell and embedding
+
+[Servo-the-browser](https://book.servo.org/running-servoshell.html) now **avoids unnecessary redraws** (@webbeef, #34008), massively reducing its CPU usage, and no longer scrolls too slowly on HiDPI systems (@nicoburns, #34063).
+
+We’ve added a **new `--screen-size` option** that can help with testing mobile websites (@mrobinson, #34038), renaming the old `--resolution` option to `--window-size`, and we’ve **removed `--no-minibrowser` mode** (@Taym95, #33677).
+
+We now **update the location bar when redirects happen** (@rwakulszowa, #34004), and these updates are sent to all embedders of Servo, not just servoshell.
 
 ## Donations
 
