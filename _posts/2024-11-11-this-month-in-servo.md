@@ -8,6 +8,10 @@ categories:
 ---
 
 <!--
+- donations 4201/month
+    - 2060/month opencollective
+    - 2141/month github
+    - thanks.dev (10 donors)
 - wpt <https://wpt.servo.org>
     - 2024-11-04 60% on all of wpt?
     - 2024-10-31 enabled css-grid tests 34052
@@ -478,6 +482,29 @@ cf663309782c95166ac56a481c7bde9483284e5f	https://github.com/servo/servo/pull/340
     d877962ee8a5003b0a6eec9fb3d16f1b759a9f9e	https://github.com/servo/servo/pull/34067	readme: Fix typos in Android build instructions (#34067)	
 +   ee68dc2589283d9ef37b578b83258d421ec29bcc	https://github.com/servo/servo/pull/33919	Support persisting unminified external stylesheets (#33919)	
 -->
+
+## Donations
+
+Thanks again for your generous support!
+We are now receiving **4201 USD/month** (+1.3% over September) in recurring donations.
+**We are no longer accepting donations on LFX** — if you were donating there, please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo).
+
+Servo is also on [thanks.dev](https://thanks.dev), and already **ten GitHub users** that depend on Servo are sponsoring us there.
+If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 4201 / 10000); padding-left: 0.5em;"><strong>4201</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 4201 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="4201" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
+With this money, we’ve been able to pay for our web hosting and self-hosted CI runners for Windows and Linux builds, and when the time comes, we’ll be able to afford macOS runners, perf bots, and maybe even an Outreachy intern or two!
+As always, use of these funds will be decided transparently in the Technical Steering Committee.
+For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
 <style>
     /* guaranteed minimum width for first paragraph after a float */

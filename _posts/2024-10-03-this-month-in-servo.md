@@ -74,7 +74,7 @@ We’ve also fixed **several HiDPI bugs** in servoshell ([@mukilan](https://gith
 ## Donations
 
 Thanks again for your generous support!
-We are now receiving **4147 USD/month** (+34.7% over July) in recurring donations.
+We are now receiving **4147 USD/month** (+34.7% over August) in recurring donations.
 This includes donations from **12 people** on LFX, but we will stop accepting donations there soon — **please move your recurring donations to [GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo)**.
 
 Servo is also on [thanks.dev](https://thanks.dev), and already **eleven GitHub users** that depend on Servo are sponsoring us there.
