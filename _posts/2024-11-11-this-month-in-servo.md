@@ -83,10 +83,10 @@ categories:
     - DONE console firefox 131+ 33661
     - DONE remove iframes from tab list 34032
     - DONE persisting unminified external stylesheets 33919
-- openharmony
-    - 2024-10-11 started publishing nightlies 33801
-    - can pass arguments to servoshell now 33588
-    - toasts when pages load or panic 33621
+- DONE openharmony
+    - DONE 2024-10-11 started publishing nightlies 33801
+    - DONE can pass arguments to servoshell now 33588
+    - DONE toasts when pages load or panic 33621
 - DONE crashes
     - DONE glwindow webxr session crashes on macos 33962
     - DONE gc borrow hazards 33857 33875 33904 33929 33942obrufau 33976 34019 34020 33965 33937
@@ -526,6 +526,9 @@ We now **update the location bar when redirects happen** (@rwakulszowa, #34004),
 
 We’ve added a **new `--unminify-css` option**, allowing you to dump the CSS used by a page and modify it for debugging, [much like you can for JavaScript](https://book.servo.org/hacking/web-compat-bugs.html#diagnosing-js-errors).
 We’ve also added a **new `--screen-size` option** that can help with testing mobile websites (@mrobinson, #34038), renaming the old `--resolution` option to `--window-size`, and we’ve **removed `--no-minibrowser` mode** (@Taym95, #33677).
+
+We now publish **nightly builds for OpenHarmony** on servo.org (@mukilan, #33801).
+When running servoshell on OpenHarmony, we now display toasts when pages load or panic (@jschwe, #33621), and you can now pass certain Servo options via `hdc shell aa start` or a test app (@jschwe, #33588).
 
 ## Donations
 
