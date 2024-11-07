@@ -79,10 +79,10 @@ categories:
 - webgpu
     - updated to wgpu v23 34073 33819 33635
     - fixed bugs where we present old images 33613
-- devtools
-    - console firefox 131+ 33661
-    - remove iframes from tab list 34032
-    - persisting unminified external stylesheets 33919
+- DONE devtools
+    - DONE console firefox 131+ 33661
+    - DONE remove iframes from tab list 34032
+    - DONE persisting unminified external stylesheets 33919
 - openharmony
     - 2024-10-11 started publishing nightlies 33801
     - can pass arguments to servoshell now 33588
@@ -515,11 +515,14 @@ We’ve also landed optimisations in table layout (@Loirooriol, #33575) and in o
 
 Work continues on making our massive `script` crate build faster, with **improved incremental builds** (@sagudev, @mrobinson, #33502) and further patches towards **splitting `script` into smaller crates** (@sagudev, @jdm, #33627, #33665).
 
-## servoshell and embedding
+## servoshell, embedding, and devtools
+
+**[Devtools](https://book.servo.org/hacking/using-devtools.html) support** (`--devtools 6080`) is now compatible with Firefox 131+ (@eerii, #33661), and no longer lists iframes as if they were inspectable tabs (@eerii, #34032).
 
 [Servo-the-browser](https://book.servo.org/running-servoshell.html) now **avoids unnecessary redraws** (@webbeef, #34008), massively reducing its CPU usage, and no longer scrolls too slowly on HiDPI systems (@nicoburns, #34063).
 
-We’ve added a **new `--screen-size` option** that can help with testing mobile websites (@mrobinson, #34038), renaming the old `--resolution` option to `--window-size`, and we’ve **removed `--no-minibrowser` mode** (@Taym95, #33677).
+We’ve added a **new `--unminify-css` option**, allowing you to dump the CSS used by a page and modify it for debugging, [much like you can for JavaScript](https://book.servo.org/hacking/web-compat-bugs.html#diagnosing-js-errors).
+We’ve also added a **new `--screen-size` option** that can help with testing mobile websites (@mrobinson, #34038), renaming the old `--resolution` option to `--window-size`, and we’ve **removed `--no-minibrowser` mode** (@Taym95, #33677).
 
 We now **update the location bar when redirects happen** (@rwakulszowa, #34004), and these updates are sent to all embedders of Servo, not just servoshell.
 
