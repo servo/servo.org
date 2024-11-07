@@ -87,11 +87,11 @@ categories:
     - 2024-10-11 started publishing nightlies 33801
     - can pass arguments to servoshell now 33588
     - toasts when pages load or panic 33621
-- crashes
-    - glwindow webxr session crashes on macos 33962
-    - gc borrow hazards 33857 33875 33904 33929 33942 33976 34019 34020 33965 33937
-    - replaced layout 34006
-    - es modules 33938
+- DONE crashes
+    - DONE glwindow webxr session crashes on macos 33962
+    - DONE gc borrow hazards 33857 33875 33904 33929 33942obrufau 33976 34019 34020 33965 33937
+    - DONE replaced layout 34006
+    - DONE es modules 33938
 - outreachy
     - clippy 31500
     - cangc 33683 33684
@@ -514,6 +514,8 @@ This greatly reduces the number of IPC channels we create for individual request
 We’ve also landed optimisations in table layout (@Loirooriol, #33575) and in our layout engine as a whole (@Loirooriol, #33806).
 
 Work continues on making our massive `script` crate build faster, with **improved incremental builds** (@sagudev, @mrobinson, #33502) and further patches towards **splitting `script` into smaller crates** (@sagudev, @jdm, #33627, #33665).
+
+We’ve also fixed several crashes, including when initiating a WebXR session on macOS (@jdm, #33962), when laying out replaced elements (@Loirooriol, #34006), when running JavaScript modules (@jdm, #33938), and in many situations when garbage collection occurs (@chickenleaf, @taniishkaa, @Loirooriol, @jdm, #33857, #33875, #33904, #33929, #33942, #33976, #34019, #34020, #33965, #33937).
 
 ## servoshell, embedding, and devtools
 
