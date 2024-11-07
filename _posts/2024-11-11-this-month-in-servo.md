@@ -52,19 +52,19 @@ categories:
     - DONE first font instance creation 33638
     - DONE memory mapping system fonts on macOS and freetype platforms 33747 mukilan
 - perf
-    - single fetch thread, fixing most errors due to too many file descriptors 33863
+    - DONE single fetch thread, fixing most errors due to too many file descriptors 33863
     - unmultiply_inplace 33553 33584 33582
-    - flexbox layout tracing 33647
-    - flexbox caching to avoid unnecessary layouts 33964 33967
-    - avoid recomputing sizes when not using vertical percentages or stretching vertically 33806
-    - avoid recomputing percentage heights of table rows 33575
+    - DONE flexbox layout tracing 33647
+    - DONE flexbox caching to avoid unnecessary layouts 33964 33967
+    - DONE avoid recomputing sizes when not using vertical percentages or stretching vertically 33806
+    - DONE avoid recomputing percentage heights of table rows 33575
     - fixed log spam when not using experimental `--features tracing` 33845
-    - faster builds of script crate 33502
+    - DONE faster builds of script crate 33502
     - fixed small incremental parser updates 33611
 - architecture
     - single cross-process compositor api 33619 33660 33817
     - start of gl bindings unification surfman#318 webxr#248 33538 33910 33911
-    - script crate splitting continues 33627 33665
+    - DONE script crate splitting continues 33627 33665
 - servoshell and embedding
     - DONE servoshell avoid unnecessary redraws 34008
     - DONE servoshell drop --no-minibrowser code path 33677
@@ -503,9 +503,17 @@ We now correctly handle **non-ASCII characters in &lt;img srcset>** (@evuez, #33
 
 ## Layout and rendering
 
-## Fonts and performance
+## Performance improvements
 
 Our font system is faster now, with **reduced latency** when loading system fonts (@mrobinson, #33638), layout **no longer blocking on sending font data** to WebRender (@mrobinson, #33600), and **memory mapped system fonts** on macOS and FreeType platforms like Linux (@mrobinson, @mukilan, #33747).
+
+Servo now has a **dedicated fetch thread** (@mrobinson, #33863).
+This greatly reduces the number of IPC channels we create for individual requests, and should fix crashes related to file descriptor exhaustion on some platforms.
+
+**Flexbox layout now uses caching** to avoid doing unnecessary work (@mrobinson, @Loirooriol, #33964, #33967), and now has experimental **[tracing](https://docs.rs/tracing/0.1.40/tracing/)-based profiling support** (@mrobinson, #33647).
+We’ve also landed optimisations in table layout (@Loirooriol, #33575) and in our layout engine as a whole (@Loirooriol, #33806).
+
+Work continues on making our massive `script` crate build faster, with **improved incremental builds** (@sagudev, @mrobinson, #33502) and further patches towards **splitting `script` into smaller crates** (@sagudev, @jdm, #33627, #33665).
 
 ## servoshell and embedding
 
