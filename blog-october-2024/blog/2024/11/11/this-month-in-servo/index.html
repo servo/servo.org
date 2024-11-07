@@ -272,10 +272,10 @@
 - webgpu
     - updated to wgpu v23 34073 33819 33635
     - fixed bugs where we present old images 33613
-- devtools
-    - console firefox 131+ 33661
-    - remove iframes from tab list 34032
-    - persisting unminified external stylesheets 33919
+- DONE devtools
+    - DONE console firefox 131+ 33661
+    - DONE remove iframes from tab list 34032
+    - DONE persisting unminified external stylesheets 33919
 - openharmony
     - 2024-10-11 started publishing nightlies 33801
     - can pass arguments to servoshell now 33588
@@ -699,11 +699,13 @@ This greatly reduces the number of IPC channels we create for individual request
 <p><strong>Flexbox layout now uses caching</strong> to avoid doing unnecessary work (@mrobinson, @Loirooriol, #33964, #33967), and now has experimental <strong><a href="https://docs.rs/tracing/0.1.40/tracing/">tracing</a>-based profiling support</strong> (@mrobinson, #33647).
 We’ve also landed optimisations in table layout (@Loirooriol, #33575) and in our layout engine as a whole (@Loirooriol, #33806).</p>
 <p>Work continues on making our massive <code>script</code> crate build faster, with <strong>improved incremental builds</strong> (@sagudev, @mrobinson, #33502) and further patches towards <strong>splitting <code>script</code> into smaller crates</strong> (@sagudev, @jdm, #33627, #33665).</p>
-<h2 id="servoshell-and-embedding" tabindex="-1">servoshell and embedding <a class="header-anchor" href="#servoshell-and-embedding">
+<h2 id="servoshell%2C-embedding%2C-and-devtools" tabindex="-1">servoshell, embedding, and devtools <a class="header-anchor" href="#servoshell%2C-embedding%2C-and-devtools">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p><strong><a href="https://book.servo.org/hacking/using-devtools.html">Devtools</a> support</strong> (<code>--devtools 6080</code>) is now compatible with Firefox 131+ (@eerii, #33661), and no longer lists iframes as if they were inspectable tabs (@eerii, #34032).</p>
 <p><a href="https://book.servo.org/running-servoshell.html">Servo-the-browser</a> now <strong>avoids unnecessary redraws</strong> (@webbeef, #34008), massively reducing its CPU usage, and no longer scrolls too slowly on HiDPI systems (@nicoburns, #34063).</p>
-<p>We’ve added a <strong>new <code>--screen-size</code> option</strong> that can help with testing mobile websites (@mrobinson, #34038), renaming the old <code>--resolution</code> option to <code>--window-size</code>, and we’ve <strong>removed <code>--no-minibrowser</code> mode</strong> (@Taym95, #33677).</p>
+<p>We’ve added a <strong>new <code>--unminify-css</code> option</strong>, allowing you to dump the CSS used by a page and modify it for debugging, <a href="https://book.servo.org/hacking/web-compat-bugs.html#diagnosing-js-errors">much like you can for JavaScript</a>.
+We’ve also added a <strong>new <code>--screen-size</code> option</strong> that can help with testing mobile websites (@mrobinson, #34038), renaming the old <code>--resolution</code> option to <code>--window-size</code>, and we’ve <strong>removed <code>--no-minibrowser</code> mode</strong> (@Taym95, #33677).</p>
 <p>We now <strong>update the location bar when redirects happen</strong> (@rwakulszowa, #34004), and these updates are sent to all embedders of Servo, not just servoshell.</p>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
