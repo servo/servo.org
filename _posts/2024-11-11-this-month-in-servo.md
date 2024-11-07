@@ -47,10 +47,10 @@ categories:
     - fixed ‘text-wrap-mode: nowrap’ 33848
 - rendering
     - correct encoding when setting `href` via the DOM 33825
-- fonts
-    - async FontKey and FontInstanceKey 33600
-    - first font instance creation 33638
-    - memory mapping system fonts on macOS and freetype platforms 33747 mukilan
+- DONE fonts
+    - DONE async FontKey and FontInstanceKey 33600
+    - DONE first font instance creation 33638
+    - DONE memory mapping system fonts on macOS and freetype platforms 33747 mukilan
 - perf
     - single fetch thread, fixing most errors due to too many file descriptors 33863
     - unmultiply_inplace 33553 33584 33582
@@ -504,6 +504,8 @@ We now correctly handle **non-ASCII characters in &lt;img srcset>** (@evuez, #33
 ## Layout and rendering
 
 ## Fonts and performance
+
+Our font system is faster now, with **reduced latency** when loading system fonts (@mrobinson, #33638), layout **no longer blocking on sending font data** to WebRender (@mrobinson, #33600), and **memory mapped system fonts** on macOS and FreeType platforms like Linux (@mrobinson, @mukilan, #33747).
 
 ## servoshell and embedding
 
