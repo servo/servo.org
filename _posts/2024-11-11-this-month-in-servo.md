@@ -501,8 +501,6 @@ We’ve also landed a bunch of improvements to our DOM geometry APIs, with DOMMa
 
 We now correctly handle **non-ASCII characters in &lt;img srcset>** (@evuez, #33873), correctly handle **data: URLs** in more situations (@webbeef, #33500), and no longer throw an uncaught exception when pages try to use IntersectionObserver (@mrobinson, #33989).
 
-## Layout and rendering
-
 ## Performance improvements
 
 Our font system is faster now, with **reduced latency** when loading system fonts (@mrobinson, #33638), layout **no longer blocking on sending font data** to WebRender (@mrobinson, #33600), and **memory mapped system fonts** on macOS and FreeType platforms like Linux (@mrobinson, @mukilan, #33747).
