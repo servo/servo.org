@@ -60,19 +60,19 @@
     - DONE first font instance creation 33638
     - DONE memory mapping system fonts on macOS and freetype platforms 33747 mukilan
 - perf
-    - single fetch thread, fixing most errors due to too many file descriptors 33863
+    - DONE single fetch thread, fixing most errors due to too many file descriptors 33863
     - unmultiply_inplace 33553 33584 33582
-    - flexbox layout tracing 33647
-    - flexbox caching to avoid unnecessary layouts 33964 33967
-    - avoid recomputing sizes when not using vertical percentages or stretching vertically 33806
-    - avoid recomputing percentage heights of table rows 33575
+    - DONE flexbox layout tracing 33647
+    - DONE flexbox caching to avoid unnecessary layouts 33964 33967
+    - DONE avoid recomputing sizes when not using vertical percentages or stretching vertically 33806
+    - DONE avoid recomputing percentage heights of table rows 33575
     - fixed log spam when not using experimental `--features tracing` 33845
-    - faster builds of script crate 33502
+    - DONE faster builds of script crate 33502
     - fixed small incremental parser updates 33611
 - architecture
     - single cross-process compositor api 33619 33660 33817
     - start of gl bindings unification surfman#318 webxr#248 33538 33910 33911
-    - script crate splitting continues 33627 33665
+    - DONE script crate splitting continues 33627 33665
 - servoshell and embedding
     - DONE servoshell avoid unnecessary redraws 34008
     - DONE servoshell drop --no-minibrowser code path 33677
@@ -504,10 +504,15 @@
 &lt;h2 id=&quot;layout-and-rendering&quot; tabindex=&quot;-1&quot;&gt;Layout and rendering &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-october-2024/blog/2024/11/11/this-month-in-servo/#layout-and-rendering&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;h2 id=&quot;fonts-and-performance&quot; tabindex=&quot;-1&quot;&gt;Fonts and performance &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-october-2024/blog/2024/11/11/this-month-in-servo/#fonts-and-performance&quot;&gt;
+&lt;h2 id=&quot;performance-improvements&quot; tabindex=&quot;-1&quot;&gt;Performance improvements &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-october-2024/blog/2024/11/11/this-month-in-servo/#performance-improvements&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Our font system is faster now, with &lt;strong&gt;reduced latency&lt;/strong&gt; when loading system fonts (@mrobinson, #33638), layout &lt;strong&gt;no longer blocking on sending font data&lt;/strong&gt; to WebRender (@mrobinson, #33600), and &lt;strong&gt;memory mapped system fonts&lt;/strong&gt; on macOS and FreeType platforms like Linux (@mrobinson, @mukilan, #33747).&lt;/p&gt;
+&lt;p&gt;Servo now has a &lt;strong&gt;dedicated fetch thread&lt;/strong&gt; (@mrobinson, #33863).
+This greatly reduces the number of IPC channels we create for individual requests, and should fix crashes related to file descriptor exhaustion on some platforms.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Flexbox layout now uses caching&lt;/strong&gt; to avoid doing unnecessary work (@mrobinson, @Loirooriol, #33964, #33967), and now has experimental &lt;strong&gt;&lt;a href=&quot;https://docs.rs/tracing/0.1.40/tracing/&quot;&gt;tracing&lt;/a&gt;-based profiling support&lt;/strong&gt; (@mrobinson, #33647).
+We’ve also landed optimisations in table layout (@Loirooriol, #33575) and in our layout engine as a whole (@Loirooriol, #33806).&lt;/p&gt;
+&lt;p&gt;Work continues on making our massive &lt;code&gt;script&lt;/code&gt; crate build faster, with &lt;strong&gt;improved incremental builds&lt;/strong&gt; (@sagudev, @mrobinson, #33502) and further patches towards &lt;strong&gt;splitting &lt;code&gt;script&lt;/code&gt; into smaller crates&lt;/strong&gt; (@sagudev, @jdm, #33627, #33665).&lt;/p&gt;
 &lt;h2 id=&quot;servoshell-and-embedding&quot; tabindex=&quot;-1&quot;&gt;servoshell and embedding &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-october-2024/blog/2024/11/11/this-month-in-servo/#servoshell-and-embedding&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
