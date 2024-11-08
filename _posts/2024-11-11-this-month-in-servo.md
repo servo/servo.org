@@ -92,12 +92,12 @@ categories:
     - DONE gc borrow hazards 33857 33875 33904 33929 33942obrufau 33976 34019 34020 33965 33937
     - DONE replaced layout 34006
     - DONE es modules 33938
-- outreachy
-    - clippy 31500
-    - cangc 33683 33684
-    - downcasting refactor 33804
-    - script codegen 33713
-    - std::mem::take 33959
+- DONE outreachy
+    - DONE clippy 31500
+    - DONE cangc 33683 33684
+    - DONE downcasting refactor 33804
+    - DONE script codegen 33713
+    - DONE std::mem::take 33959
 - contributors
     - wpt summary 33587
     - `full` and `wpt` no longer test layout 2013. 34048
@@ -509,6 +509,8 @@ We’ve also reworked WebGPU canvas presentation to ensure that we never use old
 We’ve also landed a bunch of improvements to our DOM geometry APIs, with DOMMatrix now **supporting toString()** (@simonwuelker, #33792) and **updating `is2D` on mutation** (@simonwuelker, #33796), support for **DOMRect.fromRect()** (@simonwuelker, #33798), and getBounds() on DOMQuad now **handling NaN correctly** (@simonwuelker, #33794).
 
 We now correctly handle **non-ASCII characters in &lt;img srcset>** (@evuez, #33873), correctly handle **data: URLs** in more situations (@webbeef, #33500), and no longer throw an uncaught exception when pages try to use IntersectionObserver (@mrobinson, #33989).
+
+Outreachy contributors are doing great work in Servo again, helping us land many of this month’s improvements to GC static analysis (@taniishkaa, @webbeef, @chickenleaf, @jdm, @jahielkomu, @wulanseruniati, @lauwwulan, #33692, #33706, #33800, #33774, #33816, #33808, #33827, #33822, #33820, #33828, #33852, #33843, #33836, #33865, #33862, #33891, #33888, #33880, #33902, #33892, #33893, #33895, #33931, #33924, #33917, #33921, #33958, #33920, #33973, #33960, #33928, #33985, #33984, #33978, #33975, #34003, #34002) and code health (@chickenleaf, @DileepReddyP, @taniishkaa, @mercybassey, @jahielkomu, @cashall-0, @tony-nyagah, @lwz23, @Noble14477, #33959, #33713, #33804, #33618, #33625, #33631, #33632, #33633, #33643, #33643, #33646, #33648, #33653, #33664, #33685, #33686, #33689, #33686, #33690, #33705, #33707, #33724, #33727, #33728, #33729, #33730, #33740, #33744, #33757, #33771, #33757, #33782, #33790, #33809, #33818, #33821, #33835, #33840, #33853, #33849, #33860, #33878, #33881, #33894, #33935, #33936, #33943).
 
 ## Performance improvements
 
