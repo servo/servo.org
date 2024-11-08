@@ -61,9 +61,9 @@ categories:
     - DONE fixed log spam when not using experimental `--features tracing` 33845
     - DONE faster builds of script crate 33502
     - SKIP(reverted) fixed small incremental parser updates 33611
-- architecture
-    - single cross-process compositor api 33619 33660 33817
-    - start of gl bindings unification surfman#318 webxr#248 33538 33910 33911
+- DONE architecture
+    - DONE single cross-process compositor api 33619 33660 33817
+    - DONE start of gl bindings unification surfman#318 webxr#248 33538 33910 33911
     - DONE script crate splitting continues 33627 33665
 - servoshell and embedding
     - DONE servoshell avoid unnecessary redraws 34008
@@ -496,6 +496,11 @@ Servo now supports **‘mix-blend-mode: plus-lighter’** (@mrobinson, #34057) a
 We now have partial support for the CSS size keywords **‘min-content’**, **‘max-content’**, **‘fit-content’**, **‘fit-content()’**, and **‘stretch’** (@Loirooriol, #33558, #33659, #33854, #33951), including in floats (@Loirooriol, #33666), atomic inlines (@Loirooriol, #33737), and elements with ‘position: absolute’ or ‘fixed’ (@Loirooriol, #33950).
 
 We’re implementing the **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API**, starting with full support for **crypto.subtle.digest()** (@simonwuelker, #34034), partial support for **generateKey()** with AES-CBC and AES-CTR (@msub2, #33628, #33963), and partial support for **encrypt()**, and **decrypt()** with AES-CBC (@msub2, #33795).
+
+## More engine changes
+
+Servo’s architecture is improving, with a new cross-process compositor API that **reduces memory copy overhead for video** (@mrobinson, @crbrz, #33619, #33660, #33817).
+We’ve also started phasing out our old OpenGL bindings ([gleam](https://github.com/servo/gleam) and [sparkle](https://github.com/servo/sparkle)) in favour of [glow](https://crates.io/crates/glow), which should reduce Servo’s complexity and binary size (@sagudev, @mrobinson, [surfman#318](https://github.com/servo/surfman/pull/318), [webxr#248](https://github.com/servo/webxr/pull/248), #33538, #33910, #33911).
 
 We’ve updated to **Stylo 2024-10-04** (@Loirooriol, #33767) and [**wgpu 23**](https://github.com/gfx-rs/wgpu/releases/tag/v23.0.0) (@sagudev, #34073, #33819, #33635).
 The new version of wgpu includes several patches from @sagudev, adding **support for `const_assert`**, as well as **accessing `const` arrays with runtime index values**.
