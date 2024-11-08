@@ -52,7 +52,9 @@ We’ve also fixed several crashes, including when initiating a WebXR session on
 [Servo-the-browser](https://book.servo.org/running-servoshell.html) now **avoids unnecessary redraws** ([@webbeef](https://github.com/webbeef), [#34008](https://github.com/servo/servo/pull/34008)), massively reducing its CPU usage, and no longer scrolls too slowly on HiDPI systems ([@nicoburns](https://github.com/nicoburns), [#34063](https://github.com/servo/servo/pull/34063)).
 We now **update the location bar when redirects happen** ([@rwakulszowa](https://github.com/rwakulszowa), [#34004](https://github.com/servo/servo/pull/34004)), and these updates are sent to all embedders of Servo, not just servoshell.
 
-We’ve added a **new `--unminify-css` option**, allowing you to dump the CSS used by a page and modify it for debugging, [much like you can for JavaScript](https://book.servo.org/hacking/web-compat-bugs.html#diagnosing-js-errors).
+We’ve added a **new `--unminify-css` option** ([@Taym95](https://github.com/Taym95), [#33919](https://github.com/servo/servo/pull/33919)), allowing you to dump the CSS used by a page [like you can for JavaScript](https://book.servo.org/hacking/web-compat-bugs.html#diagnosing-js-errors).
+This will pave the way for allowing you to modify that CSS for debugging site compat issues, which is not yet implemented.
+
 We’ve also added a **new `--screen-size` option** that can help with testing mobile websites ([@mrobinson](https://github.com/mrobinson), [#34038](https://github.com/servo/servo/pull/34038)), renaming the old `--resolution` option to `--window-size`, and we’ve **removed `--no-minibrowser` mode** ([@Taym95](https://github.com/Taym95), [#33677](https://github.com/servo/servo/pull/33677)).
 
 We now publish **nightly builds for OpenHarmony** on servo.org ([@mukilan](https://github.com/mukilan), [#33801](https://github.com/servo/servo/pull/33801)).
