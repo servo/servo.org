@@ -4,17 +4,17 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2024-11-11T00:00:00Z</updated>
+  <updated>2024-11-08T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
   <entry>
-    <title>This month in Servo: and more!</title>
-    <link href="https://servo.org/blog-october-2024/blog/2024/11/11/this-month-in-servo/"/>
-    <updated>2024-11-11T00:00:00Z</updated>
-    <id>https://servo.org/blog-october-2024/blog/2024/11/11/this-month-in-servo/</id>
+    <title>This month in Servo: faster fonts, fetches, and flexbox!</title>
+    <link href="https://servo.org/blog-october-2024/blog/2024/11/08/this-month-in-servo/"/>
+    <updated>2024-11-08T00:00:00Z</updated>
+    <id>https://servo.org/blog-october-2024/blog/2024/11/08/this-month-in-servo/</id>
     <content xml:lang="en" type="html">&lt;!--
 - DONE donations 4201/month
     - DONE 2060/month opencollective
@@ -69,9 +69,9 @@
     - DONE fixed log spam when not using experimental `--features tracing` 33845
     - DONE faster builds of script crate 33502
     - SKIP(reverted) fixed small incremental parser updates 33611
-- architecture
-    - single cross-process compositor api 33619 33660 33817
-    - start of gl bindings unification surfman#318 webxr#248 33538 33910 33911
+- DONE architecture
+    - DONE single cross-process compositor api 33619 33660 33817
+    - DONE start of gl bindings unification surfman#318 webxr#248 33538 33910 33911
     - DONE script crate splitting continues 33627 33665
 - servoshell and embedding
     - DONE servoshell avoid unnecessary redraws 34008
@@ -100,12 +100,12 @@
     - DONE gc borrow hazards 33857 33875 33904 33929 33942obrufau 33976 34019 34020 33965 33937
     - DONE replaced layout 34006
     - DONE es modules 33938
-- outreachy
-    - clippy 31500
-    - cangc 33683 33684
-    - downcasting refactor 33804
-    - script codegen 33713
-    - std::mem::take 33959
+- DONE outreachy
+    - DONE clippy 31500
+    - DONE cangc 33683 33684
+    - DONE downcasting refactor 33804
+    - DONE script codegen 33713
+    - DONE std::mem::take 33959
 - contributors
     - wpt summary 33587
     - `full` and `wpt` no longer test layout 2013. 34048
@@ -499,12 +499,18 @@
 &lt;p&gt;Servo now supports &lt;strong&gt;‘mix-blend-mode: plus-lighter’&lt;/strong&gt; (@mrobinson, #34057) and &lt;strong&gt;‘transition-behavior: allow-discrete’&lt;/strong&gt; (@Loirooriol, #33991), including in the ‘transition’ shorthand (@Loirooriol, #34005), along with the &lt;a href=&quot;https://w3c.github.io/webappsec-fetch-metadata/&quot;&gt;fetch metadata request headers&lt;/a&gt; &lt;strong&gt;‘Sec-Fetch-Site’&lt;/strong&gt;, &lt;strong&gt;‘Sec-Fetch-Mode’&lt;/strong&gt;, &lt;strong&gt;‘Sec-Fetch-User’&lt;/strong&gt;, and &lt;strong&gt;‘Sec-Fetch-Dest’&lt;/strong&gt; (@simonwuelker, #33830).&lt;/p&gt;
 &lt;p&gt;We now have partial support for the CSS size keywords &lt;strong&gt;‘min-content’&lt;/strong&gt;, &lt;strong&gt;‘max-content’&lt;/strong&gt;, &lt;strong&gt;‘fit-content’&lt;/strong&gt;, &lt;strong&gt;‘fit-content()’&lt;/strong&gt;, and &lt;strong&gt;‘stretch’&lt;/strong&gt; (@Loirooriol, #33558, #33659, #33854, #33951), including in floats (@Loirooriol, #33666), atomic inlines (@Loirooriol, #33737), and elements with ‘position: absolute’ or ‘fixed’ (@Loirooriol, #33950).&lt;/p&gt;
 &lt;p&gt;We’re implementing the &lt;strong&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto&quot;&gt;SubtleCrypto&lt;/a&gt; API&lt;/strong&gt;, starting with full support for &lt;strong&gt;crypto.subtle.digest()&lt;/strong&gt; (@simonwuelker, #34034), partial support for &lt;strong&gt;generateKey()&lt;/strong&gt; with AES-CBC and AES-CTR (@msub2, #33628, #33963), and partial support for &lt;strong&gt;encrypt()&lt;/strong&gt;, and &lt;strong&gt;decrypt()&lt;/strong&gt; with AES-CBC (@msub2, #33795).&lt;/p&gt;
-&lt;p&gt;We’ve also landed a bunch of improvements to our DOM geometry APIs, with DOMMatrix now &lt;strong&gt;supporting toString()&lt;/strong&gt; (@simonwuelker, #33792) and &lt;strong&gt;updating &lt;code&gt;is2D&lt;/code&gt; on mutation&lt;/strong&gt; (@simonwuelker, #33796), support for &lt;strong&gt;DOMRect.fromRect()&lt;/strong&gt; (@simonwuelker, #33798), and getBounds() on DOMQuad now &lt;strong&gt;handling NaN correctly&lt;/strong&gt; (@simonwuelker, #33794).&lt;/p&gt;
+&lt;h2 id=&quot;more-engine-changes&quot; tabindex=&quot;-1&quot;&gt;More engine changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-october-2024/blog/2024/11/08/this-month-in-servo/#more-engine-changes&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Servo’s architecture is improving, with a new cross-process compositor API that &lt;strong&gt;reduces memory copy overhead for video&lt;/strong&gt; (@mrobinson, @crbrz, #33619, #33660, #33817).
+We’ve also started phasing out our old OpenGL bindings (&lt;a href=&quot;https://github.com/servo/gleam&quot;&gt;gleam&lt;/a&gt; and &lt;a href=&quot;https://github.com/servo/sparkle&quot;&gt;sparkle&lt;/a&gt;) in favour of &lt;a href=&quot;https://crates.io/crates/glow&quot;&gt;glow&lt;/a&gt;, which should reduce Servo’s complexity and binary size (@sagudev, @mrobinson, &lt;a href=&quot;https://github.com/servo/surfman/pull/318&quot;&gt;surfman#318&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/webxr/pull/248&quot;&gt;webxr#248&lt;/a&gt;, #33538, #33910, #33911).&lt;/p&gt;
 &lt;p&gt;We’ve updated to &lt;strong&gt;Stylo 2024-10-04&lt;/strong&gt; (@Loirooriol, #33767) and &lt;a href=&quot;https://github.com/gfx-rs/wgpu/releases/tag/v23.0.0&quot;&gt;&lt;strong&gt;wgpu 23&lt;/strong&gt;&lt;/a&gt; (@sagudev, #34073, #33819, #33635).
 The new version of wgpu includes several patches from @sagudev, adding &lt;strong&gt;support for &lt;code&gt;const_assert&lt;/code&gt;&lt;/strong&gt;, as well as &lt;strong&gt;accessing &lt;code&gt;const&lt;/code&gt; arrays with runtime index values&lt;/strong&gt;.
 We’ve also reworked WebGPU canvas presentation to ensure that we never use old buffers by mistake (@sagudev, #33613).&lt;/p&gt;
+&lt;p&gt;We’ve also landed a bunch of improvements to our DOM geometry APIs, with DOMMatrix now &lt;strong&gt;supporting toString()&lt;/strong&gt; (@simonwuelker, #33792) and &lt;strong&gt;updating &lt;code&gt;is2D&lt;/code&gt; on mutation&lt;/strong&gt; (@simonwuelker, #33796), support for &lt;strong&gt;DOMRect.fromRect()&lt;/strong&gt; (@simonwuelker, #33798), and getBounds() on DOMQuad now &lt;strong&gt;handling NaN correctly&lt;/strong&gt; (@simonwuelker, #33794).&lt;/p&gt;
 &lt;p&gt;We now correctly handle &lt;strong&gt;non-ASCII characters in &amp;lt;img srcset&amp;gt;&lt;/strong&gt; (@evuez, #33873), correctly handle &lt;strong&gt;data: URLs&lt;/strong&gt; in more situations (@webbeef, #33500), and no longer throw an uncaught exception when pages try to use IntersectionObserver (@mrobinson, #33989).&lt;/p&gt;
-&lt;h2 id=&quot;performance-improvements&quot; tabindex=&quot;-1&quot;&gt;Performance improvements &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-october-2024/blog/2024/11/11/this-month-in-servo/#performance-improvements&quot;&gt;
+&lt;p&gt;Outreachy contributors are doing great work in Servo again, helping us land many of this month’s improvements to GC static analysis (@taniishkaa, @webbeef, @chickenleaf, @jdm, @jahielkomu, @wulanseruniati, @lauwwulan, #33692, #33706, #33800, #33774, #33816, #33808, #33827, #33822, #33820, #33828, #33852, #33843, #33836, #33865, #33862, #33891, #33888, #33880, #33902, #33892, #33893, #33895, #33931, #33924, #33917, #33921, #33958, #33920, #33973, #33960, #33928, #33985, #33984, #33978, #33975, #34003, #34002) and code health (@chickenleaf, @DileepReddyP, @taniishkaa, @mercybassey, @jahielkomu, @cashall-0, @tony-nyagah, @lwz23, @Noble14477, #33959, #33713, #33804, #33618, #33625, #33631, #33632, #33633, #33643, #33643, #33646, #33648, #33653, #33664, #33685, #33686, #33689, #33686, #33690, #33705, #33707, #33724, #33727, #33728, #33729, #33730, #33740, #33744, #33757, #33771, #33757, #33782, #33790, #33809, #33818, #33821, #33835, #33840, #33853, #33849, #33860, #33878, #33881, #33894, #33935, #33936, #33943).&lt;/p&gt;
+&lt;h2 id=&quot;performance-improvements&quot; tabindex=&quot;-1&quot;&gt;Performance improvements &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-october-2024/blog/2024/11/08/this-month-in-servo/#performance-improvements&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Our font system is faster now, with &lt;strong&gt;reduced latency&lt;/strong&gt; when loading system fonts (@mrobinson, #33638), layout &lt;strong&gt;no longer blocking on sending font data&lt;/strong&gt; to WebRender (@mrobinson, #33600), and &lt;strong&gt;memory mapped system fonts&lt;/strong&gt; on macOS and FreeType platforms like Linux (@mrobinson, @mukilan, #33747).&lt;/p&gt;
@@ -514,7 +520,7 @@ This greatly reduces the number of IPC channels we create for individual request
 We’ve also landed optimisations in table layout (@Loirooriol, #33575) and in our layout engine as a whole (@Loirooriol, #33806).&lt;/p&gt;
 &lt;p&gt;Work continues on making our massive &lt;code&gt;script&lt;/code&gt; crate build faster, with &lt;strong&gt;improved incremental builds&lt;/strong&gt; (@sagudev, @mrobinson, #33502) and further patches towards &lt;strong&gt;splitting &lt;code&gt;script&lt;/code&gt; into smaller crates&lt;/strong&gt; (@sagudev, @jdm, #33627, #33665).&lt;/p&gt;
 &lt;p&gt;We’ve also fixed several crashes, including when initiating a WebXR session on macOS (@jdm, #33962), when laying out replaced elements (@Loirooriol, #34006), when running JavaScript modules (@jdm, #33938), and in many situations when garbage collection occurs (@chickenleaf, @taniishkaa, @Loirooriol, @jdm, #33857, #33875, #33904, #33929, #33942, #33976, #34019, #34020, #33965, #33937).&lt;/p&gt;
-&lt;h2 id=&quot;servoshell%2C-embedding%2C-and-devtools&quot; tabindex=&quot;-1&quot;&gt;servoshell, embedding, and devtools &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-october-2024/blog/2024/11/11/this-month-in-servo/#servoshell%2C-embedding%2C-and-devtools&quot;&gt;
+&lt;h2 id=&quot;servoshell%2C-embedding%2C-and-devtools&quot; tabindex=&quot;-1&quot;&gt;servoshell, embedding, and devtools &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-october-2024/blog/2024/11/08/this-month-in-servo/#servoshell%2C-embedding%2C-and-devtools&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://book.servo.org/hacking/using-devtools.html&quot;&gt;Devtools&lt;/a&gt; support&lt;/strong&gt; (&lt;code&gt;--devtools 6080&lt;/code&gt;) is now compatible with Firefox 131+ (@eerii, #33661), and no longer lists iframes as if they were inspectable tabs (@eerii, #34032).&lt;/p&gt;
@@ -524,7 +530,7 @@ We now &lt;strong&gt;update the location bar when redirects happen&lt;/strong&gt
 We’ve also added a &lt;strong&gt;new &lt;code&gt;--screen-size&lt;/code&gt; option&lt;/strong&gt; that can help with testing mobile websites (@mrobinson, #34038), renaming the old &lt;code&gt;--resolution&lt;/code&gt; option to &lt;code&gt;--window-size&lt;/code&gt;, and we’ve &lt;strong&gt;removed &lt;code&gt;--no-minibrowser&lt;/code&gt; mode&lt;/strong&gt; (@Taym95, #33677).&lt;/p&gt;
 &lt;p&gt;We now publish &lt;strong&gt;nightly builds for OpenHarmony&lt;/strong&gt; on &lt;a href=&quot;http://servo.org/&quot;&gt;servo.org&lt;/a&gt; (@mukilan, #33801).
 When running servoshell on OpenHarmony, we now display toasts when pages load or panic (@jschwe, #33621), and you can now pass certain Servo options via &lt;code&gt;hdc shell aa start&lt;/code&gt; or a test app (@jschwe, #33588).&lt;/p&gt;
-&lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-october-2024/blog/2024/11/11/this-month-in-servo/#donations&quot;&gt;
+&lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-october-2024/blog/2024/11/08/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Thanks again for your generous support!
