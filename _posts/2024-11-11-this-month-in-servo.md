@@ -8,10 +8,10 @@ categories:
 ---
 
 <!--
-- donations 4201/month
-    - 2060/month opencollective
-    - 2141/month github
-    - thanks.dev (10 donors)
+- DONE donations 4201/month
+    - DONE 2060/month opencollective
+    - DONE 2141/month github
+    - DONE thanks.dev (10 donors)
 - wpt <https://wpt.servo.org>
     - 2024-11-04 60% on all of wpt?
     - 2024-10-31 enabled css-grid tests 34052
@@ -51,16 +51,16 @@ categories:
     - DONE async FontKey and FontInstanceKey 33600
     - DONE first font instance creation 33638
     - DONE memory mapping system fonts on macOS and freetype platforms 33747 mukilan
-- perf
+- DONE perf
     - DONE single fetch thread, fixing most errors due to too many file descriptors 33863
     - unmultiply_inplace 33553 33584 33582
     - DONE flexbox layout tracing 33647
     - DONE flexbox caching to avoid unnecessary layouts 33964 33967
     - DONE avoid recomputing sizes when not using vertical percentages or stretching vertically 33806
     - DONE avoid recomputing percentage heights of table rows 33575
-    - fixed log spam when not using experimental `--features tracing` 33845
+    - DONE fixed log spam when not using experimental `--features tracing` 33845
     - DONE faster builds of script crate 33502
-    - fixed small incremental parser updates 33611
+    - SKIP(reverted) fixed small incremental parser updates 33611
 - architecture
     - single cross-process compositor api 33619 33660 33817
     - start of gl bindings unification surfman#318 webxr#248 33538 33910 33911
@@ -74,11 +74,11 @@ categories:
     - embedder-provided resources are now documented 33775 33885
     - fetching custom protocols 33573
     - license in installer 33711
-- upgrades
-    - stylo 2024-09-02 → 2024-10-04 33767
-- webgpu
-    - updated to wgpu v23 34073 33819 33635
-    - fixed bugs where we present old images 33613
+- DONE upgrades
+    - DONE stylo 2024-09-02 → 2024-10-04 33767
+- DONE webgpu
+    - DONE updated to wgpu v23 34073 33819 33635
+    - DONE fixed bugs where we present old images 33613
 - DONE devtools
     - DONE console firefox 131+ 33661
     - DONE remove iframes from tab list 34032
@@ -497,6 +497,10 @@ We now have partial support for the CSS size keywords **‘min-content’**, **�
 
 We’re implementing the **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API**, starting with full support for **crypto.subtle.digest()** (@simonwuelker, #34034), partial support for **generateKey()** with AES-CBC and AES-CTR (@msub2, #33628, #33963), and partial support for **encrypt()**, and **decrypt()** with AES-CBC (@msub2, #33795).
 
+We’ve updated to **Stylo 2024-10-04** (@Loirooriol, #33767) and [**wgpu 23**](https://github.com/gfx-rs/wgpu/releases/tag/v23.0.0) (@sagudev, #34073, #33819, #33635).
+The new version of wgpu includes several patches from @sagudev, adding **support for `const_assert`**, as well as **accessing `const` arrays with runtime index values**.
+We’ve also reworked WebGPU canvas presentation to ensure that we never use old buffers by mistake (@sagudev, #33613).
+
 We’ve also landed a bunch of improvements to our DOM geometry APIs, with DOMMatrix now **supporting toString()** (@simonwuelker, #33792) and **updating `is2D` on mutation** (@simonwuelker, #33796), support for **DOMRect.fromRect()** (@simonwuelker, #33798), and getBounds() on DOMQuad now **handling NaN correctly** (@simonwuelker, #33794).
 
 We now correctly handle **non-ASCII characters in &lt;img srcset>** (@evuez, #33873), correctly handle **data: URLs** in more situations (@webbeef, #33500), and no longer throw an uncaught exception when pages try to use IntersectionObserver (@mrobinson, #33989).
@@ -508,7 +512,7 @@ Our font system is faster now, with **reduced latency** when loading system font
 Servo now has a **dedicated fetch thread** (@mrobinson, #33863).
 This greatly reduces the number of IPC channels we create for individual requests, and should fix crashes related to file descriptor exhaustion on some platforms.
 
-**Flexbox layout now uses caching** to avoid doing unnecessary work (@mrobinson, @Loirooriol, #33964, #33967), and now has experimental **[tracing](https://docs.rs/tracing/0.1.40/tracing/)-based profiling support** (@mrobinson, #33647).
+**Flexbox layout now uses caching** to avoid doing unnecessary work (@mrobinson, @Loirooriol, #33964, #33967), and now has experimental **[tracing](https://docs.rs/tracing/0.1.40/tracing/)-based profiling support** (@mrobinson, #33647), which in turn no longer spams RUST_LOG=info when not enabled (@delan, #33845).
 We’ve also landed optimisations in table layout (@Loirooriol, #33575) and in our layout engine as a whole (@Loirooriol, #33806).
 
 Work continues on making our massive `script` crate build faster, with **improved incremental builds** (@sagudev, @mrobinson, #33502) and further patches towards **splitting `script` into smaller crates** (@sagudev, @jdm, #33627, #33665).
