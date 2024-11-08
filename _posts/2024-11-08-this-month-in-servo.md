@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
-date:       2024-11-11
-summary:    ao!! wrrrrao!!
+title:      "This month in Servo: faster fonts, fetches, and flexbox!"
+date:       2024-11-08
+summary:    Plus initial SubtleCrypto support, CSS size keywords, and OpenHarmony nightlies.
 categories:
 ---
 
