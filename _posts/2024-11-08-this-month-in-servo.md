@@ -84,6 +84,11 @@ With this money, we’ve been able to pay for our web hosting and self-hosted CI
 As always, use of these funds will be decided transparently in the Technical Steering Committee.
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
+## Conference talks
+
+- [**Servo project update**](https://www.youtube.com/watch?v=NHa4LPpWRh8&t=1365s) — Manuel Rego spoke at the [LF Europe Member Summit](https://lfeumembersummit24.sched.com/event/1hUAF) about the status and long-term vision of the Servo project
+- [**Servo: Building a Browser Rendering Engine in Rust**](https://events.canonical.com/event/51/contributions/516/) ([slides](https://servo.org/slides/2024-10-25-ubuntu-summit/)) — Rakhi Sharma spoke at the [Ubuntu Summit](https://events.canonical.com/event/51/contributions/516/) about Servo’s recent work in embedding, layout, and benchmarking
+
 <style>
     /* guaranteed minimum width for first paragraph after a float */
     ._floatmin {
