@@ -80,7 +80,8 @@ If you use Servo libraries like [url](https://crates.io/crates/url/reverse_depen
     <progress value="4201" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
 </div></figure>
 
-With this money, we’ve been able to pay for our web hosting and self-hosted CI runners for Windows and Linux builds, and when the time comes, we’ll be able to afford macOS runners, perf bots, and maybe even an Outreachy intern or two!
+With this money, we’ve been able to pay for a **second Outreachy intern** in this upcoming round, plus our web hosting and self-hosted CI runners for Windows and Linux builds.
+When the time comes, we’ll also be able to afford macOS runners and perf bots!
 As always, use of these funds will be decided transparently in the Technical Steering Committee.
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
