@@ -11,12 +11,14 @@ Behind the Code is a new series of interviews with the contributors who help pro
 choose to work on web browsers, or how they get started? We invite you to look beyond the project's pull requests and issue
 reports, and get to know the humans who make it happen.
 
+TODO: add some links to neat contributions
+
 # <img src="https://avatars.githubusercontent.com/u/70986246?v=4" width=60> [msub2](https://github.com/msub2)
 
 ## Tell us about yourself!
 
 My name is Daniel, though I more commonly go by my online handle "msub2". I'm something of a generalist, but my primary interests
-are developing for the web, XR, and games. I created and run the WebXR Discord, which has members from both the Immersive Web Working
+are developing for the web, XR, and games. I created and run the [WebXR Discord](https://discord.gg/webxr), which has members from both the Immersive Web Working
 Group and the Meta Browser team, among others. In my free time (when I'm not working, doing Servo things, or tending to my other
 programming projects) I'm typically watching videos from YouTube/Dropout/Nebula/etc and playing video games.
 
