@@ -52,7 +52,7 @@ focused around Gamepad and WebXR, recently I've been working to help implement S
 has been really interesting! In addition to the satisfaction I get just from being able to solve interesting problems, I also rather
 enjoy the feeling of contributing to a large, communal, open-source project.
 
-## Any final thoughts you'd like to share?
+### Any final thoughts you'd like to share?
 
 I'd encourage anyone who's intrigued by the idea of contributing to Servo to give it a shot! The recent waves of attention for projects
 like Verso and Ladybird have shown that there is an appetite for new browsers and browser engines, and with Servo's history it just
