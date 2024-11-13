@@ -11,6 +11,8 @@ Behind the Code is a new series of interviews with the contributors who help pro
 choose to work on web browsers, or how they get started? We invite you to look beyond the project's pull requests and issue
 reports, and get to know the humans who make it happen.
 
+<hr>
+
 ## <img src="https://avatars.githubusercontent.com/u/70986246?v=4" width=60> [msub2](https://github.com/msub2)
 
 Some representative contributions:
