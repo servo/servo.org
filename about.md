@@ -34,6 +34,8 @@ The chart below tracks our pass rates in several *focus areas* of the [Web Platf
 
 ## Presentations
 
+* [Servo: Building a Browser Rendering Engine in Rust](https://www.youtube.com/live/LPCg0NcQICQ?t=1089s) by Rakhi Sharma (Oct 2024)
+* [Porting Servo to OpenHarmony](https://www.youtube.com/watch?v=gpz088cxDcI) by Jonathan Schwender (Oct 2024)
 * [Servo Project Updates at Linux Foundation Europe Member Summit 2024](https://www.youtube.com/watch?v=NHa4LPpWRh8&t=1351s) by Manuel Rego (Sep 2024)
 * [Servo: A Web Rendering Engine For The Future 🔮](https://www.youtube.com/watch?v=SamA5Oz-G5w) by Manuel Rego (July 2024)
 * [Modular Servo: Three Paths Forward](https://www.youtube.com/watch?v=EA_1jxzR85M) by Gregory Terzian (May 2024)
