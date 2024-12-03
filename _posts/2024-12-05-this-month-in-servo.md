@@ -16,6 +16,7 @@ categories:
 - new features
     - shadowRoot property on Element 34306
     - innerHTML property on ShadowRoot 34335
+    - getClientRects() method on Element 34025
     - crypto.subtle.deriveKey() 34185
     - crypto.subtle.{wrapKey,unwrapKey} 34262
     - crypto.subtle.{encrypt,decrypt,generateKey,importKey} for AES-GCM 34269
@@ -28,38 +29,48 @@ categories:
     - :is() and :where() 34066
     - form submission with <input type=image> 34203
     - js.disable_jit pref 34231
-    - DataTransfer api 34205
+    - ?DataTransfer api 34205
+    - ?close() method on ImageBitmap 34124
 - layout
     - css grid 32619 34352 34421
     - parallel flexbox 34132
+    - ‘justify-self’ on abspos elements 34235
     - faster column flex 34346 34372
     - faster intrinsic size caching 34384
+    - fixed clientWidth etc for floats and replaced inlines 34083
     - fixed ‘object-fit’ when ‘aspect-ratio’ is set 34413
     - fixed sizing of non-replaced abspos elements with ‘place-self’ 34264
     - fixed min/max-content block sizes of replaced elements 34284
     - fixed offsetLeft and offsetTop relative to <body> with ‘position:static’ 32761 nicoburns Loirooriol
+    - fixed bugs in flexbox stretch and free space 34162 34150
 - stylo
     - upgrade to 2024-11-01 34322
     - prepare for crates.io releases 34332 34353
 - script
-    - more work on split 34357 34356
+    - more work on split 34357 34356 34163
+    - `--unminify-js` now supports module scripts 34206
+- usability
+    - scroll anywhere, not just over content 34347 mrobinson mukilan
 - ohos
     - keyboard and ime support 34188
     - touch fling 33219 jschwe mrobinson
     - cjk fallback fonts 34410
     - better build errors 34267
+    - fixed build on windows hosts 34113
 - perf and binary size
     - fixed font template caching 34325
     - pending paint metrics 34305
     - layout 2013 compiled out by default 34290
-    - webxr feature flag 34241 wusyong augustkline
+    - webxr feature flag 34241 34348 wusyong augustkline jdm sagudev
     - webxr optional on ohos/android 34242
     - working on webgpu feature flag 34415
-    - more unification of gl bindings 34292
+    - more unification of gl bindings 33918 34292
 - crashes
     - fixed crash when launching ohos app 34237
     - fixed crash when accessing style of non-shadow descendants of shadow hosts 34298
     - fixed crash in crypto.subtle handling of Algorithm 34239
+    - fixed more crashes due to gc borrow hazards 34122 34087 34182
+    - fixed crash in width/height properties on OffscreenCanvas 34165
 - tracing
     - filtering with SERVO_TRACING 34236
     - interval profiler migration 34238 34337
@@ -72,84 +83,84 @@ categories:
     - `medium` cargo profile 34035
 
 >>> 2024-11-01T06:07:41Z
-0d7fa7544779842aa19bac88f380168e85668956	https://github.com/servo/servo/pull/34084	Use default object size as fallback for intrinsic size of replaced element (#34084)	
-f5fd560ef8cc1ae9c67641808956cefbacfa3169	https://github.com/servo/servo/pull/34081	net: Ensure that origin serialization is consistent (#34081)	
-851b125d4b42ff9663e1f9bed423aedf0657fa13	https://github.com/servo/servo/pull/34082	Properly handle fallback aspect ratio for videos (#34082)	
-31566aef02af25625ec2f28d3b108f8e0234b974	https://github.com/servo/servo/pull/34083	Fix geometry queries for floats and replaced inlines (#34083)	
+    0d7fa7544779842aa19bac88f380168e85668956	https://github.com/servo/servo/pull/34084	Use default object size as fallback for intrinsic size of replaced element (#34084)	
+    f5fd560ef8cc1ae9c67641808956cefbacfa3169	https://github.com/servo/servo/pull/34081	net: Ensure that origin serialization is consistent (#34081)	
+    851b125d4b42ff9663e1f9bed423aedf0657fa13	https://github.com/servo/servo/pull/34082	Properly handle fallback aspect ratio for videos (#34082)	
++   31566aef02af25625ec2f28d3b108f8e0234b974	https://github.com/servo/servo/pull/34083	Fix geometry queries for floats and replaced inlines (#34083)	
 >>> 2024-11-02T06:06:55Z
     a3fda3893f1c48ba857e1fa9da0102632db66119	https://github.com/servo/servo/pull/34104	build(deps): bump syn from 2.0.85 to 2.0.86 (#34104)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     3420b27d101608641dd7abf7079b12ddde3c7dda	https://github.com/servo/servo/pull/34103	build(deps): bump svg_fmt from 0.4.3 to 0.4.4 (#34103)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     7d71f260a9e7d042ad78f7dc9d5e923dd90db669	https://github.com/servo/servo/pull/34102	build(deps): bump anstyle from 1.0.9 to 1.0.10 (#34102)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     5512ff3491b9f2b2e3c4d4c6c31fa066d6a73fe8	https://github.com/servo/servo/pull/34101	build(deps): bump anyhow from 1.0.91 to 1.0.92 (#34101)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-257f4b84dbf523dd9079079c894ea53107dc2834	https://github.com/servo/servo/pull/34025	DOMRectList interface implementation (#34025)	
-d2c4448ac88669488a48ec93085b6183972089ad	https://github.com/servo/servo/pull/34076	Unify sizing logic for replaced elements (#34076)	
-f95c4cfaba1a3ee6e35bd3deac0973895a555598	https://github.com/servo/servo/pull/34096	servoshell: fix logical screen size calculation (#34096)	
-cc6f7c5bc42c049302480d42a5ebd70f984a1e8e	https://github.com/servo/servo/pull/33772	Conversion to Gradle KTS (#33772)	Mukilan Thiyagarajan <mukilan@igalia.com>
++   257f4b84dbf523dd9079079c894ea53107dc2834	https://github.com/servo/servo/pull/34025	DOMRectList interface implementation (#34025)	
+    d2c4448ac88669488a48ec93085b6183972089ad	https://github.com/servo/servo/pull/34076	Unify sizing logic for replaced elements (#34076)	
+    f95c4cfaba1a3ee6e35bd3deac0973895a555598	https://github.com/servo/servo/pull/34096	servoshell: fix logical screen size calculation (#34096)	
+    cc6f7c5bc42c049302480d42a5ebd70f984a1e8e	https://github.com/servo/servo/pull/33772	Conversion to Gradle KTS (#33772)	Mukilan Thiyagarajan <mukilan@igalia.com>
 >>> 2024-11-03T06:05:52Z
     b22c0771be89e1962a2e39a43988278229fc0496	https://github.com/servo/servo/pull/34115	Update web-platform-tests to revision b'd2f2efe271ae2fa661c52ed2fe8564e21ad4036f' (#34115)	
-0759dde11b8cbf8f06dee35314c60c845bd4062d	https://github.com/servo/servo/pull/34113	ohos: Fix mach build on windows hosts (#34113)	
-900d13fc2f785fa48346e6cfe2b1ab91790e4f5f	https://github.com/servo/servo/pull/34100	frozen array in XRInputSourcesChangeEvent, update `to_frozen_array` doc (#34100)	
++   0759dde11b8cbf8f06dee35314c60c845bd4062d	https://github.com/servo/servo/pull/34113	ohos: Fix mach build on windows hosts (#34113)	
+    900d13fc2f785fa48346e6cfe2b1ab91790e4f5f	https://github.com/servo/servo/pull/34100	frozen array in XRInputSourcesChangeEvent, update `to_frozen_array` doc (#34100)	
     f47cc927a0934097fd97b0ad7595c43e22c5ca40	https://github.com/servo/servo/pull/34099	build(deps): bump thiserror from 1.0.65 to 1.0.66 (#34099)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 >>> 2024-11-04T06:09:07Z
-5d1d3d6b5a88fb94daae1acd8aa3bdaf21c9cd31	https://github.com/servo/servo/pull/33121	Update webgl conformance tests (#33121)	
+    5d1d3d6b5a88fb94daae1acd8aa3bdaf21c9cd31	https://github.com/servo/servo/pull/33121	Update webgl conformance tests (#33121)	
     e64831d68a806bfa5dfd1bd05f489aaa42cf7b67	https://github.com/servo/servo/pull/34086	build(deps): bump exr from 1.72.0 to 1.73.0 (#34086)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>	Mukilan Thiyagarajan <mukilan@igalia.com>
-e5cc7ad235bf9782b0831350d85f87bcf80c4354	https://github.com/servo/servo/pull/34124	Implement `ImageBitmap.close` (#34124)	
-e93544c0039b196a2514207731ec9280e22a8564	https://github.com/servo/servo/pull/34118	Cleanup malloc_size_of for NodeIterator and HTMLCollection (#34118)	
-a2af619009a6adf2c845411c3dfc365b00457535	https://github.com/servo/servo/pull/34116	Enable more DOM preferences for unofficial WPT test runs (#34116)	
-2a6d480cd8ce4dccaa74420fd6a436d39c328bf7	https://github.com/servo/servo/pull/34114	Remove unnecessary clamping in used_size_as_if_inline_element() (#34114)	
++   e5cc7ad235bf9782b0831350d85f87bcf80c4354	https://github.com/servo/servo/pull/34124	Implement `ImageBitmap.close` (#34124)	
+    e93544c0039b196a2514207731ec9280e22a8564	https://github.com/servo/servo/pull/34118	Cleanup malloc_size_of for NodeIterator and HTMLCollection (#34118)	
+    a2af619009a6adf2c845411c3dfc365b00457535	https://github.com/servo/servo/pull/34116	Enable more DOM preferences for unofficial WPT test runs (#34116)	
+    2a6d480cd8ce4dccaa74420fd6a436d39c328bf7	https://github.com/servo/servo/pull/34114	Remove unnecessary clamping in used_size_as_if_inline_element() (#34114)	
 >>> 2024-11-05T06:10:31Z
     537958a3ccb57502c558e4da0963307fd7481a14	https://github.com/servo/servo/pull/34137	build(deps): bump cc from 1.1.31 to 1.1.34 (#34137)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     8dab5f4b80833902eb21ab5f694d190c1caa2fbb	https://github.com/servo/servo/pull/34136	build(deps): bump url from 2.5.1 to 2.5.3 (#34136)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>	Oriol Brufau <obrufau@igalia.com>
-cc6163dcddcc6918f11bb4b7f134929bd50023bd	https://github.com/servo/servo/pull/34122	Fix GC borrow hazards triggered by LoadBlocker::terminate (#34122)	
-072ff302d2142fa684b2d5e7024522384e1daf58	https://github.com/servo/servo/pull/34090	Replace ComputedValues with WritingMode on IndefiniteContainingBlock (#34090)	
-73d2f3c453d23099845fe215987853e227e84f67	https://github.com/servo/servo/pull/34092	Return cached object from `CryptoKey.algorithm` getter (#34092)	
++   cc6163dcddcc6918f11bb4b7f134929bd50023bd	https://github.com/servo/servo/pull/34122	Fix GC borrow hazards triggered by LoadBlocker::terminate (#34122)	
+    072ff302d2142fa684b2d5e7024522384e1daf58	https://github.com/servo/servo/pull/34090	Replace ComputedValues with WritingMode on IndefiniteContainingBlock (#34090)	
+    73d2f3c453d23099845fe215987853e227e84f67	https://github.com/servo/servo/pull/34092	Return cached object from `CryptoKey.algorithm` getter (#34092)	
     f6aaf82b9b3b6756afde8b059b29e911b2de8bf3	https://github.com/servo/servo/pull/34141	build(deps): bump thiserror from 1.0.66 to 1.0.68 (#34141)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     735618e9ad0dc1735a40512fa455855fb03b05fd	https://github.com/servo/servo/pull/34139	build(deps): bump tracing-perfetto from 0.1.1 to 0.1.2 (#34139)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     89f75a90553da7e9139646315ba288128d509697	https://github.com/servo/servo/pull/34138	build(deps): bump idna from 1.0.2 to 1.0.3 (#34138)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     93f6396e6b8a16a1599bd7bad4e630e08a130e06	https://github.com/servo/servo/pull/34135	build(deps): bump tar from 0.4.42 to 0.4.43 (#34135)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-cbfcd68bcc5b5f411400b603b76cb31b884b21ea	https://github.com/servo/servo/pull/34068	CI: use new intermittent-tracker deployment (#34068)	
+    cbfcd68bcc5b5f411400b603b76cb31b884b21ea	https://github.com/servo/servo/pull/34068	CI: use new intermittent-tracker deployment (#34068)	
     e355cc02637421d19a980d5af0ff2295da979472	https://github.com/servo/servo/pull/34130	Bigger timeout for mac unit tests (#34130)	
 >>> 2024-11-06T06:06:32Z
     756c2491452e493289c5ac17f9101d3c44965946	https://github.com/servo/servo/pull/34157	build(deps): bump cc from 1.1.34 to 1.1.35 (#34157)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     bff58cb44e72d67a3201ebb2bac8dd242dcc921c	https://github.com/servo/servo/pull/34156	build(deps): bump rustix from 0.38.38 to 0.38.39 (#34156)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     0231571ecf0a0e65c19c1b8d68116cb4dc42b74f	https://github.com/servo/servo/pull/34155	ohos: Bump ohos-vsync and ohos-sys (#34155)	
     included in last month	ee7b207f967135c95733439ed9f34c8001cf3122	https://github.com/servo/servo/pull/34091	Implement keyword sizes for replaced elements (#34091)	
-3289e7d84dd6d905099d99751781a66da55fe04e	https://github.com/servo/servo/pull/34150	layout: Properly calculate free space in flexbox flexible length resolution (#34150)	
++   3289e7d84dd6d905099d99751781a66da55fe04e	https://github.com/servo/servo/pull/34150	layout: Properly calculate free space in flexbox flexible length resolution (#34150)	
 +   fe0701e226c5f3f34380cdff3e3cfef76aca9893	https://github.com/servo/servo/pull/34132	layout: Add parallel layout to flexbox (#34132)	
-80cc4500a370f457bbe27aef17646b83acd44f56	https://github.com/servo/servo/pull/34149	Rename ImageOrientation default to "from-image" (#34149)	
+    80cc4500a370f457bbe27aef17646b83acd44f56	https://github.com/servo/servo/pull/34149	Rename ImageOrientation default to "from-image" (#34149)	
     f151cdf6eede508eb0b4fc972413e0a4b442f5b5	https://github.com/servo/servo/pull/34148	layout: Remove an obselete comment from flexbox (#34148)	
-25a0764a37a585d032ca352923b24995f8cbf1a0	https://github.com/servo/servo/pull/34087	Use out parameter for generated methods returning JSVal (#34087)	
++   25a0764a37a585d032ca352923b24995f8cbf1a0	https://github.com/servo/servo/pull/34087	Use out parameter for generated methods returning JSVal (#34087)	
 >>> 2024-11-07T06:08:59Z
-48d193cb835422dcdd3aeb39bd2bf27313eadf07	https://github.com/servo/servo/pull/34145	implement CachedFrozenArray (#34145)	
-6c2b840e37825ecf47140ece52f882df4bc5cc03	https://github.com/servo/servo/pull/34163	Support associated types in must_root lint (#34163)	
+    48d193cb835422dcdd3aeb39bd2bf27313eadf07	https://github.com/servo/servo/pull/34145	implement CachedFrozenArray (#34145)	
++   6c2b840e37825ecf47140ece52f882df4bc5cc03	https://github.com/servo/servo/pull/34163	Support associated types in must_root lint (#34163)	
     2d3b46670fed62d39e5876feb092443e61889e48	https://github.com/servo/servo/pull/34170	build(deps): bump xml-rs from 0.8.22 to 0.8.23 (#34170)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     63348e707acf4f788095910b91b2a9126e2d0069	https://github.com/servo/servo/pull/34169	build(deps): bump anyhow from 1.0.92 to 1.0.93 (#34169)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     47997b117740401cb37a122aff5f5546c0792c09	https://github.com/servo/servo/pull/34168	build(deps): bump cc from 1.1.35 to 1.1.36 (#34168)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     07aa561295895cca5ea2afcb5db9775f3bbd4c77	https://github.com/servo/servo/pull/34166	ohos: Remove unneeded dirs dependency in servo_config (#34166)	
 +   2f6ca9407bf28245b74304ee981080ecf12265cb	https://github.com/servo/servo/pull/34164	Implement `SubtleCrypto.deriveBits` with PBDKF2 (#34164)	
-c0a4eee1feace81a77c54d982943bb3e11172e47	https://github.com/servo/servo/pull/34165	Add [EnforceRange] on OffscreenCanvas width/height idl attribute (#34165)	
-a61522a1e8b9f0254786ea6a304489c8ba138a9a	https://github.com/servo/servo/pull/34153	layout: Clean up the flexible length resolution algorithm (#34153)	
++   c0a4eee1feace81a77c54d982943bb3e11172e47	https://github.com/servo/servo/pull/34165	Add [EnforceRange] on OffscreenCanvas width/height idl attribute (#34165)	
+    a61522a1e8b9f0254786ea6a304489c8ba138a9a	https://github.com/servo/servo/pull/34153	layout: Clean up the flexible length resolution algorithm (#34153)	
 >>> 2024-11-08T06:08:02Z
     4f6283d7fead1b2489456651185e3a8bbbc725e8	https://github.com/servo/servo/pull/34178	ohos/android: Fix some compiler warnings (#34178)	
     219d3c9cd57f4743821fd7fc2446a3be196e51bc	https://github.com/servo/servo/pull/34181	build(deps): bump polling from 3.7.3 to 3.7.4 (#34181)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     3af928eb7b3a49801964a4831f7339e316bab06d	https://github.com/servo/servo/pull/34179	build(deps): bump tokio from 1.41.0 to 1.41.1 (#34179)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-ac7419cf57d13c73fc35fe156e6f38d378814868	https://github.com/servo/servo/pull/34167	Consistently use `Dom` in native promise handlers (#34167)	
+    ac7419cf57d13c73fc35fe156e6f38d378814868	https://github.com/servo/servo/pull/34167	Consistently use `Dom` in native promise handlers (#34167)	
     05ee551af8b6ccbd18aaf27b04237ee4751bd2cb	https://github.com/servo/servo/pull/34175	sort Bindings.conf (#34175)	
 >>> 2024-11-09T06:04:46Z
-da462d0fcda24f11ad2c67f5db7a2db0ea0f95e2	https://github.com/servo/servo/pull/34192	Implement referrer policy for dom worker construction (#34192)	
+    da462d0fcda24f11ad2c67f5db7a2db0ea0f95e2	https://github.com/servo/servo/pull/34192	Implement referrer policy for dom worker construction (#34192)	
     6c1cd56e529c392b323033618c9bed4760a6aef7	https://github.com/servo/servo/pull/34189	build(deps): bump fastrand from 2.1.1 to 2.2.0 (#34189)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     2e844d6b3a3d7612abb3435779f1e83273c68ee5	https://github.com/servo/servo/pull/34190	build(deps): bump tempfile from 3.13.0 to 3.14.0 (#34190)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-f4cc20f7ef1e8b59fe6e088c43982a9cc9d1d935	https://github.com/servo/servo/pull/34162	layout: Fix caching of streching flex items in row flex (#34162)	Oriol Brufau <obrufau@igalia.com>
++   f4cc20f7ef1e8b59fe6e088c43982a9cc9d1d935	https://github.com/servo/servo/pull/34162	layout: Fix caching of streching flex items in row flex (#34162)	Oriol Brufau <obrufau@igalia.com>
     e366d253dc4306bec2da246bca04dd7435b355ea	https://github.com/servo/servo/pull/34187	build(deps): bump cc from 1.1.36 to 1.1.37 (#34187)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 +   6b94b2c6846b52a94aaee184c1e0d276b8f85887	https://github.com/servo/servo/pull/34185	Implement `subtlecrypto.deriveKey` (#34185)	
     fe58556c0bf37f9f13685c367341d598fcb52d33	https://github.com/servo/servo/pull/34177	Disable resources_for_tests in production (#34177)	
     39ef61c324da49308bc4e796d6f5ac1257dd9c9b	https://github.com/servo/servo/pull/34173	Exclude `crown` from the root Cargo workspace (#34173)	Delan Azabani <dazabani@igalia.com>
     ac5c67849e97c82abf1bc9fdbb30b8d85713fbcc	https://github.com/servo/servo/pull/34180	build(deps): bump libc from 0.2.161 to 0.2.162 (#34180)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 +   85a9ca7cb6b850f24c06a4bee71a9f61100f1d0c	https://github.com/servo/servo/pull/34128	layout: Add instrumentation for `display_list` (#34128)	
-645176742813c423c3c5016eaba69a546b286339	https://github.com/servo/servo/pull/33977	Implement PolicyContainer and update the default ReferrerPolicy (#33977)	
+    645176742813c423c3c5016eaba69a546b286339	https://github.com/servo/servo/pull/33977	Implement PolicyContainer and update the default ReferrerPolicy (#33977)	
 >>> 2024-11-10T06:06:06Z
     dcb9058fe367390c3043d2d261f53eff485a52d2	https://github.com/servo/servo/pull/34160	ohos: Bump napi-ohos (#34160)	
-5e2c7908d0206e6a7a2e57cea72a3ca432a1afbb	https://github.com/servo/servo/pull/34201	Use the correct fallback referrer policy for the empty string case (#34201)	
+    5e2c7908d0206e6a7a2e57cea72a3ca432a1afbb	https://github.com/servo/servo/pull/34201	Use the correct fallback referrer policy for the empty string case (#34201)	
     4da378a987fe4b47aad4e993d2e079010e495823	https://github.com/servo/servo/pull/34202	Update web-platform-tests to revision b'8686b7a6d288d3b2c22b5ddb5a21773619b22b85' (#34202)	
 +   cdd0006e3d5ac4a8bc7731c2747a0d1a47f28078	https://github.com/servo/servo/pull/34200	Implement HKDF support for `subtlecrypto.deriveBits` (#34200)	
     67ac59b80994bb2b5ad11e54315165efcbabcaba	https://github.com/servo/servo/pull/34193	subtlecrypto: Replace `NormalizedAlgorithm` with specialized variants (#34193)	
@@ -160,26 +171,26 @@ f4cc20f7ef1e8b59fe6e088c43982a9cc9d1d935	https://github.com/servo/servo/pull/341
 +   8d3d7b74035a0cb501d9b3192a79636ede8bfce2	https://github.com/servo/servo/pull/34223	Implement `crypto.subtle.sign/verify` with HMAC (#34223)	
     deddcf2c7a7ad182720aed3da50d028c1e5ecb7d	https://github.com/servo/servo/pull/34224	Fix writing of apis.html (#34224)	
     4f4b7b1abf8919ff045da0295a45111a890a75e5	https://github.com/servo/servo/pull/34214	build(deps): bump thiserror from 1.0.68 to 1.0.69 (#34214)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-6a62d52cbb0385276de617c956a0e1d880469bc9	https://github.com/servo/servo/pull/34211	Use LazyCells instead of callbacks when resolving size keywords (#34211)	
+    6a62d52cbb0385276de617c956a0e1d880469bc9	https://github.com/servo/servo/pull/34211	Use LazyCells instead of callbacks when resolving size keywords (#34211)	
     5423e622ed283dfdde832c18479a3d6b95c8cf69	https://github.com/servo/servo/pull/34212	Allow tidy to pass without support/crown/target (#34212)	
 +   f83e0a8b678075fd6063e2f93b4ed727dc3f66fc	https://github.com/servo/servo/pull/34209	Filter Perfetto traces to `servo_profiling` spans and events only (#34209)	
-b28260aa130ce36230bb01686495845b5523ebc1	https://github.com/servo/servo/pull/34152	Fix inline content sizes of intrinsic element with indefinite block size (#34152)	
+    b28260aa130ce36230bb01686495845b5523ebc1	https://github.com/servo/servo/pull/34152	Fix inline content sizes of intrinsic element with indefinite block size (#34152)	
 >>> 2024-11-13T06:04:55Z
 +   5e7664b72e4f1940f4719dddbedc6d1656c8c47e	https://github.com/servo/servo/pull/34230	Implement `"get key length"` operation for HMAC algorithm (#34230)	
     81c1f961e910fc4ac761d96ca70abf9fdeb40031	https://github.com/servo/servo/pull/34234	build(deps): bump cc from 1.1.37 to 1.2.0 (#34234)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-bf75f17348d4174127973d19c72e405dbc5efaa3	https://github.com/servo/servo/pull/34233	Add `BoxFragment::is_inline_box()` (#34233)	
-ae029242f82459233a683c7623121dde6cae3f5b	https://github.com/servo/servo/pull/34206	Unminify module scripts. (#34206)	
+    bf75f17348d4174127973d19c72e405dbc5efaa3	https://github.com/servo/servo/pull/34233	Add `BoxFragment::is_inline_box()` (#34233)	
++   ae029242f82459233a683c7623121dde6cae3f5b	https://github.com/servo/servo/pull/34206	Unminify module scripts. (#34206)	
     672b37dd9c4b27fb9892ce7148d163444bf10de0	https://github.com/servo/servo/pull/34229	build(deps): bump cpufeatures from 0.2.14 to 0.2.15 (#34229)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     2f53e24131f18f6c56f10583102ed7e2a3964537	https://github.com/servo/servo/pull/34228	build(deps): bump serde from 1.0.214 to 1.0.215 (#34228)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
     5970132595e5fc7b3c251aa96c37fdc62bfca47f	https://github.com/servo/servo/pull/34227	build(deps): bump napi-ohos related crates (#34227)	
     128b017f1e1e86e4342140e13e13c5cffbccdac7	https://github.com/servo/servo/pull/34217	build(deps): bump rustix from 0.38.39 to 0.38.40 (#34217)	dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 >>> 2024-11-14T06:06:28Z
-3fd1a229df65406699c5795cf504948cdb314320	https://github.com/servo/servo/pull/34182	Add some more CanGc arguments for compiling module scripts. (#34182)	
++   3fd1a229df65406699c5795cf504948cdb314320	https://github.com/servo/servo/pull/34182	Add some more CanGc arguments for compiling module scripts. (#34182)	
 +   6b6697e97bd3f88c3e5da4d632afb611be1a403e	https://github.com/servo/servo/pull/34242	servoshell: Fix --no-default-features and make webxr optional on ohos/android (#34242)	
 +   47a243614f920cb9cf4c058ee9d0584377a2a11e	https://github.com/servo/servo/pull/34241	feat: `webxr` feature flag (#34241)	august kline <me@augustkline.com>
-91f96cc9dd028939715a2854b11bbdade6050a5e	https://github.com/servo/servo/pull/34235	Support justify-self on absolutely positioned elements (#34235)	
++   91f96cc9dd028939715a2854b11bbdade6050a5e	https://github.com/servo/servo/pull/34235	Support justify-self on absolutely positioned elements (#34235)	
 +   114cf9a1cc75ea97ce461079519d161981af1a34	https://github.com/servo/servo/pull/34237	ohos: avoid passing some cli arguments to servo (#34237)	
-91026444701cfd68658beb21fbf446f6ed8723e6	https://github.com/servo/servo/pull/34232	Use a RwLock to cache inline_content_sizes() (#34232)	
+    91026444701cfd68658beb21fbf446f6ed8723e6	https://github.com/servo/servo/pull/34232	Use a RwLock to cache inline_content_sizes() (#34232)	
 +   c00804190cdc256183ade8f050d5f0408b550303	https://github.com/servo/servo/pull/34236	Allow filtering of tracing events via SERVO_TRACING (#34236)	
 +   873e82a5329dffeeef9c91d0e47cf34c41c53b03	https://github.com/servo/servo/pull/34231	Add `js.disable_jit` pref (#34231)	
 >>> 2024-11-15T06:23:51Z
@@ -240,7 +251,7 @@ ae029242f82459233a683c7623121dde6cae3f5b	https://github.com/servo/servo/pull/342
     06dce314f80a886bb10fec889d1b6e5c6ac070b7	https://github.com/servo/servo/pull/34307	crown: fix build for rust 1.82 on musl (#34307)	
     c8626985ca3aeafb186ecdf1ab6e5d75f793470d	https://github.com/servo/servo/pull/34146	Use try-parser in main workflow (#34146)	
 +   a58d6d1fa107cb208c11d47a234e082837b05a42	https://github.com/servo/servo/pull/34304	Update CODEOWNERS (#34304)	
-063071ba72c8cfc98bc3b5914a2114c335531d7a	https://github.com/servo/servo/pull/33918	Replace `sparkle` with `glow` in `components/canvas` (#33918)	
++   063071ba72c8cfc98bc3b5914a2114c335531d7a	https://github.com/servo/servo/pull/33918	Replace `sparkle` with `glow` in `components/canvas` (#33918)	
     910e8dc89f675cf6877b44b3b743033e07e3fff4	https://github.com/servo/servo/pull/34299	Enable Shadow DOM for tests (#34299)	
 >>> 2024-11-22T06:02:02Z
     67012a5091dc1d1dde5e3a46f926851e57b35226	https://github.com/servo/servo/pull/34336	Remove etc/shell.nix in favour of shell.nix (#34336)	
@@ -270,9 +281,9 @@ ae029242f82459233a683c7623121dde6cae3f5b	https://github.com/servo/servo/pull/342
     468f9cf014c9dc41e43974ab17fb790e42d7e6ee	https://github.com/servo/servo/pull/34360	Update web-platform-tests to revision b'6d461cc41e1a9951e1991a94f651e389b0ca24ba' (#34360)	
 +   5bd28f2abda5f4ca87dac852d2bec82f5fce0539	https://github.com/servo/servo/pull/34351	Add nicoburns to CODEOWNERS (#34351)	
 >>> 2024-11-25T06:01:56Z
-c11e0e8e706f565c4cd0e80ddfbf210d7660fbb6	https://github.com/servo/servo/pull/34347	layout: Add a hit test item that covers all scroll frame contents (#34347)	Mukilan Thiyagarajan <mukilan@igalia.com>
++   c11e0e8e706f565c4cd0e80ddfbf210d7660fbb6	https://github.com/servo/servo/pull/34347	layout: Add a hit test item that covers all scroll frame contents (#34347)	Mukilan Thiyagarajan <mukilan@igalia.com>
 +   c60e4afbee1bc70bb9fe36ad138c6aa5bb98414d	https://github.com/servo/servo/pull/34356	Support custom derives for generated types (#34356)	
-3faed9b9212fee1f0ff9be5f7cfb5e24c5b84b91	https://github.com/servo/servo/pull/34348	Filter out webidl files based on special comments, and feature-gate webxr interfaces. (#34348)	Samson <16504129+sagudev@users.noreply.github.com>
++   3faed9b9212fee1f0ff9be5f7cfb5e24c5b84b91	https://github.com/servo/servo/pull/34348	Filter out webidl files based on special comments, and feature-gate webxr interfaces. (#34348)	Samson <16504129+sagudev@users.noreply.github.com>
 +   e956f3124c230549c6ef4a63e2c27e56d0965453	https://github.com/servo/servo/pull/34357	Generate a trait abstracting over all known DOM interfaces (#34357)	
 >>> 2024-11-26T06:04:09Z
 +   63793ccbb7c0768af3f31c274df70625abacb508	https://github.com/servo/servo/pull/34353	Use `webrender_api::units::DevicePixel` rather than `style_traits::DevicePixel`  unless interfacing with Stylo (#34353)	
