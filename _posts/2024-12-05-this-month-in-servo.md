@@ -1,11 +1,23 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
+title:      "This month in Servo: grid layout, parallel flexbox, smaller binaries, and more!"
 date:       2024-12-05
 summary:    ao!! wrrrrao!!
 categories:
 ---
+
+Servo now supports **CSS grid layout** (@nicoburns, @taniishkaa, #32619, #34352, #34421), **:is() and :where() selectors** (@mrobinson, #34066), and the **getClientRects()** method on Element (@chickenleaf, #34025)!
+We’ve also added support for two key Shadow DOM interfaces, the **shadowRoot property** on Element (@simonwuelker, #34306) and the **innerHTML property on ShadowRoot** (@simonwuelker, #34335).
+
+Last month we also landed support for **‘justify-self’** on positioned elements (@chickenleaf, #34235), form submission with **&lt;input type=image>** (@shanehandley, #34203), **DataTransfer** (@Gae24, #34205), the **close()** method on ImageBitmap (@simonwuelker, #34124), plus several new **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API** features:
+
+- crypto.subtle.**deriveKey()** (@simonwuelker, #34185)
+- **wrapKey()** and **unwrapKey()** (@simonwuelker, #34262)
+- **“HMAC”** algorithm in **generateKey()** (#34278), **sign()**, **verify()** (#34223), and **deriveKey(`"get key length"`)** (#34230)
+- **“AES-GCM”** algorithm in **encrypt()**, **decrypt()**, **generateKey()**, and **importKey()** (#34269)
+- **“AES-KW”** algorithm in **generateKey()**, **importKey()**, **wrapKey()**, and **unwrapKey()** (#34262)
+- **“PBKDF2”** (#34164) and **“HKDF”** (#34200) algorithms in **deriveBits()**
 
 <!--
 - 4291.50/month donations
@@ -14,27 +26,27 @@ categories:
     - ?.??/month thanks.dev (15 donors)
 - CODEOWNERS 34316 34308 34304 34334 34351
 - new features
-    - shadowRoot property on Element 34306
-    - innerHTML property on ShadowRoot 34335
-    - getClientRects() method on Element 34025
-    - crypto.subtle.deriveKey() 34185
-    - crypto.subtle.{wrapKey,unwrapKey} 34262
-    - crypto.subtle.{encrypt,decrypt,generateKey,importKey} for AES-GCM 34269
-    - crypto.subtle.generateKey() for HMAC 34278
-    - crypto.subtle.deriveKey("get key length") for HMAC 34230
-    - crypto.subtle.{sign,verify} for HMAC 34223
-    - crypto.subtle.{generateKey,importKey,wrapKey,unwrapKey} for AES-KW 34262
-    - crypto.subtle.deriveBits() for PBKDF2 34164
-    - crypto.subtle.deriveBits() for HKDF 34200
-    - :is() and :where() 34066
-    - form submission with <input type=image> 34203
+    - DONE shadowRoot property on Element 34306
+    - DONE innerHTML property on ShadowRoot 34335
+    - DONE getClientRects() method on Element 34025
+    - DONE crypto.subtle.deriveKey() 34185
+    - DONE crypto.subtle.{wrapKey,unwrapKey} 34262
+    - DONE crypto.subtle.{encrypt,decrypt,generateKey,importKey} for AES-GCM 34269
+    - DONE crypto.subtle.generateKey() for HMAC 34278
+    - DONE crypto.subtle.deriveKey("get key length") for HMAC 34230
+    - DONE crypto.subtle.{sign,verify} for HMAC 34223
+    - DONE crypto.subtle.{generateKey,importKey,wrapKey,unwrapKey} for AES-KW 34262
+    - DONE crypto.subtle.deriveBits() for PBKDF2 34164
+    - DONE crypto.subtle.deriveBits() for HKDF 34200
+    - DONE :is() and :where() 34066
+    - DONE form submission with <input type=image> 34203
     - js.disable_jit pref 34231
-    - ?DataTransfer api 34205
-    - ?close() method on ImageBitmap 34124
+    - DONE ?DataTransfer api 34205
+    - DONE ?close() method on ImageBitmap 34124
 - layout
-    - css grid 32619 34352 34421
+    - DONE css grid 32619 34352 34421
     - parallel flexbox 34132
-    - ‘justify-self’ on abspos elements 34235
+    - DONE ‘justify-self’ on abspos elements 34235
     - faster column flex 34346 34372
     - faster intrinsic size caching 34384
     - fixed clientWidth etc for floats and replaced inlines 34083
