@@ -13,11 +13,11 @@ We’ve also added support for two key Shadow DOM interfaces, the **shadowRoot p
 Last month we also landed support for **‘justify-self’** on positioned elements (@chickenleaf, #34235), form submission with **&lt;input type=image>** (@shanehandley, #34203), **DataTransfer** (@Gae24, #34205), the **close()** method on ImageBitmap (@simonwuelker, #34124), plus several new **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API** features:
 
 - crypto.subtle.**deriveKey()** (@simonwuelker, #34185)
-- **wrapKey()** and **unwrapKey()** (@simonwuelker, #34262)
-- **“HMAC”** algorithm in **generateKey()** (#34278), **sign()**, **verify()** (#34223), and **deriveKey(`"get key length"`)** (#34230)
-- **“AES-GCM”** algorithm in **encrypt()**, **decrypt()**, **generateKey()**, and **importKey()** (#34269)
-- **“AES-KW”** algorithm in **generateKey()**, **importKey()**, **wrapKey()**, and **unwrapKey()** (#34262)
-- **“PBKDF2”** (#34164) and **“HKDF”** (#34200) algorithms in **deriveBits()**
+- **wrapKey()** and **unwrapKey()** (@msub2, #34262)
+- **“HMAC”** algorithm in **generateKey()** (@simonwuelker, #34278), **sign()**, **verify()** (@simonwuelker, #34223), and **deriveKey(`"get key length"`)** (@simonwuelker, #34230)
+- **“AES-GCM”** algorithm in **encrypt()**, **decrypt()**, **generateKey()**, and **importKey()** (@simonwuelker, #34269)
+- **“AES-KW”** algorithm in **generateKey()**, **importKey()**, **wrapKey()**, and **unwrapKey()** (@msub2, #34262)
+- **“PBKDF2”** (@simonwuelker, #34164) and **“HKDF”** (@simonwuelker, #34200) algorithms in **deriveBits()**
 
 ## More engine changes
 
@@ -27,7 +27,7 @@ We’ve fixed the behaviour of **offsetLeft** and **offsetTop** relative to &lt;
 We’ve also fixed several layout bugs around:
 
 - **‘object-fit’** when ‘aspect-ratio’ is set (@Loirooriol, #34413)
-- **clientWidth** and friends on floats and replaced inlines ()
+- **clientWidth** and friends on floats and replaced inlines (@Loirooriol, #34083)
 - **‘align-items’** and **‘align-self: stretch’** (@mrobinson, @Loirooriol, #34162)
 - **main axis free space** in flexbox (@mrobinson, #34150)
 - **min-** and **max-content block sizes** of replaced elements (@Loirooriol, #34284)
