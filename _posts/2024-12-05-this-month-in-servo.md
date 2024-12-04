@@ -7,7 +7,7 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-Servo now supports **CSS grid layout** (@nicoburns, @taniishkaa, #32619, #34352, #34421), **:is() and :where() selectors** (@mrobinson, #34066), and the **getClientRects()** method on Element (@chickenleaf, #34025)!
+Servo now supports **CSS grid layout** (@nicoburns, @taniishkaa, #32619, #34352, #34421), **parallel layout for flexbox** (@mrobinson, #34132), **:is() and :where() selectors** (@mrobinson, #34066), and the **getClientRects()** method on Element (@chickenleaf, #34025)!
 We’ve also added support for two key Shadow DOM interfaces, the **shadowRoot property** on Element (@simonwuelker, #34306) and the **innerHTML property on ShadowRoot** (@simonwuelker, #34335).
 
 Last month we also landed support for **‘justify-self’** on positioned elements (@chickenleaf, #34235), form submission with **&lt;input type=image>** (@shanehandley, #34203), **DataTransfer** (@Gae24, #34205), the **close()** method on ImageBitmap (@simonwuelker, #34124), plus several new **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API** features:
@@ -18,6 +18,20 @@ Last month we also landed support for **‘justify-self’** on positioned eleme
 - **“AES-GCM”** algorithm in **encrypt()**, **decrypt()**, **generateKey()**, and **importKey()** (#34269)
 - **“AES-KW”** algorithm in **generateKey()**, **importKey()**, **wrapKey()**, and **unwrapKey()** (#34262)
 - **“PBKDF2”** (#34164) and **“HKDF”** (#34200) algorithms in **deriveBits()**
+
+## More engine changes
+
+Layout performance continues to improve, with faster layout for **‘column’ flex containers** (@Loirooriol, @mrobinson, #34346) and faster caching of intrinsic sizes (@Loirooriol, #34384), in addition to parallel layout for flexbox (@mrobinson, #34132).
+
+We’ve fixed the behaviour of **offsetLeft** and **offsetTop** relative to &lt;body> with ‘position: static’ (@nicoburns, @Loirooriol, #32761), which also required spec changes (@nicoburns, @Loirooriol, csswg-drafts#10549).
+We’ve also fixed several layout bugs around:
+
+- **‘object-fit’** when ‘aspect-ratio’ is set (@Loirooriol, #34413)
+- **clientWidth** and friends on floats and replaced inlines ()
+- **‘align-items’** and **‘align-self: stretch’** (@mrobinson, @Loirooriol, #34162)
+- **main axis free space** in flexbox (@mrobinson, #34150)
+- **min-** and **max-content block sizes** of replaced elements (@Loirooriol, #34284)
+- sizing of non-replaced positioned elements with **‘place-self’** (@taniishkaa, #34264)
 
 <!--
 - 4291.50/month donations
@@ -43,18 +57,18 @@ Last month we also landed support for **‘justify-self’** on positioned eleme
     - js.disable_jit pref 34231
     - DONE ?DataTransfer api 34205
     - DONE ?close() method on ImageBitmap 34124
-- layout
+- DONE layout
     - DONE css grid 32619 34352 34421
-    - parallel flexbox 34132
+    - DONE parallel flexbox 34132
     - DONE ‘justify-self’ on abspos elements 34235
-    - faster column flex 34346 34372
-    - faster intrinsic size caching 34384
-    - fixed clientWidth etc for floats and replaced inlines 34083
-    - fixed ‘object-fit’ when ‘aspect-ratio’ is set 34413
-    - fixed sizing of non-replaced abspos elements with ‘place-self’ 34264
-    - fixed min/max-content block sizes of replaced elements 34284
-    - fixed offsetLeft and offsetTop relative to <body> with ‘position:static’ 32761 nicoburns Loirooriol
-    - fixed bugs in flexbox stretch and free space 34162 34150
+    - DONE faster column flex 34346 34372
+    - DONE faster intrinsic size caching 34384
+    - DONE fixed clientWidth etc for floats and replaced inlines 34083
+    - DONE fixed ‘object-fit’ when ‘aspect-ratio’ is set 34413
+    - DONE fixed sizing of non-replaced abspos elements with ‘place-self’ 34264
+    - DONE fixed min/max-content block sizes of replaced elements 34284
+    - DONE fixed offsetLeft and offsetTop relative to <body> with ‘position:static’ 32761 nicoburns Loirooriol
+    - DONE fixed bugs in flexbox stretch and free space 34162 34150
 - stylo
     - upgrade to 2024-11-01 34322
     - prepare for crates.io releases 34332 34353
