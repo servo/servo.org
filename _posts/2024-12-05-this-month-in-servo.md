@@ -7,7 +7,7 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-Servo now supports **CSS grid layout** (@nicoburns, @taniishkaa, #32619, #34352, #34421), **parallel layout for flexbox** (@mrobinson, #34132), **:is() and :where() selectors** (@mrobinson, #34066), and the **getClientRects()** method on Element (@chickenleaf, #34025)!
+Servo now supports **CSS grid layout** (@nicoburns, @taniishkaa, #32619, #34352, #34421), **parallel layout for flexbox** (@mrobinson, #34132), and **:is() and :where() selectors** (@mrobinson, #34066)!
 We’ve also added support for two key Shadow DOM interfaces, the **shadowRoot property** on Element (@simonwuelker, #34306) and the **innerHTML property on ShadowRoot** (@simonwuelker, #34335).
 
 Last month we also landed support for **‘justify-self’** on positioned elements (@chickenleaf, #34235), form submission with **&lt;input type=image>** (@shanehandley, #34203), **DataTransfer** (@Gae24, #34205), the **close()** method on ImageBitmap (@simonwuelker, #34124), plus several new **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API** features:
@@ -32,6 +32,8 @@ We’ve also fixed several layout bugs around:
 - **main axis free space** in flexbox (@mrobinson, #34150)
 - **min-** and **max-content block sizes** of replaced elements (@Loirooriol, #34284)
 - sizing of non-replaced positioned elements with **‘place-self’** (@taniishkaa, #34264)
+
+The **getClientRects()** method on Element now correctly returns a DOMRectList (@chickenleaf, #34025).
 
 <!--
 - 4291.50/month donations
