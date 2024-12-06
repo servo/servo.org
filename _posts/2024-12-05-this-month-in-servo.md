@@ -44,6 +44,17 @@ The **getClientRects()** method on Element now correctly returns a DOMRectList (
 **Stylo** has been updated to 2024-11-01 (@Loirooriol, #34322), and we’ve landed some changes to prepare our fork of Stylo for publishing releases on crates.io (@mrobinson, @nicoburns, #34332, #34353).
 We’ve also made more progress towards **splitting up our massive `script` crate** (@jdm, @sagudev, #34357, #34356, #34163), which will eventually allow Servo to be built (and rebuilt) much faster.
 
+## Performance improvements
+
+Servo’s **[tracing](https://docs.rs/tracing/0.1.40/tracing/)-based profiling support** (`--features tracing-perfetto` or `tracing-hitrace`) now supports **filtering events** via an environment variable (@delan, #34236, #34256), and no longer includes events from non-Servo crates by default (@delan, #34209).
+Note that when the filter matches some span or event, it will also match all of its descendants for now, but this is a limitation we intend to fix.
+
+Most of the events supported by the old interval profiler have been **ported to tracing** (@delan, #34238, #34337).
+**ScriptParseHTML** and **ScriptParseXML** events no longer count the time spent doing layout and script while parsing, reducing them to more realistic times (@delan, #34273), while **ScriptEvaluate** events now count the time spent running scripts in timers, DOM event listeners, and many other situations (@delan, #34286), increasing them to more realistic times.
+
+We’ve added new tracing events for **display list building** (@atbrakhi, #34392), **flex layout**, **inline layout**, and **font loading** (@delan, #34392).
+This will help us diagnose performance issues around things like caching and relayout for ‘stretch’ in flex layout, shaping text runs, and font template creation.
+
 <!--
 - 4291.50/month donations
     - 2131.50/month opencollective
@@ -108,14 +119,14 @@ We’ve also made more progress towards **splitting up our massive `script` crat
     - fixed crash in crypto.subtle handling of Algorithm 34239
     - fixed more crashes due to gc borrow hazards 34122 34087 34182
     - fixed crash in width/height properties on OffscreenCanvas 34165
-- tracing
-    - filtering with SERVO_TRACING 34236
-    - interval profiler migration 34238 34337
-    - trace level and `servo_profiling` 34256 34209
-    - fixed ScriptParseHTML and ScriptParseXML overcounting script/style/layout 34273
-    - fixed ScriptEvaluate undercounting events and timers 34286
-    - tracing for flex + inline + fonts 34392
-    - tracing for display lists 34128
+- DONE tracing
+    - DONE filtering with SERVO_TRACING 34236
+    - DONE interval profiler migration 34238 34337
+    - DONE trace level and `servo_profiling` 34256 34209
+    - DONE fixed ScriptParseHTML and ScriptParseXML overcounting script/style/layout 34273
+    - DONE fixed ScriptEvaluate undercounting events and timers 34286
+    - DONE tracing for flex + inline + fonts 34392
+    - DONE tracing for display lists 34128
 - hacking
     - `medium` cargo profile 34035
 
