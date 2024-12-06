@@ -47,6 +47,15 @@ We’ve also fixed several layout bugs around:&lt;/p&gt;
 &lt;p&gt;The &lt;strong&gt;getClientRects()&lt;/strong&gt; method on Element now correctly returns a DOMRectList (@chickenleaf, #34025).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Stylo&lt;/strong&gt; has been updated to 2024-11-01 (@Loirooriol, #34322), and we’ve landed some changes to prepare our fork of Stylo for publishing releases on &lt;a href=&quot;http://crates.io/&quot;&gt;crates.io&lt;/a&gt; (@mrobinson, @nicoburns, #34332, #34353).
 We’ve also made more progress towards &lt;strong&gt;splitting up our massive &lt;code&gt;script&lt;/code&gt; crate&lt;/strong&gt; (@jdm, @sagudev, #34357, #34356, #34163), which will eventually allow Servo to be built (and rebuilt) much faster.&lt;/p&gt;
+&lt;h2 id=&quot;performance-improvements&quot; tabindex=&quot;-1&quot;&gt;Performance improvements &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-december-2024/blog/2024/12/05/this-month-in-servo/#performance-improvements&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Servo’s &lt;strong&gt;&lt;a href=&quot;https://docs.rs/tracing/0.1.40/tracing/&quot;&gt;tracing&lt;/a&gt;-based profiling support&lt;/strong&gt; (&lt;code&gt;--features tracing-perfetto&lt;/code&gt; or &lt;code&gt;tracing-hitrace&lt;/code&gt;) now supports &lt;strong&gt;filtering events&lt;/strong&gt; via an environment variable (@delan, #34236, #34256), and no longer includes events from non-Servo crates by default (@delan, #34209).
+Note that when the filter matches some span or event, it will also match all of its descendants for now, but this is a limitation we intend to fix.&lt;/p&gt;
+&lt;p&gt;Most of the events supported by the old interval profiler have been &lt;strong&gt;ported to tracing&lt;/strong&gt; (@delan, #34238, #34337).
+&lt;strong&gt;ScriptParseHTML&lt;/strong&gt; and &lt;strong&gt;ScriptParseXML&lt;/strong&gt; events no longer count the time spent doing layout and script while parsing, reducing them to more realistic times (@delan, #34273), while &lt;strong&gt;ScriptEvaluate&lt;/strong&gt; events now count the time spent running scripts in timers, DOM event listeners, and many other situations (@delan, #34286), increasing them to more realistic times.&lt;/p&gt;
+&lt;p&gt;We’ve added new tracing events for &lt;strong&gt;display list building&lt;/strong&gt; (@atbrakhi, #34392), &lt;strong&gt;flex layout&lt;/strong&gt;, &lt;strong&gt;inline layout&lt;/strong&gt;, and &lt;strong&gt;font loading&lt;/strong&gt; (@delan, #34392).
+This will help us diagnose performance issues around things like caching and relayout for ‘stretch’ in flex layout, shaping text runs, and font template creation.&lt;/p&gt;
 &lt;!--
 - 4291.50/month donations
     - 2131.50/month opencollective
@@ -111,14 +120,14 @@ We’ve also made more progress towards &lt;strong&gt;splitting up our massive &
     - fixed crash in crypto.subtle handling of Algorithm 34239
     - fixed more crashes due to gc borrow hazards 34122 34087 34182
     - fixed crash in width/height properties on OffscreenCanvas 34165
-- tracing
-    - filtering with SERVO_TRACING 34236
-    - interval profiler migration 34238 34337
-    - trace level and `servo_profiling` 34256 34209
-    - fixed ScriptParseHTML and ScriptParseXML overcounting script/style/layout 34273
-    - fixed ScriptEvaluate undercounting events and timers 34286
-    - tracing for flex + inline + fonts 34392
-    - tracing for display lists 34128
+- DONE tracing
+    - DONE filtering with SERVO_TRACING 34236
+    - DONE interval profiler migration 34238 34337
+    - DONE trace level and `servo_profiling` 34256 34209
+    - DONE fixed ScriptParseHTML and ScriptParseXML overcounting script/style/layout 34273
+    - DONE fixed ScriptEvaluate undercounting events and timers 34286
+    - DONE tracing for flex + inline + fonts 34392
+    - DONE tracing for display lists 34128
 - hacking
     - `medium` cargo profile 34035
 
