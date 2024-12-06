@@ -19,6 +19,9 @@ Last month we also landed support for **‘justify-self’** on positioned eleme
 - **“AES-KW”** algorithm in **generateKey()**, **importKey()**, **wrapKey()**, and **unwrapKey()** (@msub2, #34262)
 - **“PBKDF2”** (@simonwuelker, #34164) and **“HKDF”** (@simonwuelker, #34200) algorithms in **deriveBits()**
 
+On OpenHarmony, we’ve landed **keyboard input** and the IME (@jschwe, @jdm, @mukilan, #34188), **touch fling gestures** (@jschwe, @mrobinson, #33219), and additional **CJK fallback fonts** (@jschwe, #34410).
+You can now build for OpenHarmony on a Windows machine (@jschwe, #34113), and build errors have been improved (@jschwe, #34267).
+
 ## More engine changes
 
 You can now **scroll the viewport** and scrollable elements **with your pointer anywhere in the area**, not just when hovering over actual content (@mrobinson, @mukilan, #34347).
@@ -85,12 +88,12 @@ We’ve also made more progress towards **splitting up our massive `script` crat
     - DONE `--unminify-js` now supports module scripts 34206
 - DONE usability
     - DONE scroll anywhere, not just over content 34347 mrobinson mukilan
-- ohos
-    - keyboard and ime support 34188
-    - touch fling 33219 jschwe mrobinson
-    - cjk fallback fonts 34410
-    - better build errors 34267
-    - fixed build on windows hosts 34113
+- DONE ohos
+    - DONE keyboard and ime support 34188
+    - DONE touch fling 33219 jschwe mrobinson
+    - DONE cjk fallback fonts 34410
+    - DONE better build errors 34267
+    - DONE fixed build on windows hosts 34113
 - perf and binary size
     - fixed font template caching 34325
     - pending paint metrics 34305
