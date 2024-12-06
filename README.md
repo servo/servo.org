@@ -150,6 +150,11 @@ LFX:
     - You may need to open it in private browsing to avoid getting a 404, not sure why
 - Manually add up the amounts for one month, stopping when you see the same donor repeated
 
+thanks.dev:
+
+- Go to <https://thanks.dev/dashboard>
+- The number of donors is in “You currently have X donors.”
+
 ## Triaging commits in nightlies for monthly updates
 
 Generally we want to include...
