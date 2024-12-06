@@ -222,7 +222,6 @@ You can now build for OpenHarmony on a Windows machine (@jschwe, #34113), and bu
       </a></h2>
 <p>You can now <strong>scroll the viewport</strong> and scrollable elements <strong>with your pointer anywhere in the area</strong>, not just when hovering over actual content (@mrobinson, @mukilan, #34347).
 <code>--unminify-js</code>, a very useful feature for <a href="https://book.servo.org/hacking/web-compat-bugs.html#diagnosing-js-errors">diagnosing Servo bugs in real websites</a>, now supports module scripts (@jdm, #34206).</p>
-<p>Layout performance continues to improve, with faster layout for <strong>‘column’ flex containers</strong> (@Loirooriol, @mrobinson, #34346) and faster caching of intrinsic sizes (@Loirooriol, #34384), in addition to parallel layout for flexbox (@mrobinson, #34132).</p>
 <p>We’ve fixed the behaviour of <strong>offsetLeft</strong> and <strong>offsetTop</strong> relative to &lt;body&gt; with ‘position: static’ (@nicoburns, @Loirooriol, #32761), which also required spec changes (@nicoburns, @Loirooriol, csswg-drafts#10549).
 We’ve also fixed several layout bugs around:</p>
 <ul>
@@ -239,6 +238,21 @@ We’ve also made more progress towards <strong>splitting up our massive <code>s
 <h2 id="performance-improvements" tabindex="-1">Performance improvements <a class="header-anchor" href="#performance-improvements">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>In addition to parallel layout for flexbox (@mrobinson, #34132), we’ve landed several other performance improvements:</p>
+<ul>
+<li>faster layout for <strong>‘column’ flex containers</strong> (@Loirooriol, @mrobinson, #34346)</li>
+<li>faster caching of intrinsic sizes (@Loirooriol, #34384)</li>
+<li>caching of font template matches (@mukilan, @mrobinson, #34325)</li>
+<li>fixed warnings and memory leak when WebRender is running late (@mrobinson, @mukilan, #34305)</li>
+</ul>
+<p>We’ve also landed some changes to reduce Servo’s binary size:</p>
+<ul>
+<li>legacy layout is no longer built by default (@jschwe, #34290)</li>
+<li>Servo no longer depends on <code>sparkle</code>, only <code>glow</code> and <code>gleam</code> (@sagudev, #33918, #34292)</li>
+<li>Servo can now be built without WebXR support (@wusyong, @augustkline, @jdm, @sagudev, #34241, #34348)</li>
+<li>servoshell can now be built without WebXR on OpenHarmony and Android (@jschwe, #34242), with more platforms to come</li>
+<li>plus some progress towards a build-time feature flag for WebGPU (@atbrakhi, #34415)</li>
+</ul>
 <p>Servo’s <strong><a href="https://docs.rs/tracing/0.1.40/tracing/">tracing</a>-based profiling support</strong> (<code>--features tracing-perfetto</code> or <code>tracing-hitrace</code>) now supports <strong>filtering events</strong> via an environment variable (@delan, #34236, #34256), and no longer includes events from non-Servo crates by default (@delan, #34209).
 Note that when the filter matches some span or event, it will also match all of its descendants for now, but this is a limitation we intend to fix.</p>
 <p>Most of the events supported by the old interval profiler have been <strong>ported to tracing</strong> (@delan, #34238, #34337).
@@ -295,14 +309,14 @@ This will help us diagnose performance issues around things like caching and rel
     - DONE cjk fallback fonts 34410
     - DONE better build errors 34267
     - DONE fixed build on windows hosts 34113
-- perf and binary size
-    - fixed font template caching 34325
-    - pending paint metrics 34305
-    - layout 2013 compiled out by default 34290
-    - webxr feature flag 34241 34348 wusyong augustkline jdm sagudev
-    - webxr optional on ohos/android 34242
-    - working on webgpu feature flag 34415
-    - more unification of gl bindings 33918 34292
+- DONE perf and binary size
+    - DONE fixed font template caching 34325
+    - DONE pending paint metrics 34305
+    - DONE layout 2013 compiled out by default 34290
+    - DONE webxr feature flag 34241 34348 wusyong augustkline jdm sagudev
+    - DONE webxr optional on ohos/android 34242
+    - DONE working on webgpu feature flag 34415
+    - DONE more unification of gl bindings 33918 34292
 - crashes
     - fixed crash when launching ohos app 34237
     - fixed crash when accessing style of non-shadow descendants of shadow hosts 34298
