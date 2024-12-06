@@ -21,6 +21,9 @@ Last month we also landed support for **‘justify-self’** on positioned eleme
 
 ## More engine changes
 
+You can now **scroll the viewport** and scrollable elements **with your pointer anywhere in the area**, not just when hovering over actual content (@mrobinson, @mukilan, #34347).
+`--unminify-js`, a very useful feature for [diagnosing Servo bugs in real websites](https://book.servo.org/hacking/web-compat-bugs.html#diagnosing-js-errors), now supports module scripts (@jdm, #34206).
+
 Layout performance continues to improve, with faster layout for **‘column’ flex containers** (@Loirooriol, @mrobinson, #34346) and faster caching of intrinsic sizes (@Loirooriol, #34384), in addition to parallel layout for flexbox (@mrobinson, #34132).
 
 We’ve fixed the behaviour of **offsetLeft** and **offsetTop** relative to &lt;body> with ‘position: static’ (@nicoburns, @Loirooriol, #32761), which also required spec changes (@nicoburns, @Loirooriol, csswg-drafts#10549).
@@ -34,6 +37,9 @@ We’ve also fixed several layout bugs around:
 - sizing of non-replaced positioned elements with **‘place-self’** (@taniishkaa, #34264)
 
 The **getClientRects()** method on Element now correctly returns a DOMRectList (@chickenleaf, #34025).
+
+**Stylo** has been updated to 2024-11-01 (@Loirooriol, #34322), and we’ve landed some changes to prepare our fork of Stylo for publishing releases on crates.io (@mrobinson, @nicoburns, #34332, #34353).
+We’ve also made more progress towards **splitting up our massive `script` crate** (@jdm, @sagudev, #34357, #34356, #34163), which will eventually allow Servo to be built (and rebuilt) much faster.
 
 <!--
 - 4291.50/month donations
@@ -71,14 +77,14 @@ The **getClientRects()** method on Element now correctly returns a DOMRectList (
     - DONE fixed min/max-content block sizes of replaced elements 34284
     - DONE fixed offsetLeft and offsetTop relative to <body> with ‘position:static’ 32761 nicoburns Loirooriol
     - DONE fixed bugs in flexbox stretch and free space 34162 34150
-- stylo
-    - upgrade to 2024-11-01 34322
-    - prepare for crates.io releases 34332 34353
-- script
-    - more work on split 34357 34356 34163
-    - `--unminify-js` now supports module scripts 34206
-- usability
-    - scroll anywhere, not just over content 34347 mrobinson mukilan
+- DONE stylo
+    - DONE upgrade to 2024-11-01 34322
+    - DONE prepare for crates.io releases 34332 34353
+- DONE script
+    - DONE more work on split 34357 34356 34163
+    - DONE `--unminify-js` now supports module scripts 34206
+- DONE usability
+    - DONE scroll anywhere, not just over content 34347 mrobinson mukilan
 - ohos
     - keyboard and ime support 34188
     - touch fling 33219 jschwe mrobinson
