@@ -105,6 +105,12 @@ When the time comes, we’ll also be able to afford macOS runners and perf bots,
 As always, use of these funds will be decided transparently in the Technical Steering Committee.
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
+## Conferences and blogs
+
+- [**Servo Revival: 2023-2024**](https://blogs.igalia.com/mrego/servo-revival-2023-2024/) — Manuel Rego wrote about Igalia’s role in getting Servo back to life, and now thriving, over the past two years
+- [**Porting Servo to OpenHarmony**](https://www.youtube.com/watch?v=1c9sHaEXQak) — Jonathan Schwender spoke at [GOSIM China 2024](https://lfeumembersummit24.sched.com/event/1hUAF) about the work we’ve done towards supporting OpenHarmony in Servo
+- [**Taming concurrency with (in)-formal methods in Servo**](https://www.youtube.com/watch?v=1c9sHaEXQak) — Gregory Terzian spoke at [GOSIM China 2024](https://lfeumembersummit24.sched.com/event/1hUAF) about using [TLA+](https://en.wikipedia.org/wiki/TLA%2B) to help us correctly implement concurrent algorithms like the HTML event loop in Servo
+
 <style>
     /* guaranteed minimum width for first paragraph after a float */
     ._floatmin {
