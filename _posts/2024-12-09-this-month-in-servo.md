@@ -10,70 +10,70 @@ categories:
 <figure class="_figr"><a href="{{ '/img/blog/november-2024.png' | url }}"><img src="{{ '/img/blog/november-2024.png' | url }}" style="width: 33em;"
     alt="Servo nightly showing new support for CSS grid layout"></a></figure>
 
-Servo now supports **CSS grid layout** (@nicoburns, @taniishkaa, #32619, #34352, #34421), **parallel layout for flexbox** (@mrobinson, #34132), and **:is() and :where() selectors** (@mrobinson, #34066)!
-We’ve also added support for two key Shadow DOM interfaces, the **shadowRoot property** on Element (@simonwuelker, #34306) and the **innerHTML property on ShadowRoot** (@simonwuelker, #34335).
+Servo now supports **CSS grid layout** ([@nicoburns](https://github.com/nicoburns), [@taniishkaa](https://github.com/taniishkaa), [#32619](https://github.com/servo/servo/pull/32619), [#34352](https://github.com/servo/servo/pull/34352), [#34421](https://github.com/servo/servo/pull/34421)), **parallel layout for flexbox** ([@mrobinson](https://github.com/mrobinson), [#34132](https://github.com/servo/servo/pull/34132)), and **:is() and :where() selectors** ([@mrobinson](https://github.com/mrobinson), [#34066](https://github.com/servo/servo/pull/34066))!
+We’ve also added support for two key Shadow DOM interfaces, the **shadowRoot property** on Element ([@simonwuelker](https://github.com/simonwuelker), [#34306](https://github.com/servo/servo/pull/34306)) and the **innerHTML property on ShadowRoot** ([@simonwuelker](https://github.com/simonwuelker), [#34335](https://github.com/servo/servo/pull/34335)).
 
-Last month we also landed support for **‘justify-self’** on positioned elements (@chickenleaf, #34235), form submission with **&lt;input type=image>** (@shanehandley, #34203), **DataTransfer** (@Gae24, #34205), the **close()** method on ImageBitmap (@simonwuelker, #34124), plus several new **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API** features:
+Last month we also landed support for **‘justify-self’** on positioned elements ([@chickenleaf](https://github.com/chickenleaf), [#34235](https://github.com/servo/servo/pull/34235)), form submission with **&lt;input type=image>** ([@shanehandley](https://github.com/shanehandley), [#34203](https://github.com/servo/servo/pull/34203)), **DataTransfer** ([@Gae24](https://github.com/Gae24), [#34205](https://github.com/servo/servo/pull/34205)), the **close()** method on ImageBitmap ([@simonwuelker](https://github.com/simonwuelker), [#34124](https://github.com/servo/servo/pull/34124)), plus several new **[SubtleCrypto](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto) API** features:
 
-- crypto.subtle.**deriveKey()** (@simonwuelker, #34185)
-- **wrapKey()** and **unwrapKey()** (@msub2, #34262)
-- **“HMAC”** algorithm in **generateKey()** (@simonwuelker, #34278), **sign()**, **verify()** (@simonwuelker, #34223), and **deriveKey(`"get key length"`)** (@simonwuelker, #34230)
-- **“AES-GCM”** algorithm in **encrypt()**, **decrypt()**, **generateKey()**, and **importKey()** (@simonwuelker, #34269)
-- **“AES-KW”** algorithm in **generateKey()**, **importKey()**, **wrapKey()**, and **unwrapKey()** (@msub2, #34262)
-- **“PBKDF2”** (@simonwuelker, #34164) and **“HKDF”** (@simonwuelker, #34200) algorithms in **deriveBits()**
+- crypto.subtle.**deriveKey()** ([@simonwuelker](https://github.com/simonwuelker), [#34185](https://github.com/servo/servo/pull/34185))
+- **wrapKey()** and **unwrapKey()** ([@msub2](https://github.com/msub2), [#34262](https://github.com/servo/servo/pull/34262))
+- **“HMAC”** algorithm in **generateKey()** ([@simonwuelker](https://github.com/simonwuelker), [#34278](https://github.com/servo/servo/pull/34278)), **sign()**, **verify()** ([@simonwuelker](https://github.com/simonwuelker), [#34223](https://github.com/servo/servo/pull/34223)), and **deriveKey(`"get key length"`)** ([@simonwuelker](https://github.com/simonwuelker), [#34230](https://github.com/servo/servo/pull/34230))
+- **“AES-GCM”** algorithm in **encrypt()**, **decrypt()**, **generateKey()**, and **importKey()** ([@simonwuelker](https://github.com/simonwuelker), [#34269](https://github.com/servo/servo/pull/34269))
+- **“AES-KW”** algorithm in **generateKey()**, **importKey()**, **wrapKey()**, and **unwrapKey()** ([@msub2](https://github.com/msub2), [#34262](https://github.com/servo/servo/pull/34262))
+- **“PBKDF2”** ([@simonwuelker](https://github.com/simonwuelker), [#34164](https://github.com/servo/servo/pull/34164)) and **“HKDF”** ([@simonwuelker](https://github.com/simonwuelker), [#34200](https://github.com/servo/servo/pull/34200)) algorithms in **deriveBits()**
 
-On OpenHarmony, we’ve landed **keyboard input** and the IME (@jschwe, @jdm, @mukilan, #34188), **touch fling gestures** (@jschwe, @mrobinson, #33219), and additional **CJK fallback fonts** (@jschwe, #34410).
-You can now build for OpenHarmony on a Windows machine (@jschwe, #34113), and build errors have been improved (@jschwe, #34267).
+On OpenHarmony, we’ve landed **keyboard input** and the IME ([@jschwe](https://github.com/jschwe), [@jdm](https://github.com/jdm), [@mukilan](https://github.com/mukilan), [#34188](https://github.com/servo/servo/pull/34188)), **touch fling gestures** ([@jschwe](https://github.com/jschwe), [@mrobinson](https://github.com/mrobinson), [#33219](https://github.com/servo/servo/pull/33219)), and additional **CJK fallback fonts** ([@jschwe](https://github.com/jschwe), [#34410](https://github.com/servo/servo/pull/34410)).
+You can now build for OpenHarmony on a Windows machine ([@jschwe](https://github.com/jschwe), [#34113](https://github.com/servo/servo/pull/34113)), and build errors have been improved ([@jschwe](https://github.com/jschwe), [#34267](https://github.com/servo/servo/pull/34267)).
 
 ## More engine changes
 
-You can now **scroll the viewport** and scrollable elements **with your pointer anywhere in the area**, not just when hovering over actual content (@mrobinson, @mukilan, #34347).
-`--unminify-js`, a very useful feature for [diagnosing Servo bugs in real websites](https://book.servo.org/hacking/web-compat-bugs.html#diagnosing-js-errors), now supports module scripts (@jdm, #34206).
+You can now **scroll the viewport** and scrollable elements **with your pointer anywhere in the area**, not just when hovering over actual content ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#34347](https://github.com/servo/servo/pull/34347)).
+`--unminify-js`, a very useful feature for [diagnosing Servo bugs in real websites](https://book.servo.org/hacking/web-compat-bugs.html#diagnosing-js-errors), now supports module scripts ([@jdm](https://github.com/jdm), [#34206](https://github.com/servo/servo/pull/34206)).
 
-We’ve fixed the behaviour of **offsetLeft** and **offsetTop** relative to &lt;body> with ‘position: static’ (@nicoburns, @Loirooriol, #32761), which also required spec changes (@nicoburns, @Loirooriol, csswg-drafts#10549).
+We’ve fixed the behaviour of **offsetLeft** and **offsetTop** relative to &lt;body> with ‘position: static’ ([@nicoburns](https://github.com/nicoburns), [@Loirooriol](https://github.com/Loirooriol), [#32761](https://github.com/servo/servo/pull/32761)), which also required spec changes ([@nicoburns](https://github.com/nicoburns), [@Loirooriol](https://github.com/Loirooriol), [w3c/csswg-drafts#10549](https://github.com/w3c/csswg-drafts/pull/10549)).
 We’ve also fixed several layout bugs around:
 
-- **‘object-fit’** when ‘aspect-ratio’ is set (@Loirooriol, #34413)
-- **clientWidth** and friends on floats and replaced inlines (@Loirooriol, #34083)
-- **‘align-items’** and **‘align-self: stretch’** (@mrobinson, @Loirooriol, #34162)
-- **main axis free space** in flexbox (@mrobinson, #34150)
-- **min-** and **max-content block sizes** of replaced elements (@Loirooriol, #34284)
-- sizing of non-replaced positioned elements with **‘place-self’** (@taniishkaa, #34264)
+- **‘object-fit’** when ‘aspect-ratio’ is set ([@Loirooriol](https://github.com/Loirooriol), [#34413](https://github.com/servo/servo/pull/34413))
+- **clientWidth** and friends on floats and replaced inlines ([@Loirooriol](https://github.com/Loirooriol), [#34083](https://github.com/servo/servo/pull/34083))
+- **‘align-items’** and **‘align-self: stretch’** ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#34162](https://github.com/servo/servo/pull/34162))
+- **main axis free space** in flexbox ([@mrobinson](https://github.com/mrobinson), [#34150](https://github.com/servo/servo/pull/34150))
+- **min-** and **max-content block sizes** of replaced elements ([@Loirooriol](https://github.com/Loirooriol), [#34284](https://github.com/servo/servo/pull/34284))
+- sizing of non-replaced positioned elements with **‘place-self’** ([@taniishkaa](https://github.com/taniishkaa), [#34264](https://github.com/servo/servo/pull/34264))
 
-The **getClientRects()** method on Element now correctly returns a DOMRectList (@chickenleaf, #34025).
+The **getClientRects()** method on Element now correctly returns a DOMRectList ([@chickenleaf](https://github.com/chickenleaf), [#34025](https://github.com/servo/servo/pull/34025)).
 
-**Stylo** has been updated to 2024-11-01 (@Loirooriol, #34322), and we’ve landed some changes to prepare our fork of Stylo for publishing releases on crates.io (@mrobinson, @nicoburns, #34332, #34353).
-We’ve also made more progress towards **splitting up our massive `script` crate** (@jdm, @sagudev, #34357, #34356, #34163), which will eventually allow Servo to be built (and rebuilt) much faster.
+**Stylo** has been updated to 2024-11-01 ([@Loirooriol](https://github.com/Loirooriol), [#34322](https://github.com/servo/servo/pull/34322)), and we’ve landed some changes to prepare our fork of Stylo for publishing releases on crates.io ([@mrobinson](https://github.com/mrobinson), [@nicoburns](https://github.com/nicoburns), [#34332](https://github.com/servo/servo/pull/34332), [#34353](https://github.com/servo/servo/pull/34353)).
+We’ve also made more progress towards **splitting up our massive `script` crate** ([@jdm](https://github.com/jdm), [@sagudev](https://github.com/sagudev), [#34357](https://github.com/servo/servo/pull/34357), [#34356](https://github.com/servo/servo/pull/34356), [#34163](https://github.com/servo/servo/pull/34163)), which will eventually allow Servo to be built (and rebuilt) much faster.
 
 ## Performance improvements
 
-In addition to parallel layout for flexbox (@mrobinson, #34132), we’ve landed several other performance improvements:
+In addition to parallel layout for flexbox ([@mrobinson](https://github.com/mrobinson), [#34132](https://github.com/servo/servo/pull/34132)), we’ve landed several other performance improvements:
 
-- faster layout for **‘column’ flex containers** (@Loirooriol, @mrobinson, #34346)
-- faster caching of intrinsic sizes (@Loirooriol, #34384)
-- caching of font template matches (@mukilan, @mrobinson, #34325)
-- fixed warnings and memory leak when WebRender is running late (@mrobinson, @mukilan, #34305)
+- faster layout for **‘column’ flex containers** ([@Loirooriol](https://github.com/Loirooriol), [@mrobinson](https://github.com/mrobinson), [#34346](https://github.com/servo/servo/pull/34346))
+- faster caching of intrinsic sizes ([@Loirooriol](https://github.com/Loirooriol), [#34384](https://github.com/servo/servo/pull/34384))
+- caching of font template matches ([@mukilan](https://github.com/mukilan), [@mrobinson](https://github.com/mrobinson), [#34325](https://github.com/servo/servo/pull/34325))
+- fixed warnings and memory leak when WebRender is running late ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#34305](https://github.com/servo/servo/pull/34305))
 
 We’ve also landed some changes to reduce Servo’s binary size:
 
-- legacy layout is no longer built by default (@jschwe, #34290)
-- Servo no longer depends on `sparkle`, only `glow` and `gleam` (@sagudev, #33918, #34292)
-- Servo can now be built without WebXR support (@wusyong, @augustkline, @jdm, @sagudev, #34241, #34348)
-- servoshell can now be built without WebXR on OpenHarmony and Android (@jschwe, #34242), with more platforms to come
-- plus some progress towards a build-time feature flag for WebGPU (@atbrakhi, #34415)
+- legacy layout is no longer built by default ([@jschwe](https://github.com/jschwe), [#34290](https://github.com/servo/servo/pull/34290))
+- Servo no longer depends on `sparkle`, only `glow` and `gleam` ([@sagudev](https://github.com/sagudev), [#33918](https://github.com/servo/servo/pull/33918), [#34292](https://github.com/servo/servo/pull/34292))
+- Servo can now be built without WebXR support ([@wusyong](https://github.com/wusyong), [@augustkline](https://github.com/augustkline), [@jdm](https://github.com/jdm), [@sagudev](https://github.com/sagudev), [#34241](https://github.com/servo/servo/pull/34241), [#34348](https://github.com/servo/servo/pull/34348))
+- servoshell can now be built without WebXR on OpenHarmony and Android ([@jschwe](https://github.com/jschwe), [#34242](https://github.com/servo/servo/pull/34242)), with more platforms to come
+- plus some progress towards a build-time feature flag for WebGPU ([@atbrakhi](https://github.com/atbrakhi), [#34415](https://github.com/servo/servo/pull/34415))
 
-Servo’s **[tracing](https://docs.rs/tracing/0.1.40/tracing/)-based profiling support** (`--features tracing-perfetto` or `tracing-hitrace`) now supports **filtering events** via an environment variable (@delan, #34236, #34256), and no longer includes events from non-Servo crates by default (@delan, #34209).
+Servo’s **[tracing](https://docs.rs/tracing/0.1.40/tracing/)-based profiling support** (`--features tracing-perfetto` or `tracing-hitrace`) now supports **filtering events** via an environment variable ([@delan](https://github.com/delan), [#34236](https://github.com/servo/servo/pull/34236), [#34256](https://github.com/servo/servo/pull/34256)), and no longer includes events from non-Servo crates by default ([@delan](https://github.com/delan), [#34209](https://github.com/servo/servo/pull/34209)).
 Note that when the filter matches some span or event, it will also match all of its descendants for now, but this is a limitation we intend to fix.
 
-Most of the events supported by the old interval profiler have been **ported to tracing** (@delan, #34238, #34337).
-**ScriptParseHTML** and **ScriptParseXML** events no longer count the time spent doing layout and script while parsing, reducing them to more realistic times (@delan, #34273), while **ScriptEvaluate** events now count the time spent running scripts in timers, DOM event listeners, and many other situations (@delan, #34286), increasing them to more realistic times.
+Most of the events supported by the old interval profiler have been **ported to tracing** ([@delan](https://github.com/delan), [#34238](https://github.com/servo/servo/pull/34238), [#34337](https://github.com/servo/servo/pull/34337)).
+**ScriptParseHTML** and **ScriptParseXML** events no longer count the time spent doing layout and script while parsing, reducing them to more realistic times ([@delan](https://github.com/delan), [#34273](https://github.com/servo/servo/pull/34273)), while **ScriptEvaluate** events now count the time spent running scripts in timers, DOM event listeners, and many other situations ([@delan](https://github.com/delan), [#34286](https://github.com/servo/servo/pull/34286)), increasing them to more realistic times.
 
-We’ve added new tracing events for **display list building** (@atbrakhi, #34392), **flex layout**, **inline layout**, and **font loading** (@delan, #34392).
+We’ve added new tracing events for **display list building** ([@atbrakhi](https://github.com/atbrakhi), [#34392](https://github.com/servo/servo/pull/34392)), **flex layout**, **inline layout**, and **font loading** ([@delan](https://github.com/delan), [#34392](https://github.com/servo/servo/pull/34392)).
 This will help us diagnose performance issues around things like caching and relayout for ‘stretch’ in flex layout, shaping text runs, and font template creation.
 
 ## For developers
 
-Hacking on Servo is now easier, with our **new `--profile medium` build mode** in Cargo (@jschwe, #34035).
+Hacking on Servo is now easier, with our **new `--profile medium` build mode** in Cargo ([@jschwe](https://github.com/jschwe), [#34035](https://github.com/servo/servo/pull/34035)).
 `medium` is more optimised than `debug`, but unlike `release`, it supports debuggers, line numbers in backtraces, and incremental builds.
 
 Servo **now uses [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)** to list reviewers that are experts in [parts of our main repo](https://github.com/servo/servo/blob/3515b83a95cb65da30c1e3988f7a47f79fd7b9bd/.github/CODEOWNERS).
