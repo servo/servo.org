@@ -7,7 +7,7 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-<figure class="_figr"><a href="{{ '/img/blog/november-2024.png' | url }}"><img src="{{ '/img/blog/november-2024.png' | url }}"
+<figure class="_figr"><a href="{{ '/img/blog/november-2024.png' | url }}"><img src="{{ '/img/blog/november-2024.png' | url }}" style="width: 33em;"
     alt="Servo nightly showing new support for CSS grid layout"></a></figure>
 
 Servo now supports **CSS grid layout** (@nicoburns, @taniishkaa, #32619, #34352, #34421), **parallel layout for flexbox** (@mrobinson, #34132), and **:is() and :where() selectors** (@mrobinson, #34066)!
