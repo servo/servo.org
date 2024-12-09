@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: grid layout, parallel flexbox, smaller binaries, and more!"
-date:       2024-12-05
-summary:    ao!! wrrrrao!!
+title:      "This month in Servo: :is() and :where(), grid layout, parallel flexbox, and more!"
+date:       2024-12-09
+summary:    Plus shadow DOM buffs, smaller binaries, and new SubtleCrypto algorithms (HMAC, AES-GCM, AES-KW, PBKDF2).
 categories:
 ---
 
