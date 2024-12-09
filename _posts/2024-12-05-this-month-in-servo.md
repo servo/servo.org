@@ -68,12 +68,20 @@ Most of the events supported by the old interval profiler have been **ported to 
 We’ve added new tracing events for **display list building** (@atbrakhi, #34392), **flex layout**, **inline layout**, and **font loading** (@delan, #34392).
 This will help us diagnose performance issues around things like caching and relayout for ‘stretch’ in flex layout, shaping text runs, and font template creation.
 
+## For developers
+
+Hacking on Servo is now easier, with our **new `--profile medium` build mode** in Cargo (@jschwe, #34035).
+`medium` is more optimised than `debug`, but unlike `release`, it supports debuggers, line numbers in backtraces, and incremental builds.
+
+Servo **now uses [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)** to list reviewers that are experts in [parts of our main repo](https://github.com/servo/servo/blob/3515b83a95cb65da30c1e3988f7a47f79fd7b9bd/.github/CODEOWNERS).
+This should make it much easier to find reviewers that know how to review your code, and helps us maximise the quality of our code reviews by allowing reviewers to specialise.
+
 <!--
 - 4291.50/month donations
     - 2131.50/month opencollective
     - 2160.00/month github
     - ?.??/month thanks.dev (15 donors)
-- CODEOWNERS 34316 34308 34304 34334 34351
+- DONE CODEOWNERS 34316 34308 34304 34334 34351
 - new features
     - DONE shadowRoot property on Element 34306
     - DONE innerHTML property on ShadowRoot 34335
@@ -140,8 +148,8 @@ This will help us diagnose performance issues around things like caching and rel
     - DONE fixed ScriptEvaluate undercounting events and timers 34286
     - DONE tracing for flex + inline + fonts 34392
     - DONE tracing for display lists 34128
-- hacking
-    - `medium` cargo profile 34035
+- DONE hacking
+    - DONE `medium` cargo profile 34035
 
 >>> 2024-11-01T06:07:41Z
     0d7fa7544779842aa19bac88f380168e85668956	https://github.com/servo/servo/pull/34084	Use default object size as fallback for intrinsic size of replaced element (#34084)	
