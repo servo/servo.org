@@ -204,7 +204,9 @@
 <p class="subtitle"><span class="tag is-dark">2024-12-05</span> ao!! wrrrrao!!</p>
 
 <div class="has-top-margin">
-  <p>Servo now supports <strong>CSS grid layout</strong> (@nicoburns, @taniishkaa, #32619, #34352, #34421), <strong>parallel layout for flexbox</strong> (@mrobinson, #34132), and <strong>:is() and :where() selectors</strong> (@mrobinson, #34066)!
+  <figure class="_figr"><a href="/blog-december-2024/img/blog/november-2024.png"><img src="/blog-december-2024/img/blog/november-2024.png"
+    alt="Servo nightly showing new support for CSS grid layout"></a></figure>
+<p>Servo now supports <strong>CSS grid layout</strong> (@nicoburns, @taniishkaa, #32619, #34352, #34421), <strong>parallel layout for flexbox</strong> (@mrobinson, #34132), and <strong>:is() and :where() selectors</strong> (@mrobinson, #34066)!
 We’ve also added support for two key Shadow DOM interfaces, the <strong>shadowRoot property</strong> on Element (@simonwuelker, #34306) and the <strong>innerHTML property on ShadowRoot</strong> (@simonwuelker, #34335).</p>
 <p>Last month we also landed support for <strong>‘justify-self’</strong> on positioned elements (@chickenleaf, #34235), form submission with <strong>&lt;input type=image&gt;</strong> (@shanehandley, #34203), <strong>DataTransfer</strong> (@Gae24, #34205), the <strong>close()</strong> method on ImageBitmap (@simonwuelker, #34124), plus several new <strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto">SubtleCrypto</a> API</strong> features:</p>
 <ul>
@@ -259,12 +261,19 @@ Note that when the filter matches some span or event, it will also match all of 
 <strong>ScriptParseHTML</strong> and <strong>ScriptParseXML</strong> events no longer count the time spent doing layout and script while parsing, reducing them to more realistic times (@delan, #34273), while <strong>ScriptEvaluate</strong> events now count the time spent running scripts in timers, DOM event listeners, and many other situations (@delan, #34286), increasing them to more realistic times.</p>
 <p>We’ve added new tracing events for <strong>display list building</strong> (@atbrakhi, #34392), <strong>flex layout</strong>, <strong>inline layout</strong>, and <strong>font loading</strong> (@delan, #34392).
 This will help us diagnose performance issues around things like caching and relayout for ‘stretch’ in flex layout, shaping text runs, and font template creation.</p>
+<h2 id="for-developers" tabindex="-1">For developers <a class="header-anchor" href="#for-developers">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Hacking on Servo is now easier, with our <strong>new <code>--profile medium</code> build mode</strong> in Cargo (@jschwe, #34035).
+<code>medium</code> is more optimised than <code>debug</code>, but unlike <code>release</code>, it supports debuggers, line numbers in backtraces, and incremental builds.</p>
+<p>Servo <strong>now uses <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners">CODEOWNERS</a></strong> to list reviewers that are experts in <a href="https://github.com/servo/servo/blob/3515b83a95cb65da30c1e3988f7a47f79fd7b9bd/.github/CODEOWNERS">parts of our main repo</a>.
+This should make it much easier to find reviewers that know how to review your code, and helps us maximise the quality of our code reviews by allowing reviewers to specialise.</p>
 <!--
 - 4291.50/month donations
     - 2131.50/month opencollective
     - 2160.00/month github
     - ?.??/month thanks.dev (15 donors)
-- CODEOWNERS 34316 34308 34304 34334 34351
+- DONE CODEOWNERS 34316 34308 34304 34334 34351
 - new features
     - DONE shadowRoot property on Element 34306
     - DONE innerHTML property on ShadowRoot 34335
@@ -331,8 +340,8 @@ This will help us diagnose performance issues around things like caching and rel
     - DONE fixed ScriptEvaluate undercounting events and timers 34286
     - DONE tracing for flex + inline + fonts 34392
     - DONE tracing for display lists 34128
-- hacking
-    - `medium` cargo profile 34035
+- DONE hacking
+    - DONE `medium` cargo profile 34035
 
 >>> 2024-11-01T06:07:41Z
     0d7fa7544779842aa19bac88f380168e85668956	https://github.com/servo/servo/pull/34084	Use default object size as fallback for intrinsic size of replaced element (#34084)	

@@ -15,7 +15,8 @@
     <link href="https://servo.org/blog-december-2024/blog/2024/12/05/this-month-in-servo/"/>
     <updated>2024-12-05T00:00:00Z</updated>
     <id>https://servo.org/blog-december-2024/blog/2024/12/05/this-month-in-servo/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;Servo now supports &lt;strong&gt;CSS grid layout&lt;/strong&gt; (@nicoburns, @taniishkaa, #32619, #34352, #34421), &lt;strong&gt;parallel layout for flexbox&lt;/strong&gt; (@mrobinson, #34132), and &lt;strong&gt;:is() and :where() selectors&lt;/strong&gt; (@mrobinson, #34066)!
+    <content xml:lang="en" type="html">&lt;figure class=&quot;_figr&quot;&gt;&lt;a href=&quot;https://servo.org/blog-december-2024/img/blog/november-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-december-2024/img/blog/november-2024.png&quot; alt=&quot;Servo nightly showing new support for CSS grid layout&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
+&lt;p&gt;Servo now supports &lt;strong&gt;CSS grid layout&lt;/strong&gt; (@nicoburns, @taniishkaa, #32619, #34352, #34421), &lt;strong&gt;parallel layout for flexbox&lt;/strong&gt; (@mrobinson, #34132), and &lt;strong&gt;:is() and :where() selectors&lt;/strong&gt; (@mrobinson, #34066)!
 We’ve also added support for two key Shadow DOM interfaces, the &lt;strong&gt;shadowRoot property&lt;/strong&gt; on Element (@simonwuelker, #34306) and the &lt;strong&gt;innerHTML property on ShadowRoot&lt;/strong&gt; (@simonwuelker, #34335).&lt;/p&gt;
 &lt;p&gt;Last month we also landed support for &lt;strong&gt;‘justify-self’&lt;/strong&gt; on positioned elements (@chickenleaf, #34235), form submission with &lt;strong&gt;&amp;lt;input type=image&amp;gt;&lt;/strong&gt; (@shanehandley, #34203), &lt;strong&gt;DataTransfer&lt;/strong&gt; (@Gae24, #34205), the &lt;strong&gt;close()&lt;/strong&gt; method on ImageBitmap (@simonwuelker, #34124), plus several new &lt;strong&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto&quot;&gt;SubtleCrypto&lt;/a&gt; API&lt;/strong&gt; features:&lt;/p&gt;
 &lt;ul&gt;
@@ -70,12 +71,19 @@ Note that when the filter matches some span or event, it will also match all of 
 &lt;strong&gt;ScriptParseHTML&lt;/strong&gt; and &lt;strong&gt;ScriptParseXML&lt;/strong&gt; events no longer count the time spent doing layout and script while parsing, reducing them to more realistic times (@delan, #34273), while &lt;strong&gt;ScriptEvaluate&lt;/strong&gt; events now count the time spent running scripts in timers, DOM event listeners, and many other situations (@delan, #34286), increasing them to more realistic times.&lt;/p&gt;
 &lt;p&gt;We’ve added new tracing events for &lt;strong&gt;display list building&lt;/strong&gt; (@atbrakhi, #34392), &lt;strong&gt;flex layout&lt;/strong&gt;, &lt;strong&gt;inline layout&lt;/strong&gt;, and &lt;strong&gt;font loading&lt;/strong&gt; (@delan, #34392).
 This will help us diagnose performance issues around things like caching and relayout for ‘stretch’ in flex layout, shaping text runs, and font template creation.&lt;/p&gt;
+&lt;h2 id=&quot;for-developers&quot; tabindex=&quot;-1&quot;&gt;For developers &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-december-2024/blog/2024/12/05/this-month-in-servo/#for-developers&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Hacking on Servo is now easier, with our &lt;strong&gt;new &lt;code&gt;--profile medium&lt;/code&gt; build mode&lt;/strong&gt; in Cargo (@jschwe, #34035).
+&lt;code&gt;medium&lt;/code&gt; is more optimised than &lt;code&gt;debug&lt;/code&gt;, but unlike &lt;code&gt;release&lt;/code&gt;, it supports debuggers, line numbers in backtraces, and incremental builds.&lt;/p&gt;
+&lt;p&gt;Servo &lt;strong&gt;now uses &lt;a href=&quot;https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners&quot;&gt;CODEOWNERS&lt;/a&gt;&lt;/strong&gt; to list reviewers that are experts in &lt;a href=&quot;https://github.com/servo/servo/blob/3515b83a95cb65da30c1e3988f7a47f79fd7b9bd/.github/CODEOWNERS&quot;&gt;parts of our main repo&lt;/a&gt;.
+This should make it much easier to find reviewers that know how to review your code, and helps us maximise the quality of our code reviews by allowing reviewers to specialise.&lt;/p&gt;
 &lt;!--
 - 4291.50/month donations
     - 2131.50/month opencollective
     - 2160.00/month github
     - ?.??/month thanks.dev (15 donors)
-- CODEOWNERS 34316 34308 34304 34334 34351
+- DONE CODEOWNERS 34316 34308 34304 34334 34351
 - new features
     - DONE shadowRoot property on Element 34306
     - DONE innerHTML property on ShadowRoot 34335
@@ -142,8 +150,8 @@ This will help us diagnose performance issues around things like caching and rel
     - DONE fixed ScriptEvaluate undercounting events and timers 34286
     - DONE tracing for flex + inline + fonts 34392
     - DONE tracing for display lists 34128
-- hacking
-    - `medium` cargo profile 34035
+- DONE hacking
+    - DONE `medium` cargo profile 34035
 
 &gt;&gt;&gt; 2024-11-01T06:07:41Z
     0d7fa7544779842aa19bac88f380168e85668956	https://github.com/servo/servo/pull/34084	Use default object size as fallback for intrinsic size of replaced element (#34084)	
