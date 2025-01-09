@@ -7,13 +7,59 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+<div class="_paired_figure">
+<div>
+
+Servo now supports **dark mode** (#34532, @arthmis, @lazypassion), respecting the platform dark mode in servoshell and **‘prefers-color-scheme’** (#34423, stylo#93, @nicoburns) on Windows and macOS.
+</div>
+<figure>
+    <div style="display: flex;">
+        <a href="{{ '/img/blog/dark-mode-december-2024.png' | url }}"><img src="{{ '/img/blog/dark-mode-december-2024.png' | url }}"
+            alt="servoshell in dark mode, rendering the MDN article for ‘prefers-color-scheme’ in dark mode, when Windows is set to dark mode"></a>
+        <a href="{{ '/img/blog/light-mode-december-2024.png' | url }}"><img src="{{ '/img/blog/light-mode-december-2024.png' | url }}"
+            alt="servoshell in light mode, rendering the MDN article for ‘prefers-color-scheme’ in light mode, when Windows is set to light mode"></a>
+    </div>
+    <figcaption><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">MDN article for ‘prefers-color-scheme’</a> in dark mode (left) and light mode (right), with <code>--pref dom.resize_observer.enabled</code>.</figcaption>
+</figure>
+</div>
+
+<div class="_paired_figure">
+<div>
+
+Servo can now run [**Discord**](https://discord.com) well enough to [**log in**](https://discord.com/login) and **read messages**, though you can’t send messages yet.
+To get this working, we landed some bare-bones AbortController support (#34519, @jdm, @syvb) and a WebSocket fix (#34634, @jdm).
+Try it yourself with `--pref dom.svg.enabled --pref dom.intersection_observer.enabled --pref dom.abort_controller.enabled`!
+</div>
+<figure>
+    <div style="display: flex;">
+        <a href="{{ '/img/blog/discord-login-1-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-login-1-december-2024.png' | url }}"
+            alt="TODO"></a>
+        <a href="{{ '/img/blog/discord-login-2-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-login-2-december-2024.png' | url }}"
+            alt="TODO"></a>
+    </div>
+    <a href="{{ '/img/blog/discord-small-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-small-december-2024.png' | url }}"
+        alt="TODO"></a>
+</figure>
+</div>
+
+<div class="_paired_figure">
+<div>
+
+We now support enough of **XPath** to get [HTMX](https://htmx.org) working (#34463, @vlindhol), when enabled via `--pref dom.xpath.enabled`.
+</div>
+<figure>
+    <a href="{{ '/img/blog/htmx-december-2024.png' | url }}"><img src="{{ '/img/blog/htmx-december-2024.png' | url }}"
+        alt="TODO"></a>
+</figure>
+</div>
+
 <!--
 - donations
     - 2160.66/month opencollective
     - 2169.00/month github
     - 16 donors on thanks.dev
 - engine
-    - 73    ‘prefers-color-scheme’ (dark mode)
+    - DONE 73    ‘prefers-color-scheme’ (dark mode)
     - 54    CSS transitions can be triggered by script
     - 53    prompt user for credentials
     - 65 69     ReadableStream with default reader and controller
@@ -25,9 +71,9 @@ categories:
         - 68    initial shadow dom layout (--pref dom.shadowdom.enabled)
     - 48    referrerpolicy attribute
     - 30    referrerPolicy property on HTMLIFrameElement
-    - 14    xpath --pref dom.xpath.enabled; htmx
-    - 34    stub AbortController --pref dom.abort_controller.enabled; discord
-    - 72    fixed WebSocket connection error; discord
+    - DONE 14    xpath --pref dom.xpath.enabled; htmx
+    - DONE 34    stub AbortController --pref dom.abort_controller.enabled; discord
+    - DONE 72    fixed WebSocket connection error; discord
     - 15    PointerEvent
     - 11 12 13 36  synchronous iframe resizing
     - 16    sync script execution with dom tree mutations
@@ -329,6 +375,15 @@ https://github.com/servo/servo/pull/34792	(#34792, @webbeef)	Split StructuredClo
         width: 13em;
         overflow: hidden;
     }
+    ._clear {
+        clear: both;
+    }
+    ._clearl {
+        clear: left;
+    }
+    ._clearr {
+        clear: right;
+    }
     ._none {
         display: none;
     }
@@ -337,7 +392,9 @@ https://github.com/servo/servo/pull/34792	(#34792, @webbeef)	Split StructuredClo
         max-width: 100%;
         margin: 1em auto;
     }
-    ._fig > ._flex {
+    ._fig > ._flex,
+    ._figl > ._flex,
+    ._figr > ._flex {
         display: flex;
     }
     ._fig table {
@@ -367,9 +424,24 @@ https://github.com/servo/servo/pull/34792	(#34792, @webbeef)	Split StructuredClo
     ._figl > video,
     ._figr > video,
     ._figl > a > img,
-    ._figr > a > img {
+    ._figr > a > img,
+    ._figl > ._flex,
+    ._figr > ._flex {
         width: 21em;
         max-width: 100%;
+    }
+    ._paired_figure {
+        display: flex;
+        flex-flow: row wrap;
+        margin-bottom: 2em;
+    }
+    ._paired_figure > div {
+        flex: 1 1 20em;
+        margin-bottom: 1em;
+    }
+    ._paired_figure > figure:not(#specificity) {
+        flex: 0 1 33em;
+        margin-top: 0;
     }
     ._runin {
         margin-bottom: 1em;
