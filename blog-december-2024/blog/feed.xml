@@ -15,13 +15,35 @@
     <link href="https://servo.org/blog-december-2024/blog/2025/01/10/this-month-in-servo/"/>
     <updated>2025-01-10T00:00:00Z</updated>
     <id>https://servo.org/blog-december-2024/blog/2025/01/10/this-month-in-servo/</id>
-    <content xml:lang="en" type="html">&lt;!--
+    <content xml:lang="en" type="html">&lt;p&gt;Servo can now run &lt;a href=&quot;https://discord.com/&quot;&gt;&lt;strong&gt;Discord&lt;/strong&gt;&lt;/a&gt; well enough to &lt;a href=&quot;https://discord.com/login&quot;&gt;&lt;strong&gt;log in&lt;/strong&gt;&lt;/a&gt; and &lt;strong&gt;read messages&lt;/strong&gt;, though you can’t send messages yet.
+To get this working, we landed some bare-bones AbortController support (#34519, @jdm, @syvb) and a WebSocket fix (#34634, @jdm).
+Try it yourself with &lt;code&gt;--pref dom.svg.enabled --pref dom.intersection_observer.enabled --pref dom.abort_controller.enabled&lt;/code&gt;!&lt;/p&gt;
+&lt;figure class=&quot;_fig&quot;&gt;
+    &lt;div class=&quot;_flex&quot;&gt;
+        &lt;a href=&quot;https://servo.org/blog-december-2024/img/blog/discord-login-1-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-december-2024/img/blog/discord-login-1-december-2024.png&quot; alt=&quot;TODO&quot; /&gt;&lt;/a&gt;
+        &lt;a href=&quot;https://servo.org/blog-december-2024/img/blog/discord-login-2-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-december-2024/img/blog/discord-login-2-december-2024.png&quot; alt=&quot;TODO&quot; /&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;a href=&quot;https://servo.org/blog-december-2024/img/blog/discord-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-december-2024/img/blog/discord-december-2024.png&quot; alt=&quot;TODO&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+&lt;figure class=&quot;_figr&quot;&gt;
+    &lt;div class=&quot;_flex&quot;&gt;
+        &lt;a href=&quot;https://servo.org/blog-december-2024/img/blog/dark-mode-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-december-2024/img/blog/dark-mode-december-2024.png&quot; alt=&quot;servoshell in dark mode, rendering the MDN article for ‘prefers-color-scheme’ in dark mode, when Windows is set to dark mode&quot; /&gt;&lt;/a&gt;
+        &lt;a href=&quot;https://servo.org/blog-december-2024/img/blog/light-mode-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-december-2024/img/blog/light-mode-december-2024.png&quot; alt=&quot;servoshell in light mode, rendering the MDN article for ‘prefers-color-scheme’ in light mode, when Windows is set to light mode&quot; /&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;figcaption&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme&quot;&gt;MDN article for ‘prefers-color-scheme’&lt;/a&gt; in dark mode (left) and light mode (right), with &lt;code&gt;--pref dom.resize_observer.enabled&lt;/code&gt;.&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;figure class=&quot;_figr _clearr&quot;&gt;
+    &lt;a href=&quot;https://servo.org/blog-december-2024/img/blog/htmx-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-december-2024/img/blog/htmx-december-2024.png&quot; alt=&quot;TODO&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+&lt;p&gt;&lt;span class=&quot;_floatmin&quot;&gt;&lt;/span&gt;Servo now supports &lt;strong&gt;dark mode&lt;/strong&gt; (#34532, @arthmis, @lazypassion), respecting the platform dark mode in servoshell and &lt;strong&gt;‘prefers-color-scheme’&lt;/strong&gt; (#34423, stylo#93, @nicoburns) on Windows and macOS.&lt;/p&gt;
+&lt;p&gt;We now support enough of &lt;strong&gt;XPath&lt;/strong&gt; to get &lt;a href=&quot;https://htmx.org/&quot;&gt;HTMX&lt;/a&gt; working (#34463, @vlindhol), when enabled via &lt;code&gt;--pref dom.xpath.enabled&lt;/code&gt;.&lt;/p&gt;
+&lt;!--
 - donations
     - 2160.66/month opencollective
     - 2169.00/month github
     - 16 donors on thanks.dev
 - engine
-    - 73    ‘prefers-color-scheme’ (dark mode)
+    - DONE 73    ‘prefers-color-scheme’ (dark mode)
     - 54    CSS transitions can be triggered by script
     - 53    prompt user for credentials
     - 65 69     ReadableStream with default reader and controller
@@ -33,9 +55,9 @@
         - 68    initial shadow dom layout (--pref dom.shadowdom.enabled)
     - 48    referrerpolicy attribute
     - 30    referrerPolicy property on HTMLIFrameElement
-    - 14    xpath --pref dom.xpath.enabled; htmx
-    - 34    stub AbortController --pref dom.abort_controller.enabled; discord
-    - 72    fixed WebSocket connection error; discord
+    - DONE 14    xpath --pref dom.xpath.enabled; htmx
+    - DONE 34    stub AbortController --pref dom.abort_controller.enabled; discord
+    - DONE 72    fixed WebSocket connection error; discord
     - 15    PointerEvent
     - 11 12 13 36  synchronous iframe resizing
     - 16    sync script execution with dom tree mutations
@@ -336,6 +358,15 @@ https://github.com/servo/servo/pull/34792	(#34792, @webbeef)	Split StructuredClo
         width: 13em;
         overflow: hidden;
     }
+    ._clear {
+        clear: both;
+    }
+    ._clearl {
+        clear: left;
+    }
+    ._clearr {
+        clear: right;
+    }
     ._none {
         display: none;
     }
@@ -344,7 +375,9 @@ https://github.com/servo/servo/pull/34792	(#34792, @webbeef)	Split StructuredClo
         max-width: 100%;
         margin: 1em auto;
     }
-    ._fig &gt; ._flex {
+    ._fig &gt; ._flex,
+    ._figl &gt; ._flex,
+    ._figr &gt; ._flex {
         display: flex;
     }
     ._fig table {
@@ -374,7 +407,9 @@ https://github.com/servo/servo/pull/34792	(#34792, @webbeef)	Split StructuredClo
     ._figl &gt; video,
     ._figr &gt; video,
     ._figl &gt; a &gt; img,
-    ._figr &gt; a &gt; img {
+    ._figr &gt; a &gt; img,
+    ._figl &gt; ._flex,
+    ._figr &gt; ._flex {
         width: 21em;
         max-width: 100%;
     }

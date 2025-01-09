@@ -204,13 +204,41 @@
 <p class="subtitle"><span class="tag is-dark">2025-01-10</span> ao!! wrrrrao!!</p>
 
 <div class="has-top-margin">
-  <!--
+  <p>Servo can now run <a href="https://discord.com"><strong>Discord</strong></a> well enough to <a href="https://discord.com/login"><strong>log in</strong></a> and <strong>read messages</strong>, though you can’t send messages yet.
+To get this working, we landed some bare-bones AbortController support (#34519, @jdm, @syvb) and a WebSocket fix (#34634, @jdm).
+Try it yourself with <code>--pref dom.svg.enabled --pref dom.intersection_observer.enabled --pref dom.abort_controller.enabled</code>!</p>
+<figure class="_fig">
+    <div class="_flex">
+        <a href="/blog-december-2024/img/blog/discord-login-1-december-2024.png"><img src="/blog-december-2024/img/blog/discord-login-1-december-2024.png"
+            alt="TODO"></a>
+        <a href="/blog-december-2024/img/blog/discord-login-2-december-2024.png"><img src="/blog-december-2024/img/blog/discord-login-2-december-2024.png"
+            alt="TODO"></a>
+    </div>
+    <a href="/blog-december-2024/img/blog/discord-december-2024.png"><img src="/blog-december-2024/img/blog/discord-december-2024.png"
+        alt="TODO"></a>
+</figure>
+<figure class="_figr">
+    <div class="_flex">
+        <a href="/blog-december-2024/img/blog/dark-mode-december-2024.png"><img src="/blog-december-2024/img/blog/dark-mode-december-2024.png"
+            alt="servoshell in dark mode, rendering the MDN article for ‘prefers-color-scheme’ in dark mode, when Windows is set to dark mode"></a>
+        <a href="/blog-december-2024/img/blog/light-mode-december-2024.png"><img src="/blog-december-2024/img/blog/light-mode-december-2024.png"
+            alt="servoshell in light mode, rendering the MDN article for ‘prefers-color-scheme’ in light mode, when Windows is set to light mode"></a>
+    </div>
+    <figcaption><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">MDN article for ‘prefers-color-scheme’</a> in dark mode (left) and light mode (right), with <code>--pref dom.resize_observer.enabled</code>.</figcaption>
+</figure>
+<figure class="_figr _clearr">
+    <a href="/blog-december-2024/img/blog/htmx-december-2024.png"><img src="/blog-december-2024/img/blog/htmx-december-2024.png"
+        alt="TODO"></a>
+</figure>
+<p><span class=_floatmin></span>Servo now supports <strong>dark mode</strong> (#34532, @arthmis, @lazypassion), respecting the platform dark mode in servoshell and <strong>‘prefers-color-scheme’</strong> (#34423, stylo#93, @nicoburns) on Windows and macOS.</p>
+<p>We now support enough of <strong>XPath</strong> to get <a href="https://htmx.org">HTMX</a> working (#34463, @vlindhol), when enabled via <code>--pref dom.xpath.enabled</code>.</p>
+<!--
 - donations
     - 2160.66/month opencollective
     - 2169.00/month github
     - 16 donors on thanks.dev
 - engine
-    - 73    ‘prefers-color-scheme’ (dark mode)
+    - DONE 73    ‘prefers-color-scheme’ (dark mode)
     - 54    CSS transitions can be triggered by script
     - 53    prompt user for credentials
     - 65 69     ReadableStream with default reader and controller
@@ -222,9 +250,9 @@
         - 68    initial shadow dom layout (--pref dom.shadowdom.enabled)
     - 48    referrerpolicy attribute
     - 30    referrerPolicy property on HTMLIFrameElement
-    - 14    xpath --pref dom.xpath.enabled; htmx
-    - 34    stub AbortController --pref dom.abort_controller.enabled; discord
-    - 72    fixed WebSocket connection error; discord
+    - DONE 14    xpath --pref dom.xpath.enabled; htmx
+    - DONE 34    stub AbortController --pref dom.abort_controller.enabled; discord
+    - DONE 72    fixed WebSocket connection error; discord
     - 15    PointerEvent
     - 11 12 13 36  synchronous iframe resizing
     - 16    sync script execution with dom tree mutations
@@ -525,6 +553,15 @@ https://github.com/servo/servo/pull/34792	(#34792, @webbeef)	Split StructuredClo
         width: 13em;
         overflow: hidden;
     }
+    ._clear {
+        clear: both;
+    }
+    ._clearl {
+        clear: left;
+    }
+    ._clearr {
+        clear: right;
+    }
     ._none {
         display: none;
     }
@@ -533,7 +570,9 @@ https://github.com/servo/servo/pull/34792	(#34792, @webbeef)	Split StructuredClo
         max-width: 100%;
         margin: 1em auto;
     }
-    ._fig > ._flex {
+    ._fig > ._flex,
+    ._figl > ._flex,
+    ._figr > ._flex {
         display: flex;
     }
     ._fig table {
@@ -563,7 +602,9 @@ https://github.com/servo/servo/pull/34792	(#34792, @webbeef)	Split StructuredClo
     ._figl > video,
     ._figr > video,
     ._figl > a > img,
-    ._figr > a > img {
+    ._figr > a > img,
+    ._figl > ._flex,
+    ._figr > ._flex {
         width: 21em;
         max-width: 100%;
     }
