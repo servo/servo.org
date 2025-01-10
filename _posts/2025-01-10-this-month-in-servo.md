@@ -61,7 +61,9 @@ We’ve made very good progress towards fixing this (@mrobinson, #34643, #34656,
 
 We now support enough of **XPath** to get [HTMX](https://htmx.org) working (@vlindhol, #34463), when enabled via `--pref dom.xpath.enabled`.
 
-Servo’s performance continues to improve, with **layout caching for flex columns** delivering up to 12x speedup (@Loirooriol, @mrobinson, #34461), many **unnecessary reflows now eliminated** (@mrobinson, #34558, #34599, #34576, #34645), **reduced memory usage** (@mrobinson, @Loirooriol, #34563, #34666), and faster rendering for pages with animations (@mrobinson, #34489).
+Servo’s performance continues to improve, with **layout caching for flex columns** delivering up to 12x speedup (@Loirooriol, @mrobinson, #34461), many **unnecessary reflows now eliminated** (@mrobinson, #34558, #34599, #34576, #34645), **reduced memory usage** (@mrobinson, @Loirooriol, #34563, #34666), faster rendering for pages with animations (@mrobinson, #34489), and timers now operating without IPC (@mrobinson, #34581).
+
+**servoshell nightlies are up to 20% smaller** (@atbrakhi, #34340), **WebGPU is now optional** at build time (@atbrakhi, #34444), and `--features tracing` no longer enables `--features layout-2013` (@jschwe, #34515).
 </div>
 <figure>
     <a href="{{ '/img/blog/htmx-december-2024.png' | url }}"><img src="{{ '/img/blog/htmx-december-2024.png' | url }}"
@@ -119,11 +121,11 @@ Servo’s performance continues to improve, with **layout caching for flex colum
     - DONE 78    faster “update the rendering” with animations
     - DONE 18    reduced memory usage by 260 bytes per InlineItem
     - DONE 61    reduced memory usage in ContainingBlockPaddingAndBorder
-    - 2     optimise production-stripped
-    - 3     webgpu feature flag
-    - 4     tracing no longer enables layout-2013
+    - DONE 2     optimise production-stripped
+    - DONE 3     webgpu feature flag
+    - DONE 4     tracing no longer enables layout-2013
     - 5     linux-perf job in ci
-    - 44    timers without IPC
+    - DONE 44    timers without IPC
     - 47    more gl bindings unification
     - DONE 75    more splitting up script crate
 - dev
