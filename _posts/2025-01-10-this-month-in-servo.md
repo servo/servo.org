@@ -36,6 +36,13 @@ We now support **console.trace()** (#34629, @simonwuelker), **PointerEvent** (#3
 Shadow DOM support continues to improve (#34503, @jdm), including very basic **Shadow DOM layout** (#34701, @mrobinson) when enabled via `--pref dom.shadowdom.enabled`.
 
 We’ve also regained support for **ReadableStream** with the default reader and controller (#34064, #34675, @gterzian, @wusyong, @Taym95).
+
+`script` underwent (and continues to undergo) major rework towards being **more reliable** and **faster to build**.
+We’ve landed better **synchronisation for DOM tree mutations** (#34505, @jdm) and continued work on **splitting up the `script` crate** (#34366, @jdm).
+
+The web platform guarantees that same-origin frames and their parents can **synchronously observe resizes** and their effects.
+Many tests rely on this, and not doing this correctly made Servo’s test results much flakier than they could otherwise be.
+We’ve made very good progress towards fixing this (#34643, #34656, #34702, #34609, @mrobinson), with correct resizing in all cases except when a same-origin frame is in another script thread, which is rare.
 </div>
 <figure>
     <div style="display: flex;">
@@ -82,8 +89,8 @@ We now support enough of **XPath** to get [HTMX](https://htmx.org) working (#344
     - DONE 34    stub AbortController --pref dom.abort_controller.enabled; discord
     - DONE 72    fixed WebSocket connection error; discord
     - DONE 15    PointerEvent
-    - 11 12 13 36  synchronous iframe resizing
-    - 16    sync script execution with dom tree mutations
+    - DONE 11 12 13 36  synchronous iframe resizing
+    - DONE 16    sync script execution with dom tree mutations
     - DONE 20    ‘min-’ and ‘max-height’ on column flex containers
     - 21    improved layout of flex container with reverse direction
     - DONE 23    ‘stretch’ on replaced abspos
@@ -116,7 +123,7 @@ We now support enough of **XPath** to get [HTMX](https://htmx.org) working (#344
     - 5     linux-perf job in ci
     - 44    timers without IPC
     - 47    more gl bindings unification
-    - 75    more splitting up script crate
+    - DONE 75    more splitting up script crate
 - dev
     - 35    fixed devtools with firefox 133
     - 6 7 8 62 63 64    now uses uv
