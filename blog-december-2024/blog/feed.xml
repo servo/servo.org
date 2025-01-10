@@ -54,7 +54,15 @@ We’ve made very good progress towards fixing this (@mrobinson, #34643, #34656,
 &lt;div&gt;
 &lt;p&gt;We now support enough of &lt;strong&gt;XPath&lt;/strong&gt; to get &lt;a href=&quot;https://htmx.org/&quot;&gt;HTMX&lt;/a&gt; working (@vlindhol, #34463), when enabled via &lt;code&gt;--pref dom.xpath.enabled&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Servo’s performance continues to improve, with &lt;strong&gt;layout caching for flex columns&lt;/strong&gt; delivering up to 12x speedup (@Loirooriol, @mrobinson, #34461), many &lt;strong&gt;unnecessary reflows now eliminated&lt;/strong&gt; (@mrobinson, #34558, #34599, #34576, #34645), &lt;strong&gt;reduced memory usage&lt;/strong&gt; (@mrobinson, @Loirooriol, #34563, #34666), faster rendering for pages with animations (@mrobinson, #34489), and timers now operating without IPC (@mrobinson, #34581).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;servoshell nightlies are up to 20% smaller&lt;/strong&gt; (@atbrakhi, #34340), &lt;strong&gt;WebGPU is now optional&lt;/strong&gt; at build time (@atbrakhi, #34444), and &lt;code&gt;--features tracing&lt;/code&gt; no longer enables &lt;code&gt;--features layout-2013&lt;/code&gt; (@jschwe, #34515).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;servoshell nightlies are up to 20% smaller&lt;/strong&gt; (@atbrakhi, #34340), &lt;strong&gt;WebGPU is now optional&lt;/strong&gt; at build time (@atbrakhi, #34444), and &lt;code&gt;--features tracing&lt;/code&gt; no longer enables &lt;code&gt;--features layout-2013&lt;/code&gt; (@jschwe, #34515) for further binary size savings.
+You can also &lt;strong&gt;limit the size of&lt;/strong&gt; several of Servo’s &lt;strong&gt;thread pools&lt;/strong&gt; with &lt;code&gt;--pref threadpools.fallback_worker_num&lt;/code&gt; and others (@jschwe, #34478), which is especially useful on machines with many CPU cores.&lt;/p&gt;
+&lt;p&gt;We’ve started laying the groundwork for full &lt;strong&gt;incremental layout&lt;/strong&gt; in our new layout engine, starting with a general layout caching mechanism (@mrobinson, @Loirooriol, #34507, #34513, #34530, #34586).
+This was lost in the switch to our new layout engine, and without it, every time a page changes, we have to rerun layout from scratch.
+As you can imagine, this is very, very expensive, and incremental layout is critical for performance on today’s highly dynamic web.&lt;/p&gt;
+&lt;aside class=&quot;_note&quot;&gt;
+&lt;p&gt;We’ve mentioned layout caching a few times, including in past monthly updates, but most of the caching we’ve landed so far has been to save time &lt;em&gt;within&lt;/em&gt; a single reflow.
+Incremental layout requires layout caching that &lt;em&gt;persists&lt;/em&gt; across reflows, and algorithms to determine when to invalidate those cached results.&lt;/p&gt;
+&lt;/aside&gt;
 &lt;/div&gt;
 &lt;figure&gt;
     &lt;a href=&quot;https://servo.org/blog-december-2024/img/blog/htmx-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/blog-december-2024/img/blog/htmx-december-2024.png&quot; alt=&quot;TODO&quot; /&gt;&lt;/a&gt;
@@ -107,8 +115,8 @@ For more details, head to our &lt;a href=&quot;https://servo.org/blog-december-2
     - DONE 20    ‘min-’ and ‘max-height’ on column flex containers
     - 21    improved layout of flex container with reverse direction
     - DONE 23    ‘stretch’ on replaced abspos
-    - 26    --pref threadpools.fallback_worker_num etc
-    - 28 31 32 33  initial layout caching for incremental layout
+    - DONE 26    --pref threadpools.fallback_worker_num etc
+    - DONE 28 31 32 33  initial layout caching for incremental layout
     - 29    fixed `new Request({referrerPolicy: &quot;&quot;})`
     - 38    fixed case insensitivity of CSS ‘attr()’ in HTML
     - 46    fixed navigation from initial about:blank in iframes
