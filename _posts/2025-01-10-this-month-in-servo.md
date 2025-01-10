@@ -63,7 +63,7 @@ We’ve made very good progress towards fixing this (@mrobinson, #34643, #34656,
 <div class="_paired_figure">
 <div class="_text_before">
 
-We now support enough of **XPath** to get [HTMX](https://htmx.org) working (@vlindhol, #34463), when enabled via `--pref dom.xpath.enabled`.
+We now support enough of **XPath** to get [htmx](https://htmx.org) working (@vlindhol, #34463), when enabled via `--pref dom.xpath.enabled`.
 </div>
 <figure>
     <a href="{{ '/img/blog/htmx-december-2024.png' | url }}"><img src="{{ '/img/blog/htmx-december-2024.png' | url }}"
