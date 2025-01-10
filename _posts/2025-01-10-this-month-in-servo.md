@@ -8,11 +8,9 @@ categories:
 ---
 
 <div class="_paired_figure">
-<div>
+<div class="_text_before">
 
 Servo now supports **dark mode** (@arthmis, @lazypassion, #34532), respecting the platform dark mode in servoshell and **‘prefers-color-scheme’** (#34423, stylo#93, @nicoburns) on Windows and macOS.
-
-**CSS transitions** can now be triggered properly by script (@mrobinson, #34486), and we now support **‘min-height’** and **‘max-height’** on column flex containers (@Loirooriol, @mrobinson, #34450), **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** in block layout (@Loirooriol, #34641, #34568, #34695), **‘stretch’** on replaced positioned elements (@Loirooriol, #34430), as well as **‘align-self: self-start’**, **‘self-end’**, **‘left’**, and **‘right’** on positioned elements (@taniishkaaa, @Loirooriol, #34365).
 </div>
 <figure>
     <div style="display: flex;">
@@ -23,14 +21,30 @@ Servo now supports **dark mode** (@arthmis, @lazypassion, #34532), respecting th
     </div>
     <figcaption><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">MDN article for ‘prefers-color-scheme’</a> in dark mode (left) and light mode (right), with <code>--pref dom.resize_observer.enabled</code>.</figcaption>
 </figure>
+<div class="_text_after">
+
+**CSS transitions** can now be triggered properly by script (@mrobinson, #34486), and we now support **‘min-height’** and **‘max-height’** on column flex containers (@Loirooriol, @mrobinson, #34450), **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** in block layout (@Loirooriol, #34641, #34568, #34695), **‘stretch’** on replaced positioned elements (@Loirooriol, #34430), as well as **‘align-self: self-start’**, **‘self-end’**, **‘left’**, and **‘right’** on positioned elements (@taniishkaaa, @Loirooriol, #34365).
+</div>
 </div>
 
 <div class="_paired_figure">
-<div>
+<div class="_text_before">
 
 Servo can now run [**Discord**](https://discord.com) well enough to [**log in**](https://discord.com/login) and **read messages**, though you can’t send messages yet.
 To get this working, we landed some bare-bones AbortController support (@jdm, @syvb, #34519) and a WebSocket fix (@jdm, #34634).
 Try it yourself with `--pref dom.svg.enabled --pref dom.intersection_observer.enabled --pref dom.abort_controller.enabled`!
+</div>
+<figure>
+    <div style="display: flex;">
+        <a href="{{ '/img/blog/discord-login-1-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-login-1-december-2024.png' | url }}"
+            alt="TODO"></a>
+        <a href="{{ '/img/blog/discord-login-2-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-login-2-december-2024.png' | url }}"
+            alt="TODO"></a>
+    </div>
+    <a href="{{ '/img/blog/discord-small-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-small-december-2024.png' | url }}"
+        alt="TODO"></a>
+</figure>
+<div class="_text_after">
 
 We now support **console.trace()** (@simonwuelker, #34629), **PointerEvent** (@wusyong, #34437), and the **clonable** property on **ShadowRoot** (@simonwuelker, #34514).
 Shadow DOM support continues to improve (@jdm, #34503), including very basic **Shadow DOM layout** (@mrobinson, #34701) when enabled via `--pref dom.shadowdom.enabled`.
@@ -44,22 +58,18 @@ The web platform guarantees that same-origin frames and their parents can **sync
 Many tests rely on this, and not doing this correctly made Servo’s test results much flakier than they could otherwise be.
 We’ve made very good progress towards fixing this (@mrobinson, #34643, #34656, #34702, #34609), with correct resizing in all cases except when a same-origin frame is in another script thread, which is rare.
 </div>
-<figure>
-    <div style="display: flex;">
-        <a href="{{ '/img/blog/discord-login-1-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-login-1-december-2024.png' | url }}"
-            alt="TODO"></a>
-        <a href="{{ '/img/blog/discord-login-2-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-login-2-december-2024.png' | url }}"
-            alt="TODO"></a>
-    </div>
-    <a href="{{ '/img/blog/discord-small-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-small-december-2024.png' | url }}"
-        alt="TODO"></a>
-</figure>
 </div>
 
 <div class="_paired_figure">
-<div>
+<div class="_text_before">
 
 We now support enough of **XPath** to get [HTMX](https://htmx.org) working (@vlindhol, #34463), when enabled via `--pref dom.xpath.enabled`.
+</div>
+<figure>
+    <a href="{{ '/img/blog/htmx-december-2024.png' | url }}"><img src="{{ '/img/blog/htmx-december-2024.png' | url }}"
+        alt="TODO"></a>
+</figure>
+<div class="_text_after">
 
 Servo’s performance continues to improve, with **layout caching for flex columns** delivering up to 12x speedup (@Loirooriol, @mrobinson, #34461), many **unnecessary reflows now eliminated** (@mrobinson, #34558, #34599, #34576, #34645), **reduced memory usage** (@mrobinson, @Loirooriol, #34563, #34666), faster rendering for pages with animations (@mrobinson, #34489), and timers now operating without IPC (@mrobinson, #34581).
 
@@ -76,10 +86,6 @@ We’ve mentioned layout caching a few times, including in past monthly updates,
 Incremental layout requires layout caching that *persists* across reflows, and algorithms to determine when to invalidate those cached results.
 </aside>
 </div>
-<figure>
-    <a href="{{ '/img/blog/htmx-december-2024.png' | url }}"><img src="{{ '/img/blog/htmx-december-2024.png' | url }}"
-        alt="TODO"></a>
-</figure>
 </div>
 
 ## Donations
@@ -482,19 +488,33 @@ https://github.com/servo/servo/pull/34792	(@webbeef, #34792)	Split StructuredClo
         width: 21em;
         max-width: 100%;
     }
+
+    .content {
+        container-type: inline-size;
+    }
     ._paired_figure {
-        display: flex;
-        flex-flow: row wrap;
-        margin-bottom: 2em;
+        margin: 1em 0;
     }
-    ._paired_figure > div {
-        flex: 1 1 20em;
-        margin-bottom: 1em;
+    @container (min-width: 55em) {
+        ._paired_figure {
+            display: grid;
+            grid-template-columns: auto 33em;
+            column-gap: 2em;
+            row-gap: 1em;
+        }
+        ._paired_figure > ._text_before,
+        ._paired_figure > ._text_after {
+            flex: 1 1 20em;
+            grid-column: 1 / 2;
+        }
+        ._paired_figure > figure:not(#specificity) {
+            flex: 0 1 33em;
+            grid-row: 1 / 3;
+            grid-column: 2 / 3;
+            margin: 0;
+        }
     }
-    ._paired_figure > figure:not(#specificity) {
-        flex: 0 1 33em;
-        margin-top: 0;
-    }
+
     ._runin {
         margin-bottom: 1em;
     }
