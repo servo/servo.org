@@ -21,8 +21,7 @@ git -C "$1" log --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,va
 | while read -r hash subject author coauthors; do
     pull_number=$(printf \%s\\n "$subject" | sed -E 's@.*[(]#([^)]+)[)].*@\1@')
     url=https://github.com/servo/servo/pull/$pull_number
-    printf \%s\\t "$url"
-    printf '(#%s' "$pull_number"
+    printf '%s\t(' "$url"
     for author in $author $coauthors; do
         # Convert “display name <email@address>” to “email@address”
         author=$(printf \%s\\n "$author" | sed -E 's/.*<(.*)>.*/\1/')
@@ -32,7 +31,7 @@ git -C "$1" log --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,va
         if fgrep -q $'\t'"$author" authors.tsv; then
             author=$(fgrep $'\t'"$author" authors.tsv | cut -f 1)
         fi
-        printf ', @%s' "$author"
+        printf '@%s, ' "$author"
     done
-    printf ')\t%s\n' "$subject"
+    printf '#%s)\t%s\n' "$pull_number" "$subject"
 done
