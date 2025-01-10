@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
+title:      "This month in Servo: dark mode, keyword sizes, XPath, and more!"
 date:       2025-01-10
-summary:    ao!! wrrrrao!!
+summary:    Servo nightlies are now faster, more reliable, 20% smaller, and more compatible with real web apps.
 categories:
 ---
 
