@@ -227,6 +227,11 @@ Try it yourself with <code>--pref dom.svg.enabled --pref dom.intersection_observ
 <p>We now support <strong>console.trace()</strong> (#34629, @simonwuelker), <strong>PointerEvent</strong> (#34437, @wusyong), and the <strong>clonable</strong> property on <strong>ShadowRoot</strong> (#34514, @simonwuelker).
 Shadow DOM support continues to improve (#34503, @jdm), including very basic <strong>Shadow DOM layout</strong> (#34701, @mrobinson) when enabled via <code>--pref dom.shadowdom.enabled</code>.</p>
 <p>We’ve also regained support for <strong>ReadableStream</strong> with the default reader and controller (#34064, #34675, @gterzian, @wusyong, @Taym95).</p>
+<p><code>script</code> underwent (and continues to undergo) major rework towards being <strong>more reliable</strong> and <strong>faster to build</strong>.
+We’ve landed better <strong>synchronisation for DOM tree mutations</strong> (#34505, @jdm) and continued work on <strong>splitting up the <code>script</code> crate</strong> (#34366, @jdm).</p>
+<p>The web platform guarantees that same-origin frames and their parents can <strong>synchronously observe resizes</strong> and their effects.
+Many tests rely on this, and not doing this correctly made Servo’s test results much flakier than they could otherwise be.
+We’ve made very good progress towards fixing this (#34643, #34656, #34702, #34609, @mrobinson), with correct resizing in all cases except when a same-origin frame is in another script thread, which is rare.</p>
 </div>
 <figure>
     <div style="display: flex;">
@@ -270,8 +275,8 @@ Shadow DOM support continues to improve (#34503, @jdm), including very basic <st
     - DONE 34    stub AbortController --pref dom.abort_controller.enabled; discord
     - DONE 72    fixed WebSocket connection error; discord
     - DONE 15    PointerEvent
-    - 11 12 13 36  synchronous iframe resizing
-    - 16    sync script execution with dom tree mutations
+    - DONE 11 12 13 36  synchronous iframe resizing
+    - DONE 16    sync script execution with dom tree mutations
     - DONE 20    ‘min-’ and ‘max-height’ on column flex containers
     - 21    improved layout of flex container with reverse direction
     - DONE 23    ‘stretch’ on replaced abspos
@@ -304,7 +309,7 @@ Shadow DOM support continues to improve (#34503, @jdm), including very basic <st
     - 5     linux-perf job in ci
     - 44    timers without IPC
     - 47    more gl bindings unification
-    - 75    more splitting up script crate
+    - DONE 75    more splitting up script crate
 - dev
     - 35    fixed devtools with firefox 133
     - 6 7 8 62 63 64    now uses uv
