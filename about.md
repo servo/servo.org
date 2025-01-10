@@ -3,15 +3,12 @@ layout: default.html
 title: About
 ---
 
-# About
+<div class="inner-container subpage-content">
 
-<div class="hero is-info is-small">
-  <div class="hero-body">
-    <p class="subtitle">
-      Servo aims to provide an <strong>independent, modular, embeddable web rendering engine</strong>, allowing developers to deliver content and applications using web standards.
-    </p>
-  </div>
-</div>
+<h1>{{ title }}</h1>
+  <p class="subtitle">
+    Servo aims to provide an <strong>independent, modular, embeddable web rendering engine</strong>, allowing developers to deliver content and applications using web standards.
+  </p>
 <br>
 
 Created by Mozilla Research in 2012, the Servo project is a research and development effort. Stewardship of Servo moved from Mozilla Research to the [**Linux Foundation**](https://www.linuxfoundation.org/) in 2020, where its mission remains unchanged. In 2023 the project moved to [**Linux Foundation Europe**](https://linuxfoundation.eu/).
@@ -59,3 +56,4 @@ The chart below tracks our pass rates in several *focus areas* of the [Web Platf
 
 Servo logo can be found at <https://github.com/servo/project/tree/master/logo>.
 
+</div>

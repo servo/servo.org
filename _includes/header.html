@@ -1,47 +1,49 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="container">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="{{ '/' | url }}">
-        <img src="{{ site.logoNegative | url }}" alt="{{ title }}">
-      </a>
+    <div class="inner-container">
+      <div class="navbar-brand">
+        <a href="{{ '/' | url }}">
+          <img src="{{ site.logoMark | url }}" alt="{{ title }}">
+        </a>
 
-      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
+        <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
 
-    <div class="navbar-menu" id="navbar-menu">
-      {% for link in menu %}
-        {% assign pagedir = page.url %}
-        {% if link.subpages %}
-          {% capture subpage-is-active %}
-            {% for sublink in link.subpages %}
-              {% if sublink.url == pagedir %}
-                is-active
-              {% endif %}
-            {% endfor %}
-          {% endcapture %}
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link{% if link.url == pagedir %} is-active {% endif %}{{ subpage-is-active }}" href="{{ link.url | url }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>
+      <div class="navbar-menu" id="navbar-menu">
+        {% for link in menu %}
+          {% assign pagedir = page.url %}
+          {% if link.subpages %}
+            {% capture subpage-is-active %}
+              {% for sublink in link.subpages %}
+                {% if sublink.url == pagedir %}
+                  is-active
+                {% endif %}
+              {% endfor %}
+            {% endcapture %}
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link{% if link.url == pagedir %} is-active {% endif %}{{ subpage-is-active }}" href="{{ link.url | url }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>
+                {{ link.title }}
+              </a>
+              <div class="navbar-dropdown">
+                {% for sublink in link.subpages %}
+                  <a class="navbar-item{% if sublink.url == pagedir %} is-active{% endif %}" href="{{ sublink.url | url }}"{% if sublink.url contains 'http://' or sublink.url contains 'https://' %} target="_blank"{% endif %}>
+                    {{ sublink.title }}
+                  </a>
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            <a class="navbar-item{% if link.url == pagedir %} is-active{% endif %}" href="{{ link.url | url }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>
               {{ link.title }}
             </a>
-            <div class="navbar-dropdown">
-              {% for sublink in link.subpages %}
-                <a class="navbar-item{% if sublink.url == pagedir %} is-active{% endif %}" href="{{ sublink.url | url }}"{% if sublink.url contains 'http://' or sublink.url contains 'https://' %} target="_blank"{% endif %}>
-                  {{ sublink.title }}
-                </a>
-              {% endfor %}
-            </div>
-          </div>
-        {% else %}
-          <a class="navbar-item{% if link.url == pagedir %} is-active{% endif %}" href="{{ link.url | url }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>
-            {{ link.title }}
-          </a>
-        {% endif %}
-      {% endfor %}
-      {% include "social-buttons.html" %}
+          {% endif %}
+        {% endfor %}
+        {% include "social-buttons.html" %}
+      </div>
     </div>
   </div>
 </nav>

@@ -3,7 +3,11 @@ layout: default.html
 title: Sponsorship
 ---
 
-# Sponsorship
+<div class="inner-container subpage-content">
+
+<div id="sponsor-intro">
+
+<h1> {{ title }} </h1>
 
 You can now help fund the Servo project by [sponsoring us on GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo).
 
@@ -20,14 +24,13 @@ The way the funds are used is decided in public via the Technical Steering Commi
 - at **1,000 USD/month**, we can set up dedicated servers for faster Windows and macOS builds, better test coverage and reliability, and new techniques like fuzzing and performance testing
 - at **10,000 USD/month**, we can sponsor a developer to make Servo their top priority
 
-<div class="hero is-info is-small">
-  <div class="hero-body">
-    <p class="subtitle">
-      If your organization is interested in sponsoring Servo's development or the implementation of a particular feature, reach out to us at <a href="mailto:join@servo.org">join@servo.org</a>.
-    </p>
-  </div>
+<p class="subtitle">
+  If your organization is interested in sponsoring Servo's development or the implementation of a particular feature, reach out to us at <a href="mailto:join@servo.org">join@servo.org</a>.
+</p>
+
 </div>
-<br>
+
+<div id="project-fund">
 
 ## Servo Project Fund
 
@@ -38,6 +41,10 @@ The Fund is governed by the Directed Fund’s Governing Board at the Linux Found
 There are currently no members of the Linux Foundation Europe Directed Fund’s Governing Board.
 
 If your organization is interested in becoming a member, please contact us at <join@servo.org> or enroll at the [Linux Foundation member enrollment page](https://enrollment.lfx.linuxfoundation.org/?project=servo).
+
+</div>
+
+<div id="donations">
 
 ## Donation fees
 
@@ -70,6 +77,8 @@ The fees for donations on Open Collective depend on how much you donate in a sin
 | PayPal (USA) |
 | PayPal (international) |
 </figure>
+
+
 
 <script>
   const hostFee = x => 0.04 * x;
@@ -150,6 +159,7 @@ The fees for donations on Open Collective depend on how much you donate in a sin
   updateGithubSponsorsTable();
   updateOpenCollectiveTable();
 </script>
+</div>
 
 <style>
   ._note {

@@ -3,7 +3,8 @@ layout: default.html
 title: Acknowledgements
 ---
 
-# Acknowledgements
+<div class="inner-container subpage-content">
+<h1>{{ title }}</h1>
 
 Servo Project has got some funding through grants thanks to the following organizations:
 * [NLnet Foundation](https://nlnet.nl/project/Servo/)
@@ -20,3 +21,4 @@ Servo Project uses some free services provided by different companies:
 *  [AWS Open Source](https://aws.amazon.com/opensource/) is providing promotional credits to cover our infrastructure costs.
   <img src="{{ '/img/aws-logo.png' | url}}" alt="AWS logo" style="vertical-align: middle; margin: 15px; width: 100px;" />
 
+</div>
