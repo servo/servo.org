@@ -71,11 +71,34 @@ Servo’s performance continues to improve, with **layout caching for flex colum
 </figure>
 </div>
 
+## Donations
+
+Thanks again for your generous support!
+We are now receiving **4329 USD/month** (+0.8% over November) in recurring donations.
+With this money, we’ve been able to cover our web hosting and [self-hosted CI runners](https://ci0.servo.org) for Windows, Linux, and now macOS builds (@delan, #34868), **halving `mach try` build times** from over an hour to under 30 minutes!
+Next month, we’ll be [expanding our CI capacity further](https://github.com/servo/project/issues/123), all made possible thanks to your help.
+
+Servo is also on [thanks.dev](https://thanks.dev), and already **sixteen GitHub users** that depend on Servo are sponsoring us there.
+If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 4329 / 10000); padding-left: 0.5em;"><strong>4329</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 4329 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="4329" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
+As always, use of these funds will be decided transparently in the Technical Steering Committee.
+For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
+
 <!--
-- donations
-    - 2160.66/month opencollective
-    - 2169.00/month github
-    - 16 donors on thanks.dev
+- DONE donations
+    - DONE 2160.66/month opencollective
+    - DONE 2169.00/month github
+    - DONE 16 donors on thanks.dev
 - engine
     - DONE 73    ‘prefers-color-scheme’ (dark mode)
     - DONE 54    CSS transitions can be triggered by script
