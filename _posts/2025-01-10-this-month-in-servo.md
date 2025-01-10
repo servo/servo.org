@@ -31,6 +31,11 @@ Servo now supports **dark mode** (#34532, @arthmis, @lazypassion), respecting th
 Servo can now run [**Discord**](https://discord.com) well enough to [**log in**](https://discord.com/login) and **read messages**, though you can’t send messages yet.
 To get this working, we landed some bare-bones AbortController support (#34519, @jdm, @syvb) and a WebSocket fix (#34634, @jdm).
 Try it yourself with `--pref dom.svg.enabled --pref dom.intersection_observer.enabled --pref dom.abort_controller.enabled`!
+
+We now support **console.trace()** (#34629, @simonwuelker), **PointerEvent** (#34437, @wusyong), and the **clonable** property on **ShadowRoot** (#34514, @simonwuelker).
+Shadow DOM support continues to improve (#34503, @jdm), including very basic **Shadow DOM layout** (#34701, @mrobinson) when enabled via `--pref dom.shadowdom.enabled`.
+
+We’ve also regained support for **ReadableStream** with the default reader and controller (#34064, #34675, @gterzian, @wusyong, @Taym95).
 </div>
 <figure>
     <div style="display: flex;">
@@ -64,19 +69,19 @@ We now support enough of **XPath** to get [HTMX](https://htmx.org) working (#344
     - DONE 73    ‘prefers-color-scheme’ (dark mode)
     - DONE 54    CSS transitions can be triggered by script
     - 53    prompt user for credentials
-    - 65 69     ReadableStream with default reader and controller
-    - 43    console.trace()
+    - DONE 65 69     ReadableStream with default reader and controller
+    - DONE 43    console.trace()
     - DONE 39 42 59  ‘min-content’, ‘max-content’, ‘fit-content’ and ‘stretch’ for block layout
     - DONE 77    ‘self-start’, ‘self-end’, ‘left’, and ‘right’ for abspos elements
-    - 76 shadow dom impl
-        - 27    clonable property on ShadowRoot
-        - 68    initial shadow dom layout (--pref dom.shadowdom.enabled)
+    - DONE 76 shadow dom impl
+        - DONE 27    clonable property on ShadowRoot
+        - DONE 68    initial shadow dom layout (--pref dom.shadowdom.enabled)
     - 48    referrerpolicy attribute
     - 30    referrerPolicy property on HTMLIFrameElement
     - DONE 14    xpath --pref dom.xpath.enabled; htmx
     - DONE 34    stub AbortController --pref dom.abort_controller.enabled; discord
     - DONE 72    fixed WebSocket connection error; discord
-    - 15    PointerEvent
+    - DONE 15    PointerEvent
     - 11 12 13 36  synchronous iframe resizing
     - 16    sync script execution with dom tree mutations
     - DONE 20    ‘min-’ and ‘max-height’ on column flex containers
