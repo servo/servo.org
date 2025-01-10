@@ -10,7 +10,7 @@ categories:
 <div class="_paired_figure">
 <div class="_text_before">
 
-Servo now supports **dark mode** (@arthmis, @lazypassion, #34532), respecting the platform dark mode in servoshell and **‘prefers-color-scheme’** (#34423, stylo#93, @nicoburns) on Windows and macOS.
+Servo now supports **dark mode** ([@arthmis](https://github.com/arthmis), [@lazypassion](https://github.com/lazypassion), [#34532](https://github.com/servo/servo/pull/34532)), respecting the platform dark mode in servoshell and **‘prefers-color-scheme’** ([@nicoburns](https://github.com/nicoburns), [#34423](https://github.com/servo/servo/pull/34423), [stylo#93](https://github.com/servo/stylo/pull/93)) on Windows and macOS.
 </div>
 <figure>
     <div style="display: flex;">
@@ -23,7 +23,7 @@ Servo now supports **dark mode** (@arthmis, @lazypassion, #34532), respecting th
 </figure>
 <div class="_text_after">
 
-**CSS transitions** can now be triggered properly by script (@mrobinson, #34486), and we now support **‘min-height’** and **‘max-height’** on column flex containers (@Loirooriol, @mrobinson, #34450), **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** in block layout (@Loirooriol, #34641, #34568, #34695), **‘stretch’** on replaced positioned elements (@Loirooriol, #34430), as well as **‘align-self: self-start’**, **‘self-end’**, **‘left’**, and **‘right’** on positioned elements (@taniishkaaa, @Loirooriol, #34365).
+**CSS transitions** can now be triggered properly by script ([@mrobinson](https://github.com/mrobinson), [#34486](https://github.com/servo/servo/pull/34486)), and we now support **‘min-height’** and **‘max-height’** on column flex containers ([@Loirooriol](https://github.com/Loirooriol), [@mrobinson](https://github.com/mrobinson), [#34450](https://github.com/servo/servo/pull/34450)), **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** in block layout ([@Loirooriol](https://github.com/Loirooriol), [#34641](https://github.com/servo/servo/pull/34641), [#34568](https://github.com/servo/servo/pull/34568), [#34695](https://github.com/servo/servo/pull/34695)), **‘stretch’** on replaced positioned elements ([@Loirooriol](https://github.com/Loirooriol), [#34430](https://github.com/servo/servo/pull/34430)), as well as **‘align-self: self-start’**, **‘self-end’**, **‘left’**, and **‘right’** on positioned elements ([@taniishkaaa](https://github.com/taniishkaaa), [@Loirooriol](https://github.com/Loirooriol), [#34365](https://github.com/servo/servo/pull/34365)).
 </div>
 </div>
 
@@ -31,7 +31,7 @@ Servo now supports **dark mode** (@arthmis, @lazypassion, #34532), respecting th
 <div class="_text_before">
 
 Servo can now run [**Discord**](https://discord.com) well enough to [**log in**](https://discord.com/login) and **read messages**, though you can’t send messages yet.
-To get this working, we landed some bare-bones AbortController support (@jdm, @syvb, #34519) and a WebSocket fix (@jdm, #34634).
+To get this working, we landed some bare-bones AbortController support ([@jdm](https://github.com/jdm), [@syvb](https://github.com/syvb), [#34519](https://github.com/servo/servo/pull/34519)) and a WebSocket fix ([@jdm](https://github.com/jdm), [#34634](https://github.com/servo/servo/pull/34634)).
 Try it yourself with `--pref dom.svg.enabled --pref dom.intersection_observer.enabled --pref dom.abort_controller.enabled`!
 </div>
 <figure>
@@ -46,23 +46,23 @@ Try it yourself with `--pref dom.svg.enabled --pref dom.intersection_observer.en
 </figure>
 <div class="_text_after">
 
-We now support **console.trace()** (@simonwuelker, #34629), **PointerEvent** (@wusyong, #34437), and the **clonable** property on **ShadowRoot** (@simonwuelker, #34514).
-Shadow DOM support continues to improve (@jdm, #34503), including very basic **Shadow DOM layout** (@mrobinson, #34701) when enabled via `--pref dom.shadowdom.enabled`.
+We now support **console.trace()** ([@simonwuelker](https://github.com/simonwuelker), [#34629](https://github.com/servo/servo/pull/34629)), **PointerEvent** ([@wusyong](https://github.com/wusyong), [#34437](https://github.com/servo/servo/pull/34437)), and the **clonable** property on **ShadowRoot** ([@simonwuelker](https://github.com/simonwuelker), [#34514](https://github.com/servo/servo/pull/34514)).
+Shadow DOM support continues to improve ([@jdm](https://github.com/jdm), [#34503](https://github.com/servo/servo/pull/34503)), including very basic **Shadow DOM layout** ([@mrobinson](https://github.com/mrobinson), [#34701](https://github.com/servo/servo/pull/34701)) when enabled via `--pref dom.shadowdom.enabled`.
 
 `script` underwent (and continues to undergo) major rework towards being **more reliable** and **faster to build**.
-We’ve landed better **synchronisation for DOM tree mutations** (@jdm, #34505) and continued work on **splitting up the `script` crate** (@jdm, #34366).
-We’ve moved our **ReadableStream** support into Servo, eliminating the maintenance burden of a downstream SpiderMonkey patch (@gterzian, @wusyong, @Taym95, #34064, #34675).
+We’ve landed better **synchronisation for DOM tree mutations** ([@jdm](https://github.com/jdm), [#34505](https://github.com/servo/servo/pull/34505)) and continued work on **splitting up the `script` crate** ([@jdm](https://github.com/jdm), [#34366](https://github.com/servo/servo/pull/34366)).
+We’ve moved our **ReadableStream** support into Servo, eliminating the maintenance burden of a downstream SpiderMonkey patch ([@gterzian](https://github.com/gterzian), [@wusyong](https://github.com/wusyong), [@Taym95](https://github.com/Taym95), [#34064](https://github.com/servo/servo/pull/34064), [#34675](https://github.com/servo/servo/pull/34675)).
 
 The web platform guarantees that same-origin frames and their parents can **synchronously observe resizes** and their effects.
 Many tests rely on this, and not doing this correctly made Servo’s test results much flakier than they could otherwise be.
-We’ve made very good progress towards fixing this (@mrobinson, #34643, #34656, #34702, #34609), with correct resizing in all cases except when a same-origin frame is in another script thread, which is rare.
+We’ve made very good progress towards fixing this ([@mrobinson](https://github.com/mrobinson), [#34643](https://github.com/servo/servo/pull/34643), [#34656](https://github.com/servo/servo/pull/34656), [#34702](https://github.com/servo/servo/pull/34702), [#34609](https://github.com/servo/servo/pull/34609)), with correct resizing in all cases except when a same-origin frame is in another script thread, which is rare.
 </div>
 </div>
 
 <div class="_paired_figure">
 <div class="_text_before">
 
-We now support enough of **XPath** to get [htmx](https://htmx.org) working (@vlindhol, #34463), when enabled via `--pref dom.xpath.enabled`.
+We now support enough of **XPath** to get [htmx](https://htmx.org) working ([@vlindhol](https://github.com/vlindhol), [#34463](https://github.com/servo/servo/pull/34463)), when enabled via `--pref dom.xpath.enabled`.
 </div>
 <figure>
     <a href="{{ '/img/blog/htmx-december-2024.png' | url }}"><img src="{{ '/img/blog/htmx-december-2024.png' | url }}"
@@ -70,12 +70,12 @@ We now support enough of **XPath** to get [htmx](https://htmx.org) working (@vli
 </figure>
 <div class="_text_after">
 
-Servo’s performance continues to improve, with **layout caching for flex columns** delivering up to 12x speedup (@Loirooriol, @mrobinson, #34461), many **unnecessary reflows now eliminated** (@mrobinson, #34558, #34599, #34576, #34645), **reduced memory usage** (@mrobinson, @Loirooriol, #34563, #34666), faster rendering for pages with animations (@mrobinson, #34489), and timers now operating without IPC (@mrobinson, #34581).
+Servo’s performance continues to improve, with **layout caching for flex columns** delivering up to 12x speedup ([@Loirooriol](https://github.com/Loirooriol), [@mrobinson](https://github.com/mrobinson), [#34461](https://github.com/servo/servo/pull/34461)), many **unnecessary reflows now eliminated** ([@mrobinson](https://github.com/mrobinson), [#34558](https://github.com/servo/servo/pull/34558), [#34599](https://github.com/servo/servo/pull/34599), [#34576](https://github.com/servo/servo/pull/34576), [#34645](https://github.com/servo/servo/pull/34645)), **reduced memory usage** ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#34563](https://github.com/servo/servo/pull/34563), [#34666](https://github.com/servo/servo/pull/34666)), faster rendering for pages with animations ([@mrobinson](https://github.com/mrobinson), [#34489](https://github.com/servo/servo/pull/34489)), and timers now operating without IPC ([@mrobinson](https://github.com/mrobinson), [#34581](https://github.com/servo/servo/pull/34581)).
 
-**servoshell nightlies are up to 20% smaller** (@atbrakhi, #34340), **WebGPU is now optional** at build time (@atbrakhi, #34444), and `--features tracing` no longer enables `--features layout-2013` (@jschwe, #34515) for further binary size savings.
-You can also **limit the size of** several of Servo’s **thread pools** with `--pref threadpools.fallback_worker_num` and others (@jschwe, #34478), which is especially useful on machines with many CPU cores.
+**servoshell nightlies are up to 20% smaller** ([@atbrakhi](https://github.com/atbrakhi), [#34340](https://github.com/servo/servo/pull/34340)), **WebGPU is now optional** at build time ([@atbrakhi](https://github.com/atbrakhi), [#34444](https://github.com/servo/servo/pull/34444)), and `--features tracing` no longer enables `--features layout-2013` ([@jschwe](https://github.com/jschwe), [#34515](https://github.com/servo/servo/pull/34515)) for further binary size savings.
+You can also **limit the size of** several of Servo’s **thread pools** with `--pref threadpools.fallback_worker_num` and others ([@jschwe](https://github.com/jschwe), [#34478](https://github.com/servo/servo/pull/34478)), which is especially useful on machines with many CPU cores.
 
-We’ve started laying the groundwork for full **incremental layout** in our new layout engine, starting with a general layout caching mechanism (@mrobinson, @Loirooriol, #34507, #34513, #34530, #34586).
+We’ve started laying the groundwork for full **incremental layout** in our new layout engine, starting with a general layout caching mechanism ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#34507](https://github.com/servo/servo/pull/34507), [#34513](https://github.com/servo/servo/pull/34513), [#34530](https://github.com/servo/servo/pull/34530), [#34586](https://github.com/servo/servo/pull/34586)).
 This was lost in the switch to our new layout engine, and without it, every time a page changes, we have to rerun layout from scratch.
 As you can imagine, this is very, very expensive, and incremental layout is critical for performance on today’s highly dynamic web.
 
@@ -91,7 +91,7 @@ Incremental layout requires layout caching that *persists* across reflows, and a
 
 Thanks again for your generous support!
 We are now receiving **4329 USD/month** (+0.8% over November) in recurring donations.
-With this money, we’ve been able to cover our web hosting and [self-hosted CI runners](https://ci0.servo.org) for Windows, Linux, and now macOS builds (@delan, #34868), **halving `mach try` build times** from over an hour to under 30 minutes!
+With this money, we’ve been able to cover our web hosting and [self-hosted CI runners](https://ci0.servo.org) for Windows, Linux, and now macOS builds ([@delan](https://github.com/delan), [#34868](https://github.com/servo/servo/pull/34868)), **halving `mach try` build times** from over an hour to under 30 minutes!
 Next month, we’ll be [expanding our CI capacity further](https://github.com/servo/project/issues/123), all made possible thanks to your help.
 
 Servo is also on [thanks.dev](https://thanks.dev), and already **sixteen GitHub users** that depend on Servo are sponsoring us there.
