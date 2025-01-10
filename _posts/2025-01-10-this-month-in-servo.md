@@ -60,6 +60,8 @@ We’ve made very good progress towards fixing this (#34643, #34656, #34702, #34
 <div>
 
 We now support enough of **XPath** to get [HTMX](https://htmx.org) working (#34463, @vlindhol), when enabled via `--pref dom.xpath.enabled`.
+
+Servo’s performance continues to improve, with **layout caching for flex columns** delivering up to 12x speedup (#34461, @Loirooriol, @mrobinson), many **unnecessary reflows now eliminated** (#34558, #34599, #34576, #34645, @mrobinson), **reduced memory usage** (#34563, #34666, @mrobinson, @Loirooriol), and faster rendering for pages with animations (#34489, @mrobinson).
 </div>
 <figure>
     <a href="{{ '/img/blog/htmx-december-2024.png' | url }}"><img src="{{ '/img/blog/htmx-december-2024.png' | url }}"
@@ -112,11 +114,11 @@ We now support enough of **XPath** to get [HTMX](https://htmx.org) working (#344
 - ohos
     - 1     swipe back
 - perf
-    - 17    flex column caching; 12x improvement
-    - 40 41 55 56   fixed reflows so they only happen when needed by HTML event loop
-    - 78    faster “update the rendering” with animations
-    - 18    reduced memory usage by 260 bytes per InlineItem
-    - 61    reduced memory usage in ContainingBlockPaddingAndBorder
+    - DONE 17    flex column caching; 12x improvement
+    - DONE 40 41 55 56   fixed reflows so they only happen when needed by HTML event loop
+    - DONE 78    faster “update the rendering” with animations
+    - DONE 18    reduced memory usage by 260 bytes per InlineItem
+    - DONE 61    reduced memory usage in ContainingBlockPaddingAndBorder
     - 2     optimise production-stripped
     - 3     webgpu feature flag
     - 4     tracing no longer enables layout-2013
