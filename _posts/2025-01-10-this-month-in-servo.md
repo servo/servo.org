@@ -49,10 +49,9 @@ Try it yourself with `--pref dom.svg.enabled --pref dom.intersection_observer.en
 We now support **console.trace()** (@simonwuelker, #34629), **PointerEvent** (@wusyong, #34437), and the **clonable** property on **ShadowRoot** (@simonwuelker, #34514).
 Shadow DOM support continues to improve (@jdm, #34503), including very basic **Shadow DOM layout** (@mrobinson, #34701) when enabled via `--pref dom.shadowdom.enabled`.
 
-We’ve also regained support for **ReadableStream** with the default reader and controller (@gterzian, @wusyong, @Taym95, #34064, #34675).
-
 `script` underwent (and continues to undergo) major rework towards being **more reliable** and **faster to build**.
 We’ve landed better **synchronisation for DOM tree mutations** (@jdm, #34505) and continued work on **splitting up the `script` crate** (@jdm, #34366).
+We’ve moved our **ReadableStream** support into Servo, eliminating the maintenance burden of a downstream SpiderMonkey patch (@gterzian, @wusyong, @Taym95, #34064, #34675).
 
 The web platform guarantees that same-origin frames and their parents can **synchronously observe resizes** and their effects.
 Many tests rely on this, and not doing this correctly made Servo’s test results much flakier than they could otherwise be.
