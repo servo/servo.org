@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # usage: list-commits-between.sh <path/to/servo> <from commit exclusive> <to commit inclusive>
 # requires: git
-set -eu
+set -euo pipefail -o bsdecho -o shwordsplit
 if [ $# -lt 1 ]; then >&2 sed '1d;2s/^# //;2q' "$0"; exit 1; fi
 missing() { >&2 echo "fatal: $1 not found"; exit 1; }
 > /dev/null command -v git || missing git
@@ -16,5 +16,22 @@ if [ "$(git -C "$1" log --pretty=\%D -n 1 "$3")" = grafted ]; then
     exit 1
 fi
 
-git -C "$1" log --pretty=$'tformat:%H\t%s\t%(trailers:key=co-authored-by,valueonly,separator=%x09)' "$2".."$3" \
-| sed -E 's@([^\t]+)\t(.*[(]#([^)]+)[)].*)@\1\thttps://github.com/servo/servo/pull/\3\t\2@'
+IFS=$'\t'
+git -C "$1" log --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,valueonly,separator=%x09)' "$2".."$3" \
+| while read -r hash subject author coauthors; do
+    pull_number=$(printf \%s\\n "$subject" | sed -E 's@.*[(]#([^)]+)[)].*@\1@')
+    url=https://github.com/servo/servo/pull/$pull_number
+    printf '%s\t(' "$url"
+    for author in $author $coauthors; do
+        # Convert “display name <email@address>” to “email@address”
+        author=$(printf \%s\\n "$author" | sed -E 's/.*<(.*)>.*/\1/')
+        # Convert “(n+)?handle@users.noreply.github.com” to “handle”
+        author=$(printf \%s\\n "$author" | sed -E 's/^(.*[+])?([^@]+)@users[.]noreply[.]github[.]com$/\2/')
+        # Look up any remaining “email@address” in authors.tsv
+        if fgrep -q $'\t'"$author" authors.tsv; then
+            author=$(fgrep $'\t'"$author" authors.tsv | cut -f 1)
+        fi
+        printf '@%s, ' "$author"
+    done
+    printf '#%s)\t%s\n' "$pull_number" "$subject"
+done
