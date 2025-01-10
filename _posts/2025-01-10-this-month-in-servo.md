@@ -11,6 +11,8 @@ categories:
 <div>
 
 Servo now supports **dark mode** (#34532, @arthmis, @lazypassion), respecting the platform dark mode in servoshell and **‘prefers-color-scheme’** (#34423, stylo#93, @nicoburns) on Windows and macOS.
+
+**CSS transitions** can now be triggered properly by script (#34486, @mrobinson), and we now support **‘min-height’** and **‘max-height’** on column flex containers (#34450, @Loirooriol, @mrobinson), **‘min-content’**, **‘max-content’**, **‘fit-content’**, and **‘stretch’** in block layout (#34641, #34568, #34695, @Loirooriol), **‘stretch’** on replaced positioned elements (#34430, @Loirooriol), as well as **‘align-self: self-start’**, **‘self-end’**, **‘left’**, and **‘right’** on positioned elements (#34365, @taniishkaaa, @Loirooriol).
 </div>
 <figure>
     <div style="display: flex;">
@@ -60,12 +62,12 @@ We now support enough of **XPath** to get [HTMX](https://htmx.org) working (#344
     - 16 donors on thanks.dev
 - engine
     - DONE 73    ‘prefers-color-scheme’ (dark mode)
-    - 54    CSS transitions can be triggered by script
+    - DONE 54    CSS transitions can be triggered by script
     - 53    prompt user for credentials
     - 65 69     ReadableStream with default reader and controller
     - 43    console.trace()
-    - 39 42 59  ‘min-content’, ‘max-content’, ‘fit-content’ and ‘stretch’ for block layout
-    - 77    ‘self-start’, ‘self-end’, ‘left’, and ‘right’ for abspos elements
+    - DONE 39 42 59  ‘min-content’, ‘max-content’, ‘fit-content’ and ‘stretch’ for block layout
+    - DONE 77    ‘self-start’, ‘self-end’, ‘left’, and ‘right’ for abspos elements
     - 76 shadow dom impl
         - 27    clonable property on ShadowRoot
         - 68    initial shadow dom layout (--pref dom.shadowdom.enabled)
@@ -77,9 +79,9 @@ We now support enough of **XPath** to get [HTMX](https://htmx.org) working (#344
     - 15    PointerEvent
     - 11 12 13 36  synchronous iframe resizing
     - 16    sync script execution with dom tree mutations
-    - 20    ‘min-’ and ‘max-height’ on column flex containers
+    - DONE 20    ‘min-’ and ‘max-height’ on column flex containers
     - 21    improved layout of flex container with reverse direction
-    - 23    ‘stretch’ on replaced abspos
+    - DONE 23    ‘stretch’ on replaced abspos
     - 26    --pref threadpools.fallback_worker_num etc
     - 28 31 32 33  initial layout caching for incremental layout
     - 29    fixed `new Request({referrerPolicy: ""})`
