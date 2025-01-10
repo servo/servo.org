@@ -63,7 +63,18 @@ We now support enough of **XPath** to get [HTMX](https://htmx.org) working (@vli
 
 Servo’s performance continues to improve, with **layout caching for flex columns** delivering up to 12x speedup (@Loirooriol, @mrobinson, #34461), many **unnecessary reflows now eliminated** (@mrobinson, #34558, #34599, #34576, #34645), **reduced memory usage** (@mrobinson, @Loirooriol, #34563, #34666), faster rendering for pages with animations (@mrobinson, #34489), and timers now operating without IPC (@mrobinson, #34581).
 
-**servoshell nightlies are up to 20% smaller** (@atbrakhi, #34340), **WebGPU is now optional** at build time (@atbrakhi, #34444), and `--features tracing` no longer enables `--features layout-2013` (@jschwe, #34515).
+**servoshell nightlies are up to 20% smaller** (@atbrakhi, #34340), **WebGPU is now optional** at build time (@atbrakhi, #34444), and `--features tracing` no longer enables `--features layout-2013` (@jschwe, #34515) for further binary size savings.
+You can also **limit the size of** several of Servo’s **thread pools** with `--pref threadpools.fallback_worker_num` and others (@jschwe, #34478), which is especially useful on machines with many CPU cores.
+
+We’ve started laying the groundwork for full **incremental layout** in our new layout engine, starting with a general layout caching mechanism (@mrobinson, @Loirooriol, #34507, #34513, #34530, #34586).
+This was lost in the switch to our new layout engine, and without it, every time a page changes, we have to rerun layout from scratch.
+As you can imagine, this is very, very expensive, and incremental layout is critical for performance on today’s highly dynamic web.
+
+<aside class=_note>
+
+We’ve mentioned layout caching a few times, including in past monthly updates, but most of the caching we’ve landed so far has been to save time *within* a single reflow.
+Incremental layout requires layout caching that *persists* across reflows, and algorithms to determine when to invalidate those cached results.
+</aside>
 </div>
 <figure>
     <a href="{{ '/img/blog/htmx-december-2024.png' | url }}"><img src="{{ '/img/blog/htmx-december-2024.png' | url }}"
@@ -121,8 +132,8 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - DONE 20    ‘min-’ and ‘max-height’ on column flex containers
     - 21    improved layout of flex container with reverse direction
     - DONE 23    ‘stretch’ on replaced abspos
-    - 26    --pref threadpools.fallback_worker_num etc
-    - 28 31 32 33  initial layout caching for incremental layout
+    - DONE 26    --pref threadpools.fallback_worker_num etc
+    - DONE 28 31 32 33  initial layout caching for incremental layout
     - 29    fixed `new Request({referrerPolicy: ""})`
     - 38    fixed case insensitivity of CSS ‘attr()’ in HTML
     - 46    fixed navigation from initial about:blank in iframes
