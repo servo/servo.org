@@ -37,12 +37,12 @@ Try it yourself with `--pref dom.svg.enabled --pref dom.intersection_observer.en
 <figure>
     <div style="display: flex;">
         <a href="{{ '/img/blog/discord-login-1-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-login-1-december-2024.png' | url }}"
-            alt="TODO"></a>
+            alt="Discord login screen in Servo, showing form input and a QR code that never finishes loading"></a>
         <a href="{{ '/img/blog/discord-login-2-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-login-2-december-2024.png' | url }}"
-            alt="TODO"></a>
+            alt="Discord loading screen in Servo, after logging in"></a>
     </div>
     <a href="{{ '/img/blog/discord-small-december-2024.png' | url }}"><img src="{{ '/img/blog/discord-small-december-2024.png' | url }}"
-        alt="TODO"></a>
+        alt="Discord channel screen in Servo, showing a few of Diffie’s messages and attachments"></a>
 </figure>
 <div class="_text_after">
 
@@ -67,7 +67,7 @@ We now support enough of **XPath** to get [HTMX](https://htmx.org) working (@vli
 </div>
 <figure>
     <a href="{{ '/img/blog/htmx-december-2024.png' | url }}"><img src="{{ '/img/blog/htmx-december-2024.png' | url }}"
-        alt="TODO"></a>
+        alt="htmx home page in Servo, with the hero banner thing now working (it relies on XPath)"></a>
 </figure>
 <div class="_text_after">
 
