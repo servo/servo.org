@@ -162,6 +162,7 @@ The fees for donations on Open Collective depend on how much you donate in a sin
 </div>
 
 <style>
+
   ._note {
     margin: 1em 1em;
     border-left: 1px solid;
@@ -173,6 +174,7 @@ The fees for donations on Open Collective depend on how much you donate in a sin
   }
   ._donation_fees table {
     width: max-content;
+    max-width: 100%;
   }
   ._donation_fees tr > *:not(#specificity) {
     text-align: left;
@@ -182,7 +184,7 @@ The fees for donations on Open Collective depend on how much you donate in a sin
     position: sticky;
     left: 0;
     /* Hide other cells that overlap when scrolling. */
-    background: #121619;
+    background:lch(91 8.22 196.44);
     z-index: 1;
   }
   ._total {

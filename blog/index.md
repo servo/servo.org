@@ -7,13 +7,16 @@ pagination:
   alias: posts
   reverse: true
 ---
-<div class="container">
 <div class="inner-container">
-  <div>
-    <a href="{{ '/blog/feed.xml' | url }}"><span class="icon"><i class="fas fa-rss"></i></span> Feed</a>
-  </div>
+
+  <div class="blog-head">
 
   # {{ title }}
+
+    <a href="{{ '/blog/feed.xml' | url }}"><span class="icon"><i class="fas fa-rss"></i></span> RSS Feed</a>
+
+  </div>
+
 
 
   {% for post in posts %}
@@ -29,5 +32,5 @@ pagination:
   {% if pagination.href.previous %}<a class="button" href="{{ pagination.href.previous }}">Previous</a>{% else %}{% endif %}
   {% if pagination.href.next %}<a class="button" href="{{ pagination.href.next }}">Next</a>{% else %}{% endif %}
   </div>
-</div>
+
 </div>
