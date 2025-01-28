@@ -108,16 +108,16 @@ To avoid false positives, be sure to step through each replacement rather than u
 
 OpenCollective:
 
-- Go to <https://opencollective.com/dashboard/servo/incoming-contributions?limit=1000&status=ACTIVE&status=ERROR&type=RECURRING>
+- Go to <https://opencollective.com/dashboard/servo/incoming-contributions?limit=1000&status=ACTIVE&status=ERROR&frequency=MONTHLY&frequency=YEARLY>
 - Make sure there is only one page of results; if there are more pages, we’ll need to update the process like we did for GitHub
-- Make sure there is a column with “month” or “year”, because some table filters hide that column
+- Make sure there is a column with “monthly” or “yearly”
 - Run this code in devtools:
 ```js
 $$("table tbody tr")
-    .map(tr => [...tr.cells][2].innerText.match(/[$](\S+)\s*USD\s*[/]\s*(\S+)/))
-    .map(match => match && [+match[1].replace(/[.,]/g, ""), match[2]])
-        .map(([cents, period]) => cents / {month:1,year:12}[period])
-        .reduce((result, cents) => result + cents, 0)
+    .map(tr => [...tr.cells].slice(2,4).map(td => td.innerText))
+    .map(([amount, period]) => [amount.match(/[$](\S+)/)[1].replace(/[.,]/g, ""), period])
+    .map(([cents, period]) => cents / {monthly:1,yearly:12}[period])
+    .reduce((result, cents) => result + cents, 0)
 ```
 - The result is USD cents/month
 
@@ -149,6 +149,14 @@ LFX:
 - Go to <https://crowdfunding.lfx.linuxfoundation.org/projects/e98e012f-479e-45d0-8781-4d7f616baa9d/financial>
     - You may need to open it in private browsing to avoid getting a 404, not sure why
 - Manually add up the amounts for one month, stopping when you see the same donor repeated
+
+thanks.dev:
+
+- Go to <https://thanks.dev/>
+- Click **Sign in with GitHub** and follow the instructions (if any)
+- Go to <https://thanks.dev/dashboard>
+- Click **For maintainers**
+- The number of donors is in “You currently have X donors.”
 
 ## Triaging commits in nightlies for monthly updates
 
