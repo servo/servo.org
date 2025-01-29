@@ -7,10 +7,7 @@ summary:    Servo builds faster, runs faster, and gamepads are now enabled by de
 categories:
 ---
 
-<figure class="_figr"><a href="{{ '/img/blog/september-2024.png' | url }}"><img src="{{ '/img/blog/september-2024.png' | url }}"
-    alt="Servo nightly showing new support for <ul type>, right-to-left layout, ‘table-layout: fixed’, ‘object-fit’, ‘object-position’, crypto.getRandomValues(BigInt64Array) and (BigUint64Array), and innerText and outerText"></a></figure>
-
-<span class=_floatmin></span>Servo has had several new features land in our nightly builds over the last month:
+Servo has had several new features land in our nightly builds over the last month:
 
 - as of 2024-09-10, we now support **&lt;ul type>** and **&lt;ul compact>** ([@simonwuelker](https://github.com/simonwuelker), [#33303](https://github.com/servo/servo/pull/33303))
 - as of 2024-09-10, we now support **console.timeLog()** ([@simonwuelker](https://github.com/simonwuelker), [#33377](https://github.com/servo/servo/pull/33377))
@@ -22,6 +19,11 @@ categories:
 - as of 2024-09-19, we now support the **‘object-fit’** and **‘object-position’** properties ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#33479](https://github.com/servo/servo/pull/33479))
 - as of 2024-09-19, **Crypto.getRandomValues()** can now take **BigInt64Array** or **BigUint64Array** ([@msub2](https://github.com/msub2), [#33485](https://github.com/servo/servo/pull/33485))
 - as of 2024-09-25, we now support **‘innerText’** and **‘outerText’ on HTMLElement** ([@Melchizedek6809](https://github.com/Melchizedek6809), [@shanehandley](https://github.com/shanehandley), [#33312](https://github.com/servo/servo/pull/33312))
+
+
+<figure><a href="{{ '/img/blog/september-2024.png' | url }}"><img src="{{ '/img/blog/september-2024.png' | url }}"
+    alt="Servo nightly showing new support for <ul type>, right-to-left layout, ‘table-layout: fixed’, ‘object-fit’, ‘object-position’, crypto.getRandomValues(BigInt64Array) and (BigUint64Array), and innerText and outerText"></a></figure>
+
 
 Servo’s flexbox support continues to mature, with support for **‘align-self: normal’** ([@Loirooriol](https://github.com/Loirooriol), [#33314](https://github.com/servo/servo/pull/33314)), plus corrections to **cross-axis percent units** in descendants ([@Loirooriol](https://github.com/Loirooriol), [@mrobinson](https://github.com/mrobinson), [#33242](https://github.com/servo/servo/pull/33242)), **automatic minimum sizes** ([@Loirooriol](https://github.com/Loirooriol), [@mrobinson](https://github.com/mrobinson), [#33248](https://github.com/servo/servo/pull/33248), [#33256](https://github.com/servo/servo/pull/33256)), **replaced flex items** ([@Loirooriol](https://github.com/Loirooriol), [@mrobinson](https://github.com/mrobinson), [#33263](https://github.com/servo/servo/pull/33263)), **baseline alignment** ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#33347](https://github.com/servo/servo/pull/33347)), and **absolute descendants** ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#33346](https://github.com/servo/servo/pull/33346)).
 

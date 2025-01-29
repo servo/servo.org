@@ -7,7 +7,7 @@ summary:    Flexbox and WebXR are now enabled by default.
 categories:
 ---
 
-<figure class="_figr"><a href="{{ '/img/blog/features-august-2024.png' | url }}"><img src="{{ '/img/blog/features-august-2024.png' | url }}"
+<figure><a href="{{ '/img/blog/features-august-2024.png' | url }}"><img src="{{ '/img/blog/features-august-2024.png' | url }}"
     alt="Servo nightly with a flexbox-based table of new features including textarea text, ‘border-image’, structuredClone(), crypto.randomUUID(), ‘clip-path’, and flexbox properties themselves"></a>
 <figcaption>A flexbox-based table showcasing some of Servo’s new features this month.</figcaption></figure>
 

@@ -7,10 +7,10 @@ summary:    Plus font rendering performance, OpenHarmony and AddressSanitizer bu
 categories:
 ---
 
-<figure class="_figr"><a href="{{ '/img/blog/june-2024.png' | url }}"><img src="{{ '/img/blog/june-2024.png' | url }}"
+<figure><a href="{{ '/img/blog/june-2024.png' | url }}"><img src="{{ '/img/blog/june-2024.png' | url }}"
     alt="servoshell showing three demos: spaces at the end of each line take up space under ‘white-space-collapse: break-spaces’, measuring the size of the viewport with a ResizeObserver, and a focused text field with a visible value, where the space after the emoji now has normal width"></a></figure>
 
-<span class=_floatmin></span>Servo has had some exciting changes land in our nightly builds over the last month:
+Servo has had some exciting changes land in our nightly builds over the last month:
 
 - as of 2024-05-31, we now support **‘white-space-collapse: break-spaces’** ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#32388](https://github.com/servo/servo/pull/32388))
 - as of 2024-06-11, we now support **&lt;col span> in &lt;colgroup>** ([@Loirooriol](https://github.com/Loirooriol), [#32467](https://github.com/servo/servo/pull/32467))
@@ -20,7 +20,7 @@ categories:
 - as of 2024-06-21, we now **render text in input fields** ([@mrobinson](https://github.com/mrobinson), [#32365](https://github.com/servo/servo/pull/32365))
     - note that editing is still very limited, and the caret and selection are not yet rendered
 
-<figure class="_figl"><a href="{{ '/img/blog/emoji-presentation.png' | url }}"><img src="{{ '/img/blog/emoji-presentation.png' | url }}"
+<figure><a href="{{ '/img/blog/emoji-presentation.png' | url }}"><img src="{{ '/img/blog/emoji-presentation.png' | url }}"
     alt="Table rendered by Servo with three columns (default, with VS15, and with VS16), comparing the behaviour of three emoji with Emoji_Presentation=Yes (🐕, 🐈, 🦜) and three emoji with Emoji_Presentation=No (☺, ™, ↔)"></a>
 <figcaption>On platforms with color emoji support, we now correctly follow Unicode’s rules for when to use color emoji. This table also uses &lt;col&#xA0;span> in a &lt;colgroup>.</figcaption></figure>
 
@@ -42,7 +42,7 @@ We’ve also fixed a bug where spaces near emoji are too wide ([@mrobinson](http
 
 ## Embedding and dev changes
 
-<figure class="_figr"><a href="{{ '/img/blog/devtools-june-2024.png' | url }}"><img src="{{ '/img/blog/devtools-june-2024.png' | url }}"
+<figure><a href="{{ '/img/blog/devtools-june-2024.png' | url }}"><img src="{{ '/img/blog/devtools-june-2024.png' | url }}"
     alt="Firefox devtools connected to Servo, with a hello world printed by a document.write() call in the Console tab"></a>
 <figcaption>You can now use Firefox devtools to evaluate JavaScript in Servo, but messages from the Console API are not yet visible.</figcaption></figure>
 

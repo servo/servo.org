@@ -7,7 +7,7 @@ summary:    Servo’s unique parallel layout engine just got even better.
 categories:
 ---
 
-<figure class="_figr"><a href="{{ '/img/blog/quest-3-passthrough.png' | url }}"><img src="{{ '/img/blog/quest-3-passthrough.png' | url }}"
+<figure><a href="{{ '/img/blog/quest-3-passthrough.png' | url }}"><img src="{{ '/img/blog/quest-3-passthrough.png' | url }}"
     alt="Servo displaying WebXR content on a Quest 3 in Quest Link mode"></a>
 <figcaption>Figure 1: Servo can now render to XR headsets via OpenXR. Image: Daniel Adams (<a href="https://twitter.com/msub2official/status/1818533316477251669">Twitter</a>)</figcaption></figure>
 
@@ -25,7 +25,7 @@ Servo has had several new features land in our nightly builds over the last mont
 We’ve also landed an experimental **OpenXR backend** ([@msub2](https://github.com/msub2), [#32817](https://github.com/servo/servo/pull/32817)), allowing Servo to display WebXR content on actual headsets like the **Quest 3** in Quest Link mode.
 You can enable it with `--pref dom.webxr.openxr.enabled`, though the backend currently only works on Windows.
 
-<figure class="_figl"><a href="{{ '/img/blog/july-2024.png' | url }}"><img src="{{ '/img/blog/july-2024.png' | url }}"
+<figure><a href="{{ '/img/blog/july-2024.png' | url }}"><img src="{{ '/img/blog/july-2024.png' | url }}"
     alt="Servo nightly showing a table with a caption, containing demos of several other new features"></a>
 <figcaption>Figure 2: a table with a caption, containing demos of several other new features.</figcaption></figure>
 
