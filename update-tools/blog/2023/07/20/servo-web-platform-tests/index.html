@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Servo and the Web Platform Tests - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine</title>
+  <meta property="og:title" content="Servo and the Web Platform Tests - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine">
+  
+
+  
+  <meta name="description" content="How we use the Web Platform Tests to guide Servo’s development.">
+  <meta name="og:description" content="How we use the Web Platform Tests to guide Servo’s development.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/update-tools/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/update-tools/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/update-tools/blog/2023/07/20/servo-web-platform-tests/">
+
+  <link rel="stylesheet" href="/update-tools/css/style.css">
+  <link rel="shortcut icon" href="/update-tools/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/update-tools/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/update-tools/">
+        <img src="/update-tools/img/servo-color-negative-no-container.png" alt="Servo and the Web Platform Tests">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              Get Involved
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/update-tools/contributing/">
+                  Contributing
+                </a>
+              
+                <a class="navbar-item" href="https://book.servo.org" target="_blank">
+                  Servo Book
+                </a>
+              
+                <a class="navbar-item" href="https://wpt.servo.org/" target="_blank">
+                  WPT pass rates
+                </a>
+              
+                <a class="navbar-item" href="/update-tools/coc/">
+                  Code of Conduct
+                </a>
+              
+            </div>
+          </div>
+        
+      
+        
+        
+          <a class="navbar-item" href="/update-tools/download/">
+            Download
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="/update-tools/blog/">
+            Blog
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="https://demo.servo.org/" target="_blank">
+            Demos
+          </a>
+        
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              About
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/update-tools/about/">
+                  About Servo
+                </a>
+              
+                <a class="navbar-item" href="https://github.com/servo/project/blob/main/governance/README.md" target="_blank">
+                  Governance
+                </a>
+              
+                <a class="navbar-item" href="/update-tools/sponsorship/">
+                  Sponsorship
+                </a>
+              
+                <a class="navbar-item" href="/update-tools/acknowledgements/">
+                  Acknowledgements
+                </a>
+              
+            </div>
+          </div>
+        
+      
+      <div class="navbar-end">
+  <div class="navbar-item buttons has-addons">
+    
+      <a class="button is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="button is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="button is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="button is-twitter-color" title="Twitter" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+      </a>
+    
+      <a class="button is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <aside class="menu box">
+            <p class="menu-label">
+              Servo and the Web Platform Tests
+            </p>
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+          </aside>
+          <div class="content">
+            
+<h1 class="title">Servo and the Web Platform Tests</h1>
+<p class="subtitle"><span class="tag is-dark">2023-07-20</span> How we use the Web Platform Tests to guide Servo’s development.</p>
+
+<div class="has-top-margin">
+  <p>With over 52000 tests and nearly two million subtests, the <a href="https://web-platform-tests.org">Web Platform Tests</a> are one of the most important parts of the web’s interoperability and compatibility story. Servo has long used the WPT to catch regressions and <a href="/blog/2023/03/16/making-easier-to-contribute/">flakiness</a>, but the suite has also played a role in our <a href="/blog/2023/04/13/layout-2013-vs-2020/">layout engine migration</a> and guiding our way towards CSS2 conformance.</p>
+<style>
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+</style>
+<div class="_runin"><p>You can find Servo on </p><h2><a href="https://wpt.fyi">wpt.fyi</a></h2><p>, a dashboard for all browsers integrated with the Web Platform Tests.</p></div>
+<p>To see the pass rates for Servo, follow <a href="https://wpt.fyi/results/?label=master&amp;label=experimental&amp;product=servo">this direct link</a>, or click <span style="font-size: 87.5%;">EDIT</span>, <span style="font-size: 87.5%;">ADD PRODUCT</span>, choose Servo, then click <span style="font-size: 87.5%;">SUBMIT</span>.</p>
+<p>While fyi is not so great for tracking progress over time (though definitely <a href="https://wpt.fyi/runs?label=master&amp;product=servo">possible</a>), it has been very helpful for drilling down from specs to sections, tests, and subtests. This has made it easier for us to decide what to work on next.</p>
+<div class="_runin"><p>But the key to this was our </p><h2><a href="https://wpt.servo.org">Servo WPT dashboard</a></h2><p>.</p></div>
+<p>The full dashboard can be found at <a href="https://wpt.servo.org">wpt.servo.org</a>, and there’s a simplified version <a href="/about/#wpt-pass-rates">on our about page</a>.</p>
+<p>Built in April, the dashboard has since tracked Servo’s pass rate over time, not just over the suite as a whole but also over several <em>focus areas</em>:</p>
+<table style="width: auto;">
+<tr>
+<td>
+<ul>
+<li>CSS overall
+    <ul>
+    <li>our CSS2 focus areas →
+    <li>CSS position module
+    <li>CSS flexbox module
+    <li>CSSOM
+    </ul>
+</ul>
+<td>
+<ul>
+<li>abspos
+<li>box-display
+<li>floats
+<li>floats-clear
+<li>linebox
+<li>margin-padding-clear
+<li>normal-flow
+<li>positioning
+</ul>
+</table>
+<p>The dashboard has data for both our <a href="/blog/2023/04/13/layout-2013-vs-2020/">legacy and new layout engines</a>, which made it easy to see where the new engine most needed catching up.</p>
+<p>Over the last three months, we’ve halved the gap with legacy or better in several of those areas:</p>
+<ul>
+<li>CSS overall (7.7pp → 3.7pp)</li>
+<li>our CSS2 focus areas (19.0pp → 8.2pp)</li>
+<li>margin-padding-clear (33.0pp → 10.3pp)</li>
+<li>CSS flexbox module (10.5pp → 3.1pp)</li>
+<li>CSS position module (2.5pp → 0.2pp(!))</li>
+</ul>
+<p>We’re two thirds of the way to legacy in floats (31.5pp → 10.8pp) and floats-clear (48.3pp → 3.3pp(!)):</p>
+<p><img src="/update-tools/img/blog/wpt-dashboard-floats.png"
+    alt="floats: 18 (legacy 50) on 1 april, 23 (legacy 52) on 15 june, 33 on 17 june, 37 (legacy 53) on 18 july, 42 on 19 july"
+    style="width: 50%;"><img src="/update-tools/img/blog/wpt-dashboard-floats-clear.png"
+    alt="floats-clear: 18 (legacy 66) on 1 april, 20 (legacy 67) on 15 june, 51 on 16 june, 57 on 22 june, 63 on 1 july, 64 on 20 july"
+    style="width: 50%;"></p>
+<p>And in the CSS2 positioning tests, we’ve surpassed legacy and built a healthy 5.5pp lead:</p>
+<p><img src="/update-tools/img/blog/wpt-dashboard-positioning.png"
+    alt="positioning: 77.7 (legacy 80.9) on 1 april, 81.7 (legacy 81.1) on 13 april, 85.7 on 1 july, 86.6 on 20 july"
+    style="width: 50%;"></p>
+<p>Over time, as our pass rates improve or people start working on new things, we’ll continue <a href="https://github.com/servo/internal-wpt-dashboard/blob/461c573885c17f42687fb26131fe8ccd4213b826/process-wpt-results.js">adding new focus areas</a>, and with the web platform continuously evolving, we probably won’t run out of areas any time soon.</p>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/update-tools/blog/">Back</a>
+</div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+  <div class="container" style="text-align: center;">
+    <a href="/update-tools/coc/">Code of Conduct</a> |
+    Contact: <a href="mailto:info@servo.org">info@servo.org</a>,
+    <a href="https://servo.zulipchat.com/">Zulip Chat</a>,
+    <a href="https://github.com/servo/servo/discussions">GitHub Discussions</a>,
+    <a href="https://floss.social/@servo">Mastodon</a>,
+    <a href="https://bsky.app/profile/servo.org">Bluesky</a>,
+    <a href="https://twitter.com/ServoDev">Twitter</a>,
+    <a href="https://www.linkedin.com/company/servo-project/">LinkedIn</a>
+  </div>
+  <div class="container" style="text-align: center; font-size: 0.875em;">
+    <p><a href="https://linuxfoundation.eu"><img src="/update-tools/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250" style="margin: 1em;"></a></p>
+    <p>&copy; 2025 The Servo Project Developers</p>
+    <p>Copyright &copy; Servo is a project of <a href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>
