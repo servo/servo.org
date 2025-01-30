@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Servo in 2024 - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine</title>
+  <meta property="og:title" content="Servo in 2024 - Servo, the embeddable, independent, memory-safe, modular, parallel web rendering engine">
+  
+
+  
+  <meta name="description" content="Servo is a web rendering engine written in Rust, with WebGL and WebGPU support, and adaptable to desktop, mobile, and embedded applications.">
+  <meta property="og:description" content="Servo is a web rendering engine written in Rust, with WebGL and WebGPU support, and adaptable to desktop, mobile, and embedded applications.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/blog-2024-recap/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/blog-2024-recap/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/blog-2024-recap/blog/2025/01/30/servo-in-2024/">
+
+  <link rel="stylesheet" href="/blog-2024-recap/css/style.css">
+  <link rel="shortcut icon" href="/blog-2024-recap/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/blog-2024-recap/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/blog-2024-recap/">
+        <img src="/blog-2024-recap/img/servo-color-negative-no-container.png" alt="Servo in 2024">
+      </a>
+
+      <a role="button" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="navbar-menu">
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              Get Involved
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/blog-2024-recap/contributing/">
+                  Contributing
+                </a>
+              
+                <a class="navbar-item" href="https://book.servo.org" target="_blank">
+                  Servo Book
+                </a>
+              
+                <a class="navbar-item" href="https://wpt.servo.org/" target="_blank">
+                  WPT pass rates
+                </a>
+              
+                <a class="navbar-item" href="/blog-2024-recap/coc/">
+                  Code of Conduct
+                </a>
+              
+            </div>
+          </div>
+        
+      
+        
+        
+          <a class="navbar-item" href="/blog-2024-recap/download/">
+            Download
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="/blog-2024-recap/blog/">
+            Blog
+          </a>
+        
+      
+        
+        
+          <a class="navbar-item" href="https://demo.servo.org/" target="_blank">
+            Demos
+          </a>
+        
+      
+        
+        
+          
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          " href="#">
+              About
+            </a>
+            <div class="navbar-dropdown">
+              
+                <a class="navbar-item" href="/blog-2024-recap/about/">
+                  About Servo
+                </a>
+              
+                <a class="navbar-item" href="https://github.com/servo/project/blob/main/governance/README.md" target="_blank">
+                  Governance
+                </a>
+              
+                <a class="navbar-item" href="/blog-2024-recap/sponsorship/">
+                  Sponsorship
+                </a>
+              
+                <a class="navbar-item" href="/blog-2024-recap/acknowledgements/">
+                  Acknowledgements
+                </a>
+              
+            </div>
+          </div>
+        
+      
+      <div class="navbar-end">
+  <div class="navbar-item buttons has-addons">
+    
+      <a class="button is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="button is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="button is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="button is-twitter-color" title="Twitter" href="https://twitter.com/ServoDev">
+        <span class="icon"><i class="fab fa-twitter"></i></span>
+      </a>
+    
+      <a class="button is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+  </div>
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <section class="section" style="padding-top: 0;">
+        <div class="container">
+          <aside class="menu box">
+            <p class="menu-label">
+              Servo in 2024
+            </p>
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+          </aside>
+          <div class="content">
+            
+<h1 class="title">Servo in 2024</h1>
+<p class="subtitle"><span class="tag is-dark">2025-01-30</span> </p>
+
+<div class="has-top-margin">
+  <!--
+    TIP: `eleventyConfig.setServerOptions({domDiff: false})` for this post!
+    Otherwise the charts will break when reloading your changes.
+-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@^4"></script>
+<script src="https://cdn.jsdelivr.net/npm/luxon@^2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1"></script>
+<script>
+    const badDates = {
+        "2024-08-25": _ => true, // massive outlier
+        "2024-08-26": _ => true, // massive outlier
+        "2024-08-27": _ => true, // massive outlier
+        "2024-08-28": _ => true, // massive outlier
+        "2024-08-29": _ => true, // massive outlier
+        "2024-08-30": _ => true, // massive outlier
+        "2024-08-31": _ => true, // massive outlier
+        "2024-09-01": key => key == "ladybird",
+        "2024-09-02": key => key == "ladybird",
+        "2024-09-03": key => key == "ladybird",
+        "2024-09-04": key => key == "ladybird",
+        "2024-09-05": key => key == "ladybird",
+        "2024-09-06": key => key == "ladybird",
+        "2024-09-07": key => key == "ladybird",
+        "2024-09-08": key => key == "ladybird",
+        "2024-09-11": key => key == "ladybird",
+        "2024-09-12": key => key == "ladybird",
+        "2024-09-13": key => key == "ladybird",
+        "2024-09-14": key => key == "ladybird",
+        "2024-09-15": key => key == "ladybird",
+        "2024-10-18": _ => true, // massive outlier
+        "2024-10-19": _ => true, // massive outlier
+        "2024-10-31": _ => true, // massive outlier
+        "2024-11-12": _ => true, // massive outlier
+    };
+    const dateScale = {
+        // Using a `time` scale ensures that time gaps in the data are represented accurately.
+        type: "time",
+        time: {
+            unit: "day",
+        },
+    };
+    const monthScale = {
+        // Using a `time` scale ensures that time gaps in the data are represented accurately.
+        type: "time",
+        time: {
+            unit: "month",
+        },
+    };
+    const percentScale = {
+        beginAtZero: true,
+        min: 0,
+        max: 1,
+        ticks: {
+            callback: (value, index, ticks) => `${value * 100}%`,
+        },
+    };
+    const countScale = {
+        beginAtZero: true,
+    };
+    const countScaleDown = {
+        beginAtZero: true,
+        reverse: true,
+    };
+    const makeOptions = (xScale, yScale) => ({
+        scales: {
+            x: xScale,
+            y: yScale,
+        },
+        // Hover anywhere on the chart to get a tooltip with all of the values at that point on the x axis.
+        interaction: {
+            intersect: false,
+            mode: "index",
+            axis: "x",
+        },
+        // Use automatic colors for data series, even though we’ve set some colors in `Chart.defaults`.
+        plugins: {
+            colors: {
+                forceOverride: true,
+            },
+        },
+    });
+    const makeSeriesSet = (keys, dataByDate) => {
+        const result = {date: []};
+        for (const date of Object.keys(dataByDate).sort()) {
+            result.date.push(date);
+            for (const key of keys) {
+                result[key] = result[key] ?? [];
+                result[key].push(dataByDate[date][key] ?? result[key].at(-1) ?? null);
+            }
+        }
+        return result;
+    };
+    const mergeSeriesSets = (seriesSets) => {
+        const keys = {};
+        const dataByDate = {};
+        for (const seriesSet of seriesSets) {
+            for (const [i, date] of seriesSet.date.entries()) {
+                dataByDate[date] = dataByDate[date] ?? {};
+                for (const key of Object.keys(seriesSet)) {
+                    if (key != "date") {
+                        dataByDate[date][key] = seriesSet[key][i];
+                        keys[key] = true;
+                    }
+                }
+            }
+        }
+        return makeSeriesSet(Object.keys(keys), dataByDate);
+    };
+    const csvToSeriesSet = (csv, keys, parser) => {
+        const dataByDate = {};
+        for (const line of csv.trim().split("\n").slice(1)) {
+            const result = parser(line.trim().split(","));
+            const date = result.date;
+            dataByDate[date] = dataByDate[date] ?? {};
+            for (const key of keys) {
+                if (!badDates[date] || !badDates[date](key)) {
+                    dataByDate[date][key] = parseFloat(result[key]);
+                }
+            }
+        }
+        return makeSeriesSet(keys, dataByDate);
+    };
+    const makeData = (keys, labels, ...seriesSets) => {
+        const seriesSet = mergeSeriesSets(seriesSets);
+        console.log(seriesSet);
+        const result = {
+            labels: seriesSet.date,
+            // TODO: `{fill: "origin"}` for some charts
+            datasets: keys.map((key, i) => ({label: labels[i], data: seriesSet[key]})),
+        };
+        return result;
+    };
+    const fetchText = async (url) => {
+        const response = await fetch(url);
+        if (!response.ok) {
+            console.error(response);
+            throw new Error;
+        }
+        return response.text();
+    };
+    Chart.defaults.elements.point.pointStyle = false;
+    Chart.defaults.borderColor = "#666";
+</script>
+<figure>
+<p><canvas id="_contributors_monthly"></canvas>
+<canvas id="_contributions_monthly"></canvas></p>
+<figcaption>Monthly contributors and contributions to servo/servo.</figcaption>
+</figure>
+<script>
+    (async () => {
+        // for i in 2023-{01..12} 2024-{01..12}; do > $i.json tools/list-pull-requests.sh servo/servo $i $i & done
+        // for i in 2023-{01..12} 2024-{01..12}; do contributions=$(< $i.json jq -r .user.login | sort | uniq -c | sort -nr | fgrep -v ' dependabot[bot]' | fgrep -v ' servo-wpt-sync'); printf '%s,%s,%s\n' $i $(printf \%s\\n "$contributions" | wc -l) $(printf \%s\\n "$contributions" | awk '{x+=$1}END{print x}'); done | tee assets/img/blog/2024-servo-contributors-monthly.csv
+        const csv = await fetchText(`/img/blog/2024-servo-contributors-monthly.csv`);
+        const keys = "contributors|contributions".split("|");
+        const labels = "Contributors|Contributions".split("|");
+        const seriesSet = csvToSeriesSet(csv, keys, ([date, contributors, contributions]) => ({date, contributors, contributions}));
+        new Chart(document.querySelector("#_contributors_monthly"), {
+            type: "bar",
+            options: makeOptions(monthScale, countScale),
+            data: makeData(["contributors"], ["Contributors"], seriesSet),
+        });
+        new Chart(document.querySelector("#_contributions_monthly"), {
+            type: "bar",
+            options: makeOptions(monthScale, countScale),
+            data: makeData(["contributions"], ["Contributions"], seriesSet),
+        });
+    })();
+</script>
+<figure>
+<p><canvas id="_pass_rates"></canvas></p>
+<figcaption>Servo’s pass rates.</figcaption>
+</figure>
+<script>
+    (async () => {
+        // for i in 2024-{01-{01..31},02-{01..29},03-{01..31},04-{01..30},05-{01..31},06-{01..30},07-{01..31},08-{01..31},09-{01..30},10-{01..31},11-{01..30},12-{01..31}}; do tools/compute-wpt-fyi-scores.sh servo $i; done | tee assets/img/blog/2024-servo-wpt-subtests.csv
+        // for i in 2024-{01-{01..31},02-{01..29},03-{01..31},04-{01..30},05-{01..31},06-{01..30},07-{01..31},08-{01..31},09-{01..30},10-{01..31},11-{01..30},12-{01..31}}; do tools/compute-wpt-fyi-scores.sh servo $i /css/; done | tee assets/img/blog/2024-servo-wpt-subtests-css-only.csv
+        const all = await fetchText(`/img/blog/2024-servo-wpt-subtests.csv`);
+        const css = await fetchText(`/img/blog/2024-servo-wpt-subtests-css-only.csv`);
+        const data = makeData(
+            "all|css".split("|"),
+            "All tests|CSS tests".split("|"),
+            csvToSeriesSet(all, ["all"], ([date, passing_subtests, total_subtests, , ,]) => ({date, all: passing_subtests / total_subtests})),
+            csvToSeriesSet(css, ["css"], ([date, passing_subtests, total_subtests, , ,]) => ({date, css: passing_subtests / total_subtests})),
+        );
+        new Chart(document.querySelector("#_pass_rates"), {
+            type: "line",
+            options: makeOptions(dateScale, percentScale),
+            data,
+        });
+    })();
+</script>
+<figure>
+<p><canvas id="_bsf"></canvas></p>
+<figcaption>Browser-specific failures for Chrome, Firefox, Ladybird, Safari, and Servo, when considering all five browsers.</figcaption>
+</figure>
+<script>
+    (async () => {
+        const browsers = [
+            ["chrome", "Chrome"],
+            ["firefox", "Firefox"],
+            ["ladybird", "Ladybird"],
+            ["safari", "Safari"],
+            ["servo", "Servo"],
+        ];
+        // node browser-specific-failures.js --from 2024-01-01 --to 2025-01-01 --products chrome,firefox,ladybird,safari,servo --output /path/to/assets/img/blog/2024-bsf-chrome-firefox-ladybird-safari-servo.csv
+        const csv = await fetchText(`/img/blog/2024-bsf-chrome-firefox-ladybird-safari-servo.csv`);
+        const keys = "chrome|firefox|ladybird|safari|servo".split("|");
+        const labels = "Chrome|Firefox|Ladybird|Safari|Servo".split("|");
+        const data = makeData(
+            keys, labels,
+            csvToSeriesSet(csv, keys, ([sha, date, , chrome, , firefox, , ladybird, , safari, , servo]) => ({date, chrome, firefox, ladybird, safari, servo})),
+        );
+        new Chart(document.querySelector("#_bsf"), {
+            type: "line",
+            options: makeOptions(dateScale, countScale),
+            data,
+        });
+    })();
+</script>
+<figure>
+<p><canvas id="_other_bsf"></canvas>
+<canvas id="_servo_bsf"></canvas></p>
+<figcaption>Pairwise browser-specific failures between Servo and either Chrome, Firefox, Safari, or Ladybird. <strong>Top (up is better)</strong> shows tests that only Servo passes. <strong>Bottom (up is better)</strong> shows tests that only the other browser passes.</figcaption>
+</figure>
+<figure>
+<p><canvas id="_other_bsf_delta"></canvas>
+<canvas id="_servo_bsf_delta"></canvas></p>
+<figcaption>Change in browser-specific failures between Servo and either Chrome, Firefox, Safari, or Ladybird. <strong>Top (up is better)</strong> shows the change in tests that only Servo passes. <strong>Bottom (up is better)</strong> shows the change in tests that only the other browser passes.</figcaption>
+</figure>
+<script>
+    (async () => {
+        const keysOther = "chromeOther|firefoxOther|ladybirdOther|safariOther".split("|");
+        const keysServo = "chromeServo|firefoxServo|ladybirdServo|safariServo".split("|");
+        const keysOtherDelta = "chromeOtherDelta|firefoxOtherDelta|ladybirdOtherDelta|safariOtherDelta".split("|");
+        const keysServoDelta = "chromeServoDelta|firefoxServoDelta|ladybirdServoDelta|safariServoDelta".split("|");
+        const labels = "Chrome|Firefox|Ladybird|Safari".split("|");
+        const chrome = await fetchText(`/img/blog/2024-bsf-chrome-servo.csv`);
+        const firefox = await fetchText(`/img/blog/2024-bsf-firefox-servo.csv`);
+        const ladybird = await fetchText(`/img/blog/2024-bsf-ladybird-servo.csv`);
+        const safari = await fetchText(`/img/blog/2024-bsf-safari-servo.csv`);
+        const seriesSet = mergeSeriesSets([
+            csvToSeriesSet(chrome, "chromeOther|chromeServo".split("|"), ([, date, , other, , servo]) => ({date, chromeOther: other, chromeServo: servo})),
+            csvToSeriesSet(firefox, "firefoxOther|firefoxServo".split("|"), ([, date, , other, , servo]) => ({date, firefoxOther: other, firefoxServo: servo})),
+            csvToSeriesSet(ladybird, "ladybirdOther|ladybirdServo".split("|"), ([, date, , other, , servo]) => ({date, ladybirdOther: other, ladybirdServo: servo})),
+            csvToSeriesSet(safari, "safariOther|safariServo".split("|"), ([, date, , other, , servo]) => ({date, safariOther: other, safariServo: servo})),
+        ]);
+        for (const browser of "chrome|firefox|ladybird|safari".split("|")) {
+            const firstOtherValue = seriesSet[`${browser}Other`].find(x => x != null);
+            const firstServoValue = seriesSet[`${browser}Servo`].find(x => x != null);
+            seriesSet[`${browser}OtherDelta`] = seriesSet[`${browser}Other`].map(x => x == null ? null : x - firstOtherValue);
+            seriesSet[`${browser}ServoDelta`] = seriesSet[`${browser}Servo`].map(x => x == null ? null : x - firstServoValue);
+        }
+        new Chart(document.querySelector("#_other_bsf"), {
+            type: "line",
+            options: makeOptions(dateScale, countScale),
+            data: makeData(keysOther, labels, seriesSet),
+        });
+        new Chart(document.querySelector("#_servo_bsf"), {
+            type: "line",
+            options: makeOptions(dateScale, countScaleDown),
+            data: makeData(keysServo, labels, seriesSet),
+        });
+        new Chart(document.querySelector("#_other_bsf_delta"), {
+            type: "line",
+            options: makeOptions(dateScale, countScale),
+            data: makeData(keysOtherDelta, labels, seriesSet),
+        });
+        new Chart(document.querySelector("#_servo_bsf_delta"), {
+            type: "line",
+            options: makeOptions(dateScale, countScaleDown),
+            data: makeData(keysServoDelta, labels, seriesSet),
+        });
+    })();
+</script>
+<!--
+- engine
+- servoshell
+- wpt
+    - end of 2023: 1269937/1714312 = 74.0%
+    - end of 2024: 1515221/1928482 = 78.5%
+    - end of 2024, as fraction of end of 2023: 1515221/1714312 = 88.3%(?)
+- contributors
+    - servo/servo commits: 2674 (852+51 bots) vs 1094 (351+70 bots)
+    - servo/servo contributors: 131 (2 bots) vs 56 (2 bots)
+- screenshots
+- conferences
+    - talks: 9 vs 6
+- donations
+- next year
+-->
+<style>
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig > ._flex {
+        display: flex;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+        max-width: 100%;
+    }
+    ._figr {
+        float: right;
+        max-width: 100%;
+    }
+    ._figl > figcaption,
+    ._figr > figcaption,
+    ._figl > iframe,
+    ._figr > iframe,
+    ._figl > video,
+    ._figr > video,
+    ._figl > a > img,
+    ._figr > a > img {
+        width: 21em;
+        max-width: 100%;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+    ._note {
+        margin: 1em 1em;
+        border-left: 1px solid;
+        padding-left: 1em;
+        opacity: 0.75;
+    }
+</style>
+
+</div>
+
+<div class="has-top-margin buttons has-addons">
+  <a class="button" href="/blog-2024-recap/blog/">Back</a>
+</div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+  <div class="container" style="text-align: center;">
+    <a href="/blog-2024-recap/coc/">Code of Conduct</a> |
+    Contact: <a href="mailto:info@servo.org">info@servo.org</a>,
+    <a href="https://servo.zulipchat.com/">Zulip Chat</a>,
+    <a href="https://github.com/servo/servo/discussions">GitHub Discussions</a>,
+    <a href="https://floss.social/@servo">Mastodon</a>,
+    <a href="https://bsky.app/profile/servo.org">Bluesky</a>,
+    <a href="https://twitter.com/ServoDev">Twitter</a>,
+    <a href="https://www.linkedin.com/company/servo-project/">LinkedIn</a>
+  </div>
+  <div class="container" style="text-align: center; font-size: 0.875em;">
+    <p><a href="https://linuxfoundation.eu"><img src="/blog-2024-recap/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250" style="margin: 1em;"></a></p>
+    <p>&copy; 2025 The Servo Project Developers</p>
+    <p>Copyright &copy; Servo is a project of <a href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+    <p>For website terms of use, trademark policy and other project policies please see <a href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+  $(() => {
+    const burger = $(".navbar-burger");
+    const menu = $(".navbar-menu");
+    burger.click(() => {
+      [burger, menu].forEach((el) => el.toggleClass('is-active'));
+    });
+  });
+</script>
+
+  </body>
+</html>
