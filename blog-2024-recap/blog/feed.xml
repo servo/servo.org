@@ -194,10 +194,10 @@
         const all = await fetchText(`/img/blog/2024-servo-wpt-subtests.csv`);
         const css = await fetchText(`/img/blog/2024-servo-wpt-subtests-css-only.csv`);
         const data = makeData(
-            &quot;all|css&quot;.split(&quot;|&quot;),
-            &quot;All tests|CSS tests&quot;.split(&quot;|&quot;),
-            csvToSeriesSet(all, [&quot;all&quot;], ([date, passing_subtests, total_subtests, , ,]) =&gt; ({date, all: passing_subtests / total_subtests})),
-            csvToSeriesSet(css, [&quot;css&quot;], ([date, passing_subtests, total_subtests, , ,]) =&gt; ({date, css: passing_subtests / total_subtests})),
+            &quot;all|css|allWeighted|cssWeighted&quot;.split(&quot;|&quot;),
+            &quot;All subtests|CSS subtests|All tests (test-weighted)|CSS tests (test-weighted)&quot;.split(&quot;|&quot;),
+            csvToSeriesSet(all, [&quot;all&quot;, &quot;allWeighted&quot;], ([date, passing_subtests, total_subtests, passing_tests, total_tests]) =&gt; ({date, all: passing_subtests / total_subtests, allWeighted: passing_tests / total_tests})),
+            csvToSeriesSet(css, [&quot;css&quot;, &quot;cssWeighted&quot;], ([date, passing_subtests, total_subtests, passing_tests, total_tests]) =&gt; ({date, css: passing_subtests / total_subtests, cssWeighted: passing_tests / total_tests})),
         );
         new Chart(document.querySelector(&quot;#_pass_rates&quot;), {
             type: &quot;line&quot;,

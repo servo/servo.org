@@ -383,10 +383,10 @@
         const all = await fetchText(`/img/blog/2024-servo-wpt-subtests.csv`);
         const css = await fetchText(`/img/blog/2024-servo-wpt-subtests-css-only.csv`);
         const data = makeData(
-            "all|css".split("|"),
-            "All tests|CSS tests".split("|"),
-            csvToSeriesSet(all, ["all"], ([date, passing_subtests, total_subtests, , ,]) => ({date, all: passing_subtests / total_subtests})),
-            csvToSeriesSet(css, ["css"], ([date, passing_subtests, total_subtests, , ,]) => ({date, css: passing_subtests / total_subtests})),
+            "all|css|allWeighted|cssWeighted".split("|"),
+            "All subtests|CSS subtests|All tests (test-weighted)|CSS tests (test-weighted)".split("|"),
+            csvToSeriesSet(all, ["all", "allWeighted"], ([date, passing_subtests, total_subtests, passing_tests, total_tests]) => ({date, all: passing_subtests / total_subtests, allWeighted: passing_tests / total_tests})),
+            csvToSeriesSet(css, ["css", "cssWeighted"], ([date, passing_subtests, total_subtests, passing_tests, total_tests]) => ({date, css: passing_subtests / total_subtests, cssWeighted: passing_tests / total_tests})),
         );
         new Chart(document.querySelector("#_pass_rates"), {
             type: "line",
