@@ -1,4 +1,3 @@
-
 # Code of Conduct
 
 The Servo Project follows the [**Rust Code of Conduct**](https://www.rust-lang.org/policies/code-of-conduct), with the differences below.
