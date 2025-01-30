@@ -30,6 +30,7 @@ case "${to_date%Z}" in
 (*) to_date=${to_date%Z}-12-31T23:59:60Z ;;
 esac
 
+out=$(mktemp)
 i=1; while :; do
   >&2 echo page $i
 
@@ -41,7 +42,7 @@ i=1; while :; do
   #  (a) closed pull requests
   #  (b) with any date
   #  (c) in .updated_at order >:(
-  gh api '/repos/'"$org_repo_slug"'/pulls?state=closed&sort=updated&direction=desc&per_page=100&page='$i > out.json
+  gh api '/repos/'"$org_repo_slug"'/pulls?state=closed&sort=updated&direction=desc&per_page=100&page='$i > "$out"
 
   # Filter the results by the given .merged_at range.
   #
@@ -50,7 +51,7 @@ i=1; while :; do
   # `fromdateiso8601` means the $from_date and $to_date expansion code above
   # would need to know which years are leap years or have leap seconds.
   jq -r --arg from_date "$from_date" --arg to_date "$to_date" \
-    '.[] | select($from_date <= .merged_at and .merged_at <= $to_date)' out.json
+    '.[] | select($from_date <= .merged_at and .merged_at <= $to_date)' "$out"
 
   # If .updated_at was always equal to .merged_at, then the results would indeed
   # be in .merged_at order, but .updated_at can be greater than .merged_at if it
@@ -67,10 +68,11 @@ i=1; while :; do
   # But since .updated_at can never be less than .merged_at, it’s safe to give
   # up as soon as we see results whose .updated_at is less than some start date.
   # Any earlier and we might give up too early.
-  if [ "$(jq -r --arg from_date "$from_date" 'map(select(.updated_at < $from_date)) | length' out.json)" -gt 0 ]; then
+  if [ "$(jq -r --arg from_date "$from_date" 'map(select(.updated_at < $from_date)) | length' "$out")" -gt 0 ]; then
     >&2 echo done
     break
   fi
 
   i=$((i+1))
 done
+rm -- "$out"
