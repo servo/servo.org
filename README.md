@@ -3,7 +3,9 @@
 - [How to start a local dev server](#how-to-start-a-local-dev-server)
 - [How to list commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly)
 - [How to list this year’s pull request contributors](#how-to-list-this-years-pull-request-contributors)
-- [How to analyse WPT pass rate improvements](#how-to-analyse-wpt-pass-rate-improvements)
+- [How to analyse Servo WPT dashboard improvements](#how-to-analyse-servo-wpt-dashboard-improvements)
+- [How to analyse wpt.fyi pass rate improvements](#how-to-analyse-wptfyi-pass-rate-improvements)
+- [How to analyse wpt.fyi Browser Specific Failures improvements](#how-to-analyse-wptfyi-browser-specific-failures-improvements)
 - [How to linkify GitHub handles and pull requests when finishing a post](#how-to-linkify-github-handles-and-pull-requests-when-finishing-a-post)
 - [How to calculate monthly recurring donations](#how-to-calculate-monthly-recurring-donations)
 - [Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates)
@@ -29,17 +31,19 @@ $ tools/list-commits-by-nightly.sh /path/to/servo
 ## How to list this year’s pull request contributors
 
 ```sh
-$ > 2023.json tools/list-pull-requests.sh servo/servo 2023 2023
-$ < 2023.json jq -r .user.login | sort | uniq -c | sort -nr
+$ > tools/2023.json tools/list-pull-requests.sh servo/servo 2023 2023
+$ < tools/2023.json jq -r .user.login | sort | uniq -c | sort -nr
 ```
 
 Or for some other range of dates:
 
 ```sh
-$ > pull-requests.json tools/list-pull-requests.sh servo/servo 2023-03-16 2024-03-16
+$ > tools/pull-requests.json tools/list-pull-requests.sh servo/servo 2023-03-16 2024-03-16
 ```
 
-## How to analyse WPT pass rate improvements
+## How to analyse [Servo WPT dashboard](https://wpt.servo.org) improvements
+
+**NOTE:** this uses Servo’s WPT dashboard scoring, which currently differs from wpt.fyi scoring in two ways. Subtests are weighted such that one test = 1, and the overall score is the fraction of that score over the *enabled* tests as of the date of the latest run.
 
 1. Go to <https://wpt.servo.org/> and open devtools
 2. `fromDate = "2024-01-25"`
@@ -93,6 +97,170 @@ $ > pull-requests.json tools/list-pull-requests.sh servo/servo 2023-03-16 2024-0
     console.log(`>>> top cuts in legacy regression (%):\n${regressionAnalysisText.join("")}`);
     function delta(p,q) { return {pp: (q-p)/10, percent: 100*(q-p)/p}; }
 })(await (await fetch("scores.json")).json(), fromDate, toDate)
+```
+
+## How to analyse [wpt.fyi](https://wpt.fyi) pass rate improvements
+
+For example, to compare end of 2024 vs end of 2023:
+
+- For end of 2024, go to <https://wpt.fyi/runs?to=2025-01-01T00%3A00&product=servo>
+- Click the Servo logo in the first row of the table, then click **VIEW RUN**
+- Write down the `run_id` in the query string, e.g. **6281304587108352**
+- For end of 2023, go to <https://wpt.fyi/runs?to=2024-01-01T00%3A00&product=servo>
+- Click the Servo logo in the first row of the table, then click **VIEW RUN**
+- Write down the `run_id` in the query string, e.g. **5195430563938304**
+- Go to <https://wpt.fyi/results/?run_id=6281304587108352&run_id=5195430563938304>
+
+Normally you can just click two runs (Servo logos) and click **VIEW RUNS** or **VIEW DIFF**, but this only works if you can see both runs on the same page. For two runs a year apart, that would require a *lot* of scrolling.
+
+To compute the passing/total subtest and test counts as shown on wpt.fyi:
+
+```sh
+$ tools/compute-wpt-fyi-scores.sh servo 2024-01-01
+$ tools/compute-wpt-fyi-scores.sh servo 2025-01-01
+```
+
+To compute those counts for only a specific suite:
+
+```sh
+$ tools/compute-wpt-fyi-scores.sh servo 2024-01-01 /css/
+$ tools/compute-wpt-fyi-scores.sh servo 2025-01-01 /css/
+```
+
+## How to analyse [wpt.fyi](https://wpt.fyi) Browser Specific Failures improvements
+
+First build the tooling:
+
+```sh
+git clone https://github.com/web-platform-tests/results-analysis.git
+cd results-analysis
+npm i
+```
+
+Create an unaligned.patch as follows:
+
+```diff
+diff --git a/lib/runs.js b/lib/runs.js
+index 03671476..044bc036 100644
+--- a/lib/runs.js
++++ b/lib/runs.js
+@@ -84,7 +84,7 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
+   for (const product of products) {
+     params += `&product=${product}`;
+   }
+-  const runsUri = `${RUNS_API}?aligned=true&max-count=1&${params}`;
++  const runsUri = `${RUNS_API}?max-count=1&${params}`;
+ 
+   console.log(`Fetching aligned runs from ${from.format('YYYY-MM-DD')} ` +
+       `to ${to.format('YYYY-MM-DD')}`);
+@@ -122,6 +122,7 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
+     } catch (e) {
+       // No cache hit; load from the server instead.
+       const url = `${runsUri}&from=${formattedFrom}&to=${formattedTo}`;
++      console.info(url);
+       const response = await fetch(url);
+       runs = await response.json();
+ 
+@@ -138,8 +139,8 @@ async function fetchAlignedRunsFromServer(products, from, to, experimental) {
+     }
+ 
+     if (runs.length !== products.length) {
+-      throw new Error(
+-          `Fetched ${runs.length} runs, expected ${products.length}`);
++      console.warn(`Not enough product runs for this day (${runs.length} < ${products.length})`);
++      continue;
+     }
+ 
+     if (
+```
+
+Create a git-write.patch as follows:
+
+```diff
+diff --git a/git-write.js b/git-write.js
+index f50269f1..6cadb645 100644
+--- a/git-write.js
++++ b/git-write.js
+@@ -157,28 +157,15 @@ async function main() {
+   const maxAge = maxAgeDays ? moment().subtract(maxAgeDays, 'days') : null;
+
+   const products = [
+-    'android_webview',
+-    'chrome',
+-    'chrome_android',
+-    'chromium',
+-    'deno',
+-    'edge',
+-    'epiphany',
+-    'firefox',
+-    'firefox_android',
+-    'flow',
+-    'node.js',
+-    'safari',
+-    'servo',
+-    'uc',
+-    'webkitgtk',
+-    'wktr',
++    'ladybird',
+   ];
+
+   for (const product of products) {
+     let productRuns = 0;
+     let stop = false;
++    let i = 0;
+     for await (const run of runs.getIterator({product})) {
++      console.debug(`Run ${i++}`);
+       productRuns++;
+       totalRuns++;
+       // Skip runs of affected tests for PRs.
+```
+
+If running NixOS, create a nixos.patch as follows:
+
+```diff
+diff --git a/shell.nix b/shell.nix
+new file mode 100644
+index 00000000..b46af2b7
+--- /dev/null
++++ b/shell.nix
+@@ -0,0 +1,19 @@
++{ pkgs ? import <nixpkgs> {} }:
++
++# /usr/bin/file: No such file or directory
++# https://github.com/nodegit/nodegit/issues/1247
++(pkgs.buildFHSEnv {
++  name = "results-analysis-env";
++  targetPkgs = pkgs: (with pkgs; [
++    krb5.dev  # krb5-config: command not found
++    file  # see above
++
++    # npm error configure: WARNING: secure clearing/zeroing of memory is not supported by the selected crypto backend
++    # npm error configure: error: Required dependencies are missing!
++    openssl openssl.dev
++    libgcrypt libgcrypt.dev
++    pkg-config
++  ]);
++  multiPkgs = pkgs: (with pkgs; [
++  ]);
++}).env
+```
+
+Then clone and build the tooling this way instead:
+
+```sh
+git clone https://github.com/web-platform-tests/results-analysis.git
+cd results-analysis
+git apply unaligned.patch
+git apply git-write.patch
+git apply nixos.patch  # NixOS only
+nix-shell
+npm i
+```
+
+Now calculate the BSF for Servo and the three major browsers:
+
+```sh
+node browser-specific-failures.js --from 2024-01-01 --to 2025-01-01 --products chrome,firefox,safari,servo --experimental
 ```
 
 ## How to linkify GitHub handles and pull requests when finishing a post
