@@ -29,8 +29,8 @@ pagination:
   {% endfor %}
 
   <div class="buttons">
-  {% if pagination.href.previous %}<a class="button" href="{{ pagination.href.previous }}">Previous</a>{% else %}{% endif %}
-  {% if pagination.href.next %}<a class="button" href="{{ pagination.href.next }}">Next</a>{% else %}{% endif %}
+  {% if pagination.href.previous %}<a class="button" href="{{ pagination.href.previous | url }}">Previous</a>{% else %}{% endif %}
+  {% if pagination.href.next %}<a class="button" href="{{ pagination.href.next | url }}">Next</a>{% else %}{% endif %}
   </div>
 
 </div>
