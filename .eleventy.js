@@ -9,10 +9,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy({"assets/img": "img"});
   eleventyConfig.addPassthroughCopy({"assets/svg": "svg"});
-eleventyConfig.addPassthroughCopy({"node_modules/reveal.js/dist/js": "reveal.js/dist/js"});
-eleventyConfig.addPassthroughCopy({"node_modules/reveal.js/dist/css": "reveal.js/dist/css"});
-eleventyConfig.addPassthroughCopy({"node_modules/reveal.js/plugin": "reveal.js/plugin"});
-eleventyConfig.addPassthroughCopy({"assets/reveal.js-theme": "reveal.js/dist/theme"});
+  eleventyConfig.addPassthroughCopy({"node_modules/reveal.js/dist": "reveal.js/dist"});
+  eleventyConfig.addPassthroughCopy({"node_modules/reveal.js/plugin": "reveal.js/plugin"});
+  eleventyConfig.addPassthroughCopy({"assets/reveal.js-theme": "reveal.js/dist/theme"});
   eleventyConfig.addPassthroughCopy({"slides": "slides"});
 
   eleventyConfig.addShortcode("currentYear", () => `${new Date().getFullYear()}`);
