@@ -7,7 +7,7 @@ summary:    Plus shadow DOM buffs, smaller binaries, and new SubtleCrypto algori
 categories:
 ---
 
-<figure class="_figr"><a href="{{ '/img/blog/november-2024.png' | url }}"><img src="{{ '/img/blog/november-2024.png' | url }}" style="width: 33em;"
+<figure><a href="{{ '/img/blog/november-2024.png' | url }}"><img src="{{ '/img/blog/november-2024.png' | url }}"
     alt="Servo nightly showing new support for CSS grid layout, when enabled via `layout.grid.enabled`"></a></figure>
 
 Servo now supports **:is() and :where() selectors** ([@mrobinson](https://github.com/mrobinson), [#34066](https://github.com/servo/servo/pull/34066)), **parallel layout for flexbox** ([@mrobinson](https://github.com/mrobinson), [#34132](https://github.com/servo/servo/pull/34132)), and experimentally, **CSS grid layout** ([@nicoburns](https://github.com/nicoburns), [@taniishkaa](https://github.com/taniishkaa), [#32619](https://github.com/servo/servo/pull/32619), [#34352](https://github.com/servo/servo/pull/34352), [#34421](https://github.com/servo/servo/pull/34421))!

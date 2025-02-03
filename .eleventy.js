@@ -4,13 +4,14 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 
 module.exports = function(eleventyConfig) {
-  eleventyConfig.setTemplateFormats(["md", "njk", "html", "css", "pdf"]);
+  eleventyConfig.setTemplateFormats(["md", "njk", "html", "css", "pdf", "liquid"]);
 
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy({"assets/img": "img"});
   eleventyConfig.addPassthroughCopy({"assets/svg": "svg"});
   eleventyConfig.addPassthroughCopy({"node_modules/reveal.js/dist": "reveal.js/dist"});
   eleventyConfig.addPassthroughCopy({"node_modules/reveal.js/plugin": "reveal.js/plugin"});
+  eleventyConfig.addPassthroughCopy({"assets/reveal.js-theme": "reveal.js/dist/theme"});
   eleventyConfig.addPassthroughCopy({"slides": "slides"});
 
   eleventyConfig.addShortcode("currentYear", () => `${new Date().getFullYear()}`);

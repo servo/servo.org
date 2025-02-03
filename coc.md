@@ -4,6 +4,8 @@ title: Code of Conduct
 note: If you modify this file, please keep this file in sync with https://github.com/servo/servo/blob/main/CODE_OF_CONDUCT.md.
 ---
 
+<div class="subpage-content inner-container">
+
 # Code of Conduct
 
 The Servo Project follows the [**Rust Code of Conduct**](https://www.rust-lang.org/policies/code-of-conduct), with two differences.
@@ -15,3 +17,4 @@ If you are subject to or witness unacceptable behavior, or have any other concer
 * Martin Robinson (he/him) <mrobinson@igalia.com>
 * Manuel Rego Casasnovas (he/him) <rego@igalia.com>
 
+</div>

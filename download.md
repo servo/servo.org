@@ -51,3 +51,11 @@ title: Download
 
   </div>
 </div>
+
+<style>
+
+.subpage-content div + div {
+  padding-top: .5rem;
+}
+
+</style>
