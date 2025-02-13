@@ -29,6 +29,7 @@ The chart below tracks our pass rates in several *focus areas* of the [Web Platf
 
 ## Presentations
 
+* [Why Build a New Browser Engine in Rust?](https://www.youtube.com/watch?v=s0MIHKv45C0) by Martin Robinson (Jan 2025 at [Barcelona Free Software](https://meetu.ps/e/NKqfz/mXgxF/i))
 * [Servo: Building a Browser Rendering Engine in Rust](https://www.youtube.com/watch?v=fp5n7CSvALA) by Rakhi Sharma (Oct 2024 at [Ubuntu Summit](https://ubuntu.com/summit))
 * [Solving Concurrency with (In-)formal Methods in Servo](https://www.youtube.com/watch?v=1c9sHaEXQak) by Gregory Terzian (Oct 2024 at [GOSIM](https://gosim.org/))
 * [Porting Servo to OpenHarmony](https://www.youtube.com/watch?v=gpz088cxDcI) by Jonathan Schwender (Oct 2024 at [GOSIM](https://gosim.org/))
