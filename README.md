@@ -28,6 +28,12 @@ $ rm tools/runs.json  # Optional: clear CI history cache
 $ tools/list-commits-by-nightly.sh /path/to/servo
 ```
 
+To copy the output to your clipboard for a specific calendar month only:
+
+```sh
+$ tools/list-commits-by-nightly.sh ~/code/servo 2>&1 | tee /dev/stderr | sed '/^>>> 2025-01-/,/^>>> 2025-02-/!d' | xclip -sel clip
+```
+
 ## How to list this year’s pull request contributors
 
 ```sh
@@ -346,6 +352,17 @@ And generally we want to exclude...
 - other CI changes
 - refactors (unless large-scale)
 - dependency cleanups
+
+The suggested workflow for efficiently triaging commits is as follows:
+
+- [List commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly) last month, copying the output to your clipboard
+- In your monthly update post, paste that output between a `<!--[commits]` line and a `[/commits]-->` line
+- For each commit, click on the link to read more and understand its impact (see [§ Hints for writing about changes](#hints-for-writing-about-changes))
+- For each commit to be excluded from the post, prefix the line with `-`
+- For each commit to be included in the post, prefix the line with `+` then:
+    - Add a line immediately below of the form `    one or more tags` (four spaces, then space-separated tags)
+    - To write some notes or additional context, append `; your notes` to that new tags line
+- Generate the outline: `tools/generate-outline.sh _posts/xxxx-xx-xx-this-month-in-servo.md`
 
 ## Hints for writing about changes
 
