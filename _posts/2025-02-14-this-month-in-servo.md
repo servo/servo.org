@@ -51,7 +51,15 @@ Other embedding improvements include:
 - Simplifying types used by consumers of libservo (@delan, @mrobinson, #35156)
 - Making it easier to build Servo without crown (@jdm, #35055)
 
+## Donations
+
+## Conference talks
+
 <!--
+- donations
+- conference talks
+  - mrobinson
+
 - api
     - /https://github.com/servo/servo/pull/26389	(@jdm, @istvan.miklos@h-lab.eu, #26389)	Add initial support for WebGL 2 BlitFramebuffer (#26389)
       api
