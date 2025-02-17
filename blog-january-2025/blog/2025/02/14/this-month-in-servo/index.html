@@ -199,41 +199,79 @@
 </div>
 
 <div class="inner-container blog-content">
-  <!--
+  <p>Servo now supports several new web API features:</p>
+<ul>
+<li><strong>:host</strong> selector (@simonwuelker, #34870)</li>
+<li><strong>Relative CSS colors</strong>, like <strong>color(from …)</strong> and <strong>rgb(from …)</strong> (@Loirooriol, #34897)</li>
+<li><strong>ClipboardEvent</strong> (@Gae24, #33576, #35146), with <code>--pref dom_clipboardevent_enabled</code></li>
+<li>Detecting WGSL extensions via <strong>WGSLLanguageFeatures</strong> (@sagudev, #34928)</li>
+<li><strong>pointer_composite_access</strong> WGSL extension (@sagudev, #35161)</li>
+<li><strong>blitFramebuffer()</strong> on <strong>WebGL2RenderingContext</strong> (@jdm, Istvan, #26389)</li>
+<li><strong>media</strong> property on <strong>HTMLStyleElement</strong> (@webbeef, #35148)</li>
+</ul>
+<p>We’ve landed a bunch of <strong>HTMLCanvasElement</strong> improvements:</p>
+<ul>
+<li><strong>toDataURL()</strong> now supports <strong>image/jpeg</strong> and <strong>image/webp</strong> (@webbeef, #34861)</li>
+<li><strong>toBlob()</strong> is now supported (@webbeef, #34938)</li>
+<li><strong>transferControlToOffscreen()</strong> is now supported (@webbeef, #34959)</li>
+</ul>
+<p><strong>Streams</strong> are a lot more useful now, with <strong>ReadableStreamBYOBReader</strong> now supporting <strong>read()</strong> (@Taym95, #35040), <strong>cancel()</strong>, <strong>close()</strong>, and <strong>releaseLock()</strong> (@Taym95, #34958).</p>
+<h2 id="embedding" tabindex="-1">Embedding <a class="header-anchor" href="#embedding">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Servo aims to be an embeddable web engine, but so far it’s been a lot harder to embed Servo than it should be.</p>
+<p>For one, configuring and starting Servo is complicated.
+We found that getting Servo running at all, even without wiring up input or handling resizes correctly, took <strong>over 200 lines</strong> of Rust code (@delan, @mrobinson, #35118).
+Embedders (apps) could only control Servo by sending and receiving a variety of “messages” and “events”, and simple questions like “what’s the current URL?” were impossible to answer without keeping track of extra state in the app.</p>
+<p>Contrast this with <a href="https://webkitgtk.org/">WebKitGTK</a>, where you can write a minimal kiosk app with a fully-functional webview in <strong>under 50 lines</strong> of C.
+To close that gap, we’ve started <strong>reworking our embedding API</strong> towards something more idiomatic and ergonomic, starting with the concept embedders care about most: the <em>webview</em>.</p>
+<p>Our new webview API is controlled by calling methods on a <strong><a href="https://doc.servo.org/servo/struct.WebView.html">WebView</a> handle</strong> (@delan, @mrobinson, #35119, #35183, #35192), including navigation and user input.
+Handles will eventually represent the lifecycle of the webview itself; if you have one, the webview is valid, and if you drop them, the webview is destroyed.</p>
+<p>Servo needs to call into the embedder too, and here we’ve started replacing the old EmbedderMsg API with a <strong>webview delegate</strong> (@delan, @mrobinson, #35211), much like the delegates in <a href="https://developer.apple.com/documentation/webkit/wkuidelegate?language=objc">Apple’s WebKit API</a>.
+In Rust, a delegate is a <code>trait</code> that the embedder can install its own <code>impl</code> for.
+Stay tuned for more on this next month!</p>
+<p>Embedders can now <strong>intercept any request</strong>, not just navigation (@zhuhaichao518, #34961), and you can now identify the webview that caused an <strong>HTTP credentials prompt</strong> (@pewsheen, @mrobinson, #34808).</p>
+<p>Other embedding improvements include:</p>
+<ul>
+<li>Adding a trait to allow for alternative rendering contexts that are better suited to certain applications (@dklassic, @wusyong, #35052, #34813, #34780)</li>
+<li>Simplifying types used by consumers of libservo (@delan, @mrobinson, #35156)</li>
+<li>Making it easier to build Servo without crown (@jdm, #35055)</li>
+</ul>
+<!--
 - api
-    - https://github.com/servo/servo/pull/26389	(@jdm, @istvan.miklos@h-lab.eu, #26389)	Add initial support for WebGL 2 BlitFramebuffer (#26389)
+    - /https://github.com/servo/servo/pull/26389	(@jdm, @istvan.miklos@h-lab.eu, #26389)	Add initial support for WebGL 2 BlitFramebuffer (#26389)
       api
-    - https://github.com/servo/servo/pull/34870	(@simonwuelker, #34870)	Support the `:host` selector (#34870)
+    - /https://github.com/servo/servo/pull/34870	(@simonwuelker, #34870)	Support the `:host` selector (#34870)
       api shadowdom
-    - https://github.com/servo/servo/pull/34938	(@webbeef, #34938)	Implement HTMLCanvasElement.toBlob (#34938)
+    - /https://github.com/servo/servo/pull/34938	(@webbeef, #34938)	Implement HTMLCanvasElement.toBlob (#34938)
       api
-    - https://github.com/servo/servo/pull/34928	(@sagudev, #34928)	Update wgpu and impl `WGSLLanguageFeatures` (#34928)
+    - /https://github.com/servo/servo/pull/34928	(@sagudev, #34928)	Update wgpu and impl `WGSLLanguageFeatures` (#34928)
       api
-    - https://github.com/servo/servo/pull/34861	(@webbeef, #34861)	Add jpeg and webp support to canvas.toDataURL() (#34861)
+    - /https://github.com/servo/servo/pull/34861	(@webbeef, #34861)	Add jpeg and webp support to canvas.toDataURL() (#34861)
       api
     - https://github.com/servo/servo/pull/34885	(@stevennovaryo, #34885)	layout: grid template getComputedStyle resolved value (#34885)
       api
-    - https://github.com/servo/servo/pull/34897	(@Loirooriol, #34897)	Enable relative color syntax (#34897)
+    - /https://github.com/servo/servo/pull/34897	(@Loirooriol, #34897)	Enable relative color syntax (#34897)
       api; relative color values ‘color(from)’, ‘rgb(from)’, ‘hsl(from)’, etc
-    - https://github.com/servo/servo/pull/34959	(@webbeef, #34959)	Implement HTMLCanvasElement.transferControlToOffscreen (#34959)
+    - /https://github.com/servo/servo/pull/34959	(@webbeef, #34959)	Implement HTMLCanvasElement.transferControlToOffscreen (#34959)
       api
-    - https://github.com/servo/servo/pull/34958	(@Taym95, #34958)	script: Implement `set_up`, `ReleaseLock`, `Closed`, `Cancel`, `acquire_byob_reader` for `ReadableStreamBYOBReader` (#34958)
+    - /https://github.com/servo/servo/pull/34958	(@Taym95, #34958)	script: Implement `set_up`, `ReleaseLock`, `Closed`, `Cancel`, `acquire_byob_reader` for `ReadableStreamBYOBReader` (#34958)
       api
-    - https://github.com/servo/servo/pull/33576	(@Gae24, #33576)	Implement Clipboard Event Api (#33576)
+    - /https://github.com/servo/servo/pull/33576	(@Gae24, #33576)	Implement Clipboard Event Api (#33576)
       api
     - https://github.com/servo/servo/pull/35096	(@Loirooriol, #35096)	layout: Fix clientWidth & friends for tables (#35096)
       api layout
-    - https://github.com/servo/servo/pull/35146	(@Gae24, #35146)	dom: set composed flag when constructing `ClipboardEvent` (#35146)
+    - /https://github.com/servo/servo/pull/35146	(@Gae24, #35146)	dom: set composed flag when constructing `ClipboardEvent` (#35146)
       api
     - https://github.com/servo/servo/pull/35066	(@shanehandley, #35066)	Update the FormData constructor to allow providing a submitter (#35066)
       api
-    - https://github.com/servo/servo/pull/35148	(@webbeef, #35148)	Add support for HTMLStyleElement.media (#35148)
+    - /https://github.com/servo/servo/pull/35148	(@webbeef, #35148)	Add support for HTMLStyleElement.media (#35148)
       api
-    - https://github.com/servo/servo/pull/35161	(@sagudev, #35161)	chore: update wgpu to include pointer_composite_access WGSL language extension (#35161)
+    - /https://github.com/servo/servo/pull/35161	(@sagudev, #35161)	chore: update wgpu to include pointer_composite_access WGSL language extension (#35161)
       api
     - https://github.com/servo/servo/pull/35138	(@willypuzzle, #35138)	[#34767] - Range header is missing from CORS header safelist (#35138)
       api; Range requests
-    - https://github.com/servo/servo/pull/35040	(@Taym95, #35040)	Script: implement `ReadableStreamBYOBReader::Read` (#35040)
+    - /https://github.com/servo/servo/pull/35040	(@Taym95, #35040)	Script: implement `ReadableStreamBYOBReader::Read` (#35040)
       api
 - ci
     - https://github.com/servo/servo/pull/34868	(@delan, #34868)	CI: use self-hosted runners for macOS build jobs (#34868)
@@ -268,15 +306,15 @@
     - https://github.com/servo/servo/pull/34810	(@simonwuelker, #34810)	Support syntax highlighting of arguments in the devtools console (#34810)
       devtools
 - embedding
-    - https://github.com/servo/servo/pull/34780	(@wusyong, #34780)	chore: remove `WindowMethods::rendering_context` (#34780)
+    - /https://github.com/servo/servo/pull/34780	(@wusyong, #34780)	chore: remove `WindowMethods::rendering_context` (#34780)
       embedding
-    - https://github.com/servo/servo/pull/34813	(@wusyong, #34813)	webxr: create glwindow with Rc window and without rendering context (#34813)
+    - /https://github.com/servo/servo/pull/34813	(@wusyong, #34813)	webxr: create glwindow with Rc window and without rendering context (#34813)
       embedding; RenderingContext trait
-    - https://github.com/servo/servo/pull/34808	(@git@pews.dev, @mrobinson, #34808)	fix: add source browsing context to `Request` and HTTP credentials prompt (#34808)
+    - /https://github.com/servo/servo/pull/34808	(@git@pews.dev, @mrobinson, #34808)	fix: add source browsing context to `Request` and HTTP credentials prompt (#34808)
       embedding
-    - https://github.com/servo/servo/pull/34961	(@zhuhaichao518@gmail.com, #34961)	Implement WebResourceRequested Event. (#34961)
+    - /https://github.com/servo/servo/pull/34961	(@zhuhaichao518@gmail.com, #34961)	Implement WebResourceRequested Event. (#34961)
       embedding
-    - https://github.com/servo/servo/pull/35055	(@jdm, #35055)	script: Feature-gate all crown support. (#35055)
+    - /https://github.com/servo/servo/pull/35055	(@jdm, #35055)	script: Feature-gate all crown support. (#35055)
       embedding
     - https://github.com/servo/servo/pull/35056	(@jdm, #35056)	Don't generate gstreamer data when dummy media backend enabled. (#35056)
       embedding
@@ -284,7 +322,7 @@
       embedding
     - https://github.com/servo/servo/pull/35049	(@andi.m.mcclure@gmail.com, #35049)	servo-media 1e28d1d997: don't unwrap ServoMedia::get() (#35049)
       embedding
-    - https://github.com/servo/servo/pull/35052	(@dklassic, #35052)	feat: Turn `RenderingContext` into a trait (#35052)
+    - /https://github.com/servo/servo/pull/35052	(@dklassic, #35052)	feat: Turn `RenderingContext` into a trait (#35052)
       embedding; RenderingContext trait
 - layout
     - https://github.com/servo/servo/pull/32103	(@Loirooriol, #32103)	Treat % as 0 for the min-content contribution of replaced elements (#32103)
@@ -415,25 +453,25 @@
     - https://github.com/servo/servo/pull/34630	(@jdm, #34630)	Update all network-related dependencies to the latest versions (#34630)
       upgrade; whole network stack
 - webview
-    - https://github.com/servo/servo/pull/35118	(@delan, @mrobinson, #35118)	Add minimal libservo example using winit (#35118)
+    - /https://github.com/servo/servo/pull/35118	(@delan, @mrobinson, #35118)	Add minimal libservo example using winit (#35118)
       webview
     - https://github.com/servo/servo/pull/35116	(@delan, @mrobinson, #35116)	Fix building libservo with `cargo build -p libservo` (#35116)
       webview
-    - https://github.com/servo/servo/pull/35156	(@delan, @mrobinson, #35156)	Remove type parameter from Servo and IOCompositor (#35121) (#35156)
+    - /https://github.com/servo/servo/pull/35156	(@delan, @mrobinson, #35156)	Remove type parameter from Servo and IOCompositor (#35121) (#35156)
       webview
     - https://github.com/servo/servo/pull/35154	(@webbeef, #35154)	Fix winit_minimal.rs build (#35154)
       webview
-    - https://github.com/servo/servo/pull/35119	(@delan, @mrobinson, #35119)	libservo: Add an initial WebView data structure to the API (#35119)
+    - /https://github.com/servo/servo/pull/35119	(@delan, @mrobinson, #35119)	libservo: Add an initial WebView data structure to the API (#35119)
       webview
-    - https://github.com/servo/servo/pull/35183	(@mrobinson, @delan, #35183)	libservo: Port desktop servoshell to use the new `WebView` API (#35183)
+    - /https://github.com/servo/servo/pull/35183	(@mrobinson, @delan, #35183)	libservo: Port desktop servoshell to use the new `WebView` API (#35183)
       webview
     - https://github.com/servo/servo/pull/35185	(@mrobinson, #35185)	libservo: Stop using `script_traits` in the embedding layer (#35185)
       webview
-    - https://github.com/servo/servo/pull/35192	(@mrobinson, #35192)	servoshell: Port Android / OHOS servoshell to use the WebView API (#35192)
+    - /https://github.com/servo/servo/pull/35192	(@mrobinson, #35192)	servoshell: Port Android / OHOS servoshell to use the WebView API (#35192)
       webview
     - https://github.com/servo/servo/pull/35226	(@mrobinson, #35226)	script_traits: Rename `ConstellationControlMsg` to `ScriptThreadMessage` (#35226)
       webview
-    - https://github.com/servo/servo/pull/35211	(@delan, @mrobinson, #35211)	Include `WebViewId` into EmbedderMsg variants where possible (#35211)
+    - /https://github.com/servo/servo/pull/35211	(@delan, @mrobinson, #35211)	Include `WebViewId` into EmbedderMsg variants where possible (#35211)
       webview
 -->
 <!--[commits]
