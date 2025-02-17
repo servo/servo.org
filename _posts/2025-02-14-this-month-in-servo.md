@@ -7,41 +7,59 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+Servo now supports several new web API features:
+
+- **:host** selector (@simonwuelker, #34870)
+- **Relative CSS colors**, like **color(from …)** and **rgb(from …)** (@Loirooriol, #34897)
+- **ClipboardEvent** (@Gae24, #33576, #35146), with `--pref dom_clipboardevent_enabled`
+- Detecting WGSL extensions via **WGSLLanguageFeatures** (@sagudev, #34928)
+- **pointer_composite_access** WGSL extension (@sagudev, #35161)
+- **blitFramebuffer()** on **WebGL2RenderingContext** (@jdm, Istvan, #26389)
+- **media** property on **HTMLStyleElement** (@webbeef, #35148)
+
+We’ve landed a bunch of **HTMLCanvasElement** improvements:
+
+- **toDataURL()** now supports **image/jpeg** and **image/webp** (@webbeef, #34861)
+- **toBlob()** is now supported (@webbeef, #34938)
+- **transferControlToOffscreen()** is now supported (@webbeef, #34959)
+
+**Streams** are a lot more useful now, with **ReadableStreamBYOBReader** now supporting **read()** (@Taym95, #35040), **cancel()**, **close()**, and **releaseLock()** (@Taym95, #34958).
+
 <!--
 - api
-    - https://github.com/servo/servo/pull/26389	(@jdm, @istvan.miklos@h-lab.eu, #26389)	Add initial support for WebGL 2 BlitFramebuffer (#26389)
+    - /https://github.com/servo/servo/pull/26389	(@jdm, @istvan.miklos@h-lab.eu, #26389)	Add initial support for WebGL 2 BlitFramebuffer (#26389)
       api
-    - https://github.com/servo/servo/pull/34870	(@simonwuelker, #34870)	Support the `:host` selector (#34870)
+    - /https://github.com/servo/servo/pull/34870	(@simonwuelker, #34870)	Support the `:host` selector (#34870)
       api shadowdom
-    - https://github.com/servo/servo/pull/34938	(@webbeef, #34938)	Implement HTMLCanvasElement.toBlob (#34938)
+    - /https://github.com/servo/servo/pull/34938	(@webbeef, #34938)	Implement HTMLCanvasElement.toBlob (#34938)
       api
-    - https://github.com/servo/servo/pull/34928	(@sagudev, #34928)	Update wgpu and impl `WGSLLanguageFeatures` (#34928)
+    - /https://github.com/servo/servo/pull/34928	(@sagudev, #34928)	Update wgpu and impl `WGSLLanguageFeatures` (#34928)
       api
-    - https://github.com/servo/servo/pull/34861	(@webbeef, #34861)	Add jpeg and webp support to canvas.toDataURL() (#34861)
+    - /https://github.com/servo/servo/pull/34861	(@webbeef, #34861)	Add jpeg and webp support to canvas.toDataURL() (#34861)
       api
     - https://github.com/servo/servo/pull/34885	(@stevennovaryo, #34885)	layout: grid template getComputedStyle resolved value (#34885)
       api
-    - https://github.com/servo/servo/pull/34897	(@Loirooriol, #34897)	Enable relative color syntax (#34897)
+    - /https://github.com/servo/servo/pull/34897	(@Loirooriol, #34897)	Enable relative color syntax (#34897)
       api; relative color values ‘color(from)’, ‘rgb(from)’, ‘hsl(from)’, etc
-    - https://github.com/servo/servo/pull/34959	(@webbeef, #34959)	Implement HTMLCanvasElement.transferControlToOffscreen (#34959)
+    - /https://github.com/servo/servo/pull/34959	(@webbeef, #34959)	Implement HTMLCanvasElement.transferControlToOffscreen (#34959)
       api
-    - https://github.com/servo/servo/pull/34958	(@Taym95, #34958)	script: Implement `set_up`, `ReleaseLock`, `Closed`, `Cancel`, `acquire_byob_reader` for `ReadableStreamBYOBReader` (#34958)
+    - /https://github.com/servo/servo/pull/34958	(@Taym95, #34958)	script: Implement `set_up`, `ReleaseLock`, `Closed`, `Cancel`, `acquire_byob_reader` for `ReadableStreamBYOBReader` (#34958)
       api
-    - https://github.com/servo/servo/pull/33576	(@Gae24, #33576)	Implement Clipboard Event Api (#33576)
+    - /https://github.com/servo/servo/pull/33576	(@Gae24, #33576)	Implement Clipboard Event Api (#33576)
       api
     - https://github.com/servo/servo/pull/35096	(@Loirooriol, #35096)	layout: Fix clientWidth & friends for tables (#35096)
       api layout
-    - https://github.com/servo/servo/pull/35146	(@Gae24, #35146)	dom: set composed flag when constructing `ClipboardEvent` (#35146)
+    - /https://github.com/servo/servo/pull/35146	(@Gae24, #35146)	dom: set composed flag when constructing `ClipboardEvent` (#35146)
       api
     - https://github.com/servo/servo/pull/35066	(@shanehandley, #35066)	Update the FormData constructor to allow providing a submitter (#35066)
       api
-    - https://github.com/servo/servo/pull/35148	(@webbeef, #35148)	Add support for HTMLStyleElement.media (#35148)
+    - /https://github.com/servo/servo/pull/35148	(@webbeef, #35148)	Add support for HTMLStyleElement.media (#35148)
       api
-    - https://github.com/servo/servo/pull/35161	(@sagudev, #35161)	chore: update wgpu to include pointer_composite_access WGSL language extension (#35161)
+    - /https://github.com/servo/servo/pull/35161	(@sagudev, #35161)	chore: update wgpu to include pointer_composite_access WGSL language extension (#35161)
       api
     - https://github.com/servo/servo/pull/35138	(@willypuzzle, #35138)	[#34767] - Range header is missing from CORS header safelist (#35138)
       api; Range requests
-    - https://github.com/servo/servo/pull/35040	(@Taym95, #35040)	Script: implement `ReadableStreamBYOBReader::Read` (#35040)
+    - /https://github.com/servo/servo/pull/35040	(@Taym95, #35040)	Script: implement `ReadableStreamBYOBReader::Read` (#35040)
       api
 - ci
     - https://github.com/servo/servo/pull/34868	(@delan, #34868)	CI: use self-hosted runners for macOS build jobs (#34868)
