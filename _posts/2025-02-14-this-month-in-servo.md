@@ -73,10 +73,33 @@ We’ve continued **splitting up our massive script crate** (@jdm, #34359, #3515
 
 ## Donations
 
+Thanks again for your generous support!
+We are now receiving **3835 USD/month** (−11.4% over December) in recurring donations.
+With this money, we’ve been able to expand our capacity for [self-hosted](https://ci0.servo.org) [CI](https://ci1.servo.org) [runners](https://ci2.servo.org) on Windows, Linux, and macOS builds, **halving `mach try` build times** from over an hour to under 30 minutes!
+
+Servo is also on [thanks.dev](https://thanks.dev), and already **21 GitHub users** (+5 over December) that depend on Servo are sponsoring us there.
+If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 3835 / 10000); padding-left: 0.5em;"><strong>3835</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 3835 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="3835" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
+As always, use of these funds will be decided transparently in the Technical Steering Committee.
+For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
+
 ## Conference talks
 
 <!--
 - donations
+  - 1436.83/month opencollective
+  - 2399.00/month github
+  - 21 donors thanks.dev
 - conference talks
   - mrobinson
 
