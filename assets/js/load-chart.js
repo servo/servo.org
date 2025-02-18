@@ -50,6 +50,7 @@ function setupChart () {
     const options = {
         height: 350,
         fontSize: 16,
+        fontName: "'Space Grotesk', sans-serif",
         legend: {
             position: 'top',
             ...(dark_mode

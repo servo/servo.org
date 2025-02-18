@@ -1,6 +1,6 @@
 ---
 layout: default.html
-title: WPT Scores
+title: WPT Pass Rates
 ---
 <style>
   .odd {
@@ -17,7 +17,6 @@ title: WPT Scores
 
   #score-table {
       width: 100%;
-      margin-top: 30px;
   }
 
   #score-table th {
@@ -41,7 +40,10 @@ title: WPT Scores
       padding: 10px;
       margin-top: 20px;
       margin-bottom: 40px;
-      font-size: 1rem;
+  }
+
+  #servo-chart, .chart-filter-bar, .chart-filter, #score-table {
+      max-width: 48rem;
   }
 
   .chart-filter-bar {
@@ -49,16 +51,23 @@ title: WPT Scores
     flex-wrap: wrap;
     column-gap: 40px;
     row-gap: 20px;
+    place-content: center;
   }
 
   .chart-filter {
     display: flex;
     align-items: center;
     gap: 20px;
+    flex-wrap: wrap;
   }
 </style>
 <div class="inner-container wpt-score-page">
   <h1>{{ title }}</h1>
+  <p class="subtitle">
+
+The chart below tracks our pass rates in several *focus areas* of the [Web Platform Tests](http://web-platform-tests.org/), as well as the whole CSS and WPT test suites. To drill down the pass rates under a focus area, see the [Servo results on wpt.fyi](https://wpt.fyi/results/?product=servo).
+
+  </p>
   <br>
     <div class="chart-filter-bar">
       <div class="chart-filter">
@@ -75,7 +84,7 @@ title: WPT Scores
         <thead id="score-table-header"><tr><th>Test Suite</th><th>Score</th></tr></thead>
         <tbody id="score-table-body"></tbody>
     </table>
-    <div id="score-explanation">
+    <p id="score-explanation">
         Scores are calculated as percentages of total <b>enabled</b>
         tests within the suite that pass. A passing test with no
         subtests gets a score of 1 while a test with subtests gets a
@@ -83,7 +92,7 @@ title: WPT Scores
         subtests within that test. This is different from the
         percentages on wpt.fyi which is calculated by giving equal
         weight to both top-level tests and subtests.
-    </div>
+    </p>
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="{{ '/js/load-chart.js' | url }}"></script>
