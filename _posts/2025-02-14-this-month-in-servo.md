@@ -111,6 +111,8 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
 ## Conference talks
 
+- [**Why Build a New Browser Engine in Rust?**](https://www.youtube.com/watch?v=s0MIHKv45C0) ([slides](https://servo.org/slides/2025-01-21-barcelona-free-software/)) — [Martin Robinson](https://abandonedwig.info) spoke about Servo’s unique benefits as a Rust-based browser and web engine, and how browser diversity can create a new renaissance for the web platform
+
 <!--
 - donations
   - 1436.83/month opencollective
