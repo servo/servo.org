@@ -25,20 +25,32 @@
               {% endfor %}
             {% endcapture %}
             <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link{% if link.url == pagedir %} is-active {% endif %}{{ subpage-is-active }}" href="{{ link.url | url }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>
-                {{ link.title }}
+              <a
+                class="navbar-link{% if link.url == pagedir %} is-active {% endif %}{{ subpage-is-active }}"
+                href="{{ link.url | url }}"
+                {% if link.external %} target="_blank"{% endif %}
+              >
+                {{ link.title }}{% if link.external %}{% include "ext-link-marker.html" %}{% endif %}
               </a>
               <div class="navbar-dropdown">
                 {% for sublink in link.subpages %}
-                  <a class="navbar-item{% if sublink.url == pagedir %} is-active{% endif %}" href="{{ sublink.url | url }}"{% if sublink.url contains 'http://' or sublink.url contains 'https://' %} target="_blank"{% endif %}>
-                    {{ sublink.title }}
+                  <a
+                    class="navbar-item{% if sublink.url == pagedir %} is-active{% endif %}"
+                    href="{{ sublink.url | url }}"
+                    {% if sublink.external %} target="_blank"{% endif %}
+                  >
+                    {{ sublink.title }}{% if sublink.external %}{% include "ext-link-marker.html" %}{% endif %}
                   </a>
                 {% endfor %}
               </div>
             </div>
           {% else %}
-            <a class="navbar-item{% if link.url == pagedir %} is-active{% endif %}" href="{{ link.url | url }}"{% if link.url contains 'http://' or link.url contains 'https://' %} target="_blank"{% endif %}>
-              {{ link.title }}
+            <a
+              class="navbar-item{% if link.url == pagedir %} is-active{% endif %}"
+              href="{{ link.url | url }}"
+              {% if link.external %} target="_blank"{% endif %}
+            >
+              {{ link.title }}{% if link.external %}{% include "ext-link-marker.html" %}{% endif %}
             </a>
           {% endif %}
         {% endfor %}
