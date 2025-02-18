@@ -9,7 +9,8 @@ categories:
 
 Servo now supports several new web API features:
 
-- **:host** selector (@simonwuelker, #34870)
+- **:host selector** (@simonwuelker, #34870)
+- **&lt;slot>** (@simonwuelker, #35013, #35177, #35191, #35221, #35137, #35222)
 - **Relative CSS colors**, like **color(from …)** and **rgb(from …)** (@Loirooriol, #34897)
 - **ClipboardEvent** (@Gae24, #33576, #35146), with `--pref dom_clipboardevent_enabled`
 - Detecting WGSL extensions via **WGSLLanguageFeatures** (@sagudev, #34928)
@@ -24,6 +25,8 @@ We’ve landed a bunch of **HTMLCanvasElement** improvements:
 - **transferControlToOffscreen()** is now supported (@webbeef, #34959)
 
 **Streams** are a lot more useful now, with **ReadableStreamBYOBReader** now supporting **read()** (@Taym95, #35040), **cancel()**, **close()**, and **releaseLock()** (@Taym95, #34958).
+
+Servo now **passes [40.6%](https://wpt.servo.org)** (+7.5pp) of enabled **Shadow DOM** tests, thanks to our landing support for the **:host selector** (@simonwuelker, #34870) and the **&lt;slot> element** (@simonwuelker, #35013, #35177, #35191, #35221, #35137, #35222), plus improvements to event handling (@simonwuelker, #34788, #34884), script (@willypuzzle, #34787), style (@simonwuelker, @jdm, #35198, #35132), and the DOM tree (@simonwuelker, @Taym95, #34803, #34834, #34863, #34909, #35076).
 
 ## Embedding
 
@@ -240,39 +243,39 @@ As a result:
     - https://github.com/servo/servo/pull/35172	(@jdm, #35172)	bindings: Move string-related bindings code to script_bindings. (#35172)
       script; towards splitting script crate
 - shadowdom
-    - https://github.com/servo/servo/pull/34803	(@simonwuelker, #34803)	Fix IS_IN_SHADOW_TREE flag for descendants after Node::remove call (#34803)
+    - /https://github.com/servo/servo/pull/34803	(@simonwuelker, #34803)	Fix IS_IN_SHADOW_TREE flag for descendants after Node::remove call (#34803)
       shadowdom
-    - https://github.com/servo/servo/pull/34787	(@willypuzzle, #34787)	Document's current script should not be updated when executing script elements inside shadow trees (#34787)
+    - /https://github.com/servo/servo/pull/34787	(@willypuzzle, #34787)	Document's current script should not be updated when executing script elements inside shadow trees (#34787)
       shadowdom
-    - https://github.com/servo/servo/pull/34834	(@simonwuelker, #34834)	Ensure Element ID modifications inside disconnected shadow roots are registered (#34834)
+    - /https://github.com/servo/servo/pull/34834	(@simonwuelker, #34834)	Ensure Element ID modifications inside disconnected shadow roots are registered (#34834)
       shadowdom
-    - https://github.com/servo/servo/pull/34863	(@simonwuelker, #34863)	Add shadow tree flags to Bind/UnbindContext (#34863)
+    - /https://github.com/servo/servo/pull/34863	(@simonwuelker, #34863)	Add shadow tree flags to Bind/UnbindContext (#34863)
       shadowdom
-    - https://github.com/servo/servo/pull/34788	(@simonwuelker, #34788)	Consider shadow dom when dispatching events (#34788)
+    - /https://github.com/servo/servo/pull/34788	(@simonwuelker, #34788)	Consider shadow dom when dispatching events (#34788)
       shadowdom
-    - https://github.com/servo/servo/pull/34870	(@simonwuelker, #34870)	Support the `:host` selector (#34870)
+    - /https://github.com/servo/servo/pull/34870	(@simonwuelker, #34870)	Support the `:host` selector (#34870)
       api shadowdom
-    - https://github.com/servo/servo/pull/34909	(@Taym95, #34909)	Fix shadow root binding children to the tree (#34909)
+    - /https://github.com/servo/servo/pull/34909	(@Taym95, #34909)	Fix shadow root binding children to the tree (#34909)
       shadowdom
-    - https://github.com/servo/servo/pull/35076	(@simonwuelker, #35076)	Set descendant's attribute's owner document in Node::adopt (#35076)
+    - /https://github.com/servo/servo/pull/35076	(@simonwuelker, #35076)	Set descendant's attribute's owner document in Node::adopt (#35076)
       shadowdom
-    - https://github.com/servo/servo/pull/35013	(@simonwuelker, #35013)	Implement shadow dom slots (#35013)
+    - /https://github.com/servo/servo/pull/35013	(@simonwuelker, #35013)	Implement shadow dom slots (#35013)
       shadowdom
-    - https://github.com/servo/servo/pull/34884	(@simonwuelker, #34884)	Implement Event propagation across shadow roots (#34884)
+    - /https://github.com/servo/servo/pull/34884	(@simonwuelker, #34884)	Implement Event propagation across shadow roots (#34884)
       shadowdom
-    - https://github.com/servo/servo/pull/35132	(@jdm, #35132)	script: Handle shadow roots when determining common ancestors of dirty roots. (#35132)
+    - /https://github.com/servo/servo/pull/35132	(@jdm, #35132)	script: Handle shadow roots when determining common ancestors of dirty roots. (#35132)
       shadowdom
-    - https://github.com/servo/servo/pull/35177	(@simonwuelker, #35177)	Propagate events from slottables to their assigned slot instead of their parent (#35177)
+    - /https://github.com/servo/servo/pull/35177	(@simonwuelker, #35177)	Propagate events from slottables to their assigned slot instead of their parent (#35177)
       shadowdom
-    - https://github.com/servo/servo/pull/35137	(@simonwuelker, #35137)	Fire slot change events when the slot content changes (#35137)
+    - /https://github.com/servo/servo/pull/35137	(@simonwuelker, #35137)	Fire slot change events when the slot content changes (#35137)
       shadowdom
-    - https://github.com/servo/servo/pull/35198	(@simonwuelker, #35198)	Never compute style for children of shadow hosts (#35198)
+    - /https://github.com/servo/servo/pull/35198	(@simonwuelker, #35198)	Never compute style for children of shadow hosts (#35198)
       shadowdom
-    - https://github.com/servo/servo/pull/35191	(@simonwuelker, #35191)	Use "slot" attribute for slottable name (#35191)
+    - /https://github.com/servo/servo/pull/35191	(@simonwuelker, #35191)	Use "slot" attribute for slottable name (#35191)
       shadowdom
-    - https://github.com/servo/servo/pull/35222	(@simonwuelker, #35222)	Don't fire slotchange events when there's already a pending event for the same slot (#35222)
+    - /https://github.com/servo/servo/pull/35222	(@simonwuelker, #35222)	Don't fire slotchange events when there's already a pending event for the same slot (#35222)
       shadowdom
-    - https://github.com/servo/servo/pull/35221	(@simonwuelker, #35221)	Potentially signal a slot change in Node::insert (#35221)
+    - /https://github.com/servo/servo/pull/35221	(@simonwuelker, #35221)	Potentially signal a slot change in Node::insert (#35221)
       shadowdom
 - upgrade
     - https://github.com/servo/servo/pull/34793	(@nicoburns, #34793)	Upgrade rustc to 1.83 (#34793)
