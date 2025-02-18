@@ -51,6 +51,15 @@ Other embedding improvements include:
 - Simplifying types used by consumers of libservo (@delan, @mrobinson, #35156)
 - Making it easier to build Servo without crown (@jdm, #35055)
 
+## Other changes
+
+We’ve reworked Servo’s **preferences system**, making all prefs optional with reasonable defaults (@mrobinson, #34966, #34999, #34994).
+As a result:
+
+- **The names of all preferences have changed**; see the [Prefs docs](https://doc.servo.org/servo_config/prefs/struct.Preferences.html) for a list
+- **Embedders no longer need a `prefs.json`** resource to get Servo running
+- Some debug options were converted to preferences (@mrobinson, #34998)
+
 ## Donations
 
 ## Conference talks
@@ -213,13 +222,13 @@ Other embedding improvements include:
     - https://github.com/servo/servo/pull/34744	(@dklassic, @mrobinson, #34744)	feat: Track the binary size for all the different platforms (#34744)
       perf
 - prefs
-    - https://github.com/servo/servo/pull/34994	(@mrobinson, #34994)	config: Remove legacy-layout and unused `Preferences` and `Opts` (#34994)
+    - /https://github.com/servo/servo/pull/34994	(@mrobinson, #34994)	config: Remove legacy-layout and unused `Preferences` and `Opts` (#34994)
       prefs
-    - https://github.com/servo/servo/pull/34966	(@mrobinson, #34966)	api: Flatten and simplify Servo preferences (#34966)
+    - /https://github.com/servo/servo/pull/34966	(@mrobinson, #34966)	api: Flatten and simplify Servo preferences (#34966)
       prefs; major rework that renames all existing prefs (see <https://doc.servo.org/servo_config/prefs/struct.Preferences.html>)
-    - https://github.com/servo/servo/pull/34999	(@mrobinson, #34999)	Remove `resources/prefs.json` (#34999)
+    - /https://github.com/servo/servo/pull/34999	(@mrobinson, #34999)	Remove `resources/prefs.json` (#34999)
       prefs
-    - https://github.com/servo/servo/pull/34998	(@mrobinson, #34998)	prefs: Move some `DebugOptions` to `Preferences` and clean up (#34998)
+    - /https://github.com/servo/servo/pull/34998	(@mrobinson, #34998)	prefs: Move some `DebugOptions` to `Preferences` and clean up (#34998)
       prefs; renames some debug options to prefs
 - script
     - https://github.com/servo/servo/pull/34359	(@jdm, #34359)	Support future uses of traits with associated types in rooting analysis (#34359)
