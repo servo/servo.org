@@ -253,6 +253,8 @@ As a result:</p>
 <li><strong>Embedders no longer need a <code>prefs.json</code></strong> resource to get Servo running</li>
 <li>Some debug options were converted to preferences (@mrobinson, #34998)</li>
 </ul>
+<p>Servo’s networking is more efficient now, with the ability to <strong>cancel fetches for navigation</strong> that contain redirects (@mrobinson, #34919) and <strong>cancel fetches for &lt;video&gt; and &lt;media&gt;</strong> when the document is unloaded (@mrobinson, #34883).
+Those changes also <strong>eliminate per-request IPC channels</strong> for navigation and cancellation respectively, and in the same vein, we’ve eliminated them for image loading too (@mrobinson, #35041).</p>
 <p>Devtools now <strong>highlights console.log() arguments</strong> according to their types (@simonwuelker, #34810).</p>
 <p>We’ve continued <strong>splitting up our massive script crate</strong> (@jdm, #34359, #35157, #35169, #35172), which will eventually make Servo much faster to build.</p>
 <p>A few crashes have been fixed, including when exiting Servo (@mukilan, #34917), when using the <a href="https://book.servo.org/hacking/profiling.html#memory-profiling">internal memory profiler</a> (@jdm, #35058), and when running ResizeObserver callbacks (@willypuzzle, #35168).</p>
@@ -422,13 +424,13 @@ For more details, head to our <a href="/blog-january-2025/sponsorship/">Sponsors
     - /https://github.com/servo/servo/pull/35207	(@Loirooriol, #35207)	layout: Remove wrong optimization when placing table among floats (#35207)
       layout; table float interaction
 - net
-    - https://github.com/servo/servo/pull/34919	(@mrobinson, #34919)	script: Move navigation fetching to the `ScriptThread` (#34919)
+    - /https://github.com/servo/servo/pull/34919	(@mrobinson, #34919)	script: Move navigation fetching to the `ScriptThread` (#34919)
       net; network perf
-    - https://github.com/servo/servo/pull/34883	(@mrobinson, #34883)	net: Use `RequestId` to cancel fetches instead of creating an IPC channel (#34883)
+    - /https://github.com/servo/servo/pull/34883	(@mrobinson, #34883)	net: Use `RequestId` to cancel fetches instead of creating an IPC channel (#34883)
       net; network perf
     - https://github.com/servo/servo/pull/34797	(@rayguo17, #34797)	Add Content Range Header and add one for blob end range (#34797)
       net; correct handling of Range requests
-    - https://github.com/servo/servo/pull/35041	(@mrobinson, #35041)	script: Do not set up an IPC route for every image load (#35041)
+    - /https://github.com/servo/servo/pull/35041	(@mrobinson, #35041)	script: Do not set up an IPC route for every image load (#35041)
       net; network perf (dota2.com)
 - ohos
     - https://github.com/servo/servo/pull/35158	(@jschwe, #35158)	ohos: Support resizing the surface (#35158)
