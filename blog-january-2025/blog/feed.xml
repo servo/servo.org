@@ -34,6 +34,10 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Streams&lt;/strong&gt; are a lot more useful now, with &lt;strong&gt;ReadableStreamBYOBReader&lt;/strong&gt; now supporting &lt;strong&gt;read()&lt;/strong&gt; (@Taym95, #35040), &lt;strong&gt;cancel()&lt;/strong&gt;, &lt;strong&gt;close()&lt;/strong&gt;, and &lt;strong&gt;releaseLock()&lt;/strong&gt; (@Taym95, #34958).&lt;/p&gt;
 &lt;p&gt;Servo now &lt;strong&gt;passes &lt;a href=&quot;https://wpt.servo.org/&quot;&gt;40.6%&lt;/a&gt;&lt;/strong&gt; (+7.5pp) of enabled &lt;strong&gt;Shadow DOM&lt;/strong&gt; tests, thanks to our landing support for the &lt;strong&gt;:host selector&lt;/strong&gt; (@simonwuelker, #34870) and the &lt;strong&gt;&amp;lt;slot&amp;gt; element&lt;/strong&gt; (@simonwuelker, #35013, #35177, #35191, #35221, #35137, #35222), plus improvements to event handling (@simonwuelker, #34788, #34884), script (@willypuzzle, #34787), style (@simonwuelker, @jdm, #35198, #35132), and the DOM tree (@simonwuelker, @Taym95, #34803, #34834, #34863, #34909, #35076).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Table layout&lt;/strong&gt; is significantly better now, particularly in ‘table-layout: fixed’ (@Loirooriol, #35170), table sizing (@Loirooriol, @mrobinson, #34889, #34947, #35167), rowspan sizing (@mrobinson, @Loirooriol, #35095), interaction with floats (@Loirooriol, #35207), and ‘border-collapse’ layout (@Loirooriol, #34932, #34908, #35097, #35122, #35165) and painting (@Loirooriol, #34933, #35003, #35100, #35075, #35129, #35163).&lt;/p&gt;
+&lt;p&gt;As a result, Servo now &lt;strong&gt;passes &lt;a href=&quot;https://wpt.servo.org/&quot;&gt;90.2%&lt;/a&gt;&lt;/strong&gt; (+11.5pp) of enabled &lt;strong&gt;CSS tables&lt;/strong&gt; tests, and of the tests that are in CSS 2, we now &lt;a href=&quot;https://wpt.fyi/results/css/CSS2/tables?sha=883995654d&amp;amp;label=master&amp;amp;max-count=1&amp;amp;product=chrome&amp;amp;product=servo&quot;&gt;&lt;strong&gt;pass more than Blink!&lt;/strong&gt;&lt;/a&gt;
+We literally stood on the shoulders of giants here, because this would not have been possible without &lt;a href=&quot;https://github.com/servo/servo/blob/3122de08f3571a4026e825dd3ef6412cb37abfae/components/layout_2020/table/mod.rs#L8-L11&quot;&gt;Blink’s&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/blob/3122de08f3571a4026e825dd3ef6412cb37abfae/components/layout_2020/table/layout.rs#L650-L654&quot;&gt;robust&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/blob/3122de08f3571a4026e825dd3ef6412cb37abfae/components/layout_2020/table/layout.rs#L1246-L1248&quot;&gt;table&lt;/a&gt; &lt;a href=&quot;https://github.com/servo/servo/blob/3122de08f3571a4026e825dd3ef6412cb37abfae/components/layout_2020/table/layout.rs#L1332-L1333&quot;&gt;impl&lt;/a&gt;.
+Despite their age, &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/9781&quot;&gt;tables&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/9916&quot;&gt;are&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/10132&quot;&gt;surprisingly&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/10133&quot;&gt;underspecified&lt;/a&gt;, &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/10881&quot;&gt;so&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/10885&quot;&gt;we&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/10937&quot;&gt;also&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/11171&quot;&gt;needed&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/11404&quot;&gt;to&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/11408&quot;&gt;report&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/11419&quot;&gt;several&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/11489&quot;&gt;spec&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/11504&quot;&gt;issues&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/11515&quot;&gt;along&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/11568&quot;&gt;the&lt;/a&gt; &lt;a href=&quot;https://github.com/w3c/csswg-drafts/issues/11570&quot;&gt;way&lt;/a&gt; (@Loirooriol).&lt;/p&gt;
 &lt;h2 id=&quot;embedding&quot; tabindex=&quot;-1&quot;&gt;Embedding &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-january-2025/blog/2025/02/14/this-month-in-servo/#embedding&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -65,6 +69,7 @@ As a result:&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;Embedders no longer need a &lt;code&gt;prefs.json&lt;/code&gt;&lt;/strong&gt; resource to get Servo running&lt;/li&gt;
 &lt;li&gt;Some debug options were converted to preferences (@mrobinson, #34998)&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;We’ve continued &lt;strong&gt;splitting up our massive script crate&lt;/strong&gt; (@jdm, #34359, #35157, #35169, #35172), which will eventually make Servo much faster to build.&lt;/p&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog-january-2025/blog/2025/02/14/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -165,33 +170,33 @@ As a result:&lt;/p&gt;
 - layout
     - https://github.com/servo/servo/pull/32103	(@Loirooriol, #32103)	Treat % as 0 for the min-content contribution of replaced elements (#32103)
       layout; img inside float (dn.se)
-    - https://github.com/servo/servo/pull/34933	(@Loirooriol, #34933)	layout: Improve painting of collapsed borders in table layout (#34933)
+    - /https://github.com/servo/servo/pull/34933	(@Loirooriol, #34933)	layout: Improve painting of collapsed borders in table layout (#34933)
       layout; table ‘border-collapse’ painting
-    - https://github.com/servo/servo/pull/34932	(@Loirooriol, #34932)	layout: Improve sizing of tables in collapsed-borders mode (#34932)
+    - /https://github.com/servo/servo/pull/34932	(@Loirooriol, #34932)	layout: Improve sizing of tables in collapsed-borders mode (#34932)
       layout; table ‘border-collapse’ sizing
     - https://github.com/servo/servo/pull/34931	(@Loirooriol, #34931)	layout: Don&#39;t recalculate the PaddingBorderMargin in table layout (#34931)
       layout; table layout perf
-    - https://github.com/servo/servo/pull/34908	(@Loirooriol, #34908)	layout: Set padding to zero on tables in collapsed-borders mode (#34908)
+    - /https://github.com/servo/servo/pull/34908	(@Loirooriol, #34908)	layout: Set padding to zero on tables in collapsed-borders mode (#34908)
       layout; table ‘border-collapse’ layout
-    - https://github.com/servo/servo/pull/34889	(@Loirooriol, #34889)	layout: Defer some table sizing logic to the parent formatting context (#34889)
+    - /https://github.com/servo/servo/pull/34889	(@Loirooriol, #34889)	layout: Defer some table sizing logic to the parent formatting context (#34889)
       layout; correct table sizing
     - https://github.com/servo/servo/pull/34907	(@Loirooriol, #34907)	layout: Refine the check for dependending on available space (#34907)
       layout; float layout perf
-    - https://github.com/servo/servo/pull/34947	(@Loirooriol, #34947)	layout: Improve logic for block size of table (#34947)
+    - /https://github.com/servo/servo/pull/34947	(@Loirooriol, #34947)	layout: Improve logic for block size of table (#34947)
       layout; table sizing
     - https://github.com/servo/servo/pull/34923	(@mrobinson, @Loirooriol, #34923)	layout: Make `Fragment` hold `ArcRefCell` inside (#34923)
       layout; memory savings (also towards incremental layout)
     - https://github.com/servo/servo/pull/34984	(@rayguo17, @mrobinson, #34984)	layout: Make non-`normal` `align-content` establish a block formatting context (#34984)
       layout; ‘align-content’
-    - https://github.com/servo/servo/pull/35003	(@Loirooriol, #35003)	layout: Allow different collapsed border style/color within a row/column (#35003)
+    - /https://github.com/servo/servo/pull/35003	(@Loirooriol, #35003)	layout: Allow different collapsed border style/color within a row/column (#35003)
       layout; table ‘border-collapse’ painting
-    - https://github.com/servo/servo/pull/35097	(@Loirooriol, #35097)	layout: Fix border widths of table wrapper with collapsed borders (#35097)
+    - /https://github.com/servo/servo/pull/35097	(@Loirooriol, #35097)	layout: Fix border widths of table wrapper with collapsed borders (#35097)
       layout; table ‘border-collapse’ layout
-    - https://github.com/servo/servo/pull/35100	(@Loirooriol, #35100)	layout: Fix conflict resolution for collapsed borders differing in color (#35100)
+    - /https://github.com/servo/servo/pull/35100	(@Loirooriol, #35100)	layout: Fix conflict resolution for collapsed borders differing in color (#35100)
       layout; table ‘border-collapse’ painting
-    - https://github.com/servo/servo/pull/35095	(@mrobinson, @Loirooriol, #35095)	layout: Improve distribution colspan cell inline size (#35095)
+    - /https://github.com/servo/servo/pull/35095	(@mrobinson, @Loirooriol, #35095)	layout: Improve distribution colspan cell inline size (#35095)
       layout; table rowspan sizing
-    - https://github.com/servo/servo/pull/35075	(@Loirooriol, #35075)	layout: Paint collapsed table borders on their own (#35075)
+    - /https://github.com/servo/servo/pull/35075	(@Loirooriol, #35075)	layout: Paint collapsed table borders on their own (#35075)
       layout; table ‘border-collapse’ painting
     - https://github.com/servo/servo/pull/35038	(@webbeef, #35038)	Add support for HTMLStyleElement.type (#35038)
       layout
@@ -199,19 +204,19 @@ As a result:&lt;/p&gt;
       api layout
     - https://github.com/servo/servo/pull/35085	(@Loirooriol, #35085)	layout: Respect alignment when sizing replaced abspos (#35085)
       layout; replaced abspos sizing
-    - https://github.com/servo/servo/pull/35129	(@Loirooriol, #35129)	layout: Hide collapsed borders crossed by spanning cells (#35129)
+    - /https://github.com/servo/servo/pull/35129	(@Loirooriol, #35129)	layout: Hide collapsed borders crossed by spanning cells (#35129)
       layout; table ‘border-collapse’ painting
-    - https://github.com/servo/servo/pull/35122	(@Loirooriol, #35122)	layout: Fix table geometry when collapsed borders have different sizes (#35122)
+    - /https://github.com/servo/servo/pull/35122	(@Loirooriol, #35122)	layout: Fix table geometry when collapsed borders have different sizes (#35122)
       layout; table ‘border-collapse’ layout
-    - https://github.com/servo/servo/pull/35165	(@Loirooriol, #35165)	layout: Zero out collapsed track sizes when painting collapsed borders (#35165)
+    - /https://github.com/servo/servo/pull/35165	(@Loirooriol, #35165)	layout: Zero out collapsed track sizes when painting collapsed borders (#35165)
       layout; table ‘border-collapse’ layout
-    - https://github.com/servo/servo/pull/35163	(@Loirooriol, #35163)	layout: Correctly resolve `currentcolor` on collapsed borders (#35163)
+    - /https://github.com/servo/servo/pull/35163	(@Loirooriol, #35163)	layout: Correctly resolve `currentcolor` on collapsed borders (#35163)
       layout; ‘border-collapse’
-    - https://github.com/servo/servo/pull/35167	(@mrobinson, @Loirooriol, #35167)	layout: Take perentage columns into account when sizing table grid min and max (#35167)
+    - /https://github.com/servo/servo/pull/35167	(@mrobinson, @Loirooriol, #35167)	layout: Take perentage columns into account when sizing table grid min and max (#35167)
       layout; table sizing with ‘width: %’ cell
-    - https://github.com/servo/servo/pull/35170	(@Loirooriol, #35170)	layout: Improve fixed table layout (#35170)
+    - /https://github.com/servo/servo/pull/35170	(@Loirooriol, #35170)	layout: Improve fixed table layout (#35170)
       layout; ‘table-layout: fixed’ interop
-    - https://github.com/servo/servo/pull/35207	(@Loirooriol, #35207)	layout: Remove wrong optimization when placing table among floats (#35207)
+    - /https://github.com/servo/servo/pull/35207	(@Loirooriol, #35207)	layout: Remove wrong optimization when placing table among floats (#35207)
       layout; table float interaction
 - net
     - https://github.com/servo/servo/pull/34919	(@mrobinson, #34919)	script: Move navigation fetching to the `ScriptThread` (#34919)
@@ -238,13 +243,13 @@ As a result:&lt;/p&gt;
     - /https://github.com/servo/servo/pull/34998	(@mrobinson, #34998)	prefs: Move some `DebugOptions` to `Preferences` and clean up (#34998)
       prefs; renames some debug options to prefs
 - script
-    - https://github.com/servo/servo/pull/34359	(@jdm, #34359)	Support future uses of traits with associated types in rooting analysis (#34359)
+    - /https://github.com/servo/servo/pull/34359	(@jdm, #34359)	Support future uses of traits with associated types in rooting analysis (#34359)
       script; towards splitting script crate
-    - https://github.com/servo/servo/pull/35157	(@jdm, #35157)	script: Move code generation and webidl files to new script_bindings crate. (#35157)
+    - /https://github.com/servo/servo/pull/35157	(@jdm, #35157)	script: Move code generation and webidl files to new script_bindings crate. (#35157)
       script; towards splitting script crate
-    - https://github.com/servo/servo/pull/35169	(@jdm, #35169)	Make generated bindings generic over DOM types (#35169)
+    - /https://github.com/servo/servo/pull/35169	(@jdm, #35169)	Make generated bindings generic over DOM types (#35169)
       script; towards splitting script crate
-    - https://github.com/servo/servo/pull/35172	(@jdm, #35172)	bindings: Move string-related bindings code to script_bindings. (#35172)
+    - /https://github.com/servo/servo/pull/35172	(@jdm, #35172)	bindings: Move string-related bindings code to script_bindings. (#35172)
       script; towards splitting script crate
 - shadowdom
     - /https://github.com/servo/servo/pull/34803	(@simonwuelker, #34803)	Fix IS_IN_SHADOW_TREE flag for descendants after Node::remove call (#34803)
