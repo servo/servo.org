@@ -63,6 +63,8 @@ As a result:
 - **Embedders no longer need a `prefs.json`** resource to get Servo running
 - Some debug options were converted to preferences (@mrobinson, #34998)
 
+We’ve continued **splitting up our massive script crate** (@jdm, #34359, #35157, #35169, #35172), which will eventually make Servo much faster to build.
+
 ## Donations
 
 ## Conference talks
@@ -234,13 +236,13 @@ As a result:
     - /https://github.com/servo/servo/pull/34998	(@mrobinson, #34998)	prefs: Move some `DebugOptions` to `Preferences` and clean up (#34998)
       prefs; renames some debug options to prefs
 - script
-    - https://github.com/servo/servo/pull/34359	(@jdm, #34359)	Support future uses of traits with associated types in rooting analysis (#34359)
+    - /https://github.com/servo/servo/pull/34359	(@jdm, #34359)	Support future uses of traits with associated types in rooting analysis (#34359)
       script; towards splitting script crate
-    - https://github.com/servo/servo/pull/35157	(@jdm, #35157)	script: Move code generation and webidl files to new script_bindings crate. (#35157)
+    - /https://github.com/servo/servo/pull/35157	(@jdm, #35157)	script: Move code generation and webidl files to new script_bindings crate. (#35157)
       script; towards splitting script crate
-    - https://github.com/servo/servo/pull/35169	(@jdm, #35169)	Make generated bindings generic over DOM types (#35169)
+    - /https://github.com/servo/servo/pull/35169	(@jdm, #35169)	Make generated bindings generic over DOM types (#35169)
       script; towards splitting script crate
-    - https://github.com/servo/servo/pull/35172	(@jdm, #35172)	bindings: Move string-related bindings code to script_bindings. (#35172)
+    - /https://github.com/servo/servo/pull/35172	(@jdm, #35172)	bindings: Move string-related bindings code to script_bindings. (#35172)
       script; towards splitting script crate
 - shadowdom
     - /https://github.com/servo/servo/pull/34803	(@simonwuelker, #34803)	Fix IS_IN_SHADOW_TREE flag for descendants after Node::remove call (#34803)
