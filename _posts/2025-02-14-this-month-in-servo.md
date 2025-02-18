@@ -28,6 +28,12 @@ We’ve landed a bunch of **HTMLCanvasElement** improvements:
 
 Servo now **passes [40.6%](https://wpt.servo.org)** (+7.5pp) of enabled **Shadow DOM** tests, thanks to our landing support for the **:host selector** (@simonwuelker, #34870) and the **&lt;slot> element** (@simonwuelker, #35013, #35177, #35191, #35221, #35137, #35222), plus improvements to event handling (@simonwuelker, #34788, #34884), script (@willypuzzle, #34787), style (@simonwuelker, @jdm, #35198, #35132), and the DOM tree (@simonwuelker, @Taym95, #34803, #34834, #34863, #34909, #35076).
 
+**Table layout** is significantly better now, particularly in ‘table-layout: fixed’ (@Loirooriol, #35170), table sizing (@Loirooriol, @mrobinson, #34889, #34947, #35167), rowspan sizing (@mrobinson, @Loirooriol, #35095), interaction with floats (@Loirooriol, #35207), and ‘border-collapse’ layout (@Loirooriol, #34932, #34908, #35097, #35122, #35165) and painting (@Loirooriol, #34933, #35003, #35100, #35075, #35129, #35163).
+
+As a result, Servo now **passes [90.2%](https://wpt.servo.org)** (+11.5pp) of enabled **CSS tables** tests, and of the tests that are in CSS 2, we now [**pass more than Blink!**](https://wpt.fyi/results/css/CSS2/tables?sha=883995654d&label=master&max-count=1&product=chrome&product=servo)
+We literally stood on the shoulders of giants here, because this would not have been possible without [Blink’s](https://github.com/servo/servo/blob/3122de08f3571a4026e825dd3ef6412cb37abfae/components/layout_2020/table/mod.rs#L8-L11) [robust](https://github.com/servo/servo/blob/3122de08f3571a4026e825dd3ef6412cb37abfae/components/layout_2020/table/layout.rs#L650-L654) [table](https://github.com/servo/servo/blob/3122de08f3571a4026e825dd3ef6412cb37abfae/components/layout_2020/table/layout.rs#L1246-L1248) [impl](https://github.com/servo/servo/blob/3122de08f3571a4026e825dd3ef6412cb37abfae/components/layout_2020/table/layout.rs#L1332-L1333).
+Despite their age, [tables](https://github.com/w3c/csswg-drafts/issues/9781) [are](https://github.com/w3c/csswg-drafts/issues/9916) [surprisingly](https://github.com/w3c/csswg-drafts/issues/10132) [underspecified](https://github.com/w3c/csswg-drafts/issues/10133), [so](https://github.com/w3c/csswg-drafts/issues/10881) [we](https://github.com/w3c/csswg-drafts/issues/10885) [also](https://github.com/w3c/csswg-drafts/issues/10937) [needed](https://github.com/w3c/csswg-drafts/issues/11171) [to](https://github.com/w3c/csswg-drafts/issues/11404) [report](https://github.com/w3c/csswg-drafts/issues/11408) [several](https://github.com/w3c/csswg-drafts/issues/11419) [spec](https://github.com/w3c/csswg-drafts/issues/11489) [issues](https://github.com/w3c/csswg-drafts/issues/11504) [along](https://github.com/w3c/csswg-drafts/issues/11515) [the](https://github.com/w3c/csswg-drafts/issues/11568) [way](https://github.com/w3c/csswg-drafts/issues/11570) (@Loirooriol).
+
 ## Embedding
 
 Servo aims to be an embeddable web engine, but so far it’s been a lot harder to embed Servo than it should be.
@@ -163,33 +169,33 @@ We’ve continued **splitting up our massive script crate** (@jdm, #34359, #3515
 - layout
     - https://github.com/servo/servo/pull/32103	(@Loirooriol, #32103)	Treat % as 0 for the min-content contribution of replaced elements (#32103)
       layout; img inside float (dn.se)
-    - https://github.com/servo/servo/pull/34933	(@Loirooriol, #34933)	layout: Improve painting of collapsed borders in table layout (#34933)
+    - /https://github.com/servo/servo/pull/34933	(@Loirooriol, #34933)	layout: Improve painting of collapsed borders in table layout (#34933)
       layout; table ‘border-collapse’ painting
-    - https://github.com/servo/servo/pull/34932	(@Loirooriol, #34932)	layout: Improve sizing of tables in collapsed-borders mode (#34932)
+    - /https://github.com/servo/servo/pull/34932	(@Loirooriol, #34932)	layout: Improve sizing of tables in collapsed-borders mode (#34932)
       layout; table ‘border-collapse’ sizing
     - https://github.com/servo/servo/pull/34931	(@Loirooriol, #34931)	layout: Don't recalculate the PaddingBorderMargin in table layout (#34931)
       layout; table layout perf
-    - https://github.com/servo/servo/pull/34908	(@Loirooriol, #34908)	layout: Set padding to zero on tables in collapsed-borders mode (#34908)
+    - /https://github.com/servo/servo/pull/34908	(@Loirooriol, #34908)	layout: Set padding to zero on tables in collapsed-borders mode (#34908)
       layout; table ‘border-collapse’ layout
-    - https://github.com/servo/servo/pull/34889	(@Loirooriol, #34889)	layout: Defer some table sizing logic to the parent formatting context (#34889)
+    - /https://github.com/servo/servo/pull/34889	(@Loirooriol, #34889)	layout: Defer some table sizing logic to the parent formatting context (#34889)
       layout; correct table sizing
     - https://github.com/servo/servo/pull/34907	(@Loirooriol, #34907)	layout: Refine the check for dependending on available space (#34907)
       layout; float layout perf
-    - https://github.com/servo/servo/pull/34947	(@Loirooriol, #34947)	layout: Improve logic for block size of table (#34947)
+    - /https://github.com/servo/servo/pull/34947	(@Loirooriol, #34947)	layout: Improve logic for block size of table (#34947)
       layout; table sizing
     - https://github.com/servo/servo/pull/34923	(@mrobinson, @Loirooriol, #34923)	layout: Make `Fragment` hold `ArcRefCell` inside (#34923)
       layout; memory savings (also towards incremental layout)
     - https://github.com/servo/servo/pull/34984	(@rayguo17, @mrobinson, #34984)	layout: Make non-`normal` `align-content` establish a block formatting context (#34984)
       layout; ‘align-content’
-    - https://github.com/servo/servo/pull/35003	(@Loirooriol, #35003)	layout: Allow different collapsed border style/color within a row/column (#35003)
+    - /https://github.com/servo/servo/pull/35003	(@Loirooriol, #35003)	layout: Allow different collapsed border style/color within a row/column (#35003)
       layout; table ‘border-collapse’ painting
-    - https://github.com/servo/servo/pull/35097	(@Loirooriol, #35097)	layout: Fix border widths of table wrapper with collapsed borders (#35097)
+    - /https://github.com/servo/servo/pull/35097	(@Loirooriol, #35097)	layout: Fix border widths of table wrapper with collapsed borders (#35097)
       layout; table ‘border-collapse’ layout
-    - https://github.com/servo/servo/pull/35100	(@Loirooriol, #35100)	layout: Fix conflict resolution for collapsed borders differing in color (#35100)
+    - /https://github.com/servo/servo/pull/35100	(@Loirooriol, #35100)	layout: Fix conflict resolution for collapsed borders differing in color (#35100)
       layout; table ‘border-collapse’ painting
-    - https://github.com/servo/servo/pull/35095	(@mrobinson, @Loirooriol, #35095)	layout: Improve distribution colspan cell inline size (#35095)
+    - /https://github.com/servo/servo/pull/35095	(@mrobinson, @Loirooriol, #35095)	layout: Improve distribution colspan cell inline size (#35095)
       layout; table rowspan sizing
-    - https://github.com/servo/servo/pull/35075	(@Loirooriol, #35075)	layout: Paint collapsed table borders on their own (#35075)
+    - /https://github.com/servo/servo/pull/35075	(@Loirooriol, #35075)	layout: Paint collapsed table borders on their own (#35075)
       layout; table ‘border-collapse’ painting
     - https://github.com/servo/servo/pull/35038	(@webbeef, #35038)	Add support for HTMLStyleElement.type (#35038)
       layout
@@ -197,19 +203,19 @@ We’ve continued **splitting up our massive script crate** (@jdm, #34359, #3515
       api layout
     - https://github.com/servo/servo/pull/35085	(@Loirooriol, #35085)	layout: Respect alignment when sizing replaced abspos (#35085)
       layout; replaced abspos sizing
-    - https://github.com/servo/servo/pull/35129	(@Loirooriol, #35129)	layout: Hide collapsed borders crossed by spanning cells (#35129)
+    - /https://github.com/servo/servo/pull/35129	(@Loirooriol, #35129)	layout: Hide collapsed borders crossed by spanning cells (#35129)
       layout; table ‘border-collapse’ painting
-    - https://github.com/servo/servo/pull/35122	(@Loirooriol, #35122)	layout: Fix table geometry when collapsed borders have different sizes (#35122)
+    - /https://github.com/servo/servo/pull/35122	(@Loirooriol, #35122)	layout: Fix table geometry when collapsed borders have different sizes (#35122)
       layout; table ‘border-collapse’ layout
-    - https://github.com/servo/servo/pull/35165	(@Loirooriol, #35165)	layout: Zero out collapsed track sizes when painting collapsed borders (#35165)
+    - /https://github.com/servo/servo/pull/35165	(@Loirooriol, #35165)	layout: Zero out collapsed track sizes when painting collapsed borders (#35165)
       layout; table ‘border-collapse’ layout
-    - https://github.com/servo/servo/pull/35163	(@Loirooriol, #35163)	layout: Correctly resolve `currentcolor` on collapsed borders (#35163)
+    - /https://github.com/servo/servo/pull/35163	(@Loirooriol, #35163)	layout: Correctly resolve `currentcolor` on collapsed borders (#35163)
       layout; ‘border-collapse’
-    - https://github.com/servo/servo/pull/35167	(@mrobinson, @Loirooriol, #35167)	layout: Take perentage columns into account when sizing table grid min and max (#35167)
+    - /https://github.com/servo/servo/pull/35167	(@mrobinson, @Loirooriol, #35167)	layout: Take perentage columns into account when sizing table grid min and max (#35167)
       layout; table sizing with ‘width: %’ cell
-    - https://github.com/servo/servo/pull/35170	(@Loirooriol, #35170)	layout: Improve fixed table layout (#35170)
+    - /https://github.com/servo/servo/pull/35170	(@Loirooriol, #35170)	layout: Improve fixed table layout (#35170)
       layout; ‘table-layout: fixed’ interop
-    - https://github.com/servo/servo/pull/35207	(@Loirooriol, #35207)	layout: Remove wrong optimization when placing table among floats (#35207)
+    - /https://github.com/servo/servo/pull/35207	(@Loirooriol, #35207)	layout: Remove wrong optimization when placing table among floats (#35207)
       layout; table float interaction
 - net
     - https://github.com/servo/servo/pull/34919	(@mrobinson, #34919)	script: Move navigation fetching to the `ScriptThread` (#34919)
