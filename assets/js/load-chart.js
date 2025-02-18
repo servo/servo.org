@@ -193,6 +193,7 @@ function setupChart () {
 
             area_dropdown.onchange = update_chart
             period_dropdown.onchange = update_chart
+            addEventListener("resize", update_chart);
             if (window.matchMedia) {
                 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
                     dark_mode = matches
