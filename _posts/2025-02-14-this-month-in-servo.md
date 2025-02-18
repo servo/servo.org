@@ -71,6 +71,8 @@ As a result:
 
 We’ve continued **splitting up our massive script crate** (@jdm, #34359, #35157, #35169, #35172), which will eventually make Servo much faster to build.
 
+A few crashes have been fixed, including when exiting Servo (@mukilan, #34917), when using the [internal memory profiler](https://book.servo.org/hacking/profiling.html#memory-profiling) (@jdm, #35058), and when running ResizeObserver callbacks (@willypuzzle, #35168).
+
 ## Donations
 
 Thanks again for your generous support!
@@ -152,11 +154,11 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - https://github.com/servo/servo/pull/35006	(@jschwe, @mukilan, #35006)	CI: Test ohos on HarmonyOS device (#35006)
       ci
 - crash
-    - https://github.com/servo/servo/pull/34917	(@mukilan, #34917)	webgl: shutdown webrender before acknowledging Exit message (#34917)
+    - /https://github.com/servo/servo/pull/34917	(@mukilan, #34917)	webgl: shutdown webrender before acknowledging Exit message (#34917)
       crash
-    - https://github.com/servo/servo/pull/35058	(@jdm, #35058)	Fix crash when using builtin memory profiler (#35058)
+    - /https://github.com/servo/servo/pull/35058	(@jdm, #35058)	Fix crash when using builtin memory profiler (#35058)
       crash
-    - https://github.com/servo/servo/pull/35168	(@willypuzzle, #35168)	[35131] Borrow hazard in Document::broadcast_active_resize_observations (#35168)
+    - /https://github.com/servo/servo/pull/35168	(@willypuzzle, #35168)	[35131] Borrow hazard in Document::broadcast_active_resize_observations (#35168)
       crash
 - dev
     - https://github.com/servo/servo/pull/34810	(@simonwuelker, #34810)	Support syntax highlighting of arguments in the devtools console (#34810)
