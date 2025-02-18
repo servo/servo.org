@@ -69,6 +69,8 @@ As a result:
 - **Embedders no longer need a `prefs.json`** resource to get Servo running
 - Some debug options were converted to preferences (@mrobinson, #34998)
 
+Devtools now **highlights console.log() arguments** according to their types (@simonwuelker, #34810).
+
 We’ve continued **splitting up our massive script crate** (@jdm, #34359, #35157, #35169, #35172), which will eventually make Servo much faster to build.
 
 A few crashes have been fixed, including when exiting Servo (@mukilan, #34917), when using the [internal memory profiler](https://book.servo.org/hacking/profiling.html#memory-profiling) (@jdm, #35058), and when running ResizeObserver callbacks (@willypuzzle, #35168).
@@ -168,7 +170,7 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - https://github.com/servo/servo/pull/35228	(@mrobinson, #35228)	Merge webxr repository (#35228)
       dev
 - devtools
-    - https://github.com/servo/servo/pull/34810	(@simonwuelker, #34810)	Support syntax highlighting of arguments in the devtools console (#34810)
+    - /https://github.com/servo/servo/pull/34810	(@simonwuelker, #34810)	Support syntax highlighting of arguments in the devtools console (#34810)
       devtools
 - embedding
     - /https://github.com/servo/servo/pull/34780	(@wusyong, #34780)	chore: remove `WindowMethods::rendering_context` (#34780)
