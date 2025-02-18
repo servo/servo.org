@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Two months in Servo: better inline layout, stable Rust, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="Two months in Servo: better inline layout, stable Rust, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  
+
+  
+  <meta name="description" content="Improved control over typography, very early support for sticky positioning and tables, plus updates to our minibrowser and build tooling.">
+  <meta name="og:description" content="Improved control over typography, very early support for sticky positioning and tables, plus updates to our minibrowser and build tooling.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/made-with-page/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/made-with-page/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/made-with-page/blog/2024/01/26/two-months-in-servo/">
+
+  <link rel="stylesheet" href="/made-with-page/css/style.css">
+  <link rel="shortcut icon" href="/made-with-page/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/made-with-page/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="inner-container">
+      <div class="navbar-brand">
+        <a href="/made-with-page/">
+          <img src="/made-with-page/img/servo-color.png" alt="Two months in Servo: better inline layout, stable Rust, and more!">
+        </a>
+
+        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="navbar-menu" id="navbar-menu">
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            " href="#">
+                Get Involved
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a class="navbar-item" href="/made-with-page/contributing/">
+                    Contributing
+                  </a>
+                
+                  <a class="navbar-item" href="https://book.servo.org" target="_blank">
+                    Servo Book
+                  </a>
+                
+                  <a class="navbar-item" href="/made-with-page/wpt/">
+                    WPT pass rates
+                  </a>
+                
+                  <a class="navbar-item" href="/made-with-page/coc/">
+                    Code of Conduct
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+          
+          
+            <a class="navbar-item" href="/made-with-page/download/">
+              Download
+            </a>
+          
+        
+          
+          
+            <a class="navbar-item" href="/made-with-page/blog/">
+              Blog
+            </a>
+          
+        
+          
+          
+            <a class="navbar-item" href="https://demo.servo.org/" target="_blank">
+              Demos
+            </a>
+          
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            " href="#">
+                About
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a class="navbar-item" href="/made-with-page/about/">
+                    About Servo
+                  </a>
+                
+                  <a class="navbar-item" href="/made-with-page/made-with/">
+                    Made with Servo
+                  </a>
+                
+                  <a class="navbar-item" href="https://github.com/servo/project/blob/main/governance/README.md" target="_blank">
+                    Governance
+                  </a>
+                
+                  <a class="navbar-item" href="/made-with-page/sponsorship/">
+                    Sponsorship
+                  </a>
+                
+                  <a class="navbar-item" href="/made-with-page/acknowledgements/">
+                    Acknowledgements
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+        <div class="navbar-end">
+    
+      <a class="social-link is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="social-link is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="social-link is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="social-link is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+</div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburgerMenu');
+  const menu = document.getElementById('navbar-menu');
+
+  const toggleMenu = () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('is-active', isExpanded);
+  };
+
+  // Toggle on click
+  hamburger.addEventListener('click', toggleMenu);
+
+
+</script>
+          <div class="content" id="Two months in Servo: better inline layout, stable Rust, and more!">
+            
+<div class="blog-hero">
+  <div class="container">
+    <div class="inner-container">
+    <h1 class="title">Two months in Servo: better inline layout, stable Rust, and more!</h1>
+      <p class="subtitle">Improved control over typography, very early support for sticky positioning and tables, plus updates to our minibrowser and build tooling.</p>
+      <p class="posted">Posted <span class="tag is-dark">2024-01-26</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="inner-container blog-content">
+  <figure class="_figr"><a href="/made-with-page/img/blog/layout-2020-justify.png"><img src="/made-with-page/img/blog/layout-2020-justify.png"
+    alt="Servo nightly showing support for ‘text-align-last’, ‘text-align: justify’, ‘vertical-align: baseline’, and ‘position: sticky’"></a></figure>
+<p>Servo has had some exciting changes land in our nightly builds over the last month:</p>
+<ul>
+<li>as of 2023-12-27, the ‘text-align-last’ property is now supported (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30905">#30905</a>)</li>
+<li>as of 2023-12-27, ‘text-align: justify’ is now supported (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30807">#30807</a>, <a href="https://github.com/servo/servo/pull/30866">#30866</a>)</li>
+<li>as of 2024-01-09, ‘line-height’ and ‘vertical-align’ are now moderately supported (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30902">#30902</a>)</li>
+<li>as of 2024-01-24, ‘Event#composedPath()’ is now supported (<a href="https://github.com/gterzian">@gterzian</a>, <a href="https://github.com/servo/servo/pull/31123">#31123</a>)</li>
+</ul>
+<figure class="_figl"><a href="/made-with-page/img/blog/layout-2020-tables.png"><img src="/made-with-page/img/blog/layout-2020-tables.png"
+    alt="Servo nightly showing rudimentary support for table layouts when the pref is enabled"></a></figure>
+<p>We’ve started working on support for <strong>sticky positioning</strong> and <strong>tables</strong> in the new layout engine, with some very early sticky positioning code landing in 2023-11-30 (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30686">#30686</a>), the CSS tables tests now enabled (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31131">#31131</a>), and rudimentary table layout landing in 2024-01-20 under the <code>layout.tables.enabled</code> pref (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/Manishearth">@Manishearth</a>, <a href="https://github.com/servo/servo/pull/30799">#30799</a>, <a href="https://github.com/servo/servo/pull/30868">#30868</a>, <a href="https://github.com/servo/servo/pull/31121">#31121</a>).</p>
+<p>Geometry in our new layout engine is now being migrated from floating-point coordinates (<code>f32</code>) to <strong>fixed-point coordinates</strong> (<code>i32</code> × 1/60) (<a href="https://github.com/atbrakhi">@atbrakhi</a>, <a href="https://github.com/servo/servo/pull/30825">#30825</a>, <a href="https://github.com/servo/servo/pull/30894">#30894</a>, <a href="https://github.com/servo/servo/pull/31135">#31135</a>), similar to other engines like WebKit and Blink.
+While floating-point geometry was thought to be better for transformation-heavy content like SVG, the fact that larger values are less precise than smaller values causes a variety of rendering problems and test failures (<a href="https://github.com/servo/servo/issues/29819">#29819</a>).</p>
+<p>As a result of these changes, we’ve made big strides in our WPT pass rates:</p>
+<ul>
+<li><strong>CSS2 floats</strong> (+3.3pp to 84.9%) and <strong>floats-clear</strong> (+5.6pp to 78.9%) continue to surge</li>
+<li>we now surpass legacy layout in the <strong>CSS2 linebox</strong> tests (<strong>61.1% → 87.9%</strong>, legacy 86.4%)</li>
+<li>we now surpass legacy layout in the <strong>css-flexbox</strong> tests (49.5% → 52.7%, legacy 52.2%)</li>
+<li>we’ve closed 76% of the gap in <strong>key CSS2 tests</strong> (79.2% → 82.2%, legacy 83.1%)</li>
+</ul>
+<h2 id="updates%2C-servoshell%2C-and-stability" tabindex="-1">Updates, servoshell, and stability <a class="header-anchor" href="#updates%2C-servoshell%2C-and-stability">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><strong>GStreamer</strong> has been updated from 0.15 to 0.21 (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30750">#30750</a>), fixing long-standing breakage of video playback.
+<strong>WebGPU</strong> has been updated from 0.17 to 0.18 (<a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/servo/servo/pull/30926">#30926</a>, <a href="https://github.com/servo/servo/pull/30954">#30954</a>), and <strong>ANGLE</strong> has been updated from <a href="https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/3729">April 2019</a> to <a href="https://chromium.googlesource.com/angle/angle/+/refs/heads/chromium/5359">August 2023</a> (<a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/servo/servo/pull/30546">#30546</a>).</p>
+<figure class="_figr"><a href="/made-with-page/img/blog/back-forward.png"><img src="/made-with-page/img/blog/back-forward.png"
+    alt="Servo nightly showing Back and Forward buttons in the minibrowser"></a></figure>
+<p>Servo’s example browser now has <strong>Back and Forward buttons</strong> (<a href="https://github.com/atbrakhi">@atbrakhi</a>, <a href="https://github.com/servo/servo/pull/30805">#30805</a>), and no longer shows the incorrect location when navigation takes a long time (<a href="https://github.com/atbrakhi">@atbrakhi</a>, <a href="https://github.com/servo/servo/pull/30518">#30518</a>).</p>
+<p>Many stability improvements have landed, including fixes for a crash in inline layout (<a href="https://github.com/atbrakhi">@atbrakhi</a>, <a href="https://github.com/servo/servo/pull/30897">#30897</a>), three WebGPU-related crashes (<a href="https://github.com/lucasMontenegro">@lucasMontenegro</a>, <a href="https://github.com/gterzian">@gterzian</a>, <a href="https://github.com/Taym95">@Taym95</a>, <a href="https://github.com/servo/servo/pull/30888">#30888</a>, <a href="https://github.com/servo/servo/pull/30989">#30989</a>, <a href="https://github.com/servo/servo/pull/31002">#31002</a>), a crash in the PerformanceResourceTiming API (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/31063">#31063</a>), and several crashes due to script runtimes being dropped in the wrong order (<a href="https://github.com/gterzian">@gterzian</a>, <a href="https://github.com/servo/servo/pull/30896">#30896</a>).</p>
+<h2 id="ci%2C-code-health%2C-and-dev-changes" tabindex="-1">CI, code health, and dev changes <a class="header-anchor" href="#ci%2C-code-health%2C-and-dev-changes">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>The intermittent macOS build failures on CI should now be fixed (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30975">#30975</a>).</p>
+<p>Servo now has some preliminary Android build support (<a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/31086">#31086</a>), though more work needs to be done before Servo will run on Android.</p>
+<p>The long-term effort to simplify how Servo is built continues (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31075">#31075</a>), and we’ve replaced the <code>time</code> crate with <code>chrono</code> and <code>std::time</code> in much of Servo (<a href="https://github.com/Taym95">@Taym95</a>, <a href="https://github.com/augustebaum">@augustebaum</a>, <a href="https://github.com/servo/servo/pull/30927">#30927</a>, <a href="https://github.com/servo/servo/pull/31020">#31020</a>, <a href="https://github.com/servo/servo/pull/30639">#30639</a>, <a href="https://github.com/servo/servo/pull/31079">#31079</a>).
+We have also started migrating our DOM bindings to use typed arrays where possible (<a href="https://github.com/gterzian">@gterzian</a>, <a href="https://github.com/servo/servo/pull/30990">#30990</a>, <a href="https://github.com/servo/servo/pull/31077">#31077</a>, <a href="https://github.com/servo/servo/pull/31087">#31087</a>, <a href="https://github.com/servo/servo/pull/31076">#31076</a>, <a href="https://github.com/servo/servo/pull/31106">#31106</a>), as part of an effort to <strong>reduce our unsafe code surface</strong> (<a href="https://github.com/servo/servo/issues/30889">#30889</a>, <a href="https://github.com/servo/servo/issues/30862">#30862</a>).</p>
+<p>Several crates have been moved into <a href="https://github.com/servo/servo">our main repo</a>:</p>
+<ul>
+<li><code>hyper_serde</code> (<a href="https://github.com/servo/hyper_serde">servo/hyper_serde</a>) was moved to <code>components/hyper_serde</code> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30803">#30803</a>)</li>
+<li><code>device</code> (<a href="https://github.com/servo/devices">servo/devices</a>) was merged into <code>components/bluetooth</code> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30974">#30974</a>)</li>
+<li><code>blurmac</code> (<a href="https://github.com/servo/devices">servo/devices</a>) was moved to <code>third_party/blurmac</code> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30974">#30974</a>)</li>
+</ul>
+<p>We’ve also made some dev changes:</p>
+<ul>
+<li>the default branch in <a href="https://github.com/servo/servo">our main repo</a> is now <code>main</code> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/atouchet">@atouchet</a>, <a href="https://github.com/servo/servo/commit/23add0c1e5c9cbdf0301b891d265e363d049532b">23add0c1e5c9c</a>, <a href="https://github.com/servo/servo/pull/30877">#30877</a>)</li>
+<li>we now target <strong>Rust 1.74</strong> stable, marking the first time ever we have built without unstable features (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/30831">#30831</a>)</li>
+<li>we now require <strong>Python 3.10</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31088">#31088</a>), and you no longer need to install virtualenv (<a href="https://github.com/frewsxcv">@frewsxcv</a>, <a href="https://github.com/servo/servo/pull/30377">#30377</a>)</li>
+<li>we’ve fixed problems building Servo on <strong>Ubuntu 20.04</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31019">#31019</a>) and <strong>NixOS</strong> (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/31052">#31052</a>, <a href="https://github.com/servo/servo/pull/31055">#31055</a>, <a href="https://github.com/servo/servo/pull/30987">#30987</a>)</li>
+<li>we now support <strong>Visual Studio 2022</strong> on Windows (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/31148">#31148</a>), the same version that rustup installs by default</li>
+</ul>
+<h3 id="linux-build-issues" tabindex="-1">Linux build issues <a class="header-anchor" href="#linux-build-issues">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Several people have reported problems building Servo on newer Linux distro versions, particularly <a href="https://github.com/servo/servo/issues/31059">with clang 15</a> or <a href="https://github.com/servo/servo/issues/30587">with clang 16</a>.
+While we’re still working on fixing the underlying issues, there are some workarounds.
+If your distro lets you install older versions of clang with a package like <code>clang-14</code>, you can tell Servo to use it with:</p>
+<pre><code>export CC=/usr/bin/clang-14
+export CXX=/usr/bin/clang++-14
+</code></pre>
+<p>Alternatively you can try our new Nix-based dev environment, which should now work on any Linux distro (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/31001">#31001</a>).
+<a href="https://nixos.org/manual/nix/stable/">Nix</a> is a package manager with some unusual benefits.
+Servo can use Nix to find the correct versions of all of its compilers and build dependencies without needing you to install them or run <code>mach bootstrap</code>.
+All you need to do is install Nix, and <code>export MACH_USE_NIX=</code> to your environment.
+<a href="https://github.com/servo/servo/wiki/Building#nix-on-other-distros">See the wiki</a> for more details!</p>
+<style>
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig > ._flex {
+        display: flex;
+    }
+    ._fig._min {
+        width: min-content;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+    }
+    ._figr {
+        float: right;
+    }
+    ._figl > iframe,
+    ._figr > iframe,
+    ._figl > a > img,
+    ._figr > a > img {
+        width: 21em;
+        max-width: max-content;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+</style>
+
+  <div>
+    <a href="/made-with-page/blog/">Back</a>
+  </div>
+</div>
+
+
+
+          </div>
+    </main>
+    <div class="contact" aria-label="Contact information">
+    <div class="container">
+        <div class="inner-container two-column">
+            <div class="column">
+                <h2>Contact</h2>
+            </div>
+            <div class="column">
+                <ul>
+                    <li><a class="footer-link" href="https://servo.zulipchat.com/">Zulip chat</a></li>
+                    <li><a class="footer-link" href="https://github.com/servo/servo/discussions">GitHub discussions</a></li>
+                    <li><a class="footer-link" href="mailto:info@servo.org">Email: info@servo.org</a></li>
+                    <li><a class="footer-link" href="https://floss.social/@servo">Mastodon</a></li>
+                    <li><a class="footer-link" href="https://bsky.app/profile/servo.org">Bluesky</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer>
+      <div class="footer">
+  <div class="container">
+    <div class="two-column inner-container">
+      <div class="column">
+        <div class="logo"><a href="https://linuxfoundation.eu"><img src="/made-with-page/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250"></a></div>
+        <p>&copy; 2025 The Servo Project Developers</p>
+        <p>Copyright &copy; Servo is a project of <a class="footer-link" href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+        <p>For website terms of use, trademark policy and other project policies please see <a class="footer-link" href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+      </div>
+      <div class="column code-of-conduct">
+        <a class="footer-link" href="/made-with-page/coc/">Code of Conduct</a>
+      </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const burger = document.querySelector(".navbar-burger");
+    const menu = document.querySelector(".navbar-menu");
+    burger.onclick = () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    };
+  })();
+</script>
+
+    </footer>
+  </body>
+</html>
