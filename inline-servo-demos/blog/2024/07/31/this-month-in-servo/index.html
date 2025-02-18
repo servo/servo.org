@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>This month in Servo: console logging, parallel tables, OpenXR, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="This month in Servo: console logging, parallel tables, OpenXR, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  
+
+  
+  <meta name="description" content="Servo’s unique parallel layout engine just got even better.">
+  <meta name="og:description" content="Servo’s unique parallel layout engine just got even better.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/inline-servo-demos/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/inline-servo-demos/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/inline-servo-demos/blog/2024/07/31/this-month-in-servo/">
+
+  <link rel="stylesheet" href="/inline-servo-demos/css/style.css">
+  <link rel="shortcut icon" href="/inline-servo-demos/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/inline-servo-demos/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="inner-container">
+      <div class="navbar-brand">
+        <a href="/inline-servo-demos/">
+          <img src="/inline-servo-demos/img/servo-color.png" alt="This month in Servo: console logging, parallel tables, OpenXR, and more!">
+        </a>
+
+        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="navbar-menu" id="navbar-menu">
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            " href="#">
+                Get Involved
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a class="navbar-item" href="/inline-servo-demos/contributing/">
+                    Contributing
+                  </a>
+                
+                  <a class="navbar-item" href="https://book.servo.org" target="_blank">
+                    Servo Book
+                  </a>
+                
+                  <a class="navbar-item" href="/inline-servo-demos/wpt/">
+                    WPT pass rates
+                  </a>
+                
+                  <a class="navbar-item" href="/inline-servo-demos/coc/">
+                    Code of Conduct
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+          
+          
+            <a class="navbar-item" href="/inline-servo-demos/download/">
+              Download
+            </a>
+          
+        
+          
+          
+            <a class="navbar-item" href="/inline-servo-demos/blog/">
+              Blog
+            </a>
+          
+        
+          
+          
+            <a class="navbar-item" href="/inline-servo-demos/demos/">
+              Demos
+            </a>
+          
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            " href="#">
+                About
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a class="navbar-item" href="/inline-servo-demos/about/">
+                    About Servo
+                  </a>
+                
+                  <a class="navbar-item" href="https://github.com/servo/project/blob/main/governance/README.md" target="_blank">
+                    Governance
+                  </a>
+                
+                  <a class="navbar-item" href="/inline-servo-demos/sponsorship/">
+                    Sponsorship
+                  </a>
+                
+                  <a class="navbar-item" href="/inline-servo-demos/acknowledgements/">
+                    Acknowledgements
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+        <div class="navbar-end">
+    
+      <a class="social-link is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="social-link is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="social-link is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="social-link is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+</div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburgerMenu');
+  const menu = document.getElementById('navbar-menu');
+
+  const toggleMenu = () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('is-active', isExpanded);
+  };
+
+  // Toggle on click
+  hamburger.addEventListener('click', toggleMenu);
+
+
+</script>
+          <div class="content" id="This month in Servo: console logging, parallel tables, OpenXR, and more!">
+            
+<div class="blog-hero">
+  <div class="container">
+    <div class="inner-container">
+    <h1 class="title">This month in Servo: console logging, parallel tables, OpenXR, and more!</h1>
+      <p class="subtitle">Servo’s unique parallel layout engine just got even better.</p>
+      <p class="posted">Posted <span class="tag is-dark">2024-07-31</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="inner-container blog-content">
+  <figure><a href="/inline-servo-demos/img/blog/quest-3-passthrough.png"><img src="/inline-servo-demos/img/blog/quest-3-passthrough.png"
+    alt="Servo displaying WebXR content on a Quest 3 in Quest Link mode"></a>
+<figcaption>Figure 1: Servo can now render to XR headsets via OpenXR. Image: Daniel Adams (<a href="https://twitter.com/msub2official/status/1818533316477251669">Twitter</a>)</figcaption></figure>
+<p><span class=_floatmin></span>
+Servo has had several new features land in our nightly builds over the last month:</p>
+<ul>
+<li>as of 2024-06-27, <strong>document.fonts.ready</strong> (<a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/32576">#32576</a>)</li>
+<li>as of 2024-07-03, the <strong>getCompilationInfo() method on GPUShaderModule</strong> (<a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/servo/servo/pull/32642">#32642</a>)</li>
+<li>as of 2024-07-08, window.<strong>customElements.getName</strong> (<a href="https://github.com/keithamus">@keithamus</a>, <a href="https://github.com/servo/servo/pull/32715">#32715</a>)</li>
+<li>as of 2024-07-09, <strong>&lt;caption&gt; in tables</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/32657">#32657</a>, <a href="https://github.com/servo/servo/pull/32695">#32695</a>)</li>
+<li>as of 2024-07-13, <strong>document.visibilityState</strong> and <strong>document.hidden</strong> (<a href="https://github.com/wusyong">@wusyong</a>, <a href="https://github.com/servo/servo/pull/32635">#32635</a>)</li>
+<li>as of 2024-07-18, the <strong>measureText() method on CanvasRenderingContext2D</strong> (<a href="https://github.com/chocolate-pie">@chocolate-pie</a>, <a href="https://github.com/servo/servo/pull/32704">#32704</a>)</li>
+<li>as of 2024-07-23, <strong>URL.parse()</strong> (<a href="https://github.com/shanehandley">@shanehandley</a>, <a href="https://github.com/servo/servo/pull/32819">#32819</a>)</li>
+</ul>
+<p>We’ve also landed an experimental <strong>OpenXR backend</strong> (<a href="https://github.com/msub2">@msub2</a>, <a href="https://github.com/servo/servo/pull/32817">#32817</a>), allowing Servo to display WebXR content on actual headsets like the <strong>Quest 3</strong> in Quest Link mode.
+You can enable it with <code>--pref dom.webxr.openxr.enabled</code>, though the backend currently only works on Windows.</p>
+<figure><a href="/inline-servo-demos/img/blog/july-2024.png"><img src="/inline-servo-demos/img/blog/july-2024.png"
+    alt="Servo nightly showing a table with a caption, containing demos of several other new features"></a>
+<figcaption>Figure 2: a table with a caption, containing demos of several other new features.</figcaption></figure>
+<h2 id="rendering-changes" tabindex="-1"><span class=_floatmin></span>Rendering changes <a class="header-anchor" href="#rendering-changes">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><strong>Parallel table layout</strong> is now enabled (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/32477">#32477</a>), spreading the work for laying out rows and their columns over all available CPU cores.
+This change is a great example of the strengths of <a href="https://crates.io/crates/rayon">Rayon</a> and the opportunistic parallelism in Servo’s layout engine.</p>
+<p>We‘ve also made progress on our new <strong>flexbox layout engine</strong> (<code>--pref layout.flexbox.enabled</code>), landing support for <strong>‘min-height’</strong> and <strong>‘max-height’</strong> on row containers (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/32785">#32785</a>), as well as <strong>baseline alignment of row containers</strong> with their siblings (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/32841">#32841</a>, <a href="https://github.com/servo/servo/pull/32810">#32810</a>) and for their items by setting <strong>‘align-items’</strong> or <strong>‘align-self’</strong> to <strong>‘baseline’</strong>, <strong>‘first baseline’</strong>, or <strong>‘last baseline’</strong> (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/nicoburns">@nicoburns</a>, <a href="https://github.com/servo/servo/pull/32787">#32787</a>, <a href="https://github.com/servo/servo/pull/32790">#32790</a>).</p>
+<aside class="_note">
+<p>Note that our flexbox layout support is still very much experimental, and missing major functionality such as ‘flex-direction: column’.</p>
+</aside>
+<p>We’ve landed support for <strong>generic font families</strong> like ‘sans-serif’ and ‘monospace’ (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/32673">#32673</a>), as well as <strong>commas in &lt;font face&gt;</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/32622">#32622</a>) and fixes for font matching on Android and OpenHarmony (<a href="https://github.com/jschwe">@jschwe</a>, <a href="https://github.com/servo/servo/pull/32725">#32725</a>, <a href="https://github.com/servo/servo/pull/32731">#32731</a>).</p>
+<p>For <strong>replaced elements</strong> like &lt;img&gt; and &lt;canvas&gt;, the <strong>‘min-width’</strong>, <strong>‘max-width’</strong>, <strong>‘min-height’</strong>, and <strong>‘max-height’</strong> properties now <strong>respect the aspect ratio</strong> of the element (<a href="https://github.com/valadaptive">@valadaptive</a>, <a href="https://github.com/servo/servo/pull/32777">#32777</a>), and you can now change that aspect ratio with the <strong>‘aspect-ratio’ property</strong> (<a href="https://github.com/valadaptive">@valadaptive</a>, <a href="https://github.com/servo/servo/pull/32800">#32800</a>, <a href="https://github.com/servo/servo/pull/32803">#32803</a>).</p>
+<figure class="_figr"><a href="/inline-servo-demos/img/blog/devtools-july-2024.png"><img src="/inline-servo-demos/img/blog/devtools-july-2024.png"
+    alt="Firefox devtools connected to Servo, showing several console errors"></a>
+<figcaption>Figure 3: console logging is now supported when using the Firefox devtools.</figcaption></figure>
+<h2 id="devtools-and-servoshell-changes" tabindex="-1"><span class=_floatmin></span>Devtools and servoshell changes <a class="header-anchor" href="#devtools-and-servoshell-changes">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>When debugging in Servo <a href="https://book.servo.org/running-servoshell.html">with the <strong>Firefox devtools</strong></a>, you can now see <strong>console messages</strong> from the page (<a href="https://github.com/eerii">@eerii</a>, <a href="https://github.com/servo/servo/pull/32727">#32727</a>), as shown in <em>Figure 3</em>, and you can even debug the devtools connection itself with our new <strong>devtools protocol analyzer</strong> (<a href="https://github.com/eerii">@eerii</a>, <a href="https://github.com/servo/servo/pull/32684">#32684</a>).</p>
+<p>servoshell now has experimental <strong>OpenHarmony support</strong> (<a href="https://github.com/jschwe">@jschwe</a>, <a href="https://github.com/servo/servo/pull/32594">#32594</a>), in addition to our experimental Android support and nightly releases for Windows, macOS, and Linux.
+We’ve also landed <strong>directory listings</strong> for local files (<a href="https://github.com/Bobulous">@Bobulous</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/32580">#32580</a>), made the location bar behave more consistently on Android (<a href="https://github.com/jschwe">@jschwe</a>, <a href="https://github.com/servo/servo/pull/32586">#32586</a>), and servoshell no longer quits when you press Escape (<a href="https://github.com/mrego">@mrego</a>, <a href="https://github.com/servo/servo/pull/32603">#32603</a>).</p>
+<figure class="_figr" style="clear: right;"><div style="text-align: left;">
+<table>
+<thead>
+<tr>
+<th>Version and build config</th>
+<th><code>servo</code> binary size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Before <a href="https://github.com/servo/servo/pull/32651">#32651</a></td>
+<td>126364k</td>
+</tr>
+<tr>
+<td>With <a href="https://github.com/servo/servo/pull/32651">#32651</a></td>
+<td>110111k (−12.8%)</td>
+</tr>
+<tr>
+<td>With <a href="https://github.com/servo/servo/pull/32651">#32651</a><br>• Without debug symbols</td>
+<td>102878k (−18.5%)</td>
+</tr>
+<tr>
+<td>With <a href="https://github.com/servo/servo/pull/32759">#32759</a><br>• Without <code>layout_2013</code></td>
+<td>107652k (−14.8%)</td>
+</tr>
+<tr>
+<td>With <a href="https://github.com/servo/servo/pull/32759">#32759</a><br>• Without debug symbols<br>• Without <code>layout_2013</code></td>
+<td>100886k (−20.1%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Figure 4: servoshell binary size improvements on Linux (amd64).</figcaption></figure>
+<p><span class=_floatmin></span>
+To reduce servoshell’s binary size, we now build our nightly releases with <strong>ThinLTO</strong> (<a href="https://github.com/jschwe">@jschwe</a>, <a href="https://github.com/servo/servo/pull/32651">#32651</a>), and you can go even further by building Servo <strong>without debug symbols</strong> (<a href="https://github.com/jschwe">@jschwe</a>, <a href="https://github.com/servo/servo/pull/32651">#32651</a>) or <strong>without the legacy layout engine</strong> (<a href="https://github.com/jschwe">@jschwe</a>, <a href="https://github.com/servo/servo/pull/32759">#32759</a>).
+Note that these builds use the <code>production</code> profile in Cargo, not the <code>release</code> profile.</p>
+<h2 id="changes-for-servo-developers" tabindex="-1">Changes for Servo developers <a class="header-anchor" href="#changes-for-servo-developers">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><a href="https://book.servo.org"><strong>The Servo book</strong></a> is now the place to go for Servo’s documentation (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/32743">#32743</a>).
+It includes our architecture and design docs, a link to our API docs, as well as docs on building, running, testing, debugging, and profiling Servo.</p>
+<p>Servo now builds without the <code>crown</code> linter by default (<a href="https://github.com/jschwe">@jschwe</a>, <a href="https://github.com/servo/servo/pull/32494">#32494</a>), simplifying the build process in some cases.
+If you’re working on DOM code, you can enable it again with <code>./mach build --use-crown</code>.</p>
+<figure class="_figr" style="clear: right;"><a href="/inline-servo-demos/img/blog/dco-check.png"><img src="/inline-servo-demos/img/blog/dco-check.png"
+    alt="GitHub checks popup showing the “DCO” check failing and a link to “Details”"></a>
+<figcaption>Figure 5: the DCO check will now fail unless you sign off your commits.</figcaption></figure>
+<p><span class=_floatmin></span>
+When contributing to Servo, <strong>your commits must now be <a href="https://developercertificate.org">“signed off”</a></strong>, which is essentially a promise that you own (or are allowed to contribute) the code in your patch.
+If the DCO check fails, click Details for help on signing off your commits (<em>Figure 5</em>).</p>
+<aside class="_note">
+<p>Note that this is <strong>not</strong> a contributor license agreement (CLA), which would allow Servo to become closed source someday, nor is it a copyright assignment.</p>
+</aside>
+<h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Thanks again for your generous support!
+We are now receiving <strong>2955 USD/month</strong> (+32.6% over June) in recurring donations.</p>
+<p>Servo is now on <a href="https://thanks.dev">thanks.dev</a>, and already <strong>three GitHub orgs</strong> that depend on Servo are sponsoring us there.
+If you use Servo libraries like <a href="https://crates.io/crates/url/reverse_dependencies">url</a>, <a href="https://crates.io/crates/html5ever/reverse_dependencies">html5ever</a>, <a href="https://crates.io/crates/selectors/reverse_dependencies">selectors</a>, or <a href="https://crates.io/crates/cssparser/reverse_dependencies">cssparser</a>, signing up for <a href="https://thanks.dev">thanks.dev</a> could be a good way for you (or your employer) to give back to the community.</p>
+<p>We are still receiving donations from <strong>14 people</strong> on LFX, but we will stop accepting donations there soon — <strong>please move your recurring donations to <a href="https://github.com/sponsors/servo">GitHub</a> or <a href="https://opencollective.com/servo">Open Collective</a></strong>.
+In the meantime, we’ve transferred <strong>2723 USD</strong> of donations from LFX to our Open Collective account.</p>
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 2955 / 10000); padding-left: 0.5em;"><strong>2955</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 2955 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="2955" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+<p>As always, use of these funds will be decided transparently in the Technical Steering Committee.
+Our updated proposal for a <a href="https://github.com/servo/project/issues/94#issuecomment-2252262955">dedicated server for CI runners</a> (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/nicoburns">@nicoburns</a>) was accepted, which should reduce build times significantly, and this is just the start!</p>
+<p>For more details, head to our <a href="/inline-servo-demos/sponsorship/">Sponsorship page</a>.</p>
+<h2 id="conferences-and-blogs" tabindex="-1">Conferences and blogs <a class="header-anchor" href="#conferences-and-blogs">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=SamA5Oz-G5w"><strong>Servo: A web rendering engine for the future</strong></a> (<a href="https://servo.org/slides/2024-07-02-global-software-technology-summit/">slides</a>) — Manuel Rego spoke at the <a href="https://huawei-events.de/en/gsts24.htm">Global Software Technology Summit 2024</a> about the status and long-term vision of the Servo project</li>
+<li><a href="https://wusyong.github.io/posts/verso-0-1/"><strong>Verso: A new browser based on Servo</strong></a> — Wu Yu Wei wrote about their plans to build a more polished Servo-based browser while improving Servo’s architecture</li>
+<li><a href="https://wusyong.github.io/posts/verso-compositor-part1/"><strong>Verso: Writing its own compositor part 1</strong></a> — Wu Yu Wei uses Verso as a sandbox to explore how we might rework Servo’s compositor to support multiple windows</li>
+<li><a href="https://conflor.es/blog/03_halfway_point"><strong>Halfway point</strong></a> — Eri wrote about repairing Servo’s devtools support, from planning to selecting tabs to finding resources and now the console, as part of their Outreachy internship</li>
+</ul>
+<h2 id="alan-jeffrey-(1967%E2%80%932024)" tabindex="-1">Alan Jeffrey (1967–2024) <a class="header-anchor" href="#alan-jeffrey-(1967%E2%80%932024)">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><a href="https://web.archive.org/web/20240714161830/https://asaj.org/">Alan Jeffrey</a>, an early member of the Servo team and a key part of helping the Servo project find a new life outside of Mozilla, passed away on 4 July.</p>
+<p>His research has furthered a wide range of fields, including concurrent and distributed systems, programming languages, formal verification, software semantics, typesetting, protocol security, and circuit design.</p>
+<p>Alan’s family have also written about his kindness, curiosity, and persistence <a href="https://www.linkedin.com/feed/update/activity:7215033040614436865/">on his LinkedIn page</a>.</p>
+<style>
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig > ._flex {
+        display: flex;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+        max-width: 100%;
+    }
+    ._figr {
+        float: right;
+        max-width: 100%;
+    }
+    ._figl > figcaption,
+    ._figr > figcaption,
+    ._figl > iframe,
+    ._figr > iframe,
+    ._figl > video,
+    ._figr > video,
+    ._figl > a > img,
+    ._figr > a > img {
+        width: 21em;
+        max-width: 100%;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+    ._note {
+        margin: 1em 1em;
+        border-left: 1px solid;
+        padding-left: 1em;
+        opacity: 0.75;
+    }
+</style>
+
+  <div>
+    <a href="/inline-servo-demos/blog/">Back</a>
+  </div>
+</div>
+
+
+
+          </div>
+    </main>
+    <div class="contact" aria-label="Contact information">
+    <div class="container">
+        <div class="inner-container two-column">
+            <div class="column">
+                <h2>Contact</h2>
+            </div>
+            <div class="column">
+                <ul>
+                    <li><a class="footer-link" href="https://servo.zulipchat.com/">Zulip chat</a></li>
+                    <li><a class="footer-link" href="https://github.com/servo/servo/discussions">GitHub discussions</a></li>
+                    <li><a class="footer-link" href="mailto:info@servo.org">Email: info@servo.org</a></li>
+                    <li><a class="footer-link" href="https://floss.social/@servo">Mastodon</a></li>
+                    <li><a class="footer-link" href="https://bsky.app/profile/servo.org">Bluesky</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer>
+      <div class="footer">
+  <div class="container">
+    <div class="two-column inner-container">
+      <div class="column">
+        <div class="logo"><a href="https://linuxfoundation.eu"><img src="/inline-servo-demos/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250"></a></div>
+        <p>&copy; 2025 The Servo Project Developers</p>
+        <p>Copyright &copy; Servo is a project of <a class="footer-link" href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+        <p>For website terms of use, trademark policy and other project policies please see <a class="footer-link" href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+      </div>
+      <div class="column code-of-conduct">
+        <a class="footer-link" href="/inline-servo-demos/coc/">Code of Conduct</a>
+      </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const burger = document.querySelector(".navbar-burger");
+    const menu = document.querySelector(".navbar-menu");
+    burger.onclick = () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    };
+  })();
+</script>
+
+    </footer>
+  </body>
+</html>
