@@ -18,7 +18,7 @@ for tag in $tags; do
   # The second line of the input is of the form `    one or more tags` or `    tags; notes`.
   # Tags must not contain spaces or PCRE regex metacharacters.
   < "$post_path" sed '/^<!--\[commits\]$/,/^\[\/commits\]-->$/!d' \
-  | rg --pcre2 -B1 --no-context-separator '(?<=^    )(([^;]+ )?'"$tag"'( [^;]+)?)' \
+  | rg --pcre2 -B1 --no-context-separator '(?<=^    )(([^;]+ )?'"$tag"'( [^;]+)?)(;|$)' \
   | while read -r list_commits_by_nightly_line; do
     read -r tags_and_notes_line
     printf '    - %s\n      %s\n' "${list_commits_by_nightly_line#+}" "${tags_and_notes_line#    }"
