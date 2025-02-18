@@ -78,6 +78,15 @@ We’ve continued **splitting up our massive script crate** (@jdm, #34359, #3515
 
 A few crashes have been fixed, including when exiting Servo (@mukilan, #34917), when using the [internal memory profiler](https://book.servo.org/hacking/profiling.html#memory-profiling) (@jdm, #35058), and when running ResizeObserver callbacks (@willypuzzle, #35168).
 
+## For developers
+
+We now run **CI smoketests on OpenHarmony** using a real device (@jschwe, @mukilan, #35006), increasing confidence in your changes beyond compile-time errors.
+
+We’ve also tripled our **self-hosted CI runner capacity** (@delan, #34983, #35002), making concurrent Windows and macOS builds possible without falling back to the much slower GitHub-hosted runners.
+
+Servo can’t yet run WebDriver-based tests on [wpt.fyi](https://wpt.fyi), [wpt.servo.org](https://wpt.servo.org), or CI, because the `servo` executor for the [Web Platform Tests](https://web-platform-tests.org) does not support testdriver.js.
+`servodriver` does, though, so we’ve started fixing test regressions with that executor with the goal of eventually switching to it (@jdm, #34957, #34997).
+
 ## Donations
 
 Thanks again for your generous support!
@@ -146,17 +155,17 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     - /https://github.com/servo/servo/pull/35040	(@Taym95, #35040)	Script: implement `ReadableStreamBYOBReader::Read` (#35040)
       api
 - ci
-    - https://github.com/servo/servo/pull/34868	(@delan, #34868)	CI: use self-hosted runners for macOS build jobs (#34868)
+    - //https://github.com/servo/servo/pull/34868	(@delan, #34868)	CI: use self-hosted runners for macOS build jobs (#34868)
       ci
-    - https://github.com/servo/servo/pull/34983	(@delan, #34983)	CI: use new API for taking a runner (#34983)
+    - /https://github.com/servo/servo/pull/34983	(@delan, #34983)	CI: use new API for taking a runner (#34983)
       ci
-    - https://github.com/servo/servo/pull/34957	(@jdm, #34957)	Various servodriver improvements (#34957)
+    - /https://github.com/servo/servo/pull/34957	(@jdm, #34957)	Various servodriver improvements (#34957)
       ci; towards testdriver.js support
-    - https://github.com/servo/servo/pull/35002	(@delan, #35002)	CI: use new self-hosted runner servers (#35002)
+    - /https://github.com/servo/servo/pull/35002	(@delan, #35002)	CI: use new self-hosted runner servers (#35002)
       ci
-    - https://github.com/servo/servo/pull/34997	(@jdm, #34997)	webdriver: Serialize JS int values as i32. (#34997)
+    - /https://github.com/servo/servo/pull/34997	(@jdm, #34997)	webdriver: Serialize JS int values as i32. (#34997)
       ci; towards testdriver.js support
-    - https://github.com/servo/servo/pull/35006	(@jschwe, @mukilan, #35006)	CI: Test ohos on HarmonyOS device (#35006)
+    - /https://github.com/servo/servo/pull/35006	(@jschwe, @mukilan, #35006)	CI: Test ohos on HarmonyOS device (#35006)
       ci
 - crash
     - /https://github.com/servo/servo/pull/34917	(@mukilan, #34917)	webgl: shutdown webrender before acknowledging Exit message (#34917)
