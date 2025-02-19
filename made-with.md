@@ -36,6 +36,13 @@ title: Made With Servo
   padding: 0;
 }
 
+.made-with-image {
+  aspect-ratio: 2;
+  object-fit: cover;
+  object-position: top left;
+  background-color: transparent;
+}
+
 </style>
 
 <div class="inner-container">
@@ -54,7 +61,11 @@ title: Made With Servo
   {% for project in group.projects %}
 
   <a class="made-with-item" href="{{project.link}}" target="_blank">
-    <img src="{{ project.img | url }}" alt=" " />
+    {% if project.img %}
+      <img src="{{ project.img | url }}" class="made-with-image" alt=" " />
+    {% else %}
+      <!--<img src="{{ project.img | url }}" class="made-with-image" alt=" " /> -->
+    {% endif %}
     <div class="made-with-text">
       <h4>{{ project.name }}</h4>
       <p>{{ project.description }}</p>
