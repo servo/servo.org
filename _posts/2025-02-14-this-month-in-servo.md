@@ -10,7 +10,7 @@ categories:
 Servo now supports several new web API features:
 
 - **:host selector** (@simonwuelker, #34870)
-- **&lt;slot>** (@simonwuelker, #35013, #35177, #35191, #35221, #35137, #35222)
+- **&lt;slot> elements** in the DOM (@simonwuelker, #35013, #35177, #35191, #35221, #35137, #35222), with layout support landing next month
 - **Relative CSS colors**, like **color(from …)** and **rgb(from …)** (@Loirooriol, #34897)
 - **ClipboardEvent** (@Gae24, #33576, #35146), with `--pref dom_clipboardevent_enabled`
 - Detecting WGSL extensions via **WGSLLanguageFeatures** (@sagudev, #34928)
