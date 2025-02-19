@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
-date:       2025-02-14
-summary:    ao!! wrrrrao!!
+title:      "This month in Servo: new webview API, relative colors, canvas buffs, and more!"
+date:       2025-02-19
+summary:    Servo is becoming truly embeddable this year.
 categories:
 ---
 
