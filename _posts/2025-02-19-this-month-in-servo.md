@@ -26,7 +26,7 @@ We’ve landed a bunch of **HTMLCanvasElement** improvements:
 
 <figure style="display: flex; justify-content: center;">
   <a href="{{ '/img/blog/january-2025.png' | url }}"><img src="{{ '/img/blog/january-2025.png' | url }}"
-    alt="servoshell in dark mode, rendering the MDN article for ‘prefers-color-scheme’ in dark mode, when Windows is set to dark mode"></a>
+    alt="servoshell nightly showing relative oklch() colors, canvas toDataURL() with image/jpeg and image/webp, canvas toBlob(), the WGSLLanguageFeatures API, and the DOM tree of a custom element with a <slot>"></a>
 </figure>
 
 **Streams** are a lot more useful now, with **ReadableStreamBYOBReader** now supporting **read()** ([@Taym95](https://github.com/Taym95), [#35040](https://github.com/servo/servo/pull/35040)), **cancel()**, **close()**, and **releaseLock()** ([@Taym95](https://github.com/Taym95), [#34958](https://github.com/servo/servo/pull/34958)).
