@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building a browser using Servo as a web engine! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="Building a browser using Servo as a web engine! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  
+
+  
+  <meta name="description" content="Let&#39;s build another web browser based on Servo!">
+  <meta name="og:description" content="Let&#39;s build another web browser based on Servo!">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/get-involved-cta/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/get-involved-cta/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/get-involved-cta/blog/2024/09/11/building-browser/">
+
+  <link rel="stylesheet" href="/get-involved-cta/css/style.css">
+  <link rel="shortcut icon" href="/get-involved-cta/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/get-involved-cta/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="inner-container">
+      <div class="navbar-brand">
+        <a href="/get-involved-cta/">
+          <img src="/get-involved-cta/img/servo-color.png" alt="Building a browser using Servo as a web engine!">
+        </a>
+
+        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="navbar-menu" id="navbar-menu">
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                Get Involved
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/get-involved-cta/contributing/"
+                    
+                  >
+                    Contributing
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://book.servo.org"
+                     target="_blank"
+                  >
+                    Servo Book<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/get-involved-cta/wpt/"
+                    
+                  >
+                    WPT pass rates
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/get-involved-cta/coc/"
+                    
+                  >
+                    Code of Conduct
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/get-involved-cta/download/"
+              
+            >
+              Download
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/get-involved-cta/blog/"
+              
+            >
+              Blog
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="https://demo.servo.org/"
+               target="_blank"
+            >
+              Demos<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+            </a>
+          
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                About
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/get-involved-cta/about/"
+                    
+                  >
+                    About Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://github.com/servo/project/blob/main/governance/README.md"
+                     target="_blank"
+                  >
+                    Governance<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/get-involved-cta/sponsorship/"
+                    
+                  >
+                    Sponsorship
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/get-involved-cta/acknowledgements/"
+                    
+                  >
+                    Acknowledgements
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+        <div class="navbar-end">
+    
+      <a class="social-link is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="social-link is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="social-link is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="social-link is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+</div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburgerMenu');
+  const menu = document.getElementById('navbar-menu');
+
+  const toggleMenu = () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('is-active', isExpanded);
+  };
+
+  // Toggle on click
+  hamburger.addEventListener('click', toggleMenu);
+
+
+</script>
+          <div class="content" id="Building a browser using Servo as a web engine!">
+            
+<div class="blog-hero">
+  <div class="container">
+    <div class="inner-container">
+    <h1 class="title">Building a browser using Servo as a web engine!</h1>
+      <p class="subtitle">Let's build another web browser based on Servo!</p>
+      <p class="posted">Posted <span class="tag is-dark">2024-09-11</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="inner-container blog-content">
+  <p>As a web engine, Servo primarily handles everything around scripting and layout.
+For embedding use cases, the <a href="https://tauri.app">Tauri</a> community experimented with <a href="/get-involved-cta/blog/2024/01/19/embedding-update/">adding a new Servo backend</a>, but Servo can also be used to build a browser.</p>
+<p>We have a reference browser in the form of <a href="https://github.com/servo/servo/tree/main/ports/servoshell">servoshell</a>, which has historically been used as a minimal example and as a test harness for the <a href="https://wpt.servo.org">Web Platform Tests</a>.
+Nevertheless, the Servo community has steadily worked towards making it a browser in its own right, starting with <a href="/get-involved-cta/blog/2023/09/15/upcoming-events-and-new-browser-ui/">our new browser UI</a> based on <a href="https://www.egui.rs">egui</a> last year.</p>
+<p>This year, <a href="https://github.com/wusyong">@wusyong</a>, a member of <a href="https://servo.org/governance/">Servo TSC</a>, created the <a href="https://github.com/versotile-org/verso">Verso</a> project as a way to explore the features Servo needs to power a robust web browser.
+In this post, we’ll explain what we tried to achieve, what we found, and what’s next for building a browser using Servo as a web engine.</p>
+<h2 id="multi-view" tabindex="-1">Multi-view <a class="header-anchor" href="#multi-view">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Of course, the first major feature we want to achieve is multiple webviews.
+A webview is a term abstracted from the <a href="https://doc.servo.org/servo/struct.TopLevelBrowsingContextId.html">top-level browsing context</a>.
+This is what people refer to as a web page.
+With multi-view support, we can create multiple web pages as tabs in a single window.
+Most importantly, we can draw our UI with additional webviews.
+The main reason we want to write UI using Servo itself is that we can dogfood our own stack and verify that it can meet practical requirements, such as prompt windows, context menus, file selectors, and more.</p>
+<p>Basic multi-view support was reviewed and merged into Servo earlier this year thanks to <a href="https://github.com/delan">@delan</a> (<a href="https://github.com/servo/servo/pull/30840">#30840</a>, <a href="https://github.com/servo/servo/pull/30841">#30841</a>, <a href="https://github.com/servo/servo/pull/30842">#30842</a>).
+Verso refined that into a specific type called <a href="https://docs.versotile.org/verso/webview/struct.WebView.html">WebView</a>.
+From there, any function that owns webviews can decide how to present them depending on their IDs.
+In a Verso window, two webviews are created at the moment—one for <a href="https://docs.versotile.org/verso/window/struct.Window.html#method.handle_servo_messages_with_webview">handling regular web pages</a> and the other for <a href="https://docs.versotile.org/verso/window/struct.Window.html#method.handle_servo_messages_with_panel">handling the UI</a>, which is currently called the Panel.
+The result of the <a href="https://github.com/versotile-org/verso?tab=readme-ov-file#verso">showcase</a> in Verso’s <a href="http://README.md">README.md</a> looks like this:</p>
+<figure class="_fig"><a href="/get-involved-cta/img/blog/verso-crt-demo.webp"><img src="/get-involved-cta/img/blog/verso-crt-demo.webp"
+    alt="Verso displaying ASCII text in a CRT style"></a>
+<figcaption>Figure 1: Verso window displaying two different webviews. One for the UI, the other for the web page.</figcaption></figure>
+<p>For now, the inter-process communication is done via Servo’s existing channel messages like <a href="https://doc.servo.org/embedder_traits/enum.EmbedderMsg.html">EmbedderMsg</a> and <a href="https://doc.servo.org/compositing/windowing/enum.EmbedderEvent.html">EmbedderEvent</a>.
+We are looking to improve the IPC mechanism with more granular control over DOM elements.
+So, the panel UI can be updated based on the status of web pages.
+One example is when the page URL is changed and the navigation bar needs to be updated.
+There are some candidates for this, such as <a href="https://doc.servo.org/script_traits/enum.WebDriverCommandMsg.html">WebDriverCommandMsg</a>.
+<a href="https://github.com/webbeef">@webbeef</a> also started a discussion about <a href="https://github.com/servo/servo/discussions/32883">defining custom elements</a> like <code>&lt;webview&gt;</code> for better ergonomics.
+Overall, improving IPC will be the next target to research after initial multi-view support.
+We will also define more specific webview types to satisfy different purposes in the future.</p>
+<h2 id="multi-window" tabindex="-1">Multi-window <a class="header-anchor" href="#multi-window">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>The other prominent feature after multi-view is the ability to support multiple windows.
+This one wasn’t planned at first, but because it affects too many components, we ended up resolving them together from the ground up.</p>
+<p>Servo uses <a href="https://github.com/servo/webrender">WebRender</a>, based on OpenGL, to render its layout.
+To support multiple windows, we need to support multiple OpenGL surfaces.
+One approach would be to create separate OpenGL contexts for each window.
+But since our implementations of WebGL, WebGPU, and WebXR are all tied to a single WebRender instance, which in turn only supports a single OpenGL context for now, we chose to use a single context with multiple surfaces.
+This alternative approach could potentially use less memory and spawn fewer threads.
+For more details, see <a href="https://wusyong.github.io/posts/verso-compositor-part3/">this series of blog posts</a> by <a href="https://github.com/wusyong">@wusyong</a>.</p>
+<figure class="_fig"><a href="/get-involved-cta/img/blog/multiwindow.png"><img src="/get-involved-cta/img/blog/multiwindow.png"
+    alt="Verso displaying two windows"></a>
+<figcaption>Figure 2: Verso creates two separate windows with the same OpenGL context.</figcaption></figure>
+<p>There is still room for improvement.
+For example, WebRender currently <a href="https://github.com/servo/webrender/blob/0.64/webrender/src/renderer/mod.rs#L1228">only supports rendering a single “document”</a>.
+Unless we create multiple WebRender instances, like Firefox does, we have one WebRender document that has to constantly update all of its display lists to show on all of our windows.
+This could potentially lead to race conditions where a webview may draw to the wrong window for a split second.</p>
+<p>There are also different OpenGL versions across multiple platforms, which can be challenging to configure and link.
+Verso is experimenting with using <a href="https://docs.rs/glutin/latest/glutin/">Glutin</a> for better configuration and attempting to get closer to the general Rust ecosystem.</p>
+<h2 id="what%E2%80%99s-next%3F" tabindex="-1">What’s next? <a class="header-anchor" href="#what%E2%80%99s-next%3F">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>With multi-view and multi-window support as the fundamental building blocks, we could create more UI elements to keep pushing the envelope of our browser and embedding research.
+At the same time, Servo is a huge project, with many potential improvements still to come, so we want to reflect on our progress and decide on our priorities.
+Here are some directions that are worth pursuing.</p>
+<h3 id="benchmarking-and-metrics" tabindex="-1">Benchmarking and metrics <a class="header-anchor" href="#benchmarking-and-metrics">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>We want to gather the strength of the community to help us track the statistics of supported CSS properties and web APIs in Servo by <a href="https://chromestatus.com/metrics/css/popularity">popularity order</a> and benchmark results such as jetstream2 and speedometer3.
+<a href="https://github.com/sagudev">@sagudev</a> already started <a href="https://servospeedometer.netlify.app/">a subset of speedometer3</a> to experiment.
+We hope this will eventually give newcomers a better overview of Servo.</p>
+<h3 id="script-triage" tabindex="-1">Script triage <a class="header-anchor" href="#script-triage">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>There’s a <a href="https://github.com/servo/project/issues/100">Servo triage meeting</a> every two weeks to triage any issues around the script crate and more.
+Once we get the statistics of supported web APIs, we can find the most popular ones that haven’t been implemented or fixed yet.
+We are already fixing some issues around loading the order and re-implementing <a href="https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream">ReadableStream</a> in Rust.
+If you are interested in implementing web APIs in Servo, feel free to join the next meeting.</p>
+<h3 id="multi-process-and-sandboxing" tabindex="-1">Multi-process and sandboxing <a class="header-anchor" href="#multi-process-and-sandboxing">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Some features are crucial to the browser but not visible to users.
+Multi-process architecture and sandboxing belong to this category.
+Both of these are implemented in Servo to some extent, but only on Linux and macOS right now, and neither of the features are enabled by default.</p>
+<p>We would like to improve these features and validate them in CI workflows.
+In the meantime, we are looking for people who can extend our sandbox to Windows via <a href="https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipes">Named Pipes</a> and <a href="https://learn.microsoft.com/en-us/windows/win32/secauthz/appcontainer-isolation">AppContainer Isolation</a>.</p>
+<h2 id="acknowledgments" tabindex="-1">Acknowledgments <a class="header-anchor" href="#acknowledgments">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>This work was <a href="https://nlnet.nl/project/Servo-Multibrowsing/">sponsored</a> by <a href="https://nlnet.nl/">NLNet</a> and the <a href="https://ngi.eu/">Next Generation Internet initiative</a>.
+We are grateful the European Commission shares the same vision for a better and more open browser ecosystem.</p>
+<figure><img src="/get-involved-cta/img/nlnet-color.png" alt="NLNet Logo" style="vertical-align: middle; margin: 15px; width: 100px;">
+  <img src="/get-involved-cta/img/blog/NGI-logo.png" alt="NGI Logo" style="vertical-align: middle; margin: 15px; width: 100px;"></figure>
+<style>
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig > ._flex {
+        display: flex;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+        max-width: 100%;
+    }
+    ._figr {
+        float: right;
+        max-width: 100%;
+    }
+    ._figl > figcaption,
+    ._figr > figcaption,
+    ._figl > iframe,
+    ._figr > iframe,
+    ._figl > video,
+    ._figr > video,
+    ._figl > a > img,
+    ._figr > a > img {
+        width: 21em;
+        max-width: 100%;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+    ._note {
+        margin: 1em 1em;
+        border-left: 1px solid;
+        padding-left: 1em;
+        opacity: 0.75;
+    }
+</style>
+
+  <div>
+    <a href="/get-involved-cta/blog/">Back</a>
+  </div>
+</div>
+
+
+
+          </div>
+    </main>
+    <div class="contact" aria-label="Contact information">
+    <div class="container">
+        <div class="inner-container two-column">
+            <div class="column">
+                <h2>Contact</h2>
+            </div>
+            <div class="column">
+                <ul>
+                    <li><a class="footer-link" href="https://servo.zulipchat.com/">Zulip chat</a></li>
+                    <li><a class="footer-link" href="https://github.com/servo/servo/discussions">GitHub discussions</a></li>
+                    <li><a class="footer-link" href="mailto:info@servo.org">Email: info@servo.org</a></li>
+                    <li><a class="footer-link" href="https://floss.social/@servo">Mastodon</a></li>
+                    <li><a class="footer-link" href="https://bsky.app/profile/servo.org">Bluesky</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer>
+      <div class="footer">
+  <div class="container">
+    <div class="two-column inner-container">
+      <div class="column">
+        <div class="logo"><a href="https://linuxfoundation.eu"><img src="/get-involved-cta/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250"></a></div>
+        <p>&copy; 2025 The Servo Project Developers</p>
+        <p>Copyright &copy; Servo is a project of <a class="footer-link" href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+        <p>For website terms of use, trademark policy and other project policies please see <a class="footer-link" href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+        <p>The source code for this website can be found at <a class="footer-link" href="https://github.com/servo/servo.org">https://github.com/servo/servo.org</a>.</p>
+      </div>
+      <div class="column code-of-conduct">
+        <a class="footer-link" href="/get-involved-cta/coc/">Code of Conduct</a>
+      </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const burger = document.querySelector(".navbar-burger");
+    const menu = document.querySelector(".navbar-menu");
+    burger.onclick = () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    };
+  })();
+</script>
+
+    </footer>
+  </body>
+</html>
