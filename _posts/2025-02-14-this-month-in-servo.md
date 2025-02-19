@@ -24,6 +24,11 @@ We’ve landed a bunch of **HTMLCanvasElement** improvements:
 - **toBlob()** is now supported (@webbeef, #34938)
 - **transferControlToOffscreen()** is now supported (@webbeef, #34959)
 
+<figure style="display: flex; justify-content: center;">
+  <a href="{{ '/img/blog/january-2025.png' | url }}"><img src="{{ '/img/blog/january-2025.png' | url }}"
+    alt="servoshell in dark mode, rendering the MDN article for ‘prefers-color-scheme’ in dark mode, when Windows is set to dark mode"></a>
+</figure>
+
 **Streams** are a lot more useful now, with **ReadableStreamBYOBReader** now supporting **read()** (@Taym95, #35040), **cancel()**, **close()**, and **releaseLock()** (@Taym95, #34958).
 
 Servo now **passes [40.6%](https://wpt.servo.org)** (+7.5pp) of enabled **Shadow DOM** tests, thanks to our landing support for the **:host selector** (@simonwuelker, #34870) and the **&lt;slot> element** (@simonwuelker, #35013, #35177, #35191, #35221, #35137, #35222), plus improvements to event handling (@simonwuelker, #34788, #34884), script (@willypuzzle, #34787), style (@simonwuelker, @jdm, #35198, #35132), and the DOM tree (@simonwuelker, @Taym95, #34803, #34834, #34863, #34909, #35076).
