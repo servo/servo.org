@@ -10,26 +10,30 @@ title: Made With Servo
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
-  margin-bottom: 32px;
+  margin-bottom: 3rem;
+}
+
+.made-with-container::last-child {
+  margin-bottom: 0;
 }
 
 .made-with-item {
   display: block;
   width: 400px;
+  max-width: 100%;
   flex: 0 0 400px;
-  border: 2px solid #333;
+  border: 2px solid var(--dark-grey);
   cursor: pointer;
   color: inherit;
   text-decoration: inherit;
 }
 
 .made-with-item:hover {
-  background-color: rgba(27, 131, 129, 0.5);
   background-color: #EAEAEA;
 }
 
 .made-with-text {
-  padding: 20px;
+  padding: 1.25rem;
 }
 
 .made-with-text > p {
@@ -45,34 +49,26 @@ title: Made With Servo
 
 </style>
 
-<div class="inner-container">
+<div class="inner-container subpage-content fullwidth">
 
 <h1>{{ title }}</h1>
-<p class="subtitle" style="margin-bottom: 32px">
+<p class="subtitle">
   This page showcases projects that are built with Servo or Servo components.
 </p>
 
 {% for group in madewith %}
 
-### {{group.name}}
+## {{group.name}}
 
 <div class="made-with-container">
-
   {% for project in group.projects %}
-
   <a class="made-with-item" href="{{project.link}}" target="_blank">
-    {% if project.img %}
-      <img src="{{ project.img | url }}" class="made-with-image" alt=" " />
-    {% else %}
-      <!--<img src="{{ project.img | url }}" class="made-with-image" alt=" " /> -->
-    {% endif %}
+    {% if project.img %}<img src="{{ project.img | url }}" class="made-with-image" alt=" " />{% endif %}
     <div class="made-with-text">
-      <h4>{{ project.name }}</h4>
+      <h3>{{ project.name }}</h3>
       <p>{{ project.description }}</p>
     </div>
-  </a>
-
-  {% endfor %}
+  </a>{% endfor %}
 </div>
 
 {% endfor %}
