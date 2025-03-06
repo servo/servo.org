@@ -101,8 +101,6 @@ categories:
       embedding
     - https://github.com/servo/servo/pull/35297	(@mrobinson, #35297)	libservo: Add a `ClipboardDelegate` and a default implementation (#35297)
       embedding
-    - https://github.com/servo/servo/pull/35352	(@simonwuelker, #35352)	Add support for the `::slotted` selector (#35352)
-      embedding
     - https://github.com/servo/servo/pull/35350	(@webbeef, #35350)	wini_minimal: trigger initial rendering and scroll properly (#35350)
       embedding
     - https://github.com/servo/servo/pull/35366	(@mrobinson, #35366)	libservo: Remove message-based API (#35366)
@@ -323,6 +321,8 @@ categories:
       shadowdom
     - https://github.com/servo/servo/pull/35338	(@simonwuelker, #35338)	Implement ServoLayoutNode::traversal_parent (#35338)
       shadowdom
+    - https://github.com/servo/servo/pull/35352	(@simonwuelker, #35352)	Add support for the `::slotted` selector (#35352)
+      embedding
     - https://github.com/servo/servo/pull/35380	(@simonwuelker, #35380)	Handle assigned slottables in an Event's path (#35380)
       shadowdom
     - https://github.com/servo/servo/pull/35382	(@maxtidev, @max@maxti.dev, @jdm, #35382)	script: Add shadow dom check to custom element constructor (#35382)
