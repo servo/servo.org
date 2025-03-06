@@ -13,27 +13,27 @@ categories:
     - 2677.00/month github
     - 21 donors thanks.dev
 - api
-    - https://github.com/servo/servo/pull/35237	(@sagudev, #35237)	webgpu: implement get image for webgpu canvas (#35237)
+    - `https://github.com/servo/servo/pull/35237	(@sagudev, #35237)	webgpu: implement get image for webgpu canvas (#35237)
       api
-    - https://github.com/servo/servo/pull/35250	(@shanehandley, #35250)	script: Implement the Bytes() method on Request and Response (#35250)
+    - `https://github.com/servo/servo/pull/35250	(@shanehandley, #35250)	script: Implement the Bytes() method on Request and Response (#35250)
       api
-    - https://github.com/servo/servo/pull/35074	(@Taym95, #35074)	Script: implement ReadableStreamBYOBRequest (#35074)
+    - `https://github.com/servo/servo/pull/35074	(@Taym95, #35074)	Script: implement ReadableStreamBYOBRequest (#35074)
       api
-    - https://github.com/servo/servo/pull/35295	(@Loirooriol, #35295)	Don't require index parameter in `CSSGroupingRule`'s `insertRule()` (#35295)
+    - `https://github.com/servo/servo/pull/35295	(@Loirooriol, #35295)	Don't require index parameter in `CSSGroupingRule`'s `insertRule()` (#35295)
       api
     - https://github.com/servo/servo/pull/35314	(@stevennovaryo, #35314)	dom: IntersectionObserver initialization (#35314)
       api
     - https://github.com/servo/servo/pull/35246	(@webbeef, #35246)	Update window.screenX and window.screenY when moving the embedder window (#35246)
       api
-    - https://github.com/servo/servo/pull/35364	(@pewsheen, #35364)	feat: dispatch mouse `contextmenu` event to DOM and embedder (#35364)
+    - `https://github.com/servo/servo/pull/35364	(@pewsheen, #35364)	feat: dispatch mouse `contextmenu` event to DOM and embedder (#35364)
       api
-    - https://github.com/servo/servo/pull/35482	(@shanehandley, #35482)	script: implement HTMLHyperlinkElementUtils for HTMLAreaElement (#35482)
+    - `https://github.com/servo/servo/pull/35482	(@shanehandley, #35482)	script: implement HTMLHyperlinkElementUtils for HTMLAreaElement (#35482)
       api
-    - https://github.com/servo/servo/pull/34844	(@gterzian, @jdm, #34844)	dom: Implement `WritableStream` (#34844)
+    - `https://github.com/servo/servo/pull/34844	(@gterzian, @jdm, #34844)	dom: Implement `WritableStream` (#34844)
       api
-    - https://github.com/servo/servo/pull/35262	(@mukilan, #35262)	script: add skeleton implementation of `FontFace` API (#35262)
+    - `https://github.com/servo/servo/pull/35262	(@mukilan, #35262)	script: add skeleton implementation of `FontFace` API (#35262)
       api
-    - https://github.com/servo/servo/pull/35151	(@yoseio, @gterzian, @Taym95, #35151)	script: Implement `Blob::bytes()` (#35151)
+    - `https://github.com/servo/servo/pull/35151	(@yoseio, @gterzian, @Taym95, #35151)	script: Implement `Blob::bytes()` (#35151)
       api
 - crash
     - https://github.com/servo/servo/pull/35235	(@webbeef, #35235)	Fix crash in screenX and screenY getters returning negative values (#35235)
@@ -45,19 +45,19 @@ categories:
     - https://github.com/servo/servo/pull/35699	(@Gae24, #35699)	script: Avoid double borrow crash in `DataTransferItem` (#35699)
       crash
 - css
-    - https://github.com/servo/servo/pull/35420	(@Loirooriol, #35420)	Enable the `quotes` CSS property (#35420)
+    - `https://github.com/servo/servo/pull/35420	(@Loirooriol, #35420)	Enable the `quotes` CSS property (#35420)
       css
     - https://github.com/servo/servo/pull/35413	(@Loirooriol, #35413)	layout: Basic implementation of size keywords on `flex-basis` (#35413)
       css
-    - https://github.com/servo/servo/pull/35103	(@longvatrong111, #35103)	Implement overflow:clip (#35103)
+    - `https://github.com/servo/servo/pull/35103	(@longvatrong111, #35103)	Implement overflow:clip (#35103)
       css
-    - https://github.com/servo/servo/pull/35414	(@yezhizhenjiakang@gmail.com, @mrobinson, #35414)	layout: Implement overflow scroll support for different axes (#35414)
+    - `https://github.com/servo/servo/pull/35414	(@yezhizhenjiakang@gmail.com, @mrobinson, #35414)	layout: Implement overflow scroll support for different axes (#35414)
       css
     - https://github.com/servo/servo/pull/35469	(@Loirooriol, #35469)	layout: Partial support for sizing keywords on flex items (#35469)
       css
-    - https://github.com/servo/servo/pull/35552	(@kingsley@kkoyung.dev, @Loirooriol, #35552)	Support for the `isolation` CSS property (#35552)
+    - `https://github.com/servo/servo/pull/35552	(@kingsley@kkoyung.dev, @Loirooriol, #35552)	Support for the `isolation` CSS property (#35552)
       css
-    - https://github.com/servo/servo/pull/34770	(@xiaochengh.work@gmail.com, #34770)	layout: Implement a non-recursive version of CSS `quotes` (#34770)
+    - `https://github.com/servo/servo/pull/34770	(@xiaochengh.work@gmail.com, #34770)	layout: Implement a non-recursive version of CSS `quotes` (#34770)
       css
 - dev
     - https://github.com/servo/servo/pull/35327	(@rayguo17, #35327)	change terminal wrapper library from blessing to blessed to support running mach test-wpt on windows. (#35327)
@@ -355,6 +355,24 @@ categories:
     - https://github.com/servo/servo/pull/35628	(@simonwuelker, #35628)	Update to rust 1.85 (#35628)
       upgrade
 -->
+
+Servo now supports more CSS properties:
+
+- the **‘quotes’** property (@xiaochengh, @Loirooriol, #34770, #35420)
+- the **‘isolation’** property (@kkoyung, @Loirooriol, #35552)
+- **‘overflow: clip’** (@longvatrong111, #35103)
+- **‘overflow’** property with two values (@yezhizhen, @mrobinson, #35414)
+
+Plus several new web API features:
+
+- **contextmenu** events (@pewsheen, #35364)
+- **WritableStream** (@gterzian, @jdm, #34844)
+- **ReadableStreamBYOBRequest** (@Taym95, #35074)
+- initial support for **FontFace** and its **load()** method (@mukilan, #35262)
+- **toBlob()** and **toDataURL()** on **WebGPU canvases** (@sagudev, #35237)
+- **bytes()** on **Request**, **Response**, and **Blob** (@shanehandley, @yoseio, @gterzian, @Taym95, #35250, #35151)
+- **href**, **origin**, **protocol**, **username**, **password**, **host**, **hostname**, **port**, **pathname**, **search**, and **hash** properties on **HTMLAreaElement** (@shanehandley, #35482)
+- **insertRule() with no argument** on **CSSGroupingRule** (@Loirooriol, #35295)
 
 ## Donations
 
