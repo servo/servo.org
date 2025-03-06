@@ -44,16 +44,16 @@ categories:
       crash
     - https://github.com/servo/servo/pull/35699	(@Gae24, #35699)	script: Avoid double borrow crash in `DataTransferItem` (#35699)
       crash
-- css
+- `css
     - `https://github.com/servo/servo/pull/35420	(@Loirooriol, #35420)	Enable the `quotes` CSS property (#35420)
       css
-    - https://github.com/servo/servo/pull/35413	(@Loirooriol, #35413)	layout: Basic implementation of size keywords on `flex-basis` (#35413)
+    - `https://github.com/servo/servo/pull/35413	(@Loirooriol, #35413)	layout: Basic implementation of size keywords on `flex-basis` (#35413)
       css
     - `https://github.com/servo/servo/pull/35103	(@longvatrong111, #35103)	Implement overflow:clip (#35103)
       css
     - `https://github.com/servo/servo/pull/35414	(@yezhizhenjiakang@gmail.com, @mrobinson, #35414)	layout: Implement overflow scroll support for different axes (#35414)
       css
-    - https://github.com/servo/servo/pull/35469	(@Loirooriol, #35469)	layout: Partial support for sizing keywords on flex items (#35469)
+    - `https://github.com/servo/servo/pull/35469	(@Loirooriol, #35469)	layout: Partial support for sizing keywords on flex items (#35469)
       css
     - `https://github.com/servo/servo/pull/35552	(@kingsley@kkoyung.dev, @Loirooriol, #35552)	Support for the `isolation` CSS property (#35552)
       css
@@ -205,34 +205,34 @@ categories:
       input
     - https://github.com/servo/servo/pull/35692	(@shubhamg13, #35692)	Set limits on pinch zoom (#35692)
       input
-- layout
-    - https://github.com/servo/servo/pull/35264	(@Loirooriol, #35264)	layout: Don't let table grid boxes inherit `display: inline-table` (#35264)
+- `layout
+    - -https://github.com/servo/servo/pull/35264	(@Loirooriol, #35264)	layout: Don't let table grid boxes inherit `display: inline-table` (#35264)
       layout
-    - https://github.com/servo/servo/pull/35178	(@rayguo17, #35178)	layout: align-content with default value normal should behave as strech in flex container (#35178)
+    - `https://github.com/servo/servo/pull/35178	(@rayguo17, #35178)	layout: align-content with default value normal should behave as strech in flex container (#35178)
       layout
-    - https://github.com/servo/servo/pull/35209	(@Loirooriol, #35209)	layout: Limit `content_inline_size_for_table` override to collapsed columns (#35209)
+    - -https://github.com/servo/servo/pull/35209	(@Loirooriol, #35209)	layout: Limit `content_inline_size_for_table` override to collapsed columns (#35209)
       layout
-    - https://github.com/servo/servo/pull/35208	(@Loirooriol, #35208)	layout: Implement default overflow alignment for abspos (#35208)
+    - `https://github.com/servo/servo/pull/35208	(@Loirooriol, #35208)	layout: Implement default overflow alignment for abspos (#35208)
       layout
-    - https://github.com/servo/servo/pull/35293	(@longvatrong111, #35293)	Add border radius to overflow scrollable frame (#35293)
+    - -https://github.com/servo/servo/pull/35293	(@longvatrong111, #35293)	Add border radius to overflow scrollable frame (#35293)
       layout
-    - https://github.com/servo/servo/pull/35290	(@Loirooriol, #35290)	layout: Simplify `Table::compute_inline_content_sizes` (#35290)
+    - -https://github.com/servo/servo/pull/35290	(@Loirooriol, #35290)	layout: Simplify `Table::compute_inline_content_sizes` (#35290)
       layout
-    - https://github.com/servo/servo/pull/35014	(@stevennovaryo, #35014)	layout: Fix relative positioned grid item (#35014)
+    - `https://github.com/servo/servo/pull/35014	(@stevennovaryo, #35014)	layout: Fix relative positioned grid item (#35014)
       layout
-    - https://github.com/servo/servo/pull/35443	(@Loirooriol, #35443)	layout: Remove `BoxFragment::overflow_clip_rect()` (#35443)
+    - -https://github.com/servo/servo/pull/35443	(@Loirooriol, #35443)	layout: Remove `BoxFragment::overflow_clip_rect()` (#35443)
       layout
-    - https://github.com/servo/servo/pull/35471	(@Loirooriol, #35471)	layout: Fully support sizing keywords on main size property of flex item (#35471)
+    - `https://github.com/servo/servo/pull/35471	(@Loirooriol, #35471)	layout: Fully support sizing keywords on main size property of flex item (#35471)
       layout
-    - https://github.com/servo/servo/pull/35630	(@Loirooriol, #35630)	layout: Ignore indefinite `stretch` on min and max sizing properties (#35630)
+    - `https://github.com/servo/servo/pull/35630	(@Loirooriol, #35630)	layout: Ignore indefinite `stretch` on min and max sizing properties (#35630)
       layout
-    - https://github.com/servo/servo/pull/35642	(@Loirooriol, #35642)	layout: Let `automatic_min_size()` take a flex-relative cb size (#35642)
+    - `https://github.com/servo/servo/pull/35642	(@Loirooriol, #35642)	layout: Let `automatic_min_size()` take a flex-relative cb size (#35642)
       layout
-    - https://github.com/servo/servo/pull/35663	(@Loirooriol, #35663)	layout: Support `stretch` cross size for flex base size (#35663)
+    - `https://github.com/servo/servo/pull/35663	(@Loirooriol, #35663)	layout: Support `stretch` cross size for flex base size (#35663)
       layout
-    - https://github.com/servo/servo/pull/35652	(@Loirooriol, #35652)	layout: Support `stretch` cross size for automatic min size in flexbox (#35652)
+    - `https://github.com/servo/servo/pull/35652	(@Loirooriol, #35652)	layout: Support `stretch` cross size for automatic min size in flexbox (#35652)
       layout
-    - https://github.com/servo/servo/pull/35688	(@Loirooriol, #35688)	layout: Use definite cross size to compute flex base size (#35688)
+    - `https://github.com/servo/servo/pull/35688	(@Loirooriol, #35688)	layout: Use definite cross size to compute flex base size (#35688)
       layout
 - net
     - https://github.com/servo/servo/pull/34986	(@shubhamg13, @shubham.gupta@chromium.org, @jdm, #34986)	Add support for Upgrade request to a potentially trustworthy URL. (#34986)
@@ -373,6 +373,8 @@ Plus several new web API features:
 - **bytes()** on **Request**, **Response**, and **Blob** (@shanehandley, @yoseio, @gterzian, @Taym95, #35250, #35151)
 - **href**, **origin**, **protocol**, **username**, **password**, **host**, **hostname**, **port**, **pathname**, **search**, and **hash** properties on **HTMLAreaElement** (@shanehandley, #35482)
 - **insertRule() with no argument** on **CSSGroupingRule** (@Loirooriol, #35295)
+
+We’ve landed layout improvements around **‘align-content: normal’** (@rayguo17, #35178), **‘place-self’** with **‘position: absolute’** (@Loirooriol, #35208), the **intrinsic sizing keywords** (@Loirooriol, #35413, #35469, #35471, #35630, #35642, #35663, #35652, #35688), and **‘position: absolute’** now works correctly in a **‘position: relative’ grid item** (@stevennovaryo, #35014).
 
 ## Donations
 
