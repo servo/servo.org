@@ -285,32 +285,32 @@ categories:
 - servodriver
     - https://github.com/servo/servo/pull/35677	(@jdm, #35677)	Allow webdriver screenshots to occur immediately upon request. (#35677)
       servodriver
-- servoshell
-    - https://github.com/servo/servo/pull/34823	(@chickenleaf, #34823)	servoshell: Migrate to egui-file-dialog from tinyfiledialogs (#34823)
+- `servoshell
+    - `https://github.com/servo/servo/pull/34823	(@chickenleaf, #34823)	servoshell: Migrate to egui-file-dialog from tinyfiledialogs (#34823)
       servoshell
-    - https://github.com/servo/servo/pull/35317	(@mrobinson, #35317)	libservo: Enable file directory listing by default (#35317)
+    - `https://github.com/servo/servo/pull/35317	(@mrobinson, #35317)	libservo: Enable file directory listing by default (#35317)
       servoshell
-    - https://github.com/servo/servo/pull/35377	(@mrobinson, #35377)	servoshell: Move `headless` setting to ServoShellPreferences (#35377)
+    - `https://github.com/servo/servo/pull/35377	(@mrobinson, #35377)	servoshell: Move `headless` setting to ServoShellPreferences (#35377)
+      embedding
+    - `https://github.com/servo/servo/pull/35407	(@mrobinson, #35407)	servoshell: Move `initial_window_size` and `screen_size_override` into `ServoShellPreferences` from `Opts` (#35407)
+      embedding
+    - `https://github.com/servo/servo/pull/35399	(@chickenleaf, #35399)	servoshell: Port alert/confirm dialog code to use egui intead of tinyfiledialogs (#35399)
       servoshell
-    - https://github.com/servo/servo/pull/35407	(@mrobinson, #35407)	servoshell: Move `initial_window_size` and `screen_size_override` into `ServoShellPreferences` from `Opts` (#35407)
+    - `https://github.com/servo/servo/pull/35464	(@chickenleaf, #35464)	servoshell: Port input dialog code to use egui intead of tinyfiledialogs (#35464)
       servoshell
-    - https://github.com/servo/servo/pull/35399	(@chickenleaf, #35399)	servoshell: Port alert/confirm dialog code to use egui intead of tinyfiledialogs (#35399)
+    - `https://github.com/servo/servo/pull/35507	(@chickenleaf, #35507)	servoshell: Port Authentication dialog code to use egui intead of tinyfiledialogs (#35507)
       servoshell
-    - https://github.com/servo/servo/pull/35464	(@chickenleaf, #35464)	servoshell: Port input dialog code to use egui intead of tinyfiledialogs (#35464)
+    - -https://github.com/servo/servo/pull/35546	(@dklassic, #35546)	chore: cleanup IME code for Servoshell (#35546)
       servoshell
-    - https://github.com/servo/servo/pull/35507	(@chickenleaf, #35507)	servoshell: Port Authentication dialog code to use egui intead of tinyfiledialogs (#35507)
+    - `https://github.com/servo/servo/pull/35577	(@chickenleaf, #35577)	servoshell: Port Permission dialog code to use egui instead of tinyfiledialogs (#35577)
       servoshell
-    - https://github.com/servo/servo/pull/35546	(@dklassic, #35546)	chore: cleanup IME code for Servoshell (#35546)
+    - `https://github.com/servo/servo/pull/35569	(@pewsheen, #35569)	fix(servoshell): blank view when close non focused tab (#35569)
       servoshell
-    - https://github.com/servo/servo/pull/35577	(@chickenleaf, #35577)	servoshell: Port Permission dialog code to use egui instead of tinyfiledialogs (#35577)
+    - `https://github.com/servo/servo/pull/35671	(@chickenleaf, #35671)	Blocks all background webview interactions when a dialog is open (#35671)
       servoshell
-    - https://github.com/servo/servo/pull/35569	(@pewsheen, #35569)	fix(servoshell): blank view when close non focused tab (#35569)
+    - `https://github.com/servo/servo/pull/35657	(@chickenleaf, #35657)	servoshell: Port SelectDevice dialog code to use egui instead of tinyfiledialogs (#35657)
       servoshell
-    - https://github.com/servo/servo/pull/35671	(@chickenleaf, #35671)	Blocks all background webview interactions when a dialog is open (#35671)
-      servoshell
-    - https://github.com/servo/servo/pull/35657	(@chickenleaf, #35657)	servoshell: Port SelectDevice dialog code to use egui instead of tinyfiledialogs (#35657)
-      servoshell
-    - https://github.com/servo/servo/pull/35674	(@chickenleaf, #35674)	Remove tinyfiledialogs dependency (#35674)
+    - `https://github.com/servo/servo/pull/35674	(@chickenleaf, #35674)	Remove tinyfiledialogs dependency (#35674)
       servoshell
 - `shadowdom
     - `https://github.com/servo/servo/pull/35220	(@simonwuelker, #35220)	Lay out the contents of slot elements (#35220)
@@ -382,6 +382,18 @@ Plus several new web API features:
 **Shadow roots** are now **supported in devtools** (@simonwuelker, #35294), and we’ve fixed some bugs related to shadow DOM trees (@simonwuelker, #35276, #35338), event handling (@simonwuelker, #35380), and custom elements (@maxtidev, @jdm, #35382).
 
 We’ve landed layout improvements around **‘border-collapse’** (@Loirooriol, #35219), **‘align-content: normal’** (@rayguo17, #35178), **‘place-self’** with **‘position: absolute’** (@Loirooriol, #35208), the **intrinsic sizing keywords** (@Loirooriol, #35413, #35469, #35471, #35630, #35642, #35663, #35652, #35688), and **‘position: absolute’** now works correctly in a **‘position: relative’ grid item** (@stevennovaryo, #35014).
+
+## Servo-the-browser
+
+**Directory listings** are now enabled for local files (@mrobinson, #35317).
+
+servoshell’s **dialogs now use egui** (@chickenleaf, #34823, #35399, #35464, #35507, #35577, #35657, #35671), rather than shelling out to a program like `zenity` (@chickenleaf, #35674), making them more secure and no longer falling back to terminal input.
+
+We’ve also fixed a bug when closing a tab other than the current one (@pewsheen, #35569).
+
+## Embedding
+
+We’ve moved some servoshell-only options out of [`Opts`](https://doc.servo.org/servo_config/opts/struct.Opts.html) (@mrobinson, #35377, #35407), since they have no effect on Servo’s behaviour.
 
 ## Donations
 
