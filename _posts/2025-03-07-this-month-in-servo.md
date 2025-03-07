@@ -367,6 +367,11 @@ Servo now supports more HTML and CSS features:
 - **‘overflow’** property with two values (@yezhizhen, @mrobinson, #35414)
 - the **‘::slotted’** selector (@simonwuelker, #35352)
 
+<figure>
+
+[![servoshell showing new support for &lt;details>, &lt;meter>, and &lt;progress> elements, plus layout support for &lt;slot> elements]({{ "/img/blog/february-2025.png" | url }})]({{ "/img/blog/february-2025.png" | url }})
+</figure>
+
 Plus several new web API features:
 
 - **contextmenu** events (@pewsheen, #35364)
@@ -387,7 +392,17 @@ We’ve landed layout improvements around **‘border-collapse’** (@Loirooriol
 
 **Directory listings** are now enabled for local files (@mrobinson, #35317).
 
+<figure>
+
+[![servoshell showing a local directory listing]({{ "/img/blog/2025-02-directory-listing.png" | url }})]({{ "/img/blog/2025-02-directory-listing.png" | url }})
+</figure>
+
 servoshell’s **dialogs now use egui** (@chickenleaf, #34823, #35399, #35464, #35507, #35564, #35577, #35657, #35671), rather than shelling out to a program like `zenity` (@chickenleaf, #35674), making them more secure and no longer falling back to terminal input.
+
+<figure>
+
+[![egui-based dialogs for alert(), confirm(), prompt(), and HTTP authentication]({{ "/img/blog/2025-02-egui-dialogs.png" | url }})]({{ "/img/blog/2025-02-egui-dialogs.png" | url }})
+</figure>
 
 We’ve also fixed a bug when closing a tab other than the current one (@pewsheen, #35569).
 
