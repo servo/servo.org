@@ -69,12 +69,12 @@ categories:
       devtools
     - https://github.com/servo/servo/pull/35416	(@jdm, #35416)	script: Add custom logging representation for DOM interfaces. (#35416)
       devtools
-- element
-    - https://github.com/servo/servo/pull/35524	(@simonwuelker, #35524)	Support the `<meter>` element (#35524)
+- `element
+    - `https://github.com/servo/servo/pull/35524	(@simonwuelker, #35524)	Support the `<meter>` element (#35524)
       element
-    - https://github.com/servo/servo/pull/35261	(@simonwuelker, #35261)	Allow the `<details>` element to be opened and closed (#35261)
+    - `https://github.com/servo/servo/pull/35261	(@simonwuelker, #35261)	Allow the `<details>` element to be opened and closed (#35261)
       element
-    - https://github.com/servo/servo/pull/35531	(@simonwuelker, #35531)	Implement the <progress> element (#35531)
+    - `https://github.com/servo/servo/pull/35531	(@simonwuelker, #35531)	Implement the <progress> element (#35531)
       element
 - embedding
     - https://github.com/servo/servo/pull/35229	(@mrobinson, #35229)	Finish the integration of `webxr` into the Cargo workspace (#35229)
@@ -356,8 +356,11 @@ categories:
       upgrade
 -->
 
-Servo now supports more CSS features:
+Servo now supports more HTML and CSS features:
 
+- the **&lt;details>** element (@simonwuelker, #35261)
+- the **&lt;meter>** element (@simonwuelker, #35524)
+- the **&lt;progress>** element (@simonwuelker, #35531)
 - the **‘quotes’** property (@xiaochengh, @Loirooriol, #34770, #35420)
 - the **‘isolation’** property (@kkoyung, @Loirooriol, #35552)
 - **‘overflow: clip’** (@longvatrong111, #35103)
