@@ -312,22 +312,22 @@ categories:
       servoshell
     - https://github.com/servo/servo/pull/35674	(@chickenleaf, #35674)	Remove tinyfiledialogs dependency (#35674)
       servoshell
-- shadowdom
+- `shadowdom
     - `https://github.com/servo/servo/pull/35220	(@simonwuelker, #35220)	Lay out the contents of slot elements (#35220)
       shadowdom
-    - https://github.com/servo/servo/pull/35276	(@simonwuelker, #35276)	Make traverse_preorder follow children of shadow hosts (#35276)
+    - `https://github.com/servo/servo/pull/35276	(@simonwuelker, #35276)	Make traverse_preorder follow children of shadow hosts (#35276)
       shadowdom
     - `https://github.com/servo/servo/pull/35294	(@simonwuelker, #35294)	Inform the devtools about shadow roots on a node (#35294)
       shadowdom
-    - https://github.com/servo/servo/pull/35338	(@simonwuelker, #35338)	Implement ServoLayoutNode::traversal_parent (#35338)
+    - `https://github.com/servo/servo/pull/35338	(@simonwuelker, #35338)	Implement ServoLayoutNode::traversal_parent (#35338)
       shadowdom
     - `https://github.com/servo/servo/pull/35352	(@simonwuelker, #35352)	Add support for the `::slotted` selector (#35352)
       shadowdom
-    - https://github.com/servo/servo/pull/35380	(@simonwuelker, #35380)	Handle assigned slottables in an Event's path (#35380)
+    - `https://github.com/servo/servo/pull/35380	(@simonwuelker, #35380)	Handle assigned slottables in an Event's path (#35380)
       shadowdom
-    - https://github.com/servo/servo/pull/35382	(@maxtidev, @max@maxti.dev, @jdm, #35382)	script: Add shadow dom check to custom element constructor (#35382)
+    - `https://github.com/servo/servo/pull/35382	(@maxtidev, @max@maxti.dev, @jdm, #35382)	script: Add shadow dom check to custom element constructor (#35382)
       shadowdom
-    - https://github.com/servo/servo/pull/35519	(@simonwuelker, #35519)	Don't attempt to report style attribute for non-htmlelements to devtools (#35519)
+    - `https://github.com/servo/servo/pull/35519	(@simonwuelker, #35519)	Don't attempt to report style attribute for non-htmlelements to devtools (#35519)
       shadowdom
 - `tables
     - `https://github.com/servo/servo/pull/35219	(@Loirooriol, #35219)	layout: Fix painting order of collapsed table borders (#35219)
@@ -378,8 +378,8 @@ Plus several new web API features:
 - **href**, **origin**, **protocol**, **username**, **password**, **host**, **hostname**, **port**, **pathname**, **search**, and **hash** properties on **HTMLAreaElement** (@shanehandley, #35482)
 - **insertRule() with no argument** on **CSSGroupingRule** (@Loirooriol, #35295)
 
-**&lt;slot> elements** are now fully supported including layout (@simonwuelker, #35220), and we’ve also landed support for the **‘::slotted’** selector (@simonwuelker, #35352).
-**Shadow roots** are now **supported in devtools** (@simonwuelker, #35294).
+**&lt;slot> elements** are now fully supported including layout (@simonwuelker, #35220, #35519), and we’ve also landed support for the **‘::slotted’** selector (@simonwuelker, #35352).
+**Shadow roots** are now **supported in devtools** (@simonwuelker, #35294), and we’ve fixed some bugs related to shadow DOM trees (@simonwuelker, #35276, #35338), event handling (@simonwuelker, #35380), and custom elements (@maxtidev, @jdm, #35382).
 
 We’ve landed layout improvements around **‘border-collapse’** (@Loirooriol, #35219), **‘align-content: normal’** (@rayguo17, #35178), **‘place-self’** with **‘position: absolute’** (@Loirooriol, #35208), the **intrinsic sizing keywords** (@Loirooriol, #35413, #35469, #35471, #35630, #35642, #35663, #35652, #35688), and **‘position: absolute’** now works correctly in a **‘position: relative’ grid item** (@stevennovaryo, #35014).
 
