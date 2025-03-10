@@ -263,24 +263,24 @@ categories:
       perf
     - `https://github.com/servo/servo/pull/35618	(@webbeef, #35618)	Improve scheduling of the memory profiler. (#35618)
       perf
-- script
-    - https://github.com/servo/servo/pull/35280	(@jdm, #35280)	Move more foundational types to script_bindings (#35280)
+- `script
+    - `https://github.com/servo/servo/pull/35280	(@jdm, #35280)	Move more foundational types to script_bindings (#35280)
       script
-    - https://github.com/servo/servo/pull/35279	(@jdm, #35279)	Move various reflector types and traits to script_bindings (#35279)
+    - `https://github.com/servo/servo/pull/35279	(@jdm, #35279)	Move various reflector types and traits to script_bindings (#35279)
       script
-    - https://github.com/servo/servo/pull/35292	(@jdm, #35292)	Make generated proxy handlers and DOM object hooks generic (#35292)
+    - `https://github.com/servo/servo/pull/35292	(@jdm, #35292)	Make generated proxy handlers and DOM object hooks generic (#35292)
       script
-    - https://github.com/servo/servo/pull/35435	(@mukilan, #35435)	script: reset spurious frame counter *only* when reflow is triggered (#35435)
+    - `https://github.com/servo/servo/pull/35435	(@mukilan, #35435)	script: reset spurious frame counter *only* when reflow is triggered (#35435)
       script
-    - https://github.com/servo/servo/pull/35387	(@mukilan, #35387)	script: fix spurious animation checks to correctly invoke rAF callbacks (#35387)
+    - `https://github.com/servo/servo/pull/35387	(@mukilan, #35387)	script: fix spurious animation checks to correctly invoke rAF callbacks (#35387)
       script
-    - https://github.com/servo/servo/pull/35578	(@jdm, #35578)	Move more bindings code to script_bindings (#35578)
+    - `https://github.com/servo/servo/pull/35578	(@jdm, #35578)	Move more bindings code to script_bindings (#35578)
       script
-    - https://github.com/servo/servo/pull/35459	(@jdm, #35459)	script: Make callbacks generic over DOM interfaces. (#35459)
+    - `https://github.com/servo/servo/pull/35459	(@jdm, #35459)	script: Make callbacks generic over DOM interfaces. (#35459)
       script
-    - https://github.com/servo/servo/pull/35457	(@jdm, #35457)	script: Refer to DOM interfaces with generic types in generated bindings. (#35457)
+    - `https://github.com/servo/servo/pull/35457	(@jdm, #35457)	script: Refer to DOM interfaces with generic types in generated bindings. (#35457)
       script
-    - https://github.com/servo/servo/pull/35620	(@jdm, #35620)	Move more bindings types to script_bindings (#35620)
+    - `https://github.com/servo/servo/pull/35620	(@jdm, #35620)	Move more bindings types to script_bindings (#35620)
       script
 - servodriver
     - https://github.com/servo/servo/pull/35677	(@jdm, #35677)	Allow webdriver screenshots to occur immediately upon request. (#35677)
@@ -332,14 +332,14 @@ categories:
 - `tables
     - `https://github.com/servo/servo/pull/35219	(@Loirooriol, #35219)	layout: Fix painting order of collapsed table borders (#35219)
       tables
-- unsafe
-    - https://github.com/servo/servo/pull/35367	(@stephenmuss@gmail.com, #35367)	script: make methods of ErrorInfo safe (#35367)
+- `unsafe
+    - `https://github.com/servo/servo/pull/35367	(@stephenmuss@gmail.com, #35367)	script: make methods of ErrorInfo safe (#35367)
       unsafe
-    - https://github.com/servo/servo/pull/35360	(@stephenmuss@gmail.com, #35360)	script: make throw_invalid_this and throw_constructor_without_new safe (#35360)
+    - `https://github.com/servo/servo/pull/35360	(@stephenmuss@gmail.com, #35360)	script: make throw_invalid_this and throw_constructor_without_new safe (#35360)
       unsafe
-    - https://github.com/servo/servo/pull/35351	(@nolen@scaife.org, #35351)	make report_pending_exception safe and adjust callers (#35351)
+    - `https://github.com/servo/servo/pull/35351	(@nolen@scaife.org, #35351)	make report_pending_exception safe and adjust callers (#35351)
       unsafe
-    - https://github.com/servo/servo/pull/35411	(@stephenmuss@gmail.com, #35411)	script: make Error::to_jsval safe (#35411)
+    - `https://github.com/servo/servo/pull/35411	(@stephenmuss@gmail.com, #35411)	script: make Error::to_jsval safe (#35411)
       unsafe
 - upgrade
     - https://github.com/servo/servo/pull/35289	(@Loirooriol, #35289)	Upgrade Stylo to 2025-02-03 (#35289)
@@ -436,9 +436,12 @@ The compositor now **notifies the embedder of new frames immediately** (@mrobins
 
 Servo’s typical **memory usage has been reduced by over 1%** thanks to Node object optimisations (@webbeef, #35592, #35554), and we’ve also improved our [memory profiler](https://book.servo.org/hacking/profiling.html#memory-profiling) (@webbeef, #35618, #35607).
 
-We’ve fixed a bug causing very high CPU usage on sites like wikipedia.org (@webbeef, #35245).
+We’ve fixed a bug causing very high CPU usage on sites like wikipedia.org (@webbeef, #35245), as well as bugs affecting requestAnimationFrame (@mukilan, #35387, #35435).
 
 You can now configure our tracing-based profiler (`--features tracing`) with `servo --tracing-filter` instead of `SERVO_TRACING` (@jschwe, #35370).
+
+We’ve continued **reducing our use of `unsafe` in script** (@nscaife, @stephenmuss, #35351, #35360, #35367, #35411), and **moving parts of `script` to `script_bindings`** (@jdm, #35279, #35280, #35292, #35457, #35459, #35578, #35620).
+Breaking up our massive `script` crate is absolutely critical for reducing Servo’s build times.
 
 ## Donations
 
