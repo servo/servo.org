@@ -35,14 +35,14 @@ categories:
       api
     - `https://github.com/servo/servo/pull/35151	(@yoseio, @gterzian, @Taym95, #35151)	script: Implement `Blob::bytes()` (#35151)
       api
-- crash
-    - https://github.com/servo/servo/pull/35235	(@webbeef, #35235)	Fix crash in screenX and screenY getters returning negative values (#35235)
+- `crash
+    - `https://github.com/servo/servo/pull/35235	(@webbeef, #35235)	Fix crash in screenX and screenY getters returning negative values (#35235)
       crash
-    - https://github.com/servo/servo/pull/35381	(@mrobinson, #35381)	dom: Always replace unpaired surrogates when handling page text (#35381)
+    - `https://github.com/servo/servo/pull/35381	(@mrobinson, #35381)	dom: Always replace unpaired surrogates when handling page text (#35381)
       crash
-    - https://github.com/servo/servo/pull/35606	(@simonwuelker, #35606)	Don't tell stylo about stylesheets that are not in a browsing context (#35606)
+    - `https://github.com/servo/servo/pull/35606	(@simonwuelker, #35606)	Don't tell stylo about stylesheets that are not in a browsing context (#35606)
       crash
-    - https://github.com/servo/servo/pull/35699	(@Gae24, #35699)	script: Avoid double borrow crash in `DataTransferItem` (#35699)
+    - `https://github.com/servo/servo/pull/35699	(@Gae24, #35699)	script: Avoid double borrow crash in `DataTransferItem` (#35699)
       crash
 - `css
     - `https://github.com/servo/servo/pull/35420	(@Loirooriol, #35420)	Enable the `quotes` CSS property (#35420)
@@ -153,42 +153,42 @@ categories:
       embedding
     - `https://github.com/servo/servo/pull/35691	(@webbeef, #35691)	winit_mininal: support proper window resizing (#35691)
       embedding
-- gc
-    - https://github.com/servo/servo/pull/35541	(@augustebaum, #35541)	Propagate `CanGc` arguments through callers in constructors (#35541)
+- `gc
+    - `https://github.com/servo/servo/pull/35541	(@augustebaum, #35541)	Propagate `CanGc` arguments through callers in constructors (#35541)
       gc
-    - https://github.com/servo/servo/pull/35593	(@yerkebulan@gmail.com, #35593)	refactor: add CanGc as argument to extract_size_algorithm (#35593)
+    - `https://github.com/servo/servo/pull/35593	(@yerke, #35593)	refactor: add CanGc as argument to extract_size_algorithm (#35593)
       gc
-    - https://github.com/servo/servo/pull/35565	(@augustebaum, #35565)	refactor: propagate CanGc arguments through callers (#35565)
+    - `https://github.com/servo/servo/pull/35565	(@augustebaum, #35565)	refactor: propagate CanGc arguments through callers (#35565)
       gc
-    - https://github.com/servo/servo/pull/35610	(@yerkebulan@gmail.com, #35610)	refactor: add CanGc as argument to DataBlock::view (#35610)
+    - `https://github.com/servo/servo/pull/35610	(@yerke, #35610)	refactor: add CanGc as argument to DataBlock::view (#35610)
       gc
-    - https://github.com/servo/servo/pull/35591	(@augustebaum, #35591)	refactor: propagate CanGc arguments through callers (#35591)
+    - `https://github.com/servo/servo/pull/35591	(@augustebaum, #35591)	refactor: propagate CanGc arguments through callers (#35591)
       gc
-    - https://github.com/servo/servo/pull/35609	(@yerkebulan@gmail.com, #35609)	refactor: add CanGc as argument to WindowProxy::set_window (#35609)
+    - `https://github.com/servo/servo/pull/35609	(@yerke, #35609)	refactor: add CanGc as argument to WindowProxy::set_window (#35609)
       gc
-    - https://github.com/servo/servo/pull/35601	(@yerkebulan@gmail.com, #35601)	refactor: add CanGc as argument to SubtleCrypto::import_key_{pbkdf2, aes, hkdf, hmac} (#35601)
+    - `https://github.com/servo/servo/pull/35601	(@yerke, #35601)	refactor: add CanGc as argument to SubtleCrypto::import_key_{pbkdf2, aes, hkdf, hmac} (#35601)
       gc
-    - https://github.com/servo/servo/pull/35596	(@yerkebulan@gmail.com, @jdm, #35596)	refactor: add CanGc as argument to create_buffer_source_with_length (#35596)
+    - `https://github.com/servo/servo/pull/35596	(@yerke, @jdm, #35596)	refactor: add CanGc as argument to create_buffer_source_with_length (#35596)
       gc
-    - https://github.com/servo/servo/pull/35595	(@yerkebulan@gmail.com, #35595)	refactor: add CanGc as argument to CountQueuingStrategy::GetSize (#35595)
+    - `https://github.com/servo/servo/pull/35595	(@yerke, #35595)	refactor: add CanGc as argument to CountQueuingStrategy::GetSize (#35595)
       gc
-    - https://github.com/servo/servo/pull/35594	(@yerkebulan@gmail.com, #35594)	refactor: add CanGc as argument to ByteLengthQueuingStrategy::GetSize (#35594)
+    - `https://github.com/servo/servo/pull/35594	(@yerke, #35594)	refactor: add CanGc as argument to ByteLengthQueuingStrategy::GetSize (#35594)
       gc
-    - https://github.com/servo/servo/pull/35597	(@yerkebulan@gmail.com, #35597)	refactor: add CanGc as argument to create_buffer_source (#35597)
+    - `https://github.com/servo/servo/pull/35597	(@yerke, #35597)	refactor: add CanGc as argument to create_buffer_source (#35597)
       gc
-    - https://github.com/servo/servo/pull/35622	(@yerkebulan@gmail.com, #35622)	refactor: add CanGc as argument to Promise::reject (#35622)
+    - `https://github.com/servo/servo/pull/35622	(@yerke, #35622)	refactor: add CanGc as argument to Promise::reject (#35622)
       gc
-    - https://github.com/servo/servo/pull/35604	(@augustebaum, #35604)	Propagate more `CanGc` (#35604)
+    - `https://github.com/servo/servo/pull/35604	(@augustebaum, #35604)	Propagate more `CanGc` (#35604)
       gc
-    - https://github.com/servo/servo/pull/35616	(@yerkebulan@gmail.com, #35616)	refactor: add CanGc as argument to Promise::resolve (#35616)
+    - `https://github.com/servo/servo/pull/35616	(@yerke, #35616)	refactor: add CanGc as argument to Promise::resolve (#35616)
       gc
-    - https://github.com/servo/servo/pull/35605	(@Gae24, #35605)	script: add `CanGc` argument to `Promise::new_resolved` and `Promise::new_rejected` (#35605)
+    - `https://github.com/servo/servo/pull/35605	(@Gae24, #35605)	script: add `CanGc` argument to `Promise::new_resolved` and `Promise::new_rejected` (#35605)
       gc
-    - https://github.com/servo/servo/pull/35640	(@yerkebulan@gmail.com, #35640)	refactor: add CanGc as argument to Promise::reject_native (#35640)
+    - `https://github.com/servo/servo/pull/35640	(@yerke, #35640)	refactor: add CanGc as argument to Promise::reject_native (#35640)
       gc
-    - https://github.com/servo/servo/pull/35647	(@yerkebulan@gmail.com, #35647)	refactor: add CanGc as argument to exception_to_promise (#35647)
+    - `https://github.com/servo/servo/pull/35647	(@yerke, #35647)	refactor: add CanGc as argument to exception_to_promise (#35647)
       gc
-    - https://github.com/servo/servo/pull/35646	(@yerkebulan@gmail.com, #35646)	refactor: add CanGc as argument to Promise::reject_error (#35646)
+    - `https://github.com/servo/servo/pull/35646	(@yerke, #35646)	refactor: add CanGc as argument to Promise::reject_error (#35646)
       gc
 - `input
     - `https://github.com/servo/servo/pull/35450	(@kongbai1996, #35450)	fix issue #35449: handle touch events in on_input_event. (#35450)
@@ -430,7 +430,7 @@ First landed in #31417, this was an expedient way to add support for multiple we
 
 We’ve **updated our [winit_minimal example](https://github.com/servo/servo/blob/139774e6b55c297bc94f7fcb8c9bf5bb8c6a7474/components/servo/examples/winit_minimal.rs)** to take advantage of these changes (@webbeef, #35350, #35686), simplify it further (@robertohuertasm, #35253), and fix window resizing (@webbeef, #35691).
 
-## Perf improvements
+## Perf and stability
 
 The compositor now **notifies the embedder of new frames immediately** (@mrobinson, #35369), not via the constellation thread.
 
@@ -442,6 +442,9 @@ You can now configure our tracing-based profiler (`--features tracing`) with `se
 
 We’ve continued **reducing our use of `unsafe` in script** (@nscaife, @stephenmuss, #35351, #35360, #35367, #35411), and **moving parts of `script` to `script_bindings`** (@jdm, #35279, #35280, #35292, #35457, #35459, #35578, #35620).
 Breaking up our massive `script` crate is absolutely critical for reducing Servo’s build times.
+
+We’ve fixed crashes that happen when moving windows past the edge of your monitor (@webbeef, #35235), when unpaired UTF-16 surrogates are sent to the DOM (@mrobinson, #35381), when focusing elements inside shadow roots (@simonwuelker, #35606), and when calling getAsString() on a DataTransferItem (@Gae24, #35699).
+We’ve also continued working on static analysis that will help catch crashes due to [GC borrow hazards](https://github.com/servo/servo/issues/33140) (@augustebaum, @yerke, @jdm, @Gae24, #35541, #35593, #35565, #35610, #35591, #35609, #35601, #35596, #35595, #35594, #35597, #35622, #35604, #35616, #35605, #35640, #35647, #35646).
 
 ## Donations
 
