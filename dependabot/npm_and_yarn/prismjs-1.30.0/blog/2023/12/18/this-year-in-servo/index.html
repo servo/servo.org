@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>This year in Servo: over 1000 pull requests and beyond - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="This year in Servo: over 1000 pull requests and beyond - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  
+
+  
+  <meta name="description" content="Reflections on Servo’s progress in 2023: contributor stats, new features, layout improvements, WPT pass rates, and plans for next year.">
+  <meta name="og:description" content="Reflections on Servo’s progress in 2023: contributor stats, new features, layout improvements, WPT pass rates, and plans for next year.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/dependabot/npm_and_yarn/prismjs-1.30.0/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/dependabot/npm_and_yarn/prismjs-1.30.0/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/dependabot/npm_and_yarn/prismjs-1.30.0/blog/2023/12/18/this-year-in-servo/">
+
+  <link rel="stylesheet" href="/dependabot/npm_and_yarn/prismjs-1.30.0/css/style.css">
+  <link rel="shortcut icon" href="/dependabot/npm_and_yarn/prismjs-1.30.0/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/dependabot/npm_and_yarn/prismjs-1.30.0/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="inner-container">
+      <div class="navbar-brand">
+        <a href="/dependabot/npm_and_yarn/prismjs-1.30.0/">
+          <img src="/dependabot/npm_and_yarn/prismjs-1.30.0/img/servo-color.png" alt="This year in Servo: over 1000 pull requests and beyond">
+        </a>
+
+        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="navbar-menu" id="navbar-menu">
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                Get Involved
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/dependabot/npm_and_yarn/prismjs-1.30.0/contributing/"
+                    
+                  >
+                    Contributing
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://book.servo.org"
+                     target="_blank"
+                  >
+                    Servo Book<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/dependabot/npm_and_yarn/prismjs-1.30.0/wpt/"
+                    
+                  >
+                    WPT pass rates
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/dependabot/npm_and_yarn/prismjs-1.30.0/coc/"
+                    
+                  >
+                    Code of Conduct
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/dependabot/npm_and_yarn/prismjs-1.30.0/download/"
+              
+            >
+              Download
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/dependabot/npm_and_yarn/prismjs-1.30.0/blog/"
+              
+            >
+              Blog
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="https://demo.servo.org/"
+               target="_blank"
+            >
+              Demos<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+            </a>
+          
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                About
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/dependabot/npm_and_yarn/prismjs-1.30.0/about/"
+                    
+                  >
+                    About Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/dependabot/npm_and_yarn/prismjs-1.30.0/made-with/"
+                    
+                  >
+                    Made with Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://github.com/servo/project/blob/main/governance/README.md"
+                     target="_blank"
+                  >
+                    Governance<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/dependabot/npm_and_yarn/prismjs-1.30.0/sponsorship/"
+                    
+                  >
+                    Sponsorship
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/dependabot/npm_and_yarn/prismjs-1.30.0/acknowledgements/"
+                    
+                  >
+                    Acknowledgements
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+        <div class="navbar-end">
+    
+      <a class="social-link is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="social-link is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="social-link is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="social-link is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+</div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburgerMenu');
+  const menu = document.getElementById('navbar-menu');
+
+  const toggleMenu = () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('is-active', isExpanded);
+  };
+
+  // Toggle on click
+  hamburger.addEventListener('click', toggleMenu);
+
+
+</script>
+          <div class="content" id="This year in Servo: over 1000 pull requests and beyond">
+            
+<div class="blog-hero">
+  <div class="container">
+    <div class="inner-container">
+    <h1 class="title">This year in Servo: over 1000 pull requests and beyond</h1>
+      <p class="subtitle">Reflections on Servo’s progress in 2023: contributor stats, new features, layout improvements, WPT pass rates, and plans for next year.</p>
+      <p class="posted">Posted <span class="tag is-dark">2023-12-18</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="inner-container blog-content">
+  <p>Servo is well and truly back.</p>
+<figure class="_figr _default"><a href="/dependabot/npm_and_yarn/prismjs-1.30.0/img/blog/recap-2023-contributors.png"><img src="/dependabot/npm_and_yarn/prismjs-1.30.0/img/blog/recap-2023-contributors.png"
+    alt="Bar chart: 453 (44%) by Igalia, 195 (19%) by non-Igalia, 389 (37%) by bots"></a>
+<figcaption>Contributors to <a href="https://github.com/servo/servo">servo/servo</a> in 2023.</figcaption></figure>
+<p><span class="_floatmin"></span>
+This year, to date, we’ve had <strong>53 unique contributors</strong> (+140% over 22 last year), landing <strong>1037 pull requests</strong> (+382% over 215) and 2485 commits (+375% over 523), and that’s just in <a href="https://github.com/servo/servo">our main repo</a>!</p>
+<p>Individual contributors are especially important for the health of the project, and of the pull requests made by humans (rather than our <a href="https://github.com/servo-wpt-sync">friendly</a> <a href="https://github.com/dependabot">bots</a>), 30% were by people outside Igalia, and 18% were by non-reviewers.</p>
+<p>Servo has been featured in <a href="/dependabot/npm_and_yarn/prismjs-1.30.0/about/">six conference talks</a> this year, including at <a href="https://www.youtube.com/watch?v=IdHvHoAO5oo">RustNL</a>, <a href="https://www.youtube.com/watch?v=pfk8s5OD99A">Web Engines Hackfest</a>, <a href="https://www.youtube.com/watch?v=J4qedc-0pjs&amp;t=2356s">LF Europe Member Summit</a>, <a href="https://youtu.be/9lkIX5ryZZ4">Open Source Summit Europe</a>, <a href="https://youtu.be/RugzThWcjn4">GOSIM Workshop</a>, and <a href="https://www.youtube.com/watch?v=lx70W83Bxtc">GOSIM Conference</a>.</p>
+<p>Servo now has a usable “minibrowser” UI, now supports offscreen rendering, its experimental WebGPU support (<code>--pref dom.webgpu.enabled</code>) has been updated, and Servo is now listed on <a href="https://wpt.fyi">wpt.fyi</a> again (click <span style="font-variant-caps: all-small-caps;">Edit</span> to add Servo).</p>
+<p><a href="/dependabot/npm_and_yarn/prismjs-1.30.0/blog/2023/04/13/layout-2013-vs-2020/">Our new layout engine</a> is now proving its strengths, with support for iframes, floats, stacking context improvements, inline layout improvements, margin collapsing, ‘position: sticky’, ‘min-width’ and ‘min-height’, ‘max-width’ and ‘max-height’, ‘align-content’, ‘justify-content’, ‘white-space’, ‘text-indent’, ‘text-align: justify’, <a href="/dependabot/npm_and_yarn/prismjs-1.30.0/blog/2023/05/31/adding-support-for-outline-properties/">‘outline’ and ‘outline-offset’</a>, and ‘filter: drop-shadow()’.</p>
+<figure class="_figl _default" style="clear: both;"><a href="/dependabot/npm_and_yarn/prismjs-1.30.0/img/blog/recap-2023-wpt.png"><img src="/dependabot/npm_and_yarn/prismjs-1.30.0/img/blog/recap-2023-wpt.png"
+    alt="Bar chart: 17% + 64pp in floats, 18% + 55pp in floats-clear, 63% + 15pp in key CSS2 tests, 80% + 14pp in abspos, 34% + 14pp in CSS position module, 67% + 13pp in margin-padding-clear, 49% + 13pp in CSSOM, 51% + 10pp in all CSS tests, 49% + 6pp in all WPT tests"></a>
+<figcaption style="max-width: 25em; margin: 0 auto;">Pass rates in parts of the <a href="https://web-platform-tests.org">Web Platform Tests</a> with our new layout engine, showing the improvement we’ve made since the <a href="/dependabot/npm_and_yarn/prismjs-1.30.0/blog/2023/07/20/servo-web-platform-tests/">start of our data</a> in April 2023.</figcaption></figure>
+<p><span class="_floatmin" style="clear: right;"></span>
+<a href="https://github.com/dbaron/inlines-and-floats">Floats are notoriously tricky</a>, to the point we found them <a href="https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report">impossible to implement correctly</a> in our legacy layout engine, but thanks to the move from eager to opportunistic parallelism, they are now supported fairly well.
+Whereas legacy layout was only ever able to reach 53.9% in the floats tests and 68.2% in floats-clear, we’re now at <strong>82.2% in floats</strong> (+28.3pp over legacy) and <strong>73.3% in floats-clear</strong> (+5.1pp over legacy).</p>
+<p><a href="http://acid1.acidtests.org">Acid1</a> now passes in the new layout engine, and we’ve also surpassed legacy layout in the <strong>CSS2 abspos (by 50.0pp)</strong>, CSS2 positioning (by 6.5pp), and CSS Position (by 4.4pp) test suites, while making big strides in others, like the <strong>CSSOM tests (+13.1pp)</strong> and key parts of the <strong>CSS2 test suite (+15.8pp)</strong>.</p>
+<p><span class="_floatmin" style="clear: both;"></span>
+<a href="https://github.com/servo/servo/wiki/Roadmap/106e95887c3d9768f791a4e0501ba5c89abe9636">Next year</a>, our funding will go towards maintaining Servo, releasing nightlies on Android, finishing our integration with Tauri (thanks to NLNet), and implementing tables and better support for floats and non-Latin text (thanks to NLNet).</p>
+<p>Servo will also be at <a href="https://fosdem.org/2024/">FOSDEM 2024</a>, with Rakhi Sharma speaking about <a href="https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/">embedding Servo in Rust projects</a> on <strong>3 February</strong> at <strong>16:45 local time</strong> (15:45 UTC).
+See you there!</p>
+<p>There’s a lot more we would like to do, so if you or a company you know are interested in sponsoring the development of an embeddable, independent, memory-safe, modular, parallel web rendering engine, we want to hear from you!
+Head over to <a href="/dependabot/npm_and_yarn/prismjs-1.30.0/sponsorship/">our sponsorship page</a>, or email <a href="mailto:join@servo.org">join@servo.org</a> for enquiries.</p>
+<p>In a decade that many people feared would become the nadir of browser engine diversity, we hope we can help change that with Servo.</p>
+<!--
+pull request data
+$ tools/list-pull-requests.sh servo/servo '2022-.*' | tee 2022.json
+$ tools/list-pull-requests.sh servo/servo '2023-.*' | tee 2023.json
+
+pull requests
+- 2022: 215 (< 2022.json jq -s length)
+- 2023: 1037 (< 2023.json jq -s length)
+
+contributors
+- 2022: 22 (< 2022.json jq -r .user.login | sort | uniq -c | sort -nr | wc -l)
+- 2023: 53 (< 2023.json jq -r .user.login | sort | uniq -c | sort -nr | wc -l)
+
+reviewers
+- https://github.com/orgs/servo/teams/developers
+- copy($$("#team-members li[data-bulk-actions-id]").map(x => x.dataset.bulkActionsId).sort().join("\n"))
+
+commits
+- 2022: 523 (git log --pretty=format:$'%h\t%cd' | rg ' 2022 ' | wc -l)
+- 2023: 2485 (git log --pretty=format:$'%h\t%cd' | rg ' 2023 ' | wc -l)
+
+for wpt pass rates and all other analysis, see assets/img/blog/recap-2023.ods
+-->
+<style>
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig > ._flex {
+        display: flex;
+    }
+    ._fig._min {
+        width: min-content;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+    }
+    ._figr {
+        float: right;
+    }
+    ._figl > iframe,
+    ._figr > iframe,
+    ._figl > a > img,
+    ._figr > a > img {
+        width: 17em;
+        max-width: max-content;
+    }
+    ._figl._default > iframe,
+    ._figr._default > iframe,
+    ._figl._default > a > img,
+    ._figr._default > a > img {
+        width: auto;
+        max-width: 100%;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+</style>
+
+  <div>
+    <a href="/dependabot/npm_and_yarn/prismjs-1.30.0/blog/">Back</a>
+  </div>
+</div>
+
+
+
+          </div>
+    </main>
+    <div class="contact" aria-label="Contact information">
+    <div class="container">
+        <div class="inner-container two-column">
+            <div class="column">
+                <h2>Contact</h2>
+            </div>
+            <div class="column">
+                <ul>
+                    <li><a class="footer-link" href="https://servo.zulipchat.com/">Zulip chat</a></li>
+                    <li><a class="footer-link" href="https://github.com/servo/servo/discussions">GitHub discussions</a></li>
+                    <li><a class="footer-link" href="mailto:info@servo.org">Email: info@servo.org</a></li>
+                    <li><a class="footer-link" href="https://floss.social/@servo">Mastodon</a></li>
+                    <li><a class="footer-link" href="https://bsky.app/profile/servo.org">Bluesky</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer>
+      <div class="footer">
+  <div class="container">
+    <div class="two-column inner-container">
+      <div class="column">
+        <div class="logo"><a href="https://linuxfoundation.eu"><img src="/dependabot/npm_and_yarn/prismjs-1.30.0/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250"></a></div>
+        <p>&copy; 2025 The Servo Project Developers</p>
+        <p>Copyright &copy; Servo is a project of <a class="footer-link" href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+        <p>For website terms of use, trademark policy and other project policies please see <a class="footer-link" href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+        <p>The source code for this website can be found at <a class="footer-link" href="https://github.com/servo/servo.org">https://github.com/servo/servo.org</a>.</p>
+      </div>
+      <div class="column code-of-conduct">
+        <a class="footer-link" href="/dependabot/npm_and_yarn/prismjs-1.30.0/coc/">Code of Conduct</a>
+      </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const burger = document.querySelector(".navbar-burger");
+    const menu = document.querySelector(".navbar-menu");
+    burger.onclick = () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    };
+  })();
+</script>
+
+    </footer>
+  </body>
+</html>
