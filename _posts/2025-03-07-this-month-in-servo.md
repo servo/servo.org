@@ -190,20 +190,20 @@ categories:
       gc
     - https://github.com/servo/servo/pull/35646	(@yerkebulan@gmail.com, #35646)	refactor: add CanGc as argument to Promise::reject_error (#35646)
       gc
-- input
-    - https://github.com/servo/servo/pull/35450	(@kongbai1996, #35450)	fix issue #35449: handle touch events in on_input_event. (#35450)
+- `input
+    - `https://github.com/servo/servo/pull/35450	(@kongbai1996, #35450)	fix issue #35449: handle touch events in on_input_event. (#35450)
       input
-    - https://github.com/servo/servo/pull/35031	(@kongbai1996, #35031)	implement Touchevent prevent default behavior (#35031)
+    - `https://github.com/servo/servo/pull/35031	(@kongbai1996, #35031)	implement Touchevent prevent default behavior (#35031)
       input
-    - https://github.com/servo/servo/pull/35535	(@dklassic, #35535)	feat: support pre-edit text display for IME (#35535)
+    - `https://github.com/servo/servo/pull/35535	(@dklassic, #35535)	feat: support pre-edit text display for IME (#35535)
       input
-    - https://github.com/servo/servo/pull/35550	(@kongbai1996, #35550)	fix touch event wrong coordinates. pageX, pageY, clientX, clientY etc. (#35550)
+    - `https://github.com/servo/servo/pull/35550	(@kongbai1996, #35550)	fix touch event wrong coordinates. pageX, pageY, clientX, clientY etc. (#35550)
       input
-    - https://github.com/servo/servo/pull/35623	(@dklassic, #35623)	feat: support IME cursor area (#35623)
+    - `https://github.com/servo/servo/pull/35623	(@dklassic, #35623)	feat: support IME cursor area (#35623)
       input
-    - https://github.com/servo/servo/pull/35537	(@kongbai1996, @schwenderjonathan@gmail.com, #35537)	Touch handler: Fix race condition and rate-limit move events (#35537)
+    - `https://github.com/servo/servo/pull/35537	(@kongbai1996, @schwenderjonathan@gmail.com, #35537)	Touch handler: Fix race condition and rate-limit move events (#35537)
       input
-    - https://github.com/servo/servo/pull/35692	(@shubhamg13, #35692)	Set limits on pinch zoom (#35692)
+    - `https://github.com/servo/servo/pull/35692	(@shubhamg13, #35692)	Set limits on pinch zoom (#35692)
       input
 - `layout
     - -https://github.com/servo/servo/pull/35264	(@Loirooriol, #35264)	layout: Don't let table grid boxes inherit `display: inline-table` (#35264)
@@ -250,18 +250,18 @@ categories:
       notifications
     - https://github.com/servo/servo/pull/34842	(@pewsheen, @jdm, #34842)	feat: add `Notification` Web API binding (#34842)
       notifications
-- perf
-    - https://github.com/servo/servo/pull/35245	(@webbeef, #35245)	Only consider fully active documents when running the 'update the rendering' steps (#35245)
+- `perf
+    - `https://github.com/servo/servo/pull/35245	(@webbeef, #35245)	Only consider fully active documents when running the 'update the rendering' steps (#35245)
       perf
-    - https://github.com/servo/servo/pull/35370	(@jschwe, #35370)	Add cli option for tracing-filter (#35370)
+    - `https://github.com/servo/servo/pull/35370	(@jschwe, #35370)	Add cli option for tracing-filter (#35370)
       perf
-    - https://github.com/servo/servo/pull/35592	(@webbeef, #35592)	dom: Move child_list to rare data (#35592)
+    - `https://github.com/servo/servo/pull/35592	(@webbeef, #35592)	dom: Move child_list to rare data (#35592)
       perf
-    - https://github.com/servo/servo/pull/35554	(@webbeef, #35554)	dom: move node ranges to raredata (#35554)
+    - `https://github.com/servo/servo/pull/35554	(@webbeef, #35554)	dom: move node ranges to raredata (#35554)
       perf
-    - https://github.com/servo/servo/pull/35607	(@webbeef, #35607)	Remove the traversal for DomRoot values when collection memory usage (#35607)
+    - `https://github.com/servo/servo/pull/35607	(@webbeef, #35607)	Remove the traversal for DomRoot values when collection memory usage (#35607)
       perf
-    - https://github.com/servo/servo/pull/35618	(@webbeef, #35618)	Improve scheduling of the memory profiler. (#35618)
+    - `https://github.com/servo/servo/pull/35618	(@webbeef, #35618)	Improve scheduling of the memory profiler. (#35618)
       perf
 - script
     - https://github.com/servo/servo/pull/35280	(@jdm, #35280)	Move more foundational types to script_bindings (#35280)
@@ -388,6 +388,8 @@ Plus several new web API features:
 
 We’ve landed layout improvements around **‘border-collapse’** (@Loirooriol, #35219), **‘align-content: normal’** (@rayguo17, #35178), **‘place-self’** with **‘position: absolute’** (@Loirooriol, #35208), the **intrinsic sizing keywords** (@Loirooriol, #35413, #35469, #35471, #35630, #35642, #35663, #35652, #35688), and **‘position: absolute’** now works correctly in a **‘position: relative’ grid item** (@stevennovaryo, #35014).
 
+Input has also been improved, with **better IME support** (@dklassic, #35535, #35623) and several fixes to touch input (@kongbai1996, @jschwe, @shubhamg13, #35450, #35031, #35550, #35537, #35692).
+
 ## Servo-the-browser (servoshell)
 
 **Directory listings** are now enabled for local files (@mrobinson, #35317).
@@ -431,6 +433,12 @@ We’ve **updated our [winit_minimal example](https://github.com/servo/servo/blo
 ## Perf improvements
 
 The compositor now **notifies the embedder of new frames immediately** (@mrobinson, #35369), not via the constellation thread.
+
+Servo’s typical **memory usage has been reduced by over 1%** thanks to Node object optimisations (@webbeef, #35592, #35554), and we’ve also improved our [memory profiler](https://book.servo.org/hacking/profiling.html#memory-profiling) (@webbeef, #35618, #35607).
+
+We’ve fixed a bug causing very high CPU usage on sites like wikipedia.org (@webbeef, #35245).
+
+You can now configure our tracing-based profiler (`--features tracing`) with `servo --tracing-filter` instead of `SERVO_TRACING` (@jschwe, #35370).
 
 ## Donations
 
