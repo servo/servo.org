@@ -20,7 +20,7 @@ Servo now supports more HTML and CSS features:
 
 <figure>
 
-[![servoshell showing new support for &lt;details>, &lt;meter>, and &lt;progress> elements, plus layout support for &lt;slot> elements]({{ "/img/blog/february-2025.png" | url }})]({{ "/img/blog/february-2025.png" | url }})
+[![servoshell showing new support for <details>, <meter>, and <progress> elements, plus layout support for <slot> elements]({{ "/img/blog/february-2025.png" | url }})]({{ "/img/blog/february-2025.png" | url }})
 </figure>
 
 Plus several new web API features:
