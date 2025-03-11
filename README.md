@@ -355,14 +355,25 @@ And generally we want to exclude...
 
 The suggested workflow for efficiently triaging commits is as follows:
 
-- [List commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly) last month, copying the output to your clipboard
-- In your monthly update post, paste that output between a `<!--[commits]` line and a `[/commits]-->` line
-- For each commit, click on the link to read more and understand its impact (see [§ Hints for writing about changes](#hints-for-writing-about-changes))
+- [Fetch pull request details](#how-to-list-this-years-pull-request-contributors) for the last two months, as follows:
+
+```
+$ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-2025-02.json
+```
+
+- [List commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly) last month, as follows:
+
+```
+$ tools/list-commits-by-nightly.sh ~/code/servo tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
+```
+
+- Open commits.txt — for the best ergonomics in VS Code, **Fold All**, then **Change Language Mode** > **Diff**
+- For each commit, read the description below to understand its impact (see [§ Hints for writing about changes](#hints-for-writing-about-changes))
 - For each commit to be excluded from the post, prefix the line with `-`
 - For each commit to be included in the post, prefix the line with `+` then:
     - Add a line immediately below of the form `    one or more tags` (four spaces, then space-separated tags)
     - To write some notes or additional context, append `; your notes` to that new tags line
-- Generate the outline: `tools/generate-outline.sh _posts/xxxx-xx-xx-this-month-in-servo.md`
+- Generate the outline: `tools/generate-outline.sh commits.txt`
 
 ## Hints for writing about changes
 
