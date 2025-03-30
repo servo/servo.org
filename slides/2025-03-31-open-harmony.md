@@ -216,13 +216,13 @@ Rust and Servo Team at Mozilla Research
 
 <div style="width: 50px; height: 10px; background: #488bd1; margin-bottom: 20px;"></div>
 
-<div class="ffragment" style="float: left; width: 65%; margin-top: 80px;">
+<div class="ffragment" style="float: left; width: 65%;">
 
-* Servo already running on OH
-* Build Support & documentation for OH
-* Open Harmony on Servo CI
-* Improved new webview API
+* Servo running on OH ✅
+* OH nightly ✅
+* Build, CI & Documentation ✅
 
+<img style="margin-block: 0;" src="/img/nightly.png" alt="image showing Servo nightly" />
 </div>
 
 <div class="ffragment" style="float: right; width: 30%;">
