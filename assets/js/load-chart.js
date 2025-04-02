@@ -38,7 +38,8 @@ function parseDateString (date) {
 function toolTip (date, wpt_sha, servo_version, score, engine) {
     return `
         <b>${formatDate(date)}</b></br>
-        Score: <b>${score / 10}</b></br>
+        Score: <b>${Math.floor(1000 * score.total_score / score.total_tests) / 10}%</b></br>
+        Subtests: <b>${Math.floor(1000 * score.total_subtests_passed / score.total_subtests) / 10}%</b></br>
         WPT: ${wpt_sha}</br>
         Servo (${engine}): ${servo_version}
     `
@@ -129,7 +130,9 @@ function setupChart () {
         table.addColumn('date', 'runOn')
 
         options.series.push({ color: dark_mode ? '#CC9933' : '#3366CC' })
-        table.addColumn('number', 'Servo')
+        table.addColumn('number', 'Score')
+        table.addColumn({ type: 'string', role: 'tooltip', p: { html: true } })
+        table.addColumn('number', 'Subtests')
         table.addColumn({ type: 'string', role: 'tooltip', p: { html: true } })
 
         for (const scores_for_run of all_scores.scores) {
@@ -141,35 +144,14 @@ function setupChart () {
             }
             const row = [
                 date,
-                area_score / 1000,
+                area_score.total_score / area_score.total_tests,
+                toolTip(date, wpt_sha, browser_version, area_score, 'Servo'),
+                area_score.total_subtests_passed / area_score.total_subtests,
                 toolTip(date, wpt_sha, browser_version, area_score, 'Servo')
             ]
             table.addRow(row)
         }
         chart.draw(table, options)
-    }
-
-    function removeChildren (parent) {
-        while (parent.firstChild) {
-            parent.removeChild(parent.firstChild)
-        }
-        return parent
-    }
-
-    function update_table (scores) {
-        const score_table = document.getElementById('score-table-body')
-        removeChildren(score_table)
-
-        for (const [idx, area] of scores.area_keys.entries()) {
-            const recent_score = scores.scores[scores.scores.length - 1]
-            score_table.insertAdjacentHTML(
-                'beforeend',
-                `<tr class="${idx % 2 ? 'odd' : 'even'}">
-                    <td>${scores.focus_areas[area]}</td>
-                    <td class="score">${String(recent_score[idx + AREA_SCORE_OFFSET] / 10).padEnd(4, '.0')}%</td>
-                </tr>`
-            )
-        }
     }
 
     fetchData
@@ -213,7 +195,6 @@ function setupChart () {
             }
             area_dropdown.value = scores.area_keys[0]
             period_dropdown.value = Object.keys(periodRanges)[4]
-            update_table(scores)
             update_chart()
         })
 }
