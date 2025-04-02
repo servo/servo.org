@@ -15,6 +15,10 @@ title: WPT Pass Rates
       padding: 10px;
   }
 
+  #score-table-container {
+      overflow-x: auto;
+  }
+
   #score-table {
       width: 100%;
   }
@@ -28,12 +32,16 @@ title: WPT Pass Rates
       padding: 5px 10px;
   }
 
+  #score-table th {
+      text-align: right;
+  }
   #score-table th:nth-child(1) {
       text-align: left;
   }
 
   #score-table-body .score {
       text-align: right;
+      font-family: "Fira Mono", monospace;
   }
 
   #score-explanation {
@@ -80,19 +88,19 @@ The chart below tracks our pass rates in several *focus areas* of the [Web Platf
       </div>
     </div>
     <div id="servo-chart"></div>
-    <table id="score-table">
-        <thead id="score-table-header"><tr><th>Test Suite</th><th>Score</th></tr></thead>
-        <tbody id="score-table-body"></tbody>
-    </table>
+    <figure id="score-table-container">
+        <table id="score-table">
+            <thead id="score-table-header"><tr><th>Test Suite</th><th>Score</th><th>Subtests</th></tr></thead>
+            <tbody id="score-table-body"></tbody>
+        </table>
+    </figure>
     <p id="score-explanation">
-        Scores are calculated as percentages of total <b>enabled</b>
-        tests within the suite that pass. A passing test with no
-        subtests gets a score of 1 while a test with subtests gets a
-        score between 0 and 1 representing the fraction of passing
-        subtests within that test. This is different from the
-        percentages on wpt.fyi which is calculated by giving equal
-        weight to both top-level tests and subtests.
+        The results are calculated as percentages of total <b>enabled</b> tests within the suite that pass.<br>
+        <b>Scores</b> are computed as follows: a passing test with no subtests gets a score of 1
+        while a test with subtests gets a score between 0 and 1 representing the fraction of passing subtests within that test.<br>
+        <b>Subtests</b> are calculated by giving equal weight to both top-level tests and subtests.
     </p>
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="{{ '/js/load-chart.js' | url }}"></script>
+<script type="text/javascript" src="{{ '/js/load-table.js' | url }}"></script>
+<script type="module" src="{{ '/js/load-chart.js' | url }}"></script>
