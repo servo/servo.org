@@ -22,7 +22,7 @@ function update_table (scores) {
             `<tr class="${idx % 2 ? 'odd' : 'even'}">
                 <td>${scores.focus_areas[area]}</td>
                 <td class="score">${String(score).padEnd(4, '.0')}%</td>
-                <td class="score">(${area_score.total_subtests_passed}/${area_score.total_subtests}) ${String(subtests).padEnd(4, '.0')}%</td>
+                <td class="score">(${new Intl.NumberFormat().format(area_score.total_subtests_passed)}/${new Intl.NumberFormat().format(area_score.total_subtests)}) ${String(subtests).padEnd(4, '.0')}%</td>
             </tr>`
         )
     }
