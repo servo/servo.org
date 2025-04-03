@@ -3,7 +3,7 @@
 google.charts.load('current', { packages: ['corechart', 'line'] })
 google.charts.setOnLoadCallback(setupChart)
 
-const fetchData = fetch('/js/scores.json')
+const fetchData = fetch('https://wpt.servo.org/scores.json')
 const embed = location.search === '?embed'
 let dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 
