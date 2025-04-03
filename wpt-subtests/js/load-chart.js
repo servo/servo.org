@@ -3,7 +3,7 @@
 google.charts.load('current', { packages: ['corechart', 'line'] })
 google.charts.setOnLoadCallback(setupChart)
 
-const fetchData = fetch('https://wpt.servo.org/scores.json')
+const fetchData = fetch('/js/scores.json')
 const embed = location.search === '?embed'
 let dark_mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 
@@ -38,8 +38,8 @@ function parseDateString (date) {
 function toolTip (date, wpt_sha, servo_version, score, engine) {
     return `
         <b>${formatDate(date)}</b></br>
-        Score: <b>${score.per_mille / 10}</b></br>
-        Subtests: <b>${score.per_mille_subtests / 10}%</b></br>
+        Score: <b>${Math.floor(100 * score.total_score / score.total_tests)}%</b></br>
+        Subtests: <b>${Math.floor(100 * score.total_subtests_passed / score.total_subtests )}%</b></br>
         WPT: ${wpt_sha}</br>
         Servo (${engine}): ${servo_version}
     `
@@ -131,6 +131,7 @@ function setupChart () {
 
         options.series.push({ color: dark_mode ? '#CC9933' : '#3366CC' })
         table.addColumn('number', 'Score')
+        table.addColumn({ type: 'string', role: 'tooltip', p: { html: true } })
         table.addColumn('number', 'Subtests')
         table.addColumn({ type: 'string', role: 'tooltip', p: { html: true } })
 
@@ -143,8 +144,9 @@ function setupChart () {
             }
             const row = [
                 date,
-                area_score.per_mille / 1000,
-                area_score.per_mille_subtests / 1000,
+                area_score.total_score / area_score.total_tests,
+                toolTip(date, wpt_sha, browser_version, area_score, 'Servo'),
+                area_score.total_subtests_passed / area_score.total_subtests,
                 toolTip(date, wpt_sha, browser_version, area_score, 'Servo')
             ]
             table.addRow(row)
@@ -164,13 +166,15 @@ function setupChart () {
         removeChildren(score_table)
 
         for (const [idx, area] of scores.area_keys.entries()) {
-            const recent_score = scores.scores[scores.scores.length - 1]
+            const area_score = scores.scores[scores.scores.length - 1][idx + AREA_SCORE_OFFSET]
+            const score = Math.floor(100 * area_score.total_score / area_score.total_tests)
+            const subtests = Math.floor(100 * area_score.total_subtests_passed / area_score.total_subtests)
             score_table.insertAdjacentHTML(
                 'beforeend',
                 `<tr class="${idx % 2 ? 'odd' : 'even'}">
                     <td>${scores.focus_areas[area]}</td>
-                    <td class="score">${String(recent_score[idx + AREA_SCORE_OFFSET].per_mille / 10).padEnd(4, '.0')}</td>
-                    <td class="score">(${String(recent_score[idx + AREA_SCORE_OFFSET].total_subtests_passed)}/${String(recent_score[idx + AREA_SCORE_OFFSET].total_subtests)}) ${String(recent_score[idx + AREA_SCORE_OFFSET].per_mille_subtests / 10).padEnd(4, '.0')}% </td>
+                    <td class="score">${String(score).padEnd(4, '.0')}%</td>
+                    <td class="score">(${area_score.total_subtests_passed}/${area_score.total_subtests}) ${String(subtests).padEnd(4, '.0')}%</td>
                 </tr>`
             )
         }
