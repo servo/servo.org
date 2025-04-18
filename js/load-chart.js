@@ -35,13 +35,13 @@ function parseDateString (date) {
     return new Date(y, m - 1, d)
 }
 
-function toolTip (date, wpt_sha, servo_version, score, engine) {
+function toolTip (date, wpt_sha, servo_version, score) {
     return `
         <b>${formatDate(date)}</b></br>
         Score: <b>${Math.floor(1000 * score.total_score / score.total_tests) / 10}%</b></br>
         Subtests: <b>${Math.floor(1000 * score.total_subtests_passed / score.total_subtests) / 10}%</b></br>
         WPT: ${wpt_sha}</br>
-        Servo (${engine}): ${servo_version}
+        Version: ${servo_version}
     `
 }
 
@@ -145,9 +145,9 @@ function setupChart () {
             const row = [
                 date,
                 area_score.total_score / area_score.total_tests,
-                toolTip(date, wpt_sha, browser_version, area_score, 'Servo'),
+                toolTip(date, wpt_sha, browser_version, area_score),
                 area_score.total_subtests_passed / area_score.total_subtests,
-                toolTip(date, wpt_sha, browser_version, area_score, 'Servo')
+                toolTip(date, wpt_sha, browser_version, area_score)
             ]
             table.addRow(row)
         }
