@@ -25,6 +25,7 @@ Links can be **opened in a new tab** by pressing the ctr/meta modifier (@webbeef
 Delegates will receive **send error notifications** for requests (@delan, #35668).
 
 We fixed a bug causing **flickering cursors** (@DevGev, #35934), and now **create the config directory** if it does not exist (@yezhizhen, #35761).
+We also fixed a number of bugs in the webdriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).
 
 ## Perf and stability
 
