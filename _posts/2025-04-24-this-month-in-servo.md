@@ -16,7 +16,21 @@ The features enabled by this flag are expected to change over time as new web pl
 We fixed a crash when resizing the browsing area too small (@sebsebmc@gmail.com, #35967).
 Dialogs now support **keyboard interaction** to close and cancel them (@chickenleaf, #3567), and the URL bar accepts any **domain-like input** (@k+github@kafji.net, #35756).
 We also enabled **sRGB colorspaces** on macOS for better colour fidelity (@IsaacMarovitz, #35683).
+Finally, we **renamed the OpenHarmony app bundle** (@jschwe, #35790).
 
+## Servo-the-engine (embedding)
+
+Embedders can now **inject userscript sources** into all webviews (@Legend-Master, #35388).
+Links can be **opened in a new tab** by pressing the ctr/meta modifier (@webbeef, @mrobinson, #35017).
+Delegates will receive **send error notifications** for requests (@delan, #35668).
+
+We fixed a bug causing **flickering cursors** (@DevGev, #35934), and now **create the config directory** if it does not exist (@yezhizhen, #35761).
+
+## Perf and stability
+
+The `OffscreenRenderingContext` is **no longer double buffered**, which can improve rendering performance in embeddings that rely on it.
+We also removed a source of **canvas rendering latency** (@sagudev, #35719), and fixed performance cliffs related to the Shadow DOM (@simonwuelker, #35802, #35725).
+We improved performance of block level layout by **reducing allocations** (@jschwe, #35781), and reduced the **latency of touch events** when they are non-cancelable (@kongbai1996, #35785).
 
 <!--
 - animated-images
