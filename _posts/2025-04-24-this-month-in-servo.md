@@ -27,6 +27,8 @@ Delegates will receive **send error notifications** for requests (@delan, #35668
 We fixed a bug causing **flickering cursors** (@DevGev, #35934), and now **create the config directory** if it does not exist (@yezhizhen, #35761).
 We also fixed a number of bugs in the webdriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).
 
+Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).
+
 ## Perf and stability
 
 The `OffscreenRenderingContext` is **no longer double buffered**, which can improve rendering performance in embeddings that rely on it.
