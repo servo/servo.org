@@ -7,17 +7,28 @@ summary:    Who knows?
 categories:
 ---
 
-We merged the first steps to supporting **animated images** in web content (@rayguo17, #36058 #36141).
+We merged the first steps to supporting **animated images** in web content (@rayguo17, #36058, #36141).
 
-Servo's ShadowDOM implementation has made significant progress and we've enabled it by default, allowing Servo to render sites like wpt.fyi correctly (TODO screenshot) (@simonwuelker, @longvatron111, @elomscansio, #35923 #35899 #35930 #36104 #34964 #36024 #36106 #36173 #36010).
+We've **enabled Shadow DOM by default** after significantly improving support, allowing Servo to render sites like wpt.fyi correctly (TODO screenshot) (@simonwuelker, @longvatron111, @elomscansio, #35923, #35899, #35930, #36104, #34964, #36024, #36106, #36173, #36010, #35769).
 
-There was lots of progress made on additional web API features in the engine:
-* we implemented **ReadableByteStreamController and ReadableStream.pipeTo** (@Taym95, @gterzian, #35410 #35650)
+We also fixed many layout bugs:
+* incorrect **fallback font** caching (@mrobinson, #35705)
+
+
+There was lots of progress on additional web API features in the engine:
+* we implemented `ReadableByteStreamController` and `ReadableStream.pipeTo` (@Taym95, @gterzian, #35410, #35650)
 * the `nonce` attribute is now used in CSP checks (@simonwuelker, #35876)
-* we removed some cases where custom elements callbacks fired incorrect (@xiaochengh, #35960 #35883)
+* we removed some cases where custom elements callbacks fired incorrectly (@xiaochengh, #35960, #35883)
 * partial support for `InterSectionObserver` was added (@stevennovaryo, #35551)
 * we implemented `Range::getClientRects` and `Range::getBoundingClientRect` (@simonwuelker, #35993)
+* `touchmove` events are more reliable (@kongbai1996, #36218 #36200) and support the `cancelable` property (@kongbai1996, #35713)
+* we added support for `HTMLOptgroupElement.label` (@simonwuelker, #35970)
+* the `scale`, `rotate`, and `translate` CSS transform properties now work (@chocolate-pie, @Loirooriol, #35926)
+* we implemented the `fit-content()` CSS sizing function (@Loirooriol, #36056)
+* CSS `image-set()` is now supported (@chocolate-pie, #36210)
 
+**Stylo** has been upgraded to 2025-03-15 (@nicoburns, @Loirooriol, #35782, #35925, #35990), and we upgraded to the **2024 Rust edition** (@simonwuelker, #35755).
+We also are nearly finished **splitting up our massive `script` crate** (@jdm, #35988, #35987, #36107, #36216, #36220, #36095), which will eventually make Servo faster to rebuild.
 
 ## Servo-the-browser (servoshell)
 
@@ -88,16 +99,9 @@ Additionally, we **avoided undefined behaviour** in the Rust bindings to the Spi
       devtools
     - https://github.com/servo/servo/pull/35884	(@atbrakhi, #35884)	devtools: use correct id for browser_id and outer_window_id (#35884)
       devtools
-- do
-    - https://github.com/servo/servo/pull/36200	(@kongbai1996, #36200)	Fixed the problem that touchmove cannot be disabled when preventDefault is invoked on touchstart. (#36200)
-      do touchm
 - dom
     - https://github.com/servo/servo/pull/35718	(@xiaochengh, #35718)	script: Implement preparation-time document (#35718)
       dom
-    - https://github.com/servo/servo/pull/35713	(@kongbai1996, #35713)	add `cancelable` property to the `TouchEvent` (#35713)
-      dom
-    - https://github.com/servo/servo/pull/35769	(@simonwuelker, #35769)	Let layout invalidations happen in the flat tree (#35769)
-      layout dom
     - https://github.com/servo/servo/pull/35864	(@kkoyung, #35864)	Implement can-have-its-url-rewritten for history api (#35864)
       dom
     - https://github.com/servo/servo/pull/35789	(@dklassic, #35789)	feat: display file chosen for input file (#35789)
@@ -108,28 +112,18 @@ Additionally, we **avoided undefined behaviour** in the Rust bindings to the Spi
       dom
     - https://github.com/servo/servo/pull/35877	(@shanehandley, #35877)	script: use passive event listener option on AddEventListenerOptions (#35877)
       dom
-    - https://github.com/servo/servo/pull/35970	(@simonwuelker, #35970)	script: Implement HTMLOptgroupElement::Label (#35970)
-      dom
     - https://github.com/servo/servo/pull/35949	(@sebsebmc, #35949)	Bring back DOM GC checkpoint to script_thread (#35949)
       dom
     - https://github.com/servo/servo/pull/35831	(@jdm, #35831)	Refactor common boilerplate out of serialize/transfer implementations (#35831)
       dom
-    - https://github.com/servo/servo/pull/35988	(@jdm, #35988)	Move CustomTraceable to script_bindings. (#35988)
-      dom split
-    - https://github.com/servo/servo/pull/35987	(@jdm, #35987)	Cleanups for future script crate split (#35987)
-      dom split
     - https://github.com/servo/servo/pull/35878	(@pewsheen, #35878)	feat: fetch notification image resources (#35878)
       dom notification
     - https://github.com/servo/servo/pull/36054	(@stephenmuss, #36054)	Support align attribute on HTMLParagraphElement interface (#36054)
-      dom
-    - https://github.com/servo/servo/pull/36095	(@jdm, #36095)	crown: Do not check trait item projections. (#36095)
       dom
     - https://github.com/servo/servo/pull/36090	(@elomscansio, #36090)	Fix form validation for readonly inputs and update WPT expectations (#36090)
       dom
     - https://github.com/servo/servo/pull/36103	(@jerensl, #36103)	fix: radio input element don't trigger validity state (#36103)
       dom
-    - https://github.com/servo/servo/pull/36107	(@jdm, #36107)	script: Ensure promises are considered DOM interfaces when generating bindings. (#36107)
-      dom split
     - https://github.com/servo/servo/pull/36082	(@Loirooriol, @mrobinson, #36082)	layout: Cache `IndependentNonReplacedContents::layout()` (#36082)
       dom notification
     - https://github.com/servo/servo/pull/36136	(@mrees@noeontheend.com, #36136)	Fix check in get_array_index_from_id to return early on ASCII char (#36136)
@@ -152,12 +146,8 @@ Additionally, we **avoided undefined behaviour** in the Rust bindings to the Spi
       dom
     - https://github.com/servo/servo/pull/36218	(@kongbai1996, #36218)	Fixed an incorrect touchmove event triggered when the second finger is pressed. (#36218)
       dom touch
-    - https://github.com/servo/servo/pull/36216	(@jdm, #36216)	Miscellaneous script splitting preparation changes (#36216)
-      dom split
     - https://github.com/servo/servo/pull/36226	(@simonwuelker, #36226)	Only invoke resize observer callback when the observed element changed its size (#36226)
       dom
-    - https://github.com/servo/servo/pull/36220	(@jdm, #36220)	More miscellaneous script splitting changes (#36220)
-      dom split
 - flexbox
     - https://github.com/servo/servo/pull/35860	(@Loirooriol, #35860)	layout: Support min/max cross keywords sizes in flexbox (#35860)
       layout flexbox
@@ -166,10 +156,6 @@ Additionally, we **avoided undefined behaviour** in the Rust bindings to the Spi
     - https://github.com/servo/servo/pull/36123	(@mrobinson, #36123)	layout: Ensure compatible positioning context during flexbox block content sizing calculation (#36123)
       layout flexbox
 - layout
-    - https://github.com/servo/servo/pull/35705	(@mrobinson, #35705)	fonts: Remove the per-FontGroup cached fallback font (#35705)
-      layout
-    - https://github.com/servo/servo/pull/35769	(@simonwuelker, #35769)	Let layout invalidations happen in the flat tree (#35769)
-      layout dom
     - https://github.com/servo/servo/pull/35821	(@Loirooriol, #35821)	layout: Remove `calculate_hypothetical_cross_size()` (#35821)
       layout cleanup
     - https://github.com/servo/servo/pull/35860	(@Loirooriol, #35860)	layout: Support min/max cross keywords sizes in flexbox (#35860)
@@ -186,8 +172,6 @@ Additionally, we **avoided undefined behaviour** in the Rust bindings to the Spi
       layout
     - https://github.com/servo/servo/pull/35947	(@Loirooriol, #35947)	Improve logic for establishing a stacking context (#35947)
       layout
-    - https://github.com/servo/servo/pull/35926	(@chocolate-pie, @Loirooriol, #35926)	layout: Add support for basic transform css properties (#35926)
-      layout
     - https://github.com/servo/servo/pull/36030	(@Loirooriol, #36030)	layout: Fix intrinsic contributions of indefinite `stretch` keyword (#36030)
       layout
     - https://github.com/servo/servo/pull/36051	(@Loirooriol, #36051)	layout: Stop ignoring containing block padding for the static position (#36051)
@@ -202,12 +186,8 @@ Additionally, we **avoided undefined behaviour** in the Rust bindings to the Spi
       layout
     - https://github.com/servo/servo/pull/36064	(@kenzieradityatirtarahardja18@gmail.com, @kenzieradityatirtarahardja.18@gmail.com, #36064)	Max assign outer block size to cell measures (#36064)
       layout
-    - https://github.com/servo/servo/pull/36056	(@Loirooriol, #36056)	layout: Implement the `fit-content()` sizing function (#36056)
-      layout
     - https://github.com/servo/servo/pull/36123	(@mrobinson, #36123)	layout: Ensure compatible positioning context during flexbox block content sizing calculation (#36123)
       layout flexbox
-    - https://github.com/servo/servo/pull/36210	(@chocolate-pie, #36210)	layout: Implement support for `image-set()` notation (#36210)
-      layout
     - https://github.com/servo/servo/pull/36202	(@mrobinson, #36202)	layout: Simplify and generalize the usage of pseudo-elements (#36202)
       layout
 - notification
@@ -215,40 +195,9 @@ Additionally, we **avoided undefined behaviour** in the Rust bindings to the Spi
       dom notification
     - https://github.com/servo/servo/pull/36082	(@Loirooriol, @mrobinson, #36082)	layout: Cache `IndependentNonReplacedContents::layout()` (#36082)
       dom notification
-- shadowdom
-- split
-    - https://github.com/servo/servo/pull/35988	(@jdm, #35988)	Move CustomTraceable to script_bindings. (#35988)
-      dom split
-    - https://github.com/servo/servo/pull/35987	(@jdm, #35987)	Cleanups for future script crate split (#35987)
-      dom split
-    - https://github.com/servo/servo/pull/36107	(@jdm, #36107)	script: Ensure promises are considered DOM interfaces when generating bindings. (#36107)
-      dom split
-    - https://github.com/servo/servo/pull/36216	(@jdm, #36216)	Miscellaneous script splitting preparation changes (#36216)
-      dom split
-    - https://github.com/servo/servo/pull/36220	(@jdm, #36220)	More miscellaneous script splitting changes (#36220)
-      dom split
 - table
     - https://github.com/servo/servo/pull/35882	(@Loirooriol, #35882)	layout: Only prevent fixed table layout when `inline-size` is `auto` (#35882)
       layout table
-- touch
-    - https://github.com/servo/servo/pull/36218	(@kongbai1996, #36218)	Fixed an incorrect touchmove event triggered when the second finger is pressed. (#36218)
-      dom touch
-- touchm
-    - https://github.com/servo/servo/pull/36200	(@kongbai1996, #36200)	Fixed the problem that touchmove cannot be disabled when preventDefault is invoked on touchstart. (#36200)
-      do touchm
-- upgrade
-    - https://github.com/servo/servo/pull/35782	(@Loirooriol, #35782)	Upgrade Stylo to 2025-03-01 (#35782)
-      upgrade
-    - https://github.com/servo/servo/pull/34714	(@asun0204@163.com, @Loirooriol, #34714)	Bump Stylo to from a93e7ef to 4add86f (#34714)
-      upgrade
-    - https://github.com/servo/servo/pull/35925	(@nicoburns, #35925)	Upgrade Stylo to 2025-03-01 (#35925)
-      upgrade
-    - https://github.com/servo/servo/pull/35755	(@simonwuelker, #35755)	Migrate to the 2024 edition (#35755)
-      upgrade
-    - https://github.com/servo/servo/pull/35990	(@nicoburns, #35990)	Upgrade Stylo to 2025-03-15 (#35990)
-      upgrade
-    - https://github.com/servo/servo/pull/36169	(@virtualritz@protonmail.com, #36169)	Made MAX_TASK_NS u128. Also removed a superfluous into(). Both were required to fix #36122 with nightly 1.85.0 (4d91de4e4 2025-02-17). (#36169)
-      upgrade
 -->
 
 <style>
