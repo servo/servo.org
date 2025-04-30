@@ -34,6 +34,8 @@ To copy the output to your clipboard for a specific calendar month only:
 $ tools/list-commits-by-nightly.sh ~/code/servo 2>&1 | tee /dev/stderr | sed '/^>>> 2025-01-/,/^>>> 2025-02-/!d' | xclip -sel clip
 ```
 
+**NOTE:** this will display the squash commit message of each commit, which has historically been less useful than the pull request description. To display pull request descriptions instead, pass in a pulls.json as documented in [§ Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates).
+
 ## How to list this year’s pull request contributors
 
 ```sh
