@@ -15,6 +15,66 @@ categories:
 - ai policy
 - wpt
     - dashboard now has subtests
+    - `fromDate = "2025-03-10"`
+    - `toDate = "2025-04-30"`
+-->
+
+<!--
+wpt dashboard analysis
+>>> top deltas (score, pp):
+/content-security-policy/ (50.9pp to 53.5%)
+/trusted-types/ (47.2pp to 47.2%)
+/css/css-text/ (17.9pp to 65.3%)
+/css/css-sizing/ (10.3pp to 62.8%)
+/streams/ (8.2pp to 18.8%)
+/css/cssom/ (6.6pp to 72.2%)
+All WPT tests (5.6pp to 62.0%)
+/shadow-dom/ (5.2pp to 52.1%)
+/css/CSS2/box-display/ (4.4pp to 92.2%)
+/css/css-align/ (4.0pp to 72.7%)
+/css/ (3.1pp to 69.2%)
+/css/css-grid/ (3.1pp to 44.3%)
+/css/css-flexbox/ (2.0pp to 78.4%)
+/css/css-position/ (1.0pp to 52.8%)
+/css/CSS2/tables/ & /css/css-tables/ (0.2pp to 92.2%)
+/css/CSS2/positioning/ (0.2pp to 94.5%)
+/css/CSS2/ (0.1pp to 85.0%)
+/css/CSS2/linebox/ (0.0pp to 96.9%)
+/css/CSS2/abspos/ (0.0pp to 98.2%)
+/css/CSS2/floats/ (0.0pp to 91.5%)
+/css/CSS2/floats-clear/ (0.0pp to 93.9%)
+/css/CSS2/margin-padding-clear/ (0.0pp to 99.0%)
+/css/CSS2/normal-flow/ (0.0pp to 96.5%)
+/gamepad/ (0.0pp to 70.8%)
+/WebCryptoAPI/ (0.0pp to 39.2%)
+/webxr/ (0.0pp to 55.8%)
+>>> top deltas (subtests, pp):
+/shadow-dom/ (70.0pp to 77.9%)
+/trusted-types/ (57.8pp to 57.8%)
+/content-security-policy/ (54.0pp to 54.8%)
+/streams/ (31.9pp to 68.1%)
+/css/css-text/ (20.4pp to 57.6%)
+/css/CSS2/linebox/ (5.5pp to 84.8%)
+All WPT tests (4.6pp to 87.4%)
+/css/CSS2/box-display/ (4.4pp to 92.2%)
+/css/css-sizing/ (3.5pp to 72.9%)
+/css/cssom/ (3.3pp to 84.7%)
+/css/css-flexbox/ (3.1pp to 62.7%)
+/css/css-grid/ (2.7pp to 44.3%)
+/css/ (2.6pp to 63.0%)
+/css/css-align/ (2.2pp to 80.0%)
+/css/CSS2/ (0.6pp to 86.6%)
+/css/CSS2/tables/ & /css/css-tables/ (0.3pp to 87.2%)
+/css/css-position/ (0.2pp to 62.9%)
+/css/CSS2/positioning/ (0.2pp to 94.5%)
+/css/CSS2/abspos/ (0.0pp to 96.6%)
+/css/CSS2/floats/ (0.0pp to 87.8%)
+/css/CSS2/floats-clear/ (0.0pp to 92.2%)
+/css/CSS2/margin-padding-clear/ (0.0pp to 99.0%)
+/css/CSS2/normal-flow/ (0.0pp to 96.2%)
+/gamepad/ (0.0pp to 93.0%)
+/WebCryptoAPI/ (0.0pp to 60.7%)
+/webxr/ (0.0pp to 64.0%)
 -->
 
 ## Donations
