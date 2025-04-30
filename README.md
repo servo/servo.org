@@ -344,7 +344,7 @@ Generally we want to include...
 And generally we want to exclude...
 
 - dependabot updates (“build(deps)”)
-- WPT imports (“Update web-platform-tests”)
+- WPT imports (“Update web-platform-tests” or “Sync WPT with upstream”)
 - lint and warning fixes
 - other CI changes
 - refactors (unless large-scale)
