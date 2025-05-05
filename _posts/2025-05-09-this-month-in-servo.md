@@ -77,6 +77,408 @@ All WPT tests (4.6pp to 87.4%)
 /webxr/ (0.0pp to 64.0%)
 -->
 
+<!--
+- api
+    - https://github.com/servo/servo/pull/36257	(@stevennovaryo, #36257)	canvas: Implement line dash setters and getters (#36257)
+      api; CanvasPathDrawingStyles `setLineDash`, `getLineDash`, `lineDashOffset`
+    - https://github.com/servo/servo/pull/36313	(@Loirooriol, #36313)	script: Implement deprecated CSSStyleSheet members (#36313)
+      api; for speedometer
+    - https://github.com/servo/servo/pull/36225	(@simonwuelker, #36225)	script: Implement input preprocessing for URLPatterns (#36225)
+      api
+    - https://github.com/servo/servo/pull/36354	(@TimvdLippe, #36354)	Run Trusted Types tests (#36354)
+      api; trusted types
+    - https://github.com/servo/servo/pull/36355	(@TimvdLippe, #36355)	Stub out Trusted Types interfaces (#36355)
+      api; trusted types
+    - https://github.com/servo/servo/pull/36336	(@Gae24, #36336)	dom: Implement `ClipboardItem` (#36336)
+      api; clipboard
+    - https://github.com/servo/servo/pull/36391	(@simonwuelker, #36391)	Split up the URLPattern implementation (#36391)
+      api
+    - https://github.com/servo/servo/pull/36382	(@simonwuelker, #36382)	Create a parser for URLPatterns (#36382)
+      api
+    - https://github.com/servo/servo/pull/36385	(@gterzian, #36385)	Streams: add an underlying sink type (#36385)
+      api; streams
+    - https://github.com/servo/servo/pull/36362	(@simonwuelker, #36362)	Add a tokenizer for URLPatterns (#36362)
+      api
+    - https://github.com/servo/servo/pull/36422	(@TimvdLippe, #36422)	Implement attribute and property lookup for Trusted Types (#36422)
+      api; trusted types
+    - https://github.com/servo/servo/pull/36393	(@sebsebmc, #36393)	Handle HTTP Refresh header (#36393)
+      api net
+    - https://github.com/servo/servo/pull/36454	(@TimvdLippe, @jdm, #36454)	Implement "Create a Trusted Type" algorithm (#36454)
+      api; start of trusted types
+    - https://github.com/servo/servo/pull/36409	(@TimvdLippe, @jdm, #36409)	Update FetchTaskTarget to propagate CSP violations. (#36409)
+      api; trusted types
+    - https://github.com/servo/servo/pull/36308	(@jerensl, #36308)	Support optional message for dataclone error (#36308)
+      api; streams
+    - https://github.com/servo/servo/pull/36363	(@TimvdLippe, @jdm, #36363)	Implement CSP check for Trusted Types (#36363)
+      api; trusted types
+    - https://github.com/servo/servo/pull/36511	(@TimvdLippe, #36511)	Gate `window.trustedTypes` behind flag (#36511)
+      api; trusted types
+    - https://github.com/servo/servo/pull/36498	(@Gae24, #36498)	async clipboard: implement `writeText` (#36498)
+      api; clipboard
+    - https://github.com/servo/servo/pull/36521	(@Loirooriol, #36521)	script: Implement CSSStyleSheet constructor (#36521)
+      api
+    - https://github.com/servo/servo/pull/36535	(@kkoyung, #36535)	Make DOMException serializable (#36535)
+      api; structured clone DOMException
+    - https://github.com/servo/servo/pull/36181	(@gterzian, #36181)	Transfer ReadableStream (#36181)
+      api; streams
+    - https://github.com/servo/servo/pull/36523	(@sebsebmc, #36523)	Support static and instance members having the same name in IDLs (#36523)
+      api net; for `Response.json` static method
+    - https://github.com/servo/servo/pull/36541	(@rayguo17, #36541)	media element: support seekable attribute (#36541)
+      api; HTMLMediaElement seekable property
+    - https://github.com/servo/servo/pull/36560	(@sidntrivedi012, @jdm, #36560)	content/dom: set navigator.onLine attribute to `true` (#36560)
+      api; fixes pinterest
+    - https://github.com/servo/servo/pull/36588	(@gterzian, #36588)	Streams: make writable streams transferrable (#36588)
+      api; streams
+    - https://github.com/servo/servo/pull/36596	(@TimvdLippe, @jdm, #36596)	Implement trusted types url setter (#36596)
+      api; trusted types
+    - https://github.com/servo/servo/pull/36586	(@webbeef, #36586)	Implement CSSStyleSheet::replaceSync (#36586)
+      api
+    - https://github.com/servo/servo/pull/36589	(@sebsebmc, #36589)	Implement static Response.json (#36589)
+      api net; `Response.json` static method
+    - https://github.com/servo/servo/pull/36470	(@Taym95, #36470)	Start adding support for transforms in readable and writable streams (#36470)
+      api; streams
+- architecture
+    - https://github.com/servo/servo/pull/36341	(@mrobinson, #36341)	constellation: Rename messages sent to the `Constellation` (#36341)
+      architecture
+    - https://github.com/servo/servo/pull/36364	(@mrobinson, #36364)	Move `ScriptToConstellationMsg` to `constellation_traits` (#36364)
+      architecture
+    - https://github.com/servo/servo/pull/36372	(@mrobinson, #36372)	`compositing`: Combine `webrender_traits` and `compositing_traits` (#36372)
+      architecture
+    - https://github.com/servo/servo/pull/36284	(@simonwuelker, #36284)	Unify the way html5ever and xml5ever block on script elements (#36284)
+      architecture; towards non-utf-8 encoding support
+    - https://github.com/servo/servo/pull/36582	(@mrobinson, #36582)	compositing: Remove `windowing.rs` and making `compositing` private (#36582)
+      architecture; no more public api in compositing
+    - https://github.com/servo/servo/pull/36613	(@mrobinson, #36613)	layout: Combine `layout_2020` and `layout_thread_2020` into a crate called `layout` (#36613)
+      architecture legacy
+    - https://github.com/servo/servo/pull/36574	(@mrobinson, #36574)	compositing: Rename `WebView` to `WebViewRenderer` (#36574)
+      architecture
+- build
+    - https://github.com/servo/servo/pull/36070	(@jschwe, #36070)	mach: Fix cross-compiling from windows to non windows (#36070)
+      build
+    - https://github.com/servo/servo/pull/36564	(@jschwe, #36564)	uv: Use native-tls (#36564)
+      build
+- compat
+    - https://github.com/servo/servo/pull/36338	(@sakupi01, #36338)	Fix: Add support for stylesheet MIME type quirk in quirks mode (#36338)
+      compat
+- compositor
+    - https://github.com/servo/servo/pull/36662	(@mrobinson, #36662)	compositor: Tick animations for an entire WebView at once (#36662)
+      compositor; refresh driver
+- crash
+    - https://github.com/servo/servo/pull/36229	(@kongbai1996, #36229)	Fixed the crash issue when the openharmony web component is adapted. (#36229)
+      crash ohos
+    - https://github.com/servo/servo/pull/36256	(@jdm, #36256)	Fix null realm assertion when activating a service worker (#36256)
+      crash
+    - https://github.com/servo/servo/pull/36461	(@dklassic, #36461)	fix: Crashing due to input element hack (#36461)
+      crash
+    - https://github.com/servo/servo/pull/36518	(@Loirooriol, #36518)	layout: Floor the max-content size by the min-content size (#36518)
+      layout crash
+    - https://github.com/servo/servo/pull/36531	(@jschwe, #36531)	touch: Fix panic with -Zconvert-mouse-to-touch (#36531)
+      crash
+    - https://github.com/servo/servo/pull/36491	(@jdm, #36491)	Fix crash when enumerating properties of global object (#36491)
+      crash
+    - https://github.com/servo/servo/pull/36566	(@Taym95, #36566)	fix writablestream assertion crash when getting chunk size following spec change (#36566)
+      crash
+    - https://github.com/servo/servo/pull/36494	(@jdm, #36494)	Fix crash when setting custom property on Location (#36494)
+      crash
+    - https://github.com/servo/servo/pull/36571	(@Loirooriol, #36571)	layout: Always floor the max-content size by the min-content size (#36571)
+      layout crash
+    - https://github.com/servo/servo/pull/36569	(@tharkum, #36569)	imagedata: Fix overflow panic for too large ImageData (#36569)
+      crash
+    - https://github.com/servo/servo/pull/36705	(@simonwuelker, #36705)	Use snapshot size instead of canvas size when converting canvas to blob (#36705)
+      crash
+- css
+    - https://github.com/servo/servo/pull/36246	(@Loirooriol, #36246)	Enable css-nesting WPT tests (#36246)
+      css; nesting
+    - https://github.com/servo/servo/pull/36254	(@Loirooriol, #36254)	Turn `CSSStyleRule` into a `CSSGroupingRule` subclass (#36254)
+      css; nesting
+    - https://github.com/servo/servo/pull/36248	(@Loirooriol, #36248)	Implement CSSNestedDeclarations (#36248)
+      css; nesting
+    - https://github.com/servo/servo/pull/36249	(@Loirooriol, #36249)	Enable CSS parent selector (`&`) (#36249)
+      css; nesting
+    - https://github.com/servo/servo/pull/36272	(@mrobinson, @Loirooriol, #36272)	script: Create `CSSStyleOwner::Null` for `getComputedStyle` (#36272)
+      css; marker pseudo
+    - https://github.com/servo/servo/pull/36317	(@mrobinson, #36317)	layout: Add initial support for the `::marker` pseudo-element (#36317)
+      css; internal support; no ‘content’ yet
+    - https://github.com/servo/servo/pull/35978	(@yezhizhen, #35978)	Fix transition toggle & cancellation & delay (#35978)
+      css; transitions
+    - https://github.com/servo/servo/pull/36374	(@ToBinio, @mrobinson, @jdm, #36374)	layout: Scale images in `image_set` by their specified resolution (#36374)
+      css; image-set()
+    - https://github.com/servo/servo/pull/36430	(@Loirooriol, #36430)	layout: Let getComputedStyle resolve auto min size as 0px when needed (#36430)
+      css; cssom fix
+    - https://github.com/servo/servo/pull/36568	(@mrobinson, @Loirooriol, #36568)	layout: Throw away nested marker elements instead of storing them in a `BoxSlot` (#36568)
+      css; marker pseudo
+    - https://github.com/servo/servo/pull/36595	(@Loirooriol, #36595)	layout: Implement `justify-self` for block-level boxes (#36595)
+      css layout
+- custom-protocol
+    - https://github.com/servo/servo/pull/36656	(@Legend-Master, @mrobinson, #36656)	Initial support for marking custom protocol secure (#36656)
+      custom-protocol
+- dev
+    - https://github.com/servo/servo/pull/36384	(@sagudev, #36384)	script: copy include! files from script_bindings to script's OUT_DIR (#36384)
+      dev; fixes rust-analyzer in script
+- devtools
+    - https://github.com/servo/servo/pull/36253	(@uthmaniv, #36253)	Add SimulateColorScheme command and script thread handling (#36253)
+      devtools
+    - https://github.com/servo/servo/pull/36168	(@uthmaniv, #36168)	Track the active tab and browsing context for devtools (#36168)
+      devtools; for color scheme simulation
+    - https://github.com/servo/servo/pull/35971	(@delan, #35971)	devtools: Fix id collisions by using incrementing counters (#35971)
+      devtools
+    - https://github.com/servo/servo/pull/36297	(@uthmaniv, #36297)	Process colorSchemeSimulation in TargetConfigurationActor (#36297)
+      devtools
+    - https://github.com/servo/servo/pull/36164	(@delan, @atbrakhi, #36164)	Devtools: initial Debugger > Sources panel (#36164)
+      devtools
+    - https://github.com/servo/servo/pull/36631	(@atbrakhi, #36631)	DevTools: `worker_id` shoud be `id` & thread for workers should be `thread` (#36631)
+      devtools
+    - https://github.com/servo/servo/pull/36632	(@atbrakhi, #36632)	DevTools: Add `resource_available` as a common shared util  (#36632)
+      devtools
+    - https://github.com/servo/servo/pull/36667	(@atbrakhi, #36667)	DevTools: Move `Source` related code to dedicated `source.rs` file (#36667)
+      devtools; Sources tab
+- editing
+    - https://github.com/servo/servo/pull/35830	(@dklassic, #35830)	feat: Implement display for text selection and caret (#35830)
+      editing
+    - https://github.com/servo/servo/pull/36478	(@webbeef, #36478)	textinput: position the caret at the end when selecting input (#36478)
+      editing
+- embedding
+    - https://github.com/servo/servo/pull/36276	(@mrobinson, #36276)	libservo: Remove a couple `EmbedderMethods` (#36276)
+      embedding
+    - https://github.com/servo/servo/pull/36223	(@mrobinson, #36223)	libservo: Start moving `WindowMethods` to `WebViewDelegate` (#36223)
+      embedding
+    - https://github.com/servo/servo/pull/36312	(@mrobinson, #36312)	constellation: Stop assuming that the viewport is shared by all WebViews (#36312)
+      embedding; per-webview dpi and zoom
+    - https://github.com/servo/servo/pull/36400	(@mrobinson, #36400)	libservo: Move animation tracking from `WindowMethods` to delegates (#36400)
+      embedding
+    - https://github.com/servo/servo/pull/36420	(@mrobinson, #36420)	libservo: Move `EventLooperWaker` from `webxr_traits` to `embedder_traits` (#36420)
+      embedding
+    - https://github.com/servo/servo/pull/36443	(@mrobinson, #36443)	compositor: Unify the cross process and in-process API (#36443)
+      embedding; working towards more robust embedding that can destroy and recreate servo instances
+    - https://github.com/servo/servo/pull/36484	(@mrobinson, #36484)	compositing: Send `CompositorDisplayListInfo` as bytes to compositor (#36484)
+      embedding; related to unified compositor
+    - https://github.com/servo/servo/pull/36483	(@mrobinson, #36483)	libservo: Create a `WebViewBuilder` class to construct `WebView`s (#36483)
+      embedding
+    - https://github.com/servo/servo/pull/36440	(@mrobinson, #36440)	libservo: Add a very simple `libservo` API test (#36440)
+      embedding
+    - https://github.com/servo/servo/pull/36419	(@mrobinson, @shubhamg13, #36419)	libservo: Make zooming and HiDPI scaling work per-`WebView` (#36419)
+      embedding; per-webview dpi and zoom
+    - -https://github.com/servo/servo/pull/36485	(@mrobinson, #36485)	libservo: Remove the unused `multiview` feature (#36485)
+      embedding; multiview
+    - https://github.com/servo/servo/pull/36543	(@mrobinson, #36543)	compositor: Unify the cross process and in-process API (#36543)
+      embedding; related to unified compositor
+    - https://github.com/servo/servo/pull/36533	(@mrobinson, #36533)	Revert "compositor: Unify the cross process and in-process API (#36443)" (#36533)
+      embedding; related to unified compositor
+    - https://github.com/servo/servo/pull/36549	(@mrobinson, #36549)	libservo: Expose a `ServoBuilder` (#36549)
+      embedding
+    - https://github.com/servo/servo/pull/36532	(@mrobinson, #36532)	libservo: Allow running more than one Servo test in a run (#36532)
+      embedding; testing
+    - https://github.com/servo/servo/pull/36413	(@yezhizhen, #36413)	Move click event trigger from embedding layer to `ScriptThread` (#36413)
+      embedding; reworking input for click events
+- forms
+    - https://github.com/servo/servo/pull/36236	(@MDCODE247, #36236)	script: Use `RegExpFlag_UnicodeSets` when validating regular expressions in `HTMLInputElement` (#36236)
+      forms; input validation
+    - https://github.com/servo/servo/pull/36252	(@elomscansio, #36252)	Fix radio group validity update when removing or selecting an input (#36252)
+      forms
+    - https://github.com/servo/servo/pull/36458	(@sebsebmc, #36458)	fix: File to FormData not correctly handling name and lastModified (#36458)
+      forms; file inputs
+    - https://github.com/servo/servo/pull/36431	(@elomscansio, #36431)	htmlinputelement: Update radio group validity logic for disconnected trees (#36431)
+      forms
+- gc
+    - https://github.com/servo/servo/pull/36375	(@yerke, #36375)	Add CanGc as arguments in methods in devtools.rs, CharacterData, CSSStyleRule, CSSStyleSheet (#36375)
+      gc
+    - https://github.com/servo/servo/pull/36371	(@yerke, #36371)	Add CanGc as arguments in methods in Attr and Node (#36371)
+      gc
+    - https://github.com/servo/servo/pull/36395	(@yerke, #36395)	add CanGc as argument to methods in DissimilarOriginWindow, DocumentFragment, DocumentType, DOMRect, DOMRectReadOnly, DOMStringMap (#36395)
+      gc
+    - https://github.com/servo/servo/pull/36392	(@yerke, #36392)	refactor: add CanGc as argument to methods in Document (#36392)
+      gc
+    - https://github.com/servo/servo/pull/36464	(@yerke, #36464)	add CanGc as argument to methods in Element (#36464)
+      gc
+    - https://github.com/servo/servo/pull/36504	(@yerke, #36504)	add CanGc as argument to methods in HTMLInputElement, HTMLLinkElement (#36504)
+      gc
+    - https://github.com/servo/servo/pull/36495	(@yerke, #36495)	add CanGc as argument to methods in HTMLCollection, HTMLDataListElement, HTMLDialogElement, HTMLElement, HTMLFieldSetElement, HTMLFormControlsCollection, HTMLFormElement, HTMLIFrameElement (#36495)
+      gc
+    - https://github.com/servo/servo/pull/36492	(@yerke, #36492)	add CanGc as argument to methods in ElementInternals, GlobalScope, HTMLAnchorElement, HTMLAreaElement, HTMLCanvasElement (#36492)
+      gc
+- html
+    - https://github.com/servo/servo/pull/35684	(@simonwuelker, #35684)	Support single-value `<select>` elements (#35684)
+      html
+    - https://github.com/servo/servo/pull/36446	(@Loirooriol, #36446)	Implement `disabled` attribute for `<link rel="stylesheet">` (#36446)
+      html
+- incremental
+    - https://github.com/servo/servo/pull/36404	(@mrobinson, @Loirooriol, #36404)	layout: Enable using cached fragments when there is a BoxTree update point (#36404)
+      incremental
+    - https://github.com/servo/servo/pull/36448	(@mrobinson, @Loirooriol, #36448)	layout: Add documentation for `CacheableLayoutResultAndInputs` (#36448)
+      incremental
+    - https://github.com/servo/servo/pull/36447	(@mrobinson, @Loirooriol, #36447)	layout: Store table parts in DOM layout data (#36447)
+      incremental
+    - https://github.com/servo/servo/pull/36513	(@mrobinson, @Loirooriol, #36513)	layout: Add a `LayoutBoxBase` to inline boxes (#36513)
+      incremental
+    - https://github.com/servo/servo/pull/36583	(@mrobinson, @Loirooriol, #36583)	layout: Store `Fragment` results in `LayoutBoxBase` and start using them for queries (#36583)
+      incremental
+- input
+    - https://github.com/servo/servo/pull/36619	(@yezhizhen, #36619)	Rework `ScriptThread::handle_input_event` for behaviour and performance (#36619)
+      input; fixes erroneous click event on right click
+- layout
+    - https://github.com/servo/servo/pull/36278	(@Loirooriol, #36278)	layout: Allow collapsing bottom margins with any indefinite block size (#36278)
+      layout
+    - https://github.com/servo/servo/pull/36298	(@Barry-dE, #36298)	Fix:  `display: inline-grid` considered an atomic inline (#36298)
+      layout; fix atomic inlines
+    - https://github.com/servo/servo/pull/36316	(@Loirooriol, #36316)	Enable layout_grid_enabled pref for all tests (#36316)
+      layout
+    - https://github.com/servo/servo/pull/36174	(@reesmichael1, #36174)	fix: root element not establishing stacking context (#35390) (#36174)
+      layout; fix stacking contexts
+    - https://github.com/servo/servo/pull/36311	(@Loirooriol, #36311)	layout: Improve style conversion for Taffy (#36311)
+      layout; grid
+    - https://github.com/servo/servo/pull/36288	(@Loirooriol, #36288)	layout: Restrict stretch alignment to flex items with computed auto size (#36288)
+      layout; flex
+    - https://github.com/servo/servo/pull/36469	(@Loirooriol, #36469)	layout: Enforce min-content min main size of flex-level tables (#36469)
+      layout; tables in flex
+    - https://github.com/servo/servo/pull/36518	(@Loirooriol, #36518)	layout: Floor the max-content size by the min-content size (#36518)
+      layout crash
+    - https://github.com/servo/servo/pull/36571	(@Loirooriol, #36571)	layout: Always floor the max-content size by the min-content size (#36571)
+      layout crash
+    - https://github.com/servo/servo/pull/36595	(@Loirooriol, #36595)	layout: Implement `justify-self` for block-level boxes (#36595)
+      css layout
+- legacy
+    - https://github.com/servo/servo/pull/36281	(@TimvdLippe, #36281)	Remove meta-legacy-layout wpt tests (#36281)
+      legacy
+    - https://github.com/servo/servo/pull/36613	(@mrobinson, #36613)	layout: Combine `layout_2020` and `layout_thread_2020` into a crate called `layout` (#36613)
+      architecture legacy
+    - https://github.com/servo/servo/pull/36698	(@mrobinson, #36698)	layout: Remove rules for legacy pseudo-elements in user agent stylesheet (#36698)
+      legacy
+- multiprocess
+    - https://github.com/servo/servo/pull/36329	(@webbeef, #36329)	Prevent zombie processes in multi-process mode. (#36329)
+      multiprocess
+    - https://github.com/servo/servo/pull/35863	(@webbeef, #35863)	Make the memory reporting multi-process aware (#35863)
+      multiprocess
+- net
+    - https://github.com/servo/servo/pull/36227	(@simonwuelker, #36227)	Refuse to provide partial response from earlier ranged request to API that did not make a range request (#36227)
+      net
+    - https://github.com/servo/servo/pull/36390	(@sebsebmc, #36390)	fix: meta referrer updating to follow spec (#36390)
+      net
+    - https://github.com/servo/servo/pull/36455	(@sebsebmc, #36455)	Manually concatenate ACRH headers to not include a space (#36455)
+      net; cors fix
+    - https://github.com/servo/servo/pull/36393	(@sebsebmc, #36393)	Handle HTTP Refresh header (#36393)
+      api net
+    - https://github.com/servo/servo/pull/36523	(@sebsebmc, #36523)	Support static and instance members having the same name in IDLs (#36523)
+      api net; for `Response.json` static method
+    - https://github.com/servo/servo/pull/36605	(@elomscansio, @jdm, #36605)	htmlvideoelement: Include security settings in poster image request (#36605)
+      net
+    - https://github.com/servo/servo/pull/36606	(@elomscansio, #36606)	Fix missing settings in script module requests (#36606)
+      net
+    - https://github.com/servo/servo/pull/36621	(@elomscansio, #36621)	layout_image: Include missing request settings in layout-initiated image loads (#36621)
+      net
+    - https://github.com/servo/servo/pull/36589	(@sebsebmc, #36589)	Implement static Response.json (#36589)
+      api net; `Response.json` static method
+- ohos
+    - https://github.com/servo/servo/pull/36229	(@kongbai1996, #36229)	Fixed the crash issue when the openharmony web component is adapted. (#36229)
+      crash ohos
+    - https://github.com/servo/servo/pull/36459	(@coding-joedow, #36459)	Implement WebviewDelegate.screen_geometry for OHOS (#36459)
+      ohos
+    - https://github.com/servo/servo/pull/36444	(@PartiallyUntyped, @jschwe, #36444)	[OHOS] Allow setting the log-filter via cli arguments (#36444)
+      ohos
+- parse
+    - https://github.com/servo/servo/pull/36622	(@elomscansio, #36622)	script_thread: HTML parser doesn't set relevant option (#36622)
+      parse
+- perf
+    - https://github.com/servo/servo/pull/36474	(@mrobinson, @Loirooriol, #36474)	layout: Box `block_margins_collapsed_with_children` member of `BoxFragment` (#36474)
+      perf; memory usage
+    - https://github.com/servo/servo/pull/36557	(@jdm, #36557)	compositing: Add memory reporter for WebRender. (#36557)
+      perf; memory usage
+    - https://github.com/servo/servo/pull/36556	(@jdm, #36556)	net: Report memory usage for image cache. (#36556)
+      perf; memory usage
+    - https://github.com/servo/servo/pull/36558	(@jdm, #36558)	net: Measure HSTS memory usage. (#36558)
+      perf; memory usage
+    - https://github.com/servo/servo/pull/36579	(@jdm, #36579)	Refactor common infrastructure for creating memory reports. (#36579)
+      perf; memory usage
+    - https://github.com/servo/servo/pull/36581	(@jdm, #36581)	Report memory usage for image frames. (#36581)
+      perf; memory usage
+    - https://github.com/servo/servo/pull/36553	(@jdm, #36553)	layout: Report memory usage for fragment and box trees. (#36553)
+      perf; memory usage
+    - https://github.com/servo/servo/pull/36600	(@Barry-dE, @jdm, #36600)	Prevent multiple notifications for image dimensions (#36600)
+      perf
+    - https://github.com/servo/servo/pull/36617	(@jdm, #36617)	Use swap_remove when unrooting DOM objects. (#36617)
+      perf
+    - https://github.com/servo/servo/pull/36612	(@jdm, #36612)	script: Only register one image callback per CSS image in use. (#36612)
+      perf
+    - https://github.com/servo/servo/pull/36604	(@jdm, #36604)	Eagerly define interfaces on non-Window globals (#36604)
+      perf; memory usage
+    - https://github.com/servo/servo/pull/36573	(@PartiallyUntyped, #36573)	[tracing] Add convenience macro for function tracing (#36573)
+      perf; tracing support
+    - https://github.com/servo/servo/pull/36629	(@mrobinson, @Loirooriol, #36629)	layout: Add a new `FragmentTree` pass to calculate containing block rectangles (#36629)
+      perf; layout queries
+    - https://github.com/servo/servo/pull/36119	(@sagudev, #36119)	Introduce snapshot concept of canvas (#36119)
+      perf
+    - https://github.com/servo/servo/pull/36664	(@jdm, #36664)	script: Measure stored layout data memory usage. (#36664)
+      perf; memory usage
+    - https://github.com/servo/servo/pull/36681	(@mrobinson, @Loirooriol, #36681)	 layout: Use box tree `Fragment`s for offset parent queries (#36681)
+      perf; layout queries
+    - https://github.com/servo/servo/pull/36663	(@mrobinson, @Loirooriol, #36663)	layout: Implement node geometry queries against `BoxTree`'s `Fragment` (#36663)
+      perf; layout queries
+    - https://github.com/servo/servo/pull/36692	(@PartiallyUntyped, #36692)	Propagate image resolution errors in layout context (#36692)
+      perf
+- script
+    - https://github.com/servo/servo/pull/36332	(@mrobinson, #36332)	script: Remove dependency on `webgpu` (#36332)
+      script; rebuild webgpu without rebuilding script
+    - https://github.com/servo/servo/pull/36320	(@mrobinson, #36320)	webgpu: Add a `webgpu_traits` crate (#36320)
+      script; webgpu dependency
+    - https://github.com/servo/servo/pull/36323	(@jdm, #36323)	Move generated bindings to script_bindings (#36323)
+      script; crate split done! script rebuilds take 50% less time
+- security
+    - https://github.com/servo/servo/pull/36510	(@TimvdLippe, #36510)	Check CSP for inline event handlers (#36510)
+      security
+    - https://github.com/servo/servo/pull/36603	(@TimvdLippe, #36603)	Set correct policy-container for worker construction (#36603)
+      security; csp
+    - https://github.com/servo/servo/pull/36623	(@TimvdLippe, #36623)	Support CSP report-only header (#36623)
+      security; csp
+- servoshell
+    - https://github.com/servo/servo/pull/36677	(@simonwuelker, #36677)	servoshell: Make list of options in <select> prompt scrollable (#36677)
+      servoshell
+- shadowdom
+    - https://github.com/servo/servo/pull/36230	(@jdm, #36230)	script: Fix resize observer depth calculation for Shadow DOM. (#36230)
+      shadowdom
+    - https://github.com/servo/servo/pull/36620	(@sakupi01, #36620)	Fix: Slot Assignment mode according to the spec (#36620)
+      shadowdom
+- test
+    - https://github.com/servo/servo/pull/36221	(@jdm, #36221)	Enable service worker WPT tests. (#36221)
+      test
+    - https://github.com/servo/servo/pull/36330	(@jdm, #36330)	constellation: Only return focused browsing contexts that exist. (#36330)
+      test; servodriver bustage
+    - https://github.com/servo/servo/pull/36301	(@sebsebmc, @sagudev, #36301)	Implement TestUtils (#36301)
+      test
+    - https://github.com/servo/servo/pull/36334	(@mrego, #36334)	wpt: Unskip webaudio tests as most are passing (#36334)
+      test; unskip tests
+    - https://github.com/servo/servo/pull/36333	(@mrego, #36333)	wpt: Unskip old-tests/ folder as most tests are passing (#36333)
+      test; unskip tests
+    - https://github.com/servo/servo/pull/36314	(@mrego, #36314)	wpt: Unskip css/css-text/i18n as many tests are passing there (#36314)
+      test; unskip tests
+    - https://github.com/servo/servo/pull/36327	(@jdm, #36327)	Ignore cert errors when running wdspec tests. (#36327)
+      test; servodriver bustage
+    - https://github.com/servo/servo/pull/36306	(@yezhizhen, #36306)	Webdriver delete cookie (#36306)
+      test; servodriver bustage
+    - https://github.com/servo/servo/pull/36340	(@mrego, #36340)	wpt: Unskip acid folder as most tests are passing (#36340)
+      test; unskip tests
+    - https://github.com/servo/servo/pull/36377	(@mukilan, #36377)	ci: use Ubuntu 22.04 for nightly jobs (#36377)
+      test
+    - https://github.com/servo/servo/pull/36402	(@jdm, #36402)	Run subset of CSP tests by default. (#36402)
+      test
+    - https://github.com/servo/servo/pull/36436	(@jdm, #36436)	Run all CSP tests in CI by default. (#36436)
+      test
+    - https://github.com/servo/servo/pull/36552	(@PotatoCP, #36552)	Implement GetComputedRole in wd (#36552)
+      test; servodriver bustage
+    - https://github.com/servo/servo/pull/27041	(@jdm, #27041)	Report exceptions for async script executions to webdriver (#27041)
+      test; servodriver bustage
+- testing
+    - https://github.com/servo/servo/pull/36348	(@Loirooriol, #36348)	Enable layout_container_queries_enabled on all WPT tests (#36348)
+      testing; experimental features
+    - https://github.com/servo/servo/pull/36475	(@Loirooriol, #36475)	Enable dom_svg_enabled on all tests (#36475)
+      testing; experimental features
+    - https://github.com/servo/servo/pull/36335	(@Loirooriol, #36335)	Run all tests with --enable-experimental-web-platform-features (#36335)
+      testing; experimental features
+    - https://github.com/servo/servo/pull/36519	(@Loirooriol, #36519)	Enable all experimental web platform features on all testsuites (#36519)
+      testing; experimental features
+- upgrade
+    - https://github.com/servo/servo/pull/36486	(@sagudev, #36486)	chore: Update wgpu to v25 (#36486)
+      upgrade
+-->
+
 ## Donations
 
 Thanks again for your generous support!
