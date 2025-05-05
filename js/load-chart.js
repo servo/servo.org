@@ -117,9 +117,8 @@ function setupChart () {
 
     function update_chart () {
         if (!all_scores) throw new Error('scores not loaded')
-        const chosen_area = area_dropdown.value
+        const area_index = +area_dropdown.value
         const chosen_period = period_dropdown.value
-        const area_index = all_scores.area_keys.indexOf(chosen_area)
         const table = new google.visualization.DataTable()
         options.series = []
         const monthsToSubtract = periodRanges[chosen_period]
@@ -164,10 +163,10 @@ function setupChart () {
                 options.hAxis.format = 'MMM YYYY'
             }
 
-            for (const area of scores.area_keys) {
+            for (const [index, area] of scores.focus_areas.entries()) {
                 const selector = document.createElement('option')
-                selector.value = area
-                selector.textContent = scores.focus_areas[area]
+                selector.value = index
+                selector.textContent = area
                 area_dropdown.appendChild(selector)
             }
 
@@ -193,7 +192,7 @@ function setupChart () {
                     update_chart()
                 })
             }
-            area_dropdown.value = scores.area_keys[0]
+            area_dropdown.value = 0
             period_dropdown.value = Object.keys(periodRanges)[4]
             update_chart()
         })
