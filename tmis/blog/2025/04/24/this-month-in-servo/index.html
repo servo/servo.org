@@ -263,23 +263,45 @@
 <div class="inner-container blog-content">
   <p>We merged the first steps to supporting <strong>animated images</strong> in web content (@rayguo17, #36058, #36141).</p>
 <p>We’ve <strong>enabled Shadow DOM by default</strong> after significantly improving support, allowing Servo to render sites like wpt.fyi correctly (TODO screenshot) (@simonwuelker, @longvatron111, @elomscansio, #35923, #35899, #35930, #36104, #34964, #36024, #36106, #36173, #36010, #35769).</p>
+<p>Having disabled by default Servo’s original, experimental layout implementation back in November 2024, we have now taken the step of <strong>deleting all of the disabled code</strong> (@Loirooriol, #35943). The new layout engine is improving significantly month over month. We now better support <strong><code>transform-style: preserve-3d</code></strong> (@HastD, #35808), and the <code>**will-change**</code> property (@yezhizhen, #35787).
+Our flexbox implementation now supports <strong>min/max keyword sizes</strong> for both cross and main axes (@Loirooriol, #35860, #35961), as well as <strong>keyword sizes</strong> for non-replaced content (@Loirooriol, #35826) and <strong>min and max sizing properties</strong> (@Loirooriol, #36015). This means Servo’s flexbox layout now has full support for sizing keywords!
+We laid the groundwork for supporting the <strong>::marker pseudo element</strong> (#36202), and implemented the <strong>fit-content()</strong> sizing function (@Loirooriol, #36056), as well as the <strong>image-set()</strong> notation (@chocolate-pie, #36210).
+Additionally, the <strong><code>scale</code>, <code>rotate</code>, and <code>translate</code></strong> transform properties now work (@chocolate-pie, @Loirooriol, #35926). Finally, we <strong>improved the performance</strong> of deeply nested pages that require laying out boxes multiple times (@Loirooriol, @mrobinson, #36082).</p>
 <p>We also fixed many layout bugs:</p>
 <ul>
 <li>incorrect <strong>fallback font</strong> caching (@mrobinson, #35705)</li>
+<li>improved <strong>overflow handling</strong> in some special cases (@yezhizhen, #35670)</li>
+<li><strong>addressed a crash</strong> caused by flex boxes and mixing fixed position and absolutely positioned descendants (@mrobinson, #36123)</li>
+<li><strong>table-layout: fixed</strong> is no longer ignored when <code>inline-size</code> is <code>auto</code> (@Loirooriol, #35882)</li>
+<li>margins of block-level box stretches are always zero, regardless of collapsing (@Loirooriol, #35904)</li>
+<li>fixed the intrinsic block size of replaced elements with auto width (@Loirooriol, #35275)</li>
+<li>added support for <strong><code>z-index</code> on grid items</strong> (@Loirooriol, #35947)</li>
+<li>indefinite stretch now contributes to intrinsic sizes (@Loirooriol, #36030)</li>
+<li>static positions now include ancestor padding (@Loirooriol, #36051)</li>
+<li>table rows with a span of &gt;1 now are sized appropriately (@PotatoCP, #36064)</li>
+<li>input element contents ignore any outer display value (@PotatoCP, #35908)</li>
 </ul>
 <p>There was lots of progress on additional web API features in the engine:</p>
 <ul>
-<li>we implemented <code>ReadableByteStreamController</code> and <code>ReadableStream.pipeTo</code> (@Taym95, @gterzian, #35410, #35650)</li>
-<li>the <code>nonce</code> attribute is now used in CSP checks (@simonwuelker, #35876)</li>
-<li>we removed some cases where custom elements callbacks fired incorrectly (@xiaochengh, #35960, #35883)</li>
-<li>partial support for <code>InterSectionObserver</code> was added (@stevennovaryo, #35551)</li>
-<li>we implemented <code>Range::getClientRects</code> and <code>Range::getBoundingClientRect</code> (@simonwuelker, #35993)</li>
+<li>we implemented <strong><code>ReadableByteStreamController</code> and <code>ReadableStream.pipeTo</code></strong> (@Taym95, @gterzian, #35410, #35650)</li>
+<li>the <strong><code>nonce</code> attribute</strong> is now used in CSP checks (@simonwuelker, #35876)</li>
+<li>we removed some cases where <strong>custom elements callbacks fired incorrectly</strong> (@xiaochengh, #35960, #35883)</li>
+<li>added <strong>partial support for <code>InterSectionObserver</code></strong> (@stevennovaryo, #35551)</li>
+<li>we <strong>implemented <code>Range.getClientRects</code> and <code>Range.getBoundingClientRect</code></strong> (@simonwuelker, #35993)</li>
 <li><code>touchmove</code> events are more reliable (@kongbai1996, #36218 #36200) and support the <code>cancelable</code> property (@kongbai1996, #35713)</li>
-<li>we added support for <code>HTMLOptgroupElement.label</code> (@simonwuelker, #35970)</li>
-<li>the <code>scale</code>, <code>rotate</code>, and <code>translate</code> CSS transform properties now work (@chocolate-pie, @Loirooriol, #35926)</li>
-<li>we implemented the <code>fit-content()</code> CSS sizing function (@Loirooriol, #36056)</li>
-<li>CSS <code>image-set()</code> is now supported (@chocolate-pie, #36210)</li>
+<li>we added support for <strong><code>HTMLOptgroupElement.label</code></strong> (@simonwuelker, #35970)</li>
+<li><strong>made <code>DOMPoint</code> and <code>DOMPointReadOnly</code> serializable</strong> with <code>postMessage</code> (@jdm, @mrobinson, #35989)</li>
+<li>Notifications now <strong>fetch associated image resources</strong> (@pewsheen, #35878)</li>
+<li><code>ResizeObserver</code> callbacks are only invoked <strong>when elements change size</strong> (@simonwuelker, #36226)</li>
+<li><strong>Request objects with FormData bodies</strong> now use the correct <code>Content-Type</code> (@andreubotella, #36194)</li>
+<li>Text response bodies containing a BOM now consume it (@andreubotella, #36192)</li>
+<li>We have begun implementing the <strong>URLPattern</strong> API (@simonwuelker, #36144)</li>
+<li>Backspace <strong>no longer removes entire lines</strong> in <code>&lt;textarea&gt;</code> (@elomscansio, @jdm, #36112)</li>
+<li>we implemented the <code>HTMLParagraphElement.align</code> attribute (@stephenmuss, #36054)</li>
+<li><strong>passive event listeners</strong> can be created (@shanehandley, #35877)</li>
+<li>cancelling an enqueued animation frame callback now works (@xiaochengh, #35849)</li>
 </ul>
+<p>Our developer tools integration now <strong>supports iframes</strong> (@simonwuelker, #35874), shows <strong>computed display values</strong> when inspecting elements (@stephenmuss, #35870), and supports <strong>multiple tabs</strong> open in the servoshell browser (@atbrakhi, #35884). To use the developer tools, we now <strong>require Firefox 133 or newer</strong> (@atbrakhi, #35792).</p>
 <p><strong>Stylo</strong> has been upgraded to 2025-03-15 (@nicoburns, @Loirooriol, #35782, #35925, #35990), and we upgraded to the <strong>2024 Rust edition</strong> (@simonwuelker, #35755).
 We also are nearly finished <strong>splitting up our massive <code>script</code> crate</strong> (@jdm, #35988, #35987, #36107, #36216, #36220, #36095), which will eventually make Servo faster to rebuild.</p>
 <h2 id="servo-the-browser-(servoshell)" tabindex="-1">Servo-the-browser (servoshell) <a class="header-anchor" href="#servo-the-browser-(servoshell)">
@@ -311,42 +333,15 @@ We also fixed a number of bugs in the webdriver server related to clicking on el
 <p>The <code>OffscreenRenderingContext</code> is <strong>no longer double buffered</strong>, which can improve rendering performance in embeddings that rely on it.
 We also removed a source of <strong>canvas rendering latency</strong> (@sagudev, #35719), and fixed performance cliffs related to the Shadow DOM (@simonwuelker, #35802, #35725).
 We improved performance of block level layout by <strong>reducing allocations</strong> (@jschwe, #35781), and reduced the <strong>latency of touch events</strong> when they are non-cancelable (@kongbai1996, #35785).</p>
-<p>We also fixed crashes involving multiple touchmove events (@kongbai1996, @jschwe, #35763), and focusing iframes (@leftmostcat, #35742).
-The project to decrease the risk of <a href="https://github.com/servo/servo/issues/33140">intermittent GC-related crashes</a> continues to make progress (@jdm, @Arya-A-Nair, @Dericko681, #35753 #36014 #36043 #36156 #36116 #36180 #36111).
-Additionally, we <strong>avoided undefined behaviour</strong> in the Rust bindings to the SpiderMonkey engine (@gmorenz, #35892 #36160 #36161 #36158).</p>
+<p>We also fixed crashes involving <strong>multiple touchmove events</strong> (@kongbai1996, @jschwe, #35763), and <strong>focusing iframes</strong> (@leftmostcat, #35742).
+The project to decrease the risk of <a href="https://github.com/servo/servo/issues/33140">intermittent GC-related crashes</a> continues to make progress (@jdm, @Arya-A-Nair, @Dericko681, #35753, #36014, #36043, #36156, #36116, #36180, #36111).
+Additionally, we <strong>removed undefined behaviour</strong> from the Rust bindings to the SpiderMonkey engine (@gmorenz, #35892, #36160, #36161, #36158).</p>
 <!--
-- cleanup
-    - https://github.com/servo/servo/pull/35943	(@Loirooriol, #35943)	Remove legacy layout (layout 2013) (#35943)
-      cleanup
 - crash
     - https://github.com/servo/servo/pull/35740	(@webbeef, #35740)	Set a valid default value for the --userscripts command line option (#35740)
       crash
     - https://github.com/servo/servo/pull/35865	(@boluochoufeng, #35865)	Fix the parsing error of PrefValue::Array, which is used for the parsing of Preferences shell_background_color_rgba field (#35865)
       crash
-- css
-    - https://github.com/servo/servo/pull/35670	(@yezhizhen, #35670)	layout: Merge `BoxFragment::used_overflow` into `ComputedValuesExt::effective_overflow` (#35670) (#35670)
-      css
-    - https://github.com/servo/servo/pull/35682	(@Loirooriol, #35682)	layout: Partial support for keyword sizes on preferred cross size (#35682)
-      css
-    - https://github.com/servo/servo/pull/35808	(@HastD, #35808)	layout: Make `transform-style: preserve-3d` establish a containing block for all descendants (#35808)
-      css
-    - https://github.com/servo/servo/pull/35787	(@yezhizhen, #35787)	layout: support CSS will-change (#35787)
-      css
-    - https://github.com/servo/servo/pull/35574	(@longvatrong111, #35574)	Fix UA style value for textarea (#35574)
-      css
-- devtools
-    - https://github.com/servo/servo/pull/35745	(@simonwuelker, #35745)	Respond to the `connect` message from a devtools client (#35745)
-      devtools
-    - https://github.com/servo/servo/pull/35792	(@atbrakhi, #35792)	devtools: update targeted firefox version. (#35792)
-      devtools
-    - https://github.com/servo/servo/pull/35874	(@simonwuelker, #35874)	Register iframes with the devtools (#35874)
-      devtools
-    - https://github.com/servo/servo/pull/35870	(@stephenmuss, #35870)	Show correctly computed element display type in devtools (#35870)
-      devtools
-    - https://github.com/servo/servo/pull/35958	(@simonwuelker, #35958)	Hide servo internal shadow roots from the inspector by default (#35958)
-      devtools
-    - https://github.com/servo/servo/pull/35884	(@atbrakhi, #35884)	devtools: use correct id for browser_id and outer_window_id (#35884)
-      devtools
 - dom
     - https://github.com/servo/servo/pull/35718	(@xiaochengh, #35718)	script: Implement preparation-time document (#35718)
       dom
@@ -358,94 +353,18 @@ Additionally, we <strong>avoided undefined behaviour</strong> in the Rust bindin
       dom
     - https://github.com/servo/servo/pull/35849	(@xiaochengh, #35849)	Fix animation frame callback cancellation (#35849)
       dom
-    - https://github.com/servo/servo/pull/35877	(@shanehandley, #35877)	script: use passive event listener option on AddEventListenerOptions (#35877)
-      dom
     - https://github.com/servo/servo/pull/35949	(@sebsebmc, #35949)	Bring back DOM GC checkpoint to script_thread (#35949)
-      dom
-    - https://github.com/servo/servo/pull/35831	(@jdm, #35831)	Refactor common boilerplate out of serialize/transfer implementations (#35831)
-      dom
-    - https://github.com/servo/servo/pull/35878	(@pewsheen, #35878)	feat: fetch notification image resources (#35878)
-      dom notification
-    - https://github.com/servo/servo/pull/36054	(@stephenmuss, #36054)	Support align attribute on HTMLParagraphElement interface (#36054)
       dom
     - https://github.com/servo/servo/pull/36090	(@elomscansio, #36090)	Fix form validation for readonly inputs and update WPT expectations (#36090)
       dom
     - https://github.com/servo/servo/pull/36103	(@jerensl, #36103)	fix: radio input element don't trigger validity state (#36103)
       dom
-    - https://github.com/servo/servo/pull/36082	(@Loirooriol, @mrobinson, #36082)	layout: Cache `IndependentNonReplacedContents::layout()` (#36082)
-      dom notification
     - https://github.com/servo/servo/pull/36136	(@mrees@noeontheend.com, #36136)	Fix check in get_array_index_from_id to return early on ASCII char (#36136)
-      dom
-    - https://github.com/servo/servo/pull/36097	(@jdm, #36097)	script: Support converting JS values to Rc<Promise> with FromJSValConvertible. (#36097)
-      dom
-    - https://github.com/servo/servo/pull/35989	(@jdm, @mrobinson, #35989)	Make DOMPoint and DOMPointReadOnly serializable (#35989)
-      dom
-    - https://github.com/servo/servo/pull/36112	(@elomscansio, @jdm, #36112)	Fix Backspace deleting entire previous line in `<textarea>` (#36112)
-      dom
-    - https://github.com/servo/servo/pull/36144	(@simonwuelker, #36144)	Start implementing the `URLPattern` API (#36144)
       dom
     - https://github.com/servo/servo/pull/36163	(@andrei.volykhin@gmail.com, #36163)	dom: Track "removed" event listener status (#36163)
       dom
-    - https://github.com/servo/servo/pull/36192	(@abotella@igalia.com, #36192)	Consume BOM in the `text()` method of fetch bodies (#36192)
-      dom
-    - https://github.com/servo/servo/pull/36194	(@abotella@igalia.com, #36194)	Fix content-type when creating a `Request` with `FormData` body (#36194)
-      dom
     - https://github.com/servo/servo/pull/36197	(@barigbuenbira@gmail.com, #36197)	fix: prevent missing value error for radio button inputs without a name (#36197)
       dom
-    - https://github.com/servo/servo/pull/36218	(@kongbai1996, #36218)	Fixed an incorrect touchmove event triggered when the second finger is pressed. (#36218)
-      dom touch
-    - https://github.com/servo/servo/pull/36226	(@simonwuelker, #36226)	Only invoke resize observer callback when the observed element changed its size (#36226)
-      dom
-- flexbox
-    - https://github.com/servo/servo/pull/35860	(@Loirooriol, #35860)	layout: Support min/max cross keywords sizes in flexbox (#35860)
-      layout flexbox
-    - https://github.com/servo/servo/pull/35961	(@Loirooriol, #35961)	layout: Support min/max main keyword sizes in flexbox (#35961)
-      layout flexbox
-    - https://github.com/servo/servo/pull/36123	(@mrobinson, #36123)	layout: Ensure compatible positioning context during flexbox block content sizing calculation (#36123)
-      layout flexbox
-- layout
-    - https://github.com/servo/servo/pull/35821	(@Loirooriol, #35821)	layout: Remove `calculate_hypothetical_cross_size()` (#35821)
-      layout cleanup
-    - https://github.com/servo/servo/pull/35860	(@Loirooriol, #35860)	layout: Support min/max cross keywords sizes in flexbox (#35860)
-      layout flexbox
-    - https://github.com/servo/servo/pull/35882	(@Loirooriol, #35882)	layout: Only prevent fixed table layout when `inline-size` is `auto` (#35882)
-      layout table
-    - https://github.com/servo/servo/pull/35826	(@Loirooriol, #35826)	layout: Handle keyword sizes when computing the hypothetical cross size (#35826)
-      layout
-    - https://github.com/servo/servo/pull/35904	(@Loirooriol, #35904)	layout: Fix interaction of margin and stretch size on block-level boxes (#35904)
-      layout
-    - https://github.com/servo/servo/pull/35275	(@Loirooriol, #35275)	layout: Remove special height logic of replaced element with auto width (#35275)
-      layout
-    - https://github.com/servo/servo/pull/35965	(@Loirooriol, #35965)	layout: Allow lazy resolution of automatic minimum sizes (#35965)
-      layout
-    - https://github.com/servo/servo/pull/35947	(@Loirooriol, #35947)	Improve logic for establishing a stacking context (#35947)
-      layout
-    - https://github.com/servo/servo/pull/36030	(@Loirooriol, #36030)	layout: Fix intrinsic contributions of indefinite `stretch` keyword (#36030)
-      layout
-    - https://github.com/servo/servo/pull/36051	(@Loirooriol, #36051)	layout: Stop ignoring containing block padding for the static position (#36051)
-      layout
-    - https://github.com/servo/servo/pull/36015	(@Loirooriol, #36015)	layout: Obey sizing keywords in `layout_for_block_content_size()` (#36015)
-      layout
-    - https://github.com/servo/servo/pull/35961	(@Loirooriol, #35961)	layout: Support min/max main keyword sizes in flexbox (#35961)
-      layout flexbox
-    - https://github.com/servo/servo/pull/36045	(@Loirooriol, #36045)	layout: Don't consider a definite `stretch` size as intrinsic (#36045)
-      layout
-    - https://github.com/servo/servo/pull/35908	(@kenzieradityatirtarahardja18@gmail.com, @kenzieradityatirtarahardja.18@gmail.com, #35908)	Make input element display-inside always flow-root (#35908)
-      layout
-    - https://github.com/servo/servo/pull/36064	(@kenzieradityatirtarahardja18@gmail.com, @kenzieradityatirtarahardja.18@gmail.com, #36064)	Max assign outer block size to cell measures (#36064)
-      layout
-    - https://github.com/servo/servo/pull/36123	(@mrobinson, #36123)	layout: Ensure compatible positioning context during flexbox block content sizing calculation (#36123)
-      layout flexbox
-    - https://github.com/servo/servo/pull/36202	(@mrobinson, #36202)	layout: Simplify and generalize the usage of pseudo-elements (#36202)
-      layout
-- notification
-    - https://github.com/servo/servo/pull/35878	(@pewsheen, #35878)	feat: fetch notification image resources (#35878)
-      dom notification
-    - https://github.com/servo/servo/pull/36082	(@Loirooriol, @mrobinson, #36082)	layout: Cache `IndependentNonReplacedContents::layout()` (#36082)
-      dom notification
-- table
-    - https://github.com/servo/servo/pull/35882	(@Loirooriol, #35882)	layout: Only prevent fixed table layout when `inline-size` is `auto` (#35882)
-      layout table
 -->
 <style>
     ._correction {
