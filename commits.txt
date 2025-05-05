@@ -140,7 +140,8 @@ https://github.com/servo/servo/pull/36239	(@andrei.volykhin@gmail.com, #36239)	d
     # from optional "EventInit" dictionary
     # (https://dom.spec.whatwg.org/#dom-eventinit-composed).
     # The limited set of event types (Custom/Error/Focus/Mouse) will be affected by this CL (used in WPT tests).
-https://github.com/servo/servo/pull/36230	(@jdm, #36230)	script: Fix resize observer depth calculation for Shadow DOM. (#36230)
++https://github.com/servo/servo/pull/36230	(@jdm, #36230)	script: Fix resize observer depth calculation for Shadow DOM. (#36230)
+    shadowdom
     # Follow the specification more closely by using the flat tree when calculating depth for the resize observer.
     # Testing: Newly passing WPT test.
     # Fixes: #36092
@@ -165,7 +166,8 @@ https://github.com/servo/servo/pull/36230	(@jdm, #36230)	script: Fix resize obse
 https://github.com/servo/servo/pull/36229	(@kongbai1996, #36229)	Fixed the crash issue when the openharmony web component is adapted. (#36229)
     # When the OpenHarmony web component is adapted, touchmove events with the same ID may exist after touchup. Therefore,
     # only error logs are printed and no exception is thrown.
-https://github.com/servo/servo/pull/36221	(@jdm, #36221)	Enable service worker WPT tests. (#36221)
++https://github.com/servo/servo/pull/36221	(@jdm, #36221)	Enable service worker WPT tests. (#36221)
+    test
     # #36114 showed a crash in the service worker code that is enabled with the experimental prefs. I'd like to have
     # these tests running even if nobody is actively working on implementing the feature right now, since they would
     # have caught the crash sooner.
@@ -313,7 +315,8 @@ https://github.com/servo/servo/pull/35971	(@delan, #35971)	devtools: Fix id coll
     # BrowsingContextId, and PipelineId in Servo. These u32 values were previously derived from our sharded (u32,u32)
     # id values by taking only the `index` (second u32) and ignoring the `namespace_id` (first u32), leading to collisions.
     # This patch fixes that by mapping those Servo ids to sequential u32 values.
-https://github.com/servo/servo/pull/36256	(@jdm, #36256)	Fix null realm assertion when activating a service worker (#36256)
++https://github.com/servo/servo/pull/36256	(@jdm, #36256)	Fix null realm assertion when activating a service worker (#36256)
+    crash
     # Ensure there is an active realm when dispatching the `activation` DOM event to the ServiceWorker global.
     # Testing: Existing WPT coverage.
     # Fixes: #36114
@@ -629,7 +632,8 @@ https://github.com/servo/servo/pull/36174	(@mrees@noeontheend.com, #36174)	fix: 
     # functions. These handle percent-encoding and such for the components of a `URLPattern`.
     # No new tests pass, because the tokenizer and parser are still missing.
     # This is part 2 of upstreaming the changes in https://github.com/simonwuelker/servo/tree/urlpattern
-https://github.com/servo/servo/pull/36330	(@jdm, #36330)	constellation: Only return focused browsing contexts that exist. (#36330)
++https://github.com/servo/servo/pull/36330	(@jdm, #36330)	constellation: Only return focused browsing contexts that exist. (#36330)
+    test; servodriver bustage
     # The webdriver server relies on the constellation to report which browsing context is focused, and assumes that
     # a focused context is ready for interaction. However, new browsing contexts exist in a weird state where they are
     # not tracked by the constellation until the initial load is complete, which leads to the constellation rejecting
@@ -642,7 +646,8 @@ https://github.com/servo/servo/pull/36330	(@jdm, #36330)	constellation: Only ret
 https://github.com/servo/servo/pull/36354	(@TimvdLippe, #36354)	Run Trusted Types tests (#36354)
     # To set a baseline of test expectations prior to implementation.
     # Part of #36258
-https://github.com/servo/servo/pull/36301	(@sebsebmc@gmail.com, @sagudev, #36301)	Implement TestUtils (#36301)
++https://github.com/servo/servo/pull/36301	(@sebsebmc@gmail.com, @sagudev, #36301)	Implement TestUtils (#36301)
+    test
     # Implement the TestUtils namespace from https://testutils.spec.whatwg.org/.
     # This should make the `js/builtins/weakrefs` tests run faster and more consistently.
     # This change will enable other WPT tests but no tests exist currently for TestUtils itself.
@@ -828,7 +833,8 @@ https://github.com/servo/servo/pull/36333	(@rego@igalia.com, #36333)	wpt: Unskip
     #  - `/css/css-flexbox/stretch-requires-computed-auto-size.html`
 https://github.com/servo/servo/pull/36314	(@rego@igalia.com, #36314)	wpt: Unskip css/css-text/i18n as many tests are passing there (#36314)
     # This patch unskips `css/css-text/i18n` WPT tests as many tests on that folder are already passing in Servo.
-https://github.com/servo/servo/pull/36070	(@jschwe, #36070)	mach: Fix cross-compiling from windows to non windows (#36070)
++https://github.com/servo/servo/pull/36070	(@jschwe, #36070)	mach: Fix cross-compiling from windows to non windows (#36070)
+    build
     # Since we switched to using `aws-lc-rs` instead of `ring`, cross-compiling on windows (to non-windows) had been
     # broken. Using the default MSVC Generator results in CMake erroneously being configured for the host platform,
     # with failing compiler checks. Switching to Ninja fixes that issue.
@@ -859,7 +865,8 @@ https://github.com/servo/servo/pull/36070	(@jschwe, #36070)	mach: Fix cross-comp
     # Servo, and now they take 8 seconds.
     # Testing: Existing WPT tests ensure no regressions.
     # Fixes: #1799
-https://github.com/servo/servo/pull/36327	(@jdm, #36327)	Ignore cert errors when running wdspec tests. (#36327)
++https://github.com/servo/servo/pull/36327	(@jdm, #36327)	Ignore cert errors when running wdspec tests. (#36327)
+    test; servodriver bustage
     # This change makes the wdspec configuration match our other browser configurations to account for #30080.
     # Testing: Tested locally, since we don't run webdriver conformance tests in CI yet. The STR from the issue do not
     # reproduce the same problem any longer.
@@ -1136,7 +1143,8 @@ https://github.com/servo/servo/pull/36377	(@mukilan, #36377)	ci: use Ubuntu 22.0
     # invalid inputs. The parser will be added in the next PR.
     # This is part 3 of upstreaming the changes in https://github.com/simonwuelker/servo/tree/urlpattern
 >>> 2025-04-09T06:09:16Z
-https://github.com/servo/servo/pull/36384	(@sagudev, #36384)	script: copy include! files from script_bindings to script's OUT_DIR (#36384)
++https://github.com/servo/servo/pull/36384	(@sagudev, #36384)	script: copy include! files from script_bindings to script's OUT_DIR (#36384)
+    dev; fixes rust-analyzer in script
     # copy generated `include!`d files from script_bindings's OUT_DIR, to script's OUT_DIR to allow Rust Analyzer to
     # load them.
     # This is done to bypass limitation of Rust Analyzer: https://github.com/rust-lang/rust-analyzer/issues/17040
@@ -1267,7 +1275,8 @@ https://github.com/servo/servo/pull/36399	(@barigbuenbira@gmail.com, #36399)	Rem
     # Testing: Covered by WPT
     # Part of https://github.com/servo/servo/issues/6414, https://github.com/servo/servo/issues/24898, preparation for
     # https://github.com/servo/html5ever/pull/590
-https://github.com/servo/servo/pull/36402	(@jdm, #36402)	Run subset of CSP tests by default. (#36402)
++https://github.com/servo/servo/pull/36402	(@jdm, #36402)	Run subset of CSP tests by default. (#36402)
+    test
     # This will establish a baseline for the changes from #36363.
     # Testing: New tests in CI.
     # Fixes: Part of #4577
@@ -1415,7 +1424,7 @@ https://github.com/servo/servo/pull/36403	(@Gae24, #36403)	script: Correctly con
     # to run some tests manually later. Behavior is covered by the WPT.
     # Co-authored-by: Oriol Brufau
     # Signed-off-by: Martin Robinson
-https://github.com/servo/servo/pull/36416	(@sagudev, #36416)	mach try: Add `wpt` alias for `linux-wpt` (#36416)
+-https://github.com/servo/servo/pull/36416	(@sagudev, #36416)	mach try: Add `wpt` alias for `linux-wpt` (#36416)
     # Add `wpt` alias for `linux-wpt` in try_parser, because that's the what I have in muscle memory.
     # Testing: Tested with new try_parser unit tests.
 -https://github.com/servo/servo/pull/36411	(@Loirooriol, #36411)	Add serde and wgsl features to wgpu-core (#36411)
@@ -1513,7 +1522,8 @@ https://github.com/servo/servo/pull/36439	(@kkoyung, #36439)	Drop vergen_git2 de
     # Testing: This change is untested, because there is no good way to test that the
     # version number embedded into Servo is correct currently.
     # Fixes: #36435
-https://github.com/servo/servo/pull/36436	(@jdm, #36436)	Run all CSP tests in CI by default. (#36436)
++https://github.com/servo/servo/pull/36436	(@jdm, #36436)	Run all CSP tests in CI by default. (#36436)
+    test
     # Extending the original set from #36402 since there are additional tests relevant to the work happening in #36409
     # and #36363.
     # Testing: New tests in CI.
@@ -1639,7 +1649,8 @@ https://github.com/servo/servo/pull/36464	(@yerke, #36464)	add CanGc as argument
     # Testing: These changes do not require tests because they are a refactor.
     # Addresses part of https://github.com/servo/servo/issues/34573.
 >>> 2025-04-13T06:07:31Z
-https://github.com/servo/servo/pull/36454	(@TimvdLippe, @jdm, #36454)	Implement "Create a Trusted Type" algorithm (#36454)
++https://github.com/servo/servo/pull/36454	(@TimvdLippe, @jdm, #36454)	Implement "Create a Trusted Type" algorithm (#36454)
+    api; start of trusted types
     # This algorithm is quite straightforward written in the specification,
     # but leads to some type awkwardness in Rust. Most notably, the callbacks
     # have different types and cannot be unified easily. They also return
@@ -1730,7 +1741,8 @@ https://github.com/servo/servo/pull/36487	(@sebsebmc@gmail.com, #36487)	Update P
 >>> 2025-04-14T06:06:10Z
 -https://github.com/servo/servo/pull/36507	(@simonwuelker, #36507)	Remove HTMLStyleElement::line_number (#36507)
     # This field is unused.
-https://github.com/servo/servo/pull/36409	(@TimvdLippe, @jdm, #36409)	Update FetchTaskTarget to propagate CSP violations. (#36409)
++https://github.com/servo/servo/pull/36409	(@TimvdLippe, @jdm, #36409)	Update FetchTaskTarget to propagate CSP violations. (#36409)
+    api; trusted types
     # It also updates the FetchResponseListener to process CSP violations to ensure that iframe elements (amongst others)
     # properly generate the CSP events. These iframe elements are used in the Trusted Types tests themselves and weren't
     # propagating the violations before.
@@ -1757,7 +1769,7 @@ https://github.com/servo/servo/pull/36308	(@jerensl, #36308)	Support optional me
     # needs to use the stored error message if it's available
     # Testing: *Describe how this pull request is tested or why it doesn't require tests*
     # Fixes: #36191
-https://github.com/servo/servo/pull/36501	(@jdm, #36501)	Fix typo in tracing code. (#36501)
+-https://github.com/servo/servo/pull/36501	(@jdm, #36501)	Fix typo in tracing code. (#36501)
     # Presumably this was an autocomplete mistake.
     # Testing: ran Servo with RUST_LOG enabled. No panic any more.
 https://github.com/servo/servo/pull/36495	(@yerke, #36495)	add CanGc as argument to methods in HTMLCollection, HTMLDataListElement, HTMLDialogElement, HTMLElement, HTMLFieldSetElement, HTMLFormControlsCollection, HTMLFormElement, HTMLIFrameElement (#36495)
@@ -1918,7 +1930,8 @@ https://github.com/servo/servo/pull/36492	(@yerke, #36492)	add CanGc as argument
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/36363	(@TimvdLippe, @jdm, #36363)	Implement CSP check for Trusted Types (#36363)
++https://github.com/servo/servo/pull/36363	(@TimvdLippe, @jdm, #36363)	Implement CSP check for Trusted Types (#36363)
+    api; trusted types
     # The algorithm [1] is implemented in the content-security-policy
     # package.
     # Requires https://github.com/rust-ammonia/rust-content-security-policy/pull/56
@@ -2162,7 +2175,8 @@ https://github.com/servo/servo/pull/36535	(@kkoyung, #36535)	Make DOMException s
 https://github.com/servo/servo/pull/36444	(@PartiallyUntyped, @schwenderjonathan@gmail.com, #36444)	[OHOS] Allow setting the log-filter via cli arguments (#36444)
     # This PR allows setting the log-filter according to the env_filter spec via CLI arguments.
     # Testing is currently in progress, will be done on machines running OHOS.
-https://github.com/servo/servo/pull/36531	(@jschwe, #36531)	touch: Fix panic with -Zconvert-mouse-to-touch (#36531)
++https://github.com/servo/servo/pull/36531	(@jschwe, #36531)	touch: Fix panic with -Zconvert-mouse-to-touch (#36531)
+    crash
     # - We previously converted all mouse move events to touch events, but we should only be doing that while a mouse
     # button is pressed (a finger always does touch-down -> move -> up / cancel)
     # - Only consider Left mouse button for mouse-to-touch. We currently already hardcode TouchId 0, which we would need
@@ -2180,7 +2194,8 @@ https://github.com/servo/servo/pull/36531	(@jschwe, #36531)	touch: Fix panic wit
 https://github.com/servo/servo/pull/36181	(@gterzian, #36181)	Transfer ReadableStream (#36181)
     # Add transfer support to ReadableStream. Part of https://github.com/servo/servo/issues/34676
 >>> 2025-04-17T06:08:43Z
-https://github.com/servo/servo/pull/36491	(@jdm, #36491)	Fix crash when enumerating properties of global object (#36491)
++https://github.com/servo/servo/pull/36491	(@jdm, #36491)	Fix crash when enumerating properties of global object (#36491)
+    crash
     # These changes make our implementation of the enumeration hook for globals [match
     # Gecko's](https://searchfox.org/mozilla-central/rev/1f65969e57c757146e3e548614b49d3a4168eeb8/dom/base/nsGlobalWindowInner
     # .cpp#3297),
@@ -2244,20 +2259,24 @@ https://github.com/servo/servo/pull/36566	(@Taym95, #36566)	fix writablestream a
     # addition, we also made a test case that always causes this crash, but since it
     # had to create 100000 ``s it's probably not appropriate for a test suite.
     # Fixes: #36551
-https://github.com/servo/servo/pull/36557	(@jdm, #36557)	compositing: Add memory reporter for WebRender. (#36557)
++https://github.com/servo/servo/pull/36557	(@jdm, #36557)	compositing: Add memory reporter for WebRender. (#36557)
+    perf; memory usage
     # This adds a memory reporter for WebRender's memory usage. I
     # seeded it with a couple entries that looked reasonable based on
     # https://searchfox.org/mozilla-central/rev/2c71f1e9b5947612abdc16b64008162c58c1b9d3/gfx/thebes/gfxPlatform.cpp#722-738.
     # Testing: Verified that new numbers appear in about:memory for servo.org. The new images category is surprisingly
     # large (40mb).
-https://github.com/servo/servo/pull/36556	(@jdm, #36556)	net: Report memory usage for image cache. (#36556)
++https://github.com/servo/servo/pull/36556	(@jdm, #36556)	net: Report memory usage for image cache. (#36556)
+    perf; memory usage
     # These changes add a new report for image cache memory usage for each script thread.
     # Testing: Looked at the numbers after browsing various stock photo sites that show galleries of images.
-https://github.com/servo/servo/pull/36558	(@jdm, #36558)	net: Measure HSTS memory usage. (#36558)
++https://github.com/servo/servo/pull/36558	(@jdm, #36558)	net: Measure HSTS memory usage. (#36558)
+    perf; memory usage
     # Records the memory usage of the HSTS lists in the network thread.
     # Testing: Verified the presence of the new reports for servo.org.
     # Fixes: #35059
-https://github.com/servo/servo/pull/36564	(@jschwe, #36564)	uv: Use native-tls (#36564)
++https://github.com/servo/servo/pull/36564	(@jschwe, #36564)	uv: Use native-tls (#36564)
+    build
     # uv by default uses baked in webpki certificates.
     # Using the system certificates is preferable for multiple reasons:
     # - OS updates will automatically update the certificates (including revoking)
@@ -2274,7 +2293,8 @@ https://github.com/servo/servo/pull/36564	(@jschwe, #36564)	uv: Use native-tls (
     # to run `Servo` unit tests. This will allow creating suites of `WebView`
     # unit tests.
     # Testing: This change includes a new test.
-https://github.com/servo/servo/pull/36494	(@jdm, #36494)	Fix crash when setting custom property on Location (#36494)
++https://github.com/servo/servo/pull/36494	(@jdm, #36494)	Fix crash when setting custom property on Location (#36494)
+    crash
     # The JS engine uses types like `Handle>` in various places and our automated bindings are not able to handle the
     # Maybe type. We have hand-written bindings that use outparams to indicate a PropertyDescriptor value is actually the
     # Nothing type, but that data was getting lost when we passed the property descriptor to SetPropertyIgnoringNamedGetter,
@@ -2290,7 +2310,8 @@ https://github.com/servo/servo/pull/36541	(@rayguo17, #36541)	media element: sup
     # Will wait for https://github.com/servo/media/pull/435 before turning this to ready for review.
     # cc @jdm @xiaochengh
 >>> 2025-04-18T06:10:13Z
-https://github.com/servo/servo/pull/36579	(@jdm, #36579)	Refactor common infrastructure for creating memory reports. (#36579)
++https://github.com/servo/servo/pull/36579	(@jdm, #36579)	Refactor common infrastructure for creating memory reports. (#36579)
+    perf; memory usage
     # This removes a bunch of duplicated code needed to support ConditionalMallocSizeOf correctly, and fixes multiple
     # places where that code was subtly wrong (the seen pointers hashset was never cleared).
     # Testing: Measuring https://www.nist.gov/image-gallery lots of times.
@@ -2323,7 +2344,8 @@ https://github.com/servo/servo/pull/36510	(@TimvdLippe, #36510)	Check CSP for in
     # had the same problem, so it seems safer to address it in general.
     # Testing: this makes a WPT test pass
     # Fixes: #36570
-https://github.com/servo/servo/pull/36581	(@jdm, #36581)	Report memory usage for image frames. (#36581)
++https://github.com/servo/servo/pull/36581	(@jdm, #36581)	Report memory usage for image frames. (#36581)
+    perf; memory usage
     # These changes make the image-cache memory reporter report much larger values after loading image-heavy pages.
     # Testing: Manual testing on https://www.nist.gov/image-gallery
     # Fixes: #36559
@@ -2366,17 +2388,20 @@ https://github.com/servo/servo/pull/36569	(@andrei.volykhin@gmail.com, #36569)	i
     # some logic to keep the baked in resources for tests only and initialize
     # the resource reader on first access.
 >>> 2025-04-19T06:03:48Z
-https://github.com/servo/servo/pull/36560	(@sidntrivedi012@gmail.com, @jdm, #36560)	content/dom: set navigator.onLine attribute to `true` (#36560)
++https://github.com/servo/servo/pull/36560	(@sidntrivedi012@gmail.com, @jdm, #36560)	content/dom: set navigator.onLine attribute to `true` (#36560)
+    api; fixes pinterest
     # Sets the navigator.onLine attribute to true.
     # Testing:
     # Ran `./mach run https://pinterest.com --enable-experimental-web-platform-features`. This doesn't show the
     # "Hmm..you're not connected to the internet" text anymore.
     # part of: #36554
-https://github.com/servo/servo/pull/36553	(@jdm, #36553)	layout: Report memory usage for fragment and box trees. (#36553)
++https://github.com/servo/servo/pull/36553	(@jdm, #36553)	layout: Report memory usage for fragment and box trees. (#36553)
+    perf; memory usage
     # Add memory reporter integration for the fragment and box trees that are persisted in the layout thread.
     # Testing: Looked at the numbers for https://servo.org and https://html.spec.whatwg.org/. The former was very small,
     # but the latter was 700mb.
-https://github.com/servo/servo/pull/36600	(@barigbuenbira@gmail.com, @jdm, #36600)	Prevent multiple notifications for image dimensions (#36600)
++https://github.com/servo/servo/pull/36600	(@barigbuenbira@gmail.com, @jdm, #36600)	Prevent multiple notifications for image dimensions (#36600)
+    perf
     # Added a simple check to only perform metadata extraction and listener notification when we haven't already processed
     # the metadata for an image
     # Testing: Existing tests should cover if we break decoding image metadata complete.
@@ -2414,10 +2439,11 @@ https://github.com/servo/servo/pull/36413	(@yezhizhen, #36413)	Move click event 
     # Fixes: This is part of #36525.
 https://github.com/servo/servo/pull/36588	(@gterzian, #36588)	Streams: make writable streams transferrable (#36588)
     # Making writable streams transferrable, part of https://github.com/servo/servo/issues/34676
-https://github.com/servo/servo/pull/36486	(@sagudev, #36486)	chore: Update wgpu to v25 (#36486)
++https://github.com/servo/servo/pull/36486	(@sagudev, #36486)	chore: Update wgpu to v25 (#36486)
+    upgrade
     # Updates wgpu to v25 and remove some verbose logging from CTS (that also causes OOM).
     # Testing: WebGPU CTS
-https://github.com/servo/servo/pull/36584	(@sagudev, #36584)	CI: Add `number_of_chunks` (#36584)
+-https://github.com/servo/servo/pull/36584	(@sagudev, #36584)	CI: Add `number_of_chunks` (#36584)
     # This allows changing number of chunks used for WPT testing (sometimes useful for WebGPU).
     # Testing: Manual try runs
     # Fixes: #30062
@@ -2425,13 +2451,15 @@ https://github.com/servo/servo/pull/36584	(@sagudev, #36584)	CI: Add `number_of_
 -https://github.com/servo/servo/pull/36618	(@servo-wpt-sync, #36618)	Sync WPT with upstream (20-04-2025) (#36618)
     # Automated downstream sync of changes from upstream as of 20-04-2025
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/36605	(@elomscansio, @jdm, #36605)	htmlvideoelement: Include security settings in poster image request (#36605)
++https://github.com/servo/servo/pull/36605	(@elomscansio, @jdm, #36605)	htmlvideoelement: Include security settings in poster image request (#36605)
+    net
     # This PR addresses [#36593](https://github.com/servo/servo/issues/36593), where the poster image request for ``
     # elements lacked several settings introduced in `RequestBuilder`. These settings — `insecure_requests_policy`,
     # `has_trustworthy_ancestor_origin`, and `policy_container` — are now forwarded from the document, aligning poster
     # requests with other fetches using the correct policy container and trust assessment.
     # This ensures that poster images are requested under the same security assumptions as other media or resource loads.
-https://github.com/servo/servo/pull/36617	(@jdm, #36617)	Use swap_remove when unrooting DOM objects. (#36617)
++https://github.com/servo/servo/pull/36617	(@jdm, #36617)	Use swap_remove when unrooting DOM objects. (#36617)
+    perf
     # Profiling from #36609 showed this is an easy win. Ordering of our root list does not matter, so swap_remove is a
     # constant time operation compared to a linear time one that caused memmove to appear in profiles with lots of unrooting.
     # Testing: Existing WPT tests will cover this change.
@@ -2451,7 +2479,8 @@ https://github.com/servo/servo/pull/36542	(@nicoburns, #36542)	Use version of `m
     # This is part of the larger layout interface cleanup and optimization that
     # @Looriool and I are doing.
     # Testing: Covered by existing tests as this is just code movement.
-https://github.com/servo/servo/pull/36612	(@jdm, #36612)	script: Only register one image callback per CSS image in use. (#36612)
++https://github.com/servo/servo/pull/36612	(@jdm, #36612)	script: Only register one image callback per CSS image in use. (#36612)
+    perf
     # When layout encounters a CSS image, the script thread is responsible for fetching the image from the image cache. When
     # the image is not yet available, the script thread creates image cache listeners to perform actions in response to
     # future updates from the image cache.
@@ -2492,7 +2521,8 @@ https://github.com/servo/servo/pull/36619	(@yezhizhen, #36619)	Rework `ScriptThr
     # Testing: Manually tested. Right mouse won't trigger click event now.
     # Fixes: #35666
     # cc @jdm @xiaochengh
-https://github.com/servo/servo/pull/36604	(@jdm, #36604)	Eagerly define interfaces on non-Window globals (#36604)
++https://github.com/servo/servo/pull/36604	(@jdm, #36604)	Eagerly define interfaces on non-Window globals (#36604)
+    perf; memory usage
     # These changes make us match Gecko's setup for how Window and non-Window globals are initialized. Since Window globals
     # are much more common than Worker globals, using lazy interface definitions can be a useful memory optimization at
     # the expense of increased complexity for property lookups.
@@ -2521,12 +2551,12 @@ https://github.com/servo/servo/pull/36606	(@elomscansio, #36606)	Fix missing set
     # This change ensures that scripts loaded via `` or dynamic `import()` correctly reflect the calling document’s
     # security environment.
 >>> 2025-04-22T06:06:20Z
-https://github.com/servo/servo/pull/36641	(@sagudev, #36641)	dependabot: group objc2 crates (#36641)
+-https://github.com/servo/servo/pull/36641	(@sagudev, #36641)	dependabot: group objc2 crates (#36641)
     # or else their PRs will fail in tidy:
     # https://github.com/servo/servo/pull/36637
     # https://github.com/servo/servo/pull/36635
     # Testing: It's bot config so no testing is possible.
-https://github.com/servo/servo/pull/36624	(@jdm, #36624)	Reduce indexing boilerplate for serializable/transferrable objects. (#36624)
+-https://github.com/servo/servo/pull/36624	(@jdm, #36624)	Reduce indexing boilerplate for serializable/transferrable objects. (#36624)
     # Rather than creating unique types for each pipeline-namespaced index type (eg. MessagePortId, DomExceptionId,
     # etc.), we can create a generic common type that uses a marker to prevent type confusion. This change allows us to
     # reduce the boilerplate code required when implementing serializable/transferable interfaces, since the structured
@@ -2665,7 +2695,7 @@ https://github.com/servo/servo/pull/36628	(@gterzian, #36628)	Streams: remove un
     # This removes a now unnecessary handling of dataclone error when port posts a message handling error to support
     # stream transfers.
     # Fix https://github.com/servo/servo/issues/36479
-https://github.com/servo/servo/pull/36625	(@jdm, #36625)	Remove unnecessary map_err. (#36625)
+-https://github.com/servo/servo/pull/36625	(@jdm, #36625)	Remove unnecessary map_err. (#36625)
     # #36361 changed the return type of structuredclone::read, so this code is just stomping on an error value that is
     # potentially more useful since #36308 was merged.
     # Testing: Existing WPT test coverage.
@@ -2677,7 +2707,8 @@ https://github.com/servo/servo/pull/36508	(@mukilan, #36508)	script: `LoadBlocke
     # unnecessary 'unknown completed load' warnings when Servo is run with
     # logging enabled.
     # Signed-off-by: Mukilan Thiyagarajan
-https://github.com/servo/servo/pull/36596	(@TimvdLippe, @jdm, #36596)	Implement trusted types url setter (#36596)
++https://github.com/servo/servo/pull/36596	(@TimvdLippe, @jdm, #36596)	Implement trusted types url setter (#36596)
+    api; trusted types
     # We now check the sink of script.src for trusted types. This is the first attribute that we check, other sinks will
     # be implemented in follow-up changes.
     # The algorithms currently hardcode various parts. That's because I need to refactor a couple of algorithms already
@@ -2837,7 +2868,7 @@ https://github.com/servo/servo/pull/36648	(@pewsheen, #36648)	chore: remove unne
 https://github.com/servo/servo/pull/36638	(@gterzian, #36638)	Streams: fix writable transfer sink abort steps (#36638)
     # Fixes an error where a promise was rejected where it should have been resolved.
     # Follow-up to https://github.com/servo/servo/pull/36588/files#r2049437506; the initial diagnosis was wrong.
-https://github.com/servo/servo/pull/36642	(@sagudev, #36642)	Fixup dependabot.yml (#36642)
+-https://github.com/servo/servo/pull/36642	(@sagudev, #36642)	Fixup dependabot.yml (#36642)
     # fixups https://github.com/servo/servo/pull/36641, as yaml was not valid (one ` ` to many).
     # Testing: No testing for bot config.
 >>> 2025-04-24T06:04:39Z
@@ -2886,7 +2917,7 @@ https://github.com/servo/servo/pull/36642	(@sagudev, #36642)	Fixup dependabot.ym
 https://github.com/servo/servo/pull/36586	(@webbeef, #36586)	Implement CSSStyleSheet::replaceSync (#36586)
     # Implements the `replaceSync` method on CSSStyleSheet
     # Testing: Covered by wpt tests. Expectations are updated.
-https://github.com/servo/servo/pull/36640	(@jdm, #36640)	script: Add generic root storage to StructuredCloneReader. (#36640)
+-https://github.com/servo/servo/pull/36640	(@jdm, #36640)	script: Add generic root storage to StructuredCloneReader. (#36640)
     # This reduces the boilerplate necessary for adding new serializable/transferable interfaces to the structured
     # cloning code. We always need to root the deserialized objects when performing a read operation, but we don't
     # actually need the concrete object types in the majority of cases. By storing a list of rooted JS object values,
@@ -2918,7 +2949,8 @@ https://github.com/servo/servo/pull/36632	(@atbrakhi, #36632)	DevTools: Add `res
     # fragment tree traversal and to, in general, make the code a bit more
     # organized.
     # Testing: This should not change any behavior so is covered by existing WPT tests.
-https://github.com/servo/servo/pull/36119	(@sagudev, #36119)	Introduce snapshot concept of canvas (#36119)
++https://github.com/servo/servo/pull/36119	(@sagudev, #36119)	Introduce snapshot concept of canvas (#36119)
+    perf
     # Each canvas context returns snapshot instead of just raw bytes. This allows as to hold off conversions (BGRA  RGBA,
     # (un)premultiply) to when/if they are actually needed. For example when loading snapshot into webgl we can load
     # both RGBA and BGRA so no conversion is really needed.
@@ -2996,7 +3028,8 @@ https://github.com/servo/servo/pull/36621	(@elomscansio, #36621)	layout_image: I
     # - `insecure_requests_policy`
     # - `has_trustworthy_ancestor_origin`
     # - `policy_container`
-https://github.com/servo/servo/pull/36664	(@jdm, #36664)	script: Measure stored layout data memory usage. (#36664)
++https://github.com/servo/servo/pull/36664	(@jdm, #36664)	script: Measure stored layout data memory usage. (#36664)
+    perf; memory usage
     # We previously ignored the opaque layout data field inside each node when measuring a DOM node's memory usage. While
     # some of the reachable memory was accounted for by measuring the layout's box tree, measuring it via the node ensures
     # that we don't miss anything. Since there are often Arc values involved, this means that the layout-thread box tree
@@ -3006,7 +3039,7 @@ https://github.com/servo/servo/pull/36664	(@jdm, #36664)	script: Measure stored 
     servoshell
     # This ensures that the select element is usable when there are a lot of options.
     # Testing: We don't have tests for servoshell.
-https://github.com/servo/servo/pull/36672	(@sagudev, #36672)	Disable serviceworkers for webgpu CTS tests (#36672)
+-https://github.com/servo/servo/pull/36672	(@sagudev, #36672)	Disable serviceworkers for webgpu CTS tests (#36672)
     # https://github.com/servo/servo/pull/36335 enabled all experimental features for all wpt tests, but
     # `dom_serviceworker_enabled` makes all CTS tests fail, because servo reports working service worker impl, but
     # CTS pre-setup of worker fails due too incomplete impl. The solution is that we disable service workers in CTS
@@ -3116,14 +3149,15 @@ https://github.com/servo/servo/pull/36690	(@kkoyung, #36690)	Fix taplo test targ
     # - https://github.com/versotile-org/tauri-runtime-verso/issues/6#issuecomment-2820776128
     # Testing: use `fetch('urlinfo://abc').then(async (response) => console.log(await response.text())).catch(console.log)`
     # in servoshell with in a secure context (e.g. https://servo.org), and see the response should not be an error
-https://github.com/servo/servo/pull/36688	(@jschwe, #36688)	Return Result from ProtocolRegistry::register() (#36688)
+-https://github.com/servo/servo/pull/36688	(@jschwe, #36688)	Return Result from ProtocolRegistry::register() (#36688)
     # Instead of returning true / false it's better to return a Result (even if we continue ignoring possible error).
     # Testing: Doesn't change any behavior
 https://github.com/servo/servo/pull/36589	(@sebsebmc@gmail.com, #36589)	Implement static Response.json (#36589)
     # Implements https://fetch.spec.whatwg.org/#dom-response-json
     # Restructured the constructor to follow the spec more closely with a separate "initialize the response" algorithm.
     # Testing: There are existing WPT tests for this.
-https://github.com/servo/servo/pull/27041	(@jdm, #27041)	Report exceptions for async script executions to webdriver (#27041)
++https://github.com/servo/servo/pull/27041	(@jdm, #27041)	Report exceptions for async script executions to webdriver (#27041)
+    test; servodriver bustage
     # Improving the accuracy of the async script execution for our webdriver implementation allows us to run many more
     # webdriver tests without timeouts, which should help with https://github.com/web-platform-tests/wpt/issues/24257.
     # Specification:
@@ -3149,7 +3183,7 @@ https://github.com/servo/servo/pull/27041	(@jdm, #27041)	Report exceptions for a
 https://github.com/servo/servo/pull/36431	(@elomscansio, #36431)	htmlinputelement: Update radio group validity logic for disconnected trees (#36431)
     # This PR updates the validity state revalidation behavior for radio input elements, ensuring consistent logic
     # regardless of tree connectivity.
-https://github.com/servo/servo/pull/36713	(@jdm, #36713)	constellation: Move log inside relevant conditional. (#36713)
+-https://github.com/servo/servo/pull/36713	(@jdm, #36713)	constellation: Move log inside relevant conditional. (#36713)
     # This message is logged when we don't actually act on it and is confusing as a result. By moving it inside the
     # conditional, we only log the message when we actually notify webdriver that the load is complete.
     # Testing: Manual testing.
