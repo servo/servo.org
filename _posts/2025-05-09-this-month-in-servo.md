@@ -270,14 +270,14 @@ All WPT tests (4.6pp to 87.4%)
       embedding; testing
     - https://github.com/servo/servo/pull/36413	(@yezhizhen, #36413)	Move click event trigger from embedding layer to `ScriptThread` (#36413)
       embedding; reworking input for click events
-- forms
-    - https://github.com/servo/servo/pull/36236	(@MDCODE247, #36236)	script: Use `RegExpFlag_UnicodeSets` when validating regular expressions in `HTMLInputElement` (#36236)
+- DONE forms
+    - DONE https://github.com/servo/servo/pull/36236	(@MDCODE247, #36236)	script: Use `RegExpFlag_UnicodeSets` when validating regular expressions in `HTMLInputElement` (#36236)
       forms; input validation
-    - https://github.com/servo/servo/pull/36252	(@elomscansio, #36252)	Fix radio group validity update when removing or selecting an input (#36252)
+    - DONE https://github.com/servo/servo/pull/36252	(@elomscansio, #36252)	Fix radio group validity update when removing or selecting an input (#36252)
       forms
-    - https://github.com/servo/servo/pull/36458	(@sebsebmc, #36458)	fix: File to FormData not correctly handling name and lastModified (#36458)
+    - DONE https://github.com/servo/servo/pull/36458	(@sebsebmc, #36458)	fix: File to FormData not correctly handling name and lastModified (#36458)
       forms; file inputs
-    - https://github.com/servo/servo/pull/36431	(@elomscansio, #36431)	htmlinputelement: Update radio group validity logic for disconnected trees (#36431)
+    - DONE https://github.com/servo/servo/pull/36431	(@elomscansio, #36431)	htmlinputelement: Update radio group validity logic for disconnected trees (#36431)
       forms
 - gc
     - https://github.com/servo/servo/pull/36375	(@yerke, #36375)	Add CanGc as arguments in methods in devtools.rs, CharacterData, CSSStyleRule, CSSStyleSheet (#36375)
@@ -494,7 +494,7 @@ Servo now supports:
 
 We’ve started implementing the [**trusted types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).
 
-Servo can now render the **caret** and **text selection** in input fields (@dklassic, @webbeef, #35830, #36478).
+Servo can now render the **caret** and **text selection** in input fields (@dklassic, @webbeef, #35830, #36478), and we’ve landed a few fixes to **radio buttons** (@elomscansio, #36252, #36431), **file inputs** (@sebsebmc, #36458), and **input validation** (@MDCODE247, #36236).
 
 Our devtools now support **color scheme simulation** (@uthmaniv, #36253, #36168, #36297), and the beginnings of a **Sources panel** (@delan, @atbrakhi, #36164, #35971, #36631, #36632, #36667).
 
