@@ -108,6 +108,64 @@ We also fixed crashes involving **multiple touchmove events** (@kongbai1996, @js
 The project to decrease the risk of [intermittent GC-related crashes](https://github.com/servo/servo/issues/33140) continues to make progress (@jdm, @Arya-A-Nair, @Dericko681, #35753, #36014, #36043, #36156, #36116, #36180, #36111).
 Additionally, we **removed undefined behaviour** from the Rust bindings to the SpiderMonkey engine (@gmorenz, #35892, #36160, #36161, #36158).
 
+<!--
+>>> top deltas (score, pp):
+/streams/ (6.6pp to 17.1%)
+/css/css-sizing/ (6.4pp to 58.4%)
+/css/CSS2/box-display/ (4.4pp to 92.2%)
+/shadow-dom/ (4.1pp to 50.9%)
+All WPT tests (2.9pp to 58.9%)
+/css/css-grid/ (2.0pp to 43.2%)
+/css/cssom/ (1.3pp to 66.5%)
+/css/ (1.1pp to 66.6%)
+/css/css-flexbox/ (1.0pp to 77.4%)
+/css/css-position/ (0.5pp to 52.2%)
+/css/css-align/ (0.4pp to 66.1%)
+/css/CSS2/positioning/ (0.2pp to 94.5%)
+/css/CSS2/tables/ & /css/css-tables/ (0.2pp to 91.9%)
+/css/CSS2/ (0.1pp to 85.0%)
+/content-security-policy/ (0.0pp to 2.6%)
+/css/CSS2/abspos/ (0.0pp to 98.2%)
+/css/CSS2/floats/ (0.0pp to 91.5%)
+/css/CSS2/floats-clear/ (0.0pp to 93.9%)
+/css/CSS2/linebox/ (0.0pp to 96.8%)
+/css/CSS2/margin-padding-clear/ (0.0pp to 99.0%)
+/css/CSS2/normal-flow/ (0.0pp to 96.5%)
+/css/css-text/ (0.0pp to 47.5%)
+/gamepad/ (0.0pp to 70.8%)
+/trusted-types/ (0.0pp to 0.0%)
+/WebCryptoAPI/ (0.0pp to 39.2%)
+/webxr/ (0.0pp to 54.9%)
+
+>>> top deltas (subtests, pp):
+/shadow-dom/ (69.8pp to 77.8%)
+/streams/ (29.0pp to 65.1%)
+/css/css-sizing/ (5.0pp to 72.3%)
+/css/CSS2/box-display/ (4.4pp to 92.2%)
+All WPT tests (3.9pp to 86.5%)
+/css/css-flexbox/ (2.8pp to 62.5%)
+/css/css-grid/ (2.4pp to 43.9%)
+/css/ (1.0pp to 61.0%)
+/css/cssom/ (1.0pp to 82.3%)
+/css/css-position/ (0.3pp to 62.7%)
+/css/css-align/ (0.3pp to 78.0%)
+/css/CSS2/tables/ & /css/css-tables/ (0.3pp to 87.0%)
+/css/CSS2/positioning/ (0.2pp to 94.5%)
+/css/CSS2/ (0.1pp to 86.0%)
+/content-security-policy/ (0.0pp to 0.7%)
+/css/CSS2/abspos/ (0.0pp to 96.6%)
+/css/CSS2/floats/ (0.0pp to 87.8%)
+/css/CSS2/floats-clear/ (0.0pp to 92.2%)
+/css/CSS2/linebox/ (0.0pp to 79.4%)
+/css/CSS2/margin-padding-clear/ (0.0pp to 99.0%)
+/css/CSS2/normal-flow/ (0.0pp to 96.2%)
+/css/css-text/ (0.0pp to 37.3%)
+/gamepad/ (0.0pp to 93.0%)
+/trusted-types/ (0.0pp to 0.0%)
+/WebCryptoAPI/ (0.0pp to 60.6%)
+/webxr/ (0.0pp to 63.0%)
+-->
+
 <style>
     ._correction {
         max-width: 33em;
