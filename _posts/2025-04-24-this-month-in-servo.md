@@ -37,7 +37,7 @@ There was lots of progress on additional web API features in the engine:
 * we **implemented `Range.getClientRects` and `Range.getBoundingClientRect`** (@simonwuelker, #35993)
 * `touchmove` events are more reliable (@kongbai1996, #36218 #36200) and support the `cancelable` property (@kongbai1996, #35713)
 * we added support for **`HTMLOptgroupElement.label`** (@simonwuelker, #35970)
-* **made `DOMPoint` and `DOMPointReadOnly` serializable** with `postMessage` (@jdm, @mrobinson, #35989)
+* **`DOMPoint` and `DOMPointReadOnly` are serializable** with `postMessage` (@jdm, @mrobinson, #35989)
 * Notifications now **fetch associated image resources** (@pewsheen, #35878)
 * `ResizeObserver` callbacks are only invoked **when elements change size** (@simonwuelker, #36226)
 * **Request objects with FormData bodies** now use the correct `Content-Type` (@andreubotella, #36194)
@@ -46,7 +46,14 @@ There was lots of progress on additional web API features in the engine:
 * Backspace **no longer removes entire lines** in `<textarea>` (@elomscansio, @jdm, #36112)
 * we implemented the `HTMLParagraphElement.align` attribute (@stephenmuss, #36054)
 * **passive event listeners** can be created (@shanehandley, #35877)
-* cancelling an enqueued animation frame callback now works (@xiaochengh, #35849)
+* cancelled enqueued animation frame callbacks **no longer run** (@xiaochengh, #35849)
+* scripts are **no longer executed** in documents that should disable scripting (@simonwuelker, #35871)
+* file inputs now **show the selected file** (@dklassic, #35789)
+* **removing an event listener** that not yet run now prevents it from running (@tharkum, #36163)
+* members of radio input groups now **apply validity constraints** more consistently (@jerensl, @elomscansio, @Barry-dE, #36197, #36090, #36103)
+* indexing properties with **values near 2^32** now resolves correctly (@reesmichael1, #36136)
+* **history.replaceState()** can now be called from file:// documents (@kkoyung, #35864)
+* script elements **adopted between documents** now use the original document to determine when to execute (@xiaochengh, #35718)
 
 Our developer tools integration now **supports iframes** (@simonwuelker, #35874), shows **computed display values** when inspecting elements (@stephenmuss, #35870), and supports **multiple tabs** open in the servoshell browser (@atbrakhi, #35884). To use the developer tools, we now **require Firefox 133 or newer** (@atbrakhi, #35792).
 
@@ -62,6 +69,7 @@ The features enabled by this flag are expected to change over time as new web pl
 We fixed a crash when resizing the browsing area too small (@sebsebmc, #35967).
 Dialogs now support **keyboard interaction** to close and cancel them (@chickenleaf, #3567), and the URL bar accepts any **domain-like input** (@kafji, #35756).
 We also enabled **sRGB colorspaces** on macOS for better colour fidelity (@IsaacMarovitz, #35683).
+Using the `--userscripts` argument without providing a path now **defaults to the `./resources/user-agent-js` directory**.
 Finally, we **renamed the OpenHarmony app bundle** (@jschwe, #35790).
 
 ## Servo-the-engine (embedding)
@@ -76,6 +84,7 @@ Delegates will receive **send error notifications** for requests (@delan, #35668
 
 We fixed a bug causing **flickering cursors** (@DevGev, #35934), and now **create the config directory** if it does not exist (@yezhizhen, #35761).
 We also fixed a number of bugs in the webdriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).
+Setting a **non-default value for `Preferences.shell_background_color_rgba`** no longer cases a crash (@boluochoufeng, #35865).
 
 Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).
 
@@ -88,37 +97,6 @@ We improved performance of block level layout by **reducing allocations** (@jsch
 We also fixed crashes involving **multiple touchmove events** (@kongbai1996, @jschwe, #35763), and **focusing iframes** (@leftmostcat, #35742).
 The project to decrease the risk of [intermittent GC-related crashes](https://github.com/servo/servo/issues/33140) continues to make progress (@jdm, @Arya-A-Nair, @Dericko681, #35753, #36014, #36043, #36156, #36116, #36180, #36111).
 Additionally, we **removed undefined behaviour** from the Rust bindings to the SpiderMonkey engine (@gmorenz, #35892, #36160, #36161, #36158).
-
-<!--
-- crash
-    - https://github.com/servo/servo/pull/35740	(@webbeef, #35740)	Set a valid default value for the --userscripts command line option (#35740)
-      crash
-    - https://github.com/servo/servo/pull/35865	(@boluochoufeng, #35865)	Fix the parsing error of PrefValue::Array, which is used for the parsing of Preferences shell_background_color_rgba field (#35865)
-      crash
-- dom
-    - https://github.com/servo/servo/pull/35718	(@xiaochengh, #35718)	script: Implement preparation-time document (#35718)
-      dom
-    - https://github.com/servo/servo/pull/35864	(@kkoyung, #35864)	Implement can-have-its-url-rewritten for history api (#35864)
-      dom
-    - https://github.com/servo/servo/pull/35789	(@dklassic, #35789)	feat: display file chosen for input file (#35789)
-      dom
-    - https://github.com/servo/servo/pull/35871	(@simonwuelker, #35871)	Don't run scripts in documents that don't have a browsing context (#35871)
-      dom
-    - https://github.com/servo/servo/pull/35849	(@xiaochengh, #35849)	Fix animation frame callback cancellation (#35849)
-      dom
-    - https://github.com/servo/servo/pull/35949	(@sebsebmc, #35949)	Bring back DOM GC checkpoint to script_thread (#35949)
-      dom
-    - https://github.com/servo/servo/pull/36090	(@elomscansio, #36090)	Fix form validation for readonly inputs and update WPT expectations (#36090)
-      dom
-    - https://github.com/servo/servo/pull/36103	(@jerensl, #36103)	fix: radio input element don't trigger validity state (#36103)
-      dom
-    - https://github.com/servo/servo/pull/36136	(@mrees@noeontheend.com, #36136)	Fix check in get_array_index_from_id to return early on ASCII char (#36136)
-      dom
-    - https://github.com/servo/servo/pull/36163	(@andrei.volykhin@gmail.com, #36163)	dom: Track "removed" event listener status (#36163)
-      dom
-    - https://github.com/servo/servo/pull/36197	(@barigbuenbira@gmail.com, #36197)	fix: prevent missing value error for radio button inputs without a name (#36197)
-      dom
--->
 
 <style>
     ._correction {
