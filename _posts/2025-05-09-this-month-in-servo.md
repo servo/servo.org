@@ -232,10 +232,10 @@ All WPT tests (4.6pp to 87.4%)
       devtools
     - DONE https://github.com/servo/servo/pull/36667	(@atbrakhi, #36667)	DevTools: Move `Source` related code to dedicated `source.rs` file (#36667)
       devtools; Sources tab
-- editing
-    - https://github.com/servo/servo/pull/35830	(@dklassic, #35830)	feat: Implement display for text selection and caret (#35830)
+- DONE editing
+    - DONE https://github.com/servo/servo/pull/35830	(@dklassic, #35830)	feat: Implement display for text selection and caret (#35830)
       editing
-    - https://github.com/servo/servo/pull/36478	(@webbeef, #36478)	textinput: position the caret at the end when selecting input (#36478)
+    - DONE https://github.com/servo/servo/pull/36478	(@webbeef, #36478)	textinput: position the caret at the end when selecting input (#36478)
       editing
 - embedding
     - https://github.com/servo/servo/pull/36276	(@mrobinson, #36276)	libservo: Remove a couple `EmbedderMethods` (#36276)
@@ -493,6 +493,8 @@ Servo now supports:
 **ReadableStream**, **WritableStream**, and **DOMException** can now be sent over **postMessage()** and **structuredClone()** (@gterzian, @kkoyung, #36181, #36588, #36535), and we’ve started working on support for **stream transforms** (@Taym95, #36470).
 
 We’ve started implementing the [**trusted types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).
+
+Servo can now render the **caret** and **text selection** in input fields (@dklassic, @webbeef, #35830, #36478).
 
 Our devtools now support **color scheme simulation** (@uthmaniv, #36253, #36168, #36297), and the beginnings of a **Sources panel** (@delan, @atbrakhi, #36164, #35971, #36631, #36632, #36667).
 
