@@ -215,22 +215,22 @@ All WPT tests (4.6pp to 87.4%)
 - dev
     - https://github.com/servo/servo/pull/36384	(@sagudev, #36384)	script: copy include! files from script_bindings to script's OUT_DIR (#36384)
       dev; fixes rust-analyzer in script
-- devtools
-    - https://github.com/servo/servo/pull/36253	(@uthmaniv, #36253)	Add SimulateColorScheme command and script thread handling (#36253)
+- DONE devtools
+    - DONE https://github.com/servo/servo/pull/36253	(@uthmaniv, #36253)	Add SimulateColorScheme command and script thread handling (#36253)
       devtools
-    - https://github.com/servo/servo/pull/36168	(@uthmaniv, #36168)	Track the active tab and browsing context for devtools (#36168)
+    - DONE https://github.com/servo/servo/pull/36168	(@uthmaniv, #36168)	Track the active tab and browsing context for devtools (#36168)
       devtools; for color scheme simulation
-    - https://github.com/servo/servo/pull/35971	(@delan, #35971)	devtools: Fix id collisions by using incrementing counters (#35971)
+    - DONE https://github.com/servo/servo/pull/35971	(@delan, #35971)	devtools: Fix id collisions by using incrementing counters (#35971)
       devtools
-    - https://github.com/servo/servo/pull/36297	(@uthmaniv, #36297)	Process colorSchemeSimulation in TargetConfigurationActor (#36297)
+    - DONE https://github.com/servo/servo/pull/36297	(@uthmaniv, #36297)	Process colorSchemeSimulation in TargetConfigurationActor (#36297)
       devtools
-    - https://github.com/servo/servo/pull/36164	(@delan, @atbrakhi, #36164)	Devtools: initial Debugger > Sources panel (#36164)
+    - DONE https://github.com/servo/servo/pull/36164	(@delan, @atbrakhi, #36164)	Devtools: initial Debugger > Sources panel (#36164)
       devtools
-    - https://github.com/servo/servo/pull/36631	(@atbrakhi, #36631)	DevTools: `worker_id` shoud be `id` & thread for workers should be `thread` (#36631)
+    - DONE https://github.com/servo/servo/pull/36631	(@atbrakhi, #36631)	DevTools: `worker_id` shoud be `id` & thread for workers should be `thread` (#36631)
       devtools
-    - https://github.com/servo/servo/pull/36632	(@atbrakhi, #36632)	DevTools: Add `resource_available` as a common shared util  (#36632)
+    - DONE https://github.com/servo/servo/pull/36632	(@atbrakhi, #36632)	DevTools: Add `resource_available` as a common shared util  (#36632)
       devtools
-    - https://github.com/servo/servo/pull/36667	(@atbrakhi, #36667)	DevTools: Move `Source` related code to dedicated `source.rs` file (#36667)
+    - DONE https://github.com/servo/servo/pull/36667	(@atbrakhi, #36667)	DevTools: Move `Source` related code to dedicated `source.rs` file (#36667)
       devtools; Sources tab
 - editing
     - https://github.com/servo/servo/pull/35830	(@dklassic, #35830)	feat: Implement display for text selection and caret (#35830)
@@ -493,6 +493,8 @@ Servo now supports:
 **ReadableStream**, **WritableStream**, and **DOMException** can now be sent over **postMessage()** and **structuredClone()** (@gterzian, @kkoyung, #36181, #36588, #36535), and we’ve started working on support for **stream transforms** (@Taym95, #36470).
 
 We’ve started implementing the [**trusted types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).
+
+Our devtools now support **color scheme simulation** (@uthmaniv, #36253, #36168, #36297), and the beginnings of a **Sources panel** (@delan, @atbrakhi, #36164, #35971, #36631, #36632, #36667).
 
 ## Donations
 
