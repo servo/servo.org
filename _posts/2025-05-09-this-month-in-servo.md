@@ -414,12 +414,12 @@ All WPT tests (4.6pp to 87.4%)
       perf; layout queries
     - https://github.com/servo/servo/pull/36692	(@PartiallyUntyped, #36692)	Propagate image resolution errors in layout context (#36692)
       perf
-- script
-    - https://github.com/servo/servo/pull/36332	(@mrobinson, #36332)	script: Remove dependency on `webgpu` (#36332)
+- DONE script
+    - DONE https://github.com/servo/servo/pull/36332	(@mrobinson, #36332)	script: Remove dependency on `webgpu` (#36332)
       script; rebuild webgpu without rebuilding script
-    - https://github.com/servo/servo/pull/36320	(@mrobinson, #36320)	webgpu: Add a `webgpu_traits` crate (#36320)
+    - DONE https://github.com/servo/servo/pull/36320	(@mrobinson, #36320)	webgpu: Add a `webgpu_traits` crate (#36320)
       script; webgpu dependency
-    - https://github.com/servo/servo/pull/36323	(@jdm, #36323)	Move generated bindings to script_bindings (#36323)
+    - DONE https://github.com/servo/servo/pull/36323	(@jdm, #36323)	Move generated bindings to script_bindings (#36323)
       script; crate split done! script rebuilds take 50% less time
 - security
     - https://github.com/servo/servo/pull/36510	(@TimvdLippe, #36510)	Check CSP for inline event handlers (#36510)
@@ -497,6 +497,13 @@ We’ve started implementing the [**trusted types API**](https://developer.mozil
 Servo can now render the **caret** and **text selection** in input fields (@dklassic, @webbeef, #35830, #36478), and we’ve landed a few fixes to **radio buttons** (@elomscansio, #36252, #36431), **file inputs** (@sebsebmc, #36458), and **input validation** (@MDCODE247, #36236).
 
 Our devtools now support **color scheme simulation** (@uthmaniv, #36253, #36168, #36297), and the beginnings of a **Sources panel** (@delan, @atbrakhi, #36164, #35971, #36631, #36632, #36667).
+
+## Under the hood
+
+We’ve finally finished **splitting up our massive `script` crate** (@jdm, #36323), which should **cut incremental build times** for that crate **by 60%**.
+This is something we’ve wanted to do for **over eleven years** (@kmcallister, #1799)!
+
+**`webgpu` rebuilds are now faster** as well, with changes to that crate no longer requiring a `script` rebuild (@mrobinson, #36332, #36320).
 
 ## Donations
 
