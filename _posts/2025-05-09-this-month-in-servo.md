@@ -79,17 +79,17 @@ All WPT tests (4.6pp to 87.4%)
 
 <!--
 - api
-    - https://github.com/servo/servo/pull/36257	(@stevennovaryo, #36257)	canvas: Implement line dash setters and getters (#36257)
+    - DONE https://github.com/servo/servo/pull/36257	(@stevennovaryo, #36257)	canvas: Implement line dash setters and getters (#36257)
       api; CanvasPathDrawingStyles `setLineDash`, `getLineDash`, `lineDashOffset`
-    - https://github.com/servo/servo/pull/36313	(@Loirooriol, #36313)	script: Implement deprecated CSSStyleSheet members (#36313)
+    - DONE https://github.com/servo/servo/pull/36313	(@Loirooriol, #36313)	script: Implement deprecated CSSStyleSheet members (#36313)
       api; for speedometer
     - https://github.com/servo/servo/pull/36225	(@simonwuelker, #36225)	script: Implement input preprocessing for URLPatterns (#36225)
       api
-    - https://github.com/servo/servo/pull/36354	(@TimvdLippe, #36354)	Run Trusted Types tests (#36354)
+    - SEEN https://github.com/servo/servo/pull/36354	(@TimvdLippe, #36354)	Run Trusted Types tests (#36354)
       api; trusted types
-    - https://github.com/servo/servo/pull/36355	(@TimvdLippe, #36355)	Stub out Trusted Types interfaces (#36355)
+    - SEEN https://github.com/servo/servo/pull/36355	(@TimvdLippe, #36355)	Stub out Trusted Types interfaces (#36355)
       api; trusted types
-    - https://github.com/servo/servo/pull/36336	(@Gae24, #36336)	dom: Implement `ClipboardItem` (#36336)
+    - DONE https://github.com/servo/servo/pull/36336	(@Gae24, #36336)	dom: Implement `ClipboardItem` (#36336)
       api; clipboard
     - https://github.com/servo/servo/pull/36391	(@simonwuelker, #36391)	Split up the URLPattern implementation (#36391)
       api
@@ -99,43 +99,43 @@ All WPT tests (4.6pp to 87.4%)
       api; streams
     - https://github.com/servo/servo/pull/36362	(@simonwuelker, #36362)	Add a tokenizer for URLPatterns (#36362)
       api
-    - https://github.com/servo/servo/pull/36422	(@TimvdLippe, #36422)	Implement attribute and property lookup for Trusted Types (#36422)
+    - SEEN https://github.com/servo/servo/pull/36422	(@TimvdLippe, #36422)	Implement attribute and property lookup for Trusted Types (#36422)
       api; trusted types
-    - https://github.com/servo/servo/pull/36393	(@sebsebmc, #36393)	Handle HTTP Refresh header (#36393)
+    - DONE https://github.com/servo/servo/pull/36393	(@sebsebmc, #36393)	Handle HTTP Refresh header (#36393)
       api net
-    - https://github.com/servo/servo/pull/36454	(@TimvdLippe, @jdm, #36454)	Implement "Create a Trusted Type" algorithm (#36454)
+    - SEEN https://github.com/servo/servo/pull/36454	(@TimvdLippe, @jdm, #36454)	Implement "Create a Trusted Type" algorithm (#36454)
       api; start of trusted types
-    - https://github.com/servo/servo/pull/36409	(@TimvdLippe, @jdm, #36409)	Update FetchTaskTarget to propagate CSP violations. (#36409)
+    - SEEN https://github.com/servo/servo/pull/36409	(@TimvdLippe, @jdm, #36409)	Update FetchTaskTarget to propagate CSP violations. (#36409)
       api; trusted types
     - https://github.com/servo/servo/pull/36308	(@jerensl, #36308)	Support optional message for dataclone error (#36308)
       api; streams
-    - https://github.com/servo/servo/pull/36363	(@TimvdLippe, @jdm, #36363)	Implement CSP check for Trusted Types (#36363)
+    - SEEN https://github.com/servo/servo/pull/36363	(@TimvdLippe, @jdm, #36363)	Implement CSP check for Trusted Types (#36363)
       api; trusted types
-    - https://github.com/servo/servo/pull/36511	(@TimvdLippe, #36511)	Gate `window.trustedTypes` behind flag (#36511)
+    - SEEN https://github.com/servo/servo/pull/36511	(@TimvdLippe, #36511)	Gate `window.trustedTypes` behind flag (#36511)
       api; trusted types
-    - https://github.com/servo/servo/pull/36498	(@Gae24, #36498)	async clipboard: implement `writeText` (#36498)
+    - DONE https://github.com/servo/servo/pull/36498	(@Gae24, #36498)	async clipboard: implement `writeText` (#36498)
       api; clipboard
-    - https://github.com/servo/servo/pull/36521	(@Loirooriol, #36521)	script: Implement CSSStyleSheet constructor (#36521)
+    - DONE https://github.com/servo/servo/pull/36521	(@Loirooriol, #36521)	script: Implement CSSStyleSheet constructor (#36521)
       api
-    - https://github.com/servo/servo/pull/36535	(@kkoyung, #36535)	Make DOMException serializable (#36535)
+    - DONE https://github.com/servo/servo/pull/36535	(@kkoyung, #36535)	Make DOMException serializable (#36535)
       api; structured clone DOMException
-    - https://github.com/servo/servo/pull/36181	(@gterzian, #36181)	Transfer ReadableStream (#36181)
+    - DONE https://github.com/servo/servo/pull/36181	(@gterzian, #36181)	Transfer ReadableStream (#36181)
       api; streams
-    - https://github.com/servo/servo/pull/36523	(@sebsebmc, #36523)	Support static and instance members having the same name in IDLs (#36523)
+    - DONE https://github.com/servo/servo/pull/36523	(@sebsebmc, #36523)	Support static and instance members having the same name in IDLs (#36523)
       api net; for `Response.json` static method
-    - https://github.com/servo/servo/pull/36541	(@rayguo17, #36541)	media element: support seekable attribute (#36541)
+    - DONE https://github.com/servo/servo/pull/36541	(@rayguo17, #36541)	media element: support seekable attribute (#36541)
       api; HTMLMediaElement seekable property
     - https://github.com/servo/servo/pull/36560	(@sidntrivedi012, @jdm, #36560)	content/dom: set navigator.onLine attribute to `true` (#36560)
       api; fixes pinterest
-    - https://github.com/servo/servo/pull/36588	(@gterzian, #36588)	Streams: make writable streams transferrable (#36588)
+    - DONE https://github.com/servo/servo/pull/36588	(@gterzian, #36588)	Streams: make writable streams transferrable (#36588)
       api; streams
-    - https://github.com/servo/servo/pull/36596	(@TimvdLippe, @jdm, #36596)	Implement trusted types url setter (#36596)
+    - SEEN https://github.com/servo/servo/pull/36596	(@TimvdLippe, @jdm, #36596)	Implement trusted types url setter (#36596)
       api; trusted types
-    - https://github.com/servo/servo/pull/36586	(@webbeef, #36586)	Implement CSSStyleSheet::replaceSync (#36586)
+    - DONE https://github.com/servo/servo/pull/36586	(@webbeef, #36586)	Implement CSSStyleSheet::replaceSync (#36586)
       api
-    - https://github.com/servo/servo/pull/36589	(@sebsebmc, #36589)	Implement static Response.json (#36589)
+    - DONE https://github.com/servo/servo/pull/36589	(@sebsebmc, #36589)	Implement static Response.json (#36589)
       api net; `Response.json` static method
-    - https://github.com/servo/servo/pull/36470	(@Taym95, #36470)	Start adding support for transforms in readable and writable streams (#36470)
+    - DONE https://github.com/servo/servo/pull/36470	(@Taym95, #36470)	Start adding support for transforms in readable and writable streams (#36470)
       api; streams
 - architecture
     - https://github.com/servo/servo/pull/36341	(@mrobinson, #36341)	constellation: Rename messages sent to the `Constellation` (#36341)
@@ -187,13 +187,13 @@ All WPT tests (4.6pp to 87.4%)
     - https://github.com/servo/servo/pull/36705	(@simonwuelker, #36705)	Use snapshot size instead of canvas size when converting canvas to blob (#36705)
       crash
 - css
-    - https://github.com/servo/servo/pull/36246	(@Loirooriol, #36246)	Enable css-nesting WPT tests (#36246)
+    - DONE https://github.com/servo/servo/pull/36246	(@Loirooriol, #36246)	Enable css-nesting WPT tests (#36246)
       css; nesting
-    - https://github.com/servo/servo/pull/36254	(@Loirooriol, #36254)	Turn `CSSStyleRule` into a `CSSGroupingRule` subclass (#36254)
+    - DONE `https://github.com/servo/servo/pull/36254	(@Loirooriol, #36254)	Turn `CSSStyleRule` into a `CSSGroupingRule` subclass (#36254)
       css; nesting
-    - https://github.com/servo/servo/pull/36248	(@Loirooriol, #36248)	Implement CSSNestedDeclarations (#36248)
+    - DONE `https://github.com/servo/servo/pull/36248	(@Loirooriol, #36248)	Implement CSSNestedDeclarations (#36248)
       css; nesting
-    - https://github.com/servo/servo/pull/36249	(@Loirooriol, #36249)	Enable CSS parent selector (`&`) (#36249)
+    - DONE `https://github.com/servo/servo/pull/36249	(@Loirooriol, #36249)	Enable CSS parent selector (`&`) (#36249)
       css; nesting
     - https://github.com/servo/servo/pull/36272	(@mrobinson, @Loirooriol, #36272)	script: Create `CSSStyleOwner::Null` for `getComputedStyle` (#36272)
       css; marker pseudo
@@ -478,6 +478,21 @@ All WPT tests (4.6pp to 87.4%)
     - https://github.com/servo/servo/pull/36486	(@sagudev, #36486)	chore: Update wgpu to v25 (#36486)
       upgrade
 -->
+
+Servo now supports:
+
+- **CSS nesting**, the **&amp;** selector (@Loirooriol, #36246, #36254, #36248, #36249)
+- the **Response.json()** static method (@sebsebmc, #36589, #36523)
+- **ClipboardItem** and **navigator.clipboard.writeText()** (@Gae24, #36336, #36498)
+- **addRule()**, **removeRules()**, **replaceSync()**, and the **rules** property on **CSSStyleSheet** (@Loirooriol, @webbeef, #36313, #36586)
+- the **CSSStyleSheet()** constructor (@Loirooriol, #36521)
+- the **Refresh** header, in HTTP responses and &lt;meta> (@sebsebmc, #36393)
+- **getLineDash**, **setLineDash**, and **lineDashOffset** on **CanvasRenderingContext2D** (@stevennovaryo, #36257)
+- the **seekable** property on **HTMLMediaElement** (@rayguo17, #36541)
+
+**ReadableStream**, **WritableStream**, and **DOMException** can now be sent over **postMessage()** and **structuredClone()** (@gterzian, @kkoyung, #36181, #36588, #36535), and we’ve started working on support for **stream transforms** (@Taym95, #36470).
+
+We’ve started implementing the [**trusted types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).
 
 ## Donations
 
