@@ -7,8 +7,9 @@ summary:    Who knows?
 categories:
 ---
 
-Big news! Complex sites such as GMail and Google Chat are now usable in Servo
-if you have 2FA disabled for your Google account. This milestone is only possible through the continued hard work of many Servo contributors across the engine, and we're thankful for all of the efforts to reach this point.
+Big news! Complex sites such as GMail and Google Chat are now usable in Servo[^1]. This milestone is only possible through the continued hard work of many Servo contributors across the engine, and we're thankful for all of the efforts to reach this point.
+
+[^1]: Must run Servo with `--pref dom_abort_controller_enabled`. Accounts with 2FA enabled may not be able to log in yet.
 
 ![Google Chat rendering in Servo](assets/img/servo-gchat.png)
 ![GMail rendering in Servo](assets/img/servo-gmail.png)
