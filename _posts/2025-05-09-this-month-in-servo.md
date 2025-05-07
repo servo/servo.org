@@ -365,7 +365,7 @@ All WPT tests (4.6pp to 87.4%)
       net
     - https://github.com/servo/servo/pull/36621	(@elomscansio, #36621)	layout_image: Include missing request settings in layout-initiated image loads (#36621)
       net
-    - https://github.com/servo/servo/pull/36589	(@sebsebmc, #36589)	Implement static Response.json (#36589)
+    - DONE https://github.com/servo/servo/pull/36589	(@sebsebmc, #36589)	Implement static Response.json (#36589)
       api net; `Response.json` static method
 - ohos
     - https://github.com/servo/servo/pull/36229	(@kongbai1996, #36229)	Fixed the crash issue when the openharmony web component is adapted. (#36229)
@@ -380,17 +380,17 @@ All WPT tests (4.6pp to 87.4%)
 - perf
     - https://github.com/servo/servo/pull/36474	(@mrobinson, @Loirooriol, #36474)	layout: Box `block_margins_collapsed_with_children` member of `BoxFragment` (#36474)
       perf; memory usage
-    - https://github.com/servo/servo/pull/36557	(@jdm, #36557)	compositing: Add memory reporter for WebRender. (#36557)
+    - DONE https://github.com/servo/servo/pull/36557	(@jdm, #36557)	compositing: Add memory reporter for WebRender. (#36557)
       perf; memory usage
-    - https://github.com/servo/servo/pull/36556	(@jdm, #36556)	net: Report memory usage for image cache. (#36556)
+    - DONE https://github.com/servo/servo/pull/36556	(@jdm, #36556)	net: Report memory usage for image cache. (#36556)
       perf; memory usage
-    - https://github.com/servo/servo/pull/36558	(@jdm, #36558)	net: Measure HSTS memory usage. (#36558)
+    - DONE https://github.com/servo/servo/pull/36558	(@jdm, #36558)	net: Measure HSTS memory usage. (#36558)
       perf; memory usage
-    - https://github.com/servo/servo/pull/36579	(@jdm, #36579)	Refactor common infrastructure for creating memory reports. (#36579)
+    - SKIP https://github.com/servo/servo/pull/36579	(@jdm, #36579)	Refactor common infrastructure for creating memory reports. (#36579)
       perf; memory usage
-    - https://github.com/servo/servo/pull/36581	(@jdm, #36581)	Report memory usage for image frames. (#36581)
+    - DONE https://github.com/servo/servo/pull/36581	(@jdm, #36581)	Report memory usage for image frames. (#36581)
       perf; memory usage
-    - https://github.com/servo/servo/pull/36553	(@jdm, #36553)	layout: Report memory usage for fragment and box trees. (#36553)
+    - DONE https://github.com/servo/servo/pull/36553	(@jdm, #36553)	layout: Report memory usage for fragment and box trees. (#36553)
       perf; memory usage
     - https://github.com/servo/servo/pull/36600	(@Barry-dE, @jdm, #36600)	Prevent multiple notifications for image dimensions (#36600)
       perf
@@ -406,7 +406,7 @@ All WPT tests (4.6pp to 87.4%)
       perf; layout queries
     - https://github.com/servo/servo/pull/36119	(@sagudev, #36119)	Introduce snapshot concept of canvas (#36119)
       perf
-    - https://github.com/servo/servo/pull/36664	(@jdm, #36664)	script: Measure stored layout data memory usage. (#36664)
+    - DONE https://github.com/servo/servo/pull/36664	(@jdm, #36664)	script: Measure stored layout data memory usage. (#36664)
       perf; memory usage
     - https://github.com/servo/servo/pull/36681	(@mrobinson, @Loirooriol, #36681)	 layout: Use box tree `Fragment`s for offset parent queries (#36681)
       perf; layout queries
@@ -506,6 +506,9 @@ We’ve finally finished **splitting up our massive `script` crate** (@jdm, #363
 This is something we’ve wanted to do for **over eleven years** (@kmcallister, #1799)!
 
 **`webgpu` rebuilds are now faster** as well, with changes to that crate no longer requiring a `script` rebuild (@mrobinson, #36332, #36320).
+
+Our new **about:memory page** can now **report detailed memory usage** for WebRender (@jdm, #36557), HSTS (@jdm, #36558), cached images (@jdm, #36556, #36581), and the fragment and box trees (@jdm, #36553), and layout data stored in the DOM (@jdm, #36664).
+As a result of that last change, some layout data is counted against JS heap usage but not the box tree.
 
 ## Donations
 
