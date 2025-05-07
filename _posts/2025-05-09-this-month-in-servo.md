@@ -479,22 +479,16 @@ All WPT tests (4.6pp to 87.4%)
       upgrade
 -->
 
-Servo now supports:
+Servo now supports the **&amp;** selector for **CSS nesting** (@Loirooriol, #36246, #36254, #36248, #36249), single-valued **&lt;select> elements** (@simonwuelker, #35684, #36677), disabling stylesheets with **&lt;link disabled>** (@Loirooriol, #36446), and the **Refresh** header in HTTP responses and &lt;meta> (@sebsebmc, #36393), plus several new web API features:
 
-- **CSS nesting**, the **&amp;** selector (@Loirooriol, #36246, #36254, #36248, #36249)
-- single-valued **&lt;select> elements** (@simonwuelker, #35684, #36677)
-- disabling stylesheets with **&lt;link disabled>** (@Loirooriol, #36446)
 - the **Response.json()** static method (@sebsebmc, #36589, #36523)
+- the **CSSStyleSheet()** constructor (@Loirooriol, #36521)
+- the **seekable** property on **HTMLMediaElement** (@rayguo17, #36541)
 - **ClipboardItem** and **navigator.clipboard.writeText()** (@Gae24, #36336, #36498)
 - **addRule()**, **removeRules()**, **replaceSync()**, and the **rules** property on **CSSStyleSheet** (@Loirooriol, @webbeef, #36313, #36586)
-- the **CSSStyleSheet()** constructor (@Loirooriol, #36521)
-- the **Refresh** header, in HTTP responses and &lt;meta> (@sebsebmc, #36393)
 - **getLineDash**, **setLineDash**, and **lineDashOffset** on **CanvasRenderingContext2D** (@stevennovaryo, #36257)
-- the **seekable** property on **HTMLMediaElement** (@rayguo17, #36541)
 
-**ReadableStream**, **WritableStream**, and **DOMException** can now be sent over **postMessage()** and **structuredClone()** (@gterzian, @kkoyung, #36181, #36588, #36535), and we’ve started working on support for **stream transforms** (@Taym95, #36470).
-
-We’ve started implementing the [**trusted types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).
+**ReadableStream**, **WritableStream**, and **DOMException** can now be sent over **postMessage()** and **structuredClone()** (@gterzian, @kkoyung, #36181, #36588, #36535), and we’ve started working on support for **stream transforms** (@Taym95, #36470) and the [**trusted types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).
 
 Servo can now render the **caret** and **text selection** in input fields (@dklassic, @webbeef, #35830, #36478), and we’ve landed a few fixes to **radio buttons** (@elomscansio, #36252, #36431), **file inputs** (@sebsebmc, #36458), and **input validation** (@MDCODE247, #36236).
 
