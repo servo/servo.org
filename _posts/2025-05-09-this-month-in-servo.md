@@ -296,10 +296,10 @@ All WPT tests (4.6pp to 87.4%)
       gc
     - https://github.com/servo/servo/pull/36492	(@yerke, #36492)	add CanGc as argument to methods in ElementInternals, GlobalScope, HTMLAnchorElement, HTMLAreaElement, HTMLCanvasElement (#36492)
       gc
-- html
-    - https://github.com/servo/servo/pull/35684	(@simonwuelker, #35684)	Support single-value `<select>` elements (#35684)
+- DONE html
+    - DONE https://github.com/servo/servo/pull/35684	(@simonwuelker, #35684)	Support single-value `<select>` elements (#35684)
       html
-    - https://github.com/servo/servo/pull/36446	(@Loirooriol, #36446)	Implement `disabled` attribute for `<link rel="stylesheet">` (#36446)
+    - DONE https://github.com/servo/servo/pull/36446	(@Loirooriol, #36446)	Implement `disabled` attribute for `<link rel="stylesheet">` (#36446)
       html
 - incremental
     - https://github.com/servo/servo/pull/36404	(@mrobinson, @Loirooriol, #36404)	layout: Enable using cached fragments when there is a BoxTree update point (#36404)
@@ -482,6 +482,8 @@ All WPT tests (4.6pp to 87.4%)
 Servo now supports:
 
 - **CSS nesting**, the **&amp;** selector (@Loirooriol, #36246, #36254, #36248, #36249)
+- single-valued **&lt;select> elements** (@simonwuelker, #35684)
+- disabling stylesheets with **&lt;link disabled>** (@Loirooriol, #36446)
 - the **Response.json()** static method (@sebsebmc, #36589, #36523)
 - **ClipboardItem** and **navigator.clipboard.writeText()** (@Gae24, #36336, #36498)
 - **addRule()**, **removeRules()**, **replaceSync()**, and the **rules** property on **CSSStyleSheet** (@Loirooriol, @webbeef, #36313, #36586)
