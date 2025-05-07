@@ -428,8 +428,8 @@ All WPT tests (4.6pp to 87.4%)
       security; csp
     - https://github.com/servo/servo/pull/36623	(@TimvdLippe, #36623)	Support CSP report-only header (#36623)
       security; csp
-- servoshell
-    - https://github.com/servo/servo/pull/36677	(@simonwuelker, #36677)	servoshell: Make list of options in <select> prompt scrollable (#36677)
+- DONE servoshell
+    - DONE https://github.com/servo/servo/pull/36677	(@simonwuelker, #36677)	servoshell: Make list of options in <select> prompt scrollable (#36677)
       servoshell
 - shadowdom
     - https://github.com/servo/servo/pull/36230	(@jdm, #36230)	script: Fix resize observer depth calculation for Shadow DOM. (#36230)
@@ -482,7 +482,7 @@ All WPT tests (4.6pp to 87.4%)
 Servo now supports:
 
 - **CSS nesting**, the **&amp;** selector (@Loirooriol, #36246, #36254, #36248, #36249)
-- single-valued **&lt;select> elements** (@simonwuelker, #35684)
+- single-valued **&lt;select> elements** (@simonwuelker, #35684, #36677)
 - disabling stylesheets with **&lt;link disabled>** (@Loirooriol, #36446)
 - the **Response.json()** static method (@sebsebmc, #36589, #36523)
 - **ClipboardItem** and **navigator.clipboard.writeText()** (@Gae24, #36336, #36498)
