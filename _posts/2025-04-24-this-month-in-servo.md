@@ -7,7 +7,9 @@ summary:    Who knows?
 categories:
 ---
 
-Big news! Complex sites such as GMail and Google Chat are now usable in Servo[^1]. This milestone is only possible through the continued hard work of many Servo contributors across the engine, and we're thankful for all of the efforts to reach this point.
+Big news!
+Complex sites such as GMail and Google Chat are now usable in Servo[^1].
+This milestone is only possible through the continued hard work of many Servo contributors across the engine, and we're thankful for all of the efforts to reach this point.
 
 [^1]: Must run Servo with `--pref dom_abort_controller_enabled`. Accounts with 2FA enabled may not be able to log in yet.
 
@@ -20,11 +22,16 @@ We've **enabled Shadow DOM by default** after significantly improving support, a
 
 We also merged the preliminary steps to support **animated images** in web content (@rayguo17, #36058, #36141).
 
-Having disabled by default Servo's original, experimental layout implementation back in November 2024, we have taken the step of **deleting all of the disabled code** (@Loirooriol, #35943). The new layout engine is improving significantly month over month! We now better support **transform-style: preserve-3d** (@HastD, #35808), and the **will-change** property (@yezhizhen, #35787).
+Having disabled by default Servo's original, experimental layout implementation back in November 2024, we have taken the step of **deleting all of the disabled code** (@Loirooriol, #35943).
+The new layout engine is improving significantly month over month!
+We now better support **transform-style: preserve-3d** (@HastD, #35808), and the **will-change** property (@yezhizhen, #35787).
 
-Our flexbox implementation supports **min/max keyword sizes** for both cross and main axes (@Loirooriol, #35860, #35961), as well as **keyword sizes** for non-replaced content (@Loirooriol, #35826) and **min and max sizing properties** (@Loirooriol, #36015). This means Servo's flexbox layout now has full support for sizing keywords!
+Our flexbox implementation supports **min/max keyword sizes** for both cross and main axes (@Loirooriol, #35860, #35961), as well as **keyword sizes** for non-replaced content (@Loirooriol, #35826) and **min and max sizing properties** (@Loirooriol, #36015).
+This means Servo's flexbox layout now has full support for sizing keywords!
 
-We laid the groundwork for supporting the **::marker pseudo element** (#36202), and implemented the **fit-content()** sizing function (@Loirooriol, #36056), as well as the **image-set()** notation (@chocolate-pie, #36210). Additionally, the **`scale`, `rotate`, and `translate`** transform properties now work (@chocolate-pie, @Loirooriol, #35926). Finally, we **improved the performance** of deeply nested pages that require laying out boxes multiple times (@Loirooriol, @mrobinson, #36082).
+We laid the groundwork for supporting the **::marker pseudo element** (#36202), and implemented the **fit-content()** sizing function (@Loirooriol, #36056), as well as the **image-set()** notation (@chocolate-pie, #36210).
+Additionally, the **`scale`, `rotate`, and `translate`** transform properties now work (@chocolate-pie, @Loirooriol, #35926).
+Finally, we **improved the performance** of deeply nested pages that require laying out boxes multiple times (@Loirooriol, @mrobinson, #36082).
 
 We also fixed many layout bugs:
 * incorrect **fallback font** caching (@mrobinson, #35705)
@@ -65,15 +72,18 @@ There was also lots of progress on non-layout web API features in the engine:
 * **history.replaceState()** can be called from file:// documents (@kkoyung, #35864)
 * script elements **adopted between documents** use the original document to determine when to execute (@xiaochengh, #35718)
 
-Our developer tools integration **supports iframes** (@simonwuelker, #35874), shows **computed display values** when inspecting elements (@stephenmuss, #35870), and supports **multiple tabs** open in the servoshell browser (@atbrakhi, #35884). To use the developer tools, we now **require Firefox 133 or newer** (@atbrakhi, #35792).
+Our developer tools integration **supports iframes** (@simonwuelker, #35874), shows **computed display values** when inspecting elements (@stephenmuss, #35870), and supports **multiple tabs** open in the servoshell browser (@atbrakhi, #35884).
+To use the developer tools, we now **require Firefox 133 or newer** (@atbrakhi, #35792).
 
 **Stylo** has been upgraded to 2025-03-15 (@nicoburns, @Loirooriol, #35782, #35925, #35990), and we upgraded to the **2024 Rust edition** (@simonwuelker, #35755).
 We also are nearly finished **splitting up our massive `script` crate** (@jdm, #35988, #35987, #36107, #36216, #36220, #36095), which will eventually make Servo faster to rebuild.
 
 ## Servo-the-browser (servoshell)
 
-servoshell supports a new command-line argument: **--enable-experimental-web-platform-features**. This argument enables incomplete engine features
-that are not ready to be turned on by default. This can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
+servoshell supports a new command-line argument: **--enable-experimental-web-platform-features**.
+This argument enables incomplete engine features
+that are not ready to be turned on by default.
+This can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
 The features enabled by this flag are expected to change over time as new web platform features are implemented in Servo.
 
 We fixed a crash when **resizing the browsing area** too small (@sebsebmc, #35967).
