@@ -79,18 +79,12 @@ All WPT tests (4.6pp to 87.4%)
 
 <!--
 - api
-    - DONE https://github.com/servo/servo/pull/36257	(@stevennovaryo, #36257)	canvas: Implement line dash setters and getters (#36257)
-      api; CanvasPathDrawingStyles `setLineDash`, `getLineDash`, `lineDashOffset`
-    - DONE https://github.com/servo/servo/pull/36313	(@Loirooriol, #36313)	script: Implement deprecated CSSStyleSheet members (#36313)
-      api; for speedometer
     - https://github.com/servo/servo/pull/36225	(@simonwuelker, #36225)	script: Implement input preprocessing for URLPatterns (#36225)
       api
     - SEEN https://github.com/servo/servo/pull/36354	(@TimvdLippe, #36354)	Run Trusted Types tests (#36354)
       api; trusted types
     - SEEN https://github.com/servo/servo/pull/36355	(@TimvdLippe, #36355)	Stub out Trusted Types interfaces (#36355)
       api; trusted types
-    - DONE https://github.com/servo/servo/pull/36336	(@Gae24, #36336)	dom: Implement `ClipboardItem` (#36336)
-      api; clipboard
     - https://github.com/servo/servo/pull/36391	(@simonwuelker, #36391)	Split up the URLPattern implementation (#36391)
       api
     - https://github.com/servo/servo/pull/36382	(@simonwuelker, #36382)	Create a parser for URLPatterns (#36382)
@@ -101,8 +95,6 @@ All WPT tests (4.6pp to 87.4%)
       api
     - SEEN https://github.com/servo/servo/pull/36422	(@TimvdLippe, #36422)	Implement attribute and property lookup for Trusted Types (#36422)
       api; trusted types
-    - DONE https://github.com/servo/servo/pull/36393	(@sebsebmc, #36393)	Handle HTTP Refresh header (#36393)
-      api net
     - SEEN https://github.com/servo/servo/pull/36454	(@TimvdLippe, @jdm, #36454)	Implement "Create a Trusted Type" algorithm (#36454)
       api; start of trusted types
     - SEEN https://github.com/servo/servo/pull/36409	(@TimvdLippe, @jdm, #36409)	Update FetchTaskTarget to propagate CSP violations. (#36409)
@@ -113,30 +105,10 @@ All WPT tests (4.6pp to 87.4%)
       api; trusted types
     - SEEN https://github.com/servo/servo/pull/36511	(@TimvdLippe, #36511)	Gate `window.trustedTypes` behind flag (#36511)
       api; trusted types
-    - DONE https://github.com/servo/servo/pull/36498	(@Gae24, #36498)	async clipboard: implement `writeText` (#36498)
-      api; clipboard
-    - DONE https://github.com/servo/servo/pull/36521	(@Loirooriol, #36521)	script: Implement CSSStyleSheet constructor (#36521)
-      api
-    - DONE https://github.com/servo/servo/pull/36535	(@kkoyung, #36535)	Make DOMException serializable (#36535)
-      api; structured clone DOMException
-    - DONE https://github.com/servo/servo/pull/36181	(@gterzian, #36181)	Transfer ReadableStream (#36181)
-      api; streams
-    - DONE https://github.com/servo/servo/pull/36523	(@sebsebmc, #36523)	Support static and instance members having the same name in IDLs (#36523)
-      api net; for `Response.json` static method
-    - DONE https://github.com/servo/servo/pull/36541	(@rayguo17, #36541)	media element: support seekable attribute (#36541)
-      api; HTMLMediaElement seekable property
     - https://github.com/servo/servo/pull/36560	(@sidntrivedi012, @jdm, #36560)	content/dom: set navigator.onLine attribute to `true` (#36560)
       api; fixes pinterest
-    - DONE https://github.com/servo/servo/pull/36588	(@gterzian, #36588)	Streams: make writable streams transferrable (#36588)
-      api; streams
     - SEEN https://github.com/servo/servo/pull/36596	(@TimvdLippe, @jdm, #36596)	Implement trusted types url setter (#36596)
       api; trusted types
-    - DONE https://github.com/servo/servo/pull/36586	(@webbeef, #36586)	Implement CSSStyleSheet::replaceSync (#36586)
-      api
-    - DONE https://github.com/servo/servo/pull/36589	(@sebsebmc, #36589)	Implement static Response.json (#36589)
-      api net; `Response.json` static method
-    - DONE https://github.com/servo/servo/pull/36470	(@Taym95, #36470)	Start adding support for transforms in readable and writable streams (#36470)
-      api; streams
 - architecture
     - https://github.com/servo/servo/pull/36341	(@mrobinson, #36341)	constellation: Rename messages sent to the `Constellation` (#36341)
       architecture
@@ -187,14 +159,6 @@ All WPT tests (4.6pp to 87.4%)
     - https://github.com/servo/servo/pull/36705	(@simonwuelker, #36705)	Use snapshot size instead of canvas size when converting canvas to blob (#36705)
       crash
 - css
-    - DONE https://github.com/servo/servo/pull/36246	(@Loirooriol, #36246)	Enable css-nesting WPT tests (#36246)
-      css; nesting
-    - DONE `https://github.com/servo/servo/pull/36254	(@Loirooriol, #36254)	Turn `CSSStyleRule` into a `CSSGroupingRule` subclass (#36254)
-      css; nesting
-    - DONE `https://github.com/servo/servo/pull/36248	(@Loirooriol, #36248)	Implement CSSNestedDeclarations (#36248)
-      css; nesting
-    - DONE `https://github.com/servo/servo/pull/36249	(@Loirooriol, #36249)	Enable CSS parent selector (`&`) (#36249)
-      css; nesting
     - https://github.com/servo/servo/pull/36272	(@mrobinson, @Loirooriol, #36272)	script: Create `CSSStyleOwner::Null` for `getComputedStyle` (#36272)
       css; marker pseudo
     - https://github.com/servo/servo/pull/36317	(@mrobinson, #36317)	layout: Add initial support for the `::marker` pseudo-element (#36317)
@@ -216,27 +180,7 @@ All WPT tests (4.6pp to 87.4%)
     - https://github.com/servo/servo/pull/36384	(@sagudev, #36384)	script: copy include! files from script_bindings to script's OUT_DIR (#36384)
       dev; fixes rust-analyzer in script
 - DONE devtools
-    - DONE https://github.com/servo/servo/pull/36253	(@uthmaniv, #36253)	Add SimulateColorScheme command and script thread handling (#36253)
-      devtools
-    - DONE https://github.com/servo/servo/pull/36168	(@uthmaniv, #36168)	Track the active tab and browsing context for devtools (#36168)
-      devtools; for color scheme simulation
-    - DONE https://github.com/servo/servo/pull/35971	(@delan, #35971)	devtools: Fix id collisions by using incrementing counters (#35971)
-      devtools
-    - DONE https://github.com/servo/servo/pull/36297	(@uthmaniv, #36297)	Process colorSchemeSimulation in TargetConfigurationActor (#36297)
-      devtools
-    - DONE https://github.com/servo/servo/pull/36164	(@delan, @atbrakhi, #36164)	Devtools: initial Debugger > Sources panel (#36164)
-      devtools
-    - DONE https://github.com/servo/servo/pull/36631	(@atbrakhi, #36631)	DevTools: `worker_id` shoud be `id` & thread for workers should be `thread` (#36631)
-      devtools
-    - DONE https://github.com/servo/servo/pull/36632	(@atbrakhi, #36632)	DevTools: Add `resource_available` as a common shared util  (#36632)
-      devtools
-    - DONE https://github.com/servo/servo/pull/36667	(@atbrakhi, #36667)	DevTools: Move `Source` related code to dedicated `source.rs` file (#36667)
-      devtools; Sources tab
 - DONE editing
-    - DONE https://github.com/servo/servo/pull/35830	(@dklassic, #35830)	feat: Implement display for text selection and caret (#35830)
-      editing
-    - DONE https://github.com/servo/servo/pull/36478	(@webbeef, #36478)	textinput: position the caret at the end when selecting input (#36478)
-      editing
 - embedding
     - https://github.com/servo/servo/pull/36276	(@mrobinson, #36276)	libservo: Remove a couple `EmbedderMethods` (#36276)
       embedding
@@ -271,14 +215,6 @@ All WPT tests (4.6pp to 87.4%)
     - https://github.com/servo/servo/pull/36413	(@yezhizhen, #36413)	Move click event trigger from embedding layer to `ScriptThread` (#36413)
       embedding; reworking input for click events
 - DONE forms
-    - DONE https://github.com/servo/servo/pull/36236	(@MDCODE247, #36236)	script: Use `RegExpFlag_UnicodeSets` when validating regular expressions in `HTMLInputElement` (#36236)
-      forms; input validation
-    - DONE https://github.com/servo/servo/pull/36252	(@elomscansio, #36252)	Fix radio group validity update when removing or selecting an input (#36252)
-      forms
-    - DONE https://github.com/servo/servo/pull/36458	(@sebsebmc, #36458)	fix: File to FormData not correctly handling name and lastModified (#36458)
-      forms; file inputs
-    - DONE https://github.com/servo/servo/pull/36431	(@elomscansio, #36431)	htmlinputelement: Update radio group validity logic for disconnected trees (#36431)
-      forms
 - gc
     - https://github.com/servo/servo/pull/36375	(@yerke, #36375)	Add CanGc as arguments in methods in devtools.rs, CharacterData, CSSStyleRule, CSSStyleSheet (#36375)
       gc
@@ -297,10 +233,6 @@ All WPT tests (4.6pp to 87.4%)
     - https://github.com/servo/servo/pull/36492	(@yerke, #36492)	add CanGc as argument to methods in ElementInternals, GlobalScope, HTMLAnchorElement, HTMLAreaElement, HTMLCanvasElement (#36492)
       gc
 - DONE html
-    - DONE https://github.com/servo/servo/pull/35684	(@simonwuelker, #35684)	Support single-value `<select>` elements (#35684)
-      html
-    - DONE https://github.com/servo/servo/pull/36446	(@Loirooriol, #36446)	Implement `disabled` attribute for `<link rel="stylesheet">` (#36446)
-      html
 - incremental
     - https://github.com/servo/servo/pull/36404	(@mrobinson, @Loirooriol, #36404)	layout: Enable using cached fragments when there is a BoxTree update point (#36404)
       incremental
@@ -365,8 +297,6 @@ All WPT tests (4.6pp to 87.4%)
       net
     - https://github.com/servo/servo/pull/36621	(@elomscansio, #36621)	layout_image: Include missing request settings in layout-initiated image loads (#36621)
       net
-    - DONE https://github.com/servo/servo/pull/36589	(@sebsebmc, #36589)	Implement static Response.json (#36589)
-      api net; `Response.json` static method
 - ohos
     - https://github.com/servo/servo/pull/36229	(@kongbai1996, #36229)	Fixed the crash issue when the openharmony web component is adapted. (#36229)
       crash ohos
@@ -380,17 +310,7 @@ All WPT tests (4.6pp to 87.4%)
 - perf
     - https://github.com/servo/servo/pull/36474	(@mrobinson, @Loirooriol, #36474)	layout: Box `block_margins_collapsed_with_children` member of `BoxFragment` (#36474)
       perf; memory usage
-    - DONE https://github.com/servo/servo/pull/36557	(@jdm, #36557)	compositing: Add memory reporter for WebRender. (#36557)
-      perf; memory usage
-    - DONE https://github.com/servo/servo/pull/36556	(@jdm, #36556)	net: Report memory usage for image cache. (#36556)
-      perf; memory usage
-    - DONE https://github.com/servo/servo/pull/36558	(@jdm, #36558)	net: Measure HSTS memory usage. (#36558)
-      perf; memory usage
     - SKIP https://github.com/servo/servo/pull/36579	(@jdm, #36579)	Refactor common infrastructure for creating memory reports. (#36579)
-      perf; memory usage
-    - DONE https://github.com/servo/servo/pull/36581	(@jdm, #36581)	Report memory usage for image frames. (#36581)
-      perf; memory usage
-    - DONE https://github.com/servo/servo/pull/36553	(@jdm, #36553)	layout: Report memory usage for fragment and box trees. (#36553)
       perf; memory usage
     - https://github.com/servo/servo/pull/36600	(@Barry-dE, @jdm, #36600)	Prevent multiple notifications for image dimensions (#36600)
       perf
@@ -406,8 +326,6 @@ All WPT tests (4.6pp to 87.4%)
       perf; layout queries
     - https://github.com/servo/servo/pull/36119	(@sagudev, #36119)	Introduce snapshot concept of canvas (#36119)
       perf
-    - DONE https://github.com/servo/servo/pull/36664	(@jdm, #36664)	script: Measure stored layout data memory usage. (#36664)
-      perf; memory usage
     - https://github.com/servo/servo/pull/36681	(@mrobinson, @Loirooriol, #36681)	 layout: Use box tree `Fragment`s for offset parent queries (#36681)
       perf; layout queries
     - https://github.com/servo/servo/pull/36663	(@mrobinson, @Loirooriol, #36663)	layout: Implement node geometry queries against `BoxTree`'s `Fragment` (#36663)
@@ -415,12 +333,6 @@ All WPT tests (4.6pp to 87.4%)
     - https://github.com/servo/servo/pull/36692	(@PartiallyUntyped, #36692)	Propagate image resolution errors in layout context (#36692)
       perf
 - DONE script
-    - DONE https://github.com/servo/servo/pull/36332	(@mrobinson, #36332)	script: Remove dependency on `webgpu` (#36332)
-      script; rebuild webgpu without rebuilding script
-    - DONE https://github.com/servo/servo/pull/36320	(@mrobinson, #36320)	webgpu: Add a `webgpu_traits` crate (#36320)
-      script; webgpu dependency
-    - DONE https://github.com/servo/servo/pull/36323	(@jdm, #36323)	Move generated bindings to script_bindings (#36323)
-      script; crate split done! script rebuilds take 50% less time
 - security
     - https://github.com/servo/servo/pull/36510	(@TimvdLippe, #36510)	Check CSP for inline event handlers (#36510)
       security
@@ -429,8 +341,6 @@ All WPT tests (4.6pp to 87.4%)
     - https://github.com/servo/servo/pull/36623	(@TimvdLippe, #36623)	Support CSP report-only header (#36623)
       security; csp
 - DONE servoshell
-    - DONE https://github.com/servo/servo/pull/36677	(@simonwuelker, #36677)	servoshell: Make list of options in <select> prompt scrollable (#36677)
-      servoshell
 - shadowdom
     - https://github.com/servo/servo/pull/36230	(@jdm, #36230)	script: Fix resize observer depth calculation for Shadow DOM. (#36230)
       shadowdom
@@ -466,14 +376,6 @@ All WPT tests (4.6pp to 87.4%)
     - https://github.com/servo/servo/pull/27041	(@jdm, #27041)	Report exceptions for async script executions to webdriver (#27041)
       test; servodriver bustage
 - DONE testing
-    - DONE https://github.com/servo/servo/pull/36348	(@Loirooriol, #36348)	Enable layout_container_queries_enabled on all WPT tests (#36348)
-      testing; experimental features
-    - DONE https://github.com/servo/servo/pull/36475	(@Loirooriol, #36475)	Enable dom_svg_enabled on all tests (#36475)
-      testing; experimental features
-    - DONE https://github.com/servo/servo/pull/36335	(@Loirooriol, #36335)	Run all tests with --enable-experimental-web-platform-features (#36335)
-      testing; experimental features
-    - DONE https://github.com/servo/servo/pull/36519	(@Loirooriol, #36519)	Enable all experimental web platform features on all testsuites (#36519)
-      testing; experimental features
 - upgrade
     - https://github.com/servo/servo/pull/36486	(@sagudev, #36486)	chore: Update wgpu to v25 (#36486)
       upgrade
