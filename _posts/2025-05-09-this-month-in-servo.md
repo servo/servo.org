@@ -504,6 +504,11 @@ This is something we’ve wanted to do for **over eleven years** (@kmcallister, 
 Our new **about:memory page** can now **report detailed memory usage** for WebRender (@jdm, #36557), HSTS (@jdm, #36558), cached images (@jdm, #36556, #36581), and the fragment and box trees (@jdm, #36553), and layout data stored in the DOM (@jdm, #36664).
 As a result of that last change, some layout data is counted against JS heap usage but not the box tree.
 
+<figure>
+
+[![about:memory now with totals for “webrender”, “hsts-list”, “image-cache”, “box-tree”, and “fragment-tree”]({{ "/img/blog/2025-05-about-memory.png" | url }})]({{ "/img/blog/2025-05-about-memory.png" | url }})
+</figure>
+
 We recently added a **`--enable-experimental-web-platform-features` option** that enables all web platform features, even those that may not be stable or complete.
 This works much like [Chromium’s option with the same name](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/RuntimeEnabledFeatures.md;drc=a4e3e1f59b6f4bcf64806cf40c1acbb043b0bddc).
 We’ve now started running the Web Platform Tests with that option (@Loirooriol, #36335, #36519, #36348, #36475), to help Servo’s WPT scores better reflect our progress.
