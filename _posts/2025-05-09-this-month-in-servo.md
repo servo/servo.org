@@ -287,9 +287,9 @@ All WPT tests (4.6pp to 87.4%)
       net
     - https://github.com/servo/servo/pull/36455	(@sebsebmc, #36455)	Manually concatenate ACRH headers to not include a space (#36455)
       net; cors fix
-    - https://github.com/servo/servo/pull/36393	(@sebsebmc, #36393)	Handle HTTP Refresh header (#36393)
+    - DONE https://github.com/servo/servo/pull/36393	(@sebsebmc, #36393)	Handle HTTP Refresh header (#36393)
       api net
-    - https://github.com/servo/servo/pull/36523	(@sebsebmc, #36523)	Support static and instance members having the same name in IDLs (#36523)
+    - DONE https://github.com/servo/servo/pull/36523	(@sebsebmc, #36523)	Support static and instance members having the same name in IDLs (#36523)
       api net; for `Response.json` static method
     - https://github.com/servo/servo/pull/36605	(@elomscansio, @jdm, #36605)	htmlvideoelement: Include security settings in poster image request (#36605)
       net
@@ -341,10 +341,10 @@ All WPT tests (4.6pp to 87.4%)
     - https://github.com/servo/servo/pull/36623	(@TimvdLippe, #36623)	Support CSP report-only header (#36623)
       security; csp
 - DONE servoshell
-- shadowdom
-    - https://github.com/servo/servo/pull/36230	(@jdm, #36230)	script: Fix resize observer depth calculation for Shadow DOM. (#36230)
+- DONE shadowdom
+    - DONE https://github.com/servo/servo/pull/36230	(@jdm, #36230)	script: Fix resize observer depth calculation for Shadow DOM. (#36230)
       shadowdom
-    - https://github.com/servo/servo/pull/36620	(@sakupi01, #36620)	Fix: Slot Assignment mode according to the spec (#36620)
+    - DONE https://github.com/servo/servo/pull/36620	(@sakupi01, #36620)	Fix: Slot Assignment mode according to the spec (#36620)
       shadowdom
 - test
     - https://github.com/servo/servo/pull/36221	(@jdm, #36221)	Enable service worker WPT tests. (#36221)
@@ -389,6 +389,10 @@ Servo now supports the **&amp;** selector for **CSS nesting** (@Loirooriol, #362
 - **ClipboardItem** and **navigator.clipboard.writeText()** (@Gae24, #36336, #36498)
 - **addRule()**, **removeRules()**, **replaceSync()**, and the **rules** property on **CSSStyleSheet** (@Loirooriol, @webbeef, #36313, #36586)
 - **getLineDash**, **setLineDash**, and **lineDashOffset** on **CanvasRenderingContext2D** (@stevennovaryo, #36257)
+
+We've **enabled Shadow DOM by default** after significantly improving support, allowing Servo to render sites like wpt.fyi correctly (@simonwuelker, @longvatron111, @elomscansio, @jdm, @sakupi01, #35923, #35899, #35930, #36104, #34964, #36024, #36106, #36173, #36010, #35769, #36230, #36620).
+
+<figure><a href="{{ '/img/blog/servo-wptfyi.png' | url }}"><img alt="wpt.fyi rendering in Servo" src="{{ '/img/blog/servo-wptfyi.png' | url }}"></a></figure>
 
 **ReadableStream**, **WritableStream**, and **DOMException** can now be sent over **postMessage()** and **structuredClone()** (@gterzian, @kkoyung, #36181, #36588, #36535), and we’ve started working on support for **stream transforms** (@Taym95, #36470) and the [**trusted types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).
 
