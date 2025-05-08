@@ -7,11 +7,11 @@ summary:    Who knows?
 categories:
 ---
 
-Big news!
+~~Big news!
 Complex sites such as GMail and Google Chat are now usable in Servo[^1].
-This milestone is only possible through the continued hard work of many Servo contributors across the engine, and we're thankful for all of the efforts to reach this point.
+This milestone is only possible through the continued hard work of many Servo contributors across the engine, and we're thankful for all of the efforts to reach this point.~~
 
-[^1]: Must run Servo with `--pref dom_abort_controller_enabled`. Accounts with 2FA enabled may not be able to log in yet.
+[^1]: ~~Must run Servo with `--pref dom_abort_controller_enabled`. Accounts with 2FA enabled may not be able to log in yet.~~
 
 <figure><a href="{{ '/img/blog/2025-04-servo-gchat.png' | url }}"><img alt="Google Chat rendering in Servo" src="{{ '/img/blog/2025-04-servo-gchat.png' | url }}"></a></figure>
 <figure><a href="{{ '/img/blog/2025-04-servo-gmail.png' | url }}"><img alt="GMail rendering in Servo" src="{{ '/img/blog/2025-04-servo-gmail.png' | url }}"></a></figure>

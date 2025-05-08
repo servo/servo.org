@@ -381,6 +381,18 @@ All WPT tests (4.6pp to 87.4%)
       upgrade
 -->
 
+Big news!
+Complex sites such as **GMail** and **Google Chat** are **now usable in Servo**, with some caveats.
+This milestone is only possible through the continued hard work of many Servo contributors across the engine, and we're thankful for all of the efforts to reach this point.
+
+<figure><a href="{{ '/img/blog/2025-04-servo-gchat.png' | url }}"><img alt="Google Chat rendering in Servo" src="{{ '/img/blog/2025-04-servo-gchat.png' | url }}"></a></figure>
+<figure><a href="{{ '/img/blog/2025-04-servo-gmail.png' | url }}"><img alt="GMail rendering in Servo" src="{{ '/img/blog/2025-04-servo-gmail.png' | url }}"></a></figure>
+
+<aside class=_note>
+
+**Caveats:** must run Servo with `--pref dom_abort_controller_enabled`. Accounts with 2FA enabled may not be able to log in yet.
+</aside>
+
 Servo now supports the **&amp;** selector for **CSS nesting** (@Loirooriol, #36246, #36254, #36248, #36249), single-valued **&lt;select> elements** (@simonwuelker, #35684, #36677), disabling stylesheets with **&lt;link disabled>** (@Loirooriol, #36446), and the **Refresh** header in HTTP responses and &lt;meta> (@sebsebmc, #36393), plus several new web API features:
 
 - the **Response.json()** static method (@sebsebmc, #36589, #36523)
