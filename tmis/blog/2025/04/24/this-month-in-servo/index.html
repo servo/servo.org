@@ -261,16 +261,23 @@
 </div>
 
 <div class="inner-container blog-content">
-  <p>Big news! Complex sites such as GMail and Google Chat are now usable in Servo[^1]. This milestone is only possible through the continued hard work of many Servo contributors across the engine, and we’re thankful for all of the efforts to reach this point.</p>
+  <p>Big news!
+Complex sites such as GMail and Google Chat are now usable in Servo[^1].
+This milestone is only possible through the continued hard work of many Servo contributors across the engine, and we’re thankful for all of the efforts to reach this point.</p>
 <p>[^1]: Must run Servo with <code>--pref dom_abort_controller_enabled</code>. Accounts with 2FA enabled may not be able to log in yet.</p>
 <figure><a href="/tmis/img/blog/servo-gchat.png"><img alt="Google Chat rendering in Servo" src="/tmis/img/blog/servo-gchat.png"></a></figure>
 <figure><a href="/tmis/img/blog/servo-gmail.png"><img alt="GMail rendering in Servo" src="/tmis/img/blog/servo-gmail.png"></a></figure>
 <p>We’ve <strong>enabled Shadow DOM by default</strong> after significantly improving support, allowing Servo to render sites like wpt.fyi correctly (@simonwuelker, @longvatron111, @elomscansio, #35923, #35899, #35930, #36104, #34964, #36024, #36106, #36173, #36010, #35769).</p>
 <figure><a href="/tmis/img/blog/servo-wptfyi.png"><img alt="wpt.fyi rendering in Servo" src="/tmis/img/blog/servo-wptfyi.png"></a></figure>
 <p>We also merged the preliminary steps to support <strong>animated images</strong> in web content (@rayguo17, #36058, #36141).</p>
-<p>Having disabled by default Servo’s original, experimental layout implementation back in November 2024, we have taken the step of <strong>deleting all of the disabled code</strong> (@Loirooriol, #35943). The new layout engine is improving significantly month over month! We now better support <strong>transform-style: preserve-3d</strong> (@HastD, #35808), and the <strong>will-change</strong> property (@yezhizhen, #35787).</p>
-<p>Our flexbox implementation supports <strong>min/max keyword sizes</strong> for both cross and main axes (@Loirooriol, #35860, #35961), as well as <strong>keyword sizes</strong> for non-replaced content (@Loirooriol, #35826) and <strong>min and max sizing properties</strong> (@Loirooriol, #36015). This means Servo’s flexbox layout now has full support for sizing keywords!</p>
-<p>We laid the groundwork for supporting the <strong>::marker pseudo element</strong> (#36202), and implemented the <strong>fit-content()</strong> sizing function (@Loirooriol, #36056), as well as the <strong>image-set()</strong> notation (@chocolate-pie, #36210). Additionally, the <strong><code>scale</code>, <code>rotate</code>, and <code>translate</code></strong> transform properties now work (@chocolate-pie, @Loirooriol, #35926). Finally, we <strong>improved the performance</strong> of deeply nested pages that require laying out boxes multiple times (@Loirooriol, @mrobinson, #36082).</p>
+<p>Having disabled by default Servo’s original, experimental layout implementation back in November 2024, we have taken the step of <strong>deleting all of the disabled code</strong> (@Loirooriol, #35943).
+The new layout engine is improving significantly month over month!
+We now better support <strong>transform-style: preserve-3d</strong> (@HastD, #35808), and the <strong>will-change</strong> property (@yezhizhen, #35787).</p>
+<p>Our flexbox implementation supports <strong>min/max keyword sizes</strong> for both cross and main axes (@Loirooriol, #35860, #35961), as well as <strong>keyword sizes</strong> for non-replaced content (@Loirooriol, #35826) and <strong>min and max sizing properties</strong> (@Loirooriol, #36015).
+This means Servo’s flexbox layout now has full support for sizing keywords!</p>
+<p>We laid the groundwork for supporting the <strong>::marker pseudo element</strong> (#36202), and implemented the <strong>fit-content()</strong> sizing function (@Loirooriol, #36056), as well as the <strong>image-set()</strong> notation (@chocolate-pie, #36210).
+Additionally, the <strong><code>scale</code>, <code>rotate</code>, and <code>translate</code></strong> transform properties now work (@chocolate-pie, @Loirooriol, #35926).
+Finally, we <strong>improved the performance</strong> of deeply nested pages that require laying out boxes multiple times (@Loirooriol, @mrobinson, #36082).</p>
 <p>We also fixed many layout bugs:</p>
 <ul>
 <li>incorrect <strong>fallback font</strong> caching (@mrobinson, #35705)</li>
@@ -312,14 +319,17 @@
 <li><strong>history.replaceState()</strong> can be called from file:// documents (@kkoyung, #35864)</li>
 <li>script elements <strong>adopted between documents</strong> use the original document to determine when to execute (@xiaochengh, #35718)</li>
 </ul>
-<p>Our developer tools integration <strong>supports iframes</strong> (@simonwuelker, #35874), shows <strong>computed display values</strong> when inspecting elements (@stephenmuss, #35870), and supports <strong>multiple tabs</strong> open in the servoshell browser (@atbrakhi, #35884). To use the developer tools, we now <strong>require Firefox 133 or newer</strong> (@atbrakhi, #35792).</p>
+<p>Our developer tools integration <strong>supports iframes</strong> (@simonwuelker, #35874), shows <strong>computed display values</strong> when inspecting elements (@stephenmuss, #35870), and supports <strong>multiple tabs</strong> open in the servoshell browser (@atbrakhi, #35884).
+To use the developer tools, we now <strong>require Firefox 133 or newer</strong> (@atbrakhi, #35792).</p>
 <p><strong>Stylo</strong> has been upgraded to 2025-03-15 (@nicoburns, @Loirooriol, #35782, #35925, #35990), and we upgraded to the <strong>2024 Rust edition</strong> (@simonwuelker, #35755).
 We also are nearly finished <strong>splitting up our massive <code>script</code> crate</strong> (@jdm, #35988, #35987, #36107, #36216, #36220, #36095), which will eventually make Servo faster to rebuild.</p>
 <h2 id="servo-the-browser-(servoshell)" tabindex="-1">Servo-the-browser (servoshell) <a class="header-anchor" href="#servo-the-browser-(servoshell)">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>servoshell supports a new command-line argument: <strong>–enable-experimental-web-platform-features</strong>. This argument enables incomplete engine features
-that are not ready to be turned on by default. This can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
+<p>servoshell supports a new command-line argument: <strong>–enable-experimental-web-platform-features</strong>.
+This argument enables incomplete engine features
+that are not ready to be turned on by default.
+This can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
 The features enabled by this flag are expected to change over time as new web platform features are implemented in Servo.</p>
 <p>We fixed a crash when <strong>resizing the browsing area</strong> too small (@sebsebmc, #35967).
 Dialogs support <strong>keyboard interaction</strong> to close and cancel them (@chickenleaf, #3567), and the URL bar accepts any <strong>domain-like input</strong> (@kafji, #35756).
@@ -418,6 +428,7 @@ All WPT tests (3.9pp to 86.5%)
         opacity: 0.75;
     }
 </style>
+
   <div>
     <a href="/tmis/blog/">Back</a>
   </div>
