@@ -13,12 +13,12 @@ This milestone is only possible through the continued hard work of many Servo co
 
 [^1]: Must run Servo with `--pref dom_abort_controller_enabled`. Accounts with 2FA enabled may not be able to log in yet.
 
-<figure><a href="{{ '/img/blog/servo-gchat.png' | url }}"><img alt="Google Chat rendering in Servo" src="{{ '/img/blog/servo-gchat.png' | url }}"></a></figure>
-<figure><a href="{{ '/img/blog/servo-gmail.png' | url }}"><img alt="GMail rendering in Servo" src="{{ '/img/blog/servo-gmail.png' | url }}"></a></figure>
+<figure><a href="{{ '/img/blog/2025-04-servo-gchat.png' | url }}"><img alt="Google Chat rendering in Servo" src="{{ '/img/blog/2025-04-servo-gchat.png' | url }}"></a></figure>
+<figure><a href="{{ '/img/blog/2025-04-servo-gmail.png' | url }}"><img alt="GMail rendering in Servo" src="{{ '/img/blog/2025-04-servo-gmail.png' | url }}"></a></figure>
 
 ~~We've **enabled Shadow DOM by default** after significantly improving support, allowing Servo to render sites like wpt.fyi correctly (@simonwuelker, @longvatron111, @elomscansio, @jdm, @sakupi01, #35923, #35899, #35930, #36104, #34964, #36024, #36106, #36173, #36010, #35769, #36230, #36620).~~
 
-<figure><a href="{{ '/img/blog/servo-wptfyi.png' | url }}"><img alt="wpt.fyi rendering in Servo" src="{{ '/img/blog/servo-wptfyi.png' | url }}"></a></figure>
+<figure><a href="{{ '/img/blog/2025-04-servo-wptfyi.png' | url }}"><img alt="wpt.fyi rendering in Servo" src="{{ '/img/blog/2025-04-servo-wptfyi.png' | url }}"></a></figure>
 
 We also merged the preliminary steps to support **animated images** in web content (@rayguo17, #36058, #36141).
 
@@ -96,7 +96,7 @@ Finally, we **renamed the OpenHarmony app bundle** (@jschwe, #35790).
 
 We added a memory usage view for Servo embedders: **visit about:memory** for a breakdown of identified allocations (@webbeef, #35728).
 
-<figure><a href="{{ '/img/blog/servo-aboutmemory.png' | url }}"><img alt="about:memory screenshot" src="{{ '/img/blog/servo-aboutmemory.png' | url }}"></a></figure>
+<figure><a href="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"><img alt="about:memory screenshot" src="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"></a></figure>
 
 Embedders can now **inject userscript sources** into all webviews (@Legend-Master, #35388).
 Links can be **opened in a new tab** by pressing the ctrl/meta modifier (@webbeef, @mrobinson, #35017).

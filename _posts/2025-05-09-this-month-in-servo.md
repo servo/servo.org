@@ -392,7 +392,7 @@ Servo now supports the **&amp;** selector for **CSS nesting** (@Loirooriol, #362
 
 We've **enabled Shadow DOM by default** after significantly improving support, allowing Servo to render sites like wpt.fyi correctly (@simonwuelker, @longvatron111, @elomscansio, @jdm, @sakupi01, #35923, #35899, #35930, #36104, #34964, #36024, #36106, #36173, #36010, #35769, #36230, #36620).
 
-<figure><a href="{{ '/img/blog/servo-wptfyi.png' | url }}"><img alt="wpt.fyi rendering in Servo" src="{{ '/img/blog/servo-wptfyi.png' | url }}"></a></figure>
+<figure><a href="{{ '/img/blog/2025-04-servo-wptfyi.png' | url }}"><img alt="wpt.fyi rendering in Servo" src="{{ '/img/blog/2025-04-servo-wptfyi.png' | url }}"></a></figure>
 
 **ReadableStream**, **WritableStream**, and **DOMException** can now be sent over **postMessage()** and **structuredClone()** (@gterzian, @kkoyung, #36181, #36588, #36535), and we’ve started working on support for **stream transforms** (@Taym95, #36470) and the [**trusted types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).
 
@@ -412,7 +412,7 @@ As a result of that last change, some layout data is counted against JS heap usa
 
 <figure>
 
-[![about:memory now with totals for “webrender”, “hsts-list”, “image-cache”, “box-tree”, and “fragment-tree”]({{ "/img/blog/2025-05-about-memory.png" | url }})]({{ "/img/blog/2025-05-about-memory.png" | url }})
+[![about:memory now with totals for “webrender”, “hsts-list”, “image-cache”, “box-tree”, and “fragment-tree”]({{ "/img/blog/2025-04-about-memory.png" | url }})]({{ "/img/blog/2025-04-about-memory.png" | url }})
 </figure>
 
 We recently added a **`--enable-experimental-web-platform-features` option** that enables all web platform features, even those that may not be stable or complete.
