@@ -640,20 +640,34 @@ This milestone is only possible through the continued hard work of many Servo co
 <aside class=_note>
 <p><strong>Caveats:</strong> must run Servo with <code>--pref dom_abort_controller_enabled</code>. Accounts with 2FA enabled may not be able to log in yet.</p>
 </aside>
-<p>Servo now supports the <strong>&amp;</strong> selector for <strong>CSS nesting</strong> (@Loirooriol, #36246, #36254, #36248, #36249), single-valued <strong>&lt;select&gt; elements</strong> (@simonwuelker, #35684, #36677), disabling stylesheets with <strong>&lt;link disabled&gt;</strong> (@Loirooriol, #36446), and the <strong>Refresh</strong> header in HTTP responses and &lt;meta&gt; (@sebsebmc, #36393), plus several new web API features:</p>
+<p>Servo now supports single-valued <strong>&lt;select&gt; elements</strong> (@simonwuelker, #35684, #36677), disabling stylesheets with <strong>&lt;link disabled&gt;</strong> (@Loirooriol, #36446), and the <strong>Refresh</strong> header in HTTP responses and &lt;meta&gt; (@sebsebmc, #36393), plus several new CSS features:</p>
+<ul>
+<li>the <strong>&amp;</strong> selector for <strong>CSS nesting</strong> (@Loirooriol, #36246, #36254, #36248, #36249)</li>
+<li><strong>‘scale’</strong>, <strong>‘rotate’</strong>, and <strong>‘translate’</strong> (@chocolate-pie, @Loirooriol, #35926)</li>
+<li><strong>‘will-change’</strong> (@yezhizhen, #35787)</li>
+<li>the <strong>‘fit-content()’</strong> sizing function (@Loirooriol, #36056)</li>
+<li>the <strong>‘image-set()’</strong> notation (@chocolate-pie, #36210)</li>
+</ul>
+<p>We’ve also landed a bunch of new web API features:</p>
 <ul>
 <li>the <strong>Response.json()</strong> static method (@sebsebmc, #36589, #36523)</li>
 <li>the <strong>CSSStyleSheet()</strong> constructor (@Loirooriol, #36521)</li>
 <li>the <strong>seekable</strong> property on <strong>HTMLMediaElement</strong> (@rayguo17, #36541)</li>
+<li>the <strong>label</strong> property on <strong>HTMLOptGroupElement</strong> (@simonwuelker, #35970)</li>
+<li>the <strong>align</strong> property on <strong>HTMLParagraphElement</strong> (@stephenmuss, #36054)</li>
 <li><strong>ClipboardItem</strong> and <strong>navigator.clipboard.writeText()</strong> (@Gae24, #36336, #36498)</li>
+<li><strong>getClientRects()</strong> and <strong>getBoundingClientRect()</strong> on <strong>Range</strong> (@simonwuelker, #35993)</li>
 <li><strong>addRule()</strong>, <strong>removeRules()</strong>, <strong>replaceSync()</strong>, and the <strong>rules</strong> property on <strong>CSSStyleSheet</strong> (@Loirooriol, @webbeef, #36313, #36586)</li>
 <li><strong>getLineDash</strong>, <strong>setLineDash</strong>, and <strong>lineDashOffset</strong> on <strong>CanvasRenderingContext2D</strong> (@stevennovaryo, #36257)</li>
 </ul>
 <p>We’ve <strong>enabled Shadow DOM by default</strong> after significantly improving support, allowing Servo to render sites like wpt.fyi correctly (@simonwuelker, @longvatron111, @elomscansio, @jdm, @sakupi01, #35923, #35899, #35930, #36104, #34964, #36024, #36106, #36173, #36010, #35769, #36230, #36620).</p>
 <figure><a href="/tmis/img/blog/2025-04-servo-wptfyi.png"><img alt="wpt.fyi rendering in Servo" src="/tmis/img/blog/2025-04-servo-wptfyi.png"></a></figure>
-<p><strong>ReadableStream</strong>, <strong>WritableStream</strong>, and <strong>DOMException</strong> can now be sent over <strong>postMessage()</strong> and <strong>structuredClone()</strong> (@gterzian, @kkoyung, #36181, #36588, #36535), and we’ve started working on support for <strong>stream transforms</strong> (@Taym95, #36470) and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API"><strong>trusted types API</strong></a> (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).</p>
+<p><strong>ReadableStream</strong>, <strong>WritableStream</strong>, <strong>DOMPoint</strong>, <strong>DOMPointReadOnly</strong>, and <strong>DOMException</strong> can now be sent over <strong>postMessage()</strong> and <strong>structuredClone()</strong> (@gterzian, @kkoyung, @jdm, @mrobinson, #36181, #36588, #36535, #35989), and we’ve started working on support for <strong>stream transforms</strong> (@Taym95, #36470) and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API"><strong>trusted types API</strong></a> (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).</p>
 <p>Servo can now render the <strong>caret</strong> and <strong>text selection</strong> in input fields (@dklassic, @webbeef, #35830, #36478), and we’ve landed a few fixes to <strong>radio buttons</strong> (@elomscansio, #36252, #36431), <strong>file inputs</strong> (@sebsebmc, #36458), and <strong>input validation</strong> (@MDCODE247, #36236).</p>
 <p>Our devtools now support <strong>color scheme simulation</strong> (@uthmaniv, #36253, #36168, #36297), and the beginnings of a <strong>Sources panel</strong> (@delan, @atbrakhi, #36164, #35971, #36631, #36632, #36667).</p>
+<p>We’ve added a <strong><code>--enable-experimental-web-platform-features</code> option</strong> that enables all engine features, even those that may not be stable or complete.
+This works much like <a href="https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/RuntimeEnabledFeatures.md;drc=a4e3e1f59b6f4bcf64806cf40c1acbb043b0bddc">Chromium’s option with the same name</a>, and it can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
+Servo now uses this option when running the Web Platform Tests (@Loirooriol, #36335, #36519, #36348, #36475), and the features enabled by this option are expected to change over time.</p>
 <h2 id="under-the-hood" tabindex="-1">Under the hood <a class="header-anchor" href="#under-the-hood">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -665,9 +679,6 @@ As a result of that last change, some layout data is counted against JS heap usa
 <figure>
 <p><a href="/tmis/img/blog/2025-04-about-memory.png"><img src="/tmis/img/blog/2025-04-about-memory.png" alt="about:memory now with totals for “webrender”, “hsts-list”, “image-cache”, “box-tree”, and “fragment-tree”"></a></p>
 </figure>
-<p>We recently added a <strong><code>--enable-experimental-web-platform-features</code> option</strong> that enables all web platform features, even those that may not be stable or complete.
-This works much like <a href="https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/RuntimeEnabledFeatures.md;drc=a4e3e1f59b6f4bcf64806cf40c1acbb043b0bddc">Chromium’s option with the same name</a>.
-We’ve now started running the Web Platform Tests with that option (@Loirooriol, #36335, #36519, #36348, #36475), to help Servo’s WPT scores better reflect our progress.</p>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>

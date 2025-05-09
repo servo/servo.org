@@ -394,20 +394,34 @@ This milestone is only possible through the continued hard work of many Servo co
 &lt;aside class=&quot;_note&quot;&gt;
 &lt;p&gt;&lt;strong&gt;Caveats:&lt;/strong&gt; must run Servo with &lt;code&gt;--pref dom_abort_controller_enabled&lt;/code&gt;. Accounts with 2FA enabled may not be able to log in yet.&lt;/p&gt;
 &lt;/aside&gt;
-&lt;p&gt;Servo now supports the &lt;strong&gt;&amp;amp;&lt;/strong&gt; selector for &lt;strong&gt;CSS nesting&lt;/strong&gt; (@Loirooriol, #36246, #36254, #36248, #36249), single-valued &lt;strong&gt;&amp;lt;select&amp;gt; elements&lt;/strong&gt; (@simonwuelker, #35684, #36677), disabling stylesheets with &lt;strong&gt;&amp;lt;link disabled&amp;gt;&lt;/strong&gt; (@Loirooriol, #36446), and the &lt;strong&gt;Refresh&lt;/strong&gt; header in HTTP responses and &amp;lt;meta&amp;gt; (@sebsebmc, #36393), plus several new web API features:&lt;/p&gt;
+&lt;p&gt;Servo now supports single-valued &lt;strong&gt;&amp;lt;select&amp;gt; elements&lt;/strong&gt; (@simonwuelker, #35684, #36677), disabling stylesheets with &lt;strong&gt;&amp;lt;link disabled&amp;gt;&lt;/strong&gt; (@Loirooriol, #36446), and the &lt;strong&gt;Refresh&lt;/strong&gt; header in HTTP responses and &amp;lt;meta&amp;gt; (@sebsebmc, #36393), plus several new CSS features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the &lt;strong&gt;&amp;amp;&lt;/strong&gt; selector for &lt;strong&gt;CSS nesting&lt;/strong&gt; (@Loirooriol, #36246, #36254, #36248, #36249)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘scale’&lt;/strong&gt;, &lt;strong&gt;‘rotate’&lt;/strong&gt;, and &lt;strong&gt;‘translate’&lt;/strong&gt; (@chocolate-pie, @Loirooriol, #35926)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘will-change’&lt;/strong&gt; (@yezhizhen, #35787)&lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;‘fit-content()’&lt;/strong&gt; sizing function (@Loirooriol, #36056)&lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;‘image-set()’&lt;/strong&gt; notation (@chocolate-pie, #36210)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We’ve also landed a bunch of new web API features:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;the &lt;strong&gt;Response.json()&lt;/strong&gt; static method (@sebsebmc, #36589, #36523)&lt;/li&gt;
 &lt;li&gt;the &lt;strong&gt;CSSStyleSheet()&lt;/strong&gt; constructor (@Loirooriol, #36521)&lt;/li&gt;
 &lt;li&gt;the &lt;strong&gt;seekable&lt;/strong&gt; property on &lt;strong&gt;HTMLMediaElement&lt;/strong&gt; (@rayguo17, #36541)&lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;label&lt;/strong&gt; property on &lt;strong&gt;HTMLOptGroupElement&lt;/strong&gt; (@simonwuelker, #35970)&lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;align&lt;/strong&gt; property on &lt;strong&gt;HTMLParagraphElement&lt;/strong&gt; (@stephenmuss, #36054)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;ClipboardItem&lt;/strong&gt; and &lt;strong&gt;navigator.clipboard.writeText()&lt;/strong&gt; (@Gae24, #36336, #36498)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;getClientRects()&lt;/strong&gt; and &lt;strong&gt;getBoundingClientRect()&lt;/strong&gt; on &lt;strong&gt;Range&lt;/strong&gt; (@simonwuelker, #35993)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;addRule()&lt;/strong&gt;, &lt;strong&gt;removeRules()&lt;/strong&gt;, &lt;strong&gt;replaceSync()&lt;/strong&gt;, and the &lt;strong&gt;rules&lt;/strong&gt; property on &lt;strong&gt;CSSStyleSheet&lt;/strong&gt; (@Loirooriol, @webbeef, #36313, #36586)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;getLineDash&lt;/strong&gt;, &lt;strong&gt;setLineDash&lt;/strong&gt;, and &lt;strong&gt;lineDashOffset&lt;/strong&gt; on &lt;strong&gt;CanvasRenderingContext2D&lt;/strong&gt; (@stevennovaryo, #36257)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;We’ve &lt;strong&gt;enabled Shadow DOM by default&lt;/strong&gt; after significantly improving support, allowing Servo to render sites like wpt.fyi correctly (@simonwuelker, @longvatron111, @elomscansio, @jdm, @sakupi01, #35923, #35899, #35930, #36104, #34964, #36024, #36106, #36173, #36010, #35769, #36230, #36620).&lt;/p&gt;
 &lt;figure&gt;&lt;a href=&quot;https://servo.org/tmis/img/blog/2025-04-servo-wptfyi.png&quot;&gt;&lt;img alt=&quot;wpt.fyi rendering in Servo&quot; src=&quot;https://servo.org/tmis/img/blog/2025-04-servo-wptfyi.png&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;strong&gt;ReadableStream&lt;/strong&gt;, &lt;strong&gt;WritableStream&lt;/strong&gt;, and &lt;strong&gt;DOMException&lt;/strong&gt; can now be sent over &lt;strong&gt;postMessage()&lt;/strong&gt; and &lt;strong&gt;structuredClone()&lt;/strong&gt; (@gterzian, @kkoyung, #36181, #36588, #36535), and we’ve started working on support for &lt;strong&gt;stream transforms&lt;/strong&gt; (@Taym95, #36470) and the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API&quot;&gt;&lt;strong&gt;trusted types API&lt;/strong&gt;&lt;/a&gt; (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ReadableStream&lt;/strong&gt;, &lt;strong&gt;WritableStream&lt;/strong&gt;, &lt;strong&gt;DOMPoint&lt;/strong&gt;, &lt;strong&gt;DOMPointReadOnly&lt;/strong&gt;, and &lt;strong&gt;DOMException&lt;/strong&gt; can now be sent over &lt;strong&gt;postMessage()&lt;/strong&gt; and &lt;strong&gt;structuredClone()&lt;/strong&gt; (@gterzian, @kkoyung, @jdm, @mrobinson, #36181, #36588, #36535, #35989), and we’ve started working on support for &lt;strong&gt;stream transforms&lt;/strong&gt; (@Taym95, #36470) and the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API&quot;&gt;&lt;strong&gt;trusted types API&lt;/strong&gt;&lt;/a&gt; (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).&lt;/p&gt;
 &lt;p&gt;Servo can now render the &lt;strong&gt;caret&lt;/strong&gt; and &lt;strong&gt;text selection&lt;/strong&gt; in input fields (@dklassic, @webbeef, #35830, #36478), and we’ve landed a few fixes to &lt;strong&gt;radio buttons&lt;/strong&gt; (@elomscansio, #36252, #36431), &lt;strong&gt;file inputs&lt;/strong&gt; (@sebsebmc, #36458), and &lt;strong&gt;input validation&lt;/strong&gt; (@MDCODE247, #36236).&lt;/p&gt;
 &lt;p&gt;Our devtools now support &lt;strong&gt;color scheme simulation&lt;/strong&gt; (@uthmaniv, #36253, #36168, #36297), and the beginnings of a &lt;strong&gt;Sources panel&lt;/strong&gt; (@delan, @atbrakhi, #36164, #35971, #36631, #36632, #36667).&lt;/p&gt;
+&lt;p&gt;We’ve added a &lt;strong&gt;&lt;code&gt;--enable-experimental-web-platform-features&lt;/code&gt; option&lt;/strong&gt; that enables all engine features, even those that may not be stable or complete.
+This works much like &lt;a href=&quot;https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/RuntimeEnabledFeatures.md;drc=a4e3e1f59b6f4bcf64806cf40c1acbb043b0bddc&quot;&gt;Chromium’s option with the same name&lt;/a&gt;, and it can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
+Servo now uses this option when running the Web Platform Tests (@Loirooriol, #36335, #36519, #36348, #36475), and the features enabled by this option are expected to change over time.&lt;/p&gt;
 &lt;h2 id=&quot;under-the-hood&quot; tabindex=&quot;-1&quot;&gt;Under the hood &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/05/09/this-month-in-servo/#under-the-hood&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -419,9 +433,6 @@ As a result of that last change, some layout data is counted against JS heap usa
 &lt;figure&gt;
 &lt;p&gt;&lt;a href=&quot;https://servo.org/tmis/img/blog/2025-04-about-memory.png&quot;&gt;&lt;img src=&quot;https://servo.org/tmis/img/blog/2025-04-about-memory.png&quot; alt=&quot;about:memory now with totals for “webrender”, “hsts-list”, “image-cache”, “box-tree”, and “fragment-tree”&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/figure&gt;
-&lt;p&gt;We recently added a &lt;strong&gt;&lt;code&gt;--enable-experimental-web-platform-features&lt;/code&gt; option&lt;/strong&gt; that enables all web platform features, even those that may not be stable or complete.
-This works much like &lt;a href=&quot;https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/RuntimeEnabledFeatures.md;drc=a4e3e1f59b6f4bcf64806cf40c1acbb043b0bddc&quot;&gt;Chromium’s option with the same name&lt;/a&gt;.
-We’ve now started running the Web Platform Tests with that option (@Loirooriol, #36335, #36519, #36348, #36475), to help Servo’s WPT scores better reflect our progress.&lt;/p&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/05/09/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -476,8 +487,8 @@ The new layout engine is improving significantly month over month!
 We now better support &lt;strong&gt;transform-style: preserve-3d&lt;/strong&gt; (@HastD, #35808), and the &lt;strong&gt;will-change&lt;/strong&gt; property (@yezhizhen, #35787).&lt;/p&gt;
 &lt;p&gt;Our flexbox implementation supports &lt;strong&gt;min/max keyword sizes&lt;/strong&gt; for both cross and main axes (@Loirooriol, #35860, #35961), as well as &lt;strong&gt;keyword sizes&lt;/strong&gt; for non-replaced content (@Loirooriol, #35826) and &lt;strong&gt;min and max sizing properties&lt;/strong&gt; (@Loirooriol, #36015).
 This means Servo’s flexbox layout now has full support for sizing keywords!&lt;/p&gt;
-&lt;p&gt;We laid the groundwork for supporting the &lt;strong&gt;::marker pseudo element&lt;/strong&gt; (#36202), and implemented the &lt;strong&gt;fit-content()&lt;/strong&gt; sizing function (@Loirooriol, #36056), as well as the &lt;strong&gt;image-set()&lt;/strong&gt; notation (@chocolate-pie, #36210).
-Additionally, the &lt;strong&gt;&lt;code&gt;scale&lt;/code&gt;, &lt;code&gt;rotate&lt;/code&gt;, and &lt;code&gt;translate&lt;/code&gt;&lt;/strong&gt; transform properties now work (@chocolate-pie, @Loirooriol, #35926).
+&lt;p&gt;We laid the groundwork for supporting the &lt;strong&gt;::marker pseudo element&lt;/strong&gt; (#36202), &lt;s&gt;and implemented the &lt;strong&gt;fit-content()&lt;/strong&gt; sizing function (@Loirooriol, #36056), as well as the &lt;strong&gt;image-set()&lt;/strong&gt; notation (@chocolate-pie, #36210).&lt;/s&gt;
+&lt;s&gt;Additionally, the &lt;strong&gt;&lt;code&gt;scale&lt;/code&gt;, &lt;code&gt;rotate&lt;/code&gt;, and &lt;code&gt;translate&lt;/code&gt;&lt;/strong&gt; transform properties now work (@chocolate-pie, @Loirooriol, #35926).&lt;/s&gt;
 Finally, we &lt;strong&gt;improved the performance&lt;/strong&gt; of deeply nested pages that require laying out boxes multiple times (@Loirooriol, @mrobinson, #36082).&lt;/p&gt;
 &lt;p&gt;We also fixed many layout bugs:&lt;/p&gt;
 &lt;ul&gt;
@@ -487,7 +498,7 @@ Finally, we &lt;strong&gt;improved the performance&lt;/strong&gt; of deeply nest
 &lt;li&gt;&lt;strong&gt;table-layout: fixed&lt;/strong&gt; is no longer ignored when &lt;code&gt;inline-size&lt;/code&gt; is &lt;code&gt;auto&lt;/code&gt; (@Loirooriol, #35882)&lt;/li&gt;
 &lt;li&gt;margins of block-level box stretches are always zero, regardless of collapsing status (@Loirooriol, #35904)&lt;/li&gt;
 &lt;li&gt;fixed the intrinsic block size of replaced elements with auto width (@Loirooriol, #35275)&lt;/li&gt;
-&lt;li&gt;added support for &lt;strong&gt;z-index on grid items&lt;/strong&gt; (@Loirooriol, #35947)&lt;/li&gt;
+&lt;li&gt;&lt;s&gt;added support for &lt;strong&gt;z-index on grid items&lt;/strong&gt; (@Loirooriol, #35947)&lt;/s&gt;&lt;/li&gt;
 &lt;li&gt;indefinite stretch contributes to intrinsic sizes (@Loirooriol, #36030)&lt;/li&gt;
 &lt;li&gt;static positions include ancestor padding (@Loirooriol, #36051)&lt;/li&gt;
 &lt;li&gt;table rows with a span of &amp;gt;1 are sized appropriately (@PotatoCP, #36064)&lt;/li&gt;
@@ -499,17 +510,17 @@ Finally, we &lt;strong&gt;improved the performance&lt;/strong&gt; of deeply nest
 &lt;li&gt;the &lt;strong&gt;nonce attribute&lt;/strong&gt; is used in Content Security Policy checks (@simonwuelker, #35876)&lt;/li&gt;
 &lt;li&gt;we removed some cases where &lt;strong&gt;custom element callbacks fired incorrectly&lt;/strong&gt; (@xiaochengh, #35960, #35883)&lt;/li&gt;
 &lt;li&gt;added &lt;strong&gt;partial support for InterSectionObserver&lt;/strong&gt; (@stevennovaryo, #35551)&lt;/li&gt;
-&lt;li&gt;we &lt;strong&gt;implemented Range.getClientRects and Range.getBoundingClientRect&lt;/strong&gt; (@simonwuelker, #35993)&lt;/li&gt;
+&lt;li&gt;&lt;s&gt;we &lt;strong&gt;implemented Range.getClientRects and Range.getBoundingClientRect&lt;/strong&gt; (@simonwuelker, #35993)&lt;/s&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;touchmove events&lt;/strong&gt; are more reliable (@kongbai1996, #36218 #36200) and support the &lt;code&gt;cancelable&lt;/code&gt; property (@kongbai1996, #35713)&lt;/li&gt;
-&lt;li&gt;we added support for &lt;strong&gt;HTMLOptgroupElement.label&lt;/strong&gt; (@simonwuelker, #35970)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;DOMPoint and DOMPointReadOnly are serializable&lt;/strong&gt; with &lt;code&gt;postMessage&lt;/code&gt; (@jdm, @mrobinson, #35989)&lt;/li&gt;
+&lt;li&gt;&lt;s&gt;we added support for &lt;strong&gt;HTMLOptgroupElement.label&lt;/strong&gt; (@simonwuelker, #35970)&lt;/s&gt;&lt;/li&gt;
+&lt;li&gt;&lt;s&gt;&lt;strong&gt;DOMPoint and DOMPointReadOnly are serializable&lt;/strong&gt; with &lt;code&gt;postMessage&lt;/code&gt; (@jdm, @mrobinson, #35989)&lt;/s&gt;&lt;/li&gt;
 &lt;li&gt;Notifications fetch &lt;strong&gt;associated image resources&lt;/strong&gt; (@pewsheen, #35878)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;ResizeObserver&lt;/code&gt; callbacks are only invoked &lt;strong&gt;when elements change size&lt;/strong&gt; (@simonwuelker, #36226)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Request objects with FormData bodies&lt;/strong&gt; use the correct &lt;code&gt;Content-Type&lt;/code&gt; (@andreubotella, #36194)&lt;/li&gt;
 &lt;li&gt;Text response bodies containing a BOM consume it (@andreubotella, #36192)&lt;/li&gt;
 &lt;li&gt;We have begun &lt;strong&gt;implementing the URLPattern API&lt;/strong&gt; (@simonwuelker, #36144)&lt;/li&gt;
 &lt;li&gt;Backspace &lt;strong&gt;no longer removes entire lines&lt;/strong&gt; in &lt;code&gt;&amp;lt;textarea&amp;gt;&lt;/code&gt; (@elomscansio, @jdm, #36112)&lt;/li&gt;
-&lt;li&gt;we implemented the &lt;strong&gt;HTMLParagraphElement.align&lt;/strong&gt; attribute (@stephenmuss, #36054)&lt;/li&gt;
+&lt;li&gt;&lt;s&gt;we implemented the &lt;strong&gt;HTMLParagraphElement.align&lt;/strong&gt; attribute (@stephenmuss, #36054)&lt;/s&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;passive event listeners&lt;/strong&gt; can be created (@shanehandley, #35877)&lt;/li&gt;
 &lt;li&gt;cancelled enqueued animation frame callbacks &lt;strong&gt;no longer run&lt;/strong&gt; (@xiaochengh, #35849)&lt;/li&gt;
 &lt;li&gt;scripts are &lt;strong&gt;no longer executed&lt;/strong&gt; in documents that should disable scripting (@simonwuelker, #35871)&lt;/li&gt;
@@ -527,11 +538,11 @@ To use the developer tools, we now &lt;strong&gt;require Firefox 133 or newer&lt
 &lt;h2 id=&quot;servo-the-browser-(servoshell)&quot; tabindex=&quot;-1&quot;&gt;Servo-the-browser (servoshell) &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/04/24/this-month-in-servo/#servo-the-browser-(servoshell)&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;servoshell supports a new command-line argument: &lt;strong&gt;–enable-experimental-web-platform-features&lt;/strong&gt;.
+&lt;p&gt;&lt;s&gt;servoshell supports a new command-line argument: &lt;strong&gt;–enable-experimental-web-platform-features&lt;/strong&gt;.
 This argument enables incomplete engine features
 that are not ready to be turned on by default.
 This can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
-The features enabled by this flag are expected to change over time as new web platform features are implemented in Servo.&lt;/p&gt;
+The features enabled by this flag are expected to change over time as new web platform features are implemented in Servo.&lt;/s&gt;&lt;/p&gt;
 &lt;p&gt;We fixed a crash when &lt;strong&gt;resizing the browsing area&lt;/strong&gt; too small (@sebsebmc, #35967).
 Dialogs support &lt;strong&gt;keyboard interaction&lt;/strong&gt; to close and cancel them (@chickenleaf, #3567), and the URL bar accepts any &lt;strong&gt;domain-like input&lt;/strong&gt; (@kafji, #35756).
 We also enabled &lt;strong&gt;sRGB colorspaces&lt;/strong&gt; on macOS for better colour fidelity (@IsaacMarovitz, #35683).
