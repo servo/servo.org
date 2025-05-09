@@ -414,7 +414,7 @@ Our devtools now support **color scheme simulation** (@uthmaniv, #36253, #36168,
 
 ## Under the hood
 
-We’ve finally finished **splitting up our massive `script` crate** (@jdm, #36323), which should **cut incremental build times** for that crate **by 60%**.
+We’ve finally finished **splitting up our massive `script` crate** (@jdm, #35988, #35987, #36107, #36216, #36220, #36095, #36323), which should **cut incremental build times** for that crate **by 60%**.
 This is something we’ve wanted to do for **over eleven years** (@kmcallister, #1799)!
 
 **`webgpu` rebuilds are now faster** as well, with changes to that crate no longer requiring a `script` rebuild (@mrobinson, #36332, #36320).

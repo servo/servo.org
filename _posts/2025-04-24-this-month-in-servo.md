@@ -76,7 +76,7 @@ Our developer tools integration **supports iframes** (@simonwuelker, #35874), sh
 To use the developer tools, we now **require Firefox 133 or newer** (@atbrakhi, #35792).
 
 **Stylo** has been upgraded to 2025-03-15 (@nicoburns, @Loirooriol, #35782, #35925, #35990), and we upgraded to the **2024 Rust edition** (@simonwuelker, #35755).
-We also are nearly finished **splitting up our massive `script` crate** (@jdm, #35988, #35987, #36107, #36216, #36220, #36095), which will eventually make Servo faster to rebuild.
+~~We also are nearly finished **splitting up our massive `script` crate** (@jdm, #35988, #35987, #36107, #36216, #36220, #36095), which will eventually make Servo faster to rebuild.~~
 
 ## Servo-the-browser (servoshell)
 
