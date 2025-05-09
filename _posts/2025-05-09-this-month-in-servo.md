@@ -413,6 +413,8 @@ We’ve also landed a bunch of new web API features:
 - **addRule()**, **removeRules()**, **replaceSync()**, and the **rules** property on **CSSStyleSheet** (@Loirooriol, @webbeef, #36313, #36586)
 - **getLineDash**, **setLineDash**, and **lineDashOffset** on **CanvasRenderingContext2D** (@stevennovaryo, #36257)
 
+<figure><a href="{{ '/img/blog/april-2025.png' | url }}"><img alt="servoshell showing new support for ‘image-set()’, ‘fit-content()’, ‘scale’, ‘translate’, ‘rotate’, ‘setLineDash()’, caret and text selection in <input>, and single-valued <select>" src="{{ '/img/blog/april-2025.png' | url }}"></a></figure>
+
 We've **enabled Shadow DOM by default** after significantly improving support, allowing Servo to render sites like wpt.fyi correctly (@simonwuelker, @longvatron111, @elomscansio, @jdm, @sakupi01, #35923, #35899, #35930, #36104, #34964, #36024, #36106, #36173, #36010, #35769, #36230, #36620).
 
 Our flexbox implementation supports **min/max keyword sizes** for both cross and main axes (@Loirooriol, #35860, #35961), as well as **keyword sizes** for non-replaced content (@Loirooriol, #35826) and **min and max sizing properties** (@Loirooriol, #36015).
