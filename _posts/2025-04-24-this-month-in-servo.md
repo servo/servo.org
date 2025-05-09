@@ -24,13 +24,13 @@ We also merged the preliminary steps to support **animated images** in web conte
 
 Having disabled by default Servo's original, experimental layout implementation back in November 2024, we have taken the step of **deleting all of the disabled code** (@Loirooriol, #35943).
 The new layout engine is improving significantly month over month!
-We now better support **transform-style: preserve-3d** (@HastD, #35808), and the **will-change** property (@yezhizhen, #35787).
+We now better support **transform-style: preserve-3d** (@HastD, #35808), ~~and the **will-change** property (@yezhizhen, #35787).~~
 
 Our flexbox implementation supports **min/max keyword sizes** for both cross and main axes (@Loirooriol, #35860, #35961), as well as **keyword sizes** for non-replaced content (@Loirooriol, #35826) and **min and max sizing properties** (@Loirooriol, #36015).
 This means Servo's flexbox layout now has full support for sizing keywords!
 
-We laid the groundwork for supporting the **::marker pseudo element** (#36202), and implemented the **fit-content()** sizing function (@Loirooriol, #36056), as well as the **image-set()** notation (@chocolate-pie, #36210).
-Additionally, the **`scale`, `rotate`, and `translate`** transform properties now work (@chocolate-pie, @Loirooriol, #35926).
+We laid the groundwork for supporting the **::marker pseudo element** (#36202), ~~and implemented the **fit-content()** sizing function (@Loirooriol, #36056), as well as the **image-set()** notation (@chocolate-pie, #36210).~~
+~~Additionally, the **`scale`, `rotate`, and `translate`** transform properties now work (@chocolate-pie, @Loirooriol, #35926).~~
 Finally, we **improved the performance** of deeply nested pages that require laying out boxes multiple times (@Loirooriol, @mrobinson, #36082).
 
 We also fixed many layout bugs:
@@ -40,7 +40,7 @@ We also fixed many layout bugs:
 * **table-layout: fixed** is no longer ignored when `inline-size` is `auto` (@Loirooriol, #35882)
 * margins of block-level box stretches are always zero, regardless of collapsing status (@Loirooriol, #35904)
 * fixed the intrinsic block size of replaced elements with auto width (@Loirooriol, #35275)
-* added support for **z-index on grid items** (@Loirooriol, #35947)
+* ~~added support for **z-index on grid items** (@Loirooriol, #35947)~~
 * indefinite stretch contributes to intrinsic sizes (@Loirooriol, #36030)
 * static positions include ancestor padding (@Loirooriol, #36051)
 * table rows with a span of >1 are sized appropriately (@PotatoCP, #36064)
@@ -51,17 +51,17 @@ There was also lots of progress on non-layout web API features in the engine:
 * the **nonce attribute** is used in Content Security Policy checks (@simonwuelker, #35876)
 * we removed some cases where **custom element callbacks fired incorrectly** (@xiaochengh, #35960, #35883)
 * added **partial support for InterSectionObserver** (@stevennovaryo, #35551)
-* we **implemented Range.getClientRects and Range.getBoundingClientRect** (@simonwuelker, #35993)
+* ~~we **implemented Range.getClientRects and Range.getBoundingClientRect** (@simonwuelker, #35993)~~
 * **touchmove events** are more reliable (@kongbai1996, #36218 #36200) and support the `cancelable` property (@kongbai1996, #35713)
-* we added support for **HTMLOptgroupElement.label** (@simonwuelker, #35970)
-* **DOMPoint and DOMPointReadOnly are serializable** with `postMessage` (@jdm, @mrobinson, #35989)
+* ~~we added support for **HTMLOptgroupElement.label** (@simonwuelker, #35970)~~
+* ~~**DOMPoint and DOMPointReadOnly are serializable** with `postMessage` (@jdm, @mrobinson, #35989)~~
 * Notifications fetch **associated image resources** (@pewsheen, #35878)
 * `ResizeObserver` callbacks are only invoked **when elements change size** (@simonwuelker, #36226)
 * **Request objects with FormData bodies** use the correct `Content-Type` (@andreubotella, #36194)
 * Text response bodies containing a BOM consume it (@andreubotella, #36192)
 * We have begun **implementing the URLPattern API** (@simonwuelker, #36144)
 * Backspace **no longer removes entire lines** in `<textarea>` (@elomscansio, @jdm, #36112)
-* we implemented the **HTMLParagraphElement.align** attribute (@stephenmuss, #36054)
+* ~~we implemented the **HTMLParagraphElement.align** attribute (@stephenmuss, #36054)~~
 * **passive event listeners** can be created (@shanehandley, #35877)
 * cancelled enqueued animation frame callbacks **no longer run** (@xiaochengh, #35849)
 * scripts are **no longer executed** in documents that should disable scripting (@simonwuelker, #35871)

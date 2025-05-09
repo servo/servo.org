@@ -393,12 +393,23 @@ This milestone is only possible through the continued hard work of many Servo co
 **Caveats:** must run Servo with `--pref dom_abort_controller_enabled`. Accounts with 2FA enabled may not be able to log in yet.
 </aside>
 
-Servo now supports the **&amp;** selector for **CSS nesting** (@Loirooriol, #36246, #36254, #36248, #36249), single-valued **&lt;select> elements** (@simonwuelker, #35684, #36677), disabling stylesheets with **&lt;link disabled>** (@Loirooriol, #36446), and the **Refresh** header in HTTP responses and &lt;meta> (@sebsebmc, #36393), plus several new web API features:
+Servo now supports single-valued **&lt;select> elements** (@simonwuelker, #35684, #36677), disabling stylesheets with **&lt;link disabled>** (@Loirooriol, #36446), and the **Refresh** header in HTTP responses and &lt;meta> (@sebsebmc, #36393), plus several new CSS features:
+
+- the **&amp;** selector for **CSS nesting** (@Loirooriol, #36246, #36254, #36248, #36249)
+- **‘scale’**, **‘rotate’**, and **‘translate’** (@chocolate-pie, @Loirooriol, #35926)
+- **‘will-change’** (@yezhizhen, #35787)
+- the **‘fit-content()’** sizing function (@Loirooriol, #36056)
+- the **‘image-set()’** notation (@chocolate-pie, #36210)
+
+We’ve also landed a bunch of new web API features:
 
 - the **Response.json()** static method (@sebsebmc, #36589, #36523)
 - the **CSSStyleSheet()** constructor (@Loirooriol, #36521)
 - the **seekable** property on **HTMLMediaElement** (@rayguo17, #36541)
+- the **label** property on **HTMLOptGroupElement** (@simonwuelker, #35970)
+- the **align** property on **HTMLParagraphElement** (@stephenmuss, #36054)
 - **ClipboardItem** and **navigator.clipboard.writeText()** (@Gae24, #36336, #36498)
+- **getClientRects()** and **getBoundingClientRect()** on **Range** (@simonwuelker, #35993)
 - **addRule()**, **removeRules()**, **replaceSync()**, and the **rules** property on **CSSStyleSheet** (@Loirooriol, @webbeef, #36313, #36586)
 - **getLineDash**, **setLineDash**, and **lineDashOffset** on **CanvasRenderingContext2D** (@stevennovaryo, #36257)
 
@@ -406,7 +417,7 @@ We've **enabled Shadow DOM by default** after significantly improving support, a
 
 <figure><a href="{{ '/img/blog/2025-04-servo-wptfyi.png' | url }}"><img alt="wpt.fyi rendering in Servo" src="{{ '/img/blog/2025-04-servo-wptfyi.png' | url }}"></a></figure>
 
-**ReadableStream**, **WritableStream**, and **DOMException** can now be sent over **postMessage()** and **structuredClone()** (@gterzian, @kkoyung, #36181, #36588, #36535), and we’ve started working on support for **stream transforms** (@Taym95, #36470) and the [**trusted types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).
+**ReadableStream**, **WritableStream**, **DOMPoint**, **DOMPointReadOnly**, and **DOMException** can now be sent over **postMessage()** and **structuredClone()** (@gterzian, @kkoyung, @jdm, @mrobinson, #36181, #36588, #36535, #35989), and we’ve started working on support for **stream transforms** (@Taym95, #36470) and the [**trusted types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).
 
 Servo can now render the **caret** and **text selection** in input fields (@dklassic, @webbeef, #35830, #36478), and we’ve landed a few fixes to **radio buttons** (@elomscansio, #36252, #36431), **file inputs** (@sebsebmc, #36458), and **input validation** (@MDCODE247, #36236).
 
