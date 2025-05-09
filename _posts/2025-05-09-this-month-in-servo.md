@@ -464,6 +464,11 @@ If you use Servo libraries like [url](https://crates.io/crates/url/reverse_depen
 As always, use of these funds will be decided transparently in the Technical Steering Committee.
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
+## Conference talks
+
+**Josh Matthews** (@jdm) will be [speaking about Servo](https://rustweek.org/talks/josh/) at [**RustWeek 2025**](https://rustweek.org), on **Tuesday 13 May** at [17:05 local time](https://everytimezone.com/?t=68228b80,929) (15:05 UTC).
+See you there!
+
 <style>
     ._correction {
         max-width: 33em;
