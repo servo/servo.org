@@ -412,6 +412,10 @@ Servo can now render the **caret** and **text selection** in input fields (@dkla
 
 Our devtools now support **color scheme simulation** (@uthmaniv, #36253, #36168, #36297), and the beginnings of a **Sources panel** (@delan, @atbrakhi, #36164, #35971, #36631, #36632, #36667).
 
+We’ve added a **`--enable-experimental-web-platform-features` option** that enables all engine features, even those that may not be stable or complete.
+This works much like [Chromium’s option with the same name](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/RuntimeEnabledFeatures.md;drc=a4e3e1f59b6f4bcf64806cf40c1acbb043b0bddc), and it can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
+Servo now uses this option when running the Web Platform Tests (@Loirooriol, #36335, #36519, #36348, #36475), and the features enabled by this option are expected to change over time.
+
 ## Under the hood
 
 We’ve finally finished **splitting up our massive `script` crate** (@jdm, #35988, #35987, #36107, #36216, #36220, #36095, #36323), which should **cut incremental build times** for that crate **by 60%**.
@@ -426,10 +430,6 @@ As a result of that last change, some layout data is counted against JS heap usa
 
 [![about:memory now with totals for “webrender”, “hsts-list”, “image-cache”, “box-tree”, and “fragment-tree”]({{ "/img/blog/2025-04-about-memory.png" | url }})]({{ "/img/blog/2025-04-about-memory.png" | url }})
 </figure>
-
-We’ve added a **`--enable-experimental-web-platform-features` option** that enables all engine features, even those that may not be stable or complete.
-This works much like [Chromium’s option with the same name](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/RuntimeEnabledFeatures.md;drc=a4e3e1f59b6f4bcf64806cf40c1acbb043b0bddc), and it can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
-Servo now uses this option when running the Web Platform Tests (@Loirooriol, #36335, #36519, #36348, #36475), and the features enabled by this option are expected to change over time.
 
 ## Donations
 
