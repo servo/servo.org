@@ -432,11 +432,18 @@ Servo now uses this option when running the Web Platform Tests (@Loirooriol, #36
 &lt;p&gt;We’ve finally finished &lt;strong&gt;splitting up our massive &lt;code&gt;script&lt;/code&gt; crate&lt;/strong&gt; (@jdm, #35988, #35987, #36107, #36216, #36220, #36095, #36323), which should &lt;strong&gt;cut incremental build times&lt;/strong&gt; for that crate &lt;strong&gt;by 60%&lt;/strong&gt;.
 This is something we’ve wanted to do for &lt;strong&gt;over eleven years&lt;/strong&gt; (@kmcallister, #1799)!&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;webgpu&lt;/code&gt; rebuilds are now faster&lt;/strong&gt; as well, with changes to that crate no longer requiring a &lt;code&gt;script&lt;/code&gt; rebuild (@mrobinson, #36332, #36320).&lt;/p&gt;
-&lt;p&gt;Our new &lt;strong&gt;about:memory page&lt;/strong&gt; can now &lt;strong&gt;report detailed memory usage&lt;/strong&gt; for WebRender (@jdm, #36557), HSTS (@jdm, #36558), cached images (@jdm, #36556, #36581), and the fragment and box trees (@jdm, #36553), and layout data stored in the DOM (@jdm, #36664).
-As a result of that last change, some layout data is counted against JS heap usage but not the box tree.&lt;/p&gt;
-&lt;figure&gt;
-&lt;p&gt;&lt;a href=&quot;https://servo.org/tmis/img/blog/2025-04-about-memory.png&quot;&gt;&lt;img src=&quot;https://servo.org/tmis/img/blog/2025-04-about-memory.png&quot; alt=&quot;about:memory now with totals for “webrender”, “hsts-list”, “image-cache”, “box-tree”, and “fragment-tree”&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/figure&gt;
+&lt;p&gt;We added a memory usage view for Servo embedders: &lt;strong&gt;visit about:memory&lt;/strong&gt; for a breakdown of identified allocations (@webbeef, @jdm, #35728, #36557, #36558, #36556, #36581, #36553, #36664).&lt;/p&gt;
+&lt;figure&gt;&lt;a href=&quot;https://servo.org/tmis/img/blog/2025-04-servo-aboutmemory.png&quot;&gt;&lt;img alt=&quot;about:memory screenshot&quot; src=&quot;https://servo.org/tmis/img/blog/2025-04-servo-aboutmemory.png&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;servo-the-engine-(embedding)&quot; tabindex=&quot;-1&quot;&gt;Servo-the-engine (embedding) &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/05/09/this-month-in-servo/#servo-the-engine-(embedding)&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Embedders can now &lt;strong&gt;inject userscript sources&lt;/strong&gt; into all webviews (@Legend-Master, #35388).
+Links can be &lt;strong&gt;opened in a new tab&lt;/strong&gt; by pressing the ctrl/meta modifier (@webbeef, @mrobinson, #35017).
+Delegates will receive &lt;strong&gt;send error notifications&lt;/strong&gt; for requests (@delan, #35668).&lt;/p&gt;
+&lt;p&gt;We fixed a bug causing &lt;strong&gt;flickering cursors&lt;/strong&gt; (@DevGev, #35934), and now &lt;strong&gt;create the config directory&lt;/strong&gt; if it does not exist (@yezhizhen, #35761).
+We also fixed a number of bugs in the webdriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).
+Setting a &lt;strong&gt;non-default value for &lt;code&gt;--pref shell_background_color_rgba&lt;/code&gt;&lt;/strong&gt; no longer cases a crash (@boluochoufeng, #35865).&lt;/p&gt;
+&lt;p&gt;Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).&lt;/p&gt;
 &lt;h2 id=&quot;perf-and-stability&quot; tabindex=&quot;-1&quot;&gt;Perf and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/05/09/this-month-in-servo/#perf-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -566,18 +573,18 @@ Dialogs support &lt;strong&gt;keyboard interaction&lt;/strong&gt; to close and c
 We also enabled &lt;strong&gt;sRGB colorspaces&lt;/strong&gt; on macOS for better colour fidelity (@IsaacMarovitz, #35683).
 Using the &lt;code&gt;--userscripts&lt;/code&gt; argument without providing a path &lt;strong&gt;defaults to ./resources/user-agent-js/&lt;/strong&gt;.
 Finally, we &lt;strong&gt;renamed the OpenHarmony app bundle&lt;/strong&gt; (@jschwe, #35790).&lt;/p&gt;
-&lt;h2 id=&quot;servo-the-engine-(embedding)&quot; tabindex=&quot;-1&quot;&gt;Servo-the-engine (embedding) &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/04/24/this-month-in-servo/#servo-the-engine-(embedding)&quot;&gt;
+&lt;h2 id=&quot;servo-the-engine-(embedding)&quot; tabindex=&quot;-1&quot;&gt;&lt;s&gt;Servo-the-engine (embedding)&lt;/s&gt; &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/04/24/this-month-in-servo/#servo-the-engine-(embedding)&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We added a memory usage view for Servo embedders: &lt;strong&gt;visit about:memory&lt;/strong&gt; for a breakdown of identified allocations (@webbeef, #35728).&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;We added a memory usage view for Servo embedders: &lt;strong&gt;visit about:memory&lt;/strong&gt; for a breakdown of identified allocations (@webbeef, #35728).&lt;/s&gt;&lt;/p&gt;
 &lt;figure&gt;&lt;a href=&quot;https://servo.org/tmis/img/blog/2025-04-servo-aboutmemory.png&quot;&gt;&lt;img alt=&quot;about:memory screenshot&quot; src=&quot;https://servo.org/tmis/img/blog/2025-04-servo-aboutmemory.png&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
-&lt;p&gt;Embedders can now &lt;strong&gt;inject userscript sources&lt;/strong&gt; into all webviews (@Legend-Master, #35388).
+&lt;p&gt;&lt;s&gt;Embedders can now &lt;strong&gt;inject userscript sources&lt;/strong&gt; into all webviews (@Legend-Master, #35388).
 Links can be &lt;strong&gt;opened in a new tab&lt;/strong&gt; by pressing the ctrl/meta modifier (@webbeef, @mrobinson, #35017).
-Delegates will receive &lt;strong&gt;send error notifications&lt;/strong&gt; for requests (@delan, #35668).&lt;/p&gt;
-&lt;p&gt;We fixed a bug causing &lt;strong&gt;flickering cursors&lt;/strong&gt; (@DevGev, #35934), and now &lt;strong&gt;create the config directory&lt;/strong&gt; if it does not exist (@yezhizhen, #35761).
+Delegates will receive &lt;strong&gt;send error notifications&lt;/strong&gt; for requests (@delan, #35668).&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;We fixed a bug causing &lt;strong&gt;flickering cursors&lt;/strong&gt; (@DevGev, #35934), and now &lt;strong&gt;create the config directory&lt;/strong&gt; if it does not exist (@yezhizhen, #35761).
 We also fixed a number of bugs in the webdriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).
-Setting a &lt;strong&gt;non-default value for &lt;code&gt;Preferences.shell_background_color_rgba&lt;/code&gt;&lt;/strong&gt; no longer cases a crash (@boluochoufeng, #35865).&lt;/p&gt;
-&lt;p&gt;Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).&lt;/p&gt;
+Setting a &lt;strong&gt;non-default value for &lt;code&gt;Preferences.shell_background_color_rgba&lt;/code&gt;&lt;/strong&gt; no longer cases a crash (@boluochoufeng, #35865).&lt;/s&gt;&lt;/p&gt;
+&lt;p&gt;&lt;s&gt;Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).&lt;/s&gt;&lt;/p&gt;
 &lt;h2 id=&quot;perf-and-stability&quot; tabindex=&quot;-1&quot;&gt;&lt;s&gt;Perf and stability&lt;/s&gt; &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/04/24/this-month-in-servo/#perf-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;

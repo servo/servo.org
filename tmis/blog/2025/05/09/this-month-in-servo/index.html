@@ -678,11 +678,18 @@ Servo now uses this option when running the Web Platform Tests (@Loirooriol, #36
 <p>We’ve finally finished <strong>splitting up our massive <code>script</code> crate</strong> (@jdm, #35988, #35987, #36107, #36216, #36220, #36095, #36323), which should <strong>cut incremental build times</strong> for that crate <strong>by 60%</strong>.
 This is something we’ve wanted to do for <strong>over eleven years</strong> (@kmcallister, #1799)!</p>
 <p><strong><code>webgpu</code> rebuilds are now faster</strong> as well, with changes to that crate no longer requiring a <code>script</code> rebuild (@mrobinson, #36332, #36320).</p>
-<p>Our new <strong>about:memory page</strong> can now <strong>report detailed memory usage</strong> for WebRender (@jdm, #36557), HSTS (@jdm, #36558), cached images (@jdm, #36556, #36581), and the fragment and box trees (@jdm, #36553), and layout data stored in the DOM (@jdm, #36664).
-As a result of that last change, some layout data is counted against JS heap usage but not the box tree.</p>
-<figure>
-<p><a href="/tmis/img/blog/2025-04-about-memory.png"><img src="/tmis/img/blog/2025-04-about-memory.png" alt="about:memory now with totals for “webrender”, “hsts-list”, “image-cache”, “box-tree”, and “fragment-tree”"></a></p>
-</figure>
+<p>We added a memory usage view for Servo embedders: <strong>visit about:memory</strong> for a breakdown of identified allocations (@webbeef, @jdm, #35728, #36557, #36558, #36556, #36581, #36553, #36664).</p>
+<figure><a href="/tmis/img/blog/2025-04-servo-aboutmemory.png"><img alt="about:memory screenshot" src="/tmis/img/blog/2025-04-servo-aboutmemory.png"></a></figure>
+<h2 id="servo-the-engine-(embedding)" tabindex="-1">Servo-the-engine (embedding) <a class="header-anchor" href="#servo-the-engine-(embedding)">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Embedders can now <strong>inject userscript sources</strong> into all webviews (@Legend-Master, #35388).
+Links can be <strong>opened in a new tab</strong> by pressing the ctrl/meta modifier (@webbeef, @mrobinson, #35017).
+Delegates will receive <strong>send error notifications</strong> for requests (@delan, #35668).</p>
+<p>We fixed a bug causing <strong>flickering cursors</strong> (@DevGev, #35934), and now <strong>create the config directory</strong> if it does not exist (@yezhizhen, #35761).
+We also fixed a number of bugs in the webdriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).
+Setting a <strong>non-default value for <code>--pref shell_background_color_rgba</code></strong> no longer cases a crash (@boluochoufeng, #35865).</p>
+<p>Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).</p>
 <h2 id="perf-and-stability" tabindex="-1">Perf and stability <a class="header-anchor" href="#perf-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
