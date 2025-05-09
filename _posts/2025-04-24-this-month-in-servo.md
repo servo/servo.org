@@ -92,21 +92,21 @@ We also enabled **sRGB colorspaces** on macOS for better colour fidelity (@Isaac
 Using the `--userscripts` argument without providing a path **defaults to ./resources/user-agent-js/**.
 Finally, we **renamed the OpenHarmony app bundle** (@jschwe, #35790).
 
-## Servo-the-engine (embedding)
+## ~~Servo-the-engine (embedding)~~
 
-We added a memory usage view for Servo embedders: **visit about:memory** for a breakdown of identified allocations (@webbeef, #35728).
+~~We added a memory usage view for Servo embedders: **visit about:memory** for a breakdown of identified allocations (@webbeef, #35728).~~
 
 <figure><a href="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"><img alt="about:memory screenshot" src="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"></a></figure>
 
-Embedders can now **inject userscript sources** into all webviews (@Legend-Master, #35388).
+~~Embedders can now **inject userscript sources** into all webviews (@Legend-Master, #35388).
 Links can be **opened in a new tab** by pressing the ctrl/meta modifier (@webbeef, @mrobinson, #35017).
-Delegates will receive **send error notifications** for requests (@delan, #35668).
+Delegates will receive **send error notifications** for requests (@delan, #35668).~~
 
-We fixed a bug causing **flickering cursors** (@DevGev, #35934), and now **create the config directory** if it does not exist (@yezhizhen, #35761).
+~~We fixed a bug causing **flickering cursors** (@DevGev, #35934), and now **create the config directory** if it does not exist (@yezhizhen, #35761).
 We also fixed a number of bugs in the webdriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).
-Setting a **non-default value for `Preferences.shell_background_color_rgba`** no longer cases a crash (@boluochoufeng, #35865).
+Setting a **non-default value for `Preferences.shell_background_color_rgba`** no longer cases a crash (@boluochoufeng, #35865).~~
 
-Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).
+~~Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).~~
 
 ## ~~Perf and stability~~
 

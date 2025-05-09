@@ -440,13 +440,21 @@ This is something we’ve wanted to do for **over eleven years** (@kmcallister, 
 
 **`webgpu` rebuilds are now faster** as well, with changes to that crate no longer requiring a `script` rebuild (@mrobinson, #36332, #36320).
 
-Our new **about:memory page** can now **report detailed memory usage** for WebRender (@jdm, #36557), HSTS (@jdm, #36558), cached images (@jdm, #36556, #36581), and the fragment and box trees (@jdm, #36553), and layout data stored in the DOM (@jdm, #36664).
-As a result of that last change, some layout data is counted against JS heap usage but not the box tree.
+We added a memory usage view for Servo embedders: **visit about:memory** for a breakdown of identified allocations (@webbeef, @jdm, #35728, #36557, #36558, #36556, #36581, #36553, #36664).
 
-<figure>
+<figure><a href="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"><img alt="about:memory screenshot" src="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"></a></figure>
 
-[![about:memory now with totals for “webrender”, “hsts-list”, “image-cache”, “box-tree”, and “fragment-tree”]({{ "/img/blog/2025-04-about-memory.png" | url }})]({{ "/img/blog/2025-04-about-memory.png" | url }})
-</figure>
+## Servo-the-engine (embedding)
+
+Embedders can now **inject userscript sources** into all webviews (@Legend-Master, #35388).
+Links can be **opened in a new tab** by pressing the ctrl/meta modifier (@webbeef, @mrobinson, #35017).
+Delegates will receive **send error notifications** for requests (@delan, #35668).
+
+We fixed a bug causing **flickering cursors** (@DevGev, #35934), and now **create the config directory** if it does not exist (@yezhizhen, #35761).
+We also fixed a number of bugs in the webdriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).
+Setting a **non-default value for `--pref shell_background_color_rgba`** no longer cases a crash (@boluochoufeng, #35865).
+
+Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).
 
 ## Perf and stability
 
