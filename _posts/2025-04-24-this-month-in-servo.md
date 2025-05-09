@@ -80,11 +80,11 @@ To use the developer tools, we now **require Firefox 133 or newer** (@atbrakhi, 
 
 ## Servo-the-browser (servoshell)
 
-servoshell supports a new command-line argument: **--enable-experimental-web-platform-features**.
+~~servoshell supports a new command-line argument: **--enable-experimental-web-platform-features**.
 This argument enables incomplete engine features
 that are not ready to be turned on by default.
 This can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
-The features enabled by this flag are expected to change over time as new web platform features are implemented in Servo.
+The features enabled by this flag are expected to change over time as new web platform features are implemented in Servo.~~
 
 We fixed a crash when **resizing the browsing area** too small (@sebsebmc, #35967).
 Dialogs support **keyboard interaction** to close and cancel them (@chickenleaf, #3567), and the URL bar accepts any **domain-like input** (@kafji, #35756).
