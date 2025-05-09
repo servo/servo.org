@@ -26,8 +26,8 @@ This milestone is only possible through the continued hard work of many Servo co
 The new layout engine is improving significantly month over month!~~
 We now better support **transform-style: preserve-3d** (@HastD, #35808), ~~and the **will-change** property (@yezhizhen, #35787).~~
 
-Our flexbox implementation supports **min/max keyword sizes** for both cross and main axes (@Loirooriol, #35860, #35961), as well as **keyword sizes** for non-replaced content (@Loirooriol, #35826) and **min and max sizing properties** (@Loirooriol, #36015).
-This means Servo's flexbox layout now has full support for sizing keywords!
+~~Our flexbox implementation supports **min/max keyword sizes** for both cross and main axes (@Loirooriol, #35860, #35961), as well as **keyword sizes** for non-replaced content (@Loirooriol, #35826) and **min and max sizing properties** (@Loirooriol, #36015).
+This means Servo's flexbox layout now has full support for sizing keywords!~~
 
 ~~We laid the groundwork for supporting the **::marker pseudo element** (#36202), and implemented the **fit-content()** sizing function (@Loirooriol, #36056), as well as the **image-set()** notation (@chocolate-pie, #36210).~~
 ~~Additionally, the **`scale`, `rotate`, and `translate`** transform properties now work (@chocolate-pie, @Loirooriol, #35926).~~
