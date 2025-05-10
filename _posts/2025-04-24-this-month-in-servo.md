@@ -86,7 +86,7 @@ that are not ready to be turned on by default.
 This can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
 The features enabled by this flag are expected to change over time as new web platform features are implemented in Servo.~~
 
-We fixed a crash when **resizing the browsing area** too small (@sebsebmc, #35967).
+~~We fixed a crash when **resizing the browsing area** too small (@sebsebmc, #35967).~~
 Dialogs support **keyboard interaction** to close and cancel them (@chickenleaf, #3567), and the URL bar accepts any **domain-like input** (@kafji, #35756).
 We also enabled **sRGB colorspaces** on macOS for better colour fidelity (@IsaacMarovitz, #35683).
 Using the `--userscripts` argument without providing a path **defaults to ./resources/user-agent-js/**.

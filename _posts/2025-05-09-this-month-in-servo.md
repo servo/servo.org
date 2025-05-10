@@ -422,7 +422,7 @@ The `OffscreenRenderingContext` is **no longer double buffered**, which can impr
 We also removed a source of **canvas rendering latency** (@sagudev, #35719), and fixed performance cliffs related to the Shadow DOM (@simonwuelker, #35802, #35725).
 We improved layout performance by **reducing allocations** (@jschwe, #35781) and **caching layout results** (@Loirooriol, @mrobinson, #36082), and reduced the **latency of touch events** when they are non-cancelable (@kongbai1996, #35785).
 
-We also fixed crashes involving **touch events** (@kongbai1996, @jschwe, #35763, #36531, #36229), **focusing iframes** (@leftmostcat, #35742), **service workers** (@jdm, #36256), **streams** (@Taym95, #36566), **Location** (@jdm, #36494), **&lt;canvas>** (@tharkum, @simonwuelker, #36569, #36705), **&lt;input>** (@dklassic, #36461), **‘min-content’** and **‘max-content’** (@Loirooriol, #36518, #36571), global objects (@jdm, #36491), and `--pref shell_background_color_rgba` (@boluochoufeng, #35865).
+We also fixed crashes involving **touch events** (@kongbai1996, @jschwe, #35763, #36531, #36229), **service workers** (@jdm, #36256), **WritableStream** (@Taym95, #36566), **Location** (@jdm, #36494), **&lt;canvas>** (@tharkum, @simonwuelker, #36569, #36705), **&lt;input>** (@dklassic, #36461), **&lt;iframe>** (@leftmostcat, #35742), **‘min-content’** and **‘max-content’** (@Loirooriol, #36518, #36571), **flexbox** (@mrobinson, #36123), global objects (@jdm, #36491), resizing the viewport (@sebsebmc, #35967), and `--pref shell_background_color_rgba` (@boluochoufeng, #35865).
 Additionally, we **removed undefined behaviour** from the Rust bindings to the SpiderMonkey engine (@gmorenz, #35892, #36160, #36161, #36158).
 
 The project to decrease the risk of [intermittent GC-related crashes](https://github.com/servo/servo/issues/33140) continues to make progress (@jdm, @Arya-A-Nair, @Dericko681, @yerke, #35753, #36014, #36043, #36156, #36116, #36180, #36111, #36375, #36371, #36395, #36392, #36464, #36504, #36495, #36492).
@@ -454,7 +454,6 @@ We made lots of progress on web API features:
 We’ve also fixed many layout bugs:
 * incorrect **fallback font** caching (@mrobinson, #35705)
 * improved **overflow handling** in some special cases (@yezhizhen, #35670)
-* **addressed a crash** caused by flex boxes and mixing fixed position and absolutely positioned descendants (@mrobinson, #36123)
 * **table-layout: fixed** is no longer ignored when `inline-size` is `auto` (@Loirooriol, #35882)
 * margins of block-level box stretches are always zero, regardless of collapsing status (@Loirooriol, #35904)
 * fixed the intrinsic block size of replaced elements with auto width (@Loirooriol, #35275)
