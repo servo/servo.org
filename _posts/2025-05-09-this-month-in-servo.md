@@ -419,6 +419,8 @@ This is something we’ve wanted to do for **over eleven years** (@kmcallister, 
 
 **`webgpu` rebuilds are now faster** as well, with changes to that crate no longer requiring a `script` rebuild (@mrobinson, #36332, #36320).
 
+**Stylo** has been upgraded to 2025-03-15 (@nicoburns, @Loirooriol, #35782, #35925, #35990), and we upgraded to the **2024 Rust edition** (@simonwuelker, #35755).
+
 We added a memory usage view for Servo embedders: **visit about:memory** for a breakdown of identified allocations (@webbeef, @jdm, #35728, #36557, #36558, #36556, #36581, #36553, #36664).
 
 <figure><a href="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"><img alt="about:memory screenshot" src="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"></a></figure>
