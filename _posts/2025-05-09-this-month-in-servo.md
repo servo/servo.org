@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
+title:      "Two months in Servo: CSS nesting, Shadow DOM, Clipboard API, and more!"
 date:       2025-05-09
-summary:    ao!! wrrrrao!!
+summary:    Try our new about:memory page and --enable-experimental-web-platform-features.
 categories:
 ---
 
