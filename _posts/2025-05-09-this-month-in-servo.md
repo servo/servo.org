@@ -220,13 +220,7 @@ All WPT tests (4.6pp to 87.4%)
       layout crash
     - https://github.com/servo/servo/pull/36595	(@Loirooriol, #36595)	layout: Implement `justify-self` for block-level boxes (#36595)
       css layout
-- legacy
-    - https://github.com/servo/servo/pull/36281	(@TimvdLippe, #36281)	Remove meta-legacy-layout wpt tests (#36281)
-      legacy
-    - https://github.com/servo/servo/pull/36613	(@mrobinson, #36613)	layout: Combine `layout_2020` and `layout_thread_2020` into a crate called `layout` (#36613)
-      architecture legacy
-    - https://github.com/servo/servo/pull/36698	(@mrobinson, #36698)	layout: Remove rules for legacy pseudo-elements in user agent stylesheet (#36698)
-      legacy
+- DONE legacy
 - multiprocess
     - https://github.com/servo/servo/pull/36329	(@webbeef, #36329)	Prevent zombie processes in multi-process mode. (#36329)
       multiprocess
@@ -382,7 +376,7 @@ Servo can now render the **caret** and **text selection** in input fields (@dkla
 
 Our devtools now support **color scheme simulation** (@uthmaniv, #36253, #36168, #36297), and the beginnings of a **Sources panel** (@delan, @atbrakhi, #36164, #35971, #36631, #36632, #36667).
 
-Having disabled by default Servo's original, experimental layout implementation back in November 2024, we have taken the step of **deleting all of the disabled code** (@Loirooriol, #35943).
+Having disabled by default Servo's original, experimental layout implementation back in November 2024, we have taken the step of **deleting all of the disabled code** (@Loirooriol, @TimvdLippe, @mrobinson, #35943, #36281, #36698) and moving all of the remaining layout code to [`layout`](https://doc.servo.org/layout/) (@mrobinson, #36613).
 Our new layout engine is improving significantly month over month!
 
 We’ve added a **`--enable-experimental-web-platform-features` option** that enables all engine features, even those that may not be stable or complete.
