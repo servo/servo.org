@@ -393,7 +393,6 @@ We’ve also landed a bunch of new web API features:
 - the **label** property on **HTMLOptGroupElement** (@simonwuelker, #35970)
 - the **align** property on **HTMLParagraphElement** (@stephenmuss, #36054)
 - **ClipboardItem** and **navigator.clipboard.writeText()** (@Gae24, #36336, #36498)
-- **getClientRects()** and **getBoundingClientRect()** on **Range** (@simonwuelker, #35993)
 - **addRule()**, **removeRules()**, **replaceSync()**, and the **rules** property on **CSSStyleSheet** (@Loirooriol, @webbeef, #36313, #36586)
 - **getLineDash**, **setLineDash**, and **lineDashOffset** on **CanvasRenderingContext2D** (@stevennovaryo, #36257)
 
@@ -409,14 +408,14 @@ This means Servo's flexbox layout now has full support for sizing keywords!
 **ReadableStream**, **WritableStream**, **DOMPoint**, **DOMPointReadOnly**, and **DOMException** can now be sent over **postMessage()** and **structuredClone()** (@gterzian, @kkoyung, @jdm, @mrobinson, #36181, #36588, #36535, #35989).
 
 We’ve started working on support for **stream transforms** (@Taym95, #36470) and the [**trusted types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (@TimvdLippe, @jdm, #36354, #36355, #36422, #36454, #36409, #36363, #36511, #36596).
-We’ve also laid the groundwork for supporting the **::marker pseudo element** (@mrobinson, #36202) and **animated images** in web content (@rayguo17, #36058, #36141).
+We’ve also laid the groundwork for supporting the **::marker pseudo element** (@mrobinson, #36202), **animated images** in web content (@rayguo17, #36058, #36141), and **getClientRects()** and **getBoundingClientRect()** on **Range** (@simonwuelker, #35993).
 
 Servo can now render the **caret** and **text selection** in input fields (@dklassic, @webbeef, #35830, #36478), and we’ve landed a few fixes to **radio buttons** (@elomscansio, #36252, #36431), **file inputs** (@sebsebmc, #36458), and **input validation** (@MDCODE247, #36236).
 
 Our devtools now support **color scheme simulation** (@uthmaniv, #36253, #36168, #36297), and the beginnings of a **Sources panel** (@delan, @atbrakhi, #36164, #35971, #36631, #36632, #36667).
 
 Having disabled by default Servo's original, experimental layout implementation back in November 2024, we have taken the step of **deleting all of the disabled code** (@Loirooriol, #35943).
-The new layout engine is improving significantly month over month!
+Our new layout engine is improving significantly month over month!
 
 We’ve added a **`--enable-experimental-web-platform-features` option** that enables all engine features, even those that may not be stable or complete.
 This works much like [Chromium’s option with the same name](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/RuntimeEnabledFeatures.md;drc=a4e3e1f59b6f4bcf64806cf40c1acbb043b0bddc), and it can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
