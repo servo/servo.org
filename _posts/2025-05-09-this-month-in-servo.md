@@ -327,7 +327,12 @@ All WPT tests (4.6pp to 87.4%)
       upgrade
 -->
 
-Big news!
+Before we start, let’s address the elephant in the room.
+Last month, we proposed that we would change our [AI contributions policy](https://book.servo.org/contributing.html#ai-contributions) to allow the use of AI tools in some situations, including GitHub Copilot for code.
+[The feedback we received](https://github.com/servo/servo/discussions/36379) from the community was overwhelmingly clear, and we’ve listened.
+We will **keep the AI contributions ban in place**, and any future proposals regarding this policy will be discussed together, as a community.
+
+At the same time, we have other big news!
 Complex sites such as **GMail** and **Google Chat** are **now usable in Servo**, with some caveats.
 This milestone is only possible through the continued hard work of many Servo contributors across the engine, and we're thankful for all of the efforts to reach this point.
 
