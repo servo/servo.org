@@ -217,17 +217,7 @@ All WPT tests (4.6pp to 87.4%)
 - DONE forms
 - DONE gc
 - DONE html
-- incremental
-    - https://github.com/servo/servo/pull/36404	(@mrobinson, @Loirooriol, #36404)	layout: Enable using cached fragments when there is a BoxTree update point (#36404)
-      incremental
-    - https://github.com/servo/servo/pull/36448	(@mrobinson, @Loirooriol, #36448)	layout: Add documentation for `CacheableLayoutResultAndInputs` (#36448)
-      incremental
-    - https://github.com/servo/servo/pull/36447	(@mrobinson, @Loirooriol, #36447)	layout: Store table parts in DOM layout data (#36447)
-      incremental
-    - https://github.com/servo/servo/pull/36513	(@mrobinson, @Loirooriol, #36513)	layout: Add a `LayoutBoxBase` to inline boxes (#36513)
-      incremental
-    - https://github.com/servo/servo/pull/36583	(@mrobinson, @Loirooriol, #36583)	layout: Store `Fragment` results in `LayoutBoxBase` and start using them for queries (#36583)
-      incremental
+- DONE incremental
 - input
     - https://github.com/servo/servo/pull/36619	(@yezhizhen, #36619)	Rework `ScriptThread::handle_input_event` for behaviour and performance (#36619)
       input; fixes erroneous click event on right click
@@ -306,13 +296,13 @@ All WPT tests (4.6pp to 87.4%)
       perf; memory usage
     - https://github.com/servo/servo/pull/36573	(@PartiallyUntyped, #36573)	[tracing] Add convenience macro for function tracing (#36573)
       perf; tracing support
-    - https://github.com/servo/servo/pull/36629	(@mrobinson, @Loirooriol, #36629)	layout: Add a new `FragmentTree` pass to calculate containing block rectangles (#36629)
+    - DONE https://github.com/servo/servo/pull/36629	(@mrobinson, @Loirooriol, #36629)	layout: Add a new `FragmentTree` pass to calculate containing block rectangles (#36629)
       perf; layout queries
     - https://github.com/servo/servo/pull/36119	(@sagudev, #36119)	Introduce snapshot concept of canvas (#36119)
       perf
-    - https://github.com/servo/servo/pull/36681	(@mrobinson, @Loirooriol, #36681)	 layout: Use box tree `Fragment`s for offset parent queries (#36681)
+    - DONE https://github.com/servo/servo/pull/36681	(@mrobinson, @Loirooriol, #36681)	 layout: Use box tree `Fragment`s for offset parent queries (#36681)
       perf; layout queries
-    - https://github.com/servo/servo/pull/36663	(@mrobinson, @Loirooriol, #36663)	layout: Implement node geometry queries against `BoxTree`'s `Fragment` (#36663)
+    - DONE https://github.com/servo/servo/pull/36663	(@mrobinson, @Loirooriol, #36663)	layout: Implement node geometry queries against `BoxTree`'s `Fragment` (#36663)
       perf; layout queries
     - https://github.com/servo/servo/pull/36692	(@PartiallyUntyped, #36692)	Propagate image resolution errors in layout context (#36692)
       perf
@@ -445,6 +435,9 @@ Setting a **non-default value for `--pref shell_background_color_rgba`** no long
 Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).
 
 ## Perf and stability
+
+We’ve started building an **incremental layout** system in Servo (@mrobinson, @Loirooriol, #36404, #36448, #36447, #36513), with a huge speedup to **offsetWidth**, **offsetHeight**, **offsetLeft**, **offsetTop**, and **offsetParent** layout queries (@mrobinson, @Loirooriol, #36583, #36629, #36681, #36663).
+Incremental layout will allow Servo to respond to page updates and layout queries without repeating layout work, which is critical on today’s highly dynamic web.
 
 The `OffscreenRenderingContext` is **no longer double buffered**, which can improve rendering performance in embeddings that rely on it.
 We also removed a source of **canvas rendering latency** (@sagudev, #35719), and fixed performance cliffs related to the Shadow DOM (@simonwuelker, #35802, #35725).
