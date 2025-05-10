@@ -383,17 +383,6 @@ We’ve added a **`--enable-experimental-web-platform-features` option** that en
 This works much like [Chromium’s option with the same name](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/RuntimeEnabledFeatures.md;drc=a4e3e1f59b6f4bcf64806cf40c1acbb043b0bddc), and it can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
 Servo now uses this option when running the Web Platform Tests (@Loirooriol, #36335, #36519, #36348, #36475), and the features enabled by this option are expected to change over time.
 
-## Under the hood
-
-We’ve finally finished **splitting up our massive `script` crate** (@jdm, #35988, #35987, #36107, #36216, #36220, #36095, #36323), which should **cut incremental build times** for that crate **by 60%**.
-This is something we’ve wanted to do for **over eleven years** (@kmcallister, #1799)!
-
-**`webgpu` rebuilds are now faster** as well, with changes to that crate no longer requiring a `script` rebuild (@mrobinson, #36332, #36320).
-
-We added a memory usage view for Servo embedders: **visit about:memory** for a breakdown of identified allocations (@webbeef, @jdm, #35728, #36557, #36558, #36556, #36581, #36553, #36664).
-
-<figure><a href="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"><img alt="about:memory screenshot" src="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"></a></figure>
-
 ## Servo-the-engine (embedding)
 
 We’ve landed some big changes to our webview API:
@@ -412,6 +401,17 @@ We fixed a bug causing **flickering cursors** (@DevGev, #35934), and now **creat
 We also fixed a number of bugs in the WebDriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).
 
 Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).
+
+## Under the hood
+
+We’ve finally finished **splitting up our massive `script` crate** (@jdm, #35988, #35987, #36107, #36216, #36220, #36095, #36323), which should **cut incremental build times** for that crate **by 60%**.
+This is something we’ve wanted to do for **over eleven years** (@kmcallister, #1799)!
+
+**`webgpu` rebuilds are now faster** as well, with changes to that crate no longer requiring a `script` rebuild (@mrobinson, #36332, #36320).
+
+We added a memory usage view for Servo embedders: **visit about:memory** for a breakdown of identified allocations (@webbeef, @jdm, #35728, #36557, #36558, #36556, #36581, #36553, #36664).
+
+<figure><a href="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"><img alt="about:memory screenshot" src="{{ '/img/blog/2025-04-servo-aboutmemory.png' | url }}"></a></figure>
 
 ## Perf and stability
 
