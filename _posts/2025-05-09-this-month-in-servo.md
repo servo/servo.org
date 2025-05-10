@@ -135,29 +135,7 @@ All WPT tests (4.6pp to 87.4%)
 - compositor
     - https://github.com/servo/servo/pull/36662	(@mrobinson, #36662)	compositor: Tick animations for an entire WebView at once (#36662)
       compositor; refresh driver
-- crash
-    - https://github.com/servo/servo/pull/36229	(@kongbai1996, #36229)	Fixed the crash issue when the openharmony web component is adapted. (#36229)
-      crash ohos
-    - https://github.com/servo/servo/pull/36256	(@jdm, #36256)	Fix null realm assertion when activating a service worker (#36256)
-      crash
-    - https://github.com/servo/servo/pull/36461	(@dklassic, #36461)	fix: Crashing due to input element hack (#36461)
-      crash
-    - https://github.com/servo/servo/pull/36518	(@Loirooriol, #36518)	layout: Floor the max-content size by the min-content size (#36518)
-      layout crash
-    - https://github.com/servo/servo/pull/36531	(@jschwe, #36531)	touch: Fix panic with -Zconvert-mouse-to-touch (#36531)
-      crash
-    - https://github.com/servo/servo/pull/36491	(@jdm, #36491)	Fix crash when enumerating properties of global object (#36491)
-      crash
-    - https://github.com/servo/servo/pull/36566	(@Taym95, #36566)	fix writablestream assertion crash when getting chunk size following spec change (#36566)
-      crash
-    - https://github.com/servo/servo/pull/36494	(@jdm, #36494)	Fix crash when setting custom property on Location (#36494)
-      crash
-    - https://github.com/servo/servo/pull/36571	(@Loirooriol, #36571)	layout: Always floor the max-content size by the min-content size (#36571)
-      layout crash
-    - https://github.com/servo/servo/pull/36569	(@tharkum, #36569)	imagedata: Fix overflow panic for too large ImageData (#36569)
-      crash
-    - https://github.com/servo/servo/pull/36705	(@simonwuelker, #36705)	Use snapshot size instead of canvas size when converting canvas to blob (#36705)
-      crash
+- DONE crash
 - css
     - https://github.com/servo/servo/pull/36272	(@mrobinson, @Loirooriol, #36272)	script: Create `CSSStyleOwner::Null` for `getComputedStyle` (#36272)
       css; marker pseudo
@@ -429,8 +407,7 @@ Links can be **opened in a new tab** by pressing the ctrl/meta modifier (@webbee
 Delegates will receive **send error notifications** for requests (@delan, #35668).
 
 We fixed a bug causing **flickering cursors** (@DevGev, #35934), and now **create the config directory** if it does not exist (@yezhizhen, #35761).
-We also fixed a number of bugs in the webdriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).
-Setting a **non-default value for `--pref shell_background_color_rgba`** no longer cases a crash (@boluochoufeng, #35865).
+We also fixed a number of bugs in the WebDriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).
 
 Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).
 
@@ -443,7 +420,7 @@ The `OffscreenRenderingContext` is **no longer double buffered**, which can impr
 We also removed a source of **canvas rendering latency** (@sagudev, #35719), and fixed performance cliffs related to the Shadow DOM (@simonwuelker, #35802, #35725).
 We improved performance of block level layout by **reducing allocations** (@jschwe, #35781), and reduced the **latency of touch events** when they are non-cancelable (@kongbai1996, #35785).
 
-We also fixed crashes involving **multiple touchmove events** (@kongbai1996, @jschwe, #35763), and **focusing iframes** (@leftmostcat, #35742).
+We also fixed crashes involving **touch events** (@kongbai1996, @jschwe, #35763, #36531, #36229), **focusing iframes** (@leftmostcat, #35742), **service workers** (@jdm, #36256), **streams** (@Taym95, #36566), **Location** (@jdm, #36494), **&lt;canvas>** (@tharkum, @simonwuelker, #36569, #36705), **&lt;input>** (@dklassic, #36461), **‘min-content’** and **‘max-content’** (@Loirooriol, #36518, #36571), global objects (@jdm, #36491), and `--pref shell_background_color_rgba` (@boluochoufeng, #35865).
 Additionally, we **removed undefined behaviour** from the Rust bindings to the SpiderMonkey engine (@gmorenz, #35892, #36160, #36161, #36158).
 
 The project to decrease the risk of [intermittent GC-related crashes](https://github.com/servo/servo/issues/33140) continues to make progress (@jdm, @Arya-A-Nair, @Dericko681, @yerke, #35753, #36014, #36043, #36156, #36116, #36180, #36111, #36375, #36371, #36395, #36392, #36464, #36504, #36495, #36492).
