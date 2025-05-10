@@ -652,10 +652,49 @@ This is something we’ve wanted to do for <strong>over eleven years</strong> (@
 Incremental layout will allow Servo to respond to page updates and layout queries without repeating layout work, which is critical on today’s highly dynamic web.</p>
 <p>The <code>OffscreenRenderingContext</code> is <strong>no longer double buffered</strong>, which can improve rendering performance in embeddings that rely on it.
 We also removed a source of <strong>canvas rendering latency</strong> (@sagudev, #35719), and fixed performance cliffs related to the Shadow DOM (@simonwuelker, #35802, #35725).
-We improved performance of block level layout by <strong>reducing allocations</strong> (@jschwe, #35781), and reduced the <strong>latency of touch events</strong> when they are non-cancelable (@kongbai1996, #35785).</p>
+We improved layout performance by <strong>reducing allocations</strong> (@jschwe, #35781) and <strong>caching layout results</strong> (@Loirooriol, @mrobinson, #36082), and reduced the <strong>latency of touch events</strong> when they are non-cancelable (@kongbai1996, #35785).</p>
 <p>We also fixed crashes involving <strong>touch events</strong> (@kongbai1996, @jschwe, #35763, #36531, #36229), <strong>focusing iframes</strong> (@leftmostcat, #35742), <strong>service workers</strong> (@jdm, #36256), <strong>streams</strong> (@Taym95, #36566), <strong>Location</strong> (@jdm, #36494), <strong>&lt;canvas&gt;</strong> (@tharkum, @simonwuelker, #36569, #36705), <strong>&lt;input&gt;</strong> (@dklassic, #36461), <strong>‘min-content’</strong> and <strong>‘max-content’</strong> (@Loirooriol, #36518, #36571), global objects (@jdm, #36491), and <code>--pref shell_background_color_rgba</code> (@boluochoufeng, #35865).
 Additionally, we <strong>removed undefined behaviour</strong> from the Rust bindings to the SpiderMonkey engine (@gmorenz, #35892, #36160, #36161, #36158).</p>
 <p>The project to decrease the risk of <a href="https://github.com/servo/servo/issues/33140">intermittent GC-related crashes</a> continues to make progress (@jdm, @Arya-A-Nair, @Dericko681, @yerke, #35753, #36014, #36043, #36156, #36116, #36180, #36111, #36375, #36371, #36395, #36392, #36464, #36504, #36495, #36492).</p>
+<h2 id="more-changes" tabindex="-1">More changes <a class="header-anchor" href="#more-changes">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We made lots of progress on web API features:</p>
+<ul>
+<li>we implemented <strong>ReadableByteStreamController and ReadableStream.pipeTo</strong> (@Taym95, @gterzian, #35410, #35650)</li>
+<li>the <strong>nonce attribute</strong> is used in Content Security Policy checks (@simonwuelker, #35876)</li>
+<li>we removed some cases where <strong>custom element callbacks fired incorrectly</strong> (@xiaochengh, #35960, #35883)</li>
+<li>added <strong>partial support for InterSectionObserver</strong> (@stevennovaryo, #35551)</li>
+<li><strong>touchmove events</strong> are more reliable (@kongbai1996, #36218 #36200) and support the <code>cancelable</code> property (@kongbai1996, #35713)</li>
+<li>Notifications fetch <strong>associated image resources</strong> (@pewsheen, #35878)</li>
+<li><code>ResizeObserver</code> callbacks are only invoked <strong>when elements change size</strong> (@simonwuelker, #36226)</li>
+<li><strong>Request objects with FormData bodies</strong> use the correct <code>Content-Type</code> (@andreubotella, #36194)</li>
+<li>Text response bodies containing a BOM consume it (@andreubotella, #36192)</li>
+<li>We have begun <strong>implementing the URLPattern API</strong> (@simonwuelker, #36144)</li>
+<li>Backspace <strong>no longer removes entire lines</strong> in <code>&lt;textarea&gt;</code> (@elomscansio, @jdm, #36112)</li>
+<li><strong>passive event listeners</strong> can be created (@shanehandley, #35877)</li>
+<li>cancelled enqueued animation frame callbacks <strong>no longer run</strong> (@xiaochengh, #35849)</li>
+<li>scripts are <strong>no longer executed</strong> in documents that should disable scripting (@simonwuelker, #35871)</li>
+<li>file inputs <strong>show the selected file</strong> (@dklassic, #35789)</li>
+<li><strong>removing an event listener</strong> that has not run prevents it from running (@tharkum, #36163)</li>
+<li>members of radio input groups <strong>apply validity constraints</strong> more consistently (@jerensl, @elomscansio, @Barry-dE, #36197, #36090, #36103)</li>
+<li>indexing properties with <strong>values near 2^32</strong> resolves correctly (@reesmichael1, #36136)</li>
+<li><strong>history.replaceState()</strong> can be called from file:// documents (@kkoyung, #35864)</li>
+<li>script elements <strong>adopted between documents</strong> use the original document to determine when to execute (@xiaochengh, #35718)</li>
+</ul>
+<p>We’ve also fixed many layout bugs:</p>
+<ul>
+<li>incorrect <strong>fallback font</strong> caching (@mrobinson, #35705)</li>
+<li>improved <strong>overflow handling</strong> in some special cases (@yezhizhen, #35670)</li>
+<li><strong>addressed a crash</strong> caused by flex boxes and mixing fixed position and absolutely positioned descendants (@mrobinson, #36123)</li>
+<li><strong>table-layout: fixed</strong> is no longer ignored when <code>inline-size</code> is <code>auto</code> (@Loirooriol, #35882)</li>
+<li>margins of block-level box stretches are always zero, regardless of collapsing status (@Loirooriol, #35904)</li>
+<li>fixed the intrinsic block size of replaced elements with auto width (@Loirooriol, #35275)</li>
+<li>indefinite stretch contributes to intrinsic sizes (@Loirooriol, #36030)</li>
+<li>static positions include ancestor padding (@Loirooriol, #36051)</li>
+<li>table rows with a span of &gt;1 are sized appropriately (@PotatoCP, #36064)</li>
+<li>input element contents ignore any outer display value (@PotatoCP, #35908)</li>
+</ul>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
