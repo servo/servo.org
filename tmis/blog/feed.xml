@@ -374,14 +374,6 @@ Our new layout engine is improving significantly month over month!&lt;/p&gt;
 &lt;p&gt;We’ve added a &lt;strong&gt;&lt;code&gt;--enable-experimental-web-platform-features&lt;/code&gt; option&lt;/strong&gt; that enables all engine features, even those that may not be stable or complete.
 This works much like &lt;a href=&quot;https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/RuntimeEnabledFeatures.md;drc=a4e3e1f59b6f4bcf64806cf40c1acbb043b0bddc&quot;&gt;Chromium’s option with the same name&lt;/a&gt;, and it can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
 Servo now uses this option when running the Web Platform Tests (@Loirooriol, #36335, #36519, #36348, #36475), and the features enabled by this option are expected to change over time.&lt;/p&gt;
-&lt;h2 id=&quot;under-the-hood&quot; tabindex=&quot;-1&quot;&gt;Under the hood &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/05/09/this-month-in-servo/#under-the-hood&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We’ve finally finished &lt;strong&gt;splitting up our massive &lt;code&gt;script&lt;/code&gt; crate&lt;/strong&gt; (@jdm, #35988, #35987, #36107, #36216, #36220, #36095, #36323), which should &lt;strong&gt;cut incremental build times&lt;/strong&gt; for that crate &lt;strong&gt;by 60%&lt;/strong&gt;.
-This is something we’ve wanted to do for &lt;strong&gt;over eleven years&lt;/strong&gt; (@kmcallister, #1799)!&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;webgpu&lt;/code&gt; rebuilds are now faster&lt;/strong&gt; as well, with changes to that crate no longer requiring a &lt;code&gt;script&lt;/code&gt; rebuild (@mrobinson, #36332, #36320).&lt;/p&gt;
-&lt;p&gt;We added a memory usage view for Servo embedders: &lt;strong&gt;visit about:memory&lt;/strong&gt; for a breakdown of identified allocations (@webbeef, @jdm, #35728, #36557, #36558, #36556, #36581, #36553, #36664).&lt;/p&gt;
-&lt;figure&gt;&lt;a href=&quot;https://servo.org/tmis/img/blog/2025-04-servo-aboutmemory.png&quot;&gt;&lt;img alt=&quot;about:memory screenshot&quot; src=&quot;https://servo.org/tmis/img/blog/2025-04-servo-aboutmemory.png&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;servo-the-engine-(embedding)&quot; tabindex=&quot;-1&quot;&gt;Servo-the-engine (embedding) &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/05/09/this-month-in-servo/#servo-the-engine-(embedding)&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -399,6 +391,14 @@ Delegates will receive &lt;strong&gt;send error notifications&lt;/strong&gt; for
 &lt;p&gt;We fixed a bug causing &lt;strong&gt;flickering cursors&lt;/strong&gt; (@DevGev, #35934), and now &lt;strong&gt;create the config directory&lt;/strong&gt; if it does not exist (@yezhizhen, #35761).
 We also fixed a number of bugs in the WebDriver server related to clicking on elements, opening and closing windows, and returning references to exotic objects (@jdm, #35737).&lt;/p&gt;
 &lt;p&gt;Finally, we made progress towards a per-webview renderer model (@mrobinson, @delan, #35701, #35716).&lt;/p&gt;
+&lt;h2 id=&quot;under-the-hood&quot; tabindex=&quot;-1&quot;&gt;Under the hood &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/05/09/this-month-in-servo/#under-the-hood&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We’ve finally finished &lt;strong&gt;splitting up our massive &lt;code&gt;script&lt;/code&gt; crate&lt;/strong&gt; (@jdm, #35988, #35987, #36107, #36216, #36220, #36095, #36323), which should &lt;strong&gt;cut incremental build times&lt;/strong&gt; for that crate &lt;strong&gt;by 60%&lt;/strong&gt;.
+This is something we’ve wanted to do for &lt;strong&gt;over eleven years&lt;/strong&gt; (@kmcallister, #1799)!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;webgpu&lt;/code&gt; rebuilds are now faster&lt;/strong&gt; as well, with changes to that crate no longer requiring a &lt;code&gt;script&lt;/code&gt; rebuild (@mrobinson, #36332, #36320).&lt;/p&gt;
+&lt;p&gt;We added a memory usage view for Servo embedders: &lt;strong&gt;visit about:memory&lt;/strong&gt; for a breakdown of identified allocations (@webbeef, @jdm, #35728, #36557, #36558, #36556, #36581, #36553, #36664).&lt;/p&gt;
+&lt;figure&gt;&lt;a href=&quot;https://servo.org/tmis/img/blog/2025-04-servo-aboutmemory.png&quot;&gt;&lt;img alt=&quot;about:memory screenshot&quot; src=&quot;https://servo.org/tmis/img/blog/2025-04-servo-aboutmemory.png&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;perf-and-stability&quot; tabindex=&quot;-1&quot;&gt;Perf and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/tmis/blog/2025/05/09/this-month-in-servo/#perf-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
