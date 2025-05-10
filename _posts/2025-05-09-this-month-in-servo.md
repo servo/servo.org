@@ -383,6 +383,16 @@ We’ve added a **`--enable-experimental-web-platform-features` option** that en
 This works much like [Chromium’s option with the same name](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/RuntimeEnabledFeatures.md;drc=a4e3e1f59b6f4bcf64806cf40c1acbb043b0bddc), and it can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
 Servo now uses this option when running the Web Platform Tests (@Loirooriol, #36335, #36519, #36348, #36475), and the features enabled by this option are expected to change over time.
 
+## Servo-the-browser (servoshell)
+
+Our developer tools integration **supports iframes** (@simonwuelker, #35874), shows **computed display values** when inspecting elements (@stephenmuss, #35870), and supports **multiple tabs** open in the servoshell browser (@atbrakhi, #35884).
+To use the developer tools, we now **require Firefox 133 or newer** (@atbrakhi, #35792).
+
+Dialogs support **keyboard interaction** to close and cancel them (@chickenleaf, #3567), and the URL bar accepts any **domain-like input** (@kafji, #35756).
+We also enabled **sRGB colorspaces** on macOS for better colour fidelity (@IsaacMarovitz, #35683).
+Using the `--userscripts` argument without providing a path **defaults to ./resources/user-agent-js/**.
+Finally, we **renamed the OpenHarmony app bundle** (@jschwe, #35790).
+
 ## Servo-the-engine (embedding)
 
 We’ve landed some big changes to our webview API:

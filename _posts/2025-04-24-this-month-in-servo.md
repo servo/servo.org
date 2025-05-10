@@ -72,8 +72,8 @@ This means Servo's flexbox layout now has full support for sizing keywords!~~
 * ~~**history.replaceState()** can be called from file:// documents (@kkoyung, #35864)~~
 * ~~script elements **adopted between documents** use the original document to determine when to execute (@xiaochengh, #35718)~~
 
-Our developer tools integration **supports iframes** (@simonwuelker, #35874), shows **computed display values** when inspecting elements (@stephenmuss, #35870), and supports **multiple tabs** open in the servoshell browser (@atbrakhi, #35884).
-To use the developer tools, we now **require Firefox 133 or newer** (@atbrakhi, #35792).
+~~Our developer tools integration **supports iframes** (@simonwuelker, #35874), shows **computed display values** when inspecting elements (@stephenmuss, #35870), and supports **multiple tabs** open in the servoshell browser (@atbrakhi, #35884).
+To use the developer tools, we now **require Firefox 133 or newer** (@atbrakhi, #35792).~~
 
 **Stylo** has been upgraded to 2025-03-15 (@nicoburns, @Loirooriol, #35782, #35925, #35990), and we upgraded to the **2024 Rust edition** (@simonwuelker, #35755).
 ~~We also are nearly finished **splitting up our massive `script` crate** (@jdm, #35988, #35987, #36107, #36216, #36220, #36095), which will eventually make Servo faster to rebuild.~~
@@ -87,10 +87,10 @@ This can be useful when a page is not functioning correctly, since it may allow 
 The features enabled by this flag are expected to change over time as new web platform features are implemented in Servo.~~
 
 ~~We fixed a crash when **resizing the browsing area** too small (@sebsebmc, #35967).~~
-Dialogs support **keyboard interaction** to close and cancel them (@chickenleaf, #3567), and the URL bar accepts any **domain-like input** (@kafji, #35756).
+~~Dialogs support **keyboard interaction** to close and cancel them (@chickenleaf, #3567), and the URL bar accepts any **domain-like input** (@kafji, #35756).
 We also enabled **sRGB colorspaces** on macOS for better colour fidelity (@IsaacMarovitz, #35683).
 Using the `--userscripts` argument without providing a path **defaults to ./resources/user-agent-js/**.
-Finally, we **renamed the OpenHarmony app bundle** (@jschwe, #35790).
+Finally, we **renamed the OpenHarmony app bundle** (@jschwe, #35790).~~
 
 ## ~~Servo-the-engine (embedding)~~
 
