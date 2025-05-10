@@ -215,23 +215,7 @@ All WPT tests (4.6pp to 87.4%)
     - https://github.com/servo/servo/pull/36413	(@yezhizhen, #36413)	Move click event trigger from embedding layer to `ScriptThread` (#36413)
       embedding; reworking input for click events
 - DONE forms
-- gc
-    - https://github.com/servo/servo/pull/36375	(@yerke, #36375)	Add CanGc as arguments in methods in devtools.rs, CharacterData, CSSStyleRule, CSSStyleSheet (#36375)
-      gc
-    - https://github.com/servo/servo/pull/36371	(@yerke, #36371)	Add CanGc as arguments in methods in Attr and Node (#36371)
-      gc
-    - https://github.com/servo/servo/pull/36395	(@yerke, #36395)	add CanGc as argument to methods in DissimilarOriginWindow, DocumentFragment, DocumentType, DOMRect, DOMRectReadOnly, DOMStringMap (#36395)
-      gc
-    - https://github.com/servo/servo/pull/36392	(@yerke, #36392)	refactor: add CanGc as argument to methods in Document (#36392)
-      gc
-    - https://github.com/servo/servo/pull/36464	(@yerke, #36464)	add CanGc as argument to methods in Element (#36464)
-      gc
-    - https://github.com/servo/servo/pull/36504	(@yerke, #36504)	add CanGc as argument to methods in HTMLInputElement, HTMLLinkElement (#36504)
-      gc
-    - https://github.com/servo/servo/pull/36495	(@yerke, #36495)	add CanGc as argument to methods in HTMLCollection, HTMLDataListElement, HTMLDialogElement, HTMLElement, HTMLFieldSetElement, HTMLFormControlsCollection, HTMLFormElement, HTMLIFrameElement (#36495)
-      gc
-    - https://github.com/servo/servo/pull/36492	(@yerke, #36492)	add CanGc as argument to methods in ElementInternals, GlobalScope, HTMLAnchorElement, HTMLAreaElement, HTMLCanvasElement (#36492)
-      gc
+- DONE gc
 - DONE html
 - incremental
     - https://github.com/servo/servo/pull/36404	(@mrobinson, @Loirooriol, #36404)	layout: Enable using cached fragments when there is a BoxTree update point (#36404)
@@ -468,8 +452,9 @@ We also removed a source of **canvas rendering latency** (@sagudev, #35719), and
 We improved performance of block level layout by **reducing allocations** (@jschwe, #35781), and reduced the **latency of touch events** when they are non-cancelable (@kongbai1996, #35785).
 
 We also fixed crashes involving **multiple touchmove events** (@kongbai1996, @jschwe, #35763), and **focusing iframes** (@leftmostcat, #35742).
-The project to decrease the risk of [intermittent GC-related crashes](https://github.com/servo/servo/issues/33140) continues to make progress (@jdm, @Arya-A-Nair, @Dericko681, #35753, #36014, #36043, #36156, #36116, #36180, #36111).
 Additionally, we **removed undefined behaviour** from the Rust bindings to the SpiderMonkey engine (@gmorenz, #35892, #36160, #36161, #36158).
+
+The project to decrease the risk of [intermittent GC-related crashes](https://github.com/servo/servo/issues/33140) continues to make progress (@jdm, @Arya-A-Nair, @Dericko681, @yerke, #35753, #36014, #36043, #36156, #36116, #36180, #36111, #36375, #36371, #36395, #36392, #36464, #36504, #36495, #36492).
 
 ## Donations
 
