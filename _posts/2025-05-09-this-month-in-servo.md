@@ -72,7 +72,7 @@ Servo now uses this option when running the Web Platform Tests ([@Loirooriol](ht
 We’ve also landed the beginnings of a **Sources panel** ([@delan](https://github.com/delan), [@atbrakhi](https://github.com/atbrakhi), [#36164](https://github.com/servo/servo/pull/36164), [#35971](https://github.com/servo/servo/pull/35971), [#36631](https://github.com/servo/servo/pull/36631), [#36632](https://github.com/servo/servo/pull/36632), [#36667](https://github.com/servo/servo/pull/36667)).
 To use devtools, we now **require Firefox 133 or newer** ([@atbrakhi](https://github.com/atbrakhi), [#35792](https://github.com/servo/servo/pull/35792)).
 
-Dialogs support **keyboard interaction** to close and cancel them ([@chickenleaf](https://github.com/chickenleaf), [#3567](https://github.com/servo/servo/pull/3567)), and the URL bar accepts any **domain-like input** ([@kafji](https://github.com/kafji), [#35756](https://github.com/servo/servo/pull/35756)).
+Dialogs support **keyboard interaction** to close and cancel them ([@chickenleaf](https://github.com/chickenleaf), [#35673](https://github.com/servo/servo/pull/35673)), and the URL bar accepts any **domain-like input** ([@kafji](https://github.com/kafji), [#35756](https://github.com/servo/servo/pull/35756)).
 We’ve also enabled **sRGB colorspaces** on macOS for better colour fidelity ([@IsaacMarovitz](https://github.com/IsaacMarovitz), [#35683](https://github.com/servo/servo/pull/35683)).
 Using the `--userscripts` option without providing a path **defaults to `resources/user-agent-js`**.
 Finally, we’ve **renamed the OpenHarmony app bundle** ([@jschwe](https://github.com/jschwe), [#35790](https://github.com/servo/servo/pull/35790)).
