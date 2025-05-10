@@ -13,11 +13,11 @@ Last month, we proposed that we would change our [AI contributions policy](https
 We will **keep the AI contributions ban in place**, and any future proposals regarding this policy will be discussed together, as a community.
 
 At the same time, we have other big news!
-Complex sites such as **GMail** and **Google Chat** are **now usable in Servo**, with some caveats.
+Complex sites such as **Gmail** and **Google Chat** are **now usable in Servo**, with some caveats.
 This milestone is only possible through the continued hard work of many Servo contributors across the engine, and we're thankful for all of the efforts to reach this point.
 
 <figure><a href="{{ '/img/blog/2025-04-servo-gchat.png' | url }}"><img alt="Google Chat rendering in Servo" src="{{ '/img/blog/2025-04-servo-gchat.png' | url }}"></a></figure>
-<figure><a href="{{ '/img/blog/2025-04-servo-gmail.png' | url }}"><img alt="GMail rendering in Servo" src="{{ '/img/blog/2025-04-servo-gmail.png' | url }}"></a></figure>
+<figure><a href="{{ '/img/blog/2025-04-servo-gmail.png' | url }}"><img alt="Gmail rendering in Servo" src="{{ '/img/blog/2025-04-servo-gmail.png' | url }}"></a></figure>
 
 <aside class=_note>
 
