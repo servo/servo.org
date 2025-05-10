@@ -420,12 +420,48 @@ Incremental layout will allow Servo to respond to page updates and layout querie
 
 The `OffscreenRenderingContext` is **no longer double buffered**, which can improve rendering performance in embeddings that rely on it.
 We also removed a source of **canvas rendering latency** (@sagudev, #35719), and fixed performance cliffs related to the Shadow DOM (@simonwuelker, #35802, #35725).
-We improved performance of block level layout by **reducing allocations** (@jschwe, #35781), and reduced the **latency of touch events** when they are non-cancelable (@kongbai1996, #35785).
+We improved layout performance by **reducing allocations** (@jschwe, #35781) and **caching layout results** (@Loirooriol, @mrobinson, #36082), and reduced the **latency of touch events** when they are non-cancelable (@kongbai1996, #35785).
 
 We also fixed crashes involving **touch events** (@kongbai1996, @jschwe, #35763, #36531, #36229), **focusing iframes** (@leftmostcat, #35742), **service workers** (@jdm, #36256), **streams** (@Taym95, #36566), **Location** (@jdm, #36494), **&lt;canvas>** (@tharkum, @simonwuelker, #36569, #36705), **&lt;input>** (@dklassic, #36461), **‘min-content’** and **‘max-content’** (@Loirooriol, #36518, #36571), global objects (@jdm, #36491), and `--pref shell_background_color_rgba` (@boluochoufeng, #35865).
 Additionally, we **removed undefined behaviour** from the Rust bindings to the SpiderMonkey engine (@gmorenz, #35892, #36160, #36161, #36158).
 
 The project to decrease the risk of [intermittent GC-related crashes](https://github.com/servo/servo/issues/33140) continues to make progress (@jdm, @Arya-A-Nair, @Dericko681, @yerke, #35753, #36014, #36043, #36156, #36116, #36180, #36111, #36375, #36371, #36395, #36392, #36464, #36504, #36495, #36492).
+
+## More changes
+
+We made lots of progress on web API features:
+* we implemented **ReadableByteStreamController and ReadableStream.pipeTo** (@Taym95, @gterzian, #35410, #35650)
+* the **nonce attribute** is used in Content Security Policy checks (@simonwuelker, #35876)
+* we removed some cases where **custom element callbacks fired incorrectly** (@xiaochengh, #35960, #35883)
+* added **partial support for InterSectionObserver** (@stevennovaryo, #35551)
+* **touchmove events** are more reliable (@kongbai1996, #36218 #36200) and support the `cancelable` property (@kongbai1996, #35713)
+* Notifications fetch **associated image resources** (@pewsheen, #35878)
+* `ResizeObserver` callbacks are only invoked **when elements change size** (@simonwuelker, #36226)
+* **Request objects with FormData bodies** use the correct `Content-Type` (@andreubotella, #36194)
+* Text response bodies containing a BOM consume it (@andreubotella, #36192)
+* We have begun **implementing the URLPattern API** (@simonwuelker, #36144)
+* Backspace **no longer removes entire lines** in `<textarea>` (@elomscansio, @jdm, #36112)
+* **passive event listeners** can be created (@shanehandley, #35877)
+* cancelled enqueued animation frame callbacks **no longer run** (@xiaochengh, #35849)
+* scripts are **no longer executed** in documents that should disable scripting (@simonwuelker, #35871)
+* file inputs **show the selected file** (@dklassic, #35789)
+* **removing an event listener** that has not run prevents it from running (@tharkum, #36163)
+* members of radio input groups **apply validity constraints** more consistently (@jerensl, @elomscansio, @Barry-dE, #36197, #36090, #36103)
+* indexing properties with **values near 2^32** resolves correctly (@reesmichael1, #36136)
+* **history.replaceState()** can be called from file:// documents (@kkoyung, #35864)
+* script elements **adopted between documents** use the original document to determine when to execute (@xiaochengh, #35718)
+
+We’ve also fixed many layout bugs:
+* incorrect **fallback font** caching (@mrobinson, #35705)
+* improved **overflow handling** in some special cases (@yezhizhen, #35670)
+* **addressed a crash** caused by flex boxes and mixing fixed position and absolutely positioned descendants (@mrobinson, #36123)
+* **table-layout: fixed** is no longer ignored when `inline-size` is `auto` (@Loirooriol, #35882)
+* margins of block-level box stretches are always zero, regardless of collapsing status (@Loirooriol, #35904)
+* fixed the intrinsic block size of replaced elements with auto width (@Loirooriol, #35275)
+* indefinite stretch contributes to intrinsic sizes (@Loirooriol, #36030)
+* static positions include ancestor padding (@Loirooriol, #36051)
+* table rows with a span of >1 are sized appropriately (@PotatoCP, #36064)
+* input element contents ignore any outer display value (@PotatoCP, #35908)
 
 ## Donations
 
