@@ -411,38 +411,38 @@ All WPT tests (4.6pp to 87.4%)
       dev; fixes rust-analyzer in script
 - DONE devtools
 - DONE editing
-- embedding
-    - https://github.com/servo/servo/pull/36276	(@mrobinson, #36276)	libservo: Remove a couple `EmbedderMethods` (#36276)
+- DONE? embedding
+    - DONE https://github.com/servo/servo/pull/36276	(@mrobinson, #36276)	libservo: Remove a couple `EmbedderMethods` (#36276)
       embedding
-    - https://github.com/servo/servo/pull/36223	(@mrobinson, #36223)	libservo: Start moving `WindowMethods` to `WebViewDelegate` (#36223)
+    - DONE https://github.com/servo/servo/pull/36223	(@mrobinson, #36223)	libservo: Start moving `WindowMethods` to `WebViewDelegate` (#36223)
       embedding
-    - https://github.com/servo/servo/pull/36312	(@mrobinson, #36312)	constellation: Stop assuming that the viewport is shared by all WebViews (#36312)
+    - DONE https://github.com/servo/servo/pull/36312	(@mrobinson, #36312)	constellation: Stop assuming that the viewport is shared by all WebViews (#36312)
       embedding; per-webview dpi and zoom
-    - https://github.com/servo/servo/pull/36400	(@mrobinson, #36400)	libservo: Move animation tracking from `WindowMethods` to delegates (#36400)
+    - DONE https://github.com/servo/servo/pull/36400	(@mrobinson, #36400)	libservo: Move animation tracking from `WindowMethods` to delegates (#36400)
       embedding
-    - https://github.com/servo/servo/pull/36420	(@mrobinson, #36420)	libservo: Move `EventLooperWaker` from `webxr_traits` to `embedder_traits` (#36420)
+    - SKIP? https://github.com/servo/servo/pull/36420	(@mrobinson, #36420)	libservo: Move `EventLooperWaker` from `webxr_traits` to `embedder_traits` (#36420)
       embedding
-    - https://github.com/servo/servo/pull/36443	(@mrobinson, #36443)	compositor: Unify the cross process and in-process API (#36443)
+    - SKIP? https://github.com/servo/servo/pull/36443	(@mrobinson, #36443)	compositor: Unify the cross process and in-process API (#36443)
       embedding; working towards more robust embedding that can destroy and recreate servo instances
-    - https://github.com/servo/servo/pull/36484	(@mrobinson, #36484)	compositing: Send `CompositorDisplayListInfo` as bytes to compositor (#36484)
+    - SKIP? https://github.com/servo/servo/pull/36484	(@mrobinson, #36484)	compositing: Send `CompositorDisplayListInfo` as bytes to compositor (#36484)
       embedding; related to unified compositor
-    - https://github.com/servo/servo/pull/36483	(@mrobinson, #36483)	libservo: Create a `WebViewBuilder` class to construct `WebView`s (#36483)
+    - DONE https://github.com/servo/servo/pull/36483	(@mrobinson, #36483)	libservo: Create a `WebViewBuilder` class to construct `WebView`s (#36483)
       embedding
-    - https://github.com/servo/servo/pull/36440	(@mrobinson, #36440)	libservo: Add a very simple `libservo` API test (#36440)
+    - SKIP? https://github.com/servo/servo/pull/36440	(@mrobinson, #36440)	libservo: Add a very simple `libservo` API test (#36440)
       embedding
-    - https://github.com/servo/servo/pull/36419	(@mrobinson, @shubhamg13, #36419)	libservo: Make zooming and HiDPI scaling work per-`WebView` (#36419)
+    - DONE https://github.com/servo/servo/pull/36419	(@mrobinson, @shubhamg13, #36419)	libservo: Make zooming and HiDPI scaling work per-`WebView` (#36419)
       embedding; per-webview dpi and zoom
     - -https://github.com/servo/servo/pull/36485	(@mrobinson, #36485)	libservo: Remove the unused `multiview` feature (#36485)
       embedding; multiview
-    - https://github.com/servo/servo/pull/36543	(@mrobinson, #36543)	compositor: Unify the cross process and in-process API (#36543)
+    - SKIP? https://github.com/servo/servo/pull/36543	(@mrobinson, #36543)	compositor: Unify the cross process and in-process API (#36543)
       embedding; related to unified compositor
-    - https://github.com/servo/servo/pull/36533	(@mrobinson, #36533)	Revert "compositor: Unify the cross process and in-process API (#36443)" (#36533)
+    - SKIP? https://github.com/servo/servo/pull/36533	(@mrobinson, #36533)	Revert "compositor: Unify the cross process and in-process API (#36443)" (#36533)
       embedding; related to unified compositor
-    - https://github.com/servo/servo/pull/36549	(@mrobinson, #36549)	libservo: Expose a `ServoBuilder` (#36549)
+    - DONE https://github.com/servo/servo/pull/36549	(@mrobinson, #36549)	libservo: Expose a `ServoBuilder` (#36549)
       embedding
-    - https://github.com/servo/servo/pull/36532	(@mrobinson, #36532)	libservo: Allow running more than one Servo test in a run (#36532)
+    - SKIP? https://github.com/servo/servo/pull/36532	(@mrobinson, #36532)	libservo: Allow running more than one Servo test in a run (#36532)
       embedding; testing
-    - https://github.com/servo/servo/pull/36413	(@yezhizhen, #36413)	Move click event trigger from embedding layer to `ScriptThread` (#36413)
+    - DONE https://github.com/servo/servo/pull/36413	(@yezhizhen, #36413)	Move click event trigger from embedding layer to `ScriptThread` (#36413)
       embedding; reworking input for click events
 - DONE forms
 - DONE gc
@@ -637,6 +637,14 @@ This is something we’ve wanted to do for <strong>over eleven years</strong> (@
 <h2 id="servo-the-engine-(embedding)" tabindex="-1">Servo-the-engine (embedding) <a class="header-anchor" href="#servo-the-engine-(embedding)">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>We’ve landed some big changes to our webview API:</p>
+<ul>
+<li><strong>pinch zoom</strong>, <strong>page zoom</strong>, and <strong>HiDPI scaling</strong> are now handled independently <strong>for each webview</strong> (@mrobinson, @shubhamg13, #36419, #36312)</li>
+<li><strong>mouse click events</strong> no longer need to be generated by the embedder, only mouse button down and up events (@yezhizhen, #36413)</li>
+<li>webviews are now created with <strong>WebViewBuilder</strong> (@mrobinson, #36483)</li>
+<li><strong>EmbedderMethods</strong> is now <strong>ServoBuilder</strong> (@mrobinson, #36276, #36549)</li>
+<li><strong>WindowMethods</strong> have moved to <strong>WebViewDelegate</strong> and <strong>ServoDelegate</strong> (@mrobinson, #36223, #36400)</li>
+</ul>
 <p>Embedders can now <strong>inject userscript sources</strong> into all webviews (@Legend-Master, #35388).
 Links can be <strong>opened in a new tab</strong> by pressing the ctrl/meta modifier (@webbeef, @mrobinson, #35017).
 Delegates will receive <strong>send error notifications</strong> for requests (@delan, #35668).</p>
