@@ -69,8 +69,8 @@ Servo now uses this option when running the Web Platform Tests ([@Loirooriol](ht
 
 ## Servo-the-browser (servoshell)
 
-Our developer tools integration **supports iframes** ([@simonwuelker](https://github.com/simonwuelker), [#35874](https://github.com/servo/servo/pull/35874)), shows **computed display values** when inspecting elements ([@stephenmuss](https://github.com/stephenmuss), [#35870](https://github.com/servo/servo/pull/35870)), and supports **multiple tabs** open in the servoshell browser ([@atbrakhi](https://github.com/atbrakhi), [#35884](https://github.com/servo/servo/pull/35884)).
-To use the developer tools, we now **require Firefox 133 or newer** ([@atbrakhi](https://github.com/atbrakhi), [#35792](https://github.com/servo/servo/pull/35792)).
+[Our devtools integration](https://book.servo.org/hacking/using-devtools.html) now **supports iframes** ([@simonwuelker](https://github.com/simonwuelker), [#35874](https://github.com/servo/servo/pull/35874)), shows **computed display values** when inspecting elements ([@stephenmuss](https://github.com/stephenmuss), [#35870](https://github.com/servo/servo/pull/35870)), and supports **multiple tabs** open in the servoshell browser ([@atbrakhi](https://github.com/atbrakhi), [#35884](https://github.com/servo/servo/pull/35884)).
+To use devtools, we now **require Firefox 133 or newer** ([@atbrakhi](https://github.com/atbrakhi), [#35792](https://github.com/servo/servo/pull/35792)).
 
 Dialogs support **keyboard interaction** to close and cancel them ([@chickenleaf](https://github.com/chickenleaf), [#3567](https://github.com/servo/servo/pull/3567)), and the URL bar accepts any **domain-like input** ([@kafji](https://github.com/kafji), [#35756](https://github.com/servo/servo/pull/35756)).
 We also enabled **sRGB colorspaces** on macOS for better colour fidelity ([@IsaacMarovitz](https://github.com/IsaacMarovitz), [#35683](https://github.com/servo/servo/pull/35683)).
