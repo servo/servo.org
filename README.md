@@ -34,6 +34,8 @@ To copy the output to your clipboard for a specific calendar month only:
 $ tools/list-commits-by-nightly.sh ~/code/servo 2>&1 | tee /dev/stderr | sed '/^>>> 2025-01-/,/^>>> 2025-02-/!d' | xclip -sel clip
 ```
 
+**NOTE:** this will display the squash commit message of each commit, which has historically been less useful than the pull request description. To display pull request descriptions instead, pass in a pulls.json as documented in [§ Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates).
+
 ## How to list this year’s pull request contributors
 
 ```sh
@@ -58,51 +60,46 @@ $ > tools/pull-requests.json tools/list-pull-requests.sh servo/servo 2023-03-16 
 
 ```js
 ((data, ...dates) => {
-    const stride = data.area_keys.length;
+    const focusAreaCount = data.focus_areas.length;
     const rows = dates.map(expectedDate => data.scores.find(([date]) => date == expectedDate));
     rows.forEach((row, i) => {
+        console.log(i, row);
         if (row == null) throw `no results for ${dates[i]}!`;
-        if (row.length != 3 + stride + 2 + stride) throw "schema change? bad length";
+        if (row.length != 3 + focusAreaCount) throw "schema change? bad length";
         if (row[0] != dates[i]) throw "unreachable! incorrect date in [0]";
         if (!/^[0-9a-f]{9}$/.test(row[1])) throw "schema change? expected commit hash in [1]";
-        if (!/^0[.]0[.]1-[0-9a-f]{7}$/.test(row[2])) throw "schema change? expected version in [2]";
-        if (!/^[0-9a-f]{9}$/.test(row[3+stride])) throw "schema change? expected commit hash in [3+stride]";
-        if (!/^0[.]0[.]1-[0-9a-f]{7}$/.test(row[4+stride])) throw "schema change? expected version in [4+stride]";
+        if (!/^0[.]0[.]1-[0-9a-f]{7,9}$/.test(row[2])) throw "schema change? expected version in [2]";
     });
-    const areas = data.area_keys.map((key, i) => ({key, results: rows.map((row, j) => ({
+    const areas = data.focus_areas.map((focusAreaName, i) => ({focusAreaName, results: rows.map((row, j) => ({
         date: dates[j],
-        legacy: row[3+i],
-        servo: row[5+stride+i],
+        score: row[3+i].total_score / row[3+i].total_tests,
+        subtests: row[3+i].total_subtests_passed / row[3+i].total_subtests,
     }))}));
     console.log(">>> areas", areas);
     const analysis = areas
-        .map(({key, results: [p, q]}) => ({
-            key,
-            regressionWas: p.legacy - p.servo,
-            regressionNow: q.legacy - q.servo,
-            legacyWas: p.legacy,
-            legacyNow: q.legacy,
-            servoWas: p.servo,
-            servoNow: q.servo,
+        .map(({focusAreaName, results: [p, q]}) => ({
+            focusAreaName,
+            scoreWas: p.score,
+            scoreNow: q.score,
+            subtestsWas: p.subtests,
+            subtestsNow: q.subtests,
         }))
-        .map(({key, regressionWas, regressionNow, legacyWas, legacyNow, servoWas, servoNow}) => ({
-            key, regressionWas, regressionNow, legacyWas, legacyNow, servoWas, servoNow,
-            legacyDelta: delta(legacyWas, legacyNow),
-            servoDelta: delta(servoWas, servoNow),
-            regressionDelta: delta(regressionWas, regressionNow),
+        .map(({focusAreaName, scoreWas, scoreNow, subtestsWas, subtestsNow}) => ({
+            focusAreaName, scoreWas, scoreNow, subtestsWas, subtestsNow,
+            scoreDelta: delta(scoreWas, scoreNow),
+            subtestsDelta: delta(subtestsWas, subtestsNow),
         }));
     console.log(">>> analysis", analysis);
-    const deltaAnalysisText = analysis
-        .sort((p,q) => q.servoDelta.pp - p.servoDelta.pp)
-        .map(({key, servoDelta, servoNow}) => `${key} (${servoDelta.pp.toFixed(1)}pp to ${(servoNow/10).toFixed(1)}%)\n`);
-    console.log(`>>> top deltas (servo, pp):\n${deltaAnalysisText.join("")}`);
-    const regressionAnalysisText = analysis
-        .filter(({regressionWas}) => regressionWas >= 0)
-        .sort((p,q) => p.regressionDelta.percent - q.regressionDelta.percent)
-        .map(({key, regressionDelta, regressionWas, regressionNow}) => `${key} (${regressionDelta.percent.toFixed(1)}% from ${(regressionWas/10).toFixed(1)}pp to ${(regressionNow/10).toFixed(1)}pp)\n`);
-    console.log(`>>> top cuts in legacy regression (%):\n${regressionAnalysisText.join("")}`);
-    function delta(p,q) { return {pp: (q-p)/10, percent: 100*(q-p)/p}; }
-})(await (await fetch("scores.json")).json(), fromDate, toDate)
+    const scoreAnalysisText = analysis
+        .sort((p,q) => q.scoreDelta.pp - p.scoreDelta.pp)
+        .map(({focusAreaName, scoreDelta, scoreNow}) => `${focusAreaName} (${scoreDelta.pp.toFixed(1)}pp to ${(scoreNow*100).toFixed(1)}%)\n`);
+    console.log(`>>> top deltas (score, pp):\n${scoreAnalysisText.join("")}`);
+    const subtestsAnalysisText = analysis
+        .sort((p,q) => q.subtestsDelta.pp - p.subtestsDelta.pp)
+        .map(({focusAreaName, subtestsDelta, subtestsNow}) => `${focusAreaName} (${subtestsDelta.pp.toFixed(1)}pp to ${(subtestsNow*100).toFixed(1)}%)\n`);
+    console.log(`>>> top deltas (subtests, pp):\n${subtestsAnalysisText.join("")}`);
+    function delta(p,q) { return {pp: (q-p)*100, percent: 100*(q-p)/p}; }
+})(await (await fetch("https://wpt.servo.org/scores.json")).json(), fromDate, toDate)
 ```
 
 ## How to analyse [wpt.fyi](https://wpt.fyi) pass rate improvements
@@ -347,7 +344,7 @@ Generally we want to include...
 And generally we want to exclude...
 
 - dependabot updates (“build(deps)”)
-- WPT imports (“Update web-platform-tests”)
+- WPT imports (“Update web-platform-tests” or “Sync WPT with upstream”)
 - lint and warning fixes
 - other CI changes
 - refactors (unless large-scale)
@@ -374,6 +371,8 @@ $ tools/list-commits-by-nightly.sh ~/code/servo tools/pulls-2025-01-2025-02.json
     - Add a line immediately below of the form `    one or more tags` (four spaces, then space-separated tags)
     - To write some notes or additional context, append `; your notes` to that new tags line
 - Generate the outline: `tools/generate-outline.sh commits.txt`
+
+**TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time. Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
 
 ## Hints for writing about changes
 

@@ -49,6 +49,6 @@ git -C "$1" log --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,va
         # Print the commit message body, with a hard wrap and an indent.
         # This doesn’t work too well, because our repo is configured to concatenate the PR commit
         # messages, which often contain a subject only, rather than using the PR description.
-        git -C "$1" log --pretty=$'tformat:%w(120,4,4)%b' | sed -E '/^ *$/d;/^    Signed-off-by: /d'
+        git -C "$1" log -n 1 --pretty=$'tformat:%w(120,4,4)%b' "$hash" | sed -E '/^ *$/d;/^    Signed-off-by: /d'
     fi
 done
