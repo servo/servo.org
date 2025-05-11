@@ -21,7 +21,7 @@ This milestone is only possible through the continued hard work of many Servo co
 
 <aside class=_note>
 
-**Caveats:** must run Servo with `--pref dom_abort_controller_enabled`. Accounts with 2FA enabled may not be able to log in yet.
+**Caveats:** must run Servo with `--enable-experimental-web-platform-features --pref dom_abort_controller_enabled`. Accounts with 2FA enabled may not be able to log in yet.
 </aside>
 
 Servo now supports single-valued **&lt;select> elements** ([@simonwuelker](https://github.com/simonwuelker), [#35684](https://github.com/servo/servo/pull/35684), [#36677](https://github.com/servo/servo/pull/36677)), disabling stylesheets with **&lt;link disabled>** ([@Loirooriol](https://github.com/Loirooriol), [#36446](https://github.com/servo/servo/pull/36446)), and the **Refresh** header in HTTP responses and &lt;meta> ([@sebsebmc](https://github.com/sebsebmc), [#36393](https://github.com/servo/servo/pull/36393)), plus several new CSS features:
