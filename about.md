@@ -23,6 +23,7 @@ Servo's roadmap is defined in the project wiki: <https://github.com/servo/servo/
 
 ## Presentations
 
+* [Servo - an embeddable web rendering engine](https://www.youtube.com/live/84bX1nPDBr4?si=Y7VXJeHtDP3tjie5&t=33761) by Josh Matthews (May 2025 at [RustWeek](https://rustweek.org/))
 * [Building a Web Rendering Engine in Rust](https://servo.org/slides/2025-03-31-open-harmony) by Rakhi Sharma (Mar 2025 at [OpenHarmony Technical Forum](https://www.meetup.com/openharmony-community/events/306394389/))
 * [Why Build a New Browser Engine in Rust?](https://www.youtube.com/watch?v=s0MIHKv45C0) by Martin Robinson (Jan 2025 at [Barcelona Free Software](https://meetu.ps/e/NKqfz/mXgxF/i))
 * [Servo: Building a Browser Rendering Engine in Rust](https://www.youtube.com/watch?v=fp5n7CSvALA) by Rakhi Sharma (Oct 2024 at [Ubuntu Summit](https://ubuntu.com/summit))
