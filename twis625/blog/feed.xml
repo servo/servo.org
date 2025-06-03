@@ -196,7 +196,259 @@ See you there!&lt;/p&gt;
     <link href="https://servo.org/twis625/blog/2025/05/03/this-month-in-servo/"/>
     <updated>2025-05-03T00:00:00Z</updated>
     <id>https://servo.org/twis625/blog/2025/05/03/this-month-in-servo/</id>
-    <content xml:lang="en" type="html">&lt;style&gt;
+    <content xml:lang="en" type="html">&lt;p&gt;Two big pieces of news for images in Servo this month:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;We can now display animated GIFs in all their animated glory (@rayguo17, #36286)!
+This work required careful architecting to integrate with existing animation mechanisms in the engine without incurring unnecessary CPU usage.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure&gt;&lt;a href=&quot;https://servo.org/twis625/img/blog/2025-06-servo-gif.gif&quot;&gt;&lt;img alt=&quot;Animated GIFs rendering in Servo&quot; src=&quot;https://servo.org/twis625/img/blog/2025-06-servo-gif.gif&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;We support loading SVG images as &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; element sources (@mukilan, @mrobinson, #36721).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure&gt;&lt;a href=&quot;https://servo.org/twis625/img/blog/2025-06-servo-svg.png&quot;&gt;&lt;img alt=&quot;SVG image rendering in Servo&quot; src=&quot;https://servo.org/twis625/img/blog/2025-06-servo-svg.png&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
+&lt;p&gt;We have also made significant progress on the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API&quot;&gt;Trusted Types API&lt;/a&gt;, going from 47% of tests passing to 58% over the course of May (@TimvdLippe, #36710, #36668, #36811, #36824, #36941, #36960).&lt;/p&gt;
+&lt;p&gt;Supporting this work on Trusted Types, our &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP&quot;&gt;Content Security Policy&lt;/a&gt; implementation has been steadily improving, now passing 59% of automated tests (@TimvdLippe, @jdm, #36709, #36710, #36832, #36860, #36887, #36923, #36963, #36962, #36961, #36965, #37020).&lt;/p&gt;
+&lt;!--
+- canvas
+    - https://github.com/servo/servo/pull/36783	(@sagudev, #36783)	Use backend trait with associated types for 2d canvas backends abstraction (#36783)
+      canvas
+    - https://github.com/servo/servo/pull/36790	(@sagudev, #36790)	canvas: Move `CompositionOrBlending` and `ellipse()` from `RaqoteBackend` to `Backend` (#36790)
+      canvas
+    - https://github.com/servo/servo/pull/36999	(@sagudev, #36999)	canvas: Move generic implementations into `GenericPathBuilder` trait (#36999)
+      canvas
+    - https://github.com/servo/servo/pull/37131	(@andrei.volykhin@gmail.com, #37131)	imagebitmap: Use snapshot::Snapshot as bitmap data (#37131)
+      canvas
+- devex
+    - https://github.com/servo/servo/pull/32836	(@jschwe, #32836)	bootstrap: Add `winget` fallback (#32836)
+      devex
+- devtools
+    - https://github.com/servo/servo/pull/36787	(@simonwuelker, #36787)	Send info about the `DocumentType` node to the devtools inspector  (#36787)
+      devtools
+    - https://github.com/servo/servo/pull/35822	(@simonwuelker, #35822)	devtools: Allow highlighting elements from the inspector (#35822)
+      devtools
+- dom
+    - https://github.com/servo/servo/pull/36776	(@simonwuelker, #36776)	Set cryptographic nonce metadata for module script fetch operations (#36776)
+      dom
+    - https://github.com/servo/servo/pull/36654	(@gterzian, #36654)	MessagePort: implement disentanglement (#36654)
+      dom
+    - https://github.com/servo/servo/pull/36240	(@TG199, #36240)	feat: implement ShadowRoot::setHTMLUnsafe (#36240)
+      dom
+    - https://github.com/servo/servo/pull/35994	(@JimmyDdotEXE, #35994)	Implement `document.scrollingElement` (#35994)
+      dom
+    - https://github.com/servo/servo/pull/36847	(@Taym95, #36847)	Avoid borrow panic when Path2D.addPath is called with self (#36847)
+      dom
+    - https://github.com/servo/servo/pull/36853	(@kungfukeith11@gmail.com, #36853)	script: Ensure `EventSource` interprets non-200 response codes as failure (#36853)
+      dom
+    - https://github.com/servo/servo/pull/36854	(@kungfukeith11@gmail.com, #36854)	script: Ensure `EventSource` field value is ignored if the null character exists in the field name (#36854)
+      dom
+    - https://github.com/servo/servo/pull/36836	(@glowe, @graham.lowe@gmail.com, #36836)	Remove unspecified early return in MessagePort::Close (#36836)
+      dom
+    - https://github.com/servo/servo/pull/36875	(@simonwuelker, #36875)	Serialize attribute nodes as the empty string (#36875)
+      dom
+    - https://github.com/servo/servo/pull/36826	(@simonwuelker, #36826)	Replace urlpattern implementation with `rust-urlpattern` crate (#36826)
+      dom
+    - https://github.com/servo/servo/pull/36866	(@simonwuelker, #36866)	Don&#39;t slice a sliced blob (#36866)
+      dom
+    - https://github.com/servo/servo/pull/36689	(@Gae24, #36689)	async clipboard: implement `readText` (#36689)
+      dom
+    - https://github.com/servo/servo/pull/36888	(@simonwuelker, #36888)	script: Serialize a custom element&#39;s &quot;is&quot; value as an attribute (#36888)
+      dom
+    - https://github.com/servo/servo/pull/36889	(@jdm, #36889)	Fix double borrow panic in Node.childNodes (#36889)
+      dom
+    - https://github.com/servo/servo/pull/36739	(@Taym95, @gterzian, #36739)	Script implement TransformStream and TransformStreamDefaultController (#36739)
+      dom
+    - https://github.com/servo/servo/pull/31398	(@Taym95, #31398)	WebIDL Fix ImageData constructor to take a Uint8ClampedArray instead of js_object (#31398)
+      dom
+    - https://github.com/servo/servo/pull/36894	(@kungfukeith11@gmail.com, #36894)	Update the list of global and window event handlers (#36894)
+      dom
+    - https://github.com/servo/servo/pull/36958	(@simonwuelker, #36958)	Update select shadow tree when contents of selected option change (#36958)
+      dom
+    - https://github.com/servo/servo/pull/36855	(@simonwuelker, #36855)	Don&#39;t attempt to resize Offscreencanvas without a rendering context (#36855)
+      dom
+    - https://github.com/servo/servo/pull/36905	(@Taym95, #36905)	Make transform stream transferrable (#36905)
+      dom
+    - https://github.com/servo/servo/pull/36975	(@andrei.volykhin@gmail.com, #36975)	svg: Add mock SVGImageElement interface (#36975)
+      dom
+    - https://github.com/servo/servo/pull/36992	(@simonwuelker, #36992)	Fully support `&lt;input type=color&gt;` (#36992)
+      dom
+    - https://github.com/servo/servo/pull/37043	(@simonwuelker, #37043)	Remove the `dom_shadowdom_enabled` preference (#37043)
+      dom
+    - https://github.com/servo/servo/pull/37039	(@simonwuelker, #37039)	Make `getAllTypes` unwrap IDL `record&lt;K, V&gt;` types (#37039)
+      dom
+    - https://github.com/servo/servo/pull/35748	(@yoseio, #35748)	script: Make `Blob.ArrayBuffer()` more specification-compliant (#35748)
+      dom
+    - https://github.com/servo/servo/pull/28321	(@ghostd, @mrobinson, #28321)	Use spec compliant content-type extraction in more places and enable a `&lt;stylesheet&gt;` quirk (#28321)
+      dom
+    - https://github.com/servo/servo/pull/36977	(@Taym95, #36977)	Stream implement pipeThrough (#36977)
+      dom
+    - https://github.com/servo/servo/pull/37073	(@arihant2math@gmail.com, #37073)	Return the proper texture format for GetPreferredCanvasFormat (#37073)
+      dom
+    - https://github.com/servo/servo/pull/36943	(@sebsebmc@gmail.com, #36943)	script: Refactor dom/headers to match spec better (#36943)
+      dom
+    - https://github.com/servo/servo/pull/37056	(@andrei.volykhin@gmail.com, #37056)	htmlmediaelement: Make dirty element on any intrinsic size changes (#37056)
+      dom
+    - https://github.com/servo/servo/pull/37101	(@andrei.volykhin@gmail.com, #37101)	imagebitmap: Make ImageBitmap serializable and transferable (#37101)
+      dom
+    - https://github.com/servo/servo/pull/37042	(@simonwuelker, #37042)	Allow `undefined` variants in IDL unions (#37042)
+      dom
+    - https://github.com/servo/servo/pull/37122	(@simonwuelker, #37122)	Don&#39;t set a prototype for unscopable objects (#37122)
+      dom
+    - https://github.com/servo/servo/pull/37119	(@simonwuelker, #37119)	Make unscopable objects writable and enumerable (#37119)
+      dom
+    - https://github.com/servo/servo/pull/37116	(@simonwuelker, #37116)	Unconditionally enable the URLPattern API (#37116)
+      dom
+    - https://github.com/servo/servo/pull/37044	(@simonwuelker, #37044)	Implement `URLPattern::{text, exec}` (#37044)
+      dom
+    - https://github.com/servo/servo/pull/37064	(@arihant2math@gmail.com, #37064)	script: Add support for polygons in `HtmlAreaElement::hit_test` (#37064)
+      dom
+    - https://github.com/servo/servo/pull/37126	(@simonwuelker, #37126)	Rename `Stylesheet::Type_` to `Stylesheet::Type` (#37126)
+      dom
+    - https://github.com/servo/servo/pull/37033	(@gterzian, @Taym95, #37033)	script: stub `AbortSignal` (#37033)
+      dom
+    - https://github.com/servo/servo/pull/37135	(@andrei.volykhin@gmail.com, #37135)	canvas: Add HTMLVideoElement to CanvasImageSource union type (#37135)
+      dom
+    - https://github.com/servo/servo/pull/37078	(@yezhizhen, #37078)	Let `input` JS event be dispatched by `keydown` instead of `keypress` (#37078)
+      dom
+    - https://github.com/servo/servo/pull/37065	(@stevennovaryo, #37065)	Implement Input `type=text` UA Shadow DOM (#37065)
+      dom
+- embedding
+    - https://github.com/servo/servo/pull/36803	(@webbeef, #36803)	Embed user agent stylesheets and media control resouces in libservo (#36803)
+      embedding
+    - https://github.com/servo/servo/pull/35720	(@Narfinger, @mrobinson, #35720)	libservo: Allow embedders to execute JavaScript scripts via the API (#35720)
+      embedding
+    - https://github.com/servo/servo/pull/37132	(@mrobinson, #37132)	constellation: Pass system theme to new Pipelines (#37132)
+      embedding
+- layout
+    - https://github.com/servo/servo/pull/36703	(@mrobinson, #36703)	script: Clamp table spans according to the HTML specification      (#36703)
+      layout
+    - https://github.com/servo/servo/pull/36795	(@mrobinson, #36795)	layout: Simplify `PositioningContext` by having it hold a single `Vec` (#36795)
+      layout
+    - https://github.com/servo/servo/pull/36749	(@Loirooriol, #36749)	layout: Let individual transform properties establish a stacking context (#36749)
+      layout
+    - https://github.com/servo/servo/pull/36876	(@mrobinson, @Loirooriol, #36876)	layout: Use `ServoLayoutNode` directly instead of a generic `impl` (#36876)
+      layout
+    - https://github.com/servo/servo/pull/36917	(@mrobinson, @Loirooriol, #36917)	layout: Resolve canvas background properties during painting (#36917)
+      layout
+    - https://github.com/servo/servo/pull/36978	(@mrobinson, @Loirooriol, #36978)	layout: Add a repaint-only incremental layout mode (#36978)
+      layout
+    - https://github.com/servo/servo/pull/36896	(@mrobinson, @Loirooriol, #36896)	layout: Share styles to inline box children via `SharedInlineStyles` (#36896)
+      layout
+    - https://github.com/servo/servo/pull/36993	(@stevennovaryo, @Loirooriol, #36993)	layout: Propagate specified info for flex item (#36993)
+      layout
+    - https://github.com/servo/servo/pull/36980	(@Loirooriol, #36980)	layout: Inform child layout about final block size (#36980)
+      layout
+    - https://github.com/servo/servo/pull/37024	(@Loirooriol, #37024)	layout: Fix `align-content` on stretched row flex containers (#37024)
+      layout
+    - https://github.com/servo/servo/pull/37029	(@mrobinson, #37029)	fonts: Fix calculation of font underline thickness on macOS (#37029)
+      layout
+    - https://github.com/servo/servo/pull/37004	(@mrobinson, #37004)	layout: Correct damage propagation and style repair for repaint-only layout (#37004)
+      layout
+    - https://github.com/servo/servo/pull/37047	(@mrobinson, @Loirooriol, #37047)	layout: Split stacking context and display list construction (#37047)
+      layout
+    - https://github.com/servo/servo/pull/37069	(@mrobinson, @Loirooriol, #37069)	layout: Move text decoration propagation to stacking context tree construction (#37069)
+      layout
+    - https://github.com/servo/servo/pull/37048	(@mrobinson, @Loirooriol, #37048)	layout: When there is no restyle damage, do not re-layout (#37048)
+      layout
+    - https://github.com/servo/servo/pull/37011	(@Loirooriol, #37011)	layout: Fix min-content inline size of multi-line row flex container (#37011)
+      layout
+    - https://github.com/servo/servo/pull/37079	(@mrobinson, #37079)	layout: Support `wavy` and `double` for `text-decoration-line` (#37079)
+      layout
+    - https://github.com/servo/servo/pull/37088	(@Loirooriol, @mrobinson, #37088)	Add another incremental layout that starts at stacking tree construction (#37088)
+      layout
+    - https://github.com/servo/servo/pull/37099	(@mrobinson, #37099)	layout: Regardless of restyle damage, always reflow when viewport changes (#37099)
+      layout
+    - https://github.com/servo/servo/pull/37097	(@mrobinson, #37097)	layout: Use the viewport size as the `background-attachment: fixed` positioning area (#37097)
+      layout
+    - https://github.com/servo/servo/pull/37147	(@Loirooriol, #37147)	layout: Fix logic for transforms with non-invertible matrix (#37147)
+      layout
+- ohos
+    - https://github.com/servo/servo/pull/36915	(@PartiallyUntyped, @jschwe, #36915)	[OH] Provide correct geometry offset and fix available screen dimensions (#36915)
+      ohos
+- profiling
+    - https://github.com/servo/servo/pull/36772	(@simonwuelker, #36772)	Include `ChildrenList::last_visited` in memory reports (#36772)
+      profiling
+    - https://github.com/servo/servo/pull/36834	(@jdm, #36834)	Various memory measurement improvements (#36834)
+      profiling
+- servoshell
+    - https://github.com/servo/servo/pull/36859	(@PartiallyUntyped, @mrobinson, #36859)	Fix missing user-agent from servo-shell (#36859)
+      servoshell
+    - https://github.com/servo/servo/pull/36867	(@jdm, #36867)	Remove service worker pref from experimental web features. (#36867)
+      servoshell
+    - https://github.com/servo/servo/pull/37128	(@Legend-Master, #37128)	servoshell: Ensure that the theme is applied properly on startup (#37128)
+      servoshell
+- stability
+    - https://github.com/servo/servo/pull/36808	(@mrobinson, #36808)	script: Unconditionally send exit message during pipeline shutdown (#36808)
+      stability
+    - https://github.com/servo/servo/pull/36869	(@jdm, #36869)	script_bindings: Check for null pointer before dereferencing proxy handler custom data (#36869)
+      stability
+    - https://github.com/servo/servo/pull/36956	(@webbeef, #36956)	Delete WR images when dropping the ImageCacheStore (#36956)
+      stability
+    - https://github.com/servo/servo/pull/36955	(@webbeef, #36955)	Prevent overflow in intersection observer area evaluation (#36955)
+      stability
+    - https://github.com/servo/servo/pull/36873	(@jschwe, #36873)	Extend --with-asan to support C/C++ code (#36873)
+      stability
+    - https://github.com/servo/servo/pull/36914	(@wusyong, @yuweiwu@YunoMacBook-Air.local, #36914)	fix: `ReadableStream::get_in_memory_bytes` too large (#36914)
+      stability
+    - https://github.com/servo/servo/pull/36957	(@yezhizhen, #36957)	Remove duplicate click event in `simulate_mouse_click` (#36957)
+      stability
+    - https://github.com/servo/servo/pull/37000	(@sebsebmc@gmail.com, #37000)	HSTS list memory reduction and fixes (#37000)
+      stability
+    - https://github.com/servo/servo/pull/36974	(@mrobinson, #36974)	compositor: Batch all pending scroll event updates into a single transaction (#36974)
+      stability
+    - https://github.com/servo/servo/pull/37034	(@jdm, #37034)	Don&#39;t build testbinding-related code by default (#37034)
+      stability
+    - https://github.com/servo/servo/pull/37015	(@sebsebmc@gmail.com, #37015)	Replace hsts preload list hashmap with an FST (#37015)
+      stability
+    - https://github.com/servo/servo/pull/37049	(@sebsebmc@gmail.com, #37049)	Add memory reporting for public suffix list (#37049)
+      stability
+    - https://github.com/servo/servo/pull/37058	(@simonwuelker, #37058)	Coalesce animated image frame data into a single shared memory region (#37058)
+      stability
+    - https://github.com/servo/servo/pull/37053	(@jdm, #37053)	net: Measure memory usage of storage thread. (#37053)
+      stability
+    - https://github.com/servo/servo/pull/37066	(@andrei.volykhin@gmail.com, #37066)	bump(deps): bump servo-media from eb96030 to 4931a4b (#37066)
+      stability
+    - https://github.com/servo/servo/pull/37120	(@jdm, #37120)	script: Return global objects for DOM objects in the relevant realm (#37120)
+      stability
+    - https://github.com/servo/servo/pull/37136	(@willypuzzle, #37136)	[#26488] Moved Droppable code into a separate struct for CanvasRenderingContext2D (#37136)
+      stability
+    - https://github.com/servo/servo/pull/37167	(@kkoyung, #37167)	Refactoring `HTMLOptionElement::Text` into iterative style (#37167)
+      stability
+    - https://github.com/servo/servo/pull/37182	(@mrobinson, #37182)	constellation: Wait for canvas thread to shut down before shutting down system font service (#37182)
+      stability
+- testing
+    - https://github.com/servo/servo/pull/36791	(@mrobinson, #36791)	libservo: Add a basic `WebView` API test (#36791)
+      testing
+    - https://github.com/servo/servo/pull/36878	(@Narfinger, #36878)	Added a new workflow that benchmarks simple startup and loading of servo.org on HarmonyOS. (#36878)
+      testing
+- upgrade
+    - https://github.com/servo/servo/pull/36770	(@mrobinson, #36770)	deps: Upgrade to latest version of our downstream WebRender fork (0.67) (#36770)
+      upgrade
+    - https://github.com/servo/servo/pull/36835	(@Loirooriol, #36835)	Upgrade Stylo to 2025-05-01 (#36835)
+      upgrade
+- webdriver
+    - https://github.com/servo/servo/pull/36871	(@longvatrong111, #36871)	Set proper button value in WebDriver - ElementClick command (#36871)
+      webdriver
+    - https://github.com/servo/servo/pull/36744	(@kenzieradityatirtarahardja18@gmail.com, @kenzieradityatirtarahardja.18@gmail.com, #36744)	Implement wheel action in webdriver (#36744)
+      webdriver
+    - https://github.com/servo/servo/pull/36673	(@jdm, #36673)	Improve some webdriver conformance tests results (#36673)
+      webdriver
+    - https://github.com/servo/servo/pull/36908	(@yezhizhen, #36908)	rework webdriver deserialization to avoid false-positive cycle error (#36908)
+      webdriver
+    - https://github.com/servo/servo/pull/36985	(@kenzieradityatirtarahardja18@gmail.com, @kenzieradityatirtarahardja.18@gmail.com, #36985)	Fix origin relative coordinate for wheel scroll and refactoring (#36985)
+      webdriver
+    - https://github.com/servo/servo/pull/37010	(@yezhizhen, #37010)	Fix `WebDriverSession::input_cancel_list` related logic (#37010)
+      webdriver
+    - https://github.com/servo/servo/pull/36932	(@longvatrong111, @mrobinson, #36932)	Synchronize `dispatch_actions` in WebDriver (#36932)
+      webdriver
+    - https://github.com/servo/servo/pull/37081	(@yezhizhen, #37081)	Remove accidentally re-added logic to `WebDriverSession::input_cancel_list` (#37081)
+      webdriver
+- webgl
+    - https://github.com/servo/servo/pull/36911	(@mrobinson, #36911)	webgl: Use `glow::Context::supported_extensions()` to implement `getSupportedExtensions()` (#36911)
+      webgl
+    - https://github.com/servo/servo/pull/36895	(@andrei.volykhin@gmail.com, #36895)	pixels: Actually write pixels in `MULTIPLY` `generic_transform_inplace` operations (#36895)
+      webgl
+--&gt;
+&lt;style&gt;
     ._correction {
         max-width: 33em;
         margin: 1em auto;
