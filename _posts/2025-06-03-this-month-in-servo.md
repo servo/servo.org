@@ -36,7 +36,7 @@ Additionally, Servo now supports:
 * `asyncClipboard.readText` (@Gae24, #36689)
 * `Stylesheet.type` (@simonwuelker, #37126)
 
-Additionally, HTMLVideoElement can be used as an image source for 2D canvas APIs (@tharkum, #37135), ImageBitmap objects can be serialized and transferred via `postMessage` (@tharkum, #37101), media elements redraw properly whenever their size changes (@tharkum, #37056), polygon image map areas are clickable (@arihant2math, #37064), `&lt;select>` elements are redrawn when their contents change (@simonwuelker, #36958), and `GPU.preferredCanvasFormat` returns platform-appropriate values (@arihant2math, #37073).
+Additionally, HTMLVideoElement can be used as an image source for 2D canvas APIs (@tharkum, #37135), ImageBitmap objects can be serialized and transferred via `postMessage` (@tharkum, #37101), media elements redraw properly whenever their size changes (@tharkum, #37056), polygon image map areas are clickable (@arihant2math, #37064), `<select>` elements are redrawn when their contents change (@simonwuelker, #36958), and `GPU.preferredCanvasFormat` returns platform-appropriate values (@arihant2math, #37073).
 
 We fixed a number of bugs where Servo's behaviour did not match relevant specifications:
 * `input` events are now fired following `keydown` events (@yezhizhen, #37078)
@@ -57,7 +57,7 @@ Embedders can now **evaluate JavaScript inside a given WebView** and receive res
 
 All embedders will receive default styling and interactivity for elements like inputs and media elements (@webbeef, #36803), which reduces the amount of configuration required when embedding the engine.
 
-Any provided system light/dark theme will be propagated to any document loaded inside of a WebView (@mrobinson, #37132).
+Any provided system light/dark theme will be propagated to all documents loaded inside of a WebView (@mrobinson, #37132).
 
 Servo's developer tools integration now highlights elements in the layout inspector (@simonwuelker, #35822), as well as displays `DocumentType` nodes correctly (@simonwuelker, #36787).
 
