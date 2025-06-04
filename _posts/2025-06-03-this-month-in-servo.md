@@ -19,9 +19,35 @@ This work required careful architecting to integrate with existing animation mec
 
 <figure><a href="{{ '/img/blog/2025-06-servo-svg.png' | url }}"><img alt="SVG image rendering in Servo" src="{{ '/img/blog/2025-06-servo-svg.png' | url }}"></a></figure>
 
-We have also made significant progress on the [Trusted Types API](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API), going from 47% of tests passing to 58% over the course of May (@TimvdLippe, #36710, #36668, #36811, #36824, #36941, #36960).
+Servo's layout implementation has historically been all-or-nothing—any change in the page, no matter how isolated, requires laying out the entire page from scratch. Fixing this is called "incremental layout", and it's a key performance optimization in all browser engines. This month we made a number of changes to **support incremental layout** that make various classes of CSS changes much more efficient than a full layout (@mrobinson, @Loirooriol, #36896, #36978, #37004, #37047, #37069, #37048, #37088, #37099).
 
-Supporting this work on Trusted Types, our [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) implementation has been steadily improving, now passing 59% of automated tests (@TimvdLippe, @jdm, #36709, #36710, #36832, #36860, #36887, #36923, #36963, #36962, #36961, #36965, #37020).
+We have also made **significant progress on the [Trusted Types API](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API)**, going from 47% of tests passing to 58% over the course of May (@TimvdLippe, #36710, #36668, #36811, #36824, #36941, #36960).
+
+Supporting this work on Trusted Types, our [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) implementation has been steadily improving, now passing 59% of automated tests (@TimvdLippe, @jdm, @simonwuelker, #36709, #36710, #36776, #36832, #36860, #36887, #36923, #36963, #36962, #36961, #36965, #37020).
+
+We've begun preparatory work to **integrate [Vello](https://github.com/linebender/vello)** as the backend for 2D canvases (@sagudev, #36783, #36790, #36999). We've also merged some preparatory work to support `::placeholder` pseudo-elements and fix rendering issues with text inputs (@stevennovaryo, #37065).
+
+We've **enabled support for `URLPattern`** (@simonwuelker, #36826, #37004, #37116), as well as **&lt;input type="color">** (@simonwuelker, #36992).
+Additionally, Servo now supports:
+* `ShadowRoot.setHTMLUnsafe` (@TG199, #36240)
+* `document.scrollingElement` (@JimmyDdotEXE, #35994)
+* `ReadableStream.pipeThrough` (@Taym95, #36977)
+* `TransformStream` (@Taym95, @gterzian, #36739, #36905)
+* `asyncClipboard.readText` (@Gae24, #36689)
+* `Stylesheet.type` (@simonwuelker, #37126)
+
+Additionally, HTMLVideoElement can be used as an image source for 2D canvas APIs (@tharkum, #37135), ImageBitmap objects can be serialized and transferred via `postMessage` (@tharkum, #37101), media elements redraw properly whenever their size changes (@tharkum, #37056), polygon image map areas are clickable (@arihant2math, #37064), `&lt;select>` elements are redrawn when their contents change (@simonwuelker, #36958), and `GPU.preferredCanvasFormat` returns platform-appropriate values (@arihant2math, #37073).
+
+We fixed a number of bugs where Servo's behaviour did not match relevant specifications:
+* `input` events are now fired following `keydown` events (@yezhizhen, #37078)
+* unscopable objects are now writable and readable, and don't have a prototype (@simonwuelker, #37119, #37122)
+* `Request` headers reject more erroneous headers (@sebsebmc, #36943)
+* External stylesheets in documents with quirks mode are more lenient about the stylesheet's `Content-Type` (@ghostd, @mrobinson, #28321)
+* the `ImageData` constructor throws better errors for unsupported arguments (@Taym95, #31398)
+* Attribute nodes are serialized as the empty string (@simonwuelker, #36875)
+* custom element `is` values are serialized as attributes (@simonwuelker, #36888)
+* `EventSource` ignores invalid field values and treats non-200 responses codes as failures (@KiChjang, #36853, #36854)
+* the `premultipliedAlpha` flag for WebGL canvases premultiplies correctly (@tharkum, #36895)
 
 ### Embedding
 
@@ -32,6 +58,10 @@ Embedders can now **evaluate JavaScript inside a given WebView** and receive res
 All embedders will receive default styling and interactivity for elements like inputs and media elements (@webbeef, #36803), which reduces the amount of configuration required when embedding the engine.
 
 Any provided system light/dark theme will be propagated to any document loaded inside of a WebView (@mrobinson, #37132).
+
+Servo's developer tools integration now highlights elements in the layout inspector (@simonwuelker, #35822), as well as displays `DocumentType` nodes correctly (@simonwuelker, #36787).
+
+We have **removed the `dom_shadowdom_enabled` preference**, since the feature has been enabled by default since March 2025.
 
 #### Servoshell
 
@@ -47,7 +77,7 @@ The current system light/dark theme is now queried on startup (@Legend-Master, #
 Servo is now better at evicting image data from GPU caches (@webbeef, #36956).
 We also reduced the memory used to store [HSTS data](https://developer.mozilla.org/en-US/docs/Glossary/HSTS), saving **more than 60mb** by doing so (@sebsebmc, #37000, #37015).
 
-We fixed a number of crashes involving animated images (@simonwuelker, #37058), media elements with an unknown duration (@tharkum, [servo-media#437](https://github.com/servo/media/pull/437)), canvas elements during shutdown (@mrobinson, #37182).
+We fixed a number of crashes involving animated images (@simonwuelker, #37058), media elements with an unknown duration (@tharkum, [servo-media#437](https://github.com/servo/media/pull/437)), canvas elements during shutdown (@mrobinson, #37182), adding a Path2D to itself (@Taym95, #36847), using `Node.childNodes` (@jdm, #36889), resizing OffscreenCanvas (@simonwuelker, #36855), querying WebGL extensions (@mrobinson, #36911), and slicing a sliced Blob (@simonwuelker, #36866).
 We also addressed a deadlock involving streams with very large chunks (@wusyong, #36914), and a source of intermittent crashes when closing tabs or removing iframes (@jdm, #37120).
 Finally, we rewrote the implementation of `HTMLOptionElement.text` to avoid crashes with deeply-nested elements (@kkoyung, #37167).
 
@@ -60,108 +90,9 @@ We upgraded our fork of WebRender to an upstream revision from late April (@mrob
 These changes ensure that Servo is up to date with ongoing work in Firefox, which shares these dependencies.
 
 <!--
-- canvas
-    - https://github.com/servo/servo/pull/36783	(@sagudev, #36783)	Use backend trait with associated types for 2d canvas backends abstraction (#36783)
-      canvas
-    - https://github.com/servo/servo/pull/36790	(@sagudev, #36790)	canvas: Move `CompositionOrBlending` and `ellipse()` from `RaqoteBackend` to `Backend` (#36790)
-      canvas
-    - https://github.com/servo/servo/pull/36999	(@sagudev, #36999)	canvas: Move generic implementations into `GenericPathBuilder` trait (#36999)
-      canvas
-    - https://github.com/servo/servo/pull/37131	(@andrei.volykhin@gmail.com, #37131)	imagebitmap: Use snapshot::Snapshot as bitmap data (#37131)
-      canvas
 - devex
     - https://github.com/servo/servo/pull/32836	(@jschwe, #32836)	bootstrap: Add `winget` fallback (#32836)
       devex
-- devtools
-    - https://github.com/servo/servo/pull/36787	(@simonwuelker, #36787)	Send info about the `DocumentType` node to the devtools inspector  (#36787)
-      devtools
-    - https://github.com/servo/servo/pull/35822	(@simonwuelker, #35822)	devtools: Allow highlighting elements from the inspector (#35822)
-      devtools
-- dom
-    - https://github.com/servo/servo/pull/36776	(@simonwuelker, #36776)	Set cryptographic nonce metadata for module script fetch operations (#36776)
-      dom
-    - https://github.com/servo/servo/pull/36654	(@gterzian, #36654)	MessagePort: implement disentanglement (#36654)
-      dom
-    - https://github.com/servo/servo/pull/36240	(@TG199, #36240)	feat: implement ShadowRoot::setHTMLUnsafe (#36240)
-      dom
-    - https://github.com/servo/servo/pull/35994	(@JimmyDdotEXE, #35994)	Implement `document.scrollingElement` (#35994)
-      dom
-    - https://github.com/servo/servo/pull/36847	(@Taym95, #36847)	Avoid borrow panic when Path2D.addPath is called with self (#36847)
-      dom
-    - https://github.com/servo/servo/pull/36853	(@kungfukeith11@gmail.com, #36853)	script: Ensure `EventSource` interprets non-200 response codes as failure (#36853)
-      dom
-    - https://github.com/servo/servo/pull/36854	(@kungfukeith11@gmail.com, #36854)	script: Ensure `EventSource` field value is ignored if the null character exists in the field name (#36854)
-      dom
-    - https://github.com/servo/servo/pull/36836	(@glowe, @graham.lowe@gmail.com, #36836)	Remove unspecified early return in MessagePort::Close (#36836)
-      dom
-    - https://github.com/servo/servo/pull/36875	(@simonwuelker, #36875)	Serialize attribute nodes as the empty string (#36875)
-      dom
-    - https://github.com/servo/servo/pull/36826	(@simonwuelker, #36826)	Replace urlpattern implementation with `rust-urlpattern` crate (#36826)
-      dom
-    - https://github.com/servo/servo/pull/36866	(@simonwuelker, #36866)	Don't slice a sliced blob (#36866)
-      dom
-    - https://github.com/servo/servo/pull/36689	(@Gae24, #36689)	async clipboard: implement `readText` (#36689)
-      dom
-    - https://github.com/servo/servo/pull/36888	(@simonwuelker, #36888)	script: Serialize a custom element's "is" value as an attribute (#36888)
-      dom
-    - https://github.com/servo/servo/pull/36889	(@jdm, #36889)	Fix double borrow panic in Node.childNodes (#36889)
-      dom
-    - https://github.com/servo/servo/pull/36739	(@Taym95, @gterzian, #36739)	Script implement TransformStream and TransformStreamDefaultController (#36739)
-      dom
-    - https://github.com/servo/servo/pull/31398	(@Taym95, #31398)	WebIDL Fix ImageData constructor to take a Uint8ClampedArray instead of js_object (#31398)
-      dom
-    - https://github.com/servo/servo/pull/36894	(@kungfukeith11@gmail.com, #36894)	Update the list of global and window event handlers (#36894)
-      dom
-    - https://github.com/servo/servo/pull/36958	(@simonwuelker, #36958)	Update select shadow tree when contents of selected option change (#36958)
-      dom
-    - https://github.com/servo/servo/pull/36855	(@simonwuelker, #36855)	Don't attempt to resize Offscreencanvas without a rendering context (#36855)
-      dom
-    - https://github.com/servo/servo/pull/36905	(@Taym95, #36905)	Make transform stream transferrable (#36905)
-      dom
-    - https://github.com/servo/servo/pull/36975	(@andrei.volykhin@gmail.com, #36975)	svg: Add mock SVGImageElement interface (#36975)
-      dom
-    - https://github.com/servo/servo/pull/36992	(@simonwuelker, #36992)	Fully support `<input type=color>` (#36992)
-      dom
-    - https://github.com/servo/servo/pull/37043	(@simonwuelker, #37043)	Remove the `dom_shadowdom_enabled` preference (#37043)
-      dom
-    - https://github.com/servo/servo/pull/37039	(@simonwuelker, #37039)	Make `getAllTypes` unwrap IDL `record<K, V>` types (#37039)
-      dom
-    - https://github.com/servo/servo/pull/35748	(@yoseio, #35748)	script: Make `Blob.ArrayBuffer()` more specification-compliant (#35748)
-      dom
-    - https://github.com/servo/servo/pull/28321	(@ghostd, @mrobinson, #28321)	Use spec compliant content-type extraction in more places and enable a `<stylesheet>` quirk (#28321)
-      dom
-    - https://github.com/servo/servo/pull/36977	(@Taym95, #36977)	Stream implement pipeThrough (#36977)
-      dom
-    - https://github.com/servo/servo/pull/37073	(@arihant2math@gmail.com, #37073)	Return the proper texture format for GetPreferredCanvasFormat (#37073)
-      dom
-    - https://github.com/servo/servo/pull/36943	(@sebsebmc@gmail.com, #36943)	script: Refactor dom/headers to match spec better (#36943)
-      dom
-    - https://github.com/servo/servo/pull/37056	(@andrei.volykhin@gmail.com, #37056)	htmlmediaelement: Make dirty element on any intrinsic size changes (#37056)
-      dom
-    - https://github.com/servo/servo/pull/37101	(@andrei.volykhin@gmail.com, #37101)	imagebitmap: Make ImageBitmap serializable and transferable (#37101)
-      dom
-    - https://github.com/servo/servo/pull/37042	(@simonwuelker, #37042)	Allow `undefined` variants in IDL unions (#37042)
-      dom
-    - https://github.com/servo/servo/pull/37122	(@simonwuelker, #37122)	Don't set a prototype for unscopable objects (#37122)
-      dom
-    - https://github.com/servo/servo/pull/37119	(@simonwuelker, #37119)	Make unscopable objects writable and enumerable (#37119)
-      dom
-    - https://github.com/servo/servo/pull/37116	(@simonwuelker, #37116)	Unconditionally enable the URLPattern API (#37116)
-      dom
-    - https://github.com/servo/servo/pull/37044	(@simonwuelker, #37044)	Implement `URLPattern::{text, exec}` (#37044)
-      dom
-    - https://github.com/servo/servo/pull/37064	(@arihant2math@gmail.com, #37064)	script: Add support for polygons in `HtmlAreaElement::hit_test` (#37064)
-      dom
-    - https://github.com/servo/servo/pull/37126	(@simonwuelker, #37126)	Rename `Stylesheet::Type_` to `Stylesheet::Type` (#37126)
-      dom
-    - https://github.com/servo/servo/pull/37033	(@gterzian, @Taym95, #37033)	script: stub `AbortSignal` (#37033)
-      dom
-    - https://github.com/servo/servo/pull/37135	(@andrei.volykhin@gmail.com, #37135)	canvas: Add HTMLVideoElement to CanvasImageSource union type (#37135)
-      dom
-    - https://github.com/servo/servo/pull/37078	(@yezhizhen, #37078)	Let `input` JS event be dispatched by `keydown` instead of `keypress` (#37078)
-      dom
-    - https://github.com/servo/servo/pull/37065	(@stevennovaryo, #37065)	Implement Input `type=text` UA Shadow DOM (#37065)
-      dom
 - layout
     - https://github.com/servo/servo/pull/36703	(@mrobinson, #36703)	script: Clamp table spans according to the HTML specification      (#36703)
       layout
@@ -173,10 +104,6 @@ These changes ensure that Servo is up to date with ongoing work in Firefox, whic
       layout
     - https://github.com/servo/servo/pull/36917	(@mrobinson, @Loirooriol, #36917)	layout: Resolve canvas background properties during painting (#36917)
       layout
-    - https://github.com/servo/servo/pull/36978	(@mrobinson, @Loirooriol, #36978)	layout: Add a repaint-only incremental layout mode (#36978)
-      layout
-    - https://github.com/servo/servo/pull/36896	(@mrobinson, @Loirooriol, #36896)	layout: Share styles to inline box children via `SharedInlineStyles` (#36896)
-      layout
     - https://github.com/servo/servo/pull/36993	(@stevennovaryo, @Loirooriol, #36993)	layout: Propagate specified info for flex item (#36993)
       layout
     - https://github.com/servo/servo/pull/36980	(@Loirooriol, #36980)	layout: Inform child layout about final block size (#36980)
@@ -185,21 +112,9 @@ These changes ensure that Servo is up to date with ongoing work in Firefox, whic
       layout
     - https://github.com/servo/servo/pull/37029	(@mrobinson, #37029)	fonts: Fix calculation of font underline thickness on macOS (#37029)
       layout
-    - https://github.com/servo/servo/pull/37004	(@mrobinson, #37004)	layout: Correct damage propagation and style repair for repaint-only layout (#37004)
-      layout
-    - https://github.com/servo/servo/pull/37047	(@mrobinson, @Loirooriol, #37047)	layout: Split stacking context and display list construction (#37047)
-      layout
-    - https://github.com/servo/servo/pull/37069	(@mrobinson, @Loirooriol, #37069)	layout: Move text decoration propagation to stacking context tree construction (#37069)
-      layout
-    - https://github.com/servo/servo/pull/37048	(@mrobinson, @Loirooriol, #37048)	layout: When there is no restyle damage, do not re-layout (#37048)
-      layout
     - https://github.com/servo/servo/pull/37011	(@Loirooriol, #37011)	layout: Fix min-content inline size of multi-line row flex container (#37011)
       layout
     - https://github.com/servo/servo/pull/37079	(@mrobinson, #37079)	layout: Support `wavy` and `double` for `text-decoration-line` (#37079)
-      layout
-    - https://github.com/servo/servo/pull/37088	(@Loirooriol, @mrobinson, #37088)	Add another incremental layout that starts at stacking tree construction (#37088)
-      layout
-    - https://github.com/servo/servo/pull/37099	(@mrobinson, #37099)	layout: Regardless of restyle damage, always reflow when viewport changes (#37099)
       layout
     - https://github.com/servo/servo/pull/37097	(@mrobinson, #37097)	layout: Use the viewport size as the `background-attachment: fixed` positioning area (#37097)
       layout
@@ -243,11 +158,6 @@ These changes ensure that Servo is up to date with ongoing work in Firefox, whic
       webdriver
     - https://github.com/servo/servo/pull/37081	(@yezhizhen, #37081)	Remove accidentally re-added logic to `WebDriverSession::input_cancel_list` (#37081)
       webdriver
-- webgl
-    - https://github.com/servo/servo/pull/36911	(@mrobinson, #36911)	webgl: Use `glow::Context::supported_extensions()` to implement `getSupportedExtensions()` (#36911)
-      webgl
-    - https://github.com/servo/servo/pull/36895	(@andrei.volykhin@gmail.com, #36895)	pixels: Actually write pixels in `MULTIPLY` `generic_transform_inplace` operations (#36895)
-      webgl
 -->
 
 <style>
