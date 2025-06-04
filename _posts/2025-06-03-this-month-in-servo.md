@@ -10,12 +10,12 @@ categories:
 
 Two big pieces of news for images in Servo this month:
 
-1. We can now display animated GIFs in all their animated glory (@rayguo17, #36286)!
+1. We now **display animated GIFs** in all their animated glory (@rayguo17, #36286)!
 This work required careful architecting to integrate with existing animation mechanisms in the engine without incurring unnecessary CPU usage.
 
 <figure><a href="{{ '/img/blog/2025-06-servo-gif.gif' | url }}"><img alt="Animated GIFs rendering in Servo" src="{{ '/img/blog/2025-06-servo-gif.gif' | url }}"></a></figure>
 
-2. We support loading SVG images as `<img>` element sources (@mukilan, @mrobinson, #36721).
+2. We support **loading SVG images** as `<img>` element sources (@mukilan, @mrobinson, #36721).
 
 <figure><a href="{{ '/img/blog/2025-06-servo-svg.png' | url }}"><img alt="SVG image rendering in Servo" src="{{ '/img/blog/2025-06-servo-svg.png' | url }}"></a></figure>
 
@@ -45,14 +45,14 @@ The current system light/dark theme is now queried on startup (@Legend-Master, #
 ### Stability
 
 Servo is now better at evicting image data from GPU caches (@webbeef, #36956).
-We also reduced the memory used to store [HSTS data](https://developer.mozilla.org/en-US/docs/Glossary/HSTS), saving more than 60mb by doing so (@sebsebmc, #37000, #37015).
+We also reduced the memory used to store [HSTS data](https://developer.mozilla.org/en-US/docs/Glossary/HSTS), saving **more than 60mb** by doing so (@sebsebmc, #37000, #37015).
 
-A number of crashes were fixed involving animated images (@simonwuelker, #37058), media elements with an unknown duration (@tharkum, [servo-media#437](https://github.com/servo/media/pull/437)), canvas elements during shutdown (@mrobinson, #37182).
+We fixed a number of crashes involving animated images (@simonwuelker, #37058), media elements with an unknown duration (@tharkum, [servo-media#437](https://github.com/servo/media/pull/437)), canvas elements during shutdown (@mrobinson, #37182).
 We also addressed a deadlock involving streams with very large chunks (@wusyong, #36914), and a source of intermittent crashes when closing tabs or removing iframes (@jdm, #37120).
 Finally, we rewrote the implementation of `HTMLOptionElement.text` to avoid crashes with deeply-nested elements (@kkoyung, #37167).
 
 We now measure the memory usage of sessionStorage and localStorage data (@jdm, #37053), the [Public Suffix List](https://en.wikipedia.org/wiki/Public_Suffix_List) (@sebsebmc, #37049), and the system font storage (@jdm, #36834).
-In addition, we reduced the size of the final Servo binary by 2mb by stripping out DOM code that should never be used outside of automated tests (@jdm, #37034).
+In addition, we **reduced the size of the final Servo binary** by 2mb by stripping out DOM code that should never be used outside of automated tests (@jdm, #37034).
 
 ### Upgrades
 
