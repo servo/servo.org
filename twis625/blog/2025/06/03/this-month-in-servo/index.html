@@ -273,6 +273,36 @@ This work required careful architecting to integrate with existing animation mec
 <figure><a href="/twis625/img/blog/2025-06-servo-svg.png"><img alt="SVG image rendering in Servo" src="/twis625/img/blog/2025-06-servo-svg.png"></a></figure>
 <p>We have also made significant progress on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API">Trusted Types API</a>, going from 47% of tests passing to 58% over the course of May (@TimvdLippe, #36710, #36668, #36811, #36824, #36941, #36960).</p>
 <p>Supporting this work on Trusted Types, our <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP">Content Security Policy</a> implementation has been steadily improving, now passing 59% of automated tests (@TimvdLippe, @jdm, #36709, #36710, #36832, #36860, #36887, #36923, #36963, #36962, #36961, #36965, #37020).</p>
+<h3 id="embedding" tabindex="-1">Embedding <a class="header-anchor" href="#embedding">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<h4 id="the-engine" tabindex="-1">The engine <a class="header-anchor" href="#the-engine">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h4>
+<p>Embedders can now <strong>evaluate JavaScript inside a given WebView</strong> and receive results asynchronously (@Narfinger, @mrobinson, #35720).</p>
+<p>All embedders will receive default styling and interactivity for elements like inputs and media elements (@webbeef, #36803), which reduces the amount of configuration required when embedding the engine.</p>
+<p>Any provided system light/dark theme will be propagated to any document loaded inside of a WebView (@mrobinson, #37132).</p>
+<h4 id="servoshell" tabindex="-1">Servoshell <a class="header-anchor" href="#servoshell">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h4>
+<p>The <code>--user-agent</code>/<code>-u</code> flag now correctly sets the User-Agent header for network requests (@PartiallyUntyped, @mrobinson, #36859).</p>
+<p>Service Workers have been removed from the list of features enabled by <code>--enable-experimental-web-platform-features</code> until they provide more value (@jdm, #36867).</p>
+<p>The current system light/dark theme is now queried on startup (@Legend-Master, #37128).</p>
+<h3 id="stability" tabindex="-1">Stability <a class="header-anchor" href="#stability">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Servo is now better at evicting image data from GPU caches (@webbeef, #36956).
+We also reduced the memory used to store <a href="https://developer.mozilla.org/en-US/docs/Glossary/HSTS">HSTS data</a>, saving more than 60mb by doing so (@sebsebmc, #37000, #37015).</p>
+<p>A number of crashes were fixed involving animated images (@simonwuelker, #37058), media elements with an unknown duration (@tharkum, <a href="https://github.com/servo/media/pull/437">servo-media#437</a>), canvas elements during shutdown (@mrobinson, #37182).
+We also addressed a deadlock involving streams with very large chunks (@wusyong, #36914), and a source of intermittent crashes when closing tabs or removing iframes (@jdm, #37120).
+Finally, we rewrote the implementation of <code>HTMLOptionElement.text</code> to avoid crashes with deeply-nested elements (@kkoyung, #37167).</p>
+<p>We now measure the memory usage of sessionStorage and localStorage data (@jdm, #37053), the <a href="https://en.wikipedia.org/wiki/Public_Suffix_List">Public Suffix List</a> (@sebsebmc, #37049), and the system font storage (@jdm, #36834).
+In addition, we reduced the size of the final Servo binary by 2mb by stripping out DOM code that should never be used outside of automated tests (@jdm, #37034).</p>
+<h3 id="upgrades" tabindex="-1">Upgrades <a class="header-anchor" href="#upgrades">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>We upgraded our fork of WebRender to an upstream revision from late April (@mrobinson, #36770), and we upgraded our Stylo dependency to a version from the start of May (@Loirooriol, #36835).
+These changes ensure that Servo is up to date with ongoing work in Firefox, which shares these dependencies.</p>
 <!--
 - canvas
     - https://github.com/servo/servo/pull/36783	(@sagudev, #36783)	Use backend trait with associated types for 2d canvas backends abstraction (#36783)
@@ -376,13 +406,6 @@ This work required careful architecting to integrate with existing animation mec
       dom
     - https://github.com/servo/servo/pull/37065	(@stevennovaryo, #37065)	Implement Input `type=text` UA Shadow DOM (#37065)
       dom
-- embedding
-    - https://github.com/servo/servo/pull/36803	(@webbeef, #36803)	Embed user agent stylesheets and media control resouces in libservo (#36803)
-      embedding
-    - https://github.com/servo/servo/pull/35720	(@Narfinger, @mrobinson, #35720)	libservo: Allow embedders to execute JavaScript scripts via the API (#35720)
-      embedding
-    - https://github.com/servo/servo/pull/37132	(@mrobinson, #37132)	constellation: Pass system theme to new Pipelines (#37132)
-      embedding
 - layout
     - https://github.com/servo/servo/pull/36703	(@mrobinson, #36703)	script: Clamp table spans according to the HTML specification      (#36703)
       layout
@@ -429,67 +452,24 @@ This work required careful architecting to integrate with existing animation mec
 - ohos
     - https://github.com/servo/servo/pull/36915	(@PartiallyUntyped, @jschwe, #36915)	[OH] Provide correct geometry offset and fix available screen dimensions (#36915)
       ohos
-- profiling
-    - https://github.com/servo/servo/pull/36772	(@simonwuelker, #36772)	Include `ChildrenList::last_visited` in memory reports (#36772)
-      profiling
-    - https://github.com/servo/servo/pull/36834	(@jdm, #36834)	Various memory measurement improvements (#36834)
-      profiling
-- servoshell
-    - https://github.com/servo/servo/pull/36859	(@PartiallyUntyped, @mrobinson, #36859)	Fix missing user-agent from servo-shell (#36859)
-      servoshell
-    - https://github.com/servo/servo/pull/36867	(@jdm, #36867)	Remove service worker pref from experimental web features. (#36867)
-      servoshell
-    - https://github.com/servo/servo/pull/37128	(@Legend-Master, #37128)	servoshell: Ensure that the theme is applied properly on startup (#37128)
-      servoshell
 - stability
     - https://github.com/servo/servo/pull/36808	(@mrobinson, #36808)	script: Unconditionally send exit message during pipeline shutdown (#36808)
-      stability
-    - https://github.com/servo/servo/pull/36869	(@jdm, #36869)	script_bindings: Check for null pointer before dereferencing proxy handler custom data (#36869)
-      stability
-    - https://github.com/servo/servo/pull/36956	(@webbeef, #36956)	Delete WR images when dropping the ImageCacheStore (#36956)
       stability
     - https://github.com/servo/servo/pull/36955	(@webbeef, #36955)	Prevent overflow in intersection observer area evaluation (#36955)
       stability
     - https://github.com/servo/servo/pull/36873	(@jschwe, #36873)	Extend --with-asan to support C/C++ code (#36873)
       stability
-    - https://github.com/servo/servo/pull/36914	(@wusyong, @yuweiwu@YunoMacBook-Air.local, #36914)	fix: `ReadableStream::get_in_memory_bytes` too large (#36914)
-      stability
     - https://github.com/servo/servo/pull/36957	(@yezhizhen, #36957)	Remove duplicate click event in `simulate_mouse_click` (#36957)
-      stability
-    - https://github.com/servo/servo/pull/37000	(@sebsebmc@gmail.com, #37000)	HSTS list memory reduction and fixes (#37000)
       stability
     - https://github.com/servo/servo/pull/36974	(@mrobinson, #36974)	compositor: Batch all pending scroll event updates into a single transaction (#36974)
       stability
-    - https://github.com/servo/servo/pull/37034	(@jdm, #37034)	Don't build testbinding-related code by default (#37034)
-      stability
-    - https://github.com/servo/servo/pull/37015	(@sebsebmc@gmail.com, #37015)	Replace hsts preload list hashmap with an FST (#37015)
-      stability
-    - https://github.com/servo/servo/pull/37049	(@sebsebmc@gmail.com, #37049)	Add memory reporting for public suffix list (#37049)
-      stability
-    - https://github.com/servo/servo/pull/37058	(@simonwuelker, #37058)	Coalesce animated image frame data into a single shared memory region (#37058)
-      stability
-    - https://github.com/servo/servo/pull/37053	(@jdm, #37053)	net: Measure memory usage of storage thread. (#37053)
-      stability
-    - https://github.com/servo/servo/pull/37066	(@andrei.volykhin@gmail.com, #37066)	bump(deps): bump servo-media from eb96030 to 4931a4b (#37066)
-      stability
-    - https://github.com/servo/servo/pull/37120	(@jdm, #37120)	script: Return global objects for DOM objects in the relevant realm (#37120)
-      stability
     - https://github.com/servo/servo/pull/37136	(@willypuzzle, #37136)	[#26488] Moved Droppable code into a separate struct for CanvasRenderingContext2D (#37136)
-      stability
-    - https://github.com/servo/servo/pull/37167	(@kkoyung, #37167)	Refactoring `HTMLOptionElement::Text` into iterative style (#37167)
-      stability
-    - https://github.com/servo/servo/pull/37182	(@mrobinson, #37182)	constellation: Wait for canvas thread to shut down before shutting down system font service (#37182)
       stability
 - testing
     - https://github.com/servo/servo/pull/36791	(@mrobinson, #36791)	libservo: Add a basic `WebView` API test (#36791)
       testing
     - https://github.com/servo/servo/pull/36878	(@Narfinger, #36878)	Added a new workflow that benchmarks simple startup and loading of servo.org on HarmonyOS. (#36878)
       testing
-- upgrade
-    - https://github.com/servo/servo/pull/36770	(@mrobinson, #36770)	deps: Upgrade to latest version of our downstream WebRender fork (0.67) (#36770)
-      upgrade
-    - https://github.com/servo/servo/pull/36835	(@Loirooriol, #36835)	Upgrade Stylo to 2025-05-01 (#36835)
-      upgrade
 - webdriver
     - https://github.com/servo/servo/pull/36871	(@longvatrong111, #36871)	Set proper button value in WebDriver - ElementClick command (#36871)
       webdriver
