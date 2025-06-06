@@ -36,6 +36,12 @@ Additionally, Servo now supports:
 * `asyncClipboard.readText` (@Gae24, #36689)
 * `Stylesheet.type` (@simonwuelker, #37126)
 
+Our layout and CSS support continues to improve.
+This month, we improved our page background sizing and style computation (@mrobinson, @Loirooriol, #36917, #37147) and added support for `wavy` and `double` for the `text-decoration-line` property (@mrobinson, #37079).
+We also fixed bugs relating to transforms (both invertible and non-invertible) (@Loirooriol, #36749, #37147), and addressed sizing issues for tables and flex containers (@stevennovaryo, @Loirooriol, #36703, #36993, #36980, #37024, #37011), Finally, we fixed missing underlines on macOS (@mrobinson, #37029).
+
+TODO: text-decoration-line screenshot
+
 Additionally, HTMLVideoElement can be used as an image source for 2D canvas APIs (@tharkum, #37135), ImageBitmap objects can be serialized and transferred via `postMessage` (@tharkum, #37101), media elements redraw properly whenever their size changes (@tharkum, #37056), polygon image map areas are clickable (@arihant2math, #37064), `<select>` elements are redrawn when their contents change (@simonwuelker, #36958), and `GPU.preferredCanvasFormat` returns platform-appropriate values (@arihant2math, #37073).
 
 We fixed a number of bugs where Servo's behaviour did not match relevant specifications:
@@ -48,6 +54,10 @@ We fixed a number of bugs where Servo's behaviour did not match relevant specifi
 * custom element `is` values are serialized as attributes (@simonwuelker, #36888)
 * `EventSource` ignores invalid field values and treats non-200 responses codes as failures (@KiChjang, #36853, #36854)
 * the `premultipliedAlpha` flag for WebGL canvases premultiplies correctly (@tharkum, #36895)
+
+Our WebDriver server implementation received a lot of attention this month!
+Element clicks now receive the expected button value (@longvatrong111, #36871), wheel actions are supported (@PotatoCP, #36744, #36985), and we removed the possibility of races between some input actions and other WebDriver commands (@longvatrong111, @mrobinson, #36932).
+We also added support for passing WebDriver references to DOM objects as arguments when executing scripts (@jdm, #36673), and fixed some bugs with JS value serialization (@yezhizhen, #36908) and cancelling inputs (@yezhizhen, #37010).
 
 ### Embedding
 
@@ -63,102 +73,46 @@ Servo's developer tools integration now highlights elements in the layout inspec
 
 We have **removed the `dom_shadowdom_enabled` preference**, since the feature has been enabled by default since March 2025.
 
+Our automated benchmarking setup is expanding, and we can now measure how long it takes to start up Servo and load the servo.org homepage on HarmoneyOS (@Narfinger, #36878), which will help us identify regressions in the future.
+
+Finally, we can now write unit tests for Servo's embedding API (@mrobinson, #36791), which allows us to write better regression tests for shutdown-related issues (@mrobinson, #36808).
+
 #### Servoshell
 
 The `--user-agent`/`-u` flag now correctly sets the User-Agent header for network requests (@PartiallyUntyped, @mrobinson, #36859).
 
 Service Workers have been removed from the list of features enabled by `--enable-experimental-web-platform-features` until they provide more value (@jdm, #36867).
 
+Building Servoshell with `--with-asan` now causes all C++ dependencies to be built with [Address Sanitizer](https://clang.llvm.org/docs/AddressSanitizer.html) as well.
+
+Bootstrapping on Windows now uses `winget` as a fallback if `chocolatey` is unavailable (@jschwe, #32836).
+
 The current system light/dark theme is now queried on startup (@Legend-Master, #37128).
+Additionally, the screen dimensions and geometry reported by the engine are now correct on Open Harmony OS (@PartiallyUntyped, @jschwe, #36915).
 
 
 ### Stability
 
+#### Memory usage
+
 Servo is now better at evicting image data from GPU caches (@webbeef, #36956).
 We also reduced the memory used to store [HSTS data](https://developer.mozilla.org/en-US/docs/Glossary/HSTS), saving **more than 60mb** by doing so (@sebsebmc, #37000, #37015).
 
-We fixed a number of crashes involving animated images (@simonwuelker, #37058), media elements with an unknown duration (@tharkum, [servo-media#437](https://github.com/servo/media/pull/437)), canvas elements during shutdown (@mrobinson, #37182), adding a Path2D to itself (@Taym95, #36847), using `Node.childNodes` (@jdm, #36889), resizing OffscreenCanvas (@simonwuelker, #36855), querying WebGL extensions (@mrobinson, #36911), and slicing a sliced Blob (@simonwuelker, #36866).
+We now measure the memory usage of sessionStorage and localStorage data (@jdm, #37053), the [Public Suffix List](https://en.wikipedia.org/wiki/Public_Suffix_List) (@sebsebmc, #37049), and the system font storage (@jdm, #36834).
+In addition, we **reduced the size of the final Servo binary** by 2mb by stripping out DOM code that should never be used outside of automated tests (@jdm, #37034).
+
+#### Crashes
+
+We fixed a number of crashes involving animated images (@simonwuelker, #37058), media elements with an unknown duration (@tharkum, [servo-media#437](https://github.com/servo/media/pull/437)), canvas elements during shutdown (@mrobinson, #37182), adding a Path2D to itself (@Taym95, #36847), calculating `IntersectionObserver` areas (@webbeef, #36955), using `Node.childNodes` (@jdm, #36889), resizing `OffscreenCanvas` (@simonwuelker, #36855), querying WebGL extensions (@mrobinson, #36911), and slicing a sliced `Blob` (@simonwuelker, #36866).
 We also addressed a deadlock involving streams with very large chunks (@wusyong, #36914), and a source of intermittent crashes when closing tabs or removing iframes (@jdm, #37120).
 Finally, we rewrote the implementation of `HTMLOptionElement.text` to avoid crashes with deeply-nested elements (@kkoyung, #37167).
 
-We now measure the memory usage of sessionStorage and localStorage data (@jdm, #37053), the [Public Suffix List](https://en.wikipedia.org/wiki/Public_Suffix_List) (@sebsebmc, #37049), and the system font storage (@jdm, #36834).
-In addition, we **reduced the size of the final Servo binary** by 2mb by stripping out DOM code that should never be used outside of automated tests (@jdm, #37034).
+Having previously noticed an unsafe pattern triggered by using JS-owned values in Rust Drop implementations ([#26488](https://github.com/servo/servo/issues/26488)), we have begun incrementally removing existing Drop implementations to remove the source of unsafety (@willypuzzle, #37136).
 
 ### Upgrades
 
 We upgraded our fork of WebRender to an upstream revision from late April (@mrobinson, #36770), and we upgraded our Stylo dependency to a version from the start of May (@Loirooriol, #36835).
 These changes ensure that Servo is up to date with ongoing work in Firefox, which shares these dependencies.
-
-<!--
-- devex
-    - https://github.com/servo/servo/pull/32836	(@jschwe, #32836)	bootstrap: Add `winget` fallback (#32836)
-      devex
-- layout
-    - https://github.com/servo/servo/pull/36703	(@mrobinson, #36703)	script: Clamp table spans according to the HTML specification      (#36703)
-      layout
-    - https://github.com/servo/servo/pull/36795	(@mrobinson, #36795)	layout: Simplify `PositioningContext` by having it hold a single `Vec` (#36795)
-      layout
-    - https://github.com/servo/servo/pull/36749	(@Loirooriol, #36749)	layout: Let individual transform properties establish a stacking context (#36749)
-      layout
-    - https://github.com/servo/servo/pull/36876	(@mrobinson, @Loirooriol, #36876)	layout: Use `ServoLayoutNode` directly instead of a generic `impl` (#36876)
-      layout
-    - https://github.com/servo/servo/pull/36917	(@mrobinson, @Loirooriol, #36917)	layout: Resolve canvas background properties during painting (#36917)
-      layout
-    - https://github.com/servo/servo/pull/36993	(@stevennovaryo, @Loirooriol, #36993)	layout: Propagate specified info for flex item (#36993)
-      layout
-    - https://github.com/servo/servo/pull/36980	(@Loirooriol, #36980)	layout: Inform child layout about final block size (#36980)
-      layout
-    - https://github.com/servo/servo/pull/37024	(@Loirooriol, #37024)	layout: Fix `align-content` on stretched row flex containers (#37024)
-      layout
-    - https://github.com/servo/servo/pull/37029	(@mrobinson, #37029)	fonts: Fix calculation of font underline thickness on macOS (#37029)
-      layout
-    - https://github.com/servo/servo/pull/37011	(@Loirooriol, #37011)	layout: Fix min-content inline size of multi-line row flex container (#37011)
-      layout
-    - https://github.com/servo/servo/pull/37079	(@mrobinson, #37079)	layout: Support `wavy` and `double` for `text-decoration-line` (#37079)
-      layout
-    - https://github.com/servo/servo/pull/37097	(@mrobinson, #37097)	layout: Use the viewport size as the `background-attachment: fixed` positioning area (#37097)
-      layout
-    - https://github.com/servo/servo/pull/37147	(@Loirooriol, #37147)	layout: Fix logic for transforms with non-invertible matrix (#37147)
-      layout
-- ohos
-    - https://github.com/servo/servo/pull/36915	(@PartiallyUntyped, @jschwe, #36915)	[OH] Provide correct geometry offset and fix available screen dimensions (#36915)
-      ohos
-- stability
-    - https://github.com/servo/servo/pull/36808	(@mrobinson, #36808)	script: Unconditionally send exit message during pipeline shutdown (#36808)
-      stability
-    - https://github.com/servo/servo/pull/36955	(@webbeef, #36955)	Prevent overflow in intersection observer area evaluation (#36955)
-      stability
-    - https://github.com/servo/servo/pull/36873	(@jschwe, #36873)	Extend --with-asan to support C/C++ code (#36873)
-      stability
-    - https://github.com/servo/servo/pull/36957	(@yezhizhen, #36957)	Remove duplicate click event in `simulate_mouse_click` (#36957)
-      stability
-    - https://github.com/servo/servo/pull/36974	(@mrobinson, #36974)	compositor: Batch all pending scroll event updates into a single transaction (#36974)
-      stability
-    - https://github.com/servo/servo/pull/37136	(@willypuzzle, #37136)	[#26488] Moved Droppable code into a separate struct for CanvasRenderingContext2D (#37136)
-      stability
-- testing
-    - https://github.com/servo/servo/pull/36791	(@mrobinson, #36791)	libservo: Add a basic `WebView` API test (#36791)
-      testing
-    - https://github.com/servo/servo/pull/36878	(@Narfinger, #36878)	Added a new workflow that benchmarks simple startup and loading of servo.org on HarmonyOS. (#36878)
-      testing
-- webdriver
-    - https://github.com/servo/servo/pull/36871	(@longvatrong111, #36871)	Set proper button value in WebDriver - ElementClick command (#36871)
-      webdriver
-    - https://github.com/servo/servo/pull/36744	(@kenzieradityatirtarahardja18@gmail.com, @kenzieradityatirtarahardja.18@gmail.com, #36744)	Implement wheel action in webdriver (#36744)
-      webdriver
-    - https://github.com/servo/servo/pull/36673	(@jdm, #36673)	Improve some webdriver conformance tests results (#36673)
-      webdriver
-    - https://github.com/servo/servo/pull/36908	(@yezhizhen, #36908)	rework webdriver deserialization to avoid false-positive cycle error (#36908)
-      webdriver
-    - https://github.com/servo/servo/pull/36985	(@kenzieradityatirtarahardja18@gmail.com, @kenzieradityatirtarahardja.18@gmail.com, #36985)	Fix origin relative coordinate for wheel scroll and refactoring (#36985)
-      webdriver
-    - https://github.com/servo/servo/pull/37010	(@yezhizhen, #37010)	Fix `WebDriverSession::input_cancel_list` related logic (#37010)
-      webdriver
-    - https://github.com/servo/servo/pull/36932	(@longvatrong111, @mrobinson, #36932)	Synchronize `dispatch_actions` in WebDriver (#36932)
-      webdriver
-    - https://github.com/servo/servo/pull/37081	(@yezhizhen, #37081)	Remove accidentally re-added logic to `WebDriverSession::input_cancel_list` (#37081)
-      webdriver
--->
 
 <style>
     ._correction {
