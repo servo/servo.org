@@ -106,6 +106,7 @@ In addition, we **reduced the size of the final Servo binary** by 2mb by strippi
 #### Crashes
 
 We fixed a number of crashes involving animated images (@simonwuelker, #37058), media elements with an unknown duration (@tharkum, [servo-media#437](https://github.com/servo/media/pull/437)), canvas elements during shutdown (@mrobinson, #37182), adding a Path2D to itself (@Taym95, #36847), calculating `IntersectionObserver` areas (@webbeef, #36955), using `Node.childNodes` (@jdm, #36889), resizing `OffscreenCanvas` (@simonwuelker, #36855), querying WebGL extensions (@mrobinson, #36911), and slicing a sliced `Blob` (@simonwuelker, #36866).
+
 We also addressed a deadlock involving streams with very large chunks (@wusyong, #36914), and a source of intermittent crashes when closing tabs or removing iframes (@jdm, #37120).
 Finally, we rewrote the implementation of `HTMLOptionElement.text` to avoid crashes with deeply-nested elements (@kkoyung, #37167).
 
