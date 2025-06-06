@@ -71,7 +71,7 @@ Any provided system light/dark theme will be propagated to all documents loaded 
 
 Servo's developer tools integration now highlights elements in the layout inspector (@simonwuelker, #35822), as well as displays `DocumentType` nodes correctly (@simonwuelker, #36787).
 
-We have **removed the `dom_shadowdom_enabled` preference**, since the feature has been enabled by default since March 2025.
+We have **removed the `dom_shadowdom_enabled` preference**, since the feature has been enabled by default since March 2025 (@simonwuelker, #37043).
 
 Our automated benchmarking setup is expanding, and we can now measure how long it takes to start up Servo and load the servo.org homepage on HarmoneyOS (@Narfinger, #36878), which will help us identify regressions in the future.
 
