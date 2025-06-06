@@ -57,6 +57,7 @@ We fixed a number of bugs where Servo's behaviour did not match relevant specifi
 
 Our WebDriver server implementation received a lot of attention this month!
 Element clicks now receive the expected button value (@longvatrong111, #36871), wheel actions are supported (@PotatoCP, #36744, #36985), and we removed the possibility of races between some input actions and other WebDriver commands (@longvatrong111, @mrobinson, #36932).
+
 We also added support for passing WebDriver references to DOM objects as arguments when executing scripts (@jdm, #36673), and fixed some bugs with JS value serialization (@yezhizhen, #36908) and cancelling inputs (@yezhizhen, #37010).
 
 ### Embedding
