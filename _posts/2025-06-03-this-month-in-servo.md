@@ -38,7 +38,7 @@ Additionally, Servo now supports:
 
 Our layout and CSS support continues to improve.
 This month, we improved our page background sizing and style computation (@mrobinson, @Loirooriol, #36917, #37147) and added support for `wavy` and `double` for the `text-decoration-line` property (@mrobinson, #37079).
-We also fixed bugs relating to transforms (both invertible and non-invertible) (@Loirooriol, #36749, #37147), and addressed sizing issues for tables and flex containers (@stevennovaryo, @Loirooriol, #36703, #36993, #36980, #37024, #37011), Finally, we fixed missing underlines on macOS (@mrobinson, #37029).
+We also fixed bugs relating to transforms (both invertible and non-invertible) (@Loirooriol, #36749, #37147), and addressed sizing issues for tables and flex containers (@stevennovaryo, @Loirooriol, #36703, #36993, #36980, #37024, #37011). Finally, we fixed missing underlines on macOS (@mrobinson, #37029).
 
 TODO: text-decoration-line screenshot
 
