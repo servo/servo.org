@@ -118,6 +118,28 @@ Having previously noticed an unsafe pattern triggered by using JS-owned values i
 We upgraded our fork of WebRender to an upstream revision from late April (@mrobinson, #36770), and we upgraded our Stylo dependency to a version from the start of May (@Loirooriol, #36835).
 These changes ensure that Servo is up to date with ongoing work in Firefox, which shares these dependencies.
 
+## Donations
+
+Thanks again for your generous support!
+We are now receiving **4597 USD/month** (−1.4% over April) in recurring donations.
+This helps cover the cost of our [self-hosted](https://ci0.servo.org) [CI](https://ci1.servo.org) [runners](https://ci2.servo.org) and our [latest Outreachy interns](https://www.outreachy.org/alums/2025-06/#:~:text=Servo), **Usman Baba Yahaya** ([@uthmaniv](https://github.com/uthmaniv)) and **Jerens Lensun** ([@jerensl](https://github.com/jerensl))!
+
+Servo is also on [thanks.dev](https://thanks.dev), and already **25 GitHub users** (+1 over April) that depend on Servo are sponsoring us there.
+If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 4597 / 10000); padding-left: 0.5em;"><strong>4597</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 4597 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="4597" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
+As always, use of these funds will be decided transparently in the Technical Steering Committee.
+For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
+
 <style>
     ._correction {
         max-width: 33em;
