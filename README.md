@@ -285,9 +285,9 @@ OpenCollective:
 - Run this code in devtools:
 ```js
 $$("table tbody tr")
-    .map(tr => [...tr.cells].slice(2,4).map(td => td.innerText))
+    .map(tr => [...tr.cells][2].innerText.split("\n"))
     .map(([amount, period]) => [amount.match(/[$](\S+)/)[1].replace(/[.,]/g, ""), period])
-    .map(([cents, period]) => cents / {monthly:1,yearly:12}[period])
+    .map(([cents, period]) => cents / {Monthly:1,Yearly:12}[period])
     .reduce((result, cents) => result + cents, 0)
 ```
 - The result is USD cents/month
