@@ -271,10 +271,21 @@ This work required careful architecting to integrate with existing animation mec
 <li>We support <strong>loading SVG images</strong> as <code>&lt;img&gt;</code> element sources (@mukilan, @mrobinson, #36721).</li>
 </ol>
 <figure><a href="/twis625/img/blog/2025-06-servo-svg.png"><img alt="SVG image rendering in Servo" src="/twis625/img/blog/2025-06-servo-svg.png"></a></figure>
-<p>Servo’s layout implementation has historically been all-or-nothing—any change in the page, no matter how isolated, requires laying out the entire page from scratch. Fixing this is called “incremental layout”, and it’s a key performance optimization in all browser engines. This month we made a number of changes to <strong>support incremental layout</strong> that make various classes of CSS changes much more efficient than a full layout (@mrobinson, @Loirooriol, #36896, #36978, #37004, #37047, #37069, #37048, #37088, #37099).</p>
+<h3 id="outreachy" tabindex="-1">Outreachy <a class="header-anchor" href="#outreachy">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>We’re excited to sponsor two <a href="https://outreachy.org">Outreachy interns</a> until the end of August!
+<strong>Jerens Lensun</strong> (<a href="https://github.com/jerensl">@jerensl</a>) will be working improving Servo’s CI setup and other Python-focused infrastructure, while <strong>Usman Baba Yahaya</strong> (<a href="https://github.com/uthmaniv">@uthmaniv</a>) will implement support for the <a href="https://firefox-source-docs.mozilla.org/devtools-user/network_monitor/">Network Monitor</a> in the developer tools.</p>
+<h3 id="web-content" tabindex="-1">Web content <a class="header-anchor" href="#web-content">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Servo’s layout implementation has historically been all-or-nothing—any change in the page, no matter how isolated, requires laying out the entire page from scratch.
+Fixing this is called “incremental layout”, and it’s a key performance optimization in all browser engines.
+This month we made a number of changes to <strong>support incremental layout</strong> that make various classes of CSS changes much more efficient than a full layout (@mrobinson, @Loirooriol, #36896, #36978, #37004, #37047, #37069, #37048, #37088, #37099).</p>
 <p>We have also made <strong>significant progress on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API">Trusted Types API</a></strong>, going from 47% of tests passing to 58% over the course of May (@TimvdLippe, #36710, #36668, #36811, #36824, #36941, #36960).</p>
 <p>Supporting this work on Trusted Types, our <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP">Content Security Policy</a> implementation has been steadily improving, now passing 59% of automated tests (@TimvdLippe, @jdm, @simonwuelker, #36709, #36710, #36776, #36832, #36860, #36887, #36923, #36963, #36962, #36961, #36965, #37020).</p>
-<p>We’ve begun preparatory work to <strong>integrate <a href="https://github.com/linebender/vello">Vello</a></strong> as the backend for 2D canvases (@sagudev, #36783, #36790, #36999). We’ve also merged some preparatory work to support <code>::placeholder</code> pseudo-elements and fix rendering issues with text inputs (@stevennovaryo, #37065).</p>
+<p>We’ve begun preparatory work to <strong>integrate <a href="https://github.com/linebender/vello">Vello</a></strong> as the backend for 2D canvases (@sagudev, #36783, #36790, #36999).
+We’ve also merged some preparatory work to support <code>::placeholder</code> pseudo-elements and fix rendering issues with text inputs (@stevennovaryo, #37065).</p>
 <p>We’ve <strong>enabled support for <code>URLPattern</code></strong> (@simonwuelker, #36826, #37004, #37116), as well as <strong>&lt;input type=“color”&gt;</strong> (@simonwuelker, #36992).
 Additionally, Servo now supports:</p>
 <ul>
@@ -287,8 +298,9 @@ Additionally, Servo now supports:</p>
 </ul>
 <p>Our layout and CSS support continues to improve.
 This month, we improved our page background sizing and style computation (@mrobinson, @Loirooriol, #36917, #37147) and added support for <code>wavy</code> and <code>double</code> for the <code>text-decoration-line</code> property (@mrobinson, #37079).
-We also fixed bugs relating to transforms (both invertible and non-invertible) (@Loirooriol, #36749, #37147), and addressed sizing issues for tables and flex containers (@stevennovaryo, @Loirooriol, #36703, #36993, #36980, #37024, #37011). Finally, we fixed missing underlines on macOS (@mrobinson, #37029).</p>
-<p>TODO: text-decoration-line screenshot</p>
+We also fixed bugs relating to transforms (both invertible and non-invertible) (@Loirooriol, #36749, #37147), and addressed sizing issues for tables and flex containers (@stevennovaryo, @Loirooriol, #36703, #36993, #36980, #37024, #37011).
+Finally, we fixed missing underlines on macOS (@mrobinson, #37029).</p>
+<figure><a href="/twis625/img/blog/2025-06-servo-decoration.png"><img alt="text-decoration rendering in Servo" src="/twis625/img/blog/2025-06-servo-decoration.png"></a></figure>
 <p>Additionally, HTMLVideoElement can be used as an image source for 2D canvas APIs (@tharkum, #37135), ImageBitmap objects can be serialized and transferred via <code>postMessage</code> (@tharkum, #37101), media elements redraw properly whenever their size changes (@tharkum, #37056), polygon image map areas are clickable (@arihant2math, #37064), <code>&lt;select&gt;</code> elements are redrawn when their contents change (@simonwuelker, #36958), and <code>GPU.preferredCanvasFormat</code> returns platform-appropriate values (@arihant2math, #37073).</p>
 <p>We fixed a number of bugs where Servo’s behaviour did not match relevant specifications:</p>
 <ul>
@@ -314,8 +326,8 @@ Element clicks now receive the expected button value (@longvatrong111, #36871), 
 <p>Embedders can now <strong>evaluate JavaScript inside a given WebView</strong> and receive results asynchronously (@Narfinger, @mrobinson, #35720).</p>
 <p>All embedders will receive default styling and interactivity for elements like inputs and media elements (@webbeef, #36803), which reduces the amount of configuration required when embedding the engine.</p>
 <p>Any provided system light/dark theme will be propagated to all documents loaded inside of a WebView (@mrobinson, #37132).</p>
-<p>Servo’s developer tools integration now highlights elements in the layout inspector (@simonwuelker, #35822), as well as displays <code>DocumentType</code> nodes correctly (@simonwuelker, #36787).</p>
-<p>TODO: highlighting screenshot</p>
+<p>Servo’s developer tools integration now <strong>highlights elements</strong> in the layout inspector (@simonwuelker, #35822), as well as displays <code>DocumentType</code> nodes correctly (@simonwuelker, #36787).</p>
+<figure><a href="/twis625/img/blog/2025-06-servo-highlight.mp4"><video alt="Highlighting elements from the layout inspector" src="/twis625/img/blog/2025-06-servo-highlight.mp4"></a></figure>
 <p>We have <strong>removed the <code>dom_shadowdom_enabled</code> preference</strong>, since the feature has been enabled by default since March 2025 (@simonwuelker, #37043).</p>
 <p>Our automated benchmarking setup is expanding, and we can now measure how long it takes to start up Servo and load the <a href="http://servo.org">servo.org</a> homepage on HarmoneyOS (@Narfinger, #36878), which will help us identify regressions in the future.</p>
 <p>Finally, we can now write unit tests for Servo’s embedding API (@mrobinson, #36791), which allows us to write better regression tests for shutdown-related issues (@mrobinson, #36808).</p>

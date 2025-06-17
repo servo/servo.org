@@ -25,10 +25,21 @@ This work required careful architecting to integrate with existing animation mec
 &lt;li&gt;We support &lt;strong&gt;loading SVG images&lt;/strong&gt; as &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; element sources (@mukilan, @mrobinson, #36721).&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure&gt;&lt;a href=&quot;https://servo.org/twis625/img/blog/2025-06-servo-svg.png&quot;&gt;&lt;img alt=&quot;SVG image rendering in Servo&quot; src=&quot;https://servo.org/twis625/img/blog/2025-06-servo-svg.png&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
-&lt;p&gt;Servo’s layout implementation has historically been all-or-nothing—any change in the page, no matter how isolated, requires laying out the entire page from scratch. Fixing this is called “incremental layout”, and it’s a key performance optimization in all browser engines. This month we made a number of changes to &lt;strong&gt;support incremental layout&lt;/strong&gt; that make various classes of CSS changes much more efficient than a full layout (@mrobinson, @Loirooriol, #36896, #36978, #37004, #37047, #37069, #37048, #37088, #37099).&lt;/p&gt;
+&lt;h3 id=&quot;outreachy&quot; tabindex=&quot;-1&quot;&gt;Outreachy &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis625/blog/2025/06/03/this-month-in-servo/#outreachy&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;We’re excited to sponsor two &lt;a href=&quot;https://outreachy.org/&quot;&gt;Outreachy interns&lt;/a&gt; until the end of August!
+&lt;strong&gt;Jerens Lensun&lt;/strong&gt; (&lt;a href=&quot;https://github.com/jerensl&quot;&gt;@jerensl&lt;/a&gt;) will be working improving Servo’s CI setup and other Python-focused infrastructure, while &lt;strong&gt;Usman Baba Yahaya&lt;/strong&gt; (&lt;a href=&quot;https://github.com/uthmaniv&quot;&gt;@uthmaniv&lt;/a&gt;) will implement support for the &lt;a href=&quot;https://firefox-source-docs.mozilla.org/devtools-user/network_monitor/&quot;&gt;Network Monitor&lt;/a&gt; in the developer tools.&lt;/p&gt;
+&lt;h3 id=&quot;web-content&quot; tabindex=&quot;-1&quot;&gt;Web content &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis625/blog/2025/06/03/this-month-in-servo/#web-content&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Servo’s layout implementation has historically been all-or-nothing—any change in the page, no matter how isolated, requires laying out the entire page from scratch.
+Fixing this is called “incremental layout”, and it’s a key performance optimization in all browser engines.
+This month we made a number of changes to &lt;strong&gt;support incremental layout&lt;/strong&gt; that make various classes of CSS changes much more efficient than a full layout (@mrobinson, @Loirooriol, #36896, #36978, #37004, #37047, #37069, #37048, #37088, #37099).&lt;/p&gt;
 &lt;p&gt;We have also made &lt;strong&gt;significant progress on the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API&quot;&gt;Trusted Types API&lt;/a&gt;&lt;/strong&gt;, going from 47% of tests passing to 58% over the course of May (@TimvdLippe, #36710, #36668, #36811, #36824, #36941, #36960).&lt;/p&gt;
 &lt;p&gt;Supporting this work on Trusted Types, our &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP&quot;&gt;Content Security Policy&lt;/a&gt; implementation has been steadily improving, now passing 59% of automated tests (@TimvdLippe, @jdm, @simonwuelker, #36709, #36710, #36776, #36832, #36860, #36887, #36923, #36963, #36962, #36961, #36965, #37020).&lt;/p&gt;
-&lt;p&gt;We’ve begun preparatory work to &lt;strong&gt;integrate &lt;a href=&quot;https://github.com/linebender/vello&quot;&gt;Vello&lt;/a&gt;&lt;/strong&gt; as the backend for 2D canvases (@sagudev, #36783, #36790, #36999). We’ve also merged some preparatory work to support &lt;code&gt;::placeholder&lt;/code&gt; pseudo-elements and fix rendering issues with text inputs (@stevennovaryo, #37065).&lt;/p&gt;
+&lt;p&gt;We’ve begun preparatory work to &lt;strong&gt;integrate &lt;a href=&quot;https://github.com/linebender/vello&quot;&gt;Vello&lt;/a&gt;&lt;/strong&gt; as the backend for 2D canvases (@sagudev, #36783, #36790, #36999).
+We’ve also merged some preparatory work to support &lt;code&gt;::placeholder&lt;/code&gt; pseudo-elements and fix rendering issues with text inputs (@stevennovaryo, #37065).&lt;/p&gt;
 &lt;p&gt;We’ve &lt;strong&gt;enabled support for &lt;code&gt;URLPattern&lt;/code&gt;&lt;/strong&gt; (@simonwuelker, #36826, #37004, #37116), as well as &lt;strong&gt;&amp;lt;input type=“color”&amp;gt;&lt;/strong&gt; (@simonwuelker, #36992).
 Additionally, Servo now supports:&lt;/p&gt;
 &lt;ul&gt;
@@ -41,8 +52,9 @@ Additionally, Servo now supports:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Our layout and CSS support continues to improve.
 This month, we improved our page background sizing and style computation (@mrobinson, @Loirooriol, #36917, #37147) and added support for &lt;code&gt;wavy&lt;/code&gt; and &lt;code&gt;double&lt;/code&gt; for the &lt;code&gt;text-decoration-line&lt;/code&gt; property (@mrobinson, #37079).
-We also fixed bugs relating to transforms (both invertible and non-invertible) (@Loirooriol, #36749, #37147), and addressed sizing issues for tables and flex containers (@stevennovaryo, @Loirooriol, #36703, #36993, #36980, #37024, #37011). Finally, we fixed missing underlines on macOS (@mrobinson, #37029).&lt;/p&gt;
-&lt;p&gt;TODO: text-decoration-line screenshot&lt;/p&gt;
+We also fixed bugs relating to transforms (both invertible and non-invertible) (@Loirooriol, #36749, #37147), and addressed sizing issues for tables and flex containers (@stevennovaryo, @Loirooriol, #36703, #36993, #36980, #37024, #37011).
+Finally, we fixed missing underlines on macOS (@mrobinson, #37029).&lt;/p&gt;
+&lt;figure&gt;&lt;a href=&quot;https://servo.org/twis625/img/blog/2025-06-servo-decoration.png&quot;&gt;&lt;img alt=&quot;text-decoration rendering in Servo&quot; src=&quot;https://servo.org/twis625/img/blog/2025-06-servo-decoration.png&quot; /&gt;&lt;/a&gt;&lt;/figure&gt;
 &lt;p&gt;Additionally, HTMLVideoElement can be used as an image source for 2D canvas APIs (@tharkum, #37135), ImageBitmap objects can be serialized and transferred via &lt;code&gt;postMessage&lt;/code&gt; (@tharkum, #37101), media elements redraw properly whenever their size changes (@tharkum, #37056), polygon image map areas are clickable (@arihant2math, #37064), &lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt; elements are redrawn when their contents change (@simonwuelker, #36958), and &lt;code&gt;GPU.preferredCanvasFormat&lt;/code&gt; returns platform-appropriate values (@arihant2math, #37073).&lt;/p&gt;
 &lt;p&gt;We fixed a number of bugs where Servo’s behaviour did not match relevant specifications:&lt;/p&gt;
 &lt;ul&gt;
@@ -68,8 +80,8 @@ Element clicks now receive the expected button value (@longvatrong111, #36871), 
 &lt;p&gt;Embedders can now &lt;strong&gt;evaluate JavaScript inside a given WebView&lt;/strong&gt; and receive results asynchronously (@Narfinger, @mrobinson, #35720).&lt;/p&gt;
 &lt;p&gt;All embedders will receive default styling and interactivity for elements like inputs and media elements (@webbeef, #36803), which reduces the amount of configuration required when embedding the engine.&lt;/p&gt;
 &lt;p&gt;Any provided system light/dark theme will be propagated to all documents loaded inside of a WebView (@mrobinson, #37132).&lt;/p&gt;
-&lt;p&gt;Servo’s developer tools integration now highlights elements in the layout inspector (@simonwuelker, #35822), as well as displays &lt;code&gt;DocumentType&lt;/code&gt; nodes correctly (@simonwuelker, #36787).&lt;/p&gt;
-&lt;p&gt;TODO: highlighting screenshot&lt;/p&gt;
+&lt;p&gt;Servo’s developer tools integration now &lt;strong&gt;highlights elements&lt;/strong&gt; in the layout inspector (@simonwuelker, #35822), as well as displays &lt;code&gt;DocumentType&lt;/code&gt; nodes correctly (@simonwuelker, #36787).&lt;/p&gt;
+&lt;figure&gt;&lt;a href=&quot;https://servo.org/twis625/img/blog/2025-06-servo-highlight.mp4&quot;&gt;&lt;video alt=&quot;Highlighting elements from the layout inspector&quot; src=&quot;https://servo.org/twis625/img/blog/2025-06-servo-highlight.mp4&quot;&gt;&lt;/video&gt;&lt;/a&gt;&lt;/figure&gt;
 &lt;p&gt;We have &lt;strong&gt;removed the &lt;code&gt;dom_shadowdom_enabled&lt;/code&gt; preference&lt;/strong&gt;, since the feature has been enabled by default since March 2025 (@simonwuelker, #37043).&lt;/p&gt;
 &lt;p&gt;Our automated benchmarking setup is expanding, and we can now measure how long it takes to start up Servo and load the &lt;a href=&quot;http://servo.org/&quot;&gt;servo.org&lt;/a&gt; homepage on HarmoneyOS (@Narfinger, #36878), which will help us identify regressions in the future.&lt;/p&gt;
 &lt;p&gt;Finally, we can now write unit tests for Servo’s embedding API (@mrobinson, #36791), which allows us to write better regression tests for shutdown-related issues (@mrobinson, #36808).&lt;/p&gt;
