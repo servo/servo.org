@@ -126,7 +126,7 @@ We fixed a number of crashes involving animated images ([@simonwuelker](https://
 We also addressed a deadlock involving streams with very large chunks ([@wusyong](https://github.com/wusyong), [#36914](https://github.com/servo/servo/pull/36914)), and a source of intermittent crashes when closing tabs or removing iframes ([@jdm](https://github.com/jdm), [#37120](https://github.com/servo/servo/pull/37120)).
 Finally, we rewrote the implementation of `HTMLOptionElement.text` to avoid crashes with deeply-nested elements ([@kkoyung](https://github.com/kkoyung), [#37167](https://github.com/servo/servo/pull/37167)).
 
-Having previously noticed an unsafe pattern triggered by using JS-owned values in Rust Drop implementations ([[#26488](https://github.com/servo/servo/pull/26488)](https://github.com/servo/servo/issues/26488)), we have begun incrementally removing existing Drop implementations to remove the source of unsafety ([@willypuzzle](https://github.com/willypuzzle), [#37136](https://github.com/servo/servo/pull/37136)).
+Having previously noticed an unsafe pattern triggered by using JS-owned values in Rust Drop implementations ([#26488](https://github.com/servo/servo/pull/26488)), we have begun incrementally removing existing Drop implementations to remove the source of unsafety ([@willypuzzle](https://github.com/willypuzzle), [#37136](https://github.com/servo/servo/pull/37136)).
 
 ### Upgrades
 
