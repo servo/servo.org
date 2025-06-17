@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: ??????"
+title:      "This month in Servo: SVG, memory usage, embedder JS, and more!"
 date:       2025-06-03
-summary:    Who even knows?
+summary:    Another month of big improvements in the engine.
 categories:
 ---
 
