@@ -19,13 +19,23 @@ This work required careful architecting to integrate with existing animation mec
 
 <figure><a href="{{ '/img/blog/2025-06-servo-svg.png' | url }}"><img alt="SVG image rendering in Servo" src="{{ '/img/blog/2025-06-servo-svg.png' | url }}"></a></figure>
 
-Servo's layout implementation has historically been all-or-nothing—any change in the page, no matter how isolated, requires laying out the entire page from scratch. Fixing this is called "incremental layout", and it's a key performance optimization in all browser engines. This month we made a number of changes to **support incremental layout** that make various classes of CSS changes much more efficient than a full layout (@mrobinson, @Loirooriol, #36896, #36978, #37004, #37047, #37069, #37048, #37088, #37099).
+### Outreachy
+
+We're excited to sponsor two [Outreachy interns](https://outreachy.org) until the end of August!
+**Jerens Lensun** ([@jerensl](https://github.com/jerensl)) will be working improving Servo's CI setup and other Python-focused infrastructure, while **Usman Baba Yahaya** ([@uthmaniv](https://github.com/uthmaniv)) will implement support for the [Network Monitor](https://firefox-source-docs.mozilla.org/devtools-user/network_monitor/) in the developer tools.
+
+### Web content
+
+Servo's layout implementation has historically been all-or-nothing—any change in the page, no matter how isolated, requires laying out the entire page from scratch.
+Fixing this is called "incremental layout", and it's a key performance optimization in all browser engines.
+This month we made a number of changes to **support incremental layout** that make various classes of CSS changes much more efficient than a full layout (@mrobinson, @Loirooriol, #36896, #36978, #37004, #37047, #37069, #37048, #37088, #37099).
 
 We have also made **significant progress on the [Trusted Types API](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API)**, going from 47% of tests passing to 58% over the course of May (@TimvdLippe, #36710, #36668, #36811, #36824, #36941, #36960).
 
 Supporting this work on Trusted Types, our [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) implementation has been steadily improving, now passing 59% of automated tests (@TimvdLippe, @jdm, @simonwuelker, #36709, #36710, #36776, #36832, #36860, #36887, #36923, #36963, #36962, #36961, #36965, #37020).
 
-We've begun preparatory work to **integrate [Vello](https://github.com/linebender/vello)** as the backend for 2D canvases (@sagudev, #36783, #36790, #36999). We've also merged some preparatory work to support `::placeholder` pseudo-elements and fix rendering issues with text inputs (@stevennovaryo, #37065).
+We've begun preparatory work to **integrate [Vello](https://github.com/linebender/vello)** as the backend for 2D canvases (@sagudev, #36783, #36790, #36999).
+We've also merged some preparatory work to support `::placeholder` pseudo-elements and fix rendering issues with text inputs (@stevennovaryo, #37065).
 
 We've **enabled support for `URLPattern`** (@simonwuelker, #36826, #37004, #37116), as well as **&lt;input type="color">** (@simonwuelker, #36992).
 Additionally, Servo now supports:
@@ -38,9 +48,10 @@ Additionally, Servo now supports:
 
 Our layout and CSS support continues to improve.
 This month, we improved our page background sizing and style computation (@mrobinson, @Loirooriol, #36917, #37147) and added support for `wavy` and `double` for the `text-decoration-line` property (@mrobinson, #37079).
-We also fixed bugs relating to transforms (both invertible and non-invertible) (@Loirooriol, #36749, #37147), and addressed sizing issues for tables and flex containers (@stevennovaryo, @Loirooriol, #36703, #36993, #36980, #37024, #37011). Finally, we fixed missing underlines on macOS (@mrobinson, #37029).
+We also fixed bugs relating to transforms (both invertible and non-invertible) (@Loirooriol, #36749, #37147), and addressed sizing issues for tables and flex containers (@stevennovaryo, @Loirooriol, #36703, #36993, #36980, #37024, #37011).
+Finally, we fixed missing underlines on macOS (@mrobinson, #37029).
 
-TODO: text-decoration-line screenshot
+<figure><a href="{{ '/img/blog/2025-06-servo-decoration.png' | url }}"><img alt="text-decoration rendering in Servo" src="{{ '/img/blog/2025-06-servo-decoration.png' | url }}"></a></figure>
 
 Additionally, HTMLVideoElement can be used as an image source for 2D canvas APIs (@tharkum, #37135), ImageBitmap objects can be serialized and transferred via `postMessage` (@tharkum, #37101), media elements redraw properly whenever their size changes (@tharkum, #37056), polygon image map areas are clickable (@arihant2math, #37064), `<select>` elements are redrawn when their contents change (@simonwuelker, #36958), and `GPU.preferredCanvasFormat` returns platform-appropriate values (@arihant2math, #37073).
 
@@ -70,9 +81,9 @@ All embedders will receive default styling and interactivity for elements like i
 
 Any provided system light/dark theme will be propagated to all documents loaded inside of a WebView (@mrobinson, #37132).
 
-Servo's developer tools integration now highlights elements in the layout inspector (@simonwuelker, #35822), as well as displays `DocumentType` nodes correctly (@simonwuelker, #36787).
+Servo's developer tools integration now **highlights elements** in the layout inspector (@simonwuelker, #35822), as well as displays `DocumentType` nodes correctly (@simonwuelker, #36787).
 
-TODO: highlighting screenshot
+<figure><a href="{{ '/img/blog/2025-06-servo-highlight.mp4' | url }}"><video alt="Highlighting elements from the layout inspector" src="{{ '/img/blog/2025-06-servo-highlight.mp4' | url }}"></a></figure>
 
 We have **removed the `dom_shadowdom_enabled` preference**, since the feature has been enabled by default since March 2025 (@simonwuelker, #37043).
 
@@ -92,7 +103,6 @@ Bootstrapping on Windows now uses `winget` as a fallback if `chocolatey` is unav
 
 The current system light/dark theme is now queried on startup (@Legend-Master, #37128).
 Additionally, the screen dimensions and geometry reported by the engine are now correct on Open Harmony OS (@PartiallyUntyped, @jschwe, #36915).
-
 
 ### Stability
 
