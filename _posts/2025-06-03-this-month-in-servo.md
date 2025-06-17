@@ -40,6 +40,9 @@ We've begun preparatory work to **integrate [Vello](https://github.com/linebende
 We've also merged some preparatory work to support `::placeholder` pseudo-elements and fix rendering issues with text inputs (@stevennovaryo, #37065).
 
 We've **enabled support for `URLPattern`** (@simonwuelker, #36826, #37004, #37116), as well as **&lt;input type="color">** (@simonwuelker, #36992).
+
+<figure><a href="{{ '/img/blog/2025-06-servo-input.png' | url }}"><img alt="Color input integration in Servo" src="{{ '/img/blog/2025-06-servo-input.png' | url }}"></a></figure>
+
 Additionally, Servo now supports:
 * `ShadowRoot.setHTMLUnsafe` (@TG199, #36240)
 * `document.scrollingElement` (@JimmyDdotEXE, #35994)
@@ -85,7 +88,7 @@ Any provided system light/dark theme will be propagated to all documents loaded 
 
 Servo's developer tools integration now **highlights elements** in the layout inspector (@simonwuelker, #35822), as well as displays `DocumentType` nodes correctly (@simonwuelker, #36787).
 
-<figure><a href="{{ '/img/blog/2025-06-servo-highlight.mp4' | url }}"><video alt="Highlighting elements from the layout inspector" src="{{ '/img/blog/2025-06-servo-highlight.mp4' | url }}"></a></figure>
+<figure><a href="{{ '/img/blog/2025-06-servo-highlight.mp4' | url }}"><video title="Highlighting elements from the layout inspector" src="{{ '/img/blog/2025-06-servo-highlight.mp4' | url }}"></video></a></figure>
 
 We have **removed the `dom_shadowdom_enabled` preference**, since the feature has been enabled by default since March 2025 (@simonwuelker, #37043).
 
