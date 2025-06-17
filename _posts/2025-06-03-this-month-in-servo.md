@@ -22,7 +22,8 @@ This work required careful architecting to integrate with existing animation mec
 ### Outreachy
 
 We're excited to sponsor two [Outreachy interns](https://outreachy.org) until the end of August!
-**Jerens Lensun** ([@jerensl](https://github.com/jerensl)) will be working improving Servo's CI setup and other Python-focused infrastructure, while **Usman Baba Yahaya** ([@uthmaniv](https://github.com/uthmaniv)) will implement support for the [Network Monitor](https://firefox-source-docs.mozilla.org/devtools-user/network_monitor/) in the developer tools.
+**Jerens Lensun** ([@jerensl](https://github.com/jerensl)) will be working on improving Servo's CI setup and other Python-focused infrastructure, while **Usman Baba Yahaya** ([@uthmaniv](https://github.com/uthmaniv)) will implement support for the [Network Monitor](https://firefox-source-docs.mozilla.org/devtools-user/network_monitor/) in the developer tools.
+They will both be blogging about their internships, and you can follow their work at [Jeren's blog](https://www.jerensl.com/blog/) and [Usman's blog](https://uthmaniv.github.io/).
 
 ### Web content
 
