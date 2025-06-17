@@ -88,7 +88,7 @@ Any provided system light/dark theme will be propagated to all documents loaded 
 
 Servo's developer tools integration now **highlights elements** in the layout inspector (@simonwuelker, #35822), as well as displays `DocumentType` nodes correctly (@simonwuelker, #36787).
 
-<figure><a href="{{ '/img/blog/2025-06-servo-highlight.mp4' | url }}"><video title="Highlighting elements from the layout inspector" src="{{ '/img/blog/2025-06-servo-highlight.mp4' | url }}"></video></a></figure>
+<figure><a href="{{ '/img/blog/2025-06-servo-highlight.webp' | url }}"><video title="Highlighting elements from the layout inspector" src="{{ '/img/blog/2025-06-servo-highlight.webp' | url }}"></video></a></figure>
 
 We have **removed the `dom_shadowdom_enabled` preference**, since the feature has been enabled by default since March 2025 (@simonwuelker, #37043).
 
