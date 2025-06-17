@@ -21,7 +21,7 @@ This work required careful architecting to integrate with existing animation mec
 
 ### Outreachy
 
-We're excited to sponsor two [Outreachy interns](https://outreachy.org) until the end of August!
+We're excited to host two [Outreachy interns](https://outreachy.org) until the end of August!
 **Jerens Lensun** ([@jerensl](https://github.com/jerensl)) will be working on improving Servo's CI setup and other Python-focused infrastructure, while **Usman Baba Yahaya** ([@uthmaniv](https://github.com/uthmaniv)) will implement support for the [Network Monitor](https://firefox-source-docs.mozilla.org/devtools-user/network_monitor/) in the developer tools.
 
 They will both be blogging about their internships, and you can follow their work at [Jeren's blog](https://www.jerensl.com/blog/) and [Usman's blog](https://uthmaniv.github.io/).
@@ -137,7 +137,7 @@ These changes ensure that Servo is up to date with ongoing work in Firefox, whic
 
 Thanks again for your generous support!
 We are now receiving **4597 USD/month** (−1.4% over April) in recurring donations.
-This helps cover the cost of our [self-hosted](https://ci0.servo.org) [CI](https://ci1.servo.org) [runners](https://ci2.servo.org) and our [latest Outreachy interns](https://www.outreachy.org/alums/2025-06/#:~:text=Servo), **Usman Baba Yahaya** ([@uthmaniv](https://github.com/uthmaniv)) and **Jerens Lensun** ([@jerensl](https://github.com/jerensl))!
+This helps cover the cost of our [self-hosted](https://ci0.servo.org) [CI](https://ci1.servo.org) [runners](https://ci2.servo.org) and one of our [latest Outreachy interns](https://www.outreachy.org/alums/2025-06/#:~:text=Servo)!
 
 Servo is also on [thanks.dev](https://thanks.dev), and already **25 GitHub users** (+1 over April) that depend on Servo are sponsoring us there.
 If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
