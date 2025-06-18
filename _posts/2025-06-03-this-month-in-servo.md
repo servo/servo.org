@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: SVG, memory usage, embedder JS, and more!"
-date:       2025-06-03
-summary:    Another month of big improvements in the engine.
+title:      "This month in Servo: color inputs, SVG, embedder JS, and more!"
+date:       2025-06-18
+summary:    Plus animated GIF support, incremental layout, and two new Outreachy internships.
 categories:
 ---
 
