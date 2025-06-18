@@ -19,14 +19,14 @@ This work required careful architecting to integrate with existing animation mec
 
 <figure><a href="{{ '/img/blog/2025-06-servo-svg.png' | url }}"><img alt="SVG image rendering in Servo" src="{{ '/img/blog/2025-06-servo-svg.png' | url }}"></a></figure>
 
-### Outreachy
+## Outreachy
 
 We're excited to host two [Outreachy interns](https://outreachy.org) until the end of August!
 **Jerens Lensun** ([@jerensl](https://github.com/jerensl)) will be working on improving Servo's CI setup and other Python-focused infrastructure, while **Usman Baba Yahaya** ([@uthmaniv](https://github.com/uthmaniv)) will implement support for the [Network Monitor](https://firefox-source-docs.mozilla.org/devtools-user/network_monitor/) in the developer tools.
 
 They will both be blogging about their internships, and you can follow their work at [Jeren's blog](https://www.jerensl.com/blog/) and [Usman's blog](https://uthmaniv.github.io/).
 
-### Web content
+## Web content
 
 Servo's layout implementation has historically been all-or-nothing—any change in the page, no matter how isolated, requires laying out the entire page from scratch.
 Fixing this is called "incremental layout", and it's a key performance optimization in all browser engines.
@@ -76,9 +76,9 @@ Element clicks now receive the expected button value ([@longvatrong111](https://
 
 We also added support for passing WebDriver references to DOM objects as arguments when executing scripts ([@jdm](https://github.com/jdm), [#36673](https://github.com/servo/servo/pull/36673)), and fixed some bugs with JS value serialization ([@yezhizhen](https://github.com/yezhizhen), [#36908](https://github.com/servo/servo/pull/36908)) and cancelling inputs ([@yezhizhen](https://github.com/yezhizhen), [#37010](https://github.com/servo/servo/pull/37010)).
 
-### Embedding
+## Embedding
 
-#### The engine
+### The engine
 
 Embedders can now **evaluate JavaScript inside a given WebView** and receive results asynchronously ([@Narfinger](https://github.com/Narfinger), [@mrobinson](https://github.com/mrobinson), [#35720](https://github.com/servo/servo/pull/35720)).
 
@@ -96,7 +96,7 @@ Our automated benchmarking setup is expanding, and we can now measure how long i
 
 Finally, we can now write unit tests for Servo's embedding API ([@mrobinson](https://github.com/mrobinson), [#36791](https://github.com/servo/servo/pull/36791)), which allows us to write better regression tests for shutdown-related issues ([@mrobinson](https://github.com/mrobinson), [#36808](https://github.com/servo/servo/pull/36808)).
 
-#### Servoshell
+### Servoshell
 
 The `--user-agent`/`-u` flag now correctly sets the User-Agent header for network requests ([@PartiallyUntyped](https://github.com/PartiallyUntyped), [@mrobinson](https://github.com/mrobinson), [#36859](https://github.com/servo/servo/pull/36859)).
 
@@ -109,9 +109,9 @@ Bootstrapping on Windows now uses `winget` as a fallback if `chocolatey` is unav
 The current system light/dark theme is now queried on startup ([@Legend-Master](https://github.com/Legend-Master), [#37128](https://github.com/servo/servo/pull/37128)).
 Additionally, the screen dimensions and geometry reported by the engine are now correct on Open Harmony OS ([@PartiallyUntyped](https://github.com/PartiallyUntyped), [@jschwe](https://github.com/jschwe), [#36915](https://github.com/servo/servo/pull/36915)).
 
-### Stability
+## Stability
 
-#### Memory usage
+### Memory usage
 
 Servo is now better at evicting image data from GPU caches ([@webbeef](https://github.com/webbeef), [#36956](https://github.com/servo/servo/pull/36956)).
 We also reduced the memory used to store [HSTS data](https://developer.mozilla.org/en-US/docs/Glossary/HSTS), saving **more than 60mb** by doing so ([@sebsebmc](https://github.com/sebsebmc), [#37000](https://github.com/servo/servo/pull/37000), [#37015](https://github.com/servo/servo/pull/37015)).
@@ -119,7 +119,7 @@ We also reduced the memory used to store [HSTS data](https://developer.mozilla.o
 We now measure the memory usage of sessionStorage and localStorage data ([@jdm](https://github.com/jdm), [#37053](https://github.com/servo/servo/pull/37053)), the [Public Suffix List](https://en.wikipedia.org/wiki/Public_Suffix_List) ([@sebsebmc](https://github.com/sebsebmc), [#37049](https://github.com/servo/servo/pull/37049)), and the system font storage ([@jdm](https://github.com/jdm), [#36834](https://github.com/servo/servo/pull/36834)).
 In addition, we **reduced the size of the final Servo binary** by 2mb by stripping out DOM code that should never be used outside of automated tests ([@jdm](https://github.com/jdm), [#37034](https://github.com/servo/servo/pull/37034)).
 
-#### Crashes
+### Crashes
 
 We fixed a number of crashes involving animated images ([@simonwuelker](https://github.com/simonwuelker), [#37058](https://github.com/servo/servo/pull/37058)), media elements with an unknown duration ([@tharkum](https://github.com/tharkum), [servo-media#437](https://github.com/servo/media/pull/437)), canvas elements during shutdown ([@mrobinson](https://github.com/mrobinson), [#37182](https://github.com/servo/servo/pull/37182)), adding a Path2D to itself ([@Taym95](https://github.com/Taym95), [#36847](https://github.com/servo/servo/pull/36847)), calculating `IntersectionObserver` areas ([@webbeef](https://github.com/webbeef), [#36955](https://github.com/servo/servo/pull/36955)), using `Node.childNodes` ([@jdm](https://github.com/jdm), [#36889](https://github.com/servo/servo/pull/36889)), resizing `OffscreenCanvas` ([@simonwuelker](https://github.com/simonwuelker), [#36855](https://github.com/servo/servo/pull/36855)), querying WebGL extensions ([@mrobinson](https://github.com/mrobinson), [#36911](https://github.com/servo/servo/pull/36911)), and slicing a sliced `Blob` ([@simonwuelker](https://github.com/simonwuelker), [#36866](https://github.com/servo/servo/pull/36866)).
 
@@ -128,7 +128,7 @@ Finally, we rewrote the implementation of `HTMLOptionElement.text` to avoid cras
 
 Having previously noticed an unsafe pattern triggered by using JS-owned values in Rust Drop implementations ([#26488](https://github.com/servo/servo/pull/26488)), we have begun incrementally removing existing Drop implementations to remove the source of unsafety ([@willypuzzle](https://github.com/willypuzzle), [#37136](https://github.com/servo/servo/pull/37136)).
 
-### Upgrades
+## Upgrades
 
 We upgraded our fork of WebRender to an upstream revision from late April ([@mrobinson](https://github.com/mrobinson), [#36770](https://github.com/servo/servo/pull/36770)), and we upgraded our Stylo dependency to a version from the start of May ([@Loirooriol](https://github.com/Loirooriol), [#36835](https://github.com/servo/servo/pull/36835)).
 These changes ensure that Servo is up to date with ongoing work in Firefox, which shares these dependencies.
