@@ -573,6 +573,50 @@
     - https://github.com/servo/servo/pull/37284    (@yezhizhen, #37284)    servoshell: Do not focus and raise new auxiliary WebDriver-created `WebView`s  (#37284)
       webdriver
 -->
+<p><canvas id="_stats" style="min-height: 400px;"></canvas></p>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.querySelector("#_stats");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06"],
+      datasets: [{
+        label: "Merged PRs",
+        data: [9, 3, 21, 78, 0, 0, 0, 24, 5, 15, 30, 30, 53, 70, 60, 64, 77, 73, 70, 167, 132, 120, 97, 111, 193, 167, 324, 185, 164, 158, 174, 273, 224, 341, 241, 230, 289, 304, 318, 314, 251, 349],
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true
+        },
+        y1: {
+          position: "right",
+          grid: {
+            drawOnChartArea: false
+          },
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: "Pull requests landed each month",
+          font: {
+            size: "20pt",
+          }
+        },
+        legend: {
+          position: 'none',
+        },
+      }
+    }
+  });
+</script>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
