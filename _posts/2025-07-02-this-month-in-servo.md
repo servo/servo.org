@@ -7,6 +7,8 @@ summary:    awooga awooga
 categories:
 ---
 
+<canvas id="_stats"></canvas>
+
 <!--
 - DONE donations
   - 2464.00/month github
@@ -357,3 +359,42 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
         opacity: 0.75;
     }
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const canvas = document.querySelector("#_stats");
+  const labels = ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06"];
+  const values = [9, 3, 21, 78, 0, 0, 0, 24, 5, 15, 30, 30, 53, 70, 60, 64, 77, 73, 70, 167, 132, 120, 97, 111, 193, 167, 324, 185, 164, 158, 174, 273, 224, 341, 241, 230, 289, 304, 318, 314, 251, 349];
+  function sliceWithZeros(xs, start, stop) {
+    return xs.map((x,i) => start <= i && i < stop ? x : 0);
+  }
+  new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: labels,
+      // alternate between blue and green every six months
+      datasets: [...Array(Math.floor(values.length / 6))].map((_,i) => ({
+        data: sliceWithZeros(values, i * 6, i * 6 + 6),
+        backgroundColor: i % 2 ? "#42be65" : "#1192e8",
+      })),
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        x: {
+          stacked: true,
+        },
+        y: {
+          beginAtZero: true,
+          stacked: true,
+        },
+      },
+      plugins: {
+        legend: {
+          position: "none",
+        },
+      },
+    }
+  });
+</script>
