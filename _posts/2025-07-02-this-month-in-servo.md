@@ -8,6 +8,40 @@ categories:
 ---
 
 <!--
+- DONE donations
+  - 2464.00/month github
+  - 2000.24/month opencollective
+  - 25 donors on thanks.dev
+- new features
+  - [dom] indexeddb
+  - [dom] transform(DOMMatrix2DInit transform) on CanvasRenderingContext2D
+  - [dom] transform(DOMMatrix2DInit transform) on CanvasPattern
+  - [dom] ImageBitmap and createImageBitmap(Blob)
+  - [dom] shadow dom <foo exportparts>
+  - [dom] xpath lang() and id()
+  - [dom] supports() on HTMLScriptElement
+  - [layout] ::part
+  - [layout] <hr size>
+  - [embedding] <meta name="viewport">
+  - [embedding] multiprocess support on windows
+- dom
+  - abort improvements (abortcontroller, abortsignal, etc)
+  - <script type="import-map">
+  - <select> bug fix
+  - shadow dom bug fix
+  - xpath bug fix
+  - trusted types bug fix
+  - scroll queries bug fix
+  - wheel and MouseEvent bug fixes
+  - encoding bug fix (#37541 294148 lines removed)
+- layout
+  - optimisation for transform etc
+  - optimisation for script queries
+- embedding
+  - :hover bug fix
+-->
+
+<!--
 - csp
     - https://github.com/servo/servo/pull/37154    (@TimvdLippe, @jdm, #37154)    net: Perform CSP checks on fetch responses. (#37154)
       csp
@@ -286,6 +320,28 @@ categories:
     - https://github.com/servo/servo/pull/37284    (@yezhizhen, #37284)    servoshell: Do not focus and raise new auxiliary WebDriver-created `WebView`s  (#37284)
       webdriver
 -->
+
+## Donations
+
+Thanks again for your generous support!
+We are now receiving **4464 USD/month** (−2.8% over May) in recurring donations.
+This helps cover the cost of our [self-hosted](https://ci0.servo.org) [CI](https://ci1.servo.org) [runners](https://ci2.servo.org) and one of our [latest Outreachy interns](https://www.outreachy.org/alums/2025-06/#:~:text=Servo)!
+
+Servo is also on [thanks.dev](https://thanks.dev), and already **25 GitHub users** (same as May) that depend on Servo are sponsoring us there.
+If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 4464 / 10000); padding-left: 0.5em;"><strong>4464</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 4464 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="4464" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
+As always, use of these funds will be decided transparently in the Technical Steering Committee.
+For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
 <style>
     ._correction {
