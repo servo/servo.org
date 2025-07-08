@@ -23,6 +23,8 @@ You can now call **transform()** with [a dictionary](https://drafts.fxtf.org/geo
 
 Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on Windows** (@wusyong, #37580).
 
+We’ve fixed several bugs, notably including a bug in the encoding of **HTML form submissions** in non-Unicode documents (@simonwuelker, #37541), which single-handedly fixed **over 97000 subtests** in the Web Platform Tests.
+
 <!--
 - DONE donations
   - 2464.00/month github
@@ -49,7 +51,7 @@ Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on 
   - trusted types bug fix
   - scroll queries bug fix
   - wheel and MouseEvent bug fixes
-  - encoding bug fix (#37541 294148 lines removed)
+  - DONE encoding bug fix (#37541 294148 lines removed)
 - layout
   - optimisation for transform etc
   - optimisation for script queries
@@ -155,7 +157,7 @@ Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on 
       dom
     - https://github.com/servo/servo/pull/37556    (@simonwuelker, #37556)    Use the document encoding when parsing a `<video>` elements poster URL (#37556)
       dom
-    - https://github.com/servo/servo/pull/37541    (@simonwuelker, #37541)    Handle nonmappable code points in Document::encoding_parse_a_url (#37541)
+    - DONE https://github.com/servo/servo/pull/37541    (@simonwuelker, #37541)    Handle nonmappable code points in Document::encoding_parse_a_url (#37541)
       dom
     - https://github.com/servo/servo/pull/37550    (@rodio, #37550)    script Exclude `CDATASection` nodes from `Node::normalize()` (#37550)
       dom
