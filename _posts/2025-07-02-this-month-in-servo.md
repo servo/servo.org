@@ -56,7 +56,7 @@ categories:
 - devtools
     - https://github.com/servo/servo/pull/37197    (@atbrakhi, #37197)    DevTools: Fix empty `debugger > source` panel (#37197)
       devtools
-    - https://github.com/servo/servo/pull/37247    (@eri@inventati.org, #37247)    devtools: Fix inspector on Firefox 139 (#37247)
+    - https://github.com/servo/servo/pull/37247    (@eerii, #37247)    devtools: Fix inspector on Firefox 139 (#37247)
       devtools
     - https://github.com/servo/servo/pull/37263    (@uthmaniv, #37263)    Update handle_network_event to use BrowsingContextActor for HttpRequest (#37263)
       devtools
@@ -75,7 +75,7 @@ categories:
 - dom
     - https://github.com/servo/servo/pull/37192    (@gterzian, #37192)    dom: implement signal abort on controller and signal (#37192)
       dom
-    - https://github.com/servo/servo/pull/37190    (@dvt.tnhn.krlbs@icloud.com, #37190)    script: Set HTTP status code when aborting an `XMLHttpRequest` (#37190)
+    - https://github.com/servo/servo/pull/37190    (@dvtkrlbs, #37190)    script: Set HTTP status code when aborting an `XMLHttpRequest` (#37190)
       dom
     - https://github.com/servo/servo/pull/34594    (@vlindhol, #34594)    XPath: implement lang() and id() core functions (#34594)
       dom
@@ -91,7 +91,7 @@ categories:
       dom
     - https://github.com/servo/servo/pull/37313    (@pewsheen, #37313)    feat(script): add `Supports()` to `htmlscriptelement` (#37313)
       dom
-    - https://github.com/servo/servo/pull/37291    (@wusyong, @yuweiwu@YunoMacBook-Air.local, #37291)    HTMLScriptElement: add `ScriptType::ImportMap` (#37291)
+    - https://github.com/servo/servo/pull/37291    (@wusyong, #37291)    HTMLScriptElement: add `ScriptType::ImportMap` (#37291)
       dom
     - https://github.com/servo/servo/pull/37293    (@simonwuelker, #37293)    Fix timing of change events for `<select>` elements (#37293)
       dom
@@ -101,7 +101,7 @@ categories:
       dom
     - https://github.com/servo/servo/pull/37340    (@pewsheen, #37340)    feat(script): add `resolve_url_like_module_specifier` to `ModuleTree` (#37340)
       dom
-    - https://github.com/servo/servo/pull/37025    (@andrei.volykhin@gmail.com, #37025)    imagebitmap: Add missing basic functionality (#37025)
+    - https://github.com/servo/servo/pull/37025    (@tharkum, #37025)    imagebitmap: Add missing basic functionality (#37025)
       dom
     - https://github.com/servo/servo/pull/37405    (@pewsheen, @wusyong, #37405)    feat(script): create import map parse result (#37405)
       dom
@@ -117,19 +117,19 @@ categories:
       dom
     - https://github.com/servo/servo/pull/37486    (@yezhizhen, #37486)    layout: capitalize string for `TextTransformCase::Capitalize` in `fn rendered_text_collection_steps` (#37486)
       dom
-    - https://github.com/servo/servo/pull/37397    (@andrei.volykhin@gmail.com, #37397)    imagebitmap: Crop bitmap data with formatting (#37397)
+    - https://github.com/servo/servo/pull/37397    (@tharkum, #37397)    imagebitmap: Crop bitmap data with formatting (#37397)
       dom
-    - https://github.com/servo/servo/pull/37434    (@ville.lindholm@external.wolt.com, #37434)    fix(xpath): pass in correct context node for // and / in predicates (#37434)
+    - https://github.com/servo/servo/pull/37434    (@vlindhol, #37434)    fix(xpath): pass in correct context node for // and / in predicates (#37434)
       dom
-    - https://github.com/servo/servo/pull/37488    (@andrei.volykhin@gmail.com, #37488)    imagebitmap: Resolve promise with ImageBitmap on bitmap task source (#37488)
+    - https://github.com/servo/servo/pull/37488    (@tharkum, #37488)    imagebitmap: Resolve promise with ImageBitmap on bitmap task source (#37488)
       dom
     - https://github.com/servo/servo/pull/37511    (@Taym95, #37511)    implement Writablestreamdefaultcontroller abortcontroller (#37511)
       dom
     - https://github.com/servo/servo/pull/37504    (@pewsheen, #37504)    feat(script): register import map (#37504)
       dom
-    - https://github.com/servo/servo/pull/37503    (@andrei.volykhin@gmail.com, #37503)    pixels: Multiply by alpha with less loss of precision (#37503)
+    - https://github.com/servo/servo/pull/37503    (@tharkum, #37503)    pixels: Multiply by alpha with less loss of precision (#37503)
       dom
-    - https://github.com/servo/servo/pull/36687    (@kenzieradityatirtarahardja18@gmail.com, @kenzieradityatirtarahardja.18@gmail.com, @asun0204@163.com, #36687)    Implement scroll event (#36687)
+    - https://github.com/servo/servo/pull/36687    (@PotatoCP, @Asun0204, #36687)    Implement scroll event (#36687)
       dom
     - https://github.com/servo/servo/pull/37594    (@TimvdLippe, #37594)    Use undefined as this in trusted type callbacks (#37594)
       dom
@@ -137,39 +137,39 @@ categories:
       dom
     - https://github.com/servo/servo/pull/37509    (@mrobinson, #37509)    script: Get scroll offsets from layout (#37509)
       dom
-    - https://github.com/servo/servo/pull/37560    (@andrei.volykhin@gmail.com, #37560)    imagebitmap: Add support of Blob as ImageBitmapSource (#37560)
+    - https://github.com/servo/servo/pull/37560    (@tharkum, #37560)    imagebitmap: Add support of Blob as ImageBitmapSource (#37560)
       dom
     - https://github.com/servo/servo/pull/37556    (@simonwuelker, #37556)    Use the document encoding when parsing a `<video>` elements poster URL (#37556)
       dom
     - https://github.com/servo/servo/pull/37541    (@simonwuelker, #37541)    Handle nonmappable code points in Document::encoding_parse_a_url (#37541)
       dom
-    - https://github.com/servo/servo/pull/37550    (@rodion.borovyk@gmail.com, #37550)    script Exclude `CDATASection` nodes from `Node::normalize()` (#37550)
+    - https://github.com/servo/servo/pull/37550    (@rodio, #37550)    script Exclude `CDATASection` nodes from `Node::normalize()` (#37550)
       dom
-    - https://github.com/servo/servo/pull/37461    (@kenzieradityatirtarahardja18@gmail.com, #37461)    script: Reverse wheel event delta sign to match specification-defined behavior (#37461)
+    - https://github.com/servo/servo/pull/37461    (@PotatoCP, #37461)    script: Reverse wheel event delta sign to match specification-defined behavior (#37461)
       dom
     - https://github.com/servo/servo/pull/37547    (@pewsheen, #37547)    feat(script): parse script element `importmap` type (#37547)
       dom
-    - https://github.com/servo/servo/pull/33044    (@arihant2math@gmail.com, @rasviitanen@gmail.com, @jdm, #33044)     Initial IndexedDB Support (#33044)
+    - https://github.com/servo/servo/pull/33044    (@arihant2math, @rasviitanen, @jdm, #33044)     Initial IndexedDB Support (#33044)
       dom
-    - https://github.com/servo/servo/pull/37652    (@arihant2math@gmail.com, @jdm, #37652)    [IndexedDB] Reduce heed related panics (#37652)
+    - https://github.com/servo/servo/pull/37652    (@arihant2math, @jdm, #37652)    [IndexedDB] Reduce heed related panics (#37652)
       dom
-    - https://github.com/servo/servo/pull/37635    (@andrei.volykhin@gmail.com, #37635)    webgl: Ignore pixel storage parameters for ImageBitmap source (#37635)
+    - https://github.com/servo/servo/pull/37635    (@tharkum, #37635)    webgl: Ignore pixel storage parameters for ImageBitmap source (#37635)
       dom
-    - https://github.com/servo/servo/pull/37671    (@andrei.volykhin@gmail.com, #37671)    canvas: Reset the current path on canvas context resetting (#37671)
+    - https://github.com/servo/servo/pull/37671    (@tharkum, #37671)    canvas: Reset the current path on canvas context resetting (#37671)
       dom
-    - https://github.com/servo/servo/pull/37653    (@arihant2math@gmail.com, #37653)    [IndexedDB] Fix upgrade version operation (#37653)
+    - https://github.com/servo/servo/pull/37653    (@arihant2math, #37653)    [IndexedDB] Fix upgrade version operation (#37653)
       dom
     - https://github.com/servo/servo/pull/37620    (@sagudev, #37620)    Make ImageData more spec compliant (#37620)
       dom
-    - https://github.com/servo/servo/pull/37692    (@andrei.volykhin@gmail.com, #37692)    canvas: Add CanvasTransform 'setTransform(transform)' method (#37692)
+    - https://github.com/servo/servo/pull/37692    (@tharkum, #37692)    canvas: Add CanvasTransform 'setTransform(transform)' method (#37692)
       dom
     - https://github.com/servo/servo/pull/37672    (@mrobinson, #37672)    script: Pass more information to the `MouseEvent` constructor (#37672)
       dom
     - https://github.com/servo/servo/pull/37704    (@simonwuelker, #37704)    Determine the initial state for fragment parsing using the scripting flag of the context element (#37704)
       dom
-    - https://github.com/servo/servo/pull/37731    (@andrei.volykhin@gmail.com, #37731)    canvas: Add CanvasPattern 'setTranform(transform)' method (#37731)
+    - https://github.com/servo/servo/pull/37731    (@tharkum, #37731)    canvas: Add CanvasPattern 'setTranform(transform)' method (#37731)
       dom
-    - https://github.com/servo/servo/pull/37634    (@andrei.volykhin@gmail.com, #37634)    imagebitmap: Add 'none' image orientation option (#37634)
+    - https://github.com/servo/servo/pull/37634    (@tharkum, #37634)    imagebitmap: Add 'none' image orientation option (#37634)
       dom
 - embedding
     - https://github.com/servo/servo/pull/35901    (@shubhamg13, @xiaochengh, #35901)    Add support for parsing and applying `viewport` `<meta>`  (#35901)
@@ -212,11 +212,11 @@ categories:
     - https://github.com/servo/servo/pull/37677    (@mrobinson, @Loirooriol, #37677)    script|layout: Do not force restyle when doing script queries (#37677)
       layout
 - media
-    - https://github.com/servo/servo/pull/37002    (@andrei.volykhin@gmail.com, #37002)    htmlmediaelement:  Fix fetch request race on "seek-data" event (#37002)
+    - https://github.com/servo/servo/pull/37002    (@tharkum, #37002)    htmlmediaelement:  Fix fetch request race on "seek-data" event (#37002)
       media
-    - https://github.com/servo/servo/pull/37264    (@andrei.volykhin@gmail.com, #37264)    htmlmediaelement: Support seek requests for non seekable fetch context (#37264)
+    - https://github.com/servo/servo/pull/37264    (@tharkum, #37264)    htmlmediaelement: Support seek requests for non seekable fetch context (#37264)
       media
-    - https://github.com/servo/servo/pull/37533    (@andrei.volykhin@gmail.com, @mrobinson, #37533)    htmlvideoelement: Fix poster frame processing algorithm (#37533)
+    - https://github.com/servo/servo/pull/37533    (@tharkum, @mrobinson, #37533)    htmlvideoelement: Fix poster frame processing algorithm (#37533)
       media
 - network
     - https://github.com/servo/servo/pull/37277    (@TimvdLippe, #37277)    Fix Sec-Fetch-Site header (#37277)
@@ -247,7 +247,7 @@ categories:
       stability
     - https://github.com/servo/servo/pull/37459    (@webbeef, #37459)    Fix panic in formelement.rs (#37459)
       stability
-    - https://github.com/servo/servo/pull/37460    (@wusyong, @yuweiwu@YunoMacBook-Air.local, #37460)    canvas: prevent unwrap on offscreen canvas (#37460)
+    - https://github.com/servo/servo/pull/37460    (@wusyong, #37460)    canvas: prevent unwrap on offscreen canvas (#37460)
       stability
     - https://github.com/servo/servo/pull/37505    (@mrobinson, @Loirooriol, #37505)    compositor: Wait for both Script and the Constellation when shutting down Pipelines (#37505)
       stability
@@ -277,7 +277,7 @@ categories:
       webdriver
     - https://github.com/servo/servo/pull/37153    (@longvatrong111, #37153)    Implement actions_by_tick for webdriver (#37153)
       webdriver
-    - https://github.com/servo/servo/pull/37224    (@kenzieradityatirtarahardja18@gmail.com, #37224)    Implement wb element send keys for file input (#37224)
+    - https://github.com/servo/servo/pull/37224    (@PotatoCP, #37224)    Implement wb element send keys for file input (#37224)
       webdriver
     - https://github.com/servo/servo/pull/37280    (@longvatrong111, #37280)    [webdriver] Implement get shadow root (#37280)
       webdriver
@@ -285,7 +285,7 @@ categories:
       webdriver
     - https://github.com/servo/servo/pull/37393    (@yezhizhen, #37393)    [WebDriver: Dispatch Action] Check if browsing context still open for each tick action (#37393)
       webdriver
-    - https://github.com/servo/servo/pull/37260    (@kenzieradityatirtarahardja18@gmail.com, #37260)    [webdriver] Add synchronization for wheel action (#37260)
+    - https://github.com/servo/servo/pull/37260    (@PotatoCP, #37260)    [webdriver] Add synchronization for wheel action (#37260)
       webdriver
     - https://github.com/servo/servo/pull/37406    (@yezhizhen, #37406)    [WebDriver] Improve some session/window handling (#37406)
       webdriver
@@ -303,7 +303,7 @@ categories:
       webdriver
     - https://github.com/servo/servo/pull/37532    (@yezhizhen, #37532)    script::webdriver_handler: Fully implement `get_known_element` (#37532)
       webdriver
-    - https://github.com/servo/servo/pull/37403    (@kenzieradityatirtarahardja18@gmail.com, #37403)    [WebDriver] Add synchronization for key action (#37403)
+    - https://github.com/servo/servo/pull/37403    (@PotatoCP, #37403)    [WebDriver] Add synchronization for key action (#37403)
       webdriver
     - https://github.com/servo/servo/pull/37521    (@yezhizhen, #37521)    `webdriver_server`: Implement find element(s) from element according to spec (#37521)
       webdriver
