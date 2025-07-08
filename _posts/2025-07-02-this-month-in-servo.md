@@ -7,25 +7,39 @@ summary:    awooga awooga
 categories:
 ---
 
+June was Servo’s busiest month in years, with **349 pull requests** landing in our nightly builds!
+
 <canvas id="_stats"></canvas>
+
+Servo now supports **viewport meta** tags (@shubhamg13, @xiaochengh, #35901), the **exportparts** attribute (@simonwuelker, #37345), the **‘::part()’ selector** (@simonwuelker, #37307), and several new web API features:
+
+- **ImageBitmap** (@tharkum, #37025, #37397, #37488, #37560, #37634)
+- the **supports() method** on **HTMLScriptElement** (@pewsheen, #37313)
+- the **lang()** and **id()** functions in **XPath** (@vlindhol, #34594)
+- the **&lt;hr size> attribute** (@simonwuelker, #37211)
+- barebones **IndexedDB** support (@arihant2math, @rasviitanen, @jdm, #33044, #37652, #37653)
+
+You can now call **transform()** with [a dictionary](https://drafts.fxtf.org/geometry/#dommatrixinit-dictionary) on **CanvasRenderingContext2D** and **CanvasPattern** (@tharkum, #37692, #37731).
+
+Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on Windows** (@wusyong, #37580).
 
 <!--
 - DONE donations
   - 2464.00/month github
   - 2000.24/month opencollective
   - 25 donors on thanks.dev
-- new features
-  - [dom] indexeddb
-  - [dom] transform(DOMMatrix2DInit transform) on CanvasRenderingContext2D
-  - [dom] transform(DOMMatrix2DInit transform) on CanvasPattern
-  - [dom] ImageBitmap and createImageBitmap(Blob)
-  - [dom] shadow dom <foo exportparts>
-  - [dom] xpath lang() and id()
-  - [dom] supports() on HTMLScriptElement
-  - [layout] ::part
-  - [layout] <hr size>
-  - [embedding] <meta name="viewport">
-  - [embedding] multiprocess support on windows
+- DONE new features
+  - DONE [dom] indexeddb
+  - DONE [dom] transform(DOMMatrix2DInit transform) on CanvasRenderingContext2D
+  - DONE [dom] transform(DOMMatrix2DInit transform) on CanvasPattern
+  - DONE [dom] ImageBitmap and createImageBitmap(Blob)
+  - DONE [dom] shadow dom <foo exportparts>
+  - DONE [dom] xpath lang() and id()
+  - DONE [dom] supports() on HTMLScriptElement
+  - DONE [layout] ::part
+  - DONE [layout] <hr size>
+  - DONE [embedding] <meta name="viewport">
+  - DONE [embedding] multiprocess support on windows
 - dom
   - abort improvements (abortcontroller, abortsignal, etc)
   - <script type="import-map">
@@ -77,7 +91,7 @@ categories:
       dom
     - https://github.com/servo/servo/pull/37190    (@dvtkrlbs, #37190)    script: Set HTTP status code when aborting an `XMLHttpRequest` (#37190)
       dom
-    - https://github.com/servo/servo/pull/34594    (@vlindhol, #34594)    XPath: implement lang() and id() core functions (#34594)
+    - DONE https://github.com/servo/servo/pull/34594    (@vlindhol, #34594)    XPath: implement lang() and id() core functions (#34594)
       dom
     - https://github.com/servo/servo/pull/37218    (@gterzian, #37218)    dom: implement aborted method of abort signal (#37218)
       dom
@@ -89,7 +103,7 @@ categories:
       dom
     - https://github.com/servo/servo/pull/37245    (@Taym95, #37245)    Dom: Implement AbortSignal ThrowIfAborted method (#37245)
       dom
-    - https://github.com/servo/servo/pull/37313    (@pewsheen, #37313)    feat(script): add `Supports()` to `htmlscriptelement` (#37313)
+    - DONE https://github.com/servo/servo/pull/37313    (@pewsheen, #37313)    feat(script): add `Supports()` to `htmlscriptelement` (#37313)
       dom
     - https://github.com/servo/servo/pull/37291    (@wusyong, #37291)    HTMLScriptElement: add `ScriptType::ImportMap` (#37291)
       dom
@@ -101,11 +115,11 @@ categories:
       dom
     - https://github.com/servo/servo/pull/37340    (@pewsheen, #37340)    feat(script): add `resolve_url_like_module_specifier` to `ModuleTree` (#37340)
       dom
-    - https://github.com/servo/servo/pull/37025    (@tharkum, #37025)    imagebitmap: Add missing basic functionality (#37025)
+    - DONE https://github.com/servo/servo/pull/37025    (@tharkum, #37025)    imagebitmap: Add missing basic functionality (#37025)
       dom
     - https://github.com/servo/servo/pull/37405    (@pewsheen, @wusyong, #37405)    feat(script): create import map parse result (#37405)
       dom
-    - https://github.com/servo/servo/pull/37345    (@simonwuelker, #37345)    Support exporting shadow parts with the `exportparts` attribute (#37345)
+    - DONE https://github.com/servo/servo/pull/37345    (@simonwuelker, #37345)    Support exporting shadow parts with the `exportparts` attribute (#37345)
       dom
     - https://github.com/servo/servo/pull/37244    (@gterzian, #37244)    AbortController: integrate with stream piping. (#37244)
       dom
@@ -117,11 +131,11 @@ categories:
       dom
     - https://github.com/servo/servo/pull/37486    (@yezhizhen, #37486)    layout: capitalize string for `TextTransformCase::Capitalize` in `fn rendered_text_collection_steps` (#37486)
       dom
-    - https://github.com/servo/servo/pull/37397    (@tharkum, #37397)    imagebitmap: Crop bitmap data with formatting (#37397)
+    - DONE https://github.com/servo/servo/pull/37397    (@tharkum, #37397)    imagebitmap: Crop bitmap data with formatting (#37397)
       dom
     - https://github.com/servo/servo/pull/37434    (@vlindhol, #37434)    fix(xpath): pass in correct context node for // and / in predicates (#37434)
       dom
-    - https://github.com/servo/servo/pull/37488    (@tharkum, #37488)    imagebitmap: Resolve promise with ImageBitmap on bitmap task source (#37488)
+    - DONE https://github.com/servo/servo/pull/37488    (@tharkum, #37488)    imagebitmap: Resolve promise with ImageBitmap on bitmap task source (#37488)
       dom
     - https://github.com/servo/servo/pull/37511    (@Taym95, #37511)    implement Writablestreamdefaultcontroller abortcontroller (#37511)
       dom
@@ -137,7 +151,7 @@ categories:
       dom
     - https://github.com/servo/servo/pull/37509    (@mrobinson, #37509)    script: Get scroll offsets from layout (#37509)
       dom
-    - https://github.com/servo/servo/pull/37560    (@tharkum, #37560)    imagebitmap: Add support of Blob as ImageBitmapSource (#37560)
+    - DONE https://github.com/servo/servo/pull/37560    (@tharkum, #37560)    imagebitmap: Add support of Blob as ImageBitmapSource (#37560)
       dom
     - https://github.com/servo/servo/pull/37556    (@simonwuelker, #37556)    Use the document encoding when parsing a `<video>` elements poster URL (#37556)
       dom
@@ -149,34 +163,34 @@ categories:
       dom
     - https://github.com/servo/servo/pull/37547    (@pewsheen, #37547)    feat(script): parse script element `importmap` type (#37547)
       dom
-    - https://github.com/servo/servo/pull/33044    (@arihant2math, @rasviitanen, @jdm, #33044)     Initial IndexedDB Support (#33044)
+    - DONE https://github.com/servo/servo/pull/33044    (@arihant2math, @rasviitanen, @jdm, #33044)     Initial IndexedDB Support (#33044)
       dom
-    - https://github.com/servo/servo/pull/37652    (@arihant2math, @jdm, #37652)    [IndexedDB] Reduce heed related panics (#37652)
+    - DONE https://github.com/servo/servo/pull/37652    (@arihant2math, @jdm, #37652)    [IndexedDB] Reduce heed related panics (#37652)
       dom
     - https://github.com/servo/servo/pull/37635    (@tharkum, #37635)    webgl: Ignore pixel storage parameters for ImageBitmap source (#37635)
       dom
     - https://github.com/servo/servo/pull/37671    (@tharkum, #37671)    canvas: Reset the current path on canvas context resetting (#37671)
       dom
-    - https://github.com/servo/servo/pull/37653    (@arihant2math, #37653)    [IndexedDB] Fix upgrade version operation (#37653)
+    - DONE https://github.com/servo/servo/pull/37653    (@arihant2math, #37653)    [IndexedDB] Fix upgrade version operation (#37653)
       dom
     - https://github.com/servo/servo/pull/37620    (@sagudev, #37620)    Make ImageData more spec compliant (#37620)
       dom
-    - https://github.com/servo/servo/pull/37692    (@tharkum, #37692)    canvas: Add CanvasTransform 'setTransform(transform)' method (#37692)
+    - DONE https://github.com/servo/servo/pull/37692    (@tharkum, #37692)    canvas: Add CanvasTransform 'setTransform(transform)' method (#37692)
       dom
     - https://github.com/servo/servo/pull/37672    (@mrobinson, #37672)    script: Pass more information to the `MouseEvent` constructor (#37672)
       dom
     - https://github.com/servo/servo/pull/37704    (@simonwuelker, #37704)    Determine the initial state for fragment parsing using the scripting flag of the context element (#37704)
       dom
-    - https://github.com/servo/servo/pull/37731    (@tharkum, #37731)    canvas: Add CanvasPattern 'setTranform(transform)' method (#37731)
+    - DONE https://github.com/servo/servo/pull/37731    (@tharkum, #37731)    canvas: Add CanvasPattern 'setTranform(transform)' method (#37731)
       dom
-    - https://github.com/servo/servo/pull/37634    (@tharkum, #37634)    imagebitmap: Add 'none' image orientation option (#37634)
+    - DONE https://github.com/servo/servo/pull/37634    (@tharkum, #37634)    imagebitmap: Add 'none' image orientation option (#37634)
       dom
 - embedding
-    - https://github.com/servo/servo/pull/35901    (@shubhamg13, @xiaochengh, #35901)    Add support for parsing and applying `viewport` `<meta>`  (#35901)
+    - DONE https://github.com/servo/servo/pull/35901    (@shubhamg13, @xiaochengh, #35901)    Add support for parsing and applying `viewport` `<meta>`  (#35901)
       embedding
     - https://github.com/servo/servo/pull/37317    (@Legend-Master, #37317)    libservo: Allow embedders to signal when the cursor has left the `WebView` (#37317)
       embedding
-    - https://github.com/servo/servo/pull/37580    (@wusyong, #37580)    constellation: add multiprocess support on Windows (#37580)
+    - DONE https://github.com/servo/servo/pull/37580    (@wusyong, #37580)    constellation: add multiprocess support on Windows (#37580)
       embedding
     - https://github.com/servo/servo/pull/37524    (@CarePackage17, #37524)    Upgrade version of Android in default user agent string (#37524)
       embedding
@@ -185,13 +199,13 @@ categories:
 - layout
     - https://github.com/servo/servo/pull/37186    (@mrobinson, @Loirooriol, #37186)    script: Allow reflows that do not produce display lists (#37186)
       layout
-    - https://github.com/servo/servo/pull/37211    (@simonwuelker, #37211)    Implement the `size` presentational hint for `<hr>` elements (#37211)
+    - DONE https://github.com/servo/servo/pull/37211    (@simonwuelker, #37211)    Implement the `size` presentational hint for `<hr>` elements (#37211)
       layout
     - https://github.com/servo/servo/pull/37252    (@Loirooriol, #37252)    layout: Force outside ::marker to establish a BFC (#37252)
       layout
     - https://github.com/servo/servo/pull/34948    (@nicoburns, #34948)    CSS Grid: percentage sizing fixes (#34948)
       layout
-    - https://github.com/servo/servo/pull/37307    (@simonwuelker, #37307)    Support `::part` selector (#37307)
+    - DONE https://github.com/servo/servo/pull/37307    (@simonwuelker, #37307)    Support `::part` selector (#37307)
       layout
     - https://github.com/servo/servo/pull/37380    (@Loirooriol, @mrobinson, #37380)    Have transform and related changes conditionally trigger only overflow damage (#37380)
       layout
