@@ -330,38 +330,39 @@
 &lt;p&gt;&lt;canvas id=&quot;_stats&quot; style=&quot;min-height: 400px;&quot;&gt;&lt;/canvas&gt;&lt;/p&gt;
 &lt;script src=&quot;https://cdn.jsdelivr.net/npm/chart.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
-  const ctx = document.querySelector(&quot;#_stats&quot;);
-
-  new Chart(ctx, {
+  const canvas = document.querySelector(&quot;#_stats&quot;);
+  const labels = [&quot;2022-01&quot;, &quot;2022-02&quot;, &quot;2022-03&quot;, &quot;2022-04&quot;, &quot;2022-05&quot;, &quot;2022-06&quot;, &quot;2022-07&quot;, &quot;2022-08&quot;, &quot;2022-09&quot;, &quot;2022-10&quot;, &quot;2022-11&quot;, &quot;2022-12&quot;, &quot;2023-01&quot;, &quot;2023-02&quot;, &quot;2023-03&quot;, &quot;2023-04&quot;, &quot;2023-05&quot;, &quot;2023-06&quot;, &quot;2023-07&quot;, &quot;2023-08&quot;, &quot;2023-09&quot;, &quot;2023-10&quot;, &quot;2023-11&quot;, &quot;2023-12&quot;, &quot;2024-01&quot;, &quot;2024-02&quot;, &quot;2024-03&quot;, &quot;2024-04&quot;, &quot;2024-05&quot;, &quot;2024-06&quot;, &quot;2024-07&quot;, &quot;2024-08&quot;, &quot;2024-09&quot;, &quot;2024-10&quot;, &quot;2024-11&quot;, &quot;2024-12&quot;, &quot;2025-01&quot;, &quot;2025-02&quot;, &quot;2025-03&quot;, &quot;2025-04&quot;, &quot;2025-05&quot;, &quot;2025-06&quot;];
+  const values = [9, 3, 21, 78, 0, 0, 0, 24, 5, 15, 30, 30, 53, 70, 60, 64, 77, 73, 70, 167, 132, 120, 97, 111, 193, 167, 324, 185, 164, 158, 174, 273, 224, 341, 241, 230, 289, 304, 318, 314, 251, 349];
+  function sliceWithZeros(xs, start, stop) {
+    return xs.map((x,i) =&gt; start &lt;= i &amp;&amp; i &lt; stop ? x : 0);
+  }
+  new Chart(canvas, {
     type: &quot;bar&quot;,
     data: {
-      labels: [&quot;2022-01&quot;, &quot;2022-02&quot;, &quot;2022-03&quot;, &quot;2022-04&quot;, &quot;2022-05&quot;, &quot;2022-06&quot;, &quot;2022-07&quot;, &quot;2022-08&quot;, &quot;2022-09&quot;, &quot;2022-10&quot;, &quot;2022-11&quot;, &quot;2022-12&quot;, &quot;2023-01&quot;, &quot;2023-02&quot;, &quot;2023-03&quot;, &quot;2023-04&quot;, &quot;2023-05&quot;, &quot;2023-06&quot;, &quot;2023-07&quot;, &quot;2023-08&quot;, &quot;2023-09&quot;, &quot;2023-10&quot;, &quot;2023-11&quot;, &quot;2023-12&quot;, &quot;2024-01&quot;, &quot;2024-02&quot;, &quot;2024-03&quot;, &quot;2024-04&quot;, &quot;2024-05&quot;, &quot;2024-06&quot;, &quot;2024-07&quot;, &quot;2024-08&quot;, &quot;2024-09&quot;, &quot;2024-10&quot;, &quot;2024-11&quot;, &quot;2024-12&quot;, &quot;2025-01&quot;, &quot;2025-02&quot;, &quot;2025-03&quot;, &quot;2025-04&quot;, &quot;2025-05&quot;, &quot;2025-06&quot;],
-      datasets: [{
-        label: &quot;Merged PRs&quot;,
-        data: [9, 3, 21, 78, 0, 0, 0, 24, 5, 15, 30, 30, 53, 70, 60, 64, 77, 73, 70, 167, 132, 120, 97, 111, 193, 167, 324, 185, 164, 158, 174, 273, 224, 341, 241, 230, 289, 304, 318, 314, 251, 349],
-        borderWidth: 2
-      }]
+      labels: labels,
+      // alternate between blue and green every six months
+      datasets: [...Array(Math.floor(values.length / 6))].map((_,i) =&gt; ({
+        data: sliceWithZeros(values, i * 6, i * 6 + 6),
+        backgroundColor: i % 2 ? &quot;#42be65&quot; : &quot;#1192e8&quot;,
+      })),
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
+        x: {
+          stacked: true,
+        },
         y: {
-          beginAtZero: true
+          beginAtZero: true,
+          stacked: true,
         },
       },
       plugins: {
-        title: {
-          display: true,
-          text: &quot;Pull requests landed each month&quot;,
-          font: {
-            size: &quot;20pt&quot;,
-          }
-        },
         legend: {
-          position: &#39;none&#39;,
+          position: &quot;none&quot;,
         },
-      }
+      },
     }
   });
 &lt;/script&gt;
