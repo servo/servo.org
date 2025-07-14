@@ -25,6 +25,28 @@ Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on 
 
 We’ve fixed several bugs, notably including a bug in the encoding of **HTML form submissions** in non-Unicode documents (@simonwuelker, #37541), which single-handedly fixed **over 97000 subtests** in the Web Platform Tests.
 
+## Performance
+
+We’ve landed several improvements towards **incremental layout**, a broad class of optimisations that ensure that layout work is only done when something has changed and never done twice.
+That work is some subset of [these five steps](https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report#layout-2020):
+
+- **Style**, that is, calculating the styles for the DOM tree
+- **[Box tree](https://drafts.csswg.org/css-display/#box-tree) construction**, taking the styled DOM tree as input
+- **[Fragment](https://www.w3.org/TR/css-break-4/#fragment) tree construction**, for pages, columns, and [lines](https://www.w3.org/TR/css-text-3/#line-breaking)
+- **Stacking context tree construction**, sorting it into CSS [painting order](https://www.w3.org/TR/CSS22/zindex.html#painting-order)
+- **Display list construction**, yielding the input we send to WebRender
+
+Servo can now **skip display list construction** when nothing would change (@mrobinson, @Loirooriol, #37186).
+This change is especially noticeable when moving the mouse cursor around on a page.
+
+**Script queries**, like offsetParent and getBoundingClientRect(), read back information from style and layout.
+When answering script queries, [we can often skip some steps](https://github.com/servo/servo/blob/78cd77069797437797158bb860117efa699e9215/components/layout/layout_impl.rs#L1409-L1435) that are not relevant, but three steps were previously unavoidable.
+Script queries can now **skip style, box tree, and fragment tree updates** when those are up to date (@mrobinson, @Loirooriol, #37677).
+This means some queries can now be answered without doing any work at all!
+
+You can now **change ‘transform’**, ‘scale’, ‘rotate’, ‘translate’, and ‘perspective’ **without a full layout** in many cases (@Loirooriol, @mrobinson, #37380).
+
+
 <!--
 - DONE donations
   - 2464.00/month github
@@ -53,8 +75,9 @@ We’ve fixed several bugs, notably including a bug in the encoding of **HTML fo
   - wheel and MouseEvent bug fixes
   - DONE encoding bug fix (#37541 294148 lines removed)
 - layout
-  - optimisation for transform etc
-  - optimisation for script queries
+  - DONE optimisation for display lists
+  - DONE optimisation for transform etc
+  - DONE optimisation for script queries
 - embedding
   - :hover bug fix
 -->
@@ -199,7 +222,7 @@ We’ve fixed several bugs, notably including a bug in the encoding of **HTML fo
     - https://github.com/servo/servo/pull/36714    (@longvatrong111, #36714)    [webdriver] Move Webdriver to ServoShell (#36714)
       embedding
 - layout
-    - https://github.com/servo/servo/pull/37186    (@mrobinson, @Loirooriol, #37186)    script: Allow reflows that do not produce display lists (#37186)
+    - DONE https://github.com/servo/servo/pull/37186    (@mrobinson, @Loirooriol, #37186)    script: Allow reflows that do not produce display lists (#37186)
       layout
     - DONE https://github.com/servo/servo/pull/37211    (@simonwuelker, #37211)    Implement the `size` presentational hint for `<hr>` elements (#37211)
       layout
@@ -209,7 +232,7 @@ We’ve fixed several bugs, notably including a bug in the encoding of **HTML fo
       layout
     - DONE https://github.com/servo/servo/pull/37307    (@simonwuelker, #37307)    Support `::part` selector (#37307)
       layout
-    - https://github.com/servo/servo/pull/37380    (@Loirooriol, @mrobinson, #37380)    Have transform and related changes conditionally trigger only overflow damage (#37380)
+    - DONE https://github.com/servo/servo/pull/37380    (@Loirooriol, @mrobinson, #37380)    Have transform and related changes conditionally trigger only overflow damage (#37380)
       layout
     - https://github.com/servo/servo/pull/37362    (@Loirooriol, #37362)    layout: Floor free space by 0 in solve_inline_margins_avoiding_floats() (#37362)
       layout
@@ -225,7 +248,7 @@ We’ve fixed several bugs, notably including a bug in the encoding of **HTML fo
       layout
     - https://github.com/servo/servo/pull/37708    (@Loirooriol, #37708)    layout: Let `align-content: stretch` fall back to `unsafe flex-start` (#37708)
       layout
-    - https://github.com/servo/servo/pull/37677    (@mrobinson, @Loirooriol, #37677)    script|layout: Do not force restyle when doing script queries (#37677)
+    - DONE https://github.com/servo/servo/pull/37677    (@mrobinson, @Loirooriol, #37677)    script|layout: Do not force restyle when doing script queries (#37677)
       layout
 - media
     - https://github.com/servo/servo/pull/37002    (@tharkum, #37002)    htmlmediaelement:  Fix fetch request race on "seek-data" event (#37002)
