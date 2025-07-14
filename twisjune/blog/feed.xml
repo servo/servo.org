@@ -28,6 +28,25 @@
 &lt;p&gt;You can now call &lt;strong&gt;transform()&lt;/strong&gt; with &lt;a href=&quot;https://drafts.fxtf.org/geometry/#dommatrixinit-dictionary&quot;&gt;a dictionary&lt;/a&gt; on &lt;strong&gt;CanvasRenderingContext2D&lt;/strong&gt; and &lt;strong&gt;CanvasPattern&lt;/strong&gt; (@tharkum, #37692, #37731).&lt;/p&gt;
 &lt;p&gt;Our experimental &lt;strong&gt;multiprocess mode&lt;/strong&gt; (&lt;code&gt;-M&lt;/code&gt; / &lt;code&gt;--multiprocess&lt;/code&gt;) now &lt;strong&gt;works on Windows&lt;/strong&gt; (@wusyong, #37580).&lt;/p&gt;
 &lt;p&gt;We’ve fixed several bugs, notably including a bug in the encoding of &lt;strong&gt;HTML form submissions&lt;/strong&gt; in non-Unicode documents (@simonwuelker, #37541), which single-handedly fixed &lt;strong&gt;over 97000 subtests&lt;/strong&gt; in the Web Platform Tests.&lt;/p&gt;
+&lt;h2 id=&quot;performance&quot; tabindex=&quot;-1&quot;&gt;Performance &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjune/blog/2025/07/02/this-month-in-servo/#performance&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We’ve landed several improvements towards &lt;strong&gt;incremental layout&lt;/strong&gt;, a broad class of optimisations that ensure that layout work is only done when something has changed and never done twice.
+That work is some subset of &lt;a href=&quot;https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report#layout-2020&quot;&gt;these five steps&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Style&lt;/strong&gt;, that is, calculating the styles for the DOM tree&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://drafts.csswg.org/css-display/#box-tree&quot;&gt;Box tree&lt;/a&gt; construction&lt;/strong&gt;, taking the styled DOM tree as input&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://www.w3.org/TR/css-break-4/#fragment&quot;&gt;Fragment&lt;/a&gt; tree construction&lt;/strong&gt;, for pages, columns, and &lt;a href=&quot;https://www.w3.org/TR/css-text-3/#line-breaking&quot;&gt;lines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stacking context tree construction&lt;/strong&gt;, sorting it into CSS &lt;a href=&quot;https://www.w3.org/TR/CSS22/zindex.html#painting-order&quot;&gt;painting order&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Display list construction&lt;/strong&gt;, yielding the input we send to WebRender&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Servo can now &lt;strong&gt;skip display list construction&lt;/strong&gt; when nothing would change (@mrobinson, @Loirooriol, #37186).
+This change is especially noticeable when moving the mouse cursor around on a page.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Script queries&lt;/strong&gt;, like offsetParent and getBoundingClientRect(), read back information from style and layout.
+When answering script queries, &lt;a href=&quot;https://github.com/servo/servo/blob/78cd77069797437797158bb860117efa699e9215/components/layout/layout_impl.rs#L1409-L1435&quot;&gt;we can often skip some steps&lt;/a&gt; that are not relevant, but three steps were previously unavoidable.
+Script queries can now &lt;strong&gt;skip style, box tree, and fragment tree updates&lt;/strong&gt; when those are up to date (@mrobinson, @Loirooriol, #37677).
+This means some queries can now be answered without doing any work at all!&lt;/p&gt;
+&lt;p&gt;You can now &lt;strong&gt;change ‘transform’&lt;/strong&gt;, ‘scale’, ‘rotate’, ‘translate’, and ‘perspective’ &lt;strong&gt;without a full layout&lt;/strong&gt; in many cases (@Loirooriol, @mrobinson, #37380).&lt;/p&gt;
 &lt;!--
 - DONE donations
   - 2464.00/month github
@@ -56,8 +75,9 @@
   - wheel and MouseEvent bug fixes
   - DONE encoding bug fix (#37541 294148 lines removed)
 - layout
-  - optimisation for transform etc
-  - optimisation for script queries
+  - DONE optimisation for display lists
+  - DONE optimisation for transform etc
+  - DONE optimisation for script queries
 - embedding
   - :hover bug fix
 --&gt;
@@ -201,7 +221,7 @@
     - https://github.com/servo/servo/pull/36714    (@longvatrong111, #36714)    [webdriver] Move Webdriver to ServoShell (#36714)
       embedding
 - layout
-    - https://github.com/servo/servo/pull/37186    (@mrobinson, @Loirooriol, #37186)    script: Allow reflows that do not produce display lists (#37186)
+    - DONE https://github.com/servo/servo/pull/37186    (@mrobinson, @Loirooriol, #37186)    script: Allow reflows that do not produce display lists (#37186)
       layout
     - DONE https://github.com/servo/servo/pull/37211    (@simonwuelker, #37211)    Implement the `size` presentational hint for `&lt;hr&gt;` elements (#37211)
       layout
@@ -211,7 +231,7 @@
       layout
     - DONE https://github.com/servo/servo/pull/37307    (@simonwuelker, #37307)    Support `::part` selector (#37307)
       layout
-    - https://github.com/servo/servo/pull/37380    (@Loirooriol, @mrobinson, #37380)    Have transform and related changes conditionally trigger only overflow damage (#37380)
+    - DONE https://github.com/servo/servo/pull/37380    (@Loirooriol, @mrobinson, #37380)    Have transform and related changes conditionally trigger only overflow damage (#37380)
       layout
     - https://github.com/servo/servo/pull/37362    (@Loirooriol, #37362)    layout: Floor free space by 0 in solve_inline_margins_avoiding_floats() (#37362)
       layout
@@ -227,7 +247,7 @@
       layout
     - https://github.com/servo/servo/pull/37708    (@Loirooriol, #37708)    layout: Let `align-content: stretch` fall back to `unsafe flex-start` (#37708)
       layout
-    - https://github.com/servo/servo/pull/37677    (@mrobinson, @Loirooriol, #37677)    script|layout: Do not force restyle when doing script queries (#37677)
+    - DONE https://github.com/servo/servo/pull/37677    (@mrobinson, @Loirooriol, #37677)    script|layout: Do not force restyle when doing script queries (#37677)
       layout
 - media
     - https://github.com/servo/servo/pull/37002    (@tharkum, #37002)    htmlmediaelement:  Fix fetch request race on &quot;seek-data&quot; event (#37002)
