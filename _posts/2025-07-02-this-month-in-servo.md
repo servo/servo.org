@@ -35,6 +35,14 @@ We now have basic support for the **Network tab** (@uthmaniv, #37384, #37263, #3
 
 In addition, our devtools are now compatible with **Firefox 139** (@eerii, #37247), and we’ve landed some preliminary work towards supporting the **Sources tab** (@atbrakhi, @delan, #36774, #37456, #37197).
 
+<figure>
+  <a href="{{ '/img/blog/2025-07-devtools1.png' | url }}"><img alt="Network tab in the Servo devtools, showing a list of requests" src="{{ '/img/blog/2025-07-devtools1.png' | url }}"></a>
+  <div style="display: flex;">
+    <a href="{{ '/img/blog/2025-07-devtools2-crop.png' | url }}"><img alt="Headers tab in the Network panel, showing the request and response headers for a request" src="{{ '/img/blog/2025-07-devtools2-crop.png' | url }}"></a>
+    <a href="{{ '/img/blog/2025-07-devtools3-crop.png' | url }}"><img alt="Timings tab in the Network panel, showing the time each phase of a request took" src="{{ '/img/blog/2025-07-devtools3-crop.png' | url }}"></a>
+  </div>
+</figure>
+
 ## Performance
 
 We’ve landed several improvements towards **incremental layout**, a broad class of optimisations that ensure that layout work is only done when something has changed and never done twice.
