@@ -28,6 +28,13 @@ We’ve fixed several bugs, notably including a bug in the encoding of **HTML fo
 Work continues on our **WebDriver server**, which can be used to automate Servo and will also power our [support for testdriver.js-based Web Platform Tests](https://book.servo.org/architecture/servodriver.html).
 We now better handle operations for [switching contexts](https://w3c.github.io/webdriver/#contexts) (@yezhizhen, @longvatrong111, #37685, #37632, #37411), [sending input](https://w3c.github.io/webdriver/#actions) (@longvatrong111, @yezhizhen, @PotatoCP, #37484, #37624, #37403, #37260, #37423, #37224, #37393, #37153, #37095), [inspecting the page](https://w3c.github.io/webdriver/#element-retrieval) (@yezhizhen, #37521, #37532, #37502, #37452, #37425, #37470), and working with shadow roots (@yezhizhen, @longvatrong111, #37546, #37578, #37280).
 
+## Devtools
+
+Servo’s [devtools support](https://book.servo.org/hacking/using-devtools.html) is becoming more capable!
+We now have basic support for the **Network tab** (@uthmaniv, #37384, #37263, #37543, #37707), including listing requests and viewing **Headers** and **Timings**.
+
+In addition, our devtools are now compatible with **Firefox 139** (@eerii, #37247), and we’ve landed some preliminary work towards supporting the **Sources tab** (@atbrakhi, @delan, #36774, #37456, #37197).
+
 ## Performance
 
 We’ve landed several improvements towards **incremental layout**, a broad class of optimisations that ensure that layout work is only done when something has changed and never done twice.
@@ -95,24 +102,24 @@ You can now **change ‘transform’**, ‘scale’, ‘rotate’, ‘translate�
       csp
     - https://github.com/servo/servo/pull/37465    (@TimvdLippe, #37465)    Fix skipping CSP checks for styles when cloning nodes (#37465)
       csp
-- devtools
-    - https://github.com/servo/servo/pull/37197    (@atbrakhi, #37197)    DevTools: Fix empty `debugger > source` panel (#37197)
+- DONE devtools
+    - DONE https://github.com/servo/servo/pull/37197    (@atbrakhi, #37197)    DevTools: Fix empty `debugger > source` panel (#37197)
       devtools
-    - https://github.com/servo/servo/pull/37247    (@eerii, #37247)    devtools: Fix inspector on Firefox 139 (#37247)
+    - DONE https://github.com/servo/servo/pull/37247    (@eerii, #37247)    devtools: Fix inspector on Firefox 139 (#37247)
       devtools
-    - https://github.com/servo/servo/pull/37263    (@uthmaniv, #37263)    Update handle_network_event to use BrowsingContextActor for HttpRequest (#37263)
+    - DONE https://github.com/servo/servo/pull/37263    (@uthmaniv, #37263)    Update handle_network_event to use BrowsingContextActor for HttpRequest (#37263)
       devtools
-    - https://github.com/servo/servo/pull/37384    (@uthmaniv, #37384)    Replace NetworkEventUpdateMsg with ResourcesUpdatedArray (#37384)
+    - DONE https://github.com/servo/servo/pull/37384    (@uthmaniv, #37384)    Replace NetworkEventUpdateMsg with ResourcesUpdatedArray (#37384)
       devtools
-    - https://github.com/servo/servo/pull/36774    (@atbrakhi, #36774)    DevTools: Implement support for showing `source_content` in `Debugger > Source` panel (#36774)
+    - DONE https://github.com/servo/servo/pull/36774    (@atbrakhi, #36774)    DevTools: Implement support for showing `source_content` in `Debugger > Source` panel (#36774)
       devtools
-    - https://github.com/servo/servo/pull/37501    (@simonwuelker, #37501)    Make layout build a display list when the highlighted DOM node changed (#37501)
+    - SKIP https://github.com/servo/servo/pull/37501    (@simonwuelker, #37501)    Make layout build a display list when the highlighted DOM node changed (#37501)
       devtools
-    - https://github.com/servo/servo/pull/37456    (@atbrakhi, @delan, #37456)    DevTools: sources for HTML files should be the whole HTML file (#37456)
+    - DONE https://github.com/servo/servo/pull/37456    (@atbrakhi, @delan, #37456)    DevTools: sources for HTML files should be the whole HTML file (#37456)
       devtools
-    - https://github.com/servo/servo/pull/37543    (@uthmaniv, #37543)    Fix network event update Message (#37543)
+    - DONE https://github.com/servo/servo/pull/37543    (@uthmaniv, #37543)    Fix network event update Message (#37543)
       devtools
-    - https://github.com/servo/servo/pull/37707    (@uthmaniv, #37707)    Add common resourceId to network events (#37707)
+    - DONE https://github.com/servo/servo/pull/37707    (@uthmaniv, #37707)    Add common resourceId to network events (#37707)
       devtools
 - dom
     - https://github.com/servo/servo/pull/37192    (@gterzian, #37192)    dom: implement signal abort on controller and signal (#37192)
