@@ -28,6 +28,8 @@
 &lt;p&gt;You can now call &lt;strong&gt;transform()&lt;/strong&gt; with &lt;a href=&quot;https://drafts.fxtf.org/geometry/#dommatrixinit-dictionary&quot;&gt;a dictionary&lt;/a&gt; on &lt;strong&gt;CanvasRenderingContext2D&lt;/strong&gt; and &lt;strong&gt;CanvasPattern&lt;/strong&gt; (@tharkum, #37692, #37731).&lt;/p&gt;
 &lt;p&gt;Our experimental &lt;strong&gt;multiprocess mode&lt;/strong&gt; (&lt;code&gt;-M&lt;/code&gt; / &lt;code&gt;--multiprocess&lt;/code&gt;) now &lt;strong&gt;works on Windows&lt;/strong&gt; (@wusyong, #37580).&lt;/p&gt;
 &lt;p&gt;We’ve fixed several bugs, notably including a bug in the encoding of &lt;strong&gt;HTML form submissions&lt;/strong&gt; in non-Unicode documents (@simonwuelker, #37541), which single-handedly fixed &lt;strong&gt;over 97000 subtests&lt;/strong&gt; in the Web Platform Tests.&lt;/p&gt;
+&lt;p&gt;Work continues on our &lt;strong&gt;WebDriver server&lt;/strong&gt;, which can be used to automate Servo and will also power our &lt;a href=&quot;https://book.servo.org/architecture/servodriver.html&quot;&gt;support for testdriver.js-based Web Platform Tests&lt;/a&gt;.
+We now better handle operations for &lt;a href=&quot;https://w3c.github.io/webdriver/#contexts&quot;&gt;switching contexts&lt;/a&gt; (@yezhizhen, @longvatrong111, #37685, #37632, #37411), &lt;a href=&quot;https://w3c.github.io/webdriver/#actions&quot;&gt;sending input&lt;/a&gt; (@longvatrong111, @yezhizhen, @PotatoCP, #37484, #37624, #37403, #37260, #37423, #37224, #37393, #37153, #37095), &lt;a href=&quot;https://w3c.github.io/webdriver/#element-retrieval&quot;&gt;inspecting the page&lt;/a&gt; (@yezhizhen, #37521, #37532, #37502, #37452, #37425, #37470), and working with shadow roots (@yezhizhen, @longvatrong111, #37546, #37578, #37280).&lt;/p&gt;
 &lt;h2 id=&quot;performance&quot; tabindex=&quot;-1&quot;&gt;Performance &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjune/blog/2025/07/02/this-month-in-servo/#performance&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -308,56 +310,56 @@ This means some queries can now be answered without doing any work at all!&lt;/p
 - upgrade
     - https://github.com/servo/servo/pull/37444    (@Loirooriol, #37444)    Upgrade Stylo to 2025-06-03 (#37444)
       upgrade
-- webdriver
-    - https://github.com/servo/servo/pull/37213    (@yezhizhen, #37213)    script: Upgrade `node_ids` to `pipeline_to_node_ids` to track the owner pipeline of the node (#37213)
+- DONE webdriver
+    - SKIP https://github.com/servo/servo/pull/37213    (@yezhizhen, #37213)    script: Upgrade `node_ids` to `pipeline_to_node_ids` to track the owner pipeline of the node (#37213)
       webdriver
-    - https://github.com/servo/servo/pull/37095    (@longvatrong111, #37095)    Fix webdriver wait for response from constellation (#37095)
+    - DONE https://github.com/servo/servo/pull/37095    (@longvatrong111, #37095)    Fix webdriver wait for response from constellation (#37095)
       webdriver
-    - https://github.com/servo/servo/pull/37153    (@longvatrong111, #37153)    Implement actions_by_tick for webdriver (#37153)
+    - DONE https://github.com/servo/servo/pull/37153    (@longvatrong111, #37153)    Implement actions_by_tick for webdriver (#37153)
       webdriver
-    - https://github.com/servo/servo/pull/37224    (@PotatoCP, #37224)    Implement wb element send keys for file input (#37224)
+    - DONE https://github.com/servo/servo/pull/37224    (@PotatoCP, #37224)    Implement wb element send keys for file input (#37224)
       webdriver
-    - https://github.com/servo/servo/pull/37280    (@longvatrong111, #37280)    [webdriver] Implement get shadow root (#37280)
+    - DONE https://github.com/servo/servo/pull/37280    (@longvatrong111, #37280)    [webdriver] Implement get shadow root (#37280)
       webdriver
-    - https://github.com/servo/servo/pull/37385    (@yezhizhen, #37385)    [WebDriver] Properly report error: &quot;No such window&quot; (#37385)
+    - SKIP https://github.com/servo/servo/pull/37385    (@yezhizhen, #37385)    [WebDriver] Properly report error: &quot;No such window&quot; (#37385)
       webdriver
-    - https://github.com/servo/servo/pull/37393    (@yezhizhen, #37393)    [WebDriver: Dispatch Action] Check if browsing context still open for each tick action (#37393)
+    - DONE https://github.com/servo/servo/pull/37393    (@yezhizhen, #37393)    [WebDriver: Dispatch Action] Check if browsing context still open for each tick action (#37393)
       webdriver
-    - https://github.com/servo/servo/pull/37260    (@PotatoCP, #37260)    [webdriver] Add synchronization for wheel action (#37260)
+    - DONE https://github.com/servo/servo/pull/37260    (@PotatoCP, #37260)    [webdriver] Add synchronization for wheel action (#37260)
       webdriver
-    - https://github.com/servo/servo/pull/37406    (@yezhizhen, #37406)    [WebDriver] Improve some session/window handling (#37406)
+    - SKIP https://github.com/servo/servo/pull/37406    (@yezhizhen, #37406)    [WebDriver] Improve some session/window handling (#37406)
       webdriver
-    - https://github.com/servo/servo/pull/37423    (@longvatrong111, #37423)    Wait enough time for tick duration in webdriver dispatch actions (#37423)
+    - DONE https://github.com/servo/servo/pull/37423    (@longvatrong111, #37423)    Wait enough time for tick duration in webdriver dispatch actions (#37423)
       webdriver
-    - https://github.com/servo/servo/pull/37411    (@longvatrong111, #37411)    Verify `webview` still open in webdriver switch frame command (#37411)
+    - DONE https://github.com/servo/servo/pull/37411    (@longvatrong111, #37411)    Verify `webview` still open in webdriver switch frame command (#37411)
       webdriver
-    - https://github.com/servo/servo/pull/37470    (@yezhizhen, #37470)    script: Support webdriver&#39;s Get Element Text operation for non-HTML elements (#37470)
+    - DONE https://github.com/servo/servo/pull/37470    (@yezhizhen, #37470)    script: Support webdriver&#39;s Get Element Text operation for non-HTML elements (#37470)
       webdriver
-    - https://github.com/servo/servo/pull/37425    (@yezhizhen, #37425)    [WebDriver] Improve get active element (#37425)
+    - DONE https://github.com/servo/servo/pull/37425    (@yezhizhen, #37425)    [WebDriver] Improve get active element (#37425)
       webdriver
-    - https://github.com/servo/servo/pull/37452    (@yezhizhen, #37452)    [WebDriver] Properly report error for `find_element` &amp; `find_elements`; Get correct visible text when matching links (#37452)
+    - DONE https://github.com/servo/servo/pull/37452    (@yezhizhen, #37452)    [WebDriver] Properly report error for `find_element` &amp; `find_elements`; Get correct visible text when matching links (#37452)
       webdriver
-    - https://github.com/servo/servo/pull/37502    (@yezhizhen, #37502)    script::webdriver_handlers: Replace `find_node_by_unique_id` with `get_known_element` (#37502)
+    - DONE https://github.com/servo/servo/pull/37502    (@yezhizhen, #37502)    script::webdriver_handlers: Replace `find_node_by_unique_id` with `get_known_element` (#37502)
       webdriver
-    - https://github.com/servo/servo/pull/37532    (@yezhizhen, #37532)    script::webdriver_handler: Fully implement `get_known_element` (#37532)
+    - DONE https://github.com/servo/servo/pull/37532    (@yezhizhen, #37532)    script::webdriver_handler: Fully implement `get_known_element` (#37532)
       webdriver
-    - https://github.com/servo/servo/pull/37403    (@PotatoCP, #37403)    [WebDriver] Add synchronization for key action (#37403)
+    - DONE https://github.com/servo/servo/pull/37403    (@PotatoCP, #37403)    [WebDriver] Add synchronization for key action (#37403)
       webdriver
-    - https://github.com/servo/servo/pull/37521    (@yezhizhen, #37521)    `webdriver_server`: Implement find element(s) from element according to spec (#37521)
+    - DONE https://github.com/servo/servo/pull/37521    (@yezhizhen, #37521)    `webdriver_server`: Implement find element(s) from element according to spec (#37521)
       webdriver
-    - https://github.com/servo/servo/pull/37624    (@yezhizhen, #37624)    [WebDriver: Release Action] Fix panic by work around buggy spec (#37624)
+    - DONE https://github.com/servo/servo/pull/37624    (@yezhizhen, #37624)    [WebDriver: Release Action] Fix panic by work around buggy spec (#37624)
       webdriver
-    - https://github.com/servo/servo/pull/37578    (@yezhizhen, #37578)    [WebDriver] Implement &quot;Find Element(s) From ShadowRoot&quot; (#37578)
+    - DONE https://github.com/servo/servo/pull/37578    (@yezhizhen, #37578)    [WebDriver] Implement &quot;Find Element(s) From ShadowRoot&quot; (#37578)
       webdriver
-    - https://github.com/servo/servo/pull/37484    (@longvatrong111, #37484)    Implement webdriver release action (#37484)
+    - DONE https://github.com/servo/servo/pull/37484    (@longvatrong111, #37484)    Implement webdriver release action (#37484)
       webdriver
-    - https://github.com/servo/servo/pull/37546    (@yezhizhen, #37546)    script::webdriver_handlers: Implement &quot;get a known shadow root&quot; (#37546)
+    - DONE https://github.com/servo/servo/pull/37546    (@yezhizhen, #37546)    script::webdriver_handlers: Implement &quot;get a known shadow root&quot; (#37546)
       webdriver
-    - https://github.com/servo/servo/pull/37632    (@yezhizhen, #37632)    [WebDriver] Grant `top_level_script_command` and `browsing_context_script_command` freedom to not verify existence of pipeline (#37632)
+    - DONE https://github.com/servo/servo/pull/37632    (@yezhizhen, #37632)    [WebDriver] Grant `top_level_script_command` and `browsing_context_script_command` freedom to not verify existence of pipeline (#37632)
       webdriver
-    - https://github.com/servo/servo/pull/37685    (@yezhizhen, #37685)    [WebDriver] Fully implement &quot;switch to (parent) frame&quot; (#37685)
+    - DONE https://github.com/servo/servo/pull/37685    (@yezhizhen, #37685)    [WebDriver] Fully implement &quot;switch to (parent) frame&quot; (#37685)
       webdriver
-    - https://github.com/servo/servo/pull/37284    (@yezhizhen, #37284)    servoshell: Do not focus and raise new auxiliary WebDriver-created `WebView`s  (#37284)
+    - SKIP https://github.com/servo/servo/pull/37284    (@yezhizhen, #37284)    servoshell: Do not focus and raise new auxiliary WebDriver-created `WebView`s  (#37284)
       webdriver
 --&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjune/blog/2025/07/02/this-month-in-servo/#donations&quot;&gt;
