@@ -25,9 +25,6 @@ Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on 
 
 We’ve fixed several bugs, notably including a bug in the encoding of **HTML form submissions** in non-Unicode documents (@simonwuelker, #37541), which single-handedly fixed **over 97000 subtests** in the Web Platform Tests.
 
-Work continues on our **WebDriver server**, which can be used to automate Servo and will also power our [support for testdriver.js-based Web Platform Tests](https://book.servo.org/architecture/servodriver.html).
-We now better handle operations for [switching contexts](https://w3c.github.io/webdriver/#contexts) (@yezhizhen, @longvatrong111, #37685, #37632, #37411), [sending input](https://w3c.github.io/webdriver/#actions) (@longvatrong111, @yezhizhen, @PotatoCP, #37484, #37624, #37403, #37260, #37423, #37224, #37393, #37153, #37095), [inspecting the page](https://w3c.github.io/webdriver/#element-retrieval) (@yezhizhen, #37521, #37532, #37502, #37452, #37425, #37470), and working with shadow roots (@yezhizhen, @longvatrong111, #37546, #37578, #37280).
-
 ## Devtools
 
 Servo’s [devtools support](https://book.servo.org/hacking/using-devtools.html) is becoming more capable!
@@ -63,6 +60,86 @@ Script queries can now **skip style, box tree, and fragment tree updates** when 
 This means some queries can now be answered without doing any work at all!
 
 You can now **change ‘transform’**, ‘scale’, ‘rotate’, ‘translate’, and ‘perspective’ **without a full layout** in many cases (@Loirooriol, @mrobinson, #37380).
+
+## WebDriver
+
+Work continues on our **WebDriver server**, which can be used to automate Servo and will also power our [support for testdriver.js-based Web Platform Tests](https://book.servo.org/architecture/servodriver.html).
+We now better handle operations for [switching contexts](https://w3c.github.io/webdriver/#contexts) (@yezhizhen, @longvatrong111, #37685, #37632, #37411), [sending input](https://w3c.github.io/webdriver/#actions) (@longvatrong111, @yezhizhen, @PotatoCP, #37484, #37624, #37403, #37260, #37423, #37224, #37393, #37153, #37095), [inspecting the page](https://w3c.github.io/webdriver/#element-retrieval) (@yezhizhen, #37521, #37532, #37502, #37452, #37425, #37470), and working with shadow roots (@yezhizhen, @longvatrong111, #37546, #37578, #37280).
+
+Want to try automating Servo with WebDriver?
+It’s so easy it fits in a blog post!
+
+```sh
+$ cargo new app
+$ cd app
+$ cargo add webdriver_client@0.2.5
+```
+
+```rust
+use std::{
+    error::Error,
+    net::{Shutdown, TcpStream},
+    process::Command,
+    thread::sleep,
+    time::Duration,
+};
+
+use webdriver_client::{
+    Driver, HttpDriverBuilder, LocationStrategy,
+    messages::{ExecuteCmd, NewSessionCmd},
+};
+
+fn main() -> Result<(), Box<dyn Error>> {
+    // Run servoshell.
+    Command::new("/path/to/servo")
+        .args(["--webdriver", "about:blank"])
+        .spawn()?;
+
+    let driver = HttpDriverBuilder::default()
+        .url("http://127.0.0.1:7000")
+        .build()?;
+    let mut params = NewSessionCmd::default();
+
+    // Remove the unsupported `goog:chromeOptions` capability,
+    // which Servo rejects with a “Session not created due to
+    // invalid capabilities” error.
+    params.reset_always_match();
+
+    // Wait for the WebDriver server to start.
+    loop {
+        sleep(Duration::from_millis(250));
+        if let Ok(stream) = TcpStream::connect("127.0.0.1:7000") {
+            stream.shutdown(Shutdown::Both)?;
+            break;
+        }
+    }
+
+    // Connect to the WebDriver server and control Servo.
+    let session = driver.session(&params)?;
+    session.go("https://shuppy.org/posts/tagged/diffie.html")?;
+
+    let diffie = session.find_element(
+        r"#thread-10000195\.md img",
+        LocationStrategy::Css,
+    )?;
+    diffie.click()?;
+
+    sleep(Duration::from_secs(1));
+    session.execute(ExecuteCmd {
+        script: "document.body.innerHTML =
+            '<h1>Hello from WebDriver!</h1>' +
+            document.body.innerHTML"
+            .to_owned(),
+        args: vec![],
+    })?;
+
+    Ok(())
+}
+```
+
+<figure>
+  <a href="{{ '/img/blog/2025-07-webdriver.png' | url }}"><img alt="Servo showing a page that was created by a WebDriver client" src="{{ '/img/blog/2025-07-webdriver.png' | url }}"></a>
+</figure>
 
 
 <!--
