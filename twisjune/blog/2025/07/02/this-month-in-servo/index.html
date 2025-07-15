@@ -287,6 +287,25 @@ We now have basic support for the <strong>Network tab</strong> (@uthmaniv, #3738
     <a href="/twisjune/img/blog/2025-07-devtools3-crop.png"><img alt="Timings tab in the Network panel, showing the time each phase of a request took" src="/twisjune/img/blog/2025-07-devtools3-crop.png"></a>
   </div>
 </figure>
+<h2 id="performance" tabindex="-1">Performance <a class="header-anchor" href="#performance">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We’ve landed several improvements towards <strong>incremental layout</strong>, a broad class of optimisations that ensure that layout work is only done when something has changed and never done twice.
+That work is some subset of <a href="https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report#layout-2020">these five steps</a>:</p>
+<ul>
+<li><strong>Style</strong>, that is, calculating the styles for the DOM tree</li>
+<li><strong><a href="https://drafts.csswg.org/css-display/#box-tree">Box tree</a> construction</strong>, taking the styled DOM tree as input</li>
+<li><strong><a href="https://www.w3.org/TR/css-break-4/#fragment">Fragment</a> tree construction</strong>, for pages, columns, and <a href="https://www.w3.org/TR/css-text-3/#line-breaking">lines</a></li>
+<li><strong>Stacking context tree construction</strong>, sorting it into CSS <a href="https://www.w3.org/TR/CSS22/zindex.html#painting-order">painting order</a></li>
+<li><strong>Display list construction</strong>, yielding the input we send to WebRender</li>
+</ul>
+<p>Servo can now <strong>skip display list construction</strong> when nothing would change (@mrobinson, @Loirooriol, #37186).
+This change is especially noticeable when moving the mouse cursor around on a page.</p>
+<p><strong>Script queries</strong>, like offsetParent and getBoundingClientRect(), read back information from style and layout.
+When answering script queries, <a href="https://github.com/servo/servo/blob/78cd77069797437797158bb860117efa699e9215/components/layout/layout_impl.rs#L1409-L1435">we can often skip some steps</a> that are not relevant, but three steps were previously unavoidable.
+Script queries can now <strong>skip style, box tree, and fragment tree updates</strong> when those are up to date (@mrobinson, @Loirooriol, #37677).
+This means some queries can now be answered without doing any work at all!</p>
+<p>You can now <strong>change ‘transform’</strong>, ‘scale’, ‘rotate’, ‘translate’, and ‘perspective’ <strong>without a full layout</strong> in many cases (@Loirooriol, @mrobinson, #37380).</p>
 <h2 id="webdriver" tabindex="-1">WebDriver <a class="header-anchor" href="#webdriver">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -359,25 +378,6 @@ $ <span class="token function">cargo</span> <span class="token function">add</sp
 <figure>
   <a href="/twisjune/img/blog/2025-07-webdriver.png"><img alt="Servo showing a page that was created by a WebDriver client" src="/twisjune/img/blog/2025-07-webdriver.png"></a>
 </figure>
-<h2 id="performance" tabindex="-1">Performance <a class="header-anchor" href="#performance">
-        <span class="icon hashlink"><i class="fas fa-link"></i></span>
-      </a></h2>
-<p>We’ve landed several improvements towards <strong>incremental layout</strong>, a broad class of optimisations that ensure that layout work is only done when something has changed and never done twice.
-That work is some subset of <a href="https://github.com/servo/servo/wiki/Servo-Layout-Engines-Report#layout-2020">these five steps</a>:</p>
-<ul>
-<li><strong>Style</strong>, that is, calculating the styles for the DOM tree</li>
-<li><strong><a href="https://drafts.csswg.org/css-display/#box-tree">Box tree</a> construction</strong>, taking the styled DOM tree as input</li>
-<li><strong><a href="https://www.w3.org/TR/css-break-4/#fragment">Fragment</a> tree construction</strong>, for pages, columns, and <a href="https://www.w3.org/TR/css-text-3/#line-breaking">lines</a></li>
-<li><strong>Stacking context tree construction</strong>, sorting it into CSS <a href="https://www.w3.org/TR/CSS22/zindex.html#painting-order">painting order</a></li>
-<li><strong>Display list construction</strong>, yielding the input we send to WebRender</li>
-</ul>
-<p>Servo can now <strong>skip display list construction</strong> when nothing would change (@mrobinson, @Loirooriol, #37186).
-This change is especially noticeable when moving the mouse cursor around on a page.</p>
-<p><strong>Script queries</strong>, like offsetParent and getBoundingClientRect(), read back information from style and layout.
-When answering script queries, <a href="https://github.com/servo/servo/blob/78cd77069797437797158bb860117efa699e9215/components/layout/layout_impl.rs#L1409-L1435">we can often skip some steps</a> that are not relevant, but three steps were previously unavoidable.
-Script queries can now <strong>skip style, box tree, and fragment tree updates</strong> when those are up to date (@mrobinson, @Loirooriol, #37677).
-This means some queries can now be answered without doing any work at all!</p>
-<p>You can now <strong>change ‘transform’</strong>, ‘scale’, ‘rotate’, ‘translate’, and ‘perspective’ <strong>without a full layout</strong> in many cases (@Loirooriol, @mrobinson, #37380).</p>
 <!--
 - DONE donations
   - 2464.00/month github
