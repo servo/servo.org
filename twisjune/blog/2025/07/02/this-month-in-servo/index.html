@@ -274,8 +274,6 @@
 <p>You can now call <strong>transform()</strong> with <a href="https://drafts.fxtf.org/geometry/#dommatrixinit-dictionary">a dictionary</a> on <strong>CanvasRenderingContext2D</strong> and <strong>CanvasPattern</strong> (@tharkum, #37692, #37731).</p>
 <p>Our experimental <strong>multiprocess mode</strong> (<code>-M</code> / <code>--multiprocess</code>) now <strong>works on Windows</strong> (@wusyong, #37580).</p>
 <p>We’ve fixed several bugs, notably including a bug in the encoding of <strong>HTML form submissions</strong> in non-Unicode documents (@simonwuelker, #37541), which single-handedly fixed <strong>over 97000 subtests</strong> in the Web Platform Tests.</p>
-<p>Work continues on our <strong>WebDriver server</strong>, which can be used to automate Servo and will also power our <a href="https://book.servo.org/architecture/servodriver.html">support for testdriver.js-based Web Platform Tests</a>.
-We now better handle operations for <a href="https://w3c.github.io/webdriver/#contexts">switching contexts</a> (@yezhizhen, @longvatrong111, #37685, #37632, #37411), <a href="https://w3c.github.io/webdriver/#actions">sending input</a> (@longvatrong111, @yezhizhen, @PotatoCP, #37484, #37624, #37403, #37260, #37423, #37224, #37393, #37153, #37095), <a href="https://w3c.github.io/webdriver/#element-retrieval">inspecting the page</a> (@yezhizhen, #37521, #37532, #37502, #37452, #37425, #37470), and working with shadow roots (@yezhizhen, @longvatrong111, #37546, #37578, #37280).</p>
 <h2 id="devtools" tabindex="-1">Devtools <a class="header-anchor" href="#devtools">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -288,6 +286,78 @@ We now have basic support for the <strong>Network tab</strong> (@uthmaniv, #3738
     <a href="/twisjune/img/blog/2025-07-devtools2-crop.png"><img alt="Headers tab in the Network panel, showing the request and response headers for a request" src="/twisjune/img/blog/2025-07-devtools2-crop.png"></a>
     <a href="/twisjune/img/blog/2025-07-devtools3-crop.png"><img alt="Timings tab in the Network panel, showing the time each phase of a request took" src="/twisjune/img/blog/2025-07-devtools3-crop.png"></a>
   </div>
+</figure>
+<h2 id="webdriver" tabindex="-1">WebDriver <a class="header-anchor" href="#webdriver">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Work continues on our <strong>WebDriver server</strong>, which can be used to automate Servo and will also power our <a href="https://book.servo.org/architecture/servodriver.html">support for testdriver.js-based Web Platform Tests</a>.
+We now better handle operations for <a href="https://w3c.github.io/webdriver/#contexts">switching contexts</a> (@yezhizhen, @longvatrong111, #37685, #37632, #37411), <a href="https://w3c.github.io/webdriver/#actions">sending input</a> (@longvatrong111, @yezhizhen, @PotatoCP, #37484, #37624, #37403, #37260, #37423, #37224, #37393, #37153, #37095), <a href="https://w3c.github.io/webdriver/#element-retrieval">inspecting the page</a> (@yezhizhen, #37521, #37532, #37502, #37452, #37425, #37470), and working with shadow roots (@yezhizhen, @longvatrong111, #37546, #37578, #37280).</p>
+<p>Want to try automating Servo with WebDriver?
+It’s so easy it fits in a blog post!</p>
+<pre class="language-sh"><code class="language-sh">$ <span class="token function">cargo</span> new app
+$ <span class="token builtin class-name">cd</span> app
+$ <span class="token function">cargo</span> <span class="token function">add</span> webdriver_client@0.2.5</code></pre>
+<pre class="language-rust"><code class="language-rust"><span class="token keyword">use</span> <span class="token namespace">std<span class="token punctuation">::</span></span><span class="token punctuation">{</span>
+    <span class="token namespace">error<span class="token punctuation">::</span></span><span class="token class-name">Error</span><span class="token punctuation">,</span>
+    <span class="token namespace">net<span class="token punctuation">::</span></span><span class="token punctuation">{</span><span class="token class-name">Shutdown</span><span class="token punctuation">,</span> <span class="token class-name">TcpStream</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token namespace">process<span class="token punctuation">::</span></span><span class="token class-name">Command</span><span class="token punctuation">,</span>
+    <span class="token namespace">thread<span class="token punctuation">::</span></span>sleep<span class="token punctuation">,</span>
+    <span class="token namespace">time<span class="token punctuation">::</span></span><span class="token class-name">Duration</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> <span class="token namespace">webdriver_client<span class="token punctuation">::</span></span><span class="token punctuation">{</span>
+    <span class="token class-name">Driver</span><span class="token punctuation">,</span> <span class="token class-name">HttpDriverBuilder</span><span class="token punctuation">,</span> <span class="token class-name">LocationStrategy</span><span class="token punctuation">,</span>
+    <span class="token namespace">messages<span class="token punctuation">::</span></span><span class="token punctuation">{</span><span class="token class-name">ExecuteCmd</span><span class="token punctuation">,</span> <span class="token class-name">NewSessionCmd</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">fn</span> <span class="token function-definition function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">-></span> <span class="token class-name">Result</span><span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token class-name">Box</span><span class="token operator">&lt;</span><span class="token keyword">dyn</span> <span class="token class-name">Error</span><span class="token operator">>></span> <span class="token punctuation">{</span>
+    <span class="token comment">// Run servoshell.</span>
+    <span class="token class-name">Command</span><span class="token punctuation">::</span><span class="token function">new</span><span class="token punctuation">(</span><span class="token string">"/path/to/servo"</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">args</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"--webdriver"</span><span class="token punctuation">,</span> <span class="token string">"about:blank"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">spawn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> driver <span class="token operator">=</span> <span class="token class-name">HttpDriverBuilder</span><span class="token punctuation">::</span><span class="token function">default</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span><span class="token string">"http://127.0.0.1:7000"</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> <span class="token keyword">mut</span> params <span class="token operator">=</span> <span class="token class-name">NewSessionCmd</span><span class="token punctuation">::</span><span class="token function">default</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Remove the unsupported `goog:chromeOptions` capability,</span>
+    <span class="token comment">// which Servo rejects with a “Session not created due to</span>
+    <span class="token comment">// invalid capabilities” error.</span>
+    params<span class="token punctuation">.</span><span class="token function">reset_always_match</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Wait for the WebDriver server to start.</span>
+    <span class="token keyword">loop</span> <span class="token punctuation">{</span>
+        <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token class-name">Duration</span><span class="token punctuation">::</span><span class="token function">from_millis</span><span class="token punctuation">(</span><span class="token number">250</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token keyword">let</span> <span class="token class-name">Ok</span><span class="token punctuation">(</span>stream<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token class-name">TcpStream</span><span class="token punctuation">::</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">"127.0.0.1:7000"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            stream<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token class-name">Shutdown</span><span class="token punctuation">::</span><span class="token class-name">Both</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// Connect to the WebDriver server and control Servo.</span>
+    <span class="token keyword">let</span> session <span class="token operator">=</span> driver<span class="token punctuation">.</span><span class="token function">session</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>params<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span>
+    session<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token string">"https://shuppy.org/posts/tagged/diffie.html"</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">let</span> diffie <span class="token operator">=</span> session<span class="token punctuation">.</span><span class="token function">find_element</span><span class="token punctuation">(</span>
+        <span class="token string">r"#thread-10000195\.md img"</span><span class="token punctuation">,</span>
+        <span class="token class-name">LocationStrategy</span><span class="token punctuation">::</span><span class="token class-name">Css</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span>
+    diffie<span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span>
+
+    <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token class-name">Duration</span><span class="token punctuation">::</span><span class="token function">from_secs</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    session<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token class-name">ExecuteCmd</span> <span class="token punctuation">{</span>
+        script<span class="token punctuation">:</span> <span class="token string">"document.body.innerHTML =
+            '&lt;h1>Hello from WebDriver!&lt;/h1>' +
+            document.body.innerHTML"</span>
+            <span class="token punctuation">.</span><span class="token function">to_owned</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        args<span class="token punctuation">:</span> <span class="token macro property">vec!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span>
+
+    <span class="token class-name">Ok</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+<figure>
+  <a href="/twisjune/img/blog/2025-07-webdriver.png"><img alt="Servo showing a page that was created by a WebDriver client" src="/twisjune/img/blog/2025-07-webdriver.png"></a>
 </figure>
 <h2 id="performance" tabindex="-1">Performance <a class="header-anchor" href="#performance">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
