@@ -150,7 +150,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 ```
 
 <figure>
-  <a href="{{ '/img/blog/2025-07-webdriver.png' | url }}"><img alt="Servo showing a page that was created by a WebDriver client" src="{{ '/img/blog/2025-07-webdriver.png' | url }}"></a>
+  <a href="{{ '/img/blog/2025-07-webdriver.png' | url }}"><img alt="Servo showing a page that was modified by a WebDriver client" src="{{ '/img/blog/2025-07-webdriver.png' | url }}"></a>
 </figure>
 
 ## Donations
