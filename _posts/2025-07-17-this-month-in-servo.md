@@ -39,10 +39,16 @@ Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on 
 
 We’ve fixed several bugs, notably including a bug in the encoding of **HTML form submissions** in non-Unicode documents ([@simonwuelker](https://github.com/simonwuelker), [#37541](https://github.com/servo/servo/pull/37541)), which single-handedly fixed **over 97000 subtests** in the Web Platform Tests.
 
+Outreachy intern **Jerens Lensun** ([@jerensl](https://github.com/jerensl)) is now working on **improving linting in mach**!
+Keep an eye out for his patches, and in the meantime, check out [the blog post](https://www.jerensl.com/blog/en-everybody-struggles-outreachy/) he wrote about his experiences.
+
 ## Devtools
 
 Servo’s [devtools support](https://book.servo.org/hacking/using-devtools.html) is becoming more capable!
 We now have basic support for the **Network tab** ([@uthmaniv](https://github.com/uthmaniv), [#37384](https://github.com/servo/servo/pull/37384), [#37263](https://github.com/servo/servo/pull/37263), [#37543](https://github.com/servo/servo/pull/37543), [#37707](https://github.com/servo/servo/pull/37707)), including listing requests and viewing **Headers** and **Timings**.
+
+This work on our network inspector would not be possible without our Outreachy intern **Usman Baba Yahaya** ([@uthmaniv](https://github.com/jerensl))!
+Until next month, check out [the blog post](https://uthmaniv.github.io/2025/06/24/Everybody-struggles.html) he wrote about his time so far.
 
 In addition, our devtools are now compatible with **Firefox 139** ([@eerii](https://github.com/eerii), [#37247](https://github.com/servo/servo/pull/37247)), and we’ve landed some preliminary work towards supporting the **Sources tab** ([@atbrakhi](https://github.com/atbrakhi), [@delan](https://github.com/delan), [#36774](https://github.com/servo/servo/pull/36774), [#37456](https://github.com/servo/servo/pull/37456), [#37197](https://github.com/servo/servo/pull/37197)).
 
