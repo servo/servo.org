@@ -158,6 +158,8 @@ Thanks again for your generous support!
 We are now receiving **4464 USD/month** (−2.8% over May) in recurring donations.
 This helps cover the cost of our [self-hosted](https://ci0.servo.org) [CI](https://ci1.servo.org) [runners](https://ci2.servo.org) and one of our [latest Outreachy interns](https://www.outreachy.org/alums/2025-06/#:~:text=Servo)!
 
+Keep an eye out for [further improvements to our CI system](https://github.com/servo/servo/issues/38141) in the coming months, including **dedicated benchmarking runners** and [**ten-minute WPT builds**](https://github.com/servo/ci-runners/issues/21), all thanks to your support.
+
 Servo is also on [thanks.dev](https://thanks.dev), and already **25 GitHub users** (same as May) that depend on Servo are sponsoring us there.
 If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
 
