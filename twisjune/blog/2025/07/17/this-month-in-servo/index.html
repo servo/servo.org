@@ -289,13 +289,7 @@ Note that Servo’s webviews are not yet accessible to screen readers.</p>
 <p>Servo’s <a href="https://book.servo.org/hacking/using-devtools.html">devtools support</a> is becoming more capable!
 We now have basic support for the <strong>Network tab</strong> (<a href="https://github.com/uthmaniv">@uthmaniv</a>, <a href="https://github.com/servo/servo/pull/37384">#37384</a>, <a href="https://github.com/servo/servo/pull/37263">#37263</a>, <a href="https://github.com/servo/servo/pull/37543">#37543</a>, <a href="https://github.com/servo/servo/pull/37707">#37707</a>), including listing requests and viewing <strong>Headers</strong> and <strong>Timings</strong>.</p>
 <p>In addition, our devtools are now compatible with <strong>Firefox 139</strong> (<a href="https://github.com/eerii">@eerii</a>, <a href="https://github.com/servo/servo/pull/37247">#37247</a>), and we’ve landed some preliminary work towards supporting the <strong>Sources tab</strong> (<a href="https://github.com/atbrakhi">@atbrakhi</a>, <a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/servo/pull/36774">#36774</a>, <a href="https://github.com/servo/servo/pull/37456">#37456</a>, <a href="https://github.com/servo/servo/pull/37197">#37197</a>).</p>
-<figure>
-  <a href="/twisjune/img/blog/2025-07-devtools1.png"><img alt="Network tab in the Servo devtools, showing a list of requests" src="/twisjune/img/blog/2025-07-devtools1.png"></a>
-  <div style="display: flex;">
-    <a href="/twisjune/img/blog/2025-07-devtools2-crop.png"><img alt="Headers tab in the Network panel, showing the request and response headers for a request" src="/twisjune/img/blog/2025-07-devtools2-crop.png"></a>
-    <a href="/twisjune/img/blog/2025-07-devtools3-crop.png"><img alt="Timings tab in the Network panel, showing the time each phase of a request took" src="/twisjune/img/blog/2025-07-devtools3-crop.png"></a>
-  </div>
-</figure>
+<figure><a href="/twisjune/img/blog/2025-07-devtools1-combined.png"><img alt="Network tab in the Servo devtools, showing a list of requests, the Headers panel with request and response headers for a request, and the Timings panel with the time each phase of that request took" src="/twisjune/img/blog/2025-07-devtools1-combined.png"></a></figure>
 <h2 id="performance" tabindex="-1">Performance <a class="header-anchor" href="#performance">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -322,15 +316,13 @@ This means some queries can now be answered without doing any work at all!</p>
 We now better handle operations for <a href="https://w3c.github.io/webdriver/#contexts">switching contexts</a> (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/longvatrong111">@longvatrong111</a>, <a href="https://github.com/servo/servo/pull/37685">#37685</a>, <a href="https://github.com/servo/servo/pull/37632">#37632</a>, <a href="https://github.com/servo/servo/pull/37411">#37411</a>), <a href="https://w3c.github.io/webdriver/#actions">sending input</a> (<a href="https://github.com/longvatrong111">@longvatrong111</a>, <a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/PotatoCP">@PotatoCP</a>, <a href="https://github.com/servo/servo/pull/37484">#37484</a>, <a href="https://github.com/servo/servo/pull/37624">#37624</a>, <a href="https://github.com/servo/servo/pull/37403">#37403</a>, <a href="https://github.com/servo/servo/pull/37260">#37260</a>, <a href="https://github.com/servo/servo/pull/37423">#37423</a>, <a href="https://github.com/servo/servo/pull/37224">#37224</a>, <a href="https://github.com/servo/servo/pull/37393">#37393</a>, <a href="https://github.com/servo/servo/pull/37153">#37153</a>, <a href="https://github.com/servo/servo/pull/37095">#37095</a>), <a href="https://w3c.github.io/webdriver/#element-retrieval">inspecting the page</a> (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/37521">#37521</a>, <a href="https://github.com/servo/servo/pull/37532">#37532</a>, <a href="https://github.com/servo/servo/pull/37502">#37502</a>, <a href="https://github.com/servo/servo/pull/37452">#37452</a>, <a href="https://github.com/servo/servo/pull/37425">#37425</a>, <a href="https://github.com/servo/servo/pull/37470">#37470</a>), and working with shadow roots (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/longvatrong111">@longvatrong111</a>, <a href="https://github.com/servo/servo/pull/37546">#37546</a>, <a href="https://github.com/servo/servo/pull/37578">#37578</a>, <a href="https://github.com/servo/servo/pull/37280">#37280</a>).</p>
 <p>Want to try automating Servo with WebDriver?
 It’s so easy it fits in a blog post!</p>
+<figure markdown=1 style="font-size: 75%;">
 <pre class="language-sh"><code class="language-sh">$ <span class="token function">cargo</span> new app
 $ <span class="token builtin class-name">cd</span> app
 $ <span class="token function">cargo</span> <span class="token function">add</span> webdriver_client@0.2.5</code></pre>
 <pre class="language-rust"><code class="language-rust"><span class="token keyword">use</span> <span class="token namespace">std<span class="token punctuation">::</span></span><span class="token punctuation">{</span>
-    <span class="token namespace">error<span class="token punctuation">::</span></span><span class="token class-name">Error</span><span class="token punctuation">,</span>
-    <span class="token namespace">net<span class="token punctuation">::</span></span><span class="token punctuation">{</span><span class="token class-name">Shutdown</span><span class="token punctuation">,</span> <span class="token class-name">TcpStream</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token namespace">process<span class="token punctuation">::</span></span><span class="token class-name">Command</span><span class="token punctuation">,</span>
-    <span class="token namespace">thread<span class="token punctuation">::</span></span>sleep<span class="token punctuation">,</span>
-    <span class="token namespace">time<span class="token punctuation">::</span></span><span class="token class-name">Duration</span><span class="token punctuation">,</span>
+    <span class="token namespace">error<span class="token punctuation">::</span></span><span class="token class-name">Error</span><span class="token punctuation">,</span> <span class="token namespace">net<span class="token punctuation">::</span></span><span class="token punctuation">{</span><span class="token class-name">Shutdown</span><span class="token punctuation">,</span> <span class="token class-name">TcpStream</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token namespace">process<span class="token punctuation">::</span></span><span class="token class-name">Command</span><span class="token punctuation">,</span> <span class="token namespace">thread<span class="token punctuation">::</span></span>sleep<span class="token punctuation">,</span> <span class="token namespace">time<span class="token punctuation">::</span></span><span class="token class-name">Duration</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">use</span> <span class="token namespace">webdriver_client<span class="token punctuation">::</span></span><span class="token punctuation">{</span>
@@ -349,9 +341,8 @@ $ <span class="token function">cargo</span> <span class="token function">add</sp
         <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span>
     <span class="token keyword">let</span> <span class="token keyword">mut</span> params <span class="token operator">=</span> <span class="token class-name">NewSessionCmd</span><span class="token punctuation">::</span><span class="token function">default</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token comment">// Remove the unsupported `goog:chromeOptions` capability,</span>
-    <span class="token comment">// which Servo rejects with a “Session not created due to</span>
-    <span class="token comment">// invalid capabilities” error.</span>
+    <span class="token comment">// Remove the unsupported `goog:chromeOptions` capability, which Servo rejects</span>
+    <span class="token comment">// with a “Session not created due to invalid capabilities” error.</span>
     params<span class="token punctuation">.</span><span class="token function">reset_always_match</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment">// Wait for the WebDriver server to start.</span>
@@ -375,15 +366,14 @@ $ <span class="token function">cargo</span> <span class="token function">add</sp
 
     <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token class-name">Duration</span><span class="token punctuation">::</span><span class="token function">from_secs</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     session<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token class-name">ExecuteCmd</span> <span class="token punctuation">{</span>
-        script<span class="token punctuation">:</span> <span class="token string">"document.body.innerHTML =
-            '&lt;h1>Hello from WebDriver!&lt;/h1>' +
-            document.body.innerHTML"</span>
-            <span class="token punctuation">.</span><span class="token function">to_owned</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        script<span class="token punctuation">:</span> <span class="token string">"document.body.innerHTML = '&lt;h1>Hello from WebDriver!&lt;/h1>' +
+            document.body.innerHTML"</span><span class="token punctuation">.</span><span class="token function">to_owned</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         args<span class="token punctuation">:</span> <span class="token macro property">vec!</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">;</span>
 
     <span class="token class-name">Ok</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span></code></pre>
+</figure>
 <figure>
   <a href="/twisjune/img/blog/2025-07-webdriver.png"><img alt="Servo showing a page that was modified by a WebDriver client" src="/twisjune/img/blog/2025-07-webdriver.png"></a>
 </figure>
