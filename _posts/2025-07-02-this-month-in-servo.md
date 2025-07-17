@@ -29,6 +29,14 @@ Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on 
 
 We’ve fixed several bugs, notably including a bug in the encoding of **HTML form submissions** in non-Unicode documents (@simonwuelker, #37541), which single-handedly fixed **over 97000 subtests** in the Web Platform Tests.
 
+You can now use a **screen reader** to help you control servoshell’s **browser UI** (@jdm, #37519).
+Note that Servo’s webviews are not yet accessible to screen readers.
+
+<figure>
+  <a href="{{ '/img/blog/2025-07-screen-reader.png' | url }}"><img alt="Screenshot of servoshell with the location bar focused, annotated with key presses and Orca screen reader output: “frame” TAB “button” TAB “button” TAB “button” TAB “entry https colon slash slash servo dot org slash selected”" src="{{ '/img/blog/2025-07-screen-reader.png' | url }}"></a>
+  <figcaption>Navigating servoshell with <a href="https://orca.gnome.org">Orca</a>, a screen reader. The back, forward, and reload buttons are not yet distinguishable (<a href="https://github.com/servo/servo/issues/38130">#38130</a>).</figcaption>
+</figure>
+
 ## Devtools
 
 Servo’s [devtools support](https://book.servo.org/hacking/using-devtools.html) is becoming more capable!
@@ -364,7 +372,7 @@ fn main() -> Result<(), Box<dyn Error>> {
       servoshell
     - https://github.com/servo/servo/pull/36891    (@Narfinger, @jschwe, #36891)    Allow OHOS servoshell to have a simple multiple tab implementation. (#36891)
       servoshell
-    - https://github.com/servo/servo/pull/37519    (@jdm, #37519)    servoshell: Enable accesskit integration. (#37519)
+    - DONE https://github.com/servo/servo/pull/37519    (@jdm, #37519)    servoshell: Enable accesskit integration. (#37519)
       servoshell
 - stability
     - https://github.com/servo/servo/pull/37215    (@Narfinger, #37215)    Hitrace-bench will now report simple memory results to bencher.dev. (#37215)
