@@ -21,7 +21,9 @@ Servo now supports **viewport meta** tags ([@shubhamg13](https://github.com/shub
 - the **&lt;hr size> attribute** ([@simonwuelker](https://github.com/simonwuelker), [#37211](https://github.com/servo/servo/pull/37211))
 - barebones **IndexedDB** support, with `--pref dom_indexeddb_enabled` ([@arihant2math](https://github.com/arihant2math), [@rasviitanen](https://github.com/rasviitanen), [@jdm](https://github.com/jdm), [#33044](https://github.com/servo/servo/pull/33044), [#37652](https://github.com/servo/servo/pull/37652), [#37653](https://github.com/servo/servo/pull/37653))
 
-You can now call **transform()** with [a dictionary](https://drafts.fxtf.org/geometry/#dommatrixinit-dictionary) on **CanvasRenderingContext2D** and **CanvasPattern** ([@tharkum](https://github.com/tharkum), [#37692](https://github.com/servo/servo/pull/37692), [#37731](https://github.com/servo/servo/pull/37731)).
+You can now call **setTransform()** with [a dictionary](https://drafts.fxtf.org/geometry/#dommatrixinit-dictionary) on **CanvasRenderingContext2D** and **CanvasPattern** ([@tharkum](https://github.com/tharkum), [#37692](https://github.com/servo/servo/pull/37692), [#37731](https://github.com/servo/servo/pull/37731)).
+
+<figure><a href="{{ '/img/blog/2025-07-diffie.png' | url }}"><img alt="servoshell showing various examples of calling setTransform() on CanvasRenderingContext2D with a dictionary" src="{{ '/img/blog/2025-07-diffie.png' | url }}"></a></figure>
 
 Abort handling on the web is a lot more viable now, with support for **abort()** and **signal** on **AbortController** ([@gterzian](https://github.com/gterzian), [#37192](https://github.com/servo/servo/pull/37192), [#37217](https://github.com/servo/servo/pull/37217)), plus **aborted**, **reason**, and **throwIfAborted()** on **AbortSignal** ([@gterzian](https://github.com/gterzian), [#37218](https://github.com/servo/servo/pull/37218), [#37227](https://github.com/servo/servo/pull/37227), [#37245](https://github.com/servo/servo/pull/37245)).
 
