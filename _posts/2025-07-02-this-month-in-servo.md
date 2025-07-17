@@ -11,25 +11,25 @@ June was Servo’s busiest month in years, with **349 pull requests** landing in
 
 <canvas id="_stats"></canvas>
 
-Servo now supports **viewport meta** tags (@shubhamg13, @xiaochengh, #35901), the **exportparts** attribute (@simonwuelker, #37345), the **‘::part()’ selector** (@simonwuelker, #37307), and several new web API features:
+Servo now supports **viewport meta** tags ([@shubhamg13](https://github.com/shubhamg13), [@xiaochengh](https://github.com/xiaochengh), [#35901](https://github.com/servo/servo/pull/35901)), the **exportparts** attribute ([@simonwuelker](https://github.com/simonwuelker), [#37345](https://github.com/servo/servo/pull/37345)), the **‘::part()’ selector** ([@simonwuelker](https://github.com/simonwuelker), [#37307](https://github.com/servo/servo/pull/37307)), and several new web API features:
 
-- **&lt;script type="importmap">** (@wusyong, @pewsheen, #37291, #37405, #37504, #37552, #37547, #37340)
-- **ImageBitmap** (@tharkum, #37025, #37397, #37488, #37560, #37634)
-- **scroll** events in the DOM (@PotatoCP, @Asun0204, #36687)
-- the **supports() method** on **HTMLScriptElement** (@pewsheen, #37313)
-- the **lang()** and **id()** functions in **XPath** (@vlindhol, #34594)
-- the **&lt;hr size> attribute** (@simonwuelker, #37211)
-- barebones **IndexedDB** support (@arihant2math, @rasviitanen, @jdm, #33044, #37652, #37653)
+- **&lt;script type="importmap">** ([@wusyong](https://github.com/wusyong), [@pewsheen](https://github.com/pewsheen), [#37291](https://github.com/servo/servo/pull/37291), [#37405](https://github.com/servo/servo/pull/37405), [#37504](https://github.com/servo/servo/pull/37504), [#37552](https://github.com/servo/servo/pull/37552), [#37547](https://github.com/servo/servo/pull/37547), [#37340](https://github.com/servo/servo/pull/37340))
+- **ImageBitmap** ([@tharkum](https://github.com/tharkum), [#37025](https://github.com/servo/servo/pull/37025), [#37397](https://github.com/servo/servo/pull/37397), [#37488](https://github.com/servo/servo/pull/37488), [#37560](https://github.com/servo/servo/pull/37560), [#37634](https://github.com/servo/servo/pull/37634))
+- **scroll** events in the DOM ([@PotatoCP](https://github.com/PotatoCP), [@Asun0204](https://github.com/Asun0204), [#36687](https://github.com/servo/servo/pull/36687))
+- the **supports() method** on **HTMLScriptElement** ([@pewsheen](https://github.com/pewsheen), [#37313](https://github.com/servo/servo/pull/37313))
+- the **lang()** and **id()** functions in **XPath** ([@vlindhol](https://github.com/vlindhol), [#34594](https://github.com/servo/servo/pull/34594))
+- the **&lt;hr size> attribute** ([@simonwuelker](https://github.com/simonwuelker), [#37211](https://github.com/servo/servo/pull/37211))
+- barebones **IndexedDB** support ([@arihant2math](https://github.com/arihant2math), [@rasviitanen](https://github.com/rasviitanen), [@jdm](https://github.com/jdm), [#33044](https://github.com/servo/servo/pull/33044), [#37652](https://github.com/servo/servo/pull/37652), [#37653](https://github.com/servo/servo/pull/37653))
 
-You can now call **transform()** with [a dictionary](https://drafts.fxtf.org/geometry/#dommatrixinit-dictionary) on **CanvasRenderingContext2D** and **CanvasPattern** (@tharkum, #37692, #37731).
+You can now call **transform()** with [a dictionary](https://drafts.fxtf.org/geometry/#dommatrixinit-dictionary) on **CanvasRenderingContext2D** and **CanvasPattern** ([@tharkum](https://github.com/tharkum), [#37692](https://github.com/servo/servo/pull/37692), [#37731](https://github.com/servo/servo/pull/37731)).
 
-Abort handling on the web is a lot more viable now, with support for **abort()** and **signal** on **AbortController** (@gterzian, #37192, #37217), plus **aborted**, **reason**, and **throwIfAborted()** on **AbortSignal** (@gterzian, #37218, #37227, #37245).
+Abort handling on the web is a lot more viable now, with support for **abort()** and **signal** on **AbortController** ([@gterzian](https://github.com/gterzian), [#37192](https://github.com/servo/servo/pull/37192), [#37217](https://github.com/servo/servo/pull/37217)), plus **aborted**, **reason**, and **throwIfAborted()** on **AbortSignal** ([@gterzian](https://github.com/gterzian), [#37218](https://github.com/servo/servo/pull/37218), [#37227](https://github.com/servo/servo/pull/37227), [#37245](https://github.com/servo/servo/pull/37245)).
 
-Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on Windows** (@wusyong, #37580).
+Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on Windows** ([@wusyong](https://github.com/wusyong), [#37580](https://github.com/servo/servo/pull/37580)).
 
-We’ve fixed several bugs, notably including a bug in the encoding of **HTML form submissions** in non-Unicode documents (@simonwuelker, #37541), which single-handedly fixed **over 97000 subtests** in the Web Platform Tests.
+We’ve fixed several bugs, notably including a bug in the encoding of **HTML form submissions** in non-Unicode documents ([@simonwuelker](https://github.com/simonwuelker), [#37541](https://github.com/servo/servo/pull/37541)), which single-handedly fixed **over 97000 subtests** in the Web Platform Tests.
 
-You can now use a **screen reader** to help you control servoshell’s **browser UI** (@jdm, #37519).
+You can now use a **screen reader** to help you control servoshell’s **browser UI** ([@jdm](https://github.com/jdm), [#37519](https://github.com/servo/servo/pull/37519)).
 Note that Servo’s webviews are not yet accessible to screen readers.
 
 <figure>
@@ -40,9 +40,9 @@ Note that Servo’s webviews are not yet accessible to screen readers.
 ## Devtools
 
 Servo’s [devtools support](https://book.servo.org/hacking/using-devtools.html) is becoming more capable!
-We now have basic support for the **Network tab** (@uthmaniv, #37384, #37263, #37543, #37707), including listing requests and viewing **Headers** and **Timings**.
+We now have basic support for the **Network tab** ([@uthmaniv](https://github.com/uthmaniv), [#37384](https://github.com/servo/servo/pull/37384), [#37263](https://github.com/servo/servo/pull/37263), [#37543](https://github.com/servo/servo/pull/37543), [#37707](https://github.com/servo/servo/pull/37707)), including listing requests and viewing **Headers** and **Timings**.
 
-In addition, our devtools are now compatible with **Firefox 139** (@eerii, #37247), and we’ve landed some preliminary work towards supporting the **Sources tab** (@atbrakhi, @delan, #36774, #37456, #37197).
+In addition, our devtools are now compatible with **Firefox 139** ([@eerii](https://github.com/eerii), [#37247](https://github.com/servo/servo/pull/37247)), and we’ve landed some preliminary work towards supporting the **Sources tab** ([@atbrakhi](https://github.com/atbrakhi), [@delan](https://github.com/delan), [#36774](https://github.com/servo/servo/pull/36774), [#37456](https://github.com/servo/servo/pull/37456), [#37197](https://github.com/servo/servo/pull/37197)).
 
 <figure>
   <a href="{{ '/img/blog/2025-07-devtools1.png' | url }}"><img alt="Network tab in the Servo devtools, showing a list of requests" src="{{ '/img/blog/2025-07-devtools1.png' | url }}"></a>
@@ -63,20 +63,20 @@ That work is some subset of [these five steps](https://github.com/servo/servo/wi
 - **Stacking context tree construction**, sorting it into CSS [painting order](https://www.w3.org/TR/CSS22/zindex.html#painting-order)
 - **Display list construction**, yielding the input we send to WebRender
 
-Servo can now **skip display list construction** when nothing would change (@mrobinson, @Loirooriol, #37186).
+Servo can now **skip display list construction** when nothing would change ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#37186](https://github.com/servo/servo/pull/37186)).
 This change is especially noticeable when moving the mouse cursor around on a page.
 
 **Script queries**, like offsetParent and getBoundingClientRect(), read back information from style and layout.
 When answering script queries, [we can often skip some steps](https://github.com/servo/servo/blob/78cd77069797437797158bb860117efa699e9215/components/layout/layout_impl.rs#L1409-L1435) that are not relevant, but three steps were previously unavoidable.
-Script queries can now **skip style, box tree, and fragment tree updates** when those are up to date (@mrobinson, @Loirooriol, #37677).
+Script queries can now **skip style, box tree, and fragment tree updates** when those are up to date ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#37677](https://github.com/servo/servo/pull/37677)).
 This means some queries can now be answered without doing any work at all!
 
-You can now **change ‘transform’**, ‘scale’, ‘rotate’, ‘translate’, and ‘perspective’ **without a full layout** in many cases (@Loirooriol, @mrobinson, #37380).
+You can now **change ‘transform’**, ‘scale’, ‘rotate’, ‘translate’, and ‘perspective’ **without a full layout** in many cases ([@Loirooriol](https://github.com/Loirooriol), [@mrobinson](https://github.com/mrobinson), [#37380](https://github.com/servo/servo/pull/37380)).
 
 ## WebDriver
 
 Work continues on our **WebDriver server**, which can be used to automate Servo and will also power our [support for testdriver.js-based Web Platform Tests](https://book.servo.org/architecture/servodriver.html).
-We now better handle operations for [switching contexts](https://w3c.github.io/webdriver/#contexts) (@yezhizhen, @longvatrong111, #37685, #37632, #37411), [sending input](https://w3c.github.io/webdriver/#actions) (@longvatrong111, @yezhizhen, @PotatoCP, #37484, #37624, #37403, #37260, #37423, #37224, #37393, #37153, #37095), [inspecting the page](https://w3c.github.io/webdriver/#element-retrieval) (@yezhizhen, #37521, #37532, #37502, #37452, #37425, #37470), and working with shadow roots (@yezhizhen, @longvatrong111, #37546, #37578, #37280).
+We now better handle operations for [switching contexts](https://w3c.github.io/webdriver/#contexts) ([@yezhizhen](https://github.com/yezhizhen), [@longvatrong111](https://github.com/longvatrong111), [#37685](https://github.com/servo/servo/pull/37685), [#37632](https://github.com/servo/servo/pull/37632), [#37411](https://github.com/servo/servo/pull/37411)), [sending input](https://w3c.github.io/webdriver/#actions) ([@longvatrong111](https://github.com/longvatrong111), [@yezhizhen](https://github.com/yezhizhen), [@PotatoCP](https://github.com/PotatoCP), [#37484](https://github.com/servo/servo/pull/37484), [#37624](https://github.com/servo/servo/pull/37624), [#37403](https://github.com/servo/servo/pull/37403), [#37260](https://github.com/servo/servo/pull/37260), [#37423](https://github.com/servo/servo/pull/37423), [#37224](https://github.com/servo/servo/pull/37224), [#37393](https://github.com/servo/servo/pull/37393), [#37153](https://github.com/servo/servo/pull/37153), [#37095](https://github.com/servo/servo/pull/37095)), [inspecting the page](https://w3c.github.io/webdriver/#element-retrieval) ([@yezhizhen](https://github.com/yezhizhen), [#37521](https://github.com/servo/servo/pull/37521), [#37532](https://github.com/servo/servo/pull/37532), [#37502](https://github.com/servo/servo/pull/37502), [#37452](https://github.com/servo/servo/pull/37452), [#37425](https://github.com/servo/servo/pull/37425), [#37470](https://github.com/servo/servo/pull/37470)), and working with shadow roots ([@yezhizhen](https://github.com/yezhizhen), [@longvatrong111](https://github.com/longvatrong111), [#37546](https://github.com/servo/servo/pull/37546), [#37578](https://github.com/servo/servo/pull/37578), [#37280](https://github.com/servo/servo/pull/37280)).
 
 Want to try automating Servo with WebDriver?
 It’s so easy it fits in a blog post!
@@ -152,322 +152,6 @@ fn main() -> Result<(), Box<dyn Error>> {
 <figure>
   <a href="{{ '/img/blog/2025-07-webdriver.png' | url }}"><img alt="Servo showing a page that was created by a WebDriver client" src="{{ '/img/blog/2025-07-webdriver.png' | url }}"></a>
 </figure>
-
-
-<!--
-- DONE donations
-  - 2464.00/month github
-  - 2000.24/month opencollective
-  - 25 donors on thanks.dev
-- DONE new features
-  - DONE [dom] indexeddb
-  - DONE [dom] transform(DOMMatrix2DInit transform) on CanvasRenderingContext2D
-  - DONE [dom] transform(DOMMatrix2DInit transform) on CanvasPattern
-  - DONE [dom] ImageBitmap and createImageBitmap(Blob)
-  - DONE [dom] shadow dom <foo exportparts>
-  - DONE [dom] xpath lang() and id()
-  - DONE [dom] supports() on HTMLScriptElement
-  - DONE [layout] ::part
-  - DONE [layout] <hr size>
-  - DONE [embedding] <meta name="viewport">
-  - DONE [embedding] multiprocess support on windows
-- dom
-  - abort improvements (abortcontroller, abortsignal, etc)
-  - <script type="import-map">
-  - <select> bug fix
-  - shadow dom bug fix
-  - xpath bug fix
-  - trusted types bug fix
-  - scroll queries bug fix
-  - wheel and MouseEvent bug fixes
-  - DONE encoding bug fix (#37541 294148 lines removed)
-- layout
-  - DONE optimisation for display lists
-  - DONE optimisation for transform etc
-  - DONE optimisation for script queries
-- embedding
-  - :hover bug fix
--->
-
-<!--
-- csp
-    - https://github.com/servo/servo/pull/37154    (@TimvdLippe, @jdm, #37154)    net: Perform CSP checks on fetch responses. (#37154)
-      csp
-    - https://github.com/servo/servo/pull/37209    (@TimvdLippe, #37209)    Report URI with POST fetch request (#37209)
-      csp
-    - https://github.com/servo/servo/pull/37474    (@TimvdLippe, #37474)    script: Fix check for document root when targeting CSP events (#37474)
-      csp
-    - https://github.com/servo/servo/pull/37465    (@TimvdLippe, #37465)    Fix skipping CSP checks for styles when cloning nodes (#37465)
-      csp
-- DONE devtools
-    - DONE https://github.com/servo/servo/pull/37197    (@atbrakhi, #37197)    DevTools: Fix empty `debugger > source` panel (#37197)
-      devtools
-    - DONE https://github.com/servo/servo/pull/37247    (@eerii, #37247)    devtools: Fix inspector on Firefox 139 (#37247)
-      devtools
-    - DONE https://github.com/servo/servo/pull/37263    (@uthmaniv, #37263)    Update handle_network_event to use BrowsingContextActor for HttpRequest (#37263)
-      devtools
-    - DONE https://github.com/servo/servo/pull/37384    (@uthmaniv, #37384)    Replace NetworkEventUpdateMsg with ResourcesUpdatedArray (#37384)
-      devtools
-    - DONE https://github.com/servo/servo/pull/36774    (@atbrakhi, #36774)    DevTools: Implement support for showing `source_content` in `Debugger > Source` panel (#36774)
-      devtools
-    - SKIP https://github.com/servo/servo/pull/37501    (@simonwuelker, #37501)    Make layout build a display list when the highlighted DOM node changed (#37501)
-      devtools
-    - DONE https://github.com/servo/servo/pull/37456    (@atbrakhi, @delan, #37456)    DevTools: sources for HTML files should be the whole HTML file (#37456)
-      devtools
-    - DONE https://github.com/servo/servo/pull/37543    (@uthmaniv, #37543)    Fix network event update Message (#37543)
-      devtools
-    - DONE https://github.com/servo/servo/pull/37707    (@uthmaniv, #37707)    Add common resourceId to network events (#37707)
-      devtools
-- dom
-    - DONE https://github.com/servo/servo/pull/37192    (@gterzian, #37192)    dom: implement signal abort on controller and signal (#37192)
-      dom
-    - https://github.com/servo/servo/pull/37190    (@dvtkrlbs, #37190)    script: Set HTTP status code when aborting an `XMLHttpRequest` (#37190)
-      dom
-    - DONE https://github.com/servo/servo/pull/34594    (@vlindhol, #34594)    XPath: implement lang() and id() core functions (#34594)
-      dom
-    - DONE https://github.com/servo/servo/pull/37218    (@gterzian, #37218)    dom: implement aborted method of abort signal (#37218)
-      dom
-    - DONE https://github.com/servo/servo/pull/37217    (@gterzian, #37217)    dom: implement signal method on abort controller (#37217)
-      dom
-    - DONE https://github.com/servo/servo/pull/37227    (@gterzian, #37227)    dom: implement abort signal reason method (#37227)
-      dom
-    - https://github.com/servo/servo/pull/37251    (@sagudev, #37251)    canvas: ensure there is a subpath in `PathBuilderRef` (#37251)
-      dom
-    - DONE https://github.com/servo/servo/pull/37245    (@Taym95, #37245)    Dom: Implement AbortSignal ThrowIfAborted method (#37245)
-      dom
-    - DONE https://github.com/servo/servo/pull/37313    (@pewsheen, #37313)    feat(script): add `Supports()` to `htmlscriptelement` (#37313)
-      dom
-    - DONE https://github.com/servo/servo/pull/37291    (@wusyong, #37291)    HTMLScriptElement: add `ScriptType::ImportMap` (#37291)
-      dom
-    - SKIP https://github.com/servo/servo/pull/37293    (@simonwuelker, #37293)    Fix timing of change events for `<select>` elements (#37293)
-      dom
-    - SKIP https://github.com/servo/servo/pull/37281    (@simonwuelker, #37281)    Don't drain ranges across shadow boundaries (#37281)
-      dom
-    - https://github.com/servo/servo/pull/37279    (@vlindhol, #37279)    script: Fix two issues in the XPath parser to pass all `xml_xpath_tests.xml` tests (#37279)
-      dom
-    - DONE https://github.com/servo/servo/pull/37340    (@pewsheen, #37340)    feat(script): add `resolve_url_like_module_specifier` to `ModuleTree` (#37340)
-      dom
-    - DONE https://github.com/servo/servo/pull/37025    (@tharkum, #37025)    imagebitmap: Add missing basic functionality (#37025)
-      dom
-    - DONE https://github.com/servo/servo/pull/37405    (@pewsheen, @wusyong, #37405)    feat(script): create import map parse result (#37405)
-      dom
-    - DONE https://github.com/servo/servo/pull/37345    (@simonwuelker, #37345)    Support exporting shadow parts with the `exportparts` attribute (#37345)
-      dom
-    - https://github.com/servo/servo/pull/37244    (@gterzian, #37244)    AbortController: integrate with stream piping. (#37244)
-      dom
-    - https://github.com/servo/servo/pull/37466    (@TimvdLippe, #37466)    Implement script prepare text for Trusted Types (#37466)
-      dom
-    - https://github.com/servo/servo/pull/37455    (@simonwuelker, #37455)    Don't count <img> elements with both name and id twice in document's named getter (#37455)
-      dom
-    - https://github.com/servo/servo/pull/37471    (@xiaochengh, #37471)    Stop DedicatedWorker from handling remaining messages after closed (#37471)
-      dom
-    - https://github.com/servo/servo/pull/37486    (@yezhizhen, #37486)    layout: capitalize string for `TextTransformCase::Capitalize` in `fn rendered_text_collection_steps` (#37486)
-      dom
-    - DONE https://github.com/servo/servo/pull/37397    (@tharkum, #37397)    imagebitmap: Crop bitmap data with formatting (#37397)
-      dom
-    - https://github.com/servo/servo/pull/37434    (@vlindhol, #37434)    fix(xpath): pass in correct context node for // and / in predicates (#37434)
-      dom
-    - DONE https://github.com/servo/servo/pull/37488    (@tharkum, #37488)    imagebitmap: Resolve promise with ImageBitmap on bitmap task source (#37488)
-      dom
-    - https://github.com/servo/servo/pull/37511    (@Taym95, #37511)    implement Writablestreamdefaultcontroller abortcontroller (#37511)
-      dom
-    - DONE https://github.com/servo/servo/pull/37504    (@pewsheen, #37504)    feat(script): register import map (#37504)
-      dom
-    - https://github.com/servo/servo/pull/37503    (@tharkum, #37503)    pixels: Multiply by alpha with less loss of precision (#37503)
-      dom
-    - DONE https://github.com/servo/servo/pull/36687    (@PotatoCP, @Asun0204, #36687)    Implement scroll event (#36687)
-      dom
-    - https://github.com/servo/servo/pull/37594    (@TimvdLippe, #37594)    Use undefined as this in trusted type callbacks (#37594)
-      dom
-    - DONE https://github.com/servo/servo/pull/37552    (@wusyong, #37552)    script: complete `resolve_module_specifier` (#37552)
-      dom
-    - https://github.com/servo/servo/pull/37509    (@mrobinson, #37509)    script: Get scroll offsets from layout (#37509)
-      dom
-    - DONE https://github.com/servo/servo/pull/37560    (@tharkum, #37560)    imagebitmap: Add support of Blob as ImageBitmapSource (#37560)
-      dom
-    - https://github.com/servo/servo/pull/37556    (@simonwuelker, #37556)    Use the document encoding when parsing a `<video>` elements poster URL (#37556)
-      dom
-    - DONE https://github.com/servo/servo/pull/37541    (@simonwuelker, #37541)    Handle nonmappable code points in Document::encoding_parse_a_url (#37541)
-      dom
-    - SKIP https://github.com/servo/servo/pull/37550    (@rodio, #37550)    script Exclude `CDATASection` nodes from `Node::normalize()` (#37550)
-      dom
-    - SKIP https://github.com/servo/servo/pull/37461    (@PotatoCP, #37461)    script: Reverse wheel event delta sign to match specification-defined behavior (#37461)
-      dom
-    - DONE https://github.com/servo/servo/pull/37547    (@pewsheen, #37547)    feat(script): parse script element `importmap` type (#37547)
-      dom
-    - DONE https://github.com/servo/servo/pull/33044    (@arihant2math, @rasviitanen, @jdm, #33044)     Initial IndexedDB Support (#33044)
-      dom
-    - DONE https://github.com/servo/servo/pull/37652    (@arihant2math, @jdm, #37652)    [IndexedDB] Reduce heed related panics (#37652)
-      dom
-    - https://github.com/servo/servo/pull/37635    (@tharkum, #37635)    webgl: Ignore pixel storage parameters for ImageBitmap source (#37635)
-      dom
-    - https://github.com/servo/servo/pull/37671    (@tharkum, #37671)    canvas: Reset the current path on canvas context resetting (#37671)
-      dom
-    - DONE https://github.com/servo/servo/pull/37653    (@arihant2math, #37653)    [IndexedDB] Fix upgrade version operation (#37653)
-      dom
-    - https://github.com/servo/servo/pull/37620    (@sagudev, #37620)    Make ImageData more spec compliant (#37620)
-      dom
-    - DONE https://github.com/servo/servo/pull/37692    (@tharkum, #37692)    canvas: Add CanvasTransform 'setTransform(transform)' method (#37692)
-      dom
-    - https://github.com/servo/servo/pull/37672    (@mrobinson, #37672)    script: Pass more information to the `MouseEvent` constructor (#37672)
-      dom
-    - https://github.com/servo/servo/pull/37704    (@simonwuelker, #37704)    Determine the initial state for fragment parsing using the scripting flag of the context element (#37704)
-      dom
-    - DONE https://github.com/servo/servo/pull/37731    (@tharkum, #37731)    canvas: Add CanvasPattern 'setTranform(transform)' method (#37731)
-      dom
-    - DONE https://github.com/servo/servo/pull/37634    (@tharkum, #37634)    imagebitmap: Add 'none' image orientation option (#37634)
-      dom
-- embedding
-    - DONE https://github.com/servo/servo/pull/35901    (@shubhamg13, @xiaochengh, #35901)    Add support for parsing and applying `viewport` `<meta>`  (#35901)
-      embedding
-    - https://github.com/servo/servo/pull/37317    (@Legend-Master, #37317)    libservo: Allow embedders to signal when the cursor has left the `WebView` (#37317)
-      embedding
-    - DONE https://github.com/servo/servo/pull/37580    (@wusyong, #37580)    constellation: add multiprocess support on Windows (#37580)
-      embedding
-    - https://github.com/servo/servo/pull/37524    (@CarePackage17, #37524)    Upgrade version of Android in default user agent string (#37524)
-      embedding
-    - https://github.com/servo/servo/pull/36714    (@longvatrong111, #36714)    [webdriver] Move Webdriver to ServoShell (#36714)
-      embedding
-- layout
-    - DONE https://github.com/servo/servo/pull/37186    (@mrobinson, @Loirooriol, #37186)    script: Allow reflows that do not produce display lists (#37186)
-      layout
-    - DONE https://github.com/servo/servo/pull/37211    (@simonwuelker, #37211)    Implement the `size` presentational hint for `<hr>` elements (#37211)
-      layout
-    - https://github.com/servo/servo/pull/37252    (@Loirooriol, #37252)    layout: Force outside ::marker to establish a BFC (#37252)
-      layout
-    - https://github.com/servo/servo/pull/34948    (@nicoburns, #34948)    CSS Grid: percentage sizing fixes (#34948)
-      layout
-    - DONE https://github.com/servo/servo/pull/37307    (@simonwuelker, #37307)    Support `::part` selector (#37307)
-      layout
-    - DONE https://github.com/servo/servo/pull/37380    (@Loirooriol, @mrobinson, #37380)    Have transform and related changes conditionally trigger only overflow damage (#37380)
-      layout
-    - https://github.com/servo/servo/pull/37362    (@Loirooriol, #37362)    layout: Floor free space by 0 in solve_inline_margins_avoiding_floats() (#37362)
-      layout
-    - https://github.com/servo/servo/pull/37412    (@mrobinson, #37412)    compositor: Do not allow script to scroll beyond node boundaries (#37412)
-      layout
-    - https://github.com/servo/servo/pull/37457    (@Loirooriol, #37457)    layout: Properly handle intrinsic min/max block sizes on replaced element (#37457)
-      layout
-    - https://github.com/servo/servo/pull/37464    (@Loirooriol, #37464)    layout: Ensure that min/max-content sizes ignore sizing properties (#37464)
-      layout
-    - https://github.com/servo/servo/pull/37475    (@mrobinson, #37475)    layout: Unify scrollable overflow calculation and include `position: absolute` (#37475)
-      layout
-    - https://github.com/servo/servo/pull/37507    (@mrobinson, @Loirooriol, #37507)    compositor: Always send an animating tick when a pipeline starts animating (#37507)
-      layout
-    - https://github.com/servo/servo/pull/37708    (@Loirooriol, #37708)    layout: Let `align-content: stretch` fall back to `unsafe flex-start` (#37708)
-      layout
-    - DONE https://github.com/servo/servo/pull/37677    (@mrobinson, @Loirooriol, #37677)    script|layout: Do not force restyle when doing script queries (#37677)
-      layout
-- media
-    - https://github.com/servo/servo/pull/37002    (@tharkum, #37002)    htmlmediaelement:  Fix fetch request race on "seek-data" event (#37002)
-      media
-    - https://github.com/servo/servo/pull/37264    (@tharkum, #37264)    htmlmediaelement: Support seek requests for non seekable fetch context (#37264)
-      media
-    - https://github.com/servo/servo/pull/37533    (@tharkum, @mrobinson, #37533)    htmlvideoelement: Fix poster frame processing algorithm (#37533)
-      media
-- network
-    - https://github.com/servo/servo/pull/37277    (@TimvdLippe, #37277)    Fix Sec-Fetch-Site header (#37277)
-      network
-- servoshell
-    - https://github.com/servo/servo/pull/37228    (@mrobinson, #37228)    servoshell: Fallback to light theme when initializing `egui` (#37228)
-      servoshell
-    - https://github.com/servo/servo/pull/36891    (@Narfinger, @jschwe, #36891)    Allow OHOS servoshell to have a simple multiple tab implementation. (#36891)
-      servoshell
-    - DONE https://github.com/servo/servo/pull/37519    (@jdm, #37519)    servoshell: Enable accesskit integration. (#37519)
-      servoshell
-- stability
-    - https://github.com/servo/servo/pull/37215    (@Narfinger, #37215)    Hitrace-bench will now report simple memory results to bencher.dev. (#37215)
-      stability
-    - https://github.com/servo/servo/pull/37239    (@simonwuelker, #37239)    Keep `winit::Window` alive until all rendering contexts are destroyed (#37239)
-      stability
-    - https://github.com/servo/servo/pull/37085    (@longvatrong111, #37085)    Add retry for hit tests with expired epoch in result (#37085)
-      stability
-    - https://github.com/servo/servo/pull/37261    (@willypuzzle, #37261)    [#26488] Moves the FetchCanceller to a separate droppable struct, in Event Source (#37261)
-      stability
-    - https://github.com/servo/servo/pull/37080    (@webbeef, #37080)    Use a VecDeque to manage timers (#37080)
-      stability
-    - https://github.com/servo/servo/pull/37310    (@willypuzzle, #37310)    [#26499] Refactors HTMLMediaElement drop logic (#37310)
-      stability
-    - https://github.com/servo/servo/pull/37195    (@jschwe, #37195)    mach: Add TSAN support (#37195)
-      stability
-    - https://github.com/servo/servo/pull/37332    (@willypuzzle, #37332)    [#26488] Refactored RTCDataChannel for safer dropping and added Promise comment (#37332)
-      stability
-    - https://github.com/servo/servo/pull/37459    (@webbeef, #37459)    Fix panic in formelement.rs (#37459)
-      stability
-    - https://github.com/servo/servo/pull/37460    (@wusyong, #37460)    canvas: prevent unwrap on offscreen canvas (#37460)
-      stability
-    - https://github.com/servo/servo/pull/37505    (@mrobinson, @Loirooriol, #37505)    compositor: Wait for both Script and the Constellation when shutting down Pipelines (#37505)
-      stability
-    - https://github.com/servo/servo/pull/37534    (@mrobinson, #37534)    layout: Do not add empty border images to the display list (#37534)
-      stability
-    - https://github.com/servo/servo/pull/37512    (@willypuzzle, #37512)    [#26488] Improves WebGLBuffer drop impl (#37512)
-      stability
-    - https://github.com/servo/servo/pull/37628    (@jschwe, @mrobinson, #37628)    resource_thread: Optimize writing JSON (#37628)
-      stability
-    - https://github.com/servo/servo/pull/37589    (@willypuzzle, #37589)    [#26488] Refactors WebGLFramebuffer deletion (#37589)
-      stability
-    - https://github.com/servo/servo/pull/37551    (@mrobinson, #37551)    canvas: Don't do operations on paths with uninvertible transforms (#37551)
-      stability
-    - https://github.com/servo/servo/pull/37691    (@Narfinger, #37691)    script: Do not run garbage collection when shutting down a Pipeline (#37691)
-      stability
-    - https://github.com/servo/servo/pull/37765    (@sagudev, #37765)    Lazily initialize canvas paint thread in constellation (#37765)
-      stability
-    - https://github.com/servo/servo/pull/37666    (@Narfinger, @jschwe, #37666)    OHOS: Run speedometer in CI (#37666)
-      stability
-- upgrade
-    - https://github.com/servo/servo/pull/37444    (@Loirooriol, #37444)    Upgrade Stylo to 2025-06-03 (#37444)
-      upgrade
-- DONE webdriver
-    - SKIP https://github.com/servo/servo/pull/37213    (@yezhizhen, #37213)    script: Upgrade `node_ids` to `pipeline_to_node_ids` to track the owner pipeline of the node (#37213)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37095    (@longvatrong111, #37095)    Fix webdriver wait for response from constellation (#37095)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37153    (@longvatrong111, #37153)    Implement actions_by_tick for webdriver (#37153)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37224    (@PotatoCP, #37224)    Implement wb element send keys for file input (#37224)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37280    (@longvatrong111, #37280)    [webdriver] Implement get shadow root (#37280)
-      webdriver
-    - SKIP https://github.com/servo/servo/pull/37385    (@yezhizhen, #37385)    [WebDriver] Properly report error: "No such window" (#37385)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37393    (@yezhizhen, #37393)    [WebDriver: Dispatch Action] Check if browsing context still open for each tick action (#37393)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37260    (@PotatoCP, #37260)    [webdriver] Add synchronization for wheel action (#37260)
-      webdriver
-    - SKIP https://github.com/servo/servo/pull/37406    (@yezhizhen, #37406)    [WebDriver] Improve some session/window handling (#37406)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37423    (@longvatrong111, #37423)    Wait enough time for tick duration in webdriver dispatch actions (#37423)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37411    (@longvatrong111, #37411)    Verify `webview` still open in webdriver switch frame command (#37411)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37470    (@yezhizhen, #37470)    script: Support webdriver's Get Element Text operation for non-HTML elements (#37470)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37425    (@yezhizhen, #37425)    [WebDriver] Improve get active element (#37425)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37452    (@yezhizhen, #37452)    [WebDriver] Properly report error for `find_element` & `find_elements`; Get correct visible text when matching links (#37452)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37502    (@yezhizhen, #37502)    script::webdriver_handlers: Replace `find_node_by_unique_id` with `get_known_element` (#37502)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37532    (@yezhizhen, #37532)    script::webdriver_handler: Fully implement `get_known_element` (#37532)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37403    (@PotatoCP, #37403)    [WebDriver] Add synchronization for key action (#37403)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37521    (@yezhizhen, #37521)    `webdriver_server`: Implement find element(s) from element according to spec (#37521)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37624    (@yezhizhen, #37624)    [WebDriver: Release Action] Fix panic by work around buggy spec (#37624)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37578    (@yezhizhen, #37578)    [WebDriver] Implement "Find Element(s) From ShadowRoot" (#37578)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37484    (@longvatrong111, #37484)    Implement webdriver release action (#37484)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37546    (@yezhizhen, #37546)    script::webdriver_handlers: Implement "get a known shadow root" (#37546)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37632    (@yezhizhen, #37632)    [WebDriver] Grant `top_level_script_command` and `browsing_context_script_command` freedom to not verify existence of pipeline (#37632)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37685    (@yezhizhen, #37685)    [WebDriver] Fully implement "switch to (parent) frame" (#37685)
-      webdriver
-    - SKIP https://github.com/servo/servo/pull/37284    (@yezhizhen, #37284)    servoshell: Do not focus and raise new auxiliary WebDriver-created `WebView`s  (#37284)
-      webdriver
--->
 
 ## Donations
 
