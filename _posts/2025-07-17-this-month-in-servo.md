@@ -1,7 +1,7 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: network inspector, a11y support, WebDriver, and more!"
+title:      "This month in Servo: network inspector, a11y first steps, WebDriver, and more!"
 date:       2025-07-17
 summary:    Plus some big perf gains, thanks to our incremental layout work.
 categories:
