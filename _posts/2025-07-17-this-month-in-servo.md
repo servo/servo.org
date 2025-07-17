@@ -3,7 +3,7 @@ layout:     post
 tags:       blog
 title:      "This month in Servo: network inspector, a11y support, WebDriver, and more!"
 date:       2025-07-17
-summary:    Plus huge perf gains thanks to our incremental layout work.
+summary:    Plus some big perf gains, thanks to our incremental layout work.
 categories:
 ---
 
