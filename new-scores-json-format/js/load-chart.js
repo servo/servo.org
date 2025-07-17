@@ -142,9 +142,9 @@ function setupChart () {
             const row = [
                 date,
                 area_score.total_score / area_score.total_tests,
-                toolTip(date, run.wpt_revision, run.servo_revision, area_score),
+                toolTip(date, run.wpt_revision, run.product_revision, area_score),
                 area_score.total_subtests_passed / area_score.total_subtests,
-                toolTip(date, run.wpt_revision, run.servo_revision, area_score)
+                toolTip(date, run.wpt_revision, run.product_revision, area_score)
             ]
             table.addRow(row)
         }
