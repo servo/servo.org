@@ -13,13 +13,17 @@ June was Servo’s busiest month in years, with **349 pull requests** landing in
 
 Servo now supports **viewport meta** tags (@shubhamg13, @xiaochengh, #35901), the **exportparts** attribute (@simonwuelker, #37345), the **‘::part()’ selector** (@simonwuelker, #37307), and several new web API features:
 
+- **&lt;script type="importmap">** (@wusyong, @pewsheen, #37291, #37405, #37504, #37552, #37547, #37340)
 - **ImageBitmap** (@tharkum, #37025, #37397, #37488, #37560, #37634)
+- **scroll** events in the DOM (@PotatoCP, @Asun0204, #36687)
 - the **supports() method** on **HTMLScriptElement** (@pewsheen, #37313)
 - the **lang()** and **id()** functions in **XPath** (@vlindhol, #34594)
 - the **&lt;hr size> attribute** (@simonwuelker, #37211)
 - barebones **IndexedDB** support (@arihant2math, @rasviitanen, @jdm, #33044, #37652, #37653)
 
 You can now call **transform()** with [a dictionary](https://drafts.fxtf.org/geometry/#dommatrixinit-dictionary) on **CanvasRenderingContext2D** and **CanvasPattern** (@tharkum, #37692, #37731).
+
+Abort handling on the web is a lot more viable now, with support for **abort()** and **signal** on **AbortController** (@gterzian, #37192, #37217), plus **aborted**, **reason**, and **throwIfAborted()** on **AbortSignal** (@gterzian, #37218, #37227, #37245).
 
 Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on Windows** (@wusyong, #37580).
 
@@ -207,37 +211,37 @@ fn main() -> Result<(), Box<dyn Error>> {
     - DONE https://github.com/servo/servo/pull/37707    (@uthmaniv, #37707)    Add common resourceId to network events (#37707)
       devtools
 - dom
-    - https://github.com/servo/servo/pull/37192    (@gterzian, #37192)    dom: implement signal abort on controller and signal (#37192)
+    - DONE https://github.com/servo/servo/pull/37192    (@gterzian, #37192)    dom: implement signal abort on controller and signal (#37192)
       dom
     - https://github.com/servo/servo/pull/37190    (@dvtkrlbs, #37190)    script: Set HTTP status code when aborting an `XMLHttpRequest` (#37190)
       dom
     - DONE https://github.com/servo/servo/pull/34594    (@vlindhol, #34594)    XPath: implement lang() and id() core functions (#34594)
       dom
-    - https://github.com/servo/servo/pull/37218    (@gterzian, #37218)    dom: implement aborted method of abort signal (#37218)
+    - DONE https://github.com/servo/servo/pull/37218    (@gterzian, #37218)    dom: implement aborted method of abort signal (#37218)
       dom
-    - https://github.com/servo/servo/pull/37217    (@gterzian, #37217)    dom: implement signal method on abort controller (#37217)
+    - DONE https://github.com/servo/servo/pull/37217    (@gterzian, #37217)    dom: implement signal method on abort controller (#37217)
       dom
-    - https://github.com/servo/servo/pull/37227    (@gterzian, #37227)    dom: implement abort signal reason method (#37227)
+    - DONE https://github.com/servo/servo/pull/37227    (@gterzian, #37227)    dom: implement abort signal reason method (#37227)
       dom
     - https://github.com/servo/servo/pull/37251    (@sagudev, #37251)    canvas: ensure there is a subpath in `PathBuilderRef` (#37251)
       dom
-    - https://github.com/servo/servo/pull/37245    (@Taym95, #37245)    Dom: Implement AbortSignal ThrowIfAborted method (#37245)
+    - DONE https://github.com/servo/servo/pull/37245    (@Taym95, #37245)    Dom: Implement AbortSignal ThrowIfAborted method (#37245)
       dom
     - DONE https://github.com/servo/servo/pull/37313    (@pewsheen, #37313)    feat(script): add `Supports()` to `htmlscriptelement` (#37313)
       dom
-    - https://github.com/servo/servo/pull/37291    (@wusyong, #37291)    HTMLScriptElement: add `ScriptType::ImportMap` (#37291)
+    - DONE https://github.com/servo/servo/pull/37291    (@wusyong, #37291)    HTMLScriptElement: add `ScriptType::ImportMap` (#37291)
       dom
-    - https://github.com/servo/servo/pull/37293    (@simonwuelker, #37293)    Fix timing of change events for `<select>` elements (#37293)
+    - SKIP https://github.com/servo/servo/pull/37293    (@simonwuelker, #37293)    Fix timing of change events for `<select>` elements (#37293)
       dom
-    - https://github.com/servo/servo/pull/37281    (@simonwuelker, #37281)    Don't drain ranges across shadow boundaries (#37281)
+    - SKIP https://github.com/servo/servo/pull/37281    (@simonwuelker, #37281)    Don't drain ranges across shadow boundaries (#37281)
       dom
     - https://github.com/servo/servo/pull/37279    (@vlindhol, #37279)    script: Fix two issues in the XPath parser to pass all `xml_xpath_tests.xml` tests (#37279)
       dom
-    - https://github.com/servo/servo/pull/37340    (@pewsheen, #37340)    feat(script): add `resolve_url_like_module_specifier` to `ModuleTree` (#37340)
+    - DONE https://github.com/servo/servo/pull/37340    (@pewsheen, #37340)    feat(script): add `resolve_url_like_module_specifier` to `ModuleTree` (#37340)
       dom
     - DONE https://github.com/servo/servo/pull/37025    (@tharkum, #37025)    imagebitmap: Add missing basic functionality (#37025)
       dom
-    - https://github.com/servo/servo/pull/37405    (@pewsheen, @wusyong, #37405)    feat(script): create import map parse result (#37405)
+    - DONE https://github.com/servo/servo/pull/37405    (@pewsheen, @wusyong, #37405)    feat(script): create import map parse result (#37405)
       dom
     - DONE https://github.com/servo/servo/pull/37345    (@simonwuelker, #37345)    Support exporting shadow parts with the `exportparts` attribute (#37345)
       dom
@@ -259,15 +263,15 @@ fn main() -> Result<(), Box<dyn Error>> {
       dom
     - https://github.com/servo/servo/pull/37511    (@Taym95, #37511)    implement Writablestreamdefaultcontroller abortcontroller (#37511)
       dom
-    - https://github.com/servo/servo/pull/37504    (@pewsheen, #37504)    feat(script): register import map (#37504)
+    - DONE https://github.com/servo/servo/pull/37504    (@pewsheen, #37504)    feat(script): register import map (#37504)
       dom
     - https://github.com/servo/servo/pull/37503    (@tharkum, #37503)    pixels: Multiply by alpha with less loss of precision (#37503)
       dom
-    - https://github.com/servo/servo/pull/36687    (@PotatoCP, @Asun0204, #36687)    Implement scroll event (#36687)
+    - DONE https://github.com/servo/servo/pull/36687    (@PotatoCP, @Asun0204, #36687)    Implement scroll event (#36687)
       dom
     - https://github.com/servo/servo/pull/37594    (@TimvdLippe, #37594)    Use undefined as this in trusted type callbacks (#37594)
       dom
-    - https://github.com/servo/servo/pull/37552    (@wusyong, #37552)    script: complete `resolve_module_specifier` (#37552)
+    - DONE https://github.com/servo/servo/pull/37552    (@wusyong, #37552)    script: complete `resolve_module_specifier` (#37552)
       dom
     - https://github.com/servo/servo/pull/37509    (@mrobinson, #37509)    script: Get scroll offsets from layout (#37509)
       dom
@@ -277,11 +281,11 @@ fn main() -> Result<(), Box<dyn Error>> {
       dom
     - DONE https://github.com/servo/servo/pull/37541    (@simonwuelker, #37541)    Handle nonmappable code points in Document::encoding_parse_a_url (#37541)
       dom
-    - https://github.com/servo/servo/pull/37550    (@rodio, #37550)    script Exclude `CDATASection` nodes from `Node::normalize()` (#37550)
+    - SKIP https://github.com/servo/servo/pull/37550    (@rodio, #37550)    script Exclude `CDATASection` nodes from `Node::normalize()` (#37550)
       dom
-    - https://github.com/servo/servo/pull/37461    (@PotatoCP, #37461)    script: Reverse wheel event delta sign to match specification-defined behavior (#37461)
+    - SKIP https://github.com/servo/servo/pull/37461    (@PotatoCP, #37461)    script: Reverse wheel event delta sign to match specification-defined behavior (#37461)
       dom
-    - https://github.com/servo/servo/pull/37547    (@pewsheen, #37547)    feat(script): parse script element `importmap` type (#37547)
+    - DONE https://github.com/servo/servo/pull/37547    (@pewsheen, #37547)    feat(script): parse script element `importmap` type (#37547)
       dom
     - DONE https://github.com/servo/servo/pull/33044    (@arihant2math, @rasviitanen, @jdm, #33044)     Initial IndexedDB Support (#33044)
       dom
