@@ -21,6 +21,14 @@ Servo now supports **viewport meta** tags ([@shubhamg13](https://github.com/shub
 - the **&lt;hr size> attribute** ([@simonwuelker](https://github.com/simonwuelker), [#37211](https://github.com/servo/servo/pull/37211))
 - barebones **IndexedDB** support, with `--pref dom_indexeddb_enabled` ([@arihant2math](https://github.com/arihant2math), [@rasviitanen](https://github.com/rasviitanen), [@jdm](https://github.com/jdm), [#33044](https://github.com/servo/servo/pull/33044), [#37652](https://github.com/servo/servo/pull/37652), [#37653](https://github.com/servo/servo/pull/37653))
 
+You can now use a **screen reader** to help you control servoshell’s **browser UI** ([@jdm](https://github.com/jdm), [#37519](https://github.com/servo/servo/pull/37519)).
+Note that Servo’s webviews are not yet accessible to screen readers.
+
+<figure>
+  <a href="{{ '/img/blog/2025-07-screen-reader.png' | url }}"><img alt="Screenshot of servoshell with the location bar focused, annotated with key presses and Orca screen reader output: “frame” TAB “button” TAB “button” TAB “button” TAB “entry https colon slash slash servo dot org slash selected”" src="{{ '/img/blog/2025-07-screen-reader.png' | url }}"></a>
+  <figcaption>Navigating servoshell with <a href="https://orca.gnome.org">Orca</a>, a screen reader. The back, forward, and reload buttons are not yet distinguishable (<a href="https://github.com/servo/servo/issues/38130">#38130</a>).</figcaption>
+</figure>
+
 You can now call **setTransform()** with [a dictionary](https://drafts.fxtf.org/geometry/#dommatrixinit-dictionary) on **CanvasRenderingContext2D** and **CanvasPattern** ([@tharkum](https://github.com/tharkum), [#37692](https://github.com/servo/servo/pull/37692), [#37731](https://github.com/servo/servo/pull/37731)).
 
 <figure><a href="{{ '/img/blog/2025-07-diffie.png' | url }}"><img alt="servoshell showing various examples of calling setTransform() on CanvasRenderingContext2D with a dictionary" src="{{ '/img/blog/2025-07-diffie.png' | url }}"></a></figure>
@@ -30,14 +38,6 @@ Abort handling on the web is a lot more viable now, with support for **abort()**
 Our experimental **multiprocess mode** (`-M` / `--multiprocess`) now **works on Windows** ([@wusyong](https://github.com/wusyong), [#37580](https://github.com/servo/servo/pull/37580)).
 
 We’ve fixed several bugs, notably including a bug in the encoding of **HTML form submissions** in non-Unicode documents ([@simonwuelker](https://github.com/simonwuelker), [#37541](https://github.com/servo/servo/pull/37541)), which single-handedly fixed **over 97000 subtests** in the Web Platform Tests.
-
-You can now use a **screen reader** to help you control servoshell’s **browser UI** ([@jdm](https://github.com/jdm), [#37519](https://github.com/servo/servo/pull/37519)).
-Note that Servo’s webviews are not yet accessible to screen readers.
-
-<figure>
-  <a href="{{ '/img/blog/2025-07-screen-reader.png' | url }}"><img alt="Screenshot of servoshell with the location bar focused, annotated with key presses and Orca screen reader output: “frame” TAB “button” TAB “button” TAB “button” TAB “entry https colon slash slash servo dot org slash selected”" src="{{ '/img/blog/2025-07-screen-reader.png' | url }}"></a>
-  <figcaption>Navigating servoshell with <a href="https://orca.gnome.org">Orca</a>, a screen reader. The back, forward, and reload buttons are not yet distinguishable (<a href="https://github.com/servo/servo/issues/38130">#38130</a>).</figcaption>
-</figure>
 
 ## Devtools
 
