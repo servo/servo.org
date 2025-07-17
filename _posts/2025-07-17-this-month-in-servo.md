@@ -44,13 +44,7 @@ We now have basic support for the **Network tab** ([@uthmaniv](https://github.co
 
 In addition, our devtools are now compatible with **Firefox 139** ([@eerii](https://github.com/eerii), [#37247](https://github.com/servo/servo/pull/37247)), and we’ve landed some preliminary work towards supporting the **Sources tab** ([@atbrakhi](https://github.com/atbrakhi), [@delan](https://github.com/delan), [#36774](https://github.com/servo/servo/pull/36774), [#37456](https://github.com/servo/servo/pull/37456), [#37197](https://github.com/servo/servo/pull/37197)).
 
-<figure>
-  <a href="{{ '/img/blog/2025-07-devtools1.png' | url }}"><img alt="Network tab in the Servo devtools, showing a list of requests" src="{{ '/img/blog/2025-07-devtools1.png' | url }}"></a>
-  <div style="display: flex;">
-    <a href="{{ '/img/blog/2025-07-devtools2-crop.png' | url }}"><img alt="Headers tab in the Network panel, showing the request and response headers for a request" src="{{ '/img/blog/2025-07-devtools2-crop.png' | url }}"></a>
-    <a href="{{ '/img/blog/2025-07-devtools3-crop.png' | url }}"><img alt="Timings tab in the Network panel, showing the time each phase of a request took" src="{{ '/img/blog/2025-07-devtools3-crop.png' | url }}"></a>
-  </div>
-</figure>
+<figure><a href="{{ '/img/blog/2025-07-devtools1-combined.png' | url }}"><img alt="Network tab in the Servo devtools, showing a list of requests, the Headers panel with request and response headers for a request, and the Timings panel with the time each phase of that request took" src="{{ '/img/blog/2025-07-devtools1-combined.png' | url }}"></a></figure>
 
 ## Performance
 
@@ -81,6 +75,8 @@ We now better handle operations for [switching contexts](https://w3c.github.io/w
 Want to try automating Servo with WebDriver?
 It’s so easy it fits in a blog post!
 
+<figure markdown=1 style="font-size: 75%;">
+
 ```sh
 $ cargo new app
 $ cd app
@@ -89,11 +85,8 @@ $ cargo add webdriver_client@0.2.5
 
 ```rust
 use std::{
-    error::Error,
-    net::{Shutdown, TcpStream},
-    process::Command,
-    thread::sleep,
-    time::Duration,
+    error::Error, net::{Shutdown, TcpStream},
+    process::Command, thread::sleep, time::Duration,
 };
 
 use webdriver_client::{
@@ -112,9 +105,8 @@ fn main() -> Result<(), Box<dyn Error>> {
         .build()?;
     let mut params = NewSessionCmd::default();
 
-    // Remove the unsupported `goog:chromeOptions` capability,
-    // which Servo rejects with a “Session not created due to
-    // invalid capabilities” error.
+    // Remove the unsupported `goog:chromeOptions` capability, which Servo rejects
+    // with a “Session not created due to invalid capabilities” error.
     params.reset_always_match();
 
     // Wait for the WebDriver server to start.
@@ -138,16 +130,15 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     sleep(Duration::from_secs(1));
     session.execute(ExecuteCmd {
-        script: "document.body.innerHTML =
-            '<h1>Hello from WebDriver!</h1>' +
-            document.body.innerHTML"
-            .to_owned(),
+        script: "document.body.innerHTML = '<h1>Hello from WebDriver!</h1>' +
+            document.body.innerHTML".to_owned(),
         args: vec![],
     })?;
 
     Ok(())
 }
 ```
+</figure>
 
 <figure>
   <a href="{{ '/img/blog/2025-07-webdriver.png' | url }}"><img alt="Servo showing a page that was modified by a WebDriver client" src="{{ '/img/blog/2025-07-webdriver.png' | url }}"></a>
