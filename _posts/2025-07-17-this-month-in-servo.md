@@ -19,7 +19,7 @@ Servo now supports **viewport meta** tags ([@shubhamg13](https://github.com/shub
 - the **supports() method** on **HTMLScriptElement** ([@pewsheen](https://github.com/pewsheen), [#37313](https://github.com/servo/servo/pull/37313))
 - the **lang()** and **id()** functions in **XPath** ([@vlindhol](https://github.com/vlindhol), [#34594](https://github.com/servo/servo/pull/34594))
 - the **&lt;hr size> attribute** ([@simonwuelker](https://github.com/simonwuelker), [#37211](https://github.com/servo/servo/pull/37211))
-- barebones **IndexedDB** support ([@arihant2math](https://github.com/arihant2math), [@rasviitanen](https://github.com/rasviitanen), [@jdm](https://github.com/jdm), [#33044](https://github.com/servo/servo/pull/33044), [#37652](https://github.com/servo/servo/pull/37652), [#37653](https://github.com/servo/servo/pull/37653))
+- barebones **IndexedDB** support, with `--pref dom_indexeddb_enabled` ([@arihant2math](https://github.com/arihant2math), [@rasviitanen](https://github.com/rasviitanen), [@jdm](https://github.com/jdm), [#33044](https://github.com/servo/servo/pull/33044), [#37652](https://github.com/servo/servo/pull/37652), [#37653](https://github.com/servo/servo/pull/37653))
 
 You can now call **transform()** with [a dictionary](https://drafts.fxtf.org/geometry/#dommatrixinit-dictionary) on **CanvasRenderingContext2D** and **CanvasPattern** ([@tharkum](https://github.com/tharkum), [#37692](https://github.com/servo/servo/pull/37692), [#37731](https://github.com/servo/servo/pull/37731)).
 
