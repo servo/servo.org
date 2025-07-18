@@ -105,8 +105,7 @@ function setupChart () {
     const area_dropdown = document.getElementById('selected-area')
     const period_dropdown = document.getElementById('selected-period')
     const chart = new google.visualization.LineChart(node)
-    const AREA_SCORE_OFFSET = 3
-    let all_scores
+    let score_data
 
     Object.keys(periodRanges).forEach(date => {
         const selector = document.createElement('option')
@@ -116,7 +115,7 @@ function setupChart () {
     })
 
     function update_chart () {
-        if (!all_scores) throw new Error('scores not loaded')
+        if (!score_data) throw new Error('scores not loaded')
         const area_index = +area_dropdown.value
         const chosen_period = period_dropdown.value
         const table = new google.visualization.DataTable()
@@ -134,19 +133,18 @@ function setupChart () {
         table.addColumn('number', 'Subtests')
         table.addColumn({ type: 'string', role: 'tooltip', p: { html: true } })
 
-        for (const scores_for_run of all_scores.scores) {
-            const area_score = scores_for_run[area_index + AREA_SCORE_OFFSET]
-            const [date_string, wpt_sha, browser_version] = scores_for_run
-            const date = parseDateString(date_string)
+        for (const run of score_data.runs) {
+            const area_score = run.scores[area_index]
+            const date = parseDateString(run.date)
             if (date < minDate) {
                 continue
             }
             const row = [
                 date,
                 area_score.total_score / area_score.total_tests,
-                toolTip(date, wpt_sha, browser_version, area_score),
+                toolTip(date, run.wpt_revision, run.product_revision, area_score),
                 area_score.total_subtests_passed / area_score.total_subtests,
-                toolTip(date, wpt_sha, browser_version, area_score)
+                toolTip(date, run.wpt_revision, run.product_revision, area_score)
             ]
             table.addRow(row)
         }
@@ -155,15 +153,15 @@ function setupChart () {
 
     fetchData
         .then(resp => resp.json())
-        .then(scores => {
-            all_scores = scores
-            if (scores.scores.length < 60) {
+        .then(data => {
+            score_data = data
+            if (score_data.runs.length < 60) {
                 options.hAxis.format = 'dd MMM YYYY'
             } else {
                 options.hAxis.format = 'MMM YYYY'
             }
 
-            for (const [index, area] of scores.focus_areas.entries()) {
+            for (const [index, area] of score_data.focus_areas.entries()) {
                 const selector = document.createElement('option')
                 selector.value = index
                 selector.textContent = area
