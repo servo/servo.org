@@ -102,5 +102,4 @@ The chart below tracks our pass rates in several *focus areas* of the [Web Platf
     </p>
 </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="{{ '/js/load-table.js' | url }}"></script>
-<script type="module" src="{{ '/js/load-chart.js' | url }}"></script>
+<script type="module" src="{{ '/js/load-chart-and-table.js' | url }}"></script>
