@@ -1,7 +1,5 @@
 const fetchData = fetch('https://wpt.servo.org/scores-last-run.json')
 
-const AREA_SCORE_OFFSET = 3
-
 function removeChildren (parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild)
@@ -9,12 +7,12 @@ function removeChildren (parent) {
     return parent
 }
 
-function update_table (scores) {
+function update_table (data) {
     const score_table = document.getElementById('score-table-body')
     removeChildren(score_table)
 
-    for (const [idx, area] of scores.focus_areas.entries()) {
-        const area_score = scores.scores_last_run[idx + AREA_SCORE_OFFSET]
+    for (const [idx, area] of data.focus_areas.entries()) {
+        const area_score = data.last_run.scores[idx]
         const score = Math.floor(1000 * area_score.total_score / area_score.total_tests) / 10
         const subtests = Math.floor(1000 * area_score.total_subtests_passed / area_score.total_subtests) / 10
         score_table.insertAdjacentHTML(
@@ -30,7 +28,5 @@ function update_table (scores) {
 
 fetchData
   .then(resp => resp.json())
-  .then(scores => {
-    update_table(scores)
-  })
+  .then(data => update_table(data))
 
