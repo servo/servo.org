@@ -19,12 +19,12 @@
 
 ## How to list commits that landed in each nightly
 
-Note that the list of nightly builds is cached in tools/runs.json, so if it exists, you will need to delete it to fetch an updated list.
+**Note that the list of nightly builds is cached in tools/runs.json, so if it exists, you will need to delete it to fetch an updated list.**
 
 Make sure your Servo checkout is on the main branch, and that the branch is up to date. Then run the script below, passing it the path to your checkout:
 
 ```sh
-$ rm tools/runs.json  # Optional: clear CI history cache
+$ rm tools/runs.json  # Optional: clear cached list of nightly builds
 $ tools/list-commits-by-nightly.sh /path/to/servo
 ```
 
@@ -352,15 +352,13 @@ And generally we want to exclude...
 
 The suggested workflow for efficiently triaging commits is as follows:
 
-- [Fetch pull request details](#how-to-list-this-years-pull-request-contributors) for the last two months, as follows:
+**Note that the list of nightly builds is cached in tools/runs.json, so if it exists, you will need to delete it to fetch an updated list.**
+
+- [Fetch pull request details](#how-to-list-this-years-pull-request-contributors) for the **last two months** (`2025-01 2025-02`), then [list commits that landed each nightly](#how-to-list-commits-that-landed-in-each-nightly) for **last month** (`/^>>> 2025-02-/,/^>>> 2025-03-/!d`):
 
 ```
+$ rm tools/runs.json  # Optional: clear cached list of nightly builds
 $ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-2025-02.json
-```
-
-- [List commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly) last month, as follows:
-
-```
 $ tools/list-commits-by-nightly.sh ~/code/servo tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
 ```
 
