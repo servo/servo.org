@@ -9,10 +9,15 @@ categories:
 
 <!--
 - 4691/month donations (4523/month without thanks.dev)
-  - 1980.23/month opencollective
-  - 2543.00/month github
-  - 22 donors 168.55/month thanks.dev
-  - benchmarking runners
+    - 1980.23/month opencollective
+    - 2543.00/month github
+    - 22 donors 168.55/month thanks.dev
+    - benchmarking runners
+- windowing
+    - [WebDriver Task] Window Size related commands gives inaccurate result servo#37804
+    - ScreenY and outerHeight ignores the title bar height servo#37824
+    - window.screen.availWidth and availHeight is inaccurate servo#37878
+    - servoshell: Tab bar dissapears when resizing the window servo#38255
 -->
 
 ## Donations
