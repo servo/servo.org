@@ -315,12 +315,6 @@ centsPerMonth += $$("table tbody tr")
 ```
 - After running it on every page, the result is USD cents/month
 
-LFX:
-
-- Go to <https://crowdfunding.lfx.linuxfoundation.org/projects/e98e012f-479e-45d0-8781-4d7f616baa9d/financial>
-    - You may need to open it in private browsing to avoid getting a 404, not sure why
-- Manually add up the amounts for one month, stopping when you see the same donor repeated
-
 thanks.dev:
 
 - Go to <https://thanks.dev/>
@@ -328,6 +322,34 @@ thanks.dev:
 - Go to <https://thanks.dev/dashboard>
 - Click **For maintainers**
 - The number of donors is in “You currently have X donors.”
+- If possible, make a payout: click **payouts**, click **withdraw**, click **withdraw**
+- Click **income**, make sure the &lt;select> is set to **gh/servo**
+- Run this code in devtools, changing `Jul 25` to the **date** column text for last month:
+```js
+monthText = "Jul 25";
+columnHeadings = [...document.querySelectorAll("div")]
+    .filter(div => div.textContent == "amount")
+    .flatMap(div => [...div.parentNode.childNodes]);
+if (new Set(columnHeadings.map(th => th.parentNode)).size != 1)
+    throw new Error("Unexpected columnHeadings values");
+headingRow = columnHeadings[0].parentNode;
+// The parent is actually the whole page content area, not just the table >:(
+contentArea = headingRow.parentNode;
+dataRowStart = [...contentArea.childNodes].indexOf(headingRow) + 1;
+dataRowEnd = [...contentArea.childNodes].length - 1;  // Total row (fragile?)
+dataRows = [...contentArea.childNodes].slice(dataRowStart, dataRowEnd);
+if (!dataRows.every(tr => tr.childNodes.length == columnHeadings.length))
+    throw new Error("Unexpected table structure");
+columnIndices = new Map(columnHeadings.map((th,i) => [th.textContent, i]));
+getValue = (tr,columnName) => tr.childNodes[columnIndices.get(columnName)].textContent;
+dataRows
+    .filter(tr => getValue(tr, "date").endsWith(` ${monthText}`))
+    .map(tr => getValue(tr, "amount"))
+    .filter(amount => amount != "< $0.01")
+    .map(amount => parseInt(amount.match(/^[$]([0-9]+[.][0-9][0-9])$/)[1].replace(".","")))
+    .reduce((p, q) => p + q)
+```
+- The result is USD cents/month
 
 ## Triaging commits in nightlies for monthly updates
 
