@@ -261,7 +261,8 @@ https://github.com/servo/servo/pull/37764	(@rodio, #37764)	Set the placeholder c
     # `NonReplacedContents`.
     # Testing: This shouldn't have any functional change, so is covered by
     # existing tests.
-https://github.com/servo/servo/pull/37630	(@sagudev, #37630)	canvas: Do not draw arc/ellipse with small sweep (#37630)
++https://github.com/servo/servo/pull/37630	(@sagudev, #37630)	canvas: Do not draw arc/ellipse with small sweep (#37630)
+    vello; preparing to migrate to vello for gpu-accelerated 2d canvas (see issue 30636, 38345)
     # While raqote does already passes this test, but small line is still visible and this PR will fix this. Vello will
     # not work correctly without this.
     # ![slika](https://github.com/user-attachments/assets/195cd2c8-bea4-46d8-bf34-9c2d0b2e996e)
@@ -376,7 +377,7 @@ https://github.com/servo/servo/pull/37630	(@sagudev, #37630)	canvas: Do not draw
     # This improves naming of layout categories and adds tracing for each
     # layout phase.
     # Testing: This just adds / adjusts profiling categories, so doesn't need tests.
-https://github.com/servo/servo/pull/37830	(@Narfinger, #37830)	OHOS CI: Robustness of speedometer (#37830)
+-https://github.com/servo/servo/pull/37830	(@Narfinger, #37830)	OHOS CI: Robustness of speedometer (#37830)
     # OHOS CI: If speedometer does not finish we currently abort the whole job.
     # This fixes this behaviour by adding an emtpy file and continuing the job.
     # Runs with errors will now look like this. Notice annotation.
@@ -385,7 +386,8 @@ https://github.com/servo/servo/pull/37830	(@Narfinger, #37830)	OHOS CI: Robustne
     # https://github.com/Narfinger/servo/actions/runs/16027530625
     # Signed-off-by: Narfinger
     # Testing: Tested on CI.
-https://github.com/servo/servo/pull/37819	(@spookyvision, @e+github@mail.taugt.net, #37819)	bhm: Add backtrace demangling (#37819)
++https://github.com/servo/servo/pull/37819	(@spookyvision, #37819)	bhm: Add backtrace demangling (#37819)
+    internals; background hang monitor now demangles backtraces
     # This PR adds backtrace demangling to background hang monitor, thereby removing a `TODO` in the component source.
     # The required `rustc-demangle` crate dependency is gated behind `#[cfg(feature = "sampler")]` as it is my understanding
     # that the surrounding code is only called when `sampler` is enabled.
@@ -622,7 +624,7 @@ https://github.com/servo/servo/pull/37828	(@tharkum, #37828)	htmlimageelement: R
     # P.S. Other browser seems to also allows getting closed shadow root, like Chromium here:
     # https://chromium-review.googlesource.com/c/chromium/src/+/5923865.
     # Testing: Covered in webdriver WPT test that access closed shadow root.
-https://github.com/servo/servo/pull/37759	(@sagudev, #37759)	canvas: use `Transform2D` instead of `Transform3D` when possible (#37759)
+-https://github.com/servo/servo/pull/37759	(@sagudev, #37759)	canvas: use `Transform2D` instead of `Transform3D` when possible (#37759)
     # While this makes our implementation deviate slightly from the specification, this clarifies
     # an invariant with the code itself. This helps to resolve some confusion as seen in
     # https://github.com/servo/servo/issues/37695#issuecomment-3013823350.
@@ -745,7 +747,7 @@ https://github.com/servo/servo/pull/37369	(@Narfinger, @gterzian, #37369)	Add a 
     # This change extends incremental box tree updates to table cells. In addition, for simplicity this refactors
     # `BoxSlot::take_layout_box()` into `BoxSlot::take_layout_box_if_undamaged()`.
     # Testing: This should not change observable behavior and is thus covered by existing WPT tests.
-https://github.com/servo/servo/pull/37176	(@yezhizhen, #37176)	layout: Ensure that the last transition for a property take precedence (#37176)
+-https://github.com/servo/servo/pull/37176	(@yezhizhen, #37176)	layout: Ensure that the last transition for a property take precedence (#37176)
     # This change bumps stylo to servo/stylo#214, to fix an issue where transition
     # properties defined earlier on the list of transitions were taking preference over
     # those defined later.
@@ -761,7 +763,7 @@ https://github.com/servo/servo/pull/37176	(@yezhizhen, #37176)	layout: Ensure th
     layout; quirks mode accuracy
     # In quirks mode, the ::marker of a bare `` should be `list-style-position: inside`,
     # Testing: Some WPT improvement
-+https://github.com/servo/servo/pull/37751	(@mrobinson, @Loirooriol, @ibluegalaxy_taoj@163.com, #37751)	layout: Add a first pass at incremental box tree construction (#37751)
++https://github.com/servo/servo/pull/37751	(@mrobinson, @Loirooriol, @coding-joedow, #37751)	layout: Add a first pass at incremental box tree construction (#37751)
     perf; incremental box tree construction via layout damage
     # This change:
     # - Adds a new type of LayoutDamage that signifies that a box needs its
@@ -775,11 +777,12 @@ https://github.com/servo/servo/pull/37176	(@yezhizhen, #37176)	layout: Ensure th
     # Testing: This should not change observable behavior and thus is covered
     # by existing WPT tests.
 >>> 2025-07-05T06:04:14Z
-https://github.com/servo/servo/pull/37888	(@jschwe, #37888)	Revert "layout: Add incremental box tree construction for inline floats and abspos" (#37888)
+-https://github.com/servo/servo/pull/37888	(@jschwe, #37888)	Revert "layout: Add incremental box tree construction for inline floats and abspos" (#37888)
     # This reverts commit 19ceccc8eb983bd87e3f8fca97d61c6dde87b4e7 due to a significant increase in resident memory usage
     # (See https://github.com/servo/servo/issues/37887).
     # Testing: This is a revert due to a regression
-https://github.com/servo/servo/pull/37863	(@sagudev, #37863)	canvas: Use snapshot in canvas backends (#37863)
++https://github.com/servo/servo/pull/37863	(@sagudev, #37863)	canvas: Use snapshot in canvas backends (#37863)
+    vello; more preparation for vello
     # This removes assumption about pixel format from backend abstraction to actual backend implementation. This is
     # important for vello.
     # Testing: WPT tests
@@ -821,11 +824,12 @@ https://github.com/servo/servo/pull/37876	(@longvatrong111, #37876)	webdriver: P
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/37584	(@sagudev, #37584)	Support WPT subsuites in agregating and flake detection (#37584)
+-https://github.com/servo/servo/pull/37584	(@sagudev, #37584)	Support WPT subsuites in agregating and flake detection (#37584)
     # Handle subsuites in wpt flake detection and aggregation as outlined in
     # https://github.com/servo/servo/issues/37319#issuecomment-2969528022. Based on #37540.
     # Testing: Manual CI run with vello_canvas subsuite: https://github.com/sagudev/servo/actions/runs/16021200215
-https://github.com/servo/servo/pull/37842	(@sagudev, #37842)	canvas: Join `Path` and `PathBuilder` into `Path` (#37842)
++https://github.com/servo/servo/pull/37842	(@sagudev, #37842)	canvas: Join `Path` and `PathBuilder` into `Path` (#37842)
+    vello; more preparation for vello
     # Dealing with both path and builder makes code complicated and this is backend internal specific anyway (we often
     # do conversions between the two just so we get specific functionality). Now I joined both into single abstractions
     # `Path`, that has all what one needs and let raqote backend deal with path/pathbuilder coversions.
@@ -862,13 +866,14 @@ https://github.com/servo/servo/pull/37880	(@tharkum, #37880)	canvas: Add Offscre
     # 2. Add a new test `window_resizeTo.html` for https://github.com/servo/servo/pull/37848
     # Testing: new test always fails because of https://github.com/servo/servo/issues/37824, which gives inaccurate
     # outerHeight.
-https://github.com/servo/servo/pull/37868	(@ibluegalaxy_taoj@163.com, #37868)	layout: Add incremental box tree construction for inline floats and abspos (#37868)
++https://github.com/servo/servo/pull/37868	(@coding-joedow, #37868)	layout: Add incremental box tree construction for inline floats and abspos (#37868)
+    perf; incremental layout for inline floats and abspos
     # This changes extend the incremental box tree construction for inline out-of-flow-box, including the
     # `InlineItem::OutOfFlowAbsolutelyPositionedBox` and `InlineItem::OutOfFlowFloatBox`.
     # Testing: This should not change observable behavior and is thus covered by existing WPT tests.
-https://github.com/servo/servo/pull/37741	(@jerensl, #37741)	Merge`ruff.toml` into `pyproject.toml` (#37741)
+-https://github.com/servo/servo/pull/37741	(@jerensl, #37741)	Merge`ruff.toml` into `pyproject.toml` (#37741)
     # add a pyproject.toml config file that includes the settings for ruff
-https://github.com/servo/servo/pull/37874	(@jerensl, #37874)	Remove `cargo-update`, `update-cargo`, `grep`, `ndk-stack`, and `ndk-gdb` mach commands (#37874)
+-https://github.com/servo/servo/pull/37874	(@jerensl, #37874)	Remove `cargo-update`, `update-cargo`, `grep`, `ndk-stack`, and `ndk-gdb` mach commands (#37874)
     # Remove some seldomly used `mach commands:
     # - `ndk-stack` and `ndk-gdb`: These commands have bit rotted completely, so need to be reimplemented. Remove them
     # for now to make them less confusing.
@@ -877,10 +882,12 @@ https://github.com/servo/servo/pull/37874	(@jerensl, #37874)	Remove `cargo-updat
     # addition, we can improve the default behavior of `git grep` by using the git attributes feature.
     # These commands are being removed in order to implement Python type checking the Servo repository.
     # Testing: This just removes some mach command so shouldn't need tests.
-https://github.com/servo/servo/pull/37866	(@ibluegalaxy_taoj@163.com, #37866)	layout: Add incremental box tree construction for inline atomics (#37866)
++https://github.com/servo/servo/pull/37866	(@coding-joedow, #37866)	layout: Add incremental box tree construction for inline atomics (#37866)
+    perf; incremental layout for inline atomics
     # This changes extend the incremental box tree construction for inline atomic
     # Testing: This should not change observable behavior and is thus covered by existing WPT tests.
-https://github.com/servo/servo/pull/37873	(@yezhizhen, #37873)	servoshell: Set `dom_testing_html_input_element_select_files_enabled` when WebDriver is enabled (#37873)
++https://github.com/servo/servo/pull/37873	(@yezhizhen, #37873)	servoshell: Set `dom_testing_html_input_element_select_files_enabled` when WebDriver is enabled (#37873)
+    webdriver; work towards running webdriver test suite
     # Testing: `.\tests\wpt\tests\webdriver\tests\classic\execute_script\collections.py` can now run to the end when
     # running either locally or `try`.
     # Fixes: #37870
@@ -893,7 +900,8 @@ https://github.com/servo/servo/pull/37779	(@kongbai1996, #37779)	compositor|scri
     # to constellation. In the script's handle_touch_event, if it exits early, we also need to update active_touch_points.
     # Testing:
     # Fixes: #37763
-https://github.com/servo/servo/pull/37854	(@ibluegalaxy_taoj@163.com, #37854)	Layout: Continue support incremental box tree reconstruction for flex&taffy level box (#37854)
++https://github.com/servo/servo/pull/37854	(@coding-joedow, #37854)	Layout: Continue support incremental box tree reconstruction for flex&taffy level box (#37854)
+    perf; incremental layout for flex items and grid items
     # Layout: Continue support incremental box tree reconstruction for flex&taffy level box
     # This change reuse the flex/taffy level box from old box slot if the box slot is valid and there is no LayoutDamage
     # to the element.
@@ -950,13 +958,13 @@ https://github.com/servo/servo/pull/37786	(@tharkum, #37786)	canvas: Add Offscre
     # - html/canvas/offscreen/manual/wide-gamut-canvas/2d.color.space.p3.convertToBlobp3.canvas.html
     # Fixes: #24272
 >>> 2025-07-06T06:03:49Z
-https://github.com/servo/servo/pull/37900	(@MichaelMcDonnell, #37900)	Fix unused import `TouchEventType` warning (#37900)
+-https://github.com/servo/servo/pull/37900	(@MichaelMcDonnell, #37900)	Fix unused import `TouchEventType` warning (#37900)
     # I'm getting an unused import warning when I use Rust-Analyzer in VS Code. I also fixed the license text which I
     # think had gotten changed by accident.
     # Testing:  I built and ran the example with `cargo build --example winit_minimal` in the `components/servo`
     # folder. There were some unused code warnings but they don't show up in Rust-Analyzer's output and I suspect they
     # are used by other code.
-https://github.com/servo/servo/pull/37899	(@sagudev, #37899)	script: Also update canvas contents when laying out right after / during long parsing (#37899)
+-https://github.com/servo/servo/pull/37899	(@sagudev, #37899)	script: Also update canvas contents when laying out right after / during long parsing (#37899)
     # Before #37703 we were actually doing update rendering of canvases/images as part of `allow_layout_if_necessary`
     # so let's keep doing that until we fix this properly as this will be much more involved and we want usable canvases
     # in the mean time.
@@ -969,7 +977,8 @@ https://github.com/servo/servo/pull/37778	(@uthmaniv, #37778)	Send WillNavigate 
     # thread, otherwise we silently ignore navigations triggered by the browser URL bar.
     # Testing: Ran servo in devtools mode , now the requests appear for new loaded page
     # Fixes: https://github.com/servo/servo/issues/37334
-https://github.com/servo/servo/pull/37892	(@ibluegalaxy_taoj@163.com, #37892)	layout: Add incremental box tree construction for inline floats and abspos (#37892)
++https://github.com/servo/servo/pull/37892	(@coding-joedow, #37892)	layout: Add incremental box tree construction for inline floats and abspos (#37892)
+    perf; incremental layout for inline floats and abspos
     # Layout: Add incremental box tree construction for inline floats and abspos
     # Due to false positives in the memory benchmark on CI, the previous PR
     # [37868](https://github.com/servo/servo/pull/37868) reverted. Now it is resubmitted.
@@ -1252,7 +1261,7 @@ https://github.com/servo/servo/pull/37940	(@yezhizhen, #37940)	WebDriver Chore: 
     # This reduces unnecessary generated code and binary size. See
     # https://github.com/servo/servo/pull/37712#discussion_r2171957828
     # Testing: No Behaviour change
-https://github.com/servo/servo/pull/37889	(@sagudev, #37889)	script: join `compositor_requested_update_the_rendering` into `should_trigger_script_thread_animation_tick` (#37889)
+-https://github.com/servo/servo/pull/37889	(@sagudev, #37889)	script: join `compositor_requested_update_the_rendering` into `should_trigger_script_thread_animation_tick` (#37889)
     # This will help us make "update the rendering" a proper task.
     # Testing: Existing WPT tests.
     # try run: https://github.com/sagudev/servo/actions/runs/16085256131
@@ -1342,7 +1351,8 @@ https://github.com/servo/servo/pull/37965	(@TimvdLippe, #37965)	Add support for 
     # Does not yet handle failures of endpoints, which requires us to update metadata. I don't see that metadata being
     # used anywhere, so I am not sure if there is WPT coverage for it.
     # Part of #37238
-https://github.com/servo/servo/pull/37954	(@ibluegalaxy_taoj@163.com, #37954)	layout: remove the finished animations to avoid to mark their dom nodes dirty (#37954)
++https://github.com/servo/servo/pull/37954	(@coding-joedow, #37954)	layout: remove the finished animations to avoid to mark their dom nodes dirty (#37954)
+    perf; avoid reflow after animations
     # Remove the finished animations to avoid marking their dom nodes dirty. The mainly change happens at [stylo PR
     # 216](https://github.com/servo/stylo/pull/216).
     # In Servo's current animation implementation, the finished animations are retained and continue to mark their
@@ -1592,7 +1602,8 @@ https://github.com/servo/servo/pull/37637	(@rayguo17, #37637)	add support for ap
     # particular this implies that the layout results of a replaced box will now be cached.
     # Testing: Unneeded (no behavior change)
     # This part of #37942
-https://github.com/servo/servo/pull/37975	(@yezhizhen, @jdm, #37975)	servoshell: Enable headless event loop for Windows (#37975)
++https://github.com/servo/servo/pull/37975	(@yezhizhen, @jdm, #37975)	servoshell: Enable headless event loop for Windows (#37975)
+    windows; can now run in headless mode on windows
     # Testing: For windows, it now passes `/_mozilla/mozilla/window_resizeTo.html` in headless mode but fails in headed
     # window as expected in https://github.com/servo/servo/pull/37899#issuecomment-3052566865.
     # Fixes: #37973
@@ -1784,7 +1795,8 @@ https://github.com/servo/servo/pull/37955	(@longvatrong111, #37955)	script_threa
     # Testing:
     # `tests/wpt/meta/webdriver/tests/classic/back/back.py`
     # `tests/wpt/meta/webdriver/tests/classic/forward/forward.py`
-https://github.com/servo/servo/pull/37668	(@sagudev, @mrobinson, #37668)	canvas: Properly bound all image pattern axis by inserting clip (#37668)
++https://github.com/servo/servo/pull/37668	(@sagudev, @mrobinson, #37668)	canvas: Properly bound all image pattern axis by inserting clip (#37668)
+    vello; more preparation for vello
     # Before we only handled no-repeat for rect, this means we rendered https://sagudev.github.io/briefcase/no-repeat.html
     # incorrectly (like firefox). Now if one of the axis is bounded (does not repeat) we clip it and let other axis be
     # unbounded (technically we clip it to end of canvas).
@@ -1831,7 +1843,8 @@ https://github.com/servo/servo/pull/38002	(@TimvdLippe, #38002)	Fix reporting wh
     # Additionally, update a WPT test. It was expecting the image
     # to load, yet was showing the fail image.
     # Part of #4577
-https://github.com/servo/servo/pull/37967	(@sagudev, #37967)	canvas: Use wrapped `kurbo::BezPath` for path everywhere (#37967)
++https://github.com/servo/servo/pull/37967	(@sagudev, #37967)	canvas: Use wrapped `kurbo::BezPath` for path everywhere (#37967)
+    vello; path building now done in script
     # This PR removes existing path(segment) abstractions in favor of `kurbo::BezPath`, well actually wrapped
     # `kurbo::BezPath`, to ensure building of valid paths. This allows us better Path2D building in script and doing
     # all validation and segmentation there and also allows us remove blocking is_point_in_path on Path2D as we can
@@ -1851,7 +1864,7 @@ https://github.com/servo/servo/pull/37605	(@iamlockon, #37605)	script: Add a Con
     # Testing: `./mach test-wpt tests/wpt/tests/IndexedDB/`, but it seems there are many test failures even in main
     # branch already ([related comment](https://github.com/servo/servo/pull/37605#issuecomment-2993889163)).
     # Fixes: #37571
-https://github.com/servo/servo/pull/38016	(@sagudev, #38016)	chore: Fix expectation of dom/xslt/large-cdata.html and disable HOS in CI (#38016)
+-https://github.com/servo/servo/pull/38016	(@sagudev, #38016)	chore: Fix expectation of dom/xslt/large-cdata.html and disable HOS in CI (#38016)
     # I've seen two multiple runs failing that reported this test as stable FAIL (and in worst case it's intermittent
     # TIMEOUT, but it does not look like it). We also disable HOS in CI, because they currently do not work: [#general >
     # CI runners @ 💬](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/CI.20runners/near/528443964)
@@ -1882,7 +1895,8 @@ https://github.com/servo/servo/pull/38037	(@atouchet, #38037)	Update ahash and p
     # Testing: `/css/css-text/white-space/pre-wrap-018.html` is now passing. Also verified manually by running
     # `data:text/html;base64,PGRpdiBzdHlsZT0idGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmU7Ij5IZWxsbyBXb3JsZCE8L2Rpdj4= `
     # Fixes: https://github.com/servo/servo/issues/33463
-https://github.com/servo/servo/pull/38028	(@yezhizhen, #38028)	mach (Windows): make `vswhere.exe` work properly (#38028)
++https://github.com/servo/servo/pull/38028	(@yezhizhen, #38028)	mach (Windows): make `vswhere.exe` work properly (#38028)
+    windows; fix building on windows 11
     # Previously, the args passed to `vswhere.exe` was wrong. There is no generic component
     # ID called `Microsoft.VisualStudio.Component.Windows10SDK`, but always something like
     # `Microsoft.VisualStudio.Component.Windows10SDK.19041` / `Microsoft.VisualStudio.Component.Windows11SDK.22621`.
@@ -1934,7 +1948,8 @@ https://github.com/servo/servo/pull/37762	(@jdm, #37762)	script: Reduce usage of
 https://github.com/servo/servo/pull/38073	(@atouchet, #38073)	Update core-foundation (#38073)
     # Update core-foundation.
     # Testing: No tests for dependency update.
-https://github.com/servo/servo/pull/38058	(@euclid.ye@huawei.com, #38058)	script: Improve `webdriver_handler::get_element_in_view_center_point` (#38058)
++https://github.com/servo/servo/pull/38058	(@yezhizhen, #38058)	script: Improve `webdriver_handler::get_element_in_view_center_point` (#38058)
+    webdriver; fix PointerMove see issue 38042
     # 1. Some rounding was wrongly used which can be a source of inaccuracy.
     # 2. Use `window.InnerWidth` instead of `body.ClientWidth` according to spec.
     # Testing: Many new passing cases.
@@ -2019,7 +2034,8 @@ https://github.com/servo/servo/pull/38055	(@mrobinson, #38055)	compositor: Do no
     # Testing: There are test result updates for this change. Many TIMEOUTS now either correctly
     # PASS OR FAIL.
     # Fixes: #36931.
-https://github.com/servo/servo/pull/38057	(@ibluegalaxy_taoj@163.com, #38057)	layout: dirty parent node with NodeDamage::ContentOrHeritage when text content changed (#38057)
++https://github.com/servo/servo/pull/38057	(@coding-joedow, #38057)	layout: dirty parent node with NodeDamage::ContentOrHeritage when text content changed (#38057)
+    perf; more precise incremental layout for text content changes
     # This change aims to reduce the scope of incremental box tree construction. Previously, when text content changed,
     # the parent node would always be marked as requiring box tree reconstruction; now, it is adjusted to only mark the
     # parent node as needing to recollect its box tree children.
@@ -2068,7 +2084,8 @@ https://github.com/servo/servo/pull/37682	(@arihant2math, #37682)	[IndexedDB] Ad
     # if the operation is a write, that the transaction is not read-only. I've added the `check_transaction` method to
     # perform these checks.
     # Additionally `Clear` was still half-implemented, so I went ahead and implemented that.
-https://github.com/servo/servo/pull/38095	(@euclid.ye@huawei.com, #38095)	webdriver: improve perform pointermove & wheel actions with more accurate coordinates (#38095)
++https://github.com/servo/servo/pull/38095	(@yezhizhen, #38095)	webdriver: improve perform pointermove & wheel actions with more accurate coordinates (#38095)
+    webdriver; fix PointerMove see issue 38042
     # 1. Create `get_origin_relative_coordinates` according to
     # [spec](https://w3c.github.io/webdriver/#dfn-get-coordinates-relative-to-an-origin) to be reused
     # 2. Add previously missing offset for PointerOrigin::Element
@@ -2104,7 +2121,8 @@ https://github.com/servo/servo/pull/37315	(@shubhamg13, #37315)	renderer: Have t
     # ```
     # Testing: This change adds a new WPT test.
     # Fixes: #37314
-https://github.com/servo/servo/pull/38082	(@euclid.ye@huawei.com, #38082)	servoshell: reduce duplication for conversion between physical/logical position/size (#38082)
++https://github.com/servo/servo/pull/38082	(@yezhizhen, #38082)	servoshell: reduce duplication for conversion between physical/logical position/size (#38082)
+    geometry; fixing bug class (see issue 37937)
     # With helper functions introduced in #38020, this is now becoming reality.
     # Testing: No behaviour change.
     # Fixes: #37937
@@ -2160,17 +2178,19 @@ https://github.com/servo/servo/pull/37846	(@arihant2math, #37846)	net: Do not pr
     # Manually implement Debug LoadResult so that VectorImageData doesn't get logged.
     # Testing: N/A
     # Fixes: #37771
-https://github.com/servo/servo/pull/38119	(@sagudev, #38119)	servoshell: Update egui to 0.32 (#38119)
++https://github.com/servo/servo/pull/38119	(@sagudev, #38119)	servoshell: Update egui to 0.32 (#38119)
+    upgrades; will help with browser menus and context menus
     # We also need to bump egui-file-dialog and accesskit_winit. Changes are done based on migration paths provided by egui.
     # Testing: No tests for servoshell
     # Fixes: #38117
-https://github.com/servo/servo/pull/38118	(@sagudev, #38118)	CI: remove i686-linux-android (#38118)
+-https://github.com/servo/servo/pull/38118	(@sagudev, #38118)	CI: remove i686-linux-android (#38118)
     # As discussed in [#general > Help solving android bindgen failure @
     # 💬](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Help.20solving.20android.20bindgen.20failure/near
     # /529091066)
     # Testing: Not needed, becuase we just remove from CI
     # Will help with #37077.
-https://github.com/servo/servo/pull/38097	(@sagudev, #38097)	canvas: Use stored transform instead of querying canvas paint thread (#38097)
++https://github.com/servo/servo/pull/38097	(@sagudev, #38097)	canvas: Use stored transform instead of querying canvas paint thread (#38097)
+    perf; reduce ipc to canvas paint thread
     # We already store transform in context state, so let's just use this when querying instead of using IPC to ask
     # canvas paint thread.
     # Testing: Existing WPT tests
@@ -2183,7 +2203,8 @@ https://github.com/servo/servo/pull/38099	(@gterzian, #38099)	script: further us
     # *Describe the changes that this pull request makes here. This will be the commit message.*
     # Testing: *Describe how this pull request is tested or why it doesn't require tests*
     # Fixes: *Link to an issue this pull requests fixes or remove this line if there is no issue*
-https://github.com/servo/servo/pull/38113	(@euclid.ye@huawei.com, #38113)	webdriver: Reduce IPC for viewport boundary check (#38113)
++https://github.com/servo/servo/pull/38113	(@yezhizhen, #38113)	webdriver: Reduce IPC for viewport boundary check (#38113)
+    webdriver perf; reduce ipc in webdriver pointerMove and scroll
     # Testing: No behaviour change.
 https://github.com/servo/servo/pull/38079	(@PotatoCP, #38079)	WebDriver: Implement some missing steps of wait for navigation to complete (#38079)
     # Based on https://w3c.github.io/webdriver/#dfn-wait-for-navigation-to-complete. We still have not implement the
@@ -2191,7 +2212,8 @@ https://github.com/servo/servo/pull/38079	(@PotatoCP, #38079)	WebDriver: Impleme
 https://github.com/servo/servo/pull/38108	(@atouchet, #38108)	Update non-breaking dependencies (#38108)
     # Update non-breaking dependencies.
     # Testing: No tests for dependency updates.
-https://github.com/servo/servo/pull/38098	(@sagudev, #38098)	canvas: Store current path only in user space (#38098)
++https://github.com/servo/servo/pull/38098	(@sagudev, #38098)	canvas: Store current path only in user space (#38098)
+    canvas; see issue 38022
     # Before we stored path in user or device space and do conversions as needed, but that complicated things.
     # So we got two options:
     # 1. store path in device space: here we would need to add `Option` to each path command, and before each usage we
@@ -2283,7 +2305,8 @@ https://github.com/servo/servo/pull/38149	(@stevennovaryo, #38149)	script: Impl 
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/37982	(@euclid.ye@huawei.com, #37982)	servoshell: Fix scroll speed for Desktop (#37982)
++https://github.com/servo/servo/pull/37982	(@yezhizhen, #37982)	servoshell: Fix scroll speed for Desktop (#37982)
+    servoshell; more ergonomic scrolling with mouse wheel
     # According to discussion https://github.com/servo/servo/pull/34063#discussion_r2187147615, this PR
     # 1. adds `PIXEL_DELTA_FACTOR` to increase scroll speed for `MouseScrollDelta::PixelDelta`, which is used by macOS
     # and high-precision mouse.
@@ -2326,7 +2349,7 @@ https://github.com/servo/servo/pull/37982	(@euclid.ye@huawei.com, #37982)	servos
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/38142	(@euclid.ye@huawei.com, #38142)	webdriver chore: check browsing context existence before handling user prompt when required (#38142)
+https://github.com/servo/servo/pull/38142	(@yezhizhen, #38142)	webdriver chore: check browsing context existence before handling user prompt when required (#38142)
     # Thanks to Trong with #38035, we can finally handle user prompt. This PR is mainly dirty work:
     # 1. Add browsing context check before handling user prompt when required, according to spec.
     # 2. Reduce IPC by removing redundant context existence check.
@@ -2335,7 +2358,7 @@ https://github.com/servo/servo/pull/38142	(@euclid.ye@huawei.com, #38142)	webdri
 https://github.com/servo/servo/pull/38143	(@simonwuelker, #38143)	Remove Document::set_allow_declarative_shadow_roots (#38143)
     # This method is unused. `rustc` didn't complain because it was marked as `pub` (which it shouldn't have been). A
     # few of the surrounding methods were also `pub`, which this change fixes.
-https://github.com/servo/servo/pull/38110	(@euclid.ye@huawei.com, #38110)	doc: Add doc for compositor/webview/embedder related to window/rect/inner_size/rendering_context (#38110)
+https://github.com/servo/servo/pull/38110	(@yezhizhen, #38110)	doc: Add doc for compositor/webview/embedder related to window/rect/inner_size/rendering_context (#38110)
     # Add docs before actually fixing #38089, #38090, #37978, #38093.
     # Testing: Just adding docs.
 https://github.com/servo/servo/pull/38035	(@longvatrong111, #38035)	webdriver: Add `handle any user prompts` step for all commands (#38035)
@@ -2488,7 +2511,8 @@ https://github.com/servo/servo/pull/38158	(@PotatoCP, #38158)	Webdriver: Allow e
 https://github.com/servo/servo/pull/38123	(@arihant2math, #38123)	Proper compare implementation for IndexedDBKeyType (#38123)
     # This is needed by the IndexedDBKeyRange implementation.
     # Doesn't fix anything since it isn't used at the moment.
-https://github.com/servo/servo/pull/38114	(@sagudev, #38114)	canvas: Move current_default_path to script CanvasState (#38114)
++https://github.com/servo/servo/pull/38114	(@sagudev, #38114)	canvas: Move current_default_path to script CanvasState (#38114)
+    canvas; see issue 38022
     # This PR moves current path handling from canvas paint thread to script's `CanvasState`. Because we used manual
     # impl for arcto and some prechecks for early fail before sending IPC we also needed to fix some bugs in Path impl.
     # Testing: Existing WPT tests
@@ -2503,7 +2527,8 @@ https://github.com/servo/servo/pull/38136	(@stevennovaryo, #38136)	css: Refactor
     # Testing: No WPT regression.
     # Fixes: #38133
 >>> 2025-07-21T06:16:34Z
-https://github.com/servo/servo/pull/38160	(@euclid.ye@huawei.com, #38160)	WebDriver: Wait focus to complete when switching window (#38160)
++https://github.com/servo/servo/pull/38160	(@yezhizhen, #38160)	WebDriver: Wait focus to complete when switching window (#38160)
+    webdriver; fix Switch To Window <https://w3c.github.io/webdriver/#switch-to-window>
     # Previously the webdriver do not wait for focus to complete, which can cause some instability.
     # No matter interact as human or webdriver, the focus chain always goes as: Embedder forwards -> Constellation
     # (do some updates) -> Embedder (do some updates).
@@ -2511,7 +2536,7 @@ https://github.com/servo/servo/pull/38186	(@webbeef, #38186)	Adjust CSP for top-
     # Allows loading of document images even when they have a sandbox CSP rule to align with other browsers.
     # Testing: No wpt failures: https://github.com/webbeef/servo/actions/runs/16403138806
     # Fixes: #38180
-https://github.com/servo/servo/pull/38181	(@TimvdLippe, #38181)	Add warning for reporting CSP violations (#38181)
+-https://github.com/servo/servo/pull/38181	(@TimvdLippe, #38181)	Add warning for reporting CSP violations (#38181)
     # This should help debug cases like #38180
 https://github.com/servo/servo/pull/38179	(@jdm, #38179)	compositing: Remove unused dependency. (#38179)
     # There are no uses of `net` within the `compositing` crate.
@@ -2630,12 +2655,13 @@ https://github.com/servo/servo/pull/38196	(@jschwe, #38196)	dom: Optimize IFrame
 https://github.com/servo/servo/pull/38219	(@jschwe, #38219)	ohos CI: Simplify getting the model name (#38219)
     # Same output, but much easier and faster than sifting through the whole output of hdc bugreport.
     # Testing: CI change: `./mach try` [run](https://github.com/servo/servo/actions/runs/16460283107)
-https://github.com/servo/servo/pull/38198	(@ibluegalaxy_taoj@163.com, #38198)	script: Use `NodeDamage::ContentOrHeritage` for slot changes (#38198)
++https://github.com/servo/servo/pull/38198	(@coding-joedow, #38198)	script: Use `NodeDamage::ContentOrHeritage` for slot changes (#38198)
+    perf; more precise incremental layout for shadow dom slot changes
     # This change aims to reduce the scope of incremental box tree construction. Previously, when children of slot node
     # changed, the slot would always be marked as requiring box tree reconstruction; now, it is adjusted to only mark
     # the slot node as needing to recollect its box tree children.
     # Testing: This should not change observable behavior and is thus covered by existing WPT tests.
-https://github.com/servo/servo/pull/38209	(@euclid.ye@huawei.com, #38209)	Implement setting position through webdriver for headed window (#38209)
+https://github.com/servo/servo/pull/38209	(@yezhizhen, #38209)	Implement setting position through webdriver for headed window (#38209)
     # Previously, we pretend we are able to set position in response. Now we can really do it.
     # Testing: Able to set position accurately when tested locally.
     # Fixes: Task 5 of #37804.
@@ -2654,13 +2680,14 @@ https://github.com/servo/servo/pull/38209	(@euclid.ye@huawei.com, #38209)	Implem
 https://github.com/servo/servo/pull/38165	(@PotatoCP, #38165)	WebDriver: Will Send Keys add documentation and modularize input file (#38165)
     # Add comment for better documentation of `will_send_keys` and extract file input handling to a function.
     # Testing: No behaviour change
-https://github.com/servo/servo/pull/38164	(@sagudev, #38164)	canvas: Make script/canvas thread boundry mostly stateless (#38164)
++https://github.com/servo/servo/pull/38164	(@sagudev, #38164)	canvas: Make script/canvas thread boundry mostly stateless (#38164)
+    canvas; see issue 38022
     # This PR removes all `Set*` commands as we will send needed options on each request. This will allow us to remove
     # most of state handling from canvas paint thread (currently it's still stateful).
     # Testing: Existing WPT tests
     # work towards #38022
     # try run: https://github.com/sagudev/servo/actions/runs/16413823963
-https://github.com/servo/servo/pull/38197	(@ibluegalaxy_taoj@163.com, #38197)	Layout: minor optimizations and bugfix for non-functional details (#38197)
+-https://github.com/servo/servo/pull/38197	(@coding-joedow, #38197)	Layout: minor optimizations and bugfix for non-functional details (#38197)
     # This change adds some minor optimizations and bugfix for non-functional details with seperated commits:
     # - fix the omission that stop use `Rayon` in single-thread mode
     # - add trace for incremental box tree construction
@@ -2673,25 +2700,26 @@ https://github.com/servo/servo/pull/38192	(@PotatoCP, #38192)	WebDriver: Clean U
     # Previously, we have failing many subtests in `*/user_prompt.py` with prefix `capabilities0-*`. The name of the subtest
     # was probably changed before, hence the failing expectation is not removed when we do `./mach update-wpt`. Here we
     # reupdate the expectation.
-https://github.com/servo/servo/pull/38212	(@euclid.ye@huawei.com, #38212)	Remove Webdriver Server's access to Constellation (#38212)
+https://github.com/servo/servo/pull/38212	(@yezhizhen, #38212)	Remove Webdriver Server's access to Constellation (#38212)
     # `WebDriverCommandMsg::TakeScreenshot` was the last thing blocking us from removing constellation access in webdriver
     # server. Now we can happily remove it.
     # Surprisingly, this reduces binary size by 185KB for release profile in Windows. #37737 removes a net total of 300
     # lines, but only reduced 98KB.
     # Testing: No regression after testing.
-https://github.com/servo/servo/pull/38210	(@sagudev, @jschwe, #38210)	chore: Update kurbo to 0.11.3 (#38210)
+-https://github.com/servo/servo/pull/38210	(@sagudev, @jschwe, #38210)	chore: Update kurbo to 0.11.3 (#38210)
     # Some of the code we wrote is now also in upstream, mainly `BezPath.current_position` and euclid types conversions.
     # Testing: Code is covered by existing WPT tests.
 >>> 2025-07-24T06:06:00Z
-https://github.com/servo/servo/pull/38238	(@euclid.ye@huawei.com, #38238)	Reduce redundancy in servoshell webdriver message forwarding and add log for script::`handle_send_keys_non_typeable` (#38238)
+https://github.com/servo/servo/pull/38238	(@yezhizhen, #38238)	Reduce redundancy in servoshell webdriver message forwarding and add log for script::`handle_send_keys_non_typeable` (#38238)
     # There was a new commit for after https://github.com/servo/servo/pull/38189#discussion_r2224805172, but that does
     # not seem to update/stop MQ.
     # Also removed `forward_webdriver_command` in servoshell according to
     # https://github.com/servo/servo/pull/38212#discussion_r2221854327.
-https://github.com/servo/servo/pull/38240	(@Narfinger, @schwenderjonathan@gmail.com, #38240)	OHOS: Clean up some compile warnings (#38240)
+-https://github.com/servo/servo/pull/38240	(@Narfinger, @jschwe, #38240)	OHOS: Clean up some compile warnings (#38240)
     # This cleans up some compile warnings about unused functions.
     # Testing: Does not change functionality, OHOS and Linux still compile (hopefully the other builds too).
-https://github.com/servo/servo/pull/38245	(@averyrudelphe@gmail.com, #38245)	Remove unused resources (#38245)
++https://github.com/servo/servo/pull/38245	(@lumiscosity, #38245)	Remove unused resources (#38245)
+    perf; reduce binary size
     # As previously discussed in #38229. To recap: `badcert.jpg` was made unused in
     # 8422dac81196b5c754f009b79760b437e02ee406 and `tumbeast.png` and its associated file of `not-found.html`
     # were superseded at some point by a message in `neterror.html` (if it were still used, it'd surely be
@@ -2699,7 +2727,8 @@ https://github.com/servo/servo/pull/38245	(@averyrudelphe@gmail.com, #38245)	Rem
     # This PR also removes two unnecessary spaces inside of the new tab's CSS file, ensuring a consistent 2 space
     # indentation in the file and saving 2 bytes.
     # Testing: Unnecessary, as this commit only removes unused assets (and fixes one style nit).
-https://github.com/servo/servo/pull/38229	(@averyrudelphe@gmail.com, #38229)	Optimize PNG images in resources folder (#38229)
++https://github.com/servo/servo/pull/38229	(@lumiscosity, #38229)	Optimize PNG images in resources folder (#38229)
+    perf; reduce binary size
     # Losslessly optimizes the PNG images in the `resources` folder with:
     # ```
     # oxipng -o max -a -s
@@ -2761,7 +2790,7 @@ https://github.com/servo/servo/pull/38229	(@averyrudelphe@gmail.com, #38229)	Opt
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/38239	(@euclid.ye@huawei.com, #38239)	cargo: Remove unused dependency (#38239)
+https://github.com/servo/servo/pull/38239	(@yezhizhen, #38239)	cargo: Remove unused dependency (#38239)
     # Remove unused `Cargo.toml` dependency to reduce binary size.
     # Testing: Can still compile in different platforms.
 +https://github.com/servo/servo/pull/38236	(@delan, @atbrakhi, #38236)	script: Add support for creating globals in isolated compartments (#38236)
@@ -2816,7 +2845,7 @@ https://github.com/servo/servo/pull/38163	(@stevennovaryo, #38163)	script: Imple
     # More context about the implementations https://hackmd.io/vtJAn4UyS_O0Idvk5dCO_w.
     # Testing: Existing WPT Coverage
     # Fixes: https://github.com/servo/servo/issues/37561
-https://github.com/servo/servo/pull/38221	(@euclid.ye@huawei.com, @mrobinson, #38221)	constellation: Eliminate long-standing inactive code path for `WebDriverData` (#38221)
+https://github.com/servo/servo/pull/38221	(@yezhizhen, @mrobinson, #38221)	constellation: Eliminate long-standing inactive code path for `WebDriverData` (#38221)
     # Cleaning up some dead code which has been here for 9 years. They are never detected by Lint because we still
     # initialize them as `None` but never change afterwards.
     # Testing: No regression.
@@ -2845,14 +2874,15 @@ https://github.com/servo/servo/pull/38244	(@stevennovaryo, #38244)	script: Imple
     # Basically it would behave like `replaceSync`, but we are running it asynchronously.
     # Testing: Existing WPT coverage.
     # Part of: https://github.com/servo/servo/issues/36162
-https://github.com/servo/servo/pull/38258	(@euclid.ye@huawei.com, #38258)	servoshell: Respond resize with authentic result and Adjust minimum window size (#38258)
+https://github.com/servo/servo/pull/38258	(@yezhizhen, #38258)	servoshell: Respond resize with authentic result and Adjust minimum window size (#38258)
     # - We no longer pretend that resize is always successful and simplify the result computation.
     # - Adjust minimum window size to match other browsers and the test expectation.
     # - Restrict some unnecessary access specifier.
     # Testing: ` ./mach test-wpt -r "tests\wpt\tests\webdriver\tests\classic\set_window_rect\set.py" --log-raw "D:\servo
     # test log\set.txt" --product servodriver  {--headless}`
     # Fixes: #37804 as Task 8 is last task.
-https://github.com/servo/servo/pull/38214	(@sagudev, #38214)	canvas: Fully stateless backend (#38214)
++https://github.com/servo/servo/pull/38214	(@sagudev, #38214)	canvas: Fully stateless backend (#38214)
+    canvas; see issue 38022
     # I think this simplifies canvas backends greatly. Before there were many (needless) hoops from abstract to concrete
     # (backend) and back, now we can do most stuff on abstract types.
     # Testing: Existing WPT tests
@@ -2877,7 +2907,7 @@ https://github.com/servo/servo/pull/38214	(@sagudev, #38214)	canvas: Fully state
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/38249	(@euclid.ye@huawei.com, #38249)	servoshell: Add window position for headless window (#38249)
+https://github.com/servo/servo/pull/38249	(@yezhizhen, #38249)	servoshell: Add window position for headless window (#38249)
     # Add virtual `window_position` to headless window so that `moveTo` and WebDriver window command can work properly.
     # Testing: `./mach test-wpt -r "tests\wpt\tests\webdriver\tests\classic\set_window_rect\set.py" --product servodriver
     # --headless`
@@ -2965,7 +2995,7 @@ https://github.com/servo/servo/pull/38243	(@jdm, #38243)	servo: Track async webv
     # operation and the embedder can receive notifications about each focus operation when it is complete, regardless
     # of whether the focus was actually changed.
     # Testing: Existing test coverage from https://github.com/servo/servo/pull/38160/ is unchanged.
-https://github.com/servo/servo/pull/38174	(@euclid.ye@huawei.com, #38174)	servoshell: Consider window decorations when handling resize requests from web content (#38174)
+https://github.com/servo/servo/pull/38174	(@yezhizhen, #38174)	servoshell: Consider window decorations when handling resize requests from web content (#38174)
     # Also fix some docs. This is used by JS `resizeTo`, `resizeBy` and webdriver [set window
     # rect](https://w3c.github.io/webdriver/#set-window-rect).
     # Testing: Can now pass more tests for headed window.
@@ -2983,7 +3013,8 @@ https://github.com/servo/servo/pull/38235	(@PotatoCP, #38235)	script(webdriver):
     # [error](https://w3c.github.io/webdriver/#dfn-error) with [error code](https://w3c.github.io/webdriver/#dfn-error-code)
     # [element not interactable](https://w3c.github.io/webdriver/#dfn-element-not-interactable).
 >>> 2025-07-26T06:05:15Z
-https://github.com/servo/servo/pull/36821	(@sagudev, #36821)	canvas: Add vello backend (#36821)
++https://github.com/servo/servo/pull/36821	(@sagudev, #36821)	canvas: Add vello backend (#36821)
+    vello; initial support for gpu-accelerated 2d canvas
     # Add vello backend by implementing Backend traits in canvas crate (so this lives in canvas_paint_thread - embedded
     # process). Current implementation uses normal wgpu, so we block on GPU work. Vello backend is gated behind `vello`
     # feature and `dom_canvas_vello_enabled` pref.
@@ -3021,7 +3052,7 @@ https://github.com/servo/servo/pull/38268	(@arihant2math, @jdm, #38268)	script: 
     # the methods from it as per the spec.
     # Spec: https://www.w3.org/TR/IndexedDB-2/#keyrange
     # Testing: WPT tests (some regressions have been exposed, but that's fine)
-https://github.com/servo/servo/pull/38274	(@sagudev, #38274)	canvas: Make GetImageData simple and only IPC message to obtain pixels (#38274)
+-https://github.com/servo/servo/pull/38274	(@sagudev, #38274)	canvas: Make GetImageData simple and only IPC message to obtain pixels (#38274)
     # Currently we had `GetImageData` and `SendPixels` to obtain pixels from script thread. This PR unifies those into
     # single `GetImageData` that does not need canvas size and has optional rect (for obtaining sub image).
     # Testing: Existing WPT tests
@@ -3061,11 +3092,13 @@ https://github.com/servo/servo/pull/38274	(@sagudev, #38274)	canvas: Make GetIma
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/38264	(@sagudev, #38264)	canvas: Make pixel obtaining methods take &mut GenericDrawTarget (#38264)
++https://github.com/servo/servo/pull/38264	(@sagudev, #38264)	canvas: Make pixel obtaining methods take &mut GenericDrawTarget (#38264)
+    vello; more preparation for vello
     # This will be needed for vello_cpu. While we could wrap it in RefCell for inner mut, but that would be less ergonomic
     # and performant.
     # Testing: Just refactoring, but the code is covered by WPT tests.
-https://github.com/servo/servo/pull/38199	(@ibluegalaxy_taoj@163.com, #38199)	layout: optimize the propagation and cleanup of RestyleDamage (#38199)
++https://github.com/servo/servo/pull/38199	(@coding-joedow, #38199)	layout: optimize the propagation and cleanup of RestyleDamage (#38199)
+    perf; more precise incremental layout propagation to descendants
     # This change optimizes `RestyleDamage` propagation and cleanup to reduce unnecessary box reconstruction and relayouts,
     # while preventing damage from the current reflow affecting subsequent ones. Improvements include:
     # - For box damage caused by `NodeDamage`, `RestyleDamage::RELAYOUT` is no longer marked immediately—avoiding
@@ -3079,11 +3112,12 @@ https://github.com/servo/servo/pull/38257	(@leo030303, #38257)	servoshell: Prope
     # The tab bar would disappear on resizes, this just reverts the change which introduced the bug.
     # Testing: servoshell doesn't currently have tests, so this change does not come with a test.
     # Fixes: https://github.com/servo/servo/issues/38255
-https://github.com/servo/servo/pull/38262	(@sagudev, #38262)	canvas: Remove `Backend` trait (#38262)
+-https://github.com/servo/servo/pull/38262	(@sagudev, #38262)	canvas: Remove `Backend` trait (#38262)
     # After #38214 `Backend` trait is only used as DrawTarget builder and as type holder. By moving types and DrawTarget
     # creation into `GenericDrawTarget` trait, we can completely remove `Backend` trait.
     # Testing: Just refactor, but code is covered by WPT tests.
-https://github.com/servo/servo/pull/38084	(@ibluegalaxy_taoj@163.com, #38084)	layout: Add incremental box tree construction for inline boxes (#38084)
++https://github.com/servo/servo/pull/38084	(@coding-joedow, #38084)	layout: Add incremental box tree construction for inline boxes (#38084)
+    perf; incremental layout for inline boxes
     # This changes extend the incremental box tree construction for inline boxes.  Since an `InlineItem` can be split
     # into multiple `InlineItem`s by a block element, the reason such an inline item is marked as damaged may simply be
     # the removal of the block element or the need to reconstruct its box tree. Therefore, under the current LayoutDamage
@@ -3116,7 +3150,7 @@ https://github.com/servo/servo/pull/38260	(@arihant2math, #38260)	script: Implem
 -https://github.com/servo/servo/pull/38276	(@Loirooriol, #38276)	layout: Inline {default,natural}_{inline,block}_size methods (#38276)
     # They only had one caller.
     # Testing: Unnecessary (no behavior change)
-https://github.com/servo/servo/pull/38294	(@sagudev, #38294)	canvas: Respect FillRule (#38294)
+-https://github.com/servo/servo/pull/38294	(@sagudev, #38294)	canvas: Respect FillRule (#38294)
     # We just need to pass user provided FillRule via IPC to canvas paint thread, then pass it all down to backend,
     # which will handle it.
     # Testing: Added WPT tests.
@@ -3128,24 +3162,26 @@ https://github.com/servo/servo/pull/38278	(@arihant2math, #38278)	script: Implem
     # Implements https://www.w3.org/TR/IndexedDB-2/#convert-a-value-to-a-key-range. Part of #38187.
     # Testing: Currently unused, doesn't change anything
     # Fixes: None
-https://github.com/servo/servo/pull/38283	(@sagudev, #38283)	canvas: Use bytemuck to remove unsafe from raqote backend (#38283)
+-https://github.com/servo/servo/pull/38283	(@sagudev, #38283)	canvas: Use bytemuck to remove unsafe from raqote backend (#38283)
     # This PR changes surface type from `Vec` to `Vec` as this is native type of raqote's backend. We used unsafe for
     # `Vec`  `Vec` casting that is replaced with bytemuck. Bytemuck is already in cargo lock.
     # Testing: Existing WPT tests.
-https://github.com/servo/servo/pull/38279	(@sagudev, #38279)	canvas: Move peniko/kurbo conversions in separate file (#38279)
++https://github.com/servo/servo/pull/38279	(@sagudev, #38279)	canvas: Move peniko/kurbo conversions in separate file (#38279)
+    vello; more preparation for vello
     # This will allow reusing those conversions in vello_cpu backend.
     # Testing: Just refactor
 https://github.com/servo/servo/pull/38285	(@kkoyung, #38285)	webdriver: configure Expires and SameSite in handle_add_cookie (#38285)
     # Handler::handle_add_cookie did not configure the attributes "Expires" and "SameSite". This patch adds them.
     # Testing: Passing WPT tests that were expected to fail.
     # Fixes: https://github.com/servo/servo/pull/37715#issuecomment-3069734014
-https://github.com/servo/servo/pull/38271	(@euclid.ye@huawei.com, #38271)	webdriver: Implement maximize window for both headless&headed window (#38271)
+https://github.com/servo/servo/pull/38271	(@yezhizhen, #38271)	webdriver: Implement maximize window for both headless&headed window (#38271)
     # - Implement [Maximize Window](https://w3c.github.io/webdriver/#maximize-window)
     # - Previously, headless window screen size is same as inner size if not specified in preference. We make it double
     # as required by the test to not have max window initially.
     # - Some other random cleanup.
     # Testing: webdriver Stress test for maximize window (headed + headless).
-https://github.com/servo/servo/pull/38059	(@ibluegalaxy_taoj@163.com, #38059)	layout: Correctly marking box damage when text-related style changed (#38059)
++https://github.com/servo/servo/pull/38059	(@coding-joedow, #38059)	layout: Correctly marking box damage when text-related style changed (#38059)
+    perf; fix incremental layout error when ‘white-space’ changes
     # This change aims to supplement the missing incremental box tree construction when text-related styles change. Since
     # certain text style adjustments can alter visible text content and typography. Therefore, the parent nodes of such
     # text are marked as needing to re-collect their box tree children to ensure the correct display of text.
@@ -3153,7 +3189,8 @@ https://github.com/servo/servo/pull/38059	(@ibluegalaxy_taoj@163.com, #38059)	la
 https://github.com/servo/servo/pull/38085	(@jerensl, #38085)	mach: Add type check on `python/servo` directory (#38085)
     # Introduce `python/servo` folder in pyrefly type checker
     # Testing: Manual testing via `./mach test-tidy` command
-https://github.com/servo/servo/pull/38282	(@sagudev, #38282)	canvas: Add vello_cpu backend (#38282)
++https://github.com/servo/servo/pull/38282	(@sagudev, #38282)	canvas: Add vello_cpu backend (#38282)
+    vello; added non-gpu backend that also uses vello
     # vello_cpu does not have any tests timeouts, because we do not need download stuff from GPU as all work happens
     # on CPU. So performance wise it's better then classic vello at least for our usecase. There are some vello bugs,
     # but I think we will be able to sort them out within upstream, eventually. Interestingly enough there are no new
@@ -3197,7 +3234,7 @@ https://github.com/servo/servo/pull/38319	(@uthmaniv, #38319)	Make request param
     # - Changes request parameters to immutable borrow
     # Testing:
     # Fixes: https://github.com/servo/servo/issues/38300
-https://github.com/servo/servo/pull/38315	(@sagudev, #38315)	canvas: Send CanvasClose to canvas thread from canvas state (#38315)
+-https://github.com/servo/servo/pull/38315	(@sagudev, #38315)	canvas: Send CanvasClose to canvas thread from canvas state (#38315)
     # Currently we only closed `CanvasRenderingContext2D` (and `OffscreenCanvasRenderingContext2D` because it wraps
     # `CanvasRenderingContext2D`), but we didn't close last consumer of `CanvasState` which is `PaintRenderingContext`. To
     # prevent any future leaks, let's just send `CanvasClose` in `CanvasState` drop.
@@ -3208,7 +3245,8 @@ https://github.com/servo/servo/pull/38314	(@yezhizhen, #38314)	cargo: Remove las
 https://github.com/servo/servo/pull/38191	(@jdm, #38191)	chore: Add test for synthesized image documents with CSP headers. (#38191)
     # Adds a regression test for https://github.com/servo/servo/pull/38186, verifying that the CSP header on the image
     # is ignored when it's loaded as a document.
-https://github.com/servo/servo/pull/38312	(@sagudev, #38312)	canvas: Gate raqote backend behind feature (enabled for now) (#38312)
++https://github.com/servo/servo/pull/38312	(@sagudev, #38312)	canvas: Gate raqote backend behind feature (enabled for now) (#38312)
+    vello; more preparation for vello
     # We want to eventually remove raqote backend, but for now we can gate it behind a feature (still enabled by default
     # in servoshell) like the rest of backends. `dom_canvas_backend=auto` will select first available backend. Builds
     # on top of https://github.com/servo/servo/pull/38310 to support cases where no backend is available.
@@ -3242,7 +3280,8 @@ https://github.com/servo/servo/pull/38225	(@longvatrong111, #38225)	Rework webdr
     # - Add `create_session`: [spec](https://www.w3.org/TR/webdriver2/#dfn-create-a-session)
     # - Refactor `handle_new_session`
     # - Replace `PageLoadStrategy` string by enum
-https://github.com/servo/servo/pull/38310	(@sagudev, #38310)	canvas: Make 2D context state creation failable and use `dom_canvas_backend` pref for backend selection (#38310)
++https://github.com/servo/servo/pull/38310	(@sagudev, #38310)	canvas: Make 2D context state creation failable and use `dom_canvas_backend` pref for backend selection (#38310)
+    vello; more preparation for vello
     # Before script just crashed in those cases because IPCSender was dropped, now we send `None` to tell script about
     # the failure and fail getContext or registerPainter accordingly.
     # This PR also unifies `dom_canvas_{backends}_enabled` prefs into `dom_canvas_backend` which is more flexible in
@@ -3266,7 +3305,8 @@ https://github.com/servo/servo/pull/38310	(@sagudev, #38310)	canvas: Make 2D con
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/38336	(@sagudev, #38336)	canvas: Use `create_similar_draw_target` for recreate (#38336)
++https://github.com/servo/servo/pull/38336	(@sagudev, #38336)	canvas: Use `create_similar_draw_target` for recreate (#38336)
+    vello; more preparation for vello
     # `create_similar_draw_target` is more performant then creating completely new target (this creates new wgpu device
     # in vello backend).
     # Testing: This change does not modify test results, but should increase performance.
@@ -3325,7 +3365,8 @@ https://github.com/servo/servo/pull/38335	(@jerensl, #38335)	mach: Make test-tid
     # decode each line to UTF-8 before evaluating it. This ensures it is counted as a string and not as bytes
     # Testing: I tested by changing the comment like the issue above and it not give an error
     # Fixes: #38237
-https://github.com/servo/servo/pull/38332	(@averyrudelphe@gmail.com, #38332)	Losslessly optimize Android resources (#38332)
++https://github.com/servo/servo/pull/38332	(@lumiscosity, #38332)	Losslessly optimize Android resources (#38332)
+    perf; reduce binary size
     # Losslessly optimizes the Android resources. These are the only non-test PNGs remaining in the project, to my knowledge.
     # Testing: Unnecessary, since this only optimizes assets.
 +https://github.com/servo/servo/pull/38330	(@atbrakhi, @delan, #38330)	devtools: Make contentType optional in source actor source responses (#38330)
@@ -3335,7 +3376,7 @@ https://github.com/servo/servo/pull/38332	(@averyrudelphe@gmail.com, #38332)	Los
     # an unwrap().
     # Testing: does not get exercised yet, but will be used in #37667
     # Fixes: part of #36027
-https://github.com/servo/servo/pull/38326	(@sagudev, #38326)	canvas: Fix the build of the vello backend (#38326)
+-https://github.com/servo/servo/pull/38326	(@sagudev, #38326)	canvas: Fix the build of the vello backend (#38326)
     # Multiple Into hoops cannot be resolved by compiler
     # Testing: Just refactor.
 https://github.com/servo/servo/pull/38166	(@mrobinson, #38166)	compositor: Request reflow when doing a page zooming (#38166)
@@ -3496,7 +3537,7 @@ https://github.com/servo/servo/pull/38376	(@sebsebmc@gmail.com, #38376)	net: Add
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/38338	(@sagudev, #38338)	chore: Update vello to fix radials in vello_cpu (#38338)
+-https://github.com/servo/servo/pull/38338	(@sagudev, #38338)	chore: Update vello to fix radials in vello_cpu (#38338)
     # This update includes a fix for https://github.com/linebender/vello/issues/1124.
     # Testing: Existing WPT tests
     # try run: https://github.com/sagudev/servo/actions/runs/16599834725
@@ -3521,7 +3562,7 @@ https://github.com/servo/servo/pull/38322	(@gterzian, #38322)	background_hang_mo
     # Fixes: https://github.com/servo/servo/issues/24850 and part of https://github.com/servo/servo/issues/34158
     # Testing: Unit tests in `component/background_hang_monitor/tests`. Also manually tested loading "about-blank"
     # in single- and multi-process mode.
-+https://github.com/servo/servo/pull/38346	(@averyrudelphe@gmail.com, @Loirooriol, #38346)	layout: respect `image-rendering` on border images (#38346)
++https://github.com/servo/servo/pull/38346	(@lumiscosity, @Loirooriol, #38346)	layout: respect `image-rendering` on border images (#38346)
     features; ‘image-rendering’ now works on ‘border-image’ too
     # Properly passes `image-rendering` down to border images.
     # Testing: Covered by WPT tests.

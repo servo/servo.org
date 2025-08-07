@@ -18,6 +18,16 @@ categories:
     - ScreenY and outerHeight ignores the title bar height servo#37824
     - window.screen.availWidth and availHeight is inaccurate servo#37878
     - servoshell: Tab bar dissapears when resizing the window servo#38255
+- vello
+    - Investigate other 2D canvas renderers in a post-Pathfinder world servo#30636
+    - Tracking issue of Vello canvas backends servo#38345
+- canvas
+    - Move canvas state handling from CanvasData (canvas paint thread) into CanvasState (script) servo#38022
+    - “We want our 2d canvas abstractions to become more general, for potential rendering of all content”
+- webdriver
+    - [WebDriver] PointerMove does not consider Global position servo#38042 <https://w3c.github.io/webdriver/#dfn-perform-a-pointer-move>
+- geometry
+    - Create universal utility function for conversion between Physical & Logical unit servo#37937
 -->
 
 ## Donations
