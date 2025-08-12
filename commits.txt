@@ -839,7 +839,7 @@ https://github.com/servo/servo/pull/37876	(@longvatrong111, #37876)	webdriver: P
     # Reviewable per commit.
     # Testing: Existing WPT tests
 +https://github.com/servo/servo/pull/37669	(@longvatrong111, #37669)	Move webdriver actions commands to servoshell (#37669)
-    webdriver; rearchitected the server to be managed by servoshell instead of libservo
+    webdriver; consistent command order / rearchitected the server to be managed by servoshell instead of libservo
     # Move webdriver actions commands to servoshell.
     # Testing: Test with webdriver enable in the CI
     # [Test result 1](https://github.com/longvatrong111/servo/actions/runs/15875355256)
@@ -1263,7 +1263,7 @@ https://github.com/servo/servo/pull/37829	(@mrobinson, #37829)	layout: When sett
     # https://github.com/servo/servo/blob/f7c86c439388c29be74161383241787e3f2fa5de/components/shared/embedder/lib.rs#L717-L720
     # Testing: More webdriver test would pass once #37893 is merged.
     # Fixes: the position part of #37824.
-https://github.com/servo/servo/pull/37940	(@yezhizhen, #37940)	WebDriver Chore: use enum instead of compile time constant for `browsing_context_script_command` (#37940)
+-https://github.com/servo/servo/pull/37940	(@yezhizhen, #37940)	WebDriver Chore: use enum instead of compile time constant for `browsing_context_script_command` (#37940)
     # This reduces unnecessary generated code and binary size. See
     # https://github.com/servo/servo/pull/37712#discussion_r2171957828
     # Testing: No Behaviour change
@@ -1323,7 +1323,8 @@ https://github.com/servo/servo/pull/37881	(@Narfinger, #37881)	OHOS CI: Allow be
     # And here a run where it installs the given version:
     # https://github.com/Narfinger/servo/actions/runs/16116949656/job/45473231784
     # Testing: Tested on CI.
-https://github.com/servo/servo/pull/37908	(@PotatoCP, #37908)	Webdriver: Keyboard Action use `webview::notify_input_event` instead of directly sent to constellation (#37908)
++https://github.com/servo/servo/pull/37908	(@PotatoCP, #37908)	Webdriver: Keyboard Action use `webview::notify_input_event` instead of directly sent to constellation (#37908)
+    webdriver; consistent command order
     # Previously, we KeyboardAction will be forwarded to constellation by the embedder. Now we use
     # `webview.notify_input_event`, which will send `WebDriverCommandMsg::ForwardInputEvent` for KeyboardAction
     # Fixes: part of https://github.com/servo/servo/issues/37370
@@ -1333,7 +1334,8 @@ https://github.com/servo/servo/pull/37903	(@jschwe, #37903)	mach: macos: Don't l
     # This prevents some linking issues.
     # Testing: Covered by existing tests. Fix for issue #37811 manually verified by the reporter.
 >>> 2025-07-10T06:12:58Z
-https://github.com/servo/servo/pull/37913	(@longvatrong111, #37913)	webdriver: Implement support for simple dialogs (#37913)
++https://github.com/servo/servo/pull/37913	(@longvatrong111, #37913)	webdriver: Implement support for simple dialogs (#37913)
+    webdriver; add commands for accept alert, dismiss alert, get alert text
     # Implement webdriver user prompt: accept alert, dismiss alert, get alert text.
     # Tests:
     # https://github.com/longvatrong111/servo/actions/runs/16175408035
@@ -1371,7 +1373,7 @@ https://github.com/servo/servo/pull/37965	(@TimvdLippe, #37965)	Add support for 
     # [animation-fill-mode](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode). However, test
     # results—including those from WPT test cases and manual verification—indicate that this functionality is already
     # guaranteed without this overhead.
-https://github.com/servo/servo/pull/37949	(@jdm, #37949)	WPT upstreamer: Make all failed merge operations leave a comment. (#37949)
+-https://github.com/servo/servo/pull/37949	(@jdm, #37949)	WPT upstreamer: Make all failed merge operations leave a comment. (#37949)
     # The WPT exporter currently assumes that removing a label from a github PR will never fail. This is obviously false
     # and the result is a silent failure. By moving the operation inside the existing try block we ensure that a comment
     # will be posted if any part of the merge step fails.
@@ -1439,14 +1441,15 @@ https://github.com/servo/servo/pull/37964	(@tharkum, #37964)	script: Propagate a
     # ![圖片](https://github.com/user-attachments/assets/3c62a4de-35ea-488d-b2e5-00e3aed52090)
     # And it can now run three.js too!
     # ![圖片](https://github.com/user-attachments/assets/d880aa92-a154-4895-aa06-b7919d1fc869)
-https://github.com/servo/servo/pull/37663	(@longvatrong111, @mrobinson, #37663)	webdriver: Evaluate script commands via the `WebView` API in servoshell (#37663)
++https://github.com/servo/servo/pull/37663	(@longvatrong111, @mrobinson, #37663)	webdriver: Evaluate script commands via the `WebView` API in servoshell (#37663)
+    webdriver; consistent command order
     # Let `WebDriverCommandMsg::ScriptCommand` goes through embedder first.
     # Give `embedder` the ability to release `webdriver` from waiting for a response of `ExecuteScript`.
     # Tests: https://github.com/longvatrong111/servo/actions/runs/16071375821
     # No regression compared to CI run on main branch.
     # Fixes: https://github.com/servo/servo/issues/37370
     # cc: @xiaochengh
-https://github.com/servo/servo/pull/37952	(@michael.wu1107@gmail.com, @xiaochengh, #37952)	Update webidl files for TextEncoder and TextDecoder (#37952)
+-https://github.com/servo/servo/pull/37952	(@michael.wu1107@gmail.com, @xiaochengh, #37952)	Update webidl files for TextEncoder and TextDecoder (#37952)
     # This PR updates the webidl files for `TextEncoder` and `TextDecoder`. For `TextDecoder.webidl`, the type
     # `AllowSharedBufferSource`, as defined in the latest spec, is replaced with `BufferSource` as servo currently does
     # not support `ShareArrayBuffer`
@@ -1478,7 +1481,7 @@ https://github.com/servo/servo/pull/37948	(@tharkum, #37948)	script: Allow to th
     # also non-zero.
     # Testing: Need to wait W3C spec change https://github.com/web-platform-tests/wpt/pull/53421 related to webdriver
     # rectangle. When combined with #37960,  this can fix at least `window_resizeTo.html`.
-https://github.com/servo/servo/pull/37958	(@jerensl, #37958)	Remove `test-android-startup` mach command (#37958)
+-https://github.com/servo/servo/pull/37958	(@jerensl, #37958)	Remove `test-android-startup` mach command (#37958)
     # Remove seldomly used `mach commands:
     # - `test-android-startup`: This command is used for minimal testing of Servo in Android
     # These commands are being removed in order to implement Python type checking the Servo repository.
@@ -1534,7 +1537,8 @@ https://github.com/servo/servo/pull/37747	(@michael.wu1107@gmail.com, @xiaocheng
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/37684	(@arihant2math, #37684)	[IndexedDB] Key ranges implementation (#37684)
++https://github.com/servo/servo/pull/37684	(@arihant2math, #37684)	[IndexedDB] Key ranges implementation (#37684)
+    indexeddb
     # Improves the implementation of keys to a point where key ranges can be implemented as well.
 -https://github.com/servo/servo/pull/37990	(@dependabot[bot], @dependabot[bot], #37990)	build(deps): bump xml-rs from 0.8.26 to 0.8.27 (#37990)
     # Bumps [xml-rs](https://github.com/kornelski/xml-rs) from 0.8.26 to 0.8.27.
@@ -1589,7 +1593,8 @@ https://github.com/servo/servo/pull/37684	(@arihant2math, #37684)	[IndexedDB] Ke
 -https://github.com/servo/servo/pull/37979	(@yezhizhen, #37979)	Chore: cleanup unused `EmbedderMsg::WebDriverCommand` (#37979)
     # Also fix doc for `WebDriverCommandMsg::GetWindowRect`.
     # Testing: No behaviour change.
-https://github.com/servo/servo/pull/37911	(@PotatoCP, #37911)	Webdriver: Send Keys use `webview::notify_input_event` (#37911)
++https://github.com/servo/servo/pull/37911	(@PotatoCP, #37911)	Webdriver: Send Keys use `webview::notify_input_event` (#37911)
+    webdriver; consistent command order
     # Previously, we SendKeys will be forwarded to constellation by the embedder. Now we use webview.notify_input_event,
     # which will send WebDriverCommandMsg::ForwardInputEvent for the KeyboardEvent and CompositionEvent.
     # Fixes: part of https://github.com/servo/servo/issues/37370
@@ -1793,7 +1798,7 @@ https://github.com/servo/servo/pull/37970	(@TimvdLippe, @jdm, #37970)	Return cor
     # in the future we can always determine the source position, but
     # let's take small steps towards that.
     # Part of #4577
-https://github.com/servo/servo/pull/37885	(@webbeef, #37885)	Avoid rooting/unrooting in Node::rev_version (#37885)
+-https://github.com/servo/servo/pull/37885	(@webbeef, #37885)	Avoid rooting/unrooting in Node::rev_version (#37885)
     # The iterator produced by Node::inclusive_ancestors roots the items but rev_version just drop and unroot them right
     # away. This patch makes it possible to work on the Node references instead to avoid rooting.
     # *Describe the changes that this pull request makes here. This will be the commit message.*
@@ -1829,11 +1834,12 @@ https://github.com/servo/servo/pull/37715	(@kkoyung, #37715)	Implement cookie ex
     # PR moves the request to embedder.
     # This simplifies code, and reduces workload of compositor, which is busier most of time.
     # Testing: No behaviour change. Updated some tests. `Width/Height` matches other browsers.
-https://github.com/servo/servo/pull/38018	(@jdm, #38018)	script: Minimize layout queries for window scroll offsets. (#38018)
++https://github.com/servo/servo/pull/38018	(@jdm, #38018)	script: Minimize layout queries for window scroll offsets. (#38018)
+    perf; reduce layout queries when firing mouse/pointer events
     # These changes reduce the number of times we need to query layout for the same information when creating mouse/pointer
     # events.
     # Testing: No new tests required for maintaining existing behaviour.
-https://github.com/servo/servo/pull/37575	(@jdm, #37575)	net: Split read-only and read-write IndexedDB operations into separate enums (#37575)
+-https://github.com/servo/servo/pull/37575	(@jdm, #37575)	net: Split read-only and read-write IndexedDB operations into separate enums (#37575)
     # This change allows the compiler to recognize if any read-only operations are missing an implementation when
     # processing a readonly transaction.
     # Testing: The existing behaviour is unchanged, so current tests suffice. The new code is unused and cannot be tested.
@@ -1888,10 +1894,10 @@ https://github.com/servo/servo/pull/38002	(@TimvdLippe, #38002)	Fix reporting wh
     # icon. I used the Gnome Looking Glass (lg) command to determine that the name was not set.
     # Testing: I followed the instructions that I put in the .desktop file. I copied the .desktop file to the right
     # folder, set up a link to the svg icon, and adjusted the paths to point to the compiled executable.
-https://github.com/servo/servo/pull/38039	(@atouchet, #38039)	Update h2 and hyper (#38039)
+-https://github.com/servo/servo/pull/38039	(@atouchet, #38039)	Update h2 and hyper (#38039)
     # Update h2 and hyper.
     # Testing: No tests for dependency updates.
-https://github.com/servo/servo/pull/38037	(@atouchet, #38037)	Update ahash and ppv-lite86 (#38037)
+-https://github.com/servo/servo/pull/38037	(@atouchet, #38037)	Update ahash and ppv-lite86 (#38037)
     # Update ahash and ppv-lite86.
     # Testing: No tests for dependency updates.
 +https://github.com/servo/servo/pull/38007	(@leo030303, @Loirooriol, #38007)	layout: Fix bug where whitespace didn't have line decorations (#38007)
@@ -1915,7 +1921,7 @@ https://github.com/servo/servo/pull/38037	(@atouchet, #38037)	Update ahash and p
     # This QoL PR also makes `mach` compatible with Windows 11 SDK, and update README.md to be consistent with
     # https://github.com/servo/book/pull/92.
     # Testing: Tested locally and working fine after removing environment variables.
-https://github.com/servo/servo/pull/38013	(@atouchet, @mukilan, #38013)	Update polling and de-dupe hermit-abi (#38013)
+-https://github.com/servo/servo/pull/38013	(@atouchet, @mukilan, #38013)	Update polling and de-dupe hermit-abi (#38013)
     # Update polling and de-dupe hermit-abi.
     # Testing: No tests for dependency update.
 -https://github.com/servo/servo/pull/38019	(@jschwe, #38019)	Re-enable HOS-CI (#38019)
@@ -1930,12 +1936,13 @@ https://github.com/servo/servo/pull/38054	(@longvatrong111, #38054)	webdriver: A
 -https://github.com/servo/servo/pull/38074	(@atouchet, #38074)	Update jobserver (#38074)
     # Update jobserver.
     # Testing: No tests for dependency update.
-https://github.com/servo/servo/pull/38027	(@jdm, #38027)	IndexedDB: communicate transaction errors and async response data more precisely (#38027)
++https://github.com/servo/servo/pull/38027	(@jdm, #38027)	IndexedDB: communicate transaction errors and async response data more precisely (#38027)
+    indexeddb
     # Digging into several crashing tests revealed that committing transactions is a fallible operation. Propagating
     # those errors led to exposing many new errors caused by the IDBRequest implementation assuming that all successful
     # responses contained a structured clone. The end result is a bunch of new test failures that were previously hidden.
     # Testing: Existing test coverage is sufficient.
-https://github.com/servo/servo/pull/38004	(@gterzian, #38004)	script: introduce safe wrappers for js val conversions  (#38004)
+-https://github.com/servo/servo/pull/38004	(@gterzian, #38004)	script: introduce safe wrappers for js val conversions  (#38004)
     # Introduce a safe wrapper trait for the unsafe `ToJSValConvertible`, and use it in `script/dom` where the default
     # `T` implementation works.
     # Part of https://github.com/servo/servo/issues/37951
@@ -1956,7 +1963,7 @@ https://github.com/servo/servo/pull/37762	(@jdm, #37762)	script: Reduce usage of
     # Testing: Existing WPT tests exercise these code paths. I also attempted to write incorrect tasks that capture
     # references or use values not explicitly captured, and the compiler correctly errors out.
     # Fixes: part of #35517
-https://github.com/servo/servo/pull/38073	(@atouchet, #38073)	Update core-foundation (#38073)
+-https://github.com/servo/servo/pull/38073	(@atouchet, #38073)	Update core-foundation (#38073)
     # Update core-foundation.
     # Testing: No tests for dependency update.
 +https://github.com/servo/servo/pull/38058	(@yezhizhen, #38058)	script: Improve `webdriver_handler::get_element_in_view_center_point` (#38058)
@@ -2034,7 +2041,7 @@ https://github.com/servo/servo/pull/38046	(@webbeef, #38046)	BroadcastChannel: c
     # including WritableStream (should never happen).
     # [2025-07-14T03:33:59Z WARN  constellation_traits::structured_data] Attempt to broadcast structured serialized data
     # including TransformStream (should never happen).
-https://github.com/servo/servo/pull/38055	(@mrobinson, #38055)	compositor: Do not wait for animation termination to take screenshots (#38055)
+-https://github.com/servo/servo/pull/38055	(@mrobinson, #38055)	compositor: Do not wait for animation termination to take screenshots (#38055)
     # WPT tests are expected to create screenshots as soon as everything is
     # loaded. If an animation is happening adding the "reftest-wait" class to
     # the root element is appropriate way to delay the screenshot. Previously, the
@@ -2051,7 +2058,8 @@ https://github.com/servo/servo/pull/38055	(@mrobinson, #38055)	compositor: Do no
     # the parent node would always be marked as requiring box tree reconstruction; now, it is adjusted to only mark the
     # parent node as needing to recollect its box tree children.
     # Testing: This should not change observable behavior and is thus covered by existing WPT tests.
-https://github.com/servo/servo/pull/38050	(@tharkum, #38050)	imagebitmap: Remove ImageBitmap from experimental web platform features (#38050)
++https://github.com/servo/servo/pull/38050	(@tharkum, #38050)	imagebitmap: Remove ImageBitmap from experimental web platform features (#38050)
+    features; ImageBitmap now enabled by default
     # Enable by default the DOM "ImageBitmap" interface previously gated behind
     # "dom.imagebitmap.enabled" preference as experimental web platform feature.
     # https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap
@@ -2087,10 +2095,11 @@ https://github.com/servo/servo/pull/38050	(@tharkum, #38050)	imagebitmap: Remove
     # ```
     # Testing: No behaviour change.
 >>> 2025-07-16T06:18:14Z
-https://github.com/servo/servo/pull/38103	(@atouchet, #38103)	Update wasm-bindgen and associated dependencies (#38103)
+-https://github.com/servo/servo/pull/38103	(@atouchet, #38103)	Update wasm-bindgen and associated dependencies (#38103)
     # Update wasm-bindgen and associated dependencies.
     # Testing: No tests for dependency updates.
-https://github.com/servo/servo/pull/37682	(@arihant2math, #37682)	[IndexedDB] Adhere better to the specification for idb object store related operations (#37682)
++https://github.com/servo/servo/pull/37682	(@arihant2math, #37682)	[IndexedDB] Adhere better to the specification for idb object store related operations (#37682)
+    indexeddb
     # Many object store related operations require the transaction to be checked: to ensure it is still active, and,
     # if the operation is a write, that the transaction is not read-only. I've added the `check_transaction` method to
     # perform these checks.
@@ -2104,7 +2113,8 @@ https://github.com/servo/servo/pull/37682	(@arihant2math, #37682)	[IndexedDB] Ad
     # 4. Handle some issues with spec: https://github.com/w3c/webdriver/issues/1758
     # Testing: Several new passing cases as we are more precise with coordinates now.
     # Fixes: Part of #38042.
-https://github.com/servo/servo/pull/38076	(@jdm, #38076)	indexeddb: Allow deleting unknown DBs. (#38076)
++https://github.com/servo/servo/pull/38076	(@jdm, #38076)	indexeddb: Allow deleting unknown DBs. (#38076)
+    indexeddb
     # The current behaviour is too strict according to the spec and is the cause of many intermittent test errors.
     # Testing: Existing coverage is sufficient.
     # Fixes: #37706
@@ -2114,7 +2124,8 @@ https://github.com/servo/servo/pull/38076	(@jdm, #38076)	indexeddb: Allow deleti
     # - BroadcastMsg is renamed to BroadcastChannelMsg for consistency.
     # Testing: covered by existing tests.
     # Fixes: #38060
-https://github.com/servo/servo/pull/37315	(@shubhamg13, #37315)	renderer: Have the viewport meta element establish the initial zoom of new pages (#37315)
++https://github.com/servo/servo/pull/37315	(@shubhamg13, #37315)	renderer: Have the viewport meta element establish the initial zoom of new pages (#37315)
+    layout; each page has its own initial pinch zoom (vs page zoom, see #38194)
     # This patch contains 2 components:
     # 1. Instead of passing `self.pinch_zoom_level().get()` while checking `zoom_result`, initialize it in
     # `combined_magnification`. Ideally, this part shouldn't have any effect on behavior.
@@ -2137,7 +2148,8 @@ https://github.com/servo/servo/pull/37315	(@shubhamg13, #37315)	renderer: Have t
     # With helper functions introduced in #38020, this is now becoming reality.
     # Testing: No behaviour change.
     # Fixes: #37937
-https://github.com/servo/servo/pull/37950	(@longvatrong111, @jdm, #37950)	Webdriver GoBack and GoForward commands wait for navigation complete (#37950)
++https://github.com/servo/servo/pull/37950	(@longvatrong111, @jdm, #37950)	Webdriver GoBack and GoForward commands wait for navigation complete (#37950)
+    webdriver; fix navigation on Back and Forward
     # After sending `GoBack` or `GoForward` command, webdriver wait for the navigation complete.
     # It can be achieved by waiting for `WebViewDelegate::notify_history_changed`
     # Testing:
@@ -2154,9 +2166,10 @@ https://github.com/servo/servo/pull/37998	(@tharkum, #37998)	canvas: Add initial
     # - html/canvas/offscreen/manual/text/canvas.2d.offscreen*
     # - html/canvas/offscreen/manual/the-offscreen-canvas/offscreencanvas.transfer.to.imagebitmap.nocrash.html
     # - imagebitmap-renderingcontext/*
-https://github.com/servo/servo/pull/38081	(@PotatoCP, #38081)	Chore: Merge all moved webdriver command msg in constellation (#38081)
+-https://github.com/servo/servo/pull/38081	(@PotatoCP, #38081)	Chore: Merge all moved webdriver command msg in constellation (#38081)
     # Small clean up to shortened the code length and making it more neat.
-https://github.com/servo/servo/pull/37935	(@longvatrong111, #37935)	webdriver: Element click waits for navigation complete (#37935)
++https://github.com/servo/servo/pull/37935	(@longvatrong111, #37935)	webdriver: Element click waits for navigation complete (#37935)
+    webdriver; fix navigation on Element Click
     # Step 11 in https://w3c.github.io/webdriver/#dfn-element-click
     # > [Try](https://w3c.github.io/webdriver/#dfn-try) to [wait for navigation to
     # complete](https://w3c.github.io/webdriver/#dfn-wait-for-navigation-to-complete) with session.
@@ -2178,15 +2191,16 @@ https://github.com/servo/servo/pull/37935	(@longvatrong111, #37935)	webdriver: E
     # later, improving DevTools’ visibility.
     # Testing: Ran servo with `--devtools=6080` flag, cached responses now appear in the network panel
     # Fixes: https://github.com/servo/servo/issues/37869
-https://github.com/servo/servo/pull/38078	(@jdm, #38078)	tests: Force a blank config directory for each WPT test run. (#38078)
++https://github.com/servo/servo/pull/38078	(@jdm, #38078)	tests: Force a blank config directory for each WPT test run. (#38078)
+    indexeddb
     # This ensures a consistent state when running tests that can otherwise leave artifacts around
     # (eg. localStorage/IndexedDB/cookies).
     # Testing: Existing test coverage is sufficient.
 >>> 2025-07-17T06:09:02Z
-https://github.com/servo/servo/pull/38101	(@arihant2math, #38101)	Move common indexeddb methods out of dom implementations (#38101)
+-https://github.com/servo/servo/pull/38101	(@arihant2math, #38101)	Move common indexeddb methods out of dom implementations (#38101)
     # A lot of shared functions were scattered around the dom files; I moved them into `indexed_db.rs` for clarity.
     # Fixes: Nothing to my knowledge, just a cleanup
-https://github.com/servo/servo/pull/37846	(@arihant2math, #37846)	net: Do not print SVG tree in `Debug` implementation of `VectorImageData` (#37846)
+-https://github.com/servo/servo/pull/37846	(@arihant2math, #37846)	net: Do not print SVG tree in `Debug` implementation of `VectorImageData` (#37846)
     # Manually implement Debug LoadResult so that VectorImageData doesn't get logged.
     # Testing: N/A
     # Fixes: #37771
@@ -2208,7 +2222,7 @@ https://github.com/servo/servo/pull/37846	(@arihant2math, #37846)	net: Do not pr
     # Testing: Existing WPT tests
     # work towards #38022
     # try run: https://github.com/sagudev/servo/actions/runs/16299182583
-https://github.com/servo/servo/pull/38099	(@gterzian, #38099)	script: further use of safe to jsval (#38099)
+-https://github.com/servo/servo/pull/38099	(@gterzian, #38099)	script: further use of safe to jsval (#38099)
     # Remove size bound from safe to jsval trait, apply to script/dom, with the exception of windowproxy.
     # Second part of https://github.com/servo/servo/issues/37951
     # Signed-off-by: gterzian
@@ -2218,10 +2232,11 @@ https://github.com/servo/servo/pull/38099	(@gterzian, #38099)	script: further us
 +https://github.com/servo/servo/pull/38113	(@yezhizhen, #38113)	webdriver: Reduce IPC for viewport boundary check (#38113)
     webdriver perf; reduce ipc in webdriver pointerMove and scroll
     # Testing: No behaviour change.
-https://github.com/servo/servo/pull/38079	(@PotatoCP, #38079)	WebDriver: Implement some missing steps of wait for navigation to complete (#38079)
++https://github.com/servo/servo/pull/38079	(@PotatoCP, #38079)	WebDriver: Implement some missing steps of wait for navigation to complete (#38079)
+    webdriver; fix navigation on command
     # Based on https://w3c.github.io/webdriver/#dfn-wait-for-navigation-to-complete. We still have not implement the
     # timer parameter, but I think it makes sense to implement Step 8.4 of `Navigation To` first.
-https://github.com/servo/servo/pull/38108	(@atouchet, #38108)	Update non-breaking dependencies (#38108)
+-https://github.com/servo/servo/pull/38108	(@atouchet, #38108)	Update non-breaking dependencies (#38108)
     # Update non-breaking dependencies.
     # Testing: No tests for dependency updates.
 +https://github.com/servo/servo/pull/38098	(@sagudev, #38098)	canvas: Store current path only in user space (#38098)
@@ -2250,10 +2265,11 @@ https://github.com/servo/servo/pull/38154	(@sebsebmc, #38154)	Add CookieStore pr
     # preference and adds the expectations as a baseline. These tests are expected to be failing because we have not
     # implemented the Cookie Store yet.
     # Testing: Enables new WPT tests.
-https://github.com/servo/servo/pull/38153	(@atouchet, #38153)	Update tempfile (#38153)
+-https://github.com/servo/servo/pull/38153	(@atouchet, #38153)	Update tempfile (#38153)
     # Update tempfile.
     # Testing: No tests for dependency update.
-https://github.com/servo/servo/pull/38140	(@longvatrong111, #38140)	webdriver: Implement send alert text (#38140)
++https://github.com/servo/servo/pull/38140	(@longvatrong111, #38140)	webdriver: Implement send alert text (#38140)
+    webdriver; implement Send Alert Text command
     # Implement webdriver `SendAlertText` command
     # Tests:
     # https://github.com/longvatrong111/servo/actions/runs/16342669929
@@ -2367,10 +2383,11 @@ https://github.com/servo/servo/pull/38142	(@yezhizhen, #38142)	webdriver chore: 
     # 2. Reduce IPC by removing redundant context existence check.
     # 3. Add many missing docs.
     # Testing: New passing cases and turn some ERROR into FAIL.
-https://github.com/servo/servo/pull/38143	(@simonwuelker, #38143)	Remove Document::set_allow_declarative_shadow_roots (#38143)
+-https://github.com/servo/servo/pull/38143	(@simonwuelker, #38143)	Remove Document::set_allow_declarative_shadow_roots (#38143)
     # This method is unused. `rustc` didn't complain because it was marked as `pub` (which it shouldn't have been). A
     # few of the surrounding methods were also `pub`, which this change fixes.
-https://github.com/servo/servo/pull/38110	(@yezhizhen, #38110)	doc: Add doc for compositor/webview/embedder related to window/rect/inner_size/rendering_context (#38110)
++https://github.com/servo/servo/pull/38110	(@yezhizhen, #38110)	doc: Add doc for compositor/webview/embedder related to window/rect/inner_size/rendering_context (#38110)
+    windowing; issues #38089, #38090, #37978, #38093
     # Add docs before actually fixing #38089, #38090, #37978, #38093.
     # Testing: Just adding docs.
 https://github.com/servo/servo/pull/38035	(@longvatrong111, #38035)	webdriver: Add `handle any user prompts` step for all commands (#38035)
@@ -2385,10 +2402,11 @@ https://github.com/servo/servo/pull/38033	(@TimvdLippe, #38033)	Inherit CSP for 
 https://github.com/servo/servo/pull/38107	(@PotatoCP, #38107)	WebDriver: Set current browsing context for NavigateTo and Refresh command (#38107)
     # Previously we didn't change the current browsing context id in our WebDriver Session after the commands `Navigate
     # To` and `Refresh`
-https://github.com/servo/servo/pull/38043	(@jerensl, @mukilan, #38043)	Mach: add type check on python tidy folder (#38043)
++https://github.com/servo/servo/pull/38043	(@jerensl, @mukilan, #38043)	Mach: add type check on python tidy folder (#38043)
+    dx; python type checking
     # Introduce `python/tidy` folder in pyrefly type checker
     # Testing: Manual testing via `./mach test-tidy` command
-https://github.com/servo/servo/pull/38135	(@jerensl, #38135)	remove test-wpt-android from mach command (#38135)
+-https://github.com/servo/servo/pull/38135	(@jerensl, #38135)	remove test-wpt-android from mach command (#38135)
     # This command is no longer work as we arleady remove `in_android_emulator` in this PR
     # [37958](https://github.com/servo/servo/pull/37958) cause of `setup_configuration_for_android_target` is no longer
     # exist in `python/servo` codebase
@@ -2409,7 +2427,7 @@ https://github.com/servo/servo/pull/37947	(@abdelrahman1234567, #37947)	script: 
     # Test: Manual Test case and existing WPT tests (classic/perform_actions/wheel.py[test_scroll_with_key_pressed])
     # Fixes: #37827
 >>> 2025-07-19T06:09:14Z
-https://github.com/servo/servo/pull/38173	(@atouchet, #38173)	Update rustc-hash and rustix (#38173)
+-https://github.com/servo/servo/pull/38173	(@atouchet, #38173)	Update rustc-hash and rustix (#38173)
     # Update rustc-hash and rustix.
     # Testing: No tests for dependency updates.
 https://github.com/servo/servo/pull/38162	(@kkoyung, #38162)	devtools: Use request destination as cause_type in NetworkEventActor (#38162)
@@ -2665,7 +2683,7 @@ https://github.com/servo/servo/pull/38048	(@TimvdLippe, #38048)	Forward CSP viol
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
 >>> 2025-07-23T06:08:17Z
-https://github.com/servo/servo/pull/38219	(@jschwe, #38219)	ohos CI: Simplify getting the model name (#38219)
+-https://github.com/servo/servo/pull/38219	(@jschwe, #38219)	ohos CI: Simplify getting the model name (#38219)
     # Same output, but much easier and faster than sifting through the whole output of hdc bugreport.
     # Testing: CI change: `./mach try` [run](https://github.com/servo/servo/actions/runs/16460283107)
 +https://github.com/servo/servo/pull/38198	(@coding-joedow, #38198)	script: Use `NodeDamage::ContentOrHeritage` for slot changes (#38198)
@@ -2713,7 +2731,8 @@ https://github.com/servo/servo/pull/38192	(@PotatoCP, #38192)	WebDriver: Clean U
     # Previously, we have failing many subtests in `*/user_prompt.py` with prefix `capabilities0-*`. The name of the subtest
     # was probably changed before, hence the failing expectation is not removed when we do `./mach update-wpt`. Here we
     # reupdate the expectation.
-https://github.com/servo/servo/pull/38212	(@yezhizhen, #38212)	Remove Webdriver Server's access to Constellation (#38212)
++https://github.com/servo/servo/pull/38212	(@yezhizhen, #38212)	Remove Webdriver Server's access to Constellation (#38212)
+    webdriver; consistent command order
     # `WebDriverCommandMsg::TakeScreenshot` was the last thing blocking us from removing constellation access in webdriver
     # server. Now we can happily remove it.
     # Surprisingly, this reduces binary size by 185KB for release profile in Windows. #37737 removes a net total of 300
@@ -2723,7 +2742,7 @@ https://github.com/servo/servo/pull/38212	(@yezhizhen, #38212)	Remove Webdriver 
     # Some of the code we wrote is now also in upstream, mainly `BezPath.current_position` and euclid types conversions.
     # Testing: Code is covered by existing WPT tests.
 >>> 2025-07-24T06:06:00Z
-https://github.com/servo/servo/pull/38238	(@yezhizhen, #38238)	Reduce redundancy in servoshell webdriver message forwarding and add log for script::`handle_send_keys_non_typeable` (#38238)
+-https://github.com/servo/servo/pull/38238	(@yezhizhen, #38238)	Reduce redundancy in servoshell webdriver message forwarding and add log for script::`handle_send_keys_non_typeable` (#38238)
     # There was a new commit for after https://github.com/servo/servo/pull/38189#discussion_r2224805172, but that does
     # not seem to update/stop MQ.
     # Also removed `forward_webdriver_command` in servoshell according to
@@ -2803,7 +2822,7 @@ https://github.com/servo/servo/pull/38238	(@yezhizhen, #38238)	Reduce redundancy
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/38239	(@yezhizhen, #38239)	cargo: Remove unused dependency (#38239)
+-https://github.com/servo/servo/pull/38239	(@yezhizhen, #38239)	cargo: Remove unused dependency (#38239)
     # Remove unused `Cargo.toml` dependency to reduce binary size.
     # Testing: Can still compile in different platforms.
 +https://github.com/servo/servo/pull/38236	(@delan, @atbrakhi, #38236)	script: Add support for creating globals in isolated compartments (#38236)
@@ -2825,7 +2844,8 @@ https://github.com/servo/servo/pull/38231	(@Narfinger, #38231)	ohos CI: Add the 
     # Testing: Tested on CI with a run here: https://github.com/Narfinger/servo/actions/runs/16465984131/job/46543984398
     # Fixes: Same name in speedometer CI will have very different speeds because of different profiles. This will fix
     # this behaviour.
-https://github.com/servo/servo/pull/38189	(@PotatoCP, #38189)	webdriver: Implement element send keys command for non-typeable form control (#38189)
++https://github.com/servo/servo/pull/38189	(@PotatoCP, #38189)	webdriver: Implement element send keys command for non-typeable form control (#38189)
+    webdriver; improve Element Send Keys
     # Implement Step 8 of remote end steps of [Element Send keys](https://w3c.github.io/webdriver/#element-send-keys),
     # specifically for non-typeable form control.
 https://github.com/servo/servo/pull/37483	(@stevennovaryo, #37483)	Reland Input `type=text` Shadow DOM With Performance Improvement (#37483)
@@ -2844,7 +2864,8 @@ https://github.com/servo/servo/pull/37483	(@stevennovaryo, #37483)	Reland Input 
     # Servo's side of: https://github.com/servo/stylo/pull/217
     # Testing: No new unexpected WPT failure, except for the one introduced by https://github.com/servo/servo/pull/37065/.
     # Fixes: #36307 #37205
-https://github.com/servo/servo/pull/38163	(@stevennovaryo, #38163)	script: Implement `DocumentOrShadowDOM.adoptedStylesheet` with `FrozenArray` (#38163)
++https://github.com/servo/servo/pull/38163	(@stevennovaryo, #38163)	script: Implement `DocumentOrShadowDOM.adoptedStylesheet` with `FrozenArray` (#38163)
+    features; experimental support for adoptedStyleSheets property on Document/ShadowRoot (--pref dom_adoptedstylesheet_enabled)
     # Spec: https://drafts.csswg.org/cssom/#dom-documentorshadowroot-adoptedstylesheets
     # Implement `DocumentOrShadowDOM.adoptedStylesheet`. Due to `ObservableArray` being a massive issue on its own, it
     # will be as it was a `FrozenArray` at first. This approach is similar to how Gecko implement adopted stylesheet.
@@ -2858,7 +2879,7 @@ https://github.com/servo/servo/pull/38163	(@stevennovaryo, #38163)	script: Imple
     # More context about the implementations https://hackmd.io/vtJAn4UyS_O0Idvk5dCO_w.
     # Testing: Existing WPT Coverage
     # Fixes: https://github.com/servo/servo/issues/37561
-https://github.com/servo/servo/pull/38221	(@yezhizhen, @mrobinson, #38221)	constellation: Eliminate long-standing inactive code path for `WebDriverData` (#38221)
+-https://github.com/servo/servo/pull/38221	(@yezhizhen, @mrobinson, #38221)	constellation: Eliminate long-standing inactive code path for `WebDriverData` (#38221)
     # Cleaning up some dead code which has been here for 9 years. They are never detected by Lint because we still
     # initialize them as `None` but never change afterwards.
     # Testing: No regression.
@@ -2879,7 +2900,8 @@ https://github.com/servo/servo/pull/37527	(@stevennovaryo, #37527)	dom: Textual 
     # For `password`, `url`, `tel`, and, `email` input, the appearance of input container is exactly the same as the
     # `text` input. Other types of textual input simply extends `text` input by adding extra components inside the container.
     # Testing: Servo textual input appearance WPT.
-https://github.com/servo/servo/pull/38244	(@stevennovaryo, #38244)	script: Implement `CSSStyleSheet.replace` (#38244)
++https://github.com/servo/servo/pull/38244	(@stevennovaryo, #38244)	script: Implement `CSSStyleSheet.replace` (#38244)
+    features; replace() method on CSSStyleSheet
     # Implement `CSSStyleSheet.replace`
     # [#dom-cssstylesheet-replace](https://drafts.csswg.org/cssom/#dom-cssstylesheet-replace) with disallow modification flag
     # [#concept-css-style-sheet-disallow-modification-flag](https://drafts.csswg.org/cssom/#concept-css-style-sheet-disallow-m
@@ -2971,10 +2993,12 @@ https://github.com/servo/servo/pull/38249	(@yezhizhen, #38249)	servoshell: Add w
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/38208	(@PotatoCP, @yezhizhen, @jdm, #38208)	webdriver: Implement element clear (#38208)
++https://github.com/servo/servo/pull/38208	(@PotatoCP, @yezhizhen, @jdm, #38208)	webdriver: Implement element clear (#38208)
+    webdriver; implement Element Clear
     # Initial Implementation of [Element Clear](https://w3c.github.io/webdriver/#element-clear).
     # Testing: `tests/wpt/tests/webdriver/tests/classic/element_clear/`
-https://github.com/servo/servo/pull/38222	(@stevennovaryo, #38222)	script: Batch `scroll` event firing (#38222)
++https://github.com/servo/servo/pull/38222	(@stevennovaryo, #38222)	script: Batch `scroll` event firing (#38222)
+    perf; batch `scroll` events
     # The user interaction triggered `scroll` event was initially implemented in https://github.com/servo/servo/pull/36687.
     # In triggering the `scroll` event, the event should be batched and triggered within update the rendering. This
     # serves as a preparatory PR for the JS API triggered `scroll` event.
@@ -2984,7 +3008,8 @@ https://github.com/servo/servo/pull/38222	(@stevennovaryo, #38222)	script: Batch
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/38152	(@leo030303, @hu.xiaocheng@huawei.com, @xiaochengh, #38152)	Add dimension source attribute to HTMLImageElement (#38152)
++https://github.com/servo/servo/pull/38152	(@leo030303, @xiaochengh, #38152)	Add dimension source attribute to HTMLImageElement (#38152)
+    features; now support <source width> and <source height>
     # HTMLImageElement was missing the dimension source attribute, as step 9 from
     # [here](https://html.spec.whatwg.org/multipage/images.html#updating-the-source-set) wasn't implemented. This meant
     # that for an element like this:
@@ -3008,13 +3033,14 @@ https://github.com/servo/servo/pull/38243	(@jdm, #38243)	servo: Track async webv
     # operation and the embedder can receive notifications about each focus operation when it is complete, regardless
     # of whether the focus was actually changed.
     # Testing: Existing test coverage from https://github.com/servo/servo/pull/38160/ is unchanged.
-https://github.com/servo/servo/pull/38174	(@yezhizhen, #38174)	servoshell: Consider window decorations when handling resize requests from web content (#38174)
++https://github.com/servo/servo/pull/38174	(@yezhizhen, #38174)	servoshell: Consider window decorations when handling resize requests from web content (#38174)
+    windowing; issue 38093
     # Also fix some docs. This is used by JS `resizeTo`, `resizeBy` and webdriver [set window
     # rect](https://w3c.github.io/webdriver/#set-window-rect).
     # Testing: Can now pass more tests for headed window.
     # Fixes: Well.. Originally the attempt is to address https://github.com/servo/servo/issues/38093#issuecomment-3092284104.
     # But it turns out as a more general problem to be fixed in another PR.
-https://github.com/servo/servo/pull/38194	(@shubhamg13, @xiaochengh, #38194)	Rename `viewport_zoom` to `pinch_zoom` (#38194)
+-https://github.com/servo/servo/pull/38194	(@shubhamg13, @xiaochengh, #38194)	Rename `viewport_zoom` to `pinch_zoom` (#38194)
     # This change is in accordance with highlighting the usage of various zoom options.
     # `pinch_zoom`: `Mobile-style` zoom using pinch gesture
     #  `page_zoom`: `Desktop-style` zoom (`Ctrl` + `+`/`-`)
@@ -3060,7 +3086,8 @@ https://github.com/servo/servo/pull/38235	(@PotatoCP, #38235)	script(webdriver):
     # `/html/canvas/element`. All subsuite expectations are stored separately.
     # Fixes: #36823
     # Fixes: #35230
-https://github.com/servo/servo/pull/38268	(@arihant2math, @jdm, #38268)	script: implement IDBKeyRange (#38268)
++https://github.com/servo/servo/pull/38268	(@arihant2math, @jdm, #38268)	script: implement IDBKeyRange (#38268)
+    indexeddb
     # #37684 provided the backend for this change. The key range interface just wraps a `IndexedDBKeyRange` and exposes
     # the methods from it as per the spec.
     # Spec: https://www.w3.org/TR/IndexedDB-2/#keyrange
@@ -3137,7 +3164,8 @@ https://github.com/servo/servo/pull/38257	(@leo030303, #38257)	servoshell: Prope
     # design, theoretically, even damaged inline items might still have some of their splits reusable. However, based
     # on the principle of simplicity and effectiveness, this PR only considers reusing undamaged inline boxes.
     # Testing: This should not change observable behavior and is thus covered by existing WPT tests.
-https://github.com/servo/servo/pull/38269	(@arihant2math, #38269)	script: Update indexeddb serialization (#38269)
++https://github.com/servo/servo/pull/38269	(@arihant2math, #38269)	script: Update indexeddb serialization (#38269)
+    indexeddb
     # - Dates are now serialized as f64s (like how firefox does it)
     # - Array buffers are serialized with structured cloning (this is not the most correct/efficent way to serialize them,
     # however it is currently better than not supporting array buffers at all)
@@ -3167,11 +3195,13 @@ https://github.com/servo/servo/pull/38260	(@arihant2math, #38260)	script: Implem
     # We just need to pass user provided FillRule via IPC to canvas paint thread, then pass it all down to backend,
     # which will handle it.
     # Testing: Added WPT tests.
-https://github.com/servo/servo/pull/38280	(@arihant2math, #38280)	script: Don't panic on IndexedDB put operation structured clone (#38280)
++https://github.com/servo/servo/pull/38280	(@arihant2math, #38280)	script: Don't panic on IndexedDB put operation structured clone (#38280)
+    crash; fix crash when calling put() on IDBObjectStore
     # Fixes panic by rethrowing exceptions.
     # Testing: Covered by WPT
     # Fixes: #38075
-https://github.com/servo/servo/pull/38278	(@arihant2math, #38278)	script: Implement converting values to indexeddb key ranges (#38278)
++https://github.com/servo/servo/pull/38278	(@arihant2math, #38278)	script: Implement converting values to indexeddb key ranges (#38278)
+    indexeddb
     # Implements https://www.w3.org/TR/IndexedDB-2/#convert-a-value-to-a-key-range. Part of #38187.
     # Testing: Currently unused, doesn't change anything
     # Fixes: None
@@ -3199,7 +3229,8 @@ https://github.com/servo/servo/pull/38271	(@yezhizhen, #38271)	webdriver: Implem
     # certain text style adjustments can alter visible text content and typography. Therefore, the parent nodes of such
     # text are marked as needing to re-collect their box tree children to ensure the correct display of text.
 >>> 2025-07-28T06:06:04Z
-https://github.com/servo/servo/pull/38085	(@jerensl, #38085)	mach: Add type check on `python/servo` directory (#38085)
++https://github.com/servo/servo/pull/38085	(@jerensl, #38085)	mach: Add type check on `python/servo` directory (#38085)
+    dx; mach now has python type checking
     # Introduce `python/servo` folder in pyrefly type checker
     # Testing: Manual testing via `./mach test-tidy` command
 +https://github.com/servo/servo/pull/38282	(@sagudev, #38282)	canvas: Add vello_cpu backend (#38282)
@@ -3231,7 +3262,8 @@ https://github.com/servo/servo/pull/38303	(@nicoburns, #38303)	Disable serde fea
     # Testing: Refactoring. Existing tests should be enough.
     # Fixes: #37966
 >>> 2025-07-29T06:11:38Z
-https://github.com/servo/servo/pull/38112	(@wuminghua7@huawei.com, #38112)	Script: Implement `TextDecoderStream` (#38112)
++https://github.com/servo/servo/pull/38112	(@minghuaw, #38112)	Script: Implement `TextDecoderStream` (#38112)
+    features; implement TextDecoderStream
     # This PR implements the `TextDecoderStream`. Other than introducing the necessary mod and webidl files corresponding
     # to `TextDecoderStream`, this PR also involves some changes in `TextDecoder` and `TrasnformStream`:
     # - The common part that can be shared between `TextDecoder` and `TextDecoderStream` are extracted into a separate
@@ -3252,7 +3284,8 @@ https://github.com/servo/servo/pull/38319	(@uthmaniv, #38319)	Make request param
     # `CanvasRenderingContext2D`), but we didn't close last consumer of `CanvasState` which is `PaintRenderingContext`. To
     # prevent any future leaks, let's just send `CanvasClose` in `CanvasState` drop.
     # Testing: Existing WPT tests
-https://github.com/servo/servo/pull/38314	(@yezhizhen, #38314)	cargo: Remove last traces of webdriver from libservo (#38314)
++https://github.com/servo/servo/pull/38314	(@yezhizhen, #38314)	cargo: Remove last traces of webdriver from libservo (#38314)
+    webdriver; consistent command order
     # The feature which enables optional dependency & function is never used and can be safely removed.
     # Testing: It can still builds.
 https://github.com/servo/servo/pull/38191	(@jdm, #38191)	chore: Add test for synthesized image documents with CSP headers. (#38191)
@@ -3373,7 +3406,8 @@ https://github.com/servo/servo/pull/38225	(@longvatrong111, #38225)	Rework webdr
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/38335	(@jerensl, #38335)	mach: Make test-tidy line length check Unicode-aware (#38335)
++https://github.com/servo/servo/pull/38335	(@jerensl, #38335)	mach: Make test-tidy line length check Unicode-aware (#38335)
+    dx; improve unicode handling for line length check in mach test-tidy
     # Currently, our implementation for each line-checking function reads the file as bytes, so we need to properly
     # decode each line to UTF-8 before evaluating it. This ensures it is counted as a string and not as bytes
     # Testing: I tested by changing the comment like the issue above and it not give an error
@@ -3392,7 +3426,8 @@ https://github.com/servo/servo/pull/38335	(@jerensl, #38335)	mach: Make test-tid
 -https://github.com/servo/servo/pull/38326	(@sagudev, #38326)	canvas: Fix the build of the vello backend (#38326)
     # Multiple Into hoops cannot be resolved by compiler
     # Testing: Just refactor.
-https://github.com/servo/servo/pull/38166	(@mrobinson, #38166)	compositor: Request reflow when doing a page zooming (#38166)
++https://github.com/servo/servo/pull/38166	(@mrobinson, #38166)	compositor: Request reflow when doing a page zooming (#38166)
+    layout; fix reflow when doing page zoom
     # Request a reflow when doing page zoom and only modify the scaling of the
     # WebView scene after the first root pipeline display list with the new
     # zoom is ready. In addition:
@@ -3414,7 +3449,7 @@ https://github.com/servo/servo/pull/38166	(@mrobinson, #38166)	compositor: Reque
     # ```
     # Testing: Adding new test
     # Fixes: #38023
-https://github.com/servo/servo/pull/38261	(@yezhizhen, #38261)	cargo: Use workspace dependency for `winit` and upgrade to 0.30.12 (#38261)
+-https://github.com/servo/servo/pull/38261	(@yezhizhen, #38261)	cargo: Use workspace dependency for `winit` and upgrade to 0.30.12 (#38261)
     # Use workspace dependency to sync the `winit` version between examples & libservo.
     # Upgrade winit to 0.30.12.
     # Fixes: The hope is lost as it doesn't fix anything..
@@ -3430,17 +3465,20 @@ https://github.com/servo/servo/pull/38261	(@yezhizhen, #38261)	cargo: Use worksp
     # result, we are able to remove `window_rendering_context` and `inner_size` fields from `struct Window`.
     # Testing: No regression/behaviour change in all tests running with headed window.
     # Fixes: https://github.com/servo/servo/issues/38255#issuecomment-3117642340
-https://github.com/servo/servo/pull/38324	(@jerensl, #38324)	mach: Fail on invalid argument in try_parser (#38324)
++https://github.com/servo/servo/pull/38324	(@jerensl, #38324)	mach: Fail on invalid argument in try_parser (#38324)
+    dx; fail loudly on bad mach try
     # This will block the command, print an error message about an invalid argument being passed to the ./mach try command,
     # and return the exit code.
     # Testing: `./mach try test-wpt`
     # Fixes: #38193
 >>> 2025-07-31T06:13:16Z
-https://github.com/servo/servo/pull/38329	(@longvatrong111, #38329)	Implement webdriver element in view (#38329)
++https://github.com/servo/servo/pull/38329	(@longvatrong111, #38329)	Implement webdriver element in view (#38329)
+    webdriver; improve Element Click
     # Implement step 6 of `ElementClick`: https://w3c.github.io/webdriver/#dfn-element-click
     # Tests: `tests/wpt/tests/webdriver/tests/classic/element_click/interactability.py`
     # cc: @xiaochengh
-https://github.com/servo/servo/pull/38376	(@sebsebmc, #38376)	net: Add expiry limit to cookies and prevent panics from max-age (#38376)
++https://github.com/servo/servo/pull/38376	(@sebsebmc, #38376)	net: Add expiry limit to cookies and prevent panics from max-age (#38376)
+    crash; fix crash when cookie has large max-age
     # Based on RFC6256 expiration must be limited to 400 days. This also solves a bug I found where large max-age values
     # could cause an overflow panic when adding.
     # Testing: New unit test added. There doesn't appear to be a WPT test that relies on this under cookies/ but
@@ -3618,7 +3656,8 @@ https://github.com/servo/servo/pull/37871	(@stevennovaryo, @mrobinson, #37871)	l
     # transformation matrix.
     # Fixes: https://github.com/servo/servo/issues/35768
     # Testing: Existing and new WPT
-https://github.com/servo/servo/pull/38234	(@longvatrong111, #38234)	Rework on webdriver wait for navigation complete (#38234)
++https://github.com/servo/servo/pull/38234	(@longvatrong111, #38234)	Rework on webdriver wait for navigation complete (#38234)
+    webdriver; fix navigation on command
     # For current implementation, when a command may trigger a navigation, webdriver only waits for document readiness state.
     # However, not all navigations make change in document.
     # This PR handles more cases for waiting for a navigation, and apply to `element_click`.

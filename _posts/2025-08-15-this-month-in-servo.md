@@ -18,6 +18,10 @@ categories:
     - ScreenY and outerHeight ignores the title bar height servo#37824
     - window.screen.availWidth and availHeight is inaccurate servo#37878
     - servoshell: Tab bar dissapears when resizing the window servo#38255
+    - Resizing the window may reveal extra space that can’t be scrolled servo#38089
+    - --device-pixel-ratio breaks hit testing servo#38090
+    - rect for webview.rs and compositor: webview_renderer.rs is heavily mix-used servo#37978
+    - WebDriver: documents loaded with Navigate To have incorrect scrollable area servo#38093
 - vello
     - Investigate other 2D canvas renderers in a post-Pathfinder world servo#30636
     - Tracking issue of Vello canvas backends servo#38345
@@ -26,6 +30,7 @@ categories:
     - “We want our 2d canvas abstractions to become more general, for potential rendering of all content”
 - webdriver
     - [WebDriver] PointerMove does not consider Global position servo#38042 <https://w3c.github.io/webdriver/#dfn-perform-a-pointer-move>
+    - [webdriver] Moving webdriver to servoshell servo#37370
 - geometry
     - Create universal utility function for conversion between Physical & Logical unit servo#37937
 -->
