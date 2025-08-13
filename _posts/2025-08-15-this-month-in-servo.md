@@ -13,15 +13,16 @@ categories:
     - 2543.00/month github
     - 22 donors 168.55/month thanks.dev
     - benchmarking runners
-- windowing
-    - [WebDriver Task] Window Size related commands gives inaccurate result servo#37804
-    - ScreenY and outerHeight ignores the title bar height servo#37824
-    - window.screen.availWidth and availHeight is inaccurate servo#37878
-    - servoshell: Tab bar dissapears when resizing the window servo#38255
-    - Resizing the window may reveal extra space that can’t be scrolled servo#38089
-    - --device-pixel-ratio breaks hit testing servo#38090
-    - rect for webview.rs and compositor: webview_renderer.rs is heavily mix-used servo#37978
-    - WebDriver: documents loaded with Navigate To have incorrect scrollable area servo#38093
+- DONE windowing
+    - DONE On some devices, hit testing is not working properly servo#36817
+    - DONE [WebDriver Task] Window Size related commands gives inaccurate result servo#37804
+    - DONE ScreenY and outerHeight ignores the title bar height servo#37824
+    - DONE window.screen.availWidth and availHeight is inaccurate servo#37878
+    - DONE rect for webview.rs and compositor: webview_renderer.rs is heavily mix-used servo#37978
+    - DONE Resizing the window may reveal extra space that can’t be scrolled servo#38089
+    - DONE --device-pixel-ratio breaks hit testing servo#38090
+    - DONE WebDriver: documents loaded with Navigate To have incorrect scrollable area servo#38093
+    - DONE servoshell: Tab bar dissapears when resizing the window servo#38255
 - vello
     - Investigate other 2D canvas renderers in a post-Pathfinder world servo#30636
     - Tracking issue of Vello canvas backends servo#38345
@@ -31,8 +32,8 @@ categories:
 - webdriver
     - [WebDriver] PointerMove does not consider Global position servo#38042 <https://w3c.github.io/webdriver/#dfn-perform-a-pointer-move>
     - [webdriver] Moving webdriver to servoshell servo#37370
-- geometry
-    - Create universal utility function for conversion between Physical & Logical unit servo#37937
+- DONE geometry
+    - SKIP Create universal utility function for conversion between Physical & Logical unit servo#37937
 -->
 <!--
 - canvas
@@ -105,8 +106,8 @@ categories:
       features; implement TextDecoderStream
     - DONE https://github.com/servo/servo/pull/38346	(@lumiscosity, @Loirooriol, #38346)	layout: respect `image-rendering` on border images (#38346)
       features; ‘image-rendering’ now works on ‘border-image’ too
-- geometry
-    - https://github.com/servo/servo/pull/38082	(@yezhizhen, #38082)	servoshell: reduce duplication for conversion between physical/logical position/size (#38082)
+- DONE geometry
+    - DONE https://github.com/servo/servo/pull/38082	(@yezhizhen, #38082)	servoshell: reduce duplication for conversion between physical/logical position/size (#38082)
       geometry; fixing bug class (see issue 37937)
 - indexeddb
     - https://github.com/servo/servo/pull/37684	(@arihant2math, #37684)	[IndexedDB] Key ranges implementation (#37684)
@@ -320,30 +321,30 @@ categories:
       webdriver; fix navigation on command
     - https://github.com/servo/servo/pull/37410	(@yezhizhen, #37410)	webdriver: Keep constellation alive and Open new top-level browsing context with new session request when none is open (#37410)
       webdriver
-- windowing
-    - https://github.com/servo/servo/pull/37812	(@yezhizhen, #37812)	webdriver: Get the window position as well as the size when resolving "Get Window Rect" (#37812)
+- DONE windowing
+    - DONE https://github.com/servo/servo/pull/37812	(@yezhizhen, #37812)	webdriver: Get the window position as well as the size when resolving "Get Window Rect" (#37812)
       windowing; issue 37804
-    - https://github.com/servo/servo/pull/37879	(@yezhizhen, @mrobinson, #37879)	embedder: Improve documentation for various places that talk about "available screen size" (#37879)
+    - DONE https://github.com/servo/servo/pull/37879	(@yezhizhen, @mrobinson, #37879)	embedder: Improve documentation for various places that talk about "available screen size" (#37879)
       windowing; issue 37878
-    - https://github.com/servo/servo/pull/37856	(@yezhizhen, #37856)	Rename original `window_resizeTo.html` to `window_resize_event.html` & Fix wrong usage of `innerHeight` & add new test (#37856)
+    - DONE https://github.com/servo/servo/pull/37856	(@yezhizhen, #37856)	Rename original `window_resizeTo.html` to `window_resize_event.html` & Fix wrong usage of `innerHeight` & add new test (#37856)
       windowing; issue 37824
-    - https://github.com/servo/servo/pull/37848	(@yezhizhen, #37848)	servoshell: Make `fn request_resize` resize window w.r.t. outer_size accurately (#37848)
+    - DONE https://github.com/servo/servo/pull/37848	(@yezhizhen, #37848)	servoshell: Make `fn request_resize` resize window w.r.t. outer_size accurately (#37848)
       windowing; issue 37804
-    - https://github.com/servo/servo/pull/37893	(@yezhizhen, #37893)	servoshell: Use DeviceIndependentPixel for WebDriver Rect related requests (#37893)
+    - DONE https://github.com/servo/servo/pull/37893	(@yezhizhen, #37893)	servoshell: Use DeviceIndependentPixel for WebDriver Rect related requests (#37893)
       windowing; issue 37804
-    - https://github.com/servo/servo/pull/37934	(@yezhizhen, #37934)	servoshell: Fix `screen_geometry` for headed_window (#37934)
+    - DONE https://github.com/servo/servo/pull/37934	(@yezhizhen, #37934)	servoshell: Fix `screen_geometry` for headed_window (#37934)
       windowing; issue 37824
-    - https://github.com/servo/servo/pull/37961	(@yezhizhen, #37961)	servoshell: Consider both OS decoration width and height when resizing (#37961)
+    - DONE https://github.com/servo/servo/pull/37961	(@yezhizhen, #37961)	servoshell: Consider both OS decoration width and height when resizing (#37961)
       windowing; fix resize errors with decorations
-    - https://github.com/servo/servo/pull/37960	(@yezhizhen, @mrobinson, #37960)	script: Get the window rectangle from the `WebViewDelegate` instead of via the compositor (#37960)
+    - DONE https://github.com/servo/servo/pull/37960	(@yezhizhen, @mrobinson, #37960)	script: Get the window rectangle from the `WebViewDelegate` instead of via the compositor (#37960)
       windowing; window size/position operations now go directly to embedder
-    - https://github.com/servo/servo/pull/38020	(@yezhizhen, #38020)	script: Get the screen metrics from the `WebViewDelegate` instead of via the compositor (#38020)
+    - DONE https://github.com/servo/servo/pull/38020	(@yezhizhen, #38020)	script: Get the screen metrics from the `WebViewDelegate` instead of via the compositor (#38020)
       windowing; screen size operations now go directly to embedder
-    - https://github.com/servo/servo/pull/38110	(@yezhizhen, #38110)	doc: Add doc for compositor/webview/embedder related to window/rect/inner_size/rendering_context (#38110)
+    - DONE https://github.com/servo/servo/pull/38110	(@yezhizhen, #38110)	doc: Add doc for compositor/webview/embedder related to window/rect/inner_size/rendering_context (#38110)
       windowing; issues #38089, #38090, #37978, #38093
-    - https://github.com/servo/servo/pull/38174	(@yezhizhen, #38174)	servoshell: Consider window decorations when handling resize requests from web content (#38174)
+    - DONE https://github.com/servo/servo/pull/38174	(@yezhizhen, #38174)	servoshell: Consider window decorations when handling resize requests from web content (#38174)
       windowing; issue 38093
-    - https://github.com/servo/servo/pull/38307	(@yezhizhen, #38307)	servoshell: Remove redundant `WindowEvent::Resized` handler (#38307)
+    - DONE https://github.com/servo/servo/pull/38307	(@yezhizhen, #38307)	servoshell: Remove redundant `WindowEvent::Resized` handler (#38307)
       windowing; issue 38255
 - windows
     - https://github.com/servo/servo/pull/37975	(@yezhizhen, @jdm, #37975)	servoshell: Enable headless event loop for Windows (#37975)
@@ -365,6 +366,17 @@ This includes several new web platform features:
 - **adoptedStyleSheets property** on **Document** and **ShadowRoot**, with `--pref dom_adoptedstylesheet_enabled` (@stevennovaryo, #38163)
 - **sessionStorage** is now isolated from localStorage (@janvarga, #37803)
 - **ImageBitmap** no longer requires `--enable-experimental-web-platform-features` (@tharkum, #38050)
+
+## What is a pixel?
+
+Many recent Servo bugs have been related to our handling of **viewport**, **window**, and **screen coordinate spaces** ([#36817](https://github.com/servo/servo/issues/36817), [#37804](https://github.com/servo/servo/issues/37804), [#37824](https://github.com/servo/servo/issues/37824), [#37878](https://github.com/servo/servo/issues/37878), [#37978](https://github.com/servo/servo/issues/37978), [#38089](https://github.com/servo/servo/issues/38089), [#38090](https://github.com/servo/servo/issues/38090), [#38093](https://github.com/servo/servo/issues/38093), [#38255](https://github.com/servo/servo/issues/38255)).
+Symptoms of these bugs include **bad hit testing** (e.g. links that can’t be clicked), **inability to scroll** to the end of the page, or **graphical glitches** like disappearing browser UI or black bars.
+
+Windows rarely take up the whole screen, viewports rarely take up the whole window due to window decorations, and when different units come into play, like CSS `px` vs device pixels, a more systematic approach is needed.
+We built [**euclid**](https://docs.rs/euclid/0.22.11/euclid/) to solve these problems in a strongly typed way within Servo, but beyond the viewport, we need to convert between euclid types and the geometry types provided by the embedder, the toolkit, the platform, or WebDriver, which creates opportunities for errors.
+
+Embedders are now the single source of truth for **window rects** and **screen sizes** (@yezhizhen, @mrobinson, #37960, #38020), and we’ve fixed incorrect coordinate handling in [**Get Window Rect**](https://w3c.github.io/webdriver/#get-window-rect), [**Set Window Rect**](https://w3c.github.io/webdriver/#set-window-rect) (@yezhizhen, #37812, #37893), **resizeTo()** (@yezhizhen, #37848), **screenX**, **screenY**, **screenLeft**, **screenTop** (@yezhizhen, #37934), and in **servoshell** (@yezhizhen, #37961, #38174, #38307, #38082).
+We’ve also improved the Web Platform Tests (@yezhizhen, #37856) and clarified our docs (@yezhizhen, @mrobinson, #37879, #38110) in these areas.
 
 ## Donations
 
