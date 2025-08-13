@@ -364,8 +364,9 @@ This includes several new web platform features:
 - **texImage3D() method** on **WebGL2RenderingContext** (@wusyong, #37718)
 - **convertToBlob()** and **transferToImageBitmap() methods** on **OffscreenCanvas** (@tharkum, #37786, #37880)
 - **adoptedStyleSheets property** on **Document** and **ShadowRoot**, with `--pref dom_adoptedstylesheet_enabled` (@stevennovaryo, #38163)
-- **sessionStorage** is now isolated from localStorage (@janvarga, #37803)
 - **ImageBitmap** no longer requires `--enable-experimental-web-platform-features` (@tharkum, #38050)
+
+**sessionStorage** is now isolated between webviews, and copied to new webviews with the same `opener` (@janvarga, #37803).
 
 ## What is a pixel?
 
