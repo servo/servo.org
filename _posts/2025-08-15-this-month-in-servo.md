@@ -36,14 +36,14 @@ categories:
     - SKIP Create universal utility function for conversion between Physical & Logical unit servo#37937
 -->
 <!--
-- canvas
-    - https://github.com/servo/servo/pull/38098	(@sagudev, #38098)	canvas: Store current path only in user space (#38098)
+- DONE canvas
+    - DONE https://github.com/servo/servo/pull/38098	(@sagudev, #38098)	canvas: Store current path only in user space (#38098)
       canvas; see issue 38022
-    - https://github.com/servo/servo/pull/38114	(@sagudev, #38114)	canvas: Move current_default_path to script CanvasState (#38114)
+    - DONE https://github.com/servo/servo/pull/38114	(@sagudev, #38114)	canvas: Move current_default_path to script CanvasState (#38114)
       canvas; see issue 38022
-    - https://github.com/servo/servo/pull/38164	(@sagudev, #38164)	canvas: Make script/canvas thread boundry mostly stateless (#38164)
+    - DONE https://github.com/servo/servo/pull/38164	(@sagudev, #38164)	canvas: Make script/canvas thread boundry mostly stateless (#38164)
       canvas; see issue 38022
-    - https://github.com/servo/servo/pull/38214	(@sagudev, #38214)	canvas: Fully stateless backend (#38214)
+    - DONE https://github.com/servo/servo/pull/38214	(@sagudev, #38214)	canvas: Fully stateless backend (#38214)
       canvas; see issue 38022
 - crash
     - https://github.com/servo/servo/pull/37959	(@Narfinger, #37959)	OHOS: Make IME more robust against errors (#37959)
@@ -374,6 +374,20 @@ Like many browsers, Servo has two kinds of zoom: **page zoom** affects the size 
 **Page zoom** now correctly triggers reflow (@mrobinson, #38166), and **pinch zoom** is now reset to the viewport meta config when navigating (@shubhamg13, #37315).
 
 **‘text-decoration[-line]’ now applies to whitespace** (@leo030303, @Loirooriol, #38007), and we’ve also fixed several layout bugs around **grid item contents** (@Loirooriol, #37981), **table cell contents** (@Loirooriol, #38290), **quirks mode** (@Loirooriol, #37814, #37831, #37820, #37837), **clientWidth** and **clientHeight** queries of grid layouts (@Loirooriol, #37917), and **‘min-height’** and **‘max-height’** of replaced elements (@Loirooriol, #37758).
+
+## 2D graphics
+
+**&lt;canvas>** is key to programmable graphics on the web, with Servo supporting WebGPU, WebGL, and 2D canvas contexts.
+But the **general-purpose 2D graphics** routines that power Servo’s 2D canvases are potentially useful for a lot more than &lt;canvas>: **font rendering** is bread and butter for Servo, but **SVG rendering** is only minimally supported right now, and **PDF output** is not yet implemented at all.
+
+Those features have one thing in common: they require things that WebRender can’t yet do.
+**WebRender** does one thing and does it well: rasterise the layouts of the web, really fast, by [using the GPU as much as possible](https://hacks.mozilla.org/2017/10/the-whole-web-at-maximum-fps-how-webrender-gets-rid-of-jank/).
+Font rendering and SVG rendering both involve rasterising arbitrary paths, which currently has to be done outside WebRender, and PDF output is out of scope entirely.
+
+The more code we can share between these tasks, the better we can make that code, and the smaller we can make Servo’s binary sizes ([#38022](https://github.com/servo/servo/issues/38022)).
+We’ve started by moving 2D-&lt;canvas>-specific state out of the `canvas` crate (@sagudev, #38098, #38114, #38164, #38214), which has in turn allowed us to modernise it with **new backends based on [Vello](https://github.com/linebender/vello)** (@EnnuiL, @sagudev, [#30636](https://github.com/servo/servo/issues/30636), [#38345](https://github.com/servo/servo/issues/38345)).
+
+<!-- TODO: write about vello patches -->
 
 ## What is a pixel?
 
