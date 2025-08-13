@@ -83,27 +83,27 @@ categories:
 - features
     - https://github.com/servo/servo/pull/37784	(@CarePackage17, #37784)	Enable LinuxSampler to be used on Android (#37784)
       features; background hang monitor now works on android? try test case to assess how user-facing this is
-    - https://github.com/servo/servo/pull/37880	(@tharkum, #37880)	canvas: Add OffscreenCanvas 'transferToImageBitmap' method (#37880)
+    - DONE https://github.com/servo/servo/pull/37880	(@tharkum, #37880)	canvas: Add OffscreenCanvas 'transferToImageBitmap' method (#37880)
       features; transferToImageBitmap() method on OffscreenCanvas
-    - https://github.com/servo/servo/pull/37803	(@janvarga, #37803)	storage: Isolate sessionStorage per top-level browsing context and copy sessionStorage when creating a new auxiliary browsing context (#37803)
+    - DONE https://github.com/servo/servo/pull/37803	(@janvarga, #37803)	storage: Isolate sessionStorage per top-level browsing context and copy sessionStorage when creating a new auxiliary browsing context (#37803)
       features; sessionStorage is now isolated between tabs/webviews, and copied when opening a new tab/webview with opener
-    - https://github.com/servo/servo/pull/37786	(@tharkum, #37786)	canvas: Add OffscreenCanvas 'convertToBlob' method (#37786)
+    - DONE https://github.com/servo/servo/pull/37786	(@tharkum, #37786)	canvas: Add OffscreenCanvas 'convertToBlob' method (#37786)
       features; convertToBlob() method on OffscreenCanvas
-    - https://github.com/servo/servo/pull/37718	(@wusyong, #37718)	WebGL2: support TexImage3D (#37718)
+    - DONE https://github.com/servo/servo/pull/37718	(@wusyong, #37718)	WebGL2: support TexImage3D (#37718)
       features; texImage3D() method on WebGL2RenderingContext, now support three.js(!), now support texture_2d_array and texture_3d webgl2 samples
-    - https://github.com/servo/servo/pull/37637	(@rayguo17, #37637)	add support for apng and webp animated image decoding (#37637)
+    - DONE https://github.com/servo/servo/pull/37637	(@rayguo17, #37637)	add support for apng and webp animated image decoding (#37637)
       features; apng and animated webp support
-    - https://github.com/servo/servo/pull/38050	(@tharkum, #38050)	imagebitmap: Remove ImageBitmap from experimental web platform features (#38050)
+    - DONE https://github.com/servo/servo/pull/38050	(@tharkum, #38050)	imagebitmap: Remove ImageBitmap from experimental web platform features (#38050)
       features; ImageBitmap now enabled by default
-    - https://github.com/servo/servo/pull/38163	(@stevennovaryo, #38163)	script: Implement `DocumentOrShadowDOM.adoptedStylesheet` with `FrozenArray` (#38163)
+    - DONE https://github.com/servo/servo/pull/38163	(@stevennovaryo, #38163)	script: Implement `DocumentOrShadowDOM.adoptedStylesheet` with `FrozenArray` (#38163)
       features; experimental support for adoptedStyleSheets property on Document/ShadowRoot (--pref dom_adoptedstylesheet_enabled)
-    - https://github.com/servo/servo/pull/38244	(@stevennovaryo, #38244)	script: Implement `CSSStyleSheet.replace` (#38244)
+    - DONE https://github.com/servo/servo/pull/38244	(@stevennovaryo, #38244)	script: Implement `CSSStyleSheet.replace` (#38244)
       features; replace() method on CSSStyleSheet
-    - https://github.com/servo/servo/pull/38152	(@leo030303, @xiaochengh, #38152)	Add dimension source attribute to HTMLImageElement (#38152)
+    - DONE https://github.com/servo/servo/pull/38152	(@leo030303, @xiaochengh, #38152)	Add dimension source attribute to HTMLImageElement (#38152)
       features; now support <source width> and <source height>
-    - https://github.com/servo/servo/pull/38112	(@minghuaw, #38112)	Script: Implement `TextDecoderStream` (#38112)
+    - DONE https://github.com/servo/servo/pull/38112	(@minghuaw, #38112)	Script: Implement `TextDecoderStream` (#38112)
       features; implement TextDecoderStream
-    - https://github.com/servo/servo/pull/38346	(@lumiscosity, @Loirooriol, #38346)	layout: respect `image-rendering` on border images (#38346)
+    - DONE https://github.com/servo/servo/pull/38346	(@lumiscosity, @Loirooriol, #38346)	layout: respect `image-rendering` on border images (#38346)
       features; ‘image-rendering’ now works on ‘border-image’ too
 - geometry
     - https://github.com/servo/servo/pull/38082	(@yezhizhen, #38082)	servoshell: reduce duplication for conversion between physical/logical position/size (#38082)
@@ -351,6 +351,20 @@ categories:
     - https://github.com/servo/servo/pull/38028	(@yezhizhen, #38028)	mach (Windows): make `vswhere.exe` work properly (#38028)
       windows; fix building on windows 11
 -->
+
+Servo has smashed its record again in July, with **367 pull requests** landing in our nightly builds!
+This includes several new web platform features:
+
+- **APNG** and **WebP animated images**, in addition to GIF (@rayguo17, #37637)
+- **&lt;source width>** and **&lt;source height>** (@leo030303, @xiaochengh, #38152)
+- **‘image-rendering’ property** now affects **‘border-image’** (@lumiscosity, @Loirooriol, #38346)
+- **TextDecoderStream** (@minghuaw, #38112)
+- **replace() method** on **CSSStyleSheet** (@stevennovaryo, #38244)
+- **texImage3D() method** on **WebGL2RenderingContext** (@wusyong, #37718)
+- **convertToBlob()** and **transferToImageBitmap() methods** on **OffscreenCanvas** (@tharkum, #37786, #37880)
+- **adoptedStyleSheets property** on **Document** and **ShadowRoot**, with `--pref dom_adoptedstylesheet_enabled` (@stevennovaryo, #38163)
+- **sessionStorage** is now isolated from localStorage (@janvarga, #37803)
+- **ImageBitmap** no longer requires `--enable-experimental-web-platform-features` (@tharkum, #38050)
 
 ## Donations
 
