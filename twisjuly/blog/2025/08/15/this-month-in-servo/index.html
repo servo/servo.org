@@ -383,32 +383,32 @@
 - internals
     - https://github.com/servo/servo/pull/37819	(@spookyvision, #37819)	bhm: Add backtrace demangling (#37819)
       internals; background hang monitor now demangles backtraces
-- layout
-    - https://github.com/servo/servo/pull/37758	(@Loirooriol, #37758)	layout: Fix block SizeConstraint for replaced elements (#37758)
+- DONE layout
+    - DONE https://github.com/servo/servo/pull/37758	(@Loirooriol, #37758)	layout: Fix block SizeConstraint for replaced elements (#37758)
       layout; fix intrinsic sizing keywords in min/max-height of replaced elements
-    - https://github.com/servo/servo/pull/37814	(@Loirooriol, #37814)	layout: Only include quirks-mode.css in actual quirks mode (#37814)
+    - DONE https://github.com/servo/servo/pull/37814	(@Loirooriol, #37814)	layout: Only include quirks-mode.css in actual quirks mode (#37814)
       layout; fix limited-quirks mode
-    - https://github.com/servo/servo/pull/37831	(@Loirooriol, #37831)	script: Remove the quirk of flooring rowSpan by 1 (#37831)
+    - DONE https://github.com/servo/servo/pull/37831	(@Loirooriol, #37831)	script: Remove the quirk of flooring rowSpan by 1 (#37831)
       layout; fix quirks mode tables
-    - https://github.com/servo/servo/pull/37820	(@Loirooriol, #37820)	script: Only enforce rowSpan >= 1 in actual quirks mode (#37820)
+    - DONE https://github.com/servo/servo/pull/37820	(@Loirooriol, #37820)	script: Only enforce rowSpan >= 1 in actual quirks mode (#37820)
       layout; fix limited-quirks mode tables
-    - https://github.com/servo/servo/pull/37837	(@Loirooriol, #37837)	layout: Implement `list-style-position` quirk (#37837)
+    - DONE https://github.com/servo/servo/pull/37837	(@Loirooriol, #37837)	layout: Implement `list-style-position` quirk (#37837)
       layout; quirks mode accuracy
-    - https://github.com/servo/servo/pull/37864	(@Loirooriol, #37864)	layout: Unify logic for laying out replaced and non-replaced in a BFC (#37864)
+    - SEE OTHER https://github.com/servo/servo/pull/37864	(@Loirooriol, #37864)	layout: Unify logic for laying out replaced and non-replaced in a BFC (#37864)
       layout perf; fix stretch keyword in block-level replaced elements around floats / see replaced caching
-    - https://github.com/servo/servo/pull/37917	(@Loirooriol, #37917)	layout: Require specific layout info in `BoxFragment::new()` (#37917)
+    - DONE https://github.com/servo/servo/pull/37917	(@Loirooriol, #37917)	layout: Require specific layout info in `BoxFragment::new()` (#37917)
       layout; fix clientWidth/clientHeight in for (inline?) grids
-    - https://github.com/servo/servo/pull/37981	(@Loirooriol, #37981)	layout: Lay out grid items with a consistent tentative block size (#37981)
+    - DONE https://github.com/servo/servo/pull/37981	(@Loirooriol, #37981)	layout: Lay out grid items with a consistent tentative block size (#37981)
       layout; fix layout of grid item contents
-    - https://github.com/servo/servo/pull/38007	(@leo030303, @Loirooriol, #38007)	layout: Fix bug where whitespace didn't have line decorations (#38007)
+    - DONE https://github.com/servo/servo/pull/38007	(@leo030303, @Loirooriol, #38007)	layout: Fix bug where whitespace didn't have line decorations (#38007)
       layout; fix underlines (and other line decorations) on whitespace, very noticeable!
-    - https://github.com/servo/servo/pull/37315	(@shubhamg13, #37315)	renderer: Have the viewport meta element establish the initial zoom of new pages (#37315)
+    - DONE https://github.com/servo/servo/pull/37315	(@shubhamg13, #37315)	renderer: Have the viewport meta element establish the initial zoom of new pages (#37315)
       layout; each page has its own initial pinch zoom (vs page zoom, see #38194)
-    - https://github.com/servo/servo/pull/38166	(@mrobinson, #38166)	compositor: Request reflow when doing a page zooming (#38166)
+    - DONE https://github.com/servo/servo/pull/38166	(@mrobinson, #38166)	compositor: Request reflow when doing a page zooming (#38166)
       layout; fix reflow when doing page zoom
-    - https://github.com/servo/servo/pull/38318	(@Loirooriol, #38318)	layout: Fix `depends_on_block_constraints` logic (#38318)
+    - SEE OTHER https://github.com/servo/servo/pull/38318	(@Loirooriol, #38318)	layout: Fix `depends_on_block_constraints` logic (#38318)
       perf layout; reduced cache misses when stretching flex items / fix stretching flex items
-    - https://github.com/servo/servo/pull/38290	(@Loirooriol, #38290)	layout: Include spanned gutters when laying out contents of table cell (#38290)
+    - DONE https://github.com/servo/servo/pull/38290	(@Loirooriol, #38290)	layout: Include spanned gutters when laying out contents of table cell (#38290)
       layout; fix layout of table cell contents
 - perf
     - https://github.com/servo/servo/pull/37832	(@mrobinson, #37832)	layout: Stop using Rayon in single-threaded mode (#37832)
@@ -620,6 +620,12 @@ This includes several new web platform features:</p>
 <li><strong>ImageBitmap</strong> no longer requires <code>--enable-experimental-web-platform-features</code> (@tharkum, #38050)</li>
 </ul>
 <p><strong>sessionStorage</strong> is now isolated between webviews, and copied to new webviews with the same <code>opener</code> (@janvarga, #37803).</p>
+<h2 id="layout-changes" tabindex="-1">Layout changes <a class="header-anchor" href="#layout-changes">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Like many browsers, Servo has two kinds of zoom: <strong>page zoom</strong> affects the size of the viewport, while <strong>pinch zoom</strong> does not (@shubhamg13, #38194).
+<strong>Page zoom</strong> now correctly triggers reflow (@mrobinson, #38166), and <strong>pinch zoom</strong> is now reset to the viewport meta config when navigating (@shubhamg13, #37315).</p>
+<p><strong>‘text-decoration[-line]’ now applies to whitespace</strong> (@leo030303, @Loirooriol, #38007), and we’ve also fixed several layout bugs around <strong>grid item contents</strong> (@Loirooriol, #37981), <strong>table cell contents</strong> (@Loirooriol, #38290), <strong>quirks mode</strong> (@Loirooriol, #37814, #37831, #37820, #37837), <strong>clientWidth</strong> and <strong>clientHeight</strong> queries of grid layouts (@Loirooriol, #37917), and <strong>‘min-height’</strong> and <strong>‘max-height’</strong> of replaced elements (@Loirooriol, #37758).</p>
 <h2 id="what-is-a-pixel%3F" tabindex="-1">What is a pixel? <a class="header-anchor" href="#what-is-a-pixel%3F">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
