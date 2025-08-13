@@ -290,14 +290,14 @@
     - SKIP Create universal utility function for conversion between Physical & Logical unit servo#37937
 -->
 <!--
-- canvas
-    - https://github.com/servo/servo/pull/38098	(@sagudev, #38098)	canvas: Store current path only in user space (#38098)
+- DONE canvas
+    - DONE https://github.com/servo/servo/pull/38098	(@sagudev, #38098)	canvas: Store current path only in user space (#38098)
       canvas; see issue 38022
-    - https://github.com/servo/servo/pull/38114	(@sagudev, #38114)	canvas: Move current_default_path to script CanvasState (#38114)
+    - DONE https://github.com/servo/servo/pull/38114	(@sagudev, #38114)	canvas: Move current_default_path to script CanvasState (#38114)
       canvas; see issue 38022
-    - https://github.com/servo/servo/pull/38164	(@sagudev, #38164)	canvas: Make script/canvas thread boundry mostly stateless (#38164)
+    - DONE https://github.com/servo/servo/pull/38164	(@sagudev, #38164)	canvas: Make script/canvas thread boundry mostly stateless (#38164)
       canvas; see issue 38022
-    - https://github.com/servo/servo/pull/38214	(@sagudev, #38214)	canvas: Fully stateless backend (#38214)
+    - DONE https://github.com/servo/servo/pull/38214	(@sagudev, #38214)	canvas: Fully stateless backend (#38214)
       canvas; see issue 38022
 - crash
     - https://github.com/servo/servo/pull/37959	(@Narfinger, #37959)	OHOS: Make IME more robust against errors (#37959)
@@ -626,6 +626,17 @@ This includes several new web platform features:</p>
 <p>Like many browsers, Servo has two kinds of zoom: <strong>page zoom</strong> affects the size of the viewport, while <strong>pinch zoom</strong> does not (@shubhamg13, #38194).
 <strong>Page zoom</strong> now correctly triggers reflow (@mrobinson, #38166), and <strong>pinch zoom</strong> is now reset to the viewport meta config when navigating (@shubhamg13, #37315).</p>
 <p><strong>‘text-decoration[-line]’ now applies to whitespace</strong> (@leo030303, @Loirooriol, #38007), and we’ve also fixed several layout bugs around <strong>grid item contents</strong> (@Loirooriol, #37981), <strong>table cell contents</strong> (@Loirooriol, #38290), <strong>quirks mode</strong> (@Loirooriol, #37814, #37831, #37820, #37837), <strong>clientWidth</strong> and <strong>clientHeight</strong> queries of grid layouts (@Loirooriol, #37917), and <strong>‘min-height’</strong> and <strong>‘max-height’</strong> of replaced elements (@Loirooriol, #37758).</p>
+<h2 id="2d-graphics" tabindex="-1">2D graphics <a class="header-anchor" href="#2d-graphics">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><strong>&lt;canvas&gt;</strong> is key to programmable graphics on the web, with Servo supporting WebGPU, WebGL, and 2D canvas contexts.
+But the <strong>general-purpose 2D graphics</strong> routines that power Servo’s 2D canvases are potentially useful for a lot more than &lt;canvas&gt;: <strong>font rendering</strong> is bread and butter for Servo, but <strong>SVG rendering</strong> is only minimally supported right now, and <strong>PDF output</strong> is not yet implemented at all.</p>
+<p>Those features have one thing in common: they require things that WebRender can’t yet do.
+<strong>WebRender</strong> does one thing and does it well: rasterise the layouts of the web, really fast, by <a href="https://hacks.mozilla.org/2017/10/the-whole-web-at-maximum-fps-how-webrender-gets-rid-of-jank/">using the GPU as much as possible</a>.
+Font rendering and SVG rendering both involve rasterising arbitrary paths, which currently has to be done outside WebRender, and PDF output is out of scope entirely.</p>
+<p>The more code we can share between these tasks, the better we can make that code, and the smaller we can make Servo’s binary sizes (<a href="https://github.com/servo/servo/issues/38022">#38022</a>).
+We’ve started by moving 2D-&lt;canvas&gt;-specific state out of the <code>canvas</code> crate (@sagudev, #38098, #38114, #38164, #38214), which has in turn allowed us to modernise it with <strong>new backends based on <a href="https://github.com/linebender/vello">Vello</a></strong> (@EnnuiL, @sagudev, <a href="https://github.com/servo/servo/issues/30636">#30636</a>, <a href="https://github.com/servo/servo/issues/38345">#38345</a>).</p>
+<!-- TODO: write about vello patches -->
 <h2 id="what-is-a-pixel%3F" tabindex="-1">What is a pixel? <a class="header-anchor" href="#what-is-a-pixel%3F">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
