@@ -227,14 +227,14 @@ categories:
       perf layout; reduced cache misses when stretching flex items / fix stretching flex items
     - https://github.com/servo/servo/pull/38349	(@Loirooriol, #38349)	layout: Make a couple tracing reflect what they actually trace (#38349)
       perf; see replaced caching
-- servoshell
-    - https://github.com/servo/servo/pull/37794	(@MichaelMcDonnell, #37794)	Add alt-d shortcut to select address bar text (#37794)
+- DONE servoshell
+    - DONE https://github.com/servo/servo/pull/37794	(@MichaelMcDonnell, #37794)	Add alt-d shortcut to select address bar text (#37794)
       servoshell
-    - https://github.com/servo/servo/pull/37839	(@MichaelMcDonnell, #37839)	servoshell: Select address bar text on click (#37839)
+    - DONE https://github.com/servo/servo/pull/37839	(@MichaelMcDonnell, #37839)	servoshell: Select address bar text on click (#37839)
       servoshell
-    - https://github.com/servo/servo/pull/38038	(@MichaelMcDonnell, #38038)	Add Linux .desktop file (#38038)
+    - DONE https://github.com/servo/servo/pull/38038	(@MichaelMcDonnell, #38038)	Add Linux .desktop file (#38038)
       servoshell; now has a desktop file and window name, so it can be pinned to taskbar
-    - https://github.com/servo/servo/pull/37982	(@yezhizhen, #37982)	servoshell: Fix scroll speed for Desktop (#37982)
+    - DONE https://github.com/servo/servo/pull/37982	(@yezhizhen, #37982)	servoshell: Fix scroll speed for Desktop (#37982)
       servoshell; more ergonomic scrolling with mouse wheel
 - upgrades
     - https://github.com/servo/servo/pull/37822	(@Loirooriol, #37822)	Upgrade Stylo to 2025-07-01 (#37822)
@@ -377,6 +377,13 @@ Like many browsers, Servo has two kinds of zoom: **page zoom** affects the size 
 **Page zoom** now correctly triggers reflow (@mrobinson, #38166), and **pinch zoom** is now reset to the viewport meta config when navigating (@shubhamg13, #37315).
 
 **‘text-decoration[-line]’ now applies to whitespace** (@leo030303, @Loirooriol, #38007), and we’ve also fixed several layout bugs around **grid item contents** (@Loirooriol, #37981), **table cell contents** (@Loirooriol, #38290), **quirks mode** (@Loirooriol, #37814, #37831, #37820, #37837), **clientWidth** and **clientHeight** queries of grid layouts (@Loirooriol, #37917), and **‘min-height’** and **‘max-height’** of replaced elements (@Loirooriol, #37758).
+
+## Browser changes
+
+**servoshell** now has a **.desktop file** and **window name**, so you can now **pin it to your taskbar** on Linux (@MichaelMcDonnell, #38038).
+We’ve made it more ergonomic too, fixing both the sluggish **mouse wheel** and **pixel-perfect trackpad scrolling** and the too fast **arrow key scrolling** (@yezhizhen, #37982).
+
+You can now **focus the location bar with Alt+`D`** in addition to Ctrl+`L` on non-macOS platforms (@MichaelMcDonnell, #37794), and **clicking the location bar** now selects the contents (@MichaelMcDonnell, #37839).
 
 ## 2D graphics
 
