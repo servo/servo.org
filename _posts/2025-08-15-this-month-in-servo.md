@@ -271,53 +271,53 @@ categories:
     - https://github.com/servo/servo/pull/38336	(@sagudev, #38336)	canvas: Use `create_similar_draw_target` for recreate (#38336)
       vello; more preparation for vello
 - webdriver
-    - https://github.com/servo/servo/pull/37783	(@yezhizhen, #37783)	[WebDriver] Implement XPath Locator Strategy (#37783)
+    - DONE https://github.com/servo/servo/pull/37783	(@yezhizhen, #37783)	[WebDriver] Implement XPath Locator Strategy (#37783)
       webdriver
-    - https://github.com/servo/servo/pull/37712	(@yezhizhen, #37712)	webdriver: Greatly improve execution speed for all tests using `SetWindowSize` (#37712)
+    - DONE https://github.com/servo/servo/pull/37712	(@yezhizhen, #37712)	webdriver: Greatly improve execution speed for all tests using `SetWindowSize` (#37712)
       webdriver; perf
-    - https://github.com/servo/servo/pull/37826	(@PotatoCP, #37826)	webdriver: enable getting closed shadow root (#37826)
+    - DONE https://github.com/servo/servo/pull/37826	(@PotatoCP, #37826)	webdriver: enable getting closed shadow root (#37826)
       webdriver
-    - https://github.com/servo/servo/pull/37498	(@PotatoCP, @sagudev, #37498)	CI: WebDriver test on try (#37498)
+    - DONE https://github.com/servo/servo/pull/37498	(@PotatoCP, @sagudev, #37498)	CI: WebDriver test on try (#37498)
       webdriver; can now run webdriver test suite with explicit mach try <wd|webdriver>
-    - https://github.com/servo/servo/pull/37669	(@longvatrong111, #37669)	Move webdriver actions commands to servoshell (#37669)
+    - DONE https://github.com/servo/servo/pull/37669	(@longvatrong111, #37669)	Move webdriver actions commands to servoshell (#37669)
       webdriver; consistent command order / rearchitected the server to be managed by servoshell instead of libservo
-    - https://github.com/servo/servo/pull/37873	(@yezhizhen, #37873)	servoshell: Set `dom_testing_html_input_element_select_files_enabled` when WebDriver is enabled (#37873)
+    - DONE https://github.com/servo/servo/pull/37873	(@yezhizhen, #37873)	servoshell: Set `dom_testing_html_input_element_select_files_enabled` when WebDriver is enabled (#37873)
       webdriver; work towards running webdriver test suite
-    - https://github.com/servo/servo/pull/37908	(@PotatoCP, #37908)	Webdriver: Keyboard Action use `webview::notify_input_event` instead of directly sent to constellation (#37908)
+    - DONE https://github.com/servo/servo/pull/37908	(@PotatoCP, #37908)	Webdriver: Keyboard Action use `webview::notify_input_event` instead of directly sent to constellation (#37908)
       webdriver; consistent command order
-    - https://github.com/servo/servo/pull/37913	(@longvatrong111, #37913)	webdriver: Implement support for simple dialogs (#37913)
+    - DONE https://github.com/servo/servo/pull/37913	(@longvatrong111, #37913)	webdriver: Implement support for simple dialogs (#37913)
       webdriver; add commands for accept alert, dismiss alert, get alert text
-    - https://github.com/servo/servo/pull/37663	(@longvatrong111, @mrobinson, #37663)	webdriver: Evaluate script commands via the `WebView` API in servoshell (#37663)
+    - DONE https://github.com/servo/servo/pull/37663	(@longvatrong111, @mrobinson, #37663)	webdriver: Evaluate script commands via the `WebView` API in servoshell (#37663)
       webdriver; consistent command order
-    - https://github.com/servo/servo/pull/37911	(@PotatoCP, #37911)	Webdriver: Send Keys use `webview::notify_input_event` (#37911)
+    - DONE https://github.com/servo/servo/pull/37911	(@PotatoCP, #37911)	Webdriver: Send Keys use `webview::notify_input_event` (#37911)
       webdriver; consistent command order
     - https://github.com/servo/servo/pull/38058	(@yezhizhen, #38058)	script: Improve `webdriver_handler::get_element_in_view_center_point` (#38058)
       webdriver; fix PointerMove see issue 38042
     - https://github.com/servo/servo/pull/38095	(@yezhizhen, #38095)	webdriver: improve perform pointermove & wheel actions with more accurate coordinates (#38095)
       webdriver; fix PointerMove see issue 38042
-    - https://github.com/servo/servo/pull/37950	(@longvatrong111, @jdm, #37950)	Webdriver GoBack and GoForward commands wait for navigation complete (#37950)
+    - DONE https://github.com/servo/servo/pull/37950	(@longvatrong111, @jdm, #37950)	Webdriver GoBack and GoForward commands wait for navigation complete (#37950)
       webdriver; fix navigation on Back and Forward
-    - https://github.com/servo/servo/pull/37935	(@longvatrong111, #37935)	webdriver: Element click waits for navigation complete (#37935)
+    - DONE https://github.com/servo/servo/pull/37935	(@longvatrong111, #37935)	webdriver: Element click waits for navigation complete (#37935)
       webdriver; fix navigation on Element Click
     - https://github.com/servo/servo/pull/38113	(@yezhizhen, #38113)	webdriver: Reduce IPC for viewport boundary check (#38113)
       webdriver perf; reduce ipc in webdriver pointerMove and scroll
-    - https://github.com/servo/servo/pull/38079	(@PotatoCP, #38079)	WebDriver: Implement some missing steps of wait for navigation to complete (#38079)
+    - DONE https://github.com/servo/servo/pull/38079	(@PotatoCP, #38079)	WebDriver: Implement some missing steps of wait for navigation to complete (#38079)
       webdriver; fix navigation on command
-    - https://github.com/servo/servo/pull/38140	(@longvatrong111, #38140)	webdriver: Implement send alert text (#38140)
+    - DONE https://github.com/servo/servo/pull/38140	(@longvatrong111, #38140)	webdriver: Implement send alert text (#38140)
       webdriver; implement Send Alert Text command
-    - https://github.com/servo/servo/pull/38160	(@yezhizhen, #38160)	WebDriver: Wait focus to complete when switching window (#38160)
+    - DONE https://github.com/servo/servo/pull/38160	(@yezhizhen, #38160)	WebDriver: Wait focus to complete when switching window (#38160)
       webdriver; fix Switch To Window <https://w3c.github.io/webdriver/#switch-to-window>
-    - https://github.com/servo/servo/pull/38212	(@yezhizhen, #38212)	Remove Webdriver Server's access to Constellation (#38212)
+    - DONE https://github.com/servo/servo/pull/38212	(@yezhizhen, #38212)	Remove Webdriver Server's access to Constellation (#38212)
       webdriver; consistent command order
     - https://github.com/servo/servo/pull/38189	(@PotatoCP, #38189)	webdriver: Implement element send keys command for non-typeable form control (#38189)
       webdriver; improve Element Send Keys
-    - https://github.com/servo/servo/pull/38208	(@PotatoCP, @yezhizhen, @jdm, #38208)	webdriver: Implement element clear (#38208)
+    - DONE https://github.com/servo/servo/pull/38208	(@PotatoCP, @yezhizhen, @jdm, #38208)	webdriver: Implement element clear (#38208)
       webdriver; implement Element Clear
-    - https://github.com/servo/servo/pull/38314	(@yezhizhen, #38314)	cargo: Remove last traces of webdriver from libservo (#38314)
+    - DONE https://github.com/servo/servo/pull/38314	(@yezhizhen, #38314)	cargo: Remove last traces of webdriver from libservo (#38314)
       webdriver; consistent command order
     - https://github.com/servo/servo/pull/38329	(@longvatrong111, #38329)	Implement webdriver element in view (#38329)
       webdriver; improve Element Click
-    - https://github.com/servo/servo/pull/38234	(@longvatrong111, #38234)	Rework on webdriver wait for navigation complete (#38234)
+    - DONE https://github.com/servo/servo/pull/38234	(@longvatrong111, #38234)	Rework on webdriver wait for navigation complete (#38234)
       webdriver; fix navigation on command
     - https://github.com/servo/servo/pull/37410	(@yezhizhen, #37410)	webdriver: Keep constellation alive and Open new top-level browsing context with new session request when none is open (#37410)
       webdriver
@@ -384,6 +384,17 @@ Like many browsers, Servo has two kinds of zoom: **page zoom** affects the size 
 We’ve made it more ergonomic too, fixing both the sluggish **mouse wheel** and **pixel-perfect trackpad scrolling** and the too fast **arrow key scrolling** (@yezhizhen, #37982).
 
 You can now **focus the location bar with Alt+`D`** in addition to Ctrl+`L` on non-macOS platforms (@MichaelMcDonnell, #37794), and **clicking the location bar** now selects the contents (@MichaelMcDonnell, #37839).
+
+## WebDriver changes
+
+**WebDriver automation** support now **goes through servoshell**, rather than through libservo internally, ensuring that WebDriver commands are consistently executed in the correct order (@longvatrong111, @PotatoCP, @mrobinson, @yezhizhen, #37669, #37908, #37663, #37911, #38212, #38314).
+We’ve also fixed race conditions in the **Back**, **Forward** (@longvatrong111, @jdm, #37950), **Element Click** (@longvatrong111, #37935), **Switch To Window** (@yezhizhen, #38160), and other commands (@PotatoCP, @longvatrong111, #38079, #38234).
+
+We’ve added support for the **Dismiss Alert**, **Accept Alert**, **Get Alert Text** (@longvatrong111, #37913), and **Send Alert Text** commands for [**simple dialogs**](https://html.spec.whatwg.org/multipage/#simple-dialogs) (@longvatrong111, #38140), as well as the **Element Clear** command (@PotatoCP, @yezhizhen, @jdm, #38208).
+[**Find Element** family of commands](https://w3c.github.io/webdriver/#element-retrieval) can now use the **`"xpath"` location strategy** (@yezhizhen, #37783).
+**Get Element Shadow Root** commands can now interact with **closed shadow roots** (@PotatoCP, #37826).
+
+You can now **run the WebDriver test suite** in CI with `mach try wd` or `mach try webdriver` (@PotatoCP, @sagudev, @yezhizhen, #37498, #37873, #37712).
 
 ## 2D graphics
 
