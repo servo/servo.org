@@ -70,6 +70,8 @@ categories:
     - https://github.com/servo/servo/pull/38359	(@delan, @atbrakhi, #38359)	devtools: Fix source contents tests and fix a race (#38359)
       devtools; fix loading sources
 - dx
+    - https://github.com/servo/servo/pull/37953        (@jerensl, #37953)      Mach: introduce Pyrefly for Python type checking, starting with the wpt folder (#37953)
+      dx; python type checking
     - https://github.com/servo/servo/pull/38043	(@jerensl, @mukilan, #38043)	Mach: add type check on python tidy folder (#38043)
       dx; python type checking
     - https://github.com/servo/servo/pull/38085	(@jerensl, #38085)	mach: Add type check on `python/servo` directory (#38085)
@@ -96,12 +98,18 @@ categories:
       features; apng and animated webp support
     - DONE https://github.com/servo/servo/pull/38050	(@tharkum, #38050)	imagebitmap: Remove ImageBitmap from experimental web platform features (#38050)
       features; ImageBitmap now enabled by default
+    - https://github.com/servo/servo/pull/38053        (@abdelrahman1234567, #38053)   servoshell: Send all button events to the `WebView` regardless of what button is pressed (#38053)
+      features; mouse events can now report all mouse buttons
+    - https://github.com/servo/servo/pull/37947        (@abdelrahman1234567, #37947)   script: Ensure that keyboard modifiers, screen point, and client point are set in WheelEvents (#37947)
+      features; wheel events now report keyboard modifiers, clientX, clientY, screenX, screenY
     - DONE https://github.com/servo/servo/pull/38163	(@stevennovaryo, #38163)	script: Implement `DocumentOrShadowDOM.adoptedStylesheet` with `FrozenArray` (#38163)
       features; experimental support for adoptedStyleSheets property on Document/ShadowRoot (--pref dom_adoptedstylesheet_enabled)
     - DONE https://github.com/servo/servo/pull/38244	(@stevennovaryo, #38244)	script: Implement `CSSStyleSheet.replace` (#38244)
       features; replace() method on CSSStyleSheet
     - DONE https://github.com/servo/servo/pull/38152	(@leo030303, @xiaochengh, #38152)	Add dimension source attribute to HTMLImageElement (#38152)
       features; now support <source width> and <source height>
+    - https://github.com/servo/servo/pull/38260        (@arihant2math, #38260) script: Implement IDBFactory.cmp (#38260)
+      features; cmp() method on IDBFactory
     - DONE https://github.com/servo/servo/pull/38112	(@minghuaw, #38112)	Script: Implement `TextDecoderStream` (#38112)
       features; implement TextDecoderStream
     - DONE https://github.com/servo/servo/pull/38346	(@lumiscosity, @Loirooriol, #38346)	layout: respect `image-rendering` on border images (#38346)
@@ -227,6 +235,19 @@ categories:
       perf layout; reduced cache misses when stretching flex items / fix stretching flex items
     - https://github.com/servo/servo/pull/38349	(@Loirooriol, #38349)	layout: Make a couple tracing reflect what they actually trace (#38349)
       perf; see replaced caching
++- security
+    - https://github.com/servo/servo/pull/37965        (@TimvdLippe, #37965)   Add support for Reporting-Endpoints (#37965)
+      security
+    - https://github.com/servo/servo/pull/37970        (@TimvdLippe, @jdm, #37970)     Return correct source position for element CSP violations (#37970)
+      security
+    - https://github.com/servo/servo/pull/38002        (@TimvdLippe, #38002)   Fix reporting when only the report-only CSP header is present (#38002)
+      security
+    - https://github.com/servo/servo/pull/38033        (@TimvdLippe, #38033)   Inherit CSP for blob workers (#38033)
+      security
+    - https://github.com/servo/servo/pull/38186        (@webbeef, #38186)      Adjust CSP for top-level image documents (#38186)
+      security
+    - https://github.com/servo/servo/pull/38048        (@TimvdLippe, #38048)   Forward CSP violations from load_whole_resource to parent event loop (#38048)
+      security
 - DONE servoshell
     - DONE https://github.com/servo/servo/pull/37794	(@MichaelMcDonnell, #37794)	Add alt-d shortcut to select address bar text (#37794)
       servoshell
@@ -283,6 +304,8 @@ categories:
       webdriver; consistent command order / rearchitected the server to be managed by servoshell instead of libservo
     - DONE https://github.com/servo/servo/pull/37873	(@yezhizhen, #37873)	servoshell: Set `dom_testing_html_input_element_select_files_enabled` when WebDriver is enabled (#37873)
       webdriver; work towards running webdriver test suite
+    - https://github.com/servo/servo/pull/37867        (@pewsheen, #37867)     refactor(webdriver): move `webdriver_port` option to servoshell pref (#37867)
+      webdriver; removed `Opts::webdriver_port` from embedding api
     - DONE https://github.com/servo/servo/pull/37908	(@PotatoCP, #37908)	Webdriver: Keyboard Action use `webview::notify_input_event` instead of directly sent to constellation (#37908)
       webdriver; consistent command order
     - DONE https://github.com/servo/servo/pull/37913	(@longvatrong111, #37913)	webdriver: Implement support for simple dialogs (#37913)
@@ -305,6 +328,10 @@ categories:
       webdriver; fix navigation on command
     - DONE https://github.com/servo/servo/pull/38140	(@longvatrong111, #38140)	webdriver: Implement send alert text (#38140)
       webdriver; implement Send Alert Text command
+    - DONE https://github.com/servo/servo/pull/38142        (@yezhizhen, #38142)    webdriver chore: check browsing context existence before handling user prompt when required (#38142)
+      webdriver; user prompts
+    - DONE https://github.com/servo/servo/pull/38035	(@longvatrong111, #38035)	webdriver: Add `handle any user prompts` step for all commands (#38035)
+      webdriver; user prompts
     - DONE https://github.com/servo/servo/pull/38160	(@yezhizhen, #38160)	WebDriver: Wait focus to complete when switching window (#38160)
       webdriver; fix Switch To Window <https://w3c.github.io/webdriver/#switch-to-window>
     - DONE https://github.com/servo/servo/pull/38212	(@yezhizhen, #38212)	Remove Webdriver Server's access to Constellation (#38212)
@@ -313,6 +340,8 @@ categories:
       webdriver; improve Element Send Keys
     - DONE https://github.com/servo/servo/pull/38208	(@PotatoCP, @yezhizhen, @jdm, #38208)	webdriver: Implement element clear (#38208)
       webdriver; implement Element Clear
+    - DONE https://github.com/servo/servo/pull/38271        (@yezhizhen, #38271)    webdriver: Implement maximize window for both headless&headed window (#38271)
+      webdriver; implement Maximize Window
     - DONE https://github.com/servo/servo/pull/38314	(@yezhizhen, #38314)	cargo: Remove last traces of webdriver from libservo (#38314)
       webdriver; consistent command order
     - https://github.com/servo/servo/pull/38329	(@longvatrong111, #38329)	Implement webdriver element in view (#38329)
@@ -342,6 +371,12 @@ categories:
       windowing; screen size operations now go directly to embedder
     - DONE https://github.com/servo/servo/pull/38110	(@yezhizhen, #38110)	doc: Add doc for compositor/webview/embedder related to window/rect/inner_size/rendering_context (#38110)
       windowing; issues #38089, #38090, #37978, #38093
+    - DONE https://github.com/servo/servo/pull/38209        (@yezhizhen, #38209)    Implement setting position through webdriver for headed window (#38209)
+      windowing; issue 37804
+    - DONE https://github.com/servo/servo/pull/38258        (@yezhizhen, #38258)    servoshell: Respond resize with authentic result and Adjust minimum window size (#38258)
+      windowing; issue 37804
+    - DONE https://github.com/servo/servo/pull/38249        (@yezhizhen, #38249)    servoshell: Add window position for headless window (#38249)
+      windowing; issue 37804
     - DONE https://github.com/servo/servo/pull/38174	(@yezhizhen, #38174)	servoshell: Consider window decorations when handling resize requests from web content (#38174)
       windowing; issue 38093
     - DONE https://github.com/servo/servo/pull/38307	(@yezhizhen, #38307)	servoshell: Remove redundant `WindowEvent::Resized` handler (#38307)
@@ -390,7 +425,7 @@ You can now **focus the location bar with Alt+`D`** in addition to Ctrl+`L` on n
 **WebDriver automation** support now **goes through servoshell**, rather than through libservo internally, ensuring that WebDriver commands are consistently executed in the correct order (@longvatrong111, @PotatoCP, @mrobinson, @yezhizhen, #37669, #37908, #37663, #37911, #38212, #38314).
 We’ve also fixed race conditions in the **Back**, **Forward** (@longvatrong111, @jdm, #37950), **Element Click** (@longvatrong111, #37935), **Switch To Window** (@yezhizhen, #38160), and other commands (@PotatoCP, @longvatrong111, #38079, #38234).
 
-We’ve added support for the **Dismiss Alert**, **Accept Alert**, **Get Alert Text** (@longvatrong111, #37913), and **Send Alert Text** commands for [**simple dialogs**](https://html.spec.whatwg.org/multipage/#simple-dialogs) (@longvatrong111, #38140), as well as the **Element Clear** command (@PotatoCP, @yezhizhen, @jdm, #38208).
+We’ve added support for the **Dismiss Alert**, **Accept Alert**, **Get Alert Text** (@longvatrong111, #37913), and **Send Alert Text** commands for [**simple dialogs**](https://html.spec.whatwg.org/multipage/#simple-dialogs) (@longvatrong111, #38140, #38035, #38142), as well as the **Maximize Window** (@yezhizhen, #38271) and **Element Clear** commands (@PotatoCP, @yezhizhen, @jdm, #38208).
 [**Find Element** family of commands](https://w3c.github.io/webdriver/#element-retrieval) can now use the **`"xpath"` location strategy** (@yezhizhen, #37783).
 **Get Element Shadow Root** commands can now interact with **closed shadow roots** (@PotatoCP, #37826).
 
@@ -418,7 +453,7 @@ Symptoms of these bugs include **bad hit testing** (e.g. links that can’t be c
 Windows rarely take up the whole screen, viewports rarely take up the whole window due to window decorations, and when different units come into play, like CSS `px` vs device pixels, a more systematic approach is needed.
 We built [**euclid**](https://docs.rs/euclid/0.22.11/euclid/) to solve these problems in a strongly typed way within Servo, but beyond the viewport, we need to convert between euclid types and the geometry types provided by the embedder, the toolkit, the platform, or WebDriver, which creates opportunities for errors.
 
-Embedders are now the single source of truth for **window rects** and **screen sizes** (@yezhizhen, @mrobinson, #37960, #38020), and we’ve fixed incorrect coordinate handling in [**Get Window Rect**](https://w3c.github.io/webdriver/#get-window-rect), [**Set Window Rect**](https://w3c.github.io/webdriver/#set-window-rect) (@yezhizhen, #37812, #37893), **resizeTo()** (@yezhizhen, #37848), **screenX**, **screenY**, **screenLeft**, **screenTop** (@yezhizhen, #37934), and in **servoshell** (@yezhizhen, #37961, #38174, #38307, #38082).
+Embedders are now the single source of truth for **window rects** and **screen sizes** (@yezhizhen, @mrobinson, #37960, #38020), and we’ve fixed incorrect coordinate handling in [**Get Window Rect**](https://w3c.github.io/webdriver/#get-window-rect), [**Set Window Rect**](https://w3c.github.io/webdriver/#set-window-rect) (@yezhizhen, #37812, #37893, #38209, #38258, #38249), **resizeTo()** (@yezhizhen, #37848), **screenX**, **screenY**, **screenLeft**, **screenTop** (@yezhizhen, #37934), and in **servoshell** (@yezhizhen, #37961, #38174, #38307, #38082).
 We’ve also improved the Web Platform Tests (@yezhizhen, #37856) and clarified our docs (@yezhizhen, @mrobinson, #37879, #38110) in these areas.
 
 ## Donations
