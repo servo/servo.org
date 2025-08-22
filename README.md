@@ -275,6 +275,13 @@ To avoid false positives, be sure to step through each replacement rather than u
 - Replace ` ([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1#$2](https://github.com/servo/$1/pull/$2)`
 - Replace ` ([0-9A-Za-z_.-]+)/([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1/$2#$3](https://github.com/$1/$2/pull/$3)`
 
+Or in vim:
+
+- `:%s/\v[@]([0-9A-Za-z_.-]+)/[@\1](https:\/\/github.com\/\1)/gc`
+- `:%s/\v #([0-9]+)/ [#\1](https:\/\/github.com\/servo\/servo\/pull\/\1)/gc`
+- `:%s/\v ([0-9A-Za-z_.-]+)#([0-9]+)/ [\1#\2](https:\/\/github.com\/servo\/\1\/pull\/\2)/gc`
+- `:%s/\v ([0-9A-Za-z_.-]+)\/([0-9A-Za-z_.-]+)#([0-9]+)/ [\1\/\2#\3](https:\/\/github.com\/\1\/\2\/pull\/\3)/gc`
+
 ## How to calculate monthly recurring donations
 
 OpenCollective:
