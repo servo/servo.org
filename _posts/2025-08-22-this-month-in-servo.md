@@ -32,6 +32,7 @@ This is a **breaking change to the Servo API**.
     <img src="{{ '/img/blog/2025-08-diffies.webp' | url }}" style="position:absolute;margin:0;inset:0;pointer-events:none" loading="lazy" alt="servoshell nightly showing the same things, but animated">
     <summary style="display:block"><img src="{{ '/img/blog/2025-08-diffies.jpg' | url }}" style="margin:0" loading="lazy"><div style="position:absolute;inset:0;display:flex;justify-content:center;align-items:center;color:#1192e8;font-size:7em;cursor:pointer;-webkit-text-stroke:1rem color-mix(in oklch,#1192e8,black 20%);user-select:none" alt="servoshell nightly showing APNG and WebP animated images, ‘image-rendering’ applying to a ‘border-image’, a WebGL 2 example using texImage3D(), ‘text-decoration’ applying to a link with spaces, and an example of adoptedStyleSheets being controlled by a color input">▶</div></summary>
   </details>
+  <figcaption>texImage3D() example reproduced from <a href="https://webglsamples.org/WebGL2Samples/#texture_2d_array">texture_2d_array</a> in the <a href="https://github.com/WebGLSamples/WebGL2Samples"><i>WebGL 2.0 Samples</i></a> by Trung Le, Shuai Shao (Shrek), et al (<a href="https://github.com/WebGLSamples/WebGL2Samples/blob/7aef7dd1ef2615e657e0110df10a0fd6270cd50e/LICENSE.md">license</a>).</figcaption>
 </figure>
 
 ## Engine changes
