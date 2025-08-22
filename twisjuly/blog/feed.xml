@@ -462,8 +462,12 @@ Font rendering and SVG rendering both involve rasterising arbitrary paths, which
 &lt;p&gt;The more code we can share between these tasks, the better we can make that code, and the smaller we can make Servo’s binary sizes (&lt;a href=&quot;https://github.com/servo/servo/issues/38022&quot;&gt;#38022&lt;/a&gt;).
 We’ve started by moving 2D-&amp;lt;canvas&amp;gt;-specific state out of the &lt;code&gt;canvas&lt;/code&gt; crate (@sagudev, #38098, #38114, #38164, #38214), which has in turn allowed us to modernise it with &lt;strong&gt;new backends based on &lt;a href=&quot;https://github.com/linebender/vello&quot;&gt;Vello&lt;/a&gt;&lt;/strong&gt; (@EnnuiL, @sagudev, &lt;a href=&quot;https://github.com/servo/servo/issues/30636&quot;&gt;#30636&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/issues/38345&quot;&gt;#38345&lt;/a&gt;):&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;a Vello GPU-based backend (@sagudev, #36821), currently slower than the default backend; to use it, build Servo with &lt;code&gt;--features vello&lt;/code&gt; and enable it with &lt;code&gt;--pref dom_canvas_vello_enabled&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;a Vello CPU-based backend (@sagudev, #38282), &lt;strong&gt;already faster than the default backend&lt;/strong&gt;; to use it, build Servo with &lt;code&gt;--features vello_cpu&lt;/code&gt; and enable it with &lt;code&gt;--pref dom_canvas_vello_cpu_enabled&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;a Vello GPU-based backend (@sagudev, #36821), currently slower than the default backend; to use it, build Servo with &lt;code&gt;--features vello&lt;/code&gt; and enable it with &lt;code&gt;--pref dom_canvas_vello_enabled&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;a Vello CPU-based backend (@sagudev, #38282), &lt;strong&gt;already faster than the default backend&lt;/strong&gt;; to use it, build Servo with &lt;code&gt;--features vello_cpu&lt;/code&gt; and enable it with &lt;code&gt;--pref dom_canvas_vello_cpu_enabled&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;what-is-a-pixel%3F&quot; tabindex=&quot;-1&quot;&gt;What is a pixel? &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjuly/blog/2025/08/15/this-month-in-servo/#what-is-a-pixel%3F&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;

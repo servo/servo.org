@@ -708,8 +708,12 @@ Font rendering and SVG rendering both involve rasterising arbitrary paths, which
 <p>The more code we can share between these tasks, the better we can make that code, and the smaller we can make Servo’s binary sizes (<a href="https://github.com/servo/servo/issues/38022">#38022</a>).
 We’ve started by moving 2D-&lt;canvas&gt;-specific state out of the <code>canvas</code> crate (@sagudev, #38098, #38114, #38164, #38214), which has in turn allowed us to modernise it with <strong>new backends based on <a href="https://github.com/linebender/vello">Vello</a></strong> (@EnnuiL, @sagudev, <a href="https://github.com/servo/servo/issues/30636">#30636</a>, <a href="https://github.com/servo/servo/issues/38345">#38345</a>):</p>
 <ul>
-<li>a Vello GPU-based backend (@sagudev, #36821), currently slower than the default backend; to use it, build Servo with <code>--features vello</code> and enable it with <code>--pref dom_canvas_vello_enabled</code></li>
-<li>a Vello CPU-based backend (@sagudev, #38282), <strong>already faster than the default backend</strong>; to use it, build Servo with <code>--features vello_cpu</code> and enable it with <code>--pref dom_canvas_vello_cpu_enabled</code></li>
+<li>
+<p>a Vello GPU-based backend (@sagudev, #36821), currently slower than the default backend; to use it, build Servo with <code>--features vello</code> and enable it with <code>--pref dom_canvas_vello_enabled</code></p>
+</li>
+<li>
+<p>a Vello CPU-based backend (@sagudev, #38282), <strong>already faster than the default backend</strong>; to use it, build Servo with <code>--features vello_cpu</code> and enable it with <code>--pref dom_canvas_vello_cpu_enabled</code></p>
+</li>
 </ul>
 <h2 id="what-is-a-pixel%3F" tabindex="-1">What is a pixel? <a class="header-anchor" href="#what-is-a-pixel%3F">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
