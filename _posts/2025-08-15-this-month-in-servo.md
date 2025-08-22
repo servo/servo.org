@@ -80,8 +80,8 @@ categories:
       dx; improve unicode handling for line length check in mach test-tidy
     - https://github.com/servo/servo/pull/38324	(@jerensl, #38324)	mach: Fail on invalid argument in try_parser (#38324)
       dx; fail loudly on bad mach try
-- embedding
-    - https://github.com/servo/servo/pull/37752	(@mrobinson, @Loirooriol, #37752)	libservo|compositor: Have scroll offset directionality match that of WebRender and the web (#37752)
+- DONE embedding
+    - DONE https://github.com/servo/servo/pull/37752	(@mrobinson, @Loirooriol, #37752)	libservo|compositor: Have scroll offset directionality match that of WebRender and the web (#37752)
       embedding; breaking change due to flipping y axis in scroll offsets
 - features
     - https://github.com/servo/servo/pull/37784	(@CarePackage17, #37784)	Enable LinuxSampler to be used on Android (#37784)
@@ -401,8 +401,13 @@ This includes several new web platform features:
 - **adoptedStyleSheets property** on **Document** and **ShadowRoot**, with `--pref dom_adoptedstylesheet_enabled` (@stevennovaryo, #38163)
 - **ImageBitmap** no longer requires `--enable-experimental-web-platform-features` (@tharkum, #38050)
 
-**Stylo 0.6.0** was released, **fixing build errors** caused by an undeclared dependency on `markupsafe` (@nicoburns, @delan, stylo#215, [stylo#218](https://github.com/servo/stylo/issues/218)).
+Notable changes for Servo library consumers:
+
+- **Stylo 0.6.0** was released, **fixing build errors** caused by an undeclared dependency on `markupsafe` (@nicoburns, @delan, stylo#215, [stylo#218](https://github.com/servo/stylo/issues/218)).
 To work around this in Stylo 0.5.0, install the dependency: `pip install markupsafe`
+
+- [**notify_scroll_event()** on WebView](https://doc.servo.org/servo/struct.WebView.html#method.notify_scroll_event) now **scrolls down as the `y` value increases** (@mrobinson, @Loirooriol, #37752), consistent with the web platform.
+This is a **breaking change to the Servo API**.
 
 **sessionStorage** is now isolated between webviews, and copied to new webviews with the same `opener` (@janvarga, #37803).
 
