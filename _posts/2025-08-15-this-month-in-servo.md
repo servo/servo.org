@@ -409,10 +409,6 @@ To work around this in Stylo 0.5.0, install the dependency: `pip install markups
 - [**notify_scroll_event()** on WebView](https://doc.servo.org/servo/struct.WebView.html#method.notify_scroll_event) now **scrolls down as the `y` value increases** (@mrobinson, @Loirooriol, #37752), consistent with the web platform.
 This is a **breaking change to the Servo API**.
 
-**sessionStorage** is now isolated between webviews, and copied to new webviews with the same `opener` (@janvarga, #37803).
-
-Work on **IndexedDB** continues, notably including support for **key ranges** (@arihant2math, @jdm, #38268, #37684, #38278).
-
 <figure>
   <details style="position:relative">
     <img src="{{ '/img/blog/2025-08-diffies.webp' | url }}" style="position:absolute;margin:0;inset:0;pointer-events:none" loading="lazy" alt="servoshell nightly showing the same things, but animated">
@@ -420,7 +416,7 @@ Work on **IndexedDB** continues, notably including support for **key ranges** (@
   </details>
 </figure>
 
-## Layout changes
+## Engine changes
 
 Like many browsers, Servo has two kinds of zoom: **page zoom** affects the size of the viewport, while **pinch zoom** does not (@shubhamg13, #38194).
 **Page zoom** now correctly triggers reflow (@mrobinson, #38166), and **pinch zoom** is now reset to the viewport meta config when navigating (@shubhamg13, #37315).
@@ -428,6 +424,10 @@ Like many browsers, Servo has two kinds of zoom: **page zoom** affects the size 
 **‘text-decoration[-line]’ now applies to whitespace** (@leo030303, @Loirooriol, #38007), and we’ve also fixed several layout bugs around **grid item contents** (@Loirooriol, #37981), **table cell contents** (@Loirooriol, #38290), **quirks mode** (@Loirooriol, #37814, #37831, #37820, #37837), **clientWidth** and **clientHeight** queries of grid layouts (@Loirooriol, #37917), and **‘min-height’** and **‘max-height’** of replaced elements (@Loirooriol, #37758).
 
 As part of our **incremental layout** project, we now **cache the layout results** of replaced boxes (@Loirooriol, #37971, #37897, #37962, #37943, #37985, #38349), **avoid unnecessary reflows** after animations (@coding-joedow, #37954), **invalidate layouts more precisely** (@coding-joedow, #38199, #38057, #38198, #38059), and we’ve added **incremental box tree construction** (@mrobinson, @Loirooriol, @coding-joedow, #37751, #37957) for flex and grid items (@coding-joedow, #37854), table columns, cells, and captions (@Loirooriol, @mrobinson, #37851, #37850, #37849), and a variety of inline elements (@coding-joedow, #38084, #37866, #37868, #37892).
+
+Work on **IndexedDB** continues, notably including support for **key ranges** (@arihant2math, @jdm, #38268, #37684, #38278).
+
+**sessionStorage** is now isolated between webviews, and copied to new webviews with the same `opener` (@janvarga, #37803).
 
 ## Browser changes
 
