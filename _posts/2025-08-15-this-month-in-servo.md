@@ -406,6 +406,13 @@ This includes several new web platform features:
 **Stylo 0.6.0** was released, **fixing build errors** caused by an undeclared dependency on `markupsafe` (@nicoburns, @delan, stylo#215, [stylo#218](https://github.com/servo/stylo/issues/218)).
 To work around this in Stylo 0.5.0, install the dependency: `pip install markupsafe`
 
+<figure>
+  <details style="position:relative">
+    <img src="{{ '/img/blog/2025-08-diffies.webp' | url }}" style="position:absolute;margin:0;inset:0;pointer-events:none" loading="lazy" alt="servoshell nightly showing the same things, but animated">
+    <summary style="display:block"><img src="{{ '/img/blog/2025-08-diffies.jpg' | url }}" style="margin:0" loading="lazy"><div style="position:absolute;inset:0;display:flex;justify-content:center;align-items:center;color:#1192e8;font-size:7em;cursor:pointer;-webkit-text-stroke:1rem color-mix(in oklch,#1192e8,black 20%);user-select:none" alt="servoshell nightly showing APNG and WebP animated images, ‘image-rendering’ applying to a ‘border-image’, a WebGL 2 example using texImage3D(), ‘text-decoration’ applying to a link with spaces, and an example of adoptedStyleSheets being controlled by a color input">▶</div></summary>
+  </details>
+</figure>
+
 ## Layout changes
 
 Like many browsers, Servo has two kinds of zoom: **page zoom** affects the size of the viewport, while **pinch zoom** does not (@shubhamg13, #38194).
