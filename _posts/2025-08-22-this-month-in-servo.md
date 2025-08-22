@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
-date:       2025-08-15
-summary:    ao!! wrrrrao!!
+title:      "This month in Servo: new image formats, canvas backends, automation, and more!"
+date:       2025-08-22
+summary:    Another record month, plus devtools improvements and creature comforts for servoshell users.
 categories:
 ---
 
