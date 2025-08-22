@@ -261,407 +261,27 @@
 </div>
 
 <div class="inner-container blog-content">
-  <!--
-- 4691/month donations (4523/month without thanks.dev)
-    - 1980.23/month opencollective
-    - 2543.00/month github
-    - 22 donors 168.55/month thanks.dev
-    - benchmarking runners
-- DONE windowing
-    - DONE On some devices, hit testing is not working properly servo#36817
-    - DONE [WebDriver Task] Window Size related commands gives inaccurate result servo#37804
-    - DONE ScreenY and outerHeight ignores the title bar height servo#37824
-    - DONE window.screen.availWidth and availHeight is inaccurate servo#37878
-    - DONE rect for webview.rs and compositor: webview_renderer.rs is heavily mix-used servo#37978
-    - DONE Resizing the window may reveal extra space that can’t be scrolled servo#38089
-    - DONE --device-pixel-ratio breaks hit testing servo#38090
-    - DONE WebDriver: documents loaded with Navigate To have incorrect scrollable area servo#38093
-    - DONE servoshell: Tab bar dissapears when resizing the window servo#38255
-- vello
-    - Investigate other 2D canvas renderers in a post-Pathfinder world servo#30636
-    - Tracking issue of Vello canvas backends servo#38345
-- canvas
-    - Move canvas state handling from CanvasData (canvas paint thread) into CanvasState (script) servo#38022
-    - “We want our 2d canvas abstractions to become more general, for potential rendering of all content”
-- webdriver
-    - [WebDriver] PointerMove does not consider Global position servo#38042 <https://w3c.github.io/webdriver/#dfn-perform-a-pointer-move>
-    - [webdriver] Moving webdriver to servoshell servo#37370
-- DONE geometry
-    - SKIP Create universal utility function for conversion between Physical & Logical unit servo#37937
--->
-<!--
-- DONE canvas
-    - DONE https://github.com/servo/servo/pull/38098	(@sagudev, #38098)	canvas: Store current path only in user space (#38098)
-      canvas; see issue 38022
-    - DONE https://github.com/servo/servo/pull/38114	(@sagudev, #38114)	canvas: Move current_default_path to script CanvasState (#38114)
-      canvas; see issue 38022
-    - DONE https://github.com/servo/servo/pull/38164	(@sagudev, #38164)	canvas: Make script/canvas thread boundry mostly stateless (#38164)
-      canvas; see issue 38022
-    - DONE https://github.com/servo/servo/pull/38214	(@sagudev, #38214)	canvas: Fully stateless backend (#38214)
-      canvas; see issue 38022
-- crash
-    - https://github.com/servo/servo/pull/37959	(@Narfinger, #37959)	OHOS: Make IME more robust against errors (#37959)
-      crash; fix crash on ohos when trying to open keyboard while a system popup is open
-    - https://github.com/servo/servo/pull/38280	(@arihant2math, #38280)	script: Don't panic on IndexedDB put operation structured clone (#38280)
-      crash; fix crash when calling put() on IDBObjectStore
-    - https://github.com/servo/servo/pull/38376	(@sebsebmc, #38376)	net: Add expiry limit to cookies and prevent panics from max-age (#38376)
-      crash; fix crash when cookie has large max-age
-- DONE devtools
-    - DONE https://github.com/servo/servo/pull/37778	(@uthmaniv, #37778)	Send WillNavigate earlier during navigation startup (#37778)
-      devtools; fix requests in Network tab for new page after navigation
-    - DONE https://github.com/servo/servo/pull/37686	(@atbrakhi, @delan, @simonwuelker, @the6p4c, #37686)	Devtools: send error replies instead of ignoring messages (#37686)
-      devtools; fix whole bug class
-    - DONE https://github.com/servo/servo/pull/37906	(@uthmaniv, #37906)	Send early DevToolsHttpRequest and relocate response reporting to main_fetch (#37906)
-      devtools; cached responses (and headers?) in Network tab
-    - DONE https://github.com/servo/servo/pull/38236	(@delan, @atbrakhi, #38236)	script: Add support for creating globals in isolated compartments (#38236)
-      devtools; debugger tab
-    - DONE https://github.com/servo/servo/pull/38232	(@delan, @atbrakhi, #38232)	script: Implement jsglue traps for saveJobQueue() (#38232)
-      devtools; debugger tab
-    - SKIP https://github.com/servo/servo/pull/38330	(@atbrakhi, @delan, #38330)	devtools: Make contentType optional in source actor source responses (#38330)
-      devtools; debugger tab
-    - DONE https://github.com/servo/servo/pull/38265	(@delan, @atbrakhi, #38265)	script: Implement jsglue trap for runJobs() (#38265)
-      devtools; debugger tab
-    - SKIP https://github.com/servo/servo/pull/38359	(@delan, @atbrakhi, #38359)	devtools: Fix source contents tests and fix a race (#38359)
-      devtools; fix loading sources
-- dx
-    - https://github.com/servo/servo/pull/37953        (@jerensl, #37953)      Mach: introduce Pyrefly for Python type checking, starting with the wpt folder (#37953)
-      dx; python type checking
-    - https://github.com/servo/servo/pull/38043	(@jerensl, @mukilan, #38043)	Mach: add type check on python tidy folder (#38043)
-      dx; python type checking
-    - https://github.com/servo/servo/pull/38085	(@jerensl, #38085)	mach: Add type check on `python/servo` directory (#38085)
-      dx; mach now has python type checking
-    - https://github.com/servo/servo/pull/38335	(@jerensl, #38335)	mach: Make test-tidy line length check Unicode-aware (#38335)
-      dx; improve unicode handling for line length check in mach test-tidy
-    - https://github.com/servo/servo/pull/38324	(@jerensl, #38324)	mach: Fail on invalid argument in try_parser (#38324)
-      dx; fail loudly on bad mach try
-- DONE embedding
-    - DONE https://github.com/servo/servo/pull/37752	(@mrobinson, @Loirooriol, #37752)	libservo|compositor: Have scroll offset directionality match that of WebRender and the web (#37752)
-      embedding; breaking change due to flipping y axis in scroll offsets
-- features
-    - https://github.com/servo/servo/pull/37784	(@CarePackage17, #37784)	Enable LinuxSampler to be used on Android (#37784)
-      features; background hang monitor now works on android? try test case to assess how user-facing this is
-    - DONE https://github.com/servo/servo/pull/37880	(@tharkum, #37880)	canvas: Add OffscreenCanvas 'transferToImageBitmap' method (#37880)
-      features; transferToImageBitmap() method on OffscreenCanvas
-    - DONE https://github.com/servo/servo/pull/37803	(@janvarga, #37803)	storage: Isolate sessionStorage per top-level browsing context and copy sessionStorage when creating a new auxiliary browsing context (#37803)
-      features; sessionStorage is now isolated between tabs/webviews, and copied when opening a new tab/webview with opener
-    - DONE https://github.com/servo/servo/pull/37786	(@tharkum, #37786)	canvas: Add OffscreenCanvas 'convertToBlob' method (#37786)
-      features; convertToBlob() method on OffscreenCanvas
-    - DONE https://github.com/servo/servo/pull/37718	(@wusyong, #37718)	WebGL2: support TexImage3D (#37718)
-      features; texImage3D() method on WebGL2RenderingContext, now support three.js(!), now support texture_2d_array and texture_3d webgl2 samples
-    - DONE https://github.com/servo/servo/pull/37637	(@rayguo17, #37637)	add support for apng and webp animated image decoding (#37637)
-      features; apng and animated webp support
-    - DONE https://github.com/servo/servo/pull/38050	(@tharkum, #38050)	imagebitmap: Remove ImageBitmap from experimental web platform features (#38050)
-      features; ImageBitmap now enabled by default
-    - https://github.com/servo/servo/pull/38053        (@abdelrahman1234567, #38053)   servoshell: Send all button events to the `WebView` regardless of what button is pressed (#38053)
-      features; mouse events can now report all mouse buttons
-    - https://github.com/servo/servo/pull/37947        (@abdelrahman1234567, #37947)   script: Ensure that keyboard modifiers, screen point, and client point are set in WheelEvents (#37947)
-      features; wheel events now report keyboard modifiers, clientX, clientY, screenX, screenY
-    - DONE https://github.com/servo/servo/pull/38163	(@stevennovaryo, #38163)	script: Implement `DocumentOrShadowDOM.adoptedStylesheet` with `FrozenArray` (#38163)
-      features; experimental support for adoptedStyleSheets property on Document/ShadowRoot (--pref dom_adoptedstylesheet_enabled)
-    - DONE https://github.com/servo/servo/pull/38244	(@stevennovaryo, #38244)	script: Implement `CSSStyleSheet.replace` (#38244)
-      features; replace() method on CSSStyleSheet
-    - DONE https://github.com/servo/servo/pull/38152	(@leo030303, @xiaochengh, #38152)	Add dimension source attribute to HTMLImageElement (#38152)
-      features; now support <source width> and <source height>
-    - https://github.com/servo/servo/pull/38260        (@arihant2math, #38260) script: Implement IDBFactory.cmp (#38260)
-      features; cmp() method on IDBFactory
-    - DONE https://github.com/servo/servo/pull/38112	(@minghuaw, #38112)	Script: Implement `TextDecoderStream` (#38112)
-      features; implement TextDecoderStream
-    - DONE https://github.com/servo/servo/pull/38346	(@lumiscosity, @Loirooriol, #38346)	layout: respect `image-rendering` on border images (#38346)
-      features; ‘image-rendering’ now works on ‘border-image’ too
-- DONE geometry
-    - DONE https://github.com/servo/servo/pull/38082	(@yezhizhen, #38082)	servoshell: reduce duplication for conversion between physical/logical position/size (#38082)
-      geometry; fixing bug class (see issue 37937)
-- indexeddb
-    - DONE https://github.com/servo/servo/pull/37684	(@arihant2math, #37684)	[IndexedDB] Key ranges implementation (#37684)
-      indexeddb
-    - https://github.com/servo/servo/pull/38027	(@jdm, #38027)	IndexedDB: communicate transaction errors and async response data more precisely (#38027)
-      indexeddb
-    - https://github.com/servo/servo/pull/37682	(@arihant2math, #37682)	[IndexedDB] Adhere better to the specification for idb object store related operations (#37682)
-      indexeddb
-    - https://github.com/servo/servo/pull/38076	(@jdm, #38076)	indexeddb: Allow deleting unknown DBs. (#38076)
-      indexeddb
-    - https://github.com/servo/servo/pull/38078	(@jdm, #38078)	tests: Force a blank config directory for each WPT test run. (#38078)
-      indexeddb
-    - DONE https://github.com/servo/servo/pull/38268	(@arihant2math, @jdm, #38268)	script: implement IDBKeyRange (#38268)
-      indexeddb
-    - https://github.com/servo/servo/pull/38269	(@arihant2math, #38269)	script: Update indexeddb serialization (#38269)
-      indexeddb
-    - DONE https://github.com/servo/servo/pull/38278	(@arihant2math, #38278)	script: Implement converting values to indexeddb key ranges (#38278)
-      indexeddb
-- internals
-    - https://github.com/servo/servo/pull/37819	(@spookyvision, #37819)	bhm: Add backtrace demangling (#37819)
-      internals; background hang monitor now demangles backtraces
-- DONE layout
-    - DONE https://github.com/servo/servo/pull/37758	(@Loirooriol, #37758)	layout: Fix block SizeConstraint for replaced elements (#37758)
-      layout; fix intrinsic sizing keywords in min/max-height of replaced elements
-    - DONE https://github.com/servo/servo/pull/37814	(@Loirooriol, #37814)	layout: Only include quirks-mode.css in actual quirks mode (#37814)
-      layout; fix limited-quirks mode
-    - DONE https://github.com/servo/servo/pull/37831	(@Loirooriol, #37831)	script: Remove the quirk of flooring rowSpan by 1 (#37831)
-      layout; fix quirks mode tables
-    - DONE https://github.com/servo/servo/pull/37820	(@Loirooriol, #37820)	script: Only enforce rowSpan >= 1 in actual quirks mode (#37820)
-      layout; fix limited-quirks mode tables
-    - DONE https://github.com/servo/servo/pull/37837	(@Loirooriol, #37837)	layout: Implement `list-style-position` quirk (#37837)
-      layout; quirks mode accuracy
-    - SEE OTHER https://github.com/servo/servo/pull/37864	(@Loirooriol, #37864)	layout: Unify logic for laying out replaced and non-replaced in a BFC (#37864)
-      layout perf; fix stretch keyword in block-level replaced elements around floats / see replaced caching
-    - DONE https://github.com/servo/servo/pull/37917	(@Loirooriol, #37917)	layout: Require specific layout info in `BoxFragment::new()` (#37917)
-      layout; fix clientWidth/clientHeight in for (inline?) grids
-    - DONE https://github.com/servo/servo/pull/37981	(@Loirooriol, #37981)	layout: Lay out grid items with a consistent tentative block size (#37981)
-      layout; fix layout of grid item contents
-    - DONE https://github.com/servo/servo/pull/38007	(@leo030303, @Loirooriol, #38007)	layout: Fix bug where whitespace didn't have line decorations (#38007)
-      layout; fix underlines (and other line decorations) on whitespace, very noticeable!
-    - DONE https://github.com/servo/servo/pull/37315	(@shubhamg13, #37315)	renderer: Have the viewport meta element establish the initial zoom of new pages (#37315)
-      layout; each page has its own initial pinch zoom (vs page zoom, see #38194)
-    - DONE https://github.com/servo/servo/pull/38166	(@mrobinson, #38166)	compositor: Request reflow when doing a page zooming (#38166)
-      layout; fix reflow when doing page zoom
-    - SEE OTHER https://github.com/servo/servo/pull/38318	(@Loirooriol, #38318)	layout: Fix `depends_on_block_constraints` logic (#38318)
-      perf layout; reduced cache misses when stretching flex items / fix stretching flex items
-    - DONE https://github.com/servo/servo/pull/38290	(@Loirooriol, #38290)	layout: Include spanned gutters when laying out contents of table cell (#38290)
-      layout; fix layout of table cell contents
-- perf
-    - https://github.com/servo/servo/pull/37832	(@mrobinson, #37832)	layout: Stop using Rayon in single-threaded mode (#37832)
-      perf; more efficient in single-threaded mode
-    - DONE https://github.com/servo/servo/pull/37851	(@Loirooriol, @mrobinson, #37851)	layout: Add incremental box tree construction for table column (#37851)
-      perf; incremental layout for table column boxes
-    - DONE https://github.com/servo/servo/pull/37850	(@Loirooriol, @mrobinson, #37850)	layout: Add incremental box tree construction for table cell (#37850)
-      perf; incremental layout for table cell boxes
-    - DONE https://github.com/servo/servo/pull/37849	(@mrobinson, @Loirooriol, #37849)	layout: Add incremental box tree construction for table caption (#37849)
-      perf; incremental layout for table caption boxes
-    - DONE https://github.com/servo/servo/pull/37751	(@mrobinson, @Loirooriol, @coding-joedow, #37751)	layout: Add a first pass at incremental box tree construction (#37751)
-      perf; incremental box tree construction via layout damage
-    - https://github.com/servo/servo/pull/37864	(@Loirooriol, #37864)	layout: Unify logic for laying out replaced and non-replaced in a BFC (#37864)
-      layout perf; fix stretch keyword in block-level replaced elements around floats / see replaced caching
-    - DONE https://github.com/servo/servo/pull/37868	(@coding-joedow, #37868)	layout: Add incremental box tree construction for inline floats and abspos (#37868)
-      perf; incremental layout for inline floats and abspos
-    - DONE https://github.com/servo/servo/pull/37866	(@coding-joedow, #37866)	layout: Add incremental box tree construction for inline atomics (#37866)
-      perf; incremental layout for inline atomics
-    - DONE https://github.com/servo/servo/pull/37854	(@coding-joedow, #37854)	Layout: Continue support incremental box tree reconstruction for flex&taffy level box (#37854)
-      perf; incremental layout for flex items and grid items
-    - DONE https://github.com/servo/servo/pull/37892	(@coding-joedow, #37892)	layout: Add incremental box tree construction for inline floats and abspos (#37892)
-      perf; incremental layout for inline floats and abspos
-    - https://github.com/servo/servo/pull/37941	(@mrobinson, @Loirooriol, #37941)	layout: Store most anonymous pseudo-elements in box slots (#37941)
-      perf; supporting change for incremental layout
-    - https://github.com/servo/servo/pull/37963	(@Narfinger, #37963)	OHOS CI allow profile (#37963)
-      perf; bencher results are now split by build profile
-    - DONE https://github.com/servo/servo/pull/37897	(@Loirooriol, #37897)	layout: Unify layout logic for replaced and non-replaced floats&atomics (#37897)
-      perf; see replaced caching
-    - DONE https://github.com/servo/servo/pull/37954	(@coding-joedow, #37954)	layout: remove the finished animations to avoid to mark their dom nodes dirty (#37954)
-      perf; avoid reflow after animations
-    - DONE https://github.com/servo/servo/pull/37957	(@mrobinson, @Loirooriol, #37957)	layout: Skip box tree construction when possible (#37957)
-      perf; initial incremental box tree construction by skipping rebuild
-    - DONE https://github.com/servo/servo/pull/37962	(@Loirooriol, #37962)	layout: Unify layout logic for replaced and non-replaced flex items (#37962)
-      perf; see replaced caching
-    - https://github.com/servo/servo/pull/37938	(@Loirooriol, #37938)	layout: Move `BoxFragment`'s block-level info into a dedicated struct (#37938)
-      perf; reduced layout memory usage
-    - DONE https://github.com/servo/servo/pull/37943	(@Loirooriol, #37943)	layout: Unify layout logic for replaced and non-replaced abspos (#37943)
-      perf; see replaced caching
-    - DONE https://github.com/servo/servo/pull/37971	(@Loirooriol, #37971)	layout: Remove `IndependentNonReplacedContents` (#37971)
-      perf; we now cache the layout results of replaced boxes
-    - DONE https://github.com/servo/servo/pull/37985	(@Loirooriol, #37985)	layout: Unify layout logic for replaced and non-replaced grid items (#37985)
-      perf; see replaced caching
-    - https://github.com/servo/servo/pull/38018	(@jdm, #38018)	script: Minimize layout queries for window scroll offsets. (#38018)
-      perf; reduce layout queries when firing mouse/pointer events
-    - DONE https://github.com/servo/servo/pull/38057	(@coding-joedow, #38057)	layout: dirty parent node with NodeDamage::ContentOrHeritage when text content changed (#38057)
-      perf; more precise incremental layout for text content changes
-    - https://github.com/servo/servo/pull/38097	(@sagudev, #38097)	canvas: Use stored transform instead of querying canvas paint thread (#38097)
-      perf; reduce ipc to canvas paint thread
-    - https://github.com/servo/servo/pull/38113	(@yezhizhen, #38113)	webdriver: Reduce IPC for viewport boundary check (#38113)
-      webdriver perf; reduce ipc in webdriver pointerMove and scroll
-    - https://github.com/servo/servo/pull/38196	(@jschwe, #38196)	dom: Optimize IFrameCollection::validate (#38196)
-      perf; 30% of script time in DOM heavy scenarios
-    - DONE https://github.com/servo/servo/pull/38198	(@coding-joedow, #38198)	script: Use `NodeDamage::ContentOrHeritage` for slot changes (#38198)
-      perf; more precise incremental layout for shadow dom slot changes
-    - https://github.com/servo/servo/pull/38245	(@lumiscosity, #38245)	Remove unused resources (#38245)
-      perf; reduce binary size
-    - https://github.com/servo/servo/pull/38229	(@lumiscosity, #38229)	Optimize PNG images in resources folder (#38229)
-      perf; reduce binary size
-    - https://github.com/servo/servo/pull/38222	(@stevennovaryo, #38222)	script: Batch `scroll` event firing (#38222)
-      perf; batch `scroll` events
-    - DONE https://github.com/servo/servo/pull/38199	(@coding-joedow, #38199)	layout: optimize the propagation and cleanup of RestyleDamage (#38199)
-      perf; more precise incremental layout propagation to descendants
-    - DONE https://github.com/servo/servo/pull/38084	(@coding-joedow, #38084)	layout: Add incremental box tree construction for inline boxes (#38084)
-      perf; incremental layout for inline boxes
-    - DONE https://github.com/servo/servo/pull/38059	(@coding-joedow, #38059)	layout: Correctly marking box damage when text-related style changed (#38059)
-      perf; fix incremental layout error when ‘white-space’ changes
-    - https://github.com/servo/servo/pull/38332	(@lumiscosity, #38332)	Losslessly optimize Android resources (#38332)
-      perf; reduce binary size
-    - https://github.com/servo/servo/pull/38318	(@Loirooriol, #38318)	layout: Fix `depends_on_block_constraints` logic (#38318)
-      perf layout; reduced cache misses when stretching flex items / fix stretching flex items
-    - DONE https://github.com/servo/servo/pull/38349	(@Loirooriol, #38349)	layout: Make a couple tracing reflect what they actually trace (#38349)
-      perf; see replaced caching
-+- security
-    - https://github.com/servo/servo/pull/37965        (@TimvdLippe, #37965)   Add support for Reporting-Endpoints (#37965)
-      security
-    - https://github.com/servo/servo/pull/37970        (@TimvdLippe, @jdm, #37970)     Return correct source position for element CSP violations (#37970)
-      security
-    - https://github.com/servo/servo/pull/38002        (@TimvdLippe, #38002)   Fix reporting when only the report-only CSP header is present (#38002)
-      security
-    - https://github.com/servo/servo/pull/38033        (@TimvdLippe, #38033)   Inherit CSP for blob workers (#38033)
-      security
-    - https://github.com/servo/servo/pull/38186        (@webbeef, #38186)      Adjust CSP for top-level image documents (#38186)
-      security
-    - https://github.com/servo/servo/pull/38048        (@TimvdLippe, #38048)   Forward CSP violations from load_whole_resource to parent event loop (#38048)
-      security
-- DONE servoshell
-    - DONE https://github.com/servo/servo/pull/37794	(@MichaelMcDonnell, #37794)	Add alt-d shortcut to select address bar text (#37794)
-      servoshell
-    - DONE https://github.com/servo/servo/pull/37839	(@MichaelMcDonnell, #37839)	servoshell: Select address bar text on click (#37839)
-      servoshell
-    - DONE https://github.com/servo/servo/pull/38038	(@MichaelMcDonnell, #38038)	Add Linux .desktop file (#38038)
-      servoshell; now has a desktop file and window name, so it can be pinned to taskbar
-    - DONE https://github.com/servo/servo/pull/37982	(@yezhizhen, #37982)	servoshell: Fix scroll speed for Desktop (#37982)
-      servoshell; more ergonomic scrolling with mouse wheel
-- upgrades
-    - https://github.com/servo/servo/pull/37822	(@Loirooriol, #37822)	Upgrade Stylo to 2025-07-01 (#37822)
-      upgrades
-    - https://github.com/servo/servo/pull/37736	(@simonwuelker, #37736)	deps: Bump `html5ever` and friends to version `0.35.0` (#37736)
-      upgrades
-    - https://github.com/servo/servo/pull/38119	(@sagudev, #38119)	servoshell: Update egui to 0.32 (#38119)
-      upgrades; will help with browser menus and context menus
-    - DONE https://github.com/servo/servo/pull/38351	(@Loirooriol, #38351)	build(deps): bump Stylo to servo/stylo#215 (#38351)
-      upgrades; also mention that we fixed bustage for third-party consumers of stylo (@nicoburns, stylo#215)
-- vello
-    - https://github.com/servo/servo/pull/37630	(@sagudev, #37630)	canvas: Do not draw arc/ellipse with small sweep (#37630)
-      vello; preparing to migrate to vello for gpu-accelerated 2d canvas (see issue 30636, 38345)
-    - https://github.com/servo/servo/pull/37863	(@sagudev, #37863)	canvas: Use snapshot in canvas backends (#37863)
-      vello; more preparation for vello
-    - https://github.com/servo/servo/pull/37842	(@sagudev, #37842)	canvas: Join `Path` and `PathBuilder` into `Path` (#37842)
-      vello; more preparation for vello
-    - https://github.com/servo/servo/pull/37668	(@sagudev, @mrobinson, #37668)	canvas: Properly bound all image pattern axis by inserting clip (#37668)
-      vello; more preparation for vello
-    - https://github.com/servo/servo/pull/37967	(@sagudev, #37967)	canvas: Use wrapped `kurbo::BezPath` for path everywhere (#37967)
-      vello; path building now done in script
-    - DONE https://github.com/servo/servo/pull/36821	(@sagudev, #36821)	canvas: Add vello backend (#36821)
-      vello; initial support for gpu-accelerated 2d canvas
-    - https://github.com/servo/servo/pull/38264	(@sagudev, #38264)	canvas: Make pixel obtaining methods take &mut GenericDrawTarget (#38264)
-      vello; more preparation for vello
-    - https://github.com/servo/servo/pull/38279	(@sagudev, #38279)	canvas: Move peniko/kurbo conversions in separate file (#38279)
-      vello; more preparation for vello
-    - DONE https://github.com/servo/servo/pull/38282	(@sagudev, #38282)	canvas: Add vello_cpu backend (#38282)
-      vello; added non-gpu backend that also uses vello
-    - https://github.com/servo/servo/pull/38312	(@sagudev, #38312)	canvas: Gate raqote backend behind feature (enabled for now) (#38312)
-      vello; more preparation for vello
-    - https://github.com/servo/servo/pull/38310	(@sagudev, #38310)	canvas: Make 2D context state creation failable and use `dom_canvas_backend` pref for backend selection (#38310)
-      vello; more preparation for vello
-    - https://github.com/servo/servo/pull/38336	(@sagudev, #38336)	canvas: Use `create_similar_draw_target` for recreate (#38336)
-      vello; more preparation for vello
-- webdriver
-    - DONE https://github.com/servo/servo/pull/37783	(@yezhizhen, #37783)	[WebDriver] Implement XPath Locator Strategy (#37783)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37712	(@yezhizhen, #37712)	webdriver: Greatly improve execution speed for all tests using `SetWindowSize` (#37712)
-      webdriver; perf
-    - DONE https://github.com/servo/servo/pull/37826	(@PotatoCP, #37826)	webdriver: enable getting closed shadow root (#37826)
-      webdriver
-    - DONE https://github.com/servo/servo/pull/37498	(@PotatoCP, @sagudev, #37498)	CI: WebDriver test on try (#37498)
-      webdriver; can now run webdriver test suite with explicit mach try <wd|webdriver>
-    - DONE https://github.com/servo/servo/pull/37669	(@longvatrong111, #37669)	Move webdriver actions commands to servoshell (#37669)
-      webdriver; consistent command order / rearchitected the server to be managed by servoshell instead of libservo
-    - DONE https://github.com/servo/servo/pull/37873	(@yezhizhen, #37873)	servoshell: Set `dom_testing_html_input_element_select_files_enabled` when WebDriver is enabled (#37873)
-      webdriver; work towards running webdriver test suite
-    - https://github.com/servo/servo/pull/37867        (@pewsheen, #37867)     refactor(webdriver): move `webdriver_port` option to servoshell pref (#37867)
-      webdriver; removed `Opts::webdriver_port` from embedding api
-    - DONE https://github.com/servo/servo/pull/37908	(@PotatoCP, #37908)	Webdriver: Keyboard Action use `webview::notify_input_event` instead of directly sent to constellation (#37908)
-      webdriver; consistent command order
-    - DONE https://github.com/servo/servo/pull/37913	(@longvatrong111, #37913)	webdriver: Implement support for simple dialogs (#37913)
-      webdriver; add commands for accept alert, dismiss alert, get alert text
-    - DONE https://github.com/servo/servo/pull/37663	(@longvatrong111, @mrobinson, #37663)	webdriver: Evaluate script commands via the `WebView` API in servoshell (#37663)
-      webdriver; consistent command order
-    - DONE https://github.com/servo/servo/pull/37911	(@PotatoCP, #37911)	Webdriver: Send Keys use `webview::notify_input_event` (#37911)
-      webdriver; consistent command order
-    - https://github.com/servo/servo/pull/38058	(@yezhizhen, #38058)	script: Improve `webdriver_handler::get_element_in_view_center_point` (#38058)
-      webdriver; fix PointerMove see issue 38042
-    - https://github.com/servo/servo/pull/38095	(@yezhizhen, #38095)	webdriver: improve perform pointermove & wheel actions with more accurate coordinates (#38095)
-      webdriver; fix PointerMove see issue 38042
-    - DONE https://github.com/servo/servo/pull/37950	(@longvatrong111, @jdm, #37950)	Webdriver GoBack and GoForward commands wait for navigation complete (#37950)
-      webdriver; fix navigation on Back and Forward
-    - DONE https://github.com/servo/servo/pull/37935	(@longvatrong111, #37935)	webdriver: Element click waits for navigation complete (#37935)
-      webdriver; fix navigation on Element Click
-    - https://github.com/servo/servo/pull/38113	(@yezhizhen, #38113)	webdriver: Reduce IPC for viewport boundary check (#38113)
-      webdriver perf; reduce ipc in webdriver pointerMove and scroll
-    - DONE https://github.com/servo/servo/pull/38079	(@PotatoCP, #38079)	WebDriver: Implement some missing steps of wait for navigation to complete (#38079)
-      webdriver; fix navigation on command
-    - DONE https://github.com/servo/servo/pull/38140	(@longvatrong111, #38140)	webdriver: Implement send alert text (#38140)
-      webdriver; implement Send Alert Text command
-    - DONE https://github.com/servo/servo/pull/38142        (@yezhizhen, #38142)    webdriver chore: check browsing context existence before handling user prompt when required (#38142)
-      webdriver; user prompts
-    - DONE https://github.com/servo/servo/pull/38035	(@longvatrong111, #38035)	webdriver: Add `handle any user prompts` step for all commands (#38035)
-      webdriver; user prompts
-    - DONE https://github.com/servo/servo/pull/38160	(@yezhizhen, #38160)	WebDriver: Wait focus to complete when switching window (#38160)
-      webdriver; fix Switch To Window <https://w3c.github.io/webdriver/#switch-to-window>
-    - DONE https://github.com/servo/servo/pull/38212	(@yezhizhen, #38212)	Remove Webdriver Server's access to Constellation (#38212)
-      webdriver; consistent command order
-    - https://github.com/servo/servo/pull/38189	(@PotatoCP, #38189)	webdriver: Implement element send keys command for non-typeable form control (#38189)
-      webdriver; improve Element Send Keys
-    - DONE https://github.com/servo/servo/pull/38208	(@PotatoCP, @yezhizhen, @jdm, #38208)	webdriver: Implement element clear (#38208)
-      webdriver; implement Element Clear
-    - DONE https://github.com/servo/servo/pull/38271        (@yezhizhen, #38271)    webdriver: Implement maximize window for both headless&headed window (#38271)
-      webdriver; implement Maximize Window
-    - DONE https://github.com/servo/servo/pull/38314	(@yezhizhen, #38314)	cargo: Remove last traces of webdriver from libservo (#38314)
-      webdriver; consistent command order
-    - https://github.com/servo/servo/pull/38329	(@longvatrong111, #38329)	Implement webdriver element in view (#38329)
-      webdriver; improve Element Click
-    - DONE https://github.com/servo/servo/pull/38234	(@longvatrong111, #38234)	Rework on webdriver wait for navigation complete (#38234)
-      webdriver; fix navigation on command
-    - https://github.com/servo/servo/pull/37410	(@yezhizhen, #37410)	webdriver: Keep constellation alive and Open new top-level browsing context with new session request when none is open (#37410)
-      webdriver
-- DONE windowing
-    - DONE https://github.com/servo/servo/pull/37812	(@yezhizhen, #37812)	webdriver: Get the window position as well as the size when resolving "Get Window Rect" (#37812)
-      windowing; issue 37804
-    - DONE https://github.com/servo/servo/pull/37879	(@yezhizhen, @mrobinson, #37879)	embedder: Improve documentation for various places that talk about "available screen size" (#37879)
-      windowing; issue 37878
-    - DONE https://github.com/servo/servo/pull/37856	(@yezhizhen, #37856)	Rename original `window_resizeTo.html` to `window_resize_event.html` & Fix wrong usage of `innerHeight` & add new test (#37856)
-      windowing; issue 37824
-    - DONE https://github.com/servo/servo/pull/37848	(@yezhizhen, #37848)	servoshell: Make `fn request_resize` resize window w.r.t. outer_size accurately (#37848)
-      windowing; issue 37804
-    - DONE https://github.com/servo/servo/pull/37893	(@yezhizhen, #37893)	servoshell: Use DeviceIndependentPixel for WebDriver Rect related requests (#37893)
-      windowing; issue 37804
-    - DONE https://github.com/servo/servo/pull/37934	(@yezhizhen, #37934)	servoshell: Fix `screen_geometry` for headed_window (#37934)
-      windowing; issue 37824
-    - DONE https://github.com/servo/servo/pull/37961	(@yezhizhen, #37961)	servoshell: Consider both OS decoration width and height when resizing (#37961)
-      windowing; fix resize errors with decorations
-    - DONE https://github.com/servo/servo/pull/37960	(@yezhizhen, @mrobinson, #37960)	script: Get the window rectangle from the `WebViewDelegate` instead of via the compositor (#37960)
-      windowing; window size/position operations now go directly to embedder
-    - DONE https://github.com/servo/servo/pull/38020	(@yezhizhen, #38020)	script: Get the screen metrics from the `WebViewDelegate` instead of via the compositor (#38020)
-      windowing; screen size operations now go directly to embedder
-    - DONE https://github.com/servo/servo/pull/38110	(@yezhizhen, #38110)	doc: Add doc for compositor/webview/embedder related to window/rect/inner_size/rendering_context (#38110)
-      windowing; issues #38089, #38090, #37978, #38093
-    - DONE https://github.com/servo/servo/pull/38209        (@yezhizhen, #38209)    Implement setting position through webdriver for headed window (#38209)
-      windowing; issue 37804
-    - DONE https://github.com/servo/servo/pull/38258        (@yezhizhen, #38258)    servoshell: Respond resize with authentic result and Adjust minimum window size (#38258)
-      windowing; issue 37804
-    - DONE https://github.com/servo/servo/pull/38249        (@yezhizhen, #38249)    servoshell: Add window position for headless window (#38249)
-      windowing; issue 37804
-    - DONE https://github.com/servo/servo/pull/38174	(@yezhizhen, #38174)	servoshell: Consider window decorations when handling resize requests from web content (#38174)
-      windowing; issue 38093
-    - DONE https://github.com/servo/servo/pull/38307	(@yezhizhen, #38307)	servoshell: Remove redundant `WindowEvent::Resized` handler (#38307)
-      windowing; issue 38255
-- windows
-    - https://github.com/servo/servo/pull/37975	(@yezhizhen, @jdm, #37975)	servoshell: Enable headless event loop for Windows (#37975)
-      windows; can now run in headless mode on windows
-    - https://github.com/servo/servo/pull/38028	(@yezhizhen, #38028)	mach (Windows): make `vswhere.exe` work properly (#38028)
-      windows; fix building on windows 11
--->
-<p>Servo has smashed its record again in July, with <strong>367 pull requests</strong> landing in our nightly builds!
+  <p>Servo has smashed its record again in July, with <strong>367 pull requests</strong> landing in our nightly builds!
 This includes several new web platform features:</p>
 <ul>
-<li><strong>APNG</strong> and <strong>WebP animated images</strong>, in addition to GIF (@rayguo17, #37637)</li>
-<li><strong>&lt;source width&gt;</strong> and <strong>&lt;source height&gt;</strong> (@leo030303, @xiaochengh, #38152)</li>
-<li><strong>‘image-rendering’ property</strong> now affects <strong>‘border-image’</strong> (@lumiscosity, @Loirooriol, #38346)</li>
-<li><strong>TextDecoderStream</strong> (@minghuaw, #38112)</li>
-<li><strong>replace() method</strong> on <strong>CSSStyleSheet</strong> (@stevennovaryo, #38244)</li>
-<li><strong>texImage3D() method</strong> on <strong>WebGL2RenderingContext</strong> (@wusyong, #37718)</li>
-<li><strong>convertToBlob()</strong> and <strong>transferToImageBitmap() methods</strong> on <strong>OffscreenCanvas</strong> (@tharkum, #37786, #37880)</li>
-<li><strong>adoptedStyleSheets property</strong> on <strong>Document</strong> and <strong>ShadowRoot</strong>, with <code>--pref dom_adoptedstylesheet_enabled</code> (@stevennovaryo, #38163)</li>
-<li><strong>ImageBitmap</strong> no longer requires <code>--enable-experimental-web-platform-features</code> (@tharkum, #38050)</li>
+<li><strong>APNG</strong> and <strong>WebP animated images</strong>, in addition to GIF (<a href="https://github.com/rayguo17">@rayguo17</a>, <a href="https://github.com/servo/servo/pull/37637">#37637</a>)</li>
+<li><strong>&lt;source width&gt;</strong> and <strong>&lt;source height&gt;</strong> (<a href="https://github.com/leo030303">@leo030303</a>, <a href="https://github.com/xiaochengh">@xiaochengh</a>, <a href="https://github.com/servo/servo/pull/38152">#38152</a>)</li>
+<li><strong>‘image-rendering’ property</strong> now affects <strong>‘border-image’</strong> (<a href="https://github.com/lumiscosity">@lumiscosity</a>, <a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/38346">#38346</a>)</li>
+<li><strong>TextDecoderStream</strong> (<a href="https://github.com/minghuaw">@minghuaw</a>, <a href="https://github.com/servo/servo/pull/38112">#38112</a>)</li>
+<li><strong>replace() method</strong> on <strong>CSSStyleSheet</strong> (<a href="https://github.com/stevennovaryo">@stevennovaryo</a>, <a href="https://github.com/servo/servo/pull/38244">#38244</a>)</li>
+<li><strong>texImage3D() method</strong> on <strong>WebGL2RenderingContext</strong> (<a href="https://github.com/wusyong">@wusyong</a>, <a href="https://github.com/servo/servo/pull/37718">#37718</a>)</li>
+<li><strong>convertToBlob()</strong> and <strong>transferToImageBitmap() methods</strong> on <strong>OffscreenCanvas</strong> (<a href="https://github.com/tharkum">@tharkum</a>, <a href="https://github.com/servo/servo/pull/37786">#37786</a>, <a href="https://github.com/servo/servo/pull/37880">#37880</a>)</li>
+<li><strong>adoptedStyleSheets property</strong> on <strong>Document</strong> and <strong>ShadowRoot</strong>, with <code>--pref dom_adoptedstylesheet_enabled</code> (<a href="https://github.com/stevennovaryo">@stevennovaryo</a>, <a href="https://github.com/servo/servo/pull/38163">#38163</a>)</li>
+<li><strong>ImageBitmap</strong> no longer requires <code>--enable-experimental-web-platform-features</code> (<a href="https://github.com/tharkum">@tharkum</a>, <a href="https://github.com/servo/servo/pull/38050">#38050</a>)</li>
 </ul>
 <p>Notable changes for Servo library consumers:</p>
 <ul>
 <li>
-<p><strong>Stylo 0.6.0</strong> was released, <strong>fixing build errors</strong> caused by an undeclared dependency on <code>markupsafe</code> (@nicoburns, @delan, stylo#215, <a href="https://github.com/servo/stylo/issues/218">stylo#218</a>).
+<p><strong>Stylo 0.6.0</strong> was released, <strong>fixing build errors</strong> caused by an undeclared dependency on <code>markupsafe</code> (<a href="https://github.com/nicoburns">@nicoburns</a>, <a href="https://github.com/delan">@delan</a>, <a href="https://github.com/servo/stylo/pull/215">stylo#215</a>, <a href="https://github.com/servo/stylo/issues/218">stylo#218</a>).
 To work around this in Stylo 0.5.0, install the dependency: <code>pip install markupsafe</code></p>
 </li>
 <li>
-<p><a href="https://doc.servo.org/servo/struct.WebView.html#method.notify_scroll_event"><strong>notify_scroll_event()</strong> on WebView</a> now <strong>scrolls down as the <code>y</code> value increases</strong> (@mrobinson, @Loirooriol, #37752), consistent with the web platform.
+<p><a href="https://doc.servo.org/servo/struct.WebView.html#method.notify_scroll_event"><strong>notify_scroll_event()</strong> on WebView</a> now <strong>scrolls down as the <code>y</code> value increases</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/37752">#37752</a>), consistent with the web platform.
 This is a <strong>breaking change to the Servo API</strong>.</p>
 </li>
 </ul>
@@ -674,29 +294,29 @@ This is a <strong>breaking change to the Servo API</strong>.</p>
 <h2 id="engine-changes" tabindex="-1">Engine changes <a class="header-anchor" href="#engine-changes">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>Like many browsers, Servo has two kinds of zoom: <strong>page zoom</strong> affects the size of the viewport, while <strong>pinch zoom</strong> does not (@shubhamg13, #38194).
-<strong>Page zoom</strong> now correctly triggers reflow (@mrobinson, #38166), and <strong>pinch zoom</strong> is now reset to the viewport meta config when navigating (@shubhamg13, #37315).</p>
-<p><strong>‘text-decoration[-line]’ now applies to whitespace</strong> (@leo030303, @Loirooriol, #38007), and we’ve also fixed several layout bugs around <strong>grid item contents</strong> (@Loirooriol, #37981), <strong>table cell contents</strong> (@Loirooriol, #38290), <strong>quirks mode</strong> (@Loirooriol, #37814, #37831, #37820, #37837), <strong>clientWidth</strong> and <strong>clientHeight</strong> queries of grid layouts (@Loirooriol, #37917), and <strong>‘min-height’</strong> and <strong>‘max-height’</strong> of replaced elements (@Loirooriol, #37758).</p>
-<p>As part of our <strong>incremental layout</strong> project, we now <strong>cache the layout results</strong> of replaced boxes (@Loirooriol, #37971, #37897, #37962, #37943, #37985, #38349), <strong>avoid unnecessary reflows</strong> after animations (@coding-joedow, #37954), <strong>invalidate layouts more precisely</strong> (@coding-joedow, #38199, #38057, #38198, #38059), and we’ve added <strong>incremental box tree construction</strong> (@mrobinson, @Loirooriol, @coding-joedow, #37751, #37957) for flex and grid items (@coding-joedow, #37854), table columns, cells, and captions (@Loirooriol, @mrobinson, #37851, #37850, #37849), and a variety of inline elements (@coding-joedow, #38084, #37866, #37868, #37892).</p>
-<p>Work on <strong>IndexedDB</strong> continues, notably including support for <strong>key ranges</strong> (@arihant2math, @jdm, #38268, #37684, #38278).</p>
-<p><strong>sessionStorage</strong> is now isolated between webviews, and copied to new webviews with the same <code>opener</code> (@janvarga, #37803).</p>
+<p>Like many browsers, Servo has two kinds of zoom: <strong>page zoom</strong> affects the size of the viewport, while <strong>pinch zoom</strong> does not (<a href="https://github.com/shubhamg13">@shubhamg13</a>, <a href="https://github.com/servo/servo/pull/38194">#38194</a>).
+<strong>Page zoom</strong> now correctly triggers reflow (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/38166">#38166</a>), and <strong>pinch zoom</strong> is now reset to the viewport meta config when navigating (<a href="https://github.com/shubhamg13">@shubhamg13</a>, <a href="https://github.com/servo/servo/pull/37315">#37315</a>).</p>
+<p><strong>‘text-decoration[-line]’ now applies to whitespace</strong> (<a href="https://github.com/leo030303">@leo030303</a>, <a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/38007">#38007</a>), and we’ve also fixed several layout bugs around <strong>grid item contents</strong> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/37981">#37981</a>), <strong>table cell contents</strong> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/38290">#38290</a>), <strong>quirks mode</strong> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/37814">#37814</a>, <a href="https://github.com/servo/servo/pull/37831">#37831</a>, <a href="https://github.com/servo/servo/pull/37820">#37820</a>, <a href="https://github.com/servo/servo/pull/37837">#37837</a>), <strong>clientWidth</strong> and <strong>clientHeight</strong> queries of grid layouts (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/37917">#37917</a>), and <strong>‘min-height’</strong> and <strong>‘max-height’</strong> of replaced elements (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/37758">#37758</a>).</p>
+<p>As part of our <strong>incremental layout</strong> project, we now <strong>cache the layout results</strong> of replaced boxes (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/37971">#37971</a>, <a href="https://github.com/servo/servo/pull/37897">#37897</a>, <a href="https://github.com/servo/servo/pull/37962">#37962</a>, <a href="https://github.com/servo/servo/pull/37943">#37943</a>, <a href="https://github.com/servo/servo/pull/37985">#37985</a>, <a href="https://github.com/servo/servo/pull/38349">#38349</a>), <strong>avoid unnecessary reflows</strong> after animations (<a href="https://github.com/coding-joedow">@coding-joedow</a>, <a href="https://github.com/servo/servo/pull/37954">#37954</a>), <strong>invalidate layouts more precisely</strong> (<a href="https://github.com/coding-joedow">@coding-joedow</a>, <a href="https://github.com/servo/servo/pull/38199">#38199</a>, <a href="https://github.com/servo/servo/pull/38057">#38057</a>, <a href="https://github.com/servo/servo/pull/38198">#38198</a>, <a href="https://github.com/servo/servo/pull/38059">#38059</a>), and we’ve added <strong>incremental box tree construction</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/coding-joedow">@coding-joedow</a>, <a href="https://github.com/servo/servo/pull/37751">#37751</a>, <a href="https://github.com/servo/servo/pull/37957">#37957</a>) for flex and grid items (<a href="https://github.com/coding-joedow">@coding-joedow</a>, <a href="https://github.com/servo/servo/pull/37854">#37854</a>), table columns, cells, and captions (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/37851">#37851</a>, <a href="https://github.com/servo/servo/pull/37850">#37850</a>, <a href="https://github.com/servo/servo/pull/37849">#37849</a>), and a variety of inline elements (<a href="https://github.com/coding-joedow">@coding-joedow</a>, <a href="https://github.com/servo/servo/pull/38084">#38084</a>, <a href="https://github.com/servo/servo/pull/37866">#37866</a>, <a href="https://github.com/servo/servo/pull/37868">#37868</a>, <a href="https://github.com/servo/servo/pull/37892">#37892</a>).</p>
+<p>Work on <strong>IndexedDB</strong> continues, notably including support for <strong>key ranges</strong> (<a href="https://github.com/arihant2math">@arihant2math</a>, <a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/servo/servo/pull/38268">#38268</a>, <a href="https://github.com/servo/servo/pull/37684">#37684</a>, <a href="https://github.com/servo/servo/pull/38278">#38278</a>).</p>
+<p><strong>sessionStorage</strong> is now isolated between webviews, and copied to new webviews with the same <code>opener</code> (<a href="https://github.com/janvarga">@janvarga</a>, <a href="https://github.com/servo/servo/pull/37803">#37803</a>).</p>
 <h2 id="browser-changes" tabindex="-1">Browser changes <a class="header-anchor" href="#browser-changes">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p><strong>servoshell</strong> now has a <strong>.desktop file</strong> and <strong>window name</strong>, so you can now <strong>pin it to your taskbar</strong> on Linux (@MichaelMcDonnell, #38038).
-We’ve made it more ergonomic too, fixing both the sluggish <strong>mouse wheel</strong> and <strong>pixel-perfect trackpad scrolling</strong> and the too fast <strong>arrow key scrolling</strong> (@yezhizhen, #37982).</p>
-<p>You can now <strong>focus the location bar with Alt+<code>D</code></strong> in addition to Ctrl+<code>L</code> on non-macOS platforms (@MichaelMcDonnell, #37794), and <strong>clicking the location bar</strong> now selects the contents (@MichaelMcDonnell, #37839).</p>
-<p>When debugging Servo <a href="https://book.servo.org/hacking/using-devtools.html">with the <strong>Firefox devtools</strong></a>, you can now view requests in the <strong>Network tab</strong> both <strong>after navigating</strong> (@uthmaniv, #37778) and when <strong>responses are served from cache</strong> (@uthmaniv, #37906).
-We’re also implementing the <strong>Debugger tab</strong> (@delan, @atbrakhi, <a href="https://github.com/servo/servo/issues/36027">#36027</a>), including several changes to our script system (@delan, @atbrakhi, #38236, #38232, #38265) and fixing a whole class of bugs where devtools ends up broken (@atbrakhi, @delan, @simonwuelker, @the6p4c, #37686).</p>
+<p><strong>servoshell</strong> now has a <strong>.desktop file</strong> and <strong>window name</strong>, so you can now <strong>pin it to your taskbar</strong> on Linux (<a href="https://github.com/MichaelMcDonnell">@MichaelMcDonnell</a>, <a href="https://github.com/servo/servo/pull/38038">#38038</a>).
+We’ve made it more ergonomic too, fixing both the sluggish <strong>mouse wheel</strong> and <strong>pixel-perfect trackpad scrolling</strong> and the too fast <strong>arrow key scrolling</strong> (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/37982">#37982</a>).</p>
+<p>You can now <strong>focus the location bar with Alt+<code>D</code></strong> in addition to Ctrl+<code>L</code> on non-macOS platforms (<a href="https://github.com/MichaelMcDonnell">@MichaelMcDonnell</a>, <a href="https://github.com/servo/servo/pull/37794">#37794</a>), and <strong>clicking the location bar</strong> now selects the contents (<a href="https://github.com/MichaelMcDonnell">@MichaelMcDonnell</a>, <a href="https://github.com/servo/servo/pull/37839">#37839</a>).</p>
+<p>When debugging Servo <a href="https://book.servo.org/hacking/using-devtools.html">with the <strong>Firefox devtools</strong></a>, you can now view requests in the <strong>Network tab</strong> both <strong>after navigating</strong> (<a href="https://github.com/uthmaniv">@uthmaniv</a>, <a href="https://github.com/servo/servo/pull/37778">#37778</a>) and when <strong>responses are served from cache</strong> (<a href="https://github.com/uthmaniv">@uthmaniv</a>, <a href="https://github.com/servo/servo/pull/37906">#37906</a>).
+We’re also implementing the <strong>Debugger tab</strong> (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/atbrakhi">@atbrakhi</a>, <a href="https://github.com/servo/servo/issues/36027">#36027</a>), including several changes to our script system (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/atbrakhi">@atbrakhi</a>, <a href="https://github.com/servo/servo/pull/38236">#38236</a>, <a href="https://github.com/servo/servo/pull/38232">#38232</a>, <a href="https://github.com/servo/servo/pull/38265">#38265</a>) and fixing a whole class of bugs where devtools ends up broken (<a href="https://github.com/atbrakhi">@atbrakhi</a>, <a href="https://github.com/delan">@delan</a>, <a href="https://github.com/simonwuelker">@simonwuelker</a>, <a href="https://github.com/the6p4c">@the6p4c</a>, <a href="https://github.com/servo/servo/pull/37686">#37686</a>).</p>
 <h2 id="webdriver-changes" tabindex="-1">WebDriver changes <a class="header-anchor" href="#webdriver-changes">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p><strong>WebDriver automation</strong> support now <strong>goes through servoshell</strong>, rather than through libservo internally, ensuring that WebDriver commands are consistently executed in the correct order (@longvatrong111, @PotatoCP, @mrobinson, @yezhizhen, #37669, #37908, #37663, #37911, #38212, #38314).
-We’ve also fixed race conditions in the <strong>Back</strong>, <strong>Forward</strong> (@longvatrong111, @jdm, #37950), <strong>Element Click</strong> (@longvatrong111, #37935), <strong>Switch To Window</strong> (@yezhizhen, #38160), and other commands (@PotatoCP, @longvatrong111, #38079, #38234).</p>
-<p>We’ve added support for the <strong>Dismiss Alert</strong>, <strong>Accept Alert</strong>, <strong>Get Alert Text</strong> (@longvatrong111, #37913), and <strong>Send Alert Text</strong> commands for <a href="https://html.spec.whatwg.org/multipage/#simple-dialogs"><strong>simple dialogs</strong></a> (@longvatrong111, #38140, #38035, #38142), as well as the <strong>Maximize Window</strong> (@yezhizhen, #38271) and <strong>Element Clear</strong> commands (@PotatoCP, @yezhizhen, @jdm, #38208).
-<a href="https://w3c.github.io/webdriver/#element-retrieval"><strong>Find Element</strong> family of commands</a> can now use the <strong><code>&quot;xpath&quot;</code> location strategy</strong> (@yezhizhen, #37783).
-<strong>Get Element Shadow Root</strong> commands can now interact with <strong>closed shadow roots</strong> (@PotatoCP, #37826).</p>
-<p>You can now <strong>run the WebDriver test suite</strong> in CI with <code>mach try wd</code> or <code>mach try webdriver</code> (@PotatoCP, @sagudev, @yezhizhen, #37498, #37873, #37712).</p>
+<p><strong>WebDriver automation</strong> support now <strong>goes through servoshell</strong>, rather than through libservo internally, ensuring that WebDriver commands are consistently executed in the correct order (<a href="https://github.com/longvatrong111">@longvatrong111</a>, <a href="https://github.com/PotatoCP">@PotatoCP</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/37669">#37669</a>, <a href="https://github.com/servo/servo/pull/37908">#37908</a>, <a href="https://github.com/servo/servo/pull/37663">#37663</a>, <a href="https://github.com/servo/servo/pull/37911">#37911</a>, <a href="https://github.com/servo/servo/pull/38212">#38212</a>, <a href="https://github.com/servo/servo/pull/38314">#38314</a>).
+We’ve also fixed race conditions in the <strong>Back</strong>, <strong>Forward</strong> (<a href="https://github.com/longvatrong111">@longvatrong111</a>, <a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/servo/servo/pull/37950">#37950</a>), <strong>Element Click</strong> (<a href="https://github.com/longvatrong111">@longvatrong111</a>, <a href="https://github.com/servo/servo/pull/37935">#37935</a>), <strong>Switch To Window</strong> (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/38160">#38160</a>), and other commands (<a href="https://github.com/PotatoCP">@PotatoCP</a>, <a href="https://github.com/longvatrong111">@longvatrong111</a>, <a href="https://github.com/servo/servo/pull/38079">#38079</a>, <a href="https://github.com/servo/servo/pull/38234">#38234</a>).</p>
+<p>We’ve added support for the <strong>Dismiss Alert</strong>, <strong>Accept Alert</strong>, <strong>Get Alert Text</strong> (<a href="https://github.com/longvatrong111">@longvatrong111</a>, <a href="https://github.com/servo/servo/pull/37913">#37913</a>), and <strong>Send Alert Text</strong> commands for <a href="https://html.spec.whatwg.org/multipage/#simple-dialogs"><strong>simple dialogs</strong></a> (<a href="https://github.com/longvatrong111">@longvatrong111</a>, <a href="https://github.com/servo/servo/pull/38140">#38140</a>, <a href="https://github.com/servo/servo/pull/38035">#38035</a>, <a href="https://github.com/servo/servo/pull/38142">#38142</a>), as well as the <strong>Maximize Window</strong> (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/38271">#38271</a>) and <strong>Element Clear</strong> commands (<a href="https://github.com/PotatoCP">@PotatoCP</a>, <a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/servo/servo/pull/38208">#38208</a>).
+<a href="https://w3c.github.io/webdriver/#element-retrieval"><strong>Find Element</strong> family of commands</a> can now use the <strong><code>&quot;xpath&quot;</code> location strategy</strong> (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/37783">#37783</a>).
+<strong>Get Element Shadow Root</strong> commands can now interact with <strong>closed shadow roots</strong> (<a href="https://github.com/PotatoCP">@PotatoCP</a>, <a href="https://github.com/servo/servo/pull/37826">#37826</a>).</p>
+<p>You can now <strong>run the WebDriver test suite</strong> in CI with <code>mach try wd</code> or <code>mach try webdriver</code> (<a href="https://github.com/PotatoCP">@PotatoCP</a>, <a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/37498">#37498</a>, <a href="https://github.com/servo/servo/pull/37873">#37873</a>, <a href="https://github.com/servo/servo/pull/37712">#37712</a>).</p>
 <h2 id="2d-graphics" tabindex="-1">2D graphics <a class="header-anchor" href="#2d-graphics">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -706,13 +326,13 @@ But the <strong>general-purpose 2D graphics</strong> routines that power Servo�
 <strong>WebRender</strong> does one thing and does it well: rasterise the layouts of the web, really fast, by <a href="https://hacks.mozilla.org/2017/10/the-whole-web-at-maximum-fps-how-webrender-gets-rid-of-jank/">using the GPU as much as possible</a>.
 Font rendering and SVG rendering both involve rasterising arbitrary paths, which currently has to be done outside WebRender, and PDF output is out of scope entirely.</p>
 <p>The more code we can share between these tasks, the better we can make that code, and the smaller we can make Servo’s binary sizes (<a href="https://github.com/servo/servo/issues/38022">#38022</a>).
-We’ve started by moving 2D-&lt;canvas&gt;-specific state out of the <code>canvas</code> crate (@sagudev, #38098, #38114, #38164, #38214), which has in turn allowed us to modernise it with <strong>new backends based on <a href="https://github.com/linebender/vello">Vello</a></strong> (@EnnuiL, @sagudev, <a href="https://github.com/servo/servo/issues/30636">#30636</a>, <a href="https://github.com/servo/servo/issues/38345">#38345</a>):</p>
+We’ve started by moving 2D-&lt;canvas&gt;-specific state out of the <code>canvas</code> crate (<a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/servo/servo/pull/38098">#38098</a>, <a href="https://github.com/servo/servo/pull/38114">#38114</a>, <a href="https://github.com/servo/servo/pull/38164">#38164</a>, <a href="https://github.com/servo/servo/pull/38214">#38214</a>), which has in turn allowed us to modernise it with <strong>new backends based on <a href="https://github.com/linebender/vello">Vello</a></strong> (<a href="https://github.com/EnnuiL">@EnnuiL</a>, <a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/servo/servo/issues/30636">#30636</a>, <a href="https://github.com/servo/servo/issues/38345">#38345</a>):</p>
 <ul>
 <li>
-<p>a Vello GPU-based backend (@sagudev, #36821), currently slower than the default backend; to use it, build Servo with <code>--features vello</code> and enable it with <code>--pref dom_canvas_vello_enabled</code></p>
+<p>a Vello GPU-based backend (<a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/servo/servo/pull/36821">#36821</a>), currently slower than the default backend; to use it, build Servo with <code>--features vello</code> and enable it with <code>--pref dom_canvas_vello_enabled</code></p>
 </li>
 <li>
-<p>a Vello CPU-based backend (@sagudev, #38282), <strong>already faster than the default backend</strong>; to use it, build Servo with <code>--features vello_cpu</code> and enable it with <code>--pref dom_canvas_vello_cpu_enabled</code></p>
+<p>a Vello CPU-based backend (<a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/servo/servo/pull/38282">#38282</a>), <strong>already faster than the default backend</strong>; to use it, build Servo with <code>--features vello_cpu</code> and enable it with <code>--pref dom_canvas_vello_cpu_enabled</code></p>
 </li>
 </ul>
 <h2 id="what-is-a-pixel%3F" tabindex="-1">What is a pixel? <a class="header-anchor" href="#what-is-a-pixel%3F">
@@ -722,8 +342,8 @@ We’ve started by moving 2D-&lt;canvas&gt;-specific state out of the <code>canv
 Symptoms of these bugs include <strong>bad hit testing</strong> (e.g. links that can’t be clicked), <strong>inability to scroll</strong> to the end of the page, or <strong>graphical glitches</strong> like disappearing browser UI or black bars.</p>
 <p>Windows rarely take up the whole screen, viewports rarely take up the whole window due to window decorations, and when different units come into play, like CSS <code>px</code> vs device pixels, a more systematic approach is needed.
 We built <a href="https://docs.rs/euclid/0.22.11/euclid/"><strong>euclid</strong></a> to solve these problems in a strongly typed way within Servo, but beyond the viewport, we need to convert between euclid types and the geometry types provided by the embedder, the toolkit, the platform, or WebDriver, which creates opportunities for errors.</p>
-<p>Embedders are now the single source of truth for <strong>window rects</strong> and <strong>screen sizes</strong> (@yezhizhen, @mrobinson, #37960, #38020), and we’ve fixed incorrect coordinate handling in <a href="https://w3c.github.io/webdriver/#get-window-rect"><strong>Get Window Rect</strong></a>, <a href="https://w3c.github.io/webdriver/#set-window-rect"><strong>Set Window Rect</strong></a> (@yezhizhen, #37812, #37893, #38209, #38258, #38249), <strong>resizeTo()</strong> (@yezhizhen, #37848), <strong>screenX</strong>, <strong>screenY</strong>, <strong>screenLeft</strong>, <strong>screenTop</strong> (@yezhizhen, #37934), and in <strong>servoshell</strong> (@yezhizhen, #37961, #38174, #38307, #38082).
-We’ve also improved the Web Platform Tests (@yezhizhen, #37856) and clarified our docs (@yezhizhen, @mrobinson, #37879, #38110) in these areas.</p>
+<p>Embedders are now the single source of truth for <strong>window rects</strong> and <strong>screen sizes</strong> (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/37960">#37960</a>, <a href="https://github.com/servo/servo/pull/38020">#38020</a>), and we’ve fixed incorrect coordinate handling in <a href="https://w3c.github.io/webdriver/#get-window-rect"><strong>Get Window Rect</strong></a>, <a href="https://w3c.github.io/webdriver/#set-window-rect"><strong>Set Window Rect</strong></a> (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/37812">#37812</a>, <a href="https://github.com/servo/servo/pull/37893">#37893</a>, <a href="https://github.com/servo/servo/pull/38209">#38209</a>, <a href="https://github.com/servo/servo/pull/38258">#38258</a>, <a href="https://github.com/servo/servo/pull/38249">#38249</a>), <strong>resizeTo()</strong> (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/37848">#37848</a>), <strong>screenX</strong>, <strong>screenY</strong>, <strong>screenLeft</strong>, <strong>screenTop</strong> (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/37934">#37934</a>), and in <strong>servoshell</strong> (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/37961">#37961</a>, <a href="https://github.com/servo/servo/pull/38174">#38174</a>, <a href="https://github.com/servo/servo/pull/38307">#38307</a>, <a href="https://github.com/servo/servo/pull/38082">#38082</a>).
+We’ve also improved the Web Platform Tests (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/servo/servo/pull/37856">#37856</a>) and clarified our docs (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/37879">#37879</a>, <a href="https://github.com/servo/servo/pull/38110">#38110</a>) in these areas.</p>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
