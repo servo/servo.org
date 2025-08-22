@@ -118,7 +118,7 @@ categories:
     - DONE https://github.com/servo/servo/pull/38082	(@yezhizhen, #38082)	servoshell: reduce duplication for conversion between physical/logical position/size (#38082)
       geometry; fixing bug class (see issue 37937)
 - indexeddb
-    - https://github.com/servo/servo/pull/37684	(@arihant2math, #37684)	[IndexedDB] Key ranges implementation (#37684)
+    - DONE https://github.com/servo/servo/pull/37684	(@arihant2math, #37684)	[IndexedDB] Key ranges implementation (#37684)
       indexeddb
     - https://github.com/servo/servo/pull/38027	(@jdm, #38027)	IndexedDB: communicate transaction errors and async response data more precisely (#38027)
       indexeddb
@@ -128,11 +128,11 @@ categories:
       indexeddb
     - https://github.com/servo/servo/pull/38078	(@jdm, #38078)	tests: Force a blank config directory for each WPT test run. (#38078)
       indexeddb
-    - https://github.com/servo/servo/pull/38268	(@arihant2math, @jdm, #38268)	script: implement IDBKeyRange (#38268)
+    - DONE https://github.com/servo/servo/pull/38268	(@arihant2math, @jdm, #38268)	script: implement IDBKeyRange (#38268)
       indexeddb
     - https://github.com/servo/servo/pull/38269	(@arihant2math, #38269)	script: Update indexeddb serialization (#38269)
       indexeddb
-    - https://github.com/servo/servo/pull/38278	(@arihant2math, #38278)	script: Implement converting values to indexeddb key ranges (#38278)
+    - DONE https://github.com/servo/servo/pull/38278	(@arihant2math, #38278)	script: Implement converting values to indexeddb key ranges (#38278)
       indexeddb
 - internals
     - https://github.com/servo/servo/pull/37819	(@spookyvision, #37819)	bhm: Add backtrace demangling (#37819)
@@ -401,10 +401,12 @@ This includes several new web platform features:
 - **adoptedStyleSheets property** on **Document** and **ShadowRoot**, with `--pref dom_adoptedstylesheet_enabled` (@stevennovaryo, #38163)
 - **ImageBitmap** no longer requires `--enable-experimental-web-platform-features` (@tharkum, #38050)
 
-**sessionStorage** is now isolated between webviews, and copied to new webviews with the same `opener` (@janvarga, #37803).
-
 **Stylo 0.6.0** was released, **fixing build errors** caused by an undeclared dependency on `markupsafe` (@nicoburns, @delan, stylo#215, [stylo#218](https://github.com/servo/stylo/issues/218)).
 To work around this in Stylo 0.5.0, install the dependency: `pip install markupsafe`
+
+**sessionStorage** is now isolated between webviews, and copied to new webviews with the same `opener` (@janvarga, #37803).
+
+Work on **IndexedDB** continues, notably including support for **key ranges** (@arihant2math, @jdm, #38268, #37684, #38278).
 
 <figure>
   <details style="position:relative">
