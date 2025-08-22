@@ -275,6 +275,13 @@ To avoid false positives, be sure to step through each replacement rather than u
 - Replace ` ([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1#$2](https://github.com/servo/$1/pull/$2)`
 - Replace ` ([0-9A-Za-z_.-]+)/([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1/$2#$3](https://github.com/$1/$2/pull/$3)`
 
+Or in vim:
+
+- `:%s/\v[@]([0-9A-Za-z_.-]+)/[@\1](https:\/\/github.com\/\1)/gc`
+- `:%s/\v #([0-9]+)/ [#\1](https:\/\/github.com\/servo\/servo\/pull\/\1)/gc`
+- `:%s/\v ([0-9A-Za-z_.-]+)#([0-9]+)/ [\1#\2](https:\/\/github.com\/servo\/\1\/pull\/\2)/gc`
+- `:%s/\v ([0-9A-Za-z_.-]+)\/([0-9A-Za-z_.-]+)#([0-9]+)/ [\1\/\2#\3](https:\/\/github.com\/\1\/\2\/pull\/\3)/gc`
+
 ## How to calculate monthly recurring donations
 
 OpenCollective:
@@ -315,12 +322,6 @@ centsPerMonth += $$("table tbody tr")
 ```
 - After running it on every page, the result is USD cents/month
 
-LFX:
-
-- Go to <https://crowdfunding.lfx.linuxfoundation.org/projects/e98e012f-479e-45d0-8781-4d7f616baa9d/financial>
-    - You may need to open it in private browsing to avoid getting a 404, not sure why
-- Manually add up the amounts for one month, stopping when you see the same donor repeated
-
 thanks.dev:
 
 - Go to <https://thanks.dev/>
@@ -328,6 +329,34 @@ thanks.dev:
 - Go to <https://thanks.dev/dashboard>
 - Click **For maintainers**
 - The number of donors is in “You currently have X donors.”
+- If possible, make a payout: click **payouts**, click **withdraw**, click **withdraw**
+- Click **income**, make sure the &lt;select> is set to **gh/servo**
+- Run this code in devtools, changing `Jul 25` to the **date** column text for last month:
+```js
+monthText = "Jul 25";
+columnHeadings = [...document.querySelectorAll("div")]
+    .filter(div => div.textContent == "amount")
+    .flatMap(div => [...div.parentNode.childNodes]);
+if (new Set(columnHeadings.map(th => th.parentNode)).size != 1)
+    throw new Error("Unexpected columnHeadings values");
+headingRow = columnHeadings[0].parentNode;
+// The parent is actually the whole page content area, not just the table >:(
+contentArea = headingRow.parentNode;
+dataRowStart = [...contentArea.childNodes].indexOf(headingRow) + 1;
+dataRowEnd = [...contentArea.childNodes].length - 1;  // Total row (fragile?)
+dataRows = [...contentArea.childNodes].slice(dataRowStart, dataRowEnd);
+if (!dataRows.every(tr => tr.childNodes.length == columnHeadings.length))
+    throw new Error("Unexpected table structure");
+columnIndices = new Map(columnHeadings.map((th,i) => [th.textContent, i]));
+getValue = (tr,columnName) => tr.childNodes[columnIndices.get(columnName)].textContent;
+dataRows
+    .filter(tr => getValue(tr, "date").endsWith(` ${monthText}`))
+    .map(tr => getValue(tr, "amount"))
+    .filter(amount => amount != "< $0.01")
+    .map(amount => parseInt(amount.match(/^[$]([0-9]+[.][0-9][0-9])$/)[1].replace(".","")))
+    .reduce((p, q) => p + q)
+```
+- The result is USD cents/month
 
 ## Triaging commits in nightlies for monthly updates
 
@@ -373,6 +402,8 @@ $ tools/list-commits-by-nightly.sh ~/code/servo tools/pulls-2025-01-2025-02.json
 **TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time. Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
 
 ## Hints for writing about changes
+
+**Focus on the web-facing impact,** for web platform features. In other words, changes to web platform features should be described in terms of how they’re observable from the platform. When in doubt, check if it exists on [MDN](https://developer.mozilla.org/en-US/docs/) or check the spec. For example, [servo#38163](https://github.com/servo/servo/pull/38163) says “DocumentOrShadowDOM”, but [DocumentOrShadowRoot](https://dom.spec.whatwg.org/#documentorshadowroot) is a mixin included by [Document](https://dom.spec.whatwg.org/#document) and [ShadowRoot](https://dom.spec.whatwg.org/#shadowroot), so we should mention those interfaces, not the mixin ([July 2025](https://servo.org/blog/2025/08/15/this-month-in-servo/)).
 
 **Always check the correct names of people and API features.** People like it when their names are spelled correctly, of course, but sometimes authors refer to API features by incorrect names. When in doubt, check the spec. For example, [servo#32642](https://github.com/servo/servo/pull/32642) says “ShaderCompilationInfo” in the title, but the interface is actually [GPUCompilationInfo](https://developer.mozilla.org/en-US/docs/Web/API/GPUCompilationInfo), returned by the [getCompilationInfo() method on GPUShaderModule](https://developer.mozilla.org/en-US/docs/Web/API/GPUShaderModule/getCompilationInfo) ([July 2024](https://servo.org/blog/2024/07/31/this-month-in-servo/)).
 
