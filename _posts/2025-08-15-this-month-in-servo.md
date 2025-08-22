@@ -277,13 +277,13 @@ categories:
       vello; more preparation for vello
     - https://github.com/servo/servo/pull/37967	(@sagudev, #37967)	canvas: Use wrapped `kurbo::BezPath` for path everywhere (#37967)
       vello; path building now done in script
-    - https://github.com/servo/servo/pull/36821	(@sagudev, #36821)	canvas: Add vello backend (#36821)
+    - DONE https://github.com/servo/servo/pull/36821	(@sagudev, #36821)	canvas: Add vello backend (#36821)
       vello; initial support for gpu-accelerated 2d canvas
     - https://github.com/servo/servo/pull/38264	(@sagudev, #38264)	canvas: Make pixel obtaining methods take &mut GenericDrawTarget (#38264)
       vello; more preparation for vello
     - https://github.com/servo/servo/pull/38279	(@sagudev, #38279)	canvas: Move peniko/kurbo conversions in separate file (#38279)
       vello; more preparation for vello
-    - https://github.com/servo/servo/pull/38282	(@sagudev, #38282)	canvas: Add vello_cpu backend (#38282)
+    - DONE https://github.com/servo/servo/pull/38282	(@sagudev, #38282)	canvas: Add vello_cpu backend (#38282)
       vello; added non-gpu backend that also uses vello
     - https://github.com/servo/servo/pull/38312	(@sagudev, #38312)	canvas: Gate raqote backend behind feature (enabled for now) (#38312)
       vello; more preparation for vello
@@ -460,9 +460,11 @@ Those features have one thing in common: they require things that WebRender can�
 Font rendering and SVG rendering both involve rasterising arbitrary paths, which currently has to be done outside WebRender, and PDF output is out of scope entirely.
 
 The more code we can share between these tasks, the better we can make that code, and the smaller we can make Servo’s binary sizes ([#38022](https://github.com/servo/servo/issues/38022)).
-We’ve started by moving 2D-&lt;canvas>-specific state out of the `canvas` crate (@sagudev, #38098, #38114, #38164, #38214), which has in turn allowed us to modernise it with **new backends based on [Vello](https://github.com/linebender/vello)** (@EnnuiL, @sagudev, [#30636](https://github.com/servo/servo/issues/30636), [#38345](https://github.com/servo/servo/issues/38345)).
+We’ve started by moving 2D-&lt;canvas>-specific state out of the `canvas` crate (@sagudev, #38098, #38114, #38164, #38214), which has in turn allowed us to modernise it with **new backends based on [Vello](https://github.com/linebender/vello)** (@EnnuiL, @sagudev, [#30636](https://github.com/servo/servo/issues/30636), [#38345](https://github.com/servo/servo/issues/38345)):
 
-<!-- TODO: write about vello patches -->
+- a Vello GPU-based backend (@sagudev, #36821), currently slower than the default backend; to use it, build Servo with `--features vello` and enable it with `--pref dom_canvas_vello_enabled`
+
+- a Vello CPU-based backend (@sagudev, #38282), **already faster than the default backend**; to use it, build Servo with `--features vello_cpu` and enable it with `--pref dom_canvas_vello_cpu_enabled`
 
 ## What is a pixel?
 
