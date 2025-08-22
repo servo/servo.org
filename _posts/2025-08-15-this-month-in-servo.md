@@ -52,22 +52,22 @@ categories:
       crash; fix crash when calling put() on IDBObjectStore
     - https://github.com/servo/servo/pull/38376	(@sebsebmc, #38376)	net: Add expiry limit to cookies and prevent panics from max-age (#38376)
       crash; fix crash when cookie has large max-age
-- devtools
-    - https://github.com/servo/servo/pull/37778	(@uthmaniv, #37778)	Send WillNavigate earlier during navigation startup (#37778)
+- DONE devtools
+    - DONE https://github.com/servo/servo/pull/37778	(@uthmaniv, #37778)	Send WillNavigate earlier during navigation startup (#37778)
       devtools; fix requests in Network tab for new page after navigation
-    - https://github.com/servo/servo/pull/37686	(@atbrakhi, @delan, @simonwuelker, @the6p4c, #37686)	Devtools: send error replies instead of ignoring messages (#37686)
+    - DONE https://github.com/servo/servo/pull/37686	(@atbrakhi, @delan, @simonwuelker, @the6p4c, #37686)	Devtools: send error replies instead of ignoring messages (#37686)
       devtools; fix whole bug class
-    - https://github.com/servo/servo/pull/37906	(@uthmaniv, #37906)	Send early DevToolsHttpRequest and relocate response reporting to main_fetch (#37906)
+    - DONE https://github.com/servo/servo/pull/37906	(@uthmaniv, #37906)	Send early DevToolsHttpRequest and relocate response reporting to main_fetch (#37906)
       devtools; cached responses (and headers?) in Network tab
-    - https://github.com/servo/servo/pull/38236	(@delan, @atbrakhi, #38236)	script: Add support for creating globals in isolated compartments (#38236)
+    - DONE https://github.com/servo/servo/pull/38236	(@delan, @atbrakhi, #38236)	script: Add support for creating globals in isolated compartments (#38236)
       devtools; debugger tab
-    - https://github.com/servo/servo/pull/38232	(@delan, @atbrakhi, #38232)	script: Implement jsglue traps for saveJobQueue() (#38232)
+    - DONE https://github.com/servo/servo/pull/38232	(@delan, @atbrakhi, #38232)	script: Implement jsglue traps for saveJobQueue() (#38232)
       devtools; debugger tab
-    - https://github.com/servo/servo/pull/38330	(@atbrakhi, @delan, #38330)	devtools: Make contentType optional in source actor source responses (#38330)
+    - SKIP https://github.com/servo/servo/pull/38330	(@atbrakhi, @delan, #38330)	devtools: Make contentType optional in source actor source responses (#38330)
       devtools; debugger tab
-    - https://github.com/servo/servo/pull/38265	(@delan, @atbrakhi, #38265)	script: Implement jsglue trap for runJobs() (#38265)
+    - DONE https://github.com/servo/servo/pull/38265	(@delan, @atbrakhi, #38265)	script: Implement jsglue trap for runJobs() (#38265)
       devtools; debugger tab
-    - https://github.com/servo/servo/pull/38359	(@delan, @atbrakhi, #38359)	devtools: Fix source contents tests and fix a race (#38359)
+    - SKIP https://github.com/servo/servo/pull/38359	(@delan, @atbrakhi, #38359)	devtools: Fix source contents tests and fix a race (#38359)
       devtools; fix loading sources
 - dx
     - https://github.com/servo/servo/pull/37953        (@jerensl, #37953)      Mach: introduce Pyrefly for Python type checking, starting with the wpt folder (#37953)
@@ -430,6 +430,9 @@ As part of our **incremental layout** project, we now **cache the layout results
 We’ve made it more ergonomic too, fixing both the sluggish **mouse wheel** and **pixel-perfect trackpad scrolling** and the too fast **arrow key scrolling** (@yezhizhen, #37982).
 
 You can now **focus the location bar with Alt+`D`** in addition to Ctrl+`L` on non-macOS platforms (@MichaelMcDonnell, #37794), and **clicking the location bar** now selects the contents (@MichaelMcDonnell, #37839).
+
+When debugging Servo [with the **Firefox devtools**](https://book.servo.org/hacking/using-devtools.html), you can now view requests in the **Network tab** both **after navigating** (@uthmaniv, #37778) and when **responses are served from cache** (@uthmaniv, #37906).
+We’re also implementing the **Debugger tab** (@delan, @atbrakhi, [#36027](https://github.com/servo/servo/issues/36027)), including several changes to our script system (@delan, @atbrakhi, #38236, #38232, #38265) and fixing a whole class of bugs where devtools ends up broken (@atbrakhi, @delan, @simonwuelker, @the6p4c, #37686).
 
 ## WebDriver changes
 
