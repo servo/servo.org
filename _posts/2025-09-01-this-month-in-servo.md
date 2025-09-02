@@ -7,6 +7,9 @@ summary:    Who even knows?
 categories:
 ---
 
+Another month, another record number of pull requests merged!
+August flew by, and with it came **452 pull requests** from Servo contributors.
+
 <style>
     ._correction {
         max-width: 33em;
