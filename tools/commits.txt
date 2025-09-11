@@ -620,10 +620,11 @@
     The problem was that when trying with a different inline size, the intrinsic block size can change, but we were
     using the cached final block size from the previous attempt.
     Testing: Adding new test Fixes: #38365
-https://github.com/servo/servo/pull/38024	(@Taym95, #38024)	Add AsHandleValue trait to Heap<Value> and make Heap values rooted (#38024)
+-https://github.com/servo/servo/pull/38024	(@Taym95, #38024)	Add AsHandleValue trait to Heap<Value> and make Heap values rooted (#38024)
     Encapsulates the unsafe conversion from Heap<Value> to HandleValue<'a>, and reducing repetitive unsafe code at call.
     fix #37258
-https://github.com/servo/servo/pull/38431	(@mrobinson, @Loirooriol, #38431)	script: Unify script-based "update the rendering" and throttle it to 60 FPS (#38431)
++https://github.com/servo/servo/pull/38431	(@mrobinson, @Loirooriol, #38431)	script: Unify script-based "update the rendering" and throttle it to 60 FPS (#38431)
+    performance
     Instead of running "update the rendering" at every IPC message, only run it when a timeout has occured in script. In
     addition, avoid updating the rendering if a rendering update isn't necessary. This should greatly reduce the amount
     of processing that has to happen in script.
@@ -639,13 +640,15 @@ https://github.com/servo/servo/pull/38431	(@mrobinson, @Loirooriol, #38431)	scri
     Followup changes will seek to simplify the way that ScriptThread-driven animation timeouts happen even simpler.
     Testing: In general, this should not change testable behavior so much, though it does seem to fix one test.  The
     main improvement here should be that the ScriptThread does less work.
-https://github.com/servo/servo/pull/38461	(@leo030303, #38461)	Servoshell: Update `Window::inner_size` on `WindowEvent::Resized` (fix resize bug) (#38461)
++https://github.com/servo/servo/pull/38461	(@leo030303, #38461)	Servoshell: Update `Window::inner_size` on `WindowEvent::Resized` (fix resize bug) (#38461)
+    servoshell
     Just adds back a line that was omitted when a different commit was reverted, see the issue for details, I've tested
     on Gnome Wayland with Fedora 42 and the bug is fixed
     Fixes: https://github.com/servo/servo/issues/38441 cc @yezhizhen
-https://github.com/servo/servo/pull/38455	(@leo030303, #38455)	Add can_gc to HTMLDocument NamedGetter (#38455)
+-https://github.com/servo/servo/pull/38455	(@leo030303, #38455)	Add can_gc to HTMLDocument NamedGetter (#38455)
     Just fixing something missed on my last PR https://github.com/servo/servo/pull/38433#discussion_r2250744925
-https://github.com/servo/servo/pull/38436	(@euclid.ye@huawei.com, #38436)	webdriver: Improve "element click" by using container + Upgrade outdated test (#38436)
++https://github.com/servo/servo/pull/38436	(@euclid.ye@huawei.com, #38436)	webdriver: Improve "element click" by using container + Upgrade outdated test (#38436)
+    webdriver
     - According to
     [spec](https://w3c.github.io/webdriver/#ref-for-dfn-in-view-3), we should use container instead of element itself to
     determine "in-view".
@@ -1636,7 +1639,8 @@ https://github.com/servo/servo/pull/38436	(@euclid.ye@huawei.com, #38436)	webdri
     Testing: Currently we do not have good tests for verifying the behavior of input events, but WebDriver tests should
     cover this. Fixes: This is part of #37932. Fixes: #26608. Fixes: #25282. Fixes: #38090.
     Co-authored-by: kongbai1996 <1782765876@qq.com>
-https://github.com/servo/servo/pull/38496	(@sagudev, #38496)	canvas: pop many clips on restore (#38496)
++https://github.com/servo/servo/pull/38496	(@sagudev, #38496)	canvas: pop many clips on restore (#38496)
+    canvas
     canvas
     When restoring context/state we need to pop all clips from current state, before we just poped one (even if there
     was none).
@@ -2126,7 +2130,7 @@ https://github.com/servo/servo/pull/38496	(@sagudev, #38496)	canvas: pop many cl
     scenarios that can be triggered in `xml5ever` that are not IO errors and the xml_serialize method simply serializes
     to a String buffer.
     [1]: https://github.com/servo/servo/actions/runs/16824267959/job/47657275606l
-https://github.com/servo/servo/pull/38511	(@jerensl, #38511)	mach(test-tidy): Make wpt lint logic `servo-tidy.toml` and optimize checking for changed files  (#38511)
+-https://github.com/servo/servo/pull/38511	(@jerensl, #38511)	mach(test-tidy): Make wpt lint logic `servo-tidy.toml` and optimize checking for changed files  (#38511)
     Fix wpt lint logic to respect servo-tidy.toml ignores and --all flag
     Testing: Should be covered on CI Fixes: #38510  #37991
     ---------
@@ -2789,7 +2793,7 @@ https://github.com/servo/servo/pull/38511	(@jerensl, #38511)	mach(test-tidy): Ma
     This change also adds a helper data structure to `Document` which will eventually be responsible for event handling.
     Testing: Cursor and status change are currently very hard to test as the API test harness makes this difficult at
     the moment.
-https://github.com/servo/servo/pull/37834	(@TimvdLippe, #37834)	Implement Trusted Type eval checks (#37834)
++https://github.com/servo/servo/pull/37834	(@TimvdLippe, #37834)	Implement Trusted Type eval checks (#37834)
     dom
     It implements the new codeForEvalGets callback to retrieve the value for a trusted script object. Additionally, it
     implements the new logic in can-compile-strings to call the policy factory if required.
@@ -3029,7 +3033,7 @@ https://github.com/servo/servo/pull/37834	(@TimvdLippe, #37834)	Implement Truste
     `ScriptThread` now that it is straightforward to get this value from the layout spatial tree. This allows removing
     some tricky callback code in the Compositor.
     Testing: This shouldn't change any observable behavior so is covered by existing tests.
-https://github.com/servo/servo/pull/37100	(@mrobinson, #37100)	script: Properly fire `input` events for clipboard use in input elements (#37100)
++https://github.com/servo/servo/pull/37100	(@mrobinson, #37100)	script: Properly fire `input` events for clipboard use in input elements (#37100)
     dom
     When using the clipboard to paste or modify the contents of an input element the specification says says[^1] to
     > Queue tasks to fire any events that should fire due to the
@@ -3447,7 +3451,7 @@ https://github.com/servo/servo/pull/37100	(@mrobinson, #37100)	script: Properly 
     Testing: Improves several WPT.
     ---------
     Co-authored-by: Mukilan Thiyagarajan <mukilan@igalia.com>
-https://github.com/servo/servo/pull/38624	(@delan, @atbrakhi, #38624)	devtools: Fix `getBreakpointListActor` handler in watcher actor (#38624)
++https://github.com/servo/servo/pull/38624	(@delan, @atbrakhi, #38624)	devtools: Fix `getBreakpointListActor` handler in watcher actor (#38624)
     devtools
     the Firefox devtools client often sends multiple
     `getBreakpointListActor` requests to the watcher actor when connecting, and the Firefox devtools server returns the
@@ -3457,7 +3461,7 @@ https://github.com/servo/servo/pull/38624	(@delan, @atbrakhi, #38624)	devtools: 
 -https://github.com/servo/servo/pull/38619	(@euclid.ye@huawei.com, #38619)	test config: Add escape character (#38619)
     Add escape character for config. Otherwise cannot run webdriver test.
     Fixes: `wptrunner.wptmanifest.parser.ParseError: Junk before EOL ]`
-https://github.com/servo/servo/pull/38602	(@rodion.borovyk@gmail.com, #38602)	script: Send JS evaluation errors to constellation (#38602)
++https://github.com/servo/servo/pull/38602	(@rodion.borovyk@gmail.com, #38602)	script: Send JS evaluation errors to constellation (#38602)
     embedding
     Send JS evaluation errors to constellation in
     `script_thread::handle_evaluate_javascript` instead of silently swallowing.
@@ -3483,7 +3487,7 @@ https://github.com/servo/servo/pull/38602	(@rodion.borovyk@gmail.com, #38602)	sc
 -https://github.com/servo/servo/pull/38386	(@abdelrahman1234567, #38386)	Basic webdriver support to servoshell on ohos (#38386)
     Adding basic webdriver support to servoshell on ohos and basic communication between the ohos device and script.
     Testing: Manual testing and tracing logs
-https://github.com/servo/servo/pull/37667	(@delan, @atbrakhi, #37667)	devtools: Show clients where they can set breakpoints (#37667)
++https://github.com/servo/servo/pull/37667	(@delan, @atbrakhi, #37667)	devtools: Show clients where they can set breakpoints (#37667)
     devtools
     devtools clients query source actors to determine where the user can set breakpoints in a source. there are two
     relevant requests here:
@@ -8646,7 +8650,7 @@ https://github.com/servo/servo/pull/37667	(@delan, @atbrakhi, #37667)	devtools: 
     (unless you reopen the PR or upgrade to it yourself)
     </details>
     <49699333+dependabot[bot]@users.noreply.github.com>
---https://github.com/servo/servo/pull/38933	(@delan, @atbrakhi, #38933)	devtools: Reland test improvements from #38614 minus CI changes (#38933)
+-https://github.com/servo/servo/pull/38933	(@delan, @atbrakhi, #38933)	devtools: Reland test improvements from #38614 minus CI changes (#38933)
     #38614 was reverted due to CI flakiness, but it also included several improvements to the devtools tests. this patch
     relands those improvements, described below.
     we make three changes that speed up the devtools tests from 73 → 65 → 56
