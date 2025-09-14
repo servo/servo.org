@@ -23,6 +23,8 @@ Servo's roadmap is defined in the project wiki: <https://github.com/servo/servo/
 
 ## Presentations
 
+* [Servo: An independent, lightweight, modular, and parallel processing architecture web engine development](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/slides/jonathan-schwender.pdf) by Jonathan Schwender (Sep 2025 at [WebEvolve 2025 Annual Event](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/high-perf.en.html))
+* [MiniApps Design and Servo](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/slides/gregory-terzian.pdf) by Gregory Terzian (Sep 2025 at [WebEvolve 2025 Annual Event](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/high-perf.en.html))
 * [Servo - an embeddable web rendering engine](https://www.youtube.com/watch?v=rd4Qe05Ou1A) by Josh Matthews (May 2025 at [RustWeek](https://rustweek.org/))
 * [Building a Web Rendering Engine in Rust](https://servo.org/slides/2025-03-31-open-harmony) by Rakhi Sharma (Mar 2025 at [OpenHarmony Technical Forum](https://www.meetup.com/openharmony-community/events/306394389/))
 * [Why Build a New Browser Engine in Rust?](https://www.youtube.com/watch?v=s0MIHKv45C0) by Martin Robinson (Jan 2025 at [Barcelona Free Software](https://meetu.ps/e/NKqfz/mXgxF/i))
