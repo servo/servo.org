@@ -23,7 +23,30 @@ Servo's roadmap is defined in the project wiki: <https://github.com/servo/servo/
 
 ## Presentations
 
-{% for talk in talks %}
+<section class="section container" aria-label="Latest talks about Servo">
+  <div class="blog">
+    <div class="inner-container">
+      <h2>Latest talks about Servo</h2>
+        <div class="blog-grid">
+            {% for talk in talks limit:5 %}<div class="card">
+                  <div class="card-content">
+                    {% if talk.youtube_id %}<div class="card-image">
+                      <iframe src="https://www.youtube.com/embed/{{ talk.youtube_id }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>{% endif %}
+                    <span class="tag">
+                      {{ talk.date }}
+                      {% if talk.event %}<span class="tag">at <a href="{{ talk.event_url }}">{{ talk.event }}</a></span>{% endif %}
+                    </span>
+                    <p class="post-title"><a href="{{ talk.url }}">{{ talk.title }}</a></p>
+                    <p class="post-summary">by {{ talk.authors }}</p>
+                  </div>
+                </div>{% endfor %}
+        </div>
+      </div>
+  </div>
+</section>
+
+{% for talk in talks offset:5 %}
 * [{{ talk.title }}]({{ talk.url }}) by {{ talk.authors }} ({{ talk.date }}{% if talk.event %} at [{{ talk.event }}]({{ talk.event_url }}){% endif %}){% endfor %}
 
 ## Logo
