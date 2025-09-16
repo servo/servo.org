@@ -17,6 +17,22 @@
     <id>https://servo.org/twisaug/blog/2025/09/01/this-month-in-servo/</id>
     <content xml:lang="en" type="html">&lt;p&gt;Another month, another record number of pull requests merged!
 August flew by, and with it came &lt;strong&gt;447 pull requests&lt;/strong&gt; from Servo contributors.&lt;/p&gt;
+&lt;p&gt;Our big new feature this month is rendering support &lt;strong&gt;inline SVG elements&lt;/strong&gt; (@mukilan, @Loirooriol, #38188, #38603).
+This improves the appearance of many popular websites.&lt;/p&gt;
+&lt;p&gt;[[add inline svg figure]]&lt;/p&gt;
+&lt;p&gt;Servo now supports CSS &lt;code&gt;font-variation-settings&lt;/code&gt; on all main desktop platforms (@simonwuelker, @mrobinson, #38642, #38760, #38831).
+We also respect &lt;code&gt;format(*-variations)&lt;/code&gt; inside &lt;code&gt;@font-face&lt;/code&gt; rules (@mrobinson, #38832).&lt;/p&gt;
+&lt;p&gt;Servo has declared a Minimum Supported Rust Version (1.85.0), and this is verified with every new pull request (@jschwe, #37152).&lt;/p&gt;
+&lt;p&gt;Our developer tools continue to make progress! We now have a functional network monitor panel (@uthmaniv, @jdm, #38216, #38601, #38625),
+and our JS debugger can show potential breakpoints (@delan, @atbrakhi, #38331, #38363, #38333, #38551, #38550, #38334, #38624, #38826, #38797).
+Additionally, the layout inspector now dims nodes that are not displayed (@simonwuelker, #38575).&lt;/p&gt;
+&lt;p&gt;[[add network monitor figure here]]&lt;/p&gt;
+&lt;p&gt;Numerous pieces of the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API&quot;&gt;Trusted Types API&lt;/a&gt; are now present in Servo
+(@TimvdLippe, @jdm, #38595, #37834, #38700, #38736, #38718, #38784, #38871, #8623, #38874, #38872, #38886), all gated behind the &lt;code&gt;dom_trusted_types_enabled&lt;/code&gt; preference.&lt;/p&gt;
+&lt;p&gt;The IndexedDB implementation (gated behind &lt;code&gt;dom_indexeddb_enabled&lt;/code&gt;) is progressing quickly (@arihant2math, @jdm, @rodion, @kkoyung, #28744, #38737, #38836, #38813, #38819, #38115, #38944, #38740, #38891, #38723, #38850).&lt;/p&gt;
+&lt;p&gt;Our WebDriver implementation now passes 80% of the implementation conformance tests.
+This is the result of lots of iteration and fixes for things like handling user prompts (@PotatoCP, #38591), computing obscured/disabled elements while clicking (@yezhizhen, #38497, #38841, #38436, #38490, #38383), and improving window focus behaviours (@yezhizhen, #38889, #38909).&lt;/p&gt;
+&lt;p&gt;We upgraded to SpiderMonkey v140 (@jdm, #37077, #38563), as well as the upstream Stylo revision as of August 1, 2025.&lt;/p&gt;
 &lt;!--
 - canvas
     - https://github.com/servo/servo/pull/38496	(@sagudev, #38496)	canvas: pop many clips on restore (#38496)
@@ -24,48 +40,8 @@ August flew by, and with it came &lt;strong&gt;447 pull requests&lt;/strong&gt; 
 - css
     - https://github.com/servo/servo/pull/38682	(@simonwuelker, #38682)	script: Implement `CSS.registerProperty` (#38682)
       css
-    - https://github.com/servo/servo/pull/38642	(@simonwuelker, #38642)	fonts: Implement CSS `font-variation-settings` property for FreeType platforms (#38642)
-      css
-    - https://github.com/servo/servo/pull/38760	(@mrobinson, #38760)	fonts: Add font variation support for macOS (#38760)
-      css
-    - https://github.com/servo/servo/pull/38831	(@mrobinson, #38831)	fonts: Add font variations support for Windows (#38831)
-      css
-    - https://github.com/servo/servo/pull/38832	(@mrobinson, #38832)	fonts: Add support for `format(*-variations)` to `@font-face` (#38832)
-      css
     - https://github.com/servo/servo/pull/38564	(@simonwuelker, #38564)	script: Support custom element states (#38564)
       css
-- devex
-    - https://github.com/servo/servo/pull/37152	(@jschwe, #37152)	CI: Check MSRV in CI (#37152)
-      devex
-- devtools
-    - https://github.com/servo/servo/pull/38331	(@delan, @atbrakhi, #38331)	script: Create a debugger script for the SpiderMonkey Debugger API (#38331)
-      devtools
-    - https://github.com/servo/servo/pull/38216	(@uthmaniv, #38216)	Calculate and send  the missing transferred_size and content_size to dev tools (#38216)
-      devtools
-    - https://github.com/servo/servo/pull/38363	(@delan, @atbrakhi, #38363)	script: Tell SpiderMonkey whether scripts are inline (#38363)
-      devtools
-    - https://github.com/servo/servo/pull/38333	(@delan, @atbrakhi, #38333)	script: Add new Window globals as debuggees (#38333)
-      devtools
-    - https://github.com/servo/servo/pull/38575	(@simonwuelker, #38575)	script: Tell devtools whether a node is displayed or not (#38575)
-      devtools
-    - https://github.com/servo/servo/pull/38551	(@delan, @atbrakhi, #38551)	script: Add new worker globals as debuggees (#38551)
-      devtools
-    - https://github.com/servo/servo/pull/38550	(@delan, @atbrakhi, #38550)	script: Set correct `introductionType` values in more places (#38550)
-      devtools
-    - https://github.com/servo/servo/pull/38334	(@delan, @atbrakhi, #38334)	devtools: Create source actors from Debugger API notifications (#38334)
-      devtools
-    - https://github.com/servo/servo/pull/38624	(@delan, @atbrakhi, #38624)	devtools: Fix `getBreakpointListActor` handler in watcher actor (#38624)
-      devtools
-    - https://github.com/servo/servo/pull/37667	(@delan, @atbrakhi, #37667)	devtools: Show clients where they can set breakpoints (#37667)
-      devtools
-    - https://github.com/servo/servo/pull/38601	(@uthmaniv, #38601)	net: Send Cookies to Devtools (#38601)
-      devtools
-    - https://github.com/servo/servo/pull/38625	(@uthmaniv, @jdm, #38625)	net: Send ResponseContentObj to Devtools (#38625)
-      devtools
-    - https://github.com/servo/servo/pull/38826	(@delan, @atbrakhi, #38826)	devtools: Fix available breakpoint positions with nested scripts (#38826)
-      devtools
-    - https://github.com/servo/servo/pull/38797	(@atbrakhi, #38797)	devtools: Handle `removeBreakpoint` on breakpoint-list actor (#38797)
-      devtools
 - dom
     - https://github.com/servo/servo/pull/38321	(@stevennovaryo, #38321)	script: Fire `scroll` event whenever JS scrolled  (#38321)
       dom
@@ -83,11 +59,7 @@ August flew by, and with it came &lt;strong&gt;447 pull requests&lt;/strong&gt; 
       dom
     - https://github.com/servo/servo/pull/38589	(@euclid.ye@huawei.com, #38589)	script: Focus on mousedown instead of mouse click according to spec (#38589)
       dom
-    - https://github.com/servo/servo/pull/38595	(@TimvdLippe, #38595)	Implement Trusted Types for ShadowRoot (#38595)
-      dom
     - https://github.com/servo/servo/pull/38539	(@mrobinson, @Loirooriol, #38539)	script/compositor: Send `mouseleave` events when cursor moves between `&lt;iframe&gt;`s (#38539)
-      dom
-    - https://github.com/servo/servo/pull/37834	(@TimvdLippe, #37834)	Implement Trusted Type eval checks (#37834)
       dom
     - https://github.com/servo/servo/pull/37100	(@mrobinson, #37100)	script: Properly fire `input` events for clipboard use in input elements (#37100)
       dom
@@ -101,15 +73,9 @@ August flew by, and with it came &lt;strong&gt;447 pull requests&lt;/strong&gt; 
       dom
     - https://github.com/servo/servo/pull/38599	(@averyrudelphe@gmail.com, #38599)	script: Strip `javascript` URL scheme using `Position::AfterScheme` rather than `Position::BeforePath` (#38599)
       dom
-    - https://github.com/servo/servo/pull/38700	(@TimvdLippe, #38700)	Implement trusted types for setAttribute (#38700)
-      dom
     - https://github.com/servo/servo/pull/38466	(@wuminghua7@huawei.com, #38466)	Script: Implement `TextEncoderStream` (#38466)
       dom
     - https://github.com/servo/servo/pull/38720	(@menonrahul02@gmail.com, #38720)	content: Make QuotaExceededError serializable (#38720)
-      dom
-    - https://github.com/servo/servo/pull/38736	(@TimvdLippe, @jdm, #38736)	Implement trusted types for setTimeout/setInterval (#38736)
-      dom
-    - https://github.com/servo/servo/pull/38718	(@TimvdLippe, #38718)	Add trusted type checks for global event handler attributes (#38718)
       dom
     - https://github.com/servo/servo/pull/38735	(@kkoyung, #38735)	script: Throw error when lower is greater than upper in IDBKeyRange (#38735)
       dom
@@ -123,11 +89,7 @@ August flew by, and with it came &lt;strong&gt;447 pull requests&lt;/strong&gt; 
       dom
     - https://github.com/servo/servo/pull/38810	(@averyrudelphe@gmail.com, #38810)	Add legacy window aliases `SVGMatrix`/`SVGPoint` for `DOMMatrix`/`DOMPoint` (#38810)
       dom
-    - https://github.com/servo/servo/pull/38784	(@TimvdLippe, #38784)	Implement trusted types for remaining attribute sinks (#38784)
-      dom
     - https://github.com/servo/servo/pull/38734	(@TimvdLippe, #38734)	Remove event handlers when attribute is removed (#38734)
-      dom
-    - https://github.com/servo/servo/pull/38871	(@TimvdLippe, #38871)	Propagate Trusted Types errors for Node.textContent (#38871)
       dom
     - https://github.com/servo/servo/pull/38495	(@abdelrahman1234567, #38495)	script: Add `FocusOptions` argument to `Element.focus` and implement `FocusOptions.preventScroll` (#38495)
       dom
@@ -136,14 +98,6 @@ August flew by, and with it came &lt;strong&gt;447 pull requests&lt;/strong&gt; 
     - https://github.com/servo/servo/pull/38984	(@euclid.ye@huawei.com, #38984)	script: Support decomposing ShadowRoot from mozjs `HandleValue` (#38984)
       dom
     - https://github.com/servo/servo/pull/38876	(@sebsebmc@gmail.com, #38876)	script: Do not include fragments when comparing URLs in `CookieStore` (#38876)
-      dom
-    - https://github.com/servo/servo/pull/38623	(@TimvdLippe, #38623)	Implement trusted types processing for JavaScript URL (#38623)
-      dom
-    - https://github.com/servo/servo/pull/38874	(@TimvdLippe, #38874)	script: Implement trusted types for `Range.createContextualFragment` (#38874)
-      dom
-    - https://github.com/servo/servo/pull/38872	(@TimvdLippe, #38872)	script: Implement trusted types for `DOMParser.parseFromString` (#38872)
-      dom
-    - https://github.com/servo/servo/pull/38886	(@TimvdLippe, #38886)	Disallow invalid trusted type policy names (#38886)
       dom
     - https://github.com/servo/servo/pull/38993	(@Gae24, #38993)	`XMLHttpRequest` `Send`: fix Content-Type failures (#38993)
       dom
@@ -163,29 +117,6 @@ August flew by, and with it came &lt;strong&gt;447 pull requests&lt;/strong&gt; 
       font
     - https://github.com/servo/servo/pull/39001	(@darryl@dpogue.ca, #39001)	fonts: Use `Helvetica` as the `system-ui` font on macOS (#39001)
       font
-- indexeddb
-    - https://github.com/servo/servo/pull/38744	(@arihant2math@gmail.com, #38744)	net: fix indexeddb backend bugs (#38744)
-      indexeddb
-    - https://github.com/servo/servo/pull/38737	(@arihant2math@gmail.com, #38737)	Enable access to transaction from idbobjectstore (#38737)
-      indexeddb
-    - https://github.com/servo/servo/pull/38836	(@arihant2math@gmail.com, #38836)	net: Fix initial indexeddb version storage (#38836)
-      indexeddb
-    - https://github.com/servo/servo/pull/38813	(@arihant2math@gmail.com, #38813)	Stub out IDBIndex (#38813)
-      indexeddb
-    - https://github.com/servo/servo/pull/38819	(@jdm, #38819)	indexeddb: Initialize DB version to zero. (#38819)
-      indexeddb
-    - https://github.com/servo/servo/pull/38115	(@jdm, #38115)	IndexedDB: Handle missing object stores in object store operations (#38115)
-      indexeddb
-    - https://github.com/servo/servo/pull/38944	(@rodion.borovyk@gmail.com, #38944)	indexeddb: Use UUIDs instead of sanitization of object store names (#38944)
-      indexeddb
-    - https://github.com/servo/servo/pull/38740	(@arihant2math@gmail.com, @jdm, #38740)	script: correctly handle indexeddb backend errors (#38740)
-      indexeddb
-    - https://github.com/servo/servo/pull/38891	(@arihant2math@gmail.com, #38891)	indexeddb: Add index schemas (#38891)
-      indexeddb
-    - https://github.com/servo/servo/pull/38723	(@arihant2math@gmail.com, #38723)	indexeddb: Implement autoincremented keys and report autoincrementedness properly through DOM interface (#38723)
-      indexeddb
-    - https://github.com/servo/servo/pull/38850	(@kkoyung, #38850)	script: Initialize IDBCursor and IDBCursorWithValue interfaces (#38850)
-      indexeddb
 - layout
     - https://github.com/servo/servo/pull/38391	(@mrobinson, @Loirooriol, #38391)	layout: Account for sticky nodes in ScrollTree transforms and cache transforms (#38391)
       layout
@@ -279,39 +210,16 @@ August flew by, and with it came &lt;strong&gt;447 pull requests&lt;/strong&gt; 
       stability
     - https://github.com/servo/servo/pull/38739	(@gterzian, #38739)	script: when handling page headers, stop if pipeline closed already (#38739)
       stability
-- svg
-    - https://github.com/servo/servo/pull/38188	(@mukilan, #38188)	script: support inline SVG by serializing the subtree (#38188)
-      svg
-    - https://github.com/servo/servo/pull/38603	(@Loirooriol, @mukilan, #38603)	layout: Improve sizing for inline SVG (#38603)
-      svg
-- upgrade
-    - https://github.com/servo/servo/pull/38429	(@Loirooriol, #38429)	Upgrade Stylo to 2025-08-01 (#38429)
-      upgrade
-    - https://github.com/servo/servo/pull/38563	(@jdm, #38563)	Upgrade to SpiderMonkey 140. (#38563)
-      upgrade
-- upgrades
-    - https://github.com/servo/servo/pull/37077	(@jdm, #37077)	Update to SpiderMonkey 137. (#37077)
-      upgrades
 - webdriver
     - https://github.com/servo/servo/pull/38401	(@kkoyung, #38401)	webdriver: consider boolean attribute when get element attribute (#38401)
       webdriver
-    - https://github.com/servo/servo/pull/38383	(@yezhizhen, #38383)	webdriver: Fix &quot;element in view&quot; by correctly computing resolved `PointerEvents` style (#38383)
-      webdriver
     - https://github.com/servo/servo/pull/38397	(@longvatrong111, #38397)	webdriver: improve session commands (#38397)
-      webdriver
-    - https://github.com/servo/servo/pull/38436	(@euclid.ye@huawei.com, #38436)	webdriver: Improve &quot;element click&quot; by using container + Upgrade outdated test (#38436)
       webdriver
     - https://github.com/servo/servo/pull/38491	(@euclid.ye@huawei.com, #38491)	webdriver: Search ancestors instead of preceding nodes when computing container for `option`&amp;`optgroup` (#38491)
       webdriver
-    - https://github.com/servo/servo/pull/38497	(@euclid.ye@huawei.com, #38497)	webdriver: Check if container is obscured for &quot;Element Click&quot; (#38497)
-      webdriver
     - https://github.com/servo/servo/pull/38536	(@Kenzie.Raditya.Tirtarahardja@huawei.com, #38536)	script(webdriver): Fix element clear for file (#38536)
       webdriver
-    - https://github.com/servo/servo/pull/38490	(@Kenzie.Raditya.Tirtarahardja@huawei.com, #38490)	script(webdriver): Check if element is disabled based on WebDriver specification (#38490)
-      webdriver
     - https://github.com/servo/servo/pull/38620	(@euclid.ye@huawei.com, #38620)	webdriver: Synchronize &quot;close window&quot; command &amp; Return correct error type (#38620)
-      webdriver
-    - https://github.com/servo/servo/pull/38591	(@Kenzie.Raditya.Tirtarahardja@huawei.com, #38591)	webdriver: Add handle user prompt for some command (#38591)
       webdriver
     - https://github.com/servo/servo/pull/38357	(@longvatrong111, #38357)	Implement webdriver extract script arguments (#38357)
       webdriver
@@ -321,15 +229,9 @@ August flew by, and with it came &lt;strong&gt;447 pull requests&lt;/strong&gt; 
       webdriver
     - https://github.com/servo/servo/pull/38745	(@longvatrong111, @euclid.ye@huawei.com, #38745)	webdriver: Refactor webdriver session and improve window handles (#38745)
       webdriver
-    - https://github.com/servo/servo/pull/38841	(@euclid.ye@huawei.com, #38841)	webdriver: Consider shadow including descendant when computing &quot;obscured&quot; step of “element click” (#38841)
-      webdriver
     - https://github.com/servo/servo/pull/38444	(@Kenzie.Raditya.Tirtarahardja@huawei.com, @euclid.ye@huawei.com, #38444)	webdriver: Element Send keys use dispatch actions for KeyboardEvent (#38444)
       webdriver
-    - https://github.com/servo/servo/pull/38889	(@euclid.ye@huawei.com, #38889)	webdriver: Focus when &quot;switch to window&quot; (#38889)
-      webdriver
     - https://github.com/servo/servo/pull/38943	(@euclid.ye@huawei.com, #38943)	script: Fix wrong procedure when deserializing `JSValue` from mozjs `HandleValue` (#38943)
-      webdriver
-    - https://github.com/servo/servo/pull/38909	(@euclid.ye@huawei.com, #38909)	webdriver: Raise `WebView` to top when focus (#38909)
       webdriver
     - https://github.com/servo/servo/pull/39012	(@euclid.ye@huawei.com, #39012)	webdriver: Improve parsing of Frame and Window (#39012)
       webdriver
