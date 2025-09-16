@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Servo in 2024: stats, features and donations - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="Servo in 2024: stats, features and donations - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  
+
+  
+  <meta name="description" content="Summary of Servo’s progress in 2024: some numbers, main highlights and plans for the future.">
+  <meta name="og:description" content="Summary of Servo’s progress in 2024: some numbers, main highlights and plans for the future.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/talks-json/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/talks-json/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/talks-json/blog/2025/01/31/servo-in-2024/">
+
+  <link rel="stylesheet" href="/talks-json/css/style.css">
+  <link rel="shortcut icon" href="/talks-json/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/talks-json/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="inner-container">
+      <div class="navbar-brand">
+        <a href="/talks-json/">
+          <img src="/talks-json/img/servo-color.png" alt="Servo in 2024: stats, features and donations">
+        </a>
+
+        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="navbar-menu" id="navbar-menu">
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                Get Involved
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/talks-json/contributing/"
+                    
+                  >
+                    Contributing
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://book.servo.org"
+                     target="_blank"
+                  >
+                    Servo Book<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/talks-json/wpt/"
+                    
+                  >
+                    WPT pass rates
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/talks-json/coc/"
+                    
+                  >
+                    Code of Conduct
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/talks-json/download/"
+              
+            >
+              Download
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/talks-json/blog/"
+              
+            >
+              Blog
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="https://demo.servo.org/"
+               target="_blank"
+            >
+              Demos<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+            </a>
+          
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                About
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/talks-json/about/"
+                    
+                  >
+                    About Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/talks-json/made-with/"
+                    
+                  >
+                    Made with Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://github.com/servo/project/blob/main/governance/README.md"
+                     target="_blank"
+                  >
+                    Governance<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/talks-json/sponsorship/"
+                    
+                  >
+                    Sponsorship
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/talks-json/acknowledgements/"
+                    
+                  >
+                    Acknowledgements
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+        <div class="navbar-end">
+    
+      <a class="social-link is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="social-link is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="social-link is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="social-link is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+</div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburgerMenu');
+  const menu = document.getElementById('navbar-menu');
+
+  const toggleMenu = () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('is-active', isExpanded);
+  };
+
+  // Toggle on click
+  hamburger.addEventListener('click', toggleMenu);
+
+
+</script>
+          <div class="content" id="Servo in 2024: stats, features and donations">
+            
+<div class="blog-hero">
+  <div class="container">
+    <div class="inner-container">
+    <h1 class="title">Servo in 2024: stats, features and donations</h1>
+      <p class="subtitle">Summary of Servo’s progress in 2024: some numbers, main highlights and plans for the future.</p>
+      <p class="posted">Posted <span class="tag is-dark">2025-01-31</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="inner-container blog-content">
+  <!--
+    TIP: `eleventyConfig.setServerOptions({domDiff: false})` for this post!
+    Otherwise the charts will break when reloading your changes.
+-->
+<p>Two years after the <a href="https://servo.org/blog/2023/01/16/servo-2023/">renewed activity</a> on the project we can confirm that Servo is fully back.</p>
+<p>If we ignore the bots, in 2024 we’ve had <strong>129 unique contributors</strong> (+143% over 54 last year), <strong>landing 1,771 pull requests</strong> (+163% over 673), and that’s just in <a href="https://github.com/servo/servo">our main repo</a>!</p>
+<p>Including bots, the total number of PRs merged goes up to <strong>2,674</strong> (+144% over 1094). From all this work, 26% of the PRs were made by Igalia, 40% by other contributors and the rest by the bots (34%). This shows how the Servo community has been growing and becoming more diverse with new actors participating actively in the project.</p>
+<p><canvas id="servoStats" style="min-height: 400px;"></canvas--></p>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById("servoStats");
+
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+      datasets: [{
+        label: "Merged PRs",
+        data: [1188, 986, 669, 118, 65, 776, 1771],
+        borderWidth: 2
+      }, {
+        label: "Unique contributors",
+        data: [142, 141, 87, 37, 20, 54, 129],
+        borderWidth: 2,
+        type: "line",
+        yAxisID: "y1"
+      }, {
+        label: "Average unique contributors per month",
+        data: [27.33, 27.17, 14.75, 4.92, 2.83, 11.33, 26.33],
+        borderWidth: 2,
+        type: "line",
+        yAxisID: "y1"
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true
+        },
+        y1: {
+          position: "right",
+          grid: {
+            drawOnChartArea: false
+          },
+        }
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: "Servo Stats 2018 - 2024",
+          font: {
+            size: "20pt",
+          }
+        },
+        subtitle: {
+          display: true,
+          text: "PRs left axis - Contributors right axis",
+        },
+        legend: {
+          position: "bottom",
+        }
+      }
+    }
+  });
+</script>
+<figure class="_stats_table">
+<table style="margin-inline: auto;">
+<thead>
+  <tr>
+    <th></th>
+    <th style="text-align:right">2018</th>
+    <th style="text-align:right">2019</th>
+    <th style="text-align:right">2020</th>
+    <th style="text-align:right">2021</th>
+    <th style="text-align:right">2022</th>
+    <th style="text-align:right">2023</th>
+    <th style="text-align:right">2024</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><strong>Merged PRs</strong></td>
+    <td style="text-align:right">1,188</td>
+    <td style="text-align:right">986</td>
+    <td style="text-align:right">669</td>
+    <td style="text-align:right">118</td>
+    <td style="text-align:right">65</td>
+    <td style="text-align:right">776</td>
+    <td style="text-align:right">1,771</td>
+  </tr>
+  <tr>
+    <td><strong>Unique contributors</strong></td>
+    <td style="text-align:right">142</td>
+    <td style="text-align:right">141</td>
+    <td style="text-align:right">87</td>
+    <td style="text-align:right">37</td>
+    <td style="text-align:right">20</td>
+    <td style="text-align:right">54</td>
+    <td style="text-align:right">129</td>
+  </tr>
+  <tr>
+    <td><strong>Average unique contributors per month</strong></td>
+    <td style="text-align:right">27.33</td>
+    <td style="text-align:right">27.17</td>
+    <td style="text-align:right">14.75</td>
+    <td style="text-align:right">4.92</td>
+    <td style="text-align:right">2.83</td>
+    <td style="text-align:right">11.33</td>
+    <td style="text-align:right">26.33</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<style>
+  ._stats_table {
+    overflow-x: auto;
+    margin-block: 1em;
+  }
+  ._stats_table tr > *:nth-child(1) {
+    /* Freeze the first cell of each row. */
+    position: sticky;
+    left: 0;
+    /* Hide other cells that overlap when scrolling. */
+    background:lch(91 8.22 196.44);
+    z-index: 1;
+  }
+</style>
+<p>Now let’s take a look to the data and chart above, which show the evolution since 2018 in number of merged PRs, unique contributors per year and average contributors per month (excluding bots). We can see <strong>the project is back to numbers of 2018 and 2019 when it was been developed in full speed</strong>!</p>
+<p>It’s worth noting that Servo popularity keeps growing, with many folks realizing there has been new activity on the project last year, and we have more and more people interested in the project.</p>
+<figure><a href="https://star-history.com/#servo/servo"><img src="/talks-json/img/blog/2025-01-servo-github-stars.png" style="width: 60ch;" alt="Servo GitHub start history chart showing Servo not stopping going up since 2013, up to more than 25,000 today"></a>
+  <figcaption>Servo GitHub stars haven't stopped growing, surpassing now 25K threshold.</figcaption>
+</figure>
+<p>During 2024 Servo has been present in <strong>8 events with 9 talks</strong>: <a href="https://fosdem.org/2024/schedule/event/fosdem-2024-2321-embedding-servo-in-rust-projects/">FOSDEM</a>, <a href="https://youtu.be/RdtlD_7JAs8">Open Source Summit North America</a>, <a href="https://servo.org/slides/2024-04-16-seattle-rust-user-group/">Seattle Rust user meetup</a>, <a href="https://www.youtube.com/watch?v=EA_1jxzR85M">GOSIM Europe</a>, <a href="https://www.youtube.com/watch?v=SamA5Oz-G5w">Global Software Technology Summit</a>, <a href="https://www.youtube.com/watch?v=NHa4LPpWRh8&amp;t=1351s">Linux Foundation Europe Member Summit</a>, <a href="https://www.youtube.com/watch?v=gpz088cxDcI">GOSIM</a> <a href="https://www.youtube.com/watch?v=1c9sHaEXQak">China</a>, <a href="https://www.youtube.com/watch?v=fp5n7CSvALA">Ubuntu Summit</a>.</p>
+<p>If we focus on development there has been many things moving forward during the year. Servo main dependencies (SpiderMonkey, Stylo and WebRender) have been upgraded, the new layout engine has kept evolving adding support for floats, tables, flexbox, fonts, etc. By the end of 2024 <a href="https://staging.wpt.fyi/results/?sha=58c1148991&amp;label=master&amp;max-count=1&amp;product=servo"><strong>Servo passes 1,515,229 WPT subtests (79%)</strong></a>. Many other new features have been under active development: WebGPU, Shadow DOM, ReadableStream, WebXR, … Servo now supports two new platforms: Android and OpenHarmony. And we have got the first experiments of applications using Servo as a web engine (like <a href="https://servo.org/blog/2024/01/19/embedding-update/">Tauri</a>, <a href="https://github.com/DioxusLabs/blitz">Blitz</a>, <a href="https://github.com/KDABLabs/cxx-qt-servo-webview">QtWebView</a>, <a href="https://github.com/mcclure/cuervo/tree/unstable_traversal_experiment">Cuervo</a>, <a href="https://github.com/versotile-org/verso/">Verso</a> and <a href="https://github.com/moto-browser/moto">Moto</a>).</p>
+<p>In 2024 we have <strong>raised 33,632.64 USD</strong> with <a href="/sponsorship/">donations via Open Collective and GitHub Sponsors</a> from <strong>500 different people and organizations</strong>. Thank you all for supporting us!</p>
+<p>With this money we have now 3 servers that provides self-hosted runners for Linux, macOS, and Windows reducing our build times <strong>from over an hour to under 30 minutes</strong>.</p>
+<p>Talking about the future, the Servo TSC has been discussing the <a href="https://github.com/servo/servo/wiki/Roadmap"><strong>roadmap for 2025</strong></a> which has been updated on the Servo’s wiki. We have many plans to keep Servo thriving with new features and improvements. Let’s hope for a great 2025!</p>
+
+  <div>
+    <a href="/talks-json/blog/">Back</a>
+  </div>
+</div>
+
+
+
+          </div>
+    </main>
+    <div class="contact" aria-label="Contact information">
+    <div class="container">
+        <div class="inner-container two-column">
+            <div class="column">
+                <h2>Contact</h2>
+            </div>
+            <div class="column">
+                <ul>
+                    <li><a class="footer-link" href="https://servo.zulipchat.com/">Zulip chat</a></li>
+                    <li><a class="footer-link" href="https://github.com/servo/servo/discussions">GitHub discussions</a></li>
+                    <li><a class="footer-link" href="mailto:info@servo.org">Email: info@servo.org</a></li>
+                    <li><a class="footer-link" href="https://floss.social/@servo">Mastodon</a></li>
+                    <li><a class="footer-link" href="https://bsky.app/profile/servo.org">Bluesky</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer>
+      <div class="footer">
+  <div class="container">
+    <div class="two-column inner-container">
+      <div class="column">
+        <div class="logo"><a href="https://linuxfoundation.eu"><img src="/talks-json/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250"></a></div>
+        <p>&copy; 2025 The Servo Project Developers</p>
+        <p>Copyright &copy; Servo is a project of <a class="footer-link" href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+        <p>For website terms of use, trademark policy and other project policies please see <a class="footer-link" href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+        <p>The source code for this website can be found at <a class="footer-link" href="https://github.com/servo/servo.org">https://github.com/servo/servo.org</a>.</p>
+      </div>
+      <div class="column code-of-conduct">
+        <a class="footer-link" href="/talks-json/coc/">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const burger = document.querySelector(".navbar-burger");
+    const menu = document.querySelector(".navbar-menu");
+    burger.onclick = () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    };
+  })();
+</script>
+
+    </footer>
+  </body>
+</html>
