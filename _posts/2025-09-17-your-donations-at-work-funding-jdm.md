@@ -8,7 +8,7 @@ categories:
 ---
 
 
-The Servo project is excited to share that long-time maintainer Josh Matthews (@jdm) is now working part-time on improving the Servo contributor experience.
+The Servo project is excited to share that long-time maintainer [Josh Matthews (@jdm)](https://github.com/jdm) is now working part-time on improving the Servo contributor experience.
 
 This is a direct result of the monthly donations to the project. The generosity of our supporters has allowed us to operate dedicated computing resources for CI purposes, as well as participate in the Outreachy program as a mentoring organization. We're excited that we can now financially support developers and allow them to dedicate more time to the Servo project over longer periods.
 
