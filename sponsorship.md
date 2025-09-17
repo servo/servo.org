@@ -11,12 +11,6 @@ title: Sponsorship
 
 You can now help fund the Servo project by [sponsoring us on GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo).
 
-<aside class="_note">
-
-Note that we will stop accepting donations [on LFX](https://crowdfunding.lfx.linuxfoundation.org/projects/servo) soon.
-Any funds left over will also be transferred to the Servo project, but recurring donations will be cancelled, so if you would like to continue your recurring donation, please do so on GitHub or Open Collective.
-</aside>
-
 Both one-time and monthly donations are appreciated, and over 80% of the amount will go directly towards improving Servo.
 The way the funds are used is decided in public via the Technical Steering Committee, but to give you a sense of scale…
 
