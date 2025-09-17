@@ -32,8 +32,7 @@ Servo's roadmap is defined in the project wiki: <https://github.com/servo/servo/
                   <div class="card-content">
                     {% if talk.youtube_id %}<div class="card-image">
                       <iframe src="https://www.youtube.com/embed/{{ talk.youtube_id }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>{% endif %}
-                    <span class="tag">
+                    </div>{% endif %}<span class="tag">
                       {{ talk.date }}
                       {% if talk.event %}<span class="tag">at <a href="{{ talk.event_url }}">{{ talk.event }}</a></span>{% endif %}
                     </span>
