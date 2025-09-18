@@ -66,9 +66,15 @@ The **HTMLDocument** interface now exists as a property on the `Window` object (
 
 Our 2d canvas implementation now supports the **Path2D.addPath** method (@arthmis, #37838) and the **Canvas2dRenderingContext/OffscreenCanvas.restore** methods now pops all applied clipping paths (@sagudev, #38496).
 Additionally, we now support **using web fonts in the 2D canvas** (@mrobinson, #38979).
-Meanwhile, the performance continues to improve in the new [Vello](https://github.com/linebender/vello?tab=readme-ov-file#vello)-based backends (@sagudev, #38406, #38356, #38440, #38437)
+Meanwhile, the performance continues to improve in the new [Vello](https://github.com/linebender/vello?tab=readme-ov-file#vello)-based backends (@sagudev, #38406, #38356, #38440, #38437).
 
+Muting media elements with the `mute` HTML attribute now works during the initial load (@rayguo17, @jschwe, #38462).
 
+Modifying stylesheets now integrates better with incremental layout, in both light trees and shadow trees (@coding-joedow, #38530, #38529).
+
+Flexbox cross sizes can no longer end up negative through stretching (@Loirooriol, #38521), while `stretch` on flex items now stretches to the line if possible (@Loirooriol, #38526).
+
+**Overflow calculations are more accurate**, now that we ignore `position: fixed` children of the root element (@stevennovaryo, #38618), compute overflow for `<body>` separate from the viewport (@shubhamg13, #38825), check for `overflow: visible` in parents and children (@shubhamg13, #38443), and propagate `overflow` to the viewport correctly (@shubhamg13, @Loirooriol, #38598).
 
 Our WebDriver implementation now passes 80% of the implementation conformance tests.
 This is the result of lots of iteration and fixes for things like handling user prompts (@PotatoCP, #38591), computing obscured/disabled elements while clicking (@yezhizhen, #38497, #38841, #38436, #38490, #38383), and improving window focus behaviours (@yezhizhen, #38889, #38909).
@@ -97,6 +103,7 @@ Evaluating JS from the embedding layer now **reports an error** if the evaluatio
 We now **display favicons** in the tab bar for each toplevel page (#36680, @simonwuelker).
 
 Resizing the browser window to a very small dimension no longer crashes the browser (@leo030303, #38461).
+Element hit testing in full screen mode now works as expected (@yezhizhen, #38328).
 
 Various popup dialogs (e.g. the `<select>` option chooser dialog) now can be closed without choosing a value (@TimvdLippe, #38373, #38949).
 Additionally, the browser now responds to a popup closing without any other inputs (@lumiscosity, #39038).
@@ -132,38 +139,12 @@ Additionally, the browser now responds to a popup closing without any other inpu
       layout
     - https://github.com/servo/servo/pull/38366	(@Loirooriol, #38366)	layout: Recreate lazy block size when re-doing layout to avoid floats (#38366)
       layout
-    - https://github.com/servo/servo/pull/38443	(@shubhamg13, #38443)	Include the scrollable overflow of a child box if either its parent or child has `overflow: visible` (#38443)
-      layout
-    - https://github.com/servo/servo/pull/38521	(@Loirooriol, #38521)	layout: Floor content-box size by zero when stretching flex item (#38521)
-      layout
-    - https://github.com/servo/servo/pull/38526	(@Loirooriol, #38526)	layout: Let `stretch` on flex item cross size stretch to the line (#38526)
-      layout
     - https://github.com/servo/servo/pull/38570	(@simonwuelker, #38570)	layout: Set color and text decoration on `<select>` elements by default (#38570)
       layout
     - https://github.com/servo/servo/pull/38678	(@mrobinson, @Loirooriol, #38678)	layout: Support storing layout data for two-level nested pseudo-elements (#38678)
       layout
-    - https://github.com/servo/servo/pull/38530	(@ibluegalaxy_taoj@163.com, #38530)	script: Ensure `notify_invalidations()` is always called when modifying stylesheets (#38530)
-      layout
-    - https://github.com/servo/servo/pull/38529	(@ibluegalaxy_taoj@163.com, #38529)	script: Mark the entire shadow tree for restyle when its stylesheet is invalidated (#38529)
-      layout
-    - https://github.com/servo/servo/pull/38618	(@stevennovaryo, #38618)	layout: Do not include `position:fixed` children when calculating scrollable overflow for root element (#38618)
-      layout
     - https://github.com/servo/servo/pull/38705	(@Loirooriol, #38705)	layout: Stop making `<video>` fall back to a preferred aspect ratio of 2 (#38705)
       layout
-    - https://github.com/servo/servo/pull/38598	(@shubhamg13, @Loirooriol, #38598)	layout: Use `overflow: visible` if `overflow` was propagated to viewport (#38598)
-      layout
-    - https://github.com/servo/servo/pull/38775	(@stevennovaryo, #38775)	layout: Stretch `<input>` inner container to its containing block (#38775)
-      layout
-    - https://github.com/servo/servo/pull/38825	(@shubhamg13, #38825)	layout: Remove workaround for `body` while building overflow frame for `StackingContextTree` construction. (#38825)
-      layout
-- media
-    - https://github.com/servo/servo/pull/38462	(@rayguo17, @jschwe, #38462)	script: fix set muted on html video element creation (#38462)
-      media
-- servoshell
-    - https://github.com/servo/servo/pull/38328	(@euclid.ye@huawei.com, #38328)	servoshell: Sync window toolbar height with minibrowser (#38328)
-      servoshell
-    - https://github.com/servo/servo/pull/38461	(@leo030303, #38461)	Servoshell: Update `Window::inner_size` on `WindowEvent::Resized` (fix resize bug) (#38461)
-      servoshell
 - webdriver
     - https://github.com/servo/servo/pull/38401	(@kkoyung, #38401)	webdriver: consider boolean attribute when get element attribute (#38401)
       webdriver
