@@ -22,6 +22,8 @@ This feature is currently gated behind the `layout_variable_fonts_enabled` prefe
 We also respect `format(*-variations)` inside `@font-face` rules (@mrobinson, #38832).
 Additionally, Servo now reads data from **OpenType Collection** system font files on macOS (@nicoburns, #38753), and uses `Helvetica` for the **system-ui** font (@dpogue, #39001).
 
+There are more CSS changes—we now support custom CSS properties with the **CSS.registerProperty** method (@simonwuelker, #38682), as well as custom element states with **ElementInternals.states** (@simonwuelker, #38564).
+
 Our developer tools continue to make progress! We now have a functional network monitor panel (@uthmaniv, @jdm, #38216, #38601, #38625),
 and our JS debugger can show potential breakpoints (@delan, @atbrakhi, #38331, #38363, #38333, #38551, #38550, #38334, #38624, #38826, #38797).
 Additionally, the layout inspector now dims nodes that are not displayed (@simonwuelker, #38575).
@@ -32,8 +34,9 @@ We fixed a significant source of crashes in the engine: hit testing using outdat
 Hit testing in a web rendering engine is the process that determines which element(s) the user's mouse is hovering over.
 Previously, this process ran inside of [WebRender](https://github.com/servo/webrender), which receives a display list representing what should be rendered for a particular page.
 Since this is either a separate thread or process from the actual page content, display lists are updated asynchronously.
+
 This means it was possible to trigger crashes by performing a hit test (e.g. moving the mouse quickly) over parts of the page that were rapidly changing, since the elements reported may not exist any more.
-This was fixed by making the hit test operation synchronous and moving it into the same thread as the actual content being tested against, eliminating the possibility of outdated results (@mrobinson, @Loirooriol, @kongbai1996, @yezhizhen, #38480, #38464, #38463, #38884).
+This was fixed by making the hit test operation synchronous and moving it into the same thread as the actual content being tested against, eliminating the possibility of outdated results (@mrobinson, @Loirooriol, @kongbai1996, @yezhizhen, #38480, #38464, #38463, #38884, #38518).
 
 Numerous pieces of the [**Trusted Types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) are now present in Servo
 (@TimvdLippe, @jdm, #38595, #37834, #38700, #38736, #38718, #38784, #38871, #8623, #38874, #38872, #38886), all gated behind the `dom_trusted_types_enabled` preference.
@@ -44,7 +47,16 @@ A prototype implementation of the [CookieStore API](https://developer.mozilla.or
 
 Servo now passes over 99.6% of the CSS geometry testsuite, thanks to an implementation of **DOMPointReadOnly.matrixTransform**, making all geometry interfaces serializable, and adding the **SVGMatrix and SVGPoint aliases** (@lumiscosity, #38801, #38828, #38810).
 
+You can now use the [**TextEncoderStream** API](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream) (@minghuaw, #38466).
+Streams that are piped now correctly pass through `undefined` values, too (@gterzian, #38470).
+We also fixed a crash in the result of the **ReadableStream.pipeTo** method (@gterzian, #38385).
+
+There were a number of changes involving DOM events: element focus now occurs after `mousedown` instead of `click` (@yezhizhen, #38589), `mouseleave` events are fired when the pointer leaves an `<iframe>` (@mrobinson, @Loirooriol, #38539), and pasting from the clipboard into a text input triggers an `input` event (@mrobinson, #37100).
+We also ignore `mousedown` and `mouseup` events for elements that are disabled (@yezhizhen, #38671), and implemented the **MouseEvent.getModifierState** method (@PotatoCP, #38535).
+Finally, removing an event handler content attribute clears all relevant event listeners (@TimvdLippe, @kotx, #38734, #39011).
+
 Servo now fires a **scroll event** whenever a page is scrolled (@stevennovaryo, #38321). Additionally, the **Window.scrollIntoView** method is now available (@abdelrahman1234567, #38230).
+The **FocusOptions.preventScroll** method can now be used to prevent scrolling when focusing an element with `Element.focus` (@abdelrahman1234567, #38495).
 
 [[figure showing scrolling effect?]]
 
@@ -52,8 +64,11 @@ The **Navigator.sendBeacon()** API is implemented, gated behind the `dom.navigat
 
 The **HTMLDocument** interface now exists as a property on the `Window` object (@leo030303, #38433).
 
-Our 2d canvas implementation now supports the **Path2D.addPath** method (@arthmis, #37838) and the `restore` method now pops all applied clipping paths (@sagudev, #38496).
+Our 2d canvas implementation now supports the **Path2D.addPath** method (@arthmis, #37838) and the **Canvas2dRenderingContext/OffscreenCanvas.restore** methods now pops all applied clipping paths (@sagudev, #38496).
 Additionally, we now support **using web fonts in the 2D canvas** (@mrobinson, #38979).
+Meanwhile, the performance continues to improve in the new [Vello](https://github.com/linebender/vello?tab=readme-ov-file#vello)-based backends (@sagudev, #38406, #38356, #38440, #38437)
+
+
 
 Our WebDriver implementation now passes 80% of the implementation conformance tests.
 This is the result of lots of iteration and fixes for things like handling user prompts (@PotatoCP, #38591), computing obscured/disabled elements while clicking (@yezhizhen, #38497, #38841, #38436, #38490, #38383), and improving window focus behaviours (@yezhizhen, #38889, #38909).
@@ -76,25 +91,8 @@ Various popup dialogs (e.g. the `<select>` option chooser dialog) now can be clo
 Additionally, the browser now responds to a popup closing without any other inputs (@lumiscosity, #39038).
 
 <!--
-- css
-    - https://github.com/servo/servo/pull/38682	(@simonwuelker, #38682)	script: Implement `CSS.registerProperty` (#38682)
-      css
-    - https://github.com/servo/servo/pull/38564	(@simonwuelker, #38564)	script: Support custom element states (#38564)
-      css
 - dom
-    - https://github.com/servo/servo/pull/38470	(@gterzian, #38470)	script: allow for undefined chunks in stream piping (#38470)
-      dom
     - https://github.com/servo/servo/pull/38579	(@simonwuelker, #38579)	script: Convert `CSS` from a IDL interface with static methods to a namespace (#38579)
-      dom
-    - https://github.com/servo/servo/pull/38589	(@euclid.ye@huawei.com, #38589)	script: Focus on mousedown instead of mouse click according to spec (#38589)
-      dom
-    - https://github.com/servo/servo/pull/38539	(@mrobinson, @Loirooriol, #38539)	script/compositor: Send `mouseleave` events when cursor moves between `<iframe>`s (#38539)
-      dom
-    - https://github.com/servo/servo/pull/37100	(@mrobinson, #37100)	script: Properly fire `input` events for clipboard use in input elements (#37100)
-      dom
-    - https://github.com/servo/servo/pull/38535	(@Kenzie.Raditya.Tirtarahardja@huawei.com, #38535)	script: Implement `getModifierState` for mouse event (#38535)
-      dom
-    - https://github.com/servo/servo/pull/38671	(@euclid.ye@huawei.com, #38671)	script: Stop handling native `mousedown` and `mouseup` for disabled elements (#38671)
       dom
     - https://github.com/servo/servo/pull/38507	(@menonrahul02@gmail.com, #38507)	script: Implement QuotaExceededError WebIDL interface (#38507)
       dom
@@ -102,15 +100,9 @@ Additionally, the browser now responds to a popup closing without any other inpu
       dom
     - https://github.com/servo/servo/pull/38599	(@averyrudelphe@gmail.com, #38599)	script: Strip `javascript` URL scheme using `Position::AfterScheme` rather than `Position::BeforePath` (#38599)
       dom
-    - https://github.com/servo/servo/pull/38466	(@wuminghua7@huawei.com, #38466)	Script: Implement `TextEncoderStream` (#38466)
-      dom
     - https://github.com/servo/servo/pull/38720	(@menonrahul02@gmail.com, #38720)	content: Make QuotaExceededError serializable (#38720)
       dom
     - https://github.com/servo/servo/pull/38746	(@Taym95, #38746)	Implement AbortSignal static abort(reason) (#38746)
-      dom
-    - https://github.com/servo/servo/pull/38734	(@TimvdLippe, #38734)	Remove event handlers when attribute is removed (#38734)
-      dom
-    - https://github.com/servo/servo/pull/38495	(@abdelrahman1234567, #38495)	script: Add `FocusOptions` argument to `Element.focus` and implement `FocusOptions.preventScroll` (#38495)
       dom
     - https://github.com/servo/servo/pull/38676	(@gterzian, @mrobinson, #38676)	script: abort planned form navigations (#38676)
       dom
@@ -122,8 +114,6 @@ Additionally, the browser now responds to a popup closing without any other inpu
       dom
     - https://github.com/servo/servo/pull/37776	(@sagudev, @mrobinson, #37776)	compositor: Allow canvas to upload rendered contents asynchronously (#37776)
       dom
-    - https://github.com/servo/servo/pull/39011	(@kot@kot.pink, #39011)	script: Clear all associated event listeners when removing an event listener content attribute. (#39011)
-      dom
 - layout
     - https://github.com/servo/servo/pull/38391	(@mrobinson, @Loirooriol, #38391)	layout: Account for sticky nodes in ScrollTree transforms and cache transforms (#38391)
       layout
@@ -132,8 +122,6 @@ Additionally, the browser now responds to a popup closing without any other inpu
     - https://github.com/servo/servo/pull/38366	(@Loirooriol, #38366)	layout: Recreate lazy block size when re-doing layout to avoid floats (#38366)
       layout
     - https://github.com/servo/servo/pull/38443	(@shubhamg13, #38443)	Include the scrollable overflow of a child box if either its parent or child has `overflow: visible` (#38443)
-      layout
-    - https://github.com/servo/servo/pull/38518	(@mrobinson, @Loirooriol, #38518)	script/compositor: Handle cursor updates from script (#38518)
       layout
     - https://github.com/servo/servo/pull/38521	(@Loirooriol, #38521)	layout: Floor content-box size by zero when stretching flex item (#38521)
       layout
@@ -161,14 +149,6 @@ Additionally, the browser now responds to a popup closing without any other inpu
     - https://github.com/servo/servo/pull/38462	(@rayguo17, @jschwe, #38462)	script: fix set muted on html video element creation (#38462)
       media
 - performance
-    - https://github.com/servo/servo/pull/38406	(@sagudev, #38406)	canvas: prune vello scene on each render and make rendering cacheable (#38406)
-      performance
-    - https://github.com/servo/servo/pull/38356	(@sagudev, #38356)	canvas: Clear vello scene if possible (#38356)
-      performance
-    - https://github.com/servo/servo/pull/38440	(@sagudev, #38440)	canvas: Do not use vello layers for opacity or default composition (#38440)
-      performance
-    - https://github.com/servo/servo/pull/38437	(@sagudev, #38437)	canvas: Use OptimizeSpeed in vello_cpu (#38437)
-      performance
     - https://github.com/servo/servo/pull/38431	(@mrobinson, @Loirooriol, #38431)	script: Unify script-based "update the rendering" and throttle it to 60 FPS (#38431)
       performance
     - https://github.com/servo/servo/pull/38666	(@jschwe, #38666)	mozjs: Remove unneeded icu_capi features (#38666)
@@ -185,8 +165,6 @@ Additionally, the browser now responds to a popup closing without any other inpu
     - https://github.com/servo/servo/pull/38461	(@leo030303, #38461)	Servoshell: Update `Window::inner_size` on `WindowEvent::Resized` (fix resize bug) (#38461)
       servoshell
 - stability
-    - https://github.com/servo/servo/pull/38385	(@gterzian, #38385)	script: in stream piping, ensure the heap is set only after it has been moved (#38385)
-      stability
     - https://github.com/servo/servo/pull/38473	(@mrobinson, #38473)	script/layout: Ensure a StackingContextTree before IntersectionObserver geometry queries (#38473)
       stability
     - https://github.com/servo/servo/pull/38664	(@gterzian, #38664)	script: check if the canvas is paintable before measuring text (#38664)
