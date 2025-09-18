@@ -58,6 +58,15 @@ Meanwhile, the performance continues to improve in the new &lt;a href=&quot;http
 &lt;p&gt;Our WebDriver implementation now passes 80% of the implementation conformance tests.
 This is the result of lots of iteration and fixes for things like handling user prompts (@PotatoCP, #38591), computing obscured/disabled elements while clicking (@yezhizhen, #38497, #38841, #38436, #38490, #38383), and improving window focus behaviours (@yezhizhen, #38889, #38909).&lt;/p&gt;
 &lt;p&gt;We upgraded to &lt;strong&gt;SpiderMonkey v140&lt;/strong&gt; (@jdm, #37077, #38563), as well as the &lt;strong&gt;upstream Stylo&lt;/strong&gt; revision as of August 1, 2025.&lt;/p&gt;
+&lt;h2 id=&quot;performance-%26-stability&quot; tabindex=&quot;-1&quot;&gt;Performance &amp;amp; Stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2025/09/01/this-month-in-servo/#performance-%26-stability&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We fixed several panics this month, involving &lt;code&gt;IntersectionObserver&lt;/code&gt; and missing stacking contexts (@mrobinson, #38473), unpaintable canvases and text (@gterzian, #38664), serializing the result of &lt;code&gt;Window.location&lt;/code&gt; (@jdm, #38709), and navigations canceled before HTTP headers are received (@gterzian, #38739).&lt;/p&gt;
+&lt;p&gt;We also fixed a number of performance pitfalls.
+The document rendering loop is now &lt;strong&gt;throttled to 60 FPS&lt;/strong&gt; (@mrobinson, @Loirooriol, #38431), while animated images do less work when advancing the current frame (@mrobinson, #38857).
+In addition, elements with CSS images will not trigger page reflow until their image data is fully available (@coding-joedow, #38916).&lt;/p&gt;
+&lt;p&gt;Finally, we made improvements to memory usage and binary size.
+Inline stylesheets are now deduplicated, which can have a significant impact on pages with &lt;strong&gt;lots of form inputs or custom elements&lt;/strong&gt; with common styles (@coding-joedow, #38540). We also removed many unused pieces of the ICU library, &lt;strong&gt;saving 16MB&lt;/strong&gt; from the final binary.&lt;/p&gt;
 &lt;h2 id=&quot;embedding&quot; tabindex=&quot;-1&quot;&gt;Embedding &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2025/09/01/this-month-in-servo/#embedding&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -128,31 +137,11 @@ Additionally, the browser now responds to a popup closing without any other inpu
 - media
     - https://github.com/servo/servo/pull/38462	(@rayguo17, @jschwe, #38462)	script: fix set muted on html video element creation (#38462)
       media
-- performance
-    - https://github.com/servo/servo/pull/38431	(@mrobinson, @Loirooriol, #38431)	script: Unify script-based &quot;update the rendering&quot; and throttle it to 60 FPS (#38431)
-      performance
-    - https://github.com/servo/servo/pull/38666	(@jschwe, #38666)	mozjs: Remove unneeded icu_capi features (#38666)
-      performance
-    - https://github.com/servo/servo/pull/38540	(@ibluegalaxy_taoj@163.com, #38540)	Reuse `StylesheetContent` for inline style sheets with identical content (#38540)
-      performance
-    - https://github.com/servo/servo/pull/38857	(@mrobinson, #38857)	script: Do not iterate through all image frames when advancing animated images (#38857)
-      performance
-    - https://github.com/servo/servo/pull/38916	(@ibluegalaxy_taoj@163.com, #38916)	script: mark image-related node dirty only when image resource loaded (#38916)
-      performance
 - servoshell
     - https://github.com/servo/servo/pull/38328	(@euclid.ye@huawei.com, #38328)	servoshell: Sync window toolbar height with minibrowser (#38328)
       servoshell
     - https://github.com/servo/servo/pull/38461	(@leo030303, #38461)	Servoshell: Update `Window::inner_size` on `WindowEvent::Resized` (fix resize bug) (#38461)
       servoshell
-- stability
-    - https://github.com/servo/servo/pull/38473	(@mrobinson, #38473)	script/layout: Ensure a StackingContextTree before IntersectionObserver geometry queries (#38473)
-      stability
-    - https://github.com/servo/servo/pull/38664	(@gterzian, #38664)	script: check if the canvas is paintable before measuring text (#38664)
-      stability
-    - https://github.com/servo/servo/pull/38709	(@jdm, #38709)	script: Ensure JS-&gt;webdriver conversions have a non-empty settings stack (#38709)
-      stability
-    - https://github.com/servo/servo/pull/38739	(@gterzian, #38739)	script: when handling page headers, stop if pipeline closed already (#38739)
-      stability
 - webdriver
     - https://github.com/servo/servo/pull/38401	(@kkoyung, #38401)	webdriver: consider boolean attribute when get element attribute (#38401)
       webdriver
