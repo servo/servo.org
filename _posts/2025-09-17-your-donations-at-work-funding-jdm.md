@@ -3,14 +3,14 @@ layout:     post
 tags:       blog
 title:      "Your Donations at Work: Funding Josh Matthews' Contributions to Servo"
 date:       2025-09-17
-summary:    Announcing Servo's first donation funded role to help improve contributor experience.
+summary:    Announcing Servo's first donation-funded role to help improve contributor experience.
 categories:
 ---
 
 
 The Servo project is excited to share that long-time maintainer [Josh Matthews (@jdm)](https://github.com/jdm) is now working part-time on improving the Servo contributor experience.
 
-This is a direct result of the monthly donations to the project. The generosity of our supporters has allowed us to operate dedicated computing resources for CI purposes, as well as participate in the Outreachy program as a mentoring organization. We're excited that we can now financially support developers and allow them to dedicate more time to the Servo project over longer periods.
+This is a direct result of the monthly donations to the project through [OpenCollective](https://opencollective.com/servo) and [GitHub](https://github.com/sponsors/servo). The generosity of our supporters has allowed us to operate dedicated computing resources for CI purposes, as well as participate in the [Outreachy program](https://www.outreachy.org/) as a mentoring organization. We're excited that we can now financially support developers and allow them to dedicate more time to the Servo project over longer periods.
 
 Josh will use this funded time to make it easier for others to contribute to the project. You will see him improving documentation, reviewing pull requests, breaking down large projects into smaller actionable tasks, and generally helping others get unstuck quicker.
 
