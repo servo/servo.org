@@ -23,10 +23,10 @@ Servo's roadmap is defined in the project wiki: <https://github.com/servo/servo/
 
 ## Presentations
 
-<section class="section container" aria-label="Latest talks about Servo">
+<section class="section" aria-label="Latest talks about Servo">
   <div class="blog">
     <div class="inner-container">
-      <h2>Latest talks about Servo</h2>
+      <h3>Latest talks about Servo</h3>
         <div class="blog-grid">
             {% for talk in talks limit:5 %}<div class="card">
                   <div class="card-content">
