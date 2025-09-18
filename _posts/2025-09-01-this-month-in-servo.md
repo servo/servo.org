@@ -75,6 +75,17 @@ This is the result of lots of iteration and fixes for things like handling user 
 
 We upgraded to **SpiderMonkey v140** (@jdm, #37077, #38563), as well as the **upstream Stylo** revision as of August 1, 2025.
 
+## Performance & Stability
+
+We fixed several panics this month, involving `IntersectionObserver` and missing stacking contexts (@mrobinson, #38473), unpaintable canvases and text (@gterzian, #38664), serializing the result of `Window.location` (@jdm, #38709), and navigations canceled before HTTP headers are received (@gterzian, #38739).
+
+We also fixed a number of performance pitfalls.
+The document rendering loop is now **throttled to 60 FPS** (@mrobinson, @Loirooriol, #38431), while animated images do less work when advancing the current frame (@mrobinson, #38857).
+In addition, elements with CSS images will not trigger page reflow until their image data is fully available (@coding-joedow, #38916).
+
+Finally, we made improvements to memory usage and binary size.
+Inline stylesheets are now deduplicated, which can have a significant impact on pages with **lots of form inputs or custom elements** with common styles (@coding-joedow, #38540). We also removed many unused pieces of the ICU library, **saving 16MB** from the final binary.
+
 ## Embedding
 
 Servo has declared a **Minimum Supported Rust Version** (1.85.0), and this is verified with every new pull request (@jschwe, #37152).
@@ -148,31 +159,11 @@ Additionally, the browser now responds to a popup closing without any other inpu
 - media
     - https://github.com/servo/servo/pull/38462	(@rayguo17, @jschwe, #38462)	script: fix set muted on html video element creation (#38462)
       media
-- performance
-    - https://github.com/servo/servo/pull/38431	(@mrobinson, @Loirooriol, #38431)	script: Unify script-based "update the rendering" and throttle it to 60 FPS (#38431)
-      performance
-    - https://github.com/servo/servo/pull/38666	(@jschwe, #38666)	mozjs: Remove unneeded icu_capi features (#38666)
-      performance
-    - https://github.com/servo/servo/pull/38540	(@ibluegalaxy_taoj@163.com, #38540)	Reuse `StylesheetContent` for inline style sheets with identical content (#38540)
-      performance
-    - https://github.com/servo/servo/pull/38857	(@mrobinson, #38857)	script: Do not iterate through all image frames when advancing animated images (#38857)
-      performance
-    - https://github.com/servo/servo/pull/38916	(@ibluegalaxy_taoj@163.com, #38916)	script: mark image-related node dirty only when image resource loaded (#38916)
-      performance
 - servoshell
     - https://github.com/servo/servo/pull/38328	(@euclid.ye@huawei.com, #38328)	servoshell: Sync window toolbar height with minibrowser (#38328)
       servoshell
     - https://github.com/servo/servo/pull/38461	(@leo030303, #38461)	Servoshell: Update `Window::inner_size` on `WindowEvent::Resized` (fix resize bug) (#38461)
       servoshell
-- stability
-    - https://github.com/servo/servo/pull/38473	(@mrobinson, #38473)	script/layout: Ensure a StackingContextTree before IntersectionObserver geometry queries (#38473)
-      stability
-    - https://github.com/servo/servo/pull/38664	(@gterzian, #38664)	script: check if the canvas is paintable before measuring text (#38664)
-      stability
-    - https://github.com/servo/servo/pull/38709	(@jdm, #38709)	script: Ensure JS->webdriver conversions have a non-empty settings stack (#38709)
-      stability
-    - https://github.com/servo/servo/pull/38739	(@gterzian, #38739)	script: when handling page headers, stop if pipeline closed already (#38739)
-      stability
 - webdriver
     - https://github.com/servo/servo/pull/38401	(@kkoyung, #38401)	webdriver: consider boolean attribute when get element attribute (#38401)
       webdriver
