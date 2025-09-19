@@ -282,6 +282,20 @@ Or in vim:
 - `:%s/\v ([0-9A-Za-z_.-]+)#([0-9]+)/ [\1#\2](https:\/\/github.com\/servo\/\1\/pull\/\2)/gc`
 - `:%s/\v ([0-9A-Za-z_.-]+)\/([0-9A-Za-z_.-]+)#([0-9]+)/ [\1\/\2#\3](https:\/\/github.com\/\1\/\2\/pull\/\3)/gc`
 
+## How to count the number of pull requests in a month
+
+After following the steps that generate `commits.txt`, run the following:
+
+```
+grep -E "^https://github.com/servo/servo/pull/" tools/commits.txt | sort | uniq | wc -l
+```
+
+To exclude dependabot PRs, run:
+
+```
+grep -E "^https://github.com/servo/servo/pull/" tools/commits.txt | grep -v dependabot | sort | uniq | wc -l
+```
+
 ## How to calculate monthly recurring donations
 
 OpenCollective:
