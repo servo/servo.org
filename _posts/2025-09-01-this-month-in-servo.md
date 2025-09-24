@@ -13,7 +13,10 @@ August flew by, and with it came **447 pull requests** from Servo contributors.
 Our big new feature this month is rendering support **inline SVG elements** (@mukilan, @Loirooriol, #38188, #38603).
 This improves the appearance of many popular websites.
 
-[[add inline svg figure]]
+<figure>
+  <a href="{{ '/img/blog/2025-09-svg.png' | url }}"><img alt="Screenshot of servoshell with the Google homepage loaded" src="{{ '/img/blog/2025-09-svg.png' | url }}"></a>
+  <figcaption>Did you know that the Google logo is an SVG element?</figcaption>
+</figure>
 
 We have implemented **named grid line lines and areas** (@nicoburns, @loirooriol, #38306, #38574, #38493), still gated behind the `layout_grid_enabled` preference (#38306, #38574).
 
@@ -28,7 +31,7 @@ Our developer tools continue to make progress! We now have a functional network 
 and our JS debugger can show potential breakpoints (@delan, @atbrakhi, #38331, #38363, #38333, #38551, #38550, #38334, #38624, #38826, #38797).
 Additionally, the layout inspector now dims nodes that are not displayed (@simonwuelker, #38575).
 
-[[add network monitor figure here]]
+<img src="{{ '/img/blog/2025-09-netmonitor.png' | url }}" alt="The Firefox network monitor, showing a list of network connections for the Servo Mastodon account homepage"><img src=" {{ '/img/blog/2025-09-mastodon.png' | url }}" alt="servoshell showing the Servo Mastodon account homepage">
 
 We fixed a significant source of crashes in the engine: hit testing using outdated display lists.
 Hit testing in a web rendering engine is the process that determines which element(s) the user's mouse is hovering over.
@@ -76,7 +79,7 @@ Flexbox cross sizes can no longer end up negative through stretching (@Loiroorio
 
 **Overflow calculations are more accurate**, now that we ignore `position: fixed` children of the root element (@stevennovaryo, #38618), compute overflow for `<body>` separate from the viewport (@shubhamg13, #38825), check for `overflow: visible` in parents and children (@shubhamg13, #38443), and propagate `overflow` to the viewport correctly (@shubhamg13, @Loirooriol, #38598).
 
-Our WebDriver implementation now passes 80% of the implementation conformance tests.
+Our **WebDriver** implementation now passes 80% of the implementation conformance tests.
 This is the result of lots of work on handling user prompts (@PotatoCP, #38591), computing obscured/disabled elements while clicking (@yezhizhen, #38497, #38841, #38436, #38490, #38383), and improving window focus behaviours (@yezhizhen, #38889, #38909).
 We also implemented the **Get Window Handles** command (@longvatrong111, @yezhizhen, #38622, #38745), added support for getting element boolean attributes (@kkoyung, #38401), and added more accurate errors for a number of commands (@yezhizhen, @longvatrong111, #38620, #38357).
 The **Element Clear** command now clears `<input type=file>` elements correctly (@PotatoCP, #38536), and **Element Send Keys** now appends to file inputs with the `multiple` attribute.
