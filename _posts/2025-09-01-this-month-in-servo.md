@@ -77,7 +77,9 @@ Flexbox cross sizes can no longer end up negative through stretching (@Loiroorio
 **Overflow calculations are more accurate**, now that we ignore `position: fixed` children of the root element (@stevennovaryo, #38618), compute overflow for `<body>` separate from the viewport (@shubhamg13, #38825), check for `overflow: visible` in parents and children (@shubhamg13, #38443), and propagate `overflow` to the viewport correctly (@shubhamg13, @Loirooriol, #38598).
 
 Our WebDriver implementation now passes 80% of the implementation conformance tests.
-This is the result of lots of iteration and fixes for things like handling user prompts (@PotatoCP, #38591), computing obscured/disabled elements while clicking (@yezhizhen, #38497, #38841, #38436, #38490, #38383), and improving window focus behaviours (@yezhizhen, #38889, #38909).
+This is the result of lots of work on handling user prompts (@PotatoCP, #38591), computing obscured/disabled elements while clicking (@yezhizhen, #38497, #38841, #38436, #38490, #38383), and improving window focus behaviours (@yezhizhen, #38889, #38909).
+We also implemented the **Get Window Handles** command (@longvatrong111, @yezhizhen, #38622, #38745), added support for getting element boolean attributes (@kkoyung, #38401), and added more accurate errors for a number of commands (@yezhizhen, @longvatrong111, #38620, #38357).
+The **Element Clear** command now clears `<input type=file>` elements correctly (@PotatoCP, #38536), and **Element Send Keys** now appends to file inputs with the `multiple` attribute.
 
 We upgraded to **SpiderMonkey v140** (@jdm, #37077, #38563), as well as the **upstream Stylo** revision as of August 1, 2025.
 
@@ -145,31 +147,6 @@ Additionally, the browser now responds to a popup closing without any other inpu
       layout
     - https://github.com/servo/servo/pull/38705	(@Loirooriol, #38705)	layout: Stop making `<video>` fall back to a preferred aspect ratio of 2 (#38705)
       layout
-- webdriver
-    - https://github.com/servo/servo/pull/38401	(@kkoyung, #38401)	webdriver: consider boolean attribute when get element attribute (#38401)
-      webdriver
-    - https://github.com/servo/servo/pull/38397	(@longvatrong111, #38397)	webdriver: improve session commands (#38397)
-      webdriver
-    - https://github.com/servo/servo/pull/38491	(@euclid.ye@huawei.com, #38491)	webdriver: Search ancestors instead of preceding nodes when computing container for `option`&`optgroup` (#38491)
-      webdriver
-    - https://github.com/servo/servo/pull/38536	(@Kenzie.Raditya.Tirtarahardja@huawei.com, #38536)	script(webdriver): Fix element clear for file (#38536)
-      webdriver
-    - https://github.com/servo/servo/pull/38620	(@euclid.ye@huawei.com, #38620)	webdriver: Synchronize "close window" command & Return correct error type (#38620)
-      webdriver
-    - https://github.com/servo/servo/pull/38357	(@longvatrong111, #38357)	Implement webdriver extract script arguments (#38357)
-      webdriver
-    - https://github.com/servo/servo/pull/38622	(@longvatrong111, #38622)	webdriver: Implement the "Get Window Handles" command (#38622)
-      webdriver
-    - https://github.com/servo/servo/pull/38407	(@Kenzie.Raditya.Tirtarahardja@huawei.com, @euclid.ye@huawei.com, #38407)	script(webdriver): Element send keys append to the end of `filelist` if Multiple (#38407)
-      webdriver
-    - https://github.com/servo/servo/pull/38745	(@longvatrong111, @euclid.ye@huawei.com, #38745)	webdriver: Refactor webdriver session and improve window handles (#38745)
-      webdriver
-    - https://github.com/servo/servo/pull/38444	(@Kenzie.Raditya.Tirtarahardja@huawei.com, @euclid.ye@huawei.com, #38444)	webdriver: Element Send keys use dispatch actions for KeyboardEvent (#38444)
-      webdriver
-    - https://github.com/servo/servo/pull/38943	(@euclid.ye@huawei.com, #38943)	script: Fix wrong procedure when deserializing `JSValue` from mozjs `HandleValue` (#38943)
-      webdriver
-    - https://github.com/servo/servo/pull/39012	(@euclid.ye@huawei.com, #39012)	webdriver: Improve parsing of Frame and Window (#39012)
-      webdriver
 -->
 
 <style>
