@@ -53,7 +53,7 @@ This was fixed by making the hit test operation synchronous and moving it into t
 
 ### DOM & JS
 
-We upgraded to **SpiderMonkey v140** (@jdm, #37077, #38563).
+We upgraded to **SpiderMonkey v140** ([changelog](https://gitlab.gnome.org/GNOME/gjs/-/blob/master/NEWS#L39-137)) (@jdm, #37077, #38563).
 
 Numerous pieces of the [**Trusted Types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) are now present in Servo
 (@TimvdLippe, @jdm, #38595, #37834, #38700, #38736, #38718, #38784, #38871, #8623, #38874, #38872, #38886), all gated behind the `dom_trusted_types_enabled` preference.
@@ -75,27 +75,37 @@ Finally, removing an event handler content attribute clears all relevant event l
 Servo now fires a **scroll event** whenever a page is scrolled (@stevennovaryo, #38321). Additionally, the **Window.scrollIntoView** method is now available (@abdelrahman1234567, #38230).
 The **FocusOptions.preventScroll** method can now be used to prevent scrolling when focusing an element with `Element.focus` (@abdelrahman1234567, #38495).
 
-[[figure showing scrolling effect?]]
-
-The **Navigator.sendBeacon()** API is implemented, gated behind the `dom.navigator.sendbeacon_enabled` preference (@TimvdLippe, #38301).
+The **Navigator.sendBeacon()** API is implemented, gated behind the `dom_navigator_sendbeacon_enabled` preference (@TimvdLippe, #38301).
+Similarly, the static **AbortSignal.abort()** method is hidden behind `dom_abort_controller_enabled` (@Taym95, #38746).
 
 The **HTMLDocument** interface now exists as a property on the `Window` object (@leo030303, #38433).
+Meanwhile, the **CSS** window property is now a [WebIDL namespace](https://webidl.spec.whatwg.org/#idl-namespaces) (@simonwuelker, #38579).
+We implemented the new **QuotaExceededError** DOMException interface (@rmeno12, #38507, #38720)
 
 Our 2d canvas implementation now supports the **Path2D.addPath** method (@arthmis, #37838) and the **Canvas2dRenderingContext/OffscreenCanvas.restore** methods now pop all applied clipping paths (@sagudev, #38496).
 Additionally, we now support **using web fonts in the 2D canvas** (@mrobinson, #38979).
-Meanwhile, the performance continues to improve in the new [Vello](https://github.com/linebender/vello?tab=readme-ov-file#vello)-based backends (@sagudev, #38406, #38356, #38440, #38437).
+Meanwhile, the performance continues to improve in the new [Vello](https://github.com/linebender/vello?tab=readme-ov-file#vello)-based backends (@sagudev, #38406, #38356, #38440, #38437), with asyanchronous uploading also showing improvements (@sagudev, @mrobinson, #37776).
 
-Muting media elements with the `mute` HTML attribute now works during the initial load (@rayguo17, @jschwe, #38462).
+Muting media elements with the `mute` HTML attribute works during the initial resource load (@rayguo17, @jschwe, #38462).
 
 Modifying stylesheets now integrates better with incremental layout, in both light trees and shadow trees (@coding-joedow, #38530, #38529).
+However, calling `setProperty` on a readonly `CSSStyleDeclaration` correctly throws an exception (@simonwuelker, #38677).
 
 ### CSS
 
-There are more CSS changes—we now support custom CSS properties with the **CSS.registerProperty** method (@simonwuelker, #38682), as well as custom element states with **ElementInternals.states** (@simonwuelker, #38564).
+We now support custom CSS properties with the **CSS.registerProperty** method (@simonwuelker, #38682), as well as custom element states with **ElementInternals.states** (@simonwuelker, #38564).
 
 Flexbox cross sizes can no longer end up negative through stretching (@Loirooriol, #38521), while `stretch` on flex items now stretches to the line if possible (@Loirooriol, #38526).
 
 **Overflow calculations are more accurate**, now that we ignore `position: fixed` children of the root element (@stevennovaryo, #38618), compute overflow for `<body>` separate from the viewport (@shubhamg13, #38825), check for `overflow: visible` in parents and children (@shubhamg13, #38443), and propagate `overflow` to the viewport correctly (@shubhamg13, @Loirooriol, #38598).
+
+Color and text decorations no longer inherit into `<select>` element contents (@simonwuelker, #38570).
+
+Negative outline offsets work correctly (@lumiscosity, @mrobinson, #38418).
+
+Video elements no longer fall back to a preferred aspect ratio of 2 (@Loirooriol, #38705).
+
+`position: sticky` elements are handled correctly inside CSS transforms (@mrobinson, @Loirooriol, #38391).
 
 We upgraded to the **upstream Stylo** revision as of August 1, 2025.
 
@@ -130,45 +140,6 @@ Element hit testing in full screen mode now works as expected (@yezhizhen, #3832
 
 Various popup dialogs (e.g. the `<select>` option chooser dialog) now can be closed without choosing a value (@TimvdLippe, #38373, #38949).
 Additionally, the browser now responds to a popup closing without any other inputs (@lumiscosity, #39038).
-
-<!--
-- dom
-    - https://github.com/servo/servo/pull/38579	(@simonwuelker, #38579)	script: Convert `CSS` from a IDL interface with static methods to a namespace (#38579)
-      dom
-    - https://github.com/servo/servo/pull/38507	(@menonrahul02@gmail.com, #38507)	script: Implement QuotaExceededError WebIDL interface (#38507)
-      dom
-    - https://github.com/servo/servo/pull/38677	(@simonwuelker, #38677)	script: Always throw when trying to `setProperty` on a readonly style `CSSStyleDeclaration` (#38677)
-      dom
-    - https://github.com/servo/servo/pull/38599	(@averyrudelphe@gmail.com, #38599)	script: Strip `javascript` URL scheme using `Position::AfterScheme` rather than `Position::BeforePath` (#38599)
-      dom
-    - https://github.com/servo/servo/pull/38720	(@menonrahul02@gmail.com, #38720)	content: Make QuotaExceededError serializable (#38720)
-      dom
-    - https://github.com/servo/servo/pull/38746	(@Taym95, #38746)	Implement AbortSignal static abort(reason) (#38746)
-      dom
-    - https://github.com/servo/servo/pull/38676	(@gterzian, @mrobinson, #38676)	script: abort planned form navigations (#38676)
-      dom
-    - https://github.com/servo/servo/pull/38984	(@euclid.ye@huawei.com, #38984)	script: Support decomposing ShadowRoot from mozjs `HandleValue` (#38984)
-      dom
-    - https://github.com/servo/servo/pull/38993	(@Gae24, #38993)	`XMLHttpRequest` `Send`: fix Content-Type failures (#38993)
-      dom
-    - https://github.com/servo/servo/pull/39020	(@andrei.volykhin@gmail.com, @volykhin.andrei@huawei.com, #39020)	webgpu: Add the dedicated WebGPU task source (#39020)
-      dom
-    - https://github.com/servo/servo/pull/37776	(@sagudev, @mrobinson, #37776)	compositor: Allow canvas to upload rendered contents asynchronously (#37776)
-      dom
-- layout
-    - https://github.com/servo/servo/pull/38391	(@mrobinson, @Loirooriol, #38391)	layout: Account for sticky nodes in ScrollTree transforms and cache transforms (#38391)
-      layout
-    - https://github.com/servo/servo/pull/38418	(@averyrudelphe@gmail.com, @mrobinson, #38418)	layout: Fix negative outline offset (#38418)
-      layout
-    - https://github.com/servo/servo/pull/38366	(@Loirooriol, #38366)	layout: Recreate lazy block size when re-doing layout to avoid floats (#38366)
-      layout
-    - https://github.com/servo/servo/pull/38570	(@simonwuelker, #38570)	layout: Set color and text decoration on `<select>` elements by default (#38570)
-      layout
-    - https://github.com/servo/servo/pull/38678	(@mrobinson, @Loirooriol, #38678)	layout: Support storing layout data for two-level nested pseudo-elements (#38678)
-      layout
-    - https://github.com/servo/servo/pull/38705	(@Loirooriol, #38705)	layout: Stop making `<video>` fall back to a preferred aspect ratio of 2 (#38705)
-      layout
--->
 
 <style>
     ._correction {
