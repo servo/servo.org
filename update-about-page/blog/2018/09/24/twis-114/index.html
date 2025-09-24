@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>This Week In Servo 114 - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="This Week In Servo 114 - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  
+
+  
+  <meta name="description" content="What&#39;s up with Servo for the week of 17 September 2018 - 24 September 2018">
+  <meta name="og:description" content="What&#39;s up with Servo for the week of 17 September 2018 - 24 September 2018">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/update-about-page/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/update-about-page/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/update-about-page/blog/2018/09/24/twis-114/">
+
+  <link rel="stylesheet" href="/update-about-page/css/style.css">
+  <link rel="shortcut icon" href="/update-about-page/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/update-about-page/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="inner-container">
+      <div class="navbar-brand">
+        <a href="/update-about-page/">
+          <img src="/update-about-page/img/servo-color.png" alt="This Week In Servo 114">
+        </a>
+
+        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="navbar-menu" id="navbar-menu">
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                Get Involved
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/contributing/"
+                    
+                  >
+                    Contributing
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://book.servo.org"
+                     target="_blank"
+                  >
+                    Servo Book<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/wpt/"
+                    
+                  >
+                    WPT pass rates
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/coc/"
+                    
+                  >
+                    Code of Conduct
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/update-about-page/download/"
+              
+            >
+              Download
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/update-about-page/blog/"
+              
+            >
+              Blog
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="https://demo.servo.org/"
+               target="_blank"
+            >
+              Demos<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+            </a>
+          
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                About
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/about/"
+                    
+                  >
+                    About Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/made-with/"
+                    
+                  >
+                    Made with Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://github.com/servo/project/blob/main/governance/README.md"
+                     target="_blank"
+                  >
+                    Governance<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/sponsorship/"
+                    
+                  >
+                    Sponsorship
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/acknowledgements/"
+                    
+                  >
+                    Acknowledgements
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+        <div class="navbar-end">
+    
+      <a class="social-link is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="social-link is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="social-link is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="social-link is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+</div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburgerMenu');
+  const menu = document.getElementById('navbar-menu');
+
+  const toggleMenu = () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('is-active', isExpanded);
+  };
+
+  // Toggle on click
+  hamburger.addEventListener('click', toggleMenu);
+
+
+</script>
+          <div class="content" id="This Week In Servo 114">
+            
+<div class="blog-hero">
+  <div class="container">
+    <div class="inner-container">
+    <h1 class="title">This Week In Servo 114</h1>
+      <p class="subtitle">What's up with Servo for the week of 17 September 2018 - 24 September 2018</p>
+      <p class="posted">Posted <span class="tag is-dark">2018-09-24</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="inner-container blog-content">
+  <p>In the <a href="https://github.com/pulls?utf8=%E2%9C%93&amp;q=is%3Apr+is%3Amerged+closed%3A2018-09-17..2018-09-24+user%3Aservo+">past week</a>,
+we merged 95 PRs in the Servo organization’s repositories.</p>
+<p>Big shout-out to <em>@eijebong</em> for <a href="https://github.com/servo/servo/pull/21741">digging into</a> the underlying cause of an ongoing,
+frustrating intermittent problem with running websocket tests in CI.</p>
+<h3 id="planning-and-status" tabindex="-1">Planning and Status <a class="header-anchor" href="#planning-and-status">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Our <a href="https://github.com/servo/servo/wiki/Roadmap">roadmap</a> is available online, including the overall plans for 2018.</p>
+<p>This week’s status updates are <a href="https://www.standu.ps/project/servo/">here</a>.</p>
+<h3 id="exciting-work-in-progress" tabindex="-1">Exciting Work in Progress <a class="header-anchor" href="#exciting-work-in-progress">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li>paulrouget is <a href="https://github.com/servo/servo/pull/21808">redesigning the compositor</a> to allow more flexibility in creating and destroying multiple instances.</li>
+<li>codehag is <a href="https://github.com/servo/servo/pull/21799">updating the developer tools</a> to match recent changes in Firefox.</li>
+<li>gterzian is <a href="https://github.com/servo/servo/pull/21673">creating a hang reporter</a> that will provide better insight when Servo is performing poorly.</li>
+<li>ceyusa is <a href="https://github.com/servo/servo/pull/21543">implementing support for <code>&lt;video&gt;</code></a> based on GStreamer</li>
+<li>retep007 is <a href="https://github.com/servo/servo/pull/21371">splitting the massive script crate</a> into smaller crates</li>
+<li>eijebong is <a href="https://github.com/servo/servo/pull/21644">updating hyper</a> from 0.10 to 0.12, enabling Servo to make use of async I/O in the future</li>
+</ul>
+<h3 id="notable-additions" tabindex="-1">Notable Additions <a class="header-anchor" href="#notable-additions">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li>jdm <a href="https://github.com/servo/rust-mozjs/pull/440">worked around</a> the problem preventing cross-compilation on macOS.</li>
+<li>paulrouget <a href="https://github.com/servo/servo/pull/21774">corrected</a> the pixel density reported by Android builds.</li>
+<li>sumit0190 <a href="https://github.com/servo/servo/pull/21771">implemented</a> automatic profiling support for IPC bytes channels.</li>
+<li>jdm <a href="https://github.com/servo/servo/pull/21767">made</a> it possible to use RUST_LOG with Android builds.</li>
+<li>nox <a href="https://github.com/servo/servo/pull/21755">improved</a> the validiation of GLSL names.</li>
+<li>nupurbaghel <a href="https://github.com/servo/servo/pull/21751">implemented</a> missing steps for the HTMLImageElement.complete API.</li>
+<li>jdm <a href="https://github.com/servo/servo/pull/21784">added</a> support for DEPTH_STENCIL renderbuffers on Android devices.</li>
+<li>Manishearth <a href="https://github.com/servo/servo/pull/21750">implemented</a> the missing <a href="https://github.com/servo/media/pull/131">BiquadFilter</a> WebAudio node type.</li>
+<li>nox <a href="https://github.com/servo/servo/pull/21723">improved</a> the cross-origin checks for sharing canvas data.</li>
+<li>paavininanda <a href="https://github.com/servo/servo/pull/21680">implemented</a> all of the relevant mutations for responsive image elements.</li>
+<li>jdm <a href="https://github.com/servo/servo/pull/21779">added</a> CI for macOS -&gt; Android cross-compilation.</li>
+<li>AugstinCB <a href="https://github.com/servo/servo/pull/21647">reclaimed</a> some memory that was leaked when a pipeline is closed.</li>
+<li>emilio <a href="https://github.com/servo/mozjs/pull/148">improved</a> the upstream build system integration for SpiderMonkey.</li>
+<li>ferjm <a href="https://github.com/servo/servo/pull/21602">corrected</a> a number of implementation errors in the <code>AudioBuffer</code> API.</li>
+</ul>
+<h3 id="new-contributors" tabindex="-1">New Contributors <a class="header-anchor" href="#new-contributors">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<ul>
+<li><a href="https://github.com/llogiq">Andre Bogus</a></li>
+<li><a href="https://github.com/DanxiongLei">danxionglei</a></li>
+<li><a href="https://github.com/sumit0190">sumit0190</a></li>
+<li><a href="https://github.com/syniuhin">syniuhin</a></li>
+</ul>
+<p>Interested in helping build a web browser? Take a look at our <a href="https://starters.servo.org/">curated list</a> of issues that are good for new contributors!</p>
+
+  <div>
+    <a href="/update-about-page/blog/">Back</a>
+  </div>
+</div>
+
+
+
+          </div>
+    </main>
+    <div class="contact" aria-label="Contact information">
+    <div class="container">
+        <div class="inner-container two-column">
+            <div class="column">
+                <h2>Contact</h2>
+            </div>
+            <div class="column">
+                <ul>
+                    <li><a class="footer-link" href="https://servo.zulipchat.com/">Zulip chat</a></li>
+                    <li><a class="footer-link" href="https://github.com/servo/servo/discussions">GitHub discussions</a></li>
+                    <li><a class="footer-link" href="mailto:info@servo.org">Email: info@servo.org</a></li>
+                    <li><a class="footer-link" href="https://floss.social/@servo">Mastodon</a></li>
+                    <li><a class="footer-link" href="https://bsky.app/profile/servo.org">Bluesky</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer>
+      <div class="footer">
+  <div class="container">
+    <div class="two-column inner-container">
+      <div class="column">
+        <div class="logo"><a href="https://linuxfoundation.eu"><img src="/update-about-page/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250"></a></div>
+        <p>&copy; 2025 The Servo Project Developers</p>
+        <p>Copyright &copy; Servo is a project of <a class="footer-link" href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+        <p>For website terms of use, trademark policy and other project policies please see <a class="footer-link" href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+        <p>The source code for this website can be found at <a class="footer-link" href="https://github.com/servo/servo.org">https://github.com/servo/servo.org</a>.</p>
+      </div>
+      <div class="column code-of-conduct">
+        <a class="footer-link" href="/update-about-page/coc/">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const burger = document.querySelector(".navbar-burger");
+    const menu = document.querySelector(".navbar-menu");
+    burger.onclick = () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    };
+  })();
+</script>
+
+    </footer>
+  </body>
+</html>

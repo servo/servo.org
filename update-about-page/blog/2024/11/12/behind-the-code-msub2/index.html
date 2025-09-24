@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Behind the code: an interview with msub2 - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="Behind the code: an interview with msub2 - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  
+
+  
+  <meta name="description" content="Q&amp;A with Servo contributor msub2.">
+  <meta name="og:description" content="Q&amp;A with Servo contributor msub2.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/update-about-page/img/servo-color-positive.png">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/update-about-page/img/servo-symbol-color-no-container.png">
+  <meta property="og:url" content="/update-about-page/blog/2024/11/12/behind-the-code-msub2/">
+
+  <link rel="stylesheet" href="/update-about-page/css/style.css">
+  <link rel="shortcut icon" href="/update-about-page/img/servo-symbol-color-no-container.png">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/update-about-page/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="inner-container">
+      <div class="navbar-brand">
+        <a href="/update-about-page/">
+          <img src="/update-about-page/img/servo-color.png" alt="Behind the code: an interview with msub2">
+        </a>
+
+        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="navbar-menu" id="navbar-menu">
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                Get Involved
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/contributing/"
+                    
+                  >
+                    Contributing
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://book.servo.org"
+                     target="_blank"
+                  >
+                    Servo Book<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/wpt/"
+                    
+                  >
+                    WPT pass rates
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/coc/"
+                    
+                  >
+                    Code of Conduct
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/update-about-page/download/"
+              
+            >
+              Download
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/update-about-page/blog/"
+              
+            >
+              Blog
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="https://demo.servo.org/"
+               target="_blank"
+            >
+              Demos<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+            </a>
+          
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                About
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/about/"
+                    
+                  >
+                    About Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/made-with/"
+                    
+                  >
+                    Made with Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://github.com/servo/project/blob/main/governance/README.md"
+                     target="_blank"
+                  >
+                    Governance<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/sponsorship/"
+                    
+                  >
+                    Sponsorship
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/update-about-page/acknowledgements/"
+                    
+                  >
+                    Acknowledgements
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+        <div class="navbar-end">
+    
+      <a class="social-link is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="social-link is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="social-link is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="social-link is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+</div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburgerMenu');
+  const menu = document.getElementById('navbar-menu');
+
+  const toggleMenu = () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('is-active', isExpanded);
+  };
+
+  // Toggle on click
+  hamburger.addEventListener('click', toggleMenu);
+
+
+</script>
+          <div class="content" id="Behind the code: an interview with msub2">
+            
+<div class="blog-hero">
+  <div class="container">
+    <div class="inner-container">
+    <h1 class="title">Behind the code: an interview with msub2</h1>
+      <p class="subtitle">Q&A with Servo contributor msub2.</p>
+      <p class="posted">Posted <span class="tag is-dark">2024-11-12</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="inner-container blog-content">
+  <p>Behind the Code is a new series of interviews with the contributors who help propel Servo forward. Ever wondered why people
+choose to work on web browsers, or how they get started? We invite you to look beyond the project’s pull requests and issue
+reports, and get to know the humans who make it happen.</p>
+<hr>
+<h2 id="msub2" tabindex="-1"><img src="https://avatars.githubusercontent.com/u/70986246?v=4" width=60> <a href="https://github.com/msub2">msub2</a> <a class="header-anchor" href="#msub2">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Some representative contributions:</p>
+<ul>
+<li><a href="https://github.com/servo/webxr/pull/243">OpenXR: Separate graphics handling from main OpenXR code</a></li>
+<li><a href="https://github.com/servo/webxr/pull/229">Surface supported interaction profiles from OpenXR runtime</a></li>
+<li><a href="https://github.com/servo/webxr/pull/224">Support OpenXR runtimes that do not support fovMutable</a></li>
+<li><a href="https://github.com/servo/servo/pull/33628">crypto: Begin SubtleCrypto implementation</a></li>
+<li><a href="https://github.com/servo/servo/pull/33508">bindings: Allow Guard to take multiple conditions, check for SecureContext in ConstructorEnabled</a></li>
+<li><a href="https://github.com/servo/servo/pull/31200">Implement non-XR Gamepad discovery and input</a></li>
+</ul>
+<h3 id="tell-us-about-yourself!" tabindex="-1">Tell us about yourself! <a class="header-anchor" href="#tell-us-about-yourself!">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>My name is Daniel, though I more commonly go by my online handle “msub2”. I’m something of a generalist, but my primary interests
+are developing for the web, XR, and games. I created and run the <a href="https://discord.gg/webxr">WebXR Discord</a>, which has members from both the Immersive Web Working
+Group and the Meta Browser team, among others. In my free time (when I’m not working, doing Servo things, or tending to my other
+programming projects) I’m typically watching videos from YouTube/Dropout/Nebula/etc and playing video games.</p>
+<h3 id="why-did-you-start-contributing-to-servo%3F" tabindex="-1">Why did you start contributing to Servo? <a class="header-anchor" href="#why-did-you-start-contributing-to-servo%3F">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>A confluence of interests, to put it simply. I was just starting to really get into Rust, having built a CHIP-8 emulator and an
+NES emulator to get my hands dirty, but I also had prior experience contributing to other browser projects like Chromium and Gecko.
+I was also eyeing Servo’s WebXR implementation (which I had submitted a couple small fixes for last year) as I could see there was
+still plenty of work that could be done there. To get started though, I looked for an adjacent area that I could work on to get
+familiar with the main Servo codebase, which led to my first contribution being support for non-XR gamepads!</p>
+<h3 id="what-was-challenging-about-your-first-contribution%3F" tabindex="-1">What was challenging about your first contribution? <a class="header-anchor" href="#what-was-challenging-about-your-first-contribution%3F">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>I’d say the most challenging part of my first contribution was twofold: the first was just getting oriented with how data flows
+in and out of Servo via the embedding API and the second was understanding how DOM structs, methods, and codegen all worked together
+in the script crate. Servo is a big project, but luckily I got lots of good help and feedback as I was working through it, which
+definitely made things easier. Looking at existing examples in the codebase of the things I was trying to do got me the rest of the
+way there I’d say.</p>
+<h3 id="what-do-you-like-about-contributing-to-the-project%3F-what-do-you-get-out-of-it%3F" tabindex="-1">What do you like about contributing to the project? What do you get out of it? <a class="header-anchor" href="#what-do-you-like-about-contributing-to-the-project%3F-what-do-you-get-out-of-it%3F">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>The thing I like most about Servo (and perhaps the web platform as an extension) is the amount of interesting problems that there
+are to solve when it comes to implementing/supporting all of its different features. While most of my contributions so far have been
+focused around Gamepad and WebXR, recently I’ve been working to help implement SubtleCrypto alongside another community member, which
+has been really interesting! In addition to the satisfaction I get just from being able to solve interesting problems, I also rather
+enjoy the feeling of contributing to a large, communal, open-source project.</p>
+<h3 id="any-final-thoughts-you%E2%80%99d-like-to-share%3F" tabindex="-1">Any final thoughts you’d like to share? <a class="header-anchor" href="#any-final-thoughts-you%E2%80%99d-like-to-share%3F">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>I’d encourage anyone who’s intrigued by the idea of contributing to Servo to give it a shot! The recent waves of attention for projects
+like Verso and Ladybird have shown that there is an appetite for new browsers and browser engines, and with Servo’s history it just
+feels right that it should finally be able to rise to a more prominent status in the ecosystem.</p>
+
+  <div>
+    <a href="/update-about-page/blog/">Back</a>
+  </div>
+</div>
+
+
+
+          </div>
+    </main>
+    <div class="contact" aria-label="Contact information">
+    <div class="container">
+        <div class="inner-container two-column">
+            <div class="column">
+                <h2>Contact</h2>
+            </div>
+            <div class="column">
+                <ul>
+                    <li><a class="footer-link" href="https://servo.zulipchat.com/">Zulip chat</a></li>
+                    <li><a class="footer-link" href="https://github.com/servo/servo/discussions">GitHub discussions</a></li>
+                    <li><a class="footer-link" href="mailto:info@servo.org">Email: info@servo.org</a></li>
+                    <li><a class="footer-link" href="https://floss.social/@servo">Mastodon</a></li>
+                    <li><a class="footer-link" href="https://bsky.app/profile/servo.org">Bluesky</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer>
+      <div class="footer">
+  <div class="container">
+    <div class="two-column inner-container">
+      <div class="column">
+        <div class="logo"><a href="https://linuxfoundation.eu"><img src="/update-about-page/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250"></a></div>
+        <p>&copy; 2025 The Servo Project Developers</p>
+        <p>Copyright &copy; Servo is a project of <a class="footer-link" href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+        <p>For website terms of use, trademark policy and other project policies please see <a class="footer-link" href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+        <p>The source code for this website can be found at <a class="footer-link" href="https://github.com/servo/servo.org">https://github.com/servo/servo.org</a>.</p>
+      </div>
+      <div class="column code-of-conduct">
+        <a class="footer-link" href="/update-about-page/coc/">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const burger = document.querySelector(".navbar-burger");
+    const menu = document.querySelector(".navbar-menu");
+    burger.onclick = () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    };
+  })();
+</script>
+
+    </footer>
+  </body>
+</html>
