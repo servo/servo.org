@@ -9,7 +9,7 @@ categories:
 
 Another month, another record number of pull requests merged!
 August flew by, and with it came **447 pull requests** from Servo contributors.
-It was also the final month of our [Outreachy](https://www.outreachy.org/) cohort; you can see read [Jerens'](https://www.jerensl.com/blog/en-final-project-progress-outreachy/) and [Uthman's](https://uthmaniv.github.io/) blogs to learn about how it went!
+It was also the final month of our [Outreachy](https://www.outreachy.org/) cohort; you can read [Jerens'](https://www.jerensl.com/blog/en-final-project-progress-outreachy/) and [Uthman's](https://uthmaniv.github.io/) blogs to learn about how it went!
 
 ## Highlights
 
@@ -91,7 +91,7 @@ We also implemented the new **QuotaExceededError** DOMException interface (@rmen
 
 Our 2d canvas implementation now supports the **Path2D.addPath** method (@arthmis, #37838) and the **Canvas2dRenderingContext/OffscreenCanvas.restore** methods now pop all applied clipping paths (@sagudev, #38496).
 Additionally, we now support **using web fonts in the 2D canvas** (@mrobinson, #38979).
-Meanwhile, the performance continues to improve in the new [Vello](https://github.com/linebender/vello?tab=readme-ov-file#vello)-based backends (@sagudev, #38406, #38356, #38440, #38437), with asyanchronous uploading also showing improvements (@sagudev, @mrobinson, #37776).
+Meanwhile, the performance continues to improve in the new [Vello](https://github.com/linebender/vello?tab=readme-ov-file#vello)-based backends (@sagudev, #38406, #38356, #38440, #38437), with asynchronous uploading also showing improvements (@sagudev, @mrobinson, #37776).
 
 Muting media elements with the `mute` HTML attribute works during the initial resource load (@rayguo17, @jschwe, #38462).
 
