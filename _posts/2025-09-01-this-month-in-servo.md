@@ -45,7 +45,7 @@ Additionally, the layout inspector now dims nodes that are not displayed (@simon
   <figcaption>That's a lot of network requests.</figcaption>
 </figure>
 
-We fixed a significant source of crashes in the engine: hit testing using outdated display lists.
+We fixed a significant source of crashes in the engine: hit testing using outdated display lists ([issue #37932](https://github.com/servo/servo/issues/37932)).
 Hit testing in a web rendering engine is the process that determines which element(s) the user's mouse is hovering over.
 Previously, this process ran inside of [WebRender](https://github.com/servo/webrender), which receives a display list representing what should be rendered for a particular page.
 Since this is either a separate thread or process from the actual page content, display lists are updated asynchronously.
