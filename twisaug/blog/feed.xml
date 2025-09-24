@@ -80,10 +80,9 @@ This feature is currently gated behind the &lt;code&gt;layout_variable_fonts_ena
 We also respect &lt;code&gt;format(*-variations)&lt;/code&gt; inside &lt;code&gt;@font-face&lt;/code&gt; rules (@mrobinson, #38832).
 Additionally, Servo now reads data from &lt;strong&gt;OpenType Collection&lt;/strong&gt; system font files on macOS (@nicoburns, #38753), and uses &lt;code&gt;Helvetica&lt;/code&gt; for the &lt;strong&gt;system-ui&lt;/strong&gt; font (@dpogue, #39001).&lt;/p&gt;
 &lt;figure&gt;
-  &lt;a href=&quot;https://servo.org/twisaug/img/blog/2025-09-variations.png&quot;&gt;&lt;img alt=&quot;Screenshot of servoshell loading a page showcasing font variations, with customizable variation values.&quot; src=&quot;https://servo.org/twisaug/img/blog/2025-09-variations.png&quot; /&gt;&lt;/a&gt;
+  &lt;a href=&quot;https://servo.org/twisaug/img/blog/2025-09-variations.png&quot;&gt;&lt;img alt=&quot;Screenshot of servoshell loading a page showcasing font variations, with customizable variation values.&quot; src=&quot;https://servo.org/twisaug/img/blog/2025-09-vaiations.png&quot; /&gt;&lt;/a&gt;
   &lt;figcaption&gt;This font can be customized!&lt;/figcaption&gt;
 &lt;/figure&gt;
-&lt;p&gt;There are more CSS changes—we now support custom CSS properties with the &lt;strong&gt;CSS.registerProperty&lt;/strong&gt; method (@simonwuelker, #38682), as well as custom element states with &lt;strong&gt;ElementInternals.states&lt;/strong&gt; (@simonwuelker, #38564).&lt;/p&gt;
 &lt;p&gt;Our developer tools continue to make progress! We now have a functional network monitor panel (@uthmaniv, @jdm, #38216, #38601, #38625),
 and our JS debugger can show potential breakpoints (@delan, @atbrakhi, #38331, #38363, #38333, #38551, #38550, #38334, #38624, #38826, #38797).
 Additionally, the layout inspector now dims nodes that are not displayed (@simonwuelker, #38575).&lt;/p&gt;
@@ -97,6 +96,10 @@ This was fixed by making the hit test operation synchronous and moving it into t
 &lt;h2 id=&quot;web-platform-support&quot; tabindex=&quot;-1&quot;&gt;Web platform support &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2025/09/01/this-month-in-servo/#web-platform-support&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;dom-%26-js&quot; tabindex=&quot;-1&quot;&gt;DOM &amp;amp; JS &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2025/09/01/this-month-in-servo/#dom-%26-js&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;We upgraded to &lt;strong&gt;SpiderMonkey v140&lt;/strong&gt; (&lt;a href=&quot;https://gitlab.gnome.org/GNOME/gjs/-/blob/master/NEWS#L39-137&quot;&gt;changelog&lt;/a&gt;) (@jdm, #37077, #38563).&lt;/p&gt;
 &lt;p&gt;Numerous pieces of the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API&quot;&gt;&lt;strong&gt;Trusted Types API&lt;/strong&gt;&lt;/a&gt; are now present in Servo
 (@TimvdLippe, @jdm, #38595, #37834, #38700, #38736, #38718, #38784, #38871, #8623, #38874, #38872, #38886), all gated behind the &lt;code&gt;dom_trusted_types_enabled&lt;/code&gt; preference.&lt;/p&gt;
 &lt;p&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API&quot;&gt;&lt;strong&gt;IndexedDB&lt;/strong&gt;&lt;/a&gt; implementation (gated behind &lt;code&gt;dom_indexeddb_enabled&lt;/code&gt;) is progressing quickly (@arihant2math, @jdm, @rodion, @kkoyung, #28744, #38737, #38836, #38813, #38819, #38115, #38944, #38740, #38891, #38723, #38850, #38735), now reporting errors via &lt;code&gt;IDBRequest&lt;/code&gt; interface and supporting autoincrement keys.&lt;/p&gt;
@@ -110,21 +113,28 @@ We also ignore &lt;code&gt;mousedown&lt;/code&gt; and &lt;code&gt;mouseup&lt;/co
 Finally, removing an event handler content attribute clears all relevant event listeners (@TimvdLippe, @kotx, #38734, #39011).&lt;/p&gt;
 &lt;p&gt;Servo now fires a &lt;strong&gt;scroll event&lt;/strong&gt; whenever a page is scrolled (@stevennovaryo, #38321). Additionally, the &lt;strong&gt;Window.scrollIntoView&lt;/strong&gt; method is now available (@abdelrahman1234567, #38230).
 The &lt;strong&gt;FocusOptions.preventScroll&lt;/strong&gt; method can now be used to prevent scrolling when focusing an element with &lt;code&gt;Element.focus&lt;/code&gt; (@abdelrahman1234567, #38495).&lt;/p&gt;
-&lt;p&gt;[[figure showing scrolling effect?]]&lt;/p&gt;
-&lt;p&gt;The &lt;strong&gt;Navigator.sendBeacon()&lt;/strong&gt; API is implemented, gated behind the &lt;code&gt;dom.navigator.sendbeacon_enabled&lt;/code&gt; preference (@TimvdLippe, #38301).&lt;/p&gt;
-&lt;p&gt;The &lt;strong&gt;HTMLDocument&lt;/strong&gt; interface now exists as a property on the &lt;code&gt;Window&lt;/code&gt; object (@leo030303, #38433).&lt;/p&gt;
-&lt;p&gt;Our 2d canvas implementation now supports the &lt;strong&gt;Path2D.addPath&lt;/strong&gt; method (@arthmis, #37838) and the &lt;strong&gt;Canvas2dRenderingContext/OffscreenCanvas.restore&lt;/strong&gt; methods now pops all applied clipping paths (@sagudev, #38496).
+&lt;p&gt;The &lt;strong&gt;Navigator.sendBeacon()&lt;/strong&gt; API is implemented, gated behind the &lt;code&gt;dom_navigator_sendbeacon_enabled&lt;/code&gt; preference (@TimvdLippe, #38301).
+Similarly, the static &lt;strong&gt;AbortSignal.abort()&lt;/strong&gt; method is hidden behind &lt;code&gt;dom_abort_controller_enabled&lt;/code&gt; (@Taym95, #38746).&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;HTMLDocument&lt;/strong&gt; interface now exists as a property on the &lt;code&gt;Window&lt;/code&gt; object (@leo030303, #38433).
+Meanwhile, the &lt;strong&gt;CSS&lt;/strong&gt; window property is now a &lt;a href=&quot;https://webidl.spec.whatwg.org/#idl-namespaces&quot;&gt;WebIDL namespace&lt;/a&gt; (@simonwuelker, #38579).
+We implemented the new &lt;strong&gt;QuotaExceededError&lt;/strong&gt; DOMException interface (@rmeno12, #38507, #38720)&lt;/p&gt;
+&lt;p&gt;Our 2d canvas implementation now supports the &lt;strong&gt;Path2D.addPath&lt;/strong&gt; method (@arthmis, #37838) and the &lt;strong&gt;Canvas2dRenderingContext/OffscreenCanvas.restore&lt;/strong&gt; methods now pop all applied clipping paths (@sagudev, #38496).
 Additionally, we now support &lt;strong&gt;using web fonts in the 2D canvas&lt;/strong&gt; (@mrobinson, #38979).
-Meanwhile, the performance continues to improve in the new &lt;a href=&quot;https://github.com/linebender/vello?tab=readme-ov-file#vello&quot;&gt;Vello&lt;/a&gt;-based backends (@sagudev, #38406, #38356, #38440, #38437).&lt;/p&gt;
-&lt;p&gt;Muting media elements with the &lt;code&gt;mute&lt;/code&gt; HTML attribute now works during the initial load (@rayguo17, @jschwe, #38462).&lt;/p&gt;
-&lt;p&gt;Modifying stylesheets now integrates better with incremental layout, in both light trees and shadow trees (@coding-joedow, #38530, #38529).&lt;/p&gt;
+Meanwhile, the performance continues to improve in the new &lt;a href=&quot;https://github.com/linebender/vello?tab=readme-ov-file#vello&quot;&gt;Vello&lt;/a&gt;-based backends (@sagudev, #38406, #38356, #38440, #38437), with asyanchronous uploading also showing improvements (@sagudev, @mrobinson, #37776).&lt;/p&gt;
+&lt;p&gt;Muting media elements with the &lt;code&gt;mute&lt;/code&gt; HTML attribute works during the initial resource load (@rayguo17, @jschwe, #38462).&lt;/p&gt;
+&lt;p&gt;Modifying stylesheets now integrates better with incremental layout, in both light trees and shadow trees (@coding-joedow, #38530, #38529).
+However, calling &lt;code&gt;setProperty&lt;/code&gt; on a readonly &lt;code&gt;CSSStyleDeclaration&lt;/code&gt; correctly throws an exception (@simonwuelker, #38677).&lt;/p&gt;
+&lt;h3 id=&quot;css&quot; tabindex=&quot;-1&quot;&gt;CSS &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2025/09/01/this-month-in-servo/#css&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;We now support custom CSS properties with the &lt;strong&gt;CSS.registerProperty&lt;/strong&gt; method (@simonwuelker, #38682), as well as custom element states with &lt;strong&gt;ElementInternals.states&lt;/strong&gt; (@simonwuelker, #38564).&lt;/p&gt;
 &lt;p&gt;Flexbox cross sizes can no longer end up negative through stretching (@Loirooriol, #38521), while &lt;code&gt;stretch&lt;/code&gt; on flex items now stretches to the line if possible (@Loirooriol, #38526).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Overflow calculations are more accurate&lt;/strong&gt;, now that we ignore &lt;code&gt;position: fixed&lt;/code&gt; children of the root element (@stevennovaryo, #38618), compute overflow for &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; separate from the viewport (@shubhamg13, #38825), check for &lt;code&gt;overflow: visible&lt;/code&gt; in parents and children (@shubhamg13, #38443), and propagate &lt;code&gt;overflow&lt;/code&gt; to the viewport correctly (@shubhamg13, @Loirooriol, #38598).&lt;/p&gt;
-&lt;p&gt;Our &lt;strong&gt;WebDriver&lt;/strong&gt; implementation now passes 80% of the implementation conformance tests.
-This is the result of lots of work on handling user prompts (@PotatoCP, #38591), computing obscured/disabled elements while clicking (@yezhizhen, #38497, #38841, #38436, #38490, #38383), and improving window focus behaviours (@yezhizhen, #38889, #38909).
-We also implemented the &lt;strong&gt;Get Window Handles&lt;/strong&gt; command (@longvatrong111, @yezhizhen, #38622, #38745), added support for getting element boolean attributes (@kkoyung, #38401), and added more accurate errors for a number of commands (@yezhizhen, @longvatrong111, #38620, #38357).
-The &lt;strong&gt;Element Clear&lt;/strong&gt; command now clears &lt;code&gt;&amp;lt;input type=file&amp;gt;&lt;/code&gt; elements correctly (@PotatoCP, #38536), and &lt;strong&gt;Element Send Keys&lt;/strong&gt; now appends to file inputs with the &lt;code&gt;multiple&lt;/code&gt; attribute.&lt;/p&gt;
-&lt;p&gt;We upgraded to &lt;strong&gt;SpiderMonkey v140&lt;/strong&gt; (@jdm, #37077, #38563), as well as the &lt;strong&gt;upstream Stylo&lt;/strong&gt; revision as of August 1, 2025.&lt;/p&gt;
+&lt;p&gt;Color and text decorations no longer inherit into &lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt; element contents (@simonwuelker, #38570).&lt;/p&gt;
+&lt;p&gt;Negative outline offsets work correctly (@lumiscosity, @mrobinson, #38418).&lt;/p&gt;
+&lt;p&gt;Video elements no longer fall back to a preferred aspect ratio of 2 (@Loirooriol, #38705).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;position: sticky&lt;/code&gt; elements are handled correctly inside CSS transforms (@mrobinson, @Loirooriol, #38391).&lt;/p&gt;
+&lt;p&gt;We upgraded to the &lt;strong&gt;upstream Stylo&lt;/strong&gt; revision as of August 1, 2025.&lt;/p&gt;
 &lt;h2 id=&quot;performance-%26-stability&quot; tabindex=&quot;-1&quot;&gt;Performance &amp;amp; Stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2025/09/01/this-month-in-servo/#performance-%26-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -139,6 +149,10 @@ Inline stylesheets are now deduplicated, which can have a significant impact on 
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Servo has declared a &lt;strong&gt;Minimum Supported Rust Version&lt;/strong&gt; (1.85.0), and this is verified with every new pull request (@jschwe, #37152).&lt;/p&gt;
 &lt;p&gt;Evaluating JS from the embedding layer now &lt;strong&gt;reports an error&lt;/strong&gt; if the evaluation failed for any reason (@rodio, #38602).&lt;/p&gt;
+&lt;p&gt;Our &lt;strong&gt;WebDriver&lt;/strong&gt; implementation now passes 80% of the implementation conformance tests.
+This is the result of lots of work on handling user prompts (@PotatoCP, #38591), computing obscured/disabled elements while clicking (@yezhizhen, #38497, #38841, #38436, #38490, #38383), and improving window focus behaviours (@yezhizhen, #38889, #38909).
+We also implemented the &lt;strong&gt;Get Window Handles&lt;/strong&gt; command (@longvatrong111, @yezhizhen, #38622, #38745), added support for getting element boolean attributes (@kkoyung, #38401), and added more accurate errors for a number of commands (@yezhizhen, @longvatrong111, #38620, #38357).
+The &lt;strong&gt;Element Clear&lt;/strong&gt; command now clears &lt;code&gt;&amp;lt;input type=file&amp;gt;&lt;/code&gt; elements correctly (@PotatoCP, #38536), and &lt;strong&gt;Element Send Keys&lt;/strong&gt; now appends to file inputs with the &lt;code&gt;multiple&lt;/code&gt; attribute.&lt;/p&gt;
 &lt;h2 id=&quot;servoshell&quot; tabindex=&quot;-1&quot;&gt;Servoshell &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2025/09/01/this-month-in-servo/#servoshell&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -147,44 +161,6 @@ Inline stylesheets are now deduplicated, which can have a significant impact on 
 Element hit testing in full screen mode now works as expected (@yezhizhen, #38328).&lt;/p&gt;
 &lt;p&gt;Various popup dialogs (e.g. the &lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt; option chooser dialog) now can be closed without choosing a value (@TimvdLippe, #38373, #38949).
 Additionally, the browser now responds to a popup closing without any other inputs (@lumiscosity, #39038).&lt;/p&gt;
-&lt;!--
-- dom
-    - https://github.com/servo/servo/pull/38579	(@simonwuelker, #38579)	script: Convert `CSS` from a IDL interface with static methods to a namespace (#38579)
-      dom
-    - https://github.com/servo/servo/pull/38507	(@menonrahul02@gmail.com, #38507)	script: Implement QuotaExceededError WebIDL interface (#38507)
-      dom
-    - https://github.com/servo/servo/pull/38677	(@simonwuelker, #38677)	script: Always throw when trying to `setProperty` on a readonly style `CSSStyleDeclaration` (#38677)
-      dom
-    - https://github.com/servo/servo/pull/38599	(@averyrudelphe@gmail.com, #38599)	script: Strip `javascript` URL scheme using `Position::AfterScheme` rather than `Position::BeforePath` (#38599)
-      dom
-    - https://github.com/servo/servo/pull/38720	(@menonrahul02@gmail.com, #38720)	content: Make QuotaExceededError serializable (#38720)
-      dom
-    - https://github.com/servo/servo/pull/38746	(@Taym95, #38746)	Implement AbortSignal static abort(reason) (#38746)
-      dom
-    - https://github.com/servo/servo/pull/38676	(@gterzian, @mrobinson, #38676)	script: abort planned form navigations (#38676)
-      dom
-    - https://github.com/servo/servo/pull/38984	(@euclid.ye@huawei.com, #38984)	script: Support decomposing ShadowRoot from mozjs `HandleValue` (#38984)
-      dom
-    - https://github.com/servo/servo/pull/38993	(@Gae24, #38993)	`XMLHttpRequest` `Send`: fix Content-Type failures (#38993)
-      dom
-    - https://github.com/servo/servo/pull/39020	(@andrei.volykhin@gmail.com, @volykhin.andrei@huawei.com, #39020)	webgpu: Add the dedicated WebGPU task source (#39020)
-      dom
-    - https://github.com/servo/servo/pull/37776	(@sagudev, @mrobinson, #37776)	compositor: Allow canvas to upload rendered contents asynchronously (#37776)
-      dom
-- layout
-    - https://github.com/servo/servo/pull/38391	(@mrobinson, @Loirooriol, #38391)	layout: Account for sticky nodes in ScrollTree transforms and cache transforms (#38391)
-      layout
-    - https://github.com/servo/servo/pull/38418	(@averyrudelphe@gmail.com, @mrobinson, #38418)	layout: Fix negative outline offset (#38418)
-      layout
-    - https://github.com/servo/servo/pull/38366	(@Loirooriol, #38366)	layout: Recreate lazy block size when re-doing layout to avoid floats (#38366)
-      layout
-    - https://github.com/servo/servo/pull/38570	(@simonwuelker, #38570)	layout: Set color and text decoration on `&lt;select&gt;` elements by default (#38570)
-      layout
-    - https://github.com/servo/servo/pull/38678	(@mrobinson, @Loirooriol, #38678)	layout: Support storing layout data for two-level nested pseudo-elements (#38678)
-      layout
-    - https://github.com/servo/servo/pull/38705	(@Loirooriol, #38705)	layout: Stop making `&lt;video&gt;` fall back to a preferred aspect ratio of 2 (#38705)
-      layout
---&gt;
 &lt;style&gt;
     ._correction {
         max-width: 33em;
