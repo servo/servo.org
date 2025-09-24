@@ -20,10 +20,20 @@ This improves the appearance of many popular websites.
 
 We have implemented **named grid line lines and areas** (@nicoburns, @loirooriol, #38306, #38574, #38493), still gated behind the `layout_grid_enabled` preference (#38306, #38574).
 
+<figure>
+  <a href="{{ '/img/blog/2025-09-grid.png' | url }}"><img alt="Screenshot of servoshell loading a page demoing a complex grid layout" src="{{ '/img/blog/2025-09-grid.png' | url }}"></a>
+  <figcaption>CSS grids are all around us.</figcaption>
+</figure>
+
 Servo now supports CSS **font-variation-settings** on all main desktop platforms (@simonwuelker, @mrobinson, #38642, #38760, #38831).
 This feature is currently gated behind the `layout_variable_fonts_enabled` preference.
 We also respect `format(*-variations)` inside `@font-face` rules (@mrobinson, #38832).
 Additionally, Servo now reads data from **OpenType Collection** system font files on macOS (@nicoburns, #38753), and uses `Helvetica` for the **system-ui** font (@dpogue, #39001).
+
+<figure>
+  <a href="{{ '/img/blog/2025-09-variations.png' | url }}"><img alt="Screenshot of servoshell loading a page showcasing font variations, with customizable variation values." src="{{ '/img/blog/2025-09-variations.png' | url }}"></a>
+  <figcaption>This font can be customized!</figcaption>
+</figure>
 
 There are more CSS changes—we now support custom CSS properties with the **CSS.registerProperty** method (@simonwuelker, #38682), as well as custom element states with **ElementInternals.states** (@simonwuelker, #38564).
 
@@ -41,14 +51,16 @@ Since this is either a separate thread or process from the actual page content, 
 This means it was possible to trigger crashes by performing a hit test (e.g. moving the mouse quickly) over parts of the page that were rapidly changing, since the elements reported may not exist any more.
 This was fixed by making the hit test operation synchronous and moving it into the same thread as the actual content being tested against, eliminating the possibility of outdated results (@mrobinson, @Loirooriol, @kongbai1996, @yezhizhen, #38480, #38464, #38463, #38884, #38518).
 
+## Web platform support
+
 Numerous pieces of the [**Trusted Types API**](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) are now present in Servo
 (@TimvdLippe, @jdm, #38595, #37834, #38700, #38736, #38718, #38784, #38871, #8623, #38874, #38872, #38886), all gated behind the `dom_trusted_types_enabled` preference.
 
-The IndexedDB implementation (gated behind `dom_indexeddb_enabled`) is progressing quickly (@arihant2math, @jdm, @rodion, @kkoyung, #28744, #38737, #38836, #38813, #38819, #38115, #38944, #38740, #38891, #38723, #38850, #38735), now reporting errors via `IDBRequest` interface and supporting autoincrement keys.
+The [**IndexedDB**](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) implementation (gated behind `dom_indexeddb_enabled`) is progressing quickly (@arihant2math, @jdm, @rodion, @kkoyung, #28744, #38737, #38836, #38813, #38819, #38115, #38944, #38740, #38891, #38723, #38850, #38735), now reporting errors via `IDBRequest` interface and supporting autoincrement keys.
 
 A prototype implementation of the [CookieStore API](https://developer.mozilla.org/en-US/docs/Web/API/CookieStore) is now implemented and gated by the `dom_cookiestore_enabled` preference (@sebsebmc, #37968, #38876).
 
-Servo now passes over 99.6% of the CSS geometry testsuite, thanks to an implementation of **DOMPointReadOnly.matrixTransform**, making all geometry interfaces serializable, and adding the **SVGMatrix and SVGPoint aliases** (@lumiscosity, #38801, #38828, #38810).
+Servo now passes over 99.6% of the [CSS geometry](https://drafts.fxtf.org/geometry/) testsuite, thanks to an implementation of **DOMPointReadOnly.matrixTransform**, making all geometry interfaces serializable, and adding the **SVGMatrix and SVGPoint aliases** (@lumiscosity, #38801, #38828, #38810).
 
 You can now use the [**TextEncoderStream** API](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream) (@minghuaw, #38466).
 Streams that are piped now correctly pass through `undefined` values, too (@gterzian, #38470).
