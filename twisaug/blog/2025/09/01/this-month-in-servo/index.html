@@ -270,10 +270,18 @@ This improves the appearance of many popular websites.</p>
   <figcaption>Did you know that the Google logo is an SVG element?</figcaption>
 </figure>
 <p>We have implemented <strong>named grid line lines and areas</strong> (@nicoburns, @loirooriol, #38306, #38574, #38493), still gated behind the <code>layout_grid_enabled</code> preference (#38306, #38574).</p>
+<figure>
+  <a href="/twisaug/img/blog/2025-09-grid.png"><img alt="Screenshot of servoshell loading a page demoing a complex grid layout" src="/twisaug/img/blog/2025-09-grid.png"></a>
+  <figcaption>CSS grids are all around us.</figcaption>
+</figure>
 <p>Servo now supports CSS <strong>font-variation-settings</strong> on all main desktop platforms (@simonwuelker, @mrobinson, #38642, #38760, #38831).
 This feature is currently gated behind the <code>layout_variable_fonts_enabled</code> preference.
 We also respect <code>format(*-variations)</code> inside <code>@font-face</code> rules (@mrobinson, #38832).
 Additionally, Servo now reads data from <strong>OpenType Collection</strong> system font files on macOS (@nicoburns, #38753), and uses <code>Helvetica</code> for the <strong>system-ui</strong> font (@dpogue, #39001).</p>
+<figure>
+  <a href="/twisaug/img/blog/2025-09-variations.png"><img alt="Screenshot of servoshell loading a page showcasing font variations, with customizable variation values." src="/twisaug/img/blog/2025-09-variations.png"></a>
+  <figcaption>This font can be customized!</figcaption>
+</figure>
 <p>There are more CSS changes—we now support custom CSS properties with the <strong>CSS.registerProperty</strong> method (@simonwuelker, #38682), as well as custom element states with <strong>ElementInternals.states</strong> (@simonwuelker, #38564).</p>
 <p>Our developer tools continue to make progress! We now have a functional network monitor panel (@uthmaniv, @jdm, #38216, #38601, #38625),
 and our JS debugger can show potential breakpoints (@delan, @atbrakhi, #38331, #38363, #38333, #38551, #38550, #38334, #38624, #38826, #38797).
@@ -285,11 +293,14 @@ Previously, this process ran inside of <a href="https://github.com/servo/webrend
 Since this is either a separate thread or process from the actual page content, display lists are updated asynchronously.</p>
 <p>This means it was possible to trigger crashes by performing a hit test (e.g. moving the mouse quickly) over parts of the page that were rapidly changing, since the elements reported may not exist any more.
 This was fixed by making the hit test operation synchronous and moving it into the same thread as the actual content being tested against, eliminating the possibility of outdated results (@mrobinson, @Loirooriol, @kongbai1996, @yezhizhen, #38480, #38464, #38463, #38884, #38518).</p>
+<h2 id="web-platform-support" tabindex="-1">Web platform support <a class="header-anchor" href="#web-platform-support">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
 <p>Numerous pieces of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API"><strong>Trusted Types API</strong></a> are now present in Servo
 (@TimvdLippe, @jdm, #38595, #37834, #38700, #38736, #38718, #38784, #38871, #8623, #38874, #38872, #38886), all gated behind the <code>dom_trusted_types_enabled</code> preference.</p>
-<p>The IndexedDB implementation (gated behind <code>dom_indexeddb_enabled</code>) is progressing quickly (@arihant2math, @jdm, @rodion, @kkoyung, #28744, #38737, #38836, #38813, #38819, #38115, #38944, #38740, #38891, #38723, #38850, #38735), now reporting errors via <code>IDBRequest</code> interface and supporting autoincrement keys.</p>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API"><strong>IndexedDB</strong></a> implementation (gated behind <code>dom_indexeddb_enabled</code>) is progressing quickly (@arihant2math, @jdm, @rodion, @kkoyung, #28744, #38737, #38836, #38813, #38819, #38115, #38944, #38740, #38891, #38723, #38850, #38735), now reporting errors via <code>IDBRequest</code> interface and supporting autoincrement keys.</p>
 <p>A prototype implementation of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CookieStore">CookieStore API</a> is now implemented and gated by the <code>dom_cookiestore_enabled</code> preference (@sebsebmc, #37968, #38876).</p>
-<p>Servo now passes over 99.6% of the CSS geometry testsuite, thanks to an implementation of <strong>DOMPointReadOnly.matrixTransform</strong>, making all geometry interfaces serializable, and adding the <strong>SVGMatrix and SVGPoint aliases</strong> (@lumiscosity, #38801, #38828, #38810).</p>
+<p>Servo now passes over 99.6% of the <a href="https://drafts.fxtf.org/geometry/">CSS geometry</a> testsuite, thanks to an implementation of <strong>DOMPointReadOnly.matrixTransform</strong>, making all geometry interfaces serializable, and adding the <strong>SVGMatrix and SVGPoint aliases</strong> (@lumiscosity, #38801, #38828, #38810).</p>
 <p>You can now use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream"><strong>TextEncoderStream</strong> API</a> (@minghuaw, #38466).
 Streams that are piped now correctly pass through <code>undefined</code> values, too (@gterzian, #38470).
 We also fixed a crash in the result of the <strong>ReadableStream.pipeTo</strong> method (@gterzian, #38385).</p>

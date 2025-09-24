@@ -71,10 +71,18 @@ This improves the appearance of many popular websites.&lt;/p&gt;
   &lt;figcaption&gt;Did you know that the Google logo is an SVG element?&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;We have implemented &lt;strong&gt;named grid line lines and areas&lt;/strong&gt; (@nicoburns, @loirooriol, #38306, #38574, #38493), still gated behind the &lt;code&gt;layout_grid_enabled&lt;/code&gt; preference (#38306, #38574).&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&quot;https://servo.org/twisaug/img/blog/2025-09-grid.png&quot;&gt;&lt;img alt=&quot;Screenshot of servoshell loading a page demoing a complex grid layout&quot; src=&quot;https://servo.org/twisaug/img/blog/2025-09-grid.png&quot; /&gt;&lt;/a&gt;
+  &lt;figcaption&gt;CSS grids are all around us.&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;Servo now supports CSS &lt;strong&gt;font-variation-settings&lt;/strong&gt; on all main desktop platforms (@simonwuelker, @mrobinson, #38642, #38760, #38831).
 This feature is currently gated behind the &lt;code&gt;layout_variable_fonts_enabled&lt;/code&gt; preference.
 We also respect &lt;code&gt;format(*-variations)&lt;/code&gt; inside &lt;code&gt;@font-face&lt;/code&gt; rules (@mrobinson, #38832).
 Additionally, Servo now reads data from &lt;strong&gt;OpenType Collection&lt;/strong&gt; system font files on macOS (@nicoburns, #38753), and uses &lt;code&gt;Helvetica&lt;/code&gt; for the &lt;strong&gt;system-ui&lt;/strong&gt; font (@dpogue, #39001).&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&quot;https://servo.org/twisaug/img/blog/2025-09-variations.png&quot;&gt;&lt;img alt=&quot;Screenshot of servoshell loading a page showcasing font variations, with customizable variation values.&quot; src=&quot;https://servo.org/twisaug/img/blog/2025-09-variations.png&quot; /&gt;&lt;/a&gt;
+  &lt;figcaption&gt;This font can be customized!&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;There are more CSS changes—we now support custom CSS properties with the &lt;strong&gt;CSS.registerProperty&lt;/strong&gt; method (@simonwuelker, #38682), as well as custom element states with &lt;strong&gt;ElementInternals.states&lt;/strong&gt; (@simonwuelker, #38564).&lt;/p&gt;
 &lt;p&gt;Our developer tools continue to make progress! We now have a functional network monitor panel (@uthmaniv, @jdm, #38216, #38601, #38625),
 and our JS debugger can show potential breakpoints (@delan, @atbrakhi, #38331, #38363, #38333, #38551, #38550, #38334, #38624, #38826, #38797).
@@ -86,11 +94,14 @@ Previously, this process ran inside of &lt;a href=&quot;https://github.com/servo
 Since this is either a separate thread or process from the actual page content, display lists are updated asynchronously.&lt;/p&gt;
 &lt;p&gt;This means it was possible to trigger crashes by performing a hit test (e.g. moving the mouse quickly) over parts of the page that were rapidly changing, since the elements reported may not exist any more.
 This was fixed by making the hit test operation synchronous and moving it into the same thread as the actual content being tested against, eliminating the possibility of outdated results (@mrobinson, @Loirooriol, @kongbai1996, @yezhizhen, #38480, #38464, #38463, #38884, #38518).&lt;/p&gt;
+&lt;h2 id=&quot;web-platform-support&quot; tabindex=&quot;-1&quot;&gt;Web platform support &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2025/09/01/this-month-in-servo/#web-platform-support&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Numerous pieces of the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API&quot;&gt;&lt;strong&gt;Trusted Types API&lt;/strong&gt;&lt;/a&gt; are now present in Servo
 (@TimvdLippe, @jdm, #38595, #37834, #38700, #38736, #38718, #38784, #38871, #8623, #38874, #38872, #38886), all gated behind the &lt;code&gt;dom_trusted_types_enabled&lt;/code&gt; preference.&lt;/p&gt;
-&lt;p&gt;The IndexedDB implementation (gated behind &lt;code&gt;dom_indexeddb_enabled&lt;/code&gt;) is progressing quickly (@arihant2math, @jdm, @rodion, @kkoyung, #28744, #38737, #38836, #38813, #38819, #38115, #38944, #38740, #38891, #38723, #38850, #38735), now reporting errors via &lt;code&gt;IDBRequest&lt;/code&gt; interface and supporting autoincrement keys.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API&quot;&gt;&lt;strong&gt;IndexedDB&lt;/strong&gt;&lt;/a&gt; implementation (gated behind &lt;code&gt;dom_indexeddb_enabled&lt;/code&gt;) is progressing quickly (@arihant2math, @jdm, @rodion, @kkoyung, #28744, #38737, #38836, #38813, #38819, #38115, #38944, #38740, #38891, #38723, #38850, #38735), now reporting errors via &lt;code&gt;IDBRequest&lt;/code&gt; interface and supporting autoincrement keys.&lt;/p&gt;
 &lt;p&gt;A prototype implementation of the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/CookieStore&quot;&gt;CookieStore API&lt;/a&gt; is now implemented and gated by the &lt;code&gt;dom_cookiestore_enabled&lt;/code&gt; preference (@sebsebmc, #37968, #38876).&lt;/p&gt;
-&lt;p&gt;Servo now passes over 99.6% of the CSS geometry testsuite, thanks to an implementation of &lt;strong&gt;DOMPointReadOnly.matrixTransform&lt;/strong&gt;, making all geometry interfaces serializable, and adding the &lt;strong&gt;SVGMatrix and SVGPoint aliases&lt;/strong&gt; (@lumiscosity, #38801, #38828, #38810).&lt;/p&gt;
+&lt;p&gt;Servo now passes over 99.6% of the &lt;a href=&quot;https://drafts.fxtf.org/geometry/&quot;&gt;CSS geometry&lt;/a&gt; testsuite, thanks to an implementation of &lt;strong&gt;DOMPointReadOnly.matrixTransform&lt;/strong&gt;, making all geometry interfaces serializable, and adding the &lt;strong&gt;SVGMatrix and SVGPoint aliases&lt;/strong&gt; (@lumiscosity, #38801, #38828, #38810).&lt;/p&gt;
 &lt;p&gt;You can now use the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream&quot;&gt;&lt;strong&gt;TextEncoderStream&lt;/strong&gt; API&lt;/a&gt; (@minghuaw, #38466).
 Streams that are piped now correctly pass through &lt;code&gt;undefined&lt;/code&gt; values, too (@gterzian, #38470).
 We also fixed a crash in the result of the &lt;strong&gt;ReadableStream.pipeTo&lt;/strong&gt; method (@gterzian, #38385).&lt;/p&gt;
