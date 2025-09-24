@@ -9,6 +9,7 @@ categories:
 
 Another month, another record number of pull requests merged!
 August flew by, and with it came **447 pull requests** from Servo contributors.
+It was also the final month of our [Outreachy](https://www.outreachy.org/) cohort; you can see read [Jerens'](https://www.jerensl.com/blog/en-final-project-progress-outreachy/) and [Uthman's](https://uthmaniv.github.io/) blogs to learn about how it went!
 
 ## Highlights
 
