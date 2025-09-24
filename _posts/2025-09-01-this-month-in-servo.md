@@ -42,8 +42,8 @@ and our JS debugger can show potential breakpoints (@delan, @atbrakhi, #38331, #
 Additionally, the layout inspector now dims nodes that are not displayed (@simonwuelker, #38575).
 
 <figure>
-<a href="{{ '/img/blog/2025-09-netmonitor.png' | url }}"><img src="{{ '/img/blog/2025-09-netmonitor.png' | url }}" alt="The Firefox network monitor, showing a list of network connections for the Servo Mastodon account homepage"></a>
 <a href="{{ '/img/blog/2025-09-mastodon.png' | url }}"><img src=" {{ '/img/blog/2025-09-mastodon.png' | url }}" alt="servoshell showing the Servo Mastodon account homepage"></a>
+<a href="{{ '/img/blog/2025-09-netmonitor.png' | url }}"><img src="{{ '/img/blog/2025-09-netmonitor.png' | url }}" alt="The Firefox network monitor, showing a list of network connections for the Servo Mastodon account homepage"></a>
   <figcaption>That's a lot of network requests.</figcaption>
 </figure>
 
