@@ -86,7 +86,7 @@ Similarly, the static **AbortSignal.abort()** method is hidden behind `dom_abort
 
 The **HTMLDocument** interface now exists as a property on the `Window` object (@leo030303, #38433).
 Meanwhile, the **CSS** window property is now a [WebIDL namespace](https://webidl.spec.whatwg.org/#idl-namespaces) (@simonwuelker, #38579).
-We implemented the new **QuotaExceededError** DOMException interface (@rmeno12, #38507, #38720)
+We also implemented the new **QuotaExceededError** DOMException interface (@rmeno12, #38507, #38720), which replaces previous usages of DOMException with the `QUOTA_EXCEEDED_ERR` name.
 
 Our 2d canvas implementation now supports the **Path2D.addPath** method (@arthmis, #37838) and the **Canvas2dRenderingContext/OffscreenCanvas.restore** methods now pop all applied clipping paths (@sagudev, #38496).
 Additionally, we now support **using web fonts in the 2D canvas** (@mrobinson, #38979).
