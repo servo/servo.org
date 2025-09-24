@@ -35,11 +35,15 @@ Additionally, Servo now reads data from **OpenType Collection** system font file
   <figcaption>This font can be customized!</figcaption>
 </figure>
 
-Our developer tools continue to make progress! We now have a functional network monitor panel (@uthmaniv, @jdm, #38216, #38601, #38625),
+Our [developer tools](https://book.servo.org/hacking/using-devtools.html) continue to make progress! We now have a functional network monitor panel (@uthmaniv, @jdm, #38216, #38601, #38625),
 and our JS debugger can show potential breakpoints (@delan, @atbrakhi, #38331, #38363, #38333, #38551, #38550, #38334, #38624, #38826, #38797).
 Additionally, the layout inspector now dims nodes that are not displayed (@simonwuelker, #38575).
 
-<img src="{{ '/img/blog/2025-09-netmonitor.png' | url }}" alt="The Firefox network monitor, showing a list of network connections for the Servo Mastodon account homepage"><img src=" {{ '/img/blog/2025-09-mastodon.png' | url }}" alt="servoshell showing the Servo Mastodon account homepage">
+<figure>
+<a href="{{ '/img/blog/2025-09-netmonitor.png' | url }}"><img src="{{ '/img/blog/2025-09-netmonitor.png' | url }}" alt="The Firefox network monitor, showing a list of network connections for the Servo Mastodon account homepage"></a>
+<a href="{{ '/img/blog/2025-09-mastodon.png' | url }}"><img src=" {{ '/img/blog/2025-09-mastodon.png' | url }}" alt="servoshell showing the Servo Mastodon account homepage"></a>
+  <figcaption>That's a lot of network requests.</figcaption>
+</figure>
 
 We fixed a significant source of crashes in the engine: hit testing using outdated display lists.
 Hit testing in a web rendering engine is the process that determines which element(s) the user's mouse is hovering over.
