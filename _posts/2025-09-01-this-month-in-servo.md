@@ -10,6 +10,8 @@ categories:
 Another month, another record number of pull requests merged!
 August flew by, and with it came **447 pull requests** from Servo contributors.
 
+## Highlights
+
 Our big new feature this month is rendering support **inline SVG elements** (@mukilan, @Loirooriol, #38188, #38603).
 This improves the appearance of many popular websites.
 
