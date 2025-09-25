@@ -34,7 +34,10 @@ We also respect `format(*-variations)` inside `@font-face` rules (@mrobinson, #3
 Additionally, Servo now reads data from **OpenType Collection (.ttc)** system font files on macOS (@nicoburns, #38753), and uses `Helvetica` for the **‘system-ui’** font (@dpogue, #39001).
 
 <figure>
-  <a href="{{ '/img/blog/2025-09-variations.png' | url }}"><img alt="Screenshot of servoshell loading a page showcasing font variations, with customizable variation values." src="{{ '/img/blog/2025-09-variations.png' | url }}"></a>
+  <details style="position:relative">
+    <img src="{{ '/img/blog/2025-09-variations.webp' | url }}" style="position:absolute;margin:0;inset:0;pointer-events:none" loading="lazy" alt="servoshell nightly showcasing variable fonts, with variable weight (`wght`) values smoothly increasing and decreasing (click to pause)">
+    <summary style="display:block"><img src="{{ '/img/blog/2025-09-variations-preview.png' | url }}" style="margin:0" loading="lazy"><div style="position:absolute;inset:0;display:flex;justify-content:center;align-items:center;color:#1192e8;font-size:7em;cursor:pointer;-webkit-text-stroke:1rem color-mix(in oklch,#1192e8,black 20%);user-select:none" alt="servoshell nightly showcasing variable fonts, with variable weight (`wght`) values smoothly increasing and decreasing (click to play)">▶</div></summary>
+  </details>
   <figcaption>This font can be customized!</figcaption>
 </figure>
 
