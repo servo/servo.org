@@ -298,11 +298,11 @@ grep -E "^https://github.com/servo/servo/pull/" tools/commits.txt | grep -v depe
 
 ## How to calculate monthly recurring donations
 
-OpenCollective:
+### OpenCollective
 
 - Go to <https://opencollective.com/dashboard/servo/incoming-contributions?limit=1000&status=ACTIVE&status=ERROR&frequency=MONTHLY&frequency=YEARLY>
 - Make sure there is only one page of results; if there are more pages, we’ll need to update the process like we did for GitHub
-- Make sure there is a column with “monthly” or “yearly”
+- Make sure there is a column with “Monthly” or “Yearly”
 - Run this code in devtools:
 ```js
 $$("table tbody tr")
@@ -313,7 +313,7 @@ $$("table tbody tr")
 ```
 - The result is USD cents/month
 
-GitHub:
+### GitHub
 
 - Go to <https://github.com/sponsors/servo/dashboard/your_sponsors>
 - Run this code in devtools:
@@ -336,7 +336,7 @@ centsPerMonth += $$("table tbody tr")
 ```
 - After running it on every page, the result is USD cents/month
 
-thanks.dev:
+### thanks.dev
 
 - Go to <https://thanks.dev/>
 - Click **Sign in with GitHub** and follow the instructions (if any)
