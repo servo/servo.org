@@ -19,7 +19,7 @@ Servo is an **independent** project hosted at Linux Foundation Europe and manage
 
 The current short-term focus of the project is to **transition Servo from a research project to a production-ready web engine** by delivering stable APIs, improving user interaction capabilities, and fostering an active community that contributes to its growth.
 
-In the long run, we want to make Servo the **leading embeddable web engine** that powers innovative applications and frameworks, offering unparalleled performance, stability, and modern web standards compliance.
+The project's long-term vision is to make Servo the **leading embeddable web engine** that powers innovative applications and frameworks, offering unparalleled performance, stability, and modern web standards compliance.
 
 Since its creation in 2012, Servo has contributed to W3C and WHATWG web standards, reporting specification issues and submitting new cross-browser automated tests, and core team members have co-edited new standards that have been adopted by other browsers. As a result, the Servo project **helps drive the entire web platform forward**, while building on a platform of reusable, modular technologies that implement web standards.
 
