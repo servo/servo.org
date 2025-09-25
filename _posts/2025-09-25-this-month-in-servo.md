@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: ?????????"
-date:       2025-09-01
-summary:    Who even knows?
+title:      "This month in Servo: variable fonts, network tools, SVG, and more!"
+date:       2025-09-25
+summary:    Servo’s biggest month by far, with everything from IndexedDB improvements to favicons in servoshell.
 categories:
 ---
 
