@@ -17,7 +17,7 @@ Servo is written in [**Rust**](https://www.rust-lang.org/), taking advantage of 
 
 Servo is an **independent** project hosted at Linux Foundation Europe and managed openly by the [Technical Steering Committee](https://github.com/servo/project/blob/main/governance/README.md).
 
-We are currently working on **transitioning Servo from a research project to a production-ready web engine** by delivering stable APIs, improving user interaction capabilities, and fostering an active community that contributes to its growth.
+The current short-term focus of the project is to **transition Servo from a research project to a production-ready web engine** by delivering stable APIs, improving user interaction capabilities, and fostering an active community that contributes to its growth.
 
 In the long run, we want to make Servo the **leading embeddable web engine** that powers innovative applications and frameworks, offering unparalleled performance, stability, and modern web standards compliance.
 
