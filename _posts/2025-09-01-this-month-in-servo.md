@@ -146,6 +146,10 @@ The **Element Clear** command now clears `<input type="file">` elements correctl
 
 We now **display favicons** of each top-level page in the tab bar (@simonwuelker, #36680).
 
+<figure>
+<a href="{{ '/img/blog/2025-09-favicon.png' | url }}"><img src=" {{ '/img/blog/2025-09-favicon.png' | url }}" alt="servoshell showing a diffie favicon in the tab bar"></a>
+</figure>
+
 Resizing the browser window to a very small dimension no longer crashes the browser (@leo030303, #38461).
 Element hit testing in full screen mode now works as expected (@yezhizhen, #38328).
 
