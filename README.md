@@ -316,25 +316,19 @@ $$("table tbody tr")
 ### GitHub
 
 - Go to <https://github.com/sponsors/servo/dashboard/your_sponsors>
+- Click **Export**, **All time**, then set **File format** to **JSON**
+- Click **Start export**, then download the JSON emailed to infra@
 - Run this code in devtools:
 ```js
-seen = new Set; centsPerMonth = 0
+sponsors = JSON.parse(`<JSON goes here>`);
+sponsors
+  .filter(sponsor => sponsor.transactions.length > 0)
+	.map(sponsor => sponsor.transactions.sort((p,q) => q.transaction_date > p.transaction_date ? 1 : q.transaction_date < p.transaction_date ? -1 : 0).at(0))
+	.map(tx => tx.tier_name.match(/^[$]([^ ]+) (.+)/).slice(1))
+	.map(([amount, period]) => parseInt(amount,10) * {"a month":100,"one time":0}[period])
+  .reduce((r,x) => r + x, 0)
 ```
-- Click through each page of the table and run this code in devtools:
-```js
-centsPerMonth += $$("table tbody tr")
-    .map(tr => [...tr.cells])
-    .map(cells => [cells[1].querySelector("a").href, cells])
-    .filter(([donorHref, cells]) => !seen.has(donorHref))
-    .map(([donorHref, cells]) => (seen.add(donorHref), cells))
-    .map(cells => cells.slice(2,4).map(td => td.innerText).join(" "))
-    .map(text => text.match(/[$](\S+)\s*(.+)/))
-    .map(match => [100 * match[1], match[2].replace(/[(]custom[)]|Via bulk sponsorship/g, "").trim()])
-    .filter(([cents, period]) => period != "One time")
-    .map(([cents, period]) => cents / {Monthly:1}[period])
-    .reduce((result, cents) => result + cents, 0)
-```
-- After running it on every page, the result is USD cents/month
+- The result is USD cents/month
 
 ### thanks.dev
 
