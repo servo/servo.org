@@ -282,13 +282,27 @@ Or in vim:
 - `:%s/\v ([0-9A-Za-z_.-]+)#([0-9]+)/ [\1#\2](https:\/\/github.com\/servo\/\1\/pull\/\2)/gc`
 - `:%s/\v ([0-9A-Za-z_.-]+)\/([0-9A-Za-z_.-]+)#([0-9]+)/ [\1\/\2#\3](https:\/\/github.com\/\1\/\2\/pull\/\3)/gc`
 
+## How to count the number of pull requests in a month
+
+After following the steps that generate `commits.txt`, run the following:
+
+```
+grep -E "^https://github.com/servo/servo/pull/" tools/commits.txt | sort | uniq | wc -l
+```
+
+To exclude dependabot PRs, run:
+
+```
+grep -E "^https://github.com/servo/servo/pull/" tools/commits.txt | grep -v dependabot | sort | uniq | wc -l
+```
+
 ## How to calculate monthly recurring donations
 
-OpenCollective:
+### OpenCollective
 
 - Go to <https://opencollective.com/dashboard/servo/incoming-contributions?limit=1000&status=ACTIVE&status=ERROR&frequency=MONTHLY&frequency=YEARLY>
 - Make sure there is only one page of results; if there are more pages, we’ll need to update the process like we did for GitHub
-- Make sure there is a column with “monthly” or “yearly”
+- Make sure there is a column with “Monthly” or “Yearly”
 - Run this code in devtools:
 ```js
 $$("table tbody tr")
@@ -299,30 +313,24 @@ $$("table tbody tr")
 ```
 - The result is USD cents/month
 
-GitHub:
+### GitHub
 
 - Go to <https://github.com/sponsors/servo/dashboard/your_sponsors>
+- Click **Export**, **All time**, then set **File format** to **JSON**
+- Click **Start export**, then download the JSON emailed to infra@
 - Run this code in devtools:
 ```js
-seen = new Set; centsPerMonth = 0
+sponsors = JSON.parse(`<JSON goes here>`);
+sponsors
+  .filter(sponsor => sponsor.transactions.length > 0)
+	.map(sponsor => sponsor.transactions.sort((p,q) => q.transaction_date > p.transaction_date ? 1 : q.transaction_date < p.transaction_date ? -1 : 0).at(0))
+	.map(tx => tx.tier_name.match(/^[$]([^ ]+) (.+)/).slice(1))
+	.map(([amount, period]) => parseInt(amount,10) * {"a month":100,"one time":0}[period])
+  .reduce((r,x) => r + x, 0)
 ```
-- Click through each page of the table and run this code in devtools:
-```js
-centsPerMonth += $$("table tbody tr")
-    .map(tr => [...tr.cells])
-    .map(cells => [cells[1].querySelector("a").href, cells])
-    .filter(([donorHref, cells]) => !seen.has(donorHref))
-    .map(([donorHref, cells]) => (seen.add(donorHref), cells))
-    .map(cells => cells.slice(2,4).map(td => td.innerText).join(" "))
-    .map(text => text.match(/[$](\S+)\s*(.+)/))
-    .map(match => [100 * match[1], match[2].replace(/[(]custom[)]|Via bulk sponsorship/g, "").trim()])
-    .filter(([cents, period]) => period != "One time")
-    .map(([cents, period]) => cents / {Monthly:1}[period])
-    .reduce((result, cents) => result + cents, 0)
-```
-- After running it on every page, the result is USD cents/month
+- The result is USD cents/month
 
-thanks.dev:
+### thanks.dev
 
 - Go to <https://thanks.dev/>
 - Click **Sign in with GitHub** and follow the instructions (if any)
