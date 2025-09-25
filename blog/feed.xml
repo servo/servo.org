@@ -4,12 +4,167 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2025-09-17T00:00:00Z</updated>
+  <updated>2025-09-25T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
+  <entry>
+    <title>This month in Servo: variable fonts, network tools, SVG, and more!</title>
+    <link href="https://servo.org/blog/2025/09/25/this-month-in-servo/"/>
+    <updated>2025-09-25T00:00:00Z</updated>
+    <id>https://servo.org/blog/2025/09/25/this-month-in-servo/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Another month, another record number of pull requests merged!
+August flew by, and with it came &lt;strong&gt;447 pull requests&lt;/strong&gt; from Servo contributors.
+It was also the final month of our &lt;a href=&quot;https://www.outreachy.org/&quot;&gt;Outreachy&lt;/a&gt; cohort; you can read &lt;a href=&quot;https://www.jerensl.com/blog/en-final-project-progress-outreachy/&quot;&gt;Jerens’&lt;/a&gt; and &lt;a href=&quot;https://uthmaniv.github.io/&quot;&gt;Uthman’s&lt;/a&gt; blogs to learn about how it went!&lt;/p&gt;
+&lt;h2 id=&quot;highlights&quot; tabindex=&quot;-1&quot;&gt;Highlights &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2025/09/25/this-month-in-servo/#highlights&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Our big new feature this month is rendering &lt;strong&gt;inline SVG elements&lt;/strong&gt; (@mukilan, @Loirooriol, #38188, #38603).
+This improves the appearance of many popular websites.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&quot;https://servo.org/img/blog/2025-09-svg.png&quot;&gt;&lt;img alt=&quot;Screenshot of servoshell with the Google homepage loaded&quot; src=&quot;https://servo.org/img/blog/2025-09-svg.png&quot; /&gt;&lt;/a&gt;
+  &lt;figcaption&gt;Did you know that the Google logo is an SVG element?&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;We have implemented &lt;strong&gt;named grid line lines and areas&lt;/strong&gt; (@nicoburns, @loirooriol, #38306, #38574, #38493), still gated behind the &lt;code&gt;layout_grid_enabled&lt;/code&gt; preference (#38306, #38574).&lt;/p&gt;
+&lt;figure&gt;
+  &lt;a href=&quot;https://servo.org/img/blog/2025-09-grid.png&quot;&gt;&lt;img alt=&quot;Screenshot of servoshell loading a page demoing a complex grid layout&quot; src=&quot;https://servo.org/img/blog/2025-09-grid.png&quot; /&gt;&lt;/a&gt;
+  &lt;figcaption&gt;CSS grids are all around us.&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Servo now supports CSS &lt;strong&gt;‘font-variation-settings’&lt;/strong&gt; on all main desktop platforms (@simonwuelker, @mrobinson, #38642, #38760, #38831).
+This feature is currently gated behind the &lt;code&gt;layout_variable_fonts_enabled&lt;/code&gt; preference.
+We also respect &lt;code&gt;format(*-variations)&lt;/code&gt; inside &lt;code&gt;@font-face&lt;/code&gt; rules (@mrobinson, #38832).
+Additionally, Servo now reads data from &lt;strong&gt;OpenType Collection (.ttc)&lt;/strong&gt; system font files on macOS (@nicoburns, #38753), and uses &lt;code&gt;Helvetica&lt;/code&gt; for the &lt;strong&gt;‘system-ui’&lt;/strong&gt; font (@dpogue, #39001).&lt;/p&gt;
+&lt;figure&gt;
+  &lt;details style=&quot;position:relative&quot;&gt;
+    &lt;img src=&quot;https://servo.org/img/blog/2025-09-variations.webp&quot; style=&quot;position:absolute;margin:0;inset:0;pointer-events:none&quot; loading=&quot;lazy&quot; alt=&quot;servoshell nightly showcasing variable fonts, with variable weight (`wght`) values smoothly increasing and decreasing (click to pause)&quot; /&gt;
+    &lt;summary style=&quot;display:block&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/2025-09-variations-preview.png&quot; style=&quot;margin:0&quot; loading=&quot;lazy&quot; /&gt;&lt;div style=&quot;position:absolute;inset:0;display:flex;justify-content:center;align-items:center;color:#1192e8;font-size:7em;cursor:pointer;-webkit-text-stroke:1rem color-mix(in oklch,#1192e8,black 20%);user-select:none&quot; alt=&quot;servoshell nightly showcasing variable fonts, with variable weight (`wght`) values smoothly increasing and decreasing (click to play)&quot;&gt;▶&lt;/div&gt;&lt;/summary&gt;
+  &lt;/details&gt;
+  &lt;figcaption&gt;This font can be customized!&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Our &lt;a href=&quot;https://book.servo.org/hacking/using-devtools.html&quot;&gt;developer tools&lt;/a&gt; continue to make progress!
+We now have a functional &lt;strong&gt;network monitor&lt;/strong&gt; panel (@uthmaniv, @jdm, #38216, #38601, #38625),
+and our JS debugger can show potential breakpoints (@delan, @atbrakhi, #38331, #38363, #38333, #38551, #38550, #38334, #38624, #38826, #38797).
+Additionally, the layout inspector now &lt;strong&gt;dims nodes that are not displayed&lt;/strong&gt; (@simonwuelker, #38575).&lt;/p&gt;
+&lt;figure&gt;
+&lt;a href=&quot;https://servo.org/img/blog/2025-09-mastodon.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/2025-09-mastodon.png&quot; alt=&quot;servoshell showing the Servo Mastodon account homepage&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;https://servo.org/img/blog/2025-09-netmonitor.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/2025-09-netmonitor.png&quot; alt=&quot;The Firefox network monitor, showing a list of network connections for the Servo Mastodon account homepage&quot; /&gt;&lt;/a&gt;
+  &lt;figcaption&gt;That&#39;s a lot of network requests.&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;We’ve fixed a significant source of crashes in the engine: hit testing using outdated display lists (&lt;a href=&quot;https://github.com/servo/servo/issues/37932&quot;&gt;issue #37932&lt;/a&gt;).
+&lt;strong&gt;Hit testing&lt;/strong&gt; in a web rendering engine is the process that determines which element(s) the user’s mouse is hovering over.&lt;/p&gt;
+&lt;p&gt;Previously, this process ran inside of &lt;a href=&quot;https://github.com/servo/webrender&quot;&gt;WebRender&lt;/a&gt;, which receives a display list representing what should be rendered for a particular page.
+WebRender runs on a separate thread or process from the actual page content, so display lists are updated asynchronously.
+By the time we do a hit test, the elements reported may not exist anymore, so we could trigger crashes by (for example) moving the mouse quickly over parts of the page that were rapidly changing.&lt;/p&gt;
+&lt;p&gt;This was fixed by making the hit test operation synchronous and moving it into the same thread as the actual content being tested against, eliminating the possibility of outdated results (@mrobinson, @Loirooriol, @kongbai1996, @yezhizhen, #38480, #38464, #38463, #38884, #38518).&lt;/p&gt;
+&lt;h2 id=&quot;web-platform-support&quot; tabindex=&quot;-1&quot;&gt;Web platform support &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2025/09/25/this-month-in-servo/#web-platform-support&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;dom-%26-js&quot; tabindex=&quot;-1&quot;&gt;DOM &amp;amp; JS &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2025/09/25/this-month-in-servo/#dom-%26-js&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;We’ve upgraded to &lt;strong&gt;SpiderMonkey v140&lt;/strong&gt; (&lt;a href=&quot;https://gitlab.gnome.org/GNOME/gjs/-/blob/master/NEWS#L39-137&quot;&gt;changelog&lt;/a&gt;) (@jdm, #37077, #38563).&lt;/p&gt;
+&lt;p&gt;Numerous pieces of the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API&quot;&gt;&lt;strong&gt;Trusted Types API&lt;/strong&gt;&lt;/a&gt; are now present in Servo
+(@TimvdLippe, @jdm, #38595, #37834, #38700, #38736, #38718, #38784, #38871, #8623, #38874, #38872, #38886), all gated behind the &lt;code&gt;dom_trusted_types_enabled&lt;/code&gt; preference.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API&quot;&gt;&lt;strong&gt;IndexedDB&lt;/strong&gt;&lt;/a&gt; implementation (gated behind &lt;code&gt;dom_indexeddb_enabled&lt;/code&gt;) is progressing quickly (@arihant2math, @jdm, @rodion, @kkoyung, #28744, #38737, #38836, #38813, #38819, #38115, #38944, #38740, #38891, #38723, #38850, #38735), now reporting errors via &lt;code&gt;IDBRequest&lt;/code&gt; interface and supporting autoincrement keys.&lt;/p&gt;
+&lt;p&gt;A prototype implementation of the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/CookieStore&quot;&gt;&lt;strong&gt;CookieStore&lt;/strong&gt; API&lt;/a&gt; is now implemented and gated by the &lt;code&gt;dom_cookiestore_enabled&lt;/code&gt; preference (@sebsebmc, #37968, #38876).&lt;/p&gt;
+&lt;p&gt;Servo now passes over &lt;strong&gt;99.6% of the &lt;a href=&quot;https://drafts.fxtf.org/geometry/&quot;&gt;CSS geometry&lt;/a&gt; test suite&lt;/strong&gt;, thanks to an implementation of &lt;strong&gt;matrixTransform() on DOMPointReadOnly&lt;/strong&gt;, making all geometry interfaces serializable, and adding the &lt;strong&gt;SVGMatrix and SVGPoint aliases&lt;/strong&gt; (@lumiscosity, #38801, #38828, #38810).&lt;/p&gt;
+&lt;p&gt;You can now use the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/TextEncoderStream&quot;&gt;&lt;strong&gt;TextEncoderStream&lt;/strong&gt; API&lt;/a&gt; (@minghuaw, #38466).
+Streams that are piped now correctly pass through &lt;code&gt;undefined&lt;/code&gt; values, too (@gterzian, #38470).
+We also fixed a crash in the result of &lt;strong&gt;pipeTo() on ReadableStream&lt;/strong&gt; (@gterzian, #38385).&lt;/p&gt;
+&lt;p&gt;We’ve implemented &lt;strong&gt;getModifierState() on MouseEvent&lt;/strong&gt; (@PotatoCP, #38535), and made a number of changes involving DOM events: &lt;strong&gt;‘mouseleave’ events&lt;/strong&gt; are fired when the pointer leaves an &amp;lt;iframe&amp;gt; (@mrobinson, @Loirooriol, #38539), pasting from the clipboard into a text input triggers an &lt;strong&gt;‘input’ event&lt;/strong&gt; (@mrobinson, #37100), &lt;strong&gt;focus now occurs after ‘mousedown’&lt;/strong&gt; instead of ‘click’ (@yezhizhen, #38589), we ignore ‘mousedown’ and ‘mouseup’ events for elements that are disabled (@yezhizhen, #38671), and removing an event handler attribute like ‘onclick’ clears all relevant event listeners (@TimvdLippe, @kotx, #38734, #39011).&lt;/p&gt;
+&lt;p&gt;Servo now supports &lt;strong&gt;scrollIntoView()&lt;/strong&gt; (@abdelrahman1234567, #38230), and fires a &lt;strong&gt;‘scroll’ event&lt;/strong&gt; whenever a page is scrolled (@stevennovaryo, #38321).
+You can now focus an element without scrolling, by passing the &lt;code&gt;{preventScroll: true}&lt;/code&gt; option to focus() (@abdelrahman1234567, #38495).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;navigator.sendBeacon()&lt;/strong&gt; is now implemented, gated behind the &lt;code&gt;dom_navigator_sendbeacon_enabled&lt;/code&gt; preference (@TimvdLippe, #38301).
+Similarly, the &lt;strong&gt;AbortSignal.abort()&lt;/strong&gt; static method is hidden behind &lt;code&gt;dom_abort_controller_enabled&lt;/code&gt; (@Taym95, #38746).&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;HTMLDocument&lt;/strong&gt; interface now exists as a property on the &lt;code&gt;Window&lt;/code&gt; object (@leo030303, #38433).
+Meanwhile, the &lt;strong&gt;CSS&lt;/strong&gt; window property is now a &lt;a href=&quot;https://webidl.spec.whatwg.org/#idl-namespaces&quot;&gt;WebIDL namespace&lt;/a&gt; (@simonwuelker, #38579).
+We also implemented the new &lt;strong&gt;QuotaExceededError&lt;/strong&gt; interface (@rmeno12, #38507, #38720), which replaces previous usages of DOMException with the &lt;code&gt;QUOTA_EXCEEDED_ERR&lt;/code&gt; name.&lt;/p&gt;
+&lt;p&gt;Our 2D canvas implementation now supports &lt;strong&gt;addPath() on Path2D&lt;/strong&gt; (@arthmis, #37838) and the &lt;strong&gt;restore()&lt;/strong&gt; methods on &lt;strong&gt;CanvasRenderingContext2D&lt;/strong&gt; and &lt;strong&gt;OffscreenCanvas&lt;/strong&gt; now pop all applied clipping paths (@sagudev, #38496).
+Additionally, we now support &lt;strong&gt;using web fonts in the 2D canvas&lt;/strong&gt; (@mrobinson, #38979).
+Meanwhile, the performance continues to improve in the new &lt;a href=&quot;https://github.com/linebender/vello?tab=readme-ov-file#vello&quot;&gt;Vello&lt;/a&gt;-based backends (@sagudev, #38406, #38356, #38440, #38437), with asynchronous uploading also showing improvements (@sagudev, @mrobinson, #37776).&lt;/p&gt;
+&lt;p&gt;Muting media elements with the &lt;strong&gt;‘mute’&lt;/strong&gt; HTML attribute now works during the initial resource load (@rayguo17, @jschwe, #38462).&lt;/p&gt;
+&lt;p&gt;Modifying stylesheets now integrates better with incremental layout, in both light trees and shadow trees (@coding-joedow, #38530, #38529).
+Note that calling setProperty() on a readonly CSSStyleDeclaration correctly throws an exception (@simonwuelker, #38677).&lt;/p&gt;
+&lt;h3 id=&quot;css&quot; tabindex=&quot;-1&quot;&gt;CSS &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2025/09/25/this-month-in-servo/#css&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;We’ve upgraded to the upstream &lt;strong&gt;Stylo&lt;/strong&gt; revision as of August 1, 2025.&lt;/p&gt;
+&lt;p&gt;We now support custom CSS properties with the &lt;strong&gt;CSS.registerProperty()&lt;/strong&gt; method (@simonwuelker, #38682), as well as custom element states with the &lt;strong&gt;‘states’ property on ElementInternals&lt;/strong&gt; (@simonwuelker, #38564).&lt;/p&gt;
+&lt;p&gt;Flexbox cross sizes can no longer end up negative through stretching (@Loirooriol, #38521), while ‘stretch’ on flex items now stretches to the line if possible (@Loirooriol, #38526).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Overflow calculations are more accurate&lt;/strong&gt;, now that we ignore ‘position: fixed’ children of the root element (@stevennovaryo, #38618), compute overflow for &amp;lt;body&amp;gt; separate from the viewport (@shubhamg13, #38825), check for ‘overflow: visible’ in parents and children (@shubhamg13, #38443), and propagate ‘overflow’ to the viewport correctly (@shubhamg13, @Loirooriol, #38598).&lt;/p&gt;
+&lt;p&gt;‘color’ and ‘text-decoration’ properties no longer inherit into the contents of &amp;lt;select&amp;gt; elements (@simonwuelker, #38570).&lt;/p&gt;
+&lt;p&gt;Negative outline offsets work correctly (@lumiscosity, @mrobinson, #38418).&lt;/p&gt;
+&lt;p&gt;Video elements no longer fall back to a preferred aspect ratio of 2 (@Loirooriol, #38705).&lt;/p&gt;
+&lt;p&gt;‘position: sticky’ elements are handled correctly inside CSS transforms (@mrobinson, @Loirooriol, #38391).&lt;/p&gt;
+&lt;h2 id=&quot;performance-%26-stability&quot; tabindex=&quot;-1&quot;&gt;Performance &amp;amp; Stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2025/09/25/this-month-in-servo/#performance-%26-stability&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We fixed several panics this month, involving IntersectionObserver and missing stacking contexts (@mrobinson, #38473), unpaintable canvases and text (@gterzian, #38664), serializing ‘location’ properties on Window objects (@jdm, #38709), and navigations canceled before HTTP headers are received (@gterzian, #38739).&lt;/p&gt;
+&lt;p&gt;We also fixed a number of performance pitfalls.
+The document rendering loop is now &lt;strong&gt;throttled to 60 FPS&lt;/strong&gt; (@mrobinson, @Loirooriol, #38431), while &lt;strong&gt;animated images do less work&lt;/strong&gt; when advancing the current frame (@mrobinson, #38857).
+In addition, elements with &lt;strong&gt;CSS images will not trigger page reflow&lt;/strong&gt; until their image data is fully available (@coding-joedow, #38916).&lt;/p&gt;
+&lt;p&gt;Finally, we made improvements to memory usage and binary size.
+Inline stylesheets are now deduplicated, which can have a significant impact on pages with &lt;strong&gt;lots of form inputs&lt;/strong&gt; or &lt;strong&gt;custom elements&lt;/strong&gt; with common styles (@coding-joedow, #38540).
+We also removed many unused pieces of the ICU library, &lt;strong&gt;saving 16MB&lt;/strong&gt; from the final binary.&lt;/p&gt;
+&lt;h2 id=&quot;embedding&quot; tabindex=&quot;-1&quot;&gt;Embedding &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2025/09/25/this-month-in-servo/#embedding&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Servo has declared a &lt;strong&gt;Minimum Supported Rust Version&lt;/strong&gt; (1.85.0), and this is verified with every new pull request (@jschwe, #37152).&lt;/p&gt;
+&lt;p&gt;Evaluating JS from the embedding layer now &lt;strong&gt;reports an error&lt;/strong&gt; if the evaluation failed for any reason (@rodio, #38602).&lt;/p&gt;
+&lt;p&gt;Our &lt;strong&gt;WebDriver&lt;/strong&gt; implementation now passes 80% of the implementation conformance tests.
+This is the result of lots of work on handling user prompts (@PotatoCP, #38591), computing obscured/disabled elements while clicking (@yezhizhen, #38497, #38841, #38436, #38490, #38383), and improving window focus behaviours (@yezhizhen, #38889, #38909).
+We also implemented the &lt;strong&gt;Get Window Handles&lt;/strong&gt; command (@longvatrong111, @yezhizhen, #38622, #38745), added support for getting element boolean attributes (@kkoyung, #38401), and added more accurate errors for a number of commands (@yezhizhen, @longvatrong111, #38620, #38357).
+The &lt;strong&gt;Element Clear&lt;/strong&gt; command now clears &lt;code&gt;&amp;lt;input type=&amp;quot;file&amp;quot;&amp;gt;&lt;/code&gt; elements correctly (@PotatoCP, #38536), and &lt;strong&gt;Element Send Keys&lt;/strong&gt; now appends to file inputs with the ‘multiple’ attribute.&lt;/p&gt;
+&lt;h2 id=&quot;servoshell&quot; tabindex=&quot;-1&quot;&gt;servoshell &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2025/09/25/this-month-in-servo/#servoshell&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We now &lt;strong&gt;display favicons&lt;/strong&gt; of each top-level page in the tab bar (@simonwuelker, #36680).&lt;/p&gt;
+&lt;figure&gt;
+&lt;a href=&quot;https://servo.org/img/blog/2025-09-favicon.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/2025-09-favicon.png&quot; alt=&quot;servoshell showing a diffie favicon in the tab bar&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
+&lt;p&gt;Resizing the browser window to a very small dimension no longer crashes the browser (@leo030303, #38461).
+Element hit testing in full screen mode now works as expected (@yezhizhen, #38328).&lt;/p&gt;
+&lt;p&gt;Various popup dialogs, such as the &amp;lt;select&amp;gt; option chooser dialog, can now be closed without choosing a value (@TimvdLippe, #38373, #38949).
+Additionally, the browser now responds to a popup closing without any other inputs (@lumiscosity, #39038).&lt;/p&gt;
+&lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2025/09/25/this-month-in-servo/#donations&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Thanks again for your generous support!
+We are now receiving &lt;strong&gt;5552 USD/month&lt;/strong&gt; (+18.3% over July) in recurring donations.&lt;/p&gt;
+&lt;p&gt;Historically this has helped cover the cost of our &lt;a href=&quot;https://ci0.servo.org/&quot;&gt;speedy&lt;/a&gt; &lt;a href=&quot;https://ci1.servo.org/&quot;&gt;CI&lt;/a&gt; &lt;a href=&quot;https://ci2.servo.org/&quot;&gt;servers&lt;/a&gt; and &lt;a href=&quot;https://www.outreachy.org/alums/2025-06/#:~:text=Servo&quot;&gt;Outreachy interns&lt;/a&gt;.
+Thanks to your support, we’re now setting up &lt;strong&gt;&lt;a href=&quot;https://ci3.servo.org/&quot;&gt;two&lt;/a&gt; &lt;a href=&quot;https://ci4.servo.org/&quot;&gt;new&lt;/a&gt; CI servers for benchmarking&lt;/strong&gt;, and &lt;strong&gt;&lt;a href=&quot;https://servo.org/blog/2025/09/17/your-donations-at-work-funding-jdm/&quot;&gt;funding the work of our long-time maintainer&lt;/a&gt; Josh Matthews&lt;/strong&gt; (@jdm), with a particular focus on helping more people contribute to Servo.&lt;/p&gt;
+&lt;p&gt;Keep an eye out for &lt;a href=&quot;https://github.com/servo/servo/issues/38141&quot;&gt;further CI improvements&lt;/a&gt; in the coming months, including &lt;a href=&quot;https://github.com/servo/ci-runners/issues/21&quot;&gt;&lt;strong&gt;ten-minute WPT builds&lt;/strong&gt;&lt;/a&gt;, &lt;strong&gt;macOS arm64 builds&lt;/strong&gt;, and &lt;strong&gt;faster pull request checks&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Servo is also on &lt;a href=&quot;https://thanks.dev/&quot;&gt;thanks.dev&lt;/a&gt;, and already &lt;strong&gt;15 GitHub users&lt;/strong&gt; (−7 from July) that depend on Servo are sponsoring us there.
+If you use Servo libraries like &lt;a href=&quot;https://crates.io/crates/url/reverse_dependencies&quot;&gt;url&lt;/a&gt;, &lt;a href=&quot;https://crates.io/crates/html5ever/reverse_dependencies&quot;&gt;html5ever&lt;/a&gt;, &lt;a href=&quot;https://crates.io/crates/selectors/reverse_dependencies&quot;&gt;selectors&lt;/a&gt;, or &lt;a href=&quot;https://crates.io/crates/cssparser/reverse_dependencies&quot;&gt;cssparser&lt;/a&gt;, signing up for &lt;a href=&quot;https://thanks.dev/&quot;&gt;thanks.dev&lt;/a&gt; could be a good way for you (or your employer) to give back to the community.&lt;/p&gt;
+&lt;figure class=&quot;_fig&quot; style=&quot;width: 100%; margin: 1em 0;&quot;&gt;&lt;div class=&quot;_flex&quot; style=&quot;height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;&quot;&gt;
+    &lt;div style=&quot;position: relative; text-align: right;&quot;&gt;
+        &lt;div style=&quot;position: absolute; margin-left: calc(100% * 5552 / 10000); padding-left: 0.5em;&quot;&gt;&lt;strong&gt;5552&lt;/strong&gt; USD/month&lt;/div&gt;
+        &lt;div style=&quot;position: absolute; margin-left: calc(100% * 5552 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;&quot;&gt;&lt;/div&gt;
+        &lt;div style=&quot;position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;&quot;&gt;&lt;/div&gt;
+        &lt;div style=&quot;padding-right: 1em;&quot;&gt;&lt;strong&gt;10000&lt;/strong&gt;&lt;!-- USD/month --&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;progress value=&quot;5552&quot; max=&quot;10000&quot; style=&quot;transform: scale(3); transform-origin: top left; width: calc(100% / 3);&quot;&gt;&lt;/progress&gt;
+&lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;As always, use of these funds will be decided transparently in the Technical Steering Committee.
+For more details, head to our &lt;a href=&quot;https://servo.org/sponsorship/&quot;&gt;Sponsorship page&lt;/a&gt;.&lt;/p&gt;
+&lt;style&gt;
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+    ._note {
+        margin: 1em 1em;
+        border-left: 1px solid;
+        padding-left: 1em;
+        opacity: 0.75;
+    }
+&lt;/style&gt;
+</content>
+  </entry>
   <entry>
     <title>Your Donations at Work: Funding Josh Matthews&#39; Contributions to Servo</title>
     <link href="https://servo.org/blog/2025/09/17/your-donations-at-work-funding-jdm/"/>
@@ -1152,187 +1307,6 @@ For more details, head to our &lt;a href=&quot;https://servo.org/sponsorship/&qu
 &lt;p&gt;In 2024 we have &lt;strong&gt;raised 33,632.64 USD&lt;/strong&gt; with &lt;a href=&quot;https://servo.org/sponsorship/&quot;&gt;donations via Open Collective and GitHub Sponsors&lt;/a&gt; from &lt;strong&gt;500 different people and organizations&lt;/strong&gt;. Thank you all for supporting us!&lt;/p&gt;
 &lt;p&gt;With this money we have now 3 servers that provides self-hosted runners for Linux, macOS, and Windows reducing our build times &lt;strong&gt;from over an hour to under 30 minutes&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Talking about the future, the Servo TSC has been discussing the &lt;a href=&quot;https://github.com/servo/servo/wiki/Roadmap&quot;&gt;&lt;strong&gt;roadmap for 2025&lt;/strong&gt;&lt;/a&gt; which has been updated on the Servo’s wiki. We have many plans to keep Servo thriving with new features and improvements. Let’s hope for a great 2025!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>This month in Servo: dark mode, keyword sizes, XPath, and more!</title>
-    <link href="https://servo.org/blog/2025/01/10/this-month-in-servo/"/>
-    <updated>2025-01-10T00:00:00Z</updated>
-    <id>https://servo.org/blog/2025/01/10/this-month-in-servo/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;Servo now supports &lt;strong&gt;dark mode&lt;/strong&gt; (&lt;a href=&quot;https://github.com/arthmis&quot;&gt;@arthmis&lt;/a&gt;, &lt;a href=&quot;https://github.com/lazypassion&quot;&gt;@lazypassion&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34532&quot;&gt;#34532&lt;/a&gt;), respecting the platform dark mode in servoshell and &lt;strong&gt;‘prefers-color-scheme’&lt;/strong&gt; (&lt;a href=&quot;https://github.com/nicoburns&quot;&gt;@nicoburns&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34423&quot;&gt;#34423&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/stylo/pull/93&quot;&gt;stylo#93&lt;/a&gt;) on Windows and macOS.&lt;/p&gt;
-&lt;figure&gt;
-    &lt;div style=&quot;display: flex;&quot;&gt;
-        &lt;a href=&quot;https://servo.org/img/blog/dark-mode-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/dark-mode-december-2024.png&quot; alt=&quot;servoshell in dark mode, rendering the MDN article for ‘prefers-color-scheme’ in dark mode, when Windows is set to dark mode&quot; /&gt;&lt;/a&gt;
-        &lt;a href=&quot;https://servo.org/img/blog/light-mode-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/light-mode-december-2024.png&quot; alt=&quot;servoshell in light mode, rendering the MDN article for ‘prefers-color-scheme’ in light mode, when Windows is set to light mode&quot; /&gt;&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;figcaption&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme&quot;&gt;MDN article for ‘prefers-color-scheme’&lt;/a&gt; in dark mode (left) and light mode (right), with &lt;code&gt;--pref dom.resize_observer.enabled&lt;/code&gt;.&lt;/figcaption&gt;
-&lt;/figure&gt;
-&lt;p&gt;&lt;strong&gt;CSS transitions&lt;/strong&gt; can now be triggered properly by script (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34486&quot;&gt;#34486&lt;/a&gt;), and we now support &lt;strong&gt;‘min-height’&lt;/strong&gt; and &lt;strong&gt;‘max-height’&lt;/strong&gt; on column flex containers (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34450&quot;&gt;#34450&lt;/a&gt;), &lt;strong&gt;‘min-content’&lt;/strong&gt;, &lt;strong&gt;‘max-content’&lt;/strong&gt;, &lt;strong&gt;‘fit-content’&lt;/strong&gt;, and &lt;strong&gt;‘stretch’&lt;/strong&gt; in block layout (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34641&quot;&gt;#34641&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34568&quot;&gt;#34568&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34695&quot;&gt;#34695&lt;/a&gt;), &lt;strong&gt;‘stretch’&lt;/strong&gt; on replaced positioned elements (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34430&quot;&gt;#34430&lt;/a&gt;), as well as &lt;strong&gt;‘align-self: self-start’&lt;/strong&gt;, &lt;strong&gt;‘self-end’&lt;/strong&gt;, &lt;strong&gt;‘left’&lt;/strong&gt;, and &lt;strong&gt;‘right’&lt;/strong&gt; on positioned elements (&lt;a href=&quot;https://github.com/taniishkaaa&quot;&gt;@taniishkaaa&lt;/a&gt;, &lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34365&quot;&gt;#34365&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;Servo can now run &lt;a href=&quot;https://discord.com/&quot;&gt;&lt;strong&gt;Discord&lt;/strong&gt;&lt;/a&gt; well enough to &lt;a href=&quot;https://discord.com/login&quot;&gt;&lt;strong&gt;log in&lt;/strong&gt;&lt;/a&gt; and &lt;strong&gt;read messages&lt;/strong&gt;, though you can’t send messages yet.
-To get this working, we landed some bare-bones AbortController support (&lt;a href=&quot;https://github.com/jdm&quot;&gt;@jdm&lt;/a&gt;, &lt;a href=&quot;https://github.com/syvb&quot;&gt;@syvb&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34519&quot;&gt;#34519&lt;/a&gt;) and a WebSocket fix (&lt;a href=&quot;https://github.com/jdm&quot;&gt;@jdm&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34634&quot;&gt;#34634&lt;/a&gt;).
-Try it yourself with &lt;code&gt;--pref dom.svg.enabled --pref dom.intersection_observer.enabled --pref dom.abort_controller.enabled&lt;/code&gt;!&lt;/p&gt;
-&lt;figure&gt;
-    &lt;div style=&quot;display: flex;&quot;&gt;
-        &lt;a href=&quot;https://servo.org/img/blog/discord-login-1-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/discord-login-1-december-2024.png&quot; alt=&quot;Discord login screen in Servo, showing form input and a QR code that never finishes loading&quot; /&gt;&lt;/a&gt;
-        &lt;a href=&quot;https://servo.org/img/blog/discord-login-2-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/discord-login-2-december-2024.png&quot; alt=&quot;Discord loading screen in Servo, after logging in&quot; /&gt;&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;a href=&quot;https://servo.org/img/blog/discord-small-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/discord-small-december-2024.png&quot; alt=&quot;Discord channel screen in Servo, showing a few of Diffie’s messages and attachments&quot; /&gt;&lt;/a&gt;
-&lt;/figure&gt;
-&lt;p&gt;We now support &lt;strong&gt;console.trace()&lt;/strong&gt; (&lt;a href=&quot;https://github.com/simonwuelker&quot;&gt;@simonwuelker&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34629&quot;&gt;#34629&lt;/a&gt;), &lt;strong&gt;PointerEvent&lt;/strong&gt; (&lt;a href=&quot;https://github.com/wusyong&quot;&gt;@wusyong&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34437&quot;&gt;#34437&lt;/a&gt;), and the &lt;strong&gt;clonable&lt;/strong&gt; property on &lt;strong&gt;ShadowRoot&lt;/strong&gt; (&lt;a href=&quot;https://github.com/simonwuelker&quot;&gt;@simonwuelker&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34514&quot;&gt;#34514&lt;/a&gt;).
-Shadow DOM support continues to improve (&lt;a href=&quot;https://github.com/jdm&quot;&gt;@jdm&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34503&quot;&gt;#34503&lt;/a&gt;), including very basic &lt;strong&gt;Shadow DOM layout&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34701&quot;&gt;#34701&lt;/a&gt;) when enabled via &lt;code&gt;--pref dom.shadowdom.enabled&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;script&lt;/code&gt; underwent (and continues to undergo) major rework towards being &lt;strong&gt;more reliable&lt;/strong&gt; and &lt;strong&gt;faster to build&lt;/strong&gt;.
-We’ve landed better &lt;strong&gt;synchronisation for DOM tree mutations&lt;/strong&gt; (&lt;a href=&quot;https://github.com/jdm&quot;&gt;@jdm&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34505&quot;&gt;#34505&lt;/a&gt;) and continued work on &lt;strong&gt;splitting up the &lt;code&gt;script&lt;/code&gt; crate&lt;/strong&gt; (&lt;a href=&quot;https://github.com/jdm&quot;&gt;@jdm&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34366&quot;&gt;#34366&lt;/a&gt;).
-We’ve moved our &lt;strong&gt;ReadableStream&lt;/strong&gt; support into Servo, eliminating the maintenance burden of a downstream SpiderMonkey patch (&lt;a href=&quot;https://github.com/gterzian&quot;&gt;@gterzian&lt;/a&gt;, &lt;a href=&quot;https://github.com/wusyong&quot;&gt;@wusyong&lt;/a&gt;, &lt;a href=&quot;https://github.com/Taym95&quot;&gt;@Taym95&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34064&quot;&gt;#34064&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34675&quot;&gt;#34675&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;The web platform guarantees that same-origin frames and their parents can &lt;strong&gt;synchronously observe resizes&lt;/strong&gt; and their effects.
-Many tests rely on this, and not doing this correctly made Servo’s test results much flakier than they could otherwise be.
-We’ve made very good progress towards fixing this (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34643&quot;&gt;#34643&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34656&quot;&gt;#34656&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34702&quot;&gt;#34702&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34609&quot;&gt;#34609&lt;/a&gt;), with correct resizing in all cases except when a same-origin frame is in another script thread, which is rare.&lt;/p&gt;
-&lt;p&gt;We now support enough of &lt;strong&gt;XPath&lt;/strong&gt; to get &lt;a href=&quot;https://htmx.org/&quot;&gt;htmx&lt;/a&gt; working (&lt;a href=&quot;https://github.com/vlindhol&quot;&gt;@vlindhol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34463&quot;&gt;#34463&lt;/a&gt;), when enabled via &lt;code&gt;--pref dom.xpath.enabled&lt;/code&gt;.&lt;/p&gt;
-&lt;figure&gt;
-    &lt;a href=&quot;https://servo.org/img/blog/htmx-december-2024.png&quot;&gt;&lt;img src=&quot;https://servo.org/img/blog/htmx-december-2024.png&quot; alt=&quot;htmx home page in Servo, with the hero banner thing now working (it relies on XPath)&quot; /&gt;&lt;/a&gt;
-&lt;/figure&gt;
-&lt;p&gt;Servo’s performance continues to improve, with &lt;strong&gt;layout caching for flex columns&lt;/strong&gt; delivering up to 12x speedup (&lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34461&quot;&gt;#34461&lt;/a&gt;), many &lt;strong&gt;unnecessary reflows now eliminated&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34558&quot;&gt;#34558&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34599&quot;&gt;#34599&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34576&quot;&gt;#34576&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34645&quot;&gt;#34645&lt;/a&gt;), &lt;strong&gt;reduced memory usage&lt;/strong&gt; (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34563&quot;&gt;#34563&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34666&quot;&gt;#34666&lt;/a&gt;), faster rendering for pages with animations (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34489&quot;&gt;#34489&lt;/a&gt;), and timers now operating without IPC (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34581&quot;&gt;#34581&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;servoshell nightlies are up to 20% smaller&lt;/strong&gt; (&lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34340&quot;&gt;#34340&lt;/a&gt;), &lt;strong&gt;WebGPU is now optional&lt;/strong&gt; at build time (&lt;a href=&quot;https://github.com/atbrakhi&quot;&gt;@atbrakhi&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34444&quot;&gt;#34444&lt;/a&gt;), and &lt;code&gt;--features tracing&lt;/code&gt; no longer enables &lt;code&gt;--features layout-2013&lt;/code&gt; (&lt;a href=&quot;https://github.com/jschwe&quot;&gt;@jschwe&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34515&quot;&gt;#34515&lt;/a&gt;) for further binary size savings.
-You can also &lt;strong&gt;limit the size of&lt;/strong&gt; several of Servo’s &lt;strong&gt;thread pools&lt;/strong&gt; with &lt;code&gt;--pref threadpools.fallback_worker_num&lt;/code&gt; and others (&lt;a href=&quot;https://github.com/jschwe&quot;&gt;@jschwe&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34478&quot;&gt;#34478&lt;/a&gt;), which is especially useful on machines with many CPU cores.&lt;/p&gt;
-&lt;p&gt;We’ve started laying the groundwork for full &lt;strong&gt;incremental layout&lt;/strong&gt; in our new layout engine, starting with a general layout caching mechanism (&lt;a href=&quot;https://github.com/mrobinson&quot;&gt;@mrobinson&lt;/a&gt;, &lt;a href=&quot;https://github.com/Loirooriol&quot;&gt;@Loirooriol&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34507&quot;&gt;#34507&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34513&quot;&gt;#34513&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34530&quot;&gt;#34530&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34586&quot;&gt;#34586&lt;/a&gt;).
-This was lost in the switch to our new layout engine, and without it, every time a page changes, we have to rerun layout from scratch.
-As you can imagine, this is very, very expensive, and incremental layout is critical for performance on today’s highly dynamic web.&lt;/p&gt;
-&lt;aside class=&quot;_note&quot;&gt;
-&lt;p&gt;We’ve mentioned layout caching a few times, including in past monthly updates, but most of the caching we’ve landed so far has been to save time &lt;em&gt;within&lt;/em&gt; a single reflow.
-Incremental layout requires layout caching that &lt;em&gt;persists&lt;/em&gt; across reflows, and algorithms to determine when to invalidate those cached results.&lt;/p&gt;
-&lt;/aside&gt;
-&lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/blog/2025/01/10/this-month-in-servo/#donations&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Thanks again for your generous support!
-We are now receiving &lt;strong&gt;4329 USD/month&lt;/strong&gt; (+0.8% over November) in recurring donations.
-With this money, we’ve been able to cover our web hosting and &lt;a href=&quot;https://ci0.servo.org/&quot;&gt;self-hosted CI runners&lt;/a&gt; for Windows, Linux, and now macOS builds (&lt;a href=&quot;https://github.com/delan&quot;&gt;@delan&lt;/a&gt;, &lt;a href=&quot;https://github.com/servo/servo/pull/34868&quot;&gt;#34868&lt;/a&gt;), &lt;strong&gt;halving &lt;code&gt;mach try&lt;/code&gt; build times&lt;/strong&gt; from over an hour to under 30 minutes!
-Next month, we’ll be &lt;a href=&quot;https://github.com/servo/project/issues/123&quot;&gt;expanding our CI capacity further&lt;/a&gt;, all made possible thanks to your help.&lt;/p&gt;
-&lt;p&gt;Servo is also on &lt;a href=&quot;https://thanks.dev/&quot;&gt;thanks.dev&lt;/a&gt;, and already &lt;strong&gt;sixteen GitHub users&lt;/strong&gt; that depend on Servo are sponsoring us there.
-If you use Servo libraries like &lt;a href=&quot;https://crates.io/crates/url/reverse_dependencies&quot;&gt;url&lt;/a&gt;, &lt;a href=&quot;https://crates.io/crates/html5ever/reverse_dependencies&quot;&gt;html5ever&lt;/a&gt;, &lt;a href=&quot;https://crates.io/crates/selectors/reverse_dependencies&quot;&gt;selectors&lt;/a&gt;, or &lt;a href=&quot;https://crates.io/crates/cssparser/reverse_dependencies&quot;&gt;cssparser&lt;/a&gt;, signing up for &lt;a href=&quot;https://thanks.dev/&quot;&gt;thanks.dev&lt;/a&gt; could be a good way for you (or your employer) to give back to the community.&lt;/p&gt;
-&lt;figure class=&quot;_fig&quot; style=&quot;width: 100%; margin: 1em 0;&quot;&gt;&lt;div class=&quot;_flex&quot; style=&quot;height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;&quot;&gt;
-    &lt;div style=&quot;position: relative; text-align: right;&quot;&gt;
-        &lt;div style=&quot;position: absolute; margin-left: calc(100% * 4329 / 10000); padding-left: 0.5em;&quot;&gt;&lt;strong&gt;4329&lt;/strong&gt; USD/month&lt;/div&gt;
-        &lt;div style=&quot;position: absolute; margin-left: calc(100% * 4329 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;&quot;&gt;&lt;/div&gt;
-        &lt;div style=&quot;position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;&quot;&gt;&lt;/div&gt;
-        &lt;div style=&quot;padding-right: 1em;&quot;&gt;&lt;strong&gt;10000&lt;/strong&gt;&lt;!-- USD/month --&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;progress value=&quot;4329&quot; max=&quot;10000&quot; style=&quot;transform: scale(3); transform-origin: top left; width: calc(100% / 3);&quot;&gt;&lt;/progress&gt;
-&lt;/div&gt;&lt;/figure&gt;
-&lt;p&gt;As always, use of these funds will be decided transparently in the Technical Steering Committee.
-For more details, head to our &lt;a href=&quot;https://servo.org/sponsorship/&quot;&gt;Sponsorship page&lt;/a&gt;.&lt;/p&gt;
-&lt;style&gt;
-    /* guaranteed minimum width for first paragraph after a float */
-    ._floatmin {
-        display: block;
-        width: 13em;
-        overflow: hidden;
-    }
-    ._clear {
-        clear: both;
-    }
-    ._clearl {
-        clear: left;
-    }
-    ._clearr {
-        clear: right;
-    }
-    ._none {
-        display: none;
-    }
-    ._fig:not(#specificity) {
-        width: 33em;
-        max-width: 100%;
-        margin: 1em auto;
-    }
-    ._fig &gt; ._flex,
-    ._figl &gt; ._flex,
-    ._figr &gt; ._flex {
-        display: flex;
-    }
-    ._fig table {
-        text-align: initial;
-    }
-    ._fig figcaption._notes {
-        text-align: left;
-        width: max-content;
-        max-width: 100%;
-    }
-    ._figl:not(#specificity),
-    ._figr:not(#specificity) {
-        margin: 0 1em 1em;
-    }
-    ._figl {
-        float: left;
-        max-width: 100%;
-    }
-    ._figr {
-        float: right;
-        max-width: 100%;
-    }
-    ._figl &gt; figcaption,
-    ._figr &gt; figcaption,
-    ._figl &gt; iframe,
-    ._figr &gt; iframe,
-    ._figl &gt; video,
-    ._figr &gt; video,
-    ._figl &gt; a &gt; img,
-    ._figr &gt; a &gt; img,
-    ._figl &gt; ._flex,
-    ._figr &gt; ._flex {
-        width: 21em;
-        max-width: 100%;
-    }
-
-    .content {
-        container-type: inline-size;
-    }
-    ._paired_figure {
-        margin: 1em 0;
-    }
-    @container (min-width: 55em) {
-        ._paired_figure {
-            display: grid;
-            grid-template-columns: auto 33em;
-            column-gap: 2em;
-            row-gap: 1em;
-        }
-        ._paired_figure &gt; ._text_before,
-        ._paired_figure &gt; ._text_after {
-            flex: 1 1 20em;
-            grid-column: 1 / 2;
-        }
-        ._paired_figure &gt; figure:not(#specificity) {
-            flex: 0 1 33em;
-            grid-row: 1 / 3;
-            grid-column: 2 / 3;
-            margin: 0;
-        }
-
-        ._text_after {
-            grid-column: 1 / 3;
-        }
-    }
-
-    ._runin {
-        margin-bottom: 1em;
-    }
-    ._runin &gt; p,
-    ._runin &gt; h2 {
-        display: inline;
-    }
-    ._correction {
-        max-width: 33em;
-        margin: 1em auto;
-        border-bottom: 1px solid;
-        padding-bottom: 1em;
-    }
-    ._note {
-        margin: 1em 1em;
-        border-left: 1px solid;
-        padding-left: 1em;
-        opacity: 0.75;
-    }
-&lt;/style&gt;
 </content>
   </entry>
 </feed>
