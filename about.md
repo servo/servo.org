@@ -11,7 +11,7 @@ title: About
   </p>
 <br>
 
-Created by Mozilla Research in 2012, the Servo project was started as a research and development effort. Stewardship of Servo moved from Mozilla Research to the [**Linux Foundation**](https://www.linuxfoundation.org/) in 2020, where its mission remains unchanged. In 2023 the project moved to [**Linux Foundation Europe**](https://linuxfoundation.eu/) trying to regain interest from a broader set of the industry.
+Created by Mozilla Research in 2012, the Servo project began as a research and development effort. Stewardship of Servo moved from Mozilla Research to the [**Linux Foundation**](https://www.linuxfoundation.org/) in 2020. The project finally moved to [**Linux Foundation Europe**](https://linuxfoundation.eu/) in 2023 with the mission of trying to regain interest from the broader industry.
 
 Servo is written in [**Rust**](https://www.rust-lang.org/), taking advantage of the memory safety properties and concurrency features of the language.
 
