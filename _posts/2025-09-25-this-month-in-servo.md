@@ -158,12 +158,6 @@ Additionally, the browser now responds to a popup closing without any other inpu
 
 ## Donations
 
-<!--
-  2177.40 opencollective
-  3205.00 github
-  169.63 thanks.dev 15 donors
--->
-
 Thanks again for your generous support!
 We are now receiving **5552 USD/month** (+18.3% over July) in recurring donations.
 
