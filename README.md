@@ -282,6 +282,13 @@ Or in vim:
 - `:%s/\v ([0-9A-Za-z_.-]+)#([0-9]+)/ [\1#\2](https:\/\/github.com\/servo\/\1\/pull\/\2)/gc`
 - `:%s/\v ([0-9A-Za-z_.-]+)\/([0-9A-Za-z_.-]+)#([0-9]+)/ [\1\/\2#\3](https:\/\/github.com\/\1\/\2\/pull\/\3)/gc`
 
+Or in emacs:
+
+- Replace `@\([0-9A-Za-z_.-]+\)` with `[@\1](https://github.com/\1)`
+- Replace ` #\([0-9]+\)` with ` [#\1](https://github.com/servo/servo/pull/\1)`
+- Replace ` \([0-9A-Za-z_.-]+\)#\([0-9]+\)` with ` [\1#\2](https://github.com/servo/\1/pull/\2)`
+- Replace ` \([0-9A-Za-z_.-]+\)/\([0-9A-Za-z_.-]+\)#\([0-9]+\)` with ` [\1/\2#\3](https://github.com/\1/\2/pull/\3)`
+
 ## How to count the number of pull requests in a month
 
 After following the steps that generate `commits.txt`, run the following:
