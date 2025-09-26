@@ -24,7 +24,7 @@ This improves the appearance of many popular websites.
 We have implemented **named grid line lines and areas** ([@nicoburns](https://github.com/nicoburns), [@loirooriol](https://github.com/loirooriol), [#38306](https://github.com/servo/servo/pull/38306), [#38574](https://github.com/servo/servo/pull/38574), [#38493](https://github.com/servo/servo/pull/38493)), still gated behind the `layout_grid_enabled` preference ([#38306](https://github.com/servo/servo/pull/38306), [#38574](https://github.com/servo/servo/pull/38574)).
 
 <figure>
-  <a href="{{ '/img/blog/2025-09-grid.png' | url }}"><img alt="Screenshot of servoshell loading a page demoing a complex grid layout" src="{{ '/img/blog/2025-09-grid.png' | url }}"></a>
+  <a href="{{ '/img/blog/2025-09-grid.jpg' | url }}"><img alt="Screenshot of servoshell loading a page demoing a complex grid layout" src="{{ '/img/blog/2025-09-grid.jpg' | url }}"></a>
   <figcaption>CSS grids are all around us.</figcaption>
 </figure>
 
