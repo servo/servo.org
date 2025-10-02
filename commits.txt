@@ -153,7 +153,8 @@ https://github.com/servo/servo/pull/39027	(@mrobinson, #39027)	layout: Lay out c
     # thing.
     # Testing: this change includes a new WPT crash test.
     # Fixes: #37421.
-https://github.com/servo/servo/pull/39040	(@yezhizhen, #39040)	webdriver: Wait for navigation to complete when creating session with all `WebView`s closed (#39040)
++https://github.com/servo/servo/pull/39040	(@yezhizhen, #39040)	webdriver: Wait for navigation to complete when creating session with all `WebView`s closed (#39040)
+    webdriver; more reliable New Session
     # In #37410 for webdriver mode, we introduced mechanism to keep program alive when all webview are closed to comply
     # with spec. But the test fails with 90% probability, as the `browsing_context` is only registered in constellation's
     # `browsing_contexts` map when documents are ready. This PR waits for navigation to complete without verifying
@@ -205,7 +206,8 @@ https://github.com/servo/servo/pull/39066	(@coding-joedow, @kongbai1996, #39066)
     # Testing: We currently do not have great testing for this as this tests the combination of hit testing of input
     # events and scrolling at that point. The completion of WebDriver support should make this easier to test.
     # Fixes: #38967
-https://github.com/servo/servo/pull/39086	(@yezhizhen, #39086)	webdriver: Focus browsing context when switch frame (#39086)
++https://github.com/servo/servo/pull/39086	(@yezhizhen, #39086)	webdriver: Focus browsing context when switch frame (#39086)
+    webdriver; improved Switch To Frame
     # #38889 adds back the mechanism to focus the window when [switch to
     # window](https://w3c.github.io/webdriver/#switch-to-window). After that, it causes many
     # flaky TIMEOUT. Turns out the real reason is same as the phenomenon which I thought was
@@ -1009,7 +1011,7 @@ https://github.com/servo/servo/pull/39109	(@TimvdLippe, #39109)	Hookup mime clas
 https://github.com/servo/servo/pull/39113	(@lumiscosity, #39113)	script: preserve 2D on DOMMatrix invert (#39113)
     # More small geometry fixes.
     # Testing: Covered by WPT (css/geometry/DOMMatrix-invert-preserves-2d.html)
-https://github.com/servo/servo/pull/39130	(@yezhizhen, #39130)	font: Remove unused `FontTable` constructor for Windows (#39130)
+-https://github.com/servo/servo/pull/39130	(@yezhizhen, #39130)	font: Remove unused `FontTable` constructor for Windows (#39130)
     # #39112 restricts accessibility for some font functions, exposing some functions that haven't been used for a long
     # time. Now it is detected by Lint as dead code.
 https://github.com/servo/servo/pull/39034	(@TimvdLippe, #39034)	Move `Element::matches_environment` to `MediaList` (#39034)
@@ -1145,7 +1147,7 @@ https://github.com/servo/servo/pull/38847	(@kkoyung, #38847)	script: Re-implemen
     # code readability.
     # Testing: Update WPT test expectation
     # Fixes: #38817 partially, and #25325
-https://github.com/servo/servo/pull/39159	(@yezhizhen, #39159)	webdriver: Update `.ini` to mark unstable subtests in `accept_alert/accept.py`, `forward/forward.py`, `perform_actions/pointer_mouse.py`, `send_alert_text/send.py` (#39159)
+-https://github.com/servo/servo/pull/39159	(@yezhizhen, #39159)	webdriver: Update `.ini` to mark unstable subtests in `accept_alert/accept.py`, `forward/forward.py`, `perform_actions/pointer_mouse.py`, `send_alert_text/send.py` (#39159)
     # Few webdriver subtests are quite unstable. But it is an overkill to mark the entire test as intermittent, as the
     # CI would permit buggy PRs that sabotage other stable subtests. This PR mark these subtests and closes the related
     # intermittent issues.
@@ -1176,7 +1178,8 @@ https://github.com/servo/servo/pull/39183	(@sagudev, #39183)	canvas: Implement `
     # Testing: Existing WPT tests
     # Fixes: #29973
     # Try run: https://github.com/sagudev/servo/actions/runs/17511337550
-https://github.com/servo/servo/pull/39186	(@yezhizhen, #39186)	webdriver: Serialize as i64 if the JS Number has no fractional part (#39186)
++https://github.com/servo/servo/pull/39186	(@yezhizhen, #39186)	webdriver: Serialize as i64 if the JS Number has no fractional part (#39186)
+    webdriver; towards enabling tests
     # JavaScript Number does not have Integer type, except for recently added `BigInt`. That's why we removed `Int`
     # variant from `JSValue` earlier in #38748. However, the Serde deserialization is strict: when it expects `u64`,
     # it cannot deserialize "3.0". But when it expects `f64`, it can still deserialize "3".
@@ -1310,7 +1313,8 @@ https://github.com/servo/servo/pull/39168	(@Narfinger, #39168)	Switch the majori
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39134	(@Narfinger, @mrobinson, @yezhizhen, #39134)	Elaborate documentation of notify_history_changed in WebViewDelegate (#39134)
++https://github.com/servo/servo/pull/39134	(@Narfinger, @mrobinson, @yezhizhen, #39134)	Elaborate documentation of notify_history_changed in WebViewDelegate (#39134)
+    api; webview api docs
     # Elaborate documentation of on_history_changed in WebViewDelegate
     # Testing: Just documentation.
 https://github.com/servo/servo/pull/39144	(@mrobinson, @Loirooriol, #39144)	script: Use `HTMLElement.scrollParent` to implement `Element.scrollIntoView` (#39144)
@@ -1847,7 +1851,8 @@ https://github.com/servo/servo/pull/39233	(@Narfinger, #39233)	Removed FnvHash a
     # Signed-off-by: Narfinger
     # Testing: Hash function changes should not change functionality, we slightly decrease the size and unit tests
     # still work.
-https://github.com/servo/servo/pull/39241	(@yezhizhen, #39241)	webdriver: Focus WebView asynchronously (#39241)
++https://github.com/servo/servo/pull/39241	(@yezhizhen, #39241)	webdriver: Focus WebView asynchronously (#39241)
+    webdriver; async Switch To Window
     # #38160 added a webdriver-specific API to support waiting on focus operations to complete. Later, #38243 added a
     # unique id to track each focus operation.
     # Back then we wait on focusing webview in webdriver hoping to improve stability, but it does not matter as it turns
@@ -1968,7 +1973,8 @@ https://github.com/servo/servo/pull/39080	(@kkoyung, #39080)	indexeddb: Implemen
     # [4] https://w3c.github.io/IndexedDB/#record-interface
     # Testing: Pass WPT tests that were expected to fail.
     # Fixes: Part of #38111
-https://github.com/servo/servo/pull/39265	(@yezhizhen, #39265)	webdriver: Add `ScrollBehavior::Instant` for `scroll_into_view` (#39265)
++https://github.com/servo/servo/pull/39265	(@yezhizhen, #39265)	webdriver: Add `ScrollBehavior::Instant` for `scroll_into_view` (#39265)
+    webdriver; operations that scroll into view now scroll instantly
     # There is a recent spec change which adds instant as default scroll behaviour:
     # https://github.com/w3c/webdriver/pull/1924. This PR reflects the change.
     # Testing: No behaviour change as `ScrollBehavior` is ignored right now.
@@ -2004,7 +2010,7 @@ https://github.com/servo/servo/pull/38783	(@rodio, #38783)	constellation: Use on
     # Testing: Tested manually, using `ps -M` to see the number of spawned threads with multiple tabs open in servoshell
     # before and after these changes.
     # Fixes: #37770
-https://github.com/servo/servo/pull/39266	(@yezhizhen, #39266)	CODEOWNERS: Add yezhizhen for WebDriver components (#39266)
+-https://github.com/servo/servo/pull/39266	(@yezhizhen, #39266)	CODEOWNERS: Add yezhizhen for WebDriver components (#39266)
     # So that I can get notified and GitHub won't wildcard other reviewers.
     # Testing: No.
 https://github.com/servo/servo/pull/39267	(@atbrakhi, @delan, #39267)	ci: Reland run devtools tests whenever we run unit tests from #38614 (#39267)
@@ -2515,7 +2521,7 @@ https://github.com/servo/servo/pull/39138	(@stevennovaryo, #39138)	Set composed 
     # `TouchEvent` should have its `composed` flag set to be able to propagate past a shadow root layer.
     # Part of #35997
     # Testing: Would require a testdriver.
-https://github.com/servo/servo/pull/39308	(@yezhizhen, #39308)	script: Make `EventTarget::fire` return `bool` according to spec (#39308)
+-https://github.com/servo/servo/pull/39308	(@yezhizhen, #39308)	script: Make `EventTarget::fire` return `bool` according to spec (#39308)
     # This is a continuation of #38566, newly discovered when fixing
     # https://github.com/servo/servo/issues/38616#issuecomment-3261561671.
     # We add more documentation and return `bool` for the function family of [event
@@ -3051,7 +3057,8 @@ https://github.com/servo/servo/pull/39343	(@kkoyung, #39343)	script_bindings(pyt
     # the conflicting identifiers, but does not yet apply the same treatment to methods. This patch extends the handling
     # to methods as well.
     # Fixes: #39286
-https://github.com/servo/servo/pull/39326	(@yezhizhen, #39326)	script: Do not call "scroll into view" when handling element clicks (#39326)
++https://github.com/servo/servo/pull/39326	(@yezhizhen, #39326)	script: Do not call "scroll into view" when handling element clicks (#39326)
+    input; fix bug where links need to be clicked twice
     # Previously, when we click any element, it would trigger "scroll into view". What's worse, for an anchor ``,
     # clicking it would "scroll into view" instead of navigating to the url until you retry the click. The reason
     # is that we built `scrollIntoView` into the focus transaction system with default option. However, the default
@@ -3223,7 +3230,8 @@ https://github.com/servo/servo/pull/39351	(@ritoban23, #39351)	script: Replace D
     # - Setter method: *self.redirected.borrow_mut() = value → self.redirected.set(value)
     # Testing: As noted in the issue, compilation is sufficient for this change.
     # Fixes: #39288
-https://github.com/servo/servo/pull/39367	(@yezhizhen, #39367)	script: Avoid panic when scrolling area of window is larger than viewport (#39367)
++https://github.com/servo/servo/pull/39367	(@yezhizhen, #39367)	script: Avoid panic when scrolling area of window is larger than viewport (#39367)
+    crash; scroll() method on Window
     # Sometimes, the computed scrolling area of window is larger than viewport. This causes panics in `Window.scroll`
     # with `f32::clamp(0.0, some negative number)`.
     # Eventually, we should find out why "computed scrolling area of window is larger than viewport". But let's avoid
@@ -3237,7 +3245,7 @@ https://github.com/servo/servo/pull/39365	(@mrobinson, #39365)	mach: Configure `
     # well.
     # Testing: There is no easy way to write an automated test for this but I
     # confirmed it work by running `uv run --show-settings`.
-https://github.com/servo/servo/pull/39366	(@yezhizhen, #39366)	webdriver: Remove TODO comments of focusing steps (#39366)
+-https://github.com/servo/servo/pull/39366	(@yezhizhen, #39366)	webdriver: Remove TODO comments of focusing steps (#39366)
     # Our current implementation already gets the "TODO" done for focusing steps.
     # https://searchfox.org/firefox-main/source/dom/html/nsGenericHTMLElement.cpp#3491-3497
     # Testing: No. Just updating comments
@@ -3474,7 +3482,7 @@ https://github.com/servo/servo/pull/39374	(@TimvdLippe, #39374)	Abort fetch cont
 -https://github.com/servo/servo/pull/39414	(@servo-wpt-sync, @yezhizhen, #39414)	Sync WPT with upstream (21-09-2025) (#39414)
     # Automated downstream sync of changes from upstream as of 21-09-2025
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/39391	(@PotatoCP, @yezhizhen, #39391)	webdriver: Improve documentations for `actions.rs` and update TODOs (#39391)
+-https://github.com/servo/servo/pull/39391	(@PotatoCP, @yezhizhen, #39391)	webdriver: Improve documentations for `actions.rs` and update TODOs (#39391)
     # Add specification quote for each steps, remove some irrelevant TODO, and move function position closer to related
     # function.
     # Testing: No behaviour change
@@ -3484,7 +3492,7 @@ https://github.com/servo/servo/pull/39409	(@simonwuelker, #39409)	Parse qualifie
     # Testing: New tests start to pass
     # Part of https://github.com/servo/servo/issues/34527
 >>> 2025-09-23T06:13:58Z
-https://github.com/servo/servo/pull/39449	(@yezhizhen, #39449)	deps: Update xattr from 1.5.1 to 1.6.1 & cc from 1.2.37 to 1.2.38 (#39449)
+-https://github.com/servo/servo/pull/39449	(@yezhizhen, #39449)	deps: Update xattr from 1.5.1 to 1.6.1 & cc from 1.2.37 to 1.2.38 (#39449)
     # Dependabot is broken somehow, and fail to recreate the PRs with command given.
     # Fixes: #39446
     # Fixes: #39426
@@ -4112,7 +4120,8 @@ https://github.com/servo/servo/pull/39296	(@Gae24, #39296)	script: implement `Cl
     # Implement ClipboardItem's getType and supports
     # Testing: covered by existing tests
 >>> 2025-09-27T06:15:34Z
-https://github.com/servo/servo/pull/39499	(@yezhizhen, #39499)	webdriver: Elegantly handle "element screenshot" when bounding box has area zero (#39499)
++https://github.com/servo/servo/pull/39499	(@yezhizhen, #39499)	webdriver: Elegantly handle "element screenshot" when bounding box has area zero (#39499)
+    webdriver; improved Take Element Screenshot
     # It is possible that the bounding rectangle of an element has area 0. This PR avoids panic in this case.
     # It is worth to mention that the panic itself won't kill the entire program for interaction, but only the webdriver
     # thread.
@@ -4203,7 +4212,8 @@ https://github.com/servo/servo/pull/39536	(@mrobinson, #39536)	script: Make styl
     # verify that though.
     # Testing: This change fixes at least two WPT tests.
     # Fixes: #26424.
-https://github.com/servo/servo/pull/39539	(@yezhizhen, #39539)	webdriver: Wait animation frame callbacks before taking (element) screenshot (#39539)
++https://github.com/servo/servo/pull/39539	(@yezhizhen, #39539)	webdriver: Wait animation frame callbacks before taking (element) screenshot (#39539)
+    webdriver; improved Take Element Screenshot
     # According to spec, we should wait animation frame callbacks before taking (element) screenshot. As "element
     # screenshot" would automatically scroll into view, this solves intermittency.
     # Testing: Manually tested on pages, and `take_element_screenshot/scroll_into_view.py` passes stably now.
@@ -4225,7 +4235,8 @@ https://github.com/servo/servo/pull/39538	(@jdm, #39538)	Revert "Add abort signa
     # Fixes: https://github.com/servo/servo/issues/39532
     # Fixes: https://github.com/servo/servo/issues/39512
     # Fixes: https://github.com/servo/servo/issues/39503
-https://github.com/servo/servo/pull/39507	(@blueguy1, @yangjingxiao1@huawei.com, @yezhizhen, #39507)	servoshell(egl): Adjust `WebViewRenderer` size when resizing surface size (#39507)
++https://github.com/servo/servo/pull/39507	(@blueguy1, @yangjingxiao1@huawei.com, @yezhizhen, #39507)	servoshell(egl): Adjust `WebViewRenderer` size when resizing surface size (#39507)
+    servoshell; fix resize on mobile platforms
     # For egl, previously, the resize function only set rendering_context size.  It needs to change webview_renderer
     # size at the same time.
     # Testing: Testing the Mossel [homepage](https://www.huaweimossel.com/) on mobile devices shows no issues when resizing.
@@ -4379,7 +4390,8 @@ https://github.com/servo/servo/pull/39052	(@TimvdLippe, @jdm, #39052)	script: Im
     # discarded and resulting in a parsing failure. Therefore,
     # we use its lenient parsing mode.
     # Part of #35035
-https://github.com/servo/servo/pull/39543	(@yezhizhen, #39543)	webdriver: Safely converting to OpenGL coordinates when taking (element) screenshot (#39543)
++https://github.com/servo/servo/pull/39543	(@yezhizhen, #39543)	webdriver: Safely converting to OpenGL coordinates when taking (element) screenshot (#39543)
+    webdriver; improve Take Element Screenshot
     # When taking element screenshot, we need to convert y-coordinates to comply with
     # OpenGL. With dpi > 1, sometimes y can be -1 due to rounding, resulting in panic when
     # https://github.com/servo/servo/blob/660f90f6879c4bf3cb16ec405c64070d5fdefa68/components/shared/compositing/rendering_con
