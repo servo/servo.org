@@ -26,7 +26,7 @@ title: Download
 **Solution**: Go to `System Settings` -> `Privacy and Security`. Scroll down to `Security` (see screenshot below).
 Click on `Open Anyway`. You should be able to run Servo now.
 
-![MacOS Security pane showing Servo was blocked](./assets/img/macos-settings-pane-servo-blocked.png)
+![MacOS Security pane showing Servo was blocked](../img/macos-settings-pane-servo-blocked.png)
 
 **Error**: Dialogue stating '“Servo.app” Not Opened'
 
