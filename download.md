@@ -21,6 +21,13 @@ title: Download
 
 **Solution**: Right-click `Servo.app` and choose "Open." The dialogue may now allow Servo to be opened.
 
+**Error**: The solution above did not work. 
+
+**Solution**: Go to `System Settings` -> `Privacy and Security`. Scroll down to `Security` (see screenshot below).
+Click on `Open Anyway`. You should be able to run Servo now.
+
+![MacOS Security pane showing Servo was blocked](./assets/img/macos-settings-pane-servo-blocked.png)
+
 **Error**: Dialogue stating '“Servo.app” Not Opened'
 
 **Solution** Dismiss the dialogue with "Done" and remove the quarantine attribute from Servo: `xattr -r -d com.apple.quarantine /Applications/Servo.app`
