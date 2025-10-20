@@ -133,17 +133,20 @@ https://github.com/servo/servo/pull/39041	(@Loirooriol, #39041)	layout: Ensure I
 https://github.com/servo/servo/pull/39078	(@arihant2math, #39078)	indexeddb: Return error instead of panicking on structured clone failure (#39078)
     # Related to failures in #38847
     # Testing: WPT
-https://github.com/servo/servo/pull/39076	(@jschwe, #39076)	script: Migrate swmanager to GenericChannel (#39076)
++https://github.com/servo/servo/pull/39076	(@jschwe, #39076)	script: Migrate swmanager to GenericChannel (#39076)
+    perf; faster messaging in single-process mode
     # Migrate `ServiceWorkerMsg` and `SWManagerMsg` to GenericChannel
     # Testing: Covered by service worker wpt tests
     # Part of #38912
-https://github.com/servo/servo/pull/39073	(@jschwe, #39073)	base: Migrate PipelineNameSpaceInstaller to GenericChannel (#39073)
++https://github.com/servo/servo/pull/39073	(@jschwe, #39073)	base: Migrate PipelineNameSpaceInstaller to GenericChannel (#39073)
+    perf; faster messaging in single-process mode
     # Testing: Covered by existing tests
     # Part of #38912
 https://github.com/servo/servo/pull/39074	(@jschwe, #39074)	script: Migrate JobResult to GenericCallback (#39074)
     # Use the new GenericCallback abstraction for serviceworker job results.
     # Testing: Covered by service worker wpt tests
-https://github.com/servo/servo/pull/39027	(@mrobinson, #39027)	layout: Lay out collapsed table rows and columns, but don't paint them (#39027)
++https://github.com/servo/servo/pull/39027	(@mrobinson, #39027)	layout: Lay out collapsed table rows and columns, but don't paint them (#39027)
+    crash; fix crash with ‘visibility: collapse’
     # It's expected that script queries be able to interact with collapsed
     # table rows and columns, so this change starts laying them out. They
     # still do not affect table dimensions, nor are they painted.
@@ -179,7 +182,8 @@ https://github.com/servo/servo/pull/39059	(@arihant2math, #39059)	webcrypto: imp
     # more closely follow the specification. This also simplifies the code a
     # bit and adds some TODOs about future improvements.
     # Testing: This should not change behavior and is thus covered by existing tests.
-https://github.com/servo/servo/pull/39051	(@arihant2math, @sagudev, #39051)	Throw `SyntaxError` from `Location::SetHref` (#39051)
++https://github.com/servo/servo/pull/39051	(@arihant2math, @sagudev, #39051)	Throw `SyntaxError` from `Location::SetHref` (#39051)
+    dom; fix exception type in set href() on Location
     # It was originally throwing a TypeError, which was making WPT fail.
     # Testing: Many happy WPT subtests
     # Fixes: #39050
@@ -188,10 +192,12 @@ https://github.com/servo/servo/pull/39051	(@arihant2math, @sagudev, #39051)	Thro
     # Uses clipped time to convert dates that are stored as `f64`s into JS values.
     # Testing: WPT
     # Fixes: #25327
--https://github.com/servo/servo/pull/39033	(@TimvdLippe, #39033)	Move LinkProcessingOptions into separate file (#39033)
++https://github.com/servo/servo/pull/39033	(@TimvdLippe, #39033)	Move LinkProcessingOptions into separate file (#39033)
+    net; <link rel=preload> and Link header preloads
     # This makes future implementations easier where we will reuse most of this code to parse Link headers.
     # Part of #35035
-https://github.com/servo/servo/pull/39075	(@mrobinson, #39075)	layout: Gracefully handle script queries on nodes with uninvertible transforms (#39075)
++https://github.com/servo/servo/pull/39075	(@mrobinson, #39075)	layout: Gracefully handle script queries on nodes with uninvertible transforms (#39075)
+    crash; fix crash with ‘transform: scale(0)’
     # Instead of panicking when doing a geometry script query on a node with
     # an uninvertible transform, return a zero-sized rectangle at the
     # untransformed position. This is similar to what Gecko and Blink do
@@ -233,7 +239,8 @@ https://github.com/servo/servo/pull/39066	(@coding-joedow, @kongbai1996, #39066)
     # respective folders as outlined in https://github.com/servo/servo/issues/38901#issuecomment-3243020235
     # Testing: Just refactor.
     # Part of https://github.com/servo/servo/issues/38901
-https://github.com/servo/servo/pull/39039	(@jschwe, #39039)	Add direct script to embedder channel  (#39039)
++https://github.com/servo/servo/pull/39039	(@jschwe, #39039)	Add direct script to embedder channel  (#39039)
+    perf; in single-process mode, script can now message the embedder directly for reduced latency
     # This PR **removes** `ScriptToConstellationMessage::ForwardToEmbedder`, and replaces it with an explicit
     # `ScriptToEmbedderChannel`. This new channel is based on `GenericCallback` and in single-process mode will directly
     # send the message the to the embedder and wake it. In multi-process mode, the message is routed via the ROUTER,
@@ -473,7 +480,7 @@ https://github.com/servo/servo/pull/38970	(@tharkum, #38970)	canvas: Use non roo
     # is added to those methods so that it is clearer that we are following
     # it.
     # Testing: This should not change behavior and is thus covered by existing tests.
-https://github.com/servo/servo/pull/39095	(@Narfinger, #39095)	Change BrowingContextId from WebViewId explicitly (#39095)
+-https://github.com/servo/servo/pull/39095	(@Narfinger, #39095)	Change BrowingContextId from WebViewId explicitly (#39095)
     # There were still some accesses to the inner BrowsingContextId from the WebViewId. This changes it to completely
     # rely on the From trait for these methods. This also means we can make the field private.
     # For testing we add a way to create arbitrary WebViewIds.
@@ -489,7 +496,8 @@ https://github.com/servo/servo/pull/39081	(@jdm, #39081)	indexeddb: Serialize al
     # Testing: Existing WPT coverage is sufficient.
     # Fixes: #38818
     # Fixed: #38842
-https://github.com/servo/servo/pull/39102	(@mrobinson, #39102)	script: Always dirty nodes when changing node state (#39102)
++https://github.com/servo/servo/pull/39102	(@mrobinson, #39102)	script: Always dirty nodes when changing node state (#39102)
+    layout; fix :hover bug
     # With incremental layout adding a restyle to a node isn't enough to force
     # its layout to update. We also need to explicitly mark the node as dirty
     # so that its contents are updated when layout is run. This change makes
@@ -903,7 +911,8 @@ https://github.com/servo/servo/pull/39084	(@kkoyung, #39084)	webcrypto: Reduce u
     # s_impl.cc;l=3752?)
     # Testing: Tested Manually
     # Fixes: #39002
-https://github.com/servo/servo/pull/39148	(@lumiscosity, #39148)	script: implement setMatrixValue for DOMMatrix (#39148)
++https://github.com/servo/servo/pull/39148	(@lumiscosity, #39148)	script: implement setMatrixValue for DOMMatrix (#39148)
+    dom; setMatrixValue() on DOMMatrix
     # Even more progress on the geometry suite. Almost there!
     # Testing: Covered by WPT (css/geometry).
 -https://github.com/servo/servo/pull/39136	(@dependabot[bot], @dependabot[bot], #39136)	build(deps): bump cc from 1.2.34 to 1.2.35 (#39136)
@@ -939,7 +948,7 @@ https://github.com/servo/servo/pull/39148	(@lumiscosity, #39148)	script: impleme
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39108	(@kkoyung, #39108)	script: Queue a microtask in `wait_for_all` of promise type (#39108)
+-https://github.com/servo/servo/pull/39108	(@kkoyung, #39108)	script: Queue a microtask in `wait_for_all` of promise type (#39108)
     # In the wait-for-all algorithm of the IDL promise type, we need to queue a microtask to perform successSteps given
     # « » if total is 0.
     # This step was previously implemented in a workaround, which perform successSteps immediately.
@@ -1001,7 +1010,7 @@ https://github.com/servo/servo/pull/39108	(@kkoyung, #39108)	script: Queue a mic
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39107	(@mrobinson, #39107)	script: Modify `Element::determine_scroll_into_view_position` to take a `ScrollingBox` (#39107)
+-https://github.com/servo/servo/pull/39107	(@mrobinson, #39107)	script: Modify `Element::determine_scroll_into_view_position` to take a `ScrollingBox` (#39107)
     # There is no need to separate the two kinds of scrolling boxes into
     # `Element` and `Viewport` more than once. This also eliminates a
     # potentially panicking `unwrap()`.
@@ -1024,7 +1033,8 @@ https://github.com/servo/servo/pull/39109	(@TimvdLippe, #39109)	Hookup mime clas
 -https://github.com/servo/servo/pull/39130	(@yezhizhen, #39130)	font: Remove unused `FontTable` constructor for Windows (#39130)
     # #39112 restricts accessibility for some font functions, exposing some functions that haven't been used for a long
     # time. Now it is detected by Lint as dead code.
-https://github.com/servo/servo/pull/39034	(@TimvdLippe, #39034)	Move `Element::matches_environment` to `MediaList` (#39034)
++https://github.com/servo/servo/pull/39034	(@TimvdLippe, #39034)	Move `Element::matches_environment` to `MediaList` (#39034)
+    net; <link rel=preload> and Link header preloads
     # It more logically matches `MediaList`, and it allows us to
     # call this method with a document. This is required when
     # parsing Link headers, as they don't have an associated
@@ -1042,7 +1052,7 @@ https://github.com/servo/servo/pull/39171	(@sebsebmc, #39171)	fix: Store channel
 https://github.com/servo/servo/pull/39170	(@sebsebmc, #39170)	script: Remove CookieListItem fields that were removed in the spec (#39170)
     # The spec removed all fields from CookieListItem except for name and value
     # Testing: WPT tests cover this already.
-https://github.com/servo/servo/pull/39165	(@Loirooriol, #39165)	layout: Add method to retrieve only the first LayoutBoxBase of a box (#39165)
+-https://github.com/servo/servo/pull/39165	(@Loirooriol, #39165)	layout: Add method to retrieve only the first LayoutBoxBase of a box (#39165)
     # A LayoutBox typically has one LayoutBoxBase, or none in the case of `LayoutBox::DisplayContents`. However,
     # `LayoutBox::InlineLevel` can contain multiple inline items, each one with its base. But since things like the
     # style or the fragment flags should be the same for all of them, getting the first base is sometimes enough.
@@ -1338,7 +1348,7 @@ https://github.com/servo/servo/pull/39168	(@Narfinger, #39168)	Switch the majori
     # ancestors of an element. `scrollParent` now does this so we can use it
     # to properly implement `scrollIntoView`.
     # Testing: There are WPT tests for this change.
-https://github.com/servo/servo/pull/39190	(@sagudev, #39190)	CI: Change APT mirror priorities (#39190)
+-https://github.com/servo/servo/pull/39190	(@sagudev, #39190)	CI: Change APT mirror priorities (#39190)
     # We noticed many times that bootstrap sometimes takes a lot of
     # time due to slow download speed: [#general > Bootstrap is slow in CI @
     # 💬](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Bootstrap.20is.20slow.20in.20CI/near/537610373).
@@ -1891,7 +1901,7 @@ https://github.com/servo/servo/pull/39235	(@Loirooriol, #39235)	layout: Set base
     # fragment. However, if the line only has a forced line break, then we still need to set the baseline.
     # Testing: Adding new test.
 >>> 2025-09-12T06:13:30Z
-https://github.com/servo/servo/pull/39229	(@Loirooriol, #39229)	layout: Add style to `ConstraintSpace` and `IndefiniteContainingBlock` (#39229)
+-https://github.com/servo/servo/pull/39229	(@Loirooriol, #39229)	layout: Add style to `ConstraintSpace` and `IndefiniteContainingBlock` (#39229)
     # They only had the writing mode, now they will have the entire computed style.
     # This is needed for #39230.
     # Testing: Not needed, no behavior change
@@ -2716,7 +2726,8 @@ https://github.com/servo/servo/pull/39173	(@Loirooriol, #39173)	layout: Fix prop
     # of first retrieving the style from the DOM element and then getting the `LayoutBoxBase` from the box.
     # Testing: Adding more tests. We were only failing one of them, but it's hard to test the fixes given that we don't
     # show scrollbars. The tests that were already passing are useful too, e.g. Firefox fails one of them.
-https://github.com/servo/servo/pull/39290	(@TimvdLippe, #39290)	Add signal to request (#39290)
++https://github.com/servo/servo/pull/39290	(@TimvdLippe, #39290)	Add signal to request (#39290)
+    dom; AbortController progress
     # The signal taken from the requestinit is now passed into
     # the request object with the relevant steps. I added all
     # spec comments to this method, as I had trouble figuring
@@ -2988,7 +2999,8 @@ https://github.com/servo/servo/pull/39323	(@kkoyung, #39323)	script: Remove redu
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39348	(@jschwe, #39348)	canvas: Port CanvasMsg channel to generic channel (#39348)
++https://github.com/servo/servo/pull/39348	(@jschwe, #39348)	canvas: Port CanvasMsg channel to generic channel (#39348)
+    perf; faster messaging for canvas thread in single-process mode
     # Additionally also improve the warning message if the routed receiver disconnects and exit the thread.
     # If the routed receiver disconnects, we can't receive any canvas messages anymore, and any control messages can't
     # remedy that, so we might as well exit.
@@ -3038,10 +3050,12 @@ https://github.com/servo/servo/pull/39348	(@jschwe, #39348)	canvas: Port CanvasM
     # in servoshell by pressing `Ctrl` + `F12`. The command-line argument and
     # `Opts` field are older and I believe are no longer necessary.
     # Testing: This just removes a redundant command-line option, so no tests.
-https://github.com/servo/servo/pull/39347	(@jschwe, #39347)	migrate GenerateImageKey reply to generic channel (#39347)
++https://github.com/servo/servo/pull/39347	(@jschwe, #39347)	migrate GenerateImageKey reply to generic channel (#39347)
+    perf; faster messaging in single-process mode
     # Testing: No functional changes. Covered by existing wpt tests.
     # Part of https://github.com/servo/servo/issues/38912
-https://github.com/servo/servo/pull/39345	(@jschwe, #39345)	generic channel: Migrate background hang monitor to GenericChannel (#39345)
++https://github.com/servo/servo/pull/39345	(@jschwe, #39345)	generic channel: Migrate background hang monitor to GenericChannel (#39345)
+    perf; faster messaging in single-process mode
     # Refactor the background hang monitor channels to use GenericChannel.
     # Deserialization errors of `BackgroundHangMonitorControlMsg` are now logged and ignored instead of causing a panic.
     # Testing: No major functional changes. Covered by BHM tests. GenericChannel is also already widely used in servo.
@@ -4433,7 +4447,8 @@ https://github.com/servo/servo/pull/39538	(@jdm, #39538)	Revert "Add abort signa
     # https://servo.zulipchat.com/#narrow/channel/263398-general/topic/indexedDB.20location/with/535911631
     # Sub PRs:
     # - [x] Move shared storage/net stuff to base (`IpcSend` and `CoreResourcePool`) #39419
-https://github.com/servo/servo/pull/39052	(@TimvdLippe, @jdm, #39052)	script: Implement parsing of Link HTTP headers (#39052)
++https://github.com/servo/servo/pull/39052	(@TimvdLippe, @jdm, #39052)	script: Implement parsing of Link HTTP headers (#39052)
+    net; <link rel=preload> and Link header preloads
     # The Link HTTP header can do the same as link elements,
     # in that they can preload/prefetch/etc... This implements
     # the basics of header parsing and hooks it up for preload.
