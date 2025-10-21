@@ -134,12 +134,12 @@ https://github.com/servo/servo/pull/39078	(@arihant2math, #39078)	indexeddb: Ret
     # Related to failures in #38847
     # Testing: WPT
 +https://github.com/servo/servo/pull/39076	(@jschwe, #39076)	script: Migrate swmanager to GenericChannel (#39076)
-    perf; faster messaging in single-process mode
+    ;perf; faster messaging in single-process mode
     # Migrate `ServiceWorkerMsg` and `SWManagerMsg` to GenericChannel
     # Testing: Covered by service worker wpt tests
     # Part of #38912
 +https://github.com/servo/servo/pull/39073	(@jschwe, #39073)	base: Migrate PipelineNameSpaceInstaller to GenericChannel (#39073)
-    perf; faster messaging in single-process mode
+    ;perf; faster messaging in single-process mode
     # Testing: Covered by existing tests
     # Part of #38912
 https://github.com/servo/servo/pull/39074	(@jschwe, #39074)	script: Migrate JobResult to GenericCallback (#39074)
@@ -240,7 +240,7 @@ https://github.com/servo/servo/pull/39066	(@coding-joedow, @kongbai1996, #39066)
     # Testing: Just refactor.
     # Part of https://github.com/servo/servo/issues/38901
 +https://github.com/servo/servo/pull/39039	(@jschwe, #39039)	Add direct script to embedder channel  (#39039)
-    perf; in single-process mode, script can now message the embedder directly for reduced latency
+    ;perf; in single-process mode, script can now message the embedder directly for reduced latency
     # This PR **removes** `ScriptToConstellationMessage::ForwardToEmbedder`, and replaces it with an explicit
     # `ScriptToEmbedderChannel`. This new channel is based on `GenericCallback` and in single-process mode will directly
     # send the message the to the embedder and wake it. In multi-process mode, the message is routed via the ROUTER,
@@ -463,7 +463,7 @@ https://github.com/servo/servo/pull/38970	(@tharkum, #38970)	canvas: Use non roo
     # Testing: There are tests for this change.
     # Fixes: #39096.
 +https://github.com/servo/servo/pull/39106	(@Narfinger, #39106)	constellation: Use `FnvHashMap` for hashmaps that use ids as keys (#39106)
-    perf
+    ;perf
     # FNV is faster for hashing less than 16 bytes of data and the
     # cryptographic properties of the default HashMap are not needed for the
     # various ids.
@@ -1541,7 +1541,7 @@ https://github.com/servo/servo/pull/39213	(@simonwuelker, #39213)	Seperate freet
     # don't actually support variable fonts, but I've opted to keep the current behaviour for now.
     # Fixes: https://github.com/servo/servo/issues/39209
 +https://github.com/servo/servo/pull/39202	(@Narfinger, #39202)	Moves to FxHashMap for Allocator, BHM, Canvas, Media, Servo, WebGL and WebGPU (#39202)
-    perf
+    ;perf
     # This moves more of HashMap/FnvHashMap to FxHashmap. Again we only changed instances that do not look security
     # related and have small keys.
     # Additionally, allocator used the fnv feature which did not seem to be used.
@@ -1755,7 +1755,7 @@ https://github.com/servo/servo/pull/38846	(@abdelrahman1234567, @yezhizhen, #388
     #    - Check if test requires specific dependencies
     #    - Verify WPT server is serving the test file
 +https://github.com/servo/servo/pull/39166	(@Narfinger, #39166)	Replace Hash Algorithm in HashMap/Set with FxHashMap/Set for simple types (#39166)
-    perf
+    ;perf
     # FxHash is faster than FnvHash and SipHash for  simple types up to at least 64 bytes. The cryptographic guarantees
     # are not needed for any types changed here because they are simple ids.
     # This changes the types in script and net crates.
@@ -1875,7 +1875,7 @@ https://github.com/servo/servo/pull/39247	(@simonwuelker, #39247)	script: Set va
     # Uses the `zstd` support from `async-compression` to support zstd Content-Encoding.
     # Testing: Covered by wpt tests.
 +https://github.com/servo/servo/pull/39233	(@Narfinger, #39233)	Removed FnvHash and transformed the rest to FxHashmap (#39233)
-    perf
+    ;perf
     # This should be the final PR for the Hash Function series that is trivial.
     # Of note: I decided to transform `HashMapTracedValues` to use FxBuildHasher. This is likely not going to improve
     # performance as Atom's already have a unique u32 that is used as the Hash but it safes a few bytes for the RandomState
@@ -1990,7 +1990,7 @@ https://github.com/servo/servo/pull/39263	(@TimvdLippe, #39263)	Add trusted type
     # Part of #36258
     # Fixes #38877
 +https://github.com/servo/servo/pull/39275	(@Narfinger, #39275)	Move signals_slots to ScriptMutationObservers (#39275)
-    perf; improve ScriptThread event loop access
+    ;perf; improve ScriptThread event loop access
     # Both places where we access signals_slots already have a reference to ScriptMutationObserver. This saves us another
     # access to with_script_thread.
     # Testing: This does not change functionality.
@@ -2019,8 +2019,7 @@ https://github.com/servo/servo/pull/39255	(@kkoyung, #39255)	script: Check if In
     # This patch uses the function `js::rust::wrappers::JS_IsIdentifier` to achieve this checking.
     # Testing: Pass WPT tests that were expected to fail.
     # Fixes: #25324
-+https://github.com/servo/servo/pull/39271	(@delan, #39271)	ci: Stop using `python3 ./mach` (#39271)
-    perf; bencher ci
+-https://github.com/servo/servo/pull/39271	(@delan, #39271)	ci: Stop using `python3 ./mach` (#39271)
     # this way of invoking mach is incorrect now that we use uv, and it will prevent us from running bencher builds on
     # self-hosted runners (#39269), where the system Python is too old (3.10 vs 3.11).
     # Testing:
@@ -2040,7 +2039,7 @@ https://github.com/servo/servo/pull/39255	(@kkoyung, #39255)	script: Check if In
     # - GitHub-hosted
     # Fixes: #39192
 +https://github.com/servo/servo/pull/38783	(@rodio, #38783)	constellation: Use one image cache thread pool in the single-process mode (#38783)
-    perf; reduce excessive thread counts in single-process mode
+    ;perf; reduce excessive thread counts in single-process mode
     # Previously, each ScriptThread was creating a new image cache with a separate thread pool. These changes add an
     # image cache to the constellation and create new image caches by calling the `create_new_image_cache` method. It
     # reuses the original image cache's thread pool and reduces the number of spawned threads in the single-process mode.
@@ -2782,7 +2781,7 @@ https://github.com/servo/servo/pull/39323	(@kkoyung, #39323)	script: Remove redu
     # I think this was missed in #39344.
     # Testing: No tests for Cargo.toml edit.
 +https://github.com/servo/servo/pull/39354	(@mrobinson, #39354)	profile: Remove integration with Instruments.app "Points of Interest" (#39354)
-    perf; profiling with Instruments.app has been removed in favour of perfetto/hitrace
+    ;perf; profiling with Instruments.app has been removed in favour of perfetto/hitrace
     # This changes removes the integration with Instruments.app "Points of
     # Interest" track for a variety of reasons:
     #  - This functionality is made somewhat redundant by Servo's support for
@@ -3003,7 +3002,7 @@ https://github.com/servo/servo/pull/39323	(@kkoyung, #39323)	script: Remove redu
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
 +https://github.com/servo/servo/pull/39348	(@jschwe, #39348)	canvas: Port CanvasMsg channel to generic channel (#39348)
-    perf; faster messaging for canvas thread in single-process mode
+    ;perf; faster messaging for canvas thread in single-process mode
     # Additionally also improve the warning message if the routed receiver disconnects and exit the thread.
     # If the routed receiver disconnects, we can't receive any canvas messages anymore, and any control messages can't
     # remedy that, so we might as well exit.
@@ -3054,11 +3053,11 @@ https://github.com/servo/servo/pull/39323	(@kkoyung, #39323)	script: Remove redu
     # `Opts` field are older and I believe are no longer necessary.
     # Testing: This just removes a redundant command-line option, so no tests.
 +https://github.com/servo/servo/pull/39347	(@jschwe, #39347)	migrate GenerateImageKey reply to generic channel (#39347)
-    perf; faster messaging in single-process mode
+    ;perf; faster messaging in single-process mode
     # Testing: No functional changes. Covered by existing wpt tests.
     # Part of https://github.com/servo/servo/issues/38912
 +https://github.com/servo/servo/pull/39345	(@jschwe, #39345)	generic channel: Migrate background hang monitor to GenericChannel (#39345)
-    perf; faster messaging in single-process mode
+    ;perf; faster messaging in single-process mode
     # Refactor the background hang monitor channels to use GenericChannel.
     # Deserialization errors of `BackgroundHangMonitorControlMsg` are now logged and ignored instead of causing a panic.
     # Testing: No major functional changes. Covered by BHM tests. GenericChannel is also already widely used in servo.
@@ -3272,7 +3271,7 @@ https://github.com/servo/servo/pull/39373	(@nicoburns, #39373)	Update to Stylo w
     # - https://github.com/servo/stylo/pull/242
     # Testing: This is a no-op for Servo. So if it builds without non-stylo lockfile changes it should be good.
 +https://github.com/servo/servo/pull/39351	(@ritoban23, #39351)	script: Replace DomRefCell<bool> with Cell<bool> for Response::redirected (#39351)
-    perf; memory usage
+    ;perf; memory usage
     # Replace DomRefCell with Cell for Response::redirected field.
     # Changed redirected field from DomRefCell to Cell and updated all related methods:
     # - Struct field: redirected: DomRefCell → redirected: Cell
@@ -3598,7 +3597,7 @@ https://github.com/servo/servo/pull/39409	(@simonwuelker, #39409)	Parse qualifie
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
 +https://github.com/servo/servo/pull/39437	(@lumiscosity, #39437)	Convert Android resources to lossless .webp (#39437)
-    perf; binary size
+    ;perf; binary size
     # Another tiny binary size win for Android! .webp assets are supported since API level 17, and Servo is built against
     # 33, so this shouldn't cause issues.
     # Testing: Manual.
@@ -4156,14 +4155,14 @@ https://github.com/servo/servo/pull/39467	(@Narfinger, #39467)	Allow hyper_serde
     # Signed-off-by: Narfinger
     # Testing: Compilation is the test.
 +https://github.com/servo/servo/pull/39480	(@Narfinger, #39480)	Script: Change script/dom/{bluetooth,canvas,html} to not rely on Deref<str> for DOMString (#39480)
-    perf; avoiding UTF-8 conversion in DOM strings
+    ;perf; avoiding UTF-8 conversion in DOM strings
     # This is part of the future work of implementing LazyDOMString as outlined in
     # https://github.com/servo/servo/issues/39479.
     # We use str() method or direct implementations on DOMString for these methods. We also change some types.
     # Signed-off-by: Narfinger
     # Testing: This is essentially just renaming a method and a type and should not change functionality.
 +https://github.com/servo/servo/pull/39481	(@Narfinger, #39481)	Script: Change the rest of script to not rely on Deref<str> for DOMString (#39481)
-    perf; avoiding UTF-8 conversion in DOM strings
+    ;perf; avoiding UTF-8 conversion in DOM strings
     # This is part of the future work of implementing LazyDOMString as outlined in issue #39479.
     # We use str() method or direct implementations on DOMString for these methods. We also change some types.
     # This is independent of https://github.com/servo/servo/pull/39480
@@ -4202,7 +4201,7 @@ https://github.com/servo/servo/pull/39496	(@longvatrong111, #39496)	Establish ba
     # Update testdriver infrastructure test expectation.
     # For now, most failures of testdriver tests are caused by missing implementation or issue in Servo.
 +https://github.com/servo/servo/pull/39504	(@Narfinger, #39504)	Script: Remove last instances of Deref<str> and DerefMut<str> used for DOMString (#39504)
-    perf; avoiding UTF-8 conversion in DOM strings
+    ;perf; avoiding UTF-8 conversion in DOM strings
     # This removes the last instances of Deref and DerefMut used for DOMString.
     # The goal is outlined in https://github.com/servo/servo/issues/39479.
     # Signed-off-by: Narfinger
@@ -4543,7 +4542,7 @@ https://github.com/servo/servo/pull/39538	(@jdm, #39538)	Revert "Add abort signa
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
 +https://github.com/servo/servo/pull/39567	(@Narfinger, #39567)	Remove some default features of image. (#39567)
-    perf; binary size
+    ;perf; binary size
     # Not all the features are needed in a browser for image, so we disable less used image formats to save on binary size.
     # Signed-off-by: Narfinger
     # Part of addressing: https://github.com/servo/servo/issues/38966
@@ -4576,11 +4575,11 @@ https://github.com/servo/servo/pull/39140	(@Narfinger, #39140)	Allow WebViews an
     # Signed-off-by: Narfinger
     # Testing: This should be covered by WPT tests and normal browsing behavior works fine.
 +https://github.com/servo/servo/pull/39244	(@Narfinger, #39244)	More changes to HashMap/HashSet to use fxhash (#39244)
-    perf
+    ;perf
     # Moved more functions to fxhash. And provide comments about the choices when necessary.
     # Testing: Hash functions shouldn't change functionality.
 +https://github.com/servo/servo/pull/39274	(@Narfinger, #39274)	Split WindowProxies in script to own struct and allow to get an Rc to it. (#39274)
-    perf; improve ScriptThread event loop access
+    ;perf; improve ScriptThread event loop access
     # Split the window_proxies in script thread into its own struct with appropiate methods. ScriptThread allows to get
     # an Rc to it.
     # HtmlIFrameElement, Window and WindowProxy now get the Rc on construction from ScriptThread.
