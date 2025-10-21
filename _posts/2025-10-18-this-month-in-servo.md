@@ -7,6 +7,25 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+**Viewport meta** tags are now enabled on mobile devices only, fixing a bug where they were enabled on desktop (@shubhamg13, #39133).
+You can still enable them if needed with `--pref viewport_meta_enabled` (@shubhamg13, #39207).
+
+## For embedders
+
+Servo now requires **Rust 1.86** to build (@sagudev, #39185).
+
+**Keyboard scrolling** is now automatically implemented by Servo (@delan, @mrobinson, #39371), so embedders [no longer](https://github.com/servo/servo/pull/39371/files#diff-24ced12025398fd76b233d19f4507362ae8b3848157577d8041effc4c4a229ae) need to translate **arrow keys**, **Home**, **End**, **Page Up**, and **Page Down** to WebView API calls.
+This change also improves the behaviour of those keys, scrolling the element or &lt;iframe> that was focused or most recently clicked (or a nearby ancestor).
+
+<code>[DebugOptions](https://doc.servo.org/servo_config/opts/struct.DebugOptions.html)::convert_mouse_to_touch</code> (`-Z convert-mouse-to-touch`) has been removed (@mrobinson, #39352), with no replacement.
+Touch event simulation continues to be available in servoshell as `--simulate-touch-events`.
+
+<code>[DebugOptions](https://doc.servo.org/servo_config/opts/struct.DebugOptions.html)::webrender_stats</code> (`-Z wr-stats` in servoshell) has been removed (@mrobinson, #39331); instead call <code>[toggle_webrender_debugging](https://doc.servo.org/servo/struct.WebView.html#method.toggle_webrender_debugging)([Profiler](https://doc.servo.org/servo/enum.WebRenderDebugOption.html#variant.Profiler))</code> on a WebView (or press **Ctrl**+**F12** in servoshell).
+
+<code>[DebugOptions](https://doc.servo.org/servo_config/opts/struct.DebugOptions.html)::trace_layout</code> (`-Z trace-layout`) has been removed (@mrobinson, #39332), since it had no effect.
+
+We’ve improved the docs for <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::[notify_history_changed](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_history_changed)</code> (@Narfinger, @mrobinson, @yezhizhen, #39134).
+
 ## Donations
 
 Thanks again for your generous support!
