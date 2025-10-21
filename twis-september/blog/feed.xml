@@ -59,7 +59,7 @@ We also create one thread pool for the image cache now, rather than one pool per
 &lt;p&gt;We’ve started working on an optimisation for string handling in Servo’s DOM layer (@Narfinger, #39480, #39481, #39504).
 Strings in our DOM have historically been represented as &lt;a href=&quot;https://doc.rust-lang.org/std/string/struct.String.html&quot;&gt;ordinary Rust strings&lt;/a&gt;, but they often come from SpiderMonkey, where they use &lt;a href=&quot;https://searchfox.org/firefox-main/rev/8e5d58cfed616cb90586c614e53d8ab1ffc8af27/js/src/vm/StringType.h#83&quot;&gt;a variety of representations&lt;/a&gt;, none of which are entirely compatible.
 SpiderMonkey strings would continue to need conversion to Servo strings, but the idea we’re working towards is to &lt;strong&gt;make the conversion lazy&lt;/strong&gt;, in the hope that many strings will never end up being converted at all.&lt;/p&gt;
-&lt;p&gt;We now use a faster hash algorithm for internal hashmaps that are not security-critical (@Narfinger, #39106, #39166, #39202, #39233).
+&lt;p&gt;We now use a faster hash algorithm for internal hashmaps that are not security-critical (@Narfinger, #39106, #39166, #39202, #39233, #39244).
 These changes also switch that faster algorithm from &lt;a href=&quot;https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function&quot;&gt;FNV&lt;/a&gt; to an &lt;a href=&quot;https://docs.rs/rustc-hash/2.1.1/rustc_hash/&quot;&gt;even simpler polynomial hash&lt;/a&gt;, following in the footsteps of &lt;a href=&quot;https://github.com/rust-lang/rust/pull/37229&quot;&gt;Rust&lt;/a&gt; and &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1477628&quot;&gt;Stylo&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;We’ve also landed a few more self-contained perf improvements:&lt;/p&gt;
 &lt;ul&gt;
@@ -67,7 +67,7 @@ These changes also switch that faster algorithm from &lt;a href=&quot;https://en
 &lt;li&gt;reducing memory usage (@ritoban23, #39351)&lt;/li&gt;
 &lt;li&gt;reducing binary size (@lumiscosity, @Narfinger, #39437, #39567)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Support for profiling Servo with the macOS Instruments.app has been removed (@mrobinson, #39437).
+&lt;p&gt;Support for profiling Servo with the macOS Instruments.app has been removed (@mrobinson, #39354).
 We currently recommend using &lt;a href=&quot;https://ui.perfetto.dev/&quot;&gt;Perfetto&lt;/a&gt; or &lt;a href=&quot;https://gitee.com/openharmony/hiviewdfx_hitrace&quot;&gt;HiTrace&lt;/a&gt; for instrumentation-based profiling.
 This is unfortunately &lt;a href=&quot;https://book.servo.org/hacking/profiling.html&quot;&gt;still undocumented&lt;/a&gt;, but you can get started by building Servo with &lt;code&gt;--features tracing-perfetto&lt;/code&gt; or &lt;code&gt;--features tracing-hitrace&lt;/code&gt; and running with &lt;code&gt;SERVO_TRACING=trace&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/18/this-month-in-servo/#donations&quot;&gt;

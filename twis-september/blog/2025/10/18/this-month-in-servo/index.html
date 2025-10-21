@@ -295,7 +295,7 @@ We also create one thread pool for the image cache now, rather than one pool per
 <p>We’ve started working on an optimisation for string handling in Servo’s DOM layer (@Narfinger, #39480, #39481, #39504).
 Strings in our DOM have historically been represented as <a href="https://doc.rust-lang.org/std/string/struct.String.html">ordinary Rust strings</a>, but they often come from SpiderMonkey, where they use <a href="https://searchfox.org/firefox-main/rev/8e5d58cfed616cb90586c614e53d8ab1ffc8af27/js/src/vm/StringType.h#83">a variety of representations</a>, none of which are entirely compatible.
 SpiderMonkey strings would continue to need conversion to Servo strings, but the idea we’re working towards is to <strong>make the conversion lazy</strong>, in the hope that many strings will never end up being converted at all.</p>
-<p>We now use a faster hash algorithm for internal hashmaps that are not security-critical (@Narfinger, #39106, #39166, #39202, #39233).
+<p>We now use a faster hash algorithm for internal hashmaps that are not security-critical (@Narfinger, #39106, #39166, #39202, #39233, #39244).
 These changes also switch that faster algorithm from <a href="https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function">FNV</a> to an <a href="https://docs.rs/rustc-hash/2.1.1/rustc_hash/">even simpler polynomial hash</a>, following in the footsteps of <a href="https://github.com/rust-lang/rust/pull/37229">Rust</a> and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1477628">Stylo</a>.</p>
 <p>We’ve also landed a few more self-contained perf improvements:</p>
 <ul>
@@ -303,7 +303,7 @@ These changes also switch that faster algorithm from <a href="https://en.wikiped
 <li>reducing memory usage (@ritoban23, #39351)</li>
 <li>reducing binary size (@lumiscosity, @Narfinger, #39437, #39567)</li>
 </ul>
-<p>Support for profiling Servo with the macOS Instruments.app has been removed (@mrobinson, #39437).
+<p>Support for profiling Servo with the macOS Instruments.app has been removed (@mrobinson, #39354).
 We currently recommend using <a href="https://ui.perfetto.dev">Perfetto</a> or <a href="https://gitee.com/openharmony/hiviewdfx_hitrace">HiTrace</a> for instrumentation-based profiling.
 This is unfortunately <a href="https://book.servo.org/hacking/profiling.html">still undocumented</a>, but you can get started by building Servo with <code>--features tracing-perfetto</code> or <code>--features tracing-hitrace</code> and running with <code>SERVO_TRACING=trace</code>.</p>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
