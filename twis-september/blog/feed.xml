@@ -48,6 +48,28 @@ Touch event simulation continues to be available in servoshell as &lt;code&gt;--
 &lt;p&gt;On mobile devices, servoshell now resizes the webview correctly when the available space changes (@blueguy1, @yjx, @yezhizhen, #39507).&lt;/p&gt;
 &lt;p&gt;On macOS, telling servoshell to &lt;a href=&quot;https://w3c.github.io/webdriver/#screen-capture&quot;&gt;&lt;strong&gt;take a screenshot&lt;/strong&gt;&lt;/a&gt; no longer hides the window (@mrobinson, #39500).
 This does not affect taking a screenshot in headless mode (&lt;code&gt;--headless&lt;/code&gt;), where there continues to be no window at all.&lt;/p&gt;
+&lt;h2 id=&quot;performance&quot; tabindex=&quot;-1&quot;&gt;Performance &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/18/this-month-in-servo/#performance&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Servo currently runs in &lt;strong&gt;single-process mode&lt;/strong&gt; unless you opt in to &lt;code&gt;--multiprocess&lt;/code&gt; mode, and we’ve landed a few perf improvements in that default mode.
+For one, in single-process mode, script can now &lt;strong&gt;communicate with the embedder directly&lt;/strong&gt; for reduced latency (@jschwe, #39039).
+We also create one thread pool for the image cache now, rather than one pool per script thread (@rodio, #38783).&lt;/p&gt;
+&lt;p&gt;Many components of Servo that &lt;em&gt;would&lt;/em&gt; be &lt;a href=&quot;https://book.servo.org/architecture/overview.html#architecture&quot;&gt;separated by a process boundary&lt;/a&gt; in multiprocess mode, now use &lt;a href=&quot;https://docs.rs/crossbeam-channel/0.5.15/crossbeam_channel/&quot;&gt;crossbeam channels&lt;/a&gt; in single-process mode, rather than using &lt;a href=&quot;https://docs.rs/ipc-channel/0.20.2/ipc_channel/&quot;&gt;IPC channels&lt;/a&gt; in both modes (@jschwe, #39073, #39076, #39345, #39347, #39348).
+&lt;a href=&quot;https://docs.rs/ipc-channel/0.20.2/ipc_channel/&quot;&gt;IPC channels&lt;/a&gt; are required when communicating with another process, but they’re more expensive, because they require serialising and deserialising each message, plus resources from the operating system.&lt;/p&gt;
+&lt;p&gt;We’ve started working on an optimisation for string handling in Servo’s DOM layer (@Narfinger, #39480, #39481, #39504).
+Strings in our DOM have historically been represented as &lt;a href=&quot;https://doc.rust-lang.org/std/string/struct.String.html&quot;&gt;ordinary Rust strings&lt;/a&gt;, but they often come from SpiderMonkey, where they use &lt;a href=&quot;https://searchfox.org/firefox-main/rev/8e5d58cfed616cb90586c614e53d8ab1ffc8af27/js/src/vm/StringType.h#83&quot;&gt;a variety of representations&lt;/a&gt;, none of which are entirely compatible.
+SpiderMonkey strings would continue to need conversion to Servo strings, but the idea we’re working towards is to &lt;strong&gt;make the conversion lazy&lt;/strong&gt;, in the hope that many strings will never end up being converted at all.&lt;/p&gt;
+&lt;p&gt;We now use a faster hash algorithm for internal hashmaps that are not security-critical (@Narfinger, #39106, #39166, #39202, #39233).
+These changes also switch that faster algorithm from &lt;a href=&quot;https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function&quot;&gt;FNV&lt;/a&gt; to an &lt;a href=&quot;https://docs.rs/rustc-hash/2.1.1/rustc_hash/&quot;&gt;even simpler polynomial hash&lt;/a&gt;, following in the footsteps of &lt;a href=&quot;https://github.com/rust-lang/rust/pull/37229&quot;&gt;Rust&lt;/a&gt; and &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1477628&quot;&gt;Stylo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We’ve also landed a few more self-contained perf improvements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;speeding up accesses to the event loop (@Narfinger, #39274, #39275)&lt;/li&gt;
+&lt;li&gt;reducing memory usage (@ritoban23, #39351)&lt;/li&gt;
+&lt;li&gt;reducing binary size (@lumiscosity, @Narfinger, #39437, #39567)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Support for profiling Servo with the macOS Instruments.app has been removed (@mrobinson, #39437).
+We currently recommend using &lt;a href=&quot;https://ui.perfetto.dev/&quot;&gt;Perfetto&lt;/a&gt; or &lt;a href=&quot;https://gitee.com/openharmony/hiviewdfx_hitrace&quot;&gt;HiTrace&lt;/a&gt; for instrumentation-based profiling.
+This is unfortunately &lt;a href=&quot;https://book.servo.org/hacking/profiling.html&quot;&gt;still undocumented&lt;/a&gt;, but you can get started by building Servo with &lt;code&gt;--features tracing-perfetto&lt;/code&gt; or &lt;code&gt;--features tracing-hitrace&lt;/code&gt; and running with &lt;code&gt;SERVO_TRACING=trace&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/18/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;

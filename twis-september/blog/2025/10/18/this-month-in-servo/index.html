@@ -284,6 +284,28 @@ Touch event simulation continues to be available in servoshell as <code>--simula
 <p>On mobile devices, servoshell now resizes the webview correctly when the available space changes (@blueguy1, @yjx, @yezhizhen, #39507).</p>
 <p>On macOS, telling servoshell to <a href="https://w3c.github.io/webdriver/#screen-capture"><strong>take a screenshot</strong></a> no longer hides the window (@mrobinson, #39500).
 This does not affect taking a screenshot in headless mode (<code>--headless</code>), where there continues to be no window at all.</p>
+<h2 id="performance" tabindex="-1">Performance <a class="header-anchor" href="#performance">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Servo currently runs in <strong>single-process mode</strong> unless you opt in to <code>--multiprocess</code> mode, and we’ve landed a few perf improvements in that default mode.
+For one, in single-process mode, script can now <strong>communicate with the embedder directly</strong> for reduced latency (@jschwe, #39039).
+We also create one thread pool for the image cache now, rather than one pool per script thread (@rodio, #38783).</p>
+<p>Many components of Servo that <em>would</em> be <a href="https://book.servo.org/architecture/overview.html#architecture">separated by a process boundary</a> in multiprocess mode, now use <a href="https://docs.rs/crossbeam-channel/0.5.15/crossbeam_channel/">crossbeam channels</a> in single-process mode, rather than using <a href="https://docs.rs/ipc-channel/0.20.2/ipc_channel/">IPC channels</a> in both modes (@jschwe, #39073, #39076, #39345, #39347, #39348).
+<a href="https://docs.rs/ipc-channel/0.20.2/ipc_channel/">IPC channels</a> are required when communicating with another process, but they’re more expensive, because they require serialising and deserialising each message, plus resources from the operating system.</p>
+<p>We’ve started working on an optimisation for string handling in Servo’s DOM layer (@Narfinger, #39480, #39481, #39504).
+Strings in our DOM have historically been represented as <a href="https://doc.rust-lang.org/std/string/struct.String.html">ordinary Rust strings</a>, but they often come from SpiderMonkey, where they use <a href="https://searchfox.org/firefox-main/rev/8e5d58cfed616cb90586c614e53d8ab1ffc8af27/js/src/vm/StringType.h#83">a variety of representations</a>, none of which are entirely compatible.
+SpiderMonkey strings would continue to need conversion to Servo strings, but the idea we’re working towards is to <strong>make the conversion lazy</strong>, in the hope that many strings will never end up being converted at all.</p>
+<p>We now use a faster hash algorithm for internal hashmaps that are not security-critical (@Narfinger, #39106, #39166, #39202, #39233).
+These changes also switch that faster algorithm from <a href="https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function">FNV</a> to an <a href="https://docs.rs/rustc-hash/2.1.1/rustc_hash/">even simpler polynomial hash</a>, following in the footsteps of <a href="https://github.com/rust-lang/rust/pull/37229">Rust</a> and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1477628">Stylo</a>.</p>
+<p>We’ve also landed a few more self-contained perf improvements:</p>
+<ul>
+<li>speeding up accesses to the event loop (@Narfinger, #39274, #39275)</li>
+<li>reducing memory usage (@ritoban23, #39351)</li>
+<li>reducing binary size (@lumiscosity, @Narfinger, #39437, #39567)</li>
+</ul>
+<p>Support for profiling Servo with the macOS Instruments.app has been removed (@mrobinson, #39437).
+We currently recommend using <a href="https://ui.perfetto.dev">Perfetto</a> or <a href="https://gitee.com/openharmony/hiviewdfx_hitrace">HiTrace</a> for instrumentation-based profiling.
+This is unfortunately <a href="https://book.servo.org/hacking/profiling.html">still undocumented</a>, but you can get started by building Servo with <code>--features tracing-perfetto</code> or <code>--features tracing-hitrace</code> and running with <code>SERVO_TRACING=trace</code>.</p>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
