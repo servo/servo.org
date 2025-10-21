@@ -26,6 +26,19 @@ Touch event simulation continues to be available in servoshell as `--simulate-to
 
 We’ve improved the docs for <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::[notify_history_changed](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_history_changed)</code> (@Narfinger, @mrobinson, @yezhizhen, #39134).
 
+## servoshell
+
+You can now **enable experimental web platform features** with the click of a button (@jdm, #39125), instead of passing the command line option.
+
+**Favicons** now update correctly when you **navigate back and forward** (@webbeef, #39575), not just when you load a new page.
+
+servoshell’s **command line argument parsing** has been reworked (@Narfinger, #37194, #39316), which should fix the confusing behaviour of some options.
+
+On mobile devices, servoshell now resizes the webview correctly when the available space changes (@blueguy1, @yjx, @yezhizhen, #39507).
+
+On macOS, telling servoshell to [**take a screenshot**](https://w3c.github.io/webdriver/#screen-capture) no longer hides the window (@mrobinson, #39500).
+This does not affect taking a screenshot in headless mode (`--headless`), where there continues to be no window at all.
+
 ## Donations
 
 Thanks again for your generous support!
