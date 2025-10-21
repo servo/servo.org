@@ -1,0 +1,212 @@
+- api
+    - https://github.com/servo/servo/pull/39133	(@shubhamg13, #39133)	Enable viewport `<meta>` tag support for mobile platforms only (#39133)
+      api; viewport meta now enabled on mobile devices only (including pinephone), and you can now opt in with `--pref viewport_meta_enabled`
+    - https://github.com/servo/servo/pull/39185	(@sagudev, #39185)	cargo: Bump MSRV to 1.86.0 (#39185)
+      api
+    - https://github.com/servo/servo/pull/39134	(@Narfinger, @mrobinson, @yezhizhen, #39134)	Elaborate documentation of notify_history_changed in WebViewDelegate (#39134)
+      api; webview api docs
+    - https://github.com/servo/servo/pull/39207	(@shubhamg13, #39207)	fixup: Enable viewport <meta> tag support for mobile platforms only (#39207)
+      api; viewport meta now enabled on mobile devices only (including pinephone), and you can now opt in with `--pref viewport_meta_enabled`
+    - https://github.com/servo/servo/pull/39332	(@mrobinson, #39332)	libservo: Remove the `Opts::trace_layout` (#39332)
+      api; remove broken debug option
+    - https://github.com/servo/servo/pull/39331	(@mrobinson, #39331)	libservo: Remove `Opts::webrender_stats` and `-Z wr-stats` (#39331)
+      api; use Ctrl+F12 instead
+    - https://github.com/servo/servo/pull/39371	(@delan, @mrobinson, #39371)	script: Move keyboard scrolling to script (#39371)
+      api input; keyboard scrolling is now built-in, works with focused/clicked scrollports, and bubbles out if not scrollable along that axis
+    - https://github.com/servo/servo/pull/39352	(@mrobinson, #39352)	servoshell: Move touch event simulation to servoshell (#39352)
+      api; removes touch event simulation from the api; for servoshell, use `--simulate-touch-events` instead of `-Z convert-mouse-to-touch`
+    - https://github.com/servo/servo/pull/39575	(@webbeef, #39575)	script: Cache the current favicon on the document (#39575)
+      api; favicon updates correctly with back/forward navigation
+- crash
+    - https://github.com/servo/servo/pull/39027	(@mrobinson, #39027)	layout: Lay out collapsed table rows and columns, but don't paint them (#39027)
+      crash; fix crash with ‘visibility: collapse’
+    - https://github.com/servo/servo/pull/39075	(@mrobinson, #39075)	layout: Gracefully handle script queries on nodes with uninvertible transforms (#39075)
+      crash; fix crash with ‘transform: scale(0)’
+    - https://github.com/servo/servo/pull/39211	(@Loirooriol, #39211)	Add test for `resizeTo(-1, -1)` (#39211)
+      crash
+    - https://github.com/servo/servo/pull/39189	(@sagudev, #39189)	layout: Convert animated image delays < 10ms into 100 ms delays (#39189)
+      crash; fix crash when animated images have small frame delays
+    - https://github.com/servo/servo/pull/39204	(@mrobinson, #39204)	libservo: Make Servo (and servoshell) more resilient against extreme sizes (#39204)
+      crash
+    - https://github.com/servo/servo/pull/39289	(@Integral-Tech, #39289)	servoshell: Add `ParseResolutionError` to parse elegantly (#39289)
+      crash; fix crash with invalid --screen-size or --window-size
+    - https://github.com/servo/servo/pull/39320	(@Integral-Tech, #39320)	net: use `log::error!` to handle DevTools startup failures gracefully (#39320)
+      crash
+    - https://github.com/servo/servo/pull/39367	(@yezhizhen, #39367)	script: Avoid panic when scrolling area of window is larger than viewport (#39367)
+      crash; scroll() method on Window
+- devtools
+    - https://github.com/servo/servo/pull/39309	(@delan, #39309)	devtools: Fix race in tests due to asynchronous termination (#39309)
+      devtools
+    - https://github.com/servo/servo/pull/39318	(@Narfinger, @mrobinson, #39318)	net: Do not send `data` scheme requests to DevTools (#39318)
+      devtools
+- dom
+    - https://github.com/servo/servo/pull/39051	(@arihant2math, @sagudev, #39051)	Throw `SyntaxError` from `Location::SetHref` (#39051)
+      dom; fix exception type in set href() on Location
+    - https://github.com/servo/servo/pull/39070	(@jerensl, @mukilan, #39070)	 script_bindings(python): Fix all the rest of type annotation in script_bindings codegen (#39070)
+      dom; codegen.py is now fully typed
+    - https://github.com/servo/servo/pull/39056	(@arihant2math, #39056)	script: Add message to SyntaxError (#39056)
+      dom; SyntaxError can now have error messages
+    - https://github.com/servo/servo/pull/39110	(@mrobinson, @Loirooriol, #39110)	script/layout: Implement `HTMLElement.scrollParent` (#39110)
+      dom
+    - https://github.com/servo/servo/pull/39148	(@lumiscosity, #39148)	script: implement setMatrixValue for DOMMatrix (#39148)
+      dom; setMatrixValue() on DOMMatrix
+    - https://github.com/servo/servo/pull/39113	(@lumiscosity, #39113)	script: preserve 2D on DOMMatrix invert (#39113)
+      dom; fix invertSelf() on DOMMatrix
+    - https://github.com/servo/servo/pull/39153	(@Loirooriol, #39153)	layout: Fix `scrollParent` to skip ancestors with `display: contents` (#39153)
+      dom
+    - https://github.com/servo/servo/pull/39183	(@sagudev, #39183)	canvas: Implement `strokeText` (#39183)
+      dom; strokeText() method on CanvasRenderingContext2D
+    - https://github.com/servo/servo/pull/39144	(@mrobinson, @Loirooriol, #39144)	script: Use `HTMLElement.scrollParent` to implement `Element.scrollIntoView` (#39144)
+      dom; scrollIntoView() now works with shadow DOM
+    - https://github.com/servo/servo/pull/39281	(@TimvdLippe, #39281)	Remove the `dom_trusted_types_enabled` preference (#39281)
+      dom; ship trusted types!
+    - https://github.com/servo/servo/pull/39290	(@TimvdLippe, #39290)	Add signal to request (#39290)
+      dom; AbortController progress
+    - https://github.com/servo/servo/pull/39325	(@mukilan, #39325)	script: use `Element::create` instead of DOM struct constructors (#39325)
+      dom; fix `:defined`
+    - https://github.com/servo/servo/pull/39295	(@TimvdLippe, #39295)	script: Do not start `Fetch` operations if they have been aborted by the `AbortController` (#39295)
+      dom; AbortController progress
+    - https://github.com/servo/servo/pull/39397	(@Loirooriol, @mrobinson, #39397)	script: Return `None` for `offsetParent` on root `<html>` and all `<body>` elements (#39397)
+      dom; fix offsetParent on <html> and <body> elements
+    - https://github.com/servo/servo/pull/39390	(@mukilan, #39390)	script: switch to `Element::create` in `HTMLSelectElement` (#39390)
+      dom; fix `:defined`
+    - https://github.com/servo/servo/pull/39406	(@TimvdLippe, #39406)	Add AbortSignal support for event listeners (#39406)
+      dom; AbortController progress
+    - https://github.com/servo/servo/pull/39374	(@TimvdLippe, #39374)	Abort fetch controller when signal is aborted (#39374)
+      dom; AbortController progress
+    - https://github.com/servo/servo/pull/39466	(@tharkum, #39466)	html: Add the reflected 'sizes' IDL attribute for <image> (#39466)
+      dom; sizes property on HTMLImageElement
+    - https://github.com/servo/servo/pull/39394	(@rodio, #39394)	script: Add message to NotFoundError (#39394)
+      dom; NotFoundError can now have error messages
+    - https://github.com/servo/servo/pull/39296	(@Gae24, #39296)	script: implement `ClipboardItem` `getType` and `supports` (#39296)
+      dom; getType() and supports() on ClipboardItem
+    - https://github.com/servo/servo/pull/39475	(@Loirooriol, @mrobinson, #39475)	script: Chain up `scrollIntoView()` scrolling to parent `<iframe>`s (#39475)
+      dom; improve scrollIntoView() with iframes
+    - https://github.com/servo/servo/pull/39535	(@excitablesnowball, #39535)	script: Add message to InvalidStateError (#39535)
+      dom; InvalidStateError can now have error messages
+    - https://github.com/servo/servo/pull/39483	(@tharkum, #39483)	html: Count <image> attributes state changes as the relevant mutations (#39483)
+      dom; improve handling of <img> attribute changes
+- feature
+    - https://github.com/servo/servo/pull/39421	(@TimvdLippe, #39421)	Add abort signal preference to experimental web features (#39421)
+      feature; --enable-experimental-web-platform-features now includes --pref dom_abort_controller_enabled
+- indexeddb
+    - https://github.com/servo/servo/pull/39008	(@arihant2math, #39008)	indexeddb: Finish implementation of key_type_to_jsval (#39008)
+      indexeddb; can now use Array and Date keys
+    - https://github.com/servo/servo/pull/39080	(@kkoyung, #39080)	indexeddb: Implement `openCursor` and `openKeyCursor` for object store (#39080)
+      indexeddb; openCursor() and openKeyCursor() on IDBObjectStore
+- input
+    - https://github.com/servo/servo/pull/39326	(@yezhizhen, #39326)	script: Do not call "scroll into view" when handling element clicks (#39326)
+      input; fix bug where links need to be clicked twice
+    - https://github.com/servo/servo/pull/39371	(@delan, @mrobinson, #39371)	script: Move keyboard scrolling to script (#39371)
+      api input; keyboard scrolling is now built-in, works with focused/clicked scrollports, and bubbles out if not scrollable along that axis
+    - https://github.com/servo/servo/pull/39469	(@mrobinson, @delan, #39469)	script: Chain up keyboard scrolling to parent `<iframe>`s (#39469)
+      input; improve keyboard scrolling with iframes
+- layout
+    - https://github.com/servo/servo/pull/39102	(@mrobinson, #39102)	script: Always dirty nodes when changing node state (#39102)
+      layout; fix :hover bug
+    - https://github.com/servo/servo/pull/39014	(@stevennovaryo, #39014)	layout: Fix Textual `<input>` Vertical Align Style (#39014)
+      layout; text in <input> is now vertically centered
+    - https://github.com/servo/servo/pull/39230	(@Loirooriol, #39230)	layout: Take `text-indent` into account in min/max-content inline sizes (#39230)
+      layout; fix intrinsic sizes with ‘text-indent’
+    - https://github.com/servo/servo/pull/39401	(@Loirooriol, #39401)	layout: Ignore insets in Taffy for static and sticky positionings (#39401)
+      layout; fix ‘position: static’ and ‘position: sticky’ on grid items
+    - https://github.com/servo/servo/pull/39536	(@mrobinson, #39536)	script: Make stylesheets loaded via `<link>` elements block the rendering (#39536)
+      layout; fixed big FOUC bug
+- net
+    - https://github.com/servo/servo/pull/39033	(@TimvdLippe, #39033)	Move LinkProcessingOptions into separate file (#39033)
+      net; <link rel=preload> and Link header preloads
+    - https://github.com/servo/servo/pull/39034	(@TimvdLippe, #39034)	Move `Element::matches_environment` to `MediaList` (#39034)
+      net; <link rel=preload> and Link header preloads
+    - https://github.com/servo/servo/pull/39215	(@simonwuelker, #39215)	net: Don't prompt for credentials when 401 response has no `WWW-Authenticate` header (#39215)
+      net; fix credentials prompt when 401 has no ‘WWW-Authenticate’
+    - https://github.com/servo/servo/pull/36530	(@webbeef, #36530)	Enable the zstd decoder (#36530)
+      net
+    - https://github.com/servo/servo/pull/39052	(@TimvdLippe, @jdm, #39052)	script: Implement parsing of Link HTTP headers (#39052)
+      net; <link rel=preload> and Link header preloads
+- perf
+    - https://github.com/servo/servo/pull/39076	(@jschwe, #39076)	script: Migrate swmanager to GenericChannel (#39076)
+      perf; faster messaging in single-process mode
+    - https://github.com/servo/servo/pull/39073	(@jschwe, #39073)	base: Migrate PipelineNameSpaceInstaller to GenericChannel (#39073)
+      perf; faster messaging in single-process mode
+    - https://github.com/servo/servo/pull/39039	(@jschwe, #39039)	Add direct script to embedder channel  (#39039)
+      perf; in single-process mode, script can now message the embedder directly for reduced latency
+    - https://github.com/servo/servo/pull/39106	(@Narfinger, #39106)	constellation: Use `FnvHashMap` for hashmaps that use ids as keys (#39106)
+      perf
+    - https://github.com/servo/servo/pull/39202	(@Narfinger, #39202)	Moves to FxHashMap for Allocator, BHM, Canvas, Media, Servo, WebGL and WebGPU (#39202)
+      perf
+    - https://github.com/servo/servo/pull/39166	(@Narfinger, #39166)	Replace Hash Algorithm in HashMap/Set with FxHashMap/Set for simple types (#39166)
+      perf
+    - https://github.com/servo/servo/pull/39233	(@Narfinger, #39233)	Removed FnvHash and transformed the rest to FxHashmap (#39233)
+      perf
+    - https://github.com/servo/servo/pull/39275	(@Narfinger, #39275)	Move signals_slots to ScriptMutationObservers (#39275)
+      perf; improve ScriptThread event loop access
+    - https://github.com/servo/servo/pull/39271	(@delan, #39271)	ci: Stop using `python3 ./mach` (#39271)
+      perf; bencher ci
+    - https://github.com/servo/servo/pull/38783	(@rodio, #38783)	constellation: Use one image cache thread pool in the single-process mode (#38783)
+      perf; reduce excessive thread counts in single-process mode
+    - https://github.com/servo/servo/pull/39354	(@mrobinson, #39354)	profile: Remove integration with Instruments.app "Points of Interest" (#39354)
+      perf; profiling with Instruments.app has been removed in favour of perfetto/hitrace
+    - https://github.com/servo/servo/pull/39348	(@jschwe, #39348)	canvas: Port CanvasMsg channel to generic channel (#39348)
+      perf; faster messaging for canvas thread in single-process mode
+    - https://github.com/servo/servo/pull/39347	(@jschwe, #39347)	migrate GenerateImageKey reply to generic channel (#39347)
+      perf; faster messaging in single-process mode
+    - https://github.com/servo/servo/pull/39345	(@jschwe, #39345)	generic channel: Migrate background hang monitor to GenericChannel (#39345)
+      perf; faster messaging in single-process mode
+    - https://github.com/servo/servo/pull/39351	(@ritoban23, #39351)	script: Replace DomRefCell<bool> with Cell<bool> for Response::redirected (#39351)
+      perf; memory usage
+    - https://github.com/servo/servo/pull/39437	(@lumiscosity, #39437)	Convert Android resources to lossless .webp (#39437)
+      perf; binary size
+    - https://github.com/servo/servo/pull/39480	(@Narfinger, #39480)	Script: Change script/dom/{bluetooth,canvas,html} to not rely on Deref<str> for DOMString (#39480)
+      perf; avoiding UTF-8 conversion in DOM strings
+    - https://github.com/servo/servo/pull/39481	(@Narfinger, #39481)	Script: Change the rest of script to not rely on Deref<str> for DOMString (#39481)
+      perf; avoiding UTF-8 conversion in DOM strings
+    - https://github.com/servo/servo/pull/39504	(@Narfinger, #39504)	Script: Remove last instances of Deref<str> and DerefMut<str> used for DOMString (#39504)
+      perf; avoiding UTF-8 conversion in DOM strings
+    - https://github.com/servo/servo/pull/39567	(@Narfinger, #39567)	Remove some default features of image. (#39567)
+      perf; binary size
+    - https://github.com/servo/servo/pull/39244	(@Narfinger, #39244)	More changes to HashMap/HashSet to use fxhash (#39244)
+      perf
+    - https://github.com/servo/servo/pull/39274	(@Narfinger, #39274)	Split WindowProxies in script to own struct and allow to get an Rc to it. (#39274)
+      perf; improve ScriptThread event loop access
+- servoshell
+    - https://github.com/servo/servo/pull/39125	(@jdm, #39125)	servoshell: Add button to toggle experimental web platform features. (#39125)
+      servoshell
+    - https://github.com/servo/servo/pull/37194	(@Narfinger, #37194)	servoshell: Replace `getopts` with `bpaf` for argument parsing (#37194)
+      servoshell
+    - https://github.com/servo/servo/pull/39316	(@Narfinger, #39316)	servoshell: Update the debug options (`-Z`) help to reflect current set of options (#39316)
+      servoshell; removed some broken debug options
+    - https://github.com/servo/servo/pull/39500	(@mrobinson, #39500)	servoshell: Do not hide window in macOS when taking screenshot (#39500)
+      servoshell; screenshots can now be taken without headless mode on macOS
+    - https://github.com/servo/servo/pull/39507	(@blueguy1, @yangjingxiao1@huawei.com, @yezhizhen, #39507)	servoshell(egl): Adjust `WebViewRenderer` size when resizing surface size (#39507)
+      servoshell; fix resize on mobile platforms
+- svg
+    - https://github.com/servo/servo/pull/39494	(@webbeef, #39494)	script: display top-level SVG image documents. (#39494)
+      svg; can now load svg as top-level document
+- upgrade
+    - https://github.com/servo/servo/pull/39150	(@Loirooriol, #39150)	Upgrade Stylo to 2025-09-02 (#39150)
+      upgrade
+    - https://github.com/servo/servo/pull/39016	(@wusyong, #39016)	chore: update wgpu to v26 (#39016)
+      upgrade
+- webdriver
+    - https://github.com/servo/servo/pull/39040	(@yezhizhen, #39040)	webdriver: Wait for navigation to complete when creating session with all `WebView`s closed (#39040)
+      webdriver; more reliable New Session
+    - https://github.com/servo/servo/pull/39087	(@PotatoCP, #39087)	CI: Enable webdriver classic on wpt workflow (#39087)
+      webdriver; webdriver is now tested in CI
+    - https://github.com/servo/servo/pull/39086	(@yezhizhen, #39086)	webdriver: Focus browsing context when switch frame (#39086)
+      webdriver; improved Switch To Frame
+    - https://github.com/servo/servo/pull/39186	(@yezhizhen, #39186)	webdriver: Serialize as i64 if the JS Number has no fractional part (#39186)
+      webdriver; towards enabling tests
+    - https://github.com/servo/servo/pull/39241	(@yezhizhen, #39241)	webdriver: Focus WebView asynchronously (#39241)
+      webdriver; async Switch To Window
+    - https://github.com/servo/servo/pull/39265	(@yezhizhen, #39265)	webdriver: Add `ScrollBehavior::Instant` for `scroll_into_view` (#39265)
+      webdriver; operations that scroll into view now scroll instantly
+    - https://github.com/servo/servo/pull/38508	(@PotatoCP, #38508)	webdriver: Support "scroll into view" for commands (#38508)
+      webdriver; Element Click, Element Send Keys, Element Clear, Take Element Screenshot
+    - https://github.com/servo/servo/pull/39472	(@mrobinson, #39472)	servoshell: Scale WebDriver mouse button coordinates by HiDPI scale factor (#39472)
+      webdriver; partially fix hidpi
+    - https://github.com/servo/servo/pull/39499	(@yezhizhen, #39499)	webdriver: Elegantly handle "element screenshot" when bounding box has area zero (#39499)
+      webdriver; improved Take Element Screenshot
+    - https://github.com/servo/servo/pull/39539	(@yezhizhen, #39539)	webdriver: Wait animation frame callbacks before taking (element) screenshot (#39539)
+      webdriver; improved Take Element Screenshot
+    - https://github.com/servo/servo/pull/39543	(@yezhizhen, #39543)	webdriver: Safely converting to OpenGL coordinates when taking (element) screenshot (#39543)
+      webdriver; improve Take Element Screenshot
