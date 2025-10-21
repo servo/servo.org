@@ -7,10 +7,26 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+September was another busy month for Servo, with a bunch of new features in our nightly builds and [**our very first versioned release**]({{ '/blog/2025/10/20/servo-0.0.1-release/' | url }}):
+
+- the **Trusted Types** API is now stable (@TimvdLippe, #39281)
+- **strokeText()** on CanvasRenderingContext2D (@sagudev, #39183)
+- **invertSelf()** on DOMMatrix (@lumiscosity, #39148)
+- **getType()** and **supports()** on ClipboardItem (@Gae24, #39296)
+- **scrollParent** property on HTMLElement (@mrobinson, @Loirooriol, #39110)
+- **sizes** property on HTMLImageElement (@tharkum, #39466)
+
 **Viewport meta** tags are now enabled on mobile devices only, fixing a bug where they were enabled on desktop (@shubhamg13, #39133).
 You can still enable them if needed with `--pref viewport_meta_enabled` (@shubhamg13, #39207).
 
-We’ve fixed a bug where links often need to be clicked twice (@yezhizhen, #39326).
+The **scrollIntoView()** method on Element now works with shadow DOM (@mrobinson, @Loirooriol, #39144), and recurses to parent iframes if they are same origin (@Loirooriol, @mrobinson, #39475, #39397, #39153).
+
+We’ve made a bunch of progress on **AbortController** (@TimvdLippe, #39290, #39295, #39374, #39406).
+
+Several types of **DOM exceptions can now have error messages** (@arihant2math, @rodio, @excitablesnowball, #39056, #39394, #39535), and we’ve also fixed a bug where links often need to be clicked twice (@yezhizhen, #39326), and fixed bugs affecting &lt;img> attribute changes (@tharkum, #39483), the ‘:defined’ selector (@mukilan, #39325, #39390), invertSelf() on DOMMatrix (@lumiscosity, #39113), and the ‘href’ setter on Location (@arihant2math, @sagudev, #39051).
+
+One complex part of Servo isn’t even written in Rust, it’s written in Python!
+[**codegen.py**](https://github.com/servo/servo/blob/25d3c5a157e781db8813071a5ba647463546d0cd/components/script_bindings/codegen/codegen.py), which describes how to generate Rust code with bindings for every known DOM interface from the WebIDL, is now **fully type annotated** (@jerensl, @mukilan, #39070).
 
 ## For embedders
 
