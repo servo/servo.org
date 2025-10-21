@@ -10,11 +10,13 @@ categories:
 **Viewport meta** tags are now enabled on mobile devices only, fixing a bug where they were enabled on desktop (@shubhamg13, #39133).
 You can still enable them if needed with `--pref viewport_meta_enabled` (@shubhamg13, #39207).
 
+We’ve fixed a bug where links often need to be clicked twice (@yezhizhen, #39326).
+
 ## For embedders
 
 Servo now requires **Rust 1.86** to build (@sagudev, #39185).
 
-**Keyboard scrolling** is now automatically implemented by Servo (@delan, @mrobinson, #39371), so embedders [no longer](https://github.com/servo/servo/pull/39371/files#diff-24ced12025398fd76b233d19f4507362ae8b3848157577d8041effc4c4a229ae) need to translate **arrow keys**, **Home**, **End**, **Page Up**, and **Page Down** to WebView API calls.
+**Keyboard scrolling** is now automatically implemented by Servo (@delan, @mrobinson, #39371, #39469), so embedders [no longer](https://github.com/servo/servo/pull/39371/files#diff-24ced12025398fd76b233d19f4507362ae8b3848157577d8041effc4c4a229ae) need to translate **arrow keys**, **Home**, **End**, **Page Up**, and **Page Down** to WebView API calls.
 This change also improves the behaviour of those keys, scrolling the element or &lt;iframe> that was focused or most recently clicked (or a nearby ancestor).
 
 <code>[DebugOptions](https://doc.servo.org/servo_config/opts/struct.DebugOptions.html)::convert_mouse_to_touch</code> (`-Z convert-mouse-to-touch`) has been removed (@mrobinson, #39352), with no replacement.
