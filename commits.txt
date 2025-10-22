@@ -1537,7 +1537,8 @@ https://github.com/servo/servo/pull/39191	(@lumiscosity, #39191)	script: Make se
     crash
     # This test crashes in Servo, and passes on Gecko, Blink and Webkit.
     # The crash should be addressed by #39204.
-https://github.com/servo/servo/pull/39213	(@simonwuelker, #39213)	Seperate freetype face and named instance indices (#39213)
++https://github.com/servo/servo/pull/39213	(@simonwuelker, #39213)	Seperate freetype face and named instance indices (#39213)
+    crash; fix crash with .ttc fonts
     # In servo, each `LocalFontIdentifier` has an `fn index() -> u32`, which returns the index of the font within the font
     # file in case it is a font collection (`.ttc` instead of `.ttf`). The way this index is obtained is platform-dependent.
     # On systems using `fontconfig`, we get the index by querying `FC_INDEX`:
@@ -1567,16 +1568,17 @@ https://github.com/servo/servo/pull/39213	(@simonwuelker, #39213)	Seperate freet
     # Relevant code in FF: https://searchfox.org/firefox-main/source/image/FrameTimeout.h#35
     # Testing: Manually tested
     # Fixes: #39187
-https://github.com/servo/servo/pull/39201	(@coding-joedow, #39201)	layout: allow only repaint when css background and border image loaded (#39201)
++https://github.com/servo/servo/pull/39201	(@coding-joedow, #39201)	layout: allow only repaint when css background and border image loaded (#39201)
+    perf; avoid new display list until CSS background or border images are loaded
     # This change allows that only new display list is built when css background and border image loaded.
     # Testing: This change should not change any behaviors so covered by existing WPT tests.
-https://github.com/servo/servo/pull/39205	(@jdm, #39205)	script: Replace webcrypto-specific macro with trait abstraction. (#39205)
+-https://github.com/servo/servo/pull/39205	(@jdm, #39205)	script: Replace webcrypto-specific macro with trait abstraction. (#39205)
     # The value_from_js_object macro exists to paper over differences between dictionary types that require rooting
     # (via `RootedTraceableBox`) and those that do not. However, I need to read the macro source every time I look at
     # the code that uses it because I can never remember what it's doing. These changes replace the macro with a trait
     # abstraction that is clearer, and should be a code size win as well.
     # Testing: Existing WPT tests suffice.
-https://github.com/servo/servo/pull/39195	(@lumiscosity, #39195)	script: Add can_gc to WebIDL dictionary constructors (#39195)
+-https://github.com/servo/servo/pull/39195	(@lumiscosity, #39195)	script: Add can_gc to WebIDL dictionary constructors (#39195)
     # More progress on can_gc!
     # Testing: Internal change only, shouldn't change behavior.
     # Fixes: #38708
@@ -1775,10 +1777,10 @@ https://github.com/servo/servo/pull/38846	(@abdelrahman1234567, @yezhizhen, #388
     # This changes the types in script and net crates.
     # In a future PR we will change the remaining Fnv to be also Fx unless there is a reason to keep them as Fnv.
     # Testing: Should not change functionality but unit test and wpt will find it.
-https://github.com/servo/servo/pull/39210	(@sagudev, @mrobinson, #39210)	script: Document need for always sending an image update to compositor (#39210)
+-https://github.com/servo/servo/pull/39210	(@sagudev, @mrobinson, #39210)	script: Document need for always sending an image update to compositor (#39210)
     # I hit this many times while working on #38717
     # Testing: Not needed because we just update the docs
-https://github.com/servo/servo/pull/39223	(@lumiscosity, #39223)	script: Propagate CanGc argument through DictionaryFromJSVal trait (#39223)
+-https://github.com/servo/servo/pull/39223	(@lumiscosity, #39223)	script: Propagate CanGc argument through DictionaryFromJSVal trait (#39223)
     # Testing: Internal changes only, shouldn't change behaviour.
     # Fixes: #39206
 >>> 2025-09-11T06:04:19Z
@@ -1911,7 +1913,8 @@ https://github.com/servo/servo/pull/39247	(@simonwuelker, #39247)	script: Set va
     # [After 1](https://github.com/yezhizhen/servo/actions/runs/17598282988),
     # [After 2](https://github.com/yezhizhen/servo/actions/runs/17598280603), [After
     # 3](https://github.com/yezhizhen/servo/actions/runs/17589228530)
-https://github.com/servo/servo/pull/39235	(@Loirooriol, #39235)	layout: Set baseline even if line box has no fragment (#39235)
++https://github.com/servo/servo/pull/39235	(@Loirooriol, #39235)	layout: Set baseline even if line box has no fragment (#39235)
+    layout; fix baselines in inline layout
     # `InlineFormattingContextLayout::finish_current_line_and_reset()` has an early return in case the line has no
     # fragment. However, if the line only has a forced line break, then we still need to set the baseline.
     # Testing: Adding new test.
@@ -1999,7 +2002,8 @@ https://github.com/servo/servo/pull/38738	(@arihant2math, #38738)	script: Ensure
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
 >>> 2025-09-13T06:02:13Z
-https://github.com/servo/servo/pull/39263	(@TimvdLippe, #39263)	Add trusted type checks for eval arguments (#39263)
++https://github.com/servo/servo/pull/39263	(@TimvdLippe, #39263)	Add trusted type checks for eval arguments (#39263)
+    dom; part of trusted types
     # Also bumps mozjs to the latest version that has support for `GStackVector` which is what this callback uses.
     # Part of #36258
     # Fixes #38877
@@ -2027,7 +2031,7 @@ https://github.com/servo/servo/pull/39263	(@TimvdLippe, #39263)	Add trusted type
     # There is a recent spec change which adds instant as default scroll behaviour:
     # https://github.com/w3c/webdriver/pull/1924. This PR reflects the change.
     # Testing: No behaviour change as `ScrollBehavior` is ignored right now.
-https://github.com/servo/servo/pull/39255	(@kkoyung, #39255)	script: Check if IndexedDB key path is ECMAScript identifier name (#39255)
+-https://github.com/servo/servo/pull/39255	(@kkoyung, #39255)	script: Check if IndexedDB key path is ECMAScript identifier name (#39255)
     # From IndexedDB spec, when we check whether a key path is valid, we have to check whether it is an ECMAScript
     # identifier name. We have not yet implemented this logic, and always return true.
     # This patch uses the function `js::rust::wrappers::JS_IsIdentifier` to achieve this checking.
@@ -2064,7 +2068,8 @@ https://github.com/servo/servo/pull/39255	(@kkoyung, #39255)	script: Check if In
     # So that I can get notified and GitHub won't wildcard other reviewers.
     # Testing: No.
 +https://github.com/servo/servo/pull/39267	(@atbrakhi, @delan, #39267)	ci: Reland run devtools tests whenever we run unit tests from #38614 (#39267)-
-https://github.com/servo/servo/pull/39260	(@tharkum, #39260)	html: Ignore a parse error on 'srcset' attribute parsing (#39260)
++https://github.com/servo/servo/pull/39260	(@tharkum, #39260)	html: Ignore a parse error on 'srcset' attribute parsing (#39260)
+    dom; improve handling of syntax errors in srcset
     # Parsing the 'srcset' attribute of an image element may result in a parse error
     # indicating a non-fatal mismatch between the input and the requirements.
     # https://html.spec.whatwg.org/multipage/#concept-microsyntax-parse-error
