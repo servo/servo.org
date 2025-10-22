@@ -78,10 +78,6 @@ We’ve also landed a few more self-contained perf improvements:
 - reducing memory usage (@ritoban23, #39351)
 - reducing binary size (@lumiscosity, @Narfinger, #39437, #39567)
 
-Support for profiling Servo with the macOS Instruments.app has been removed (@mrobinson, #39354).
-We currently recommend using [Perfetto](https://ui.perfetto.dev) or [HiTrace](https://gitee.com/openharmony/hiviewdfx_hitrace) for instrumentation-based profiling.
-This is unfortunately [still undocumented](https://book.servo.org/hacking/profiling.html), but you can get started by building Servo with `--features tracing-perfetto` or `--features tracing-hitrace` and running with `SERVO_TRACING=trace`.
-
 ## Donations
 
 Thanks again for your generous support!
