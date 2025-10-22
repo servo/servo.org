@@ -302,7 +302,7 @@ This does not affect taking a screenshot in headless mode (<code>--headless</cod
       </a></h2>
 <p>Servo currently runs in <strong>single-process mode</strong> unless you opt in to <code>--multiprocess</code> mode, and we’ve landed a few perf improvements in that default mode.
 For one, in single-process mode, script can now <strong>communicate with the embedder directly</strong> for reduced latency (@jschwe, #39039).
-We also create one thread pool for the image cache now, rather than one pool per script thread (@rodio, #38783).</p>
+We also create one thread pool for the image cache now, rather than one pool per origin (@rodio, #38783).</p>
 <p>Many components of Servo that <em>would</em> be <a href="https://book.servo.org/architecture/overview.html#architecture">separated by a process boundary</a> in multiprocess mode, now use <a href="https://docs.rs/crossbeam-channel/0.5.15/crossbeam_channel/">crossbeam channels</a> in single-process mode, rather than using <a href="https://docs.rs/ipc-channel/0.20.2/ipc_channel/">IPC channels</a> in both modes (@jschwe, #39073, #39076, #39345, #39347, #39348).
 <a href="https://docs.rs/ipc-channel/0.20.2/ipc_channel/">IPC channels</a> are required when communicating with another process, but they’re more expensive, because they require serialising and deserialising each message, plus resources from the operating system.</p>
 <p>We’ve started working on an optimisation for string handling in Servo’s DOM layer (@Narfinger, #39480, #39481, #39504).
