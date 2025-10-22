@@ -1,8 +1,12 @@
 - crash
+    - https://github.com/servo/servo/pull/39078	(@arihant2math, #39078)	indexeddb: Return error instead of panicking on structured clone failure (#39078)
+      crash
     - https://github.com/servo/servo/pull/39027	(@mrobinson, #39027)	layout: Lay out collapsed table rows and columns, but don't paint them (#39027)
       crash; fix crash with ‘visibility: collapse’
     - https://github.com/servo/servo/pull/39075	(@mrobinson, #39075)	layout: Gracefully handle script queries on nodes with uninvertible transforms (#39075)
       crash; fix crash with ‘transform: scale(0)’
+    - https://github.com/servo/servo/pull/39171	(@sebsebmc, #39171)	fix: Store channel reference in CookieStore to prevent panic on unload (#39171)
+      crash; fix crash in cookie store
     - https://github.com/servo/servo/pull/39211	(@Loirooriol, #39211)	Add test for `resizeTo(-1, -1)` (#39211)
       crash
     - https://github.com/servo/servo/pull/39189	(@sagudev, #39189)	layout: Convert animated image delays < 10ms into 100 ms delays (#39189)
@@ -23,12 +27,26 @@
 - dom
     - https://github.com/servo/servo/pull/38998	(@jerensl, #38998)	script_bindings(python): Add type around js jit class in codegen.py (#38998)
       dom; type annotations
+    - https://github.com/servo/servo/pull/39059	(@arihant2math, #39059)	webcrypto: implement raw hmac export (#39059)
+      dom; crypto.subtle.exportKey() can now export HMAC keys in `raw` format
+    - https://github.com/servo/servo/pull/38885	(@arihant2math, #38885)	indexeddb: Implement getAll and getAllKeys (#38885)
+      dom; getAll() and getAllKeys() on IDBObjectStore
+    - https://github.com/servo/servo/pull/39163	(@TimvdLippe, #39163)	Disable scripting when sandbox flag is set (#39163)
+      dom; ‘Content-Security-Policy: sandbox’ now disables scripting unless ‘allow-scripts’ is given
+    - https://github.com/servo/servo/pull/38717	(@sagudev, #38717)	webgpu: Simplify presentation and handle cleared in script (#38717)
+      dom; webgpu presentation is more reliable
 - indexeddb
     - https://github.com/servo/servo/pull/39008	(@arihant2math, #39008)	indexeddb: Finish implementation of key_type_to_jsval (#39008)
       indexeddb; can now use Array and Date keys
     - https://github.com/servo/servo/pull/39080	(@kkoyung, #39080)	indexeddb: Implement `openCursor` and `openKeyCursor` for object store (#39080)
       indexeddb; openCursor() and openKeyCursor() on IDBObjectStore
 - layout
+    - https://github.com/servo/servo/pull/39055	(@Loirooriol, #39055)	layout: Avoid setting baseline for phantom line boxes (#39055)
+      layout; fix inline layout with empty elements (~= phantom line boxes)
+    - https://github.com/servo/servo/pull/39041	(@Loirooriol, #39041)	layout: Ensure IFC for abspos with inline-level original display (#39041)
+      layout; fix abspos with ‘display: inline’
+    - https://github.com/servo/servo/pull/39066	(@coding-joedow, @kongbai1996, #39066)	layout: Move hit testing for scrollable areas to display list construction (#39066)
+      layout; fixed bug in scrolling the wrong element when it overlaps another element
     - https://github.com/servo/servo/pull/39102	(@mrobinson, #39102)	script: Always dirty nodes when changing node state (#39102)
       layout; fix :hover bug
     - https://github.com/servo/servo/pull/39014	(@stevennovaryo, #39014)	layout: Fix Textual `<input>` Vertical Align Style (#39014)
@@ -39,6 +57,16 @@
       layout; fix ‘position: static’ and ‘position: sticky’ on grid items
     - https://github.com/servo/servo/pull/39536	(@mrobinson, #39536)	script: Make stylesheets loaded via `<link>` elements block the rendering (#39536)
       layout; fixed big FOUC bug
+- net
+    - https://github.com/servo/servo/pull/39146	(@TimvdLippe, #39146)	Refactor loading methods to align with specification (#39146)
+      net; preload depends on this
+    - https://github.com/servo/servo/pull/39167	(@TimvdLippe, #39167)	Add resource header for mime sniffing (#39167)
+      net; preload depends on this
+- perf
+    - https://github.com/servo/servo/pull/39074	(@jschwe, #39074)	script: Migrate JobResult to GenericCallback (#39074)
+      perf; faster messaging in single-process mode
+    - https://github.com/servo/servo/pull/39168	(@Narfinger, #39168)	Switch the majority of fxhash uses to rustc_hash which is maintained (#39168)
+      perf; faster hash algo
 - svg
     - https://github.com/servo/servo/pull/39494	(@webbeef, #39494)	script: display top-level SVG image documents. (#39494)
       svg; can now load svg as top-level document

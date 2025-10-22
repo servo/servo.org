@@ -1,5 +1,6 @@
 >>> 2025-09-01T06:03:13Z
-https://github.com/servo/servo/pull/39055	(@Loirooriol, #39055)	layout: Avoid setting baseline for phantom line boxes (#39055)
++https://github.com/servo/servo/pull/39055	(@Loirooriol, #39055)	layout: Avoid setting baseline for phantom line boxes (#39055)
+    layout; fix inline layout with empty elements (~= phantom line boxes)
     # Phantom line boxes should be treated as non-existing for most purposes, so don't let them affect the baseline of
     # their block container.
     # Testing: An existing test passes, and also adding a new one which doesn't rely on ``
@@ -123,14 +124,16 @@ https://github.com/servo/servo/pull/39055	(@Loirooriol, #39055)	layout: Avoid se
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
 >>> 2025-09-02T06:03:16Z
-https://github.com/servo/servo/pull/39041	(@Loirooriol, #39041)	layout: Ensure IFC for abspos with inline-level original display (#39041)
++https://github.com/servo/servo/pull/39041	(@Loirooriol, #39041)	layout: Ensure IFC for abspos with inline-level original display (#39041)
+    layout; fix abspos with ‘display: inline’
     # Absolutely positioned elements get blockified, but their static position still depends on the original
     # display. Therefore, if we encounter an abspos with an inline-level original display, we will now ensure that it's
     # handled in an inline formatting context. This way its static position will correctly take into account things like
     # `text-align`.
     # Testing: Several WPT tests are now passing.
     # Fixes: #39017
-https://github.com/servo/servo/pull/39078	(@arihant2math, #39078)	indexeddb: Return error instead of panicking on structured clone failure (#39078)
++https://github.com/servo/servo/pull/39078	(@arihant2math, #39078)	indexeddb: Return error instead of panicking on structured clone failure (#39078)
+    crash
     # Related to failures in #38847
     # Testing: WPT
 +https://github.com/servo/servo/pull/39076	(@jschwe, #39076)	script: Migrate swmanager to GenericChannel (#39076)
@@ -142,7 +145,8 @@ https://github.com/servo/servo/pull/39078	(@arihant2math, #39078)	indexeddb: Ret
     ;perf; faster messaging in single-process mode
     # Testing: Covered by existing tests
     # Part of #38912
-https://github.com/servo/servo/pull/39074	(@jschwe, #39074)	script: Migrate JobResult to GenericCallback (#39074)
++https://github.com/servo/servo/pull/39074	(@jschwe, #39074)	script: Migrate JobResult to GenericCallback (#39074)
+    perf; faster messaging in single-process mode
     # Use the new GenericCallback abstraction for serviceworker job results.
     # Testing: Covered by service worker wpt tests
 +https://github.com/servo/servo/pull/39027	(@mrobinson, #39027)	layout: Lay out collapsed table rows and columns, but don't paint them (#39027)
@@ -170,7 +174,8 @@ https://github.com/servo/servo/pull/39074	(@jschwe, #39074)	script: Migrate JobR
     dom; type annotations
     # Add type around js jit class in codegen.py
     # Needed this PR: #38845
-https://github.com/servo/servo/pull/39059	(@arihant2math, #39059)	webcrypto: implement raw hmac export (#39059)
++https://github.com/servo/servo/pull/39059	(@arihant2math, #39059)	webcrypto: implement raw hmac export (#39059)
+    dom; crypto.subtle.exportKey() can now export HMAC keys in `raw` format
     # Implement raw export of HMAC keys. JWT export of HMAC keys will come in a separate PR.
     # Testing: WPT
     # Fixes: Partially #39060
@@ -210,7 +215,8 @@ https://github.com/servo/servo/pull/39059	(@arihant2math, #39059)	webcrypto: imp
     ;dom; codegen.py is now fully typed
     # This will complete the type annotation on `codegen.py` so we can safely remove the ignore from `pyproject`
     # configurataion
-https://github.com/servo/servo/pull/39066	(@coding-joedow, @kongbai1996, #39066)	layout: Move hit testing for scrollable areas to display list construction (#39066)
++https://github.com/servo/servo/pull/39066	(@coding-joedow, @kongbai1996, #39066)	layout: Move hit testing for scrollable areas to display list construction (#39066)
+    layout; fixed bug in scrolling the wrong element when it overlaps another element
     # Move the construction of hit test items for scroll nodes to the display list construction stage. This way they
     # respect the `z-index` of their originating fragments and stacking context ordering in general.
     # Testing: We currently do not have great testing for this as this tests the combination of hit testing of input
@@ -513,7 +519,7 @@ https://github.com/servo/servo/pull/39099	(@arihant2math, @jschwe, #39099)	Fix s
     # The steps were incorrectly numbered, this PR fixes that and copies over the description of each step.
     # Testing: None, just expanding on the comments/fixing the step numbering
 >>> 2025-09-05T06:03:58Z
-https://github.com/servo/servo/pull/39084	(@kkoyung, #39084)	webcrypto: Reduce usage of standalone helper functions for JWK format (#39084)
+-https://github.com/servo/servo/pull/39084	(@kkoyung, #39084)	webcrypto: Reduce usage of standalone helper functions for JWK format (#39084)
     # Reduce the reliance on standalone helper functions for handling JWK format. Instead, those functionalities are
     # now integrated into the `JsonWebKey` type generated by script_binding, via the local trait `JsonWebKeyExt`, for
     # internal use.
@@ -1044,13 +1050,14 @@ https://github.com/servo/servo/pull/39109	(@TimvdLippe, #39109)	Hookup mime clas
 >>> 2025-09-06T06:05:54Z
 -https://github.com/servo/servo/pull/39174	(@sagudev, #39174)	cargo: Ignore advisory for deprecated crate 'fxhash' (#39174)
     # Unblock CI, we will do migration slowly (because stylo).
-https://github.com/servo/servo/pull/39171	(@sebsebmc, #39171)	fix: Store channel reference in CookieStore to prevent panic on unload (#39171)
++https://github.com/servo/servo/pull/39171	(@sebsebmc, #39171)	fix: Store channel reference in CookieStore to prevent panic on unload (#39171)
+    crash; fix crash in cookie store
     # CookieStore sets up a route with the resource threads to handle async communication and needs to later unregister
     # itself when the page unloads. When attempting to do this in the `Drop` of CookieStore we panic attempting to
     # retrieve the channel via `self.global().resource_threads()` because global is already null. This change stores a
     # reference to the core resource thread in the object to send the unregister on `Drop`.
     # Testing: manual testing for crash fix, behavior should be unchanged
-https://github.com/servo/servo/pull/39170	(@sebsebmc, #39170)	script: Remove CookieListItem fields that were removed in the spec (#39170)
+-https://github.com/servo/servo/pull/39170	(@sebsebmc, #39170)	script: Remove CookieListItem fields that were removed in the spec (#39170)
     # The spec removed all fields from CookieListItem except for name and value
     # Testing: WPT tests cover this already.
 -https://github.com/servo/servo/pull/39165	(@Loirooriol, #39165)	layout: Add method to retrieve only the first LayoutBoxBase of a box (#39165)
@@ -1178,7 +1185,8 @@ https://github.com/servo/servo/pull/38847	(@kkoyung, #38847)	script: Re-implemen
     # Fixes: #39117
     # Fixes: #39121
     # Fixes: #39154
-https://github.com/servo/servo/pull/39146	(@TimvdLippe, #39146)	Refactor loading methods to align with specification (#39146)
++https://github.com/servo/servo/pull/39146	(@TimvdLippe, #39146)	Refactor loading methods to align with specification (#39146)
+    net; preload depends on this
     # This is in preparation of being able to do mime sniffing on the response data. For that, we first need to introduce
     # separate methods so that we can decouple them from process_response. In doing so, we introduce a NavigationParams
     # which mimics what the spec intents. The spec stores different data (policy container instead of csp list and
@@ -1234,11 +1242,13 @@ https://github.com/servo/servo/pull/39172	(@Loirooriol, #39172)	layout: Simplify
     # Testing: Verified when running `./mach test-wpt /IndexedDB --headless --product servodriver`. We don't run
     # servodriver in CI yet.
     # Fixes: #39175
-https://github.com/servo/servo/pull/38885	(@arihant2math, #38885)	indexeddb: Implement getAll and getAllKeys (#38885)
++https://github.com/servo/servo/pull/38885	(@arihant2math, #38885)	indexeddb: Implement getAll and getAllKeys (#38885)
+    dom; getAll() and getAllKeys() on IDBObjectStore
     # Implement getAll and getAllKeys for IDBObjectStore.
     # Testing: WPT & Unit testing
     # Fixes: Part of #6963.
-https://github.com/servo/servo/pull/39168	(@Narfinger, #39168)	Switch the majority of fxhash uses to rustc_hash which is maintained (#39168)
++https://github.com/servo/servo/pull/39168	(@Narfinger, #39168)	Switch the majority of fxhash uses to rustc_hash which is maintained (#39168)
+    perf; faster hash algo
     # fxhash seems to be unmaintained (see https://github.com/rustsec/advisory-db/issues/2185) so we should move away
     # from it.
     # Additionally, the new crate might be slightly faster.
@@ -1370,7 +1380,8 @@ https://github.com/servo/servo/pull/39168	(@Narfinger, #39168)	Switch the majori
     # I also set more strict timeout (10 min; usually it takes 2-3 min but always less then 4 min) for bootstrap to
     # alert us on problems.
     # Testing: Manual CI run: https://github.com/sagudev/servo/actions/runs/17527791255
-https://github.com/servo/servo/pull/39167	(@TimvdLippe, #39167)	Add resource header for mime sniffing (#39167)
++https://github.com/servo/servo/pull/39167	(@TimvdLippe, #39167)	Add resource header for mime sniffing (#39167)
+    net; preload depends on this
     # The concept of a "resource header" is not well specced, since it is unclear what a "resource" is. That said,
     # it most closely matches a "response" as part of the navigation params.
     # With this change, we now delay loading the document until either two things happen:
@@ -1379,7 +1390,8 @@ https://github.com/servo/servo/pull/39167	(@TimvdLippe, #39167)	Add resource hea
     # We initially store bytes in the resource header and then after loading parse the stored bytes. Any subsequent
     # loading will process as before.
     # Part of #14024
-https://github.com/servo/servo/pull/39163	(@TimvdLippe, #39163)	Disable scripting when sandbox flag is set (#39163)
++https://github.com/servo/servo/pull/39163	(@TimvdLippe, #39163)	Disable scripting when sandbox flag is set (#39163)
+    dom; ‘Content-Security-Policy: sandbox’ now disables scripting unless ‘allow-scripts’ is given
     # While I adding spec comments to the CSP crate, I discovered two issues:
     # 1. We should only use the last sandbox value (WPT test added)
     # 2. We weren't checking for the scripting sandbox flag in document
@@ -1394,7 +1406,8 @@ https://github.com/servo/servo/pull/39191	(@lumiscosity, #39191)	script: Make se
     # Testing: Changes are internal, this shouldn't affect behavior.
     # Fixes: #39128
 >>> 2025-09-09T06:04:01Z
-https://github.com/servo/servo/pull/38717	(@sagudev, #38717)	webgpu: Simplify presentation and handle cleared in script (#38717)
++https://github.com/servo/servo/pull/38717	(@sagudev, #38717)	webgpu: Simplify presentation and handle cleared in script (#38717)
+    dom; webgpu presentation is more reliable
     # There are many important changes here:
     # - Generalize the presentation buffer into standalone staging buffers that hold their own state. This allow them
     # to be used by getImage.
