@@ -29,7 +29,7 @@ Several types of **DOM exceptions can now have error messages** (@arihant2math, 
 One complex part of Servo isn’t even written in Rust, it’s written in Python!
 [**codegen.py**](https://github.com/servo/servo/blob/25d3c5a157e781db8813071a5ba647463546d0cd/components/script_bindings/codegen/codegen.py), which describes how to generate Rust code with bindings for every known DOM interface from the WebIDL, is now **fully type annotated** (@jerensl, @mukilan, #39070).
 
-## For embedders
+## Embedding and automation
 
 Servo now requires **Rust 1.86** to build (@sagudev, #39185).
 
@@ -44,6 +44,12 @@ Touch event simulation continues to be available in servoshell as `--simulate-to
 <code>[DebugOptions](https://doc.servo.org/servo_config/opts/struct.DebugOptions.html)::trace_layout</code> (`-Z trace-layout`) has been removed (@mrobinson, #39332), since it had no effect.
 
 We’ve improved the docs for <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::[notify_history_changed](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_history_changed)</code> (@Narfinger, @mrobinson, @yezhizhen, #39134).
+
+When automating servoshell with **WebDriver**, commands **targeting elements** now correctly **scroll into view** if needed (@PotatoCP, @yezhizhen, #38508, #39265), allowing **Element Click**, **Element Send Keys**, **Element Clear**, and **Take Element Screenshot** to work properly when the element is outside the viewport.
+
+**WebDriver mouse inputs** now work correctly with **HiDPI scaling** on more platforms (@mrobinson, #39472), and we’ve improved the reliability of **Take Screenshot**, **Take Element Screenshot** (@yezhizhen, #39499, #39539, #39543), **Switch To Frame** (@yezhizhen, #39086), **Switch To Window** (@yezhizhen, #39241), and **New Session** (@yezhizhen, #39040).
+
+These improvements have enabled us to run the **WebDriver conformance tests** in CI by default (@PotatoCP, #39087), and also mean we’re closer than ever to running [WebDriver-based Web Platform Tests](https://web-platform-tests.org/writing-tests/testdriver.html).
 
 ## servoshell
 

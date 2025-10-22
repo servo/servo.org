@@ -157,7 +157,7 @@ https://github.com/servo/servo/pull/39074	(@jschwe, #39074)	script: Migrate JobR
     # Testing: this change includes a new WPT crash test.
     # Fixes: #37421.
 +https://github.com/servo/servo/pull/39040	(@yezhizhen, #39040)	webdriver: Wait for navigation to complete when creating session with all `WebView`s closed (#39040)
-    webdriver; more reliable New Session
+    ;webdriver; more reliable New Session
     # In #37410 for webdriver mode, we introduced mechanism to keep program alive when all webview are closed to comply
     # with spec. But the test fails with 90% probability, as the `browsing_context` is only registered in constellation's
     # `browsing_contexts` map when documents are ready. This PR waits for navigation to complete without verifying
@@ -175,7 +175,7 @@ https://github.com/servo/servo/pull/39059	(@arihant2math, #39059)	webcrypto: imp
     # Fixes: Partially #39060
 >>> 2025-09-03T06:03:29Z
 +https://github.com/servo/servo/pull/39087	(@PotatoCP, #39087)	CI: Enable webdriver classic on wpt workflow (#39087)
-    webdriver; webdriver is now tested in CI
+    ;webdriver; webdriver is now tested in CI
     # Since WebDriver is quite stable now, enable the `webdriver/classic` tests on wpt CI.
 -https://github.com/servo/servo/pull/39094	(@mrobinson, @Loirooriol, #39094)	script: Make `scrollIntoView` more similar to the specification (#39094)
     # Rework the flow of code in `Element:scroll_into_view_with_options` to
@@ -216,7 +216,7 @@ https://github.com/servo/servo/pull/39066	(@coding-joedow, @kongbai1996, #39066)
     # events and scrolling at that point. The completion of WebDriver support should make this easier to test.
     # Fixes: #38967
 +https://github.com/servo/servo/pull/39086	(@yezhizhen, #39086)	webdriver: Focus browsing context when switch frame (#39086)
-    webdriver; improved Switch To Frame
+    ;webdriver; improved Switch To Frame
     # #38889 adds back the mechanism to focus the window when [switch to
     # window](https://w3c.github.io/webdriver/#switch-to-window). After that, it causes many
     # flaky TIMEOUT. Turns out the real reason is same as the phenomenon which I thought was
@@ -1202,7 +1202,7 @@ https://github.com/servo/servo/pull/38839	(@arihant2math, #38839)	script: Initia
     # Fixes: #29973
     # Try run: https://github.com/sagudev/servo/actions/runs/17511337550
 +https://github.com/servo/servo/pull/39186	(@yezhizhen, #39186)	webdriver: Serialize as i64 if the JS Number has no fractional part (#39186)
-    webdriver; towards enabling tests
+    ;webdriver; towards enabling tests
     # JavaScript Number does not have Integer type, except for recently added `BigInt`. That's why we removed `Int`
     # variant from `JSValue` earlier in #38748. However, the Serde deserialization is strict: when it expects `u64`,
     # it cannot deserialize "3.0". But when it expects `f64`, it can still deserialize "3".
@@ -1884,7 +1884,7 @@ https://github.com/servo/servo/pull/39247	(@simonwuelker, #39247)	script: Set va
     # Testing: Hash function changes should not change functionality, we slightly decrease the size and unit tests
     # still work.
 +https://github.com/servo/servo/pull/39241	(@yezhizhen, #39241)	webdriver: Focus WebView asynchronously (#39241)
-    webdriver; async Switch To Window
+    ;webdriver; async Switch To Window
     # #38160 added a webdriver-specific API to support waiting on focus operations to complete. Later, #38243 added a
     # unique id to track each focus operation.
     # Back then we wait on focusing webview in webdriver hoping to improve stability, but it does not matter as it turns
@@ -2009,7 +2009,7 @@ https://github.com/servo/servo/pull/39263	(@TimvdLippe, #39263)	Add trusted type
     # Testing: Pass WPT tests that were expected to fail.
     # Fixes: Part of #38111
 +https://github.com/servo/servo/pull/39265	(@yezhizhen, #39265)	webdriver: Add `ScrollBehavior::Instant` for `scroll_into_view` (#39265)
-    webdriver; operations that scroll into view now scroll instantly
+    ;webdriver; operations that scroll into view now scroll instantly
     # There is a recent spec change which adds instant as default scroll behaviour:
     # https://github.com/w3c/webdriver/pull/1924. This PR reflects the change.
     # Testing: No behaviour change as `ScrollBehavior` is ignored right now.
@@ -2060,7 +2060,7 @@ https://github.com/servo/servo/pull/39260	(@tharkum, #39260)	html: Ignore a pars
     # Testing: Improvements in the following tests
     # - html/semantics/embedded-content/the-img-element/srcset/parse-a-srcset-attribute.html
 +https://github.com/servo/servo/pull/38508	(@PotatoCP, #38508)	webdriver: Support "scroll into view" for commands (#38508)
-    webdriver; Element Click, Element Send Keys, Element Clear, Take Element Screenshot
+    ;webdriver; Element Click, Element Send Keys, Element Clear, Take Element Screenshot
     # Implement scroll into view steps for all WebDriver command that requires it (element click, element send keys,
     # element clear, and take element screenshot).
     # Testing: `element_send_keys/scroll_into_view.py`, `element_click/scroll_into_view.py`, `element_clear/clear.py`
@@ -3914,7 +3914,7 @@ https://github.com/servo/servo/pull/39443	(@Loirooriol, @mrobinson, #39443)	layo
     # This undoes #35882 according to the last CSSWG resolution, since this is required by web compat.
     # Testing: Modifying the relevant test
 +https://github.com/servo/servo/pull/39472	(@mrobinson, #39472)	servoshell: Scale WebDriver mouse button coordinates by HiDPI scale factor (#39472)
-    webdriver; partially fix hidpi
+    ;webdriver; partially fix hidpi
     # Mouse button events are sent in CSSPixel coordinates, but these need to
     # so they need to converted into device coordinates when creating an input
     # event for them. This isn't an issue for automated test because they
@@ -4186,7 +4186,7 @@ https://github.com/servo/servo/pull/39467	(@Narfinger, #39467)	Allow hyper_serde
     # Testing: covered by existing tests
 >>> 2025-09-27T06:15:34Z
 +https://github.com/servo/servo/pull/39499	(@yezhizhen, #39499)	webdriver: Elegantly handle "element screenshot" when bounding box has area zero (#39499)
-    webdriver; improved Take Element Screenshot
+    ;webdriver; improved Take Element Screenshot
     # It is possible that the bounding rectangle of an element has area 0. This PR avoids panic in this case.
     # It is worth to mention that the panic itself won't kill the entire program for interaction, but only the webdriver
     # thread.
@@ -4285,7 +4285,7 @@ https://github.com/servo/servo/pull/39491	(@Loirooriol, #39491)	layout: Align ta
     # Testing: This change fixes at least two WPT tests.
     # Fixes: #26424.
 +https://github.com/servo/servo/pull/39539	(@yezhizhen, #39539)	webdriver: Wait animation frame callbacks before taking (element) screenshot (#39539)
-    webdriver; improved Take Element Screenshot
+    ;webdriver; improved Take Element Screenshot
     # According to spec, we should wait animation frame callbacks before taking (element) screenshot. As "element
     # screenshot" would automatically scroll into view, this solves intermittency.
     # Testing: Manually tested on pages, and `take_element_screenshot/scroll_into_view.py` passes stably now.
@@ -4464,7 +4464,7 @@ https://github.com/servo/servo/pull/39538	(@jdm, #39538)	Revert "Add abort signa
     # we use its lenient parsing mode.
     # Part of #35035
 +https://github.com/servo/servo/pull/39543	(@yezhizhen, #39543)	webdriver: Safely converting to OpenGL coordinates when taking (element) screenshot (#39543)
-    webdriver; improve Take Element Screenshot
+    ;webdriver; improve Take Element Screenshot
     # When taking element screenshot, we need to convert y-coordinates to comply with
     # OpenGL. With dpi > 1, sometimes y can be -1 due to rounding, resulting in panic when
     # https://github.com/servo/servo/blob/660f90f6879c4bf3cb16ec405c64070d5fdefa68/components/shared/compositing/rendering_con
