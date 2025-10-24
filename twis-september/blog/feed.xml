@@ -33,21 +33,23 @@
 --&gt;
 &lt;p&gt;September was another busy month for Servo, with a bunch of new features in our nightly builds and &lt;a href=&quot;https://servo.org/twis-september/blog/2025/10/20/servo-0.0.1-release/&quot;&gt;&lt;strong&gt;our very first versioned release&lt;/strong&gt;&lt;/a&gt;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;the &lt;strong&gt;Trusted Types&lt;/strong&gt; API is now stable (@TimvdLippe, #39281)&lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;Trusted Types&lt;/strong&gt; API is now stable (@TimvdLippe, #39281, #39263)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;strokeText()&lt;/strong&gt; on CanvasRenderingContext2D (@sagudev, #39183)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;invertSelf()&lt;/strong&gt; on DOMMatrix (@lumiscosity, #39148)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;getType()&lt;/strong&gt; and &lt;strong&gt;supports()&lt;/strong&gt; on ClipboardItem (@Gae24, #39296)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;getAll()&lt;/strong&gt; and &lt;strong&gt;getAllKeys()&lt;/strong&gt; on IDBObjectStore (@arihant2math, #38885)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;scrollParent&lt;/strong&gt; property on HTMLElement (@mrobinson, @Loirooriol, #39110)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;sizes&lt;/strong&gt; property on HTMLImageElement (@tharkum, #39466)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Viewport meta&lt;/strong&gt; tags are now enabled on mobile devices only, fixing a bug where they were enabled on desktop (@shubhamg13, #39133).
 You can still enable them if needed with &lt;code&gt;--pref viewport_meta_enabled&lt;/code&gt; (@shubhamg13, #39207).&lt;/p&gt;
-&lt;p&gt;The &lt;strong&gt;scrollIntoView()&lt;/strong&gt; method on Element now works with shadow DOM (@mrobinson, @Loirooriol, #39144), and recurses to parent iframes if they are same origin (@Loirooriol, @mrobinson, #39475, #39397, #39153).&lt;/p&gt;
 &lt;p&gt;Servo now supports &lt;strong&gt;‘&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Encoding&quot;&gt;Content-Encoding&lt;/a&gt;: &lt;a href=&quot;https://en.wikipedia.org/wiki/Zstd&quot;&gt;zstd&lt;/a&gt;’&lt;/strong&gt; (@webbeef, #36530), and we’ve fixed a bug causing spurious credentials prompts when a HTTP 401 has no ‘WWW-Authenticate’ header (@simonwuelker, #39215).
-We’ve also made a bunch of progress on &lt;strong&gt;AbortController&lt;/strong&gt; (@TimvdLippe, #39290, #39295, #39374, #39406) and &lt;strong&gt;&amp;lt;link rel=preload&amp;gt;&lt;/strong&gt; (@TimvdLippe, @jdm, #39033, #39034, #39052).&lt;/p&gt;
+We’ve also made a bunch of progress on &lt;strong&gt;AbortController&lt;/strong&gt; (@TimvdLippe, #39290, #39295, #39374, #39406) and &lt;strong&gt;&amp;lt;link rel=preload&amp;gt;&lt;/strong&gt; (@TimvdLippe, @jdm, #39033, #39034, #39052, #39146, #39167).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;‘Content-Security-Policy: sandbox’&lt;/strong&gt; now &lt;strong&gt;disables scripting&lt;/strong&gt; unless &lt;strong&gt;‘allow-scripts’&lt;/strong&gt; is given (@TimvdLippe, #39163), and &lt;strong&gt;crypto.subtle.exportKey()&lt;/strong&gt; can now export HMAC keys in &lt;code&gt;raw&lt;/code&gt; format (@arihant2math, #39059).&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;scrollIntoView()&lt;/strong&gt; method on Element now works with shadow DOM (@mrobinson, @Loirooriol, #39144), and recurses to parent iframes if they are same origin (@Loirooriol, @mrobinson, #39475, #39397, #39153).&lt;/p&gt;
 &lt;p&gt;Several types of &lt;strong&gt;DOM exceptions can now have error messages&lt;/strong&gt; (@arihant2math, @rodio, @excitablesnowball, #39056, #39394, #39535), and we’ve also fixed a bug where links often need to be clicked twice (@yezhizhen, #39326), and fixed bugs affecting &amp;lt;img&amp;gt; attribute changes (@tharkum, #39483), the ‘:defined’ selector (@mukilan, #39325, #39390), invertSelf() on DOMMatrix (@lumiscosity, #39113), and the ‘href’ setter on Location (@arihant2math, @sagudev, #39051).&lt;/p&gt;
 &lt;p&gt;One complex part of Servo isn’t even written in Rust, it’s written in Python!
-&lt;a href=&quot;https://github.com/servo/servo/blob/25d3c5a157e781db8813071a5ba647463546d0cd/components/script_bindings/codegen/codegen.py&quot;&gt;&lt;strong&gt;codegen.py&lt;/strong&gt;&lt;/a&gt;, which describes how to generate Rust code with bindings for every known DOM interface from the WebIDL, is now &lt;strong&gt;fully type annotated&lt;/strong&gt; (@jerensl, @mukilan, #39070).&lt;/p&gt;
+&lt;a href=&quot;https://github.com/servo/servo/blob/25d3c5a157e781db8813071a5ba647463546d0cd/components/script_bindings/codegen/codegen.py&quot;&gt;&lt;strong&gt;codegen.py&lt;/strong&gt;&lt;/a&gt;, which describes how to generate Rust code with bindings for every known DOM interface from the WebIDL, is now &lt;strong&gt;fully type annotated&lt;/strong&gt; (@jerensl, @mukilan, #39070, #38998).&lt;/p&gt;
 &lt;h2 id=&quot;embedding-and-automation&quot; tabindex=&quot;-1&quot;&gt;Embedding and automation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/18/this-month-in-servo/#embedding-and-automation&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;

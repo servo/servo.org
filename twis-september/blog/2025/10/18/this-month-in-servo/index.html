@@ -269,21 +269,23 @@
 -->
 <p>September was another busy month for Servo, with a bunch of new features in our nightly builds and <a href="/twis-september/blog/2025/10/20/servo-0.0.1-release/"><strong>our very first versioned release</strong></a>:</p>
 <ul>
-<li>the <strong>Trusted Types</strong> API is now stable (@TimvdLippe, #39281)</li>
+<li>the <strong>Trusted Types</strong> API is now stable (@TimvdLippe, #39281, #39263)</li>
 <li><strong>strokeText()</strong> on CanvasRenderingContext2D (@sagudev, #39183)</li>
 <li><strong>invertSelf()</strong> on DOMMatrix (@lumiscosity, #39148)</li>
 <li><strong>getType()</strong> and <strong>supports()</strong> on ClipboardItem (@Gae24, #39296)</li>
+<li><strong>getAll()</strong> and <strong>getAllKeys()</strong> on IDBObjectStore (@arihant2math, #38885)</li>
 <li><strong>scrollParent</strong> property on HTMLElement (@mrobinson, @Loirooriol, #39110)</li>
 <li><strong>sizes</strong> property on HTMLImageElement (@tharkum, #39466)</li>
 </ul>
 <p><strong>Viewport meta</strong> tags are now enabled on mobile devices only, fixing a bug where they were enabled on desktop (@shubhamg13, #39133).
 You can still enable them if needed with <code>--pref viewport_meta_enabled</code> (@shubhamg13, #39207).</p>
-<p>The <strong>scrollIntoView()</strong> method on Element now works with shadow DOM (@mrobinson, @Loirooriol, #39144), and recurses to parent iframes if they are same origin (@Loirooriol, @mrobinson, #39475, #39397, #39153).</p>
 <p>Servo now supports <strong>‘<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Encoding">Content-Encoding</a>: <a href="https://en.wikipedia.org/wiki/Zstd">zstd</a>’</strong> (@webbeef, #36530), and we’ve fixed a bug causing spurious credentials prompts when a HTTP 401 has no ‘WWW-Authenticate’ header (@simonwuelker, #39215).
-We’ve also made a bunch of progress on <strong>AbortController</strong> (@TimvdLippe, #39290, #39295, #39374, #39406) and <strong>&lt;link rel=preload&gt;</strong> (@TimvdLippe, @jdm, #39033, #39034, #39052).</p>
+We’ve also made a bunch of progress on <strong>AbortController</strong> (@TimvdLippe, #39290, #39295, #39374, #39406) and <strong>&lt;link rel=preload&gt;</strong> (@TimvdLippe, @jdm, #39033, #39034, #39052, #39146, #39167).</p>
+<p><strong>‘Content-Security-Policy: sandbox’</strong> now <strong>disables scripting</strong> unless <strong>‘allow-scripts’</strong> is given (@TimvdLippe, #39163), and <strong>crypto.subtle.exportKey()</strong> can now export HMAC keys in <code>raw</code> format (@arihant2math, #39059).</p>
+<p>The <strong>scrollIntoView()</strong> method on Element now works with shadow DOM (@mrobinson, @Loirooriol, #39144), and recurses to parent iframes if they are same origin (@Loirooriol, @mrobinson, #39475, #39397, #39153).</p>
 <p>Several types of <strong>DOM exceptions can now have error messages</strong> (@arihant2math, @rodio, @excitablesnowball, #39056, #39394, #39535), and we’ve also fixed a bug where links often need to be clicked twice (@yezhizhen, #39326), and fixed bugs affecting &lt;img&gt; attribute changes (@tharkum, #39483), the ‘:defined’ selector (@mukilan, #39325, #39390), invertSelf() on DOMMatrix (@lumiscosity, #39113), and the ‘href’ setter on Location (@arihant2math, @sagudev, #39051).</p>
 <p>One complex part of Servo isn’t even written in Rust, it’s written in Python!
-<a href="https://github.com/servo/servo/blob/25d3c5a157e781db8813071a5ba647463546d0cd/components/script_bindings/codegen/codegen.py"><strong>codegen.py</strong></a>, which describes how to generate Rust code with bindings for every known DOM interface from the WebIDL, is now <strong>fully type annotated</strong> (@jerensl, @mukilan, #39070).</p>
+<a href="https://github.com/servo/servo/blob/25d3c5a157e781db8813071a5ba647463546d0cd/components/script_bindings/codegen/codegen.py"><strong>codegen.py</strong></a>, which describes how to generate Rust code with bindings for every known DOM interface from the WebIDL, is now <strong>fully type annotated</strong> (@jerensl, @mukilan, #39070, #38998).</p>
 <h2 id="embedding-and-automation" tabindex="-1">Embedding and automation <a class="header-anchor" href="#embedding-and-automation">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
