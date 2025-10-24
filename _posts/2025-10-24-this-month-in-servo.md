@@ -7,13 +7,6 @@ summary:    Click the radioactive symbol button (☢) to enable experimental web
 categories:
 ---
 
-<!--
-- donations 5654.03/month
-    - opencollective 2212.40/month
-    - github 3284.00/month
-    - thanks.dev 157.63/month 28 donors
--->
-
 September was another busy month for Servo, with a bunch of new features landing in our nightly builds:
 
 - the **Trusted Types** API is now stable (@TimvdLippe, #39281, #39263)
