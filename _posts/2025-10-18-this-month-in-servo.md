@@ -80,18 +80,19 @@ Servo currently runs in **single-process mode** unless you opt in to `--multipro
 For one, in single-process mode, script can now **communicate with the embedder directly** for reduced latency (@jschwe, #39039).
 We also create one thread pool for the image cache now, rather than one pool per origin (@rodio, #38783).
 
-Many components of Servo that *would* be [separated by a process boundary](https://book.servo.org/architecture/overview.html#architecture) in multiprocess mode, now use [crossbeam channels](https://docs.rs/crossbeam-channel/0.5.15/crossbeam_channel/) in single-process mode, rather than using [IPC channels](https://docs.rs/ipc-channel/0.20.2/ipc_channel/) in both modes (@jschwe, #39073, #39076, #39345, #39347, #39348).
+Many components of Servo that *would* be [separated by a process boundary](https://book.servo.org/architecture/overview.html#architecture) in multiprocess mode, now use [crossbeam channels](https://docs.rs/crossbeam-channel/0.5.15/crossbeam_channel/) in single-process mode, rather than using [IPC channels](https://docs.rs/ipc-channel/0.20.2/ipc_channel/) in both modes (@jschwe, #39073, #39076, #39345, #39347, #39348, #39074).
 [IPC channels](https://docs.rs/ipc-channel/0.20.2/ipc_channel/) are required when communicating with another process, but they’re more expensive, because they require serialising and deserialising each message, plus resources from the operating system.
 
 We’ve started working on an optimisation for string handling in Servo’s DOM layer (@Narfinger, #39480, #39481, #39504).
 Strings in our DOM have historically been represented as [ordinary Rust strings](https://doc.rust-lang.org/std/string/struct.String.html), but they often come from SpiderMonkey, where they use [a variety of representations](https://searchfox.org/firefox-main/rev/8e5d58cfed616cb90586c614e53d8ab1ffc8af27/js/src/vm/StringType.h#83), none of which are entirely compatible.
 SpiderMonkey strings would continue to need conversion to Servo strings, but the idea we’re working towards is to **make the conversion lazy**, in the hope that many strings will never end up being converted at all.
 
-We now use a faster hash algorithm for internal hashmaps that are not security-critical (@Narfinger, #39106, #39166, #39202, #39233, #39244).
+We now use a faster hash algorithm for internal hashmaps that are not security-critical (@Narfinger, #39106, #39166, #39202, #39233, #39244, #39168).
 These changes also switch that faster algorithm from [FNV](https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function) to an [even simpler polynomial hash](https://docs.rs/rustc-hash/2.1.1/rustc_hash/), following in the footsteps of [Rust](https://github.com/rust-lang/rust/pull/37229) and [Stylo](https://bugzilla.mozilla.org/show_bug.cgi?id=1477628).
 
 We’ve also landed a few more self-contained perf improvements:
 - speeding up accesses to the event loop (@Narfinger, #39274, #39275)
+- avoviding new display lists while loading CSS images (@coding-joedow, #39201)
 - reducing memory usage (@ritoban23, #39351)
 - reducing binary size (@lumiscosity, @Narfinger, #39437, #39567)
 
