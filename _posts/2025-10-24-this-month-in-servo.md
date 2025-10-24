@@ -9,89 +9,89 @@ categories:
 
 September was another busy month for Servo, with a bunch of new features landing in our nightly builds:
 
-- the **Trusted Types** API is now stable (@TimvdLippe, #39281, #39263)
-- **strokeText()** on CanvasRenderingContext2D (@sagudev, #39183)
-- **invertSelf()** on DOMMatrix (@lumiscosity, #39148)
-- **getType()** and **supports()** on ClipboardItem (@Gae24, #39296)
-- **getAll()** and **getAllKeys()** on IDBObjectStore (@arihant2math, #38885)
-- **scrollParent** property on HTMLElement (@mrobinson, @Loirooriol, #39110)
-- **sizes** property on HTMLImageElement (@tharkum, #39466)
+- the **Trusted Types** API is now stable ([@TimvdLippe](https://github.com/TimvdLippe), [#39281](https://github.com/servo/servo/pull/39281), [#39263](https://github.com/servo/servo/pull/39263))
+- **strokeText()** on CanvasRenderingContext2D ([@sagudev](https://github.com/sagudev), [#39183](https://github.com/servo/servo/pull/39183))
+- **invertSelf()** on DOMMatrix ([@lumiscosity](https://github.com/lumiscosity), [#39148](https://github.com/servo/servo/pull/39148))
+- **getType()** and **supports()** on ClipboardItem ([@Gae24](https://github.com/Gae24), [#39296](https://github.com/servo/servo/pull/39296))
+- **getAll()** and **getAllKeys()** on IDBObjectStore ([@arihant2math](https://github.com/arihant2math), [#38885](https://github.com/servo/servo/pull/38885))
+- **scrollParent** property on HTMLElement ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#39110](https://github.com/servo/servo/pull/39110))
+- **sizes** property on HTMLImageElement ([@tharkum](https://github.com/tharkum), [#39466](https://github.com/servo/servo/pull/39466))
 
 <figure>
     <img src="{{ '/img/blog/2025-10-diffie.jpg' | url }}" alt="servoshell nightly showing new support for the strokeText() method on CanvasRenderingContext2D">
 </figure>
 
-**Viewport meta** tags are now enabled on mobile devices only, fixing a bug where they were enabled on desktop (@shubhamg13, #39133).
-You can still enable them if needed with `--pref viewport_meta_enabled` (@shubhamg13, #39207).
+**Viewport meta** tags are now enabled on mobile devices only, fixing a bug where they were enabled on desktop ([@shubhamg13](https://github.com/shubhamg13), [#39133](https://github.com/servo/servo/pull/39133)).
+You can still enable them if needed with `--pref viewport_meta_enabled` ([@shubhamg13](https://github.com/shubhamg13), [#39207](https://github.com/servo/servo/pull/39207)).
 
-Servo now supports **‘[Content-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Encoding): [zstd](https://en.wikipedia.org/wiki/Zstd)’** (@webbeef, #36530), and we’ve fixed a bug causing spurious credentials prompts when a HTTP 401 has no ‘WWW-Authenticate’ header (@simonwuelker, #39215).
-We’ve also made a bunch of progress on **AbortController** (@TimvdLippe, #39290, #39295, #39374, #39406) and **&lt;link rel=preload>** (@TimvdLippe, @jdm, #39033, #39034, #39052, #39146, #39167).
+Servo now supports **‘[Content-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Encoding): [zstd](https://en.wikipedia.org/wiki/Zstd)’** ([@webbeef](https://github.com/webbeef), [#36530](https://github.com/servo/servo/pull/36530)), and we’ve fixed a bug causing spurious credentials prompts when a HTTP 401 has no ‘WWW-Authenticate’ header ([@simonwuelker](https://github.com/simonwuelker), [#39215](https://github.com/servo/servo/pull/39215)).
+We’ve also made a bunch of progress on **AbortController** ([@TimvdLippe](https://github.com/TimvdLippe), [#39290](https://github.com/servo/servo/pull/39290), [#39295](https://github.com/servo/servo/pull/39295), [#39374](https://github.com/servo/servo/pull/39374), [#39406](https://github.com/servo/servo/pull/39406)) and **&lt;link rel=preload>** ([@TimvdLippe](https://github.com/TimvdLippe), [@jdm](https://github.com/jdm), [#39033](https://github.com/servo/servo/pull/39033), [#39034](https://github.com/servo/servo/pull/39034), [#39052](https://github.com/servo/servo/pull/39052), [#39146](https://github.com/servo/servo/pull/39146), [#39167](https://github.com/servo/servo/pull/39167)).
 
-**‘Content-Security-Policy: sandbox’** now **disables scripting** unless **‘allow-scripts’** is given (@TimvdLippe, #39163), and **crypto.subtle.exportKey()** can now export HMAC keys in `raw` format (@arihant2math, #39059).
+**‘Content-Security-Policy: sandbox’** now **disables scripting** unless **‘allow-scripts’** is given ([@TimvdLippe](https://github.com/TimvdLippe), [#39163](https://github.com/servo/servo/pull/39163)), and **crypto.subtle.exportKey()** can now export HMAC keys in `raw` format ([@arihant2math](https://github.com/arihant2math), [#39059](https://github.com/servo/servo/pull/39059)).
 
-The **scrollIntoView()** method on Element now works with shadow DOM (@mrobinson, @Loirooriol, #39144), and recurses to parent iframes if they are same origin (@Loirooriol, @mrobinson, #39475, #39397, #39153).
+The **scrollIntoView()** method on Element now works with shadow DOM ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#39144](https://github.com/servo/servo/pull/39144)), and recurses to parent iframes if they are same origin ([@Loirooriol](https://github.com/Loirooriol), [@mrobinson](https://github.com/mrobinson), [#39475](https://github.com/servo/servo/pull/39475), [#39397](https://github.com/servo/servo/pull/39397), [#39153](https://github.com/servo/servo/pull/39153)).
 
-Several types of **DOM exceptions can now have error messages** (@arihant2math, @rodio, @excitablesnowball, #39056, #39394, #39535), and we’ve also fixed a bug where links often need to be clicked twice (@yezhizhen, #39326), and fixed bugs affecting &lt;img> attribute changes (@tharkum, #39483), the ‘:defined’ selector (@mukilan, #39325, #39390), invertSelf() on DOMMatrix (@lumiscosity, #39113), and the ‘href’ setter on Location (@arihant2math, @sagudev, #39051).
+Several types of **DOM exceptions can now have error messages** ([@arihant2math](https://github.com/arihant2math), [@rodio](https://github.com/rodio), [@excitablesnowball](https://github.com/excitablesnowball), [#39056](https://github.com/servo/servo/pull/39056), [#39394](https://github.com/servo/servo/pull/39394), [#39535](https://github.com/servo/servo/pull/39535)), and we’ve also fixed a bug where links often need to be clicked twice ([@yezhizhen](https://github.com/yezhizhen), [#39326](https://github.com/servo/servo/pull/39326)), and fixed bugs affecting &lt;img> attribute changes ([@tharkum](https://github.com/tharkum), [#39483](https://github.com/servo/servo/pull/39483)), the ‘:defined’ selector ([@mukilan](https://github.com/mukilan), [#39325](https://github.com/servo/servo/pull/39325), [#39390](https://github.com/servo/servo/pull/39390)), invertSelf() on DOMMatrix ([@lumiscosity](https://github.com/lumiscosity), [#39113](https://github.com/servo/servo/pull/39113)), and the ‘href’ setter on Location ([@arihant2math](https://github.com/arihant2math), [@sagudev](https://github.com/sagudev), [#39051](https://github.com/servo/servo/pull/39051)).
 
 One complex part of Servo isn’t even written in Rust, it’s written in Python!
-[**codegen.py**](https://github.com/servo/servo/blob/25d3c5a157e781db8813071a5ba647463546d0cd/components/script_bindings/codegen/codegen.py), which describes how to generate Rust code with bindings for every known DOM interface from the WebIDL, is now **fully type annotated** (@jerensl, @mukilan, #39070, #38998).
+[**codegen.py**](https://github.com/servo/servo/blob/25d3c5a157e781db8813071a5ba647463546d0cd/components/script_bindings/codegen/codegen.py), which describes how to generate Rust code with bindings for every known DOM interface from the WebIDL, is now **fully type annotated** ([@jerensl](https://github.com/jerensl), [@mukilan](https://github.com/mukilan), [#39070](https://github.com/servo/servo/pull/39070), [#38998](https://github.com/servo/servo/pull/38998)).
 
 ## Embedding and automation
 
-Servo now requires **Rust 1.86** to build (@sagudev, #39185).
+Servo now requires **Rust 1.86** to build ([@sagudev](https://github.com/sagudev), [#39185](https://github.com/servo/servo/pull/39185)).
 
-**Keyboard scrolling** is now automatically implemented by Servo (@delan, @mrobinson, #39371, #39469), so embedders [no longer](https://github.com/servo/servo/pull/39371/files#diff-24ced12025398fd76b233d19f4507362ae8b3848157577d8041effc4c4a229ae) need to translate **arrow keys**, **Home**, **End**, **Page Up**, and **Page Down** to WebView API calls.
+**Keyboard scrolling** is now automatically implemented by Servo ([@delan](https://github.com/delan), [@mrobinson](https://github.com/mrobinson), [#39371](https://github.com/servo/servo/pull/39371), [#39469](https://github.com/servo/servo/pull/39469)), so embedders [no longer](https://github.com/servo/servo/pull/39371/files#diff-24ced12025398fd76b233d19f4507362ae8b3848157577d8041effc4c4a229ae) need to translate **arrow keys**, **Home**, **End**, **Page Up**, and **Page Down** to WebView API calls.
 This change also improves the behaviour of those keys, scrolling the element or &lt;iframe> that was focused or most recently clicked (or a nearby ancestor).
 
-<code>[DebugOptions](https://doc.servo.org/servo_config/opts/struct.DebugOptions.html)::convert_mouse_to_touch</code> (`-Z convert-mouse-to-touch`) has been removed (@mrobinson, #39352), with no replacement.
+<code>[DebugOptions](https://doc.servo.org/servo_config/opts/struct.DebugOptions.html)::convert_mouse_to_touch</code> (`-Z convert-mouse-to-touch`) has been removed ([@mrobinson](https://github.com/mrobinson), [#39352](https://github.com/servo/servo/pull/39352)), with no replacement.
 Touch event simulation continues to be available in servoshell as `--simulate-touch-events`.
 
-<code>[DebugOptions](https://doc.servo.org/servo_config/opts/struct.DebugOptions.html)::webrender_stats</code> (`-Z wr-stats` in servoshell) has been removed (@mrobinson, #39331); instead call <code>[toggle_webrender_debugging](https://doc.servo.org/servo/struct.WebView.html#method.toggle_webrender_debugging)([Profiler](https://doc.servo.org/servo/enum.WebRenderDebugOption.html#variant.Profiler))</code> on a WebView (or press **Ctrl**+**F12** in servoshell).
+<code>[DebugOptions](https://doc.servo.org/servo_config/opts/struct.DebugOptions.html)::webrender_stats</code> (`-Z wr-stats` in servoshell) has been removed ([@mrobinson](https://github.com/mrobinson), [#39331](https://github.com/servo/servo/pull/39331)); instead call <code>[toggle_webrender_debugging](https://doc.servo.org/servo/struct.WebView.html#method.toggle_webrender_debugging)([Profiler](https://doc.servo.org/servo/enum.WebRenderDebugOption.html#variant.Profiler))</code> on a WebView (or press **Ctrl**+**F12** in servoshell).
 
-<code>[DebugOptions](https://doc.servo.org/servo_config/opts/struct.DebugOptions.html)::trace_layout</code> (`-Z trace-layout`) has been removed (@mrobinson, #39332), since it had no effect.
+<code>[DebugOptions](https://doc.servo.org/servo_config/opts/struct.DebugOptions.html)::trace_layout</code> (`-Z trace-layout`) has been removed ([@mrobinson](https://github.com/mrobinson), [#39332](https://github.com/servo/servo/pull/39332)), since it had no effect.
 
-We’ve improved the docs for <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::[notify_history_changed](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_history_changed)</code> (@Narfinger, @mrobinson, @yezhizhen, #39134).
+We’ve improved the docs for <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::[notify_history_changed](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_history_changed)</code> ([@Narfinger](https://github.com/Narfinger), [@mrobinson](https://github.com/mrobinson), [@yezhizhen](https://github.com/yezhizhen), [#39134](https://github.com/servo/servo/pull/39134)).
 
-When automating servoshell with **WebDriver**, commands **targeting elements** now correctly **scroll into view** if needed (@PotatoCP, @yezhizhen, #38508, #39265), allowing **Element Click**, **Element Send Keys**, **Element Clear**, and **Take Element Screenshot** to work properly when the element is outside the viewport.
+When automating servoshell with **WebDriver**, commands **targeting elements** now correctly **scroll into view** if needed ([@PotatoCP](https://github.com/PotatoCP), [@yezhizhen](https://github.com/yezhizhen), [#38508](https://github.com/servo/servo/pull/38508), [#39265](https://github.com/servo/servo/pull/39265)), allowing **Element Click**, **Element Send Keys**, **Element Clear**, and **Take Element Screenshot** to work properly when the element is outside the viewport.
 
-**WebDriver mouse inputs** now work correctly with **HiDPI scaling** on more platforms (@mrobinson, #39472), and we’ve improved the reliability of **Take Screenshot**, **Take Element Screenshot** (@yezhizhen, #39499, #39539, #39543), **Switch To Frame** (@yezhizhen, #39086), **Switch To Window** (@yezhizhen, #39241), and **New Session** (@yezhizhen, #39040).
+**WebDriver mouse inputs** now work correctly with **HiDPI scaling** on more platforms ([@mrobinson](https://github.com/mrobinson), [#39472](https://github.com/servo/servo/pull/39472)), and we’ve improved the reliability of **Take Screenshot**, **Take Element Screenshot** ([@yezhizhen](https://github.com/yezhizhen), [#39499](https://github.com/servo/servo/pull/39499), [#39539](https://github.com/servo/servo/pull/39539), [#39543](https://github.com/servo/servo/pull/39543)), **Switch To Frame** ([@yezhizhen](https://github.com/yezhizhen), [#39086](https://github.com/servo/servo/pull/39086)), **Switch To Window** ([@yezhizhen](https://github.com/yezhizhen), [#39241](https://github.com/servo/servo/pull/39241)), and **New Session** ([@yezhizhen](https://github.com/yezhizhen), [#39040](https://github.com/servo/servo/pull/39040)).
 
-These improvements have enabled us to run the **WebDriver conformance tests** in CI by default (@PotatoCP, #39087), and also mean we’re closer than ever to running [WebDriver-based Web Platform Tests](https://web-platform-tests.org/writing-tests/testdriver.html).
+These improvements have enabled us to run the **WebDriver conformance tests** in CI by default ([@PotatoCP](https://github.com/PotatoCP), [#39087](https://github.com/servo/servo/pull/39087)), and also mean we’re closer than ever to running [WebDriver-based Web Platform Tests](https://web-platform-tests.org/writing-tests/testdriver.html).
 
 ## servoshell
 
-You can now **enable experimental web platform features** with the click of a button (@jdm, #39125), instead of passing the command line option.
+You can now **enable experimental web platform features** with the click of a button ([@jdm](https://github.com/jdm), [#39125](https://github.com/servo/servo/pull/39125)), instead of passing the command line option.
 
-**Favicons** now update correctly when you **navigate back and forward** (@webbeef, #39575), not just when you load a new page.
+**Favicons** now update correctly when you **navigate back and forward** ([@webbeef](https://github.com/webbeef), [#39575](https://github.com/servo/servo/pull/39575)), not just when you load a new page.
 
-servoshell’s **command line argument parsing** has been reworked (@Narfinger, #37194, #39316), which should fix the confusing behaviour of some options.
+servoshell’s **command line argument parsing** has been reworked ([@Narfinger](https://github.com/Narfinger), [#37194](https://github.com/servo/servo/pull/37194), [#39316](https://github.com/servo/servo/pull/39316)), which should fix the confusing behaviour of some options.
 
-On mobile devices, servoshell now resizes the webview correctly when the available space changes (@blueguy1, @yjx, @yezhizhen, #39507).
+On mobile devices, servoshell now resizes the webview correctly when the available space changes ([@blueguy1](https://github.com/blueguy1), [@yjx](https://github.com/yjx), [@yezhizhen](https://github.com/yezhizhen), [#39507](https://github.com/servo/servo/pull/39507)).
 
-On macOS, telling servoshell to [**take a screenshot**](https://w3c.github.io/webdriver/#screen-capture) no longer hides the window (@mrobinson, #39500).
+On macOS, telling servoshell to [**take a screenshot**](https://w3c.github.io/webdriver/#screen-capture) no longer hides the window ([@mrobinson](https://github.com/mrobinson), [#39500](https://github.com/servo/servo/pull/39500)).
 This does not affect taking a screenshot in headless mode (`--headless`), where there continues to be no window at all.
 
 ## Performance
 
 Servo currently runs in **single-process mode** unless you opt in to `--multiprocess` mode, and we’ve landed a few perf improvements in that default mode.
-For one, in single-process mode, script can now **communicate with the embedder directly** for reduced latency (@jschwe, #39039).
-We also create one thread pool for the image cache now, rather than one pool per origin (@rodio, #38783).
+For one, in single-process mode, script can now **communicate with the embedder directly** for reduced latency ([@jschwe](https://github.com/jschwe), [#39039](https://github.com/servo/servo/pull/39039)).
+We also create one thread pool for the image cache now, rather than one pool per origin ([@rodio](https://github.com/rodio), [#38783](https://github.com/servo/servo/pull/38783)).
 
-Many components of Servo that *would* be [separated by a process boundary](https://book.servo.org/architecture/overview.html#architecture) in multiprocess mode, now use [crossbeam channels](https://docs.rs/crossbeam-channel/0.5.15/crossbeam_channel/) in single-process mode, rather than using [IPC channels](https://docs.rs/ipc-channel/0.20.2/ipc_channel/) in both modes (@jschwe, #39073, #39076, #39345, #39347, #39348, #39074).
+Many components of Servo that *would* be [separated by a process boundary](https://book.servo.org/architecture/overview.html#architecture) in multiprocess mode, now use [crossbeam channels](https://docs.rs/crossbeam-channel/0.5.15/crossbeam_channel/) in single-process mode, rather than using [IPC channels](https://docs.rs/ipc-channel/0.20.2/ipc_channel/) in both modes ([@jschwe](https://github.com/jschwe), [#39073](https://github.com/servo/servo/pull/39073), [#39076](https://github.com/servo/servo/pull/39076), [#39345](https://github.com/servo/servo/pull/39345), [#39347](https://github.com/servo/servo/pull/39347), [#39348](https://github.com/servo/servo/pull/39348), [#39074](https://github.com/servo/servo/pull/39074)).
 [IPC channels](https://docs.rs/ipc-channel/0.20.2/ipc_channel/) are required when communicating with another process, but they’re more expensive, because they require serialising and deserialising each message, plus resources from the operating system.
 
-We’ve started working on an optimisation for string handling in Servo’s DOM layer (@Narfinger, #39480, #39481, #39504).
+We’ve started working on an optimisation for string handling in Servo’s DOM layer ([@Narfinger](https://github.com/Narfinger), [#39480](https://github.com/servo/servo/pull/39480), [#39481](https://github.com/servo/servo/pull/39481), [#39504](https://github.com/servo/servo/pull/39504)).
 Strings in our DOM have historically been represented as [ordinary Rust strings](https://doc.rust-lang.org/std/string/struct.String.html), but they often come from SpiderMonkey, where they use [a variety of representations](https://searchfox.org/firefox-main/rev/8e5d58cfed616cb90586c614e53d8ab1ffc8af27/js/src/vm/StringType.h#83), none of which are entirely compatible.
 SpiderMonkey strings would continue to need conversion to Servo strings, but the idea we’re working towards is to **make the conversion lazy**, in the hope that many strings will never end up being converted at all.
 
-We now use a faster hash algorithm for internal hashmaps that are not security-critical (@Narfinger, #39106, #39166, #39202, #39233, #39244, #39168).
+We now use a faster hash algorithm for internal hashmaps that are not security-critical ([@Narfinger](https://github.com/Narfinger), [#39106](https://github.com/servo/servo/pull/39106), [#39166](https://github.com/servo/servo/pull/39166), [#39202](https://github.com/servo/servo/pull/39202), [#39233](https://github.com/servo/servo/pull/39233), [#39244](https://github.com/servo/servo/pull/39244), [#39168](https://github.com/servo/servo/pull/39168)).
 These changes also switch that faster algorithm from [FNV](https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function) to an [even simpler polynomial hash](https://docs.rs/rustc-hash/2.1.1/rustc_hash/), following in the footsteps of [Rust](https://github.com/rust-lang/rust/pull/37229) and [Stylo](https://bugzilla.mozilla.org/show_bug.cgi?id=1477628).
 
 We’ve also landed a few more self-contained perf improvements:
-- speeding up accesses to the event loop (@Narfinger, #39274, #39275)
-- avoviding new display lists while loading CSS images (@coding-joedow, #39201)
-- reducing memory usage (@ritoban23, #39351)
-- reducing binary size (@lumiscosity, @Narfinger, #39437, #39567)
+- speeding up accesses to the event loop ([@Narfinger](https://github.com/Narfinger), [#39274](https://github.com/servo/servo/pull/39274), [#39275](https://github.com/servo/servo/pull/39275))
+- avoviding new display lists while loading CSS images ([@coding-joedow](https://github.com/coding-joedow), [#39201](https://github.com/servo/servo/pull/39201))
+- reducing memory usage ([@ritoban23](https://github.com/ritoban23), [#39351](https://github.com/servo/servo/pull/39351))
+- reducing binary size ([@lumiscosity](https://github.com/lumiscosity), [@Narfinger](https://github.com/Narfinger), [#39437](https://github.com/servo/servo/pull/39437), [#39567](https://github.com/servo/servo/pull/39567))
 
 ## Donations
 
@@ -119,17 +119,17 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
 ## Conference talks
 
-**[MiniApps Design and Servo](https://ke.segmentfault.com/course/1650000043885605/section/1500000047216580)** (starting at ~2:37:00; [slides](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/slides/gregory-terzian.pdf)) — Gregory Terzian (@gterzian) spoke about how Servo can be used as a web engine for mini-app platforms at [WebEvolve 2025](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/high-perf.en.html)
+**[MiniApps Design and Servo](https://ke.segmentfault.com/course/1650000043885605/section/1500000047216580)** (starting at ~2:37:00; [slides](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/slides/gregory-terzian.pdf)) — Gregory Terzian ([@gterzian](https://github.com/gterzian)) spoke about how Servo can be used as a web engine for mini-app platforms at [WebEvolve 2025](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/high-perf.en.html)
 
-**[独⽴的，轻量级，模块化与并⾏处理架构的Web引擎开发](https://ke.segmentfault.com/course/1650000043885605/section/1500000047216580)** [zh] / **Developing an independent, light-weight, modular and parallel web-engine** [en] (starting at ~5:49:00; [slides](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/slides/jonathan-schwender.pdf)) — Jonathan Schwender (@jschwe) spoke about Servo’s goals and status at [WebEvolve 2025](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/high-perf.en.html)
+**[独⽴的，轻量级，模块化与并⾏处理架构的Web引擎开发](https://ke.segmentfault.com/course/1650000043885605/section/1500000047216580)** [zh] / **Developing an independent, light-weight, modular and parallel web-engine** [en] (starting at ~5:49:00; [slides](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/slides/jonathan-schwender.pdf)) — Jonathan Schwender ([@jschwe](https://github.com/jschwe)) spoke about Servo’s goals and status at [WebEvolve 2025](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/high-perf.en.html)
 
-**Servo: A new web engine written in Rust**\* ([slides](https://docs.google.com/presentation/d/1t15UKit4UPkZ-4ankkvsTJdpQWdBCmeTXLALeLk9n34); [transcript](https://blogs.igalia.com/mrego/servo-a-new-web-engine-written-in-rust/)) — Manuel Rego (@rego) spoke about the Servo project at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
+**Servo: A new web engine written in Rust**\* ([slides](https://docs.google.com/presentation/d/1t15UKit4UPkZ-4ankkvsTJdpQWdBCmeTXLALeLk9n34); [transcript](https://blogs.igalia.com/mrego/servo-a-new-web-engine-written-in-rust/)) — Manuel Rego ([@rego](https://github.com/rego)) spoke about the Servo project at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
 
-**Driving Innovation with Servo and OpenHarmony: Unified Rendering and WebDriver**\* ([slides]({{ '/files/2025-09-13-driving-innovation-with-servo-and-openharmony-unified-rendering-and-webdriver.pdf' | url}})) — Jingshi Shangguan &amp; Zhizhen Ye (@yezhizhen) spoke about a new OpenHarmony rendering backend and WebDriver support in Servo at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
+**Driving Innovation with Servo and OpenHarmony: Unified Rendering and WebDriver**\* ([slides]({{ '/files/2025-09-13-driving-innovation-with-servo-and-openharmony-unified-rendering-and-webdriver.pdf' | url}})) — Jingshi Shangguan &amp; Zhizhen Ye ([@yezhizhen](https://github.com/yezhizhen)) spoke about a new OpenHarmony rendering backend and WebDriver support in Servo at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
 
-**The Joy and Value of Embedded Servo Systems**\* ([slides]({{ '/files/2025-09-13-the-joy-and-value-of-embedded-servo-systems.pdf' | url}})) — Gregory Terzian (@gterzian) spoke about embedding Servo at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
+**The Joy and Value of Embedded Servo Systems**\* ([slides]({{ '/files/2025-09-13-the-joy-and-value-of-embedded-servo-systems.pdf' | url}})) — Gregory Terzian ([@gterzian](https://github.com/gterzian)) spoke about embedding Servo at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
 
-**A Dive Into the Servo Layout System**\* ([slides]({{ '/files/2025-09-13-a-dive-into-the-servo-layout-system.pdf' | url }})) — Martin Robinson (@mrobinson) &amp; Oriol Brufau (@obrufau) spoke about the architecture of Servo’s parallel and incremental layout system at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
+**A Dive Into the Servo Layout System**\* ([slides]({{ '/files/2025-09-13-a-dive-into-the-servo-layout-system.pdf' | url }})) — Martin Robinson ([@mrobinson](https://github.com/mrobinson)) &amp; Oriol Brufau ([@obrufau](https://github.com/obrufau)) spoke about the architecture of Servo’s parallel and incremental layout system at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
 
 <small>\* video coming soon; go to our [About page]({{ '/about/' | url }}) for updates</small>
 
