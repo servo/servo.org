@@ -24,6 +24,10 @@ September was another busy month for Servo, with a bunch of new features in our 
 - **scrollParent** property on HTMLElement (@mrobinson, @Loirooriol, #39110)
 - **sizes** property on HTMLImageElement (@tharkum, #39466)
 
+<figure>
+    <img src="{{ '/img/blog/2025-10-diffie.jpg' | url }}" alt="servoshell nightly showing new support for the strokeText() method on CanvasRenderingContext2D">
+</figure>
+
 **Viewport meta** tags are now enabled on mobile devices only, fixing a bug where they were enabled on desktop (@shubhamg13, #39133).
 You can still enable them if needed with `--pref viewport_meta_enabled` (@shubhamg13, #39207).
 
