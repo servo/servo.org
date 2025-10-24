@@ -124,6 +124,22 @@ If you use Servo libraries like [url](https://crates.io/crates/url/reverse_depen
 Use of donations is decided transparently via the Technical Steering Committee’s public **[funding request process](https://github.com/servo/project/blob/main/FUNDING_REQUEST.md)**, and active proposals are tracked in [servo/project#187](https://github.com/servo/project/issues/187).
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
+## Conference talks
+
+**[MiniApps Design and Servo](https://ke.segmentfault.com/course/1650000043885605/section/1500000047216580)** (starting at ~2:37:00; [slides](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/slides/gregory-terzian.pdf)) — Gregory Terzian (@gterzian) spoke about how Servo can be used as a web engine for mini-app platforms at [WebEvolve 2025](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/high-perf.en.html)
+
+**[独⽴的，轻量级，模块化与并⾏处理架构的Web引擎开发](https://ke.segmentfault.com/course/1650000043885605/section/1500000047216580)** [zh] / **Developing an independent, light-weight, modular and parallel web-engine** [en] (starting at ~5:49:00; [slides](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/slides/jonathan-schwender.pdf)) — Jonathan Schwender (@jschwe) spoke about Servo’s goals and status at [WebEvolve 2025](https://www.w3.org/2024/01/webevolve-series-events/annual-2025/high-perf.en.html)
+
+**Servo: A new web engine written in Rust**\* ([slides](https://docs.google.com/presentation/d/1t15UKit4UPkZ-4ankkvsTJdpQWdBCmeTXLALeLk9n34); [transcript](https://blogs.igalia.com/mrego/servo-a-new-web-engine-written-in-rust/)) — Manuel Rego (@rego) spoke about the Servo project at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
+
+**Driving Innovation with Servo and OpenHarmony: Unified Rendering and WebDriver**\* ([slides]({{ '/files/2025-09-13-driving-innovation-with-servo-and-openharmony-unified-rendering-and-webdriver.pdf' | url}})) — Jingshi Shangguan &amp; Zhizhen Ye (@yezhizhen) spoke about a new OpenHarmony rendering backend and WebDriver support in Servo at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
+
+**The Joy and Value of Embedded Servo Systems**\* ([slides]({{ '/files/2025-09-13-the-joy-and-value-of-embedded-servo-systems.pdf' | url}})) — Gregory Terzian (@gterzian) spoke about embedding Servo at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
+
+**A Dive Into the Servo Layout System**\* ([slides]({{ '/files/2025-09-13-a-dive-into-the-servo-layout-system.pdf' | url }})) — Martin Robinson (@mrobinson) &amp; Oriol Brufau (@obrufau) spoke about the architecture of Servo’s parallel and incremental layout system at [GOSIM Hangzhou 2025](https://hangzhou2025.gosim.org)
+
+<small>\* video coming soon; go to our [About page]({{ '/about/' | url }}) for updates</small>
+
 <style>
     ._correction {
         max-width: 33em;
