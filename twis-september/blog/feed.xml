@@ -4,27 +4,17 @@
   <subtitle>All the entries in the Servo blog.</subtitle>
   <link href="https://servo.org/blog/feed.xml" rel="self"/>
   <link href="https://servo.org"/>
-  <updated>2025-10-20T00:00:00Z</updated>
+  <updated>2025-10-24T00:00:00Z</updated>
   <id>https://servo.org</id>
   <author>
     <name>Servo Team</name>
     <email>info@servo.org</email>
   </author>
   <entry>
-    <title>Servo 0.0.1 Release</title>
-    <link href="https://servo.org/twis-september/blog/2025/10/20/servo-0.0.1-release/"/>
-    <updated>2025-10-20T00:00:00Z</updated>
-    <id>https://servo.org/twis-september/blog/2025/10/20/servo-0.0.1-release/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;Today, the Servo team has released new versions of the &lt;code&gt;servoshell&lt;/code&gt; binaries for all our supported platforms, tagged &lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.0.1&quot;&gt;v0.0.1&lt;/a&gt;. These binaries are essentially the same nightly builds that were already available from the &lt;a href=&quot;https://servo.org/download&quot;&gt;download page&lt;/a&gt; with additional manual testing, now tagging them explicitly as releases for future reference.&lt;/p&gt;
-&lt;p&gt;We plan to publish such a tagged release every month. For now, we are adopting a simple release process where we will use a recent nightly build and perform additional manual testing to identify issues and regressions before tagging and publishing the binaries.&lt;/p&gt;
-&lt;p&gt;There are currently no plans to publish these releases on &lt;a href=&quot;https://crates.io/&quot;&gt;crates.io&lt;/a&gt; or platform-specific app stores. The goal is just to publish &lt;a href=&quot;https://github.com/servo/servo/releases&quot;&gt;tagged releases on GitHub&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>This month in Servo: and more!</title>
-    <link href="https://servo.org/twis-september/blog/2025/10/18/this-month-in-servo/"/>
-    <updated>2025-10-18T00:00:00Z</updated>
-    <id>https://servo.org/twis-september/blog/2025/10/18/this-month-in-servo/</id>
+    <title>This month in Servo: experimental mode, Trusted Types, strokeText(), and more!</title>
+    <link href="https://servo.org/twis-september/blog/2025/10/24/this-month-in-servo/"/>
+    <updated>2025-10-24T00:00:00Z</updated>
+    <id>https://servo.org/twis-september/blog/2025/10/24/this-month-in-servo/</id>
     <content xml:lang="en" type="html">&lt;!--
 - donations 5654.03/month
     - opencollective 2212.40/month
@@ -53,7 +43,7 @@ We’ve also made a bunch of progress on &lt;strong&gt;AbortController&lt;/stron
 &lt;p&gt;Several types of &lt;strong&gt;DOM exceptions can now have error messages&lt;/strong&gt; (@arihant2math, @rodio, @excitablesnowball, #39056, #39394, #39535), and we’ve also fixed a bug where links often need to be clicked twice (@yezhizhen, #39326), and fixed bugs affecting &amp;lt;img&amp;gt; attribute changes (@tharkum, #39483), the ‘:defined’ selector (@mukilan, #39325, #39390), invertSelf() on DOMMatrix (@lumiscosity, #39113), and the ‘href’ setter on Location (@arihant2math, @sagudev, #39051).&lt;/p&gt;
 &lt;p&gt;One complex part of Servo isn’t even written in Rust, it’s written in Python!
 &lt;a href=&quot;https://github.com/servo/servo/blob/25d3c5a157e781db8813071a5ba647463546d0cd/components/script_bindings/codegen/codegen.py&quot;&gt;&lt;strong&gt;codegen.py&lt;/strong&gt;&lt;/a&gt;, which describes how to generate Rust code with bindings for every known DOM interface from the WebIDL, is now &lt;strong&gt;fully type annotated&lt;/strong&gt; (@jerensl, @mukilan, #39070, #38998).&lt;/p&gt;
-&lt;h2 id=&quot;embedding-and-automation&quot; tabindex=&quot;-1&quot;&gt;Embedding and automation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/18/this-month-in-servo/#embedding-and-automation&quot;&gt;
+&lt;h2 id=&quot;embedding-and-automation&quot; tabindex=&quot;-1&quot;&gt;Embedding and automation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/24/this-month-in-servo/#embedding-and-automation&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Servo now requires &lt;strong&gt;Rust 1.86&lt;/strong&gt; to build (@sagudev, #39185).&lt;/p&gt;
@@ -67,7 +57,7 @@ Touch event simulation continues to be available in servoshell as &lt;code&gt;--
 &lt;p&gt;When automating servoshell with &lt;strong&gt;WebDriver&lt;/strong&gt;, commands &lt;strong&gt;targeting elements&lt;/strong&gt; now correctly &lt;strong&gt;scroll into view&lt;/strong&gt; if needed (@PotatoCP, @yezhizhen, #38508, #39265), allowing &lt;strong&gt;Element Click&lt;/strong&gt;, &lt;strong&gt;Element Send Keys&lt;/strong&gt;, &lt;strong&gt;Element Clear&lt;/strong&gt;, and &lt;strong&gt;Take Element Screenshot&lt;/strong&gt; to work properly when the element is outside the viewport.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;WebDriver mouse inputs&lt;/strong&gt; now work correctly with &lt;strong&gt;HiDPI scaling&lt;/strong&gt; on more platforms (@mrobinson, #39472), and we’ve improved the reliability of &lt;strong&gt;Take Screenshot&lt;/strong&gt;, &lt;strong&gt;Take Element Screenshot&lt;/strong&gt; (@yezhizhen, #39499, #39539, #39543), &lt;strong&gt;Switch To Frame&lt;/strong&gt; (@yezhizhen, #39086), &lt;strong&gt;Switch To Window&lt;/strong&gt; (@yezhizhen, #39241), and &lt;strong&gt;New Session&lt;/strong&gt; (@yezhizhen, #39040).&lt;/p&gt;
 &lt;p&gt;These improvements have enabled us to run the &lt;strong&gt;WebDriver conformance tests&lt;/strong&gt; in CI by default (@PotatoCP, #39087), and also mean we’re closer than ever to running &lt;a href=&quot;https://web-platform-tests.org/writing-tests/testdriver.html&quot;&gt;WebDriver-based Web Platform Tests&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;servoshell&quot; tabindex=&quot;-1&quot;&gt;servoshell &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/18/this-month-in-servo/#servoshell&quot;&gt;
+&lt;h2 id=&quot;servoshell&quot; tabindex=&quot;-1&quot;&gt;servoshell &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/24/this-month-in-servo/#servoshell&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;You can now &lt;strong&gt;enable experimental web platform features&lt;/strong&gt; with the click of a button (@jdm, #39125), instead of passing the command line option.&lt;/p&gt;
@@ -76,7 +66,7 @@ Touch event simulation continues to be available in servoshell as &lt;code&gt;--
 &lt;p&gt;On mobile devices, servoshell now resizes the webview correctly when the available space changes (@blueguy1, @yjx, @yezhizhen, #39507).&lt;/p&gt;
 &lt;p&gt;On macOS, telling servoshell to &lt;a href=&quot;https://w3c.github.io/webdriver/#screen-capture&quot;&gt;&lt;strong&gt;take a screenshot&lt;/strong&gt;&lt;/a&gt; no longer hides the window (@mrobinson, #39500).
 This does not affect taking a screenshot in headless mode (&lt;code&gt;--headless&lt;/code&gt;), where there continues to be no window at all.&lt;/p&gt;
-&lt;h2 id=&quot;performance&quot; tabindex=&quot;-1&quot;&gt;Performance &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/18/this-month-in-servo/#performance&quot;&gt;
+&lt;h2 id=&quot;performance&quot; tabindex=&quot;-1&quot;&gt;Performance &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/24/this-month-in-servo/#performance&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Servo currently runs in &lt;strong&gt;single-process mode&lt;/strong&gt; unless you opt in to &lt;code&gt;--multiprocess&lt;/code&gt; mode, and we’ve landed a few perf improvements in that default mode.
@@ -96,7 +86,7 @@ These changes also switch that faster algorithm from &lt;a href=&quot;https://en
 &lt;li&gt;reducing memory usage (@ritoban23, #39351)&lt;/li&gt;
 &lt;li&gt;reducing binary size (@lumiscosity, @Narfinger, #39437, #39567)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/18/this-month-in-servo/#donations&quot;&gt;
+&lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/24/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Thanks again for your generous support!
@@ -116,7 +106,7 @@ If you use Servo libraries like &lt;a href=&quot;https://crates.io/crates/url/re
 &lt;/div&gt;&lt;/figure&gt;
 &lt;p&gt;Use of donations is decided transparently via the Technical Steering Committee’s public &lt;strong&gt;&lt;a href=&quot;https://github.com/servo/project/blob/main/FUNDING_REQUEST.md&quot;&gt;funding request process&lt;/a&gt;&lt;/strong&gt;, and active proposals are tracked in &lt;a href=&quot;https://github.com/servo/project/issues/187&quot;&gt;servo/project#187&lt;/a&gt;.
 For more details, head to our &lt;a href=&quot;https://servo.org/twis-september/sponsorship/&quot;&gt;Sponsorship page&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;conference-talks&quot; tabindex=&quot;-1&quot;&gt;Conference talks &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/18/this-month-in-servo/#conference-talks&quot;&gt;
+&lt;h2 id=&quot;conference-talks&quot; tabindex=&quot;-1&quot;&gt;Conference talks &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twis-september/blog/2025/10/24/this-month-in-servo/#conference-talks&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://ke.segmentfault.com/course/1650000043885605/section/1500000047216580&quot;&gt;MiniApps Design and Servo&lt;/a&gt;&lt;/strong&gt; (starting at ~2:37:00; &lt;a href=&quot;https://www.w3.org/2024/01/webevolve-series-events/annual-2025/slides/gregory-terzian.pdf&quot;&gt;slides&lt;/a&gt;) — Gregory Terzian (@gterzian) spoke about how Servo can be used as a web engine for mini-app platforms at &lt;a href=&quot;https://www.w3.org/2024/01/webevolve-series-events/annual-2025/high-perf.en.html&quot;&gt;WebEvolve 2025&lt;/a&gt;&lt;/p&gt;
@@ -140,6 +130,16 @@ For more details, head to our &lt;a href=&quot;https://servo.org/twis-september/
         opacity: 0.75;
     }
 &lt;/style&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Servo 0.0.1 Release</title>
+    <link href="https://servo.org/twis-september/blog/2025/10/20/servo-0.0.1-release/"/>
+    <updated>2025-10-20T00:00:00Z</updated>
+    <id>https://servo.org/twis-september/blog/2025/10/20/servo-0.0.1-release/</id>
+    <content xml:lang="en" type="html">&lt;p&gt;Today, the Servo team has released new versions of the &lt;code&gt;servoshell&lt;/code&gt; binaries for all our supported platforms, tagged &lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.0.1&quot;&gt;v0.0.1&lt;/a&gt;. These binaries are essentially the same nightly builds that were already available from the &lt;a href=&quot;https://servo.org/download&quot;&gt;download page&lt;/a&gt; with additional manual testing, now tagging them explicitly as releases for future reference.&lt;/p&gt;
+&lt;p&gt;We plan to publish such a tagged release every month. For now, we are adopting a simple release process where we will use a recent nightly build and perform additional manual testing to identify issues and regressions before tagging and publishing the binaries.&lt;/p&gt;
+&lt;p&gt;There are currently no plans to publish these releases on &lt;a href=&quot;https://crates.io/&quot;&gt;crates.io&lt;/a&gt; or platform-specific app stores. The goal is just to publish &lt;a href=&quot;https://github.com/servo/servo/releases&quot;&gt;tagged releases on GitHub&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
   <entry>
