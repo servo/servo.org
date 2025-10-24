@@ -14,7 +14,7 @@ categories:
     - thanks.dev 157.63/month 28 donors
 -->
 
-September was another busy month for Servo, with a bunch of new features in our nightly builds and [**our very first versioned release**]({{ '/blog/2025/10/20/servo-0.0.1-release/' | url }}):
+September was another busy month for Servo, with a bunch of new features landing in our nightly builds:
 
 - the **Trusted Types** API is now stable (@TimvdLippe, #39281, #39263)
 - **strokeText()** on CanvasRenderingContext2D (@sagudev, #39183)
