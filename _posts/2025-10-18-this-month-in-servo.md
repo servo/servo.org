@@ -28,7 +28,7 @@ September was another busy month for Servo, with a bunch of new features in our 
 You can still enable them if needed with `--pref viewport_meta_enabled` (@shubhamg13, #39207).
 
 Servo now supports **‘[Content-Encoding](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Encoding): [zstd](https://en.wikipedia.org/wiki/Zstd)’** (@webbeef, #36530), and we’ve fixed a bug causing spurious credentials prompts when a HTTP 401 has no ‘WWW-Authenticate’ header (@simonwuelker, #39215).
-We’ve also made a bunch of progress on **AbortController** (@TimvdLippe, #39290, #39295, #39374, #39406) and **&lt;link rel=preload>** (@TimvdLippe, @jdm, #39033, #39034, #39052).
+We’ve also made a bunch of progress on **AbortController** (@TimvdLippe, #39290, #39295, #39374, #39406) and **&lt;link rel=preload>** (@TimvdLippe, @jdm, #39033, #39034, #39052, #39146, #39167).
 
 **‘Content-Security-Policy: sandbox’** now **disables scripting** unless **‘allow-scripts’** is given (@TimvdLippe, #39163), and **crypto.subtle.exportKey()** can now export HMAC keys in `raw` format (@arihant2math, #39059).
 
