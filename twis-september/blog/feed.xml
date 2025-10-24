@@ -41,6 +41,9 @@
 &lt;li&gt;&lt;strong&gt;scrollParent&lt;/strong&gt; property on HTMLElement (@mrobinson, @Loirooriol, #39110)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;sizes&lt;/strong&gt; property on HTMLImageElement (@tharkum, #39466)&lt;/li&gt;
 &lt;/ul&gt;
+&lt;figure&gt;
+    &lt;img src=&quot;https://servo.org/twis-september/img/blog/2025-10-diffie.jpg&quot; alt=&quot;servoshell nightly showing new support for the strokeText() method on CanvasRenderingContext2D&quot; /&gt;
+&lt;/figure&gt;
 &lt;p&gt;&lt;strong&gt;Viewport meta&lt;/strong&gt; tags are now enabled on mobile devices only, fixing a bug where they were enabled on desktop (@shubhamg13, #39133).
 You can still enable them if needed with &lt;code&gt;--pref viewport_meta_enabled&lt;/code&gt; (@shubhamg13, #39207).&lt;/p&gt;
 &lt;p&gt;Servo now supports &lt;strong&gt;‘&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Encoding&quot;&gt;Content-Encoding&lt;/a&gt;: &lt;a href=&quot;https://en.wikipedia.org/wiki/Zstd&quot;&gt;zstd&lt;/a&gt;’&lt;/strong&gt; (@webbeef, #36530), and we’ve fixed a bug causing spurious credentials prompts when a HTTP 401 has no ‘WWW-Authenticate’ header (@simonwuelker, #39215).
@@ -79,16 +82,17 @@ This does not affect taking a screenshot in headless mode (&lt;code&gt;--headles
 &lt;p&gt;Servo currently runs in &lt;strong&gt;single-process mode&lt;/strong&gt; unless you opt in to &lt;code&gt;--multiprocess&lt;/code&gt; mode, and we’ve landed a few perf improvements in that default mode.
 For one, in single-process mode, script can now &lt;strong&gt;communicate with the embedder directly&lt;/strong&gt; for reduced latency (@jschwe, #39039).
 We also create one thread pool for the image cache now, rather than one pool per origin (@rodio, #38783).&lt;/p&gt;
-&lt;p&gt;Many components of Servo that &lt;em&gt;would&lt;/em&gt; be &lt;a href=&quot;https://book.servo.org/architecture/overview.html#architecture&quot;&gt;separated by a process boundary&lt;/a&gt; in multiprocess mode, now use &lt;a href=&quot;https://docs.rs/crossbeam-channel/0.5.15/crossbeam_channel/&quot;&gt;crossbeam channels&lt;/a&gt; in single-process mode, rather than using &lt;a href=&quot;https://docs.rs/ipc-channel/0.20.2/ipc_channel/&quot;&gt;IPC channels&lt;/a&gt; in both modes (@jschwe, #39073, #39076, #39345, #39347, #39348).
+&lt;p&gt;Many components of Servo that &lt;em&gt;would&lt;/em&gt; be &lt;a href=&quot;https://book.servo.org/architecture/overview.html#architecture&quot;&gt;separated by a process boundary&lt;/a&gt; in multiprocess mode, now use &lt;a href=&quot;https://docs.rs/crossbeam-channel/0.5.15/crossbeam_channel/&quot;&gt;crossbeam channels&lt;/a&gt; in single-process mode, rather than using &lt;a href=&quot;https://docs.rs/ipc-channel/0.20.2/ipc_channel/&quot;&gt;IPC channels&lt;/a&gt; in both modes (@jschwe, #39073, #39076, #39345, #39347, #39348, #39074).
 &lt;a href=&quot;https://docs.rs/ipc-channel/0.20.2/ipc_channel/&quot;&gt;IPC channels&lt;/a&gt; are required when communicating with another process, but they’re more expensive, because they require serialising and deserialising each message, plus resources from the operating system.&lt;/p&gt;
 &lt;p&gt;We’ve started working on an optimisation for string handling in Servo’s DOM layer (@Narfinger, #39480, #39481, #39504).
 Strings in our DOM have historically been represented as &lt;a href=&quot;https://doc.rust-lang.org/std/string/struct.String.html&quot;&gt;ordinary Rust strings&lt;/a&gt;, but they often come from SpiderMonkey, where they use &lt;a href=&quot;https://searchfox.org/firefox-main/rev/8e5d58cfed616cb90586c614e53d8ab1ffc8af27/js/src/vm/StringType.h#83&quot;&gt;a variety of representations&lt;/a&gt;, none of which are entirely compatible.
 SpiderMonkey strings would continue to need conversion to Servo strings, but the idea we’re working towards is to &lt;strong&gt;make the conversion lazy&lt;/strong&gt;, in the hope that many strings will never end up being converted at all.&lt;/p&gt;
-&lt;p&gt;We now use a faster hash algorithm for internal hashmaps that are not security-critical (@Narfinger, #39106, #39166, #39202, #39233, #39244).
+&lt;p&gt;We now use a faster hash algorithm for internal hashmaps that are not security-critical (@Narfinger, #39106, #39166, #39202, #39233, #39244, #39168).
 These changes also switch that faster algorithm from &lt;a href=&quot;https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function&quot;&gt;FNV&lt;/a&gt; to an &lt;a href=&quot;https://docs.rs/rustc-hash/2.1.1/rustc_hash/&quot;&gt;even simpler polynomial hash&lt;/a&gt;, following in the footsteps of &lt;a href=&quot;https://github.com/rust-lang/rust/pull/37229&quot;&gt;Rust&lt;/a&gt; and &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=1477628&quot;&gt;Stylo&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;We’ve also landed a few more self-contained perf improvements:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;speeding up accesses to the event loop (@Narfinger, #39274, #39275)&lt;/li&gt;
+&lt;li&gt;avoviding new display lists while loading CSS images (@coding-joedow, #39201)&lt;/li&gt;
 &lt;li&gt;reducing memory usage (@ritoban23, #39351)&lt;/li&gt;
 &lt;li&gt;reducing binary size (@lumiscosity, @Narfinger, #39437, #39567)&lt;/li&gt;
 &lt;/ul&gt;
