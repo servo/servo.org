@@ -3,7 +3,7 @@ layout:     post
 tags:       blog
 title:      "This month in Servo: experimental mode, Trusted Types, strokeText(), and more!"
 date:       2025-10-24
-summary:    Click the radioactive symbol button (☢) to enable experimental web platform features.
+summary:    Click the experimental mode button (☢) to enable bleeding-edge web platform features.
 categories:
 ---
 
@@ -19,6 +19,15 @@ September was another busy month for Servo, with a bunch of new features landing
 
 <figure>
     <img src="{{ '/img/blog/2025-10-diffie.jpg' | url }}" alt="servoshell nightly showing new support for the strokeText() method on CanvasRenderingContext2D">
+</figure>
+
+servoshell now has a new **experimental mode button** (☢).
+Turning on experimental mode has the same effect as running Servo with `--enable-experimental-web-platform-features`: it enables all engine features, even those that may not be stable or complete.
+This works much like Chromium’s option with the same name, and it can be useful when a page is not functioning correctly, since it may allow the page to make further progress.
+
+<figure>
+    <img src="{{ '/img/blog/2025-10-experimental.png' | url }}" alt="servoshell nightly showing the new experimental mode button (☢), which enables experimental web platform features">
+    <figcaption>Top to bottom: experimental mode off, experimental mode on.</figcaption>
 </figure>
 
 **Viewport meta** tags are now enabled on mobile devices only, fixing a bug where they were enabled on desktop ([@shubhamg13](https://github.com/shubhamg13), [#39133](https://github.com/servo/servo/pull/39133)).
@@ -59,8 +68,6 @@ When automating servoshell with **WebDriver**, commands **targeting elements** n
 These improvements have enabled us to run the **WebDriver conformance tests** in CI by default ([@PotatoCP](https://github.com/PotatoCP), [#39087](https://github.com/servo/servo/pull/39087)), and also mean we’re closer than ever to running [WebDriver-based Web Platform Tests](https://web-platform-tests.org/writing-tests/testdriver.html).
 
 ## servoshell
-
-You can now **enable experimental web platform features** with the click of a button ([@jdm](https://github.com/jdm), [#39125](https://github.com/servo/servo/pull/39125)), instead of passing the command line option.
 
 **Favicons** now update correctly when you **navigate back and forward** ([@webbeef](https://github.com/webbeef), [#39575](https://github.com/servo/servo/pull/39575)), not just when you load a new page.
 
