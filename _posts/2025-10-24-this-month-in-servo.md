@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: and more!"
-date:       2025-10-18
-summary:    ao!! wrrrrao!!
+title:      "This month in Servo: experimental mode, Trusted Types, strokeText(), and more!"
+date:       2025-10-24
+summary:    Click the radioactive symbol button (☢) to enable experimental web platform features.
 categories:
 ---
 
