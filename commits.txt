@@ -1401,7 +1401,7 @@ https://github.com/servo/servo/pull/39172	(@Loirooriol, #39172)	layout: Simplify
     # that and confirmed that in other browsers it now properly works (it no longer shows a 404). However, Servo now
     # fails that test as we don't fire an load event.
     # Part of #913
-https://github.com/servo/servo/pull/39191	(@lumiscosity, #39191)	script: Make set_dictionary_property a safe function (#39191)
+-https://github.com/servo/servo/pull/39191	(@lumiscosity, #39191)	script: Make set_dictionary_property a safe function (#39191)
     # Makes `set_dictionary_property` safe.
     # Testing: Changes are internal, this shouldn't affect behavior.
     # Fixes: #39128
@@ -2765,7 +2765,7 @@ https://github.com/servo/servo/pull/39321	(@simonwuelker, #39321)	script: Use xp
     # the argument.
     # Testing: New web platform tests start to pass
     # Part of https://github.com/servo/servo/issues/34527
-https://github.com/servo/servo/pull/39328	(@kkoyung, #39328)	script: Check whether the generated crypto key has empty usages (#39328)
+-https://github.com/servo/servo/pull/39328	(@kkoyung, #39328)	script: Check whether the generated crypto key has empty usages (#39328)
     # The WebCryptoAPI spec requires that when we generate crypto keys by the generateKey method of SubtleCrypto interface
     # we have to check whether the usages is empty. If the usages is empty, throw a SyntaxError.
     # FYI, Step 9 of https://w3c.github.io/webcrypto/#SubtleCrypto-method-generateKey
@@ -3276,16 +3276,17 @@ https://github.com/servo/servo/pull/39323	(@kkoyung, #39323)	script: Remove redu
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39372	(@Loirooriol, @mrobinson, #39372)	layout: Avoid ClipId, ExternalScrollId and ScrollTreeNodeId references (#39372)
+-https://github.com/servo/servo/pull/39372	(@Loirooriol, @mrobinson, #39372)	layout: Avoid ClipId, ExternalScrollId and ScrollTreeNodeId references (#39372)
     # Changes function signatures to accept `ClipId`, `ExternalScrollId` and `ScrollTreeNodeId` instead of `&ClipId`,
     # `&ExternalScrollId` and `&ScrollTreeNodeId`. This avoids several `&` and `*`.
     # Testing: not needed, no behavior change.
-https://github.com/servo/servo/pull/39375	(@Loirooriol, #39375)	layout: Avoid recomputing automatic inline size (#39375)
++https://github.com/servo/servo/pull/39375	(@Loirooriol, #39375)	layout: Avoid recomputing automatic inline size (#39375)
+    perf; less work in block layouts
     # Laying out a block-level box that establishes an independent formatting context may require multiple attempts
     # because it needs to avoid floats. We were previously recomputing the automatic inline size every time, even if it
     # was always the same. Now we will only compute it once.
     # Testing: Not needed, no behavior change
-https://github.com/servo/servo/pull/39373	(@nicoburns, #39373)	Update to Stylo with icu range dependency (#39373)
+-https://github.com/servo/servo/pull/39373	(@nicoburns, #39373)	Update to Stylo with icu range dependency (#39373)
     # Updates Stylo to:
     # - https://github.com/servo/stylo/pull/242
     # Testing: This is a no-op for Servo. So if it builds without non-stylo lockfile changes it should be good.
@@ -3362,7 +3363,8 @@ https://github.com/servo/servo/pull/39388	(@Loirooriol, #39388)	layout: Make bot
     # `caption-side: bottom`. This unifies the logic for both kinds of captions to avoid divergences.
     # Testing: Modifying an existing test to also cover this case.
     # Fixes: #39386
-https://github.com/servo/servo/pull/39350	(@jschwe, #39350)	Bump ipc_channel and remove unnecessary lock in SystemFontServiceProxy (#39350)
++https://github.com/servo/servo/pull/39350	(@jschwe, #39350)	Bump ipc_channel and remove unnecessary lock in SystemFontServiceProxy (#39350)
+    perf; faster ipc in multi-process mode
     # Since IpcSender is now Sync (since `ipc_channel` 0.20.2), we can remove locks that were added just to make structs
     # containing the sender `Sync` again.
     # There is another occurrence of `Arc>>`  in `RequestBody`, however that sender is exchanged / updated, so cloning
@@ -3431,7 +3433,7 @@ https://github.com/servo/servo/pull/39396	(@mrobinson, #39396)	script: Have Hype
 https://github.com/servo/servo/pull/39327	(@arihant2math, #39327)	Enable credential management wpt tests (#39327)
     # Enabling them early to prevent intermittent failures.
     # Fixes: Partially #38788
-https://github.com/servo/servo/pull/38288	(@arihant2math, @jdm, #38288)	Implement indexeddb array conversion (#38288)
+-https://github.com/servo/servo/pull/38288	(@arihant2math, @jdm, #38288)	Implement indexeddb array conversion (#38288)
     # Implement conversion from js arrays into rust.
     # Testing: WPT
     # Fixes: None
@@ -3897,7 +3899,8 @@ https://github.com/servo/servo/pull/39452	(@tharkum, #39452)	html: Properly coun
     # See .
     # Testing: Improvements in the following tests
     # - html/semantics/embedded-content/the-img-element/relevant-mutations.html
-https://github.com/servo/servo/pull/39441	(@mrobinson, @Loirooriol, #39441)	script: Remove absolute positioning workaround from `scrollIntoView` implementation (#39441)
++https://github.com/servo/servo/pull/39441	(@mrobinson, @Loirooriol, #39441)	script: Remove absolute positioning workaround from `scrollIntoView` implementation (#39441)
+    dom; part of scrollIntoView
     # This isn't needed as the border box query already takes into account the
     # containing block chain. Instead, consistently calculate the new
     # scroll position for a scroller relative to its current scroll offset.
@@ -3968,7 +3971,8 @@ https://github.com/servo/servo/pull/39453	(@kkoyung, #39453)	script: Enable cryp
     # A few WPT error expectations are also added to WPT meta. The related cryptographic algorithms have not yet implemented,
     # so the errors are expected. I don't know why WPT test did not capture them before.
     # Testing: Existing tests suffice.
-https://github.com/servo/servo/pull/39447	(@webbeef, #39447)	constellation: Store pending viewport changes (#39447)
++https://github.com/servo/servo/pull/39447	(@webbeef, #39447)	constellation: Store pending viewport changes (#39447)
+    api; fix incorrect hidpi scaling in new tab
     # It is possible for viewport changes to be received before the constellation adds a browsing context to its managed set
     # when navigating. When that happens, the viewport change is ignored, and eg. the hidpi will keep the default 1.0 value.
     # On later page navigation, this value is not updated and leads to incorrect display zooming. The initial page load
@@ -4167,7 +4171,7 @@ https://github.com/servo/servo/pull/39393	(@Loirooriol, #39393)	layout: Correctl
     # This fixes the logic that computes sticky offset bounds in order to correctly take margins into account.
     # Testing: One test passes
     # Fixes: #39389
-https://github.com/servo/servo/pull/39467	(@Narfinger, #39467)	Allow hyper_serde to only depend on serde_core for potentially faster compile times. (#39467)
+-https://github.com/servo/servo/pull/39467	(@Narfinger, #39467)	Allow hyper_serde to only depend on serde_core for potentially faster compile times. (#39467)
     # Serde_core was released which has all the traits and allows some crates to have parallel compile times.
     # More information can be found here: https://github.com/serde-rs/serde/tree/master/serde_core
     # serde_bytes already depends on on serde_core. Additionally added serde and serde_core to dependabot group.
@@ -4216,7 +4220,7 @@ https://github.com/servo/servo/pull/39514	(@TimvdLippe, #39514)	Fully implement 
     # It also introduces the `unusable` method, as that's the one the spec uses. The other two getters no longer exist
     # in the spec.
     # Fixes #39448
-https://github.com/servo/servo/pull/39496	(@longvatrong111, #39496)	Establish baselines for testdriver.js infrastructure tests (#39496)
+-https://github.com/servo/servo/pull/39496	(@longvatrong111, #39496)	Establish baselines for testdriver.js infrastructure tests (#39496)
     # Update testdriver infrastructure test expectation.
     # For now, most failures of testdriver tests are caused by missing implementation or issue in Servo.
 +https://github.com/servo/servo/pull/39504	(@Narfinger, #39504)	Script: Remove last instances of Deref<str> and DerefMut<str> used for DOMString (#39504)
@@ -4230,14 +4234,16 @@ https://github.com/servo/servo/pull/39496	(@longvatrong111, #39496)	Establish ba
     # Calling `scrollIntoView()` on an element within an `` will now scroll scrolling boxes from the parent document(s),
     # as long as they have the same origin.
     # Testing: One existing subtest passes, and adding a new test.
-https://github.com/servo/servo/pull/39451	(@TimvdLippe, #39451)	Avoid crash when non-trusted-script object is passed into Function constructor (#39451)
++https://github.com/servo/servo/pull/39451	(@TimvdLippe, #39451)	Avoid crash when non-trusted-script object is passed into Function constructor (#39451)
+    crash; fix crash in Function constructor
     # It is possible to pass in objects that are not trusted scripts into the Function constructor. Rather than crashing,
     # we now treat these as untrusted. `can_compile_string_with_trusted_type` doesn't need to know the contents of a
     # string, as it always marks it as untrusted.
     # We can make the same optimization in the string case, where we no longer need to convert the string.
     # Testing: This change adds a WPT crash test.
     # Fixes #39436
-https://github.com/servo/servo/pull/39515	(@Loirooriol, #39515)	compositing: Don't reset scroll positions when receiving a new frame tree (#39515)
++https://github.com/servo/servo/pull/39515	(@Loirooriol, #39515)	compositing: Don't reset scroll positions when receiving a new frame tree (#39515)
+    dom; part of scrollIntoView
     # In the past, all scroll offsets were reset when navigating between pages,
     # and layouts probably didn't preserve their scroll positions between back
     # and forward operations. Whatever the reason, the compositor was still trying to
@@ -4570,13 +4576,14 @@ https://github.com/servo/servo/pull/39491	(@Loirooriol, #39491)	layout: Align ta
     # called `StorageManager`: this could refer to either webstorage's thread manager or to the backend for [the storage
     # manager interface](https://storage.spec.whatwg.org/#storagemanager). webstorage is the full name of the spec,
     # so I chose to keep that in the names of files/structs to prevent confusion when storage manager is implemented.
-https://github.com/servo/servo/pull/39456	(@rodio, #39456)	script: Empty pending mutation observers when notifying mutation observers (#39456)
++https://github.com/servo/servo/pull/39456	(@rodio, #39456)	script: Empty pending mutation observers when notifying mutation observers (#39456)
+    crash; fix crash in MutationObserver
     # Empty the surrounding agent’s pending mutation observers when notifying mutation observers according to the
     # spec. Also, the code in the method MutationObserver::queue_a_mutation_record and the corresponding specification
     # have diverged over the years. These changes bring the code into conformity with the specification.
     # Testing: Added a new crash test
     # Fixes: #39434 #39531
-https://github.com/servo/servo/pull/39140	(@Narfinger, #39140)	Allow WebViews and fonts to have a RenderingGroupId. (#39140)
+-https://github.com/servo/servo/pull/39140	(@Narfinger, #39140)	Allow WebViews and fonts to have a RenderingGroupId. (#39140)
     # Motivation: The font cache currently has to store a cache of Keys which need to be given by the webrender instance.
     # Having a cache for every WebViewId in the future when we have every webview have the different webrender::DocumentId
     # might be too wasteful
@@ -4625,11 +4632,11 @@ https://github.com/servo/servo/pull/39468	(@Gae24, #39468)	script: when fetching
     # Testing: Improvements in the following tests
     # - html/dom/reflection-embedded.html
     # - html/semantics/embedded-content/the-img-element/relevant-mutations.html
-https://github.com/servo/servo/pull/39534	(@sagudev, #39534)	crown: Check closure bodies for unrooted types and fix root TransmitBodyPromise* (#39534)
+-https://github.com/servo/servo/pull/39534	(@sagudev, #39534)	crown: Check closure bodies for unrooted types and fix root TransmitBodyPromise* (#39534)
     # We should also check closure bodies for unrooted expressions.
     # Testing: New crown tests
     # Fixes: #37331
     # Fixes (partial): #37330
-https://github.com/servo/servo/pull/39562	(@simonwuelker, #39562)	Remove references to stylo from `mach test-unit` (#39562)
+-https://github.com/servo/servo/pull/39562	(@simonwuelker, #39562)	Remove references to stylo from `mach test-unit` (#39562)
     #  `stylo` does not live in the servo repository anymore.
 >>> 2025-10-01T06:39:36Z

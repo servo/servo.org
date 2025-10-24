@@ -1,3 +1,6 @@
+- api
+    - https://github.com/servo/servo/pull/39447	(@webbeef, #39447)	constellation: Store pending viewport changes (#39447)
+      api; fix incorrect hidpi scaling in new tab
 - crash
     - https://github.com/servo/servo/pull/39078	(@arihant2math, #39078)	indexeddb: Return error instead of panicking on structured clone failure (#39078)
       crash
@@ -21,26 +24,24 @@
       crash
     - https://github.com/servo/servo/pull/39367	(@yezhizhen, #39367)	script: Avoid panic when scrolling area of window is larger than viewport (#39367)
       crash; scroll() method on Window
+    - https://github.com/servo/servo/pull/39451	(@TimvdLippe, #39451)	Avoid crash when non-trusted-script object is passed into Function constructor (#39451)
+      crash; fix crash in Function constructor
+    - https://github.com/servo/servo/pull/39456	(@rodio, #39456)	script: Empty pending mutation observers when notifying mutation observers (#39456)
+      crash; fix crash in MutationObserver
 - devtools
     - https://github.com/servo/servo/pull/39309	(@delan, #39309)	devtools: Fix race in tests due to asynchronous termination (#39309)
       devtools
     - https://github.com/servo/servo/pull/39318	(@Narfinger, @mrobinson, #39318)	net: Do not send `data` scheme requests to DevTools (#39318)
       devtools
 - dom
-    - DONE https://github.com/servo/servo/pull/38998	(@jerensl, #38998)	script_bindings(python): Add type around js jit class in codegen.py (#38998)
-      dom; type annotations
-    - DONE https://github.com/servo/servo/pull/39059	(@arihant2math, #39059)	webcrypto: implement raw hmac export (#39059)
-      dom; crypto.subtle.exportKey() can now export HMAC keys in `raw` format
-    - DONE https://github.com/servo/servo/pull/38885	(@arihant2math, #38885)	indexeddb: Implement getAll and getAllKeys (#38885)
-      dom; getAll() and getAllKeys() on IDBObjectStore
-    - DONE https://github.com/servo/servo/pull/39163	(@TimvdLippe, #39163)	Disable scripting when sandbox flag is set (#39163)
-      dom; ‘Content-Security-Policy: sandbox’ now disables scripting unless ‘allow-scripts’ is given
     - https://github.com/servo/servo/pull/38717	(@sagudev, #38717)	webgpu: Simplify presentation and handle cleared in script (#38717)
       dom; webgpu presentation is more reliable
-    - DONE https://github.com/servo/servo/pull/39263	(@TimvdLippe, #39263)	Add trusted type checks for eval arguments (#39263)
-      dom; part of trusted types
     - https://github.com/servo/servo/pull/39260	(@tharkum, #39260)	html: Ignore a parse error on 'srcset' attribute parsing (#39260)
       dom; improve handling of syntax errors in srcset
+    - https://github.com/servo/servo/pull/39441	(@mrobinson, @Loirooriol, #39441)	script: Remove absolute positioning workaround from `scrollIntoView` implementation (#39441)
+      dom; part of scrollIntoView
+    - https://github.com/servo/servo/pull/39515	(@Loirooriol, #39515)	compositing: Don't reset scroll positions when receiving a new frame tree (#39515)
+      dom; part of scrollIntoView
 - indexeddb
     - https://github.com/servo/servo/pull/39008	(@arihant2math, #39008)	indexeddb: Finish implementation of key_type_to_jsval (#39008)
       indexeddb; can now use Array and Date keys
@@ -65,18 +66,11 @@
       layout; fix ‘position: static’ and ‘position: sticky’ on grid items
     - https://github.com/servo/servo/pull/39536	(@mrobinson, #39536)	script: Make stylesheets loaded via `<link>` elements block the rendering (#39536)
       layout; fixed big FOUC bug
-- DONE net
-    - DONE https://github.com/servo/servo/pull/39146	(@TimvdLippe, #39146)	Refactor loading methods to align with specification (#39146)
-      net; preload depends on this
-    - DONE https://github.com/servo/servo/pull/39167	(@TimvdLippe, #39167)	Add resource header for mime sniffing (#39167)
-      net; preload depends on this
-- DONE perf
-    - DONE https://github.com/servo/servo/pull/39074	(@jschwe, #39074)	script: Migrate JobResult to GenericCallback (#39074)
-      perf; faster messaging in single-process mode
-    - DONE https://github.com/servo/servo/pull/39168	(@Narfinger, #39168)	Switch the majority of fxhash uses to rustc_hash which is maintained (#39168)
-      perf; faster hash algo
-    - DONE https://github.com/servo/servo/pull/39201	(@coding-joedow, #39201)	layout: allow only repaint when css background and border image loaded (#39201)
-      perf; avoid new display list until CSS background or border images are loaded
+- perf
+    - https://github.com/servo/servo/pull/39375	(@Loirooriol, #39375)	layout: Avoid recomputing automatic inline size (#39375)
+      perf; less work in block layouts
+    - https://github.com/servo/servo/pull/39350	(@jschwe, #39350)	Bump ipc_channel and remove unnecessary lock in SystemFontServiceProxy (#39350)
+      perf; faster ipc in multi-process mode
 - svg
     - https://github.com/servo/servo/pull/39494	(@webbeef, #39494)	script: display top-level SVG image documents. (#39494)
       svg; can now load svg as top-level document
