@@ -12,11 +12,13 @@ title: Sponsorship
 You can now help fund the Servo project by [sponsoring us on GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo).
 
 Both one-time and monthly donations are appreciated, and over 80% of the amount will go directly towards improving Servo.
-The way the funds are used is decided in public via the Technical Steering Committee, but to give you a sense of scale…
+To give you a sense of scale…
 
 - at **100 USD/month**, we can cover the costs of our website and other core infrastructure
 - at **1,000 USD/month**, we can set up dedicated servers for faster Windows and macOS builds, better test coverage and reliability, and new techniques like fuzzing and performance testing
 - at **10,000 USD/month**, we can sponsor a developer to make Servo their top priority
+
+Use of donations is decided transparently via the Technical Steering Committee’s public **[funding request process](https://github.com/servo/project/blob/main/FUNDING_REQUEST.md)**, and active proposals are tracked in [servo/project#187](https://github.com/servo/project/issues/187).
 
 <p class="subtitle">
   If your organization is interested in sponsoring Servo's development or the implementation of a particular feature, reach out to us at <a href="mailto:join@servo.org">join@servo.org</a>.
