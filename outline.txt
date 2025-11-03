@@ -1,3 +1,11 @@
+- api
+    - https://github.com/servo/servo/pull/39738	(@atbrakhi, @mrobinson, @shubhamg13, #39738)	libservo: Modify the `WebView::set_zoom` to take final zoom value  (#39738)
+      api; WebView::set_zoom() is now set_page_zoom(); it’s now absolute not relative; reset_zoom() was removed; page_zoom() was added
+    - https://github.com/servo/servo/pull/39720	(@mrobinson, #39720)	libservo: Unify notifications to the embedder that input events are handled (#39720)
+      api; WebViewDelegate::notify_keyboard_event() is now notify_input_event_handled(); now covers all input events; now includes information about whether the event was consumed and/or had preventDefault
+- crash
+    - https://github.com/servo/servo/pull/39771	(@mrobinson, #39771)	servoshell: Reimplement "onClick" action on Android (#39771)
+      crash; fixed crash when clicking on web content on android
 - crate
     - https://github.com/servo/servo/pull/39546	(@simonwuelker, #39546)	Move XPath implementation into its own crate (#39546)
       crate; xpath implementation with a bring-your-own-dom API
@@ -28,6 +36,8 @@
       dom
     - https://github.com/servo/servo/pull/39717	(@tharkum, #39717)	html: Support selecting <media> element source from children (#39717)
       dom
+    - https://github.com/servo/servo/pull/39749	(@simonwuelker, #39749)	xpath: Let the parents of attribute nodes be their owner elements (#39749)
+      dom; implement `@attr/parent`
     - https://github.com/servo/servo/pull/39658	(@kkoyung, #39658)	script: Implement Compression API (#39658)
       dom
 - embedding
@@ -69,6 +79,8 @@
       perf
     - https://github.com/servo/servo/pull/38996	(@mrobinson, @mukilan, #38996)	script: Do not root nodes with animating images (#38996)
       perf
+    - https://github.com/servo/servo/pull/39774	(@simonwuelker, #39774)	xpath: Avoid allocating hashmap when comparing NodeSet and String (#39774)
+      perf; faster comparison of node-sets with strings
 - servoshell
     - https://github.com/servo/servo/pull/39501	(@mrobinson, #39501)	servoshell: Do not override HiDPI ratio when taking screenshots (#39501)
       servoshell; screenshots use current DPI of system
@@ -118,3 +130,5 @@
       webdriver
     - https://github.com/servo/servo/pull/39620	(@yezhizhen, @mrobinson, #39620)	webdriver: Implement implicit wait for "Element retrieval" (#39620)
       webdriver
+    - https://github.com/servo/servo/pull/39647	(@mrobinson, #39647)	script: Combine `WebDriverJSError` with `JavaScriptEvaluationError` and add the stack (#39647)
+      webdriver; script execution errors now include error message, location, and stack trace

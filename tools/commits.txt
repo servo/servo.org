@@ -1024,7 +1024,7 @@
     # Testing: These changes are rebaselines of test results, so are tests themselves.
 -https://github.com/servo/servo/pull/39662	(@arihant2math, #39662)	storage: More documentation for indexeddb_thread.rs (#39662)
     # Cleaned up some of the documentation.
-https://github.com/servo/servo/pull/39646	(@kkoyung, #39646)	script: Migrate `sign`/`verify` operation to use new normalization (#39646)
++https://github.com/servo/servo/pull/39646	(@kkoyung, #39646)	script: Migrate `sign`/`verify` operation to use new normalization (#39646)
     webcrypto
     # Refactoring of the algorithm normalization in #39431 introduces a new algorithm normalization procedure to replace the
     # existing one, and we continue the migration here.
@@ -1310,7 +1310,7 @@ https://github.com/servo/servo/pull/39646	(@kkoyung, #39646)	script: Migrate `si
 -https://github.com/servo/servo/pull/39778	(@atouchet, #39778)	Update some non-breaking dependencies (#39778)
     # Update some non-breaking dependencies.
     # Testing: No tests for dependency updates.
-https://github.com/servo/servo/pull/39760	(@kkoyung, #39760)	script: Migrate `importKey` operation to use new normalization (#39760)
++https://github.com/servo/servo/pull/39760	(@kkoyung, #39760)	script: Migrate `importKey` operation to use new normalization (#39760)
     webcrypto
     # Refactoring of the algorithm normalization in #39431 introduces a new algorithm normalization procedure to replace the
     # existing one, and we continue the migration here.
@@ -1328,40 +1328,44 @@ https://github.com/servo/servo/pull/39760	(@kkoyung, #39760)	script: Migrate `im
     # we move the "export" counterpart of the above `import_key_xxx` functions all together.  So, some refactoring is also
     # made to the `ExportKey` method.
     # Testing: Refactoring.  Existing WPT tests suffice.  Fixes: Part of #39368
-https://github.com/servo/servo/pull/39771	(@mrobinson, #39771)	servoshell: Reimplement "onClick" action on Android (#39771)
++https://github.com/servo/servo/pull/39771	(@mrobinson, #39771)	servoshell: Reimplement "onClick" action on Android (#39771)
+    crash; fixed crash when clicking on web content on android
     # The Android interface needs some way to communciate click events to Servo, so the JNI layer needs to expose a click
     # event.  Even though there is no longer a "click" action in the API, we can implement this behavior via a mouse button
     # down and then mouse button up event, which should be a more complete implementation in the DOM.
     # This fixes a regression from #39705.
     # Testing: There currently aren't tests for Android interaction via the Java layer (which is one reason why this
     # regression happened sadly).  Fixes #39742.
-https://github.com/servo/servo/pull/39774	(@simonwuelker, #39774)	xpath: Avoid allocating hashmap when comparing NodeSet and String (#39774)
++https://github.com/servo/servo/pull/39774	(@simonwuelker, #39774)	xpath: Avoid allocating hashmap when comparing NodeSet and String (#39774)
+    perf; faster comparison of node-sets with strings
     # A NodeSet and a String are equal iff the text content of any node in the set is equal to the string.  Instead of
     # creating a hashmap of text contents and then calling `contains` on that, just iterate over the nodeset and see if the
     # string is in there.
     # Testing: This should not change behaviour and is thus covered by existing tests Part of #34527
-https://github.com/servo/servo/pull/39770	(@mrobinson, #39770)	libservo: Improve JavaScript evaluation error name and documentation (#39770)
+-https://github.com/servo/servo/pull/39770	(@mrobinson, #39770)	libservo: Improve JavaScript evaluation error name and documentation (#39770)
     # Testing: this just changes a type name and adds documentation, so doesn't need new tests.
-https://github.com/servo/servo/pull/39738	(@atbrakhi, @mrobinson, @shubhamg13, #39738)	libservo: Modify the `WebView::set_zoom` to take final zoom value  (#39738)
++https://github.com/servo/servo/pull/39738	(@atbrakhi, @mrobinson, @shubhamg13, #39738)	libservo: Modify the `WebView::set_zoom` to take final zoom value  (#39738)
+    api; WebView::set_zoom() is now set_page_zoom(); it’s now absolute not relative; reset_zoom() was removed; page_zoom() was added
     # Previously in the `WebView::set_zoom` API, we were multiplying the zoom value with the current page zoom.  This made it
     # hard to absolute zoom value or to reset the zoom value entirely.  This PR modifies the API to take a final zoom value.
     # Now it's the embedder's responsibility to calculate relative zoom changes.
     # In addition, API is renamed to `WebView::set_page_zoom()` and `WebView::page_zoom()` in order to better distinguished
     # between page zoom and pinch zoom.
     # Testing: Added unit test
-https://github.com/servo/servo/pull/39647	(@mrobinson, #39647)	script: Combine `WebDriverJSError` with `JavaScriptEvaluationError` and add the stack (#39647)
++https://github.com/servo/servo/pull/39647	(@mrobinson, #39647)	script: Combine `WebDriverJSError` with `JavaScriptEvaluationError` and add the stack (#39647)
+    webdriver; script execution errors now include error message, location, and stack trace
     # This change merges the WebDriver only `WebDriverJSError` with the API `JavaScriptEvaluationError` and also allows
     # passing `ErrorInfo` information through to the API layer when possible.  In addition, the stack is added to `ErrorInfo`
     # (but only in situations when evaluating JavaScript code for WebDriver or via the API for performance reasons).
     # These changes allow much more useful error output when script execution fails via WebDriver.  Now the error message and
     # source file line numbers are printed by the test executor.
     # Testing: These changes should be reflected in the testing output.
-https://github.com/servo/servo/pull/39746	(@simonwuelker, #39746)	xpath: Reject non-ascii whitespace when converting string to number (#39746)
+-https://github.com/servo/servo/pull/39746	(@simonwuelker, #39746)	xpath: Reject non-ascii whitespace when converting string to number (#39746)
     # The `number` function converts from arbitrary values to numbers.  String values are parsed as you would expect, and
     # whitespace around them is trimmed.  We used to allow arbitrary whitespace, firefox allows only ASCII.  I've taken this
     # opportunity to also implement a dummy DOM that we can use for testing these kinds of things.
     # Testing: This change adds new tests Part of #34527
-https://github.com/servo/servo/pull/39762	(@simonwuelker, #39762)	xpath: Remove `PredicateExpr` (#39762)
+-https://github.com/servo/servo/pull/39762	(@simonwuelker, #39762)	xpath: Remove `PredicateExpr` (#39762)
     # A predicate expression is just a regular expressions.  We can remove it and make the AST a bit smaller (and easier to
     # read).
     # Testing: Covered by existing tests Part of #34527
@@ -1371,7 +1375,8 @@ https://github.com/servo/servo/pull/39762	(@simonwuelker, #39762)	xpath: Remove 
     # Luckily, our implementation can catch this mistake and throw NotSupportedError in later steps, by
     # `NormalizedAlgorithm::encrypt` and `NormalizedAlgorithm::decrypt`.  However, we should remove the wrong registration.
     # Testing: No behavioral change.  Existing WPT tests suffice.
-https://github.com/servo/servo/pull/39720	(@mrobinson, #39720)	libservo: Unify notifications to the embedder that input events are handled (#39720)
++https://github.com/servo/servo/pull/39720	(@mrobinson, #39720)	libservo: Unify notifications to the embedder that input events are handled (#39720)
+    api; WebViewDelegate::notify_keyboard_event() is now notify_input_event_handled(); now covers all input events; now includes information about whether the event was consumed and/or had preventDefault
     # Servo currently has three ways of notifying the embedder that input events have been processed.
     # 1.  `WebViewDelegate::notify_keyboard_event`: This is used to implement
     #    overridable keybindings in servoshell.  It notifies the embedder when a keyboard event has been processed, but not
@@ -1388,7 +1393,7 @@ https://github.com/servo/servo/pull/39720	(@mrobinson, #39720)	libservo: Unify n
     # type to describe the result of event handling.
     # Testing: This shouldn't change observable behavior and is thus covered by existing tests.  The new API is consumed by
     # servoshell, which uses it for tests.
-https://github.com/servo/servo/pull/39758	(@atouchet, #39758)	Update some Windows dependencies (#39758)
+-https://github.com/servo/servo/pull/39758	(@atouchet, #39758)	Update some Windows dependencies (#39758)
     # Update some Windows dependencies.
     # Testing: No tests for dependency updates.
 -https://github.com/servo/servo/pull/39734	(@kkoyung, #39734)	script: Overwrite WebCrypto algorithm name during normalization (#39734)
@@ -1396,12 +1401,13 @@ https://github.com/servo/servo/pull/39758	(@atouchet, #39758)	Update some Window
     # internally, by Step 7 of .
     # This step is missing for some cases.  This patch brings it back.
     # Testing: Existing tests suffice.
-https://github.com/servo/servo/pull/39749	(@simonwuelker, #39749)	xpath: Let the parents of attribute nodes be their owner elements (#39749)
++https://github.com/servo/servo/pull/39749	(@simonwuelker, #39749)	xpath: Let the parents of attribute nodes be their owner elements (#39749)
+    dom; implement `@attr/parent`
     # This is different from the rest of the DOM, see https://www.w3.org/TR/1999/REC-xpath-19991116/#attribute-nodes.
     # Luckily, this can cleanly be implemented for XPath because we already abstract over the concrete DOM implementation.
     # Testing: This change adds a test Part of #34527
 >>> 2025-10-12T06:03:13Z
-https://github.com/servo/servo/pull/39773	(@shram-laabh, #39773)	Adding message argument in WrongDocument Error (#39773)
+-https://github.com/servo/servo/pull/39773	(@shram-laabh, #39773)	Adding message argument in WrongDocument Error (#39773)
     # *This pull request address one of the action item of [*Provide messages in JS
     # errors*](https://github.com/servo/servo/issues/39053) i.e.  it adds message argument in WrongDocument Error *
     # Testing: *This PR is tested using CLI ./mach test-unit -p libservo --jobs=3* Fixes: [*Provide messages in JS
@@ -1419,7 +1425,7 @@ https://github.com/servo/servo/pull/39773	(@shram-laabh, #39773)	Adding message 
     #   - `SubtleCrypto::encrypt_decrypt_aes_ctr` - `SubtleCrypto::encrypt_aes_gcm` - `SubtleCrypto::decrypt_aes_gcm` -
     #   `SubtleCrypto::export_aes_aes`
     # Testing: Refactoring.  Existing WPT tests suffice.  Fixes: Part of #39368
-https://github.com/servo/servo/pull/39788	(@simonwuelker, #39788)	xpath: Clean up the expression AST a bit (#39788)
+-https://github.com/servo/servo/pull/39788	(@simonwuelker, #39788)	xpath: Clean up the expression AST a bit (#39788)
     # The current AST has different nodes for additive, multiplicative, relational (etc) expressions.  That is not a useful
     # distinction, as they are all treated more or less the same.  Instead, I've unified these as `Expression::Binary(lhs,
     # binary_operator, rhs)`.
@@ -1427,7 +1433,7 @@ https://github.com/servo/servo/pull/39788	(@simonwuelker, #39788)	xpath: Clean u
     #     Minus
     # } ``` This change is in preparation for an upcoming PR which will address #39602 .
     # Testing: Covered by existing tests Part of #34527
-https://github.com/servo/servo/pull/39680	(@mukilan, #39680)	nix: Update Android NDK version in shell.nix (#39680)
+-https://github.com/servo/servo/pull/39680	(@mukilan, #39680)	nix: Update Android NDK version in shell.nix (#39680)
     # Servo now requires r28 of the NDK.  This needs to land after #39625 as the newer NDK is not available in the current
     # pinned version of nixpkgs.
     # Signed-off-by: Mukilan Thiyagarajan
