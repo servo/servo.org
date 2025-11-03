@@ -1437,23 +1437,26 @@
     # Servo now requires r28 of the NDK.  This needs to land after #39625 as the newer NDK is not available in the current
     # pinned version of nixpkgs.
     # Signed-off-by: Mukilan Thiyagarajan
-https://github.com/servo/servo/pull/39776	(@mrobinson, #39776)	webdriver: Send events to the embedder as `InputEvent` with a response channel (#39776)
++https://github.com/servo/servo/pull/39776	(@mrobinson, #39776)	webdriver: Send events to the embedder as `InputEvent` with a response channel (#39776)
+    input; similar change, but in webdriver, which is an internal part of servoshell
     # This change simplifies the WebDriver Embedder API by exposing a single message for dispatching input event actions.
     # This message now includes a `Sender` which is used to inform the WebDriver server that the embedder has finished
     # processing the message in the DOM.  This replaces the system of ids and the side channel that was used for this purpose
     # before.
     # Testing: This is just a simplification of the WebDriver API and shouldn't really change behavior in a perceivable way,
     # so it covered by existing tests.
-https://github.com/servo/servo/pull/39740	(@mrobinson, #39740)	script: Combine all `Event` flags into a single bitflags (#39740)
+-https://github.com/servo/servo/pull/39740	(@mrobinson, #39740)	script: Combine all `Event` flags into a single bitflags (#39740)
     # This makes the management of flags conceptually simpler and reduces the number of instance variables in the `Event` data
     # structure.
     # Testing: This should not change behavior so should be covered by existing tests.
-https://github.com/servo/servo/pull/39783	(@yezhizhen, #39783)	webdriver: Improve argument extraction of (async) script execution  (#39783)
++https://github.com/servo/servo/pull/39783	(@yezhizhen, #39783)	webdriver: Improve argument extraction of (async) script execution  (#39783)
+    webdriver; fixed bug preventing some older(?) webdriver libraries from passing web elements to Execute Script
     # According to [spec](https://w3c.github.io/webdriver/#dfn-json-deserialize), we should regard an object as
     # webelement/shadowroot/webframe//webwindow, as long as one of the key is the corresponding identifier.  Moreover, the
     # order matters.  This PR addresses this.
     # Testing: Added 8 subtests to wdspec.  Fixes: Part of #38083.
-https://github.com/servo/servo/pull/39608	(@arayaryoma, #39608)	fonts: Do not fall back to non-Japanese fonts for Han in Japanese language documents (#39608)
++https://github.com/servo/servo/pull/39608	(@arayaryoma, #39608)	fonts: Do not fall back to non-Japanese fonts for Han in Japanese language documents (#39608)
+    layout; better automatic font selection for japanese text on macOS and unix
     # ## Motivations
     # This PR improves fallback font algorithm for Japanese documents on macos and Linux.
     # For Japanese documents, we generally use a same font for Hiragana/Katakana/Kanji(Han).  Since their is a fallback
@@ -1468,7 +1471,8 @@ https://github.com/servo/servo/pull/39751	(@simonwuelker, #39751)	script: Restri
     # https://searchfox.org/firefox-main/rev/b30a9b734819436853abf4eba6d768037514b3f6/dom/xslt/xpath/XPathExpression.cpp#115
     # for the equivalent code in firefox.  Chrome also throws the same error.
     # Testing: This change adds a test Part of #34527
-https://github.com/servo/servo/pull/39625	(@delan, #39625)	NixOS: bump nixpkgs and fix etc/devtools_parser.py (#39625)
++https://github.com/servo/servo/pull/39625	(@delan, #39625)	NixOS: bump nixpkgs and fix etc/devtools_parser.py (#39625)
+    dev; on nixos and nix, upgrade from LLVM 14 to 20, and fix some build issues
     # this patch bumps nixpkgs to [the tip](https://github.com/NixOS/nixpkgs/commit/5b5be50345d4113d04ba58c444348849f5585b4a)
     # of [nixos-25.05](https://github.com/NixOS/nixpkgs/commits/nixos-25.05).  this is still not new enough for X11-based
     # machines on NixOS 25.11 (#39623), so i’ve added a note explaining what to do in that situation.
@@ -1478,7 +1482,7 @@ https://github.com/servo/servo/pull/39625	(@delan, #39625)	NixOS: bump nixpkgs a
     # capabilities to capture packets from loopback interfaces.  to use etc/devtools_parser.py, install wireshark with your
     # system package manager, or for NixOS, enable the option: `programs.wireshark.enable = true;`
     # Testing: no tests needed, since it only affects the NixOS dev environment Fixes: #39624 Fixes: #31059 Related: #39623
-https://github.com/servo/servo/pull/39779	(@arihant2math, #39779)	Fix typo in newtab.html (#39779)
+-https://github.com/servo/servo/pull/39779	(@arihant2math, #39779)	Fix typo in newtab.html (#39779)
     # Self-explanatory.
 >>> 2025-10-13T06:03:26Z
 -https://github.com/servo/servo/pull/39824	(@dependabot[bot], @dependabot[bot], #39824)	build(deps): bump find-msvc-tools from 0.1.3 to 0.1.4 (#39824)
@@ -1599,7 +1603,8 @@ https://github.com/servo/servo/pull/39775	(@TimvdLippe, #39775)	Add policy conta
     # For font contexts I tried to pass through the relevant information, but it is a tad too much.  Once fontcontext knows
     # more information about its containing global (as the TODO also points to referrer), we should clean this up.
     # Part of #35035
-https://github.com/servo/servo/pull/39810	(@mrobinson, #39810)	libservo: Notify the embedder when an input event can't be sent to a Pipeline (#39810)
++https://github.com/servo/servo/pull/39810	(@mrobinson, #39810)	libservo: Notify the embedder when an input event can't be sent to a Pipeline (#39810)
+    input; more reliable notification of input events in some edge cases
     # The `WebViewDelegate::notify_input_event_handled` method is called for the embedder when an input event's processing has
     # finished within Servo.  This allows the embedder to chain the event up to parent widgets or do some kind of
     # post-processing such as the implementation of overridable keybindings.
@@ -1607,7 +1612,8 @@ https://github.com/servo/servo/pull/39810	(@mrobinson, #39810)	libservo: Notify 
     # This could happen when an event is handled during navigation or perhaps during shutdown.  In any case, Servo should
     # *always* tell the embedder when the event is done processing so that they don't get eaten by the Servo widget.
     # Testing: This is very difficult to test as it only happens in very specific time-sensitive sitautions.
-https://github.com/servo/servo/pull/39800	(@simonwuelker, #39800)	XPath: Flatten the AST to make it more flexible (#39800)
++https://github.com/servo/servo/pull/39800	(@simonwuelker, #39800)	XPath: Flatten the AST to make it more flexible (#39800)
+    perf; preparation for optimising xpath queries
     # The current XPath AST is tightly tied to the parser grammar.  To address issues like
     # https://github.com/servo/servo/issues/39739, we'll want to do optimization passes on the AST in the future, which
     # requires relaxing it's structure first.
@@ -1644,7 +1650,7 @@ https://github.com/servo/servo/pull/39800	(@simonwuelker, #39800)	XPath: Flatten
     #     Expression::Literal(Literal::String("world".to_string())),
     # ])), ```
     # Testing: No behaviour change intended, covered by existing tests.  Part of #34527
-https://github.com/servo/servo/pull/39802	(@servo-wpt-sync, #39802)	Sync WPT with upstream (12-10-2025) (#39802)
+-https://github.com/servo/servo/pull/39802	(@servo-wpt-sync, #39802)	Sync WPT with upstream (12-10-2025) (#39802)
     # Automated downstream sync of changes from upstream as of 12-10-2025 [no-wpt-sync]
 +https://github.com/servo/servo/pull/39805	(@kkoyung, #39805)	script: Migrate `deriveBits`/`get key length` operation to use new normalization (#39805)
     webcrypto
@@ -1662,13 +1668,15 @@ https://github.com/servo/servo/pull/39802	(@servo-wpt-sync, #39802)	Sync WPT wit
     # `get_key_length_for_aes` function is moved to sub-module `aes_operation`.  - The `import_key_aes`, `import_key_hkdf`,
     # `import_key_hmac` and `import_key_pbkdf2` are removed since they are no longer in use.
     # Testing: Refactoring.  Existing WPT tests suffice.  Fixes: Part of #39368
-https://github.com/servo/servo/pull/39803	(@yezhizhen, #39803)	fonts: Fix compilation warning due to added fallback mechanism (#39803)
++https://github.com/servo/servo/pull/39803	(@yezhizhen, #39803)	fonts: Fix compilation warning due to added fallback mechanism (#39803)
+    layout; font fallback for japanese text
     # #39608 added a mechanism to read document language from layout.  It was used to make sure fallback font for
     # Hiragana/Katakana/Kanji is same for Japanese document.
     # Right now, the mechanism is only used for FreeType/macOS.  For Windows, it already did the job correctly even before
     # #39608, so there is no need for the mechanism yet.
     # Testing: Manually tested on https://ja.wikipedia.org/wiki/Servo
-https://github.com/servo/servo/pull/39804	(@yezhizhen, #39804)	webdriver: Fix JS serialization for object with special key (#39804)
++https://github.com/servo/servo/pull/39804	(@yezhizhen, #39804)	webdriver: Fix JS serialization for object with special key (#39804)
+    webdriver; fixed a bug causing errors when passing [web elements](https://w3c.github.io/webdriver/#dfn-web-elements) (and other JS objects with unusual keys) to [Execute Script](https://w3c.github.io/webdriver/#execute-script)
     # Previously, the JS deserialization is wrong for object like `{"-": 3}`.  This was because we never generate a valid JSON
     # string literal from the request.
     # Now I share @Loirooriol's laughter: "We just fixed something very basic, but there is no existing test covering this",
@@ -1747,17 +1755,19 @@ https://github.com/servo/servo/pull/39804	(@yezhizhen, #39804)	webdriver: Fix JS
     # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself.  You can also trigger a
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39845	(@simonwuelker, #39845)	script: Remove RefCell around document.animations (#39845)
++https://github.com/servo/servo/pull/39845	(@simonwuelker, #39845)	script: Remove RefCell around document.animations (#39845)
+    perf; remove indirection over CSS animations
     # We never mutate this field.
-https://github.com/servo/servo/pull/39844	(@simonwuelker, #39844)	script: Pass CanGc to input-related methods that interact with SpiderMonkey (#39844)
+-https://github.com/servo/servo/pull/39844	(@simonwuelker, #39844)	script: Pass CanGc to input-related methods that interact with SpiderMonkey (#39844)
     # Testing: Compile-time annotations only, no testing required.
 https://github.com/servo/servo/pull/39671	(@Gae24, #39671)	script: replace load_whole_resource with async fetch when constructing a worker (#39671)
     # Testing: no behaviour changes in tests result should happen Fixes: #39621
-https://github.com/servo/servo/pull/39843	(@Loirooriol, #39843)	Revert "Add unittest code coverage to CI " (#39843)
+-https://github.com/servo/servo/pull/39843	(@Loirooriol, #39843)	Revert "Add unittest code coverage to CI " (#39843)
     # Reverts servo/servo#39789
     # Reason: It broke try labels
     # Testing: Unneeded, just a revert Fixes: #39842
-https://github.com/servo/servo/pull/39789	(@jschwe, @sagudev, #39789)	Add unittest code coverage to CI  (#39789)
++https://github.com/servo/servo/pull/39789	(@jschwe, @sagudev, #39789)	Add unittest code coverage to CI  (#39789)
+    dev; unit tests now have code coverage in CI
     # Add a CI workflow to determine the code coverage.  For now we only run unit-tests, wpt-tests with code coverage can be
     # added later.  We use `lld` to avoid OOM errors during linking (with `ld`, we would need to reduce the build-concurrency
     # drastically to prevent OOM errors in CI) For now, coverage would run during `full` and on-demand (i.e explicitly
@@ -1779,7 +1789,8 @@ https://github.com/servo/servo/pull/39834	(@Loirooriol, #39834)	layout: Make inl
     #  - If the inline has a box shadow or an outline (not on all browsers).  - If the inline establishes a containing block
     #  for abspos descendants.  - When getting the size using JS APIs.
     # Testing: Some existing tests pass, also adding a new one Fixes: #39648
-https://github.com/servo/servo/pull/39314	(@Narfinger, @mukilan, #39314)	servoshell: Improve CLI help formatting (#39314)
++https://github.com/servo/servo/pull/39314	(@Narfinger, @mukilan, #39314)	servoshell: Improve CLI help formatting (#39314)
+    servoshell; much more readable --help output
     # This improves the servoshell CI help messaging.  Notice that spaces in front of comments are of importance in bpaf.  The
     # output is probably not ideal yet but it should be way better.
     # Testing: Compiled and looked at the output.  Fixes: https://github.com/servo/servo/issues/39312
@@ -1789,7 +1800,8 @@ https://github.com/servo/servo/pull/39764	(@simonwuelker, #39764)	xpath: Cast qu
     # See https://searchfox.org/firefox-main/rev/ab5bf2401717970560597083d6ac72915bde2d89/dom/xslt/xpath/XPathResult.cpp#160
     # for the relevant part in gecko.
     # Testing: This change adds a test Part of #34527
-https://github.com/servo/servo/pull/39272	(@delan, #39272)	ci: Run bencher jobs on self-hosted runners (#39272)
++https://github.com/servo/servo/pull/39272	(@delan, #39272)	ci: Run bencher jobs on self-hosted runners (#39272)
+    dev; CI jobs for runtime benchmarks now run on self-hosted runners
     # some bencher jobs, specifically linux release profile jobs, measure runtime perf by running speedometer and dromaeo.
     # doing this on GitHub-hosted runners is suboptimal, because GitHub-hosted runners are not under our control and their
     # performance can vary wildly depending on what hosts we get and how busy they are.
@@ -2379,7 +2391,7 @@ https://github.com/servo/servo/pull/39943	(@jdm, @TimvdLippe, #39943)	Add abort 
     # el=experimental&label=master&aligned).
     # Testing: Lots of new passing tests.  Fixes: #39904 Fixes: #39513
 >>> 2025-10-19T06:12:55Z
-https://github.com/servo/servo/pull/39985	(@servo-wpt-sync, #39985)	Sync WPT with upstream (19-10-2025) (#39985)
++https://github.com/servo/servo/pull/39985	(@servo-wpt-sync, #39985)	Sync WPT with upstream (19-10-2025) (#39985)
     # Automated downstream sync of changes from upstream as of 19-10-2025 [no-wpt-sync]
 https://github.com/servo/servo/pull/39975	(@yezhizhen, @jdm, #39975)	doc: Remove MFC build tools requirement for Windows (#39975)
     # Testing: I build from scratch on a very old laptop.  That's what motivated me to install as few components as possible.
@@ -3189,7 +3201,7 @@ https://github.com/servo/servo/pull/40175	(@yerke, #40175)	add CanGc as argument
     # add CanGc as argument to safe_to_jsval
     # Testing: These changes do not require tests because they are a refactor.  Closes
     # https://github.com/servo/servo/issues/39236
-https://github.com/servo/servo/pull/40172	(@servo-wpt-sync, #40172)	Sync WPT with upstream (26-10-2025) (#40172)
++https://github.com/servo/servo/pull/40172	(@servo-wpt-sync, #40172)	Sync WPT with upstream (26-10-2025) (#40172)
     # Automated downstream sync of changes from upstream as of 26-10-2025 [no-wpt-sync]
 https://github.com/servo/servo/pull/40169	(@alevann, #40169)	script: Add message to InvalidCharacterError (#40169)
     # Adds an optional message to be attached to an InvalidCharacterError.
