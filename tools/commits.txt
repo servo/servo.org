@@ -68,24 +68,27 @@
     # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself.  You can also trigger a
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39546	(@simonwuelker, #39546)	Move XPath implementation into its own crate (#39546)
++https://github.com/servo/servo/pull/39546	(@simonwuelker, #39546)	Move XPath implementation into its own crate (#39546)
+    crate; xpath implementation with a bring-your-own-dom API
     # XPath (and, in the future, XSLT) is only loosely coupled to `script`.  As `script` is already very large, I'd like to
     # move the xpath parser and evaluator into a seperate crate.  Doing so allows us to iterate on it more easily, without
     # having to recompile `script`.  Abstracting over the concrete DOM implementation could also allow us to write some more
     # comprehensive unit tests.
     # Testing: Covered by existing web platform tests Part of https://github.com/servo/servo/issues/34527 Fixes
     # https://github.com/servo/servo/issues/39551
-https://github.com/servo/servo/pull/39501	(@mrobinson, #39501)	servoshell: Do not override HiDPI ratio when taking screenshots (#39501)
++https://github.com/servo/servo/pull/39501	(@mrobinson, #39501)	servoshell: Do not override HiDPI ratio when taking screenshots (#39501)
+    servoshell; screenshots use current DPI of system
     # This override is meant to force reftests to always run with a device pixel ratio of 1.0.  Reftests are always run in
     # headless mode which uses a device pixel ratio of 1.0 regardless (unless you override it).  Removing this particular
     # override allows taking screenshots in the system DPI when taking them in headed mode, which is actually a bit useful.
     # Testing: A test verifying the old behavior is removed.  This causes `/css/pixel_snapping_position_a.html` to start
     # passing.
-https://github.com/servo/servo/pull/39586	(@mrobinson, #39586)	libservo: Re-export types that are used by servoshell (#39586)
+-https://github.com/servo/servo/pull/39586	(@mrobinson, #39586)	libservo: Re-export types that are used by servoshell (#39586)
     # servoshell should not depend on internal Servo crates.  Instead, `libervo` should re-export any types that are used by
     # embedders.  This change does that re-export for private types currently used by servoshell.
     # Testing: This just changes the way types are imported, so curent tests should suffice.
-https://github.com/servo/servo/pull/39506	(@andrei.volykhin@gmail.com, #39506)	html: Allow legacy referrer policies only for <meta> referrer (#39506)
++https://github.com/servo/servo/pull/39506	(@andrei.volykhin@gmail.com, #39506)	html: Allow legacy referrer policies only for <meta> referrer (#39506)
+    dom
     # Follow the HTML specification and allow to use legacy referrer policies (never/default/always/origin-when-crossorigin)
     # only with 'meta' referrer.
     # See https://html.spec.whatwg.org/multipage/#meta-referrer (step 5)
@@ -96,7 +99,8 @@ https://github.com/servo/servo/pull/39506	(@andrei.volykhin@gmail.com, #39506)	h
     # So unknown policy values (legacy from meta-referrer) will be ignored and determine as 'ReferrerPolicy::EmptyString'.
     # Testing: No changes
     # Fixes: #36833
-https://github.com/servo/servo/pull/36322	(@Loirooriol, #36322)	layout: Let min/max constraints avoid collapsing bottom margins (#36322)
++https://github.com/servo/servo/pull/36322	(@Loirooriol, #36322)	layout: Let min/max constraints avoid collapsing bottom margins (#36322)
+    layout
     # When `block-size` was intrinsic and there was no block-end padding or margin, we were allowing the block-end margin of
     # the box to collapse with the block-end margin of its contents.
     # However, due to `min-block-size` or `max-block-size`, the final size can be different than the intrinsic size of the
@@ -106,15 +110,16 @@ https://github.com/servo/servo/pull/36322	(@Loirooriol, #36322)	layout: Let min/
     # Testing: 2 tests are now passing.  There is also 1 new failure, but that test only passes in WebKit and I don't agree
     # with it.
     # Fixes: #36321
-https://github.com/servo/servo/pull/39589	(@mrobinson, #39589)	script: Use `conditional_malloc_size_of` for `Rc` types on `Window` (#39589)
+-https://github.com/servo/servo/pull/39589	(@mrobinson, #39589)	script: Use `conditional_malloc_size_of` for `Rc` types on `Window` (#39589)
     # This allows measuring the size of these types conditionally rather than ignoring them.
     # Testing: This modifies which things are measured by `MallocSizeOf` which isn't covered by tests.
-https://github.com/servo/servo/pull/39588	(@simonwuelker, #39588)	script: Remove unreachable assertions in xpath parser (#39588)
+-https://github.com/servo/servo/pull/39588	(@simonwuelker, #39588)	script: Remove unreachable assertions in xpath parser (#39588)
     # `relative_path_expr` can only ever return `Expr::Path`.  If we make it return a `PathExpr` then callers can rely on this
     # invariant.
     # Testing: There's only limited testing for this change due to https://github.com/servo/servo/issues/39551.  But I think
     # that's okay, since the change is fairly trivial.  Part of https://github.com/servo/servo/issues/34527
-https://github.com/servo/servo/pull/39583	(@mrobinson, @delan, #39583)	libservo: Add a `WebView::take_screenshot()` API and use it for reftests (#39583)
++https://github.com/servo/servo/pull/39583	(@mrobinson, @delan, #39583)	libservo: Add a `WebView::take_screenshot()` API and use it for reftests (#39583)
+    embedding
     # This change adds a new API to the `WebView` for capturing screenshots.  This makes it possible to:
     #  - use the reftest waiting infrastructure via the API
     #    easily.
@@ -124,21 +129,22 @@ https://github.com/servo/servo/pull/39583	(@mrobinson, @delan, #39583)	libservo:
     #    screenshot.
     # In addition, the previous infrastructure, the `wait_for_stable_image` option is removed completely.
     # Testing: This change is tested by the passing of the WPT tests, as they commonly use the screenshot feature.
-https://github.com/servo/servo/pull/39502	(@shubhamg13, #39502)	compositor: Add Paint Metric events to Perfetto Traces (#39502)
+-https://github.com/servo/servo/pull/39502	(@shubhamg13, #39502)	compositor: Add Paint Metric events to Perfetto Traces (#39502)
     # > Some metrics like TimeToFirstPaint and TimeToFirstContentfulPaint are only in the HTML traces.  [See
     # this](https://github.com/servo/perf-analysis-tools?tab=readme-ov-file#how-to-analyse-a-single-servo-sample)
     # In order to analyse the performance and refine [perf-analysis-tools](https://github.com/servo/perf-analysis-tools) we
     # need these metrics to be added to Perfetto also.
     # Testing: Verified by using Perfetto traces
-https://github.com/servo/servo/pull/39571	(@Loirooriol, #39571)	layout: Avoid negative corner radii values for border-radius (#39571)
++https://github.com/servo/servo/pull/39571	(@Loirooriol, #39571)	layout: Avoid negative corner radii values for border-radius (#39571)
+    layout
     # The `border-radius` property provides the radii for the border box.  For the curvature of the padding and content boxes,
     # we then subtract the border and padding sizes.  However, we weren't flooring the result by zero, which could make the
     # background completely disappear when using `background-clip: padding-box` or `background-clip: content-box`.
     # Testing: Adding 4 new tests, but 2 of them fail in both Servo and Firefox.  Fixes: #39540
-https://github.com/servo/servo/pull/39585	(@Gae24, #39585)	script: move testbinding DOM interfaces to script/dom/test (#39585)
+-https://github.com/servo/servo/pull/39585	(@Gae24, #39585)	script: move testbinding DOM interfaces to script/dom/test (#39585)
     # Move testbinding interfaces to it's own module, to avoid cluttering dom folder.
     # Testing: A successful build is enough Part of #38901
-https://github.com/servo/servo/pull/39568	(@mrobinson, #39568)	layout: Ensure that the `Epoch` stored in layout is accurate (#39568)
+-https://github.com/servo/servo/pull/39568	(@mrobinson, #39568)	layout: Ensure that the `Epoch` stored in layout is accurate (#39568)
     # The first epoch is 0 as that is the one used in the initial transaction, but the code was setting the first `Epoch` to
     # `Epoch(1)`.  This means that when layout advanced the epoch, the `Epoch` of the first produced display list was
     # `Epoch(2)`.
@@ -146,7 +152,8 @@ https://github.com/servo/servo/pull/39568	(@mrobinson, #39568)	layout: Ensure th
     # addition, we always store this epoch in `PipelineDetails` in the renderer.  This will be important when adding the
     # `WebView::take_screenshot` API.
     # Testing: This should not change behavior, so is covered by existing tests which rely on proper `Epoch` advancement.
-https://github.com/servo/servo/pull/39544	(@RichardTjokroutomo, @jdm, @yezhizhen, #39544)	script: Add line number argument to module script compilation functions (#39544)
++https://github.com/servo/servo/pull/39544	(@RichardTjokroutomo, @jdm, @yezhizhen, #39544)	script: Add line number argument to module script compilation functions (#39544)
+    dom
     # Script: added ```line_no``` as argument to both ```fetch_inline_module_script()``` & ```compile_module_script()``` to
     # fix the inline script reporting wrong line issue ([#39415](https://github.com/servo/servo/issues/39415)).
     # Originally, the function ```compile_module_script()``` hardwires the value 1 when invoking
@@ -199,7 +206,8 @@ https://github.com/servo/servo/pull/39544	(@RichardTjokroutomo, @jdm, @yezhizhen
     # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself.  You can also trigger a
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39564	(@kkoyung, #39564)	script: Return cached object from `CryptoKey.usages` getter (#39564)
++https://github.com/servo/servo/pull/39564	(@kkoyung, #39564)	script: Return cached object from `CryptoKey.usages` getter (#39564)
+    dom
     # Create and store a cached object in `CryptoKey` for the `[[usages]]` internal slot when the key is created or when its
     # `[[usages]]` internal slot is updated.  The getter can then return the cached object as specified in
     # https://w3c.github.io/webcrypto/#dom-cryptokey-usages, instead of creating a new object on each call.
@@ -242,10 +250,11 @@ https://github.com/servo/servo/pull/39564	(@kkoyung, #39564)	script: Return cach
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
 >>> 2025-10-02T06:16:06Z
-https://github.com/servo/servo/pull/39614	(@cpedraza@unal.edu.co, #39614)	unit test: Remove unused import in fonts (#39614)
+-https://github.com/servo/servo/pull/39614	(@cpedraza@unal.edu.co, #39614)	unit test: Remove unused import in fonts (#39614)
     # Remove unused import (`use base::generic_channel;`)
     # Testing: Clippy ran successfully, no tests added Fixes: #39609
-https://github.com/servo/servo/pull/39612	(@Loirooriol, #39612)	Upgrade Stylo to 2025-10-01 (#39612)
++https://github.com/servo/servo/pull/39612	(@Loirooriol, #39612)	Upgrade Stylo to 2025-10-01 (#39612)
+    upgrade
     # This continues #39150
     # Changelog:
     #  - Upstream:
@@ -276,13 +285,15 @@ https://github.com/servo/servo/pull/39612	(@Loirooriol, #39612)	Upgrade Stylo to
     # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself.  You can also trigger a
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39519	(@michael.wu1107@gmail.com, #39519)	fonts: Initial draft of synthetic bold face for FreeType (#39519)
++https://github.com/servo/servo/pull/39519	(@michael.wu1107@gmail.com, #39519)	fonts: Initial draft of synthetic bold face for FreeType (#39519)
+    layout
     # This is an initial attempt at implementing synthetic bold face for font families that lack actual bold faces.  The
     # overall approach borrowed implementations from Chromium and FireFox.  WPT expectations will be updated after
     # https://github.com/servo/stylo/pull/244 lands
     # Testing: There are existing WPT testcases for font synthesis (`wpt/css/css-fonts/font-synthesis-*`)
     # Depends on: https://github.com/servo/stylo/pull/244
-https://github.com/servo/servo/pull/39590	(@atbrakhi, #39590)	script: Support `keyCode`, `charCode` in KeyboardEvent constructor (#39590)
++https://github.com/servo/servo/pull/39590	(@atbrakhi, #39590)	script: Support `keyCode`, `charCode` in KeyboardEvent constructor (#39590)
+    dom
     # Support `keyCode` and `charCode` fields in KeyboardEventInit for Speedometer 3.0
     # Speedometer 3.0 fails because Servo's KeyboardEvent constructor ignores keyCode and charCode parameters, hardcoding them
     # to 0.  This breaks frameworks that check `event.keyCode === 13` for Enter key detection.  This is how [Speedometer 3.0
@@ -299,10 +310,10 @@ https://github.com/servo/servo/pull/39590	(@atbrakhi, #39590)	script: Support `k
     # dictionary instead of hardcoding to 0.
     # Testing: No new tests added.  Fixes: part of https://github.com/servo/servo/issues/16719
     # Servo running Speedometer3.0 successfully
-https://github.com/servo/servo/pull/39605	(@mrobinson, #39605)	servodriver: Use the `wpt-prefs.json` file when running servoshell (#39605)
+-https://github.com/servo/servo/pull/39605	(@mrobinson, #39605)	servodriver: Use the `wpt-prefs.json` file when running servoshell (#39605)
     # These preferences are necessary in order for tests to run properly in servodriver.
     # Testing: This causes more tests to pass when WPT is run with `--product servodriver`
-https://github.com/servo/servo/pull/39587	(@delan, @mrobinson, #39587)	webdriver: Use `take_screenshot()` API in Take (Element) Screenshot (#39587)
+-https://github.com/servo/servo/pull/39587	(@delan, @mrobinson, #39587)	webdriver: Use `take_screenshot()` API in Take (Element) Screenshot (#39587)
     # WPT tests require us to reliably take screenshots when test pages are fully loaded and testing is complete, and the WPT
     # runner uses
     # [test-wait.js](https://github.com/servo/servo/blob/a2f551eb2dda6ca35262d1c4a3b3f8d27f9ffdb5/tests/wpt/tests/tools/wptrun
@@ -326,16 +337,16 @@ https://github.com/servo/servo/pull/39587	(@delan, @mrobinson, #39587)	webdriver
     # image::RgbaImage over crossbeam without shared memory (it’s not cross-process) - we now handle the zero-sized element
     # case directly in the WebDriver server
     # Testing: This should fix some flaky tests.  Fixes: #36715.  Fixes: (partially) #39180.  Fixes: (partially) #34683.
-https://github.com/servo/servo/pull/39603	(@delan, @mrobinson, #39603)	Update expectations for `--product servodriver` (#39603)
+-https://github.com/servo/servo/pull/39603	(@delan, @mrobinson, #39603)	Update expectations for `--product servodriver` (#39603)
     # this patch updates the expectations for tests that use testdriver.js, which currently only work with `--product
     # servodriver` (#34683), running the tests with #39587.
     # expectations for all other tests, which don’t use testdriver.js, are unaffected.
     # Testing: this patch updates test expectations, though the tests are not yet run in CI
-https://github.com/servo/servo/pull/39511	(@Narfinger, #39511)	OHOS CI: Abort early when speedometer crashes in test-speedometer-ohos (#39511)
+-https://github.com/servo/servo/pull/39511	(@Narfinger, #39511)	OHOS CI: Abort early when speedometer crashes in test-speedometer-ohos (#39511)
     # Check for the pid of servo for test-speedometer-ohos to see if it did not crash and abort early if it crashed.
     # Testing: Ran test-speedometer-ohos with closing servo and without closing servo on the phone.  Fixes:
     # https://github.com/servo/servo/issues/37742
-https://github.com/servo/servo/pull/39594	(@simonwuelker, #39594)	xpath: Remove XML QName validation (#39594)
+-https://github.com/servo/servo/pull/39594	(@simonwuelker, #39594)	xpath: Remove XML QName validation (#39594)
     # *Most* of the properties that were verified here were already verified by the xpath parser before.  I have not found any
     # evidence that other browsers do the remaining checks.  There are web platform tests that expect contradicting behavior
     # (which pass in other browsers).
@@ -344,7 +355,8 @@ https://github.com/servo/servo/pull/39594	(@simonwuelker, #39594)	xpath: Remove 
     # rebasing.
     # Testing: A new web platform test starts to pass.  Fixes https://github.com/servo/servo/issues/39442 Part of #34527
     # cc @minghuaw
-https://github.com/servo/servo/pull/39591	(@mrobinson, @Loirooriol, #39591)	layout: Clone static position rectangles when caching in `IndependentFormattingContext` (#39591)
++https://github.com/servo/servo/pull/39591	(@mrobinson, @Loirooriol, #39591)	layout: Clone static position rectangles when caching in `IndependentFormattingContext` (#39591)
+    layout; incremental
     # Hoisted absolutes that are cached in IndependentFormattingContexts may have their HoistedSharedFragment reused between
     # layouts.  This means that the original value of the adjusted static positioning rectangles need to be preserved in
     # cache.  This change makes it so that these values are cloned when being retrieved from the cache.  Further adjustments
@@ -395,7 +407,7 @@ https://github.com/servo/servo/pull/39591	(@mrobinson, @Loirooriol, #39591)	layo
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
 >>> 2025-10-03T06:10:51Z
-https://github.com/servo/servo/pull/39549	(@TimvdLippe, #39549)	Add style as potential preload destination (#39549)
+-https://github.com/servo/servo/pull/39549	(@TimvdLippe, #39549)	Add style as potential preload destination (#39549)
     # This was missed during the previous implementation and was the reason that the CSP tests weren't working.
     # It also updates a test to ensure that audio and video are not preloaded.  No browsers do that and with this fix, the
     # test now passes in Chrome.  In Firefox it still fails as it doesn't implement `.vtt` support.
@@ -430,18 +442,20 @@ https://github.com/servo/servo/pull/39549	(@TimvdLippe, #39549)	Add style as pot
     # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself.  You can also trigger a
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39632	(@yezhizhen, #39632)	webdriver: Clean-up `actions.rs` (#39632)
+-https://github.com/servo/servo/pull/39632	(@yezhizhen, #39632)	webdriver: Clean-up `actions.rs` (#39632)
     # Some clean-up before picking up #37046 again.  - Remove some dead code clippy macro - Rename `dispatch_general_action`
     # to `dispatch_pause_action`
     # Testing: No behaviour change.
-https://github.com/servo/servo/pull/39547	(@TimvdLippe, #39547)	Implement `fetchLater` (#39547)
++https://github.com/servo/servo/pull/39547	(@TimvdLippe, #39547)	Implement `fetchLater` (#39547)
+    dom; pref-gated
     # Allows fetches to be deferred, only in a secure context.  It does not yet implement quota computation, since we don't
     # have a concept of document quota yet.
     # Also update the `fetch/api/idlharness` test to run in a secure context, since this API is only available there.
     # Positive Mozilla position: https://github.com/mozilla/standards-positions/issues/703 Positive WebKit position:
     # https://github.com/WebKit/standards-positions/issues/85
     # Closes whatwg/fetch#1858
-https://github.com/servo/servo/pull/39477	(@kkoyung, #39477)	script: Migrate `digest` operation to use new normalization (#39477)
++https://github.com/servo/servo/pull/39477	(@kkoyung, #39477)	script: Migrate `digest` operation to use new normalization (#39477)
+    webcrypto
     # Refactoring of the algorithm normalization in #39431 introduces a new algorithm normalization procedure to replace the
     # existing one.
     # This patch migrates the `digest` operation from using existing `normalize_algorithm_for_digest` function to using the
@@ -450,29 +464,30 @@ https://github.com/servo/servo/pull/39477	(@kkoyung, #39477)	script: Migrate `di
     # (not migrated yet) depend on it.  It will be removed when those operations are also migrated.
     # A minor bug (missing a step) in `normalize_algorithm` is also fixed.
     # Testing: Refactoring.  Existing WPT tests are enough.  Fixes: Part of #39368
-https://github.com/servo/servo/pull/39615	(@atouchet, #39615)	cargo: Update various non-breaking dependencies (#39615)
+-https://github.com/servo/servo/pull/39615	(@atouchet, #39615)	cargo: Update various non-breaking dependencies (#39615)
     # Update various non-breaking dependencies.
     # Testing: No tests for dependency updates.
-https://github.com/servo/servo/pull/39617	(@arihant2math@gmail.com, #39617)	Remove `test_mapping.json` and `python/servo/mutation` (#39617)
+-https://github.com/servo/servo/pull/39617	(@arihant2math@gmail.com, #39617)	Remove `test_mapping.json` and `python/servo/mutation` (#39617)
     # As per #39585.
     # >It used to run on our old buildbot CI for a couple years.  It was never migrated, and we should clean it up.
     # _Originally posted by @jdm in https://github.com/servo/servo/issues/39585#issuecomment-3351054660_
-https://github.com/servo/servo/pull/39584	(@arihant2math@gmail.com, #39584)	script: Stubs for geolocation interfaces (#39584)
+-https://github.com/servo/servo/pull/39584	(@arihant2math@gmail.com, #39584)	script: Stubs for geolocation interfaces (#39584)
     # Needed for #39526; stubs out all the necessary interface from https://www.w3.org/TR/geolocation/.
     # Testing: WPT
 >>> 2025-10-04T06:08:15Z
-https://github.com/servo/servo/pull/39651	(@atouchet, #39651)	Update js-sys and associated dependencies (#39651)
+-https://github.com/servo/servo/pull/39651	(@atouchet, #39651)	Update js-sys and associated dependencies (#39651)
     # Update js-sys and associated dependencies.
     # Testing: No tests for dependency updates.
-https://github.com/servo/servo/pull/39644	(@yezhizhen, #39644)	webdriver: Update expectation for `wheel.py` (#39644)
+-https://github.com/servo/servo/pull/39644	(@yezhizhen, #39644)	webdriver: Update expectation for `wheel.py` (#39644)
     # This test TIMEOUT at a very low frequency: ~ once per three weeks.  If not timeout, it passes all 14 sub-tests.  It is
     # better to update expectation and close the intermittent issue to avoid potential regression.
     # Testing: No behaviour change Fixes: #39505
-https://github.com/servo/servo/pull/38991	(@mrobinson, @mukilan, #38991)	script: Skip running layout when only updating images or canvas (#38991)
++https://github.com/servo/servo/pull/38991	(@mrobinson, @mukilan, #38991)	script: Skip running layout when only updating images or canvas (#38991)
+    perf
     # Add a new super-lightweight layout mode that avoids any layout when canvas is updated or animated images progress to the
     # next frame.  In the future this can also be used for video elements.
     # Testing: This is a performance optimization, so shouldn't change any WPT test results.
-https://github.com/servo/servo/pull/39627	(@mrobinson, #39627)	script: Share `Epoch` between canvas and layout and update the renderer separately (#39627)
+-https://github.com/servo/servo/pull/39627	(@mrobinson, #39627)	script: Share `Epoch` between canvas and layout and update the renderer separately (#39627)
     # Before both canvas updates and layout had their own `Epoch`.  This change makes it so the `Epoch` is shared.  This means
     # that display lists might have non-consecutive `Epoch`s, but will also allow for the `Epoch` in the renderer to update
     # even when no new display list is produced.  This is important for #38991.  In that PR the display list step can be
@@ -480,24 +495,26 @@ https://github.com/servo/servo/pull/39627	(@mrobinson, #39627)	script: Share `Ep
     # Testing: This shouldn't change the user-observable behavior and is thus covered by existing tests.  It should prevent
     # flakiness once #38991 lands.
 >>> 2025-10-05T06:13:51Z
-https://github.com/servo/servo/pull/39642	(@yezhizhen, #39642)	webdriver: Implement Pointer ID (#39642)
+-https://github.com/servo/servo/pull/39642	(@yezhizhen, #39642)	webdriver: Implement Pointer ID (#39642)
     # This is necessary first step to distinguish pointer sources: "mouse, pen, touch".
     # Spec: https://w3c.github.io/webdriver/#dfn-get-a-pointer-id.
     # Testing: No behaviour change yet as we still only dispatch pointer type: mouse.  Fixes: Part of #39264.
-https://github.com/servo/servo/pull/39629	(@jdm, #39629)	net: Share SVG font database between all image caches in the same process (#39629)
++https://github.com/servo/servo/pull/39629	(@jdm, #39629)	net: Share SVG font database between all image caches in the same process (#39629)
+    perf
     # load_system_fonts is relatively slow, since it needs to scan every font in the system font directories.  There's no need
     # to repeat this work for every single SVG on a page; we can do it once when creating an image cache in a process and
     # reuse that font information for all derived image caches in the same process.
     # Testing: Manually verified that pages with SVGs still load.  There should be no observable behaviour change in WPT
     # tests.
-https://github.com/servo/servo/pull/39607	(@mrobinson, #39607)	script: Do not show simple dialogs for Windows that cannot show them and normalize newlines (#39607)
++https://github.com/servo/servo/pull/39607	(@mrobinson, #39607)	script: Do not show simple dialogs for Windows that cannot show them and normalize newlines (#39607)
+    dom
     # The specification has a list of rules about when [simple dialogs cannot be shown][u1].  This change implements that part
     # of the specification and also the bits that specify when to noramlize newlines in their messages.  In addition, it fills
     # in the remaining specification step comments for these methods.
     # [u1]: https://html.spec.whatwg.org/multipage/#cannot-show-simple-dialogs
     # Testing: This causes some CSP tests run via servodriver to start passing.  Unexpected alert dialogs cause failures in
     # servodriver.
-https://github.com/servo/servo/pull/39654	(@webbeef, #39654)	doc: update NDK version in build instructions (#39654)
+-https://github.com/servo/servo/pull/39654	(@webbeef, #39654)	doc: update NDK version in build instructions (#39654)
     # The build system now requires r28.
     # Testing: Follow the steps for an Android build.
 >>> 2025-10-06T06:27:38Z
@@ -670,7 +687,7 @@ https://github.com/servo/servo/pull/39654	(@webbeef, #39654)	doc: update NDK ver
     # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself.  You can also trigger a
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39660	(@TimvdLippe, #39660)	Define conditional_malloc_size_of for all Rc (#39660)
+-https://github.com/servo/servo/pull/39660	(@TimvdLippe, #39660)	Define conditional_malloc_size_of for all Rc (#39660)
     # This updates all Rc that were ignored for malloc_size_of to use conditional_malloc_size_of, unless the type in the Rc
     # itself doesn't support malloc_size.
     # Regular expressions used to search for all occurrences:
@@ -679,14 +696,14 @@ https://github.com/servo/servo/pull/39660	(@TimvdLippe, #39660)	Define condition
     # To be able to define these, several new implementations were added to `malloc_size_of/lib.rs` as well as
     # `HashMapTracedValues`.
     # Testing: if it compiles, it's safe
-https://github.com/servo/servo/pull/39656	(@mrobinson, #39656)	wpt: Capture test output when running WPT in WebDriver mode (#39656)
+-https://github.com/servo/servo/pull/39656	(@mrobinson, #39656)	wpt: Capture test output when running WPT in WebDriver mode (#39656)
     # We were capturing test output (such as stack traces) by using the "test" key in the data provided to the
     # `process_output` log handler.  This doesn't work for WebDriver mode because the test runner runs in another process
     # entirely and it may reuse Servo executable instances for tests.
     # This change maps browser process output to tests using the "browser_pid" key that is often provided while in WebDriver
     # mode.
     # Testing: This modifies the test harness, so the tests are running tests.  Fixes: #39176
-https://github.com/servo/servo/pull/39665	(@servo-wpt-sync, #39665)	Sync WPT with upstream (05-10-2025) (#39665)
+-https://github.com/servo/servo/pull/39665	(@servo-wpt-sync, #39665)	Sync WPT with upstream (05-10-2025) (#39665)
     # Automated downstream sync of changes from upstream as of 05-10-2025 [no-wpt-sync]
 >>> 2025-10-07T06:06:52Z
 -https://github.com/servo/servo/pull/39700	(@dependabot[bot], @dependabot[bot], #39700)	build(deps): bump diplomat-runtime from 0.8.2 to 0.8.3 (#39700)
@@ -749,19 +766,20 @@ https://github.com/servo/servo/pull/39665	(@servo-wpt-sync, #39665)	Sync WPT wit
     # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself.  You can also trigger a
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39690	(@Loirooriol, #39690)	layout: Remove some unneeded type annotations (#39690)
+-https://github.com/servo/servo/pull/39690	(@Loirooriol, #39690)	layout: Remove some unneeded type annotations (#39690)
     # Testing: unneeded, no behavior change
-https://github.com/servo/servo/pull/39689	(@Loirooriol, #39689)	Test that text with `font-size: 0` has an intrinsic contribution of 0 (#39689)
+-https://github.com/servo/servo/pull/39689	(@Loirooriol, #39689)	Test that text with `font-size: 0` has an intrinsic contribution of 0 (#39689)
     # The problem reported in #29675 was (accidentally?) fixed by #32278.  Let's add a test.
     # Testing: Adds a new WPT.  Fixes: #29675
-https://github.com/servo/servo/pull/39688	(@Loirooriol, #39688)	layout: Unify line height resolution (#39688)
+-https://github.com/servo/servo/pull/39688	(@Loirooriol, #39688)	layout: Unify line height resolution (#39688)
     # Both `flow/inline/line.rs` and `flow/inline/mod.rs` had a function to resolve the `line-height` value.  They were pretty
     # much the same, except that the former wasn't handling single-line text inputs.  But I don't think it matters, since the
     # text inside such input can't be styled with `vertical-align: top` or `bottom`.
     # Thus this patch unifies the logic.  And to simplify the callers, now this function accepts a
     # `&InlineContainerStateFlags` instead of a bool for identifying single-line text inputs.
     # Testing: There shouldn't be any behavior change.  This is part of #39664
-https://github.com/servo/servo/pull/39610	(@mrobinson, @Loirooriol, #39610)	script: Use CSP sandboxing flags for `<iframe>` and pass them to child `Document`s (#39610)
++https://github.com/servo/servo/pull/39610	(@mrobinson, @Loirooriol, #39610)	script: Use CSP sandboxing flags for `<iframe>` and pass them to child `Document`s (#39610)
+    dom
     # This change makes it so that `` sanboxing is equivalent to the one used for Content Security Policy, which is how the
     # specification is written.  In addition, these sandboxing flags are passed through to `` `Document`s via `LoadData` and
     # stored as `Document::creation_sandboxing_flag_set`.  The flags are used to calculate the final
@@ -776,28 +794,31 @@ https://github.com/servo/servo/pull/39610	(@mrobinson, @Loirooriol, #39610)	scri
     #  now failing because the iframe is sanboxed but in the ScriptThread now due to `allow-same-origin`.  More implementation
     #  is needed to add support for the "one permitted sandbox navigator concept."
     # Fixes: This is part of #31973.
-https://github.com/servo/servo/pull/39645	(@gterzian, #39645)	script: implement url matches about:blank (#39645)
+-https://github.com/servo/servo/pull/39645	(@gterzian, #39645)	script: implement url matches about:blank (#39645)
     # Implement [matches-about:blank](https://html.spec.whatwg.org/multipage/#matches-about:blank), and uses it to compute the
     # fallback url of a document.
     # This will also be useful as part of [fixing iframe loading](https://github.com/servo/servo/issues/31973).
     # There is one unrelated change to origin.rs, which is the result of an fmt.
     # Testing: added unit-tests and the fallback url should be covered by wpt tests.
-https://github.com/servo/servo/pull/39682	(@mrobinson, @delan, @yezhizhen, #39682)	webdriver: Apply script timeout to related IPC messaging as well (#39682)
++https://github.com/servo/servo/pull/39682	(@mrobinson, @delan, @yezhizhen, #39682)	webdriver: Apply script timeout to related IPC messaging as well (#39682)
+    webdriver
     # In some cases scripts never call their `setTimeout` guard.  In that case also timeout if we never hear a reply from the
     # script thread.  In general, the script timeout is applied to all synchronous IPC waiting for script replies.
     # In addition, rework timeout setting a bit to be more similar to the specifciation.
     # Testing: This causes some tests run with the WebDriver test runner to fail with TIMEOUT rather than CRASH, accurately
     # reflecting their reason for failing.
-https://github.com/servo/servo/pull/39620	(@yezhizhen, @mrobinson, #39620)	webdriver: Implement implicit wait for "Element retrieval" (#39620)
++https://github.com/servo/servo/pull/39620	(@yezhizhen, @mrobinson, #39620)	webdriver: Implement implicit wait for "Element retrieval" (#39620)
+    webdriver
     # Implicit wait is specified in [WebDriver spec](https://w3c.github.io/webdriver/#dfn-find), which is used to keep
     # retrieving elements until found or timeout.  This is really convenient for automation with real websites.
     # Testing: Manually tested with [Selenium](https://www.selenium.dev/documentation/webdriver/waits/#implicit-waits).
-https://github.com/servo/servo/pull/39684	(@mrobinson, @delan, #39684)	compositor: Fix a performance regression from #39583 (#39684)
++https://github.com/servo/servo/pull/39684	(@mrobinson, @delan, #39684)	compositor: Fix a performance regression from #39583 (#39684)
+    perf
     # When processing new WebRender frames after handling messages in the compositor, only do that when we actually receive
     # `NewWebRenderFrameReady` messages.  This isn't an issue unless there are active animations.  When there are, every spin
     # of the event loop was triggering a repaint.
     # Testing: This should fix the performance regression on the Speedometer Bencher benchmarks.  Fixes: #39641
-https://github.com/servo/servo/pull/39683	(@Narfinger, #39683)	OHOS/Android: Fix black screen of app. (#39683)
+-https://github.com/servo/servo/pull/39683	(@Narfinger, #39683)	OHOS/Android: Fix black screen of app. (#39683)
     # https://github.com/servo/servo/commit/6ffc0cd482e0e9815e5005533753fec2642c804b seemed to have forgotten to present the
     # rendering context.  This fixes this.
     # Testing: Compiled on OHOS and it works now.  Fixes: https://github.com/servo/servo/issues/39638
@@ -850,27 +871,31 @@ https://github.com/servo/servo/pull/39683	(@Narfinger, #39683)	OHOS/Android: Fix
     # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself.  You can also trigger a
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39570	(@Gae24, #39570)	script: further restrict accepted worker script (#39570)
++https://github.com/servo/servo/pull/39570	(@Gae24, #39570)	script: further restrict accepted worker script (#39570)
+    dom
     # Follow more closely spec, adding some missing steps.
     # Testing: should be covered by existing wpt tests
-https://github.com/servo/servo/pull/39705	(@mrobinson, #39705)	libservo: Remove `MouseButtonAction::Click` from the API (#39705)
++https://github.com/servo/servo/pull/39705	(@mrobinson, #39705)	libservo: Remove `MouseButtonAction::Click` from the API (#39705)
+    embedding
     # The embedder should never be responsible for triggering click events, so this change removes that possibility from the
     # API.  In addition, triggering of click events is simplified by moving the logic to the `DocumentEventHandler`.  This has
     # the benefit of making behavior consistent between in-process and out-of-process ``s.  Now click events are never
     # triggered when the button up and down cross frame boundaries.
     # Testing: This should be covered by existing tests.
-https://github.com/servo/servo/pull/39681	(@michael.wu1107@gmail.com, @mrobinson, #39681)	fonts: Use OS/2 table to determine if font face is already bold when synthesizing bold face for FreeType platform (#39681)
++https://github.com/servo/servo/pull/39681	(@michael.wu1107@gmail.com, @mrobinson, #39681)	fonts: Use OS/2 table to determine if font face is already bold when synthesizing bold face for FreeType platform (#39681)
+    layout
     # The previous implementation in #39519 mistakenly used the `FontTemplateDescriptor` to determine whether the font face
     # itself is already bold.  This PR fixes that by using the `usWeightClass` in the `OS/2` table of the font face to
     # determine if the font face is bold already.
     # Testing: A new testcase `/tests/wpt/mozilla/tests/css/font_synthesis_weight_static_bold.html` is getting added in
     # #39633.  This test checks whether a bold font face gets "double emboldened" Depends on: #39633
-https://github.com/servo/servo/pull/39704	(@yezhizhen, #39704)	script: Remove `WebdriverTimeout` callback (#39704)
+-https://github.com/servo/servo/pull/39704	(@yezhizhen, #39704)	script: Remove `WebdriverTimeout` callback (#39704)
     # After #39682, this callback is no longer necessary.  We also remove `WebDriverJSError::Timeout`.
     # Testing: No regression in wdspec.  For servodriver,
     # [before](https://github.com/yezhizhen/servo/actions/runs/18300017112).
     # [after](https://github.com/yezhizhen/servo/actions/runs/18300911442) is also the same.
-https://github.com/servo/servo/pull/39686	(@mrobinson, @Loirooriol, #39686)	script: Allow loading of `<iframe srcdoc>` with a `sandbox` attribute (#39686)
++https://github.com/servo/servo/pull/39686	(@mrobinson, @Loirooriol, #39686)	script: Allow loading of `<iframe srcdoc>` with a `sandbox` attribute (#39686)
+    dom
     # Before, `about: srcdoc` was only handled when loading `` contents in the same `ScriptThread` as the parent.  This is not
     # always the case though with sandboxed ``s.  This change makes it so that both code paths properly handle `about:
     # srcdoc`.
@@ -968,11 +993,11 @@ https://github.com/servo/servo/pull/39686	(@mrobinson, @Loirooriol, #39686)	scri
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
 >>> 2025-10-09T06:05:17Z
-https://github.com/servo/servo/pull/39723	(@atouchet, #39723)	Update arboard (#39723)
+-https://github.com/servo/servo/pull/39723	(@atouchet, #39723)	Update arboard (#39723)
     # This updates arboard which was downgraded in #39673 for some reason which re-introduced a number of duplicate windows
     # crates.
     # Testing: No tests for dependency update.
-https://github.com/servo/servo/pull/39715	(@yezhizhen, #39715)	webdriver: Serialize script `String` argument correctly to prevent injection attack (#39715)
+-https://github.com/servo/servo/pull/39715	(@yezhizhen, #39715)	webdriver: Serialize script `String` argument correctly to prevent injection attack (#39715)
     # The previous serialization is problematic when dealing with string argument with special characters.  In addition, it
     # was vulnerable to injection attack like below:
     # ```rust let s = r#""); alert(1); //"#; let args_string = format!("\"{}\"", s); let script = format!("(function() {{
@@ -980,7 +1005,8 @@ https://github.com/servo/servo/pull/39715	(@yezhizhen, #39715)	webdriver: Serial
     # Testing: Added four new tests in [wdspec](https://web-platform-tests.org/writing-tests/wdspec.html).  Before this PR, we
     # would get "javascript error" for the new tests, and trigger user prompts.  Now it passes.  This should also fix some
     # testdriver tests.
-https://github.com/servo/servo/pull/39661	(@waterwhisperer24@qq.com, #39661)	htmlbuttonelement: check if document is fully active in activation behavior (#39661)
++https://github.com/servo/servo/pull/39661	(@waterwhisperer24@qq.com, #39661)	htmlbuttonelement: check if document is fully active in activation behavior (#39661)
+    dom
     #  check if document is fully active in HTMLButtonElement's activation behaviour
     # Testing: ran a [try build](https://github.com/WaterWhisperer/servo/actions/runs/18343522397) and it passed successfully
     # Fixes: #39643
@@ -991,14 +1017,15 @@ https://github.com/servo/servo/pull/39661	(@waterwhisperer24@qq.com, #39661)	htm
     # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself.  You can also trigger a
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39721	(@mrobinson, #39721)	wpt: Rebaseline some more `testdriver.js` tests (#39721)
+-https://github.com/servo/servo/pull/39721	(@mrobinson, #39721)	wpt: Rebaseline some more `testdriver.js` tests (#39721)
     # These tests were missed in the first batch of `testdriver.js` baselines, likely because the script which identified them
     # didn't handle reference tests.  With this change, the number of tests with differing results is down to 111[^1].
     # [^1]: https://github.com/servo/servo/actions/runs/18339818090
     # Testing: These changes are rebaselines of test results, so are tests themselves.
-https://github.com/servo/servo/pull/39662	(@arihant2math@gmail.com, #39662)	storage: More documentation for indexeddb_thread.rs (#39662)
+-https://github.com/servo/servo/pull/39662	(@arihant2math@gmail.com, #39662)	storage: More documentation for indexeddb_thread.rs (#39662)
     # Cleaned up some of the documentation.
 https://github.com/servo/servo/pull/39646	(@kkoyung, #39646)	script: Migrate `sign`/`verify` operation to use new normalization (#39646)
+    webcrypto
     # Refactoring of the algorithm normalization in #39431 introduces a new algorithm normalization procedure to replace the
     # existing one, and we continue the migration here.
     # In this patch:
@@ -1007,10 +1034,11 @@ https://github.com/servo/servo/pull/39646	(@kkoyung, #39646)	script: Migrate `si
     # `normalize_algorithm_for_sign_or_verify` is removed.  - The functions `sign_hmac` and `verify_hmac` are moved to the
     # sub-module `hmac_operation`.
     # Testing: Refactoring.  Existing WPT tests suffice.  Fixes: Part of #39368
-https://github.com/servo/servo/pull/39718	(@Gae24, #39718)	script: Move worker DOM interfaces to `script/dom/workers/` (#39718)
+-https://github.com/servo/servo/pull/39718	(@Gae24, #39718)	script: Move worker DOM interfaces to `script/dom/workers/` (#39718)
     # Moves code related to the Web Worker spec to a new mod.
     # Testing: A successful build is enough Part of #38901
-https://github.com/servo/servo/pull/39635	(@andrei.volykhin@gmail.com, #39635)	html: Do not update the image data inside legacy <image> constructor (#39635)
++https://github.com/servo/servo/pull/39635	(@andrei.volykhin@gmail.com, #39635)	html: Do not update the image data inside legacy <image> constructor (#39635)
+    dom
     # The legacy 'image' constructor (new Image()) doesn't have any step in specification which require to run `update the
     # image data` algorithm.
     # See https://html.spec.whatwg.org/multipage/#dom-image
@@ -1019,32 +1047,36 @@ https://github.com/servo/servo/pull/39635	(@andrei.volykhin@gmail.com, #39635)	h
     # relevant mutations) to handle the edge case of `decode()` with 'image' without "src" and "srcset" attributes.
     # See html/semantics/embedded-content/the-img-element/decode/image-decode.html#L87
     # Testing: No changes in test expectations
-https://github.com/servo/servo/pull/39709	(@mrobinson, @delan, #39709)	libservo: Make `FormControl` responses completely asynchronous (#39709)
++https://github.com/servo/servo/pull/39709	(@mrobinson, @delan, #39709)	libservo: Make `FormControl` responses completely asynchronous (#39709)
+    perf
     # Before responses to `FormControl` requests were handled synchronous in script (ie they would block the page).  This
     # change makes it so that they are handled asynchronously, with their responses filtering back through the Constellation.
     # This should fix many WPT tests when run with WebDriver.
     # Testing: There are some WebDriver-based test for this, but they do not quite pass yet.  More investigation is required,
     # but this is necessary to get them to pass.  Fixes: #39652 Fixes: #37013
-https://github.com/servo/servo/pull/39687	(@mrobinson, #39687)	deps: Upgrade to WebRender 0.68 (#39687)
++https://github.com/servo/servo/pull/39687	(@mrobinson, #39687)	deps: Upgrade to WebRender 0.68 (#39687)
+    upgrade
     # This is the latest release of WebRender that will be based on a recent version of WebRender from the Gecko repository.
     # Testing: This should not change Servo's behavior and is thus covered by existing tests.  Fixes:
     # https://github.com/servo/webrender/issues/4875
-https://github.com/servo/servo/pull/39653	(@arihant2math@gmail.com, #39653)	storage: Port webstorage to sqlite3 (#39653)
++https://github.com/servo/servo/pull/39653	(@arihant2math@gmail.com, #39653)	storage: Port webstorage to sqlite3 (#39653)
+    perf
     # Currently we use a single json file to hold all webstorage data.  This is bad; this json file would become slow to read
     # or write to as the number of origins and key/value pairs increase.  This PR splits this into one database per an origin,
     # and uses sqlite3 instead of json.  IndexedDB already uses sqlite3, so no additionally dependencies are added.
     # Fixes: #36034 Testing: WPT
-https://github.com/servo/servo/pull/39679	(@yezhizhen, @willypuzzle, #39679)	webdriver: Stop making fields `RefCell` (#39679)
+-https://github.com/servo/servo/pull/39679	(@yezhizhen, @willypuzzle, #39679)	webdriver: Stop making fields `RefCell` (#39679)
     # Stop making any fields of webdriver being RefCell to completely rely on compile-time check.
     # Testing: No behaviour change Fixes: #39497 Fixes: #39649
 >>> 2025-10-10T06:17:29Z
-https://github.com/servo/servo/pull/39633	(@michael.wu1107@gmail.com, @wuminghua7@huawei.com, #39633)	fonts: Add synthetic bold face support for Windows (#39633)
++https://github.com/servo/servo/pull/39633	(@michael.wu1107@gmail.com, @wuminghua7@huawei.com, #39633)	fonts: Add synthetic bold face support for Windows (#39633)
+    layout
     # This PR follows #39519 and adds synthetic bold face support for Windows platform.
     # Testing: There are existing WPT testcases for font synthesis (wpt/css/css-fonts/font-synthesis-*).  A new test that
     # checks for "double emboldening" (a bold font gets emboldened again) is getting added to the upstream WPT repo
     # (https://github.com/web-platform-tests/wpt/pull/55313) Depends on: https://github.com/servo/dwrote-rs/pull/70,
     # https://github.com/servo/dwrote-rs/pull/71 Part of #39637
--https://github.com/servo/servo/pull/39753	(@dependabot[bot], @dependabot[bot], #39753)	build(deps): bump half from 2.6.0 to 2.7.0 (#39753)
+--https://github.com/servo/servo/pull/39753	(@dependabot[bot], @dependabot[bot], #39753)	build(deps): bump half from 2.6.0 to 2.7.0 (#39753)
     # Bumps [half](https://github.com/VoidStarKat/half-rs) from 2.6.0 to 2.7.0.
     # Release notes Sourced from half's releases.
     # 2.7.0 Changed
@@ -1141,26 +1173,29 @@ https://github.com/servo/servo/pull/39633	(@michael.wu1107@gmail.com, @wuminghua
     # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself.  You can also trigger a
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/39727	(@simonwuelker, #39727)	xpath: Prove that some internal errors are unreachable (#39727)
+-https://github.com/servo/servo/pull/39727	(@simonwuelker, #39727)	xpath: Prove that some internal errors are unreachable (#39727)
     # The `Evaluatable` trait is used for enforcing a common interface for expressions.  Removing it allows us to pass
     # additional parameters to some functions that need them, which proves that a few errors are impossible to reach.
     # Testing: Covered by existing tests Part of #34527
-https://github.com/servo/servo/pull/39387	(@jschwe, #39387)	Add code-coverage option for `./mach test-unit` using llvm-cov (#39387)
++https://github.com/servo/servo/pull/39387	(@jschwe, #39387)	Add code-coverage option for `./mach test-unit` using llvm-cov (#39387)
+    testing
     # Add a `--code-coverage` option for `./mach test-unit` and an option to pass additional arguments.  The additional
     # options are required to e.g.  pass `--codecov --output-path=codecov.json` to generate a codecov compatible report in CI.
     # We use [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov) to simplify our workflow, since it handles both the
     # required compile flags and creating the report.
     # Testing: Manual testing of the new flags First step towards https://github.com/servo/servo/issues/37768
-https://github.com/servo/servo/pull/39731	(@Loirooriol, #39731)	Stylo: Let `Stylesheet::from_bytes()` take a `Arc<Locked<MediaList>>` parameter (#39731)
+-https://github.com/servo/servo/pull/39731	(@Loirooriol, #39731)	Stylo: Let `Stylesheet::from_bytes()` take a `Arc<Locked<MediaList>>` parameter (#39731)
     # For `@import` we already had a `Arc>`, so now we will no longer pointlessly clone it into a `MediaList` in order to pass
     # it to `Stylesheet::from_bytes()`, just for it to be wrapped again into an `Arc>`.
     # Testing: Unneeded, no change in behavior
     # Stylo PR: https://github.com/servo/stylo/pull/251
-https://github.com/servo/servo/pull/39691	(@michael.wu1107@gmail.com, #39691)	fonts: Add synthetic bold face support for macos (#39691)
++https://github.com/servo/servo/pull/39691	(@michael.wu1107@gmail.com, #39691)	fonts: Add synthetic bold face support for macos (#39691)
+    layout
     # This PR follows https://github.com/servo/servo/pull/39519 and adds synthetic bold face support for MacOs platform.
     # Testing: There are existing WPT testcases for font synthesis (wpt/css/css-fonts/font-synthesis-*).  A new test checking
     # that a bold face font does not get "double emboldened" is getting added in #39713 Part of #39637
-https://github.com/servo/servo/pull/39733	(@kkoyung, #39733)	script: Migrate `generateKey` operation to use new normalization (#39733)
++https://github.com/servo/servo/pull/39733	(@kkoyung, #39733)	script: Migrate `generateKey` operation to use new normalization (#39733)
+    webcrypto
     # Refactoring of the algorithm normalization in #39431 introduces a new algorithm normalization procedure to replace the
     # existing one, and we continue the migration here.
     # In this patch:
@@ -1169,7 +1204,8 @@ https://github.com/servo/servo/pull/39733	(@kkoyung, #39733)	script: Migrate `ge
     # `normalize_algorithm_for_generate_key` is removed.  - The functions `generate_key_aes` and `generate_key_hmac` are moved
     # to the sub-module `aes_operation` and `hmac_operation`, respectively.
     # Testing: Refactoring.  Existing WPT tests suffice.  Fixes: Part of #39368
-https://github.com/servo/servo/pull/39509	(@Narfinger, #39509)	Script: Lazily transform the DOMString into Rust String instead of immediately. (#39509)
++https://github.com/servo/servo/pull/39509	(@Narfinger, #39509)	Script: Lazily transform the DOMString into Rust String instead of immediately. (#39509)
+    perf
     # This implements LazyDOMString (from now on DOMString) as outlined in https://github.com/servo/servo/issues/39479.
     # Constructing from a *mut JSString we keep the in a RootedTraceableBox> and transform the string into a rust string if
     # necessary via the `make_rust_string` method.  Methods used in script are implemented on this string.  Currently we
@@ -1178,7 +1214,8 @@ https://github.com/servo/servo/pull/39509	(@Narfinger, #39509)	Script: Lazily tr
     # `make_rust_string` and the `bytes` method.  This method returns the new type `EncodedBytes` which contains the reference
     # to the underlying string in either format.
     # Testing: WPT tests still seem to work, so this should test this functionality.
-https://github.com/servo/servo/pull/39606	(@andrei.volykhin@gmail.com, #39606)	html: Add missing 'width' and 'height' reflected IDL dimension attributes (#39606)
++https://github.com/servo/servo/pull/39606	(@andrei.volykhin@gmail.com, #39606)	html: Add missing 'width' and 'height' reflected IDL dimension attributes (#39606)
+    dom
     # The HTML specification defines the 'width' and 'height' attributes as dimension attributes for the embedded content and
     # images (img, iframe, embed, object, video, source, input with image type)
     # https://html.spec.whatwg.org/multipage/#dimension-attributes and for the tables (table, col, colgroup, thead, tbody,
@@ -1194,7 +1231,8 @@ https://github.com/servo/servo/pull/39606	(@andrei.volykhin@gmail.com, #39606)	h
     # Testing: Improvements in the following tests - html/dom/idlharness.https.html - html/dom/reflection-embedded.html -
     # html/dom/reflection-tabular.html -
     # html/rendering/replaced-elements/attributes-for-embedded-content-and-images/picture-aspect-ratio.html
-https://github.com/servo/servo/pull/39717	(@andrei.volykhin@gmail.com, #39717)	html: Support selecting <media> element source from children (#39717)
++https://github.com/servo/servo/pull/39717	(@andrei.volykhin@gmail.com, #39717)	html: Support selecting <media> element source from children (#39717)
+    dom
     # Follow the HTML implemetation and support selection of the 'media' element loading source from 'source' children
     # elements with validation processing over their 'media/src/type' attributes.
     # See https://html.spec.whatwg.org/multipage/#concept-media-load-algorithm
@@ -1206,7 +1244,8 @@ https://github.com/servo/servo/pull/39717	(@andrei.volykhin@gmail.com, #39717)	h
     # with regressions (after enabled 'source' type attribute validation): - content-security-policy/media-src/media-src* -
     # mixed-content/gen/top\*audio|video-tag* - resource-timing/initiator-type/*
     # Fixes: https://github.com/servo/servo/issues/21481 Fixes: https://github.com/servo/servo/issues/34127
-https://github.com/servo/servo/pull/39370	(@mukilan, #39370)	script: optimize `Element::create` for uncustomized built-in elements (#39370)
++https://github.com/servo/servo/pull/39370	(@mukilan, #39370)	script: optimize `Element::create` for uncustomized built-in elements (#39370)
+    perf
     # The investigation in #37745 revealed that `Element::create` spends ~39% of its runtime in `set_custom_element_state`.
     # For uncustomized built-in elements, this overhead is unnecessary as according to the spec, they are equivalent to being
     # initialized in the "uncustomized" state.  Although our rust implemention also initializes the elements in "uncustomized"
@@ -1217,14 +1256,14 @@ https://github.com/servo/servo/pull/39370	(@mukilan, #39370)	script: optimize `E
     # For more information about the peformance improvements, please refer to [this comment][1].
     # [1]: https://github.com/servo/servo/issues/37745#issuecomment-3305477287
     # Testing: There should be no functional change, so this is covered by WPT suite.
-https://github.com/servo/servo/pull/39729	(@simonwuelker, #39729)	mach: Run XPath unit tests with mach test-unit (#39729)
+-https://github.com/servo/servo/pull/39729	(@simonwuelker, #39729)	mach: Run XPath unit tests with mach test-unit (#39729)
     # Fixes: https://github.com/servo/servo/issues/39551
-https://github.com/servo/servo/pull/39476	(@simonwuelker, #39476)	Add `test-wait` to `/_mozilla/shadow-dom/move-element-with-ua-shadow-tree-crash.html` (#39476)
+-https://github.com/servo/servo/pull/39476	(@simonwuelker, #39476)	Add `test-wait` to `/_mozilla/shadow-dom/move-element-with-ua-shadow-tree-crash.html` (#39476)
     # Without the `test-wait` class the testharness won't wait until the actual test executes.
     # I'm not sure if this is the reason for https://github.com/servo/servo/issues/39473 (I don't understand how that could
     # cause the test to time out), but it's definitely *a* bug.  The test is not intermittent locally.  Let's do a couple try
     # runs and then see where we go from there.
-https://github.com/servo/servo/pull/39719	(@Loirooriol, #39719)	script: Refactor imported stylesheets (#39719)
+-https://github.com/servo/servo/pull/39719	(@Loirooriol, #39719)	script: Refactor imported stylesheets (#39719)
     # We were previously using the unsound `StylesheetContents::from_data()` to create a dummy stylesheet, which we were later
     # replacing with the actual imported stylesheet once it loaded.
     # This patch changes that to use `ImportSheet::Pending` instead.  But then:
@@ -1233,26 +1272,29 @@ https://github.com/servo/servo/pull/39719	(@Loirooriol, #39719)	script: Refactor
     #  `ImportSheet::Sheet(stylesheet)` later on.
     # Testing: Unnecessary, there should be no behavior change Fixes: #39710
     # Stylo PR: https://github.com/servo/stylo/pull/250
-https://github.com/servo/servo/pull/39713	(@michael.wu1107@gmail.com, #39713)	fonts: Do not apply synthetic bold if font is already bold for webfont on FreeType platform (#39713)
++https://github.com/servo/servo/pull/39713	(@michael.wu1107@gmail.com, #39713)	fonts: Do not apply synthetic bold if font is already bold for webfont on FreeType platform (#39713)
+    layout
     # This is to fix my oversight in the previous PR #39681 where the use of OS/2 table to determine a synthetic bold face
     # should be applied is not applied to web font.
     # Testing: Added a new test `tests/wpt/mozilla/tests/css/font_synthesis_weight_webfont_bold.html` that checks if an
     # already-bold webfont is "double emboldened" Part of #39637
-https://github.com/servo/servo/pull/39730	(@yezhizhen, #39730)	mach: New powershell script `mach.ps1` mimicking globbing of Unix (#39730)
+-https://github.com/servo/servo/pull/39730	(@yezhizhen, #39730)	mach: New powershell script `mach.ps1` mimicking globbing of Unix (#39730)
     # Unix terminal natively supports globbing, but Windows don't.  That's why command like `.\mach update-wpt
     # D:\selenium_servo\linux\*.log` works differently on Windows.
     # This PR creates a new script `mach.ps1`.
     # 1.  If user uses cmd, `./mach` still runs `./mach.bat`.  2.  If user uses powershell, `./mach` runs `./mach.ps1`,
     # supporting the feature mentioned.
     # Testing: Manually tested.  Fixes: #39724
-https://github.com/servo/servo/pull/38996	(@mrobinson, @mukilan, #38996)	script: Do not root nodes with animating images (#38996)
++https://github.com/servo/servo/pull/38996	(@mrobinson, @mukilan, #38996)	script: Do not root nodes with animating images (#38996)
+    perf
     # Now that we do not need to call `Node::dirty` when an image frame changes, we no longer have to keep a map of rooted
     # nodes.  Instead, expose a new `AnimatingImages` type that also tracks when the set of animating images is diryt and new
     # image animation update should maybe be scheduled.
     # In addition, cancel any ongoing image animations eagerly when they are removed from the DOM like we do for CSS
     # animations.
     # Testing: This should not change behavior and thus is covered by existing WPT tests.
-https://github.com/servo/servo/pull/39530	(@kkoyung, #39530)	script: Migrate `encrypt`/`decrypt` operation to use new normalization (#39530)
++https://github.com/servo/servo/pull/39530	(@kkoyung, #39530)	script: Migrate `encrypt`/`decrypt` operation to use new normalization (#39530)
+    webcrypto
     # Refactoring of the algorithm normalization in #39431 introduces a new algorithm normalization procedure to replace the
     # existing one, and we continue the migration here.
     # This patch migrates the `encrypt` and `decrypt` operation from using existing
@@ -1265,10 +1307,11 @@ https://github.com/servo/servo/pull/39530	(@kkoyung, #39530)	script: Migrate `en
     # also migrated, we can remove them.
     # Testing: Refactoring.  Existing WPT tests are enough.  Fixes: Part of #39368
 >>> 2025-10-11T06:01:57Z
-https://github.com/servo/servo/pull/39778	(@atouchet, #39778)	Update some non-breaking dependencies (#39778)
+-https://github.com/servo/servo/pull/39778	(@atouchet, #39778)	Update some non-breaking dependencies (#39778)
     # Update some non-breaking dependencies.
     # Testing: No tests for dependency updates.
 https://github.com/servo/servo/pull/39760	(@kkoyung, #39760)	script: Migrate `importKey` operation to use new normalization (#39760)
+    webcrypto
     # Refactoring of the algorithm normalization in #39431 introduces a new algorithm normalization procedure to replace the
     # existing one, and we continue the migration here.
     # In this patch:
@@ -1322,7 +1365,7 @@ https://github.com/servo/servo/pull/39762	(@simonwuelker, #39762)	xpath: Remove 
     # A predicate expression is just a regular expressions.  We can remove it and make the AST a bit smaller (and easier to
     # read).
     # Testing: Covered by existing tests Part of #34527
-https://github.com/servo/servo/pull/39761	(@kkoyung, #39761)	script: Remove wrongly registered operations for AES-KW (#39761)
+-https://github.com/servo/servo/pull/39761	(@kkoyung, #39761)	script: Remove wrongly registered operations for AES-KW (#39761)
     # AES-KW algorithm does not support encryption and decryption (https://w3c.github.io/webcrypto/#aes-kw-registration), but
     # it was wrongly registered with these two operations in our implementation.
     # Luckily, our implementation can catch this mistake and throw NotSupportedError in later steps, by
@@ -1348,7 +1391,7 @@ https://github.com/servo/servo/pull/39720	(@mrobinson, #39720)	libservo: Unify n
 https://github.com/servo/servo/pull/39758	(@atouchet, #39758)	Update some Windows dependencies (#39758)
     # Update some Windows dependencies.
     # Testing: No tests for dependency updates.
-https://github.com/servo/servo/pull/39734	(@kkoyung, #39734)	script: Overwrite WebCrypto algorithm name during normalization (#39734)
+-https://github.com/servo/servo/pull/39734	(@kkoyung, #39734)	script: Overwrite WebCrypto algorithm name during normalization (#39734)
     # WebCrypto API allows user to input case-insensitive algorithm name, and overwrites it with standardized algorithm name
     # internally, by Step 7 of .
     # This step is missing for some cases.  This patch brings it back.
@@ -1363,7 +1406,8 @@ https://github.com/servo/servo/pull/39773	(@shram-laabh, #39773)	Adding message 
     # errors*](https://github.com/servo/servo/issues/39053) i.e.  it adds message argument in WrongDocument Error *
     # Testing: *This PR is tested using CLI ./mach test-unit -p libservo --jobs=3* Fixes: [*Provide messages in JS
     # errors*](https://github.com/servo/servo/issues/39053)
-https://github.com/servo/servo/pull/39780	(@kkoyung, #39780)	script: Migrate `wrapKey`/`unwrapKey` operation to use new normalization (#39780)
++https://github.com/servo/servo/pull/39780	(@kkoyung, #39780)	script: Migrate `wrapKey`/`unwrapKey` operation to use new normalization (#39780)
+    webcrypto
     # Refactoring of the algorithm normalization in #39431 introduces a new algorithm normalization procedure to replace the
     # existing one, and we continue the migration here.
     # In this patch:
@@ -1515,7 +1559,8 @@ https://github.com/servo/servo/pull/36303	(@kenzieradityatirtarahardja18@gmail.c
     # spec.
     # Testing: This change adds a WPT test.  Fixes: #35950
     # Try: http://github.com/PotatoCP/servo/actions/runs/14303000315 cc: @xiaochengh @d-desiatkin
-https://github.com/servo/servo/pull/39814	(@kkoyung, #39814)	script: Change type of [[algorithm]] internal slot of CryptoKey (#39814)
++https://github.com/servo/servo/pull/39814	(@kkoyung, #39814)	script: Change type of [[algorithm]] internal slot of CryptoKey (#39814)
+    webcrypto
     # CryptoKey interface has an internal slot named [[algorithm]], which store a WebIDL dictionary [1].  CryptoKey also
     # stores a cached ECMAScript Object associated with the [[algorithm]] internal slot, and returns this object when the
     # interface member `algorithm` is called [2].
@@ -1595,7 +1640,8 @@ https://github.com/servo/servo/pull/39800	(@simonwuelker, #39800)	XPath: Flatten
     # Testing: No behaviour change intended, covered by existing tests.  Part of #34527
 https://github.com/servo/servo/pull/39802	(@servo-wpt-sync, #39802)	Sync WPT with upstream (12-10-2025) (#39802)
     # Automated downstream sync of changes from upstream as of 12-10-2025 [no-wpt-sync]
-https://github.com/servo/servo/pull/39805	(@kkoyung, #39805)	script: Migrate `deriveBits`/`get key length` operation to use new normalization (#39805)
++https://github.com/servo/servo/pull/39805	(@kkoyung, #39805)	script: Migrate `deriveBits`/`get key length` operation to use new normalization (#39805)
+    webcrypto
     # Refactoring of the algorithm normalization in #39431 introduces a new algorithm normalization procedure to replace the
     # existing one, and we continue the migration here.  This patch is the last piece of this migration.
     # In this patch:
@@ -1788,14 +1834,16 @@ https://github.com/servo/servo/pull/39832	(@Loirooriol, #39832)	Split intersecti
 https://github.com/servo/servo/pull/39767	(@gterzian, #39767)	base: derive`Debug` for `WebViewId` (#39767)
     # Add the top level browsing context info to the debug of webview ids, for clarity(this is already done for the display).
     # Would have saved me some debugging over at https://github.com/servo/servo/issues/39748
-https://github.com/servo/servo/pull/39829	(@kkoyung, #39829)	script: Allow zero length in deriveBits operation of HKDF and PBKDF2 (#39829)
++https://github.com/servo/servo/pull/39829	(@kkoyung, #39829)	script: Allow zero length in deriveBits operation of HKDF and PBKDF2 (#39829)
+    webcrypto
     # The WebCrypto API specification was updated (https://github.com/w3c/webcrypto/pull/380) to allow zero length in
     # deriveBits operation of HKDF and PBKDF2.  This patch updates our implementation accordingly.
     # Testing: Pass some WPT tests that were expected to fail.
 https://github.com/servo/servo/pull/39825	(@yezhizhen, #39825)	webdriver: Reduce visibilty of some structures and functions (#39825)
     # Work on some chore before further improving script execution.
     # Testing: No behaviour change.
-https://github.com/servo/servo/pull/39827	(@kkoyung, #39827)	script: Register "get key length" operation for AES-KW (#39827)
++https://github.com/servo/servo/pull/39827	(@kkoyung, #39827)	script: Register "get key length" operation for AES-KW (#39827)
+    webcrypto
     # We have already implemented the "get key length" operation for AES-KW in
     # `components/script/dom/subtlecrypto/aes_operation.rs`.  Registering it to `registeredAlgorithms` in the algorithm
     # normalization makes it functional.
@@ -1853,7 +1901,8 @@ https://github.com/servo/servo/pull/39812	(@jschwe, #39812)	testing: Use nextest
     # - The `--profile` option in nextest is not the cargo profile, but refers to nextest configuration profiles.  -
     # `--nocapture` is a direct argument to nextest, not to the testharness, so we can remove the preceding `--` seperator.
     # Testing: Tested by running unit-tests in CI Fixes: #39797
-https://github.com/servo/servo/pull/39863	(@kkoyung, #39863)	script: Access internal slot of CryptoKey from HMAC Operations (#39863)
++https://github.com/servo/servo/pull/39863	(@kkoyung, #39863)	script: Access internal slot of CryptoKey from HMAC Operations (#39863)
+    webcrypto
     # After the PR #39814 being merged, we can access the `[[algorithm]]` internal slot of a `CryptoKey` directly in Rust,
     # without doing a JS object conversion.
     # This patch leverages this feature to simplify HMAC operation steps that access the `[[algorithm]]` internal slot of
@@ -1958,7 +2007,8 @@ https://github.com/servo/servo/pull/39856	(@yezhizhen, #39856)	cargo: Resolve ya
     # https://github.com/servo/servo/actions/runs/18486627140/job/52671217855
     # https://github.com/servo/servo/actions/runs/18485457867/job/52668108268
 >>> 2025-10-16T06:14:01Z
-https://github.com/servo/servo/pull/39806	(@arihant2math@gmail.com, @kkoyung, #39806)	webcrypto: Add JWK export for HMAC keys (#39806)
++https://github.com/servo/servo/pull/39806	(@arihant2math@gmail.com, @kkoyung, #39806)	webcrypto: Add JWK export for HMAC keys (#39806)
+    webcrypto
     # Finish up the work started by #39059.
 https://github.com/servo/servo/pull/39885	(@yezhizhen, #39885)	webdriver: Deserialize `WebWindow` and report error correctly for script execution (#39885)
     # We were relying on `fn WebdriverWindow` to report `NoSuchWindow` during script execution, regardless of the fact that it
@@ -2047,7 +2097,8 @@ https://github.com/servo/servo/pull/39891	(@yezhizhen, #39891)	Compositor: Do no
     # We should not dispatch input event when point is given but hit-test has empty result.  This caused panic when the page
     # is not fully loaded.  Also restructure code a bit.
     # Testing: Manually tested.  Fixes: #39888
-https://github.com/servo/servo/pull/39894	(@kkoyung, #39894)	script: Simplify dictionary conversion in `SubtleCrypto` (#39894)
++https://github.com/servo/servo/pull/39894	(@kkoyung, #39894)	script: Simplify dictionary conversion in `SubtleCrypto` (#39894)
+    webcrypto
     # WebCrypto API implementation involves a lot of conversion between JS values and many different WebIDL dictionaries.  We
     # currently have two helper functions, `value_from_js_object` and `boxed_value_from_js_object`, to convert JS values into
     # different WebIDL dictionaries.
@@ -2109,7 +2160,8 @@ https://github.com/servo/servo/pull/39830	(@RichardTjokroutomo, @Loirooriol, #39
     # `TextRunSegment::layout_into_line_items()`.
     # Testing: Adding new tests.  There is also a new failure because we don't support `word-break: auto-phrase`.  Fixes:
     # #39728
-https://github.com/servo/servo/pull/39918	(@kkoyung, #39918)	script: Correct block size in bits of SHA algorithms (#39918)
++https://github.com/servo/servo/pull/39918	(@kkoyung, #39918)	script: Correct block size in bits of SHA algorithms (#39918)
+    webcrypto
     # The block size in bits of SHA-1, SHA-256, SHA-384 and SHA-512 should be 512, 512, 1024 and 1024, respectively, according
     # to the specification [FIPS-198-1](http://csrc.nist.gov/publications/fips/fips198-1/FIPS-198-1_final.pdf).
     # Testing: Pass some WPT tests that were expected to fail.
@@ -3575,7 +3627,8 @@ https://github.com/servo/servo/pull/40208	(@Gae24, #40208)	wpt: avoid checking i
     # Since we don't implement SharedWorker this tests ended up failing also for the dedicate worker case, with this patch we
     # resort to checking the existence of the onmessage property, making sure that we actually pass this test.
     # Testing: a new test pass for worker
-https://github.com/servo/servo/pull/39658	(@kkoyung, #39658)	script: Implement Compression API (#39658)
++https://github.com/servo/servo/pull/39658	(@kkoyung, #39658)	script: Implement Compression API (#39658)
+    dom
     # The patch implements Compression (https://compression.spec.whatwg.org/) with the compression and decompression provided
     # by the `flate2` crate (https://crates.io/crates/flate2).
     # `flate2` supports several different backends, controlled through the crate's features.  By default, it uses
@@ -3596,7 +3649,8 @@ https://github.com/servo/servo/pull/40204	(@yerke, #40204)	move test for PrefVal
     # move test for PrefValue to a separate mod test
     # Testing: existing unit test still runs with `mach test-unit`.
     # This change will reduce the amount of code that the compiler has to compile when we are not running tests.
-https://github.com/servo/servo/pull/39369	(@kkoyung, #39369)	script: Add Ed25519 support to SubtleCrypto (#39369)
++https://github.com/servo/servo/pull/39369	(@kkoyung, #39369)	script: Add Ed25519 support to SubtleCrypto (#39369)
+    webcrypto
     # This patch adds the cryptographic algorithm Ed25519 support to `SubtleCrypto` interface, covering the "sign", "verify",
     # "generateKey", "importKey" and "exportKey" operations.
     # One may notice that the following related WPT tests do not pass in this patch.  They are caused by the unimplemented
@@ -3828,7 +3882,8 @@ https://github.com/servo/servo/pull/40278	(@simonwuelker, #40278)	script: Don't 
     # it's already registered and doesn't need to do so again), and whether it will be in a shadow tree after
     # `unbind_from_tree` is called (then there's no need to unregister).
     # Testing: This change adds a new web platform test Fixes: https://github.com/servo/servo/issues/40242
-https://github.com/servo/servo/pull/40253	(@kkoyung, #40253)	script: Implement import key operation for ECDH (#40253)
++https://github.com/servo/servo/pull/40253	(@kkoyung, #40253)	script: Implement import key operation for ECDH (#40253)
+    webcrypto
     # Implement import key operation for ECDH, using cryptographic calculation implementation from the crates `p256`, `p384`
     # and `p521`.
     # Testing: - Pass some WPT tests that were expected to fail.  - Some FAIL expectations are added.  They are related to the
