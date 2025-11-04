@@ -7,6 +7,15 @@ summary:    Who even knows?
 categories:
 ---
 
+Servo now supports several new web platform features:
+
+- **CompressionStream** and **DecompressionStream** (@kkoyung, #39658)
+- **fetchLater** (@TimvdLippe, #39547), with `dom_abort_controller_enabled`
+
+Our HTML-compatible **XPath** implementation now lives in its [own](https://github.com/servo/servo/tree/cd4c032908211fa2c26df550f6766080d1d28969/components/xpath) [crate](https://doc.servo.org/xpath/), and it’s no longer limited to the Servo DOM (@simonwuelker, #39546).
+We don’t have any specific plans to release this as a standalone library just yet, but please let us know if you have a use case that would benefit from this!
+
+Servo now supports `new KeyboardEvent({keyCode})` and `({charCode})` (@atbrakhi, #39590), which is enough to get [**Speedometer 3.0**](https://browserbench.org/Speedometer3.0/) working on macOS.
 
 ## Donations
 
