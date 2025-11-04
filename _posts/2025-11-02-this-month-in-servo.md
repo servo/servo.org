@@ -12,10 +12,32 @@ Servo now supports several new web platform features:
 - **CompressionStream** and **DecompressionStream** (@kkoyung, #39658)
 - **fetchLater** (@TimvdLippe, #39547), with `dom_abort_controller_enabled`
 
+Servo now supports `new KeyboardEvent({keyCode})` and `({charCode})` (@atbrakhi, #39590), which is enough to get [**Speedometer 3.0**](https://browserbench.org/Speedometer3.0/) working on macOS.
+
+## Embedding and ecosystem
+
 Our HTML-compatible **XPath** implementation now lives in its [own](https://github.com/servo/servo/tree/cd4c032908211fa2c26df550f6766080d1d28969/components/xpath) [crate](https://doc.servo.org/xpath/), and it’s no longer limited to the Servo DOM (@simonwuelker, #39546).
 We don’t have any specific plans to release this as a standalone library just yet, but please let us know if you have a use case that would benefit from this!
 
-Servo now supports `new KeyboardEvent({keyCode})` and `({charCode})` (@atbrakhi, #39590), which is enough to get [**Speedometer 3.0**](https://browserbench.org/Speedometer3.0/) working on macOS.
+We’ve improved **page zoom** in our webview API (@atbrakhi, @mrobinson, @shubhamg13, #39738), which includes some **breaking changes**:
+
+- <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::set_zoom</code> was renamed to <code>[set_page_zoom](https://doc.servo.org/servo/struct.WebView.html#method.set_page_zoom)</code>, and it now takes an **absolute** zoom value. This makes it idempotent, but it means if you want relative zoom, you’ll have to multiply the zoom values yourself.
+- Use the new <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[page_zoom](https://doc.servo.org/servo/struct.WebView.html#method.page_zoom)</code> method to get the current zoom value.
+- <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::reset_zoom</code> was removed; use `set_page_zoom(1.0)` instead.
+
+Some **breaking changes** were also needed to give embedders a more powerful way to **share input events with webviews** (@mrobinson, #39720).
+Often both your app and the pages in your webviews may be interested in knowing when users press a key.
+Servo handles these situations by asking the embedder for all potentially useful input events, then echoing some of them back:
+
+1. Embedder calls <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[notify_input_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event)</code> to tell Servo about an input event, then web content (and Servo) can handle the event.
+2. Servo calls <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::notify_keyboard_event</code> to tell the embedder about keyboard events that were neither [canceled by scripts](https://dom.spec.whatwg.org/#dom-event-preventdefault) nor handled by Servo itself. The event details is included in the arguments.
+
+Embedders had **no way of knowing *when*** non-keyboard input events, or keyboard events that were canceled or handled by Servo, have **completed all of their effects in Servo**.
+This was good enough for servoshell’s overridable key bindings, but not for WebDriver, where commands like [Perform Actions](https://w3c.github.io/webdriver/#perform-actions) need to reliably wait for input events to be handled.
+To solve these problems, we’ve replaced <code>notify_keyboard_event</code> with <code>[notify_input_event_handled](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_input_event_handled)</code>:
+
+1. Embedder calls <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[notify_input_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event)</code> to tell Servo about an input event, then web content (and Servo) can handle the event. **This now returns an <code>[InputEventId](https://doc.servo.org/servo/struct.InputEventId.html)</code>**, allowing embedders to remember input events that they still care about for step 2.
+2. **Servo calls <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::[notify_input_event_handled](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_input_event_handled)</code>** to tell the embedder about **every input event, when Servo has finished handling it**. The event details are **not included** in the arguments, but you can use the <code>[InputEventId](https://doc.servo.org/servo/struct.InputEventId.html)</code> to look up the details in the embedder.
 
 ## Donations
 
