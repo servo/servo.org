@@ -12,6 +12,12 @@ Servo now supports several new web platform features:
 - **CompressionStream** and **DecompressionStream** (@kkoyung, #39658)
 - **fetchLater** (@TimvdLippe, #39547), with `dom_abort_controller_enabled`
 
+**AbortController** and **AbortSignal** are now **enabled by default** (@jdm, #40079), after implementing **AbortSignal.timeout()** (@Taym95, #40032) and fixing **throwIfAborted()** on **AbortSignal** (@Taym95, #40224).
+If this is the first time you’ve heard of them, you might be surprised how important they are for real-world web compat!
+[**Over 40%**](https://webstatus.dev/features/aborting) of Google Chrome page loads at least *check* if they are supported, and many popular websites including GitHub and Discord are broken without them.
+
+**XPath** is now **enabled by default** (@simonwuelker, #40212), after implementing **‘@attr/parent’ queries** (@simonwuelker, #39749), completely rewriting the parser (@simonwuelker, #39977), and landing several other fixes (@simonwuelker, #40103, #40105, #40161, #40167).
+
 Servo now supports `new KeyboardEvent({keyCode})` and `({charCode})` (@atbrakhi, #39590), which is enough to get [**Speedometer 3.0**](https://browserbench.org/Speedometer3.0/) working on macOS.
 
 ## Embedding and ecosystem
