@@ -10,7 +10,7 @@ categories:
 Servo now supports several new web platform features:
 
 - **CompressionStream** and **DecompressionStream** (@kkoyung, #39658)
-- **fetchLater** (@TimvdLippe, #39547), with `dom_abort_controller_enabled`
+- **fetchLater()** (@TimvdLippe, #39547)
 
 **AbortController** and **AbortSignal** are now **enabled by default** (@jdm, #40079), after implementing **AbortSignal.timeout()** (@Taym95, #40032) and fixing **throwIfAborted()** on **AbortSignal** (@Taym95, #40224).
 If this is the first time you’ve heard of them, you might be surprised how important they are for real-world web compat!
