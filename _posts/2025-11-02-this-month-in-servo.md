@@ -29,6 +29,21 @@ Servo now supports `new KeyboardEvent({keyCode})` and `({charCode})` (@atbrakhi,
 Our HTML-compatible **XPath** implementation now lives in its [own](https://github.com/servo/servo/tree/cd4c032908211fa2c26df550f6766080d1d28969/components/xpath) [crate](https://doc.servo.org/xpath/), and it’s no longer limited to the Servo DOM (@simonwuelker, #39546).
 We don’t have any specific plans to release this as a standalone library just yet, but please let us know if you have a use case that would benefit from this!
 
+You can now **take screenshots** of webviews with <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[take_screenshot](https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot)</code> (@mrobinson, @delan, #39583).
+
+Historically Servo has struggled with situations causing **100% CPU usage** or **unnecessary work on every tick** of the event loop, whenever a page is considered “active” or “animating” ([#25305](https://github.com/servo/servo/issues/25305), [#3406](https://github.com/servo/servo/issues/3406)).
+We had since throttled animations (@mrobinson, #37169) and reflows (@mrobinson, @Loirooriol, #38431), but only to fixed rates of 120 Hz and 60 Hz respectively.
+
+But starting this month, you can run Servo with **vsync**, thanks to the **<code>[RefreshDriver](https://doc.servo.org/servo/trait.RefreshDriver.html)</code> trait** (@coding-joedow, @mrobinson, #39072), which allows embedders to tell Servo *when* to start rendering each frame.
+The [default driver](https://doc.servo.org/compositing/refresh_driver/struct.TimerRefreshDriver.html) continues to run at 120 Hz, but you can define and install your own with <code>[ServoBuilder](https://doc.servo.org/servo/struct.ServoBuilder.html)::[refresh_driver](https://doc.servo.org/servo/struct.ServoBuilder.html#method.refresh_driver)</code>.
+
+### Breaking changes
+
+Servo’s embedding API has had a few **breaking changes**:
+
+- <code>[Opts](https://doc.servo.org/servo_config/opts/struct.Opts.html)::wait_for_stable_image</code> was **removed**; to wait for a stable image, call <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[**take_screenshot**](https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot)</code> instead (@mrobinson, @delan, #39583).
+- <code>[MouseButtonAction](https://doc.servo.org/servo/enum.MouseButtonAction.html)::Click</code> was **removed**; use <code>[**Down**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Down)</code> followed by <code>[**Up**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Up)</code>. [Click events](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) need to be *derived* from mouse button downs and ups to ensure that they are fired correctly (@mrobinson, #39705).
+
 We’ve improved **page zoom** in our webview API (@atbrakhi, @mrobinson, @shubhamg13, #39738), which includes some **breaking changes**:
 
 - <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::set_zoom</code> was renamed to <code>[set_page_zoom](https://doc.servo.org/servo/struct.WebView.html#method.set_page_zoom)</code>, and it now takes an **absolute** zoom value. This makes it idempotent, but it means if you want relative zoom, you’ll have to multiply the zoom values yourself.
