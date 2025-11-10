@@ -317,6 +317,10 @@ To solve these problems, we’ve replaced <code>notify_keyboard_event</code> wit
 <li>Embedder calls <code><a href="https://doc.servo.org/servo/struct.WebView.html">WebView</a>::<a href="https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event">notify_input_event</a></code> to tell Servo about an input event, then web content (and Servo) can handle the event. <strong>This now returns an <code><a href="https://doc.servo.org/servo/struct.InputEventId.html">InputEventId</a></code></strong>, allowing embedders to remember input events that they still care about for step 2.</li>
 <li><strong>Servo calls <code><a href="https://doc.servo.org/servo/trait.WebViewDelegate.html">WebViewDelegate</a>::<a href="https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_input_event_handled">notify_input_event_handled</a></code></strong> to tell the embedder about <strong>every input event, when Servo has finished handling it</strong>. The event details are <strong>not included</strong> in the arguments, but you can use the <code><a href="https://doc.servo.org/servo/struct.InputEventId.html">InputEventId</a></code> to look up the details in the embedder.</li>
 </ol>
+<h2 id="perf-and-stability" tabindex="-1">Perf and stability <a class="header-anchor" href="#perf-and-stability">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We’ve fixed crashes when clicking on web content on Android (@mrobinson, #39771), and when running Servo on platforms where JIT is forbidden (@jschwe, @sagudev, #40071, #40130).</p>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
