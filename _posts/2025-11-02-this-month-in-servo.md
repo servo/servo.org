@@ -9,16 +9,20 @@ categories:
 
 Servo now supports several new web platform features:
 
+- **&lt;source>** in **&lt;video>** and **&lt;audio>** (@tharkum, #39717)
 - **CompressionStream** and **DecompressionStream** (@kkoyung, #39658)
 - **fetchLater()** (@TimvdLippe, #39547)
+- **Document.parseHTMLUnsafe()** (@lukewarlow, #40246)
 - the **which** property on **UIEvent** (@Taym95, #40109)
+- the **relatedTarget** property on **UIEvent** (@TimvdLippe, #40182)
+- **self&#x2E;name** and **.onmessageerror** in dedicated workers (@yerke, #40156)
 - **name** and **areas** properties on **HTMLMapElement** (@tharkum, #40133)
 
-**AbortController** and **AbortSignal** are now **enabled by default** (@jdm, #40079), after implementing **AbortSignal.timeout()** (@Taym95, #40032) and fixing **throwIfAborted()** on **AbortSignal** (@Taym95, #40224).
+**AbortController** and **AbortSignal** are now **enabled by default** (@jdm, @TimvdLippe, #40079, #39943), after implementing **AbortSignal.timeout()** (@Taym95, #40032) and fixing **throwIfAborted()** on **AbortSignal** (@Taym95, #40224).
 If this is the first time you’ve heard of them, you might be surprised how important they are for real-world web compat!
 [**Over 40%**](https://webstatus.dev/features/aborting) of Google Chrome page loads at least *check* if they are supported, and many popular websites including GitHub and Discord are broken without them.
 
-**XPath** is now **enabled by default** (@simonwuelker, #40212), after implementing **‘@attr/parent’ queries** (@simonwuelker, #39749), completely rewriting the parser (@simonwuelker, #39977), and landing several other fixes (@simonwuelker, #40103, #40105, #40161, #40167).
+**XPath** is now **enabled by default** (@simonwuelker, #40212), after implementing **‘@attr/parent’ queries** (@simonwuelker, #39749), **Copy** > **<u>X</u>Path** in the **DevTools Inspector** (@simonwuelker, #39892), completely rewriting the parser (@simonwuelker, #39977), and landing several other fixes (@simonwuelker, #40103, #40105, #40161, #40167, #39751, #39764).
 
 Servo now supports `new KeyboardEvent({keyCode})` and `({charCode})` (@atbrakhi, #39590), which is enough to get [**Speedometer 3.0**](https://browserbench.org/Speedometer3.0/) working on macOS.
 
@@ -43,6 +47,7 @@ Servo’s embedding API has had a few **breaking changes**:
 
 - <code>[Opts](https://doc.servo.org/servo_config/opts/struct.Opts.html)::wait_for_stable_image</code> was **removed**; to wait for a stable image, call <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[**take_screenshot**](https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot)</code> instead (@mrobinson, @delan, #39583).
 - <code>[MouseButtonAction](https://doc.servo.org/servo/enum.MouseButtonAction.html)::Click</code> was **removed**; use <code>[**Down**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Down)</code> followed by <code>[**Up**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Up)</code>. [Click events](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) need to be *derived* from mouse button downs and ups to ensure that they are fired correctly (@mrobinson, #39705).
+- <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::set_pinch_zoom</code> was renamed to <code>[pinch_zoom](https://doc.servo.org/servo/struct.WebView.html#method.pinch_zoom)</code>, to better reflect that **pinch zoom** is always **relative** (@mrobinson, @atbrakhi, #39868).
 
 We’ve improved **page zoom** in our webview API (@atbrakhi, @mrobinson, @shubhamg13, #39738), which includes some **breaking changes**:
 

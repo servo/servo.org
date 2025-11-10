@@ -1232,7 +1232,7 @@
     # html/dom/reflection-tabular.html -
     # html/rendering/replaced-elements/attributes-for-embedded-content-and-images/picture-aspect-ratio.html
 +https://github.com/servo/servo/pull/39717	(@tharkum, #39717)	html: Support selecting <media> element source from children (#39717)
-    dom
+    ;dom
     # Follow the HTML implemetation and support selection of the 'media' element loading source from 'source' children
     # elements with validation processing over their 'media/src/type' attributes.
     # See https://html.spec.whatwg.org/multipage/#concept-media-load-algorithm
@@ -1467,7 +1467,7 @@
     # ## Screenshots rendering https://ja.wikipedia.org/wiki/Servo
     # before fixed after fixed
 +https://github.com/servo/servo/pull/39751	(@simonwuelker, #39751)	script: Restrict allowed node types for XPath context node (#39751)
-    dom; xpath
+    ;dom; xpath
     # See
     # https://searchfox.org/firefox-main/rev/b30a9b734819436853abf4eba6d768037514b3f6/dom/xslt/xpath/XPathExpression.cpp#115
     # for the equivalent code in firefox.  Chrome also throws the same error.
@@ -1796,7 +1796,7 @@ https://github.com/servo/servo/pull/39834	(@Loirooriol, #39834)	layout: Make inl
     # output is probably not ideal yet but it should be way better.
     # Testing: Compiled and looked at the output.  Fixes: https://github.com/servo/servo/issues/39312
 +https://github.com/servo/servo/pull/39764	(@simonwuelker, #39764)	xpath: Cast query result to desired type (#39764)
-    dom; xpath
+    ;dom; xpath
     # When running an XPath query, users supply a target result type (eg `XPathResult.NUMBER_TYPE`).  When this type does
     # match the return value of the query, then we need to convert to it.
     # See https://searchfox.org/firefox-main/rev/ab5bf2401717970560597083d6ac72915bde2d89/dom/xslt/xpath/XPathResult.cpp#160
@@ -1929,7 +1929,7 @@ https://github.com/servo/servo/pull/39812	(@jschwe, #39812)	testing: Use nextest
     # `CryptoKey`.
     # Testing: Refactoring.  Existing WPT tests suffice.
 +https://github.com/servo/servo/pull/39868	(@mrobinson, @atbrakhi, #39868)	libservo: Rename `WebView::set_pinch_zoom` to `WebView::pinch_zoom` (#39868)
-    api; breaking change
+    ;api; breaking change
     # This change is meant to make it more obvious that adjusting the pinch zoom of a `WebView` works differently than
     # adjusting the page zoom.  New pinch zoom values are *always* zoom deltas, that is they are always multiplied by the
     # current pinch zoom value.  This is due to the way that system APIs and Servo's internal touch handler provide values.
@@ -2388,7 +2388,7 @@ https://github.com/servo/servo/pull/39920	(@tharkum, #39920)	fetch: Skip chunk p
     # public DOM `Fetch` API, and no observable WPT expectation changes because DOM `Response + ReadableStream` are processing
     # empty fetched chunk (from "about:blank", "data:,") without any trackable state changes.
 +https://github.com/servo/servo/pull/39943	(@jdm, @TimvdLippe, #39943)	Add abort signal preference to experimental web features (#39421) (#39943)
-    api; part of abortsignal ship
+    ;api; part of abortsignal ship
     # This way we have full coverage on WPT rather than the specific folders with tests.  The timeout in
     # `/performance-timeline/` will be addressed by #39941.  The timeout under `/webmessaging/` [makes us match all other
     # browsers](https://wpt.fyi/results/webmessaging/message-channels/close-event/document-destroyed.tentative.window.html?lab
@@ -3295,7 +3295,7 @@ https://github.com/servo/servo/pull/40037	(@Loirooriol, #40037)	layout: Simplify
     # Finally, replace all occurences of "Webrender" with "WebRender".
     # Testing: This should not change behavior so is covered by existing tests.
 +https://github.com/servo/servo/pull/39892	(@simonwuelker, #39892)	devtools: Support getting XPath selector for node actor (#39892)
-    devtools
+    ;devtools
     # You can copy the XPath selector from the inspector by right-clicking on a node and selecting `Copy->XPath`.
     # Testing: I tried adding a test but the effort didn't seem worth it.  The devtools tests are currently very specifically
     # tailored towards source-list tests.
@@ -3447,7 +3447,7 @@ https://github.com/servo/servo/pull/40037	(@Loirooriol, #40037)	layout: Simplify
     # fixes that, so we now consistently use the nextest retry mechanism for unit tests in CI.
     # Testing: Mac unitests in CI
 +https://github.com/servo/servo/pull/40182	(@TimvdLippe, #40182)	Properly initialize related_target in UI events (#40182)
-    dom
+    ;dom
     # UI events can specify `relatedTarget` themselves.  These were correctly initialized, but this wasn't the case for the
     # base event they extend.  Therefore, we need to initialize the event `relatedTarget` and only store this information
     # once.
@@ -3456,7 +3456,7 @@ https://github.com/servo/servo/pull/40037	(@Loirooriol, #40037)	layout: Simplify
     layout
     # Testing: Added unit tests.  Fixes: https://github.com/servo/servo/issues/39261 Closes #39294
 +https://github.com/servo/servo/pull/40156	(@yerke, #40156)	script: Add an implementation of `DedicatedWorkerGlobalScope.name` and `DedicatedWorkerGlobalScope.onmessageerror` (#40156)
-    dom
+    ;dom
     # add `DedicatedWorkerGlobalScope.Name` and `DedicatedWorkerGlobalScope.onmessageerror`
     # Closes https://github.com/servo/servo/issues/40114
 -https://github.com/servo/servo/pull/40179	(@yerke, #40179)	add CanGc as argument to methods in HTMLMediaElement (#40179)
@@ -3495,7 +3495,7 @@ https://github.com/servo/servo/pull/40037	(@Loirooriol, #40037)	layout: Simplify
     # rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start) [//]: # (dependabot-automerge-end)
 +https://github.com/servo/servo/pull/40246	(@lukewarlow, #40246)	Implement Document.parseHTMLUnsafe (#40246)
-    dom
+    ;dom
     # Implement `Document.parseHTMLUnsafe`
     # Testing: Covered by existing WPTs, expectations have been updated.  Fixes: #40245
 -https://github.com/servo/servo/pull/40244	(@simonwuelker, #40244)	Replace "map(..).unwrap_or(false)" with "is_some_and(..)" everywhere (#40244)
