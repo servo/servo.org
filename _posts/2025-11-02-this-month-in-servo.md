@@ -69,6 +69,10 @@ To solve these problems, we’ve replaced <code>notify_keyboard_event</code> wit
 1. Embedder calls <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[notify_input_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event)</code> to tell Servo about an input event, then web content (and Servo) can handle the event. **This now returns an <code>[InputEventId](https://doc.servo.org/servo/struct.InputEventId.html)</code>**, allowing embedders to remember input events that they still care about for step 2.
 2. **Servo calls <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::[notify_input_event_handled](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_input_event_handled)</code>** to tell the embedder about **every input event, when Servo has finished handling it**. The event details are **not included** in the arguments, but you can use the <code>[InputEventId](https://doc.servo.org/servo/struct.InputEventId.html)</code> to look up the details in the embedder.
 
+## Perf and stability
+
+We’ve fixed crashes when clicking on web content on Android (@mrobinson, #39771), and when running Servo on platforms where JIT is forbidden (@jschwe, @sagudev, #40071, #40130).
+
 ## Donations
 
 Thanks again for your generous support!
