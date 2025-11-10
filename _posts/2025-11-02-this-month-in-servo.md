@@ -28,6 +28,17 @@ Servo now supports `new KeyboardEvent({keyCode})` and `({charCode})` (@atbrakhi,
 
 **ImageData** can now be sent over **postMessage()** and **structuredClone()** (@Gae24, #40084).
 
+## Layout engine
+
+Our layout engine can now render text in **synthetic bold** (@minghuaw, @mrobinson, #39519, #39681, #39633, #39691, #39713), and now selects more appropriate fallback fonts for **Kanji** in **Japanese text** (@arayaryoma, #39608).
+
+**‘initial-scale’** now does the right thing in **&lt;meta name=viewport>** (@atbrakhi, @shubhamg13, @mrobinson, #40055).
+
+We’ve improved the way we handle **‘border-radius’** (@Loirooriol, #39571) and **margin collapsing** (@Loirooriol, #36322).
+While they’re fairly unassuming fixes on the surface, both of them allowed us to **find interop issues** in the big incumbent engines (@Loirooriol, [#39540](https://github.com/servo/servo/issues/39540), [#36321](https://github.com/servo/servo/issues/36321)) and **help improve web standards** (@noamr, @Loirooriol, [csswg-drafts#12961](https://github.com/w3c/csswg-drafts/issues/12961), [csswg-drafts#12218](https://github.com/w3c/csswg-drafts/issues/12218)).
+
+In other words, Servo is good for the web, even if you’re not using it yet!
+
 ## Embedding and ecosystem
 
 Our HTML-compatible **XPath** implementation now lives in its [own](https://github.com/servo/servo/tree/cd4c032908211fa2c26df550f6766080d1d28969/components/xpath) [crate](https://doc.servo.org/xpath/), and it’s no longer limited to the Servo DOM (@simonwuelker, #39546).
