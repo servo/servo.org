@@ -9,7 +9,7 @@ title: Sponsorship
 
 <h1> {{ title }} </h1>
 
-You can now help fund the Servo project by [sponsoring us on GitHub](https://github.com/sponsors/servo) or [Open Collective](https://opencollective.com/servo).
+You can now help fund the Servo project by [sponsoring us on GitHub](https://github.com/sponsors/servo), [Open Collective](https://opencollective.com/servo) and [thanks.dev](https://thanks.dev/).
 
 Both one-time and monthly donations are appreciated, and over 80% of the amount will go directly towards improving Servo.
 To give you a sense of scaleâ€¦
@@ -23,6 +23,28 @@ Use of donations is decided transparently via the Technical Steering Committeeâ€
 <p class="subtitle">
   If your organization is interested in sponsoring Servo's development or the implementation of a particular feature, reach out to us at <a href="mailto:join@servo.org">join@servo.org</a>.
 </p>
+
+</div>
+
+<div id="sponsorship-tiers">
+
+## Sponsorship Tiers
+
+- **Platinum: 10,000 USD/month**
+- **Gold: 5,000 USD/month**
+- **Silver: 1,000 USD/month**
+- **Bronze: 100 USD/month**
+
+By sponsoring through one of the tiers **your logo/name will be displayed at [servo.org](https://servo.org/)**, provided that it doesn't violate [Servo's Code of Conduct](https://servo.org/coc).
+
+<p class="subtitle">
+  If you are interested in sponsoring the Servo project through one of this tiers, please email us at <a href="mailto:join@servo.org">join@servo.org</a>.
+</p>
+
+A few clarifications:
+- The donations should come with no obligations to the project (i.e no strings attached).
+- The Servo project doesn't endorse the sponsors that appear at [servo.org](https://servo.org/).
+- The Servo project reserves the right to reject sponsors.
 
 </div>
 
