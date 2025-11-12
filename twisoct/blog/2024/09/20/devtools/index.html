@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Reviving the devtools support in Servo - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="Reviving the devtools support in Servo - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  
+
+  
+  <meta name="description" content="You can now inspect the DOM tree, view styles, evaluate JavaScript, and read console messages in Servo!">
+  <meta name="og:description" content="You can now inspect the DOM tree, view styles, evaluate JavaScript, and read console messages in Servo!">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/twisoct/svg/servo-color-positive.svg">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/twisoct/svg/servo-symbol-color-no-container.svg">
+  <meta property="og:url" content="/twisoct/blog/2024/09/20/devtools/">
+
+  <link rel="stylesheet" href="/twisoct/css/style.css">
+  <link rel="shortcut icon" href="/twisoct/svg/servo-symbol-color-no-container.svg">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/twisoct/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="inner-container">
+      <div class="navbar-brand">
+        <a href="/twisoct/">
+          <img src="/twisoct/svg/servo-color.svg" alt="Reviving the devtools support in Servo">
+        </a>
+
+        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="navbar-menu" id="navbar-menu">
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                Get Involved
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisoct/contributing/"
+                    
+                  >
+                    Contributing
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://book.servo.org"
+                     target="_blank"
+                  >
+                    Servo Book<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisoct/wpt/"
+                    
+                  >
+                    WPT pass rates
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisoct/coc/"
+                    
+                  >
+                    Code of Conduct
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/twisoct/download/"
+              
+            >
+              Download
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/twisoct/blog/"
+              
+            >
+              Blog
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="https://demo.servo.org/"
+               target="_blank"
+            >
+              Demos<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+            </a>
+          
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                About
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisoct/about/"
+                    
+                  >
+                    About Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisoct/made-with/"
+                    
+                  >
+                    Made with Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://github.com/servo/project/blob/main/governance/README.md"
+                     target="_blank"
+                  >
+                    Governance<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisoct/sponsorship/"
+                    
+                  >
+                    Sponsorship
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisoct/acknowledgements/"
+                    
+                  >
+                    Acknowledgements
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+        <div class="navbar-end">
+    
+      <a class="social-link is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="social-link is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="social-link is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="social-link is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+</div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburgerMenu');
+  const menu = document.getElementById('navbar-menu');
+
+  const toggleMenu = () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('is-active', isExpanded);
+  };
+
+  // Toggle on click
+  hamburger.addEventListener('click', toggleMenu);
+
+
+</script>
+          <div class="content" id="Reviving the devtools support in Servo">
+            
+<div class="blog-hero">
+  <div class="container">
+    <div class="inner-container">
+    <h1 class="title">Reviving the devtools support in Servo</h1>
+      <p class="subtitle">You can now inspect the DOM tree, view styles, evaluate JavaScript, and read console messages in Servo!</p>
+      <p class="posted">Posted <span class="tag is-dark">2024-09-20</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="inner-container blog-content">
+  <figure><a href="/twisoct/img/blog/devtools-inspector.png"><img src="/twisoct/img/blog/devtools-inspector.png"
+    alt="On the left, it shows the DOM inspector with the tree view, CSS list and computed properties views. On the right is servoshell with servo.org opened."></a>
+<figcaption>The HTML and CSS inspector is able to display the DOM elements and their attributes and CSS properties.</figcaption></figure>
+<p><span class=_floatmin></span>Servo has been working on improving our <a href="https://firefox-source-docs.mozilla.org/devtools-user">Firefox devtools</a> support as part of the <a href="https://www.outreachy.org">Outreachy</a> internship program since June, and we’re thrilled to share significant progress.</p>
+<p>Devtools are a set of <strong>browser web developer tools</strong> that allows you to examine, edit, and debug HTML, CSS, and JavaScript.
+Servo leverages existing work from the Firefox devtools to inspect its own websites, employing the same open protocol that is used for connecting to other Firefox instances.</p>
+<p>While relying on a third party API allows us to offer this functionality without building it from scratch, it doesn’t come without downsides.
+Back in June last year, with the release of Firefox 110, changes to the protocol <strong>broke our previous implementation</strong>.
+The core issue was that the message structure sent between Servo and Firefox for the devtools functionality had changed.</p>
+<p>To address this, we first updated an existing patch to fix the connection and list the webviews running in Servo (<a href="https://github.com/fabricedesre">@fabricedesre</a>, <a href="https://github.com/eerii">@eerii</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/32475">#32475</a>).
+We also had to update the structure of some <a href="https://firefox-source-docs.mozilla.org/devtools/backend/actor-hierarchy.html">actors</a> (pieces of code that respond to messages sent by Firefox with relevant information), since they changed significantly (<a href="https://github.com/eerii">@eerii</a>, <a href="https://github.com/servo/servo/pull/32509">#32509</a>).</p>
+<p>One of the main challenges was figuring out the messages we needed to send back to Firefox.
+The <a href="https://searchfox.org/mozilla-central/source/devtools/server/actors">source code</a> for their devtools implementation is very well commented and proved to be invaluable.
+However, it was also helpful to see the actual messages being sent.
+While Servo can show the ones it sends and receives, <strong>debugging another instance of Firefox</strong> to observe its messages was very useful.
+To facilitate this, we made a helper script (<a href="https://github.com/eerii">@eerii</a>, <a href="https://github.com/servo/servo/pull/32684">#32684</a>) using <a href="https://www.wireshark.org">Wireshark</a> to inspect the connection between the devtools client and server, allowing us to view the contents of each packet and search through them.</p>
+<p><strong>Support for the console</strong> was fixed, enabling the execution of JavaScript code directly in Servo’s webviews and displaying any warnings or errors that the page emits (<a href="https://github.com/eerii">@eerii</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/32727">#32727</a>).</p>
+<figure><a href="/twisoct/img/blog/devtools-console.png"><img src="/twisoct/img/blog/devtools-console.png"
+    alt="Developer JavaScript console that shows commands and their results"></a>
+<figcaption>The JavaScript developer console now displays page logs.
+It can also run commands.</figcaption></figure>
+<p><span class=_floatmin></span>Finally, the most significant changes involved the <strong>DOM inspector</strong>.
+Tighter integration with Servo’s script module was required to retrieve the properties of each element.
+Viewing CSS styles was particularly challenging, since they can come from many places, including the <code>style</code> attribute, a stylesheet, or from ancestors, but <a href="https://github.com/emilio">@emilio</a> had great insight into where to look.
+As a result, it’s now possible to view the HTML tree, and add, remove, or modify any attribute or CSS property (<a href="https://github.com/eerii">@eerii</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/32655">#32655</a>, <a href="https://github.com/servo/servo/pull/32884">#32884</a>, <a href="https://github.com/servo/servo/pull/32888">#32888</a>, <a href="https://github.com/servo/servo/pull/33025">#33025</a>).</p>
+<p>There is still work to be done.
+Some valuable features like the Network and Storage tabs are still not functional, and parts of the DOM inspector are still barebones.
+For example, now that flexbox is enabled by default (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/33186">#33186</a>), it would be a good idea to support it in the Layout panel.
+We’re working on <strong>developer documentation</strong> that will be available in the <a href="https://book.servo.org">Servo book</a> to make future contributions easier.</p>
+<p>That said, the <strong>Console</strong> and <strong>Inspector</strong> support has largely landed, and you can enable them with the <code>--devtools</code> flag in servoshell.
+For a step-by-step guide on how to use Servo’s devtools, check out the new <a href="https://book.servo.org/hacking/using-devtools.html">devtools chapter</a> in the Servo book.
+We’d love to hear your feedback on how these work and what additional features you’d find helpful in your workflow.</p>
+<p>Many thanks to <a href="https://github.com/eerii">@eerii</a> and Outreachy for the internship that made this possible!</p>
+<style>
+    /* guaranteed minimum width for first paragraph after a float */
+    ._floatmin {
+        display: block;
+        width: 13em;
+        overflow: hidden;
+    }
+    ._none {
+        display: none;
+    }
+    ._fig:not(#specificity) {
+        width: 33em;
+        max-width: 100%;
+        margin: 1em auto;
+    }
+    ._fig > ._flex {
+        display: flex;
+    }
+    ._fig table {
+        text-align: initial;
+    }
+    ._fig figcaption._notes {
+        text-align: left;
+        width: max-content;
+        max-width: 100%;
+    }
+    ._figl:not(#specificity),
+    ._figr:not(#specificity) {
+        margin: 0 1em 1em;
+    }
+    ._figl {
+        float: left;
+        max-width: 100%;
+    }
+    ._figr {
+        float: right;
+        clear: right;
+        max-width: 100%;
+    }
+    ._figl > figcaption,
+    ._figr > figcaption,
+    ._figl > iframe,
+    ._figr > iframe,
+    ._figl > video,
+    ._figr > video,
+    ._figl > a > img,
+    ._figr > a > img {
+        width: 33em;
+        max-width: 100%;
+    }
+    ._runin {
+        margin-bottom: 1em;
+    }
+    ._runin > p,
+    ._runin > h2 {
+        display: inline;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+    ._note {
+        margin: 1em 1em;
+        border-left: 1px solid;
+        padding-left: 1em;
+        opacity: 0.75;
+    }
+</style>
+
+  <div>
+    <a href="/twisoct/blog/">Back</a>
+  </div>
+</div>
+
+
+
+          </div>
+    </main>
+    <div class="contact" aria-label="Contact information">
+    <div class="container">
+        <div class="inner-container two-column">
+            <div class="column">
+                <h2>Contact</h2>
+            </div>
+            <div class="column">
+                <ul>
+                    <li><a class="footer-link" href="https://servo.zulipchat.com/">Zulip chat</a></li>
+                    <li><a class="footer-link" href="https://github.com/servo/servo/discussions">GitHub discussions</a></li>
+                    <li><a class="footer-link" href="mailto:info@servo.org">Email: info@servo.org</a></li>
+                    <li><a class="footer-link" href="https://floss.social/@servo">Mastodon</a></li>
+                    <li><a class="footer-link" href="https://bsky.app/profile/servo.org">Bluesky</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer>
+      <div class="footer">
+  <div class="container">
+    <div class="two-column inner-container">
+      <div class="column">
+        <div class="logo"><a href="https://linuxfoundation.eu"><img src="/twisoct/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250"></a></div>
+        <p>&copy; 2025 The Servo Project Developers</p>
+        <p>Copyright &copy; Servo is a project of <a class="footer-link" href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+        <p>For website terms of use, trademark policy and other project policies please see <a class="footer-link" href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+        <p>The source code for this website can be found at <a class="footer-link" href="https://github.com/servo/servo.org">https://github.com/servo/servo.org</a>.</p>
+      </div>
+      <div class="column code-of-conduct">
+        <a class="footer-link" href="/twisoct/coc/">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const burger = document.querySelector(".navbar-burger");
+    const menu = document.querySelector(".navbar-menu");
+    burger.onclick = () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    };
+  })();
+</script>
+
+    </footer>
+  </body>
+</html>
