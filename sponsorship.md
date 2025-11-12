@@ -38,7 +38,7 @@ Use of donations is decided transparently via the Technical Steering Committeeâ€
 By sponsoring through one of the tiers **your logo/name will be displayed at [servo.org](https://servo.org/)**, provided that it doesn't violate [Servo's Code of Conduct](https://servo.org/coc).
 
 <p class="subtitle">
-  If you are interested in sponsoring the Servo project through one of this tiers, please email us at <a href="mailto:join@servo.org">join@servo.org</a>.
+  If you are interested in sponsoring the Servo project through one of these tiers, please contact us at <a href="mailto:join@servo.org">join@servo.org</a>.
 </p>
 
 A few clarifications:
