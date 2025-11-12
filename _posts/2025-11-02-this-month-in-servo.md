@@ -86,23 +86,30 @@ We’ve fixed crashes when clicking on web content on Android (@mrobinson, #3977
 
 ## Donations
 
+<!--
+- 5753.87/month donations
+    - 2243.24/month opencollective
+    - 3353.00/month github
+    - 157.63/month 28 donors thanks.dev
+-->
+
 Thanks again for your generous support!
-We are now receiving **??? USD/month** (+?.?% over September) in recurring donations.
+We are now receiving **5753 USD/month** (+1.7% over September) in recurring donations.
 
 This helps us cover the cost of our **[speedy](https://ci0.servo.org) [CI](https://ci1.servo.org) [and](https://ci2.servo.org) [benchmarking](https://ci3.servo.org) [servers](https://ci4.servo.org)**, one of our latest **[Outreachy interns](https://www.outreachy.org/alums/2025-06/#:~:text=Servo)**, and funding **[maintainer work]({{ '/blog/2025/09/17/your-donations-at-work-funding-jdm/' | url }})** that helps more people contribute to Servo.
-Keep an eye out for [further CI improvements](https://github.com/servo/servo/issues/38141) in the coming months, including [faster pull request checks](https://github.com/servo/servo/pull/39900) and [ten-minute WPT builds](https://github.com/servo/ci-runners/issues/21).
+Keep an eye out for [further CI improvements](https://github.com/servo/servo/issues/38141) in the coming months, including [faster macOS arm64 builds](https://github.com/servo/ci-runners/pull/64) and [ten-minute WPT builds](https://github.com/servo/ci-runners/issues/21).
 
-Servo is also on [thanks.dev](https://thanks.dev), and already **?** (±? from September) that depend on Servo are sponsoring us there.
+Servo is also on [thanks.dev](https://thanks.dev), and already **28 GitHub users** (same as September) that depend on Servo are sponsoring us there.
 If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
 
 <figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
     <div style="position: relative; text-align: right;">
-        <div style="position: absolute; margin-left: calc(100% * 5654 / 10000); padding-left: 0.5em;"><strong>5654</strong> USD/month</div>
-        <div style="position: absolute; margin-left: calc(100% * 5654 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; right: calc(100% - 100% * 5753 / 10000); padding-right: 0.5em;"><strong>5753</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 5753 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
         <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
         <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
     </div>
-    <progress value="5654" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+    <progress value="5753" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
 </div></figure>
 
 Use of donations is decided transparently via the Technical Steering Committee’s public **[funding request process](https://github.com/servo/project/blob/main/FUNDING_REQUEST.md)**, and active proposals are tracked in [servo/project#187](https://github.com/servo/project/issues/187).
