@@ -272,6 +272,8 @@
 <li><strong>self.name</strong> and <strong>.onmessageerror</strong> in dedicated workers (@yerke, #40156)</li>
 <li><strong>name</strong> and <strong>areas</strong> properties on <strong>HTMLMapElement</strong> (@tharkum, #40133)</li>
 </ul>
+<p>In <strong>servoshell</strong> for <strong>Android</strong>, you can now enable <strong>experimental mode</strong> with <!-- TODO how many? --> just a few taps (@jdm, #40054), use the <strong>software keyboard</strong> (@jdm, #40009), deliver <strong>touch events</strong> to web content (@mrobinson, #40240), and dismiss the location field (@jdm, #40049).
+<strong>Pinch zoom</strong> is now fully supported in both Servo and <strong>servoshell</strong>, taking into account the locations of pinch inputs (@mrobinson, @atbrakhi, #40083) and allowing keyboard scrolling when zoomed in (@mrobinson, @atbrakhi, #40108).</p>
 <p><strong>AbortController</strong> and <strong>AbortSignal</strong> are now <strong>enabled by default</strong> (@jdm, @TimvdLippe, #40079, #39943), after implementing <strong>AbortSignal.timeout()</strong> (@Taym95, #40032) and fixing <strong>throwIfAborted()</strong> on <strong>AbortSignal</strong> (@Taym95, #40224).
 If this is the first time you’ve heard of them, you might be surprised how important they are for real-world web compat!
 <a href="https://webstatus.dev/features/aborting"><strong>Over 40%</strong></a> of Google Chrome page loads at least <em>check</em> if they are supported, and many popular websites including GitHub and Discord are broken without them.</p>
@@ -301,9 +303,18 @@ The <a href="https://doc.servo.org/compositing/refresh_driver/struct.TimerRefres
       </a></h3>
 <p>Servo’s embedding API has had a few <strong>breaking changes</strong>:</p>
 <ul>
-<li><code><a href="https://doc.servo.org/servo_config/opts/struct.Opts.html">Opts</a>::wait_for_stable_image</code> was <strong>removed</strong>; to wait for a stable image, call <code><a href="https://doc.servo.org/servo/struct.WebView.html">WebView</a>::<a href="https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot"><strong>take_screenshot</strong></a></code> instead (@mrobinson, @delan, #39583).</li>
-<li><code><a href="https://doc.servo.org/servo/enum.MouseButtonAction.html">MouseButtonAction</a>::Click</code> was <strong>removed</strong>; use <code><a href="https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Down"><strong>Down</strong></a></code> followed by <code><a href="https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Up"><strong>Up</strong></a></code>. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event">Click events</a> need to be <em>derived</em> from mouse button downs and ups to ensure that they are fired correctly (@mrobinson, #39705).</li>
-<li><code><a href="https://doc.servo.org/servo/struct.WebView.html">WebView</a>::set_pinch_zoom</code> was renamed to <code><a href="https://doc.servo.org/servo/struct.WebView.html#method.pinch_zoom">pinch_zoom</a></code>, to better reflect that <strong>pinch zoom</strong> is always <strong>relative</strong> (@mrobinson, @atbrakhi, #39868).</li>
+<li>
+<p><code><a href="https://doc.servo.org/servo_config/opts/struct.Opts.html">Opts</a>::wait_for_stable_image</code> was <strong>removed</strong>; to wait for a stable image, call <code><a href="https://doc.servo.org/servo/struct.WebView.html">WebView</a>::<a href="https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot"><strong>take_screenshot</strong></a></code> instead (@mrobinson, @delan, #39583).</p>
+</li>
+<li>
+<p><code><a href="https://doc.servo.org/servo/enum.MouseButtonAction.html">MouseButtonAction</a>::Click</code> was <strong>removed</strong>; use <code><a href="https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Down"><strong>Down</strong></a></code> followed by <code><a href="https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Up"><strong>Up</strong></a></code>. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event">Click events</a> need to be <em>derived</em> from mouse button downs and ups to ensure that they are fired correctly (@mrobinson, #39705).</p>
+</li>
+<li>
+<p><strong>Scrolling is now <em>derived</em></strong> from mouse wheel events. When you have mouse wheel input to forward to Servo, you should now call <code><a href="https://doc.servo.org/servo/struct.WebView.html">WebView</a>::<a href="https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event">notify_input_event</a></code> <em>only</em>, not <code><a href="https://doc.servo.org/servo/struct.WebView.html#method.notify_scroll_event">notify_scroll_event</a></code> (@mrobinson, @atbrakhi, #40269).</p>
+</li>
+<li>
+<p><code><a href="https://doc.servo.org/servo/struct.WebView.html">WebView</a>::set_pinch_zoom</code> was renamed to <code><a href="https://doc.servo.org/servo/struct.WebView.html#method.pinch_zoom">pinch_zoom</a></code>, to better reflect that <strong>pinch zoom</strong> is always <strong>relative</strong> (@mrobinson, @atbrakhi, #39868).</p>
+</li>
 </ul>
 <p>We’ve improved <strong>page zoom</strong> in our webview API (@atbrakhi, @mrobinson, @shubhamg13, #39738), which includes some <strong>breaking changes</strong>:</p>
 <ul>
