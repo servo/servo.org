@@ -26,13 +26,19 @@
 &lt;li&gt;&lt;strong&gt;self.name&lt;/strong&gt; and &lt;strong&gt;.onmessageerror&lt;/strong&gt; in dedicated workers (@yerke, #40156)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;name&lt;/strong&gt; and &lt;strong&gt;areas&lt;/strong&gt; properties on &lt;strong&gt;HTMLMapElement&lt;/strong&gt; (@tharkum, #40133)&lt;/li&gt;
 &lt;/ul&gt;
+&lt;figure&gt;
+    &lt;img src=&quot;https://servo.org/twisoct/img/blog/2025-11-diffie.png&quot; alt=&quot;servoshell nightly showing new support CompressionStream and synthetic bold&quot; /&gt;
+&lt;/figure&gt;
 &lt;p&gt;In &lt;strong&gt;servoshell&lt;/strong&gt; for &lt;strong&gt;Android&lt;/strong&gt;, you can now enable &lt;strong&gt;experimental mode&lt;/strong&gt; with &lt;!-- TODO how many? --&gt; just a few taps (@jdm, #40054), use the &lt;strong&gt;software keyboard&lt;/strong&gt; (@jdm, #40009), deliver &lt;strong&gt;touch events&lt;/strong&gt; to web content (@mrobinson, #40240), and dismiss the location field (@jdm, #40049).
 &lt;strong&gt;Pinch zoom&lt;/strong&gt; is now fully supported in both Servo and &lt;strong&gt;servoshell&lt;/strong&gt;, taking into account the locations of pinch inputs (@mrobinson, @atbrakhi, #40083) and allowing keyboard scrolling when zoomed in (@mrobinson, @atbrakhi, #40108).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;AbortController&lt;/strong&gt; and &lt;strong&gt;AbortSignal&lt;/strong&gt; are now &lt;strong&gt;enabled by default&lt;/strong&gt; (@jdm, @TimvdLippe, #40079, #39943), after implementing &lt;strong&gt;AbortSignal.timeout()&lt;/strong&gt; (@Taym95, #40032) and fixing &lt;strong&gt;throwIfAborted()&lt;/strong&gt; on &lt;strong&gt;AbortSignal&lt;/strong&gt; (@Taym95, #40224).
 If this is the first time you’ve heard of them, you might be surprised how important they are for real-world web compat!
 &lt;a href=&quot;https://webstatus.dev/features/aborting&quot;&gt;&lt;strong&gt;Over 40%&lt;/strong&gt;&lt;/a&gt; of Google Chrome page loads at least &lt;em&gt;check&lt;/em&gt; if they are supported, and many popular websites including GitHub and Discord are broken without them.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;XPath&lt;/strong&gt; is now &lt;strong&gt;enabled by default&lt;/strong&gt; (@simonwuelker, #40212), after implementing &lt;strong&gt;‘@attr/parent’ queries&lt;/strong&gt; (@simonwuelker, #39749), &lt;strong&gt;Copy&lt;/strong&gt; &amp;gt; &lt;strong&gt;&lt;u&gt;X&lt;/u&gt;Path&lt;/strong&gt; in the &lt;strong&gt;DevTools Inspector&lt;/strong&gt; (@simonwuelker, #39892), completely rewriting the parser (@simonwuelker, #39977), and landing several other fixes (@simonwuelker, #40103, #40105, #40161, #40167, #39751, #39764).&lt;/p&gt;
-&lt;p&gt;Servo now supports &lt;code&gt;new KeyboardEvent({keyCode})&lt;/code&gt; and &lt;code&gt;({charCode})&lt;/code&gt; (@atbrakhi, #39590), which is enough to get &lt;a href=&quot;https://browserbench.org/Speedometer3.0/&quot;&gt;&lt;strong&gt;Speedometer 3.0&lt;/strong&gt;&lt;/a&gt; working on macOS.&lt;/p&gt;
+&lt;p&gt;Servo now supports &lt;code&gt;new KeyboardEvent({keyCode})&lt;/code&gt; and &lt;code&gt;({charCode})&lt;/code&gt; (@atbrakhi, #39590), which is enough to get &lt;a href=&quot;https://browserbench.org/Speedometer3.0/&quot;&gt;&lt;strong&gt;Speedometer 3.0&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&quot;https://browserbench.org/Speedometer3.1/&quot;&gt;&lt;strong&gt;3.1&lt;/strong&gt;&lt;/a&gt; working on macOS.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;a href=&quot;https://servo.org/twisoct/img/blog/2025-11-speedometer.png&quot;&gt;&lt;img src=&quot;https://servo.org/twisoct/img/blog/2025-11-speedometer-small.png&quot; alt=&quot;servoshell nightly showing Speedometer 3.1 running successfully on macOS&quot; /&gt;&lt;/a&gt;
+&lt;/figure&gt;
 &lt;p&gt;&lt;strong&gt;ImageData&lt;/strong&gt; can now be sent over &lt;strong&gt;postMessage()&lt;/strong&gt; and &lt;strong&gt;structuredClone()&lt;/strong&gt; (@Gae24, #40084).&lt;/p&gt;
 &lt;h2 id=&quot;layout-engine&quot; tabindex=&quot;-1&quot;&gt;Layout engine &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct/blog/2025/11/02/this-month-in-servo/#layout-engine&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
@@ -93,6 +99,7 @@ To solve these problems, we’ve replaced &lt;code&gt;notify_keyboard_event&lt;/
 &lt;h2 id=&quot;perf-and-stability&quot; tabindex=&quot;-1&quot;&gt;Perf and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct/blog/2025/11/02/this-month-in-servo/#perf-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Servo now does &lt;strong&gt;zero unnecessary layout work&lt;/strong&gt; when &lt;strong&gt;updating canvases&lt;/strong&gt; and &lt;strong&gt;animated images&lt;/strong&gt;, thanks to a new “UpdatedImageData” layout mode (@mrobinson, @mukilan, #38991).&lt;/p&gt;
 &lt;p&gt;We’ve fixed crashes when clicking on web content on Android (@mrobinson, #39771), and when running Servo on platforms where JIT is forbidden (@jschwe, @sagudev, #40071, #40130).&lt;/p&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct/blog/2025/11/02/this-month-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
