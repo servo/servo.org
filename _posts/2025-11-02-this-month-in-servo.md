@@ -89,6 +89,8 @@ To solve these problems, we’ve replaced <code>notify_keyboard_event</code> wit
 
 ## Perf and stability
 
+Servo now does **zero unnecessary layout work** when **updating canvases** and **animated images**, thanks to a new “UpdatedImageData” layout mode (@mrobinson, @mukilan, #38991).
+
 We’ve fixed crashes when clicking on web content on Android (@mrobinson, #39771), and when running Servo on platforms where JIT is forbidden (@jschwe, @sagudev, #40071, #40130).
 
 ## Donations
