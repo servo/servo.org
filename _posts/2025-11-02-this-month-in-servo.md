@@ -18,6 +18,10 @@ Servo now supports several new web platform features:
 - **self&#x2E;name** and **.onmessageerror** in dedicated workers (@yerke, #40156)
 - **name** and **areas** properties on **HTMLMapElement** (@tharkum, #40133)
 
+<figure>
+    <img src="{{ '/img/blog/2025-11-diffie.png' | url }}" alt="servoshell nightly showing new support CompressionStream and synthetic bold">
+</figure>
+
 In **servoshell** for **Android**, you can now enable **experimental mode** with <!-- TODO how many? --> just a few taps (@jdm, #40054), use the **software keyboard** (@jdm, #40009), deliver **touch events** to web content (@mrobinson, #40240), and dismiss the location field (@jdm, #40049).
 **Pinch zoom** is now fully supported in both Servo and **servoshell**, taking into account the locations of pinch inputs (@mrobinson, @atbrakhi, #40083) and allowing keyboard scrolling when zoomed in (@mrobinson, @atbrakhi, #40108).
 
@@ -27,7 +31,11 @@ If this is the first time you’ve heard of them, you might be surprised how imp
 
 **XPath** is now **enabled by default** (@simonwuelker, #40212), after implementing **‘@attr/parent’ queries** (@simonwuelker, #39749), **Copy** > **<u>X</u>Path** in the **DevTools Inspector** (@simonwuelker, #39892), completely rewriting the parser (@simonwuelker, #39977), and landing several other fixes (@simonwuelker, #40103, #40105, #40161, #40167, #39751, #39764).
 
-Servo now supports `new KeyboardEvent({keyCode})` and `({charCode})` (@atbrakhi, #39590), which is enough to get [**Speedometer 3.0**](https://browserbench.org/Speedometer3.0/) working on macOS.
+Servo now supports `new KeyboardEvent({keyCode})` and `({charCode})` (@atbrakhi, #39590), which is enough to get [**Speedometer 3.0**](https://browserbench.org/Speedometer3.0/) and [**3.1**](https://browserbench.org/Speedometer3.1/) working on macOS.
+
+<figure>
+    <a href="{{ '/img/blog/2025-11-speedometer.png' | url }}"><img src="{{ '/img/blog/2025-11-speedometer-small.png' | url }}" alt="servoshell nightly showing Speedometer 3.1 running successfully on macOS"></a>
+</figure>
 
 **ImageData** can now be sent over **postMessage()** and **structuredClone()** (@Gae24, #40084).
 
