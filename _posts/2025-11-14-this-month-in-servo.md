@@ -120,7 +120,7 @@ We’ve fixed crashes when clicking on web content on Android ([@mrobinson](http
 
 ## For developers
 
-CI builds for **pull requests** should now take **70% less time**, since they now run on self-hosted CI runners ([@delan](https://github.com/delan), [#39900](https://github.com/servo/servo/pull/39900)).
+CI builds for **pull requests** should now take **70% less time**, since they now run on self-hosted CI runners ([@delan](https://github.com/delan), [#39900](https://github.com/servo/servo/pull/39900), [#39915](https://github.com/servo/servo/pull/39915)).
 **Bencher builds** for runtime benchmarking now run on our new [dedicated](https://ci3.servo.org) [servers](https://ci4.servo.org), so our [Speedometer](https://bencher.dev/perf/servo?branches=52e1e9bb-959c-4171-a53d-e06bd694a6c1&testbeds=d742c702-3842-4108-9d0c-2db74e57599a%2Cd5e49dbe-b866-453a-b6ac-1cc2c452b846&benchmarks=0df0380f-9809-45bc-b525-b6ad9d5fbe91%2Cf7c6adb5-e702-42bc-902c-d2154b1e2428&measures=e71c685b-9ce9-4abc-a55d-a1de2ffe04fb&start_time=1733011200000&end_time=1764460800000) and Dromaeo data should now be more accurate and less noisy ([@delan](https://github.com/delan), [#39272](https://github.com/servo/servo/pull/39272)).
 
 We’ve now switched all of our macOS builds to run on arm64 ([@sagudev](https://github.com/sagudev), [@jschwe](https://github.com/jschwe), [#38460](https://github.com/servo/servo/pull/38460), [#39968](https://github.com/servo/servo/pull/39968)).
