@@ -130,13 +130,6 @@ Work is underway to set up faster macOS arm64 runners on our own servers (@delan
 
 ## Donations
 
-<!--
-- 5753.87/month donations
-    - 2243.24/month opencollective
-    - 3353.00/month github
-    - 157.63/month 28 donors thanks.dev
--->
-
 Thanks again for your generous support!
 We are now receiving **5753 USD/month** (+1.7% over September) in recurring donations.
 
