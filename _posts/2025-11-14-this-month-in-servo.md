@@ -19,7 +19,7 @@ Servo now supports several new web platform features:
 - **name** and **areas** properties on **HTMLMapElement** (@tharkum, #40133)
 
 <figure>
-    <img src="{{ '/img/blog/2025-11-diffie.png' | url }}" alt="servoshell nightly showing new support CompressionStream and synthetic bold">
+    <img src="{{ '/img/blog/2025-11-diffie.png' | url }}" alt="servoshell nightly showing new support for CompressionStream and synthetic bold">
 </figure>
 
 **servoshell** for **macOS** now ships as **native Apple Silicon binaries** (@jschwe, #39981).
