@@ -69,45 +69,45 @@ In other words, Servo is good for the web, even if you’re not using it yet!
 Our HTML-compatible **XPath** implementation now lives in its [own](https://github.com/servo/servo/tree/cd4c032908211fa2c26df550f6766080d1d28969/components/xpath) [crate](https://doc.servo.org/xpath/), and it’s no longer limited to the Servo DOM (@simonwuelker, #39546).
 We don’t have any specific plans to release this as a standalone library just yet, but please let us know if you have a use case that would benefit from this!
 
-You can now **take screenshots** of webviews with <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[take_screenshot](https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot)</code> (@mrobinson, @delan, #39583).
+You can now **take screenshots** of webviews with <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[take_screenshot](https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot)</code> (@mrobinson, @delan, #39583).
 
 Historically Servo has struggled with situations causing **100% CPU usage** or **unnecessary work on every tick** of the event loop, whenever a page is considered “active” or “animating” ([#25305](https://github.com/servo/servo/issues/25305), [#3406](https://github.com/servo/servo/issues/3406)).
 We had since throttled animations (@mrobinson, #37169) and reflows (@mrobinson, @Loirooriol, #38431), but only to fixed rates of 120 Hz and 60 Hz respectively.
 
 But starting this month, you can run Servo with **vsync**, thanks to the **<code>[RefreshDriver](https://doc.servo.org/servo/trait.RefreshDriver.html)</code> trait** (@coding-joedow, @mrobinson, #39072), which allows embedders to tell Servo *when* to start rendering each frame.
-The [default driver](https://doc.servo.org/compositing/refresh_driver/struct.TimerRefreshDriver.html) continues to run at 120 Hz, but you can define and install your own with <code>[ServoBuilder](https://doc.servo.org/servo/struct.ServoBuilder.html)::[refresh_driver](https://doc.servo.org/servo/struct.ServoBuilder.html#method.refresh_driver)</code>.
+The [default driver](https://doc.servo.org/compositing/refresh_driver/struct.TimerRefreshDriver.html) continues to run at 120 Hz, but you can define and install your own with <code>[ServoBuilder](https://doc.servo.org/servo/struct.ServoBuilder.html)::<wbr>[refresh_driver](https://doc.servo.org/servo/struct.ServoBuilder.html#method.refresh_driver)</code>.
 
 ### Breaking changes
 
 Servo’s embedding API has had a few **breaking changes**:
 
-- <code>[Opts](https://doc.servo.org/servo_config/opts/struct.Opts.html)::wait_for_stable_image</code> was **removed**; to wait for a stable image, call <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[**take_screenshot**](https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot)</code> instead (@mrobinson, @delan, #39583).
+- <code>[Opts](https://doc.servo.org/servo_config/opts/struct.Opts.html)::<wbr>wait_for_stable_image</code> was **removed**; to wait for a stable image, call <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[**take_screenshot**](https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot)</code> instead (@mrobinson, @delan, #39583).
 
-- <code>[MouseButtonAction](https://doc.servo.org/servo/enum.MouseButtonAction.html)::Click</code> was **removed**; use <code>[**Down**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Down)</code> followed by <code>[**Up**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Up)</code>. [Click events](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) need to be *derived* from mouse button downs and ups to ensure that they are fired correctly (@mrobinson, #39705).
+- <code>[MouseButtonAction](https://doc.servo.org/servo/enum.MouseButtonAction.html)::<wbr>Click</code> was **removed**; use <code>[**Down**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Down)</code> followed by <code>[**Up**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Up)</code>. [Click events](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) need to be *derived* from mouse button downs and ups to ensure that they are fired correctly (@mrobinson, #39705).
 
-- **Scrolling is now *derived*** from mouse wheel events. When you have mouse wheel input to forward to Servo, you should now call <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[notify_input_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event)</code> *only*, not <code>[notify_scroll_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_scroll_event)</code> (@mrobinson, @atbrakhi, #40269).
+- **Scrolling is now *derived*** from mouse wheel events. When you have mouse wheel input to forward to Servo, you should now call <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[notify_input_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event)</code> *only*, not <code>[notify_scroll_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_scroll_event)</code> (@mrobinson, @atbrakhi, #40269).
 
-- <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::set_pinch_zoom</code> was renamed to <code>[pinch_zoom](https://doc.servo.org/servo/struct.WebView.html#method.pinch_zoom)</code>, to better reflect that **pinch zoom** is always **relative** (@mrobinson, @atbrakhi, #39868).
+- <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>set_pinch_zoom</code> was renamed to <code>[pinch_zoom](https://doc.servo.org/servo/struct.WebView.html#method.pinch_zoom)</code>, to better reflect that **pinch zoom** is always **relative** (@mrobinson, @atbrakhi, #39868).
 
 We’ve improved **page zoom** in our webview API (@atbrakhi, @mrobinson, @shubhamg13, #39738), which includes some **breaking changes**:
 
-- <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::set_zoom</code> was renamed to <code>[set_page_zoom](https://doc.servo.org/servo/struct.WebView.html#method.set_page_zoom)</code>, and it now takes an **absolute** zoom value. This makes it idempotent, but it means if you want relative zoom, you’ll have to multiply the zoom values yourself.
-- Use the new <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[page_zoom](https://doc.servo.org/servo/struct.WebView.html#method.page_zoom)</code> method to get the current zoom value.
-- <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::reset_zoom</code> was removed; use `set_page_zoom(1.0)` instead.
+- <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>set_zoom</code> was renamed to <code>[set_page_zoom](https://doc.servo.org/servo/struct.WebView.html#method.set_page_zoom)</code>, and it now takes an **absolute** zoom value. This makes it idempotent, but it means if you want relative zoom, you’ll have to multiply the zoom values yourself.
+- Use the new <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[page_zoom](https://doc.servo.org/servo/struct.WebView.html#method.page_zoom)</code> method to get the current zoom value.
+- <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>reset_zoom</code> was removed; use `set_page_zoom(1.0)` instead.
 
 Some **breaking changes** were also needed to give embedders a more powerful way to **share input events with webviews** (@mrobinson, #39720).
 Often both your app and the pages in your webviews may be interested in knowing when users press a key.
 Servo handles these situations by asking the embedder for all potentially useful input events, then echoing some of them back:
 
-1. Embedder calls <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[notify_input_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event)</code> to tell Servo about an input event, then web content (and Servo) can handle the event.
-2. Servo calls <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::notify_keyboard_event</code> to tell the embedder about keyboard events that were neither [canceled by scripts](https://dom.spec.whatwg.org/#dom-event-preventdefault) nor handled by Servo itself. The event details is included in the arguments.
+1. Embedder calls <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[notify_input_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event)</code> to tell Servo about an input event, then web content (and Servo) can handle the event.
+2. Servo calls <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::<wbr>notify_keyboard_event</code> to tell the embedder about keyboard events that were neither [canceled by scripts](https://dom.spec.whatwg.org/#dom-event-preventdefault) nor handled by Servo itself. The event details is included in the arguments.
 
 Embedders had **no way of knowing *when*** non-keyboard input events, or keyboard events that were canceled or handled by Servo, have **completed all of their effects in Servo**.
 This was good enough for servoshell’s overridable key bindings, but not for WebDriver, where commands like [Perform Actions](https://w3c.github.io/webdriver/#perform-actions) need to reliably wait for input events to be handled.
 To solve these problems, we’ve replaced <code>notify_keyboard_event</code> with <code>[notify_input_event_handled](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_input_event_handled)</code>:
 
-1. Embedder calls <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::[notify_input_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event)</code> to tell Servo about an input event, then web content (and Servo) can handle the event. **This now returns an <code>[InputEventId](https://doc.servo.org/servo/struct.InputEventId.html)</code>**, allowing embedders to remember input events that they still care about for step 2.
-2. **Servo calls <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::[notify_input_event_handled](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_input_event_handled)</code>** to tell the embedder about **every input event, when Servo has finished handling it**. The event details are **not included** in the arguments, but you can use the <code>[InputEventId](https://doc.servo.org/servo/struct.InputEventId.html)</code> to look up the details in the embedder.
+1. Embedder calls <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[notify_input_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event)</code> to tell Servo about an input event, then web content (and Servo) can handle the event. **This now returns an <code>[InputEventId](https://doc.servo.org/servo/struct.InputEventId.html)</code>**, allowing embedders to remember input events that they still care about for step 2.
+2. **Servo calls <code>[WebViewDelegate](https://doc.servo.org/servo/trait.WebViewDelegate.html)::<wbr>[notify_input_event_handled](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.notify_input_event_handled)</code>** to tell the embedder about **every input event, when Servo has finished handling it**. The event details are **not included** in the arguments, but you can use the <code>[InputEventId](https://doc.servo.org/servo/struct.InputEventId.html)</code> to look up the details in the embedder.
 
 ## Perf and stability
 
