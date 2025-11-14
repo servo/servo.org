@@ -22,8 +22,38 @@ Servo now supports several new web platform features:
     <img src="{{ '/img/blog/2025-11-diffie.png' | url }}" alt="servoshell nightly showing new support CompressionStream and synthetic bold">
 </figure>
 
-In **servoshell** for **Android**, you can now enable **experimental mode** with <!-- TODO how many? --> just a few taps (@jdm, #40054), use the **software keyboard** (@jdm, #40009), deliver **touch events** to web content (@mrobinson, #40240), and dismiss the location field (@jdm, #40049).
+<script>
+    (function makeVideoPlayersClickable() {
+        addEventListener("toggle", event => {
+            const details = event.target.closest("details");
+            console.log(details, details.open);
+            if (!details?.open) {
+                return;
+            }
+            const video = details.querySelector("video");
+            video?.fastSeek(0);
+            video?.play();
+            console.log(details, video);
+        }, true);
+    })();
+</script>
+
+In **servoshell** for **Android**, you can now enable **experimental mode** with just two taps (@jdm, #40054), use the **software keyboard** (@jdm, #40009), deliver **touch events** to web content (@mrobinson, #40240), and dismiss the location field (@jdm, #40049).
 **Pinch zoom** is now fully supported in both Servo and **servoshell**, taking into account the locations of pinch inputs (@mrobinson, @atbrakhi, #40083) and allowing keyboard scrolling when zoomed in (@mrobinson, @atbrakhi, #40108).
+
+<figure>
+    <div style="display:flex">
+        <details style="position:relative;width:50%">
+            <video src="{{ '/img/blog/2025-11-experimental.webm' | url }}" style="position:absolute;margin:0;inset:0;pointer-events:none" loading="lazy">servoshell on Android showing GitHub loaded with an internal error, then enabling experimental mode in the settings menu, then reloading the page successfully (click to pause)</video>
+            <summary style="display:block"><img src="{{ '/img/blog/2025-11-experimental.jpg' | url }}" style="margin:0" loading="lazy"><div style="position:absolute;inset:0;display:flex;justify-content:center;align-items:center;color:#1192e8;font-size:7em;cursor:pointer;-webkit-text-stroke:1rem color-mix(in oklch,#1192e8,black 20%);user-select:none" alt="servoshell on Android showing GitHub loaded with an internal error, then enabling experimental mode in the settings menu, then reloading the page successfully (click to play)">▶</div></summary>
+        </details>
+        <details style="position:relative;width:50%">
+            <video src="{{ '/img/blog/2025-11-input.webm' | url }}" style="position:absolute;margin:0;inset:0;pointer-events:none" loading="lazy">servoshell on Android showing a page that opens the software keyboard and listens for touch events (click to pause)</video>
+            <summary style="display:block"><img src="{{ '/img/blog/2025-11-input.jpg' | url }}" style="margin:0" loading="lazy"><div style="position:absolute;inset:0;display:flex;justify-content:center;align-items:center;color:#1192e8;font-size:7em;cursor:pointer;-webkit-text-stroke:1rem color-mix(in oklch,#1192e8,black 20%);user-select:none" alt="servoshell on Android showing a page that opens the software keyboard and listens for touch events (click to play)">▶</div></summary>
+        </details>
+    </div>
+    <figcaption>servoshell on Android. <strong>Left:</strong> you can now turn on experimental mode in the settings menu. <strong>Right:</strong> we now support the soft keyboard and touch events.</figcaption>
+</figure>
 
 **AbortController** and **AbortSignal** are now **enabled by default** (@jdm, @TimvdLippe, #40079, #39943), after implementing **AbortSignal.timeout()** (@Taym95, #40032) and fixing **throwIfAborted()** on **AbortSignal** (@Taym95, #40224).
 If this is the first time you’ve heard of them, you might be surprised how important they are for real-world web compat!
