@@ -23,7 +23,7 @@ Servo now supports several new web platform features:
 </figure>
 
 **servoshell** for **macOS** now ships as **native Apple Silicon binaries** ([@jschwe](https://github.com/jschwe), [#39981](https://github.com/servo/servo/pull/39981)).
-Building servoshell for macOS amd64 still works for now, but is no longer officially supported by automated testing in CI (see *§ For developers*).
+Building servoshell for macOS x86-64 still works for now, but is no longer officially supported by automated testing in CI (see *§ For developers*).
 
 In **servoshell** for **Android**, you can now enable **experimental mode** with just two taps ([@jdm](https://github.com/jdm), [#40054](https://github.com/servo/servo/pull/40054)), use the **software keyboard** ([@jdm](https://github.com/jdm), [#40009](https://github.com/servo/servo/pull/40009)), deliver **touch events** to web content ([@mrobinson](https://github.com/mrobinson), [#40240](https://github.com/servo/servo/pull/40240)), and dismiss the location field ([@jdm](https://github.com/jdm), [#40049](https://github.com/servo/servo/pull/40049)).
 **Pinch zoom** is now fully supported in both Servo and **servoshell**, taking into account the locations of pinch inputs ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#40083](https://github.com/servo/servo/pull/40083)) and allowing keyboard scrolling when zoomed in ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#40108](https://github.com/servo/servo/pull/40108)).
