@@ -9,24 +9,24 @@ categories:
 
 Servo now supports several new web platform features:
 
-- **&lt;source>** in **&lt;video>** and **&lt;audio>** (@tharkum, #39717)
-- **CompressionStream** and **DecompressionStream** (@kkoyung, #39658)
-- **fetchLater()** (@TimvdLippe, #39547)
-- **Document.parseHTMLUnsafe()** (@lukewarlow, #40246)
-- the **which** property on **UIEvent** (@Taym95, #40109)
-- the **relatedTarget** property on **UIEvent** (@TimvdLippe, #40182)
-- **self&#x2E;name** and **.onmessageerror** in dedicated workers (@yerke, #40156)
-- **name** and **areas** properties on **HTMLMapElement** (@tharkum, #40133)
+- **&lt;source>** in **&lt;video>** and **&lt;audio>** ([@tharkum](https://github.com/tharkum), [#39717](https://github.com/servo/servo/pull/39717))
+- **CompressionStream** and **DecompressionStream** ([@kkoyung](https://github.com/kkoyung), [#39658](https://github.com/servo/servo/pull/39658))
+- **fetchLater()** ([@TimvdLippe](https://github.com/TimvdLippe), [#39547](https://github.com/servo/servo/pull/39547))
+- **Document.parseHTMLUnsafe()** ([@lukewarlow](https://github.com/lukewarlow), [#40246](https://github.com/servo/servo/pull/40246))
+- the **which** property on **UIEvent** ([@Taym95](https://github.com/Taym95), [#40109](https://github.com/servo/servo/pull/40109))
+- the **relatedTarget** property on **UIEvent** ([@TimvdLippe](https://github.com/TimvdLippe), [#40182](https://github.com/servo/servo/pull/40182))
+- **self&#x2E;name** and **.onmessageerror** in dedicated workers ([@yerke](https://github.com/yerke), [#40156](https://github.com/servo/servo/pull/40156))
+- **name** and **areas** properties on **HTMLMapElement** ([@tharkum](https://github.com/tharkum), [#40133](https://github.com/servo/servo/pull/40133))
 
 <figure>
     <img src="{{ '/img/blog/2025-11-diffie.png' | url }}" alt="servoshell nightly showing new support for CompressionStream and synthetic bold">
 </figure>
 
-**servoshell** for **macOS** now ships as **native Apple Silicon binaries** (@jschwe, #39981).
+**servoshell** for **macOS** now ships as **native Apple Silicon binaries** ([@jschwe](https://github.com/jschwe), [#39981](https://github.com/servo/servo/pull/39981)).
 Building servoshell for macOS amd64 still works for now, but is no longer officially supported by automated testing in CI (see *§ For developers*).
 
-In **servoshell** for **Android**, you can now enable **experimental mode** with just two taps (@jdm, #40054), use the **software keyboard** (@jdm, #40009), deliver **touch events** to web content (@mrobinson, #40240), and dismiss the location field (@jdm, #40049).
-**Pinch zoom** is now fully supported in both Servo and **servoshell**, taking into account the locations of pinch inputs (@mrobinson, @atbrakhi, #40083) and allowing keyboard scrolling when zoomed in (@mrobinson, @atbrakhi, #40108).
+In **servoshell** for **Android**, you can now enable **experimental mode** with just two taps ([@jdm](https://github.com/jdm), [#40054](https://github.com/servo/servo/pull/40054)), use the **software keyboard** ([@jdm](https://github.com/jdm), [#40009](https://github.com/servo/servo/pull/40009)), deliver **touch events** to web content ([@mrobinson](https://github.com/mrobinson), [#40240](https://github.com/servo/servo/pull/40240)), and dismiss the location field ([@jdm](https://github.com/jdm), [#40049](https://github.com/servo/servo/pull/40049)).
+**Pinch zoom** is now fully supported in both Servo and **servoshell**, taking into account the locations of pinch inputs ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#40083](https://github.com/servo/servo/pull/40083)) and allowing keyboard scrolling when zoomed in ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#40108](https://github.com/servo/servo/pull/40108)).
 
 <figure>
     <div style="display:flex">
@@ -42,63 +42,63 @@ In **servoshell** for **Android**, you can now enable **experimental mode** with
     <figcaption>servoshell on Android. <strong>Left:</strong> you can now turn on experimental mode in the settings menu. <strong>Right:</strong> we now support the soft keyboard and touch events.</figcaption>
 </figure>
 
-**AbortController** and **AbortSignal** are now **enabled by default** (@jdm, @TimvdLippe, #40079, #39943), after implementing **AbortSignal.timeout()** (@Taym95, #40032) and fixing **throwIfAborted()** on **AbortSignal** (@Taym95, #40224).
+**AbortController** and **AbortSignal** are now **enabled by default** ([@jdm](https://github.com/jdm), [@TimvdLippe](https://github.com/TimvdLippe), [#40079](https://github.com/servo/servo/pull/40079), [#39943](https://github.com/servo/servo/pull/39943)), after implementing **AbortSignal.timeout()** ([@Taym95](https://github.com/Taym95), [#40032](https://github.com/servo/servo/pull/40032)) and fixing **throwIfAborted()** on **AbortSignal** ([@Taym95](https://github.com/Taym95), [#40224](https://github.com/servo/servo/pull/40224)).
 If this is the first time you’ve heard of them, you might be surprised how important they are for real-world web compat!
 [**Over 40%**](https://webstatus.dev/features/aborting) of Google Chrome page loads at least *check* if they are supported, and many popular websites including GitHub and Discord are broken without them.
 
-**XPath** is now **enabled by default** (@simonwuelker, #40212), after implementing **‘@attr/parent’ queries** (@simonwuelker, #39749), **Copy** > **<u>X</u>Path** in the **DevTools Inspector** (@simonwuelker, #39892), completely rewriting the parser (@simonwuelker, #39977), and landing several other fixes (@simonwuelker, #40103, #40105, #40161, #40167, #39751, #39764).
+**XPath** is now **enabled by default** ([@simonwuelker](https://github.com/simonwuelker), [#40212](https://github.com/servo/servo/pull/40212)), after implementing **‘@attr/parent’ queries** ([@simonwuelker](https://github.com/simonwuelker), [#39749](https://github.com/servo/servo/pull/39749)), **Copy** > **<u>X</u>Path** in the **DevTools Inspector** ([@simonwuelker](https://github.com/simonwuelker), [#39892](https://github.com/servo/servo/pull/39892)), completely rewriting the parser ([@simonwuelker](https://github.com/simonwuelker), [#39977](https://github.com/servo/servo/pull/39977)), and landing several other fixes ([@simonwuelker](https://github.com/simonwuelker), [#40103](https://github.com/servo/servo/pull/40103), [#40105](https://github.com/servo/servo/pull/40105), [#40161](https://github.com/servo/servo/pull/40161), [#40167](https://github.com/servo/servo/pull/40167), [#39751](https://github.com/servo/servo/pull/39751), [#39764](https://github.com/servo/servo/pull/39764)).
 
-Servo now supports `new KeyboardEvent({keyCode})` and `({charCode})` (@atbrakhi, #39590), which is enough to get [**Speedometer 3.0**](https://browserbench.org/Speedometer3.0/) and [**3.1**](https://browserbench.org/Speedometer3.1/) working on macOS.
+Servo now supports `new KeyboardEvent({keyCode})` and `({charCode})` ([@atbrakhi](https://github.com/atbrakhi), [#39590](https://github.com/servo/servo/pull/39590)), which is enough to get [**Speedometer 3.0**](https://browserbench.org/Speedometer3.0/) and [**3.1**](https://browserbench.org/Speedometer3.1/) working on macOS.
 
 <figure>
     <a href="{{ '/img/blog/2025-11-speedometer.png' | url }}"><img src="{{ '/img/blog/2025-11-speedometer-small.png' | url }}" alt="servoshell nightly showing Speedometer 3.1 running successfully on macOS"></a>
 </figure>
 
-**ImageData** can now be sent over **postMessage()** and **structuredClone()** (@Gae24, #40084).
+**ImageData** can now be sent over **postMessage()** and **structuredClone()** ([@Gae24](https://github.com/Gae24), [#40084](https://github.com/servo/servo/pull/40084)).
 
 ## Layout engine
 
-Our layout engine can now render text in **synthetic bold** (@minghuaw, @mrobinson, #39519, #39681, #39633, #39691, #39713), and now selects more appropriate fallback fonts for **Kanji** in **Japanese text** (@arayaryoma, #39608).
+Our layout engine can now render text in **synthetic bold** ([@minghuaw](https://github.com/minghuaw), [@mrobinson](https://github.com/mrobinson), [#39519](https://github.com/servo/servo/pull/39519), [#39681](https://github.com/servo/servo/pull/39681), [#39633](https://github.com/servo/servo/pull/39633), [#39691](https://github.com/servo/servo/pull/39691), [#39713](https://github.com/servo/servo/pull/39713)), and now selects more appropriate fallback fonts for **Kanji** in **Japanese text** ([@arayaryoma](https://github.com/arayaryoma), [#39608](https://github.com/servo/servo/pull/39608)).
 
-**‘initial-scale’** now does the right thing in **&lt;meta name=viewport>** (@atbrakhi, @shubhamg13, @mrobinson, #40055).
+**‘initial-scale’** now does the right thing in **&lt;meta name=viewport>** ([@atbrakhi](https://github.com/atbrakhi), [@shubhamg13](https://github.com/shubhamg13), [@mrobinson](https://github.com/mrobinson), [#40055](https://github.com/servo/servo/pull/40055)).
 
-We’ve improved the way we handle **‘border-radius’** (@Loirooriol, #39571) and **margin collapsing** (@Loirooriol, #36322).
-While they’re fairly unassuming fixes on the surface, both of them allowed us to **find interop issues** in the big incumbent engines (@Loirooriol, [#39540](https://github.com/servo/servo/issues/39540), [#36321](https://github.com/servo/servo/issues/36321)) and **help improve web standards** (@noamr, @Loirooriol, [csswg-drafts#12961](https://github.com/w3c/csswg-drafts/issues/12961), [csswg-drafts#12218](https://github.com/w3c/csswg-drafts/issues/12218)).
+We’ve improved the way we handle **‘border-radius’** ([@Loirooriol](https://github.com/Loirooriol), [#39571](https://github.com/servo/servo/pull/39571)) and **margin collapsing** ([@Loirooriol](https://github.com/Loirooriol), [#36322](https://github.com/servo/servo/pull/36322)).
+While they’re fairly unassuming fixes on the surface, both of them allowed us to **find interop issues** in the big incumbent engines ([@Loirooriol](https://github.com/Loirooriol), [#39540](https://github.com/servo/servo/issues/39540), [#36321](https://github.com/servo/servo/issues/36321)) and **help improve web standards** ([@noamr](https://github.com/noamr), [@Loirooriol](https://github.com/Loirooriol), [csswg-drafts#12961](https://github.com/w3c/csswg-drafts/issues/12961), [csswg-drafts#12218](https://github.com/w3c/csswg-drafts/issues/12218)).
 
 In other words, Servo is good for the web, even if you’re not using it yet!
 
 ## Embedding and ecosystem
 
-Our HTML-compatible **XPath** implementation now lives in its [own](https://github.com/servo/servo/tree/cd4c032908211fa2c26df550f6766080d1d28969/components/xpath) [crate](https://doc.servo.org/xpath/), and it’s no longer limited to the Servo DOM (@simonwuelker, #39546).
+Our HTML-compatible **XPath** implementation now lives in its [own](https://github.com/servo/servo/tree/cd4c032908211fa2c26df550f6766080d1d28969/components/xpath) [crate](https://doc.servo.org/xpath/), and it’s no longer limited to the Servo DOM ([@simonwuelker](https://github.com/simonwuelker), [#39546](https://github.com/servo/servo/pull/39546)).
 We don’t have any specific plans to release this as a standalone library just yet, but please let us know if you have a use case that would benefit from this!
 
-You can now **take screenshots** of webviews with <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[take_screenshot](https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot)</code> (@mrobinson, @delan, #39583).
+You can now **take screenshots** of webviews with <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[take_screenshot](https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot)</code> ([@mrobinson](https://github.com/mrobinson), [@delan](https://github.com/delan), [#39583](https://github.com/servo/servo/pull/39583)).
 
 Historically Servo has struggled with situations causing **100% CPU usage** or **unnecessary work on every tick** of the event loop, whenever a page is considered “active” or “animating” ([#25305](https://github.com/servo/servo/issues/25305), [#3406](https://github.com/servo/servo/issues/3406)).
-We had since throttled animations (@mrobinson, #37169) and reflows (@mrobinson, @Loirooriol, #38431), but only to fixed rates of 120 Hz and 60 Hz respectively.
+We had since throttled animations ([@mrobinson](https://github.com/mrobinson), [#37169](https://github.com/servo/servo/pull/37169)) and reflows ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#38431](https://github.com/servo/servo/pull/38431)), but only to fixed rates of 120 Hz and 60 Hz respectively.
 
-But starting this month, you can run Servo with **vsync**, thanks to the **<code>[RefreshDriver](https://doc.servo.org/servo/trait.RefreshDriver.html)</code> trait** (@coding-joedow, @mrobinson, #39072), which allows embedders to tell Servo *when* to start rendering each frame.
+But starting this month, you can run Servo with **vsync**, thanks to the **<code>[RefreshDriver](https://doc.servo.org/servo/trait.RefreshDriver.html)</code> trait** ([@coding-joedow](https://github.com/coding-joedow), [@mrobinson](https://github.com/mrobinson), [#39072](https://github.com/servo/servo/pull/39072)), which allows embedders to tell Servo *when* to start rendering each frame.
 The [default driver](https://doc.servo.org/compositing/refresh_driver/struct.TimerRefreshDriver.html) continues to run at 120 Hz, but you can define and install your own with <code>[ServoBuilder](https://doc.servo.org/servo/struct.ServoBuilder.html)::<wbr>[refresh_driver](https://doc.servo.org/servo/struct.ServoBuilder.html#method.refresh_driver)</code>.
 
 ### Breaking changes
 
 Servo’s embedding API has had a few **breaking changes**:
 
-- <code>[Opts](https://doc.servo.org/servo_config/opts/struct.Opts.html)::<wbr>wait_for_stable_image</code> was **removed**; to wait for a stable image, call <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[**take_screenshot**](https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot)</code> instead (@mrobinson, @delan, #39583).
+- <code>[Opts](https://doc.servo.org/servo_config/opts/struct.Opts.html)::<wbr>wait_for_stable_image</code> was **removed**; to wait for a stable image, call <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[**take_screenshot**](https://doc.servo.org/servo/struct.WebView.html#method.take_screenshot)</code> instead ([@mrobinson](https://github.com/mrobinson), [@delan](https://github.com/delan), [#39583](https://github.com/servo/servo/pull/39583)).
 
-- <code>[MouseButtonAction](https://doc.servo.org/servo/enum.MouseButtonAction.html)::<wbr>Click</code> was **removed**; use <code>[**Down**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Down)</code> followed by <code>[**Up**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Up)</code>. [Click events](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) need to be *derived* from mouse button downs and ups to ensure that they are fired correctly (@mrobinson, #39705).
+- <code>[MouseButtonAction](https://doc.servo.org/servo/enum.MouseButtonAction.html)::<wbr>Click</code> was **removed**; use <code>[**Down**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Down)</code> followed by <code>[**Up**](https://doc.servo.org/servo/enum.MouseButtonAction.html#variant.Up)</code>. [Click events](https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event) need to be *derived* from mouse button downs and ups to ensure that they are fired correctly ([@mrobinson](https://github.com/mrobinson), [#39705](https://github.com/servo/servo/pull/39705)).
 
-- **Scrolling is now *derived*** from mouse wheel events. When you have mouse wheel input to forward to Servo, you should now call <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[notify_input_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event)</code> *only*, not <code>[notify_scroll_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_scroll_event)</code> (@mrobinson, @atbrakhi, #40269).
+- **Scrolling is now *derived*** from mouse wheel events. When you have mouse wheel input to forward to Servo, you should now call <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[notify_input_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event)</code> *only*, not <code>[notify_scroll_event](https://doc.servo.org/servo/struct.WebView.html#method.notify_scroll_event)</code> ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#40269](https://github.com/servo/servo/pull/40269)).
 
-- <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>set_pinch_zoom</code> was renamed to <code>[pinch_zoom](https://doc.servo.org/servo/struct.WebView.html#method.pinch_zoom)</code>, to better reflect that **pinch zoom** is always **relative** (@mrobinson, @atbrakhi, #39868).
+- <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>set_pinch_zoom</code> was renamed to <code>[pinch_zoom](https://doc.servo.org/servo/struct.WebView.html#method.pinch_zoom)</code>, to better reflect that **pinch zoom** is always **relative** ([@mrobinson](https://github.com/mrobinson), [@atbrakhi](https://github.com/atbrakhi), [#39868](https://github.com/servo/servo/pull/39868)).
 
-We’ve improved **page zoom** in our webview API (@atbrakhi, @mrobinson, @shubhamg13, #39738), which includes some **breaking changes**:
+We’ve improved **page zoom** in our webview API ([@atbrakhi](https://github.com/atbrakhi), [@mrobinson](https://github.com/mrobinson), [@shubhamg13](https://github.com/shubhamg13), [#39738](https://github.com/servo/servo/pull/39738)), which includes some **breaking changes**:
 
 - <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>set_zoom</code> was renamed to <code>[set_page_zoom](https://doc.servo.org/servo/struct.WebView.html#method.set_page_zoom)</code>, and it now takes an **absolute** zoom value. This makes it idempotent, but it means if you want relative zoom, you’ll have to multiply the zoom values yourself.
 - Use the new <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>[page_zoom](https://doc.servo.org/servo/struct.WebView.html#method.page_zoom)</code> method to get the current zoom value.
 - <code>[WebView](https://doc.servo.org/servo/struct.WebView.html)::<wbr>reset_zoom</code> was removed; use `set_page_zoom(1.0)` instead.
 
-Some **breaking changes** were also needed to give embedders a more powerful way to **share input events with webviews** (@mrobinson, #39720).
+Some **breaking changes** were also needed to give embedders a more powerful way to **share input events with webviews** ([@mrobinson](https://github.com/mrobinson), [#39720](https://github.com/servo/servo/pull/39720)).
 Often both your app and the pages in your webviews may be interested in knowing when users press a key.
 Servo handles these situations by asking the embedder for all potentially useful input events, then echoing some of them back:
 
@@ -114,19 +114,19 @@ To solve these problems, we’ve replaced <code>notify_keyboard_event</code> wit
 
 ## Perf and stability
 
-Servo now does **zero unnecessary layout work** when **updating canvases** and **animated images**, thanks to a new “UpdatedImageData” layout mode (@mrobinson, @mukilan, #38991).
+Servo now does **zero unnecessary layout work** when **updating canvases** and **animated images**, thanks to a new “UpdatedImageData” layout mode ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#38991](https://github.com/servo/servo/pull/38991)).
 
-We’ve fixed crashes when clicking on web content on Android (@mrobinson, #39771), and when running Servo on platforms where JIT is forbidden (@jschwe, @sagudev, #40071, #40130).
+We’ve fixed crashes when clicking on web content on Android ([@mrobinson](https://github.com/mrobinson), [#39771](https://github.com/servo/servo/pull/39771)), and when running Servo on platforms where JIT is forbidden ([@jschwe](https://github.com/jschwe), [@sagudev](https://github.com/sagudev), [#40071](https://github.com/servo/servo/pull/40071), [#40130](https://github.com/servo/servo/pull/40130)).
 
 ## For developers
 
-CI builds for **pull requests** should now take **70% less time**, since they now run on self-hosted CI runners (@delan, #39900).
-**Bencher builds** for runtime benchmarking now run on our new [dedicated](https://ci3.servo.org) [servers](https://ci4.servo.org), so our [Speedometer](https://bencher.dev/perf/servo?branches=52e1e9bb-959c-4171-a53d-e06bd694a6c1&testbeds=d742c702-3842-4108-9d0c-2db74e57599a%2Cd5e49dbe-b866-453a-b6ac-1cc2c452b846&benchmarks=0df0380f-9809-45bc-b525-b6ad9d5fbe91%2Cf7c6adb5-e702-42bc-902c-d2154b1e2428&measures=e71c685b-9ce9-4abc-a55d-a1de2ffe04fb&start_time=1733011200000&end_time=1764460800000) and Dromaeo data should now be more accurate and less noisy (@delan, #39272).
+CI builds for **pull requests** should now take **70% less time**, since they now run on self-hosted CI runners ([@delan](https://github.com/delan), [#39900](https://github.com/servo/servo/pull/39900)).
+**Bencher builds** for runtime benchmarking now run on our new [dedicated](https://ci3.servo.org) [servers](https://ci4.servo.org), so our [Speedometer](https://bencher.dev/perf/servo?branches=52e1e9bb-959c-4171-a53d-e06bd694a6c1&testbeds=d742c702-3842-4108-9d0c-2db74e57599a%2Cd5e49dbe-b866-453a-b6ac-1cc2c452b846&benchmarks=0df0380f-9809-45bc-b525-b6ad9d5fbe91%2Cf7c6adb5-e702-42bc-902c-d2154b1e2428&measures=e71c685b-9ce9-4abc-a55d-a1de2ffe04fb&start_time=1733011200000&end_time=1764460800000) and Dromaeo data should now be more accurate and less noisy ([@delan](https://github.com/delan), [#39272](https://github.com/servo/servo/pull/39272)).
 
-We’ve now switched all of our macOS builds to run on arm64 (@sagudev, @jschwe, #38460, #39968).
+We’ve now switched all of our macOS builds to run on arm64 ([@sagudev](https://github.com/sagudev), [@jschwe](https://github.com/jschwe), [#38460](https://github.com/servo/servo/pull/38460), [#39968](https://github.com/servo/servo/pull/39968)).
 This helps back our macOS releases with thorough automated testing on the same architecture as our releases, but we can’t run them on self-hosted CI runners yet, so they may be slower for the time being.
 
-Work is underway to set up faster macOS arm64 runners on our own servers (@delan, [ci-runners#64](https://github.com/servo/ci-runners/pull/64)), funded by your donations. Speaking of which!
+Work is underway to set up faster macOS arm64 runners on our own servers ([@delan](https://github.com/delan), [ci-runners#64](https://github.com/servo/ci-runners/pull/64)), funded by your donations. Speaking of which!
 
 ## Donations
 
