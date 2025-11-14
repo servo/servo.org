@@ -22,6 +22,9 @@ Servo now supports several new web platform features:
     <img src="{{ '/img/blog/2025-11-diffie.png' | url }}" alt="servoshell nightly showing new support CompressionStream and synthetic bold">
 </figure>
 
+**servoshell** for **macOS** now ships as **native Apple Silicon binaries** (@jschwe, #39981).
+Building servoshell for macOS amd64 still works for now, but is no longer officially supported by automated testing in CI (see *§ For developers*).
+
 In **servoshell** for **Android**, you can now enable **experimental mode** with just two taps (@jdm, #40054), use the **software keyboard** (@jdm, #40009), deliver **touch events** to web content (@mrobinson, #40240), and dismiss the location field (@jdm, #40049).
 **Pinch zoom** is now fully supported in both Servo and **servoshell**, taking into account the locations of pinch inputs (@mrobinson, @atbrakhi, #40083) and allowing keyboard scrolling when zoomed in (@mrobinson, @atbrakhi, #40108).
 
@@ -114,6 +117,16 @@ To solve these problems, we’ve replaced <code>notify_keyboard_event</code> wit
 Servo now does **zero unnecessary layout work** when **updating canvases** and **animated images**, thanks to a new “UpdatedImageData” layout mode (@mrobinson, @mukilan, #38991).
 
 We’ve fixed crashes when clicking on web content on Android (@mrobinson, #39771), and when running Servo on platforms where JIT is forbidden (@jschwe, @sagudev, #40071, #40130).
+
+## For developers
+
+CI builds for **pull requests** should now take **70% less time**, since they now run on self-hosted CI runners (@delan, #39900).
+**Bencher builds** for runtime benchmarking now run on our new [dedicated](https://ci3.servo.org) [servers](https://ci4.servo.org), so our [Speedometer](https://bencher.dev/perf/servo?branches=52e1e9bb-959c-4171-a53d-e06bd694a6c1&testbeds=d742c702-3842-4108-9d0c-2db74e57599a%2Cd5e49dbe-b866-453a-b6ac-1cc2c452b846&benchmarks=0df0380f-9809-45bc-b525-b6ad9d5fbe91%2Cf7c6adb5-e702-42bc-902c-d2154b1e2428&measures=e71c685b-9ce9-4abc-a55d-a1de2ffe04fb&start_time=1733011200000&end_time=1764460800000) and Dromaeo data should now be more accurate and less noisy (@delan, #39272).
+
+We’ve now switched all of our macOS builds to run on arm64 (@sagudev, @jschwe, #38460, #39968).
+This helps back our macOS releases with thorough automated testing on the same architecture as our releases, but we can’t run them on self-hosted CI runners yet, so they may be slower for the time being.
+
+Work is underway to set up faster macOS arm64 runners on our own servers (@delan, [ci-runners#64](https://github.com/servo/ci-runners/pull/64)), funded by your donations. Speaking of which!
 
 ## Donations
 
