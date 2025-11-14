@@ -22,22 +22,6 @@ Servo now supports several new web platform features:
     <img src="{{ '/img/blog/2025-11-diffie.png' | url }}" alt="servoshell nightly showing new support CompressionStream and synthetic bold">
 </figure>
 
-<script>
-    (function makeVideoPlayersClickable() {
-        addEventListener("toggle", event => {
-            const details = event.target.closest("details");
-            console.log(details, details.open);
-            if (!details?.open) {
-                return;
-            }
-            const video = details.querySelector("video");
-            video?.fastSeek(0);
-            video?.play();
-            console.log(details, video);
-        }, true);
-    })();
-</script>
-
 In **servoshell** for **Android**, you can now enable **experimental mode** with just two taps (@jdm, #40054), use the **software keyboard** (@jdm, #40009), deliver **touch events** to web content (@mrobinson, #40240), and dismiss the location field (@jdm, #40049).
 **Pinch zoom** is now fully supported in both Servo and **servoshell**, taking into account the locations of pinch inputs (@mrobinson, @atbrakhi, #40083) and allowing keyboard scrolling when zoomed in (@mrobinson, @atbrakhi, #40108).
 
@@ -176,3 +160,19 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
         opacity: 0.75;
     }
 </style>
+
+<script>
+    (function makeVideoPlayersClickable() {
+        addEventListener("toggle", event => {
+            const details = event.target.closest("details");
+            console.log(details, details.open);
+            if (!details?.open) {
+                return;
+            }
+            const video = details.querySelector("video");
+            video?.fastSeek(0);
+            video?.play();
+            console.log(details, video);
+        }, true);
+    })();
+</script>
