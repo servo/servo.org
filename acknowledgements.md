@@ -27,7 +27,7 @@ title: Acknowledgements
 
 * Repositories and some CI infrastructure (<https://github.com/servo>) are hosted by [GitHub](https://github.com/).
 * Chat tool (<https://servo.zulipchat.com/>) is provided by [Zulip](https://zulip.com/).
-* [AWS Open Source](https://aws.amazon.com/opensource/) is providing promotional credits to cover our infrastructure costs.
+* [AWS Open Source](https://aws.amazon.com/opensource/) is providing promotional credits to cover some of our infrastructure costs.
 
 </div>
 
