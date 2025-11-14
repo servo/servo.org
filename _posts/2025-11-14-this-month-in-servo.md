@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "This month in Servo: ??????????"
-date:       2025-11-02
-summary:    Who even knows?
+title:      "October in Servo: better for the web, better for embedders, better for you"
+date:       2025-11-14
+summary:    Big changes to our webview API, improved macOS and Android builds, and now we’ve shipped AbortController, AbortSignal, and XPath.
 categories:
 ---
 
