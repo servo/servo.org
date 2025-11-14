@@ -35,16 +35,11 @@ Use of donations is decided transparently via the Technical Steering Committeeâ€
 - **Silver: 1,000 USD/month**
 - **Bronze: 100 USD/month**
 
-Sponsors in the Bronze tier and above will be acknowledged on [servo.org](https://servo.org/) with **their logo or name**.
+Sponsors in the Bronze tier and above will be acknowledged on [servo.org](https://servo.org/) with **their logo or name**. The donations should come with no obligations to the project (i.e no strings attached).
 
 <p class="subtitle">
   If you are interested in sponsoring the Servo project through one of these tiers, please contact us at <a href="mailto:join@servo.org">join@servo.org</a>.
 </p>
-
-A few clarifications:
-- The donations should come with no obligations to the project (i.e no strings attached).
-- The Servo project doesn't endorse the sponsors that appear at [servo.org](https://servo.org/).
-- The Servo project reserves the right to reject sponsors.
 
 </div>
 
