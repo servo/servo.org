@@ -9,7 +9,7 @@ title: Sponsorship
 
 <h1> {{ title }} </h1>
 
-You can now help fund the Servo project by [sponsoring us on GitHub](https://github.com/sponsors/servo), [Open Collective](https://opencollective.com/servo) and [thanks.dev](https://thanks.dev/).
+You can now help fund the Servo project by [sponsoring us on GitHub](https://github.com/sponsors/servo), [Open Collective](https://opencollective.com/servo), [thanks.dev](https://thanks.dev/), and <a href="https://benevity.com/">Benevity</a>.
 
 Both one-time and monthly donations are appreciated, and over 80% of the amount will go directly towards improving Servo.
 To give you a sense of scale…

@@ -18,7 +18,7 @@ title: Acknowledgements
 {% endfor %}
 </ul>
 
-<p>We are very grateful to all our patrons who contribute monetarily to support the project via <a href="https://opencollective.com/servo">Open Collective</a>, <a href="https://github.com/sponsors/servo">GitHub</a> and <a href="https://thanks.dev/">thanks.dev</a>.
+<p>We are very grateful to all our patrons who contribute monetarily to support the project via <a href="https://opencollective.com/servo">Open Collective</a>, <a href="https://github.com/sponsors/servo">GitHub</a>, <a href="https://thanks.dev/">thanks.dev</a>, and <a href="https://benevity.com/">Benevity</a>.
 </p>
 
 <h2>Infrastructure Sponsors</h2>
