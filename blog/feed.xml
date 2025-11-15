@@ -162,14 +162,19 @@ For more details, head to our &lt;a href=&quot;https://servo.org/sponsorship/&qu
     (function makeVideoPlayersClickable() {
         addEventListener(&quot;toggle&quot;, event =&gt; {
             const details = event.target.closest(&quot;details&quot;);
-            console.log(details, details.open);
             if (!details?.open) {
                 return;
             }
             const video = details.querySelector(&quot;video&quot;);
-            video?.fastSeek(0);
-            video?.play();
-            console.log(details, video);
+            if (!video) {
+                return;
+            }
+            if (video.fastSeek) {
+                video.fastSeek(0);
+            } else {
+                video.currentTime = 0;
+            }
+            video.play();
         }, true);
     })();
 &lt;/script&gt;
