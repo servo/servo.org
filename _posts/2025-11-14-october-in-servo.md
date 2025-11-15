@@ -171,14 +171,19 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
     (function makeVideoPlayersClickable() {
         addEventListener("toggle", event => {
             const details = event.target.closest("details");
-            console.log(details, details.open);
             if (!details?.open) {
                 return;
             }
             const video = details.querySelector("video");
-            video?.fastSeek(0);
-            video?.play();
-            console.log(details, video);
+            if (!video) {
+                return;
+            }
+            if (video.fastSeek) {
+                video.fastSeek(0);
+            } else {
+                video.currentTime = 0;
+            }
+            video.play();
         }, true);
     })();
 </script>
