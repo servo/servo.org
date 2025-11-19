@@ -1,6 +1,100 @@
 <div class="sponsorship container">
-    <div class="inner-container">
-        <h2>Sponsorship</h2>
-        <p>For information about how to sponsor the project, visit <a href="{{ '/sponsorship/' | url }}">the sponsorship page</a>.</p>
-    </div>
+  <div class="inner-container">
+    <h2 class="center-text">Partners</h2>
+
+    {% assign partners_sorted = partners | sort_natural: "name" %}
+
+    <ul id="partners">
+    {% for partner in partners_sorted %}
+      <li>
+        <a href="{{ partner.url }}">
+          <img src="{{ partner.img | url}}" alt="{{ partner.name }} logo" class="partner-img" />
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+
+    <h2 class="center-text">Sponsors</h2>
+
+    {% assign platinum_sponsors = sponsors | where: "type", "platinum" | sort_natural: "name" %}
+    {% assign gold_sponsors = sponsors | where: "type", "gold" | sort_natural: "name" %}
+    {% assign silver_sponsors = sponsors | where: "type", "silver" | sort_natural: "name" %}
+    {% assign bronze_sponsors = sponsors | where: "type", "bronze" | sort_natural: "name" %}
+
+    {% if platinum_sponsors.size > 0 %}
+    <h3 class="center-text">Platinum</h3>
+
+    <ul id="sponsors">
+    {% for sponsor in platinum_sponsors %}
+      <li>
+        <a href="{{ sponsor.url }}">
+          <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if gold_sponsors.size > 0 %}
+    <h3 class="center-text">Gold</h3>
+
+    <ul id="sponsors">
+    {% for sponsor in gold_sponsors %}
+      <li>
+        <a href="{{ sponsor.url }}">
+          <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if silver_sponsors.size > 0 %}
+    <h3 class="center-text">Silver</h3>
+
+    <ul id="sponsors">
+    {% for sponsor in silver_sponsors %}
+      <li>
+        <a href="{{ sponsor.url }}">
+          <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if bronze_sponsors.size > 0 %}
+    <h3 class="center-text">Bronze</h3>
+
+    <ul id="sponsors">
+    {% for sponsor in bronze_sponsors %}
+      <li>
+        <a href="{{ sponsor.url }}">
+          <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    <p>For information about how to sponsor the project, visit <a href="{{ '/sponsorship/' | url }}">the sponsorship page</a>.</p>
+  </div>
 </div>
+
+<style>
+
+ul#partners, ul#sponsors {
+  padding: 0;
+  max-width: 100%;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.partner-img, .sponsor-img {
+  max-width: 15rem;
+  margin: 2rem;
+}
+
+</style>
