@@ -15,7 +15,7 @@ The Servo project has introduced the following sponsorship tiers for people will
 
 This is intended for donations with no obligations (i.e no strings attached) from organizations and individuals that would like to get their logo or name at [servo.org homepage]({{ '/#sponsors' | url }}).
 
-Organizations and individuals interested in sponsoring the Servo project through one of these tiers should contact us at <join@servo.org>.
+Please contact us at <join@servo.org> if you are interested in sponsoring the project through one of these tiers.
 
 All the information about these new tiers is available at the [Sponsorship page]({{ '/sponsorship/#sponsorship-tiers' | url }}) on this website.
 
