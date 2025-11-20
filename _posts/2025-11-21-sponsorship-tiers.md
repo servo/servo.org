@@ -13,7 +13,7 @@ The Servo project has introduced the following sponsorship tiers for people will
 - **Silver: 1,000 USD/month**
 - **Bronze: 100 USD/month**
 
-This is intended for donations with no obligations (i.e no strings attached) from organizations and individuals that would like to get their logo or name at [servo.org homepage]({{ '/#sponsors' | url }}).
+Organizations and individual sponsors donating in these tiers will be acknowledged on the [servo.org homepage]({{ '/#sponsors' | url }}) with their logo or name. Please note that such donations should come with no obligations to the project i.e they should be "no strings attached" donations. 
 
 Please contact us at <join@servo.org> if you are interested in sponsoring the project through one of these tiers.
 
