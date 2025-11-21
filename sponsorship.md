@@ -174,6 +174,9 @@ The fees for donations on Open Collective depend on how much you donate in a sin
 </script>
 </div>
 
+## Infrastructure Sponsors
+  {% include "acknowledgements.html" %}
+
 <style>
 
   ._note {
