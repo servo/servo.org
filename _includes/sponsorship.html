@@ -1,102 +1,164 @@
-<div class="sponsorship container">
+<div class="sponsorship">
   <div class="inner-container">
-    <h2 class="center-text">Partners</h2>
+    <div class="inner-container__logos">
+      <h3 class="center-text">Partners</h3>
 
-    {% assign partners_sorted = partners | sort_natural: "name" %}
+      {% assign partners_sorted = partners | sort_natural: "name" %}
 
-    <ul id="partners">
-    {% for partner in partners_sorted %}
-      <li>
-        <a href="{{ partner.url }}">
-          <img src="{{ partner.img | url}}" alt="{{ partner.name }} logo" class="partner-img" />
-        </a>
-      </li>
-    {% endfor %}
-    </ul>
+      <ul id="partners" class="logos-home">
+      {% for partner in partners_sorted %}
+        <li>
+          <a href="{{ partner.url }}">
+            <img src="{{ partner.img | url}}" alt="{{ partner.name }} logo" class="partner-img" />
+          </a>
+        </li>
+      {% endfor %}
+      </ul>
 
-    <h2 class="center-text">Sponsors</h2>
+    </div>
 
     {% assign platinum_sponsors = sponsors | where: "type", "platinum" | sort_natural: "name" %}
     {% assign gold_sponsors = sponsors | where: "type", "gold" | sort_natural: "name" %}
     {% assign silver_sponsors = sponsors | where: "type", "silver" | sort_natural: "name" %}
     {% assign bronze_sponsors = sponsors | where: "type", "bronze" | sort_natural: "name" %}
 
+    <div id="sponsors">
+
     {% if platinum_sponsors.size > 0 %}
-    <h3 class="center-text">Platinum</h3>
-
-    <ul id="sponsors">
-    {% for sponsor in platinum_sponsors %}
-      <li>
-        <a href="{{ sponsor.url }}">
-          <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
-        </a>
-      </li>
-    {% endfor %}
-    </ul>
+    <div class="inner-container__logos">
+      <h3 class="center-text">Platinum Sponsors</h3>
+        <ul class="logos-home">
+        {% for sponsor in platinum_sponsors %}
+          <li>
+            <a href="{{ sponsor.url }}">
+              <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
+            </a>
+          </li>
+        {% endfor %}
+        </ul>
+    </div>
     {% endif %}
 
+
+    
     {% if gold_sponsors.size > 0 %}
-    <h3 class="center-text">Gold</h3>
-
-    <ul id="sponsors">
-    {% for sponsor in gold_sponsors %}
-      <li>
-        <a href="{{ sponsor.url }}">
-          <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
-        </a>
-      </li>
-    {% endfor %}
-    </ul>
+    <div class="inner-container__logos">
+      <h3 class="center-text">Gold Sponsors</h3>
+        <ul class="logos-home">
+        {% for sponsor in gold_sponsors %}
+          <li>
+            <a href="{{ sponsor.url }}">
+              <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
+            </a>
+          </li>
+        {% endfor %}
+        </ul>
+    </div>
     {% endif %}
 
+
+    
     {% if silver_sponsors.size > 0 %}
-    <h3 class="center-text">Silver</h3>
+    <div class="inner-container__logos">
+      <h3 class="center-text">Silver Sponsors</h3>
 
-    <ul id="sponsors">
-    {% for sponsor in silver_sponsors %}
-      <li>
-        <a href="{{ sponsor.url }}">
-          <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
-        </a>
-      </li>
-    {% endfor %}
-    </ul>
+      <ul class="logos-home">
+      {% for sponsor in silver_sponsors %}
+        <li>
+          <a href="{{ sponsor.url }}">
+            <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
+          </a>
+        </li>
+      {% endfor %}
+      </ul>
+      </div>
     {% endif %}
 
+
+    
     {% if bronze_sponsors.size > 0 %}
-    <h3 class="center-text">Bronze</h3>
+    <div class="inner-container__logos">
+      <h3 class="center-text">Bronze Sponsors</h3>
 
-    <ul id="sponsors">
-    {% for sponsor in bronze_sponsors %}
-      <li>
-        <a href="{{ sponsor.url }}">
-          <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
-        </a>
-      </li>
-    {% endfor %}
-    </ul>
+      <ul class="logos-home">
+      {% for sponsor in bronze_sponsors %}
+        <li class=" {% if loop.index == loop.length and loop.length is odd %}odd-last{% endif %}">
+          <a href="{{ sponsor.url }}">
+            <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
+          </a>
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
     {% endif %}
+    </div>
 
-    <p>For information about how to sponsor the project, visit <a href="{{ '/sponsorship/' | url }}">the sponsorship page</a>.</p>
+<div class="acknowledgements">
+    <div class="acknowledgements__container">
+        <p>We would like to thank <a href="https ://github.com/">GitHub</a>, <a href="https://zulip.com/">Zulip</a>, and <a href="https://aws.amazon.com/opensource/">AWS Open Source</a> for <a href="{{ '/sponsorship/#infrastructure-sponsors' | url }}">their services</a> free of charge for use in the Servo project.</p>
+        <p>For information about how to sponsor the project, visit <a href="{{ '/sponsorship/' | url }}">the sponsorship page</a>.</p>
+      </div>
+</div>
+
 
   </div>
 </div>
 
 <style>
 
-ul#partners, ul#sponsors {
-  padding: 0;
-  max-width: 100%;
+.logos-home {
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  padding: 0;
+  max-width: 64rem;
   align-items: center;
-  justify-content: center;
 }
 
 .partner-img, .sponsor-img {
-  max-width: 15rem;
-  margin: 2rem;
+  min-width: 15rem;
+  padding: 3.25rem 2rem;
 }
+
+.inner-container__logos {
+  border: 1px solid var(--midturquoise);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.25rem;
+  border-radius: 32px;
+}
+
+.inner-container__logos h3 {
+  border-bottom: 1px solid var(--midturquoise);
+  padding-top: var(--12px);
+  padding-bottom: var(--12px);
+  font-size: var(--step-1);
+}
+
+.odd-last {
+  grid-column: 1 / -1;
+}
+
+.odd-last .sponsor-img {
+  padding: 1.25rem 0;
+  max-width: 8rem;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .partner-img, .sponsor-img {
+    min-width: 9rem;
+    padding: 2rem 1rem;
+}
+}
+
+@media (max-width: 420px) {
+  .logos-home {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 </style>
