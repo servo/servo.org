@@ -3,6 +3,7 @@ layout: download.html
 title: Download
 ---
 
+
 <div class="columns">
   <div class="column">
 
@@ -59,10 +60,22 @@ Click on `Open Anyway`. You should be able to run Servo now.
   </div>
 </div>
 
+
+
 <style>
 
-.subpage-content div + div {
-  padding-top: .5rem;
+.downloads div + div {
+  padding-top: .5rem
 }
+
+.subpage-content .column {
+  padding-bottom: 1.25rem;
+}
+
+p > img {
+  padding: 1.25rem 0;
+}
+
+
 
 </style>
