@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>This month in Servo: new elements, IME support, delegate API, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="This month in Servo: new elements, IME support, delegate API, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  
+
+  
+  <meta name="description" content="A huge month for both Servo the browser and Servo the engine.">
+  <meta name="og:description" content="A huge month for both Servo the browser and Servo the engine.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/mukilan-patch-1/svg/servo-color-positive.svg">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/mukilan-patch-1/svg/servo-symbol-color-no-container.svg">
+  <meta property="og:url" content="/mukilan-patch-1/blog/2025/03/10/this-month-in-servo/">
+
+  <link rel="stylesheet" href="/mukilan-patch-1/css/style.css">
+  <link rel="shortcut icon" href="/mukilan-patch-1/svg/servo-symbol-color-no-container.svg">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/mukilan-patch-1/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="inner-container">
+      <div class="navbar-brand">
+        <a href="/mukilan-patch-1/">
+          <img src="/mukilan-patch-1/svg/servo-color.svg" alt="This month in Servo: new elements, IME support, delegate API, and more!">
+        </a>
+
+        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="navbar-menu" id="navbar-menu">
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                Get Involved
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/mukilan-patch-1/contributing/"
+                    
+                  >
+                    Contributing
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://book.servo.org"
+                     target="_blank"
+                  >
+                    Servo Book<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/mukilan-patch-1/wpt/"
+                    
+                  >
+                    WPT pass rates
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/mukilan-patch-1/coc/"
+                    
+                  >
+                    Code of Conduct
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/mukilan-patch-1/download/"
+              
+            >
+              Download
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/mukilan-patch-1/blog/"
+              
+            >
+              Blog
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="https://demo.servo.org/"
+               target="_blank"
+            >
+              Demos<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+            </a>
+          
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                About
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/mukilan-patch-1/about/"
+                    
+                  >
+                    About Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/mukilan-patch-1/made-with/"
+                    
+                  >
+                    Made with Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://github.com/servo/project/blob/main/governance/README.md"
+                     target="_blank"
+                  >
+                    Governance<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/mukilan-patch-1/sponsorship/"
+                    
+                  >
+                    Sponsorship
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+        <div class="navbar-end">
+    
+      <a class="social-link is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="social-link is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="social-link is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="social-link is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+</div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburgerMenu');
+  const menu = document.getElementById('navbar-menu');
+
+  const toggleMenu = () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('is-active', isExpanded);
+  };
+
+  // Toggle on click
+  hamburger.addEventListener('click', toggleMenu);
+
+
+</script>
+          <div class="content" id="This month in Servo: new elements, IME support, delegate API, and more!">
+            
+<div class="blog-hero">
+  <div class="container">
+    <div class="inner-container">
+    <h1 class="title">This month in Servo: new elements, IME support, delegate API, and more!</h1>
+      <p class="subtitle">A huge month for both Servo the browser and Servo the engine.</p>
+      <p class="posted">Posted <span class="tag is-dark">2025-03-10</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="inner-container blog-content">
+  <p>Servo now supports more HTML and CSS features:</p>
+<ul>
+<li>the <strong>&lt;details&gt;</strong> element (<a href="https://github.com/simonwuelker">@simonwuelker</a>, <a href="https://github.com/servo/servo/pull/35261">#35261</a>)</li>
+<li>the <strong>&lt;meter&gt;</strong> element (<a href="https://github.com/simonwuelker">@simonwuelker</a>, <a href="https://github.com/servo/servo/pull/35524">#35524</a>)</li>
+<li>the <strong>&lt;progress&gt;</strong> element (<a href="https://github.com/simonwuelker">@simonwuelker</a>, <a href="https://github.com/servo/servo/pull/35531">#35531</a>)</li>
+<li>the <strong>‘quotes’</strong> property (<a href="https://github.com/xiaochengh">@xiaochengh</a>, <a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/34770">#34770</a>, <a href="https://github.com/servo/servo/pull/35420">#35420</a>)</li>
+<li>the <strong>‘isolation’</strong> property (<a href="https://github.com/kkoyung">@kkoyung</a>, <a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/35552">#35552</a>)</li>
+<li><strong>‘overflow: clip’</strong> (<a href="https://github.com/longvatrong111">@longvatrong111</a>, <a href="https://github.com/servo/servo/pull/35103">#35103</a>)</li>
+<li><strong>‘overflow’</strong> property with two values (<a href="https://github.com/yezhizhen">@yezhizhen</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/35414">#35414</a>)</li>
+<li>the <strong>‘::slotted’</strong> selector (<a href="https://github.com/simonwuelker">@simonwuelker</a>, <a href="https://github.com/servo/servo/pull/35352">#35352</a>)</li>
+</ul>
+<figure>
+<p><a href="/mukilan-patch-1/img/blog/february-2025.png"><img src="/mukilan-patch-1/img/blog/february-2025.png" alt="servoshell showing new support for &lt;details&gt;, &lt;meter&gt;, and &lt;progress&gt; elements, plus layout support for &lt;slot&gt; elements"></a></p>
+</figure>
+<p>Plus several new web API features:</p>
+<ul>
+<li><strong>contextmenu</strong> events (<a href="https://github.com/pewsheen">@pewsheen</a>, <a href="https://github.com/servo/servo/pull/35364">#35364</a>)</li>
+<li><strong>WritableStream</strong> (<a href="https://github.com/gterzian">@gterzian</a>, <a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/servo/servo/pull/34844">#34844</a>)</li>
+<li><strong>ReadableStreamBYOBRequest</strong> (<a href="https://github.com/Taym95">@Taym95</a>, <a href="https://github.com/servo/servo/pull/35074">#35074</a>)</li>
+<li>initial support for <strong>FontFace</strong> and its <strong>load()</strong> method (<a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/35262">#35262</a>)</li>
+<li><strong>toBlob()</strong> and <strong>toDataURL()</strong> on <strong>WebGPU canvases</strong> (<a href="https://github.com/sagudev">@sagudev</a>, <a href="https://github.com/servo/servo/pull/35237">#35237</a>)</li>
+<li><strong>bytes()</strong> on <strong>Request</strong>, <strong>Response</strong>, and <strong>Blob</strong> (<a href="https://github.com/shanehandley">@shanehandley</a>, <a href="https://github.com/yoseio">@yoseio</a>, <a href="https://github.com/gterzian">@gterzian</a>, <a href="https://github.com/Taym95">@Taym95</a>, <a href="https://github.com/servo/servo/pull/35250">#35250</a>, <a href="https://github.com/servo/servo/pull/35151">#35151</a>)</li>
+<li><strong>href</strong>, <strong>origin</strong>, <strong>protocol</strong>, <strong>username</strong>, <strong>password</strong>, <strong>host</strong>, <strong>hostname</strong>, <strong>port</strong>, <strong>pathname</strong>, <strong>search</strong>, and <strong>hash</strong> properties on <strong>HTMLAreaElement</strong> (<a href="https://github.com/shanehandley">@shanehandley</a>, <a href="https://github.com/servo/servo/pull/35482">#35482</a>)</li>
+<li><strong>insertRule() with no argument</strong> on <strong>CSSGroupingRule</strong> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/35295">#35295</a>)</li>
+</ul>
+<p><strong>&lt;slot&gt; elements</strong> are now fully supported including layout (<a href="https://github.com/simonwuelker">@simonwuelker</a>, <a href="https://github.com/servo/servo/pull/35220">#35220</a>, <a href="https://github.com/servo/servo/pull/35519">#35519</a>), and we’ve also landed support for the <strong>‘::slotted’</strong> selector (<a href="https://github.com/simonwuelker">@simonwuelker</a>, <a href="https://github.com/servo/servo/pull/35352">#35352</a>).
+<strong>Shadow roots</strong> are now <strong>supported in devtools</strong> (<a href="https://github.com/simonwuelker">@simonwuelker</a>, <a href="https://github.com/servo/servo/pull/35294">#35294</a>), and we’ve fixed some bugs related to shadow DOM trees (<a href="https://github.com/simonwuelker">@simonwuelker</a>, <a href="https://github.com/servo/servo/pull/35276">#35276</a>, <a href="https://github.com/servo/servo/pull/35338">#35338</a>), event handling (<a href="https://github.com/simonwuelker">@simonwuelker</a>, <a href="https://github.com/servo/servo/pull/35380">#35380</a>), and custom elements (<a href="https://github.com/maxtidev">@maxtidev</a>, <a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/servo/servo/pull/35382">#35382</a>).</p>
+<p>We’ve landed layout improvements around <strong>‘border-collapse’</strong> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/35219">#35219</a>), <strong>‘align-content: normal’</strong> (<a href="https://github.com/rayguo17">@rayguo17</a>, <a href="https://github.com/servo/servo/pull/35178">#35178</a>), <strong>‘place-self’</strong> with <strong>‘position: absolute’</strong> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/35208">#35208</a>), the <strong>intrinsic sizing keywords</strong> (<a href="https://github.com/Loirooriol">@Loirooriol</a>, <a href="https://github.com/servo/servo/pull/35413">#35413</a>, <a href="https://github.com/servo/servo/pull/35469">#35469</a>, <a href="https://github.com/servo/servo/pull/35471">#35471</a>, <a href="https://github.com/servo/servo/pull/35630">#35630</a>, <a href="https://github.com/servo/servo/pull/35642">#35642</a>, <a href="https://github.com/servo/servo/pull/35663">#35663</a>, <a href="https://github.com/servo/servo/pull/35652">#35652</a>, <a href="https://github.com/servo/servo/pull/35688">#35688</a>), and <strong>‘position: absolute’</strong> now works correctly in a <strong>‘position: relative’ grid item</strong> (<a href="https://github.com/stevennovaryo">@stevennovaryo</a>, <a href="https://github.com/servo/servo/pull/35014">#35014</a>).</p>
+<p>Input has also been improved, with <strong>better IME support</strong> (<a href="https://github.com/dklassic">@dklassic</a>, <a href="https://github.com/servo/servo/pull/35535">#35535</a>, <a href="https://github.com/servo/servo/pull/35623">#35623</a>) and several fixes to touch input (<a href="https://github.com/kongbai1996">@kongbai1996</a>, <a href="https://github.com/jschwe">@jschwe</a>, <a href="https://github.com/shubhamg13">@shubhamg13</a>, <a href="https://github.com/servo/servo/pull/35450">#35450</a>, <a href="https://github.com/servo/servo/pull/35031">#35031</a>, <a href="https://github.com/servo/servo/pull/35550">#35550</a>, <a href="https://github.com/servo/servo/pull/35537">#35537</a>, <a href="https://github.com/servo/servo/pull/35692">#35692</a>).</p>
+<h2 id="servo-the-browser-(servoshell)" tabindex="-1">Servo-the-browser (servoshell) <a class="header-anchor" href="#servo-the-browser-(servoshell)">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><strong>Directory listings</strong> are now enabled for local files (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/35317">#35317</a>).</p>
+<figure>
+<p><a href="/mukilan-patch-1/img/blog/2025-02-directory-listing.png"><img src="/mukilan-patch-1/img/blog/2025-02-directory-listing.png" alt="servoshell showing a local directory listing"></a></p>
+</figure>
+<p>servoshell’s <strong>dialogs now use egui</strong> (<a href="https://github.com/chickenleaf">@chickenleaf</a>, <a href="https://github.com/servo/servo/pull/34823">#34823</a>, <a href="https://github.com/servo/servo/pull/35399">#35399</a>, <a href="https://github.com/servo/servo/pull/35464">#35464</a>, <a href="https://github.com/servo/servo/pull/35507">#35507</a>, <a href="https://github.com/servo/servo/pull/35564">#35564</a>, <a href="https://github.com/servo/servo/pull/35577">#35577</a>, <a href="https://github.com/servo/servo/pull/35657">#35657</a>, <a href="https://github.com/servo/servo/pull/35671">#35671</a>), rather than shelling out to a program like <code>zenity</code> (<a href="https://github.com/chickenleaf">@chickenleaf</a>, <a href="https://github.com/servo/servo/pull/35674">#35674</a>), making them more secure and no longer falling back to terminal input.</p>
+<figure>
+<p><a href="/mukilan-patch-1/img/blog/2025-02-egui-dialogs.png"><img src="/mukilan-patch-1/img/blog/2025-02-egui-dialogs.png" alt="egui-based dialogs for alert(), confirm(), prompt(), and HTTP authentication"></a></p>
+</figure>
+<p>We’ve also fixed a bug when closing a tab other than the current one (<a href="https://github.com/pewsheen">@pewsheen</a>, <a href="https://github.com/servo/servo/pull/35569">#35569</a>).</p>
+<h2 id="servo-the-engine-(embedding)" tabindex="-1">Servo-the-engine (embedding) <a class="header-anchor" href="#servo-the-engine-(embedding)">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We’ve simplified our embedding API by <strong>merging all input event delivery</strong> into <a href="https://doc.servo.org/servo/struct.WebView.html#method.notify_input_event"><code>WebView::notify_input_event</code></a> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/35430">#35430</a>), making <strong>bluetooth optional</strong> (<a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/webbeef">@webbeef</a>, <a href="https://github.com/servo/servo/pull/35479">#35479</a>, <a href="https://github.com/servo/servo/pull/35590">#35590</a>), making the <strong>“background hang monitor” optional</strong> (<a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/servo/servo/pull/35256">#35256</a>), and <strong>eliminating the need to depend on <code>webxr</code></strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/35229">#35229</a>).
+We’ve also moved some servoshell-only options out of <a href="https://doc.servo.org/servo_config/opts/struct.Opts.html"><code>Opts</code></a> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/35377">#35377</a>, <a href="https://github.com/servo/servo/pull/35407">#35407</a>), since they have no effect on Servo’s behaviour.</p>
+<p>We’ve landed our initial <strong>delegate-based API</strong> (<a href="https://github.com/delan">@delan</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/35196">#35196</a>, <a href="https://github.com/servo/servo/pull/35260">#35260</a>, <a href="https://github.com/servo/servo/pull/35297">#35297</a>, <a href="https://github.com/servo/servo/pull/35396">#35396</a>, <a href="https://github.com/servo/servo/pull/35400">#35400</a>, <a href="https://github.com/servo/servo/pull/35544">#35544</a>, <a href="https://github.com/servo/servo/pull/35579">#35579</a>, <a href="https://github.com/servo/servo/pull/35662">#35662</a>, <a href="https://github.com/servo/servo/pull/35672">#35672</a>), which replaces our old message-based API for integrating Servo with your app (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/delan">@delan</a>, <a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/35284">#35284</a>, <a href="https://github.com/servo/servo/pull/35315">#35315</a>, <a href="https://github.com/servo/servo/pull/35366">#35366</a>).
+By implementing <a href="https://doc.servo.org/servo/trait.WebViewDelegate.html"><code>WebViewDelegate</code></a> and <a href="https://doc.servo.org/servo/trait.ServoDelegate.html"><code>ServoDelegate</code></a> and <a href="https://doc.servo.org/servo/struct.WebView.html#method.set_delegate">installing</a> <a href="https://doc.servo.org/servo/struct.Servo.html#method.set_delegate">them</a>, you can have Servo call back into your app’s logic with ease.</p>
+<p>We’ve simplified the <a href="https://doc.servo.org/servo/trait.RenderingContext.html"><code>RenderingContext</code></a> trait (<a href="https://github.com/wusyong">@wusyong</a>, <a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/35251">#35251</a>, <a href="https://github.com/servo/servo/pull/35553">#35553</a>) and <strong>added three built-in <code>RenderingContext</code> impls</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/35465">#35465</a>, <a href="https://github.com/servo/servo/pull/35501">#35501</a>), making it easier to set up a context Servo can render to:</p>
+<ul>
+<li><a href="https://doc.servo.org/servo/struct.WindowRenderingContext.html"><code>WindowRenderingContext</code></a> renders to a <strong>whole window</strong></li>
+<li><a href="https://doc.servo.org/servo/struct.OffscreenRenderingContext.html"><code>OffscreenRenderingContext</code></a> renders to <strong>part of a window</strong></li>
+<li><a href="https://doc.servo.org/servo/struct.SoftwareRenderingContext.html"><code>SoftwareRenderingContext</code></a> renders to an image, <strong>without hardware acceleration</strong></li>
+</ul>
+<p>We’ve heavily reworked and documented our <strong>webview rendering model</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/wusyong">@wusyong</a>, <a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/35522">#35522</a>, <a href="https://github.com/servo/servo/pull/35621">#35621</a>), <strong>moved image output</strong> and <strong>shutdown logic</strong> out of the compositor (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/wusyong">@wusyong</a>, <a href="https://github.com/servo/servo/pull/35538">#35538</a>), and removed some complicated logic around synchronous repaints when a window is resized (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/35283">#35283</a>, <a href="https://github.com/servo/servo/pull/35277">#35277</a>).
+These changes should make it a lot clearer how to get Servo’s webviews onto your display.</p>
+<p>One part of this model that we’re starting to move away from is the support for multiple webviews in one rendering context (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/wusyong">@wusyong</a>, <a href="https://github.com/servo/servo/pull/35536">#35536</a>).
+First landed in <a href="https://github.com/servo/servo/pull/31417">#31417</a>, this was an expedient way to add support for multiple webviews, but it imposed some serious limitations on how webviews could be interleaved with other app content, and the performance and security was inadequate.</p>
+<p>We’ve <strong>updated our <a href="https://github.com/servo/servo/blob/139774e6b55c297bc94f7fcb8c9bf5bb8c6a7474/components/servo/examples/winit_minimal.rs">winit_minimal example</a></strong> to take advantage of these changes (<a href="https://github.com/webbeef">@webbeef</a>, <a href="https://github.com/servo/servo/pull/35350">#35350</a>, <a href="https://github.com/servo/servo/pull/35686">#35686</a>), simplify it further (<a href="https://github.com/robertohuertasm">@robertohuertasm</a>, <a href="https://github.com/servo/servo/pull/35253">#35253</a>), and fix window resizing (<a href="https://github.com/webbeef">@webbeef</a>, <a href="https://github.com/servo/servo/pull/35691">#35691</a>).</p>
+<h2 id="perf-and-stability" tabindex="-1">Perf and stability <a class="header-anchor" href="#perf-and-stability">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>The compositor now <strong>notifies the embedder of new frames immediately</strong> (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/35369">#35369</a>), not via the constellation thread.</p>
+<p>Servo’s typical <strong>memory usage has been reduced by over 1%</strong> thanks to Node object optimisations (<a href="https://github.com/webbeef">@webbeef</a>, <a href="https://github.com/servo/servo/pull/35592">#35592</a>, <a href="https://github.com/servo/servo/pull/35554">#35554</a>), and we’ve also improved our <a href="https://book.servo.org/hacking/profiling.html#memory-profiling">memory profiler</a> (<a href="https://github.com/webbeef">@webbeef</a>, <a href="https://github.com/servo/servo/pull/35618">#35618</a>, <a href="https://github.com/servo/servo/pull/35607">#35607</a>).</p>
+<p>We’ve fixed a bug causing very high CPU usage on sites like <a href="http://wikipedia.org">wikipedia.org</a> (<a href="https://github.com/webbeef">@webbeef</a>, <a href="https://github.com/servo/servo/pull/35245">#35245</a>), as well as bugs affecting requestAnimationFrame (<a href="https://github.com/mukilan">@mukilan</a>, <a href="https://github.com/servo/servo/pull/35387">#35387</a>, <a href="https://github.com/servo/servo/pull/35435">#35435</a>).</p>
+<p>You can now configure our tracing-based profiler (<code>--features tracing</code>) with <code>servo --tracing-filter</code> instead of <code>SERVO_TRACING</code> (<a href="https://github.com/jschwe">@jschwe</a>, <a href="https://github.com/servo/servo/pull/35370">#35370</a>).</p>
+<p>We’ve continued <strong>reducing our use of <code>unsafe</code> in script</strong> (<a href="https://github.com/nscaife">@nscaife</a>, <a href="https://github.com/stephenmuss">@stephenmuss</a>, <a href="https://github.com/servo/servo/pull/35351">#35351</a>, <a href="https://github.com/servo/servo/pull/35360">#35360</a>, <a href="https://github.com/servo/servo/pull/35367">#35367</a>, <a href="https://github.com/servo/servo/pull/35411">#35411</a>), and <strong>moving parts of <code>script</code> to <code>script_bindings</code></strong> (<a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/servo/servo/pull/35279">#35279</a>, <a href="https://github.com/servo/servo/pull/35280">#35280</a>, <a href="https://github.com/servo/servo/pull/35292">#35292</a>, <a href="https://github.com/servo/servo/pull/35457">#35457</a>, <a href="https://github.com/servo/servo/pull/35459">#35459</a>, <a href="https://github.com/servo/servo/pull/35578">#35578</a>, <a href="https://github.com/servo/servo/pull/35620">#35620</a>).
+Breaking up our massive <code>script</code> crate is absolutely critical for reducing Servo’s build times.</p>
+<p>We’ve fixed crashes that happen when moving windows past the edge of your monitor (<a href="https://github.com/webbeef">@webbeef</a>, <a href="https://github.com/servo/servo/pull/35235">#35235</a>), when unpaired UTF-16 surrogates are sent to the DOM (<a href="https://github.com/mrobinson">@mrobinson</a>, <a href="https://github.com/servo/servo/pull/35381">#35381</a>), when focusing elements inside shadow roots (<a href="https://github.com/simonwuelker">@simonwuelker</a>, <a href="https://github.com/servo/servo/pull/35606">#35606</a>), and when calling getAsString() on a DataTransferItem (<a href="https://github.com/Gae24">@Gae24</a>, <a href="https://github.com/servo/servo/pull/35699">#35699</a>).
+We’ve also continued working on static analysis that will help catch crashes due to <a href="https://github.com/servo/servo/issues/33140">GC borrow hazards</a> (<a href="https://github.com/augustebaum">@augustebaum</a>, <a href="https://github.com/yerke">@yerke</a>, <a href="https://github.com/jdm">@jdm</a>, <a href="https://github.com/Gae24">@Gae24</a>, <a href="https://github.com/servo/servo/pull/35541">#35541</a>, <a href="https://github.com/servo/servo/pull/35593">#35593</a>, <a href="https://github.com/servo/servo/pull/35565">#35565</a>, <a href="https://github.com/servo/servo/pull/35610">#35610</a>, <a href="https://github.com/servo/servo/pull/35591">#35591</a>, <a href="https://github.com/servo/servo/pull/35609">#35609</a>, <a href="https://github.com/servo/servo/pull/35601">#35601</a>, <a href="https://github.com/servo/servo/pull/35596">#35596</a>, <a href="https://github.com/servo/servo/pull/35595">#35595</a>, <a href="https://github.com/servo/servo/pull/35594">#35594</a>, <a href="https://github.com/servo/servo/pull/35597">#35597</a>, <a href="https://github.com/servo/servo/pull/35622">#35622</a>, <a href="https://github.com/servo/servo/pull/35604">#35604</a>, <a href="https://github.com/servo/servo/pull/35616">#35616</a>, <a href="https://github.com/servo/servo/pull/35605">#35605</a>, <a href="https://github.com/servo/servo/pull/35640">#35640</a>, <a href="https://github.com/servo/servo/pull/35647">#35647</a>, <a href="https://github.com/servo/servo/pull/35646">#35646</a>).</p>
+<h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Thanks again for your generous support!
+We are now receiving <strong>4363 USD/month</strong> (+13.7% over January) in recurring donations.
+This helps cover the cost of our <a href="https://ci0.servo.org">self-hosted</a> <a href="https://ci1.servo.org">CI</a> <a href="https://ci2.servo.org">runners</a> and <a href="https://www.outreachy.org/">Outreachy</a> internships.</p>
+<p>Servo is also on <a href="https://thanks.dev">thanks.dev</a>, and already <strong>21 GitHub users</strong> (+5 over January) that depend on Servo are sponsoring us there.
+If you use Servo libraries like <a href="https://crates.io/crates/url/reverse_dependencies">url</a>, <a href="https://crates.io/crates/html5ever/reverse_dependencies">html5ever</a>, <a href="https://crates.io/crates/selectors/reverse_dependencies">selectors</a>, or <a href="https://crates.io/crates/cssparser/reverse_dependencies">cssparser</a>, signing up for <a href="https://thanks.dev">thanks.dev</a> could be a good way for you (or your employer) to give back to the community.</p>
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; margin-left: calc(100% * 4363 / 10000); padding-left: 0.5em;"><strong>4363</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 4363 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="4363" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+<p>As always, use of these funds will be decided transparently in the Technical Steering Committee.
+For more details, head to our <a href="/mukilan-patch-1/sponsorship/">Sponsorship page</a>.</p>
+<style>
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+    ._note {
+        margin: 1em 1em;
+        border-left: 1px solid;
+        padding-left: 1em;
+        opacity: 0.75;
+    }
+</style>
+
+  <div>
+    <a href="/mukilan-patch-1/blog/">Back</a>
+  </div>
+</div>
+
+
+
+          </div>
+    </main>
+    <div class="contact" aria-label="Contact information">
+    <div class="container">
+        <div class="inner-container two-column">
+            <div class="column">
+                <h2>Contact</h2>
+            </div>
+            <div class="column">
+                <ul>
+                    <li><a class="footer-link" href="https://servo.zulipchat.com/">Zulip chat</a></li>
+                    <li><a class="footer-link" href="https://github.com/servo/servo/discussions">GitHub discussions</a></li>
+                    <li><a class="footer-link" href="mailto:info@servo.org">Email: info@servo.org</a></li>
+                    <li><a class="footer-link" href="https://floss.social/@servo">Mastodon</a></li>
+                    <li><a class="footer-link" href="https://bsky.app/profile/servo.org">Bluesky</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer>
+      <div class="footer">
+  <div class="container">
+    <div class="two-column inner-container">
+      <div class="column">
+        <div class="logo"><a href="https://linuxfoundation.eu"><img src="/mukilan-patch-1/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250"></a></div>
+        <p>&copy; 2025 The Servo Project Developers</p>
+        <p>Copyright &copy; Servo is a project of <a class="footer-link" href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+        <p>For website terms of use, trademark policy and other project policies please see <a class="footer-link" href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+        <p>The source code for this website can be found at <a class="footer-link" href="https://github.com/servo/servo.org">https://github.com/servo/servo.org</a>.</p>
+      </div>
+      <div class="column code-of-conduct">
+        <a class="footer-link" href="/mukilan-patch-1/coc/">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const burger = document.querySelector(".navbar-burger");
+    const menu = document.querySelector(".navbar-menu");
+    burger.onclick = () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    };
+  })();
+</script>
+
+    </footer>
+  </body>
+</html>
