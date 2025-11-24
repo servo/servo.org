@@ -40,7 +40,7 @@
     {% endif %}
 
 
-    
+
     {% if gold_sponsors.size > 0 %}
     <div class="inner-container__logos">
       <h3 class="center-text">Gold Sponsors</h3>
@@ -57,7 +57,7 @@
     {% endif %}
 
 
-    
+
     {% if silver_sponsors.size > 0 %}
     <div class="inner-container__logos">
       <h3 class="center-text">Silver Sponsors</h3>
@@ -75,14 +75,14 @@
     {% endif %}
 
 
-    
     {% if bronze_sponsors.size > 0 %}
     <div class="inner-container__logos">
       <h3 class="center-text">Bronze Sponsors</h3>
 
       <ul class="logos-home">
       {% for sponsor in bronze_sponsors %}
-        <li class=" {% if loop.index == loop.length and loop.length is odd %}odd-last{% endif %}">
+        {% assign mod = forloop.index | modulo: 2 %}
+        <li class="{% if forloop.last and mod != 0 %}odd-last{% endif %}">
           <a href="{{ sponsor.url }}">
             <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
           </a>
