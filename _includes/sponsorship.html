@@ -9,7 +9,11 @@
       {% for partner in partners_sorted %}
         <li>
           <a href="{{ partner.url }}">
+            {% if partner.img %}
             <img src="{{ partner.img | url}}" alt="{{ partner.name }} logo" class="partner-img" />
+            {% else %}
+            <span>{{ partner.name }}</span>
+            {% endif %}
           </a>
         </li>
       {% endfor %}
@@ -30,9 +34,13 @@
         <ul class="logos-home">
         {% for sponsor in platinum_sponsors %}
           <li>
-            <a href="{{ sponsor.url }}">
+            {% if sponsor.url %}<a href="{{ sponsor.url }}">{% endif %}
+              {% if sponsor.img %}
               <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
-            </a>
+              {% else %}
+              <span>{{ sponsor.name }}</span>
+              {% endif %}
+            {% if sponsor.url %}</a>{% endif %}
           </li>
         {% endfor %}
         </ul>
@@ -47,9 +55,13 @@
         <ul class="logos-home">
         {% for sponsor in gold_sponsors %}
           <li>
-            <a href="{{ sponsor.url }}">
+            {% if sponsor.url %}<a href="{{ sponsor.url }}">{% endif %}
+              {% if sponsor.img %}
               <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
-            </a>
+              {% else %}
+              <span>{{ sponsor.name }}</span>
+              {% endif %}
+            {% if sponsor.url %}</a>{% endif %}
           </li>
         {% endfor %}
         </ul>
@@ -65,9 +77,13 @@
       <ul class="logos-home">
       {% for sponsor in silver_sponsors %}
         <li>
-          <a href="{{ sponsor.url }}">
+          {% if sponsor.url %}<a href="{{ sponsor.url }}">{% endif %}
+            {% if sponsor.img %}
             <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
-          </a>
+            {% else %}
+            <span>{{ sponsor.name }}</span>
+            {% endif %}
+          {% if sponsor.url %}</a>{% endif %}
         </li>
       {% endfor %}
       </ul>
@@ -82,9 +98,13 @@
       <ul class="logos-home">
       {% for sponsor in bronze_sponsors %}
         <li>
-          <a href="{{ sponsor.url }}">
+          {% if sponsor.url %}<a href="{{ sponsor.url }}">{% endif %}
+            {% if sponsor.img %}
             <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
-          </a>
+            {% else %}
+            <span>{{ sponsor.name }}</span>
+            {% endif %}
+          {% if sponsor.url %}</a>{% endif %}
         </li>
       {% endfor %}
       </ul>
@@ -122,6 +142,14 @@
 
 .logos-home > li {
   flex: 0 0 50%;
+  text-align: center;
+  font-size: var(--step-3);
+  font-weight: bold;
+}
+
+.logos-home > li > span {
+  display: inline-block;
+  margin: 1rem;
 }
 
 @media (max-width: 720px) {
