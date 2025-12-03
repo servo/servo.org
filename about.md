@@ -42,7 +42,7 @@ Servo's roadmap is defined in the [project wiki](https://github.com/servo/servo/
                       {{ talk.date }}
                       {% if talk.event %}<span class="tag">at <a href="{{ talk.event_url }}">{{ talk.event }}</a></span>{% endif %}
                     </span>
-                    <p class="post-title"><a href="{{ talk.url }}">{{ talk.title }}</a></p>
+                    <p class="post-title"><a href="{{ talk.url }}">{{ talk.title }}</a>{% if talk.slides %} <a href="{{ talk.slides }}" style="font-size: smaller;">[Slides]</a>{% endif %}</p>
                     <p class="post-summary">by {{ talk.authors }}</p>
                   </div>
                 </div>{% endfor %}
@@ -52,7 +52,7 @@ Servo's roadmap is defined in the [project wiki](https://github.com/servo/servo/
 </section>
 
 {% for talk in talks offset:5 %}
-* [{{ talk.title }}]({{ talk.url }}) by {{ talk.authors }} ({{ talk.date }}{% if talk.event %} at [{{ talk.event }}]({{ talk.event_url }}){% endif %}){% endfor %}
+* [{{ talk.title }}]({{ talk.url }}){% if talk.slides %} <a href="{{ talk.slides }}" style="font-size: smaller;">[Slides]</a>{% endif %} by {{ talk.authors }} ({{ talk.date }}{% if talk.event %} at [{{ talk.event }}]({{ talk.event_url }}){% endif %}){% endfor %}
 
 ## Logo
 
