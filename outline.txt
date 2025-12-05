@@ -10,19 +10,37 @@
       api servoshell; copy link, open link in new, copy image link, open image in new, cut, copy, paste, select all
     - https://github.com/servo/servo/pull/40598	(@mrobinson, #40598)	libservo: Add `WebView::can_go_forward` and `WebView::can_go_back` (#40598)
       api servoshell
+    - https://github.com/servo/servo/pull/40738	(@mrobinson, @mukilan, #40738)	compositing: Make `RefreshDriver` per-`RenderingContext` (#40738)
+      api; part of per-webview RenderingContext
+    - https://github.com/servo/servo/pull/40716	(@sagudev, #40716)	Use safe JSContext/AutoRealm/CurrentRealm in codegen (#40716)
+      api; safer api for mozjs bindings
+    - https://github.com/servo/servo/pull/40721	(@mrobinson, @mukilan, #40721)	compositing: Allow WebGL contexts to have different Surfman devices (#40721)
+      api; part of per-webview RenderingContext
+    - https://github.com/servo/servo/pull/40715	(@mrobinson, #40715)	servoshell: Always use `ControlFlow::Wait` on winit (#40715)
+      api; removed in favour of RefreshDriver
     - https://github.com/servo/servo/pull/40607	(@mrobinson, #40607)	libservo: Add `ContextMenuElementInformation` to for the context menu API (#40607)
       api; element_info() on ContextMenu
+    - https://github.com/servo/servo/pull/40594	(@mukilan, @mrobinson, #40594)	compositing: Allow WebGL contexts to have different Surfman devices (#40594)
+      api; part of per-webview RenderingContext
     - https://github.com/servo/servo/pull/40794	(@mrobinson, #40794)	libservo: Have `WebView` take a `RenderingContext` rather than `Servo` (#40794)
       api; per-webview rendering contexts (big part of support for multiple windows)
     - https://github.com/servo/servo/pull/40799	(@mrobinson, #40799)	libservo: Remove `Servo::animating()` (#40799)
       api; removed in favour of RefreshDriver
+    - https://github.com/servo/servo/pull/40886	(@mrobinson, #40886)	libservo: Remove `ServoDelegate::notify_animating_changed` (#40886)
+      api; removed in favour of RefreshDriver
+    - https://github.com/servo/servo/pull/40923	(@mrobinson, #40923)	libservo: Starting removing the multi-document interface API (#40923)
+      api; remove old multiple webview features in favour of per-webview RenderingContext
     - https://github.com/servo/servo/pull/40951	(@mrobinson, #40951)	libservo: Clean up Servo exports and export more at the root (#40951)
       api; `use servo::*`
 - crash
+    - https://github.com/servo/servo/pull/40459	(@Narfinger, #40459)	net: Do not implement `Serialize`/`Deserialize` for `RasterImage` and introduce``SharedRasterImage` (#40459)
+      crash; fix crash in Speedometer3.1
     - https://github.com/servo/servo/pull/40821	(@nicoburns, #40821)	Upgrade Taffy to v0.9.2 (#40821)
       crash; fix panic in grid layout
     - https://github.com/servo/servo/pull/40913	(@simonwuelker, #40913)	fonts: Don't panic when font information contains invalid UTF-8 (#40913)
       crash; fix panic with unusual fonts
+    - https://github.com/servo/servo/pull/40911	(@Taym95, #40911)	fix RefCell already borrowed panic in readablestream (#40911)
+      crash; fix panic in ReadableStream
     - https://github.com/servo/servo/pull/40933	(@mrobinson, #40933)	servoshell: Schedule keyboard shortcut exits so that they can be done cleanly (#40933)
       crash; fix crashes when exiting servo
 - devtools
@@ -73,6 +91,8 @@
       dom; exception messages
     - https://github.com/servo/servo/pull/40765	(@kkoyung, #40765)	script: Implement SHA-3 in WebCrypto API (#40765)
       dom; crypto.subtle.digest("SHA3-256"), SHA3-384, SHA3-512; first among major engines!
+    - https://github.com/servo/servo/pull/40636	(@mukilan, #40636)	net: Relax the SVG content type detection logic. (#40636)
+      dom; fixed SVG rendering with Content-Type parameters
     - https://github.com/servo/servo/pull/40832	(@kkoyung, #40832)	script: Implement CShake in WebCrypto API (#40832)
       dom; crypto.subtle.digest("cSHAKE128"), cSHAKE256
     - https://github.com/servo/servo/pull/40842	(@Taym95, #40842)	Implement brotli support for CompressionStream and DecompressionStream (#40842)
@@ -106,6 +126,8 @@
       layout; variable fonts
     - https://github.com/servo/servo/pull/40867	(@simonwuelker, #40867)	fonts: Apply variations for `font-weight`, `font-stretch` (#40867)
       layout; variable fonts
+    - https://github.com/servo/servo/pull/40884	(@simonwuelker, #40884)	Don't override `opsz` from `font-variation-settings` when `font-optical-sizing` is `auto` (#40884)
+      layout; part of font-optical-sizing
     - https://github.com/servo/servo/pull/40916	(@Loirooriol, @mrobinson, #40916)	stylo: Add stacking context damage when outline-width becomes non-zero (#40916)
       layout; incremental layout for ‘outline’ changes
 - perf

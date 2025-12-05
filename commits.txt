@@ -310,7 +310,7 @@ https://github.com/servo/servo/pull/40286	(@lukewarlow, #40286)	Update Attr::Set
     # We no longer early return if the attributes owner changes after the Trusted Types callback runs.
     # Testing: https://wpt.live/trusted-types/set-attributes-mutations-in-callback.tentative.html - not sure how to
     # import the test change?
-https://github.com/servo/servo/pull/40353	(@jdm, #40353)	script: Trigger rendering update for skipped resize observations. (#40353)
+-https://github.com/servo/servo/pull/40353	(@jdm, #40353)	script: Trigger rendering update for skipped resize observations. (#40353)
     # When resize observations are skipped, they get delayed until the next turn of the event loop. In headless tests,
     # we're not guaranteed that this next turn occurs in time, unless some other event happens to run. This leads to
     # intermittent results unless we ensure that the event loop will run again.
@@ -1066,7 +1066,7 @@ https://github.com/servo/servo/pull/40371	(@Gae24, #40371)	script: remove microt
     # updates are driven by the system compositor.
     # Testing: This should increase the smoothness of animations, but I'm
     # not sure how to test that exactly.
-https://github.com/servo/servo/pull/40100	(@gterzian, #40100)	script: improve spec compliance of the iframe load event steps (#40100)
+-https://github.com/servo/servo/pull/40100	(@gterzian, #40100)	script: improve spec compliance of the iframe load event steps (#40100)
     # Prevent the running of the iframe load event steps for the initial about:blank document. Part of
     # https://github.com/servo/servo/issues/31973
     # Testing: /html/browsers/browsing-the-web/navigating-across-documents/initial-empty-document/iframe-nosrc.html
@@ -1074,7 +1074,7 @@ https://github.com/servo/servo/pull/40100	(@gterzian, #40100)	script: improve sp
     # it when we realize it isn't being mentioned by PR's anymore.
     # https://github.com/servo/servo/issues/34819
 >>> 2025-11-08T06:07:37Z
-https://github.com/servo/servo/pull/40483	(@yezhizhen, #40483)	webdriver: Do not remove id from `input_state_table` if it still in `input_cancel_list` (#40483)
+-https://github.com/servo/servo/pull/40483	(@yezhizhen, #40483)	webdriver: Do not remove id from `input_state_table` if it still in `input_cancel_list` (#40483)
     # There ~was~ has been a [bug](https://github.com/servo/servo/issues/37579#issuecomment-2990762713) in spec. Our
     # workaround has been: for every keyup/pointerup, we remove a corresponding entry in `input_cancel_list`.
     # But we missed one thing: it is possible to only dispatch keydown in [element send
@@ -1102,7 +1102,8 @@ https://github.com/servo/servo/pull/40495	(@mrobinson, #40495)	wpt: Run in headl
     # Currently we only prime the font key cache for the very first painter. Replace this with a mechanism to request
     # the System Font Service to prime the key cache whenever a new `WebView` is created.
     # Testing: This only modifies an internal optimization, so should be covered by existing tests.
-https://github.com/servo/servo/pull/40459	(@Narfinger, #40459)	net: Do not implement `Serialize`/`Deserialize` for `RasterImage` and introduce``SharedRasterImage` (#40459)
++https://github.com/servo/servo/pull/40459	(@Narfinger, #40459)	net: Do not implement `Serialize`/`Deserialize` for `RasterImage` and introduce``SharedRasterImage` (#40459)
+    crash; fix crash in Speedometer3.1
     # RasterImage is now not seralizeable and backed by Vec storage. Add a new struct `SharedRasterImage` that allows
     # serializeing. This can be constructed from RasterImage. This introduces some more copying but I think the tradeoff
     # is ok. Newly introduced copies are for favicon response to the embedder and EmbedderNotifications.
@@ -1773,7 +1774,7 @@ https://github.com/servo/servo/pull/40556	(@mrobinson, #40556)	script: Have `Fet
     # so I've removed the second test instance.
     # Depends on https://github.com/servo/servo/pull/40564
     # Testing: The relevant test is now `OK`
-https://github.com/servo/servo/pull/40564	(@simonwuelker, #40564)	script: Choose correct document for xpath queries (#40564)
+-https://github.com/servo/servo/pull/40564	(@simonwuelker, #40564)	script: Choose correct document for xpath queries (#40564)
     # The result of an xpath query can depend on whether or not the document is a HTMLDocument. We should always use the
     # document that `document.evaluate` was called on. Instead, we were using the document of the relevant window. This
     # makes a difference when a script creates a document and calls `document.evaluate` on that.
@@ -2910,7 +2911,7 @@ https://github.com/servo/servo/pull/40757	(@kongbai1996, #40757)	compositing: Do
     # `BuildType.Kind.RELEASE` and `BuildType.Kind.DEV` respectively.
     # Fixes: #40752
     # Testing: Tested manually that building android with `--profile release` creates the correct directory structure.
-https://github.com/servo/servo/pull/40750	(@arihant2math, #40750)	script: Finish converting all error message enum variants to Option<String> (#40750)
+-https://github.com/servo/servo/pull/40750	(@arihant2math, #40750)	script: Finish converting all error message enum variants to Option<String> (#40750)
     # I used find and replace to finish the job. All this PR does is replace all `Error::` occurrences with `Error::(None)`.
     # Testing: Refactor
     # Fixes: #39053
@@ -3025,7 +3026,8 @@ https://github.com/servo/servo/pull/40737	(@mrobinson, @mukilan, #40737)	composi
     # This is required so that there can be multiple `WebGpuExternalImages`
     # for a single `Constellation`.
     # Testing: This should not change behavior so is covered by existing tests.
-https://github.com/servo/servo/pull/40738	(@mrobinson, @mukilan, #40738)	compositing: Make `RefreshDriver` per-`RenderingContext` (#40738)
++https://github.com/servo/servo/pull/40738	(@mrobinson, @mukilan, #40738)	compositing: Make `RefreshDriver` per-`RenderingContext` (#40738)
+    api; part of per-webview RenderingContext
     # Instead of having a global `RefreshDriver` for all of Servo, let each
     # `RenderingContext` have its own `RefreshDriver`. This allows for things
     # like per-monitor `RefreshDriver`s and helps to ensure that multiple
@@ -3082,7 +3084,8 @@ https://github.com/servo/servo/pull/40733	(@TimvdLippe, #40733)	webdriver: imple
     # The tests now start running rather than erroring, but they aren't working yet as we don't currently use protocol
     # handlers yet. That's for follow-up PRs, as that requires more plumbing.
     # Part of #40615
-https://github.com/servo/servo/pull/40716	(@sagudev, #40716)	Use safe JSContext/AutoRealm/CurrentRealm in codegen (#40716)
++https://github.com/servo/servo/pull/40716	(@sagudev, #40716)	Use safe JSContext/AutoRealm/CurrentRealm in codegen (#40716)
+    api; safer api for mozjs bindings
     # We replace many places that use `SafeJSContext` with `JSContext` and I also rewrote `is_platform_object_same_origin`
     # to use new `JSContext`. Unfortunately using wrappers2 in them causes crashes (in handle code), so I reverted that
     # part in last commit and will fix handles in mozjs later.
@@ -3144,7 +3147,8 @@ https://github.com/servo/servo/pull/40690	(@mrobinson, @mukilan, #40690)	composi
     # This is necessary to support multiple painters sharing the same WebGL
     # thread.
     # Testing: This doesn't really change behavior yet, so is covered by existing tests.
-https://github.com/servo/servo/pull/40721	(@mrobinson, @mukilan, #40721)	compositing: Allow WebGL contexts to have different Surfman devices (#40721)
++https://github.com/servo/servo/pull/40721	(@mrobinson, @mukilan, #40721)	compositing: Allow WebGL contexts to have different Surfman devices (#40721)
+    api; part of per-webview RenderingContext
     # Currently, a single `surfman::Device` is used for all WebGL contexts.
     # This cannot work when we have multiple rendering contexts. So, extract
     # the surfman `Connection` and `Adapter` into a per-painter data structure
@@ -3160,14 +3164,15 @@ https://github.com/servo/servo/pull/40721	(@mrobinson, @mukilan, #40721)	composi
     #   - Allow failing to the Device when processing WebXR commands. WebXR
     #     sometimes tries to access contexts after they have been removed.
     # Testing: Should be covered by existing tests.
-https://github.com/servo/servo/pull/40714	(@WaterWhisperer, #40714)	Update expectation for `media-elements/event_timeupdate_noautoplay.html` to PASS by removing .ini (#40714)
+-https://github.com/servo/servo/pull/40714	(@WaterWhisperer, #40714)	Update expectation for `media-elements/event_timeupdate_noautoplay.html` to PASS by removing .ini (#40714)
     # Testing: None
     # Fixes: #25046
 -https://github.com/servo/servo/pull/40717	(@mrobinson, #40717)	python: Remove `notify-py` from Python dependencies (#40717)
     # Support for sending build notifications was removed in #37818, but the
     # dependency in `requirements.txt` was not removed. This PR fixest that.
     # Testing: This change just removes an unsued build dependency, so no testing is necessary.
-https://github.com/servo/servo/pull/40715	(@mrobinson, #40715)	servoshell: Always use `ControlFlow::Wait` on winit (#40715)
++https://github.com/servo/servo/pull/40715	(@mrobinson, #40715)	servoshell: Always use `ControlFlow::Wait` on winit (#40715)
+    api; removed in favour of RefreshDriver
     # Nowadays the renderer will always wake up the event loop when it needs to paint
     # a new frame, so we can always use `ControlFlow::Wait`. This should be a
     # more efficient way to run animations.
@@ -3193,7 +3198,7 @@ https://github.com/servo/servo/pull/40160	(@jschwe, #40160)	profiling: Add abstr
     # if the runtime switch is disabled, so having more fine-grained options to partially enabled tracing could be useful.
     # Testing: Tested manually by building with and without the `tracing` feature. In CI we also build with the tracing
     # feature in the HarmonyOS build. We don't have any automated tests for the correctness / presence of the traced entries.
-https://github.com/servo/servo/pull/40712	(@mrobinson, #40712)	libservo: Trigger a rendering update when waiting for paint readiness in WebView unit tests (#40712)
+-https://github.com/servo/servo/pull/40712	(@mrobinson, #40712)	libservo: Trigger a rendering update when waiting for paint readiness in WebView unit tests (#40712)
     # Some unit tests attempt to wait for the WebView to be paint ready before
     # executing. The previous code would wait for a frame ready message from
     # the WebView before running, but this was subject to timing issues due to
@@ -3255,7 +3260,7 @@ https://github.com/servo/servo/pull/40637	(@kongbai1996, #40637)	Compositor: Add
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/40707	(@yezhizhen, #40707)	Revert servo/servo#40594 "Allow WebGL contexts to have different Surfman devices" (#40707)
+-https://github.com/servo/servo/pull/40707	(@yezhizhen, #40707)	Revert servo/servo#40594 "Allow WebGL contexts to have different Surfman devices" (#40707)
     # This reverts commit bcbd4a2f19c43e1755a0684e954c7f1ca3c85828.
     # There was too many intermittents: https://github.com/servo/servo/pull/40699#issuecomment-3544170297. Some PRs fail
     # to merge.
@@ -3430,7 +3435,7 @@ https://github.com/servo/servo/pull/40688	(@tharkum, #40688)	html: Run the <medi
     # See https://github.com/whatwg/html/issues/4487
     # Testing: Improvements in the following tests
     # - html/semantics/embedded-content/media-elements/playing-the-media-resource/loop-from-ended.tentative.html
-https://github.com/servo/servo/pull/40689	(@mukilan, #40689)	wpt: Backport upstream WPT PR for new SVG test. (#40689)
+-https://github.com/servo/servo/pull/40689	(@mukilan, #40689)	wpt: Backport upstream WPT PR for new SVG test. (#40689)
     # The exported [upstream PR] failed to merge due to lint issues and there was also a suggestion to move the test to
     # a different folder.
     # Since that upstream PR has now been merged manually, backport these fixes to Servo's copy of WPT.
@@ -3448,13 +3453,15 @@ https://github.com/servo/servo/pull/40685	(@tharkum, #40685)	html: Fire the <med
     # function wrongly returns `NotSupportedError` for them. It causes a few WPT tests fail. This patch fix it with
     # correct enum variants.
     # Testing: Pass some WPT tests that were expected to fail.
-https://github.com/servo/servo/pull/40594	(@mukilan, @mrobinson, #40594)	compositing: Allow WebGL contexts to have different Surfman devices (#40594)
++https://github.com/servo/servo/pull/40594	(@mukilan, @mrobinson, #40594)	compositing: Allow WebGL contexts to have different Surfman devices (#40594)
+    api; part of per-webview RenderingContext
     # Currently, a single `surfman::Device` is used for all WebGL contexts. This cannot work when we have multiple
     # rendering contexts. So, extract the surfman `Connection` and `Adapter` into a per-painter data structure
     # (`PainterSurfmanDetailsMap`) and store the `Device` directly in the WebGL context.
     # This patch also modifies the WebXR traits so that the `Device` doesn't need to be explictly passed into most methods.
     # Testing: Should be covered by existing tests.
-https://github.com/servo/servo/pull/40636	(@mukilan, #40636)	net: Relax the SVG content type detection logic. (#40636)
++https://github.com/servo/servo/pull/40636	(@mukilan, #40636)	net: Relax the SVG content type detection logic. (#40636)
+    dom; fixed SVG rendering with Content-Type parameters
     # The current logic fails when the `Content-Type` header includes the character encoding other parameters like `qs`.
     # Fixes: #40630
 -https://github.com/servo/servo/pull/40675  (@Taym95, #40675)   Remove #![allow(dead_code)] from readablestreambyobreader (#40675)
@@ -3466,7 +3473,7 @@ https://github.com/servo/servo/pull/40654	(@TimvdLippe, #40654)	Implement `Windo
     # `ErrorInfo` only retrieves the message data, but doesn't include the type of the exception. For that, we need to use
     # `(*report)._base.errorNumber` and map that back to the original type codes. However, deferring that to a follow-up
     # as that requires some more work in mozjs.
-https://github.com/servo/servo/pull/40670	(@arihant2math, #40670)	resources: Ensure that selectors in CSS for the newtab page refer to actual elements (#40670)
+-https://github.com/servo/servo/pull/40670	(@arihant2math, #40670)	resources: Ensure that selectors in CSS for the newtab page refer to actual elements (#40670)
     # I did part of a refactor to address a review but didn't finish it. Fixes white input/button in dark mode.
 https://github.com/servo/servo/pull/40671	(@mrobinson, #40671)	libservo: Make `WebView::set_history` have `crate` visibility (#40671)
     # I mistakenly made this method have public visibility in a recent PR
@@ -4210,7 +4217,7 @@ https://github.com/servo/servo/pull/40843	(@dyegoaurelio, #40843)	script: Move C
     # Move CSP DOM interfaces to `script/dom/security`
     # Testing: Just a refactor, it doesn't require tests
     # Fixes: part of #38901
-https://github.com/servo/servo/pull/40841	(@jschwe, #40841)	ohos CI: Try and improve the scenario test stability (#40841)
+-https://github.com/servo/servo/pull/40841	(@jschwe, #40841)	ohos CI: Try and improve the scenario test stability (#40841)
     # - Factor out some common code
     # - Create and use `hdc_py` library, used for enabling (and disabling) performance mode and screen timeout.
     # - Add screenshots on test failure
@@ -4219,7 +4226,8 @@ https://github.com/servo/servo/pull/40841	(@jschwe, #40841)	ohos CI: Try and imp
     # Testing: This is a CI modification for ohos. [mach
     # try](https://github.com/servo/servo/actions/runs/19614805970/job/56165963814)
 >>> 2025-11-26T06:18:52Z
-https://github.com/servo/servo/pull/40886	(@mrobinson, #40886)	libservo: Remove `ServoDelegate::notify_animating_changed` (#40886)
++https://github.com/servo/servo/pull/40886	(@mrobinson, #40886)	libservo: Remove `ServoDelegate::notify_animating_changed` (#40886)
+    api; removed in favour of RefreshDriver
     # This is dead code #40799, as it is never called. Remove the delegate
     # call and the entire `ServoShellServoDelegate` as the only thing that it
     # was doing was printing top-level errors which only happen when something
@@ -4473,7 +4481,8 @@ https://github.com/servo/servo/pull/40875	(@tharkum, #40875)	html: Use WeakRef f
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/40884	(@simonwuelker, #40884)	Don't override `opsz` from `font-variation-settings` when `font-optical-sizing` is `auto` (#40884)
++https://github.com/servo/servo/pull/40884	(@simonwuelker, #40884)	Don't override `opsz` from `font-variation-settings` when `font-optical-sizing` is `auto` (#40884)
+    layout; part of font-optical-sizing
     # `font-optical-sizing:auto` is UA-defined, and other browsers only set `opsz` when other variation sources don't
     # already set it.
     # Gecko code for reference: https://searchfox.org/firefox-main/source/gfx/src/nsFont.cpp#277.
@@ -4662,7 +4671,8 @@ https://github.com/servo/servo/pull/40836	(@yezhizhen, #40836)	webdriver: Enable
     # error" yet.
     # Testing: We added WPT tests for "Find element", "Find element from element", "Find element from shadow root"
     # for both successful implicit wait and timeout case.
-https://github.com/servo/servo/pull/40911	(@Taym95, #40911)	fix RefCell already borrowed panic in readablestream (#40911)
++https://github.com/servo/servo/pull/40911	(@Taym95, #40911)	fix RefCell already borrowed panic in readablestream (#40911)
+    crash; fix panic in ReadableStream
     # fixes an intermittent RefCell already borrowed panic in the ReadableStream implementation by tightening the borrow
     # scope of ReadableStream::reader in the error and cancel.
     # Testing: super hard to make crash test for this.
@@ -4697,7 +4707,8 @@ https://github.com/servo/servo/pull/40661	(@janvarga, #40661)	storage: Introduce
     # In addition to the new coordination thread, this PR also lays the infrastructure required to develop a parallel,
     # next-generation IndexedDB implementation under the indexeddb_next feature flag living on a separate branch.
     # Testing: Unit and WPT tests continue to pass
-https://github.com/servo/servo/pull/40923	(@mrobinson, #40923)	libservo: Starting removing the multi-document interface API (#40923)
++https://github.com/servo/servo/pull/40923	(@mrobinson, #40923)	libservo: Starting removing the multi-document interface API (#40923)
+    api; remove old multiple webview features in favour of per-webview RenderingContext
     # For a while Servo has while had a somewhat unfinished multi-document
     # interface API that was meant to implement a kind of window manager
     # inside a single `RenderingContext`. This came with some focus handling
@@ -4726,7 +4737,7 @@ https://github.com/servo/servo/pull/40923	(@mrobinson, #40923)	libservo: Startin
     # are also provided for the existing "import key" operation of Argon2.
     # Testing: Pass some WPT tests that were expected to fail.
     # Fixes: Part of #40687
-https://github.com/servo/servo/pull/40776	(@webbeef, #40776)	dom: avoid short lived rooting in Node::is_ancestor_of (#40776)
+-https://github.com/servo/servo/pull/40776	(@webbeef, #40776)	dom: avoid short lived rooting in Node::is_ancestor_of (#40776)
     # When using the iterator nodes are rooted but they are dropped immediately.
     # Testing: Green wpt run: https://github.com/webbeef/servo/actions/runs/19560383039/job/56012660243
 https://github.com/servo/servo/pull/40709	(@jdm, #40709)	servodriver: Clear cookies between tests. (#40709)
