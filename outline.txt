@@ -12,11 +12,15 @@
       api servoshell
     - https://github.com/servo/servo/pull/40607	(@mrobinson, #40607)	libservo: Add `ContextMenuElementInformation` to for the context menu API (#40607)
       api; element_info() on ContextMenu
+    - https://github.com/servo/servo/pull/40794	(@mrobinson, #40794)	libservo: Have `WebView` take a `RenderingContext` rather than `Servo` (#40794)
+      api; per-webview rendering contexts (big part of support for multiple windows)
     - https://github.com/servo/servo/pull/40799	(@mrobinson, #40799)	libservo: Remove `Servo::animating()` (#40799)
       api; removed in favour of RefreshDriver
     - https://github.com/servo/servo/pull/40951	(@mrobinson, #40951)	libservo: Clean up Servo exports and export more at the root (#40951)
       api; `use servo::*`
 - crash
+    - https://github.com/servo/servo/pull/40821	(@nicoburns, #40821)	Upgrade Taffy to v0.9.2 (#40821)
+      crash; fix panic in grid layout
     - https://github.com/servo/servo/pull/40913	(@simonwuelker, #40913)	fonts: Don't panic when font information contains invalid UTF-8 (#40913)
       crash; fix panic with unusual fonts
     - https://github.com/servo/servo/pull/40933	(@mrobinson, #40933)	servoshell: Schedule keyboard shortcut exits so that they can be done cleanly (#40933)
@@ -65,10 +69,14 @@
       dom; crypto.subtle.generateKey("ECDSA")
     - https://github.com/servo/servo/pull/40591	(@kkoyung, #40591)	script: Implement sign operation of ECDSA (#40591)
       dom; crypto.subtle.sign("ECDSA")
+    - https://github.com/servo/servo/pull/40768	(@simonwuelker, #40768)	script: Add messages to exceptions thrown in Element::attachShadow (#40768)
+      dom; exception messages
     - https://github.com/servo/servo/pull/40765	(@kkoyung, #40765)	script: Implement SHA-3 in WebCrypto API (#40765)
       dom; crypto.subtle.digest("SHA3-256"), SHA3-384, SHA3-512; first among major engines!
     - https://github.com/servo/servo/pull/40832	(@kkoyung, #40832)	script: Implement CShake in WebCrypto API (#40832)
       dom; crypto.subtle.digest("cSHAKE128"), cSHAKE256
+    - https://github.com/servo/servo/pull/40842	(@Taym95, #40842)	Implement brotli support for CompressionStream and DecompressionStream (#40842)
+      dom; new CompressionStream("brotli") and new DecompressionStream("brotli")
     - https://github.com/servo/servo/pull/40447	(@stevennovaryo, #40447)	dom: Focus scroll to the element only if it is not visible (#40447)
       dom; focus no longer scrolls if element is visible
     - https://github.com/servo/servo/pull/40936	(@kkoyung, #40936)	script: Finishing implementation of Argon2 in WebCrypto (#40936)
@@ -86,6 +94,8 @@
       layout
     - https://github.com/servo/servo/pull/40699	(@mrobinson, @Loirooriol, #40699)	layout: Rebuild the box tree when the `quotes` attribute changes on a pseudo-element (#40699)
       layout
+    - https://github.com/servo/servo/pull/40578	(@rayguo17, #40578)	Media: Display User Agent Controls widget for video element. (#40578)
+      layout; UA controls for <video> (was previously supported for <audio>)
     - https://github.com/servo/servo/pull/40698	(@mrobinson, @Loirooriol, #40698)	script: Trigger reflow properly for pseudo-elements with `content: attr()` (#40698)
       layout
     - https://github.com/servo/servo/pull/40684	(@WaterWhisperer, #40684)	script: Support SVG <use> elements with fragment identifiers (#40684)
@@ -137,6 +147,8 @@
 - security
     - https://github.com/servo/servo/pull/40334	(@kkoyung, #40334)	script: Use `base64ct` instead of `base64` in SubtleCrypto (#40334)
       security dom
+    - https://github.com/servo/servo/pull/40725	(@mrobinson, #40725)	script: Use a `WeakRef` for references to `WebGLRenderingContext` (#40725)
+      security; fix use-after-free in WebGL
 - servoshell
     - https://github.com/servo/servo/pull/40402	(@mrobinson, @atbrakhi, #40402)	libservo: Integrate context menu into the show_embedder_control API (#40402)
       api servoshell; rework context menu api, embedders can now know the position and know what each item does (`show_context_menu(webview, result_sender, title, items)` → `ContextMenu.{id,position,items,select,dismiss}()`)
