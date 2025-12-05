@@ -67,7 +67,8 @@ https://github.com/servo/servo/pull/40307	(@mukilan, @mrobinson, #40307)	composi
     # And let the Compositor create the `PainterId` when it creates a new `Painter`. Also make inline formatting code take
     # `LayoutContext` rather than threading it via the `InlineFormattingContextBuilder`.
     # Testing: Should preserve existing behavior, so covered by existing tests.
-https://github.com/servo/servo/pull/40158	(@mrobinson, #40158)	pixels: Store decoded images as RGBA premultiplied data (#40158)
++https://github.com/servo/servo/pull/40158	(@mrobinson, #40158)	pixels: Store decoded images as RGBA premultiplied data (#40158)
+    perf; faster animated GIF rendering
     # Canvas expects input data to be in RGBA premultiplied format and
     # WebRender already supports RGBA and BGRA data as long as they are
     # premultiplied. Pre-multiplying up front allows:
@@ -88,7 +89,8 @@ https://github.com/servo/servo/pull/40158	(@mrobinson, #40158)	pixels: Store dec
     # from things like image elements. We do not have that yet, but I argue that this change
     # is important anyway due to the amount that it reduces memory and file descriptor usage
     # as well as the cost of copying image data so much in memory.
-https://github.com/servo/servo/pull/39384	(@shubhamg13, @boluochoufeng, #39384)	Add support for LargestContentfulPaint PaintMetric (#39384)
++https://github.com/servo/servo/pull/39384	(@shubhamg13, @boluochoufeng, #39384)	Add support for LargestContentfulPaint PaintMetric (#39384)
+    perf; LCP measurement
     # Steps for calculating LCP:
     # 1. When the pref for `largest_contentful_paint_enabled` is enabled, `LargestContentfulPaintCandidateCollector`
     # is created once per LayoutThread using `viewport_size`.
@@ -158,7 +160,7 @@ https://github.com/servo/servo/pull/40128	(@aaron-wgd, #40128)	servoshell/deskto
     # Should fix docs workflow which currently fails because not enough space is left:
     # https://github.com/servo/servo/actions/runs/18964865479
     # run: https://github.com/servo/servo/actions/runs/18997885819
-https://github.com/servo/servo/pull/40327	(@mukilan, #40327)	wpt: Have `ServoRefTestExecutor` inherit from `RefTestExecutor` (#40327)
+-https://github.com/servo/servo/pull/40327	(@mukilan, #40327)	wpt: Have `ServoRefTestExecutor` inherit from `RefTestExecutor` (#40327)
     # Since `ProcessTestExecutor` is only used by Servo and doesn't add much
     # on top of `ServoExecutor`, merge the former into the latter.
     # Also make `ServoExecutor` a mixin so that the derived classes can
@@ -298,7 +300,8 @@ https://github.com/servo/servo/pull/40205	(@yerke, #40205)	layout: Show pointer 
     dom; toggle events on HTMLDetailsElement
     # Implement ToggleEvent and use for details element
     # Testing: Covered by existing WPTs
-https://github.com/servo/servo/pull/40328	(@mark-buer, #40328)	devtools: Expose cache status for requests in network monitor. (#40328)
++https://github.com/servo/servo/pull/40328	(@mark-buer, #40328)	devtools: Expose cache status for requests in network monitor. (#40328)
+    devtools
     # Expose cache status for requests in network monitor.
     # Testing: Net tests pass. No existing test infrastructure for devtools, adding them seems outside the scope of this PR.
     # Fixes: #40237
@@ -326,7 +329,8 @@ https://github.com/servo/servo/pull/40353	(@jdm, #40353)	script: Trigger renderi
     # Testing: This change fixes some tests.
     # Fixes: #40348.
 >>> 2025-11-07T06:18:32Z
-https://github.com/servo/servo/pull/39714	(@shubhamg13, #39714)	Add basic `IDL` implementation for `LargestContentfulPaint` (#39714)
++https://github.com/servo/servo/pull/39714	(@shubhamg13, #39714)	Add basic `IDL` implementation for `LargestContentfulPaint` (#39714)
+    perf; `observe({type: "largest-contentful-paint"})` on PerformanceObserver
     # Add basic `IDL` implementation for `LargestContentfulPaint`
     # Testing: Tested locally
     # Fixes: N/A
@@ -380,7 +384,7 @@ https://github.com/servo/servo/pull/40462	(@Taym95, #40462)	WebGLBuffer: follow 
     # DOMString which owns the string it double copied it.
     # We now use Cow as input making both sides happy.
     # Testing: Does not change functionality.
-https://github.com/servo/servo/pull/40461	(@mrobinson, #40461)	net: Simplify `FetchResponseListener` and move it to `script` (#40461)
+-https://github.com/servo/servo/pull/40461	(@mrobinson, #40461)	net: Simplify `FetchResponseListener` and move it to `script` (#40461)
     # `FetchReponseListener` has traditionally lived in `net` even though it
     # is only used in `script` currently. Because of the two way dependency,
     # it has also use a lot of templating to implement something pretty basic
@@ -835,7 +839,7 @@ https://github.com/servo/servo/pull/40411	(@simonwuelker, #40411)	xpath: Handle 
     # cause unnecessary merge conflicts.
     # Testing: New web platform tests start to pass
 +https://github.com/servo/servo/pull/40402	(@mrobinson, @atbrakhi, #40402)	libservo: Integrate context menu into the show_embedder_control API (#40402)
-    api; rework context menu api, embedders can now know the position and know what each item does (`show_context_menu(webview, result_sender, title, items)` → `ContextMenu.{id,position,items,select,dismiss}()`)
+    api servoshell; rework context menu api, embedders can now know the position and know what each item does (`show_context_menu(webview, result_sender, title, items)` → `ContextMenu.{id,position,items,select,dismiss}()`)
     # This PR integrates showing context menus into the
     # `WebViewDelegate::show_embedder_control` API. In addition,
     # `ContextMenuItem` and `ContextMenuAction` data types are exposed which
@@ -1784,7 +1788,8 @@ https://github.com/servo/servo/pull/40542	(@simonwuelker, #40542)	xpath: Don't e
     # Previously there where two functions defined in this function which was already
     # roughly 600 lines. There was also a blocking section which was split out.
     # Testing: Should not change functionality and tests still work.
-https://github.com/servo/servo/pull/40501	(@mrobinson, @atbrakhi, #40501)	script: Add context-based context menu options (#40501)
++https://github.com/servo/servo/pull/40501	(@mrobinson, @atbrakhi, #40501)	script: Add context-based context menu options (#40501)
+    api servoshell; copy link, open link in new, copy image link, open image in new, cut, copy, paste, select all
     # Add context menu options for images, links, and editable text areas. In
     # addition add the ability to show menu options that are disabled. This
     # also improves the visual style of the context menu in egui as part of
@@ -1801,7 +1806,8 @@ https://github.com/servo/servo/pull/40541	(@simonwuelker, #40541)	tests: Import 
     # fixed in followup changes. Firefox and chrome both pass all tests.
     # Testing: This change adds new tests
     # Fixes #39726
-https://github.com/servo/servo/pull/40554	(@Loirooriol, #40554)	script: Pass the right base URI to inline sheets (#40554)
++https://github.com/servo/servo/pull/40554	(@Loirooriol, #40554)	script: Pass the right base URI to inline sheets (#40554)
+    layout; inline <style> now takes <base> into account
     # HTMLStyleElement was creating stylesheets using the URI of the document, ignoring ``.
     # To avoid having to create the UrlExtraData twice (or clone it), this inlines the `stylesheetcontents_create_callback`.
     # Testing: 2 WPT are now passing
@@ -2646,7 +2652,7 @@ https://github.com/servo/servo/pull/40616	(@TimvdLippe, #40616)	Implement protoc
     # [1]:
     # https://github.com/rust-ammonia/rust-content-security-policy/blob/db8f2e97fed57a6f903ee4f5e8109e5ed4c10141/src/lib.rs#L1
     # 550-L1569
-https://github.com/servo/servo/pull/40643	(@kkoyung, #40643)	script: Flatten nested match arms in `NormalizedAlgorithm` (#40643)
+-https://github.com/servo/servo/pull/40643	(@kkoyung, #40643)	script: Flatten nested match arms in `NormalizedAlgorithm` (#40643)
     # This patch flattens nested match arms in `NormalizedAlgorithm` to simplify our code. Moreover, primarily matching
     # the algorithm names, instead of matching the enum variant types, makes more sense, since some algorithms share
     # the same enum variant type.
@@ -2888,14 +2894,14 @@ https://github.com/servo/servo/pull/40757	(@kongbai1996, #40757)	compositing: Do
     # This results in a significant reduction in the number of `FrameMsg::SetScrollOffsets`, which in turn greatly
     # reduces the number of `set_scroll_offsets` calls in the WebRender backend. This is beneficial for performance.
     # Testing: This is an attempt to increase performance, so is covered by existing tests.
-https://github.com/servo/servo/pull/40758	(@jschwe, #40758)	profiling: Fix missing span enter (#40758)
+-https://github.com/servo/servo/pull/40758	(@jschwe, #40758)	profiling: Fix missing span enter (#40758)
     # If we don't enter the span, then nothing will be traced. This was overlooked during review of
     # https://github.com/servo/servo/pull/40629.
     # Also clean-up some `tracing` feature flag occurence, which is not needed when using the macro from profile_traits.
     # Testing: Manually tested with `tracing-hitrace` feature
 -https://github.com/servo/servo/pull/40755	(@sagudev, #40755)	CI: Do not `fail_fast` on push to main (#40755)
     # Fixes: #40741
-https://github.com/servo/servo/pull/40753	(@mukilan, #40753)	mach: Normalize the `--profile` argument to build commands (#40753)
+-https://github.com/servo/servo/pull/40753	(@mukilan, #40753)	mach: Normalize the `--profile` argument to build commands (#40753)
     # The current logic treats the explict version of release and dev build specification i.e the `--profile release`
     # and `--profile dev` options as custom profiles. This breaks other logic that explictly check for release and dev
     # profile types, like the android build.
@@ -2907,7 +2913,8 @@ https://github.com/servo/servo/pull/40750	(@arihant2math, #40750)	script: Finish
     # I used find and replace to finish the job. All this PR does is replace all `Error::` occurrences with `Error::(None)`.
     # Testing: Refactor
     # Fixes: #39053
-https://github.com/servo/servo/pull/40742	(@webbeef, #40742)	script: Optimize Node::insert (#40742)
++https://github.com/servo/servo/pull/40742	(@webbeef, #40742)	script: Optimize Node::insert (#40742)
+    perf; faster parseFromString() on DOMParser
     # - Change how the static node list is built to prevent a second iteration of new_nodes
     # - Memoize some invariants of the parent
     # Testing: No wpt regressions: https://github.com/webbeef/servo/actions/runs/19493174678
@@ -3382,7 +3389,8 @@ https://github.com/servo/servo/pull/40707	(@yezhizhen, #40707)	Revert servo/serv
     # node. This is a crude implementation, because we currently aren't taking
     # into account what attributes changed, but at least it works.
     # Testing: This doesn't have any test changes, but should fix the test situation described in #40419.
-https://github.com/servo/servo/pull/40607	(@mrobinson, #40607)	libservo: Add `ContextMenuElementInformation` to for the context menu API (#40607)
++https://github.com/servo/servo/pull/40607	(@mrobinson, #40607)	libservo: Add `ContextMenuElementInformation` to for the context menu API (#40607)
+    api; element_info() on ContextMenu
     # This new data structure allows passing more information when popping up
     # context menus. It's possible in the future that it will be adapted into
     # a more generic "hit test result" type API ala WebKit, but for now, this is probably
@@ -3432,7 +3440,7 @@ https://github.com/servo/servo/pull/40685	(@tharkum, #40685)	html: Fire the <med
     # The associated WPT PR: https://github.com/web-platform-tests/wpt/pull/56014
     # Testing: Improvements in the following tests
     # - html/semantics/embedded-content/media-elements/ready-states/autoplay.html
-https://github.com/servo/servo/pull/40686	(@kkoyung, #40686)	script: Fix wrongly matched normalized algorithm in `NormalizedAlgorithm::get_key_length` (#40686)
+-https://github.com/servo/servo/pull/40686	(@kkoyung, #40686)	script: Fix wrongly matched normalized algorithm in `NormalizedAlgorithm::get_key_length` (#40686)
     # In `NormalizedAlgorithm::get_key_length`, we match the wrong enum variants for HKDF and PBKDF2. Therefore, the
     # function wrongly returns `NotSupportedError` for them. It causes a few WPT tests fail. This patch fix it with
     # correct enum variants.
@@ -3541,7 +3549,8 @@ https://github.com/servo/servo/pull/40653	(@TimvdLippe, #40653)	libservo: Notify
     # https://web-platform.test:8443/html/webappapis/system-state-and-capabilities/the-navigator-object/%s
     # ```
     # Part of #40615
-https://github.com/servo/servo/pull/40799	(@mrobinson, #40799)	libservo: Remove `Servo::animating()` (#40799)
++https://github.com/servo/servo/pull/40799	(@mrobinson, #40799)	libservo: Remove `Servo::animating()` (#40799)
+    api; removed in favour of RefreshDriver
     # Instead of relying on `Sevo::animating()` in servoshell to drive the
     # event loop, it is sufficient to just let the `RefreshDriver` wake it up
     # when it is time to re-render.
@@ -4392,7 +4401,8 @@ https://github.com/servo/servo/pull/40872	(@yezhizhen, #40872)	Remove unnecessar
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/40913	(@simonwuelker, #40913)	fonts: Don't panic when font information contains invalid UTF-8 (#40913)
++https://github.com/servo/servo/pull/40913	(@simonwuelker, #40913)	fonts: Don't panic when font information contains invalid UTF-8 (#40913)
+    crash; fix panic with unusual fonts
     # `freetype` gives us `*const c_char` which is not necessarily UTF-8. In some cases we can simply ignore such fonts
     # instead of panicking. (We can also save on allocation when comparing font formats)
     # Testing: Covered by existing tests
@@ -4500,7 +4510,7 @@ https://github.com/servo/servo/pull/40890	(@Taym95, #40890)	Fixes ByteLengthQueu
     #   [ByteLengthQueuingStrategy: size behaves as expected with strange arguments]
     #     expected: TIMEOUT
     # ```
-https://github.com/servo/servo/pull/40895	(@yezhizhen, #40895)	display_list: Fix doc for `ScrollType` (#40895)
+-https://github.com/servo/servo/pull/40895	(@yezhizhen, #40895)	display_list: Fix doc for `ScrollType` (#40895)
     # In #37412 we renamed `ScrollSensitivity` to `ScrollType`. This PR updates the doc.
 >>> 2025-11-28T06:11:01Z
 https://github.com/servo/servo/pull/40857	(@kkoyung, #40857)	script: Add new KeyFormat and KeyUsage for modern algorithms (#40857)
@@ -4509,7 +4519,8 @@ https://github.com/servo/servo/pull/40857	(@kkoyung, #40857)	script: Add new Key
     # This patch adds those new key formats and key usages, preparing for the implementation of the new algorithms.
     # Testing: No behavioral changes in existing cryptographic algorithms. Existing tests suffice.
     # Fixes: Part of #40687
-https://github.com/servo/servo/pull/40447	(@stevennovaryo, #40447)	dom: Focus scroll to the element only if it is not visible (#40447)
++https://github.com/servo/servo/pull/40447	(@stevennovaryo, #40447)	dom: Focus scroll to the element only if it is not visible (#40447)
+    dom; focus no longer scrolls if element is visible
     # Currently when we call a `Focus` we always scroll a focusable element to the center of
     # the container. However, this would causes a different behavior where UAs wouldn't scroll
     # when a focus is called to a visible element. This PR add implementations following the behavior of Firefox
@@ -4617,7 +4628,8 @@ https://github.com/servo/servo/pull/40918	(@mrobinson, #40918)	script: Break the
     # multiprocess mode while causing a panic to happen due to a null pointer
     # dereference. The sad tab appeared after this change, so things seem to work
     # properly still. Testing crashes is tricky with the way we test servo now.
-https://github.com/servo/servo/pull/40916	(@Loirooriol, @mrobinson, #40916)	stylo: Add stacking context damage when outline-width becomes non-zero (#40916)
++https://github.com/servo/servo/pull/40916	(@Loirooriol, @mrobinson, #40916)	stylo: Add stacking context damage when outline-width becomes non-zero (#40916)
+    layout; incremental layout for ‘outline’ changes
     # Bumps Stylo to https://github.com/servo/stylo/pull/274
     # Testing: Adding new test
 +https://github.com/servo/servo/pull/40883	(@mrobinson, @mukilan, #40883)	servoshell: Add architectural support for opening multiple windows (#40883)
@@ -4665,7 +4677,8 @@ https://github.com/servo/servo/pull/40917	(@tharkum, #40917)	html: Add new media
 >>> 2025-11-29T06:19:57Z
 -https://github.com/servo/servo/pull/40934	(@nacho, #40934)	Fix various typos throughout the code base (#40934)
     # null
-https://github.com/servo/servo/pull/40933	(@mrobinson, #40933)	servoshell: Schedule keyboard shortcut exits so that they can be done cleanly (#40933)
++https://github.com/servo/servo/pull/40933	(@mrobinson, #40933)	servoshell: Schedule keyboard shortcut exits so that they can be done cleanly (#40933)
+    crash; fix crashes when exiting servo
     # This is a speculative fix for a crash mentioned by @mukilan[^1]. It will
     # also make moving to a more consistent shutdown model (even one driven by
     # dropping of the `Servo` instance) possible.
@@ -4765,7 +4778,8 @@ https://github.com/servo/servo/pull/40944	(@mrobinson, #40944)	constellation: Br
     #    `Rc`.
     # Testing: This should not change behavior in a way that is observable, so should
     # be covered by existing tests.
-https://github.com/servo/servo/pull/40951	(@mrobinson, #40951)	libservo: Clean up Servo exports and export more at the root (#40951)
++https://github.com/servo/servo/pull/40951	(@mrobinson, #40951)	libservo: Clean up Servo exports and export more at the root (#40951)
+    api; `use servo::*`
     # This change makes it easier for embedders to embed the types that they
     # need by exporting almost everything necessary to use Servo at the root
     # of libservo, apart from a few exceptions. In addition, the `Servo` is moved
@@ -4777,7 +4791,8 @@ https://github.com/servo/servo/pull/40953	(@mrobinson, #40953)	servoshell: Alway
     # This prevents crashes when exiting servoshell in different situations.
     # For instance, this fixes a crash when running WPT tests on some systems.
     # Testing: This fixes an issue when running WPT tests locally.
-https://github.com/servo/servo/pull/40948	(@kkoyung, #40948)	script: Implement import/export key operation of ChaCha20-Poly1305 (#40948)
++https://github.com/servo/servo/pull/40948	(@kkoyung, #40948)	script: Implement import/export key operation of ChaCha20-Poly1305 (#40948)
+    dom; crypto.subtle.importKey("ChaCha20-Poly1305") and exportKey() for ChaCha20-Poly1305 keys
     # Start adding ChaCha20-Poly1305 support to WebCrypto API.
     # This patch implements "import key" operation and "export key" operation of ChaCha20-Poly1305, using the crate
     # `chacha20poly1305` to support the cryptographic calculation.

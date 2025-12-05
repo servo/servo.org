@@ -5,10 +5,25 @@
     - https://github.com/servo/servo/pull/40408	(@mrobinson, #40408)	libservo: Add a fallback clipboard (#40408)
       api
     - https://github.com/servo/servo/pull/40402	(@mrobinson, @atbrakhi, #40402)	libservo: Integrate context menu into the show_embedder_control API (#40402)
-      api; rework context menu api, embedders can now know the position and know what each item does (`show_context_menu(webview, result_sender, title, items)` → `ContextMenu.{id,position,items,select,dismiss}()`)
+      api servoshell; rework context menu api, embedders can now know the position and know what each item does (`show_context_menu(webview, result_sender, title, items)` → `ContextMenu.{id,position,items,select,dismiss}()`)
+    - https://github.com/servo/servo/pull/40501	(@mrobinson, @atbrakhi, #40501)	script: Add context-based context menu options (#40501)
+      api servoshell; copy link, open link in new, copy image link, open image in new, cut, copy, paste, select all
     - https://github.com/servo/servo/pull/40598	(@mrobinson, #40598)	libservo: Add `WebView::can_go_forward` and `WebView::can_go_back` (#40598)
       api servoshell
+    - https://github.com/servo/servo/pull/40607	(@mrobinson, #40607)	libservo: Add `ContextMenuElementInformation` to for the context menu API (#40607)
+      api; element_info() on ContextMenu
+    - https://github.com/servo/servo/pull/40799	(@mrobinson, #40799)	libservo: Remove `Servo::animating()` (#40799)
+      api; removed in favour of RefreshDriver
+    - https://github.com/servo/servo/pull/40951	(@mrobinson, #40951)	libservo: Clean up Servo exports and export more at the root (#40951)
+      api; `use servo::*`
+- crash
+    - https://github.com/servo/servo/pull/40913	(@simonwuelker, #40913)	fonts: Don't panic when font information contains invalid UTF-8 (#40913)
+      crash; fix panic with unusual fonts
+    - https://github.com/servo/servo/pull/40933	(@mrobinson, #40933)	servoshell: Schedule keyboard shortcut exits so that they can be done cleanly (#40933)
+      crash; fix crashes when exiting servo
 - devtools
+    - https://github.com/servo/servo/pull/40328	(@mark-buer, #40328)	devtools: Expose cache status for requests in network monitor. (#40328)
+      devtools
     - https://github.com/servo/servo/pull/40760	(@eerii, #40760)	devtools: Support reloading tab (#40760)
       devtools
 - dom
@@ -54,13 +69,19 @@
       dom; crypto.subtle.digest("SHA3-256"), SHA3-384, SHA3-512; first among major engines!
     - https://github.com/servo/servo/pull/40832	(@kkoyung, #40832)	script: Implement CShake in WebCrypto API (#40832)
       dom; crypto.subtle.digest("cSHAKE128"), cSHAKE256
+    - https://github.com/servo/servo/pull/40447	(@stevennovaryo, #40447)	dom: Focus scroll to the element only if it is not visible (#40447)
+      dom; focus no longer scrolls if element is visible
     - https://github.com/servo/servo/pull/40936	(@kkoyung, #40936)	script: Finishing implementation of Argon2 in WebCrypto (#40936)
       dom; full support for Argon2 including crypto.subtle.deriveBits("Argon2d"), Argon2i, Argon2id (get key length is an internal algorithm)
     - https://github.com/servo/servo/pull/40932	(@kkoyung, #40932)	script: Implement import key operation of Argon2 (#40932)
       dom; roll this into the other Argon2 patch (import key is an internal algorithm)
+    - https://github.com/servo/servo/pull/40948	(@kkoyung, #40948)	script: Implement import/export key operation of ChaCha20-Poly1305 (#40948)
+      dom; crypto.subtle.importKey("ChaCha20-Poly1305") and exportKey() for ChaCha20-Poly1305 keys
 - layout
     - https://github.com/servo/servo/pull/40314	(@simonwuelker, #40314)	script: Enforce exclusivity between <details> elements in the same tree (#40314)
       layout; <details name> exclusivity
+    - https://github.com/servo/servo/pull/40554	(@Loirooriol, #40554)	script: Pass the right base URI to inline sheets (#40554)
+      layout; inline <style> now takes <base> into account
     - https://github.com/servo/servo/pull/34846	(@nicoburns, #34846)	Support `calc()` values in CSS Grid (#34846)
       layout
     - https://github.com/servo/servo/pull/40699	(@mrobinson, @Loirooriol, #40699)	layout: Rebuild the box tree when the `quotes` attribute changes on a pseudo-element (#40699)
@@ -75,9 +96,19 @@
       layout; variable fonts
     - https://github.com/servo/servo/pull/40867	(@simonwuelker, #40867)	fonts: Apply variations for `font-weight`, `font-stretch` (#40867)
       layout; variable fonts
+    - https://github.com/servo/servo/pull/40916	(@Loirooriol, @mrobinson, #40916)	stylo: Add stacking context damage when outline-width becomes non-zero (#40916)
+      layout; incremental layout for ‘outline’ changes
 - perf
+    - https://github.com/servo/servo/pull/40158	(@mrobinson, #40158)	pixels: Store decoded images as RGBA premultiplied data (#40158)
+      perf; faster animated GIF rendering
+    - https://github.com/servo/servo/pull/39384	(@shubhamg13, @boluochoufeng, #39384)	Add support for LargestContentfulPaint PaintMetric (#39384)
+      perf; LCP measurement
+    - https://github.com/servo/servo/pull/39714	(@shubhamg13, #39714)	Add basic `IDL` implementation for `LargestContentfulPaint` (#39714)
+      perf; `observe({type: "largest-contentful-paint"})` on PerformanceObserver
     - https://github.com/servo/servo/pull/40639	(@mrobinson, @vimpunk, #40639)	script: Add support for parsing CSS in parallel (#40639)
       perf
+    - https://github.com/servo/servo/pull/40742	(@webbeef, #40742)	script: Optimize Node::insert (#40742)
+      perf; faster parseFromString() on DOMParser
     - https://github.com/servo/servo/pull/40797	(@Loirooriol, @mrobinson, #40797)	layout: Preserve cached layout results of undamaged descendants (#40797)
       perf; better incremental layout for descendants
     - https://github.com/servo/servo/pull/40795	(@Loirooriol, @mrobinson, #40795)	layout: Preserve cached intrinsic sizes of undamaged descendants (#40795)
@@ -107,10 +138,14 @@
     - https://github.com/servo/servo/pull/40334	(@kkoyung, #40334)	script: Use `base64ct` instead of `base64` in SubtleCrypto (#40334)
       security dom
 - servoshell
+    - https://github.com/servo/servo/pull/40402	(@mrobinson, @atbrakhi, #40402)	libservo: Integrate context menu into the show_embedder_control API (#40402)
+      api servoshell; rework context menu api, embedders can now know the position and know what each item does (`show_context_menu(webview, result_sender, title, items)` → `ContextMenu.{id,position,items,select,dismiss}()`)
     - https://github.com/servo/servo/pull/40306	(@mrobinson, #40306)	servoshell: Add a `VsyncRefreshDriver` for Android (#40306)
       servoshell; use system compositor for vsync
     - https://github.com/servo/servo/pull/40434	(@atbrakhi, @mrobinson, #40434)	servoshell: Implement context menu in servoshell (#40434)
       servoshell; initial context menu (back, forward, reload)
+    - https://github.com/servo/servo/pull/40501	(@mrobinson, @atbrakhi, #40501)	script: Add context-based context menu options (#40501)
+      api servoshell; copy link, open link in new, copy image link, open image in new, cut, copy, paste, select all
     - https://github.com/servo/servo/pull/40598	(@mrobinson, #40598)	libservo: Add `WebView::can_go_forward` and `WebView::can_go_back` (#40598)
       api servoshell
     - https://github.com/servo/servo/pull/40883	(@mrobinson, @mukilan, #40883)	servoshell: Add architectural support for opening multiple windows (#40883)
