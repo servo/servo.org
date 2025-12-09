@@ -7,7 +7,7 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-Landing in [**Servo 0.0.3**](https://github.com/servo/servo/releases/tag/v0.0.3) and our November nightly builds, we now have **context menus** for links, images, and other web content (@atbrakhi, @mrobinson, #40434, #40501), plus several web platform features:
+Landing in [**Servo 0.0.3**](https://github.com/servo/servo/releases/tag/v0.0.3) and our November nightly builds, we now have **context menus** for links, images, and other web content (@atbrakhi, @mrobinson, #40434, #40501), **vsync on Android** (@mrobinson, #40306), plus several web platform features:
 
 - **&lt;video controls>** (@rayguo17, #40578)
 - **&lt;use>** in SVG (@WaterWhisperer, #40684)
@@ -15,6 +15,7 @@ Landing in [**Servo 0.0.3**](https://github.com/servo/servo/releases/tag/v0.0.3)
 - **‘brotli’** in **CompressionStream** and **DecompressionStream** (@Taym95, #40842)
 - **‘display-p3-linear’** in CSS **color()** and **color-mix()** (@Loirooriol, #40525)
 - **calc()** now works in **grid layout** (@nicoburns, #34846)
+- **ResizeObserver** is now enabled by default (@jdm, #40378)
 
 **Font variations** are now applied in **‘font-weight’** and **‘font-stretch’** (@simonwuelker, #40867), fixing a rendering issue in the [Web Engines Hackfest website](https://webengineshackfest.org).
 
@@ -40,7 +41,7 @@ We now have full support for **SHA3-256**, **SHA3-384**, **SHA3-512** (@kkoyung,
 ## Embedding API
 
 **Each webview** can now now have its **own rendering context** (@mrobinson, @mukilan, #40794, #40738, #40721, #40594, #40923).
-This effectively enables full support for **multiple windows**, and you’ll see servoshell make use of that this month.
+This effectively enables full support for **multiple windows**, and we’ve started incorporating that into servoshell (@mrobinson, @mukilan, #40883).
 
 Our previously unused **context menu API** has been replaced with a new, more effective API that includes actions for links, images, and other web content (@mrobinson, @atbrakhi, #40402, #40501, #40607).
 For more details, see the docs for **[ContextMenu](https://doc.servo.org/servo/struct.ContextMenu.html)**, [EmbedderControl::<wbr>ContextMenu](https://doc.servo.org/servo/enum.EmbedderControl.html#variant.ContextMenu), and [WebViewDelegate::<wbr>show_<wbr>embedder_<wbr>control()](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.show_embedder_control).
