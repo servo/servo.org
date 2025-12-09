@@ -7,6 +7,17 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+Landing in [**Servo 0.0.3**](https://github.com/servo/servo/releases/tag/v0.0.3) and our November nightly builds:
+
+- **&lt;video controls>** (@rayguo17, #40578)
+- **&lt;use>** in SVG (@WaterWhisperer, #40684)
+- ☢️ **‘font-optical-sizing’** (@simonwuelker, #40829, #40861, #40884)
+- **‘display-p3-linear’** in CSS **color()** and **color-mix()** (@Loirooriol, #40525)
+- **&lt;details name>** is now exclusive, like radio buttons (@simonwuelker, #40314)
+- **calc()** now works in **grid layout** (@nicoburns, #34846)
+
+**Font variations** are now applied in **‘font-weight’** and **‘font-stretch’** (@simonwuelker, #40867), fixing a rendering issue in the [Web Engines Hackfest website](https://webengineshackfest.org).
+
 @kkoyung has landed some huge improvements in the [**SubtleCrypto API**](https://w3c.github.io/webcrypto/), including some of the more [modern algorithms in this WICG draft](https://wicg.github.io/webcrypto-modern-algos/), and a fix for constant-time base64 (#40334).
 We now have full support for **SHA3-256**, **SHA3-384**, **SHA3-512** (@kkoyung, #40765), **cSHAKE128**, **cSHAKE256** (@kkoyung, #40832), **Argon2d**, **Argon2i**, **Argon2id**, **ChaCha20-Poly1305**, **ECDH**, **ECDSA**, and **X25519**:
 
