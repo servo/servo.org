@@ -15,7 +15,7 @@
     <link href="https://servo.org/twisnov/blog/2025/12/12/november-in-servo/"/>
     <updated>2025-12-12T00:00:00Z</updated>
     <id>https://servo.org/twisnov/blog/2025/12/12/november-in-servo/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;Landing in &lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.0.3&quot;&gt;&lt;strong&gt;Servo 0.0.3&lt;/strong&gt;&lt;/a&gt; and our November nightly builds:&lt;/p&gt;
+    <content xml:lang="en" type="html">&lt;p&gt;Landing in &lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.0.3&quot;&gt;&lt;strong&gt;Servo 0.0.3&lt;/strong&gt;&lt;/a&gt; and our November nightly builds, we now have &lt;strong&gt;context menus&lt;/strong&gt; for links, images, and other web content (@mrobinson, @atbrakhi, #40402, #40501, #40607), plus several web platform features:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&amp;lt;video controls&amp;gt;&lt;/strong&gt; (@rayguo17, #40578)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&amp;lt;use&amp;gt;&lt;/strong&gt; in SVG (@WaterWhisperer, #40684)&lt;/li&gt;
@@ -109,6 +109,18 @@ We now have full support for &lt;strong&gt;SHA3-256&lt;/strong&gt;, &lt;strong&g
 &lt;/figure&gt;
 &lt;p&gt;&lt;strong&gt;&amp;lt;details&amp;gt;&lt;/strong&gt; now fires &lt;strong&gt;‘toggle’&lt;/strong&gt; events (@lukewarlow, #40271), and &lt;strong&gt;&amp;lt;details name&amp;gt;&lt;/strong&gt; is now exclusive, like radio buttons (@simonwuelker, #40314).
 &lt;strong&gt;InputEvent&lt;/strong&gt;, which represents &lt;strong&gt;‘input’&lt;/strong&gt; and &lt;strong&gt;‘beforeinput’&lt;/strong&gt; events, now has &lt;strong&gt;composed&lt;/strong&gt;, &lt;strong&gt;data&lt;/strong&gt;, &lt;strong&gt;isComposing&lt;/strong&gt;, and &lt;strong&gt;inputType&lt;/strong&gt; properties (@excitablesnowball, #39989).&lt;/p&gt;
+&lt;h2 id=&quot;embedding-api&quot; tabindex=&quot;-1&quot;&gt;Embedding API &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisnov/blog/2025/12/12/november-in-servo/#embedding-api&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Each webview&lt;/strong&gt; can now now have its &lt;strong&gt;own rendering context&lt;/strong&gt; (@mrobinson, @mukilan, #40794, #40738, #40721, #40594, #40923).
+This effectively enables full support for &lt;strong&gt;multiple windows&lt;/strong&gt;, and you’ll see servoshell make use of that this month.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://doc.servo.org/servo/struct.WebView.html&quot;&gt;&lt;strong&gt;WebView&lt;/strong&gt;&lt;/a&gt; now has &lt;a href=&quot;https://doc.servo.org/servo/struct.WebView.html#method.can_go_back&quot;&gt;&lt;strong&gt;can_go_back()&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.servo.org/servo/struct.WebView.html#method.can_go_forward&quot;&gt;&lt;strong&gt;can_go_forward()&lt;/strong&gt;&lt;/a&gt; methods, and servoshell now uses those to disable the back and forward buttons (@mrobinson, #40598).&lt;/p&gt;
+&lt;p&gt;Having introduced our new &lt;a href=&quot;https://doc.servo.org/servo/trait.RefreshDriver.html&quot;&gt;&lt;strong&gt;RefreshDriver&lt;/strong&gt;&lt;/a&gt; API in October, we’ve now &lt;strong&gt;removed &lt;a href=&quot;https://doc.servo.org/servo/struct.Servo.html&quot;&gt;Servo&lt;/a&gt;::&lt;wbr /&gt;animating()&lt;/strong&gt; (@mrobinson, #40799) and &lt;strong&gt;&lt;a href=&quot;https://doc.servo.org/servo/trait.ServoDelegate.html&quot;&gt;ServoDelegate&lt;/a&gt;::&lt;wbr /&gt;notify_&lt;wbr /&gt;animating_&lt;wbr /&gt;changed()&lt;/strong&gt; (@mrobinson, #40886), and similarly cleaned up the obsolete and inefficient “animating” state in servoshell (@mrobinson, #40715).&lt;/p&gt;
+&lt;p&gt;We’ve moved virtually all of the useful items in the Servo API to the root of the &lt;code&gt;servo&lt;/code&gt; library crate (@mrobinson, #40951).
+This is a &lt;strong&gt;breaking change&lt;/strong&gt;, but we expect that it will greatly simplify embedding Servo, and it means you can even write &lt;code&gt;use servo::*;&lt;/code&gt; in a pinch.&lt;/p&gt;
+&lt;p&gt;When running Servo without a custom &lt;a href=&quot;https://doc.servo.org/servo/clipboard_delegate/trait.ClipboardDelegate.html&quot;&gt;&lt;strong&gt;ClipboardDelegate&lt;/strong&gt;&lt;/a&gt;, we normally use the system clipboard by default.
+But if there’s no system clipboard, we now have a built-in &lt;strong&gt;fallback clipboard&lt;/strong&gt; (@mrobinson, #40408), rather than having no clipboard at all.
+Note that the fallback clipboard is very limited, as it can only store text and does not work across processes.&lt;/p&gt;
 &lt;style&gt;
     ._correction {
         max-width: 33em;
