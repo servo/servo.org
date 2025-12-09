@@ -7,7 +7,7 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-Landing in [**Servo 0.0.3**](https://github.com/servo/servo/releases/tag/v0.0.3) and our November nightly builds, we now have **context menus** for links, images, and other web content (@mrobinson, @atbrakhi, #40402, #40501, #40607), plus several web platform features:
+Landing in [**Servo 0.0.3**](https://github.com/servo/servo/releases/tag/v0.0.3) and our November nightly builds, we now have **context menus** for links, images, and other web content (@atbrakhi, @mrobinson, #40434, #40501), plus several web platform features:
 
 - **&lt;video controls>** (@rayguo17, #40578)
 - **&lt;use>** in SVG (@WaterWhisperer, #40684)
@@ -41,6 +41,9 @@ We now have full support for **SHA3-256**, **SHA3-384**, **SHA3-512** (@kkoyung,
 
 **Each webview** can now now have its **own rendering context** (@mrobinson, @mukilan, #40794, #40738, #40721, #40594, #40923).
 This effectively enables full support for **multiple windows**, and you’ll see servoshell make use of that this month.
+
+Our previously unused **context menu API** has been replaced with a new, more effective API that includes actions for links, images, and other web content (@mrobinson, @atbrakhi, #40402, #40501, #40607).
+For more details, see the docs for **[ContextMenu](https://doc.servo.org/servo/struct.ContextMenu.html)**, [EmbedderControl::<wbr>ContextMenu](https://doc.servo.org/servo/enum.EmbedderControl.html#variant.ContextMenu), and [WebViewDelegate::<wbr>show_<wbr>embedder_<wbr>control()](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.show_embedder_control).
 
 [**WebView**](https://doc.servo.org/servo/struct.WebView.html) now has [**can_go_back()**](https://doc.servo.org/servo/struct.WebView.html#method.can_go_back) and [**can_go_forward()**](https://doc.servo.org/servo/struct.WebView.html#method.can_go_forward) methods, and servoshell now uses those to disable the back and forward buttons (@mrobinson, #40598).
 
