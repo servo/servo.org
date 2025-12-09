@@ -12,8 +12,8 @@ Landing in [**Servo 0.0.3**](https://github.com/servo/servo/releases/tag/v0.0.3)
 - **&lt;video controls>** (@rayguo17, #40578)
 - **&lt;use>** in SVG (@WaterWhisperer, #40684)
 - ☢️ **‘font-optical-sizing’** (@simonwuelker, #40829, #40861, #40884)
+- **‘brotli’** in **CompressionStream** and **DecompressionStream** (@Taym95, #40842)
 - **‘display-p3-linear’** in CSS **color()** and **color-mix()** (@Loirooriol, #40525)
-- **&lt;details name>** is now exclusive, like radio buttons (@simonwuelker, #40314)
 - **calc()** now works in **grid layout** (@nicoburns, #34846)
 
 **Font variations** are now applied in **‘font-weight’** and **‘font-stretch’** (@simonwuelker, #40867), fixing a rendering issue in the [Web Engines Hackfest website](https://webengineshackfest.org).
@@ -33,6 +33,9 @@ We now have full support for **SHA3-256**, **SHA3-384**, **SHA3-512** (@kkoyung,
 | ECDSA | n/a | #40536 | #40553 | #40523 | #40591 | #40557 |
 | X25519 | #40497 | #40421 | #40480 | #40398 | n/a | n/a |
 </figure>
+
+**&lt;details>** now fires **‘toggle’** events (@lukewarlow, #40271), and **&lt;details name>** is now exclusive, like radio buttons (@simonwuelker, #40314).
+**InputEvent**, which represents **‘input’** and **‘beforeinput’** events, now has **composed**, **data**, **isComposing**, and **inputType** properties (@excitablesnowball, #39989).
 
 <style>
     ._correction {
