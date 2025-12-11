@@ -7,7 +7,7 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-Landing in [**Servo 0.0.3**](https://github.com/servo/servo/releases/tag/v0.0.3) and our November nightly builds, we now have **context menus** for links, images, and other web content (@atbrakhi, @mrobinson, #40434, #40501), **vsync on Android** (@mrobinson, #40306), plus several web platform features:
+Landing in [**Servo 0.0.3**](https://github.com/servo/servo/releases/tag/v0.0.3) and our November nightly builds, we now have **context menus** for links, images, and other web content (@atbrakhi, @mrobinson, #40434, #40501), **vsync on Android** (@mrobinson, #40306), **light mode** for the **new tab page** (@arihant2math, #40272), plus several web platform features:
 
 - **&lt;video controls>** (@rayguo17, #40578)
 - **&lt;use>** in SVG (@WaterWhisperer, #40684)
@@ -56,6 +56,10 @@ This is a **breaking change**, but we expect that it will greatly simplify embed
 When running Servo without a custom [**ClipboardDelegate**](https://doc.servo.org/servo/clipboard_delegate/trait.ClipboardDelegate.html), we normally use the system clipboard by default.
 But if there’s no system clipboard, we now have a built-in **fallback clipboard** (@mrobinson, #40408), rather than having no clipboard at all.
 Note that the fallback clipboard is very limited, as it can only store text and does not work across processes.
+
+## Performance and stability
+
+We’ve fixed a bug causing **nytimes.com** to hang (@jdm, #40811), as well as fixing crashes in **[Speedometer 3.0](https://www.browserbench.org/Speedometer3.0/)** and **[3.1](https://www.browserbench.org/Speedometer3.1/)** (@Narfinger, #40459), grid layout (@nicoburns, #40821), the fonts subsystem (@simonwuelker, #40913), XPath (@simonwuelker, #40411), ReadableStream (@Taym95, #40911), AudioContext (@Taym95, #40729), and when exiting Servo (@mrobinson, #40933).
 
 <style>
     ._correction {
