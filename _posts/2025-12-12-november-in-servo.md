@@ -59,6 +59,13 @@ Note that the fallback clipboard is very limited, as it can only store text and 
 
 ## Performance and stability
 
+Servo now **parses CSS in parallel** with script and layout (@mrobinson, @vimpunk, #40639, #40556), and can now measure [**Largest Contentful Paint**](https://web.dev/articles/lcp) in PerformanceObserver as well as in our internal profiling tools (@shubhamg13, @boluochoufeng, #39714, #39384).
+
+**Just-in-time compilation** (JIT) is now **optional** (@jschwe, #37972), which can be useful in situations where generating native code is forbidden by policy or unwanted for other reasons.
+
+We’ve improved the performance of incremental layout (@Loirooriol, @mrobinson, #40795, #40797), touch input (@kongbai1996, #40637), animated GIF rendering (@mrobinson, #40158), the prefs subsystem (@webbeef, #40775), and parseFromString() on DOMParser (@webbeef, #40742).
+We also use fewer IPC resources when internal profiling features are disabled (@lumiscosity, #40823).
+
 We’ve fixed a bug causing **nytimes.com** to hang (@jdm, #40811), as well as fixing crashes in **[Speedometer 3.0](https://www.browserbench.org/Speedometer3.0/)** and **[3.1](https://www.browserbench.org/Speedometer3.1/)** (@Narfinger, #40459), grid layout (@nicoburns, #40821), the fonts subsystem (@simonwuelker, #40913), XPath (@simonwuelker, #40411), ReadableStream (@Taym95, #40911), AudioContext (@Taym95, #40729), and when exiting Servo (@mrobinson, #40933).
 
 <style>

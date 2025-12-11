@@ -71,7 +71,7 @@ https://github.com/servo/servo/pull/40309	(@mukilan, @mrobinson, #40309)	composi
     # `LayoutContext` rather than threading it via the `InlineFormattingContextBuilder`.
     # Testing: Should preserve existing behavior, so covered by existing tests.
 +https://github.com/servo/servo/pull/40158	(@mrobinson, #40158)	pixels: Store decoded images as RGBA premultiplied data (#40158)
-    perf; faster animated GIF rendering
+    ;perf; faster animated GIF rendering
     # Canvas expects input data to be in RGBA premultiplied format and
     # WebRender already supports RGBA and BGRA data as long as they are
     # premultiplied. Pre-multiplying up front allows:
@@ -93,7 +93,7 @@ https://github.com/servo/servo/pull/40309	(@mukilan, @mrobinson, #40309)	composi
     # is important anyway due to the amount that it reduces memory and file descriptor usage
     # as well as the cost of copying image data so much in memory.
 +https://github.com/servo/servo/pull/39384	(@shubhamg13, @boluochoufeng, #39384)	Add support for LargestContentfulPaint PaintMetric (#39384)
-    perf; LCP measurement
+    ;perf; LCP measurement
     # Steps for calculating LCP:
     # 1. When the pref for `largest_contentful_paint_enabled` is enabled, `LargestContentfulPaintCandidateCollector`
     # is created once per LayoutThread using `viewport_size`.
@@ -333,7 +333,7 @@ https://github.com/servo/servo/pull/40128	(@aaron-wgd, #40128)	servoshell/deskto
     # Fixes: #40348.
 >>> 2025-11-07T06:18:32Z
 +https://github.com/servo/servo/pull/39714	(@shubhamg13, #39714)	Add basic `IDL` implementation for `LargestContentfulPaint` (#39714)
-    perf; `observe({type: "largest-contentful-paint"})` on PerformanceObserver
+    ;perf; `observe({type: "largest-contentful-paint"})` on PerformanceObserver
     # Add basic `IDL` implementation for `LargestContentfulPaint`
     # Testing: Tested locally
     # Fixes: N/A
@@ -1755,7 +1755,7 @@ https://github.com/servo/servo/pull/39510	(@Taym95, #39510)	Implement read loopi
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
 +https://github.com/servo/servo/pull/40556	(@mrobinson, #40556)	script: Have `FetchResponseListener::process_response_eof` consume the listener (#40556)
-    perf; part of parallel CSS parsing
+    ;perf; part of parallel CSS parsing
     # The goal of this change is to prevent having to copy so much data out of
     # listeners when a fetch completes, which will be particularly important
     # for off-the-main thread parsing of CSS (see #22478). This change has
@@ -2738,7 +2738,7 @@ https://github.com/servo/servo/pull/40650	(@kkoyung, #40650)	script: Use `hkdf` 
     # our WebCrypto API, and allowing variable length output. This helps to make those HKDF-related WPT tests pass.
     # Testing: Pass some WPT tests that were expected to fail.
 +https://github.com/servo/servo/pull/40639	(@mrobinson, @vimpunk, #40639)	script: Add support for parsing CSS in parallel (#40639)
-    perf; parallel CSS parsing
+    ;perf; parallel CSS parsing
     # This change is a rework of #22478, originally authored by @vimpunk.
     # It adds parsing of CSS in parallel with the main script thread. The
     # big idea here is that when the transfer of stylesheet bytes is
@@ -2928,7 +2928,7 @@ https://github.com/servo/servo/pull/40757	(@kongbai1996, #40757)	compositing: Do
     # Testing: Refactor
     # Fixes: #39053
 +https://github.com/servo/servo/pull/40742	(@webbeef, #40742)	script: Optimize Node::insert (#40742)
-    perf; faster parseFromString() on DOMParser
+    ;perf; faster parseFromString() on DOMParser
     # - Change how the static node list is built to prevent a second iteration of new_nodes
     # - Memoize some invariants of the parent
     # Testing: No wpt regressions: https://github.com/webbeef/servo/actions/runs/19493174678
@@ -3245,7 +3245,7 @@ https://github.com/servo/servo/pull/40690	(@mrobinson, @mukilan, #40690)	composi
     # Fixes https://github.com/servo/servo/issues/40452
     # Fixes https://github.com/servo/servo/issues/31414
 +https://github.com/servo/servo/pull/40637	(@kongbai1996, #40637)	Compositor: Add touch compatibility handling for mouse move events (#40637)
-    perf
+    ;perf
     # Every time a touchmove event is added, it updates the cursor, causing frequent hit testing and affecting the
     # performance of scrolling. Adding a flag to mark the current touchmove is done for compatibility with touch events. In
     # this case, the last_mouse_move_position will not be updated.
@@ -3537,12 +3537,12 @@ https://github.com/servo/servo/pull/40666	(@arihant2math, @yezhizhen, #40666)	in
     # This avoids a warning when compiling tests.
     # Testing: Not needed, no behavior change
 +https://github.com/servo/servo/pull/40797	(@Loirooriol, @mrobinson, #40797)	layout: Preserve cached layout results of undamaged descendants (#40797)
-    perf; better incremental layout for descendants
+    ;perf; better incremental layout for descendants
     # We were previously clearing the cached layout results when the element, an ancestor, or a child had relayout
     # damage. Now we will only clear the cache if the relayout damage is in the element or a descendant.
     # Testing: Unneeded, no behavior change
 +https://github.com/servo/servo/pull/40795	(@Loirooriol, @mrobinson, #40795)	layout: Preserve cached intrinsic sizes of undamaged descendants (#40795)
-    perf; better incremental layout for descendants
+    ;perf; better incremental layout for descendants
     # We were previously clearing the cached intrinsic inline sizes when the element, an ancestor, or a child had relayout
     # damage. However, intrinsic sizes don't depend on ancestors for the most part, so now we will only clear the cache
     # if the relayout damage is in the element or a descendant.
@@ -3617,7 +3617,7 @@ https://github.com/servo/servo/pull/40788	(@mukilan, @mrobinson, #40788)	composi
     # experimental features.
     # Testing: No change of behavior.
 +https://github.com/servo/servo/pull/37972	(@jschwe, #37972)	Add feature to disable JIT support in mozjs at compile-time (#37972)
-    perf
+    ;perf
     # When the `js_jit` feature is not selected, this reduces the binary size from 89 to 80 MiB for linux
     # production-stripped.
     # By default, we still enable JIT, but in scenarios where JIT is not required or not allowed by the system, the size
@@ -3627,7 +3627,7 @@ https://github.com/servo/servo/pull/40788	(@mukilan, @mrobinson, #40788)	composi
     # `--no-default-features`, `vello-cpu` is unconditionally selected by servoshell (identical to previous behavior).
     # Testing: The default behavior is unchanged. The HarmonyOS CI job does test with `--no-default-features`
 +https://github.com/servo/servo/pull/40775	(@webbeef, #40775)	dom: cache preference access in Document (#40775)
-    perf
+    ;perf
     # They showed up in some profile due to the RwLock access.
     # Testing: Green wpt tests: https://github.com/webbeef/servo/actions/runs/19559457895/job/56010036063
 >>> 2025-11-23T06:03:05Z
@@ -3635,7 +3635,7 @@ https://github.com/servo/servo/pull/40788	(@mukilan, @mrobinson, #40788)	composi
     # Automated downstream sync of changes from upstream as of 23-11-2025
     # [no-wpt-sync]
 +https://github.com/servo/servo/pull/40823	(@lumiscosity, #40823)	Don't spawn a channel for ProfilerChan when profiling is off (#40823)
-    perf; reduce IPC resources
+    ;perf; reduce IPC resources
     # ProfilerChan now takes an Option<> in order to avoid spawning a channel when unnecessary.
     # Testing: Manual (-p and --profiler-trace-path options still work with these changes).
     # Fixes: #40810
