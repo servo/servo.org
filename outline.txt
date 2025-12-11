@@ -1,38 +1,13 @@
 - a11y
     - https://github.com/servo/servo/pull/40925	(@lukewarlow, #40925)	servoshell: Add proper labels to UI elements (#40925)
       a11y
-- api
-    - DONE https://github.com/servo/servo/pull/40408	(@mrobinson, #40408)	libservo: Add a fallback clipboard (#40408)
-      api
-    - DONE https://github.com/servo/servo/pull/40402	(@mrobinson, @atbrakhi, #40402)	libservo: Integrate context menu into the show_embedder_control API (#40402)
-      api servoshell; rework context menu api, embedders can now know the position and know what each item does (`show_context_menu(webview, result_sender, title, items)` → `ContextMenu.{id,position,items,select,dismiss}()`)
-    - DONE https://github.com/servo/servo/pull/40501	(@mrobinson, @atbrakhi, #40501)	script: Add context-based context menu options (#40501)
-      api servoshell; copy link, open link in new, copy image link, open image in new, cut, copy, paste, select all
-    - DONE https://github.com/servo/servo/pull/40598	(@mrobinson, #40598)	libservo: Add `WebView::can_go_forward` and `WebView::can_go_back` (#40598)
-      api servoshell
-    - DONE https://github.com/servo/servo/pull/40738	(@mrobinson, @mukilan, #40738)	compositing: Make `RefreshDriver` per-`RenderingContext` (#40738)
-      api; part of per-webview RenderingContext
-    - DONE https://github.com/servo/servo/pull/40721	(@mrobinson, @mukilan, #40721)	compositing: Allow WebGL contexts to have different Surfman devices (#40721)
-      api; part of per-webview RenderingContext
-    - DONE https://github.com/servo/servo/pull/40715	(@mrobinson, #40715)	servoshell: Always use `ControlFlow::Wait` on winit (#40715)
-      api; removed in favour of RefreshDriver
-    - DONE https://github.com/servo/servo/pull/40607	(@mrobinson, #40607)	libservo: Add `ContextMenuElementInformation` to for the context menu API (#40607)
-      api; element_info() on ContextMenu
-    - DONE https://github.com/servo/servo/pull/40594	(@mukilan, @mrobinson, #40594)	compositing: Allow WebGL contexts to have different Surfman devices (#40594)
-      api; part of per-webview RenderingContext
-    - DONE https://github.com/servo/servo/pull/40794	(@mrobinson, #40794)	libservo: Have `WebView` take a `RenderingContext` rather than `Servo` (#40794)
-      api; per-webview rendering contexts (big part of support for multiple windows)
-    - DONE https://github.com/servo/servo/pull/40799	(@mrobinson, #40799)	libservo: Remove `Servo::animating()` (#40799)
-      api; removed in favour of RefreshDriver
-    - DONE https://github.com/servo/servo/pull/40886	(@mrobinson, #40886)	libservo: Remove `ServoDelegate::notify_animating_changed` (#40886)
-      api; removed in favour of RefreshDriver
-    - DONE https://github.com/servo/servo/pull/40923	(@mrobinson, #40923)	libservo: Starting removing the multi-document interface API (#40923)
-      api; remove old multiple webview features in favour of per-webview RenderingContext
-    - DONE https://github.com/servo/servo/pull/40951	(@mrobinson, #40951)	libservo: Clean up Servo exports and export more at the root (#40951)
-      api; `use servo::*`
 - crash
+    - https://github.com/servo/servo/pull/40411	(@simonwuelker, #40411)	xpath: Handle OOB conditions and non-char-boundaries in `substring` (#40411)
+      crash
     - https://github.com/servo/servo/pull/40459	(@Narfinger, #40459)	net: Do not implement `Serialize`/`Deserialize` for `RasterImage` and introduce``SharedRasterImage` (#40459)
       crash; fix crash in Speedometer3.1
+    - https://github.com/servo/servo/pull/40729	(@Taym95, #40729)	Fix RefCell already borrowed panic in HTMLMediaElement::set_audio_renderer (#40729)
+      crash
     - https://github.com/servo/servo/pull/40821	(@nicoburns, #40821)	Upgrade Taffy to v0.9.2 (#40821)
       crash; fix panic in grid layout
     - https://github.com/servo/servo/pull/40913	(@simonwuelker, #40913)	fonts: Don't panic when font information contains invalid UTF-8 (#40913)
@@ -41,8 +16,14 @@
       crash; fix panic in ReadableStream
     - https://github.com/servo/servo/pull/40933	(@mrobinson, #40933)	servoshell: Schedule keyboard shortcut exits so that they can be done cleanly (#40933)
       crash; fix crashes when exiting servo
+    - https://github.com/servo/servo/pull/40953	(@mrobinson, #40953)	servoshell: Always exit via `RunningAppState::schedule_exit` (#40953)
+      crash
 - devtools
     - https://github.com/servo/servo/pull/40328	(@mark-buer, #40328)	devtools: Expose cache status for requests in network monitor. (#40328)
+      devtools
+    - https://github.com/servo/servo/pull/40428	(@eerii, #40428)	tools: Use ISO8601 timestamps and filter ports correctly in the Devtools parser (#40428)
+      devtools
+    - https://github.com/servo/servo/pull/40489	(@eerii, #40489)	tools: Remove wrapped JSON message in the DevTools parser (#40489)
       devtools
     - https://github.com/servo/servo/pull/40760	(@eerii, #40760)	devtools: Support reloading tab (#40760)
       devtools
@@ -53,15 +34,21 @@
       dom; check how partial is partial
     - https://github.com/servo/servo/pull/40304	(@WaterWhisperer, #40304)	script/layout: Implement Element.currentCSSZoom attribute (#40304)
       dom; currentCSSZoom property on Element
-    - DONE https://github.com/servo/servo/pull/40378	(@jdm, #40378)	config: Enable ResizeObserver by default. (#40378)
-      dom
     - https://github.com/servo/servo/pull/40768	(@simonwuelker, #40768)	script: Add messages to exceptions thrown in Element::attachShadow (#40768)
+      dom; exception messages
+    - https://github.com/servo/servo/pull/40745	(@d-kraus, #40745)	script: Add message to Dom exception Error::NotSupported (#40745)
       dom; exception messages
     - https://github.com/servo/servo/pull/40636	(@mukilan, #40636)	net: Relax the SVG content type detection logic. (#40636)
       dom; fixed SVG rendering with Content-Type parameters
+    - https://github.com/servo/servo/pull/40811	(@jdm, #40811)	script: Improve spec-compliance of Performance resource timing entries (#40811)
+      dom; fix hang on nytimes.com
     - https://github.com/servo/servo/pull/40447	(@stevennovaryo, #40447)	dom: Focus scroll to the element only if it is not visible (#40447)
       dom; focus no longer scrolls if element is visible
 - layout
+    - https://github.com/servo/servo/pull/40449	(@mrobinson, #40449)	script: Also set the `Theme` on incomplete loads (#40449)
+      layout
+    - https://github.com/servo/servo/pull/40432	(@mrobinson, #40432)	script: Eagerly update the `Device` in Layout when it changes (#40432)
+      layout
     - https://github.com/servo/servo/pull/40554	(@Loirooriol, #40554)	script: Pass the right base URI to inline sheets (#40554)
       layout; inline <style> now takes <base> into account
     - https://github.com/servo/servo/pull/40699	(@mrobinson, @Loirooriol, #40699)	layout: Rebuild the box tree when the `quotes` attribute changes on a pseudo-element (#40699)
@@ -77,8 +64,10 @@
       perf; LCP measurement
     - https://github.com/servo/servo/pull/39714	(@shubhamg13, #39714)	Add basic `IDL` implementation for `LargestContentfulPaint` (#39714)
       perf; `observe({type: "largest-contentful-paint"})` on PerformanceObserver
+    - https://github.com/servo/servo/pull/40556	(@mrobinson, #40556)	script: Have `FetchResponseListener::process_response_eof` consume the listener (#40556)
+      perf; part of parallel CSS parsing
     - https://github.com/servo/servo/pull/40639	(@mrobinson, @vimpunk, #40639)	script: Add support for parsing CSS in parallel (#40639)
-      perf
+      perf; parallel CSS parsing
     - https://github.com/servo/servo/pull/40742	(@webbeef, #40742)	script: Optimize Node::insert (#40742)
       perf; faster parseFromString() on DOMParser
     - https://github.com/servo/servo/pull/40797	(@Loirooriol, @mrobinson, #40797)	layout: Preserve cached layout results of undamaged descendants (#40797)
@@ -89,6 +78,8 @@
       perf
     - https://github.com/servo/servo/pull/40775	(@webbeef, #40775)	dom: cache preference access in Document (#40775)
       perf
+    - https://github.com/servo/servo/pull/40823	(@lumiscosity, #40823)	Don't spawn a channel for ProfilerChan when profiling is off (#40823)
+      perf; reduce IPC resources
 - quality
     - https://github.com/servo/servo/pull/40494	(@mrobinson, #40494)	script: Wrap unsafe code in `scriptruntime.rs` in `unsafe {}` (#40494)
       quality
@@ -111,19 +102,6 @@
 - security
     - https://github.com/servo/servo/pull/40725	(@mrobinson, #40725)	script: Use a `WeakRef` for references to `WebGLRenderingContext` (#40725)
       security; fix use-after-free in WebGL
-- servoshell
-    - DONE https://github.com/servo/servo/pull/40402	(@mrobinson, @atbrakhi, #40402)	libservo: Integrate context menu into the show_embedder_control API (#40402)
-      api servoshell; rework context menu api, embedders can now know the position and know what each item does (`show_context_menu(webview, result_sender, title, items)` → `ContextMenu.{id,position,items,select,dismiss}()`)
-    - DONE https://github.com/servo/servo/pull/40306	(@mrobinson, #40306)	servoshell: Add a `VsyncRefreshDriver` for Android (#40306)
-      servoshell; use system compositor for vsync
-    - DONE https://github.com/servo/servo/pull/40434	(@atbrakhi, @mrobinson, #40434)	servoshell: Implement context menu in servoshell (#40434)
-      servoshell; initial context menu (back, forward, reload)
-    - DONE https://github.com/servo/servo/pull/40501	(@mrobinson, @atbrakhi, #40501)	script: Add context-based context menu options (#40501)
-      api servoshell; copy link, open link in new, copy image link, open image in new, cut, copy, paste, select all
-    - DONE https://github.com/servo/servo/pull/40598	(@mrobinson, #40598)	libservo: Add `WebView::can_go_forward` and `WebView::can_go_back` (#40598)
-      api servoshell
-    - DONE https://github.com/servo/servo/pull/40883	(@mrobinson, @mukilan, #40883)	servoshell: Add architectural support for opening multiple windows (#40883)
-      servoshell; towards multiple windows
 - testing
     - https://github.com/servo/servo/pull/40291	(@mrobinson, #40291)	wpt: Enable WebDriver by default when running WPT (#40291)
       testing; testdriver tests enabled, webdriver now enabled by default (`--product servo` to opt out)
@@ -131,3 +109,8 @@
       testing
     - https://github.com/servo/servo/pull/39897	(@jschwe, #39897)	Upload junit report of unit-tests in CI  (#39897)
       testing
+    - https://github.com/servo/servo/pull/40709	(@jdm, #40709)	servodriver: Clear cookies between tests. (#40709)
+      testing
+- webdriver
+    - https://github.com/servo/servo/pull/40303	(@yezhizhen, #40303)	servoshell: Implement `WebDriverCommandMsg::TakeScreenshot` for egl (#40303)
+      webdriver
