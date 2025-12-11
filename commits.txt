@@ -2676,7 +2676,8 @@ https://github.com/servo/servo/pull/40616	(@TimvdLippe, #40616)	Implement protoc
     # Add scroll and fling trace.
     # Testing: There are no related tests available for now; we will add a test item for frame rate statistics on CI later.
     # Fixes: NA
-https://github.com/servo/servo/pull/40618	(@mrobinson, #40618)	script: Issue resource timing for stylesheets before the "load" event (#40618)
++https://github.com/servo/servo/pull/40618	(@mrobinson, #40618)	script: Issue resource timing for stylesheets before the "load" event (#40618)
+    perf; part of parallel CSS parsing
     # Tests seem to assume that resource timing is available during the "load"
     # event. Doing so causes some tests to pass and others to fail, which
     # appear to have been false passes.
@@ -2685,7 +2686,7 @@ https://github.com/servo/servo/pull/40618	(@mrobinson, #40618)	script: Issue res
     # another thread for parsing.
     # Testing: This change updates WPT test results.
 >>> 2025-11-16T06:14:11Z
-https://github.com/servo/servo/pull/40455	(@yezhizhen, #40455)	servodriver: Shut down Servo elegantly when all tests finish (#40455)
+-https://github.com/servo/servo/pull/40455	(@yezhizhen, #40455)	servodriver: Shut down Servo elegantly when all tests finish (#40455)
     # Previously, we always kill the instance when tests finish instead of normally shutting down. That blocked clean-ups
     # works, such as Code Coverage we wanted to add, and other things I'm not aware of.
     # Testing: We have tested for a week and checked the logs of CI to confirm it works normally now.
@@ -2696,17 +2697,18 @@ https://github.com/servo/servo/pull/40455	(@yezhizhen, #40455)	servodriver: Shut
     # Minor typo.
     # Testing: WPT
     # Fixes: WPT Tests
-https://github.com/servo/servo/pull/38286	(@sagudev, #38286)	canvas: Clear bitmap without transform (#38286)
+-https://github.com/servo/servo/pull/38286	(@sagudev, #38286)	canvas: Clear bitmap without transform (#38286)
     # We only need to clear the viewport and with wrong transform this will not do.
     # Testing: Existing WPT tests
-https://github.com/servo/servo/pull/40657	(@simonwuelker, #40657)	script: Don't rely on Attr nodes when communicating with layout (#40657)
++https://github.com/servo/servo/pull/40657	(@simonwuelker, #40657)	script: Don't rely on Attr nodes when communicating with layout (#40657)
+    perf; avoid creating Attr nodes unless using getAttributeNode() or XPath
     # When script is looking up an attribute for layout then it only needs to care about the attribute value. The
     # `Attr` node itself is not required. If we want to lazily construct attribute nodes in the future
     # (https://github.com/servo/servo/issues/36697) then we should use `Attr` as little as possible.
     # This also ends up simplifying the code by accident.
     # Testing: No behaviour change intended, regressions are covered by existing tests.
     # Part of https://github.com/servo/servo/issues/36697
-https://github.com/servo/servo/pull/40646	(@mrobinson, #40646)	script: Eliminate duplicate quirks mode origin check in stylesheet loader (#40646)
+-https://github.com/servo/servo/pull/40646	(@mrobinson, #40646)	script: Eliminate duplicate quirks mode origin check in stylesheet loader (#40646)
     # This was due to the fact that two PRs doing this landed around the same
     # time. This PR eliminates the duplicate check.
     # Testing: This should not change behavior so is covered by existing tests.
@@ -2726,7 +2728,7 @@ https://github.com/servo/servo/pull/40646	(@mrobinson, #40646)	script: Eliminate
     # https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes#configuring-a
     # utomatically-generated-release-notes
     # Testing: Not tested, no impact on servo itself.
-https://github.com/servo/servo/pull/40650	(@kkoyung, #40650)	script: Use `hkdf` crate for HKDF in WebCrypto (#40650)
+-https://github.com/servo/servo/pull/40650	(@kkoyung, #40650)	script: Use `hkdf` crate for HKDF in WebCrypto (#40650)
     # We currently use the crate `aws-lc-rs` for HKDF in the WebCrypto API. When generating output
     # bytes from the output of HKDF-Expand operation (OKM, Output Key Material), it enforces the
     # requested output length must match the length of key type (see error condition of `Okm::fill`
@@ -2761,7 +2763,7 @@ https://github.com/servo/servo/pull/40650	(@kkoyung, #40650)	script: Use `hkdf` 
     # by existing tests.
     # Fixes: #20721
     # Closes: #22478
-https://github.com/servo/servo/pull/40649	(@WaterWhisperer, #40649)	script: Remove unnecessary `Trusted` wrapper in `RemovableDomEventListener` (#40649)
+-https://github.com/servo/servo/pull/40649	(@WaterWhisperer, #40649)	script: Remove unnecessary `Trusted` wrapper in `RemovableDomEventListener` (#40649)
     #  Replace `Trusted` with `Dom` and add the appropriate crown attribute.
     # Testing: `./mach build --use-crown` succeed and no difference in behaviour when running `./mach test-wpt
     # tests/wpt/tests/dom/abort`
@@ -2862,7 +2864,8 @@ https://github.com/servo/servo/pull/40649	(@WaterWhisperer, #40649)	script: Remo
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
 -https://github.com/servo/servo/pull/40769  (@Loirooriol, #40769)   layout: Cleanup for replaced elements with widgets (#40769)
-https://github.com/servo/servo/pull/40762	(@simonwuelker, #40762)	script: Don't crash when encountering unexpected node types in `Range::createContextualFragment` (#40762)
++https://github.com/servo/servo/pull/40762	(@simonwuelker, #40762)	script: Don't crash when encountering unexpected node types in `Range::createContextualFragment` (#40762)
+    crash
     # The spec says that all node types other than element, text and comment should be treated as `None`. We were
     # panicking on a few instead.
     # Testing: This change adds a simple crashtest
@@ -2890,7 +2893,7 @@ https://github.com/servo/servo/pull/40433	(@mrobinson, #40433)	paint: Do trigger
     # for the SHA-3 calculation.
     # Testing: Pass WPT tests that were expected to fail.
     # Fixes: Part of #40687
-https://github.com/servo/servo/pull/40763	(@tharkum, #40763)	html: The queued <media> `volumechange` event should be cancellable (#40763)
+-https://github.com/servo/servo/pull/40763	(@tharkum, #40763)	html: The queued <media> `volumechange` event should be cancellable (#40763)
     # Following the HTML specification, on the `volume` or `mute` attrubute changes the user agent must queue a media
     # element task given the media element to fire an event named `volumechange` at the media element (the `generation_id`
     # value will be captured to allow cancel this task - `media-element-load-algorithm` steps 3-5)
@@ -2904,7 +2907,8 @@ https://github.com/servo/servo/pull/40763	(@tharkum, #40763)	html: The queued <m
     devtools
     # Allows to use the reload button from the top bar of `about:debugging`.
     # Testing: Manual testing.
-https://github.com/servo/servo/pull/40757	(@kongbai1996, #40757)	compositing: Do not set scroll offsets of zero when restoring scroll offsets in new display lists (#40757)
++https://github.com/servo/servo/pull/40757	(@kongbai1996, #40757)	compositing: Do not set scroll offsets of zero when restoring scroll offsets in new display lists (#40757)
+    perf
     # This results in a significant reduction in the number of `FrameMsg::SetScrollOffsets`, which in turn greatly
     # reduces the number of `set_scroll_offsets` calls in the WebRender backend. This is beneficial for performance.
     # Testing: This is an attempt to increase performance, so is covered by existing tests.
@@ -2933,7 +2937,7 @@ https://github.com/servo/servo/pull/40757	(@kongbai1996, #40757)	compositing: Do
     # - Memoize some invariants of the parent
     # Testing: No wpt regressions: https://github.com/webbeef/servo/actions/runs/19493174678
     # This improves the `parseFromString()` benchmark by ~7% on my machine.
-https://github.com/servo/servo/pull/40473	(@monissaJ, @jschwe, #40473)	ohos CI: Add webdriver based scenario tests (#40473)
+-https://github.com/servo/servo/pull/40473	(@monissaJ, @jschwe, #40473)	ohos CI: Add webdriver based scenario tests (#40473)
     # Add webdriver based scripts to run scenario tests on OpenHarmony devices, with the purpose of testing functionality
     # in CI. For now passing these tests will not be enforced, as we first need to see how reliable the CI tests are in
     # daily usage.
@@ -3035,7 +3039,7 @@ https://github.com/servo/servo/pull/40473	(@monissaJ, @jschwe, #40473)	ohos CI: 
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/40737	(@mrobinson, @mukilan, #40737)	compositor: Share the `WebGpuExternalImageMap` among all `Painter`s (#40737)
+-https://github.com/servo/servo/pull/40737	(@mrobinson, @mukilan, #40737)	compositor: Share the `WebGpuExternalImageMap` among all `Painter`s (#40737)
     # This is required so that there can be multiple `WebGpuExternalImages`
     # for a single `Constellation`.
     # Testing: This should not change behavior so is covered by existing tests.
@@ -3048,7 +3052,8 @@ https://github.com/servo/servo/pull/40737	(@mrobinson, @mukilan, #40737)	composi
     # Testing: This shouldn't change behavior and thus is covered by existing tests.
 -https://github.com/servo/servo/pull/40739	(@sagudev, #40739)	CI: only upload test results to codecov if unit-test are actually run (#40739)
     # This should prevent comments like this: https://github.com/servo/servo/pull/40736#issuecomment-3552372357
-https://github.com/servo/servo/pull/40736	(@mrobinson, #40736)	webgl: Ensure all Surfman surfaces are released properly (#40736)
++https://github.com/servo/servo/pull/40736	(@mrobinson, #40736)	webgl: Ensure all Surfman surfaces are released properly (#40736)
+    crash; fix crash in WebGL
     # This change ensures that all Surfman surfaces used for WebRendering
     # rendering are released in the WebGL thread properly by:
     # - Moving `WebGLThread` shutdown to the renderer. The renderer starts it,
@@ -3482,7 +3487,8 @@ https://github.com/servo/servo/pull/40685	(@tharkum, #40685)	html: Fire the <med
 -https://github.com/servo/servo/pull/40675  (@Taym95, #40675)   Remove #![allow(dead_code)] from readablestreambyobreader (#40675)
     # #![allow(dead_code)]  not needed in readablestreambyobreader(left over stream re-implementation)
     # PS: this was made using Servo.
-https://github.com/servo/servo/pull/40654	(@TimvdLippe, #40654)	Implement `WindowOrWorkerGlobalScope::reportError` (#40654)
++https://github.com/servo/servo/pull/40654	(@TimvdLippe, #40654)	Implement `WindowOrWorkerGlobalScope::reportError` (#40654)
+    dom; window.reportError()
     # This web API is alternative API to `throw e`, which is why we can reuse a lot of the existing machinery.
     # The one testcase that isn't passing yet is because it reports an empty `TypeError`. The current logic in
     # `ErrorInfo` only retrieves the message data, but doesn't include the type of the exception. For that, we need to use
@@ -3490,11 +3496,11 @@ https://github.com/servo/servo/pull/40654	(@TimvdLippe, #40654)	Implement `Windo
     # as that requires some more work in mozjs.
 -https://github.com/servo/servo/pull/40670	(@arihant2math, #40670)	resources: Ensure that selectors in CSS for the newtab page refer to actual elements (#40670)
     # I did part of a refactor to address a review but didn't finish it. Fixes white input/button in dark mode.
-https://github.com/servo/servo/pull/40671	(@mrobinson, #40671)	libservo: Make `WebView::set_history` have `crate` visibility (#40671)
+-https://github.com/servo/servo/pull/40671	(@mrobinson, #40671)	libservo: Make `WebView::set_history` have `crate` visibility (#40671)
     # I mistakenly made this method have public visibility in a recent PR
     # Testing: This doesn't change behavior and is thus covered by existing tests.
     # Fixes: #40667
-https://github.com/servo/servo/pull/40666	(@arihant2math, @yezhizhen, #40666)	indexeddb: Clean shutdown of indexeddb threads/threadpool (#40666)
+-https://github.com/servo/servo/pull/40666	(@arihant2math, @yezhizhen, #40666)	indexeddb: Clean shutdown of indexeddb threads/threadpool (#40666)
     # Clean shutdown of indexeddb.
     # Testing: Covered by WPT
 -https://github.com/servo/servo/pull/38644	(@sagudev, #38644)	CI: use `--profile` instead of profile shorthands (#38644)
@@ -3599,7 +3605,8 @@ https://github.com/servo/servo/pull/40653	(@TimvdLippe, #40653)	libservo: Notify
     # to pay for this cleanup though.
     # This is the first step toward supporting multiple windows in servoshell.
     # Testing: This should not change behavior and is thus covered by existing tests.
-https://github.com/servo/servo/pull/40788	(@mukilan, @mrobinson, #40788)	compositing: Support per-Painter operations and message handling (#40788)
++https://github.com/servo/servo/pull/40788	(@mukilan, @mrobinson, #40788)	compositing: Support per-Painter operations and message handling (#40788)
+    ;api;part of per-webview RenderingContext
     # Currently, only the first `Painter` is used for all operations in the `Compositor`. This change modifies the
     # compositor API and message handling to allow routing the operations to the correct `Painter` via a provided
     # `PainterId` or `WebViewId`.
@@ -3974,7 +3981,7 @@ https://github.com/servo/servo/pull/40822	(@freyacodes, #40822)	Update nixpkgs t
     # AttributeError: 'StructuredLogger' object has no attribute 'warn'
     # ```
     # Testing: Manual test. Can't test the test harness.
-https://github.com/servo/servo/pull/40301	(@jdm, @uthmaniv, #40301)	fonts: Add WebFontDocumentContext for CSS Fonts 4 font fetching (#40301)
+-https://github.com/servo/servo/pull/40301	(@jdm, @uthmaniv, #40301)	fonts: Add WebFontDocumentContext for CSS Fonts 4 font fetching (#40301)
     # Rebase of #37021 with review comments applied. These changes bundle up the required information from the relevant
     # global when a stylesheet is added so that any requests for web fonts match the specification.
     # Testing: Newly passing tests.
@@ -4204,12 +4211,12 @@ https://github.com/servo/servo/pull/40852	(@delan, #40852)	ci: Use new queue API
 +https://github.com/servo/servo/pull/40861	(@simonwuelker, #40861)	Add `layout_variable_fonts_enabled` to experimental preferences  (#40861)
     ;layout; variable fonts
     # Part of #38800
-https://github.com/servo/servo/pull/40856	(@WaterWhisperer, #40856)	script: Align Streams implementation with spec step calls (#40856)
+-https://github.com/servo/servo/pull/40856	(@WaterWhisperer, #40856)	script: Align Streams implementation with spec step calls (#40856)
     # updates several methods in `ReadableStream` to use `.expect()` instead of `?` where the spec indicates an infallible
     # operation (denoted by `!`).
     # Testing: `mach test-wpt /streams/`
     # Fixes: part of #36906
-https://github.com/servo/servo/pull/40793	(@tharkum, #40793)	html: Update MediaSession `setPositionState` method (#40793)
+-https://github.com/servo/servo/pull/40793	(@tharkum, #40793)	html: Update MediaSession `setPositionState` method (#40793)
     # The MediaSession `setPositionState` method should only update the position state and propagate it to the platform
     # media session UI controller and shouldn't change somehow the properties of the media element directly (duration,
     # playback rate or position).
@@ -4217,7 +4224,8 @@ https://github.com/servo/servo/pull/40793	(@tharkum, #40793)	html: Update MediaS
     # Testing: Improvements in the following tests
     # - /mediasession/positionstate.html
     # The media session UI functionality is implemented for Android and didn't test due lack of testing sample.
-https://github.com/servo/servo/pull/40599	(@Narfinger, #40599)	profile: Added Pss measure to memory report. (#40599)
++https://github.com/servo/servo/pull/40599	(@Narfinger, #40599)	profile: Added Pss measure to memory report. (#40599)
+    perf; PSS in internal memory profiler, not just RSS
     # Added pss memory report to the memory reporting.
     # Signed-off-by: Narfinger
     # Testing: Looked locally at the pss and it works.
@@ -4229,7 +4237,7 @@ https://github.com/servo/servo/pull/40413	(@lukewarlow, #40413)	Add CommandEvent
     # Add CommandEvent
     # This is behind the new dom_command_invokers_enabled pref.
     # Testing: Existing WPTs
-https://github.com/servo/servo/pull/40843	(@dyegoaurelio, #40843)	script: Move CSP DOM interfaces to `script/dom/security` (#40843)
+-https://github.com/servo/servo/pull/40843	(@dyegoaurelio, #40843)	script: Move CSP DOM interfaces to `script/dom/security` (#40843)
     # *Describe the changes that this pull request makes here. This will be the commit message.*
     # Move CSP DOM interfaces to `script/dom/security`
     # Testing: Just a refactor, it doesn't require tests
@@ -4347,7 +4355,7 @@ https://github.com/servo/servo/pull/40876	(@delan, #40876)	ci: Remove self-hoste
     # github infra failure. you can cancel the build yourself, but please take a screenshot and report it first!
     # Testing:
     # - [mach try windows linux lint](https://github.com/servo/servo/actions/runs/19659755273)
-https://github.com/servo/servo/pull/40877	(@yezhizhen, #40877)	compositor: Update doc of `ExternalScrollId` in `ScrollResult` (#40877)
+-https://github.com/servo/servo/pull/40877	(@yezhizhen, #40877)	compositor: Update doc of `ExternalScrollId` in `ScrollResult` (#40877)
     # The original attempt is to remove it. But we can't do this. Add doc to explain why.
     # Testing: This should change nothing.
     # Fixes: Preparing for #40663.
@@ -4545,7 +4553,8 @@ https://github.com/servo/servo/pull/40899	(@jschwe, #40899)	CI: Add retries for 
 -https://github.com/servo/servo/pull/40895	(@yezhizhen, #40895)	display_list: Fix doc for `ScrollType` (#40895)
     # In #37412 we renamed `ScrollSensitivity` to `ScrollType`. This PR updates the doc.
 >>> 2025-11-28T06:11:01Z
-https://github.com/servo/servo/pull/40857	(@kkoyung, #40857)	script: Add new KeyFormat and KeyUsage for modern algorithms (#40857)
++https://github.com/servo/servo/pull/40857	(@kkoyung, #40857)	script: Add new KeyFormat and KeyUsage for modern algorithms (#40857)
+    dom; SubtleCrypto
     # The specification of Modern Algorithms in the Web Cryptography API (https://wicg.github.io/webcrypto-modern-algos/)
     # adds new key formats and key usages to support modern cryptographic algorithms.
     # This patch adds those new key formats and key usages, preparing for the implementation of the new algorithms.
@@ -4638,7 +4647,8 @@ https://github.com/servo/servo/pull/40922	(@Loirooriol, #40922)	script: Stop ass
     # we can remove it so lets do that.
     # Also fixed some typos in surrounding code.
     # Testing: No behavior change, covered by existing tests
-https://github.com/servo/servo/pull/40918	(@mrobinson, #40918)	script: Break the `ScriptThread` dependency on the initial `Pipeline` (#40918)
++https://github.com/servo/servo/pull/40918	(@mrobinson, #40918)	script: Break the `ScriptThread` dependency on the initial `Pipeline` (#40918)
+    perf; initial work towards sharing script threads across webviews
     # `ScriptThread`s start with an initial `Pipeline`, but that `Pipeline`
     # should not be used for any `ScriptThread` global data as a
     # `ScriptThread` can have any number of `Pipeline`s that come and go.
@@ -4718,7 +4728,8 @@ https://github.com/servo/servo/pull/40917	(@tharkum, #40917)	html: Add new media
     # [^1]: https://github.com/servo/servo/pull/40883#issuecomment-3584090609
     # Testing: It's difficult to test this crash because it seems to only happen on
     # nixOS and we currently don't have a good way to test crashes on exit.
-https://github.com/servo/servo/pull/40661	(@janvarga, #40661)	storage: Introduce storage coordination thread and infrastructure for parallel next-generation IndexedDB implementation (#40661)
++https://github.com/servo/servo/pull/40661	(@janvarga, #40661)	storage: Introduce storage coordination thread and infrastructure for parallel next-generation IndexedDB implementation (#40661)
+    perf; initial work towards parallel IndexedDB
     # This PR introduces a new storage coordination thread, intended to serve as the central point for managing all
     # current and future storage endpoints in Servo.
     # In addition to the new coordination thread, this PR also lays the infrastructure required to develop a parallel,
@@ -4786,12 +4797,13 @@ https://github.com/servo/servo/pull/40661	(@janvarga, #40661)	storage: Introduce
 -https://github.com/servo/servo/pull/40958	(@servo-wpt-sync, #40958)	Sync WPT with upstream (30-11-2025) (#40958)
     # Automated downstream sync of changes from upstream as of 30-11-2025
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/40949	(@WaterWhisperer, #40949)	script: Reflect infallible Streams operation in spec (#40949)
+-https://github.com/servo/servo/pull/40949	(@WaterWhisperer, #40949)	script: Reflect infallible Streams operation in spec (#40949)
     # updates several methods in `ReadableByteStream` to use `.expect()` instead of `?` where the spec indicates an
     # infallible operation (denoted by `!`).
     # Testing: `./mach test-wpt /streams/readable-byte-streams`
     # Fixes: part of #36906
-https://github.com/servo/servo/pull/40944	(@mrobinson, #40944)	constellation: Break the `EventLoop` dependency on the initial `Pipeline` (#40944)
++https://github.com/servo/servo/pull/40944	(@mrobinson, #40944)	constellation: Break the `EventLoop` dependency on the initial `Pipeline` (#40944)
+    perf; initial work towards sharing script threads across webviews
     # Currently starting a script `EventLoop` depends on sending data about
     # the initial `Pipeline`. This change breaks this dependency. The goal
     # here is to:
