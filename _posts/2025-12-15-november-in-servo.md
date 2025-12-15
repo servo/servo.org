@@ -74,12 +74,6 @@ We’ve fixed a bug causing **nytimes.com** to hang ([@jdm](https://github.com/j
 
 ## Donations
 
-<!--
-- 2638.90/month opencollective
-- 3649.00/month github
-- 145.87/month 28 donors thanks.dev
--->
-
 Thanks again for your generous support!
 We are now receiving **6433 USD/month** (+11.8% over October) in recurring donations.
 This helps us cover the cost of our **[speedy](https://ci0.servo.org) [CI](https://ci1.servo.org) [and](https://ci2.servo.org) [benchmarking](https://ci3.servo.org) [servers](https://ci4.servo.org)**, one of our latest **[Outreachy interns](https://www.outreachy.org/alums/2025-06/#:~:text=Servo)**, and funding **[maintainer work]({{ '/blog/2025/09/17/your-donations-at-work-funding-jdm/' | url }})** that helps more people contribute to Servo.
