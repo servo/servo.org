@@ -17,6 +17,10 @@ Landing in [**Servo 0.0.3**](https://github.com/servo/servo/releases/tag/v0.0.3)
 - **calc()** now works in **grid layout** (@nicoburns, #34846)
 - **ResizeObserver** is now enabled by default (@jdm, #40378)
 
+<figure>
+    <img src="{{ '/img/blog/2025-12-diffie.png' | url }}" alt="Servo 0.0.3 showing new support for <use> in SVG, <details name>, and context menus">
+</figure>
+
 **Font variations** are now applied in **‘font-weight’** and **‘font-stretch’** (@simonwuelker, #40867), fixing a rendering issue in the [Web Engines Hackfest website](https://webengineshackfest.org).
 
 @kkoyung has landed some huge improvements in the [**SubtleCrypto API**](https://w3c.github.io/webcrypto/), including some of the more [modern algorithms in this WICG draft](https://wicg.github.io/webcrypto-modern-algos/), and a fix for constant-time base64 (#40334).
