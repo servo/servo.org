@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "November in Servo: ???"
-date:       2025-12-12
-summary:    ao!! wrrrrao!!
+title:      "November in Servo: monthly releases, context menus, parallel CSS parsing, and more!"
+date:       2025-12-15
+summary:    All of these updates are in Servo 0.0.3.
 categories:
 ---
 
