@@ -82,6 +82,7 @@ Servo is also on [thanks.dev](https://thanks.dev), and already **28 GitHub users
 If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
 
 We now have [**sponsorship tiers**]({{ '/blog/2025/11/21/sponsorship-tiers/' | url }}) that allow you or your organisation to donate to the Servo project with public acknowlegement of your support.
+A big thanks from Servo to our newest Bronze Sponsors: **Jenny &amp; Phil Porada**, **Josh Aas**, **LambdaTest**, and **Sandwich**!
 If you’re interested in this kind of sponsorship, please contact us at [join@servo.org](mailto:join@servo.org).
 
 <figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
