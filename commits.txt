@@ -1,5 +1,6 @@
 >>> 2025-12-01T06:09:12Z
-https://github.com/servo/servo/pull/40961	(@jschwe, #40961)	servoshell: Fix stdout / stderr output in windows production builds (#40961)
++https://github.com/servo/servo/pull/40961	(@jschwe, #40961)	servoshell: Fix stdout / stderr output in windows production builds (#40961)
+    servoshell; --help etc now works on windows, as long as you run servoshell from a console
     # When servo is started from the command line, we still want output to be printed. On windows, due to us using the
     # `windows` subsystem (as opposed to the default `console` subsystem), this doesn't work out-of-the-box, and we need
     # to manually attempt to attach to the console of the parent process. If servo was not started from the command line,
@@ -155,7 +156,8 @@ https://github.com/servo/servo/pull/40961	(@jschwe, #40961)	servoshell: Fix stdo
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/40837	(@freyacodes, #40837)	Fix duplicate carets in <textarea> (#40837)
++https://github.com/servo/servo/pull/40837	(@freyacodes, #40837)	Fix duplicate carets in <textarea> (#40837)
+    editing
     # This fixes a bug where  would render with many carets. Reports vary, but in my case it would would be at the start
     # and end of every "word", as long as those cursors came before the actual cursor.
     # The actual cursor would render normally, except that it does not render immediately after a line break. This
@@ -183,7 +185,7 @@ https://github.com/servo/servo/pull/40943	(@janvarga, #40943)	net: Expose make_s
     # properly when testing upcoming SiteDataManager.
     # Testing: Unit tests continue to pass, make_ssl_server tested manually
 >>> 2025-12-02T07:53:37Z
-https://github.com/servo/servo/pull/40962	(@jschwe, #40962)	servoshell: Prepare November release (0.0.3) (#40962)
+-https://github.com/servo/servo/pull/40962	(@jschwe, #40962)	servoshell: Prepare November release (0.0.3) (#40962)
     # As discussed in the tsc-channel, prepare for the next release by cutting a version on the last day of the month.
     # Note: The actual release would happen ~ 2 weeks from now, when the blog post for november is ready.
     # This commit was produced by running `./mach release 0.0.3`.
@@ -219,7 +221,8 @@ https://github.com/servo/servo/pull/40962	(@jschwe, #40962)	servoshell: Prepare 
 -https://github.com/servo/servo/pull/40990	(@Narfinger, #40990)	Remove unused `ipc-channel` dependency in `layout` and `background_hang_monitor` (#40990)
     # `layout` and `background_hang_monitor` do not need `ipc-channel` anymore.
     # Testing: It compiles.
-https://github.com/servo/servo/pull/40743	(@mrobinson, #40743)	script: Make a Layout-safe version of `Element::each_custom_state` (#40743)
++https://github.com/servo/servo/pull/40743	(@mrobinson, #40743)	script: Make a Layout-safe version of `Element::each_custom_state` (#40743)
+    crash; in custom elements
     # `Element::each_custom_state` is called from Layout, but it creates
     # `DomRef` types on the stack, which can only be done on the main script
     # thread. Since layout might be doing styling and element consultation on
@@ -236,7 +239,8 @@ https://github.com/servo/servo/pull/40743	(@mrobinson, #40743)	script: Make a La
     # is hit.
     # The timeouts might be related to the script change from https://github.com/servo/servo/pull/40798.
     # Testing: Not needed.
-https://github.com/servo/servo/pull/40984	(@mrobinson, @Loirooriol, #40984)	layout: Handle stacking context tree outlines during display list building (#40984)
++https://github.com/servo/servo/pull/40984	(@mrobinson, @Loirooriol, #40984)	layout: Handle stacking context tree outlines during display list building (#40984)
+    perf; reduce work done when focus changes
     # Instead of eagerly adding outlines to their own stacking context tree
     # section, handle them as part of display list building. This means that
     # the stacking context tree does not need to be rebuilt when outlines on
@@ -244,19 +248,21 @@ https://github.com/servo/servo/pull/40984	(@mrobinson, @Loirooriol, #40984)	layo
     # Testing: This is a speculative performance fix, behavior is covered by
     # existing tests.
     # Fixes: #40957.
-https://github.com/servo/servo/pull/40941	(@Narfinger, #40941)	net: Allow servo to use a http proxy without authentication (#40941)
++https://github.com/servo/servo/pull/40941	(@Narfinger, #40941)	net: Allow servo to use a http proxy without authentication (#40941)
+    api; --pref network_http_proxy_uri
     # Servo can now use a http proxy to connect to the internet. This currently only supports using all connections
     # through the proxy.
     # This uses the already used hyper_util crate which had the functionality in it already.
     # We also switch from tower_service to tower with only util feature flag. This might increase the binary size slightly.
     # Testing: Tested on a local machine which is behind a proxy with and without the flag and it works correctly.
-https://github.com/servo/servo/pull/40980	(@yezhizhen, #40980)	servoshell: Explicitly add the  `Win32_System_Console` feature to `windows-sys` (#40980)
+-https://github.com/servo/servo/pull/40980	(@yezhizhen, #40980)	servoshell: Explicitly add the  `Win32_System_Console` feature to `windows-sys` (#40980)
     # In #40961, we start to use `windows_sys::Win32::System::Console;`. This is gated behind `Win32_System_Console`
     # feature. We didn't have the problem merging that one, because it was luckily enabled by some other dependencies. But
     # @dependabot can act weird: #40979, which would break the build from time to time.
     # See https://github.com/servo/servo/actions/runs/19816434323/job/56768628158.
     # Fixes: Treacherous bug that is only revealed when other crates's `windows-sys` is downgraded.
-https://github.com/servo/servo/pull/40960	(@atbrakhi, #40960)	config: Rename `DebugOpts` to `DiagnosticsLogging` and get rid of `dump` terminology (#40960)
++https://github.com/servo/servo/pull/40960	(@atbrakhi, #40960)	config: Rename `DebugOpts` to `DiagnosticsLogging` and get rid of `dump` terminology (#40960)
+    api; DebugOpts is now DiagnosticsLogging; DebugOpts::disable_share_style_cache is now Prefs::layout_style_sharing_cache_enabled; other options have been renamed to not use the term “dump”; `-Z` can now be reached with `SERVO_DIAGNOSTICS`
     # In this PR, we rename `DebugOpts` to `DiagnosticsLogging`, add some
     # documentation and rename variables to get rid of dump terminology.
     # Testing:
@@ -266,7 +272,8 @@ https://github.com/servo/servo/pull/40960	(@atbrakhi, #40960)	config: Rename `De
     # This allows us to look at logs in the future and has easier parsing of the values.
     # Signed-off-by: Narfinger
     # Testing: Custom run on https://github.com/Narfinger/servo/actions/runs/19575793934
-https://github.com/servo/servo/pull/40959	(@atbrakhi, #40959)	Move `disable_share_style_cache` to `prefs` (#40959)
++https://github.com/servo/servo/pull/40959	(@atbrakhi, #40959)	Move `disable_share_style_cache` to `prefs` (#40959)
+    api; see SERVO_DIAGNOSTICS patch
     # This change move `DebugOpts::disable_share_style_cache` to `Prefs::layout_style_sharing_cache_enabled` and ensure
     # it is enabled by default. We also inverted the usage.
     # Testing:
@@ -329,7 +336,7 @@ https://github.com/servo/servo/pull/40940	(@tharkum, #40940)	script: Fire the vi
     # See https://html.spec.whatwg.org/multipage/#event-media-resize
     # Testing: Added new test to confirm `resize` event ordering
     # - html/semantics/embedded-content/media-elements/event_order_durationchange_resize_loadedmetadata.html
-https://github.com/servo/servo/pull/40974	(@yezhizhen, #40974)	servoshell: Unset `webdriver_port` when scheduling shutdown (#40974)
+-https://github.com/servo/servo/pull/40974	(@yezhizhen, #40974)	servoshell: Unset `webdriver_port` when scheduling shutdown (#40974)
     # This is the minimal possible changes after I've tried several approaches. The original problem is tricky after
     # multi-window support, as we want to shutdown normally while not panic after no window is open to support Servodriver.
     # Testing:
@@ -597,7 +604,8 @@ https://github.com/servo/servo/pull/41008	(@Narfinger, #41008)	Use 'GenericSende
     # Using generic channel for bluetooth module.
     # Signed-off-by: Narfinger
     # Testing: This should not change functionality.
-https://github.com/servo/servo/pull/41010	(@mukilan, @mrobinson, #41010)	libservo: Make `Servo` an opaque cloneable handle (#41010)
++https://github.com/servo/servo/pull/41010	(@mukilan, @mrobinson, #41010)	libservo: Make `Servo` an opaque cloneable handle (#41010)
+    api; `Servo` is now cloneable to share within a thread
     # Move the members of `Servo` struct to an inner structure that is wrapped in an `Rc` so that handle to `Servo`
     # instances can be made cloneable and used from `WebView`s.
     # Testing: This preserves existing public API of the Servo struct, so should be covered by existing tests.
@@ -605,7 +613,8 @@ https://github.com/servo/servo/pull/41010	(@mukilan, @mrobinson, #41010)	libserv
     # The phone was not set into perf mode which might interrupt scripts.
     # Signed-off-by: Narfinger
     # Testing: Should not need any testing.
-https://github.com/servo/servo/pull/40927	(@mrobinson, #40927)	servoshell: Add support for opening new windows on desktop (#40927)
++https://github.com/servo/servo/pull/40927	(@mrobinson, #40927)	servoshell: Add support for opening new windows on desktop (#40927)
+    servoshell; includes new button in tab bar
     # This change finishes adding support for opening new windows in the
     # desktop version of servoshell. A new button is added to the tab bar
     # which opens a new window (this can be adjusted later, if necessary).
@@ -620,7 +629,7 @@ https://github.com/servo/servo/pull/40927	(@mrobinson, #40927)	servoshell: Add s
     # - Simplify some match
     # - Explicitly state unused match arm: PointerCancel is not implemented.
     # Testing: Refactor. Covered by existing test.
-https://github.com/servo/servo/pull/41009	(@mrobinson, #41009)	constellation: Remove debugging `println!` introduced in #40944 (#41009)
+-https://github.com/servo/servo/pull/41009	(@mrobinson, #41009)	constellation: Remove debugging `println!` introduced in #40944 (#41009)
     # I inadvertently left this debugging code in before landing the change.
     # Testing: This just removes an unexpected `println!` so no new tests are necessary.
 https://github.com/servo/servo/pull/40981	(@tharkum, #40981)	html: Track the script/UA initiated media `seek` request (#40981)
@@ -664,7 +673,8 @@ https://github.com/servo/servo/pull/40982	(@mrobinson, @mukilan, #40982)	libserv
     # this patch.
     # Testing: Pass some WPT tests that were expected to fail.
     # Fixes: Part of #40687
-https://github.com/servo/servo/pull/40994	(@Loirooriol, #40994)	script: Reconstruct box tree when `order` changes (#40994)
++https://github.com/servo/servo/pull/40994	(@Loirooriol, #40994)	script: Reconstruct box tree when `order` changes (#40994)
+    layout; fix incremental layout when animating (or changing?) ‘order’
     # The CSS `order` property affects the order of boxes in the box tree. Therefore, when it changes, we need to
     # reconstruct it.
     # Testing: Adding new test
@@ -841,7 +851,8 @@ https://github.com/servo/servo/pull/40997	(@dyegoaurelio, #40997)	Block and repo
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/41028	(@kongbai1996, @yezhizhen, #41028)	touch: Stop flinging if no scroll happened (#41028)
++https://github.com/servo/servo/pull/41028	(@kongbai1996, @yezhizhen, #41028)	touch: Stop flinging if no scroll happened (#41028)
+    input; fix breakage of flinging after reaching scrollport extrema
     # If no scroll happened, we would stop flinging if there is any.
     # Extract the functionality to `fn stop_fling_if_needed`.
     # Testing: There are currently no related test cases for the modifications made to fling.
@@ -894,7 +905,7 @@ https://github.com/servo/servo/pull/41028	(@kongbai1996, @yezhizhen, #41028)	tou
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/41033	(@webbeef, #41033)	script: shorten script thread name (#41033)
+-https://github.com/servo/servo/pull/41033	(@webbeef, #41033)	script: shorten script thread name (#41033)
     # On Linux thread names are limited to 15 characters: that caused all the script threads to be named 'ScriptScriptEve'
     # and show up with the same name in tooling.
     # That changes turns the name to 'Script#{script id}' instead.
@@ -908,7 +919,8 @@ https://github.com/servo/servo/pull/35991	(@Taym95, #35991)	Script Implement Rea
     # Error messages in the import/export key operations of ChaCha20-Poly1305 are missing. This patch adds those error
     # messages.
     # Testing: No behavioral change. Existing tests suffice.
-https://github.com/servo/servo/pull/41012	(@mukilan, @mrobinson, #41012)	libservo: Trigger shutdown internally from `Servo`'s `Drop` impl (#41012)
++https://github.com/servo/servo/pull/41012	(@mukilan, @mrobinson, #41012)	libservo: Trigger shutdown internally from `Servo`'s `Drop` impl (#41012)
+    api; Servo::start_shutting_down() and deinit() removed in favour of Drop the last handle
     # Remove the public API to trigger shutdown and instead trigger the process from `Servo`'s implementation of `Drop`
     # trait.
     # This makes it hard to create issues involving the order of destruction of `Servo` and `WebView`s. It will also
@@ -978,7 +990,8 @@ https://github.com/servo/servo/pull/41012	(@mukilan, @mrobinson, #41012)	libserv
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/41013	(@atbrakhi, #41013)	config: Add `SERVO_DIAGNOSTICS` environment variable for diagnostic options (#41013)
++https://github.com/servo/servo/pull/41013	(@atbrakhi, #41013)	config: Add `SERVO_DIAGNOSTICS` environment variable for diagnostic options (#41013)
+    api; see SERVO_DIAGNOSTICS patch
     # With this change can now configure diagnostic logging via the `SERVO_DIAGNOSTICS` environment variable in addition
     # to the existing -Z command-line flag.
     # The environment variable accepts the same comma-separated options as -Z (e.g.,
@@ -1059,7 +1072,8 @@ https://github.com/servo/servo/pull/41039	(@danilopedraza, #41039)	script: add e
     # Followed the [MDN](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/encrypt#aes-ctr) and
     # [w3c](https://w3c.github.io/webcrypto/#aes-ctr-operations-encrypt) docs to write the messages.
     # I'm thinking on adding more messages, so any feedback would be appreciated! :)
-https://github.com/servo/servo/pull/40935	(@Narfinger, #40935)	net: use system certificates (#40935)
++https://github.com/servo/servo/pull/40935	(@Narfinger, #40935)	net: use system certificates (#40935)
+    api; use platform root certs by default; old behaviour (webpki roots) available with --pref network_webpki_roots; can still provide custom roots with Opts::certificate_path / --certificate-path=
     # This changes the certificate verifier to use rustls_platform_verifier under the hood.
     # **Note**: The rustls-platform-verifier has specific instructions for android and currently we fall back to the
     # webpki roots for this platform.
@@ -1078,7 +1092,7 @@ https://github.com/servo/servo/pull/41063	(@AnonMiraj, #41063)	layout: Pass degr
 -https://github.com/servo/servo/pull/41112	(@servo-wpt-sync, #41112)	Sync WPT with upstream (07-12-2025) (#41112)
     # Automated downstream sync of changes from upstream as of 07-12-2025
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/41110	(@frozolotl, #41110)	doc: Refer to the correct links in the Servo Book (#41110)
+-https://github.com/servo/servo/pull/41110	(@frozolotl, #41110)	doc: Refer to the correct links in the Servo Book (#41110)
     # The previous links are broken. I removed the operating system specific URLs, as they are found in [Building
     # Servo](https://book.servo.org/building/building.html) as well and aren't as likely to rot there.
     # Testing: I don't think there are tests for the `README.md`
@@ -1114,7 +1128,7 @@ https://github.com/servo/servo/pull/41094	(@mukilan, #41094)	webgl: Unconditiona
     # in `remove_webgl_context` to skip freeing the context and associated resources.
     # Fixes #41082.
     # Testing: A new crash test is added.
-https://github.com/servo/servo/pull/41095	(@mukilan, #41095)	net: Remove use of deprecated crate `rustls-pemfile`. (#41095)
+-https://github.com/servo/servo/pull/41095	(@mukilan, #41095)	net: Remove use of deprecated crate `rustls-pemfile`. (#41095)
     # Switch the last remaining uses of the deprecated `rustls-pemfile` crate
     # to the `rustls-pki-types` crate.
     # Fixes #41090.
@@ -2105,7 +2119,8 @@ https://github.com/servo/servo/pull/41171	(@yezhizhen, #41171)	webdriver: Enable
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/41179	(@mrobinson, #41179)	Fix all Android build warnings and make the CA verifier preference more flexible (#41179)
++https://github.com/servo/servo/pull/41179	(@mrobinson, #41179)	Fix all Android build warnings and make the CA verifier preference more flexible (#41179)
+    api; see other root certs change
     # This change fixes a variety of build warnings on Android. In a related
     # change, the CA verifier preference allows using a list of certificate
     # overrides and the `rust-webpki` verifier regardless of platform. Whether
@@ -2128,10 +2143,12 @@ https://github.com/servo/servo/pull/40939	(@gterzian, @Taym95, #40939)	indexeddb
     # Testing: New failures on WPT tests: to be fixed as part of several follow-ups.
     # Fixes: The parts of https://github.com/servo/servo/issues/38942#issuecomment-3270223903 that were not addressed
     # when the issue was closed.
-https://github.com/servo/servo/pull/41199	(@jdm, #41199)	script: Add newlines after each value in formdata body. (#41199)
++https://github.com/servo/servo/pull/41199	(@jdm, #41199)	script: Add newlines after each value in formdata body. (#41199)
+    dom; fix form submission issue affecting login page on lichess.org
     # Fixes logging in to lichess.org, since our request body now matches what other browsers send.
     # Testing: Newly passing WPT tests.
-https://github.com/servo/servo/pull/40567	(@jiang1997, #40567)	net/devtools: Expose TLS security info to DevTools network panel (#40567)
++https://github.com/servo/servo/pull/40567	(@jiang1997, #40567)	net/devtools: Expose TLS security info to DevTools network panel (#40567)
+    devtools; network panel show TLS version, cipher suite, key exchange group, ALPN protocol, HSTS and ECH status, and (partial) security state
     # First PR for #40232.
     # Implement the getSecurityInfo protocol message to allow DevTools clients
     # to inspect TLS connection details for HTTPS requests, including:
@@ -2143,7 +2160,8 @@ https://github.com/servo/servo/pull/40567	(@jiang1997, #40567)	net/devtools: Exp
     # - Security state
     # Security state is simplified (secure/insecure only) and certificate
     # details are stubbed out; both will be completed in follow-up work.
-https://github.com/servo/servo/pull/41187	(@mrobinson, #41187)	layout: Serialize `transform` according to spec for `getComputedValue()` (#41187)
++https://github.com/servo/servo/pull/41187	(@mrobinson, #41187)	layout: Serialize `transform` according to spec for `getComputedValue()` (#41187)
+    dom; fix ‘transform’ in getComputedStyle()
     # The specification [^1] states that the `transform` property should be
     # serialized by multiplying out its transforms, unless the property is not
     # a transform list. This change does that.
@@ -2211,6 +2229,7 @@ https://github.com/servo/servo/pull/41214	(@rayguo17, #41214)	net: check actual 
     # Testing: http_cache unittest and does not affect any existing WPT test result.
     # Fixes: https://github.com/servo/servo/issues/41174
 https://github.com/servo/servo/pull/41209	(@Narfinger, #41209)	config: Set the default value of the `network_http_proxy_uri` setting via the `http_proxy` variable (#41209)
+    api; respect `http_proxy` environment variable
     # This parses the env variable "http_proxy" for servoshell and sets the network_http_proxy_uri if it exists to the
     # same value.
     # Testing: Tested that it correctly picks it up.
@@ -2228,7 +2247,7 @@ https://github.com/servo/servo/pull/41219	(@yezhizhen, #41219)	ohos: Add stable 
     # - Some new FAIL expectations are added. They were skipped by WPT when the import key operation of RSA-OAEP had
     # not been implemented, and requires other not-yet-implemented operations to pass.
     # Fixes: Part of #41113
-https://github.com/servo/servo/pull/41203	(@Narfinger, #41203)	ohos: Warn on common commandline argument mistakes (#41203)
+-https://github.com/servo/servo/pull/41203	(@Narfinger, #41203)	ohos: Warn on common commandline argument mistakes (#41203)
     # Currently, commandline arguments need to be used like this: '--psn=--tracing_filter' which people can easily forget
     # and use '--psn=tracing_filter'.
     # This happened to multiple people and leads to weird issues, since the argument is silently dropped.
@@ -2287,7 +2306,8 @@ https://github.com/servo/servo/pull/40412	(@lukewarlow, #40412)	Fire toggle even
     # Testing: Pass some WPT tests that were expected to fail.
     # Fixes: Part of #41113
 >>> 2025-12-16T06:08:46Z
-https://github.com/servo/servo/pull/41272	(@simonwuelker, #41272)	script: Support legacy "background" presentational hint on more elements (#41272)
++https://github.com/servo/servo/pull/41272	(@simonwuelker, #41272)	script: Support legacy "background" presentational hint on more elements (#41272)
+    layout; now support `background` and `bgcolor` attributes on <table>, <thead>, <tbody>, <tfoot>, <tr>, <td>, <th>
     # Testing: New tests start to pass
     # Fixes https://github.com/servo/servo/issues/41269
 -https://github.com/servo/servo/pull/41298	(@dependabot[bot], @dependabot[bot], #41298)	build(deps): bump ohos-abilitykit-sys from 0.1.2 to 0.1.3 (#41298)
@@ -2448,6 +2468,7 @@ https://github.com/servo/servo/pull/41236	(@janvarga, #41236)	libservo: Introduc
     # Testing: Pass some WPT tests that were expected to fail.
     # Fixes: Part of #41113
 https://github.com/servo/servo/pull/41268	(@treeshateorcs, @yezhizhen, #41268)	prefs: Handle uppercase HTTP_PROXY variable (#41268)
+    api; respect `HTTP_PROXY` environment variable
     # follow up to #41209
     # #41209 does not read HTTP_PROXY (all caps) or `HtTp_PrOxY" or w/e. i personally have the variable in all
     # caps. I propose we check both "HTTP_PROXY" and "http_proxy", but not mixed case. Firefox does just that at
@@ -2735,13 +2756,13 @@ https://github.com/servo/servo/pull/41314	(@mrobinson, #41314)	servoshell: Do no
     # rust-windowing/winit#4026
     # Testing: This level of servoshell is untested unfortunately so no tests are added.
     # Fixes: #41307.
-https://github.com/servo/servo/pull/41321	(@jschwe, #41321)	deps: Lock bincode in the Cargo.toml (#41321)
+-https://github.com/servo/servo/pull/41321	(@jschwe, #41321)	deps: Lock bincode in the Cargo.toml (#41321)
     # To reduce our risk of future supply chain attacks, pin bincode 1.3.3 in our Cargo.toml.
     # Author actions like rewriting git history and nuking the original repository make validating updates more difficult.
     # Since the author has announced, the development is stopped, the most reasonable thing to do is pin our version the
     # Cargo.toml. In the unlikely case of an update, it should require a review based on a diff of the crates.io releases.
     # Testing: no functional changes, not required
-https://github.com/servo/servo/pull/41313	(@yezhizhen, #41313)	CI: Make ohos scenario tests adapatable to screen dimension changes (#41313)
+-https://github.com/servo/servo/pull/41313	(@yezhizhen, #41313)	CI: Make ohos scenario tests adapatable to screen dimension changes (#41313)
     # We have seen consecutive ✅ for commits since #41276. This further improves tests stability:
     # 1. No need to wait for pop up that long, as we only start to search for it after page is loaded. JS is efficient here.
     # 2. Click another tab based on webdriver instead of hard-coded coordinates.
@@ -2805,7 +2826,7 @@ https://github.com/servo/servo/pull/41235	(@mrobinson, #41235)	servoshell: Creat
     # `error!`s as they typically break the entire execution of the program.
     # [^1]: https://w3c.github.io/webdriver/#new-window
     # Testing: This is tested by the entire WPT suite.
-https://github.com/servo/servo/pull/41301	(@simonwuelker, #41301)	Add tendril to the list of html5ever-crates to patch (#41301)
+-https://github.com/servo/servo/pull/41301	(@simonwuelker, #41301)	Add tendril to the list of html5ever-crates to patch (#41301)
     # `tendril` has moved into the html5ever repository, so when we patch html5ever then we need to patch tendril too.
 >>> 2025-12-19T06:06:08Z
 https://github.com/servo/servo/pull/40987	(@Narfinger, #40987)	Use `GenericSender` and `GenericReceiver` for WebDriver (#40987)

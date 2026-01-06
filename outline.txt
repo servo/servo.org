@@ -1,4 +1,27 @@
+- api
+    - https://github.com/servo/servo/pull/40941	(@Narfinger, #40941)	net: Allow servo to use a http proxy without authentication (#40941)
+      api; --pref network_http_proxy_uri
+    - https://github.com/servo/servo/pull/40960	(@atbrakhi, #40960)	config: Rename `DebugOpts` to `DiagnosticsLogging` and get rid of `dump` terminology (#40960)
+      api; DebugOpts is now DiagnosticsLogging; DebugOpts::disable_share_style_cache is now Prefs::layout_style_sharing_cache_enabled; other options have been renamed to not use the term “dump”; `-Z` can now be reached with `SERVO_DIAGNOSTICS`
+    - https://github.com/servo/servo/pull/40959	(@atbrakhi, #40959)	Move `disable_share_style_cache` to `prefs` (#40959)
+      api; see SERVO_DIAGNOSTICS patch
+    - https://github.com/servo/servo/pull/41010	(@mukilan, @mrobinson, #41010)	libservo: Make `Servo` an opaque cloneable handle (#41010)
+      api; `Servo` is now cloneable to share within a thread
+    - https://github.com/servo/servo/pull/41012	(@mukilan, @mrobinson, #41012)	libservo: Trigger shutdown internally from `Servo`'s `Drop` impl (#41012)
+      api; Servo::start_shutting_down() and deinit() removed in favour of Drop the last handle
+    - https://github.com/servo/servo/pull/41013	(@atbrakhi, #41013)	config: Add `SERVO_DIAGNOSTICS` environment variable for diagnostic options (#41013)
+      api; see SERVO_DIAGNOSTICS patch
+    - https://github.com/servo/servo/pull/40935	(@Narfinger, #40935)	net: use system certificates (#40935)
+      api; use platform root certs by default; old behaviour (webpki roots) available with --pref network_webpki_roots; can still provide custom roots with Opts::certificate_path / --certificate-path=
+    - https://github.com/servo/servo/pull/41179	(@mrobinson, #41179)	Fix all Android build warnings and make the CA verifier preference more flexible (#41179)
+      api; see other root certs change
+    - https://github.com/servo/servo/pull/41209	(@Narfinger, #41209)	config: Set the default value of the `network_http_proxy_uri` setting via the `http_proxy` variable (#41209)
+      api; respect `http_proxy` environment variable
+    - https://github.com/servo/servo/pull/41268	(@treeshateorcs, @yezhizhen, #41268)	prefs: Handle uppercase HTTP_PROXY variable (#41268)
+      api; respect `HTTP_PROXY` environment variable
 - crash
+    - https://github.com/servo/servo/pull/40743	(@mrobinson, #40743)	script: Make a Layout-safe version of `Element::each_custom_state` (#40743)
+      crash; in custom elements
     - https://github.com/servo/servo/pull/40954	(@Taym95, #40954)	Fix crash when creating an AudioNode from a closed AudioContext (#40954)
       crash
     - https://github.com/servo/servo/pull/41570	(@jschwe, #41570)	servoshell: ohos: Fix crash when hiding IME (#41570)
@@ -11,6 +34,8 @@
       devtools perf
     - https://github.com/servo/servo/pull/41087	(@eerii, #41087)	devtools: Update to Firefox 145 (#41087)
       devtools
+    - https://github.com/servo/servo/pull/40567	(@jiang1997, #40567)	net/devtools: Expose TLS security info to DevTools network panel (#40567)
+      devtools; network panel show TLS version, cipher suite, key exchange group, ALPN protocol, HSTS and ECH status, and (partial) security state
 - dom
     - https://github.com/servo/servo/pull/40978	(@kkoyung, #40978)	script: Implement generate key operation of ChaCha20-Poly1305 (#40978)
       dom; crypto.subtle.generateKey("ChaCha20-Poly1305")
@@ -24,6 +49,10 @@
       dom; more crypto.subtle changes
     - https://github.com/servo/servo/pull/41172	(@kkoyung, #41172)	script: Implement import key operation of RSASSA-PKCS1-v1_5 (#41172)
       dom; crypto.subtle.importKey("RSASSA-PKCS1-v1_5")
+    - https://github.com/servo/servo/pull/41199	(@jdm, #41199)	script: Add newlines after each value in formdata body. (#41199)
+      dom; fix form submission issue affecting login page on lichess.org
+    - https://github.com/servo/servo/pull/41187	(@mrobinson, #41187)	layout: Serialize `transform` according to spec for `getComputedValue()` (#41187)
+      dom; fix ‘transform’ in getComputedStyle()
     - https://github.com/servo/servo/pull/41225	(@kkoyung, #41225)	script: Implement export key operations of three RSA algorithms (#41225)
       dom; crypto.subtle.exportKey() for `RSASSA-PKCS1-v1_5`, `RSA-PSS`, `RSA-OAEP`
     - https://github.com/servo/servo/pull/41217	(@kkoyung, @TimvdLippe, #41217)	script: Implement import key operation of RSA-OAEP (#41217)
@@ -52,8 +81,26 @@
       dom; more crypto.subtle changes
     - https://github.com/servo/servo/pull/41585	(@kkoyung, #41585)	script: Implement import key operation of ML-KEM (#41585)
       dom; crypto.subtle.importKey("ML-KEM") - in modern algorithms
+- editing
+    - https://github.com/servo/servo/pull/40837	(@freyacodes, #40837)	Fix duplicate carets in <textarea> (#40837)
+      editing
+- input
+    - https://github.com/servo/servo/pull/41028	(@kongbai1996, @yezhizhen, #41028)	touch: Stop flinging if no scroll happened (#41028)
+      input; fix breakage of flinging after reaching scrollport extrema
+- layout
+    - https://github.com/servo/servo/pull/40994	(@Loirooriol, #40994)	script: Reconstruct box tree when `order` changes (#40994)
+      layout; fix incremental layout when animating (or changing?) ‘order’
+    - https://github.com/servo/servo/pull/41272	(@simonwuelker, #41272)	script: Support legacy "background" presentational hint on more elements (#41272)
+      layout; now support `background` and `bgcolor` attributes on <table>, <thead>, <tbody>, <tfoot>, <tr>, <td>, <th>
 - perf
+    - https://github.com/servo/servo/pull/40984	(@mrobinson, @Loirooriol, #40984)	layout: Handle stacking context tree outlines during display list building (#40984)
+      perf; reduce work done when focus changes
     - https://github.com/servo/servo/pull/41161	(@mrobinson, #41161)	constellation: Only set up a single Devtools route for all `ScriptThread`s (#41161)
       devtools perf
     - https://github.com/servo/servo/pull/41451	(@WaterWhisperer, #41451)	feat: `gamepad` feature flag (#41451)
       perf; gamepad support now optional at build time
+- servoshell
+    - https://github.com/servo/servo/pull/40961	(@jschwe, #40961)	servoshell: Fix stdout / stderr output in windows production builds (#40961)
+      servoshell; --help etc now works on windows, as long as you run servoshell from a console
+    - https://github.com/servo/servo/pull/40927	(@mrobinson, #40927)	servoshell: Add support for opening new windows on desktop (#40927)
+      servoshell; includes new button in tab bar
