@@ -25,6 +25,14 @@
       api; new SiteDataManager allowing clearing cache and cookies; old CookieManager renamed to NetworkManager
     - https://github.com/servo/servo/pull/41351	(@atbrakhi, #41351)	Add `ServoDelegate` and `WebViewDelegate` methods for Console API (#41351)
       api; new show_console_message() method in both ServoDelegate and WebViewDelegate
+    - https://github.com/servo/servo/pull/41378	(@janvarga, #41378)	libservo: Add initial `SiteDataManager::site_data` API (#41378)
+      api; new SiteDataManager API for listing sites that are storing data
+    - https://github.com/servo/servo/pull/41523	(@janvarga, #41523)	libservo: Group site data entries by eTLD+1 and simplify related tests (#41523)
+      api; SiteDataManager (localStorage, sessionStorage, etc) now groups data by eTLD+1 (public suffix list), not just origin.
+    - https://github.com/servo/servo/pull/41528	(@janvarga, #41528)	libservo: Extend `SiteDataManager::site_data` to include cookie sites (#41528)
+      api; SiteDataManager now exposes cookies, not just localStorage and sessionStorage. are supercookies blocked yet?
+    - https://github.com/servo/servo/pull/41386	(@janvarga, @mrobinson, #41386)	libservo: Add initial `NetworkManager::cache_entries` API (#41386)
+      api; NetworkManager method for listing entries in HTTP cache
 - crash
     - https://github.com/servo/servo/pull/40743	(@mrobinson, #40743)	script: Make a Layout-safe version of `Element::each_custom_state` (#40743)
       crash; in custom elements
@@ -36,8 +44,12 @@
       crash; fix crash in ‘background-repeat: round’
     - https://github.com/servo/servo/pull/41261	(@Taym95, #41261)	Fix RefCell double-borrow in Window::remove_reporting_observer (#41261)
       crash; fix crash in disconnect() on ReportingObserver
+    - https://github.com/servo/servo/pull/41253	(@WaterWhisperer, #41253)	script: Replace `borrow_mut()` with `borrow()` in `AudioBuffer::restore_js_channel_data` (#41253)
+      crash; fix crash when using AudioBuffer with AnalyserNode
     - https://github.com/servo/servo/pull/40945	(@simonwuelker, #40945)	fonts: Panic less in platform/freetype (#40945)
       crash; reduce panics in freetype glue code
+    - https://github.com/servo/servo/pull/41533	(@jschwe, #41533)	compositor: Remove unwrap if surface unbound (#41533)
+      crash; fix crash when switching windows (in future patch?)
     - https://github.com/servo/servo/pull/41570	(@jschwe, #41570)	servoshell: ohos: Fix crash when hiding IME (#41570)
       crash
 - css
@@ -85,6 +97,10 @@
       dom; fix ‘dblclick’ events on <input> events
     - https://github.com/servo/servo/pull/41316	(@kkoyung, #41316)	script: Implement encrypt/decrypt operations of RSA-OAEP (#41316)
       dom; crypto.subtle.encrypt() and decrypt() for `RSA-OAEP`
+    - https://github.com/servo/servo/pull/41355	(@TimvdLippe, #41355)	script: Implement destroying of top-level navigable (#41355)
+      dom; improved handling of closing documents in iframes. iframe lifecycle is hard <https://hsivonen.fi/about-blank/>
+    - https://github.com/servo/servo/pull/41376	(@simonwuelker, #41376)	script: Prescan byte stream to determine encoding before parsing document (#41376)
+      dom; partial support for <meta charset>
     - https://github.com/servo/servo/pull/41395	(@kkoyung, #41395)	script: Store `HashAlgorithmIdentifier` as `NormalizedAlgorithm` (#41395)
       dom; more crypto.subtle changes
     - https://github.com/servo/servo/pull/41346	(@TimvdLippe, #41346)	script: Implement destroying of documents (#41346)
@@ -95,6 +111,12 @@
       dom; more crypto.subtle changes
     - https://github.com/servo/servo/pull/41435	(@simonwuelker, #41435)	script: Use chardetng to guess encoding when all else fails (#41435)
       dom; guess the character encoding in pages that do not declare one <https://hsivonen.fi/chardetng/>
+    - https://github.com/servo/servo/pull/41372	(@stevennovaryo, #41372)	script: Add stub `VisualViewport` Interface (#41372)
+      dom; started working on VisualViewport API
+    - https://github.com/servo/servo/pull/41482	(@janvarga, #41482)	storage: Fix WebStorage SQLite writes until schema migration is implemented (#41482)
+      dom; fix persistence of localStorage data
+    - https://github.com/servo/servo/pull/41531	(@janvarga, #41531)	storage: Scope `WebStorage` quota per storage type instead of per origin total (#41531)
+      dom; fix localStorage full breaking sessionStorage (and vice versa)
     - https://github.com/servo/servo/pull/41472	(@kkoyung, #41472)	script: Add helper function to handle JsonWebKey common encoding tasks (#41472)
       dom; more crypto.subtle changes
     - https://github.com/servo/servo/pull/41544	(@kkoyung, #41544)	script: Add helper function for setting JsonWebKey key_ops attribute (#41544)
@@ -110,9 +132,13 @@
       editing
     - https://github.com/servo/servo/pull/41330	(@freyacodes, #41330)	layout: Fix caret never rendering following a newline (#41330)
       editing; fix caret failing to render at start of line
+    - https://github.com/servo/servo/pull/41521	(@mrobinson, #41521)	base: Move Unicode offset types to `base` (#41521)
+      editing; part of fixing unicode offset bugs
 - input
     - https://github.com/servo/servo/pull/41028	(@kongbai1996, @yezhizhen, #41028)	touch: Stop flinging if no scroll happened (#41028)
       input; fix breakage of flinging after reaching scrollport extrema
+    - https://github.com/servo/servo/pull/41156	(@mrobinson, #41156)	libservo: Remove `WebViewInner::rect` (#41156)
+      input; fix hit testing after resizing window
     - https://github.com/servo/servo/pull/41184	(@mrobinson, #41184)	servoshell: Use `WheelMode::DeltaPixel` on line-based wheel events converted to pixels (#41184)
       input; fix line-based scroll wheels going way too fast
 - layout
@@ -120,8 +146,18 @@
       layout; fix incremental layout when animating (or changing?) ‘order’
     - https://github.com/servo/servo/pull/41272	(@simonwuelker, #41272)	script: Support legacy "background" presentational hint on more elements (#41272)
       layout; now support `background` and `bgcolor` attributes on <table>, <thead>, <tbody>, <tfoot>, <tr>, <td>, <th>
+    - https://github.com/servo/servo/pull/41291	(@Loirooriol, #41291)	layout: Obey min/max constraints when min/max violations sum to zero when flexing items (#41291)
+      layout; fix sizing of flex items with ‘max-width’ or ‘max-height’
     - https://github.com/servo/servo/pull/41350	(@mrobinson, #41350)	stylo: Enable vendor-prefixed properties (#41350)
       layout; enabled vendor-prefixed CSS properties like ‘-moz-transform’
+    - https://github.com/servo/servo/pull/41478	(@andreubotella, #41478)	script: Make link elements set `ElementState::UNVISITED` (#41478)
+      layout; fix matching of certain selectors containing ‘:link’
+    - https://github.com/servo/servo/pull/41513	(@Loirooriol, #41513)	layout: Take floats into account for the intrinsic sizes of an inline FC (#41513)
+      layout; fix intrinsic sizes containing floats
+    - https://github.com/servo/servo/pull/41510	(@Loirooriol, #41510)	layout: Stop clearing floats on anonymous blocks for intrinsic sizes (#41510)
+      layout; fix anonymous blocks near floats
+    - https://github.com/servo/servo/pull/41477	(@Loirooriol, #41477)	layout: Don't omit empty fragments for inline boxes (#41477)
+      layout; fix getClientRects() in cases with empty fragments
 - perf
     - https://github.com/servo/servo/pull/40984	(@mrobinson, @Loirooriol, #40984)	layout: Handle stacking context tree outlines during display list building (#40984)
       perf; reduce work done when focus changes
@@ -129,6 +165,8 @@
       devtools perf
     - https://github.com/servo/servo/pull/40613	(@Narfinger, @gterzian, @Taym95, #40613)	net: Implement eviction in the HTTP cache using `quick_cache` (#40613)
       perf; memory cache eviction
+    - https://github.com/servo/servo/pull/41368	(@webbeef, #41368)	script: set a bloom filter when creating a MatchingContext (#41368)
+      perf; improved speed of selector matching
     - https://github.com/servo/servo/pull/41451	(@WaterWhisperer, #41451)	feat: `gamepad` feature flag (#41451)
       perf; gamepad support now optional at build time
 - servoshell
@@ -138,3 +176,6 @@
       servoshell; includes new button in tab bar
     - https://github.com/servo/servo/pull/41235	(@mrobinson, #41235)	servoshell: Create new WebDriver `WebView`s in new toplevel windows (#41235)
       servoshell; webdriver now uses multiple windows when creating new webviews
+- windowing
+    - https://github.com/servo/servo/pull/41144	(@mrobinson, #41144)	compositing: Drop `Painter`s when they have no `WebView`s (#41144)
+      windowing; part of multiple windows work

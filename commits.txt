@@ -1382,7 +1382,8 @@ https://github.com/servo/servo/pull/41151	(@Ajay-singh1, #41151)	fonts: Add more
     # - Some new FAIL expectations are added. They were skipped by WPT when the import key operation of RSA-PSS had not
     # been implemented, and requires other not-yet-implemented operations to pass.
     # Fixes: #34362, and part of #41113
-https://github.com/servo/servo/pull/41156	(@mrobinson, #41156)	libservo: Remove `WebViewInner::rect` (#41156)
++https://github.com/servo/servo/pull/41156	(@mrobinson, #41156)	libservo: Remove `WebViewInner::rect` (#41156)
+    input; fix hit testing after resizing window
     # With the removal of the MDI support, a `WebView` is now always as big as
     # the `RenderingContext` onto which it renders. This change removes the
     # remnant of the MDI support which is the `rect` property. This was
@@ -1399,7 +1400,8 @@ https://github.com/servo/servo/pull/41156	(@mrobinson, #41156)	libservo: Remove 
     # any major API changes.
     # Reference:- https://crates.io/crates/xml-rs/0.8.28
     # Testing: It doesn't require testing because this is just the change in the crate's name
-https://github.com/servo/servo/pull/41144	(@mrobinson, #41144)	compositing: Drop `Painter`s when they have no `WebView`s (#41144)
++https://github.com/servo/servo/pull/41144	(@mrobinson, #41144)	compositing: Drop `Painter`s when they have no `WebView`s (#41144)
+    windowing; part of multiple windows work
     # Remove `Painter`s from the `Compositor` when their final `WebView` is
     # dropped. This ensures that their resources are properly released and
     # deinitialized, such as the WebRender instance and all of its resources.
@@ -1511,7 +1513,7 @@ https://github.com/servo/servo/pull/41131	(@tharkum, #41131)	script: Decouple ow
     # a crash in WebRender.
     # Testing: This change adds a crash test.
     # Fixes: #41130.
-https://github.com/servo/servo/pull/41177	(@Loirooriol, #41177)	layout: Merge BaseFragment and BaseFragmentInfo (#41177)
+-https://github.com/servo/servo/pull/41177	(@Loirooriol, #41177)	layout: Merge BaseFragment and BaseFragmentInfo (#41177)
     # These structs used to be different when they were added in #29699: `BaseFragment` had a `debug_id` field, while
     # `BaseFragmentInfo` didn't. But this field was later removed in #35001, so the structs became identical.
     # Therefore, this patch just unifies them. I'm picking `BaseFragmentInfo` as the name, since it was the most frequently
@@ -2234,7 +2236,7 @@ https://github.com/servo/servo/pull/41214	(@rayguo17, #41214)	net: check actual 
     # `Content-Range` Header. Do not construct resposne from this cached response if the two does not match.
     # Testing: http_cache unittest and does not affect any existing WPT test result.
     # Fixes: https://github.com/servo/servo/issues/41174
-https://github.com/servo/servo/pull/41209	(@Narfinger, #41209)	config: Set the default value of the `network_http_proxy_uri` setting via the `http_proxy` variable (#41209)
++https://github.com/servo/servo/pull/41209	(@Narfinger, #41209)	config: Set the default value of the `network_http_proxy_uri` setting via the `http_proxy` variable (#41209)
     api; respect `http_proxy` environment variable
     # This parses the env variable "http_proxy" for servoshell and sets the network_http_proxy_uri if it exists to the
     # same value.
@@ -2473,7 +2475,7 @@ https://github.com/servo/servo/pull/41236	(@janvarga, #41236)	libservo: Introduc
     # RSASSA-PKCS1-v1_5.
     # Testing: Pass some WPT tests that were expected to fail.
     # Fixes: Part of #41113
-https://github.com/servo/servo/pull/41268	(@treeshateorcs, @yezhizhen, #41268)	prefs: Handle uppercase HTTP_PROXY variable (#41268)
++https://github.com/servo/servo/pull/41268	(@treeshateorcs, @yezhizhen, #41268)	prefs: Handle uppercase HTTP_PROXY variable (#41268)
     api; respect `HTTP_PROXY` environment variable
     # follow up to #41209
     # #41209 does not read HTTP_PROXY (all caps) or `HtTp_PrOxY" or w/e. i personally have the variable in all
@@ -2609,7 +2611,8 @@ https://github.com/servo/servo/pull/41239	(@helvete003, #41239)	layout: Do not s
     # about the testing. Its a bit overwhelming with all the directories so i am not sure if the test is okay like this
     # or even in the right place.
     # Fixes: #41101
-https://github.com/servo/servo/pull/41253	(@WaterWhisperer, #41253)	script: Replace `borrow_mut()` with `borrow()` in `AudioBuffer::restore_js_channel_data` (#41253)
++https://github.com/servo/servo/pull/41253	(@WaterWhisperer, #41253)	script: Replace `borrow_mut()` with `borrow()` in `AudioBuffer::restore_js_channel_data` (#41253)
+    crash; fix crash when using AudioBuffer with AnalyserNode
     # Avoid borrow hazard in `AudioBuffer::restore_js_channel_data`
     # Testing: `./mach check` and `./mach test-wpt
     # tests/wpt/tests/webaudio/the-audio-api/the-analysernode-interface/test-analyser-output.html --pref
@@ -2843,7 +2846,8 @@ https://github.com/servo/servo/pull/40987	(@Narfinger, #40987)	Use `GenericSende
     # - Use the generic channel for webdriver.
     # - Implement try_receive_timeout for GenericReceiver.
     # Testing: WPT should still work.
-https://github.com/servo/servo/pull/41368	(@webbeef, #41368)	script: set a bloom filter when creating a MatchingContext (#41368)
++https://github.com/servo/servo/pull/41368	(@webbeef, #41368)	script: set a bloom filter when creating a MatchingContext (#41368)
+    perf; improved speed of selector matching
     # Uses bloom filters in `MatchingContext` to make selector matching more efficient. This seems to improve Speedometer
     # score a bit.
     # Testing: no new test for that small optimization.
@@ -2926,7 +2930,8 @@ https://github.com/servo/servo/pull/41323	(@janvarga, #41323)	net: Align `Resour
     # This PR aligns `ResourceThreads::clear_cache` with the existing
     # `clear_cookies` function by waiting for a response synchronously.
     # Testing: Unit tests continue to pass.
-https://github.com/servo/servo/pull/41291	(@Loirooriol, #41291)	layout: Obey min/max constraints when min/max violations sum to zero when flexing items (#41291)
++https://github.com/servo/servo/pull/41291	(@Loirooriol, #41291)	layout: Obey min/max constraints when min/max violations sum to zero when flexing items (#41291)
+    layout; fix sizing of flex items with ‘max-width’ or ‘max-height’
     # The old logic had the problem that, if the total violation was zero, we would just freeze all items without clamping
     # their target main size between the min and max sizes.
     # This patch refactors the logic to make it simpler.
@@ -2962,7 +2967,7 @@ https://github.com/servo/servo/pull/41345	(@TimvdLippe, #41345)	script: Mark fet
     # result, page scripts listening for dblclick on the input never received the event.
     # Testing: tested manually.
     # Fixes: #41303
-https://github.com/servo/servo/pull/41373	(@simonwuelker, #41373)	script: Remove redundant call to Node::adopt in Node::replace_all (#41373)
+-https://github.com/servo/servo/pull/41373	(@simonwuelker, #41373)	script: Remove redundant call to Node::adopt in Node::replace_all (#41373)
     # All the new nodes will be `adopt`-ed inside the respective calls to `Node::insert` anyways.
 -https://github.com/servo/servo/pull/41366	(@dependabot[bot], @dependabot[bot], #41366)	build(deps): bump ohos-vsync-sys from 0.1.4 to 0.1.5 (#41366)
     # Bumps [ohos-vsync-sys](https://github.com/openharmony-rs/ohos-sys) from 0.1.4 to 0.1.5.
@@ -3217,7 +3222,8 @@ https://github.com/servo/servo/pull/40825	(@Taym95, #40825)	Clone request/respon
 https://github.com/servo/servo/pull/41414	(@jdm, #41414)	tidy: Add check for feature annotation format. (#41414)
     # This new lint checks for some easy mistakes to make with the annotation format.
     # Testing: New unit tests added.
-https://github.com/servo/servo/pull/41355	(@TimvdLippe, #41355)	script: Implement destroying of top-level navigable (#41355)
++https://github.com/servo/servo/pull/41355	(@TimvdLippe, #41355)	script: Implement destroying of top-level navigable (#41355)
+    dom; improved handling of closing documents in iframes. iframe lifecycle is hard <https://hsivonen.fi/about-blank/>
     # Another step towards being spec-compatible. Right now
     # we can't destroy an unsalvagable document during unloading,
     # as that breaks all kinds of tests. Before that, we need
@@ -3241,7 +3247,8 @@ https://github.com/servo/servo/pull/41407	(@Narfinger, #41407)	Switch profile an
     # `PlatformWindow` are named the same thing. This PR renames them to more
     # accurately reflect what they are.
     # Testing: This PR just does a simple rename so existing tests should suffice.
-https://github.com/servo/servo/pull/41376	(@simonwuelker, #41376)	script: Prescan byte stream to determine encoding before parsing document (#41376)
++https://github.com/servo/servo/pull/41376	(@simonwuelker, #41376)	script: Prescan byte stream to determine encoding before parsing document (#41376)
+    dom; partial support for <meta charset>
     # Servo currently completely ignores `` tags. When we find one with an encoding that is incompatible to the current
     # one, then we should reload the page and start over with the new encoding. A common optimization that has even
     # made its way into the specification is to wait for a few bytes to arrive and inspect them for `meta` tags, so the
@@ -3253,7 +3260,7 @@ https://github.com/servo/servo/pull/41376	(@simonwuelker, #41376)	script: Presca
     # believe they're reasonable.
     # Testing: New tests start to pass.
     # Part of https://github.com/servo/servo/issues/6414
-https://github.com/servo/servo/pull/41405	(@TimvdLippe, #41405)	script: Mark beacon requests as keepalive (#41405)
+-https://github.com/servo/servo/pull/41405	(@TimvdLippe, #41405)	script: Mark beacon requests as keepalive (#41405)
     # This is checked if the body is a stream, but the payload calculation needs to be in a follow-up PR.
     # Part of #38302
 https://github.com/servo/servo/pull/41385	(@TimvdLippe, #41385)	script: Implement customElementRegistry support for document.importNode (#41385)
@@ -3560,7 +3567,8 @@ https://github.com/servo/servo/pull/41401	(@yezhizhen, #41401)	servoshell: Prope
     # (Gamepad Disabled)
     # 3. `cargo build -p servoshell --features "gamepad,webxr,..."` (Gamepad & WebXR Enabled)
     # Fixes: #40897
-https://github.com/servo/servo/pull/41378	(@janvarga, #41378)	libservo: Add initial `SiteDataManager::site_data` API (#41378)
++https://github.com/servo/servo/pull/41378	(@janvarga, #41378)	libservo: Add initial `SiteDataManager::site_data` API (#41378)
+    api; new SiteDataManager API for listing sites that are storing data
     # This PR adds an initial `site_data` API to `SiteDataManager`, allowing
     # embedders to obtain a unified list of sites that have associated site data.
     # The implementation introduces supporting infrastructure across storage and
@@ -3630,7 +3638,8 @@ https://github.com/servo/servo/pull/41322	(@gterzian, #41322)	indexeddb: impleme
     # returning current databases to script.
     # Testing: WPT tests with new passes
     # Fixes: The "Implement databases deletion and `databases`" item of https://github.com/servo/servo/issues/40983
-https://github.com/servo/servo/pull/41372	(@stevennovaryo, #41372)	script: Add stub `VisualViewport` Interface (#41372)
++https://github.com/servo/servo/pull/41372	(@stevennovaryo, #41372)	script: Add stub `VisualViewport` Interface (#41372)
+    dom; started working on VisualViewport API
     # Add placeholder implementation of DOM `VisualViewport` according to the spec
     # https://drafts.csswg.org/cssom-view/#visualviewport. This is the first step of implementing the interface and
     # syncing it with the `PinchZoom` struct that we had in the `Embedder`.
@@ -3651,7 +3660,8 @@ https://github.com/servo/servo/pull/41352	(@mukilan, #41352)	libservo: Let `User
     # constellation via messages. The change also separates the serialized version containg the user contents into a new
     # `UserContent` structure so that the API cannot be misused.
     # Testing: New unit tests have been added for the different scenarios involving UserContentManager.
-https://github.com/servo/servo/pull/41482	(@janvarga, #41482)	storage: Fix WebStorage SQLite writes until schema migration is implemented (#41482)
++https://github.com/servo/servo/pull/41482	(@janvarga, #41482)	storage: Fix WebStorage SQLite writes until schema migration is implemented (#41482)
+    dom; fix persistence of localStorage data
     # This PR fixes WebStorage SQLite writes by switching to `UPDATE` and `INSERT` as a
     # temporary fallback.
     # The previous `UPSERT` statement assumes a `UNIQUE` or `PRIMARY KEY` constraint
@@ -3866,7 +3876,8 @@ https://github.com/servo/servo/pull/41436	(@yerke, #41436)	stylo: add layout.css
 -https://github.com/servo/servo/pull/41507	(@yezhizhen, #41507)	Bump sea-query `1.0.0-rc.9`->`1.0.0-rc.23` and sea-query-rusqlite `0.8.0-rc.8`->`0.8.0-rc.14` (#41507)
     # Dependa-human at service. Dependabot can't really bump these since they are in `components/storage`.
     # Fixes: #41504
-https://github.com/servo/servo/pull/41478	(@andreubotella, #41478)	script: Make link elements set `ElementState::UNVISITED` (#41478)
++https://github.com/servo/servo/pull/41478	(@andreubotella, #41478)	script: Make link elements set `ElementState::UNVISITED` (#41478)
+    layout; fix matching of certain selectors containing ‘:link’
     # In Servo, the `:link` and `:any-link` pseudo-classes correctly match link elements when they are part of a compound
     # selector whose last simple selector does not start with them (e.g. `a:link` or `:link b`), but they do not match
     # when the last simple selector starts with `:link`.
@@ -3978,13 +3989,15 @@ https://github.com/servo/servo/pull/41478	(@andreubotella, #41478)	script: Make 
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/41513	(@Loirooriol, #41513)	layout: Take floats into account for the intrinsic sizes of an inline FC (#41513)
++https://github.com/servo/servo/pull/41513	(@Loirooriol, #41513)	layout: Take floats into account for the intrinsic sizes of an inline FC (#41513)
+    layout; fix intrinsic sizes containing floats
     # The computation of the min-content and max-content sizes of an inline formatting context was ignoring floated contents.
     # Now we will take them into account.
     # Testing: One test is now passing. Note there isn't much test coverage because there is no spec, and browsers aren't
     # fully interoperable. More tests should be added as part of https://github.com/w3c/csswg-drafts/issues/9120
     # Fixes: #3923
-https://github.com/servo/servo/pull/41510	(@Loirooriol, #41510)	layout: Stop clearing floats on anonymous blocks for intrinsic sizes (#41510)
++https://github.com/servo/servo/pull/41510	(@Loirooriol, #41510)	layout: Stop clearing floats on anonymous blocks for intrinsic sizes (#41510)
+    layout; fix anonymous blocks near floats
     # When computing the intrinsic sizes of a block container which doesn't establish an inline formatting context,
     # block-level children which don't establish an independent formatting context clear floats. That's because these
     # blocks overlap the floats instead of being placed next to them.
@@ -3992,7 +4005,8 @@ https://github.com/servo/servo/pull/41510	(@Loirooriol, #41510)	layout: Stop cle
     # context. This matches what other browsers do.
     # Testing: 4 tests are now passing
     # Fixes: #41280
-https://github.com/servo/servo/pull/41521	(@mrobinson, #41521)	base: Move Unicode offset types to `base` (#41521)
++https://github.com/servo/servo/pull/41521	(@mrobinson, #41521)	base: Move Unicode offset types to `base` (#41521)
+    editing; part of fixing unicode offset bugs
     # This moves the Unicode offset types to the `base` crate and makes them
     # generally more usable throughout the Servo codebase. In addition, they
     # are renamed to use Rust naming and to be a bit more consistent:
@@ -4011,10 +4025,11 @@ https://github.com/servo/servo/pull/41519	(@sagudev, #41519)	script: Use more wr
     # This is companion PR to https://github.com/servo/mozjs/pull/680 but it was originally written as part of #40716.
     # Testing: Covered by `/webidl/ecmascript-binding/global-object-implicit-this-value-cross-realm.html`
 >>> 2025-12-27T06:05:57Z
-https://github.com/servo/servo/pull/41525	(@Loirooriol, #41525)	layout: Use `LogicalSides1D` in `compute_inline_content_sizes_for_block_level_boxes()` (#41525)
+-https://github.com/servo/servo/pull/41525	(@Loirooriol, #41525)	layout: Use `LogicalSides1D` in `compute_inline_content_sizes_for_block_level_boxes()` (#41525)
     # Instead of storing the sizes of the start and end floats separately, we can just use a `LogicalSides1D`.
     # Testing: Not needed, no behavior change
-https://github.com/servo/servo/pull/41523	(@janvarga, #41523)	libservo: Group site data entries by eTLD+1 and simplify related tests (#41523)
++https://github.com/servo/servo/pull/41523	(@janvarga, #41523)	libservo: Group site data entries by eTLD+1 and simplify related tests (#41523)
+    api; SiteDataManager (localStorage, sessionStorage, etc) now groups data by eTLD+1 (public suffix list), not just origin.
     # This PR updates `SiteDataManager::site_data` to group entries by eTLD+1
     # instead of origin, matching how site data is typically presented in browser
     # UI and aligning the API with user expectations.
@@ -4028,7 +4043,8 @@ https://github.com/servo/servo/pull/41523	(@janvarga, #41523)	libservo: Group si
     css; support contrast-color() in color values
     # This updates the tests expectations for https://github.com/servo/stylo/pull/283
     # Testing: new wpt tests are passing
-https://github.com/servo/servo/pull/41531	(@janvarga, #41531)	storage: Scope `WebStorage` quota per storage type instead of per origin total (#41531)
++https://github.com/servo/servo/pull/41531	(@janvarga, #41531)	storage: Scope `WebStorage` quota per storage type instead of per origin total (#41531)
+    dom; fix localStorage full breaking sessionStorage (and vice versa)
     # Change quota accounting for `WebStorage` so that usage is tracked per storage
     # type instead of combining `localStorage` and `sessionStorage` into a single per
     # origin total.
@@ -4053,7 +4069,8 @@ https://github.com/servo/servo/pull/41540	(@jschwe, #41540)	servoshell: ohos: Mo
     # This patch adds a helper function `JsonWebKey::encode_string_field` to handle common base64url encoding tasks
     # across multiple algorithms.
     # Testing: Refactoring. Existing tests suffice.
-https://github.com/servo/servo/pull/41528	(@janvarga, #41528)	libservo: Extend `SiteDataManager::site_data` to include cookie sites (#41528)
++https://github.com/servo/servo/pull/41528	(@janvarga, #41528)	libservo: Extend `SiteDataManager::site_data` to include cookie sites (#41528)
+    api; SiteDataManager now exposes cookies, not just localStorage and sessionStorage. are supercookies blocked yet?
     # Extend `SiteDataManager::site_data` to include sites that have cookies
     # stored by the networking layer.
     # This aligns cookie handling with the grouping model already used for
@@ -4079,7 +4096,8 @@ https://github.com/servo/servo/pull/41520	(@sagudev, #41520)	script: Support new
     # migration to new context model. Second commit has another demo.
     # Testing: Covered by WPT
     # Part of #40600
-https://github.com/servo/servo/pull/41533	(@jschwe, #41533)	compositor: Remove unwrap if surface unbound (#41533)
++https://github.com/servo/servo/pull/41533	(@jschwe, #41533)	compositor: Remove unwrap if surface unbound (#41533)
+    crash; fix crash when switching windows (in future patch?)
     # If present_bound_surface fails for other reasons, we already handle this by simply printing the error.
     # If there is no surface attached to the context, we also simply log the error and otherwise ignore it,
     # instead of crashing servo.
@@ -4264,7 +4282,8 @@ https://github.com/servo/servo/pull/41533	(@jschwe, #41533)	compositor: Remove u
     # - `if: github.repository == 'servo/servo' && needs.build-harmonyos-aarch64.result == 'success'` does not work, jobs are
     # still spawned, see [mach try ohos, with failing build step](https://github.com/servo/servo/actions/runs/20556664058)
     # and [upstream issue](https://github.com/actions/toolkit/issues/581)
-https://github.com/servo/servo/pull/41386	(@janvarga, @mrobinson, #41386)	libservo: Add initial `NetworkManager::cache_entries` API (#41386)
++https://github.com/servo/servo/pull/41386	(@janvarga, @mrobinson, #41386)	libservo: Add initial `NetworkManager::cache_entries` API (#41386)
+    api; NetworkManager method for listing entries in HTTP cache
     # Add initial support in `NetworkManager` for listing entries currently stored
     # in the HTTP cache. Each returned entry is identified by its cache key (URL).
     # The necessary support has been added to the net crate to expose cache entry
@@ -4509,7 +4528,8 @@ https://github.com/servo/servo/pull/41458	(@TimvdLippe, #41458)	script: Use corr
     # The actual code changes can be found in the [upstream PR](https://github.com/openharmony-rs/ohos-ime/pull/11)
     # Testing: Manually tested the fix with the issue reproducer.
     # Fixes: #41535
-https://github.com/servo/servo/pull/41477	(@Loirooriol, #41477)	layout: Don't omit empty fragments for inline boxes (#41477)
++https://github.com/servo/servo/pull/41477	(@Loirooriol, #41477)	layout: Don't omit empty fragments for inline boxes (#41477)
+    layout; fix getClientRects() in cases with empty fragments
     # For an inline box that had already generated some fragment, we were omitting additional fragments that would have
     # had no content, padding, border nor margin. This basically happened when the inline was split by a block, e.g. ``.
     # However, other browsers agree that JS APIs like `getClientRects()` should include these empty fragments, so remove
