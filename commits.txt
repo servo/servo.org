@@ -1,6 +1,6 @@
 >>> 2025-12-01T06:09:12Z
 +https://github.com/servo/servo/pull/40961	(@jschwe, #40961)	servoshell: Fix stdout / stderr output in windows production builds (#40961)
-    servoshell; --help etc now works on windows, as long as you run servoshell from a console
+    ;servoshell; --help etc now works on windows, as long as you run servoshell from a console
     # When servo is started from the command line, we still want output to be printed. On windows, due to us using the
     # `windows` subsystem (as opposed to the default `console` subsystem), this doesn't work out-of-the-box, and we need
     # to manually attempt to attach to the console of the parent process. If servo was not started from the command line,
@@ -249,7 +249,7 @@ https://github.com/servo/servo/pull/40943	(@janvarga, #40943)	net: Expose make_s
     # existing tests.
     # Fixes: #40957.
 +https://github.com/servo/servo/pull/40941	(@Narfinger, #40941)	net: Allow servo to use a http proxy without authentication (#40941)
-    api; --pref network_http_proxy_uri
+    ;api; --pref network_http_proxy_uri
     # Servo can now use a http proxy to connect to the internet. This currently only supports using all connections
     # through the proxy.
     # This uses the already used hyper_util crate which had the functionality in it already.
@@ -262,7 +262,7 @@ https://github.com/servo/servo/pull/40943	(@janvarga, #40943)	net: Expose make_s
     # See https://github.com/servo/servo/actions/runs/19816434323/job/56768628158.
     # Fixes: Treacherous bug that is only revealed when other crates's `windows-sys` is downgraded.
 +https://github.com/servo/servo/pull/40960	(@atbrakhi, #40960)	config: Rename `DebugOpts` to `DiagnosticsLogging` and get rid of `dump` terminology (#40960)
-    api; DebugOpts is now DiagnosticsLogging; DebugOpts::disable_share_style_cache is now Prefs::layout_style_sharing_cache_enabled; other options have been renamed to not use the term “dump”; `-Z` can now be reached with `SERVO_DIAGNOSTICS`
+    ;api; DebugOpts is now DiagnosticsLogging; DebugOpts::disable_share_style_cache is now Prefs::layout_style_sharing_cache_enabled; other options have been renamed to not use the term “dump”; `-Z` can now be reached with `SERVO_DIAGNOSTICS`
     # In this PR, we rename `DebugOpts` to `DiagnosticsLogging`, add some
     # documentation and rename variables to get rid of dump terminology.
     # Testing:
@@ -273,7 +273,7 @@ https://github.com/servo/servo/pull/40943	(@janvarga, #40943)	net: Expose make_s
     # Signed-off-by: Narfinger
     # Testing: Custom run on https://github.com/Narfinger/servo/actions/runs/19575793934
 +https://github.com/servo/servo/pull/40959	(@atbrakhi, #40959)	Move `disable_share_style_cache` to `prefs` (#40959)
-    api; see SERVO_DIAGNOSTICS patch
+    ;api; see SERVO_DIAGNOSTICS patch
     # This change move `DebugOpts::disable_share_style_cache` to `Prefs::layout_style_sharing_cache_enabled` and ensure
     # it is enabled by default. We also inverted the usage.
     # Testing:
@@ -605,7 +605,7 @@ https://github.com/servo/servo/pull/41008	(@Narfinger, #41008)	Use 'GenericSende
     # Signed-off-by: Narfinger
     # Testing: This should not change functionality.
 +https://github.com/servo/servo/pull/41010	(@mukilan, @mrobinson, #41010)	libservo: Make `Servo` an opaque cloneable handle (#41010)
-    api; `Servo` is now cloneable to share within a thread
+    ;api; `Servo` is now cloneable to share within a thread
     # Move the members of `Servo` struct to an inner structure that is wrapped in an `Rc` so that handle to `Servo`
     # instances can be made cloneable and used from `WebView`s.
     # Testing: This preserves existing public API of the Servo struct, so should be covered by existing tests.
@@ -993,7 +993,7 @@ https://github.com/servo/servo/pull/41032	(@Narfinger, #41032)	Documentation: Ad
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
 +https://github.com/servo/servo/pull/41013	(@atbrakhi, #41013)	config: Add `SERVO_DIAGNOSTICS` environment variable for diagnostic options (#41013)
-    api; see SERVO_DIAGNOSTICS patch
+    ;api; see SERVO_DIAGNOSTICS patch
     # With this change can now configure diagnostic logging via the `SERVO_DIAGNOSTICS` environment variable in addition
     # to the existing -Z command-line flag.
     # The environment variable accepts the same comma-separated options as -Z (e.g.,
@@ -1075,7 +1075,7 @@ https://github.com/servo/servo/pull/41039	(@danilopedraza, #41039)	script: add e
     # [w3c](https://w3c.github.io/webcrypto/#aes-ctr-operations-encrypt) docs to write the messages.
     # I'm thinking on adding more messages, so any feedback would be appreciated! :)
 +https://github.com/servo/servo/pull/40935	(@Narfinger, #40935)	net: use system certificates (#40935)
-    api; use platform root certs by default; old behaviour (webpki roots) available with --pref network_webpki_roots; can still provide custom roots with Opts::certificate_path / --certificate-path=
+    ;api; use platform root certs by default; old behaviour (webpki roots) available with --pref network_webpki_roots; can still provide custom roots with Opts::certificate_path / --certificate-path=
     # This changes the certificate verifier to use rustls_platform_verifier under the hood.
     # **Note**: The rustls-platform-verifier has specific instructions for android and currently we fall back to the
     # webpki roots for this platform.
@@ -2128,7 +2128,7 @@ https://github.com/servo/servo/pull/41171	(@yezhizhen, #41171)	webdriver: Enable
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
 +https://github.com/servo/servo/pull/41179	(@mrobinson, #41179)	Fix all Android build warnings and make the CA verifier preference more flexible (#41179)
-    api; see other root certs change
+    ;api; see other root certs change
     # This change fixes a variety of build warnings on Android. In a related
     # change, the CA verifier preference allows using a list of certificate
     # overrides and the `rust-webpki` verifier regardless of platform. Whether
@@ -2237,7 +2237,7 @@ https://github.com/servo/servo/pull/41214	(@rayguo17, #41214)	net: check actual 
     # Testing: http_cache unittest and does not affect any existing WPT test result.
     # Fixes: https://github.com/servo/servo/issues/41174
 +https://github.com/servo/servo/pull/41209	(@Narfinger, #41209)	config: Set the default value of the `network_http_proxy_uri` setting via the `http_proxy` variable (#41209)
-    api; respect `http_proxy` environment variable
+    ;api; respect `http_proxy` environment variable
     # This parses the env variable "http_proxy" for servoshell and sets the network_http_proxy_uri if it exists to the
     # same value.
     # Testing: Tested that it correctly picks it up.
@@ -2476,7 +2476,7 @@ https://github.com/servo/servo/pull/41236	(@janvarga, #41236)	libservo: Introduc
     # Testing: Pass some WPT tests that were expected to fail.
     # Fixes: Part of #41113
 +https://github.com/servo/servo/pull/41268	(@treeshateorcs, @yezhizhen, #41268)	prefs: Handle uppercase HTTP_PROXY variable (#41268)
-    api; respect `HTTP_PROXY` environment variable
+    ;api; respect `HTTP_PROXY` environment variable
     # follow up to #41209
     # #41209 does not read HTTP_PROXY (all caps) or `HtTp_PrOxY" or w/e. i personally have the variable in all
     # caps. I propose we check both "HTTP_PROXY" and "http_proxy", but not mixed case. Firefox does just that at
