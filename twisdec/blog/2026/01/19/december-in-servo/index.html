@@ -256,6 +256,22 @@
 -->
 <p><strong>servoshell</strong> now supports <strong>multiple windows</strong> (@mrobinson, #40927, #41235)!
 This builds on features that landed in Servo’s embedding API <a href="/twisdec/blog/2025/12/15/november-in-servo/">last month</a>, and we’ve also fixed a memory leak when closing windows (@mrobinson, #41144).</p>
+<p>When using <strong>servoshell</strong> on Windows, you can now see <code>--help</code> and log output, as long as servoshell was started in a console.</p>
+<p>Servo diagnostics options are now accessible in servoshell via the <code>SERVO_DIAGNOSTICS</code> environment variable (@atbrakhi, #41013), in addition to the usual <code>-Z</code> / <code>--debug=</code> arguments.</p>
+<h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Servo now has basic support for <strong>HTTP proxies</strong> (@Narfinger, #40941).
+You can set the proxy URL in the <code>http_proxy</code> (@Narfinger, #41209) or <code>HTTP_PROXY</code> (@treeshateorcs, @yezhizhen, #41268) environment variables, or via <code>--pref network_http_proxy_uri</code>.</p>
+<p>We now use the <strong>system root certificates</strong> by default (@Narfinger, @mrobinson, #40935, #41179), on most platforms.
+If you don’t want to trust the system root certificates, you can instead continue to use Mozilla’s root certificates with <code>--pref network_use_webpki_roots</code>.
+As always, you can also add your own root certificates via <a href="https://doc.servo.org/servo/opts/struct.Opts.html"><code>Opts</code></a>::<a href="https://doc.servo.org/servo/opts/struct.Opts.html#structfield.certificate_path"><code>certificate_path</code></a> (<code>--certificate-path=</code>).</p>
+<p><a href="https://doc.servo.org/servo/struct.Servo.html"><code>Servo</code></a>, the main handle for controlling Servo, is now cloneable for sharing within the same thread (@mukilan, @mrobinson, #41010).</p>
+<p>Several interfaces have also been renamed:</p>
+<ul>
+<li><code>DebugOpts</code>::<code>disable_share_style_cache</code> is now <a href="https://doc.servo.org/servo/prefs/struct.Preferences.html"><code>Preferences</code></a>::<a href="https://doc.servo.org/servo/prefs/struct.Preferences.html#structfield.layout_style_sharing_cache_enabled"><code>layout_style_sharing_cache_enabled</code></a> (@atbrakhi, #40959)</li>
+<li>The rest of <code>DebugOpts</code> has been moved to <a href="https://doc.servo.org/servo/opts/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>, and the options have been renamed (@atbrakhi, #40960)</li>
+</ul>
 <style>
     ._correction {
         max-width: 33em;
