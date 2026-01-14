@@ -654,7 +654,7 @@ https://github.com/servo/servo/pull/40902	(@Loirooriol, @mrobinson, #40902)	scri
     # caret or selections get correctly updated.
     # Testing: Manually tested that #38989 is not regressing
 +https://github.com/servo/servo/pull/40982	(@mrobinson, @mukilan, #40982)	libservo: Finish the `SimpleDialog` API (#40982)
-    api; new SimpleDialog / AlertDialog / ConfirmDialog / PromptDialog interface, harder to misuse and reduces boilerplate for embedders that want to ignore dialogs
+    ;api; new SimpleDialog / AlertDialog / ConfirmDialog / PromptDialog interface, harder to misuse and reduces boilerplate for embedders that want to ignore dialogs
     # Finish exposing the `SimpleDialog` API in libservo, abstracting away the
     # response senders into structures with methods. In addition, add a
     # default behavior so that embedders do not have to explicitly send a
@@ -922,7 +922,7 @@ https://github.com/servo/servo/pull/41032	(@Narfinger, #41032)	Documentation: Ad
     # messages.
     # Testing: No behavioral change. Existing tests suffice.
 +https://github.com/servo/servo/pull/41012	(@mukilan, @mrobinson, #41012)	libservo: Trigger shutdown internally from `Servo`'s `Drop` impl (#41012)
-    api; Servo::start_shutting_down() and deinit() removed in favour of Drop the last handle
+    ;api; Servo::start_shutting_down() and deinit() removed in favour of Drop the last handle
     # Remove the public API to trigger shutdown and instead trigger the process from `Servo`'s implementation of `Drop`
     # trait.
     # This makes it hard to create issues involving the order of destruction of `Servo` and `WebView`s. It will also
@@ -2463,7 +2463,8 @@ https://github.com/servo/servo/pull/41257	(@mrobinson, #41257)	mach: Allow updat
     # logging in via the web interface, doing this via the API requires an
     # access token.
     # Testing: This change adds a unit test for the regex that matches GitHub Action URLs.
-https://github.com/servo/servo/pull/41236	(@janvarga, #41236)	libservo: Introduce `CookieManager` for embedders (#41236)
++https://github.com/servo/servo/pull/41236	(@janvarga, #41236)	libservo: Introduce `CookieManager` for embedders (#41236)
+    ;api; basis of #41255
     # This PR introduces an initial CookieManager abstraction intended primarily
     # for embedders to inspect and manage cookies.
     # At this stage, only clearing all cookies is supported. Additional
@@ -2780,7 +2781,7 @@ https://github.com/servo/servo/pull/41314	(@mrobinson, #41314)	servoshell: Do no
     # approach has never been adopted. We fall back to longer implicit wait time now.
     # Testing: https://github.com/servo/servo/actions/runs/20264413218
 +https://github.com/servo/servo/pull/41255	(@janvarga, #41255)	libservo: Introduce `SiteDataManager` and `NetworkManager` (#41255)
-    api; new SiteDataManager allowing clearing cache and cookies; old CookieManager renamed to NetworkManager
+    ;api; new SiteDataManager allowing clearing cache and cookies; old CookieManager renamed to NetworkManager
     # This PR introduces an initial `SiteDataManager` abstraction intended
     # primarily for embedders to inspect and manage site data.
     # At this stage, `SiteDataManager` supports clearing network cache and
@@ -3157,7 +3158,7 @@ https://github.com/servo/servo/pull/41014	(@Taym95, #41014)	IndexedDB: Handle er
     # Fixes: #17635.
     # Fixes: #14941.
 +https://github.com/servo/servo/pull/41351	(@atbrakhi, #41351)	Add `ServoDelegate` and `WebViewDelegate` methods for Console API (#41351)
-    api; new show_console_message() method in both ServoDelegate and WebViewDelegate
+    ;api; new show_console_message() method in both ServoDelegate and WebViewDelegate
     # Route console messages through the embedding API instead of printing directly, giving embedders control over
     # console output handling.
     # Testing: Should be covered by exsisting tests
@@ -3568,7 +3569,7 @@ https://github.com/servo/servo/pull/41401	(@yezhizhen, #41401)	servoshell: Prope
     # 3. `cargo build -p servoshell --features "gamepad,webxr,..."` (Gamepad & WebXR Enabled)
     # Fixes: #40897
 +https://github.com/servo/servo/pull/41378	(@janvarga, #41378)	libservo: Add initial `SiteDataManager::site_data` API (#41378)
-    api; new SiteDataManager API for listing sites that are storing data
+    ;api; new SiteDataManager API for listing sites that are storing data
     # This PR adds an initial `site_data` API to `SiteDataManager`, allowing
     # embedders to obtain a unified list of sites that have associated site data.
     # The implementation introduces supporting infrastructure across storage and
@@ -3603,7 +3604,8 @@ https://github.com/servo/servo/pull/41441	(@yezhizhen, #41441)	wpt: Disable prox
 https://github.com/servo/servo/pull/41486	(@leo030303, #41486)	LocalStorage: Add table initialisation for in memory databases (#41486)
     # Fixes #41485
     # Added a unit test.
-https://github.com/servo/servo/pull/41474	(@janvarga, #41474)	libservo: Move network cache management to `NetworkManager` (#41474)
++https://github.com/servo/servo/pull/41474	(@janvarga, #41474)	libservo: Move network cache management to `NetworkManager` (#41474)
+    ;api; NetworkManager::clear_cache (initially added in #41255)
     # This PR moves network cache management out of `SiteDataManager` and into
     # `NetworkManager`, aligning the API with how browser engines conceptually
     # separate network layer state from site scoped data.
@@ -4029,7 +4031,7 @@ https://github.com/servo/servo/pull/41519	(@sagudev, #41519)	script: Use more wr
     # Instead of storing the sizes of the start and end floats separately, we can just use a `LogicalSides1D`.
     # Testing: Not needed, no behavior change
 +https://github.com/servo/servo/pull/41523	(@janvarga, #41523)	libservo: Group site data entries by eTLD+1 and simplify related tests (#41523)
-    api; SiteDataManager (localStorage, sessionStorage, etc) now groups data by eTLD+1 (public suffix list), not just origin.
+    ;api; SiteDataManager (localStorage, sessionStorage, etc) now groups data by eTLD+1 (public suffix list), not just origin.
     # This PR updates `SiteDataManager::site_data` to group entries by eTLD+1
     # instead of origin, matching how site data is typically presented in browser
     # UI and aligning the API with user expectations.
@@ -4070,7 +4072,7 @@ https://github.com/servo/servo/pull/41540	(@jschwe, #41540)	servoshell: ohos: Mo
     # across multiple algorithms.
     # Testing: Refactoring. Existing tests suffice.
 +https://github.com/servo/servo/pull/41528	(@janvarga, #41528)	libservo: Extend `SiteDataManager::site_data` to include cookie sites (#41528)
-    api; SiteDataManager now exposes cookies, not just localStorage and sessionStorage. are supercookies blocked yet?
+    ;api; SiteDataManager now exposes cookies, not just localStorage and sessionStorage. are supercookies blocked yet?
     # Extend `SiteDataManager::site_data` to include sites that have cookies
     # stored by the networking layer.
     # This aligns cookie handling with the grouping model already used for
@@ -4283,7 +4285,7 @@ https://github.com/servo/servo/pull/41520	(@sagudev, #41520)	script: Support new
     # still spawned, see [mach try ohos, with failing build step](https://github.com/servo/servo/actions/runs/20556664058)
     # and [upstream issue](https://github.com/actions/toolkit/issues/581)
 +https://github.com/servo/servo/pull/41386	(@janvarga, @mrobinson, #41386)	libservo: Add initial `NetworkManager::cache_entries` API (#41386)
-    api; NetworkManager method for listing entries in HTTP cache
+    ;api; NetworkManager method for listing entries in HTTP cache
     # Add initial support in `NetworkManager` for listing entries currently stored
     # in the HTTP cache. Each returned entry is identified by its cache key (URL).
     # The necessary support has been added to the net crate to expose cache entry
