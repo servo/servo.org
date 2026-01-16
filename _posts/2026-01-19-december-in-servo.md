@@ -21,6 +21,10 @@ Servo diagnostics options are now accessible in servoshell via the `SERVO_DIAGNO
 [**Servo’s devtools**](https://book.servo.org/contributing/devtools.html) now partially support the **Network** > **Security** tab (@jiang1997, #40567), allowing you to inspect some of the TLS details of your requests.
 We’ve also made it **compatible with Firefox 145** (@eerii, #41087), and use fewer IPC resources (@mrobinson, #41161).
 
+<figure>
+    <img src="{{ '/img/blog/2026-01-devtools-security.png' | url }}" alt="this website in Servo’s devtools, showing that the main request used TLS 1.3, TLS13_AES_256_GCM_SHA384 cipher suite, and X25519MLKEM768 key exchange, with HSTS enabled and HPKP disabled">
+</figure>
+
 ## Embedding API
 
 Servo now has basic support for **HTTP proxies** (@Narfinger, #40941).
