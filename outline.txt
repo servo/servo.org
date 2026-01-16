@@ -7,6 +7,8 @@
       crash; fix crash in chiptune.com with `<link rel="shortcut icon" href=""/>`
     - https://github.com/servo/servo/pull/41158	(@mrobinson, #41158)	layout: Ensure that `background-repeat: round` size calculation rounds to nearest natural number (#41158)
       crash; fix crash in ‘background-repeat: round’
+    - https://github.com/servo/servo/pull/41262	(@Loirooriol, #41262)	layout: Treat `<audio>` as replaced and do not display when there is no `controls` attribute (#41262)
+      crash layout; fix crash and replaced layout bugs
     - https://github.com/servo/servo/pull/41261	(@Taym95, #41261)	Fix RefCell double-borrow in Window::remove_reporting_observer (#41261)
       crash; fix crash in disconnect() on ReportingObserver
     - https://github.com/servo/servo/pull/41253	(@WaterWhisperer, #41253)	script: Replace `borrow_mut()` with `borrow()` in `AudioBuffer::restore_js_channel_data` (#41253)
@@ -17,34 +19,41 @@
       crash; fix crash when switching windows (in future patch?)
     - https://github.com/servo/servo/pull/41570	(@jschwe, #41570)	servoshell: ohos: Fix crash when hiding IME (#41570)
       crash
-- css
-    - DONE https://github.com/servo/servo/pull/41542	(@webbeef, #41542)	style: enable contrast-color() (#41542)
-      css; support contrast-color() in color values
 - dom
-    - DONE https://github.com/servo/servo/pull/35991	(@Taym95, #35991)	Script Implement ReadableByteStreamTee (#35991)
-      dom; tee() on readable byte streams (ReadableStream type “bytes”)
-    - DONE https://github.com/servo/servo/pull/41111	(@Taym95, #41111)	Expose window.clientInformation as a navigator alias (#41111)
-      dom; window.clientInformation = navigator
+    - https://github.com/servo/servo/pull/40940	(@tharkum, #40940)	script: Fire the video `resize` event in the expected order (#40940)
+      dom; fix ‘resize’ events on <video> elements
+    - https://github.com/servo/servo/pull/40977	(@longvatrong111, #40977)	selectors::Element::parent() shouldn't cross shadow tree boundary (#40977)
+      dom; fix shadow dom style resolution (not Element::parent() DOM API)
+    - https://github.com/servo/servo/pull/41039	(@danilopedraza, #41039)	script: add error messages (#41039)
+      dom; more crypto.subtle changes
     - https://github.com/servo/servo/pull/41199	(@jdm, #41199)	script: Add newlines after each value in formdata body. (#41199)
       dom; fix form submission issue affecting login page on lichess.org
     - https://github.com/servo/servo/pull/41187	(@mrobinson, #41187)	layout: Serialize `transform` according to spec for `getComputedValue()` (#41187)
       dom; fix ‘transform’ in getComputedStyle()
     - https://github.com/servo/servo/pull/41319	(@Taym95, #41319)	script: retarget dblclick from input UA shadow DOM to host (#41319)
       dom; fix ‘dblclick’ events on <input> events
+    - https://github.com/servo/servo/pull/41325	(@Taym95, #41325)	Fix hashchange only queue when fragment actually changes (#41325)
+      dom; fix ‘hashchange’ events
     - https://github.com/servo/servo/pull/41355	(@TimvdLippe, #41355)	script: Implement destroying of top-level navigable (#41355)
       dom; improved handling of closing documents in iframes. iframe lifecycle is hard <https://hsivonen.fi/about-blank/>
-    - DONE https://github.com/servo/servo/pull/41376	(@simonwuelker, #41376)	script: Prescan byte stream to determine encoding before parsing document (#41376)
-      dom; partial support for <meta charset>
     - https://github.com/servo/servo/pull/41346	(@TimvdLippe, #41346)	script: Implement destroying of documents (#41346)
       dom; now correctly unload iframes when removed from document
-    - DONE https://github.com/servo/servo/pull/41435	(@simonwuelker, #41435)	script: Use chardetng to guess encoding when all else fails (#41435)
-      dom; guess the character encoding in pages that do not declare one <https://hsivonen.fi/chardetng/>
     - https://github.com/servo/servo/pull/41372	(@stevennovaryo, #41372)	script: Add stub `VisualViewport` Interface (#41372)
       dom; started working on VisualViewport API
     - https://github.com/servo/servo/pull/41482	(@janvarga, #41482)	storage: Fix WebStorage SQLite writes until schema migration is implemented (#41482)
       dom; fix persistence of localStorage data
     - https://github.com/servo/servo/pull/41531	(@janvarga, #41531)	storage: Scope `WebStorage` quota per storage type instead of per origin total (#41531)
       dom; fix localStorage full breaking sessionStorage (and vice versa)
+    - https://github.com/servo/servo/pull/41536	(@sagudev, #41536)	script: Pass &mut CurrentRealm in callbacks (#41536)
+      dom; improving GC safety (see issue mozjs#647, pull mozjs#638)
+    - https://github.com/servo/servo/pull/41537	(@sagudev, #41537)	script: Use more new JSContext/CurrentRealm in crossorigin codegen (#41537)
+      dom; improving GC safety (see issue mozjs#647, pull mozjs#638)
+    - https://github.com/servo/servo/pull/41520	(@sagudev, #41520)	script: Support new context for promise and add some more helpers to ease migration (#41520)
+      dom; improving GC safety (see issue mozjs#647, pull mozjs#638)
+    - https://github.com/servo/servo/pull/41546	(@sagudev, #41546)	cargo: Update mozjs to improve soundness (#41546)
+      dom; fix undefined behaviour in mozjs (@jdm, @gmorenz, @sagudev, mozjs#688, mozjs#689, mozjs#692)
+    - https://github.com/servo/servo/pull/41564	(@sagudev, #41564)	script: Obtain `&mut JSContext` at the start of the script and pass it down to msg handlers (#41564)
+      dom; improving GC safety (see issue mozjs#647, pull mozjs#638)
 - editing
     - https://github.com/servo/servo/pull/40837	(@freyacodes, #40837)	Fix duplicate carets in <textarea> (#40837)
       editing
@@ -60,10 +69,10 @@
     - https://github.com/servo/servo/pull/41184	(@mrobinson, #41184)	servoshell: Use `WheelMode::DeltaPixel` on line-based wheel events converted to pixels (#41184)
       input; fix line-based scroll wheels going way too fast
 - layout
-    - DONE https://github.com/servo/servo/pull/41272	(@simonwuelker, #41272)	script: Support legacy "background" presentational hint on more elements (#41272)
-      layout; now support `background` and `bgcolor` attributes on <table>, <thead>, <tbody>, <tfoot>, <tr>, <td>, <th>
-    - DONE https://github.com/servo/servo/pull/41350	(@mrobinson, #41350)	stylo: Enable vendor-prefixed properties (#41350)
-      layout; enabled vendor-prefixed CSS properties like ‘-moz-transform’
+    - https://github.com/servo/servo/pull/41262	(@Loirooriol, #41262)	layout: Treat `<audio>` as replaced and do not display when there is no `controls` attribute (#41262)
+      crash layout; fix crash and replaced layout bugs
+    - https://github.com/servo/servo/pull/41239	(@helvete003, #41239)	layout: Do not set `cursor: text` on `<input type=color>` (#41239)
+      layout; fix UA styles
 - perf
     - https://github.com/servo/servo/pull/40984	(@mrobinson, @Loirooriol, #40984)	layout: Handle stacking context tree outlines during display list building (#40984)
       perf; reduce work done when focus changes

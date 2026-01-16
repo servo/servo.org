@@ -326,7 +326,8 @@ https://github.com/servo/servo/pull/40943	(@janvarga, #40943)	net: Expose make_s
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/40940	(@tharkum, #40940)	script: Fire the video `resize` event in the expected order (#40940)
++https://github.com/servo/servo/pull/40940	(@tharkum, #40940)	script: Fire the video `resize` event in the expected order (#40940)
+    dom; fix ‘resize’ events on <video> elements
     # Queuing a media element task given the media element to fire an event named `resize` at the media element shoud
     # be done:
     # - upon the initial `metadata` event from the media engine
@@ -600,7 +601,7 @@ https://github.com/servo/servo/pull/40803	(@TimvdLippe, #40803)	Implement usage 
     # using the `document.protocol_handler_automation_mode`
     # which will be part of a follow-up PR.
     # Part of #40615
-https://github.com/servo/servo/pull/41008	(@Narfinger, #41008)	Use 'GenericSender' and 'GenericReceiver' for bluetooth main component (#41008)
+-https://github.com/servo/servo/pull/41008	(@Narfinger, #41008)	Use 'GenericSender' and 'GenericReceiver' for bluetooth main component (#41008)
     # Using generic channel for bluetooth module.
     # Signed-off-by: Narfinger
     # Testing: This should not change functionality.
@@ -911,7 +912,7 @@ https://github.com/servo/servo/pull/40997	(@dyegoaurelio, #40997)	Block and repo
     # and show up with the same name in tooling.
     # That changes turns the name to 'Script#{script id}' instead.
     # Testing: No test coverage for that very internal detail.
-https://github.com/servo/servo/pull/41032	(@Narfinger, #41032)	Documentation: Add documentation for EmbedderMsg to clarify (#41032)
+-https://github.com/servo/servo/pull/41032	(@Narfinger, #41032)	Documentation: Add documentation for EmbedderMsg to clarify (#41032)
     # EmbedderMsg go towards the Embedder. We clarify this.
     # Testing: Just a doc comment.
 +https://github.com/servo/servo/pull/35991	(@Taym95, #35991)	Script Implement ReadableByteStreamTee (#35991)
@@ -1020,7 +1021,8 @@ https://github.com/servo/servo/pull/41046	(@tharkum, #41046)	html: Enhance image
     # - html/semantics/embedded-content/the-img-element/current-pixel-density/error.html
     # - html/semantics/embedded-content/the-img-element/environment-changes/viewport-change.html
     # Fixes: https://github.com/servo/servo/issues/38777
-https://github.com/servo/servo/pull/40977	(@longvatrong111, #40977)	selectors::Element::parent() shouldn't cross shadow tree boundary (#40977)
++https://github.com/servo/servo/pull/40977	(@longvatrong111, #40977)	selectors::Element::parent() shouldn't cross shadow tree boundary (#40977)
+    dom; fix shadow dom style resolution (not Element::parent() DOM API)
     # ServoLayoutElement::parent_element() method shouldn't cross shadow tree boundary.
     # `inheritance_parent` uses `traversal_parent`
     # Testing:
@@ -1032,7 +1034,7 @@ https://github.com/servo/servo/pull/40977	(@longvatrong111, #40977)	selectors::E
     # cause https://github.com/servo/servo/pull/40977#issuecomment-3608471378
     # Fixes: [#40896](https://github.com/servo/servo/issues/40896)
     # cc: @xiaochengh
-https://github.com/servo/servo/pull/41031	(@Narfinger, #41031)	IndexedDB: Use GenericSender, GenericReceiver and GenericCallback for IndexedDB (#41031)
+-https://github.com/servo/servo/pull/41031	(@Narfinger, #41031)	IndexedDB: Use GenericSender, GenericReceiver and GenericCallback for IndexedDB (#41031)
     # Moving IndexedDB to use the generic channel methods.
     # Of note is the change in 'IDBRequest::execute_async'. This method previously added a channel that was constructed
     # from the callsite in put into the AsyncOperation. Now we do not take a function but take a 'FnOnce(GenericCallback>)
@@ -1048,7 +1050,7 @@ https://github.com/servo/servo/pull/41031	(@Narfinger, #41031)	IndexedDB: Use Ge
     # Some cleanup to avoid having to specify an empty `handle_message` method if it is not implemented or not
     # necessary. Removed the TODOs from Environment and Pause since they don't respond to any message.
     # Testing: This patch doesn't change behaviour.
-https://github.com/servo/servo/pull/41074	(@eerii, #41074)	devtools: Box the actor inside register (#41074)
+-https://github.com/servo/servo/pull/41074	(@eerii, #41074)	devtools: Box the actor inside register (#41074)
     # Small refactor to reduce verbosity when creating actors. Since they always need to be boxed, do that in
     # `register{_later}` instead. I also added the `Send` trait to `Actor` directly since it is always needed.
     # Testing: This patch doesn't change behaviour.
@@ -1064,10 +1066,11 @@ https://github.com/servo/servo/pull/41067	(@yezhizhen, #41067)	webdriver: Add to
     # since we can dispatch touch now. I plan to improve this and make it work soon!
     # Fixes: The step 4 of #41042. We still need to fix some bugs of spec, and wait for resolution.
     # TODO later: When we have touch simulation for Desktop, "Element click" should also dispatch pointer touch.
-https://github.com/servo/servo/pull/41066	(@jdm, #41066)	allocator: Write untracked allocations to log file. (#41066)
+-https://github.com/servo/servo/pull/41066	(@jdm, #41066)	allocator: Write untracked allocations to log file. (#41066)
     # The output is very large, so moving it away from stdout makes it easier to write tools to process it.
     # Testing: No automated testing for optional low-level feature.
-https://github.com/servo/servo/pull/41039	(@danilopedraza, #41039)	script: add error messages (#41039)
++https://github.com/servo/servo/pull/41039	(@danilopedraza, #41039)	script: add error messages (#41039)
+    dom; more crypto.subtle changes
     # script: add error messages for conditions in `encrypt_aes_ctr`
     # Testing: No tests needed (?) let me know if I should add tests for this somewhere.
     # Fixes: #40756
@@ -1315,7 +1318,7 @@ https://github.com/servo/servo/pull/41139	(@eerii, #41139)	devtools: ActorEncode
     # are not actors, so including them in this trait doesn't make much sense. Besides, they have special requirements
     # so it is better to keep them separate.
     # Testing: Manual testing in `about:debugging`.
-https://github.com/servo/servo/pull/41086	(@MCozhusheck, #41086)	mach: Add yes installation cofirmation flag to bootstrap command (#41086)
+-https://github.com/servo/servo/pull/41086	(@MCozhusheck, #41086)	mach: Add yes installation cofirmation flag to bootstrap command (#41086)
     # Implements #40502
     # Adds `--yes` flag to mach bootstrap command which confirms installation of all required packages.
     # Unlike `--force` flag (which also does that) it does NOT reinstall all packages but only confirms them (if required
@@ -1334,7 +1337,7 @@ https://github.com/servo/servo/pull/41086	(@MCozhusheck, #41086)	mach: Add yes i
     # Testing: There aren't really tests for this, but I tested it manually by
     # running the memory reporter and ensuring that both the old and new values were
     # the same.
-https://github.com/servo/servo/pull/41051	(@Narfinger, #41051)	Devtools: Switch to GenericChannel and GenericCallback (#41051)
+-https://github.com/servo/servo/pull/41051	(@Narfinger, #41051)	Devtools: Switch to GenericChannel and GenericCallback (#41051)
     # Switch the devtools part to GenericCallback and GenericSender.
     # To keep the diff small the names where not changes as a Sender almost fills the same requirement as a callback.
     # Testing: As this is mostly type changes, the compilation is the test but also devtools seem to work fine with
@@ -1417,7 +1420,7 @@ https://github.com/servo/servo/pull/41151	(@Ajay-singh1, #41151)	fonts: Add more
     # implementation for both simplicity and necessity.
     # Testing: This should not change observable behavior, but does fix a memory leak
     # while closing windows.
-https://github.com/servo/servo/pull/41143	(@Narfinger, #41143)	Base: Implement GenericOneshot channels (#41143)
+-https://github.com/servo/servo/pull/41143	(@Narfinger, #41143)	Base: Implement GenericOneshot channels (#41143)
     # This implements a GenericOneshot channel. The size in the crossbeam channel is restricted while in the Ipc case
     # we use the same IpcChannel(for now).
     # We also use these channels in WebDriver to prove they work.
@@ -2426,7 +2429,8 @@ https://github.com/servo/servo/pull/41282	(@mrobinson, @Loirooriol, #41282)	layo
     # `BaseFragment`. The goal here is to eventually also store a reference to the parent fragment in this `BaseFragment`
     # as well.
     # Testing: This should not change behavior in an observable way, so is covered by WPT tests.
-https://github.com/servo/servo/pull/41262	(@Loirooriol, #41262)	layout: Treat `<audio>` as replaced and do not display when there is no `controls` attribute (#41262)
++https://github.com/servo/servo/pull/41262	(@Loirooriol, #41262)	layout: Treat `<audio>` as replaced and do not display when there is no `controls` attribute (#41262)
+    crash layout; fix crash and replaced layout bugs
     # Add an important UA style to ensure that `` isn't displayed at all when it doesn't have the `controls` attribute. This
     # matches Gecko, Blink and WebKit.
     # When it does have the attribute, then treat it as replaced. For example, this means that it won't stretch by default
@@ -2607,7 +2611,8 @@ https://github.com/servo/servo/pull/41254	(@WaterWhisperer, #41254)	net: Track f
     # - before:
     # - now:
     # Fixes: #38730
-https://github.com/servo/servo/pull/41239	(@helvete003, #41239)	layout: Do not set `cursor: text` on `<input type=color>` (#41239)
++https://github.com/servo/servo/pull/41239	(@helvete003, #41239)	layout: Do not set `cursor: text` on `<input type=color>` (#41239)
+    layout; fix UA styles
     # type=color was just missing in the `servo.css`. Since i am new to the project it would be awesome to get more infos
     # about the testing. Its a bit overwhelming with all the directories so i am not sure if the test is okay like this
     # or even in the right place.
@@ -2843,7 +2848,7 @@ https://github.com/servo/servo/pull/41292	(@danilopedraza, #41292)	script: Add e
 -https://github.com/servo/servo/pull/41301	(@simonwuelker, #41301)	Add tendril to the list of html5ever-crates to patch (#41301)
     # `tendril` has moved into the html5ever repository, so when we patch html5ever then we need to patch tendril too.
 >>> 2025-12-19T06:06:08Z
-https://github.com/servo/servo/pull/40987	(@Narfinger, #40987)	Use `GenericSender` and `GenericReceiver` for WebDriver (#40987)
+-https://github.com/servo/servo/pull/40987	(@Narfinger, #40987)	Use `GenericSender` and `GenericReceiver` for WebDriver (#40987)
     # - Use the generic channel for webdriver.
     # - Implement try_receive_timeout for GenericReceiver.
     # Testing: WPT should still work.
@@ -3208,7 +3213,8 @@ https://github.com/servo/servo/pull/41318	(@mrobinson, #41318)	libservo: Allow r
     # Fixes: #41220.
 -https://github.com/servo/servo/pull/41344	(@mrobinson, #41344)	ci: Correctly pass `arm: false` to x86 macOS WPT jobs (#41344)
     # Testing: I did a try run to test this change.
-https://github.com/servo/servo/pull/41325	(@Taym95, #41325)	Fix hashchange only queue when fragment actually changes (#41325)
++https://github.com/servo/servo/pull/41325	(@Taym95, #41325)	Fix hashchange only queue when fragment actually changes (#41325)
+    dom; fix ‘hashchange’ events
     # Fix hashchange only queue when fragment actually changes
     # Testing: tested it manually for now.
     # Fixes: #41304
@@ -3237,7 +3243,7 @@ https://github.com/servo/servo/pull/41408	(@TimvdLippe, #41408)	script: Implemen
     # yet to configure the quota, hence we use the default quota. That's why we have some tests failing again.
     # It involves computing which document to compute the quota for, as well as computing total length of
     # requests. Additionally, the DevTools computation for headers now uses the same logic for headers as deferred fetches.
-https://github.com/servo/servo/pull/41407	(@Narfinger, #41407)	Switch profile and metric to GenericChannel and Callbacks (#41407)
+-https://github.com/servo/servo/pull/41407	(@Narfinger, #41407)	Switch profile and metric to GenericChannel and Callbacks (#41407)
     # Switch profile and metric to GenericChannel.
     # Signed-off-by: Narfinger
     # Testing: If it compiles it should work.
@@ -3314,7 +3320,7 @@ https://github.com/servo/servo/pull/41397	(@jdm, #41397)	config: Add annotations
     # The comment here is out of date and also using `unwrap_or` is a bit more
     # idiomatic.
     # Testing: This doesn't change behavior so is covered by existing tests.
-https://github.com/servo/servo/pull/41401	(@yezhizhen, #41401)	servoshell: Properly handle `WindowEvent::Focused` (#41401)
+-https://github.com/servo/servo/pull/41401	(@yezhizhen, #41401)	servoshell: Properly handle `WindowEvent::Focused` (#41401)
     # There are two bugs listed below. Basically, we never ever set
     # https://github.com/servo/servo/blob/1b0bd11e111508fa3ee7e77ccdf6cf4149d137bb/ports/servoshell/running_app_state.rs#L253-
     # L255
@@ -3594,7 +3600,7 @@ https://github.com/servo/servo/pull/41450	(@simonwuelker, #41450)	script: Make s
     # This makes https://intsys.co.jp/game/panepon/p01/index.html load with the correct encoding. Notably, that site
     # uses shift-jis but has no encoding declaration of any kind.
     # Part of https://github.com/servo/servo/issues/6414
-https://github.com/servo/servo/pull/41441	(@yezhizhen, #41441)	wpt: Disable proxy for `test-wpt` unless users know what they are doing (#41441)
+-https://github.com/servo/servo/pull/41441	(@yezhizhen, #41441)	wpt: Disable proxy for `test-wpt` unless users know what they are doing (#41441)
     # Nowadays Servo automatically loads system default proxy. It has enabled my NSA colleagues to visit external networks
     # without modifying transport layer, whereas `test-wpt` has been failing after it.
     # We disable the proxy unless users know what they are doing.
@@ -3632,7 +3638,7 @@ https://github.com/servo/servo/pull/41486	(@leo030303, #41486)	LocalStorage: Add
     # is loaded.
     # This PR use the "list" as element retrieval target.
     # Testing: Tested with simulated congested network.
-https://github.com/servo/servo/pull/41495	(@atbrakhi, #41495)	Separate `console.clear()` from `ConsoleLogLevel` (#41495)
+-https://github.com/servo/servo/pull/41495	(@atbrakhi, #41495)	Separate `console.clear()` from `ConsoleLogLevel` (#41495)
     # Separate `console.clear()` from `ConsoleLogLevel`. See https://github.com/servo/servo/pull/41311#discussion_r2622642820
     # Testing: Tested locally. Unfortunately in DevTools tests we do not cover console tab
 https://github.com/servo/servo/pull/41322	(@gterzian, #41322)	indexeddb: implement databases concept(detete and `databases` method) (#41322)
@@ -3769,7 +3775,7 @@ https://github.com/servo/servo/pull/41475	(@Loirooriol, #41475)	script: Restrict
     # the static position is only used when both insets in the same axis are `auto`.
     # Therefore, this patch avoids dirtying the box tree when both axes have a non-auto inset.
     # Testing: Not needed, this should have no observable behavior change
-https://github.com/servo/servo/pull/41454	(@janvarga, #41454)	net: Expose `replace_host_table` via test_util (#41454)
+-https://github.com/servo/servo/pull/41454	(@janvarga, #41454)	net: Expose `replace_host_table` via test_util (#41454)
     # Expose `replace_host_table` via test_util so it can be reused by other
     # crates, notably libservo tests.
     # This allows tests to map arbitrary host names to localhost, so loading of
@@ -4082,18 +4088,21 @@ https://github.com/servo/servo/pull/41540	(@jschwe, #41540)	servoshell: ohos: Mo
     # The necessary support has been added to the net crate to expose cookie site
     # information.
     # Testing: The existing integration test has been extended to cover cookies.
-https://github.com/servo/servo/pull/41536	(@sagudev, #41536)	script: Pass &mut CurrentRealm in callbacks (#41536)
++https://github.com/servo/servo/pull/41536	(@sagudev, #41536)	script: Pass &mut CurrentRealm in callbacks (#41536)
+    dom; improving GC safety (see issue mozjs#647, pull mozjs#638)
     # Continuation of #41520 to use more safe cx in promises, now by passing &mut CurrentRealm in callbacks. Most callback
     # implementations still do conversions to old SafeJSContext, so there are some low hanging stuff for follow ups.
     # Testing: Should be covered by existing WPT tests.
     # try run: https://github.com/sagudev/servo/actions/runs/20540030020
     # Part of #40600
-https://github.com/servo/servo/pull/41537	(@sagudev, #41537)	script: Use more new JSContext/CurrentRealm in crossorigin codegen (#41537)
++https://github.com/servo/servo/pull/41537	(@sagudev, #41537)	script: Use more new JSContext/CurrentRealm in crossorigin codegen (#41537)
+    dom; improving GC safety (see issue mozjs#647, pull mozjs#638)
     # reviewable per commit
     # Testing: Should be covered by WPT tests.
     # try run: https://github.com/sagudev/servo/actions/runs/20540365373
     # Part of #40600
-https://github.com/servo/servo/pull/41520	(@sagudev, #41520)	script: Support new context for promise and add some more helpers to ease migration (#41520)
++https://github.com/servo/servo/pull/41520	(@sagudev, #41520)	script: Support new context for promise and add some more helpers to ease migration (#41520)
+    dom; improving GC safety (see issue mozjs#647, pull mozjs#638)
     # This PR adds support for using new JSContext/CurrentRealm to promise and adds some more helpers that will ease
     # migration to new context model. Second commit has another demo.
     # Testing: Covered by WPT
@@ -4313,7 +4322,8 @@ https://github.com/servo/servo/pull/41481	(@d-kraus, #41481)	malloc_size_of: Tra
 -https://github.com/servo/servo/pull/41547	(@WaterWhisperer, #41547)	script: Replace `RefCell` with `DomRefCell` in `svgsvgelement::cached_serialized_data_url` (#41547)
     # Testing: [WPT tests](https://github.com/WaterWhisperer/servo/actions/runs/20552524367/job/59033378580)
     # Fixes: #41539
-https://github.com/servo/servo/pull/41546	(@sagudev, #41546)	cargo: Update mozjs to improve soundness (#41546)
++https://github.com/servo/servo/pull/41546	(@sagudev, #41546)	cargo: Update mozjs to improve soundness (#41546)
+    dom; fix undefined behaviour in mozjs (@jdm, @gmorenz, @sagudev, mozjs#688, mozjs#689, mozjs#692)
     # This bring us these mozjs (soundness) fixes: https://github.com/servo/mozjs/pull/688,
     # https://github.com/servo/mozjs/pull/689 https://github.com/servo/mozjs/pull/692
     # Testing: Should be covered by WPT tests.
@@ -4515,7 +4525,7 @@ https://github.com/servo/servo/pull/41571	(@Gae24, #41571)	script: Pass `ModuleT
     # Inside `notify_owner_to_finish` we already retrieve the `ModuleTree` tied to the corresponding `ModuleIdentity`,
     # but we ended up retrieving it a second time inside of `run_a_module_script` instead of simply passing it.
     # Testing: Covered by existing tests, a simple cleanup.
-https://github.com/servo/servo/pull/41458	(@TimvdLippe, #41458)	script: Use correct creation_url for workers (#41458)
+-https://github.com/servo/servo/pull/41458	(@TimvdLippe, #41458)	script: Use correct creation_url for workers (#41458)
     # Instead of the creation URL of the containing global,
     # it should instead use the URL of the current worker.
     # Despite the referrer specification stating that we
@@ -4537,7 +4547,7 @@ https://github.com/servo/servo/pull/41458	(@TimvdLippe, #41458)	script: Use corr
     # However, other browsers agree that JS APIs like `getClientRects()` should include these empty fragments, so remove
     # the optimization.
     # Testing: Adding WPT
-https://github.com/servo/servo/pull/41423	(@TimvdLippe, #41423)	script: Introduce concept of a fetch group (#41423)
+-https://github.com/servo/servo/pull/41423	(@TimvdLippe, #41423)	script: Introduce concept of a fetch group (#41423)
     # We now keep track of deferred fetches in globalscope
     # rather than in document loader. This matches what
     # the spec expects with its concept of a fetchgroup.
@@ -4644,7 +4654,8 @@ https://github.com/servo/servo/pull/41565	(@sagudev, #41565)	script: Remove redu
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/41564	(@sagudev, #41564)	script: Obtain `&mut JSContext` at the start of the script and pass it down to msg handlers (#41564)
++https://github.com/servo/servo/pull/41564	(@sagudev, #41564)	script: Obtain `&mut JSContext` at the start of the script and pass it down to msg handlers (#41564)
+    dom; improving GC safety (see issue mozjs#647, pull mozjs#638)
     # At the start of the script we create first (and only[^1]) safe `JSContext`, from where we should pass it down to
     # every code that needs the cx. This PR brings it all the way down to message handlers. There is clear separation
     # between functions that use new model `&mut JSContext` and the ones that use the old model (usually they take can_gc).
@@ -4653,7 +4664,7 @@ https://github.com/servo/servo/pull/41564	(@sagudev, #41564)	script: Obtain `&mu
     # (we derive new shorter `&mut JSContext` from the old one).
     # Testing: This is just refactor, but should covered by WPT tests.
     # Part of #40600
-https://github.com/servo/servo/pull/41592	(@jdm, #41592)	tests: Enable css-font-loading tests. (#41592)
+-https://github.com/servo/servo/pull/41592	(@jdm, #41592)	tests: Enable css-font-loading tests. (#41592)
     # We have a partial implementation of FontFace and FontFaceSet, so we should run the tests associated with them.
     # Testing: New tests enabled.
 https://github.com/servo/servo/pull/41496	(@atbrakhi, #41496)	devtools: Implement the actual clearing of `clearMessagesCacheAsync` (#41496)
