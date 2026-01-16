@@ -37,6 +37,8 @@ We’ve also made it **compatible with Firefox 145** (@eerii, #41087), and use f
     <img src="{{ '/img/blog/2026-01-devtools-security.png' | url }}" alt="this website in Servo’s devtools, showing that the main request used TLS 1.3, TLS13_AES_256_GCM_SHA384 cipher suite, and X25519MLKEM768 key exchange, with HSTS enabled and HPKP disabled">
 </figure>
 
+We’ve fixed rendering bugs related to **‘float’**, **‘order’**, **‘max-width’**, **‘max-height’**, **‘:link’ selectors**, and **getClientRects()**, affecting intrinsic sizing (@Loirooriol, #41513), anonymous blocks (@Loirooriol, #41510), incremental layout (@Loirooriol, #40994), flex item sizing (@Loirooriol, #41291), selector matching (@andreubotella, #41478), and empty fragments (@Loirooriol, #41477).
+
 ## Embedding API
 
 Servo now has basic support for **HTTP proxies** (@Narfinger, #40941).
