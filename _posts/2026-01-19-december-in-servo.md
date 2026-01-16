@@ -18,6 +18,9 @@ When using **servoshell** on Windows, you can now see `--help` and log output, a
 
 Servo diagnostics options are now accessible in servoshell via the `SERVO_DIAGNOSTICS` environment variable (@atbrakhi, #41013), in addition to the usual `-Z` / `--debug=` arguments.
 
+[**Servo’s devtools**](https://book.servo.org/contributing/devtools.html) now partially support the **Network** > **Security** tab (@jiang1997, #40567), allowing you to inspect some of the TLS details of your requests.
+We’ve also made it **compatible with Firefox 145** (@eerii, #41087), and use fewer IPC resources (@mrobinson, #41161).
+
 ## Embedding API
 
 Servo now has basic support for **HTTP proxies** (@Narfinger, #40941).
