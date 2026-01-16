@@ -11,8 +11,8 @@ categories:
 - 2991.40/month opencollective
 -->
 
-**servoshell** now supports **multiple windows** (@mrobinson, #40927, #41235)!
-This builds on features that landed in Servo’s embedding API [last month]({{ '/blog/2025/12/15/november-in-servo/' | url }}), and we’ve also fixed a memory leak when closing windows (@mrobinson, #41144).
+**Servo 0.0.4** and our December nightly builds now support **multiple windows** (@mrobinson, #40927, #41235, #41144)!
+This builds on features that landed in Servo’s embedding API [last month]({{ '/blog/2025/12/15/november-in-servo/' | url }}).
 
 We’ve continued shipping the **[SubtleCrypto](https://w3c.github.io/webcrypto/) [API](https://wicg.github.io/webcrypto-modern-algos/)**, with full support for **ChaCha20-Poly1305**, **RSA-OAEP**, **RSA-PSS**, and **RSASSA-PKCS1-v1_5** (see below), plus **importKey() for ML-KEM** (@kkoyung, #41585) and several other improvements (@kkoyung, @PaulTreitel, #41180, #41395, #41428, #41442, #41472, #41544, #41563, #41587):
 
