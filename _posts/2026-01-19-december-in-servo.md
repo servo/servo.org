@@ -14,6 +14,18 @@ categories:
 **servoshell** now supports **multiple windows** (@mrobinson, #40927, #41235)!
 This builds on features that landed in Servo’s embedding API [last month]({{ '/blog/2025/12/15/november-in-servo/' | url }}), and we’ve also fixed a memory leak when closing windows (@mrobinson, #41144).
 
+We’ve continued shipping the **[SubtleCrypto](https://w3c.github.io/webcrypto/) [API](https://wicg.github.io/webcrypto-modern-algos/)**, with full support for **ChaCha20-Poly1305**, **RSA-OAEP**, **RSA-PSS**, and **RSASSA-PKCS1-v1_5** (see below), plus **importKey() for ML-KEM** (@kkoyung, #41585) and several other improvements (@kkoyung, @PaulTreitel, #41180, #41395, #41428, #41442, #41472, #41544, #41563, #41587):
+
+<figure style="overflow-x: scroll;">
+
+| Algorithm | |
+|---|---|
+| <span style=white-space:nowrap>ChaCha20-Poly1305</span> | (@kkoyung, #40978, #41003, #41030) |
+| <span style=white-space:nowrap>RSA-OAEP</span> | (@kkoyung, @TimvdLippe, @jdm, #41225, #41217, #41240, #41316) |
+| <span style=white-space:nowrap>RSA-PSS</span> | (@kkoyung, @jdm, #41157, #41225, #41240, #41287) |
+| <span style=white-space:nowrap>RSASSA-PKCS1-v1_5</span> | (@kkoyung, @jdm, #41172, #41225, #41240, #41267) |
+</figure>
+
 When using **servoshell** on Windows, you can now see `--help` and log output, as long as servoshell was started in a console.
 
 Servo diagnostics options are now accessible in servoshell via the `SERVO_DIAGNOSTICS` environment variable (@atbrakhi, #41013), in addition to the usual `-Z` / `--debug=` arguments.
