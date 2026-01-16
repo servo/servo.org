@@ -13,6 +13,15 @@ categories:
 
 **Servo 0.0.4** and our December nightly builds now support **multiple windows** (@mrobinson, #40927, #41235, #41144)!
 This builds on features that landed in Servo’s embedding API [last month]({{ '/blog/2025/12/15/november-in-servo/' | url }}).
+We’ve also landed support for several web platform features, both old and new:
+
+- **‘contrast-color()’** in CSS color values (@webbeef, #41542)
+- partial support for **&lt;meta charset>** (@simonwuelker, #41376)
+- partial support for [**encoding sniffing**](https://html.spec.whatwg.org/multipage/#encoding-sniffing-algorithm) (@simonwuelker, #41435)
+- **‘background’** and **‘bgcolor’** attributes on &lt;table>, &lt;thead>, &lt;tbody>, &lt;tfoot>, &lt;tr>, &lt;td>, &lt;th> (@simonwuelker, #41272)
+- **tee()** on **readable byte streams** (@Taym95, #35991)
+
+For better compatibility with older web content, we now support **vendor-prefixed** CSS properties like ‘-moz-transform’ (@mrobinson, #41350), as well as window.**clientInformation** (@Taym95, #41111).
 
 We’ve continued shipping the **[SubtleCrypto](https://w3c.github.io/webcrypto/) [API](https://wicg.github.io/webcrypto-modern-algos/)**, with full support for **ChaCha20-Poly1305**, **RSA-OAEP**, **RSA-PSS**, and **RSASSA-PKCS1-v1_5** (see below), plus **importKey() for ML-KEM** (@kkoyung, #41585) and several other improvements (@kkoyung, @PaulTreitel, #41180, #41395, #41428, #41442, #41472, #41544, #41563, #41587):
 
