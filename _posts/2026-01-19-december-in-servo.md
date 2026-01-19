@@ -80,6 +80,13 @@ Several interfaces have also been renamed:
 
 ## Perf and stability
 
+We can now **evict entries** from our **HTTP cache** (@Narfinger, @gterzian, @Taym95, #40613), rather than having it grow forever (or get cleared by an embedder).
+**about:memory** now tracks **SVG-related memory usage** (@d-kraus, #41481), and we’ve fixed memory leaks in &lt;video> and &lt;audio> (@tharkum, #41131).
+
+Servo now does less work when **matching selectors** (@webbeef, #41368), when **focus changes** (@mrobinson, @Loirooriol, #40984), and when **reflowing boxes** whose size did not change (@Loirooriol, @mrobinson, #41160).
+
+To allow for smaller binaries, **gamepad support** is now **optional at build time** (@WaterWhisperer, #41451).
+
 We’ve fixed some **undefined behaviour** around garbage collection (@sagudev, @jdm, @gmorenz, #41546, mozjs#688, mozjs#689, mozjs#692).
 To better avoid other garbage-collection-related bugs (@sagudev, <!-- ISSUE --> mozjs#647, mozjs#638), we’ve continued our work on defining (and migrating to) safer interfaces between Servo and the SpiderMonkey GC (@sagudev, #41519, #41536, #41537, #41520, #41564).
 
