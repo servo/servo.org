@@ -174,7 +174,7 @@
 -https://github.com/servo/servo/pull/40777	(@webbeef, #40777)	script: inline roots.swap_remove() (#40777)
     # This saves the work done by 'ptr::read()' that we don't use.
     # Testing: Green WPT run: https://github.com/webbeef/servo/actions/runs/19560614891
-https://github.com/servo/servo/pull/40943	(@janvarga, #40943)	net: Expose make_server to other crates via test-util feature (#40943)
+-https://github.com/servo/servo/pull/40943	(@janvarga, #40943)	net: Expose make_server to other crates via test-util feature (#40943)
     # This PR extracts make_server() (and related helpers) from net/tests/main.rs
     # into a reusable module, guarded by a new test-util feature.
     # With this change, other Servo crates, especially libservo, can spin up a
@@ -633,7 +633,8 @@ https://github.com/servo/servo/pull/40803	(@TimvdLippe, #40803)	Implement usage 
 -https://github.com/servo/servo/pull/41009	(@mrobinson, #41009)	constellation: Remove debugging `println!` introduced in #40944 (#41009)
     # I inadvertently left this debugging code in before landing the change.
     # Testing: This just removes an unexpected `println!` so no new tests are necessary.
-https://github.com/servo/servo/pull/40981	(@tharkum, #40981)	html: Track the script/UA initiated media `seek` request (#40981)
++https://github.com/servo/servo/pull/40981	(@tharkum, #40981)	html: Track the script/UA initiated media `seek` request (#40981)
+    dom; fix ‘seeked’ events in <video> and <audio>
     # The low-level media `seek` request could be initiated by script (DOM method call or setting of an IDL attribute),
     # by the user agent (seeking data) or by the media engine itself (e.g. gst_play_set_rate()).
     # And to distinguish between them we will use the latest seek position (in seconds) to be able abort processing the
@@ -647,7 +648,7 @@ https://github.com/servo/servo/pull/40981	(@tharkum, #40981)	html: Track the scr
     # - html/semantics/embedded-content/media-elements/preserves-pitch.html
     # See https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/4762
     # Fixes: https://github.com/servo/servo/issues/37057
-https://github.com/servo/servo/pull/40902	(@Loirooriol, @mrobinson, #40902)	script: Don't dirty with ContentOrHeritage damage when changing state (#40902)
+-https://github.com/servo/servo/pull/40902	(@Loirooriol, @mrobinson, #40902)	script: Don't dirty with ContentOrHeritage damage when changing state (#40902)
     # When for example changing the hover state of an element, we were dirtying it with ContentOrHeritage damage, which
     # forced it to be laid out again.
     # This was added in #39102 in order to fix #38989, but for the most part it's no longer needed.
@@ -681,7 +682,8 @@ https://github.com/servo/servo/pull/40902	(@Loirooriol, @mrobinson, #40902)	scri
     # reconstruct it.
     # Testing: Adding new test
     # Fixes: #40813
-https://github.com/servo/servo/pull/40997	(@dyegoaurelio, #40997)	Block and report CSP violations for javascript: URLs in window.open (#40997)
++https://github.com/servo/servo/pull/40997	(@dyegoaurelio, #40997)	Block and report CSP violations for javascript: URLs in window.open (#40997)
+    security; CSP now enforced in `open("javascript:")`
     # Previously, when window.open() was called with a javascript: URL, the script would execute unconditionally without
     # any CSP enforcement. The CSP list was not propagated from the opener to the newly opened document.
     # This commit fixes two issues:
@@ -1003,7 +1005,7 @@ https://github.com/servo/servo/pull/40997	(@dyegoaurelio, #40997)	Block and repo
     # Environment variable parsing is disabled in production builds
     # Testing: Tested locally for release, debug and production build to make sure it is disabled for production
     # Fixes: Part of https://github.com/servo/servo/issues/40863
-https://github.com/servo/servo/pull/41027	(@tharkum, #41027)	html: Change the `play` state of the media player if the old is opposite (#41027)
+-https://github.com/servo/servo/pull/41027	(@tharkum, #41027)	html: Change the `play` state of the media player if the old is opposite (#41027)
     # It's important to check the media player's `paused` state to avoid unnecessary changes to its internal state (via
     # `play`, `pause`), including configuration the `playback rate` and `volume` properties.
     # Depends on https://github.com/servo/media/pull/467
@@ -1012,7 +1014,7 @@ https://github.com/servo/servo/pull/41027	(@tharkum, #41027)	html: Change the `p
     # (the `seek` position is not overridden for default playback rate (1.0)).
     # - html/semantics/embedded-content/media-elements/preserves-pitch.html
     # See https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/4762
-https://github.com/servo/servo/pull/41046	(@tharkum, #41046)	html: Enhance image `update the image data`, `environment changes` algorithms (#41046)
+-https://github.com/servo/servo/pull/41046	(@tharkum, #41046)	html: Enhance image `update the image data`, `environment changes` algorithms (#41046)
     # The following image processing algorithms were updated (with description)
     # - https://html.spec.whatwg.org/multipage/#update-the-image-data
     # - https://html.spec.whatwg.org/multipage/#img-environment-changes
@@ -1369,10 +1371,11 @@ https://github.com/servo/servo/pull/41163	(@lumiscosity, #41163)	Optimize assets
     # route.
     # Testing: This should not show any behavior differences and we do not test
     # for the number of file handles used.
-https://github.com/servo/servo/pull/41159	(@Loirooriol, @mrobinson, #41159)	layout: Cleanup hit-testing logic for outlines (#41159)
+-https://github.com/servo/servo/pull/41159	(@Loirooriol, @mrobinson, #41159)	layout: Cleanup hit-testing logic for outlines (#41159)
     # After #40984, hit-testing shouldn't encounter outlines. So just remove the logic and add an assert instead.
     # Testing: Not needed, no behavior change
-https://github.com/servo/servo/pull/41151	(@Ajay-singh1, #41151)	fonts: Add more Noto fallback options for different languages for Android (#41151)
++https://github.com/servo/servo/pull/41151	(@Ajay-singh1, #41151)	fonts: Add more Noto fallback options for different languages for Android (#41151)
+    layout; better language coverage in default fonts on android
     # This PR adds more fallback options for different fonts in Android Platform.This mimics the behaviour in Gecko for
     # fallback. For reference: https://searchfox.org/firefox-main/source/gfx/thebes/gfxAndroidPlatform.cpp
     # Testing: We do not run tests for Android.
@@ -1439,7 +1442,8 @@ https://github.com/servo/servo/pull/41151	(@Ajay-singh1, #41151)	fonts: Add more
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/41182	(@mrobinson, #41182)	compositing: Have `preventDefault` prevent the scroll behavior of wheel events (#41182)
++https://github.com/servo/servo/pull/41182	(@mrobinson, #41182)	compositing: Have `preventDefault` prevent the scroll behavior of wheel events (#41182)
+    dom; fix preventDefault() on ‘wheel’ events
     # This change makes it so that when `preventDefault` is called on a wheel
     # event, the scroll is prevented. The downside here is that there is more
     # latency on wheel based scroll events. This can be mitigated in the
@@ -1447,7 +1451,8 @@ https://github.com/servo/servo/pull/41182	(@mrobinson, #41182)	compositing: Have
     # followup though.
     # Testing: `/dom/events/scrolling/wheel-event-no-scroll-after-prevent-default.html` is added to test this.
     # Fixes: #41154.
-https://github.com/servo/servo/pull/41160	(@Loirooriol, @mrobinson, #41160)	layout: Preserve cached intrinsic inline sizes in more cases (#41160)
++https://github.com/servo/servo/pull/41160	(@Loirooriol, @mrobinson, #41160)	layout: Preserve cached intrinsic inline sizes in more cases (#41160)
+    perf; faster incremental box tree layout when the size of a box is unchanged
     # If a box has layout damage, but the intrinsic contribution of some ancestor doesn't depend on its contents, then
     # we don't need to clear the cached intrinsic sizes of further ancestors.
     # Testing: No behavior change, just an optimization. It would be good to have unit tests that check we don't do
@@ -1462,7 +1467,8 @@ https://github.com/servo/servo/pull/41160	(@Loirooriol, @mrobinson, #41160)	layo
     # Testing: This part of servoshell is untested, so it's difficult to add
     # a test for this.
     # Fixes: #41164.
-https://github.com/servo/servo/pull/40938	(@Gae24, #40938)	script: Bring creating and running classic scripts closer to spec (#40938)
++https://github.com/servo/servo/pull/40938	(@Gae24, #40938)	script: Bring creating and running classic scripts closer to spec (#40938)
+    servoshell; --unminify-js now works for worker scripts
     # Use the algorithms introduced in #41109 in more places.
     # Follow more closely the spec when executing classic scripts, introducing the concepts of rethrowing and muting errors.
     # Muting errors is not actually implemented, and will be done in a followup.
@@ -1497,7 +1503,8 @@ https://github.com/servo/servo/pull/40938	(@Gae24, #40938)	script: Bring creatin
     # - Some new FAIL expectations are added. They were skipped by WPT when the import key operation of RSASSA-PKCS1-v1_5
     # had not been implemented, and requires other not-yet-implemented operations to pass.
     # Fixes: Part of #41113
-https://github.com/servo/servo/pull/41131	(@tharkum, #41131)	script: Decouple ownership of the media element from IPC router callback (#41131)
++https://github.com/servo/servo/pull/41131	(@tharkum, #41131)	script: Decouple ownership of the media element from IPC router callback (#41131)
+    perf; fix memory leak in <video> and <audio>
     # Added new invocation struct `HTMLMediaElementEventHandler` that allows to decouple ownership of the `HTMLMediaElement`
     # from the IPC router callback (break cyclic reference dependency) by replacing a `Trusted` wrapper with more suitable
     # `WeakRef`.
@@ -2183,7 +2190,8 @@ https://github.com/servo/servo/pull/40939	(@gterzian, @Taym95, #40939)	indexeddb
     # Testing: We clicked on it, it worked.
     # Fixes: Probably none, making this pull request takes as much time as writing a separate issue, if not less.
 >>> 2025-12-13T06:07:36Z
-https://github.com/servo/servo/pull/41229	(@yezhizhen, #41229)	ohos: Do not alert when notified `LoadStatus::Complete` (#41229)
++https://github.com/servo/servo/pull/41229	(@yezhizhen, #41229)	ohos: Do not alert when notified `LoadStatus::Complete` (#41229)
+    servoshell; no longer alerts for every page load on ohos
     # Other platforms don't have this alert. It is simply obnoxious.
     # Also not accurate, as the page may still be loading other content.
 https://github.com/servo/servo/pull/41233	(@mrobinson, #41233)	fonts: Calculate font keys count via number of font keys and not number of `Painter`s (#41233)
@@ -2202,7 +2210,8 @@ https://github.com/servo/servo/pull/41233	(@mrobinson, #41233)	fonts: Calculate 
     # Testing: This turned up in testing when converting the WebDriver to use
     # multiple windows. This change allows that to work properly, so the test is
     # effectively that change.
-https://github.com/servo/servo/pull/41228	(@jdm, #41228)	script: Use rooted typed arrays in generated code and buffer source APIs (#41228)
++https://github.com/servo/servo/pull/41228	(@jdm, #41228)	script: Use rooted typed arrays in generated code and buffer source APIs (#41228)
+    crash; fix crash in Uint8Array
     # There are two flavours of the mozjs `TypedArray` wrapper for typed array objects: one stores a `Box>`, while the
     # other just has a bare `*mut JSObject`. The second one must only be stored inside the `CustomAutoRoot` rooting values,
     # but we were using it in many other places like WebIDL dictionaries without rooting it safely. These changes make
@@ -2228,12 +2237,14 @@ https://github.com/servo/servo/pull/41210	(@TimvdLippe, #41210)	net: Make parsin
     # expects a literal string comparison, regardless if the value reflects a valid origin or not.
     # Initially I thought this was a spec issue (https://github.com/whatwg/fetch/issues/1895), but alas it wasn't.
     # Testing: This allows multiple WPT tests to pass.
-https://github.com/servo/servo/pull/41200	(@jdm, #41200)	devtools: Handle unsupported messages related to devtools settings. (#41200)
++https://github.com/servo/servo/pull/41200	(@jdm, #41200)	devtools: Handle unsupported messages related to devtools settings. (#41200)
+    devtools; can now open the devtools settings panel
     # These commits allow the frontend to open the devtools settings panel successfully and allow the network monitor
     # to function when the "Persist Logs" frontend option is enabled.
     # Testing: Manually tested. No harness for automated tests for the network monitor exist yet.
     # Fixes: #41196
-https://github.com/servo/servo/pull/41214	(@rayguo17, #41214)	net: check actual response body length from http cached response (#41214)
++https://github.com/servo/servo/pull/41214	(@rayguo17, #41214)	net: check actual response body length from http cached response (#41214)
+    net; fix incorrect caching of incomplete responses
     # When constructing response for partial content request from previously cached response with `Content-Range`
     # Header (a.k.a Partial Response), add a check whether the body length of this response match what it claims in its
     # `Content-Range` Header. Do not construct resposne from this cached response if the two does not match.
@@ -2303,7 +2314,8 @@ https://github.com/servo/servo/pull/41234	(@zen-zap, #41234)	script: Do not conf
     #    Button in shadow DOM clicked
     #    ```
     # Fixes: #41002
-https://github.com/servo/servo/pull/40412	(@lukewarlow, #40412)	Fire toggle events for dialog methods (#40412)
++https://github.com/servo/servo/pull/40412	(@lukewarlow, #40412)	Fire toggle events for dialog methods (#40412)
+    dom; fire ‘toggle’ events on <dialog>
     # Fire toggle events for dialog methods
     # Testing: Existing WPTs
     # Depends on #40405
@@ -2443,7 +2455,7 @@ https://github.com/servo/servo/pull/41282	(@mrobinson, @Loirooriol, #41282)	layo
     # test is probably wrong, now we match other browsers.
     # Fixes: #40693
     # Fixes: #41183
-https://github.com/servo/servo/pull/41276	(@yezhizhen, #41276)	CI: Make OHOS scenario tests always succeed (#41276)
+-https://github.com/servo/servo/pull/41276	(@yezhizhen, #41276)	CI: Make OHOS scenario tests always succeed (#41276)
     # 1. Extract a lot of common stuff.
     # 2. Improve stability: use WebDriver implicit wait + get url which would block execution until page is loaded. We
     # no longer need to worry about `NoSuchWindow` exception thanks to it.
@@ -2795,7 +2807,8 @@ https://github.com/servo/servo/pull/41314	(@mrobinson, #41314)	servoshell: Do no
     # better reflect its scope.
     # Additional site data APIs will be added in follow-up PRs.
     # Testing: Added a new integration test with a TODO comment.
-https://github.com/servo/servo/pull/41292	(@danilopedraza, #41292)	script: Add error message text to errors in `aes_operation.rs` (#41292)
++https://github.com/servo/servo/pull/41292	(@danilopedraza, #41292)	script: Add error message text to errors in `aes_operation.rs` (#41292)
+    dom; more crypto.subtle changes
     # add error messages for `encrypt_aes_ctr`, `encrypt_aes_cbc`, and `decrypt_aes_cbc`
     # Related issue: #40756
     # For some of the messages I just used the `fmt::Display` of `UnpadError`, but maybe these messages should be more
@@ -2932,7 +2945,7 @@ https://github.com/servo/servo/pull/41292	(@danilopedraza, #41292)	script: Add e
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/41323	(@janvarga, #41323)	net: Align `ResourceThreads::clear_cache` with `clear_cookies` (#41323)
+-https://github.com/servo/servo/pull/41323	(@janvarga, #41323)	net: Align `ResourceThreads::clear_cache` with `clear_cookies` (#41323)
     # This PR aligns `ResourceThreads::clear_cache` with the existing
     # `clear_cookies` function by waiting for a response synchronously.
     # Testing: Unit tests continue to pass.
@@ -3191,7 +3204,8 @@ https://github.com/servo/servo/pull/41347	(@mrobinson, #41347)	libservo: Make `U
     # Finish adding RSA-OAEP support to WebCrypto API, by implementing the encrypt and decrypt operations of RSA-OAEP.
     # Testing: Pass some WPT tests that were expected to fail.
     # Fixes: Part of #41113
-https://github.com/servo/servo/pull/41318	(@mrobinson, #41318)	libservo: Allow responding to auxiliary `WebView` open requests asynchronously (#41318)
++https://github.com/servo/servo/pull/41318	(@mrobinson, #41318)	libservo: Allow responding to auxiliary `WebView` open requests asynchronously (#41318)
+    api; WebViewDelegate::request_open_auxiliary_webview() is now request_create_new(), and it can now be handled async; subject to further changes
     # This change renames the `WebView::request_open_auxiliary_webview` to
     # `WebView::request_create_new` and allows responding to it
     # asynchronously. A new `CreateNewWebViewRequest` is exposed that keeps
@@ -3226,7 +3240,7 @@ https://github.com/servo/servo/pull/40825	(@Taym95, #40825)	Clone request/respon
     # Fetch spec algorithms for request/response cloning, including the shared body stream.
     # Testing: more WPT test should pass.
     # Fixes: #36503
-https://github.com/servo/servo/pull/41414	(@jdm, #41414)	tidy: Add check for feature annotation format. (#41414)
+-https://github.com/servo/servo/pull/41414	(@jdm, #41414)	tidy: Add check for feature annotation format. (#41414)
     # This new lint checks for some easy mistakes to make with the annotation format.
     # Testing: New unit tests added.
 +https://github.com/servo/servo/pull/41355	(@TimvdLippe, #41355)	script: Implement destroying of top-level navigable (#41355)
@@ -3278,7 +3292,7 @@ https://github.com/servo/servo/pull/41385	(@TimvdLippe, #41385)	script: Implemen
     # scoped registries which we don't support yet. These tests thus flipped: those that were erroneously failing are
     # now passing and vice versa.
     # Part of #34319
-https://github.com/servo/servo/pull/41384	(@TimvdLippe, @jdm, #41384)	script: Remove Drop implementation of FetchCanceller (#41384)
+-https://github.com/servo/servo/pull/41384	(@TimvdLippe, @jdm, #41384)	script: Remove Drop implementation of FetchCanceller (#41384)
     # Instead, we now explicitly call `.terminate()` and introduce relevant methods to FetchCanceller.
     # Follow-up from review in #41345
 -https://github.com/servo/servo/pull/41403	(@yezhizhen, #41403)	wpt: Fix typo when update wpt results from link (#41403)
@@ -3305,7 +3319,8 @@ https://github.com/servo/servo/pull/41384	(@TimvdLippe, @jdm, #41384)	script: Re
     # it relies on the correct ordering of iframe unloading
     # to verify the fetch-later requests are sent.
     # Part of #31973
-https://github.com/servo/servo/pull/41397	(@jdm, #41397)	config: Add annotations to preferences controlling web platform features. (#41397)
++https://github.com/servo/servo/pull/41397	(@jdm, #41397)	config: Add annotations to preferences controlling web platform features. (#41397)
+    api; document experimental web platform features in book (see also book#182, book#189)
     # Per [this zulip
     # thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Keeping.20track.20of.20incomplete.20features/wi
     # th/564402373),
@@ -4029,7 +4044,8 @@ https://github.com/servo/servo/pull/41436	(@yerke, #41436)	stylo: add layout.css
     # servoshell in the tests and on android / ohos.
     # - Allow parsing str slices, instead of requiring Vec. This allows removing unnecessary conversions / allocations.
     # Testing: Covered by existing unit, integration and wpt tests, which pass commandline arguments.
-https://github.com/servo/servo/pull/41519	(@sagudev, #41519)	script: Use more wrappers2 in maybe_cross_origin_set_rawcx (#41519)
++https://github.com/servo/servo/pull/41519	(@sagudev, #41519)	script: Use more wrappers2 in maybe_cross_origin_set_rawcx (#41519)
+    dom; improving GC safety (see issue mozjs#647, pull mozjs#638)
     # This is companion PR to https://github.com/servo/mozjs/pull/680 but it was originally written as part of #40716.
     # Testing: Covered by `/webidl/ecmascript-binding/global-object-implicit-this-value-cross-realm.html`
 >>> 2025-12-27T06:05:57Z
@@ -4300,7 +4316,8 @@ https://github.com/servo/servo/pull/41540	(@jschwe, #41540)	servoshell: ohos: Mo
     # The necessary support has been added to the net crate to expose cache entry
     # information.
     # Testing: A new integration test has been added.
-https://github.com/servo/servo/pull/41481	(@d-kraus, #41481)	malloc_size_of: Track allocations from parsed SVG trees. (#41481)
++https://github.com/servo/servo/pull/41481	(@d-kraus, #41481)	malloc_size_of: Track allocations from parsed SVG trees. (#41481)
+    perf; track SVG memory usage in about:memory
     # Implemented `MallocSizeOf` trait for `usvg::Tree`, `usvg::Node`, `usvg::Group`, `usvg::Path`, `usvg::ClipPath`
     # and  `tiny_skia_path::Path`.
     # Testing:
@@ -4558,7 +4575,7 @@ https://github.com/servo/servo/pull/41571	(@Gae24, #41571)	script: Pass `ModuleT
     # fetch group (which is a separate field from deferred
     # fetches).
     # Fixes #41286
-https://github.com/servo/servo/pull/41565	(@sagudev, #41565)	script: Remove redundant realm entering (#41565)
+-https://github.com/servo/servo/pull/41565	(@sagudev, #41565)	script: Remove redundant realm entering (#41565)
     # `spawn_pipeline` does not need realm entered and `handle_fullscreen_exit` does realm entering on it's own:
     # https://github.com/servo/servo/blob/133c9b4266aa245c7b78ce16a703072749e4bd8a/components/script/script_thread.rs#L2503
     # try run: https://github.com/sagudev/servo/actions/runs/20567048851
