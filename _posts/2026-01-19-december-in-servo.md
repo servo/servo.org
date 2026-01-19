@@ -46,7 +46,7 @@ We’ve also made it **compatible with Firefox 145** (@eerii, #41087), and use f
     <img src="{{ '/img/blog/2026-01-devtools-security.png' | url }}" alt="this website in Servo’s devtools, showing that the main request used TLS 1.3, TLS13_AES_256_GCM_SHA384 cipher suite, and X25519MLKEM768 key exchange, with HSTS enabled and HPKP disabled">
 </figure>
 
-We’ve fixed rendering bugs related to **‘float’**, **‘order’**, **‘max-width’**, **‘max-height’**, **‘:link’ selectors**, and **getClientRects()**, affecting intrinsic sizing (@Loirooriol, #41513), anonymous blocks (@Loirooriol, #41510), incremental layout (@Loirooriol, #40994), flex item sizing (@Loirooriol, #41291), selector matching (@andreubotella, #41478), and empty fragments (@Loirooriol, #41477).
+We’ve fixed rendering bugs related to **‘float’**, **‘order’**, **‘max-width’**, **‘max-height’**, **‘:link’ selectors**, **&lt;audio> layout**, and **getClientRects()**, affecting intrinsic sizing (@Loirooriol, #41513), anonymous blocks (@Loirooriol, #41510), incremental layout (@Loirooriol, #40994), flex item sizing (@Loirooriol, #41291), selector matching (@andreubotella, #41478), replaced element layout (@Loirooriol, #41262), and empty fragments (@Loirooriol, #41477).
 
 Servo now fires **‘toggle’** events on **&lt;dialog>** (@lukewarlow, #40412).
 We’ve also improved the conformance of ‘wheel’ events (@mrobinson, #41182), ‘hashchange’ events (@Taym95, #41325), ‘dblclick’ events on &lt;input> (@Taym95, #41319), ‘resize’ events on &lt;video> (@tharkum, #40940), ‘seeked’ events on &lt;video> and &lt;audio> (@tharkum, #40981), and the ‘transform’ property in getComputedStyle() (@mrobinson, #41187).
@@ -77,6 +77,20 @@ Several interfaces have also been renamed:
 - [`Servo`](https://doc.servo.org/servo/struct.Servo.html)::`clear_cookies` is now [`SiteDataManager`](???)::[`clear_cookies`](???) (@janvarga, #41236, #41255)
 - `DebugOpts`::`disable_share_style_cache` is now [`Preferences`](https://doc.servo.org/servo/prefs/struct.Preferences.html)::[`layout_style_sharing_cache_enabled`](https://doc.servo.org/servo/prefs/struct.Preferences.html#structfield.layout_style_sharing_cache_enabled) (@atbrakhi, #40959)
 - The rest of `DebugOpts` has been moved to [`DiagnosticsLogging`](https://doc.servo.org/servo/opts/struct.DiagnosticsLogging.html), and the options have been renamed (@atbrakhi, #40960)
+
+## Perf and stability
+
+We’ve fixed a crash that occurs when **&lt;link rel="shortcut icon">** has an **empty ‘href’ attribute**, which affected chiptune<!---->.com (@webbeef, #41056), and we’ve also fixed crashes in:
+
+- ‘background-repeat’ (@mrobinson, #41158)
+- &lt;audio> layout (@Loirooriol, #41262)
+- custom elements (@mrobinson, #40743)
+- AudioBuffer (@WaterWhisperer, #41253)
+- AudioNode (@Taym95, #40954)
+- ReportingObserver (@Taym95, #41261)
+- Uint8Array (@jdm, #41228)
+- the fonts system, on FreeType platforms (@simonwuelker, #40945)
+- IME usage, on OpenHarmony (@jschwe, #41570)
 
 <style>
     ._correction {
