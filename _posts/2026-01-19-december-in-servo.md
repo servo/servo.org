@@ -80,6 +80,9 @@ Several interfaces have also been renamed:
 
 ## Perf and stability
 
+We’ve fixed some **undefined behaviour** around garbage collection (@sagudev, @jdm, @gmorenz, #41546, mozjs#688, mozjs#689, mozjs#692).
+To better avoid other garbage-collection-related bugs (@sagudev, <!-- ISSUE --> mozjs#647, mozjs#638), we’ve continued our work on defining (and migrating to) safer interfaces between Servo and the SpiderMonkey GC (@sagudev, #41519, #41536, #41537, #41520, #41564).
+
 We’ve fixed a crash that occurs when **&lt;link rel="shortcut icon">** has an **empty ‘href’ attribute**, which affected chiptune<!---->.com (@webbeef, #41056), and we’ve also fixed crashes in:
 
 - ‘background-repeat’ (@mrobinson, #41158)
