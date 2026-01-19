@@ -93,6 +93,10 @@ To shut down Servo, simply &lt;a href=&quot;https://doc.rust-lang.org/std/mem/fn
 &lt;h2 id=&quot;perf-and-stability&quot; tabindex=&quot;-1&quot;&gt;Perf and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisdec/blog/2026/01/19/december-in-servo/#perf-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We can now &lt;strong&gt;evict entries&lt;/strong&gt; from our &lt;strong&gt;HTTP cache&lt;/strong&gt; (@Narfinger, @gterzian, @Taym95, #40613), rather than having it grow forever (or get cleared by an embedder).
+&lt;strong&gt;about:memory&lt;/strong&gt; now tracks &lt;strong&gt;SVG-related memory usage&lt;/strong&gt; (@d-kraus, #41481), and we’ve fixed memory leaks in &amp;lt;video&amp;gt; and &amp;lt;audio&amp;gt; (@tharkum, #41131).&lt;/p&gt;
+&lt;p&gt;Servo now does less work when &lt;strong&gt;matching selectors&lt;/strong&gt; (@webbeef, #41368), when &lt;strong&gt;focus changes&lt;/strong&gt; (@mrobinson, @Loirooriol, #40984), and when &lt;strong&gt;reflowing boxes&lt;/strong&gt; whose size did not change (@Loirooriol, @mrobinson, #41160).&lt;/p&gt;
+&lt;p&gt;To allow for smaller binaries, &lt;strong&gt;gamepad support&lt;/strong&gt; is now &lt;strong&gt;optional at build time&lt;/strong&gt; (@WaterWhisperer, #41451).&lt;/p&gt;
 &lt;p&gt;We’ve fixed some &lt;strong&gt;undefined behaviour&lt;/strong&gt; around garbage collection (@sagudev, @jdm, @gmorenz, #41546, mozjs#688, mozjs#689, mozjs#692).
 To better avoid other garbage-collection-related bugs (@sagudev, &lt;!-- ISSUE --&gt; mozjs#647, mozjs#638), we’ve continued our work on defining (and migrating to) safer interfaces between Servo and the SpiderMonkey GC (@sagudev, #41519, #41536, #41537, #41520, #41564).&lt;/p&gt;
 &lt;p&gt;We’ve fixed a crash that occurs when &lt;strong&gt;&amp;lt;link rel=“shortcut icon”&amp;gt;&lt;/strong&gt; has an &lt;strong&gt;empty ‘href’ attribute&lt;/strong&gt;, which affected chiptune&lt;!----&gt;.com (@webbeef, #41056), and we’ve also fixed crashes in:&lt;/p&gt;

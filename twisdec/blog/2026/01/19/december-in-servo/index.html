@@ -329,6 +329,10 @@ To shut down Servo, simply <a href="https://doc.rust-lang.org/std/mem/fn.drop.ht
 <h2 id="perf-and-stability" tabindex="-1">Perf and stability <a class="header-anchor" href="#perf-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>We can now <strong>evict entries</strong> from our <strong>HTTP cache</strong> (@Narfinger, @gterzian, @Taym95, #40613), rather than having it grow forever (or get cleared by an embedder).
+<strong>about:memory</strong> now tracks <strong>SVG-related memory usage</strong> (@d-kraus, #41481), and we’ve fixed memory leaks in &lt;video&gt; and &lt;audio&gt; (@tharkum, #41131).</p>
+<p>Servo now does less work when <strong>matching selectors</strong> (@webbeef, #41368), when <strong>focus changes</strong> (@mrobinson, @Loirooriol, #40984), and when <strong>reflowing boxes</strong> whose size did not change (@Loirooriol, @mrobinson, #41160).</p>
+<p>To allow for smaller binaries, <strong>gamepad support</strong> is now <strong>optional at build time</strong> (@WaterWhisperer, #41451).</p>
 <p>We’ve fixed some <strong>undefined behaviour</strong> around garbage collection (@sagudev, @jdm, @gmorenz, #41546, mozjs#688, mozjs#689, mozjs#692).
 To better avoid other garbage-collection-related bugs (@sagudev, <!-- ISSUE --> mozjs#647, mozjs#638), we’ve continued our work on defining (and migrating to) safer interfaces between Servo and the SpiderMonkey GC (@sagudev, #41519, #41536, #41537, #41520, #41564).</p>
 <p>We’ve fixed a crash that occurs when <strong>&lt;link rel=“shortcut icon”&gt;</strong> has an <strong>empty ‘href’ attribute</strong>, which affected chiptune<!---->.com (@webbeef, #41056), and we’ve also fixed crashes in:</p>
