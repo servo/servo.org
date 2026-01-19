@@ -23,7 +23,7 @@ We’ve also landed support for several web platform features, both old and new:
 
 For better compatibility with older web content, we now support **vendor-prefixed** CSS properties like ‘-moz-transform’ (@mrobinson, #41350), as well as window.**clientInformation** (@Taym95, #41111).
 
-We’ve continued shipping the **[SubtleCrypto](https://w3c.github.io/webcrypto/) [API](https://wicg.github.io/webcrypto-modern-algos/)**, with full support for **ChaCha20-Poly1305**, **RSA-OAEP**, **RSA-PSS**, and **RSASSA-PKCS1-v1_5** (see below), plus **importKey() for ML-KEM** (@kkoyung, #41585) and several other improvements (@kkoyung, @PaulTreitel, #41180, #41395, #41428, #41442, #41472, #41544, #41563, #41587):
+We’ve continued shipping the **[SubtleCrypto](https://w3c.github.io/webcrypto/) [API](https://wicg.github.io/webcrypto-modern-algos/)**, with full support for **ChaCha20-Poly1305**, **RSA-OAEP**, **RSA-PSS**, and **RSASSA-PKCS1-v1_5** (see below), plus **importKey() for ML-KEM** (@kkoyung, #41585) and several other improvements (@kkoyung, @PaulTreitel, @danilopedraza, #41180, #41395, #41428, #41442, #41472, #41544, #41563, #41587, #41039, #41292):
 
 <figure style="overflow-x: scroll;">
 
@@ -47,6 +47,9 @@ We’ve also made it **compatible with Firefox 145** (@eerii, #41087), and use f
 </figure>
 
 We’ve fixed rendering bugs related to **‘float’**, **‘order’**, **‘max-width’**, **‘max-height’**, **‘:link’ selectors**, and **getClientRects()**, affecting intrinsic sizing (@Loirooriol, #41513), anonymous blocks (@Loirooriol, #41510), incremental layout (@Loirooriol, #40994), flex item sizing (@Loirooriol, #41291), selector matching (@andreubotella, #41478), and empty fragments (@Loirooriol, #41477).
+
+Servo now fires **‘toggle’** events on **&lt;dialog>** (@lukewarlow, #40412).
+We’ve also improved the conformance of ‘wheel’ events (@mrobinson, #41182), ‘hashchange’ events (@Taym95, #41325), ‘dblclick’ events on &lt;input> (@Taym95, #41319), ‘resize’ events on &lt;video> (@tharkum, #40940), ‘seeked’ events on &lt;video> and &lt;audio> (@tharkum, #40981), and the ‘transform’ property in getComputedStyle() (@mrobinson, #41187).
 
 ## Embedding API
 
