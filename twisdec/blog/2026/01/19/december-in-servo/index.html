@@ -329,7 +329,9 @@ To shut down Servo, simply <a href="https://doc.rust-lang.org/std/mem/fn.drop.ht
 <h2 id="perf-and-stability" tabindex="-1">Perf and stability <a class="header-anchor" href="#perf-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>We’ve fixed a crash that occurs when <strong>&lt;link rel=“shortcut icon”&gt;</strong> has an empty <strong>href</strong>, which affected chiptune<!---->.com (@webbeef, #41056), and we’ve also fixed crashes in:</p>
+<p>We’ve fixed some <strong>undefined behaviour</strong> around garbage collection (@sagudev, @jdm, @gmorenz, #41546, mozjs#688, mozjs#689, mozjs#692).
+To better avoid other garbage-collection-related bugs (@sagudev, <!-- ISSUE --> mozjs#647, mozjs#638), we’ve continued our work on defining (and migrating to) safer interfaces between Servo and the SpiderMonkey GC (@sagudev, #41519, #41536, #41537, #41520, #41564).</p>
+<p>We’ve fixed a crash that occurs when <strong>&lt;link rel=“shortcut icon”&gt;</strong> has an <strong>empty ‘href’ attribute</strong>, which affected chiptune<!---->.com (@webbeef, #41056), and we’ve also fixed crashes in:</p>
 <ul>
 <li>‘background-repeat’ (@mrobinson, #41158)</li>
 <li>&lt;audio&gt; layout (@Loirooriol, #41262)</li>

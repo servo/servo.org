@@ -93,7 +93,9 @@ To shut down Servo, simply &lt;a href=&quot;https://doc.rust-lang.org/std/mem/fn
 &lt;h2 id=&quot;perf-and-stability&quot; tabindex=&quot;-1&quot;&gt;Perf and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisdec/blog/2026/01/19/december-in-servo/#perf-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We’ve fixed a crash that occurs when &lt;strong&gt;&amp;lt;link rel=“shortcut icon”&amp;gt;&lt;/strong&gt; has an empty &lt;strong&gt;href&lt;/strong&gt;, which affected chiptune&lt;!----&gt;.com (@webbeef, #41056), and we’ve also fixed crashes in:&lt;/p&gt;
+&lt;p&gt;We’ve fixed some &lt;strong&gt;undefined behaviour&lt;/strong&gt; around garbage collection (@sagudev, @jdm, @gmorenz, #41546, mozjs#688, mozjs#689, mozjs#692).
+To better avoid other garbage-collection-related bugs (@sagudev, &lt;!-- ISSUE --&gt; mozjs#647, mozjs#638), we’ve continued our work on defining (and migrating to) safer interfaces between Servo and the SpiderMonkey GC (@sagudev, #41519, #41536, #41537, #41520, #41564).&lt;/p&gt;
+&lt;p&gt;We’ve fixed a crash that occurs when &lt;strong&gt;&amp;lt;link rel=“shortcut icon”&amp;gt;&lt;/strong&gt; has an &lt;strong&gt;empty ‘href’ attribute&lt;/strong&gt;, which affected chiptune&lt;!----&gt;.com (@webbeef, #41056), and we’ve also fixed crashes in:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;‘background-repeat’ (@mrobinson, #41158)&lt;/li&gt;
 &lt;li&gt;&amp;lt;audio&amp;gt; layout (@Loirooriol, #41262)&lt;/li&gt;
