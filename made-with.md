@@ -61,7 +61,8 @@ title: Made With Servo
 ## {{group.name}}
 
 <div class="made-with-container">
-  {% for project in group.projects %}
+  {% assign projects = group.projects | sort_natural: "name" %}
+  {% for project in projects %}
   <a class="made-with-item" href="{{project.link}}" target="_blank">
     {% if project.img %}<img src="{{ project.img | url }}" class="made-with-image" alt=" " />{% endif %}
     <div class="made-with-text">
