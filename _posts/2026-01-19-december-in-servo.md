@@ -13,7 +13,7 @@ categories:
 - 288.75/month 30 donors thanks.dev
 -->
 
-**Servo 0.0.4** and our December nightly builds now support **multiple windows** (@mrobinson, #40927, #41235, #41144)!
+**Servo 0.0.4** and our December nightly builds now support **multiple windows** (@mrobinson, @mukilan, #40927, #41235, #41144)!
 This builds on features that landed in Servo’s embedding API [last month]({{ '/blog/2025/12/15/november-in-servo/' | url }}).
 We’ve also landed support for several web platform features, both old and new:
 
