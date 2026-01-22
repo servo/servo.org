@@ -33,10 +33,10 @@
       <h3 class="center-text">Platinum Sponsors</h3>
         <ul class="logos-home">
         {% for sponsor in platinum_sponsors %}
-          <li>
+          <li class="sponsor-{{ sponsor.type }}">
             {% if sponsor.url %}<a href="{{ sponsor.url }}">{% endif %}
               {% if sponsor.img %}
-              <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
+              <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img" />
               {% else %}
               {{ sponsor.name }}
               {% endif %}
@@ -52,19 +52,20 @@
     {% if gold_sponsors.size > 0 %}
     <div class="inner-container__logos">
       <h3 class="center-text">Gold Sponsors</h3>
-        <ul class="logos-home">
-        {% for sponsor in gold_sponsors %}
-          <li>
-            {% if sponsor.url %}<a href="{{ sponsor.url }}">{% endif %}
-              {% if sponsor.img %}
-              <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
-              {% else %}
-              {{ sponsor.name }}
-              {% endif %}
-            {% if sponsor.url %}</a>{% endif %}
-          </li>
-        {% endfor %}
-        </ul>
+
+      <ul class="logos-home">
+      {% for sponsor in gold_sponsors %}
+        <li class="sponsor-{{ sponsor.type }}">
+          {% if sponsor.url %}<a href="{{ sponsor.url }}">{% endif %}
+            {% if sponsor.img %}
+            <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img" />
+            {% else %}
+            {{ sponsor.name }}
+            {% endif %}
+          {% if sponsor.url %}</a>{% endif %}
+        </li>
+      {% endfor %}
+      </ul>
     </div>
     {% endif %}
 
@@ -76,10 +77,10 @@
 
       <ul class="logos-home">
       {% for sponsor in silver_sponsors %}
-        <li>
+        <li class="sponsor-{{ sponsor.type }}">
           {% if sponsor.url %}<a href="{{ sponsor.url }}">{% endif %}
             {% if sponsor.img %}
-            <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
+            <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img" />
             {% else %}
             {{ sponsor.name }}
             {% endif %}
@@ -87,7 +88,7 @@
         </li>
       {% endfor %}
       </ul>
-      </div>
+    </div>
     {% endif %}
 
 
@@ -97,10 +98,10 @@
 
       <ul class="logos-home">
       {% for sponsor in bronze_sponsors %}
-        <li>
+        <li class="sponsor-{{ sponsor.type }}">
           {% if sponsor.url %}<a href="{{ sponsor.url }}">{% endif %}
             {% if sponsor.img %}
-            <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img sponsor-{{ sponsor.type }}" />
+            <img src="{{ sponsor.img | url}}" alt="{{ sponsor.name }} logo" class="sponsor-img" />
             {% else %}
             {{ sponsor.name }}
             {% endif %}
@@ -140,6 +141,18 @@
   margin-inline: auto;
   padding: 3.25rem 2rem;
 }
+.sponsor-gold .sponsor-img {
+  max-height: 11rem;
+  padding: 2.25rem 1.5rem;
+}
+.sponsor-silver .sponsor-img {
+  max-height: 7rem;
+  padding: 1.75rem 1rem;
+}
+.sponsor-bronze .sponsor-img {
+  max-height: 5rem;
+  padding: 1.25rem 0.5rem;
+}
 
 .logos-home > li {
   flex: 0 0 50%;
@@ -147,15 +160,42 @@
   font-size: var(--step-3);
   font-weight: bold;
 }
+.logos-home > li.sponsor-gold {
+  flex: 0 0 33%;
+  font-size: var(--step-2);
+}
+.logos-home > li.sponsor-silver {
+  flex: 0 0 25%;
+  font-size: var(--step-1);
+}
+.logos-home > li.sponsor-bronze {
+  flex: 0 0 25%;
+  font-size: var(--step-0);
+}
 
 @media (max-width: 720px) {
   .partner-img, .sponsor-img {
     max-height: 9rem;
     padding: 2rem 1rem;
   }
+  .sponsor-gold .sponsor-img {
+    max-height: 7rem;
+    padding: 1.5rem 0.75rem;
+  }
+  .sponsor-silver .sponsor-img {
+    max-height: 5rem;
+    padding: 1rem 0.5rem;
+  }
+  .sponsor-bronze .sponsor-img {
+    max-height: 3rem;
+    padding: 0.5rem 0.25rem;
+  }
 
   .logos-home > li {
     flex: 0 0 90%;
+  }
+  .logos-home > li.sponsor-gold {
+    flex: 0 0 50%;
   }
 
   .logos-home > li:first-child {
