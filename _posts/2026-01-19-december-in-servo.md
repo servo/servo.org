@@ -134,6 +134,18 @@ If you’re interested in this kind of sponsorship, please contact us at [join@s
 Use of donations is decided transparently via the Technical Steering Committee’s public **[funding request process](https://github.com/servo/project/blob/main/FUNDING_REQUEST.md)**, and active proposals are tracked in [servo/project#187](https://github.com/servo/project/issues/187).
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
+## Conference talks and blogs
+
+[**Web engine CI on a shoestring budget**](https://www.youtube.com/watch?v=-W1mSXdlRqA) ([slides](https://www.azabani.com/talks/2025-12-18-shoestring-web-engine-ci/); [transcript](https://blogs.igalia.com/mrego/servo-a-new-web-engine-written-in-rust/)) — Delan Azabani (@delan) spoke about the CI system that keeps our builds and tryjobs moving fast.
+
+[**Servo 2025 Stats**](https://blogs.igalia.com/mrego/servo-2025-stats/) — Manuel Rego (@mrego) wrote about the growth of the Servo project, and how our many new contributors have enabled that.
+
+We have two **upcoming** talks at [**FOSDEM 2026**](https://fosdem.org/2026/) in **Brussels** later this month:
+
+[**The Servo project and its impact on the web platform ecosystem**](https://fosdem.org/2026/schedule/event/LXFKS9-servo-project-impact/) — Manuel Rego (@mrego) is speaking on **Saturday 31 January** at [**14:00 local time**](https://everytimezone.com/?t=697d4600,8ac) (13:00 UTC), about Servo’s impact on spec issues, interop bugs, test cases, and the broader web platform ecosystem.
+
+[**Implementing Streams Spec in Servo web engine**](https://fosdem.org/2026/schedule/event/3J8GUD-servo-streams-reimplementation/) — Taym Haddadi (@Taym95) is speaking on **Saturday 31 January** at [**17:45 local time**](https://everytimezone.com/?t=697d4600,98d) (16:45 UTC), about our experiences writing a new implementation of the [Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) that is independent of the one in SpiderMonkey.
+
 <style>
     ._correction {
         max-width: 33em;
