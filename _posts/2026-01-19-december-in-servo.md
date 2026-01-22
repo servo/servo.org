@@ -23,6 +23,11 @@ We’ve also landed support for several web platform features, both old and new:
 - **‘background’** and **‘bgcolor’** attributes on &lt;table>, &lt;thead>, &lt;tbody>, &lt;tfoot>, &lt;tr>, &lt;td>, &lt;th> (@simonwuelker, #41272)
 - **tee()** on **readable byte streams** (@Taym95, #35991)
 
+<aside class="_note">
+
+**Note:** due to [a known issue](https://github.com/servo/servo/issues/42069), servoshell on macOS may not be able to directly open new windows, depending on your system settings.
+</aside>
+
 <figure>
     <img src="{{ '/img/blog/2026-01-diffie.png' | url }}" alt="Servo 0.0.4 showing new support for multiple windows">
 </figure>
