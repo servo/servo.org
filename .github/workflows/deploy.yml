@@ -8,9 +8,13 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: '20.x'
       - name: Checkout
@@ -30,6 +34,7 @@ jobs:
           npx eleventy --output='_site/' --pathprefix='/'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
         with:
           publish_dir: ./_site
           github_token: ${{ secrets.GITHUB_TOKEN }}
