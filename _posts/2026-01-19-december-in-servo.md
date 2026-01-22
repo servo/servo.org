@@ -21,6 +21,10 @@ We’ve also landed support for several web platform features, both old and new:
 - **‘background’** and **‘bgcolor’** attributes on &lt;table>, &lt;thead>, &lt;tbody>, &lt;tfoot>, &lt;tr>, &lt;td>, &lt;th> (@simonwuelker, #41272)
 - **tee()** on **readable byte streams** (@Taym95, #35991)
 
+<figure>
+    <img src="{{ '/img/blog/2026-01-diffie.png' | url }}" alt="Servo 0.0.4 showing new support for multiple windows">
+</figure>
+
 For better compatibility with older web content, we now support **vendor-prefixed** CSS properties like ‘-moz-transform’ (@mrobinson, #41350), as well as window.**clientInformation** (@Taym95, #41111).
 
 We’ve continued shipping the **[SubtleCrypto](https://w3c.github.io/webcrypto/) [API](https://wicg.github.io/webcrypto-modern-algos/)**, with full support for **ChaCha20-Poly1305**, **RSA-OAEP**, **RSA-PSS**, and **RSASSA-PKCS1-v1_5** (see below), plus **importKey() for ML-KEM** (@kkoyung, #41585) and several other improvements (@kkoyung, @PaulTreitel, @danilopedraza, #41180, #41395, #41428, #41442, #41472, #41544, #41563, #41587, #41039, #41292):
