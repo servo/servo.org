@@ -217,7 +217,7 @@ https://github.com/w3c/csswg-drafts/issues/12852
 
 -----
 
-## Join the projecat 🤝
+## Join the project 🤝
 
 * GitHub: [`github.com/servo`](https://github.com/servo)
 * Chat: [`servo.zulipchat.com`](https://servo.zulipchat.com/)
