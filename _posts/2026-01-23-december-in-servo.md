@@ -135,17 +135,19 @@ For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
 ## Conference talks and blogs
 
-[**Web engine CI on a shoestring budget**](https://www.youtube.com/watch?v=-W1mSXdlRqA) ([slides](https://www.azabani.com/talks/2025-12-18-shoestring-web-engine-ci/); [transcript](https://blogs.igalia.com/mrego/servo-a-new-web-engine-written-in-rust/)) — Delan Azabani ([@delan](https://github.com/delan)) spoke about the CI system that keeps our builds and tryjobs moving fast.
+We’ve recently published one talk and one blog post:
 
-[**Servo 2025 Stats**](https://blogs.igalia.com/mrego/servo-2025-stats/) — Manuel Rego ([@mrego](https://github.com/mrego)) wrote about the growth of the Servo project, and how our many new contributors have enabled that.
+- [**Web engine CI on a shoestring budget**](https://www.youtube.com/watch?v=-W1mSXdlRqA) ([slides](https://www.azabani.com/talks/2025-12-18-shoestring-web-engine-ci/); [transcript](https://blogs.igalia.com/mrego/servo-a-new-web-engine-written-in-rust/)) – Delan Azabani ([@delan](https://github.com/delan)) spoke about the CI system that keeps our builds and tryjobs moving fast, running nearly two million tests in under half an hour.
 
-We have two **upcoming** talks at [**FOSDEM 2026**](https://fosdem.org/2026/) in **Brussels** later this month:
+- [**Servo 2025 Stats**](https://blogs.igalia.com/mrego/servo-2025-stats/) – Manuel Rego ([@mrego](https://github.com/mrego)) wrote about the growth of the Servo project, and how our many new contributors have enabled that.
 
-[**The Servo project and its impact on the web platform ecosystem**](https://fosdem.org/2026/schedule/event/LXFKS9-servo-project-impact/) — Manuel Rego ([@mrego](https://github.com/mrego)) is speaking on **Saturday 31 January** at [**14:00 local time**](https://everytimezone.com/?t=697d4600,8ac) (13:00 UTC), about Servo’s impact on spec issues, interop bugs, test cases, and the broader web platform ecosystem.
+We also have two **upcoming** talks at [**FOSDEM 2026**](https://fosdem.org/2026/) in **Brussels** later this month:
 
-[**Implementing Streams Spec in Servo web engine**](https://fosdem.org/2026/schedule/event/3J8GUD-servo-streams-reimplementation/) — Taym Haddadi ([@Taym95](https://github.com/Taym95)) is speaking on **Saturday 31 January** at [**17:45 local time**](https://everytimezone.com/?t=697d4600,98d) (16:45 UTC), about our experiences writing a new implementation of the [Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) that is independent of the one in SpiderMonkey.
+- [**The Servo project and its impact on the web platform ecosystem**](https://fosdem.org/2026/schedule/event/LXFKS9-servo-project-impact/) – Manuel Rego ([@mrego](https://github.com/mrego)) is speaking on **Saturday 31 January** at [**14:00 local time**](https://everytimezone.com/?t=697d4600,8ac) (13:00 UTC), about Servo’s impact on spec issues, interop bugs, test cases, and the broader web platform ecosystem.
 
-Servo developers Martin Robinson ([@mrobinson](https://github.com/mrobinson)) and Delan Azabani ([@delan](https://github.com/delan)) will also be attending FOSDEM 2026, so it’s a great time to come along and chat about Servo!
+- [**Implementing Streams Spec in Servo web engine**](https://fosdem.org/2026/schedule/event/3J8GUD-servo-streams-reimplementation/) – Taym Haddadi ([@Taym95](https://github.com/Taym95)) is speaking on **Saturday 31 January** at [**17:45 local time**](https://everytimezone.com/?t=697d4600,98d) (16:45 UTC), about our experiences writing a new implementation of the [Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) that is independent of the one in SpiderMonkey.
+
+Servo developers Martin Robinson ([@mrobinson](https://github.com/mrobinson)) and Delan Azabani ([@delan](https://github.com/delan)) will also be attending FOSDEM 2026, so it would be a great time to come along and chat about Servo!
 
 <style>
     ._correction {
