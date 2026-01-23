@@ -7,6 +7,13 @@ summary:    All of these updates are in Servo 0.0.3.
 categories:
 ---
 
+<aside class="_correction">
+
+**Correction (2026-01-19)**
+
+[An earlier version](https://github.com/servo/servo.org/pull/282) of this post said that Servo now has full support for ChaCha20-Poly1305, but this was incorrect. We had only landed the ‘importKey’ and ‘exportKey’ operations. The ‘encrypt’, ‘decrypt’, and ‘generateKey’ options landed in the following month.
+</aside>
+
 Landing in [**Servo 0.0.3**](https://github.com/servo/servo/releases/tag/v0.0.3) and our November nightly builds, we now have **context menus** for links, images, and other web content ([@atbrakhi](https://github.com/atbrakhi), [@mrobinson](https://github.com/mrobinson), [#40434](https://github.com/servo/servo/pull/40434), [#40501](https://github.com/servo/servo/pull/40501)), **vsync on Android** ([@mrobinson](https://github.com/mrobinson), [#40306](https://github.com/servo/servo/pull/40306)), **light mode** for the **new tab page** ([@arihant2math](https://github.com/arihant2math), [#40272](https://github.com/servo/servo/pull/40272)), plus several web platform features:
 
 - **&lt;video controls>** ([@rayguo17](https://github.com/rayguo17), [#40578](https://github.com/servo/servo/pull/40578))

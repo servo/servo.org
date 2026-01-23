@@ -270,6 +270,8 @@ node browser-specific-failures.js --from 2024-01-01 --to 2025-01-01 --products c
 
 To avoid false positives, be sure to step through each replacement rather than using Replace All.
 
+If you’re using Visual Studio Code or Sublime Text:
+
 - Replace `@([0-9A-Za-z_.-]+)` with `[@$1](https://github.com/$1)`
 - Replace ` #([0-9]+)` with ` [#$1](https://github.com/servo/servo/pull/$1)`
 - Replace ` ([0-9A-Za-z_.-]+)#([0-9]+)` with ` [$1#$2](https://github.com/servo/$1/pull/$2)`
@@ -436,3 +438,4 @@ When we make mistakes, we issue corrections on the blog and on social media.
 
 - [**November 2023**](https://servo.org/blog/2023/11/30/embedding-floats-color-mix/) — [An earlier version](https://github.com/servo/servo.org/pull/126) of this post said that Servo now supports the :has() selector, but this was incorrect. While some of the code implementing the feature has landed, it is [not yet enabled](https://github.com/servo/servo/blob/7bcb25c85c98c367c6423ebc0fed964dd08cad56/components/selectors/parser.rs#L276-L279).
 - [**March 2024**](https://servo.org/blog/2024/03/12/sponsoring-servo/) — [An earlier version](https://github.com/servo/servo.org/pull/139) of this post said that over 94% of amounts donated to Servo go directly to the project, with only 6% in fees, but this was incorrect. The actual fees depend on the payment method and the amount you donate, but in most cases they are between 10% and 20%. We are still working on clarifying the exact rules about fees with our crowdfunding platforms, so check our [Sponsorship](https://servo.org/sponsorship/) page for the latest information.
+- [**November 2025**](https://servo.org/blog/2025/12/15/november-in-servo/) — [An earlier version](https://github.com/servo/servo.org/pull/282) of this post said that Servo now has full support for ChaCha20-Poly1305, but this was incorrect. We had only landed the ‘importKey’ and ‘exportKey’ operations. The ‘encrypt’, ‘decrypt’, and ‘generateKey’ options landed in the following month.
