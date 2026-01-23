@@ -40,7 +40,7 @@ We’ve continued shipping the **[SubtleCrypto](https://w3c.github.io/webcrypto/
 | <span style=white-space:nowrap>RSASSA-PKCS1-v1_5</span> | ([@kkoyung](https://github.com/kkoyung), [@jdm](https://github.com/jdm), [#41172](https://github.com/servo/servo/pull/41172), [#41225](https://github.com/servo/servo/pull/41225), [#41240](https://github.com/servo/servo/pull/41240), [#41267](https://github.com/servo/servo/pull/41267)) |
 </figure>
 
-When using **servoshell** on Windows, you can now see `--help` and log output, as long as servoshell was started in a console.
+When using **servoshell** on Windows, you can now see `--help` and log output, as long as servoshell was started in a console ([@jschwe](https://github.com/jschwe), [#40961](https://github.com/servo/servo/pull/40961)).
 
 Servo diagnostics options are now accessible in servoshell via the `SERVO_DIAGNOSTICS` environment variable ([@atbrakhi](https://github.com/atbrakhi), [#41013](https://github.com/servo/servo/pull/41013)), in addition to the usual `-Z` / `--debug=` arguments.
 
