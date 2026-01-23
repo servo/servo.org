@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "December in Servo: and more!"
-date:       2026-01-19
-summary:    ao!! wrrrrao!!
+title:      "December in Servo: multiple windows, proxy support, better caching, and more!"
+date:       2026-01-23
+summary:    Come along and meet us at FOSDEM 2026 – we’re speaking there too!
 categories:
 ---
 
@@ -150,6 +150,8 @@ We have two **upcoming** talks at [**FOSDEM 2026**](https://fosdem.org/2026/) in
 [**The Servo project and its impact on the web platform ecosystem**](https://fosdem.org/2026/schedule/event/LXFKS9-servo-project-impact/) — Manuel Rego (@mrego) is speaking on **Saturday 31 January** at [**14:00 local time**](https://everytimezone.com/?t=697d4600,8ac) (13:00 UTC), about Servo’s impact on spec issues, interop bugs, test cases, and the broader web platform ecosystem.
 
 [**Implementing Streams Spec in Servo web engine**](https://fosdem.org/2026/schedule/event/3J8GUD-servo-streams-reimplementation/) — Taym Haddadi (@Taym95) is speaking on **Saturday 31 January** at [**17:45 local time**](https://everytimezone.com/?t=697d4600,98d) (16:45 UTC), about our experiences writing a new implementation of the [Streams API](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API) that is independent of the one in SpiderMonkey.
+
+Servo developers Martin Robinson (@mrobinson) and Delan Azabani (@delan) will also be attending FOSDEM 2026, so it’s a great time to come along and chat about Servo!
 
 <style>
     ._correction {
