@@ -7,7 +7,7 @@ summary:    Come along and meet us at FOSDEM 2026 – we’re speaking there too
 categories:
 ---
 
-**Servo 0.0.4** and our December nightly builds now support **multiple windows** ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#40927](https://github.com/servo/servo/pull/40927), [#41235](https://github.com/servo/servo/pull/41235), [#41144](https://github.com/servo/servo/pull/41144))!
+[**Servo 0.0.4**](https://github.com/servo/servo/releases/tag/v0.0.4) and our December nightly builds now support **multiple windows** ([@mrobinson](https://github.com/mrobinson), [@mukilan](https://github.com/mukilan), [#40927](https://github.com/servo/servo/pull/40927), [#41235](https://github.com/servo/servo/pull/41235), [#41144](https://github.com/servo/servo/pull/41144))!
 This builds on features that landed in Servo’s embedding API [last month]({{ '/blog/2025/12/15/november-in-servo/' | url }}).
 We’ve also landed support for several web platform features, both old and new:
 
