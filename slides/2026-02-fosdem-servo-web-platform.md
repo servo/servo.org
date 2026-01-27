@@ -50,9 +50,14 @@ Manuel Rego (he/him) <rego@igalia.com>
 
 ### What is Servo❓
 
+<div class="fragment">
+
 A **web rendering engine** written in **Rust**
 
-<div style="display: flex; flex-wrap: wrap; width: 15em; gap: 1em; margin-inline: auto; margin-block: 1em; background: white; padding: 1em; padding-top: 0.5em; border-radius: 1em;">
+</div>
+
+<div class="fragment" style="display: flex; flex-wrap: wrap; width: 15em; gap: 1em; margin-inline: auto; margin-top: 1em; background: white; padding: 1em; padding-top: 0.5em; border-radius: 1em; justify-content: center;
+">
   <div class="feature">
     <img src="/img/home-embeddable.png" alt="Embeddable icon"/>
     <strong style="color: #4fc066;">Embeddable</strong>
@@ -100,6 +105,11 @@ A **web rendering engine** written in **Rust**
 
 TODO: Video showing Servo opening some pages and windows
 
+- Open servo.org
+- Browse a bit, opening a blog post, maybe open GitHub, usual wikipedia search
+- Open a new window, open lichess, start to play
+- Go back to the other window, search for FOSDEM or go to the website, and browse a bit more
+
 ----
 
 ### Main highlights (2023-) ✨
@@ -130,7 +140,32 @@ TODO: Video showing Servo opening some pages and windows
 
 ----
 
-TODO: WebDriver demo
+### WebDriver demo 🤖
+
+* Open Servo with `--webdriver=7002`
+* Command line commands to take a screenshot:
+
+```sh
+SESSIONID=$(curl -H 'Content-Type: application/json' -X POST
+                 -d '{"capabilities": {}}'
+                 http://127.0.0.1:7002/session
+            | jq -r ".value.sessionId")
+
+curl -v http://127.0.0.1:7002/session/${SESSIONID}/screenshot
+| jq -r ".value" | base64 -d > screenshot.png
+```
+
+Check [`servo-screenshot` experiment](https://github.com/mrego/servo-toys/tree/main/servo-screenshot)
+
+----
+
+### New projects using Servo 🚧
+
+* [**Servo GTK**](https://github.com/nacho/servo-gtk): A GTK4 library that embeds the Servo web engine
+* [**Slint Servo Example**](https://github.com/slint-ui/slint/tree/master/examples/servo): Integrate Servo web engine as WebView component for Slint
+* [**Polo**](https://github.com/Ranrar/Marco/tree/servo): A lightweight Markdown viewer
+
+See [`servo.org/made-with`](https://servo.org/made-with/) for more examples
 
 -----
 
@@ -139,13 +174,17 @@ TODO: WebDriver demo
 
 ----
 
-### Wider scope 🦀
+### Rust 🦀
 
 * **Rust programming language**
-  * Started by Mozilla in parallel with the Servo project
-  * Language has been influenced by Servo's needs
-  * Servo as a proof that is a serious systems programming language
-* [**Popular Servo crates/libraries**](https://crates.io/teams/github:servo:cargo-publish): rust-url, html5ever, etc.
+  * Started by Mozilla in parallel with  
+    the Servo project
+  * Language design was influenced  
+    by Servo's requirements
+  * Servo proved that Rust could be  
+    a serious systems-level language
+* [**Popular Servo crates/libraries**](https://crates.io/teams/github:servo:cargo-publish):  
+  rust-url, html5ever, etc.
 * Chromium is **starting to use Rust**
 
 ----
@@ -155,7 +194,8 @@ TODO: WebDriver demo
 * **Show it is possible** to start from scratch
 * **Similar principles**: closely follow specs terminology and structure
 * **Innovation**:
-  * Architectural: multi-core and parallel since the beginning
+  * Architectural: multi-core and parallel  
+    since inception
   * Allow experimentation
   * New ways to implement the web platform
 
@@ -176,7 +216,8 @@ TODO: WebDriver demo
 
 * Shared test suite for the web platform
 * Servo auto-syncs WPT in both directions ↔️
-* More than **450 PRs** by `servo-wpt-sync` (261 in 2025)
+* More than **450 PRs** by `servo-wpt-sync`  
+  (261 in 2025)
 * Infra: Update docker image to Ubuntu 22.04
 
 ----
@@ -193,52 +234,81 @@ TODO: WebDriver demo
 
 ----
 
-TODO Examples
+#### Example: Session history
 
-https://github.com/whatwg/html/issues/1454#issuecomment-241317285
+<div style="font-size: smaller;">
+  <img style="border-radius: 1em; box-shadow: 0.25em 0.25em 1em black; width: 50%; float: right; margin-top: 1.2em;" src="/img/a-model-of-navigation-history.png" alt="Screenshot of paper 'A model of navigation history' by Connor G. Brewster & Alan Jeffrey, August, 2016" />
+  <ul style="display: inline;">
+    <li style="margin-left: 1em;">Paper: <a href="https://arxiv.org/abs/1608.05444"><strong>A Model of Navigation History</strong></a><br>by Connor G. Brewster<br>&amp; Alan Jeffrey</li>
+    <li style="margin-left: 1em;">Helped to solve a long standing issue:<br><a href="https://github.com/whatwg/html/issues/1454"><code>whatwg/html#1454</code></a></li>
+  </ul>
+</div>
 
-https://github.com/w3c/css-houdini-drafts/issues?q=is%3Aissue%20state%3Aclosed%20author%3Aasajeffrey
+----
 
-https://github.com/whatwg/html/issues/12016
+#### Example: CSS2 tables interop issues
 
-https://github.com/w3c/csswg-drafts/issues/13149
+<div style="font-size: smaller; width: 70%;">
 
-https://github.com/w3c/csswg-drafts/issues/12852
+* CSS tables implementation
+* Found many interop issues:
+  * [`w3c/csswg-drafts#11489`](https://github.com/w3c/csswg-drafts/issues/11489)
+  * [`w3c/csswg-drafts#11799`](https://github.com/w3c/csswg-drafts/issues/11799)
+  * [`w3c/csswg-drafts#12689`](https://github.com/w3c/csswg-drafts/issues/12689)
+  * ...
+* **Better WPT pass-rate than WebKit**
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+</div>
+
+<img style="border-radius: 1em; box-shadow: 0.25em 0.25em 1em black; position: absolute; right: 1em; top: 3em; padding: 0.5em; background: white; width: 7em;" src="/img/css-talbes-issue-11489.png" alt="Screenshot of example on issue https://github.com/w3c/csswg-drafts/issues/11489" />
+<img style="border-radius: 1em; box-shadow: 0.25em 0.25em 1em black; position: absolute; left: 3em; top: 10.5em; padding: 0.5em; background: white; width: 11em;" src="/img/css-talbes-issue-11799.png" alt="Screenshot of example on issue https://github.com/w3c/csswg-drafts/issues/11799" />
+<img style="border-radius: 1em; box-shadow: 0.25em 0.25em 1em black; position: absolute; right: 2em; top: 11.5em; padding: 0.5em; background: white; width: 5em;" src="/img/css-talbes-issue-12689.png" alt="Screenshot of example on issue https://github.com/w3c/csswg-drafts/issues/12689" />
 
 ----
 
 ### Conclusions 📌
 
 * New web engines **help the wider ecosystem**
-* **Improve specs** and identify interop issues
-* **Increase test coverage** covering corner cases
-* Provide **new ways to use the web platform**
+* **Improve specs** and identify **interop issues**
+* **Increase test coverage**  
+  including missing corner cases
+* Provide **novel approaches to use the Web**
 * **Diversification**: healthier platform
 
 -----
 
-## Join the project 🤝
+### Join the project 🤝
 
-* GitHub: [`github.com/servo`](https://github.com/servo)
-* Chat: [`servo.zulipchat.com`](https://servo.zulipchat.com/)
-* Email: [`join@servo.org`](mailto:join@servo.org)
-* Sponsor: [GitHub](https://github.com/sponsors/servo) & [Open Collective](https://opencollective.com/servo)
+* GitHub 💻: [`github.com/servo`](https://github.com/servo)
+* Chat 💬: [`servo.zulipchat.com`](https://servo.zulipchat.com/)
+* Email 📧: [`join@servo.org`](mailto:join@servo.org)
+* Sponsor 💰: [GitHub](https://github.com/sponsors/servo) & [Open Collective](https://opencollective.com/servo)
 
-<div style="text-align: center; margin: 1em;">
+<div style="text-align: center; margin: 1em; margin-bottom: 0em;">
 
 Looking into **growing a healthy community around the project**
 
 </div>
 
------
+----
 
-## Test Servo & Report issues 🧪
+### Test Servo & Report issues 🧪
 
-* Download: [`servo.org/download`](https://servo.org/download)
-* Issues: [`github.com/servo/servo/issues`](https://github.com/servo/servo/issues)
-* Discussions: [`github.com/servo/servo/discussions`](https://github.com/servo/servo/discussions)
+* Download ⬇️  
+  [`servo.org/download`](https://servo.org/download)
+* Issues 🐛  
+  [`github.com/servo/servo/issues`](https://github.com/servo/servo/issues)
+* Discussions 🗫:  
+  [`github.com/servo/servo/discussions`](https://github.com/servo/servo/discussions)
 
-<div style="text-align: center; margin: 1em;">
+<div style="text-align: center; margin: 1em; margin-bottom: 0em;">
 
 **Play with Servo** and  
 **let us know your experience**
@@ -251,7 +321,7 @@ Looking into **growing a healthy community around the project**
 
 ## Thanks 🙏
 
-<div style="float: left; font-size: 70%; text-align: left; padding: 0.5em;">
+<div style="float: left; text-align: left;">
 
 **[`servo.org`](https://servo.org)**
 
@@ -261,7 +331,7 @@ Looking into **growing a healthy community around the project**
 
 </div>
 
-<img src="/img/servo-qr.png" style="width: 20%; margin-left: 3em;" alt="QR code with Servo logo pointing to servo.org website" />
+<img src="/img/servo-qr.png" style="width: 20%; margin-left: 1em;" alt="QR code with Servo logo pointing to servo.org website" />
 
 <img src="/img/servo-color-positive-no-container.svg" style="width: 30%; margin: 1em;" alt="Servo logo" />
 
