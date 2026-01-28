@@ -324,7 +324,7 @@ Looking into **growing a healthy community around the project**
 
 **[`floss.social/@servo`](https://floss.social/@servo)**
 
-**[`bsky.app/profile/servo.org`](bsky.app/profile/servo.org)**
+**[`bsky.app/profile/servo.org`](https://bsky.app/profile/servo.org)**
 
 </div>
 
