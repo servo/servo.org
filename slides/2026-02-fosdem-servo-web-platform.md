@@ -137,22 +137,24 @@ A **web rendering engine** written in **Rust**
 
 ### WebDriver demo 🤖
 
-TODO: Maybe a video?
-
 * Open Servo with `--webdriver=7002`
-* Command line commands to take a screenshot:
+* Use WebDriver commands (e.g. [WebDriverIO](https://www.npmjs.com/package/webdriverio))
 
-```sh
-SESSIONID=$(curl -H 'Content-Type: application/json' -X POST
-                 -d '{"capabilities": {}}'
-                 http://127.0.0.1:7002/session
-            | jq -r ".value.sessionId")
+```js
+import { remote } from 'webdriverio'
 
-curl -v http://127.0.0.1:7002/session/${SESSIONID}/screenshot
-| jq -r ".value" | base64 -d > screenshot.png
+const browser = await remote({
+    hostname: '127.0.0.1',
+    port: 7002,
+    capabilities: {  }
+})
+
+await browser.navigateTo('https://news.ycombinator.com/')
 ```
 
-Check [`servo-screenshot` experiment](https://github.com/mrego/servo-toys/tree/main/servo-screenshot)
+----
+
+<!-- .slide: data-background-video="/img/servo-demo-fosdem-2026-webdriver.webm" data-background-video-loop data-background-video-muted -->
 
 ----
 
