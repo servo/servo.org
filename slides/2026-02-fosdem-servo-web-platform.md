@@ -103,12 +103,13 @@ A **web rendering engine** written in **Rust**
 
 ----
 
-TODO: Video showing Servo opening some pages and windows
+<!-- .slide: data-background-video="/img/servo-demo-fosdem-2026.webm" data-background-video-loop data-background-video-muted -->
 
-- Open servo.org
-- Browse a bit, opening a blog post, maybe open GitHub, usual wikipedia search
-- Open a new window, open lichess, start to play
-- Go back to the other window, search for FOSDEM or go to the website, and browse a bit more
+----
+
+### Stats 2018-2025 📈
+
+![Chart showing Servo stats from 2018-2025 in merged PRs, average monthly contributors and average monthly contributors with 10 or more PRs in a month. Last 3 years project has been growing a lot. All the data and details in the blog post: https://blogs.igalia.com/mrego/servo-2025-stats/](/img/servo-stats-2025.png)
 
 ----
 
@@ -134,13 +135,9 @@ TODO: Video showing Servo opening some pages and windows
 
 ----
 
-### Stats 2018-2025 📈
-
-![Chart showing Servo stats from 2018-2025 in merged PRs, average monthly contributors and average monthly contributors with 10 or more PRs in a month. Last 3 years project has been growing a lot. All the data and details in the blog post: https://blogs.igalia.com/mrego/servo-2025-stats/](/img/servo-stats-2025.png)
-
-----
-
 ### WebDriver demo 🤖
+
+TODO: Maybe a video?
 
 * Open Servo with `--webdriver=7002`
 * Command line commands to take a screenshot:
