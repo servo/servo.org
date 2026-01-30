@@ -169,7 +169,7 @@ await browser.navigateTo('https://news.ycombinator.com/')
 
 See [`servo.org/made-with`](https://servo.org/made-with/) for more examples
 
------
+----
 
 <!-- .slide: data-background-video="/img/servo-demo-fosdem-2026-beaver.webm" data-background-video-loop data-background-video-muted -->
 
