@@ -162,11 +162,16 @@ await browser.navigateTo('https://news.ycombinator.com/')
 ### New projects using Servo 🚧
 
 * [**Apache Cordova Plugin**](https://github.com/NiklasMerz/cordova-plugin-servo-webview): Plugin for Apache Cordova to use Servo as web engine
-* [**Servo GTK**](https://github.com/nacho/servo-gtk): A GTK4 library that embeds the Servo web engine
-* [**Slint Servo Example**](https://github.com/slint-ui/slint/tree/master/examples/servo): Integrate Servo web engine as WebView component for Slint
+* [**Beaver**](https://tangled.org/me.webbeef.org/browser.html/): A browser using web technologies and Servo as web rendering engine
+* [**Servo GTK**](https://github.com/nacho/servo-gtk): A GTK4 library that embeds Servo
+* [**Slint Servo**](https://github.com/slint-ui/slint/tree/master/examples/servo): Integrate Servo web engine as WebView component for Slint
 * [**Polo**](https://github.com/Ranrar/Marco/tree/servo): A lightweight Markdown viewer
 
 See [`servo.org/made-with`](https://servo.org/made-with/) for more examples
+
+-----
+
+<!-- .slide: data-background-video="/img/servo-demo-fosdem-2026-beaver.webm" data-background-video-loop data-background-video-muted -->
 
 -----
 
