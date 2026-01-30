@@ -131,6 +131,7 @@ A **web rendering engine** written in **Rust**
 * **Performance** optimizations
 * **Editability and interactivity** enhancements
 * **Layout** improvements
+* More **features**
 * ...
 
 ----
