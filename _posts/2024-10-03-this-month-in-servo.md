@@ -45,7 +45,7 @@ Servo has a new kind of **experimental profiling support** that can send profili
 This is in addition to Servo’s existing [HTML-trace-based profiling support](https://book.servo.org/hacking/profiling.html#generating-timelines).
 
 We’ve also added a new `profiling` Cargo profile that builds Servo with the recommended settings for profiling ([@delan](https://github.com/delan), [#33432](https://github.com/servo/servo/pull/33432)).
-For more details on building Servo for profiling, benchmarking, and other perf-related use cases, check out our updated [Building Servo](https://book.servo.org/hacking/building-servo.html#build-profiles) chapter ([@delan](https://github.com/delan), [book#22](https://github.com/servo/book/pull/22)).
+For more details on building Servo for profiling, benchmarking, and other perf-related use cases, check out our updated [Building Servo](https://book.servo.org/building/building.html#build-profiles) chapter ([@delan](https://github.com/delan), [book#22](https://github.com/servo/book/pull/22)).
 
 ## Build times
 
