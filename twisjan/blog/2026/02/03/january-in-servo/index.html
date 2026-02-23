@@ -251,7 +251,23 @@
 </div>
 
 <div class="inner-container blog-content">
-  <p>Our <strong>developer tools</strong> integration continues to improve.
+  <h2 id="web-apis" tabindex="-1">Web APIs <a class="header-anchor" href="#web-apis">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We’ve enabled support for the <strong>navigator.sendBeacon</strong> by default (@TimvdLippe, #41694); the <code>dom_navigator_sendbeacon_enabled</code> preference has been removed.</p>
+<p>Servo now <strong><a href="https://wpt.fyi/results/WebCryptoAPI?label=master&amp;product=chrome%5Bexperimental%5D&amp;product=firefox%5Bexperimental%5D&amp;product=safari&amp;product=servo&amp;aligned">leads other browsers</a></strong> in support for new WebCrypto algorithms!
+This includes work on ML-KEM (@kkoyung, #41604, #41617, #41615, #41627), ML-DSA (@kkoyung, #41628, #41647, #41659, #41676), AES-OCB (@kkoyung, #41791, #41822, #41813, #41829), and AES-GCM (@kkoyung, #41950).
+Additionally, the error messages returned by many WebCrypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).</p>
+<p>JS module loading received a lot of attention—we’ve improved support for <strong>cyclic imports</strong> (@Gae24, #41779), <strong>import attributes</strong> (@Gae24, #42185), and <strong>JSON modules</strong> (@Gae24, @jdm, #42138).</p>
+<p>Additionally, the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload"><code>preload</code></a> attribute now triggers <strong>preload fetch operations</strong> that can improve page load speeds (@TimvdLippe, @jdm, #40059).</p>
+<h2 id="automation-and-introspection" tabindex="-1">Automation and introspection <a class="header-anchor" href="#automation-and-introspection">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Last month Servo gained support for HTTP proxies.
+We now support <strong>HTTPS proxies</strong> as well (@Narfinger, #41689), which can be configured with the <code>https_proxy</code>/<code>HTTPS_PROXY</code> environment variables or the <code>network_https_proxy_uri</code> preference.
+In addition, the <code>NO_PROXY</code> variable or <code>network_http_no_proxy</code> preference can <strong>disable any proxy</strong> for particular domains.
+See <a href="https://doc.servo.org/servo/struct.Preferences.html#structfield.network_http_no_proxy">the preference documentation</a> for more details.</p>
+<p>Our <strong>developer tools</strong> integration continues to improve.
 Worker globals are now categorized correctly in the UI (@atbrakhi, #41929), and the Sources panel is populated for very short documents (@atbrakhi, #41983).
 Servo will report console messages that were logged before the developer tools are opened (@eerii, @mrobinson, #41895).
 Finally, we fixed a panic when selecting nodes in the layout inspector that have no style information (@eerii, #41800).</p>
@@ -262,13 +278,20 @@ Evaluating a synchronous script that returns a Promise will wait until that prom
 <code>touchmove</code> events are sent for pointer actions when a button is pressed (@yezhizhen, #41801), and <code>touchcancel</code> events for canceled pointer action items (@yezhizhen, #41937).</p>
 <p>The <a href="https://w3c.github.io/webdriver/#element-clear"><code>Element Clear</code></a> API now tests whether the element is interactable (@yezhizhen, #42124).
 A null script execution timeout value will never trigger a timeout (@yezhizhen, #42184), and synthesized <code>pointermove</code> events have a consistent <code>pointerId</code> value (@yezhizhen, #41726).</p>
+<h2 id="embedding" tabindex="-1">Embedding <a class="header-anchor" href="#embedding">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>It is now possible to <strong>cross-compile Servo</strong> using Windows as the host (@yezhizhen, #41748).
+In addition, we have <strong>pinned all git dependencies</strong> to specific revisions to reduce the risk of build failures (@Narfinger, #42029).
+In future, we intend to <a href="https://github.com/servo/servo/issues/25650">forbid git dependencies entirely</a>.</p>
+<p>The <a href="https://doc.servo.org/servo/struct.SiteDataManager.html"><code>SiteDataManager</code></a> interface has a new <strong>clear_site_data</strong> method to clear all stored data for a particular host (@janvarga, #41618, #41709, #41852).</p>
 <p>Our nightly testing UI, <strong>servoshell</strong>, now respects any customized installation path on Windows (@yezhizhen, #41653).
 We fixed a crash in the Android app when pausing the application (@NiklasMerz, #41827).
-Additionally, clicking inside a webview in the app removes focus from any browser UI (@mrobinson, #42080).</p>
+Additionally, clicking inside a webview in the desktop app will remove focus from any browser UI (@mrobinson, #42080).</p>
 <h2 id="stability-%26-performance" tabindex="-1">Stability &amp; performance <a class="header-anchor" href="#stability-%26-performance">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>We converted many uses of IPC channels in the engine to channels that are <strong>more efficient</strong> when multiprocess mode is disabled (@Narfinger, @jdm, @sagudev, @mrobinson, #41178, #41071, #41733, #41806, #41380, #41809, #41774, #42032, #42033).</p>
+<p>We converted many uses of IPC channels in the engine to channels that are <strong>more efficient</strong> when multiprocess mode is disabled (@Narfinger, @jdm, @sagudev, @mrobinson, #41178, #41071, #41733, #41806, #41380, #41809, #41774, #42032, #42033, #41412).</p>
 <p>Servo now sets a <strong>socket timeout for HTTP conections</strong> (@Narfinger, @mrobinson, #41710).
 This is controlled by the <code>network_connection_timeout</code> preference and defaults to <strong>15 seconds</strong>.</p>
 <p>Each instance of Servo now starts four fewer threads (@Narfinger, #41740).

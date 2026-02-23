@@ -15,7 +15,23 @@
     <link href="https://servo.org/twisjan/blog/2026/02/03/january-in-servo/"/>
     <updated>2026-02-03T00:00:00Z</updated>
     <id>https://servo.org/twisjan/blog/2026/02/03/january-in-servo/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;Our &lt;strong&gt;developer tools&lt;/strong&gt; integration continues to improve.
+    <content xml:lang="en" type="html">&lt;h2 id=&quot;web-apis&quot; tabindex=&quot;-1&quot;&gt;Web APIs &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#web-apis&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We’ve enabled support for the &lt;strong&gt;navigator.sendBeacon&lt;/strong&gt; by default (@TimvdLippe, #41694); the &lt;code&gt;dom_navigator_sendbeacon_enabled&lt;/code&gt; preference has been removed.&lt;/p&gt;
+&lt;p&gt;Servo now &lt;strong&gt;&lt;a href=&quot;https://wpt.fyi/results/WebCryptoAPI?label=master&amp;amp;product=chrome%5Bexperimental%5D&amp;amp;product=firefox%5Bexperimental%5D&amp;amp;product=safari&amp;amp;product=servo&amp;amp;aligned&quot;&gt;leads other browsers&lt;/a&gt;&lt;/strong&gt; in support for new WebCrypto algorithms!
+This includes work on ML-KEM (@kkoyung, #41604, #41617, #41615, #41627), ML-DSA (@kkoyung, #41628, #41647, #41659, #41676), AES-OCB (@kkoyung, #41791, #41822, #41813, #41829), and AES-GCM (@kkoyung, #41950).
+Additionally, the error messages returned by many WebCrypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).&lt;/p&gt;
+&lt;p&gt;JS module loading received a lot of attention—we’ve improved support for &lt;strong&gt;cyclic imports&lt;/strong&gt; (@Gae24, #41779), &lt;strong&gt;import attributes&lt;/strong&gt; (@Gae24, #42185), and &lt;strong&gt;JSON modules&lt;/strong&gt; (@Gae24, @jdm, #42138).&lt;/p&gt;
+&lt;p&gt;Additionally, the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload&quot;&gt;&lt;code&gt;preload&lt;/code&gt;&lt;/a&gt; attribute now triggers &lt;strong&gt;preload fetch operations&lt;/strong&gt; that can improve page load speeds (@TimvdLippe, @jdm, #40059).&lt;/p&gt;
+&lt;h2 id=&quot;automation-and-introspection&quot; tabindex=&quot;-1&quot;&gt;Automation and introspection &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#automation-and-introspection&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Last month Servo gained support for HTTP proxies.
+We now support &lt;strong&gt;HTTPS proxies&lt;/strong&gt; as well (@Narfinger, #41689), which can be configured with the &lt;code&gt;https_proxy&lt;/code&gt;/&lt;code&gt;HTTPS_PROXY&lt;/code&gt; environment variables or the &lt;code&gt;network_https_proxy_uri&lt;/code&gt; preference.
+In addition, the &lt;code&gt;NO_PROXY&lt;/code&gt; variable or &lt;code&gt;network_http_no_proxy&lt;/code&gt; preference can &lt;strong&gt;disable any proxy&lt;/strong&gt; for particular domains.
+See &lt;a href=&quot;https://doc.servo.org/servo/struct.Preferences.html#structfield.network_http_no_proxy&quot;&gt;the preference documentation&lt;/a&gt; for more details.&lt;/p&gt;
+&lt;p&gt;Our &lt;strong&gt;developer tools&lt;/strong&gt; integration continues to improve.
 Worker globals are now categorized correctly in the UI (@atbrakhi, #41929), and the Sources panel is populated for very short documents (@atbrakhi, #41983).
 Servo will report console messages that were logged before the developer tools are opened (@eerii, @mrobinson, #41895).
 Finally, we fixed a panic when selecting nodes in the layout inspector that have no style information (@eerii, #41800).&lt;/p&gt;
@@ -26,13 +42,20 @@ Evaluating a synchronous script that returns a Promise will wait until that prom
 &lt;code&gt;touchmove&lt;/code&gt; events are sent for pointer actions when a button is pressed (@yezhizhen, #41801), and &lt;code&gt;touchcancel&lt;/code&gt; events for canceled pointer action items (@yezhizhen, #41937).&lt;/p&gt;
 &lt;p&gt;The &lt;a href=&quot;https://w3c.github.io/webdriver/#element-clear&quot;&gt;&lt;code&gt;Element Clear&lt;/code&gt;&lt;/a&gt; API now tests whether the element is interactable (@yezhizhen, #42124).
 A null script execution timeout value will never trigger a timeout (@yezhizhen, #42184), and synthesized &lt;code&gt;pointermove&lt;/code&gt; events have a consistent &lt;code&gt;pointerId&lt;/code&gt; value (@yezhizhen, #41726).&lt;/p&gt;
+&lt;h2 id=&quot;embedding&quot; tabindex=&quot;-1&quot;&gt;Embedding &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#embedding&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;It is now possible to &lt;strong&gt;cross-compile Servo&lt;/strong&gt; using Windows as the host (@yezhizhen, #41748).
+In addition, we have &lt;strong&gt;pinned all git dependencies&lt;/strong&gt; to specific revisions to reduce the risk of build failures (@Narfinger, #42029).
+In future, we intend to &lt;a href=&quot;https://github.com/servo/servo/issues/25650&quot;&gt;forbid git dependencies entirely&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://doc.servo.org/servo/struct.SiteDataManager.html&quot;&gt;&lt;code&gt;SiteDataManager&lt;/code&gt;&lt;/a&gt; interface has a new &lt;strong&gt;clear_site_data&lt;/strong&gt; method to clear all stored data for a particular host (@janvarga, #41618, #41709, #41852).&lt;/p&gt;
 &lt;p&gt;Our nightly testing UI, &lt;strong&gt;servoshell&lt;/strong&gt;, now respects any customized installation path on Windows (@yezhizhen, #41653).
 We fixed a crash in the Android app when pausing the application (@NiklasMerz, #41827).
-Additionally, clicking inside a webview in the app removes focus from any browser UI (@mrobinson, #42080).&lt;/p&gt;
+Additionally, clicking inside a webview in the desktop app will remove focus from any browser UI (@mrobinson, #42080).&lt;/p&gt;
 &lt;h2 id=&quot;stability-%26-performance&quot; tabindex=&quot;-1&quot;&gt;Stability &amp;amp; performance &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#stability-%26-performance&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We converted many uses of IPC channels in the engine to channels that are &lt;strong&gt;more efficient&lt;/strong&gt; when multiprocess mode is disabled (@Narfinger, @jdm, @sagudev, @mrobinson, #41178, #41071, #41733, #41806, #41380, #41809, #41774, #42032, #42033).&lt;/p&gt;
+&lt;p&gt;We converted many uses of IPC channels in the engine to channels that are &lt;strong&gt;more efficient&lt;/strong&gt; when multiprocess mode is disabled (@Narfinger, @jdm, @sagudev, @mrobinson, #41178, #41071, #41733, #41806, #41380, #41809, #41774, #42032, #42033, #41412).&lt;/p&gt;
 &lt;p&gt;Servo now sets a &lt;strong&gt;socket timeout for HTTP conections&lt;/strong&gt; (@Narfinger, @mrobinson, #41710).
 This is controlled by the &lt;code&gt;network_connection_timeout&lt;/code&gt; preference and defaults to &lt;strong&gt;15 seconds&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Each instance of Servo now starts four fewer threads (@Narfinger, #41740).
