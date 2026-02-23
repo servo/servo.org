@@ -7,6 +7,25 @@ summary:    hurr durr
 categories:
 ---
 
+## Web APIs
+
+We've enabled support for the **navigator.sendBeacon** by default (@TimvdLippe, #41694); the `dom_navigator_sendbeacon_enabled` preference has been removed.
+
+Servo now **[leads other browsers](https://wpt.fyi/results/WebCryptoAPI?label=master&product=chrome%5Bexperimental%5D&product=firefox%5Bexperimental%5D&product=safari&product=servo&aligned)** in support for new WebCrypto algorithms!
+This includes work on ML-KEM (@kkoyung, #41604, #41617, #41615, #41627), ML-DSA (@kkoyung, #41628, #41647, #41659, #41676), AES-OCB (@kkoyung, #41791, #41822, #41813, #41829), and AES-GCM (@kkoyung, #41950).
+Additionally, the error messages returned by many WebCrypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).
+
+JS module loading received a lot of attention—we've improved support for **cyclic imports** (@Gae24, #41779), **import attributes** (@Gae24, #42185), and **JSON modules** (@Gae24, @jdm, #42138).
+
+Additionally, the [`preload`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload) attribute now triggers **preload fetch operations** that can improve page load speeds (@TimvdLippe, @jdm, #40059).
+
+## Automation and introspection
+
+Last month Servo gained support for HTTP proxies.
+We now support **HTTPS proxies** as well (@Narfinger, #41689), which can be configured with the `https_proxy`/`HTTPS_PROXY` environment variables or the `network_https_proxy_uri` preference.
+In addition, the `NO_PROXY` variable or `network_http_no_proxy` preference can **disable any proxy** for particular domains.
+See [the preference documentation](https://doc.servo.org/servo/struct.Preferences.html#structfield.network_http_no_proxy) for more details.
+
 Our **developer tools** integration continues to improve.
 Worker globals are now categorized correctly in the UI (@atbrakhi, #41929), and the Sources panel is populated for very short documents (@atbrakhi, #41983).
 Servo will report console messages that were logged before the developer tools are opened (@eerii, @mrobinson, #41895).
@@ -22,13 +41,21 @@ Evaluating a synchronous script that returns a Promise will wait until that prom
 The [`Element Clear`](https://w3c.github.io/webdriver/#element-clear) API now tests whether the element is interactable (@yezhizhen, #42124).
 A null script execution timeout value will never trigger a timeout (@yezhizhen, #42184), and synthesized `pointermove` events have a consistent `pointerId` value (@yezhizhen, #41726).
 
+## Embedding
+
+It is now possible to **cross-compile Servo** using Windows as the host (@yezhizhen, #41748).
+In addition, we have **pinned all git dependencies** to specific revisions to reduce the risk of build failures (@Narfinger, #42029).
+In future, we intend to [forbid git dependencies entirely](https://github.com/servo/servo/issues/25650).
+
+The [`SiteDataManager`](https://doc.servo.org/servo/struct.SiteDataManager.html) interface has a new **clear_site_data** method to clear all stored data for a particular host (@janvarga, #41618, #41709, #41852).
+
 Our nightly testing UI, **servoshell**, now respects any customized installation path on Windows (@yezhizhen, #41653).
 We fixed a crash in the Android app when pausing the application (@NiklasMerz, #41827).
-Additionally, clicking inside a webview in the app removes focus from any browser UI (@mrobinson, #42080).
+Additionally, clicking inside a webview in the desktop app will remove focus from any browser UI (@mrobinson, #42080).
 
 ## Stability & performance
 
-We converted many uses of IPC channels in the engine to channels that are **more efficient** when multiprocess mode is disabled (@Narfinger, @jdm, @sagudev, @mrobinson, #41178, #41071, #41733, #41806, #41380, #41809, #41774, #42032, #42033).
+We converted many uses of IPC channels in the engine to channels that are **more efficient** when multiprocess mode is disabled (@Narfinger, @jdm, @sagudev, @mrobinson, #41178, #41071, #41733, #41806, #41380, #41809, #41774, #42032, #42033, #41412).
 
 Servo now sets a **socket timeout for HTTP conections** (@Narfinger, @mrobinson, #41710).
 This is controlled by the `network_connection_timeout` preference and defaults to **15 seconds**.
