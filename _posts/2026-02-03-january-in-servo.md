@@ -22,8 +22,30 @@ Additionally, the [`preload`](https://developer.mozilla.org/en-US/docs/Web/HTML/
 **Text input fields** have received a lot of love this month.
 Clicking in an input field will position the cursor accordingly (@mrobinson, @jdm, @Loirooriol, #41906, #41974, #41931), as will clicking past the end of a multiline input (@mrobinson, @Loirooriol, #41909).
 Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).
-Newlines can no longer be pasted into single line inputs (@mrobinson, #41934).
+
+The `cursor-color` CSS property is respected when rendering the input cursor (@mrobinson, #41976), and newlines can no longer be pasted into single line inputs (@mrobinson, #41934)
 Finally, we fixed a panic that occurred when focusing a text field that is disabled (@mrobinson, #42078), as well as panics from APIs like `setRangeText` that confused bytes and UTF-8 character indices (@mrobinson, #41588).
+
+We also made time to **improve form controls**!
+The default styling of many controls received some care (@mrobinson, #42085), while `<input type=button>` can now be styled with the `:active` pseudo-class (@mrobinson, #42095).
+Conversely, disabled `<select>` elements can no longer be activated (@simonwuelker, #42036).
+
+Mouse events triggered by the embedder are more complete; `MouseEvent.detail` correctly reports the click count for `mouseup` and `mousedown` events (@mrobinson, #41833), and many other members are now consistent with other mouse events (@mrobinson, #42013).
+
+**Fonts** were another area of focus this month.
+Loading web fonts from `file://` origins works as expected (@TimvdLippe, #41714), as does using web fonts within Shadow DOM content (@minghuaw, #42151).
+Each web font request now creates a [PerformanceResourceTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming) entry (@lumi-me-not, #41784).
+Servo supports font variations as of November 2025, so the [`FontFace`](https://developer.mozilla.org/en-US/docs/Web/API/FontFace) constructor no longer ignores the `font-variation-settings` property (@muse254, #41968).
+
+Cursive scripts now ignore the `letter-spacing` CSS property (@mrobinson, #42165),
+and we significantly reduced the time and memory required when **rendering non-ASCII text** (@mrobinson, @Loirooriol, #42105, #42162) as well as for text nodes that share the same font (@mrobinson, #41876).
+
+## CSS
+
+There were lots of improvements to block layout algorithms (@Loirooriol, #41492, #41624, #41632, #41655, #41652, #41683).
+These often affect pages where some block element (such as a `<div>`) exists within other layout mode (such as an inline `<span>`, or a flexbox context), and fixes like these ensure Servo matches the output of other browsers.
+
+
 
 ## Automation and introspection
 
