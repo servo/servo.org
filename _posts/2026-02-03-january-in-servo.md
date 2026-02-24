@@ -19,6 +19,12 @@ JS module loading received a lot of attention—we've improved support for **cyc
 
 Additionally, the [`preload`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload) attribute now triggers **preload fetch operations** that can improve page load speeds (@TimvdLippe, @jdm, #40059).
 
+**Text input fields** have received a lot of love this month.
+Clicking in an input field will position the cursor accordingly (@mrobinson, @jdm, @Loirooriol, #41906, #41974, #41931), as will clicking past the end of a multiline input (@mrobinson, @Loirooriol, #41909).
+Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).
+Newlines can no longer be pasted into single line inputs (@mrobinson, #41934).
+Finally, we fixed a panic that occurred when focusing a text field that is disabled (@mrobinson, #42078), as well as panics from APIs like `setRangeText` that confused bytes and UTF-8 character indices (@mrobinson, #41588).
+
 ## Automation and introspection
 
 Last month Servo gained support for HTTP proxies.
@@ -37,6 +43,7 @@ While the debugger is paused, hovering over JS objects will report the object's 
 Similarly, our **WebDriver server** is also maturing.
 Evaluating a synchronous script that returns a Promise will wait until that promise settles (@yezhizhen, #41823).
 `touchmove` events are sent for pointer actions when a button is pressed (@yezhizhen, #41801), and `touchcancel` events for canceled pointer action items (@yezhizhen, #41937).
+Finally, any pointer actions that would trigger duplicate `mousemove` events are silently discarded (@mrobinson, #42034).
 
 The [`Element Clear`](https://w3c.github.io/webdriver/#element-clear) API now tests whether the element is interactable (@yezhizhen, #42124).
 A null script execution timeout value will never trigger a timeout (@yezhizhen, #42184), and synthesized `pointermove` events have a consistent `pointerId` value (@yezhizhen, #41726).
