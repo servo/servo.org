@@ -262,9 +262,24 @@ Additionally, the error messages returned by many WebCrypto APIs are now more de
 <p>Additionally, the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload"><code>preload</code></a> attribute now triggers <strong>preload fetch operations</strong> that can improve page load speeds (@TimvdLippe, @jdm, #40059).</p>
 <p><strong>Text input fields</strong> have received a lot of love this month.
 Clicking in an input field will position the cursor accordingly (@mrobinson, @jdm, @Loirooriol, #41906, #41974, #41931), as will clicking past the end of a multiline input (@mrobinson, @Loirooriol, #41909).
-Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).
-Newlines can no longer be pasted into single line inputs (@mrobinson, #41934).
+Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).</p>
+<p>The <code>cursor-color</code> CSS property is respected when rendering the input cursor (@mrobinson, #41976), and newlines can no longer be pasted into single line inputs (@mrobinson, #41934)
 Finally, we fixed a panic that occurred when focusing a text field that is disabled (@mrobinson, #42078), as well as panics from APIs like <code>setRangeText</code> that confused bytes and UTF-8 character indices (@mrobinson, #41588).</p>
+<p>We also made time to <strong>improve form controls</strong>!
+The default styling of many controls received some care (@mrobinson, #42085), while <code>&lt;input type=button&gt;</code> can now be styled with the <code>:active</code> pseudo-class (@mrobinson, #42095).
+Conversely, disabled <code>&lt;select&gt;</code> elements can no longer be activated (@simonwuelker, #42036).</p>
+<p>Mouse events triggered by the embedder are more complete; <code>MouseEvent.detail</code> correctly reports the click count for <code>mouseup</code> and <code>mousedown</code> events (@mrobinson, #41833), and many other members are now consistent with other mouse events (@mrobinson, #42013).</p>
+<p><strong>Fonts</strong> were another area of focus this month.
+Loading web fonts from <code>file://</code> origins works as expected (@TimvdLippe, #41714), as does using web fonts within Shadow DOM content (@minghuaw, #42151).
+Each web font request now creates a <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming">PerformanceResourceTiming</a> entry (@lumi-me-not, #41784).
+Servo supports font variations as of November 2025, so the <a href="https://developer.mozilla.org/en-US/docs/Web/API/FontFace"><code>FontFace</code></a> constructor no longer ignores the <code>font-variation-settings</code> property (@muse254, #41968).</p>
+<p>Cursive scripts now ignore the <code>letter-spacing</code> CSS property (@mrobinson, #42165),
+and we significantly reduced the time and memory required when <strong>rendering non-ASCII text</strong> (@mrobinson, @Loirooriol, #42105, #42162) as well as for text nodes that share the same font (@mrobinson, #41876).</p>
+<h2 id="css" tabindex="-1">CSS <a class="header-anchor" href="#css">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>There were lots of improvements to block layout algorithms (@Loirooriol, #41492, #41624, #41632, #41655, #41652, #41683).
+These often affect pages where some block element (such as a <code>&lt;div&gt;</code>) exists within other layout mode (such as an inline <code>&lt;span&gt;</code>, or a flexbox context), and fixes like these ensure Servo matches the output of other browsers.</p>
 <h2 id="automation-and-introspection" tabindex="-1">Automation and introspection <a class="header-anchor" href="#automation-and-introspection">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>

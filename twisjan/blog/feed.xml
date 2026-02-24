@@ -26,9 +26,24 @@ Additionally, the error messages returned by many WebCrypto APIs are now more de
 &lt;p&gt;Additionally, the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload&quot;&gt;&lt;code&gt;preload&lt;/code&gt;&lt;/a&gt; attribute now triggers &lt;strong&gt;preload fetch operations&lt;/strong&gt; that can improve page load speeds (@TimvdLippe, @jdm, #40059).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Text input fields&lt;/strong&gt; have received a lot of love this month.
 Clicking in an input field will position the cursor accordingly (@mrobinson, @jdm, @Loirooriol, #41906, #41974, #41931), as will clicking past the end of a multiline input (@mrobinson, @Loirooriol, #41909).
-Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).
-Newlines can no longer be pasted into single line inputs (@mrobinson, #41934).
+Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;cursor-color&lt;/code&gt; CSS property is respected when rendering the input cursor (@mrobinson, #41976), and newlines can no longer be pasted into single line inputs (@mrobinson, #41934)
 Finally, we fixed a panic that occurred when focusing a text field that is disabled (@mrobinson, #42078), as well as panics from APIs like &lt;code&gt;setRangeText&lt;/code&gt; that confused bytes and UTF-8 character indices (@mrobinson, #41588).&lt;/p&gt;
+&lt;p&gt;We also made time to &lt;strong&gt;improve form controls&lt;/strong&gt;!
+The default styling of many controls received some care (@mrobinson, #42085), while &lt;code&gt;&amp;lt;input type=button&amp;gt;&lt;/code&gt; can now be styled with the &lt;code&gt;:active&lt;/code&gt; pseudo-class (@mrobinson, #42095).
+Conversely, disabled &lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt; elements can no longer be activated (@simonwuelker, #42036).&lt;/p&gt;
+&lt;p&gt;Mouse events triggered by the embedder are more complete; &lt;code&gt;MouseEvent.detail&lt;/code&gt; correctly reports the click count for &lt;code&gt;mouseup&lt;/code&gt; and &lt;code&gt;mousedown&lt;/code&gt; events (@mrobinson, #41833), and many other members are now consistent with other mouse events (@mrobinson, #42013).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fonts&lt;/strong&gt; were another area of focus this month.
+Loading web fonts from &lt;code&gt;file://&lt;/code&gt; origins works as expected (@TimvdLippe, #41714), as does using web fonts within Shadow DOM content (@minghuaw, #42151).
+Each web font request now creates a &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming&quot;&gt;PerformanceResourceTiming&lt;/a&gt; entry (@lumi-me-not, #41784).
+Servo supports font variations as of November 2025, so the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/FontFace&quot;&gt;&lt;code&gt;FontFace&lt;/code&gt;&lt;/a&gt; constructor no longer ignores the &lt;code&gt;font-variation-settings&lt;/code&gt; property (@muse254, #41968).&lt;/p&gt;
+&lt;p&gt;Cursive scripts now ignore the &lt;code&gt;letter-spacing&lt;/code&gt; CSS property (@mrobinson, #42165),
+and we significantly reduced the time and memory required when &lt;strong&gt;rendering non-ASCII text&lt;/strong&gt; (@mrobinson, @Loirooriol, #42105, #42162) as well as for text nodes that share the same font (@mrobinson, #41876).&lt;/p&gt;
+&lt;h2 id=&quot;css&quot; tabindex=&quot;-1&quot;&gt;CSS &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#css&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;There were lots of improvements to block layout algorithms (@Loirooriol, #41492, #41624, #41632, #41655, #41652, #41683).
+These often affect pages where some block element (such as a &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;) exists within other layout mode (such as an inline &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt;, or a flexbox context), and fixes like these ensure Servo matches the output of other browsers.&lt;/p&gt;
 &lt;h2 id=&quot;automation-and-introspection&quot; tabindex=&quot;-1&quot;&gt;Automation and introspection &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#automation-and-introspection&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
