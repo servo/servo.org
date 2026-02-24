@@ -260,6 +260,11 @@ This includes work on ML-KEM (@kkoyung, #41604, #41617, #41615, #41627), ML-DSA 
 Additionally, the error messages returned by many WebCrypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).</p>
 <p>JS module loading received a lot of attention—we’ve improved support for <strong>cyclic imports</strong> (@Gae24, #41779), <strong>import attributes</strong> (@Gae24, #42185), and <strong>JSON modules</strong> (@Gae24, @jdm, #42138).</p>
 <p>Additionally, the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload"><code>preload</code></a> attribute now triggers <strong>preload fetch operations</strong> that can improve page load speeds (@TimvdLippe, @jdm, #40059).</p>
+<p><strong>Text input fields</strong> have received a lot of love this month.
+Clicking in an input field will position the cursor accordingly (@mrobinson, @jdm, @Loirooriol, #41906, #41974, #41931), as will clicking past the end of a multiline input (@mrobinson, @Loirooriol, #41909).
+Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).
+Newlines can no longer be pasted into single line inputs (@mrobinson, #41934).
+Finally, we fixed a panic that occurred when focusing a text field that is disabled (@mrobinson, #42078), as well as panics from APIs like <code>setRangeText</code> that confused bytes and UTF-8 character indices (@mrobinson, #41588).</p>
 <h2 id="automation-and-introspection" tabindex="-1">Automation and introspection <a class="header-anchor" href="#automation-and-introspection">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -275,7 +280,8 @@ Finally, we fixed a panic when selecting nodes in the layout inspector that have
 While the debugger is paused, hovering over JS objects will report the object’s properties for builtin JS classes (@eerii, @atbrakhi, #42186).</p>
 <p>Similarly, our <strong>WebDriver server</strong> is also maturing.
 Evaluating a synchronous script that returns a Promise will wait until that promise settles (@yezhizhen, #41823).
-<code>touchmove</code> events are sent for pointer actions when a button is pressed (@yezhizhen, #41801), and <code>touchcancel</code> events for canceled pointer action items (@yezhizhen, #41937).</p>
+<code>touchmove</code> events are sent for pointer actions when a button is pressed (@yezhizhen, #41801), and <code>touchcancel</code> events for canceled pointer action items (@yezhizhen, #41937).
+Finally, any pointer actions that would trigger duplicate <code>mousemove</code> events are silently discarded (@mrobinson, #42034).</p>
 <p>The <a href="https://w3c.github.io/webdriver/#element-clear"><code>Element Clear</code></a> API now tests whether the element is interactable (@yezhizhen, #42124).
 A null script execution timeout value will never trigger a timeout (@yezhizhen, #42184), and synthesized <code>pointermove</code> events have a consistent <code>pointerId</code> value (@yezhizhen, #41726).</p>
 <h2 id="embedding" tabindex="-1">Embedding <a class="header-anchor" href="#embedding">

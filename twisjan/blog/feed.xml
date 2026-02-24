@@ -24,6 +24,11 @@ This includes work on ML-KEM (@kkoyung, #41604, #41617, #41615, #41627), ML-DSA 
 Additionally, the error messages returned by many WebCrypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).&lt;/p&gt;
 &lt;p&gt;JS module loading received a lot of attention—we’ve improved support for &lt;strong&gt;cyclic imports&lt;/strong&gt; (@Gae24, #41779), &lt;strong&gt;import attributes&lt;/strong&gt; (@Gae24, #42185), and &lt;strong&gt;JSON modules&lt;/strong&gt; (@Gae24, @jdm, #42138).&lt;/p&gt;
 &lt;p&gt;Additionally, the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload&quot;&gt;&lt;code&gt;preload&lt;/code&gt;&lt;/a&gt; attribute now triggers &lt;strong&gt;preload fetch operations&lt;/strong&gt; that can improve page load speeds (@TimvdLippe, @jdm, #40059).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Text input fields&lt;/strong&gt; have received a lot of love this month.
+Clicking in an input field will position the cursor accordingly (@mrobinson, @jdm, @Loirooriol, #41906, #41974, #41931), as will clicking past the end of a multiline input (@mrobinson, @Loirooriol, #41909).
+Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).
+Newlines can no longer be pasted into single line inputs (@mrobinson, #41934).
+Finally, we fixed a panic that occurred when focusing a text field that is disabled (@mrobinson, #42078), as well as panics from APIs like &lt;code&gt;setRangeText&lt;/code&gt; that confused bytes and UTF-8 character indices (@mrobinson, #41588).&lt;/p&gt;
 &lt;h2 id=&quot;automation-and-introspection&quot; tabindex=&quot;-1&quot;&gt;Automation and introspection &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#automation-and-introspection&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -39,7 +44,8 @@ Finally, we fixed a panic when selecting nodes in the layout inspector that have
 While the debugger is paused, hovering over JS objects will report the object’s properties for builtin JS classes (@eerii, @atbrakhi, #42186).&lt;/p&gt;
 &lt;p&gt;Similarly, our &lt;strong&gt;WebDriver server&lt;/strong&gt; is also maturing.
 Evaluating a synchronous script that returns a Promise will wait until that promise settles (@yezhizhen, #41823).
-&lt;code&gt;touchmove&lt;/code&gt; events are sent for pointer actions when a button is pressed (@yezhizhen, #41801), and &lt;code&gt;touchcancel&lt;/code&gt; events for canceled pointer action items (@yezhizhen, #41937).&lt;/p&gt;
+&lt;code&gt;touchmove&lt;/code&gt; events are sent for pointer actions when a button is pressed (@yezhizhen, #41801), and &lt;code&gt;touchcancel&lt;/code&gt; events for canceled pointer action items (@yezhizhen, #41937).
+Finally, any pointer actions that would trigger duplicate &lt;code&gt;mousemove&lt;/code&gt; events are silently discarded (@mrobinson, #42034).&lt;/p&gt;
 &lt;p&gt;The &lt;a href=&quot;https://w3c.github.io/webdriver/#element-clear&quot;&gt;&lt;code&gt;Element Clear&lt;/code&gt;&lt;/a&gt; API now tests whether the element is interactable (@yezhizhen, #42124).
 A null script execution timeout value will never trigger a timeout (@yezhizhen, #42184), and synthesized &lt;code&gt;pointermove&lt;/code&gt; events have a consistent &lt;code&gt;pointerId&lt;/code&gt; value (@yezhizhen, #41726).&lt;/p&gt;
 &lt;h2 id=&quot;embedding&quot; tabindex=&quot;-1&quot;&gt;Embedding &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#embedding&quot;&gt;
