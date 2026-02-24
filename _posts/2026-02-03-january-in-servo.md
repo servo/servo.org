@@ -45,7 +45,12 @@ and we significantly reduced the time and memory required when **rendering non-A
 There were lots of improvements to block layout algorithms (@Loirooriol, #41492, #41624, #41632, #41655, #41652, #41683).
 These often affect pages where some block element (such as a `<div>`) exists within other layout mode (such as an inline `<span>`, or a flexbox context), and fixes like these ensure Servo matches the output of other browsers.
 
+Elements with overflow that is scrollable can be scrolled more consistently, even with CSS transforms applied to them (@stevennovaryo, #41707, #42005).
 
+Generated image content used to only work with pseudo-elements, but that restriction no longer applies (@andreubotella, #41480).
+Similarly, `<details>` elements can now be styled with the `::details-cotent` pseudo-elemement (@lukewarlow, #42107), as well as the `:open` pseudo-class (@lukewarlow, #42195).
+
+CSS styles now inherit correctly through `display: contents` as well as `<slot>` elements in Shadow DOM content (@longvatrong111, @Loirooriol, @mrobinson, #41855).
 
 ## Automation and introspection
 
