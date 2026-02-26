@@ -10,6 +10,22 @@ categories:
 ## Web APIs
 
 We've enabled support for the **navigator.sendBeacon** by default (@TimvdLippe, #41694); the `dom_navigator_sendbeacon_enabled` preference has been removed.
+As part of this work, we implemented the [`keepalive`](https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive) feature of the Request API (@TimvdLippe, #41457, @WaterWhisperer, #41811).
+
+That's not all for network-related improvements!
+Quota errors from the [`fetchLater`](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetchLater) API provide more details (@TimvdLippe, #41665), and fetch response body promises now reject when invalid gzip content is encountered (@arayaryoma, #39438).
+Meanwhile, [`EventSource`](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) connections will no longer endlessly reconnect for permanent failures (@WaterWhisperer, #41651, #42137), and now use the correct `Last-Event-Id` header when reconnecting (@WaterWhisperer, #42103).
+
+There has been lots of work related to **navigating pages and loading iframes**.
+We process URL fragments more consistently when navigating via the `location` property (@TimvdLippe, #41805, #41834), and allow evaluating `javascript:` URLs when a document's domain has been modified (@jdm, #41969).
+We're also made it possible to use `blob:` URLs from inside `about:blank` and `about:srcdoc` documents (@jdm, #41966, #42104).
+Finally, documents with opaque origins are no longer allowed to set `document.domain` (@TimvdLippe, #41780).
+
+Servo's mixed content protections are steadily increasing.
+Insecure requests (e.g. HTTP) originating from `<iframe>` elements can be upgraded to secure protocols (@WaterWhisperer, #41661), and redirected requests now check the most recent URL when determining if the protocol is secure (@WaterWhisperer, #41832).
+
+Stylesheets loaded when parsing the document will block the document `load` event more consistently (@TimvdLippe, @mrobinson, #41986, #41987, #41988, #41973), and the `blocking` attribute can be used for stylesheets that are added dynamically @TimvdLippe, #42096).
+We also fire the `error` event if a fetched stylesheet response is invalid (@TimvdLippe, @mrobinson, #42037).
 
 Servo now **[leads other browsers](https://wpt.fyi/results/WebCryptoAPI?label=master&product=chrome%5Bexperimental%5D&product=firefox%5Bexperimental%5D&product=safari&product=servo&aligned)** in support for new WebCrypto algorithms!
 This includes work on ML-KEM (@kkoyung, #41604, #41617, #41615, #41627), ML-DSA (@kkoyung, #41628, #41647, #41659, #41676), AES-OCB (@kkoyung, #41791, #41822, #41813, #41829), and AES-GCM (@kkoyung, #41950).
@@ -51,6 +67,10 @@ Generated image content used to only work with pseudo-elements, but that restric
 Similarly, `<details>` elements can now be styled with the `::details-cotent` pseudo-elemement (@lukewarlow, #42107), as well as the `:open` pseudo-class (@lukewarlow, #42195).
 
 CSS styles now inherit correctly through `display: contents` as well as `<slot>` elements in Shadow DOM content (@longvatrong111, @Loirooriol, @mrobinson, #41855).
+
+## Network & Fetch
+
+
 
 ## Automation and introspection
 
