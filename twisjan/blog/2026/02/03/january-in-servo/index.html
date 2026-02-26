@@ -254,7 +254,19 @@
   <h2 id="web-apis" tabindex="-1">Web APIs <a class="header-anchor" href="#web-apis">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>We’ve enabled support for the <strong>navigator.sendBeacon</strong> by default (@TimvdLippe, #41694); the <code>dom_navigator_sendbeacon_enabled</code> preference has been removed.</p>
+<p>We’ve enabled support for the <strong>navigator.sendBeacon</strong> by default (@TimvdLippe, #41694); the <code>dom_navigator_sendbeacon_enabled</code> preference has been removed.
+As part of this work, we implemented the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive"><code>keepalive</code></a> feature of the Request API (@TimvdLippe, #41457, @WaterWhisperer, #41811).</p>
+<p>That’s not all for network-related improvements!
+Quota errors from the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetchLater"><code>fetchLater</code></a> API provide more details (@TimvdLippe, #41665), and fetch response body promises now reject when invalid gzip content is encountered (@arayaryoma, #39438).
+Meanwhile, <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource"><code>EventSource</code></a> connections will no longer endlessly reconnect for permanent failures (@WaterWhisperer, #41651, #42137), and now use the correct <code>Last-Event-Id</code> header when reconnecting (@WaterWhisperer, #42103).</p>
+<p>There has been lots of work related to <strong>navigating pages and loading iframes</strong>.
+We process URL fragments more consistently when navigating via the <code>location</code> property (@TimvdLippe, #41805, #41834), and allow evaluating <code>javascript:</code> URLs when a document’s domain has been modified (@jdm, #41969).
+We’re also made it possible to use <code>blob:</code> URLs from inside <code>about:blank</code> and <code>about:srcdoc</code> documents (@jdm, #41966, #42104).
+Finally, documents with opaque origins are no longer allowed to set <code>document.domain</code> (@TimvdLippe, #41780).</p>
+<p>Servo’s mixed content protections are steadily increasing.
+Insecure requests (e.g. HTTP) originating from <code>&lt;iframe&gt;</code> elements can be upgraded to secure protocols (@WaterWhisperer, #41661), and redirected requests now check the most recent URL when determining if the protocol is secure (@WaterWhisperer, #41832).</p>
+<p>Stylesheets loaded when parsing the document will block the document <code>load</code> event more consistently (@TimvdLippe, @mrobinson, #41986, #41987, #41988, #41973), and the <code>blocking</code> attribute can be used for stylesheets that are added dynamically @TimvdLippe, #42096).
+We also fire the <code>error</code> event if a fetched stylesheet response is invalid (@TimvdLippe, @mrobinson, #42037).</p>
 <p>Servo now <strong><a href="https://wpt.fyi/results/WebCryptoAPI?label=master&amp;product=chrome%5Bexperimental%5D&amp;product=firefox%5Bexperimental%5D&amp;product=safari&amp;product=servo&amp;aligned">leads other browsers</a></strong> in support for new WebCrypto algorithms!
 This includes work on ML-KEM (@kkoyung, #41604, #41617, #41615, #41627), ML-DSA (@kkoyung, #41628, #41647, #41659, #41676), AES-OCB (@kkoyung, #41791, #41822, #41813, #41829), and AES-GCM (@kkoyung, #41950).
 Additionally, the error messages returned by many WebCrypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).</p>
@@ -284,6 +296,9 @@ These often affect pages where some block element (such as a <code>&lt;div&gt;</
 <p>Generated image content used to only work with pseudo-elements, but that restriction no longer applies (@andreubotella, #41480).
 Similarly, <code>&lt;details&gt;</code> elements can now be styled with the <code>::details-cotent</code> pseudo-elemement (@lukewarlow, #42107), as well as the <code>:open</code> pseudo-class (@lukewarlow, #42195).</p>
 <p>CSS styles now inherit correctly through <code>display: contents</code> as well as <code>&lt;slot&gt;</code> elements in Shadow DOM content (@longvatrong111, @Loirooriol, @mrobinson, #41855).</p>
+<h2 id="network-%26-fetch" tabindex="-1">Network &amp; Fetch <a class="header-anchor" href="#network-%26-fetch">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
 <h2 id="automation-and-introspection" tabindex="-1">Automation and introspection <a class="header-anchor" href="#automation-and-introspection">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>

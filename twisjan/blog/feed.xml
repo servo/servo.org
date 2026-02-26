@@ -18,7 +18,19 @@
     <content xml:lang="en" type="html">&lt;h2 id=&quot;web-apis&quot; tabindex=&quot;-1&quot;&gt;Web APIs &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#web-apis&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We’ve enabled support for the &lt;strong&gt;navigator.sendBeacon&lt;/strong&gt; by default (@TimvdLippe, #41694); the &lt;code&gt;dom_navigator_sendbeacon_enabled&lt;/code&gt; preference has been removed.&lt;/p&gt;
+&lt;p&gt;We’ve enabled support for the &lt;strong&gt;navigator.sendBeacon&lt;/strong&gt; by default (@TimvdLippe, #41694); the &lt;code&gt;dom_navigator_sendbeacon_enabled&lt;/code&gt; preference has been removed.
+As part of this work, we implemented the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive&quot;&gt;&lt;code&gt;keepalive&lt;/code&gt;&lt;/a&gt; feature of the Request API (@TimvdLippe, #41457, @WaterWhisperer, #41811).&lt;/p&gt;
+&lt;p&gt;That’s not all for network-related improvements!
+Quota errors from the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Window/fetchLater&quot;&gt;&lt;code&gt;fetchLater&lt;/code&gt;&lt;/a&gt; API provide more details (@TimvdLippe, #41665), and fetch response body promises now reject when invalid gzip content is encountered (@arayaryoma, #39438).
+Meanwhile, &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/EventSource&quot;&gt;&lt;code&gt;EventSource&lt;/code&gt;&lt;/a&gt; connections will no longer endlessly reconnect for permanent failures (@WaterWhisperer, #41651, #42137), and now use the correct &lt;code&gt;Last-Event-Id&lt;/code&gt; header when reconnecting (@WaterWhisperer, #42103).&lt;/p&gt;
+&lt;p&gt;There has been lots of work related to &lt;strong&gt;navigating pages and loading iframes&lt;/strong&gt;.
+We process URL fragments more consistently when navigating via the &lt;code&gt;location&lt;/code&gt; property (@TimvdLippe, #41805, #41834), and allow evaluating &lt;code&gt;javascript:&lt;/code&gt; URLs when a document’s domain has been modified (@jdm, #41969).
+We’re also made it possible to use &lt;code&gt;blob:&lt;/code&gt; URLs from inside &lt;code&gt;about:blank&lt;/code&gt; and &lt;code&gt;about:srcdoc&lt;/code&gt; documents (@jdm, #41966, #42104).
+Finally, documents with opaque origins are no longer allowed to set &lt;code&gt;document.domain&lt;/code&gt; (@TimvdLippe, #41780).&lt;/p&gt;
+&lt;p&gt;Servo’s mixed content protections are steadily increasing.
+Insecure requests (e.g. HTTP) originating from &lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt; elements can be upgraded to secure protocols (@WaterWhisperer, #41661), and redirected requests now check the most recent URL when determining if the protocol is secure (@WaterWhisperer, #41832).&lt;/p&gt;
+&lt;p&gt;Stylesheets loaded when parsing the document will block the document &lt;code&gt;load&lt;/code&gt; event more consistently (@TimvdLippe, @mrobinson, #41986, #41987, #41988, #41973), and the &lt;code&gt;blocking&lt;/code&gt; attribute can be used for stylesheets that are added dynamically @TimvdLippe, #42096).
+We also fire the &lt;code&gt;error&lt;/code&gt; event if a fetched stylesheet response is invalid (@TimvdLippe, @mrobinson, #42037).&lt;/p&gt;
 &lt;p&gt;Servo now &lt;strong&gt;&lt;a href=&quot;https://wpt.fyi/results/WebCryptoAPI?label=master&amp;amp;product=chrome%5Bexperimental%5D&amp;amp;product=firefox%5Bexperimental%5D&amp;amp;product=safari&amp;amp;product=servo&amp;amp;aligned&quot;&gt;leads other browsers&lt;/a&gt;&lt;/strong&gt; in support for new WebCrypto algorithms!
 This includes work on ML-KEM (@kkoyung, #41604, #41617, #41615, #41627), ML-DSA (@kkoyung, #41628, #41647, #41659, #41676), AES-OCB (@kkoyung, #41791, #41822, #41813, #41829), and AES-GCM (@kkoyung, #41950).
 Additionally, the error messages returned by many WebCrypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).&lt;/p&gt;
@@ -48,6 +60,9 @@ These often affect pages where some block element (such as a &lt;code&gt;&amp;lt
 &lt;p&gt;Generated image content used to only work with pseudo-elements, but that restriction no longer applies (@andreubotella, #41480).
 Similarly, &lt;code&gt;&amp;lt;details&amp;gt;&lt;/code&gt; elements can now be styled with the &lt;code&gt;::details-cotent&lt;/code&gt; pseudo-elemement (@lukewarlow, #42107), as well as the &lt;code&gt;:open&lt;/code&gt; pseudo-class (@lukewarlow, #42195).&lt;/p&gt;
 &lt;p&gt;CSS styles now inherit correctly through &lt;code&gt;display: contents&lt;/code&gt; as well as &lt;code&gt;&amp;lt;slot&amp;gt;&lt;/code&gt; elements in Shadow DOM content (@longvatrong111, @Loirooriol, @mrobinson, #41855).&lt;/p&gt;
+&lt;h2 id=&quot;network-%26-fetch&quot; tabindex=&quot;-1&quot;&gt;Network &amp;amp; Fetch &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#network-%26-fetch&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
 &lt;h2 id=&quot;automation-and-introspection&quot; tabindex=&quot;-1&quot;&gt;Automation and introspection &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#automation-and-introspection&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
