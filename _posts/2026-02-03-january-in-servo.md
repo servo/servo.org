@@ -7,6 +7,10 @@ summary:    hurr durr
 categories:
 ---
 
+<figure>
+    <img src="{{ '/img/blog/2026-02-diffie.png' | url }}" alt="Servo 0.0.5 showing improved appearance of buttons, text inputs, radio buttons, and checkboxes, plus new support for ‘::details-content’ and ‘:open’ selectors">
+</figure>
+
 ## Web APIs
 
 We've enabled support for the **navigator.sendBeacon** by default (@TimvdLippe, #41694); the `dom_navigator_sendbeacon_enabled` preference has been removed.
