@@ -29,7 +29,7 @@ Meanwhile, &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Eve
 &lt;p&gt;There has been lots of work related to &lt;strong&gt;navigating pages and loading iframes&lt;/strong&gt;.
 We process URL fragments more consistently when navigating via the &lt;code&gt;location&lt;/code&gt; property (@TimvdLippe, #41805, #41834), and allow evaluating &lt;code&gt;javascript:&lt;/code&gt; URLs when a document’s domain has been modified (@jdm, #41969).
 We’re also made it possible to use &lt;code&gt;blob:&lt;/code&gt; URLs from inside &lt;code&gt;about:blank&lt;/code&gt; and &lt;code&gt;about:srcdoc&lt;/code&gt; documents (@jdm, #41966, #42104).
-Finally, documents with opaque origins are no longer allowed to set &lt;code&gt;document.domain&lt;/code&gt; (@TimvdLippe, #41780).&lt;/p&gt;
+Finally, constructed documents (e.g. &lt;code&gt;new Document()&lt;/code&gt;) now inherit the origin and domain of the document that created them (@TimvdLippe, #41780), and we implemented the new &lt;a href=&quot;https://html.spec.whatwg.org/multipage/#the-origin-interface&quot;&gt;&lt;code&gt;Origin&lt;/code&gt;&lt;/a&gt; interface.&lt;/p&gt;
 &lt;p&gt;Servo’s mixed content protections are steadily increasing.
 Insecure requests (e.g. HTTP) originating from &lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt; elements can be upgraded to secure protocols (@WaterWhisperer, #41661), and redirected requests now check the most recent URL when determining if the protocol is secure (@WaterWhisperer, #41832).&lt;/p&gt;
 &lt;p&gt;Stylesheets loaded when parsing the document will block the document &lt;code&gt;load&lt;/code&gt; event more consistently (@TimvdLippe, @mrobinson, #41986, #41987, #41988, #41973), and the &lt;code&gt;blocking&lt;/code&gt; attribute can be used for stylesheets that are added dynamically @TimvdLippe, #42096).
@@ -41,7 +41,8 @@ Additionally, the error messages returned by many WebCrypto APIs are now more de
 &lt;p&gt;Additionally, the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload&quot;&gt;&lt;code&gt;preload&lt;/code&gt;&lt;/a&gt; attribute now triggers &lt;strong&gt;preload fetch operations&lt;/strong&gt; that can improve page load speeds (@TimvdLippe, @jdm, #40059).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Text input fields&lt;/strong&gt; have received a lot of love this month.
 Clicking in an input field will position the cursor accordingly (@mrobinson, @jdm, @Loirooriol, #41906, #41974, #41931), as will clicking past the end of a multiline input (@mrobinson, @Loirooriol, #41909).
-Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).&lt;/p&gt;
+Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).
+Finally, we fixed a bug causing the input caret to be hidden in &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; elements inside of Shadow DOM content (@stevennovaryo, #42233).&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;cursor-color&lt;/code&gt; CSS property is respected when rendering the input cursor (@mrobinson, #41976), and newlines can no longer be pasted into single line inputs (@mrobinson, #41934)
 Finally, we fixed a panic that occurred when focusing a text field that is disabled (@mrobinson, #42078), as well as panics from APIs like &lt;code&gt;setRangeText&lt;/code&gt; that confused bytes and UTF-8 character indices (@mrobinson, #41588).&lt;/p&gt;
 &lt;p&gt;We also made time to &lt;strong&gt;improve form controls&lt;/strong&gt;!
@@ -61,11 +62,15 @@ and we significantly reduced the time and memory required when &lt;strong&gt;ren
 These often affect pages where some block element (such as a &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;) exists within other layout mode (such as an inline &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt;, or a flexbox context), and fixes like these ensure Servo matches the output of other browsers.&lt;/p&gt;
 &lt;p&gt;Elements with overflow that is scrollable can be scrolled more consistently, even with CSS transforms applied to them (@stevennovaryo, #41707, #42005).&lt;/p&gt;
 &lt;p&gt;Generated image content used to only work with pseudo-elements, but that restriction no longer applies (@andreubotella, #41480).
-Similarly, &lt;code&gt;&amp;lt;details&amp;gt;&lt;/code&gt; elements can now be styled with the &lt;code&gt;::details-cotent&lt;/code&gt; pseudo-elemement (@lukewarlow, #42107), as well as the &lt;code&gt;:open&lt;/code&gt; pseudo-class (@lukewarlow, #42195).&lt;/p&gt;
+Similarly, &lt;code&gt;&amp;lt;details&amp;gt;&lt;/code&gt; elements can now be styled with the &lt;code&gt;::details-content&lt;/code&gt; pseudo-elemement (@lukewarlow, #42107), as well as the &lt;code&gt;:open&lt;/code&gt; pseudo-class (@lukewarlow, #42195).&lt;/p&gt;
 &lt;p&gt;CSS styles now inherit correctly through &lt;code&gt;display: contents&lt;/code&gt; as well as &lt;code&gt;&amp;lt;slot&amp;gt;&lt;/code&gt; elements in Shadow DOM content (@longvatrong111, @Loirooriol, @mrobinson, #41855).&lt;/p&gt;
-&lt;h2 id=&quot;network-%26-fetch&quot; tabindex=&quot;-1&quot;&gt;Network &amp;amp; Fetch &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#network-%26-fetch&quot;&gt;
-        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
-      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;overflow-clip-margin&lt;/code&gt; property now works correctly when &lt;code&gt;border-radius&lt;/code&gt; is present (@Loirooriol, #41967).&lt;/p&gt;
+&lt;p&gt;We fixed bugs involving text inside flexbox elements: they now use consistent baselines for alignment (@lukewarlow, @mrobinson, #42038) and updated styles are propagated to the text correctly (@mrobinson, #41951).&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;align&lt;/code&gt; attribute on &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; elements now aligns the image as expected (@mrobinson, #42220).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;word-break: keep-all&lt;/code&gt; now prevents line breaks in &lt;a href=&quot;https://en.wikipedia.org/wiki/CJK_characters&quot;&gt;CJK text&lt;/a&gt; (@RichardTjokroutomo, #42088).&lt;/p&gt;
+&lt;p&gt;We also fixed some bugs involving &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Margin_collapsing&quot;&gt;collapsing margins&lt;/a&gt;, floats, and &lt;a href=&quot;https://drafts.csswg.org/css-inline-3/#invisible-line-boxes&quot;&gt;phantom line boxes&lt;/a&gt; (@Loirooriol, #41812), which sound much cooler than they actually are.&lt;/p&gt;
+&lt;p&gt;Finally, we upgraded our &lt;a href=&quot;https://crates.io/crates/stylo&quot;&gt;Stylo&lt;/a&gt; dependency to the latest changes as of January 1 2026 (@Loirooriol, #41916, #41696).
+Stylo powers our CSS parsing and &lt;a href=&quot;https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/&quot;&gt;style resolution engine&lt;/a&gt;, and this upgrade improves our &lt;strong&gt;CSS animations and transitions&lt;/strong&gt; for borders and overflow clipping and &lt;strong&gt;parsing color functions&lt;/strong&gt; like &lt;code&gt;color-mix&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;automation-and-introspection&quot; tabindex=&quot;-1&quot;&gt;Automation and introspection &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#automation-and-introspection&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -77,8 +82,9 @@ See &lt;a href=&quot;https://doc.servo.org/servo/struct.Preferences.html#structf
 Worker globals are now categorized correctly in the UI (@atbrakhi, #41929), and the Sources panel is populated for very short documents (@atbrakhi, #41983).
 Servo will report console messages that were logged before the developer tools are opened (@eerii, @mrobinson, #41895).
 Finally, we fixed a panic when selecting nodes in the layout inspector that have no style information (@eerii, #41800).&lt;/p&gt;
-&lt;p&gt;Pausing in the JS debugger now interrupts script execution (@eerii, @atbrakhi, @jdm, #42007), and breakpoints can be toggled through the UI (@eerii, @atbrakhi, #41925, #42154).
-While the debugger is paused, hovering over JS objects will report the object’s properties for builtin JS classes (@eerii, @atbrakhi, #42186).&lt;/p&gt;
+&lt;p&gt;We’re working towards supporting pausing in the JS debugger (@eerii, @atbrakhi, @jdm, #42007), and breakpoints can be toggled through the UI (@eerii, @atbrakhi, #41925, #42154).
+While the debugger is paused, hovering over JS objects will report the object’s properties for builtin JS classes (@eerii, @atbrakhi, #42186).
+Sadly, pausing does not actually pause Servo yet; stay tuned for updates in next month’s blog post!&lt;/p&gt;
 &lt;p&gt;Similarly, our &lt;strong&gt;WebDriver server&lt;/strong&gt; is also maturing.
 Evaluating a synchronous script that returns a Promise will wait until that promise settles (@yezhizhen, #41823).
 &lt;code&gt;touchmove&lt;/code&gt; events are sent for pointer actions when a button is pressed (@yezhizhen, #41801), and &lt;code&gt;touchcancel&lt;/code&gt; events for canceled pointer action items (@yezhizhen, #41937).
@@ -110,6 +116,8 @@ Meanwhile, we added a new cache to reduce memory usage and improve rendering per
 This can reduce the risk of out of memory (OOM) errors on pages that create large numbers of short-lived WebGL or WebGPU objects.&lt;/p&gt;
 &lt;p&gt;To reduce the risk of panics involving the JS engine integration, we are using &lt;strong&gt;the Rust type system&lt;/strong&gt; to make certain kinds of dynamic borrow failures impossible (@sagudev, #41692, #41782, #41756, #41808, #41879, #41878, #41955, #41971, #42123).
 We also continue to identify and &lt;strong&gt;forbid code patterns&lt;/strong&gt; that can trigger rare crashes during garbage collection when destroying a WebView (@willypuzzle, #41717, #41783, #41911, #41911, #41977, #41984, #42243).&lt;/p&gt;
+&lt;p&gt;This month also featured various fixes panics in parallel layout (@mrobinson, #42026), WebGPU (@WaterWhisperer, #42050), &lt;code&gt;&amp;lt;link&amp;gt;&lt;/code&gt; fetching (@jdm, #42208), &lt;code&gt;Element.attachShadow&lt;/code&gt; (@mrobinson, #42237), text input methods (@mrobinson, #42240), Web Workers when the developer tools are active,(@mrobinson, #42159), IndexedDB (@gterzian, #41960), and asynchronous &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API&quot;&gt;session history&lt;/a&gt; updates (@mrobinson, #42238).&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;Node.compareDocumentPosition&lt;/code&gt; method is now more efficient (@webbeef, #42260), and selections in text inputs no longer require a full page layout (@mrobinson, @Loirooriol, #41963).&lt;/p&gt;
 &lt;style&gt;
     ._correction {
         max-width: 33em;
