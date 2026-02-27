@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>January in Servo: who knows? - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
-  <meta property="og:title" content="January in Servo: who knows? - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  <title>January in Servo: text input, preloads, details styling, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="January in Servo: text input, preloads, details styling, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
   
 
   
-  <meta name="description" content="hurr durr">
-  <meta name="og:description" content="hurr durr">
+  <meta name="description" content="The web works hard, but Servo contributors work harder.">
+  <meta name="og:description" content="The web works hard, but Servo contributors work harder.">
   
   <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
   <meta name="author" content="The Servo Project Developers">
@@ -35,7 +35,7 @@
     <div class="inner-container">
       <div class="navbar-brand">
         <a href="/twisjan/">
-          <img src="/twisjan/svg/servo-color.svg" alt="January in Servo: who knows?">
+          <img src="/twisjan/svg/servo-color.svg" alt="January in Servo: text input, preloads, details styling, and more!">
         </a>
 
         <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
@@ -238,33 +238,30 @@
 
 
 </script>
-          <div class="content" id="January in Servo: who knows?">
+          <div class="content" id="January in Servo: text input, preloads, details styling, and more!">
             
 <div class="blog-hero">
   <div class="container">
     <div class="inner-container">
-    <h1 class="title">January in Servo: who knows?</h1>
-      <p class="subtitle">hurr durr</p>
+    <h1 class="title">January in Servo: text input, preloads, details styling, and more!</h1>
+      <p class="subtitle">The web works hard, but Servo contributors work harder.</p>
       <p class="posted">Posted <span class="tag is-dark">2026-02-03</span></p>
     </div>
   </div>
 </div>
 
 <div class="inner-container blog-content">
-  <figure>
+  <p><a href="https://github.com/servo/servo/releases/tag/v0.0.5"><strong>Servo 0.0.5</strong></a> is here, bringing with it lots of bug fixes and improvements for JS and CSS features.</p>
+<figure>
     <img src="/twisjan/img/blog/2026-02-diffie.png" alt="Servo 0.0.5 showing improved appearance of buttons, text inputs, radio buttons, and checkboxes, plus new support for ‘::details-content’ and ‘:open’ selectors">
 </figure>
 <h2 id="web-apis" tabindex="-1">Web APIs <a class="header-anchor" href="#web-apis">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>We were accidentally persisting <code>SessionStorage</code> data beyond the current session, but this has been corrected (@arihant2math, #41326).</p>
-<p>Servo now plays OGG media inside <code>&lt;audio&gt;</code> elements (@jdm, #41789)!
+<p>Servo now <strong>plays OGG media</strong> inside <code>&lt;audio&gt;</code> elements (@jdm, #41789)!
 We disabled this feature many years ago due to bugs in <a href="https://gstreamer.freedesktop.org/">GStreamer</a>, our media playback engine, but those bugs have since been fixed.</p>
-<p>IndexedDB support continues to make progress.
-This month we gained improvements to connection queues (@gterzian, #41500, #42053) and request granularity (@gterzian, #41933).
-This work remains disabled behind the <code>dom_indexeddb_enabled</code> preference until more of the IndexedDB API is implemented.</p>
 <p>We now support non-<code>px</code> sizes for width and height attributes in <code>&lt;svg&gt;</code> elements (@rodio, #40761).</p>
-<p>Inactive documents will now correct reject fullscreen mode changes (@stevennovaryo, #42068).</p>
+<p>Inactive documents will now correctly reject fullscreen mode changes (@stevennovaryo, #42068).</p>
 <p>We’ve enabled support for the <strong>navigator.sendBeacon</strong> by default (@TimvdLippe, #41694); the <code>dom_navigator_sendbeacon_enabled</code> preference has been removed.
 As part of this work, we implemented the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive"><code>keepalive</code></a> feature of the Request API (@TimvdLippe, #41457, @WaterWhisperer, #41811).</p>
 <p>That’s not all for network-related improvements!
@@ -275,16 +272,20 @@ Finally, Servo will create <code>PerformanceResourceTiming</code> entries for re
 We process URL fragments more consistently when navigating via the <code>location</code> property (@TimvdLippe, #41805, #41834), and allow evaluating <code>javascript:</code> URLs when a document’s domain has been modified (@jdm, #41969).
 XML documents loaded in an <code>&lt;iframe&gt;</code> will no longer inherit an encoding from the parent document (@simonwuelker, #41637).</p>
 <p>We’re also made it possible to use <code>blob:</code> URLs from inside <code>about:blank</code> and <code>about:srcdoc</code> documents (@jdm, #41966, #42104).
-Finally, constructed documents (e.g. <code>new Document()</code>) now inherit the origin and domain of the document that created them (@TimvdLippe, #41780), and we implemented the new <a href="https://html.spec.whatwg.org/multipage/#the-origin-interface"><code>Origin</code></a> interface.</p>
-<p>Servo’s mixed content protections are steadily increasing.
+Finally, constructed documents (e.g. <code>new Document()</code>) now inherit the origin and domain of the document that created them (@TimvdLippe, #41780), and we implemented the new <a href="https://html.spec.whatwg.org/multipage/#the-origin-interface"><code>Origin</code></a> interface (@WaterWhisperer, #41712).</p>
+<p>Servo’s <strong>mixed content protections</strong> are steadily increasing.
 Insecure requests (e.g. HTTP) originating from <code>&lt;iframe&gt;</code> elements can be upgraded to secure protocols (@WaterWhisperer, #41661), and redirected requests now check the most recent URL when determining if the protocol is secure (@WaterWhisperer, #41832).</p>
-<p>Stylesheets loaded when parsing the document will block the document <code>load</code> event more consistently (@TimvdLippe, @mrobinson, #41986, #41987, #41988, #41973), and the <code>blocking</code> attribute can be used for stylesheets that are added dynamically @TimvdLippe, #42096).
+<p>Stylesheets loaded when parsing the document will block the document <code>load</code> event more consistently (@TimvdLippe, @mrobinson, #41986, #41987, #41988, #41973), and the <code>blocking</code> attribute can be used for stylesheets that are added dynamically (@TimvdLippe, #42096).
 We also fire the <code>error</code> event if a fetched stylesheet response is invalid (@TimvdLippe, @mrobinson, #42037).</p>
 <p>Servo now <strong><a href="https://wpt.fyi/results/WebCryptoAPI?label=master&amp;product=chrome%5Bexperimental%5D&amp;product=firefox%5Bexperimental%5D&amp;product=safari&amp;product=servo&amp;aligned">leads other browsers</a></strong> in support for new WebCrypto algorithms!
-This includes work on ML-KEM (@kkoyung, #41604, #41617, #41615, #41627), ML-DSA (@kkoyung, #41628, #41647, #41659, #41676), AES-OCB (@kkoyung, #41791, #41822, #41813, #41829), and AES-GCM (@kkoyung, #41950).
+This includes work on <strong>ML-KEM</strong> (@kkoyung, #41604, #41617, #41615, #41627), <strong>ML-DSA</strong> (@kkoyung, #41628, #41647, #41659, #41676), <strong>AES-OCB</strong> (@kkoyung, #41791, #41822, #41813, #41829), and <strong>AES-GCM</strong> (@kkoyung, #41950).
 Additionally, the error messages returned by many WebCrypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).</p>
 <p>JS module loading received a lot of attention—we’ve improved support for <strong>cyclic imports</strong> (@Gae24, #41779), <strong>import attributes</strong> (@Gae24, #42185), and <strong>JSON modules</strong> (@Gae24, @jdm, #42138).</p>
 <p>Additionally, the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload"><code>preload</code></a> attribute now triggers <strong>preload fetch operations</strong> that can improve page load speeds (@TimvdLippe, @jdm, #40059).</p>
+<p>IndexedDB support continues to make progress.
+This month we gained improvements to connection queues (@gterzian, #41500, #42053) and request granularity (@gterzian, #41933).
+This work remains disabled behind the <code>dom_indexeddb_enabled</code> preference until more of the IndexedDB API is implemented.</p>
+<p>We were accidentally persisting <code>SessionStorage</code> data beyond the current session, but this has been corrected (@arihant2math, #41326).</p>
 <p><strong>Text input fields</strong> have received a lot of love this month.
 Clicking in an input field will position the cursor accordingly (@mrobinson, @jdm, @Loirooriol, #41906, #41974, #41931), as will clicking past the end of a multiline input (@mrobinson, @Loirooriol, #41909).
 Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).
@@ -316,7 +317,7 @@ These often affect pages where some block element (such as a <code>&lt;div&gt;</
 Similarly, <code>&lt;details&gt;</code> elements can now be styled with the <code>::details-content</code> pseudo-elemement (@lukewarlow, #42107), as well as the <code>:open</code> pseudo-class (@lukewarlow, #42195).</p>
 <p>CSS styles now inherit correctly through <code>display: contents</code> as well as <code>&lt;slot&gt;</code> elements in Shadow DOM content (@longvatrong111, @Loirooriol, @mrobinson, #41855).</p>
 <p>The <code>overflow-clip-margin</code> property now works correctly when <code>border-radius</code> is present (@Loirooriol, #41967).</p>
-<p>We fixed bugs involving text inside flexbox elements: they now use consistent baselines for alignment (@lukewarlow, @mrobinson, #42038) and updated styles are propagated to the text correctly (@mrobinson, #41951).</p>
+<p>We fixed bugs involving text inside flexbox elements: they now use consistent baselines for alignment (@lukewarlow, @mrobinson, #42038) and style updates are propagated to the text correctly (@mrobinson, #41951).</p>
 <p>The <code>align</code> attribute on <code>&lt;img&gt;</code> elements now aligns the image as expected (@mrobinson, #42220).</p>
 <p><code>word-break: keep-all</code> now prevents line breaks in <a href="https://en.wikipedia.org/wiki/CJK_characters">CJK text</a> (@RichardTjokroutomo, #42088).</p>
 <p>We also fixed some bugs involving <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Margin_collapsing">collapsing margins</a>, floats, and <a href="https://drafts.csswg.org/css-inline-3/#invisible-line-boxes">phantom line boxes</a> (@Loirooriol, #41812), which sound much cooler than they actually are.</p>

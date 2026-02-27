@@ -11,24 +11,21 @@
     <email>info@servo.org</email>
   </author>
   <entry>
-    <title>January in Servo: who knows?</title>
+    <title>January in Servo: text input, preloads, details styling, and more!</title>
     <link href="https://servo.org/twisjan/blog/2026/02/03/january-in-servo/"/>
     <updated>2026-02-03T00:00:00Z</updated>
     <id>https://servo.org/twisjan/blog/2026/02/03/january-in-servo/</id>
-    <content xml:lang="en" type="html">&lt;figure&gt;
+    <content xml:lang="en" type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.0.5&quot;&gt;&lt;strong&gt;Servo 0.0.5&lt;/strong&gt;&lt;/a&gt; is here, bringing with it lots of bug fixes and improvements for JS and CSS features.&lt;/p&gt;
+&lt;figure&gt;
     &lt;img src=&quot;https://servo.org/twisjan/img/blog/2026-02-diffie.png&quot; alt=&quot;Servo 0.0.5 showing improved appearance of buttons, text inputs, radio buttons, and checkboxes, plus new support for ‘::details-content’ and ‘:open’ selectors&quot; /&gt;
 &lt;/figure&gt;
 &lt;h2 id=&quot;web-apis&quot; tabindex=&quot;-1&quot;&gt;Web APIs &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#web-apis&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We were accidentally persisting &lt;code&gt;SessionStorage&lt;/code&gt; data beyond the current session, but this has been corrected (@arihant2math, #41326).&lt;/p&gt;
-&lt;p&gt;Servo now plays OGG media inside &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; elements (@jdm, #41789)!
+&lt;p&gt;Servo now &lt;strong&gt;plays OGG media&lt;/strong&gt; inside &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; elements (@jdm, #41789)!
 We disabled this feature many years ago due to bugs in &lt;a href=&quot;https://gstreamer.freedesktop.org/&quot;&gt;GStreamer&lt;/a&gt;, our media playback engine, but those bugs have since been fixed.&lt;/p&gt;
-&lt;p&gt;IndexedDB support continues to make progress.
-This month we gained improvements to connection queues (@gterzian, #41500, #42053) and request granularity (@gterzian, #41933).
-This work remains disabled behind the &lt;code&gt;dom_indexeddb_enabled&lt;/code&gt; preference until more of the IndexedDB API is implemented.&lt;/p&gt;
 &lt;p&gt;We now support non-&lt;code&gt;px&lt;/code&gt; sizes for width and height attributes in &lt;code&gt;&amp;lt;svg&amp;gt;&lt;/code&gt; elements (@rodio, #40761).&lt;/p&gt;
-&lt;p&gt;Inactive documents will now correct reject fullscreen mode changes (@stevennovaryo, #42068).&lt;/p&gt;
+&lt;p&gt;Inactive documents will now correctly reject fullscreen mode changes (@stevennovaryo, #42068).&lt;/p&gt;
 &lt;p&gt;We’ve enabled support for the &lt;strong&gt;navigator.sendBeacon&lt;/strong&gt; by default (@TimvdLippe, #41694); the &lt;code&gt;dom_navigator_sendbeacon_enabled&lt;/code&gt; preference has been removed.
 As part of this work, we implemented the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive&quot;&gt;&lt;code&gt;keepalive&lt;/code&gt;&lt;/a&gt; feature of the Request API (@TimvdLippe, #41457, @WaterWhisperer, #41811).&lt;/p&gt;
 &lt;p&gt;That’s not all for network-related improvements!
@@ -39,16 +36,20 @@ Finally, Servo will create &lt;code&gt;PerformanceResourceTiming&lt;/code&gt; en
 We process URL fragments more consistently when navigating via the &lt;code&gt;location&lt;/code&gt; property (@TimvdLippe, #41805, #41834), and allow evaluating &lt;code&gt;javascript:&lt;/code&gt; URLs when a document’s domain has been modified (@jdm, #41969).
 XML documents loaded in an &lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt; will no longer inherit an encoding from the parent document (@simonwuelker, #41637).&lt;/p&gt;
 &lt;p&gt;We’re also made it possible to use &lt;code&gt;blob:&lt;/code&gt; URLs from inside &lt;code&gt;about:blank&lt;/code&gt; and &lt;code&gt;about:srcdoc&lt;/code&gt; documents (@jdm, #41966, #42104).
-Finally, constructed documents (e.g. &lt;code&gt;new Document()&lt;/code&gt;) now inherit the origin and domain of the document that created them (@TimvdLippe, #41780), and we implemented the new &lt;a href=&quot;https://html.spec.whatwg.org/multipage/#the-origin-interface&quot;&gt;&lt;code&gt;Origin&lt;/code&gt;&lt;/a&gt; interface.&lt;/p&gt;
-&lt;p&gt;Servo’s mixed content protections are steadily increasing.
+Finally, constructed documents (e.g. &lt;code&gt;new Document()&lt;/code&gt;) now inherit the origin and domain of the document that created them (@TimvdLippe, #41780), and we implemented the new &lt;a href=&quot;https://html.spec.whatwg.org/multipage/#the-origin-interface&quot;&gt;&lt;code&gt;Origin&lt;/code&gt;&lt;/a&gt; interface (@WaterWhisperer, #41712).&lt;/p&gt;
+&lt;p&gt;Servo’s &lt;strong&gt;mixed content protections&lt;/strong&gt; are steadily increasing.
 Insecure requests (e.g. HTTP) originating from &lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt; elements can be upgraded to secure protocols (@WaterWhisperer, #41661), and redirected requests now check the most recent URL when determining if the protocol is secure (@WaterWhisperer, #41832).&lt;/p&gt;
-&lt;p&gt;Stylesheets loaded when parsing the document will block the document &lt;code&gt;load&lt;/code&gt; event more consistently (@TimvdLippe, @mrobinson, #41986, #41987, #41988, #41973), and the &lt;code&gt;blocking&lt;/code&gt; attribute can be used for stylesheets that are added dynamically @TimvdLippe, #42096).
+&lt;p&gt;Stylesheets loaded when parsing the document will block the document &lt;code&gt;load&lt;/code&gt; event more consistently (@TimvdLippe, @mrobinson, #41986, #41987, #41988, #41973), and the &lt;code&gt;blocking&lt;/code&gt; attribute can be used for stylesheets that are added dynamically (@TimvdLippe, #42096).
 We also fire the &lt;code&gt;error&lt;/code&gt; event if a fetched stylesheet response is invalid (@TimvdLippe, @mrobinson, #42037).&lt;/p&gt;
 &lt;p&gt;Servo now &lt;strong&gt;&lt;a href=&quot;https://wpt.fyi/results/WebCryptoAPI?label=master&amp;amp;product=chrome%5Bexperimental%5D&amp;amp;product=firefox%5Bexperimental%5D&amp;amp;product=safari&amp;amp;product=servo&amp;amp;aligned&quot;&gt;leads other browsers&lt;/a&gt;&lt;/strong&gt; in support for new WebCrypto algorithms!
-This includes work on ML-KEM (@kkoyung, #41604, #41617, #41615, #41627), ML-DSA (@kkoyung, #41628, #41647, #41659, #41676), AES-OCB (@kkoyung, #41791, #41822, #41813, #41829), and AES-GCM (@kkoyung, #41950).
+This includes work on &lt;strong&gt;ML-KEM&lt;/strong&gt; (@kkoyung, #41604, #41617, #41615, #41627), &lt;strong&gt;ML-DSA&lt;/strong&gt; (@kkoyung, #41628, #41647, #41659, #41676), &lt;strong&gt;AES-OCB&lt;/strong&gt; (@kkoyung, #41791, #41822, #41813, #41829), and &lt;strong&gt;AES-GCM&lt;/strong&gt; (@kkoyung, #41950).
 Additionally, the error messages returned by many WebCrypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).&lt;/p&gt;
 &lt;p&gt;JS module loading received a lot of attention—we’ve improved support for &lt;strong&gt;cyclic imports&lt;/strong&gt; (@Gae24, #41779), &lt;strong&gt;import attributes&lt;/strong&gt; (@Gae24, #42185), and &lt;strong&gt;JSON modules&lt;/strong&gt; (@Gae24, @jdm, #42138).&lt;/p&gt;
 &lt;p&gt;Additionally, the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload&quot;&gt;&lt;code&gt;preload&lt;/code&gt;&lt;/a&gt; attribute now triggers &lt;strong&gt;preload fetch operations&lt;/strong&gt; that can improve page load speeds (@TimvdLippe, @jdm, #40059).&lt;/p&gt;
+&lt;p&gt;IndexedDB support continues to make progress.
+This month we gained improvements to connection queues (@gterzian, #41500, #42053) and request granularity (@gterzian, #41933).
+This work remains disabled behind the &lt;code&gt;dom_indexeddb_enabled&lt;/code&gt; preference until more of the IndexedDB API is implemented.&lt;/p&gt;
+&lt;p&gt;We were accidentally persisting &lt;code&gt;SessionStorage&lt;/code&gt; data beyond the current session, but this has been corrected (@arihant2math, #41326).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Text input fields&lt;/strong&gt; have received a lot of love this month.
 Clicking in an input field will position the cursor accordingly (@mrobinson, @jdm, @Loirooriol, #41906, #41974, #41931), as will clicking past the end of a multiline input (@mrobinson, @Loirooriol, #41909).
 Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).
@@ -80,7 +81,7 @@ These often affect pages where some block element (such as a &lt;code&gt;&amp;lt
 Similarly, &lt;code&gt;&amp;lt;details&amp;gt;&lt;/code&gt; elements can now be styled with the &lt;code&gt;::details-content&lt;/code&gt; pseudo-elemement (@lukewarlow, #42107), as well as the &lt;code&gt;:open&lt;/code&gt; pseudo-class (@lukewarlow, #42195).&lt;/p&gt;
 &lt;p&gt;CSS styles now inherit correctly through &lt;code&gt;display: contents&lt;/code&gt; as well as &lt;code&gt;&amp;lt;slot&amp;gt;&lt;/code&gt; elements in Shadow DOM content (@longvatrong111, @Loirooriol, @mrobinson, #41855).&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;overflow-clip-margin&lt;/code&gt; property now works correctly when &lt;code&gt;border-radius&lt;/code&gt; is present (@Loirooriol, #41967).&lt;/p&gt;
-&lt;p&gt;We fixed bugs involving text inside flexbox elements: they now use consistent baselines for alignment (@lukewarlow, @mrobinson, #42038) and updated styles are propagated to the text correctly (@mrobinson, #41951).&lt;/p&gt;
+&lt;p&gt;We fixed bugs involving text inside flexbox elements: they now use consistent baselines for alignment (@lukewarlow, @mrobinson, #42038) and style updates are propagated to the text correctly (@mrobinson, #41951).&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;align&lt;/code&gt; attribute on &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; elements now aligns the image as expected (@mrobinson, #42220).&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;word-break: keep-all&lt;/code&gt; now prevents line breaks in &lt;a href=&quot;https://en.wikipedia.org/wiki/CJK_characters&quot;&gt;CJK text&lt;/a&gt; (@RichardTjokroutomo, #42088).&lt;/p&gt;
 &lt;p&gt;We also fixed some bugs involving &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Margin_collapsing&quot;&gt;collapsing margins&lt;/a&gt;, floats, and &lt;a href=&quot;https://drafts.csswg.org/css-inline-3/#invisible-line-boxes&quot;&gt;phantom line boxes&lt;/a&gt; (@Loirooriol, #41812), which sound much cooler than they actually are.&lt;/p&gt;
