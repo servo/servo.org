@@ -13,15 +13,31 @@ categories:
 
 ## Web APIs
 
+We were accidentally persisting `SessionStorage` data beyond the current session, but this has been corrected (@arihant2math, #41326).
+
+Servo now plays OGG media inside `<audio>` elements (@jdm, #41789)!
+We disabled this feature many years ago due to bugs in [GStreamer](https://gstreamer.freedesktop.org/), our media playback engine, but those bugs have since been fixed.
+
+IndexedDB support continues to make progress.
+This month we gained improvements to connection queues (@gterzian, #41500, #42053) and request granularity (@gterzian, #41933).
+This work remains disabled behind the `dom_indexeddb_enabled` preference until more of the IndexedDB API is implemented.
+
+We now support non-`px` sizes for width and height attributes in `<svg>` elements (@rodio, #40761).
+
+Inactive documents will now correct reject fullscreen mode changes (@stevennovaryo, #42068).
+
 We've enabled support for the **navigator.sendBeacon** by default (@TimvdLippe, #41694); the `dom_navigator_sendbeacon_enabled` preference has been removed.
 As part of this work, we implemented the [`keepalive`](https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive) feature of the Request API (@TimvdLippe, #41457, @WaterWhisperer, #41811).
 
 That's not all for network-related improvements!
 Quota errors from the [`fetchLater`](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetchLater) API provide more details (@TimvdLippe, #41665), and fetch response body promises now reject when invalid gzip content is encountered (@arayaryoma, #39438).
 Meanwhile, [`EventSource`](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) connections will no longer endlessly reconnect for permanent failures (@WaterWhisperer, #41651, #42137), and now use the correct `Last-Event-Id` header when reconnecting (@WaterWhisperer, #42103).
+Finally, Servo will create `PerformanceResourceTiming` entries for requests that returned unsuccessful responses (@bellau, #41804).
 
 There has been lots of work related to **navigating pages and loading iframes**.
 We process URL fragments more consistently when navigating via the `location` property (@TimvdLippe, #41805, #41834), and allow evaluating `javascript:` URLs when a document's domain has been modified (@jdm, #41969).
+XML documents loaded in an `<iframe>` will no longer inherit an encoding from the parent document (@simonwuelker, #41637).
+
 We're also made it possible to use `blob:` URLs from inside `about:blank` and `about:srcdoc` documents (@jdm, #41966, #42104).
 Finally, constructed documents (e.g. `new Document()`) now inherit the origin and domain of the document that created them (@TimvdLippe, #41780), and we implemented the new [`Origin`](https://html.spec.whatwg.org/multipage/#the-origin-interface) interface.
 
@@ -52,6 +68,14 @@ The default styling of many controls received some care (@mrobinson, #42085), wh
 Conversely, disabled `<select>` elements can no longer be activated (@simonwuelker, #42036).
 
 Mouse events triggered by the embedder are more complete; `MouseEvent.detail` correctly reports the click count for `mouseup` and `mousedown` events (@mrobinson, #41833), and many other members are now consistent with other mouse events (@mrobinson, #42013).
+
+Performing a pinch zoom on mobile is now reflected in the [`VisualViewport`](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport) API (@stevennovaryo, #41754).
+This work remains hidden behind the `dom_visual_viewport_enabled` preference until more of the API is supported.
+
+We've changed the behaviour of Web APIs that use the [`[Clamp]` annotation](https://webidl.spec.whatwg.org/#Clamp) (such as `Blob.slice`).
+The previous implementation would cast floating point values to their integer equivalents, but the standard requires [more specific rounding logic](https://webidl.spec.whatwg.org/#abstract-opdef-converttoint) (#41640).
+
+The `RGBA8` constant is now available in WebGL 1 rendering contexts; it was previously only available in WebGL 2 contexts (@simonwuelker, #42048).
 
 **Fonts** were another area of focus this month.
 Loading web fonts from `file://` origins works as expected (@TimvdLippe, #41714), as does using web fonts within Shadow DOM content (@minghuaw, #42151).
@@ -121,6 +145,9 @@ The [`SiteDataManager`](https://doc.servo.org/servo/struct.SiteDataManager.html)
 Our nightly testing UI, **servoshell**, now respects any customized installation path on Windows (@yezhizhen, #41653).
 We fixed a crash in the Android app when pausing the application (@NiklasMerz, #41827).
 Additionally, clicking inside a webview in the desktop app will remove focus from any browser UI (@mrobinson, #42080).
+
+We've laid more groundwork to expose accessibility tree information from WebViews (@delan, @lukewarlow, @alice, #41924).
+There's nothing to test yet, but keep an eye on our [tracking issue](https://github.com/servo/servo/issues/4344) if you want to be notified when nightly builds are ready for testing!
 
 ## Stability & performance
 
