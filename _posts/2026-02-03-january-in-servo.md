@@ -1,11 +1,13 @@
 ---
 layout:     post
 tags:       blog
-title:      "January in Servo: who knows?"
+title:      "January in Servo: text input, preloads, details styling, and more!"
 date:       2026-02-03
-summary:    hurr durr
+summary:    The web works hard, but Servo contributors work harder.
 categories:
 ---
+
+[**Servo 0.0.5**](https://github.com/servo/servo/releases/tag/v0.0.5) is here, bringing with it lots of bug fixes and improvements for JS and CSS features.
 
 <figure>
     <img src="{{ '/img/blog/2026-02-diffie.png' | url }}" alt="Servo 0.0.5 showing improved appearance of buttons, text inputs, radio buttons, and checkboxes, plus new support for ‘::details-content’ and ‘:open’ selectors">
@@ -13,18 +15,12 @@ categories:
 
 ## Web APIs
 
-We were accidentally persisting `SessionStorage` data beyond the current session, but this has been corrected (@arihant2math, #41326).
-
-Servo now plays OGG media inside `<audio>` elements (@jdm, #41789)!
+Servo now **plays OGG media** inside `<audio>` elements (@jdm, #41789)!
 We disabled this feature many years ago due to bugs in [GStreamer](https://gstreamer.freedesktop.org/), our media playback engine, but those bugs have since been fixed.
-
-IndexedDB support continues to make progress.
-This month we gained improvements to connection queues (@gterzian, #41500, #42053) and request granularity (@gterzian, #41933).
-This work remains disabled behind the `dom_indexeddb_enabled` preference until more of the IndexedDB API is implemented.
 
 We now support non-`px` sizes for width and height attributes in `<svg>` elements (@rodio, #40761).
 
-Inactive documents will now correct reject fullscreen mode changes (@stevennovaryo, #42068).
+Inactive documents will now correctly reject fullscreen mode changes (@stevennovaryo, #42068).
 
 We've enabled support for the **navigator.sendBeacon** by default (@TimvdLippe, #41694); the `dom_navigator_sendbeacon_enabled` preference has been removed.
 As part of this work, we implemented the [`keepalive`](https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive) feature of the Request API (@TimvdLippe, #41457, @WaterWhisperer, #41811).
@@ -39,21 +35,27 @@ We process URL fragments more consistently when navigating via the `location` pr
 XML documents loaded in an `<iframe>` will no longer inherit an encoding from the parent document (@simonwuelker, #41637).
 
 We're also made it possible to use `blob:` URLs from inside `about:blank` and `about:srcdoc` documents (@jdm, #41966, #42104).
-Finally, constructed documents (e.g. `new Document()`) now inherit the origin and domain of the document that created them (@TimvdLippe, #41780), and we implemented the new [`Origin`](https://html.spec.whatwg.org/multipage/#the-origin-interface) interface.
+Finally, constructed documents (e.g. `new Document()`) now inherit the origin and domain of the document that created them (@TimvdLippe, #41780), and we implemented the new [`Origin`](https://html.spec.whatwg.org/multipage/#the-origin-interface) interface (@WaterWhisperer, #41712).
 
-Servo's mixed content protections are steadily increasing.
+Servo's **mixed content protections** are steadily increasing.
 Insecure requests (e.g. HTTP) originating from `<iframe>` elements can be upgraded to secure protocols (@WaterWhisperer, #41661), and redirected requests now check the most recent URL when determining if the protocol is secure (@WaterWhisperer, #41832).
 
-Stylesheets loaded when parsing the document will block the document `load` event more consistently (@TimvdLippe, @mrobinson, #41986, #41987, #41988, #41973), and the `blocking` attribute can be used for stylesheets that are added dynamically @TimvdLippe, #42096).
+Stylesheets loaded when parsing the document will block the document `load` event more consistently (@TimvdLippe, @mrobinson, #41986, #41987, #41988, #41973), and the `blocking` attribute can be used for stylesheets that are added dynamically (@TimvdLippe, #42096).
 We also fire the `error` event if a fetched stylesheet response is invalid (@TimvdLippe, @mrobinson, #42037).
 
 Servo now **[leads other browsers](https://wpt.fyi/results/WebCryptoAPI?label=master&product=chrome%5Bexperimental%5D&product=firefox%5Bexperimental%5D&product=safari&product=servo&aligned)** in support for new WebCrypto algorithms!
-This includes work on ML-KEM (@kkoyung, #41604, #41617, #41615, #41627), ML-DSA (@kkoyung, #41628, #41647, #41659, #41676), AES-OCB (@kkoyung, #41791, #41822, #41813, #41829), and AES-GCM (@kkoyung, #41950).
+This includes work on **ML-KEM** (@kkoyung, #41604, #41617, #41615, #41627), **ML-DSA** (@kkoyung, #41628, #41647, #41659, #41676), **AES-OCB** (@kkoyung, #41791, #41822, #41813, #41829), and **AES-GCM** (@kkoyung, #41950).
 Additionally, the error messages returned by many WebCrypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).
 
 JS module loading received a lot of attention—we've improved support for **cyclic imports** (@Gae24, #41779), **import attributes** (@Gae24, #42185), and **JSON modules** (@Gae24, @jdm, #42138).
 
 Additionally, the [`preload`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload) attribute now triggers **preload fetch operations** that can improve page load speeds (@TimvdLippe, @jdm, #40059).
+
+IndexedDB support continues to make progress.
+This month we gained improvements to connection queues (@gterzian, #41500, #42053) and request granularity (@gterzian, #41933).
+This work remains disabled behind the `dom_indexeddb_enabled` preference until more of the IndexedDB API is implemented.
+
+We were accidentally persisting `SessionStorage` data beyond the current session, but this has been corrected (@arihant2math, #41326).
 
 **Text input fields** have received a lot of love this month.
 Clicking in an input field will position the cursor accordingly (@mrobinson, @jdm, @Loirooriol, #41906, #41974, #41931), as will clicking past the end of a multiline input (@mrobinson, @Loirooriol, #41909).
@@ -99,7 +101,7 @@ CSS styles now inherit correctly through `display: contents` as well as `<slot>`
 
 The `overflow-clip-margin` property now works correctly when `border-radius` is present (@Loirooriol, #41967).
 
-We fixed bugs involving text inside flexbox elements: they now use consistent baselines for alignment (@lukewarlow, @mrobinson, #42038) and updated styles are propagated to the text correctly (@mrobinson, #41951).
+We fixed bugs involving text inside flexbox elements: they now use consistent baselines for alignment (@lukewarlow, @mrobinson, #42038) and style updates are propagated to the text correctly (@mrobinson, #41951).
 
 The `align` attribute on `<img>` elements now aligns the image as expected (@mrobinson, #42220).
 
