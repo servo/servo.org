@@ -23,7 +23,7 @@ Meanwhile, [`EventSource`](https://developer.mozilla.org/en-US/docs/Web/API/Even
 There has been lots of work related to **navigating pages and loading iframes**.
 We process URL fragments more consistently when navigating via the `location` property (@TimvdLippe, #41805, #41834), and allow evaluating `javascript:` URLs when a document's domain has been modified (@jdm, #41969).
 We're also made it possible to use `blob:` URLs from inside `about:blank` and `about:srcdoc` documents (@jdm, #41966, #42104).
-Finally, documents with opaque origins are no longer allowed to set `document.domain` (@TimvdLippe, #41780).
+Finally, constructed documents (e.g. `new Document()`) now inherit the origin and domain of the document that created them (@TimvdLippe, #41780), and we implemented the new [`Origin`](https://html.spec.whatwg.org/multipage/#the-origin-interface) interface.
 
 Servo's mixed content protections are steadily increasing.
 Insecure requests (e.g. HTTP) originating from `<iframe>` elements can be upgraded to secure protocols (@WaterWhisperer, #41661), and redirected requests now check the most recent URL when determining if the protocol is secure (@WaterWhisperer, #41832).
@@ -42,6 +42,7 @@ Additionally, the [`preload`](https://developer.mozilla.org/en-US/docs/Web/HTML/
 **Text input fields** have received a lot of love this month.
 Clicking in an input field will position the cursor accordingly (@mrobinson, @jdm, @Loirooriol, #41906, #41974, #41931), as will clicking past the end of a multiline input (@mrobinson, @Loirooriol, #41909).
 Selecting text with the mouse in input fields works (@mrobinson, #42049), and double and triple clicks now toggle selections (@mrobinson, #41926).
+Finally, we fixed a bug causing the input caret to be hidden in `<input>` elements inside of Shadow DOM content (@stevennovaryo, #42233).
 
 The `cursor-color` CSS property is respected when rendering the input cursor (@mrobinson, #41976), and newlines can no longer be pasted into single line inputs (@mrobinson, #41934)
 Finally, we fixed a panic that occurred when focusing a text field that is disabled (@mrobinson, #42078), as well as panics from APIs like `setRangeText` that confused bytes and UTF-8 character indices (@mrobinson, #41588).
@@ -68,13 +69,22 @@ These often affect pages where some block element (such as a `<div>`) exists wit
 Elements with overflow that is scrollable can be scrolled more consistently, even with CSS transforms applied to them (@stevennovaryo, #41707, #42005).
 
 Generated image content used to only work with pseudo-elements, but that restriction no longer applies (@andreubotella, #41480).
-Similarly, `<details>` elements can now be styled with the `::details-cotent` pseudo-elemement (@lukewarlow, #42107), as well as the `:open` pseudo-class (@lukewarlow, #42195).
+Similarly, `<details>` elements can now be styled with the `::details-content` pseudo-elemement (@lukewarlow, #42107), as well as the `:open` pseudo-class (@lukewarlow, #42195).
 
 CSS styles now inherit correctly through `display: contents` as well as `<slot>` elements in Shadow DOM content (@longvatrong111, @Loirooriol, @mrobinson, #41855).
 
-## Network & Fetch
+The `overflow-clip-margin` property now works correctly when `border-radius` is present (@Loirooriol, #41967).
 
+We fixed bugs involving text inside flexbox elements: they now use consistent baselines for alignment (@lukewarlow, @mrobinson, #42038) and updated styles are propagated to the text correctly (@mrobinson, #41951).
 
+The `align` attribute on `<img>` elements now aligns the image as expected (@mrobinson, #42220).
+
+`word-break: keep-all` now prevents line breaks in [CJK text](https://en.wikipedia.org/wiki/CJK_characters) (@RichardTjokroutomo, #42088).
+
+We also fixed some bugs involving [collapsing margins](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Margin_collapsing), floats, and [phantom line boxes](https://drafts.csswg.org/css-inline-3/#invisible-line-boxes) (@Loirooriol, #41812), which sound much cooler than they actually are.
+
+Finally, we upgraded our [Stylo](https://crates.io/crates/stylo) dependency to the latest changes as of January 1 2026 (@Loirooriol, #41916, #41696).
+Stylo powers our CSS parsing and [style resolution engine](https://hacks.mozilla.org/2017/08/inside-a-super-fast-css-engine-quantum-css-aka-stylo/), and this upgrade improves our **CSS animations and transitions** for borders and overflow clipping and **parsing color functions** like `color-mix`.
 
 ## Automation and introspection
 
@@ -88,8 +98,9 @@ Worker globals are now categorized correctly in the UI (@atbrakhi, #41929), and 
 Servo will report console messages that were logged before the developer tools are opened (@eerii, @mrobinson, #41895).
 Finally, we fixed a panic when selecting nodes in the layout inspector that have no style information (@eerii, #41800).
 
-Pausing in the JS debugger now interrupts script execution (@eerii, @atbrakhi, @jdm, #42007), and breakpoints can be toggled through the UI (@eerii, @atbrakhi, #41925, #42154).
+We're working towards supporting pausing in the JS debugger (@eerii, @atbrakhi, @jdm, #42007), and breakpoints can be toggled through the UI (@eerii, @atbrakhi, #41925, #42154).
 While the debugger is paused, hovering over JS objects will report the object's properties for builtin JS classes (@eerii, @atbrakhi, #42186).
+Sadly, pausing does not actually pause Servo yet; stay tuned for updates in next month's blog post!
 
 Similarly, our **WebDriver server** is also maturing.
 Evaluating a synchronous script that returns a Promise will wait until that promise settles (@yezhizhen, #41823).
@@ -130,6 +141,10 @@ This can reduce the risk of out of memory (OOM) errors on pages that create larg
 
 To reduce the risk of panics involving the JS engine integration, we are using **the Rust type system** to make certain kinds of dynamic borrow failures impossible (@sagudev, #41692, #41782, #41756, #41808, #41879, #41878, #41955, #41971, #42123).
 We also continue to identify and **forbid code patterns** that can trigger rare crashes during garbage collection when destroying a WebView (@willypuzzle, #41717, #41783, #41911, #41911, #41977, #41984, #42243).
+
+This month also featured various fixes panics in parallel layout (@mrobinson, #42026), WebGPU (@WaterWhisperer, #42050), `<link>` fetching (@jdm, #42208), `Element.attachShadow` (@mrobinson, #42237), text input methods (@mrobinson, #42240), Web Workers when the developer tools are active,(@mrobinson, #42159), IndexedDB (@gterzian, #41960), and asynchronous [session history](https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API) updates (@mrobinson, #42238).
+
+The `Node.compareDocumentPosition` method is now more efficient (@webbeef, #42260), and selections in text inputs no longer require a full page layout (@mrobinson, @Loirooriol, #41963).
 
 <style>
     ._correction {
