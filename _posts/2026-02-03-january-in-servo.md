@@ -165,13 +165,13 @@ It's said that one of the hardest problems in computer science is cache invalida
 We improved the memory usage of **dynamic inline SVG content** by evicting stale SVG tree data from a cache (@TomRCummings, #41675).
 Meanwhile, we added a new cache to reduce memory usage and improve rendering performance for pages with animating images (@Narfinger, #41956).
 
-Servo's JS engine now accounts for 2d and 3d canvas-related memory usage when deciding whether to perform a garbage collection operation.
+Servo's JS engine now accounts for 2d and 3d canvas-related memory usage when deciding whether to perform a garbage collection operation (@sagudev, #42180).
 This can reduce the risk of out of memory (OOM) errors on pages that create large numbers of short-lived WebGL or WebGPU objects.
 
 To reduce the risk of panics involving the JS engine integration, we are using **the Rust type system** to make certain kinds of dynamic borrow failures impossible (@sagudev, #41692, #41782, #41756, #41808, #41879, #41878, #41955, #41971, #42123).
 We also continue to identify and **forbid code patterns** that can trigger rare crashes during garbage collection when destroying a WebView (@willypuzzle, #41717, #41783, #41911, #41911, #41977, #41984, #42243).
 
-This month also featured various fixes panics in parallel layout (@mrobinson, #42026), WebGPU (@WaterWhisperer, #42050), `<link>` fetching (@jdm, #42208), `Element.attachShadow` (@mrobinson, #42237), text input methods (@mrobinson, #42240), Web Workers when the developer tools are active,(@mrobinson, #42159), IndexedDB (@gterzian, #41960), and asynchronous [session history](https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API) updates (@mrobinson, #42238).
+This month also brought fixes for panics in parallel layout (@mrobinson, #42026), WebGPU (@WaterWhisperer, #42050), `<link>` fetching (@jdm, #42208), `Element.attachShadow` (@mrobinson, #42237), text input methods (@mrobinson, #42240), Web Workers when the developer tools are active,(@mrobinson, #42159), IndexedDB (@gterzian, #41960), and asynchronous [session history](https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API) updates (@mrobinson, #42238).
 
 The `Node.compareDocumentPosition` method is now more efficient (@webbeef, #42260), and selections in text inputs no longer require a full page layout (@mrobinson, @Loirooriol, #41963).
 
@@ -197,7 +197,7 @@ If you’re interested in this kind of sponsorship, please contact us at [join@s
 
 <figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
     <div style="position: relative; text-align: right;">
-        <div style="position: absolute; right: calc(100% - 100% * 7007 / 10000); padding-right: 0.5em;"><strong>7110</strong> USD/month</div>
+        <div style="position: absolute; right: calc(100% - 100% * 7007 / 10000); padding-right: 0.5em;"><strong>7007</strong> USD/month</div>
         <div style="position: absolute; margin-left: calc(100% * 7007 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
         <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
         <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
