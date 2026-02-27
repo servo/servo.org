@@ -21,14 +21,24 @@
 &lt;h2 id=&quot;web-apis&quot; tabindex=&quot;-1&quot;&gt;Web APIs &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#web-apis&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We were accidentally persisting &lt;code&gt;SessionStorage&lt;/code&gt; data beyond the current session, but this has been corrected (@arihant2math, #41326).&lt;/p&gt;
+&lt;p&gt;Servo now plays OGG media inside &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; elements (@jdm, #41789)!
+We disabled this feature many years ago due to bugs in &lt;a href=&quot;https://gstreamer.freedesktop.org/&quot;&gt;GStreamer&lt;/a&gt;, our media playback engine, but those bugs have since been fixed.&lt;/p&gt;
+&lt;p&gt;IndexedDB support continues to make progress.
+This month we gained improvements to connection queues (@gterzian, #41500, #42053) and request granularity (@gterzian, #41933).
+This work remains disabled behind the &lt;code&gt;dom_indexeddb_enabled&lt;/code&gt; preference until more of the IndexedDB API is implemented.&lt;/p&gt;
+&lt;p&gt;We now support non-&lt;code&gt;px&lt;/code&gt; sizes for width and height attributes in &lt;code&gt;&amp;lt;svg&amp;gt;&lt;/code&gt; elements (@rodio, #40761).&lt;/p&gt;
+&lt;p&gt;Inactive documents will now correct reject fullscreen mode changes (@stevennovaryo, #42068).&lt;/p&gt;
 &lt;p&gt;We’ve enabled support for the &lt;strong&gt;navigator.sendBeacon&lt;/strong&gt; by default (@TimvdLippe, #41694); the &lt;code&gt;dom_navigator_sendbeacon_enabled&lt;/code&gt; preference has been removed.
 As part of this work, we implemented the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive&quot;&gt;&lt;code&gt;keepalive&lt;/code&gt;&lt;/a&gt; feature of the Request API (@TimvdLippe, #41457, @WaterWhisperer, #41811).&lt;/p&gt;
 &lt;p&gt;That’s not all for network-related improvements!
 Quota errors from the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Window/fetchLater&quot;&gt;&lt;code&gt;fetchLater&lt;/code&gt;&lt;/a&gt; API provide more details (@TimvdLippe, #41665), and fetch response body promises now reject when invalid gzip content is encountered (@arayaryoma, #39438).
-Meanwhile, &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/EventSource&quot;&gt;&lt;code&gt;EventSource&lt;/code&gt;&lt;/a&gt; connections will no longer endlessly reconnect for permanent failures (@WaterWhisperer, #41651, #42137), and now use the correct &lt;code&gt;Last-Event-Id&lt;/code&gt; header when reconnecting (@WaterWhisperer, #42103).&lt;/p&gt;
+Meanwhile, &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/EventSource&quot;&gt;&lt;code&gt;EventSource&lt;/code&gt;&lt;/a&gt; connections will no longer endlessly reconnect for permanent failures (@WaterWhisperer, #41651, #42137), and now use the correct &lt;code&gt;Last-Event-Id&lt;/code&gt; header when reconnecting (@WaterWhisperer, #42103).
+Finally, Servo will create &lt;code&gt;PerformanceResourceTiming&lt;/code&gt; entries for requests that returned unsuccessful responses (@bellau, #41804).&lt;/p&gt;
 &lt;p&gt;There has been lots of work related to &lt;strong&gt;navigating pages and loading iframes&lt;/strong&gt;.
 We process URL fragments more consistently when navigating via the &lt;code&gt;location&lt;/code&gt; property (@TimvdLippe, #41805, #41834), and allow evaluating &lt;code&gt;javascript:&lt;/code&gt; URLs when a document’s domain has been modified (@jdm, #41969).
-We’re also made it possible to use &lt;code&gt;blob:&lt;/code&gt; URLs from inside &lt;code&gt;about:blank&lt;/code&gt; and &lt;code&gt;about:srcdoc&lt;/code&gt; documents (@jdm, #41966, #42104).
+XML documents loaded in an &lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt; will no longer inherit an encoding from the parent document (@simonwuelker, #41637).&lt;/p&gt;
+&lt;p&gt;We’re also made it possible to use &lt;code&gt;blob:&lt;/code&gt; URLs from inside &lt;code&gt;about:blank&lt;/code&gt; and &lt;code&gt;about:srcdoc&lt;/code&gt; documents (@jdm, #41966, #42104).
 Finally, constructed documents (e.g. &lt;code&gt;new Document()&lt;/code&gt;) now inherit the origin and domain of the document that created them (@TimvdLippe, #41780), and we implemented the new &lt;a href=&quot;https://html.spec.whatwg.org/multipage/#the-origin-interface&quot;&gt;&lt;code&gt;Origin&lt;/code&gt;&lt;/a&gt; interface.&lt;/p&gt;
 &lt;p&gt;Servo’s mixed content protections are steadily increasing.
 Insecure requests (e.g. HTTP) originating from &lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt; elements can be upgraded to secure protocols (@WaterWhisperer, #41661), and redirected requests now check the most recent URL when determining if the protocol is secure (@WaterWhisperer, #41832).&lt;/p&gt;
@@ -49,6 +59,11 @@ Finally, we fixed a panic that occurred when focusing a text field that is disab
 The default styling of many controls received some care (@mrobinson, #42085), while &lt;code&gt;&amp;lt;input type=button&amp;gt;&lt;/code&gt; can now be styled with the &lt;code&gt;:active&lt;/code&gt; pseudo-class (@mrobinson, #42095).
 Conversely, disabled &lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt; elements can no longer be activated (@simonwuelker, #42036).&lt;/p&gt;
 &lt;p&gt;Mouse events triggered by the embedder are more complete; &lt;code&gt;MouseEvent.detail&lt;/code&gt; correctly reports the click count for &lt;code&gt;mouseup&lt;/code&gt; and &lt;code&gt;mousedown&lt;/code&gt; events (@mrobinson, #41833), and many other members are now consistent with other mouse events (@mrobinson, #42013).&lt;/p&gt;
+&lt;p&gt;Performing a pinch zoom on mobile is now reflected in the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport&quot;&gt;&lt;code&gt;VisualViewport&lt;/code&gt;&lt;/a&gt; API (@stevennovaryo, #41754).
+This work remains hidden behind the &lt;code&gt;dom_visual_viewport_enabled&lt;/code&gt; preference until more of the API is supported.&lt;/p&gt;
+&lt;p&gt;We’ve changed the behaviour of Web APIs that use the &lt;a href=&quot;https://webidl.spec.whatwg.org/#Clamp&quot;&gt;&lt;code&gt;[Clamp]&lt;/code&gt; annotation&lt;/a&gt; (such as &lt;code&gt;Blob.slice&lt;/code&gt;).
+The previous implementation would cast floating point values to their integer equivalents, but the standard requires &lt;a href=&quot;https://webidl.spec.whatwg.org/#abstract-opdef-converttoint&quot;&gt;more specific rounding logic&lt;/a&gt; (#41640).&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;RGBA8&lt;/code&gt; constant is now available in WebGL 1 rendering contexts; it was previously only available in WebGL 2 contexts (@simonwuelker, #42048).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Fonts&lt;/strong&gt; were another area of focus this month.
 Loading web fonts from &lt;code&gt;file://&lt;/code&gt; origins works as expected (@TimvdLippe, #41714), as does using web fonts within Shadow DOM content (@minghuaw, #42151).
 Each web font request now creates a &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming&quot;&gt;PerformanceResourceTiming&lt;/a&gt; entry (@lumi-me-not, #41784).
@@ -101,6 +116,8 @@ In future, we intend to &lt;a href=&quot;https://github.com/servo/servo/issues/2
 &lt;p&gt;Our nightly testing UI, &lt;strong&gt;servoshell&lt;/strong&gt;, now respects any customized installation path on Windows (@yezhizhen, #41653).
 We fixed a crash in the Android app when pausing the application (@NiklasMerz, #41827).
 Additionally, clicking inside a webview in the desktop app will remove focus from any browser UI (@mrobinson, #42080).&lt;/p&gt;
+&lt;p&gt;We’ve laid more groundwork to expose accessibility tree information from WebViews (@delan, @lukewarlow, @alice, #41924).
+There’s nothing to test yet, but keep an eye on our &lt;a href=&quot;https://github.com/servo/servo/issues/4344&quot;&gt;tracking issue&lt;/a&gt; if you want to be notified when nightly builds are ready for testing!&lt;/p&gt;
 &lt;h2 id=&quot;stability-%26-performance&quot; tabindex=&quot;-1&quot;&gt;Stability &amp;amp; performance &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjan/blog/2026/02/03/january-in-servo/#stability-%26-performance&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;

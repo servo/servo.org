@@ -257,14 +257,24 @@
 <h2 id="web-apis" tabindex="-1">Web APIs <a class="header-anchor" href="#web-apis">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>We were accidentally persisting <code>SessionStorage</code> data beyond the current session, but this has been corrected (@arihant2math, #41326).</p>
+<p>Servo now plays OGG media inside <code>&lt;audio&gt;</code> elements (@jdm, #41789)!
+We disabled this feature many years ago due to bugs in <a href="https://gstreamer.freedesktop.org/">GStreamer</a>, our media playback engine, but those bugs have since been fixed.</p>
+<p>IndexedDB support continues to make progress.
+This month we gained improvements to connection queues (@gterzian, #41500, #42053) and request granularity (@gterzian, #41933).
+This work remains disabled behind the <code>dom_indexeddb_enabled</code> preference until more of the IndexedDB API is implemented.</p>
+<p>We now support non-<code>px</code> sizes for width and height attributes in <code>&lt;svg&gt;</code> elements (@rodio, #40761).</p>
+<p>Inactive documents will now correct reject fullscreen mode changes (@stevennovaryo, #42068).</p>
 <p>We’ve enabled support for the <strong>navigator.sendBeacon</strong> by default (@TimvdLippe, #41694); the <code>dom_navigator_sendbeacon_enabled</code> preference has been removed.
 As part of this work, we implemented the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive"><code>keepalive</code></a> feature of the Request API (@TimvdLippe, #41457, @WaterWhisperer, #41811).</p>
 <p>That’s not all for network-related improvements!
 Quota errors from the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetchLater"><code>fetchLater</code></a> API provide more details (@TimvdLippe, #41665), and fetch response body promises now reject when invalid gzip content is encountered (@arayaryoma, #39438).
-Meanwhile, <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource"><code>EventSource</code></a> connections will no longer endlessly reconnect for permanent failures (@WaterWhisperer, #41651, #42137), and now use the correct <code>Last-Event-Id</code> header when reconnecting (@WaterWhisperer, #42103).</p>
+Meanwhile, <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource"><code>EventSource</code></a> connections will no longer endlessly reconnect for permanent failures (@WaterWhisperer, #41651, #42137), and now use the correct <code>Last-Event-Id</code> header when reconnecting (@WaterWhisperer, #42103).
+Finally, Servo will create <code>PerformanceResourceTiming</code> entries for requests that returned unsuccessful responses (@bellau, #41804).</p>
 <p>There has been lots of work related to <strong>navigating pages and loading iframes</strong>.
 We process URL fragments more consistently when navigating via the <code>location</code> property (@TimvdLippe, #41805, #41834), and allow evaluating <code>javascript:</code> URLs when a document’s domain has been modified (@jdm, #41969).
-We’re also made it possible to use <code>blob:</code> URLs from inside <code>about:blank</code> and <code>about:srcdoc</code> documents (@jdm, #41966, #42104).
+XML documents loaded in an <code>&lt;iframe&gt;</code> will no longer inherit an encoding from the parent document (@simonwuelker, #41637).</p>
+<p>We’re also made it possible to use <code>blob:</code> URLs from inside <code>about:blank</code> and <code>about:srcdoc</code> documents (@jdm, #41966, #42104).
 Finally, constructed documents (e.g. <code>new Document()</code>) now inherit the origin and domain of the document that created them (@TimvdLippe, #41780), and we implemented the new <a href="https://html.spec.whatwg.org/multipage/#the-origin-interface"><code>Origin</code></a> interface.</p>
 <p>Servo’s mixed content protections are steadily increasing.
 Insecure requests (e.g. HTTP) originating from <code>&lt;iframe&gt;</code> elements can be upgraded to secure protocols (@WaterWhisperer, #41661), and redirected requests now check the most recent URL when determining if the protocol is secure (@WaterWhisperer, #41832).</p>
@@ -285,6 +295,11 @@ Finally, we fixed a panic that occurred when focusing a text field that is disab
 The default styling of many controls received some care (@mrobinson, #42085), while <code>&lt;input type=button&gt;</code> can now be styled with the <code>:active</code> pseudo-class (@mrobinson, #42095).
 Conversely, disabled <code>&lt;select&gt;</code> elements can no longer be activated (@simonwuelker, #42036).</p>
 <p>Mouse events triggered by the embedder are more complete; <code>MouseEvent.detail</code> correctly reports the click count for <code>mouseup</code> and <code>mousedown</code> events (@mrobinson, #41833), and many other members are now consistent with other mouse events (@mrobinson, #42013).</p>
+<p>Performing a pinch zoom on mobile is now reflected in the <a href="https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport"><code>VisualViewport</code></a> API (@stevennovaryo, #41754).
+This work remains hidden behind the <code>dom_visual_viewport_enabled</code> preference until more of the API is supported.</p>
+<p>We’ve changed the behaviour of Web APIs that use the <a href="https://webidl.spec.whatwg.org/#Clamp"><code>[Clamp]</code> annotation</a> (such as <code>Blob.slice</code>).
+The previous implementation would cast floating point values to their integer equivalents, but the standard requires <a href="https://webidl.spec.whatwg.org/#abstract-opdef-converttoint">more specific rounding logic</a> (#41640).</p>
+<p>The <code>RGBA8</code> constant is now available in WebGL 1 rendering contexts; it was previously only available in WebGL 2 contexts (@simonwuelker, #42048).</p>
 <p><strong>Fonts</strong> were another area of focus this month.
 Loading web fonts from <code>file://</code> origins works as expected (@TimvdLippe, #41714), as does using web fonts within Shadow DOM content (@minghuaw, #42151).
 Each web font request now creates a <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming">PerformanceResourceTiming</a> entry (@lumi-me-not, #41784).
@@ -337,6 +352,8 @@ In future, we intend to <a href="https://github.com/servo/servo/issues/25650">fo
 <p>Our nightly testing UI, <strong>servoshell</strong>, now respects any customized installation path on Windows (@yezhizhen, #41653).
 We fixed a crash in the Android app when pausing the application (@NiklasMerz, #41827).
 Additionally, clicking inside a webview in the desktop app will remove focus from any browser UI (@mrobinson, #42080).</p>
+<p>We’ve laid more groundwork to expose accessibility tree information from WebViews (@delan, @lukewarlow, @alice, #41924).
+There’s nothing to test yet, but keep an eye on our <a href="https://github.com/servo/servo/issues/4344">tracking issue</a> if you want to be notified when nightly builds are ready for testing!</p>
 <h2 id="stability-%26-performance" tabindex="-1">Stability &amp; performance <a class="header-anchor" href="#stability-%26-performance">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
