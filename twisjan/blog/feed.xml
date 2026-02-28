@@ -15,7 +15,7 @@
     <link href="https://servo.org/twisjan/blog/2026/02/03/january-in-servo/"/>
     <updated>2026-02-03T00:00:00Z</updated>
     <id>https://servo.org/twisjan/blog/2026/02/03/january-in-servo/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.0.5&quot;&gt;&lt;strong&gt;Servo 0.0.5&lt;/strong&gt;&lt;/a&gt; is here, bringing with it lots of bug fixes and improvements for JS and CSS features.
+    <content xml:lang="en" type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.0.5&quot;&gt;&lt;strong&gt;Servo 0.0.5&lt;/strong&gt;&lt;/a&gt; is here, bringing with it lots of improvements in web platform features.
 Some highlights:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&amp;lt;link rel=preload&amp;gt;&lt;/strong&gt; (@TimvdLippe, @jdm, #40059)&lt;/li&gt;
@@ -34,6 +34,7 @@ Some highlights:&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;Cyclic imports&lt;/strong&gt;, &lt;strong&gt;import attributes&lt;/strong&gt;, and &lt;strong&gt;JSON modules&lt;/strong&gt; (@Gae24, #41779)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;navigator.sendBeacon()&lt;/strong&gt; is enabled by default (@TimvdLippe, #41694)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;https_proxy&lt;/code&gt;, &lt;code&gt;HTTPS_PROXY&lt;/code&gt;, and &lt;code&gt;NO_PROXY&lt;/code&gt; (@Narfinger, #41689)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ML-KEM&lt;/strong&gt;, &lt;strong&gt;ML-DSA&lt;/strong&gt;, and &lt;strong&gt;AES-OCB&lt;/strong&gt; in &lt;strong&gt;&lt;a href=&quot;https://w3c.github.io/webcrypto/&quot;&gt;Crypto&lt;/a&gt;&lt;/strong&gt; (@kkoyung, #41604, #41617, #41615, #41627, #41628, #41647, #41659, #41676, #41791, #41822, #41813, #41829)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure&gt;
     &lt;img src=&quot;https://servo.org/twisjan/img/blog/2026-02-diffie.png&quot; alt=&quot;Servo 0.0.5 showing improved appearance of buttons, text inputs, radio buttons, and checkboxes, plus new support for ‘::details-content’ and ‘:open’ selectors&quot; /&gt;
@@ -61,7 +62,7 @@ Insecure requests (e.g. HTTP) originating from &amp;lt;iframe&amp;gt; elements c
 &lt;p&gt;&lt;strong&gt;&amp;lt;style blocking&amp;gt;&lt;/strong&gt; and &lt;strong&gt;&amp;lt;link blocking&amp;gt;&lt;/strong&gt; can now be used to block rendering while loading stylesheets that are added dynamically (@TimvdLippe, #42096), and stylesheets loaded when parsing the document will &lt;strong&gt;block the document ‘load’ event&lt;/strong&gt; more consistently (@TimvdLippe, @mrobinson, #41986, #41987, #41988, #41973).
 We also &lt;strong&gt;fire the ‘error’ event&lt;/strong&gt; if a fetched stylesheet response is invalid (@TimvdLippe, @mrobinson, #42037).&lt;/p&gt;
 &lt;p&gt;Servo now &lt;strong&gt;&lt;a href=&quot;https://wpt.fyi/results/WebCryptoAPI?run_id=5925299129942016&amp;amp;run_id=5929752339939328&amp;amp;run_id=5468032483983360&amp;amp;run_id=5132831023169536&quot;&gt;leads other browsers&lt;/a&gt;&lt;/strong&gt; in support for new &lt;strong&gt;&lt;a href=&quot;https://w3c.github.io/webcrypto/&quot;&gt;Web&lt;/a&gt; &lt;a href=&quot;https://wicg.github.io/webcrypto-modern-algos/&quot;&gt;Cryptography&lt;/a&gt;&lt;/strong&gt; algorithms!
-This includes work on &lt;strong&gt;ML-KEM&lt;/strong&gt; (@kkoyung, #41604, #41617, #41615, #41627), &lt;strong&gt;ML-DSA&lt;/strong&gt; (@kkoyung, #41628, #41647, #41659, #41676), &lt;strong&gt;AES-OCB&lt;/strong&gt; (@kkoyung, #41791, #41822, #41813, #41829), and &lt;strong&gt;AES-GCM&lt;/strong&gt; (@kkoyung, #41950).
+This includes full support for &lt;strong&gt;ML-KEM&lt;/strong&gt; (@kkoyung, #41604, #41617, #41615, #41627), &lt;strong&gt;ML-DSA&lt;/strong&gt; (@kkoyung, #41628, #41647, #41659, #41676), and &lt;strong&gt;AES-OCB&lt;/strong&gt; (@kkoyung, #41791, #41822, #41813, #41829), plus improvements to &lt;strong&gt;AES-GCM&lt;/strong&gt; (@kkoyung, #41950).
 Additionally, the error messages returned by many Crypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules&quot;&gt;JS module&lt;/a&gt; loading&lt;/strong&gt; received a lot of attention – we’ve improved support for &lt;strong&gt;cyclic imports&lt;/strong&gt; (@Gae24, #41779), &lt;strong&gt;import attributes&lt;/strong&gt; (@Gae24, #42185), and &lt;strong&gt;JSON modules&lt;/strong&gt; (@Gae24, @jdm, #42138).&lt;/p&gt;
 &lt;p&gt;Additionally, the &lt;strong&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload&quot;&gt;&amp;lt;link rel=preload&amp;gt;&lt;/a&gt;&lt;/strong&gt; attribute now triggers &lt;strong&gt;preload fetch operations&lt;/strong&gt; that can improve page load speeds (@TimvdLippe, @jdm, #40059).&lt;/p&gt;
