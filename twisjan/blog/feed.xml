@@ -72,13 +72,14 @@ Servo supports font variations as of November 2025, so as of this month, the &lt
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;There were lots of improvements to &lt;strong&gt;block layout&lt;/strong&gt; algorithms (@Loirooriol, #41492, #41624, #41632, #41655, #41652, #41683).
-These often affect pages where some block element (such as a &amp;lt;div&amp;gt;) exists within other layout mode (such as an inline &amp;lt;span&amp;gt;, or a flexbox context), and fixes like these ensure Servo matches the output of other browsers.&lt;/p&gt;
-&lt;p&gt;Elements with overflow that is scrollable can be scrolled more consistently, even with CSS transforms applied to them (@stevennovaryo, #41707, #42005).&lt;/p&gt;
-&lt;p&gt;Generated image content used to only work with pseudo-elements, but that restriction no longer applies (@andreubotella, #41480).
-Similarly, &amp;lt;details&amp;gt; elements can now be styled with the ‘::details-content’ pseudo-elemement (@lukewarlow, #42107), as well as the ‘:open’ pseudo-class (@lukewarlow, #42195).&lt;/p&gt;
-&lt;p&gt;CSS styles now inherit correctly through ‘display: contents’ as well as &amp;lt;slot&amp;gt; elements in Shadow DOM content (@longvatrong111, @Loirooriol, @mrobinson, #41855).&lt;/p&gt;
-&lt;p&gt;The ‘overflow-clip-margin’ property now works correctly when ‘border-radius’ is present (@Loirooriol, #41967).&lt;/p&gt;
-&lt;p&gt;We fixed bugs involving text inside flexbox elements: they now use consistent baselines for alignment (@lukewarlow, @mrobinson, #42038) and style updates are propagated to the text correctly (@mrobinson, #41951).&lt;/p&gt;
+These often affect pages where a block element (such as a &amp;lt;div&amp;gt;) exists within some other layout mode (such as an inline &amp;lt;span&amp;gt;, or a flexbox context), and fixes like these ensure Servo matches the output of other browsers.&lt;/p&gt;
+&lt;p&gt;Elements with &lt;strong&gt;scrollable overflow&lt;/strong&gt; can be scrolled more consistently, even with CSS transforms applied to them (@stevennovaryo, #41707, #42005).&lt;/p&gt;
+&lt;p&gt;You can now use &lt;strong&gt;‘content: &amp;lt;image&amp;gt;’ on any element&lt;/strong&gt; (@andreubotella, #41480).
+Generated image content used to only work with pseudo-elements, but that restriction no longer applies.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&amp;lt;details&amp;gt; elements&lt;/strong&gt; can now be styled with the &lt;strong&gt;‘::details-content’ pseudo-element&lt;/strong&gt; (@lukewarlow, #42107), as well as the ‘:open’ pseudo-class (@lukewarlow, #42195).&lt;/p&gt;
+&lt;p&gt;CSS styles now inherit correctly through &lt;strong&gt;‘display: contents’&lt;/strong&gt; as well as &lt;strong&gt;&amp;lt;slot&amp;gt; elements&lt;/strong&gt; in Shadow DOM content (@longvatrong111, @Loirooriol, @mrobinson, #41855).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;‘overflow-clip-margin’&lt;/strong&gt; now works correctly when &lt;strong&gt;‘border-radius’&lt;/strong&gt; is present (@Loirooriol, #41967).&lt;/p&gt;
+&lt;p&gt;We fixed bugs involving text inside flexbox elements: they now use consistent baselines for alignment (@lukewarlow, @mrobinson, #42038), and style updates are propagated to the text correctly (@mrobinson, #41951).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&amp;lt;img align&amp;gt;&lt;/strong&gt; now aligns the image as expected (@mrobinson, #42220).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;‘word-break: keep-all’&lt;/strong&gt; now prevents line breaks in &lt;strong&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/CJK_characters&quot;&gt;CJK&lt;/a&gt; text&lt;/strong&gt; (@RichardTjokroutomo, #42088).&lt;/p&gt;
 &lt;p&gt;We also fixed some bugs involving &lt;strong&gt;floats&lt;/strong&gt;, &lt;strong&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Margin_collapsing&quot;&gt;collapsing margins&lt;/a&gt;&lt;/strong&gt;, and &lt;strong&gt;&lt;a href=&quot;https://drafts.csswg.org/css-inline-3/#invisible-line-boxes&quot;&gt;phantom line boxes&lt;/a&gt;&lt;/strong&gt; (@Loirooriol, #41812), which sound much cooler than they actually are.&lt;/p&gt;
@@ -109,7 +110,7 @@ Now a null &lt;a href=&quot;https://w3c.github.io/webdriver/#dfn-script-timeout&
 &lt;p&gt;You can now &lt;strong&gt;cross-compile Servo&lt;/strong&gt; using Windows as the host (@yezhizhen, #41748).&lt;/p&gt;
 &lt;p&gt;We’ve &lt;strong&gt;pinned all git dependencies&lt;/strong&gt; to specific revisions, to reduce the risk of build failures (@Narfinger, #42029).
 We intend to eventually &lt;a href=&quot;https://github.com/servo/servo/issues/25650&quot;&gt;forbid git dependencies&lt;/a&gt; in Servo libraries, which will help unblock releasing Servo on &lt;a href=&quot;https://crates.io/&quot;&gt;crates.io&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://doc.servo.org/servo/struct.SiteDataManager.html&quot;&gt;SiteDataManager&lt;/a&gt;&lt;/strong&gt; has a new &lt;strong&gt;&lt;a href=&quot;https://doc.servo.org/servo/struct.SiteDataManager.html#method.clear_site_data&quot;&gt;clear_site_data()&lt;/a&gt;&lt;/strong&gt; method to clear all stored data for a particular host (@janvarga, #41618, #41709, #41852).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://doc.servo.org/servo/struct.SiteDataManager.html&quot;&gt;SiteDataManager&lt;/a&gt;&lt;/strong&gt; now has a new &lt;strong&gt;&lt;a href=&quot;https://doc.servo.org/servo/struct.SiteDataManager.html#method.clear_site_data&quot;&gt;clear_site_data()&lt;/a&gt;&lt;/strong&gt; method to clear all stored data for a particular host (@janvarga, #41618, #41709, #41852).&lt;/p&gt;
 &lt;p&gt;Our nightly testing UI, &lt;strong&gt;servoshell&lt;/strong&gt;, now respects any customized installation path on Windows (@yezhizhen, #41653).
 We fixed a crash in the Android app when pausing the application (@NiklasMerz, #41827).
 Additionally, clicking inside a webview in the desktop app will remove focus from any browser UI (@mrobinson, #42080).&lt;/p&gt;
