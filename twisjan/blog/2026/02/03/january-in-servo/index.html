@@ -251,7 +251,25 @@
 </div>
 
 <div class="inner-container blog-content">
-  <p><a href="https://github.com/servo/servo/releases/tag/v0.0.5"><strong>Servo 0.0.5</strong></a> is here, bringing with it lots of bug fixes and improvements for JS and CSS features.</p>
+  <p><a href="https://github.com/servo/servo/releases/tag/v0.0.5"><strong>Servo 0.0.5</strong></a> is here, bringing with it lots of bug fixes and improvements for JS and CSS features.
+Some highlights:</p>
+<ul>
+<li><strong>&lt;link rel=preload&gt;</strong> (@TimvdLippe, @jdm, #40059)</li>
+<li><strong>&lt;style blocking&gt;</strong> and <strong>&lt;link blocking&gt;</strong> (@TimvdLippe, #42096)</li>
+<li><strong>&lt;img align&gt;</strong> (@mrobinson, #42220)</li>
+<li><strong>&lt;select disabled&gt;</strong> (@simonwuelker, #42036)</li>
+<li><strong>OGG files</strong> can now be played in <strong>&lt;audio&gt;</strong> (@jdm, #41789)</li>
+<li><strong>‘cursor-color’</strong> (@mrobinson, #41976)</li>
+<li><strong>‘content: &lt;image&gt;’</strong> works on all elements (@andreubotella, #41480)</li>
+<li><strong>‘::details-content’</strong> on &lt;details&gt; (@lukewarlow, #42107)</li>
+<li><strong>‘:open’</strong> on &lt;details&gt; (@lukewarlow, #42195)</li>
+<li><strong>‘:active’</strong> on &lt;input type=button&gt; (@mrobinson, #42095)</li>
+<li><strong><a href="https://html.spec.whatwg.org/multipage/#the-origin-interface">Origin</a> API</strong> (@WaterWhisperer, #41712)</li>
+<li><strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail">MouseEvent.detail</a></strong> (@mrobinson, #41833)</li>
+<li><strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive">Request.keepalive</a></strong> (@TimvdLippe, @WaterWhisperer, #41457, #41811)</li>
+<li><strong>Cyclic imports</strong>, <strong>import attributes</strong>, and <strong>JSON modules</strong> (@Gae24, #41779)</li>
+<li><strong>navigator.sendBeacon()</strong> is enabled by default (@TimvdLippe, #41694)</li>
+</ul>
 <figure>
     <img src="/twisjan/img/blog/2026-02-diffie.png" alt="Servo 0.0.5 showing improved appearance of buttons, text inputs, radio buttons, and checkboxes, plus new support for ‘::details-content’ and ‘:open’ selectors">
 </figure>
@@ -263,7 +281,7 @@ We disabled this feature many years ago due to bugs in <a href="https://gstreame
 <p>We now support non-<code>px</code> sizes for width and height attributes in &lt;svg&gt; elements (@rodio, #40761).</p>
 <p>Inactive documents will now correctly reject fullscreen mode changes (@stevennovaryo, #42068).</p>
 <p>We’ve enabled support for the <strong>navigator.sendBeacon()</strong> by default (@TimvdLippe, #41694); the <code>dom_navigator_sendbeacon_enabled</code> preference has been removed.
-As part of this work, we implemented the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive"><code>keepalive</code></a> feature of the Request API (@TimvdLippe, #41457, @WaterWhisperer, #41811).</p>
+As part of this work, we implemented the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive"><code>keepalive</code></a> feature of the Request API (@TimvdLippe, @WaterWhisperer, #41457, #41811).</p>
 <p>That’s not all for network-related improvements!
 Quota errors from the <strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetchLater">fetchLater()</a> API</strong> provide more details (@TimvdLippe, #41665), and fetch response body promises now reject when <strong>invalid gzip content</strong> is encountered (@arayaryoma, #39438).
 Meanwhile, <strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">EventSource</a></strong> connections will no longer endlessly reconnect for permanent failures (@WaterWhisperer, #41651, #42137), and now use the correct <strong>‘Last-Event-Id’ header</strong> when reconnecting (@WaterWhisperer, #42103).
@@ -294,7 +312,7 @@ Finally, we fixed a panic when focusing a text field that is disabled (@mrobinso
 <p>We also made time to <strong>improve form controls</strong>!
 The default styling of many controls received some care (@mrobinson, #42085), while <strong>&lt;input type=button&gt;</strong> can now be styled with the <strong>‘:active’ pseudo-class</strong> (@mrobinson, #42095).
 Conversely, disabled <strong>&lt;select&gt;</strong> elements can no longer be activated (@simonwuelker, #42036).</p>
-<p>Mouse events triggered by the embedder are more complete; <strong>MouseEvent.detail</strong> correctly reports the click count for <strong>‘mouseup’</strong> and <strong>‘mousedown’</strong> events (@mrobinson, #41833), and many other members are now consistent with other mouse events (@mrobinson, #42013).</p>
+<p>Mouse events triggered by the embedder are more complete; <a href="https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail"><strong>MouseEvent.detail</strong></a> correctly reports the click count for <strong>‘mouseup’</strong> and <strong>‘mousedown’</strong> events (@mrobinson, #41833), and many other members are now consistent with other mouse events (@mrobinson, #42013).</p>
 <p>Performing a pinch zoom on mobile is now reflected in the <strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport">VisualViewport</a> API</strong> (@stevennovaryo, #41754), though for now the feature is disabled by default (<code>--pref dom_visual_viewport_enabled</code>).</p>
 <p>We’ve changed the behaviour of Web APIs that use the <a href="https://webidl.spec.whatwg.org/#Clamp"><code>[Clamp]</code> annotation</a> (such as <strong>Blob.slice()</strong>).
 The previous implementation would cast floating point values to their integer equivalents, but the standard requires <a href="https://webidl.spec.whatwg.org/#abstract-opdef-converttoint">more specific rounding logic</a> (@Taym95, #41640).</p>
