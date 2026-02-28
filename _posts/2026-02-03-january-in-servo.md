@@ -7,7 +7,26 @@ summary:    The web works hard, but Servo contributors work harder.
 categories:
 ---
 
-[**Servo 0.0.5**](https://github.com/servo/servo/releases/tag/v0.0.5) is here, bringing with it lots of bug fixes and improvements for JS and CSS features.
+[**Servo 0.0.5**](https://github.com/servo/servo/releases/tag/v0.0.5) is here, bringing with it lots of improvements in web platform features.
+Some highlights:
+
+- **&lt;link rel=preload>** (@TimvdLippe, @jdm, #40059)
+- **&lt;style blocking>** and **&lt;link blocking>** (@TimvdLippe, #42096)
+- **&lt;img align>** (@mrobinson, #42220)
+- **&lt;select disabled>** (@simonwuelker, #42036)
+- **OGG files** can now be played in **&lt;audio>** (@jdm, #41789)
+- **‘cursor-color’** (@mrobinson, #41976)
+- **‘content: &lt;image>’** works on all elements (@andreubotella, #41480)
+- **‘::details-content’** on &lt;details> (@lukewarlow, #42107)
+- **‘:open’** on &lt;details> (@lukewarlow, #42195)
+- **‘:active’** on &lt;input type=button> (@mrobinson, #42095)
+- **[Origin](https://html.spec.whatwg.org/multipage/#the-origin-interface) API** (@WaterWhisperer, #41712)
+- **[MouseEvent.detail](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail)** (@mrobinson, #41833)
+- **[Request.keepalive](https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive)** (@TimvdLippe, @WaterWhisperer, #41457, #41811)
+- **Cyclic imports**, **import attributes**, and **JSON modules** (@Gae24, #41779)
+- **navigator.sendBeacon()** is enabled by default (@TimvdLippe, #41694)
+- `https_proxy`, `HTTPS_PROXY`, and `NO_PROXY` (@Narfinger, #41689)
+- **ML-KEM**, **ML-DSA**, and **AES-OCB** in **[Crypto](https://w3c.github.io/webcrypto/)** (@kkoyung, #41604, #41617, #41615, #41627, #41628, #41647, #41659, #41676, #41791, #41822, #41813, #41829)
 
 <figure>
     <img src="{{ '/img/blog/2026-02-diffie.png' | url }}" alt="Servo 0.0.5 showing improved appearance of buttons, text inputs, radio buttons, and checkboxes, plus new support for ‘::details-content’ and ‘:open’ selectors">
@@ -23,7 +42,7 @@ We now support non-`px` sizes for width and height attributes in &lt;svg> elemen
 Inactive documents will now correctly reject fullscreen mode changes (@stevennovaryo, #42068).
 
 We've enabled support for the **navigator.sendBeacon()** by default (@TimvdLippe, #41694); the `dom_navigator_sendbeacon_enabled` preference has been removed.
-As part of this work, we implemented the [`keepalive`](https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive) feature of the Request API (@TimvdLippe, #41457, @WaterWhisperer, #41811).
+As part of this work, we implemented the [`keepalive`](https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive) feature of the Request API (@TimvdLippe, @WaterWhisperer, #41457, #41811).
 
 That's not all for network-related improvements!
 Quota errors from the **[fetchLater()](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetchLater) API** provide more details (@TimvdLippe, #41665), and fetch response body promises now reject when **invalid gzip content** is encountered (@arayaryoma, #39438).
@@ -44,7 +63,7 @@ Insecure requests (e.g. HTTP) originating from &lt;iframe> elements can now be u
 We also **fire the ‘error’ event** if a fetched stylesheet response is invalid (@TimvdLippe, @mrobinson, #42037).
 
 Servo now **[leads other browsers](https://wpt.fyi/results/WebCryptoAPI?run_id=5925299129942016&run_id=5929752339939328&run_id=5468032483983360&run_id=5132831023169536)** in support for new **[Web](https://w3c.github.io/webcrypto/) [Cryptography](https://wicg.github.io/webcrypto-modern-algos/)** algorithms!
-This includes work on **ML-KEM** (@kkoyung, #41604, #41617, #41615, #41627), **ML-DSA** (@kkoyung, #41628, #41647, #41659, #41676), **AES-OCB** (@kkoyung, #41791, #41822, #41813, #41829), and **AES-GCM** (@kkoyung, #41950).
+This includes full support for **ML-KEM** (@kkoyung, #41604, #41617, #41615, #41627), **ML-DSA** (@kkoyung, #41628, #41647, #41659, #41676), and **AES-OCB** (@kkoyung, #41791, #41822, #41813, #41829), plus improvements to **AES-GCM** (@kkoyung, #41950).
 Additionally, the error messages returned by many Crypto APIs are now more detailed (@PaulTreitel, @danilopedraza, #41964, #41468, #41902).
 
 **[JS module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) loading** received a lot of attention – we've improved support for **cyclic imports** (@Gae24, #41779), **import attributes** (@Gae24, #42185), and **JSON modules** (@Gae24, @jdm, #42138).
@@ -68,7 +87,7 @@ We also made time to **improve form controls**!
 The default styling of many controls received some care (@mrobinson, #42085), while **&lt;input type=button>** can now be styled with the **‘:active’ pseudo-class** (@mrobinson, #42095).
 Conversely, disabled **&lt;select>** elements can no longer be activated (@simonwuelker, #42036).
 
-Mouse events triggered by the embedder are more complete; **MouseEvent.detail** correctly reports the click count for **‘mouseup’** and **‘mousedown’** events (@mrobinson, #41833), and many other members are now consistent with other mouse events (@mrobinson, #42013).
+Mouse events triggered by the embedder are more complete; [**MouseEvent.detail**](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail) correctly reports the click count for **‘mouseup’** and **‘mousedown’** events (@mrobinson, #41833), and many other members are now consistent with other mouse events (@mrobinson, #42013).
 
 Performing a pinch zoom on mobile is now reflected in the **[VisualViewport](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport) API** (@stevennovaryo, #41754), though for now the feature is disabled by default (`--pref dom_visual_viewport_enabled`).
 
