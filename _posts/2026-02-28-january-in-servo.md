@@ -2,7 +2,7 @@
 layout:     post
 tags:       blog
 title:      "January in Servo: text input, preloads, details styling, and more!"
-date:       2026-02-03
+date:       2026-02-28
 summary:    The web works hard, but Servo contributors work harder.
 categories:
 ---
