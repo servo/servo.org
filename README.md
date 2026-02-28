@@ -305,6 +305,15 @@ To exclude dependabot PRs, run:
 grep -E "^https://github.com/servo/servo/pull/" tools/commits.txt | grep -v dependabot | sort | uniq | wc -l
 ```
 
+## How to automatically triage automated PRs
+
+Note that on macOS and FreeBSD, you may need `-i ''`.
+
+```
+sed -i -E 's/^https:[^\t]+\t\(@dependabot\[bot\],/-&/' commits.txt
+sed -i -E 's/^https:[^\t]+\t\(@servo-wpt-sync,/-&/' commits.txt
+```
+
 ## How to calculate monthly recurring donations
 
 ### OpenCollective
