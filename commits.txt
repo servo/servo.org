@@ -3,7 +3,8 @@
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 01-02-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/42181	(@mrobinson, #42181)	layout: Add support for `-webkit-text-security` (#42181)
++https://github.com/servo/servo/pull/42181	(@mrobinson, #42181)	layout: Add support for `-webkit-text-security` (#42181)
+    dom; unspecified CSS property but required for motionmark
     # This change adds support for the unspecified `-webkit-text-security`
     # property. All major browsers support this property. The benefit of
     # adding this property is that the first addition of a prefixed CSS
@@ -12,7 +13,7 @@ https://github.com/servo/servo/pull/42181	(@mrobinson, #42181)	layout: Add suppo
     # Testing: Three new Servo-specific tests are added for this change. There
     # are a few `-webkit-text-security` tests in WPT, but they do not seem
     # to test basic functionality.
-https://github.com/servo/servo/pull/42262	(@sagudev, #42262)	Merge `DomObject` proc-macro into `#[dom_struct]` (#42262)
+-https://github.com/servo/servo/pull/42262	(@sagudev, #42262)	Merge `DomObject` proc-macro into `#[dom_struct]` (#42262)
     # DomObject derive should not be used standalone so let's just inline it into dom_struct macro. This will help me
     # with https://github.com/servo/servo/issues/26488#issuecomment-3824301234
     # This should (I did not test) also improve compile times, because we do one macro expansion less on dom_struct.
@@ -221,25 +222,30 @@ https://github.com/servo/servo/pull/42255	(@TimvdLippe, #42255)	script: Fix timi
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42277	(@simonwuelker, #42277)	script: Add navigator.pdfViewerEnabled (#42277)
++https://github.com/servo/servo/pull/42277	(@simonwuelker, #42277)	script: Add navigator.pdfViewerEnabled (#42277)
+    dom; navigator.pdfViewerEnabled always false
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Servo doesn't have a pdf viewer, so we simply set the property to `false`.
     # Testing: New tests start to pass
-https://github.com/servo/servo/pull/42275	(@simonwuelker, #42275)	script: Allow any valid CSS color for color input values (#42275)
++https://github.com/servo/servo/pull/42275	(@simonwuelker, #42275)	script: Allow any valid CSS color for color input values (#42275)
+    dom; [from patch expectations] accept CSS named colors and other <color> values like color-mix()
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Testing: New tests start to pass
     # Closes: https://github.com/servo/servo/issues/42117
-https://github.com/servo/servo/pull/42272	(@WaterWhisperer, #42272)	script: Implement base-uri CSP check (#42272)
++https://github.com/servo/servo/pull/42272	(@WaterWhisperer, #42272)	script: Implement base-uri CSP check (#42272)
+    dom; ‘Content-Security-Policy: base-uri’
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Testing: `./mach test-wpt /content-security-policy/base-uri`
     # Fixes: #42261
-https://github.com/servo/servo/pull/41568	(@atbrakhi, #41568)	Expose a `GamepadProvider` and use `Responder` types for messages (#41568)
++https://github.com/servo/servo/pull/41568	(@atbrakhi, #41568)	Expose a `GamepadProvider` and use `Responder` types for messages (#41568)
+    dom; [from patch] move gamepad haptic effects from WebViewDelegate to (also per-webview) GamepadProvider
     # /!\ contains libservo changes! does it affect the embedder?
     # /!\ contains servoshell changes! does it affect the user experience?
     # Expose a `GamepadProvider` and use `Responder` types for messages
     # Testing:
     # Fixes: https://github.com/servo/servo/issues/41453
-https://github.com/servo/servo/pull/42271	(@sagudev, #42271)	script: Correctly handle Reflector with AssociatedMemory and remove associated memory in finalize instead of drop (#42271)
++https://github.com/servo/servo/pull/42271	(@sagudev, #42271)	script: Correctly handle Reflector with AssociatedMemory and remove associated memory in finalize instead of drop (#42271)
+    bug; fix regression that broke speedometer
     # Reviewable per commits:
     # As noted in https://github.com/servo/servo/pull/42180#discussion_r2749861902 transmuting `&Reflector` to
     # `&Reflector` will ignore AssociatedMemory information and thus it will not remove extra associated memory. By
@@ -252,7 +258,8 @@ https://github.com/servo/servo/pull/42271	(@sagudev, #42271)	script: Correctly h
     # Testing: Tested locally that it fixes speedometer.
     # Fixes #42269
 >>> 2026-02-03T06:19:21Z
-https://github.com/servo/servo/pull/42289	(@yezhizhen, #42289)	webdriver: Support interspersed pointerMove actions via event queue (#42289)
++https://github.com/servo/servo/pull/42289	(@yezhizhen, #42289)	webdriver: Support interspersed pointerMove actions via event queue (#42289)
+    webdriver; [read spec to understand pointerMove duration] allow pointerMove with duration to be interleaved with other actions
     # For `pointerMove` with duration, we need to wait asynchronously and execute in parallel for subsequent moves.
     # But we never did this correctly: we waited in a blocking way which broke the whole point of tick: making sure we
     # simultaneously perform actions from multiple sources within a single unit time.
@@ -266,18 +273,21 @@ https://github.com/servo/servo/pull/42289	(@yezhizhen, #42289)	webdriver: Suppor
     # https://github.com/servo/servo/pull/42289#issuecomment-3838895081.
     # Fixes: #42235
     # This is a pre-requisite to #41923: multi-touch support.
-https://github.com/servo/servo/pull/42295	(@arihant2math, #42295)	geolocation: Support `errorCallback` (#42295)
++https://github.com/servo/servo/pull/42295	(@arihant2math, #42295)	geolocation: Support `errorCallback` (#42295)
+    dom; [checked servoshell and config prefs] when dom_geolocation_enabled, navigator.geolocation.getCurrentPosition() and watchPosition() now support errors argument
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Support `errorCallback` in geolocation position request functions and throw the necessary errors.
     # Testing: Passes 3 more WPT tests
     # Fixes: Partially #38903
-https://github.com/servo/servo/pull/42293	(@simonwuelker, #42293)	script: Implement HTMLInputElement.alpha (#42293)
++https://github.com/servo/servo/pull/42293	(@simonwuelker, #42293)	script: Implement HTMLInputElement.alpha (#42293)
+    dom; [checked patch to confirm that <input type=color alpha> was previously supported] just the IDL attribute
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Testing: New tests start to pass
-https://github.com/servo/servo/pull/42290	(@atbrakhi, #42290)	devtools: Remove redundant `addDebuggee` call (#42290)
+-https://github.com/servo/servo/pull/42290	(@atbrakhi, #42290)	devtools: Remove redundant `addDebuggee` call (#42290)
     # Remove duplicate addDebuggee call in debugger.js
     # Testing: This change should not change functionality.
-https://github.com/servo/servo/pull/42273	(@TimvdLippe, #42273)	script: Fix handling changes to relevant attributes for stylesheets (#42273)
++https://github.com/servo/servo/pull/42273	(@TimvdLippe, #42273)	script: Fix handling changes to relevant attributes for stylesheets (#42273)
+    crash; fix crash and failure to remove stylesheets when changing <link> attributes
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # We weren't removing stylesheets when we should be doing so. This most notably happens when the stylesheet no longer
     # has a href or its "rel" changes.
@@ -285,14 +295,16 @@ https://github.com/servo/servo/pull/42273	(@TimvdLippe, #42273)	script: Fix hand
     # if it were an href. However, if we set the type attribute, then that's not the href.
     # To fix that, we now retrieve the href inside the method so we always have the correct value.
     # Fixes #42259
-https://github.com/servo/servo/pull/42276	(@TimvdLippe, #42276)	script: Set host for template content (#42276)
++https://github.com/servo/servo/pull/42276	(@TimvdLippe, #42276)	script: Set host for template content (#42276)
+    dom; [checked patch to understand impact from new wpt pass] <template> elements now throw when trying to create an invalid hierarchy with DOM API
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # A template element should set the host of a DocumentFragment. However, it didn't have a host yet. That's because
     # ShadowRoot declares a host attribute which returns Element, but its property is declared on DocumentFragment.
     # Therefore, define the host on DocumentFragment instead and use it in all relevant points for shadow roots. Then,
     # update the pre-insert validity check to use the correct host-including variant of inclusive ancestors. Lastly,
     # set the host of the template to wire it all up.
-https://github.com/servo/servo/pull/42250	(@rayguo17, #42250)	script: add force option for assign-slottables for a tree (#42250)
++https://github.com/servo/servo/pull/42250	(@rayguo17, #42250)	script: add force option for assign-slottables for a tree (#42250)
+    dom; [checked patch for full description and impact from new wpt test] fix incorrect assignedNodes() when <slot> is removed from tree
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # In the case of node removal, if the subtree of the removed node contains `` element, force traverse down to each ``
     # element is needed to reset the assignment of the slottables that currently being assigned to the `` element. This
@@ -301,7 +313,8 @@ https://github.com/servo/servo/pull/42250	(@rayguo17, #42250)	script: add force 
     # Fixes https://github.com/servo/servo/issues/35188
     # Fixes https://github.com/servo/servo/issues/42182
     # cc @TimvdLippe @simonwuelker @xiaochengh
-https://github.com/servo/servo/pull/42279	(@simonwuelker, #42279)	script: Support different colorspaces for `<input type=color>` (#42279)
++https://github.com/servo/servo/pull/42279	(@simonwuelker, #42279)	script: Support different colorspaces for `<input type=color>` (#42279)
+    dom; [checked patch to confirm that both content and IDL attributes are newly supported] <input type=color colorspace> in engine only (not in servoshell or embedding API yet)
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # This change adds support for the `colorspace` attribute on color inputs and implements serialization of the input
     # value accordingly.
