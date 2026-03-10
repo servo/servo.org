@@ -18,12 +18,13 @@
     # with https://github.com/servo/servo/issues/26488#issuecomment-3824301234
     # This should (I did not test) also improve compile times, because we do one macro expansion less on dom_struct.
     # Testing: It compiles.
-https://github.com/servo/servo/pull/42264	(@Loirooriol, #42264)	layout: Simplify logic for border specificity (#42264)
+-https://github.com/servo/servo/pull/42264	(@Loirooriol, #42264)	layout: Simplify logic for border specificity (#42264)
     # When CSS tables collapse borders, we need to compare their specificities to determine which border wins. One thing
     # that the specificity takes into account is the border-style. We were manually mapping each possible BorderStyle
     # to its priority, but Stylo already provides Ord, so we can just use that instead.
     # Testing: Not needed, no behavior change
-https://github.com/servo/servo/pull/42136	(@yezhizhen, #42136)	css: Enable registered custom properties with CSSOM but stay unanimatable (#42136)
++https://github.com/servo/servo/pull/42136	(@yezhizhen, #42136)	css: Enable registered custom properties with CSSOM but stay unanimatable (#42136)
+    dom; partial support for CSS @property (not animatable)
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Many websites use Tailwind CSS script which utilizes registered custom properties.
     # This PR makes such websites look as expected, such as #42129.
@@ -33,7 +34,8 @@ https://github.com/servo/servo/pull/42136	(@yezhizhen, #42136)	css: Enable regis
     # Fixes: #42129
     # Fixes: #41417
     # Stylo Companion: https://github.com/servo/stylo/pull/293
-https://github.com/servo/servo/pull/42263	(@mrobinson, #42263)	script: Do not consider a node an ancestor of itself in `Node::is_ancestor_of` (#42263)
++https://github.com/servo/servo/pull/42263	(@mrobinson, #42263)	script: Do not consider a node an ancestor of itself in `Node::is_ancestor_of` (#42263)
+    crash; [from fixes issue] fix crash when calling `select.options.add(..., select)` (should throw)
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # This change fixes a crash in options collections due to the fact that a
     # `` element was being considered an ancestor of itself. This
@@ -42,7 +44,8 @@ https://github.com/servo/servo/pull/42263	(@mrobinson, #42263)	script: Do not co
     # `HTMLOptionCollect::Add`.
     # Testing: This change adds a WPT crash test.
     # Fixes: #41080.
-https://github.com/servo/servo/pull/42255	(@TimvdLippe, #42255)	script: Fix timing of frozen base URL (#42255)
++https://github.com/servo/servo/pull/42255	(@TimvdLippe, #42255)	script: Fix timing of frozen base URL (#42255)
+    dom; [checked patch for impact from new wpt passes] fix <base> not taking effect in some cases, or taking effect when given a data: or javascript: URL
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Make it runs at the correct time and then also performs checks for its scheme. The CSP check is left for a
     # follow-up PR.
@@ -321,7 +324,8 @@ https://github.com/servo/servo/pull/42255	(@TimvdLippe, #42255)	script: Fix timi
     # The color picker from servoshell doesn't yet support non-rgb colorspaces (and neither does the embedding API),
     # so we convert to and from rgb when communicating with the embedder.
     # Testing: New tests start to pass
-https://github.com/servo/servo/pull/42082	(@gterzian, #42082)	Indexeddb: connection lifecycle (#42082)
++https://github.com/servo/servo/pull/42082	(@gterzian, #42082)	Indexeddb: connection lifecycle (#42082)
+    dom; [checked patch to understand impact more rigorously but unsuccessful] indexeddb is more conformant when opening and closing connections
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement the full connection lifecycle, from opening and potentially upgrading a database, waiting on existing
     # connections to close, firing the versionchange and blocked events, and updating pending open requests when
@@ -475,11 +479,13 @@ https://github.com/servo/servo/pull/42082	(@gterzian, #42082)	Indexeddb: connect
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42041	(@Taym95, #42041)	fetch: implement multipart/form-data parsing for Request::formData() (#42041)
++https://github.com/servo/servo/pull/42041	(@Taym95, #42041)	fetch: implement multipart/form-data parsing for Request::formData() (#42041)
+    dom; [checked patch for impact from new wpt passes] formData() on Request (it existed before but did not work)
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Testing: More test passed in `fetch/api/abort/request.any.js.ini`
     # fixes: #25106
-https://github.com/servo/servo/pull/42060	(@stevennovaryo, #42060)	script: Impl `UserActivation` interface (#42060)
++https://github.com/servo/servo/pull/42060	(@stevennovaryo, #42060)	script: Impl `UserActivation` interface (#42060)
+    dom; [checked patch for impact from new wpt passes] UserActivation API, plus requestFullscreen() on Element now requires user activation
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # /!\ may contain changes to feature flags
     # User activation is a concept used to prevents annoying usage of specific API (Fullscreen API, Virtual Keyboard)
@@ -493,35 +499,36 @@ https://github.com/servo/servo/pull/42060	(@stevennovaryo, #42060)	script: Impl 
     # implement this behavior on fullscreen API which is used to test activation consuming behavior.
     # Spec: https://html.spec.whatwg.org/multipage/interaction.html#the-useractivation-interface
     # Testing: Existing WPT
-https://github.com/servo/servo/pull/42309	(@yezhizhen, #42309)	webdriver: Improve input event synchronization time-complexity from O(N²) to O(N) (#42309)
+-https://github.com/servo/servo/pull/42309	(@yezhizhen, #42309)	webdriver: Improve input event synchronization time-complexity from O(N²) to O(N) (#42309)
     # - Rename `wait_for_user_agent_handling_complete` to `wait_for_input_event_handled`
     # - Reduce the time-complexity from $O(N^2)$ to $O(N)$: we are waiting for all `pending_input_event_receivers`
     # anyway. There is no need for `crossbeam_channel::Select` as the sender won't block, and channel is `unbound`.
     # - Add a TODO: Some DOM events may not have been produced at the end of wait.
     # Testing: This is refactor. https://github.com/servo/servo/actions/runs/21627646437
-https://github.com/servo/servo/pull/41224	(@Narfinger, #41224)	etc: Include script for running blink perf tests (#41224)
+-https://github.com/servo/servo/pull/41224	(@Narfinger, #41224)	etc: Include script for running blink perf tests (#41224)
     # This is a simple webdriver script that can run a folder of the blink_perf_tests and output a bmf json file.
     # Signed-off-by: Narfinger
     # Testing: Does not require testing as it is a separate tool.
-https://github.com/servo/servo/pull/42270	(@fanosoro@gmail.com, #42270)	script: Start a performance timeline entry for iframe documents (#42270)
++https://github.com/servo/servo/pull/42270	(@fanosoro@gmail.com, #42270)	script: Start a performance timeline entry for iframe documents (#42270)
+    dom; [checked patch for impact from new wpt passes] performance.getEntries() now returns PerformanceResourceTiming entries for activity in iframes
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Added resource timing that was missing for an iframe document.
     # Testing: Added
     # Fixes: https://github.com/servo/servo/issues/41666
-https://github.com/servo/servo/pull/42310	(@jdm, #42310)	deps: Update bytes crate to 0.11.1 (#42310)
+-https://github.com/servo/servo/pull/42310	(@jdm, #42310)	deps: Update bytes crate to 0.11.1 (#42310)
     # This resolves the following error:
     # ```
     #   | /a/servo/servo/deny.toml:107: Integer overflow in `BytesMut::reserve`: bytes 1.11.0
     #   registry+https://github.com/rust-lang/crates.io-index
     # ```
     # Testing: `./mach test-tidy` passes.
-https://github.com/servo/servo/pull/42305	(@jschwe, #42305)	Bump servoshell to 0.0.5 (#42305)
+-https://github.com/servo/servo/pull/42305	(@jschwe, #42305)	Bump servoshell to 0.0.5 (#42305)
     # /!\ contains servoshell changes! does it affect the user experience?
     # This version bump is a bit delayed, since I forgot to open the PR before FOSDEM. The actual release will thus
     # likely not be based on this commit, but backported to the release branch, to stay in sync with our monthly report.
     # There still has been no resolution on the `0.1` version bump situation, hence another bump of the patch version.
     # Testing: Not required
-https://github.com/servo/servo/pull/42169	(@jschwe, #42169)	mach: use `uv run --frozen` (#42169)
+-https://github.com/servo/servo/pull/42169	(@jschwe, #42169)	mach: use `uv run --frozen` (#42169)
     # /!\ contains libservo changes! does it affect the embedder?
     # This will avoid updating the lockfile during regular operations. Also ignore the `servo.egg-info` directory, which
     # the new python requirement installation mechanism via setuptools creates.
@@ -529,7 +536,7 @@ https://github.com/servo/servo/pull/42169	(@jschwe, #42169)	mach: use `uv run --
     # This PR also updates the uv version in CI to a newer one. If you encounter any issues with the lockfile after this
     # PR, it might be necessary to update your local instance of uv.
     # Testing: Build still works. [mach try full](https://github.com/servo/servo/actions/runs/21624364040)
-https://github.com/servo/servo/pull/42308	(@atbrakhi, #42308)	devtools: cleanup debugger.js (#42308)
+-https://github.com/servo/servo/pull/42308	(@atbrakhi, #42308)	devtools: cleanup debugger.js (#42308)
     # Debugger.js had many repetitive code, this change creates 2 helper functions and renames some functions/variables
     # to make it more clear.
     # Testing: This should not change any functionality
@@ -590,7 +597,7 @@ https://github.com/servo/servo/pull/42308	(@atbrakhi, #42308)	devtools: cleanup 
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42297	(@yezhizhen, #42297)	webdriver: Remove orphan `Handler::num_pending_actions` (#42297)
+-https://github.com/servo/servo/pull/42297	(@yezhizhen, #42297)	webdriver: Remove orphan `Handler::num_pending_actions` (#42297)
     # `Handler::num_pending_actions` has been a poor orphan since who-knows-when.
     # This also removes the only dependency on `Cell`.
     # Testing: This removes unused field. Covered by existing tests.
@@ -647,7 +654,7 @@ https://github.com/servo/servo/pull/42297	(@yezhizhen, #42297)	webdriver: Remove
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
 >>> 2026-02-05T06:29:41Z
-https://github.com/servo/servo/pull/42346	(@jschwe, #42346)	perf tests: Fix minor issues in blink layout tests runner (#42346)
+-https://github.com/servo/servo/pull/42346	(@jschwe, #42346)	perf tests: Fix minor issues in blink layout tests runner (#42346)
     # - Catch MaxRetryError exception and retry, to avoid logging warnings. This was observed on macos and can happen
     # during startup of servo.
     # - Change the default port, since 7000 was reported by multiple people to cause "port in use" errors.
@@ -669,7 +676,8 @@ https://github.com/servo/servo/pull/42346	(@jschwe, #42346)	perf tests: Fix mino
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42344	(@jdm, #42344)	script: Remove named window proxy map entry when destroying nested browsing context (#42344)
++https://github.com/servo/servo/pull/42344	(@jdm, #42344)	script: Remove named window proxy map entry when destroying nested browsing context (#42344)
+    dom; [checked patch and then codebase for impact] fix <a target> etc when iframe is removed and then added with the same name
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # Leaving the entries sitting around both unnecessarily increases memory usage and breaks code that looks up window
     # proxies by name and reuses names for iframes within the same page.
@@ -679,10 +687,11 @@ https://github.com/servo/servo/pull/42342	(@Gae24, #42342)	script: use `&mut JSC
     # Switch `PostMessage` of `Worker`, `DedicatedWorkerGlobalScope` and `ServiceWoker` to use `&mut JSContext`,
     # propagating it to `post_message_impl`.
     # Testing: A successful build is enough
-https://github.com/servo/servo/pull/42337	(@Loirooriol, #42337)	Bump Stylo to servo/stylo#303 (#42337)
+-https://github.com/servo/servo/pull/42337	(@Loirooriol, #42337)	Bump Stylo to servo/stylo#303 (#42337)
     # Bumps Stylo to "Sort static prefs by name".
     # Testing: Unneeded (no behavior change)
-https://github.com/servo/servo/pull/42201	(@lukewarlow, #42201)	script: Match `:modal` when dialog is modal (#42201)
++https://github.com/servo/servo/pull/42201	(@lukewarlow, #42201)	script: Match `:modal` when dialog is modal (#42201)
+    dom; ‘:modal’ on <dialog>
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # In addition, clean-up the UA stylesheet for dialogs.
     # Stylo PR: servo/stylo#301
@@ -5019,7 +5028,8 @@ https://github.com/servo/servo/pull/42878	(@atbrakhi, @eerii, #42878)	devtools: 
     # This is in order to support the upcoming work on `onStep`, `onPop`, and `onEnterFrame` hook.
     # Testing: all existing tests are passing
     # Fixes: Part of #36027
-https://github.com/servo/servo/pull/42897	(@mukilan, #42897)	prefs: Cleanup unused preferences. (#42897)
++https://github.com/servo/servo/pull/42897	(@mukilan, #42897)	prefs: Cleanup unused preferences. (#42897)
+    api; [from description, patch, and fixes issue] renamed dom_worklet_blockingsleep to dom_worklet_blockingsleep_enabled, and removed js_asyncstack, js_discard_system_source, js_dump_stack_on_debuggee_would_run, js_ion_offthread_compilation_enabled, js_mem_gc_allocation_threshold_avoid_interrupt_factor, js_mem_gc_allocation_threshold_factor, js_mem_gc_allocation_threshold_mb, js_mem_gc_decommit_threshold_mb, js_mem_gc_dynamic_heap_growth_enabled, js_mem_gc_dynamic_mark_slice_enabled, js_shared_memory, js_throw_on_asmjs_validation_failure, js_throw_on_debuggee_would_run, js_werror_enabled, network_mime_sniff
     # /!\ may contain changes to feature flags
     # This patch removes `js_*` preferences that are not currently wired up to the SM engine. The
     # `js_mem_gc_allocation_threshold_factor` was being used previously but got that usage was commented out in #28092,
