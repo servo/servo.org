@@ -683,7 +683,8 @@
     # proxies by name and reuses names for iframes within the same page.
     # Testing: Newly-passing tests.
     # Fixes: #15258
-https://github.com/servo/servo/pull/42342	(@Gae24, #42342)	script: use `&mut JSContext` inside workers `PostMessage` api (#42342)
++https://github.com/servo/servo/pull/42342	(@Gae24, #42342)	script: use `&mut JSContext` inside workers `PostMessage` api (#42342)
+    crash; [checked patch to find meta issue] safety from ground up
     # Switch `PostMessage` of `Worker`, `DedicatedWorkerGlobalScope` and `ServiceWoker` to use `&mut JSContext`,
     # propagating it to `post_message_impl`.
     # Testing: A successful build is enough
@@ -696,13 +697,14 @@ https://github.com/servo/servo/pull/42342	(@Gae24, #42342)	script: use `&mut JSC
     # In addition, clean-up the UA stylesheet for dialogs.
     # Stylo PR: servo/stylo#301
     # Testing: change causes several WPT tests to start passing.
-https://github.com/servo/servo/pull/42330	(@eerii, @mrobinson, #42330)	devtools: Only highlight fragments that share the first encountered `SpatialId` for a node (#42330)
++https://github.com/servo/servo/pull/42330	(@eerii, @mrobinson, #42330)	devtools: Only highlight fragments that share the first encountered `SpatialId` for a node (#42330)
+    crash; [opened to read fixes issues] fix crashes in devtools Inspector tab
     # Remove the assertion and only highlight the first `SpatialId` if there are multiple ones. It should be the bottom-most.
     # Testing: This fixes the test case at https://github.com/servo/servo/issues/40851#issuecomment-3846717049, which
     # can only be tested manually. In general, there are not automated Devtools tests for these kind of interactions.
     # Fixes: #40851
     # Fixes: #41142
-https://github.com/servo/servo/pull/41885	(@Narfinger, @yezhizhen, #41885)	CI: Use mitmproxy in OHOS Ci (#41885)
+-https://github.com/servo/servo/pull/41885	(@Narfinger, @yezhizhen, #41885)	CI: Use mitmproxy in OHOS Ci (#41885)
     # This has a couple of changes to use mitmproxy (see more
     # https://book.servo.org/contributing/profiling.html?highlight=mitmproxy#webpage-snapshots) in the ohos benchmarking CI.
     # - We include an easy script to create a mitmproxy dump (etc/ci/scenario/update-mitmproxy-dump.py).
@@ -714,12 +716,12 @@ https://github.com/servo/servo/pull/41885	(@Narfinger, @yezhizhen, #41885)	CI: U
     # Testing:  https://github.com/Narfinger/servo/actions/runs/21630846381/job/62343433828
     # In the future we will add smoketest and hitrace-bench to use mitmproxy and finally switch mitmproxy to record and
     # replay mode.
-https://github.com/servo/servo/pull/42328	(@yezhizhen, #42328)	paint: Reduce unnecessary memory reallocation/mutable getter (#42328)
+-https://github.com/servo/servo/pull/42328	(@yezhizhen, #42328)	paint: Reduce unnecessary memory reallocation/mutable getter (#42328)
     # - Retain capacity of `pending_touch_move_actions` with `fn remove_pending_touch_move_actions`
     # - Remove unnecessary mutable getter in `fn move_allowed`
     # - Reduces visibility of functions in `touch.rs`
     # Just a refactor.
-https://github.com/servo/servo/pull/41141	(@Narfinger, #41141)	Allow llvm-coverage to write file on webdriver exit (#41141)
+-https://github.com/servo/servo/pull/41141	(@Narfinger, #41141)	Allow llvm-coverage to write file on webdriver exit (#41141)
     # /!\ contains servoshell changes! does it affect the user experience?
     # This adds a `cfg` to servo that uses the llvm profile-runtime function for writing the coverage file to disk.
     # When the webdriver shuts down we should make sure to write the llvm_coverage file. This is only required on platforms
@@ -728,36 +730,38 @@ https://github.com/servo/servo/pull/41141	(@Narfinger, #41141)	Allow llvm-covera
     # Testing: Tested '/mach build -r --coverage && ./mach test-wpt -r --coverage' and there do not seem any parsing
     # errors anymore.
     # Fixes: https://github.com/servo/servo/issues/40942
-https://github.com/servo/servo/pull/42322	(@yezhizhen, #42322)	wpt/UT: Disable `https_proxy` for local tests (#42322)
+-https://github.com/servo/servo/pull/42322	(@yezhizhen, #42322)	wpt/UT: Disable `https_proxy` for local tests (#42322)
     # /!\ contains libservo changes! does it affect the embedder?
     # This helps buddies from MI5, MI6, NSA etc. to run tests behind proxy.
     # Testing: Tested locally behind proxy. For some reason, I already set `127.0.0.1` and `localhost` in `no_proxy`,
     # but it does not work.
     # Fixes: #42321
-https://github.com/servo/servo/pull/42326	(@mrobinson, #42326)	script: Move WebVTT interfaces into a `webvtt` directory (#42326)
+-https://github.com/servo/servo/pull/42326	(@mrobinson, #42326)	script: Move WebVTT interfaces into a `webvtt` directory (#42326)
     # This change organizes the rest of the media-related interfaces by moving
     # the WebVTT-related[^1] interfaces into their own directory and two more
     # media-related interfaces into the `media` directory.
     # Testing: This just moves source files around, so a successful build should be a good enough test.
     # Fixes: This is part of #38901.
-https://github.com/servo/servo/pull/42303	(@mrobinson, #42303)	layout: Handle zero-sized positioning areas when laying out a dimension for `background-repeat` (#42303)
++https://github.com/servo/servo/pull/42303	(@mrobinson, #42303)	layout: Handle zero-sized positioning areas when laying out a dimension for `background-repeat` (#42303)
+    crash; [from fixes issue] fix crash when ‘background-repeat: round’ and box is empty
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # The specification says that the rounding of the tile size should only happen
     # when the positioning size is not zero. This change makes us follow the
     # specification in this case.
     # Testing: This PR adds a new WPT crash test.
     # Fixes: #42216
-https://github.com/servo/servo/pull/42323	(@kkoyung, #42323)	script: Move more steps of AES algorithms to `aes_common` module (#42323)
+-https://github.com/servo/servo/pull/42323	(@kkoyung, #42323)	script: Move more steps of AES algorithms to `aes_common` module (#42323)
     # Move some common/similar steps of the import key operations of AES-CTR, AES-CBC, AES-GCM, AES-KW and AES-OCB to
     # the shared module `aes_common`.
     # Some comments are also added to the shared module `aes_common` to explain the small difference in the specification
     # of AES-OCB operations.
     # Testing: Refactoring. Existing tests suffice.
-https://github.com/servo/servo/pull/42294	(@Gae24, #42294)	script: Start using `&mut JSContext` and wrappers2 functions inside module script code (#42294)
++https://github.com/servo/servo/pull/42294	(@Gae24, #42294)	script: Start using `&mut JSContext` and wrappers2 functions inside module script code (#42294)
+    crash; safety from ground up
     # Start using `&mut JSContext` and wrappers2 functions for module script code.
     # Testing: A successful build should be enough
 >>> 2026-02-06T06:39:37Z
-https://github.com/servo/servo/pull/42385	(@Loirooriol, #42385)	Add test tracking web-exposed CSS properties (#42385)
+-https://github.com/servo/servo/pull/42385	(@Loirooriol, #42385)	Add test tracking web-exposed CSS properties (#42385)
     # When doing a Stylo upgrade, it may happen that a commit imported from upstream accidentally enables a CSS property
     # on Servo. That is even more likely after https://phabricator.services.mozilla.com/D280900, since the new default
     # is that properties are enabled everywhere.
@@ -765,13 +769,15 @@ https://github.com/servo/servo/pull/42385	(@Loirooriol, #42385)	Add test trackin
     # to stable, but that requires running the test without experimental features, or using internal APIs. So for now,
     # the test will also track experimental properties.
     # Testing: just adding a new test, no behavior change
-https://github.com/servo/servo/pull/42371	(@danpao@microsoft.com, #42371)	mach: Force the use of arm64 Python when running with Windows on arm64 (#42371)
++https://github.com/servo/servo/pull/42371	(@danpao@microsoft.com, #42371)	mach: Force the use of arm64 Python when running with Windows on arm64 (#42371)
+    build; [opened to check unsuccessfully if mach now works on windows arm64; update: no. see #42312] fix for building servo with mach on windows arm64
     # There is currently [a bug in UV](https://github.com/astral-sh/uv/issues/12906) that results in it using the x64
     # flavor of Python when running on Arm64 Windows. This then causes all Python scripts to believe they are on an x64
     # device and so Server installs the wrong dependencies and builds for the wrong architecture.
     # Testing: Local on my Arm64 Windows device
     # Contributes to fixing #40611
-https://github.com/servo/servo/pull/42341	(@npiesco, #42341)	fix(background_hang_monitor): Use DummySampler on Windows ARM64 (#42341)
++https://github.com/servo/servo/pull/42341	(@npiesco, #42341)	fix(background_hang_monitor): Use DummySampler on Windows ARM64 (#42341)
+    build; fix for building servo with mach on windows arm64
     # Windows ARM64 (aarch64, MSVC) does not support native profiling. PR updates platform configuration to route Windows
     # ARM64 to DummySampler, aligning it with other unsupported targets (e.g., Linux musl) and fixing build compatibility.
     # PR #42312
@@ -847,7 +853,7 @@ https://github.com/servo/servo/pull/42341	(@npiesco, #42341)	fix(background_hang
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/41711	(@mrobinson, #41711)	fonts: Port macOS font code to use `objc2-*` crates (#41711)
+-https://github.com/servo/servo/pull/41711	(@mrobinson, #41711)	fonts: Port macOS font code to use `objc2-*` crates (#41711)
     # This change moves Servo's macOS font code away from using our homegrown
     # `core-*` crates and toward the more general-purpose `objc2-*` crates.
     # Development of these crates is more active and they use automatic code
@@ -860,7 +866,8 @@ https://github.com/servo/servo/pull/41711	(@mrobinson, #41711)	fonts: Port macOS
     #  - is the first step toward more flexible font fallback on macOS (#41426)
     #  - means we can now remove our manually FFI bindings for font variation code.
     # Testing: This should not change behavior and macOS is currently untested via WPT on the Ci.
-https://github.com/servo/servo/pull/42370	(@pralkarz, #42370)	script: use `&mut JSContext` in `Window::PostMessage` (#42370)
++https://github.com/servo/servo/pull/42370	(@pralkarz, #42370)	script: use `&mut JSContext` in `Window::PostMessage` (#42370)
+    crash; safety from ground up
     # Replace `crate::script_runtime::JSContext` with `js::context::JSContext` in `Window::PostMessage`'s API.
     # Testing: Builds and runs locally.
     # Part of: https://github.com/servo/servo/issues/42347
@@ -1106,7 +1113,8 @@ https://github.com/servo/servo/pull/38840	(@arihant2math, #38840)	indexeddb: IDB
     # Implements `createIndex` and `deleteIndex`, they have already been implemented in the backend.
     # Testing: WPT
     # Fixes: Partially #38100
-https://github.com/servo/servo/pull/42417	(@BryanSmith00, #42417)	Script: Use `&mut JSContext` in `BroadcastChannel::PostMessage` (#42417)
++https://github.com/servo/servo/pull/42417	(@BryanSmith00, #42417)	Script: Use `&mut JSContext` in `BroadcastChannel::PostMessage` (#42417)
+    crash; safety from ground up
     # Replace `crate::script_runtime::JSContext` with `js::context::JSContext` in `BroadcastChannel::PostMessage` and
     # update interface binding.
     # Testing: Builds and runs locally.
@@ -2384,7 +2392,8 @@ https://github.com/servo/servo/pull/42621	(@TimvdLippe, #42621)	script: Add base
     # In preparation of the actual implementation.
     # Also had to update the codegen to be able to handle default values for DOMString.
     # Part of #25005
-https://github.com/servo/servo/pull/42619	(@sagudev, #42619)	script: `&mut JSContext` in native functions and make them safer (#42619)
++https://github.com/servo/servo/pull/42619	(@sagudev, #42619)	script: `&mut JSContext` in native functions and make them safer (#42619)
+    crash; safety from ground up
     # Testing: Just refactor, should be covered by WPT
     # Part of #40600
 https://github.com/servo/servo/pull/42604	(@Gae24, #42604)	script: implement `resolve_a_module_integrity_metadata` (#42604)
@@ -2399,7 +2408,8 @@ https://github.com/servo/servo/pull/42604	(@Gae24, #42604)	script: implement `re
 https://github.com/servo/servo/pull/42617	(@shubhamg13, #42617)	layout: Simply check of `non-zero` bounding rect for contentful_paint (#42617)
     # Use helper function to evaluate non-zero bounding rect size
     # Testing: Existing WPT Tests Passed. No change in behaviour.
-https://github.com/servo/servo/pull/42616	(@sagudev, #42616)	script: Pass `&mut JSContext` to timers, abort controller, some transfers and some streams (#42616)
++https://github.com/servo/servo/pull/42616	(@sagudev, #42616)	script: Pass `&mut JSContext` to timers, abort controller, some transfers and some streams (#42616)
+    crash; safety from ground up
     # I just wanted to do abort signal, but then this happend.
     # Testing: Just refactor, should be covered by WPT tests
     # Part of #40600
@@ -2594,7 +2604,8 @@ https://github.com/servo/servo/pull/42616	(@sagudev, #42616)	script: Pass `&mut 
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42637	(@sagudev, #42637)	script: Move CSSStyleSheetMethods to &mut JSContext (#42637)
++https://github.com/servo/servo/pull/42637	(@sagudev, #42637)	script: Move CSSStyleSheetMethods to &mut JSContext (#42637)
+    crash; safety from ground up
     # Demonstrate how to change some methods:
     # - [from `InRealm` to `&mut
     # CurrentRealm`](https://github.com/servo/servo/commit/0132fc0fbed66058a7147160135912379d7ad675)
@@ -2820,7 +2831,8 @@ https://github.com/servo/servo/pull/42656	(@willypuzzle, #42656)	script: Refacto
     # Moves the drop logic for `GPUComputePassEncoder` to a separate `DroppableGPUComputePassEncoder` struct.
     # Testing: Tests that coverages webgpu just exist
     # Fixes: Partially #26488
-https://github.com/servo/servo/pull/42640	(@Gae24, #42640)	script: Start using `&mut JSContext` in devtools and webdriver code (#42640)
++https://github.com/servo/servo/pull/42640	(@Gae24, #42640)	script: Start using `&mut JSContext` in devtools and webdriver code (#42640)
+    crash; safety from ground up
     # This is a first step to compile scripts using `&mut JSContext`.
     # Testing: Refactor, covered by existing WPT tests.
     # Part of #40600
@@ -2878,7 +2890,8 @@ https://github.com/servo/servo/pull/42684	(@Narfinger, #42684)	pixels: Avoid unn
     # We do not need to clone the vector just to clone it again for an GenericSharedMemory to take it.
     # In real life tests this copy can take up to 30% of the `webrender_image_descriptor_and_data_for_frame` function.
     # Testing: This does not change functionality and just reorders the allocation.
-https://github.com/servo/servo/pull/42662	(@Narfinger, #42662)	canvas: Change canvas to use JSContext instead of CanGc (#42662)
++https://github.com/servo/servo/pull/42662	(@Narfinger, #42662)	canvas: Change canvas to use JSContext instead of CanGc (#42662)
+    crash; safety from ground up
     # This changes the methods in dom/canvas to use the new JSContext/&mut JSContext instead of CanGc.
     # Part of https://github.com/servo/servo/issues/40600
     # Signed-off-by: Narfinger
@@ -2904,7 +2917,8 @@ https://github.com/servo/servo/pull/42668	(@Gae24, #42668)	script: check if reso
     # `specifierKey is a code unit prefix of record's specifier;`
     # Testing: More tests are now passing
     # Part of #37553
-https://github.com/servo/servo/pull/42679	(@Gae24, #42679)	script: pass down `&mut JSContext` in `post_connection_steps` (#42679)
++https://github.com/servo/servo/pull/42679	(@Gae24, #42679)	script: pass down `&mut JSContext` in `post_connection_steps` (#42679)
+    crash; safety from ground up
     # Pass down `&mut JSContext` in `post_connection_steps`
     # Testing: No functionality change, a successful build is enough
     # Part of #40600
@@ -2924,7 +2938,8 @@ https://github.com/servo/servo/pull/42634	(@TimvdLippe, #42634)	script: Implemen
     # of the current selection and do various checks, as well as
     # check the presence of `contenteditable`.
     # Part of #25005
-https://github.com/servo/servo/pull/42681	(@sagudev, #42681)	script: Pass `&mut JSContext` to Constructor and Wrap (#42681)
++https://github.com/servo/servo/pull/42681	(@sagudev, #42681)	script: Pass `&mut JSContext` to Constructor and Wrap (#42681)
+    crash; safety from ground up
     # Testing: Just refactor, but should be covered by WPT
     # Part of #40600
 https://github.com/servo/servo/pull/42601	(@simonwuelker, #42601)	devtools: Apply attribute modifications in the inspector to the DOM tree (#42601)
@@ -2953,9 +2968,11 @@ https://github.com/servo/servo/pull/42659	(@24bsm032@iiitdmj.ac.in, #42659)	mach
     #     (runtime dependencies declared via uv script metadata)
     # After these changes, ./mach test-tidy passes successfully locally.
     # Fixes: #42653
-https://github.com/servo/servo/pull/42665	(@TimvdLippe, #42665)	script: Move ImportScripts to &mut JSContext (#42665)
++https://github.com/servo/servo/pull/42665	(@TimvdLippe, #42665)	script: Move ImportScripts to &mut JSContext (#42665)
+    crash; safety from ground up
     # Part of #42638
-https://github.com/servo/servo/pull/42667	(@TimvdLippe, #42667)	script: Move attribute-related methods to &mut JSContext (#42667)
++https://github.com/servo/servo/pull/42667	(@TimvdLippe, #42667)	script: Move attribute-related methods to &mut JSContext (#42667)
+    crash; safety from ground up
     # Part of #42638
 >>> 2026-02-19T06:29:19Z
 https://github.com/servo/servo/pull/42502	(@Narfinger, #42502)	devtools: Allow specifiying an address to listen to and default to localhost (#42502)
@@ -3285,7 +3302,8 @@ https://github.com/servo/servo/pull/42725	(@sagudev, #42725)	script: Add `reflec
     # Just to complement existing with_proto method introduced in #42699.
     # Justification for arg ordering: reflect_dom_* have arguments reversed, so first one is Box (the most important)
     # then global, proto and lastly cx.
-https://github.com/servo/servo/pull/42729	(@sagudev, #42729)	 script: Pass `&mut JSContext` in `FetchResponseListener::process_response_eof` (#42729)
++https://github.com/servo/servo/pull/42729	(@sagudev, #42729)	 script: Pass `&mut JSContext` in `FetchResponseListener::process_response_eof` (#42729)
+    crash; safety from ground up
     # `process_response_eof` is the only method that needs cx at least right now. This PR removes one temp_cx and
     # introduces one, removing that one will is hard (needs VirtualMethods and a lot of work)
     # Testing: Just refactor
@@ -3306,7 +3324,8 @@ https://github.com/servo/servo/pull/42714	(@lukewarlow, @mrobinson, #42714)	scri
     # but these are more generic helpers for Servo-only tests.
     # Testing: This change adds a series of Servo-only tests that verify the behavior of the new `forceLayout()`
     # function. Tests that rely on the moved interfaces are updated and should continue to pass.
-https://github.com/servo/servo/pull/42726	(@kkoyung, #42726)	script: Pass `&mut JSContext` to methods of `SubtleCrypto` (#42726)
++https://github.com/servo/servo/pull/42726	(@kkoyung, #42726)	script: Pass `&mut JSContext` to methods of `SubtleCrypto` (#42726)
+    crash; safety from ground up
     # This patch changes the methods of `SubtleCrypto` to use the new `&mut JSContext` and `&mut CurrentRealm`, Those
     # methods are `Encrypt`, `Decrypt`, `Sign`, `Verify`, `GenerateKey`, `DeriveKey`, `DeriveBits`, `Digest`, `ImportKey`,
     # `ExportKey`, `WrapKey`, `UnwrapKey`, `EncapsulateKey`, `EncapsulateBits`, `DecapsulateKey`, `DecapsulateBits`.
@@ -3334,7 +3353,8 @@ https://github.com/servo/servo/pull/42654	(@yezhizhen, #42654)	script: Use `touc
     # We also take the chance to update `pointercancel` related tests introduced in
     # https://github.com/servo/servo/pull/41937: `touchcancel` should not be followed by `touchend` according to
     # [spec](https://w3c.github.io/touch-events/#dfn-touchcancel).
-https://github.com/servo/servo/pull/42720	(@TimurBora, #42720)	script/dom/bluetooth: Move to &mut js::context::JSContext (#42720)
++https://github.com/servo/servo/pull/42720	(@TimurBora, #42720)	script/dom/bluetooth: Move to &mut js::context::JSContext (#42720)
+    crash; safety from ground up
     # Move from `InRealm` to `&mut CurrentRealm` and from `CanGc` to `&mut js::context::JSContext`
     # Testing: `/mach build`, `/mach test-unit` and `/mach test-tidy`
     # Fixes: Part of #42638
@@ -3942,7 +3962,8 @@ https://github.com/servo/servo/pull/42745	(@yezhizhen, #42745)	webdriver: Check 
     # However, for some reason webdriver crate does not check it for this particular case.
     # This PR moves the check to the beginning of dispatch scroll action.
     # Testing: Added a wdspec test.
-https://github.com/servo/servo/pull/42751	(@sagudev, #42751)	script: Pass `&mut JSContext` to more dom methods (#42751)
++https://github.com/servo/servo/pull/42751	(@sagudev, #42751)	script: Pass `&mut JSContext` to more dom methods (#42751)
+    crash; safety from ground up
     # split from https://github.com/servo/servo/pull/42635, some dom methods are also called from other function, which
     # require passing down cx from many more places :(
     # Testing: Just refactor, but should be covered by WPT.
@@ -4235,7 +4256,8 @@ https://github.com/servo/servo/pull/42770	(@yezhizhen, #42770)	servo harness: Re
     # by extension command".
     # [Try](https://github.com/servo/servo/actions/runs/22295662553/job/64492009162).
 >>> 2026-02-25T06:30:54Z
-https://github.com/servo/servo/pull/42805	(@sahinonur2000@hotmail.com, #42805)	script: use `&mut JSContext` inside `History` (#42805)
++https://github.com/servo/servo/pull/42805	(@sahinonur2000@hotmail.com, #42805)	script: use `&mut JSContext` inside `History` (#42805)
+    crash; safety from ground up
     # Replace `crate::script_runtime::JSContext` with `js::context::JSContext` in:
     # - `History::PostMessage`
     # - `History::ReplaceState`
@@ -4388,7 +4410,8 @@ https://github.com/servo/servo/pull/42815	(@shubhamg13, #42815)	tests: Move `use
     # /!\ contains libservo changes! does it affect the embedder?
     # Move `UserContentManager` tests to a separate file as `tests/webview.rs` is getting too cluttered.
     # Testing: Existing Tests Passed
-https://github.com/servo/servo/pull/42809	(@kkoyung, #42809)	script: Pass `&mut JSContext` to method of `Crypto` interface (#42809)
++https://github.com/servo/servo/pull/42809	(@kkoyung, #42809)	script: Pass `&mut JSContext` to method of `Crypto` interface (#42809)
+    crash; safety from ground up
     # This patch changes the method of `Crypto` interface to use the new `&mut JSContext`.
     # The method `crypto.subtle` calls `SubtleCrypto::new` to create an instance of `SubtleCrypto` and the new `&mut
     # JSContext` is passed to `SubtleCrypto::new`. Therefore, the new `reflect_dom_object_with_cx` method is also used in
@@ -4415,7 +4438,8 @@ https://github.com/servo/servo/pull/42782	(@Narfinger, #42782)	base: Replace cal
     # throughout the code base for GenericChannel etc. This replaces it with a simple function and a LazyLock to get
     # more consistency.
     # Testing: Compilation is the test.
-https://github.com/servo/servo/pull/42780	(@sahinonur2000@hotmail.com, #42780)	script: use `&mut JSContext` in `DissimilarOriginWindowMethods` (#42780)
++https://github.com/servo/servo/pull/42780	(@sahinonur2000@hotmail.com, #42780)	script: use `&mut JSContext` in `DissimilarOriginWindowMethods` (#42780)
+    crash; safety from ground up
     # Replace `crate::script_runtime::JSContext` with `js::context::JSContext` in:
     # - `DissimilarOriginWindowMethods::PostMessage`
     # - `DissimilarOriginWindowMethods::SetOpener`
@@ -4610,7 +4634,8 @@ https://github.com/servo/servo/pull/42816	(@Loirooriol, @lukewarlow, @mrobinson,
     # Previously, when a float box had rebuild damage from its own (not from ancestors), we weren't reusing it. Now we
     # will reuse them just like we do for other independent formatting context roots.
     # Testing: Not needed, just an optimization, there should be no behavior change
-https://github.com/servo/servo/pull/42820	(@Narfinger, #42820)	Script: Use &mut JSContext in CheckValidity and ReportValidity Methods (#42820)
++https://github.com/servo/servo/pull/42820	(@Narfinger, #42820)	Script: Use &mut JSContext in CheckValidity and ReportValidity Methods (#42820)
+    crash; safety from ground up
     # This is part of replacing can_gc with the new &JSContext/&mut JSContext method.
     # We modify CheckValidity and ReportValidity in various HTML Elements to use the context instead of CanGc.
     # Testing: Compilation is the test as this is mostly mechanical.
@@ -4630,7 +4655,8 @@ https://github.com/servo/servo/pull/42024	(@shubhamg13, #42024)	tests: Enable la
     # /!\ contains changes to WPT expectations! it probably affects the web platform
     # We have a partial implementation of LargestContentfulPaint , so we should run the tests associated with them.
     # Testing: New tests enabled.
-https://github.com/servo/servo/pull/42635	(@sagudev, #42635)	script: Pass down `&mut JSContext` in servoparser and event loop. (#42635)
++https://github.com/servo/servo/pull/42635	(@sagudev, #42635)	script: Pass down `&mut JSContext` in servoparser and event loop. (#42635)
+    crash; safety from ground up
     # I only wanted to get `&mut JSContext` in microtask chunk and checkpoint, but this in turn needed `&mut JSContext`
     # in servoparser, which then caused need for even more changes in script.
     # I tried to limit the size by putting some `temp_cx` in:
@@ -4777,7 +4803,8 @@ https://github.com/servo/servo/pull/42874	(@atbrakhi, @eerii, #42874)	devtools: 
     # By using getOffsetMetadata now, it is showing the correct line and column for each frame when breakpoint is being set.
     # Testing: all existing tests are passing
     # Fixes: Part of #36027
-https://github.com/servo/servo/pull/42880	(@sahinonur2000@hotmail.com, #42880)	script: use `&mut JSContext` in `MessagePort::PostMessage` (#42880)
++https://github.com/servo/servo/pull/42880	(@sahinonur2000@hotmail.com, #42880)	script: use `&mut JSContext` in `MessagePort::PostMessage` (#42880)
+    crash; safety from ground up
     # Replace crate::script_runtime::JSContext with js::context::JSContext in `MessagePort::PostMessage`
     # Testing: Builds and runs fine
     # Fixes: part of https://github.com/servo/servo/issues/42347
@@ -4982,7 +5009,8 @@ https://github.com/servo/servo/pull/40956	(@dyegoaurelio, #40956)	Fix CSP nonce 
     # I've also created a PR to implement the duplicate attrs flag on html5ever https://github.com/servo/html5ever/pull/695
     # Testing: doesn't fixes the aforementioned wpt test yet.
     # Fixes: part of #36437
-https://github.com/servo/servo/pull/42846	(@Gae24, #42846)	script: Propagate `&mut JSContext` inside `evaluate_js_on_global` (#42846)
++https://github.com/servo/servo/pull/42846	(@Gae24, #42846)	script: Propagate `&mut JSContext` inside `evaluate_js_on_global` (#42846)
+    crash; safety from ground up
     # Since `evaluate_js_on_global` called `enter_realm` and there were already some callee that did it, I've actually
     # passed `&mut CurrentRealm`.
     # Also converted `Window::WebdriverException` to pass `&mut JSContext` inside `javascript_error_info_from_error_info`.
