@@ -940,7 +940,8 @@
     # Replace `crate::script_runtime::JSContext` with `js::context::JSContext` in `Window::PostMessage`'s API.
     # Testing: Builds and runs locally.
     # Part of: https://github.com/servo/servo/issues/42347
-https://github.com/servo/servo/pull/42332	(@lukewarlow, #42332)	layout: Do not consider pseudo-elements widgets for the purposes of replaced content (#42332)
++https://github.com/servo/servo/pull/42332	(@lukewarlow, #42332)	layout: Do not consider pseudo-elements widgets for the purposes of replaced content (#42332)
+    crash layout; [from fixes issues] fix crash and incorrect layout of ‘list-style-image’ and ‘content: <image>’
     ^ commit 5f884cfe29c8c806410b8fcad871f3b6d3cf1dc7
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # When an element has an image content value or list-style-image value they end up duplicating the content of the
@@ -951,7 +952,8 @@ https://github.com/servo/servo/pull/42332	(@lukewarlow, #42332)	layout: Do not c
     # Testing: newly added test crashes on main servo (slightly flakily), but passes consistently now.
     # Fixes: #42329
     # Fixes: #41231
-https://github.com/servo/servo/pull/42288	(@mukilan, #42288)	libservo: Expand the `UserContentManager` API. (#42288)
++https://github.com/servo/servo/pull/42288	(@mukilan, #42288)	libservo: Expand the `UserContentManager` API. (#42288)
+    api; [git show (new!) and cargo-public-api (new!)] add UserContentManager::{add_stylesheet,remove_script,remove_stylesheet}(); change add_script() to take an Rc; maybe enable servoshell --user-stylesheets? (would need to test)
     ^ commit 79ed814ec17d0087e7f2decf8400006f0d2ba881
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains servoshell changes! does it affect the user experience?
@@ -965,18 +967,19 @@ https://github.com/servo/servo/pull/42288	(@mukilan, #42288)	libservo: Expand th
     # investigation is needed here and could be addressed in future patches.
     # Testing: New unit tests are added for the user stylesheet APIs. Existing tests have been updated to test the
     # removal of user scripts.
-https://github.com/servo/servo/pull/42363	(@Gae24, #42363)	chore: move `ClassicScript` related code to a new module (#42363)
+-https://github.com/servo/servo/pull/42363	(@Gae24, #42363)	chore: move `ClassicScript` related code to a new module (#42363)
     ^ commit 3748667775464920f36b76361299a32d4c55185d
     # As discussed on a [Zulip
     # thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Code.20organization/with/571886607), move
     # `ClassicScript` code to a new module.
     # Testing: A successful build is enough
-https://github.com/servo/servo/pull/42358	(@yezhizhen, #42358)	webdriver: Remove last dependency on `RefCell` (#42358)
+-https://github.com/servo/servo/pull/42358	(@yezhizhen, #42358)	webdriver: Remove last dependency on `RefCell` (#42358)
     ^ commit 8dc7b5c06bb29260851245c9f04e6b99876b1fbf
     # `pending_input_event_receivers` is the last thing that uses `RefCell`.
     # This PR improves safety as we rely on static check, and performance slightly too.
     # Testing: Just refactor.
-https://github.com/servo/servo/pull/42350	(@yezhizhen, #42350)	paint: Do not unwrap in `stop_fling_if_needed` to fix pinch zoom panic (#42350)
++https://github.com/servo/servo/pull/42350	(@yezhizhen, #42350)	paint: Do not unwrap in `stop_fling_if_needed` to fix pinch zoom panic (#42350)
+    crash; [from fixes issue] fix crash when using multitouch input
     ^ commit edac9de9c1272001916f92af3b22704bff55222f
     # Touch sequence may have already been removed before stopping potential fling during Paint update.
     # This can happen when we touch up both fingers quickly after the touch move,
@@ -984,11 +987,12 @@ https://github.com/servo/servo/pull/42350	(@yezhizhen, #42350)	paint: Do not unw
     # We should not play with fire and `unwrap`.
     # Testing: Tested with Android, ohos and WebDriver. I can no longer replicate the panic with Pinch Zoom.
     # Fixes: #42320, which is very verbose but provides the entire story.
-https://github.com/servo/servo/pull/42353	(@sagudev, #42353)	CI: Add uv.lock to all sparse-checkouts (#42353)
+-https://github.com/servo/servo/pull/42353	(@sagudev, #42353)	CI: Add uv.lock to all sparse-checkouts (#42353)
     ^ commit ce513d5355dcd375202ca8a824eb58d63bb89ac9
     # Fixes #42352
 >>> 2026-02-07T06:25:23Z
-https://github.com/servo/servo/pull/42339	(@TimvdLippe, #42339)	script: Fix last remaining base element test (#42339)
++https://github.com/servo/servo/pull/42339	(@TimvdLippe, #42339)	script: Fix last remaining base element test (#42339)
+    dom; [git show for new wpt passes] fix <base> not taking effect in some cases
     ^ commit cb374800719e6e1b6ee59b9a41348b15b7fd624b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This was the last failure in this directory. To fix it, I had to spelunk into a couple of places:
