@@ -38,19 +38,19 @@ git -C "$1" log --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,va
 
     # Hopefully helpful hints about the contents of the patch.
     if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^components/servo/'; then
-        printf '    # /!\ %s\n' 'contains libservo changes! does it affect the embedder?'
+        printf '    ^ /!\ %s\n' 'contains libservo changes! does it affect the embedder?'
     fi
     if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^ports/servoshell/'; then
-        printf '    # /!\ %s\n' 'contains servoshell changes! does it affect the user experience?'
+        printf '    ^ /!\ %s\n' 'contains servoshell changes! does it affect the user experience?'
     fi
     if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^tests/wpt/meta/'; then
-        printf '    # /!\ %s\n' 'contains changes to WPT expectations! it probably affects the web platform'
+        printf '    ^ /!\ %s\n' 'contains changes to WPT expectations! it probably affects the web platform'
     fi
     if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^ports/servoshell/prefs[.]rs$'; then
-        printf '    # /!\ %s\n' 'may contain changes to EXPERIMENTAL_PREFS'
+        printf '    ^ /!\ %s\n' 'may contain changes to EXPERIMENTAL_PREFS'
     fi
     if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^components/config/prefs[.]rs$'; then
-        printf '    # /!\ %s\n' 'may contain changes to feature flags'
+        printf '    ^ /!\ %s\n' 'may contain changes to feature flags'
     fi
 
     # Check if `$4` was set, but use `$pulls_json_path` below.
