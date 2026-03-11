@@ -37,6 +37,7 @@ git -C "$1" log --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,va
     printf '#%s)\t%s\n' "$pull_number" "$subject"
 
     # Hopefully helpful hints about the contents of the patch.
+    printf '    ^ commit %s\n' "$hash"
     if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^components/servo/'; then
         printf '    ^ /!\ %s\n' 'contains libservo changes! does it affect the embedder?'
     fi
