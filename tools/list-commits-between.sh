@@ -47,6 +47,9 @@ git -C "$1" log --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,va
     if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^tests/wpt/meta/'; then
         printf '    ^ /!\ %s\n' 'contains changes to WPT expectations! it probably affects the web platform'
     fi
+    if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '[.]webidl$'; then
+        printf '    ^ /!\ %s\n' 'contains WebIDL changes! did we ship a new API?'
+    fi
     if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^ports/servoshell/prefs[.]rs$'; then
         printf '    ^ /!\ %s\n' 'may contain changes to EXPERIMENTAL_PREFS'
     fi
