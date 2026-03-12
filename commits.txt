@@ -1003,12 +1003,13 @@
     # 3. We weren't sanitizing the value in case it contains an ASCII tab or newline + U+003C. This is true for both
     # the form target as well as for other link elements.
     # All in all, added a lot more specification text to figure out what was going on.
-https://github.com/servo/servo/pull/42334	(@Narfinger, #42334)	ohos ci: Remove HOS smoketest (#42334)
+-https://github.com/servo/servo/pull/42334	(@Narfinger, #42334)	ohos ci: Remove HOS smoketest (#42334)
     ^ commit c6fbaf33e2bdb9b7c7bcf2a03486f0c6b8ebf308
     # Smoketest is subsumed by scenario test and can be removed.
     # Signed-off-by: Narfinger
     # Testing: *Describe how this pull request is tested or why it doesn't require tests*
-https://github.com/servo/servo/pull/42369	(@mrobinson, #42369)	deps: Merge the servo/media repository (#42369)
+-https://github.com/servo/servo/pull/42369	(@mrobinson, #42369)	deps: Merge the servo/media repository (#42369)
+    ; [opened to check why wpt expectations changed]
     ^ commit eeb31a3cec873ea671f2965735a6c158867c4a33
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -1040,12 +1041,14 @@ https://github.com/servo/servo/pull/42369	(@mrobinson, #42369)	deps: Merge the s
     #    - `siple_webrtc.rs`: Depended on `webrtc` library:
     # Testing: This is covered by existing tests. In addition, the job which runs
     # the media examples is added to the unit test workflow.
-https://github.com/servo/servo/pull/42389	(@jdm, #42389)	servo: Remove `Servo::constellation_sender` (#42389)
++https://github.com/servo/servo/pull/42389	(@jdm, #42389)	servo: Remove `Servo::constellation_sender` (#42389)
+    api; removed Servo::constellation_sender() from public API (should never have been public)
     ^ commit 8d54bf0a4b81daa798833c967797ccf9756b6a64
     ^ /!\ contains libservo changes! does it affect the embedder?
     # This shouldn't be public, and does not appear to be used anywhere.
     # Testing: Build-only change.
-https://github.com/servo/servo/pull/42388	(@rayguo17, #42388)	script_bindings: add generic type to webidl record typedefs containing dom interfaces (#42388)
+-https://github.com/servo/servo/pull/42388	(@rayguo17, #42388)	script_bindings: add generic type to webidl record typedefs containing dom interfaces (#42388)
+    ; [opened fixes issue]
     ^ commit 0fa52e7791fb646ba2b377f1e09d380c89c360e8
     # when generating rust bindings for webidl typedef, the `` generic Type would not be added for record
     # because `containsDomInterface` does not take record into account. This change add the is_Record check in
@@ -1053,23 +1056,24 @@ https://github.com/servo/servo/pull/42388	(@rayguo17, #42388)	script_bindings: a
     # Testing: Manually tested with https://github.com/servo/servo/issues/42362, and building from scratch with `./mach
     # build` is successful.
     # Fixes: https://github.com/servo/servo/issues/42362
-https://github.com/servo/servo/pull/42409	(@shubhamg13, #42409)	script: Remove `Worker` scope from `PerformancePaintTiming` (#42409)
++https://github.com/servo/servo/pull/42409	(@shubhamg13, #42409)	script: Remove `Worker` scope from `PerformancePaintTiming` (#42409)
+    dom; [git show] PerformancePaintTiming is no longer exposed to Worker globals
     ^ commit 2ca78080832a31917caf4d373066b95668b6ca4c
     # This will align `PerformancePaintTiming` interface according to `W3C` specifications.
     # Specifiactions: [PerformancePaintTiming](https://w3c.github.io/paint-timing/#sec-PerformancePaintTiming)
     # Testing: `_mozilla/mozilla/interfaces.worker.html`
-https://github.com/servo/servo/pull/42406	(@simonwuelker, #42406)	script: Call ElementStylesheetLoader::load_with_element directly (#42406)
+-https://github.com/servo/servo/pull/42406	(@simonwuelker, #42406)	script: Call ElementStylesheetLoader::load_with_element directly (#42406)
     ^ commit b6be493876f0c2e02dfc82281ffef9a5dbd3d391
     # When a `` element loads a stylesheet then it calls `ElementStylesheetLoader::new`, followed immediately by
     # calling `load` on the new loader. This is the only place where these functions are used, so we can coalesce them
     # together and avoid an unreachable assertion in the process.
     # This should have no impact on the end user, it's just a cleanup.
     # Testing: Regressions should be covered by existing tests
-https://github.com/servo/servo/pull/42407	(@Narfinger, #42407)	Revert "CI: OHOS: Better test for hdc device connected (#42365)" (#42407)
+-https://github.com/servo/servo/pull/42407	(@Narfinger, #42407)	Revert "CI: OHOS: Better test for hdc device connected (#42365)" (#42407)
     ^ commit b48612a948c43694df8640c2981af5409a0d7c2e
     # This reverts commit 071f064e2e97b4b4c41e2683db1298c75fe7291f.
     # Seems the devices are more finicky in CI.
-https://github.com/servo/servo/pull/42405	(@yezhizhen, #42405)	wpt: Fix syntax error in `pointerevent_touch-propagates-when-target-is-video_touch.html` (#42405)
+-https://github.com/servo/servo/pull/42405	(@yezhizhen, #42405)	wpt: Fix syntax error in `pointerevent_touch-propagates-when-target-is-video_touch.html` (#42405)
     ^ commit 5a5d71d67ea1ff4ed5351a5a376740492d745630
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # The syntax is wrong. We cannot pass an Element as duration. Only Firefox [was passing
@@ -1078,7 +1082,8 @@ https://github.com/servo/servo/pull/42405	(@yezhizhen, #42405)	wpt: Fix syntax e
     # which is a bug of geckodriver:
     # Testing: Updated expectation of existing tests.
     # This blocks https://github.com/servo/servo/pull/42398, https://github.com/servo/servo/pull/42387.
-https://github.com/servo/servo/pull/42399	(@mrobinson, #42399)	layout: Properly count characters when segmenting IFC text (#42399)
++https://github.com/servo/servo/pull/42399	(@mrobinson, #42399)	layout: Properly count characters when segmenting IFC text (#42399)
+    editing; [from fixes issue] fix selection and caret bug when input fields have multiple text runs (e.g. mixed scripts)
     ^ commit edbce7e854e49b2b25874cd863279e22a738859d
     # There was a bug where characters were not properly counted when
     # segmeting IFC text. Immediately incrementing the
@@ -1092,35 +1097,38 @@ https://github.com/servo/servo/pull/42399	(@mrobinson, #42399)	layout: Properly 
     # is used. Since this is mainly about appearance and is very specific to our
     # implementation the test is Servo-specific.
     # Fixes: #42354.
-https://github.com/servo/servo/pull/42366	(@Narfinger, @mrobinson, #42366)	script: Add check for IntersectionObserver to not connect to the same document multiple times. (#42366)
++https://github.com/servo/servo/pull/42366	(@Narfinger, @mrobinson, #42366)	script: Add check for IntersectionObserver to not connect to the same document multiple times. (#42366)
+    perf; minor optimisation
     ^ commit 4e85b9946f18a90c39c48efe4589faf915dc939f
     # Previous IntersectionObserver had only connect_to_owner_unchecked method. We replace this with a checked method
     # to not add the same IntersectionObserver to the same document multiple times.
     # This should improve performance as the same IntersectionObserver was tested multiple times.
     # Signed-off-by: Narfinger
     # Testing: Compilation and println statements to see if we do not add us again to the document.
-https://github.com/servo/servo/pull/42375	(@24bsm032@iiitdmj.ac.in, #42375)	libservo: Fix dead code warning and fix two typos in unit tests (#42375)
+-https://github.com/servo/servo/pull/42375	(@24bsm032@iiitdmj.ac.in, #42375)	libservo: Fix dead code warning and fix two typos in unit tests (#42375)
     ^ commit 4c2327e2256cfa5456ffed06e088c4f12f7ae318
     ^ /!\ contains libservo changes! does it affect the embedder?
     # This PR addresses a dead code warning removed during test builds by ensuring the servo test helper constructor is
     # exercised. None of the functional behaviors are changed and this only improves test clarity and keeps the compiler
     # output warning-free.
     # Fixes: #42364
-https://github.com/servo/servo/pull/42365	(@Narfinger, #42365)	CI: OHOS: Better test for hdc device connected (#42365)
+-https://github.com/servo/servo/pull/42365	(@Narfinger, #42365)	CI: OHOS: Better test for hdc device connected (#42365)
     ^ commit 071f064e2e97b4b4c41e2683db1298c75fe7291f
     # Use a different method to test for phone being connected to the CI.
     # Fixes: https://github.com/servo/servo/issues/42335
-https://github.com/servo/servo/pull/42390	(@stevennovaryo, #42390)	script: Check whether window is top level before looking for it in the `ScriptThread` (#42390)
++https://github.com/servo/servo/pull/42390	(@stevennovaryo, #42390)	script: Check whether window is top level before looking for it in the `ScriptThread` (#42390)
+    perf; [git show] minor optimisation for IntersectionObserver
     ^ commit 936aaf1ec5c1156cfeff61cad0ef65b1f7037cb6
     # Instead of immediately looking for the top-level browsing context's `Document` in the `ScriptThread`, check whether
     # `Window` is top-level beforehand. This is a small optimization.
     # Testing: Existing WPTs (no behavior changes)
-https://github.com/servo/servo/pull/42327	(@webbeef, #42327)	layout: get rid of some collect() calls (#42327)
++https://github.com/servo/servo/pull/42327	(@webbeef, #42327)	layout: get rid of some collect() calls (#42327)
+    perf; [git show and opened] minor optimisations in layout queries
     ^ commit 86403fa4e5ac7c3a11889eac9a6fa574227f0955
     # Profiling a speedometer run showed significant time spent in some layout function in vector allocations. The main
     # change is to switch the result of `query_box_areas()` from a Vec to and iterator.
     # Testing: refactoring with no expected test changes
-https://github.com/servo/servo/pull/42392	(@yezhizhen, #42392)	deny: Skip `GHSA-r6v5-fh4h-64xc` to unblock CI (#42392)
+-https://github.com/servo/servo/pull/42392	(@yezhizhen, #42392)	deny: Skip `GHSA-r6v5-fh4h-64xc` to unblock CI (#42392)
     ^ commit 10209cc18382b1739826fafdc217775f1c1a2859
     # Unblock the CI.
     # We cannot upgrade time right now due to MSRV.
@@ -1160,7 +1168,8 @@ https://github.com/servo/servo/pull/42392	(@yezhizhen, #42392)	deny: Skip `GHSA-
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42025	(@shubhamg13, #42025)	tests: Enable paint-timing tests (#42025)
++https://github.com/servo/servo/pull/42025	(@shubhamg13, #42025)	tests: Enable paint-timing tests (#42025)
+    test; [git show; wpt.fyi; wpt.live] PerformancePaintTiming and LargestContentfulPaint tests now enabled
     ^ commit 80601ce8e6798d7ae91c5e2840a41d993edf3269
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # We have a implementation of PaintTiming , so we should run the tests associated with them.
@@ -1171,7 +1180,7 @@ https://github.com/servo/servo/pull/42025	(@shubhamg13, #42025)	tests: Enable pa
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 08-02-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/42398	(@yezhizhen, #42398)	testdriver harness: Allow duration 0 for actions/tick (#42398)
+-https://github.com/servo/servo/pull/42398	(@yezhizhen, #42398)	testdriver harness: Allow duration 0 for actions/tick (#42398)
     ^ commit ccd271c8a53bd795ccfd53a5d338ad7a155f9aea
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Previously, even if you explicitly set duration 0, it still ends up with `None`.
@@ -1184,7 +1193,8 @@ https://github.com/servo/servo/pull/42398	(@yezhizhen, #42398)	testdriver harnes
     # Testing: There is no existing testdriver tests that use duration 0.
     # Fixes: https://github.com/web-platform-tests/wpt/issues/57606
     # Found in: https://github.com/servo/servo/pull/42387#issuecomment-3859501808
-https://github.com/servo/servo/pull/42430	(@Loirooriol, #42430)	wpt: Unskip most `css-inline` tests (#42430)
++https://github.com/servo/servo/pull/42430	(@Loirooriol, #42430)	wpt: Unskip most `css-inline` tests (#42430)
+    test; [git show] enable all `css-inline` tests other than `initial-letter` and `text-box-trim`, rather than only the `baseline-source` tests
     ^ commit 9ac519da73371b56631d99d992ce054afdc3c506
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This is in preparation of #42361, which will add support for `baseline-shift`, so we shouldn't skip these tests.
