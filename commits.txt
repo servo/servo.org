@@ -1242,24 +1242,26 @@
     # update interface binding.
     # Testing: Builds and runs locally.
     # Part of: https://github.com/servo/servo/issues/42347
-https://github.com/servo/servo/pull/42427	(@sebsebmc, #42427)	script: cookiestore: Normalize cookie name and value in Get and Set (#42427)
++https://github.com/servo/servo/pull/42427	(@sebsebmc, #42427)	script: cookiestore: Normalize cookie name and value in Get and Set (#42427)
+    dom; [git show] get() and getAll() on CookieStore now normalises cookie names and values by trimming whitespace
     ^ commit c330c7c436e43bdecc6ffa41e582a30a7fea2e13
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Trims leading and trailing spaces and tabs for names and values in Get/GetAll/Set. The specification does this
     # in the query/set cookie methods but those functions are split across the script, resource thread, and cookie
     # storage. Instead I'm normalize the values at the API entry points so we have the normalized values everywhere.
     # Testing: Cookiestore WPT tests cover this
-https://github.com/servo/servo/pull/42429	(@sebsebmc, #42429)	mach: use --no-verify for mach try push command (#42429)
+-https://github.com/servo/servo/pull/42429	(@sebsebmc, #42429)	mach: use --no-verify for mach try push command (#42429)
     ^ commit ceab4b60946c58ba76acf97d27bdf7d6fe11c964
     # Skip push hooks for try command. This speeds up try for me, which normally means waiting for clippy a second
     # time. The commit step is already using `--no-verify`.
     # Testing: tested this change locally and it works
-https://github.com/servo/servo/pull/42425	(@webbeef, #42425)	websocket: resolve relative urls in constructor (#42425)
++https://github.com/servo/servo/pull/42425	(@webbeef, #42425)	websocket: resolve relative urls in constructor (#42425)
+    dom; [git show] new WebSocket() now resolves relative urls
     ^ commit 5b54abeac703208ac1ae881f7282ed4963649b7a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement steps 1. and 2. of the websocket constructor to resolve the url against the current settings API base URL.
     # Testing: Some WPT tests are now passing
-https://github.com/servo/servo/pull/42422	(@kkoyung, #42422)	script: Combine import key operations of RSA algorithms (#42422)
+-https://github.com/servo/servo/pull/42422	(@kkoyung, #42422)	script: Combine import key operations of RSA algorithms (#42422)
     ^ commit 05d1bb60e178dcb4605dade2fbf789f26d9bd720
     # The import key operations of
     # - RSASSA-PKCS1-v1_5 (`rsassa_pkcs1_v1_5_operation::import_key`)
@@ -1269,20 +1271,23 @@ https://github.com/servo/servo/pull/42422	(@kkoyung, #42422)	script: Combine imp
     # shared among them.
     # The enum variant `RsaAlgorithm::RsaSsaPkcs1v15` is also renamed as `RsaAlgorithm::RsassaPkcs1v1_5` for clarity.
     # Testing: Refactoring. Existing tests suffice.
-https://github.com/servo/servo/pull/42254	(@TimvdLippe, #42254)	script: Start implementation of shared attribute processing for iframes (#42254)
++https://github.com/servo/servo/pull/42254	(@TimvdLippe, #42254)	script: Start implementation of shared attribute processing for iframes (#42254)
+    dom; [from issue] partially fix the firing of load events on <iframe> and its contentWindow, which has long been incorrect in servo
     ^ commit cc0e98d3a93c8ef4ea8a9c0da504bf4c9da1fe90
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Start with implementing the new algorithms per the spec. This fixes the case where the load event should be fired,
     # but only if a src exists and it is about:blank and it is connected for the very first time.
     # Part of #31973
-https://github.com/servo/servo/pull/42418	(@sebsebmc, #42418)	Fix cookiestore defaults propagation (#42418)
++https://github.com/servo/servo/pull/42418	(@sebsebmc, #42418)	Fix cookiestore defaults propagation (#42418)
+    dom; [git show + affected wpt tests + reading impl + webdriver spec §14.2 Get Named Cookie + rfc6265 §5.4] fix CookieStore get() and getAll() to return correct attributes, and fix handling of Expires and Max-Age in ‘Set-Cookie’
     ^ commit 639fccd03f4185c62c7584af9f9068c2dc5fd92e
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Also fixes propagating expiry clamping to underlying cookie object. This matters when attempting to inspect expiry
     # time from a retrieved cookie.
     # According to the WPT tests, setting max-age in a cookie string is supposed to be visible in the retrieved expiry.
     # Testing: cookiestore WPT tests cover this behavior
-https://github.com/servo/servo/pull/42396	(@shubhamg13, #42396)	script: Expose `toJSON` on `PerformancePaintTiming` (#42396)
++https://github.com/servo/servo/pull/42396	(@shubhamg13, #42396)	script: Expose `toJSON` on `PerformancePaintTiming` (#42396)
+    dom; [git show + mdn + paint timing spec + webidl spec (to understand what [Default] means)] impl toJSON() on PerformancePaintTiming
     ^ commit 60fc5c3e5205673baf49cb4b93ada9ccb5274837
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -1291,7 +1296,7 @@ https://github.com/servo/servo/pull/42396	(@shubhamg13, #42396)	script: Expose `
     # Testing: `components/servo/tests/performance_paint_timing.rs`
     # Fixes: Updated expectations for Existing WPT Tests.
 >>> 2026-02-09T06:34:46Z
-https://github.com/servo/servo/pull/42404	(@Narfinger, #42404)	OHOS: Update openharmony versions to api lvl 21 (#42404)
+-https://github.com/servo/servo/pull/42404	(@Narfinger, #42404)	OHOS: Update openharmony versions to api lvl 21 (#42404)
     ^ commit 7488c127db4609584f113dfdeb451a81b6d99f79
     # This updates the Openharmony required version to API lvl 21 (6.0.0.1 OpenHarmony and 6.0.1 HarmonyOS).
     # We need API level 19+ for https://github.com/servo/servo/pull/41738, however an API level 19 SDK was never released
@@ -1423,7 +1428,8 @@ https://github.com/servo/servo/pull/42404	(@Narfinger, #42404)	OHOS: Update open
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42387	(@yezhizhen, #42387)	paint: Unify scrolling/pinch zoom behaviour across platforms (#42387)
++https://github.com/servo/servo/pull/42387	(@yezhizhen, #42387)	paint: Unify scrolling/pinch zoom behaviour across platforms (#42387)
+    webdriver; [git show] fix handling of devicePixelRatio≠1 in webdriver pointer actions
     ^ commit c5b391390e72509d1bb2bd3f04dfa556af64caa5
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # There has been a weird discrepancy between headed/headless test automation,
@@ -1436,13 +1442,13 @@ https://github.com/servo/servo/pull/42387	(@yezhizhen, #42387)	paint: Unify scro
     # This is critical for test automation which always relies on CSS pixel.
     # Testing: Added which ensures pinch zoom does happen, and there is no crash for #42320.
     # Fixes: #42386
-https://github.com/servo/servo/pull/42448	(@Amin-Missaoui, #42448)	script: remove is_modal and replace with ElementState::MODAL instead (#42426) (#42448)
+-https://github.com/servo/servo/pull/42448	(@Amin-Missaoui, #42448)	script: remove is_modal and replace with ElementState::MODAL instead (#42426) (#42448)
     ^ commit ea3ae4be1b25e98d49a5fc0bb76eb4230e6b09fe
     # Removed `is_modal` and replaced with `ElementState::MODAL` inside all conditional checks as per suggestion by
     # [@Loirooriol](https://github.com/servo/servo/issues/42426).
     # Testing: Not needed, no behavior change
     # Fixes: #42426
-https://github.com/servo/servo/pull/42410	(@Loirooriol, #42410)	Enable `layout.css.attr.enabled` pref for `css-values` tests (#42410)
+-https://github.com/servo/servo/pull/42410	(@Loirooriol, #42410)	Enable `layout.css.attr.enabled` pref for `css-values` tests (#42410)
     ^ commit e0212b38e8033bc8ff310ab2118f3a9d5000e492
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ may contain changes to feature flags
@@ -1653,12 +1659,13 @@ https://github.com/servo/servo/pull/42435	(@sebsebmc, #42435)	script: cookiestor
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implements the `set_a_cookie` behavior from the cookiestore spec.
     # Testing: cookiestore WPT tests cover this
-https://github.com/servo/servo/pull/42483	(@Narfinger, #42483)	base: This cleans up some old unneeded ignore annotation for MallocSizeOf and updates some descriptions (#42483)
+-https://github.com/servo/servo/pull/42483	(@Narfinger, #42483)	base: This cleans up some old unneeded ignore annotation for MallocSizeOf and updates some descriptions (#42483)
     ^ commit c324141fb490ea1670641fda7ccb95ec07a996fa
     # We implemented many more MallocSizeOf tests (even if some such as channels are zero).
     # Meaning we can not ignore more of it making the code cleaner.
     # Testing: Compilation is the test.
-https://github.com/servo/servo/pull/40324	(@arihant2math, #40324)	Add servo:config page (#40324)
++https://github.com/servo/servo/pull/40324	(@arihant2math, #40324)	Add servo:config page (#40324)
+    servoshell; new servo:config page for setting any and all prefs like firefox about:config (not yet persistent; not all prefs support effective runtime changes)
     ^ commit 232d434701ed26bc6228d8e2f3e713565b444154
     ^ /!\ contains servoshell changes! does it affect the user experience?
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -1670,7 +1677,7 @@ https://github.com/servo/servo/pull/40324	(@arihant2math, #40324)	Add servo:conf
     # is more flexible.
     # - Make more of these config options work on the fly.
     # - Allow for reverting config options.
-https://github.com/servo/servo/pull/42161	(@Narfinger, #42161)	deps: Update ipc-channel (#42161)
+-https://github.com/servo/servo/pull/42161	(@Narfinger, #42161)	deps: Update ipc-channel (#42161)
     ^ commit 48581c8de77e541a1787977667679babc5068b4c
     ^ /!\ contains libservo changes! does it affect the embedder?
     # This updates ipc-channel.
@@ -1678,20 +1685,20 @@ https://github.com/servo/servo/pull/42161	(@Narfinger, #42161)	deps: Update ipc-
     # This currently uses git revisions temporarily.
     # Signed-off-by: Narfinger
     # Testing: Full try run here: https://github.com/Narfinger/servo/actions/runs/21471578693
-https://github.com/servo/servo/pull/42164	(@janeoa, #42164)	ohos CI: Update hitrace-bench to 0.10.0 to add LCP and FCP metrics (#42164)
+-https://github.com/servo/servo/pull/42164	(@janeoa, #42164)	ohos CI: Update hitrace-bench to 0.10.0 to add LCP and FCP metrics (#42164)
     ^ commit 1a406e4b7122d845f9870bf0cf81ea8c2e2a83e0
     # Update ohos.yml hitrace-bench and runs.json to 0.10.0
     # Testing: This should be testing using CI
-https://github.com/servo/servo/pull/42475	(@mrego, #42475)	Fix comment in the nightly workflow (#42475)
+-https://github.com/servo/servo/pull/42475	(@mrego, #42475)	Fix comment in the nightly workflow (#42475)
     ^ commit 2fc31b7ff852cbb51467eb2a68bf305e5b9d2d9a
     # Testing: No needed just fixing a comment.
-https://github.com/servo/servo/pull/42473	(@pralkarz, #42473)	mach: run `fmt` with the root dir as cwd (#42473)
+-https://github.com/servo/servo/pull/42473	(@pralkarz, #42473)	mach: run `fmt` with the root dir as cwd (#42473)
     ^ commit b1012479fd8700b567f67fccf49c5a7346165d85
     # `contextdir.chdir` is not thread-safe, but the formatting runs synchronously in a single thread, so it's fine.
     # Testing: Made some changes to various `.rs`, `.py`, and `.toml` files, and ran `../mach fmt` from a few different
     # subdirectories to ensure it picks up the files to reformat.
     # Fixes: #42472
-https://github.com/servo/servo/pull/42449	(@pralkarz, #42449)	IndexedDB: correct the expected result for a test set (#42449)
+-https://github.com/servo/servo/pull/42449	(@pralkarz, #42449)	IndexedDB: correct the expected result for a test set (#42449)
     ^ commit fbdb62ac9376aafd4c81e07a2fbebeaac6f45318
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # After the changes from #42443, there are no longer any unhandled errors in
@@ -1699,7 +1706,8 @@ https://github.com/servo/servo/pull/42449	(@pralkarz, #42449)	IndexedDB: correct
     # Also remove the now-passing test labels for consistency with other `.ini` files.
     # Testing: No unexpected results in `idbobjectstore_createIndex.any.worker.html`, the tests now run as expected.
     # Fixes: #42445
-https://github.com/servo/servo/pull/42306	(@atbrakhi, @eerii, #42306)	devtools: Implement debugger `Eval` event (#42306)
++https://github.com/servo/servo/pull/42306	(@atbrakhi, @eerii, #42306)	devtools: Implement debugger `Eval` event (#42306)
+    devtools; [asked in #42306] evaluateJS and evaluateJSAsync on console actors now uses our new spidermonkey debugger integration under the hood
     ^ commit d6097d1967cd0c24413d5e665afcd2748f492b90
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # Replace the `EvaluateJS` function to use `debugger.js` `Eval` event
@@ -1710,12 +1718,13 @@ https://github.com/servo/servo/pull/42306	(@atbrakhi, @eerii, #42306)	devtools: 
     # [eval](https://firefox-source-docs.mozilla.org/js/Debugger/Debugger.Frame.html#eval-code-options).
     # Testing: No new tests added yet, Old tests are not impacted by this change.
     # Fixes: Part of https://github.com/servo/servo/issues/36027
-https://github.com/servo/servo/pull/41738	(@janeoa, #41738)	servoshell: Support formatting key,value pairs of events via hitrace on ohos (#41738)
+-https://github.com/servo/servo/pull/41738	(@janeoa, #41738)	servoshell: Support formatting key,value pairs of events via hitrace on ohos (#41738)
     ^ commit 7cf131106ebdfce0bb288ce08c4e503bbad557a8
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # `start_trace_ex` includes not only name, but fields and values of the trace
     # Testing: I've passed LargestContentfulPaint pref and got it in the hitrace.
-https://github.com/servo/servo/pull/42361	(@Loirooriol, #42361)	Upgrade Stylo to 2026-02-02 (#42361)
++https://github.com/servo/servo/pull/42361	(@Loirooriol, #42361)	Upgrade Stylo to 2026-02-02 (#42361)
+    style; [git show] impl ‘alignment-baseline’ and ‘baseline-shift’, plus the new shorthand format for ‘vertical-align’
     ^ commit 2a3f23c78d1c48e7d880f5b5656a0590108ce059
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This continues #41916
@@ -1731,7 +1740,8 @@ https://github.com/servo/servo/pull/42361	(@Loirooriol, #42361)	Upgrade Stylo to
     # a shorthand of them. This also introduces `vertical-align: center`.
     # Testing: Various tests improve. Some internal tests are updated because they were wrong. And some fail because we
     # don't support presentation attributes on SVG elements.
-https://github.com/servo/servo/pull/42470	(@mrobinson, #42470)	servoshell: Foward `WindowEvent::Focused` events to egui (#42470)
++https://github.com/servo/servo/pull/42470	(@mrobinson, #42470)	servoshell: Foward `WindowEvent::Focused` events to egui (#42470)
+    servoshell; [from fixes issue] fix regression where caret is not visible in the location bar
     ^ commit 489c0f015934e96c45bafde7ddd0079c104f5371
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # When doing event handling on desktop servoshell, ensure that
@@ -1739,7 +1749,7 @@ https://github.com/servo/servo/pull/42470	(@mrobinson, #42470)	servoshell: Fowar
     # egui knows to show the text cursor in the URL bar input field.
     # Testing: We currently do not have a way to test visual behavior at this level of servoshell.
     # Fixes: #42091.
-https://github.com/servo/servo/pull/42468	(@yezhizhen, #42468)	paint: Track `TouchId` in `PendingTouchInputEvent` (#42468)
+-https://github.com/servo/servo/pull/42468	(@yezhizhen, #42468)	paint: Track `TouchId` in `PendingTouchInputEvent` (#42468)
     ^ commit 03d8d167483b13e351f879e2723f409c27a9740e
     # As you can tell from branch name, the initial goal is to add multi-touch support for touchmove.
     # But things get too messy, so I decide to split into two PRs.
@@ -1750,7 +1760,7 @@ https://github.com/servo/servo/pull/42468	(@yezhizhen, #42468)	paint: Track `Tou
     # Testing: No behaviour change.
     # Part of #41923
 >>> 2026-02-11T06:36:13Z
-https://github.com/servo/servo/pull/42525	(@shubhamg13, #42525)	Update expected results for paint-timing tests (#42525)
+-https://github.com/servo/servo/pull/42525	(@shubhamg13, #42525)	Update expected results for paint-timing tests (#42525)
     ^ commit b76354f058b38af89ee8e53e0a30ffbe3ae62f87
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Updates the WPT expectations for #42411.
@@ -1787,7 +1797,7 @@ https://github.com/servo/servo/pull/42525	(@shubhamg13, #42525)	Update expected 
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42482	(@Narfinger, #42482)	CI: OHOS Use mitmproxy in record and replay mode (#42482)
+-https://github.com/servo/servo/pull/42482	(@Narfinger, #42482)	CI: OHOS Use mitmproxy in record and replay mode (#42482)
     ^ commit 67521a9b0894d8bc1ca38173722d1479b4cfddf8
     # We now use a replay recorded via mitmproxy to run the benchmarks.
     # 1. Check the GitHub cache for a mitmproxy dump.
@@ -1800,7 +1810,8 @@ https://github.com/servo/servo/pull/42482	(@Narfinger, #42482)	CI: OHOS Use mitm
     # The noisy output of mitmdump actually shows that it is answering the queries from replay for all scenario tests.
     # https://github.com/Narfinger/servo/actions/runs/21831381306/job/62991977638 shows how before the scenario tests
     # the cache is created and stored.
-https://github.com/servo/servo/pull/42510	(@simonwuelker, #42510)	script: Fix check whether object is an array in console.log (#42510)
++https://github.com/servo/servo/pull/42510	(@simonwuelker, #42510)	script: Fix check whether object is an array in console.log (#42510)
+    devtools; console.log() with objects now shows a preview (2/2)
     ^ commit a0be22dca7553c5f0286b506015dbbb3ed4b7ee3
     # In https://github.com/servo/servo/pull/42296 i made a mistake during the final changes, accidentally inverting a
     # condition. This was not caught by CI because we don't run devtools tests in CI.
@@ -1878,7 +1889,8 @@ https://github.com/servo/servo/pull/42510	(@simonwuelker, #42510)	script: Fix ch
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42484	(@arihant2math, #42484)	webstorage: Improve storage memory size reporting (#42484)
++https://github.com/servo/servo/pull/42484	(@arihant2math, #42484)	webstorage: Improve storage memory size reporting (#42484)
+    perf; [TODO check if storage is in about:memory] prepare/improve the reporting of storage memory usage in about:memory
     ^ commit 086863398d49ae7f1504dc64ab992ad9e8d0e11c
     # `local_storage_origins` is ~2-3kb of memory, which is probably large enough to be included in the report, given
     # that it likely can grow much more. A much bigger memory user is sqlite3, but I'm still working on finding a way
@@ -1889,7 +1901,8 @@ https://github.com/servo/servo/pull/42488	(@webbeef, #42488)	media: enable defau
     # This makes it possible to actually play media when loaded as top level content and not already in a video or
     # audio element.
     # Testing: manual testing with `./mach run https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm`
-https://github.com/servo/servo/pull/42478	(@Narfinger, #42478)	devtools: Implement MallocSizeOf for DevtoolsInstance (#42478)
++https://github.com/servo/servo/pull/42478	(@Narfinger, #42478)	devtools: Implement MallocSizeOf for DevtoolsInstance (#42478)
+    perf; [from fixes issue] devtools server in about:memory (1/2)
     ^ commit 870576f948ed12952ddc3b60448dc025e8c2f9e1
     # This implements MallocSizeOf for DevtoolsInstance. Major changes:
     # - Newtype for ActorRegistry because AtomicRefCell>> did not like mallocsizeof (even with trait bound on Actor)
@@ -1899,20 +1912,22 @@ https://github.com/servo/servo/pull/42478	(@Narfinger, #42478)	devtools: Impleme
     # Signed-off-by: Narfinger
     # Testing: Compilation is the test.
     # Fixes: Part of addressing https://github.com/servo/servo/issues/42453
-https://github.com/servo/servo/pull/42504	(@Narfinger, #42504)	media: Implement MallocSizeOf for most of the types used (#42504)
++https://github.com/servo/servo/pull/42504	(@Narfinger, #42504)	media: Implement MallocSizeOf for most of the types used (#42504)
+    perf; prepare to add media memory usage to about:memory
     ^ commit 40c780f98bf29940aae37eb0a1c472d202f1d1b8
     # Implement MallocSizeOf for most of former servo media crate.
     # Most of this should be uncontroversal as it is just adding derives.
     # Of note are implementation of std::sync::mpsc::Sender with currently size_of=0 and an ignored Box.
     # Signed-off-by: Narfinger
     # Testing: Compilation is the test.
-https://github.com/servo/servo/pull/42511	(@willypuzzle, #42511)	script: Move GPUCommandBuffer drop logic to separate struct (#42511)
+-https://github.com/servo/servo/pull/42511	(@willypuzzle, #42511)	script: Move GPUCommandBuffer drop logic to separate struct (#42511)
     ^ commit ddb31c180f39262ab5be19322f81b8265fcf7759
     # Moves the `Drop` implementation for `GPUCommandBuffer` to a separate struct, `DroppableGPUCommandBuffer`. Updates
     # bindings config to remove `allowDropImpl` which is no longer needed.
     # Testing: No tests added
     # Fixes: Partially #26488
-https://github.com/servo/servo/pull/42333	(@alice, @delan, #42333)	config: Add a pref for the experimental accessibility code (#42333)
++https://github.com/servo/servo/pull/42333	(@alice, @delan, #42333)	config: Add a pref for the experimental accessibility code (#42333)
+    a11y; new pref accessibility_enabled
     ^ commit 60efb42dc61a0ae5f2f511eae2deebc966a7856d
     ^ /!\ may contain changes to feature flags
     # This adds a pref which will be used to enable the experimental accessibility tree.
@@ -1938,12 +1953,13 @@ https://github.com/servo/servo/pull/42487	(@mrobinson, #42487)	script: Close exi
     # embedders. This fixes an issue where egui draws scary runtime errors all
     # over servoshell when opening multiple context menus.
     # Testing: This changes adds a new WebView API test.
-https://github.com/servo/servo/pull/42296	(@simonwuelker, #42296)	devtools: Support sending js objects to firefox devtools from console.log (#42296)
++https://github.com/servo/servo/pull/42296	(@simonwuelker, #42296)	devtools: Support sending js objects to firefox devtools from console.log (#42296)
+    devtools; [opened (has screenshot!)] console.log() with objects now shows a preview (1/2)
     ^ commit 60c8b8fad5ef8f513651b9be6e670999736a9a36
     # This allows us to `console.log` objects from JS and have a preview of them appear in the console.
     # Interacting with said preview doesn't work yet, because the devtools object actor is a stub.
     # Testing: This change adds a test
-https://github.com/servo/servo/pull/42340	(@npiesco, #42340)	fix(build): Fix Windows build hang in Python detection (#42340)
+-https://github.com/servo/servo/pull/42340	(@npiesco, #42340)	fix(build): Fix Windows build hang in Python detection (#42340)
     ^ commit 70eb04d8ad3bcf305e15cc799dfdc18ad7e6b8ae
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Build hangs on Windows because running `python` with no arguments in non-TTY context waits for stdin indefinitely.
@@ -1952,12 +1968,12 @@ https://github.com/servo/servo/pull/42340	(@npiesco, #42340)	fix(build): Fix Win
     # - Windows: Waits for stdin regardless, hangs forever
     # Fix: Add `--version` to probe so it exits immediately on all platforms. Since `--version` is now part of the probe,
     # return fresh Command to prevent it from persisting into actual script invocation.
-https://github.com/servo/servo/pull/42499	(@mukilan, #42499)	layout: Move `UserAgentStylesheets` struct from `stylo` to `layout`. (#42499)
+-https://github.com/servo/servo/pull/42499	(@mukilan, #42499)	layout: Move `UserAgentStylesheets` struct from `stylo` to `layout`. (#42499)
     ^ commit b682f03394dda9afe3253effc5f60472dfcc573c
     # This struct is only ever used by Servo so there is not reason to have it defined in stylo. A follow-up PR in stylo
     # will remove the struct.
     # Testing: This change simply moves an existing struct from stylo, so shouldn't have any behavioral changes.
-https://github.com/servo/servo/pull/42464	(@shubhamg13, #42464)	libservo: Remove implicit unit tests entries from `Cargo.toml` (#42464)
+-https://github.com/servo/servo/pull/42464	(@shubhamg13, #42464)	libservo: Remove implicit unit tests entries from `Cargo.toml` (#42464)
     ^ commit 914271933bd1523057be1c3c056840f72226a48a
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Tests are implicitly detected by `cargo`. So, it is not required to mention them unless required custom requirments.
@@ -2139,13 +2155,14 @@ https://github.com/servo/servo/pull/42446	(@TimvdLippe, #42446)	script: Introduc
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42543	(@simonwuelker, #42543)	devtools: Handle disconnected error gracefully when shutting down servo (#42543)
++https://github.com/servo/servo/pull/42543	(@simonwuelker, #42543)	devtools: Handle disconnected error gracefully when shutting down servo (#42543)
+    crash; fix panic when exiting servo while devtools is connected
     ^ commit a20e2981b8295d56b707280a5010441c50ee591e
     # When the servo window is closed while there is an active devtools connection then the devtools threads reliably
     # panics because it can't talk to script anymore. We can simply ignore the `Disconnected` error when shutting down. If
     # the script thread already shut down then there's nothing meaningful for the devtools to send anyways.
     # Testing: This kind of interaction is hard to test. I've not written an automated test.
-https://github.com/servo/servo/pull/42479	(@24bsm032@iiitdmj.ac.in, #42479)	libservo: Fix build warnings for unfulfilled `dead_code` lint expectations in tests (#42479)
+-https://github.com/servo/servo/pull/42479	(@24bsm032@iiitdmj.ac.in, #42479)	libservo: Fix build warnings for unfulfilled `dead_code` lint expectations in tests (#42479)
     ^ commit 2532c53414faac956da04689f8870ff134131dd2
     ^ /!\ contains libservo changes! does it affect the embedder?
     # The `#[expect(dead_code)]` annotations in `components/servo/tests/common/mod.rs` and
@@ -2161,47 +2178,51 @@ https://github.com/servo/servo/pull/42506	(@Gae24, #42506)	script: implement `im
     # `resolve` function to mozjs.
     # Testing: Covered by existing tests, results updated
     # Part of #37553
-https://github.com/servo/servo/pull/41999	(@shubhamg13, #41999)	layout: Limit LCP stopping to actual user input events. (#41999)
++https://github.com/servo/servo/pull/41999	(@shubhamg13, #41999)	layout: Limit LCP stopping to actual user input events. (#41999)
+    dom; [from fixes issue] fix Largest Contentful Paint to ignore mouse moves for deciding when to stop the timer
     ^ commit 83fdf34193f96bb95b9fe3b459a93cbe6a7ce1bf
     ^ /!\ contains libservo changes! does it affect the embedder?
     # This basically doesn't halt LCP on Mouse Move.
     # Reference: https://www.w3.org/TR/largest-contentful-paint/#limitations
     # Testing: `components/servo/tests/largest_contentful_paint.rs`
     # Fixes: #42534
-https://github.com/servo/servo/pull/42539	(@shubhamg13, #42539)	layout: Get rid of `LargestContentfulPaintType` struct (#42539)
+-https://github.com/servo/servo/pull/42539	(@shubhamg13, #42539)	layout: Get rid of `LargestContentfulPaintType` struct (#42539)
     ^ commit f1ff08ca0e29553145e9f021493c74b426148131
     # LargestContentfulPaintType is not useful.
     # Testing: No behaviour change expected
-https://github.com/servo/servo/pull/42355	(@simonwuelker, #42355)	devtools: Show attached event listeners in inspector tab (#42355)
++https://github.com/servo/servo/pull/42355	(@simonwuelker, #42355)	devtools: Show attached event listeners in inspector tab (#42355)
+    devtools; [opened (includes screenshot!)] partial support for listing event listeners attached to a node (just event type and phase)
     ^ commit 929e275fcde31cc95467a89842dee9fe31d6b2ab
     # This change makes the devtools inspector show any event listeners that are attached to a node. The primary motivation
     # is making the devtools more useful for debugging real-world websites.
     # You can also click on the event listener to show some more info, though most of that (everything except the event
     # type and the event phase) is currently just placeholder text:
     # Testing: This change adds a new test
-https://github.com/servo/servo/pull/42480	(@Narfinger, #42480)	devtools: Plugin to about:memory (#42480)
++https://github.com/servo/servo/pull/42480	(@Narfinger, #42480)	devtools: Plugin to about:memory (#42480)
+    perf; devtools server in about:memory (2/2)
     ^ commit 2b6a26012534eb66e843a371242cac2789a082e8
     ^ /!\ contains libservo changes! does it affect the embedder?
     # This implements the final glue to have memory reporting for devtools.
     # Testing: Run some webpages and connected to devtools and looked at about:memory
     # Fixes: https://github.com/servo/servo/issues/42453
-https://github.com/servo/servo/pull/42500	(@shubhamg13, #42500)	tests: Move `javascript_evaluators` tests to a separate file (#42500)
+-https://github.com/servo/servo/pull/42500	(@shubhamg13, #42500)	tests: Move `javascript_evaluators` tests to a separate file (#42500)
     ^ commit c0e74d730d47da377895311846c01d03444dc5da
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Move Javascript tests to a separate file as `tests/webview.rs` is getting too cluttered.
     # Testing: Existing Tests Passed
-https://github.com/servo/servo/pull/42513	(@pralkarz, #42513)	devtools: handle syntax highlighting booleans in `console.log` (#42513)
++https://github.com/servo/servo/pull/42513	(@pralkarz, #42513)	devtools: handle syntax highlighting booleans in `console.log` (#42513)
+    devtools; [from fixes issue] console.log() with booleans has those values now syntax highlighted
     ^ commit 0dc5bee60a6318daa7cf0f52c9cecf71774d5d89
     # Testing: `./mach test-devtools` (added a new test)
     # Fixes: #42503
-https://github.com/servo/servo/pull/42532	(@yezhizhen, #42532)	script_bindings/libservo: Fix build script to use `uv` to build instead of `python3` (#42532)
+-https://github.com/servo/servo/pull/42532	(@yezhizhen, #42532)	script_bindings/libservo: Fix build script to use `uv` to build instead of `python3` (#42532)
     ^ commit 62926adaaf0311e795734c24ba74d31b99648260
     ^ /!\ contains libservo changes! does it affect the embedder?
     # - Redirect stdin to null device when testing Python command. This fixes the issue with Windows.
     # - Use `--frozen` for both test command and actual command used in build. This is what we've been doing for `mach`.
     # Before this PR, uv fails due to the missing `--frozen` and we fall back to python3 in CI for various platforms.
     # Fixes: #42527
-https://github.com/servo/servo/pull/42508	(@Narfinger, @jschwe, #42508)	CI: OHOS Use mitmproxy with forwarding mode in hitrace-bench (#42508)
+-https://github.com/servo/servo/pull/42508	(@Narfinger, @jschwe, #42508)	CI: OHOS Use mitmproxy with forwarding mode in hitrace-bench (#42508)
     ^ commit 9993a2168a6d91fbc0e03d3e185393b520ecff5c
     # This updates to a new hitrace-bench version which supports to handle mitmproxy by automatically starting and
     # destroying it for the benchmarks.
@@ -2218,12 +2239,13 @@ https://github.com/servo/servo/pull/42498	(@shubhamg13, #42498)	layout: Do not c
     # paint](https://www.w3.org/TR/paint-timing/#first-paint) (due to the enclosing boxes of the iframes) but no [first
     # contentful paint](https://www.w3.org/TR/paint-timing/#first-contentful-paint).
     # Testing: Update WPT tests expectations.
-https://github.com/servo/servo/pull/42531	(@Narfinger, #42531)	script: Switch QueuedTask to a struct to support MallocSizeOf (#42531)
+-https://github.com/servo/servo/pull/42531	(@Narfinger, #42531)	script: Switch QueuedTask to a struct to support MallocSizeOf (#42531)
     ^ commit 4b87712d64188ed810c45fe52bd0481b17cdf7f2
     # This switches the QueuedTask type to a proper struct allowing us to have MallocSizeOf and similar.
     # Signed-off-by: Narfinger
     # Testing: Compilation is the test.
-https://github.com/servo/servo/pull/42505	(@Narfinger, #42505)	webxr: Implement MallocSizeOf (#42505)
++https://github.com/servo/servo/pull/42505	(@Narfinger, #42505)	webxr: Implement MallocSizeOf (#42505)
+    perf; prepare to add webxr memory usage to about:memory
     ^ commit 2f619821acf91db93361549d0dfe6736b6fa3aae
     # Implement MallocSizeOf for most of WebXr. Mostly uncontroversal changes.
     # Of note:
@@ -2261,17 +2283,19 @@ https://github.com/servo/servo/pull/42505	(@Narfinger, #42505)	webxr: Implement 
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42584	(@mrobinson, @Loirooriol, @lukewarlow, #42584)	layout: Clear `display: none` boxes during damage traversal (#42584)
++https://github.com/servo/servo/pull/42584	(@mrobinson, @Loirooriol, @lukewarlow, #42584)	layout: Clear `display: none` boxes during damage traversal (#42584)
+    perf; destroy boxes for ‘display: none’ earlier in the layout process
     ^ commit dca525022296de32cd80227432aff1399a3dba0b
     # There is no need to wait until box tree layout to do this and we want to
     # make clearing boxes a thing that happens in the damage traversal.
     # Testing: This should not change behavior in an observable way, so should
     # be covered by existing tests.
-https://github.com/servo/servo/pull/42585	(@Loirooriol, #42585)	build(deps): bump Stylo to "Stop setting `layout.css.marker.restricted` to true" (#42585)
+-https://github.com/servo/servo/pull/42585	(@Loirooriol, #42585)	build(deps): bump Stylo to "Stop setting `layout.css.marker.restricted` to true" (#42585)
     ^ commit 5b855021a32babc0f622448a3a221692a65b9426
     # Bumps Stylo to servo/stylo#311
     # Testing: Not needed, no behavior change
-https://github.com/servo/servo/pull/42538	(@Narfinger, #42538)	servoshell: Trigger reload when the F5 key is pressed (#42538)
++https://github.com/servo/servo/pull/42538	(@Narfinger, #42538)	servoshell: Trigger reload when the F5 key is pressed (#42538)
+    servoshell; pressing F5 now reloads, not just Ctrl+R / ⌘R
     ^ commit 028afda6d8562b657bb10e85205e994f55e44ba5
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Whenever I open Servoshell and reload, I want to hit F5. Alas it does nothing.
@@ -2294,7 +2318,7 @@ https://github.com/servo/servo/pull/42444	(@jdm, @mrobinson, #42444)	storage: Do
     # them. This is very difficult to test reliably, but replacing calls to unwrap with sending error values to the
     # script thread is clearly an improvement.
     # Testing: Some intermittent crashes now turn into intermittent timeouts.
-https://github.com/servo/servo/pull/42572	(@alice, #42572)	net/fetch: Don't write Response::termination_reason in closure (#42572)
+-https://github.com/servo/servo/pull/42572	(@alice, #42572)	net/fetch: Don't write Response::termination_reason in closure (#42572)
     ^ commit 55589e941fe1003afd5a548fa362d26c07d9fe38
     # Writing `termination_reason` in the closure in `http_network_fetch()` had no effect, as the response is captured
     # by value, and cannot be captured by mutable reference as it is needed later in the outer function.
@@ -2303,7 +2327,8 @@ https://github.com/servo/servo/pull/42572	(@alice, #42572)	net/fetch: Don't writ
     # Note: I don't understand this code deeply, I was just trying my best to fix the warning. I'm more than happy to
     # close this PR or change the code if someone more familiar has a better idea of how to fix it.
     # Testing: Existing tests, no behaviour change.
-https://github.com/servo/servo/pull/42582	(@mrobinson, @Loirooriol, @lukewarlow, #42582)	layout: Preserve boxes in rebuilt subtrees underneath independent formatting contexts (#42582)
++https://github.com/servo/servo/pull/42582	(@mrobinson, @Loirooriol, @lukewarlow, #42582)	layout: Preserve boxes in rebuilt subtrees underneath independent formatting contexts (#42582)
+    perf; avoid damaging descendants in some cases when rebuilding the box tree (also required for future work to preserve fragments)
     ^ commit 260eb8688cdad0a7c99a5a252e282c21561ffa83
     # When a box needs to be rebuilt due to a style change, it previously
     # would rebuild the entire box subtree, including all descendants. This is
