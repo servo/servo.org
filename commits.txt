@@ -1455,7 +1455,8 @@
     # The implementation of `attr()` in Stylo is not complete, but this way we can start testing for it.
     # Bumps Stylo to https://github.com/servo/stylo/pull/306
     # Testing: Various tests pass, also a few failures. No impact on users, even with experimental features enabled.
-https://github.com/servo/servo/pull/42443	(@verbroekj@gmail.com, #42443)	IndexedDB: Throw InvalidStateError if object store is deleted in createIndex/deleteIndex (#42443)
++https://github.com/servo/servo/pull/42443	(@verbroekj@gmail.com, #42443)	IndexedDB: Throw InvalidStateError if object store is deleted in createIndex/deleteIndex (#42443)
+    dom; [git show + indexeddb spec] createIndex() and deleteIndex() on IDBObjectStore now correctly throw after deleteObjectStore() on IDBDatabase
     ^ commit 15ad383c9fc34a257a197b120147feff4ce4855b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     #  This PR adds a check to ensure that createIndex and deleteIndex throw an InvalidStateError if the object store
@@ -1463,7 +1464,8 @@ https://github.com/servo/servo/pull/42443	(@verbroekj@gmail.com, #42443)	Indexed
     # I checked the spec to make sure the error check happens in the right order (checking the transaction mode before
     # the deleted state). I've verified this with the Web Platform Tests, and the createIndex test is now passing.
     # Fixes #42436
-https://github.com/servo/servo/pull/42440	(@arihant2math, #42440)	indexeddb: Implement index retrieval (#42440)
++https://github.com/servo/servo/pull/42440	(@arihant2math, #42440)	indexeddb: Implement index retrieval (#42440)
+    dom; [git show + fixes issue] index() on IDBObjectStore
     ^ commit 3442a91766a79a4483f35feba8f5d4919e95d099
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -1472,7 +1474,8 @@ https://github.com/servo/servo/pull/42440	(@arihant2math, #42440)	indexeddb: Imp
     # into a single struct.
     # Testing: WPT
     # Fixes: #42438
-https://github.com/servo/servo/pull/42431	(@arihant2math, #42431)	indexeddb: Expose keypath in idbindex (#42431)
++https://github.com/servo/servo/pull/42431	(@arihant2math, #42431)	indexeddb: Expose keypath in idbindex (#42431)
+    dom; [git show + fixes issue] keyPath on IDBIndex
     ^ commit 7a810eda0a27693d78ad3d9c010d930e33e1fdf3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -1654,7 +1657,8 @@ https://github.com/servo/servo/pull/42431	(@arihant2math, #42431)	indexeddb: Exp
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42435	(@sebsebmc, #42435)	script: cookiestore: implement steps to 'set a cookie' (#42435)
++https://github.com/servo/servo/pull/42435	(@sebsebmc, #42435)	script: cookiestore: implement steps to 'set a cookie' (#42435)
+    dom; [git show] more conformant set() on CookieStore
     ^ commit cb11e797b51ad07b13aedbffd8f5d9089ced56b8
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implements the `set_a_cookie` behavior from the cookiestore spec.
@@ -1896,7 +1900,8 @@ https://github.com/servo/servo/pull/42435	(@sebsebmc, #42435)	script: cookiestor
     # that it likely can grow much more. A much bigger memory user is sqlite3, but I'm still working on finding a way
     # to extract memory usage for it.
     # Testing: Manual
-https://github.com/servo/servo/pull/42488	(@webbeef, #42488)	media: enable default controls on top-level media elements (#42488)
++https://github.com/servo/servo/pull/42488	(@webbeef, #42488)	media: enable default controls on top-level media elements (#42488)
+    servoshell; loading video or audio as a document now has controls
     ^ commit f1953afec03d4109058ce661e911e232271e4779
     # This makes it possible to actually play media when loaded as top level content and not already in a video or
     # audio element.
@@ -1933,7 +1938,8 @@ https://github.com/servo/servo/pull/42488	(@webbeef, #42488)	media: enable defau
     # This adds a pref which will be used to enable the experimental accessibility tree.
     # Testing: No testing: just adds a pref which is currently unused.
     # Fixes: part of #4344
-https://github.com/servo/servo/pull/42411	(@shubhamg13, #42411)	layout: Mark `Contentful` for Images only if they have `ImageKey` (#42411)
++https://github.com/servo/servo/pull/42411	(@shubhamg13, #42411)	layout: Mark `Contentful` for Images only if they have `ImageKey` (#42411)
+    dom; fix First Contentful Paint timings for <video> and <video poster>
     ^ commit 8d474e7fa07425ded4ad3b63b764273014521bef
     # This PR checks if `ImageKey` is available, then it marks it as `Contentful`. For Videos, if valid `poster` or
     # `first frame`, it will be stored in `ImageKey`.
@@ -1943,7 +1949,8 @@ https://github.com/servo/servo/pull/42411	(@shubhamg13, #42411)	layout: Mark `Co
     # -  `/paint-timing/fcp-only/fcp-video-frame.html`
     # Fixes #42359
     # Fixes #42360
-https://github.com/servo/servo/pull/42487	(@mrobinson, #42487)	script: Close existing context menus when a new one opens (#42487)
++https://github.com/servo/servo/pull/42487	(@mrobinson, #42487)	script: Close existing context menus when a new one opens (#42487)
+    api; we now WebViewDelegate::hide_embedder_control() any open context menus before show_embedder_control() a context menu
     ^ commit 3292a6edc48280ae05f63300ca3410e4568f8e0e
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains servoshell changes! does it affect the user experience?
@@ -1978,7 +1985,8 @@ https://github.com/servo/servo/pull/42487	(@mrobinson, #42487)	script: Close exi
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Tests are implicitly detected by `cargo`. So, it is not required to mention them unless required custom requirments.
     # Testing: Existing Unit Tests Passed.
-https://github.com/servo/servo/pull/41290	(@webbeef, #41290)	script: Implement pointer events (#41290)
++https://github.com/servo/servo/pull/41290	(@webbeef, #41290)	script: Implement pointer events (#41290)
+    dom; [git show + mdn] pointermove, pointerdown, pointerup, pointercancel
     ^ commit 39d946b01d4e9f17d8212d1d11a694187c86b66d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Remaining failures are due to the missing implementation of the pointer capture and pointer lock APIs, as well as:
@@ -2000,7 +2008,8 @@ https://github.com/servo/servo/pull/41290	(@webbeef, #41290)	script: Implement p
     # https://github.com/servo/servo/issues/41250
     # Testing: Updated wpt expectations
     # Fixes: https://github.com/servo/servo/issues/38435
-https://github.com/servo/servo/pull/42481	(@TimvdLippe, #42481)	script: Fix crash when failed requests finish from a previous generation (#42481)
++https://github.com/servo/servo/pull/42481	(@TimvdLippe, #42481)	script: Fix crash when failed requests finish from a previous generation (#42481)
+    crash; fix crash when <link rel=stylesheet href> changes during stylesheet load
     ^ commit 8ae4cbebafe4516425773a1cad6892d48c0bcb90
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Most likely a regression introduced in #42208 where the pending loads counter has been reset. For successful
@@ -2031,13 +2040,14 @@ https://github.com/servo/servo/pull/42481	(@TimvdLippe, #42481)	script: Fix cras
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42545	(@Loirooriol, #42545)	layout: SVG with zero size should get natural ratio from viewBox (#42545)
++https://github.com/servo/servo/pull/42545	(@Loirooriol, #42545)	layout: SVG with zero size should get natural ratio from viewBox (#42545)
+    layout; <svg width=0> and <svg height=0> now correctly use viewBox aspect ratio
     ^ commit ec984b3c7651f7df50e01e311d28670bb4ffc90a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This logic was (accidentally?) changed in #40761. Revert it back to the original one, which is simpler, and matches
     # Blink and WebKit.
     # Testing: Adding new test
-https://github.com/servo/servo/pull/42562	(@jdm, #42562)	Revert "script: Introduce end of loading phases" (#42562)
+-https://github.com/servo/servo/pull/42562	(@jdm, #42562)	Revert "script: Introduce end of loading phases" (#42562)
     ^ commit ab85eafc7e28bd56cddc7d32010c0e0a1f724a52
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Reverts servo/servo#42446 . Too many new intermittent timeouts caused by missing document load events.
@@ -2078,7 +2088,8 @@ https://github.com/servo/servo/pull/42562	(@jdm, #42562)	Revert "script: Introdu
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42446	(@TimvdLippe, #42446)	script: Introduce end of loading phases (#42446)
+-https://github.com/servo/servo/pull/42446	(@TimvdLippe, #42446)	script: Introduce end of loading phases (#42446)
+    ; reverted for now
     ^ commit 94f418c6e6f0cc2531181568e6cc07dcb36914dd
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Since the steps for https://html.spec.whatwg.org/multipage/parsing.html#the-end are scattered throughout various
@@ -2170,7 +2181,8 @@ https://github.com/servo/servo/pull/42446	(@TimvdLippe, #42446)	script: Introduc
     # tests. Removed unfulfilled `#[expect(dead_code)]` annotations from the above files.
     # Testing: Tests compile cleanly after this change.
     # Fixes: #42412
-https://github.com/servo/servo/pull/42506	(@Gae24, #42506)	script: implement `import.meta.resolve` (#42506)
++https://github.com/servo/servo/pull/42506	(@Gae24, #42506)	script: implement `import.meta.resolve` (#42506)
+    dom; [git show] import.meta.resolve()
     ^ commit a83e1973d52efc9e46013df18693d3a223cd781f
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Our implementation of
@@ -2229,7 +2241,8 @@ https://github.com/servo/servo/pull/42506	(@Gae24, #42506)	script: implement `im
     # Currently we are only in forwarding mode and do _not_ replay responses.
     # Signed-off-by: Narfinger
     # Testing: https://github.com/Narfinger/servo/actions/runs/21867906670/job/63114716882
-https://github.com/servo/servo/pull/42498	(@shubhamg13, #42498)	layout: Do not consider `iframe` fragments at contentful for paint timing (#42498)
++https://github.com/servo/servo/pull/42498	(@shubhamg13, #42498)	layout: Do not consider `iframe` fragments at contentful for paint timing (#42498)
+    dom; fix First Contentful Paint timings to ignore <iframe> (while keeping them in First Paint)
     ^ commit dbc8a7f9dadb65882dfcb6dded78a5ad682e204d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This aligns `first-contentful-paint` about `iframe` according to
@@ -2301,7 +2314,8 @@ https://github.com/servo/servo/pull/42498	(@shubhamg13, #42498)	layout: Do not c
     # Whenever I open Servoshell and reload, I want to hit F5. Alas it does nothing.
     # Now it will.
     # Testing: This level of functionality in servoshell is not tested at the moment.
-https://github.com/servo/servo/pull/42577	(@Loirooriol, #42577)	layout: Fix intrinsic size of replaced with ratio and natural height only (#42577)
++https://github.com/servo/servo/pull/42577	(@Loirooriol, #42577)	layout: Fix intrinsic size of replaced with ratio and natural height only (#42577)
+    layout; fix width of <img height> to use aspect ratio instead of 300px
     ^ commit 28065dfc4f262b73d02b4974289af940d68bdbd0
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # If a replaced element has a natural width and a natural height, then the natural width wins, and the intrinsic
@@ -2312,7 +2326,8 @@ https://github.com/servo/servo/pull/42577	(@Loirooriol, #42577)	layout: Fix intr
     # natural height thru the ratio. We were still letting the 300px fallback width win.
     # Testing: Some tests pass
     # Fixes: #42573
-https://github.com/servo/servo/pull/42444	(@jdm, @mrobinson, #42444)	storage: Do not panic if sqlite fails to open a DB. (#42444)
++https://github.com/servo/servo/pull/42444	(@jdm, @mrobinson, #42444)	storage: Do not panic if sqlite fails to open a DB. (#42444)
+    crash; [git show] fix crashes when we fail to open a sqlite database (under the hood of indexeddb)
     ^ commit 36c436ac126c167bc9b6db0cf26671e3df68bbe7
     # #42442 triggered a bunch of intermittent panics due to DBs being cleaned up while tests were still trying to use
     # them. This is very difficult to test reliably, but replacing calls to unwrap with sending error values to the
@@ -2339,7 +2354,8 @@ https://github.com/servo/servo/pull/42444	(@jdm, @mrobinson, #42444)	storage: Do
     # necessary in order to start preserving fragments in these subtrees.
     # Testing: This should not change observable layout behavior. We do not really
     # have tests to verify these kind of optimizations.
-https://github.com/servo/servo/pull/42576	(@sagudev, #42576)	script: Use CString for `Error::Type` and `Error::Range` (#42576)
++https://github.com/servo/servo/pull/42576	(@sagudev, #42576)	script: Use CString for `Error::Type` and `Error::Range` (#42576)
+    perf; avoid string conversion allocations near spidermonkey boundary
     ^ commit d5d400c7d696d583c1353dff03d8e3230722f9a2
     # Continuation of https://github.com/servo/servo/pull/42135, switch Error::Type and Error::Range to also use CStrings
     # internally, as they are converted to CString for throwing JS exceptions (other get thrown as DomException object,
@@ -2347,11 +2363,12 @@ https://github.com/servo/servo/pull/42576	(@sagudev, #42576)	script: Use CString
     # Changes in script crate are mechanical.
     # Testing: Should be covered by WPT tests.
     # Part of #42126
-https://github.com/servo/servo/pull/42571	(@shubhamg13, @yezhizhen, #42571)	paint: Get rid of unnecessary trait from `LCPCandidateID` (#42571)
+-https://github.com/servo/servo/pull/42571	(@shubhamg13, @yezhizhen, #42571)	paint: Get rid of unnecessary trait from `LCPCandidateID` (#42571)
     ^ commit c67143634afc09bac66fdd6d2ef312cf28d22578
     # Just remove some extra traits.
     # Testing: No behavior change
-https://github.com/servo/servo/pull/42574	(@mrobinson, @Loirooriol, @lukewarlow, #42574)	layout: Ensure layout damage clears inline content size cache of parent (#42574)
++https://github.com/servo/servo/pull/42574	(@mrobinson, @Loirooriol, @lukewarlow, #42574)	layout: Ensure layout damage clears inline content size cache of parent (#42574)
+    layout; [git show] fix size of ‘width: max-content’ when descendants change size
     ^ commit 25b4121ad7b88ae303c6dc6331802f334cd46c81
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This change fixes an issue where layout damage to a node was not
@@ -2359,7 +2376,7 @@ https://github.com/servo/servo/pull/42574	(@mrobinson, @Loirooriol, @lukewarlow,
     # it starts to clean up the damage traversal logic in preparation for
     # changes to the way that damage is processed and box tree layout is done.
     # Testing: This change adds a new WPT test.
-https://github.com/servo/servo/pull/42535	(@mrobinson, #42535)	layout: Properly set parent of dirty root after box tree layout (#42535)
+-https://github.com/servo/servo/pull/42535	(@mrobinson, #42535)	layout: Properly set parent of dirty root after box tree layout (#42535)
     ^ commit 6d2960ab360c4bea81500ea2df6597e1dfbf056c
     # When laying out the box tree from a dirty root, we were replacing the inner layout
     # box contents of the dirty root, but not updating its parent. This change fixes
@@ -2368,7 +2385,8 @@ https://github.com/servo/servo/pull/42535	(@mrobinson, #42535)	layout: Properly 
     # we will in the future.
     # Testing: The parent is currently unused, but it will be used in the future. This
     # shouldn't change the functioning of Servo currently.
-https://github.com/servo/servo/pull/42401	(@sahinonur2000@hotmail.com, #42401)	script: Implement DocumentOrShadowRoot.FullscreenDocument (#42401)
++https://github.com/servo/servo/pull/42401	(@sahinonur2000@hotmail.com, #42401)	script: Implement DocumentOrShadowRoot.FullscreenDocument (#42401)
+    dom; fullscreenElement on Document and ShadowRoot
     ^ commit fb9bef66fd6859b0a6a69b48107f2850a63dc7ca
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -2386,11 +2404,12 @@ https://github.com/servo/servo/pull/42401	(@sahinonur2000@hotmail.com, #42401)	s
     # Passing WPT run: https://github.com/onsah/servo/actions/runs/21872882492
     # ## Fixes
     # https://github.com/servo/servo/issues/42234
-https://github.com/servo/servo/pull/42558	(@yezhizhen, #42558)	script: Use snakecase for variables in CSS implementation files (#42558)
+-https://github.com/servo/servo/pull/42558	(@yezhizhen, #42558)	script: Use snakecase for variables in CSS implementation files (#42558)
     ^ commit b088ee4697cfc646ef142f624b5ba50873fb65e7
     # Use snakecase to be consistent. Also these names are normally quite long already.
     # Testing: Just renaming.
-https://github.com/servo/servo/pull/42135	(@sagudev, #42135)	script: Pass more CStr(ing) instead of rust strings (#42135)
++https://github.com/servo/servo/pull/42135	(@sagudev, #42135)	script: Pass more CStr(ing) instead of rust strings (#42135)
+    perf; avoid string conversion allocations near spidermonkey boundary
     ^ commit 3f3c6a5d903a0c9404556e081ec66613d6072e86
     # This is companion to https://github.com/servo/mozjs/pull/703 which makes mozjs to use CStr(ing) in the API (where
     # we would silently do conversion in mozjs). This way we can avoid rust string -> c string allocations.
@@ -2400,7 +2419,8 @@ https://github.com/servo/servo/pull/42135	(@sagudev, #42135)	script: Pass more C
     # Testing: It should be just refactor without any side effects so there should be no changes to WPT results.
     # Try run: https://github.com/sagudev/servo/actions/runs/21328878448
     # Part of #42126
-https://github.com/servo/servo/pull/41169	(@shubhamg13, #41169)	compositing: Re-enable LCP calculation on WebViews after they have been reloaded/navigated (#41169)
++https://github.com/servo/servo/pull/41169	(@shubhamg13, #41169)	compositing: Re-enable LCP calculation on WebViews after they have been reloaded/navigated (#41169)
+    dom; fix Largest Contentful Paint timings after reload or navigate
     ^ commit baf2f4f8bf3255a0c282d64ddae6c0391e5aaea8
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Re-enable LCP calculation on WebViews after they have been reloaded/navigated.
@@ -2410,7 +2430,8 @@ https://github.com/servo/servo/pull/41169	(@shubhamg13, #41169)	compositing: Re-
     # observed inconsistent with Chrome.
     # Testing: `components/servo/tests/largest_contentful_paint.rs`
     # Fixes: #42533
-https://github.com/servo/servo/pull/42528	(@yezhizhen, #42528)	paint: Consider opportunity to send `touchmove` to `ScriptThread` regardless of existence of `ScrollZoomEvent` (#42528)
++https://github.com/servo/servo/pull/42528	(@yezhizhen, #42528)	paint: Consider opportunity to send `touchmove` to `ScriptThread` regardless of existence of `ScrollZoomEvent` (#42528)
+    dom; touchmove events now fire even when part of a two-finger pinch zoom
     ^ commit f34ed13e3f2200ede4a74da6c359305870ffbb1c
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # We still keep the key performance optimization. But it is important to send the event to script, if other conditions
@@ -2420,7 +2441,7 @@ https://github.com/servo/servo/pull/42528	(@yezhizhen, #42528)	paint: Consider o
     # - `pointerevent_pointerout_after_pointercancel_touch.html`/`pointerevent_pointerleave_after_pointercancel_touch.html`
     # no longer scroll **indefinitely**. These two tests will work once we have `pointerout` and `pointerleave`.
     # Part of #41923.
-https://github.com/servo/servo/pull/42563	(@yezhizhen, #42563)	mach (Android): Remove `CC_` & `CXX_` for build environment (#42563)
+-https://github.com/servo/servo/pull/42563	(@yezhizhen, #42563)	mach (Android): Remove `CC_` & `CXX_` for build environment (#42563)
     ^ commit 7b1a59460c4cbe686c4e47ea2a9c738664874d96
     # This reverts the workaround introduced in https://github.com/servo/servo/pull/42232#discussion_r2740827196 which
     # enabled CC builder, given https://github.com/aws/aws-lc-rs/pull/1026 in the new release.
@@ -2555,15 +2576,16 @@ https://github.com/servo/servo/pull/42563	(@yezhizhen, #42563)	mach (Android): R
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42607	(@Loirooriol, #42607)	build(deps): bump keccak from 0.1.5 to 0.1.6 (#42607)
+-https://github.com/servo/servo/pull/42607	(@Loirooriol, #42607)	build(deps): bump keccak from 0.1.5 to 0.1.6 (#42607)
     ^ commit 63858e868e88c913a53baafe379435877ca65150
     # Version 0.1.5 has been yanked.
     # This unblocks CI.
-https://github.com/servo/servo/pull/42491	(@Loirooriol, #42491)	build(deps): bump Stylo to "Allow the embedder to override all preferences" (#42491)
+-https://github.com/servo/servo/pull/42491	(@Loirooriol, #42491)	build(deps): bump Stylo to "Allow the embedder to override all preferences" (#42491)
     ^ commit 2b8f5e95b9b723cb374c2d078ff18c5f60a9d746
     # Bumps Stylo to servo/stylo#309
     # Testing: no behavior change, though this will allow Servo to override Stylo preferences in the future.
-https://github.com/servo/servo/pull/42569	(@shubhamg13, #42569)	layout: Consider image backgrounds as contentful for the `first-contentful-paint` paint metric (#42569)
++https://github.com/servo/servo/pull/42569	(@shubhamg13, #42569)	layout: Consider image backgrounds as contentful for the `first-contentful-paint` paint metric (#42569)
+    dom; fix First Contentful Paint timings for ‘background-image’
     ^ commit 01bb13ee99d85981e50ee6c73b773e70641b3f24
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # As per W3C [spec](https://www.w3.org/TR/paint-timing/#sec-terminology)
@@ -2575,7 +2597,8 @@ https://github.com/servo/servo/pull/42569	(@shubhamg13, #42569)	layout: Consider
     # [background-size](https://www.w3.org/TR/css-backgrounds-3/#background-size) has non-zero width and height values.
     # Testing: Updated WPT Expectations
     # Fixes: #42568
-https://github.com/servo/servo/pull/42466	(@mrobinson, #42466)	layout: Store a fallback cache in the `FontGroup` (#42466)
++https://github.com/servo/servo/pull/42466	(@mrobinson, #42466)	layout: Store a fallback cache in the `FontGroup` (#42466)
+    layout; [fixes issue] fallback fonts are now cached per lang / unicode block / unicode script; part of system-font-aware font fallback
     ^ commit 150f767b198cac7e8d21b25a2835495d7b737494
     # Store a list of recently used fallbacks in the `FontGroups`, keyed by
     # `lang` property and the detected `UnicodeBlock` and `Script` of the
@@ -2587,7 +2610,8 @@ https://github.com/servo/servo/pull/42466	(@mrobinson, #42466)	layout: Store a f
     # Testing: This should not change rendering output so is covered by existing
     # tests. It might have a minor affect on performance.
     # Fixes: This is part of #41426.
-https://github.com/servo/servo/pull/42583	(@simonwuelker, #42583)	devtools: Properly handle opening and closing client connections  (#42583)
++https://github.com/servo/servo/pull/42583	(@simonwuelker, #42583)	devtools: Properly handle opening and closing client connections  (#42583)
+    crash; [fixes issue] fix crash after devtools clients disconnect
     ^ commit 53ffdda2a1c7dbe27fcc135406c7942687d1acd4
     # Both the `DevtoolsInstance` and the `BrowsingContextActor` maintain a list of live connections. When a new global
     # is created, its `BrowsingContextActor` copies the list of active connections from the `DevtoolsInstance`. When a
@@ -2604,7 +2628,7 @@ https://github.com/servo/servo/pull/42583	(@simonwuelker, #42583)	devtools: Prop
     # https://github.com/servo/servo/blob/d5d400c7d696d583c1353dff03d8e3230722f9a2/components/script/dom/globalscope.rs#L240-L
     # 242
     # was always false during our tests.
-https://github.com/servo/servo/pull/42596	(@mrobinson, @Loirooriol, @lukewarlow, #42596)	layout: Clear dirty box tree nodes during damage traversal (#42596)
+-https://github.com/servo/servo/pull/42596	(@mrobinson, @Loirooriol, @lukewarlow, #42596)	layout: Clear dirty box tree nodes during damage traversal (#42596)
     ^ commit 0c182904f5871a09178df9cf265d29e45c234b06
     # Instead of keeping dirty box tree nodes around after the damage
     # traversal, clear them readily (like `display: none` nodes). This
@@ -2614,23 +2638,24 @@ https://github.com/servo/servo/pull/42596	(@mrobinson, @Loirooriol, @lukewarlow,
     # bit easier to follow.
     # Testing: This shouldn't change observable behavior so should be covered by existing
     # tests.
-https://github.com/servo/servo/pull/42597	(@kkoyung, #42597)	script: Remove unused trait implementation in `subtlecrypto.rs` (#42597)
+-https://github.com/servo/servo/pull/42597	(@kkoyung, #42597)	script: Remove unused trait implementation in `subtlecrypto.rs` (#42597)
     ^ commit ca9652df3c12d57b788a26ce3b83b5eb1a6274b9
     # After commit 4539c7e, we no longer use `From` trait implementation for `SubtleAlgorithm` and
     # `KeyAlgorithmAndDerivatives`. We can remove these unused code.
     # Testing: Cleaning up. Existing tests suffice.
-https://github.com/servo/servo/pull/42595	(@Narfinger, #42595)	OHOS: reverse bump HarmonyOS version number (#42595)
+-https://github.com/servo/servo/pull/42595	(@Narfinger, #42595)	OHOS: reverse bump HarmonyOS version number (#42595)
     ^ commit 0634e53437eb5aa39fbd719e1733c6f84ff15fe0
     # It turns out the HarmonyOS version numbers can be confusing. This now puts it as the same as the OpenHarmony
     # version numbers.
     # As the SDKs are backwards compatible everything should still work with newer SDKs.
     # Testing: CI will test compilation and installation and manually tested by me.
-https://github.com/servo/servo/pull/42178	(@shubhamg13, #42178)	layout: Only mark contentful for `non-zero` bounding rect (#42178)
++https://github.com/servo/servo/pull/42178	(@shubhamg13, #42178)	layout: Only mark contentful for `non-zero` bounding rect (#42178)
+    dom; fix First/Largest Contentful Paint timings for zero-sized elements
     ^ commit 53bef8e4847354b4a304bcdd9c4364748621d7a7
     # Check for non-zero width and height values for marking contentful.
     # Testing: Existing WPT Tests Passed
     # Fixes: #42592
-https://github.com/servo/servo/pull/42541	(@shubhamg13, #42541)	layout: Introduce `PaintTimingHandler` (#42541)
+-https://github.com/servo/servo/pull/42541	(@shubhamg13, #42541)	layout: Introduce `PaintTimingHandler` (#42541)
     ^ commit 0c2962e2c2a46573dd98d6e7f6abfbcd093ad8c3
     # This PR aims to open doors for common handler for all `PaintTiming` protocols.
     # Will add more logic related to `PaintTiming` here targeting completeness of it.
@@ -2640,7 +2665,8 @@ https://github.com/servo/servo/pull/42541	(@shubhamg13, #42541)	layout: Introduc
     # 3. Adding helper functions.
     # Testing: No change in behavior expected.
     # - `components/servo/tests/largest_contentful_paint.rs`
-https://github.com/servo/servo/pull/42567	(@rayguo17, #42567)	image: take exif orientation into account when decoding static image (#42567)
++https://github.com/servo/servo/pull/42567	(@rayguo17, #42567)	image: take exif orientation into account when decoding static image (#42567)
+    layout; [spec] images now rotate according to EXIF metadata by default (like ‘image-orientation: from-image’)
     ^ commit 6438cb1cd68368fb208d5c988668ab3df49c212f
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # When decoding static image, change the layout of rgba value based on exif orientation metadata.
@@ -2653,7 +2679,8 @@ https://github.com/servo/servo/pull/42567	(@rayguo17, #42567)	image: take exif o
     # > This property is optional for implementations.
     # And there are more wpt tests passing, we may be able to deprioritize the tests for `image-orientation`.
 >>> 2026-02-15T06:25:56Z
-https://github.com/servo/servo/pull/42621	(@TimvdLippe, #42621)	script: Add baseline for `editing/` WPT tests (#42621)
++https://github.com/servo/servo/pull/42621	(@TimvdLippe, #42621)	script: Add baseline for `editing/` WPT tests (#42621)
+    dom; [git show] started impl work on document.execCommand()
     ^ commit ae390d8bf8359bf6b52d528795a8480ad972c0d1
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -2665,7 +2692,8 @@ https://github.com/servo/servo/pull/42621	(@TimvdLippe, #42621)	script: Add base
     ^ commit e7c35d544512b1b6005e1cc65568f15699a51e25
     # Testing: Just refactor, should be covered by WPT
     # Part of #40600
-https://github.com/servo/servo/pull/42604	(@Gae24, #42604)	script: implement `resolve_a_module_integrity_metadata` (#42604)
++https://github.com/servo/servo/pull/42604	(@Gae24, #42604)	script: implement `resolve_a_module_integrity_metadata` (#42604)
+    dom; [git show + mdn] `.integrity` in <script type=importmap>
     ^ commit 49adfed9a8fa56c6e80268406e5b2209fc3177ab
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # `ImportMap` _integrity_ entry was practically unused, since it is only needed for [resolving a module integrity
@@ -2675,7 +2703,7 @@ https://github.com/servo/servo/pull/42604	(@Gae24, #42604)	script: implement `re
     # an implementation for it, the test timeout, making the test cases that comes after them not run.
     # Testing: More tests start passing
     # Part of #37553
-https://github.com/servo/servo/pull/42617	(@shubhamg13, #42617)	layout: Simply check of `non-zero` bounding rect for contentful_paint (#42617)
+-https://github.com/servo/servo/pull/42617	(@shubhamg13, #42617)	layout: Simply check of `non-zero` bounding rect for contentful_paint (#42617)
     ^ commit ebcb92d6c140931f2fbaec25d68ffbba3bdc9e4b
     # Use helper function to evaluate non-zero bounding rect size
     # Testing: Existing WPT Tests Passed. No change in behaviour.
@@ -2891,21 +2919,24 @@ https://github.com/servo/servo/pull/42617	(@shubhamg13, #42617)	layout: Simply c
     # - [from `CanGc` to `&mut JSContext`](https://github.com/servo/servo/commit/36e5b32ee1823e663d29a35a90caf257acacab90)
     # Testing: Just refactor, should be covered by WPT.
     # Part of #40600
-https://github.com/servo/servo/pull/42626	(@TimvdLippe, #42626)	script: Check trusted types for execCommand (#42626)
++https://github.com/servo/servo/pull/42626	(@TimvdLippe, #42626)	script: Check trusted types for execCommand (#42626)
+    dom; [git show] start impl work for execCommand
     ^ commit 2eeaf05af97cd0d85e63ca7c6340a1f79631503b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # We should only do this for the `insertHTML` command.
     # All other commands are unaffected.
     # Part of #25005
-https://github.com/servo/servo/pull/42630	(@Gae24, #42630)	script: ensure `resolve_module_specifier` picks the most specific scope (#42630)
++https://github.com/servo/servo/pull/42630	(@Gae24, #42630)	script: ensure `resolve_module_specifier` picks the most specific scope (#42630)
+    dom; [git show + mdn] fix ordering of `.scopes` in <script type=importmap>
     ^ commit 4f1f128307f8463ea5d6d0687394354aba576e05
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # According to [specification](https://html.spec.whatwg.org/multipage/#the-resolution-algorithm) when resolving a
     # module specifier we should prioritize more specific scopes, we achieve it by sorting the scopes in descending order.
     # Testing: A test is now passing
     # Part of #37553
-https://github.com/servo/servo/pull/42628	(@yezhizhen, #42628)	webdriver: Retrieve viewport size in CSS pixel (#42628)
++https://github.com/servo/servo/pull/42628	(@yezhizhen, #42628)	webdriver: Retrieve viewport size in CSS pixel (#42628)
+    webdriver; [git show + spec] fix handling of devicePixelRatio≠1 in pointer actions and scroll actions
     ^ commit 16f9f7500e5240c596189b454a9b1b92b3b05c35
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # According to
@@ -3070,7 +3101,8 @@ https://github.com/servo/servo/pull/42628	(@yezhizhen, #42628)	webdriver: Retrie
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42660	(@sagudev, #42660)	webgl: correctly handle corner case of active texture (the one at MAX_COMBINED_TEXTURE_IMAGE_UNITS) (#42660)
+-https://github.com/servo/servo/pull/42660	(@sagudev, #42660)	webgl: correctly handle corner case of active texture (the one at MAX_COMBINED_TEXTURE_IMAGE_UNITS) (#42660)
+    ; [fixes issue unclear]
     ^ commit 97990a26152c8616e5aaf81610b1fd28fd4afed6
     # #42639 was actually the real issue, just solved less ideally. Instead of doing negative checks, which are easy
     # to go wrong like before, we know do positive check which is more clear IMO. Because counting of units is 0-based,
@@ -3081,11 +3113,13 @@ https://github.com/servo/servo/pull/42660	(@sagudev, #42660)	webgl: correctly ha
     # https://sagudev.github.io/WebGL/sdk/tests/conformance/textures/misc/texture-active-bind.html
     # Fixes: #42639
     # Co-authored-by: Weixie Cui
-https://github.com/servo/servo/pull/42661	(@alice, #42661)	Bump rust version to 1.92.0 (#42661)
+-https://github.com/servo/servo/pull/42661	(@alice, #42661)	Bump rust version to 1.92.0 (#42661)
+    ; not the msrv
     ^ commit 00e07a67366d633289aae11b930666dfc7684730
     # This is a prerequisite for using the new version of egui introduced in https://github.com/servo/servo/pull/42402.
     # Testing: No new behaviour.
-https://github.com/servo/servo/pull/42633	(@TimvdLippe, #42633)	script: Implement support for contenteditable (#42633)
++https://github.com/servo/servo/pull/42633	(@TimvdLippe, #42633)	script: Implement support for contenteditable (#42633)
+    dom; [git show; checked in servoshell] contentEditable on HTMLElement (for execCommand only! no interactive editing)
     ^ commit e23c14aabdd50c161fb2da0a6b6b6a53cb47e240
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -3095,7 +3129,7 @@ https://github.com/servo/servo/pull/42633	(@TimvdLippe, #42633)	script: Implemen
     # pre-existing failure for absolute positioned pseudo elements. These currently do not render correctly, regardless
     # of the existence of contenteditable.
     # Fixes #12776
-https://github.com/servo/servo/pull/42657	(@mrobinson, #42657)	script: Use the `Weak<ScriptThread>` reference for tracing instead of thread-local storage (#42657)
+-https://github.com/servo/servo/pull/42657	(@mrobinson, #42657)	script: Use the `Weak<ScriptThread>` reference for tracing instead of thread-local storage (#42657)
     ^ commit 6842da5f5b371f2cb8acf074b63f3410b9573de0
     # This changes makes it so that tracing accesses the `ScriptThread` via a
     # weak reference set on the `Runtime` rather than thread local storage.
