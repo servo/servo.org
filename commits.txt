@@ -3138,18 +3138,20 @@
     # for SpiderMonkey callbacks in the `ScriptThread`.
     # Testing: This should not change behavior in a way that is observable
     # via testing.
-https://github.com/servo/servo/pull/42622	(@rayguo17, #42622)	stylo: Treat empty css url string as invalid (#42622)
++https://github.com/servo/servo/pull/42622	(@rayguo17, #42622)	stylo: Treat empty css url string as invalid (#42622)
+    style; fix bug where empty ‘url()’ would try to make a request
     ^ commit 97f0cb29b7a140ea973c96a1c8ee6d07a98045d3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Parallel Servo PR for https://github.com/servo/stylo/pull/313
     # Testing: two wpt tests start passing.
-https://github.com/servo/servo/pull/42581	(@shubhamg13, #42581)	layout: Consider `border-image` contentful for `first-contentful-paint` (#42581)
++https://github.com/servo/servo/pull/42581	(@shubhamg13, #42581)	layout: Consider `border-image` contentful for `first-contentful-paint` (#42581)
+    dom; fix First Contentful Paint timings for ‘border-image’
     ^ commit 3d18f331db081ece9e1567cff0d5d22f2e54b5f3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # We have test for border-image with svg. Adding this with png
     # Testing: `wpt/tests/paint-timing/fcp-only/fcp-border-image.html`
     # Fixes: #42618
-https://github.com/servo/servo/pull/42600	(@mrobinson, @Loirooriol, @lukewarlow, #42600)	layout: Clear all node damage during damage traversal (#42600)
+-https://github.com/servo/servo/pull/42600	(@mrobinson, @Loirooriol, @lukewarlow, #42600)	layout: Clear all node damage during damage traversal (#42600)
     ^ commit 59f2325ff1d9a8ed1d31ac7faea6fc7d66526455
     # Instead of waiting until the box tree construction phase of layout to
     # clear node damage, clear it during the damage traversal. This means that
@@ -3158,7 +3160,7 @@ https://github.com/servo/servo/pull/42600	(@mrobinson, @Loirooriol, @lukewarlow,
     # optimizations.
     # Testing: This should not really change behavior (other than being marginally more
     # efficient when there is a dirty root), so existing tests should suffice.
-https://github.com/servo/servo/pull/42656	(@willypuzzle, #42656)	script: Refactors GPUComputePassEncoder to manage drop logic (#42656)
+-https://github.com/servo/servo/pull/42656	(@willypuzzle, #42656)	script: Refactors GPUComputePassEncoder to manage drop logic (#42656)
     ^ commit 8a16d8ca7dcd51aeff924893fd7aa23f9b2e1011
     # Moves the drop logic for `GPUComputePassEncoder` to a separate `DroppableGPUComputePassEncoder` struct.
     # Testing: Tests that coverages webgpu just exist
@@ -3170,7 +3172,7 @@ https://github.com/servo/servo/pull/42656	(@willypuzzle, #42656)	script: Refacto
     # Testing: Refactor, covered by existing WPT tests.
     # Part of #40600
 >>> 2026-02-18T06:38:05Z
-https://github.com/servo/servo/pull/42690	(@willypuzzle, #42690)	script: Defers GPUComputePipeline drop to a helper struct (#42690)
+-https://github.com/servo/servo/pull/42690	(@willypuzzle, #42690)	script: Defers GPUComputePipeline drop to a helper struct (#42690)
     ^ commit 24f23038119da9e2f3e1c441f7b2fdd9eea4c21c
     # Moves the drop implementation for `GPUComputePipeline` to a separate `DroppableGPUComputePipeline` struct.
     # Removes `allowDropImpl` from the bindings configuration.
@@ -3215,7 +3217,8 @@ https://github.com/servo/servo/pull/42690	(@willypuzzle, #42690)	script: Defers 
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42689	(@TimurBora, #42689)	script: Turn scrollParent into a function and change wpt tests (#42689)
++https://github.com/servo/servo/pull/42689	(@TimurBora, #42689)	script: Turn scrollParent into a function and change wpt tests (#42689)
+    dom; [fixes issue + spec issue] scrollParent() on HTMLElement is now a function per csswg-drafts#12731
     ^ commit 87ff2021a2229b7e1e93765863d01038fc6c6180
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -3224,7 +3227,8 @@ https://github.com/servo/servo/pull/42689	(@TimurBora, #42689)	script: Turn scro
     # Testing: updating wpt tests `tests/wpt/tests/css/cssom-view/scrollParent.html` and
     # `tests/wpt/tests/css/cssom-view/scrollParent-shadow-tree.html`
     # Fixes: #42547
-https://github.com/servo/servo/pull/42684	(@Narfinger, #42684)	pixels: Avoid unnecessary clone (#42684)
++https://github.com/servo/servo/pull/42684	(@Narfinger, #42684)	pixels: Avoid unnecessary clone (#42684)
+    perf; [checked impl for clearer impact statement unsuccessfully] reduce runtime of one of the steps of loading an image by up to 30%
     ^ commit 0c623f52811d77c644209c0345f6fd5aa72320f4
     # We do not need to clone the vector just to clone it again for an GenericSharedMemory to take it.
     # In real life tests this copy can take up to 30% of the `webrender_image_descriptor_and_data_for_frame` function.
@@ -3236,7 +3240,7 @@ https://github.com/servo/servo/pull/42684	(@Narfinger, #42684)	pixels: Avoid unn
     # Part of https://github.com/servo/servo/issues/40600
     # Signed-off-by: Narfinger
     # Testing: This is a refactor, hence, compilation is the test.
-https://github.com/servo/servo/pull/42686	(@Gae24, #42686)	script: remove unused code inside `globalscope.rs` (#42686)
+-https://github.com/servo/servo/pull/42686	(@Gae24, #42686)	script: remove unused code inside `globalscope.rs` (#42686)
     ^ commit e2e93a214aee70c77ae0276a1e1730fa62b5d69c
     # - `resolved_module_set_mut()` was replaced by `add_module_to_resolved_module_set`
     # - `send_to_constellation()`, all code use `script_to_constellation_chan()` and optionally handle errors
@@ -3244,7 +3248,8 @@ https://github.com/servo/servo/pull/42686	(@Gae24, #42686)	script: remove unused
     # removed later on
     # Testing: A successful build is enough
     # Part of #40882
-https://github.com/servo/servo/pull/42668	(@Gae24, #42668)	script: check if resolved module specifier starts with the specifier of the imported maps (#42668)
++https://github.com/servo/servo/pull/42668	(@Gae24, #42668)	script: check if resolved module specifier starts with the specifier of the imported maps (#42668)
+    dom; [spec + spec issue] fix bug when using multiple <script type=importmap> (and fix spec issue html#12167)
     ^ commit 09bb43ed8d7af51f896bc6498b0cc38289bc9c36
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # After debugging some of the failing tests, it appears spec text is wrong.
@@ -3265,7 +3270,8 @@ https://github.com/servo/servo/pull/42668	(@Gae24, #42668)	script: check if reso
     # Pass down `&mut JSContext` in `post_connection_steps`
     # Testing: No functionality change, a successful build is enough
     # Part of #40600
-https://github.com/servo/servo/pull/42634	(@TimvdLippe, #42634)	script: Implement check for supported and enabled commands (#42634)
++https://github.com/servo/servo/pull/42634	(@TimvdLippe, #42634)	script: Implement check for supported and enabled commands (#42634)
+    dom; [git show] document.queryCommandEnabled(), gated by --pref dom_exec_command_enabled
     ^ commit 92e2d0008341890d8c92e352a584b9f38d7b3662
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -3288,14 +3294,15 @@ https://github.com/servo/servo/pull/42634	(@TimvdLippe, #42634)	script: Implemen
     ^ commit f6230815375dd7f6bd075d8fcef1b5bd1693db16
     # Testing: Just refactor, but should be covered by WPT
     # Part of #40600
-https://github.com/servo/servo/pull/42601	(@simonwuelker, #42601)	devtools: Apply attribute modifications in the inspector to the DOM tree (#42601)
++https://github.com/servo/servo/pull/42601	(@simonwuelker, #42601)	devtools: Apply attribute modifications in the inspector to the DOM tree (#42601)
+    devtools; allow editing DOM attributes, and update tree when DOM attributes change
     ^ commit a60f9370c7be4243df812566f01e55eb684227c0
     # The inspector view allows modifying the attributes of DOM elements. However, we lie to the devtools client: While
     # it looks like the attributes change, the changes are never actually applied to the DOM.
     # This change fixes that, and also makes it so attribute modifications from non-inspector sources are shown in
     # the inspector.
     # Testing: This change adds two tests
-https://github.com/servo/servo/pull/42678	(@yezhizhen, #42678)	deps: Deduplicate `futures`, disable features & improve consistency (#42678)
+-https://github.com/servo/servo/pull/42678	(@yezhizhen, #42678)	deps: Deduplicate `futures`, disable features & improve consistency (#42678)
     ^ commit cad0ded8b36c7ce880f30b13dc6de03042439edc
     # - Remove deps on `futures@0.1.31`. Update deny
     # - Remove `compat` features of futures. This is not used anywhere and introduces duplication.
@@ -3305,7 +3312,7 @@ https://github.com/servo/servo/pull/42678	(@yezhizhen, #42678)	deps: Deduplicate
     # - Update `futures` & `futures-executor` to 0.3.32
     # - Disable default features of `futures`: this decreases binary size by 12KB in release.
     # Testing: Existing UT.
-https://github.com/servo/servo/pull/42659	(@24bsm032@iiitdmj.ac.in, #42659)	mach: enable type checking for etc/ci python files (#42659)
+-https://github.com/servo/servo/pull/42659	(@24bsm032@iiitdmj.ac.in, #42659)	mach: enable type checking for etc/ci python files (#42659)
     ^ commit a1e269675d6e74425971f2bddb665394befe5a39
     # This enables type checking for Python files under etc/ci by adding
     # etc/ci/*.py to pyrefly's project-includes in pyproject.toml.
@@ -3326,7 +3333,8 @@ https://github.com/servo/servo/pull/42659	(@24bsm032@iiitdmj.ac.in, #42659)	mach
     ^ commit 3665659dbe3f41df20419839f854bef4cb6bf583
     # Part of #42638
 >>> 2026-02-19T06:29:19Z
-https://github.com/servo/servo/pull/42502	(@Narfinger, #42502)	devtools: Allow specifiying an address to listen to and default to localhost (#42502)
++https://github.com/servo/servo/pull/42502	(@Narfinger, #42502)	devtools: Allow specifiying an address to listen to and default to localhost (#42502)
+    devtools; --devtools= (--pref devtools_server_port → devtools_server_listen_address) can now take an address:port (or just a port), and defaults to 127.0.0.1 instead of 0.0.0.0
     ^ commit 00fa5d3088e2de170ee3d4642aef8d854f0665de
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains servoshell changes! does it affect the user experience?
