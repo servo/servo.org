@@ -3655,13 +3655,15 @@
     #     preserve the inline content size cache between box tree rebuilds.
     # Testing: This should not change behavior in a testable way (we currently do
     # not have robust performance tests), so WPT test results should not change.
-https://github.com/servo/servo/pull/41508	(@Taym95, #41508)	Indexeddb: transaction lifecycle (#41508)
++https://github.com/servo/servo/pull/41508	(@Taym95, #41508)	Indexeddb: transaction lifecycle (#41508)
+    dom; [git show] indexeddb is more conformant when handling transactions
     ^ commit 590ae8577924390923084390ac8861c39aedd16c
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Indexeddb: transaction lifecycle
     # Testing: more Indexeddb test should pass
     # part of #40983
-https://github.com/servo/servo/pull/42712	(@sagudev, #42712)	script: always `let cx = &mut cx` in codegen and support cx in Constructor (#42712)
++https://github.com/servo/servo/pull/42712	(@sagudev, #42712)	script: always `let cx = &mut cx` in codegen and support cx in Constructor (#42712)
+    crash; [previous patch → fixes issue] safety from ground up
     ^ commit 3cde83447ec5f24cd8155a87e175ff479ca86366
     # #42681 did not actually allowed using cx in Constructor, but it did most heavy lifting. Now we need to pass cx to
     # Constructor call (and skip CanGc) if cx is requested in Bindings.conf. This PR also test this on testbindings.
@@ -3670,7 +3672,8 @@ https://github.com/servo/servo/pull/42712	(@sagudev, #42712)	script: always `let
     # unify this.
     # Testing: It compiles
 >>> 2026-02-21T06:22:07Z
-https://github.com/servo/servo/pull/42704	(@TimvdLippe, #42704)	script: Implement canonicalize whitespace (#42704)
++https://github.com/servo/servo/pull/42704	(@TimvdLippe, #42704)	script: Implement canonicalize whitespace (#42704)
+    dom; [git show + spec] “canonicalize whitespace” algorithm, key part of document.execCommand("delete" | "forwardDelete" | "insertText") <https://w3c.github.io/editing/docs/execCommand/#canonicalize-whitespace>
     ^ commit 32936858dfc104bd67cf82e149dcd440a85eeaa0
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # What I thought would be a small algorithm turns out required tons of other implementations of various definitions,
@@ -3679,7 +3682,8 @@ https://github.com/servo/servo/pull/42704	(@TimvdLippe, #42704)	script: Implemen
     # parts of the delete command untouched. For now, it is good if tests keep on working without crashing. Later,
     # once the full delete command is implemented, more tests should be passing.
     # Part of #25005
-https://github.com/servo/servo/pull/42728	(@mrobinson, #42728)	script: Remove some proprietary Servo-only testing methods from `Window` (#42728)
+-https://github.com/servo/servo/pull/42728	(@mrobinson, #42728)	script: Remove some proprietary Servo-only testing methods from `Window` (#42728)
+    ; [git show + rg codebase] only affects API that was pref-gated dom_servo_helpers_enabled (for testing); pref still remains for ServoTestUtils
     ^ commit e7ee1171d8d3f4b61a47d043d3835c6c8ac9e460
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -3692,7 +3696,8 @@ https://github.com/servo/servo/pull/42728	(@mrobinson, #42728)	script: Remove so
     #     of a W3C specification.
     # 3. `Window.js_backtrace`: This method is moved to `ServoTestUtils`.
     # Testing: Tests are updated to reflect these changes.
-https://github.com/servo/servo/pull/42725	(@sagudev, #42725)	script: Add `reflect_dom_object_with_cx` (#42725)
++https://github.com/servo/servo/pull/42725	(@sagudev, #42725)	script: Add `reflect_dom_object_with_cx` (#42725)
+    crash; [previous patch → fixes issue] safety from ground up
     ^ commit f69ee078d2df2ea7625065f8a17b9984b96ff0ea
     # Just to complement existing with_proto method introduced in #42699.
     # Justification for arg ordering: reflect_dom_* have arguments reversed, so first one is Box (the most important)
@@ -3704,14 +3709,15 @@ https://github.com/servo/servo/pull/42725	(@sagudev, #42725)	script: Add `reflec
     # introduces one, removing that one will is hard (needs VirtualMethods and a lot of work)
     # Testing: Just refactor
     # Part of #40600
-https://github.com/servo/servo/pull/42669	(@Taym95, #42669)	indexeddb: propagate legacy didThrow from version-change event dispatch (#42669)
++https://github.com/servo/servo/pull/42669	(@Taym95, #42669)	indexeddb: propagate legacy didThrow from version-change event dispatch (#42669)
+    dom; [git show + spec] indexeddb is more conformant when upgrading a database (which happens when opening a connection)
     ^ commit 0bc3b61a74d149208e7a1ab8843e0d32ed69a3a4
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # indexeddb: propagate legacy didThrow from version-change event dispatch
     # Testing: fire-upgradeneeded-event-exception.any.js, upgrade-transaction-deactivation-timing.any.js are passing.
     # depends on https://github.com/servo/servo/pull/41508
     # part of https://github.com/servo/servo/issues/40983
-https://github.com/servo/servo/pull/42714	(@lukewarlow, @mrobinson, #42714)	script: Introduce `ServoTestUtils` and a `forceLayout()` function (#42714)
+-https://github.com/servo/servo/pull/42714	(@lukewarlow, @mrobinson, #42714)	script: Introduce `ServoTestUtils` and a `forceLayout()` function (#42714)
     ^ commit 853fcf4fda0c31ab418c21eac4323d9e91d2b912
     ^ /!\ contains WebIDL changes! did we ship a new API?
     ^ /!\ may contain changes to feature flags
@@ -3732,7 +3738,7 @@ https://github.com/servo/servo/pull/42714	(@lukewarlow, @mrobinson, #42714)	scri
     # The change also propagate to the all internal methods within the `subtlecrypto` module.
     # Testing: Refactoring. Existing tests suffice.
     # Fixes: Part of #42638
-https://github.com/servo/servo/pull/42265	(@act2510akitake, @lunlunsan, @Gae24, #42265)	script: Use `decode_with_bom_removal` for UTF-8 decoding in Blob, Worker, and Module (#42265)
+-https://github.com/servo/servo/pull/42265	(@act2510akitake, @lunlunsan, @Gae24, #42265)	script: Use `decode_with_bom_removal` for UTF-8 decoding in Blob, Worker, and Module (#42265)
     ^ commit 58994df9c9ca7ad06d4da393a0692b1c32fe4545
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This PR replaces decode with decode_with_bom_removal when decoding UTF-8 text in several places. Some UTF-8 files start
@@ -3740,7 +3746,8 @@ https://github.com/servo/servo/pull/42265	(@act2510akitake, @lunlunsan, @Gae24, 
     # does this correctly, so this change makes the behavior more spec-compliant.
     # Testing: The project builds successfully.
     # Fixes: #42239
-https://github.com/servo/servo/pull/42654	(@yezhizhen, #42654)	script: Use `touchstart` element as event target for `touchmove`/`touchend`/`touchcancel` (#42654)
++https://github.com/servo/servo/pull/42654	(@yezhizhen, #42654)	script: Use `touchstart` element as event target for `touchmove`/`touchend`/`touchcancel` (#42654)
+    dom; fix event.target for touchmove, touchend, and touchcancel events; fix incorrect firing of touchend events after touchcancel events
     ^ commit e98e4c9d30d4d261488f6d70dbebdb1756761195
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # [Spec](https://w3c.github.io/touch-events/#dfn-touchend:~:text=screen%2E-,The,element,-%2E) for
@@ -3761,7 +3768,8 @@ https://github.com/servo/servo/pull/42654	(@yezhizhen, #42654)	script: Use `touc
     # Move from `InRealm` to `&mut CurrentRealm` and from `CanGc` to `&mut js::context::JSContext`
     # Testing: `/mach build`, `/mach test-unit` and `/mach test-tidy`
     # Fixes: Part of #42638
-https://github.com/servo/servo/pull/42336	(@delan, @alice@igalia.com, #42336)	libservo: Allow the embedder to activate accessibility (#42336)
++https://github.com/servo/servo/pull/42336	(@delan, @alice@igalia.com, #42336)	libservo: Allow the embedder to activate accessibility (#42336)
+    a11y; Servo::set_accessibility_active() later superseded by WebView::set_accessibility_active()
     ^ commit c07682f22224e98f9f68535882ac4f6ef6814834
     ^ /!\ contains libservo changes! does it affect the embedder?
     # this patch adds a Servo::set_accessibility_active() method that embedders can use to tell Servo to start building
@@ -3775,12 +3783,13 @@ https://github.com/servo/servo/pull/42336	(@delan, @alice@igalia.com, #42336)	li
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 22-02-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/42743	(@Loirooriol, #42743)	Move mozjs and egui patching into the right place (#42743)
+-https://github.com/servo/servo/pull/42743	(@Loirooriol, #42743)	Move mozjs and egui patching into the right place (#42743)
     ^ commit 1e7918de60bb5ab20fc632e41ec93c96ec9c332e
     # They need to be under `[patch.crates-io]`. At the previous position, they wouldn't be patched when e.g. uncommenting
     # the section for patching Stylo crates.
     # Testing: Not needed, no behavior change
-https://github.com/servo/servo/pull/42731	(@TimvdLippe, #42731)	script: Implement queryCommandSupported (#42731)
++https://github.com/servo/servo/pull/42731	(@TimvdLippe, #42731)	script: Implement queryCommandSupported (#42731)
+    dom; document.queryCommandSupported()
     ^ commit e505275744d539e6e21a0f7fbdc271239e9a70f9
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -3794,14 +3803,17 @@ https://github.com/servo/servo/pull/42731	(@TimvdLippe, #42731)	script: Implemen
     # tests don't consider a command enabled, since the
     # range of the selection is empty.
     # Part of #25005
-https://github.com/servo/servo/pull/42738	(@kkoyung, #42738)	script: Use `reflect_dom_object_with_cx` in `CryptoKey::new` (#42738)
++https://github.com/servo/servo/pull/42738	(@kkoyung, #42738)	script: Use `reflect_dom_object_with_cx` in `CryptoKey::new` (#42738)
+    crash; [previous patch] safety from ground up
     ^ commit 00a36b27b8ea341670281c785cef5eadd4ec94b1
     # Use the new `reflect_dom_object_with_cx` introduced in #42725 in `CryptoKey::new`.
     # Testing: Refactoring. Existing tests suffice.
-https://github.com/servo/servo/pull/42737	(@sagudev, #42737)	script: Use `reflect_dom_object_with_cx` and without proto if possible (#42737)
++https://github.com/servo/servo/pull/42737	(@sagudev, #42737)	script: Use `reflect_dom_object_with_cx` and without proto if possible (#42737)
+    crash; safety from ground up
     ^ commit 1bf985a92a4288fb62a5ca4224f637af9335a2ef
     # This was left over from https://github.com/servo/servo/pull/42725#pullrequestreview-3832117437
-https://github.com/servo/servo/pull/42735	(@TimurBora, #42735)	fixup: inline CanGc and use CurrentRealm in get_gatt_children (#42735)
++https://github.com/servo/servo/pull/42735	(@TimurBora, #42735)	fixup: inline CanGc and use CurrentRealm in get_gatt_children (#42735)
+    crash; safety from ground up
     ^ commit 235dd18b79f22f86b64a9e52d0d0f7594f766c10
     # Follow-up PR to #42720 (addressing nits by @sagudev)
     # Testing: It compiles without any errors
@@ -4333,12 +4345,12 @@ https://github.com/servo/servo/pull/42735	(@TimurBora, #42735)	fixup: inline Can
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42757	(@Taym95, #42757)	Indexeddb: Move IDBFactory to global scope(away from specific globals like window and worker) (#42757)
+-https://github.com/servo/servo/pull/42757	(@Taym95, #42757)	Indexeddb: Move IDBFactory to global scope(away from specific globals like window and worker) (#42757)
     ^ commit 6fece59b5ac03c65c28a95d58797a7253a062c99
     # Move IDBFactory to global scope(away from specific globals like window and worker)
     # Testing: no effect on WPT test.
     # part of https://github.com/servo/servo/issues/40983
-https://github.com/servo/servo/pull/42655	(@kkoyung, #42655)	script: Simplify IDL dictionary conversion in `SubtleCrypto` (#42655)
+-https://github.com/servo/servo/pull/42655	(@kkoyung, #42655)	script: Simplify IDL dictionary conversion in `SubtleCrypto` (#42655)
     ^ commit 91c717ccc8a28ec89630782fd6080f87227c83fd
     # In `NormalizedAlgorithm::from_object_value`, we use `dictionary_from_jsval` to convert `HandleValue` into IDL
     # dictionary types generated by `script_bingings`, and immediately use `From`, `TryFrom`, `TryFromWithCx` trait
@@ -4348,7 +4360,8 @@ https://github.com/servo/servo/pull/42655	(@kkoyung, #42655)	script: Simplify ID
     # for those dictionaries and moving the `dictionary_from_jsval` calls into `try_from_with_cx`.
     # Testing: Refactoring. Existing tests suffice.
     # Fixes: Preparation for #42579
-https://github.com/servo/servo/pull/42755	(@simonwuelker, #42755)	layout: Create a webrender stacking context for fragments with `transform-style: preserve-3d` (#42755)
++https://github.com/servo/servo/pull/42755	(@simonwuelker, #42755)	layout: Create a webrender stacking context for fragments with `transform-style: preserve-3d` (#42755)
+    style; [git show + spec + playing with and reading failing tests] partial support for ‘transform-style: preserve-3d’
     ^ commit 98c63925b6e2c7f5dc5ad3d79f96366e44bcb318
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Such elements already establish stacking contexts, but we don't tell webrender about them.
@@ -4361,11 +4374,13 @@ https://github.com/servo/servo/pull/42755	(@simonwuelker, #42755)	layout: Create
     # for example.
     # Fixes https://github.com/servo/servo/issues/30474
     # Testing: New tests start to pass.
-https://github.com/servo/servo/pull/42752	(@simonwuelker, #42752)	script: Don't crash when logging self-referential objects with devtools (#42752)
++https://github.com/servo/servo/pull/42752	(@simonwuelker, #42752)	script: Don't crash when logging self-referential objects with devtools (#42752)
+    devtools; [fixes issue + rg codebase + git log -S + trying repro] part of console.log() with objects showing a preview
     ^ commit 742c8f8ef6473d7fcbbd474b6a16a75a4a7c8550
     # Testing: This change adds a test
     # Fixes https://github.com/servo/servo/issues/42742
-https://github.com/servo/servo/pull/42748	(@TimvdLippe, #42748)	script: Implement remaining query command methods (#42748)
++https://github.com/servo/servo/pull/42748	(@TimvdLippe, #42748)	script: Implement remaining query command methods (#42748)
+    dom; [git show] document.queryCommand{Indeterm,State,Value}() gated by --pref dom_exec_command_enabled
     ^ commit f8552ed2142668cd25db831e3783261c42f7124a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -4373,13 +4388,15 @@ https://github.com/servo/servo/pull/42748	(@TimvdLippe, #42748)	script: Implemen
     # clutter when debugging these tests to figure out why they aren't passing yet.
     # For the delete command, since it doesn't have any state or is indeterminate, we always return the same.
     # Part of #25005
-https://github.com/servo/servo/pull/42732	(@Taym95, #42732)	FIx Intermittent transaction-scheduling-mixed-scopes test (#42732)
++https://github.com/servo/servo/pull/42732	(@Taym95, #42732)	FIx Intermittent transaction-scheduling-mixed-scopes test (#42732)
+    dom; [git show] more conformant transaction handling in indexeddb
     ^ commit 1e01b04cc513b1ad1a9cb669de3d7de497b91047
     # Queue the "complete" event before unblocking later transactions in the backend. This preserves event ordering for
     # overlapping transactions created on the same connection.
     # Fixes #42730
     # Fixes #42718
-https://github.com/servo/servo/pull/42745	(@yezhizhen, #42745)	webdriver: Check missing params before dispatch scroll action (#42745)
++https://github.com/servo/servo/pull/42745	(@yezhizhen, #42745)	webdriver: Check missing params before dispatch scroll action (#42745)
+    webdriver; [git show] fix incorrect exception thrown when wheel actions are missing properties
     ^ commit 27fd7dfa309032419104a9410d7b200baecaf1db
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This actually happens at a very early stage: https://w3c.github.io/webdriver/#dfn-process-a-wheel-action
@@ -4393,7 +4410,7 @@ https://github.com/servo/servo/pull/42745	(@yezhizhen, #42745)	webdriver: Check 
     # require passing down cx from many more places :(
     # Testing: Just refactor, but should be covered by WPT.
     # Part of #42638
-https://github.com/servo/servo/pull/42733	(@yezhizhen, #42733)	script:  Rectify `update_active_touch_points_when_early_return` (#42733)
+-https://github.com/servo/servo/pull/42733	(@yezhizhen, #42733)	script:  Rectify `update_active_touch_points_when_early_return` (#42733)
     ^ commit 75418e7ace7a5fe65d802f1950f77e4b715d6a3d
     ^ /!\ may contain changes to feature flags
     # - Use `FxHashMap` for `active_pointer_ids`
@@ -4401,7 +4418,8 @@ https://github.com/servo/servo/pull/42733	(@yezhizhen, #42733)	script:  Rectify 
     # - Randomly fix some typos
     # Testing: This changes logging message but no other observable behaviours. The logging should be more accurate,
     # but I didn't test.
-https://github.com/servo/servo/pull/42750	(@TimvdLippe, #42750)	wpt: Move exec_command preference to experimental preferences (#42750)
++https://github.com/servo/servo/pull/42750	(@TimvdLippe, #42750)	wpt: Move exec_command preference to experimental preferences (#42750)
+    api; --pref dom_exec_command_enabled is now experimental!
     ^ commit 039eab4485cd94f23e666a3f90fa098d0c2e4423
     ^ /!\ contains servoshell changes! does it affect the user experience?
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -4410,7 +4428,8 @@ https://github.com/servo/servo/pull/42750	(@TimvdLippe, #42750)	wpt: Move exec_c
     # seeing any test coverage in the `/editing` tests. To make tracking of progress possible, it should be defined in
     # prefs, not in the `.ini` configuration.
     # Part of #25005
-https://github.com/servo/servo/pull/42734	(@TimvdLippe, #42734)	script: Implement focus support for contenteditable elements (#42734)
++https://github.com/servo/servo/pull/42734	(@TimvdLippe, #42734)	script: Implement focus support for contenteditable elements (#42734)
+    dom; [git show] focus() on a contenteditable element for the first time now sets the initial selection range
     ^ commit c6c29fcd33f43be19ec790234e7ea59950182a94
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # There is no specification for this, but there are relevant
@@ -4423,7 +4442,7 @@ https://github.com/servo/servo/pull/42734	(@TimvdLippe, #42734)	script: Implemen
     # Part of #7492
     # Part of #12776
     # Part of #25005
-https://github.com/servo/servo/pull/41459	(@pylbrecht, #41459)	Move run_a_module_script() to GlobalScope (#41459)
+-https://github.com/servo/servo/pull/41459	(@pylbrecht, #41459)	Move run_a_module_script() to GlobalScope (#41459)
     ^ commit adee70304646435ae74feb134874332e09fc1b1b
     # Prerequisite for #40365.
     # Moving `run_a_module_script()` to `GlobalScope` will allow us to execute module scripts on `WorkerGlobalScope`.
@@ -4564,7 +4583,8 @@ https://github.com/servo/servo/pull/41459	(@pylbrecht, #41459)	Move run_a_module
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42754	(@Gae24, #42754)	script: Preserve the order of entries when parsing an import map (#42754)
++https://github.com/servo/servo/pull/42754	(@Gae24, #42754)	script: Preserve the order of entries when parsing an import map (#42754)
+    dom; [git show + wpt case] fix ordering of `.imports` in <script type=importmap>
     ^ commit ea7703c39d921bd2e9f64adf566c33e2a6366625
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Unless the feature `preserve_order` is enabled, serde_json will sort the map's entries in an alphanumerical order.
@@ -4574,7 +4594,8 @@ https://github.com/servo/servo/pull/42754	(@Gae24, #42754)	script: Preserve the 
     # can trigger a GC.
     # Testing: A subtest now pass
     # Part of #37553
-https://github.com/servo/servo/pull/42778	(@Loirooriol, #42778)	layout: Let `TableSlotCell` store an `IndependentFormattingContext` (#42778)
++https://github.com/servo/servo/pull/42778	(@Loirooriol, #42778)	layout: Let `TableSlotCell` store an `IndependentFormattingContext` (#42778)
+    layout; [fixes issue] fix failure to respond to style changes on ‘display: table-cell’
     ^ commit 8dfda0979d497c3566d54141eebc5211f4b5e36c
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # `TableSlotCell` was storing the `BlockFormattingContext` and the `LayoutBoxBase` in separate fields. Now it will
@@ -4584,7 +4605,8 @@ https://github.com/servo/servo/pull/42778	(@Loirooriol, #42778)	layout: Let `Tab
     # `IndependentFormattingContext::repair_style()`.
     # Testing: Adding a new test
     # Fixes: #42777
-https://github.com/servo/servo/pull/42768	(@shubhamg13, #42768)	layout: Account `opacity` for marking `first-contentful-paint` (#42768)
++https://github.com/servo/servo/pull/42768	(@shubhamg13, #42768)	layout: Account `opacity` for marking `first-contentful-paint` (#42768)
+    dom; fix First Contentful Paint timings for ‘opacity’
     ^ commit 6d0b65121852e75ad9aea5cdf3f04ca186cc67f9
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # As per the spec opacity should be considered for `first-contentful-paint`
@@ -4593,7 +4615,8 @@ https://github.com/servo/servo/pull/42768	(@shubhamg13, #42768)	layout: Account 
     # >  - el and all of its ancestors' [used](https://www.w3.org/TR/css-cascade-5/#used-value)
     # [opacity](https://www.w3.org/TR/css-color-3/#opacity) is greater than zero.
     # Testing: WPT Tests Passed
-https://github.com/servo/servo/pull/42083	(@Narfinger, #42083)	base: GenericSharedMemory switch to custom struct (#42083)
++https://github.com/servo/servo/pull/42083	(@Narfinger, #42083)	base: GenericSharedMemory switch to custom struct (#42083)
+    perf; cheaper shared memory in non-multiprocess mode by using `Arc<Vec<u8>>` instead of IPC
     ^ commit f7142720c36041e0b3e55dae003cefd111ff37f5
     # This changes the GenericSharedMemory which was previous an alias for IpcSharedMemory to a custom type. Similar
     # to GenericChannel
@@ -4602,7 +4625,8 @@ https://github.com/servo/servo/pull/42083	(@Narfinger, #42083)	base: GenericShar
     # Signed-off-by: Narfinger
     # Testing: We have new simple tests for GenericSharedMemory and WPT
     # (https://github.com/Narfinger/servo/actions/runs/21253723622) should cover the general usage.
-https://github.com/servo/servo/pull/42776	(@mrobinson, #42776)	fonts: Use the system font API to get a fallback on macOS (#42776)
++https://github.com/servo/servo/pull/42776	(@mrobinson, #42776)	fonts: Use the system font API to get a fallback on macOS (#42776)
+    layout; [fixes issues] fix rendering of text in scripts relying on system fallback fonts on macOS (e.g. Adlam)
     ^ commit 6b26d864916a29f39e6e22a1268a2a9ee43abd29
     # As a last resort, as the system font API to find a suitable fallback
     # font on macOS. This allows macOS to use the fonts that are found in the
@@ -4616,25 +4640,28 @@ https://github.com/servo/servo/pull/42776	(@mrobinson, #42776)	fonts: Use the sy
     # Testing: WPT tests are not currently run for macOS, but I've verified that this
     # improves rendering of Adlam and, in general, in the `alluni.txt` testcase.
     # Fixes: #38403. This is part of #41426.
-https://github.com/servo/servo/pull/42717	(@mrobinson, @Loirooriol, @lukewarlow, #42717)	layout: Extend damage propagation isolation to table cells and captions (#42717)
++https://github.com/servo/servo/pull/42717	(@mrobinson, @Loirooriol, @lukewarlow, #42717)	layout: Extend damage propagation isolation to table cells and captions (#42717)
+    perf; part of layout optimisation: keep fragment tree layout cache in descendants of most independent formatting contexts
     ^ commit ff014d9889f4de81128a25abd0dab6399b9813fd
     # These two types of boxes should also be able to isolate damage during
     # propagation and serve as roots for box tree reconstruction, as their
     # contents are independent of their containing box.
     # Testing: This should not change testable behavior so is covered by existing WPT tests.
-https://github.com/servo/servo/pull/41919	(@webbeef, #41919)	net: Use the user locale for the Accept-Language header and navigator language (#41919)
++https://github.com/servo/servo/pull/41919	(@webbeef, #41919)	net: Use the user locale for the Accept-Language header and navigator language (#41919)
+    dom; [git show] navigator.language and ‘Accept-Language’ now default to $LANG instead of en-US if present
     ^ commit a4c5ca107049b0672f76b934724b2e9b4dc685f9
     ^ /!\ may contain changes to feature flags
     # That respects the user locale better than hardcoding en-US.  This can also be manually set with the `LANG`
     # environment variable.
     # Testing: Manual testing with the devtools to check the header sent and the value of `navigator.language`
     # Fixes: #27210
-https://github.com/servo/servo/pull/42716	(@Narfinger, #42716)	script: Do not unnecessary clone CSP list in `Document::get_csp_list` (#42716)
++https://github.com/servo/servo/pull/42716	(@Narfinger, #42716)	script: Do not unnecessary clone CSP list in `Document::get_csp_list` (#42716)
+    perf; [git show + callers in codebase] avoid allocating when checking things against the current ‘Content-Security-Policy’
     ^ commit c6a5eb584a82beb792fe782012337f60ac7e0f7c
     # We previously clonsed the CSP list unnecessarily which consisted of roughly 2.7%. 1.2% spend in Document::get_csp_list.
     # We can easily avoid it with Ref and cloning it deliberately when needed.
     # Testing: This is functionally identical to the previous code as it is a change from clone to a Ref<>.
-https://github.com/servo/servo/pull/42774	(@eerii, #42774)	devtools: Get the correct debuggee in debugger.js (#42774)
+-https://github.com/servo/servo/pull/42774	(@eerii, #42774)	devtools: Get the correct debuggee in debugger.js (#42774)
     ^ commit 158742f72c134d8f0853c1461b467fa4fe5fdf64
     # Remove the placeholder way of getting a debuggee in `eval` and finds the correct one in the map. Another way
     # of doing this would be to have two maps, `debuggeesToPipelineIds` and `pipelineIdsToDebuggees`, I'm open to
@@ -4652,7 +4679,8 @@ https://github.com/servo/servo/pull/42724	(@rayguo17, #42724)	layout: align/just
     # baseline` fallback to `end`.
     # Testing: More WPT test is passing.
     # Fixes: N/A
-https://github.com/servo/servo/pull/42599	(@eerii, @atbrakhi, #42599)	devtools: Unify pause handling for breakpoints and interrupt  (#42599)
++https://github.com/servo/servo/pull/42599	(@eerii, @atbrakhi, #42599)	devtools: Unify pause handling for breakpoints and interrupt  (#42599)
+    devtools; [git show + asked in comments] pause button including pausing execution!
     ^ commit 92259af70217c9ac35d522fa94e6d42f3d4eeb2a
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # The pause debugger screen should be shown for both pausing manually (interrupt) and hitting a breakpoint.
@@ -4663,11 +4691,12 @@ https://github.com/servo/servo/pull/42599	(@eerii, @atbrakhi, #42599)	devtools: 
     # Testing: New DevTools test and manual testing.
     # Part of: #36027
     # cc @atbrakhi
-https://github.com/servo/servo/pull/42772	(@jschwe, #42772)	Rename nightly.yml to release.yml (#42772)
+-https://github.com/servo/servo/pull/42772	(@jschwe, #42772)	Rename nightly.yml to release.yml (#42772)
     ^ commit f99d9689b879d2849de46d4a3ec67ce9f55c8889
     # The workflow is now used both for regular releases and nightly releases.
     # Testing: Not tested, it's a simple rename and nothing should rely on the name `nightly.yml` (grep search)
-https://github.com/servo/servo/pull/42770	(@yezhizhen, #42770)	servo harness: Reduce recursive execution for shutdown (#42770)
+-https://github.com/servo/servo/pull/42770	(@yezhizhen, #42770)	servo harness: Reduce recursive execution for shutdown (#42770)
+    ; [git show] affects wpt glue only, not webdriver impl
     ^ commit c661dd08e1d90c24c3dd567ab2722b58182fc54a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # I like `servo` runner, or better known as its previous name `servodriver` to some people.
@@ -4845,14 +4874,15 @@ https://github.com/servo/servo/pull/42770	(@yezhizhen, #42770)	servo harness: Re
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/42823	(@jdm, #42823)	python: Run flake8 on WPT tooling to match upstream. (#42823)
+-https://github.com/servo/servo/pull/42823	(@jdm, #42823)	python: Run flake8 on WPT tooling to match upstream. (#42823)
     ^ commit ab9bb8ac972fef72dc7e7c424b005ba7c413c484
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This should prevent recurring issues with exported WPT changes being prevented from merging due to failing linting
     # checks upstream.
     # Testing: Can't test WPT linting integration at this point in time.
     # Fixes: #40662
-https://github.com/servo/servo/pull/42806	(@mrobinson, #42806)	script: Fire `select` events for user input selections (#42806)
++https://github.com/servo/servo/pull/42806	(@mrobinson, #42806)	script: Fire `select` events for user input selections (#42806)
+    dom; [git show] fire select events on elements when selection changes due to user input
     ^ commit 1f425510424eda4252410f0424a8d3f8e84ff288
     # This change makes it so that selection changes driven by user input
     # events also fire the `select` event and not just selection changes from
@@ -4863,7 +4893,7 @@ https://github.com/servo/servo/pull/42806	(@mrobinson, #42806)	script: Fire `sel
     # Testing: This change adds a Servo-specific WPT test. This is Servo-specific as
     # it relies on engine-specific text selection behavior.
     # Fixes: #41308.
-https://github.com/servo/servo/pull/42815	(@shubhamg13, #42815)	tests: Move `user_content_manager` tests to a separate file (#42815)
+-https://github.com/servo/servo/pull/42815	(@shubhamg13, #42815)	tests: Move `user_content_manager` tests to a separate file (#42815)
     ^ commit c1414dc424f0df0f5a59fc73f9b85503a40d6955
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Move `UserContentManager` tests to a separate file as `tests/webview.rs` is getting too cluttered.
@@ -4877,24 +4907,27 @@ https://github.com/servo/servo/pull/42815	(@shubhamg13, #42815)	tests: Move `use
     # `SubtleCrypto::new`.
     # Testing: Refactoring. Existing tests suffice.
     # Fixes: Part of #42638
-https://github.com/servo/servo/pull/42821	(@Gae24, #42821)	script: Don't stop at scopes's first module specifier map when resolving a module specifier (#42821)
++https://github.com/servo/servo/pull/42821	(@Gae24, #42821)	script: Don't stop at scopes's first module specifier map when resolving a module specifier (#42821)
+    dom; [git show + wpt case] correctly handle imports that may be relevant to more than one fo the `.scopes` in a <script type=importmap>
     ^ commit c1ee5ff522abaa12fa887fba497d36f24e3533d6
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Previously, the resolution loop would break immediately after running `resolve_imports_match` against the first
     # module specifier map of the import map's scopes, regardless of whether a match was actually found.
     # Testing: All sub-tests of `resolving.html` now pass
     # Part of #37553
-https://github.com/servo/servo/pull/42783	(@Loirooriol, @lukewarlow, @mrobinson, #42783)	layout: Reuse boxes for independent formatting contexts with self damage if compatible (#42783)
++https://github.com/servo/servo/pull/42783	(@Loirooriol, @lukewarlow, @mrobinson, #42783)	layout: Reuse boxes for independent formatting contexts with self damage if compatible (#42783)
+    perf; improve incremental box tree layout by reusing boxes when they are damaged
     ^ commit a2041d6263cfc19ba8aa4261530c08f2d5192e83
     # Previously, when a formatting context root had rebuild damage from its own (not from ancestors), we weren't
     # reusing it. Now we check if the level of the box (i.e. whether it's inline-level, block-level, a table cell,
     # a table caption, or absolutely positioned) that will be generated by the new style is compatible with the old
     # box. And if so, we reuse it.
     # Testing: Not needed, there should be no behavior change
-https://github.com/servo/servo/pull/42819	(@sagudev, #42819)	CI: Always switch apt mirrors before apt (#42819)
+-https://github.com/servo/servo/pull/42819	(@sagudev, #42819)	CI: Always switch apt mirrors before apt (#42819)
     ^ commit 05dccf627c815c8648d853029a882bf43673ccbe
     # Default azure mirror suck and we already used this in linux/linux-wpt workflows.
-https://github.com/servo/servo/pull/42782	(@Narfinger, #42782)	base: Replace calls to servo_opts in generic channel with OnceLock (#42782)
++https://github.com/servo/servo/pull/42782	(@Narfinger, #42782)	base: Replace calls to servo_opts in generic channel with OnceLock (#42782)
+    perf; faster multiprocess mode and force-IPC mode checks
     ^ commit e0533af47eb7c3db0c99d7e144761f272fe6f0e1
     # Previous we had multiple calls to `servo_config::opts::get().multiprocess || servo_config::opts::get().force_ipc`
     # scattered
@@ -4910,22 +4943,23 @@ https://github.com/servo/servo/pull/42782	(@Narfinger, #42782)	base: Replace cal
     # - `DissimilarOriginWindowMethods::Opener`
     # Testing: Builds and runs locally. WPT [test passed](https://github.com/onsah/servo/actions/runs/22342635066)
     # Fixes: part of https://github.com/servo/servo/issues/42347
-https://github.com/servo/servo/pull/42799	(@shubhamg13, #42799)	layout: Move `LCPCandidateID` logic to `PaintTimingHandler` (#42799)
+-https://github.com/servo/servo/pull/42799	(@shubhamg13, #42799)	layout: Move `LCPCandidateID` logic to `PaintTimingHandler` (#42799)
     ^ commit e94e98754c0324a842b344b0399a31216ce64485
     # This eliminates some code duplication.
     # Testing: This change is just moving code and should not change functionality, so should be covered by existing tests.
-https://github.com/servo/servo/pull/42564	(@shubhamg13, #42564)	wpt: Enable `largest_contentful_paint_enabled` for `paint_timing/with_lcp` (#42564)
+-https://github.com/servo/servo/pull/42564	(@shubhamg13, #42564)	wpt: Enable `largest_contentful_paint_enabled` for `paint_timing/with_lcp` (#42564)
     ^ commit d5edb268ab8be2a71efffa6fb927f3bdb8e8e555
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Enable feature for some tests in `paint_timing`
     # Testing: Update WPT Expectations
-https://github.com/servo/servo/pull/42792	(@simonwuelker, #42792)	script: Cleanup the terminology around parser/main thread in async html parser (#42792)
+-https://github.com/servo/servo/pull/42792	(@simonwuelker, #42792)	script: Cleanup the terminology around parser/main thread in async html parser (#42792)
     ^ commit d68760964cdd8325a44f4a12724fcd1cb08d103d
     # The variable names and comments around the code refer to the main thread as the "tokenizer" and the parser thread
     # as the "html tokenizer". This confuses me every time I look at the code, because both tokenize html and neither
     # can do it without the other.
     # I've renamed things to be a bit more clear, mostly referring to things as the "main thread" and the "parser thread".
-https://github.com/servo/servo/pull/42810	(@atbrakhi, #42810)	devtools: Fix panic for breakpoint at invalid entry point (#42810)
++https://github.com/servo/servo/pull/42810	(@atbrakhi, #42810)	devtools: Fix panic for breakpoint at invalid entry point (#42810)
+    crash; devtools: fix panic when setting breakpoint at an invalid location
     ^ commit 960a20c2ab9c557540be0f0454b83a699755838a
     # Fix panic for breakpoint at invalid entry point.
     # Testing: Added a new test
