@@ -417,13 +417,16 @@ $ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-
 $ tools/list-commits-by-nightly.sh ~/code/servo tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
 ```
 
-- Open commits.txt — for the best ergonomics in VS Code, **Fold All**, then **Change Language Mode** > **Diff**
+- Open commits.txt — for the best ergonomics, set the language mode to **Diff**, then **Fold All**
 - For each commit, read the description below to understand its impact (see [§ Hints for writing about changes](#hints-for-writing-about-changes))
 - For each commit to be excluded from the post, prefix the line with `-`
 - For each commit to be included in the post, prefix the line with `+` then:
     - Add a line immediately below of the form `    one or more tags` (four spaces, then space-separated tags)
-    - To write some notes or additional context, append `; your notes` to that new tags line
+    - To write some notes or additional context, append `; your notes` to that new tags line — be sure to include enough context to write about the change without the hints and description, because those will not be visible after the next step
 - Generate the outline: `tools/generate-outline.sh commits.txt > outline.txt`
+- Open outline.txt — for the best ergonomics, set the language mode to **Diff**
+- For each commit, write about it in the blog post, then change the leading `+` to `-`
+- When none of the lines start with `+`, you’re done!
 
 **TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time. Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
 
