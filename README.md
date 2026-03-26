@@ -423,7 +423,7 @@ $ tools/list-commits-by-nightly.sh ~/code/servo tools/pulls-2025-01-2025-02.json
 - For each commit to be included in the post, prefix the line with `+` then:
     - Add a line immediately below of the form `    one or more tags` (four spaces, then space-separated tags)
     - To write some notes or additional context, append `; your notes` to that new tags line
-- Generate the outline: `tools/generate-outline.sh commits.txt`
+- Generate the outline: `tools/generate-outline.sh commits.txt > outline.txt`
 
 **TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time. Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
 
