@@ -44,6 +44,8 @@ We’ve also landed the **colorspace** attribute (@simonwuelker, #42279), but on
 
 **‘vertical-align’** is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361).
 
+We’ve continued our long-running effort to use the **Rust type system** to make certain kinds of dynamic borrow failures impossible (@Gae24, @pralkarz, @BryanSmith00, @sagudev, @Narfinger, @TimvdLippe, @kkoyung, @TimurBora, @onsah, #42294, #42370, #42417, #42619, #42616, #42637, #42640, #42662, #42679, #42681, #42665, #42667, #42699, #42729, #42726, #42720, #42737, #42735, #42751, #42805, #42809, #42780, #42820, #42715, #42635, #42880, #42846).
+
 <style>
     ._correction {
         max-width: 33em;
