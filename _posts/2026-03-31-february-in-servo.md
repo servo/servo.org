@@ -44,6 +44,20 @@ We’ve also landed the **colorspace** attribute (@simonwuelker, #42279), but on
 
 **‘vertical-align’** is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361).
 
+## Developer tools
+
+[**DevTools**](https://book.servo.org/contributing/devtools.html) has seen some big improvements in February!
+
+When enabled in servoshell, the DevTools server is more secure by default, listening only on localhost when only a port number is specified (@Narfinger, #42502).
+
+In the **Inspector** tab, you can now **edit DOM attributes**, and the DOM tree updates when attributes change (@simonwuelker, #42601, #42785).
+You can now list the event type and phase of **event listeners** attached to a DOM node as well (@simonwuelker, #42355).
+
+In the **Console** tab, **objects can now be previewed** when passed to console.log() and friends (@simonwuelker, #42296, #42510, #42752), and boolean values are now syntax highlighted (@pralkarz, #42513).
+
+In the **Debugger** tab, you can now **pause and resume** script execution, both manually and when breakpoints are hit (@eerii, @atbrakhi, #42599, #42580, #42874).
+We’ve also started working on other debugger features (@atbrakhi, @eerii, #42306), including stepping execution (@eerii, @atbrakhi, #42844, #42878, #42906), so once again stay tuned!
+
 ## Performance and stability
 
 Our **about:memory** page now knows how to **report many new kinds of memory usage**, including the **DevTools** server (@Narfinger, #42478, #42480), **WebGL** (@sagudev, #42570), **localStorage** and **sessionStorage** (@arihant2math, #42484), and some of the memory used by **IndexedDB** (@arihant2math, #42486).
