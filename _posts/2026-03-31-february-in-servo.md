@@ -32,6 +32,7 @@ Plus a bunch of new DOM APIs:
 - **fullscreenElement** on **Document** and **ShadowRoot** (@onsah, #42401)
 - **toJSON()** on **PerformancePaintTiming** (@shubhamg13, #42396)
 - **navigator.pdfViewerEnabled** (@simonwuelker, #42277)
+- **keyPath** on **IDBIndex** (@arihant2math, #42431)
 - **createIndex()**, **deleteIndex()**, and **index()** on **IDBObjectStore** (@arihant2math, @bulltickr, #38840, #42440, #42443)
 
 Servo now supports the newer **pointermove**, **pointerdown**, **pointerup**, and **pointercancel** events (@webbeef, #41290).
@@ -44,11 +45,22 @@ We’ve also landed the **colorspace** attribute (@simonwuelker, #42279), but on
 
 **‘vertical-align’** is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361).
 
+## Embedding API
+
+Some changes to [`Preferences`](https://doc.servo.org/servo/struct.Preferences.html):
+
+- `devtools_server_port` is now [`devtools_server_listen_address`](https://doc.servo.org/servo/struct.Preferences.html#structfield.devtools_server_listen_address), and can now take either a port number (as before) or a full [SocketAddr](https://doc.rust-lang.org/std/net/enum.SocketAddr.html) (@Narfinger, #42502)
+
+- `dom_worklet_blockingsleep` is now `dom_worklet_blockingsleep_enabled` (@mukilan, #42897)
+
+- Removed many unused preferences (@mukilan, #42897) – `js_asyncstack`, `js_discard_system_source`, `js_dump_stack_on_debuggee_would_run`, `js_ion_offthread_compilation_enabled`, `js_mem_gc_allocation_threshold_avoid_interrupt_factor`, `js_mem_gc_allocation_threshold_factor`, `js_mem_gc_allocation_threshold_mb`, `js_mem_gc_decommit_threshold_mb`, `js_mem_gc_dynamic_heap_growth_enabled`, `js_mem_gc_dynamic_mark_slice_enabled`, `js_shared_memory`, `js_throw_on_asmjs_validation_failure`, `js_throw_on_debuggee_would_run`, `js_werror_enabled`, `network_mime_sniff`
+
 ## Developer tools
 
 [**DevTools**](https://book.servo.org/contributing/devtools.html) has seen some big improvements in February!
 
 When enabled in servoshell, the DevTools server is more secure by default, listening only on localhost when only a port number is specified (@Narfinger, #42502).
+You can open the port for remote debugging by passing a full [SocketAddr](https://doc.rust-lang.org/std/net/enum.SocketAddr.html), such as `--devtools=[::]:6080` or `--devtools=0.0.0.0:6080`.
 
 In the **Inspector** tab, you can now **edit DOM attributes**, and the DOM tree updates when attributes change (@simonwuelker, #42601, #42785).
 You can now list the event type and phase of **event listeners** attached to a DOM node as well (@simonwuelker, #42355).
