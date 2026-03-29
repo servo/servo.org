@@ -138,6 +138,11 @@ We’ve continued our long-running effort to **use the Rust type system** to mak
 
 If you navigate to a **video file** or **audio file as a document**, the player now has controls (@webbeef, #42488).
 
+**Images now rotate** according to their **EXIF metadata** by default (@rayguo17, #42567), like they would once we add support for ‘image-orientation: from-image’.
+
+We’re implementing **system-font-aware font fallback** (@mrobinson, #42466), with support for this on macOS landing this month (@mrobinson, #42776).
+This allows Servo to render text in scripts that are not covered by web fonts or any of the fonts on Servo’s built-in lists of fallback fonts, as long as they are covered by fonts installed on the system.
+
 **‘vertical-align’** is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361), and **scrollParent** on **HTMLElement** is now a function per [this recent spec update](https://github.com/w3c/csswg-drafts/issues/12731) (@TimurBora, #42689).
 
 **Cookies** are now more conformant (@sebsebmc, #42418, #42427, #42435).
@@ -170,7 +175,12 @@ We now support the **‘-webkit-text-security’** property in CSS (@mrobinson, 
 
 ## Bug fixes
 
-We’ve fixed a variety of web-related bugs:
+**&lt;img height>** now takes the default &lt;img width> from the aspect ratio of the image (@Loirooriol, #42577), rather than using a width of 300px by default.
+**&lt;svg width=0>** and **&lt;svg height=0>** now take the default width and height (respectively) from the aspect ratio of the &lt;svg viewBox> (@Loirooriol, #42545).
+
+We’ve fixed a bug in the result of **layout queries**, such as getBoundingClientRect(), on inline **&lt;svg>** (@jdm, @Loirooriol, #42594), and we’ve fixed layout bugs related to **‘display: table-cell’** (@Loirooriol, #42778), **‘display: list-item’** (@Loirooriol, #42825, #42864), **‘inset: auto’** (@Loirooriol, #42586), **‘width: max-content’** (@mrobinson, @Loirooriol, @lukewarlow, #42574), **‘align-self: last baseline’** (@rayguo17, #42724), **‘list-style-image’** (@lukewarlow, #42332), **‘content: &lt;image>’** (@lukewarlow, #42332), negative **‘margin’** (@Loirooriol, #42889), and **ink overflow** (@mrobinson, #42403).
+
+We’ve also fixed a variety of other web-related bugs:
 
 - `event.target` being incorrect on **touchmove**, **touchend**, and **touchcancel** events (@yezhizhen, #42654)
 - **touchmove** events not being fired when part of a two-finger pinch zoom (@yezhizhen, #42528)
