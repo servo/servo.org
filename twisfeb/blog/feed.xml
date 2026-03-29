@@ -45,7 +45,7 @@
 &lt;li&gt;&lt;strong&gt;createIndex()&lt;/strong&gt;, &lt;strong&gt;deleteIndex()&lt;/strong&gt;, and &lt;strong&gt;index()&lt;/strong&gt; on &lt;strong&gt;IDBObjectStore&lt;/strong&gt; (@arihant2math, @bulltickr, #38840, #42440, #42443)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Servo now supports the newer &lt;strong&gt;pointermove&lt;/strong&gt;, &lt;strong&gt;pointerdown&lt;/strong&gt;, &lt;strong&gt;pointerup&lt;/strong&gt;, and &lt;strong&gt;pointercancel&lt;/strong&gt; events (@webbeef, #41290).
-We’ve also fixed the &lt;code&gt;event.target&lt;/code&gt; on the older &lt;strong&gt;touchmove&lt;/strong&gt;, &lt;strong&gt;touchend&lt;/strong&gt;, and &lt;strong&gt;touchcancel&lt;/strong&gt; events, we now fire touchmove events even when part of a two-finger pinch zoom (@yezhizhen, #42528), and we no longer fire erroneous touchend events after touchcancel events (@yezhizhen, #42654).&lt;/p&gt;
+The older &lt;strong&gt;touchmove&lt;/strong&gt;, &lt;strong&gt;touchstart&lt;/strong&gt;, &lt;strong&gt;touchend&lt;/strong&gt;, and &lt;strong&gt;touchcancel&lt;/strong&gt; events continue to be supported.&lt;/p&gt;
 &lt;p&gt;The default language in &lt;strong&gt;‘Accept-Language’&lt;/strong&gt; and &lt;strong&gt;navigator.language&lt;/strong&gt; is now taken from the &lt;strong&gt;$LANG&lt;/strong&gt; environment variable if present (@webbeef, #41919), rather than always being set to en-US.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&amp;lt;input type=color&amp;gt;&lt;/strong&gt; now supports any CSS color value (@simonwuelker, #42275), including the more complex values like color-mix().
 We’ve also landed the &lt;strong&gt;colorspace&lt;/strong&gt; attribute (@simonwuelker, #42279), but only in the web-facing side of Servo for now, not the embedding API or in servoshell.&lt;/p&gt;
@@ -135,6 +135,9 @@ This has long behaved incorrectly in Servo, and it has historically caused many 
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We’ve fixed a variety of web-related bugs:&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;code&gt;event.target&lt;/code&gt; being incorrect on &lt;strong&gt;touchmove&lt;/strong&gt;, &lt;strong&gt;touchend&lt;/strong&gt;, and &lt;strong&gt;touchcancel&lt;/strong&gt; events (@yezhizhen, #42654)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;touchmove&lt;/strong&gt; events not being fired when part of a two-finger pinch zoom (@yezhizhen, #42528)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;touchend&lt;/strong&gt; events erroneously firing after touchcancel events (@yezhizhen, #42654)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;assignedNodes()&lt;/strong&gt; on &lt;strong&gt;HTMLSlotElement&lt;/strong&gt; returning incorrect results after the &amp;lt;slot&amp;gt; was removed from the shadow tree (@rayguo17, #42250)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&amp;lt;template&amp;gt;&lt;/strong&gt; failing to throw HierarchyRequestError when a DOM API is used to create an invalid hierarchy (@TimvdLippe, #42276)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&amp;lt;a target&amp;gt;&lt;/strong&gt; failing to work correctly after the related &amp;lt;iframe&amp;gt; is removed and a new one added with the same name (@jdm, #42344)&lt;/li&gt;

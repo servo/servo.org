@@ -281,7 +281,7 @@
 <li><strong>createIndex()</strong>, <strong>deleteIndex()</strong>, and <strong>index()</strong> on <strong>IDBObjectStore</strong> (@arihant2math, @bulltickr, #38840, #42440, #42443)</li>
 </ul>
 <p>Servo now supports the newer <strong>pointermove</strong>, <strong>pointerdown</strong>, <strong>pointerup</strong>, and <strong>pointercancel</strong> events (@webbeef, #41290).
-We’ve also fixed the <code>event.target</code> on the older <strong>touchmove</strong>, <strong>touchend</strong>, and <strong>touchcancel</strong> events, we now fire touchmove events even when part of a two-finger pinch zoom (@yezhizhen, #42528), and we no longer fire erroneous touchend events after touchcancel events (@yezhizhen, #42654).</p>
+The older <strong>touchmove</strong>, <strong>touchstart</strong>, <strong>touchend</strong>, and <strong>touchcancel</strong> events continue to be supported.</p>
 <p>The default language in <strong>‘Accept-Language’</strong> and <strong>navigator.language</strong> is now taken from the <strong>$LANG</strong> environment variable if present (@webbeef, #41919), rather than always being set to en-US.</p>
 <p><strong>&lt;input type=color&gt;</strong> now supports any CSS color value (@simonwuelker, #42275), including the more complex values like color-mix().
 We’ve also landed the <strong>colorspace</strong> attribute (@simonwuelker, #42279), but only in the web-facing side of Servo for now, not the embedding API or in servoshell.</p>
@@ -371,6 +371,9 @@ This has long behaved incorrectly in Servo, and it has historically caused many 
       </a></h2>
 <p>We’ve fixed a variety of web-related bugs:</p>
 <ul>
+<li><code>event.target</code> being incorrect on <strong>touchmove</strong>, <strong>touchend</strong>, and <strong>touchcancel</strong> events (@yezhizhen, #42654)</li>
+<li><strong>touchmove</strong> events not being fired when part of a two-finger pinch zoom (@yezhizhen, #42528)</li>
+<li><strong>touchend</strong> events erroneously firing after touchcancel events (@yezhizhen, #42654)</li>
 <li><strong>assignedNodes()</strong> on <strong>HTMLSlotElement</strong> returning incorrect results after the &lt;slot&gt; was removed from the shadow tree (@rayguo17, #42250)</li>
 <li><strong>&lt;template&gt;</strong> failing to throw HierarchyRequestError when a DOM API is used to create an invalid hierarchy (@TimvdLippe, #42276)</li>
 <li><strong>&lt;a target&gt;</strong> failing to work correctly after the related &lt;iframe&gt; is removed and a new one added with the same name (@jdm, #42344)</li>
