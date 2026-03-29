@@ -19,8 +19,9 @@ categories:
 - **‘:modal’** selectors on **&lt;dialog>** (@lukewarlow, #42201)
 - **‘@property’** rules (@yezhizhen, @Loirooriol, #42136, #42858)
 - **‘alignment-baseline’** and **‘baseline-shift’** (@Loirooriol, #42361)
-- partial support for **‘transform-style: preserve-3d’** (@simonwuelker, #42755)
 - **‘Content-Security-Policy: base-uri’** (@WaterWhisperer, #42272)
+- partial support for **&lt;iframe loading=lazy>** (@TimvdLippe, #41959)
+- partial support for **‘transform-style: preserve-3d’** (@simonwuelker, #42755)
 
 Plus a bunch of new DOM APIs:
 
@@ -37,7 +38,7 @@ Plus a bunch of new DOM APIs:
 - **createIndex()**, **deleteIndex()**, and **index()** on **IDBObjectStore** (@arihant2math, @bulltickr, #38840, #42440, #42443)
 
 Servo now supports the newer **pointermove**, **pointerdown**, **pointerup**, and **pointercancel** events (@webbeef, #41290).
-We’ve also fixed the `event.target` on the older **touchmove**, **touchend**, and **touchcancel** events, and we no longer fire erroneous touchend events after touchcancel events (@yezhizhen, #42654).
+The older **touchmove**, **touchstart**, **touchend**, and **touchcancel** events continue to be supported.
 
 The default language in **‘Accept-Language’** and **navigator.language** is now taken from the **$LANG** environment variable if present (@webbeef, #41919), rather than always being set to en-US.
 
@@ -146,6 +147,9 @@ We now support the **‘-webkit-text-security’** property in CSS (@mrobinson, 
 
 We’ve fixed a variety of web-related bugs:
 
+- `event.target` being incorrect on **touchmove**, **touchend**, and **touchcancel** events (@yezhizhen, #42654)
+- **touchmove** events not being fired when part of a two-finger pinch zoom (@yezhizhen, #42528)
+- **touchend** events erroneously firing after touchcancel events (@yezhizhen, #42654)
 - **assignedNodes()** on **HTMLSlotElement** returning incorrect results after the &lt;slot> was removed from the shadow tree (@rayguo17, #42250)
 - **&lt;template>** failing to throw HierarchyRequestError when a DOM API is used to create an invalid hierarchy (@TimvdLippe, #42276)
 - **&lt;a target>** failing to work correctly after the related &lt;iframe> is removed and a new one added with the same name (@jdm, #42344)
