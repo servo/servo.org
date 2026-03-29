@@ -370,6 +370,9 @@ We’ve also started internally tracking the memory usage of the media subsystem
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p>If you navigate to a <strong>video file</strong> or <strong>audio file as a document</strong>, the player now has controls (@webbeef, #42488).</p>
+<p><strong>Images now rotate</strong> according to their <strong>EXIF metadata</strong> by default (@rayguo17, #42567), like they would once we add support for ‘image-orientation: from-image’.</p>
+<p>We’re implementing <strong>system-font-aware font fallback</strong> (@mrobinson, #42466), with support for this on macOS landing this month (@mrobinson, #42776).
+This allows Servo to render text in scripts that are not covered by web fonts or any of the fonts on Servo’s built-in lists of fallback fonts, as long as they are covered by fonts installed on the system.</p>
 <p><strong>‘vertical-align’</strong> is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361), and <strong>scrollParent</strong> on <strong>HTMLElement</strong> is now a function per <a href="https://github.com/w3c/csswg-drafts/issues/12731">this recent spec update</a> (@TimurBora, #42689).</p>
 <p><strong>Cookies</strong> are now more conformant (@sebsebmc, #42418, #42427, #42435).
 <strong>‘Expires’</strong> and <strong>‘Max-Age’</strong> attributes are now handled correctly in ‘Set-Cookie’ headers, <strong>get()</strong> and <strong>getAll()</strong> on <strong>CookieStore</strong> now trim whitespace in cookie names and values, and the behaviour of <strong>set()</strong> on <strong>CookieStore</strong> has been improved.</p>
@@ -394,7 +397,10 @@ This has long behaved incorrectly in Servo, and it has historically caused many 
 <h2 id="bug-fixes" tabindex="-1">Bug fixes <a class="header-anchor" href="#bug-fixes">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>We’ve fixed a variety of web-related bugs:</p>
+<p><strong>&lt;img height&gt;</strong> now takes the default &lt;img width&gt; from the aspect ratio of the image (@Loirooriol, #42577), rather than using a width of 300px by default.
+<strong>&lt;svg width=0&gt;</strong> and <strong>&lt;svg height=0&gt;</strong> now take the default width and height (respectively) from the aspect ratio of the &lt;svg viewBox&gt; (@Loirooriol, #42545).</p>
+<p>We’ve fixed a bug in the result of <strong>layout queries</strong>, such as getBoundingClientRect(), on inline <strong>&lt;svg&gt;</strong> (@jdm, @Loirooriol, #42594), and we’ve fixed layout bugs related to <strong>‘display: table-cell’</strong> (@Loirooriol, #42778), <strong>‘display: list-item’</strong> (@Loirooriol, #42825, #42864), <strong>‘inset: auto’</strong> (@Loirooriol, #42586), <strong>‘width: max-content’</strong> (@mrobinson, @Loirooriol, @lukewarlow, #42574), <strong>‘align-self: last baseline’</strong> (@rayguo17, #42724), <strong>‘list-style-image’</strong> (@lukewarlow, #42332), <strong>‘content: &lt;image&gt;’</strong> (@lukewarlow, #42332), negative <strong>‘margin’</strong> (@Loirooriol, #42889), and <strong>ink overflow</strong> (@mrobinson, #42403).</p>
+<p>We’ve also fixed a variety of other web-related bugs:</p>
 <ul>
 <li><code>event.target</code> being incorrect on <strong>touchmove</strong>, <strong>touchend</strong>, and <strong>touchcancel</strong> events (@yezhizhen, #42654)</li>
 <li><strong>touchmove</strong> events not being fired when part of a two-finger pinch zoom (@yezhizhen, #42528)</li>
