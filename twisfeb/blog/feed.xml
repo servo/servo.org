@@ -50,8 +50,16 @@ The older &lt;strong&gt;touchmove&lt;/strong&gt;, &lt;strong&gt;touchstart&lt;/s
 &lt;p&gt;&lt;strong&gt;&amp;lt;input type=color&amp;gt;&lt;/strong&gt; now supports any CSS color value (@simonwuelker, #42275), including the more complex values like color-mix().
 We’ve also landed the &lt;strong&gt;colorspace&lt;/strong&gt; attribute (@simonwuelker, #42279), but only in the web-facing side of Servo for now, not the embedding API or in servoshell.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;‘vertical-align’&lt;/strong&gt; is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361).&lt;/p&gt;
-&lt;p&gt;We’ve started implementing &lt;strong&gt;document.execCommand()&lt;/strong&gt; (@TimvdLippe, #42621, #42626, #42750).
-This feature (&lt;code&gt;--pref dom_exec_command_enabled&lt;/code&gt;) is also &lt;strong&gt;enabled in experimental mode&lt;/strong&gt;, and together with &lt;strong&gt;contenteditable&lt;/strong&gt;, it’s critical for rich text editing on the web.
+&lt;p&gt;We’ve started working on &lt;strong&gt;accessibility support for web content&lt;/strong&gt; (@alice, @delan, #42333, #42402), gated by a pref (&lt;code&gt;--pref accessibility_enabled&lt;/code&gt;).
+Each webview will be able to expose its own accessibility tree, which the embedder can then integrate into its own accessibility tree.
+As part of this work:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://accesskit.dev/&quot;&gt;&lt;strong&gt;AccessKit&lt;/strong&gt;&lt;/a&gt; now supports &lt;strong&gt;combining accessibility trees&lt;/strong&gt; with its new “subtree” feature (@DataTriny, @delan, @lukewarlow, @alice, AccessKit/accesskit#655, AccessKit/accesskit#641)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.egui.rs/&quot;&gt;&lt;strong&gt;egui&lt;/strong&gt;&lt;/a&gt; has been migrated to the new AccessKit API (@delan, @lukewarlow, @lucasmerlin, @DataTriny, emilk/egui#7850)&lt;/li&gt;
+&lt;li&gt;we added a &lt;a href=&quot;https://doc.servo.org/servo/struct.Servo.html&quot;&gt;&lt;code&gt;Servo&lt;/code&gt;&lt;/a&gt; API for activating accessibility features (), although this has since become a &lt;a href=&quot;https://doc.servo.org/servo/struct.WebView.html&quot;&gt;&lt;code&gt;WebView&lt;/code&gt;&lt;/a&gt; API&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We’ve started implementing &lt;strong&gt;document.execCommand()&lt;/strong&gt; (@TimvdLippe, #42621, #42626, #42750), gated by a pref (&lt;code&gt;--pref dom_exec_command_enabled&lt;/code&gt;).
+This feature is also &lt;strong&gt;enabled in experimental mode&lt;/strong&gt;, and together with &lt;strong&gt;contenteditable&lt;/strong&gt;, it’s critical for rich text editing on the web.
 The work done in February includes:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;document.queryCommandEnabled()&lt;/strong&gt; (@TimvdLippe, #42634)&lt;/li&gt;
