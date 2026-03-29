@@ -46,6 +46,16 @@ We’ve also landed the **colorspace** attribute (@simonwuelker, #42279), but on
 
 **‘vertical-align’** is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361).
 
+We’ve started implementing **document.execCommand()** (@TimvdLippe, #42621, #42626, #42750).
+This feature (`--pref dom_exec_command_enabled`) is also **enabled in experimental mode**, and together with **contenteditable**, it’s critical for rich text editing on the web.
+The work done in February includes:
+
+- **document.queryCommandEnabled()** (@TimvdLippe, #42634)
+- **document.queryCommandSupported()** (@TimvdLippe, #42731)
+- **document.queryCommandIndeterm()**, **queryCommandState()**, and **queryCommandValue()** (@TimvdLippe, #42748)
+- the [**canonicalize whitespace**](https://w3c.github.io/editing/docs/execCommand/#canonicalize-whitespace) algorithm – this is used by the ‘delete’, ‘forwardDelete’, and ‘insertText’ commands (@TimvdLippe, #42704)
+- **contentEditable** on **HTMLElement** – for execCommand() only, excluding any support for interactive editing (@TimvdLippe, #42633, #42734)
+
 ## Embedding API
 
 Servo is now easier to **build offline**, using the complete source tarball included in each release (@jschwe, #42852).
