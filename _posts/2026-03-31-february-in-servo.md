@@ -47,8 +47,16 @@ We’ve also landed the **colorspace** attribute (@simonwuelker, #42279), but on
 
 **‘vertical-align’** is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361).
 
-We’ve started implementing **document.execCommand()** (@TimvdLippe, #42621, #42626, #42750).
-This feature (`--pref dom_exec_command_enabled`) is also **enabled in experimental mode**, and together with **contenteditable**, it’s critical for rich text editing on the web.
+We’ve started working on **accessibility support for web content** (@alice, @delan, #42333, #42402), gated by a pref (`--pref accessibility_enabled`).
+Each webview will be able to expose its own accessibility tree, which the embedder can then integrate into its own accessibility tree.
+As part of this work:
+
+- [**AccessKit**](https://accesskit.dev) now supports **combining accessibility trees** with its new “subtree” feature (@DataTriny, @delan, @lukewarlow, @alice, AccessKit/accesskit#655, AccessKit/accesskit#641)
+- [**egui**](https://www.egui.rs) has been migrated to the new AccessKit API (@delan, @lukewarlow, @lucasmerlin, @DataTriny, emilk/egui#7850)
+- we added a [`Servo`](https://doc.servo.org/servo/struct.Servo.html) API for activating accessibility features (@delan, @alice, #42336), although this has since become a [`WebView`](https://doc.servo.org/servo/struct.WebView.html) API
+
+We’ve started implementing **document.execCommand()** (@TimvdLippe, #42621, #42626, #42750), gated by a pref (`--pref dom_exec_command_enabled`).
+This feature is also **enabled in experimental mode**, and together with **contenteditable**, it’s critical for rich text editing on the web.
 The work done in February includes:
 
 - **document.queryCommandEnabled()** (@TimvdLippe, #42634)
