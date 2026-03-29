@@ -39,6 +39,7 @@
 &lt;li&gt;&lt;strong&gt;fullscreenElement&lt;/strong&gt; on &lt;strong&gt;Document&lt;/strong&gt; and &lt;strong&gt;ShadowRoot&lt;/strong&gt; (@onsah, #42401)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;toJSON()&lt;/strong&gt; on &lt;strong&gt;PerformancePaintTiming&lt;/strong&gt; (@shubhamg13, #42396)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;navigator.pdfViewerEnabled&lt;/strong&gt; (@simonwuelker, #42277)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;keyPath&lt;/strong&gt; on &lt;strong&gt;IDBIndex&lt;/strong&gt; (@arihant2math, #42431)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;createIndex()&lt;/strong&gt;, &lt;strong&gt;deleteIndex()&lt;/strong&gt;, and &lt;strong&gt;index()&lt;/strong&gt; on &lt;strong&gt;IDBObjectStore&lt;/strong&gt; (@arihant2math, @bulltickr, #38840, #42440, #42443)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Servo now supports the newer &lt;strong&gt;pointermove&lt;/strong&gt;, &lt;strong&gt;pointerdown&lt;/strong&gt;, &lt;strong&gt;pointerup&lt;/strong&gt;, and &lt;strong&gt;pointercancel&lt;/strong&gt; events (@webbeef, #41290).
@@ -47,11 +48,27 @@ We’ve also fixed the &lt;code&gt;event.target&lt;/code&gt; on the older &lt;st
 &lt;p&gt;&lt;strong&gt;&amp;lt;input type=color&amp;gt;&lt;/strong&gt; now supports any CSS color value (@simonwuelker, #42275), including the more complex values like color-mix().
 We’ve also landed the &lt;strong&gt;colorspace&lt;/strong&gt; attribute (@simonwuelker, #42279), but only in the web-facing side of Servo for now, not the embedding API or in servoshell.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;‘vertical-align’&lt;/strong&gt; is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361).&lt;/p&gt;
+&lt;h2 id=&quot;embedding-api&quot; tabindex=&quot;-1&quot;&gt;Embedding API &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisfeb/blog/2026/03/31/february-in-servo/#embedding-api&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Some changes to &lt;a href=&quot;https://doc.servo.org/servo/struct.Preferences.html&quot;&gt;&lt;code&gt;Preferences&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;devtools_server_port&lt;/code&gt; is now &lt;a href=&quot;https://doc.servo.org/servo/struct.Preferences.html#structfield.devtools_server_listen_address&quot;&gt;&lt;code&gt;devtools_server_listen_address&lt;/code&gt;&lt;/a&gt;, and can now take either a port number (as before) or a full &lt;a href=&quot;https://doc.rust-lang.org/std/net/enum.SocketAddr.html&quot;&gt;SocketAddr&lt;/a&gt; (@Narfinger, #42502)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;dom_worklet_blockingsleep&lt;/code&gt; is now &lt;code&gt;dom_worklet_blockingsleep_enabled&lt;/code&gt; (@mukilan, #42897)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Removed many unused preferences (@mukilan, #42897) – &lt;code&gt;js_asyncstack&lt;/code&gt;, &lt;code&gt;js_discard_system_source&lt;/code&gt;, &lt;code&gt;js_dump_stack_on_debuggee_would_run&lt;/code&gt;, &lt;code&gt;js_ion_offthread_compilation_enabled&lt;/code&gt;, &lt;code&gt;js_mem_gc_allocation_threshold_avoid_interrupt_factor&lt;/code&gt;, &lt;code&gt;js_mem_gc_allocation_threshold_factor&lt;/code&gt;, &lt;code&gt;js_mem_gc_allocation_threshold_mb&lt;/code&gt;, &lt;code&gt;js_mem_gc_decommit_threshold_mb&lt;/code&gt;, &lt;code&gt;js_mem_gc_dynamic_heap_growth_enabled&lt;/code&gt;, &lt;code&gt;js_mem_gc_dynamic_mark_slice_enabled&lt;/code&gt;, &lt;code&gt;js_shared_memory&lt;/code&gt;, &lt;code&gt;js_throw_on_asmjs_validation_failure&lt;/code&gt;, &lt;code&gt;js_throw_on_debuggee_would_run&lt;/code&gt;, &lt;code&gt;js_werror_enabled&lt;/code&gt;, &lt;code&gt;network_mime_sniff&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&quot;developer-tools&quot; tabindex=&quot;-1&quot;&gt;Developer tools &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisfeb/blog/2026/03/31/february-in-servo/#developer-tools&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://book.servo.org/contributing/devtools.html&quot;&gt;&lt;strong&gt;DevTools&lt;/strong&gt;&lt;/a&gt; has seen some big improvements in February!&lt;/p&gt;
-&lt;p&gt;When enabled in servoshell, the DevTools server is more secure by default, listening only on localhost when only a port number is specified (@Narfinger, #42502).&lt;/p&gt;
+&lt;p&gt;When enabled in servoshell, the DevTools server is more secure by default, listening only on localhost when only a port number is specified (@Narfinger, #42502).
+You can open the port for remote debugging by passing a full &lt;a href=&quot;https://doc.rust-lang.org/std/net/enum.SocketAddr.html&quot;&gt;SocketAddr&lt;/a&gt;, such as &lt;code&gt;--devtools=[::]:6080&lt;/code&gt; or &lt;code&gt;--devtools=0.0.0.0:6080&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;In the &lt;strong&gt;Inspector&lt;/strong&gt; tab, you can now &lt;strong&gt;edit DOM attributes&lt;/strong&gt;, and the DOM tree updates when attributes change (@simonwuelker, #42601, #42785).
 You can now list the event type and phase of &lt;strong&gt;event listeners&lt;/strong&gt; attached to a DOM node as well (@simonwuelker, #42355).&lt;/p&gt;
 &lt;p&gt;In the &lt;strong&gt;Console&lt;/strong&gt; tab, &lt;strong&gt;objects can now be previewed&lt;/strong&gt; when passed to console.log() and friends (@simonwuelker, #42296, #42510, #42752), and boolean values are now syntax highlighted (@pralkarz, #42513).&lt;/p&gt;

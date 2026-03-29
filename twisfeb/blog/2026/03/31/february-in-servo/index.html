@@ -275,6 +275,7 @@
 <li><strong>fullscreenElement</strong> on <strong>Document</strong> and <strong>ShadowRoot</strong> (@onsah, #42401)</li>
 <li><strong>toJSON()</strong> on <strong>PerformancePaintTiming</strong> (@shubhamg13, #42396)</li>
 <li><strong>navigator.pdfViewerEnabled</strong> (@simonwuelker, #42277)</li>
+<li><strong>keyPath</strong> on <strong>IDBIndex</strong> (@arihant2math, #42431)</li>
 <li><strong>createIndex()</strong>, <strong>deleteIndex()</strong>, and <strong>index()</strong> on <strong>IDBObjectStore</strong> (@arihant2math, @bulltickr, #38840, #42440, #42443)</li>
 </ul>
 <p>Servo now supports the newer <strong>pointermove</strong>, <strong>pointerdown</strong>, <strong>pointerup</strong>, and <strong>pointercancel</strong> events (@webbeef, #41290).
@@ -283,11 +284,27 @@ We’ve also fixed the <code>event.target</code> on the older <strong>touchmove<
 <p><strong>&lt;input type=color&gt;</strong> now supports any CSS color value (@simonwuelker, #42275), including the more complex values like color-mix().
 We’ve also landed the <strong>colorspace</strong> attribute (@simonwuelker, #42279), but only in the web-facing side of Servo for now, not the embedding API or in servoshell.</p>
 <p><strong>‘vertical-align’</strong> is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361).</p>
+<h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Some changes to <a href="https://doc.servo.org/servo/struct.Preferences.html"><code>Preferences</code></a>:</p>
+<ul>
+<li>
+<p><code>devtools_server_port</code> is now <a href="https://doc.servo.org/servo/struct.Preferences.html#structfield.devtools_server_listen_address"><code>devtools_server_listen_address</code></a>, and can now take either a port number (as before) or a full <a href="https://doc.rust-lang.org/std/net/enum.SocketAddr.html">SocketAddr</a> (@Narfinger, #42502)</p>
+</li>
+<li>
+<p><code>dom_worklet_blockingsleep</code> is now <code>dom_worklet_blockingsleep_enabled</code> (@mukilan, #42897)</p>
+</li>
+<li>
+<p>Removed many unused preferences (@mukilan, #42897) – <code>js_asyncstack</code>, <code>js_discard_system_source</code>, <code>js_dump_stack_on_debuggee_would_run</code>, <code>js_ion_offthread_compilation_enabled</code>, <code>js_mem_gc_allocation_threshold_avoid_interrupt_factor</code>, <code>js_mem_gc_allocation_threshold_factor</code>, <code>js_mem_gc_allocation_threshold_mb</code>, <code>js_mem_gc_decommit_threshold_mb</code>, <code>js_mem_gc_dynamic_heap_growth_enabled</code>, <code>js_mem_gc_dynamic_mark_slice_enabled</code>, <code>js_shared_memory</code>, <code>js_throw_on_asmjs_validation_failure</code>, <code>js_throw_on_debuggee_would_run</code>, <code>js_werror_enabled</code>, <code>network_mime_sniff</code></p>
+</li>
+</ul>
 <h2 id="developer-tools" tabindex="-1">Developer tools <a class="header-anchor" href="#developer-tools">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p><a href="https://book.servo.org/contributing/devtools.html"><strong>DevTools</strong></a> has seen some big improvements in February!</p>
-<p>When enabled in servoshell, the DevTools server is more secure by default, listening only on localhost when only a port number is specified (@Narfinger, #42502).</p>
+<p>When enabled in servoshell, the DevTools server is more secure by default, listening only on localhost when only a port number is specified (@Narfinger, #42502).
+You can open the port for remote debugging by passing a full <a href="https://doc.rust-lang.org/std/net/enum.SocketAddr.html">SocketAddr</a>, such as <code>--devtools=[::]:6080</code> or <code>--devtools=0.0.0.0:6080</code>.</p>
 <p>In the <strong>Inspector</strong> tab, you can now <strong>edit DOM attributes</strong>, and the DOM tree updates when attributes change (@simonwuelker, #42601, #42785).
 You can now list the event type and phase of <strong>event listeners</strong> attached to a DOM node as well (@simonwuelker, #42355).</p>
 <p>In the <strong>Console</strong> tab, <strong>objects can now be previewed</strong> when passed to console.log() and friends (@simonwuelker, #42296, #42510, #42752), and boolean values are now syntax highlighted (@pralkarz, #42513).</p>
