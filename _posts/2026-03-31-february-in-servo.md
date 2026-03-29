@@ -25,7 +25,7 @@ categories:
 
 Plus a bunch of new DOM APIs:
 
-- most of [**Pointer Events**](https://w3c.github.io/pointerevents/) (@webbeef, #41290)
+- most of the [**Pointer Events**](https://w3c.github.io/pointerevents/) API (@webbeef, #41290)
 - the **UserActivation** API (@stevennovaryo, #42060)
 - **import.meta.resolve()** (@Gae24, #42506)
 - the **formData()** method on **Request** (@Taym95, #42041)
@@ -50,7 +50,9 @@ Each webview will be able to expose its own accessibility tree, which the embedd
 As part of this work:
 
 - [**AccessKit**](https://accesskit.dev) now supports **combining accessibility trees** with its new “subtree” feature (@DataTriny, @delan, @lukewarlow, @alice, AccessKit/accesskit#655, AccessKit/accesskit#641)
+
 - [**egui**](https://www.egui.rs) has been migrated to the new AccessKit API (@delan, @lukewarlow, @lucasmerlin, @DataTriny, emilk/egui#7850)
+
 - we added a [`Servo`](https://doc.servo.org/servo/struct.Servo.html) API for activating accessibility features (@delan, @alice, #42336), although this has since become a [`WebView`](https://doc.servo.org/servo/struct.WebView.html) API
 
 We’ve started implementing **document.execCommand()** (@TimvdLippe, #42621, #42626, #42750), gated by a pref (`--pref dom_exec_command_enabled`).
