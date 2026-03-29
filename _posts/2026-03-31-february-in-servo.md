@@ -47,13 +47,37 @@ We’ve also landed the **colorspace** attribute (@simonwuelker, #42279), but on
 
 ## Embedding API
 
-Some changes to [`Preferences`](https://doc.servo.org/servo/struct.Preferences.html):
+Servo is now easier to **build offline**, using the complete source tarball included in each release (@jschwe, #42852).
+Go to a release on GitHub, then download `servo-[version]-src-vendored.tar.gz` to get started.
 
-- `devtools_server_port` is now [`devtools_server_listen_address`](https://doc.servo.org/servo/struct.Preferences.html#structfield.devtools_server_listen_address), and can now take either a port number (as before) or a full [SocketAddr](https://doc.rust-lang.org/std/net/enum.SocketAddr.html) (@Narfinger, #42502)
+You can now **add and remove user stylesheets** with [`User­Content­Manager`](https://doc.servo.org/servo/struct.UserContentManager.html)::[`add­_stylesheet`](https://doc.servo.org/servo/struct.UserContentManager.html#method.add_stylesheet) and [`remove­_stylesheet`](https://doc.servo.org/servo/struct.UserContentManager.html#method.remove_stylesheet), and **remove user scripts** with [`User­Content­Manager`](https://doc.servo.org/servo/struct.UserContentManager.html)::[`remove­_script`](https://doc.servo.org/servo/struct.UserContentManager.html#method.remove_script) (@mukilan, #42288).
+Previously user stylesheets were only configurable via servoshell’s `--user-stylesheet` option.
 
-- `dom_worklet_blockingsleep` is now `dom_worklet_blockingsleep_enabled` (@mukilan, #42897)
+<aside class=_note>
 
-- Removed many unused preferences (@mukilan, #42897) – `js_asyncstack`, `js_discard_system_source`, `js_dump_stack_on_debuggee_would_run`, `js_ion_offthread_compilation_enabled`, `js_mem_gc_allocation_threshold_avoid_interrupt_factor`, `js_mem_gc_allocation_threshold_factor`, `js_mem_gc_allocation_threshold_mb`, `js_mem_gc_decommit_threshold_mb`, `js_mem_gc_dynamic_heap_growth_enabled`, `js_mem_gc_dynamic_mark_slice_enabled`, `js_shared_memory`, `js_throw_on_asmjs_validation_failure`, `js_throw_on_debuggee_would_run`, `js_werror_enabled`, `network_mime_sniff`
+**User stylesheets** work a bit differently to **userstyles**, since they [cascade](https://drafts.csswg.org/css-cascade/#cascading) via the [user origin](https://drafts.csswg.org/css-cascade/#cascade-origin-user), not the [author origin](https://drafts.csswg.org/css-cascade/#cascade-origin-author). For more details about the tradeoffs, check out [*Customising the web: browsers as user agents*](https://www.youtube.com/watch?v=xLFQejlPf6U) ([slides](https://www.azabani.com/talks/2023-11-10-customising-the-web/)).
+</aside>
+
+Before opening any [**context menus**](https://doc.servo.org/servo/enum.EmbedderControl.html#variant.ContextMenu) on behalf of web content, Servo now closes any context menus that were opened by web content (@mrobinson, #42487), to avoid UI problems on some platforms.
+This is done by calling [`WebView­Delegate`](https://doc.servo.org/servo/trait.WebViewDelegate.html)::[`hide­_embedder­_control`](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.hide_embedder_control) before calling [`show­_embedder­_control`](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.show_embedder_control) in those cases.
+
+[**Input method events**](https://doc.servo.org/servo/enum.EmbedderControl.html#variant.InputMethod) from web content now indicate whether or not the virtual keyboard should be shown (@stevennovaryo, @mrobinson, #42467), with the new [`Input­Method­Control`](https://doc.servo.org/servo/struct.InputMethodControl.html)::[`allow­_virtual­_keyboard`](https://doc.servo.org/servo/struct.InputMethodControl.html#method.allow_virtual_keyboard) method.
+Generally the virtual keyboard should only be shown when the page has [sticky activation](https://developer.mozilla.org/en-US/docs/Glossary/Sticky_activation).
+
+We’re reworking our **gamepad API**, with [`WebView­Delegate`](https://doc.servo.org/servo/trait.WebViewDelegate.html)::`play­_gamepad­_haptic­_effect` and `stop­_gamepad­_haptic­_effect` being replaced by a new API that (as of the end of February at least) is known as `GamepadProvider` (@atbrakhi, #41568).
+The old methods are no longer called ([#43743](https://github.com/servo/servo/issues/43743)), and may be removed at some point.
+
+We now have better diagnostic output when we fail to create an OpenGL context (@mrobinson, #42873), including when the OpenGL versions supported by the device are too old.
+
+[`Servo`](https://doc.servo.org/servo/struct.Servo.html)::`constellation_sender` was removed (@jdm, #42389), since it was never useful to embedders.
+
+We’ve also made some changes to [`Preferences`](https://doc.servo.org/servo/struct.Preferences.html):
+
+- `devtools­_server­_port` is now [`devtools­_server­_listen­_address`](https://doc.servo.org/servo/struct.Preferences.html#structfield.devtools_server_listen_address), and can now take either a port number (as before) or a full [SocketAddr](https://doc.rust-lang.org/std/net/enum.SocketAddr.html) (@Narfinger, #42502)
+
+- `dom­_worklet­_blockingsleep` is now `dom­_worklet­_blockingsleep­_enabled` (@mukilan, #42897)
+
+- Removed many unused preferences (@mukilan, #42897) – `js­_asyncstack`, `js­_discard­_system­_source`, `js­_dump­_stack­_on­_debuggee­_would­_run`, `js­_ion­_offthread­_compilation­_enabled`, `js­_mem­_gc­_allocation­_threshold­_avoid­_interrupt­_factor`, `js­_mem­_gc­_allocation­_threshold­_factor`, `js­_mem­_gc­_allocation­_threshold­_mb`, `js­_mem­_gc­_decommit­_threshold­_mb`, `js­_mem­_gc­_dynamic­_heap­_growth­_enabled`, `js­_mem­_gc­_dynamic­_mark­_slice­_enabled`, `js­_shared­_memory`, `js­_throw­_on­_asmjs­_validation­_failure`, `js­_throw­_on­_debuggee­_would­_run`, `js­_werror­_enabled`, and `network­_mime­_sniff`
 
 ## Developer tools
 
