@@ -25,6 +25,7 @@ categories:
 Plus a bunch of new DOM APIs:
 
 - most of [**Pointer Events**](https://w3c.github.io/pointerevents/) (@webbeef, #41290)
+- the **UserActivation** API (@stevennovaryo, #42060)
 - **import.meta.resolve()** (@Gae24, #42506)
 - the **formData()** method on **Request** (@Taym95, #42041)
 - the **alpha** property on **HTMLInputElement** (@simonwuelker, #42293)
@@ -100,6 +101,47 @@ Our **about:memory** page now knows how to **report many new kinds of memory usa
 We’ve also started internally tracking the memory usage of the media subsystem (@Narfinger, #42504) and WebXR (@Narfinger, #42505).
 
 We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@Gae24, @pralkarz, @BryanSmith00, @sagudev, @Narfinger, @TimvdLippe, @kkoyung, @TimurBora, @onsah, #42342, #42294, #42370, #42417, #42619, #42616, #42637, #42640, #42662, #42679, #42681, #42665, #42667, #42699, #42712, #42725, #42729, #42726, #42720, #42738, #42737, #42735, #42751, #42805, #42809, #42780, #42820, #42715, #42635, #42880, #42846).
+
+## More on the web platform
+
+**Cookies** are now more conformant (@sebsebmc, #42418, #42427, #42435).
+**‘Expires’** and **‘Max-Age’** attributes are now handled correctly in ‘Set-Cookie’ headers, **get()** and **getAll()** on **CookieStore** now trim whitespace in cookie names and values, and the behaviour of **set()** on **CookieStore** has been improved.
+
+**&lt;iframe>** elements are now more conformant in how **load** events are fired on the element and its contentWindow (@TimvdLippe, #42254), although there are still some bugs.
+This has long behaved incorrectly in Servo, and it has historically caused many problems in the Web Platform Tests.
+
+**IndexedDB** is now more conformant in our handling of transactions (@Taym95, #41508, #42732), and when opening and closing connections (@gterzian, @Taym95, #42082, #42669).
+
+We’ve started implementing **Largest Contentful Paint** timings (@shubhamg13, #42024), and we’ve landed a bunch of improvements to how **First Contentful Paint** timings work in Servo:
+
+- we now include ‘background-image’ (@shubhamg13, #42569)
+- we now include ‘border-image’ (@shubhamg13, #42581)
+- we now ignore subtrees with ‘opacity: 0’ (@shubhamg13, #42768)
+- we now ignore zero-sized subtrees (@shubhamg13, #42178)
+- we now ignore &lt;iframe> (@shubhamg13, #42498)
+- we now ignore &lt;video> and &lt;video poster> unless they actually have an image (@shubhamg13, #42411)
+- we now ignore mouse moves when deciding when to stop measuring (@shubhamg13, #41999)
+
+**new WebSocket()** now resolves relative URLs (@webbeef, #42425).
+
+**requestFullscreen()** on **Element** now requires [user activation](https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/User_activation) (@stevennovaryo, #42060).
+
+**performance.getEntries()** now returns [PerformanceResourceTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming) entries for navigations in &lt;iframe> (@muse254, #42270).
+
+When geolocation is enabled (`--pref dom_geolocation_enabled`), **navigator­.geolocation­.get­Current­Position()** and **watch­Position()** now support the optional **errors** argument (@arihant2math, #42295).
+
+We now support the **‘-webkit-text-security’** property in CSS (@mrobinson, #42181), which is not specified anywhere but required for [MotionMark](https://browserbench.org/MotionMark1.2/).
+
+## Bug fixes
+
+We’ve fixed a variety of web-related bugs:
+
+- **assignedNodes()** on **HTMLSlotElement** returning incorrect results after the &lt;slot> was removed from the shadow tree (@rayguo17, #42250)
+- **&lt;template>** failing to throw HierarchyRequestError when a DOM API is used to create an invalid hierarchy (@TimvdLippe, #42276)
+- **&lt;a target>** failing to work correctly after the related &lt;iframe> is removed and a new one added with the same name (@jdm, #42344)
+- **&lt;base>** not taking effect in some cases, or taking effect when given a **data:** or **javascript:** URL (@TimvdLippe, #42255, #42339)
+- **Largest Contentful Paint** timings no longer being collected after reloading or navigating (@shubhamg13, #41169)
+- **PerformancePaintTiming** being exposed to Worker globals when they shouldn’t be (@shubhamg13, #42409)
 
 We’ve fixed **crashes in DevTools**, in the Inspector tab (@eerii, @mrobinson, #42330), when exiting Servo while DevTools is connected (@simonwuelker, #42543), when setting breakpoints (@atbrakhi, #42810), and after clients disconnect (@simonwuelker, #42583).
 
