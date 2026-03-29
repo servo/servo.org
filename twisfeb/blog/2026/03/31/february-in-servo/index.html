@@ -268,6 +268,7 @@
 <p>Plus a bunch of new DOM APIs:</p>
 <ul>
 <li>most of <a href="https://w3c.github.io/pointerevents/"><strong>Pointer Events</strong></a> (@webbeef, #41290)</li>
+<li>the <strong>UserActivation</strong> API (@stevennovaryo, #42060)</li>
 <li><strong>import.meta.resolve()</strong> (@Gae24, #42506)</li>
 <li>the <strong>formData()</strong> method on <strong>Request</strong> (@Taym95, #42041)</li>
 <li>the <strong>alpha</strong> property on <strong>HTMLInputElement</strong> (@simonwuelker, #42293)</li>
@@ -331,6 +332,41 @@ We’ve also started working on other debugger features (@atbrakhi, @eerii, #423
 <p>Our <strong>about:memory</strong> page now knows how to <strong>report many new kinds of memory usage</strong>, including the <strong>DevTools</strong> server (@Narfinger, #42478, #42480), <strong>WebGL</strong> (@sagudev, #42570), <strong>localStorage</strong> and <strong>sessionStorage</strong> (@arihant2math, #42484), and some of the memory used by <strong>IndexedDB</strong> (@arihant2math, #42486).
 We’ve also started internally tracking the memory usage of the media subsystem (@Narfinger, #42504) and WebXR (@Narfinger, #42505).</p>
 <p>We’ve continued our long-running effort to <strong>use the Rust type system</strong> to make certain kinds of dynamic borrow failures impossible (@Gae24, @pralkarz, @BryanSmith00, @sagudev, @Narfinger, @TimvdLippe, @kkoyung, @TimurBora, @onsah, #42342, #42294, #42370, #42417, #42619, #42616, #42637, #42640, #42662, #42679, #42681, #42665, #42667, #42699, #42712, #42725, #42729, #42726, #42720, #42738, #42737, #42735, #42751, #42805, #42809, #42780, #42820, #42715, #42635, #42880, #42846).</p>
+<h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><strong>Cookies</strong> are now more conformant (@sebsebmc, #42418, #42427, #42435).
+<strong>‘Expires’</strong> and <strong>‘Max-Age’</strong> attributes are now handled correctly in ‘Set-Cookie’ headers, <strong>get()</strong> and <strong>getAll()</strong> on <strong>CookieStore</strong> now trim whitespace in cookie names and values, and the behaviour of <strong>set()</strong> on <strong>CookieStore</strong> has been improved.</p>
+<p><strong>&lt;iframe&gt;</strong> elements are now more conformant in how <strong>load</strong> events are fired on the element and its contentWindow (@TimvdLippe, #42254), although there are still some bugs.
+This has long behaved incorrectly in Servo, and it has historically caused many problems in the Web Platform Tests.</p>
+<p><strong>IndexedDB</strong> is now more conformant in our handling of transactions (@Taym95, #41508, #42732), and when opening and closing connections (@gterzian, @Taym95, #42082, #42669).</p>
+<p>We’ve started implementing <strong>Largest Contentful Paint</strong> timings (@shubhamg13, #42024), and we’ve landed a bunch of improvements to how <strong>First Contentful Paint</strong> timings work in Servo:</p>
+<ul>
+<li>we now include ‘background-image’ (@shubhamg13, #42569)</li>
+<li>we now include ‘border-image’ (@shubhamg13, #42581)</li>
+<li>we now ignore subtrees with ‘opacity: 0’ (@shubhamg13, #42768)</li>
+<li>we now ignore zero-sized subtrees (@shubhamg13, #42178)</li>
+<li>we now ignore &lt;iframe&gt; (@shubhamg13, #42498)</li>
+<li>we now ignore &lt;video&gt; and &lt;video poster&gt; unless they actually have an image (@shubhamg13, #42411)</li>
+<li>we now ignore mouse moves when deciding when to stop measuring (@shubhamg13, #41999)</li>
+</ul>
+<p><strong>new WebSocket()</strong> now resolves relative URLs (@webbeef, #42425).</p>
+<p><strong>requestFullscreen()</strong> on <strong>Element</strong> now requires <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/User_activation">user activation</a> (@stevennovaryo, #42060).</p>
+<p><strong>performance.getEntries()</strong> now returns <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming">PerformanceResourceTiming</a> entries for navigations in &lt;iframe&gt; (@muse254, #42270).</p>
+<p>When geolocation is enabled (<code>--pref dom_geolocation_enabled</code>), <strong>navigator­.geolocation­.get­Current­Position()</strong> and <strong>watch­Position()</strong> now support the optional <strong>errors</strong> argument (@arihant2math, #42295).</p>
+<p>We now support the <strong>‘-webkit-text-security’</strong> property in CSS (@mrobinson, #42181), which is not specified anywhere but required for <a href="https://browserbench.org/MotionMark1.2/">MotionMark</a>.</p>
+<h2 id="bug-fixes" tabindex="-1">Bug fixes <a class="header-anchor" href="#bug-fixes">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We’ve fixed a variety of web-related bugs:</p>
+<ul>
+<li><strong>assignedNodes()</strong> on <strong>HTMLSlotElement</strong> returning incorrect results after the &lt;slot&gt; was removed from the shadow tree (@rayguo17, #42250)</li>
+<li><strong>&lt;template&gt;</strong> failing to throw HierarchyRequestError when a DOM API is used to create an invalid hierarchy (@TimvdLippe, #42276)</li>
+<li><strong>&lt;a target&gt;</strong> failing to work correctly after the related &lt;iframe&gt; is removed and a new one added with the same name (@jdm, #42344)</li>
+<li><strong>&lt;base&gt;</strong> not taking effect in some cases, or taking effect when given a <strong>data:</strong> or <strong>javascript:</strong> URL (@TimvdLippe, #42255, #42339)</li>
+<li><strong>Largest Contentful Paint</strong> timings no longer being collected after reloading or navigating (@shubhamg13, #41169)</li>
+<li><strong>PerformancePaintTiming</strong> being exposed to Worker globals when they shouldn’t be (@shubhamg13, #42409)</li>
+</ul>
 <p>We’ve fixed <strong>crashes in DevTools</strong>, in the Inspector tab (@eerii, @mrobinson, #42330), when exiting Servo while DevTools is connected (@simonwuelker, #42543), when setting breakpoints (@atbrakhi, #42810), and after clients disconnect (@simonwuelker, #42583).</p>
 <p>We’ve fixed <strong>crashes in layout</strong>, when using ‘background-repeat: round’ (@mrobinson, #42303), when using ‘list-style-image’ or ‘content: &lt;image&gt;’ (@lukewarlow, #42332), when calling elementFromPoint() on Document (@mrobinson, @Loirooriol, @lukewarlow, #42822), and when handling layout queries like getBoundingClientRect() on inline &lt;svg&gt; (@jdm, @Loirooriol, #42594).</p>
 <p>We’ve fixed <strong>crashes related to stylesheets</strong>, when removing stylesheets from the DOM (@TimvdLippe, #42273), when changing the href of a &lt;link rel=stylesheet&gt; (@TimvdLippe, #42481), and when loading stylesheets with <code>--layout-threads=1</code> (@mrobinson, @Loirooriol, @lukewarlow, #42685).</p>
