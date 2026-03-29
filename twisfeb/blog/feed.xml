@@ -49,6 +49,16 @@ We’ve also fixed the &lt;code&gt;event.target&lt;/code&gt; on the older &lt;st
 &lt;p&gt;&lt;strong&gt;&amp;lt;input type=color&amp;gt;&lt;/strong&gt; now supports any CSS color value (@simonwuelker, #42275), including the more complex values like color-mix().
 We’ve also landed the &lt;strong&gt;colorspace&lt;/strong&gt; attribute (@simonwuelker, #42279), but only in the web-facing side of Servo for now, not the embedding API or in servoshell.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;‘vertical-align’&lt;/strong&gt; is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361).&lt;/p&gt;
+&lt;p&gt;We’ve started implementing &lt;strong&gt;document.execCommand()&lt;/strong&gt; (@TimvdLippe, #42621, #42626, #42750).
+This feature (&lt;code&gt;--pref dom_exec_command_enabled&lt;/code&gt;) is also &lt;strong&gt;enabled in experimental mode&lt;/strong&gt;, and together with &lt;strong&gt;contenteditable&lt;/strong&gt;, it’s critical for rich text editing on the web.
+The work done in February includes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;document.queryCommandEnabled()&lt;/strong&gt; (@TimvdLippe, #42634)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;document.queryCommandSupported()&lt;/strong&gt; (@TimvdLippe, #42731)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;document.queryCommandIndeterm()&lt;/strong&gt;, &lt;strong&gt;queryCommandState()&lt;/strong&gt;, and &lt;strong&gt;queryCommandValue()&lt;/strong&gt; (@TimvdLippe, #42748)&lt;/li&gt;
+&lt;li&gt;the &lt;a href=&quot;https://w3c.github.io/editing/docs/execCommand/#canonicalize-whitespace&quot;&gt;&lt;strong&gt;canonicalize whitespace&lt;/strong&gt;&lt;/a&gt; algorithm – this is used by the ‘delete’, ‘forwardDelete’, and ‘insertText’ commands (@TimvdLippe, #42704)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;contentEditable&lt;/strong&gt; on &lt;strong&gt;HTMLElement&lt;/strong&gt; – for execCommand() only, excluding any support for interactive editing (@TimvdLippe, #42633, #42734)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&quot;embedding-api&quot; tabindex=&quot;-1&quot;&gt;Embedding API &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisfeb/blog/2026/03/31/february-in-servo/#embedding-api&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;

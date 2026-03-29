@@ -285,6 +285,16 @@ We’ve also fixed the <code>event.target</code> on the older <strong>touchmove<
 <p><strong>&lt;input type=color&gt;</strong> now supports any CSS color value (@simonwuelker, #42275), including the more complex values like color-mix().
 We’ve also landed the <strong>colorspace</strong> attribute (@simonwuelker, #42279), but only in the web-facing side of Servo for now, not the embedding API or in servoshell.</p>
 <p><strong>‘vertical-align’</strong> is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361).</p>
+<p>We’ve started implementing <strong>document.execCommand()</strong> (@TimvdLippe, #42621, #42626, #42750).
+This feature (<code>--pref dom_exec_command_enabled</code>) is also <strong>enabled in experimental mode</strong>, and together with <strong>contenteditable</strong>, it’s critical for rich text editing on the web.
+The work done in February includes:</p>
+<ul>
+<li><strong>document.queryCommandEnabled()</strong> (@TimvdLippe, #42634)</li>
+<li><strong>document.queryCommandSupported()</strong> (@TimvdLippe, #42731)</li>
+<li><strong>document.queryCommandIndeterm()</strong>, <strong>queryCommandState()</strong>, and <strong>queryCommandValue()</strong> (@TimvdLippe, #42748)</li>
+<li>the <a href="https://w3c.github.io/editing/docs/execCommand/#canonicalize-whitespace"><strong>canonicalize whitespace</strong></a> algorithm – this is used by the ‘delete’, ‘forwardDelete’, and ‘insertText’ commands (@TimvdLippe, #42704)</li>
+<li><strong>contentEditable</strong> on <strong>HTMLElement</strong> – for execCommand() only, excluding any support for interactive editing (@TimvdLippe, #42633, #42734)</li>
+</ul>
 <h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
