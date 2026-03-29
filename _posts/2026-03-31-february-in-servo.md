@@ -65,6 +65,16 @@ The work done in February includes:
 - the [**canonicalize whitespace**](https://w3c.github.io/editing/docs/execCommand/#canonicalize-whitespace) algorithm – this is used by the ‘delete’, ‘forwardDelete’, and ‘insertText’ commands (@TimvdLippe, #42704)
 - **contentEditable** on **HTMLElement** – for execCommand() only, excluding any support for interactive editing (@TimvdLippe, #42633, #42734)
 
+## servoshell
+
+servoshell now has a **servo:config** page (@arihant2math, #40324), allowing you to set any of Servo’s preferences, including internal prefs.
+This is much like about:config in Firefox.
+Note that preference changes are not yet persistent, and not all prefs take effect when changed at runtime.
+
+You can now **press F5** to **reload the page** in servoshell (@Narfinger, #42538), in addition to pressing Ctrl+R or ⌘R.
+
+We’ve fixed a regression where the caret stopped being visible in the location bar (@mrobinson, #42470).
+
 ## Embedding API
 
 Servo is now easier to **build offline**, using the complete source tarball included in each release (@jschwe, #42852).
@@ -122,6 +132,8 @@ We’ve also started internally tracking the memory usage of the media subsystem
 We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@Gae24, @pralkarz, @BryanSmith00, @sagudev, @Narfinger, @TimvdLippe, @kkoyung, @TimurBora, @onsah, #42342, #42294, #42370, #42417, #42619, #42616, #42637, #42640, #42662, #42679, #42681, #42665, #42667, #42699, #42712, #42725, #42729, #42726, #42720, #42738, #42737, #42735, #42751, #42805, #42809, #42780, #42820, #42715, #42635, #42880, #42846).
 
 ## More on the web platform
+
+If you navigate to a **video file** or **audio file as a document**, the player now has controls (@webbeef, #42488).
 
 **Cookies** are now more conformant (@sebsebmc, #42418, #42427, #42435).
 **‘Expires’** and **‘Max-Age’** attributes are now handled correctly in ‘Set-Cookie’ headers, **get()** and **getAll()** on **CookieStore** now trim whitespace in cookie names and values, and the behaviour of **set()** on **CookieStore** has been improved.
