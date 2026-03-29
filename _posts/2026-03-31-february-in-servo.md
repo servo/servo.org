@@ -45,8 +45,6 @@ The default language in **‘Accept-Language’** and **navigator.language** is 
 **&lt;input type=color>** now supports any CSS color value (@simonwuelker, #42275), including the more complex values like color-mix().
 We’ve also landed the **colorspace** attribute (@simonwuelker, #42279), but only in the web-facing side of Servo for now, not the embedding API or in servoshell.
 
-**‘vertical-align’** is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361).
-
 We’ve started working on **accessibility support for web content** (@alice, @delan, #42333, #42402), gated by a pref (`--pref accessibility_enabled`).
 Each webview will be able to expose its own accessibility tree, which the embedder can then integrate into its own accessibility tree.
 As part of this work:
@@ -64,6 +62,9 @@ The work done in February includes:
 - **document.queryCommandIndeterm()**, **queryCommandState()**, and **queryCommandValue()** (@TimvdLippe, #42748)
 - the [**canonicalize whitespace**](https://w3c.github.io/editing/docs/execCommand/#canonicalize-whitespace) algorithm – this is used by the ‘delete’, ‘forwardDelete’, and ‘insertText’ commands (@TimvdLippe, #42704)
 - **contentEditable** on **HTMLElement** – for execCommand() only, excluding any support for interactive editing (@TimvdLippe, #42633, #42734)
+
+We’ve landed some fixes for issues preventing Servo from being built on Windows arm64 (@dpaoliello, @npiesco, #42371, #42341).
+Work to enable Windows arm64 as a build platform is ongoing (@npiesco, #42312).
 
 ## servoshell
 
@@ -135,6 +136,8 @@ We’ve continued our long-running effort to **use the Rust type system** to mak
 
 If you navigate to a **video file** or **audio file as a document**, the player now has controls (@webbeef, #42488).
 
+**‘vertical-align’** is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361), and **scrollParent** on **HTMLElement** is now a function per [this recent spec update](https://github.com/w3c/csswg-drafts/issues/12731) (@TimurBora, #42689).
+
 **Cookies** are now more conformant (@sebsebmc, #42418, #42427, #42435).
 **‘Expires’** and **‘Max-Age’** attributes are now handled correctly in ‘Set-Cookie’ headers, **get()** and **getAll()** on **CookieStore** now trim whitespace in cookie names and values, and the behaviour of **set()** on **CookieStore** has been improved.
 
@@ -176,6 +179,7 @@ We’ve fixed a variety of web-related bugs:
 - **&lt;base>** not taking effect in some cases, or taking effect when given a **data:** or **javascript:** URL (@TimvdLippe, #42255, #42339)
 - **Largest Contentful Paint** timings no longer being collected after reloading or navigating (@shubhamg13, #41169)
 - **PerformancePaintTiming** being exposed to Worker globals when they shouldn’t be (@shubhamg13, #42409)
+- changes to how we trigger garbage collection breaking [Speedometer](https://browserbench.org/Speedometer3.1/) (@sagudev, #42271)
 
 We’ve fixed **crashes in DevTools**, in the Inspector tab (@eerii, @mrobinson, #42330), when exiting Servo while DevTools is connected (@simonwuelker, #42543), when setting breakpoints (@atbrakhi, #42810), and after clients disconnect (@simonwuelker, #42583).
 
