@@ -132,6 +132,11 @@ We’ve also started working on other debugger features (@atbrakhi, @eerii, #423
 Our **about:memory** page now knows how to **report many new kinds of memory usage**, including the **DevTools** server (@Narfinger, #42478, #42480), **WebGL** (@sagudev, #42570), **localStorage** and **sessionStorage** (@arihant2math, #42484), and some of the memory used by **IndexedDB** (@arihant2math, #42486).
 We’ve also started internally tracking the memory usage of the media subsystem (@Narfinger, #42504) and WebXR (@Narfinger, #42505).
 
+**Layout** has seen a lot of performance work in February, with our main focus being on improving [**incremental layout**]({{ '/blog/2025/07/17/this-month-in-servo/#performance' | url }}) of the **box tree** and **fragment tree**.
+
+We now have our first **truly incremental box tree layout** (@mrobinson, @Loirooriol, @lukewarlow, #42700, #42816), rather than our previous “dirty roots”-based approach.
+Depending on how they were [damaged](https://en.wikipedia.org/wiki/Dirty_bit), some boxes for **independent formatting contexts** (@Loirooriol, @lukewarlow, @mrobinson, #42783) and **floats** (@Loirooriol, @lukewarlow, @mrobinson, #42816) can be reused, and boxes that are reused avoid damaging their parents (@Loirooriol, @lukewarlow, @mrobinson, #42847).
+
 Servo uses **shared memory** for many situations where copying data over channels would be too expensive, such as for images and fonts.
 In multiprocess mode (`--multiprocess`), we use the operating system to create the shared memory in a way that can be shared with other processes, such as [shm_open(3)](https://pubs.opengroup.org/onlinepubs/9799919799/functions/shm_open.html) or [CreateFileMappingW](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingw), but this consumes resources that can sometimes be exhausted.
 We only need to use those kinds of shared memory in multiprocess mode, so we’ve reworked Servo to use `Arc`﻿`<Vec<u8>>` in single-process mode (@Narfinger, #42083), which should avoid resource exhaustion.
