@@ -229,21 +229,30 @@ Work to enable Windows arm64 as a build platform is ongoing (@npiesco, #42312).
 
 We’ve fixed a bug in the result of **layout queries**, such as getBoundingClientRect(), on inline **&lt;svg>** (@jdm, @Loirooriol, #42594), and we’ve fixed layout bugs related to **‘display: table-cell’** (@Loirooriol, #42778), **‘display: list-item’** (@Loirooriol, #42825, #42864), **‘inset: auto’** (@Loirooriol, #42586), **‘width: max-content’** (@mrobinson, @Loirooriol, @lukewarlow, #42574), **‘align-self: last baseline’** (@rayguo17, #42724), **‘list-style-image’** (@lukewarlow, #42332), **‘content: &lt;image>’** (@lukewarlow, #42332), negative **‘margin’** (@Loirooriol, #42889), and **ink overflow** (@mrobinson, #42403).
 
-We’ve also fixed a variety of other web-related bugs:
+HTML and CSS bugs:
 
 - **Empty ‘url()’** values making requests when they shouldn’t (@rayguo17, #42622)
+- **&lt;template>** failing to throw HierarchyRequestError when a DOM API is used to create an invalid hierarchy (@TimvdLippe, #42276)
+- **&lt;input>** and **&lt;textarea>** selection behaviour being incorrect when the text contains more than one script (@mrobinson, #42399)
+- **&lt;script nonce>** validation failing to work correctly in some cases (@dyegoaurelio, #40956)
+- **&lt;a target>** failing to work correctly after the related &lt;iframe> is removed and a new one added with the same name (@jdm, #42344)
+- **&lt;base>** not taking effect in some cases, or taking effect when given a **data:** or **javascript:** URL (@TimvdLippe, #42255, #42339)
+
+JavaScript and DOM bugs:
 - `event.target` being incorrect on **touchmove**, **touchend**, and **touchcancel** events (@yezhizhen, #42654)
 - **touchmove** events not being fired when part of a two-finger pinch zoom (@yezhizhen, #42528)
 - **touchend** events erroneously firing after touchcancel events (@yezhizhen, #42654)
 - **assignedNodes()** on **HTMLSlotElement** returning incorrect results after the &lt;slot> was removed from the shadow tree (@rayguo17, #42250)
-- **&lt;template>** failing to throw HierarchyRequestError when a DOM API is used to create an invalid hierarchy (@TimvdLippe, #42276)
-- **&lt;input>** and **&lt;textarea>** selection behaviour being incorrect when the text contains more than one script (@mrobinson, #42399)
-- **&lt;a target>** failing to work correctly after the related &lt;iframe> is removed and a new one added with the same name (@jdm, #42344)
-- **&lt;base>** not taking effect in some cases, or taking effect when given a **data:** or **javascript:** URL (@TimvdLippe, #42255, #42339)
 - **Largest Contentful Paint** timings no longer being collected after reloading or navigating (@shubhamg13, #41169)
 - **PerformancePaintTiming** being exposed to Worker globals when they shouldn’t be (@shubhamg13, #42409)
 - **JavaScript modules** resolved incorrectly when there are overlapping `.imports` or `.scopes` or import maps (@Gae24, #42668, #42630, #42754, #42821)
 - changes to how we trigger **garbage collection** breaking [Speedometer](https://browserbench.org/Speedometer3.1/) (@sagudev, #42271)
+
+WebDriver bugs:
+
+- **[Pointer actions](https://w3c.github.io/webdriver/#pointer-actions) and [wheel actions](https://w3c.github.io/webdriver/#wheel-actions)** behaving incorrectly when devicePixelRatio ≠ 1 (@yezhizhen, #42387, #42628)
+- **[Wheel actions](https://w3c.github.io/webdriver/#wheel-actions)** throwing incorrect exceptions when they are missing properties (@yezhizhen, #42745)
+- **[pointerMove](https://w3c.github.io/webdriver/#dfn-dispatch-a-pointermove-action) actions** with non-zero duration failing to interleave with other actions (@yezhizhen, #42289)
 
 We’ve fixed **crashes in DevTools**, in the Inspector tab (@eerii, @mrobinson, #42330), when exiting Servo while DevTools is connected (@simonwuelker, #42543), when setting breakpoints (@atbrakhi, #42810), and after clients disconnect (@simonwuelker, #42583).
 
