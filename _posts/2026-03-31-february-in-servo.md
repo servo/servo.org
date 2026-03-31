@@ -37,13 +37,23 @@ Plus a bunch of new DOM APIs:
 - **keyPath** on **IDBIndex** (@arihant2math, #42431)
 - **createIndex()**, **deleteIndex()**, and **index()** on **IDBObjectStore** (@arihant2math, @bulltickr, #38840, #42440, #42443)
 
-Servo now supports the newer **pointermove**, **pointerdown**, **pointerup**, and **pointercancel** events (@webbeef, #41290).
-The older **touchmove**, **touchstart**, **touchend**, and **touchcancel** events continue to be supported.
+This is a *big* update, so here’s an outline:
 
-The default language in **‘Accept-Language’** and **navigator.language** is now taken from the **$LANG** environment variable if present (@webbeef, #41919), rather than always being set to en-US.
+- [**Work in progress**](#work-in-progress)<br>– accessibility, execCommand()
 
-**&lt;input type=color>** now supports any CSS color value (@simonwuelker, #42275), including the more complex values like color-mix().
-We’ve also landed the **colorspace** attribute (@simonwuelker, #42279), but only in the web-facing side of Servo for now, not the embedding API or in servoshell.
+- [**Developer tools**](#developer-tools)<br>– localhost only by default, Inspector, Console, Debugger
+
+- [**servoshell**](#servoshell)<br>– servo:config, F5 to reload
+
+- [**Embedding API**](#embedding-api)<br>– offline builds, user stylesheets, context menus, gamepad API
+
+- [**More on the web platform**](#more-on-the-web-platform)<br>– font fallback, cookies, IndexedDB, First and Largest Contentful Paint
+
+- [**Performance and stability**](#performance-and-stability)<br>– about:memory, incremental layout, shared memory
+
+- [**Bug fixes**](#bug-fixes)<br>– Windows arm64, layout, DOM events, shadow DOM
+
+## Work in progress
 
 We’ve started working on **accessibility support for web content** (@alice, @delan, #42333, #42402), gated by a pref (`--pref accessibility_enabled`).
 Each webview will be able to expose its own accessibility tree, which the embedder can then integrate into its own accessibility tree.
@@ -65,8 +75,20 @@ The work done in February includes:
 - the [**canonicalize whitespace**](https://w3c.github.io/editing/docs/execCommand/#canonicalize-whitespace) algorithm – this is used by the ‘delete’, ‘forwardDelete’, and ‘insertText’ commands (@TimvdLippe, #42704)
 - **contentEditable** on **HTMLElement** – for execCommand() only, excluding any support for interactive editing (@TimvdLippe, #42633, #42734)
 
-We’ve landed some fixes for issues preventing Servo from being built on Windows arm64 (@dpaoliello, @npiesco, #42371, #42341).
-Work to enable Windows arm64 as a build platform is ongoing (@npiesco, #42312).
+## Developer tools
+
+[**DevTools**](https://book.servo.org/contributing/devtools.html) has seen some big improvements in February!
+
+When enabled in servoshell, the DevTools server is more secure by default, listening only on localhost when only a port number is specified (@Narfinger, #42502).
+You can open the port for remote debugging by passing a full [SocketAddr](https://doc.rust-lang.org/std/net/enum.SocketAddr.html), such as `--devtools=[::]:6080` or `--devtools=0.0.0.0:6080`.
+
+In the **Inspector** tab, you can now **edit DOM attributes**, and the DOM tree updates when attributes change (@simonwuelker, #42601, #42785).
+You can now list the event type and phase of **event listeners** attached to a DOM node as well (@simonwuelker, #42355).
+
+In the **Console** tab, **objects can now be previewed** when passed to console.log() and friends (@simonwuelker, #42296, #42510, #42752), and boolean values are now syntax highlighted (@pralkarz, #42513).
+
+In the **Debugger** tab, you can now **pause and resume** script execution, both manually and when breakpoints are hit (@eerii, @atbrakhi, #42599, #42580, #42874).
+We’ve also started working on other debugger features (@atbrakhi, @eerii, #42306), including stepping execution (@eerii, @atbrakhi, #42844, #42878, #42906), so once again stay tuned!
 
 ## servoshell
 
@@ -112,43 +134,6 @@ We’ve also made some changes to [`Preferences`](https://doc.servo.org/servo/st
 
 - Removed many unused preferences (@mukilan, #42897) – `js­_asyncstack`, `js­_discard­_system­_source`, `js­_dump­_stack­_on­_debuggee­_would­_run`, `js­_ion­_offthread­_compilation­_enabled`, `js­_mem­_gc­_allocation­_threshold­_avoid­_interrupt­_factor`, `js­_mem­_gc­_allocation­_threshold­_factor`, `js­_mem­_gc­_allocation­_threshold­_mb`, `js­_mem­_gc­_decommit­_threshold­_mb`, `js­_mem­_gc­_dynamic­_heap­_growth­_enabled`, `js­_mem­_gc­_dynamic­_mark­_slice­_enabled`, `js­_shared­_memory`, `js­_throw­_on­_asmjs­_validation­_failure`, `js­_throw­_on­_debuggee­_would­_run`, `js­_werror­_enabled`, and `network­_mime­_sniff`
 
-## Developer tools
-
-[**DevTools**](https://book.servo.org/contributing/devtools.html) has seen some big improvements in February!
-
-When enabled in servoshell, the DevTools server is more secure by default, listening only on localhost when only a port number is specified (@Narfinger, #42502).
-You can open the port for remote debugging by passing a full [SocketAddr](https://doc.rust-lang.org/std/net/enum.SocketAddr.html), such as `--devtools=[::]:6080` or `--devtools=0.0.0.0:6080`.
-
-In the **Inspector** tab, you can now **edit DOM attributes**, and the DOM tree updates when attributes change (@simonwuelker, #42601, #42785).
-You can now list the event type and phase of **event listeners** attached to a DOM node as well (@simonwuelker, #42355).
-
-In the **Console** tab, **objects can now be previewed** when passed to console.log() and friends (@simonwuelker, #42296, #42510, #42752), and boolean values are now syntax highlighted (@pralkarz, #42513).
-
-In the **Debugger** tab, you can now **pause and resume** script execution, both manually and when breakpoints are hit (@eerii, @atbrakhi, #42599, #42580, #42874).
-We’ve also started working on other debugger features (@atbrakhi, @eerii, #42306), including stepping execution (@eerii, @atbrakhi, #42844, #42878, #42906), so once again stay tuned!
-
-## Performance and stability
-
-Our **about:memory** page now knows how to **report many new kinds of memory usage**, including the **DevTools** server (@Narfinger, #42478, #42480), **WebGL** (@sagudev, #42570), **localStorage** and **sessionStorage** (@arihant2math, #42484), and some of the memory used by **IndexedDB** (@arihant2math, #42486).
-We’ve also started internally tracking the memory usage of the media subsystem (@Narfinger, #42504) and WebXR (@Narfinger, #42505).
-
-**Layout** has seen a lot of performance work in February, with our main focus being on improving [**incremental layout**]({{ '/blog/2025/07/17/this-month-in-servo/#performance' | url }}) of the **box tree** and **fragment tree**.
-
-We now have our first **truly incremental box tree layout** (@mrobinson, @Loirooriol, @lukewarlow, #42700, #42816), rather than our previous “dirty roots”-based approach.
-Depending on how they were [damaged](https://en.wikipedia.org/wiki/Dirty_bit), some boxes for **independent formatting contexts** (@Loirooriol, @lukewarlow, @mrobinson, #42783) and **floats** (@Loirooriol, @lukewarlow, @mrobinson, #42816) can now be reused, and they avoid damaging their parents (@Loirooriol, @lukewarlow, @mrobinson, #42847).
-
-**Incremental fragment tree layout** is improving too!
-Whereas we previously had to decide whether to run fragment tree layout in an “all or nothing” way, we can now **reuse cached fragments** in independent formatting contexts (@mrobinson, @Loirooriol, @lukewarlow, #42687, #42717, #42871).
-We can also measure how much work is being done on each layout (@Loirooriol, @lukewarlow, @mrobinson, #42817).
-
-Servo uses **shared memory** for many situations where copying data over channels would be too expensive, such as for images and fonts.
-In multiprocess mode (`--multiprocess`), we use the operating system to create the shared memory in a way that can be shared with other processes, such as [shm_open(3)](https://pubs.opengroup.org/onlinepubs/9799919799/functions/shm_open.html) or [CreateFileMappingW](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingw), but this consumes resources that can sometimes be exhausted.
-We only need to use those kinds of shared memory in multiprocess mode, so we’ve reworked Servo to use `Arc`﻿`<Vec<u8>>` in single-process mode (@Narfinger, #42083), which should avoid resource exhaustion.
-
-We’ve also landed optimisations for **‘Content-Security-Policy’** (@Narfinger, #42716), **IntersectionObserver** (@Narfinger, @mrobinson, @stevennovaryo, #42366, #42390), **layout queries** (@webbeef, #42327), the **bfcache** (@Narfinger, #42703), loading **images** (@Narfinger, #42684), and in the interfaces between Servo and **SpiderMonkey** (@sagudev, #42135, #42576).
-
-We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@Gae24, @pralkarz, @BryanSmith00, @sagudev, @Narfinger, @TimvdLippe, @kkoyung, @TimurBora, @onsah, #42342, #42294, #42370, #42417, #42619, #42616, #42637, #42640, #42662, #42679, #42681, #42665, #42667, #42699, #42712, #42725, #42729, #42726, #42720, #42738, #42737, #42735, #42751, #42805, #42809, #42780, #42820, #42715, #42635, #42880, #42846).
-
 ## More on the web platform
 
 If you navigate to a **video file** or **audio file as a document**, the player now has controls (@webbeef, #42488).
@@ -157,6 +142,14 @@ If you navigate to a **video file** or **audio file as a document**, the player 
 
 We’re implementing **system-font-aware font fallback** (@mrobinson, #42466), with support for this on macOS landing this month (@mrobinson, #42776).
 This allows Servo to render text in scripts that are not covered by web fonts or any of the fonts on Servo’s built-in lists of fallback fonts, as long as they are covered by fonts installed on the system.
+
+Servo now supports the newer **pointermove**, **pointerdown**, **pointerup**, and **pointercancel** events (@webbeef, #41290).
+The older **touchmove**, **touchstart**, **touchend**, and **touchcancel** events continue to be supported.
+
+The default language in **‘Accept-Language’** and **navigator.language** is now taken from the **$LANG** environment variable if present (@webbeef, #41919), rather than always being set to en-US.
+
+**&lt;input type=color>** now supports any CSS color value (@simonwuelker, #42275), including the more complex values like color-mix().
+We’ve also landed the **colorspace** attribute (@simonwuelker, #42279), but only in the web-facing side of Servo for now, not the embedding API or in servoshell.
 
 **‘vertical-align’** is now a shorthand for ‘alignment-baseline’ and ‘baseline-shift’ (@Loirooriol, #42361), and **scrollParent** on **HTMLElement** is now a function per [this recent spec update](https://github.com/w3c/csswg-drafts/issues/12731) (@TimurBora, #42689).
 
@@ -188,7 +181,32 @@ When geolocation is enabled (`--pref dom_geolocation_enabled`), **navigator­.ge
 
 We now support the **‘-webkit-text-security’** property in CSS (@mrobinson, #42181), which is not specified anywhere but required for [MotionMark](https://browserbench.org/MotionMark1.2/).
 
+## Performance and stability
+
+Our **about:memory** page now knows how to **report many new kinds of memory usage**, including the **DevTools** server (@Narfinger, #42478, #42480), **WebGL** (@sagudev, #42570), **localStorage** and **sessionStorage** (@arihant2math, #42484), and some of the memory used by **IndexedDB** (@arihant2math, #42486).
+We’ve also started internally tracking the memory usage of the media subsystem (@Narfinger, #42504) and WebXR (@Narfinger, #42505).
+
+**Layout** has seen a lot of performance work in February, with our main focus being on improving [**incremental layout**]({{ '/blog/2025/07/17/this-month-in-servo/#performance' | url }}) of the **box tree** and **fragment tree**.
+
+We now have our first **truly incremental box tree layout** (@mrobinson, @Loirooriol, @lukewarlow, #42700, #42816), rather than our previous “dirty roots”-based approach.
+Depending on how they were [damaged](https://en.wikipedia.org/wiki/Dirty_bit), some boxes for **independent formatting contexts** (@Loirooriol, @lukewarlow, @mrobinson, #42783) and **floats** (@Loirooriol, @lukewarlow, @mrobinson, #42816) can now be reused, and they avoid damaging their parents (@Loirooriol, @lukewarlow, @mrobinson, #42847).
+
+**Incremental fragment tree layout** is improving too!
+Whereas we previously had to decide whether to run fragment tree layout in an “all or nothing” way, we can now **reuse cached fragments** in independent formatting contexts (@mrobinson, @Loirooriol, @lukewarlow, #42687, #42717, #42871).
+We can also measure how much work is being done on each layout (@Loirooriol, @lukewarlow, @mrobinson, #42817).
+
+Servo uses **shared memory** for many situations where copying data over channels would be too expensive, such as for images and fonts.
+In multiprocess mode (`--multiprocess`), we use the operating system to create the shared memory in a way that can be shared with other processes, such as [shm_open(3)](https://pubs.opengroup.org/onlinepubs/9799919799/functions/shm_open.html) or [CreateFileMappingW](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingw), but this consumes resources that can sometimes be exhausted.
+We only need to use those kinds of shared memory in multiprocess mode, so we’ve reworked Servo to use `Arc`﻿`<Vec<u8>>` in single-process mode (@Narfinger, #42083), which should avoid resource exhaustion.
+
+We’ve also landed optimisations for **‘Content-Security-Policy’** (@Narfinger, #42716), **IntersectionObserver** (@Narfinger, @mrobinson, @stevennovaryo, #42366, #42390), **layout queries** (@webbeef, #42327), the **bfcache** (@Narfinger, #42703), loading **images** (@Narfinger, #42684), and in the interfaces between Servo and **SpiderMonkey** (@sagudev, #42135, #42576).
+
+We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@Gae24, @pralkarz, @BryanSmith00, @sagudev, @Narfinger, @TimvdLippe, @kkoyung, @TimurBora, @onsah, #42342, #42294, #42370, #42417, #42619, #42616, #42637, #42640, #42662, #42679, #42681, #42665, #42667, #42699, #42712, #42725, #42729, #42726, #42720, #42738, #42737, #42735, #42751, #42805, #42809, #42780, #42820, #42715, #42635, #42880, #42846).
+
 ## Bug fixes
+
+We’ve landed some fixes for issues preventing Servo from being built on **Windows arm64** (@dpaoliello, @npiesco, #42371, #42341).
+Work to enable Windows arm64 as a build platform is ongoing (@npiesco, #42312).
 
 **&lt;img height>** now takes the default &lt;img width> from the aspect ratio of the image (@Loirooriol, #42577), rather than using a width of 300px by default.
 **&lt;svg width=0>** and **&lt;svg height=0>** now take the default width and height (respectively) from the aspect ratio of the &lt;svg viewBox> (@Loirooriol, #42545).
