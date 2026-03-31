@@ -52,6 +52,8 @@ This is a *big* update, so here’s an outline:
 
 - [**Bug fixes**](#bug-fixes)<br>– Windows arm64, layout, DOM events, shadow DOM
 
+- [**Donations**](#donations)<br>– how you can help Servo flourish
+
 ## Work in progress
 
 We’ve started working on **accessibility support for web content** ([@alice](https://github.com/alice), [@delan](https://github.com/delan), [#42333](https://github.com/servo/servo/pull/42333), [#42402](https://github.com/servo/servo/pull/42402)), gated by a pref (`--pref accessibility_enabled`).
