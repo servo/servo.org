@@ -135,7 +135,11 @@ We’ve also started internally tracking the memory usage of the media subsystem
 **Layout** has seen a lot of performance work in February, with our main focus being on improving [**incremental layout**]({{ '/blog/2025/07/17/this-month-in-servo/#performance' | url }}) of the **box tree** and **fragment tree**.
 
 We now have our first **truly incremental box tree layout** (@mrobinson, @Loirooriol, @lukewarlow, #42700, #42816), rather than our previous “dirty roots”-based approach.
-Depending on how they were [damaged](https://en.wikipedia.org/wiki/Dirty_bit), some boxes for **independent formatting contexts** (@Loirooriol, @lukewarlow, @mrobinson, #42783) and **floats** (@Loirooriol, @lukewarlow, @mrobinson, #42816) can be reused, and boxes that are reused avoid damaging their parents (@Loirooriol, @lukewarlow, @mrobinson, #42847).
+Depending on how they were [damaged](https://en.wikipedia.org/wiki/Dirty_bit), some boxes for **independent formatting contexts** (@Loirooriol, @lukewarlow, @mrobinson, #42783) and **floats** (@Loirooriol, @lukewarlow, @mrobinson, #42816) can now be reused, and they avoid damaging their parents (@Loirooriol, @lukewarlow, @mrobinson, #42847).
+
+**Incremental fragment tree layout** is improving too!
+Whereas we previously had to decide whether to run fragment tree layout in an “all or nothing” way, we can now **reuse cached fragments** in independent formatting contexts (@mrobinson, @Loirooriol, @lukewarlow, #42687, #42717, #42871).
+We can also measure how much work is being done on each layout (@Loirooriol, @lukewarlow, @mrobinson, #42817).
 
 Servo uses **shared memory** for many situations where copying data over channels would be too expensive, such as for images and fonts.
 In multiprocess mode (`--multiprocess`), we use the operating system to create the shared memory in a way that can be shared with other processes, such as [shm_open(3)](https://pubs.opengroup.org/onlinepubs/9799919799/functions/shm_open.html) or [CreateFileMappingW](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingw), but this consumes resources that can sometimes be exhausted.
