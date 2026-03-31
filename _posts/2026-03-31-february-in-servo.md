@@ -11,7 +11,7 @@ categories:
 
 - **&lt;button command>** and **&lt;button commandfor>** ([@lukewarlow](https://github.com/lukewarlow), [#41237](https://github.com/servo/servo/pull/41237))
 - **‘:modal’** selectors on **&lt;dialog>** ([@lukewarlow](https://github.com/lukewarlow), [#42201](https://github.com/servo/servo/pull/42201))
-- **‘[@property](https://github.com/property)’** rules ([@yezhizhen](https://github.com/yezhizhen), [@Loirooriol](https://github.com/Loirooriol), [#42136](https://github.com/servo/servo/pull/42136), [#42858](https://github.com/servo/servo/pull/42858))
+- **‘@property’** rules ([@yezhizhen](https://github.com/yezhizhen), [@Loirooriol](https://github.com/Loirooriol), [#42136](https://github.com/servo/servo/pull/42136), [#42858](https://github.com/servo/servo/pull/42858))
 - **‘alignment-baseline’** and **‘baseline-shift’** ([@Loirooriol](https://github.com/Loirooriol), [#42361](https://github.com/servo/servo/pull/42361))
 - **‘Content-Security-Policy: base-uri’** ([@WaterWhisperer](https://github.com/WaterWhisperer), [#42272](https://github.com/servo/servo/pull/42272))
 - partial support for **&lt;iframe loading=lazy>** ([@TimvdLippe](https://github.com/TimvdLippe), [#41959](https://github.com/servo/servo/pull/41959))
