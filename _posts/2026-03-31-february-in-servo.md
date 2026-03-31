@@ -99,8 +99,16 @@ We’ve also started working on other debugger features ([@atbrakhi](https://git
 
 Back in August, we added a **servo:preferences** page to servoshell that allows you to set some of Servo’s *most common* preferences at runtime ([@jdm](https://github.com/arihant2math), [#38159](https://github.com/servo/servo/pull/38159)).
 
+<figure>
+    <a href="{{ '/img/blog/2026-03-preferences-page.png' | url }}"><img src="{{ '/img/blog/2026-03-preferences-page.png' | url }}" alt="Servo 0.0.6 showing the ‘servo:preferences’ page, with controls for experimental mode, disabling the HTTP cache, and setting the ‘User-Agent’ header"></a>
+</figure>
+
 servoshell now has a **servo:config** page ([@arihant2math](https://github.com/arihant2math), [#40324](https://github.com/servo/servo/pull/40324)), allowing you to set *any* preference, even internal ones.
 Note that preference changes are not yet persistent, and not all prefs take effect when changed at runtime.
+
+<figure>
+    <a href="{{ '/img/blog/2026-03-config-page.png' | url }}"><img src="{{ '/img/blog/2026-03-config-page.png' | url }}" alt="Servo 0.0.6 showing the ‘servo:config’ page, with a search field and a list of preferences, some of which are in bold since they have been changed from their default values"></a>
+</figure>
 
 You can now **press F5** to **reload the page** in servoshell ([@Narfinger](https://github.com/Narfinger), [#42538](https://github.com/servo/servo/pull/42538)), in addition to pressing Ctrl+R or ⌘R.
 
