@@ -17,11 +17,13 @@ git -C "$1" fetch https://github.com/servo/servo.git
 default_branch_head=$(cut -f 1 "$1/.git/FETCH_HEAD")
 
 if ! [ -e runs.json ]; then
-  gh api '/repos/servo/servo/actions/workflows/nightly.yml/runs?status=success&per_page=62' > runs.json
+  gh api '/repos/servo/servo/actions/workflows/release.yml/runs?status=success&per_page=62' > runs.json
 fi
 
-# Convert `runs.json` to `runs.tsv` with lines `<head commit>\t<timestamp>`.
-< runs.json jq -r '.workflow_runs[] | "\(.head_sha)\t\(.updated_at)"' | $tac > runs.tsv
+# Convert `runs.json` to `runs.tsv` with lines `<head commit>\t<timestamp>`,
+# considering only the runs for nightly releases, not for monthly releases.
+# Both use the same workflow, but only nightly releases are scheduled.
+< runs.json jq -r '.workflow_runs[] | select(.event == "schedule") | "\(.head_sha)\t\(.updated_at)"' | $tac > runs.tsv
 
 # We exclude `$minus_commit` and its ancestors from the next nightly’s list of
 # commits, effectively as the `<from>` in `git log <from>..<to>`. Normally this
