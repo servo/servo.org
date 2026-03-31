@@ -97,8 +97,9 @@ We’ve also started working on other debugger features ([@atbrakhi](https://git
 
 ## servoshell
 
-servoshell now has a **servo:config** page ([@arihant2math](https://github.com/arihant2math), [#40324](https://github.com/servo/servo/pull/40324)), allowing you to set any of Servo’s preferences, including internal prefs.
-This is much like about:config in Firefox.
+Back in August, we added a **servo:preferences** page to servoshell that allows you to set some of Servo’s *most common* preferences at runtime ([@jdm](https://github.com/arihant2math), [#38159](https://github.com/servo/servo/pull/38159)).
+
+servoshell now has a **servo:config** page ([@arihant2math](https://github.com/arihant2math), [#40324](https://github.com/servo/servo/pull/40324)), allowing you to set *any* preference, even internal ones.
 Note that preference changes are not yet persistent, and not all prefs take effect when changed at runtime.
 
 You can now **press F5** to **reload the page** in servoshell ([@Narfinger](https://github.com/Narfinger), [#42538](https://github.com/servo/servo/pull/42538)), in addition to pressing Ctrl+R or ⌘R.
