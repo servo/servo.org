@@ -94,6 +94,10 @@ In the **Console** tab, **objects can now be previewed** when passed to console.
 In the **Debugger** tab, you can now **pause and resume** script execution, both manually and when breakpoints are hit (@eerii, @atbrakhi, #42599, #42580, #42874).
 We’ve also started working on other debugger features (@atbrakhi, @eerii, #42306), including stepping execution (@eerii, @atbrakhi, #42844, #42878, #42906), so once again stay tuned!
 
+<figure>
+    <video src="{{ '/img/blog/2026-03-devtools-debugger.mp4' | url }}" autoplay muted loop>Servo 0.0.6 showing DevTools debugger setting breakpoints, pausing on those breakpoints, and resuming script execution</video>
+</figure>
+
 ## servoshell
 
 servoshell now has a **servo:config** page (@arihant2math, #40324), allowing you to set any of Servo’s preferences, including internal prefs.
