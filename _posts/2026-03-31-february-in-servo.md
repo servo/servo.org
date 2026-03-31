@@ -37,6 +37,10 @@ Plus a bunch of new DOM APIs:
 - **keyPath** on **IDBIndex** (@arihant2math, #42431)
 - **createIndex()**, **deleteIndex()**, and **index()** on **IDBObjectStore** (@arihant2math, @bulltickr, #38840, #42440, #42443)
 
+<figure>
+    <a href="{{ '/img/blog/2026-03-diffie.png' | url }}"><img src="{{ '/img/blog/2026-03-diffie.png' | url }}" alt="Servo 0.0.6 showing ‘transform-style: preserve-3d’, ‘vertical-align’ shorthand with ‘baseline-shift’, objects being previewed in DevTools when passed to console.log(), pausing script execution in DevTools, and opening a modal `<dialog>` with `<button command>`"></a>
+</figure>
+
 This is a *big* update, so here’s an outline:
 
 - [**Work in progress**](#work-in-progress)<br>– accessibility, execCommand()
