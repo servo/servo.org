@@ -435,11 +435,11 @@ We can also measure how much work is being done on each layout (as above, #42817
 <p>Servo uses <strong>shared memory</strong> for many situations where copying data over channels would be too expensive, such as for images and fonts.
 In multiprocess mode (<code>--multiprocess</code>), we use the operating system to create the shared memory in a way that can be shared with other processes, such as <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/shm_open.html">shm_open(3)</a> or <a href="https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingw">CreateFileMappingW</a>, but this consumes resources that can sometimes be exhausted.
 We only need to use those kinds of shared memory in multiprocess mode, so we’ve reworked Servo to use <code>Arc</code>﻿<code>&lt;Vec&lt;u8&gt;&gt;</code> in single-process mode (@Narfinger, #42083), which should avoid resource exhaustion.</p>
-<p>We’ve also landed optimisations for <strong>‘Content-Security-Policy’</strong> (@Narfinger, #42716), <strong>IntersectionObserver</strong> (@Narfinger, @mrobinson, @stevennovaryo, #42366, #42390), <strong>layout queries</strong> (@webbeef, #42327), the <strong>bfcache</strong> (@Narfinger, #42703), loading <strong>images</strong> (@Narfinger, #42684), and in the interfaces between Servo and <strong>SpiderMonkey</strong> (@sagudev, #42135, #42576).</p>
 <p><strong>Parsing web pages</strong> is complicated: we want pages to render incrementally as they stream in from the network, and we want to prefetch resources, but scripts can call document.write(), which injects markup “on the spot”.
 This is further complicated if that markup also contains a &lt;script&gt;.</p>
 <p>We’ve recently landed some fixes to Servo’s <strong>async parser</strong> (@simonwuelker, #42882, #42910), which handles these issues more efficiently.
 This is currently an obscure and somewhat buggy feature (<code>--pref dom­_servoparser­_async­_html­_tokenizer­_enabled</code>), but if we can get the feature working more reliably (<a href="https://github.com/servo/servo/issues/37418">#37418</a>), it could <strong>halve the energy</strong> Servo spends on parsing, <strong>lower latency</strong> for pages that don’t use document.write(), and even <strong>improve the html5ever API</strong> for the ecosystem.</p>
+<p>We’ve also landed optimisations for <strong>‘Content-Security-Policy’</strong> (@Narfinger, #42716), <strong>IntersectionObserver</strong> (@Narfinger, @mrobinson, @stevennovaryo, #42366, #42390), <strong>layout queries</strong> (@webbeef, #42327), the <strong>bfcache</strong> (@Narfinger, #42703), loading <strong>images</strong> (@Narfinger, #42684), and checks for <strong>multiprocess mode</strong> (@Narfinger, #42782), as well as the interfaces between Servo and <strong>SpiderMonkey</strong> (@sagudev, #42135, #42576).</p>
 <p>We’ve continued our long-running effort to <strong>use the Rust type system</strong> to make certain kinds of dynamic borrow failures impossible (@Gae24, @pralkarz, @BryanSmith00, @sagudev, @Narfinger, @TimvdLippe, @kkoyung, @TimurBora, @onsah, #42342, #42294, #42370, #42417, #42619, #42616, #42637, #42640, #42662, #42679, #42681, #42665, #42667, #42699, #42712, #42725, #42729, #42726, #42720, #42738, #42737, #42735, #42751, #42805, #42809, #42780, #42820, #42715, #42635, #42880, #42846).</p>
 <h2 id="bug-fixes" tabindex="-1">Bug fixes <a class="header-anchor" href="#bug-fixes">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
@@ -449,21 +449,31 @@ Work to enable Windows arm64 as a build platform is ongoing (@npiesco, #42312).<
 <p><strong>&lt;img height&gt;</strong> now takes the default &lt;img width&gt; from the aspect ratio of the image (@Loirooriol, #42577), rather than using a width of 300px by default.
 <strong>&lt;svg width=0&gt;</strong> and <strong>&lt;svg height=0&gt;</strong> now take the default width and height (respectively) from the aspect ratio of the &lt;svg viewBox&gt; (@Loirooriol, #42545).</p>
 <p>We’ve fixed a bug in the result of <strong>layout queries</strong>, such as getBoundingClientRect(), on inline <strong>&lt;svg&gt;</strong> (@jdm, @Loirooriol, #42594), and we’ve fixed layout bugs related to <strong>‘display: table-cell’</strong> (@Loirooriol, #42778), <strong>‘display: list-item’</strong> (@Loirooriol, #42825, #42864), <strong>‘inset: auto’</strong> (@Loirooriol, #42586), <strong>‘width: max-content’</strong> (@mrobinson, @Loirooriol, @lukewarlow, #42574), <strong>‘align-self: last baseline’</strong> (@rayguo17, #42724), <strong>‘list-style-image’</strong> (@lukewarlow, #42332), <strong>‘content: &lt;image&gt;’</strong> (@lukewarlow, #42332), negative <strong>‘margin’</strong> (@Loirooriol, #42889), and <strong>ink overflow</strong> (@mrobinson, #42403).</p>
-<p>We’ve also fixed a variety of other web-related bugs:</p>
+<p>HTML and CSS bugs:</p>
 <ul>
 <li><strong>Empty ‘url()’</strong> values making requests when they shouldn’t (@rayguo17, #42622)</li>
+<li><strong>&lt;template&gt;</strong> failing to throw HierarchyRequestError when a DOM API is used to create an invalid hierarchy (@TimvdLippe, #42276)</li>
+<li><strong>&lt;input&gt;</strong> and <strong>&lt;textarea&gt;</strong> selection behaviour being incorrect when the text contains more than one script (@mrobinson, #42399)</li>
+<li><strong>&lt;script nonce&gt;</strong> validation failing to work correctly in some cases (@dyegoaurelio, #40956)</li>
+<li><strong>&lt;a target&gt;</strong> failing to work correctly after the related &lt;iframe&gt; is removed and a new one added with the same name (@jdm, #42344)</li>
+<li><strong>&lt;base&gt;</strong> not taking effect in some cases, or taking effect when given a <strong>data:</strong> or <strong>javascript:</strong> URL (@TimvdLippe, #42255, #42339)</li>
+</ul>
+<p>JavaScript and DOM bugs:</p>
+<ul>
 <li><code>event.target</code> being incorrect on <strong>touchmove</strong>, <strong>touchend</strong>, and <strong>touchcancel</strong> events (@yezhizhen, #42654)</li>
 <li><strong>touchmove</strong> events not being fired when part of a two-finger pinch zoom (@yezhizhen, #42528)</li>
 <li><strong>touchend</strong> events erroneously firing after touchcancel events (@yezhizhen, #42654)</li>
 <li><strong>assignedNodes()</strong> on <strong>HTMLSlotElement</strong> returning incorrect results after the &lt;slot&gt; was removed from the shadow tree (@rayguo17, #42250)</li>
-<li><strong>&lt;template&gt;</strong> failing to throw HierarchyRequestError when a DOM API is used to create an invalid hierarchy (@TimvdLippe, #42276)</li>
-<li><strong>&lt;input&gt;</strong> and <strong>&lt;textarea&gt;</strong> selection behaviour being incorrect when the text contains more than one script (@mrobinson, #42399)</li>
-<li><strong>&lt;a target&gt;</strong> failing to work correctly after the related &lt;iframe&gt; is removed and a new one added with the same name (@jdm, #42344)</li>
-<li><strong>&lt;base&gt;</strong> not taking effect in some cases, or taking effect when given a <strong>data:</strong> or <strong>javascript:</strong> URL (@TimvdLippe, #42255, #42339)</li>
 <li><strong>Largest Contentful Paint</strong> timings no longer being collected after reloading or navigating (@shubhamg13, #41169)</li>
 <li><strong>PerformancePaintTiming</strong> being exposed to Worker globals when they shouldn’t be (@shubhamg13, #42409)</li>
 <li><strong>JavaScript modules</strong> resolved incorrectly when there are overlapping <code>.imports</code> or <code>.scopes</code> or import maps (@Gae24, #42668, #42630, #42754, #42821)</li>
 <li>changes to how we trigger <strong>garbage collection</strong> breaking <a href="https://browserbench.org/Speedometer3.1/">Speedometer</a> (@sagudev, #42271)</li>
+</ul>
+<p>WebDriver bugs:</p>
+<ul>
+<li><strong><a href="https://w3c.github.io/webdriver/#pointer-actions">Pointer actions</a> and <a href="https://w3c.github.io/webdriver/#wheel-actions">wheel actions</a></strong> behaving incorrectly when devicePixelRatio ≠ 1 (@yezhizhen, #42387, #42628)</li>
+<li><strong><a href="https://w3c.github.io/webdriver/#wheel-actions">Wheel actions</a></strong> throwing incorrect exceptions when they are missing properties (@yezhizhen, #42745)</li>
+<li><strong><a href="https://w3c.github.io/webdriver/#dfn-dispatch-a-pointermove-action">pointerMove</a> actions</strong> with non-zero duration failing to interleave with other actions (@yezhizhen, #42289)</li>
 </ul>
 <p>We’ve fixed <strong>crashes in DevTools</strong>, in the Inspector tab (@eerii, @mrobinson, #42330), when exiting Servo while DevTools is connected (@simonwuelker, #42543), when setting breakpoints (@atbrakhi, #42810), and after clients disconnect (@simonwuelker, #42583).</p>
 <p>We’ve fixed <strong>crashes in layout</strong>, when using ‘background-repeat: round’ (@mrobinson, #42303), when using ‘list-style-image’ or ‘content: &lt;image&gt;’ (@lukewarlow, #42332), when calling elementFromPoint() on Document (@mrobinson, @Loirooriol, @lukewarlow, #42822), and when handling layout queries like getBoundingClientRect() on inline &lt;svg&gt; (@jdm, @Loirooriol, #42594).</p>
