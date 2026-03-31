@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "February in Servo: and more!"
+title:      "February in Servo: faster layout, pause and resume scripts, and more!"
 date:       2026-03-31
-summary:    ao!! wrrrrao!!
+summary:    Plus improvements to font fallback, our embedding API, and the DevTools Console and Inspector.
 categories:
 ---
 
