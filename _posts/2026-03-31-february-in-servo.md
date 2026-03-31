@@ -230,11 +230,13 @@ We’ve fixed a bug in the result of **layout queries**, such as getBoundingClie
 
 We’ve also fixed a variety of other web-related bugs:
 
+- **Empty ‘url()’** values making requests when they shouldn’t (@rayguo17, #42622)
 - `event.target` being incorrect on **touchmove**, **touchend**, and **touchcancel** events (@yezhizhen, #42654)
 - **touchmove** events not being fired when part of a two-finger pinch zoom (@yezhizhen, #42528)
 - **touchend** events erroneously firing after touchcancel events (@yezhizhen, #42654)
 - **assignedNodes()** on **HTMLSlotElement** returning incorrect results after the &lt;slot> was removed from the shadow tree (@rayguo17, #42250)
 - **&lt;template>** failing to throw HierarchyRequestError when a DOM API is used to create an invalid hierarchy (@TimvdLippe, #42276)
+- **&lt;input>** and **&lt;textarea>** selection behaviour being incorrect when the text contains more than one script (@mrobinson, #42399)
 - **&lt;a target>** failing to work correctly after the related &lt;iframe> is removed and a new one added with the same name (@jdm, #42344)
 - **&lt;base>** not taking effect in some cases, or taking effect when given a **data:** or **javascript:** URL (@TimvdLippe, #42255, #42339)
 - **Largest Contentful Paint** timings no longer being collected after reloading or navigating (@shubhamg13, #41169)
