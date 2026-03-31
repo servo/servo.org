@@ -209,13 +209,13 @@ Servo uses **shared memory** for many situations where copying data over channel
 In multiprocess mode (`--multiprocess`), we use the operating system to create the shared memory in a way that can be shared with other processes, such as [shm_open(3)](https://pubs.opengroup.org/onlinepubs/9799919799/functions/shm_open.html) or [CreateFileMappingW](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingw), but this consumes resources that can sometimes be exhausted.
 We only need to use those kinds of shared memory in multiprocess mode, so we’ve reworked Servo to use `Arc`﻿`<Vec<u8>>` in single-process mode (@Narfinger, #42083), which should avoid resource exhaustion.
 
-We’ve also landed optimisations for **‘Content-Security-Policy’** (@Narfinger, #42716), **IntersectionObserver** (@Narfinger, @mrobinson, @stevennovaryo, #42366, #42390), **layout queries** (@webbeef, #42327), the **bfcache** (@Narfinger, #42703), loading **images** (@Narfinger, #42684), and in the interfaces between Servo and **SpiderMonkey** (@sagudev, #42135, #42576).
-
 **Parsing web pages** is complicated: we want pages to render incrementally as they stream in from the network, and we want to prefetch resources, but scripts can call document.write(), which injects markup “on the spot”.
 This is further complicated if that markup also contains a &lt;script>.
 
 We’ve recently landed some fixes to Servo’s **async parser** (@simonwuelker, #42882, #42910), which handles these issues more efficiently.
 This is currently an obscure and somewhat buggy feature (`--pref dom­_servoparser­_async­_html­_tokenizer­_enabled`), but if we can get the feature working more reliably ([#37418](https://github.com/servo/servo/issues/37418)), it could **halve the energy** Servo spends on parsing, **lower latency** for pages that don’t use document.write(), and even **improve the html5ever API** for the ecosystem.
+
+We’ve also landed optimisations for **‘Content-Security-Policy’** (@Narfinger, #42716), **IntersectionObserver** (@Narfinger, @mrobinson, @stevennovaryo, #42366, #42390), **layout queries** (@webbeef, #42327), the **bfcache** (@Narfinger, #42703), loading **images** (@Narfinger, #42684), and checks for **multiprocess mode** (@Narfinger, #42782), as well as the interfaces between Servo and **SpiderMonkey** (@sagudev, #42135, #42576).
 
 We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@Gae24, @pralkarz, @BryanSmith00, @sagudev, @Narfinger, @TimvdLippe, @kkoyung, @TimurBora, @onsah, #42342, #42294, #42370, #42417, #42619, #42616, #42637, #42640, #42662, #42679, #42681, #42665, #42667, #42699, #42712, #42725, #42729, #42726, #42720, #42738, #42737, #42735, #42751, #42805, #42809, #42780, #42820, #42715, #42635, #42880, #42846).
 
