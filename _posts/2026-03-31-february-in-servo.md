@@ -28,6 +28,7 @@ Plus a bunch of new DOM APIs:
 - most of the [**Pointer Events**](https://w3c.github.io/pointerevents/) API (@webbeef, #41290)
 - the **UserActivation** API (@stevennovaryo, #42060)
 - **import.meta.resolve()** (@Gae24, #42506)
+- **integrity** in **&lt;script type=importmap>** (@Gae24, #42604)
 - the **formData()** method on **Request** (@Taym95, #42041)
 - the **alpha** property on **HTMLInputElement** (@simonwuelker, #42293)
 - **tabIndex** on **HTMLElement** and **SVGElement** (@mrobinson, @Loirooriol, #42913)
@@ -232,7 +233,8 @@ We’ve also fixed a variety of other web-related bugs:
 - **&lt;base>** not taking effect in some cases, or taking effect when given a **data:** or **javascript:** URL (@TimvdLippe, #42255, #42339)
 - **Largest Contentful Paint** timings no longer being collected after reloading or navigating (@shubhamg13, #41169)
 - **PerformancePaintTiming** being exposed to Worker globals when they shouldn’t be (@shubhamg13, #42409)
-- changes to how we trigger garbage collection breaking [Speedometer](https://browserbench.org/Speedometer3.1/) (@sagudev, #42271)
+- **JavaScript modules** resolved incorrectly when there are overlapping `.imports` or `.scopes` or import maps (@Gae24, #42668, #42630, #42754, #42821)
+- changes to how we trigger **garbage collection** breaking [Speedometer](https://browserbench.org/Speedometer3.1/) (@sagudev, #42271)
 
 We’ve fixed **crashes in DevTools**, in the Inspector tab (@eerii, @mrobinson, #42330), when exiting Servo while DevTools is connected (@simonwuelker, #42543), when setting breakpoints (@atbrakhi, #42810), and after clients disconnect (@simonwuelker, #42583).
 
