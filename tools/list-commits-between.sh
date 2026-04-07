@@ -18,7 +18,7 @@ if [ "$(git -C "$1" log --pretty=\%D -n 1 "$3")" = grafted ]; then
 fi
 
 IFS=$'\t'
-git -C "$1" log --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,valueonly,separator=%x09)' "$2".."$3" \
+git -C "$1" log --reverse --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,valueonly,separator=%x09)' "$2".."$3" \
 | while read -r hash subject author coauthors; do
     pull_number=$(printf \%s\\n "$subject" | sed -E 's@.*[(]#([^)]+)[)].*@\1@')
     url=https://github.com/servo/servo/pull/$pull_number
