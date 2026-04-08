@@ -310,7 +310,8 @@ https://github.com/servo/servo/pull/42953	(@jschwe, #42953)	Reword our security 
     # reflect that.
     # This is not a policy change, just making the wording more clear.
     # Testing: Not required, policy description.
-https://github.com/servo/servo/pull/42937	(@willypuzzle, #42937)	script: Refactors GPUPipelineLayout to disallow direct Drop. (#42937)
++https://github.com/servo/servo/pull/42937	(@willypuzzle, #42937)	script: Refactors GPUPipelineLayout to disallow direct Drop. (#42937)
+    dom; [asked in #26488] soundness?
     ^ commit 68284e4a3860f381ec08e24567545076194ea618
     # Moves the `Drop` implementation for `GPUPipelineLayout` to a dedicated private helper struct,
     # `DroppableGPUPipelineLayout`. This ensures that DOM types do not directly implement `Drop`, aligning with best
@@ -521,7 +522,8 @@ https://github.com/servo/servo/pull/42987	(@simonwuelker, #42987)	script: Fire p
     # for the element hovered by the pointer and all its ancestors. That implies using the flat tree, which we were not
     # doing before.
     # Testing: This change fixes a web platform test and makes https://github.com/simeydotme/hover-tilt work in servo
-https://github.com/servo/servo/pull/42982	(@willypuzzle, #42982)	script: Refactors `GPURenderBundle`'s drop implementation. (#42982)
++https://github.com/servo/servo/pull/42982	(@willypuzzle, #42982)	script: Refactors `GPURenderBundle`'s drop implementation. (#42982)
+    dom; [asked in #26488] soundness?
     ^ commit bff59c629a6866a0dca09865789b8c8c22f6b545
     # Moves the `Drop` logic for `GPURenderBundle` into a dedicated helper struct, `DroppableGPURenderBundle`. This change
     # ensures that `GPURenderBundle` itself does not directly implement `Drop`, aligning with the policy to prevent direct
@@ -881,7 +883,8 @@ https://github.com/servo/servo/pull/42991	(@simonwuelker, #42991)	script: Use st
     # (https://starlight.astro.build/components/tabs/). I've seen that (broken) component on multiple websites.
     # Fixes https://github.com/servo/servo/issues/41105
     # Testing: New tests start to pass
-https://github.com/servo/servo/pull/43018	(@willypuzzle, #43018)	script: Refactors GPURenderPassEncoder's drop implementation. (#43018)
++https://github.com/servo/servo/pull/43018	(@willypuzzle, #43018)	script: Refactors GPURenderPassEncoder's drop implementation. (#43018)
+    dom; [asked in #26488] soundness?
     ^ commit 1f6037d02281961a72133c9fbfe15106cf60e0c6
     # Moves the `Drop` logic for `GPURenderPassEncoder` into a dedicated helper struct, `DroppableGPURenderPassEncoder`. This
     # ensures that DOM types do not directly implement `Drop`, aligning with the policy for resource management in the
@@ -1367,7 +1370,8 @@ https://github.com/servo/servo/pull/43017	(@jakubadamw, #43017)	script: Implemen
     # of options that are marked as selected.
     # Testing: 14 assertions in the existing WPT went from failing to passing.
     # Fixes #15522.
-https://github.com/servo/servo/pull/43071	(@willypuzzle, #43071)	script: Refactor GPURenderPipeline's drop implementation (#43071)
++https://github.com/servo/servo/pull/43071	(@willypuzzle, #43071)	script: Refactor GPURenderPipeline's drop implementation (#43071)
+    dom; [asked in #26488] soundness?
     ^ commit 229d89042f42c8e273847597eeb4d2299ab3d19c
     # Moves the `Drop` logic for `GPURenderPipeline` into a dedicated helper struct, `DroppableGPURenderPipeline`.
     # The associated `Bindings.conf` entry is
@@ -2106,7 +2110,8 @@ https://github.com/servo/servo/pull/43178	(@simonwuelker, #43178)	script: Fire a
     # Testing: A new test starts to pass and
     # `html/webappapis/scripting/processing-model-2/runtime-error-in-body-onerror.html` does not crash
     # Fixes: https://github.com/servo/servo/issues/13152
-https://github.com/servo/servo/pull/43181	(@TimvdLippe, #43181)	script: Move Trusted Types interfaces to `script/dom/trustedtypes` (#43181)
++https://github.com/servo/servo/pull/43181	(@TimvdLippe, #43181)	script: Move Trusted Types interfaces to `script/dom/trustedtypes` (#43181)
+    dom; outreachy refactor
     ^ commit aae5c4cd973a7c2179f9f5da29d287deff124f00
     # Part of #38901
     # Testing: it compiles
@@ -2425,7 +2430,8 @@ https://github.com/servo/servo/pull/43226	(@yezhizhen, #43226)	script: Free memo
     # This is a hot path. This way we free the unused memory earlier.
     # Didn't realize the difference in #43202.
     # Testing: This is a memory optimization that does not change visible behaviour.
-https://github.com/servo/servo/pull/43222	(@willypuzzle, #43222)	script: Move GPUSampler drop logic to a helper struct (#43222)
++https://github.com/servo/servo/pull/43222	(@willypuzzle, #43222)	script: Move GPUSampler drop logic to a helper struct (#43222)
+    dom; [asked in #26488] soundness?
     ^ commit b2ac181091e08ffde1079b46d925f82862df285b
     # Implementing `Drop` for DOM types is being forbidden. This moves the resource cleanup logic for `GPUSampler`
     # to a separate `DroppableGPUSampler` struct and removes the `allowDropImpl` flag from the bindings configuration.
@@ -2614,7 +2620,8 @@ https://github.com/servo/servo/pull/43243	(@jschwe, #43243)	Use workspace deps c
     # `workspace.version` (did not like the `.` in a `key`).
     # [`tomllib`]: https://docs.python.org/3/library/tomllib.html
     # Testing: Should be covered by regular CI testing.
-https://github.com/servo/servo/pull/43220	(@Gae24, #43220)	script: Pass `&mut JSContext` to `VirtualMethods::bind_to_tree` (#43220)
++https://github.com/servo/servo/pull/43220	(@Gae24, #43220)	script: Pass `&mut JSContext` to `VirtualMethods::bind_to_tree` (#43220)
+    dom; safety from ground up
     ^ commit ef97d7e19912ad70400d0c953abd769dfc14e95a
     # Testing: No behaviour change, a successful build is enough.
     # Fixes: #42838 #43239
@@ -2631,7 +2638,8 @@ https://github.com/servo/servo/pull/43262	(@yezhizhen, #43262)	webdriver: Always
     # This is now possible since #43202. We remove the workaround introduced long ago.
     # Testing: Before #43202, this would deadlock in many tests, and is therefore covered by existing tests.
     # [Try](https://github.com/servo/servo/actions/runs/23080857516)
-https://github.com/servo/servo/pull/43252	(@Gae24, #43252)	script: Pass `&mut JSContext` in more places (#43252)
++https://github.com/servo/servo/pull/43252	(@Gae24, #43252)	script: Pass `&mut JSContext` in more places (#43252)
+    dom; safety from ground up
     ^ commit e8b581aaf0eee9154d5c20333c76f20f561a379a
     # Continuation of #43220, removes many `temp_cx` calls introduced by that.
     # Testing: No behaviour change, a successful build is enough.
@@ -2663,7 +2671,8 @@ https://github.com/servo/servo/pull/43273	(@webbeef, #43273)	chore: replace refe
     ^ commit f660fd6d9180de34f0d8ae83b328dd7b0075a675
     # Part of #40600
     # Testing: It compiles
-https://github.com/servo/servo/pull/43269	(@TimvdLippe, #43269)	script: Move CSPViolationReportTask (#43269)
++https://github.com/servo/servo/pull/43269	(@TimvdLippe, #43269)	script: Move CSPViolationReportTask (#43269)
+    dom; outreachy refactor
     ^ commit d0d84f40c712b1445990fff0997147a2465cfbec
     # This was the only struct leftover in security_manager. Therefore, this both moves and renames the files.
     # Part of #38901
@@ -2717,7 +2726,8 @@ https://github.com/servo/servo/pull/43276	(@simartin, #43276)	script: remove red
     # ScriptWindowProxies's find_window_proxy and get methods are exactly the same; remove the latter.
     # Testing:  Existing WPT tests should cover the script_thread.rs change
     # Fixes: https://github.com/servo/servo/issues/43251
-https://github.com/servo/servo/pull/43270	(@TimvdLippe, #43270)	script: Move reporting interfaces (#43270)
++https://github.com/servo/servo/pull/43270	(@TimvdLippe, #43270)	script: Move reporting interfaces (#43270)
+    dom; outreachy refactor
     ^ commit f8b06d72918637c0ca4e20913dcdc132cbc1290a
     # Also moves some relevant methods from GlobalScope that were only used within ReportingObserver.
     # Part of #38901
@@ -2732,7 +2742,8 @@ https://github.com/servo/servo/pull/43270	(@TimvdLippe, #43270)	script: Move rep
     ^ commit d952864be0ffab3363b97076b25af1a97a2ac874
     # Part of #40600
     # Testing: It compiles
-https://github.com/servo/servo/pull/43279	(@TimvdLippe, #43279)	script: Move debugger interfaces into `debugger/` (#43279)
++https://github.com/servo/servo/pull/43279	(@TimvdLippe, #43279)	script: Move debugger interfaces into `debugger/` (#43279)
+    dom; outreachy refactor
     ^ commit 058759bf0662b8a429169e4c54de9bf02492bba6
     # Part of #38901
     # Testing: It compiles
@@ -2759,7 +2770,8 @@ https://github.com/servo/servo/pull/43177	(@TimvdLippe, #43177)	script: Record s
     # light-weight interaction, but most of the code doesn't do anything yet since the relevant commands aren't implemented.
     # Part of #25005
     # Testing: no behavioral changes, only preparations for future work
-https://github.com/servo/servo/pull/43284	(@yezhizhen, @sagudev, #43284)	script: Use `&mut JSContext` in `HTMLMapElement`&`HTMLImageElement` (#43284)
++https://github.com/servo/servo/pull/43284	(@yezhizhen, @sagudev, #43284)	script: Use `&mut JSContext` in `HTMLMapElement`&`HTMLImageElement` (#43284)
+    dom; safety from ground up
     ^ commit c9c8e22abd583e5ffc0ddc8e8def5a036434e1f1
     # I just want to be part of the campaign.
     # Testing: It compiles.
@@ -2768,7 +2780,8 @@ https://github.com/servo/servo/pull/43285	(@SharanRP, #43285)	script: inline dis
     # fixes #43280
     # This PR in lines the dispatch_load_event and dispatch_error_event wrappers directly into their call sites and
     # removes the unused function definitions
-https://github.com/servo/servo/pull/43288	(@willypuzzle, #43288)	script: Move drop logic for several WebGPU types to helper structs (#43288)
++https://github.com/servo/servo/pull/43288	(@willypuzzle, #43288)	script: Move drop logic for several WebGPU types to helper structs (#43288)
+    dom; [asked in #26488] soundness?
     ^ commit b3c8c50af896f8798fc87585d7d3a47be689850f
     # Implementing `Drop` for DOM types is being forbidden. This moves the resource cleanup logic for `GPUShaderModule`,
     # `GPUTexture`, and `GPUTextureView` to separate helper structs and removes the `allowDropImpl` flag from the
@@ -3480,7 +3493,8 @@ https://github.com/servo/servo/pull/43337	(@Narfinger, #43337)	script: Content E
     # users can now see object properties and function metadata
     # Testing: Current tests are passing. Manual testing.
     # Fixes: Part of #36027
-https://github.com/servo/servo/pull/43383	(@TimvdLippe, #43383)	script: Pass `&mut JSContext` to `attribute_mutated` (#43383)
++https://github.com/servo/servo/pull/43383	(@TimvdLippe, #43383)	script: Pass `&mut JSContext` to `attribute_mutated` (#43383)
+    dom; safety from ground up
     ^ commit 479a9b6be3c3c8fc8a8c2a2475ad253ebe72b559
     # It pushes the `temp_cx` 1 level up to `element.rs` where the calling chain begins. Other than that this was purely
     # a mechanical change where I used regexes to replace all patterns with the new ones.
@@ -3535,7 +3549,8 @@ https://github.com/servo/servo/pull/43367	(@TimvdLippe, #43367)	script: Strip bl
     ^ commit 6a788b1bf3d1682d7cd91be4041a6349df69f8cf
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This was missed when implementing support for reporting CSP violations.
-https://github.com/servo/servo/pull/43437	(@TimvdLippe, #43437)	script: Move encoding interfaces into `encoding/` (#43437)
++https://github.com/servo/servo/pull/43437	(@TimvdLippe, #43437)	script: Move encoding interfaces into `encoding/` (#43437)
+    dom; outreachy refactor
     ^ commit 4723955af84f092592cea38a7c5f89a11290b6a6
     # Part of #38901
     # Testing: It compiles
@@ -3615,7 +3630,8 @@ https://github.com/servo/servo/pull/43437	(@TimvdLippe, #43437)	script: Move enc
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/43259	(@PuercoPop, #43259)	script: Pass &mut JSContext to FetchResponseListener::process_response (#43259)
++https://github.com/servo/servo/pull/43259	(@PuercoPop, #43259)	script: Pass &mut JSContext to FetchResponseListener::process_response (#43259)
+    dom; safety from ground up
     ^ commit eea60b8eb11792adf080b1453f81190d4885d79f
     # Add the cx parameter to `fn process_response` in the `FetchResponseListener` trait and the traits that
     # that interface change requires. Chose to add it as the first parameter, following the same order that
@@ -4130,7 +4146,8 @@ https://github.com/servo/servo/pull/43521	(@SharanRP, #43521)	Use encoding-parse
     # Testing: Verified with the WPT form-action tests `./mach test-wpt
     # tests/wpt/tests/html/semantics/forms/the-form-element`, all relevant tests passed.
     # Fixes: #43507
-https://github.com/servo/servo/pull/43525	(@Gae24, #43525)	script: Propagate `&mut JSContext` from `GlobalScope::start_message_port` to stream code (#43525)
++https://github.com/servo/servo/pull/43525	(@Gae24, #43525)	script: Propagate `&mut JSContext` from `GlobalScope::start_message_port` to stream code (#43525)
+    dom; safety from ground up
     ^ commit 16264500630287e6b4bff494108957b850ff048e
     # Pass `&mut JSContext` to more stream related code.
     # Testing: A successful build is enough.
@@ -4191,13 +4208,15 @@ https://github.com/servo/servo/pull/43532	(@TG199, #43532)	remove referrer field
     # Remove `referrer` field from `ScriptFetchOptions` and pass it directly to `script_fetch_request`.
     # This keeps ScriptFetchOptions aligned with the HTML
     # fixes #42875
-https://github.com/servo/servo/pull/43544	(@willypuzzle, #43544)	webgl: Remove manual Drop implementation for WebGLQuery (#43544)
++https://github.com/servo/servo/pull/43544	(@willypuzzle, #43544)	webgl: Remove manual Drop implementation for WebGLQuery (#43544)
+    dom; [asked in #26488] soundness?
     ^ commit 1e514bcfe99388e73fc7ff4bcd996bc3eb20d196
     # Moves the cleanup logic to a separate helper struct to comply with the prohibition of manual `Drop` implementations
     # for DOM types.
     # Testing: WebGL tests just cover its parts
     # Fixes: Partially #26488
-https://github.com/servo/servo/pull/43543	(@pylbrecht, #43543)	Pass &mut JSContext (#43543)
++https://github.com/servo/servo/pull/43543	(@pylbrecht, #43543)	Pass &mut JSContext (#43543)
+    dom; safety from ground up
     ^ commit 2f1b7f0f8441fec510f8859746d9bf0420c5d7dd
     # This is follow-up of #41459.
     # We replace some of these:
@@ -4427,7 +4446,8 @@ https://github.com/servo/servo/pull/43492	(@SharanRP, #43492)	devtools: Handle s
     # unwrap/expect paths.
     # Testing: No dedicated tests were added for this change.
     # Fixes: #43317
-https://github.com/servo/servo/pull/43563	(@willypuzzle, #43563)	webgl: Remove manual Drop implementation for WebGLRenderbuffer (#43563)
++https://github.com/servo/servo/pull/43563	(@willypuzzle, #43563)	webgl: Remove manual Drop implementation for WebGLRenderbuffer (#43563)
+    dom; [asked in #26488] soundness?
     ^ commit 95aa798b2f54ebeb10e52cc4538978cee729c852
     # Moves the cleanup logic to a separate helper struct to comply with the prohibition of manual `Drop` implementations
     # for DOM types.
@@ -4664,7 +4684,8 @@ https://github.com/servo/servo/pull/43595	(@minghuaw, #43595)	layout: Do not tri
     # unnecessary reflow. This PR removes the boolean field from the `WebFontLoaded` message and only sends the message
     # when the web font loading is successful.
     # Testing: Existing WPT tests
-https://github.com/servo/servo/pull/43597	(@elomscansio, #43597)	script: Move Clipboard DOM interfaces to script/dom/clipboard/ (#43597)
++https://github.com/servo/servo/pull/43597	(@elomscansio, #43597)	script: Move Clipboard DOM interfaces to script/dom/clipboard/ (#43597)
+    dom; outreachy refactor
     ^ commit 36a5885086a23100ba5158b7dcd36a243e6aea95
     # Moves interfaces defined by the clipboard spec to the script/dom/clipboard/ module from script/dom/.
     # Testing: Just a refactor shouldn't need any testing
@@ -4676,12 +4697,14 @@ https://github.com/servo/servo/pull/43583	(@Loirooriol, #43583)	script: Add pres
     # Also bumps Stylo to servo/stylo#343, in order to also set the preshints for percentage values. However, layout
     # will ignore percentages for the purpose of computing the natural sizes and aspect ratio.
     # Testing: Improves WPT
-https://github.com/servo/servo/pull/43607	(@elomscansio, #43607)	script: Move file DOM interfaces to script/dom/file/ (#43607)
++https://github.com/servo/servo/pull/43607	(@elomscansio, #43607)	script: Move file DOM interfaces to script/dom/file/ (#43607)
+    dom; outreachy refactor
     ^ commit fc29fea5e1ec28fab21474b78ec35ff02955d6c8
     # Moves interfaces defined by the file spec to the script/dom/file/ module from script/dom/.
     # Testing: Just a refactor shouldn't need any testing
     # Fixes: Partially #38901
-https://github.com/servo/servo/pull/43602	(@elomscansio, #43602)	script: Move document DOM interfaces to script/dom/document/ (#43602)
++https://github.com/servo/servo/pull/43602	(@elomscansio, #43602)	script: Move document DOM interfaces to script/dom/document/ (#43602)
+    dom; outreachy refactor
     ^ commit 7e97e820087c19adfd8bd99813f3e80fa690d8b1
     # Moves interfaces defined by the document spec to the script/dom/document/ module from script/dom/.
     # Testing: Just a refactor shouldn't need any testing
@@ -4711,17 +4734,20 @@ https://github.com/servo/servo/pull/43615	(@yezhizhen, #43615)	cargo: Rename wor
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Also reorders alphabetically for the corresponding user .toml.
     # Similar to #43526.
-https://github.com/servo/servo/pull/43616	(@jayant911, #43616)	script: Move xpath interfaces into xpath/ (#43616)
++https://github.com/servo/servo/pull/43616	(@jayant911, #43616)	script: Move xpath interfaces into xpath/ (#43616)
+    dom; outreachy refactor
     ^ commit ae33e48cb8f5aef2ddca2b4aec17110a5b94dd09
     # Moves xpath interfaces into script/dom/xpath/ module from script/dom/.
     # Testing: Just a refactor.
     # Fixes: Part of #38901
-https://github.com/servo/servo/pull/43609	(@elomscansio, #43609)	script: Move datatransfer DOM interfaces to script/dom/datatransfer/ (#43609)
++https://github.com/servo/servo/pull/43609	(@elomscansio, #43609)	script: Move datatransfer DOM interfaces to script/dom/datatransfer/ (#43609)
+    dom; outreachy refactor
     ^ commit 2bc868788f6b9861a58890a0b537c4f680dcf6a1
     # Moves interfaces defined by the datatransfer spec to the script/dom/datatransfer/ module from script/dom/.
     # Testing: Just a refactor shouldn't need any testing
     # Fixes: Partially #38901
-https://github.com/servo/servo/pull/43612	(@jayant911, #43612)	script: Move url interfaces into url/ (#43612)
++https://github.com/servo/servo/pull/43612	(@jayant911, #43612)	script: Move url interfaces into url/ (#43612)
+    dom; outreachy refactor
     ^ commit 0e7ca88c24b75e8a285d9c16cf540a658c4141c7
     # Moves url interfaces into script/dom/url/ module from script/dom/.
     # Testing: Just a refactor shouldn't need any testing.
@@ -4738,7 +4764,8 @@ https://github.com/servo/servo/pull/43618	(@jschwe, #43618)	deps: Update mozjs t
     # - https://github.com/servo/mozjs/pull/725
     # Testing: Covered by existing tests.
 >>> 2026-03-25T23:19:34Z
-https://github.com/servo/servo/pull/43641	(@sabbCodes, #43641)	devtools: Renamed BrowsingContext in breakpoint, console & thread actors (#43641)
++https://github.com/servo/servo/pull/43641	(@sabbCodes, #43641)	devtools: Renamed BrowsingContext in breakpoint, console & thread actors (#43641)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 9e2d033047a0bb11baa8e9af684b73004117444d
     # Renamed BrowsingContext in breakpoint, console & thread actors
     # Testing: No testing required.
@@ -4843,7 +4870,8 @@ https://github.com/servo/servo/pull/43619	(@sabbCodes, #43619)	devtools: Rename 
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/43642	(@sabbCodes, #43642)	devtools: Renamed BrowsingContext in inspector & its actors (#43642)
++https://github.com/servo/servo/pull/43642	(@sabbCodes, #43642)	devtools: Renamed BrowsingContext in inspector & its actors (#43642)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 02a2d45c304a83328722a85bc8e11de639ec64f7
     # Renamed BrowsingContext in inspector, highlighter, page_style, style_rule & walker actors
     # Testing: No testing required.
@@ -4911,12 +4939,14 @@ https://github.com/servo/servo/pull/43654	(@StaySafe020, #43654)	Add README for 
     # Testing: This change only adds a metadata field to Cargo.toml and does not
     # affect build output or runtime behavior. No tests are required.
     # fixes #43143
-https://github.com/servo/servo/pull/43656	(@arabson99, #43656)	devtools: Rename ReflowActor variables in browsing context actor (#43656)
++https://github.com/servo/servo/pull/43656	(@arabson99, #43656)	devtools: Rename ReflowActor variables in browsing context actor (#43656)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 0d0b392565f2941d2475261e402351abe1605c8e
     # Renamed ReflowActor in browsing_context actor.
     # Testing: `./mach test-devtools`, All test passed.
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43662	(@jayant911, #43662)	script: move node interfaces into node/. (#43662)
++https://github.com/servo/servo/pull/43662	(@jayant911, #43662)	script: move node interfaces into node/. (#43662)
+    dom; outreachy refactor
     ^ commit c698be8306cdfaf9863a49513cdd4a4c405174a2
     # Moves node interfaces into script/dom/node/ module from script/dom/.
     # Testing: Just a refactor shouldn't need any testing.
@@ -4947,7 +4977,8 @@ https://github.com/servo/servo/pull/43449	(@yezhizhen, #43449)	canvas: Support a
     # |----------|----------|
     # |  |   |
     # |  |  |
-https://github.com/servo/servo/pull/43644	(@jayant911, #43644)	devtools: Rename console_actor and console in actors (#43644)
++https://github.com/servo/servo/pull/43644	(@jayant911, #43644)	devtools: Rename console_actor and console in actors (#43644)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit b3329fb7646df14c51149084724f1dbdc611ba34
     # Rename console_actor and console in  actors.
     # Testing: ran `./mach test-devtools`.
@@ -4961,7 +4992,8 @@ https://github.com/servo/servo/pull/43652	(@TimvdLippe, #43652)	script: Report C
     # web pages knowing wheter a page has failed because of CSP.
     # 2. We were reporting the violations in the wrong global. We shouldn't fire these in the global of the child,
     # but instead in the parent.
-https://github.com/servo/servo/pull/43631	(@willypuzzle, #43631)	webgl: Remove manual Drop implementation for WebGLSampler (#43631)
++https://github.com/servo/servo/pull/43631	(@willypuzzle, #43631)	webgl: Remove manual Drop implementation for WebGLSampler (#43631)
+    dom; [asked in #26488] soundness?
     ^ commit bc62b7475cb9ccb65f14e21974f9c111d743f151
     # Moves the cleanup logic to a separate helper struct to comply with the prohibition of manual `Drop` implementations
     # for DOM types.
@@ -4977,7 +5009,8 @@ https://github.com/servo/servo/pull/43496	(@jdm, #43496)	script: Align javascrip
     # parent document load event
     # Testing: Lots of new tests passing.
     # Fixes: #24901
-https://github.com/servo/servo/pull/43672	(@jayant911, #43672)	Devtool: rename NetworkParentActor variable names. (#43672)
++https://github.com/servo/servo/pull/43672	(@jayant911, #43672)	Devtool: rename NetworkParentActor variable names. (#43672)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit ec782e72643e82259fcef56ce408559eb366ef9f
     # Rename NetworkParent  in watcher actors.
     # Testing: ran `./mach test-devtools`.
@@ -4992,13 +5025,15 @@ https://github.com/servo/servo/pull/43673	(@yezhizhen, #43673)	wdspec: `tagName`
     # https://github.com/servo/servo/blob/bc62b7475cb9ccb65f14e21974f9c111d743f151/tests/wpt/tests/webdriver/tests/support/inl
     # ine.py#L33-L34
     # Testing: New passing WPT.
-https://github.com/servo/servo/pull/43664	(@sabbCodes, #43664)	devtools: Rename TabDescriptorActor variable names (#43664)
++https://github.com/servo/servo/pull/43664	(@sabbCodes, #43664)	devtools: Rename TabDescriptorActor variable names (#43664)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit b22ef1eadd0485412cf2af1e9b284d7ba6af3b79
     # Renamed TabDescriptorActor variable names in browsing_context, root & target_configuration
     # Cleaned up a few more names as suggested by eerii
     # Testing: No testing required
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43676	(@StaySafe020, #43676)	devtools: Rename DeviceActor variables for consistency (#43676)
++https://github.com/servo/servo/pull/43676	(@StaySafe020, #43676)	devtools: Rename DeviceActor variables for consistency (#43676)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 7e6323595a6fe883505bb95b60e906c382fcfab6
     # Rename `DeviceActor` local variable in `root.rs` from `device` to `device_actor` for naming consistency across
     # the devtools crate.
@@ -5020,7 +5055,8 @@ https://github.com/servo/servo/pull/43472	(@brentschroeter, @eerii, #43472)	devt
     # practice actors should never independently pull incoming messages without centralized coordination.
     # Testing: No new tests, as interleaving writes are difficult to evoke deterministically. Removing the `JsonPacketStream`
     # implementation for `TcpStream` should discourage regressions due to improper use of raw streams.
-https://github.com/servo/servo/pull/43684	(@jayant911, #43684)	devtools: Rename PageStyleActor variable names (#43684)
++https://github.com/servo/servo/pull/43684	(@jayant911, #43684)	devtools: Rename PageStyleActor variable names (#43684)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 302b719ea3d1344f618056009d500a02dea23d30
     # Rename page_style in inspector .
     # Testing: ran `./mach test-devtools`.
@@ -5098,7 +5134,8 @@ https://github.com/servo/servo/pull/43690	(@yezhizhen, #43690)	webdriver: Improv
     # We fix spec in https://github.com/w3c/webdriver/pull/1955 and
     # make sure Servo behaves consistently with other browsers.
     # Testing: Added one test for invalid expiry time. New passing with existing.
-https://github.com/servo/servo/pull/43657	(@TimvdLippe, #43657)	script: Pass `&mut JSContext` to `FetchResponseListener::process_response_chunk` (#43657)
++https://github.com/servo/servo/pull/43657	(@TimvdLippe, #43657)	script: Pass `&mut JSContext` to `FetchResponseListener::process_response_chunk` (#43657)
+    dom; safety from ground up
     ^ commit f340042c1d248dc32caff863396c272f286fbc02
     # Fixes #42841
     # Testing: It compiles
@@ -5135,7 +5172,8 @@ https://github.com/servo/servo/pull/43634	(@Veercodeprog, #43634)	script: Use en
     # * Ran ./mach test-wpt tests/wpt/tests/eventsource/
     # * Checked relevant coverage under
     # tests/wpt/tests/html/infrastructure/urls/resolving-urls/query-encoding/
-https://github.com/servo/servo/pull/43678	(@sabbCodes, #43678)	devtools: Renamed WorkerActor variables in affected files (#43678)
++https://github.com/servo/servo/pull/43678	(@sabbCodes, #43678)	devtools: Renamed WorkerActor variables in affected files (#43678)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 190844378b4bf7d8ac3856fc172cec5550e8c962
     # Renamed WorkerActor variables in watcher, console, root and lib.rs
     # Testing: No testing required
@@ -5201,7 +5239,8 @@ https://github.com/servo/servo/pull/43646	(@elomscansio, @mukilan, #43646)	const
     # that handles the component-specific variants into a new method
     # Testing: Just a refactor shouldn't need any testing
     # Fixes: #42097
-https://github.com/servo/servo/pull/43655	(@sabbCodes, #43655)	devtools: Rename BrowsingContextActor variable names (#43655)
++https://github.com/servo/servo/pull/43655	(@sabbCodes, #43655)	devtools: Rename BrowsingContextActor variable names (#43655)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit b707a591171f91d837d4c122f8ea6ccf1a63604d
     # Renamed BrowsingContext in tab, network_event, watcher actors & lib.rs
     # Testing: No testing required - only renaming done
@@ -5236,7 +5275,8 @@ https://github.com/servo/servo/pull/43716	(@mrobinson, @mrobinson, #43716)	tidy:
     # reverted locally.
     # Testing: As this just fixes a runtime issue when running `test-tidy`, this
     # probably doesn't deserve a test.
-https://github.com/servo/servo/pull/43714	(@TimvdLippe, #43714)	script: move element interfaces into `element/` (#43714)
++https://github.com/servo/servo/pull/43714	(@TimvdLippe, #43714)	script: move element interfaces into `element/` (#43714)
+    dom; outreachy refactor
     ^ commit 0df9b39af9e980a3bab9834cadd109409a91f4bf
     # It moves `Element.rs` into a subdirectory and turns on dead code detection (found 4 methods that could be
     # removed). Then it also extracts the first attribute-related method into a separate file, to reduce the file size of
@@ -5264,7 +5304,8 @@ https://github.com/servo/servo/pull/43711	(@mrobinson, @mrobinson, #43711)	scrip
     # `DocumentTimeline` specification concepts. Note that there was already
     # an `AnimationTimeline`, but it did not implement the specification.
     # Testing: Various WPT start to pass or no longer error / timeout.
-https://github.com/servo/servo/pull/43675	(@sabbCodes, #43675)	devtools: Rename NetworkEventActor variable concerned files (#43675)
++https://github.com/servo/servo/pull/43675	(@sabbCodes, #43675)	devtools: Rename NetworkEventActor variable concerned files (#43675)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 9dbe608558d2a2fd89e764b6fb042dc1b9159308
     # Renamed NetworkEventActor variables in network_handler & lib.rs
     # Testing: No testing required
@@ -5352,12 +5393,14 @@ https://github.com/servo/servo/pull/43738	(@yezhizhen, #43738)	net: Enable `fetc
 https://github.com/servo/servo/pull/43736	(@yezhizhen, #43736)	script: Add TODO for Computed Role (#43736)
     ^ commit db719abcedab225b8853175833980f16af82c7a7
     # Beginning of #43734.
-https://github.com/servo/servo/pull/43731	(@sabbCodes, #43731)	devtools: Rename RootActor variable names (#43731)
++https://github.com/servo/servo/pull/43731	(@sabbCodes, #43731)	devtools: Rename RootActor variable names (#43731)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit c32b720ca4fda982b8d8942fdfbdf137fd1ee572
     # Renamed RootActor variable names in root, watcher, tab & lib.rs
     # Testing: No testing required.
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43729	(@sabbCodes, #43729)	devtools: Rename StyleSheetsActor variable names (#43729)
++https://github.com/servo/servo/pull/43729	(@sabbCodes, #43729)	devtools: Rename StyleSheetsActor variable names (#43729)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit be1468f2790fe34e93e5a3adbe3b417155c00710
     # Renamed StyleSheetsActor variable names in browsing_context
     # Testing: Ran `./mach test-devtools` locally.
@@ -5369,32 +5412,38 @@ https://github.com/servo/servo/pull/43749	(@sagudev, #43749)	chore: relax mozlog
     # use pinned version from WPT (which will work in upgrades).
     # Testing: None
     # Fixes: https://servo.zulipchat.com/#narrow/channel/263398-general/topic/WPT.20import.20failed.20today
-https://github.com/servo/servo/pull/43728	(@sabbCodes, #43728)	devtools: Rename WatcherActor variable names (#43728)
++https://github.com/servo/servo/pull/43728	(@sabbCodes, #43728)	devtools: Rename WatcherActor variable names (#43728)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 4eb332251f4ad77f628af11dc70846015887bebd
     # Renamed WatcherActor variable names in browsing_context, network_handler, network_event, tab, watcher & lib.rs
     # Testing: Ran `./mach test-devtools` locally.
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43740	(@sabbCodes, #43740)	devtools: Rename AccessibilityActor variable names (#43740)
++https://github.com/servo/servo/pull/43740	(@sabbCodes, #43740)	devtools: Rename AccessibilityActor variable names (#43740)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 1c7f16b10e6e759704b7f5f3a733396726368cce
     # Renamed AccessibilityActor variable names in browsing_context
     # Testing: No testing required
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43751	(@sabbCodes, #43751)	devtools: Rename PreferenceActor variable names (#43751)
++https://github.com/servo/servo/pull/43751	(@sabbCodes, #43751)	devtools: Rename PreferenceActor variable names (#43751)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 5adddd7af43d53cab22acf40b120fe749a14b3e6
     # Renamed PreferenceActor variable names in root.rs.
     # Testing: No testing required.
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43748	(@sabbCodes, #43748)	devtools: Rename LayoutInspectorActor variable names (#43748)
++https://github.com/servo/servo/pull/43748	(@sabbCodes, #43748)	devtools: Rename LayoutInspectorActor variable names (#43748)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 4f71c0cef9160d214cb8572eccb74d90a974c19f
     # Renamed LayoutInspectorActor variable names in walker.rs
     # Testing: No testing required
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43747	(@sabbCodes, #43747)	devtools: Rename HighlighterActor variable names (#43747)
++https://github.com/servo/servo/pull/43747	(@sabbCodes, #43747)	devtools: Rename HighlighterActor variable names (#43747)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 5054ca087b5a2b6194375cdde55476f0f088296a
     # Renamed HighlighterActor variable names in inspector.rs.
     # Testing: No testing required
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43752	(@sabbCodes, @eerii, #43752)	devtools: Rename ProcessActor variable names (#43752)
++https://github.com/servo/servo/pull/43752	(@sabbCodes, @eerii, #43752)	devtools: Rename ProcessActor variable names (#43752)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 4b0f1a7c8b6cadf80a641c181c5da71bfc0d6b3c
     # Renamed ProcessActor variable names in root.rs.
     # Testing: No testing required.
@@ -5462,7 +5511,8 @@ https://github.com/servo/servo/pull/43721	(@Taym95, #43721)	indexeddb: make put(
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/43745	(@sabbCodes, #43745)	devtools: Rename CssPropertiesActor variable names (#43745)
++https://github.com/servo/servo/pull/43745	(@sabbCodes, #43745)	devtools: Rename CssPropertiesActor variable names (#43745)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 40fc2b8176f366a03df61d3c3b1020ea529efb20
     # Renamed CssPropertiesActor variable names in browsing_context
     # Testing: No testing required.
@@ -5537,17 +5587,20 @@ https://github.com/servo/servo/pull/43764	(@yezhizhen, #43764)	servo: Wait for c
     # 7. https://github.com/servo/servo/actions/runs/23710888811/job/69070509775
     # 8. https://github.com/servo/servo/actions/runs/23711200872
     # Fixes: #43726
-https://github.com/servo/servo/pull/43724	(@sabbCodes, #43724)	devtools: Rename InspectorActor variable names (#43724)
++https://github.com/servo/servo/pull/43724	(@sabbCodes, #43724)	devtools: Rename InspectorActor variable names (#43724)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 134e4c7db11a0d635517a697780f770bb66f7e66
     # Renamed InspectorActor variable names in browsing_context, inspector & lib.rs
     # Testing: No testing required.
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43723	(@sabbCodes, #43723)	devtools: Rename ThreadActor variable names (#43723)
++https://github.com/servo/servo/pull/43723	(@sabbCodes, #43723)	devtools: Rename ThreadActor variable names (#43723)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 906679a8c13dde0055d7b87bf48f905b20b16153
     # Renamed ThreadActor variable names in breakpoint, browsing_context, watcher, worker & lib.rs.
     # Testing: No testing required.
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43765	(@sabbCodes, #43765)	devtools: Rename ThreadConfigurationActor variable names (#43765)
++https://github.com/servo/servo/pull/43765	(@sabbCodes, #43765)	devtools: Rename ThreadConfigurationActor variable names (#43765)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 07a4335f4c3cff3ebc09a22f47e9c94335299362
     # Renamed ThreadConfigurationActor variable names in watcher.rs.
     # Testing: No testing required.
@@ -5555,7 +5608,8 @@ https://github.com/servo/servo/pull/43765	(@sabbCodes, #43765)	devtools: Rename 
 https://github.com/servo/servo/pull/43769	(@jschwe, @mrobinson, #43769)	embedder_traits: Add documentation for ResourceReaderMethods (#43769)
     ^ commit 1a86292f202d7f93d48b9b064a70457dec4f1296
     # Testing: Documentation only, testing not required
-https://github.com/servo/servo/pull/43767	(@sabbCodes, #43767)	devtools: Rename FrameActor variable names (#43767)
++https://github.com/servo/servo/pull/43767	(@sabbCodes, #43767)	devtools: Rename FrameActor variable names (#43767)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 6e799ca694cd1fc4e4bd883709818e90b96c7851
     # Renamed FrameActor variable names to match standards in thread & lib.rs
     # Testing: No testing required.
@@ -5603,7 +5657,8 @@ https://github.com/servo/servo/pull/43475	(@shubhamg13, #43475)	layout: Do not c
     # 1. Broken Images are skipped for FirstContentfulPaint as per specs.
     # 2. Update the WPT test.
     # Testing: `tests/wpt/tests/paint-timing/fcp-only/fcp-broken-image.html`
-https://github.com/servo/servo/pull/43774	(@CynthiaOketch, #43774)	script: Move Element attribute getters/setters into attributes.rs (#43774)
++https://github.com/servo/servo/pull/43774	(@CynthiaOketch, #43774)	script: Move Element attribute getters/setters into attributes.rs (#43774)
+    dom; outreachy refactor
     ^ commit 3a5031fd2a98cdaf76c2465acd2d9c0557d4e392
     # Following #43714, which moved the element interfaces into the `element/` directory and extracted `get_int_attribute`
     # into `attributes.rs` as a proof-of-concept, this PR moves the remaining attribute getter/setter methods out of
