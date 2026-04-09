@@ -504,7 +504,8 @@ https://github.com/servo/servo/pull/42736	(@webbeef, #42736)	script: pointer eve
     # Also add global event handlers that were missing.
     # Testing: WPT expectations are updated.
     # cc @yezhizhen
-https://github.com/servo/servo/pull/42963	(@Loirooriol, #42963)	script: Avoid data race in `ServoLayoutElement::apply_selector_flags()` (#42963)
++https://github.com/servo/servo/pull/42963	(@Loirooriol, #42963)	script: Avoid data race in `ServoLayoutElement::apply_selector_flags()` (#42963)
+    unsound; [lsp callers] fix data race found by TSAN in style
     ^ commit 36c6594c76c2653a4f49cb88c28072c228a81c4f
     # This changes `Element::selector_flags` from `Cell` to `AtomicUsize`, thus avoiding the risk of data races.
     # Testing: Tested manually. We don't run tests using TSAN builds.
@@ -648,7 +649,7 @@ https://github.com/servo/servo/pull/42960	(@mrobinson, @Loirooriol, @lukewarlow,
     # Testing: This fixes flakiness in an internal WPT-style test.
     # Fixes: #42908.
 >>> 2026-03-04T23:09:18Z
-https://github.com/servo/servo/pull/42741	(@Loirooriol, #42741)	build(deps): bump Stylo to "Make preference system more robust" (#42741)
+-https://github.com/servo/servo/pull/42741	(@Loirooriol, #42741)	build(deps): bump Stylo to "Make preference system more robust" (#42741)
     ^ commit cd8973873d38db0074c74997261039f8b90bd753
     ^ /!\ may contain changes to feature flags
     # Bumps Stylo to https://github.com/servo/stylo/pull/314
@@ -1196,7 +1197,8 @@ https://github.com/servo/servo/pull/43055	(@kkoyung, #43055)	script: Use `Crypto
     # Pass `ListFrames` back to devtools
     # Testing: existing test passes
     # Fixes: part of #36027
-https://github.com/servo/servo/pull/43026	(@brentschroeter, @eerii, #43026)	tools: Support tab navigation via navigateTo, goBack, and goForward (#43026)
++https://github.com/servo/servo/pull/43026	(@brentschroeter, @eerii, #43026)	tools: Support tab navigation via navigateTo, goBack, and goForward (#43026)
+    devtools; [fixes issue] partial impl of navigation controls (location, back, forward)
     ^ commit 4c69d856f6c89de7688184eede8c56de09517949
     # Add support for navigation requests ("navigateTo", "goBack", and "goForward") over the Remote Debugging Protocol. These
     # may be sent by a UI client in response to user input (for example the address bar in the Firefox inspector),
@@ -1249,7 +1251,7 @@ https://github.com/servo/servo/pull/43013	(@delan, @alice, #43013)	constellation
     # browsing context.
     # Testing: will be covered by accessibility tree tests in a later patch
     # Fixes: part of #4344, extracted from our work in #42338
-https://github.com/servo/servo/pull/43057	(@mrobinson, #43057)	deps: Upgrade to `strum` 0.28 (#43057)
+-https://github.com/servo/servo/pull/43057	(@mrobinson, #43057)	deps: Upgrade to `strum` 0.28 (#43057)
     ^ commit 17dcf840ef1a5f34206dee30197752e21d6413a7
     # This requires updating to a new version of Stylo.
     # Corresponding Stylo PR: servo/stylo#319
@@ -1344,7 +1346,8 @@ https://github.com/servo/servo/pull/43066	(@mrobinson, #43066)	script: Readily a
     #    concept](https://dom.spec.whatwg.org/#concept-element-attributes-get-by-name))
     # Testing: This should not really change behavior so should be covered by existing tests.
 >>> 2026-03-07T23:05:56Z
-https://github.com/servo/servo/pull/43045	(@Loirooriol, #43045)	Upgrade Stylo to 2026-03-01 (#43045)
++https://github.com/servo/servo/pull/43045	(@Loirooriol, #43045)	Upgrade Stylo to 2026-03-01 (#43045)
+    style; [new wpt passes] impl ‘attr(namespace|local)’ and ‘clamp(none)’
     ^ commit 42d228dcc78f40998d5c4959085ebd6296f333d1
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This continues  #42361
@@ -1467,7 +1470,7 @@ https://github.com/servo/servo/pull/43093	(@kkoyung, #43093)	script: Implement "
     # Testing: Pass WPT tests that were expected to fail.
     # Fixes: Part of #43072
 >>> 2026-03-11T23:06:49Z
-https://github.com/servo/servo/pull/43085	(@Loirooriol, #43085)	script,layout: Use Stylo's logic for registering custom properties from script (#43085)
+-https://github.com/servo/servo/pull/43085	(@Loirooriol, #43085)	script,layout: Use Stylo's logic for registering custom properties from script (#43085)
     ^ commit a2ca667041dd685b67277acf6a483cbb5a9bbb38
     # Stylo PR: https://github.com/servo/stylo/pull/325
     # Testing: Not needed, no behavior change
@@ -1844,7 +1847,8 @@ https://github.com/servo/servo/pull/43138	(@yezhizhen, #43138)	script: Replace t
     # Testing: This fixes the issue where newly added test
     # in #43126 randomly TIMEOUT with very high probability:
     # https://github.com/servo/servo/actions/runs/22906496902
-https://github.com/servo/servo/pull/43133	(@simonwuelker, #43133)	script: Only send objects with `ESClass::Object` to devtools (#43133)
++https://github.com/servo/servo/pull/43133	(@simonwuelker, #43133)	script: Only send objects with `ESClass::Object` to devtools (#43133)
+    crash; [spec] fix crash when logging or inspecting exotic objects in JS
     ^ commit c37ae57a0d9dbc548a4ae37f761c8dcc1cd667a9
     # We should only send previews of ordinary objects[^1] (i think that's the correct term) objects to the devtools. The
     # code is not designed to handle other objects, which currently causes crashes.
@@ -1864,7 +1868,7 @@ https://github.com/servo/servo/pull/43133	(@simonwuelker, #43133)	script: Only s
     #  Create helper functions to reduce boilerplate in some tests
     # Testing: All tests are passing
     # Fixes: See comment https://github.com/servo/servo/pull/43135#pullrequestreview-3921936566
-https://github.com/servo/servo/pull/43020	(@Gae24, @mrobinson, #43020)	script: bump mozjs to use SpiderMonkey 140.8 and set more compile options (#43020)
+-https://github.com/servo/servo/pull/43020	(@Gae24, @mrobinson, #43020)	script: bump mozjs to use SpiderMonkey 140.8 and set more compile options (#43020)
     ^ commit bc1cd2ceeb1c4197c36329d8cbe2749ad06b1b92
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Set `mutedErrors_`, `noScriptRval`, `isRunOnce` compile options.
@@ -1897,7 +1901,7 @@ https://github.com/servo/servo/pull/43151	(@simonwuelker, #43151)	script: Accura
     # for the task on the relevant task source to be run.
     # Testing: The timing should be slightly more accurate but that is hard to measure or test for. Therefore this PR
     # does not include a test.
-https://github.com/servo/servo/pull/43146	(@Loirooriol, #43146)	deps: Bump Stylo to "Share Device logic among Gecko and Servo" (#43146)
+-https://github.com/servo/servo/pull/43146	(@Loirooriol, #43146)	deps: Bump Stylo to "Share Device logic among Gecko and Servo" (#43146)
     ^ commit 517262fb34643d624d73eafa1ab7d6aa653f3b64
     # Stylo PR: https://github.com/servo/stylo/pull/330
     # Testing: Not needed, no behavior change
@@ -2037,7 +2041,8 @@ https://github.com/servo/servo/pull/43169	(@yezhizhen, #43169)	embedder_traits: 
     # > The following actions are running on Node.js 20 and may not work as expected...
     # We avoid touching those actions forked from web-platform-tests.
     # Testing: If this can merge, it is successful.
-https://github.com/servo/servo/pull/43111	(@Loirooriol, #43111)	Improve `list-style-type` and counter styles (#43111)
++https://github.com/servo/servo/pull/43111	(@Loirooriol, #43111)	Improve `list-style-type` and counter styles (#43111)
+    layout; [need to verify experimentally] improve appearance of <summary>; impl ‘list-style-type: <string>’, and maybe ‘counter(list-item)’ and ‘counters(list-item)’ and ‘symbols()’?
     ^ commit a8142546ca85be7a182583926fb0954d9cc92e0d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Bumps Stylo to https://github.com/servo/stylo/pull/329, and modifies the code accordingly:
@@ -2309,7 +2314,8 @@ https://github.com/servo/servo/pull/43213	(@bruno-j-nicoletti, #43213)	script: U
     # Replaces the default task canceler with the shared task canceler found in the global scope.
     # Testing: #42536 specifies that building is enough.
     # Fixes: #42536
-https://github.com/servo/servo/pull/43201	(@Loirooriol, #43201)	layout: Set `text-indent: 0` in UA styles for `::marker` (#43201)
++https://github.com/servo/servo/pull/43201	(@Loirooriol, #43201)	layout: Set `text-indent: 0` in UA styles for `::marker` (#43201)
+    layout; improve ‘::marker’ styles in mixed LTR/RTL content
     ^ commit 3c86026ef174da1eac862e7599f318dc50af4b47
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Authors can't set `text-indent` directly to a `::marker`, but it was inheriting from the list item. This was
@@ -2475,7 +2481,8 @@ https://github.com/servo/servo/pull/43147	(@Taym95, #43147)	storage: construct a
     # wiring layers, while both sides still talked to the same storage backend threads.
     # Testing: Added shutdown_storage_group test, and should not effect WTP test.
     # Fixes: part of #40983
-https://github.com/servo/servo/pull/43153	(@brentschroeter, #43153)	devtools: Use active pipeline and script channel in inspector actors (#43153)
++https://github.com/servo/servo/pull/43153	(@brentschroeter, #43153)	devtools: Use active pipeline and script channel in inspector actors (#43153)
+    devtools; fix Inspector tab after navigating
     ^ commit 890ef58052b45c7c09a063190ffcf2a3d7dcb05d
     # The `InspectorActor` and its children now query the `BrowsingContextActor` for the active pipeline ID and script
     # sender instead of storing their own copies, which become outdated on navigation. Previously, the inspector remained
@@ -2512,7 +2519,8 @@ https://github.com/servo/servo/pull/42509	(@janeoa, @Narfinger, @jschwe, #42509)
     # ~~Testing: within `etc/ci/scenatio` directory do `uv run blink_perf_test.py`~~
     # Testing: within servo project root do `UV_PROJECT=etc/ci/scenario uv run etc/ci/scenario/blink_perf_test.py -vem`
     # For `help` use `-h`
-https://github.com/servo/servo/pull/43230	(@brentschroeter, #43230)	devtools: Add support for one-way protocol messages (#43230)
++https://github.com/servo/servo/pull/43230	(@brentschroeter, #43230)	devtools: Add support for one-way protocol messages (#43230)
+    devtools; fix desync due to incorrect handling of “one-way” messages, where the client expects no reply
     ^ commit 69a1f99bd2c36e041b8baf8d428ec2bcd577eede
     # Some Remote Debugging Protocol message types are specified as `oneway`, meaning that they expect no reply. Sending
     # anything—including an error—in response to these messages throws the devtools client and actor out of sync.
@@ -2606,7 +2614,8 @@ https://github.com/servo/servo/pull/43132	(@mrobinson, #43132)	layout: Add a lit
     # - nick-fields
     # - KyleMayes/install-llvm
     # - bencher
-https://github.com/servo/servo/pull/43243	(@jschwe, #43243)	Use workspace deps consistently and add version requirement (#43243)
++https://github.com/servo/servo/pull/43243	(@jschwe, #43243)	Use workspace deps consistently and add version requirement (#43243)
+    api; part of crates.io release
     ^ commit 363ba0ccd1d78d386470386c0bcbb71c0a2b25e6
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains servoshell changes! does it affect the user experience?
@@ -3305,7 +3314,7 @@ https://github.com/servo/servo/pull/43350	(@mrobinson, @chrisduerr, #43350)	pain
     # Pass `&mut JSContext` to `Element::create` and `create_html_element`
     # Testing: No functionality changes, covered by existing tests.
     # Part of #40600
-https://github.com/servo/servo/pull/43344	(@jschwe, #43344)	everywhere: Remove unused deps (#43344)
+-https://github.com/servo/servo/pull/43344	(@jschwe, #43344)	everywhere: Remove unused deps (#43344)
     ^ commit f5d4847e85c18421d4e4714bca9cf9d9b7eadce6
     ^ /!\ contains libservo changes! does it affect the embedder?
     # RustRover flags unused dependencies gray in Cargo.toml, which works well except for macro / derive related crates
@@ -3676,7 +3685,8 @@ https://github.com/servo/servo/pull/43436	(@mrobinson, #43436)	script: Move by w
     # Linux. This change makes the modifier key for word movement dependent on
     # the platform.
     # Testing: This change adds a Servo-specific keyboard motion test. Keyboard motion events are not specified AFAIK.
-https://github.com/servo/servo/pull/43361	(@SharanRP, #43361)	devtools: add `eval` support for dedicated workers (#43361)
++https://github.com/servo/servo/pull/43361	(@SharanRP, #43361)	devtools: add `eval` support for dedicated workers (#43361)
+    devtools; impl evaluation in Console tab for (non-service) workers
     ^ commit 5bb4f9f103e629fe38ea28bc67a8543a00cc6e60
     # Added dedicated worker side handling, followed the same pattern used in main script handling by wiring worker
     # global scope to `DebuggerGlobalScope` and invoking `fire_eval`
@@ -4446,7 +4456,8 @@ https://github.com/servo/servo/pull/43572	(@SharanRP, #43572)	script: Use encodi
     # and adds a WPT test for it.
     # Testing: added Test file
     # Fixes: #43559
-https://github.com/servo/servo/pull/43492	(@SharanRP, #43492)	devtools: Handle service worker eval (#43492)
++https://github.com/servo/servo/pull/43492	(@SharanRP, #43492)	devtools: Handle service worker eval (#43492)
+    devtools; [review comments] impl evaluation in Console tab for service workers, pending #43659
     ^ commit 20e11deb9665bb66645495258750675614befa93
     # This completes the service-worker side while addressing earlier panic concerns by avoiding unconditional
     # unwrap/expect paths.
@@ -4758,12 +4769,13 @@ https://github.com/servo/servo/pull/43615	(@yezhizhen, #43615)	cargo: Rename wor
     # Moves url interfaces into script/dom/url/ module from script/dom/.
     # Testing: Just a refactor shouldn't need any testing.
     # Part of #38901
-https://github.com/servo/servo/pull/43614	(@sabbCodes, #43614)	devtools: Rename registry in tab, watcher and browsing_context (#43614)
++https://github.com/servo/servo/pull/43614	(@sabbCodes, #43614)	devtools: Rename registry in tab, watcher and browsing_context (#43614)
+    devtools; [issue 43605 is] outreachy refactor
     ^ commit beafb08ae8c38f33bc3980ab00afaedcf72cedd1
     # Renamed `actors` to `registry` in `actors/tab.rs`, `actors/watcher.rs` and `actors/browsing_context.rs`.
     # Testing: No tests were required, however compilation was successful
     # Part of: #43605
-https://github.com/servo/servo/pull/43618	(@jschwe, #43618)	deps: Update mozjs to 0.15.7 (#43618)
+-https://github.com/servo/servo/pull/43618	(@jschwe, #43618)	deps: Update mozjs to 0.15.7 (#43618)
     ^ commit e095bc4cef5ed58917a9a7f257cfe354418e8ccd
     # This mainly includes:
     # - https://github.com/servo/mozjs/pull/717
@@ -4861,7 +4873,8 @@ https://github.com/servo/servo/pull/43610	(@lukewarlow, #43610)	script: Implemen
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/43619	(@sabbCodes, #43619)	devtools: Rename registry in source, node, & network_handler (#43619)
++https://github.com/servo/servo/pull/43619	(@sabbCodes, #43619)	devtools: Rename registry in source, node, & network_handler (#43619)
+    devtools; [issue 43605 is] outreachy refactor
     ^ commit 0d2b91a9d18cbf73d58a447b0d8c6cc893c6c206
     # Renamed actors to registry in source, node, & network_handler.
     # Testing: No tests were required, however compilation was successful
@@ -4908,7 +4921,8 @@ https://github.com/servo/servo/pull/43515	(@niyabits, @Loirooriol, #43515)	layou
     # `li`; `has` pseudo-class has not been implemented yet |
     # | /css/selectors/has-style-sharing-pseudo-008.html     | #25133 | Test file uses `has` to remove `content` from a
     # `li`; `has` pseudo-class has not been implemented yet |
-https://github.com/servo/servo/pull/43623	(@sabbCodes, #43623)	devtools: Refactored ActorRegistry variables in lib.rs (#43623)
++https://github.com/servo/servo/pull/43623	(@sabbCodes, #43623)	devtools: Refactored ActorRegistry variables in lib.rs (#43623)
+    devtools; [issue 43605 is] outreachy refactor
     ^ commit 4820941cab960bf5858109f12683da597d65625e
     # Refactored the lib.rs file to replace ``actors``` & ```self.actors``` variables with ```registry``` and
     # ```self.registry```
@@ -5054,7 +5068,8 @@ https://github.com/servo/servo/pull/43673	(@yezhizhen, #43673)	wdspec: `tagName`
     # (`test_breakpoint_at_invalid_entry_point_does_not_crash`) occasionally fails due to a race condition tracked
     # separately. opened an isssue for it at #43667
     # fixes part of #43606
-https://github.com/servo/servo/pull/43472	(@brentschroeter, @eerii, #43472)	devtools: wrap TcpStream to synchronize network operations (#43472)
++https://github.com/servo/servo/pull/43472	(@brentschroeter, @eerii, #43472)	devtools: wrap TcpStream to synchronize network operations (#43472)
+    devtools; [review comments + zulip convo] fix desyncs due to interleaved writes from multiple threads
     ^ commit c94722d3dad83b7fdcf1ff3f27671613f17aaebc
     # Introduces a new type `DevtoolsConnection`, which implements the `JsonPacketStream` trait with proper coordination
     # of I/O across threads. This replaces the implementation of `JsonPacketStream` for raw `TcpStream`s, which was
@@ -5069,7 +5084,8 @@ https://github.com/servo/servo/pull/43472	(@brentschroeter, @eerii, #43472)	devt
     # Rename page_style in inspector .
     # Testing: ran `./mach test-devtools`.
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43679	(@saydmateen, #43679)	devtools: Standardize EnvironmentActor variables (#43679)
++https://github.com/servo/servo/pull/43679	(@saydmateen, #43679)	devtools: Standardize EnvironmentActor variables (#43679)
+    devtools; [issue 43606 is] outreachy refactor
     ^ commit 12756512ba6d84d482d37a9610767b244b0bedaa
     # Standardize EnvironmentActor variables
     # Testing: Ran `test-devtools` and all tests passed
@@ -5085,7 +5101,8 @@ https://github.com/servo/servo/pull/43325	(@lukewarlow, @Loirooriol, #43325)	scr
     # Testing: Covered by WPTs
     # Fixes: https://github.com/servo/servo/issues/38263
     # Fixes: https://github.com/servo/servo/issues/43351
-https://github.com/servo/servo/pull/43659	(@CynthiaOketch, #43659)	devtools: Show service workers in Firefox DevTools about:debugging (#43659)
++https://github.com/servo/servo/pull/43659	(@CynthiaOketch, #43659)	devtools: Show service workers in Firefox DevTools about:debugging (#43659)
+    devtools; add support for inspecting service workers
     ^ commit 9af19158f3751077f23663eeed1e7feffe1b1481
     # This update makes service workers properly show up in DevTools and behave more like dedicated workers.
     # - Added an is_service_worker field to DevtoolsPageInfo so the devtools server can tell service workers apart from
@@ -5413,7 +5430,7 @@ https://github.com/servo/servo/pull/43736	(@yezhizhen, #43736)	script: Add TODO 
     # Renamed StyleSheetsActor variable names in browsing_context
     # Testing: Ran `./mach test-devtools` locally.
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43749	(@sagudev, #43749)	chore: relax mozlog version requirement (#43749)
+-https://github.com/servo/servo/pull/43749	(@sagudev, #43749)	chore: relax mozlog version requirement (#43749)
     ^ commit 242cec577007ad1550fda3ed2347a21af93b6fd5
     # Having strict versions here prevents WPT imports. Because we resolve our deps together with WPT deps:
     # https://github.com/servo/servo/blob/c32b720ca4fda982b8d8942fdfbdf137fd1ee572/pyproject.toml#L9 we will effectively
@@ -5696,7 +5713,8 @@ https://github.com/servo/servo/pull/43600	(@longvatrong111, #43600)	servo: Add `
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Expose set_cookie_for_url, get_cookie_for_url, allow applications to get/set cookies.
     # Testing: Unit test for `SiteDataManager` and manual test with ServoShell.
-https://github.com/servo/servo/pull/41562	(@BudiArb, @rayguo17, @mrobinson, #41562)	script: Implement <input type=range> widget's layout (#41562)
++https://github.com/servo/servo/pull/41562	(@BudiArb, @rayguo17, @mrobinson, #41562)	script: Implement <input type=range> widget's layout (#41562)
+    layout; impl interactive <input type=range>
     ^ commit 35c3731c4644ed629b408e073b6d5f43866f903c
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement the layout of ``. Support automatically calculating the position of thumb based on the current input
