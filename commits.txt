@@ -12,7 +12,8 @@
     # Our implementation actually matches the new specification. We simply update the specification text, with some
     # minor refactoring accordingly.
     # Testing: Refactoring. Existing tests suffice.
-https://github.com/servo/servo/pull/42798	(@webbeef, #42798)	script: Add a `ServoInternals.garbageCollectAllContexts()` (#42798)
++https://github.com/servo/servo/pull/42798	(@webbeef, #42798)	script: Add a `ServoInternals.garbageCollectAllContexts()` (#42798)
+    perf; [git show] about:memory now has a Force GC button
     ^ commit 1ad41dc15f90bcc22de7cf3f9afa8d903b280a1e
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # This is useful in about:memory to measure memory usage after running the GC.
@@ -111,7 +112,8 @@ https://github.com/servo/servo/pull/42927	(@kkoyung, #42927)	script: Reorder rea
     # Testing: This should be mostly covered by our CI, but some amount of breakage is to be expected, since
     # some package names could still be referenced from scripts which are not tested or run in CI. [mach try
     # run](https://github.com/jschwe/servo/actions/runs/22502945949)
-https://github.com/servo/servo/pull/42931	(@Gae24, #42931)	net: Ignore subresource integrity with invalid base64 value (#42931)
++https://github.com/servo/servo/pull/42931	(@Gae24, #42931)	net: Ignore subresource integrity with invalid base64 value (#42931)
+    dom; more conformant SRI <script integrity> and <style integrity>
     ^ commit 63d91163d2d2e49e7abcd01532d0839ea395810b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Found this while analysing module preload test failures. In particular a subtest of `modulepreload.html` was recently
@@ -863,7 +865,8 @@ https://github.com/servo/servo/pull/42786	(@Taym95, #42786)	indexeddb: restore o
     # and upgrade abort did not fully restore the connection object store set in all cases.
     # Testing: More indexeddb tests should pass.
     # part of https://github.com/servo/servo/issues/40983
-https://github.com/servo/servo/pull/42077	(@Narfinger, @jschwe, #42077)	net: Implement LazyGenericCallback and use it in websocket (#42077)
++https://github.com/servo/servo/pull/42077	(@Narfinger, @jschwe, #42077)	net: Implement LazyGenericCallback and use it in websocket (#42077)
+    perf; use crossbeam channels instead of IPC channels unless in multiprocess mode
     ^ commit 5aed3ab5172ac2b0134c6efeca2768dbb7baba4e
     # We introduce a new type of callback, LazyGenericCallback and use it in websocket initialization.
     # The basic requirement is that for websocket the place where the callback is called and where it is constructed
@@ -1156,7 +1159,8 @@ https://github.com/servo/servo/pull/42912	(@jschwe, #42912)	Add codesigning scri
     ^ commit 3f0665a6792bdb0c7f22353c5635009dbe6fe25c
     # Testing: https://github.com/servo/servo/actions/runs/22749912784
     # Fixes: The consistent CI failure after #42990
-https://github.com/servo/servo/pull/42781	(@Narfinger, #42781)	script: Implement efficient TreeIterator without rooting when possible (#42781)
++https://github.com/servo/servo/pull/42781	(@Narfinger, #42781)	script: Implement efficient TreeIterator without rooting when possible (#42781)
+    perf; [git show] faster DOM tree walking, starting with document.open()
     ^ commit 11d47b62b9f82dcfc6d64b907b4cb64253b43ac9
     # This implements an two types:
     # - Efficient Tree Iterator that can be used without rooting when possible.
@@ -1695,7 +1699,8 @@ https://github.com/servo/servo/pull/43106	(@kkoyung, #43106)	script: Implement "
     # Specification: https://wicg.github.io/webcrypto-modern-algos/#SubtleCrypto-method-getPublicKey
     # Testing: Pass WPT tests that were expected to fail.
     # Fixes: Part of #43072
-https://github.com/servo/servo/pull/42978	(@Narfinger, #42978)	script: Add UnrootedSimpleNodeIterator (#42978)
++https://github.com/servo/servo/pull/42978	(@Narfinger, #42978)	script: Add UnrootedSimpleNodeIterator (#42978)
+    perf; [git show] faster DOM tree walking, starting with wholeText() on Text
     ^ commit 9062952bf9ac7b6310e914029a19fd4cfb7b82cb
     # In the same vein as https://github.com/servo/servo/pull/42781 we implement a UnrootedSimpleNodeIterator that takes
     # a no_gc and does not root the required nodes.
@@ -3053,7 +3058,8 @@ https://github.com/servo/servo/pull/43301	(@yezhizhen, #43301)	script: Skip RAII
     # We skip all above work in this case.
     # Testing: This is an optimization that should not change visible behaviour,
     # thus covered by all the testdriver tests.
-https://github.com/servo/servo/pull/43304	(@Narfinger, #43304)	Script: Do not convert to and from DOMString multiple times (#43304)
++https://github.com/servo/servo/pull/43304	(@Narfinger, #43304)	Script: Do not convert to and from DOMString multiple times (#43304)
+    perf; avoid conversions from DOMString to String and back to DOMString
     ^ commit c49433e94fead3a35b8a060dbe358a4ced0663c7
     # Previously we called queue_dialog_toggle_break_event_task with DOMStrings which converted them to strings to then
     # convert them back to DOMStrings.
@@ -3255,7 +3261,8 @@ https://github.com/servo/servo/pull/43323	(@simonwuelker, #43323)	script: Log un
     # the failure only recently started happening (on an unrelated commit). This might be an effect of caching hiding /
     # avoiding the failure.
     # Testing: Tested in CI. Apparently this file is not covered by the python type checker yet.
-https://github.com/servo/servo/pull/42964	(@Gae24, #42964)	script: Add support for modulepreload link elements (#42964)
++https://github.com/servo/servo/pull/42964	(@Gae24, #42964)	script: Add support for modulepreload link elements (#42964)
+    dom; partial support for <link rel=modulepreload>
     ^ commit 9a8571efccf097e519be5f42eafec6d0cd2cacf0
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Add support to modulepreload link elements. Currently we only fetch the root module, as I think it is needs to be
@@ -3479,7 +3486,8 @@ https://github.com/servo/servo/pull/43228	(@chrisduerr, #43228)	servo: Rename `W
     # was no way for the embedder to retrieve the current pinch zoom.
     # This patch renames the existing `pinch_zoom` method to `adjust_pinch_zoom` and changes the `pinch_zoom` method to
     # instead return the current pinch zoom level.
-https://github.com/servo/servo/pull/43337	(@Narfinger, #43337)	script: Content Event Handler Check switch to HashSet (#43337)
++https://github.com/servo/servo/pull/43337	(@Narfinger, #43337)	script: Content Event Handler Check switch to HashSet (#43337)
+    perf; faster lookup of content attributes for event handlers (was O(n), now O(1))
     ^ commit 8d153761f9f538c4f8642d20c63fcd677b476e9a
     # Previously CONTENT_EVENT_HANDLER_NAMES was a array of more than 100 elements where we were doing a linear search.
     # This replaces it with a FxHashSet and a O(1) search. In most cases this should not improve performance as the
@@ -3711,7 +3719,8 @@ https://github.com/servo/servo/pull/42771	(@stevennovaryo, #42771)	script: Fire 
     # BlobMethods.
     # Testing: Just a refactor, ./mach test-unit still passes.
     # Fixes: Part of #42638
-https://github.com/servo/servo/pull/43368	(@Loirooriol, #43368)	Implement "tables inherit color from body quirk" (#43368)
++https://github.com/servo/servo/pull/43368	(@Loirooriol, #43368)	Implement "tables inherit color from body quirk" (#43368)
+    style; <table> now inherits ‘color’ from <body> in quirks mode
     ^ commit e2aa1c8c064f62e9b25081bba74f16bfcff8d6e3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Bumps Stylo to https://github.com/servo/stylo/pull/333
@@ -3886,7 +3895,8 @@ https://github.com/servo/servo/pull/43468	(@yezhizhen, #43468)	webdriver: Remove
     ^ commit e1433babbb75c99b61ab2cccaf8f84437f22057b
     # The width and height should be guaranteed to be non-negative according to CSSOM regardless of the writing mode.
     # Testing: Existing tests.
-https://github.com/servo/servo/pull/43309	(@Narfinger, #43309)	script: Move easy IpcChannel usage to GenericChannel usage (#43309)
++https://github.com/servo/servo/pull/43309	(@Narfinger, #43309)	script: Move easy IpcChannel usage to GenericChannel usage (#43309)
+    perf; use crossbeam channels instead of IPC channels unless in multiprocess mode
     ^ commit 81c3bde86c1e7260995513f0c6f7f99f58de7e4d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This moves some easy elements in Script from IpcChannel and related methods to GenericChannel and related methods
@@ -3946,7 +3956,7 @@ https://github.com/servo/servo/pull/43309	(@Narfinger, #43309)	script: Move easy
     # Before(We shouldn't see these values- it's incorrect):
     # Testing: Current tests are passing.
     # Fixes: Part of #36027
-https://github.com/servo/servo/pull/43471	(@Nishant-k-sagar, #43471)	cleanup: Remove unused GlobalScope argument from call_pull_algorithm (#43471)
+-https://github.com/servo/servo/pull/43471	(@Nishant-k-sagar, #43471)	cleanup: Remove unused GlobalScope argument from call_pull_algorithm (#43471)
     ^ commit 2ca02dfa4c4a5e5603c22283b3edb55a9497c860
     # This PR involves cleaning up the unused GlobalScope argument in UnderlyingSourceContainer::call_pull_algorithm. This PR
     # involves changes across three files. Only removing the unused GlobalScope and suppressed reference with underscore
@@ -3969,12 +3979,14 @@ https://github.com/servo/servo/pull/43477	(@TimvdLippe, #43477)	net: Remove `pro
     # methods were called right after each other and there was only 1 implementation in `htmlvideoelement`. That
     # implementation is now moved to `process_request_body` and hence we can remove the unnecessary method.
     # Testing: It compiles
-https://github.com/servo/servo/pull/43470	(@Narfinger, @jdm, #43470)	script: Fix borrow hazard in script_modules (#43470)
++https://github.com/servo/servo/pull/43470	(@Narfinger, @jdm, #43470)	script: Fix borrow hazard in script_modules (#43470)
+    crash; [fixes issue] fix panic when GC runs while creating JS promises
     ^ commit 7f8f9834c86b74526a96e3bdbb4526c542cc9d42
     # Fix the borrow hazard by simply taking the option and inserting it again.
     # Testing: This is a refactor and crown does not complain so it should be fine.
     # Fixes: https://github.com/servo/servo/issues/43377
-https://github.com/servo/servo/pull/43476	(@Narfinger, #43476)	script: Use UnrootedSimpleNodeIterator in delete_cell_or_row (#43476)
++https://github.com/servo/servo/pull/43476	(@Narfinger, #43476)	script: Use UnrootedSimpleNodeIterator in delete_cell_or_row (#43476)
+    perf; [git show] faster DOM tree walking in deleteRow() on HTMLTableSectionElement, deleteCell() on HTMLTableRowElement, moveBefore() on Node, and when Element children change and get damaged in some cases
     ^ commit ffae45327cf794568be176e38367fecbfb1d0b65
     # This uses UnrootedSimpleNodeIterator in a couple of places, namely
     # - delete_cell_or_row
@@ -3989,7 +4001,8 @@ https://github.com/servo/servo/pull/43476	(@Narfinger, #43476)	script: Use Unroo
     ^ commit dc9e442b179f0be29a3a7afec337538a6b78ef54
     # Part of #42638
     # Testing: It compiles
-https://github.com/servo/servo/pull/43353	(@Gae24, #43353)	config: add a preference to allow fetching modulepreload descendants (#43353)
++https://github.com/servo/servo/pull/43353	(@Gae24, #43353)	config: add a preference to allow fetching modulepreload descendants (#43353)
+    dom; [git show] --pref for recursion, not <link rel=modulepreload> in general
     ^ commit 74ac696b695c02cc3d5027c2c09837278058b322
     ^ /!\ may contain changes to feature flags
     # As suggested [here](https://github.com/servo/servo/pull/42964#issuecomment-4073998452), adds a preference to enable
@@ -4371,7 +4384,8 @@ https://github.com/servo/servo/pull/43381	(@yezhizhen, #43381)	paint: Propogate 
     # but a disaster for WebDriver as it is synchornously waiting for the feedback.
     # Testing: Several tests no longer CRASH.
     # Fixes: #43379
-https://github.com/servo/servo/pull/42474	(@Narfinger, @Taym95, #42474)	net: Close the control stream of RequestBody to fix resource leak (#42474)
++https://github.com/servo/servo/pull/42474	(@Narfinger, @Taym95, #42474)	net: Close the control stream of RequestBody to fix resource leak (#42474)
+    crash; [fixes issue] fix crash due to IPC resource leak when making many requests over time
     ^ commit cf0676fd26d7d53dbb14a9e62480776e30087c03
     # For a network fetch, the body chunk request sender keeps being alive as long as the request is alive. This leads
     # to a big resource leak as this keeps a couple of IpcChannels and SharedMemory around. These would only be cleaned
@@ -4400,7 +4414,8 @@ https://github.com/servo/servo/pull/42179	(@mishop-15, #42179)	script: Migrate f
     # use `encoding_rs`, so it makes sense to switch.
     # Testing: A new WPT test (`tests/wpt/meta/eventsource/format-bom.any.js.ini`) is now passing.
     # Fixes: #42094.
-https://github.com/servo/servo/pull/43447	(@RichardTjokroutomo, @mrobinson, #43447)	font: Consider `lang` attribute when shaping (#43447)
++https://github.com/servo/servo/pull/43447	(@RichardTjokroutomo, @mrobinson, #43447)	font: Consider `lang` attribute when shaping (#43447)
+    layout; glyph shaping now takes lang attribute into account, which is important for zh vs ja due to CJK unification
     ^ commit afa4b524ab75c28f5eb27872e6e8ba90f451c8b5
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Fonts: Added `language` field in the struct `ShapingOptions` so Harfbuzz can also consider language when shaping
@@ -4539,7 +4554,8 @@ https://github.com/servo/servo/pull/43573	(@jschwe, #43573)	servoshell: Remove -
     # userscripts](https://github.com/servo/servo/pull/43182#issuecomment-4048383093) option, since embedders can use the
     # (new) `UserContentManager` API instead.
     # Testing: This removes a commandline flag from servoshell. Existing tests passing is sufficient.
-https://github.com/servo/servo/pull/42666	(@Loirooriol, #42666)	layout: Stretch replaced elements with aspect ratio but no natural sizes (#42666)
++https://github.com/servo/servo/pull/42666	(@Loirooriol, #42666)	layout: Stretch replaced elements with aspect ratio but no natural sizes (#42666)
+    layout; better sizing of <img> and <svg> without ‘width’ or ‘height’ (finding spec issues csswg-drafts#12612, csswg-drafts#13149)
     ^ commit 41a50106eb24d439eca2ae5f6f63df4b7d4c1bab
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Instead of using the default object width of 300px, use the inline-axis stretch size, or zero when computing the
@@ -4686,7 +4702,8 @@ https://github.com/servo/servo/pull/43581	(@webbeef, #43581)	bluetooth: unbreak 
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/43585	(@Gae24, #43585)	script: Correctly setup request for worker module scripts (#43585)
++https://github.com/servo/servo/pull/43585	(@Gae24, #43585)	script: Correctly setup request for worker module scripts (#43585)
+    dom; more conformant JS modules in web workers
     ^ commit 113b06f2ee09db90b3b805bdae1b36053813e96f
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # According to spec we should fetch worker modules using the _outside settings_, however we can't use it directly
@@ -4707,7 +4724,8 @@ https://github.com/servo/servo/pull/43595	(@minghuaw, #43595)	layout: Do not tri
     # Moves interfaces defined by the clipboard spec to the script/dom/clipboard/ module from script/dom/.
     # Testing: Just a refactor shouldn't need any testing
     # Fixes: Partially #38901
-https://github.com/servo/servo/pull/43583	(@Loirooriol, #43583)	script: Add preshints for `width` and `height` attributes of `<svg>` (#43583)
++https://github.com/servo/servo/pull/43583	(@Loirooriol, #43583)	script: Add preshints for `width` and `height` attributes of `<svg>` (#43583)
+    style; impl <svg width> and <svg height>
     ^ commit 7c1401fff89ca5433648183375aed80ec8649bf8
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Lets the `width` and `height` attributes of `` set presentational hints for the CSS properties of the same name.
@@ -4726,7 +4744,8 @@ https://github.com/servo/servo/pull/43583	(@Loirooriol, #43583)	script: Add pres
     # Moves interfaces defined by the document spec to the script/dom/document/ module from script/dom/.
     # Testing: Just a refactor shouldn't need any testing
     # Fixes: Partially #38901
-https://github.com/servo/servo/pull/43586	(@Loirooriol, #43586)	layout: Allow block-levels inside an inline directly, without wrapper (#43586)
+-https://github.com/servo/servo/pull/43586	(@Loirooriol, #43586)	layout: Allow block-levels inside an inline directly, without wrapper (#43586)
+    ;layout; mostly not observable
     ^ commit 62b2eefc7c535da46197b4a8c1b48313f6426897
     # When encountering a block-level inside an inline box, we would wrap it (together with other block-level siblings,
     # if any) inside an anonymous block box.
@@ -4798,7 +4817,8 @@ https://github.com/servo/servo/pull/43615	(@yezhizhen, #43615)	cargo: Rename wor
     # - canvas_traits
     # - constellation
     # Testing: This should not change any behaviour.
-https://github.com/servo/servo/pull/43625	(@Loirooriol, #43625)	layout: Fix `justify-self: auto` on block-in-inline (#43625)
+-https://github.com/servo/servo/pull/43625	(@Loirooriol, #43625)	layout: Fix `justify-self: auto` on block-in-inline (#43625)
+    ;layout; fix regression in #43586
     ^ commit 80c57f80d44c499e40f71bf83b3aad2cf4ac1946
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # We were resolving `justify-self: auto` according to the `justify-items` of the containing block. However, the CSSWG
@@ -4928,7 +4948,8 @@ https://github.com/servo/servo/pull/43515	(@niyabits, @Loirooriol, #43515)	layou
     # ```self.registry```
     # No testing required, compiles successfully.
     # Part o the #43605
-https://github.com/servo/servo/pull/43603	(@Messi002, #43603)	paint: Enable WebRender dithering to reduce gradient color banding (#43603)
++https://github.com/servo/servo/pull/43603	(@Messi002, #43603)	paint: Enable WebRender dithering to reduce gradient color banding (#43603)
+    layout; ‘linear-gradient()’ now dithers to reduce banding
     ^ commit 1e901934b5d08409d01a6c7bfe121d70ce5a0ca8
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Enable WebRender gradient dithering to reduce color banding
