@@ -63,8 +63,7 @@ git -C "$1" log --reverse --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-auth
         # lines, character wrap to 120, stop before any `---` line, delete empty lines, indent it with four spaces,
         # then print the result.
         jq -er --argjson number $pull_number 'select(.number == $number) | .body' "$pulls_json_path" \
-        | tr -d \\r | sed -E 's/<[^>]+>//g' | fmt -s -w 120 | fold -w 120 \
-        | sed -En '/^---$/q;/^ *$/d;s/^/    # /;p' \
+        | tr -d \\r | sed -En 's/^/    # /;p' \
         || : # printf '    %s\n' '[Pull request description not found]'
     else
         # Print the commit message body, with a hard wrap and an indent.
