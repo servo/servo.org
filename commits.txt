@@ -29,7 +29,7 @@
     # at the time. Should be safe to remove.
     # Testing: Well, this probably should be reviewed by someone who is familiar with the background. Not covered by
     # any tests.
-https://github.com/servo/servo/pull/42919	(@TimvdLippe, #42919)	Build nightly releases earlier for WPT (#42919)
+-https://github.com/servo/servo/pull/42919	(@TimvdLippe, #42919)	Build nightly releases earlier for WPT (#42919)
     ^ commit ba4274218dc4160a71ee347c613e0fd494d68121
     # WPT creates `epochs/daily` either at 2 or 3AM. This means that if a fix land on day 1, then WPT is tagged earlier
     # than the nightly release, so it can take 24-48 hours before a change is reflected on wpt.fyi
@@ -815,14 +815,16 @@ https://github.com/servo/servo/pull/42960	(@mrobinson, @Loirooriol, @lukewarlow,
 https://github.com/servo/servo/pull/43009	(@yezhizhen, #43009)	pixels: Properly format the panic message in `webrender_image_descriptor_and_data_for_frame` (#43009)
     ^ commit a1fde82cb0241d27358d21b60177655fb87253a6
     # `expect` is not a macro.
-https://github.com/servo/servo/pull/42739	(@Tarmil, @yezhizhen, #42739)	paint: Bound screenshot to the viewport (#42739)
++https://github.com/servo/servo/pull/42739	(@Tarmil, @yezhizhen, #42739)	paint: Bound screenshot to the viewport (#42739)
+    crash; [git show] fix crash in webdriver Take Element Screenshot with large elements
     ^ commit 1970e57b264c89f0da0d87ae2badbce5bfa07050
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Ensure that the screenshot rectangle is bounded by the width and height of the viewport.
     # Testing: The WPT test `test_clip_huge_element_to_viewport` now passes instead of crashing. It is also fixed so
     # that the returned screenshot size is the expected 800x600; it would otherwise be 792x600 due to the body margin.
     # Fixes: #42530
-https://github.com/servo/servo/pull/42976	(@jdm, #42976)	layout: Prevent DomRefCell::borrow from being used in layout code (#42976)
++https://github.com/servo/servo/pull/42976	(@jdm, #42976)	layout: Prevent DomRefCell::borrow from being used in layout code (#42976)
+    crash; fix crash under TSAN due to data races in layout
     ^ commit f206571869653af482299c7a5f77542d89c627a2
     # DomRefCell::borrow inside of layout code is risky because it leads to memory races if the code is ever called from
     # layout worker threads. This can be caught via TSAN, but we can also catch it deterministically in CI by using our
@@ -1227,7 +1229,8 @@ https://github.com/servo/servo/pull/43046	(@TimvdLippe, #43046)	script: Fix look
     # before it actually deletes the attribute. Right now, we do it regardless if it is a valid property and thus we
     # incorrectly delete the attribute.
     # Testing: No change in tests, since the test in question has more assertions that require more fixes
-https://github.com/servo/servo/pull/43012	(@delan, @alice, #43012)	base: Deterministic AccessKit tree UUID format for pipelines (#43012)
++https://github.com/servo/servo/pull/43012	(@delan, @alice, #43012)	base: Deterministic AccessKit tree UUID format for pipelines (#43012)
+    a11y; defining AccessKit subtree ids for documents, so we can graft them into webview subtrees as you navigate
     ^ commit fd93a020417e8fbf906a3475cbf711eed6f7f705
     # each webview will have an AccessKit subtree, and each pipeline representing a document will have an
     # AccessKit subtree for its layout. but to graft the subtree of a pipeline into that of a webview (for
@@ -1244,7 +1247,8 @@ https://github.com/servo/servo/pull/43012	(@delan, @alice, #43012)	base: Determi
     # that was an intended use case (or even possible).
     # Testing: this patch includes a unit test
     # Fixes: part of #4344, extracted from our work in #42338
-https://github.com/servo/servo/pull/43013	(@delan, @alice, #43013)	constellation: Track top-level pipeline changes in webviews (#43013)
++https://github.com/servo/servo/pull/43013	(@delan, @alice, #43013)	constellation: Track top-level pipeline changes in webviews (#43013)
+    a11y; tracking navigations of the top-level document in each webview, so we can graft them into webview subtrees
     ^ commit ec55e8304093075233e6e361dd726b4af8ec6f0e
     # whenever a browsing context loads a new document or otherwise navigates, the constellation sends a new frame tree
     # to the compositor, giving us a nice, relatively central way to detect when we may need to update the graft node in
@@ -1366,7 +1370,8 @@ https://github.com/servo/servo/pull/43066	(@mrobinson, #43066)	script: Readily a
     # In particular, this includes some performance optimizations, improves `attr()`, and adds support for `none`
     # keywords in `clamp()`.
     # Testing: Some WPT tests pass.
-https://github.com/servo/servo/pull/43017	(@jakubadamw, #43017)	script: Implement `HTMLSelectElement.selectedOptions` (#43017)
++https://github.com/servo/servo/pull/43017	(@jakubadamw, #43017)	script: Implement `HTMLSelectElement.selectedOptions` (#43017)
+    dom; impl selectedOptions on HTMLSelectElement
     ^ commit d6fdd30c19a23169bd111d9569972089c4062697
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -1615,7 +1620,8 @@ https://github.com/servo/servo/pull/43101	(@xZaisk, @yezhizhen, #43101)	script: 
     # Adds specific InvalidStateError messages in HTMLDialogElement for
     # `show()` and `showModal()` error paths.
     # A fix part of #40756.
-https://github.com/servo/servo/pull/42218	(@freyacodes, @mrobinson, #42218)	layout: Support text carets on empty lines in <textarea> (#42218)
++https://github.com/servo/servo/pull/42218	(@freyacodes, @mrobinson, #42218)	layout: Support text carets on empty lines in <textarea> (#42218)
+    editing; text carets now render on empty lines
     ^ commit 4ec46aaadcf58bb08e64c551a817a72ab253634e
     # This PR modifies the text layout in such a way that text carets can render on empty lines (other than the first if
     # the textarea is empty). Zero-length segments are added to support caret rendering. The last line, if it is without
@@ -2013,7 +2019,8 @@ https://github.com/servo/servo/pull/43082	(@TimvdLippe, #43082)	script: Complete
     # (not now at least), but it's better to fix the condition anyway.
     # Fixes nightly upload failures like in https://github.com/servo/servo/actions/runs/22927035640/job/66539862051
     # Testing: Not tested
-https://github.com/servo/servo/pull/43170	(@delan, #43170)	Fix `-p servo` lib target build (and fix CI check accordingly) (#43170)
++https://github.com/servo/servo/pull/43170	(@delan, #43170)	Fix `-p servo` lib target build (and fix CI check accordingly) (#43170)
+    api; fix regression that broke anyone consuming libservo (now `servo`) with a compile error about aws_lc_rs in servo-net
     ^ commit f9fd3968e5e6e21adbcc848ba368260edbdddf47
     ^ /!\ contains libservo changes! does it affect the embedder?
     # the `-p servo` (formerly libservo) lib target was busted for anyone genuinely consuming it as a library, but we
@@ -2246,7 +2253,8 @@ https://github.com/servo/servo/pull/43190	(@lukewarlow, #43190)	prefs: Remove `d
     # This now passes most of the relevant tests. Most of the remaining failures are due to missing functionality such
     # as the popover API, element reflection properties (see https://github.com/servo/servo/issues/42884), and issues
     # with the event retargeting code that doesn't handle shadow dom correctly.
-https://github.com/servo/servo/pull/43203	(@jdm, #43203)	libservo: Expose ClipboardDelegate in public API. (#43203)
++https://github.com/servo/servo/pull/43203	(@jdm, #43203)	libservo: Expose ClipboardDelegate in public API. (#43203)
+    api; WebView::set_clipboard_delegate() can actually be called now
     ^ commit 69d4353eca2a8f0cfffea11f205e7e0192ff4227
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Per [#embedding > Miscellaneous Embedding
@@ -2314,7 +2322,8 @@ https://github.com/servo/servo/pull/43202	(@yezhizhen, #43202)	script: Notify em
     # yet. Depends on #43166.
     # Testing: Ran `mach test-devtools` and manual testing.
     # Part of: #36027
-https://github.com/servo/servo/pull/43213	(@bruno-j-nicoletti, #43213)	script: Use the shared task canceller in `DedicatedWorkerGlobalScope::run_worker_scope` (#43213)
++https://github.com/servo/servo/pull/43213	(@bruno-j-nicoletti, #43213)	script: Use the shared task canceller in `DedicatedWorkerGlobalScope::run_worker_scope` (#43213)
+    dom; [reading code; asked in fixes issue] fix bug where we continue running tasks in web workers even after the document is closed?
     ^ commit 3a680c53897cfb51040b9380954c9068943873cc
     # Replaces the default task canceler with the shared task canceler found in the global scope.
     # Testing: #42536 specifies that building is enough.
@@ -2509,7 +2518,7 @@ https://github.com/servo/servo/pull/43233	(@mrobinson, #43233)	servo: Rename `Ga
     # This makes the name of the `GamepadDelegate` consistent with the other
     # delegates.
     # Testing: No tests necessary as this is just renaming some structs and members. Compilation should be enough.
-https://github.com/servo/servo/pull/42509	(@janeoa, @Narfinger, @jschwe, #42509)	ohos: Add script to run blink perf tests on device (#42509)
+-https://github.com/servo/servo/pull/42509	(@janeoa, @Narfinger, @jschwe, #42509)	ohos: Add script to run blink perf tests on device (#42509)
     ^ commit 44a151f925c454bacaa7f46736be5c6a147307d9
     # CI: ohos blink_perf_test scenario
     # Background:
@@ -2566,7 +2575,8 @@ https://github.com/servo/servo/pull/43237	(@jschwe, #43237)	config: Remove unuse
     # `reply_unchecked` change and use the new `mark_handled` instead.
     # Depends on: #43230
     # Testing: DevTools tests
-https://github.com/servo/servo/pull/43248	(@chrisduerr, #43248)	servo: Add `id` method to `InputMethodControl` (#43248)
++https://github.com/servo/servo/pull/43248	(@chrisduerr, #43248)	servo: Add `id` method to `InputMethodControl` (#43248)
+    api; add new getter InputMethodControl::id()
     ^ commit 9186a7efab421763e45a13baa75b560166577a73
     ^ /!\ contains libservo changes! does it affect the embedder?
     # While it is possible to acquire the embedder ID through `EmbedderControl::id`, it is no longer possible once the
@@ -2598,7 +2608,8 @@ https://github.com/servo/servo/pull/43246	(@mrobinson, #43246)	script: Scroll ta
     # also scroll them into view. Though this is unspecified, this is what all
     # other browsers do.
     # Testing: This change adds a new Servo-specific test. The behavior isn't really specified.
-https://github.com/servo/servo/pull/43249	(@chrisduerr, @mrobinson, #43249)	embedder_traits: Add missing Debug impl to `PixelFormat` (#43249)
++https://github.com/servo/servo/pull/43249	(@chrisduerr, @mrobinson, #43249)	embedder_traits: Add missing Debug impl to `PixelFormat` (#43249)
+    api; PixelFormat is now impl Debug
     ^ commit e0e07f14ba6be44a02b498dd7de8b9f040d5abdf
     # Testing: This just implements `Debug` on an API exposed type, so tests are not necessary.
 https://github.com/servo/servo/pull/43132	(@mrobinson, #43132)	layout: Add a little padding to textual inputs (#43132)
@@ -2641,7 +2652,8 @@ https://github.com/servo/servo/pull/43132	(@mrobinson, #43132)	layout: Add a lit
     ^ commit ef97d7e19912ad70400d0c953abd769dfc14e95a
     # Testing: No behaviour change, a successful build is enough.
     # Fixes: #42838 #43239
-https://github.com/servo/servo/pull/43261	(@chrisduerr, #43261)	libservo: Expose `StringRequest` in public API (#43261)
++https://github.com/servo/servo/pull/43261	(@chrisduerr, #43261)	libservo: Expose `StringRequest` in public API (#43261)
+    api; [references commit] part of #43203
     ^ commit 58e7d14963f19778ff6e17cc38180df6cb4763a7
     ^ /!\ contains libservo changes! does it affect the embedder?
     # This is a follow-up to 69d4353, which attempted to make the `ClipboardDelegate` trait implementable, but missed
@@ -2664,7 +2676,8 @@ https://github.com/servo/servo/pull/43264	(@jschwe, #43264)	blurmac: Disable pub
     ^ commit fa899420c7f32ed23684421dd8b4c214dbfff8d7
     # `cargo publish --workspace` should ignore this crate, we currently don't plan to release it.
     # Testing: Not tested
-https://github.com/servo/servo/pull/43250	(@chrisduerr, @mrobinson, #43250)	servo: Force embedders to implement `EventLoopWaker::wake` (#43250)
++https://github.com/servo/servo/pull/43250	(@chrisduerr, @mrobinson, #43250)	servo: Force embedders to implement `EventLoopWaker::wake` (#43250)
+    api; [git show] breaking! remove default fn wake() in trait EventLoopWaker, since it never makes sense for a custom impl to leave it empty
     ^ commit 279a53e598227560f5f2577e73247e6d34653b83
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Currently it is possible to define an `EventLoopWaker` which does nothing on `wake`, however there's no reason
@@ -2714,7 +2727,8 @@ https://github.com/servo/servo/pull/43275	(@yezhizhen, #43275)	webdriver: Wait f
     ^ commit 71907ee9fd4559a953fec6ccb0d3f346f3e2dd88
     # This continues #43262. Also added TODO.
     # Testing: Existing tests: [Try](https://github.com/servo/servo/actions/runs/23089599333)
-https://github.com/servo/servo/pull/43229	(@chrisduerr, #43229)	servo: Fix minor documentation issues (#43229)
++https://github.com/servo/servo/pull/43229	(@chrisduerr, #43229)	servo: Fix minor documentation issues (#43229)
+    api; [git show] improved docs for Servo, ServoBuilder, WebViewBuilder, and RenderingContext
     ^ commit cf908a8d6c07f8122520d839c01fac6491c26e80
     ^ /!\ contains libservo changes! does it affect the embedder?
     # null
@@ -2792,7 +2806,8 @@ https://github.com/servo/servo/pull/43177	(@TimvdLippe, #43177)	script: Record s
     ^ commit c9c8e22abd583e5ffc0ddc8e8def5a036434e1f1
     # I just want to be part of the campaign.
     # Testing: It compiles.
-https://github.com/servo/servo/pull/43285	(@SharanRP, #43285)	script: inline dispatch_load_event and dispatch_error_event  (#43285)
++https://github.com/servo/servo/pull/43285	(@SharanRP, #43285)	script: inline dispatch_load_event and dispatch_error_event  (#43285)
+    cleanup; [fixes issue] outreachy refactor
     ^ commit ae08945a54d2e93c0c29d59831276655f6934b54
     # fixes #43280
     # This PR in lines the dispatch_load_event and dispatch_error_event wrappers directly into their call sites and
@@ -3035,7 +3050,7 @@ https://github.com/servo/servo/pull/43281	(@simonwuelker, #43281)	script: Suppor
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/43299	(@jdm, #43299)	Update wayland crates. (#43299)
+-https://github.com/servo/servo/pull/43299	(@jdm, #43299)	Update wayland crates. (#43299)
     ^ commit 3d25895cafecddbff47387022b383592fefeb9f8
     # Updates the wayland crates and adds a new exemption for the quick-xml duplication. This prevents dependabot opening
     # a PR every day for these crates which can never be merged.
@@ -3341,7 +3356,8 @@ https://github.com/servo/servo/pull/43357	(@shubhamg13, #43357)	wpt: Add a delay
     # This adds a delay of 2 seconds for loading a valid image. This is added to potentially overcome the race condition
     # happening while reporting LCP, to save from false positive result.
     # Testing: WPT tests is `TIMED OUT` as expected.
-https://github.com/servo/servo/pull/43216	(@dyegoaurelio, #43216)	script: Implement duplicate attribute check for CSP nonce validation (#43216)
++https://github.com/servo/servo/pull/43216	(@dyegoaurelio, #43216)	script: Implement duplicate attribute check for CSP nonce validation (#43216)
+    dom; reject elements with duplicate attributes in ‘Content-Security-Policy’ nonce checks
     ^ commit be58c968de5e659f1814c92a5371750114b1d088
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Propagate the had_duplicate_attributes flag from html5ever's
@@ -3478,7 +3494,8 @@ https://github.com/servo/servo/pull/42833	(@shubhamg13, #42833)	layout: Do not c
     # Testing: `tests/wpt/tests/largest-contentful-paint/broken-image-icon.html`
     # Fixes: #42832
     # Fixes: #43030
-https://github.com/servo/servo/pull/43228	(@chrisduerr, #43228)	servo: Rename `WebView::pinch_zoom` to `adjust_pinch_zoom` and add pinch zoom getter (#43228)
++https://github.com/servo/servo/pull/43228	(@chrisduerr, #43228)	servo: Rename `WebView::pinch_zoom` to `adjust_pinch_zoom` and add pinch zoom getter (#43228)
+    api; breaking! renamed WebView::pinch_zoom() to adjust_pinch_zoom() so we can add a getter for the current pinch zoom at pinch_zoom()
     ^ commit 3c9221c3b54a8b0a493286407c12017c835e598a
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains servoshell changes! does it affect the user experience?
@@ -3545,7 +3562,8 @@ https://github.com/servo/servo/pull/43041	(@Taym95, #43041)	indexeddb: align get
     # Pass `&mut JSContext` to `ReadableStream::cancel`, in preparation of porting the remaining `BlobMethods`.
     # Testing: Just a refactor, ./mach test-unit still passes.
     # Fixes: Part of #42638
-https://github.com/servo/servo/pull/43431	(@jakubadamw, #43431)	script: Prevent invisible elements from being focusable (#43431)
++https://github.com/servo/servo/pull/43431	(@jakubadamw, #43431)	script: Prevent invisible elements from being focusable (#43431)
+    dom; [fixes issue] fix bug where elements with ‘visibility: hidden’ could be focused by clicking or by API
     ^ commit e6d06b2cea9b7cf326ef4fa9abac776713cf63c2
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Elements with `visibility: hidden` or `visibility: collapse` could receive focus via both sequential navigation
@@ -3660,7 +3678,8 @@ https://github.com/servo/servo/pull/43367	(@TimvdLippe, #43367)	script: Strip bl
     # Testing: Checked that servo builds locally as well as `./mach fmt` and `./mach test-tidy`. I don't think more
     # tests are needed as we are not introducing new functionality
     # Fixes: #42840
-https://github.com/servo/servo/pull/43029	(@delan, @alice, #43029)	libservo: Per-webview accessibility activation (#43029)
++https://github.com/servo/servo/pull/43029	(@delan, @alice, #43029)	libservo: Per-webview accessibility activation (#43029)
+    a11y api; breaking! Servo::set_accessibility_active() is now WebView::set_accessibility_active(), since that is harder to misuse in a way that will cause a panic
     ^ commit 4dbc9f7af947cd110f80d0c386493cb6ddc7db0d
     ^ /!\ contains libservo changes! does it affect the embedder?
     # in #42336, we added a [Servo](https://doc.servo.org/servo/struct.Servo.html)-global API for controlling whether
@@ -4008,7 +4027,8 @@ https://github.com/servo/servo/pull/43477	(@TimvdLippe, #43477)	net: Remove `pro
     # As suggested [here](https://github.com/servo/servo/pull/42964#issuecomment-4073998452), adds a preference to enable
     # fetching modulepreload descendants, turned off by default.
     # Testing: A successful build is enough.
-https://github.com/servo/servo/pull/38773	(@abdelrahman1234567, @abdelrahman1234567, @mrobinson, #38773)	script: Implement the `scrollend` event (#38773)
++https://github.com/servo/servo/pull/38773	(@abdelrahman1234567, @abdelrahman1234567, @mrobinson, #38773)	script: Implement the `scrollend` event (#38773)
+    dom; [git show] fire ‘scrollend’ events on Document, Element, and VisualViewport
     ^ commit 76e1a09082e4a9af10bca67a7848291bbef6a436
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This change implements the `scrollend` event. Since there is no support for asynchronous / smooth scrolling,
@@ -4033,7 +4053,8 @@ https://github.com/servo/servo/pull/43483	(@TimvdLippe, #43483)	script: Set corr
     ^ commit 8f699b1f17ece8aa3eb83efdb85e29502fae90cd
     # Part of #40600
     # Testing: It compiles
-https://github.com/servo/servo/pull/43487	(@jdm, #43487)	script: Do not record associated memory for Promises, and release associated memory for WindowProxy. (#43487)
++https://github.com/servo/servo/pull/43487	(@jdm, #43487)	script: Do not record associated memory for Promises, and release associated memory for WindowProxy. (#43487)
+    crash; [fixes issue] fix crashes in --debug-mozjs builds when handling some promises, and when exiting
     ^ commit c166fec94ac90afae5c9e9ed2b694f84b691fb20
     # This fixes two assertions observed in Servo using debug mozjs builds:
     # * `Assertion failure: !IsInsideNursery(obj)` for every promise object reflected into Rust code
@@ -4159,7 +4180,7 @@ https://github.com/servo/servo/pull/43495	(@shubhamg13, #43495)	servo: No longer
     # test_default_pref_with_background |
     # test_non_default_pref_with_background |
     # test_non_default_pref_with_same_background |
-https://github.com/servo/servo/pull/43491	(@jdm, #43491)	script: Move navigation origin logic into a method with spec steps. (#43491)
+-https://github.com/servo/servo/pull/43491	(@jdm, #43491)	script: Move navigation origin logic into a method with spec steps. (#43491)
     ^ commit 5f247392bee2353e126f161012ce86fb866f0867
     # This pulls one bit of navigation logic out into a method that is easier to cross-reference against the spec,
     # and drops a bunch of custom logic that is better served by the existing LoadOrigin infrastructure.
@@ -4168,7 +4189,8 @@ https://github.com/servo/servo/pull/43491	(@jdm, #43491)	script: Move navigation
     ^ commit ea8d93d740dcd1df3adee822cb697c1c5816dcf0
     # Remove unused `LayoutDom`
     # Testing: Successful Compilation is enough to verify the change.
-https://github.com/servo/servo/pull/43521	(@SharanRP, #43521)	Use encoding-parse for form action (#43521)
++https://github.com/servo/servo/pull/43521	(@SharanRP, #43521)	Use encoding-parse for form action (#43521)
+    dom; [fixes issue] outreachy? <form action> is now correctly resolved with the page encoding
     ^ commit 5af76f6a23ca6259a84375752f62a37440ddf3b3
     # Parse form action URLs using the document's encoding-aware URL parser.
     # Testing: Verified with the WPT form-action tests `./mach test-wpt
@@ -4186,7 +4208,8 @@ https://github.com/servo/servo/pull/43521	(@SharanRP, #43521)	Use encoding-parse
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 22-03-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/43523	(@jayant911, #43523)	script: add navigation and traversal task source (#43523)
++https://github.com/servo/servo/pull/43523	(@jayant911, #43523)	script: add navigation and traversal task source (#43523)
+    dom; [fixes issue and spec; asked in fixes issue] paving the way for some future conformance work?
     ^ commit 5ba6636555baeeade8939b8449e82fb3137b3b19
     # script: Add navigation and traversal task source
     # Testing: This shouldn't be something that's observable through tests, so a successful build is enough to verify
@@ -4225,13 +4248,15 @@ https://github.com/servo/servo/pull/43526	(@yezhizhen, #43526)	cargo: Rename Wor
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Also reorders alphabetically for the corresponding user .toml.
-https://github.com/servo/servo/pull/43485	(@SharanRP, #43485)	Gate picker on trusted click (#43485)
++https://github.com/servo/servo/pull/43485	(@SharanRP, #43485)	Gate picker on trusted click (#43485)
+    dom; opening <select> picker now requires user interaction
     ^ commit 9cbdf9d8b110e8eca846366309e73300753e6187
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Fixes: #43360
     # This PR makes `` behave like other browsers by only opening the picker for trusted user clicks, and adds a regression
     # test to ensure synthetic `.click()/dispatchEvent('click')` won’t open it.
-https://github.com/servo/servo/pull/43532	(@TG199, #43532)	remove referrer field from ScriptFetchOptions (#43532)
++https://github.com/servo/servo/pull/43532	(@TG199, #43532)	remove referrer field from ScriptFetchOptions (#43532)
+    cleanup dom
     ^ commit a63a00936fcbb631bd157cc13bba1ac842e8c235
     # Remove `referrer` field from `ScriptFetchOptions` and pass it directly to `script_fetch_request`.
     # This keeps ScriptFetchOptions aligned with the HTML
@@ -4253,7 +4278,7 @@ https://github.com/servo/servo/pull/43532	(@TG199, #43532)	remove referrer field
     # ```
     # ..by passing a `cx: &mut JSContext` instead.
 >>> 2026-03-24T01:04:16Z
-https://github.com/servo/servo/pull/43545	(@ctonneslan, #43545)	Fix typo: occured -> occurred in error comments (#43545)
+-https://github.com/servo/servo/pull/43545	(@ctonneslan, #43545)	Fix typo: occured -> occurred in error comments (#43545)
     ^ commit f655eee527a0244574fae637e9a4c73c4daa8935
     # Two comment typos in indexeddb.rs and generic_channelset.rs. Skipped the `independant` function name in layout.rs
     # since renaming it would be breaking.
@@ -4329,7 +4354,8 @@ https://github.com/servo/servo/pull/43545	(@ctonneslan, #43545)	Fix typo: occure
     # Move `CSSKeyframeRule::Style` from `CanGc` to `&mut JSContext`.
     # Testing: Just a refactor, Existing tests suffice.
     # Fixes: Part of #42638
-https://github.com/servo/servo/pull/43537	(@jayant911, #43537)	script: Use encoding-parsing algorithm in XMLHttpRequest::Open (#43537)
++https://github.com/servo/servo/pull/43537	(@jayant911, #43537)	script: Use encoding-parsing algorithm in XMLHttpRequest::Open (#43537)
+    dom; [fixes issue and git show] outreachy? open() on XMLHttpRequest now correctly resolves the url argument with the page encoding
     ^ commit ebfdaff63f3d89e594b6506992e67698ca918e9a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Add a new method to components/script/dom/globalscope.rs which checks if the global is a Window , then uses
@@ -4359,7 +4385,8 @@ https://github.com/servo/servo/pull/43539	(@TimvdLippe, #43539)	script: Implemen
     # that it is an invalid document.
     # Fixes #16103
     # [1]: https://html.spec.whatwg.org/multipage/document-lifecycle.html#navigate-ua-inline
-https://github.com/servo/servo/pull/43554	(@jdm, #43554)	wpt: Add test for form action encoding. (#43554)
++https://github.com/servo/servo/pull/43554	(@jdm, #43554)	wpt: Add test for form action encoding. (#43554)
+    dom; [fixes issue] part of #43521
     ^ commit fa5e7bffdd6a09a035b9ae00163ee48ddb2a33ea
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Verified that this test fails before #43521 and passes after it, and matches behaviour of other browsers.
@@ -4457,14 +4484,16 @@ https://github.com/servo/servo/pull/43564	(@mukilan, #43564)	embedder_traits: Ad
     # Move `CSSKeyframesRule` methods (`CssRules`, `AppendRule`, `DeleteRule`, `FindRule`) from `CanGc` to `&mut JSContext`.
     # Testing: It compiles.
     # Fixes: Part of #42638
-https://github.com/servo/servo/pull/43560	(@eyupcanakman, #43560)	script: Add error messages in HMAC WebCrypto operations (#43560)
++https://github.com/servo/servo/pull/43560	(@eyupcanakman, #43560)	script: Add error messages in HMAC WebCrypto operations (#43560)
+    dom; better exception error messages in SubtleCrypto
     ^ commit 1422d2a850bf11ad352b03612d4789c82be737b6
     # Replace all `Error::*(None)` instances in `hmac_operation.rs` with
     # descriptive error messages, covering sign, verify, generate_key,
     # import_key, and export_key operations.
     # Testing: Existing WPT tests cover all HMAC operations and check error types, not message strings. No behavioral change.
     # Fixes: Part of #40756
-https://github.com/servo/servo/pull/43572	(@SharanRP, #43572)	script: Use encoding-parse algorithm when handling iframe and Document URL attributes (#43572)
++https://github.com/servo/servo/pull/43572	(@SharanRP, #43572)	script: Use encoding-parse algorithm when handling iframe and Document URL attributes (#43572)
+    dom; [fixes issue] outreachy? <iframe src> is now correctly resolved with the page encoding
     ^ commit 34583dc66f9a02afe6f87914d78294a7e9aa038b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This PR fixes iframe URL parsing to use document encoding, so non-UTF-8 pages reflect iframe.src  correctly,
@@ -4961,12 +4990,14 @@ https://github.com/servo/servo/pull/43515	(@niyabits, @Loirooriol, #43515)	layou
     # 138, 100, 0.04) 0%, transparent 60%)`). Before the change, Servo showed harsh horizontal bands. After the change,
     # the gradient renders smoothly, matching Firefox and Chrome behavior.
     # Fixes: #43568
-https://github.com/servo/servo/pull/43647	(@elomscansio, #43647)	script: Move resizeobserver DOM interfaces to script/dom/resizeobserver/ (#43647)
++https://github.com/servo/servo/pull/43647	(@elomscansio, #43647)	script: Move resizeobserver DOM interfaces to script/dom/resizeobserver/ (#43647)
+    dom; [fixes issue is] outreachy refactor
     ^ commit 14faaaf093d5dd5cd417b4a42cac77db2ed14dcd
     # Moves interfaces defined by the resizeobserver spec to the script/dom/resizeobserver/ module from script/dom/.
     # Testing: Just a refactor shouldn't need any testing
     # Fixes: Partially https://github.com/servo/servo/issues/38901
-https://github.com/servo/servo/pull/43651	(@elomscansio, #43651)	script: Move event DOM interfaces to script/dom/event/ (#43651)
++https://github.com/servo/servo/pull/43651	(@elomscansio, #43651)	script: Move event DOM interfaces to script/dom/event/ (#43651)
+    dom; [fixes issue is] outreachy refactor
     ^ commit 5e19c83bd61bfd64420ea0777c28b0ecf81daa6f
     # Moves interfaces defined by the event spec to the script/dom/event/ module from script/dom/.
     # Testing: Just a refactor shouldn't need any testing
@@ -5144,7 +5175,8 @@ https://github.com/servo/servo/pull/43325	(@lukewarlow, @Loirooriol, #43325)	scr
     # In Firefox, go to about:debugging and connect to localhost:6080
     # Confirm the service worker shows up under "Service Workers"
     # Fixes #43574
-https://github.com/servo/servo/pull/43556	(@delan, @alice, #43556)	libservo: Set up graft node in AccessKit trees for webviews (#43556)
++https://github.com/servo/servo/pull/43556	(@delan, @alice, #43556)	libservo: Set up graft node in AccessKit trees for webviews (#43556)
+    a11y; graft active top-level document into each webview’s AccessKit subtree (no document accessibility tree yet)
     ^ commit 3f746481a2cb499a8a9836e0b9770376bb236f5e
     ^ /!\ contains libservo changes! does it affect the embedder?
     # in #43029, we defined an accessibility tree for each webview. we create those trees when accessibility is activated
@@ -5200,6 +5232,7 @@ https://github.com/servo/servo/pull/43087	(@TimvdLippe, #43087)	script: Fire inp
     # the input element to work with text edits.
     # Part of #25005
 https://github.com/servo/servo/pull/43634	(@Veercodeprog, #43634)	script: Use encoding-parsed URLs in EventSource constructor (#43634)
+    dom; [fixes issue] outreachy? EventSource ctor now correctly resolves the url argument with the page encoding
     ^ commit 235a3577f308590d5ac8a1f658afb5e8a0b28d41
     # Fixes #43629.
     # The `EventSource` constructor was resolving input URLs with
@@ -5261,7 +5294,8 @@ https://github.com/servo/servo/pull/43634	(@Veercodeprog, #43634)	script: Use en
     # a rebase manually by commenting `@dependabot rebase`.
     # [//]: # (dependabot-automerge-start)
     # [//]: # (dependabot-automerge-end)
-https://github.com/servo/servo/pull/43646	(@elomscansio, @mukilan, #43646)	constellation: Convert constellation's EmbedderProxy to GenericEmbedderProxy (#43646)
++https://github.com/servo/servo/pull/43646	(@elomscansio, @mukilan, #43646)	constellation: Convert constellation's EmbedderProxy to GenericEmbedderProxy (#43646)
+    architecture; [fixes issue is] outreachy refactor; split out messages to the embedder by their source for better use of the type system
     ^ commit 7fe875ac36cfa63a7fae5cfd4f3bf2843c7fff04
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Refactor Constellation module to use GenericEmbedderProxy
@@ -5337,7 +5371,8 @@ https://github.com/servo/servo/pull/43717	(@yezhizhen, #43717)	canvas: Don't inc
     # It is better to not allocate them in the first place.
     # Testing: [Try](https://github.com/servo/servo/actions/runs/23642089615).
     # Added a Servo-specific crash test to ensure we will not have empty font/string in a text run.
-https://github.com/servo/servo/pull/43582	(@SharanRP, #43582)	script: React correctly to `selected` attributes changes in for `<option>` (#43582)
++https://github.com/servo/servo/pull/43582	(@SharanRP, #43582)	script: React correctly to `selected` attributes changes in for `<option>` (#43582)
+    dom; [fixes issue] handle dynamic changes to <option selected> in the containing <select>
     ^ commit 6dd427683cfac00352381f6f93e10023ceb24638
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Fixes: #43522
@@ -5494,7 +5529,8 @@ https://github.com/servo/servo/pull/43736	(@yezhizhen, #43736)	script: Add TODO 
     # Renamed ProcessActor variable names in root.rs.
     # Testing: No testing required.
     # Fixes: Part of #43606
-https://github.com/servo/servo/pull/43721	(@Taym95, #43721)	indexeddb: make put() overwrite existing SQLite records (#43721)
++https://github.com/servo/servo/pull/43721	(@Taym95, #43721)	indexeddb: make put() overwrite existing SQLite records (#43721)
+    dom; fix erroneous exception when calling put() on IDBObjectStore and the record already exists
     ^ commit f59723184213b04fa02d727040bb75e8eeb5ad75
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # indexeddb: make put() overwrite existing SQLite records
@@ -5690,7 +5726,8 @@ https://github.com/servo/servo/pull/43653	(@mrobinson, @lukewarlow, @Loirooriol,
     # recover this memory by storing one `GlyphStore` per `TextRunSegment`, which
     # should recover 16 bytes.
     # Testing: This should not change behavior so is covered by existing tests.
-https://github.com/servo/servo/pull/42139	(@arihant2math, @gterzian, @Taym95, #42139)	storage: implement obtaining a storage bottle map, and create and delete databse (#42139)
++https://github.com/servo/servo/pull/42139	(@arihant2math, @gterzian, @Taym95, #42139)	storage: implement obtaining a storage bottle map, and create and delete databse (#42139)
+    dom; [spec] implement storage #obtain-a-storage-bottle-map, an algorithm that forms part of the shared foundations of indexeddb, localStorage, and showNotification()
     ^ commit 2566b477cef5ecd318df780bf213617ab6fb3d69
     # Add a storage client concept, meant to implement https://storage.spec.whatwg.org/
     # Implement https://storage.spec.whatwg.org/#obtain-a-storage-bottle-map
@@ -5788,7 +5825,8 @@ https://github.com/servo/servo/pull/43785	(@webbeef, #43785)	layout: remove nois
     ^ commit 5db86cc5f0e9a74c552a72e1247f0c59eee953f7
     # These were forgotten in 17a7ee037bd
     # Testing: no testing needed
-https://github.com/servo/servo/pull/43780	(@TG199, #43780)	script: Let `Console::internal_warn` take `String` instead of `DOMString` (#43780)
++https://github.com/servo/servo/pull/43780	(@TG199, #43780)	script: Let `Console::internal_warn` take `String` instead of `DOMString` (#43780)
+    perf; [fixes issue] avoid converting from String to DOMString and back to String when sending internal warnings to console
     ^ commit bb667737a9bf3dfa2581c95f75ca7dbac92dc065
     #  All callers were constructing a DOMString only to have it immediately converted back to String inside internal_warn,
     #  resulting in an unnecessary allocation and clone. This changes the parameter type to String and updates all call
