@@ -471,7 +471,8 @@ https://github.com/servo/servo/pull/42935	(@webbeef, #42935)	script: Mark disabl
     # 
     # Testing: This is just a little refactor. No change in behavior expected. Successful compilation is enough to verify.
     # 
-https://github.com/servo/servo/pull/42930	(@simonwuelker, #42930)	script: Fix deadlock in async html parser (#42930)
++https://github.com/servo/servo/pull/42930	(@simonwuelker, #42930)	script: Fix deadlock in async html parser (#42930)
+    perf; more fixes for async parser (discussed in previous mupdate)
     ^ commit e033588b3072258a636e7e0a1f6ae032176a0a2a
     # When the async parser thread finds a `<meta charset>` tag then it asks the main thread whether parsing should restart. The main thread wasn't responding, so the parser got stuck.
     # 
@@ -501,7 +502,8 @@ https://github.com/servo/servo/pull/42949	(@shubhamg13, #42949)	layout: Add imag
     # Rebased on: #42948
     # 
     # Testing: No expected change in behavior, Successful Compilation is enough to verify.
-https://github.com/servo/servo/pull/42959	(@simonwuelker, #42959)	tests: Add back .ini file for parser reentrancy test (#42959)
++https://github.com/servo/servo/pull/42959	(@simonwuelker, #42959)	tests: Add back .ini file for parser reentrancy test (#42959)
+    perf; more fixes for async parser (discussed in previous mupdate)
     ^ commit a7f89a22fffd9ef34f3c2b5f80aef051479ce493
     # The file was removed in https://github.com/servo/servo/commit/bb5547a5d05b1f002d9cce3197cfb9cdcb71d33c but we still need it. Note that we don't crash on the async variant anymore since https://github.com/servo/servo/pull/42910.
     # 
@@ -525,7 +527,8 @@ https://github.com/servo/servo/pull/42959	(@simonwuelker, #42959)	tests: Add bac
     # 
     # Testing: DevTools tests and manual checks.
     # Part of: #36027
-https://github.com/servo/servo/pull/42961	(@simonwuelker, #42961)	fonts: Don't apply `letter-spacing` to formatting characters (#42961)
++https://github.com/servo/servo/pull/42961	(@simonwuelker, #42961)	fonts: Don't apply `letter-spacing` to formatting characters (#42961)
+    layout; [fixes issue] fix ‘letter-spacing’ applying to invisible zero-width formatting characters
     ^ commit 640fe6356ab5fa1a5903e27210c2d0d1d4c10a3b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This change checks whether a character belongs to the `Cf` category of unicode characters before applying `letter-spacing`. The `fonts` crate now depends on `icu_properties`, but that crate is already in our dependency tree (with the same features enabled).
@@ -835,7 +838,8 @@ https://github.com/servo/servo/pull/42736	(@webbeef, #42736)	script: pointer eve
     # Testing: This is just removing unused code from our build scripts.
     # Fixes: #42956.
     # 
-https://github.com/servo/servo/pull/42987	(@simonwuelker, #42987)	script: Fire pointer, `mouseenter`, and `mouseleave`events respecting the flat tree (#42987)
++https://github.com/servo/servo/pull/42987	(@simonwuelker, #42987)	script: Fire pointer, `mouseenter`, and `mouseleave`events respecting the flat tree (#42987)
+    dom; pointer and mouse events can now be captured across shadow DOM boundaries <https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling#event_capture>
     ^ commit d5f02b6f15215a8ffc1d535249f68dbab5587bc5
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # The [spec](https://w3c.github.io/pointerevents/#the-pointerenter-event) says that pointer events should be fired for the element hovered by the pointer and all its ancestors. That implies using the flat tree, which we were not doing before.
@@ -918,7 +922,8 @@ https://github.com/servo/servo/pull/42652	(@yezhizhen, #42652)	`pointerevent_sup
     # Testing: We don't test the contents of the plist file.
     # 
     # 
-https://github.com/servo/servo/pull/42989	(@simonwuelker, #42989)	 script: Set relatedTarget for {mouse, pointer}x{enter, leave, out, over} events (#42989)
++https://github.com/servo/servo/pull/42989	(@simonwuelker, #42989)	 script: Set relatedTarget for {mouse, pointer}x{enter, leave, out, over} events (#42989)
+    dom; pointer and mouse events now have relatedTarget
     ^ commit 036cb9a68cc64595c02ebbeef904d5969c979c07
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # 
@@ -1400,7 +1405,8 @@ https://github.com/servo/servo/pull/43009	(@yezhizhen, #43009)	pixels: Properly 
     # 
     # Testing: We have new tests for LazyGenericCallback and wpt test run here: https://github.com/Narfinger/servo/actions/runs/21246091767
     # 
-https://github.com/servo/servo/pull/42991	(@simonwuelker, #42991)	script: Use stylo dom apis for querySelector/querySelectorAll (#42991)
++https://github.com/servo/servo/pull/42991	(@simonwuelker, #42991)	script: Use stylo dom apis for querySelector/querySelectorAll (#42991)
+    dom; [mdn] more conformant querySelector() and querySelectorAll() on Element
     ^ commit 78efa1860dedde6e5db3a2e2f5b93974952b7aea
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Stylo has ready-to-use apis for `Node::querySelector` and `Node::querySelectorAll`. We currently instead set up our own selector queries, which is neither as correct nor as performant, so this change makes servo use the stylo interfaces instead.
@@ -2484,7 +2490,8 @@ https://github.com/servo/servo/pull/43105	(@mrobinson, #43105)	layout: Revert ch
     # 
     # Testing: These changes are really only testable via the manual test `tests/html/form-control-visuals.html`.
     # 
-https://github.com/servo/servo/pull/43103	(@shubhamg13, #43103)	script: Add missing steps for parsing a legacy font size (#43103)
++https://github.com/servo/servo/pull/43103	(@shubhamg13, #43103)	script: Add missing steps for parsing a legacy font size (#43103)
+    dom; more conformant <font size>
     ^ commit c32d9f51afe4cb6787124bd99815b94b1caf9bc3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # In this change clamps legacy font size value of the `<font>` element to the range [1,7] according to steps 10, 11 of [rules-for-parsing-a-legacy-font-size](https://html.spec.whatwg.org/multipage/rendering.html#rules-for-parsing-a-legacy-font-size).
@@ -2664,7 +2671,8 @@ https://github.com/servo/servo/pull/43106	(@kkoyung, #43106)	script: Implement "
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/43125	(@shubhamg13, #43125)	fonts: Fix font-weight matching behavior for "simple" font families (#43125)
++https://github.com/servo/servo/pull/43125	(@shubhamg13, #43125)	fonts: Fix font-weight matching behavior for "simple" font families (#43125)
+    layout; more conformant ‘font-weight’ matching when no font matches exactly
     ^ commit b9b95e34a26cd6154212bc4d16f601739b39ed29
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This aligns with behavior with spec, by selecting `BOLD` for the weights greater than 500.
@@ -2676,7 +2684,8 @@ https://github.com/servo/servo/pull/43125	(@shubhamg13, #43125)	fonts: Fix font-
     # - Firefox: https://phabricator.services.mozilla.com/D274775
     # 
     # Testing: This causes a WPT test to start passing.
-https://github.com/servo/servo/pull/43127	(@jschwe, #43127)	devcontainer: Add a dockerignore (#43127)
++https://github.com/servo/servo/pull/43127	(@jschwe, #43127)	devcontainer: Add a dockerignore (#43127)
+    dev; part of new devcontainer for servo development
     ^ commit 4fa57ff0fffa007d1d6e31e39322a736550e08f0
     # Rename the dockerfile and add a dockerignore. This reduces the size of the build-context greatly. 
     # Renaming is a preparation for later adding more possible dockerfiles (e.g. fedora based etc).
@@ -2692,7 +2701,8 @@ https://github.com/servo/servo/pull/43127	(@jschwe, #43127)	devcontainer: Add a 
     # 
     # Testing: Existing tests are passing
     # 
-https://github.com/servo/servo/pull/42566	(@shubhamg13, #42566)	layout: Support `svg` in `border-image-source` (#42566)
++https://github.com/servo/servo/pull/42566	(@shubhamg13, #42566)	layout: Support `svg` in `border-image-source` (#42566)
+    layout; ‘border-image-source’ (the image part of ‘border-image’) now supports svg
     ^ commit 66e1350dab108238a849edf4d6ae6233c91906b3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Extends the SVG support for `border-image-source`
@@ -2723,7 +2733,8 @@ https://github.com/servo/servo/pull/43134	(@sagudev, #43134)	chore: Bump mozangl
     # Testing: Added a new test
     # Fixes: Part of #36027 
     # 
-https://github.com/servo/servo/pull/43131	(@jschwe, @sagudev, #43131)	devcontainer: Add workflow to build and publish Ubuntu amd64 devcontainer (#43131)
++https://github.com/servo/servo/pull/43131	(@jschwe, @sagudev, #43131)	devcontainer: Add workflow to build and publish Ubuntu amd64 devcontainer (#43131)
+    dev; towards new devcontainer for servo development (not complete yet; see #40656)
     ^ commit 6f15489be65b9acb38e162ac0f4e734bc5fae84b
     # This adds a simple workflow to build and push the devcontainer to our github container registry. 
     # This would allow us (in a follow-up PR) to use the prebuild devcontainer image from ghcr, instead of needing to first build the image from scratch, which can save quite a bit of time.
@@ -2808,7 +2819,8 @@ https://github.com/servo/servo/pull/43138	(@yezhizhen, #43138)	script: Replace t
     # 
     # Testing: CI testing of this change should give us good confidence. Manual testing of `./mach doc` and `./mach build` showed no issues on macos. [Full try run](https://github.com/jschwe/servo/actions/runs/22909562747)
     # 
-https://github.com/servo/servo/pull/43151	(@simonwuelker, #43151)	script: Accurately measure timing of `DOMContentLoaded` event (#43151)
++https://github.com/servo/servo/pull/43151	(@simonwuelker, #43151)	script: Accurately measure timing of `DOMContentLoaded` event (#43151)
+    perf; [git show] more accurate PerformanceNavigationTiming results for DOMContentLoaded
     ^ commit 2697f3a91a55367177589fbbb122046877c6d971
     # We should measure the time it takes to fire the `DOMContentLoaded` event, but we were including the time it takes for the task on the relevant task source to be run.
     # 
@@ -3096,7 +3108,8 @@ https://github.com/servo/servo/pull/43027	(@minghuaw, @xiaochengh, @Loirooriol, 
     # Testing: Check `mach test-devtools` and manual test
     # Part of: #36027
     # 
-https://github.com/servo/servo/pull/43178	(@simonwuelker, #43178)	script: Fire an error event when event handler fails to compile (#43178)
++https://github.com/servo/servo/pull/43178	(@simonwuelker, #43178)	script: Fire an error event when event handler fails to compile (#43178)
+    crash dom; [git show] fire ‘error’ events when event handlers (attributes that start with “on”) contain syntax errors, and fix crash when they contain runtime errors
     ^ commit c84edc0403709285954e12076330e07d51b47c81
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # For the longest time we've had a `dispatch_event` boolean flag in our error reporting code that determines whether or not to fire an `error` event. It was only set to `false` in the event handler code due to a double borrow that would occur otherwise. It seems that this is no longer a problem, so we can remove the flag and correctly fire the event in that case too.
@@ -3110,7 +3123,8 @@ https://github.com/servo/servo/pull/43178	(@simonwuelker, #43178)	script: Fire a
     # Part of #38901 
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/43139	(@jschwe, #43139)	devcontainer: Use new prebuilt devcontainer image. (#43139)
++https://github.com/servo/servo/pull/43139	(@jschwe, #43139)	devcontainer: Use new prebuilt devcontainer image. (#43139)
+    dev; part of new devcontainer for servo development
     ^ commit 04ca254f843ed650d3e5b14e5693ad51a60cc84b
     # Follow-up to #43131.
     # 
@@ -5123,7 +5137,8 @@ https://github.com/servo/servo/pull/43357	(@shubhamg13, #43357)	wpt: Add a delay
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/42833	(@shubhamg13, #42833)	layout: Do not consider broken images as LCP candidates (#42833)
++https://github.com/servo/servo/pull/42833	(@shubhamg13, #42833)	layout: Do not consider broken images as LCP candidates (#42833)
+    perf; ignore broken images (rippy!!) for Largest Contentful Paint timings
     ^ commit efe28fb99e3571e1e53012ae555a50afa20cb844
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Broken Image Icons are not worthy for LCP candidates.
@@ -5664,7 +5679,7 @@ https://github.com/servo/servo/pull/40365	(@pylbrecht, @Gae24, #40365)	Add basic
     # Testing: Not tested in CI. Compiled the crate locally, but without cross-compiling for android
     # Fixes: #43462
     # 
-https://github.com/servo/servo/pull/43469	(@jschwe, #43469)	servoshell: Fix function_casts_as_integer lint (#43469)
+-https://github.com/servo/servo/pull/43469	(@jschwe, #43469)	servoshell: Fix function_casts_as_integer lint (#43469)
     ^ commit e4eca03a7bba46853d1d8f4adba5d4769a24f389
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Found when building with Rust 1.94. The lint itself only complains about the direct function ptr to usize cast and recommends an intermediate `as *const ()` cast. We also don't need provenance here, so we can also use the more explicit .addr() cast.
@@ -6588,7 +6603,8 @@ https://github.com/servo/servo/pull/43084	(@yoursanonymous, @Loirooriol, #43084)
     # Testing: Existing tests
     # Part of: #36027 
     # Depends on: #43566
-https://github.com/servo/servo/pull/43573	(@jschwe, #43573)	servoshell: Remove --userscripts option (#43573)
++https://github.com/servo/servo/pull/43573	(@jschwe, #43573)	servoshell: Remove --userscripts option (#43573)
+    servoshell; --userscripts has been removed, but it can be reinstated if needed at any point as a wrapper around the new UserContentManager api
     ^ commit 64afd05d11bd28db4751d04a221a911b27b5167b
     ^ /!\ contains servoshell changes! does it affect the user experience?
     ^ /!\ may contain changes to EXPERIMENTAL_PREFS
