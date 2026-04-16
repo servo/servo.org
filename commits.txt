@@ -940,7 +940,8 @@ https://github.com/servo/servo/pull/42984	(@kkoyung, #42984)	script: Resolve nam
     # This is equivalent the changes on ML-KEM in #42918 in which I forgot to include the counterpart for ML-DSA :(
     # 
     # Testing: Refactoring. Existing tests suffice.
-https://github.com/servo/servo/pull/42529	(@longvatrong111, #42529)	stylo: Enable system color (#42529)
++https://github.com/servo/servo/pull/42529	(@longvatrong111, #42529)	stylo: Enable system color (#42529)
+    style; [git show + stylo patch + spec + reverts] ‘<system-color>’ values: ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, ‘WindowText’ (all other changes were reverted in #43105 and #43107)
     ^ commit 712b7b3b639647dbeac8957b5973a3d60d132f12
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Enable system color:
@@ -2033,7 +2034,8 @@ https://github.com/servo/servo/pull/43067	(@mrobinson, @Loirooriol, #43067)	scri
     # 
     # Testing: This fixes a WPT test.
     # 
-https://github.com/servo/servo/pull/43066	(@mrobinson, #43066)	script: Readily accept all event names as `Atom`s (#43066)
++https://github.com/servo/servo/pull/43066	(@mrobinson, #43066)	script: Readily accept all event names as `Atom`s (#43066)
+    perf; [git show] avoid String allocation when constructing DOM events within servo
     ^ commit 291e9e57cbefb06e1d2f1656cc705174e79ae03b
     # Accepting the name of the event as a `DOMString` means that when events
     # are constructed from within Servo (for instance via input event
@@ -2179,7 +2181,8 @@ https://github.com/servo/servo/pull/43074	(@webbeef, #43074)	script: Coalesce wh
     # 
     # Testing: This should not change behavior and is thus covered by existing tests.
     # 
-https://github.com/servo/servo/pull/43092	(@mrobinson, #43092)	Update comment showing how to override WebRender dependency in `Cargo.toml` (#43092)
++https://github.com/servo/servo/pull/43092	(@mrobinson, #43092)	Update comment showing how to override WebRender dependency in `Cargo.toml` (#43092)
+    api; towards crates.io release
     ^ commit 01a3b60bf62e258724d6de661e4c5e0c4286c185
     # WebRender is now a crates.io dependency so the previous lines need to
     # be updated to be like the ones for other crates.io. dependnecies.
@@ -2472,7 +2475,8 @@ https://github.com/servo/servo/pull/43101	(@xZaisk, @yezhizhen, #43101)	script: 
     # Testing: The problem is fixed, for both executable and zip, see [this](https://github.com/servo/servo/actions/runs/22841763218/job/66249263625). Bencher [works too](https://github.com/servo/servo/actions/runs/22843667165/job/66256020144).
     # Fixes: #43102, where the windows artifact keeps missing.
     # 
-https://github.com/servo/servo/pull/43105	(@mrobinson, #43105)	layout: Revert changes from #42529 to button control style (#43105)
++https://github.com/servo/servo/pull/43105	(@mrobinson, #43105)	layout: Revert changes from #42529 to button control style (#43105)
+    style; reverts part of #42529
     ^ commit 204ededfbdf8bff47e4fa487ef8e6bc726cfd8cb
     # I believe that these changes (part of #42529) were likely made in error. Servo
     # button controls do not follow the system theme, so system colors should not be
@@ -2528,7 +2532,8 @@ https://github.com/servo/servo/pull/43061	(@yezhizhen, #43061)	css: Enable `jump
     # Testing: New passing WPT. Several in `moveBefore` goes from TIMEOUT to `FAIL`, as the API is not enabled in Servo. Added 4 new tests to test the proper rendering.
     # Fixes: #43060
     # 
-https://github.com/servo/servo/pull/43088	(@mrobinson, #43088)	script_bindings: Reduce the amount of borrowing inside `DOMString` (#43088)
++https://github.com/servo/servo/pull/43088	(@mrobinson, #43088)	script_bindings: Reduce the amount of borrowing inside `DOMString` (#43088)
+    perf; reduce RefCell borrow ops in DOMString
     ^ commit f0fc893561209d9ea8385893d9d1ef344057c33b
     # For many operations, `DOMString` needs to convert the internal string
     # storage to a Rust `String` and then borrow again to actually do the
@@ -2718,7 +2723,8 @@ https://github.com/servo/servo/pull/43106	(@kkoyung, #43106)	script: Implement "
     # 
     # Fixes: #42098
     # 
-https://github.com/servo/servo/pull/43134	(@sagudev, #43134)	chore: Bump mozangle to 0.5.5 (#43134)
++https://github.com/servo/servo/pull/43134	(@sagudev, #43134)	chore: Bump mozangle to 0.5.5 (#43134)
+    ports; [PR linked in description] part of porting to freebsd
     ^ commit 764ef29de500b74ed851245f24aba464e933ee80
     # For https://github.com/servo/servo/pull/43116
 +https://github.com/servo/servo/pull/43135	(@atbrakhi, @eerii, #43135)	devtools: Add test for `StepIn`, `StepOut` and `StepOver` hooks (#43135)
@@ -2741,7 +2747,8 @@ https://github.com/servo/servo/pull/43134	(@sagudev, #43134)	chore: Bump mozangl
     # This a part of #40656.
     # 
     # Testing: workflow run in my fork: https://github.com/jschwe/servo/actions/runs/22897536246/job/66435358111 -> created the following image: https://github.com/jschwe/servo/pkgs/container/servo%2Fdevcontainer-ubuntu
-https://github.com/servo/servo/pull/43107	(@mrobinson, #43107)	deps: Update Stylo to include "Restore Servo's original form control theme colors" (#43107)
++https://github.com/servo/servo/pull/43107	(@mrobinson, #43107)	deps: Update Stylo to include "Restore Servo's original form control theme colors" (#43107)
+    style; reverts part of #42529
     ^ commit 66c7f81b6caeec84ca9e9d8d248896e94439f3d3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This change just updates the version of Stylo to a version which restores the original Servo theme colors.
@@ -3149,7 +3156,8 @@ https://github.com/servo/servo/pull/43027	(@minghuaw, @xiaochengh, @Loirooriol, 
     # 
     # <img width="214" height="131" alt="image" src="https://github.com/user-attachments/assets/4894bca6-2d56-4d48-ac10-96f23fd70f2c" />
     # 
-https://github.com/servo/servo/pull/43185	(@mrobinson, #43185)	wpt: Use the default Servo user agent for WPT tests (#43185)
+-https://github.com/servo/servo/pull/43185	(@mrobinson, #43185)	wpt: Use the default Servo user agent for WPT tests (#43185)
+    ;test; test only
     ^ commit f0c5b37c24b78f44565e7eac53abdda85bef580c
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Some WPT tests [^1] rely on the user agent reflecting that of a real
@@ -3305,7 +3313,8 @@ https://github.com/servo/servo/pull/43191	(@simonwuelker, #43191)	script: Log un
     # Testing: Should be covered by existing tests. We don't test if this allows vendored builds or published builds.
     # Fixes: Partial fix for #43145
     # 
-https://github.com/servo/servo/pull/43190	(@lukewarlow, #43190)	prefs: Remove `dom_command_invokers_enabled` (#43190)
++https://github.com/servo/servo/pull/43190	(@lukewarlow, #43190)	prefs: Remove `dom_command_invokers_enabled` (#43190)
+    dom; [git show] ship CommandEvent and (idl) command on HTMLButtonElement
     ^ commit a27bd9dde7903c8c5a53bfd6aafe7e5ad11e1271
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -3332,7 +3341,8 @@ https://github.com/servo/servo/pull/43190	(@lukewarlow, #43190)	prefs: Remove `d
     # Testing: Covered by CI testing, which involves building servo and the macos dmg and windows installer. 
     # 
     # Fixes: Part of #43145
-https://github.com/servo/servo/pull/43206	(@mrobinson, #43206)	prefs: Move `Opts::user_stylesheets` to `ServoShellPreferences` (#43206)
++https://github.com/servo/servo/pull/43206	(@mrobinson, #43206)	prefs: Move `Opts::user_stylesheets` to `ServoShellPreferences` (#43206)
+    api; breaking change! Opts::user_stylesheets has been removed (but it’s still supported in libservo UserContentManager and servoshell --user-stylesheet)
     ^ commit 8432a21d638a7501d36eca00b2a4320bd3ba20fa
     ^ /!\ contains servoshell changes! does it affect the user experience?
     ^ /!\ may contain changes to EXPERIMENTAL_PREFS
@@ -3350,7 +3360,8 @@ https://github.com/servo/servo/pull/43210	(@yezhizhen, @mrobinson, #43210)	embed
     # > /// right and down (revealing more content left and up).
     # 
     # I don't know about other people emebedding Servo, but I have always been thinking reversely.
-https://github.com/servo/servo/pull/43128	(@mrobinson, #43128)	paint: Add support for a blinking text caret (#43128)
++https://github.com/servo/servo/pull/43128	(@mrobinson, #43128)	paint: Add support for a blinking text caret (#43128)
+    editing; [git show] caret blinks now (but can be disabled with --pref editing_caret_blink_time=0)
     ^ commit ea995155f81626ab5caeb5bc5fe7f06fc4153796
     ^ /!\ may contain changes to feature flags
     # This change adds support for a blinking text caret using WebRender
@@ -3429,7 +3440,8 @@ https://github.com/servo/servo/pull/43212	(@simonwuelker, #43212)	Everywhere: Re
     # 
     # Fixes: part of #40983
     # 
-https://github.com/servo/servo/pull/43207	(@mrobinson, #43207)	prefs: Remove `Opts::nonincremental_layout` (#43207)
++https://github.com/servo/servo/pull/43207	(@mrobinson, #43207)	prefs: Remove `Opts::nonincremental_layout` (#43207)
+    api; breaking change! Opts::nonincremental_layout has been removed (it only worked properly in legacy layout)
     ^ commit c80bdd9c923e40b381df21245899bf3676d57697
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains servoshell changes! does it affect the user experience?
@@ -3598,7 +3610,8 @@ https://github.com/servo/servo/pull/43226	(@yezhizhen, #43226)	script: Free memo
     # Testing: WebGpu tests just cover its cases
     # Fixes: Partially #26488 
     # 
-https://github.com/servo/servo/pull/43205	(@mrobinson, #43205)	servo: Set all delegates and `GamepadProvider` in `WebViewBuilder` (#43205)
++https://github.com/servo/servo/pull/43205	(@mrobinson, #43205)	servo: Set all delegates and `GamepadProvider` in `WebViewBuilder` (#43205)
+    api; breaking change! WebView::set_delegate(), set_clipboard_delegate(), and set_gamepad_provider() are now WebViewBuilder::delegate(), clipboard_delegate(), and gamepad_provider()… but note that GamepadProvider has since been renamed in #43233
     ^ commit 6a20de06f453482f9b072ad6e7a598219510f075
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains servoshell changes! does it affect the user experience?
@@ -3612,7 +3625,8 @@ https://github.com/servo/servo/pull/43205	(@mrobinson, #43205)	servo: Set all de
     # Testing: There aren't currently tests for the clipboard delegate, but this
     # change should work as the corresponding parts in servoshell still compile.
     # 
-https://github.com/servo/servo/pull/43209	(@mrobinson, #43209)	prefs: Move `Opts::print_pwm` to `DiagnosticsLogging::progressive_web_metrics` (#43209)
++https://github.com/servo/servo/pull/43209	(@mrobinson, #43209)	prefs: Move `Opts::print_pwm` to `DiagnosticsLogging::progressive_web_metrics` (#43209)
+    api; breaking change! Opts::print_pwm is now DiagnosticsLogging::progressive_web_metrics
     ^ commit 5fec1395c9d4396941830430525f7765baf1ce83
     ^ /!\ contains servoshell changes! does it affect the user experience?
     ^ /!\ may contain changes to EXPERIMENTAL_PREFS
@@ -3653,7 +3667,8 @@ https://github.com/servo/servo/pull/43209	(@mrobinson, #43209)	prefs: Move `Opts
     # This PR does not touch `TimelineActor` or `FramerateActor`. These are theoretically affected by the same issue as the `InspectorActor`, but in practice neither is ever instantiated. It seems both have been effectively unreachable code since 1aab10f2 and will require more extensive work and testing that is beyond the scope of this change.
     # 
     # Testing: Updates to the `WalkerActor` and `BrowsingContextActor` are unit tested via the new `test_walker_observes_new_dom_after_nav` case in `devtools_tests.py`. There are no existing unit tests to reference for the highlighter and style actors; these have been tested manually but this PR does not introduce further automated tests. This PR also improves handling of `tabNavigated` messages to simplify the unit test written for 4c69d85.
-https://github.com/servo/servo/pull/43233	(@mrobinson, #43233)	servo: Rename `GamepadProvider` to `GamepadDelegate` (#43233)
++https://github.com/servo/servo/pull/43233	(@mrobinson, #43233)	servo: Rename `GamepadProvider` to `GamepadDelegate` (#43233)
+    api; breaking change! GamepadProvider is now GamepadDelegate, and gamepad_provider() on WebViewBuilder and WebView are now gamepad_delegate()
     ^ commit ce952368f85068a22f9d47f484b1516f506cf712
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains servoshell changes! does it affect the user experience?
@@ -4831,7 +4846,8 @@ https://github.com/servo/servo/pull/43341	(@shubhamg13, #43341)	script: Correct 
     # Testing: Should not change behavior 
     # Fixes: part of #36027 
     # 
-https://github.com/servo/servo/pull/43343	(@mrobinson, #43343)	script: Do not fire simulated click on spacebar/enter in non-state-changing elements (#43343)
++https://github.com/servo/servo/pull/43343	(@mrobinson, #43343)	script: Do not fire simulated click on spacebar/enter in non-state-changing elements (#43343)
+    dom; fix bug where pressing Space or Enter in text fields causes it to be clicked
     ^ commit 85554646487fd3d9fad97cb8fe882e0349dedec0
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Servo has for years implemented a behavior where spacebar or enter click
@@ -4845,7 +4861,8 @@ https://github.com/servo/servo/pull/43343	(@mrobinson, #43343)	script: Do not fi
     # Testing: This change adds a Servo-specific test due to the ambiguities in the specification.
     # Fixes: #39028.
     # 
-https://github.com/servo/servo/pull/43322	(@mrobinson, #43322)	script: Allow keyboard scrolling with the spacebar (#43322)
++https://github.com/servo/servo/pull/43322	(@mrobinson, #43322)	script: Allow keyboard scrolling with the spacebar (#43322)
+    input; [git show] allow scrolling with Space and Shift+Space
     ^ commit 3cd221993b4eb6a4c56f564dca7aef1004dbe5bc
     # This change allows pressing the spacebar to cause a page down or page up
     # scroll. This matches the behavior of other browsers. In addition, keyboard
@@ -5975,7 +5992,8 @@ https://github.com/servo/servo/pull/43501	(@rogerkorantenng, #43501)	script: Fix
     # **After (fix):**
     # 
     # <img width="960" alt="Screenshot From 2026-03-20 23-43-05" src="https://github.com/user-attachments/assets/99490b06-aeaa-4dcc-b10a-56336efad87d" />
-https://github.com/servo/servo/pull/43500	(@lukewarlow, #43500)	script: Add nohref reflection to HTMLAreaElement (#43500)
++https://github.com/servo/servo/pull/43500	(@lukewarlow, #43500)	script: Add nohref reflection to HTMLAreaElement (#43500)
+    dom; [git show + spec] noHref on HTMLAreaElement (has no effect per spec)
     ^ commit 74640b7719de22530e1a2592f417ded936ed109b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -5983,7 +6001,8 @@ https://github.com/servo/servo/pull/43500	(@lukewarlow, #43500)	script: Add nohr
     # 
     # Testing: Covered by WPTs
     # 
-https://github.com/servo/servo/pull/43499	(@lukewarlow, #43499)	script: Add hreflang, type and charset reflection to HTMLAnchorElement (#43499)
++https://github.com/servo/servo/pull/43499	(@lukewarlow, #43499)	script: Add hreflang, type and charset reflection to HTMLAnchorElement (#43499)
+    dom; [git show + spec] hreflang, type, charset on HTMLAnchorElement (has no effect per spec)
     ^ commit f06e67c0310e552be9e9bb69d4af8b356f35b5c0
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -5991,7 +6010,8 @@ https://github.com/servo/servo/pull/43499	(@lukewarlow, #43499)	script: Add href
     # 
     # Testing: Covered by WPTs
     # 
-https://github.com/servo/servo/pull/43502	(@lukewarlow, #43502)	script: Add usemap reflection to HTMLInputElement and HTMLObjectElement (#43502)
++https://github.com/servo/servo/pull/43502	(@lukewarlow, #43502)	script: Add usemap reflection to HTMLInputElement and HTMLObjectElement (#43502)
+    dom; [git show + spec + trying it in firefox] useMap on HTMLInputElement and HTMLObjectElement (has no effect per spec)
     ^ commit ac1c86fea706d884bcc38c8a0a2b6c180614c6f9
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -6032,7 +6052,8 @@ https://github.com/servo/servo/pull/43519	(@kkoyung, #43519)	script: Rework on d
     # 
     # Testing: `./mach test-wpt tests/wpt/tests/IndexedDB/keypath_invalid.any.js`
     # Fixes: #42434 
-https://github.com/servo/servo/pull/43518	(@lukewarlow, #43518)	script: Add longdesc reflection to HTMLIFrameElement and HTMLFrameElement (#43518)
++https://github.com/servo/servo/pull/43518	(@lukewarlow, #43518)	script: Add longdesc reflection to HTMLIFrameElement and HTMLFrameElement (#43518)
+    dom; [git show + spec] longDesc on HTMLIFrameElement and HTMLFrameElement (has no effect per spec)
     ^ commit 09b0cfce8ede068f25995fb31563627094e29d27
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -6475,7 +6496,8 @@ https://github.com/servo/servo/pull/42179	(@mishop-15, #42179)	script: Migrate f
     # 
     # Testing: Successful compilation is enough to verify the change.
     # 
-https://github.com/servo/servo/pull/43564	(@mukilan, #43564)	embedder_traits: Add more documentation to public API. (#43564)
++https://github.com/servo/servo/pull/43564	(@mukilan, #43564)	embedder_traits: Add more documentation to public API. (#43564)
+    api; [git show + review comments] improve EmbedderControl-related docs
     ^ commit 351f3d7849d5fd7f01366bba1baee60cfe825e88
     # Testing: No code changes, so testing is not required.
     # 
@@ -6604,7 +6626,7 @@ https://github.com/servo/servo/pull/43084	(@yoursanonymous, @Loirooriol, #43084)
     # Part of: #36027 
     # Depends on: #43566
 +https://github.com/servo/servo/pull/43573	(@jschwe, #43573)	servoshell: Remove --userscripts option (#43573)
-    servoshell; --userscripts has been removed, but it can be reinstated if needed at any point as a wrapper around the new UserContentManager api
+    servoshell; [asked about removal] --userscripts has been removed, but it can be reinstated if needed at any point as a wrapper around the new UserContentManager api
     ^ commit 64afd05d11bd28db4751d04a221a911b27b5167b
     ^ /!\ contains servoshell changes! does it affect the user experience?
     ^ /!\ may contain changes to EXPERIMENTAL_PREFS
@@ -6869,7 +6891,8 @@ https://github.com/servo/servo/pull/43581	(@webbeef, #43581)	bluetooth: unbreak 
     # 
     # Testing: There are new passes
     # 
-https://github.com/servo/servo/pull/43595	(@minghuaw, #43595)	layout: Do not trigger `dirty_all_nodes` when web font loading fails (#43595)
++https://github.com/servo/servo/pull/43595	(@minghuaw, #43595)	layout: Do not trigger `dirty_all_nodes` when web font loading fails (#43595)
+    perf; avoid reflow when web font fails to load
     ^ commit 75a56e567b453fe4741d72f72664ed5597e280ae
     # Currently, the `web_font_finished_loading_callback` sends a `ScriptThreadMessage::WebFontLoaded` message regardless of whether web font loading succeeds or not, which leads to dirtying all nodes in `script_thread.rs`. This creates unnecessary reflow. This PR removes the boolean field from the `WebFontLoaded` message and only sends the message when the web font loading is successful.
     # 
@@ -6921,7 +6944,8 @@ https://github.com/servo/servo/pull/43595	(@minghuaw, #43595)	layout: Do not tri
     # 
     # Fixes: #41636
     # 
-https://github.com/servo/servo/pull/43588	(@sabbCodes, #43588)	script: Use encoding-parse algorithm in Worker::Constructor (#43588)
++https://github.com/servo/servo/pull/43588	(@sabbCodes, #43588)	script: Use encoding-parse algorithm in Worker::Constructor (#43588)
+    dom; [fixes issue] outreachy? Worker constructor() now correctly resolves the url argument with the page encoding
     ^ commit ae4a5b8de572b5242111f79abf807e42a947be27
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Updated api base url to encoding_parse_a_url and wrote tests referencing the suggested format
@@ -7013,7 +7037,8 @@ https://github.com/servo/servo/pull/43615	(@yezhizhen, #43615)	cargo: Rename wor
     # Testing: [mach try (no existing cache)](https://github.com/jschwe/servo/actions/runs/23507308462/job/68418624068), [mach try #2](https://github.com/jschwe/servo/actions/runs/23508733572/job/68423715413) - i.e. 34 minutes vs. 19 minutes total runtime, and 30 m vs 15 m build time (with ideal conditions for the caching)
     # 
     # 
-https://github.com/servo/servo/pull/43610	(@lukewarlow, #43610)	script: Implement HTMLMarqueeElement type (#43610)
++https://github.com/servo/servo/pull/43610	(@lukewarlow, #43610)	script: Implement HTMLMarqueeElement type (#43610)
+    dom; [git show] HTMLMarqueeElement (no layout)
     ^ commit 04fb115a6d2059803037669aeee1547a1ef0ac3e
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -7161,7 +7186,8 @@ https://github.com/servo/servo/pull/43610	(@lukewarlow, #43610)	script: Implemen
     # Testing: No testing required.
     # 
     # Fixes: Part of #43606 
-https://github.com/servo/servo/pull/43515	(@niyabits, @Loirooriol, #43515)	layout: Display generated content for ::marker (#43515)
++https://github.com/servo/servo/pull/43515	(@niyabits, @Loirooriol, #43515)	layout: Display generated content for ::marker (#43515)
+    layout; [git show + fixes issue] ‘content’ on ‘::marker’
     ^ commit d29ef8dcd0f74a9e40188493ac0aac01a5c9fb22
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implements a fix for #43036
@@ -7267,7 +7293,8 @@ https://github.com/servo/servo/pull/43580	(@webbeef, #43580)	servo: Add a `Bluet
     # Testing: Manual testing with a build that has the `native-bluetooth` feature enabled.
     # 
     # 
-https://github.com/servo/servo/pull/43382	(@minghuaw, #43382)	font: Filter out downloaded web fonts before starting to download another web font (#43382)
++https://github.com/servo/servo/pull/43382	(@minghuaw, #43382)	font: Filter out downloaded web fonts before starting to download another web font (#43382)
+    perf; [git show] avoid downloading web fonts twice
     ^ commit 13029a9deb1e2971aa02e01ead8e8f757e44ab4f
     # Checks the web font sources and filter out the ones that are already downloaded in the `FontContext` before starting to load new ones
     # 
@@ -7396,14 +7423,15 @@ https://github.com/servo/servo/pull/43673	(@yezhizhen, #43673)	wdspec: `tagName`
     # Testing: Ran `test-devtools` and all tests passed
     # Fixes: Part of https://github.com/servo/servo/issues/43606
     # 
-https://github.com/servo/servo/pull/43681	(@mukilan, #43681)	embedder_traits: Update docs for the public API of `input_event` module (#43681)
++https://github.com/servo/servo/pull/43681	(@mukilan, #43681)	embedder_traits: Update docs for the public API of `input_event` module (#43681)
+    api; [git show] improve docs in servo::input_events
     ^ commit 75d633882517932776fb41bc45b5d6e5295a06ed
     # These are mostly formatting changes to make them consistent.
     # 
     # Testing: Not required as there are no code changes. 
     # 
     # 
-https://github.com/servo/servo/pull/43325	(@lukewarlow, @Loirooriol, #43325)	script: Refactors HTMLInputElement.rs into type specific files (#43325)
+-https://github.com/servo/servo/pull/43325	(@lukewarlow, @Loirooriol, #43325)	script: Refactors HTMLInputElement.rs into type specific files (#43325)
     ^ commit 087c50657f11afad0812eca6b3c38ac9267b5025
     # Refactors HTMLInputElement.rs to split lots of type specific input code into their own files. These SpecificInputTypes are responsible for their own shadow trees and also for element specific data such as FileInputType's filelist.
     # 
@@ -7637,7 +7665,8 @@ https://github.com/servo/servo/pull/43690	(@yezhizhen, #43690)	webdriver: Improv
     ^ commit 442c63e2d9c2bd8c06b8a019db5e71ca349e3966
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # If there are multiple header values and one of them is empty, we should append the empty string rather than skipping it. The algorithm was incorrectly advancing the operation and continuing the loop, rather than appending and later returning the `values`.
-https://github.com/servo/servo/pull/43498	(@lukewarlow, @AlexVasiluta, #43498)	script: Implement shadow tree for file input (#43498)
++https://github.com/servo/servo/pull/43498	(@lukewarlow, @AlexVasiluta, #43498)	script: Implement shadow tree for file input (#43498)
+    layout; [git show + fixes issue] improve styling of <input type=file> and support ‘::file-selector-button’
     ^ commit 563dd06e52e835e7695d4b91e8a0328040f16459
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # script: Implement shadow tree for file input
@@ -8285,7 +8314,8 @@ https://github.com/servo/servo/pull/43600	(@longvatrong111, #43600)	servo: Add `
     # 
     # Testing: Some improvements in WPT tests, with a few regressions. This change includes a Servo-specific appearance test to detect unexpected changes to the look and feel of range widgets.
     # Fixes: #22728
-https://github.com/servo/servo/pull/43778	(@sabbCodes, #43778)	script: Remove unnecessary Window::unminify_css field (#43778)
++https://github.com/servo/servo/pull/43778	(@sabbCodes, #43778)	script: Remove unnecessary Window::unminify_css field (#43778)
+    cleanup; [fixes issue] outreachy refactor
     ^ commit 4f316b7f847441fcfb30317f9129c450998d1b86
     # Initialize unminified_css_dir directly in Window::new instead of storing a separate unminify_css bool and lazily setting the dir in init_document.
     # 
@@ -8388,14 +8418,16 @@ https://github.com/servo/servo/pull/43231	(@stevennovaryo, #43231)	layout: Persi
 -https://github.com/servo/servo/pull/41739	(@TimvdLippe, @mrobinson, #41739)	Add script to show stale intermittent issues (#41739)
     ^ commit 26a1942a339e3cb5356f509ed6b8f1ae93c54c75
     # This script shows any issue which has not received any updates for over a month. This means it is no longer intermittent and therefore can be closed.
-https://github.com/servo/servo/pull/43116	(@nortti0, @nortti0, #43116)	Port Servo to FreeBSD (#43116)
++https://github.com/servo/servo/pull/43116	(@nortti0, @nortti0, #43116)	Port Servo to FreeBSD (#43116)
+    ports; servo now builds and runs on freebsd! let’s make a screenshot :3
     ^ commit 11687b3263c3ac34a0f49244444a15117cc2bf35
     # Add the minimum amount of FreeBSD-specific code to Servo, where no platform-neutral fallback exists.
     # 
     # Testing: I've succesfully built and run Servo on FreeBSD with these changes (and some fixes to dependencies). There's no functional change to any other targets. This pull request was created with Servo running on FreeBSD.
     # Fixes: #11625 
     # 
-https://github.com/servo/servo/pull/43771	(@niyabits, @niyabits, #43771)	script: move fullscreen functionality to `script/dom/fullscreen` (#43771)
++https://github.com/servo/servo/pull/43771	(@niyabits, @niyabits, #43771)	script: move fullscreen functionality to `script/dom/fullscreen` (#43771)
+    cleanup; [fixes issue] outreachy refactor
     ^ commit d9efd44c4c6a717fb9e4e95472ee0212941d7d65
     # # Checklist
     # 
