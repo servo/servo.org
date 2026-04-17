@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# usage: list-commits-by-nightly.sh <path/to/servo> [--pulls-json-path=path/to/pulls.json]
+# usage: list-commits-by-nightly.sh <path/to/servo> [--pulls-json-path=path/to/pulls.json] [--git-show-output-cache-path=path/to/cache]
 # requires: zsh, gh, jq, tac, rg, git
 set -euo pipefail -o bsdecho -o shwordsplit
 if [ $# -lt 1 ]; then >&2 sed '1d;2s/^# //;2q' "$0"; exit 1; fi
@@ -14,6 +14,10 @@ while [ $# -gt 0 ]; do
   case "$1" in
   (--pulls-json-path=*)
     pulls_json_path=${${1#--pulls-json-path=}:a}
+    shift
+    ;;
+  (--git-show-output-cache-path=*)
+    git_show_output_cache_path=${${1#--git-show-output-cache-path=}:a}
     shift
     ;;
   (*)
@@ -99,11 +103,14 @@ unset minus_commit
   # If `$minus_commit` is not yet set, we don’t know enough to list the commits
   # in this nightly, so just skip it and move on.
   if [ "${minus_commit+set}" = set ]; then
+    set --
     if [ -n "${pulls_json_path+set}" ]; then
-      ./list-commits-between.sh "$servo_repo_path" $minus_commit $commit --pulls-json-path="$pulls_json_path"
-    else
-      ./list-commits-between.sh "$servo_repo_path" $minus_commit $commit
+      set -- "$@" --pulls-json-path="$pulls_json_path"
     fi
+    if [ -n "${git_show_output_cache_path+set}" ]; then
+      set -- "$@" --git-show-output-cache-path="$git_show_output_cache_path"
+    fi
+    ./list-commits-between.sh "$servo_repo_path" $minus_commit $commit "$@"
   fi
 
   # If the head of this nightly does not have bespoke commits, we can use it

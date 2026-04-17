@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# usage: list-commits-between.sh <path/to/servo> <from commit exclusive> <to commit inclusive> [--pulls-json-path=path/to/pulls.json]
+# usage: list-commits-between.sh <path/to/servo> <from commit exclusive> <to commit inclusive> [--pulls-json-path=path/to/pulls.json] [--git-show-output-cache-path=path/to/cache]
 # requires: git
 set -euo pipefail -o bsdecho -o shwordsplit
 if [ $# -lt 1 ]; then >&2 sed '1d;2s/^# //;2q' "$0"; exit 1; fi
@@ -12,6 +12,10 @@ while [ $# -gt 0 ]; do
   case "$1" in
   (--pulls-json-path=*)
     pulls_json_path=${${1#--pulls-json-path=}:a}
+    shift
+    ;;
+  (--git-show-output-cache-path=*)
+    git_show_output_cache_path=${${1#--git-show-output-cache-path=}:a}
     shift
     ;;
   (*)
@@ -69,6 +73,13 @@ git -C "$servo_repo_path" log --reverse --pretty=$'tformat:%H\t%s\t%aE\t%(traile
     fi
     if git -C "$servo_repo_path" show --pretty= --name-only "$hash" | egrep -q '^components/config/prefs[.]rs$'; then
         printf '    ^ /!\ %s\n' 'may contain changes to feature flags'
+    fi
+
+    # If given a `--git-show-output-cache-path=`, cache the output of `git show`.
+    if [ -n "${git_show_output_cache_path+set}" ]; then
+        # show with stat (lines changed), summary (files created and deleted), and patch.
+        # enable color in the output, even though stdout is not a tty.
+        git -C "$servo_repo_path" show --color=always --stat --summary -p "$hash" > "$git_show_output_cache_path/$hash"
     fi
 
     if [ -n "${pulls_json_path+set}" ]; then
