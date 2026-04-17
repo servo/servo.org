@@ -1,24 +1,38 @@
 #!/usr/bin/env zsh
-# usage: list-commits-between.sh <path/to/servo> <from commit exclusive> <to commit inclusive> [path/to/pulls.json]
+# usage: list-commits-between.sh <path/to/servo> <from commit exclusive> <to commit inclusive> [--pulls-json-path=path/to/pulls.json]
 # requires: git
 set -euo pipefail -o bsdecho -o shwordsplit
 if [ $# -lt 1 ]; then >&2 sed '1d;2s/^# //;2q' "$0"; exit 1; fi
 missing() { >&2 echo "fatal: $1 not found"; exit 1; }
 > /dev/null command -v git || missing git
-pulls_json_path=${${4-/dev/null}:a}
+servo_repo_path=$1; shift
+from_commit_exclusive=$1; shift
+to_commit_inclusive=$1; shift
+while [ $# -gt 0 ]; do
+  case "$1" in
+  (--pulls-json-path=*)
+    pulls_json_path=${${1#--pulls-json-path=}:a}
+    shift
+    ;;
+  (*)
+    >&2 echo "fatal: unknown option: $1"
+    exit 1
+    ;;
+  esac
+done
 cd -- "$(dirname -- "${0:a}")"
 
 # Given a commit x, if git says x is grafted, then git log w..x will only log x
 # and git log x..y will log the entire history of the repo. This can happen if
 # x is missing its parents due to a shallow fetch (--depth=1), in which case you
 # should fetch it again with --unshallow. Or something weirder may be happening.
-if [ "$(git -C "$1" log --pretty=\%D -n 1 "$3")" = grafted ]; then
-    >&2 echo "fatal: commit is grafted: $3"
+if [ "$(git -C "$servo_repo_path" log --pretty=\%D -n 1 "$to_commit_inclusive")" = grafted ]; then
+    >&2 echo "fatal: commit is grafted: $to_commit_inclusive"
     exit 1
 fi
 
 IFS=$'\t'
-git -C "$1" log --reverse --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,valueonly,separator=%x09)' "$2".."$3" \
+git -C "$servo_repo_path" log --reverse --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,valueonly,separator=%x09)' "$from_commit_exclusive".."$to_commit_inclusive" \
 | while read -r hash subject author coauthors; do
     pull_number=$(printf \%s\\n "$subject" | sed -E 's@.*[(]#([^)]+)[)].*@\1@')
     url=https://github.com/servo/servo/pull/$pull_number
@@ -38,27 +52,26 @@ git -C "$1" log --reverse --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-auth
 
     # Hopefully helpful hints about the contents of the patch.
     printf '    ^ commit %s\n' "$hash"
-    if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^components/servo/'; then
+    if git -C "$servo_repo_path" show --pretty= --name-only "$hash" | egrep -q '^components/servo/'; then
         printf '    ^ /!\ %s\n' 'contains libservo changes! does it affect the embedder?'
     fi
-    if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^ports/servoshell/'; then
+    if git -C "$servo_repo_path" show --pretty= --name-only "$hash" | egrep -q '^ports/servoshell/'; then
         printf '    ^ /!\ %s\n' 'contains servoshell changes! does it affect the user experience?'
     fi
-    if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^tests/wpt/meta/'; then
+    if git -C "$servo_repo_path" show --pretty= --name-only "$hash" | egrep -q '^tests/wpt/meta/'; then
         printf '    ^ /!\ %s\n' 'contains changes to WPT expectations! it probably affects the web platform'
     fi
-    if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '[.]webidl$'; then
+    if git -C "$servo_repo_path" show --pretty= --name-only "$hash" | egrep -q '[.]webidl$'; then
         printf '    ^ /!\ %s\n' 'contains WebIDL changes! did we ship a new API?'
     fi
-    if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^ports/servoshell/prefs[.]rs$'; then
+    if git -C "$servo_repo_path" show --pretty= --name-only "$hash" | egrep -q '^ports/servoshell/prefs[.]rs$'; then
         printf '    ^ /!\ %s\n' 'may contain changes to EXPERIMENTAL_PREFS'
     fi
-    if git -C "$1" show --pretty= --name-only "$hash" | egrep -q '^components/config/prefs[.]rs$'; then
+    if git -C "$servo_repo_path" show --pretty= --name-only "$hash" | egrep -q '^components/config/prefs[.]rs$'; then
         printf '    ^ /!\ %s\n' 'may contain changes to feature flags'
     fi
 
-    # Check if `$4` was set, but use `$pulls_json_path` below.
-    if [ -n "${4+set}" ]; then
+    if [ -n "${pulls_json_path+set}" ]; then
         # Get the PR description, strip carriage returns and HTML markup, word wrap to 120 without joining existing
         # lines, character wrap to 120, stop before any `---` line, delete empty lines, indent it with four spaces,
         # then print the result.
@@ -69,6 +82,6 @@ git -C "$1" log --reverse --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-auth
         # Print the commit message body, with a hard wrap and an indent.
         # This doesn’t work too well, because our repo is configured to concatenate the PR commit
         # messages, which often contain a subject only, rather than using the PR description.
-        git -C "$1" log -n 1 --pretty=$'tformat:%w(120,4,4)%b' "$hash" | sed -E '/^ *$/d;/^    Signed-off-by: /d'
+        git -C "$servo_repo_path" log -n 1 --pretty=$'tformat:%w(120,4,4)%b' "$hash" | sed -E '/^ *$/d;/^    Signed-off-by: /d'
     fi
 done

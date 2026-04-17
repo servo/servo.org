@@ -34,7 +34,7 @@ To copy the output to your clipboard for a specific calendar month only:
 $ tools/list-commits-by-nightly.sh ~/code/servo 2>&1 | tee /dev/stderr | sed '/^>>> 2025-01-/,/^>>> 2025-02-/!d' | xclip -sel clip
 ```
 
-**NOTE:** this will display the squash commit message of each commit, which has historically been less useful than the pull request description. To display pull request descriptions instead, pass in a pulls.json as documented in [§ Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates).
+**NOTE:** this will display the squash commit message of each commit, which has historically been less useful than the pull request description. To display pull request descriptions instead, pass in a pulls.json with `--pulls-json-path=` as documented in [§ Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates).
 
 ## How to list this year’s pull request contributors
 
@@ -414,7 +414,7 @@ The suggested workflow for efficiently triaging commits is as follows:
 ```
 $ rm tools/runs.json  # Optional: clear cached list of nightly builds
 $ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-2025-02.json
-$ tools/list-commits-by-nightly.sh ~/code/servo tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
+$ tools/list-commits-by-nightly.sh ~/code/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
 ```
 
 - Open commits.txt — for the best ergonomics, set the language mode to **Diff**, then **Fold All**
