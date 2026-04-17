@@ -92,7 +92,8 @@ https://github.com/servo/servo/pull/42926	(@yezhizhen, #42926)	paint: Track whet
     # Testing: Added a WPT test.
     # Fixes: https://github.com/servo/servo/issues/42921
     # 
-https://github.com/servo/servo/pull/42927	(@kkoyung, #42927)	script: Reorder reading algorithm and data arguments in WebCrypto (#42927)
++https://github.com/servo/servo/pull/42927	(@kkoyung, #42927)	script: Reorder reading algorithm and data arguments in WebCrypto (#42927)
+    dom; more efficient crypto.subtle.encrypt(), decrypt(), sign(), verify(), digest(), importKey(), unwrapKey(), decapsulateKey(), decapsulateBits() per spec update (w3c/webcrypto#422, 426)
     ^ commit 0eeb44c5e9202425864f21e743c659f0c171637c
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # The specification of WebCrypto and Modern Algorithms in WebCrypto has updated to reorder reading algorithm and data arguments in "encrypt", "decrypt", "sign", "verify", "digest", "importKey", "unwrapKey", "decapsulateKey" and "decapsulateBits" methods. This patch updates our implementation accordingly.
@@ -929,7 +930,8 @@ https://github.com/servo/servo/pull/42652	(@yezhizhen, #42652)	`pointerevent_sup
     # 
     # 
     # Testing: New tests start to pass. Most related tests still fail because we dispatch mouse and pointer events in the wrong order.
-https://github.com/servo/servo/pull/42984	(@kkoyung, #42984)	script: Resolve name referencing issue during ML-DSA export (#42984)
++https://github.com/servo/servo/pull/42984	(@kkoyung, #42984)	script: Resolve name referencing issue during ML-DSA export (#42984)
+    dom; no functional change. more conformant SubtleCrypto per spec update (WICG/webcrypto-modern-algos#47, 48)
     ^ commit 059d39aead0277c9132739f5548eb9d8f83e5b7a
     # In the WebCrypto modern algorithm specification, the issue (https://github.com/WICG/webcrypto-modern-algos/issues/47) on algorithm name referencing in the export key operation of ML-KEM had been resolved by the following commit in the specification repository:
     # 
@@ -1878,7 +1880,8 @@ https://github.com/servo/servo/pull/42946	(@yezhizhen, #42946)	webdriver: Enable
     # 2. We shouldn't refetch when attribute values are the same
     # 3. We shouldn't fetch when the type attribute doesn't match
     # 4. We should fetch, even if the media doesn't match. Only when the media is then changed, we should re-evaluate.
-https://github.com/servo/servo/pull/43055	(@kkoyung, #43055)	script: Use `CryptoAlgorithm` in name fields of subtle dictionaries (#43055)
++https://github.com/servo/servo/pull/43055	(@kkoyung, #43055)	script: Use `CryptoAlgorithm` in name fields of subtle dictionaries (#43055)
+    perf; avoid string comparisons on SubtleCrypto algorithm names
     ^ commit 8df3819a9ef256d5f0c1f7d4721e270e2cbc75d4
     # We currently use `String` to store cryptographic algorithm name in subtle dictionaries in WebCrypto code. The algorithm normalization guarantees that there are only a limited number of possible strings that can be assigned to the name fields.
     # 
@@ -2119,7 +2122,8 @@ https://github.com/servo/servo/pull/43067	(@mrobinson, @Loirooriol, #43067)	scri
     # Testing: This is a very invasive change, and there are bound to be scripts / places I have overlooked. Searching for usages of `servo` is very hard, since it's also the name of the library.
     # Try run: https://github.com/servo/servo/actions/runs/22637676818
     # 
-https://github.com/servo/servo/pull/43073	(@kkoyung, #43073)	script: Implement `SubtleCrypto.getPublicKey` method with X25519 support (#43073)
++https://github.com/servo/servo/pull/43073	(@kkoyung, #43073)	script: Implement `SubtleCrypto.getPublicKey` method with X25519 support (#43073)
+    dom; crypto.subtle.getPublicKey() starting with X25519
     ^ commit 1c449ed53b13233de535a34c34c6b1be0862383c
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -2196,7 +2200,8 @@ https://github.com/servo/servo/pull/43074	(@webbeef, #43074)	script: Coalesce wh
     # 
     # Testing: This does not change functionality, so should be covered by existing tests.
     # 
-https://github.com/servo/servo/pull/43093	(@kkoyung, #43093)	script: Implement "getPublicKey" operations of RSA algorithms (#43093)
++https://github.com/servo/servo/pull/43093	(@kkoyung, #43093)	script: Implement "getPublicKey" operations of RSA algorithms (#43093)
+    dom; crypto.subtle.getPublicKey() for RSASSA-PKCS1-v1_5, RSA-PSS, and RSA-OAEP
     ^ commit d472788f107a1e18141cb2e0f3cda7396cb542e7
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement "getPublicKey" operations of RSASSA-PKCS1-v1_5, RSA-PSS and RSA-OAEP. The steps are implemented at `rsa_common.rs` shared by the three RSA algorithms.
@@ -2545,7 +2550,8 @@ https://github.com/servo/servo/pull/43061	(@yezhizhen, #43061)	css: Enable `jump
     # 
     # Testing: This is just a minor optimization, so should be covered by existing tests.
     # 
-https://github.com/servo/servo/pull/43106	(@kkoyung, #43106)	script: Implement "getPublicKey" operations of ECDSA and ECDH (#43106)
++https://github.com/servo/servo/pull/43106	(@kkoyung, #43106)	script: Implement "getPublicKey" operations of ECDSA and ECDH (#43106)
+    dom; crypto.subtle.getPublicKey() for ECDSA and ECDH
     ^ commit c3060385bcbde16b4a56ab545b07148e33b5d9d1
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement "getPublicKey" operations of ECDSA and ECDH. The steps are implemented at the new submodule `ec_common` shared by ECDSA and ECDH.
@@ -4510,7 +4516,8 @@ https://github.com/servo/servo/pull/43301	(@yezhizhen, #43301)	script: Skip RAII
     # 
     # Testing: Manual as well as current tests are passing.
     # Fixes: part of #36027 
-https://github.com/servo/servo/pull/43315	(@kkoyung, #43315)	script: ML-KEM/ML-DSA PKCS8 keys in non-seed-only formats (#43315)
++https://github.com/servo/servo/pull/43315	(@kkoyung, #43315)	script: ML-KEM/ML-DSA PKCS8 keys in non-seed-only formats (#43315)
+    dom; no functional change. more conformant SubtleCrypto per spec update (WICG/webcrypto-modern-algos#29, 34)
     ^ commit ab6a42c8cd132ec0b7a8f6ccfcaf74bae90aa7d0
     # The specification of Modern Algorithms in WebCrypto API has updated to specify how to handle ML-KEM/DSA PKCS8 keys in non-seed-only formats.
     # 
@@ -6024,7 +6031,8 @@ https://github.com/servo/servo/pull/43516	(@yezhizhen, #43516)	cargo: Use kebab 
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Continues what @jschwe has been doing.
-https://github.com/servo/servo/pull/43519	(@kkoyung, #43519)	script: Rework on dictionary conversion in SubtleCrypto (#43519)
++https://github.com/servo/servo/pull/43519	(@kkoyung, #43519)	script: Rework on dictionary conversion in SubtleCrypto (#43519)
+    dom; [git show + test cases] more efficient and conformant handling of algorithm arguments in SubtleCrypto operations
     ^ commit c23d8888634faf79dec8989d9abc566efa64ae10
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Our existing `SubtleCrypto::normalize_algorithm` implementation converts the input dictionary from a JavaScript object to a Rust struct twice. The first conversion (Step 2 to 4) under WebIDL dictionary `Algorithm` is for retrieving the `name` property to determine the desired dictionary type, and the second conversion (Step 9 to 10) is for retrieving the whole dictionary of desired WebIDL dictionary type.
@@ -6147,7 +6155,8 @@ https://github.com/servo/servo/pull/43495	(@shubhamg13, #43495)	servo: No longer
     # Fixes: #43497
     # 
     # 
-https://github.com/servo/servo/pull/43533	(@kkoyung, #43533)	script: Rename `length` parameter of cSHAKE to `outputLength` (#43533)
++https://github.com/servo/servo/pull/43533	(@kkoyung, #43533)	script: Rename `length` parameter of cSHAKE to `outputLength` (#43533)
+    dom; more conformant SubtleCrypto per spec update (WICG/webcrypto-modern-algos#52)
     ^ commit dcca7b2030adbc056ffaded0ff7c9cbeafc2cc88
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -6418,7 +6427,8 @@ https://github.com/servo/servo/pull/42149	(@shubhamg13, #42149)	layout: Consider
     # Testing: Adds a new test.
     # Part of #43507
     # 
-https://github.com/servo/servo/pull/43551	(@kkoyung, #43551)	script: Implement TurboSHAKE algorithm in WebCrypto (#43551)
++https://github.com/servo/servo/pull/43551	(@kkoyung, #43551)	script: Implement TurboSHAKE algorithm in WebCrypto (#43551)
+    dom; crypto.subtle.digest() for TurboSHAKE (no other operations for algorithm)
     ^ commit 23f78a06c795a7059a5e49f7e7d2394269654fbe
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -8224,7 +8234,8 @@ https://github.com/servo/servo/pull/43692	(@mrobinson, @lukewarlow, @Loirooriol,
     # 
     # Testing: This does not change behavior and so should be covered by existing tests.
     # 
-https://github.com/servo/servo/pull/43775	(@kkoyung, #43775)	script: Guarantee constant-time all-zero check on X25519 secret (#43775)
++https://github.com/servo/servo/pull/43775	(@kkoyung, #43775)	script: Guarantee constant-time all-zero check on X25519 secret (#43775)
+    dom; security! crypto.subtle.deriveBits() for X25519 now checks for all-zero secrets in constant time
     ^ commit c4ccb715e414e3b7be1c3268c72198c09d137b9d
     # The "deriveBits" operation of X25519 in WebCrypto throws an OperationError when the secret is all-zero value. The check must be done in constant time.
     # 
@@ -8465,7 +8476,8 @@ https://github.com/servo/servo/pull/43231	(@stevennovaryo, #43231)	layout: Persi
     # 
     # Testing: This should not change behvior so is covered by existing tests.
     # 
-https://github.com/servo/servo/pull/43773	(@kkoyung, #43773)	script: Require HMAC comparison to be constant time (#43773)
++https://github.com/servo/servo/pull/43773	(@kkoyung, #43773)	script: Require HMAC comparison to be constant time (#43773)
+    dom; [git show] security! crypto.subtle.verify() for HMAC now compares signatures in constant time
     ^ commit 4d0c29c2c7c6abd68fb917afca9692b04e20566a
     # We should compare HMAC signatures in constant time when validating user-provided signatures, to prevent leaking timing information proportional to the number of matching bytes. The WebCrypto specification has also updated to require to use constant-time comparison in HMAC signatures.
     # 
