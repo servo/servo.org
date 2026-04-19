@@ -73,7 +73,8 @@
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 01-03-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/42923	(@webbeef, #42923)	mem: fix camelCase in JSON serialization of memory reports (#42923)
++https://github.com/servo/servo/pull/42923	(@webbeef, #42923)	mem: fix camelCase in JSON serialization of memory reports (#42923)
+    perf; fix regression in about:memory output where all processes became reported as content processes
     ^ commit 7c7cd5c0a6a2f72c644a28349bfa77931935ed18
     # The change in 2d3a7c87c288 dropped the camelCase formatting of is_main_process. As a result the about:memory page claims that all processes are content processes.
     # 
@@ -457,6 +458,7 @@ https://github.com/servo/servo/pull/42926	(@yezhizhen, #42926)	paint: Track whet
     # Fixes: Part of #42934?
     # 
 https://github.com/servo/servo/pull/42935	(@webbeef, #42935)	script: Mark disabled elements pointed at and elements targets of touch events as `:active` (#42935)
+    layout
     ^ commit 4487e0222a9e80ac60a8ca6e15f651f42227fc6a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This implements the "If the element is [being actively pointed at](https://html.spec.whatwg.org/multipage/semantics-other.html#being-actively-pointed-at)" part of https://html.spec.whatwg.org/multipage/semantics-other.html#selector-active
@@ -497,6 +499,7 @@ https://github.com/servo/servo/pull/42935	(@webbeef, #42935)	script: Mark disabl
     # Fixes: Partially #26488 
     # 
 https://github.com/servo/servo/pull/42949	(@shubhamg13, #42949)	layout: Add image_url to `ImageInfo` struct (#42949)
+    dom
     ^ commit 062bb35ac5deddc00b9d56da0f7f4c38b39074fc
     # This just adds URL to pass to ImageFragment for LargestContentfulPaint Entry
     # 
@@ -538,6 +541,7 @@ https://github.com/servo/servo/pull/42949	(@shubhamg13, #42949)	layout: Add imag
     # Fixes https://github.com/servo/servo/issues/38781
     # 
 https://github.com/servo/servo/pull/42901	(@shubhamg13, #42901)	Pass Request's URL for `LargestContentfulPaint` Entry (#42901)
+    dom
     ^ commit 77e4bfbcc4be7da5e9c32bbec65c078e5e55b738
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -813,7 +817,8 @@ https://github.com/servo/servo/pull/42901	(@shubhamg13, #42901)	Pass Request's U
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/42736	(@webbeef, #42736)	script: pointer events: pointerenter, pointerout, pointerleave, pointerover (#42736)
++https://github.com/servo/servo/pull/42736	(@webbeef, #42736)	script: pointer events: pointerenter, pointerout, pointerleave, pointerover (#42736)
+    dom; ‘pointerover’, ‘pointerout’, ‘pointerenter’, and ‘pointerleave’ events
     ^ commit 295e019d00a8543ae356cdcb7da2ff9ac0eff72b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -986,6 +991,7 @@ https://github.com/servo/servo/pull/42652	(@yezhizhen, #42652)	`pointerevent_sup
     # Testing: This is just a little refactor. No change in behavior expected. Successful compilation is enough to verify.
     # 
 https://github.com/servo/servo/pull/42960	(@mrobinson, @Loirooriol, @lukewarlow, #42960)	layout/fonts: Mitigate races related to quirks mode and fallback fonts (#42960)
+    layout
     ^ commit 027910e5443fea1b22f54468cf38c65ba4bac576
     # This change includes two related fixes for flakiness revealed by #42847.
     # 
@@ -1725,6 +1731,7 @@ https://github.com/servo/servo/pull/43014	(@yezhizhen, #43014)	webdriver: Do not
     # 
     # Testing: This change does not need testing because it just fixes a typo in a rustdoc comment.
 https://github.com/servo/servo/pull/42251	(@stevennovaryo, @mrobinson, #42251)	layout: Add a query for getting the effective overflow of an element and use it in `script` (#42251)
+    dom; IntersectionObserver
     ^ commit a672397f2dc9d66d582e4cbc91a5e6af9d96a80d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # In layout calculation within script, Instead of relying on the computed values for overflow, query the overflow from layout for its used value to accurately reflect whether an element establish a scroll container. This query will be used for `IntersectionObserver` as well.
@@ -2176,7 +2183,8 @@ https://github.com/servo/servo/pull/43076	(@yezhizhen, #43076)	webdriver: Use gl
     # 
     # Testing: This should not change behavior so is covered by existing tests.
     # 
-https://github.com/servo/servo/pull/43074	(@webbeef, #43074)	script: Coalesce wheel input events (#43074)
++https://github.com/servo/servo/pull/43074	(@webbeef, #43074)	script: Coalesce wheel input events (#43074)
+    perf; [fixes issue] fix sluggish scrolling on long docs.rs pages like <https://docs.rs/iced-x86/1.21.0/iced_x86/code_asm/struct.CodeAssembler.html>
     ^ commit cea658e2c059acfd7bd238f82fd634df448ac2df
     # This follows the same principle used for mouse move events, but we have to update the event parameters since we receive the delta from the previous event.
     # 
@@ -3185,7 +3193,8 @@ https://github.com/servo/servo/pull/43169	(@yezhizhen, #43169)	embedder_traits: 
     # Testing: This causes some access key tests to pass on macOS.
     # 
 >>> 2026-03-12T23:43:18Z
-https://github.com/servo/servo/pull/43191	(@simonwuelker, #43191)	script: Log uncaught JS exceptions to the console (#43191)
++https://github.com/servo/servo/pull/43191	(@simonwuelker, #43191)	script: Log uncaught JS exceptions to the console (#43191)
+    dom; fix regression in logging uncaught JS exceptions to console
     ^ commit 333e195845d7ddae5ac9bbde3965e7ed4c7c3f49
     # The script execution code has changed a bit in the last months so some things that used to work don't anymore.
     # 
@@ -3436,7 +3445,8 @@ https://github.com/servo/servo/pull/43202	(@yezhizhen, #43202)	script: Notify em
     # 
     # Testing: Improves WPT
     # 
-https://github.com/servo/servo/pull/43212	(@simonwuelker, #43212)	Everywhere: Remove instances of clippy::redundant-clone (#43212)
++https://github.com/servo/servo/pull/43212	(@simonwuelker, #43212)	Everywhere: Remove instances of clippy::redundant-clone (#43212)
+    perf; avoid redundant clones and lint on it
     ^ commit c0ff7c1fc9c5545d854321f594eee27cabcbadb5
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains servoshell changes! does it affect the user experience?
@@ -3479,7 +3489,8 @@ https://github.com/servo/servo/pull/43212	(@simonwuelker, #43212)	Everywhere: Re
     # Testing: Changes the help message, manual testing required.
     # Fixes: #43214
     # 
-https://github.com/servo/servo/pull/43218	(@simonwuelker, #43218)	script: Mark canvas as dirty after updating image data (#43218)
++https://github.com/servo/servo/pull/43218	(@simonwuelker, #43218)	script: Mark canvas as dirty after updating image data (#43218)
+    dom; fix bug in putImageData() on CanvasRenderingContext2D that broke Minecraft4k <https://theintraclinic.com/archive/#:~:text=Minecraft4k>
     ^ commit 020c651f21921f98424f72e3bd40e333d81892e7
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This makes https://theintraclinic.com/archive/minecraft4k-js/ work correctly in servo.
@@ -3926,7 +3937,7 @@ https://github.com/servo/servo/pull/43262	(@yezhizhen, #43262)	webdriver: Always
     # Part of #38901
     # 
     # Testing: It compiles
-https://github.com/servo/servo/pull/43272	(@webbeef, #43272)	chore: remove abbreviated crate names (#43272)
+-https://github.com/servo/servo/pull/43272	(@webbeef, #43272)	chore: remove abbreviated crate names (#43272)
     ^ commit e56651ef7d6dff1ad09128f7ebd4126e2580a040
     # This remove `sm-player` and `sm-gst-render` that point to the same crates as `servo-media-player` and `servo-media-gstreamer-render`
     # 
@@ -3980,7 +3991,8 @@ https://github.com/servo/servo/pull/43275	(@yezhizhen, #43275)	webdriver: Wait f
     #     `<details>`.
     # 2. Clicking on a `<label>` should activate its target.
     # 
-https://github.com/servo/servo/pull/43276	(@simartin, #43276)	script: remove redundant ScriptWindowProxies method (#43276)
++https://github.com/servo/servo/pull/43276	(@simartin, #43276)	script: remove redundant ScriptWindowProxies method (#43276)
+    cleanup; [fixes issue] outreachy refactor?
     ^ commit 23a23f41aef85f3312c759c659795ca2c4fe6b95
     # ScriptWindowProxies's find_window_proxy and get methods are exactly the same; remove the latter.
     # 
@@ -4056,13 +4068,15 @@ https://github.com/servo/servo/pull/43282	(@yezhizhen, #43282)	script_bindings: 
     # Fixes: Partially #26488 
     # 
 >>> 2026-03-16T23:18:41Z
-https://github.com/servo/servo/pull/43286	(@simonwuelker, #43286)	script: Let `FontFaceSet` be `setlike<FontFace>` (#43286)
++https://github.com/servo/servo/pull/43286	(@simonwuelker, #43286)	script: Let `FontFaceSet` be `setlike<FontFace>` (#43286)
+    dom; more conformant FontFaceSet (--enable-experimental-web-platform-features or --pref dom_fontface_enabled)
     ^ commit 16a6494db55c5f28aef01d230d12adee5d1f8760
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # Testing: New tests start to pass.
     # 
-https://github.com/servo/servo/pull/43281	(@simonwuelker, #43281)	script: Support constructing `FontFace`s from `ArrayBuffer`s (#43281)
++https://github.com/servo/servo/pull/43281	(@simonwuelker, #43281)	script: Support constructing `FontFace`s from `ArrayBuffer`s (#43281)
+    dom; [mdn] FontFace constructor() now accepts ArrayBuffer in `source` argument (?--pref dom_fontface_enabled)
     ^ commit 708f5de35b2b21b0a78770c936c5e4ba331fa374
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # 
@@ -4545,7 +4559,8 @@ https://github.com/servo/servo/pull/43301	(@yezhizhen, #43301)	script: Skip RAII
     # Related commit in specification repository: https://github.com/WICG/webcrypto-modern-algos/commit/6543db893e9f229c1381b6af60122e9a5db93ebd
     # 
     # Testing: Only changes in spec text. No code change.
-https://github.com/servo/servo/pull/43320	(@simartin, #43320)	servoshell: fix display of tooltip showing link target URL (#43320)
++https://github.com/servo/servo/pull/43320	(@simartin, #43320)	servoshell: fix display of tooltip showing link target URL (#43320)
+    servoshell; fix bug where link hover status lines are sometimes not legible
     ^ commit f8fe8ce82cf7aebbf6a2240dd991c2c6f20f5aad
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # I noticed while investigating #42636 that whenever servoshell displays a link target URL, the associated tooltip is sometimes shown with some kind of transparency, that is usually - but not always - "fixed" after a bit of time.
@@ -4817,12 +4832,14 @@ https://github.com/servo/servo/pull/43320	(@simartin, #43320)	servoshell: fix di
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/43329	(@simonwuelker, #43329)	net: Allow opaque origins in `parse_blob_url` (#43329)
++https://github.com/servo/servo/pull/43329	(@simonwuelker, #43329)	net: Allow opaque origins in `parse_blob_url` (#43329)
+    dom; [mentioned issue] towards fixing Worker constructor() with blob `url` argument
     ^ commit 4d1dc6db4dd0667bdd4bca437f862efeb50bf676
     # Blob URLs created with opaque origins (like those in https://github.com/servo/servo/issues/43326) were rejected when parsed during `fetch`.
     # 
     # Testing: This doesn't have an impact on WPT but I've added a unit test
-https://github.com/servo/servo/pull/43323	(@simonwuelker, #43323)	script: Log unhandled promise rejections to the console (#43323)
++https://github.com/servo/servo/pull/43323	(@simonwuelker, #43323)	script: Log unhandled promise rejections to the console (#43323)
+    dom; log unhandled promise rejections to console (see also #43191)
     ^ commit 4409f817202572dc64e3b5df721ae20b71105068
     # I've also refactored the relevant function a bit, because it was unnecessarily nested and inside a huge `unsafe` block.
     # 
@@ -4847,7 +4864,8 @@ https://github.com/servo/servo/pull/43323	(@simonwuelker, #43323)	script: Log un
     # 
     # Testing: Covered by existing tests
     # 
-https://github.com/servo/servo/pull/43341	(@shubhamg13, #43341)	script: Correct data type of `poster` in `HTMLVideoElement.webidl` (#43341)
++https://github.com/servo/servo/pull/43341	(@shubhamg13, #43341)	script: Correct data type of `poster` in `HTMLVideoElement.webidl` (#43341)
+    dom; more conformant poster on HTMLVideoElement
     ^ commit 89a4a4e24cf0c290a8068aa7939828903e775c00
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -4926,7 +4944,7 @@ https://github.com/servo/servo/pull/43341	(@shubhamg13, #43341)	script: Correct 
     # Testing: Not tested, it's difficult to test try-label related changes. The fix is trivial though.
     # Fixes: #43345
     # 
-https://github.com/servo/servo/pull/43357	(@shubhamg13, #43357)	wpt: Add a delay to load to valid image to overcome false positive `PASS` (#43357)
+-https://github.com/servo/servo/pull/43357	(@shubhamg13, #43357)	wpt: Add a delay to load to valid image to overcome false positive `PASS` (#43357)
     ^ commit ba7ad0d8aa03a3486409c72e6d4e10da24aaf4e7
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This adds a delay of 2 seconds for loading a valid image. This is added to potentially overcome the race condition happening while reporting LCP, to save from false positive result.
@@ -5532,6 +5550,7 @@ https://github.com/servo/servo/pull/43357	(@shubhamg13, #43357)	wpt: Add a delay
     # 
     # Testing: No WPT change.
 https://github.com/servo/servo/pull/42771	(@stevennovaryo, #42771)	script: Fire scroll event on visual viewport scroll (#42771)
+    dom
     ^ commit c4cdcb7da8659778071709048d2e418e596941cd
     ^ /!\ contains libservo changes! does it affect the embedder?
     # On visual viewport scroll, fire the scroll event to the `VisualViewport` instances. Incidentaly, fix a bug where the pinch zoom update should be propagated to the script.
@@ -5661,6 +5680,7 @@ https://github.com/servo/servo/pull/42771	(@stevennovaryo, #42771)	script: Fire 
     # 
     # </details>
 https://github.com/servo/servo/pull/40365	(@pylbrecht, @Gae24, #40365)	Add basic support for handling module scripts in workers (#40365)
+    dom
     ^ commit 15a400b42a1f0e523fc7da52ce03910ddadf5e7a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # While we now pass a lot of worker tests, we still fail a bunch:
@@ -5731,6 +5751,7 @@ https://github.com/servo/servo/pull/40365	(@pylbrecht, @Gae24, #40365)	Add basic
     # 
     # 
 https://github.com/servo/servo/pull/42975	(@shubhamg13, #42975)	layout: Fix `first-paint` detection (#42975)
+    dom
     ^ commit a7d8f542da1f7fa6e97736fee981254f47ace5ad
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -5973,7 +5994,8 @@ https://github.com/servo/servo/pull/43468	(@yezhizhen, #43468)	webdriver: Remove
     # Testing: Verified locally that WPT tests can run to completion in debug mozjs builds, but we don't run those on CI.
     # Fixes: #43486
     # 
-https://github.com/servo/servo/pull/43454	(@simonwuelker, #43454)	style: Don't skip animations that have no keyframes (#43454)
++https://github.com/servo/servo/pull/43454	(@simonwuelker, #43454)	style: Don't skip animations that have no keyframes (#43454)
+    layout; [stylo PR description] fix ‘animationstart’ and ‘animationend’ events not being fired on animations with no keyframes
     ^ commit 3039f1a70b32efb78309ba3e3b406df0d7830fe0
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Companion PR for https://github.com/servo/stylo/pull/336
@@ -5995,6 +6017,7 @@ https://github.com/servo/servo/pull/43503	(@yezhizhen, #43503)	base: Move `gener
     # Its siblings already live in that folder. Should not leave it alone.
     # 
 https://github.com/servo/servo/pull/43501	(@rogerkorantenng, #43501)	script: Fix panic in crypto.getRandomValues when random generation fails (#43501)
+    crash
     ^ commit cfaaad4b6632f45b1cb21020231716c13b6ef796
     # ## Summary
     # 
@@ -6107,7 +6130,7 @@ https://github.com/servo/servo/pull/43516	(@yezhizhen, #43516)	cargo: Use kebab 
     # properly.
     # Fixes: #43517
     # 
-https://github.com/servo/servo/pull/43495	(@shubhamg13, #43495)	servo: No longer call `show_webview_and_wait_for_rendering_to_be_ready` in PerformancePaintTiming unit tests (#43495)
+-https://github.com/servo/servo/pull/43495	(@shubhamg13, #43495)	servo: No longer call `show_webview_and_wait_for_rendering_to_be_ready` in PerformancePaintTiming unit tests (#43495)
     ^ commit bcff95fd32a7412ccd85d0dcdc6dc01eb60dcb57
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Instead of calling `show_webview_and_wait_for_rendering_to_be_ready`, run `requestAnimationFrame` on JavaScript.
@@ -6412,6 +6435,7 @@ https://github.com/servo/servo/pull/43526	(@yezhizhen, #43526)	cargo: Rename Wor
     # Fixes: #43509
     # 
 https://github.com/servo/servo/pull/42149	(@shubhamg13, #42149)	layout: Consider `iframe` for `first-paint` (#42149)
+    dom
     ^ commit 047e3210d7e4e11d06c9c80991291692b329da96
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # `iframe` should be considered for `first-paint`. 
@@ -7512,7 +7536,7 @@ https://github.com/servo/servo/pull/43673	(@yezhizhen, #43673)	wdspec: `tagName`
     # 
     # Testing: this patch updates the relevant accessibility test in libservo
     # Fixes: part of #4344, extracted from our work in #42338
-https://github.com/servo/servo/pull/43694	(@shubhamg13, #43694)	wpt: Enable `css-device-adapt` tests (#43694)
+-https://github.com/servo/servo/pull/43694	(@shubhamg13, #43694)	wpt: Enable `css-device-adapt` tests (#43694)
     ^ commit ff691057120fff8e235182960f3afd365d0eb03d
     # Add one more directory of tests
     # 
@@ -8292,6 +8316,7 @@ https://github.com/servo/servo/pull/43764	(@yezhizhen, #43764)	servo: Wait for c
     # 
     # Testing: Unit tests cover basic functionality.
 https://github.com/servo/servo/pull/43475	(@shubhamg13, #43475)	layout: Do not consider broken image as contentful (#43475)
+    dom
     ^ commit 2d29c38e42632546df6561f485aaf9fe74fc99b8
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # 1. Broken Images are skipped for FirstContentfulPaint as per specs.
@@ -8327,7 +8352,8 @@ https://github.com/servo/servo/pull/43475	(@shubhamg13, #43475)	layout: Do not c
     # part of #38901
     # part of #43709
     # part of #43714
-https://github.com/servo/servo/pull/43600	(@longvatrong111, #43600)	servo: Add `SiteDataManager::set_cookie_for_url` and `SiteDataManager::cookies_for_url` (#43600)
++https://github.com/servo/servo/pull/43600	(@longvatrong111, #43600)	servo: Add `SiteDataManager::set_cookie_for_url` and `SiteDataManager::cookies_for_url` (#43600)
+    api; [git show now integrated into commit-triage @ 2026-04-19] SiteDataManager::cookies_for_url() and set_cookie_for_url()
     ^ commit 399c8ebe312b8775517663dbecff43789918ab86
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Expose set_cookie_for_url, get_cookie_for_url, allow applications to get/set cookies.
@@ -8433,6 +8459,7 @@ https://github.com/servo/servo/pull/43785	(@webbeef, #43785)	layout: remove nois
     # Fixes: #43091
     # 
 https://github.com/servo/servo/pull/43231	(@stevennovaryo, #43231)	layout: Persist `ExternalScrollId` for `::before` and `::after` pseudo element.  (#43231)
+    layout
     ^ commit 01689d241ac1d2401d529b751e01e59fa9765da5
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # In general, for a normal `BoxFragment`, a `ExternalScrollId` is created by directly using the `OpaqueNode::id` which is the heap address of the `Node`. But for a `BoxFragment` from a `::before` or `::after` pseudo element, we are using the next unused id (starting from zero) with an increment of two. 
