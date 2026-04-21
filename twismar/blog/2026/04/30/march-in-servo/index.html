@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>March in Servo: and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
-  <meta property="og:title" content="March in Servo: and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  <title>March in Servo: tab navigation, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="March in Servo: tab navigation, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
   
 
   
@@ -35,7 +35,7 @@
     <div class="inner-container">
       <div class="navbar-brand">
         <a href="/twismar/">
-          <img src="/twismar/svg/servo-color.svg" alt="March in Servo: and more!">
+          <img src="/twismar/svg/servo-color.svg" alt="March in Servo: tab navigation, and more!">
         </a>
 
         <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
@@ -238,12 +238,12 @@
 
 
 </script>
-          <div class="content" id="March in Servo: and more!">
+          <div class="content" id="March in Servo: tab navigation, and more!">
             
 <div class="blog-hero">
   <div class="container">
     <div class="inner-container">
-    <h1 class="title">March in Servo: and more!</h1>
+    <h1 class="title">March in Servo: tab navigation, and more!</h1>
       <p class="subtitle">ao!! wrrrrao!!</p>
       <p class="posted">Posted <span class="tag is-dark">2026-04-30</span></p>
     </div>
@@ -252,12 +252,53 @@
 
 <div class="inner-container blog-content">
   <p><a href="https://github.com/servo/servo/releases/tag/v0.1.0"><strong>Servo 0.1.0</strong></a> represents Servo’s biggest month ever, with a record <strong>530 commits</strong> and <a href="/twismar/blog/2026/04/13/servo-0.1.0-release/"><strong>our first ever release on crates.io</strong></a>!</p>
-<p>A great deal of work went into making this possible, including renaming <code>libservo</code> to just <code>servo</code> (@jschwe, #43141), making each package self-contained (@jschwe, #43180, #43165), fixing build issues (@delan, @jschwe, #43170, #43458, #43463) and <a href="http://crates.io">crates.io</a> compliance issues (@jschwe, #43459), configuring package metadata (@jschwe, @StaySafe020, #43078, #43264, #43451, #43457, #43654), and organising our dependency tree (@jschwe, @yezhizhen, @webbeef, @mrobinson, #42916, #43243, #43263, #43516, #43526, #43552, #43615, #43622, #43273, #43092).
+<p>With this release Servo becomes more accessible, thanks to <strong>tab navigation</strong> (@mrobinson, @Loirooriol, #42952, #43019, #43058, #43246, #43267, #43067) and <strong>keyboard scrolling</strong> with Space and Shift+Space (@mrobinson, #43322).</p>
+<p>We’ve shipped several new web platform features:</p>
+<ul>
+<li><strong>‘::first-letter’</strong> styling (@minghuaw, @xiaochengh, @Loirooriol, #43027)</li>
+<li><strong>‘::placeholder’</strong> styling (@stevennovaryo, #43053)</li>
+<li><strong>‘::file-selector-button’</strong> styling (@lukewarlow, @AlexVasiluta, #43498)</li>
+<li><strong>‘background-blend-mode’</strong> (@mrobinson, #43666)</li>
+<li><strong>‘content’</strong> on <strong>‘::marker’</strong> (@niyabits, @Loirooriol, #43515)</li>
+<li><strong>‘list-style-type: &lt;string&gt;’</strong> (@Loirooriol, #43111)</li>
+<li><strong>&lt;input type=range&gt;</strong> (@BudiArb, @rayguo17, @mrobinson, #41562)</li>
+<li>the <strong>accesskey</strong> attribute (@mrobinson, #43031, #43144, #43434)</li>
+<li>partial support for <strong>&lt;link rel=modulepreload&gt;</strong> (@Gae24, #42964)</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/system-color"><strong>&lt;system-color&gt;</strong></a> values in CSS (@longvatrong111, @mrobinson, #42529, #43105, #43107)</li>
+</ul>
+<p>Plus a bunch of new DOM APIs:</p>
+<ul>
+<li><strong>CommandEvent</strong> (@lukewarlow, #43190)</li>
+<li><strong>moveBefore()</strong> on <strong>Node</strong> (@lukewarlow, #41238)</li>
+<li><strong>relatedTarget</strong> on <strong>MouseEvent</strong> and <strong>PointerEvent</strong> (@simonwuelker, #42989)</li>
+<li><strong>command</strong> on <strong>HTMLButtonElement</strong> (@lukewarlow, #43190)</li>
+<li><strong>selectedOptions</strong> on <strong>HTMLSelectElement</strong> (@jakubadamw, #43017)</li>
+<li><strong>url</strong> on <strong>LargestContentfulPaint</strong> (@shubhamg13, #42901, #42949)</li>
+<li><strong>crypto.subtle.digest()</strong> for <strong>TurboSHAKE</strong> (@kkoyung, #43551)</li>
+<li><strong>crypto.subtle.getPublicKey()</strong> for <strong>X25519</strong>, <strong>RSASSA-PKCS1-v1_5</strong>, <strong>RSA-PSS</strong>, and <strong>RSA-OAEP</strong> (@kkoyung, #43073, #43093)</li>
+</ul>
+<p>Servo now fires <strong>‘pointerover’</strong>, <strong>‘pointerout’</strong>, <strong>‘pointerenter’</strong>, and <strong>‘pointerleave’</strong> events on web content (@webbeef, #42736), <strong>‘scroll’</strong> events on <strong>VisualViewport</strong> (@stevennovaryo, #42771), and <strong>‘scrollend’</strong> events on <strong>Document</strong>, <strong>Element</strong>, and <strong>VisualViewport</strong> (@abdelrahman1234567, @mrobinson, #38773).</p>
+<p>A great deal of work went into making the <strong><a href="http://crates.io">crates.io</a> release</strong> possible, including renaming <code>libservo</code> to just <code>servo</code> (@jschwe, #43141), making each package self-contained (@jschwe, #43180, #43165), fixing build issues (@delan, @jschwe, #43170, #43458, #43463) and <a href="http://crates.io">crates.io</a> compliance issues (@jschwe, #43459), configuring package metadata (@jschwe, @StaySafe020, #43078, #43264, #43451, #43457, #43654), and organising our dependency tree (@jschwe, @yezhizhen, @webbeef, @mrobinson, #42916, #43243, #43263, #43516, #43526, #43552, #43615, #43622, #43273, #43092).
 As a result, you can now take your first step towards <a href="https://book.servo.org/embedding/overview.html">embedding Servo</a> in a Rust app with:</p>
 <figure>
 <pre><code>$ cargo add servo
 </code></pre>
 </figure>
+<h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We’ve improved the default appearance of <strong>&lt;select&gt;</strong> (@lukewarlow, #43175), <strong>&lt;summary&gt;</strong> (@Loirooriol, #43111), <strong>&lt;input type=file&gt;</strong> (@lukewarlow, @AlexVasiluta, @lukewarlow, #43498, #43186), and <strong>&lt;textarea&gt;</strong> and <strong>&lt;input type=text&gt;</strong> and friends (@mrobinson, #43132).</p>
+<p>We’ve fixed a bug where pressing the arrow keys in form fields both moves the caret (good) and scrolls the page (bad) (@mrobinson, #43247).</p>
+<p>In your CSS, you can now use the <strong>&lt;system-color&gt; values</strong> ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, and ‘WindowText’ (@longvatrong111, #42529).</p>
+<p>We’ve landed partial support for using <strong>CSS <a href="https://drafts.csswg.org/css-lists/#counter">counters</a></strong> in ‘list-style-type’ on ‘display: list-item’ and ‘content’ on ‘::marker’, but the counter values themselves are not calculated yet, so all list items still read as <code>0.</code> or similar.
+In any case, you can use a &lt;counter-style-name&gt; or ‘symbols()’ in ‘list-style-type’, and ‘counter()’ and ‘counters()’ in ‘content’ (@Loirooriol, #43111).</p>
+<p>Servo now exposes several attributes that have no direct effect, but are needed for web compatibility (@lukewarlow, #43500, #43499, #43502, #43518):</p>
+<ul>
+<li><strong>noHref</strong> on <strong>HTMLAreaElement</strong></li>
+<li><strong>hreflang</strong>, <strong>type</strong>, <strong>charset</strong> on <strong>HTMLAnchorElement</strong></li>
+<li><strong>useMap</strong> on <strong>HTMLInputElement</strong> and <strong>HTMLObjectElement</strong></li>
+<li><strong>longDesc</strong> on <strong>HTMLIFrameElement</strong> and <strong>HTMLFrameElement</strong></li>
+</ul>
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
