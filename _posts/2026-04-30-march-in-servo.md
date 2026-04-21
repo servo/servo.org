@@ -47,6 +47,41 @@ $ cargo add servo
 ```
 </figure>
 
+## Embedding API
+
+Breaking changes:
+
+- [`Servo`](https://doc.servo.org/servo/struct.Servo.html)::`set­_accessibility­_active()` is now [`WebView`](https://doc.servo.org/servo/struct.WebView.html)::[`set­_accessibility­_active()`](https://doc.servo.org/servo/struct.WebView.html#method.set_accessibility_active) (@delan, @alice, #43029), to make the API harder to misuse (see the docs for more details).
+
+- What was previously named [`WebView`](https://doc.servo.org/servo/struct.WebView.html)::`pinch­_zoom()` has been renamed to [`adjust­_pinch­_zoom()`](https://doc.servo.org/servo/struct.WebView.html#method.adjust_pinch_zoom), and we’ve added a [`pinch­_zoom()`](https://doc.servo.org/servo/struct.WebView.html#method.pinch_zoom) method that lets you read the current pinch zoom level (@chrisduerr, #43228).
+
+- [`WebView`](https://doc.servo.org/servo/struct.WebView.html)::`set­_delegate()`, `set­_clipboard­_delegate()`, and `set­_gamepad­_provider()` are now [`WebViewBuilder`](https://doc.servo.org/servo/struct.WebViewBuilder.html)::[`delegate()`](https://doc.servo.org/servo/struct.WebViewBuilder.html#method.delegate), [`clipboard­_delegate()`](https://doc.servo.org/servo/struct.WebViewBuilder.html#method.clipboard_delegate), and [`gamepad­_delegate()`](https://doc.servo.org/servo/struct.WebViewBuilder.html#method.gamepad_delegate) (@mrobinson, #43205, #43233). Note that set­\_gamepad­\_<strong>provider</strong>() is now gamepad­\_<strong>delegate</strong>(), consistent with the `GamepadProvider` rename below.
+
+- [`WebViewDelegate`](https://doc.servo.org/servo/trait.WebViewDelegate.html)::[`show­_bluetooth­_device­_dialog()`](https://doc.servo.org/servo/trait.WebViewDelegate.html#method.show_bluetooth_device_dialog) has been reworked to use the same “request object” pattern as the `request­_*()` methods, giving you a [`Bluetooth­Device­Selection­Request`](https://doc.servo.org/servo/struct.BluetoothDeviceSelectionRequest.html) with clear methods (@webbeef, #43580).
+
+- `GamepadProvider` has been renamed to [`GamepadDelegate`](https://doc.servo.org/servo/trait.GamepadDelegate.html), and `gamepad­_provider()` on [`WebView`](https://doc.servo.org/servo/struct.WebView.html) has been renamed to `gamepad­_delegate()` (@mrobinson, #43233).
+
+- The empty default implementation of [`EventLoopWaker`](https://doc.servo.org/servo/trait.EventLoopWaker.html)::[`wake`](https://doc.servo.org/servo/trait.EventLoopWaker.html#tymethod.wake) has been removed, because it almost never makes sense for a new custom impl to leave the method empty (@chrisduerr, @mrobinson, #43250).
+
+- [`Opts`](https://doc.servo.org/servo/struct.Opts.html)::`print­_pwm` is now [`DiagnosticsLogging`](https://doc.servo.org/servo/struct.DiagnosticsLogging.html)::[`progressive­_web­_metrics`](https://doc.servo.org/servo/struct.DiagnosticsLogging.html#structfield.progressive_web_metrics) (@mrobinson, #43209).
+
+Removed from our API:
+
+- [`Opts`](https://doc.servo.org/servo/struct.Opts.html)::`nonincremental­_layout` (@mrobinson, #43207) – no replacement. This only really worked in legacy layout.
+
+- [`Opts`](https://doc.servo.org/servo/struct.Opts.html)::`user­_stylesheets` (@mrobinson, #43206) – use [`UserContentManager`](https://doc.servo.org/servo/struct.UserContentManager.html)::[`add­_stylesheet()`](https://doc.servo.org/servo/struct.UserContentManager.html#method.add_stylesheet) instead. This is how servoshell’s `--user-stylesheet` option works.
+
+You can now read and write cookies with [`SiteDataManager`](https://doc.servo.org/servo/struct.SiteDataManager.html)::[`cookies­_for­_url()`](https://doc.servo.org/servo/struct.SiteDataManager.html#method.cookies_for_url) and [`set­_cookie­_for­_url()`](https://doc.servo.org/servo/struct.SiteDataManager.html#method.set_cookie_for_url) (@longvatrong111, #43600).
+
+[`ClipboardDelegate`](https://doc.servo.org/servo/trait.ClipboardDelegate.html) and [`StringRequest`](https://doc.servo.org/servo/struct.StringRequest.html) are now exposed to the public API, allowing you to implement custom clipboard delegates (@jdm, @chrisduerr, #43203, #43261).
+You can pass your custom delegate to [`WebViewBuilder`](https://doc.servo.org/servo/struct.WebViewBuilder.html)::[`clipboard­_delegate()`](https://doc.servo.org/servo/struct.WebViewBuilder.html#method.clipboard_delegate).
+
+You can now get the [`EmbedderControlId`](https://doc.servo.org/servo/struct.EmbedderControlId.html) associated with an [`InputMethodControl`](https://doc.servo.org/servo/struct.InputMethodControl.html) by calling [`InputMethodControl`](https://doc.servo.org/servo/struct.InputMethodControl.html)::[`id()`](https://doc.servo.org/servo/struct.InputMethodControl.html#method.id) (@chrisduerr, #43248).
+
+[`PixelFormat`](https://doc.servo.org/servo/enum.PixelFormat.html) now implements [`Debug`](https://doc.rust-lang.org/1.92.0/core/fmt/trait.Debug.html) (@chrisduerr, @mrobinson, #43249).
+
+We’ve improved the docs for [`Servo`](https://doc.servo.org/servo/struct.Servo.html), [`ServoBuilder`](https://doc.servo.org/servo/struct.ServoBuilder.html), [`WebViewBuilder`](https://doc.servo.org/servo/struct.WebViewBuilder.html), [`RenderingContext`](https://doc.servo.org/servo/trait.RenderingContext.html) (@chrisduerr, #43229), [`EmbedderControlId`](https://doc.servo.org/servo/struct.EmbedderControlId.html), [`EmbedderControlRequest`](https://doc.servo.org/servo/enum.EmbedderControlRequest.html), [`EmbedderControlResponse`](https://doc.servo.org/servo/enum.EmbedderControlResponse.html), [`SimpleDialogRequest`](https://doc.servo.org/servo/enum.SimpleDialogRequest.html), [`AlertResponse`](https://doc.servo.org/servo/enum.AlertResponse.html), [`ConfirmResponse`](https://doc.servo.org/servo/enum.ConfirmResponse.html), [`PromptResponse`](https://doc.servo.org/servo/enum.PromptResponse.html), [`EmbedderMsg`](https://doc.servo.org/servo/enum.EmbedderMsg.html) (@mukilan, #43564), [`ResourceReaderMethods`](https://doc.servo.org/servo/resources/trait.ResourceReaderMethods.html) (@jschwe, @mrobinson, #43769), [`servo`](https://doc.servo.org/servo/)::[`input­_events`](https://doc.servo.org/servo/input_events/index.html) (@mukilan, #43681), and [`WheelDelta`](https://doc.servo.org/servo/struct.WheelDelta.html) (@yezhizhen, @mrobinson, #43210).
+
 ## More on the web platform
 
 We’ve improved the default appearance of **&lt;summary>** (@Loirooriol, #43111), **&lt;select>** (@lukewarlow, #43175), **&lt;input type=file>** (@lukewarlow, @AlexVasiluta, @lukewarlow, #43498, #43186), and **&lt;textarea>** and **&lt;input type=text>** and friends (@mrobinson, #43132).
