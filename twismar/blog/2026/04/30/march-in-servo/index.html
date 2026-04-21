@@ -284,6 +284,48 @@ As a result, you can now take your first step towards <a href="https://book.serv
 <pre><code>$ cargo add servo
 </code></pre>
 </figure>
+<h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Breaking changes:</p>
+<ul>
+<li>
+<p><a href="https://doc.servo.org/servo/struct.Servo.html"><code>Servo</code></a>::<code>set­_accessibility­_active()</code> is now <a href="https://doc.servo.org/servo/struct.WebView.html"><code>WebView</code></a>::<a href="https://doc.servo.org/servo/struct.WebView.html#method.set_accessibility_active"><code>set­_accessibility­_active()</code></a> (@delan, @alice, #43029), to make the API harder to misuse (see the docs for more details).</p>
+</li>
+<li>
+<p>What was previously named <a href="https://doc.servo.org/servo/struct.WebView.html"><code>WebView</code></a>::<code>pinch­_zoom()</code> has been renamed to <a href="https://doc.servo.org/servo/struct.WebView.html#method.adjust_pinch_zoom"><code>adjust­_pinch­_zoom()</code></a>, and we’ve added a <a href="https://doc.servo.org/servo/struct.WebView.html#method.pinch_zoom"><code>pinch­_zoom()</code></a> method that lets you read the current pinch zoom level (@chrisduerr, #43228).</p>
+</li>
+<li>
+<p><a href="https://doc.servo.org/servo/struct.WebView.html"><code>WebView</code></a>::<code>set­_delegate()</code>, <code>set­_clipboard­_delegate()</code>, and <code>set­_gamepad­_provider()</code> are now <a href="https://doc.servo.org/servo/struct.WebViewBuilder.html"><code>WebViewBuilder</code></a>::<a href="https://doc.servo.org/servo/struct.WebViewBuilder.html#method.delegate"><code>delegate()</code></a>, <a href="https://doc.servo.org/servo/struct.WebViewBuilder.html#method.clipboard_delegate"><code>clipboard­_delegate()</code></a>, and <a href="https://doc.servo.org/servo/struct.WebViewBuilder.html#method.gamepad_delegate"><code>gamepad­_delegate()</code></a> (@mrobinson, #43205, #43233). Note that set­_gamepad­_<strong>provider</strong>() is now gamepad­_<strong>delegate</strong>(), consistent with the <code>GamepadProvider</code> rename below.</p>
+</li>
+<li>
+<p><a href="https://doc.servo.org/servo/trait.WebViewDelegate.html"><code>WebViewDelegate</code></a>::<a href="https://doc.servo.org/servo/trait.WebViewDelegate.html#method.show_bluetooth_device_dialog"><code>show­_bluetooth­_device­_dialog()</code></a> has been reworked to use the same “request object” pattern as the <code>request­_*()</code> methods, giving you a <a href="https://doc.servo.org/servo/struct.BluetoothDeviceSelectionRequest.html"><code>Bluetooth­Device­Selection­Request</code></a> with clear methods (@webbeef, #43580).</p>
+</li>
+<li>
+<p><code>GamepadProvider</code> has been renamed to <a href="https://doc.servo.org/servo/trait.GamepadDelegate.html"><code>GamepadDelegate</code></a>, and <code>gamepad­_provider()</code> on <a href="https://doc.servo.org/servo/struct.WebView.html"><code>WebView</code></a> has been renamed to <code>gamepad­_delegate()</code> (@mrobinson, #43233).</p>
+</li>
+<li>
+<p>The empty default implementation of <a href="https://doc.servo.org/servo/trait.EventLoopWaker.html"><code>EventLoopWaker</code></a>::<a href="https://doc.servo.org/servo/trait.EventLoopWaker.html#tymethod.wake"><code>wake</code></a> has been removed, because it almost never makes sense for a new custom impl to leave the method empty (@chrisduerr, @mrobinson, #43250).</p>
+</li>
+<li>
+<p><a href="https://doc.servo.org/servo/struct.Opts.html"><code>Opts</code></a>::<code>print_pwm</code> is now <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#structfield.progressive_web_metrics"><code>progressive_web_metrics</code></a> (@mrobinson, #43209).</p>
+</li>
+</ul>
+<p>Removed from our API:</p>
+<ul>
+<li>
+<p><a href="https://doc.servo.org/servo/struct.Opts.html"><code>Opts</code></a>::<code>nonincremental­_layout</code> (@mrobinson, #43207) – no replacement. This only really worked in legacy layout.</p>
+</li>
+<li>
+<p><a href="https://doc.servo.org/servo/struct.Opts.html"><code>Opts</code></a>::<code>user­_stylesheets</code> (@mrobinson, #43206) – use <a href="https://doc.servo.org/servo/struct.UserContentManager.html"><code>UserContentManager</code></a>::<a href="https://doc.servo.org/servo/struct.UserContentManager.html#method.add_stylesheet"><code>add­_stylesheet()</code></a> instead. This is how servoshell’s <code>--user-stylesheet</code> option works.</p>
+</li>
+</ul>
+<p>You can now read and write cookies with <a href="https://doc.servo.org/servo/struct.SiteDataManager.html"><code>SiteDataManager</code></a>::<a href="https://doc.servo.org/servo/struct.SiteDataManager.html#method.cookies_for_url"><code>cookies­_for­_url()</code></a> and <a href="https://doc.servo.org/servo/struct.SiteDataManager.html#method.set_cookie_for_url"><code>set­_cookie­_for­_url()</code></a> (@longvatrong111, #43600).</p>
+<p><a href="https://doc.servo.org/servo/trait.ClipboardDelegate.html"><code>ClipboardDelegate</code></a> and <a href="https://doc.servo.org/servo/struct.StringRequest.html"><code>StringRequest</code></a> are now exposed to the public API, allowing you to implement custom clipboard delegates (@jdm, @chrisduerr, #43203, #43261).
+You can pass your custom delegate to <a href="https://doc.servo.org/servo/struct.WebViewBuilder.html"><code>WebViewBuilder</code></a>::<a href="https://doc.servo.org/servo/struct.WebViewBuilder.html#method.clipboard_delegate"><code>clipboard­_delegate()</code></a>.</p>
+<p>You can now get the <a href="https://doc.servo.org/servo/struct.EmbedderControlId.html"><code>EmbedderControlId</code></a> associated with an <a href="https://doc.servo.org/servo/struct.InputMethodControl.html"><code>InputMethodControl</code></a> by calling <a href="https://doc.servo.org/servo/struct.InputMethodControl.html"><code>InputMethodControl</code></a>::<a href="https://doc.servo.org/servo/struct.InputMethodControl.html#method.id"><code>id()</code></a> (@chrisduerr, #43248).</p>
+<p><a href="https://doc.servo.org/servo/enum.PixelFormat.html"><code>PixelFormat</code></a> now implements <a href="https://doc.rust-lang.org/1.92.0/core/fmt/trait.Debug.html"><code>Debug</code></a> (@chrisduerr, @mrobinson, #43249).</p>
+<p>We’ve improved the docs for <a href="https://doc.servo.org/servo/struct.Servo.html"><code>Servo</code></a>, <a href="https://doc.servo.org/servo/struct.ServoBuilder.html"><code>ServoBuilder</code></a>, <a href="https://doc.servo.org/servo/struct.WebViewBuilder.html"><code>WebViewBuilder</code></a>, <a href="https://doc.servo.org/servo/trait.RenderingContext.html"><code>RenderingContext</code></a> (@chrisduerr, #43229), <a href="https://doc.servo.org/servo/struct.EmbedderControlId.html"><code>EmbedderControlId</code></a>, <a href="https://doc.servo.org/servo/enum.EmbedderControlRequest.html"><code>EmbedderControlRequest</code></a>, <a href="https://doc.servo.org/servo/enum.EmbedderControlResponse.html"><code>EmbedderControlResponse</code></a>, <a href="https://doc.servo.org/servo/enum.SimpleDialogRequest.html"><code>SimpleDialogRequest</code></a>, <a href="https://doc.servo.org/servo/enum.AlertResponse.html"><code>AlertResponse</code></a>, <a href="https://doc.servo.org/servo/enum.ConfirmResponse.html"><code>ConfirmResponse</code></a>, <a href="https://doc.servo.org/servo/enum.PromptResponse.html"><code>PromptResponse</code></a>, <a href="https://doc.servo.org/servo/enum.EmbedderMsg.html"><code>EmbedderMsg</code></a> (@mukilan, #43564), <a href="https://doc.servo.org/servo/resources/trait.ResourceReaderMethods.html"><code>ResourceReaderMethods</code></a> (@jschwe, @mrobinson, #43769), <a href="https://doc.servo.org/servo/"><code>servo</code></a>::<a href="https://doc.servo.org/servo/input_events/index.html"><code>input­_events</code></a> (@mukilan, #43681), and <a href="https://doc.servo.org/servo/struct.WheelDelta.html"><code>WheelDelta</code></a> (@yezhizhen, @mrobinson, #43210).</p>
 <h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
