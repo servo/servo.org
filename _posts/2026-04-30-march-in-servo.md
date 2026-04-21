@@ -1,7 +1,7 @@
 ---
 layout:     post
 tags:       blog
-title:      "March in Servo: and more!"
+title:      "March in Servo: tab navigation, and more!"
 date:       2026-04-30
 summary:    ao!! wrrrrao!!
 categories:
@@ -9,15 +9,20 @@ categories:
 
 [**Servo 0.1.0**](https://github.com/servo/servo/releases/tag/v0.1.0) represents Servo’s biggest month ever, with a record **530 commits** and [**our first ever release on crates.io**]({{ '/blog/2026/04/13/servo-0.1.0-release/' | url }})!
 
-This release includes several new features:
+With this release Servo becomes more accessible, thanks to **tab navigation** (@mrobinson, @Loirooriol, #42952, #43019, #43058, #43246, #43267, #43067) and **keyboard scrolling** with Space and Shift+Space (@mrobinson, #43322).
+
+We’ve shipped several new web platform features:
 
 - **‘::first-letter’** styling (@minghuaw, @xiaochengh, @Loirooriol, #43027)
 - **‘::placeholder’** styling (@stevennovaryo, #43053)
+- **‘::file-selector-button’** styling (@lukewarlow, @AlexVasiluta, #43498)
 - **‘background-blend-mode’** (@mrobinson, #43666)
 - **‘content’** on **‘::marker’** (@niyabits, @Loirooriol, #43515)
+- **‘list-style-type: &lt;string>’** (@Loirooriol, #43111)
 - **&lt;input type=range>** (@BudiArb, @rayguo17, @mrobinson, #41562)
 - the **accesskey** attribute (@mrobinson, #43031, #43144, #43434)
 - partial support for **&lt;link rel=modulepreload>** (@Gae24, #42964)
+- [**&lt;system-color>**](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/system-color) values in CSS (@longvatrong111, @mrobinson, #42529, #43105, #43107)
 
 Plus a bunch of new DOM APIs:
 
@@ -27,6 +32,7 @@ Plus a bunch of new DOM APIs:
 - **command** on **HTMLButtonElement** (@lukewarlow, #43190)
 - **selectedOptions** on **HTMLSelectElement** (@jakubadamw, #43017)
 - **url** on **LargestContentfulPaint** (@shubhamg13, #42901, #42949)
+- **crypto.subtle.digest()** for **TurboSHAKE** (@kkoyung, #43551)
 - **crypto.subtle.getPublicKey()** for **X25519**, **RSASSA-PKCS1-v1_5**, **RSA-PSS**, and **RSA-OAEP** (@kkoyung, #43073, #43093)
 
 Servo now fires **‘pointerover’**, **‘pointerout’**, **‘pointerenter’**, and **‘pointerleave’** events on web content (@webbeef, #42736), **‘scroll’** events on **VisualViewport** (@stevennovaryo, #42771), and **‘scrollend’** events on **Document**, **Element**, and **VisualViewport** (@abdelrahman1234567, @mrobinson, #38773).
@@ -43,6 +49,16 @@ $ cargo add servo
 
 ## More on the web platform
 
+We’ve improved the default appearance of **&lt;summary>** (@Loirooriol, #43111), **&lt;select>** (@lukewarlow, #43175), **&lt;input type=file>** (@lukewarlow, @AlexVasiluta, @lukewarlow, #43498, #43186), and **&lt;textarea>** and **&lt;input type=text>** and friends (@mrobinson, #43132).
+**&lt;select>** also now requires user interaction to open the picker (@SharanRP, #43485).
+
+We’ve fixed a bug where pressing the arrow keys in form fields both moves the caret (good) and scrolls the page (bad) (@mrobinson, #43247).
+
+In your CSS, you can now use the **&lt;system-color> values** ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, and ‘WindowText’ (@longvatrong111, #42529).
+
+We’ve landed partial support for using **CSS [counters](https://drafts.csswg.org/css-lists/#counter)** in ‘list-style-type’ on ‘display: list-item’ and ‘content’ on ‘::marker’, but the counter values themselves are not calculated yet, so all list items still read as `0.` or similar.
+In any case, you can use a &lt;counter-style-name> or ‘symbols()’ in ‘list-style-type’, and ‘counter()’ and ‘counters()’ in ‘content’ (@Loirooriol, #43111).
+
 Servo now exposes several attributes that have no direct effect, but are needed for web compatibility (@lukewarlow, #43500, #43499, #43502, #43518):
 
 - **noHref** on **HTMLAreaElement**
@@ -51,6 +67,8 @@ Servo now exposes several attributes that have no direct effect, but are needed 
 - **longDesc** on **HTMLIFrameElement** and **HTMLFrameElement**
 
 ## Performance and stability
+
+**crypto.subtle.encrypt()**, **decrypt()**, **sign()**, **verify()**, **digest()**, **importKey()**, **unwrapKey()**, **decapsulateKey()**, and **decapsulateBits()** are more efficient now (@kkoyung, #42927), thanks to a recent [spec](https://github.com/w3c/webcrypto/issues/422) [update](https://github.com/w3c/webcrypto/pull/426).
 
 **DOM data structures** (`#[dom_struct]`) can refer to one another, with the help of [garbage collection](https://research.mozilla.org/2014/08/26/javascript-servos-only-garbage-collector/).
 But when DOM objects are being destroyed, those references can become invalid for a brief moment, depending on the order the GC finalizers run in.
