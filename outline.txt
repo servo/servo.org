@@ -1,0 +1,1128 @@
++	(@delan, @alice, #43012)	base: Deterministic AccessKit tree UUID format for pipelines (#43012)
+a11y; defining AccessKit subtree ids for documents, so we can graft them into webview subtrees as you navigate
+
++	(@delan, @alice, #43013)	constellation: Track top-level pipeline changes in webviews (#43013)
+a11y; tracking navigations of the top-level document in each webview, so we can graft them into webview subtrees
+
++	(@delan, @alice, #43029)	libservo: Per-webview accessibility activation (#43029)
+a11y api; breaking! Servo::set_accessibility_active() is now WebView::set_accessibility_active(), since that is harder to misuse in a way that will cause a panic
+
++	(@delan, @alice, #43556)	libservo: Set up graft node in AccessKit trees for webviews (#43556)
+a11y; graft active top-level document into each webview’s AccessKit subtree (no document accessibility tree yet)
+
++	(@yezhizhen, #43736)	script: Add TODO for Computed Role (#43736)
+a11y; towards Computed Role impl
+
++	(@jschwe, #42916)	Unify servo package naming (#42916)
+api; part of crates.io release
+
++	(@jschwe, #43078)	Explicitly set publish = false for test crates (#43078)
+api; towards crates.io release
+
++	(@mrobinson, #43092)	Update comment showing how to override WebRender dependency in `Cargo.toml` (#43092)
+api; towards crates.io release
+
++	(@jschwe, #43141)	Rename libservo to servo (#43141)
+api; part of crates.io release
+
++	(@delan, #43170)	Fix `-p servo` lib target build (and fix CI check accordingly) (#43170)
+api; fix regression that broke anyone consuming libservo (now `servo`) with a compile error about aws_lc_rs in servo-net
+
++	(@jschwe, #43180)	Move ply and WebIDL into script_bindings (#43180)
+api; part of crates.io release
+
++	(@jdm, #43203)	libservo: Expose ClipboardDelegate in public API. (#43203)
+api; WebView::set_clipboard_delegate() can actually be called now
+
++	(@jschwe, #43165)	libservo: Remove dependency on gstreamer.py (#43165)
+api; towards crates.io release
+
++	(@mrobinson, #43206)	prefs: Move `Opts::user_stylesheets` to `ServoShellPreferences` (#43206)
+api; breaking change! Opts::user_stylesheets has been removed (but it’s still supported in libservo UserContentManager and servoshell --user-stylesheet)
+
++	(@yezhizhen, @mrobinson, #43210)	embedder_traits: Specify clearly what the sign of `WheelDelta` means (#43210)
+api; [checked libservo docs and it is indeed exposed] improve docs for servo::WheelDelta
+
++	(@mrobinson, #43207)	prefs: Remove `Opts::nonincremental_layout` (#43207)
+api; breaking change! Opts::nonincremental_layout has been removed (it only worked properly in legacy layout)
+
++	(@mrobinson, #43205)	servo: Set all delegates and `GamepadProvider` in `WebViewBuilder` (#43205)
+api; breaking change! WebView::set_delegate(), set_clipboard_delegate(), and set_gamepad_provider() are now WebViewBuilder::delegate(), clipboard_delegate(), and gamepad_provider()… but note that GamepadProvider has since been renamed in #43233
+
++	(@mrobinson, #43209)	prefs: Move `Opts::print_pwm` to `DiagnosticsLogging::progressive_web_metrics` (#43209)
+api; breaking change! Opts::print_pwm is now DiagnosticsLogging::progressive_web_metrics
+
++	(@mrobinson, #43233)	servo: Rename `GamepadProvider` to `GamepadDelegate` (#43233)
+api; breaking change! GamepadProvider is now GamepadDelegate, and gamepad_provider() on WebViewBuilder and WebView are now gamepad_delegate()
+
++	(@chrisduerr, #43248)	servo: Add `id` method to `InputMethodControl` (#43248)
+api; add new getter InputMethodControl::id()
+
++	(@chrisduerr, @mrobinson, #43249)	embedder_traits: Add missing Debug impl to `PixelFormat` (#43249)
+api; PixelFormat is now impl Debug
+
++	(@jschwe, #43243)	Use workspace deps consistently and add version requirement (#43243)
+api; part of crates.io release
+
++	(@chrisduerr, #43261)	libservo: Expose `StringRequest` in public API (#43261)
+api; [references commit] part of #43203
+
++	(@jschwe, #43264)	blurmac: Disable publishing (#43264)
+api; part of crates.io release
+
++	(@chrisduerr, @mrobinson, #43250)	servo: Force embedders to implement `EventLoopWaker::wake` (#43250)
+api; [git show] breaking! remove default fn wake() in trait EventLoopWaker, since it never makes sense for a custom impl to leave it empty
+
++	(@webbeef, #43273)	chore: replace references to servo_url by servo-url (#43273)
+api; part of crates.io release
+
++	(@chrisduerr, #43229)	servo: Fix minor documentation issues (#43229)
+api; [git show] improved docs for Servo, ServoBuilder, WebViewBuilder, and RenderingContext
+
++	(@jschwe, #43263)	Version releases with the workspace version (#43263)
+api; part of crates.io release
+
++	(@chrisduerr, #43228)	servo: Rename `WebView::pinch_zoom` to `adjust_pinch_zoom` and add pinch zoom getter (#43228)
+api; breaking! renamed WebView::pinch_zoom() to adjust_pinch_zoom() so we can add a getter for the current pinch zoom at pinch_zoom()
+
++	(@delan, @alice, #43029)	libservo: Per-webview accessibility activation (#43029)
+a11y api; breaking! Servo::set_accessibility_active() is now WebView::set_accessibility_active(), since that is harder to misuse in a way that will cause a panic
+
++	(@jschwe, #43451)	Metadata: Add missing repository information (#43451)
+api; part of crates.io release
+
++	(@jschwe, #43457)	Cargo.toml: More publish preparation (#43457)
+api; part of crates.io release
+
++	(@jschwe, #43458)	servo-dom-struct: Enable required features (#43458)
+api; part of crates.io release
+
++	(@jschwe, #43459)	script-bindings: Don't write bytecode during build.rs (#43459)
+api; part of crates.io release
+
++	(@jschwe, #43463)	Fix media-gstreamer-render-android (#43463)
+api; part of crates.io release
+
++	(@yezhizhen, #43516)	cargo: Use kebab case consistenly for those already starting with `servo-` (#43516)
+api; towards crates.io release
+
++	(@yezhizhen, #43526)	cargo: Rename Workspace-local dependencies starting with b to `servo-*` (#43526)
+api; towards crates.io release
+
++	(@yezhizhen, #43552)	cargo: Rename workspace-local library starting with b to `servo_*` (#43552)
+api; part of crates.io release
+
++	(@mukilan, #43564)	embedder_traits: Add more documentation to public API. (#43564)
+api; [git show + review comments] improve EmbedderControl-related docs
+
++	(@yezhizhen, #43615)	cargo: Rename workspace-local dependencies starting with c to `servo-*` (#43615)
+api; towards crates.io release
+
++	(@yezhizhen, #43622)	cargo: Rename workspace-local library starting with c to `servo_*` (#43622)
+api; part of crates.io release
+
++	(@StaySafe020, #43654)	Add README for the `servo` crate (#43654)
+api; part of crates.io release
+
++	(@webbeef, #43580)	servo: Add a `BluetoothDeviceSelectionRequest` to the API for selecting Bluetooth devices (#43580)
+api; [cargo public-api diff --target-dir target/cargo-public-api -p servo f38c7308b0af90c78d2c2235084c313b9783a714~1..f38c7308b0af90c78d2c2235084c313b9783a714] breaking! WebViewDelegate::show_bluetooth_device_dialog() has been reworked to use the request object pattern, taking a BluetoothDeviceSelectionRequest with clear methods
+
++	(@mukilan, #43681)	embedder_traits: Update docs for the public API of `input_event` module (#43681)
+api; [git show] improve docs in servo::input_events
+
++	(@jschwe, @mrobinson, #43769)	embedder_traits: Add documentation for ResourceReaderMethods (#43769)
+api; improve docs for ResourceReaderMethods; confirmed exposed in libservo <https://doc.servo.org/servo/resources/trait.ResourceReaderMethods.html>
+
++	(@longvatrong111, #43600)	servo: Add `SiteDataManager::set_cookie_for_url` and `SiteDataManager::cookies_for_url` (#43600)
+api; [git show now integrated into commit-triage @ 2026-04-19] SiteDataManager::cookies_for_url() and set_cookie_for_url()
+
++	(@elomscansio, @mukilan, #43646)	constellation: Convert constellation's EmbedderProxy to GenericEmbedderProxy (#43646)
+architecture; [fixes issue is] outreachy refactor; split out messages to the embedder by their source for better use of the type system
+
++	(@simartin, #43276)	script: remove redundant ScriptWindowProxies method (#43276)
+cleanup; [fixes issue] outreachy refactor?
+
++	(@SharanRP, #43285)	script: inline dispatch_load_event and dispatch_error_event  (#43285)
+cleanup; [fixes issue] outreachy refactor
+
++	(@TG199, #43532)	remove referrer field from ScriptFetchOptions (#43532)
+cleanup dom
+
++	(@sabbCodes, #43778)	script: Remove unnecessary Window::unminify_css field (#43778)
+cleanup; [fixes issue] outreachy refactor
+
++	(@niyabits, @niyabits, #43771)	script: move fullscreen functionality to `script/dom/fullscreen` (#43771)
+cleanup; [fixes issue] outreachy refactor
+
++	(@Tarmil, @yezhizhen, #42739)	paint: Bound screenshot to the viewport (#42739)
+crash; [git show] fix crash in webdriver Take Element Screenshot with large elements
+
++	(@jdm, #42976)	layout: Prevent DomRefCell::borrow from being used in layout code (#42976)
+crash; fix crash under TSAN due to data races in layout
+
++	(@simonwuelker, #43133)	script: Only send objects with `ESClass::Object` to devtools (#43133)
+crash; [spec] fix crash when logging or inspecting exotic objects in JS
+
++	(@simonwuelker, #43178)	script: Fire an error event when event handler fails to compile (#43178)
+crash dom; [git show] fire ‘error’ events when event handlers (attributes that start with “on”) contain syntax errors, and fix crash when they contain runtime errors
+
++	(@Narfinger, @jdm, #43470)	script: Fix borrow hazard in script_modules (#43470)
+crash; [fixes issue] fix panic when GC runs while creating JS promises
+
++	(@jdm, #43487)	script: Do not record associated memory for Promises, and release associated memory for WindowProxy. (#43487)
+crash; [fixes issue] fix crashes in --debug-mozjs builds when handling some promises, and when exiting
+
++	(@rogerkorantenng, #43501)	script: Fix panic in crypto.getRandomValues when random generation fails (#43501)
+crash; fix crash in crypto.getRandomValues()
+
++	(@yezhizhen, #43381)	paint: Propogate input event dispatch failure to Servo to resolve deadlock (#43381)
+crash; [exploring surrounding code] fix deadlock when webdriver input fails due to hit test failure or servo shutting down
+
++	(@Narfinger, @Taym95, #42474)	net: Close the control stream of RequestBody to fix resource leak (#42474)
+crash; [fixes issue] fix crash due to IPC resource leak when making many requests over time
+
++	(@yezhizhen, #43449)	canvas: Support all Unicode variation selectors in text runs (#43449)
+crash dom; support Variation Selectors for emoji etc in CanvasRenderingContext2D and fix panic
+
++	(@jschwe, #42888)	mach: Add command to export build env (#42888)
+dev; improve transparency and composability of what mach does by adding `mach print-env` and `mach exec`
+
++	(@jschwe, #43127)	devcontainer: Add a dockerignore (#43127)
+dev; part of new devcontainer for servo development
+
++	(@jschwe, @sagudev, #43131)	devcontainer: Add workflow to build and publish Ubuntu amd64 devcontainer (#43131)
+dev; towards new devcontainer for servo development (not complete yet; see #40656)
+
++	(@jschwe, #43139)	devcontainer: Use new prebuilt devcontainer image. (#43139)
+dev; part of new devcontainer for servo development
+
++	(@eerii, @atbrakhi, #42907)	devtools: Implement initial support for `Step in`, `Step out` and `Step over` (#42907)
+devtools; [attachments] implement Step Over in debugger
+
++	(@atbrakhi, #42936)	devtools: Implement frame scoped evaluation (#42936)
+devtools; [attachments] when hovering variables in debugger, show their current values
+
++	(@atbrakhi, #42994)	devtools: Use actual class name in `ObjectActor` (#42994)
+devtools; [attachments] when hovering symbols in debugger, show the correct `<prototype>`
+
++	(@atbrakhi, #42996)	devtools: Implement function name preview in debugger popup (#42996)
+devtools; [attachments] when hovering functions in debugger, show the function name
+
++	(@atbrakhi, @eerii, #43015)	devtools: implement listing all frames (#43015)
+devtools; part of implementing Call stack panel in debugger
+
++	(@eerii, @atbrakhi, #43040)	devtools: Get newest frame when resuming without a frameActorID (#43040)
+devtools; part of implementing Step commands in debugger
+
++	(@atbrakhi, @eerii, #43039)	devtools: Pass `ListFrames` back to devtools (#43039)
+devtools; part of implementing Call stack panel in debugger
+
++	(@brentschroeter, @eerii, #43026)	tools: Support tab navigation via navigateTo, goBack, and goForward (#43026)
+devtools; [fixes issue] partial impl of navigation controls (location, back, forward)
+
++	(@eerii, #43042)	devtools: Fix step out and clearing stepping hooks (#43042)
+devtools; [git show] implement Step Out in debugger
+
++	(@atbrakhi, @eerii, #43135)	devtools: Add test for `StepIn`, `StepOut` and `StepOver` hooks (#43135)
+devtools; part of implementing Step commands in debugger
+
++	(@atbrakhi, #43140)	devtools: create helper functions to reduce duplication in tests (#43140)
+devtools; [git show] misc debugger work
+
++	(@eerii, @atbrakhi, #43166)	devtools: Allow registering environment actor from debugger.js (#43166)
+devtools; part of implementing Scopes panel in debugger
+
++	(@eerii, @atbrakhi, #43167)	devtools: Handle `getEnvironment` message (#43167)
+devtools; part of implementing Scopes panel in debugger
+
++	(@brentschroeter, #43153)	devtools: Use active pipeline and script channel in inspector actors (#43153)
+devtools; fix Inspector tab after navigating
+
++	(@brentschroeter, #43230)	devtools: Add support for one-way protocol messages (#43230)
+devtools; fix desync due to incorrect handling of “one-way” messages, where the client expects no reply
+
++	(@eerii, #43236)	devtools: Remove `reply_unchecked` in favour of `mark_handled` (#43236)
+devtools; [git show] misc debugger work
+
++	(@atbrakhi, #43316)	devtools: Remove `EvaluateJS` in favor of `Eval` (#43316)
+devtools; [git show] misc debugger work
+
++	(@atbrakhi, @eerii, #43232)	devtools: Implement initial support for showing scope variables (#43232)
+devtools; part of implementing Scopes panel in debugger
+
++	(@atbrakhi, #43319)	devtools: Implement `PropertyIteratorActor` boilerplate (#43319)
+devtools; part of implementing hover properties in debugger
+
++	(@atbrakhi, @eerii, #43356)	devtools: Implement `object` and `function` property preview (#43356)
+devtools; [attachments] when hovering objects/functions/arrays in debugger, show their properties
+
++	(@SharanRP, #43361)	devtools: add `eval` support for dedicated workers (#43361)
+devtools; impl evaluation in Console tab for (non-service) workers
+
++	(@atbrakhi, #43456)	devtools: Implement initial support for `ArrayPreviewer` (#43456)
+devtools; [attachments] when hovering arrays in debugger, show them as arrays with length etc (partial)
+
++	(@SharanRP, #43492)	devtools: Handle service worker eval (#43492)
+devtools; [review comments] impl evaluation in Console tab for service workers, pending #43659
+
++	(@eerii, @atbrakhi, #43566)	devtools: Rename `PropertyPreview` to `PropertyDescriptor` (#43566)
+devtools; [git show] misc debugger work
+
++	(@eerii, @atbrakhi, #43567)	devtools: Remove double optional from WebIDL  (#43567)
+devtools; [git show] misc debugger work
+
++	(@sabbCodes, #43614)	devtools: Rename registry in tab, watcher and browsing_context (#43614)
+devtools; [issue 43605 is] outreachy refactor
+
++	(@sabbCodes, #43641)	devtools: Renamed BrowsingContext in breakpoint, console & thread actors (#43641)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43619)	devtools: Rename registry in source, node, & network_handler (#43619)
+devtools; [issue 43605 is] outreachy refactor
+
++	(@sabbCodes, #43642)	devtools: Renamed BrowsingContext in inspector & its actors (#43642)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43623)	devtools: Refactored ActorRegistry variables in lib.rs (#43623)
+devtools; [issue 43605 is] outreachy refactor
+
++	(@arabson99, #43656)	devtools: Rename ReflowActor variables in browsing context actor (#43656)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@jayant911, #43644)	devtools: Rename console_actor and console in actors (#43644)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@jayant911, #43672)	Devtool: rename NetworkParentActor variable names. (#43672)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43664)	devtools: Rename TabDescriptorActor variable names (#43664)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@StaySafe020, #43676)	devtools: Rename DeviceActor variables for consistency (#43676)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@brentschroeter, @eerii, #43472)	devtools: wrap TcpStream to synchronize network operations (#43472)
+devtools; [review comments + zulip convo] fix desyncs due to interleaved writes from multiple threads
+
++	(@jayant911, #43684)	devtools: Rename PageStyleActor variable names (#43684)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@saydmateen, #43679)	devtools: Standardize EnvironmentActor variables (#43679)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@CynthiaOketch, #43659)	devtools: Show service workers in Firefox DevTools about:debugging (#43659)
+devtools; add support for inspecting service workers
+
++	(@sabbCodes, #43678)	devtools: Renamed WorkerActor variables in affected files (#43678)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@eerii, @atbrakhi, #43587)	devtools: Rework debugger value structure (#43587)
+devtools; [git show] misc debugger work
+
++	(@sabbCodes, #43655)	devtools: Rename BrowsingContextActor variable names (#43655)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43675)	devtools: Rename NetworkEventActor variable concerned files (#43675)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43731)	devtools: Rename RootActor variable names (#43731)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43729)	devtools: Rename StyleSheetsActor variable names (#43729)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43728)	devtools: Rename WatcherActor variable names (#43728)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43740)	devtools: Rename AccessibilityActor variable names (#43740)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43751)	devtools: Rename PreferenceActor variable names (#43751)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43748)	devtools: Rename LayoutInspectorActor variable names (#43748)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43747)	devtools: Rename HighlighterActor variable names (#43747)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, @eerii, #43752)	devtools: Rename ProcessActor variable names (#43752)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43745)	devtools: Rename CssPropertiesActor variable names (#43745)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43724)	devtools: Rename InspectorActor variable names (#43724)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43723)	devtools: Rename ThreadActor variable names (#43723)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43765)	devtools: Rename ThreadConfigurationActor variable names (#43765)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@sabbCodes, #43767)	devtools: Rename FrameActor variable names (#43767)
+devtools; [issue 43606 is] outreachy refactor
+
++	(@yezhizhen, #42926)	paint: Track whether script is handling touchmove per `TouchId` (#42926)
+dom; [fixes issue] fix ‘touchmove’ events failing to fire during multi-touch
+
++	(@kkoyung, #42927)	script: Reorder reading algorithm and data arguments in WebCrypto (#42927)
+dom; more efficient crypto.subtle.encrypt(), decrypt(), sign(), verify(), digest(), importKey(), unwrapKey(), decapsulateKey(), decapsulateBits() per spec update (w3c/webcrypto#422, 426)
+
++	(@Gae24, #42931)	net: Ignore subresource integrity with invalid base64 value (#42931)
+dom; more conformant SRI <script integrity> and <style integrity>
+
++	(@willypuzzle, #42937)	script: Refactors GPUPipelineLayout to disallow direct Drop. (#42937)
+dom; [asked in #26488] soundness?
+
++	(@shubhamg13, #42949)	layout: Add image_url to `ImageInfo` struct (#42949)
+dom; part of #42901
+
++	(@Narfinger, #42957)	script: jscontext-ify element aria methods and SetCrossOrigin (#42957)
+dom; [issue 40600 is] safety from ground up
+
++	(@shubhamg13, #42901)	Pass Request's URL for `LargestContentfulPaint` Entry (#42901)
+dom; [test cases] url on LargestContentfulPaint
+
++	(@Taym95, #42727)	indexeddb: implement "inject a key into a value using a key path with value" (#42727)
+dom; [spec] implement storing records with in-line keys
+
++	(@webbeef, #42736)	script: pointer events: pointerenter, pointerout, pointerleave, pointerover (#42736)
+dom; ‘pointerover’, ‘pointerout’, ‘pointerenter’, and ‘pointerleave’ events
+
++	(@simonwuelker, #42987)	script: Fire pointer, `mouseenter`, and `mouseleave`events respecting the flat tree (#42987)
+dom; pointer and mouse events can now be captured across shadow DOM boundaries <https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling#event_capture>
+
++	(@willypuzzle, #42982)	script: Refactors `GPURenderBundle`'s drop implementation. (#42982)
+dom; [asked in #26488] soundness?
+
++	(@simonwuelker, #42989)	 script: Set relatedTarget for {mouse, pointer}x{enter, leave, out, over} events (#42989)
+dom; pointer and mouse events now have relatedTarget
+
++	(@kkoyung, #42984)	script: Resolve name referencing issue during ML-DSA export (#42984)
+dom; no functional change. more conformant SubtleCrypto per spec update (WICG/webcrypto-modern-algos#47, 48)
+
++	(@Taym95, #42786)	indexeddb: restore object store metadata on upgrade abort and sync connection  (#42786)
+dom; [git show + spec] fix inconsistent state after aborting an upgrade transaction #abort-upgrade-transaction
+
++	(@simonwuelker, #42991)	script: Use stylo dom apis for querySelector/querySelectorAll (#42991)
+dom; [mdn] more conformant querySelector() and querySelectorAll() on Element
+
++	(@willypuzzle, #43018)	script: Refactors GPURenderPassEncoder's drop implementation. (#43018)
+dom; [asked in #26488] soundness?
+
++	(@lukewarlow, #42883)	script: Improvements to `command` button implementation (#42883)
+dom; [git show] more conformant <button command>
+
++	(@stevennovaryo, @mrobinson, #42251)	layout: Add a query for getting the effective overflow of an element and use it in `script` (#42251)
+dom; [unsuccessful understanding] more conformant IntersectionObserver
+
++	(@TimvdLippe, #43016)	script: Fully implement delete_the_selection (#43016)
+dom; towards implementing document.execCommand("delete")
+
++	(@TimvdLippe, #43043)	script: Fix handling of attributes for link elements (#43043)
+dom; more efficient and conformant handling of <link media> and <link type> in <link rel=stylesheet>
+
++	(@TimvdLippe, #43046)	script: Fix lookup of properties of DOMStringMap (#43046)
+dom; [git show + mentioned test] more conformant element.dataset["-foo"] and ["--foo"]
+
++	(@mrobinson, #43031)	script: Add support for the `accesskey` attribute (#43031)
+dom; [git show] accesskey global attribute, including input handling (⌃⌥ on macOS, Alt+Shift otherwise)
+
++	(@TimvdLippe, @elomscansio, #43063)	script: Append CSP policies from meta elements (#43063)
+dom; [fixes issue] fix ‘Content-Security-Policy’ in <meta> overriding the policy in headers, so they now combine
+
++	(@TimvdLippe, #43028)	script: Implement miscellaneous commands related to delete (#43028)
+dom; [git show] implement document.execCommand("defaultParagraphSeparator") and execCommand("styleWithCSS")
+
++	(@jakubadamw, #43017)	script: Implement `HTMLSelectElement.selectedOptions` (#43017)
+dom; impl selectedOptions on HTMLSelectElement
+
++	(@willypuzzle, #43071)	script: Refactor GPURenderPipeline's drop implementation (#43071)
+dom; [asked in #26488] soundness?
+
++	(@kkoyung, #43073)	script: Implement `SubtleCrypto.getPublicKey` method with X25519 support (#43073)
+dom; crypto.subtle.getPublicKey() starting with X25519
+
++	(@kkoyung, #43093)	script: Implement "getPublicKey" operations of RSA algorithms (#43093)
+dom; crypto.subtle.getPublicKey() for RSASSA-PKCS1-v1_5, RSA-PSS, and RSA-OAEP
+
++	(@xZaisk, @yezhizhen, #43101)	script: Add error messages in HTMLDialogElement (#43101)
+dom; better exception error messages in HTMLDialogElement
+
++	(@shubhamg13, #43103)	script: Add missing steps for parsing a legacy font size (#43103)
+dom; more conformant <font size>
+
++	(@Gae24, #43108)	script: Pass `&mut JSContext` to DOM apis that call `Element::create` (#43108)
+dom; [issue 40600 is] safety from ground up
+
++	(@kkoyung, #43106)	script: Implement "getPublicKey" operations of ECDSA and ECDH (#43106)
+dom; crypto.subtle.getPublicKey() for ECDSA and ECDH
+
++	(@lukewarlow, #41238)	script: Implement node.moveBefore() (#41238)
+dom; moveBefore() on Node (technically ParentNode but this is the closest exposed type)
+
++	(@Taym95, #43115)	WebCryptoAPI: implement Ed25519 and split Handle::Ed25519 into Ed25519PrivateKey and Ed25519PublicKey (#43115)
+dom; [git show + spec] crypto.subtle.getPublicKey() + ?importKey() + ?generateKey() for Ed25519
+
++	(@Gae24, #43130)	script: Pass `&mut JSContext` to `VirtualMethods::cloning_steps` and `Node::clone` (#43130)
+dom; [issue 40600 is] safety from ground up
+
++	(@mrobinson, #43144)	script: Correct equality check when detecting whether element has access key assigned (#43144)
+dom; part of accesskey #43031
+
++	(@TimvdLippe, #43082)	script: Complete basic implementation of delete command (#43082)
+dom; partially implement document.execCommand("delete")
+
++	(@simonwuelker, #43178)	script: Fire an error event when event handler fails to compile (#43178)
+crash dom; [git show] fire ‘error’ events when event handlers (attributes that start with “on”) contain syntax errors, and fix crash when they contain runtime errors
+
++	(@TimvdLippe, #43181)	script: Move Trusted Types interfaces to `script/dom/trustedtypes` (#43181)
+dom; outreachy refactor
+
++	(@simonwuelker, #43191)	script: Log uncaught JS exceptions to the console (#43191)
+dom; fix regression in logging uncaught JS exceptions to console
+
++	(@lukewarlow, #43190)	prefs: Remove `dom_command_invokers_enabled` (#43190)
+dom; [git show] ship CommandEvent and (idl) command on HTMLButtonElement
+
++	(@bruno-j-nicoletti, #43213)	script: Use the shared task canceller in `DedicatedWorkerGlobalScope::run_worker_scope` (#43213)
+dom; [reading code; asked in fixes issue] fix bug where we continue running tasks in web workers even after the document is closed?
+
++	(@Taym95, #43096)	constellation(storage): validate storage event source and scope session fanout by webview (#43096)
+dom; [git show new tests + fixes issue] towards more conformant indexeddb that runs asynchronously with the document event loop
+
++	(@simonwuelker, #43218)	script: Mark canvas as dirty after updating image data (#43218)
+dom; fix bug in putImageData() on CanvasRenderingContext2D that broke Minecraft4k <https://theintraclinic.com/archive/#:~:text=Minecraft4k>
+
++	(@Uiniel, #43215)	script: Move `BlobMethods` to `&mut JSContext` (#43215)
+dom; [issue 42638 is] safety from ground up
+
++	(@willypuzzle, #43222)	script: Move GPUSampler drop logic to a helper struct (#43222)
+dom; [asked in #26488] soundness?
+
++	(@TimvdLippe, #43150)	script: Check for render-blocking documents before continuing (#43150)
+dom; [git show + exploring code] partially implement <script blocking> and <link blocking> (but not <style blocking>)
+
++	(@TimvdLippe, #43183)	script: Pass &mut JSContext in trusted types interfaces (#43183)
+dom; [issue 40600 is] safety from ground up
+
++	(@Gae24, #43219)	script: Pass `&mut JSContext` to `children_changed` and `adopting_steps` (#43219)
+dom; [issue 40600 is] safety from ground up
+
++	(@TimvdLippe, #43245)	script: Pass `&mut JSContext` to `TrustedScriptURL::get_trusted_type_compliant_string` (#43245)
+dom; [issue 42638 is] safety from ground up
+
++	(@Gae24, #43220)	script: Pass `&mut JSContext` to `VirtualMethods::bind_to_tree` (#43220)
+dom; safety from ground up
+
++	(@Gae24, #43252)	script: Pass `&mut JSContext` in more places (#43252)
+dom; safety from ground up
+
++	(@TimvdLippe, #43268)	script: Pass `&mut JSContext` to `TrustedHTML::get_trusted_type_compliant_string` (#43268)
+dom; [issue 40600 is] safety from ground up
+
++	(@TimvdLippe, #43269)	script: Move CSPViolationReportTask (#43269)
+dom; outreachy refactor
+
++	(@TimvdLippe, #43184)	script: Pass `&mut JSContext` in CSP code (#43184)
+dom; [issue 40600 is] safety from ground up
+
++	(@TimvdLippe, #43270)	script: Move reporting interfaces (#43270)
+dom; outreachy refactor
+
++	(@TimvdLippe, #43277)	script: Pass `&mut JSContext` to `TrustedScript::can_compile_string_with_trusted_type` (#43277)
+dom; [issue 40600 is] safety from ground up
+
++	(@TimvdLippe, #43278)	script: Pass `&mut JSContext` to `set_timeout_or_interval` (#43278)
+dom; [issue 40600 is] safety from ground up
+
++	(@TimvdLippe, #43279)	script: Move debugger interfaces into `debugger/` (#43279)
+dom; outreachy refactor
+
++	(@TimvdLippe, #43177)	script: Record state for nodes prior to executing commands (#43177)
+dom; towards document.execCommand()
+
++	(@yezhizhen, @sagudev, #43284)	script: Use `&mut JSContext` in `HTMLMapElement`&`HTMLImageElement` (#43284)
+dom; safety from ground up
+
++	(@willypuzzle, #43288)	script: Move drop logic for several WebGPU types to helper structs (#43288)
+dom; [asked in #26488] soundness?
+
++	(@simonwuelker, #43286)	script: Let `FontFaceSet` be `setlike<FontFace>` (#43286)
+dom; more conformant FontFaceSet (--enable-experimental-web-platform-features or --pref dom_fontface_enabled)
+
++	(@simonwuelker, #43281)	script: Support constructing `FontFace`s from `ArrayBuffer`s (#43281)
+dom; [mdn] FontFace constructor() now accepts ArrayBuffer in `source` argument (?--pref dom_fontface_enabled)
+
++	(@yezhizhen, #43302)	script: Port `Notification` to mozjs `JSContext` (#43302)
+dom; safety from ground up
+
++	(@yezhizhen, #43312)	script: Port `TreeWalker` & `NodeIterator` to `&mut JSContext` (#43312)
+dom; [issue 40600 is] safety from ground up
+
++	(@kkoyung, #43315)	script: ML-KEM/ML-DSA PKCS8 keys in non-seed-only formats (#43315)
+dom; no functional change. more conformant SubtleCrypto per spec update (WICG/webcrypto-modern-algos#29, 34)
+
++	(@simonwuelker, #43329)	net: Allow opaque origins in `parse_blob_url` (#43329)
+dom; [mentioned issue] towards fixing Worker constructor() with blob `url` argument
+
++	(@simonwuelker, #43323)	script: Log unhandled promise rejections to the console (#43323)
+dom; log unhandled promise rejections to console (see also #43191)
+
++	(@Gae24, #42964)	script: Add support for modulepreload link elements (#42964)
+dom; partial support for <link rel=modulepreload>
+
++	(@shubhamg13, #43341)	script: Correct data type of `poster` in `HTMLVideoElement.webidl` (#43341)
+dom; more conformant poster on HTMLVideoElement
+
++	(@mrobinson, #43343)	script: Do not fire simulated click on spacebar/enter in non-state-changing elements (#43343)
+dom; fix bug where pressing Space or Enter in text fields causes it to be clicked
+
++	(@Gae24, #43348)	script: Pass `&mut JSContext` to `Element::create` (#43348)
+dom; [issue 40600 is] safety from ground up
+
++	(@dyegoaurelio, #43216)	script: Implement duplicate attribute check for CSP nonce validation (#43216)
+dom; reject elements with duplicate attributes in ‘Content-Security-Policy’ nonce checks
+
++	(@Uiniel, #43327)	script: Pass `&mut JSContext` to more functions in `dom/stream` (#43327)
+dom; [issue 42638 is] safety from ground up
+
++	(@TimvdLippe, #43362)	script: Pass `&mut JSContext` to `TrustedScript::get_trusted_type_compliant_string` (#43362)
+dom; [issue 40600 is] safety from ground up
+
++	(@TimvdLippe, #43365)	script: Pass `&mut JSContext` in remaining parts of Trusted Types (#43365)
+dom; [issue 40600 is] safety from ground up
+
++	(@TimvdLippe, #43383)	script: Pass `&mut JSContext` to `attribute_mutated` (#43383)
+dom; safety from ground up
+
++	(@Taym95, #43041)	indexeddb: align getAll/getAllKeys and convert_value_to_key with IndexedDB spec (#43041)
+dom; [git show] more conformant indexeddb key handling
+
++	(@Uiniel, #43432)	script: Pass `&mut JSContext` to `ReadableStream::cancel` (#43432)
+dom; [issue 42638 is] safety from ground up
+
++	(@jakubadamw, #43431)	script: Prevent invisible elements from being focusable (#43431)
+dom; [fixes issue] fix bug where elements with ‘visibility: hidden’ could be focused by clicking or by API
+
++	(@mrobinson, #43434)	script: Base `accesskey` on keyboard key codes (#43434)
+dom; part of accesskey #43031
+
++	(@TimvdLippe, #43367)	script: Strip blockedURI resource (#43367)
+dom; [git show + spec] more conformant blockedURI in ‘Content-Security-Policy’ reports <https://w3c.github.io/webappsec-csp/#dom-cspviolationreportbody-blockedurl>
+
++	(@TimvdLippe, #43437)	script: Move encoding interfaces into `encoding/` (#43437)
+dom; outreachy refactor
+
++	(@PuercoPop, #43259)	script: Pass &mut JSContext to FetchResponseListener::process_response (#43259)
+dom; safety from ground up
+
++	(@stevennovaryo, #42771)	script: Fire scroll event on visual viewport scroll (#42771)
+dom; fire ‘scroll’ event on VisualViewport
+
++	(@Uiniel, #43439)	script: Pass `&mut JSContext` to more functions in `dom/stream` (#43439)
+dom; [issue 42638 is] safety from ground up
+
++	(@pylbrecht, @Gae24, #40365)	Add basic support for handling module scripts in workers (#40365)
+dom; [test cases + mdn] Worker constructor() now supports `{type: "module"}`
+
++	(@shubhamg13, #42975)	layout: Fix `first-paint` detection (#42975)
+dom; [test cases] First Paint and First Contentful Paint timings now ignore transparent or default ‘background’ paints
+
++	(@Gae24, #43473)	script: Propagate `&mut JSContext` inside `global_scope_script_execution.rs` (#43473)
+dom; [issue 40600 is] safety from ground up
+
++	(@TimvdLippe, #43481)	script: Pass `&mut JSContext` to `Location` (#43481)
+dom; [issue 42638 is] safety from ground up
+
++	(@Gae24, #43353)	config: add a preference to allow fetching modulepreload descendants (#43353)
+dom; [git show] --pref for recursion, not <link rel=modulepreload> in general
+
++	(@abdelrahman1234567, @abdelrahman1234567, @mrobinson, #38773)	script: Implement the `scrollend` event (#38773)
+dom; [git show] fire ‘scrollend’ events on Document, Element, and VisualViewport
+
++	(@TimvdLippe, #43480)	script: Pass `&mut JSContext` to devtools (#43480)
+dom; [issue 40600 is] safety from ground up
+
++	(@TimvdLippe, #43483)	script: Set correct referrer for CSP violations (#43483)
+dom; [git show + spec] more conformant referrer in ‘Content-Security-Policy’ reports <https://w3c.github.io/webappsec-csp/#dom-cspviolationreportbody-referrer>
+
++	(@TimvdLippe, #43479)	script: Pass `&mut JSContext` to `submit_timing_data` (#43479)
+dom; [issue 40600 is] safety from ground up
+
++	(@lukewarlow, #43500)	script: Add nohref reflection to HTMLAreaElement (#43500)
+dom; [git show + spec] noHref on HTMLAreaElement (has no effect per spec)
+
++	(@lukewarlow, #43499)	script: Add hreflang, type and charset reflection to HTMLAnchorElement (#43499)
+dom; [git show + spec] hreflang, type, charset on HTMLAnchorElement (has no effect per spec)
+
++	(@lukewarlow, #43502)	script: Add usemap reflection to HTMLInputElement and HTMLObjectElement (#43502)
+dom; [git show + spec + trying it in firefox] useMap on HTMLInputElement and HTMLObjectElement (has no effect per spec)
+
++	(@kkoyung, #43519)	script: Rework on dictionary conversion in SubtleCrypto (#43519)
+dom; [git show + test cases] more efficient and conformant handling of algorithm arguments in SubtleCrypto operations
+
++	(@jerensl, #42451)	script: add a check for a valid key path on idb object store (#42451)
+dom; [fixes issue] more conformant createIndex on IDBObjectStore #dom-idbobjectstore-createindex
+
++	(@lukewarlow, #43518)	script: Add longdesc reflection to HTMLIFrameElement and HTMLFrameElement (#43518)
+dom; [git show + spec] longDesc on HTMLIFrameElement and HTMLFrameElement (has no effect per spec)
+
++	(@SharanRP, #43521)	Use encoding-parse for form action (#43521)
+dom; [fixes issue] outreachy? <form action> is now correctly resolved with the page encoding
+
++	(@Gae24, #43525)	script: Propagate `&mut JSContext` from `GlobalScope::start_message_port` to stream code (#43525)
+dom; safety from ground up
+
++	(@jayant911, #43523)	script: add navigation and traversal task source (#43523)
+dom; [fixes issue and spec; asked in fixes issue] paving the way for some future conformance work?
+
++	(@kkoyung, #43533)	script: Rename `length` parameter of cSHAKE to `outputLength` (#43533)
+dom; more conformant SubtleCrypto per spec update (WICG/webcrypto-modern-algos#52)
+
++	(@Gae24, #43535)	script_bindings: Pass `&mut JSContext` to `CustomElementReaction::invoke` (#43535)
+dom; [issue 40600 is] safety from ground up
+
++	(@TimvdLippe, #43438)	script: Fix current URL for CSP requests (#43438)
+dom; more conformant requests under ‘Content-Security-Policy’
+
++	(@SharanRP, #43485)	Gate picker on trusted click (#43485)
+dom; opening <select> picker now requires user interaction
+
++	(@TG199, #43532)	remove referrer field from ScriptFetchOptions (#43532)
+cleanup dom
+
++	(@willypuzzle, #43544)	webgl: Remove manual Drop implementation for WebGLQuery (#43544)
+dom; [asked in #26488] soundness?
+
++	(@pylbrecht, #43543)	Pass &mut JSContext (#43543)
+dom; safety from ground up
+
++	(@arabson99, #43549)	script: Pass &mut JSContext to CSSKeyframeRule::Style (#43549)
+dom; [issue 42638 is] safety from ground up
+
++	(@jayant911, #43537)	script: Use encoding-parsing algorithm in XMLHttpRequest::Open (#43537)
+dom; [fixes issue and git show] outreachy? open() on XMLHttpRequest now correctly resolves the url argument with the page encoding
+
++	(@shubhamg13, #42149)	layout: Consider `iframe` for `first-paint` (#42149)
+dom; First Paint timings now include <iframe>
+
++	(@TimvdLippe, #43539)	script: Implement support for `X-Frame-Options` (#43539)
+dom; implement ‘X-Frame-Options’ and fix bug where iframes could access the contents of error pages
+
++	(@jdm, #43554)	wpt: Add test for form action encoding. (#43554)
+dom; [fixes issue] part of #43521
+
++	(@kkoyung, #43551)	script: Implement TurboSHAKE algorithm in WebCrypto (#43551)
+dom; crypto.subtle.digest() for TurboSHAKE (no other operations for algorithm)
+
++	(@mishop-15, #42179)	script: Migrate from `utf_8` crate to `encoding_rs` in `EventSource` (#42179)
+dom; [git show + spec] more conformant EventSource
+
++	(@arabson99, #43570)	script: Pass &mut JSContext to CSSNestedDeclarations::Style (#43570)
+dom; [issue 42638 is] safety from ground up
+
++	(@arabson99, #43571)	script: Pass &mut JSContext to CSSKeyframesRule methods (#43571)
+dom; [issue 42638 is] safety from ground up
+
++	(@eyupcanakman, #43560)	script: Add error messages in HMAC WebCrypto operations (#43560)
+dom; better exception error messages in SubtleCrypto
+
++	(@SharanRP, #43572)	script: Use encoding-parse algorithm when handling iframe and Document URL attributes (#43572)
+dom; [fixes issue] outreachy? <iframe src> is now correctly resolved with the page encoding
+
++	(@willypuzzle, #43563)	webgl: Remove manual Drop implementation for WebGLRenderbuffer (#43563)
+dom; [asked in #26488] soundness?
+
++	(@arabson99, #43569)	script: Pass &mut JSContext to CSSStyleRule::Style (#43569)
+dom; [issue 42638 is] safety from ground up
+
++	(@jayant911, #43579)	script: Pass down &mut JSContext to CSSGroupingRule methods (#43579)
+dom; [issue 42638 is] safety from ground up
+
++	(@jayant911, #43584)	script: Pass down &mut JSContext to CookieStore methods (#43584)
+dom; [issue 42638 is] safety from ground up
+
++	(@Gae24, #43585)	script: Correctly setup request for worker module scripts (#43585)
+dom; more conformant JS modules in web workers
+
++	(@elomscansio, #43597)	script: Move Clipboard DOM interfaces to script/dom/clipboard/ (#43597)
+dom; outreachy refactor
+
++	(@elomscansio, #43607)	script: Move file DOM interfaces to script/dom/file/ (#43607)
+dom; outreachy refactor
+
++	(@elomscansio, #43602)	script: Move document DOM interfaces to script/dom/document/ (#43602)
+dom; outreachy refactor
+
++	(@sabbCodes, #43588)	script: Use encoding-parse algorithm in Worker::Constructor (#43588)
+dom; [fixes issue] outreachy? Worker constructor() now correctly resolves the url argument with the page encoding
+
++	(@jayant911, #43616)	script: Move xpath interfaces into xpath/ (#43616)
+dom; outreachy refactor
+
++	(@elomscansio, #43609)	script: Move datatransfer DOM interfaces to script/dom/datatransfer/ (#43609)
+dom; outreachy refactor
+
++	(@jayant911, #43612)	script: Move url interfaces into url/ (#43612)
+dom; outreachy refactor
+
++	(@lukewarlow, #43610)	script: Implement HTMLMarqueeElement type (#43610)
+dom; [git show] HTMLMarqueeElement (no layout)
+
++	(@elomscansio, #43647)	script: Move resizeobserver DOM interfaces to script/dom/resizeobserver/ (#43647)
+dom; [fixes issue is] outreachy refactor
+
++	(@elomscansio, #43651)	script: Move event DOM interfaces to script/dom/event/ (#43651)
+dom; [fixes issue is] outreachy refactor
+
++	(@jayant911, #43662)	script: move node interfaces into node/. (#43662)
+dom; outreachy refactor
+
++	(@yezhizhen, #43449)	canvas: Support all Unicode variation selectors in text runs (#43449)
+crash dom; support Variation Selectors for emoji etc in CanvasRenderingContext2D and fix panic
+
++	(@TimvdLippe, #43652)	script: Report CSP violations for child navigations in parent page (#43652)
+dom; fix handling of ‘Content-Security-Policy’ violations in iframes
+
++	(@willypuzzle, #43631)	webgl: Remove manual Drop implementation for WebGLSampler (#43631)
+dom; [asked in #26488] soundness?
+
++	(@jdm, #43496)	script: Align javascript: URL evaluation closer to the spec. (#43496)
+dom; [fixes issue] fixed a bunch of iframe and javascript URL timing issues. interesting to explain how iframes and navigation in general are complicated and full of special cases (#is-initial-about:blank, #the-javascript:-url-special-case, etc). refer to PR description when writing
+
++	(@TimvdLippe, #43657)	script: Pass `&mut JSContext` to `FetchResponseListener::process_response_chunk` (#43657)
+dom; safety from ground up
+
++	(@TimvdLippe, #43087)	script: Fire input events when executing commands (#43087)
+dom; [git show + exploring code] fire ‘beforeinput’ and ‘input’ events when executing supported and enabled commands
+
++	(@Veercodeprog, #43634)	script: Use encoding-parsed URLs in EventSource constructor (#43634)
+dom; [fixes issue] outreachy? EventSource ctor now correctly resolves the url argument with the page encoding
+
++	(@TimvdLippe, #43708)	net: Fix header parsing for empty strings (#43708)
+dom; [git show] part of ‘X-Frame-Options’ impl
+
++	(@TimvdLippe, #43714)	script: move element interfaces into `element/` (#43714)
+dom; outreachy refactor
+
++	(@SharanRP, #43582)	script: React correctly to `selected` attributes changes in for `<option>` (#43582)
+dom; [fixes issue] handle dynamic changes to <option selected> in the containing <select>
+
++	(@mrobinson, @mrobinson, #43711)	script: Implement `AnimationTimeline` and `DocumentTimeline` from Web Animations (#43711)
+dom; ship AnimationTimeline and DocumentTimeline, small initial step towards Web Animations API
+
++	(@TimvdLippe, #43713)	script: Pass `&mut JSContext` to `navigate` (#43713)
+dom; [issue 40600 is] safety from ground up
+
++	(@TimvdLippe, #43630)	script: Implement `frame-ancestors` CSP check (#43630)
+dom; implement ‘frame-ancestors’ directives in ‘Content-Security-Policy’
+
++	(@jdm, #43732)	script: Use result of determining the origin in more cases. (#43732)
+dom; fix for opaque origin in <iframe sandbox>
+
++	(@TimvdLippe, #43645)	net: Update reported CSP urls for websockets (#43645)
+dom; [git show + spec issue w3c/webappsec-csp#735] more conformant blockedURI in ‘Content-Security-Policy’ reports <https://w3c.github.io/webappsec-csp/#dom-cspviolationreportbody-blockedurl>
+
++	(@Taym95, #43721)	indexeddb: make put() overwrite existing SQLite records (#43721)
+dom; fix erroneous exception when calling put() on IDBObjectStore and the record already exists
+
++	(@Taym95, #43754)	indexeddb: fix idbobjectstore rename error handling (#43754)
+dom; [git show] fix bug when renaming object store to a name that already exists
+
++	(@kkoyung, #43775)	script: Guarantee constant-time all-zero check on X25519 secret (#43775)
+dom; security! crypto.subtle.deriveBits() for X25519 now checks for all-zero secrets in constant time
+
++	(@arihant2math, @gterzian, @Taym95, #42139)	storage: implement obtaining a storage bottle map, and create and delete databse (#42139)
+dom; [spec] implement storage #obtain-a-storage-bottle-map, an algorithm that forms part of the shared foundations of indexeddb, localStorage, and showNotification()
+
++	(@shubhamg13, #43475)	layout: Do not consider broken image as contentful (#43475)
+dom; ignore broken images (rippy!!) for First Contentful Paint timings
+
++	(@CynthiaOketch, #43774)	script: Move Element attribute getters/setters into attributes.rs (#43774)
+dom; outreachy refactor
+
++	(@kkoyung, #43773)	script: Require HMAC comparison to be constant time (#43773)
+dom; [git show] security! crypto.subtle.verify() for HMAC now compares signatures in constant time
+
++	(@freyacodes, @mrobinson, #42218)	layout: Support text carets on empty lines in <textarea> (#42218)
+editing; text carets now render on empty lines
+
++	(@mrobinson, #43128)	paint: Add support for a blinking text caret (#43128)
+editing; [git show] caret blinks now (but can be disabled with --pref editing_caret_blink_time=0)
+
++	(@mrobinson, #43436)	script: Move by word in text fields on Windows and Linux with control (#43436)
+editing; move caret by word is now Alt on macOS and Ctrl otherwise, rather than Alt on all platforms
+
++	(@mrobinson, @Loirooriol, #42952)	script: Add basic support for tab navigation (#42952)
+input; implement tab navigation!
+
++	(@mrobinson, @Loirooriol, #43019)	script: Distinguish between sequential (keyboard) and click focusability (#43019)
+input; part of tab navigation #42952
+
++	(@mrobinson, #43058)	script: Align focusable area logic to be closer to the specification (#43058)
+input; part of tab navigation #42952
+
++	(@mrobinson, @Loirooriol, #43067)	script: Allow focusing boxes with overflow with the keyboard (#43067)
+input; scrollable boxes are now focusable with tab navigation
+
++	(@mrobinson, #43247)	script: Only trigger one default event handler for form controls (#43247)
+input; fix bug where arrow keys in form fields both moves the caret and scrolls the page
+
++	(@mrobinson, #43246)	script: Scroll targets into view during sequential tab navigation (#43246)
+input; part of tab navigation #42952
+
++	(@mrobinson, #43267)	script: Add support for the "sequential focus navigation starting point" (#43267)
+input; part of tab navigation #42952
+
++	(@mrobinson, #43322)	script: Allow keyboard scrolling with the spacebar (#43322)
+input; [git show] allow scrolling with Space and Shift+Space
+
++	(@mrobinson, @chrisduerr, #43350)	paint: Remove the scroll event averaging workaround (#43350)
+input; [fixes issue] fix sluggish touchpad scrolling on linux
+
++	(@mrobinson, #43238)	layout: Properly find text index when clicking to left of text fragments (#43238)
+input; [git show] more forgiving hit testing when clicking to move the caret to the start of a line
+
++	(@mrobinson, #43811)	script: Add support for `ShadowRoot.delegatesFocus` and start implementing the focusing steps (#43811)
+input; towards shadow-DOM-compatible focus
+
++	(@webbeef, #43529)	bluetooth: switch to btleplug (#43529)
+internals; new bluetooth stack using btleplug, the cross-platform BLE library <https://nonpolynomial.com/2023/10/30/how-to-beg-borrow-steal-your-way-to-a-cross-platform-bluetooth-le-library/>
+
++	(@webbeef, #43581)	bluetooth: unbreak native-bluetooth builds (#43581)
+internals; part of #43529
+
++	(@webbeef, #42935)	script: Mark disabled elements pointed at and elements targets of touch events as `:active` (#42935)
+layout; [fixes issues] ‘:active’ now matches disabled or non-focusable elements too, while they are being clicked
+
++	(@simonwuelker, #42961)	fonts: Don't apply `letter-spacing` to formatting characters (#42961)
+layout; [fixes issue] fix ‘letter-spacing’ applying to invisible zero-width formatting characters
+
++	(@mrobinson, @Loirooriol, @lukewarlow, #42960)	layout/fonts: Mitigate races related to quirks mode and fallback fonts (#42960)
+layout; [fixes issue] fix flaky regression in inline layout
+
++	(@stevennovaryo, #43053)	layout: Make `::placeholder` public and add property restriction for `::placeholder` and `::marker` (#43053)
+layout; implement ‘::placeholder’ styling for <input> etc
+
++	(@shubhamg13, #43125)	fonts: Fix font-weight matching behavior for "simple" font families (#43125)
+layout; more conformant ‘font-weight’ matching when no font matches exactly
+
++	(@shubhamg13, #42566)	layout: Support `svg` in `border-image-source` (#42566)
+layout; ‘border-image-source’ (the image part of ‘border-image’) now supports svg
+
++	(@Loirooriol, #43111)	Improve `list-style-type` and counter styles (#43111)
+layout; [need to verify experimentally] improve appearance of <summary>; impl ‘list-style-type: <string>’, and maybe ‘counter(list-item)’ and ‘counters(list-item)’ and ‘symbols()’?
+
++	(@lukewarlow, #43175)	layout: Paint the `<select>` chevon using an SVG (#43175)
+layout; improve block sizing of <select>
+
++	(@minghuaw, @xiaochengh, @Loirooriol, #43027)	layout: Add initial support for first-letter pseudo element (#43027)
+layout; ‘::first-letter’ works now!
+
++	(@lukewarlow, #43186)	script: Account for `multiple` in `<input type=file>` text (#43186)
+layout; improve appearance of <input type=file multiple>
+
++	(@Loirooriol, #43201)	layout: Set `text-indent: 0` in UA styles for `::marker` (#43201)
+layout; improve ‘::marker’ styles in mixed LTR/RTL content
+
++	(@mrobinson, #43132)	layout: Add a little padding to textual inputs (#43132)
+layout; improve appearance of <textarea> and <input type=text> and friends
+
++	(@simonwuelker, #43454)	style: Don't skip animations that have no keyframes (#43454)
+layout; [stylo PR description] fix ‘animationstart’ and ‘animationend’ events not being fired on animations with no keyframes
+
++	(@mrobinson, #43520)	layout: Improve the rendering of the `<marquee>` element (#43520)
+layout; [fixes issue] minimal UA styles for <marquee> (not animated yet)
+
++	(@RichardTjokroutomo, @mrobinson, #43447)	font: Consider `lang` attribute when shaping (#43447)
+layout; glyph shaping now takes lang attribute into account, which is important for zh vs ja due to CJK unification
+
++	(@yoursanonymous, @Loirooriol, #43084)	layout: Fix static position of abspos nested within a block-in-inline (#43084)
+layout; [fixes issue] fix “static position” (default position) of boxes with ‘position: absolute’ inside ‘display: block’ inside ‘display: inline’
+
++	(@Loirooriol, #42666)	layout: Stretch replaced elements with aspect ratio but no natural sizes (#42666)
+layout; better sizing of <img> and <svg> without ‘width’ or ‘height’ (finding spec issues csswg-drafts#12612, csswg-drafts#13149)
+
++	(@niyabits, @Loirooriol, #43515)	layout: Display generated content for ::marker (#43515)
+layout; [git show + fixes issue] ‘content’ on ‘::marker’
+
++	(@Messi002, #43603)	paint: Enable WebRender dithering to reduce gradient color banding (#43603)
+layout; ‘linear-gradient()’ now dithers to reduce banding
+
++	(@lukewarlow, @AlexVasiluta, #43498)	script: Implement shadow tree for file input (#43498)
+layout; [git show + fixes issue] improve styling of <input type=file> and support ‘::file-selector-button’
+
++	(@mrobinson, #43722)	script: Use the containing node as the activable element for UA widgets (#43722)
+layout; fix bug where ‘:active’ would not always match <input> when it should
+
++	(@mrobinson, @mrobinson, #43666)	layout: Add support for `background-blend-mode` (#43666)
+layout; [git show + stylo] support ‘background-blend-mode’ (was neither @supports nor handled in layout)
+
++	(@BudiArb, @rayguo17, @mrobinson, #41562)	script: Implement <input type=range> widget's layout (#41562)
+layout; impl interactive <input type=range>
+
++	(@stevennovaryo, #43231)	layout: Persist `ExternalScrollId` for `::before` and `::after` pseudo element.  (#43231)
+layout; [fixes issue] fix bug where ‘overflow: scroll’ doesn’t work consistently on ‘::before’ and ‘::after’
+
++	(@nicoburns, #42118)	Implement `direction` property for CSS Grid (#42118)
+layout; ‘direction’ on grid containers
+
++	(@webbeef, #42798)	script: Add a `ServoInternals.garbageCollectAllContexts()` (#42798)
+perf; [git show] about:memory now has a Force GC button
+
++	(@webbeef, #42923)	mem: fix camelCase in JSON serialization of memory reports (#42923)
+perf; fix regression in about:memory output where all processes became reported as content processes
+
++	(@simonwuelker, #42930)	script: Fix deadlock in async html parser (#42930)
+perf; more fixes for async parser (discussed in previous mupdate)
+
++	(@simonwuelker, #42959)	tests: Add back .ini file for parser reentrancy test (#42959)
+perf; more fixes for async parser (discussed in previous mupdate)
+
++	(@Narfinger, @jschwe, #42077)	net: Implement LazyGenericCallback and use it in websocket (#42077)
+perf; use crossbeam channels instead of IPC channels unless in multiprocess mode
+
++	(@Taym95, #42966)	indexeddb: remove blocking GenerateKey sync IPC (#42966)
+perf; [git show + spec] avoid IPC when generating a key as part of storing a record #generate-a-key
+
++	(@Narfinger, #42781)	script: Implement efficient TreeIterator without rooting when possible (#42781)
+perf; [git show] faster DOM tree walking, starting with document.open()
+
++	(@kkoyung, #43055)	script: Use `CryptoAlgorithm` in name fields of subtle dictionaries (#43055)
+perf; avoid string comparisons on SubtleCrypto algorithm names
+
++	(@mrobinson, #43066)	script: Readily accept all event names as `Atom`s (#43066)
+perf; [git show] avoid String allocation when constructing DOM events within servo
+
++	(@webbeef, #43074)	script: Coalesce wheel input events (#43074)
+perf; [fixes issue] fix sluggish scrolling on long docs.rs pages like <https://docs.rs/iced-x86/1.21.0/iced_x86/code_asm/struct.CodeAssembler.html>
+
++	(@mrobinson, #43088)	script_bindings: Reduce the amount of borrowing inside `DOMString` (#43088)
+perf; reduce RefCell borrow ops in DOMString
+
++	(@Narfinger, #42978)	script: Add UnrootedSimpleNodeIterator (#42978)
+perf; [git show] faster DOM tree walking, starting with wholeText() on Text
+
++	(@yezhizhen, #43138)	script: Replace the `InputEventId` of `existing_constellation_wheel_event` when coalescing wheel events (#43138)
+perf; part of #43074
+
++	(@simonwuelker, #43151)	script: Accurately measure timing of `DOMContentLoaded` event (#43151)
+perf; [git show] more accurate PerformanceNavigationTiming results for DOMContentLoaded
+
++	(@yezhizhen, #43169)	embedder_traits: Upgrade `InputEventHandled` to `InputEventsHandled` to batch IPC response (#43169)
+perf; part of #43202
+
++	(@simonwuelker, #43212)	Everywhere: Remove instances of clippy::redundant-clone (#43212)
+perf; avoid redundant clones and lint on it
+
++	(@yezhizhen, #43226)	script: Free memory earlier in hot path of input handling (#43226)
+perf; reduce lifetime of allocations when moving mouse
+
++	(@yezhizhen, #43262)	webdriver: Always wait for `mousemove`/`wheel` in a blocking manner (#43262)
+perf; part of #43202
+
++	(@yezhizhen, #43275)	webdriver: Wait for `ImeEvent::Composition` (#43275)
+perf; part of #43202
+
++	(@yezhizhen, #43301)	script: Skip RAII guard and early return when input event queue is empty (#43301)
+perf; part of #43202
+
++	(@Narfinger, #43304)	Script: Do not convert to and from DOMString multiple times (#43304)
+perf; avoid conversions from DOMString to String and back to DOMString
+
++	(@shubhamg13, #42833)	layout: Do not consider broken images as LCP candidates (#42833)
+perf; ignore broken images (rippy!!) for Largest Contentful Paint timings
+
++	(@Narfinger, #43337)	script: Content Event Handler Check switch to HashSet (#43337)
+perf; faster lookup of content attributes for event handlers (was O(n), now O(1))
+
++	(@stevennovaryo, #43056)	layout: Move `resolved_sticky_offset` to `BoxFragmentRareData` (#43056)
+perf; reduce memory usage of BoxFragment by 10%
+
++	(@mrobinson, #43452)	script: Modify and copy the contents of `<textarea>` placeholder less (#43452)
+perf; avoid some String allocations in <textarea placeholder>
+
++	(@Narfinger, #43309)	script: Move easy IpcChannel usage to GenericChannel usage (#43309)
+perf; use crossbeam channels instead of IPC channels unless in multiprocess mode
+
++	(@Narfinger, #43476)	script: Use UnrootedSimpleNodeIterator in delete_cell_or_row (#43476)
+perf; [git show] faster DOM tree walking in deleteRow() on HTMLTableSectionElement, deleteCell() on HTMLTableRowElement, moveBefore() on Node, and when Element children change and get damaged in some cases
+
++	(@minghuaw, #43595)	layout: Do not trigger `dirty_all_nodes` when web font loading fails (#43595)
+perf; avoid reflow when web font fails to load
+
++	(@minghuaw, #43382)	font: Filter out downloaded web fonts before starting to download another web font (#43382)
+perf; [git show] avoid downloading web fonts twice
+
++	(@yezhizhen, #43717)	canvas: Don't include text run without string or font when `build_unshaped_text_runs` (#43717)
+perf; avoid Vec allocation for empty text runs
+
++	(@mrobinson, @lukewarlow, @Loirooriol, #43653)	layout: Combine some common text segment data into `FontAndScriptInfo` (#43653)
+perf; towards better caching for shaping results
+
++	(@TG199, #43780)	script: Let `Console::internal_warn` take `String` instead of `DOMString` (#43780)
+perf; [fixes issue] avoid converting from String to DOMString and back to String when sending internal warnings to console
+
++	(@sagudev, #43134)	chore: Bump mozangle to 0.5.5 (#43134)
+ports; [PR linked in description] part of porting to freebsd
+
++	(@nortti0, @nortti0, #43116)	Port Servo to FreeBSD (#43116)
+ports; servo now builds and runs on freebsd! let’s make a screenshot :3
+
++	(@jschwe, #42912)	Add codesigning script for macOS (#42912)
+servoshell; towards signed servoshell releases for macos to avoid gatekeeper blocking
+
++	(@jschwe, @mrobinson, #42958)	servoshell: Rename executable to servoshell. (#42958)
+servoshell; servoshell binary is now servoshell (see also: libservo crate is now servo… when was that? i forget)
+
++	(@simartin, #43320)	servoshell: fix display of tooltip showing link target URL (#43320)
+servoshell; fix bug where link hover status lines are sometimes not legible
+
++	(@jschwe, #43573)	servoshell: Remove --userscripts option (#43573)
+servoshell; [asked about removal] --userscripts has been removed, but it can be reinstated if needed at any point as a wrapper around the new UserContentManager api
+
++	(@longvatrong111, #42529)	stylo: Enable system color (#42529)
+style; [git show + stylo patch + spec + reverts] ‘<system-color>’ values: ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, ‘WindowText’ (all other changes were reverted in #43105 and #43107)
+
++	(@Loirooriol, #43045)	Upgrade Stylo to 2026-03-01 (#43045)
+style; [new wpt passes] impl ‘attr(namespace|local)’ and ‘clamp(none)’
+
++	(@mrobinson, #43105)	layout: Revert changes from #42529 to button control style (#43105)
+style; reverts part of #42529
+
++	(@yezhizhen, #43061)	css: Enable `jump-start`, `jump-both`, `jump-end`, `jump-none` step-position (#43061)
+style; [mdn] impl ‘steps(…, <step-position>)’ values ‘jump-start’, ‘jump-end’, ‘jump-none’, and ‘jump-both’ (used by ‘animation-timing-function’ and ‘transition-timing-function’)
+
++	(@mrobinson, #43107)	deps: Update Stylo to include "Restore Servo's original form control theme colors" (#43107)
+style; reverts part of #42529
+
++	(@Loirooriol, #43368)	Implement "tables inherit color from body quirk" (#43368)
+style; <table> now inherits ‘color’ from <body> in quirks mode
+
++	(@Loirooriol, #43583)	script: Add preshints for `width` and `height` attributes of `<svg>` (#43583)
+style; impl <svg width> and <svg height>
+
++	(@Loirooriol, #42963)	script: Avoid data race in `ServoLayoutElement::apply_selector_flags()` (#42963)
+unsound; [lsp callers] fix data race found by TSAN in style
+
++	(@yezhizhen, #43014)	webdriver: Do nothing for `dispatch_pause_action` (#43014)
+webdriver; [asked in comments] unclear if observable
+
++	(@yezhizhen, #42946)	webdriver: Enable `pointerMove` to perform smooth transition over specified duration (#42946)
+webdriver; ‘pointerMove’ actions with ‘duration’ are now smoothly interpolated
+
++	(@yezhizhen, #43076)	webdriver: Use globally shared `tick_start` per tick (#43076)
+webdriver; part of #42946
+
++	(@yezhizhen, #43126)	webdriver: Support interspersed scroll actions via event queue (#43126)
+webdriver; fix bug where ‘wheel’ actions fail to interleave with other actions
+
++	(@yezhizhen, #43202)	script: Notify embedder coalesced events to resolve potential WebDriver deadlock (#43202)
+webdriver; fix deadlock under heavy use of actions from multiple input sources (#43136)
+
++	(@yezhizhen, #43690)	webdriver: Improve error reporting for Cookie Addition (#43690)
+webdriver; [spec link] more conformant Add Cookie with spec patch (w3c/webdriver#1955)
+
