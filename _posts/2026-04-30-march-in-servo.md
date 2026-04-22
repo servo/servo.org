@@ -84,15 +84,33 @@ We’ve improved the docs for [`Servo`](https://doc.servo.org/servo/struct.Servo
 
 ## More on the web platform
 
-We’ve improved the default appearance of **&lt;summary>** (@Loirooriol, #43111), **&lt;select>** (@lukewarlow, #43175), **&lt;input type=file>** (@lukewarlow, @AlexVasiluta, @lukewarlow, #43498, #43186), and **&lt;textarea>** and **&lt;input type=text>** and friends (@mrobinson, #43132).
+**Carets now blink** in text fields (@mrobinson, #43128).
+You can [configure or disable](https://doc.servo.org/servo/prefs/struct.Preferences.html#structfield.editing_caret_blink_time) blinking carets with `--pref editing_caret_blink_time=0` or a duration in milliseconds.
+**Clicking to move the caret** is more forgiving now (@mrobinson, #43238), and moving the caret by a **word at a time** is more conventional on Windows and Linux, with Ctrl instead of Alt (@mrobinson, #43436).
+We’ve also fixed a bug where pressing the arrow keys in text fields both moves the caret (good) and scrolls the page (bad), and fixed a bug where the caret fails to render on empty lines (@mrobinson, @freyacodes, #43247, #42218).
+
+**Input** has improved, with more responsive **touchpad scrolling** on Linux (@mrobinson, @chrisduerr, #43350).
+**Pointer events** and **mouse events** can now be **[captured](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling#event_capture) across shadow DOM boundaries** (@simonwuelker, #42987), and we’ve now started working towards shadow-DOM-compatible focus (@mrobinson, #43811).
+
+The **lang** attribute is now taken into account when shaping, which is important for the correct rendering of Chinese and Japanese text (@RichardTjokroutomo, @mrobinson, #43447).
+**‘font-weight’** is now matched more accurately when no available font is an exact match (@shubhamg13, #43125).
+
+We’ve improved the default appearance of **&lt;summary>** (@Loirooriol, #43111), **&lt;select>** (@lukewarlow, #43175), **&lt;input type=file>** (@lukewarlow, @AlexVasiluta, @lukewarlow, #43498, #43186), and **&lt;textarea>** and **&lt;input type=text>** and friends (@mrobinson, #43132), plus **‘::marker’** in mixed LTR/RTL content (@Loirooriol, #43201).
 **&lt;select>** also now requires user interaction to open the picker (@SharanRP, #43485).
 
-We’ve fixed a bug where pressing the arrow keys in form fields both moves the caret (good) and scrolls the page (bad) (@mrobinson, #43247).
+**&lt;form action>**, **&lt;iframe src>**, **open(url)** on **XMLHttpRequest**, **new EventSource(url)**, and **new Worker(url)** now correctly resolve the URL with the page encoding (@SharanRP, @jayant911, @Veercodeprog, @sabbCodes, #43521, #43572, #43537, #43634, #43588).
 
-In your CSS, you can now use the **&lt;system-color> values** ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, and ‘WindowText’ (@longvatrong111, #42529).
+**‘direction’** now works on grid containers (@nicoburns, #42118), **SVG images** can now be used in **‘border-image’** (@shubhamg13, #42566), **‘linear-gradient()’** now dithers to reduce banding (@Messi002, #43603), **‘letter-spacing’** no longer applies to invisible zero-width formatting characters (@simonwuelker, #42961), and **‘:active’** now matches disabled or non-focusable elements too, as long as they are being clicked (@webbeef, #42935).
+
+We’ve fixed bugs related to the **‘animationstart’** and **‘animationend’** events (@simonwuelker, #43454), **inline layout** in quirks mode (@mrobinson, @Loirooriol, @lukewarlow, #42960), **‘:active’** on &lt;input> (@mrobinson, #43722), **‘overflow: scroll’** on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), the default position of **‘position: absolute’** inside blocks that are nested in an inline layout (@yoursanonymous, @Loirooriol, #43084), and the default size of &lt;img> and &lt;svg> without **width** or **height** attributes (@Loirooriol, #42666).
+Fixing that last bug led to Servo developers finding two [spec](https://github.com/w3c/csswg-drafts/issues/12612) [issues](https://github.com/w3c/csswg-drafts/issues/13149)!
+
+We now support the CSS **&lt;system-color> values** ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, and ‘WindowText’ (@longvatrong111, #42529).
 
 We’ve landed partial support for using **CSS [counters](https://drafts.csswg.org/css-lists/#counter)** in ‘list-style-type’ on ‘display: list-item’ and ‘content’ on ‘::marker’, but the counter values themselves are not calculated yet, so all list items still read as `0.` or similar.
 In any case, you can use a &lt;counter-style-name> or ‘symbols()’ in ‘list-style-type’, and ‘counter()’ and ‘counters()’ in ‘content’ (@Loirooriol, #43111).
+
+We’ve also landed partial support for **&lt;marquee>** and the **HTMLMarqueeElement** interface, including basic layout, but the contents are not animated yet (@mrobinson, @lukewarlow, #43520, #43610).
 
 Servo now exposes several attributes that have no direct effect, but are needed for web compatibility (@lukewarlow, #43500, #43499, #43502, #43518):
 
