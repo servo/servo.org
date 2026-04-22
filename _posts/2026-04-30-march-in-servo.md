@@ -13,6 +13,8 @@ With this release Servo becomes more accessible, thanks to **tab navigation** (@
 
 We’ve shipped several new web platform features:
 
+- **‘X-Frame-Options’** (@TimvdLippe, #43539, #43708)
+- **‘Content-Security-Policy: frame-ancestors’** (@TimvdLippe, #43630)
 - **‘::first-letter’** styling (@minghuaw, @xiaochengh, @Loirooriol, #43027)
 - **‘::placeholder’** styling (@stevennovaryo, #43053)
 - **‘::file-selector-button’** styling (@lukewarlow, @AlexVasiluta, #43498)
@@ -20,6 +22,7 @@ We’ve shipped several new web platform features:
 - **‘content’** on **‘::marker’** (@niyabits, @Loirooriol, #43515)
 - **‘list-style-type: &lt;string>’** (@Loirooriol, #43111)
 - **&lt;input type=range>** (@BudiArb, @rayguo17, @mrobinson, #41562)
+- **&lt;svg width>** and **&lt;svg height>** (@Loirooriol, #43583)
 - the **accesskey** attribute (@mrobinson, #43031, #43144, #43434)
 - partial support for **&lt;link rel=modulepreload>** (@Gae24, #42964)
 - [**&lt;system-color>**](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/system-color) values in CSS (@longvatrong111, @mrobinson, #42529, #43105, #43107)
@@ -98,16 +101,16 @@ The **lang** attribute is now taken into account when shaping, which is importan
 We’ve improved the default appearance of **&lt;summary>** (@Loirooriol, #43111), **&lt;select>** (@lukewarlow, #43175), **&lt;input type=file>** (@lukewarlow, @AlexVasiluta, @lukewarlow, #43498, #43186), and **&lt;textarea>** and **&lt;input type=text>** and friends (@mrobinson, #43132), plus **‘::marker’** in mixed LTR/RTL content (@Loirooriol, #43201).
 **&lt;select>** also now requires user interaction to open the picker (@SharanRP, #43485).
 
-**&lt;form action>**, **&lt;iframe src>**, **open(url)** on **XMLHttpRequest**, **new EventSource(url)**, and **new Worker(url)** now correctly resolve the URL with the page encoding (@SharanRP, @jayant911, @Veercodeprog, @sabbCodes, #43521, #43572, #43537, #43634, #43588).
+**&lt;form action>**, **&lt;iframe src>**, **open(url)** on **XMLHttpRequest**, **new EventSource(url)**, and **new Worker(url)** now correctly resolve the URL with the page encoding (@SharanRP, @jdm, @jayant911, @Veercodeprog, @sabbCodes, #43521, #43554, #43572, #43537, #43634, #43588).
 
 **‘direction’** now works on grid containers (@nicoburns, #42118), **SVG images** can now be used in **‘border-image’** (@shubhamg13, #42566), **‘linear-gradient()’** now dithers to reduce banding (@Messi002, #43603), **‘letter-spacing’** no longer applies to invisible zero-width formatting characters (@simonwuelker, #42961), and **‘:active’** now matches disabled or non-focusable elements too, as long as they are being clicked (@webbeef, #42935).
 
-We’ve improved the conformance of **JS modules** (@Gae24, #43585), **‘Content-Security-Policy’** (@TimvdLippe, #43367, #43483, #43438, #43645), **&lt;button command>** (@lukewarlow, #42883), **&lt;font size>** (@shubhamg13, #43103), **&lt;script integrity>** and **&lt;style integrity>** (@Gae24, #42931), **EventSource** (@mishop-15, #42179), **IndexedDB** (@Taym95, @jerensl, #43096, #43041, #42451), **IntersectionObserver** (@stevennovaryo, @mrobinson, #42251), **SubtleCrypto** (@kkoyung, #42984, #43315, #43533), **HTMLVideoElement** (@shubhamg13, #43341), **dataset** on **Element** (@TimvdLippe, #43046), and **querySelector()** and **querySelectorAll()** (@simonwuelker, #42991).
+We’ve improved the conformance of **JS modules** (@Gae24, #43585), **‘Content-Security-Policy’** (@TimvdLippe, #43367, #43483, #43438, #43645, #43652), **&lt;button command>** (@lukewarlow, #42883), **&lt;font size>** (@shubhamg13, #43103), **&lt;script integrity>** and **&lt;style integrity>** (@Gae24, #42931), **EventSource** (@mishop-15, #42179), **IndexedDB** (@Taym95, @jerensl, #43096, #43041, #42451, #43721, #43754), **IntersectionObserver** (@stevennovaryo, @mrobinson, #42251), **SubtleCrypto** (@kkoyung, #42984, #43315, #43533), **HTMLVideoElement** (@shubhamg13, #43341), **dataset** on **Element** (@TimvdLippe, #43046), and **querySelector()** and **querySelectorAll()** (@simonwuelker, #42991).
 
-We’ve fixed bugs related to the **‘animationstart’** and **‘animationend’** events (@simonwuelker, #43454), **inline layout** in quirks mode (@mrobinson, @Loirooriol, @lukewarlow, #42960), **‘:active’** on &lt;input> (@mrobinson, #43722), **‘overflow: scroll’** on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), the default position of **‘position: absolute’** inside blocks that are nested in an inline layout (@yoursanonymous, @Loirooriol, #43084), and the default size of &lt;img> and &lt;svg> without **width** or **height** attributes (@Loirooriol, #42666).
+We’ve fixed bugs related to **&lt;iframe>** (@TimvdLippe, @jdm, #43539, #43732), the **‘animationstart’** and **‘animationend’** events (@simonwuelker, #43454), **inline layout** in quirks mode (@mrobinson, @Loirooriol, @lukewarlow, #42960), **‘:active’** on &lt;input> (@mrobinson, #43722), **‘overflow: scroll’** on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), the default position of **‘position: absolute’** inside blocks that are nested in an inline layout (@yoursanonymous, @Loirooriol, #43084), and the default size of &lt;img> and &lt;svg> without **width** or **height** attributes (@Loirooriol, #42666).
 Fixing that last bug led to Servo developers finding two [spec](https://github.com/w3c/csswg-drafts/issues/12612) [issues](https://github.com/w3c/csswg-drafts/issues/13149)!
 
-We now support the CSS **&lt;system-color> values** ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, and ‘WindowText’ (@longvatrong111, #42529).
+We now support the CSS **&lt;system-color> values** ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, and ‘WindowText’ (@longvatrong111, #42529, #43105, #43107).
 
 We’ve landed partial support for using **CSS [counters](https://drafts.csswg.org/css-lists/#counter)** in ‘list-style-type’ on ‘display: list-item’ and ‘content’ on ‘::marker’, but the counter values themselves are not calculated yet, so all list items still read as `0.` or similar.
 In any case, you can use a &lt;counter-style-name> or ‘symbols()’ in ‘list-style-type’, and ‘counter()’ and ‘counters()’ in ‘content’ (@Loirooriol, #43111).
