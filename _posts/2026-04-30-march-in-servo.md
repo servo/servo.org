@@ -50,7 +50,7 @@ $ cargo add servo
 ```
 </figure>
 
-## Embedding API
+## Embedding and automation
 
 Breaking changes:
 
@@ -84,6 +84,11 @@ You can now get the [`EmbedderControlId`](https://doc.servo.org/servo/struct.Emb
 [`PixelFormat`](https://doc.servo.org/servo/enum.PixelFormat.html) now implements [`Debug`](https://doc.rust-lang.org/1.92.0/core/fmt/trait.Debug.html) (@chrisduerr, @mrobinson, #43249).
 
 We’ve improved the docs for [`Servo`](https://doc.servo.org/servo/struct.Servo.html), [`ServoBuilder`](https://doc.servo.org/servo/struct.ServoBuilder.html), [`WebViewBuilder`](https://doc.servo.org/servo/struct.WebViewBuilder.html), [`RenderingContext`](https://doc.servo.org/servo/trait.RenderingContext.html) (@chrisduerr, #43229), [`EmbedderControlId`](https://doc.servo.org/servo/struct.EmbedderControlId.html), [`EmbedderControlRequest`](https://doc.servo.org/servo/enum.EmbedderControlRequest.html), [`EmbedderControlResponse`](https://doc.servo.org/servo/enum.EmbedderControlResponse.html), [`SimpleDialogRequest`](https://doc.servo.org/servo/enum.SimpleDialogRequest.html), [`AlertResponse`](https://doc.servo.org/servo/enum.AlertResponse.html), [`ConfirmResponse`](https://doc.servo.org/servo/enum.ConfirmResponse.html), [`PromptResponse`](https://doc.servo.org/servo/enum.PromptResponse.html), [`EmbedderMsg`](https://doc.servo.org/servo/enum.EmbedderMsg.html) (@mukilan, #43564), [`ResourceReaderMethods`](https://doc.servo.org/servo/resources/trait.ResourceReaderMethods.html) (@jschwe, @mrobinson, #43769), [`servo`](https://doc.servo.org/servo/)::[`input­_events`](https://doc.servo.org/servo/input_events/index.html) (@mukilan, #43681), and [`WheelDelta`](https://doc.servo.org/servo/struct.WheelDelta.html) (@yezhizhen, @mrobinson, #43210).
+
+We fixed a deadlock in **WebDriver** that occurs under heavy use of **[actions](https://w3c.github.io/webdriver/#actions)** from multiple input sources (@yezhizhen, #43202, #43169, #43262, #43275, #43301), **‘pointerMove’ actions** with a ‘duration’ are now smoothly interpolated (@yezhizhen, #42946, #43076).
+
+**Add Cookie** is now more conformant (@yezhizhen, #43690), which led to Servo developers landing [a spec patch](https://github.com/w3c/webdriver/pull/1955).
+**‘pause’ actions** are now slightly more efficient (@yezhizhen, #43014), and we’ve fixed a bug where **‘wheel’ actions** fail to interleave with other actions (@yezhizhen, #43126).
 
 ## More on the web platform
 
