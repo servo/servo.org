@@ -96,6 +96,9 @@ All of the features above are enabled in servoshell’s experimental mode.
 For a long time, Servo has had some support for the [**Web Bluetooth API**](https://webbluetoothcg.github.io/web-bluetooth/) under `--pref dom­_bluetooth­_enabled`.
 We’ve recently reworked our implementation to adopt [**btleplug**](https://nonpolynomial.com/2023/10/30/how-to-beg-borrow-steal-your-way-to-a-cross-platform-bluetooth-le-library/), the cross-platform Rust-native Bluetooth LE library (@webbeef, #43529, #43581).
 
+We’ve landed more fixes to Servo’s [**async parser**]({{ '/blog/2026/03/31/february-in-servo/#:~:text=Parsing%20web%20pages' | url }}) (@simonwuelker, #42930, #42959), under `--pref dom­_servoparser­_async­_html­_tokenizer­_enabled`.
+If we can get the feature working more reliably ([#37418](https://github.com/servo/servo/issues/37418)), it could **halve the energy** Servo spends on parsing, **lower latency** for pages that don’t use document.write(), and even **improve the html5ever API** for the ecosystem.
+
 ## Developer tools
 
 Servo’s DevTools feature now has partial support for inspecting **service workers** (@CynthiaOketch, #43659), as well as using the **navigation controls** along the top of the UI (@brentschroeter, @eerii, #43026).
@@ -191,7 +194,17 @@ Servo now exposes several attributes that have no direct effect, but are needed 
 
 ## Performance and stability
 
+We’ve fixed **sluggish scrolling** on long documents like [this page on docs.rs](https://docs.rs/iced-x86/1.21.0/iced_x86/code_asm/struct.CodeAssembler.html) (@webbeef, @yezhizhen, #43074, #43138), and reduced the **memory usage of BoxFragment** by **10%** (@stevennovaryo, #43056).
+**about:memory** now has a **Force GC** button (@webbeef, #42798), and no longer reports all processes as content processes in multiprocess mode (@webbeef, #42923).
+
+**Web fonts** are no longer fetched more than once, and they no longer cause reflow when they fail to load (@minghuaw, #43382, #43595).
+We’re also working towards better caching for shaping results (@mrobinson, @lukewarlow, @Loirooriol, #43653).
+**Event handler** attribute lookup is more efficient now (@Narfinger, #43337), and we’ve made **DOM tree walking** more efficient in many cases (@Narfinger, #42781, #42978, #43476).
+
 **crypto.subtle.encrypt()**, **decrypt()**, **sign()**, **verify()**, **digest()**, **importKey()**, **unwrapKey()**, **decapsulateKey()**, and **decapsulateBits()** are more efficient now (@kkoyung, #42927), thanks to a recent [spec](https://github.com/w3c/webcrypto/issues/422) [update](https://github.com/w3c/webcrypto/pull/426).
+
+More of Servo now **uses cheaper crossbeam channels** instead of IPC channels, unless Servo is running in multiprocess mode, or **avoids IPC altogether** (@Narfinger, @jschwe, @Taym95, #42077, #43309, #42966).
+We’ve also reduced clones, allocations, conversions, comparisons, and borrow checks in many parts of Servo (@simonwuelker, @kkoyung, @mrobinson, @Narfinger, @yezhizhen, @TG199, #43212, #43055, #43066, #43304, #43452, #43717, #43780, #43088, #43226).
 
 **DOM data structures** (`#[dom_struct]`) can refer to one another, with the help of [garbage collection](https://research.mozilla.org/2014/08/26/javascript-servos-only-garbage-collector/).
 But when DOM objects are being destroyed, those references can become invalid for a brief moment, depending on the order the GC finalizers run in.
