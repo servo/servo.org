@@ -331,6 +331,8 @@ and towards supporting <strong>IntersectionObserver</strong>, under <code>--pref
 <p><strong>&lt;link rel=modulepreload&gt;</strong> is now partially supported (@Gae24, #42964), though recursive fetching of descendants is gated by <code>--pref dom­_allow­_preloading­_module­_descendants</code> (@Gae24, #43353).</p>
 <p>For a long time, Servo has had some support for the <a href="https://webbluetoothcg.github.io/web-bluetooth/"><strong>Web Bluetooth API</strong></a> under <code>--pref dom­_bluetooth­_enabled</code>.
 We’ve recently reworked our implementation to adopt <a href="https://nonpolynomial.com/2023/10/30/how-to-beg-borrow-steal-your-way-to-a-cross-platform-bluetooth-le-library/"><strong>btleplug</strong></a>, the cross-platform Rust-native Bluetooth LE library (@webbeef, #43529, #43581).</p>
+<p>We’ve landed more fixes to Servo’s <a href="/twismar/blog/2026/03/31/february-in-servo/#:~:text=Parsing%20web%20pages"><strong>async parser</strong></a> (@simonwuelker, #42930, #42959), under <code>--pref dom­_servoparser­_async­_html­_tokenizer­_enabled</code>.
+If we can get the feature working more reliably (<a href="https://github.com/servo/servo/issues/37418">#37418</a>), it could <strong>halve the energy</strong> Servo spends on parsing, <strong>lower latency</strong> for pages that don’t use document.write(), and even <strong>improve the html5ever API</strong> for the ecosystem.</p>
 <h2 id="developer-tools" tabindex="-1">Developer tools <a class="header-anchor" href="#developer-tools">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -418,7 +420,14 @@ In any case, you can use a &lt;counter-style-name&gt; or ‘symbols()’ in ‘l
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>We’ve fixed <strong>sluggish scrolling</strong> on long documents like <a href="https://docs.rs/iced-x86/1.21.0/iced_x86/code_asm/struct.CodeAssembler.html">this page on docs.rs</a> (@webbeef, @yezhizhen, #43074, #43138), and reduced the <strong>memory usage of BoxFragment</strong> by <strong>10%</strong> (@stevennovaryo, #43056).
+<strong>about:memory</strong> now has a <strong>Force GC</strong> button (@webbeef, #42798), and no longer reports all processes as content processes in multiprocess mode (@webbeef, #42923).</p>
+<p><strong>Web fonts</strong> are no longer fetched more than once, and they no longer cause reflow when they fail to load (@minghuaw, #43382, #43595).
+We’re also working towards better caching for shaping results (@mrobinson, @lukewarlow, @Loirooriol, #43653).
+<strong>Event handler</strong> attribute lookup is more efficient now (@Narfinger, #43337), and we’ve made <strong>DOM tree walking</strong> more efficient in many cases (@Narfinger, #42781, #42978, #43476).</p>
 <p><strong>crypto.subtle.encrypt()</strong>, <strong>decrypt()</strong>, <strong>sign()</strong>, <strong>verify()</strong>, <strong>digest()</strong>, <strong>importKey()</strong>, <strong>unwrapKey()</strong>, <strong>decapsulateKey()</strong>, and <strong>decapsulateBits()</strong> are more efficient now (@kkoyung, #42927), thanks to a recent <a href="https://github.com/w3c/webcrypto/issues/422">spec</a> <a href="https://github.com/w3c/webcrypto/pull/426">update</a>.</p>
+<p>More of Servo now <strong>uses cheaper crossbeam channels</strong> instead of IPC channels, unless Servo is running in multiprocess mode, or <strong>avoids IPC altogether</strong> (@Narfinger, @jschwe, @Taym95, #42077, #43309, #42966).
+We’ve also reduced clones, allocations, conversions, comparisons, and borrow checks in many parts of Servo (@simonwuelker, @kkoyung, @mrobinson, @Narfinger, @yezhizhen, @TG199, #43212, #43055, #43066, #43304, #43452, #43717, #43780, #43088, #43226).</p>
 <p><strong>DOM data structures</strong> (<code>#[dom_struct]</code>) can refer to one another, with the help of <a href="https://research.mozilla.org/2014/08/26/javascript-servos-only-garbage-collector/">garbage collection</a>.
 But when DOM objects are being destroyed, those references can become invalid for a brief moment, depending on the order the GC finalizers run in.
 This can be unsound if those references are accessed, which is a very easy mistake to make if the type has an <code>impl Drop</code>.
