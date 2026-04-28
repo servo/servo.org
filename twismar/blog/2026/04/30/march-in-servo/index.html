@@ -266,7 +266,6 @@
 <li><strong>&lt;input type=range&gt;</strong> (@BudiArb, @rayguo17, @mrobinson, #41562)</li>
 <li><strong>&lt;svg width&gt;</strong> and <strong>&lt;svg height&gt;</strong> (@Loirooriol, #43583)</li>
 <li>the <strong>accesskey</strong> attribute (@mrobinson, #43031, #43144, #43434)</li>
-<li>partial support for <strong>&lt;link rel=modulepreload&gt;</strong> (@Gae24, #42964)</li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/system-color"><strong>&lt;system-color&gt;</strong></a> values in CSS (@longvatrong111, @mrobinson, #42529, #43105, #43107)</li>
 </ul>
 <p>Plus a bunch of new DOM APIs:</p>
@@ -278,15 +277,48 @@
 <li><strong>selectedOptions</strong> on <strong>HTMLSelectElement</strong> (@jakubadamw, #43017)</li>
 <li><strong>url</strong> on <strong>LargestContentfulPaint</strong> (@shubhamg13, #42901, #42949)</li>
 <li><strong>crypto.subtle.digest()</strong> for <strong>TurboSHAKE</strong> (@kkoyung, #43551)</li>
-<li><strong>crypto.subtle.getPublicKey()</strong> for <strong>X25519</strong>, <strong>RSASSA-PKCS1-v1_5</strong>, <strong>RSA-PSS</strong>, and <strong>RSA-OAEP</strong> (@kkoyung, #43073, #43093)</li>
+<li><strong>crypto.subtle.getPublicKey()</strong> for <strong>ECDH</strong>, <strong>ECDSA</strong>, <strong>Ed25519</strong>, <strong>RSASSA-PKCS1-v1_5</strong>, <strong>RSA-PSS</strong>, <strong>RSA-OAEP</strong>, and <strong>X25519</strong> (@kkoyung, @Taym95, #43073, #43093, #43106, #43115)</li>
 </ul>
-<p>Servo now fires <strong>‘pointerover’</strong>, <strong>‘pointerout’</strong>, <strong>‘pointerenter’</strong>, and <strong>‘pointerleave’</strong> events on web content (@webbeef, #42736), <strong>‘scroll’</strong> events on <strong>VisualViewport</strong> (@stevennovaryo, #42771), and <strong>‘scrollend’</strong> events on <strong>Document</strong>, <strong>Element</strong>, and <strong>VisualViewport</strong> (@abdelrahman1234567, @mrobinson, #38773).</p>
+<p><strong>new Worker()</strong> now supports <code>{type: &quot;module&quot;}</code> (@pylbrecht, @Gae24, #40365), and <strong>CanvasRenderingContext2D</strong> now supports drawing text with <strong>Variation Selectors</strong>, allowing you to control things like emoji presentation and CJK shaping (@yezhizhen, #43449).</p>
+<p>Servo now fires <strong>‘pointerover’</strong>, <strong>‘pointerout’</strong>, <strong>‘pointerenter’</strong>, and <strong>‘pointerleave’</strong> events on web content (@webbeef, #42736), <strong>‘scroll’</strong> events on <strong>VisualViewport</strong> (@stevennovaryo, #42771), and <strong>‘scrollend’</strong> events on <strong>Document</strong>, <strong>Element</strong>, and <strong>VisualViewport</strong> (@abdelrahman1234567, @mrobinson, #38773).
+We also fire <strong>‘error’</strong> events when <strong>event handler</strong> attributes contain syntax errors (@simonwuelker, #43178).</p>
 <p>A great deal of work went into making the <strong><a href="http://crates.io">crates.io</a> release</strong> possible, including renaming <code>libservo</code> to just <code>servo</code> (@jschwe, #43141), making each package self-contained (@jschwe, #43180, #43165), fixing build issues (@delan, @jschwe, #43170, #43458, #43463) and <a href="http://crates.io">crates.io</a> compliance issues (@jschwe, #43459), configuring package metadata (@jschwe, @StaySafe020, #43078, #43264, #43451, #43457, #43654), and organising our dependency tree (@jschwe, @yezhizhen, @webbeef, @mrobinson, #42916, #43243, #43263, #43516, #43526, #43552, #43615, #43622, #43273, #43092).
 As a result, you can now take your first step towards <a href="https://book.servo.org/embedding/overview.html">embedding Servo</a> in a Rust app with:</p>
 <figure>
 <pre><code>$ cargo add servo
 </code></pre>
 </figure>
+<p>This is another big update, so here’s an outline:</p>
+<ul>
+<li>
+<p><a href="#work-in-progress"><strong>Work in progress</strong></a></p>
+</li>
+<li>
+<p><a href="#developer-tools"><strong>Developer tools</strong></a></p>
+</li>
+<li>
+<p><a href="#embedding-and-automation"><strong>Embedding and automation</strong></a></p>
+</li>
+<li>
+<p><a href="#more-on-the-web-platform"><strong>More on the web platform</strong></a></p>
+</li>
+<li>
+<p><a href="#performance-and-stability"><strong>Performance and stability</strong></a></p>
+</li>
+</ul>
+<h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We’ve landed more work towards supporting <strong>IndexedDB</strong>, under <code>--pref dom­_indexeddb­_enabled</code> (@arihant2math, @gterzian, @Taym95, @jerensl, #42139, #43096, #43041, #42451, #43721, #43754, #42786),
+and towards supporting <strong>IntersectionObserver</strong>, under <code>--pref dom­_intersection­_observer­_enabled</code> (@stevennovaryo, @mrobinson, #42251).</p>
+<p>We’re continuing to implement <strong>document.execCommand()</strong> for <strong>rich text editing</strong> (@TimvdLippe, #43177), under <code>--pref dom­_exec­_command­_enabled</code>.
+<strong>‘beforeinput’</strong> and <strong>‘input’</strong> events are now fired when executing supported and enabled commands (@TimvdLippe, #43087), the <strong>‘defaultParagraphSeparator’</strong> and <strong>‘styleWithCSS’</strong> commands are now supported (@TimvdLippe, #43028), and the <strong>‘delete’</strong> command is partially supported (@TimvdLippe, #43016, #43082).</p>
+<p>We’re also working on the <a href="https://drafts.csswg.org/css-font-loading/"><strong>Font Loading API</strong></a> (@simonwuelker, #43286), under <code>--pref dom­_fontface­_enabled</code>.
+<strong>new FontFace()</strong> now accepts ArrayBuffer in its <code>source</code> argument (@simonwuelker, #43281).</p>
+<p>All of the features above are enabled in servoshell’s experimental mode.</p>
+<p><strong>&lt;link rel=modulepreload&gt;</strong> is now partially supported (@Gae24, #42964), though recursive fetching of descendants is gated by <code>--pref dom­_allow­_preloading­_module­_descendants</code> (@Gae24, #43353).</p>
+<p>For a long time, Servo has had some support for the <a href="https://webbluetoothcg.github.io/web-bluetooth/"><strong>Web Bluetooth API</strong></a> under <code>--pref dom­_bluetooth­_enabled</code>.
+We’ve recently reworked our implementation to adopt <a href="https://nonpolynomial.com/2023/10/30/how-to-beg-borrow-steal-your-way-to-a-cross-platform-bluetooth-le-library/"><strong>btleplug</strong></a>, the cross-platform Rust-native Bluetooth LE library (@webbeef, #43529, #43581).</p>
 <h2 id="developer-tools" tabindex="-1">Developer tools <a class="header-anchor" href="#developer-tools">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -349,15 +381,16 @@ You can <a href="https://doc.servo.org/servo/prefs/struct.Preferences.html#struc
 <strong>Clicking to move the caret</strong> is more forgiving now (@mrobinson, #43238), and moving the caret by a <strong>word at a time</strong> is more conventional on Windows and Linux, with Ctrl instead of Alt (@mrobinson, #43436).
 We’ve also fixed a bug where pressing the arrow keys in text fields both moves the caret (good) and scrolls the page (bad), and fixed a bug where the caret fails to render on empty lines (@mrobinson, @freyacodes, #43247, #42218).</p>
 <p><strong>Input</strong> has improved, with more responsive <strong>touchpad scrolling</strong> on Linux (@mrobinson, @chrisduerr, #43350).
-<strong>Pointer events</strong> and <strong>mouse events</strong> can now be <strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling#event_capture">captured</a> across shadow DOM boundaries</strong> (@simonwuelker, #42987), and we’ve now started working towards shadow-DOM-compatible focus (@mrobinson, #43811).</p>
+<strong>Pointer events</strong> and <strong>mouse events</strong> can now be <strong><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling#event_capture">captured</a> across shadow DOM boundaries</strong> (@simonwuelker, #42987), and we’ve now started working towards shadow-DOM-compatible focus (@mrobinson, #43811).
+Pressing <strong>Space</strong> or <strong>Enter</strong> inside text fields no longer causes them to be clicked (@mrobinson, #43343).</p>
 <p>The <strong>lang</strong> attribute is now taken into account when shaping, which is important for the correct rendering of Chinese and Japanese text (@RichardTjokroutomo, @mrobinson, #43447).
 <strong>‘font-weight’</strong> is now matched more accurately when no available font is an exact match (@shubhamg13, #43125).</p>
 <p>We’ve improved the default appearance of <strong>&lt;summary&gt;</strong> (@Loirooriol, #43111), <strong>&lt;select&gt;</strong> (@lukewarlow, #43175), <strong>&lt;input type=file&gt;</strong> (@lukewarlow, @AlexVasiluta, @lukewarlow, #43498, #43186), and <strong>&lt;textarea&gt;</strong> and <strong>&lt;input type=text&gt;</strong> and friends (@mrobinson, #43132), plus <strong>‘::marker’</strong> in mixed LTR/RTL content (@Loirooriol, #43201).
 <strong>&lt;select&gt;</strong> also now requires user interaction to open the picker (@SharanRP, #43485).</p>
 <p><strong>&lt;form action&gt;</strong>, <strong>&lt;iframe src&gt;</strong>, <strong>open(url)</strong> on <strong>XMLHttpRequest</strong>, <strong>new EventSource(url)</strong>, and <strong>new Worker(url)</strong> now correctly resolve the URL with the page encoding (@SharanRP, @jdm, @jayant911, @Veercodeprog, @sabbCodes, #43521, #43554, #43572, #43537, #43634, #43588).</p>
 <p><strong>‘direction’</strong> now works on grid containers (@nicoburns, #42118), <strong>SVG images</strong> can now be used in <strong>‘border-image’</strong> (@shubhamg13, #42566), <strong>‘linear-gradient()’</strong> now dithers to reduce banding (@Messi002, #43603), <strong>‘letter-spacing’</strong> no longer applies to invisible zero-width formatting characters (@simonwuelker, #42961), and <strong>‘:active’</strong> now matches disabled or non-focusable elements too, as long as they are being clicked (@webbeef, #42935).</p>
-<p>We’ve improved the conformance of <strong>JS modules</strong> (@Gae24, #43585), <strong>‘Content-Security-Policy’</strong> (@TimvdLippe, #43367, #43483, #43438, #43645, #43652), <strong>&lt;button command&gt;</strong> (@lukewarlow, #42883), <strong>&lt;font size&gt;</strong> (@shubhamg13, #43103), <strong>&lt;script integrity&gt;</strong> and <strong>&lt;style integrity&gt;</strong> (@Gae24, #42931), <strong>EventSource</strong> (@mishop-15, #42179), <strong>IndexedDB</strong> (@Taym95, @jerensl, #43096, #43041, #42451, #43721, #43754), <strong>IntersectionObserver</strong> (@stevennovaryo, @mrobinson, #42251), <strong>SubtleCrypto</strong> (@kkoyung, #42984, #43315, #43533), <strong>HTMLVideoElement</strong> (@shubhamg13, #43341), <strong>dataset</strong> on <strong>Element</strong> (@TimvdLippe, #43046), and <strong>querySelector()</strong> and <strong>querySelectorAll()</strong> (@simonwuelker, #42991).</p>
-<p>We’ve fixed bugs related to <strong>&lt;iframe&gt;</strong> (@TimvdLippe, @jdm, #43539, #43732), the <strong>‘animationstart’</strong> and <strong>‘animationend’</strong> events (@simonwuelker, #43454), <strong>inline layout</strong> in quirks mode (@mrobinson, @Loirooriol, @lukewarlow, #42960), <strong>‘:active’</strong> on &lt;input&gt; (@mrobinson, #43722), <strong>‘overflow: scroll’</strong> on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), the default position of <strong>‘position: absolute’</strong> inside blocks that are nested in an inline layout (@yoursanonymous, @Loirooriol, #43084), and the default size of &lt;img&gt; and &lt;svg&gt; without <strong>width</strong> or <strong>height</strong> attributes (@Loirooriol, #42666).
+<p>We’ve improved the conformance of <strong>JS modules</strong> (@Gae24, #43585), <strong>‘Content-Security-Policy’</strong> (@TimvdLippe, @elomscansio, #43367, #43483, #43438, #43645, #43652, #43063), <strong>&lt;button command&gt;</strong> (@lukewarlow, #42883), <strong>&lt;font size&gt;</strong> (@shubhamg13, #43103), <strong>&lt;link media&gt;</strong> and <strong>&lt;link type&gt;</strong> (@TimvdLippe, #43043), <strong>&lt;option selected&gt;</strong> (@SharanRP, #43582), <strong>&lt;script integrity&gt;</strong> and <strong>&lt;style integrity&gt;</strong> (@Gae24, #42931), <strong>EventSource</strong> (@mishop-15, #42179), <strong>SubtleCrypto</strong> (@kkoyung, #42984, #43315, #43533), <strong>HTMLVideoElement</strong> (@shubhamg13, #43341), <strong>dataset</strong> on <strong>Element</strong> (@TimvdLippe, #43046), and <strong>querySelector()</strong> and <strong>querySelectorAll()</strong> (@simonwuelker, #42991).</p>
+<p>We’ve fixed bugs related to <strong>focus</strong> (@jakubadamw, #43431), <strong>&lt;iframe&gt;</strong> (@TimvdLippe, @jdm, #43539, #43732), the <strong>‘animationstart’</strong> and <strong>‘animationend’</strong> events (@simonwuelker, #43454), the <strong>‘touchmove’</strong> event (@yezhizhen, #42926), <strong>inline layout</strong> in quirks mode (@mrobinson, @Loirooriol, @lukewarlow, #42960), <strong>‘:active’</strong> on &lt;input&gt; (@mrobinson, #43722), <strong>‘overflow: scroll’</strong> on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), the default position of <strong>‘position: absolute’</strong> inside blocks that are nested in an inline layout (@yoursanonymous, @Loirooriol, #43084), and the default size of &lt;img&gt; and &lt;svg&gt; without <strong>width</strong> or <strong>height</strong> attributes (@Loirooriol, #42666).
 Fixing that last bug led to Servo developers finding two <a href="https://github.com/w3c/csswg-drafts/issues/12612">spec</a> <a href="https://github.com/w3c/csswg-drafts/issues/13149">issues</a>!</p>
 <p>We now support the CSS <strong>&lt;system-color&gt; values</strong> ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, and ‘WindowText’ (@longvatrong111, #42529, #43105, #43107).</p>
 <p>We’ve landed partial support for using <strong>CSS <a href="https://drafts.csswg.org/css-lists/#counter">counters</a></strong> in ‘list-style-type’ on ‘display: list-item’ and ‘content’ on ‘::marker’, but the counter values themselves are not calculated yet, so all list items still read as <code>0.</code> or similar.
