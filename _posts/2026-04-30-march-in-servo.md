@@ -8,6 +8,7 @@ categories:
 ---
 
 [**Servo 0.1.0**](https://github.com/servo/servo/releases/tag/v0.1.0) represents Servo’s biggest month ever, with a record **530 commits** and [**our first ever release on crates.io**]({{ '/blog/2026/04/13/servo-0.1.0-release/' | url }})!
+For security fixes, see [**§ Security**](#security).
 
 With this release Servo becomes more accessible, thanks to **tab navigation** (@mrobinson, @Loirooriol, #42952, #43019, #43058, #43246, #43267, #43067) and **keyboard scrolling** with Space and Shift+Space (@mrobinson, #43322).
 
@@ -55,6 +56,8 @@ $ cargo add servo
 
 This is another big update, so here’s an outline:
 
+- [**Security**](#security)
+
 - [**Work in progress**](#work-in-progress)
 
 - [**Developer tools**](#developer-tools)
@@ -64,6 +67,16 @@ This is another big update, so here’s an outline:
 - [**More on the web platform**](#more-on-the-web-platform)
 
 - [**Performance and stability**](#performance-and-stability)
+
+## Security
+
+**crypto.subtle.deriveBits()** for **X25519** checking for all-zero secrets, and **verify()** for **HMAC** comparing signatures, are now done **in constant time** (@kkoyung, #43775, #43773).
+
+**‘Content-Security-Policy’** now handles redirects correctly (@TimvdLippe, #43438), and sends violation reports with the correct **blockedURI** and **referrer** (@TimvdLippe, #43367, #43645, #43483).
+The policy in &lt;meta> now combines with the policy sent in HTTP headers, rather than overriding it (@TimvdLippe, @elomscansio, #43063).
+When checking nonces, we now reject elements with duplicate attributes (@dyegoaurelio, #43216).
+
+The document containing an **&lt;iframe>** can no longer access the contents of error pages (@TimvdLippe, #43539), and CSP violations inside an &lt;iframe> are now correctly reported (@TimvdLippe, #43652).
 
 ## Work in progress
 
@@ -157,7 +170,7 @@ We’ve improved the default appearance of **&lt;summary>** (@Loirooriol, #43111
 
 **‘direction’** now works on grid containers (@nicoburns, #42118), **SVG images** can now be used in **‘border-image’** (@shubhamg13, #42566), **‘linear-gradient()’** now dithers to reduce banding (@Messi002, #43603), **‘letter-spacing’** no longer applies to invisible zero-width formatting characters (@simonwuelker, #42961), and **‘:active’** now matches disabled or non-focusable elements too, as long as they are being clicked (@webbeef, #42935).
 
-We’ve improved the conformance of **JS modules** (@Gae24, #43585), **‘Content-Security-Policy’** (@TimvdLippe, @elomscansio, #43367, #43483, #43438, #43645, #43652, #43063), **&lt;button command>** (@lukewarlow, #42883), **&lt;font size>** (@shubhamg13, #43103), **&lt;link media>** and **&lt;link type>** (@TimvdLippe, #43043), **&lt;option selected>** (@SharanRP, #43582), **&lt;script integrity>** and **&lt;style integrity>** (@Gae24, #42931), **EventSource** (@mishop-15, #42179), **SubtleCrypto** (@kkoyung, #42984, #43315, #43533), **HTMLVideoElement** (@shubhamg13, #43341), **dataset** on **Element** (@TimvdLippe, #43046), and **querySelector()** and **querySelectorAll()** (@simonwuelker, #42991).
+We’ve improved the conformance of **JS modules** (@Gae24, #43585), **&lt;button command>** (@lukewarlow, #42883), **&lt;font size>** (@shubhamg13, #43103), **&lt;link media>** and **&lt;link type>** (@TimvdLippe, #43043), **&lt;option selected>** (@SharanRP, #43582), **&lt;script integrity>** and **&lt;style integrity>** (@Gae24, #42931), **EventSource** (@mishop-15, #42179), **SubtleCrypto** (@kkoyung, #42984, #43315, #43533), **HTMLVideoElement** (@shubhamg13, #43341), **dataset** on **Element** (@TimvdLippe, #43046), and **querySelector()** and **querySelectorAll()** (@simonwuelker, #42991).
 
 We’ve fixed bugs related to **focus** (@jakubadamw, #43431), **&lt;iframe>** (@TimvdLippe, @jdm, #43539, #43732), the **‘animationstart’** and **‘animationend’** events (@simonwuelker, #43454), the **‘touchmove’** event (@yezhizhen, #42926), **inline layout** in quirks mode (@mrobinson, @Loirooriol, @lukewarlow, #42960), **‘:active’** on &lt;input> (@mrobinson, #43722), **‘overflow: scroll’** on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), the default position of **‘position: absolute’** inside blocks that are nested in an inline layout (@yoursanonymous, @Loirooriol, #43084), and the default size of &lt;img> and &lt;svg> without **width** or **height** attributes (@Loirooriol, #42666).
 Fixing that last bug led to Servo developers finding two [spec](https://github.com/w3c/csswg-drafts/issues/12612) [issues](https://github.com/w3c/csswg-drafts/issues/13149)!
