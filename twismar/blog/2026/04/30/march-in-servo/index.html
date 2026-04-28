@@ -251,7 +251,8 @@
 </div>
 
 <div class="inner-container blog-content">
-  <p><a href="https://github.com/servo/servo/releases/tag/v0.1.0"><strong>Servo 0.1.0</strong></a> represents Servo’s biggest month ever, with a record <strong>530 commits</strong> and <a href="/twismar/blog/2026/04/13/servo-0.1.0-release/"><strong>our first ever release on crates.io</strong></a>!</p>
+  <p><a href="https://github.com/servo/servo/releases/tag/v0.1.0"><strong>Servo 0.1.0</strong></a> represents Servo’s biggest month ever, with a record <strong>530 commits</strong> and <a href="/twismar/blog/2026/04/13/servo-0.1.0-release/"><strong>our first ever release on crates.io</strong></a>!
+For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p>
 <p>With this release Servo becomes more accessible, thanks to <strong>tab navigation</strong> (@mrobinson, @Loirooriol, #42952, #43019, #43058, #43246, #43267, #43067) and <strong>keyboard scrolling</strong> with Space and Shift+Space (@mrobinson, #43322).</p>
 <p>We’ve shipped several new web platform features:</p>
 <ul>
@@ -291,6 +292,9 @@ As a result, you can now take your first step towards <a href="https://book.serv
 <p>This is another big update, so here’s an outline:</p>
 <ul>
 <li>
+<p><a href="#security"><strong>Security</strong></a></p>
+</li>
+<li>
 <p><a href="#work-in-progress"><strong>Work in progress</strong></a></p>
 </li>
 <li>
@@ -306,10 +310,18 @@ As a result, you can now take your first step towards <a href="https://book.serv
 <p><a href="#performance-and-stability"><strong>Performance and stability</strong></a></p>
 </li>
 </ul>
+<h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><strong>crypto.subtle.deriveBits()</strong> for <strong>X25519</strong> checking for all-zero secrets, and <strong>verify()</strong> for <strong>HMAC</strong> comparing signatures, are now done <strong>in constant time</strong> (@kkoyung, #43775, #43773).</p>
+<p><strong>‘Content-Security-Policy’</strong> now handles redirects correctly (@TimvdLippe, #43438), and sends violation reports with the correct <strong>blockedURI</strong> and <strong>referrer</strong> (@TimvdLippe, #43367, #43645, #43483).
+The policy in &lt;meta&gt; now combines with the policy sent in HTTP headers, rather than overriding it (@TimvdLippe, @elomscansio, #43063).
+When checking nonces, we now reject elements with duplicate attributes (@dyegoaurelio, #43216).</p>
+<p>The document containing an <strong>&lt;iframe&gt;</strong> can no longer access the contents of error pages (@TimvdLippe, #43539), and CSP violations inside an &lt;iframe&gt; are now correctly reported (@TimvdLippe, #43652).</p>
 <h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>We’ve landed more work towards supporting <strong>IndexedDB</strong>, under <code>--pref dom­_indexeddb­_enabled</code> (@arihant2math, @gterzian, @Taym95, @jerensl, #42139, #43096, #43041, #42451, #43721, #43754, #42786),
+<p>We’ve landed more work towards supporting <strong>IndexedDB</strong>, under <code>--pref dom­_indexeddb­_enabled</code> (@arihant2math, @gterzian, @Taym95, @jerensl, #42139, #42727, #43096, #43041, #42451, #43721, #43754, #42786),
 and towards supporting <strong>IntersectionObserver</strong>, under <code>--pref dom­_intersection­_observer­_enabled</code> (@stevennovaryo, @mrobinson, #42251).</p>
 <p>We’re continuing to implement <strong>document.execCommand()</strong> for <strong>rich text editing</strong> (@TimvdLippe, #43177), under <code>--pref dom­_exec­_command­_enabled</code>.
 <strong>‘beforeinput’</strong> and <strong>‘input’</strong> events are now fired when executing supported and enabled commands (@TimvdLippe, #43087), the <strong>‘defaultParagraphSeparator’</strong> and <strong>‘styleWithCSS’</strong> commands are now supported (@TimvdLippe, #43028), and the <strong>‘delete’</strong> command is partially supported (@TimvdLippe, #43016, #43082).</p>
@@ -389,7 +401,7 @@ Pressing <strong>Space</strong> or <strong>Enter</strong> inside text fields no 
 <strong>&lt;select&gt;</strong> also now requires user interaction to open the picker (@SharanRP, #43485).</p>
 <p><strong>&lt;form action&gt;</strong>, <strong>&lt;iframe src&gt;</strong>, <strong>open(url)</strong> on <strong>XMLHttpRequest</strong>, <strong>new EventSource(url)</strong>, and <strong>new Worker(url)</strong> now correctly resolve the URL with the page encoding (@SharanRP, @jdm, @jayant911, @Veercodeprog, @sabbCodes, #43521, #43554, #43572, #43537, #43634, #43588).</p>
 <p><strong>‘direction’</strong> now works on grid containers (@nicoburns, #42118), <strong>SVG images</strong> can now be used in <strong>‘border-image’</strong> (@shubhamg13, #42566), <strong>‘linear-gradient()’</strong> now dithers to reduce banding (@Messi002, #43603), <strong>‘letter-spacing’</strong> no longer applies to invisible zero-width formatting characters (@simonwuelker, #42961), and <strong>‘:active’</strong> now matches disabled or non-focusable elements too, as long as they are being clicked (@webbeef, #42935).</p>
-<p>We’ve improved the conformance of <strong>JS modules</strong> (@Gae24, #43585), <strong>‘Content-Security-Policy’</strong> (@TimvdLippe, @elomscansio, #43367, #43483, #43438, #43645, #43652, #43063), <strong>&lt;button command&gt;</strong> (@lukewarlow, #42883), <strong>&lt;font size&gt;</strong> (@shubhamg13, #43103), <strong>&lt;link media&gt;</strong> and <strong>&lt;link type&gt;</strong> (@TimvdLippe, #43043), <strong>&lt;option selected&gt;</strong> (@SharanRP, #43582), <strong>&lt;script integrity&gt;</strong> and <strong>&lt;style integrity&gt;</strong> (@Gae24, #42931), <strong>EventSource</strong> (@mishop-15, #42179), <strong>SubtleCrypto</strong> (@kkoyung, #42984, #43315, #43533), <strong>HTMLVideoElement</strong> (@shubhamg13, #43341), <strong>dataset</strong> on <strong>Element</strong> (@TimvdLippe, #43046), and <strong>querySelector()</strong> and <strong>querySelectorAll()</strong> (@simonwuelker, #42991).</p>
+<p>We’ve improved the conformance of <strong>JS modules</strong> (@Gae24, #43585), <strong>&lt;button command&gt;</strong> (@lukewarlow, #42883), <strong>&lt;font size&gt;</strong> (@shubhamg13, #43103), <strong>&lt;link media&gt;</strong> and <strong>&lt;link type&gt;</strong> (@TimvdLippe, #43043), <strong>&lt;option selected&gt;</strong> (@SharanRP, #43582), <strong>&lt;script integrity&gt;</strong> and <strong>&lt;style integrity&gt;</strong> (@Gae24, #42931), <strong>EventSource</strong> (@mishop-15, #42179), <strong>SubtleCrypto</strong> (@kkoyung, #42984, #43315, #43533), <strong>HTMLVideoElement</strong> (@shubhamg13, #43341), <strong>dataset</strong> on <strong>Element</strong> (@TimvdLippe, #43046), and <strong>querySelector()</strong> and <strong>querySelectorAll()</strong> (@simonwuelker, #42991).</p>
 <p>We’ve fixed bugs related to <strong>focus</strong> (@jakubadamw, #43431), <strong>&lt;iframe&gt;</strong> (@TimvdLippe, @jdm, #43539, #43732), the <strong>‘animationstart’</strong> and <strong>‘animationend’</strong> events (@simonwuelker, #43454), the <strong>‘touchmove’</strong> event (@yezhizhen, #42926), <strong>inline layout</strong> in quirks mode (@mrobinson, @Loirooriol, @lukewarlow, #42960), <strong>‘:active’</strong> on &lt;input&gt; (@mrobinson, #43722), <strong>‘overflow: scroll’</strong> on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), the default position of <strong>‘position: absolute’</strong> inside blocks that are nested in an inline layout (@yoursanonymous, @Loirooriol, #43084), and the default size of &lt;img&gt; and &lt;svg&gt; without <strong>width</strong> or <strong>height</strong> attributes (@Loirooriol, #42666).
 Fixing that last bug led to Servo developers finding two <a href="https://github.com/w3c/csswg-drafts/issues/12612">spec</a> <a href="https://github.com/w3c/csswg-drafts/issues/13149">issues</a>!</p>
 <p>We now support the CSS <strong>&lt;system-color&gt; values</strong> ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, and ‘WindowText’ (@longvatrong111, #42529, #43105, #43107).</p>
