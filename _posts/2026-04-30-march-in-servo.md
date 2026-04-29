@@ -45,6 +45,14 @@ Plus a bunch of new DOM APIs:
 `--userscripts` has been removed for now, but anyone who uses it is welcome to reinstate it as a wrapper around [`User­Content­Manager`](https://doc.servo.org/servo/struct.UserContentManager.html)::[`add­_script`](https://doc.servo.org/servo/struct.UserContentManager.html#method.add_script) (@jschwe, #43573).
 We’ve fixed a bug where link hover status lines are sometimes not legible (@simartin, #43320), and we’re working on getting servoshell signed for macOS to avoid getting blocked by Gatekeeper (@jschwe, #42912).
 
+[After a long effort](https://github.com/servo/servo/issues/11625) by @valpackett, @dlrobertson, and more recently @nortti0 and @sagudev (#43116, #43134), we can now build Servo for **FreeBSD**!
+Note that Servo 0.1.0 still has some issues that need to be worked around, but you can get all the details in [#44601](https://github.com/servo/servo/issues/44601).
+
+<figure>
+
+[![]({{ '/img/blog/2026-04-freebsd.png' | url }})]({{ '/img/blog/2026-04-freebsd.png' | url }})
+</figure>
+
 A great deal of work went into making the **crates.io release** possible, including renaming `libservo` to just `servo` (@jschwe, #43141), making each package self-contained (@jschwe, #43180, #43165), fixing build issues (@delan, @jschwe, #43170, #43458, #43463) and crates.io compliance issues (@jschwe, #43459), configuring package metadata (@jschwe, @StaySafe020, #43078, #43264, #43451, #43457, #43654), and organising our dependency tree (@jschwe, @yezhizhen, @webbeef, @mrobinson, #42916, #43243, #43263, #43516, #43526, #43552, #43615, #43622, #43273, #43092).
 As a result, you can now take your first step towards [embedding Servo](https://book.servo.org/embedding/overview.html) in a Rust app with:
 
@@ -61,7 +69,7 @@ This is another big update, so here’s an outline:
 
 - [**Work in progress**](#work-in-progress)
 
-- [**Developer tools**](#developer-tools)
+- [**For developers**](#for-developers)
 
 - [**Embedding and automation**](#embedding-and-automation)
 
@@ -106,9 +114,7 @@ We’re now implementing the [**Web Animations API**](https://www.w3.org/TR/web-
 We’ve landed more fixes to Servo’s [**async parser**]({{ '/blog/2026/03/31/february-in-servo/#:~:text=Parsing%20web%20pages' | url }}) (@simonwuelker, #42930, #42959), under `--pref dom­_servoparser­_async­_html­_tokenizer­_enabled`.
 If we can get the feature working more reliably ([#37418](https://github.com/servo/servo/issues/37418)), it could **halve the energy** Servo spends on parsing, **lower latency** for pages that don’t use document.write(), and even **improve the html5ever API** for the ecosystem.
 
-For developers, we’re working on a new [**dev container**](https://containers.dev), which will provide an alternative to [our usual procedures](https://book.servo.org/building/building.html) for setting up a Servo build environment (@jschwe, @sagudev, #43127, #43131, #43139).
-
-## Developer tools
+## For developers
 
 Servo’s DevTools feature now has partial support for inspecting **service workers** (@CynthiaOketch, #43659), as well as using the **navigation controls** along the top of the UI (@brentschroeter, @eerii, #43026).
 
@@ -120,6 +126,11 @@ In the **Debugger** tab, you can now **Step In**, **Step Out**, and **Step Over*
 We’ve landed partial support for the **Scopes** panel (@eerii, @atbrakhi, #43166, #43167, #43232), the **Call stack** panel (@atbrakhi, @eerii, #43015, #43039), and showing you information when **hovering over objects**, **arrays**, **functions**, and other values (@atbrakhi, @eerii, #43319, #43356, #43456, #42996, #42936, #42994).
 
 We’ve fixed some long-outstanding bugs where the **DevTools UI may stop responding** due to protocol desyncs (@brentschroeter, @eerii, #43230, #43236), or due to messages from multiple Servo threads being interleaved (@brentschroeter, @eerii, #43472).
+
+For developers of Servo itself, [**mach**](https://book.servo.org/building/building.html#mach) can be a bit opaque at times.
+To make mach more transparent and composable, we’ve added `mach print-env` and `mach exec` commands (@jschwe, #42888).
+
+We’re also working on a new [**dev container**](https://containers.dev), which will provide an alternative to [our usual procedures](https://book.servo.org/building/building.html) for setting up a Servo build environment (@jschwe, @sagudev, #43127, #43131, #43139).
 
 ## Embedding and automation
 
