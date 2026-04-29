@@ -22,10 +22,13 @@ We’ve shipped several new web platform features:
 - **‘background-blend-mode’** (@mrobinson, #43666)
 - **‘content’** on **‘::marker’** (@niyabits, @Loirooriol, #43515)
 - **‘list-style-type: &lt;string>’** (@Loirooriol, #43111)
+- **‘attr(namespace|local)’** and **‘clamp(none)’** (@Loirooriol, #43045)
 - **&lt;input type=range>** (@BudiArb, @rayguo17, @mrobinson, #41562)
+- **&lt;script blocking=render>** (@TimvdLippe, #43150)
 - **&lt;svg width>** and **&lt;svg height>** (@Loirooriol, #43583)
 - the **accesskey** attribute (@mrobinson, #43031, #43144, #43434)
 - [**&lt;system-color>**](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/system-color) values in CSS (@longvatrong111, @mrobinson, #42529, #43105, #43107)
+- [**&lt;step-position>**](https://drafts.csswg.org/css-easing/#typedef-step-position) values **‘jump-start’**, **‘jump-end’**, **‘jump-none’**, and **‘jump-both’** (@yezhizhen, #43061)
 
 Plus a bunch of new DOM APIs:
 
@@ -99,6 +102,8 @@ We’ve recently reworked our implementation to adopt [**btleplug**](https://non
 We’ve landed more fixes to Servo’s [**async parser**]({{ '/blog/2026/03/31/february-in-servo/#:~:text=Parsing%20web%20pages' | url }}) (@simonwuelker, #42930, #42959), under `--pref dom­_servoparser­_async­_html­_tokenizer­_enabled`.
 If we can get the feature working more reliably ([#37418](https://github.com/servo/servo/issues/37418)), it could **halve the energy** Servo spends on parsing, **lower latency** for pages that don’t use document.write(), and even **improve the html5ever API** for the ecosystem.
 
+For developers, we’re working on a new [**dev container**](https://containers.dev), which will provide an alternative to [our usual procedures](https://book.servo.org/building/building.html) for setting up a Servo build environment (@jschwe, @sagudev, #43127, #43131, #43139).
+
 ## Developer tools
 
 Servo’s DevTools feature now has partial support for inspecting **service workers** (@CynthiaOketch, #43659), as well as using the **navigation controls** along the top of the UI (@brentschroeter, @eerii, #43026).
@@ -166,6 +171,21 @@ Pressing **Space** or **Enter** inside text fields no longer causes them to be c
 The **lang** attribute is now taken into account when shaping, which is important for the correct rendering of Chinese and Japanese text (@RichardTjokroutomo, @mrobinson, #43447).
 **‘font-weight’** is now matched more accurately when no available font is an exact match (@shubhamg13, #43125).
 
+**Navigation** is one of the most complicated parts of HTML: navigating can <a href='javascript:"diffie (reload to continue reading)"'>run some JavaScript that replaces the page</a>, <a href='javascript:alert("diffie")'>just run some JavaScript</a>, or depending on the response, [do nothing at all](http://google.com/generate_204).
+**&lt;iframe>** makes navigation doubly complicated: the document containing an &lt;iframe> can observe and interact with the document inside the &lt;iframe> in various ways, often synchronously.
+This has been the source of [many](https://github.com/servo/servo/issues/14856) [bugs](https://github.com/servo/servo/issues/23373) [over](https://github.com/servo/servo/issues/24901) [the](https://github.com/servo/servo/issues/31242) [years](https://github.com/servo/servo/issues/31973), but we’ve recently fixed one of those major issues (@jdm, #43496).
+
+<figure><div style="display: flex; gap: 1em; align-items: center;">
+
+![]({{ '/img/blog/2026-04-javascript-url-special-case.png' | url }})
+
+![]({{ '/img/blog/2026-04-is-initial-about-blank.png' | url }})
+
+</div><figcaption>
+
+`javascript:` URLs are [a massive special case](https://html.spec.whatwg.org/multipage/#the-javascript:-url-special-case) with [many quirks](https://github.com/whatwg/html/issues?q=label%3A%22topic%3A%20javascript%3A%20URLs%22), and &lt;iframe> has [its own big edge cases](https://html.spec.whatwg.org/multipage/#is-initial-about:blank).
+</figcaption></figure>
+
 We’ve improved the default appearance of **&lt;summary>** (@Loirooriol, #43111), **&lt;select>** (@lukewarlow, #43175), **&lt;input type=file>** (@lukewarlow, @AlexVasiluta, @lukewarlow, #43498, #43186), and **&lt;textarea>** and **&lt;input type=text>** and friends (@mrobinson, #43132), plus **‘::marker’** in mixed LTR/RTL content (@Loirooriol, #43201).
 **&lt;select>** also now requires user interaction to open the picker (@SharanRP, #43485).
 
@@ -177,7 +197,7 @@ We’ve improved the default appearance of **&lt;summary>** (@Loirooriol, #43111
 
 We’ve improved the conformance of **JS modules** (@Gae24, #43585), **&lt;button command>** (@lukewarlow, #42883), **&lt;font size>** (@shubhamg13, #43103), **&lt;link media>** and **&lt;link type>** (@TimvdLippe, #43043), **&lt;option selected>** (@SharanRP, #43582), **&lt;script integrity>** and **&lt;style integrity>** (@Gae24, #42931), **EventSource** (@mishop-15, #42179), **SubtleCrypto** (@kkoyung, #42984, #43315, #43533), **HTMLVideoElement** (@shubhamg13, #43341), **dataset** on **Element** (@TimvdLippe, #43046), and **querySelector()** and **querySelectorAll()** (@simonwuelker, #42991).
 
-We’ve fixed bugs related to **focus** (@jakubadamw, #43431), **&lt;iframe>** (@TimvdLippe, @jdm, #43539, #43732), the **‘animationstart’** and **‘animationend’** events (@simonwuelker, #43454), the **‘touchmove’** event (@yezhizhen, #42926), **CanvasRenderingContext2D** (@simonwuelker, #43218), **inline layout** in quirks mode (@mrobinson, @Loirooriol, @lukewarlow, #42960), **‘:active’** on &lt;input> (@mrobinson, #43722), **‘overflow: scroll’** on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), the default position of **‘position: absolute’** inside blocks that are nested in an inline layout (@yoursanonymous, @Loirooriol, #43084), and the default size of &lt;img> and &lt;svg> without **width** or **height** attributes (@Loirooriol, #42666).
+We’ve fixed bugs related to **focus** (@jakubadamw, #43431), **&lt;iframe>** (@TimvdLippe, @jdm, #43539, #43732), the **‘animationstart’** and **‘animationend’** events (@simonwuelker, #43454), the **‘touchmove’** event (@yezhizhen, #42926), **CanvasRenderingContext2D** (@simonwuelker, #43218), **quirks mode** (@mrobinson, @Loirooriol, @lukewarlow, #42960, #43368), **‘:active’** on &lt;input> (@mrobinson, #43722), **‘overflow: scroll’** on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), **‘position: absolute’** (@yoursanonymous, @Loirooriol, #43084), and **&lt;img>** and **&lt;svg>** without width or height attributes (@Loirooriol, #42666).
 Fixing that last bug led to Servo developers finding two [spec](https://github.com/w3c/csswg-drafts/issues/12612) [issues](https://github.com/w3c/csswg-drafts/issues/13149)!
 
 We now support the CSS **&lt;system-color> values** ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, and ‘WindowText’ (@longvatrong111, #42529, #43105, #43107).
