@@ -265,6 +265,7 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 <li><strong>‘content’</strong> on <strong>‘::marker’</strong> (@niyabits, @Loirooriol, #43515)</li>
 <li><strong>‘list-style-type: &lt;string&gt;’</strong> (@Loirooriol, #43111)</li>
 <li><strong>&lt;input type=range&gt;</strong> (@BudiArb, @rayguo17, @mrobinson, #41562)</li>
+<li><strong>&lt;script blocking=render&gt;</strong> (@TimvdLippe, #43150)</li>
 <li><strong>&lt;svg width&gt;</strong> and <strong>&lt;svg height&gt;</strong> (@Loirooriol, #43583)</li>
 <li>the <strong>accesskey</strong> attribute (@mrobinson, #43031, #43144, #43434)</li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/system-color"><strong>&lt;system-color&gt;</strong></a> values in CSS (@longvatrong111, @mrobinson, #42529, #43105, #43107)</li>
@@ -333,6 +334,7 @@ and towards supporting <strong>IntersectionObserver</strong>, under <code>--pref
 We’ve recently reworked our implementation to adopt <a href="https://nonpolynomial.com/2023/10/30/how-to-beg-borrow-steal-your-way-to-a-cross-platform-bluetooth-le-library/"><strong>btleplug</strong></a>, the cross-platform Rust-native Bluetooth LE library (@webbeef, #43529, #43581).</p>
 <p>We’ve landed more fixes to Servo’s <a href="/twismar/blog/2026/03/31/february-in-servo/#:~:text=Parsing%20web%20pages"><strong>async parser</strong></a> (@simonwuelker, #42930, #42959), under <code>--pref dom­_servoparser­_async­_html­_tokenizer­_enabled</code>.
 If we can get the feature working more reliably (<a href="https://github.com/servo/servo/issues/37418">#37418</a>), it could <strong>halve the energy</strong> Servo spends on parsing, <strong>lower latency</strong> for pages that don’t use document.write(), and even <strong>improve the html5ever API</strong> for the ecosystem.</p>
+<p>For developers, we’re working on a new <a href="https://containers.dev"><strong>dev container</strong></a>, which will provide an alternative to <a href="https://book.servo.org/building/building.html">our usual procedures</a> for setting up a Servo build environment (@jschwe, @sagudev, #43127, #43131, #43139).</p>
 <h2 id="developer-tools" tabindex="-1">Developer tools <a class="header-anchor" href="#developer-tools">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -399,6 +401,15 @@ We’ve also fixed a bug where pressing the arrow keys in text fields both moves
 Pressing <strong>Space</strong> or <strong>Enter</strong> inside text fields no longer causes them to be clicked (@mrobinson, #43343).</p>
 <p>The <strong>lang</strong> attribute is now taken into account when shaping, which is important for the correct rendering of Chinese and Japanese text (@RichardTjokroutomo, @mrobinson, #43447).
 <strong>‘font-weight’</strong> is now matched more accurately when no available font is an exact match (@shubhamg13, #43125).</p>
+<p><strong>Navigation</strong> is one of the most complicated parts of HTML: navigating can <a href='javascript:"diffie (reload to continue reading)"'>run some JavaScript that replaces the page</a>, <a href='javascript:alert("diffie")'>just run some JavaScript</a>, or depending on the response, <a href="http://google.com/generate_204">do nothing at all</a>.
+<strong>&lt;iframe&gt;</strong> makes navigation doubly complicated: the document containing an &lt;iframe&gt; can observe and interact with the document inside the &lt;iframe&gt; in various ways, often synchronously.
+This has been the source of <a href="https://github.com/servo/servo/issues/14856">many</a> <a href="https://github.com/servo/servo/issues/23373">bugs</a> <a href="https://github.com/servo/servo/issues/24901">over</a> <a href="https://github.com/servo/servo/issues/31242">the</a> <a href="https://github.com/servo/servo/issues/31973">years</a>, but we’ve recently fixed one of those major issues (@jdm, #43496).</p>
+<figure><div style="display: flex; gap: 1em; align-items: center;">
+<p><img src="/twismar/img/blog/2026-04-javascript-url-special-case.png" alt=""></p>
+<p><img src="/twismar/img/blog/2026-04-is-initial-about-blank.png" alt=""></p>
+</div><figcaption>
+<p><code>javascript:</code> URLs are <a href="https://html.spec.whatwg.org/multipage/#the-javascript:-url-special-case">a massive special case</a> with <a href="https://github.com/whatwg/html/issues?q=label%3A%22topic%3A%20javascript%3A%20URLs%22">many quirks</a>, and &lt;iframe&gt; has <a href="https://html.spec.whatwg.org/multipage/#is-initial-about:blank">its own big edge cases</a>.</p>
+</figcaption></figure>
 <p>We’ve improved the default appearance of <strong>&lt;summary&gt;</strong> (@Loirooriol, #43111), <strong>&lt;select&gt;</strong> (@lukewarlow, #43175), <strong>&lt;input type=file&gt;</strong> (@lukewarlow, @AlexVasiluta, @lukewarlow, #43498, #43186), and <strong>&lt;textarea&gt;</strong> and <strong>&lt;input type=text&gt;</strong> and friends (@mrobinson, #43132), plus <strong>‘::marker’</strong> in mixed LTR/RTL content (@Loirooriol, #43201).
 <strong>&lt;select&gt;</strong> also now requires user interaction to open the picker (@SharanRP, #43485).</p>
 <p><strong>&lt;form action&gt;</strong>, <strong>&lt;iframe src&gt;</strong>, <strong>open(url)</strong> on <strong>XMLHttpRequest</strong>, <strong>new EventSource(url)</strong>, and <strong>new Worker(url)</strong> now correctly resolve the URL with the page encoding (@SharanRP, @jdm, @jayant911, @Veercodeprog, @sabbCodes, #43521, #43554, #43572, #43537, #43634, #43588).</p>
