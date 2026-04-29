@@ -286,6 +286,11 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 <p><strong>servoshell</strong> is now installed as <code>servoshell</code> or <code>servoshell.exe</code>, rather than <code>servo</code> or <code>servo.exe</code> (@jschwe, @mrobinson, #42958).
 <code>--userscripts</code> has been removed for now, but anyone who uses it is welcome to reinstate it as a wrapper around <a href="https://doc.servo.org/servo/struct.UserContentManager.html"><code>User­Content­Manager</code></a>::<a href="https://doc.servo.org/servo/struct.UserContentManager.html#method.add_script"><code>add­_script</code></a> (@jschwe, #43573).
 We’ve fixed a bug where link hover status lines are sometimes not legible (@simartin, #43320), and we’re working on getting servoshell signed for macOS to avoid getting blocked by Gatekeeper (@jschwe, #42912).</p>
+<p><a href="https://github.com/servo/servo/issues/11625">After a long effort</a> by @valpackett, @dlrobertson, and more recently @nortti0 and @sagudev (#43116, #43134), we can now build Servo for <strong>FreeBSD</strong>!
+Note that Servo 0.1.0 still has some issues that need to be worked around, but you can get all the details in <a href="https://github.com/servo/servo/issues/44601">#44601</a>.</p>
+<figure>
+<p><a href="/twismar/img/blog/2026-04-freebsd.png"><img src="/twismar/img/blog/2026-05-freebsd.png" alt=""></a></p>
+</figure>
 <p>A great deal of work went into making the <strong><a href="http://crates.io">crates.io</a> release</strong> possible, including renaming <code>libservo</code> to just <code>servo</code> (@jschwe, #43141), making each package self-contained (@jschwe, #43180, #43165), fixing build issues (@delan, @jschwe, #43170, #43458, #43463) and <a href="http://crates.io">crates.io</a> compliance issues (@jschwe, #43459), configuring package metadata (@jschwe, @StaySafe020, #43078, #43264, #43451, #43457, #43654), and organising our dependency tree (@jschwe, @yezhizhen, @webbeef, @mrobinson, #42916, #43243, #43263, #43516, #43526, #43552, #43615, #43622, #43273, #43092).
 As a result, you can now take your first step towards <a href="https://book.servo.org/embedding/overview.html">embedding Servo</a> in a Rust app with:</p>
 <figure>
@@ -301,7 +306,7 @@ As a result, you can now take your first step towards <a href="https://book.serv
 <p><a href="#work-in-progress"><strong>Work in progress</strong></a></p>
 </li>
 <li>
-<p><a href="#developer-tools"><strong>Developer tools</strong></a></p>
+<p><a href="#for-developers"><strong>For developers</strong></a></p>
 </li>
 <li>
 <p><a href="#embedding-and-automation"><strong>Embedding and automation</strong></a></p>
@@ -340,8 +345,7 @@ We’ve recently reworked our implementation to adopt <a href="https://nonpolyno
 <p>We’re now implementing the <a href="https://www.w3.org/TR/web-animations/"><strong>Web Animations API</strong></a>, starting with AnimationTimeline and DocumentTimeline (@mrobinson, #43711).</p>
 <p>We’ve landed more fixes to Servo’s <a href="/twismar/blog/2026/03/31/february-in-servo/#:~:text=Parsing%20web%20pages"><strong>async parser</strong></a> (@simonwuelker, #42930, #42959), under <code>--pref dom­_servoparser­_async­_html­_tokenizer­_enabled</code>.
 If we can get the feature working more reliably (<a href="https://github.com/servo/servo/issues/37418">#37418</a>), it could <strong>halve the energy</strong> Servo spends on parsing, <strong>lower latency</strong> for pages that don’t use document.write(), and even <strong>improve the html5ever API</strong> for the ecosystem.</p>
-<p>For developers, we’re working on a new <a href="https://containers.dev"><strong>dev container</strong></a>, which will provide an alternative to <a href="https://book.servo.org/building/building.html">our usual procedures</a> for setting up a Servo build environment (@jschwe, @sagudev, #43127, #43131, #43139).</p>
-<h2 id="developer-tools" tabindex="-1">Developer tools <a class="header-anchor" href="#developer-tools">
+<h2 id="for-developers" tabindex="-1">For developers <a class="header-anchor" href="#for-developers">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p>Servo’s DevTools feature now has partial support for inspecting <strong>service workers</strong> (@CynthiaOketch, #43659), as well as using the <strong>navigation controls</strong> along the top of the UI (@brentschroeter, @eerii, #43026).</p>
@@ -350,6 +354,9 @@ If we can get the feature working more reliably (<a href="https://github.com/ser
 <p>In the <strong>Debugger</strong> tab, you can now <strong>Step In</strong>, <strong>Step Out</strong>, and <strong>Step Over</strong> (@eerii, @atbrakhi, #42907, #43040, #43042, #43135).
 We’ve landed partial support for the <strong>Scopes</strong> panel (@eerii, @atbrakhi, #43166, #43167, #43232), the <strong>Call stack</strong> panel (@atbrakhi, @eerii, #43015, #43039), and showing you information when <strong>hovering over objects</strong>, <strong>arrays</strong>, <strong>functions</strong>, and other values (@atbrakhi, @eerii, #43319, #43356, #43456, #42996, #42936, #42994).</p>
 <p>We’ve fixed some long-outstanding bugs where the <strong>DevTools UI may stop responding</strong> due to protocol desyncs (@brentschroeter, @eerii, #43230, #43236), or due to messages from multiple Servo threads being interleaved (@brentschroeter, @eerii, #43472).</p>
+<p>For developers of Servo itself, <a href="https://book.servo.org/building/building.html#mach"><strong>mach</strong></a> can be a bit opaque at times.
+To make mach more transparent and composable, we’ve added <code>mach print-env</code> and <code>mach exec</code> commands (@jschwe, #42888).</p>
+<p>We’re also working on a new <a href="https://containers.dev"><strong>dev container</strong></a>, which will provide an alternative to <a href="https://book.servo.org/building/building.html">our usual procedures</a> for setting up a Servo build environment (@jschwe, @sagudev, #43127, #43131, #43139).</p>
 <h2 id="embedding-and-automation" tabindex="-1">Embedding and automation <a class="header-anchor" href="#embedding-and-automation">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>

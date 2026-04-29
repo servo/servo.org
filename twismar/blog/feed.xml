@@ -50,6 +50,11 @@ For security fixes, see &lt;a href=&quot;https://servo.org/twismar/blog/2026/04/
 &lt;p&gt;&lt;strong&gt;servoshell&lt;/strong&gt; is now installed as &lt;code&gt;servoshell&lt;/code&gt; or &lt;code&gt;servoshell.exe&lt;/code&gt;, rather than &lt;code&gt;servo&lt;/code&gt; or &lt;code&gt;servo.exe&lt;/code&gt; (@jschwe, @mrobinson, #42958).
 &lt;code&gt;--userscripts&lt;/code&gt; has been removed for now, but anyone who uses it is welcome to reinstate it as a wrapper around &lt;a href=&quot;https://doc.servo.org/servo/struct.UserContentManager.html&quot;&gt;&lt;code&gt;User­Content­Manager&lt;/code&gt;&lt;/a&gt;::&lt;a href=&quot;https://doc.servo.org/servo/struct.UserContentManager.html#method.add_script&quot;&gt;&lt;code&gt;add­_script&lt;/code&gt;&lt;/a&gt; (@jschwe, #43573).
 We’ve fixed a bug where link hover status lines are sometimes not legible (@simartin, #43320), and we’re working on getting servoshell signed for macOS to avoid getting blocked by Gatekeeper (@jschwe, #42912).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/servo/servo/issues/11625&quot;&gt;After a long effort&lt;/a&gt; by @valpackett, @dlrobertson, and more recently @nortti0 and @sagudev (#43116, #43134), we can now build Servo for &lt;strong&gt;FreeBSD&lt;/strong&gt;!
+Note that Servo 0.1.0 still has some issues that need to be worked around, but you can get all the details in &lt;a href=&quot;https://github.com/servo/servo/issues/44601&quot;&gt;#44601&lt;/a&gt;.&lt;/p&gt;
+&lt;figure&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twismar/img/blog/2026-04-freebsd.png&quot;&gt;&lt;img src=&quot;https://servo.org/twismar/img/blog/2026-05-freebsd.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/figure&gt;
 &lt;p&gt;A great deal of work went into making the &lt;strong&gt;&lt;a href=&quot;http://crates.io/&quot;&gt;crates.io&lt;/a&gt; release&lt;/strong&gt; possible, including renaming &lt;code&gt;libservo&lt;/code&gt; to just &lt;code&gt;servo&lt;/code&gt; (@jschwe, #43141), making each package self-contained (@jschwe, #43180, #43165), fixing build issues (@delan, @jschwe, #43170, #43458, #43463) and &lt;a href=&quot;http://crates.io/&quot;&gt;crates.io&lt;/a&gt; compliance issues (@jschwe, #43459), configuring package metadata (@jschwe, @StaySafe020, #43078, #43264, #43451, #43457, #43654), and organising our dependency tree (@jschwe, @yezhizhen, @webbeef, @mrobinson, #42916, #43243, #43263, #43516, #43526, #43552, #43615, #43622, #43273, #43092).
 As a result, you can now take your first step towards &lt;a href=&quot;https://book.servo.org/embedding/overview.html&quot;&gt;embedding Servo&lt;/a&gt; in a Rust app with:&lt;/p&gt;
 &lt;figure&gt;
@@ -65,7 +70,7 @@ As a result, you can now take your first step towards &lt;a href=&quot;https://b
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twismar/blog/2026/04/30/march-in-servo/#work-in-progress&quot;&gt;&lt;strong&gt;Work in progress&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://servo.org/twismar/blog/2026/04/30/march-in-servo/#developer-tools&quot;&gt;&lt;strong&gt;Developer tools&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twismar/blog/2026/04/30/march-in-servo/#for-developers&quot;&gt;&lt;strong&gt;For developers&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twismar/blog/2026/04/30/march-in-servo/#embedding-and-automation&quot;&gt;&lt;strong&gt;Embedding and automation&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
@@ -104,8 +109,7 @@ We’ve recently reworked our implementation to adopt &lt;a href=&quot;https://n
 &lt;p&gt;We’re now implementing the &lt;a href=&quot;https://www.w3.org/TR/web-animations/&quot;&gt;&lt;strong&gt;Web Animations API&lt;/strong&gt;&lt;/a&gt;, starting with AnimationTimeline and DocumentTimeline (@mrobinson, #43711).&lt;/p&gt;
 &lt;p&gt;We’ve landed more fixes to Servo’s &lt;a href=&quot;https://servo.org/twismar/blog/2026/03/31/february-in-servo/#:~:text=Parsing%20web%20pages&quot;&gt;&lt;strong&gt;async parser&lt;/strong&gt;&lt;/a&gt; (@simonwuelker, #42930, #42959), under &lt;code&gt;--pref dom­_servoparser­_async­_html­_tokenizer­_enabled&lt;/code&gt;.
 If we can get the feature working more reliably (&lt;a href=&quot;https://github.com/servo/servo/issues/37418&quot;&gt;#37418&lt;/a&gt;), it could &lt;strong&gt;halve the energy&lt;/strong&gt; Servo spends on parsing, &lt;strong&gt;lower latency&lt;/strong&gt; for pages that don’t use document.write(), and even &lt;strong&gt;improve the html5ever API&lt;/strong&gt; for the ecosystem.&lt;/p&gt;
-&lt;p&gt;For developers, we’re working on a new &lt;a href=&quot;https://containers.dev/&quot;&gt;&lt;strong&gt;dev container&lt;/strong&gt;&lt;/a&gt;, which will provide an alternative to &lt;a href=&quot;https://book.servo.org/building/building.html&quot;&gt;our usual procedures&lt;/a&gt; for setting up a Servo build environment (@jschwe, @sagudev, #43127, #43131, #43139).&lt;/p&gt;
-&lt;h2 id=&quot;developer-tools&quot; tabindex=&quot;-1&quot;&gt;Developer tools &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismar/blog/2026/04/30/march-in-servo/#developer-tools&quot;&gt;
+&lt;h2 id=&quot;for-developers&quot; tabindex=&quot;-1&quot;&gt;For developers &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismar/blog/2026/04/30/march-in-servo/#for-developers&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Servo’s DevTools feature now has partial support for inspecting &lt;strong&gt;service workers&lt;/strong&gt; (@CynthiaOketch, #43659), as well as using the &lt;strong&gt;navigation controls&lt;/strong&gt; along the top of the UI (@brentschroeter, @eerii, #43026).&lt;/p&gt;
@@ -114,6 +118,9 @@ If we can get the feature working more reliably (&lt;a href=&quot;https://github
 &lt;p&gt;In the &lt;strong&gt;Debugger&lt;/strong&gt; tab, you can now &lt;strong&gt;Step In&lt;/strong&gt;, &lt;strong&gt;Step Out&lt;/strong&gt;, and &lt;strong&gt;Step Over&lt;/strong&gt; (@eerii, @atbrakhi, #42907, #43040, #43042, #43135).
 We’ve landed partial support for the &lt;strong&gt;Scopes&lt;/strong&gt; panel (@eerii, @atbrakhi, #43166, #43167, #43232), the &lt;strong&gt;Call stack&lt;/strong&gt; panel (@atbrakhi, @eerii, #43015, #43039), and showing you information when &lt;strong&gt;hovering over objects&lt;/strong&gt;, &lt;strong&gt;arrays&lt;/strong&gt;, &lt;strong&gt;functions&lt;/strong&gt;, and other values (@atbrakhi, @eerii, #43319, #43356, #43456, #42996, #42936, #42994).&lt;/p&gt;
 &lt;p&gt;We’ve fixed some long-outstanding bugs where the &lt;strong&gt;DevTools UI may stop responding&lt;/strong&gt; due to protocol desyncs (@brentschroeter, @eerii, #43230, #43236), or due to messages from multiple Servo threads being interleaved (@brentschroeter, @eerii, #43472).&lt;/p&gt;
+&lt;p&gt;For developers of Servo itself, &lt;a href=&quot;https://book.servo.org/building/building.html#mach&quot;&gt;&lt;strong&gt;mach&lt;/strong&gt;&lt;/a&gt; can be a bit opaque at times.
+To make mach more transparent and composable, we’ve added &lt;code&gt;mach print-env&lt;/code&gt; and &lt;code&gt;mach exec&lt;/code&gt; commands (@jschwe, #42888).&lt;/p&gt;
+&lt;p&gt;We’re also working on a new &lt;a href=&quot;https://containers.dev/&quot;&gt;&lt;strong&gt;dev container&lt;/strong&gt;&lt;/a&gt;, which will provide an alternative to &lt;a href=&quot;https://book.servo.org/building/building.html&quot;&gt;our usual procedures&lt;/a&gt; for setting up a Servo build environment (@jschwe, @sagudev, #43127, #43131, #43139).&lt;/p&gt;
 &lt;h2 id=&quot;embedding-and-automation&quot; tabindex=&quot;-1&quot;&gt;Embedding and automation &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismar/blog/2026/04/30/march-in-servo/#embedding-and-automation&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
