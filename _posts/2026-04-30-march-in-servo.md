@@ -14,6 +14,10 @@ With this release Servo becomes more accessible, thanks to **tab navigation** (@
 
 We’ve shipped several new web platform features:
 
+- **&lt;input type=range>** (@BudiArb, @rayguo17, @mrobinson, #41562)
+- **&lt;script blocking=render>** (@TimvdLippe, #43150)
+- **&lt;svg width>** and **&lt;svg height>** (@Loirooriol, #43583)
+- the **accesskey** attribute (@mrobinson, #43031, #43144, #43434)
 - **‘X-Frame-Options’** (@TimvdLippe, #43539, #43708)
 - **‘Content-Security-Policy: frame-ancestors’** (@TimvdLippe, #43630)
 - **‘::first-letter’** styling (@minghuaw, @xiaochengh, @Loirooriol, #43027)
@@ -23,11 +27,7 @@ We’ve shipped several new web platform features:
 - **‘content’** on **‘::marker’** (@niyabits, @Loirooriol, #43515)
 - **‘list-style-type: &lt;string>’** (@Loirooriol, #43111)
 - **‘attr(namespace|local)’** and **‘clamp(none)’** (@Loirooriol, #43045)
-- **&lt;input type=range>** (@BudiArb, @rayguo17, @mrobinson, #41562)
-- **&lt;script blocking=render>** (@TimvdLippe, #43150)
-- **&lt;svg width>** and **&lt;svg height>** (@Loirooriol, #43583)
-- the **accesskey** attribute (@mrobinson, #43031, #43144, #43434)
-- [**&lt;system-color>**](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/system-color) values in CSS (@longvatrong111, @mrobinson, #42529, #43105, #43107)
+- [**&lt;system-color>**](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/system-color) (@longvatrong111, @mrobinson, #42529, #43105, #43107)
 - [**&lt;step-position>**](https://drafts.csswg.org/css-easing/#typedef-step-position) values **‘jump-start’**, **‘jump-end’**, **‘jump-none’**, and **‘jump-both’** (@yezhizhen, #43061)
 
 Plus a bunch of new DOM APIs:
@@ -40,12 +40,6 @@ Plus a bunch of new DOM APIs:
 - **url** on **LargestContentfulPaint** (@shubhamg13, #42901, #42949)
 - **crypto.subtle.digest()** for **TurboSHAKE** (@kkoyung, #43551)
 - **crypto.subtle.getPublicKey()** for **ECDH**, **ECDSA**, **Ed25519**, **RSASSA-PKCS1-v1_5**, **RSA-PSS**, **RSA-OAEP**, and **X25519** (@kkoyung, @Taym95, #43073, #43093, #43106, #43115)
-
-
-**new Worker()** now supports `{type: "module"}` (@pylbrecht, @Gae24, #40365), and **CanvasRenderingContext2D** now supports drawing text with **Variation Selectors**, allowing you to control things like emoji presentation and CJK shaping (@yezhizhen, #43449).
-
-Servo now fires **‘pointerover’**, **‘pointerout’**, **‘pointerenter’**, and **‘pointerleave’** events on web content (@webbeef, #42736), **‘scroll’** events on **VisualViewport** (@stevennovaryo, #42771), and **‘scrollend’** events on **Document**, **Element**, and **VisualViewport** (@abdelrahman1234567, @mrobinson, #38773).
-We also fire **‘error’** events when **event handler** attributes contain syntax errors (@simonwuelker, #43178).
 
 A great deal of work went into making the **crates.io release** possible, including renaming `libservo` to just `servo` (@jschwe, #43141), making each package self-contained (@jschwe, #43180, #43165), fixing build issues (@delan, @jschwe, #43170, #43458, #43463) and crates.io compliance issues (@jschwe, #43459), configuring package metadata (@jschwe, @StaySafe020, #43078, #43264, #43451, #43457, #43654), and organising our dependency tree (@jschwe, @yezhizhen, @webbeef, @mrobinson, #42916, #43243, #43263, #43516, #43526, #43552, #43615, #43622, #43273, #43092).
 As a result, you can now take your first step towards [embedding Servo](https://book.servo.org/embedding/overview.html) in a Rust app with:
@@ -186,6 +180,11 @@ This has been the source of [many](https://github.com/servo/servo/issues/14856) 
 `javascript:` URLs are [a massive special case](https://html.spec.whatwg.org/multipage/#the-javascript:-url-special-case) with [many quirks](https://github.com/whatwg/html/issues?q=label%3A%22topic%3A%20javascript%3A%20URLs%22), and &lt;iframe> has [its own big edge cases](https://html.spec.whatwg.org/multipage/#is-initial-about:blank).
 </figcaption></figure>
 
+**new Worker()** now supports **JS modules** (@pylbrecht, @Gae24, #40365), and **CanvasRenderingContext2D** now supports drawing text with **Variation Selectors**, allowing you to control things like emoji presentation and CJK shaping (@yezhizhen, #43449).
+
+Servo now fires **‘pointerover’**, **‘pointerout’**, **‘pointerenter’**, and **‘pointerleave’** events on web content (@webbeef, #42736), **‘scroll’** events on **VisualViewport** (@stevennovaryo, #42771), and **‘scrollend’** events on **Document**, **Element**, and **VisualViewport** (@abdelrahman1234567, @mrobinson, #38773).
+We also fire **‘error’** events when **event handler** attributes contain syntax errors (@simonwuelker, #43178).
+
 We’ve improved the default appearance of **&lt;summary>** (@Loirooriol, #43111), **&lt;select>** (@lukewarlow, #43175), **&lt;input type=file>** (@lukewarlow, @AlexVasiluta, @lukewarlow, #43498, #43186), and **&lt;textarea>** and **&lt;input type=text>** and friends (@mrobinson, #43132), plus **‘::marker’** in mixed LTR/RTL content (@Loirooriol, #43201).
 **&lt;select>** also now requires user interaction to open the picker (@SharanRP, #43485).
 
@@ -199,8 +198,6 @@ We’ve improved the conformance of **JS modules** (@Gae24, #43585), **&lt;butto
 
 We’ve fixed bugs related to **focus** (@jakubadamw, #43431), **&lt;iframe>** (@TimvdLippe, @jdm, #43539, #43732), the **‘animationstart’** and **‘animationend’** events (@simonwuelker, #43454), the **‘touchmove’** event (@yezhizhen, #42926), **CanvasRenderingContext2D** (@simonwuelker, #43218), **quirks mode** (@mrobinson, @Loirooriol, @lukewarlow, #42960, #43368), **‘:active’** on &lt;input> (@mrobinson, #43722), **‘overflow: scroll’** on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), **‘position: absolute’** (@yoursanonymous, @Loirooriol, #43084), and **&lt;img>** and **&lt;svg>** without width or height attributes (@Loirooriol, #42666).
 Fixing that last bug led to Servo developers finding two [spec](https://github.com/w3c/csswg-drafts/issues/12612) [issues](https://github.com/w3c/csswg-drafts/issues/13149)!
-
-We now support the CSS **&lt;system-color> values** ‘AccentColor’, ‘AccentColorText’, ‘ActiveText’, ‘ButtonBorder’, ‘ButtonFace’, ‘ButtonText’, ‘Canvas’, ‘CanvasText’, ‘Field’, ‘FieldText’, ‘GrayText’, ‘Highlight’, ‘HighlightText’, ‘LinkText’, ‘Mark’, ‘MarkText’, ‘SelectedItem’, ‘SelectedItemText’, ‘VisitedText’, ‘ActiveBorder’, ‘ActiveCaption’, ‘AppWorkspace’, ‘Background’, ‘ButtonHighlight’, ‘ButtonShadow’, ‘CaptionText’, ‘InactiveBorder’, ‘InactiveCaption’, ‘InactiveCaptionText’, ‘InfoBackground’, ‘InfoText’, ‘Menu’, ‘MenuText’, ‘Scrollbar’, ‘ThreeDDarkShadow’, ‘ThreeDFace’, ‘ThreeDHighlight’, ‘ThreeDLightShadow’, ‘ThreeDShadow’, ‘Window’, ‘WindowFrame’, and ‘WindowText’ (@longvatrong111, #42529, #43105, #43107).
 
 We’ve landed partial support for using **CSS [counters](https://drafts.csswg.org/css-lists/#counter)** in ‘list-style-type’ on ‘display: list-item’ and ‘content’ on ‘::marker’, but the counter values themselves are not calculated yet, so all list items still read as `0.` or similar.
 In any case, you can use a &lt;counter-style-name> or ‘symbols()’ in ‘list-style-type’, and ‘counter()’ and ‘counters()’ in ‘content’ (@Loirooriol, #43111).
