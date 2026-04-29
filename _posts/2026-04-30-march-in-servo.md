@@ -49,7 +49,7 @@ Note that Servo 0.1.0 still has some issues that need to be worked around, but y
 
 <figure>
 
-[![]({{ '/img/blog/2026-04-freebsd.png' | url }})]({{ '/img/blog/2026-04-freebsd.png' | url }})
+[![servoshell 0.1.0 showing the FreeBSD website and the Servo new tab page, alongside a terminal that ran fastfetch, showing that this is FreeBSD 15]({{ '/img/blog/2026-04-freebsd.png' | url }})]({{ '/img/blog/2026-04-freebsd.png' | url }})
 </figure>
 
 A great deal of work went into making the **crates.io release** possible, including renaming `libservo` to just `servo` ([@jschwe](https://github.com/jschwe), [#43141](https://github.com/servo/servo/pull/43141)), making each package self-contained ([@jschwe](https://github.com/jschwe), [#43180](https://github.com/servo/servo/pull/43180), [#43165](https://github.com/servo/servo/pull/43165)), fixing build issues ([@delan](https://github.com/delan), [@jschwe](https://github.com/jschwe), [#43170](https://github.com/servo/servo/pull/43170), [#43458](https://github.com/servo/servo/pull/43458), [#43463](https://github.com/servo/servo/pull/43463)) and crates.io compliance issues ([@jschwe](https://github.com/jschwe), [#43459](https://github.com/servo/servo/pull/43459)), configuring package metadata ([@jschwe](https://github.com/jschwe), [@StaySafe020](https://github.com/StaySafe020), [#43078](https://github.com/servo/servo/pull/43078), [#43264](https://github.com/servo/servo/pull/43264), [#43451](https://github.com/servo/servo/pull/43451), [#43457](https://github.com/servo/servo/pull/43457), [#43654](https://github.com/servo/servo/pull/43654)), and organising our dependency tree ([@jschwe](https://github.com/jschwe), [@yezhizhen](https://github.com/yezhizhen), [@webbeef](https://github.com/webbeef), [@mrobinson](https://github.com/mrobinson), [#42916](https://github.com/servo/servo/pull/42916), [#43243](https://github.com/servo/servo/pull/43243), [#43263](https://github.com/servo/servo/pull/43263), [#43516](https://github.com/servo/servo/pull/43516), [#43526](https://github.com/servo/servo/pull/43526), [#43552](https://github.com/servo/servo/pull/43552), [#43615](https://github.com/servo/servo/pull/43615), [#43622](https://github.com/servo/servo/pull/43622), [#43273](https://github.com/servo/servo/pull/43273), [#43092](https://github.com/servo/servo/pull/43092)).
@@ -191,9 +191,9 @@ This has been the source of [many](https://github.com/servo/servo/issues/14856) 
 
 <figure><div style="display: flex; gap: 1em; align-items: center;">
 
-![]({{ '/img/blog/2026-04-javascript-url-special-case.png' | url }})
+![screenshot of the HTML specification, showing that “the javascript: URL special case” is referenced in eight other sections]({{ '/img/blog/2026-04-javascript-url-special-case.png' | url }})
 
-![]({{ '/img/blog/2026-04-is-initial-about-blank.png' | url }})
+![screenshot of the HTML specification, showing that “is initial about:blank” is referenced in eighteen other sections]({{ '/img/blog/2026-04-is-initial-about-blank.png' | url }})
 
 </div><figcaption>
 
