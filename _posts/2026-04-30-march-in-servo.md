@@ -92,10 +92,16 @@ We’re also working on the [**Font Loading API**](https://drafts.csswg.org/css-
 
 All of the features above are enabled in servoshell’s experimental mode.
 
+Work on **accessibility** support for web contents continues under `--pref accessibility­_enabled`.
+There was a [**breaking change**](#embedding-and-automation) in the embedding API (@delan, @alice, #43029), and we’ve landed support for “grafting” the accessibility tree of a document into that of its containing webview (@delan, @alice, #43012, #43013, #43556).
+As a result, when you navigate, separate documents can have separate accessibility trees without complicating the embedder.
+
 **&lt;link rel=modulepreload>** is now partially supported (@Gae24, #42964), though recursive fetching of descendants is gated by `--pref dom­_allow­_preloading­_module­_descendants` (@Gae24, #43353).
 
 For a long time, Servo has had some support for the [**Web Bluetooth API**](https://webbluetoothcg.github.io/web-bluetooth/) under `--pref dom­_bluetooth­_enabled`.
 We’ve recently reworked our implementation to adopt [**btleplug**](https://nonpolynomial.com/2023/10/30/how-to-beg-borrow-steal-your-way-to-a-cross-platform-bluetooth-le-library/), the cross-platform Rust-native Bluetooth LE library (@webbeef, #43529, #43581).
+
+We’re now implementing the [**Web Animations API**](https://www.w3.org/TR/web-animations/), starting with AnimationTimeline and DocumentTimeline (@mrobinson, #43711).
 
 We’ve landed more fixes to Servo’s [**async parser**]({{ '/blog/2026/03/31/february-in-servo/#:~:text=Parsing%20web%20pages' | url }}) (@simonwuelker, #42930, #42959), under `--pref dom­_servoparser­_async­_html­_tokenizer­_enabled`.
 If we can get the feature working more reliably ([#37418](https://github.com/servo/servo/issues/37418)), it could **halve the energy** Servo spends on parsing, **lower latency** for pages that don’t use document.write(), and even **improve the html5ever API** for the ecosystem.
@@ -198,9 +204,9 @@ We’ve improved the default appearance of **&lt;summary>** (@Loirooriol, #43111
 
 **DOMContentLoaded** timings in **Performance­Navigation­Timing** are more accurate (@simonwuelker, #43151). **Performance­Paint­Timing** and **Largest­Contentful­Paint** are more accurate too, taking &lt;iframe> into account (@shubhamg13, #42149), and checking for and ignoring things like broken images and transparent backgrounds (@shubhamg13, #42833, #42975, #43475).
 
-We’ve improved the conformance of **JS modules** (@Gae24, #43585), **&lt;button command>** (@lukewarlow, #42883), **&lt;font size>** (@shubhamg13, #43103), **&lt;link media>** and **&lt;link type>** (@TimvdLippe, #43043), **&lt;option selected>** (@SharanRP, #43582), **&lt;script integrity>** and **&lt;style integrity>** (@Gae24, #42931), **EventSource** (@mishop-15, #42179), **SubtleCrypto** (@kkoyung, #42984, #43315, #43533), **HTMLVideoElement** (@shubhamg13, #43341), **dataset** on **Element** (@TimvdLippe, #43046), and **querySelector()** and **querySelectorAll()** (@simonwuelker, #42991).
+We’ve improved the conformance of **JS modules** (@Gae24, #43585), **&lt;button command>** (@lukewarlow, #42883), **&lt;font size>** (@shubhamg13, #43103), **&lt;link media>** and **&lt;link type>** (@TimvdLippe, #43043), **&lt;option selected>** (@SharanRP, #43582), **&lt;script integrity>** and **&lt;style integrity>** (@Gae24, #42931), **EventSource** (@mishop-15, #42179), **SubtleCrypto** (@kkoyung, #42984, #43315, #43533, #43519), **Worker** (@simonwuelker, #43329), **HTMLVideoElement** (@shubhamg13, #43341), **dataset** on **Element** (@TimvdLippe, #43046), and **querySelector()** and **querySelectorAll()** (@simonwuelker, #42991).
 
-We’ve fixed bugs related to **focus** (@jakubadamw, #43431), **&lt;iframe>** (@TimvdLippe, @jdm, #43539, #43732), the **‘animationstart’** and **‘animationend’** events (@simonwuelker, #43454), the **‘touchmove’** event (@yezhizhen, #42926), **CanvasRenderingContext2D** (@simonwuelker, #43218), **quirks mode** (@mrobinson, @Loirooriol, @lukewarlow, #42960, #43368), **‘:active’** on &lt;input> (@mrobinson, #43722), **‘overflow: scroll’** on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), **‘position: absolute’** (@yoursanonymous, @Loirooriol, #43084), and **&lt;img>** and **&lt;svg>** without width or height attributes (@Loirooriol, #42666).
+We’ve fixed bugs related to **error reporting** (@simonwuelker, @xZaisk, @yezhizhen, @eyupcanakman, #43191, #43323, #43101, #43560), **event loops** (@jayant911, #43523), **focus** (@jakubadamw, #43431), **quirks mode** (@mrobinson, @Loirooriol, @lukewarlow, #42960, #43368), **&lt;iframe>** (@TimvdLippe, @jdm, #43539, #43732), the **‘animationstart’** and **‘animationend’** events (@simonwuelker, #43454), the **‘touchmove’** event (@yezhizhen, #42926), **CanvasRenderingContext2D** (@simonwuelker, #43218), **Worker** (@bruno-j-nicoletti, #43213), **‘:active’** on &lt;input> (@mrobinson, #43722), **‘overflow: scroll’** on ‘::before’ and ‘::after’ (@stevennovaryo, #43231), **‘position: absolute’** (@yoursanonymous, @Loirooriol, #43084), and **&lt;img>** and **&lt;svg>** without width or height attributes (@Loirooriol, #42666).
 Fixing that last bug led to Servo developers finding two [spec](https://github.com/w3c/csswg-drafts/issues/12612) [issues](https://github.com/w3c/csswg-drafts/issues/13149)!
 
 We’ve landed partial support for using **CSS [counters](https://drafts.csswg.org/css-lists/#counter)** in ‘list-style-type’ on ‘display: list-item’ and ‘content’ on ‘::marker’, but the counter values themselves are not calculated yet, so all list items still read as `0.` or similar.
