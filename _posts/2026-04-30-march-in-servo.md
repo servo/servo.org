@@ -41,6 +41,10 @@ Plus a bunch of new DOM APIs:
 - **crypto.subtle.digest()** for **TurboSHAKE** (@kkoyung, #43551)
 - **crypto.subtle.getPublicKey()** for **ECDH**, **ECDSA**, **Ed25519**, **RSASSA-PKCS1-v1_5**, **RSA-PSS**, **RSA-OAEP**, and **X25519** (@kkoyung, @Taym95, #43073, #43093, #43106, #43115)
 
+**servoshell** is now installed as `servoshell` or `servoshell.exe`, rather than `servo` or `servo.exe` (@jschwe, @mrobinson, #42958).
+`--userscripts` has been removed for now, but anyone who uses it is welcome to reinstate it as a wrapper around [`User­Content­Manager`](https://doc.servo.org/servo/struct.UserContentManager.html)::[`add­_script`](https://doc.servo.org/servo/struct.UserContentManager.html#method.add_script) (@jschwe, #43573).
+We’ve fixed a bug where link hover status lines are sometimes not legible (@simartin, #43320), and we’re working on getting servoshell signed for macOS to avoid getting blocked by Gatekeeper (@jschwe, #42912).
+
 A great deal of work went into making the **crates.io release** possible, including renaming `libservo` to just `servo` (@jschwe, #43141), making each package self-contained (@jschwe, #43180, #43165), fixing build issues (@delan, @jschwe, #43170, #43458, #43463) and crates.io compliance issues (@jschwe, #43459), configuring package metadata (@jschwe, @StaySafe020, #43078, #43264, #43451, #43457, #43654), and organising our dependency tree (@jschwe, @yezhizhen, @webbeef, @mrobinson, #42916, #43243, #43263, #43516, #43526, #43552, #43615, #43622, #43273, #43092).
 As a result, you can now take your first step towards [embedding Servo](https://book.servo.org/embedding/overview.html) in a Rust app with:
 
