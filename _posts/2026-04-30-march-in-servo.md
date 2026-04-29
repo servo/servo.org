@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "March in Servo: tab navigation, and more!"
+title:      "March in Servo: keyboard navigation, better debugging, FreeBSD support, and more!"
 date:       2026-04-30
-summary:    ao!! wrrrrao!!
+summary:    Servo’s biggest month ever.
 categories:
 ---
 
