@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# usage: list-commits-by-nightly.sh <path/to/servo> [path/to/pulls.json]
+# usage: list-commits-by-nightly.sh <path/to/servo> [--pulls-json-path=path/to/pulls.json] [--git-show-output-cache-path=path/to/cache]
 # requires: zsh, gh, jq, tac, rg, git
 set -euo pipefail -o bsdecho -o shwordsplit
 if [ $# -lt 1 ]; then >&2 sed '1d;2s/^# //;2q' "$0"; exit 1; fi
@@ -9,12 +9,28 @@ missing() { >&2 echo "fatal: $1 not found"; exit 1; }
 > /dev/null command -v tac && tac='tac' || tac='tail -r'
 > /dev/null command -v rg || missing rg
 > /dev/null command -v git || missing git
-pulls_json_path=${${2-/dev/null}:a}
+servo_repo_path=$1; shift
+while [ $# -gt 0 ]; do
+  case "$1" in
+  (--pulls-json-path=*)
+    pulls_json_path=${${1#--pulls-json-path=}:a}
+    shift
+    ;;
+  (--git-show-output-cache-path=*)
+    git_show_output_cache_path=${${1#--git-show-output-cache-path=}:a}
+    shift
+    ;;
+  (*)
+    >&2 echo "fatal: unknown option: $1"
+    exit 1
+    ;;
+  esac
+done
 cd -- "$(dirname -- "${0:a}")"
 
 # Fetch the default branch, so we can warn if commits aren’t reachable from it.
-git -C "$1" fetch https://github.com/servo/servo.git
-default_branch_head=$(cut -f 1 "$1/.git/FETCH_HEAD")
+git -C "$servo_repo_path" fetch https://github.com/servo/servo.git
+default_branch_head=$(cut -f 1 "$servo_repo_path/.git/FETCH_HEAD")
 
 if ! [ -e runs.json ]; then
   gh api '/repos/servo/servo/actions/workflows/release.yml/runs?status=success&per_page=62' > runs.json
@@ -70,10 +86,10 @@ unset minus_commit
 
   # Sometimes we build a nightly from something other than the default branch,
   # so we may not have the commits locally.
-  ./fetch-commit-if-needed.sh "$1" $commit
+  ./fetch-commit-if-needed.sh "$servo_repo_path" $commit
 
   # Check if the head of this nightly has bespoke commits.
-  git -C "$1" merge-base --is-ancestor $commit $default_branch_head \
+  git -C "$servo_repo_path" merge-base --is-ancestor $commit $default_branch_head \
   && has_bespoke_commits=false \
   || has_bespoke_commits=true
 
@@ -87,12 +103,14 @@ unset minus_commit
   # If `$minus_commit` is not yet set, we don’t know enough to list the commits
   # in this nightly, so just skip it and move on.
   if [ "${minus_commit+set}" = set ]; then
-    # Check if `$2` was set, but use `$pulls_json_path` below.
-    if [ -n "${2+set}" ]; then
-      ./list-commits-between.sh "$1" $minus_commit $commit "$pulls_json_path"
-    else
-      ./list-commits-between.sh "$1" $minus_commit $commit
+    set --
+    if [ -n "${pulls_json_path+set}" ]; then
+      set -- "$@" --pulls-json-path="$pulls_json_path"
     fi
+    if [ -n "${git_show_output_cache_path+set}" ]; then
+      set -- "$@" --git-show-output-cache-path="$git_show_output_cache_path"
+    fi
+    ./list-commits-between.sh "$servo_repo_path" $minus_commit $commit "$@"
   fi
 
   # If the head of this nightly does not have bespoke commits, we can use it
