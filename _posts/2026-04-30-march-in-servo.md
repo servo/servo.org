@@ -261,7 +261,34 @@ Thanks to a wide range of people, many of whom were contributing to Servo for th
 
 ## Donations
 
-<figure><div style="width: 100%; border: 1px solid; padding: 1rem; font-size: 3em;">TODO: donations section goes here</div></figure>
+<!--
+- 3068.90 opencollective
+- 3928.00 github
+- 170.41/37 thanks.dev
+-->
+
+Thanks again for your generous support!
+We are now receiving **7167 USD/month** (+2.6% from February) in recurring donations.
+This helps us cover the cost of our **[speedy](https://ci0.servo.org) [CI](https://ci1.servo.org) [and](https://ci2.servo.org) [benchmarking](https://ci3.servo.org) [servers](https://ci4.servo.org)**, one of our latest **[Outreachy interns](https://www.outreachy.org/alums/2025-06/#:~:text=Servo)**, and funding **[maintainer work]({{ '/blog/2025/09/17/your-donations-at-work-funding-jdm/' | url }})** that helps more people contribute to Servo.
+
+Servo is also on [thanks.dev](https://thanks.dev), and already **37 GitHub users** (+5 from February) that depend on Servo are sponsoring us there.
+If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
+
+We now have [**sponsorship tiers**]({{ '/blog/2025/11/21/sponsorship-tiers/' | url }}) that allow you or your organisation to donate to the Servo project with public acknowlegement of your support.
+If you’re interested in this kind of sponsorship, please contact us at [join@servo.org](mailto:join@servo.org).
+
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; right: calc(100% - 100% * 7167 / 10000); padding-right: 0.5em;"><strong>7167</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 7167 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="7167" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+
+Use of donations is decided transparently via the Technical Steering Committee’s public **[funding request process](https://github.com/servo/project/blob/main/FUNDING_REQUEST.md)**, and active proposals are tracked in [servo/project#187](https://github.com/servo/project/issues/187).
+For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
 <style>
     ._correction {
