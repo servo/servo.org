@@ -40,7 +40,9 @@ Plus a bunch of new DOM APIs:
 - **crypto.subtle.digest()** for **TurboSHAKE** ([@kkoyung](https://github.com/kkoyung), [#43551](https://github.com/servo/servo/pull/43551))
 - **crypto.subtle.getPublicKey()** for **ECDH**, **ECDSA**, **Ed25519**, **RSASSA-PKCS1-v1_5**, **RSA-PSS**, **RSA-OAEP**, and **X25519** ([@kkoyung](https://github.com/kkoyung), [@Taym95](https://github.com/Taym95), [#43073](https://github.com/servo/servo/pull/43073), [#43093](https://github.com/servo/servo/pull/43093), [#43106](https://github.com/servo/servo/pull/43106), [#43115](https://github.com/servo/servo/pull/43115))
 
-<figure><div style="width: 100%; aspect-ratio: 4/3; border: 1px solid; padding: 1rem; font-size: 3em;">TODO: diffie goes here</div></figure>
+<figure>
+    <a href="{{ '/img/blog/2026-04-diffie.png' | url }}"><img src="{{ '/img/blog/2026-04-diffie.png' | url }}" alt="servoshell 0.1.0 showing several new features: `<input type=range>`; the character “返” rendered differently depending on whether the ‘lang’ is ‘zh’, ‘ja’, or ‘ko’; the emoji “✈️” rendered on a 2D canvas in both emoji presentation and text presentation; a screenshot of the DevTools debugger, showing live variable values; a text field with label “Diffie” that can be focused with Alt+Shift+D; and examples of styling ‘::first-letter’, ‘::placeholder’, and ‘::file-selector-button’"></a>
+</figure>
 
 **servoshell** is now installed as `servoshell` or `servoshell.exe`, rather than `servo` or `servo.exe` ([@jschwe](https://github.com/jschwe), [@mrobinson](https://github.com/mrobinson), [#42958](https://github.com/servo/servo/pull/42958)).
 `--userscripts` has been removed for now, but anyone who uses it is welcome to reinstate it as a wrapper around [`User­Content­Manager`](https://doc.servo.org/servo/struct.UserContentManager.html)::[`add­_script`](https://doc.servo.org/servo/struct.UserContentManager.html#method.add_script) ([@jschwe](https://github.com/jschwe), [#43573](https://github.com/servo/servo/pull/43573)).
