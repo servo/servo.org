@@ -1,5 +1,6 @@
 # Servo.org website
 
+- [How to write a monthly update](#how-to-write-a-monthly-update)
 - [How to start a local dev server](#how-to-start-a-local-dev-server)
 - [How to list commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly)
 - [How to list this year’s pull request contributors](#how-to-list-this-years-pull-request-contributors)
@@ -13,6 +14,49 @@
 - [Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates)
 - [Hints for writing about changes](#hints-for-writing-about-changes)
 - [Corrections](#corrections)
+
+## How to write a monthly update
+
+Each month, we write a **monthly update**, which is a blog post that [serves as the “extended” release notes](https://book.servo.org/for-maintainers/release-process.html) for the monthly release.
+What goes in the monthly update has evolved over the years, but currently the recurring “core” is to write about **commits**, **donations**, and (if there are any) **conference talks**.
+
+### Writing about commits
+
+This is the most time-consuming part by far.
+The earliest monthly updates (in 2023) were fairly manageable with an ad-hoc process and a bit of tooling, with maybe 100–150 commits to digest and write about.
+But nowadays (in 2026) we have easily 400–500 commits to digest and write about, and keeping up with that requires a more efficient process.
+
+At a high level, the current process (and the tooling) is designed to help you digest all of the commits that landed in the previous month’s [nightly builds](https://github.com/servo/servo-nightly-builds), so you can write about them.
+This more or less corresponds to the commits that will land in the next [monthly release](https://github.com/servo/servo/releases), but where they differ, [we err on the side of](https://github.com/servo/book/pull/214#discussion_r3019920813) deferring the commit until the next monthly update.
+
+**Future:** assuming the monthly releases are here to stay, we may want to rework the tooling to directly consider the commits that will land in the monthly release, rather than the commits that landed in last month’s nightlies.
+
+The suggested workflow for efficiently triaging commits is as follows:
+
+**Note that the list of nightly builds is cached in tools/runs.json, so if it exists, you will need to delete it to fetch an updated list.**
+
+- [Fetch pull request details](#how-to-list-this-years-pull-request-contributors) for the **last two months** (`2025-01 2025-02`), then [list commits that landed each nightly](#how-to-list-commits-that-landed-in-each-nightly) for **last month** (`/^>>> 2025-02-/,/^>>> 2025-03-/!d`):
+
+```
+$ rm tools/runs.json  # Optional: clear cached list of nightly builds
+$ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-2025-02.json
+$ tools/list-commits-by-nightly.sh ~/code/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
+```
+
+- Open commits.txt — for the best ergonomics, set the language mode to **Diff**, then **Fold All**
+- For each commit, read the description below to understand its impact (see [§ Hints for writing about changes](#hints-for-writing-about-changes))
+- For each commit to be excluded from the post, prefix the line with `-`
+- For each commit to be included in the post, prefix the line with `+` then:
+    - Add a line immediately below of the form `    one or more tags` (four spaces, then space-separated tags)
+    - To write some notes or additional context, append `; your notes` to that new tags line — be sure to include enough context to write about the change without the hints and description, because those will not be visible after the next step
+- Generate the outline: `tools/generate-outline.sh commits.txt > outline.txt`
+- Open outline.txt — for the best ergonomics, set the language mode to **Diff**
+- For each commit, write about it in the blog post, then change the leading `+` to `-`
+- When none of the lines start with `+`, you’re done!
+
+**TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time. Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
+
+We’re working on [a new tool](https://github.com/jdm/commit-triage) that will make the triage process even more efficient.
 
 ## How to start a local dev server
 
@@ -407,31 +451,6 @@ And generally we want to exclude...
 - other CI changes
 - refactors (unless large-scale)
 - dependency cleanups
-
-The suggested workflow for efficiently triaging commits is as follows:
-
-**Note that the list of nightly builds is cached in tools/runs.json, so if it exists, you will need to delete it to fetch an updated list.**
-
-- [Fetch pull request details](#how-to-list-this-years-pull-request-contributors) for the **last two months** (`2025-01 2025-02`), then [list commits that landed each nightly](#how-to-list-commits-that-landed-in-each-nightly) for **last month** (`/^>>> 2025-02-/,/^>>> 2025-03-/!d`):
-
-```
-$ rm tools/runs.json  # Optional: clear cached list of nightly builds
-$ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-2025-02.json
-$ tools/list-commits-by-nightly.sh ~/code/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
-```
-
-- Open commits.txt — for the best ergonomics, set the language mode to **Diff**, then **Fold All**
-- For each commit, read the description below to understand its impact (see [§ Hints for writing about changes](#hints-for-writing-about-changes))
-- For each commit to be excluded from the post, prefix the line with `-`
-- For each commit to be included in the post, prefix the line with `+` then:
-    - Add a line immediately below of the form `    one or more tags` (four spaces, then space-separated tags)
-    - To write some notes or additional context, append `; your notes` to that new tags line — be sure to include enough context to write about the change without the hints and description, because those will not be visible after the next step
-- Generate the outline: `tools/generate-outline.sh commits.txt > outline.txt`
-- Open outline.txt — for the best ergonomics, set the language mode to **Diff**
-- For each commit, write about it in the blog post, then change the leading `+` to `-`
-- When none of the lines start with `+`, you’re done!
-
-**TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time. Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
 
 ## Hints for writing about changes
 
