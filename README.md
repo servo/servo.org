@@ -7,6 +7,8 @@
 - [How to analyse wpt.fyi pass rate improvements](#how-to-analyse-wptfyi-pass-rate-improvements)
 - [How to analyse wpt.fyi Browser Specific Failures improvements](#how-to-analyse-wptfyi-browser-specific-failures-improvements)
 - [How to linkify GitHub handles and pull requests when finishing a post](#how-to-linkify-github-handles-and-pull-requests-when-finishing-a-post)
+- [How to count the number of pull requests in a month](#how-to-count-the-number-of-pull-requests-in-a-month)
+- [How to automatically triage automated PRs](#how-to-automatically-triage-automated-prs)
 - [How to calculate monthly recurring donations](#how-to-calculate-monthly-recurring-donations)
 - [Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates)
 - [Hints for writing about changes](#hints-for-writing-about-changes)
