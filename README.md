@@ -1,5 +1,6 @@
 # Servo.org website
 
+- [How to write a monthly update](#how-to-write-a-monthly-update)
 - [How to start a local dev server](#how-to-start-a-local-dev-server)
 - [How to list commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly)
 - [How to list this year’s pull request contributors](#how-to-list-this-years-pull-request-contributors)
@@ -13,6 +14,8 @@
 - [Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates)
 - [Hints for writing about changes](#hints-for-writing-about-changes)
 - [Corrections](#corrections)
+
+## How to write a monthly update
 
 ## How to start a local dev server
 
