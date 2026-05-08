@@ -212,8 +212,8 @@
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/43805	(@Taym95, #43805)	indexeddb: fix structured cloning for transaction state, File, and FileList (#43805)
-    dom; indexeddb…
++https://github.com/servo/servo/pull/43805	(@Taym95, #43805)	indexeddb: fix structured cloning for transaction state, File, and FileList (#43805)
+    dom; indexeddb now supports storing values that require structured cloning
     ^ commit c4d32e15cf3426e776e132415734a314576b5591
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -306,7 +306,8 @@ https://github.com/servo/servo/pull/43701	(@shubhamg13, #43701)	wpt: Delete `vie
     # Testing: TODO (Waiting for #43160)
     # Fixes: #41582
     # 
-https://github.com/servo/servo/pull/43830	(@jschwe, #43830)	servo: Fix gstreamer_plugins feature guard (#43830)
+-https://github.com/servo/servo/pull/43830	(@jschwe, #43830)	servo: Fix gstreamer_plugins feature guard (#43830)
+    ;api; remove some dead code when compiling libservo without --features media-gstreamer
     ^ commit 15cc2686dace218b386f82f61d9bea04ba3b0ac1
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Testing: gstreamer feature is enable in CI, and we test both mac and windows, which guard the elements in the module.
@@ -337,6 +338,7 @@ https://github.com/servo/servo/pull/43558	(@delan, @lukewarlow, @alice, #43558)	
     # Testing: none in this patch, but will be covered by end-to-end platform a11y tests in WPT
     # Fixes: part of #4344, extracted from our work in #42338
 https://github.com/servo/servo/pull/43772	(@delan, @alice, #43772)	a11y: Miscellaneous cleanups to our accessibility code (#43772)
+    a11y; …
     ^ commit 4041256e24238dc1b8a894e4f0f86d97328e70e9
     ^ /!\ contains libservo changes! does it affect the embedder?
     # this patch cleans up a few minor issues in our accessibility code:
@@ -386,7 +388,8 @@ https://github.com/servo/servo/pull/43792	(@eerii, @atbrakhi, #43792)	devtools: 
     # Testing: Ran mach test-devtools and manual testing
     # Part of: #36027
     # Depends on: #43791
-https://github.com/servo/servo/pull/43831	(@jschwe, #43831)	webgpu: Fix feature guard (#43831)
+-https://github.com/servo/servo/pull/43831	(@jschwe, #43831)	webgpu: Fix feature guard (#43831)
+    ;api; remove some dead code when compiling libservo without --features webgpu
     ^ commit a463495c904a87da121f8dca218983352bb76fd6
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Remove the dependency on the `webgpu` crate if the feature is disabled.
@@ -397,7 +400,8 @@ https://github.com/servo/servo/pull/43831	(@jschwe, #43831)	webgpu: Fix feature 
     # Testing: `webgpu` feature is enabled by default in CI, and we test `--no-default-features` too in the HOS build in CI. `cargo tree -p servo --no-default-features` does not show webgpu anymore after this change.
     # 
     # 
-https://github.com/servo/servo/pull/43826	(@yezhizhen, #43826)	layout/script: Free memory earlier by consuming instead of draining the temporary container if it is unused (#43826)
++https://github.com/servo/servo/pull/43826	(@yezhizhen, #43826)	layout/script: Free memory earlier by consuming instead of draining the temporary container if it is unused (#43826)
+    perf; reduce lifetime of allocations
     ^ commit 5fb3877f9f1881938695c536b2e5409c0ba01234
     # Follow up of https://github.com/servo/servo/pull/43226
     # This also allows us to remove some `mut` declaration.
@@ -710,7 +714,8 @@ https://github.com/servo/servo/pull/43620	(@Messi002, #43620)	Fix child disappea
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/43787	(@TG199, #43787)	doc: explain how to create a WebView (#43712) (#43787)
++https://github.com/servo/servo/pull/43787	(@TG199, #43787)	doc: explain how to create a WebView (#43712) (#43787)
+    api; improve WebView and WebViewBuilder docs
     ^ commit ed78dadacbe674271b275583300a92afa2971f58
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Added a "Creating a WebView" section to the `WebView` doc comment explaining that `WebViewBuilder` is the correct way to create a `WebView`, with a usage example. Also expanded the `WebViewBuilder` doc comment to be more descriptive.
@@ -983,7 +988,8 @@ https://github.com/servo/servo/pull/43873	(@mrobinson, #43873)	script: Also set 
     # 
     # Fixes: A part of #43606
 >>> 2026-04-03T23:10:13Z
-https://github.com/servo/servo/pull/43878	(@Loirooriol, #43878)	Upgrade Stylo to 2026-04-01 (#43878)
++https://github.com/servo/servo/pull/43878	(@Loirooriol, #43878)	Upgrade Stylo to 2026-04-01 (#43878)
+    style; impl ‘revert-rule’ (kinda like a no op value?), nested pseudo-elements under ‘::details-content’ like ‘::details-content::before’ and ‘::details-content::after’, dashed idents in @property like ‘syntax: '--foo'’ and ‘initialValue: '--foo'’, more conformant ‘attr()’
     ^ commit b0582911db4bb2f05bb09ec1b251948dd963ab37
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This continues  #43045
@@ -1026,14 +1032,16 @@ https://github.com/servo/servo/pull/43884	(@jdm, #43884)	script: Move eventsourc
     # The EventSource interface is unrelated to the other code in the event module.
     # 
     # Testing: Just moving code around; no runtime impact.
-https://github.com/servo/servo/pull/43882	(@asdfup@protonmail.com, #43882)	Fix error message for illegal HTML element constructors (#41107) (#43882)
++https://github.com/servo/servo/pull/43882	(@asdfup@protonmail.com, #43882)	Fix error message for illegal HTML element constructors (#41107) (#43882)
+    dom; better exception error messages in HTMLElement constructor() and descendants
     ^ commit 0054b71d38a9e77203e24b59ab33bd48715f9eb0
     # Changes the error message for illegal HTML element constructors like `new HTMLElement()` from `new.target must not be the active function object` to `Illegal constructor.`, matching Chrome, Firefox, and the HTML spec.
     # 
     # Ran `./mach test-wpt tests/wpt/tests/custom-elements`. 180 tests passed as expected, 1 pre-existing unrelated crash in `HTMLMediaElement`.
     # 
     # #41107 
-https://github.com/servo/servo/pull/43798	(@yezhizhen, #43798)	net: Set "request-includes-credentials" and URL list of response for "HTTP-network-or-cache fetch" (#43798)
++https://github.com/servo/servo/pull/43798	(@yezhizhen, #43798)	net: Set "request-includes-credentials" and URL list of response for "HTTP-network-or-cache fetch" (#43798)
+    net; more conformant HTTP fetch
     ^ commit b47ab9c5007c5824cd0fd0e6568d30d9db41645c
     # Part of #33616
     # 
@@ -1093,7 +1101,8 @@ https://github.com/servo/servo/pull/43844	(@thebabalola, #43844)	script: Fix ass
     # Testing: No testing required, compiles successfully.
     # Fixes: Part of #43800
     # 
-https://github.com/servo/servo/pull/43892	(@simonwuelker, #43892)	servo: Fix rustdoc warnings (#43892)
++https://github.com/servo/servo/pull/43892	(@simonwuelker, #43892)	servo: Fix rustdoc warnings (#43892)
+    api; fix broken links in api docs
     ^ commit a9dd2b3d157646addb0b4523ae49598ed1ccc6ba
     ^ /!\ contains libservo changes! does it affect the embedder?
     # One warning remains:
@@ -1113,7 +1122,8 @@ https://github.com/servo/servo/pull/43892	(@simonwuelker, #43892)	servo: Fix rus
     # I think that's a false positive, because `InterceptedWebResourceLoad` *is* public.
     # 
     # Testing: We don't run `./mach doc` in CI, so there's no way to test this
-https://github.com/servo/servo/pull/43895	(@mrobinson, #43895)	servo: Remove `WebViewDelegate::play_gamepad_haptic_effect` and `WebViewDelegate::stop_gamepad_haptic_effect` (#43895)
++https://github.com/servo/servo/pull/43895	(@mrobinson, #43895)	servo: Remove `WebViewDelegate::play_gamepad_haptic_effect` and `WebViewDelegate::stop_gamepad_haptic_effect` (#43895)
+    api; technically a breaking change! remove old delegate methods for haptic effects that have been dead since GamepadProvider (now GamepadDelegate) was added in february 2026
     ^ commit e3c894b12e01c97e1f6d1cc32af84ed8794d69a0
     ^ /!\ contains libservo changes! does it affect the embedder?
     # This functionality was moved to the `GamepadDelegate`, but the old
@@ -1146,7 +1156,8 @@ https://github.com/servo/servo/pull/43872	(@mrobinson, #43872)	servoshell: Only 
     # 
     # Testing: No testing required, compiles successfully.
     # Fixes: Part of #43800
-https://github.com/servo/servo/pull/43338	(@Narfinger, @longvatrong111@gmail.com, @mrobinson, #43338)	servo: Add `WebView::load_request` and `UrlRequest` to the API (#43338)
++https://github.com/servo/servo/pull/43338	(@Narfinger, @longvatrong111@gmail.com, @mrobinson, #43338)	servo: Add `WebView::load_request` and `UrlRequest` to the API (#43338)
+    api; new WebView::load_request() method (and UrlRequest API) for loading a URL with custom headers
     ^ commit 6cece2de59a95f10917bb334644817fc13082a20
     ^ /!\ contains libservo changes! does it affect the embedder?
     # This is the continuation of https://github.com/servo/servo/pull/43310 with permission from https://github.com/longvatrong111 to continue the work as they are currently busy.
@@ -1395,7 +1406,8 @@ https://github.com/servo/servo/pull/43848	(@StaySafe020, #43848)	Automatically g
     ^ commit ff9e242de97f199a258c19b25d0d8722abf7d930
     # Automated downstream sync of changes from upstream as of 05-04-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/43930	(@yezhizhen, #43930)	mach: Set up build mode (Side effect: Stylo thread stack size reduced to 512 KiB again for most build) (#43930)
++https://github.com/servo/servo/pull/43930	(@yezhizhen, #43930)	mach: Set up build mode (Side effect: Stylo thread stack size reduced to 512 KiB again for most build) (#43930)
+    crash; [43930 → 43927 → 43888 → 43845] part of #43888
     ^ commit bb94d98bb20212dd59367578c7206bd9255ffb15
     # Previously the mode is always "". Now we set it to the real profile.
     # Note that previously, all the build has 2MiB stylo thread stack size, which is unintended.
@@ -1482,7 +1494,8 @@ https://github.com/servo/servo/pull/43940	(@mrobinson, @mrobinson, #43940)	scrip
     # Part of #40600
     # 
     # Testing: It compiles
-https://github.com/servo/servo/pull/43260	(@MuhammadMouostafa, #43260)	script: Add error messages in StaticRange (#43260)
++https://github.com/servo/servo/pull/43260	(@MuhammadMouostafa, #43260)	script: Add error messages in StaticRange (#43260)
+    dom; better exception error messages in StaticRange
     ^ commit bb368dbb122cd0d66c3340e1529a47d426cdab68
     # Adds specific InvalidNodeType error messages in StaticRange for Constructor().
     # 
@@ -1781,7 +1794,8 @@ https://github.com/servo/servo/pull/43744	(@SharanRP, #43744)	layout: Fix line b
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/43888	(@yezhizhen, #43888)	script/mach: Increase stack size of `ScriptThread`/`StyleThread` to 8MiB to match recursion depth of other browsers (#43888)
++https://github.com/servo/servo/pull/43888	(@yezhizhen, #43888)	script/mach: Increase stack size of `ScriptThread`/`StyleThread` to 8MiB to match recursion depth of other browsers (#43888)
+    crash; [fixes issue] fix crash with deeply nested shadow roots
     ^ commit 0353f11ee2e3726314ac407f337e68746525ea58
     # TL;DR: We increase stack size of `ScriptThread` to 8MiB, and set Stylo stack size environment var
     # to 8 MiB for all builds. This only reserves virtual memory space which is
@@ -2010,7 +2024,8 @@ https://github.com/servo/servo/pull/43949	(@sabbCodes, #43949)	storage: Make add
     #   • 1 tests timed out unexpectedly
     # ```
     # Fixes: #43880
-https://github.com/servo/servo/pull/43970	(@yezhizhen, #43970)	net: Improve HTTP fetch compliance (#43970)
++https://github.com/servo/servo/pull/43970	(@yezhizhen, #43970)	net: Improve HTTP fetch compliance (#43970)
+    net; more conformant HTTP fetch
     ^ commit cb2dd62e62827d696130f5801465fe86be0bd9c5
     # Most notably, implement step 5 and removes the incorrect place for it.
     # Part of follow up to #43798
@@ -2357,13 +2372,15 @@ https://github.com/servo/servo/pull/42995	(@Narfinger, #42995)	OHOS CI: Fix pars
     # Testing: This is currently untested. As it is a small CI change that can't break a broken test it should be fine.
     # Fixes: https://github.com/servo/servo/issues/42992
     # 
-https://github.com/servo/servo/pull/43890	(@Loirooriol, #43890)	stylo: Enable multiple color arguments in `color-mix()` (#43890)
++https://github.com/servo/servo/pull/43890	(@Loirooriol, #43890)	stylo: Enable multiple color arguments in `color-mix()` (#43890)
+    style; impl ‘color-mix()’ with one <color> argument, or with more than two <color> arguments
     ^ commit 0615c394b94d0dd473f68880050e7e0fdf731caa
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Bumps Stylo to https://github.com/servo/stylo/pull/348
     # 
     # Testing: 2 WPT improve
-https://github.com/servo/servo/pull/43987	(@yezhizhen, #43987)	script/net: Make URL List closer to spec (#43987)
++https://github.com/servo/servo/pull/43987	(@yezhizhen, #43987)	script/net: Make URL List closer to spec (#43987)
+    dom; towards implementing redirected property on Response
     ^ commit 8b1619ba1d541ea838d93d55fc8fb1b87de4eb0a
     # [Redirected](https://fetch.spec.whatwg.org/#dom-response-redirected) should be decided by the URL List.
     # Currently it does not. We add some TODO, fill URL in more places according to spec.
@@ -2388,7 +2405,8 @@ https://github.com/servo/servo/pull/44003	(@sabbCodes, #44003)	Remove introducti
     # 
     # Testing: No testing required, compiles successfully.
     # Fixes: #43980
-https://github.com/servo/servo/pull/43897	(@TG199, #43897)	  script: Support sprintf-style substitutions in console methods (#43897)
++https://github.com/servo/servo/pull/43897	(@TG199, #43897)	  script: Support sprintf-style substitutions in console methods (#43897)
+    dom; console.log() and friends now support printf-style formatting like console.log("%s %d %x %f", "hello", 16, 16, 16)
     ^ commit a7e4b80b31b373626a3db4264ac4379846b31dfe
     #  Implement the Console Formatter operation for all console methods.
     # Fixes: #43827 
@@ -2579,7 +2597,8 @@ https://github.com/servo/servo/pull/44017	(@jschwe, @mukilan, #44017)	release: F
     # Testing: Tested manually, by cancelling [this workflow](https://github.com/servo/servo/actions/runs/24119740924/job/70371050119) which resulted in a draft release publish (failure branch)
     # 
     # 
-https://github.com/servo/servo/pull/44016	(@yezhizhen, @webbeef, #44016)	script: Reduce `ShadowRoot::bind_to_tree` complexity from O(2^N) to O(N) (#44016)
++https://github.com/servo/servo/pull/44016	(@yezhizhen, @webbeef, #44016)	script: Reduce `ShadowRoot::bind_to_tree` complexity from O(2^N) to O(N) (#44016)
+    perf; fix O(2^n) appendChild() when shadow roots are involved
     ^ commit 712b4f9bc237dd2c6976b708799a92929b53f8fb
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # During traversal, exclude shadow roots.
@@ -3112,7 +3131,8 @@ https://github.com/servo/servo/pull/43983	(@Messi002, #43983)	media: Clean up sh
     # 
     # Fixes: #43828
     # 
-https://github.com/servo/servo/pull/44070	(@mrobinson, #44070)	servoshell: Ignore requests to focus unknown WebViews via keyboard shortcuts (#44070)
++https://github.com/servo/servo/pull/44070	(@mrobinson, #44070)	servoshell: Ignore requests to focus unknown WebViews via keyboard shortcuts (#44070)
+    crash servoshell; fix crash when pressing Ctrl+2 or ⌘2 with only one tab
     ^ commit f45223568eeaeb5f0eeedcc4ce0825750b316016
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Instead of panicking when pressing a keyboard shortcut for an uknown
@@ -3174,7 +3194,8 @@ https://github.com/servo/servo/pull/44061	(@RichardTjokroutomo, #44061)	font: Re
     # We can then reuse it more often.
     # 
     # Testing: Just a refactor.
-https://github.com/servo/servo/pull/44052	(@yezhizhen, #44052)	script: Skip clearing subtree layout boxes of detached element when attaching shadow to it (#44052)
++https://github.com/servo/servo/pull/44052	(@yezhizhen, #44052)	script: Skip clearing subtree layout boxes of detached element when attaching shadow to it (#44052)
+    perf; reduce work done in attachShadow() on Element
     ^ commit 560498923e5ded1fa95ae099da2fcb27bc309d82
     # There is no layout boxes to clear in this case. For the example in #43998,
     # this skips the traversal many times.
@@ -3247,7 +3268,8 @@ https://github.com/servo/servo/pull/43189	(@lukewarlow, @mrobinson, #43189)	scri
     # Part of #40600
     # 
     # Testing: It compiles
-https://github.com/servo/servo/pull/44073	(@TG199, #44073)	Stylo: Enable text align match parent servo (#44073)
++https://github.com/servo/servo/pull/44073	(@TG199, #44073)	Stylo: Enable text align match parent servo (#44073)
+    layout; ‘text-align: match-parent’ (like ‘inherit’, but can inherit ‘start’ and ‘end’ properly)
     ^ commit 5606cf3f65037cdbfd1424688ceaf42309131edf
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Companion PR for servo/stylo#350
@@ -3287,7 +3309,8 @@ https://github.com/servo/servo/pull/43990	(@simonwuelker, #43990)	script: Accept
     # Testing: New tests start to pass
     # Part of https://github.com/servo/servo/issues/43821 - we no longer throw an exception in the case above.
     # 
-https://github.com/servo/servo/pull/44079	(@yezhizhen, #44079)	config: Fix panic when converting convertible `PrefValue::Int` to u64 (#44079)
++https://github.com/servo/servo/pull/44079	(@yezhizhen, #44079)	config: Fix panic when converting convertible `PrefValue::Int` to u64 (#44079)
+    crash; fix crash in servoshell when setting u64 preferences like --pref network_http_cache_size or --pref network_connection_timeout
     ^ commit b62dc72c732e09c7869ea7296d1063710317e9a7
     ^ /!\ contains servoshell changes! does it affect the user experience?
     ^ /!\ may contain changes to EXPERIMENTAL_PREFS
@@ -3374,7 +3397,8 @@ https://github.com/servo/servo/pull/44093	(@jschwe, #44093)	deps: Fix sea-query 
     # 
     # Testing: No changes, covered by existing tests.
     # Fixes: #44089
-https://github.com/servo/servo/pull/43700	(@TG199, #43700)	script: implement missing steps for form submission (#43700)
++https://github.com/servo/servo/pull/43700	(@TG199, #43700)	script: implement missing steps for form submission (#43700)
+    dom; more conformant form submission
     ^ commit a670c7a52b40e4c1899ef0b04f579e9c80a434c3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement missing history handling steps for form submission 
@@ -3511,14 +3535,16 @@ https://github.com/servo/servo/pull/44108	(@jschwe, #44108)	ci: Secure release w
     # Testing: Requires a manual workflow run on a protected branch. Given that we already tested environments in previous PRs, I think this PR might be safe to test after merging, instead of protecting the PR branch.
     # 
     # 
-https://github.com/servo/servo/pull/44115	(@TG199, #44115)	script: Move cookie_store from GlobalScope into Window (#44115)
++https://github.com/servo/servo/pull/44115	(@TG199, #44115)	script: Move cookie_store from GlobalScope into Window (#44115)
+    gardening; refactor
     ^ commit 3cb97fc17b7b068779b1310982d455a924cd7233
     # Push GlobalScope::cookie_store down into Window
     # 
     # Testing: ./mach test-wpt tests/wpt/tests/cookiestore
     # Fixes: #44107 
     # 
-https://github.com/servo/servo/pull/44116	(@sabbCodes, #44116)	servo: Remove unnecessary RefCell from site_data_manager (#44116)
++https://github.com/servo/servo/pull/44116	(@sabbCodes, #44116)	servo: Remove unnecessary RefCell from site_data_manager (#44116)
+    api; technically a breaking change! Servo::site_data_manager() now returns `&SiteDataManager` instead of `Ref<'_, SiteDataManager>`
     ^ commit 00ef0f439f89db8d184880e174756833276ad3fd
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Removed unnecessary ```RefCell``` from ```site_data_manager```
@@ -3566,7 +3592,8 @@ https://github.com/servo/servo/pull/44123	(@jschwe, #44123)	bootstrap: Stop inst
     # cargo-about is only used in the ./mach release command, which will only be used by very few people (when preparing a release). Hence it doesn't make sense to install it for everyone, and instead we can just tell the user how to install if it is missing, and save resources for everyone else.
     # 
     # Testing: Not tested, but trivial
-https://github.com/servo/servo/pull/44124	(@TG199, #44124)	  libservo: Export CookieSource in public API (#44124)
++https://github.com/servo/servo/pull/44124	(@TG199, #44124)	  libservo: Export CookieSource in public API (#44124)
+    api; fix bug where SiteDataManager::cookies_for_url() was unable to be called due to CookieSource argument
     ^ commit 29c56040558ad8a071ca6aba65a70146c5b2cc5b
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Fixes: #44102
@@ -4438,6 +4465,7 @@ https://github.com/servo/servo/pull/44203	(@nicoburns, #44203)	deps: Upgrade Taf
     # 
     # 
 https://github.com/servo/servo/pull/44205	(@mukilan, #44205)	servoshell: Fix incorrect calculation of WebView dimension. (#44205)
+    ;servoshell; same-month regression
     ^ commit 38e339723770e5722c6e48a4fd1f4e42d5e46e3b
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # The upgrade to egui 0.34.0 in #44053 replaced the usage of the deprecated `Ui::available_rect` method with `Ui::content_rect` as suggested in the deprecation notice in egui. However, `content_rect` is not equivalent to `available_rect` and doesn't seem to account for the area occupied by the egui panels.
@@ -4786,7 +4814,8 @@ https://github.com/servo/servo/pull/44159	(@niyabits, #44159)	canvas: fix unreco
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/43617	(@TG199, #43617)	script: Implement wake lock api (#43617)
++https://github.com/servo/servo/pull/43617	(@TG199, #43617)	script: Implement wake lock api (#43617)
+    dom; implement navigator.wakeLock under --pref dom_wakelock_enabled (not experimental)
     ^ commit a2213091c4c3b9488fdc61f8b5c0422260ee938f
     ^ /!\ contains libservo changes! does it affect the embedder?
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -4823,7 +4852,8 @@ https://github.com/servo/servo/pull/44215	(@Taym95, #44215)	Indexeddb: fix upgra
     # [rustls-webpki](https://rustsec.org/packages/rustls-webpki.html) has [vulnerability report](https://rustsec.org/advisories/RUSTSEC-2026-0098.html). This is fixed in newer 0.103.12.
     # 
     # Testing: Cargo deny will now pass causing the CI to pass.
-https://github.com/servo/servo/pull/44223	(@yezhizhen, #44223)	embedding: Use non-advertised (standard) shortcut (#44223)
++https://github.com/servo/servo/pull/44223	(@yezhizhen, #44223)	embedding: Use non-advertised (standard) shortcut (#44223)
+    servoshell; fix shortcuts on windows so they behave normally and not like “install-on-demand” <https://learn.microsoft.com/en-au/windows/win32/msi/advertisement>
     ^ commit 0f935df0c85b279303b61795156003168828291e
     # Right now we are using [advertised shortcut](https://learn.microsoft.com/en-au/windows/win32/msi/advertisement). This is drastically different from standard Windows shortcut. For example, when you right click,
     # then click "open file position", nothing happens. 
@@ -4836,6 +4866,7 @@ https://github.com/servo/servo/pull/44223	(@yezhizhen, #44223)	embedding: Use no
     # 
     # Testing: [Windows Try](https://github.com/servo/servo/actions/runs/24436253745). 
 https://github.com/servo/servo/pull/44208	(@alice, #44208)	layout: Send accessibility updates directly to embedder from layout. (#44208)
+    a11y; …
     ^ commit 31be152bfaff521afcf24ef4733454454e85ef16
     # This introduces a `ScriptToEmbedderChan` property on `LayoutThread`, which is used to send accessibility updates directly to the embedder.
     # 
@@ -4993,7 +5024,8 @@ https://github.com/servo/servo/pull/44252	(@simonwuelker, #44252)	tests: Remove 
     # The original bug was triggered by the shadow tree for audio controls, and that tree exists without the `src` element too.
     # 
     # Let's see if this fixes https://github.com/servo/servo/issues/39473
-https://github.com/servo/servo/pull/44253	(@javaderg@pm.me, #44253)	api: WebView::animating should only take a reference to self (#44253)
++https://github.com/servo/servo/pull/44253	(@javaderg@pm.me, #44253)	api: WebView::animating should only take a reference to self (#44253)
+    api; WebView::animating() no longer consumes the WebView handle, taking `&self` instead of `self`
     ^ commit 4a3ee306db31e31a1a0ed52fa4ee07536b536cca
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Fixed that `WebView::animating` takes `self` instead of `&self` as argument.
@@ -5117,7 +5149,8 @@ https://github.com/servo/servo/pull/44182	(@jschwe, #44182)	android: Support cus
     # Testing: We don't run any runtime tests for android in CI
     # 
     # 
-https://github.com/servo/servo/pull/44279	(@Loirooriol, #44279)	layout: Avoid unnecessary borrow in `TextRun::segment_text_by_font()` (#44279)
++https://github.com/servo/servo/pull/44279	(@Loirooriol, #44279)	layout: Avoid unnecessary borrow in `TextRun::segment_text_by_font()` (#44279)
+    perf; reduce RefCell borrow ops in TextRun (inline layout)
     ^ commit 9ef8fe5e42fd491d7c61a24874b5c5c42519e0cd
     # No need to borrow `self.inline_styles.style` when the result is already available as a parameter of the function.
     # 
@@ -5139,14 +5172,16 @@ https://github.com/servo/servo/pull/44283	(@arihant2math, #44283)	servoshell: Re
     dom; indexeddb…
     ^ commit b4a569536c144cc4cb5970ef5c513858c123b0bc
     # Since indexeddb is now part of the experimental features list, we can remove it from the "more experimental" features list.
-https://github.com/servo/servo/pull/44282	(@arihant2math, #44282)	script: Add messages to all errors in `components/script/dom/location.rs` (#44282)
++https://github.com/servo/servo/pull/44282	(@arihant2math, #44282)	script: Add messages to all errors in `components/script/dom/location.rs` (#44282)
+    dom; better exception error messages in Location
     ^ commit 83eacc517a6a037b6dce90f822d798e3f3840fe6
     # Mostly reuses the original error message from #39051, but on the rest of the methods that require it. Also adds a new error message for `document_if_same_origin`.
     # 
     # Testing: None
     # Fixes: Partially #40756 
     # 
-https://github.com/servo/servo/pull/44243	(@sabbCodes, #44243)	script: Make adjacent errors and console.log messages log in correct order (#44243)
++https://github.com/servo/servo/pull/44243	(@sabbCodes, #44243)	script: Make adjacent errors and console.log messages log in correct order (#44243)
+    dom; fix incorrect order of console.log() messages and uncaught exception messages in console
     ^ commit 77e75aaf9ec98bbcbc7ee7e4a7d0097d2294e689
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Made adjacent errors and console.log messages log in correct order
@@ -5462,7 +5497,8 @@ https://github.com/servo/servo/pull/44318	(@yezhizhen, #44318)	Revert "storage: 
     # Fixes: #44316
     # Fixes: #44310
     # Fixes: #44306
-https://github.com/servo/servo/pull/43794	(@longvatrong111, #43794)	Implement SiteDataManager::cookies_for_url_async (#43794)
++https://github.com/servo/servo/pull/43794	(@longvatrong111, #43794)	Implement SiteDataManager::cookies_for_url_async (#43794)
+    api; new SiteDataManager::cookies_for_url_async() method <https://doc.servo.org/servo/struct.SiteDataManager.html#method.cookies_for_url_async>
     ^ commit 2d445b649d839e2d15cea7c88b15a8c1e13e868b
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Support applications to get cookies asynchronously from embedder.
@@ -5539,7 +5575,8 @@ https://github.com/servo/servo/pull/43124	(@webbeef, #43124)	script: registratio
     # Testing: optimization with no tests regression: https://github.com/webbeef/servo/actions/runs/22880845745
     # 
     # 
-https://github.com/servo/servo/pull/44327	(@yezhizhen, #44327)	Android: Fix black screen when exiting menu or resuming activity in lifecycle (#44327)
++https://github.com/servo/servo/pull/44327	(@yezhizhen, #44327)	Android: Fix black screen when exiting menu or resuming activity in lifecycle (#44327)
+    servoshell; fix black screen when closing settings or switching back from another app
     ^ commit d3932a2118d05ab49dcbbd739d05959dbccb2c3a
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # We should request repaint for the platform window when `resume_painting` 
@@ -6435,7 +6472,8 @@ https://github.com/servo/servo/pull/44370	(@mrobinson, #44370)	layout: Add place
     # Testing: This change adds a Servo-specific WPT test. Caret rendering isn't specified.
     # Fixes: #41338
     # 
-https://github.com/servo/servo/pull/44242	(@jschwe, #44242)	net: Optimize initial TLS connection (#44242)
++https://github.com/servo/servo/pull/44242	(@jschwe, #44242)	net: Optimize initial TLS connection (#44242)
+    perf; reduce first TLS connection latency by 30ms
     ^ commit 97c08a6f95a1b89068782e937e48c966e4f97d7c
     ^ /!\ contains libservo changes! does it affect the embedder?
     # By touching the crypto provider, we can force it to gather entropy.
@@ -6503,7 +6541,7 @@ https://github.com/servo/servo/pull/44410	(@TimvdLippe, #44410)	script: Add init
     # Part of #25005
     # 
     # Testing: WPT
-https://github.com/servo/servo/pull/44429	(@yezhizhen, #44429)	dependabot: Add rustls-webpki related group (#44429)
+-https://github.com/servo/servo/pull/44429	(@yezhizhen, #44429)	dependabot: Add rustls-webpki related group (#44429)
     ^ commit d46b0a98266cc66b007dc8d18d1c572a51371edd
     # This should make #44415, #44418, #44419 
     # work in one PR without conflict in the future.
@@ -6942,6 +6980,7 @@ https://github.com/servo/servo/pull/44456	(@jschwe, #44456)	profile: Add instrum
     # <br />
     # 
 https://github.com/servo/servo/pull/44437	(@alice, @delan, #44437)	layout: Allow repeatedly adding the same node to AccessibilityUpdate  (#44437)
+    a11y; …
     ^ commit ff0e9655a8f88203dfb8910a1ab1308499706a20
     # This means keeping nodes in a temporary map until the accesskit TreeUpdate is accessed via `finalize()`. After `finalize()` is called, any further attempts to use the object will panic.
     # 
@@ -6996,6 +7035,7 @@ https://github.com/servo/servo/pull/44436	(@mrobinson, #44436)	layout: Split har
     # it depends on tab rendering, which we do not currently support properly.
 >>> 2026-04-24T23:56:31Z
 https://github.com/servo/servo/pull/44438	(@alice, @delan, #44438)	layout: Store AccessibilityTree's nodes in ArcRefCells. (#44438)
+    a11y; …
     ^ commit 6a84134a3473ac84f0165a4f12ebef2f31e78360
     # This will allow us not to need to repeatedly borrow `self` when reading/updating individual `AccessibilityNode`s.
     # 
@@ -7228,6 +7268,7 @@ https://github.com/servo/servo/pull/44357	(@rovertrack, #44357)	Gamepad: Impleme
     # Fixes: #44333
     # 
 https://github.com/servo/servo/pull/44473	(@alice, #44473)	script: Don't panic when trying to de-activate accessibility (#44473)
+    a11y; …
     ^ commit 61203e68b9e0a7dc1f162e2264c6ff906be33f21
     # When reloading, the pipeline is closed before we get the chance to set accessibility inactive, which we do for pipelines which stick around in the bfcache. We don't need to panic if we're trying to de-activate accessibility and the pipeline is already closed.
     # 
@@ -7390,6 +7431,7 @@ https://github.com/servo/servo/pull/44462	(@rovertrack, #44462)	Devtools: Enable
     # Part of #40600
     # 
 https://github.com/servo/servo/pull/44255	(@alice, @delan, #44255)	layout: Expose some non-interactive accessibility roles based on DOM node type. (#44255)
+    a11y; …
     ^ commit 8ced3d1b8eceead83690f2634f38e17c37c6d143
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Sets the accessibility role of nodes based on their DOM node type (ignoring ARIA roles and computed styles for now), for a small subset of roles.
@@ -8748,7 +8790,8 @@ https://github.com/servo/servo/pull/44550	(@Loirooriol, #44550)	layout: Keep all
     # Testing: Adding new WPT
     # Fixes: #44549
     # 
-https://github.com/servo/servo/pull/44551	(@Loirooriol, #44551)	layout: Handle `display: contents` in all `TraversalHandler` (#44551)
++https://github.com/servo/servo/pull/44551	(@Loirooriol, #44551)	layout: Handle `display: contents` in all `TraversalHandler` (#44551)
+    layout; ‘display: contents’ now works correctly inside ‘display: table’, ‘table-row’, ‘table-row-group’ (<table>, <tr>, <thead>, <tbody>, <tfoot>)
     ^ commit dcd3a4ba84ab72b05913dae673a4be75ff28756f
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # The `TraversalHandler` trait defined the methods that handle elements with `display: contents` using a default implementation that was no-op. Therefore, it was easy for types implementing the trait to forget to handle `display: contents` correctly.
@@ -8905,7 +8948,8 @@ https://github.com/servo/servo/pull/44612	(@nicoburns, #44612)	Upgrade to Stylo 
 https://github.com/servo/servo/pull/44618	(@simonwuelker, #44618)	script: Remove unfulfilled crown expectations (#44618)
     ^ commit 58ac83bab6c79384c7c9af3ddef7a6c8532d6b5b
     # Fixes https://github.com/servo/servo/issues/44610
-https://github.com/servo/servo/pull/44166	(@longvatrong111, #44166)	servo: Add `SiteDataManager::clear_session_cookies` (#44166)
++https://github.com/servo/servo/pull/44166	(@longvatrong111, #44166)	servo: Add `SiteDataManager::clear_session_cookies` (#44166)
+    api; new SiteDataManager::clear_session_cookies() method. no save_cookies() in this patch! <https://doc.servo.org/servo/struct.SiteDataManager.html#method.clear_session_cookies>
     ^ commit c7f4f37e1b189896edda8e041a333518382d8b2f
     ^ /!\ contains libservo changes! does it affect the embedder?
     # Implement save_cookies and clear_session_cookies in SiteDataManager

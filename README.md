@@ -400,6 +400,7 @@ And generally we want to exclude...
 
 - dependabot updates (“build(deps)”)
 - WPT imports (“Update web-platform-tests” or “Sync WPT with upstream”)
+- fixes for regressions that happened in the same month
 - lint and warning fixes
 - other CI changes
 - refactors (unless large-scale)
