@@ -1330,7 +1330,7 @@ https://github.com/servo/servo/pull/28583	(@i@yvt.jp, @jdm, #28583)	Implement th
     # 
     # Testing: No testing required, compiles successfully.
     # Fixes: Part of #43800
-https://github.com/servo/servo/pull/43922	(@jschwe, #43922)	mach: Fix typo in allocator feature name (#43922)
+-https://github.com/servo/servo/pull/43922	(@jschwe, #43922)	mach: Fix typo in allocator feature name (#43922)
     ^ commit 42ba33d7efe11ac03c5d2595dba6fd1112b0471d
     # This name was mistyped during the rename of the servo crates to be `servo-` prefixed.
     # 
@@ -1376,7 +1376,7 @@ https://github.com/servo/servo/pull/43926	(@mrobinson, @mrobinson, #43926)	scrip
     # Part of #42638
     # 
     # Testing: It compiles
-https://github.com/servo/servo/pull/43920	(@jschwe, #43920)	ci: Secure book-sync secrets with environment (#43920)
+-https://github.com/servo/servo/pull/43920	(@jschwe, #43920)	ci: Secure book-sync secrets with environment (#43920)
     ^ commit 06f63206095275a447c8736024c44f63b8e1aef6
     # We defined a github environment `book-sync` which contains the required secrets.
     # After merging this PR we can remove the secrets from the per-repository secrets, which reduces the scope the secrets are available in, and has the added restriction of only being available on protected branches.
@@ -1431,7 +1431,7 @@ https://github.com/servo/servo/pull/43920	(@jschwe, #43920)	ci: Secure book-sync
     # 
     # Testing: No testing required, compiles successfully.
     # Fixes: Part of #43800
-https://github.com/servo/servo/pull/43931	(@jschwe, #43931)	bootstrap: Sync packages with book (#43931)
+-https://github.com/servo/servo/pull/43931	(@jschwe, #43931)	bootstrap: Sync packages with book (#43931)
     ^ commit e6ed6954b41859ddcfaa81ab96855b82e76c6b01
     # This commit removes some unneeded lines from README.md in the linux_packages folder. This will trigger `book-export` to run, since it creates a diff in that folder.
     # Since the export only happens if there is a diff, and there have been not changes since the auto sync PR landed, the formatting related changes never got upstreamed (sorting the packages).
@@ -2068,7 +2068,7 @@ https://github.com/servo/servo/pull/43746	(@simonwuelker, @jdm, #43746)	Force ca
     # Part of https://github.com/servo/servo/issues/43326
     # Part of https://github.com/servo/servo/issues/25226
     # 
-https://github.com/servo/servo/pull/43971	(@jschwe, #43971)	profile: Add debug_span and minor refactoring (#43971)
+-https://github.com/servo/servo/pull/43971	(@jschwe, #43971)	profile: Add debug_span and minor refactoring (#43971)
     ^ commit d21fc8238a00e8e6cf66a01c4f9a12385b48b6e0
     # Add an internal macro to avoid duplication, and use that to implement the existing two `trace` and `info` macros and add `debug_span`. We skip `warn` and `error` (from the tracing-rs library), since those names don't fit our profiling usage too well, and 3 different levels should also be enough. If we need more levels in the future we could still add more macros than (after deciding on better names than warn and error)
     # 
@@ -3401,7 +3401,8 @@ https://github.com/servo/servo/pull/44038	(@niyabits, #44038)	localstorage: test
     # 
     # Testing: Compilation is the test as we only use previously made iterator functions.
     # 
-https://github.com/servo/servo/pull/44093	(@jschwe, #44093)	deps: Fix sea-query pre-release versions (#44093)
++https://github.com/servo/servo/pull/44093	(@jschwe, #44093)	deps: Fix sea-query pre-release versions (#44093)
+    api; fix build failure for embedders with a fresh Cargo.lock
     ^ commit 34337273a36d5e0e67d429039987c785f9f7c7fc
     # This prevents issues for users that don't already have a lockfile, since prerelease versions can have breaking changes.
     # This should also be backported to the release branch.
@@ -3600,7 +3601,7 @@ https://github.com/servo/servo/pull/44109	(@jschwe, #44109)	bootstrap/devcontain
     # Testing: bootstrap is ran in CI, and the packages were already being installed by the wpt workflow.
     # 
     # 
-https://github.com/servo/servo/pull/44123	(@jschwe, #44123)	bootstrap: Stop installing cargo-about (#44123)
+-https://github.com/servo/servo/pull/44123	(@jschwe, #44123)	bootstrap: Stop installing cargo-about (#44123)
     ^ commit a13e3852cd060e3819349919122d5b37bc4cf860
     # cargo-about is only used in the ./mach release command, which will only be used by very few people (when preparing a release). Hence it doesn't make sense to install it for everyone, and instead we can just tell the user how to install if it is missing, and save resources for everyone else.
     # 
@@ -5083,7 +5084,8 @@ https://github.com/servo/servo/pull/42204	(@stevennovaryo, @jdm, #42204)	script:
     # Part of: https://github.com/servo/servo/issues/35767
     # 
     # Co-authored-by: Josh Matthews [josh@joshmatthews.net](josh@joshmatthews.net)
-https://github.com/servo/servo/pull/44198	(@kkoyung, #44198)	script: Initialize Sanitizer API implementation (#44198)
++https://github.com/servo/servo/pull/44198	(@kkoyung, #44198)	script: Initialize Sanitizer API implementation (#44198)
+    wip dom; start implementing Sanitizer under --pref dom_sanitizer_enabled (not experimental)
     ^ commit b23ee51d00720f466c7207cef11e77772a696997
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -6903,7 +6905,8 @@ https://github.com/servo/servo/pull/44435	(@simon@igalia.com, #44435)	script: Re
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/44346	(@jschwe, #44346)	mozjs: Fix make 4.4 broken parallel compilation (#44346)
++https://github.com/servo/servo/pull/44346	(@jschwe, #44346)	mozjs: Fix make 4.4 broken parallel compilation (#44346)
+    perf; fix parallel compilation of mozjs with gnu make 4.4 (MOZJS_FROM_SOURCE=1, --debug-mozjs, etc)
     ^ commit d0b2337118c58a9b37bfa79bf8f6849c12ee3bde
     # Companion PR to https://github.com/servo/mozjs/pull/735.
     # This bumps mozjs to the latest version 0.15.9. The changes were reviewed in the linked PR.
@@ -7360,6 +7363,7 @@ https://github.com/servo/servo/pull/44459	(@jschwe, #44459)	devtools: Respect SO
     # 
     # Opened to reduces the complexity of #44254 
 https://github.com/servo/servo/pull/44481	(@kkoyung, #44481)	script: Add or remove elements in sanitizer (#44481)
+    wip dom; towards Sanitizer impl
     ^ commit 430105468fed9c17b7e89e8633866dc59ab08f5d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
