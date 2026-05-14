@@ -266,7 +266,8 @@ https://github.com/servo/servo/pull/43182	(@jschwe, #43182)	Embed default resour
     # 
     # Testing: Covered by existing tests. [mach try full](https://github.com/jschwe/servo/actions/runs/23811669469)
     # Fixes: Part of #43145
-https://github.com/servo/servo/pull/43824	(@webbeef, #43824)	script: Remove useless upcast::<Element> calls (#43824)
++https://github.com/servo/servo/pull/43824	(@webbeef, #43824)	script: Remove useless upcast::<Element> calls (#43824)
+    cleanup; dom refactor (upcast is not actually costly, so this should not affect perf)
     ^ commit 2518f97dace2ba007e00d960b756b976f74ca921
     # upcast::<Type>() is costly in general, but in some cases we can avoid that call and use a direct field access instead.
     # 
@@ -298,7 +299,7 @@ https://github.com/servo/servo/pull/43824	(@webbeef, #43824)	script: Remove usel
     # 
     # Fixes: part of  #43606 and #43800
     # 
-https://github.com/servo/servo/pull/43701	(@shubhamg13, #43701)	wpt: Delete `viewport-apply-initial-scale-after-navigation.html` (#43701)
+-https://github.com/servo/servo/pull/43701	(@shubhamg13, #43701)	wpt: Delete `viewport-apply-initial-scale-after-navigation.html` (#43701)
     ^ commit 23e69b0658c414e9b82106b15af8ccf6418b550d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Scenario proposed should be best tested using unit tests.
@@ -373,7 +374,8 @@ https://github.com/servo/servo/pull/43770	(@mrobinson, #43770)	script: Use `Text
     # 
     # Testing: This fixes a few WPT tests.
     # 
-https://github.com/servo/servo/pull/43802	(@mukilan, #43802)	config: Add documentation for the public API. (#43802)
++https://github.com/servo/servo/pull/43802	(@mukilan, #43802)	config: Add documentation for the public API. (#43802)
+    api; improve docs in servo_config, servo::{opts, Opts, DiagnosticsLogging, OutputOptions, initialize_options, get, prefs, PrefValue}
     ^ commit 069aa65d5479d861cf686c4b16bdd4c00e8800ca
     ^ /!\ may contain changes to feature flags
     # Testing: No code changes, so no testing is required.
@@ -435,7 +437,8 @@ https://github.com/servo/servo/pull/43792	(@eerii, @atbrakhi, #43792)	devtools: 
     # 
     # Fixes: A part of #43606
     # 
-https://github.com/servo/servo/pull/43799	(@simonwuelker, #43799)	script: Let `wheel`,  keyboard- and pointerevents be composed when fired by the user agent (#43799)
++https://github.com/servo/servo/pull/43799	(@simonwuelker, #43799)	script: Let `wheel`,  keyboard- and pointerevents be composed when fired by the user agent (#43799)
+    dom; mouse events, ‘keyup’ and ‘keypress’ events (but not ‘keydown’ yet), pointer events other than ‘pointerenter’ and ‘pointerleave’ (‘pointermove’ etc), and ‘wheel’ events now bubble out of shadow roots
     ^ commit 8791236c7a399db581e8426386bb6d6c5618a83b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -920,6 +923,7 @@ https://github.com/servo/servo/pull/43866	(@jschwe, #43866)	servo-hyper-serde: U
     # 
     # 
 https://github.com/servo/servo/pull/43822	(@sabbCodes, #43822)	Used encoding-parsing algorithm in follow_hyperlink (#43822)
+    dom; <a href> now correctly resolves the href with the page encoding
     ^ commit 782dce68c487f13d425e5baf8bc9b4051a41ea10
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Used encoding-parsing algorithm in follow_hyperlink
@@ -1248,7 +1252,7 @@ https://github.com/servo/servo/pull/42998	(@Taym95, #42998)	indexeddb: abort pen
 -https://github.com/servo/servo/pull/43898	(@xtqqczze, #43898)	build(deps): bump rustix from 1.1.2 to 1.1.4 (#43898)
     ^ commit c8c200cf9662a65f15c235505b12149214232a96
     # null
-https://github.com/servo/servo/pull/43902	(@simon@igalia.com, #43902)	Don’t print passing unit tests (#43902)
+-https://github.com/servo/servo/pull/43902	(@simon@igalia.com, #43902)	Don’t print passing unit tests (#43902)
     ^ commit 894327e5d9e602b69ebde8974c7e406b70a70d7f
     # This removes from the output of `./mach test-unit` hundreds of lines like:
     # 
@@ -1351,7 +1355,8 @@ https://github.com/servo/servo/pull/28583	(@i@yvt.jp, @jdm, #28583)	Implement th
     # 
     # Testing: No testing required, compiles successfully.
     # Fixes: Part of #43800
-https://github.com/servo/servo/pull/43918	(@arihant2math, #43918)	Prevent panic on client storage directory conflict (#43918)
++https://github.com/servo/servo/pull/43918	(@arihant2math, #43918)	Prevent panic on client storage directory conflict (#43918)
+    crash; fix crash when servo can’t write web storage data (localStorage, indexeddb) to disk
     ^ commit 3718abd6263e983f6b91cf0e224b8f2513d91b64
     # Instead of erroring out, it makes sense to open an in memory database so that the thread can keep functioning.
     # 
@@ -1441,13 +1446,15 @@ https://github.com/servo/servo/pull/43926	(@mrobinson, @mrobinson, #43926)	scrip
     # Testing: not required / in a way this is a test of our book-export action. 
     # 
     # 
-https://github.com/servo/servo/pull/43939	(@kkoyung, #43939)	script: Move Web Crypto interfaces to `script/dom/webcrypto` (#43939)
++https://github.com/servo/servo/pull/43939	(@kkoyung, #43939)	script: Move Web Crypto interfaces to `script/dom/webcrypto` (#43939)
+    cleanup; dom refactor
     ^ commit 623ce593836934dc3321e4373f4968755db750a2
     # Move interfaces defined by the Web Crypto specification to the `script/dom/webcrypto/` from `script/dom/`. This includes `Crypto`, `CryptoKey` and `SubtleCrypto` (with its submodules).
     # 
     # Testing: No behavior changes.
     # Fixes: Part of #38901
-https://github.com/servo/servo/pull/43702	(@webbeef, @TimvdLippe, #43702)	parser: add a pretty printer for top-level json documents (#43702)
++https://github.com/servo/servo/pull/43702	(@webbeef, @TimvdLippe, #43702)	parser: add a pretty printer for top-level json documents (#43702)
+    api; json documents are now pretty-printed when loaded as a document (has screenshot!)
     ^ commit 0b5688fdfae7c541924df1c88aee4a955d3e45e8
     # This adds a new resource implementing a simple pretty printer  for json documents.
     # 
@@ -1464,7 +1471,8 @@ https://github.com/servo/servo/pull/43914	(@Taym95, #43914)	IndexedDB: Fix fire-
     # Testing: fire-success/error event wpt test fixed.
     # Fixes: part of #40983
     # 
-https://github.com/servo/servo/pull/43940	(@mrobinson, @mrobinson, #43940)	script: Support deleting words with backspace in textual inputs (#43940)
++https://github.com/servo/servo/pull/43940	(@mrobinson, @mrobinson, #43940)	script: Support deleting words with backspace in textual inputs (#43940)
+    editing; Ctrl+Backspace or ⌥⌫ now deletes a whole word
     ^ commit 9da7484061054d3f3a061f1992a5853b36de63ff
     # This change makes it so that when you press alt or control (depending on
     # the platform) while backspacing, entire words are deleted. This matches
@@ -1840,7 +1848,8 @@ https://github.com/servo/servo/pull/43744	(@SharanRP, #43744)	layout: Fix line b
     # 
     # Fixes: #43845
     # 
-https://github.com/servo/servo/pull/43933	(@drasticactions, #43933)	script: Fix GC tracing of compiled JSScript pointers in ClassicScript (#43933)
++https://github.com/servo/servo/pull/43933	(@drasticactions, #43933)	script: Fix GC tracing of compiled JSScript pointers in ClassicScript (#43933)
+    crash; fix crash in GC
     ^ commit 3b128b37e327742974d5d8cb3ce09eed18e04844
     # Stores the compiled JSScript pointer in a rooted location that is traceable by the GC. This fixes a crash observed in an experimental C# Servo binding that could not be reproduced in servoshell.
     # 
@@ -2100,7 +2109,8 @@ https://github.com/servo/servo/pull/43746	(@simonwuelker, @jdm, #43746)	Force ca
     # - `actors/source.rs`: `actor` → `source_actor` in `SourceActor::register()`
     # 
     # Part of #43606.
-https://github.com/servo/servo/pull/43978	(@sabbCodes, #43978)	layout: Rename confusing ```SequentialLayoutState::collapse_margins``` (#43978)
++https://github.com/servo/servo/pull/43978	(@sabbCodes, #43978)	layout: Rename confusing ```SequentialLayoutState::collapse_margins``` (#43978)
+    cleanup; layout refactor
     ^ commit 02a350d864dbf1e48ecd6bbaba8a31c2edf1b24b
     # Renamed ```SequentialLayoutState::collapse_margins``` to ```commit_margin``` in ```float.rs```, ```mod.rs``` & ```inline/mod.rs```
     # 
@@ -2346,7 +2356,7 @@ https://github.com/servo/servo/pull/43995	(@eerii, @atbrakhi, #43995)	devtools: 
     # Testing: Ran `mach test-devtools` and manual testing
     # Part of: #36027
     # 
-https://github.com/servo/servo/pull/43996	(@simonwuelker, #43996)	script: Remove FIXME about deprecated performance.timing (#43996)
+-https://github.com/servo/servo/pull/43996	(@simonwuelker, #43996)	script: Remove FIXME about deprecated performance.timing (#43996)
     ^ commit 57adfc136f4fafacd8481b205650bfd5630dfa99
     # `performance.timing` is not going anywhere anytime soon. Deprecating it is none of servo's concern. The spec links are also outdated.
     # 
@@ -2598,7 +2608,7 @@ https://github.com/servo/servo/pull/44006	(@Skgland, #44006)	devtools: remove `i
     # 
     # Testing: no new test needed as this only removes code
     # 
-https://github.com/servo/servo/pull/44017	(@jschwe, @mukilan, #44017)	release: Fix result check for cancelled workflows (#44017)
+-https://github.com/servo/servo/pull/44017	(@jschwe, @mukilan, #44017)	release: Fix result check for cancelled workflows (#44017)
     ^ commit 0ea14d1b6012bfd8d8ee17bb7251635588fe3cb3
     # If the entire workflow was cancelled we also need to check for `cancelled()`. Simply checking needs.*.result is not sufficient - it was observed that the success branch was still entered when only checking needs.
     # 
@@ -3346,7 +3356,8 @@ https://github.com/servo/servo/pull/44075	(@TimvdLippe, #44075)	script: Further 
     # Part of #25005
     # 
     # Testing: WPT
-https://github.com/servo/servo/pull/44031	(@sabbCodes, #44031)	layout: Resolve `word-spacing` percentages against computed `font-size` (#44031)
++https://github.com/servo/servo/pull/44031	(@sabbCodes, #44031)	layout: Resolve `word-spacing` percentages against computed `font-size` (#44031)
+    layout; fix ‘word-spacing: <percentage>’ per spec update <https://github.com/w3c/csswg-drafts/issues/2165>
     ^ commit fbb37acf15a24bb9424b7fd6f620b515c2413832
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Changes ```word-spacing``` to resolve percentages against the computed ```font-size```, instead of the size of a space.
@@ -3374,7 +3385,8 @@ https://github.com/servo/servo/pull/44088	(@Taym95, #44088)	IndexedDB: Implement
     # Testing: idbfactory-databases-opaque-origin.html test passed.
     # Fixes: part of https://github.com/servo/servo/issues/40983
     # 
-https://github.com/servo/servo/pull/44050	(@thebabalola, #44050)	script: Fix panic in compressedTexSubImage2D when no base image exists (#44050)
++https://github.com/servo/servo/pull/44050	(@thebabalola, #44050)	script: Fix panic in compressedTexSubImage2D when no base image exists (#44050)
+    crash; fix crash in compressedTexSubImage2D() on WebGLRenderingContext affecting “30 Seconds Drawing” <https://www.posemaniacs.com/tools/thirtyseconds>
     ^ commit 3bf38ef7ea241df4ae3de86103e729fa1e69ce78
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Calling `compressedTexSubImage2D` without a prior `compressedTexImage2D` for the same texture target and level caused the panic at `tex_image_2d.rs:633` because `image_info_for_target` returned `None` and `.unwrap()` was called on it.
@@ -3418,7 +3430,8 @@ https://github.com/servo/servo/pull/44038	(@niyabits, #44038)	localstorage: test
     # Fixes: #43670
     # 
     # 
-https://github.com/servo/servo/pull/44092	(@simonwuelker, #44092)	script: Remove layout helper traits (#44092)
++https://github.com/servo/servo/pull/44092	(@simonwuelker, #44092)	script: Remove layout helper traits (#44092)
+    cleanup; layout refactor
     ^ commit 0fef52f10c108e97288bd4c1ab6816dd768ab013
     # Servo has lots of `LayoutXYZHelper` traits that are used to define additional methods on `LayoutDom<XYZ>`. We can replace them with `impl LayoutDom<XYZ>` blocks, reducing the number of LoC and making it easier to add or modify methods.
     # 
@@ -3465,7 +3478,8 @@ https://github.com/servo/servo/pull/44029	(@mrobinson, #44029)	script: Make `Doc
     # 
     # Testing: This should not change behavior so existing tests should suffice.
     # 
-https://github.com/servo/servo/pull/44094	(@webbeef, #44094)	script: make all keyboard events composed (#44094)
++https://github.com/servo/servo/pull/44094	(@webbeef, #44094)	script: make all keyboard events composed (#44094)
+    dom; ‘keydown’ events now bubble out of shadow roots
     ^ commit 80e84412318c626d80b9fd4ac956d77f0ba81d0d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Adjust event targeting for keyboard events when a shadow host is involved. This is needed to not interfere with keyboard default action like tabindex focusing.
@@ -3483,7 +3497,8 @@ https://github.com/servo/servo/pull/44085	(@jschwe, #44085)	CI: Simplify release
     # Testing: [manually triggered nightly release](https://github.com/servo/servo/actions/runs/24236862409)
     # 
     # 
-https://github.com/servo/servo/pull/44103	(@yezhizhen, #44103)	layout/script: Remove unused layout optimization heuristics (#44103)
++https://github.com/servo/servo/pull/44103	(@yezhizhen, #44103)	layout/script: Remove unused layout optimization heuristics (#44103)
+    cleanup; layout dead code
     ^ commit 99c53f8cdf998f34bfc2bfeb7828b2d4218d7d35
     # `dom_count` was used to determine whether it is worth it to run layout parallel algorithm.
     # Now this is based on `layout_threads` pref.
@@ -3587,7 +3602,8 @@ https://github.com/servo/servo/pull/44110	(@TimvdLippe, #44110)	script: Split up
     # Part of #43709
     # 
     # Testing: It compiles
-https://github.com/servo/servo/pull/44109	(@jschwe, #44109)	bootstrap/devcontainer: Install required packages for wpt. (#44109)
++https://github.com/servo/servo/pull/44109	(@jschwe, #44109)	bootstrap/devcontainer: Install required packages for wpt. (#44109)
+    dev; part of new devcontainer for servo development (TODO: how complete is it?)
     ^ commit 6bfaab4079dc62756c6cad02d86b629829b838d1
     # Based on our linux-wpt.yml workflow update our bootstrap and devcontainer package list.
     # This should make the local environment closer to our CI environment when running WPT. We only purge the droid font in the devcontainer, since we shouldn't purge packages for the user.
@@ -3638,14 +3654,16 @@ https://github.com/servo/servo/pull/44127	(@simonwuelker, #44127)	script: Unbind
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 12-04-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/44126	(@jschwe, #44126)	devcontainer: Fix build error on macos (#44126)
++https://github.com/servo/servo/pull/44126	(@jschwe, #44126)	devcontainer: Fix build error on macos (#44126)
+    dev; part of new devcontainer for servo development
     ^ commit b3d359fabfd2fc497f909ce4fde25ef79a780ef3
     # When building the devcontainer from source on arm macOS, we get arm Ubuntu, for which we don't have a prebuild mozjs version. That triggers a compilation from source, which fails, due to issues finding String.h. I can't confirm this, but it might be because the mounted workspace is case-insensitive. We definitly don't want that, so just make sure that the cargo target directory is in a named volume. That also has the advantage that we don't clobber the hosts target dir and still persist.
     # 
     # Testing: Manually tested on macOS.
     # Fixes:  ./mach build in a devcontainer built from source on arm64 macOS.
     # 
-https://github.com/servo/servo/pull/44114	(@mrobinson, #44114)	script: Rewrite the layout DOM wrappers (#44114)
++https://github.com/servo/servo/pull/44114	(@mrobinson, #44114)	script: Rewrite the layout DOM wrappers (#44114)
+    cleanup; layout refactor
     ^ commit 45972e07ab43d7defb4e7ab1a96bfb1df6a6a756
     # This change reworks the layout DOM wrappers so that they are simpler and
     # easier to reason about. The main changes here:
@@ -3970,7 +3988,8 @@ https://github.com/servo/servo/pull/44156	(@simartin, #44156)	webgl: fix incorre
     # 
     # Testing: This is a comment-only change, so not covered by any automated test. I manually navigated to a random subset of those links and checked they do take to the correct section.
     # 
-https://github.com/servo/servo/pull/44111	(@jschwe, @sagudev, #44111)	devcontainer: Verify build on PRs. (#44111)
++https://github.com/servo/servo/pull/44111	(@jschwe, @sagudev, #44111)	devcontainer: Verify build on PRs. (#44111)
+    dev; part of new devcontainer for servo development
     ^ commit b5d454eca0e82f4bad8dfaa15c4fcedfc1df6f02
     # This allows us to verify that the devcontainer builds, when a PR changes any of the affected files.
     # 
@@ -4025,7 +4044,8 @@ https://github.com/servo/servo/pull/44160	(@eerii, @atbrakhi, #44160)	devtools: 
     # Testing: Existing tests pass
     # Part of: #36027
     # 
-https://github.com/servo/servo/pull/44162	(@jschwe, #44162)	devcontainer: Build multi-arch image (#44162)
++https://github.com/servo/servo/pull/44162	(@jschwe, #44162)	devcontainer: Build multi-arch image (#44162)
+    dev; part of new devcontainer for servo development
     ^ commit 69dbc1601414030826b4772d76a6004925b2b056
     # Also build an arm64 version of the devcontainer and combine both into a multi platform image.
     # This also fixes the upload step, which was broken on main by b5d454eca0e82f4bad8dfaa15c4fcedfc1df6f02.
@@ -4490,7 +4510,8 @@ https://github.com/servo/servo/pull/44205	(@mukilan, #44205)	servoshell: Fix inc
     # 
     # Testing: Tested manually as we don't have automated tests for the shell.
     # Fixes: #44136
-https://github.com/servo/servo/pull/44120	(@simonwuelker, #44120)	script: Don't traverse `O(the whole DOM tree)` nodes when inserting elements into `Vec` in tree order (#44120)
++https://github.com/servo/servo/pull/44120	(@simonwuelker, #44120)	script: Don't traverse `O(the whole DOM tree)` nodes when inserting elements into `Vec` in tree order (#44120)
+    perf; fix O(whole DOM tree) handling of ‘id’ and ‘name’ attributes, reducing load time for ES2025 spec from 33s to 16s <https://262.ecma-international.org/16.0/index.html>
     ^ commit 2930beb4d12720b14587e188cd60bfdb55ea149c
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Previously the code was computing a prefix sum over the number of preceding elements in tree order to get the index that the node should be inserted in.
@@ -4839,7 +4860,8 @@ https://github.com/servo/servo/pull/44159	(@niyabits, #44159)	canvas: fix unreco
     # 
     # Fixes: #41493 
     # 
-https://github.com/servo/servo/pull/44214	(@niyabits, #44214)	webgl: replace WebGLCommandSender with WebGLChan (#44214)
++https://github.com/servo/servo/pull/44214	(@niyabits, #44214)	webgl: replace WebGLCommandSender with WebGLChan (#44214)
+    cleanup; webgl refactor
     ^ commit 0260fe88696d7b625d647a26526de94f61f188cb
     # Remove the `WebGLCommandSender` wrapper and return `Option<WebGLChan>` directly from the `webgl_chan` method.
     # 
@@ -4903,7 +4925,8 @@ https://github.com/servo/servo/pull/44196	(@atbrakhi, @eerii, #44196)	devtools: 
     # Fixes: Part of #39858 
     # <img width="941" height="795" alt="image" src="https://github.com/user-attachments/assets/e121265c-3987-4e37-a97d-b7cef0e05f4b" />
     # 
-https://github.com/servo/servo/pull/44237	(@mrobinson, #44237)	wpt: Convert several old Servo-specific crash tests into WPT crashtests (#44237)
++https://github.com/servo/servo/pull/44237	(@mrobinson, #44237)	wpt: Convert several old Servo-specific crash tests into WPT crashtests (#44237)
+    cleanup; tests cleanup
     ^ commit 0353e0fd2e56cff2fcd453d8da6afcfd637f2ec7
     # This change converts a collection of old Servo-specific crash tests into
     # WPT style crash tests, which are supported directly by the WPT test
@@ -4913,7 +4936,7 @@ https://github.com/servo/servo/pull/44237	(@mrobinson, #44237)	wpt: Convert seve
     # 
     # Testing: This change just changes the tests, so should be tested by the test run.
     # 
-https://github.com/servo/servo/pull/44240	(@mrobinson, #44240)	wpt: Remove empty test `ini` for `/_mozilla/mozilla/localeCompare.html` (#44240)
+-https://github.com/servo/servo/pull/44240	(@mrobinson, #44240)	wpt: Remove empty test `ini` for `/_mozilla/mozilla/localeCompare.html` (#44240)
     ^ commit 12bac57c3e3d71d7b9080cd96e58359fa1bd572a
     # Judging by the expected result in the test, the situation described in
     # the bug is no longer the case.
@@ -4936,7 +4959,7 @@ https://github.com/servo/servo/pull/44234	(@TimvdLippe, #44234)	script: Fix comm
     # Part of #25005
     # 
     # Testing: WPT
-https://github.com/servo/servo/pull/44238	(@mrobinson, #44238)	wpt: Remove the `/_mozilla/mozilla/sslfail.html` (#44238)
+-https://github.com/servo/servo/pull/44238	(@mrobinson, #44238)	wpt: Remove the `/_mozilla/mozilla/sslfail.html` (#44238)
     ^ commit d4729c05b2fb471cdd132d5376187f3ed3deb913
     # This tests a feature (`about:sslfail`) that was removed in #14360 and
     # has been flaky for years. At this point, the test has been flaking for a
@@ -4962,7 +4985,8 @@ https://github.com/servo/servo/pull/44233	(@eerii, @atbrakhi, #44233)	devtools: 
     # Depends on: #44196
     # 
     # <img width="934" height="388" alt="image" src="https://github.com/user-attachments/assets/8589ef9c-7a58-47dd-83dd-4f66607125fe" />
-https://github.com/servo/servo/pull/44232	(@mrobinson, #44232)	wpt: Rename Servo-specific WPT-style tests to match WPT conventions (#44232)
++https://github.com/servo/servo/pull/44232	(@mrobinson, #44232)	wpt: Rename Servo-specific WPT-style tests to match WPT conventions (#44232)
+    cleanup; tests cleanup
     ^ commit d22435c6f66bf776042b11683cd8dede6aa3a02c
     # This is a very minor, but annoying bit of technical debt that we have
     # carried for over a decade. Many of the Servo-specific WPT-style tests
@@ -5002,7 +5026,8 @@ https://github.com/servo/servo/pull/44245	(@arihant2math, #44245)	storage: Enabl
     ^ /!\ may contain changes to EXPERIMENTAL_PREFS
     # Enables indexeddb as experimental; allows indexeddb to be tested on wpt.fyi. 
     # 
-https://github.com/servo/servo/pull/44248	(@mrobinson, @mrobinson, #44248)	wpt: Make `/_mozilla/mozilla/getBoundingClientRect.html` wait for fonts to load (#44248)
+-https://github.com/servo/servo/pull/44248	(@mrobinson, @mrobinson, #44248)	wpt: Make `/_mozilla/mozilla/getBoundingClientRect.html` wait for fonts to load (#44248)
+    ;test; test only
     ^ commit 730fa9d47d8edd51ed58cab824ff1985558a4e72
     # This is a speculative fix for #39668. Although I could not get this test
     # to flake locally, it is obviously wrong to assumee that web fonts (Ahem
@@ -5014,7 +5039,8 @@ https://github.com/servo/servo/pull/44248	(@mrobinson, @mrobinson, #44248)	wpt: 
     # Testing: This should fix intermittency as seen on the CI.
     # Fixes: #39668
     # 
-https://github.com/servo/servo/pull/44247	(@mrobinson, @mrobinson, #44247)	wpt: Make `/_mozilla/css/offset-properties-inline.html` wait for fonts to load (#44247)
+-https://github.com/servo/servo/pull/44247	(@mrobinson, @mrobinson, #44247)	wpt: Make `/_mozilla/css/offset-properties-inline.html` wait for fonts to load (#44247)
+    ;test; test only
     ^ commit 57cc4931bd365232688ce18626ad1549a7cba8d1
     # This is a speculative fix for #40543. Although I could not get this test
     # to flake locally, it is obviously wrong to assumee that web fonts (Ahem
@@ -5206,13 +5232,15 @@ https://github.com/servo/servo/pull/44283	(@arihant2math, #44283)	servoshell: Re
     # 
     # Testing: ```./mach test-unit -p servo -- test_console_log_and_error_ordering``` passed.
     # Fixes: #44204
-https://github.com/servo/servo/pull/44277	(@nicoburns, #44277)	layout: depend on `web_atoms` rather than `html5ever` (#44277)
++https://github.com/servo/servo/pull/44277	(@nicoburns, #44277)	layout: depend on `web_atoms` rather than `html5ever` (#44277)
+    cleanup; layout refactor
     ^ commit df3f91546522dcdb61b90f42568be84189b53732
     # `servo-layout` only depends on `html5ever` for it's atom types which are now split out into the `web_atoms` crate. This switches the dependency to `web_atoms` to remove the unncessary dependency
     # 
     # Testing: This just imports the same types from a different crate. So if it builds, it should work.
     # 
-https://github.com/servo/servo/pull/44260	(@mrobinson, @mrobinson, #44260)	wpt: Correct the name of a `__dir__.ini` metadata file after #44232 (#44260)
+-https://github.com/servo/servo/pull/44260	(@mrobinson, @mrobinson, #44260)	wpt: Correct the name of a `__dir__.ini` metadata file after #44232 (#44260)
+    ;test; test only
     ^ commit 3ffecfb60cb7953f0241a42fa60699ebfeeb6f97
     # This file was renamed incorrectly due to automated renaming of directory
     # contents.
@@ -5404,7 +5432,8 @@ https://github.com/servo/servo/pull/44250	(@TimvdLippe, #44250)	script: Correctl
     # You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/servo/servo/network/alerts).
     # 
     # </details>
-https://github.com/servo/servo/pull/44290	(@kkoyung, #44290)	script: Default configuration of sanitizer (#44290)
++https://github.com/servo/servo/pull/44290	(@kkoyung, #44290)	script: Default configuration of sanitizer (#44290)
+    wip dom; towards Sanitizer impl
     ^ commit 617c28f631a88d84fbed3f7f4b9e50b678d912a1
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This patch implements the built-in safe default configuration for `Sanitizer` constructor.
@@ -5450,7 +5479,8 @@ https://github.com/servo/servo/pull/44281	(@simon@igalia.com, #44281)	layout: Fi
     # Testing: covered by existing WPT tests
     # Fixes: https://github.com/servo/servo/issues/43687
     # 
-https://github.com/servo/servo/pull/43461	(@simonwuelker, #43461)	style: When animating a property, ignore keyframes that don't declare that property (#43461)
++https://github.com/servo/servo/pull/43461	(@simonwuelker, #43461)	style: When animating a property, ignore keyframes that don't declare that property (#43461)
+    style; fix @keyframes that set properties in some keyframes but not others
     ^ commit fdf1e09a2a416d9c61531ee498adad21f3f51fbd
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Companion PR for https://github.com/servo/stylo/pull/338 (Refer to that PR for a proper description)
@@ -5625,7 +5655,8 @@ https://github.com/servo/servo/pull/44179	(@Gae24, #44179)	script: Clean up `pre
     # 
     # Testing: Covered by existing tests.
     # 
-https://github.com/servo/servo/pull/44133	(@rovertrack, #44133)	layout: Produce an empty display list when the `Document` element is removed (#44133)
++https://github.com/servo/servo/pull/44133	(@rovertrack, #44133)	layout: Produce an empty display list when the `Document` element is removed (#44133)
+    layout; fix bug where deleting the document’s root element does not blank the rendering
     ^ commit 8dfb6be75b9935783e664e3588dd987d88614c6a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Previously, when the `Document` element was removed, no further display list updates would be sent to paint. This change makes it so that when the `Document` element is removed a single new empty display list is sent.
@@ -5702,7 +5733,8 @@ https://github.com/servo/servo/pull/44246	(@simonwuelker, #44246)	script: Suppor
     # 
     # Testing: New tests start to pass
     # 
-https://github.com/servo/servo/pull/44338	(@nicoburns, #44338)	Use our own http server for the webdriver server (#44338)
++https://github.com/servo/servo/pull/44338	(@nicoburns, #44338)	Use our own http server for the webdriver server (#44338)
+    perf; smaller dependency tree
     ^ commit 2c917400590d9883d96132e5b32c675a2aaa6593
     # Helps with: https://github.com/servo/servo/issues/38776. Reduces total Servo crate count by 7 (977 -> 970).
     # 
@@ -6053,7 +6085,8 @@ https://github.com/servo/servo/pull/44367	(@simon@nasilyan.com, #44367)	webgl: V
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/44335	(@kkoyung, #44335)	script: Canonicalization of sanitizer configuration (#44335)
++https://github.com/servo/servo/pull/44335	(@kkoyung, #44335)	script: Canonicalization of sanitizer configuration (#44335)
+    wip dom; towards Sanitizer impl
     ^ commit 4a5fe1478845cc288eaeb3d5597fa6d0ba7c95a4
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement the canonicalization of sanitizer configuration, along with the canonicalization of element with attributes, element, attribute and name. They are implemented for the `SanitizerConfig`, `SanitizerElementWithAttributes`, `SanitizerElement` and `SanitizerAttribute`, through the `SantiizerConfigAlgorithm`, `Canonicalization` and `NameCanonicalization` trait.
@@ -6567,7 +6600,8 @@ https://github.com/servo/servo/pull/44410	(@TimvdLippe, #44410)	script: Add init
     # work in one PR without conflict in the future.
     # 
     # Testing: Will be tested in CI in future rounds of update.
-https://github.com/servo/servo/pull/44421	(@kkoyung, #44421)	script: Validate sanitizer configuration (#44421)
++https://github.com/servo/servo/pull/44421	(@kkoyung, #44421)	script: Validate sanitizer configuration (#44421)
+    wip dom; towards Sanitizer impl
     ^ commit 6934a65e5c31d382e3129903b5db2f0354506483
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement sanitizer configuration validation algorithm, and complete the "set a configuration" algorithm.
@@ -6925,7 +6959,8 @@ https://github.com/servo/servo/pull/44435	(@simon@igalia.com, #44435)	script: Re
     # Testing: It compiles 
     # Part of #40600 
     # 
-https://github.com/servo/servo/pull/44452	(@kkoyung, #44452)	script: Implement `Sanitizer.get()` method (#44452)
++https://github.com/servo/servo/pull/44452	(@kkoyung, #44452)	script: Implement `Sanitizer.get()` method (#44452)
+    wip dom; towards Sanitizer impl
     ^ commit daed36d4bf838c0a6a51dbf8687028b2a64ec942
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement the `Sanitizer.get()` method.
@@ -7282,7 +7317,8 @@ https://github.com/servo/servo/pull/44438	(@alice, @delan, #44438)	layout: Store
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/44357	(@rovertrack, #44357)	Gamepad: Implement gamepad buttons to be array, removing GamepadList (#44357)
++https://github.com/servo/servo/pull/44357	(@rovertrack, #44357)	Gamepad: Implement gamepad buttons to be array, removing GamepadList (#44357)
+    dom; more conformant buttons property on Gamepad (`navigator.getGamepads()[0]?.buttons`)
     ^ commit d812d2f1a71b1c8e0a02d2635a35e8af629b6d34
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # Replaced `GamepadButtonList` interface with a frozen array of gamepad buttons to match the gamepad webidl specification.
@@ -7475,7 +7511,8 @@ https://github.com/servo/servo/pull/44386	(@jdm, #44386)	script: Wrap debugger g
     # Testing: We don't run debug-mozjs in CI, but this change makes a bunch of tests stop asserting.
     # Fixes: #44385
     # 
-https://github.com/servo/servo/pull/44364	(@webbeef, #44364)	script: Use a u16 for prototype id to speed up Castable::is<T>() (#44364)
++https://github.com/servo/servo/pull/44364	(@webbeef, #44364)	script: Use a u16 for prototype id to speed up Castable::is<T>() (#44364)
+    perf; faster casting of DOM objects in exchange for a bit more memory usage
     ^ commit 87daffa1fdca07c3db199b3ddf1aa950d9733191
     # `Castable::is<T>()` calls `get_dom_class()` in a way that incurs a roundtrip to the JS engine and
     # multiple pointer indirections:
@@ -7539,7 +7576,8 @@ https://github.com/servo/servo/pull/43632	(@Gae24, #43632)	script: Extract `Erro
     # 
     # Testing: Covered by existing tests, expectations updated.
     # 
-https://github.com/servo/servo/pull/44454	(@mrobinson, #44454)	layout_api: Use a "type bundle" to encapsulate all layout DOM types (#44454)
++https://github.com/servo/servo/pull/44454	(@mrobinson, #44454)	layout_api: Use a "type bundle" to encapsulate all layout DOM types (#44454)
+    cleanup; layout refactor
     ^ commit 1a9808d4211884bbe96a62f9131ee3e3d11eec04
     # This change creates a new "type bundle" trait, which holds all of the
     # concrete implementations of the layout DOM types. The benefit here is
@@ -8295,7 +8333,8 @@ https://github.com/servo/servo/pull/43627	(@TimvdLippe, #43627)	script: Remove c
     # 
     # Testing: It compiles.
     # 
-https://github.com/servo/servo/pull/44480	(@mrobinson, @simon@igalia.com, #44480)	layout: Add support for tab stops (#44480)
++https://github.com/servo/servo/pull/44480	(@mrobinson, @simon@igalia.com, #44480)	layout: Add support for tab stops (#44480)
+    layout; impl ‘tab-size’ and correct advance for tab characters in <pre> etc
     ^ commit 9ef26e160b0f6fe0e554777bc56969752a1daa86
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This change adds support for real tab stops in layout, instead of
@@ -8459,7 +8498,8 @@ https://github.com/servo/servo/pull/44474	(@yezhizhen, #44474)	layout: Consider 
     # Testing: Successful build, fmt, test-tidy
     # Fixes: Part of #42347
     # 
-https://github.com/servo/servo/pull/44424	(@mrobinson, #44424)	layout: Use a consistent definition of "document white space" (#44424)
++https://github.com/servo/servo/pull/44424	(@mrobinson, #44424)	layout: Use a consistent definition of "document white space" (#44424)
+    crash layout; fix crash in layout on ja.wikipedia.org
     ^ commit 22114bd3882299d86ba95e64bdbe03f0ff960318
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Because the definition of "document white space" differed in various
@@ -8688,7 +8728,8 @@ https://github.com/servo/servo/pull/44581	(@jdm, #44581)	script: Use non-asserti
     # Testing: Fixes many IndexedDB WPT tests that assert in a debug-mozjs build. We do not run this configuration on CI yet.
     # Fixes: #44570
     # 
-https://github.com/servo/servo/pull/44585	(@kkoyung, #44585)	script: Fix name of non-replaceable sanitizer elements (#44585)
++https://github.com/servo/servo/pull/44585	(@kkoyung, #44585)	script: Fix name of non-replaceable sanitizer elements (#44585)
+    wip dom; towards Sanitizer impl
     ^ commit d492abfbbd61f586908057f33f1ac16f39b94a1e
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # The third item of the *built-in non-replaceable elements list* of the Sanitizer API should have the name "math". We wrongly use "mathml" in our code. This patch fixes this typo.
@@ -8703,13 +8744,15 @@ https://github.com/servo/servo/pull/44587	(@jschwe, #44587)	ci: Always use cover
     # Testing: Speculative fix, not tested.
     # 
     # 
-https://github.com/servo/servo/pull/44591	(@mrobinson, #44591)	deps: Upgrade to `pyrefly` 0.63.1 (#44591)
++https://github.com/servo/servo/pull/44591	(@mrobinson, #44591)	deps: Upgrade to `pyrefly` 0.63.1 (#44591)
+    ports; fix freebsd build issue
     ^ commit 769533336e05f9fb3ab4cf865aa66242048f2a36
     # 
     # Testing: This upgrades one of our testing dependencies so should be
     # verified by `test-tidy`.
     # 
-https://github.com/servo/servo/pull/44397	(@mrobinson, #44397)	script: Enable sequential focus navigation across frame boundaries (#44397)
++https://github.com/servo/servo/pull/44397	(@mrobinson, #44397)	script: Enable sequential focus navigation across frame boundaries (#44397)
+    dom; tab navigation now works across iframe boundaries
     ^ commit c3b41cdc976336ea9d4945115f9035fac52bbeb9
     # This change implements support for navigation across both local and
     # remote frame boundaries during sequential focus navigation. It allows
@@ -8786,7 +8829,8 @@ https://github.com/servo/servo/pull/44272	(@shubhamg13, #44272)	Pass `Performanc
     # 
     # Testing: More WPT tests Passed
     # 
-https://github.com/servo/servo/pull/44560	(@mrobinson, #44560)	layout: Do not assume layout data structures exist during queries (#44560)
++https://github.com/servo/servo/pull/44560	(@mrobinson, #44560)	layout: Do not assume layout data structures exist during queries (#44560)
+    crash layout; fix crash when doing layout queries (offsetHeight etc) on elements whose ancestors were removed from the tree
     ^ commit 35ed110ff87498369d19ec14f5106fcd9bf39866
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Data structures, such as the fragment tree and and stacking context
@@ -8834,7 +8878,8 @@ https://github.com/servo/servo/pull/44517	(@rovertrack, #44517)	devtools: Implem
     # Testing: 6 existing tests pass, and adding a new one. There is one new failure, because we lack `font-kerning: none`.
     # Fixes: #42070
     # 
-https://github.com/servo/servo/pull/44612	(@nicoburns, #44612)	Upgrade to Stylo with user-select property enabled (#44612)
+-https://github.com/servo/servo/pull/44612	(@nicoburns, #44612)	Upgrade to Stylo with user-select property enabled (#44612)
+    ;style; no web platform changes
     ^ commit dd0886aeb48982d53383fd7351ce6f3029356e14
     # Upgrades Stylo to latest main which includes https://github.com/servo/stylo/pull/356
     # 
@@ -8978,7 +9023,7 @@ https://github.com/servo/servo/pull/44612	(@nicoburns, #44612)	Upgrade to Stylo 
     # </details>
     # <br />
     # 
-https://github.com/servo/servo/pull/44618	(@simonwuelker, #44618)	script: Remove unfulfilled crown expectations (#44618)
+-https://github.com/servo/servo/pull/44618	(@simonwuelker, #44618)	script: Remove unfulfilled crown expectations (#44618)
     ^ commit 58ac83bab6c79384c7c9af3ddef7a6c8532d6b5b
     # Fixes https://github.com/servo/servo/issues/44610
 +https://github.com/servo/servo/pull/44166	(@longvatrong111, #44166)	servo: Add `SiteDataManager::clear_session_cookies` (#44166)
@@ -9003,7 +9048,8 @@ https://github.com/servo/servo/pull/44618	(@simonwuelker, #44618)	script: Remove
     # Testing: It compiles
     # Part of #40600
     # 
-https://github.com/servo/servo/pull/44177	(@jschwe, @mrobinson, #44177)	Disable debug_assertions in release profile (#44177)
++https://github.com/servo/servo/pull/44177	(@jschwe, @mrobinson, #44177)	Disable debug_assertions in release profile (#44177)
+    dev; `release` is no longer #[cfg(debug_assertions)], so if you are using `release` as a “faster debug” build locally, consider switching to `checked-release` or `medium` because those are #[cfg(debug_assertions)]
     ^ commit 38d741a13066430277457888113d2ff684eac10a
     # The default for release builds in Rust is to turn off debug assertions.
     # We previously had them turned on, since for a long time servo was too
@@ -9049,19 +9095,22 @@ https://github.com/servo/servo/pull/44177	(@jschwe, @mrobinson, #44177)	Disable 
     # Part of #42638
     # 
     # Testing: It compiles.
-https://github.com/servo/servo/pull/44629	(@elomscansio, #44629)	Port methods calling fire event (#44629)
++https://github.com/servo/servo/pull/44629	(@elomscansio, #44629)	Port methods calling fire event (#44629)
+    dom; safety from ground up
     ^ commit 29bba45039df7c31ecaffa1b55ac7f5f3de64322
     # Propagate `&mut JSContext` in some of the methods calling fire event and related call sites.
     # 
     # Testing: Successful build is enough
     # Fixes: Part of #42638 
-https://github.com/servo/servo/pull/44496	(@sabbCodes, #44496)	layout: value of <input type=file> now inherits ‘color’ by default (#44496)
++https://github.com/servo/servo/pull/44496	(@sabbCodes, #44496)	layout: value of <input type=file> now inherits ‘color’ by default (#44496)
+    layout; improve appearance of <input type=file> by making the value part inherit ‘color’
     ^ commit 4a017a1012363af55bca19b90c0a1638cd40f5e8
     # Made value of <input type=file> now inherit ‘color’ by default
     # 
     # Testing: `./mach test-wpt tests/wpt/mozilla/tests/css/input-file-color-inherit.html` passes successfully.
     # Fixes: #44427
-https://github.com/servo/servo/pull/44535	(@mrobinson, #44535)	script: Add the "sequential" navigation mechanism for tab navigation (#44535)
++https://github.com/servo/servo/pull/44535	(@mrobinson, #44535)	script: Add the "sequential" navigation mechanism for tab navigation (#44535)
+    dom; more conformant tab navigation
     ^ commit 68e61ea4466649f820ccef709b2136f39875138c
     # This change aligns Servo with the HTML specification's concept of the
     # *navigation mechanism*, which determines the behavior of picking a
@@ -9081,7 +9130,8 @@ https://github.com/servo/servo/pull/44535	(@mrobinson, #44535)	script: Add the "
     # Testing: It compiles
     # Part of #42638
     # 
-https://github.com/servo/servo/pull/44635	(@arabson99, #44635)	fonts: Remove unused import of euclid::num::Zero in tests. (#44635)
++https://github.com/servo/servo/pull/44635	(@arabson99, #44635)	fonts: Remove unused import of euclid::num::Zero in tests. (#44635)
+    cleanup; fonts compile warning
     ^ commit 515b69742ec9fd5f4831c3dc130ccf3afd2d1391
     # Remove unused import of `euclid::num::Zero` in components/fonts/tests/font.rs
     # that causes a compiler warning when building unit tests.
@@ -9104,7 +9154,8 @@ https://github.com/servo/servo/pull/44529	(@TimvdLippe, #44529)	script: Fix smal
     # Part of #42812
     # 
     # Testing: It compiles
-https://github.com/servo/servo/pull/44607	(@simon@igalia.com, #44607)	script: Fix "RefCell already borrowed" for DOMString in DataTransfer.getData (#44607)
++https://github.com/servo/servo/pull/44607	(@simon@igalia.com, #44607)	script: Fix "RefCell already borrowed" for DOMString in DataTransfer.getData (#44607)
+    crash; fix crash in getData() on DataTransfer
     ^ commit fafad2b5484a31d1edc6f88ee51ece5d78fcb181
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # `match_domstring_ascii!` presumably borrows that RefCell, and `.clone()` borrows it again.
@@ -9121,7 +9172,8 @@ https://github.com/servo/servo/pull/44597	(@kkoyung, #44597)	script: Guarantee z
     # Testing: Hardening. No behavioral changes.
     # Fixes: Part of #44586
     # 
-https://github.com/servo/servo/pull/44594	(@kkoyung, #44594)	script: Allow and remove attributes in sanitizer (#44594)
++https://github.com/servo/servo/pull/44594	(@kkoyung, #44594)	script: Allow and remove attributes in sanitizer (#44594)
+    wip dom; towards Sanitizer impl
     ^ commit bebdf342f76cb6d53201e8abb7c68c56c25019ba
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -9133,7 +9185,8 @@ https://github.com/servo/servo/pull/44594	(@kkoyung, #44594)	script: Allow and r
     # 
     # Testing: Testing: Covered by WPT tests in `sanitizer-api` subdirectory.
     # Fixes: Part of #43948
-https://github.com/servo/servo/pull/44641	(@jschwe, #44641)	devcontainer: Stop installing cargo-about (#44641)
++https://github.com/servo/servo/pull/44641	(@jschwe, #44641)	devcontainer: Stop installing cargo-about (#44641)
+    dev; part of new devcontainer for servo development
     ^ commit a3d5f0294adff024a9eb1a24718c7ee58f158791
     # We stopped installing cargo-about in bootstrap in #44123, since it's only ever needed by the person doing a release.
     # `cargo-about` 0.9.0 also added a required feature to install the binary, meaning the dockerfile is broken as is and removing cargo-about unbreaks the docker image build.
