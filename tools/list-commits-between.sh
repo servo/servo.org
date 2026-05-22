@@ -56,8 +56,8 @@ git -C "$servo_repo_path" log --reverse --pretty=$'tformat:%H\t%s\t%aE\t%(traile
 
     # Hopefully helpful hints about the contents of the patch.
     printf '    ^ commit %s\n' "$hash"
-    if git -C "$servo_repo_path" show --pretty= --name-only "$hash" | egrep -q '^components/servo/'; then
-        printf '    ^ /!\ %s\n' 'contains libservo changes! does it affect the embedder?'
+    if git -C "$servo_repo_path" show --pretty= --name-only "$hash" | egrep -q '^components/(servo|shared/embedder)/'; then
+        printf '    ^ /!\ %s\n' 'contains libservo or embedder_traits changes! does it affect our public API?'
     fi
     if git -C "$servo_repo_path" show --pretty= --name-only "$hash" | egrep -q '^ports/servoshell/'; then
         printf '    ^ /!\ %s\n' 'contains servoshell changes! does it affect the user experience?'

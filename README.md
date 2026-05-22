@@ -445,6 +445,12 @@ $ tools/list-commits-by-nightly.sh ~/code/servo --pulls-json-path=tools/pulls-20
 
 **Check for disabled implementations.** Sometimes a patch appears to implement an API feature, but the feature is still completely disabled. In this case, it may not be worth writing about the feature at all, unless a lot of work went into the patch. For example, [servo#30752](https://github.com/servo/servo/pull/30752) implements some :has() selector features, but the feature is completely disabled ([November 2023](https://servo.org/blog/2023/11/30/embedding-floats-color-mix/)).
 
+**Check if changes in `servo` (formerly `libservo`) or `embedder_traits` affect our public API.** Such changes are important to highlight in the monthly updates, especially if they are breaking changes.
+
+- Changes to `embedder_traits` [items](https://doc.rust-lang.org/1.88.0/reference/items.html) often affect the public API because many of them are re-exported by `libservo` with `pub use`. To check if an `embedder_traits` item is actually part of the public API, go to [our online API docs](https://doc.servo.org/servo/) and search for it. If the search result for that item starts with `servo::`, then it’s part of the public API. If the search result starts with `embedder_traits::`, then it’s not part of the public API.
+
+- You can use tools like cargo-semver-checks and cargo-public-api to diff two versions of our public API. For example, with cargo-public-api: `cargo public-api diff -p servo <old commit>..<new commit>`
+
 ## Corrections
 
 When we make mistakes, we issue corrections on the blog and on social media.

@@ -248,7 +248,7 @@
 +https://github.com/servo/servo/pull/43182	(@jschwe, #43182)	Embed default resources in Servo applications using a `servo-default-resources` crate (#43182)
     api; towards crates.io release
     ^ commit f4877c190ebc7dfc1afce6e06cfa8e9e4aff040c
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # This PR considers the following constraints:
     # 
@@ -312,7 +312,7 @@
 -https://github.com/servo/servo/pull/43830	(@jschwe, #43830)	servo: Fix gstreamer_plugins feature guard (#43830)
     ;api; remove some dead code when compiling libservo without --features media-gstreamer
     ^ commit 15cc2686dace218b386f82f61d9bea04ba3b0ac1
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Testing: gstreamer feature is enable in CI, and we test both mac and windows, which guard the elements in the module.
     # 
     # 
@@ -344,7 +344,7 @@
 +https://github.com/servo/servo/pull/43772	(@delan, @alice, #43772)	a11y: Miscellaneous cleanups to our accessibility code (#43772)
     cleanup; a11y cleanup
     ^ commit 4041256e24238dc1b8a894e4f0f86d97328e70e9
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # this patch cleans up a few minor issues in our accessibility code:
     # 
     # - we remove the initial synchronous TreeUpdate in [WebView::set_accessibility_active()](https://doc.servo.org/servo/struct.WebView.html#method.set_accessibility_active). it’s not actually necessary, because AccessKit only requires that subtree updates happen after the graft node is created in the parent, but those subtree updates can be delayed indefinitely. removing it simplifies our API a bit.
@@ -398,7 +398,7 @@
 -https://github.com/servo/servo/pull/43831	(@jschwe, #43831)	webgpu: Fix feature guard (#43831)
     ;api; remove some dead code when compiling libservo without --features webgpu
     ^ commit a463495c904a87da121f8dca218983352bb76fd6
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Remove the dependency on the `webgpu` crate if the feature is disabled.
     # 
     # Note: This doesn't seem to improve the binary size in production mode, so presumably dead code elimination is already working well. Nevertheless, it's preferable to correctly feature guard and it should save a bit of compile-time (when not building with the webgpu feature).
@@ -728,7 +728,7 @@
 +https://github.com/servo/servo/pull/43787	(@TG199, #43787)	doc: explain how to create a WebView (#43712) (#43787)
     api; improve WebView and WebViewBuilder docs
     ^ commit ed78dadacbe674271b275583300a92afa2971f58
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Added a "Creating a WebView" section to the `WebView` doc comment explaining that `WebViewBuilder` is the correct way to create a `WebView`, with a usage example. Also expanded the `WebViewBuilder` doc comment to be more descriptive.
     # Fixes: #43712
     # 
@@ -873,6 +873,7 @@
 +https://github.com/servo/servo/pull/43858	(@Narfinger, #43858)	base: Implement MallocSizeOf for some more types (#43858)
     perf; more accurate memory usage tracking for PathBuf, tokio::sync::oneshot::Sender, http::{HeaderMap, Method}, data_url::Mime, urlpattern::UrlPattern (note case)
     ^ commit f7d77754ff677b944ae50a2cbb3f8e283267f993
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # This implements MallocSizeOf for a couple more types and removes some "ignore_malloc_size_of" throughout the codebase.
     # - std::path::PathBuf
     # - tokio::sync::oneshot::Sender
@@ -1126,7 +1127,7 @@
 +https://github.com/servo/servo/pull/43892	(@simonwuelker, #43892)	servo: Fix rustdoc warnings (#43892)
     api; fix broken links in api docs
     ^ commit a9dd2b3d157646addb0b4523ae49598ed1ccc6ba
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # One warning remains:
     # ```
     # warning: public documentation for `intercept` links to private item `InterceptedWebResourceLoad`
@@ -1147,7 +1148,7 @@
 +https://github.com/servo/servo/pull/43895	(@mrobinson, #43895)	servo: Remove `WebViewDelegate::play_gamepad_haptic_effect` and `WebViewDelegate::stop_gamepad_haptic_effect` (#43895)
     api; technically a breaking change! remove old delegate methods for haptic effects that have been dead since GamepadProvider (now GamepadDelegate) was added in february 2026
     ^ commit e3c894b12e01c97e1f6d1cc32af84ed8794d69a0
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # This functionality was moved to the `GamepadDelegate`, but the old
     # delegate methods were never removed. They are currently unused.
     # 
@@ -1182,7 +1183,7 @@
 +https://github.com/servo/servo/pull/43338	(@Narfinger, @longvatrong111@gmail.com, @mrobinson, #43338)	servo: Add `WebView::load_request` and `UrlRequest` to the API (#43338)
     api; new WebView::load_request() method (and UrlRequest API) for loading a URL with custom headers
     ^ commit 6cece2de59a95f10917bb334644817fc13082a20
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # This is the continuation of https://github.com/servo/servo/pull/43310 with permission from https://github.com/longvatrong111 to continue the work as they are currently busy.
     # 
     # This changes the previous PR by having a a new URLRequest object that can have more parameters. Currently we only implement headers.
@@ -1193,7 +1194,7 @@
 +https://github.com/servo/servo/pull/40098	(@shubhamg13, #40098)	paint: Use viewport meta tag's `min-scale` and `max-scale` to clamp pinch zoom (#40098)
     layout; impl ‘min-scale’ and ‘max-scale’ in <meta name=viewport>
     ^ commit 4e315eba20cd4a1b72e2b5b43ed8cb82a681eb41
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # **Note: Targeting Mobile devices only.**
     # 
@@ -1475,6 +1476,7 @@
 +https://github.com/servo/servo/pull/43702	(@webbeef, @TimvdLippe, #43702)	parser: add a pretty printer for top-level json documents (#43702)
     api; json documents are now pretty-printed when loaded as a document (has screenshot!)
     ^ commit 0b5688fdfae7c541924df1c88aee4a955d3e45e8
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # This adds a new resource implementing a simple pretty printer  for json documents.
     # 
     # Testing: build this branch and launch with `./mach run https://httpbin.org/json`
@@ -1537,7 +1539,7 @@
 +https://github.com/servo/servo/pull/43947	(@rovertrack, #43947)	servo: Use _ prefixed names for unused arguments for public API functions  (#43947)
     api; improve docs in WebViewDelegate and WebXrRegistry
     ^ commit 621f6b0cf734ea1ca3c5e5032e86371956d8f2e5
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # updated all methods that were using underscore in arguments
     # 
     # - `WebViewDelegate`
@@ -2089,7 +2091,7 @@
 +https://github.com/servo/servo/pull/43746	(@simonwuelker, @jdm, #43746)	Force callers to claim `blob` url before making a fetch request (#43746)
     dom; fix bug where calling URL.revokeObjectURL() immediately after fetching that url may not work
     ^ commit e73c010bb18f7c84c3ce12721a08b6fcccc8dca7
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # `blob` URLs have a implicit blob URL entry attached, which stores the data contained in the blob. The specification requires this entry to be resolved as the URL is parsed. We only resolve it inside `net` when loading the URL. That causes problems if the blob entry has been revoked in the meantime - see https://github.com/servo/servo/issues/25226.
     # 
@@ -2676,7 +2678,7 @@
 +https://github.com/servo/servo/pull/43208	(@rayguo17, #43208)	media: Implement Player for ohos backend (#43208)
     web; <video> now works on openharmony
     ^ commit 280d984d3b09bc25c5fbeb951ba33856192b9d6b
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Implement Player Trait in ohos backend using Harmony OS MediaKit's[ AVPlayer](https://developer.huawei.com/consumer/en/doc/harmonyos-references/capi-avplayer-h).
     # 
     # The modular design of `VideoSink`, `InnerPlayer`, and `MediaSource` is taken from the GStreamer backend.
@@ -3303,7 +3305,7 @@
 +https://github.com/servo/servo/pull/43189	(@lukewarlow, @mrobinson, #43189)	script: Implement drop-down select multiple (#43189)
     html; <select multiple> (TODO: check how well this is supported in servoshell)
     ^ commit 55e586737b72a9b8c284f15f33cbc61824ceb297
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains servoshell changes! does it affect the user experience?
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement drop-down select multiple: 
@@ -3618,7 +3620,7 @@
 +https://github.com/servo/servo/pull/44116	(@sabbCodes, #44116)	servo: Remove unnecessary RefCell from site_data_manager (#44116)
     api; technically a breaking change! Servo::site_data_manager() now returns `&SiteDataManager` instead of `Ref<'_, SiteDataManager>`
     ^ commit 00ef0f439f89db8d184880e174756833276ad3fd
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Removed unnecessary ```RefCell``` from ```site_data_manager```
     # 
     # Testing: ```./mach test-unit -p servo``` result; ```Summary [  10.204s] 1 test run: 1 passed, 0 skipped```
@@ -3670,7 +3672,7 @@
 +https://github.com/servo/servo/pull/44124	(@TG199, #44124)	  libservo: Export CookieSource in public API (#44124)
     api; fix bug where SiteDataManager::cookies_for_url() was unable to be called due to CookieSource argument
     ^ commit 29c56040558ad8a071ca6aba65a70146c5b2cc5b
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Fixes: #44102
     # 
     # 
@@ -4582,7 +4584,7 @@
 +https://github.com/servo/servo/pull/42338	(@alice, @delan, @lukewarlow, #42338)	layout: Add a basic accessibility tree implementation for web contents (#42338)
     a11y; initial accessibility tree for web contents (--pref accessibility_enabled)
     ^ commit d11fc3a1c6d274330c60589acf3a398ac006fcd8
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # This change introduces the `accessibility_tree` module, containing code to build an in-memory representation of a very basic accessibility tree for web contents. Currently, the tree for a given document contains:
     # - a `RootWebArea` which has the document root node as its sole child,
@@ -4911,7 +4913,7 @@
 +https://github.com/servo/servo/pull/43617	(@TG199, #43617)	script: Implement wake lock api (#43617)
     dom; implement navigator.wakeLock under --pref dom_wakelock_enabled (not experimental)
     ^ commit a2213091c4c3b9488fdc61f8b5c0422260ee938f
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
     ^ /!\ may contain changes to feature flags
@@ -5130,7 +5132,7 @@
 +https://github.com/servo/servo/pull/44253	(@javaderg@pm.me, #44253)	api: WebView::animating should only take a reference to self (#44253)
     api; WebView::animating() no longer consumes the WebView handle, taking `&self` instead of `self`
     ^ commit 4a3ee306db31e31a1a0ed52fa4ee07536b536cca
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Fixed that `WebView::animating` takes `self` instead of `&self` as argument.
     # 
     # Testing: Unsure how this could be tested for, beyond creating a unit test for each individual function as a sanity check that all parameters are correct. This seems excessive.
@@ -5293,7 +5295,7 @@
 +https://github.com/servo/servo/pull/44243	(@sabbCodes, #44243)	script: Make adjacent errors and console.log messages log in correct order (#44243)
     dom; fix incorrect order of console.log() messages and uncaught exception messages in console
     ^ commit 77e75aaf9ec98bbcbc7ee7e4a7d0097d2294e689
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Made adjacent errors and console.log messages log in correct order
     # 
     # Testing: ```./mach test-unit -p servo -- test_console_log_and_error_ordering``` passed.
@@ -5591,7 +5593,7 @@
 +https://github.com/servo/servo/pull/44271	(@Narfinger, #44271)	net: Refactor obtain_response and split devtools (#44271)
     perf; avoid string allocations and copying when making requests
     ^ commit 68ca2808ee73dbf448f60523e924c7d185fe8746
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # This PR refactors parts of the net crate with one minor functional change.
     # Most of the main functions in the net crate are quite long and rather unwieldly. This PR tries to help make them more understandable.
     # 
@@ -5618,7 +5620,7 @@
 +https://github.com/servo/servo/pull/43794	(@longvatrong111, #43794)	Implement SiteDataManager::cookies_for_url_async (#43794)
     api; new SiteDataManager::cookies_for_url_async() method <https://doc.servo.org/servo/struct.SiteDataManager.html#method.cookies_for_url_async>
     ^ commit 2d445b649d839e2d15cea7c88b15a8c1e13e868b
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Support applications to get cookies asynchronously from embedder.
     # 
     # Testing: `servo/components/servo/tests/site_data_manager.rs::test_get_cookie_async`
@@ -6610,7 +6612,7 @@
 +https://github.com/servo/servo/pull/44242	(@jschwe, #44242)	net: Optimize initial TLS connection (#44242)
     perf; reduce first TLS connection latency by 30ms
     ^ commit 97c08a6f95a1b89068782e937e48c966e4f97d7c
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # By touching the crypto provider, we can force it to gather entropy.
     # On my linux VM, that moved ~60ms off the critical path (using aws-lc-rs, 
     # but probably any other crypto provider would show similar behavior).
@@ -7058,7 +7060,7 @@
 +https://github.com/servo/servo/pull/44443	(@jschwe, #44443)	profile: Add initial trace event (#44443)
     perf; startup instrumentation
     ^ commit ab5deb4030fb35e6fb3fa37a3e7e6bd8500ed782
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Adds a profiling event at the startup of servoshell, right after initializing the tracing subsystem. To support this, add macro abstractions for tracing events.
     # The existing span (macros) have a start and an end, but for one-off events, we don't need a span and hence it make sense to also add the event macros.
@@ -7071,7 +7073,7 @@
 +https://github.com/servo/servo/pull/44456	(@jschwe, #44456)	profile: Add instrumentation to startup related functions  (#44456)
     perf; startup instrumentation
     ^ commit 0ea42bc7747295d9066f4413f67b5a38233e5918
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Follow-up to #44443.
     # This helps investigating the cold-start timeline, and could be used
@@ -7583,7 +7585,7 @@
 +https://github.com/servo/servo/pull/44255	(@alice, @delan, #44255)	layout: Expose some non-interactive accessibility roles based on DOM node type. (#44255)
     a11y; set roles Article, Complementary, ContentInfo, Heading, Banner, Splitter, Main, Navigation, and Paragraph on web content
     ^ commit 8ced3d1b8eceead83690f2634f38e17c37c6d143
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Sets the accessibility role of nodes based on their DOM node type (ignoring ARIA roles and computed styles for now), for a small subset of roles.
     # 
     # This change also re-works some details of accessibility tree building:
@@ -7634,7 +7636,7 @@
 +https://github.com/servo/servo/pull/44343	(@rovertrack, #44343)	embedder_traits: Move Wakelock trait to Embedder_traits (#44343)
     dom; towards exposing navigator.wakeLock in libservo API. feature is --pref dom_wakelock_enabled (not experimental)
     ^ commit b768a93a47abb508ec0141f04eb0cf6d60ed0f82
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Moved the Wakelock trait from wakelock to embedder_trait [components/shared/embedder/lib.rs](https://github.com/servo/servo/compare/main...rovertrack:servo:issue-44239?expand=1#diff-71d8f825ba6f796e220d49bc548e9a34783586a5a597edc6311a26e31dbf7020)
     # Added Required dependency in `components/shared/embedder/lib.rs`
     # imported the Wakelock trait from `components/shared/embedder/lib.rs` to `components/wakelock/lib.rs`
@@ -7688,7 +7690,7 @@
 +https://github.com/servo/servo/pull/44433	(@janvarga, #44433)	storage: Add support for temporary storage (#44433)
     api servoshell; --temporary-storage (and Opts::temporary_storage) runs servo with all storage going to a new unique location for that instance (~/.config/servo/default/clientstorage/temporary/<uuid>)
     ^ commit 902d5d10d9671e439a205ef606a7b3ed3046e467
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains servoshell changes! does it affect the user experience?
     ^ /!\ may contain changes to EXPERIMENTAL_PREFS
     # Add support for temporary storage via a new config option `temporary_storage`
@@ -8631,7 +8633,7 @@
 +https://github.com/servo/servo/pull/44493	(@webbeef, #44493)	servo: Add `referrer` and `destination` fields to `WebResourceRequest` (#44493)
     api; new fields `destination` and `referrer_url` on WebResourceRequest, can use for adblocking with your own impl load_web_resource() on ServoDelegate or WebViewDelegate
     ^ commit 0117a8cc144e5a639dec9ad5d68622ce07473750
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # The destination and referrer are useful for some use cases like hooking up adblock-rust. We could also fetch the referrer from the headers but this is more expensive. I also added a way to get access to the resource threads from the Servo api. This allows embedders to use Servo's fetch implementation instead of bringing an external http client.
     # 
     # Testing: updated relevant unit tests
@@ -9131,7 +9133,7 @@
 +https://github.com/servo/servo/pull/44166	(@longvatrong111, #44166)	servo: Add `SiteDataManager::clear_session_cookies` (#44166)
     api; new SiteDataManager::clear_session_cookies() method. no save_cookies() in this patch! <https://doc.servo.org/servo/struct.SiteDataManager.html#method.clear_session_cookies>
     ^ commit c7f4f37e1b189896edda8e041a333518382d8b2f
-    ^ /!\ contains libservo changes! does it affect the embedder?
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Implement save_cookies and clear_session_cookies in SiteDataManager
     # Support APIs like:
     # [Harmony OS WebCookieManager clear session cookies](https://developer.huawei.com/consumer/en/doc/harmonyos-references/arkts-apis-webview-webcookiemanager#clearsessioncookiesync11)
