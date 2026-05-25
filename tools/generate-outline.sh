@@ -12,12 +12,12 @@ cd -- "$(dirname -- "${0:a}")"
 tags=$(< "$post_path" rg -v '^    # ' | rg --pcre2 -o '(?<=^    )([^;#^][^;]*)' | tr ' ' \\n | sort -u)
 # For each tag...
 for tag in $tags; do
-  # ...find all of the commits that we marked with that tag. Each commit consists of two lines.
+  # ...find all of the accepted (`+`) commits that we marked with that tag.
+  # Each commit consists of two lines.
   # The first line of the input is of the form `+https://url\t(@author, #123)\tPull request title`.
   # The second line of the input is of the form `    one or more tags` or `    tags; notes`.
   # Tags must not contain spaces or PCRE regex metacharacters.
-  < "$post_path" rg -v '^    [;#^]' \
-  | rg --pcre2 -B1 --no-context-separator '(?<=^    )(([^;]+ )?'"$tag"'( [^;]+)?) *(;|$)' \
+  < "$post_path" rg --pcre2 -U '^[+].*\n    (([^;]+ )?'"$tag"'( [^;]+)?) *(;|$)' \
   $(: ::: Remove the '+https://url' part from the start of the first line of each commit.) \
   | sed -E 's/^[^ \t]*//' \
   $(: ::: Take one commit at a time, that is, two lines at a time.) \
