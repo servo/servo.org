@@ -258,6 +258,45 @@
 <p>All of the features above are enabled in servoshell’s experimental mode.</p>
 <p>Servo can now build a very basic <strong>accessibility tree</strong> for web contents, under <code>--pref accessibility­_enabled</code> (@alice, @delan, @lukewarlow, #42338, #43558, #44437, #44438).
 This includes text runs, plus nine other non-interactive accessibility roles (@alice, @delan, #44255).</p>
+<h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>With the second major release of the Servo library, we have some quick notes about <strong>API stability</strong> and <strong>semver compatibility</strong>:</p>
+<ul>
+<li>
+<p><strong>The <a href="https://crates.io/crates/servo">‘servo’</a> package</strong> follows <a href="https://doc.rust-lang.org/1.88.0/cargo/reference/specifying-dependencies.html#default-requirements">Cargo’s rules for semver compatibility</a> – 0.1.1 is compatible with version 0.1.0, but 0.2.0 is a breaking update.</p>
+</li>
+<li>
+<p>Until we integrate semver analysis into our release process, each monthly release will have a breaking version number, while non-breaking version numbers may be used for LTS updates.</p>
+</li>
+<li>
+<p>In general, <strong>dependencies of ‘servo’</strong>, like <a href="https://crates.io/crates/servo-base">‘servo-base’</a> and <a href="https://crates.io/crates/servo-script">‘servo-script’</a>, <strong>do not use semver</strong>.
+Any release may include breaking changes.</p>
+</li>
+</ul>
+<p>We’ve fixed a <strong>build failure</strong> affecting embedders with a <strong>new or updated Cargo.lock</strong> (@jschwe, #44093), and landed several other changes to help us with the Servo library release process (@jschwe, @mukilan, #43972, #44642, #43182, #43866, #44086, #43797).</p>
+<p>Breaking changes:</p>
+<ul>
+<li>
+<p><a href="https://doc.servo.org/servo/struct.WebView.html"><code>Web­View</code></a>::<a href="https://doc.servo.org/servo/struct.WebView.html#method.animating"><code>animating</code></a> now takes <code>&amp;self</code> instead of <code>self</code>, so you can call it without cloning the handle (@JavaDerg, #44253)</p>
+</li>
+<li>
+<p><a href="https://doc.servo.org/servo/struct.Servo.html"><code>Servo</code></a>::<a href="https://doc.servo.org/servo/struct.Servo.html#method.site_data_manager"><code>site­_data­_manager</code></a> now returns <code>&amp;SiteDataManager</code> instead of <code>Ref&lt;'_, SiteDataManager&gt;</code> (@sabbCodes, #44116)</p>
+</li>
+<li>
+<p><a href="https://doc.servo.org/servo/trait.WebViewDelegate.html"><code>Web­View­Delegate</code></a>::<code>play­_gamepad­_haptic­_effect</code> and <code>stop­_gamepad­_haptic­_effect</code> have been removed (@mrobinson, #43895), but they have not worked since February 2026 – use <a href="https://doc.servo.org/servo/trait.GamepadDelegate.html"><code>Gamepad­Delegate</code></a> instead</p>
+</li>
+</ul>
+<p>You can now load a URL with <strong>custom request headers</strong> by calling <a href="https://doc.servo.org/servo/struct.WebView.html"><code>Web­View</code></a>::<a href="https://doc.servo.org/servo/struct.WebView.html#method.load_request"><code>load­_request</code></a> (@Narfinger, @longvatrong111, @mrobinson, #43338).</p>
+<p>You can now <strong>retrieve cookies asynchronously</strong> by calling <a href="https://doc.servo.org/servo/struct.SiteDataManager.html"><code>Site­Data­Manager</code></a>::<a href="https://doc.servo.org/servo/struct.SiteDataManager.html#method.cookies_for_url_async"><code>cookies­_for­_url­_async</code></a> (@longvatrong111, #43794).</p>
+<p>The synchronous version of that method, <a href="https://doc.servo.org/servo/struct.SiteDataManager.html"><code>Site­Data­Manager</code></a>::<a href="https://doc.servo.org/servo/struct.SiteDataManager.html#method.cookies_for_url"><code>cookies­_for­_url</code></a>, was previously not callable because <a href="https://doc.servo.org/servo/enum.CookieSource.html"><code>Cookie­Source</code></a> was not exposed to the public API, but we’ve fixed that now (@TG199, #44124).</p>
+<p>You can now <strong>clear session cookies</strong> without clearing <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies#removal_defining_the_lifetime_of_a_cookie">permanent cookies</a> by calling <a href="https://doc.servo.org/servo/struct.SiteDataManager.html"><code>Site­Data­Manager</code></a>::<a href="https://doc.servo.org/servo/struct.SiteDataManager.html#method.clear_session_cookies"><code>clear­_session­_cookies</code></a> (@longvatrong111, #44166).</p>
+<p>When <strong>intercepting requests</strong> with <a href="https://doc.servo.org/servo/trait.ServoDelegate.html"><code>Servo­Delegate</code></a>:: and <a href="https://doc.servo.org/servo/trait.WebViewDelegate.html"><code>Web­View­Delegate</code></a>::<a href="https://doc.servo.org/servo/trait.WebViewDelegate.html#method.load_web_resource"><code>load­_web­_resource</code></a>, we now include a <a href="https://doc.servo.org/servo/struct.WebResourceRequest.html#structfield.destination"><code>destination</code></a> and <a href="https://doc.servo.org/servo/struct.WebResourceRequest.html#structfield.referrer_url"><code>referrer­_url</code></a> in the <a href="https://doc.servo.org/servo/struct.WebResourceRequest.html"><code>Web­Resource­Request</code></a>, which can be helpful if you’re implementing <strong>ad blocking</strong> (@webbeef, #44493).</p>
+<p>You can configure Servo to <strong>write all of its storage to a unique directory</strong> for that session by enabling <a href="https://doc.servo.org/servo/struct.Opts.html"><code>Opts</code></a>::<a href="https://doc.servo.org/servo/struct.Opts.html#structfield.temporary_storage"><code>temporary­_storage</code></a> (@janvarga, #44433).
+Note that these unique directories currently persist after Servo exits, so it’s an isolation feature, not a privacy feature.</p>
+<p><a href="https://doc.servo.org/servo/struct.WindowRenderingContext.html"><code>Window­Rendering­Context</code></a>::<a href="https://doc.servo.org/servo/struct.WindowRenderingContext.html#method.new"><code>new</code></a> and <a href="https://doc.servo.org/servo/struct.SoftwareRenderingContext.html"><code>Software­Rendering­Context</code></a>::<a href="https://doc.servo.org/servo/struct.SoftwareRenderingContext.html#method.new"><code>new</code></a> now return an error if the given <code>size</code> is less than 1x1 (@freyacodes, @mrobinson, #44011).</p>
+<p>We’ve improved our API docs for <a href="https://doc.servo.org/servo/struct.WebView.html"><code>Web­View</code></a>, <a href="https://doc.servo.org/servo/struct.WebViewBuilder.html"><code>Web­View­Builder</code></a>, <a href="https://doc.servo.org/servo/trait.WebViewDelegate.html"><code>Web­View­Delegate</code></a>, <a href="https://doc.servo.org/servo/trait.ServoDelegate.html"><code>ServoDelegate</code></a>, <a href="https://doc.servo.org/servo/struct.PromptDialog.html"><code>Prompt­Dialog</code></a>, <a href="https://doc.servo.org/servo/struct.WebResourceLoad.html"><code>Web­Resource­Load</code></a>, <a href="https://doc.servo.org/servo/webxr/trait.WebXrRegistry.html"><code>Web­Xr­Registry</code></a>, <a href="https://doc.servo.org/servo/struct.Preferences.html"><code>Preferences</code></a>, and servoshell’s <a href="https://doc.servo.org/servoshell/prefs/static.EXPERIMENTAL_PREFS.html"><code>EXPERIMENTAL­_PREFS</code></a> (@simonwuelker, @TG199, @sabbCodes, @jdm, @rovertrack, #43892, #43787, #44171, #43947).</p>
+<p>We’ve also improved our API docs for <a href="https://doc.servo.org/servo/struct.Opts.html"><code>Opts</code></a>, <a href="https://doc.servo.org/servo/enum.OutputOptions.html"><code>Output­Options</code></a>, <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>Diagnostics­Logging</code></a>, <a href="https://doc.servo.org/servo/enum.PrefValue.html"><code>Pref­Value</code></a>, <a href="https://doc.servo.org/servo/index.html"><code>servo</code></a>::<a href="https://doc.servo.org/servo/opts/index.html"><code>opts</code></a>, and <a href="https://doc.servo.org/servo_config/index.html"><code>servo­_config</code></a> (@mukilan, #43802).</p>
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
