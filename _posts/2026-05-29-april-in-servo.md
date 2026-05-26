@@ -7,14 +7,29 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+This is another big update, so here’s an outline:
+
+- [**Work in progress**](#work-in-progress)
+
+- [**Embedding API**](#embedding-api)
+
+- [**Performance and stability**](#performance-and-stability)
+
 ## Work in progress
 
-[TODO: write about experimental feature changes]
+**IndexedDB** is now enabled in servoshell’s experimental mode (@arihant2math, #44245).
+As always, embedders can enable it with [`Preferences`](https://doc.servo.org/servo/struct.Preferences.html)::[`dom­_indexeddb­_enabled`](https://doc.servo.org/servo/struct.Preferences.html#structfield.dom_indexeddb_enabled) (@arihant2math, #44245, #44283).
+
+We’ve made more progress on the **IntersectionObserver API**, under `--pref dom­_intersection­_observer­_enabled` (@stevennovaryo, @jdm, #42204).
 
 All of the features above are enabled in servoshell’s experimental mode.
 
 Servo can now build a very basic **accessibility tree** for web contents, under `--pref accessibility­_enabled` (@alice, @delan, @lukewarlow, #42338, #43558, #44437, #44438).
 This includes text runs, plus nine other non-interactive accessibility roles (@alice, @delan, #44255).
+
+We’ve started implementing the **Sanitizer API**, under `--pref dom­_sanitizer­_enabled` (@kkoyung, #44198, #44290, #44335, #44421, #44452, #44481, #44585, #44594).
+
+We’ve also started implementing **SharedWorker**, under `--pref dom­_sharedworker­_enabled` (@Taym95, #44375, #44440).
 
 ## Embedding API
 
