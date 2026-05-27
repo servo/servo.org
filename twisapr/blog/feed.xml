@@ -20,6 +20,9 @@
 &lt;p&gt;We’ve shipped several new web platform features:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&amp;lt;video&amp;gt;&lt;/strong&gt; playback on OpenHarmony (@rayguo17, #43208)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘minimum-scale’&lt;/strong&gt; and &lt;strong&gt;‘maximum-scale’&lt;/strong&gt; values in &lt;strong&gt;&amp;lt;meta name=viewport&amp;gt;&lt;/strong&gt; (@shubhamg13, #40098, #43715)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘tab-size’&lt;/strong&gt; (@mrobinson, @SimonSapin, #44480)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘text-align: match-parent’&lt;/strong&gt; (@TG199, #44073)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Plus a bunch of new DOM APIs:&lt;/p&gt;
 &lt;ul&gt;
@@ -41,6 +44,9 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#embedding-api&quot;&gt;&lt;strong&gt;Embedding API&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#more-on-the-web-platform&quot;&gt;&lt;strong&gt;More on the web platform&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#performance-and-stability&quot;&gt;&lt;strong&gt;Performance and stability&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
@@ -105,6 +111,13 @@ Note that these unique directories currently persist after Servo exits, so it’
 &lt;p&gt;&lt;a href=&quot;https://doc.servo.org/servo/struct.WindowRenderingContext.html&quot;&gt;&lt;code&gt;Window­Rendering­Context&lt;/code&gt;&lt;/a&gt;::&lt;a href=&quot;https://doc.servo.org/servo/struct.WindowRenderingContext.html#method.new&quot;&gt;&lt;code&gt;new&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://doc.servo.org/servo/struct.SoftwareRenderingContext.html&quot;&gt;&lt;code&gt;Software­Rendering­Context&lt;/code&gt;&lt;/a&gt;::&lt;a href=&quot;https://doc.servo.org/servo/struct.SoftwareRenderingContext.html#method.new&quot;&gt;&lt;code&gt;new&lt;/code&gt;&lt;/a&gt; now return an error if the given &lt;code&gt;size&lt;/code&gt; is less than 1x1 (@freyacodes, @mrobinson, #44011).&lt;/p&gt;
 &lt;p&gt;We’ve improved our API docs for &lt;a href=&quot;https://doc.servo.org/servo/struct.WebView.html&quot;&gt;&lt;code&gt;Web­View&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.servo.org/servo/struct.WebViewBuilder.html&quot;&gt;&lt;code&gt;Web­View­Builder&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.servo.org/servo/trait.WebViewDelegate.html&quot;&gt;&lt;code&gt;Web­View­Delegate&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.servo.org/servo/trait.ServoDelegate.html&quot;&gt;&lt;code&gt;ServoDelegate&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.servo.org/servo/struct.PromptDialog.html&quot;&gt;&lt;code&gt;Prompt­Dialog&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.servo.org/servo/struct.WebResourceLoad.html&quot;&gt;&lt;code&gt;Web­Resource­Load&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.servo.org/servo/webxr/trait.WebXrRegistry.html&quot;&gt;&lt;code&gt;Web­Xr­Registry&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.servo.org/servo/struct.Preferences.html&quot;&gt;&lt;code&gt;Preferences&lt;/code&gt;&lt;/a&gt;, and servoshell’s &lt;a href=&quot;https://doc.servo.org/servoshell/prefs/static.EXPERIMENTAL_PREFS.html&quot;&gt;&lt;code&gt;EXPERIMENTAL­_PREFS&lt;/code&gt;&lt;/a&gt; (@simonwuelker, @TG199, @sabbCodes, @jdm, @rovertrack, #43892, #43787, #44171, #43947).&lt;/p&gt;
 &lt;p&gt;We’ve also improved our API docs for &lt;a href=&quot;https://doc.servo.org/servo/struct.Opts.html&quot;&gt;&lt;code&gt;Opts&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.servo.org/servo/enum.OutputOptions.html&quot;&gt;&lt;code&gt;Output­Options&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.servo.org/servo/struct.DiagnosticsLogging.html&quot;&gt;&lt;code&gt;Diagnostics­Logging&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.servo.org/servo/enum.PrefValue.html&quot;&gt;&lt;code&gt;Pref­Value&lt;/code&gt;&lt;/a&gt;, &lt;a href=&quot;https://doc.servo.org/servo/index.html&quot;&gt;&lt;code&gt;servo&lt;/code&gt;&lt;/a&gt;::&lt;a href=&quot;https://doc.servo.org/servo/opts/index.html&quot;&gt;&lt;code&gt;opts&lt;/code&gt;&lt;/a&gt;, and &lt;a href=&quot;https://doc.servo.org/servo_config/index.html&quot;&gt;&lt;code&gt;servo­_config&lt;/code&gt;&lt;/a&gt; (@mukilan, #43802).&lt;/p&gt;
+&lt;h2 id=&quot;more-on-the-web-platform&quot; tabindex=&quot;-1&quot;&gt;More on the web platform &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#more-on-the-web-platform&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Tab characters&lt;/strong&gt; are now rendered correctly in &lt;strong&gt;&amp;lt;pre&amp;gt;&lt;/strong&gt; (and other elements with &lt;strong&gt;‘white-space: pre’&lt;/strong&gt;), with proper tab stops (@mrobinson, @SimonSapin, #44480).&lt;/p&gt;
+&lt;p&gt;We’ve improved the default appearance of &lt;strong&gt;&amp;lt;input type=file&amp;gt;&lt;/strong&gt; (@sabbCodes, #44496) and &lt;strong&gt;&amp;lt;textarea placeholder&amp;gt;&lt;/strong&gt; (@mrobinson, #43770).&lt;/p&gt;
+&lt;p&gt;We’ve improved the conformance of &lt;strong&gt;&amp;lt;svg viewBox&amp;gt;&lt;/strong&gt; (@yezhizhen, #44420) and &lt;strong&gt;‘font’&lt;/strong&gt; (@RichardTjokroutomo, #44061).&lt;/p&gt;
+&lt;p&gt;We’ve fixed bugs related to &lt;strong&gt;‘box-shadow’&lt;/strong&gt; (@yezhizhen, #44474, #44457), &lt;strong&gt;‘display: contents’&lt;/strong&gt; (@Loirooriol, #44551), &lt;strong&gt;‘display: inline-flex’&lt;/strong&gt; (@SimonSapin, #44281), &lt;strong&gt;‘display: table-cell’&lt;/strong&gt; (@Loirooriol, #44550), &lt;strong&gt;‘display: table-row-group’&lt;/strong&gt; (@Veercodeprog, #43674), &lt;strong&gt;‘overflow-x: clip’&lt;/strong&gt; and &lt;strong&gt;‘overflow-y: clip’&lt;/strong&gt; (@Messi002, #43620), &lt;strong&gt;‘position: absolute’&lt;/strong&gt; on grid items (@nicoburns, #44324), &lt;strong&gt;‘word-spacing: &amp;lt;percentage&amp;gt;’&lt;/strong&gt; (@sabbCodes, #44031), and &lt;strong&gt;removeChild()&lt;/strong&gt; on &lt;strong&gt;Document&lt;/strong&gt; (@rovertrack, #44133).&lt;/p&gt;
 &lt;h2 id=&quot;performance-and-stability&quot; tabindex=&quot;-1&quot;&gt;Performance and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#performance-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
