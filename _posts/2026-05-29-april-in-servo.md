@@ -113,7 +113,7 @@ We’ve also improved our API docs for [`Opts`](https://doc.servo.org/servo/stru
 
 We’ve improved the default appearance of **&lt;input type=file>** (@sabbCodes, #44496) and **&lt;textarea placeholder>** (@mrobinson, #43770).
 
-We’ve improved the conformance of **&lt;svg viewBox>** (@yezhizhen, #44420) and **‘font’** (@RichardTjokroutomo, #44061).
+We’ve improved the conformance of **fetch algorithms** (@yezhizhen, #43970, #43798), **focus** and **tab navigation** (@mrobinson, #43842, #44029, #44360, #43859, #44535), **form submission** (@TG199, #43700), **JS modules** (@elomscansio, @Gae24, #43741, #44179, #44042), **page navigation** (@TimvdLippe, #43857), **&lt;svg viewBox>** (@yezhizhen, #44420), **‘font’** (@RichardTjokroutomo, #44061), **‘load’** events (@jdm, @arabson99, #43807, #44046), **axes** and **buttons** on **Gamepad** (@log101, @rovertrack, #44411, #44357), **copyTexImage2D()** on **WebGLRenderingContext** (@simartin, @mrobinson, #43608), texImage3D() on WebGL2RenderingContext (@simartin, #44367), **environmentBlendMode** on **XRSession** (@msub2, #44155), and **PerformanceResourceTiming** (@shubhamg13, #44228).
 
 We’ve fixed bugs related to **‘box-shadow’** (@yezhizhen, #44474, #44457), **‘display: contents’** (@Loirooriol, #44551), **‘display: inline-flex’** (@SimonSapin, #44281), **‘display: table-cell’** (@Loirooriol, #44550), **‘display: table-row-group’** (@Veercodeprog, #43674), **‘overflow-x: clip’** and **‘overflow-y: clip’** (@Messi002, #43620), **‘position: absolute’** on grid items (@nicoburns, #44324), **‘word-spacing: &lt;percentage>’** (@sabbCodes, #44031), and **removeChild()** on **Document** (@rovertrack, #44133).
 
