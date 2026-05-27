@@ -14,6 +14,9 @@ Servo’s support for text in **Chinese**, **Japanese**, and **Korean** language
 We’ve shipped several new web platform features:
 
 - **&lt;video>** playback on OpenHarmony (@rayguo17, #43208)
+- **‘minimum-scale’** and **‘maximum-scale’** values in **&lt;meta name=viewport>** (@shubhamg13, #40098, #43715)
+- **‘tab-size’** (@mrobinson, @SimonSapin, #44480)
+- **‘text-align: match-parent’** (@TG199, #44073)
 
 Plus a bunch of new DOM APIs:
 
@@ -32,6 +35,8 @@ This is another big update, so here’s an outline:
 - [**Work in progress**](#work-in-progress)
 
 - [**Embedding API**](#embedding-api)
+
+- [**More on the web platform**](#more-on-the-web-platform)
 
 - [**Performance and stability**](#performance-and-stability)
 
@@ -101,6 +106,16 @@ Note that these unique directories currently persist after Servo exits, so it’
 We’ve improved our API docs for [`Web­View`](https://doc.servo.org/servo/struct.WebView.html), [`Web­View­Builder`](https://doc.servo.org/servo/struct.WebViewBuilder.html), [`Web­View­Delegate`](https://doc.servo.org/servo/trait.WebViewDelegate.html), [`ServoDelegate`](https://doc.servo.org/servo/trait.ServoDelegate.html), [`Prompt­Dialog`](https://doc.servo.org/servo/struct.PromptDialog.html), [`Web­Resource­Load`](https://doc.servo.org/servo/struct.WebResourceLoad.html), [`Web­Xr­Registry`](https://doc.servo.org/servo/webxr/trait.WebXrRegistry.html), [`Preferences`](https://doc.servo.org/servo/struct.Preferences.html), and servoshell’s [`EXPERIMENTAL­_PREFS`](https://doc.servo.org/servoshell/prefs/static.EXPERIMENTAL_PREFS.html) (@simonwuelker, @TG199, @sabbCodes, @jdm, @rovertrack, #43892, #43787, #44171, #43947).
 
 We’ve also improved our API docs for [`Opts`](https://doc.servo.org/servo/struct.Opts.html), [`Output­Options`](https://doc.servo.org/servo/enum.OutputOptions.html), [`Diagnostics­Logging`](https://doc.servo.org/servo/struct.DiagnosticsLogging.html), [`Pref­Value`](https://doc.servo.org/servo/enum.PrefValue.html), [`servo`](https://doc.servo.org/servo/index.html)::[`opts`](https://doc.servo.org/servo/opts/index.html), and [`servo­_config`](https://doc.servo.org/servo_config/index.html) (@mukilan, #43802).
+
+## More on the web platform
+
+**Tab characters** are now rendered correctly in **&lt;pre>** (and other elements with **‘white-space: pre’**), with proper tab stops (@mrobinson, @SimonSapin, #44480).
+
+We’ve improved the default appearance of **&lt;input type=file>** (@sabbCodes, #44496) and **&lt;textarea placeholder>** (@mrobinson, #43770).
+
+We’ve improved the conformance of **&lt;svg viewBox>** (@yezhizhen, #44420) and **‘font’** (@RichardTjokroutomo, #44061).
+
+We’ve fixed bugs related to **‘box-shadow’** (@yezhizhen, #44474, #44457), **‘display: contents’** (@Loirooriol, #44551), **‘display: inline-flex’** (@SimonSapin, #44281), **‘display: table-cell’** (@Loirooriol, #44550), **‘display: table-row-group’** (@Veercodeprog, #43674), **‘overflow-x: clip’** and **‘overflow-y: clip’** (@Messi002, #43620), **‘position: absolute’** on grid items (@nicoburns, #44324), **‘word-spacing: &lt;percentage>’** (@sabbCodes, #44031), and **removeChild()** on **Document** (@rovertrack, #44133).
 
 ## Performance and stability
 
