@@ -56,7 +56,7 @@ As always, embedders can enable it with [`Preferences`](https://doc.servo.org/se
 We’ve made more progress on the **IntersectionObserver API**, under `--pref dom­_intersection­_observer­_enabled` (@stevennovaryo, @jdm, #42204).
 
 We’re continuing to implement **document.execCommand()** for **rich text editing** (@TimvdLippe, #44529), under `--pref dom­_exec­_command­_enabled`.
-This release adds support for the **‘bold’**, **‘fontName’**, **‘fontSize’**, **‘italic’**, **‘strikethrough’**, and **‘underline’** commands (@TimvdLippe, @jdm, @mrobinson, #44511, #43287, #44432, #44410, #44194, #44030, #44039, #44041, #44075, #44234, #44250, #44331, #44390).
+This release adds support for the **‘bold’**, **‘fontName’**, **‘fontSize’**, **‘italic’**, **‘strikethrough’**, and **‘underline’** commands (@TimvdLippe, @jdm, @mrobinson, #44511, #43287, #44432, #44410, #44194, #44030, #44039, #44041, #44075, #44234, #44250, #44331, #44390, #44137, #44293, #44312, #44347).
 
 All of the features above are enabled in servoshell’s experimental mode.
 
