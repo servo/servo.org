@@ -13,10 +13,14 @@ Servo’s support for text in **Chinese**, **Japanese**, and **Korean** language
 
 We’ve shipped several new web platform features:
 
+- **&lt;template shadowrootslotassignment>** (@simonwuelker, #44246)
 - **&lt;video>** playback on OpenHarmony (@rayguo17, #43208)
 - **‘minimum-scale’** and **‘maximum-scale’** values in **&lt;meta name=viewport>** (@shubhamg13, #40098, #43715)
 - **‘tab-size’** (@mrobinson, @SimonSapin, #44480)
 - **‘text-align: match-parent’** (@TG199, #44073)
+- **new Worker()** with **blob URLs** (@jdm, #44004)
+- **getContext(`"webgl"`)** on **OffscreenCanvas** (@niyabits, #44159)
+- the **detail** property on **PerformanceMark** and **PerformanceMeasure** (@shubhamg13, #44289)
 
 Plus a bunch of new DOM APIs:
 
@@ -110,6 +114,8 @@ We’ve also improved our API docs for [`Opts`](https://doc.servo.org/servo/stru
 ## More on the web platform
 
 **Tab characters** are now rendered correctly in **&lt;pre>** (and other elements with **‘white-space: pre’**), with proper tab stops (@mrobinson, @SimonSapin, #44480).
+
+**&lt;a href>** now correctly resolves the URL with the page encoding (@sabbCodes, #43822).
 
 We’ve improved the default appearance of **&lt;input type=file>** (@sabbCodes, #44496) and **&lt;textarea placeholder>** (@mrobinson, #43770).
 
