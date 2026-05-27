@@ -7,6 +7,20 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+We’ve shipped several new web platform features:
+
+- **&lt;video>** playback on OpenHarmony (@rayguo17, #43208)
+
+Plus a bunch of new DOM APIs:
+
+- **‘selectionchange’** events on &lt;input> and &lt;textarea> (@TimvdLippe, #44461)
+- **StorageManager**, in experimental mode (@Taym95, #43976)
+- **activeElement** on **Document** and **ShadowRoot** (@mrobinson, #43861)
+- **crypto.subtle.supports()** (@kkoyung, #43703) – Servo is the first major browser engine to support this!
+- **cellPadding**, **cellSpacing**, and **align** properties on **HTMLTableElement** (@mrobinson, #43903) – previously supported in HTML only
+- **relatedTarget** on **‘focus’** and **‘blur’** events (@mrobinson, #43926)
+- **transferFromImageBitmap()** on **ImageBitmapRenderingContext** (@Messi002, #43984)
+
 This is another big update, so here’s an outline:
 
 - [**Work in progress**](#work-in-progress)
@@ -31,6 +45,8 @@ We’ve also fixed a crash when reloading pages with accessibility enabled (@ali
 We’ve started implementing the **Sanitizer API**, under `--pref dom­_sanitizer­_enabled` (@kkoyung, #44198, #44290, #44335, #44421, #44452, #44481, #44585, #44594).
 
 We’ve also started implementing **SharedWorker**, under `--pref dom­_sharedworker­_enabled` (@Taym95, #44375, #44440).
+
+We’re working on the **WakeLock API** too, under `--pref dom­_wakelock­_enabled` (@TG199, @rovertrack, #43617, #44343).
 
 ## Embedding API
 
