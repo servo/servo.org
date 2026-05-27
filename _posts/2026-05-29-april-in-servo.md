@@ -26,6 +26,7 @@ All of the features above are enabled in servoshell’s experimental mode.
 
 Servo can now build a very basic **accessibility tree** for web contents, under `--pref accessibility­_enabled` (@alice, @delan, @lukewarlow, #42338, #43558, #44437, #44438).
 This includes text runs, plus nine other non-interactive accessibility roles (@alice, @delan, #44255).
+We’ve also fixed a crash when reloading pages with accessibility enabled (@alice, #44473).
 
 We’ve started implementing the **Sanitizer API**, under `--pref dom­_sanitizer­_enabled` (@kkoyung, #44198, #44290, #44335, #44421, #44452, #44481, #44585, #44594).
 
@@ -73,6 +74,25 @@ We’ve improved our API docs for [`Web­View`](https://doc.servo.org/servo/stru
 We’ve also improved our API docs for [`Opts`](https://doc.servo.org/servo/struct.Opts.html), [`Output­Options`](https://doc.servo.org/servo/enum.OutputOptions.html), [`Diagnostics­Logging`](https://doc.servo.org/servo/struct.DiagnosticsLogging.html), [`Pref­Value`](https://doc.servo.org/servo/enum.PrefValue.html), [`servo`](https://doc.servo.org/servo/index.html)::[`opts`](https://doc.servo.org/servo/opts/index.html), and [`servo­_config`](https://doc.servo.org/servo_config/index.html) (@mukilan, #43802).
 
 ## Performance and stability
+
+Several crashes have been fixed:
+
+- in compressedTexSubImage2D() on WebGLRenderingContext (@thebabalola, #44050)
+- in console.log() (@thebabalola, #43844)
+- in getData() on DataTransfer (@SimonSapin, #44607)
+- in remove() on Element (@SimonSapin, #44435)
+- in replaceWith() on Element (@yezhizhen, #44503)
+- in `--debug-mozjs` builds (@jdm, #44386, #44573, #44581)
+- in flex and grid layout (@mrobinson, @nicoburns, #44424, #44203)
+- in layout queries like `offsetHeight` (@mrobinson, #44560)
+- in the devtools Debugger tab, when stepping and when inspecting nested values (@atbrakhi, @eerii, #44024, #43995)
+- when removing &lt;colgroup> from the DOM (@Loirooriol, #43846)
+- when running garbage collection (@drasticactions, #43933)
+- when running servoshell with a [`u64`](https://doc.rust-lang.org/1.88.0/std/primitive.u64.html) `--pref` (@yezhizhen, #44079)
+- when shadow roots are deeply nested, or when calling attachShadow() removes elements from the flat tree (@yezhizhen, @mrobinson, #43888, #43930, #44259)
+- when [web storage features](https://storage.spec.whatwg.org) fail to write to disk or encounter SQLite errors (@arihant2math, @sabbCodes, #43918, #43949)
+
+We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891), and fixed a crash in servoshell when pressing keys like Ctrl+2 or ⌘2 with not enough tabs open (@mrobinson, #44070).
 
 We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@sagudev, @TimvdLippe, @Narfinger, @elomscansio, @Gae24, @rovertrack, @yezhizhen, @nodelpit, #43174, #43524, #43928, #43943, #43942, #43944, #43946, #43952, #43975, #44018, #44175, #44241, #44368, #44406, #44441, #44422, #44475, #44478, #44484, #44476, #44490, #44477, #44494, #44497, #44498, #44495, #44505, #44506, #44507, #44508, #44509, #44510, #44512, #44482, #44527, #44528, #44531, #44534, #44542, #44533, #44543, #44553, #44547, #44563, #44562, #44565, #44558, #44583, #44606, #44605, #44608, #44602, #44584, #44620, #44590, #44254, #44628, #44629, #44638, #44626).
 
