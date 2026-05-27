@@ -35,7 +35,8 @@ As always, embedders can enable it with &lt;a href=&quot;https://doc.servo.org/s
 &lt;p&gt;We’ve made more progress on the &lt;strong&gt;IntersectionObserver API&lt;/strong&gt;, under &lt;code&gt;--pref dom­_intersection­_observer­_enabled&lt;/code&gt; (@stevennovaryo, @jdm, #42204).&lt;/p&gt;
 &lt;p&gt;All of the features above are enabled in servoshell’s experimental mode.&lt;/p&gt;
 &lt;p&gt;Servo can now build a very basic &lt;strong&gt;accessibility tree&lt;/strong&gt; for web contents, under &lt;code&gt;--pref accessibility­_enabled&lt;/code&gt; (@alice, @delan, @lukewarlow, #42338, #43558, #44437, #44438).
-This includes text runs, plus nine other non-interactive accessibility roles (@alice, @delan, #44255).&lt;/p&gt;
+This includes text runs, plus nine other non-interactive accessibility roles (@alice, @delan, #44255).
+We’ve also fixed a crash when reloading pages with accessibility enabled (@alice, #44473).&lt;/p&gt;
 &lt;p&gt;We’ve started implementing the &lt;strong&gt;Sanitizer API&lt;/strong&gt;, under &lt;code&gt;--pref dom­_sanitizer­_enabled&lt;/code&gt; (@kkoyung, #44198, #44290, #44335, #44421, #44452, #44481, #44585, #44594).&lt;/p&gt;
 &lt;p&gt;We’ve also started implementing &lt;strong&gt;SharedWorker&lt;/strong&gt;, under &lt;code&gt;--pref dom­_sharedworker­_enabled&lt;/code&gt; (@Taym95, #44375, #44440).&lt;/p&gt;
 &lt;h2 id=&quot;embedding-api&quot; tabindex=&quot;-1&quot;&gt;Embedding API &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#embedding-api&quot;&gt;
@@ -81,6 +82,24 @@ Note that these unique directories currently persist after Servo exits, so it’
 &lt;h2 id=&quot;performance-and-stability&quot; tabindex=&quot;-1&quot;&gt;Performance and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#performance-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Several crashes have been fixed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;in compressedTexSubImage2D() on WebGLRenderingContext (@thebabalola, #44050)&lt;/li&gt;
+&lt;li&gt;in console.log() (@thebabalola, #43844)&lt;/li&gt;
+&lt;li&gt;in getData() on DataTransfer (@SimonSapin, #44607)&lt;/li&gt;
+&lt;li&gt;in remove() on Element (@SimonSapin, #44435)&lt;/li&gt;
+&lt;li&gt;in replaceWith() on Element (@yezhizhen, #44503)&lt;/li&gt;
+&lt;li&gt;in &lt;code&gt;--debug-mozjs&lt;/code&gt; builds (@jdm, #44386, #44573, #44581)&lt;/li&gt;
+&lt;li&gt;in flex and grid layout (@mrobinson, @nicoburns, #44424, #44203)&lt;/li&gt;
+&lt;li&gt;in layout queries like &lt;code&gt;offsetHeight&lt;/code&gt; (@mrobinson, #44560)&lt;/li&gt;
+&lt;li&gt;in the devtools Debugger tab, when stepping and when inspecting nested values (@atbrakhi, @eerii, #44024, #43995)&lt;/li&gt;
+&lt;li&gt;when removing &amp;lt;colgroup&amp;gt; from the DOM (@Loirooriol, #43846)&lt;/li&gt;
+&lt;li&gt;when running garbage collection (@drasticactions, #43933)&lt;/li&gt;
+&lt;li&gt;when running servoshell with a &lt;a href=&quot;https://doc.rust-lang.org/1.88.0/std/primitive.u64.html&quot;&gt;&lt;code&gt;u64&lt;/code&gt;&lt;/a&gt; &lt;code&gt;--pref&lt;/code&gt; (@yezhizhen, #44079)&lt;/li&gt;
+&lt;li&gt;when shadow roots are deeply nested, or when calling attachShadow() removes elements from the flat tree (@yezhizhen, @mrobinson, #43888, #43930, #44259)&lt;/li&gt;
+&lt;li&gt;when &lt;a href=&quot;https://storage.spec.whatwg.org/&quot;&gt;web storage features&lt;/a&gt; fail to write to disk or encounter SQLite errors (@arihant2math, @sabbCodes, #43918, #43949)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891), and fixed a crash in servoshell when pressing keys like Ctrl+2 or ⌘2 with not enough tabs open (@mrobinson, #44070).&lt;/p&gt;
 &lt;p&gt;We’ve continued our long-running effort to &lt;strong&gt;use the Rust type system&lt;/strong&gt; to make certain kinds of dynamic borrow failures impossible (@sagudev, @TimvdLippe, @Narfinger, @elomscansio, @Gae24, @rovertrack, @yezhizhen, @nodelpit, #43174, #43524, #43928, #43943, #43942, #43944, #43946, #43952, #43975, #44018, #44175, #44241, #44368, #44406, #44441, #44422, #44475, #44478, #44484, #44476, #44490, #44477, #44494, #44497, #44498, #44495, #44505, #44506, #44507, #44508, #44509, #44510, #44512, #44482, #44527, #44528, #44531, #44534, #44542, #44533, #44543, #44553, #44547, #44563, #44562, #44565, #44558, #44583, #44606, #44605, #44608, #44602, #44584, #44620, #44590, #44254, #44628, #44629, #44638, #44626).&lt;/p&gt;
 &lt;p&gt;Thanks to a wide range of people, we’ve also landed a bunch of cleanups and refactors (@delan, @alice, @Skgland, @atbrakhi, @eerii, @sabbCodes, @jdm, @thebabalola, @CynthiaOketch, @kkoyung, @TimvdLippe, @rovertrack, @webbeef, @arabson99, @yezhizhen, @simonwuelker, @mrobinson, @nicoburns, @longvatrong111, @niyabits, @treetmitterglad, @foresterre, @mukilan, @elomscansio, @TG199, #43772, #44006, #43860, #44121, #44160, #43884, #44154, #44569, #43939, #44003, #44110, #44122, #43824, #44635, #44103, #43978, #44092, #44114, #44277, #44454, #44274, #44237, #44232, #44167, #44214, #43820, #43825, #43810, #43838, #43841, #43847, #43875, #43876, #43889, #43893, #43896, #43881, #43906, #43913, #43908, #43917, #43910, #43921, #43924, #43925, #43907, #43923, #43916, #43909, #43911, #43957, #43969, #43967, #43915, #43954, #43963, #43959, #43955, #44067, #44068, #44071, #44084, #44265, #44115).&lt;/p&gt;
 &lt;style&gt;
