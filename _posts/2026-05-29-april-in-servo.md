@@ -7,6 +7,8 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+Servo’s support for text in **Chinese**, **Japanese**, and **Korean** languages has improved, with correct wrapping in the layout engine (@SharanRP, #43744), and CJK fonts now enabled in servoshell’s browser UI on Windows, Linux, and FreeBSD (@yezhizhen, @CynthiaOketch, @nortti0, #44055, #44138, #44514).
+
 We’ve shipped several new web platform features:
 
 - **&lt;video>** playback on OpenHarmony (@rayguo17, #43208)
