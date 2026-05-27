@@ -7,6 +7,8 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+For security fixes, see [**§ Security**](#security).
+
 Servo’s support for text in **Chinese**, **Japanese**, and **Korean** languages has improved, with correct wrapping in the layout engine (@SharanRP, #43744), and CJK fonts now enabled in servoshell’s browser UI on Windows, Linux, and FreeBSD (@yezhizhen, @CynthiaOketch, @nortti0, #44055, #44138, #44514).
 
 We’ve shipped several new web platform features:
@@ -25,11 +27,17 @@ Plus a bunch of new DOM APIs:
 
 This is another big update, so here’s an outline:
 
+- [**Security**](#security)
+
 - [**Work in progress**](#work-in-progress)
 
 - [**Embedding API**](#embedding-api)
 
 - [**Performance and stability**](#performance-and-stability)
+
+## Security
+
+We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891).
 
 ## Work in progress
 
@@ -110,7 +118,7 @@ Several crashes have been fixed:
 - when shadow roots are deeply nested, or when calling attachShadow() removes elements from the flat tree (@yezhizhen, @mrobinson, #43888, #43930, #44259)
 - when [web storage features](https://storage.spec.whatwg.org) fail to write to disk or encounter SQLite errors (@arihant2math, @sabbCodes, #43918, #43949)
 
-We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891), and fixed a crash in servoshell when pressing keys like Ctrl+2 or ⌘2 with not enough tabs open (@mrobinson, #44070).
+We fixed a crash in servoshell when pressing keys like Ctrl+2 or ⌘2 with not enough tabs open (@mrobinson, #44070).
 
 We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@sagudev, @TimvdLippe, @Narfinger, @elomscansio, @Gae24, @rovertrack, @yezhizhen, @nodelpit, #43174, #43524, #43928, #43943, #43942, #43944, #43946, #43952, #43975, #44018, #44175, #44241, #44368, #44406, #44441, #44422, #44475, #44478, #44484, #44476, #44490, #44477, #44494, #44497, #44498, #44495, #44505, #44506, #44507, #44508, #44509, #44510, #44512, #44482, #44527, #44528, #44531, #44534, #44542, #44533, #44543, #44553, #44547, #44563, #44562, #44565, #44558, #44583, #44606, #44605, #44608, #44602, #44584, #44620, #44590, #44254, #44628, #44629, #44638, #44626).
 
