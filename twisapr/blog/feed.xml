@@ -15,7 +15,8 @@
     <link href="https://servo.org/twisapr/blog/2026/05/29/april-in-servo/"/>
     <updated>2026-05-29T00:00:00Z</updated>
     <id>https://servo.org/twisapr/blog/2026/05/29/april-in-servo/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;Servo’s support for text in &lt;strong&gt;Chinese&lt;/strong&gt;, &lt;strong&gt;Japanese&lt;/strong&gt;, and &lt;strong&gt;Korean&lt;/strong&gt; languages has improved, with correct wrapping in the layout engine (@SharanRP, #43744), and CJK fonts now enabled in servoshell’s browser UI on Windows, Linux, and FreeBSD (@yezhizhen, @CynthiaOketch, @nortti0, #44055, #44138, #44514).&lt;/p&gt;
+    <content xml:lang="en" type="html">&lt;p&gt;For security fixes, see &lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#security&quot;&gt;&lt;strong&gt;§ Security&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Servo’s support for text in &lt;strong&gt;Chinese&lt;/strong&gt;, &lt;strong&gt;Japanese&lt;/strong&gt;, and &lt;strong&gt;Korean&lt;/strong&gt; languages has improved, with correct wrapping in the layout engine (@SharanRP, #43744), and CJK fonts now enabled in servoshell’s browser UI on Windows, Linux, and FreeBSD (@yezhizhen, @CynthiaOketch, @nortti0, #44055, #44138, #44514).&lt;/p&gt;
 &lt;p&gt;We’ve shipped several new web platform features:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&amp;lt;video&amp;gt;&lt;/strong&gt; playback on OpenHarmony (@rayguo17, #43208)&lt;/li&gt;
@@ -33,6 +34,9 @@
 &lt;p&gt;This is another big update, so here’s an outline:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#security&quot;&gt;&lt;strong&gt;Security&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#work-in-progress&quot;&gt;&lt;strong&gt;Work in progress&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -42,6 +46,10 @@
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#performance-and-stability&quot;&gt;&lt;strong&gt;Performance and stability&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&quot;security&quot; tabindex=&quot;-1&quot;&gt;Security &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#security&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891).&lt;/p&gt;
 &lt;h2 id=&quot;work-in-progress&quot; tabindex=&quot;-1&quot;&gt;Work in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#work-in-progress&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -115,7 +123,7 @@ Note that these unique directories currently persist after Servo exits, so it’
 &lt;li&gt;when shadow roots are deeply nested, or when calling attachShadow() removes elements from the flat tree (@yezhizhen, @mrobinson, #43888, #43930, #44259)&lt;/li&gt;
 &lt;li&gt;when &lt;a href=&quot;https://storage.spec.whatwg.org/&quot;&gt;web storage features&lt;/a&gt; fail to write to disk or encounter SQLite errors (@arihant2math, @sabbCodes, #43918, #43949)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891), and fixed a crash in servoshell when pressing keys like Ctrl+2 or ⌘2 with not enough tabs open (@mrobinson, #44070).&lt;/p&gt;
+&lt;p&gt;We fixed a crash in servoshell when pressing keys like Ctrl+2 or ⌘2 with not enough tabs open (@mrobinson, #44070).&lt;/p&gt;
 &lt;p&gt;We’ve continued our long-running effort to &lt;strong&gt;use the Rust type system&lt;/strong&gt; to make certain kinds of dynamic borrow failures impossible (@sagudev, @TimvdLippe, @Narfinger, @elomscansio, @Gae24, @rovertrack, @yezhizhen, @nodelpit, #43174, #43524, #43928, #43943, #43942, #43944, #43946, #43952, #43975, #44018, #44175, #44241, #44368, #44406, #44441, #44422, #44475, #44478, #44484, #44476, #44490, #44477, #44494, #44497, #44498, #44495, #44505, #44506, #44507, #44508, #44509, #44510, #44512, #44482, #44527, #44528, #44531, #44534, #44542, #44533, #44543, #44553, #44547, #44563, #44562, #44565, #44558, #44583, #44606, #44605, #44608, #44602, #44584, #44620, #44590, #44254, #44628, #44629, #44638, #44626).&lt;/p&gt;
 &lt;p&gt;Thanks to a wide range of people, we’ve also landed a bunch of cleanups and refactors (@delan, @alice, @Skgland, @atbrakhi, @eerii, @sabbCodes, @jdm, @thebabalola, @CynthiaOketch, @kkoyung, @TimvdLippe, @rovertrack, @webbeef, @arabson99, @yezhizhen, @simonwuelker, @mrobinson, @nicoburns, @longvatrong111, @niyabits, @treetmitterglad, @foresterre, @mukilan, @elomscansio, @TG199, #43772, #44006, #43860, #44121, #44160, #43884, #44154, #44569, #43939, #44003, #44110, #44122, #43824, #44635, #44103, #43978, #44092, #44114, #44277, #44454, #44274, #44237, #44232, #44167, #44214, #43820, #43825, #43810, #43838, #43841, #43847, #43875, #43876, #43889, #43893, #43896, #43881, #43906, #43913, #43908, #43917, #43910, #43921, #43924, #43925, #43907, #43923, #43916, #43909, #43911, #43957, #43969, #43967, #43915, #43954, #43963, #43959, #43955, #44067, #44068, #44071, #44084, #44265, #44115).&lt;/p&gt;
 &lt;style&gt;
