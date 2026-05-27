@@ -46,6 +46,9 @@ As always, embedders can enable it with [`Preferences`](https://doc.servo.org/se
 
 We’ve made more progress on the **IntersectionObserver API**, under `--pref dom­_intersection­_observer­_enabled` (@stevennovaryo, @jdm, #42204).
 
+We’re continuing to implement **document.execCommand()** for **rich text editing** (@TimvdLippe, #44529), under `--pref dom­_exec­_command­_enabled`.
+This release adds support for the **‘bold’**, **‘fontName’**, **‘fontSize’**, **‘italic’**, **‘strikethrough’**, and **‘underline’** commands (@TimvdLippe, @jdm, @mrobinson, #44511, #43287, #44432, #44410, #44194, #44030, #44039, #44041, #44075, #44234, #44250, #44331, #44390).
+
 All of the features above are enabled in servoshell’s experimental mode.
 
 Servo can now build a very basic **accessibility tree** for web contents, under `--pref accessibility­_enabled` (@alice, @delan, @lukewarlow, #42338, #43558, #44437, #44438).
@@ -119,6 +122,11 @@ Several crashes have been fixed:
 - when [web storage features](https://storage.spec.whatwg.org) fail to write to disk or encounter SQLite errors (@arihant2math, @sabbCodes, #43918, #43949)
 
 We fixed a crash in servoshell when pressing keys like Ctrl+2 or ⌘2 with not enough tabs open (@mrobinson, #44070).
+
+**DOM data structures** (`#[dom_struct]`) can refer to one another, with the help of [garbage collection](https://research.mozilla.org/2014/08/26/javascript-servos-only-garbage-collector/).
+But when DOM objects are being destroyed, those references can become invalid for a brief moment, depending on the order the GC finalizers run in.
+This can be unsound if those references are accessed, which is a very easy mistake to make if the type has an `impl Drop`.
+To help prevent that class of bug, we’ve been reworking our DOM types so that none of them have `#[dom_struct]` and `impl Drop` at the same time, and this effort is now complete (@willypuzzle, #44119, #44501, #44513).
 
 We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@sagudev, @TimvdLippe, @Narfinger, @elomscansio, @Gae24, @rovertrack, @yezhizhen, @nodelpit, #43174, #43524, #43928, #43943, #43942, #43944, #43946, #43952, #43975, #44018, #44175, #44241, #44368, #44406, #44441, #44422, #44475, #44478, #44484, #44476, #44490, #44477, #44494, #44497, #44498, #44495, #44505, #44506, #44507, #44508, #44509, #44510, #44512, #44482, #44527, #44528, #44531, #44534, #44542, #44533, #44543, #44553, #44547, #44563, #44562, #44565, #44558, #44583, #44606, #44605, #44608, #44602, #44584, #44620, #44590, #44254, #44628, #44629, #44638, #44626).
 
