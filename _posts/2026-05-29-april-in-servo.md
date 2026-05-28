@@ -52,6 +52,7 @@ We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, 
 
 **IndexedDB** is now enabled in servoshell’s experimental mode (@arihant2math, #44245).
 As always, embedders can enable it with [`Preferences`](https://doc.servo.org/servo/struct.Preferences.html)::[`dom­_indexeddb­_enabled`](https://doc.servo.org/servo/struct.Preferences.html#structfield.dom_indexeddb_enabled) (@arihant2math, #44245, #44283).
+To that end, we’ve landed improvements to IDBDatabase, IDBObjectStore, IDBCursor, IDBKeyRange, IDBRequest, and to the key handling, exception handling, and transactions (@Taym95, #44128, #43901, #44009, #43914, #44161, #44183, #44059, #44215, #42998).
 
 We’ve made more progress on the **IntersectionObserver API**, under `--pref dom­_intersection­_observer­_enabled` (@stevennovaryo, @jdm, #42204).
 
@@ -118,6 +119,9 @@ We’ve also improved our API docs for [`Opts`](https://doc.servo.org/servo/stru
 **&lt;a href>** now correctly resolves the URL with the page encoding (@sabbCodes, #43822).
 
 We’ve improved the default appearance of **&lt;input type=file>** (@sabbCodes, #44496) and **&lt;textarea placeholder>** (@mrobinson, #43770).
+
+All **keyboard events**, **mouse events**, **wheel events**, and **pointer events**, other than **‘keydown’**, **‘pointerenter’**, and **‘pointerleave’**, now **bubble out of shadow roots** (@simonwuelker, #43799).
+**‘error’ events** on **Window** now report the correct **filename** (**source** in **onerror**) and **lineno** (@Gae24, #43632).
 
 We’ve improved the conformance of **fetch algorithms** (@yezhizhen, #43970, #43798), **focus** and **tab navigation** (@mrobinson, #43842, #44029, #44360, #43859, #44535), **form submission** (@TG199, #43700), **JS modules** (@elomscansio, @Gae24, #43741, #44179, #44042), **page navigation** (@TimvdLippe, #43857), **&lt;svg viewBox>** (@yezhizhen, #44420), **‘font’** (@RichardTjokroutomo, #44061), **‘load’** events (@jdm, @arabson99, #43807, #44046), **axes** and **buttons** on **Gamepad** (@log101, @rovertrack, #44411, #44357), **copyTexImage2D()** on **WebGLRenderingContext** (@simartin, @mrobinson, #43608), **texImage3D()** on **WebGL2RenderingContext** (@simartin, #44367), **environmentBlendMode** on **XRSession** (@msub2, #44155), and **PerformanceResourceTiming** (@shubhamg13, #44228).
 
