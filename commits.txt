@@ -407,7 +407,7 @@
     # Testing: `webgpu` feature is enabled by default in CI, and we test `--no-default-features` too in the HOS build in CI. `cargo tree -p servo --no-default-features` does not show webgpu anymore after this change.
     # 
     # 
-+https://github.com/servo/servo/pull/43826	(@yezhizhen, #43826)	layout/script: Free memory earlier by consuming instead of draining the temporary container if it is unused (#43826)
+.https://github.com/servo/servo/pull/43826	(@yezhizhen, #43826)	layout/script: Free memory earlier by consuming instead of draining the temporary container if it is unused (#43826)
     perf; reduce lifetime of allocations
     ^ commit 5fb3877f9f1881938695c536b2e5409c0ba01234
     # Follow up of https://github.com/servo/servo/pull/43226
@@ -870,7 +870,7 @@
     # This moves step 23 to the end of the algorithm and also updates the spec steps related to JavaScript navigations.
     # 
     # Testing: WPT
-+https://github.com/servo/servo/pull/43858	(@Narfinger, #43858)	base: Implement MallocSizeOf for some more types (#43858)
+.https://github.com/servo/servo/pull/43858	(@Narfinger, #43858)	base: Implement MallocSizeOf for some more types (#43858)
     perf; more accurate memory usage tracking for PathBuf, tokio::sync::oneshot::Sender, http::{HeaderMap, Method}, data_url::Mime, urlpattern::UrlPattern (note case)
     ^ commit f7d77754ff677b944ae50a2cbb3f8e283267f993
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
@@ -2623,7 +2623,7 @@
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/44008	(@rovertrack, #44008)	script: Pass &CStr to get_callable_property (#44008)
+.https://github.com/servo/servo/pull/44008	(@rovertrack, #44008)	script: Pass &CStr to get_callable_property (#44008)
     perf; avoid CString allocation when invoking event handler attributes (onclick etc). unclear if IDL attributes or content attributes
     ^ commit ba4f031f865ba52269f2b0af0b06df11b6ab9c2e
     # Fixes: #43968 
@@ -2729,7 +2729,7 @@
     # Testing: Pure refactor with no behavior change. Ran `./mach try linux-unit-tests` to verify existing tests continue to pass.
     # Fixes: #42981
     # 
-+https://github.com/servo/servo/pull/44037	(@jschwe, #44037)	allocator: Add libc Heap information on macos (#44037)
+.https://github.com/servo/servo/pull/44037	(@jschwe, #44037)	allocator: Add libc Heap information on macos (#44037)
     perf; in about:memory, we now report libc malloc memory usage on macOS (both allocated and reserved), and report reserved such usage on linux (instead of only allocated)
     ^ commit 516dba791f8c31b44de92481bf4b34922e849b83
     # Despite using `jemalloc` by default on macos as the Rust global allocator, the default system allocator will still be used by some C/C++ libraries.
@@ -3181,7 +3181,7 @@
     #   Fixes:part of  #43800
     # 
     # 
-+https://github.com/servo/servo/pull/43983	(@Messi002, #43983)	media: Clean up shadow root content when removing controls (#43983)
+.https://github.com/servo/servo/pull/43983	(@Messi002, #43983)	media: Clean up shadow root content when removing controls (#43983)
     perf; fix memory leak when deleting <video controls> or <audio controls>
     ^ commit 4029f196e6d2f0c4584fe7f43fd3507ed6aabbc8
     # When media controls are removed (either by removing the controls attribute or by removing the element from the DOM), the shadow root's children are now cleared. This breaks the reference cycle between the js mediacontrols instance and the media element, the event listeners and this.media reference in the controls script would otherwise keep the element alive and prevent garbage collection.
@@ -3254,7 +3254,7 @@
     # We can then reuse it more often.
     # 
     # Testing: Just a refactor.
-+https://github.com/servo/servo/pull/44052	(@yezhizhen, #44052)	script: Skip clearing subtree layout boxes of detached element when attaching shadow to it (#44052)
+.https://github.com/servo/servo/pull/44052	(@yezhizhen, #44052)	script: Skip clearing subtree layout boxes of detached element when attaching shadow to it (#44052)
     perf; reduce work done in attachShadow() on Element
     ^ commit 560498923e5ded1fa95ae099da2fcb27bc309d82
     # There is no layout boxes to clear in this case. For the example in #43998,
@@ -3593,7 +3593,7 @@
     # 
     # Fixes: #44001
     # 
-+https://github.com/servo/servo/pull/44074	(@mrobinson, @Loirooriol, #44074)	script: Move `StyleData` to `Element` from `Node` (#44074)
+.https://github.com/servo/servo/pull/44074	(@mrobinson, @Loirooriol, #44074)	script: Move `StyleData` to `Element` from `Node` (#44074)
     perf; reduce Attr, Text, and CharacterData memory usage by 16 bytes
     ^ commit 12a655d42c1d65017707da62c031656354159a67
     # Many things are nodes, such as `CharacterData` and attributes. They
@@ -3778,7 +3778,7 @@
     # complete to something else.
     # Fixes: #23264
     # 
-+https://github.com/servo/servo/pull/44134	(@mrobinson, @mrobinson, #44134)	script: Remove the duplicate implementation of `selectors::Element` (#44134)
+.https://github.com/servo/servo/pull/44134	(@mrobinson, @mrobinson, #44134)	script: Remove the duplicate implementation of `selectors::Element` (#44134)
     perf dom; reduce impl code for matches() and closest() on Element
     ^ commit 8eafa6e9ad372d28645398ec6fa04eee32b237db
     # Servo has had two implementations of `selectors::Element`, one used
@@ -4971,7 +4971,7 @@
     # Follow-up to https://github.com/servo/servo/pull/42338.
     # 
     # Testing: Covered by existing tests.
-+https://github.com/servo/servo/pull/44221	(@rovertrack, #44221)	Match on NonNull::new instead of using is_null() and expect() (#44221)
+.https://github.com/servo/servo/pull/44221	(@rovertrack, #44221)	Match on NonNull::new instead of using is_null() and expect() (#44221)
     perf; eliminate code for redundant Option checks when evaluating JS on GlobalScope
     ^ commit 134beac3f018a6245d18cc9709a5725c5a29e260
     # The code was doing repetitive work by checking if `compiled_script` is null and then assigning and expecting the same, combined and replaced with condition based working
@@ -5114,7 +5114,7 @@
     # Testing: This should fix itnermittency as seen on the CI.
     # Fixes: #40543.
     # 
-+https://github.com/servo/servo/pull/44227	(@rovertrack, #44227)	script: Use OffscreenRenderingContextId instead of DOMString in OffscreenCanvas (#44227)
+.https://github.com/servo/servo/pull/44227	(@rovertrack, #44227)	script: Use OffscreenRenderingContextId instead of DOMString in OffscreenCanvas (#44227)
     perf; eliminate code for fallback case for contextType attribute in getContext() on OffscreenCanvas by using WebIDL enum type
     ^ commit 2578b5b78a054d07ea72a84b1bc9f6b682158636
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -5261,7 +5261,7 @@
     # Testing: We don't run any runtime tests for android in CI
     # 
     # 
-+https://github.com/servo/servo/pull/44279	(@Loirooriol, #44279)	layout: Avoid unnecessary borrow in `TextRun::segment_text_by_font()` (#44279)
+.https://github.com/servo/servo/pull/44279	(@Loirooriol, #44279)	layout: Avoid unnecessary borrow in `TextRun::segment_text_by_font()` (#44279)
     perf; reduce RefCell borrow ops in TextRun (inline layout)
     ^ commit 9ef8fe5e42fd491d7c61a24874b5c5c42519e0cd
     # No need to borrow `self.inline_styles.style` when the result is already available as a parameter of the function.
@@ -5567,7 +5567,7 @@
     # 
     # Testing: More WPT Tests Passed
     # 
-+https://github.com/servo/servo/pull/44303	(@mrobinson, #44303)	layout: Remove dependency on `xi-unicode` (#44303)
+.https://github.com/servo/servo/pull/44303	(@mrobinson, #44303)	layout: Remove dependency on `xi-unicode` (#44303)
     perf; smaller dependency tree
     ^ commit 789974975fffd52eabe5ce23ee94a8f2ee135e36
     # This functionality is already provided by `icu_properties` which is already
@@ -5591,7 +5591,7 @@
     # Part of #25005
     # 
     # Testing: WPT
-+https://github.com/servo/servo/pull/44271	(@Narfinger, #44271)	net: Refactor obtain_response and split devtools (#44271)
+.https://github.com/servo/servo/pull/44271	(@Narfinger, #44271)	net: Refactor obtain_response and split devtools (#44271)
     perf; avoid string allocations and copying when making requests
     ^ commit 68ca2808ee73dbf448f60523e924c7d185fe8746
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
@@ -5689,7 +5689,7 @@
     # - Fix some spec link
     # 
     # Testing: Nothing should change as no code change.
-+https://github.com/servo/servo/pull/43124	(@webbeef, #43124)	script: registration mechanism for selective broadcast from constellation (#43124)
+.https://github.com/servo/servo/pull/43124	(@webbeef, #43124)	script: registration mechanism for selective broadcast from constellation (#43124)
     perf; avoid IPC when some script threads have no reason to receive certain messages from the constellation
     ^ commit d16c9984f604b7a9f36b248d45e1c234c07834f3
     # This introduces a mechanism that let script threads register and unregister themselves from receiving messages from the constellation. This is useful when only globals with event listeners or callbacks will process some message types.
@@ -5815,7 +5815,7 @@
     # 
     # Testing: New tests start to pass
     # 
-+https://github.com/servo/servo/pull/44338	(@nicoburns, #44338)	Use our own http server for the webdriver server (#44338)
+.https://github.com/servo/servo/pull/44338	(@nicoburns, #44338)	Use our own http server for the webdriver server (#44338)
     perf; smaller dependency tree
     ^ commit 2c917400590d9883d96132e5b32c675a2aaa6593
     # Helps with: https://github.com/servo/servo/issues/38776. Reduces total Servo crate count by 7 (977 -> 970).
@@ -6700,7 +6700,7 @@
     # 
     # Testing: Covered by WPT tests in `sanitizer-api/sanitizer-config.tentative.html`
     # Fixes: Part of #43948
-+https://github.com/servo/servo/pull/44428	(@Narfinger, #44428)	media: Switch to workspace dependencies and minor cleanup (#44428)
+.https://github.com/servo/servo/pull/44428	(@Narfinger, #44428)	media: Switch to workspace dependencies and minor cleanup (#44428)
     perf; smaller dependency tree (by using std LazyLock instead of once_cell)
     ^ commit c2b88ff7f5c9d79041b2ea26b41f28d31a619e9f
     # This PR makes minor cleanup in the media crates:
@@ -8673,7 +8673,7 @@
     # 
     # Testing: Tested locally.
     # 
-+https://github.com/servo/servo/pull/44544	(@Narfinger, #44544)	script: Replace some usage of children() with children_unrooted() in script/dom/execcommand (#44544)
+.https://github.com/servo/servo/pull/44544	(@Narfinger, #44544)	script: Replace some usage of children() with children_unrooted() in script/dom/execcommand (#44544)
     perf; avoid GC rooting in HTMLFieldSetElement, HTMLMediaElement, and document.execCommand()
     ^ commit 28de8abdb5c2a0e89147421489d49c781a9a9932
     # This replaces some usages of children() with children_unrooted() for more efficiency in execcommand, htmlfieldsetelement and htmlmediaelement.

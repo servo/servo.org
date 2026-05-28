@@ -505,7 +505,7 @@ dom; fix potential UAF <https://github.com/servo/servo/issues/26488#issuecomment
 .	(@simartin, @mrobinson, #43608)	script: Invalidate texture if there's a bound framebuffer in `WebGLRenderingContext` (#43608)
 dom; more conformant copyTexImage2D() on WebGLRenderingContext
 
-+	(@mrobinson, @mrobinson, #44134)	script: Remove the duplicate implementation of `selectors::Element` (#44134)
+.	(@mrobinson, @mrobinson, #44134)	script: Remove the duplicate implementation of `selectors::Element` (#44134)
 perf dom; reduce impl code for matches() and closest() on Element
 
 +	(@Taym95, #44128)	Indexeddb: Follow the spec and make IDBRequest result/error getters throw while pending (#44128)
@@ -1060,40 +1060,40 @@ net; more conformant HTTP fetch
 .	(@yezhizhen, #43970)	net: Improve HTTP fetch compliance (#43970)
 net; more conformant HTTP fetch
 
-+	(@yezhizhen, #43826)	layout/script: Free memory earlier by consuming instead of draining the temporary container if it is unused (#43826)
+.	(@yezhizhen, #43826)	layout/script: Free memory earlier by consuming instead of draining the temporary container if it is unused (#43826)
 perf; reduce lifetime of allocations
 
-+	(@Narfinger, #43858)	base: Implement MallocSizeOf for some more types (#43858)
+.	(@Narfinger, #43858)	base: Implement MallocSizeOf for some more types (#43858)
 perf; more accurate memory usage tracking for PathBuf, tokio::sync::oneshot::Sender, http::{HeaderMap, Method}, data_url::Mime, urlpattern::UrlPattern (note case)
 
-+	(@rovertrack, #44008)	script: Pass &CStr to get_callable_property (#44008)
+.	(@rovertrack, #44008)	script: Pass &CStr to get_callable_property (#44008)
 perf; avoid CString allocation when invoking event handler attributes (onclick etc). unclear if IDL attributes or content attributes
 
 +	(@yezhizhen, @webbeef, #44016)	script: Reduce `ShadowRoot::bind_to_tree` complexity from O(2^N) to O(N) (#44016)
 perf; fix O(2^n) appendChild() when shadow roots are involved
 
-+	(@jschwe, #44037)	allocator: Add libc Heap information on macos (#44037)
+.	(@jschwe, #44037)	allocator: Add libc Heap information on macos (#44037)
 perf; in about:memory, we now report libc malloc memory usage on macOS (both allocated and reserved), and report reserved such usage on linux (instead of only allocated)
 
 +	(@mrobinson, #43974)	layout: Integrate more details into FontAndScriptInfo (#43974)
 perf; part of improving shaping performance
 
-+	(@Messi002, #43983)	media: Clean up shadow root content when removing controls (#43983)
+.	(@Messi002, #43983)	media: Clean up shadow root content when removing controls (#43983)
 perf; fix memory leak when deleting <video controls> or <audio controls>
 
-+	(@yezhizhen, #44052)	script: Skip clearing subtree layout boxes of detached element when attaching shadow to it (#44052)
+.	(@yezhizhen, #44052)	script: Skip clearing subtree layout boxes of detached element when attaching shadow to it (#44052)
 perf; reduce work done in attachShadow() on Element
 
 +	(@arihant2math, #39009)	indexeddb: Implement encoding module (#39009)
 perf dom; more efficient indexeddb key range queries
 
-+	(@mrobinson, @Loirooriol, #44074)	script: Move `StyleData` to `Element` from `Node` (#44074)
+.	(@mrobinson, @Loirooriol, #44074)	script: Move `StyleData` to `Element` from `Node` (#44074)
 perf; reduce Attr, Text, and CharacterData memory usage by 16 bytes
 
 +	(@simonwuelker, #44127)	script: Unbind `<script>` elements properly from the tree (#44127)
 perf; part of #44120
 
-+	(@mrobinson, @mrobinson, #44134)	script: Remove the duplicate implementation of `selectors::Element` (#44134)
+.	(@mrobinson, @mrobinson, #44134)	script: Remove the duplicate implementation of `selectors::Element` (#44134)
 perf dom; reduce impl code for matches() and closest() on Element
 
 +	(@simonwuelker, #44139)	script: Don't re-parse link relations when binding element to tree (#44139)
@@ -1105,34 +1105,34 @@ perf; fix O(whole DOM tree) handling of ‘id’ and ‘name’ attributes, redu
 +	(@alice, #44208)	layout: Send accessibility updates directly to embedder from layout. (#44208)
 perf a11y; eliminate IPC when sending accessibility updates for web content
 
-+	(@rovertrack, #44221)	Match on NonNull::new instead of using is_null() and expect() (#44221)
+.	(@rovertrack, #44221)	Match on NonNull::new instead of using is_null() and expect() (#44221)
 perf; eliminate code for redundant Option checks when evaluating JS on GlobalScope
 
 +	(@Loirooriol, @mrobinson, #44231)	layout: Reuse abspos fragments when they didn't change (#44231)
 perf; reuse fragments when layout results are cached and the fragment would have the same size and position
 
-+	(@rovertrack, #44227)	script: Use OffscreenRenderingContextId instead of DOMString in OffscreenCanvas (#44227)
+.	(@rovertrack, #44227)	script: Use OffscreenRenderingContextId instead of DOMString in OffscreenCanvas (#44227)
 perf; eliminate code for fallback case for contextType attribute in getContext() on OffscreenCanvas by using WebIDL enum type
 
 +	(@mrobinson, @lukewarlow, @Loirooriol, #42904)	layout: Cache `SameFormattingContextBlock` layout results (#42904)
 perf layout; impl caching for typical fragments in block layout. less work, but more memory
 
-+	(@Loirooriol, #44279)	layout: Avoid unnecessary borrow in `TextRun::segment_text_by_font()` (#44279)
+.	(@Loirooriol, #44279)	layout: Avoid unnecessary borrow in `TextRun::segment_text_by_font()` (#44279)
 perf; reduce RefCell borrow ops in TextRun (inline layout)
 
-+	(@mrobinson, #44303)	layout: Remove dependency on `xi-unicode` (#44303)
+.	(@mrobinson, #44303)	layout: Remove dependency on `xi-unicode` (#44303)
 perf; smaller dependency tree
 
-+	(@Narfinger, #44271)	net: Refactor obtain_response and split devtools (#44271)
+.	(@Narfinger, #44271)	net: Refactor obtain_response and split devtools (#44271)
 perf; avoid string allocations and copying when making requests
 
 +	(@mrobinson, #44299)	script: Cancel animations for non-rendered nodes in script (#44299)
 perf layout; more efficient processing of animations in large trees. also fix ‘animation’ not working on ‘display: contents’
 
-+	(@webbeef, #43124)	script: registration mechanism for selective broadcast from constellation (#43124)
+.	(@webbeef, #43124)	script: registration mechanism for selective broadcast from constellation (#43124)
 perf; avoid IPC when some script threads have no reason to receive certain messages from the constellation
 
-+	(@nicoburns, #44338)	Use our own http server for the webdriver server (#44338)
+.	(@nicoburns, #44338)	Use our own http server for the webdriver server (#44338)
 perf; smaller dependency tree
 
 +	(@mrobinson, #44370)	layout: Add placeholders for text carets after finishing a line (#44370)
@@ -1141,7 +1141,7 @@ perf editing; towards preserving shaping results between layouts. fix caret not 
 +	(@jschwe, #44242)	net: Optimize initial TLS connection (#44242)
 perf; reduce first TLS connection latency by 30ms
 
-+	(@Narfinger, #44428)	media: Switch to workspace dependencies and minor cleanup (#44428)
+.	(@Narfinger, #44428)	media: Switch to workspace dependencies and minor cleanup (#44428)
 perf; smaller dependency tree (by using std LazyLock instead of once_cell)
 
 +	(@jschwe, #44346)	mozjs: Fix make 4.4 broken parallel compilation (#44346)
@@ -1159,7 +1159,7 @@ perf layout; towards more efficient inline layout
 +	(@webbeef, #44364)	script: Use a u16 for prototype id to speed up Castable::is<T>() (#44364)
 perf; faster casting of DOM objects in exchange for a bit more memory usage
 
-+	(@Narfinger, #44544)	script: Replace some usage of children() with children_unrooted() in script/dom/execcommand (#44544)
+.	(@Narfinger, #44544)	script: Replace some usage of children() with children_unrooted() in script/dom/execcommand (#44544)
 perf; avoid GC rooting in HTMLFieldSetElement, HTMLMediaElement, and document.execCommand()
 
 +	(@jschwe, #44182)	android: Support custom build profiles (#44182)

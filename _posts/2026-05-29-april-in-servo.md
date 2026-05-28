@@ -125,6 +125,21 @@ We’ve fixed bugs related to **‘box-shadow’** (@yezhizhen, #44474, #44457),
 
 ## Performance and stability
 
+Like most browser engines, Servo is a multi-threaded (and sometimes multi-process) system requiring a great deal of IPC messages to keep everything connected.
+[Two key components](https://book.servo.org/design-documentation/architecture.html) of this system are the **constellation** thread, which manages the engine as a whole, and the **script threads** (or web processes), which render the web pages.
+Sending these messages can be expensive though, so to **reduce unnecessary IPC traffic**, we’ve landed an optimisation that allows script threads to selectively receive only the relevant messages from the constellation (@webbeef, #43124).
+
+We’ve reduced the **memory usage** of each **Attr**, **Text**, and **CharacterData** node in the DOM by 16 bytes (@mrobinson, @Loirooriol, #44074), and **fixed a memory leak** when deleting **&lt;video controls>** or **&lt;audio controls>** (@Messi002, #43983).
+
+Our **about:memory** page is more accurate now too, with new tracking of **libc memory allocations** on macOS, improved tracking of libc memory allocations on Linux (@jschwe, #44037), and more accurate tracking of PathBuf and types in `tokio`, `http`, `data_url`, and `urlpattern` (@Narfinger, #43858).
+
+Less memory usage isn’t always better in browser engines though, because there are many kinds of caches and other optimisations we can do to make browsing the web faster, at the expense of increased memory usage.
+[TODO write about those]
+
+We’ve landed several changes that should reduce the **binary size** of Servo (@rovertrack, @mrobinson, @nicoburns, @Narfinger, #44227, #44221, #44303, #44338, #44428, #44134).
+
+We’ve also reduced clones, allocations, borrow checks, GC rooting steps, and other operations in many parts of Servo (@rovertrack, @Narfinger, @Loirooriol, @yezhizhen, #44008, #44544, #44271, #44279, #43826, #44052).
+
 Several crashes have been fixed:
 
 - in compressedTexSubImage2D() on WebGLRenderingContext (@thebabalola, #44050)
