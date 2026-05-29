@@ -9,6 +9,8 @@ categories:
 
 For security fixes, see [**§ Security**](#security).
 
+Navigating to a **JSON file** as the top-level document now renders the JSON with an **interactive pretty-printer** (@webbeef, @TimvdLippe, #43702).
+
 Servo’s support for text in **Chinese**, **Japanese**, and **Korean** languages has improved, with correct wrapping in the layout engine (@SharanRP, #43744), and CJK fonts now enabled in servoshell’s browser UI on Windows, Linux, and FreeBSD (@yezhizhen, @CynthiaOketch, @nortti0, #44055, #44138, #44514).
 
 We’ve shipped several new web platform features:
@@ -37,6 +39,8 @@ This is another big update, so here’s an outline:
 - [**Security**](#security)
 
 - [**Work in progress**](#work-in-progress)
+
+- [**servoshell**](#servoshell)
 
 - [**Embedding API**](#embedding-api)
 
@@ -70,6 +74,13 @@ We’ve started implementing the **Sanitizer API**, under `--pref dom­_sanitize
 We’ve also started implementing **SharedWorker**, under `--pref dom­_sharedworker­_enabled` (@Taym95, #44375, #44440).
 
 We’re working on the **WakeLock API** too, under `--pref dom­_wakelock­_enabled` (@TG199, @rovertrack, #43617, #44343).
+
+## servoshell
+
+servoshell for Android now has a **revamped browser UI**, including a new **history view** (@espy, #43795), and we’ve fixed the black screen bug when closing settings or switching back from another app (@yezhizhen, #44327).
+You can now close tabs on OpenHarmony too (@Narfinger, #42713).
+
+As for servoshell on desktop platforms, we’ve fixed some focus- and IME-related bugs (@mrobinson, #43872, #43932), and on Windows, we now install a normal shortcut without the strange behaviour of an “advertised” shortcut (@yezhizhen, #44223).
 
 ## Embedding API
 
