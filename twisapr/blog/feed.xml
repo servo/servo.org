@@ -16,6 +16,7 @@
     <updated>2026-05-29T00:00:00Z</updated>
     <id>https://servo.org/twisapr/blog/2026/05/29/april-in-servo/</id>
     <content xml:lang="en" type="html">&lt;p&gt;For security fixes, see &lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#security&quot;&gt;&lt;strong&gt;§ Security&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Navigating to a &lt;strong&gt;JSON file&lt;/strong&gt; as the top-level document now renders the JSON with an &lt;strong&gt;interactive pretty-printer&lt;/strong&gt; (@webbeef, @TimvdLippe, #43702).&lt;/p&gt;
 &lt;p&gt;Servo’s support for text in &lt;strong&gt;Chinese&lt;/strong&gt;, &lt;strong&gt;Japanese&lt;/strong&gt;, and &lt;strong&gt;Korean&lt;/strong&gt; languages has improved, with correct wrapping in the layout engine (@SharanRP, #43744), and CJK fonts now enabled in servoshell’s browser UI on Windows, Linux, and FreeBSD (@yezhizhen, @CynthiaOketch, @nortti0, #44055, #44138, #44514).&lt;/p&gt;
 &lt;p&gt;We’ve shipped several new web platform features:&lt;/p&gt;
 &lt;ul&gt;
@@ -48,6 +49,9 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#servoshell&quot;&gt;&lt;strong&gt;servoshell&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#for-developers&quot;&gt;&lt;strong&gt;For developers&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#embedding-api&quot;&gt;&lt;strong&gt;Embedding API&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
@@ -85,6 +89,14 @@ We’ve also fixed a crash when reloading pages with accessibility enabled (@ali
 &lt;p&gt;servoshell for Android now has a &lt;strong&gt;revamped browser UI&lt;/strong&gt;, including a new &lt;strong&gt;history view&lt;/strong&gt; (@espy, #43795), and we’ve fixed the black screen bug when closing settings or switching back from another app (@yezhizhen, #44327).
 You can now close tabs on OpenHarmony too (@Narfinger, #42713).&lt;/p&gt;
 &lt;p&gt;As for servoshell on desktop platforms, we’ve fixed some focus- and IME-related bugs (@mrobinson, #43872, #43932), and on Windows, we now install a normal shortcut without the strange behaviour of an “advertised” shortcut (@yezhizhen, #44223).&lt;/p&gt;
+&lt;h2 id=&quot;for-developers&quot; tabindex=&quot;-1&quot;&gt;For developers &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#for-developers&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When using the &lt;strong&gt;Inspector&lt;/strong&gt; tab in the Firefox &lt;strong&gt;DevTools&lt;/strong&gt;, the &lt;strong&gt;Rules&lt;/strong&gt; panel now includes declarations in &lt;strong&gt;‘@layer’ rules&lt;/strong&gt; (@arabson99, #43912).&lt;/p&gt;
+&lt;p&gt;When &lt;strong&gt;logging expressions&lt;/strong&gt; in the &lt;strong&gt;Console&lt;/strong&gt; tab, and when &lt;strong&gt;hovering over symbols&lt;/strong&gt; in the &lt;strong&gt;Debugger&lt;/strong&gt; tab, you can now get more information about the contents of functions, arrays, objects, and other values (@atbrakhi, @eerii, #44172, #44173, #44022, #44233, #44196, #44181, #44064, #44023, #44164, #44369, #44262).&lt;/p&gt;
+&lt;p&gt;When using the &lt;strong&gt;Debugger&lt;/strong&gt; tab, you can now use the &lt;strong&gt;Scopes&lt;/strong&gt; panel to inspect local and global variables (@eerii, @atbrakhi, #43792, #43791), you can now debug &lt;strong&gt;web worker&lt;/strong&gt; scripts (@atbrakhi, #43981), and we’ve started implementing &lt;strong&gt;blackboxing&lt;/strong&gt;, aka the &lt;strong&gt;Ignore source&lt;/strong&gt; button (@freyacodes, #44142).&lt;/p&gt;
+&lt;p&gt;We’ve also landed some initial support for the &lt;strong&gt;Style Editor&lt;/strong&gt; tab (@rovertrack, #44517, #44462).&lt;/p&gt;
+&lt;p&gt;We’re working towards re-enabling our automated DevTools tests in CI, which should make the feature more reliable (@freyacodes, #44577), and we’ve landed a small build reproducibility fix too (@jschwe, #44459).&lt;/p&gt;
 &lt;h2 id=&quot;embedding-api&quot; tabindex=&quot;-1&quot;&gt;Embedding API &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#embedding-api&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -170,7 +182,7 @@ But when DOM objects are being destroyed, those references can become invalid fo
 This can be unsound if those references are accessed, which is a very easy mistake to make if the type has an &lt;code&gt;impl Drop&lt;/code&gt;.
 To help prevent that class of bug, we’re reworking our DOM types so that none of them have &lt;code&gt;#[dom_struct]&lt;/code&gt; and &lt;code&gt;impl Drop&lt;/code&gt; at the same time (@willypuzzle, #44119, #44501, #44513).&lt;/p&gt;
 &lt;p&gt;We’ve continued our long-running effort to &lt;strong&gt;use the Rust type system&lt;/strong&gt; to make certain kinds of dynamic borrow failures impossible (@sagudev, @TimvdLippe, @Narfinger, @elomscansio, @Gae24, @rovertrack, @yezhizhen, @nodelpit, #43174, #43524, #43928, #43943, #43942, #43944, #43946, #43952, #43975, #44018, #44175, #44241, #44368, #44406, #44441, #44422, #44475, #44478, #44484, #44476, #44490, #44477, #44494, #44497, #44498, #44495, #44505, #44506, #44507, #44508, #44509, #44510, #44512, #44482, #44527, #44528, #44531, #44534, #44542, #44533, #44543, #44553, #44547, #44563, #44562, #44565, #44558, #44583, #44606, #44605, #44608, #44602, #44584, #44620, #44590, #44254, #44628, #44629, #44638, #44626).&lt;/p&gt;
-&lt;p&gt;Thanks to a wide range of people, we’ve also landed a bunch of cleanups and refactors (@delan, @alice, @Skgland, @atbrakhi, @eerii, @sabbCodes, @jdm, @thebabalola, @CynthiaOketch, @kkoyung, @TimvdLippe, @rovertrack, @webbeef, @arabson99, @yezhizhen, @simonwuelker, @mrobinson, @nicoburns, @longvatrong111, @niyabits, @treetmitterglad, @foresterre, @mukilan, @elomscansio, @TG199, #43772, #44006, #43860, #44121, #44160, #43884, #44154, #44569, #43939, #44003, #44110, #44122, #43824, #44635, #44103, #43978, #44092, #44114, #44277, #44454, #44274, #44237, #44232, #44167, #44214, #43820, #43825, #43810, #43838, #43841, #43847, #43875, #43876, #43889, #43893, #43896, #43881, #43906, #43913, #43908, #43917, #43910, #43921, #43924, #43925, #43907, #43923, #43916, #43909, #43911, #43957, #43969, #43967, #43915, #43954, #43963, #43959, #43955, #44067, #44068, #44071, #44084, #44265, #44115).&lt;/p&gt;
+&lt;p&gt;Thanks to a wide range of people, we’ve also landed a bunch of cleanups and refactors (@delan, @alice, @Skgland, @atbrakhi, @eerii, @sabbCodes, @jdm, @thebabalola, @CynthiaOketch, @kkoyung, @TimvdLippe, @rovertrack, @webbeef, @arabson99, @yezhizhen, @simonwuelker, @mrobinson, @nicoburns, @longvatrong111, @niyabits, @treetmitterglad, @foresterre, @mukilan, @elomscansio, @freyacodes, @TG199, #43772, #44006, #43860, #44121, #44160, #43884, #44154, #44569, #43939, #44003, #44110, #44122, #43824, #44635, #44103, #43978, #44092, #44114, #44277, #44454, #44274, #44237, #44232, #44167, #44214, #43820, #43825, #43810, #43838, #43841, #43847, #43875, #43876, #43889, #43893, #43896, #43881, #43906, #43913, #43908, #43917, #43910, #43921, #43924, #43925, #43907, #43923, #43916, #43909, #43911, #43957, #43969, #43967, #43915, #43954, #43963, #43959, #43955, #44067, #44068, #44071, #44084, #44265, #44115, #44358).&lt;/p&gt;
 &lt;h2 id=&quot;donations&quot; tabindex=&quot;-1&quot;&gt;Donations &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#donations&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
