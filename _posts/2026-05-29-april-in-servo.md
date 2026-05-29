@@ -42,6 +42,8 @@ This is another big update, so here’s an outline:
 
 - [**servoshell**](#servoshell)
 
+- [**For developers**](#for-developers)
+
 - [**Embedding API**](#embedding-api)
 
 - [**More on the web platform**](#more-on-the-web-platform)
@@ -81,6 +83,18 @@ servoshell for Android now has a **revamped browser UI**, including a new **hist
 You can now close tabs on OpenHarmony too (@Narfinger, #42713).
 
 As for servoshell on desktop platforms, we’ve fixed some focus- and IME-related bugs (@mrobinson, #43872, #43932), and on Windows, we now install a normal shortcut without the strange behaviour of an “advertised” shortcut (@yezhizhen, #44223).
+
+## For developers
+
+When using the **Inspector** tab in the Firefox **DevTools**, the **Rules** panel now includes declarations in **‘@layer’ rules** (@arabson99, #43912).
+
+When **logging expressions** in the **Console** tab, and when **hovering over symbols** in the **Debugger** tab, you can now get more information about the contents of functions, arrays, objects, and other values (@atbrakhi, @eerii, #44172, #44173, #44022, #44233, #44196, #44181, #44064, #44023, #44164, #44369, #44262).
+
+When using the **Debugger** tab, you can now use the **Scopes** panel to inspect local and global variables (@eerii, @atbrakhi, #43792, #43791), you can now debug **web worker** scripts (@atbrakhi, #43981), and we’ve started implementing **blackboxing**, aka the **Ignore source** button (@freyacodes, #44142).
+
+We’ve also landed some initial support for the **Style Editor** tab (@rovertrack, #44517, #44462).
+
+We’re working towards re-enabling our automated DevTools tests in CI, which should make the feature more reliable (@freyacodes, #44577), and we’ve landed a small build reproducibility fix too (@jschwe, #44459).
 
 ## Embedding API
 
@@ -181,7 +195,7 @@ To help prevent that class of bug, we’re reworking our DOM types so that none 
 
 We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@sagudev, @TimvdLippe, @Narfinger, @elomscansio, @Gae24, @rovertrack, @yezhizhen, @nodelpit, #43174, #43524, #43928, #43943, #43942, #43944, #43946, #43952, #43975, #44018, #44175, #44241, #44368, #44406, #44441, #44422, #44475, #44478, #44484, #44476, #44490, #44477, #44494, #44497, #44498, #44495, #44505, #44506, #44507, #44508, #44509, #44510, #44512, #44482, #44527, #44528, #44531, #44534, #44542, #44533, #44543, #44553, #44547, #44563, #44562, #44565, #44558, #44583, #44606, #44605, #44608, #44602, #44584, #44620, #44590, #44254, #44628, #44629, #44638, #44626).
 
-Thanks to a wide range of people, we’ve also landed a bunch of cleanups and refactors (@delan, @alice, @Skgland, @atbrakhi, @eerii, @sabbCodes, @jdm, @thebabalola, @CynthiaOketch, @kkoyung, @TimvdLippe, @rovertrack, @webbeef, @arabson99, @yezhizhen, @simonwuelker, @mrobinson, @nicoburns, @longvatrong111, @niyabits, @treetmitterglad, @foresterre, @mukilan, @elomscansio, @TG199, #43772, #44006, #43860, #44121, #44160, #43884, #44154, #44569, #43939, #44003, #44110, #44122, #43824, #44635, #44103, #43978, #44092, #44114, #44277, #44454, #44274, #44237, #44232, #44167, #44214, #43820, #43825, #43810, #43838, #43841, #43847, #43875, #43876, #43889, #43893, #43896, #43881, #43906, #43913, #43908, #43917, #43910, #43921, #43924, #43925, #43907, #43923, #43916, #43909, #43911, #43957, #43969, #43967, #43915, #43954, #43963, #43959, #43955, #44067, #44068, #44071, #44084, #44265, #44115).
+Thanks to a wide range of people, we’ve also landed a bunch of cleanups and refactors (@delan, @alice, @Skgland, @atbrakhi, @eerii, @sabbCodes, @jdm, @thebabalola, @CynthiaOketch, @kkoyung, @TimvdLippe, @rovertrack, @webbeef, @arabson99, @yezhizhen, @simonwuelker, @mrobinson, @nicoburns, @longvatrong111, @niyabits, @treetmitterglad, @foresterre, @mukilan, @elomscansio, @freyacodes, @TG199, #43772, #44006, #43860, #44121, #44160, #43884, #44154, #44569, #43939, #44003, #44110, #44122, #43824, #44635, #44103, #43978, #44092, #44114, #44277, #44454, #44274, #44237, #44232, #44167, #44214, #43820, #43825, #43810, #43838, #43841, #43847, #43875, #43876, #43889, #43893, #43896, #43881, #43906, #43913, #43908, #43917, #43910, #43921, #43924, #43925, #43907, #43923, #43916, #43909, #43911, #43957, #43969, #43967, #43915, #43954, #43963, #43959, #43955, #44067, #44068, #44071, #44084, #44265, #44115, #44358).
 
 ## Donations
 
