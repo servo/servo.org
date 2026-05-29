@@ -86,7 +86,7 @@ We’ve also fixed a crash when reloading pages with accessibility enabled (@ali
 &lt;h2 id=&quot;servoshell&quot; tabindex=&quot;-1&quot;&gt;servoshell &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#servoshell&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;servoshell for Android now has a &lt;strong&gt;revamped browser UI&lt;/strong&gt;, including a new &lt;strong&gt;history view&lt;/strong&gt; (@espy, #43795), and we’ve fixed the black screen bug when closing settings or switching back from another app (@yezhizhen, #44327).
+&lt;p&gt;servoshell for Android now has a &lt;strong&gt;revamped browser UI&lt;/strong&gt;, including a new &lt;strong&gt;history view&lt;/strong&gt; (@espy, #43795), the &lt;strong&gt;apk is 30% smaller&lt;/strong&gt; (@jschwe, #44278, #44182), and we’ve fixed the black screen bug when closing settings or switching back from another app (@yezhizhen, #44327).
 You can now close tabs on OpenHarmony too (@Narfinger, #42713).&lt;/p&gt;
 &lt;p&gt;As for servoshell on desktop platforms, we’ve fixed some focus- and IME-related bugs (@mrobinson, #43872, #43932), and on Windows, we now install a normal shortcut without the strange behaviour of an “advertised” shortcut (@yezhizhen, #44223).&lt;/p&gt;
 &lt;h2 id=&quot;for-developers&quot; tabindex=&quot;-1&quot;&gt;For developers &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#for-developers&quot;&gt;
@@ -97,6 +97,16 @@ You can now close tabs on OpenHarmony too (@Narfinger, #42713).&lt;/p&gt;
 &lt;p&gt;When using the &lt;strong&gt;Debugger&lt;/strong&gt; tab, you can now use the &lt;strong&gt;Scopes&lt;/strong&gt; panel to inspect local and global variables (@eerii, @atbrakhi, #43792, #43791), you can now debug &lt;strong&gt;web worker&lt;/strong&gt; scripts (@atbrakhi, #43981), and we’ve started implementing &lt;strong&gt;blackboxing&lt;/strong&gt;, aka the &lt;strong&gt;Ignore source&lt;/strong&gt; button (@freyacodes, #44142).&lt;/p&gt;
 &lt;p&gt;We’ve also landed some initial support for the &lt;strong&gt;Style Editor&lt;/strong&gt; tab (@rovertrack, #44517, #44462).&lt;/p&gt;
 &lt;p&gt;We’re working towards re-enabling our automated DevTools tests in CI, which should make the feature more reliable (@freyacodes, #44577), and we’ve landed a small build reproducibility fix too (@jschwe, #44459).&lt;/p&gt;
+&lt;p&gt;For developers of Servo itself, please note that the &lt;strong&gt;Cargo ‘release’ profile&lt;/strong&gt; is no longer &lt;code&gt;#[cfg(debug­_assertions)]&lt;/code&gt; (@jschwe, @mrobinson, #44177).
+If you’ve been using ‘release’ as a “faster ‘debug’ with assertions” build locally, consider switching to ‘checked-release’ or ‘medium’.&lt;/p&gt;
+&lt;p&gt;The pull request template has been updated (@mrobinson, #44135).
+&lt;strong&gt;‘Testing’&lt;/strong&gt; and &lt;strong&gt;‘Fixes’&lt;/strong&gt; should go at the &lt;em&gt;bottom&lt;/em&gt; of the PR description, and &lt;strong&gt;‘Testing’&lt;/strong&gt; is about automated tests, not how you tested the PR locally.&lt;/p&gt;
+&lt;p&gt;We’ve made more progress on the new &lt;a href=&quot;https://containers.dev/&quot;&gt;&lt;strong&gt;dev container&lt;/strong&gt;&lt;/a&gt;, which will provide an alternative to &lt;a href=&quot;https://book.servo.org/building/building.html&quot;&gt;our usual procedures&lt;/a&gt; for setting up a Servo build environment (@jschwe, @sagudev, #44126, #44111, #44162, #44641, #44109).
+Keep an eye out for that &lt;a href=&quot;https://book.servo.org/building/building.html&quot;&gt;in the book&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;In the meantime, did you know that you can use &lt;a href=&quot;https://lix.systems/&quot;&gt;&lt;strong&gt;Lix&lt;/strong&gt;&lt;/a&gt; or &lt;a href=&quot;https://nixos.org/manual/nix/stable&quot;&gt;&lt;strong&gt;Nix&lt;/strong&gt;&lt;/a&gt; to build Servo on Linux with a lot less hassle, &lt;em&gt;even if&lt;/em&gt; you’re not using NixOS?
+For now at least, head to the &lt;a href=&quot;https://book.servo.org/building/nixos.html&quot;&gt;NixOS page&lt;/a&gt; in the book to learn more.&lt;/p&gt;
+&lt;p&gt;We’ve fixed building Servo with the &lt;strong&gt;‘jitspew’ feature&lt;/strong&gt; in mozjs, allowing you to set &lt;strong&gt;IONFLAGS&lt;/strong&gt; to enable JIT logging (@simonwuelker, #44010).
+We’ve also fixed build issues on Windows and FreeBSD (@zhangxichang, @mrobinson, #44264, #44591).&lt;/p&gt;
 &lt;h2 id=&quot;embedding-api&quot; tabindex=&quot;-1&quot;&gt;Embedding API &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#embedding-api&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;

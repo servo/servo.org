@@ -322,7 +322,7 @@ We’ve also fixed a crash when reloading pages with accessibility enabled (@ali
 <h2 id="servoshell" tabindex="-1">servoshell <a class="header-anchor" href="#servoshell">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>servoshell for Android now has a <strong>revamped browser UI</strong>, including a new <strong>history view</strong> (@espy, #43795), and we’ve fixed the black screen bug when closing settings or switching back from another app (@yezhizhen, #44327).
+<p>servoshell for Android now has a <strong>revamped browser UI</strong>, including a new <strong>history view</strong> (@espy, #43795), the <strong>apk is 30% smaller</strong> (@jschwe, #44278, #44182), and we’ve fixed the black screen bug when closing settings or switching back from another app (@yezhizhen, #44327).
 You can now close tabs on OpenHarmony too (@Narfinger, #42713).</p>
 <p>As for servoshell on desktop platforms, we’ve fixed some focus- and IME-related bugs (@mrobinson, #43872, #43932), and on Windows, we now install a normal shortcut without the strange behaviour of an “advertised” shortcut (@yezhizhen, #44223).</p>
 <h2 id="for-developers" tabindex="-1">For developers <a class="header-anchor" href="#for-developers">
@@ -333,6 +333,16 @@ You can now close tabs on OpenHarmony too (@Narfinger, #42713).</p>
 <p>When using the <strong>Debugger</strong> tab, you can now use the <strong>Scopes</strong> panel to inspect local and global variables (@eerii, @atbrakhi, #43792, #43791), you can now debug <strong>web worker</strong> scripts (@atbrakhi, #43981), and we’ve started implementing <strong>blackboxing</strong>, aka the <strong>Ignore source</strong> button (@freyacodes, #44142).</p>
 <p>We’ve also landed some initial support for the <strong>Style Editor</strong> tab (@rovertrack, #44517, #44462).</p>
 <p>We’re working towards re-enabling our automated DevTools tests in CI, which should make the feature more reliable (@freyacodes, #44577), and we’ve landed a small build reproducibility fix too (@jschwe, #44459).</p>
+<p>For developers of Servo itself, please note that the <strong>Cargo ‘release’ profile</strong> is no longer <code>#[cfg(debug­_assertions)]</code> (@jschwe, @mrobinson, #44177).
+If you’ve been using ‘release’ as a “faster ‘debug’ with assertions” build locally, consider switching to ‘checked-release’ or ‘medium’.</p>
+<p>The pull request template has been updated (@mrobinson, #44135).
+<strong>‘Testing’</strong> and <strong>‘Fixes’</strong> should go at the <em>bottom</em> of the PR description, and <strong>‘Testing’</strong> is about automated tests, not how you tested the PR locally.</p>
+<p>We’ve made more progress on the new <a href="https://containers.dev"><strong>dev container</strong></a>, which will provide an alternative to <a href="https://book.servo.org/building/building.html">our usual procedures</a> for setting up a Servo build environment (@jschwe, @sagudev, #44126, #44111, #44162, #44641, #44109).
+Keep an eye out for that <a href="https://book.servo.org/building/building.html">in the book</a>!</p>
+<p>In the meantime, did you know that you can use <a href="https://lix.systems"><strong>Lix</strong></a> or <a href="https://nixos.org/manual/nix/stable"><strong>Nix</strong></a> to build Servo on Linux with a lot less hassle, <em>even if</em> you’re not using NixOS?
+For now at least, head to the <a href="https://book.servo.org/building/nixos.html">NixOS page</a> in the book to learn more.</p>
+<p>We’ve fixed building Servo with the <strong>‘jitspew’ feature</strong> in mozjs, allowing you to set <strong>IONFLAGS</strong> to enable JIT logging (@simonwuelker, #44010).
+We’ve also fixed build issues on Windows and FreeBSD (@zhangxichang, @mrobinson, #44264, #44591).</p>
 <h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
