@@ -79,7 +79,7 @@ We’re working on the **WakeLock API** too, under `--pref dom­_wakelock­_enab
 
 ## servoshell
 
-servoshell for Android now has a **revamped browser UI**, including a new **history view** (@espy, #43795), and we’ve fixed the black screen bug when closing settings or switching back from another app (@yezhizhen, #44327).
+servoshell for Android now has a **revamped browser UI**, including a new **history view** (@espy, #43795), the **apk is 30% smaller** (@jschwe, #44278, #44182), and we’ve fixed the black screen bug when closing settings or switching back from another app (@yezhizhen, #44327).
 You can now close tabs on OpenHarmony too (@Narfinger, #42713).
 
 As for servoshell on desktop platforms, we’ve fixed some focus- and IME-related bugs (@mrobinson, #43872, #43932), and on Windows, we now install a normal shortcut without the strange behaviour of an “advertised” shortcut (@yezhizhen, #44223).
@@ -95,6 +95,21 @@ When using the **Debugger** tab, you can now use the **Scopes** panel to inspect
 We’ve also landed some initial support for the **Style Editor** tab (@rovertrack, #44517, #44462).
 
 We’re working towards re-enabling our automated DevTools tests in CI, which should make the feature more reliable (@freyacodes, #44577), and we’ve landed a small build reproducibility fix too (@jschwe, #44459).
+
+For developers of Servo itself, please note that the **Cargo ‘release’ profile** is no longer `#[cfg(debug­_assertions)]` (@jschwe, @mrobinson, #44177).
+If you’ve been using ‘release’ as a “faster ‘debug’ with assertions” build locally, consider switching to ‘checked-release’ or ‘medium’.
+
+The pull request template has been updated (@mrobinson, #44135).
+**‘Testing’** and **‘Fixes’** should go at the *bottom* of the PR description, and **‘Testing’** is about automated tests, not how you tested the PR locally.
+
+We’ve made more progress on the new [**dev container**](https://containers.dev), which will provide an alternative to [our usual procedures](https://book.servo.org/building/building.html) for setting up a Servo build environment (@jschwe, @sagudev, #44126, #44111, #44162, #44641, #44109).
+Keep an eye out for that [in the book](https://book.servo.org/building/building.html)!
+
+In the meantime, did you know that you can use [**Lix**](https://lix.systems) or [**Nix**](https://nixos.org/manual/nix/stable) to build Servo on Linux with a lot less hassle, *even if* you’re not using NixOS?
+For now at least, head to the [NixOS page](https://book.servo.org/building/nixos.html) in the book to learn more.
+
+We’ve fixed building Servo with the **‘jitspew’ feature** in mozjs, allowing you to set **IONFLAGS** to enable JIT logging (@simonwuelker, #44010).
+We’ve also fixed build issues on Windows and FreeBSD (@zhangxichang, @mrobinson, #44264, #44591).
 
 ## Embedding API
 
