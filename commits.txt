@@ -1277,8 +1277,8 @@
     # ```
     #         PASS [   0.011s] style_tests str::test_str_join_empty
     # ```
-+https://github.com/servo/servo/pull/28583	(@yvt, @jdm, #28583)	Implement the IDL security check (#28583)
-    security; we now restrict certain cross-origin DOM accesses
+.https://github.com/servo/servo/pull/28583	(@yvt, @jdm, #28583)	Implement the IDL security check (#28583)
+    security; we now restrict certain cross-origin DOM accesses. which ones were incorrect and which ones have been fixed are unclear, asked in comments
     ^ commit c6bb3cc363b3e85b06e7d46c88a69c51beec983c
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # <https://heycam.github.io/webidl/#es-operations>
@@ -2470,7 +2470,7 @@
     # Fixes: #43326
     # Fixes: #43973
     # 
-+https://github.com/servo/servo/pull/44002	(@Taym95, #44002)	Make localStorage and sessionStorage throw on opaque origins (#44002)
+.https://github.com/servo/servo/pull/44002	(@Taym95, #44002)	Make localStorage and sessionStorage throw on opaque origins (#44002)
     security; fix bug where localStorage and sessionStorage could be used (and shared) by documents in opaque origins (e.g. <iframe sandbox> without sandbox=allow-same-origin)
     ^ commit ac4df79bd6591fbd5b48dc9e725238ab768c27d3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -3420,7 +3420,7 @@
     # Testing: Tested by manually [triggering](https://github.com/servo/servo/actions/runs/24119955943/job/70371705395) a release for `0.1.0-rc2`, which got successfully published to crates.io. This was also a resume-after-cancellation test, since the first ~30 crates of the release had already been published via `cargo publish --workspace`, before running into the issue that `cargo publish --workspace` can't resume after intermediate failures. The last commit "Fix buffering issue in CI" is untested, and was added after observing the stdout log messages only appearing at the end of the script. That commit is trivial though, and probably does not justify using crates.io resources for another test release.
     # 
     # 
-+https://github.com/servo/servo/pull/44088	(@Taym95, #44088)	IndexedDB: Implement storage-key checks for IDBFactory entry points (#44088)
+.https://github.com/servo/servo/pull/44088	(@Taym95, #44088)	IndexedDB: Implement storage-key checks for IDBFactory entry points (#44088)
     security; fix bug where indexeddb was usable in sandboxed iframes and data: url dedicated workers
     ^ commit daf15e8e07b328e5dbe6f0dc923676619df73543
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -3437,8 +3437,8 @@
     # Per the WebGL spec, this should generate `GL_INVALID_OPERATION` instead of panicking. So this PR replaces the unwrap with proper error handling. And also includes a WPT crash test that reproduces the original panic.
     # 
     # Fixes #43527
-+https://github.com/servo/servo/pull/44038	(@niyabits, #44038)	localstorage: test storage is not shared across iframes with opaque origins (#44038)
-    security; fix bug where localStorage in ‘about:srcdoc’ is shared with other documents in opaque origins
+.https://github.com/servo/servo/pull/44038	(@niyabits, #44038)	localstorage: test storage is not shared across iframes with opaque origins (#44038)
+    security; part of #43988
     ^ commit c3d4c014c7d33ed0d9eea95ebc7dbaef30746dc9
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Adds a WPT test to make sure we do not share the storage thread between any document that has an opaque URL.
@@ -3550,8 +3550,8 @@
     # 
     # Testing: Just removing dead code.
     # 
-+https://github.com/servo/servo/pull/43988	(@niyabits, #43988)	storage: fix incorrect data sharing by passing document origin to storage thread (#43988)
-    security; fix bug where localStorage in ‘about:srcdoc’ is shared with other documents in opaque origins
+.https://github.com/servo/servo/pull/43988	(@niyabits, #43988)	storage: fix incorrect data sharing by passing document origin to storage thread (#43988)
+    security; fix bug where localStorage in ‘about:srcdoc’ is shared with other documents in opaque origins. this doesn’t really make sense to me, asked in #44001
     ^ commit 9fff951a5e3bbd7613662a4de25db59641ea257d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Changes all the uses of `ServoUrl` to `ImmutableOrigin` in `WebStorageThreadMsg`
@@ -5234,7 +5234,7 @@
     # to start passing.
     # Fixes: #40731.
     # 
-+https://github.com/servo/servo/pull/44270	(@simartin, #44270)	webgl: check TexImage3D's input data length (#44270)
+.https://github.com/servo/servo/pull/44270	(@simartin, #44270)	webgl: check TexImage3D's input data length (#44270)
     security crash dom; fix oob memory read and crash in texImage3D() on WebGL2RenderingContext
     ^ commit 5634eab8cc882328700318943a521128bdcaa7b7
     # tex-3d-size-limit.html currently crashes because we don't check that the input data is large enough, and happily access memory that's not ours if it's not.
@@ -5751,7 +5751,7 @@
     # Part of #25005
     # 
     # Testing: WPT
-+https://github.com/servo/servo/pull/44152	(@officialasishkumar, #44152)	net: Keep IP cookie buckets separate (#44152)
+.https://github.com/servo/servo/pull/44152	(@officialasishkumar, #44152)	net: Keep IP cookie buckets separate (#44152)
     security; fix bug where pages in some IP address origins can evict cookies from other IP address origins
     ^ commit 678f9d7a47778d2a02ca5e1d2ee4b3cd2b3c2bc8
     # Use the full IP address as the cookie storage bucket key instead of passing IP hosts through the public suffix registrable-domain helper. This prevents unrelated IP hosts that share suffix-like address segments from sharing a per-host eviction bucket.
@@ -5759,7 +5759,7 @@
     # Testing: Added `test_ip_cookie_bucket_collision_eviction`; ran `cargo test -p servo-net --test main test_ip_cookie_bucket_collision_eviction --locked`.
     # Fixes: #44097
 >>> 2026-04-19T23:41:46Z
-+https://github.com/servo/servo/pull/44341	(@jdm, #44341)	net: Update test cookie expiration dates to one century in the future. (#44341)
+.https://github.com/servo/servo/pull/44341	(@jdm, #44341)	net: Update test cookie expiration dates to one century in the future. (#44341)
     test; fix test with hardcoded date, 2016+10 years :D
     ^ commit 19354a5b371cb3ceaecc6035cebd264c498d2c10
     # These dates were chosen 10 years ago, which I'm sure felt like a reasonably far-future date for a very young web engine. Surprise! We're still here, so we can be more bold this time.
@@ -9268,7 +9268,7 @@
     # Testing: adding a new crashtest
     # Fixes: https://github.com/servo/servo/issues/44599
     # 
-+https://github.com/servo/servo/pull/44597	(@kkoyung, #44597)	script: Guarantee zeroizing of secret in `Vec<u8>` stored in `CryptoKey` (#44597)
+.https://github.com/servo/servo/pull/44597	(@kkoyung, #44597)	script: Guarantee zeroizing of secret in `Vec<u8>` stored in `CryptoKey` (#44597)
     security; fix bug in CryptoKey where we fail to zero buffers containing key material after use
     ^ commit 81913b9a03757dec9c4be76e3c7c2e34289931ee
     # Replace `Vec<u8>` with `Zeroizing<Vec<u8>>` for secret variants in the enum `dom::cryptokey::Handle`.

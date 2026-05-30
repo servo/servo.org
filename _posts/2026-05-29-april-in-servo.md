@@ -7,6 +7,11 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
+April 2026 was a big milestone for Servo, with some automated tests failing because they had hard-coded cookie expiry dates set to April 2016 plus ten years.
+Surprise!
+We’re still here.
+Here’s to the next 100 years of Servo (@jdm, #44341).
+
 For security fixes, see [**§ Security**](#security).
 
 Navigating to a **JSON file** as the top-level document now renders the JSON with an **interactive pretty-printer** (@webbeef, @TimvdLippe, #43702).
@@ -56,7 +61,22 @@ This is another big update, so here’s an outline:
 
 ## Security
 
-We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891).
+**CryptoKey** now zeroes buffers containing key material after use (@kkoyung, #44597).
+
+With only a few exceptions, you can only access DOM APIs in another document if that document is in the **same origin**.
+But if that document is in the same *site* with a different port number, Servo currently allows these accesses even though it shouldn’t.
+We’ve fixed some (but not all) of these incorrect accesses, specifically those that involve binding a Window or Location method in this document with a `this` from the other document (@yvt, @jdm, #28583).
+
+We’ve fixed a bug where **localStorage** and **sessionStorage** were usable in **sandboxed &lt;iframe>** and shared with every other sandboxed &lt;iframe>, rather than throwing SecurityError (@Taym95, #44002).
+
+We’ve fixed a bug where **localStorage** and **sessionStorage** were shared between all **&lt;iframe srcdoc> documents**, rather than isolated using the origin of the containing document (@niyabits, #43988, #44038).
+
+We’ve fixed a bug where **IndexedDB** was usable in **sandboxed &lt;iframe>** and **data: URL web workers** (@Taym95, #44088).
+
+We’ve fixed a bug where pages in some **IP address origins** can evict cookies from other IP address origins (@officialasishkumar, #44152).
+Only evicting cookies was possible, not reading or writing them.
+
+We’ve fixed an **out-of-bounds memory read** in **texImage3D()** on **WebGL2RenderingContext** (@simartin, #44270), and fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891).
 
 ## Work in progress
 
