@@ -61,7 +61,7 @@ We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, 
 As always, embedders can enable it with [`Preferences`](https://doc.servo.org/servo/struct.Preferences.html)::[`dom­_indexeddb­_enabled`](https://doc.servo.org/servo/struct.Preferences.html#structfield.dom_indexeddb_enabled) (@arihant2math, #44245, #44283).
 
 IndexedDB now uses Servo’s new **“client storage”** system, which is based on the [Storage Standard](https://storage.spec.whatwg.org) and will allow us to have a unified on-disk format and quota management for all web platform features that persistently store data (@gterzian, #44374, #43900).
-We’ve also landed improvements to IDBDatabase, IDBObjectStore, IDBCursor, IDBKeyRange, IDBRequest, and to the handling of transactions, keys, values, and exceptions (@Taym95, #44128, #43901, #44009, #43914, #44161, #44183, #44059, #44215, #42998, #43805).
+We’ve also made key range queries more efficient (@arihant2math, #39009), landed improvements to IDBDatabase, IDBObjectStore, IDBCursor, IDBKeyRange, IDBRequest, and to the handling of transactions, keys, values, and exceptions (@Taym95, #44128, #43901, #44009, #43914, #44161, #44183, #44059, #44215, #42998, #43805).
 
 We’ve made more progress on the **IntersectionObserver API**, under `--pref dom­_intersection­_observer­_enabled` (@stevennovaryo, @jdm, #42204).
 
@@ -72,7 +72,7 @@ All of the features above are enabled in servoshell’s experimental mode.
 
 Servo can now build a very basic **accessibility tree** for web contents, under `--pref accessibility­_enabled` (@alice, @delan, @lukewarlow, #42338, #43558, #44437, #44438).
 This includes text runs, plus nine other non-interactive accessibility roles (@alice, @delan, #44255).
-We’ve also fixed a crash when reloading pages with accessibility enabled (@alice, #44473).
+We’ve also fixed a crash when reloading pages with accessibility enabled (@alice, #44473), and made accessibility tree updates more efficient (@alice, #44208).
 
 We’ve started implementing the **Sanitizer API**, under `--pref dom­_sanitizer­_enabled` (@kkoyung, #44198, #44290, #44335, #44421, #44452, #44481, #44585, #44594).
 
@@ -110,6 +110,7 @@ Keep an eye out for that [in the book](https://book.servo.org/building/building.
 
 In the meantime, did you know that you can use [**Lix**](https://lix.systems) or [**Nix**](https://nixos.org/manual/nix/stable) to build Servo on Linux with a lot less hassle, *even if* you’re not using NixOS?
 For now at least, head to the [NixOS page](https://book.servo.org/building/nixos.html) in the book to learn more.
+We’ve also fixed a regression that made `--debug-mozjs` and `MOZJS_FROM_SOURCE` builds take much longer to complete on Linux when not using Nix (@jschwe, #44346).
 
 We’ve fixed building Servo with the **‘jitspew’ feature** in mozjs, allowing you to set **IONFLAGS** to enable JIT logging (@simonwuelker, #44010).
 We’ve also fixed build issues on Windows and FreeBSD (@zhangxichang, @mrobinson, #44264, #44591).
@@ -177,9 +178,14 @@ All **keyboard events**, **mouse events**, **wheel events**, and **pointer event
 
 We’ve improved the conformance of **fetch algorithms** (@yezhizhen, #43970, #43798), **focus** and **tab navigation** (@mrobinson, #43842, #44029, #44360, #43859, #44535), **form submission** (@TG199, #43700), **JS modules** (@elomscansio, @Gae24, #43741, #44179, #44042), **page navigation** (@TimvdLippe, #43857), **&lt;svg viewBox>** (@yezhizhen, #44420), **‘font’** (@RichardTjokroutomo, #44061), **‘load’** events (@jdm, @arabson99, #43807, #44046), **fetchLater()** (@TimvdLippe, #43627), **axes** and **buttons** on **Gamepad** (@log101, @rovertrack, #44411, #44357), **copyTexImage2D()** on **WebGLRenderingContext** (@simartin, @mrobinson, #43608), **texImage3D()** on **WebGL2RenderingContext** (@simartin, #44367), **environmentBlendMode** on **XRSession** (@msub2, #44155), **mark()** and **measure()** on **Performance** (@shubhamg13, @simonwuelker, #44471, #44199, #43990, #43753), and **PerformanceResourceTiming** (@shubhamg13, #44228).
 
-We’ve fixed bugs related to **console logging** (@sabbCodes, #44243), **‘box-shadow’** (@yezhizhen, #44474, #44457), **‘display: contents’** (@Loirooriol, #44551), **‘display: inline-flex’** (@SimonSapin, #44281), **‘display: table-cell’** (@Loirooriol, #44550), **‘display: table-row-group’** (@Veercodeprog, #43674), **‘overflow-x: clip’** and **‘overflow-y: clip’** (@Messi002, #43620), **‘position: absolute’** on grid items (@nicoburns, #44324), **‘word-spacing: &lt;percentage>’** (@sabbCodes, #44031), **removeChild()** on **Document** (@rovertrack, #44133), and **URL.revokeObjectURL()** (@simonwuelker, @jdm, #43746, #43977, #44035).
+We’ve fixed bugs related to **console logging** (@sabbCodes, #44243), **‘animation’** (@mrobinson, #44299), **‘box-shadow’** (@yezhizhen, #44474, #44457), **‘display: contents’** (@Loirooriol, @mrobinson, #44551, #44299), **‘display: inline-flex’** (@SimonSapin, #44281), **‘display: table-cell’** (@Loirooriol, #44550), **‘display: table-row-group’** (@Veercodeprog, #43674), **‘overflow-x: clip’** and **‘overflow-y: clip’** (@Messi002, #43620), **‘position: absolute’** on grid items (@nicoburns, #44324), **‘word-spacing: &lt;percentage>’** (@sabbCodes, #44031), **removeChild()** on **Document** (@rovertrack, #44133), and **URL.revokeObjectURL()** (@simonwuelker, @jdm, #43746, #43977, #44035).
 
 ## Performance and stability
+
+We’ve fixed some big inefficiencies in Servo.
+**appendChild()** with nested shadow roots is no longer <math><mrow><mi>O</mi><mrow><mo>(</mo><msup><mn>2</mn><mi>n</mi></msup><mo>)</mo></mrow></mrow></math> (@yezhizhen, @webbeef, #44016), and we’ve halved the time it takes to load [the ECMAScript spec](https://262.ecma-international.org/16.0/index.html) by fixing the <math><mrow><mi>O</mi><mrow><mo>(</mo><mtext>whole DOM tree</mtext><mo>)</mo></mrow></mrow></math> processing of **‘id’** and **‘name’ attributes** (@simonwuelker, #44120, #44127, #44117).
+
+Servo makes its **first TLS connection** in each session **30–60 ms faster** (@jschwe, #44242), and we’ve instrumented the Servo and servoshell startup processes to find more opportunities for optimisation (@jschwe, #44443, #44456).
 
 Like most browser engines, Servo is a multi-threaded (and sometimes multi-process) system requiring a great deal of IPC messages to keep everything connected.
 [Two key components](https://book.servo.org/design-documentation/architecture.html) of this system are the **constellation** thread, which manages the engine as a whole, and the **script threads** (or web processes), which render the web pages.
@@ -190,11 +196,14 @@ We’ve reduced the **memory usage** of each **Attr**, **Text**, and **Character
 Our **about:memory** page is more accurate now too, with new tracking of **libc memory allocations** on macOS, improved tracking of libc memory allocations on Linux (@jschwe, #44037), and more accurate tracking of PathBuf and types in `tokio`, `http`, `data_url`, and `urlpattern` (@Narfinger, #43858).
 
 Less memory usage isn’t always better in browser engines though, because there are many kinds of caches and other optimisations we can do to make browsing the web faster, at the expense of increased memory usage.
-[TODO write about those]
+For example, we can greatly speed up **prototype checks** for DOM objects by storing a number in each object that identifies the concrete type, at the expense of making each DOM object 64 bits larger (@webbeef, #44364).
+
+Layout can now **reuse fragments** in later reflows, in many cases that involve block layout or ‘position: absolute’ (@mrobinson, @lukewarlow, @Loirooriol, #42904, #44231).
+We’re also working on **reusing shaping results** in later reflows, and making inline layout more efficient (@mrobinson, #44370, #43974, #44436).
 
 We’ve landed several changes that should reduce the **binary size** of Servo (@rovertrack, @mrobinson, @nicoburns, @Narfinger, #44227, #44221, #44303, #44338, #44428, #44134).
 
-We’ve also reduced clones, allocations, borrow checks, GC rooting steps, and other operations in many parts of Servo (@rovertrack, @Narfinger, @Loirooriol, @yezhizhen, #44008, #44544, #44271, #44279, #43826, #44052).
+We’ve also reduced clones, allocations, borrow checks, GC rooting steps, and other operations in many parts of Servo (@rovertrack, @Narfinger, @Loirooriol, @yezhizhen, @simonwuelker, #44008, #44544, #44271, #44279, #43826, #44052, #44139).
 
 Several crashes have been fixed:
 
