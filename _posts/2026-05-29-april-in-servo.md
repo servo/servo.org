@@ -19,6 +19,9 @@ We’ve shipped several new web platform features:
 - **&lt;template shadowrootslotassignment>** (@simonwuelker, #44246)
 - **&lt;video>** playback on OpenHarmony (@rayguo17, #43208)
 - **‘minimum-scale’** and **‘maximum-scale’** values in **&lt;meta name=viewport>** (@shubhamg13, #40098, #43715)
+- **‘color-mix()’** with **any number of &lt;color> values** (@Loirooriol, #43890)
+- **‘&amp;::before’** and **‘&amp;::after’** in **‘::details-content’** (@Loirooriol, #43878)
+- **‘revert-rule’** (@Loirooriol, #43878)
 - **‘tab-size’** (@mrobinson, @SimonSapin, #44480)
 - **‘text-align: match-parent’** (@TG199, #44073)
 - **new Worker()** with **blob URLs** (@jdm, #44004)
@@ -176,7 +179,7 @@ All **keyboard events**, **mouse events**, **wheel events**, and **pointer event
 
 **Exception messages** have improved in Location, StaticRange, and the HTMLElement family of types (@arihant2math, @MuhammadMouostafa, @treetmitterglad, #44282, #43260, #43882).
 
-We’ve improved the conformance of **fetch algorithms** (@yezhizhen, #43970, #43798), **focus** and **tab navigation** (@mrobinson, #43842, #44029, #44360, #43859, #44535), **form submission** (@TG199, #43700), **JS modules** (@elomscansio, @Gae24, #43741, #44179, #44042), **page navigation** (@TimvdLippe, #43857), **&lt;svg viewBox>** (@yezhizhen, #44420), **‘font’** (@RichardTjokroutomo, #44061), **‘load’** events (@jdm, @arabson99, #43807, #44046), **fetchLater()** (@TimvdLippe, #43627), **axes** and **buttons** on **Gamepad** (@log101, @rovertrack, #44411, #44357), **copyTexImage2D()** on **WebGLRenderingContext** (@simartin, @mrobinson, #43608), **texImage3D()** on **WebGL2RenderingContext** (@simartin, #44367), **environmentBlendMode** on **XRSession** (@msub2, #44155), **mark()** and **measure()** on **Performance** (@shubhamg13, @simonwuelker, #44471, #44199, #43990, #43753), and **PerformanceResourceTiming** (@shubhamg13, #44228).
+We’ve improved the conformance of **fetch algorithms** (@yezhizhen, #43970, #43798), **focus** and **tab navigation** (@mrobinson, #43842, #44029, #44360, #43859, #44535), **form submission** (@TG199, #43700), **JS modules** (@elomscansio, @Gae24, #43741, #44179, #44042), **page navigation** (@TimvdLippe, #43857), **&lt;svg viewBox>** (@yezhizhen, #44420), **‘attr()’** (@Loirooriol, #43878), **‘:focus’** (@mrobinson, #43873), **‘font’** (@RichardTjokroutomo, #44061), **‘@keyframes’** (@simonwuelker, #43461), **‘@property’** (@Loirooriol, #43878), **‘load’** events (@jdm, @arabson99, #43807, #44046), **fetchLater()** (@TimvdLippe, #43627), **axes** and **buttons** on **Gamepad** (@log101, @rovertrack, #44411, #44357), **copyTexImage2D()** on **WebGLRenderingContext** (@simartin, @mrobinson, #43608), **texImage3D()** on **WebGL2RenderingContext** (@simartin, #44367), **environmentBlendMode** on **XRSession** (@msub2, #44155), **mark()** and **measure()** on **Performance** (@shubhamg13, @simonwuelker, #44471, #44199, #43990, #43753), and **PerformanceResourceTiming** (@shubhamg13, #44228).
 
 We’ve fixed bugs related to **console logging** (@sabbCodes, #44243), **‘animation’** (@mrobinson, #44299), **‘box-shadow’** (@yezhizhen, #44474, #44457), **‘display: contents’** (@Loirooriol, @mrobinson, #44551, #44299), **‘display: inline-flex’** (@SimonSapin, #44281), **‘display: table-cell’** (@Loirooriol, #44550), **‘display: table-row-group’** (@Veercodeprog, #43674), **‘overflow-x: clip’** and **‘overflow-y: clip’** (@Messi002, #43620), **‘position: absolute’** on grid items (@nicoburns, #44324), **‘word-spacing: &lt;percentage>’** (@sabbCodes, #44031), **removeChild()** on **Document** (@rovertrack, #44133), and **URL.revokeObjectURL()** (@simonwuelker, @jdm, #43746, #43977, #44035).
 
