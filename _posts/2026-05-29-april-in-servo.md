@@ -15,6 +15,7 @@ Servo’s support for text in **Chinese**, **Japanese**, and **Korean** language
 
 We’ve shipped several new web platform features:
 
+- **&lt;select multiple>** (@lukewarlow, @mrobinson, #43189)
 - **&lt;template shadowrootslotassignment>** (@simonwuelker, #44246)
 - **&lt;video>** playback on OpenHarmony (@rayguo17, #43208)
 - **‘minimum-scale’** and **‘maximum-scale’** values in **&lt;meta name=viewport>** (@shubhamg13, #40098, #43715)
@@ -22,7 +23,7 @@ We’ve shipped several new web platform features:
 - **‘text-align: match-parent’** (@TG199, #44073)
 - **new Worker()** with **blob URLs** (@jdm, #44004)
 - **getContext(`"webgl"`)** on **OffscreenCanvas** (@niyabits, #44159)
-- the **detail** property on **PerformanceMark** and **PerformanceMeasure** (@shubhamg13, #44289)
+- the **detail** property on **PerformanceMark** and **PerformanceMeasure** (@shubhamg13, #44289, #44272)
 
 Plus a bunch of new DOM APIs:
 
@@ -58,7 +59,9 @@ We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, 
 
 **IndexedDB** is now enabled in servoshell’s experimental mode (@arihant2math, #44245).
 As always, embedders can enable it with [`Preferences`](https://doc.servo.org/servo/struct.Preferences.html)::[`dom­_indexeddb­_enabled`](https://doc.servo.org/servo/struct.Preferences.html#structfield.dom_indexeddb_enabled) (@arihant2math, #44245, #44283).
-To that end, we’ve landed improvements to IDBDatabase, IDBObjectStore, IDBCursor, IDBKeyRange, IDBRequest, and to the key handling, exception handling, and transactions (@Taym95, #44128, #43901, #44009, #43914, #44161, #44183, #44059, #44215, #42998).
+
+IndexedDB now uses Servo’s new **“client storage”** system, which is based on the [Storage Standard](https://storage.spec.whatwg.org) and will allow us to have a unified on-disk format and quota management for all web platform features that persistently store data (@gterzian, #44374, #43900).
+We’ve also landed improvements to IDBDatabase, IDBObjectStore, IDBCursor, IDBKeyRange, IDBRequest, and to the handling of transactions, keys, values, and exceptions (@Taym95, #44128, #43901, #44009, #43914, #44161, #44183, #44059, #44215, #42998, #43805).
 
 We’ve made more progress on the **IntersectionObserver API**, under `--pref dom­_intersection­_observer­_enabled` (@stevennovaryo, @jdm, #42204).
 
@@ -154,18 +157,27 @@ We’ve also improved our API docs for [`Opts`](https://doc.servo.org/servo/stru
 
 ## More on the web platform
 
+**<kbd>Tab</kbd> navigation** now works across **&lt;iframe>** boundaries (@mrobinson, #44397), and **<kbd>Ctrl</kbd>+<kbd>Backspace</kbd>** (or **<kbd>⌥</kbd><kbd>⌫</kbd>**) now **deletes a whole word** in input fields (@mrobinson, #43940).
+
 **Tab characters** are now rendered correctly in **&lt;pre>** (and other elements with **‘white-space: pre’**), with proper tab stops (@mrobinson, @SimonSapin, #44480).
+**Spaces** are now rendered correctly in **2D &lt;canvas>**, instead of twice as wide as they should be (@mrobinson, #43899).
 
 **&lt;a href>** now correctly resolves the URL with the page encoding (@sabbCodes, #43822).
 
 We’ve improved the default appearance of **&lt;input type=file>** (@sabbCodes, #44496) and **&lt;textarea placeholder>** (@mrobinson, #43770).
 
-All **keyboard events**, **mouse events**, **wheel events**, and **pointer events**, other than **‘keydown’**, **‘pointerenter’**, and **‘pointerleave’**, now **bubble out of shadow roots** (@simonwuelker, #43799).
+All **keyboard events**, **mouse events**, **wheel events**, and **pointer events**, other than **‘pointerenter’** and **‘pointerleave’**, now **bubble out of shadow roots** (@simonwuelker, @webbeef, #43799, #44094).
 **‘error’ events** on **Window** now report the correct **filename** (**source** in **onerror**) and **lineno** (@Gae24, #43632).
 
-We’ve improved the conformance of **fetch algorithms** (@yezhizhen, #43970, #43798), **focus** and **tab navigation** (@mrobinson, #43842, #44029, #44360, #43859, #44535), **form submission** (@TG199, #43700), **JS modules** (@elomscansio, @Gae24, #43741, #44179, #44042), **page navigation** (@TimvdLippe, #43857), **&lt;svg viewBox>** (@yezhizhen, #44420), **‘font’** (@RichardTjokroutomo, #44061), **‘load’** events (@jdm, @arabson99, #43807, #44046), **axes** and **buttons** on **Gamepad** (@log101, @rovertrack, #44411, #44357), **copyTexImage2D()** on **WebGLRenderingContext** (@simartin, @mrobinson, #43608), **texImage3D()** on **WebGL2RenderingContext** (@simartin, #44367), **environmentBlendMode** on **XRSession** (@msub2, #44155), and **PerformanceResourceTiming** (@shubhamg13, #44228).
+**console.log()** and friends now support **printf-style formatting directives**, although for now `%c` is ignored (@TG199, #43897).
 
-We’ve fixed bugs related to **‘box-shadow’** (@yezhizhen, #44474, #44457), **‘display: contents’** (@Loirooriol, #44551), **‘display: inline-flex’** (@SimonSapin, #44281), **‘display: table-cell’** (@Loirooriol, #44550), **‘display: table-row-group’** (@Veercodeprog, #43674), **‘overflow-x: clip’** and **‘overflow-y: clip’** (@Messi002, #43620), **‘position: absolute’** on grid items (@nicoburns, #44324), **‘word-spacing: &lt;percentage>’** (@sabbCodes, #44031), and **removeChild()** on **Document** (@rovertrack, #44133).
+**file: URLs** are now considered **secure contexts**, so they can now use features like **crypto.subtle** and **crypto.random­UUID** (@simonwuelker, #43989).
+
+**Exception messages** have improved in Location, StaticRange, and the HTMLElement family of types (@arihant2math, @MuhammadMouostafa, @treetmitterglad, #44282, #43260, #43882).
+
+We’ve improved the conformance of **fetch algorithms** (@yezhizhen, #43970, #43798), **focus** and **tab navigation** (@mrobinson, #43842, #44029, #44360, #43859, #44535), **form submission** (@TG199, #43700), **JS modules** (@elomscansio, @Gae24, #43741, #44179, #44042), **page navigation** (@TimvdLippe, #43857), **&lt;svg viewBox>** (@yezhizhen, #44420), **‘font’** (@RichardTjokroutomo, #44061), **‘load’** events (@jdm, @arabson99, #43807, #44046), **fetchLater()** (@TimvdLippe, #43627), **axes** and **buttons** on **Gamepad** (@log101, @rovertrack, #44411, #44357), **copyTexImage2D()** on **WebGLRenderingContext** (@simartin, @mrobinson, #43608), **texImage3D()** on **WebGL2RenderingContext** (@simartin, #44367), **environmentBlendMode** on **XRSession** (@msub2, #44155), **mark()** and **measure()** on **Performance** (@shubhamg13, @simonwuelker, #44471, #44199, #43990, #43753), and **PerformanceResourceTiming** (@shubhamg13, #44228).
+
+We’ve fixed bugs related to **console logging** (@sabbCodes, #44243), **‘box-shadow’** (@yezhizhen, #44474, #44457), **‘display: contents’** (@Loirooriol, #44551), **‘display: inline-flex’** (@SimonSapin, #44281), **‘display: table-cell’** (@Loirooriol, #44550), **‘display: table-row-group’** (@Veercodeprog, #43674), **‘overflow-x: clip’** and **‘overflow-y: clip’** (@Messi002, #43620), **‘position: absolute’** on grid items (@nicoburns, #44324), **‘word-spacing: &lt;percentage>’** (@sabbCodes, #44031), **removeChild()** on **Document** (@rovertrack, #44133), and **URL.revokeObjectURL()** (@simonwuelker, @jdm, #43746, #43977, #44035).
 
 ## Performance and stability
 
@@ -208,9 +220,9 @@ But when DOM objects are being destroyed, those references can become invalid fo
 This can be unsound if those references are accessed, which is a very easy mistake to make if the type has an `impl Drop`.
 To help prevent that class of bug, we’re reworking our DOM types so that none of them have `#[dom_struct]` and `impl Drop` at the same time (@willypuzzle, #44119, #44501, #44513).
 
-We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@sagudev, @TimvdLippe, @Narfinger, @elomscansio, @Gae24, @rovertrack, @yezhizhen, @nodelpit, #43174, #43524, #43928, #43943, #43942, #43944, #43946, #43952, #43975, #44018, #44175, #44241, #44368, #44406, #44441, #44422, #44475, #44478, #44484, #44476, #44490, #44477, #44494, #44497, #44498, #44495, #44505, #44506, #44507, #44508, #44509, #44510, #44512, #44482, #44527, #44528, #44531, #44534, #44542, #44533, #44543, #44553, #44547, #44563, #44562, #44565, #44558, #44583, #44606, #44605, #44608, #44602, #44584, #44620, #44590, #44254, #44628, #44629, #44638, #44626).
+We’ve improved our static analysis for GC rooting (@officialasishkumar, #44489), and we’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@sagudev, @TimvdLippe, @Narfinger, @elomscansio, @Gae24, @rovertrack, @yezhizhen, @nodelpit, #43174, #43524, #43928, #43943, #43942, #43944, #43946, #43952, #43975, #44018, #44175, #44241, #44368, #44406, #44441, #44422, #44475, #44478, #44484, #44476, #44490, #44477, #44494, #44497, #44498, #44495, #44505, #44506, #44507, #44508, #44509, #44510, #44512, #44482, #44527, #44528, #44531, #44534, #44542, #44533, #44543, #44553, #44547, #44563, #44562, #44565, #44558, #44583, #44606, #44605, #44608, #44602, #44584, #44620, #44590, #44254, #44628, #44629, #44638, #44626, #44081).
 
-Thanks to a wide range of people, we’ve also landed a bunch of cleanups and refactors (@delan, @alice, @Skgland, @atbrakhi, @eerii, @sabbCodes, @jdm, @thebabalola, @CynthiaOketch, @kkoyung, @TimvdLippe, @rovertrack, @webbeef, @arabson99, @yezhizhen, @simonwuelker, @mrobinson, @nicoburns, @longvatrong111, @niyabits, @treetmitterglad, @foresterre, @mukilan, @elomscansio, @freyacodes, @TG199, #43772, #44006, #43860, #44121, #44160, #43884, #44154, #44569, #43939, #44003, #44110, #44122, #43824, #44635, #44103, #43978, #44092, #44114, #44277, #44454, #44274, #44237, #44232, #44167, #44214, #43820, #43825, #43810, #43838, #43841, #43847, #43875, #43876, #43889, #43893, #43896, #43881, #43906, #43913, #43908, #43917, #43910, #43921, #43924, #43925, #43907, #43923, #43916, #43909, #43911, #43957, #43969, #43967, #43915, #43954, #43963, #43959, #43955, #44067, #44068, #44071, #44084, #44265, #44115, #44358).
+Thanks to a wide range of people, we’ve also landed a bunch of cleanups and refactors (@delan, @alice, @Skgland, @atbrakhi, @eerii, @sabbCodes, @jdm, @thebabalola, @CynthiaOketch, @kkoyung, @TimvdLippe, @rovertrack, @webbeef, @arabson99, @yezhizhen, @simonwuelker, @mrobinson, @nicoburns, @longvatrong111, @niyabits, @treetmitterglad, @foresterre, @mukilan, @elomscansio, @freyacodes, @StaySafe020, @TG199, #43772, #44006, #43860, #44121, #44160, #43884, #44154, #44569, #43939, #44003, #44110, #44122, #43824, #44635, #44103, #43978, #44092, #44114, #44277, #44454, #44274, #44237, #44232, #44167, #44214, #43820, #43825, #43810, #43838, #43841, #43847, #43875, #43876, #43889, #43893, #43896, #43881, #43906, #43913, #43908, #43917, #43910, #43921, #43924, #43925, #43907, #43923, #43916, #43909, #43911, #43957, #43969, #43967, #43915, #43954, #43963, #43959, #43955, #44067, #44068, #44071, #44084, #44265, #44115, #44358, #43848).
 
 ## Donations
 
@@ -244,6 +256,12 @@ Use of donations is decided transparently via the Technical Steering Committee�
 For more details, head to our [Sponsorship page]({{ '/sponsorship/' | url }}).
 
 <style>
+    kbd {
+        background: #00000020;
+        margin: 0 0.125rem;
+        padding: 0.125rem;
+        border-radius: 0.25rem;
+    }
     ._correction {
         max-width: 33em;
         margin: 1em auto;
