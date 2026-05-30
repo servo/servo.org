@@ -251,7 +251,11 @@
 </div>
 
 <div class="inner-container blog-content">
-  <p>For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p>
+  <p>April 2026 was a big milestone for Servo, with some automated tests failing because they had hard-coded cookie expiry dates set to April 2016 plus ten years.
+Surprise!
+We’re still here.
+Here’s to the next 100 years of Servo (@jdm, #44341).</p>
+<p>For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p>
 <p>Navigating to a <strong>JSON file</strong> as the top-level document now renders the JSON with an <strong>interactive pretty-printer</strong> (@webbeef, @TimvdLippe, #43702).</p>
 <p>Servo’s support for text in <strong>Chinese</strong>, <strong>Japanese</strong>, and <strong>Korean</strong> languages has improved, with correct wrapping in the layout engine (@SharanRP, #43744), and CJK fonts now enabled in servoshell’s browser UI on Windows, Linux, and FreeBSD (@yezhizhen, @CynthiaOketch, @nortti0, #44055, #44138, #44514).</p>
 <p>We’ve shipped several new web platform features:</p>
@@ -306,7 +310,16 @@
 <h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891).</p>
+<p><strong>CryptoKey</strong> now zeroes buffers containing key material after use (@kkoyung, #44597).</p>
+<p>With only a few exceptions, you can only access DOM APIs in another document if that document is in the <strong>same origin</strong>.
+But if that document is in the same <em>site</em> with a different port number, Servo currently allows these accesses even though it shouldn’t.
+We’ve fixed some (but not all) of these incorrect accesses, specifically those that involve binding a Window or Location method in this document with a <code>this</code> from the other document (@yvt, @jdm, #28583).</p>
+<p>We’ve fixed a bug where <strong>localStorage</strong> and <strong>sessionStorage</strong> were usable in <strong>sandboxed &lt;iframe&gt;</strong> and shared with every other sandboxed &lt;iframe&gt;, rather than throwing SecurityError (@Taym95, #44002).</p>
+<p>We’ve fixed a bug where <strong>localStorage</strong> and <strong>sessionStorage</strong> were shared between all <strong>&lt;iframe srcdoc&gt; documents</strong>, rather than isolated using the origin of the containing document (@niyabits, #43988, #44038).</p>
+<p>We’ve fixed a bug where <strong>IndexedDB</strong> was usable in <strong>sandboxed &lt;iframe&gt;</strong> and <strong>data: URL web workers</strong> (@Taym95, #44088).</p>
+<p>We’ve fixed a bug where pages in some <strong>IP address origins</strong> can evict cookies from other IP address origins (@officialasishkumar, #44152).
+Only evicting cookies was possible, not reading or writing them.</p>
+<p>We’ve fixed an <strong>out-of-bounds memory read</strong> in <strong>texImage3D()</strong> on <strong>WebGL2RenderingContext</strong> (@simartin, #44270), and fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891).</p>
 <h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>

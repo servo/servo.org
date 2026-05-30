@@ -15,7 +15,11 @@
     <link href="https://servo.org/twisapr/blog/2026/05/29/april-in-servo/"/>
     <updated>2026-05-29T00:00:00Z</updated>
     <id>https://servo.org/twisapr/blog/2026/05/29/april-in-servo/</id>
-    <content xml:lang="en" type="html">&lt;p&gt;For security fixes, see &lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#security&quot;&gt;&lt;strong&gt;§ Security&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+    <content xml:lang="en" type="html">&lt;p&gt;April 2026 was a big milestone for Servo, with some automated tests failing because they had hard-coded cookie expiry dates set to April 2016 plus ten years.
+Surprise!
+We’re still here.
+Here’s to the next 100 years of Servo (@jdm, #44341).&lt;/p&gt;
+&lt;p&gt;For security fixes, see &lt;a href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#security&quot;&gt;&lt;strong&gt;§ Security&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Navigating to a &lt;strong&gt;JSON file&lt;/strong&gt; as the top-level document now renders the JSON with an &lt;strong&gt;interactive pretty-printer&lt;/strong&gt; (@webbeef, @TimvdLippe, #43702).&lt;/p&gt;
 &lt;p&gt;Servo’s support for text in &lt;strong&gt;Chinese&lt;/strong&gt;, &lt;strong&gt;Japanese&lt;/strong&gt;, and &lt;strong&gt;Korean&lt;/strong&gt; languages has improved, with correct wrapping in the layout engine (@SharanRP, #43744), and CJK fonts now enabled in servoshell’s browser UI on Windows, Linux, and FreeBSD (@yezhizhen, @CynthiaOketch, @nortti0, #44055, #44138, #44514).&lt;/p&gt;
 &lt;p&gt;We’ve shipped several new web platform features:&lt;/p&gt;
@@ -70,7 +74,16 @@
 &lt;h2 id=&quot;security&quot; tabindex=&quot;-1&quot;&gt;Security &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#security&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CryptoKey&lt;/strong&gt; now zeroes buffers containing key material after use (@kkoyung, #44597).&lt;/p&gt;
+&lt;p&gt;With only a few exceptions, you can only access DOM APIs in another document if that document is in the &lt;strong&gt;same origin&lt;/strong&gt;.
+But if that document is in the same &lt;em&gt;site&lt;/em&gt; with a different port number, Servo currently allows these accesses even though it shouldn’t.
+We’ve fixed some (but not all) of these incorrect accesses, specifically those that involve binding a Window or Location method in this document with a &lt;code&gt;this&lt;/code&gt; from the other document (@yvt, @jdm, #28583).&lt;/p&gt;
+&lt;p&gt;We’ve fixed a bug where &lt;strong&gt;localStorage&lt;/strong&gt; and &lt;strong&gt;sessionStorage&lt;/strong&gt; were usable in &lt;strong&gt;sandboxed &amp;lt;iframe&amp;gt;&lt;/strong&gt; and shared with every other sandboxed &amp;lt;iframe&amp;gt;, rather than throwing SecurityError (@Taym95, #44002).&lt;/p&gt;
+&lt;p&gt;We’ve fixed a bug where &lt;strong&gt;localStorage&lt;/strong&gt; and &lt;strong&gt;sessionStorage&lt;/strong&gt; were shared between all &lt;strong&gt;&amp;lt;iframe srcdoc&amp;gt; documents&lt;/strong&gt;, rather than isolated using the origin of the containing document (@niyabits, #43988, #44038).&lt;/p&gt;
+&lt;p&gt;We’ve fixed a bug where &lt;strong&gt;IndexedDB&lt;/strong&gt; was usable in &lt;strong&gt;sandboxed &amp;lt;iframe&amp;gt;&lt;/strong&gt; and &lt;strong&gt;data: URL web workers&lt;/strong&gt; (@Taym95, #44088).&lt;/p&gt;
+&lt;p&gt;We’ve fixed a bug where pages in some &lt;strong&gt;IP address origins&lt;/strong&gt; can evict cookies from other IP address origins (@officialasishkumar, #44152).
+Only evicting cookies was possible, not reading or writing them.&lt;/p&gt;
+&lt;p&gt;We’ve fixed an &lt;strong&gt;out-of-bounds memory read&lt;/strong&gt; in &lt;strong&gt;texImage3D()&lt;/strong&gt; on &lt;strong&gt;WebGL2RenderingContext&lt;/strong&gt; (@simartin, #44270), and fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891).&lt;/p&gt;
 &lt;h2 id=&quot;work-in-progress&quot; tabindex=&quot;-1&quot;&gt;Work in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisapr/blog/2026/05/29/april-in-servo/#work-in-progress&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
