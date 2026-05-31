@@ -1,5 +1,6 @@
 # Servo.org website
 
+- [How to write a monthly update](#how-to-write-a-monthly-update)
 - [How to start a local dev server](#how-to-start-a-local-dev-server)
 - [How to list commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly)
 - [How to list this year’s pull request contributors](#how-to-list-this-years-pull-request-contributors)
@@ -7,10 +8,55 @@
 - [How to analyse wpt.fyi pass rate improvements](#how-to-analyse-wptfyi-pass-rate-improvements)
 - [How to analyse wpt.fyi Browser Specific Failures improvements](#how-to-analyse-wptfyi-browser-specific-failures-improvements)
 - [How to linkify GitHub handles and pull requests when finishing a post](#how-to-linkify-github-handles-and-pull-requests-when-finishing-a-post)
+- [How to count the number of pull requests in a month](#how-to-count-the-number-of-pull-requests-in-a-month)
+- [How to automatically triage automated PRs](#how-to-automatically-triage-automated-prs)
 - [How to calculate monthly recurring donations](#how-to-calculate-monthly-recurring-donations)
 - [Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates)
 - [Hints for writing about changes](#hints-for-writing-about-changes)
 - [Corrections](#corrections)
+
+## How to write a monthly update
+
+Each month, we write a **monthly update**, which is a blog post that [serves as the “extended” release notes](https://book.servo.org/for-maintainers/release-process.html) for the monthly release.
+What goes in the monthly update has evolved over the years, but currently the recurring “core” is to write about **commits**, **donations**, and (if there are any) **conference talks**.
+
+### Writing about commits
+
+This is the most time-consuming part by far.
+The earliest monthly updates (in 2023) were fairly manageable with an ad-hoc process and a bit of tooling, with maybe 100–150 commits to digest and write about.
+But nowadays (in 2026) we have easily 400–500 commits to digest and write about, and keeping up with that requires a more efficient process.
+
+At a high level, the current process (and the tooling) is designed to help you digest all of the commits that landed in the previous month’s [nightly builds](https://github.com/servo/servo-nightly-builds), so you can write about them.
+This more or less corresponds to the commits that will land in the next [monthly release](https://github.com/servo/servo/releases), but where they differ, [we err on the side of](https://github.com/servo/book/pull/214#discussion_r3019920813) deferring the commit until the next monthly update.
+
+**Future:** assuming the monthly releases are here to stay, we may want to rework the tooling to directly consider the commits that will land in the monthly release, rather than the commits that landed in last month’s nightlies.
+
+The suggested workflow for efficiently triaging commits is as follows:
+
+**Note that the list of nightly builds is cached in tools/runs.json, so if it exists, you will need to delete it to fetch an updated list.**
+
+- [Fetch pull request details](#how-to-list-this-years-pull-request-contributors) for the **last two months** (`2025-01 2025-02`), then [list commits that landed each nightly](#how-to-list-commits-that-landed-in-each-nightly) for **last month** (`/^>>> 2025-02-/,/^>>> 2025-03-/!d`):
+
+```
+$ rm tools/runs.json  # Optional: clear cached list of nightly builds
+$ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-2025-02.json
+$ tools/list-commits-by-nightly.sh ~/code/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
+```
+
+- Open commits.txt — for the best ergonomics, set the language mode to **Diff**, then **Fold All**
+- For each commit, read the description below to understand its impact (see [§ Hints for writing about changes](#hints-for-writing-about-changes))
+- For each commit to be excluded from the post, prefix the line with `-`
+- For each commit to be included in the post, prefix the line with `+` then:
+    - Add a line immediately below of the form `    one or more tags` (four spaces, then space-separated tags)
+    - To write some notes or additional context, append `; your notes` to that new tags line — be sure to include enough context to write about the change without the hints and description, because those will not be visible after the next step
+- Generate the outline: `tools/generate-outline.sh commits.txt > outline.txt`
+- Open outline.txt — for the best ergonomics, set the language mode to **Diff**
+- For each commit, write about it in the blog post, then change the leading `+` to `-`
+- When none of the lines start with `+`, you’re done!
+
+**TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time. Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
+
+We’re working on [a new tool](https://github.com/jdm/commit-triage) that will make the triage process even more efficient.
 
 ## How to start a local dev server
 
@@ -400,35 +446,11 @@ And generally we want to exclude...
 
 - dependabot updates (“build(deps)”)
 - WPT imports (“Update web-platform-tests” or “Sync WPT with upstream”)
+- fixes for regressions that happened in the same month
 - lint and warning fixes
 - other CI changes
 - refactors (unless large-scale)
 - dependency cleanups
-
-The suggested workflow for efficiently triaging commits is as follows:
-
-**Note that the list of nightly builds is cached in tools/runs.json, so if it exists, you will need to delete it to fetch an updated list.**
-
-- [Fetch pull request details](#how-to-list-this-years-pull-request-contributors) for the **last two months** (`2025-01 2025-02`), then [list commits that landed each nightly](#how-to-list-commits-that-landed-in-each-nightly) for **last month** (`/^>>> 2025-02-/,/^>>> 2025-03-/!d`):
-
-```
-$ rm tools/runs.json  # Optional: clear cached list of nightly builds
-$ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-2025-02.json
-$ tools/list-commits-by-nightly.sh ~/code/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
-```
-
-- Open commits.txt — for the best ergonomics, set the language mode to **Diff**, then **Fold All**
-- For each commit, read the description below to understand its impact (see [§ Hints for writing about changes](#hints-for-writing-about-changes))
-- For each commit to be excluded from the post, prefix the line with `-`
-- For each commit to be included in the post, prefix the line with `+` then:
-    - Add a line immediately below of the form `    one or more tags` (four spaces, then space-separated tags)
-    - To write some notes or additional context, append `; your notes` to that new tags line — be sure to include enough context to write about the change without the hints and description, because those will not be visible after the next step
-- Generate the outline: `tools/generate-outline.sh commits.txt > outline.txt`
-- Open outline.txt — for the best ergonomics, set the language mode to **Diff**
-- For each commit, write about it in the blog post, then change the leading `+` to `-`
-- When none of the lines start with `+`, you’re done!
-
-**TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time. Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
 
 ## Hints for writing about changes
 
@@ -443,6 +465,12 @@ $ tools/list-commits-by-nightly.sh ~/code/servo --pulls-json-path=tools/pulls-20
 **Check for experimental implementations.** Sometimes a patch appears to implement an API feature, but the feature is gated by a pref. If the user needs to enable a pref to use a feature, make sure you mention that. For example, [servo#31108](https://github.com/servo/servo/pull/31108) implements ResizeObserver, but the user needs to run servoshell with `--pref dom.resize_observer.enabled` ([June 2024](https://servo.org/blog/2024/06/28/input-text-emoji-devtools/)).
 
 **Check for disabled implementations.** Sometimes a patch appears to implement an API feature, but the feature is still completely disabled. In this case, it may not be worth writing about the feature at all, unless a lot of work went into the patch. For example, [servo#30752](https://github.com/servo/servo/pull/30752) implements some :has() selector features, but the feature is completely disabled ([November 2023](https://servo.org/blog/2023/11/30/embedding-floats-color-mix/)).
+
+**Check if changes in `servo` (formerly `libservo`) or `embedder_traits` affect our public API.** Such changes are important to highlight in the monthly updates, especially if they are breaking changes.
+
+- Changes to `embedder_traits` [items](https://doc.rust-lang.org/1.88.0/reference/items.html) often affect the public API because many of them are re-exported by `libservo` with `pub use`. To check if an `embedder_traits` item is actually part of the public API, go to [our online API docs](https://doc.servo.org/servo/) and search for it. If the search result for that item starts with `servo::`, then it’s part of the public API. If the search result starts with `embedder_traits::`, then it’s not part of the public API.
+
+- You can use tools like cargo-semver-checks and cargo-public-api to diff two versions of our public API. For example, with cargo-public-api: `cargo public-api diff -p servo <old commit>..<new commit>`
 
 ## Corrections
 
