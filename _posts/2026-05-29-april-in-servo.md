@@ -32,18 +32,18 @@ We’ve shipped several new web platform features:
 - **‘tab-size’** (@mrobinson, @SimonSapin, #44480)
 - **‘text-align: match-parent’** (@TG199, #44073)
 - **new Worker()** with **blob URLs** (@jdm, #44004)
-- **getContext(`"webgl"`)** on **OffscreenCanvas** (@niyabits, #44159)
-- the **detail** property on **PerformanceMark** and **PerformanceMeasure** (@shubhamg13, #44289, #44272)
+- **get­Context(`"webgl"`)** on **Offscreen­Canvas** (@niyabits, #44159)
+- the **detail** property on **Performance­Mark** and **Performance­Measure** (@shubhamg13, #44289, #44272)
 
 Plus a bunch of new DOM APIs:
 
 - **‘selectionchange’** events on &lt;input> and &lt;textarea> (@TimvdLippe, #44461)
-- **StorageManager**, in experimental mode (@Taym95, #43976)
-- **activeElement** on **Document** and **ShadowRoot** (@mrobinson, #43861)
+- **Storage­Manager**, in experimental mode (@Taym95, #43976)
+- **active­Element** on **Document** and **Shadow­Root** (@mrobinson, #43861)
 - **crypto.subtle.supports()** (@kkoyung, #43703) – Servo is the first major browser engine to support this!
-- **cellPadding**, **cellSpacing**, and **align** properties on **HTMLTableElement** (@mrobinson, #43903) – previously supported in HTML only
-- **relatedTarget** on **‘focus’** and **‘blur’** events (@mrobinson, #43926)
-- **transferFromImageBitmap()** on **ImageBitmapRenderingContext** (@Messi002, #43984)
+- **cell­Padding**, **cell­Spacing**, and **align** properties on **HTML­Table­Element** (@mrobinson, #43903) – previously supported in HTML only
+- **related­Target** on **‘focus’** and **‘blur’** events (@mrobinson, #43926)
+- **transfer­From­Image­Bitmap()** on **Image­Bitmap­Rendering­Context** (@Messi002, #43984)
 
 Servo’s support for text in **Chinese**, **Japanese**, and **Korean** languages has improved, with correct wrapping in the layout engine (@SharanRP, #43744), and CJK fonts now enabled in servoshell’s browser UI on Windows, Linux, and FreeBSD (@yezhizhen, @CynthiaOketch, @nortti0, #44055, #44138, #44514).
 
@@ -72,22 +72,22 @@ This is another big update, so here’s an outline:
 
 ## Security
 
-**CryptoKey** now zeroes buffers containing key material after use (@kkoyung, #44597).
+**Crypto­Key** now zeroes buffers containing key material after use (@kkoyung, #44597).
 
 With only a few exceptions, you can only access DOM APIs in another document if that document is in the **same origin**.
 But if that document is in the same *site* with a different port number, Servo currently allows these accesses even though it shouldn’t.
 We’ve fixed some (but not all) of these incorrect accesses, specifically those that involve binding a Window or Location method in this document with a `this` from the other document (@yvt, @jdm, #28583).
 
-We’ve fixed a bug where **localStorage** and **sessionStorage** were usable in **sandboxed &lt;iframe>** and shared with every other sandboxed &lt;iframe>, rather than throwing SecurityError (@Taym95, #44002).
+We’ve fixed a bug where **local­Storage** and **session­Storage** were usable in **sandboxed &lt;iframe>** and shared with every other sandboxed &lt;iframe>, rather than throwing Security­Error (@Taym95, #44002).
 
-We’ve fixed a bug where **localStorage** and **sessionStorage** were shared between all **&lt;iframe srcdoc> documents**, rather than isolated using the origin of the containing document (@niyabits, #43988, #44038).
+We’ve fixed a bug where **local­Storage** and **session­Storage** were shared between all **&lt;iframe srcdoc> documents**, rather than isolated using the origin of the containing document (@niyabits, #43988, #44038).
 
 We’ve fixed a bug where **IndexedDB** was usable in **sandboxed &lt;iframe>** and **data: URL web workers** (@Taym95, #44088).
 
 We’ve fixed a bug where pages in some **IP address origins** can evict cookies from other IP address origins (@officialasishkumar, #44152).
 Only evicting cookies was possible, not reading or writing them.
 
-We’ve fixed an **out-of-bounds memory read** in **texImage3D()** on **WebGL2RenderingContext** (@simartin, #44270), and fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891).
+We’ve fixed an **out-of-bounds memory read** in **tex­Image3D()** on **Web­GL2­Rendering­Context** (@simartin, #44270), and fixed some undefined behaviour in servoshell’s signal handler (@Narfinger, #43891).
 
 ## Work in progress
 
@@ -95,12 +95,12 @@ We’ve fixed an **out-of-bounds memory read** in **texImage3D()** on **WebGL2Re
 As always, embedders can enable it with [`Preferences`](https://doc.servo.org/servo/struct.Preferences.html)::[`dom­_indexeddb­_enabled`](https://doc.servo.org/servo/struct.Preferences.html#structfield.dom_indexeddb_enabled) (@arihant2math, #44245, #44283).
 
 IndexedDB now uses Servo’s new **“client storage”** system, which is based on the [Storage Standard](https://storage.spec.whatwg.org) and will allow us to have a unified on-disk format and quota management for all web platform features that persistently store data (@gterzian, #44374, #43900).
-We’ve also made key range queries more efficient (@arihant2math, #39009), landed improvements to IDBDatabase, IDBObjectStore, IDBCursor, IDBKeyRange, IDBRequest, and to the handling of transactions, keys, values, and exceptions (@Taym95, #44128, #43901, #44009, #43914, #44161, #44183, #44059, #44215, #42998, #43805).
+We’ve also made key range queries more efficient (@arihant2math, #39009), landed improvements to IDB­Database, IDB­Object­Store, IDB­Cursor, IDB­Key­Range, IDB­Request, and to the handling of transactions, keys, values, and exceptions (@Taym95, #44128, #43901, #44009, #43914, #44161, #44183, #44059, #44215, #42998, #43805).
 
-We’ve made more progress on the **IntersectionObserver API**, under `--pref dom­_intersection­_observer­_enabled` (@stevennovaryo, @jdm, #42204).
+We’ve made more progress on the **Intersection­Observer API**, under `--pref dom­_intersection­_observer­_enabled` (@stevennovaryo, @jdm, #42204).
 
-We’re continuing to implement **document.execCommand()** for **rich text editing** (@TimvdLippe, #44529), under `--pref dom­_exec­_command­_enabled`.
-This release adds support for the **‘bold’**, **‘fontName’**, **‘fontSize’**, **‘italic’**, **‘strikethrough’**, and **‘underline’** commands (@TimvdLippe, @jdm, @mrobinson, #44511, #43287, #44432, #44410, #44194, #44030, #44039, #44041, #44075, #44234, #44250, #44331, #44390, #44137, #44293, #44312, #44347).
+We’re continuing to implement **document.exec­Command()** for **rich text editing** (@TimvdLippe, #44529), under `--pref dom­_exec­_command­_enabled`.
+This release adds support for the **‘bold’**, **‘font­Name’**, **‘font­Size’**, **‘italic’**, **‘strikethrough’**, and **‘underline’** commands (@TimvdLippe, @jdm, @mrobinson, #44511, #43287, #44432, #44410, #44194, #44030, #44039, #44041, #44075, #44234, #44250, #44331, #44390, #44137, #44293, #44312, #44347).
 
 All of the features above are enabled in servoshell’s experimental mode.
 
@@ -110,9 +110,9 @@ We’ve also fixed a crash when reloading pages with accessibility enabled (@ali
 
 We’ve started implementing the **Sanitizer API**, under `--pref dom­_sanitizer­_enabled` (@kkoyung, #44198, #44290, #44335, #44421, #44452, #44481, #44585, #44594).
 
-We’ve also started implementing **SharedWorker**, under `--pref dom­_sharedworker­_enabled` (@Taym95, #44375, #44440).
+We’ve also started implementing **Shared­Worker**, under `--pref dom­_sharedworker­_enabled` (@Taym95, #44375, #44440).
 
-We’re working on the **WakeLock API** too, under `--pref dom­_wakelock­_enabled` (@TG199, @rovertrack, #43617, #44343).
+We’re working on the **Wake­Lock API** too, under `--pref dom­_wakelock­_enabled` (@TG199, @rovertrack, #43617, #44343).
 
 ## servoshell
 
@@ -144,7 +144,7 @@ Keep an eye out for that [in the book](https://book.servo.org/building/building.
 
 In the meantime, did you know that you can use [**Lix**](https://lix.systems) or [**Nix**](https://nixos.org/manual/nix/stable) to build Servo on Linux with a lot less hassle, *even if* you’re not using NixOS?
 For now at least, head to the [NixOS page](https://book.servo.org/building/nixos.html) in the book to learn more.
-We’ve also fixed a regression that made `--debug-mozjs` and `MOZJS_FROM_SOURCE` builds take much longer to complete on Linux when not using Nix (@jschwe, #44346).
+We’ve also fixed a regression that made `--debug-mozjs` and `MOZJS­_FROM­_SOURCE` builds take much longer to complete on Linux when not using Nix (@jschwe, #44346).
 
 We’ve fixed building Servo with the **‘jitspew’ feature** in mozjs, allowing you to set **IONFLAGS** to enable JIT logging (@simonwuelker, #44010).
 We’ve also fixed build issues on Windows and FreeBSD (@zhangxichang, @mrobinson, #44264, #44591).
@@ -208,16 +208,16 @@ All **keyboard events**, **mouse events**, **wheel events**, and **pointer event
 
 **file: URLs** are now considered **secure contexts**, so they can now use features like **crypto.subtle** and **crypto.random­UUID** (@simonwuelker, #43989).
 
-**Exception messages** have improved in Location, StaticRange, and the HTMLElement family of types (@arihant2math, @MuhammadMouostafa, @treetmitterglad, #44282, #43260, #43882).
+**Exception messages** have improved in Location, Static­Range, and the HTML­Element family of types (@arihant2math, @MuhammadMouostafa, @treetmitterglad, #44282, #43260, #43882).
 
-We’ve improved the conformance of **fetch algorithms** (@yezhizhen, #43970, #43798), **focus** and **tab navigation** (@mrobinson, #43842, #44029, #44360, #43859, #44535), **form submission** (@TG199, #43700), **JS modules** (@elomscansio, @Gae24, #43741, #44179, #44042), **page navigation** (@TimvdLippe, #43857), **&lt;svg viewBox>** (@yezhizhen, #44420), **‘attr()’** (@Loirooriol, #43878), **‘:focus’** (@mrobinson, #43873), **‘font’** (@RichardTjokroutomo, #44061), **‘@keyframes’** (@simonwuelker, #43461), **‘@property’** (@Loirooriol, #43878), **‘load’** events (@jdm, @arabson99, #43807, #44046), **fetchLater()** (@TimvdLippe, #43627), **axes** and **buttons** on **Gamepad** (@log101, @rovertrack, #44411, #44357), **copyTexImage2D()** on **WebGLRenderingContext** (@simartin, @mrobinson, #43608), **texImage3D()** on **WebGL2RenderingContext** (@simartin, #44367), **environmentBlendMode** on **XRSession** (@msub2, #44155), **mark()** and **measure()** on **Performance** (@shubhamg13, @simonwuelker, #44471, #44199, #43990, #43753), and **PerformanceResourceTiming** (@shubhamg13, #44228).
+We’ve improved the conformance of **fetch algorithms** (@yezhizhen, #43970, #43798), **focus** and **tab navigation** (@mrobinson, #43842, #44029, #44360, #43859, #44535), **form submission** (@TG199, #43700), **JS modules** (@elomscansio, @Gae24, #43741, #44179, #44042), **page navigation** (@TimvdLippe, #43857), **&lt;svg view­Box>** (@yezhizhen, #44420), **‘attr()’** (@Loirooriol, #43878), **‘:focus’** (@mrobinson, #43873), **‘font’** (@RichardTjokroutomo, #44061), **‘@keyframes’** (@simonwuelker, #43461), **‘@property’** (@Loirooriol, #43878), **‘load’** events (@jdm, @arabson99, #43807, #44046), **fetch­Later()** (@TimvdLippe, #43627), **axes** and **buttons** on **Gamepad** (@log101, @rovertrack, #44411, #44357), **copy­Tex­Image­2D()** on **Web­GL­Rendering­Context** (@simartin, @mrobinson, #43608), **tex­Image3D()** on **Web­GL2­Rendering­Context** (@simartin, #44367), **environment­Blend­Mode** on **XR­Session** (@msub2, #44155), **mark()** and **measure()** on **Performance** (@shubhamg13, @simonwuelker, #44471, #44199, #43990, #43753), and **Performance­Resource­Timing** (@shubhamg13, #44228).
 
-We’ve fixed bugs related to **console logging** (@sabbCodes, #44243), **‘animation’** (@mrobinson, #44299), **‘box-shadow’** (@yezhizhen, #44474, #44457), **‘display: contents’** (@Loirooriol, @mrobinson, #44551, #44299), **‘display: inline-flex’** (@SimonSapin, #44281), **‘display: table-cell’** (@Loirooriol, #44550), **‘display: table-row-group’** (@Veercodeprog, #43674), **‘overflow-x: clip’** and **‘overflow-y: clip’** (@Messi002, #43620), **‘position: absolute’** on grid items (@nicoburns, #44324), **‘word-spacing: &lt;percentage>’** (@sabbCodes, #44031), **removeChild()** on **Document** (@rovertrack, #44133), and **URL.revokeObjectURL()** (@simonwuelker, @jdm, #43746, #43977, #44035).
+We’ve fixed bugs related to **console logging** (@sabbCodes, #44243), **‘animation’** (@mrobinson, #44299), **‘box-shadow’** (@yezhizhen, #44474, #44457), **‘display: contents’** (@Loirooriol, @mrobinson, #44551, #44299), **‘display: inline-flex’** (@SimonSapin, #44281), **‘display: table-cell’** (@Loirooriol, #44550), **‘display: table-row-group’** (@Veercodeprog, #43674), **‘overflow-x: clip’** and **‘overflow-y: clip’** (@Messi002, #43620), **‘position: absolute’** on grid items (@nicoburns, #44324), **‘word-spacing: &lt;percentage>’** (@sabbCodes, #44031), **remove­Child()** on **Document** (@rovertrack, #44133), and **URL.revoke­Object­URL()** (@simonwuelker, @jdm, #43746, #43977, #44035).
 
 ## Performance and stability
 
 We’ve fixed some big inefficiencies in Servo.
-**appendChild()** with nested shadow roots is no longer <math><mrow><mi>O</mi><mrow><mo>(</mo><msup><mn>2</mn><mi>n</mi></msup><mo>)</mo></mrow></mrow></math> (@yezhizhen, @webbeef, #44016), and we’ve halved the time it takes to load [the ECMAScript spec](https://262.ecma-international.org/16.0/index.html) by fixing the <math><mrow><mi>O</mi><mrow><mo>(</mo><mtext>whole DOM tree</mtext><mo>)</mo></mrow></mrow></math> processing of **‘id’** and **‘name’ attributes** (@simonwuelker, #44120, #44127, #44117).
+**append­Child()** with nested shadow roots is no longer <math><mrow><mi>O</mi><mrow><mo>(</mo><msup><mn>2</mn><mi>n</mi></msup><mo>)</mo></mrow></mrow></math> (@yezhizhen, @webbeef, #44016), and we’ve halved the time it takes to load [the ECMAScript spec](https://262.ecma-international.org/16.0/index.html) by fixing the <math><mrow><mi>O</mi><mrow><mo>(</mo><mtext>whole DOM tree</mtext><mo>)</mo></mrow></mrow></math> processing of **‘id’** and **‘name’ attributes** (@simonwuelker, #44120, #44127, #44117).
 
 Servo makes its **first TLS connection** in each session **30–60 ms faster** (@jschwe, #44242), and we’ve instrumented the Servo and servoshell startup processes to find more opportunities for optimisation (@jschwe, #44443, #44456).
 
@@ -225,9 +225,9 @@ Like most browser engines, Servo is a multi-threaded (and sometimes multi-proces
 [Two key components](https://book.servo.org/design-documentation/architecture.html) of this system are the **constellation** thread, which manages the engine as a whole, and the **script threads** (or web processes), which render the web pages.
 Sending these messages can be expensive though, so to **reduce unnecessary IPC traffic**, we’ve landed an optimisation that allows script threads to selectively receive only the relevant messages from the constellation (@webbeef, #43124).
 
-We’ve reduced the **memory usage** of each **Attr**, **Text**, and **CharacterData** node in the DOM by 16 bytes (@mrobinson, @Loirooriol, #44074), and **fixed a memory leak** when deleting **&lt;video controls>** or **&lt;audio controls>** (@Messi002, #43983).
+We’ve reduced the **memory usage** of each **Attr**, **Text**, and **Character­Data** node in the DOM by 16 bytes (@mrobinson, @Loirooriol, #44074), and **fixed a memory leak** when deleting **&lt;video controls>** or **&lt;audio controls>** (@Messi002, #43983).
 
-Our **about:memory** page is more accurate now too, with new tracking of **libc memory allocations** on macOS, improved tracking of libc memory allocations on Linux (@jschwe, #44037), and more accurate tracking of PathBuf and types in `tokio`, `http`, `data_url`, and `urlpattern` (@Narfinger, #43858).
+Our **about:memory** page is more accurate now too, with new tracking of **libc memory allocations** on macOS, improved tracking of libc memory allocations on Linux (@jschwe, #44037), and more accurate tracking of Path­Buf and types in `tokio`, `http`, `data­_url`, and `urlpattern` (@Narfinger, #43858).
 
 Less memory usage isn’t always better in browser engines though, because there are many kinds of caches and other optimisations we can do to make browsing the web faster, at the expense of increased memory usage.
 For example, we can greatly speed up **prototype checks** for DOM objects by storing a number in each object that identifies the concrete type, at the expense of making each DOM object 64 bits larger (@webbeef, #44364).
@@ -241,27 +241,27 @@ We’ve also reduced clones, allocations, borrow checks, GC rooting steps, and o
 
 Several crashes have been fixed:
 
-- in compressedTexSubImage2D() on WebGLRenderingContext (@thebabalola, #44050)
+- in compressed­Tex­Sub­Image2D() on Web­GL­Rendering­Context (@thebabalola, #44050)
 - in console.log() (@thebabalola, #43844)
-- in getData() on DataTransfer (@SimonSapin, #44607)
+- in get­Data() on Data­Transfer (@SimonSapin, #44607)
 - in remove() on Element (@SimonSapin, #44435)
-- in replaceWith() on Element (@yezhizhen, #44503)
+- in replace­With() on Element (@yezhizhen, #44503)
 - in `--debug-mozjs` builds (@jdm, #44386, #44573, #44581)
 - in flex and grid layout (@mrobinson, @nicoburns, #44424, #44203)
-- in layout queries like `offsetHeight` (@mrobinson, #44560)
+- in layout queries like `offset­Height` (@mrobinson, #44560)
 - in the devtools Debugger tab, when stepping and when inspecting nested values (@atbrakhi, @eerii, #44024, #43995)
 - when removing &lt;colgroup> from the DOM (@Loirooriol, #43846)
 - when running garbage collection (@drasticactions, #43933)
 - when running servoshell with a [`u64`](https://doc.rust-lang.org/1.88.0/std/primitive.u64.html) `--pref` (@yezhizhen, #44079)
-- when shadow roots are deeply nested, or when calling attachShadow() removes elements from the flat tree (@yezhizhen, @mrobinson, #43888, #43930, #44259)
+- when shadow roots are deeply nested, or when calling attach­Shadow() removes elements from the flat tree (@yezhizhen, @mrobinson, #43888, #43930, #44259)
 - when [web storage features](https://storage.spec.whatwg.org) fail to write to disk or encounter SQLite errors (@arihant2math, @sabbCodes, #43918, #43949)
 
 We fixed a crash in servoshell when pressing keys like Ctrl+2 or ⌘2 with not enough tabs open (@mrobinson, #44070).
 
-**DOM data structures** (`#[dom_struct]`) can refer to one another, with the help of [garbage collection](https://research.mozilla.org/2014/08/26/javascript-servos-only-garbage-collector/).
+**DOM data structures** (`#[dom­_struct]`) can refer to one another, with the help of [garbage collection](https://research.mozilla.org/2014/08/26/javascript-servos-only-garbage-collector/).
 But when DOM objects are being destroyed, those references can become invalid for a brief moment, depending on the order the GC finalizers run in.
 This can be unsound if those references are accessed, which is a very easy mistake to make if the type has an `impl Drop`.
-To help prevent that class of bug, we’re reworking our DOM types so that none of them have `#[dom_struct]` and `impl Drop` at the same time (@willypuzzle, #44119, #44501, #44513).
+To help prevent that class of bug, we’re reworking our DOM types so that none of them have `#[dom­_struct]` and `impl Drop` at the same time (@willypuzzle, #44119, #44501, #44513).
 
 We’ve improved our static analysis for GC rooting (@officialasishkumar, #44489), and we’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@sagudev, @TimvdLippe, @Narfinger, @elomscansio, @Gae24, @rovertrack, @yezhizhen, @nodelpit, #43174, #43524, #43928, #43943, #43942, #43944, #43946, #43952, #43975, #44018, #44175, #44241, #44368, #44406, #44441, #44422, #44475, #44478, #44484, #44476, #44490, #44477, #44494, #44497, #44498, #44495, #44505, #44506, #44507, #44508, #44509, #44510, #44512, #44482, #44527, #44528, #44531, #44534, #44542, #44533, #44543, #44553, #44547, #44563, #44562, #44565, #44558, #44583, #44606, #44605, #44608, #44602, #44584, #44620, #44590, #44254, #44628, #44629, #44638, #44626, #44081).
 
