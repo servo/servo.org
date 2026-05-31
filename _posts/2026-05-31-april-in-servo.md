@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "April in Servo: and more!"
-date:       2026-05-29
-summary:    ao!! wrrrrao!!
+title:      "April in Servo: new Android UI, focus, forms, security fixes, and more!"
+date:       2026-05-31
+summary:    Plus better inspection of values in the DevTools Console and Debugger tabs.
 categories:
 ---
 
