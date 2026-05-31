@@ -7,12 +7,19 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-April 2026 was a big milestone for Servo, with some automated tests failing because they had hard-coded cookie expiry dates set to April 2016 plus ten years.
+[**Servo 0.2.0**](https://github.com/servo/servo/releases/tag/v0.2.0) contains all of the changes we landed in April, which came out to yet another record **534 commits** (March: 530).
+For security fixes, see [**§ Security**](#security).
+
+<aside class=_note>
+
+**Note:** the GitHub release is available now, but [the crates.io release](https://crates.io/crates/servo) is not yet complete.
+We expect to publish it some time **next week**.
+</aside>
+
+April was a big milestone for Servo, with some automated tests failing because they had hard-coded cookie expiry dates set to April 2016 plus ten years.
 Surprise!
 We’re still here.
 Here’s to the next 100 years of Servo (@jdm, #44341).
-
-For security fixes, see [**§ Security**](#security).
 
 Navigating to a **JSON file** as the top-level document now renders the JSON with an **interactive pretty-printer** (@webbeef, @TimvdLippe, #43702).
 
