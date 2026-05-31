@@ -16,6 +16,10 @@ For security fixes, see [**§ Security**](#security).
 We expect to publish it some time **next week**.
 </aside>
 
+<figure>
+    <a href="{{ '/img/blog/2026-05-diffie.png' | url }}"><img src="{{ '/img/blog/2026-05-diffie.png' | url }}" alt="servoshell 0.2.0 showing several new features: better wrapping for CJK scripts, ‘tab-size’, better file pickers and `<textarea>`, `<select multiple>`, ‘::details-content::before’ and ‘::details-content::after’, and ‘color-mix()’ with any number of colors"></a>
+</figure>
+
 We’ve shipped several new web platform features:
 
 - **&lt;select multiple>** (@lukewarlow, @mrobinson, #43189)
