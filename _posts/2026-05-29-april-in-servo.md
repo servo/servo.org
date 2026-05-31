@@ -16,15 +16,6 @@ For security fixes, see [**§ Security**](#security).
 We expect to publish it some time **next week**.
 </aside>
 
-April was a big milestone for Servo, with some automated tests failing because they had hard-coded cookie expiry dates set to April 2016 plus ten years.
-Surprise!
-We’re still here.
-Here’s to the next 100 years of Servo (@jdm, #44341).
-
-Navigating to a **JSON file** as the top-level document now renders the JSON with an **interactive pretty-printer** (@webbeef, @TimvdLippe, #43702).
-
-Servo’s support for text in **Chinese**, **Japanese**, and **Korean** languages has improved, with correct wrapping in the layout engine (@SharanRP, #43744), and CJK fonts now enabled in servoshell’s browser UI on Windows, Linux, and FreeBSD (@yezhizhen, @CynthiaOketch, @nortti0, #44055, #44138, #44514).
-
 We’ve shipped several new web platform features:
 
 - **&lt;select multiple>** (@lukewarlow, @mrobinson, #43189)
@@ -49,6 +40,15 @@ Plus a bunch of new DOM APIs:
 - **cellPadding**, **cellSpacing**, and **align** properties on **HTMLTableElement** (@mrobinson, #43903) – previously supported in HTML only
 - **relatedTarget** on **‘focus’** and **‘blur’** events (@mrobinson, #43926)
 - **transferFromImageBitmap()** on **ImageBitmapRenderingContext** (@Messi002, #43984)
+
+Servo’s support for text in **Chinese**, **Japanese**, and **Korean** languages has improved, with correct wrapping in the layout engine (@SharanRP, #43744), and CJK fonts now enabled in servoshell’s browser UI on Windows, Linux, and FreeBSD (@yezhizhen, @CynthiaOketch, @nortti0, #44055, #44138, #44514).
+
+Navigating to a **JSON file** as the top-level document now renders the JSON with an **interactive pretty-printer** (@webbeef, @TimvdLippe, #43702).
+
+April was a big milestone for Servo, with some automated tests failing because they had hard-coded cookie expiry dates set to April 2016 plus ten years.
+Surprise!
+We’re still here.
+Here’s to the next 100 years of Servo (@jdm, #44341).
 
 This is another big update, so here’s an outline:
 
