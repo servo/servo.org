@@ -119,6 +119,10 @@ We’re working on the **Wake­Lock API** too, under `--pref dom­_wakelock­_en
 servoshell for Android now has a **revamped browser UI**, including a new **history view** ([@espy](https://github.com/espy), [#43795](https://github.com/servo/servo/pull/43795)), the **apk is 30% smaller** ([@jschwe](https://github.com/jschwe), [#44278](https://github.com/servo/servo/pull/44278), [#44182](https://github.com/servo/servo/pull/44182)), and we’ve fixed the black screen bug when closing settings or switching back from another app ([@yezhizhen](https://github.com/yezhizhen), [#44327](https://github.com/servo/servo/pull/44327)).
 You can now close tabs on OpenHarmony too ([@Narfinger](https://github.com/Narfinger), [#42713](https://github.com/servo/servo/pull/42713)).
 
+<figure>
+    <a href="{{ '/img/blog/2026-05-android.png' | url }}"><img src="{{ '/img/blog/2026-05-android.png' | url }}" alt="servoshell 0.2.0 showing the revamped browser UI on Android. from left to right: viewing a web page, the settings view, the history view"></a>
+</figure>
+
 As for servoshell on desktop platforms, we’ve fixed some focus- and IME-related bugs ([@mrobinson](https://github.com/mrobinson), [#43872](https://github.com/servo/servo/pull/43872), [#43932](https://github.com/servo/servo/pull/43932)), and on Windows, we now install a normal shortcut without the strange behaviour of an “advertised” shortcut ([@yezhizhen](https://github.com/yezhizhen), [#44223](https://github.com/servo/servo/pull/44223)).
 
 ## For developers
