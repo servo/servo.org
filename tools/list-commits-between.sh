@@ -83,16 +83,22 @@ git -C "$servo_repo_path" log --reverse --pretty=$'tformat:%H\t%s\t%aE\t%(traile
     fi
 
     if [ -n "${pulls_json_path+set}" ]; then
-        # Get the PR description, strip carriage returns and HTML markup, word wrap to 120 without joining existing
-        # lines, character wrap to 120, stop before any `---` line, delete empty lines, indent it with four spaces,
-        # then print the result.
+        # Get the PR description, strip carriage returns, and indent and prefix each line.
+        # This is ideal for use with jdm/commit-triage, which can render PR descriptions.
         jq -er --argjson number $pull_number 'select(.number == $number) | .body' "$pulls_json_path" \
         | tr -d \\r | sed -En 's/^/    # /;p' \
         || : # printf '    %s\n' '[Pull request description not found]'
     else
-        # Print the commit message body, with a hard wrap and an indent.
-        # This doesn’t work too well, because our repo is configured to concatenate the PR commit
-        # messages, which often contain a subject only, rather than using the PR description.
-        git -C "$servo_repo_path" log -n 1 --pretty=$'tformat:%w(120,4,4)%b' "$hash" | sed -E '/^ *$/d;/^    Signed-off-by: /d'
+        # Get the commit message body, strip carriage returns, and indent and prefix each line.
+        # Between July 2023 [1] and March 2025 [2], this was not very useful, because the body of
+        # the (landing) commit message just contained a list of (PR branch) commit title lines.
+        # Nowadays it contains the PR description, which is usable with jdm/commit-triage, but
+        # there are hard line breaks baked into it that can make it render a bit differently
+        # (there are extra `\n` that don’t quite corrupt the Markdown, but they turn into extra
+        # `<br>` because of how GitHub renders Markdown in that context).
+        # [1] <https://github.com/servo/servo/pull/29989>
+        # [2] <https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Fixing.20the.20GitHub.20commit.20message/near/509195418>
+        git -C "$servo_repo_path" log -n 1 --pretty=$'tformat:%w(0)%b' "$hash" \
+        | tr -d \\r | sed -En 's/^/    # /;p'
     fi
 done
