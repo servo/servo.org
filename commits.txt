@@ -176,7 +176,8 @@
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/44600	(@delan, @mrobinson, @mukilan, #44600)	Update uv.lock for #44591 (#44600)
++https://github.com/servo/servo/pull/44600	(@delan, @mrobinson, @mukilan, #44600)	Update uv.lock for #44591 (#44600)
+    ports; fix freebsd build issue
     ^ commit f73f72afc6122ddf1275e54a17d0cbcdc9f3e3bc
     # #44591 bumps pyrefly to 0.63.1, but uv.lock still lists pyrefly 0.23.1. as a result, when mach runs `uv run --frozen`, we still try to install the old version of pyrefly, which fails on FreeBSD (#44589).
     # 
@@ -213,8 +214,8 @@ https://github.com/servo/servo/pull/44637	(@jdm, #44637)	script: Introduce argum
     # The UnderlyingSourceType contains members that need to be rooted, which is fine when it's used as a member of a DOM object. However, we also use it as an argument for the constructor, which requires adding a lot of rooting analysis exceptions that could hide other issues. By splitting these responsibilities we make the code simpler to read and remove the rooting analysis exceptions.
     # 
     # Testing: Existing stream tests cover this refactoring.
-https://github.com/servo/servo/pull/44439	(@alice, @delan, @mrobinson, @delan@azabani.com, #44439)	layout: Accessibility: Compute labels for name-from-content nodes  (#44439)
-    a11y; …
++https://github.com/servo/servo/pull/44439	(@alice, @delan, @mrobinson, @delan@azabani.com, #44439)	layout: Accessibility: Compute labels for name-from-content nodes  (#44439)
+    a11y; compute names from contents <https://w3c.github.io/aria/#namefromcontent>
     ^ commit 6bcaa8d3a626007a6740106d989b47b0b4b7f35a
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # After updating children, we can then walk the text node descendants for [name from content](https://w3c.github.io/aria/#namefromcontent) nodes to compute their labels.
@@ -247,7 +248,7 @@ https://github.com/servo/servo/pull/44439	(@alice, @delan, @mrobinson, @delan@az
     # 
     # Testing: Successful build is enough
     # Fixes: Part of #42638 
-https://github.com/servo/servo/pull/44661	(@jdm, #44661)	fonts: Clean up unnecessary clone. (#44661)
+-https://github.com/servo/servo/pull/44661	(@jdm, #44661)	fonts: Clean up unnecessary clone. (#44661)
     ^ commit 0f348ae7c32a7fa6b3dda30bb98c2d4736958b39
     # This makes clippy warning-free on macOS.
     # 
@@ -267,7 +268,8 @@ https://github.com/servo/servo/pull/44661	(@jdm, #44661)	fonts: Clean up unneces
     # Pass `redirectStart` to document and expose it to PerformanceMark
     # 
     # Testing: More WPT tests Passed
-https://github.com/servo/servo/pull/44662	(@jdm, #44662)	script: Remove unnecessary Box inside of Rc. (#44662)
++https://github.com/servo/servo/pull/44662	(@jdm, #44662)	script: Remove unnecessary Box inside of Rc. (#44662)
+    perf; reduce allocations in streams api
     ^ commit 7a6c5c7a7a1a11e213659eb43f072075870ba670
     # The `Box<Heap<...>>` pattern exists because it's easiest to use and initialize Heap correctly when it's immediately placed inside of a stable heap allocation. `Rc<Heap<...>>` serves the same purpose, so we can avoid the redundant allocation and clean up some clippy exceptions.
     # 
@@ -392,7 +394,8 @@ https://github.com/servo/servo/pull/44356	(@simonwuelker, #44356)	mozjs: Make `F
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 03-05-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/44679	(@nodelpit, #44679)	script: Replace assert! to debug_assert! in sanitizer (#44679)
++https://github.com/servo/servo/pull/44679	(@nodelpit, #44679)	script: Replace assert! to debug_assert! in sanitizer (#44679)
+    perf; reduce expensive assertions in Sanitizer
     ^ commit ccb02d82690d5a3473df446b876195a46579557d
     # This change allows for better performance in production.
     # 
@@ -404,7 +407,8 @@ https://github.com/servo/servo/pull/44679	(@nodelpit, #44679)	script: Replace as
     # Part of #42638.
     # 
     # Testing: It compiles.
-https://github.com/servo/servo/pull/44674	(@jdm, @TimvdLippe, #44674)	allocator: Add script to post-process output of tracking allocator (#44674)
++https://github.com/servo/servo/pull/44674	(@jdm, @TimvdLippe, #44674)	allocator: Add script to post-process output of tracking allocator (#44674)
+    perf; towards more improvements to ‘about:memory’
     ^ commit b2184d0e0716afbfbe8959e33c1787a1d2c8de97
     # This script can be used to identify the crates containing the largest number of untracked allocations, and the largest untracked allocations within those crates.
     # 
@@ -1570,7 +1574,8 @@ https://github.com/servo/servo/pull/44738	(@eerii, @atbrakhi, #44738)	devtools: 
     # Testing: Existing tests pass
     # Part of: #36027 test_console_log_function
     # 
-https://github.com/servo/servo/pull/44741	(@Gae24, #44741)	script: retrieve fetch options and base url from the active script for timer scripts (#44741)
++https://github.com/servo/servo/pull/44741	(@Gae24, #44741)	script: retrieve fetch options and base url from the active script for timer scripts (#44741)
+    dom; fix dynamic import() in setTimeout() and setInterval() callbacks
     ^ commit 13210b2e02e3bdd5da41a066a14820727472ad43
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Use the active script's fetch options and base url according to spec, fixing dynamic imports inside timers scripts.
@@ -2203,7 +2208,8 @@ https://github.com/servo/servo/pull/44764	(@atbrakhi, #44764)	devtools: Fix func
     # 
     # Similar to https://github.com/servo/servo/pull/44291#issuecomment-4265766940, the dependabot fails us again.
     # We got an empty commit 0383a103d1354ace1e88130ffe494fd941eb07fa
-https://github.com/servo/servo/pull/44766	(@alice, #44766)	layout: Add setter/getter methods on AccessibilityNode. (#44766)
++https://github.com/servo/servo/pull/44766	(@alice, #44766)	layout: Add setter/getter methods on AccessibilityNode. (#44766)
+    a11y; towards incremental tree building
     ^ commit beb56b6476bf8a826a5cc0905629a3478de59673
     # These allow us to avoid reaching into the inner accesskit::Node. They also allow us to set a boolean indicating whether the node has been updated, which we can check instead of returning a bool from update_node().
     # 
@@ -2239,7 +2245,8 @@ https://github.com/servo/servo/pull/44765	(@atbrakhi, @eerii, #44765)	devtools: 
     # Testing:  Current tests are passing
     # Fixes:  part of #36027 
     # 
-https://github.com/servo/servo/pull/44767	(@alice, @delan, #44767)	layout: Generate unique IDs for accessibility nodes. (#44767)
++https://github.com/servo/servo/pull/44767	(@alice, @delan, #44767)	layout: Generate unique IDs for accessibility nodes. (#44767)
+    a11y; towards incremental tree building. a11y node ids need to be decoupled from dom node addresses, to avoid misdirection when a dom node is destroyed and a new one created at the same address
     ^ commit 0d6ba0524dc5893ef1bb6c2e30e2b18463616e11
     # Use a sequential u64 to generate a unique ID for each node, instead of using the OpaqueId directly.
     # 
@@ -2323,7 +2330,8 @@ https://github.com/servo/servo/pull/44781	(@jdm, #44781)	media: Make all media s
     # 
     # Testing: This should not change observable behavior, so is covered by existing tests.
     # 
-https://github.com/servo/servo/pull/44791	(@mrobinson, @mrobinson, #44791)	script: Properly render CDATA sections (#44791)
++https://github.com/servo/servo/pull/44791	(@mrobinson, @mrobinson, #44791)	script: Properly render CDATA sections (#44791)
+    layout; impl layout for <![CDATA[]]>
     ^ commit 6915a3b3e561ec650687a90a0e182f77cfa0edc5
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This change makes it so that CDATA sections are rendered properly during
@@ -2462,8 +2470,8 @@ https://github.com/servo/servo/pull/44791	(@mrobinson, @mrobinson, #44791)	scrip
     # 
     # Testing: This does not change behavior as the code was just duplicating work on closer inspection.
     # 
-https://github.com/servo/servo/pull/44768	(@alice, @delan, #44768)	layout: Split recompute_children() from update_node() in AccessibilityTree. (#44768)
-    a11y; …
++https://github.com/servo/servo/pull/44768	(@alice, @delan, #44768)	layout: Split recompute_children() from update_node() in AccessibilityTree. (#44768)
+    a11y; towards incremental tree building
     ^ commit f3bdb24d2a43853721ea757fee704ef250df9c56
     # This allows us to use recompute_children() as the opportunity to create new nodes,
     # and assert at the start of update_node_and_children() that the node has already been created.
@@ -2549,7 +2557,7 @@ https://github.com/servo/servo/pull/44809	(@sagudev, #44809)	Modernize `derive(D
     # This is something that has bothering me for long time. Our proc-macros are still written as that we are in 2018. This PR serves as demonstration how much better we can write macros and their tests (we can also test expand content).
     # 
     # Testing: This changes is covered by tests.
-https://github.com/servo/servo/pull/44814	(@sagudev, #44814)	CI: Use `RUSTFLAGS=-D warnings` (#44814)
+-https://github.com/servo/servo/pull/44814	(@sagudev, #44814)	CI: Use `RUSTFLAGS=-D warnings` (#44814)
     ^ commit 75251444048784cbe07fc6e8d62d395dc6295e51
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Android and OHOS have many warnings in servoshell due too completely different impl so I decided to ignore them for now.
@@ -2763,7 +2771,8 @@ https://github.com/servo/servo/pull/44464	(@jdm, #44464)	script: Separate concep
     # Testing: Fixes many asserting tests in WPT run with --debug-mozjs enabled, but we don't run that in CI yet.
     # Fixes: #44387
     # 
-https://github.com/servo/servo/pull/44823	(@jdm, #44823)	script: Treat GPUAdapter as a set instead of a map. (#44823)
++https://github.com/servo/servo/pull/44823	(@jdm, #44823)	script: Treat GPUAdapter as a set instead of a map. (#44823)
+    dom; part of #44598
     ^ commit f5bb0bb05b033acda1fe47d163c85329e171c18c
     # This fixes a regression from 474ee1726ce7df3c2314051264ab3c8612c076ad, which replaced the Setlike import with Maplike. The Maplike implementation for types that implement Setlike is mostly stubbed out.
     # 
@@ -2777,7 +2786,8 @@ https://github.com/servo/servo/pull/44816	(@kimjune01@gmail.com, #44816)	script:
     # Testing: Automated tests do not verify the error messages in exceptions, so there are no automated tests for these changes.
     # 
     # Part of #40756
-https://github.com/servo/servo/pull/44688	(@jdm, #44688)	script: Use correct slotchange event type for inline event handler. (#44688)
++https://github.com/servo/servo/pull/44688	(@jdm, #44688)	script: Use correct slotchange event type for inline event handler. (#44688)
+    dom; impl onslotchange event handler (attribute) on ShadowRoot, and fix ‘slotchange’ events failing to bubble
     ^ commit 5f066bfdd8ba62b1f68a7f3ca2ec0c4f5004b097
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # The ShadowRoot.onslotchange handler was defined incorrectly, and writing a test for it exposed that our slotchange events were not bubbling as they should.
@@ -2805,7 +2815,8 @@ https://github.com/servo/servo/pull/44832	(@jschwe, #44832)	fonts: Fix potential
     # Testing: No behavior change is expected in existing tests, since they would have panicked in CI due to underflow.
     # 
     # 
-https://github.com/servo/servo/pull/44825	(@jdm, #44825)	script: Treat HTMLAnchorElement as activatable. (#44825)
++https://github.com/servo/servo/pull/44825	(@jdm, #44825)	script: Treat HTMLAnchorElement as activatable. (#44825)
+    dom; you can now click on <area> elements programmatically. but i don’t think we support image maps in layout?
     ^ commit ac0692d426fbd2ce2dabc4326b678db829b6f89b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # HTMLAreaElement already implements the Activatable trait, we just forgot to include it in the big match.
@@ -3103,7 +3114,8 @@ https://github.com/servo/servo/pull/44848	(@kkoyung, #44848)	script: Combine ope
     # 
     # Testing: Refactoring. Covered by WPT tests in `WebCrypto` subdirectory.
     # 
-https://github.com/servo/servo/pull/44704	(@noble.note3185@fastmail.com, @jdm, #44704)	script: add error msgs to cssstylesheet.rs aes_common.rs (#44704)
++https://github.com/servo/servo/pull/44704	(@noble.note3185@fastmail.com, @jdm, #44704)	script: add error msgs to cssstylesheet.rs aes_common.rs (#44704)
+    dom; improve JS error messages in CSSStyleSheet (document.styleSheets[]) and web crypto api
     ^ commit f923abdef5070908a1db44422bc06ad1f934e7b6
     # … components/script/dom/webcrypto/subtlecrypto/aes_common.rs
     # 
@@ -3916,7 +3928,8 @@ https://github.com/servo/servo/pull/44888	(@simonwuelker, #44888)	constellation:
     # </details>
     # <br />
     # 
-https://github.com/servo/servo/pull/44899	(@jdm, #44899)	wpt: Wrap event listener in testharness step. (#44899)
+-https://github.com/servo/servo/pull/44899	(@jdm, #44899)	wpt: Wrap event listener in testharness step. (#44899)
+    ;test; test only
     ^ commit 1a655f2c9f239eab2e0a2b3f928a23e908bba062
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # If the listener is called but an assertion fails, the test will time out. It fails much faster when it's wrapped correctly.
@@ -4555,8 +4568,8 @@ https://github.com/servo/servo/pull/44945	(@mrobinson, #44945)	layout: Stop clon
     # Before this PR, calculating accumulated containing blocks is a stand-alone traversal of the fragment tree that takes ~4% of the layout time in one synthetic benchmark. This moves it to be part of the existing tree traversal for stacking context construction, hopefully improving performance.
     # 
     # Testing: expected not to change observable behavior or outcomes of existing tests. The intermediate commit **before** “Remove now-redundant containing block computation pass” has does calculations and asserts they give the same result. Latest WPT run with this assertion: https://github.com/servo/servo/actions/runs/25807772217
-https://github.com/servo/servo/pull/44785	(@alice, @delan, #44785)	layout: Add a basic test for incremental accessibility tree updates. (#44785)
-    a11y; …
++https://github.com/servo/servo/pull/44785	(@alice, @delan, #44785)	layout: Add a basic test for incremental accessibility tree updates. (#44785)
+    a11y; towards incremental tree building
     ^ commit ad7c3f9928ffc6f6d29e92405b86234b904d038a
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -5194,8 +5207,8 @@ https://github.com/servo/servo/pull/45026	(@niyabits, #45026)	script: Remove une
     # 
     # Testing: This just ensures that the memory of `AudioNode::node_id` is tracked, so doesn't require a new test.
     # 
-https://github.com/servo/servo/pull/44801	(@alice, @delan, @mrobinson, #44801)	layout: Prune stale accessibility nodes from the cache after each update. (#44801)
-    a11y; …
++https://github.com/servo/servo/pull/44801	(@alice, @delan, @mrobinson, #44801)	layout: Prune stale accessibility nodes from the cache after each update. (#44801)
+    a11y; towards incremental tree building
     ^ commit 1af38f22d0051d29851d39a1d6f9337343bd83af
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ may contain changes to feature flags
@@ -5279,7 +5292,8 @@ https://github.com/servo/servo/pull/44801	(@alice, @delan, @mrobinson, #44801)	l
     # Part of #45022
     # 
     # Testing: WPT
-https://github.com/servo/servo/pull/45039	(@averyrudelphe@gmail.com, #45039)	layout: Fix `border-image-outset` clipping (#45039)
++https://github.com/servo/servo/pull/45039	(@averyrudelphe@gmail.com, #45039)	layout: Fix `border-image-outset` clipping (#45039)
+    layout; fix incorrect rendering (clipping) of ‘border-image-outset’
     ^ commit 6b211402127898d4181e753faf326544ad92ecc9
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Previously this created `common` before passing it down to `build_border_image`, which meant it wasn't aware of the outset.
@@ -5296,7 +5310,7 @@ https://github.com/servo/servo/pull/44920	(@avis137@posteo.net, #44920)	layout: 
     # Testing: more WPT tests passing
     # Fixes: #44886, as this rule appears to be the only case where a distinction between HTML and non-HTML documents is needed
     # 
-https://github.com/servo/servo/pull/45033	(@alice, #45033)	layout: `use` accesskit::NodeId in `accessibility_tree.rs`. (#45033)
+-https://github.com/servo/servo/pull/45033	(@alice, #45033)	layout: `use` accesskit::NodeId in `accessibility_tree.rs`. (#45033)
     ^ commit c20e11cc972d6142f10b81e2cbfb65e555996859
     # Also un-qualify accesskit::Role where it was still qualified.
     # 
@@ -5314,21 +5328,23 @@ https://github.com/servo/servo/pull/45033	(@alice, #45033)	layout: `use` accessk
     # 
     # Testing: This should not change observable behavior, so should be covered by existing tests.
     # 
-https://github.com/servo/servo/pull/45034	(@alice, #45034)	layout: make `root_node_id` a member of AccessibilityTree (#45034)
+-https://github.com/servo/servo/pull/45034	(@alice, #45034)	layout: make `root_node_id` a member of AccessibilityTree (#45034)
     ^ commit 68c534422309dd5a3c36fce1b327e89861755110
     # This allows us to run print_tree() and assert_integrity() without needing to pass in the root node id.
     # 
     # Testing: No behaviour change.
     # 
     # Includes #45033.
-https://github.com/servo/servo/pull/45035	(@alice, #45035)	layout:  Have AccessibilityUpdate represent all changes in this update. (#45035)
++https://github.com/servo/servo/pull/45035	(@alice, #45035)	layout:  Have AccessibilityUpdate represent all changes in this update. (#45035)
+    a11y; towards incremental tree building
     ^ commit 4bd306a81a51e80022679d5cc506d80cac1d65cf
     # Specifically, move `tree_changes` from `AccessibilityTree` on to `AccessibilityUpdate`, and have `AccessibilityUpdate` implement the logic from `finalize_tree_changes()`.
     # 
     # Testing: Updates the unit test in the same file.
     # 
     # Includes #45034.
-https://github.com/servo/servo/pull/45051	(@freyacodes, #45051)	shell.nix: Update nixpkgs (#45051)
++https://github.com/servo/servo/pull/45051	(@freyacodes, #45051)	shell.nix: Update nixpkgs (#45051)
+    dev; fix nixos/nix build issue
     ^ commit 72da633c9cb874189a994488c24de1012b4e2dce
     # It's more fun to work on Servo when surfman doesn't panic :)
     # 
@@ -5622,7 +5638,7 @@ https://github.com/servo/servo/pull/45037	(@yezhizhen, #45037)	ci: Add vello bac
     # Testing: It compiles
     # Part of #40600
     # 
-https://github.com/servo/servo/pull/45057	(@jerensl, #45057)	script: modernize dom struct proc-macro and add new tests (#45057)
+-https://github.com/servo/servo/pull/45057	(@jerensl, #45057)	script: modernize dom struct proc-macro and add new tests (#45057)
     ^ commit 9e49391feb361932f61bf98d66bdf20afaf499e8
     # This part of the modernization proc-macro initiates according to issue #44810
     # 
@@ -5698,7 +5714,8 @@ https://github.com/servo/servo/pull/45083	(@yezhizhen, #45083)	ci: Reduce Window
     # https://github.com/servo/servo/actions/runs/26270050300
     # https://github.com/servo/servo/actions/runs/26270041463
     # 
-https://github.com/servo/servo/pull/45079	(@mukilan, #45079)	libservo: Mark `webxr` crate as optional dependency for all targets. (#45079)
++https://github.com/servo/servo/pull/45079	(@mukilan, #45079)	libservo: Mark `webxr` crate as optional dependency for all targets. (#45079)
+    ports; fix windows build issue
     ^ commit ffba6bd59c99e79e1b8e94a430b82e5444d4385d
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Currently some targets include `webxr` as a non-optional dependency which leads to issues like #45027 where the features enabled for `webxr` support conflict with other `servo` features.
@@ -5779,6 +5796,7 @@ https://github.com/servo/servo/pull/44966	(@jschwe, #44966)	devcontainer: Instal
     # Fixes: #44349
     # 
 https://github.com/servo/servo/pull/45106	(@averyrudelphe@gmail.com, #45106)	script: Add `ontransitionstart` EventHandler (#45106)
+    dom; ontransitionstart event handler (attribute). but does it actually work? …
     ^ commit 1ad6dfdee6f43ccf8bdeaa43cd35e343d89463e6
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -6201,7 +6219,8 @@ https://github.com/servo/servo/pull/45140	(@sagudev, #45140)	webgpu: Accept `GPU
     # Testing: WebGPU CTS run
     # 
 >>> 2026-05-26T23:48:46Z
-https://github.com/servo/servo/pull/45135	(@freyacodes, #45135)	shell.nix: Rename xorg packages to fix warnings (#45135)
++https://github.com/servo/servo/pull/45135	(@freyacodes, #45135)	shell.nix: Rename xorg packages to fix warnings (#45135)
+    dev; fix nixos/nix build issue
     ^ commit e5b3d1cc3dea6d2378e026b8e09f506e9e16e62c
     # This fixes some warnings from shell.nix:
     # 
@@ -6471,8 +6490,8 @@ https://github.com/servo/servo/pull/45135	(@freyacodes, #45135)	shell.nix: Renam
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/45050	(@atbrakhi, #45050)	devtools: Fix deadlock-like silent failure in DevTools (#45050)
-    devtools; …
++https://github.com/servo/servo/pull/45050	(@atbrakhi, #45050)	devtools: Fix deadlock-like silent failure in DevTools (#45050)
+    devtools; fix hang when Console tab evaluation during pause causes a breakpoint to be hit
     ^ commit ad3b96d2d59eb028a4245f39aacdd86f000dffdc
     # When the debugger was already paused, console evaluation could hit another breakpoint and send a second paused packet. This created a deadlock-like nested pause flow where DevTools appeared to resume, but behind the scenes pause/resume handling got stuck silently.
     # 
@@ -6558,7 +6577,8 @@ https://github.com/servo/servo/pull/45155	(@freyacodes, #45155)	devtools: Add di
     # This should help with panics such as https://github.com/servo/servo/issues/45141 where there is a mismatch between actual and expected type.
     # 
     # Testing: Not relevant for internal diagnostics
-https://github.com/servo/servo/pull/45118	(@officialasishkumar, #45118)	script: Support event handler content attributes on SVG elements (#45118)
++https://github.com/servo/servo/pull/45118	(@officialasishkumar, #45118)	script: Support event handler content attributes on SVG elements (#45118)
+    dom; impl event handler (attributes) on svg elements. unclear if this is just <svg> or any svg-namespaced element?
     ^ commit eb572b19a1a81c20b96e53a418ae677f540d5ab0
     # Event handler content attributes such as `onclick` were only activated in
     # `HTMLElement::attribute_mutated`, so setting one on an SVG element had no
@@ -7422,7 +7442,8 @@ https://github.com/servo/servo/pull/45065	(@avis137@posteo.net, #45065)	script: 
     # Testing: no change in behavior, no changes in test results, the Rust ownership system would error at any case where it is not possible to move the `DOMString` to create a `String`.
     # Fixes: #44999 (though nothing prevents anyone from using `to_string` again where `String::from` would be better)
     # 
-https://github.com/servo/servo/pull/45084	(@calvaris@igalia.com, #45084)	media: support MP4 with moov atom at the end of the file (#45084)
++https://github.com/servo/servo/pull/45084	(@calvaris@igalia.com, #45084)	media: support MP4 with moov atom at the end of the file (#45084)
+    web; fix playback of mp4 without fast start
     ^ commit 81b709060ba2297d44e82d390c940e808ac47302
     # qtdemux failed with "no 'moov' atom within the first 10 MB" when the MP4 did not have fast start because ServoSrc declared only SEQUENTIAL push-only to the pipeline, making qtdemux quit the seek-to-end. Besides, the file:// protocol did not expose the asset size in the HTTP headers so the media backend never got the set_input_size.
     # 
@@ -7530,7 +7551,8 @@ https://github.com/servo/servo/pull/45212	(@jschwe, @mrobinson, #45212)	canvas: 
     # Testing: Covered by existing canvas WPT tests
     # 
     # 
-https://github.com/servo/servo/pull/45207	(@alice, #45207)	Document fields on AccessibilityNode and AccessibilityTree. (#45207)
++https://github.com/servo/servo/pull/45207	(@alice, #45207)	Document fields on AccessibilityNode and AccessibilityTree. (#45207)
+    a11y; towards incremental tree building
     ^ commit fb7f6d039c410fdeee900ffc1e5fdfbf9071cfcf
     # Also rename `epoch` to `embedder_epoch` to emphasise that it's not an epoch of the tree (e.g. incremented on each update) but rather an epoch known to the embedder.
     # 
@@ -7823,7 +7845,8 @@ https://github.com/servo/servo/pull/45056	(@eerii, #45056)	devtools: Fix inspect
     # Fixes: #42603
     # Part of: #39862
     # Part of: #45055
-https://github.com/servo/servo/pull/45227	(@mrobinson, @Loirooriol, #45227)	layout: Do not store cached shaping results in non-text nodes (#45227)
++https://github.com/servo/servo/pull/45227	(@mrobinson, @Loirooriol, #45227)	layout: Do not store cached shaping results in non-text nodes (#45227)
+    crash; fix crash in ‘content’
     ^ commit 4c7085c9b85d1a2e18f1fabf47a6d50568a3e529
     # Non-text nodes can add text to layout, for instance, via the `content`
     # properly on pseudo-elements. In that case we do not want to store
@@ -7885,7 +7908,7 @@ https://github.com/servo/servo/pull/45227	(@mrobinson, @Loirooriol, #45227)	layo
     # This change is only in `components/script/dom/console.rs`.
     # Testing: No change in behavior, the rust compiler would error in cases where its not possible to move `DOMString` to `String`. 
     # Fixes: #44999
-https://github.com/servo/servo/pull/45197	(@mrobinson, #45197)	layout: Improve debugging output of `BaseFragment` (#45197)
+-https://github.com/servo/servo/pull/45197	(@mrobinson, #45197)	layout: Improve debugging output of `BaseFragment` (#45197)
     ^ commit 9559998c189865a907e906cb5584df4353ca102d
     # This change does a few things to improve debugging output of
     # `BaseFragment`:
