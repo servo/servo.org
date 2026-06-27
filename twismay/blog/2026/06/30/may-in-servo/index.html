@@ -253,6 +253,16 @@
 <div class="inner-container blog-content">
   <p><a href="https://github.com/servo/servo/releases/tag/v0.3.0"><strong>Servo 0.3.0</strong></a> contains all of the changes we landed in May, which came out to <strong>391 commits</strong> (March: 534).
 For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p>
+<p>We’ve shipped several new web platform features:</p>
+<ul>
+<li><strong>‘font-kerning: none’</strong> (@simonwuelker, #44634)</li>
+<li><strong>‘font-variant-east-asian’</strong> (@simonwuelker, #44989)</li>
+<li><strong>‘font-variant-ligatures’</strong> (@simonwuelker, #44903)</li>
+<li><strong>‘font-variant-numeric’</strong> (@simonwuelker, #44950)</li>
+<li><strong>‘font-variant-position’</strong> (@simonwuelker, #45142)</li>
+<li><strong>mp4</strong> files <strong>without fast start</strong> in <strong>&lt;video&gt;</strong> (@calvaris, #45084)</li>
+<li><strong>&lt;![CDATA[]]&gt;</strong> layout (@mrobinson, #44791)</li>
+</ul>
 <p>Plus a bunch of new DOM APIs:</p>
 <ul>
 <li><strong>onslotchange</strong> property on <strong>Shadow­Root</strong> (@jdm, #44688)</li>
@@ -293,7 +303,7 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 <p>We’re continuing to implement <strong>document.exec­Command()</strong> for <strong>rich text editing</strong>, under <code>--pref dom­_exec­_command­_enabled</code>.
 This release adds support for the <strong>‘back­Color’</strong>, <strong>‘fore­Color’</strong>, <strong>‘create­Link’</strong>, <strong>‘unlink’</strong>, <strong>‘superscript’</strong>, <strong>‘subscript’</strong>, and <strong>‘remove­Format’</strong> commands (@TimvdLippe, #44644, #44682, #44657, #44710, #44677).</p>
 <p>We’re also working on the <strong>Sanitizer</strong> API, under <code>--pref dom­_sanitizer­_enabled</code>.
-With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for <strong>allow­Processing­Instruction()</strong> and <strong>remove­Processing­Instruction()</strong> on <strong>Sanitizer</strong> (@kkoyung, #44734).</p>
+With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for <strong>set­Comments()</strong>, <strong>set­Data­Attributes()</strong>, <strong>allow­Processing­Instruction()</strong>, <strong>remove­Processing­Instruction()</strong>, and <strong>remove­Unsafe()</strong> on <strong>Sanitizer</strong> (@kkoyung, #44734, #44983).</p>
 <p>All of the features above are enabled in servoshell’s experimental mode.</p>
 <p>We’re now working on <strong>SharedWorker</strong> and <strong>ServiceWorker</strong>, under <code>--pref dom­_sharedworker­_enabled</code> and <code>--pref dom­_serviceworker­_enabled</code> respectively.
 This release adds support for <strong>new Shared­Worker()</strong> (@Taym95, #44761), and parts of the ServiceWorker API (@gterzian, @arihant2math, #45082, #44787).</p>
@@ -354,6 +364,19 @@ We run compile tests with the MSRV, but most of our testing is now done with Rus
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>Several crashes have been fixed:</p>
+<ul>
+<li>in <strong>‘content’</strong> (@mrobinson, @Loirooriol, @SimonSapin, #45227, #44762)</li>
+<li>in <strong>Media­Stream</strong> (@jdm, #44781)</li>
+<li>in <strong>item()</strong> on <strong>attributes</strong> on <strong>Element</strong> (@webbeef, #44721)</li>
+<li>in <strong>append­Rule()</strong> on <strong>CSS­Keyframes­Rule</strong> (@mrobinson, #45173)</li>
+<li>in <strong>init­Event()</strong> on <strong>Focus­Event</strong> (@mrobinson, #44870)</li>
+<li>in <strong>stop()</strong> on <strong>Window</strong> (@TimvdLippe, #44804)</li>
+<li>in <code>document.exec­Command(​&quot;delete&quot;)</code> (@TimvdLippe, #44748)</li>
+<li>in <code>--debug-mozjs</code> builds (@Gae24, @SharanRP, #44745, #45001)</li>
+<li>when shaping zero-width spaces (@mrobinson, #45176)</li>
+<li>when toggling servoshell’s experimental mode at runtime (@mrobinson, @Loirooriol, #45226)</li>
+</ul>
 <p>We’ve continued our long-running effort to <strong>use the Rust type system</strong> to make certain kinds of dynamic borrow failures impossible (@Gae24, @MavenRain, @Narfinger, @SteveSharonSam, @TimvdLippe, @elomscansio, @jdm, @kkoyung, @yezhizhen, #44712, #44759, #44879, #45014, #45058, #45061, #45076, #45098, #45110, #45149, #45117, #45184, #45201, #44806, #44930, #44942, #44946, #45233, #45181, #44659, #44660, #44664, #44668, #44992, #45000, #45081, #45009, #45225, #45087, #45244, #45245, #45247, #44663, #44665, #44993, #45040, #45053, #44647, #44671, #44681, #44717, #44733, #44686, #44653).</p>
 <style>
     kbd {

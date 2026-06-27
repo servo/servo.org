@@ -17,6 +17,16 @@
     <id>https://servo.org/twismay/blog/2026/06/30/may-in-servo/</id>
     <content xml:lang="en" type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.3.0&quot;&gt;&lt;strong&gt;Servo 0.3.0&lt;/strong&gt;&lt;/a&gt; contains all of the changes we landed in May, which came out to &lt;strong&gt;391 commits&lt;/strong&gt; (March: 534).
 For security fixes, see &lt;a href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#security&quot;&gt;&lt;strong&gt;§ Security&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We’ve shipped several new web platform features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;‘font-kerning: none’&lt;/strong&gt; (@simonwuelker, #44634)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘font-variant-east-asian’&lt;/strong&gt; (@simonwuelker, #44989)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘font-variant-ligatures’&lt;/strong&gt; (@simonwuelker, #44903)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘font-variant-numeric’&lt;/strong&gt; (@simonwuelker, #44950)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘font-variant-position’&lt;/strong&gt; (@simonwuelker, #45142)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;mp4&lt;/strong&gt; files &lt;strong&gt;without fast start&lt;/strong&gt; in &lt;strong&gt;&amp;lt;video&amp;gt;&lt;/strong&gt; (@calvaris, #45084)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;lt;![CDATA[]]&amp;gt;&lt;/strong&gt; layout (@mrobinson, #44791)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Plus a bunch of new DOM APIs:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;onslotchange&lt;/strong&gt; property on &lt;strong&gt;Shadow­Root&lt;/strong&gt; (@jdm, #44688)&lt;/li&gt;
@@ -57,7 +67,7 @@ For security fixes, see &lt;a href=&quot;https://servo.org/twismay/blog/2026/06/
 &lt;p&gt;We’re continuing to implement &lt;strong&gt;document.exec­Command()&lt;/strong&gt; for &lt;strong&gt;rich text editing&lt;/strong&gt;, under &lt;code&gt;--pref dom­_exec­_command­_enabled&lt;/code&gt;.
 This release adds support for the &lt;strong&gt;‘back­Color’&lt;/strong&gt;, &lt;strong&gt;‘fore­Color’&lt;/strong&gt;, &lt;strong&gt;‘create­Link’&lt;/strong&gt;, &lt;strong&gt;‘unlink’&lt;/strong&gt;, &lt;strong&gt;‘superscript’&lt;/strong&gt;, &lt;strong&gt;‘subscript’&lt;/strong&gt;, and &lt;strong&gt;‘remove­Format’&lt;/strong&gt; commands (@TimvdLippe, #44644, #44682, #44657, #44710, #44677).&lt;/p&gt;
 &lt;p&gt;We’re also working on the &lt;strong&gt;Sanitizer&lt;/strong&gt; API, under &lt;code&gt;--pref dom­_sanitizer­_enabled&lt;/code&gt;.
-With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for &lt;strong&gt;allow­Processing­Instruction()&lt;/strong&gt; and &lt;strong&gt;remove­Processing­Instruction()&lt;/strong&gt; on &lt;strong&gt;Sanitizer&lt;/strong&gt; (@kkoyung, #44734).&lt;/p&gt;
+With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for &lt;strong&gt;set­Comments()&lt;/strong&gt;, &lt;strong&gt;set­Data­Attributes()&lt;/strong&gt;, &lt;strong&gt;allow­Processing­Instruction()&lt;/strong&gt;, &lt;strong&gt;remove­Processing­Instruction()&lt;/strong&gt;, and &lt;strong&gt;remove­Unsafe()&lt;/strong&gt; on &lt;strong&gt;Sanitizer&lt;/strong&gt; (@kkoyung, #44734, #44983).&lt;/p&gt;
 &lt;p&gt;All of the features above are enabled in servoshell’s experimental mode.&lt;/p&gt;
 &lt;p&gt;We’re now working on &lt;strong&gt;SharedWorker&lt;/strong&gt; and &lt;strong&gt;ServiceWorker&lt;/strong&gt;, under &lt;code&gt;--pref dom­_sharedworker­_enabled&lt;/code&gt; and &lt;code&gt;--pref dom­_serviceworker­_enabled&lt;/code&gt; respectively.
 This release adds support for &lt;strong&gt;new Shared­Worker()&lt;/strong&gt; (@Taym95, #44761), and parts of the ServiceWorker API (@gterzian, @arihant2math, #45082, #44787).&lt;/p&gt;
@@ -118,6 +128,19 @@ We run compile tests with the MSRV, but most of our testing is now done with Rus
 &lt;h2 id=&quot;performance-and-stability&quot; tabindex=&quot;-1&quot;&gt;Performance and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#performance-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Several crashes have been fixed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;in &lt;strong&gt;‘content’&lt;/strong&gt; (@mrobinson, @Loirooriol, @SimonSapin, #45227, #44762)&lt;/li&gt;
+&lt;li&gt;in &lt;strong&gt;Media­Stream&lt;/strong&gt; (@jdm, #44781)&lt;/li&gt;
+&lt;li&gt;in &lt;strong&gt;item()&lt;/strong&gt; on &lt;strong&gt;attributes&lt;/strong&gt; on &lt;strong&gt;Element&lt;/strong&gt; (@webbeef, #44721)&lt;/li&gt;
+&lt;li&gt;in &lt;strong&gt;append­Rule()&lt;/strong&gt; on &lt;strong&gt;CSS­Keyframes­Rule&lt;/strong&gt; (@mrobinson, #45173)&lt;/li&gt;
+&lt;li&gt;in &lt;strong&gt;init­Event()&lt;/strong&gt; on &lt;strong&gt;Focus­Event&lt;/strong&gt; (@mrobinson, #44870)&lt;/li&gt;
+&lt;li&gt;in &lt;strong&gt;stop()&lt;/strong&gt; on &lt;strong&gt;Window&lt;/strong&gt; (@TimvdLippe, #44804)&lt;/li&gt;
+&lt;li&gt;in &lt;code&gt;document.exec­Command(​&amp;quot;delete&amp;quot;)&lt;/code&gt; (@TimvdLippe, #44748)&lt;/li&gt;
+&lt;li&gt;in &lt;code&gt;--debug-mozjs&lt;/code&gt; builds (@Gae24, @SharanRP, #44745, #45001)&lt;/li&gt;
+&lt;li&gt;when shaping zero-width spaces (@mrobinson, #45176)&lt;/li&gt;
+&lt;li&gt;when toggling servoshell’s experimental mode at runtime (@mrobinson, @Loirooriol, #45226)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;We’ve continued our long-running effort to &lt;strong&gt;use the Rust type system&lt;/strong&gt; to make certain kinds of dynamic borrow failures impossible (@Gae24, @MavenRain, @Narfinger, @SteveSharonSam, @TimvdLippe, @elomscansio, @jdm, @kkoyung, @yezhizhen, #44712, #44759, #44879, #45014, #45058, #45061, #45076, #45098, #45110, #45149, #45117, #45184, #45201, #44806, #44930, #44942, #44946, #45233, #45181, #44659, #44660, #44664, #44668, #44992, #45000, #45081, #45009, #45225, #45087, #45244, #45245, #45247, #44663, #44665, #44993, #45040, #45053, #44647, #44671, #44681, #44717, #44733, #44686, #44653).&lt;/p&gt;
 &lt;style&gt;
     kbd {
