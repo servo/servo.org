@@ -25,6 +25,8 @@ For security fixes, see &lt;a href=&quot;https://servo.org/twismay/blog/2026/06/
 &lt;li&gt;&lt;strong&gt;‘font-variant-numeric’&lt;/strong&gt; (@simonwuelker, #44950)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;‘font-variant-position’&lt;/strong&gt; (@simonwuelker, #45142)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;mp4&lt;/strong&gt; files &lt;strong&gt;without fast start&lt;/strong&gt; in &lt;strong&gt;&amp;lt;video&amp;gt;&lt;/strong&gt; (@calvaris, #45084)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;form enctype=&amp;quot;multipart/form-data&amp;quot;&amp;gt;&lt;/code&gt; (@yezhizhen, #45028)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;form enctype=&amp;quot;text/plain&amp;quot;&amp;gt;&lt;/code&gt; (@yezhizhen, #45111)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&amp;lt;![CDATA[]]&amp;gt;&lt;/strong&gt; layout (@mrobinson, #44791)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Plus a bunch of new DOM APIs:&lt;/p&gt;
@@ -34,7 +36,7 @@ For security fixes, see &lt;a href=&quot;https://servo.org/twismay/blog/2026/06/
 &lt;li&gt;&lt;strong&gt;new Blob()&lt;/strong&gt; with &lt;code&gt;{endings: &amp;quot;native&amp;quot;}&lt;/code&gt; (@yezhizhen, #44803)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;new Performance­Mark()&lt;/strong&gt; (@shubhamg13, #44702)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;parse­HTML()&lt;/strong&gt; on &lt;strong&gt;Document&lt;/strong&gt; (@kkoyung, #44952)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;read­As­Binary­String()&lt;/strong&gt; on &lt;strong&gt;File­Reader&lt;/strong&gt; (@yezhizhen, #44858)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;read­As­Binary­String()&lt;/strong&gt; on &lt;strong&gt;File­Reader&lt;/strong&gt; (@yezhizhen, #44858, #44921)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;performance.measure()&lt;/strong&gt; with mark values &lt;strong&gt;‘redirect­Start’&lt;/strong&gt;, &lt;strong&gt;‘redirect­End’&lt;/strong&gt;, &lt;strong&gt;‘secure­Connection­Start’&lt;/strong&gt;, and &lt;strong&gt;‘response­End’&lt;/strong&gt; (@shubhamg13, #44673, #44624, #44850, #44739)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This is another big update, so here’s an outline:&lt;/p&gt;
@@ -61,6 +63,11 @@ For security fixes, see &lt;a href=&quot;https://servo.org/twismay/blog/2026/06/
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#performance-and-stability&quot;&gt;&lt;strong&gt;Performance and stability&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&quot;security&quot; tabindex=&quot;-1&quot;&gt;Security &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#security&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Servo’s JS runtime, &lt;strong&gt;SpiderMonkey 140.10.0&lt;/strong&gt;, had several &lt;strong&gt;memory safety bugs&lt;/strong&gt; that have been fixed in Servo 0.3.0 with the update to SpiderMonkey 140.10.1 (@jschwe, #44755).
+For more details, see &lt;a href=&quot;https://nvd.nist.gov/vuln/detail/CVE-2026-7322&quot;&gt;CVE-2026-7322&lt;/a&gt;, &lt;a href=&quot;https://nvd.nist.gov/vuln/detail/CVE-2026-7323&quot;&gt;CVE-2026-7323&lt;/a&gt;, and &lt;a href=&quot;https://www.mozilla.org/en-US/security/advisories/mfsa2026-36/&quot;&gt;MFSA 2026-36&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;work-in-progress&quot; tabindex=&quot;-1&quot;&gt;Work in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#work-in-progress&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -68,6 +75,8 @@ For security fixes, see &lt;a href=&quot;https://servo.org/twismay/blog/2026/06/
 This release adds support for the &lt;strong&gt;‘back­Color’&lt;/strong&gt;, &lt;strong&gt;‘fore­Color’&lt;/strong&gt;, &lt;strong&gt;‘create­Link’&lt;/strong&gt;, &lt;strong&gt;‘unlink’&lt;/strong&gt;, &lt;strong&gt;‘superscript’&lt;/strong&gt;, &lt;strong&gt;‘subscript’&lt;/strong&gt;, and &lt;strong&gt;‘remove­Format’&lt;/strong&gt; commands (@TimvdLippe, #44644, #44682, #44657, #44710, #44677).&lt;/p&gt;
 &lt;p&gt;We’re also working on the &lt;strong&gt;Sanitizer&lt;/strong&gt; API, under &lt;code&gt;--pref dom­_sanitizer­_enabled&lt;/code&gt;.
 With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for &lt;strong&gt;set­Comments()&lt;/strong&gt;, &lt;strong&gt;set­Data­Attributes()&lt;/strong&gt;, &lt;strong&gt;allow­Processing­Instruction()&lt;/strong&gt;, &lt;strong&gt;remove­Processing­Instruction()&lt;/strong&gt;, and &lt;strong&gt;remove­Unsafe()&lt;/strong&gt; on &lt;strong&gt;Sanitizer&lt;/strong&gt; (@kkoyung, #44734, #44983).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IndexedDB&lt;/strong&gt; continues to improve, under &lt;code&gt;--pref dom­_indexeddb­_enabled&lt;/code&gt;.
+This release brings a more conformant &lt;strong&gt;abort()&lt;/strong&gt; on &lt;strong&gt;IDB­Transaction&lt;/strong&gt; (@Taym95, #43950).&lt;/p&gt;
 &lt;p&gt;All of the features above are enabled in servoshell’s experimental mode.&lt;/p&gt;
 &lt;p&gt;We’re now working on &lt;strong&gt;SharedWorker&lt;/strong&gt; and &lt;strong&gt;ServiceWorker&lt;/strong&gt;, under &lt;code&gt;--pref dom­_sharedworker­_enabled&lt;/code&gt; and &lt;code&gt;--pref dom­_serviceworker­_enabled&lt;/code&gt; respectively.
 This release adds support for &lt;strong&gt;new Shared­Worker()&lt;/strong&gt; (@Taym95, #44761), and parts of the ServiceWorker API (@gterzian, @arihant2math, #45082, #44787).&lt;/p&gt;
@@ -124,10 +133,13 @@ We run compile tests with the MSRV, but most of our testing is now done with Rus
 &lt;h2 id=&quot;more-on-the-web-platform&quot; tabindex=&quot;-1&quot;&gt;More on the web platform &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#more-on-the-web-platform&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We’ve improved the default appearance of &lt;strong&gt;&amp;lt;dl&amp;gt;&lt;/strong&gt;, &lt;strong&gt;&amp;lt;ol&amp;gt;&lt;/strong&gt;, &lt;strong&gt;&amp;lt;ul&amp;gt;&lt;/strong&gt;, &lt;strong&gt;&amp;lt;table&amp;gt;&lt;/strong&gt;, &lt;strong&gt;&amp;lt;thead&amp;gt;&lt;/strong&gt;, &lt;strong&gt;&amp;lt;tbody&amp;gt;&lt;/strong&gt;, &lt;strong&gt;&amp;lt;tfoot&amp;gt;&lt;/strong&gt;, &lt;strong&gt;&amp;lt;tr&amp;gt;&lt;/strong&gt;, &lt;strong&gt;&amp;lt;td&amp;gt;&lt;/strong&gt;, &lt;strong&gt;&amp;lt;th&amp;gt;&lt;/strong&gt;, &lt;strong&gt;&amp;lt;dir&amp;gt;&lt;/strong&gt;, &lt;strong&gt;&amp;lt;menu&amp;gt;&lt;/strong&gt;, and &lt;strong&gt;&amp;lt;form&amp;gt;&lt;/strong&gt; (@avis137, #44837, #44920).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;CryptoKey&lt;/strong&gt; is now &lt;strong&gt;serializable&lt;/strong&gt;, allowing it to be used in structuredClone() and postMessage() (@kkoyung, #45163).&lt;/p&gt;
+&lt;p&gt;We’ve improved the conformance of &lt;strong&gt;form submission&lt;/strong&gt; (@yezhizhen, #44943, #44953, #44954, #44957), &lt;strong&gt;tab navigation&lt;/strong&gt; (@mrobinson, #44684), &lt;strong&gt;javascript: url navigation&lt;/strong&gt; (@jdm, @TimvdLippe, #43490), &lt;strong&gt;‘Refresh’&lt;/strong&gt; and &lt;strong&gt;&amp;lt;meta http-equiv=Refresh&amp;gt;&lt;/strong&gt; (@jschwe, @mrobinson, #45113, #45116), &lt;strong&gt;GPU­Supported­Limits&lt;/strong&gt; (@sagudev, #45114), &lt;strong&gt;GPU­Texture&lt;/strong&gt; (@sagudev, #45154), &lt;strong&gt;create­Bind­Group()&lt;/strong&gt; on &lt;strong&gt;GPU­Device&lt;/strong&gt; (@sagudev, #45140), &lt;strong&gt;read­As­Data­URL()&lt;/strong&gt; on &lt;strong&gt;File­Reader&lt;/strong&gt; (@yezhizhen, #44897, #44924), &lt;strong&gt;stream()&lt;/strong&gt; on &lt;strong&gt;Blob&lt;/strong&gt; (@Taym95, #45133), &lt;strong&gt;crypto.subtle.derive­Bits()&lt;/strong&gt; (@kkoyung, #44706), and &lt;strong&gt;ML-KEM&lt;/strong&gt; in &lt;strong&gt;Subtle­Crypto&lt;/strong&gt; (@kkoyung, #45153).&lt;/p&gt;
 &lt;h2 id=&quot;performance-and-stability&quot; tabindex=&quot;-1&quot;&gt;Performance and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#performance-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;To improve Servo’s &lt;strong&gt;build times&lt;/strong&gt;, we’re moving more code out of our massive &lt;strong&gt;script crate&lt;/strong&gt; (@Narfinger, @jdm, #44598, #44823).&lt;/p&gt;
 &lt;p&gt;Several crashes have been fixed:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;in &lt;strong&gt;‘content’&lt;/strong&gt; (@mrobinson, @Loirooriol, @SimonSapin, #45227, #44762)&lt;/li&gt;

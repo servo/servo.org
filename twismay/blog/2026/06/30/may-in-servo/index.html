@@ -261,6 +261,8 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 <li><strong>‘font-variant-numeric’</strong> (@simonwuelker, #44950)</li>
 <li><strong>‘font-variant-position’</strong> (@simonwuelker, #45142)</li>
 <li><strong>mp4</strong> files <strong>without fast start</strong> in <strong>&lt;video&gt;</strong> (@calvaris, #45084)</li>
+<li><code>&lt;form enctype=&quot;multipart/form-data&quot;&gt;</code> (@yezhizhen, #45028)</li>
+<li><code>&lt;form enctype=&quot;text/plain&quot;&gt;</code> (@yezhizhen, #45111)</li>
 <li><strong>&lt;![CDATA[]]&gt;</strong> layout (@mrobinson, #44791)</li>
 </ul>
 <p>Plus a bunch of new DOM APIs:</p>
@@ -270,7 +272,7 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 <li><strong>new Blob()</strong> with <code>{endings: &quot;native&quot;}</code> (@yezhizhen, #44803)</li>
 <li><strong>new Performance­Mark()</strong> (@shubhamg13, #44702)</li>
 <li><strong>parse­HTML()</strong> on <strong>Document</strong> (@kkoyung, #44952)</li>
-<li><strong>read­As­Binary­String()</strong> on <strong>File­Reader</strong> (@yezhizhen, #44858)</li>
+<li><strong>read­As­Binary­String()</strong> on <strong>File­Reader</strong> (@yezhizhen, #44858, #44921)</li>
 <li><strong>performance.measure()</strong> with mark values <strong>‘redirect­Start’</strong>, <strong>‘redirect­End’</strong>, <strong>‘secure­Connection­Start’</strong>, and <strong>‘response­End’</strong> (@shubhamg13, #44673, #44624, #44850, #44739)</li>
 </ul>
 <p>This is another big update, so here’s an outline:</p>
@@ -297,6 +299,11 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 <p><a href="#performance-and-stability"><strong>Performance and stability</strong></a></p>
 </li>
 </ul>
+<h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Servo’s JS runtime, <strong>SpiderMonkey 140.10.0</strong>, had several <strong>memory safety bugs</strong> that have been fixed in Servo 0.3.0 with the update to SpiderMonkey 140.10.1 (@jschwe, #44755).
+For more details, see <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-7322">CVE-2026-7322</a>, <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-7323">CVE-2026-7323</a>, and <a href="https://www.mozilla.org/en-US/security/advisories/mfsa2026-36/">MFSA 2026-36</a>.</p>
 <h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -304,6 +311,8 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 This release adds support for the <strong>‘back­Color’</strong>, <strong>‘fore­Color’</strong>, <strong>‘create­Link’</strong>, <strong>‘unlink’</strong>, <strong>‘superscript’</strong>, <strong>‘subscript’</strong>, and <strong>‘remove­Format’</strong> commands (@TimvdLippe, #44644, #44682, #44657, #44710, #44677).</p>
 <p>We’re also working on the <strong>Sanitizer</strong> API, under <code>--pref dom­_sanitizer­_enabled</code>.
 With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for <strong>set­Comments()</strong>, <strong>set­Data­Attributes()</strong>, <strong>allow­Processing­Instruction()</strong>, <strong>remove­Processing­Instruction()</strong>, and <strong>remove­Unsafe()</strong> on <strong>Sanitizer</strong> (@kkoyung, #44734, #44983).</p>
+<p><strong>IndexedDB</strong> continues to improve, under <code>--pref dom­_indexeddb­_enabled</code>.
+This release brings a more conformant <strong>abort()</strong> on <strong>IDB­Transaction</strong> (@Taym95, #43950).</p>
 <p>All of the features above are enabled in servoshell’s experimental mode.</p>
 <p>We’re now working on <strong>SharedWorker</strong> and <strong>ServiceWorker</strong>, under <code>--pref dom­_sharedworker­_enabled</code> and <code>--pref dom­_serviceworker­_enabled</code> respectively.
 This release adds support for <strong>new Shared­Worker()</strong> (@Taym95, #44761), and parts of the ServiceWorker API (@gterzian, @arihant2math, #45082, #44787).</p>
@@ -360,10 +369,13 @@ We run compile tests with the MSRV, but most of our testing is now done with Rus
 <h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>We’ve improved the default appearance of <strong>&lt;dl&gt;</strong>, <strong>&lt;ol&gt;</strong>, <strong>&lt;ul&gt;</strong>, <strong>&lt;table&gt;</strong>, <strong>&lt;thead&gt;</strong>, <strong>&lt;tbody&gt;</strong>, <strong>&lt;tfoot&gt;</strong>, <strong>&lt;tr&gt;</strong>, <strong>&lt;td&gt;</strong>, <strong>&lt;th&gt;</strong>, <strong>&lt;dir&gt;</strong>, <strong>&lt;menu&gt;</strong>, and <strong>&lt;form&gt;</strong> (@avis137, #44837, #44920).</p>
 <p><strong>CryptoKey</strong> is now <strong>serializable</strong>, allowing it to be used in structuredClone() and postMessage() (@kkoyung, #45163).</p>
+<p>We’ve improved the conformance of <strong>form submission</strong> (@yezhizhen, #44943, #44953, #44954, #44957), <strong>tab navigation</strong> (@mrobinson, #44684), <strong>javascript: url navigation</strong> (@jdm, @TimvdLippe, #43490), <strong>‘Refresh’</strong> and <strong>&lt;meta http-equiv=Refresh&gt;</strong> (@jschwe, @mrobinson, #45113, #45116), <strong>GPU­Supported­Limits</strong> (@sagudev, #45114), <strong>GPU­Texture</strong> (@sagudev, #45154), <strong>create­Bind­Group()</strong> on <strong>GPU­Device</strong> (@sagudev, #45140), <strong>read­As­Data­URL()</strong> on <strong>File­Reader</strong> (@yezhizhen, #44897, #44924), <strong>stream()</strong> on <strong>Blob</strong> (@Taym95, #45133), <strong>crypto.subtle.derive­Bits()</strong> (@kkoyung, #44706), and <strong>ML-KEM</strong> in <strong>Subtle­Crypto</strong> (@kkoyung, #45153).</p>
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>To improve Servo’s <strong>build times</strong>, we’re moving more code out of our massive <strong>script crate</strong> (@Narfinger, @jdm, #44598, #44823).</p>
 <p>Several crashes have been fixed:</p>
 <ul>
 <li>in <strong>‘content’</strong> (@mrobinson, @Loirooriol, @SimonSapin, #45227, #44762)</li>
