@@ -88,6 +88,10 @@ We’ve also reworked our [**DiagnosticsLogging**](https://doc.servo.org/servo/s
 
 **CryptoKey** is now **serializable**, allowing it to be used in structuredClone() and postMessage() (@kkoyung, #45163).
 
+## Performance and stability
+
+We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@Gae24, @MavenRain, @Narfinger, @SteveSharonSam, @TimvdLippe, @elomscansio, @jdm, @kkoyung, @yezhizhen, #44712, #44759, #44879, #45014, #45058, #45061, #45076, #45098, #45110, #45149, #45117, #45184, #45201, #44806, #44930, #44942, #44946, #45233, #45181, #44659, #44660, #44664, #44668, #44992, #45000, #45081, #45009, #45225, #45087, #45244, #45245, #45247, #44663, #44665, #44993, #45040, #45053, #44647, #44671, #44681, #44717, #44733, #44686, #44653).
+
 <style>
     kbd {
         background: #00000020;
