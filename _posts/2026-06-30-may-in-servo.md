@@ -18,6 +18,8 @@ We’ve shipped several new web platform features:
 - **‘font-variant-numeric’** (@simonwuelker, #44950)
 - **‘font-variant-position’** (@simonwuelker, #45142)
 - **mp4** files **without fast start** in **&lt;video>** (@calvaris, #45084)
+- `<form enctype="multipart/form-data">` (@yezhizhen, #45028)
+- `<form enctype="text/plain">` (@yezhizhen, #45111)
 - **&lt;![CDATA[]]>** layout (@mrobinson, #44791)
 
 Plus a bunch of new DOM APIs:
@@ -27,7 +29,7 @@ Plus a bunch of new DOM APIs:
 - **new Blob()** with `{endings: "native"}` (@yezhizhen, #44803)
 - **new Performance­Mark()** (@shubhamg13, #44702)
 - **parse­HTML()** on **Document** (@kkoyung, #44952)
-- **read­As­Binary­String()** on **File­Reader** (@yezhizhen, #44858)
+- **read­As­Binary­String()** on **File­Reader** (@yezhizhen, #44858, #44921)
 - **performance.measure()** with mark values **‘redirect­Start’**, **‘redirect­End’**, **‘secure­Connection­Start’**, and **‘response­End’** (@shubhamg13, #44673, #44624, #44850, #44739)
 
 This is another big update, so here’s an outline:
@@ -46,6 +48,11 @@ This is another big update, so here’s an outline:
 
 - [**Performance and stability**](#performance-and-stability)
 
+## Security
+
+Servo’s JS runtime, **SpiderMonkey 140.10.0**, had several **memory safety bugs** that have been fixed in Servo 0.3.0 with the update to SpiderMonkey 140.10.1 (@jschwe, #44755).
+For more details, see [CVE-2026-7322](https://nvd.nist.gov/vuln/detail/CVE-2026-7322), [CVE-2026-7323](https://nvd.nist.gov/vuln/detail/CVE-2026-7323), and [MFSA 2026-36](https://www.mozilla.org/en-US/security/advisories/mfsa2026-36/).
+
 ## Work in progress
 
 We’re continuing to implement **document.exec­Command()** for **rich text editing**, under `--pref dom­_exec­_command­_enabled`.
@@ -53,6 +60,9 @@ This release adds support for the **‘back­Color’**, **‘fore­Color’**, 
 
 We’re also working on the **Sanitizer** API, under `--pref dom­_sanitizer­_enabled`.
 With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for **set­Comments()**, **set­Data­Attributes()**, **allow­Processing­Instruction()**, **remove­Processing­Instruction()**, and **remove­Unsafe()** on **Sanitizer** (@kkoyung, #44734, #44983).
+
+**IndexedDB** continues to improve, under `--pref dom­_indexeddb­_enabled`.
+This release brings a more conformant **abort()** on **IDB­Transaction** (@Taym95, #43950).
 
 All of the features above are enabled in servoshell’s experimental mode.
 
@@ -96,9 +106,15 @@ We’ve also reworked our [**DiagnosticsLogging**](https://doc.servo.org/servo/s
 
 ## More on the web platform
 
+We’ve improved the default appearance of **&lt;dl>**, **&lt;ol>**, **&lt;ul>**, **&lt;table>**, **&lt;thead>**, **&lt;tbody>**, **&lt;tfoot>**, **&lt;tr>**, **&lt;td>**, **&lt;th>**, **&lt;dir>**, **&lt;menu>**, and **&lt;form>** (@avis137, #44837, #44920).
+
 **CryptoKey** is now **serializable**, allowing it to be used in structuredClone() and postMessage() (@kkoyung, #45163).
 
+We’ve improved the conformance of **form submission** (@yezhizhen, #44943, #44953, #44954, #44957), **tab navigation** (@mrobinson, #44684), **javascript: url navigation** (@jdm, @TimvdLippe, #43490), **‘Refresh’** and **&lt;meta http-equiv=Refresh>** (@jschwe, @mrobinson, #45113, #45116), **GPU­Supported­Limits** (@sagudev, #45114), **GPU­Texture** (@sagudev, #45154), **create­Bind­Group()** on **GPU­Device** (@sagudev, #45140), **read­As­Data­URL()** on **File­Reader** (@yezhizhen, #44897, #44924), **stream()** on **Blob** (@Taym95, #45133), **crypto.subtle.derive­Bits()** (@kkoyung, #44706), and **ML-KEM** in **Subtle­Crypto** (@kkoyung, #45153).
+
 ## Performance and stability
+
+To improve Servo’s **build times**, we’re moving more code out of our massive **script crate** (@Narfinger, @jdm, #44598, #44823).
 
 Several crashes have been fixed:
 
