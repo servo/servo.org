@@ -253,6 +253,17 @@
 <div class="inner-container blog-content">
   <p><a href="https://github.com/servo/servo/releases/tag/v0.3.0"><strong>Servo 0.3.0</strong></a> contains all of the changes we landed in May, which came out to <strong>391 commits</strong> (March: 534).
 For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p>
+<p>Plus a bunch of new DOM APIs:</p>
+<ul>
+<li><strong>onslotchange</strong> property on <strong>Shadow­Root</strong> (@jdm, #44688)</li>
+<li><strong>screen­Left</strong> and <strong>screen­Top</strong> on <strong>Window</strong> (@TG199, #45128)</li>
+<li><strong>new Blob()</strong> with <code>{endings: &quot;native&quot;}</code> (@yezhizhen, #44803)</li>
+<li><strong>new Performance­Mark()</strong> (@shubhamg13, #44702)</li>
+<li><strong>parse­HTML()</strong> on <strong>Document</strong> (@kkoyung, #44952)</li>
+<li><strong>read­As­Binary­String()</strong> on <strong>File­Reader</strong> (@yezhizhen, #44858)</li>
+<li><strong>performance.measure()</strong> with mark values <strong>‘redirect­Start’</strong>, <strong>‘redirect­End’</strong>, <strong>‘secure­Connection­Start’</strong>, and <strong>‘response­End’</strong> (@shubhamg13, #44673, #44624, #44850, #44739)</li>
+</ul>
+<p>This is another big update, so here’s an outline:</p>
 <ul>
 <li>
 <p><a href="#security"><strong>Security</strong></a></p>
@@ -276,6 +287,16 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 <p><a href="#performance-and-stability"><strong>Performance and stability</strong></a></p>
 </li>
 </ul>
+<h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We’re continuing to implement <strong>document.exec­Command()</strong> for <strong>rich text editing</strong>, under <code>--pref dom­_exec­_command­_enabled</code>.
+This release adds support for the <strong>‘back­Color’</strong>, <strong>‘fore­Color’</strong>, <strong>‘create­Link’</strong>, <strong>‘unlink’</strong>, <strong>‘superscript’</strong>, <strong>‘subscript’</strong>, and <strong>‘remove­Format’</strong> commands (@TimvdLippe, #44644, #44682, #44657, #44710, #44677).</p>
+<p>We’re also working on the <strong>Sanitizer</strong> API, under <code>--pref dom­_sanitizer­_enabled</code>.
+With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for <strong>allow­Processing­Instruction()</strong> and <strong>remove­Processing­Instruction()</strong> on <strong>Sanitizer</strong> (@kkoyung, #44734).</p>
+<p>All of the features above are enabled in servoshell’s experimental mode.</p>
+<p>We’re now working on <strong>SharedWorker</strong> and <strong>ServiceWorker</strong>, under <code>--pref dom­_sharedworker­_enabled</code> and <code>--pref dom­_serviceworker­_enabled</code> respectively.
+This release adds support for <strong>new Shared­Worker()</strong> (@Taym95, #44761), and parts of the ServiceWorker API (@gterzian, @arihant2math, #45082, #44787).</p>
 <h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -326,6 +347,10 @@ We run compile tests with the MSRV, but most of our testing is now done with Rus
 <p><strong>(Breaking change)</strong> <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.extend_from_string"><code>extend­_from­_string</code></a> no longer accepts a <code>help</code> option – this option only existed to support servoshell’s <code>-Z help</code> / <code>--debug=help</code> option, so the code implementing it has been moved to servoshell</p>
 </li>
 </ul>
+<h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><strong>CryptoKey</strong> is now <strong>serializable</strong>, allowing it to be used in structuredClone() and postMessage() (@kkoyung, #45163).</p>
 <style>
     kbd {
         background: #00000020;

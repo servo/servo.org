@@ -17,6 +17,17 @@
     <id>https://servo.org/twismay/blog/2026/06/30/may-in-servo/</id>
     <content xml:lang="en" type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.3.0&quot;&gt;&lt;strong&gt;Servo 0.3.0&lt;/strong&gt;&lt;/a&gt; contains all of the changes we landed in May, which came out to &lt;strong&gt;391 commits&lt;/strong&gt; (March: 534).
 For security fixes, see &lt;a href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#security&quot;&gt;&lt;strong&gt;§ Security&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Plus a bunch of new DOM APIs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;onslotchange&lt;/strong&gt; property on &lt;strong&gt;Shadow­Root&lt;/strong&gt; (@jdm, #44688)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;screen­Left&lt;/strong&gt; and &lt;strong&gt;screen­Top&lt;/strong&gt; on &lt;strong&gt;Window&lt;/strong&gt; (@TG199, #45128)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;new Blob()&lt;/strong&gt; with &lt;code&gt;{endings: &amp;quot;native&amp;quot;}&lt;/code&gt; (@yezhizhen, #44803)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;new Performance­Mark()&lt;/strong&gt; (@shubhamg13, #44702)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;parse­HTML()&lt;/strong&gt; on &lt;strong&gt;Document&lt;/strong&gt; (@kkoyung, #44952)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;read­As­Binary­String()&lt;/strong&gt; on &lt;strong&gt;File­Reader&lt;/strong&gt; (@yezhizhen, #44858)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;performance.measure()&lt;/strong&gt; with mark values &lt;strong&gt;‘redirect­Start’&lt;/strong&gt;, &lt;strong&gt;‘redirect­End’&lt;/strong&gt;, &lt;strong&gt;‘secure­Connection­Start’&lt;/strong&gt;, and &lt;strong&gt;‘response­End’&lt;/strong&gt; (@shubhamg13, #44673, #44624, #44850, #44739)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is another big update, so here’s an outline:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#security&quot;&gt;&lt;strong&gt;Security&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
@@ -40,6 +51,16 @@ For security fixes, see &lt;a href=&quot;https://servo.org/twismay/blog/2026/06/
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#performance-and-stability&quot;&gt;&lt;strong&gt;Performance and stability&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&quot;work-in-progress&quot; tabindex=&quot;-1&quot;&gt;Work in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#work-in-progress&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We’re continuing to implement &lt;strong&gt;document.exec­Command()&lt;/strong&gt; for &lt;strong&gt;rich text editing&lt;/strong&gt;, under &lt;code&gt;--pref dom­_exec­_command­_enabled&lt;/code&gt;.
+This release adds support for the &lt;strong&gt;‘back­Color’&lt;/strong&gt;, &lt;strong&gt;‘fore­Color’&lt;/strong&gt;, &lt;strong&gt;‘create­Link’&lt;/strong&gt;, &lt;strong&gt;‘unlink’&lt;/strong&gt;, &lt;strong&gt;‘superscript’&lt;/strong&gt;, &lt;strong&gt;‘subscript’&lt;/strong&gt;, and &lt;strong&gt;‘remove­Format’&lt;/strong&gt; commands (@TimvdLippe, #44644, #44682, #44657, #44710, #44677).&lt;/p&gt;
+&lt;p&gt;We’re also working on the &lt;strong&gt;Sanitizer&lt;/strong&gt; API, under &lt;code&gt;--pref dom­_sanitizer­_enabled&lt;/code&gt;.
+With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for &lt;strong&gt;allow­Processing­Instruction()&lt;/strong&gt; and &lt;strong&gt;remove­Processing­Instruction()&lt;/strong&gt; on &lt;strong&gt;Sanitizer&lt;/strong&gt; (@kkoyung, #44734).&lt;/p&gt;
+&lt;p&gt;All of the features above are enabled in servoshell’s experimental mode.&lt;/p&gt;
+&lt;p&gt;We’re now working on &lt;strong&gt;SharedWorker&lt;/strong&gt; and &lt;strong&gt;ServiceWorker&lt;/strong&gt;, under &lt;code&gt;--pref dom­_sharedworker­_enabled&lt;/code&gt; and &lt;code&gt;--pref dom­_serviceworker­_enabled&lt;/code&gt; respectively.
+This release adds support for &lt;strong&gt;new Shared­Worker()&lt;/strong&gt; (@Taym95, #44761), and parts of the ServiceWorker API (@gterzian, @arihant2math, #45082, #44787).&lt;/p&gt;
 &lt;h2 id=&quot;embedding-api&quot; tabindex=&quot;-1&quot;&gt;Embedding API &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#embedding-api&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -90,6 +111,10 @@ We run compile tests with the MSRV, but most of our testing is now done with Rus
 &lt;p&gt;&lt;strong&gt;(Breaking change)&lt;/strong&gt; &lt;a href=&quot;https://doc.servo.org/servo/struct.DiagnosticsLogging.html&quot;&gt;&lt;code&gt;DiagnosticsLogging&lt;/code&gt;&lt;/a&gt;::&lt;a href=&quot;https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.extend_from_string&quot;&gt;&lt;code&gt;extend­_from­_string&lt;/code&gt;&lt;/a&gt; no longer accepts a &lt;code&gt;help&lt;/code&gt; option – this option only existed to support servoshell’s &lt;code&gt;-Z help&lt;/code&gt; / &lt;code&gt;--debug=help&lt;/code&gt; option, so the code implementing it has been moved to servoshell&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&quot;more-on-the-web-platform&quot; tabindex=&quot;-1&quot;&gt;More on the web platform &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#more-on-the-web-platform&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;CryptoKey&lt;/strong&gt; is now &lt;strong&gt;serializable&lt;/strong&gt;, allowing it to be used in structuredClone() and postMessage() (@kkoyung, #45163).&lt;/p&gt;
 &lt;style&gt;
     kbd {
         background: #00000020;
