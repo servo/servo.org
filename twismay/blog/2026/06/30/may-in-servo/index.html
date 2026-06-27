@@ -276,6 +276,56 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 <p><a href="#performance-and-stability"><strong>Performance and stability</strong></a></p>
 </li>
 </ul>
+<h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Servo now requires <strong>Rust 1.88.0</strong> or newer, up from the old MSRV of 1.86.0 (@sagudev, #44815).
+We run compile tests with the MSRV, but most of our testing is now done with Rust 1.95.0 (@simonwuelker, #44632).</p>
+<p><strong>Breaking changes</strong> to the <strong>cookies</strong> methods in our <a href="https://doc.servo.org/servo/struct.SiteDataManager.html"><strong>SiteDataManager</strong></a> API (@longvatrong111, #44708):</p>
+<ul>
+<li>
+<p><a href="https://doc.servo.org/servo/struct.SiteDataManager.html"><code>Site­Data­Manager</code></a>::<a href="https://doc.servo.org/servo/struct.SiteDataManager.html#method.clear_cookies"><code>clear­_cookies</code></a> now takes an additional <code>callback</code> argument, allowing it to be called async – to continue calling it sync, pass <code>None</code> as the <code>callback</code></p>
+</li>
+<li>
+<p><a href="https://doc.servo.org/servo/struct.SiteDataManager.html"><code>Site­Data­Manager</code></a>::<a href="https://doc.servo.org/servo/struct.SiteDataManager.html#method.clear_session_cookies"><code>clear­_session­_cookies</code></a> now takes an additional <code>callback</code> argument, allowing it to be called async – to continue calling it sync, pass <code>None</code> as the <code>callback</code></p>
+</li>
+<li>
+<p><a href="https://doc.servo.org/servo/struct.SiteDataManager.html"><code>Site­Data­Manager</code></a>::<a href="https://doc.servo.org/servo/struct.SiteDataManager.html#method.set_cookie_for_url"><code>set­_cookie­_for­_url</code></a> now takes an additional <code>callback</code> argument, allowing it to be called async – to continue calling it sync, pass <code>None</code> as the <code>callback</code></p>
+</li>
+<li>
+<p><a href="https://doc.servo.org/servo/struct.SiteDataManager.html"><code>Site­Data­Manager</code></a>::<code>set­_cookie­_for­_url­_async</code> has been removed in favour of <a href="https://doc.servo.org/servo/struct.SiteDataManager.html#method.set_cookie_for_url"><code>set­_cookie­_for­_url</code></a> – to migrate, replace <code>set­_cookie­_for­_url­_async(​callback)</code> with <code>set­_cookie­_for­_url(​Some(​Box::new(​callback)))</code></p>
+</li>
+</ul>
+<p>We’ve also reworked our <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><strong>DiagnosticsLogging</strong></a> API (@mukilan, #44703):</p>
+<ul>
+<li>
+<p>You can now set options with <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.toggle_option"><code>toggle­_option</code></a>, and check if they are enabled with <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.is_enabled"><code>is­_enabled</code></a></p>
+</li>
+<li>
+<p>Each option is a variant of <a href="https://doc.servo.org/servo/enum.DiagnosticsLoggingOption.html"><code>DiagnosticsLoggingOption</code></a>, a new type that also has useful methods for exposing these options in embedder UI</p>
+</li>
+<li>
+<p><strong>(Breaking change)</strong> <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a> no longer has <code>pub</code> fields representing each option – to migrate, replace field writes and field reads with <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.toggle_option"><code>toggle­_option</code></a> and <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.is_enabled"><code>is­_enabled</code></a> respectively</p>
+</li>
+<li>
+<p><strong>(Breaking change)</strong> <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.extend_from_string"><code>extend­_from­_string</code></a> no longer accepts a <code>help</code> option – this option only existed to support servoshell’s <code>-Z help</code> / <code>--debug=help</code> option, so the code implementing it has been moved to servoshell</p>
+</li>
+</ul>
+<p><strong>Breaking changes</strong> to our <a href="https://doc.servo.org/servo/struct.Preferences.html"><strong>Preferences</strong></a> API (@Narfinger, @mrobinson, #44307):</p>
+<ul>
+<li>
+<p><code>threadpools­_image­_cache­_workers­_max</code>, <code>threadpools­_indexeddb­_workers­_max</code>, and <code>threadpools­_webstorage­_workers­_max</code> have been <strong>removed</strong> in favour of a combined <a href="https://doc.servo.org/servo/struct.Preferences.html#structfield.thread_pool_workers_max"><code>thread­_pool­_workers­_max</code></a></p>
+</li>
+<li>
+<p><code>threadpools­_fallback­_worker­_num</code> has been <strong>renamed</strong> to <a href="https://doc.servo.org/servo/struct.Preferences.html#structfield.thread_pool_fallback_workers"><code>thread­_pool­_fallback­_workers</code></a></p>
+</li>
+<li>
+<p><code>threadpools­_async­_runtime­_workers­_max</code> has been <strong>renamed</strong> to <a href="https://doc.servo.org/servo/struct.Preferences.html#structfield.thread_pool_async_runtime_workers_max"><code>thread­_pool­_async­_runtime­_workers­_max</code></a></p>
+</li>
+<li>
+<p><code>threadpools­_webrender­_workers­_max</code> has been <strong>renamed</strong> to <a href="https://doc.servo.org/servo/struct.Preferences.html#structfield.thread_pool_webrender_workers_max"><code>thread­_pool­_webrender­_workers­_max</code></a></p>
+</li>
+</ul>
 <style>
     kbd {
         background: #00000020;
