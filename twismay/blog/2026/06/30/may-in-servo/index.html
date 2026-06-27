@@ -296,21 +296,6 @@ We run compile tests with the MSRV, but most of our testing is now done with Rus
 <p><a href="https://doc.servo.org/servo/struct.SiteDataManager.html"><code>Site­Data­Manager</code></a>::<code>set­_cookie­_for­_url­_async</code> has been removed in favour of <a href="https://doc.servo.org/servo/struct.SiteDataManager.html#method.set_cookie_for_url"><code>set­_cookie­_for­_url</code></a> – to migrate, replace <code>set­_cookie­_for­_url­_async(​callback)</code> with <code>set­_cookie­_for­_url(​Some(​Box::new(​callback)))</code></p>
 </li>
 </ul>
-<p>We’ve also reworked our <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><strong>DiagnosticsLogging</strong></a> API (@mukilan, #44703):</p>
-<ul>
-<li>
-<p>You can now set options with <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.toggle_option"><code>toggle­_option</code></a>, and check if they are enabled with <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.is_enabled"><code>is­_enabled</code></a></p>
-</li>
-<li>
-<p>Each option is a variant of <a href="https://doc.servo.org/servo/enum.DiagnosticsLoggingOption.html"><code>DiagnosticsLoggingOption</code></a>, a new type that also has useful methods for exposing these options in embedder UI</p>
-</li>
-<li>
-<p><strong>(Breaking change)</strong> <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a> no longer has <code>pub</code> fields representing each option – to migrate, replace field writes and field reads with <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.toggle_option"><code>toggle­_option</code></a> and <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.is_enabled"><code>is­_enabled</code></a> respectively</p>
-</li>
-<li>
-<p><strong>(Breaking change)</strong> <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.extend_from_string"><code>extend­_from­_string</code></a> no longer accepts a <code>help</code> option – this option only existed to support servoshell’s <code>-Z help</code> / <code>--debug=help</code> option, so the code implementing it has been moved to servoshell</p>
-</li>
-</ul>
 <p><strong>Breaking changes</strong> to our <a href="https://doc.servo.org/servo/struct.Preferences.html"><strong>Preferences</strong></a> API (@Narfinger, @mrobinson, #44307):</p>
 <ul>
 <li>
@@ -324,6 +309,21 @@ We run compile tests with the MSRV, but most of our testing is now done with Rus
 </li>
 <li>
 <p><code>threadpools­_webrender­_workers­_max</code> has been <strong>renamed</strong> to <a href="https://doc.servo.org/servo/struct.Preferences.html#structfield.thread_pool_webrender_workers_max"><code>thread­_pool­_webrender­_workers­_max</code></a></p>
+</li>
+</ul>
+<p>We’ve also reworked our <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><strong>DiagnosticsLogging</strong></a> API (@mukilan, #44703):</p>
+<ul>
+<li>
+<p>You can now set options with <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.toggle_option"><code>toggle­_option</code></a>, and check if they are enabled with <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.is_enabled"><code>is­_enabled</code></a></p>
+</li>
+<li>
+<p>Each option is a variant of <a href="https://doc.servo.org/servo/enum.DiagnosticsLoggingOption.html"><code>DiagnosticsLoggingOption</code></a>, a new type that also has useful methods for exposing these options in embedder UI</p>
+</li>
+<li>
+<p><strong>(Breaking change)</strong> <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a> no longer has <code>pub</code> fields representing each option – to migrate, replace field writes and field reads with <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.toggle_option"><code>toggle­_option</code></a> and <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.is_enabled"><code>is­_enabled</code></a> respectively</p>
+</li>
+<li>
+<p><strong>(Breaking change)</strong> <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.extend_from_string"><code>extend­_from­_string</code></a> no longer accepts a <code>help</code> option – this option only existed to support servoshell’s <code>-Z help</code> / <code>--debug=help</code> option, so the code implementing it has been moved to servoshell</p>
 </li>
 </ul>
 <style>
