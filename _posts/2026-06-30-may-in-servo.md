@@ -10,6 +10,16 @@ categories:
 [**Servo 0.3.0**](https://github.com/servo/servo/releases/tag/v0.3.0) contains all of the changes we landed in May, which came out to **391 commits** (March: 534).
 For security fixes, see [**§ Security**](#security).
 
+We’ve shipped several new web platform features:
+
+- **‘font-kerning: none’** (@simonwuelker, #44634)
+- **‘font-variant-east-asian’** (@simonwuelker, #44989)
+- **‘font-variant-ligatures’** (@simonwuelker, #44903)
+- **‘font-variant-numeric’** (@simonwuelker, #44950)
+- **‘font-variant-position’** (@simonwuelker, #45142)
+- **mp4** files **without fast start** in **&lt;video>** (@calvaris, #45084)
+- **&lt;![CDATA[]]>** layout (@mrobinson, #44791)
+
 Plus a bunch of new DOM APIs:
 
 - **onslotchange** property on **Shadow­Root** (@jdm, #44688)
@@ -42,7 +52,7 @@ We’re continuing to implement **document.exec­Command()** for **rich text edi
 This release adds support for the **‘back­Color’**, **‘fore­Color’**, **‘create­Link’**, **‘unlink’**, **‘superscript’**, **‘subscript’**, and **‘remove­Format’** commands (@TimvdLippe, #44644, #44682, #44657, #44710, #44677).
 
 We’re also working on the **Sanitizer** API, under `--pref dom­_sanitizer­_enabled`.
-With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for **allow­Processing­Instruction()** and **remove­Processing­Instruction()** on **Sanitizer** (@kkoyung, #44734).
+With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for **set­Comments()**, **set­Data­Attributes()**, **allow­Processing­Instruction()**, **remove­Processing­Instruction()**, and **remove­Unsafe()** on **Sanitizer** (@kkoyung, #44734, #44983).
 
 All of the features above are enabled in servoshell’s experimental mode.
 
@@ -89,6 +99,19 @@ We’ve also reworked our [**DiagnosticsLogging**](https://doc.servo.org/servo/s
 **CryptoKey** is now **serializable**, allowing it to be used in structuredClone() and postMessage() (@kkoyung, #45163).
 
 ## Performance and stability
+
+Several crashes have been fixed:
+
+- in **‘content’** (@mrobinson, @Loirooriol, @SimonSapin, #45227, #44762)
+- in **Media­Stream** (@jdm, #44781)
+- in **item()** on **attributes** on **Element** (@webbeef, #44721)
+- in **append­Rule()** on **CSS­Keyframes­Rule** (@mrobinson, #45173)
+- in **init­Event()** on **Focus­Event** (@mrobinson, #44870)
+- in **stop()** on **Window** (@TimvdLippe, #44804)
+- in `document.exec­Command(​"delete")` (@TimvdLippe, #44748)
+- in `--debug-mozjs` builds (@Gae24, @SharanRP, #44745, #45001)
+- when shaping zero-width spaces (@mrobinson, #45176)
+- when toggling servoshell’s experimental mode at runtime (@mrobinson, @Loirooriol, #45226)
 
 We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@Gae24, @MavenRain, @Narfinger, @SteveSharonSam, @TimvdLippe, @elomscansio, @jdm, @kkoyung, @yezhizhen, #44712, #44759, #44879, #45014, #45058, #45061, #45076, #45098, #45110, #45149, #45117, #45184, #45201, #44806, #44930, #44942, #44946, #45233, #45181, #44659, #44660, #44664, #44668, #44992, #45000, #45081, #45009, #45225, #45087, #45244, #45245, #45247, #44663, #44665, #44993, #45040, #45053, #44647, #44671, #44681, #44717, #44733, #44686, #44653).
 
