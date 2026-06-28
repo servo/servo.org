@@ -32,6 +32,8 @@ Plus a bunch of new DOM APIs:
 - **read­As­Binary­String()** on **File­Reader** (@yezhizhen, #44858, #44921)
 - **performance.measure()** with mark values **‘redirect­Start’**, **‘redirect­End’**, **‘secure­Connection­Start’**, and **‘response­End’** (@shubhamg13, #44673, #44624, #44850, #44739)
 
+We’ve also fixed some build issues on Windows (@mukilan, #45079), FreeBSD (@delan, @mrobinson, @mukilan, #44600), and for anyone building Servo on NixOS or with Nix (@freyacodes, #45051, #45135).
+
 This is another big update, so here’s an outline:
 
 - [**Security**](#security)
@@ -66,8 +68,31 @@ This release brings a more conformant **abort()** on **IDB­Transaction** (@Taym
 
 All of the features above are enabled in servoshell’s experimental mode.
 
+We’ve made more progress towards **accessibility** support, including the [**name from contents**](https://book.servo.org/contributing/getting-started.html#ai-contributions) algorithm (@alice, @delan, @mrobinson, #44439) and several changes towards **building the accessibility tree incrementally** (@alice, @delan, @mrobinson, #44766, #45035, #45207, #44768, #44785, #44801, #44767, #45029).
+The latter is critical for performance in real-world web content.
+
 We’re now working on **SharedWorker** and **ServiceWorker**, under `--pref dom­_sharedworker­_enabled` and `--pref dom­_serviceworker­_enabled` respectively.
 This release adds support for **new Shared­Worker()** (@Taym95, #44761), and parts of the ServiceWorker API (@gterzian, @arihant2math, #45082, #44787).
+
+## servoshell
+
+You can now configure the path to a [**hosts file**](https://en.wikipedia.org/w/index.php?title=Hosts_(file)&oldid=1360805760) in servoshell with **-\-host-file=** (singular), as an alternative to the **HOST_FILE** (singular) environment variable (@jschwe, #44880).
+
+You can now provide a directory of **user scripts** to run in every document with **-\-userscripts=** (@jdm, #44754).
+
+## For developers
+
+When using the **Debugger** tab in the Firefox **DevTools**:
+
+- You can now [“blackbox”](https://antongunnarsson.com/devtools-blackbox/) a script by clicking **Ignore source** (@freyacodes, #44359).
+This prevents breakpoints from being hit inside that script, and it should also allow you to step through execution in the debugger without pausing inside that script.
+
+- The **Scopes** panel is more accurate now (@atbrakhi, @eerii, #44765).
+
+For developers of Servo itself, please note that [per project policy](https://book.servo.org/contributing/getting-started.html#ai-contributions), you **must not** use the output of **large language models** or other **generative AI tools** in your contributions.
+To help us enforce that, we now have CI checks that reject AI agents as coauthors (@SimonSapin, @delan, #44723).
+
+We’ve also fixed build issues with `--features vello` (@Gae24, @yezhizhen, #44875, #45036).
 
 ## Embedding API
 
@@ -157,7 +182,7 @@ We’ve also reduced allocations, GC rooting steps, and other operations in many
 
 To improve Servo’s **build times**, we’re moving more code out of our massive **script crate** (@Narfinger, @jdm, #44598, #44636, #44823), and reduced the size of our dependency tree (@jschwe, #44818).
 
-Several crashes have been fixed:
+Several crashes and hangs have been fixed:
 
 - in **‘content’** (@mrobinson, @Loirooriol, @SimonSapin, #45227, #44762)
 - in **Media­Stream** (@jdm, #44781)
@@ -167,7 +192,9 @@ Several crashes have been fixed:
 - in **stop()** on **Window** (@TimvdLippe, #44804)
 - in `document.exec­Command(​"delete")` (@TimvdLippe, #44748)
 - in `--debug-mozjs` builds (@Gae24, @SharanRP, #44745, #45001)
-- when shaping zero-width spaces (@mrobinson, #45176)
+- when evaluating scripts in DevTools while paused (@atbrakhi, #45050)
+- when previewing some JS values in DevTools (@eerii, @atbrakhi, #45054)
+- when shaping zero-width spaces in layout (@mrobinson, #45176)
 - when toggling servoshell’s experimental mode at runtime (@mrobinson, @Loirooriol, #45226)
 
 We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@Gae24, @MavenRain, @Narfinger, @SteveSharonSam, @TimvdLippe, @elomscansio, @jdm, @kkoyung, @yezhizhen, #44712, #44759, #44879, #45014, #45058, #45061, #45076, #45098, #45110, #45149, #45117, #45184, #45201, #44806, #44930, #44942, #44946, #45233, #45181, #44659, #44660, #44664, #44668, #44992, #45000, #45081, #45009, #45225, #45087, #45244, #45245, #45247, #44663, #44665, #44993, #45040, #45053, #44647, #44671, #44681, #44717, #44733, #44686, #44653).
