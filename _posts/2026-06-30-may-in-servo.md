@@ -36,19 +36,19 @@ We’ve also fixed some build issues on Windows (@mukilan, #45079), FreeBSD (@de
 
 This is another big update, so here’s an outline:
 
-- [**Security**](#security)
+- [**Security**](#security)<br>– memory safety fixes
 
-- [**Work in progress**](#work-in-progress)
+- [**Work in progress**](#work-in-progress)<br>– execCommand(), Sanitizer, IndexedDB, accessibility, workers
 
-- [**servoshell**](#servoshell)
+- [**Embedding API**](#embedding-api)<br>– MSRV, cookies, preferences, diagnostics
 
-- [**For developers**](#for-developers)
+- [**For users and developers**](#for-users-and-developers)<br>– `--host-file`, `--userscripts`, DevTools Debugger
 
-- [**Embedding API**](#embedding-api)
+- [**More on the web platform**](#more-on-the-web-platform)<br>– focus, forms, navigation, SubtleCrypto, WebGPU
 
-- [**More on the web platform**](#more-on-the-web-platform)
+- [**Performance**](#performance)<br>– about:memory, threads, layout, DOM, build times
 
-- [**Performance and stability**](#performance-and-stability)
+- [**Stability**](#stability)<br>– crashes, hangs, static analysis
 
 ## Security
 
@@ -73,26 +73,6 @@ The latter is critical for performance in real-world web content.
 
 We’re now working on **SharedWorker** and **ServiceWorker**, under `--pref dom­_sharedworker­_enabled` and `--pref dom­_serviceworker­_enabled` respectively.
 This release adds support for **new Shared­Worker()** (@Taym95, #44761), and parts of the ServiceWorker API (@gterzian, @arihant2math, #45082, #44787).
-
-## servoshell
-
-You can now configure the path to a [**hosts file**](https://en.wikipedia.org/w/index.php?title=Hosts_(file)&oldid=1360805760) in servoshell with **-\-host-file=** (singular), as an alternative to the **HOST_FILE** (singular) environment variable (@jschwe, #44880).
-
-You can now provide a directory of **user scripts** to run in every document with **-\-userscripts=** (@jdm, #44754).
-
-## For developers
-
-When using the **Debugger** tab in the Firefox **DevTools**:
-
-- You can now [“blackbox”](https://antongunnarsson.com/devtools-blackbox/) a script by clicking **Ignore source** (@freyacodes, #44359).
-This prevents breakpoints from being hit inside that script, and it should also allow you to step through execution in the debugger without pausing inside that script.
-
-- The **Scopes** panel is more accurate now (@atbrakhi, @eerii, #44765).
-
-For developers of Servo itself, please note that [per project policy](https://book.servo.org/contributing/getting-started.html#ai-contributions), you **must not** use the output of **large language models** or other **generative AI tools** in your contributions.
-To help us enforce that, we now have CI checks that reject AI agents as coauthors (@SimonSapin, @delan, #44723).
-
-We’ve also fixed build issues with `--features vello` (@Gae24, @yezhizhen, #44875, #45036).
 
 ## Embedding API
 
@@ -129,6 +109,26 @@ We’ve also reworked our [**DiagnosticsLogging**](https://doc.servo.org/servo/s
 
 - **(Breaking change)** [`DiagnosticsLogging`](https://doc.servo.org/servo/struct.DiagnosticsLogging.html)::[`extend­_from­_string`](https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.extend_from_string) no longer accepts a `help` option – this option only existed to support servoshell’s `-Z help` / `--debug=help` option, so the code implementing it has been moved to servoshell
 
+## For users and developers
+
+**servoshell** has two new options:
+
+- You can now configure the path to a [**hosts file**](https://en.wikipedia.org/w/index.php?title=Hosts_(file)&oldid=1360805760) with **-\-host-file=** (singular), as an alternative to the **HOST_FILE** (singular) environment variable (@jschwe, #44880).
+
+- You can now provide a directory of **user scripts** to run in every document with **-\-userscripts=** (@jdm, #44754).
+
+When using the **Debugger** tab in the Firefox **DevTools**:
+
+- You can now [“blackbox”](https://antongunnarsson.com/devtools-blackbox/) a script by clicking **Ignore source** (@freyacodes, #44359).
+This prevents breakpoints from being hit inside that script, and it should also allow you to step through execution in the debugger without pausing inside that script.
+
+- The **Scopes** panel is more accurate now (@atbrakhi, @eerii, #44765).
+
+For developers of Servo itself, please note that [per project policy](https://book.servo.org/contributing/getting-started.html#ai-contributions), you **must not** use the output of **large language models** or other **generative AI tools** in your contributions.
+To help us enforce that, we now have CI checks that reject AI agents as coauthors (@SimonSapin, @delan, #44723).
+
+We’ve also fixed build issues with `--features vello` (@Gae24, @yezhizhen, #44875, #45036).
+
 ## More on the web platform
 
 We’ve improved the default appearance of **&lt;dl>**, **&lt;ol>**, **&lt;ul>**, **&lt;table>**, **&lt;thead>**, **&lt;tbody>**, **&lt;tfoot>**, **&lt;tr>**, **&lt;td>**, **&lt;th>**, **&lt;dir>**, **&lt;menu>**, and **&lt;form>** (@avis137, #44837, #44920).
@@ -143,7 +143,7 @@ We’ve also landed improvements to **GPU­Supported­Limits** (@sagudev, #45114
 
 We’ve fixed bugs related to **&lt;svg>** with **‘Content-Security-Policy’** (@TimvdLippe, @jdm, #44974), **‘:active’** (@SharanRP, @mrobinson, #43953), **‘:hover’** (@SharanRP, @mrobinson, #43979), **‘align-items’** (@yezhizhen, #44396), **‘border-image-outset’** (@lumiscosity, #45039), **‘padding’** with **‘overflow: scroll’** (@stevennovaryo, #44263), **‘pointerup’ events** (@mrobinson, #44666), **‘slotchange’ events** (@jdm, #44688), **dynamic import()** (@Gae24, #44741), and **clip()** on **CanvasRenderingContext2D** (@yezhizhen, #44831).
 
-## Performance and stability
+## Performance
 
 We’ve built a tool that will help us improve **‘about:memory’** by finding untracked allocations (@jdm, @TimvdLippe, @webbeef, #44674, #44980).
 
@@ -181,6 +181,8 @@ On OpenHarmony, we now have a real refresh driver for reduced idle CPU usage (@j
 We’ve also reduced allocations, GC rooting steps, and other operations in many parts of Servo (@jschwe, @kkoyung, @mrobinson, @SteveSharonSam, @Narfinger, @jdm, @nodelpit, @simonwuelker, #44961, #44944, #44972, #45231, #45078, #44662, #44679, #44967, #44963, #44933, #44935, #44905).
 
 To improve Servo’s **build times**, we’re moving more code out of our massive **script crate** (@Narfinger, @jdm, #44598, #44636, #44823), and reduced the size of our dependency tree (@jschwe, #44818).
+
+## Stability
 
 Several crashes and hangs have been fixed:
 
