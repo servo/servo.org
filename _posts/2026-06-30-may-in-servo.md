@@ -56,7 +56,7 @@ For more details, see [CVE-2026-7322](https://nvd.nist.gov/vuln/detail/CVE-2026-
 ## Work in progress
 
 We’re continuing to implement **document.exec­Command()** for **rich text editing**, under `--pref dom­_exec­_command­_enabled`.
-This release adds support for the **‘back­Color’**, **‘fore­Color’**, **‘create­Link’**, **‘unlink’**, **‘superscript’**, **‘subscript’**, and **‘remove­Format’** commands (@TimvdLippe, #44644, #44682, #44657, #44710, #44677).
+This release adds support for the **‘back­Color’**, **‘fore­Color’**, **‘create­Link’**, **‘unlink’**, **‘superscript’**, **‘subscript’**, and **‘remove­Format’** commands (@TimvdLippe, #44644, #44682, #44657, #44710, #44677), plus partial support for the **‘insert­Paragraph’** command (@TimvdLippe, #44909).
 
 We’re also working on the **Sanitizer** API, under `--pref dom­_sanitizer­_enabled`.
 With the feature now enabled in servoshell’s experimental mode (@kkoyung, #44701), this release adds support for **set­Comments()**, **set­Data­Attributes()**, **allow­Processing­Instruction()**, **remove­Processing­Instruction()**, and **remove­Unsafe()** on **Sanitizer** (@kkoyung, #44734, #44983).
@@ -110,11 +110,46 @@ We’ve improved the default appearance of **&lt;dl>**, **&lt;ol>**, **&lt;ul>**
 
 **CryptoKey** is now **serializable**, allowing it to be used in structuredClone() and postMessage() (@kkoyung, #45163).
 
-We’ve improved the conformance of **form submission** (@yezhizhen, #44943, #44953, #44954, #44957), **tab navigation** (@mrobinson, #44684), **javascript: url navigation** (@jdm, @TimvdLippe, #43490), **‘Refresh’** and **&lt;meta http-equiv=Refresh>** (@jschwe, @mrobinson, #45113, #45116), **GPU­Supported­Limits** (@sagudev, #45114), **GPU­Texture** (@sagudev, #45154), **create­Bind­Group()** on **GPU­Device** (@sagudev, #45140), **read­As­Data­URL()** on **File­Reader** (@yezhizhen, #44897, #44924), **stream()** on **Blob** (@Taym95, #45133), **crypto.subtle.derive­Bits()** (@kkoyung, #44706), and **ML-KEM** in **Subtle­Crypto** (@kkoyung, #45153).
+We’ve improved the conformance of **form submission** (@yezhizhen, #44943, #44953, #44954, #44957), **tab navigation** (@mrobinson, #44684), **javascript: url navigation** (@jdm, @TimvdLippe, #43490), **‘Refresh’** and **&lt;meta http-equiv=Refresh>** (@jschwe, @mrobinson, #45113, #45116), **‘line-break: anywhere’** (@mrobinson, @SimonSapin, #44609), **GPU­Supported­Limits** (@sagudev, #45114), **GPU­Texture** (@sagudev, #45154), **create­Bind­Group()** on **GPU­Device** (@sagudev, #45140), **read­As­Data­URL()** on **File­Reader** (@yezhizhen, #44897, #44924), **stream()** on **Blob** (@Taym95, #45133), **crypto.subtle.derive­Bits()** (@kkoyung, #44706), **performance.measure()** (@shubhamg13, #44675), and **ML-KEM** in **Subtle­Crypto** (@kkoyung, #45153).
 
 ## Performance and stability
 
-To improve Servo’s **build times**, we’re moving more code out of our massive **script crate** (@Narfinger, @jdm, #44598, #44823).
+We’ve built a tool that will help us improve **‘about:memory’** by finding untracked allocations (@jdm, @TimvdLippe, @webbeef, #44674, #44980).
+
+Servo now requires fewer OS threads per CPU, after we combined the **thread pools** for the image cache, web storage, and IndexedDB (@Narfinger, @mrobinson, #44307).
+
+We’ve landed a bunch of **layout** optimisations:
+
+- The fragment tree is now **immutable** for the most part, with small pockets of interior mutability where mutability is needed.
+This means that most fragment tree accesses no longer have to incur the runtime cost of borrowing an [AtomicRefCell](https://docs.rs/atomic_refcell/0.1.14/atomic_refcell/) (@mrobinson, @Loirooriol, #44849).
+
+- Two steps in the layout process, calculating **containing blocks** and building the **stacking context tree**, require traversing the fragment tree.
+This can be expensive, but we’ve now combined them into a **single fragment tree traversal** in most cases (@SimonSapin, @mrobinson, #44911, #45210).
+
+- Another step in the layout process, calculating **scrollable overflow**, used to require traversing the entire fragment tree.
+We’ve effectively eliminated that traversal, by making the calculation both **lazy** and **incremental** (@mrobinson, @Loirooriol, #44854).
+
+- We’ve improved the caching of fragments, shaping results, and other layout results between reflows (@mrobinson, @Loirooriol, @SimonSapin, #45038, #44769).
+
+- We’ve made incremental fragment layout more precise (@Loirooriol, @mrobinson, #44925).
+
+- We’ve reduced the memory usage of text shaping (@mrobinson, @SimonSapin, #44609).
+
+**DOM attributes** are much more efficient in this release:
+
+- When scripts write attribute values, we avoid serialising them until the attribute is read back by a script (if ever), speeding up frequent writes to inline styles by up to 25% (@mrobinson, #44931).
+
+- When we parse attributes in HTML or read attribute values internally, we avoid constructing [Attr](https://developer.mozilla.org/en-US/docs/Web/API/Attr) nodes until a script [actually](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNode) [needs](https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes) them, reducing memory usage and making garbage collection less likely (@webbeef, @TimvdLippe, @mrobinson, #44209, #45023, #45031, #45060).
+
+We’ve eliminated a traversal of the whole DOM tree whenever an **&lt;iframe>** is attached to the tree, which is especially noticeable when parsing documents with many &lt;iframe> tags (@mrobinson, #45236).
+
+Stylesheet locks now use [AtomicRefCell](https://docs.rs/atomic_refcell/0.1.14/atomic_refcell/), which is even more efficient than a [parking_lot](https://docs.rs/parking_lot/0.12.5/parking_lot/)::[RwLock](https://docs.rs/parking_lot/0.12.5/parking_lot/type.RwLock.html) (@mrobinson, #44883).
+
+On OpenHarmony, we now have a real refresh driver for reduced idle CPU usage (@jschwe, @yezhizhen, #44927), and we now cache the font list on disk for faster startup (@RichardTjokroutomo, @d-desyatkin, #44158).
+
+We’ve also reduced allocations, GC rooting steps, and other operations in many parts of Servo (@jschwe, @kkoyung, @mrobinson, @SteveSharonSam, @Narfinger, @jdm, @nodelpit, @simonwuelker, #44961, #44944, #44972, #45231, #45078, #44662, #44679, #44967, #44963, #44933, #44935, #44905).
+
+To improve Servo’s **build times**, we’re moving more code out of our massive **script crate** (@Narfinger, @jdm, #44598, #44636, #44823), and reduced the size of our dependency tree (@jschwe, #44818).
 
 Several crashes have been fixed:
 
