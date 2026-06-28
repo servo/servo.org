@@ -275,6 +275,7 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 <li><strong>read­As­Binary­String()</strong> on <strong>File­Reader</strong> (@yezhizhen, #44858, #44921)</li>
 <li><strong>performance.measure()</strong> with mark values <strong>‘redirect­Start’</strong>, <strong>‘redirect­End’</strong>, <strong>‘secure­Connection­Start’</strong>, and <strong>‘response­End’</strong> (@shubhamg13, #44673, #44624, #44850, #44739)</li>
 </ul>
+<p>We’ve also fixed some build issues on Windows (@mukilan, #45079), FreeBSD (@delan, @mrobinson, @mukilan, #44600), and for anyone building Servo on NixOS or with Nix (@freyacodes, #45051, #45135).</p>
 <p>This is another big update, so here’s an outline:</p>
 <ul>
 <li>
@@ -314,8 +315,31 @@ With the feature now enabled in servoshell’s experimental mode (@kkoyung, #447
 <p><strong>IndexedDB</strong> continues to improve, under <code>--pref dom­_indexeddb­_enabled</code>.
 This release brings a more conformant <strong>abort()</strong> on <strong>IDB­Transaction</strong> (@Taym95, #43950).</p>
 <p>All of the features above are enabled in servoshell’s experimental mode.</p>
+<p>We’ve made more progress towards <strong>accessibility</strong> support, including the <a href="https://book.servo.org/contributing/getting-started.html#ai-contributions"><strong>name from contents</strong></a> algorithm (@alice, @delan, @mrobinson, #44439) and several changes towards <strong>building the accessibility tree incrementally</strong> (@alice, @delan, @mrobinson, #44766, #45035, #45207, #44768, #44785, #44801, #44767, #45029).
+The latter is critical for performance in real-world web content.</p>
 <p>We’re now working on <strong>SharedWorker</strong> and <strong>ServiceWorker</strong>, under <code>--pref dom­_sharedworker­_enabled</code> and <code>--pref dom­_serviceworker­_enabled</code> respectively.
 This release adds support for <strong>new Shared­Worker()</strong> (@Taym95, #44761), and parts of the ServiceWorker API (@gterzian, @arihant2math, #45082, #44787).</p>
+<h2 id="servoshell" tabindex="-1">servoshell <a class="header-anchor" href="#servoshell">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>You can now configure the path to a <a href="https://en.wikipedia.org/w/index.php?title=Hosts_(file)&amp;oldid=1360805760"><strong>hosts file</strong></a> in servoshell with <strong>--host-file=</strong> (singular), as an alternative to the <strong>HOST_FILE</strong> (singular) environment variable (@jschwe, #44880).</p>
+<p>You can now provide a directory of <strong>user scripts</strong> to run in every document with <strong>--userscripts=</strong> (@jdm, #44754).</p>
+<h2 id="for-developers" tabindex="-1">For developers <a class="header-anchor" href="#for-developers">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>When using the <strong>Debugger</strong> tab in the Firefox <strong>DevTools</strong>:</p>
+<ul>
+<li>
+<p>You can now <a href="https://antongunnarsson.com/devtools-blackbox/">“blackbox”</a> a script by clicking <strong>Ignore source</strong> (@freyacodes, #44359).
+This prevents breakpoints from being hit inside that script, and it should also allow you to step through execution in the debugger without pausing inside that script.</p>
+</li>
+<li>
+<p>The <strong>Scopes</strong> panel is more accurate now (@atbrakhi, @eerii, #44765).</p>
+</li>
+</ul>
+<p>For developers of Servo itself, please note that <a href="https://book.servo.org/contributing/getting-started.html#ai-contributions">per project policy</a>, you <strong>must not</strong> use the output of <strong>large language models</strong> or other <strong>generative AI tools</strong> in your contributions.
+To help us enforce that, we now have CI checks that reject AI agents as coauthors (@SimonSapin, @delan, #44723).</p>
+<p>We’ve also fixed build issues with <code>--features vello</code> (@Gae24, @yezhizhen, #44875, #45036).</p>
 <h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -418,7 +442,7 @@ We’ve effectively eliminated that traversal, by making the calculation both <s
 <p>On OpenHarmony, we now have a real refresh driver for reduced idle CPU usage (@jschwe, @yezhizhen, #44927), and we now cache the font list on disk for faster startup (@RichardTjokroutomo, @d-desyatkin, #44158).</p>
 <p>We’ve also reduced allocations, GC rooting steps, and other operations in many parts of Servo (@jschwe, @kkoyung, @mrobinson, @SteveSharonSam, @Narfinger, @jdm, @nodelpit, @simonwuelker, #44961, #44944, #44972, #45231, #45078, #44662, #44679, #44967, #44963, #44933, #44935, #44905).</p>
 <p>To improve Servo’s <strong>build times</strong>, we’re moving more code out of our massive <strong>script crate</strong> (@Narfinger, @jdm, #44598, #44636, #44823), and reduced the size of our dependency tree (@jschwe, #44818).</p>
-<p>Several crashes have been fixed:</p>
+<p>Several crashes and hangs have been fixed:</p>
 <ul>
 <li>in <strong>‘content’</strong> (@mrobinson, @Loirooriol, @SimonSapin, #45227, #44762)</li>
 <li>in <strong>Media­Stream</strong> (@jdm, #44781)</li>
@@ -428,7 +452,9 @@ We’ve effectively eliminated that traversal, by making the calculation both <s
 <li>in <strong>stop()</strong> on <strong>Window</strong> (@TimvdLippe, #44804)</li>
 <li>in <code>document.exec­Command(​&quot;delete&quot;)</code> (@TimvdLippe, #44748)</li>
 <li>in <code>--debug-mozjs</code> builds (@Gae24, @SharanRP, #44745, #45001)</li>
-<li>when shaping zero-width spaces (@mrobinson, #45176)</li>
+<li>when evaluating scripts in DevTools while paused (@atbrakhi, #45050)</li>
+<li>when previewing some JS values in DevTools (@eerii, @atbrakhi, #45054)</li>
+<li>when shaping zero-width spaces in layout (@mrobinson, #45176)</li>
 <li>when toggling servoshell’s experimental mode at runtime (@mrobinson, @Loirooriol, #45226)</li>
 </ul>
 <p>We’ve continued our long-running effort to <strong>use the Rust type system</strong> to make certain kinds of dynamic borrow failures impossible (@Gae24, @MavenRain, @Narfinger, @SteveSharonSam, @TimvdLippe, @elomscansio, @jdm, @kkoyung, @yezhizhen, #44712, #44759, #44879, #45014, #45058, #45061, #45076, #45098, #45110, #45149, #45117, #45184, #45201, #44806, #44930, #44942, #44946, #45233, #45181, #44659, #44660, #44664, #44668, #44992, #45000, #45081, #45009, #45225, #45087, #45244, #45245, #45247, #44663, #44665, #44993, #45040, #45053, #44647, #44671, #44681, #44717, #44733, #44686, #44653).</p>

@@ -39,6 +39,7 @@ For security fixes, see &lt;a href=&quot;https://servo.org/twismay/blog/2026/06/
 &lt;li&gt;&lt;strong&gt;read­As­Binary­String()&lt;/strong&gt; on &lt;strong&gt;File­Reader&lt;/strong&gt; (@yezhizhen, #44858, #44921)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;performance.measure()&lt;/strong&gt; with mark values &lt;strong&gt;‘redirect­Start’&lt;/strong&gt;, &lt;strong&gt;‘redirect­End’&lt;/strong&gt;, &lt;strong&gt;‘secure­Connection­Start’&lt;/strong&gt;, and &lt;strong&gt;‘response­End’&lt;/strong&gt; (@shubhamg13, #44673, #44624, #44850, #44739)&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;We’ve also fixed some build issues on Windows (@mukilan, #45079), FreeBSD (@delan, @mrobinson, @mukilan, #44600), and for anyone building Servo on NixOS or with Nix (@freyacodes, #45051, #45135).&lt;/p&gt;
 &lt;p&gt;This is another big update, so here’s an outline:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -78,8 +79,31 @@ With the feature now enabled in servoshell’s experimental mode (@kkoyung, #447
 &lt;p&gt;&lt;strong&gt;IndexedDB&lt;/strong&gt; continues to improve, under &lt;code&gt;--pref dom­_indexeddb­_enabled&lt;/code&gt;.
 This release brings a more conformant &lt;strong&gt;abort()&lt;/strong&gt; on &lt;strong&gt;IDB­Transaction&lt;/strong&gt; (@Taym95, #43950).&lt;/p&gt;
 &lt;p&gt;All of the features above are enabled in servoshell’s experimental mode.&lt;/p&gt;
+&lt;p&gt;We’ve made more progress towards &lt;strong&gt;accessibility&lt;/strong&gt; support, including the &lt;a href=&quot;https://book.servo.org/contributing/getting-started.html#ai-contributions&quot;&gt;&lt;strong&gt;name from contents&lt;/strong&gt;&lt;/a&gt; algorithm (@alice, @delan, @mrobinson, #44439) and several changes towards &lt;strong&gt;building the accessibility tree incrementally&lt;/strong&gt; (@alice, @delan, @mrobinson, #44766, #45035, #45207, #44768, #44785, #44801, #44767, #45029).
+The latter is critical for performance in real-world web content.&lt;/p&gt;
 &lt;p&gt;We’re now working on &lt;strong&gt;SharedWorker&lt;/strong&gt; and &lt;strong&gt;ServiceWorker&lt;/strong&gt;, under &lt;code&gt;--pref dom­_sharedworker­_enabled&lt;/code&gt; and &lt;code&gt;--pref dom­_serviceworker­_enabled&lt;/code&gt; respectively.
 This release adds support for &lt;strong&gt;new Shared­Worker()&lt;/strong&gt; (@Taym95, #44761), and parts of the ServiceWorker API (@gterzian, @arihant2math, #45082, #44787).&lt;/p&gt;
+&lt;h2 id=&quot;servoshell&quot; tabindex=&quot;-1&quot;&gt;servoshell &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#servoshell&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;You can now configure the path to a &lt;a href=&quot;https://en.wikipedia.org/w/index.php?title=Hosts_(file)&amp;amp;oldid=1360805760&quot;&gt;&lt;strong&gt;hosts file&lt;/strong&gt;&lt;/a&gt; in servoshell with &lt;strong&gt;--host-file=&lt;/strong&gt; (singular), as an alternative to the &lt;strong&gt;HOST_FILE&lt;/strong&gt; (singular) environment variable (@jschwe, #44880).&lt;/p&gt;
+&lt;p&gt;You can now provide a directory of &lt;strong&gt;user scripts&lt;/strong&gt; to run in every document with &lt;strong&gt;--userscripts=&lt;/strong&gt; (@jdm, #44754).&lt;/p&gt;
+&lt;h2 id=&quot;for-developers&quot; tabindex=&quot;-1&quot;&gt;For developers &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#for-developers&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;When using the &lt;strong&gt;Debugger&lt;/strong&gt; tab in the Firefox &lt;strong&gt;DevTools&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;You can now &lt;a href=&quot;https://antongunnarsson.com/devtools-blackbox/&quot;&gt;“blackbox”&lt;/a&gt; a script by clicking &lt;strong&gt;Ignore source&lt;/strong&gt; (@freyacodes, #44359).
+This prevents breakpoints from being hit inside that script, and it should also allow you to step through execution in the debugger without pausing inside that script.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;strong&gt;Scopes&lt;/strong&gt; panel is more accurate now (@atbrakhi, @eerii, #44765).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For developers of Servo itself, please note that &lt;a href=&quot;https://book.servo.org/contributing/getting-started.html#ai-contributions&quot;&gt;per project policy&lt;/a&gt;, you &lt;strong&gt;must not&lt;/strong&gt; use the output of &lt;strong&gt;large language models&lt;/strong&gt; or other &lt;strong&gt;generative AI tools&lt;/strong&gt; in your contributions.
+To help us enforce that, we now have CI checks that reject AI agents as coauthors (@SimonSapin, @delan, #44723).&lt;/p&gt;
+&lt;p&gt;We’ve also fixed build issues with &lt;code&gt;--features vello&lt;/code&gt; (@Gae24, @yezhizhen, #44875, #45036).&lt;/p&gt;
 &lt;h2 id=&quot;embedding-api&quot; tabindex=&quot;-1&quot;&gt;Embedding API &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twismay/blog/2026/06/30/may-in-servo/#embedding-api&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -182,7 +206,7 @@ We’ve effectively eliminated that traversal, by making the calculation both &l
 &lt;p&gt;On OpenHarmony, we now have a real refresh driver for reduced idle CPU usage (@jschwe, @yezhizhen, #44927), and we now cache the font list on disk for faster startup (@RichardTjokroutomo, @d-desyatkin, #44158).&lt;/p&gt;
 &lt;p&gt;We’ve also reduced allocations, GC rooting steps, and other operations in many parts of Servo (@jschwe, @kkoyung, @mrobinson, @SteveSharonSam, @Narfinger, @jdm, @nodelpit, @simonwuelker, #44961, #44944, #44972, #45231, #45078, #44662, #44679, #44967, #44963, #44933, #44935, #44905).&lt;/p&gt;
 &lt;p&gt;To improve Servo’s &lt;strong&gt;build times&lt;/strong&gt;, we’re moving more code out of our massive &lt;strong&gt;script crate&lt;/strong&gt; (@Narfinger, @jdm, #44598, #44636, #44823), and reduced the size of our dependency tree (@jschwe, #44818).&lt;/p&gt;
-&lt;p&gt;Several crashes have been fixed:&lt;/p&gt;
+&lt;p&gt;Several crashes and hangs have been fixed:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;in &lt;strong&gt;‘content’&lt;/strong&gt; (@mrobinson, @Loirooriol, @SimonSapin, #45227, #44762)&lt;/li&gt;
 &lt;li&gt;in &lt;strong&gt;Media­Stream&lt;/strong&gt; (@jdm, #44781)&lt;/li&gt;
@@ -192,7 +216,9 @@ We’ve effectively eliminated that traversal, by making the calculation both &l
 &lt;li&gt;in &lt;strong&gt;stop()&lt;/strong&gt; on &lt;strong&gt;Window&lt;/strong&gt; (@TimvdLippe, #44804)&lt;/li&gt;
 &lt;li&gt;in &lt;code&gt;document.exec­Command(​&amp;quot;delete&amp;quot;)&lt;/code&gt; (@TimvdLippe, #44748)&lt;/li&gt;
 &lt;li&gt;in &lt;code&gt;--debug-mozjs&lt;/code&gt; builds (@Gae24, @SharanRP, #44745, #45001)&lt;/li&gt;
-&lt;li&gt;when shaping zero-width spaces (@mrobinson, #45176)&lt;/li&gt;
+&lt;li&gt;when evaluating scripts in DevTools while paused (@atbrakhi, #45050)&lt;/li&gt;
+&lt;li&gt;when previewing some JS values in DevTools (@eerii, @atbrakhi, #45054)&lt;/li&gt;
+&lt;li&gt;when shaping zero-width spaces in layout (@mrobinson, #45176)&lt;/li&gt;
 &lt;li&gt;when toggling servoshell’s experimental mode at runtime (@mrobinson, @Loirooriol, #45226)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;We’ve continued our long-running effort to &lt;strong&gt;use the Rust type system&lt;/strong&gt; to make certain kinds of dynamic borrow failures impossible (@Gae24, @MavenRain, @Narfinger, @SteveSharonSam, @TimvdLippe, @elomscansio, @jdm, @kkoyung, @yezhizhen, #44712, #44759, #44879, #45014, #45058, #45061, #45076, #45098, #45110, #45149, #45117, #45184, #45201, #44806, #44930, #44942, #44946, #45233, #45181, #44659, #44660, #44664, #44668, #44992, #45000, #45081, #45009, #45225, #45087, #45244, #45245, #45247, #44663, #44665, #44993, #45040, #45053, #44647, #44671, #44681, #44717, #44733, #44686, #44653).&lt;/p&gt;
