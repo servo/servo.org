@@ -375,10 +375,9 @@ We run compile tests with the MSRV, but most of our testing is now done with Rus
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>We’ve built a tool that will help us improve <strong>‘about:memory’</strong> by finding untracked allocations (@jdm, @TimvdLippe, @webbeef, #44674, #44980).
-We’ve also reduced the memory usage of text shaping (@mrobinson, @SimonSapin, #44609).</p>
+<p>We’ve built a tool that will help us improve <strong>‘about:memory’</strong> by finding untracked allocations (@jdm, @TimvdLippe, @webbeef, #44674, #44980).</p>
 <p>Servo now requires fewer OS threads per CPU, after we combined the <strong>thread pools</strong> for the image cache, web storage, and IndexedDB (@Narfinger, @mrobinson, #44307).</p>
-<p>We’ve landed bunch of <strong>layout</strong> optimisations:</p>
+<p>We’ve landed a bunch of <strong>layout</strong> optimisations:</p>
 <ul>
 <li>
 <p>The fragment tree is now <strong>immutable</strong> for the most part, with small pockets of interior mutability where mutability is needed.
@@ -393,7 +392,13 @@ This can be expensive, but we’ve now combined them into a <strong>single fragm
 We’ve effectively eliminated that traversal, by making the calculation both <strong>lazy</strong> and <strong>incremental</strong> (@mrobinson, @Loirooriol, #44854).</p>
 </li>
 <li>
-<p>We’ve also made incremental fragment layout more precise (@Loirooriol, @mrobinson, #44925), and improved the caching of fragments, shaping results, and other layout results between reflows (@mrobinson, @Loirooriol, @SimonSapin, #45038, #44769).</p>
+<p>We’ve improved the caching of fragments, shaping results, and other layout results between reflows (@mrobinson, @Loirooriol, @SimonSapin, #45038, #44769).</p>
+</li>
+<li>
+<p>We’ve made incremental fragment layout more precise (@Loirooriol, @mrobinson, #44925).</p>
+</li>
+<li>
+<p>We’ve reduced the memory usage of text shaping (@mrobinson, @SimonSapin, #44609).</p>
 </li>
 </ul>
 <p><strong>DOM attributes</strong> are much more efficient in this release:</p>
