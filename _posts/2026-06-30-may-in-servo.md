@@ -55,7 +55,7 @@ For more details, see [CVE-2026-7322](https://nvd.nist.gov/vuln/detail/CVE-2026-
 
 ## Work in progress
 
-We’re continuing to implement **document.exec­Command()** for **rich text editing**, under `--pref dom­_exec­_command­_enabled`.
+We’re continuing to implement **document.exec­Command()** for **rich text editing**, under `--pref dom­_exec­_command­_enabled` (@TimvdLippe, #44735, #44973, #44887).
 This release adds support for the **‘back­Color’**, **‘fore­Color’**, **‘create­Link’**, **‘unlink’**, **‘superscript’**, **‘subscript’**, and **‘remove­Format’** commands (@TimvdLippe, #44644, #44682, #44657, #44710, #44677), plus partial support for the **‘insert­Paragraph’** command (@TimvdLippe, #44909).
 
 We’re also working on the **Sanitizer** API, under `--pref dom­_sanitizer­_enabled`.
@@ -110,7 +110,13 @@ We’ve improved the default appearance of **&lt;dl>**, **&lt;ol>**, **&lt;ul>**
 
 **CryptoKey** is now **serializable**, allowing it to be used in structuredClone() and postMessage() (@kkoyung, #45163).
 
-We’ve improved the conformance of **form submission** (@yezhizhen, #44943, #44953, #44954, #44957), **tab navigation** (@mrobinson, #44684), **javascript: url navigation** (@jdm, @TimvdLippe, #43490), **‘Refresh’** and **&lt;meta http-equiv=Refresh>** (@jschwe, @mrobinson, #45113, #45116), **‘line-break: anywhere’** (@mrobinson, @SimonSapin, #44609), **GPU­Supported­Limits** (@sagudev, #45114), **GPU­Texture** (@sagudev, #45154), **create­Bind­Group()** on **GPU­Device** (@sagudev, #45140), **read­As­Data­URL()** on **File­Reader** (@yezhizhen, #44897, #44924), **stream()** on **Blob** (@Taym95, #45133), **crypto.subtle.derive­Bits()** (@kkoyung, #44706), **performance.measure()** (@shubhamg13, #44675), and **ML-KEM** in **Subtle­Crypto** (@kkoyung, #45153).
+We’ve improved **JS error messages** in several parts of the DOM (@n0blenote, @jdm, @TG199, @PuercoPop, #44704, #45186, #44656).
+
+We’ve improved the conformance of **form submission** (@yezhizhen, #44943, #44953, #44954, #44957), **tab navigation** (@mrobinson, #44684), **javascript: url navigation** (@jdm, @TimvdLippe, #43490), **‘Refresh’ headers** and **&lt;meta http-equiv=Refresh>** (@jschwe, @mrobinson, #45113, #45116), **‘line-break: anywhere’** (@mrobinson, @SimonSapin, #44609), **assign()** on **Location** (@TG199, @jdm, #44298), **crypto.subtle.derive­Bits()** (@kkoyung, #44706), **get­Computed­Style()** (@Loirooriol, #44856), **performance.measure()** (@shubhamg13, #44675), **read­As­Data­URL()** on **File­Reader** (@yezhizhen, #44897, #44924), **stream()** on **Blob** (@Taym95, #45133), and **ML-KEM** in **Subtle­Crypto** (@kkoyung, #45153).
+
+We’ve also landed improvements to **GPU­Supported­Limits** (@sagudev, #45114), **GPU­Texture** (@sagudev, #45154), **create­Bind­Group()** on **GPU­Device** (@sagudev, #45140), and other **WebGPU** features (@sagudev, #45097).
+
+We’ve fixed bugs related to **&lt;svg>** with **‘Content-Security-Policy’** (@TimvdLippe, @jdm, #44974), **‘:active’** (@SharanRP, @mrobinson, #43953), **‘:hover’** (@SharanRP, @mrobinson, #43979), **‘align-items’** (@yezhizhen, #44396), **‘border-image-outset’** (@lumiscosity, #45039), **‘padding’** with **‘overflow: scroll’** (@stevennovaryo, #44263), **‘pointerup’ events** (@mrobinson, #44666), **‘slotchange’ events** (@jdm, #44688), **dynamic import()** (@Gae24, #44741), and **clip()** on **CanvasRenderingContext2D** (@yezhizhen, #44831).
 
 ## Performance and stability
 
