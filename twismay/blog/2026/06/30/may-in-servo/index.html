@@ -279,25 +279,25 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 <p>This is another big update, so here’s an outline:</p>
 <ul>
 <li>
-<p><a href="#security"><strong>Security</strong></a></p>
+<p><a href="#security"><strong>Security</strong></a><br>– memory safety fixes</p>
 </li>
 <li>
-<p><a href="#work-in-progress"><strong>Work in progress</strong></a></p>
+<p><a href="#work-in-progress"><strong>Work in progress</strong></a><br>– execCommand(), Sanitizer, IndexedDB, accessibility, workers</p>
 </li>
 <li>
-<p><a href="#servoshell"><strong>servoshell</strong></a></p>
+<p><a href="#embedding-api"><strong>Embedding API</strong></a><br>– MSRV, cookies, preferences, diagnostics</p>
 </li>
 <li>
-<p><a href="#for-developers"><strong>For developers</strong></a></p>
+<p><a href="#for-users-and-developers"><strong>For users and developers</strong></a><br>– <code>--host-file</code>, <code>--userscripts</code>, DevTools Debugger</p>
 </li>
 <li>
-<p><a href="#embedding-api"><strong>Embedding API</strong></a></p>
+<p><a href="#more-on-the-web-platform"><strong>More on the web platform</strong></a><br>– focus, forms, navigation, SubtleCrypto, WebGPU</p>
 </li>
 <li>
-<p><a href="#more-on-the-web-platform"><strong>More on the web platform</strong></a></p>
+<p><a href="#performance"><strong>Performance</strong></a><br>– about:memory, threads, layout, DOM, build times</p>
 </li>
 <li>
-<p><a href="#performance-and-stability"><strong>Performance and stability</strong></a></p>
+<p><a href="#stability"><strong>Stability</strong></a><br>– crashes, hangs, static analysis</p>
 </li>
 </ul>
 <h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
@@ -319,27 +319,6 @@ This release brings a more conformant <strong>abort()</strong> on <strong>IDB­T
 The latter is critical for performance in real-world web content.</p>
 <p>We’re now working on <strong>SharedWorker</strong> and <strong>ServiceWorker</strong>, under <code>--pref dom­_sharedworker­_enabled</code> and <code>--pref dom­_serviceworker­_enabled</code> respectively.
 This release adds support for <strong>new Shared­Worker()</strong> (@Taym95, #44761), and parts of the ServiceWorker API (@gterzian, @arihant2math, #45082, #44787).</p>
-<h2 id="servoshell" tabindex="-1">servoshell <a class="header-anchor" href="#servoshell">
-        <span class="icon hashlink"><i class="fas fa-link"></i></span>
-      </a></h2>
-<p>You can now configure the path to a <a href="https://en.wikipedia.org/w/index.php?title=Hosts_(file)&amp;oldid=1360805760"><strong>hosts file</strong></a> in servoshell with <strong>--host-file=</strong> (singular), as an alternative to the <strong>HOST_FILE</strong> (singular) environment variable (@jschwe, #44880).</p>
-<p>You can now provide a directory of <strong>user scripts</strong> to run in every document with <strong>--userscripts=</strong> (@jdm, #44754).</p>
-<h2 id="for-developers" tabindex="-1">For developers <a class="header-anchor" href="#for-developers">
-        <span class="icon hashlink"><i class="fas fa-link"></i></span>
-      </a></h2>
-<p>When using the <strong>Debugger</strong> tab in the Firefox <strong>DevTools</strong>:</p>
-<ul>
-<li>
-<p>You can now <a href="https://antongunnarsson.com/devtools-blackbox/">“blackbox”</a> a script by clicking <strong>Ignore source</strong> (@freyacodes, #44359).
-This prevents breakpoints from being hit inside that script, and it should also allow you to step through execution in the debugger without pausing inside that script.</p>
-</li>
-<li>
-<p>The <strong>Scopes</strong> panel is more accurate now (@atbrakhi, @eerii, #44765).</p>
-</li>
-</ul>
-<p>For developers of Servo itself, please note that <a href="https://book.servo.org/contributing/getting-started.html#ai-contributions">per project policy</a>, you <strong>must not</strong> use the output of <strong>large language models</strong> or other <strong>generative AI tools</strong> in your contributions.
-To help us enforce that, we now have CI checks that reject AI agents as coauthors (@SimonSapin, @delan, #44723).</p>
-<p>We’ve also fixed build issues with <code>--features vello</code> (@Gae24, @yezhizhen, #44875, #45036).</p>
 <h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -390,6 +369,31 @@ We run compile tests with the MSRV, but most of our testing is now done with Rus
 <p><strong>(Breaking change)</strong> <a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html"><code>DiagnosticsLogging</code></a>::<a href="https://doc.servo.org/servo/struct.DiagnosticsLogging.html#method.extend_from_string"><code>extend­_from­_string</code></a> no longer accepts a <code>help</code> option – this option only existed to support servoshell’s <code>-Z help</code> / <code>--debug=help</code> option, so the code implementing it has been moved to servoshell</p>
 </li>
 </ul>
+<h2 id="for-users-and-developers" tabindex="-1">For users and developers <a class="header-anchor" href="#for-users-and-developers">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><strong>servoshell</strong> has two new options:</p>
+<ul>
+<li>
+<p>You can now configure the path to a <a href="https://en.wikipedia.org/w/index.php?title=Hosts_(file)&amp;oldid=1360805760"><strong>hosts file</strong></a> with <strong>--host-file=</strong> (singular), as an alternative to the <strong>HOST_FILE</strong> (singular) environment variable (@jschwe, #44880).</p>
+</li>
+<li>
+<p>You can now provide a directory of <strong>user scripts</strong> to run in every document with <strong>--userscripts=</strong> (@jdm, #44754).</p>
+</li>
+</ul>
+<p>When using the <strong>Debugger</strong> tab in the Firefox <strong>DevTools</strong>:</p>
+<ul>
+<li>
+<p>You can now <a href="https://antongunnarsson.com/devtools-blackbox/">“blackbox”</a> a script by clicking <strong>Ignore source</strong> (@freyacodes, #44359).
+This prevents breakpoints from being hit inside that script, and it should also allow you to step through execution in the debugger without pausing inside that script.</p>
+</li>
+<li>
+<p>The <strong>Scopes</strong> panel is more accurate now (@atbrakhi, @eerii, #44765).</p>
+</li>
+</ul>
+<p>For developers of Servo itself, please note that <a href="https://book.servo.org/contributing/getting-started.html#ai-contributions">per project policy</a>, you <strong>must not</strong> use the output of <strong>large language models</strong> or other <strong>generative AI tools</strong> in your contributions.
+To help us enforce that, we now have CI checks that reject AI agents as coauthors (@SimonSapin, @delan, #44723).</p>
+<p>We’ve also fixed build issues with <code>--features vello</code> (@Gae24, @yezhizhen, #44875, #45036).</p>
 <h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -399,7 +403,7 @@ We run compile tests with the MSRV, but most of our testing is now done with Rus
 <p>We’ve improved the conformance of <strong>form submission</strong> (@yezhizhen, #44943, #44953, #44954, #44957), <strong>tab navigation</strong> (@mrobinson, #44684), <strong>javascript: url navigation</strong> (@jdm, @TimvdLippe, #43490), <strong>‘Refresh’ headers</strong> and <strong>&lt;meta http-equiv=Refresh&gt;</strong> (@jschwe, @mrobinson, #45113, #45116), <strong>‘line-break: anywhere’</strong> (@mrobinson, @SimonSapin, #44609), <strong>assign()</strong> on <strong>Location</strong> (@TG199, @jdm, #44298), <strong>crypto.subtle.derive­Bits()</strong> (@kkoyung, #44706), <strong>get­Computed­Style()</strong> (@Loirooriol, #44856), <strong>performance.measure()</strong> (@shubhamg13, #44675), <strong>read­As­Data­URL()</strong> on <strong>File­Reader</strong> (@yezhizhen, #44897, #44924), <strong>stream()</strong> on <strong>Blob</strong> (@Taym95, #45133), and <strong>ML-KEM</strong> in <strong>Subtle­Crypto</strong> (@kkoyung, #45153).</p>
 <p>We’ve also landed improvements to <strong>GPU­Supported­Limits</strong> (@sagudev, #45114), <strong>GPU­Texture</strong> (@sagudev, #45154), <strong>create­Bind­Group()</strong> on <strong>GPU­Device</strong> (@sagudev, #45140), and other <strong>WebGPU</strong> features (@sagudev, #45097).</p>
 <p>We’ve fixed bugs related to <strong>&lt;svg&gt;</strong> with <strong>‘Content-Security-Policy’</strong> (@TimvdLippe, @jdm, #44974), <strong>‘:active’</strong> (@SharanRP, @mrobinson, #43953), <strong>‘:hover’</strong> (@SharanRP, @mrobinson, #43979), <strong>‘align-items’</strong> (@yezhizhen, #44396), <strong>‘border-image-outset’</strong> (@lumiscosity, #45039), <strong>‘padding’</strong> with <strong>‘overflow: scroll’</strong> (@stevennovaryo, #44263), <strong>‘pointerup’ events</strong> (@mrobinson, #44666), <strong>‘slotchange’ events</strong> (@jdm, #44688), <strong>dynamic import()</strong> (@Gae24, #44741), and <strong>clip()</strong> on <strong>CanvasRenderingContext2D</strong> (@yezhizhen, #44831).</p>
-<h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
+<h2 id="performance" tabindex="-1">Performance <a class="header-anchor" href="#performance">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p>We’ve built a tool that will help us improve <strong>‘about:memory’</strong> by finding untracked allocations (@jdm, @TimvdLippe, @webbeef, #44674, #44980).</p>
@@ -442,6 +446,9 @@ We’ve effectively eliminated that traversal, by making the calculation both <s
 <p>On OpenHarmony, we now have a real refresh driver for reduced idle CPU usage (@jschwe, @yezhizhen, #44927), and we now cache the font list on disk for faster startup (@RichardTjokroutomo, @d-desyatkin, #44158).</p>
 <p>We’ve also reduced allocations, GC rooting steps, and other operations in many parts of Servo (@jschwe, @kkoyung, @mrobinson, @SteveSharonSam, @Narfinger, @jdm, @nodelpit, @simonwuelker, #44961, #44944, #44972, #45231, #45078, #44662, #44679, #44967, #44963, #44933, #44935, #44905).</p>
 <p>To improve Servo’s <strong>build times</strong>, we’re moving more code out of our massive <strong>script crate</strong> (@Narfinger, @jdm, #44598, #44636, #44823), and reduced the size of our dependency tree (@jschwe, #44818).</p>
+<h2 id="stability" tabindex="-1">Stability <a class="header-anchor" href="#stability">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
 <p>Several crashes and hangs have been fixed:</p>
 <ul>
 <li>in <strong>‘content’</strong> (@mrobinson, @Loirooriol, @SimonSapin, #45227, #44762)</li>
