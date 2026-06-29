@@ -201,6 +201,23 @@ Several crashes and hangs have been fixed:
 
 We’ve continued our long-running effort to **use the Rust type system** to make certain kinds of dynamic borrow failures impossible (@Gae24, @MavenRain, @Narfinger, @SteveSharonSam, @TimvdLippe, @elomscansio, @jdm, @kkoyung, @yezhizhen, #44712, #44759, #44879, #45014, #45058, #45061, #45076, #45098, #45110, #45149, #45117, #45184, #45201, #44806, #44930, #44942, #44946, #45233, #45181, #44659, #44660, #44664, #44668, #44992, #45000, #45081, #45009, #45225, #45087, #45244, #45245, #45247, #44663, #44665, #44993, #45040, #45053, #44647, #44671, #44681, #44717, #44733, #44686, #44653).
 
+## New contributors
+
+A special thanks to the following people for landing their first patch in Servo:
+
+- AbdAlRahman Gad (@AbdAlRahmanGad, #45213)
+- Onyeka Obi (@MavenRain, #44806)
+- Steve Sharon Sam (@SteveSharonSam, #45030)
+- avis137 (@avis137, #44837)
+- Xabier Rodríguez (@calvaris, #45084)
+- June (@kimjune01, #44816)
+- Matt Van Horn (@mvanhorn, #44740)
+- nicole (@n0blenote, #44704)
+- panxt8 (@panxt8, #44991)
+
+Interested in helping build a web browser?
+Take a look at our [curated list](https://starters.servo.org) of issues that are good for new contributors!
+
 ## Donations
 
 <!--

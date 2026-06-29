@@ -11,6 +11,7 @@
 - [How to count the number of pull requests in a month](#how-to-count-the-number-of-pull-requests-in-a-month)
 - [How to automatically triage automated PRs](#how-to-automatically-triage-automated-prs)
 - [How to calculate monthly recurring donations](#how-to-calculate-monthly-recurring-donations)
+- [How to calculate new contributors](#how-to-calculate-new-contributors)
 - [Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates)
 - [Hints for writing about changes](#hints-for-writing-about-changes)
 - [Corrections](#corrections)
@@ -40,7 +41,7 @@ The suggested workflow for efficiently triaging commits is as follows:
 ```
 $ rm tools/runs.json  # Optional: clear cached list of nightly builds
 $ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-2025-02.json
-$ tools/list-commits-by-nightly.sh ~/code/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
+$ tools/list-commits-by-nightly.sh /path/to/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
 ```
 
 - Open commits.txt — for the best ergonomics, set the language mode to **Diff**, then **Fold All**
@@ -77,7 +78,7 @@ $ tools/list-commits-by-nightly.sh /path/to/servo
 To copy the output to your clipboard for a specific calendar month only:
 
 ```sh
-$ tools/list-commits-by-nightly.sh ~/code/servo 2>&1 | tee /dev/stderr | sed '/^>>> 2025-01-/,/^>>> 2025-02-/!d' | xclip -sel clip
+$ tools/list-commits-by-nightly.sh /path/to/servo 2>&1 | tee /dev/stderr | sed '/^>>> 2025-01-/,/^>>> 2025-02-/!d' | xclip -sel clip
 ```
 
 **NOTE:** this will display the squash commit message of each commit, which has historically been less useful than the pull request description. To display pull request descriptions instead, pass in a pulls.json with `--pulls-json-path=` as documented in [§ Triaging commits in nightlies for monthly updates](#triaging-commits-in-nightlies-for-monthly-updates).
@@ -429,6 +430,34 @@ dataRows
     .reduce((p, q) => p + q)
 ```
 - The result is USD cents/month
+
+## How to calculate new contributors
+
+Update your clone of Servo’s main repo, and replace the gitmailmap(5) with our own table for mapping GitHub handles:
+
+```sh
+$ git -C /path/to/servo fetch origin
+$ cp servo.mailmap /path/to/servo/.mailmap
+```
+
+Run this in DevTools against [commit-triage](https://github.com/jdm/commit-triage):
+
+```js
+[...new Set((await import("./search-dialog.js")).commits.flatMap(commit => commit.authors))].sort().join("\n")
+```
+
+Save the output to `this-month-authors.txt`, then generate a `tools/git-log-authors.txt`:
+
+```sh
+$ tools/git-log-authors.sh /path/to/servo origin/main > tools/git-log-authors.txt
+```
+
+Now compute the first-time authors, given a “cutoff” commit beyond which any contributions are no longer considered first-time:
+
+```sh
+$ cutoff_commit=v0.2.0
+$ < this-month-authors.txt while read -r author; do tools/is-new-contributor.sh /path/to/servo tools/git-log-authors.txt "$author" "$cutoff_commit"; done
+```
 
 ## Triaging commits in nightlies for monthly updates
 
