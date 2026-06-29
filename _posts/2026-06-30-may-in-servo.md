@@ -68,7 +68,7 @@ This release brings a more conformant **abort()** on **IDB­Transaction** (@Taym
 
 All of the features above are enabled in servoshell’s experimental mode.
 
-We’ve made more progress towards **accessibility** support, including the [**name from contents**](https://book.servo.org/contributing/getting-started.html#ai-contributions) algorithm (@alice, @delan, @mrobinson, #44439) and several changes towards **building the accessibility tree incrementally** (@alice, @delan, @mrobinson, #44766, #45035, #45207, #44768, #44785, #44801, #44767, #45029).
+We’ve made more progress towards **accessibility** support, including the [**name from contents**](https://w3c.github.io/aria/#namefromcontent) algorithm (@alice, @delan, @mrobinson, #44439) and several changes towards **building the accessibility tree incrementally** (@alice, @delan, @mrobinson, #44766, #45035, #45207, #44768, #44785, #44801, #44767, #45029).
 The latter is critical for performance in real-world web content.
 
 We’re now working on **SharedWorker** and **ServiceWorker**, under `--pref dom­_sharedworker­_enabled` and `--pref dom­_serviceworker­_enabled` respectively.
