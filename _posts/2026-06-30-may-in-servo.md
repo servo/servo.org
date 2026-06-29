@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "May in Servo: and more!"
+title:      "May in Servo: user scripts, mp4 compat, blackboxing in DevTools, and more!"
 date:       2026-06-30
-summary:    ao!! wrrrrao!!
+summary:    Plus seven new commands for execCommand(), and Sanitizer API now experimental.
 categories:
 ---
 
