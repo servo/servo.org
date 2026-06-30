@@ -10,6 +10,10 @@ categories:
 [**Servo 0.3.0**](https://github.com/servo/servo/releases/tag/v0.3.0) contains all of the changes we landed in May, which came out to **391 commits** (March: 534).
 For security fixes, see [**§ Security**](#security).
 
+<figure>
+    <a href="{{ '/img/blog/2026-06-diffie.png' | url }}"><img src="{{ '/img/blog/2026-06-diffie.png' | url }}" alt="servoshell 0.3.0 showing several new features: the `document.execCommand()` commands ‘back­Color’, ‘create­Link’, ‘unlink’, ‘superscript’, ‘subscript’, and ‘remove­Format’, plus ‘font-kerning’ and ‘font-variant-ligatures’"></a>
+</figure>
+
 We’ve shipped several new web platform features:
 
 - **‘font-kerning: none’** ([@simonwuelker](https://github.com/simonwuelker), [#44634](https://github.com/servo/servo/pull/44634))
