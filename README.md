@@ -483,7 +483,7 @@ Now compute the first-time authors, given a “cutoff” commit beyond which any
 
 ```sh
 $ cutoff_commit=v0.2.0
-$ < this-month-authors.txt while read -r author; do tools/is-new-contributor.sh /path/to/servo tools/git-log-authors.txt "$author" "$cutoff_commit"; done
+$ < this-month-authors.txt while read -r author; do tools/is-new-contributor.sh /path/to/servo tools/git-log-authors.txt "$author" "$cutoff_commit"; done | tee first-time-authors.txt
 ```
 
 ## Triaging commits in nightlies for monthly updates
