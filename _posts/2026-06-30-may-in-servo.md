@@ -7,7 +7,7 @@ summary:    Plus seven new commands for execCommand(), and Sanitizer API now exp
 categories:
 ---
 
-[**Servo 0.3.0**](https://github.com/servo/servo/releases/tag/v0.3.0) contains all of the changes we landed in May, which came out to **391 commits** (March: 534).
+[**Servo 0.3.0**](https://github.com/servo/servo/releases/tag/v0.3.0) contains all of the changes we landed in May, which came out to **391 commits** (April: 534).
 For security fixes, see [**§ Security**](#security).
 
 <figure>
