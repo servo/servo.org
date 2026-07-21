@@ -900,7 +900,8 @@ https://github.com/servo/servo/pull/45264	(@TG199, #45264)	script: Propagate wak
     # This change fixes it.
     # Fixes: #44235 
     # 
-https://github.com/servo/servo/pull/45182	(@yezhizhen, #45182)	script: Generate new blob URL per `createObjectURL` call (#45182)
++https://github.com/servo/servo/pull/45182	(@yezhizhen, #45182)	script: Generate new blob URL per `createObjectURL` call (#45182)
+    dom; more conformant URL.createObjectURL()
     ^ commit 4c5b317e1a8b323e74bece6a17f14780948f0f51
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Previously, we generate same URL when calling `createObjectURL` on same `Blob`.
@@ -2077,7 +2078,8 @@ https://github.com/servo/servo/pull/45415	(@alice, #45415)	layout: Move logic to
     # Part of #40600
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/45416	(@steigeo, #45416)	script: Prevent input type mutation logic from running when type didn't change (#45416)
++https://github.com/servo/servo/pull/45416	(@steigeo, #45416)	script: Prevent input type mutation logic from running when type didn't change (#45416)
+    dom; more conformant setter for type on HTMLInputElement
     ^ commit 53449a7d3d3481d9545113ef005af2dd80fe2b58
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Currently, setting the type of an input element to what it was already is (`element.type = element.type`) causes the type mutation logic to run. For inputs with type number, this causes input sanitization to occur and alters the typed text in the box. This is inconsistent with other browsers and causes issues with number inputs in React.
@@ -2147,7 +2149,8 @@ https://github.com/servo/servo/pull/45428	(@BryanSmith00, #45428)	script: replac
     # Testing: No behavior change so existing tests suffice
     # Fixes: [#45406](https://github.com/servo/servo/issues/45406)
     # 
-https://github.com/servo/servo/pull/45417	(@yezhizhen, #45417)	script: Make `URL.revokeObjectURL` work for sandboxed iframe (#45417)
++https://github.com/servo/servo/pull/45417	(@yezhizhen, #45417)	script: Make `URL.revokeObjectURL` work for sandboxed iframe (#45417)
+    dom; more conformant URL.revokeObjectURL()
     ^ commit 1fe73cb6ff24bddc03b39c89cce1c40359edb20d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -2166,7 +2169,8 @@ https://github.com/servo/servo/pull/45426	(@veyndan, #45426)	android: remove pro
     # There were other product flavors before, but they were removed in d7de206dbd459e8c8bf121f73755d12569c6cc55. Since there is only one product flavor now, there isn't much utility to it. Removing it makes the Gradle tasks a tad less verbose, and simplifies the regex needed to parse those Gradle tasks.
     # 
     # Testing: Ran app
-https://github.com/servo/servo/pull/45048	(@webbeef, #45048)	script: implement the pointer capture API (#45048)
++https://github.com/servo/servo/pull/45048	(@webbeef, #45048)	script: implement the pointer capture API (#45048)
+    dom; impl setPointerCapture() and releasePointerCapture() and hasPointerCapture() on Element (pointer capture <https://w3c.github.io/pointerevents/#pointer-capture>)
     ^ commit ad6ad15ff08d62d5b7ba20eeaade94c091a8e6b3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -2525,7 +2529,8 @@ https://github.com/servo/servo/pull/45433	(@mrobinson, #45433)	script: Properly 
     # Testing: This causes two WPT tests to start passing.
     # Fixes: #44140.
     # 
-https://github.com/servo/servo/pull/45467	(@mukilan, #45467)	libservo: Expand documentation for `WebView` methods. (#45467)
++https://github.com/servo/servo/pull/45467	(@mukilan, #45467)	libservo: Expand documentation for `WebView` methods. (#45467)
+    api; improve docs for WebView, EmbedderControl, NavigationRequest, PermissionRequest, AlertDialog, ConfirmDialog, PromptDialog, and FilePicker
     ^ commit 3cdae07ff662081d9c33576e79022d5fafdc68e9
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Also add documentation for few more types in `webview_delegate.rs`.
@@ -2669,7 +2674,8 @@ https://github.com/servo/servo/pull/45420	(@mrobinson, @Loirooriol, #45420)	layo
     # 
     # Testing: This should not change behavior so should be covered by existing tests.
     # 
-https://github.com/servo/servo/pull/45502	(@mukilan, #45502)	libservo: Remove unused `WebView::send_error` API. (#45502)
++https://github.com/servo/servo/pull/45502	(@mukilan, #45502)	libservo: Remove unused `WebView::send_error` API. (#45502)
+    api; technically breaking! remove unused WebView::send_error()
     ^ commit ee2f421958a7460ece0d0bd71aa2ccea35be075d
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Based on Git history, it seems this API was originally used in the pre-delegate, message-based embedding API. The embedder used the `SendError` variant to report any IPC `send` failures when responding to requests from the engine in the form of `EmbedderMsg`s that carry a response sender.
@@ -4177,7 +4183,8 @@ https://github.com/servo/servo/pull/45622	(@mrobinson, #45622)	geometry: Limit t
     # Testing: A followup change will a crash test.
     # Fixes: Part of #36870
     # 
-https://github.com/servo/servo/pull/45599	(@mukilan, #45599)	deps: upgrade surfman to 0.13.0 (#45599)
++https://github.com/servo/servo/pull/45599	(@mukilan, #45599)	deps: upgrade surfman to 0.13.0 (#45599)
+    api; fix same-month regression in #45289 and/or #45456. but by doing so, surfman 0.13.0 now calls glFlush() in Device::present_bound_surface() on macOS <https://doc.servo.org/surfman/unix/device/type.Device.html#method.present_bound_surface>
     ^ commit 4c5af78c578c55ec6838f6d029a94c4cbf1d2c0a
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Testing: Tested using a patched Servo on [personal fork].
@@ -4930,7 +4937,8 @@ https://github.com/servo/servo/pull/45708	(@jdm, #45708)	script: Ensure Document
     # The pattern `Something::new(...).as_traced()` inside of `new_inherited` is unsafe, since it can be garbage collected if any further allocations trigger a GC before the object that contains it is finished having its reflector allocated and initialized.
     # 
     # Testing: Can't construct a test for this due to GC timing; this fixes a crash that is exposed by running with GC zeal enabled.
-https://github.com/servo/servo/pull/45705	(@skyz1, #45705)	script: Only restrict input length when minlength and maxlength apply (#45705)
++https://github.com/servo/servo/pull/45705	(@skyz1, #45705)	script: Only restrict input length when minlength and maxlength apply (#45705)
+    dom; more conformant <input minlength> and <input maxlength>
     ^ commit 9ed3e206f6d175ddbf526cc76be95cea38f8acf6
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Previously, the number of characters the user was able to enter in an input was restricted, even when the length restriction attributes did not apply to the input type.
@@ -5898,7 +5906,8 @@ https://github.com/servo/servo/pull/45770	(@yezhizhen, #45770)	net: Improve Fetc
     # 
     # Testing: Updated UT. This is not testable by WPT, as the original header `Content-Disposition` is only inserted
     # for those chosen from embedder file picker (`<input type="file">`), but not those in memory.
-https://github.com/servo/servo/pull/45768	(@simonwuelker, #45768)	fonts: Always synthesize variations from font-weight/font-stretch (#45768)
++https://github.com/servo/servo/pull/45768	(@simonwuelker, #45768)	fonts: Always synthesize variations from font-weight/font-stretch (#45768)
+    layout; improve rendering of variable fonts, in particular fixing the too thin `wght` when ‘font-weight: normal’
     ^ commit 02e22779ed4fa3e7e8f5d9228724644b90d4e506
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # We were only setting a value for the variation axes when the corresponding CSS property has a non-default value. That can cause incorrect behaviour because the default value of an axis depends on the font.
@@ -6544,7 +6553,8 @@ https://github.com/servo/servo/pull/43945	(@mrobinson, @mrobinson, #43945)	layou
     # Testing: It compiles
     # Part of #40600
     # 
-https://github.com/servo/servo/pull/45861	(@yezhizhen, #45861)	script: Implement `Blob.textStream` (#45861)
++https://github.com/servo/servo/pull/45861	(@yezhizhen, #45861)	script: Implement `Blob.textStream` (#45861)
+    dom; impl textStream() on Blob <https://w3c.github.io/FileAPI/#text-stream-method-algo>
     ^ commit 5f9306e269e0e4128e40221c6a181a78a5b07d40
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -6759,7 +6769,8 @@ https://github.com/servo/servo/pull/45876	(@skyz1, #45876)	script: Remove `CanGc
     # Part of #40600
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/45864	(@yezhizhen, #45864)	script: Implement `Request.textStream` & `Response.textStream` (#45864)
++https://github.com/servo/servo/pull/45864	(@yezhizhen, #45864)	script: Implement `Request.textStream` & `Response.textStream` (#45864)
+    dom; impl textStream() on Request and Response <https://fetch.spec.whatwg.org/#dom-body-textstream>
     ^ commit c2ac1f1baa73623a30efc962ad6adbc49e90f446
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -7368,7 +7379,8 @@ https://github.com/servo/servo/pull/45937	(@Gae24, #45937)	script: migrate some 
     # Testing: It compiles
     # Part of #40600
     # 
-https://github.com/servo/servo/pull/45825	(@skyz1, #45825)	script: Restore focus when closing dialogs (#45825)
++https://github.com/servo/servo/pull/45825	(@skyz1, #45825)	script: Restore focus when closing dialogs (#45825)
+    dom; improve focus handling when closing <dialog>
     ^ commit c9bb9fb7f09311359cba9dc704170b47845fae3a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Previously the focus was not returned to the original focused element after a dialog has been closed. This change implements the step for storing the previously focused elements and focusing it when dialogs are closed.
@@ -7593,7 +7605,8 @@ https://github.com/servo/servo/pull/45964	(@TimvdLippe, #45964)	script: Replace 
     # Part of #40600
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/45953	(@yezhizhen, #45953)	script: Fix `new Response()` construction (#45953)
++https://github.com/servo/servo/pull/45953	(@yezhizhen, #45953)	script: Fix `new Response()` construction (#45953)
+    dom; more conformant new Response()
     ^ commit 2edc288fabf79444220dfb92c34784df92c55315
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
