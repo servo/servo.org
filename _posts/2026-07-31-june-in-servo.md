@@ -10,6 +10,35 @@ categories:
 [**Servo 0.4.0**](https://github.com/servo/servo/releases/tag/v0.4.0) contains all of the changes we landed in May, which came out to yet another record **558 commits** (April: 534, May: 391).
 For security fixes, see [**§ Security**](#security).
 
+## You can help!
+
+Servo is steadily becoming a bigger and busier project every month, and by June 2026, we’ve been reading through **over four times** the commits as we did when we started in September 2023.
+
+<figure>
+    <a href="{{ '/img/blog/2026-07-commits.png' | url }}"><img src="{{ '/img/blog/2026-07-commits.png' | url }}" alt="line chart showing how many commits landed in Servo’s main repo each month from September 2023 to June 2026 inclusive. there’s a clear linear trend, from 130 commits up to 551 commits"></a>
+</figure>
+
+This is hard work, particularly since there are things we need to know that are often difficult to answer just by reading the changes:
+
+- **Who does the change affect**, if anyone? Does it affect users, Servo developers, embedders, or some other group?
+
+- **What observable difference does the change make**, if any?
+
+- **Does the feature require any preferences to be enabled**, or is it enabled for everyone by default?
+
+- **Are any real-world websites affected by the change?**
+
+- **What issue or broader project is the change related to?** This question is answered by `Fixes: #xxxxx` or `Part of: #xxxxx` in the PR description.
+
+Thanks to an initiative by @jdm, it’s now easier than ever for you to **help us answer those questions**, using the Servo Highfive bot!
+If you’re working on a pull request that you think might be interesting for the next monthly update, even if you’re not 100% sure, tell us about it by following the steps below:
+
+1. You add the <span style="padding: 0.1875lh; border-radius: calc(0.5lh + 2 * 1px); background: rgb(13, 17, 23);"><span style="padding: 0 0.25lh; border: thin solid rgba(85, 221, 126, 0.3); border-radius: 0.5lh; color: rgb(85, 221, 126); background-color: rgba(84, 222, 126, 0.18);">monthly update</span></span> label to your pull request, or comment <code style="display: /* allow wrapping only as last resort */ inline-block;">@servo-highfive monthly update</code>
+
+2. Highfive posts a comment asking you some questions
+
+3. You answer those questions in a comment containing <code style="display: /* allow wrapping only as last resort */ inline-block;">@servo-highfive monthly update answer</code>
+
 ## New contributors
 
 A special thanks to the following people for landing their first patch in Servo:
