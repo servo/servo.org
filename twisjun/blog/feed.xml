@@ -18,6 +18,15 @@
     <content xml:lang="en" type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.4.0&quot;&gt;&lt;strong&gt;Servo 0.4.0&lt;/strong&gt;&lt;/a&gt; contains all of the changes we landed in May, which came out to yet another record &lt;strong&gt;558 commits&lt;/strong&gt; (April: 534, May: 391).
 For security fixes, see &lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#security&quot;&gt;&lt;strong&gt;§ Security&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;We’ve shipped several new web platform features:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;‘attr()’&lt;/strong&gt;, in &lt;a href=&quot;https://book.servo.org/design-documentation/experimental-features.html#experimental-web-platform-features&quot;&gt;experimental mode&lt;/a&gt; (@Loirooriol, #45041)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘image(&amp;lt;color&amp;gt;)’&lt;/strong&gt;, &lt;strong&gt;‘closest-corner’&lt;/strong&gt;, and &lt;strong&gt;‘farthest-corner’&lt;/strong&gt; in &lt;strong&gt;‘ellipse()’&lt;/strong&gt; and &lt;strong&gt;‘circle()’&lt;/strong&gt; (@Loirooriol, #45421)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘calc()’&lt;/strong&gt; and other &lt;a href=&quot;https://drafts.csswg.org/css-values/#math&quot;&gt;mathematical expressions&lt;/a&gt; can now be resolved later than parse time, e.g. &lt;code&gt;sign(1em - 32px)&lt;/code&gt; (@Loirooriol, #45421)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘@media (device-width)’&lt;/strong&gt;, &lt;strong&gt;‘@media (device-height)’&lt;/strong&gt;, &lt;strong&gt;‘@media (height)’&lt;/strong&gt;, &lt;strong&gt;‘@media (aspect-ratio)’&lt;/strong&gt;, and their &lt;strong&gt;min-&lt;/strong&gt; and &lt;strong&gt;max-&lt;/strong&gt; variants (@jdm, @mrobinson, @nicoburns, @jschwe, #44978, #45707, #45490)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘@media (orientation)’&lt;/strong&gt; (@nicoburns, #45707)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘@media (pointer)’&lt;/strong&gt; and &lt;strong&gt;‘@media (any-pointer)’&lt;/strong&gt; (@nicoburns, #45681)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;‘@media (hover)’&lt;/strong&gt; and &lt;strong&gt;‘@media (any-hover)’&lt;/strong&gt; (@nicoburns, #45681)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Plus a bunch of new DOM APIs:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Shared­Worker&lt;/strong&gt; (@Taym95, #45786)&lt;/li&gt;
@@ -68,12 +77,16 @@ If you’re working on a pull request that you think might be interesting for th
 &lt;p&gt;You answer those questions in a comment containing &lt;code style=&quot;display: /* allow wrapping only as last resort */ inline-block;&quot;&gt;@servo-highfive monthly update answer&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&quot;work-in-progress&quot; tabindex=&quot;-1&quot;&gt;Work in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#work-in-progress&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We’re implementing the more powerful version of &lt;strong&gt;‘attr()’&lt;/strong&gt; that can be used anywhere, not just in ‘content’ (@Loirooriol, #45041, #45421, #45495, #45752).&lt;/p&gt;
 &lt;h2 id=&quot;more-on-the-web-platform&quot; tabindex=&quot;-1&quot;&gt;More on the web platform &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#more-on-the-web-platform&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;We’ve improved the conformance of &lt;strong&gt;&amp;lt;dialog&amp;gt;&lt;/strong&gt; (@skyz1, #45825), &lt;strong&gt;&amp;lt;input minlength&amp;gt;&lt;/strong&gt; and &lt;strong&gt;&amp;lt;input maxlength&amp;gt;&lt;/strong&gt; (@skyz1, #45705), &lt;strong&gt;HTML­Input­Element&lt;/strong&gt; (@steigeo, #45416), &lt;strong&gt;new Response()&lt;/strong&gt; (@yezhizhen, #45953), &lt;strong&gt;URL.create­Object­URL()&lt;/strong&gt; and &lt;strong&gt;URL.revoke­Object­URL()&lt;/strong&gt; (@yezhizhen, #45182, #45417), and &lt;strong&gt;ECDSA&lt;/strong&gt; and &lt;strong&gt;Ed25519&lt;/strong&gt; in &lt;strong&gt;Subtle­Crypto&lt;/strong&gt; (@kkoyung, #45833, #46017).&lt;/p&gt;
+&lt;p&gt;We’ve improved the conformance of &lt;strong&gt;&amp;lt;dialog&amp;gt;&lt;/strong&gt; (@skyz1, #45825), &lt;strong&gt;&amp;lt;iframe sandbox&amp;gt;&lt;/strong&gt; (@cychronex-labs, #45880), &lt;strong&gt;&amp;lt;input minlength&amp;gt;&lt;/strong&gt; and &lt;strong&gt;&amp;lt;input maxlength&amp;gt;&lt;/strong&gt; (@skyz1, #45705), &lt;strong&gt;‘font-style’&lt;/strong&gt; and &lt;strong&gt;‘unicode-range’&lt;/strong&gt; in &lt;strong&gt;‘@font-face’&lt;/strong&gt; (@Loirooriol, #45821), &lt;strong&gt;HTML­Input­Element&lt;/strong&gt; (@steigeo, #45416), &lt;strong&gt;new Response()&lt;/strong&gt; (@yezhizhen, #45953), &lt;strong&gt;URL.create­Object­URL()&lt;/strong&gt; and &lt;strong&gt;URL.revoke­Object­URL()&lt;/strong&gt; (@yezhizhen, #45182, #45417), and &lt;strong&gt;ECDSA&lt;/strong&gt; and &lt;strong&gt;Ed25519&lt;/strong&gt; in &lt;strong&gt;Subtle­Crypto&lt;/strong&gt; (@kkoyung, #45833, #46017).&lt;/p&gt;
 &lt;p&gt;We’ve fixed bugs related to &lt;strong&gt;‘animation­iteration’ events&lt;/strong&gt; (@Loirooriol, #45990), &lt;strong&gt;‘click’ events&lt;/strong&gt; (@mrobinson, #45751), &lt;strong&gt;‘error’ events&lt;/strong&gt; in Worker global scopes (@Gae24, #45829), and […].&lt;/p&gt;
-&lt;h2 id=&quot;performance-and-stability&quot; tabindex=&quot;-1&quot;&gt;Performance and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#performance-and-stability&quot;&gt;
+&lt;h2 id=&quot;garbage-collection-safety&quot; tabindex=&quot;-1&quot;&gt;Garbage collection safety &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#garbage-collection-safety&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We use a &lt;a href=&quot;https://doc.servo.org/script_bindings/cell/struct.DomRefCell.html&quot;&gt;&lt;strong&gt;RefCell&lt;/strong&gt;-based mechanism&lt;/a&gt; to store many of our DOM types in other DOM types, enforcing Rust’s “aliasing xor mutability” rule at runtime by panicking if the rule is violated.
@@ -84,6 +97,12 @@ We can then require that a &lt;code&gt;&amp;amp;NoGC&lt;/code&gt; must be borrow
 &lt;p&gt;We have a large codebase that needs to be migrated in parts, so for now we’ve created the new method &lt;a href=&quot;https://doc.servo.org/script_bindings/cell/struct.DomRefCell.html#method.safe_borrow_mut&quot;&gt;safe­_borrow­_mut()&lt;/a&gt; (@sagudev, #46050).
 We also need to update all of our script-related code to borrow our &lt;a href=&quot;https://doc.servo.org/script_bindings/import/base/struct.JSContext.html&quot;&gt;safe JSContext wrapper&lt;/a&gt;, rather than creating an owned JSContext on the spot.&lt;/p&gt;
 &lt;p&gt;This continues our long-running effort to &lt;strong&gt;use the Rust type system&lt;/strong&gt; to make Servo’s integration with SpiderMonkey safer and more reliable (@Gae24, @Keerti707, @Narfinger, @TimvdLippe, @sagudev, @guptapiyush16, @ivomurrell, @kunalmohan, @skyz1, #45230, #45436, #45503, #45617, #45711, #45797, #45800, #45858, #45884, #45937, #45902, #45968, #45977, #45991, #46003, #46005, #46084, #45548, #45552, #45590, #45909, #45912, #45943, #46089, #46117, #46114, #45320, #45324, #45328, #45340, #45381, #45385, #45410, #45392, #45409, #45604, #45616, #45618, #45627, #45636, #45662, #45663, #45675, #45674, #45677, #45684, #45735, #45807, #45810, #45816, #45818, #45828, #45838, #45836, #45837, #45840, #45841, #45857, #45859, #45862, #45875, #45887, #45931, #45964, #45935, #45987, #45988, #46001, #46040, #46051, #46057, #46106, #46125, #45678, #46002, #45845, #45645, #45673, #45259, #45817, #45822, #45876, #45877, #45891).&lt;/p&gt;
+&lt;h2 id=&quot;performance-and-stability&quot; tabindex=&quot;-1&quot;&gt;Performance and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#performance-and-stability&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;NoGC&lt;/strong&gt; was designed to prevent dynamic borrow failures, but it also enables some performance optimisations!
+If we can prove that garbage collection is impossible in some part of Servo, we can often &lt;strong&gt;avoid rooting JavaScript objects&lt;/strong&gt; when interacting with them within that region of code.
+This has allowed us to reduce overheads by over 1% in the &lt;strong&gt;layout&lt;/strong&gt; process and in &lt;strong&gt;HTML­Collection&lt;/strong&gt; (@Narfinger, #46092, #45582).&lt;/p&gt;
 &lt;h2 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#new-contributors&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
