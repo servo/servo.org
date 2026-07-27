@@ -39,6 +39,30 @@ For security fixes, see &lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/
 &lt;li&gt;&lt;strong&gt;crypto­.subtle­.digest()&lt;/strong&gt; for &lt;strong&gt;KT128&lt;/strong&gt; and &lt;strong&gt;KT256&lt;/strong&gt; (@kkoyung, #45699)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;crypto­.subtle­.get­Public­Key()&lt;/strong&gt; for &lt;strong&gt;ML-KEM&lt;/strong&gt; and &lt;strong&gt;ML-DSA&lt;/strong&gt; (@kkoyung, #45252)&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;This is another big update, so here’s an outline:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#you-can-help&quot;&gt;&lt;strong&gt;You can help!&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;– how to help us write the monthly updates&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#security&quot;&gt;&lt;strong&gt;Security&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;– memory safety fixes&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#work-in-progress&quot;&gt;&lt;strong&gt;Work in progress&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;– …&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#more-on-the-web-platform&quot;&gt;&lt;strong&gt;More on the web platform&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;– …&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#garbage-collection-safety&quot;&gt;&lt;strong&gt;Garbage collection safety&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;– …&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#performance-and-stability&quot;&gt;&lt;strong&gt;Performance and stability&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;– …&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#new-contributors&quot;&gt;&lt;strong&gt;New contributors&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;– 21 new contributors in June&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&quot;you-can-help!&quot; tabindex=&quot;-1&quot;&gt;You can help! &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#you-can-help!&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -77,6 +101,17 @@ If you’re working on a pull request that you think might be interesting for th
 &lt;p&gt;You answer those questions in a comment containing &lt;code style=&quot;display: /* allow wrapping only as last resort */ inline-block;&quot;&gt;@servo-highfive monthly update answer&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h2 id=&quot;security&quot; tabindex=&quot;-1&quot;&gt;Security &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#security&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Servo’s JS runtime, &lt;strong&gt;SpiderMonkey 140.10.1&lt;/strong&gt;, had several &lt;strong&gt;security bugs&lt;/strong&gt; that have been fixed in Servo 0.4.0 with the update to SpiderMonkey 140.11.0 (@jschwe, #45584).
+For more details, see &lt;a href=&quot;https://nvd.nist.gov/vuln/detail/CVE-2026-8388&quot;&gt;CVE-2026-8388&lt;/a&gt;, &lt;a href=&quot;https://nvd.nist.gov/vuln/detail/CVE-2026-8391&quot;&gt;CVE-2026-8391&lt;/a&gt;, &lt;a href=&quot;https://nvd.nist.gov/vuln/detail/CVE-2026-8974&quot;&gt;CVE-2026-8974&lt;/a&gt;, &lt;a href=&quot;https://nvd.nist.gov/vuln/detail/CVE-2026-8975&quot;&gt;CVE-2026-8975&lt;/a&gt;, and &lt;a href=&quot;https://www.mozilla.org/en-US/security/advisories/mfsa2026-48/&quot;&gt;MFSA 2026-48&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Several more &lt;strong&gt;security bugs&lt;/strong&gt; in Servo’s JS runtime have been fixed in Servo 0.4.0 with the update to SpiderMonkey 140.12.0 (@jschwe, #45766).
+The exact CVEs that apply to us are not yet known, but for more details, see &lt;a href=&quot;https://www.mozilla.org/en-US/security/advisories/mfsa2026-58/&quot;&gt;MFSA 2026-58&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;RSA&lt;/strong&gt; operations in &lt;strong&gt;Subtle­Crypto&lt;/strong&gt; now do modular exponentiation in constant time (@kkoyung, #45631).
+Please note that our RSA implementation is currently vulnerable to the &lt;a href=&quot;https://people.redhat.com/~hkario/marvin/&quot;&gt;Marvin Attack&lt;/a&gt; – for more details, see &lt;a href=&quot;https://rustsec.org/advisories/RUSTSEC-2023-0071.html&quot;&gt;RUSTSEC-2023-0071&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ML-DSA&lt;/strong&gt; operations in &lt;strong&gt;Subtle­Crypto&lt;/strong&gt; now do the Decompose step in constant time, fixing &lt;a href=&quot;https://rustsec.org/advisories/RUSTSEC-2025-0144.html&quot;&gt;RUSTSEC-2025-0144&lt;/a&gt; (@kkoyung, #45294).&lt;/p&gt;
+&lt;p&gt;We’ve fixed an HTML injection bug (XSS) in &lt;strong&gt;file:/// directory listings&lt;/strong&gt;, which affected file names containing &lt;code&gt;&amp;lt;/script&amp;gt;&lt;/code&gt; (@sahvx655-wq, #45510).&lt;/p&gt;
 &lt;h2 id=&quot;work-in-progress&quot; tabindex=&quot;-1&quot;&gt;Work in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#work-in-progress&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;

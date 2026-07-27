@@ -275,6 +275,30 @@ For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p
 <li><strong>crypto­.subtle­.digest()</strong> for <strong>KT128</strong> and <strong>KT256</strong> (@kkoyung, #45699)</li>
 <li><strong>crypto­.subtle­.get­Public­Key()</strong> for <strong>ML-KEM</strong> and <strong>ML-DSA</strong> (@kkoyung, #45252)</li>
 </ul>
+<p>This is another big update, so here’s an outline:</p>
+<ul>
+<li>
+<p><a href="#you-can-help"><strong>You can help!</strong></a><br>– how to help us write the monthly updates</p>
+</li>
+<li>
+<p><a href="#security"><strong>Security</strong></a><br>– memory safety fixes</p>
+</li>
+<li>
+<p><a href="#work-in-progress"><strong>Work in progress</strong></a><br>– …</p>
+</li>
+<li>
+<p><a href="#more-on-the-web-platform"><strong>More on the web platform</strong></a><br>– …</p>
+</li>
+<li>
+<p><a href="#garbage-collection-safety"><strong>Garbage collection safety</strong></a><br>– …</p>
+</li>
+<li>
+<p><a href="#performance-and-stability"><strong>Performance and stability</strong></a><br>– …</p>
+</li>
+<li>
+<p><a href="#new-contributors"><strong>New contributors</strong></a><br>– 21 new contributors in June</p>
+</li>
+</ul>
 <h2 id="you-can-help!" tabindex="-1">You can help! <a class="header-anchor" href="#you-can-help!">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -313,6 +337,17 @@ If you’re working on a pull request that you think might be interesting for th
 <p>You answer those questions in a comment containing <code style="display: /* allow wrapping only as last resort */ inline-block;">@servo-highfive monthly update answer</code></p>
 </li>
 </ol>
+<h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Servo’s JS runtime, <strong>SpiderMonkey 140.10.1</strong>, had several <strong>security bugs</strong> that have been fixed in Servo 0.4.0 with the update to SpiderMonkey 140.11.0 (@jschwe, #45584).
+For more details, see <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-8388">CVE-2026-8388</a>, <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-8391">CVE-2026-8391</a>, <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-8974">CVE-2026-8974</a>, <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-8975">CVE-2026-8975</a>, and <a href="https://www.mozilla.org/en-US/security/advisories/mfsa2026-48/">MFSA 2026-48</a>.</p>
+<p>Several more <strong>security bugs</strong> in Servo’s JS runtime have been fixed in Servo 0.4.0 with the update to SpiderMonkey 140.12.0 (@jschwe, #45766).
+The exact CVEs that apply to us are not yet known, but for more details, see <a href="https://www.mozilla.org/en-US/security/advisories/mfsa2026-58/">MFSA 2026-58</a>.</p>
+<p><strong>RSA</strong> operations in <strong>Subtle­Crypto</strong> now do modular exponentiation in constant time (@kkoyung, #45631).
+Please note that our RSA implementation is currently vulnerable to the <a href="https://people.redhat.com/~hkario/marvin/">Marvin Attack</a> – for more details, see <a href="https://rustsec.org/advisories/RUSTSEC-2023-0071.html">RUSTSEC-2023-0071</a>.</p>
+<p><strong>ML-DSA</strong> operations in <strong>Subtle­Crypto</strong> now do the Decompose step in constant time, fixing <a href="https://rustsec.org/advisories/RUSTSEC-2025-0144.html">RUSTSEC-2025-0144</a> (@kkoyung, #45294).</p>
+<p>We’ve fixed an HTML injection bug (XSS) in <strong>file:/// directory listings</strong>, which affected file names containing <code>&lt;/script&gt;</code> (@sahvx655-wq, #45510).</p>
 <h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
