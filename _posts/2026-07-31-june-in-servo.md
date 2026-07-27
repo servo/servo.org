@@ -59,6 +59,20 @@ We’ve improved the conformance of **&lt;dialog>** (@skyz1, #45825), **&lt;inpu
 
 We’ve fixed bugs related to **‘animation­iteration’ events** (@Loirooriol, #45990), **‘click’ events** (@mrobinson, #45751), **‘error’ events** in Worker global scopes (@Gae24, #45829), and […].
 
+## Performance and stability
+
+We use a [**RefCell**-based mechanism](https://doc.servo.org/script_bindings/cell/struct.DomRefCell.html) to store many of our DOM types in other DOM types, enforcing Rust’s “aliasing xor mutability” rule at runtime by panicking if the rule is violated.
+But when garbage collection happens, we need to [borrow()](https://doc.servo.org/script_bindings/cell/struct.DomRefCell.html#method.borrow) each DomRefCell to trace the references, and this is the source of many panic bugs.
+To fix that whole class of bugs, we initially created **CanGc**, a marker type that would annotate the code paths where GC can occur, in conjunction with custom static analysis (@jdm, #33140).
+
+With the Rust type system we can do even better, if we flip that around and require any [borrow\_mut()](https://doc.servo.org/script_bindings/cell/struct.DomRefCell.html#method.borrow_mut) call to prove that GC can *not* occur by passing a **NoGC** marker value.
+We can then require that a `&NoGC` must be borrowed from a `&JSContext` (which blocks GC) and not a `&mut JSContext` (which allows GC), taking advantage of how Rust references work without needing any custom static analysis.
+
+We have a large codebase that needs to be migrated in parts, so for now we’ve created the new method [safe­\_borrow­\_mut()](https://doc.servo.org/script_bindings/cell/struct.DomRefCell.html#method.safe_borrow_mut) (@sagudev, #46050).
+We also need to update all of our script-related code to borrow our [safe JSContext wrapper](https://doc.servo.org/script_bindings/import/base/struct.JSContext.html), rather than creating an owned JSContext on the spot.
+
+This continues our long-running effort to **use the Rust type system** to make Servo’s integration with SpiderMonkey safer and more reliable (@Gae24, @Keerti707, @Narfinger, @TimvdLippe, @sagudev, @guptapiyush16, @ivomurrell, @kunalmohan, @skyz1, #45230, #45436, #45503, #45617, #45711, #45797, #45800, #45858, #45884, #45937, #45902, #45968, #45977, #45991, #46003, #46005, #46084, #45548, #45552, #45590, #45909, #45912, #45943, #46089, #46117, #46114, #45320, #45324, #45328, #45340, #45381, #45385, #45410, #45392, #45409, #45604, #45616, #45618, #45627, #45636, #45662, #45663, #45675, #45674, #45677, #45684, #45735, #45807, #45810, #45816, #45818, #45828, #45838, #45836, #45837, #45840, #45841, #45857, #45859, #45862, #45875, #45887, #45931, #45964, #45935, #45987, #45988, #46001, #46040, #46051, #46057, #46106, #46125, #45678, #46002, #45845, #45645, #45673, #45259, #45817, #45822, #45876, #45877, #45891).
+
 ## New contributors
 
 A special thanks to the following people for landing their first patch in Servo:
