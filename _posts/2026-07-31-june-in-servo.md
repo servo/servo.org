@@ -32,6 +32,22 @@ Plus a bunch of new DOM APIs:
 - **crypto­.subtle­.digest()** for **KT128** and **KT256** (@kkoyung, #45699)
 - **crypto­.subtle­.get­Public­Key()** for **ML-KEM** and **ML-DSA** (@kkoyung, #45252)
 
+This is another big update, so here’s an outline:
+
+- [**You can help!**](#you-can-help)<br>– how to help us write the monthly updates
+
+- [**Security**](#security)<br>– memory safety fixes
+
+- [**Work in progress**](#work-in-progress)<br>– …
+
+- [**More on the web platform**](#more-on-the-web-platform)<br>– …
+
+- [**Garbage collection safety**](#garbage-collection-safety)<br>– …
+
+- [**Performance and stability**](#performance-and-stability)<br>– …
+
+- [**New contributors**](#new-contributors)<br>– 21 new contributors in June
+
 ## You can help!
 
 Servo is steadily becoming a bigger and busier project every month, and by June 2026, we’ve been reading through **over four times** the commits as we did when we started in September 2023.
@@ -60,6 +76,21 @@ If you’re working on a pull request that you think might be interesting for th
 2. Highfive posts a comment asking you some questions
 
 3. You answer those questions in a comment containing <code style="display: /* allow wrapping only as last resort */ inline-block;">@servo-highfive monthly update answer</code>
+
+## Security
+
+Servo’s JS runtime, **SpiderMonkey 140.10.1**, had several **security bugs** that have been fixed in Servo 0.4.0 with the update to SpiderMonkey 140.11.0 (@jschwe, #45584).
+For more details, see [CVE-2026-8388](https://nvd.nist.gov/vuln/detail/CVE-2026-8388), [CVE-2026-8391](https://nvd.nist.gov/vuln/detail/CVE-2026-8391), [CVE-2026-8974](https://nvd.nist.gov/vuln/detail/CVE-2026-8974), [CVE-2026-8975](https://nvd.nist.gov/vuln/detail/CVE-2026-8975), and [MFSA 2026-48](https://www.mozilla.org/en-US/security/advisories/mfsa2026-48/).
+
+Several more **security bugs** in Servo’s JS runtime have been fixed in Servo 0.4.0 with the update to SpiderMonkey 140.12.0 (@jschwe, #45766).
+The exact CVEs that apply to us are not yet known, but for more details, see [MFSA 2026-58](https://www.mozilla.org/en-US/security/advisories/mfsa2026-58/).
+
+**RSA** operations in **Subtle­Crypto** now do modular exponentiation in constant time (@kkoyung, #45631).
+Please note that our RSA implementation is currently vulnerable to the [Marvin Attack](https://people.redhat.com/~hkario/marvin/) – for more details, see [RUSTSEC-2023-0071](https://rustsec.org/advisories/RUSTSEC-2023-0071.html).
+
+**ML-DSA** operations in **Subtle­Crypto** now do the Decompose step in constant time, fixing [RUSTSEC-2025-0144](https://rustsec.org/advisories/RUSTSEC-2025-0144.html) (@kkoyung, #45294).
+
+We’ve fixed an HTML injection bug (XSS) in **file:/// directory listings**, which affected file names containing `</script>` (@sahvx655-wq, #45510).
 
 ## Work in progress
 
