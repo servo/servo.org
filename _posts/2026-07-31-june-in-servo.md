@@ -12,6 +12,14 @@ For security fixes, see [**§ Security**](#security).
 
 We’ve shipped several new web platform features:
 
+- **‘attr()’**, in [experimental mode](https://book.servo.org/design-documentation/experimental-features.html#experimental-web-platform-features) (@Loirooriol, #45041)
+- **‘image(&lt;color>)’**, **‘closest-corner’**, and **‘farthest-corner’** in **‘ellipse()’** and **‘circle()’** (@Loirooriol, #45421)
+- **‘calc()’** and other [mathematical expressions](https://drafts.csswg.org/css-values/#math) can now be resolved later than parse time, e.g. `sign(1em - 32px)` (@Loirooriol, #45421)
+- **‘&#x40;media (device-width)’**, **‘&#x40;media (device-height)’**, **‘&#x40;media (height)’**, **‘&#x40;media (aspect-ratio)’**, and their **min-** and **max-** variants (@jdm, @mrobinson, @nicoburns, @jschwe, #44978, #45707, #45490)
+- **‘&#x40;media (orientation)’** (@nicoburns, #45707)
+- **‘&#x40;media (pointer)’** and **‘&#x40;media (any-pointer)’** (@nicoburns, #45681)
+- **‘&#x40;media (hover)’** and **‘&#x40;media (any-hover)’** (@nicoburns, #45681)
+
 Plus a bunch of new DOM APIs:
 
 - **Shared­Worker** (@Taym95, #45786)
@@ -53,13 +61,19 @@ If you’re working on a pull request that you think might be interesting for th
 
 3. You answer those questions in a comment containing <code style="display: /* allow wrapping only as last resort */ inline-block;">@servo-highfive monthly update answer</code>
 
+## Work in progress
+
+We’re implementing the more powerful version of **‘attr()’** that can be used anywhere, not just in ‘content’, under `--pref layout­_css­_attr­_enabled` (@Loirooriol, #45041, #45421, #45495, #45752).
+
+All of the features above are enabled in servoshell’s [experimental mode](https://book.servo.org/design-documentation/experimental-features.html#experimental-web-platform-features).
+
 ## More on the web platform
 
-We’ve improved the conformance of **&lt;dialog>** (@skyz1, #45825), **&lt;input minlength>** and **&lt;input maxlength>** (@skyz1, #45705), **HTML­Input­Element** (@steigeo, #45416), **new Response()** (@yezhizhen, #45953), **URL.create­Object­URL()** and **URL.revoke­Object­URL()** (@yezhizhen, #45182, #45417), and **ECDSA** and **Ed25519** in **Subtle­Crypto** (@kkoyung, #45833, #46017).
+We’ve improved the conformance of **&lt;dialog>** (@skyz1, #45825), **&lt;iframe sandbox>** (@cychronex-labs, #45880), **&lt;input minlength>** and **&lt;input maxlength>** (@skyz1, #45705), **‘font-style’** and **‘unicode-range’** in **‘@font-face’** (@Loirooriol, #45821), **HTML­Input­Element** (@steigeo, #45416), **new Response()** (@yezhizhen, #45953), **URL.create­Object­URL()** and **URL.revoke­Object­URL()** (@yezhizhen, #45182, #45417), and **ECDSA** and **Ed25519** in **Subtle­Crypto** (@kkoyung, #45833, #46017).
 
 We’ve fixed bugs related to **‘animation­iteration’ events** (@Loirooriol, #45990), **‘click’ events** (@mrobinson, #45751), **‘error’ events** in Worker global scopes (@Gae24, #45829), and […].
 
-## Performance and stability
+## Garbage collection safety
 
 We use a [**RefCell**-based mechanism](https://doc.servo.org/script_bindings/cell/struct.DomRefCell.html) to store many of our DOM types in other DOM types, enforcing Rust’s “aliasing xor mutability” rule at runtime by panicking if the rule is violated.
 But when garbage collection happens, we need to [borrow()](https://doc.servo.org/script_bindings/cell/struct.DomRefCell.html#method.borrow) each DomRefCell to trace the references, and this is the source of many panic bugs.
@@ -72,6 +86,12 @@ We have a large codebase that needs to be migrated in parts, so for now we’ve 
 We also need to update all of our script-related code to borrow our [safe JSContext wrapper](https://doc.servo.org/script_bindings/import/base/struct.JSContext.html), rather than creating an owned JSContext on the spot.
 
 This continues our long-running effort to **use the Rust type system** to make Servo’s integration with SpiderMonkey safer and more reliable (@Gae24, @Keerti707, @Narfinger, @TimvdLippe, @sagudev, @guptapiyush16, @ivomurrell, @kunalmohan, @skyz1, #45230, #45436, #45503, #45617, #45711, #45797, #45800, #45858, #45884, #45937, #45902, #45968, #45977, #45991, #46003, #46005, #46084, #45548, #45552, #45590, #45909, #45912, #45943, #46089, #46117, #46114, #45320, #45324, #45328, #45340, #45381, #45385, #45410, #45392, #45409, #45604, #45616, #45618, #45627, #45636, #45662, #45663, #45675, #45674, #45677, #45684, #45735, #45807, #45810, #45816, #45818, #45828, #45838, #45836, #45837, #45840, #45841, #45857, #45859, #45862, #45875, #45887, #45931, #45964, #45935, #45987, #45988, #46001, #46040, #46051, #46057, #46106, #46125, #45678, #46002, #45845, #45645, #45673, #45259, #45817, #45822, #45876, #45877, #45891).
+
+## Performance and stability
+
+**NoGC** was designed to prevent dynamic borrow failures, but it also enables some performance optimisations!
+If we can prove that garbage collection is impossible in some part of Servo, we can often **avoid rooting JavaScript objects** when interacting with them within that region of code.
+This has allowed us to reduce overheads by over 1% in the **layout** process and in **HTML­Collection** (@Narfinger, #46092, #45582).
 
 ## New contributors
 
