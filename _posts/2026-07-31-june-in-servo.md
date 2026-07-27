@@ -10,6 +10,20 @@ categories:
 [**Servo 0.4.0**](https://github.com/servo/servo/releases/tag/v0.4.0) contains all of the changes we landed in May, which came out to yet another record **558 commits** (April: 534, May: 391).
 For security fixes, see [**§ Security**](#security).
 
+We’ve shipped several new web platform features:
+
+Plus a bunch of new DOM APIs:
+
+- **Shared­Worker** (@Taym95, #45786)
+- **custom­Element­Registry** on **Document** and **Shadow­Root** (@shubhamg13, #45872)
+- **initialize()** on **Custom­Element­Registry** (@shubhamg13, @yezhizhen, #45903)
+- **new Custom­Element­Registry()** (@shubhamg13, #45791)
+- **text­Stream()** on **Request**, **Response**, and **Blob** (@yezhizhen, #45864, #45861)
+- **set­Pointer­Capture()**, **release­Pointer­Capture()**, **has­Pointer­Capture()** on **Element** (@webbeef, #45048)
+- **on­touch­start**, **on­touch­end**, **on­touch­move**, **on­touch­cancel** on **Element** (@stevennovaryo, #45049)
+- **crypto­.subtle­.digest()** for **KT128** and **KT256** (@kkoyung, #45699)
+- **crypto­.subtle­.get­Public­Key()** for **ML-KEM** and **ML-DSA** (@kkoyung, #45252)
+
 ## You can help!
 
 Servo is steadily becoming a bigger and busier project every month, and by June 2026, we’ve been reading through **over four times** the commits as we did when we started in September 2023.
@@ -38,6 +52,12 @@ If you’re working on a pull request that you think might be interesting for th
 2. Highfive posts a comment asking you some questions
 
 3. You answer those questions in a comment containing <code style="display: /* allow wrapping only as last resort */ inline-block;">@servo-highfive monthly update answer</code>
+
+## More on the web platform
+
+We’ve improved the conformance of **&lt;dialog>** (@skyz1, #45825), **&lt;input minlength>** and **&lt;input maxlength>** (@skyz1, #45705), **HTML­Input­Element** (@steigeo, #45416), **new Response()** (@yezhizhen, #45953), **URL.create­Object­URL()** and **URL.revoke­Object­URL()** (@yezhizhen, #45182, #45417), and **ECDSA** and **Ed25519** in **Subtle­Crypto** (@kkoyung, #45833, #46017).
+
+We’ve fixed bugs related to **‘animation­iteration’ events** (@Loirooriol, #45990), **‘click’ events** (@mrobinson, #45751), **‘error’ events** in Worker global scopes (@Gae24, #45829), and […].
 
 ## New contributors
 
