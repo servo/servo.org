@@ -142,6 +142,17 @@ This continues our long-running effort to **use the Rust type system** to make S
 If we can prove that garbage collection is impossible in some part of Servo, we can often **avoid rooting JavaScript objects** when interacting with them within that region of code.
 This has allowed us to reduce overheads by over 1% in the **layout** process and in **HTML­Collection** (@Narfinger, #46092, #45582).
 
+Our **memory usage** has improved, with **BoxFragment** now **17% smaller** (288 → 240 bytes on amd64) and **ShapeCacheEntry** now smaller too (@SimonSapin, @mrobinson, @simonwuelker, #45183, #45496).
+
+We’ve fixed some nasty **memory leaks** when **reloading** and in **2D canvases** (@Taym95, @sagudev, @jschwe, #45455, #45261, #45414).
+
+Speaking of which, **2D canvases** now use up to **23% less power** (@yezhizhen, #45301), and we now avoid rasterising the same SVG more than once (@Narfinger, @jschwe, #44805).
+
+Servo now **decodes all images asynchronously** and **fills image caches asynchronously**, leaving script threads (web content processes) more time for other work (@Narfinger, #45542, #44483).
+On top of that, we’ve improved **incremental layout** (@mrobinson, @Loirooriol, #45411) and reduced reflows in **IntersectionObserver** (@jschwe, #45986).
+
+We’ve also reduced allocations, copies, GC rooting steps, and other operations in many parts of Servo (@Narfinger, @SimonSapin, @mrobinson, @Loirooriol, #45506, #45969, #45940, #45760, #46090, #45335, #45413, #45511).
+
 For several months, Frédéric (@fred-wang) has been [**fuzzing**](https://en.wikipedia.org/wiki/Fuzzing) for Servo bugs, and thanks to his work we’ve fixed sixteen (16) **crash bugs** in June, affecting **&lt;link onerror>**, **‘animation’**, **‘clip-path’**, **‘content’**, **‘rotate’**, **‘transition’**, **‘transform-style’**, **‘display: contents’**, **‘overflow: clip’**, **CSS­Keyframes­Rule**, **Font­Face**, **stop() on Window**, and the **DOM tree** (@mrobinson, @Loirooriol, #46031, #46027, #46054, #46058, #46016, #46028, #46033, #45287, #45951, #45634, #45629, #46110, #46094, #45799, #45611, #45682).
 
 We’ve also fixed crash bugs related to **IPC** failures, **HTML­Input­Element**, **Range**, the **DevTools** Debugger tab, and when servoshell is built with `--features native-bluetooth` (@jschwe, @Taym95, @mrobinson, @atbrakhi, @mukilan, #45311, #45619, #45765, #45513, #45702).
