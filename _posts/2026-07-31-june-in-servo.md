@@ -100,6 +100,8 @@ We’re implementing the more powerful version of **‘attr()’** that can be u
 
 All of the features above are enabled in servoshell’s [experimental mode](https://book.servo.org/design-documentation/experimental-features.html#experimental-web-platform-features).
 
+We’ve made more progress towards **accessibility** support, under `--pref accessibility_enabled` (@alice, @delan, #45555, #45554, #44949).
+
 Rust doesn’t have a stable [ABI](https://en.wikipedia.org/wiki/Application_binary_interface), so it has generally not been possible to embed Servo in another application without building Servo from source.
 To make it possible, we’ve started designing a **wrapper C API** that will let you consume Servo as a prebuilt shared library using the stable and ubiquitous C ABI (@mukilan, #44984).
 Eventually the idea is that we’ll create a wrapper Rust API around *that* wrapper C API, so you can have both the ergonomics of Rust *and* the build simplicity of C.
