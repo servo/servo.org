@@ -144,6 +144,8 @@ This has allowed us to reduce overheads by over 1% in the **layout** process and
 
 For several months, Frédéric (@fred-wang) has been [**fuzzing**](https://en.wikipedia.org/wiki/Fuzzing) for Servo bugs, and thanks to his work we’ve fixed sixteen (16) **crash bugs** in June, affecting **&lt;link onerror>**, **‘animation’**, **‘clip-path’**, **‘content’**, **‘rotate’**, **‘transition’**, **‘transform-style’**, **‘display: contents’**, **‘overflow: clip’**, **CSS­Keyframes­Rule**, **Font­Face**, **stop() on Window**, and the **DOM tree** (@mrobinson, @Loirooriol, #46031, #46027, #46054, #46058, #46016, #46028, #46033, #45287, #45951, #45634, #45629, #46110, #46094, #45799, #45611, #45682).
 
+We’ve also fixed crash bugs related to **IPC** failures, **HTML­Input­Element**, **Range**, the **DevTools** Debugger tab, and when servoshell is built with `--features native-bluetooth` (@jschwe, @Taym95, @mrobinson, @atbrakhi, @mukilan, #45311, #45619, #45765, #45513, #45702).
+
 ## New contributors
 
 A special thanks to the following people for landing their first patch in Servo:
