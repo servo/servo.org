@@ -40,6 +40,8 @@ This is another big update, so here’s an outline:
 
 - [**Work in progress**](#work-in-progress)<br>– …
 
+- [**Embedding API**](#embedding-api)<br>– …
+
 - [**More on the web platform**](#more-on-the-web-platform)<br>– …
 
 - [**Garbage collection safety**](#garbage-collection-safety)<br>– …
@@ -97,6 +99,22 @@ We’ve fixed an HTML injection bug (XSS) in **file:/// directory listings**, wh
 We’re implementing the more powerful version of **‘attr()’** that can be used anywhere, not just in ‘content’, under `--pref layout­_css­_attr­_enabled` (@Loirooriol, #45041, #45421, #45495, #45752).
 
 All of the features above are enabled in servoshell’s [experimental mode](https://book.servo.org/design-documentation/experimental-features.html#experimental-web-platform-features).
+
+Rust doesn’t have a stable [ABI](https://en.wikipedia.org/wiki/Application_binary_interface), so it has generally not been possible to embed Servo in another application without building Servo from source.
+To make it possible, we’ve started designing a **wrapper C API** that will let you consume Servo as a prebuilt shared library using the stable and ubiquitous C ABI (@mukilan, #44984).
+Eventually the idea is that we’ll create a wrapper Rust API around *that* wrapper C API, so you can have both the ergonomics of Rust *and* the build simplicity of C.
+
+## Embedding API
+
+New in the [**Servo API**](https://doc.servo.org/servo/):
+
+- [`Web­View`](https://doc.servo.org/servo/struct.WebView.html)::[`rendering­_context`](https://doc.servo.org/servo/struct.WebView.html#method.rendering_context) (@mrobinson, #46047)
+
+Breaking changes:
+
+- [`Web­View`](https://doc.servo.org/servo/struct.WebView.html)::`send­_error` has been removed (@mukilan, #45502) – this method was always meant to be internal, and has become unused after we introduced the new Web­View- and Web­View­Delegate-based API
+
+We’ve improved the docs for Web­View, Web­View­Delegate, JS­Value, Alert­Dialog, Allow­Or­Deny­Request, Authentication­Response, Bluetooth­Device­Description, Confirm­Dialog, Console­Log­Level, Create­New­Web­View­Request, Embedder­Control, Embedder­Control­Response, File­Picker, Image, Java­Script­Error­Info, Navigation­Request, Permission­Request, Pixel­Format, Prompt­Dialog, Protocol­Handler­Registration, Protocol­Handler­Update­Registration, Scroll, Select­Element, Select­Element­Request, and Web­View­Vector (@mukilan, #45282, #45467).
 
 ## More on the web platform
 
