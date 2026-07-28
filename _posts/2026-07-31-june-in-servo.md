@@ -42,6 +42,8 @@ This is another big update, so here’s an outline:
 
 - [**Embedding API**](#embedding-api)<br>– …
 
+- [**For users and developers**](#for-users-and-developers)<br>– …
+
 - [**More on the web platform**](#more-on-the-web-platform)<br>– …
 
 - [**Garbage collection safety**](#garbage-collection-safety)<br>– …
@@ -117,6 +119,16 @@ Breaking changes:
 - [`Web­View`](https://doc.servo.org/servo/struct.WebView.html)::`send­_error` has been removed (@mukilan, #45502) – this method was always meant to be internal, and has become unused after we introduced the new Web­View- and Web­View­Delegate-based API
 
 We’ve improved the docs for Web­View, Web­View­Delegate, JS­Value, Alert­Dialog, Allow­Or­Deny­Request, Authentication­Response, Bluetooth­Device­Description, Confirm­Dialog, Console­Log­Level, Create­New­Web­View­Request, Embedder­Control, Embedder­Control­Response, File­Picker, Image, Java­Script­Error­Info, Navigation­Request, Permission­Request, Pixel­Format, Prompt­Dialog, Protocol­Handler­Registration, Protocol­Handler­Update­Registration, Scroll, Select­Element, Select­Element­Request, and Web­View­Vector (@mukilan, #45282, #45467).
+
+## For users and developers
+
+When using the Firefox **DevTools**:
+
+- in the **Console** tab, **uncaught exceptions** are reported correctly (@jdm, #45549)
+
+- in the **Console** and **Debugger** tabs, you can now inspect the elements of **nested arrays** and the entries of **Map objects** (@atbrakhi, #45435, #45514, #45767)
+
+- in the **Debugger** tab, the **Scopes** panel now shows any **‘(uninitialized)’** variables, the value of `this`, and the **global scope** (@atbrakhi, @eerii, #45824, #45517)
 
 ## More on the web platform
 
