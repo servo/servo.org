@@ -142,6 +142,8 @@ This continues our long-running effort to **use the Rust type system** to make S
 If we can prove that garbage collection is impossible in some part of Servo, we can often **avoid rooting JavaScript objects** when interacting with them within that region of code.
 This has allowed us to reduce overheads by over 1% in the **layout** process and in **HTML­Collection** (@Narfinger, #46092, #45582).
 
+For several months, Frédéric (@fred-wang) has been [**fuzzing**](https://en.wikipedia.org/wiki/Fuzzing) for Servo bugs, and thanks to his work we’ve fixed sixteen (16) **crash bugs** in June, affecting **&lt;link onerror>**, **‘animation’**, **‘clip-path’**, **‘content’**, **‘rotate’**, **‘transition’**, **‘transform-style’**, **‘display: contents’**, **‘overflow: clip’**, **CSS­Keyframes­Rule**, **Font­Face**, **stop() on Window**, and the **DOM tree** (@mrobinson, @Loirooriol, #46031, #46027, #46054, #46058, #46016, #46028, #46033, #45287, #45951, #45634, #45629, #46110, #46094, #45799, #45611, #45682).
+
 ## New contributors
 
 A special thanks to the following people for landing their first patch in Servo:
