@@ -7,7 +7,7 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-[**Servo 0.4.0**](https://github.com/servo/servo/releases/tag/v0.4.0) contains all of the changes we landed in May, which came out to yet another record **558 commits** (April: 534, May: 391).
+[**Servo 0.4.0**](https://github.com/servo/servo/releases/tag/v0.4.0) contains all of the changes we landed in June, which came out to yet another record **558 commits** (April: 534, May: 391).
 For security fixes, see [**§ Security**](#security).
 
 We’ve shipped several new web platform features:
