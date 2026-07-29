@@ -36,23 +36,23 @@ This is another big update, so here’s an outline:
 
 - [**You can help!**](#you-can-help)<br>– how to help us write the monthly updates
 
-- [**Security**](#security)<br>– memory safety fixes
+- [**Security**](#security)
 
-- [**Real world compat**](#real-world-compat)<br>– …
+- [**Real world compat**](#real-world-compat)
 
-- [**Work in progress**](#work-in-progress)<br>– …
+- [**Work in progress**](#work-in-progress)
 
-- [**Embedding API**](#embedding-api)<br>– …
+- [**Embedding API**](#embedding-api)
 
-- [**For users and developers**](#for-users-and-developers)<br>– …
+- [**For users and developers**](#for-users-and-developers)
 
-- [**More on the web platform**](#more-on-the-web-platform)<br>– …
+- [**More on the web platform**](#more-on-the-web-platform)
 
-- [**Garbage collection safety**](#garbage-collection-safety)<br>– …
+- [**Garbage collection safety**](#garbage-collection-safety)
 
-- [**Performance and stability**](#performance-and-stability)<br>– …
+- [**Performance and stability**](#performance-and-stability)
 
-- [**New contributors**](#new-contributors)<br>– 21 new contributors in June
+- [**New contributors**](#new-contributors)
 
 ## You can help!
 
@@ -304,7 +304,7 @@ When using the Firefox **DevTools**:
 
 We’ve improved the conformance of **&lt;dialog>** (@skyz1, #45825), **&lt;iframe sandbox>** (@cychronex-labs, #45880), **&lt;input minlength>** and **&lt;input maxlength>** (@skyz1, #45705), **‘font-style’** and **‘unicode-range’** in **‘@font-face’** (@Loirooriol, #45821), **HTML­Input­Element** (@steigeo, #45416), **new Response()** (@yezhizhen, #45953), **URL.create­Object­URL()** and **URL.revoke­Object­URL()** (@yezhizhen, #45182, #45417), and **ECDSA** and **Ed25519** in **Subtle­Crypto** (@kkoyung, #45833, #46017).
 
-We’ve fixed bugs related to **‘animation­iteration’ events** (@Loirooriol, #45990), **‘click’ events** (@mrobinson, #45751), **‘error’ events** in Worker global scopes (@Gae24, #45829), and […].
+We’ve fixed bugs related to **‘animation­iteration’ events** (@Loirooriol, #45990), **‘click’ events** (@mrobinson, #45751), and **‘error’ events** in Worker global scopes (@Gae24, #45829).
 
 ## Garbage collection safety
 
