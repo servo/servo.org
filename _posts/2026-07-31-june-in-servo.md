@@ -38,6 +38,8 @@ This is another big update, so here’s an outline:
 
 - [**Security**](#security)<br>– memory safety fixes
 
+- [**Real world compat**](#real-world-compat)<br>– …
+
 - [**Work in progress**](#work-in-progress)<br>– …
 
 - [**Embedding API**](#embedding-api)<br>– …
@@ -95,6 +97,177 @@ Please note that our RSA implementation is currently vulnerable to the [Marvin A
 **ML-DSA** operations in **Subtle­Crypto** now do the Decompose step in constant time, fixing [RUSTSEC-2025-0144](https://rustsec.org/advisories/RUSTSEC-2025-0144.html) (@kkoyung, #45294).
 
 We’ve fixed an HTML injection bug (XSS) in **file:/// directory listings**, which affected file names containing `</script>` (@sahvx655-wq, #45510).
+
+## Real world compat
+
+Layout correctness has significantly improved on **[lichess.org](https://lichess.org)**, and many websites have become a lot more readable thanks to our improved handling of **variable fonts** (@simonwuelker, #45768), including **Zulip ([servo.zulipchat.com](https://servo.zulipchat.com))** and **Speedtest ([speedtest.net](https://speedtest.net))**.
+
+<figure class="_spaced">
+    <div class="_peel" style="--default-position: 33%;">
+        <div class="_line">
+            <div class="_left"><div>v0.3.0</div></div>
+            <div class="_right"><div>v0.4.0</div></div>
+        </div>
+        <img src="{{ '/img/blog/2026-07-161705.png' | url }}">
+        <img src="{{ '/img/blog/2026-07-161708.png' | url }}">
+    </div>
+    <figcaption><a href="https://lichess.org">lichess.org</a></figcaption>
+</figure>
+
+<figure class="_spaced">
+    <div class="_peel" style="--default-position: 20%;">
+        <div class="_line">
+            <div class="_left"><div>v0.3.0</div></div>
+            <div class="_right"><div>v0.4.0</div></div>
+        </div>
+        <img src="{{ '/img/blog/2026-07-161115.png' | url }}">
+        <img src="{{ '/img/blog/2026-07-161201.png' | url }}">
+    </div>
+    <figcaption>Zulip (<a href="https://servo.zulipchat.com">servo.zulipchat.com</a>)</figcaption>
+</figure>
+
+<figure class="_spaced">
+    <div class="_peel" style="--default-position: 39%;">
+        <div class="_line">
+            <div class="_left"><div>v0.3.0</div></div>
+            <div class="_right"><div>v0.4.0</div></div>
+        </div>
+        <img src="{{ '/img/blog/2026-07-174050.png' | url }}">
+        <img src="{{ '/img/blog/2026-07-174052.png' | url }}">
+    </div>
+    <figcaption>Speedtest (<a href="https://speedtest.net">speedtest.net</a>)</figcaption>
+</figure>
+
+Many websites worked in Servo even before version 0.4.0, including **Google Photos ([photos.google.com](https://photos.google.com))** and Cash Converters ([cashconverters.com.au](https://cashconverters.com.au)).
+Other websites, like Google Maps ([maps.google.com](https://maps.google.com)) and OpenStreetMap ([www.openstreetmap.org](https://www.openstreetmap.org)), render well but have some issues with interactivity.
+
+<figure class="_spaced _halves">
+    <figure class="_spaced">
+        <a href="{{ '/img/blog/2026-07-175215.png' | url }}" style="color: inherit;">
+            <div class="_peel">
+                <div class="_line">
+                    <div class="_left"><div>v0.3.0</div></div>
+                    <div class="_right"><div>v0.4.0</div></div>
+                </div>
+                <img src="{{ '/img/blog/2026-07-175214.png' | url }}">
+                <img src="{{ '/img/blog/2026-07-175215.png' | url }}">
+            </div>
+        </a>
+        <figcaption>Google Photos (<a href="https://photos.google.com">photos.google.com</a>)</figcaption>
+    </figure>
+    <figure class="_spaced">
+        <a href="{{ '/img/blog/2026-07-162341.png' | url }}" style="color: inherit;">
+            <div class="_peel">
+                <div class="_line">
+                    <div class="_left"><div>v0.3.0</div></div>
+                    <div class="_right"><div>v0.4.0</div></div>
+                </div>
+                <img src="{{ '/img/blog/2026-07-162338.png' | url }}">
+                <img src="{{ '/img/blog/2026-07-162341.png' | url }}">
+            </div>
+        </a>
+        <figcaption>Cash Converters (<a href="https://cashconverters.com.au">cashconverters.com.au</a>)</figcaption>
+    </figure>
+    <figure class="_spaced">
+        <a href="{{ '/img/blog/2026-07-202258.png' | url }}" style="color: inherit;">
+            <div class="_peel">
+                <div class="_line">
+                    <div class="_left"><div>v0.3.0</div></div>
+                    <div class="_right"><div>v0.4.0</div></div>
+                </div>
+                <img src="{{ '/img/blog/2026-07-202255.png' | url }}">
+                <img src="{{ '/img/blog/2026-07-202258.png' | url }}">
+            </div>
+        </a>
+        <figcaption>Google Maps (<a href="https://maps.google.com">maps.google.com</a>)</figcaption>
+    </figure>
+    <figure class="_spaced">
+        <a href="{{ '/img/blog/2026-07-203458.png' | url }}" style="color: inherit;">
+            <div class="_peel">
+                <div class="_line">
+                    <div class="_left"><div>v0.3.0</div></div>
+                    <div class="_right"><div>v0.4.0</div></div>
+                </div>
+                <img src="{{ '/img/blog/2026-07-203456.png' | url }}">
+                <img src="{{ '/img/blog/2026-07-203458.png' | url }}">
+            </div>
+        </a>
+        <figcaption>OpenStreetMap (<a href="https://www.openstreetmap.org">www.openstreetmap.org</a>)</figcaption>
+    </figure>
+</figure>
+
+We’re interested to hear how well your favourite websites run in Servo!
+Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341), and failures [in our GitHub issues](https://github.com/servo/servo/issues).
+
+<style>
+    ._spaced {
+        margin: 1em 0;
+    }
+    ._halves {
+        display: flex;
+        flex-flow: row wrap;
+    }
+    ._halves > * {
+        width: 50%;
+    }
+    ._peel {
+        --default-position: 50%;
+        position: relative;
+        overflow: hidden;
+        background: white;
+        * {
+            /* ensure ‘pointermove’ events always target the root */
+            pointer-events: none;
+            user-select: none;
+        }
+        img {
+            background: white;
+        }
+        :not(:last-child) {
+            position: absolute;
+            inset: 0 auto 0 auto;
+            width: var(--position, var(--default-position));
+            height: 100%;
+            object-fit: cover;
+            object-position: top left;
+        }
+        ._line {
+            z-index: 1;
+            border-right: thin solid #1192e8;
+            div {
+                position: absolute;
+                right: 0;
+                width: 0;
+            }
+            div div {
+                position: absolute;
+                width: max-content;
+                padding: 0 0.25em;
+                background: #ffffff80;
+            }
+            ._left div {
+                /* extend left of the line */
+                right: 0;
+            }
+            ._right div {
+                /* extend right of the line */
+                left: 0;
+            }
+        }
+    }
+</style>
+
+<script>
+    for (const peel of document.querySelectorAll("._peel")) {
+        peel.addEventListener("pointermove", event => {
+            const position = Math.max(0, Math.min(1, event.offsetX / peel.offsetWidth));
+            peel.style.setProperty("--position", `${position * 100}%`);
+        }, true);
+        peel.addEventListener("pointerleave", event => {
+            peel.style.removeProperty("--position");
+        });
+    }
+</script>
 
 ## Work in progress
 
