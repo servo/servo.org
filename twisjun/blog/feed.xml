@@ -48,6 +48,9 @@ For security fixes, see &lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#security&quot;&gt;&lt;strong&gt;Security&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;– memory safety fixes&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#real-world-compat&quot;&gt;&lt;strong&gt;Real world compat&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;– …&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#work-in-progress&quot;&gt;&lt;strong&gt;Work in progress&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;– …&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -118,6 +121,169 @@ The exact CVEs that apply to us are not yet known, but for more details, see &lt
 Please note that our RSA implementation is currently vulnerable to the &lt;a href=&quot;https://people.redhat.com/~hkario/marvin/&quot;&gt;Marvin Attack&lt;/a&gt; – for more details, see &lt;a href=&quot;https://rustsec.org/advisories/RUSTSEC-2023-0071.html&quot;&gt;RUSTSEC-2023-0071&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;ML-DSA&lt;/strong&gt; operations in &lt;strong&gt;Subtle­Crypto&lt;/strong&gt; now do the Decompose step in constant time, fixing &lt;a href=&quot;https://rustsec.org/advisories/RUSTSEC-2025-0144.html&quot;&gt;RUSTSEC-2025-0144&lt;/a&gt; (@kkoyung, #45294).&lt;/p&gt;
 &lt;p&gt;We’ve fixed an HTML injection bug (XSS) in &lt;strong&gt;file:/// directory listings&lt;/strong&gt;, which affected file names containing &lt;code&gt;&amp;lt;/script&amp;gt;&lt;/code&gt; (@sahvx655-wq, #45510).&lt;/p&gt;
+&lt;h2 id=&quot;real-world-compat&quot; tabindex=&quot;-1&quot;&gt;Real world compat &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#real-world-compat&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Layout correctness has significantly improved on &lt;strong&gt;&lt;a href=&quot;https://lichess.org/&quot;&gt;lichess.org&lt;/a&gt;&lt;/strong&gt;, and many websites have become a lot more readable thanks to our improved handling of &lt;strong&gt;variable fonts&lt;/strong&gt; (@simonwuelker, #45768), including &lt;strong&gt;Zulip (&lt;a href=&quot;https://servo.zulipchat.com/&quot;&gt;servo.zulipchat.com&lt;/a&gt;)&lt;/strong&gt; and &lt;strong&gt;Speedtest (&lt;a href=&quot;https://speedtest.net/&quot;&gt;speedtest.net&lt;/a&gt;)&lt;/strong&gt;.&lt;/p&gt;
+&lt;figure class=&quot;_spaced&quot;&gt;
+    &lt;div class=&quot;_peel&quot; style=&quot;--default-position: 33%;&quot;&gt;
+        &lt;div class=&quot;_line&quot;&gt;
+            &lt;div class=&quot;_left&quot;&gt;&lt;div&gt;v0.3.0&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;_right&quot;&gt;&lt;div&gt;v0.4.0&lt;/div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-161705.png&quot; /&gt;
+        &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-161708.png&quot; /&gt;
+    &lt;/div&gt;
+    &lt;figcaption&gt;&lt;a href=&quot;https://lichess.org/&quot;&gt;lichess.org&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;figure class=&quot;_spaced&quot;&gt;
+    &lt;div class=&quot;_peel&quot; style=&quot;--default-position: 20%;&quot;&gt;
+        &lt;div class=&quot;_line&quot;&gt;
+            &lt;div class=&quot;_left&quot;&gt;&lt;div&gt;v0.3.0&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;_right&quot;&gt;&lt;div&gt;v0.4.0&lt;/div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-161115.png&quot; /&gt;
+        &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-161201.png&quot; /&gt;
+    &lt;/div&gt;
+    &lt;figcaption&gt;Zulip (&lt;a href=&quot;https://servo.zulipchat.com/&quot;&gt;servo.zulipchat.com&lt;/a&gt;)&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;figure class=&quot;_spaced&quot;&gt;
+    &lt;div class=&quot;_peel&quot; style=&quot;--default-position: 39%;&quot;&gt;
+        &lt;div class=&quot;_line&quot;&gt;
+            &lt;div class=&quot;_left&quot;&gt;&lt;div&gt;v0.3.0&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;_right&quot;&gt;&lt;div&gt;v0.4.0&lt;/div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-174050.png&quot; /&gt;
+        &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-174052.png&quot; /&gt;
+    &lt;/div&gt;
+    &lt;figcaption&gt;Speedtest (&lt;a href=&quot;https://speedtest.net/&quot;&gt;speedtest.net&lt;/a&gt;)&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Many websites worked in Servo even before version 0.4.0, including &lt;strong&gt;Google Photos (&lt;a href=&quot;https://photos.google.com/&quot;&gt;photos.google.com&lt;/a&gt;)&lt;/strong&gt; and Cash Converters (&lt;a href=&quot;https://cashconverters.com.au/&quot;&gt;cashconverters.com.au&lt;/a&gt;).
+Other websites, like Google Maps (&lt;a href=&quot;https://maps.google.com/&quot;&gt;maps.google.com&lt;/a&gt;) and OpenStreetMap (&lt;a href=&quot;https://www.openstreetmap.org/&quot;&gt;www.openstreetmap.org&lt;/a&gt;), render well but have some issues with interactivity.&lt;/p&gt;
+&lt;figure class=&quot;_spaced _halves&quot;&gt;
+    &lt;figure class=&quot;_spaced&quot;&gt;
+        &lt;a href=&quot;https://servo.org/twisjun/img/blog/2026-07-175215.png&quot; style=&quot;color: inherit;&quot;&gt;
+            &lt;div class=&quot;_peel&quot;&gt;
+                &lt;div class=&quot;_line&quot;&gt;
+                    &lt;div class=&quot;_left&quot;&gt;&lt;div&gt;v0.3.0&lt;/div&gt;&lt;/div&gt;
+                    &lt;div class=&quot;_right&quot;&gt;&lt;div&gt;v0.4.0&lt;/div&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-175214.png&quot; /&gt;
+                &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-175215.png&quot; /&gt;
+            &lt;/div&gt;
+        &lt;/a&gt;
+        &lt;figcaption&gt;Google Photos (&lt;a href=&quot;https://photos.google.com/&quot;&gt;photos.google.com&lt;/a&gt;)&lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;figure class=&quot;_spaced&quot;&gt;
+        &lt;a href=&quot;https://servo.org/twisjun/img/blog/2026-07-162341.png&quot; style=&quot;color: inherit;&quot;&gt;
+            &lt;div class=&quot;_peel&quot;&gt;
+                &lt;div class=&quot;_line&quot;&gt;
+                    &lt;div class=&quot;_left&quot;&gt;&lt;div&gt;v0.3.0&lt;/div&gt;&lt;/div&gt;
+                    &lt;div class=&quot;_right&quot;&gt;&lt;div&gt;v0.4.0&lt;/div&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-162338.png&quot; /&gt;
+                &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-162341.png&quot; /&gt;
+            &lt;/div&gt;
+        &lt;/a&gt;
+        &lt;figcaption&gt;Cash Converters (&lt;a href=&quot;https://cashconverters.com.au/&quot;&gt;cashconverters.com.au&lt;/a&gt;)&lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;figure class=&quot;_spaced&quot;&gt;
+        &lt;a href=&quot;https://servo.org/twisjun/img/blog/2026-07-202258.png&quot; style=&quot;color: inherit;&quot;&gt;
+            &lt;div class=&quot;_peel&quot;&gt;
+                &lt;div class=&quot;_line&quot;&gt;
+                    &lt;div class=&quot;_left&quot;&gt;&lt;div&gt;v0.3.0&lt;/div&gt;&lt;/div&gt;
+                    &lt;div class=&quot;_right&quot;&gt;&lt;div&gt;v0.4.0&lt;/div&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-202255.png&quot; /&gt;
+                &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-202258.png&quot; /&gt;
+            &lt;/div&gt;
+        &lt;/a&gt;
+        &lt;figcaption&gt;Google Maps (&lt;a href=&quot;https://maps.google.com/&quot;&gt;maps.google.com&lt;/a&gt;)&lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;figure class=&quot;_spaced&quot;&gt;
+        &lt;a href=&quot;https://servo.org/twisjun/img/blog/2026-07-203458.png&quot; style=&quot;color: inherit;&quot;&gt;
+            &lt;div class=&quot;_peel&quot;&gt;
+                &lt;div class=&quot;_line&quot;&gt;
+                    &lt;div class=&quot;_left&quot;&gt;&lt;div&gt;v0.3.0&lt;/div&gt;&lt;/div&gt;
+                    &lt;div class=&quot;_right&quot;&gt;&lt;div&gt;v0.4.0&lt;/div&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-203456.png&quot; /&gt;
+                &lt;img src=&quot;https://servo.org/twisjun/img/blog/2026-07-203458.png&quot; /&gt;
+            &lt;/div&gt;
+        &lt;/a&gt;
+        &lt;figcaption&gt;OpenStreetMap (&lt;a href=&quot;https://www.openstreetmap.org/&quot;&gt;www.openstreetmap.org&lt;/a&gt;)&lt;/figcaption&gt;
+    &lt;/figure&gt;
+&lt;/figure&gt;
+&lt;p&gt;We’re interested to hear how well your favourite websites run in Servo!
+Report successes in &lt;a href=&quot;https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341&quot;&gt;this Zulip thread&lt;/a&gt;, and failures &lt;a href=&quot;https://github.com/servo/servo/issues&quot;&gt;in our GitHub issues&lt;/a&gt;.&lt;/p&gt;
+&lt;style&gt;
+    ._spaced {
+        margin: 1em 0;
+    }
+    ._halves {
+        display: flex;
+        flex-flow: row wrap;
+    }
+    ._halves &gt; * {
+        width: 50%;
+    }
+    ._peel {
+        --default-position: 50%;
+        position: relative;
+        overflow: hidden;
+        background: white;
+        * {
+            /* ensure ‘pointermove’ events always target the root */
+            pointer-events: none;
+            user-select: none;
+        }
+        img {
+            background: white;
+        }
+        :not(:last-child) {
+            position: absolute;
+            inset: 0 auto 0 auto;
+            width: var(--position, var(--default-position));
+            height: 100%;
+            object-fit: cover;
+            object-position: top left;
+        }
+        ._line {
+            z-index: 1;
+            border-right: thin solid #1192e8;
+            div {
+                position: absolute;
+                right: 0;
+                width: 0;
+            }
+            div div {
+                position: absolute;
+                width: max-content;
+                padding: 0 0.25em;
+                background: #ffffff80;
+            }
+            ._left div {
+                /* extend left of the line */
+                right: 0;
+            }
+            ._right div {
+                /* extend right of the line */
+                left: 0;
+            }
+        }
+    }
+&lt;/style&gt;
+&lt;script&gt;
+    for (const peel of document.querySelectorAll(&quot;._peel&quot;)) {
+        peel.addEventListener(&quot;pointermove&quot;, event =&gt; {
+            const position = Math.max(0, Math.min(1, event.offsetX / peel.offsetWidth));
+            peel.style.setProperty(&quot;--position&quot;, `${position * 100}%`);
+        }, true);
+        peel.addEventListener(&quot;pointerleave&quot;, event =&gt; {
+            peel.style.removeProperty(&quot;--position&quot;);
+        });
+    }
+&lt;/script&gt;
 &lt;h2 id=&quot;work-in-progress&quot; tabindex=&quot;-1&quot;&gt;Work in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisjun/blog/2026/07/31/june-in-servo/#work-in-progress&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
