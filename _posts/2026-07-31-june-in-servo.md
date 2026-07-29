@@ -263,9 +263,6 @@ Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/chan
             const position = Math.max(0, Math.min(1, event.offsetX / peel.offsetWidth));
             peel.style.setProperty("--position", `${position * 100}%`);
         }, true);
-        peel.addEventListener("pointerleave", event => {
-            peel.style.removeProperty("--position");
-        });
     }
 </script>
 
