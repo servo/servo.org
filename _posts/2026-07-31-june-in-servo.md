@@ -10,6 +10,10 @@ categories:
 [**Servo 0.4.0**](https://github.com/servo/servo/releases/tag/v0.4.0) contains all of the changes we landed in June, which came out to yet another record **558 commits** (April: 534, May: 391).
 For security fixes, see [**§ Security**](#security).
 
+<figure>
+    <a href="{{ '/img/blog/2026-07-diffie.png' | url }}"><img src="{{ '/img/blog/2026-07-diffie.png' | url }}" alt="servoshell 0.4.0 showing several new features: the ‘width’, ‘height’, ‘device-width’, ‘device-height’, and ‘aspect-ratio’ media query features, plus the upgraded ‘attr()’ function, with a box whose ‘background-color’ and ‘width’ are controlled by data attributes that are in turn set by range inputs"></a>
+</figure>
+
 We’ve shipped several new web platform features:
 
 - **‘attr()’**, in [experimental mode](https://book.servo.org/design-documentation/experimental-features.html#experimental-web-platform-features) (@Loirooriol, #45041)
