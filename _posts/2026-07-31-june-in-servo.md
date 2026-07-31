@@ -38,7 +38,7 @@ Plus a bunch of new DOM APIs:
 
 This is another big update, so here’s an outline:
 
-- [**You can help!**](#you-can-help)<br>– how to help us write the monthly updates
+- [**You can help!**](#you-can-help)
 
 - [**Security**](#security)
 
@@ -142,60 +142,24 @@ Layout correctness has significantly improved on **[lichess.org](https://lichess
     <figcaption>Speedtest (<a href="https://speedtest.net">speedtest.net</a>)</figcaption>
 </figure>
 
-Many websites worked in Servo even before version 0.4.0, including **Google Photos ([photos.google.com](https://photos.google.com))** and Cash Converters ([cashconverters.com.au](https://cashconverters.com.au)).
+Many websites worked in Servo even before version 0.4.0, including **Google Photos ([photos.google.com](https://photos.google.com))** and Cash Converters ([cashconverters.com.au](https://cashconverters.com.au)), and continue to work in version 0.4.0.
 Other websites, like Google Maps ([maps.google.com](https://maps.google.com)) and OpenStreetMap ([www.openstreetmap.org](https://www.openstreetmap.org)), render well but have some issues with interactivity.
 
 <figure class="_spaced _halves">
     <figure class="_spaced">
-        <a href="{{ '/img/blog/2026-07-175215.png' | url }}" style="color: inherit;">
-            <div class="_peel">
-                <div class="_line">
-                    <div class="_left"><div>v0.3.0</div></div>
-                    <div class="_right"><div>v0.4.0</div></div>
-                </div>
-                <img src="{{ '/img/blog/2026-07-175214.png' | url }}">
-                <img src="{{ '/img/blog/2026-07-175215.png' | url }}">
-            </div>
-        </a>
+        <a href="{{ '/img/blog/2026-07-175215.png' | url }}"><img src="{{ '/img/blog/2026-07-175215.png' | url }}"></a>
         <figcaption>Google Photos (<a href="https://photos.google.com">photos.google.com</a>)</figcaption>
     </figure>
     <figure class="_spaced">
-        <a href="{{ '/img/blog/2026-07-162341.png' | url }}" style="color: inherit;">
-            <div class="_peel">
-                <div class="_line">
-                    <div class="_left"><div>v0.3.0</div></div>
-                    <div class="_right"><div>v0.4.0</div></div>
-                </div>
-                <img src="{{ '/img/blog/2026-07-162338.png' | url }}">
-                <img src="{{ '/img/blog/2026-07-162341.png' | url }}">
-            </div>
-        </a>
+        <a href="{{ '/img/blog/2026-07-162341.png' | url }}"><img src="{{ '/img/blog/2026-07-162341.png' | url }}"></a>
         <figcaption>Cash Converters (<a href="https://cashconverters.com.au">cashconverters.com.au</a>)</figcaption>
     </figure>
     <figure class="_spaced">
-        <a href="{{ '/img/blog/2026-07-202258.png' | url }}" style="color: inherit;">
-            <div class="_peel">
-                <div class="_line">
-                    <div class="_left"><div>v0.3.0</div></div>
-                    <div class="_right"><div>v0.4.0</div></div>
-                </div>
-                <img src="{{ '/img/blog/2026-07-202255.png' | url }}">
-                <img src="{{ '/img/blog/2026-07-202258.png' | url }}">
-            </div>
-        </a>
+        <a href="{{ '/img/blog/2026-07-202258.png' | url }}"><img src="{{ '/img/blog/2026-07-202258.png' | url }}"></a>
         <figcaption>Google Maps (<a href="https://maps.google.com">maps.google.com</a>)</figcaption>
     </figure>
     <figure class="_spaced">
-        <a href="{{ '/img/blog/2026-07-203458.png' | url }}" style="color: inherit;">
-            <div class="_peel">
-                <div class="_line">
-                    <div class="_left"><div>v0.3.0</div></div>
-                    <div class="_right"><div>v0.4.0</div></div>
-                </div>
-                <img src="{{ '/img/blog/2026-07-203456.png' | url }}">
-                <img src="{{ '/img/blog/2026-07-203458.png' | url }}">
-            </div>
-        </a>
+        <a href="{{ '/img/blog/2026-07-203458.png' | url }}"><img src="{{ '/img/blog/2026-07-203458.png' | url }}"></a>
         <figcaption>OpenStreetMap (<a href="https://www.openstreetmap.org">www.openstreetmap.org</a>)</figcaption>
     </figure>
 </figure>
