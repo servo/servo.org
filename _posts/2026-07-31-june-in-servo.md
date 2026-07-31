@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "June in Servo: and more!"
+title:      "June in Servo: real world compat, media queries, SharedWorker, and more!"
 date:       2026-07-31
-summary:    ao!! wrrrrao!!
+summary:    We now have a new way for you to help us write the monthly updates :)
 categories:
 ---
 
