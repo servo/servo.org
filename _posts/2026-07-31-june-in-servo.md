@@ -27,9 +27,10 @@ We’ve shipped several new web platform features:
 Plus a bunch of new DOM APIs:
 
 - **Shared­Worker** ([@Taym95](https://github.com/Taym95), [#45786](https://github.com/servo/servo/pull/45786))
+- **console­.dir()** ([@Taym95](https://github.com/Taym95), [#45109](https://github.com/servo/servo/pull/45109))
 - **custom­Element­Registry** on **Document** and **Shadow­Root** ([@shubhamg13](https://github.com/shubhamg13), [#45872](https://github.com/servo/servo/pull/45872))
 - **initialize()** on **Custom­Element­Registry** ([@shubhamg13](https://github.com/shubhamg13), [@yezhizhen](https://github.com/yezhizhen), [#45903](https://github.com/servo/servo/pull/45903))
-- **new Custom­Element­Registry()** ([@shubhamg13](https://github.com/shubhamg13), [#45791](https://github.com/servo/servo/pull/45791))
+- **new Custom­Element­Registry()** ([@shubhamg13](https://github.com/shubhamg13), [#45791](https://github.com/servo/servo/pull/45791), [#45550](https://github.com/servo/servo/pull/45550))
 - **text­Stream()** on **Request**, **Response**, and **Blob** ([@yezhizhen](https://github.com/yezhizhen), [#45864](https://github.com/servo/servo/pull/45864), [#45861](https://github.com/servo/servo/pull/45861))
 - **set­Pointer­Capture()**, **release­Pointer­Capture()**, **has­Pointer­Capture()** on **Element** ([@webbeef](https://github.com/webbeef), [#45048](https://github.com/servo/servo/pull/45048))
 - **on­touch­start**, **on­touch­end**, **on­touch­move**, **on­touch­cancel** on **Element** ([@stevennovaryo](https://github.com/stevennovaryo), [#45049](https://github.com/servo/servo/pull/45049))
@@ -238,9 +239,20 @@ Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/chan
 
 We’re implementing the more powerful version of **‘attr()’** that can be used anywhere, not just in ‘content’, under `--pref layout­_css­_attr­_enabled` ([@Loirooriol](https://github.com/Loirooriol), [#45041](https://github.com/servo/servo/pull/45041), [#45421](https://github.com/servo/servo/pull/45421), [#45495](https://github.com/servo/servo/pull/45495), [#45752](https://github.com/servo/servo/pull/45752)).
 
+**WebGPU** support has improved, under `--pref dom­_webgpu­_enabled`:
+
+- implemented **copy­External­Image­To­Texture()** on **GPU­Queue** ([@sagudev](https://github.com/sagudev), [#45646](https://github.com/servo/servo/pull/45646))
+- implemented **create­Query­Set()** on **GPU­Device** and **resolve­Query­Set()** on **GPU­Command­Encoder** ([@sagudev](https://github.com/sagudev), [#45644](https://github.com/servo/servo/pull/45644))
+- implemented **push­Debug­Group()**, **pop­Debug­Group()**, and **insert­Debug­Marker()** on **GPU­Command­Encoder**, **GPU­Compute­Pass­Encoder**, and **GPU­Render­Pass­Encoder** ([@jschwe](https://github.com/jschwe), [#45489](https://github.com/servo/servo/pull/45489))
+- more conformant **GPU­Texture** ([@sagudev](https://github.com/sagudev), [#45300](https://github.com/servo/servo/pull/45300))
+- more conformant **request­Adapter()** on **GPU** ([@sagudev](https://github.com/sagudev), [#45424](https://github.com/servo/servo/pull/45424))
+- more conformant **secure context** enforcement ([@sagudev](https://github.com/sagudev), [#45279](https://github.com/servo/servo/pull/45279))
+
 All of the features above are enabled in servoshell’s [experimental mode](https://book.servo.org/design-documentation/experimental-features.html#experimental-web-platform-features).
 
 We’ve made more progress towards **accessibility** support, under `--pref accessibility_enabled` ([@alice](https://github.com/alice), [@delan](https://github.com/delan), [#45555](https://github.com/servo/servo/pull/45555), [#45554](https://github.com/servo/servo/pull/45554), [#44949](https://github.com/servo/servo/pull/44949)).
+
+We’ve started implementing **Web Animations**, under `--pref dom­_web­_animations­_enabled` ([@simonwuelker](https://github.com/simonwuelker), [#45522](https://github.com/servo/servo/pull/45522)), as well as **webkit­Relative­Path** on **File**, under `--pref dom­_entries­_api­_enabled` ([@yezhizhen](https://github.com/yezhizhen), [#45666](https://github.com/servo/servo/pull/45666)).
 
 Rust doesn’t have a stable [ABI](https://en.wikipedia.org/wiki/Application_binary_interface), so it has generally not been possible to embed Servo in another application without building Servo from source.
 To make it possible, we’ve started designing a **wrapper C API** that will let you consume Servo as a prebuilt shared library using the stable and ubiquitous C ABI ([@mukilan](https://github.com/mukilan), [#44984](https://github.com/servo/servo/pull/44984)).
@@ -260,6 +272,22 @@ We’ve improved the docs for Web­View, Web­View­Delegate, JS­Value, Alert­
 
 ## For users and developers
 
+In servoshell:
+
+- the **Android** version now requires **Android 13+** ([@jschwe](https://github.com/jschwe), [#46104](https://github.com/servo/servo/pull/46104))
+
+- the **desktop** version now lets you **drag and drop files** to open them ([@simonwuelker](https://github.com/simonwuelker), [#45454](https://github.com/servo/servo/pull/45454))
+
+- the **desktop** version now lets the **tab bar scroll horizontally** if you have too many tabs open, but from one tab hoarder to another, maybe you should reconsider having so many tabs open ([@Nylme](https://github.com/Nylme), [#44884](https://github.com/servo/servo/pull/44884))
+
+- **&lt;select multiple>** should now be interactable on **all desktop platforms** ([@alexcat3](https://github.com/alexcat3), [#45419](https://github.com/servo/servo/pull/45419))
+
+- `localhost:<port>` now implies `http://` **in the location bar** and **on the command line**, rather than treating `localhost:` as an unsupported URL scheme ([@SteveSharonSam](https://github.com/SteveSharonSam), [#45729](https://github.com/servo/servo/pull/45729), [#45832](https://github.com/servo/servo/pull/45832))
+
+- entering fullscreen now happens on the monitor containing the window, even if you’ve moved it to a different monitor ([@rhit-kapilaar](https://github.com/rhit-kapilaar), [#45556](https://github.com/servo/servo/pull/45556))
+
+- the browser UI no longer gets stuck in hovered states ([@mrobinson](https://github.com/mrobinson), [#45290](https://github.com/servo/servo/pull/45290))
+
 When using the Firefox **DevTools**:
 
 - in the **Console** tab, **uncaught exceptions** are reported correctly ([@jdm](https://github.com/jdm), [#45549](https://github.com/servo/servo/pull/45549))
@@ -268,11 +296,18 @@ When using the Firefox **DevTools**:
 
 - in the **Debugger** tab, the **Scopes** panel now shows any **‘(uninitialized)’** variables, the value of `this`, and the **global scope** ([@atbrakhi](https://github.com/atbrakhi), [@eerii](https://github.com/eerii), [#45824](https://github.com/servo/servo/pull/45824), [#45517](https://github.com/servo/servo/pull/45517))
 
+We’ve fixed some build issues on **riscv32**, **riscv64**, and **arm64** ([@fxzjshm](https://github.com/fxzjshm), [@saschanaz](https://github.com/saschanaz), [#45285](https://github.com/servo/servo/pull/45285), [#45731](https://github.com/servo/servo/pull/45731)), and modernised servoshell for **Android** to use Compose UI and Kotlin ([@veyndan](https://github.com/veyndan), [#45923](https://github.com/servo/servo/pull/45923), [#45932](https://github.com/servo/servo/pull/45932), [#45941](https://github.com/servo/servo/pull/45941), [#45982](https://github.com/servo/servo/pull/45982), [#45985](https://github.com/servo/servo/pull/45985), [#46015](https://github.com/servo/servo/pull/46015), [#46035](https://github.com/servo/servo/pull/46035), [#46037](https://github.com/servo/servo/pull/46037), [#46046](https://github.com/servo/servo/pull/46046), [#46053](https://github.com/servo/servo/pull/46053), [#46061](https://github.com/servo/servo/pull/46061), [#46071](https://github.com/servo/servo/pull/46071), [#45641](https://github.com/servo/servo/pull/45641), [#45643](https://github.com/servo/servo/pull/45643), [#45650](https://github.com/servo/servo/pull/45650), [#45665](https://github.com/servo/servo/pull/45665), [#45671](https://github.com/servo/servo/pull/45671), [#45676](https://github.com/servo/servo/pull/45676), [#45679](https://github.com/servo/servo/pull/45679), [#45683](https://github.com/servo/servo/pull/45683), [#45712](https://github.com/servo/servo/pull/45712), [#45713](https://github.com/servo/servo/pull/45713), [#45734](https://github.com/servo/servo/pull/45734), [#45738](https://github.com/servo/servo/pull/45738)).
+
 ## More on the web platform
 
-We’ve improved the conformance of **&lt;dialog>** ([@skyz1](https://github.com/skyz1), [#45825](https://github.com/servo/servo/pull/45825)), **&lt;iframe sandbox>** ([@cychronex-labs](https://github.com/cychronex-labs), [#45880](https://github.com/servo/servo/pull/45880)), **&lt;input minlength>** and **&lt;input maxlength>** ([@skyz1](https://github.com/skyz1), [#45705](https://github.com/servo/servo/pull/45705)), **‘font-style’** and **‘unicode-range’** in **‘[@font-face](https://github.com/font-face)’** ([@Loirooriol](https://github.com/Loirooriol), [#45821](https://github.com/servo/servo/pull/45821)), **HTML­Input­Element** ([@steigeo](https://github.com/steigeo), [#45416](https://github.com/servo/servo/pull/45416)), **new Response()** ([@yezhizhen](https://github.com/yezhizhen), [#45953](https://github.com/servo/servo/pull/45953)), **URL.create­Object­URL()** and **URL.revoke­Object­URL()** ([@yezhizhen](https://github.com/yezhizhen), [#45182](https://github.com/servo/servo/pull/45182), [#45417](https://github.com/servo/servo/pull/45417)), and **ECDSA** and **Ed25519** in **Subtle­Crypto** ([@kkoyung](https://github.com/kkoyung), [#45833](https://github.com/servo/servo/pull/45833), [#46017](https://github.com/servo/servo/pull/46017)).
+To allow for more performant scrolling, **‘wheel’ events** are no longer `.cancelable` unless there are one or more non-[`passive`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#passive) event listeners ([@kunalmohan](https://github.com/kunalmohan), [#45667](https://github.com/servo/servo/pull/45667)).
+Note that like in Firefox, ‘wheel’ events are `passive` by default.
 
-We’ve fixed bugs related to **‘animation­iteration’ events** ([@Loirooriol](https://github.com/Loirooriol), [#45990](https://github.com/servo/servo/pull/45990)), **‘click’ events** ([@mrobinson](https://github.com/mrobinson), [#45751](https://github.com/servo/servo/pull/45751)), and **‘error’ events** in Worker global scopes ([@Gae24](https://github.com/Gae24), [#45829](https://github.com/servo/servo/pull/45829)).
+**‘dotted’**, **‘dashed’**, and **‘wavy’ text decorations** are now continuous across element boundaries ([@mrobinson](https://github.com/mrobinson), [#45726](https://github.com/servo/servo/pull/45726)).
+
+We’ve improved the conformance of **&lt;dialog>** ([@skyz1](https://github.com/skyz1), [#45825](https://github.com/servo/servo/pull/45825)), **&lt;iframe sandbox>** ([@cychronex-labs](https://github.com/cychronex-labs), [#45880](https://github.com/servo/servo/pull/45880)), **&lt;input minlength>** and **&lt;input maxlength>** ([@skyz1](https://github.com/skyz1), [#45705](https://github.com/servo/servo/pull/45705)), **‘font-style’** and **‘unicode-range’** in **‘[@font-face](https://github.com/font-face)’** ([@Loirooriol](https://github.com/Loirooriol), [#45821](https://github.com/servo/servo/pull/45821)), **FontFaceSet** ([@mrobinson](https://github.com/mrobinson), [#45390](https://github.com/servo/servo/pull/45390), [#45382](https://github.com/servo/servo/pull/45382)), **HTML­Input­Element** ([@steigeo](https://github.com/steigeo), [#45416](https://github.com/servo/servo/pull/45416)), **new Response()** ([@yezhizhen](https://github.com/yezhizhen), [#45953](https://github.com/servo/servo/pull/45953)), **URL.create­Object­URL()** and **URL.revoke­Object­URL()** ([@yezhizhen](https://github.com/yezhizhen), [#45182](https://github.com/servo/servo/pull/45182), [#45417](https://github.com/servo/servo/pull/45417)), and **ECDSA** and **Ed25519** in **Subtle­Crypto** ([@kkoyung](https://github.com/kkoyung), [#45833](https://github.com/servo/servo/pull/45833), [#46017](https://github.com/servo/servo/pull/46017)).
+
+We’ve fixed bugs related to **&lt;input hidden>** ([@mrobinson](https://github.com/mrobinson), [#45750](https://github.com/servo/servo/pull/45750)), **‘animation-delay’** ([@yezhizhen](https://github.com/yezhizhen), [#45013](https://github.com/servo/servo/pull/45013)), **‘clip-path’** ([@Loirooriol](https://github.com/Loirooriol), [#45468](https://github.com/servo/servo/pull/45468), [#45373](https://github.com/servo/servo/pull/45373)), **‘tab-size’** ([@SimonSapin](https://github.com/SimonSapin), [@mrobinson](https://github.com/mrobinson), [#45309](https://github.com/servo/servo/pull/45309)), **‘width’** and **‘height’** ([@RichardTjokroutomo](https://github.com/RichardTjokroutomo), [#44627](https://github.com/servo/servo/pull/44627)), **‘box-shadow: inset’** ([@Loirooriol](https://github.com/Loirooriol), [#45620](https://github.com/servo/servo/pull/45620)), **‘animation­iteration’ events** ([@Loirooriol](https://github.com/Loirooriol), [#45990](https://github.com/servo/servo/pull/45990)), **‘click’ events** ([@mrobinson](https://github.com/mrobinson), [#45751](https://github.com/servo/servo/pull/45751)), and **‘error’ events** in Worker global scopes ([@Gae24](https://github.com/Gae24), [#45829](https://github.com/servo/servo/pull/45829)).
 
 ## Garbage collection safety
 
@@ -302,6 +337,8 @@ Speaking of which, **2D canvases** now use up to **23% less power** ([@yezhizhen
 
 Servo now **decodes all images asynchronously** and **fills image caches asynchronously**, leaving script threads (web content processes) more time for other work ([@Narfinger](https://github.com/Narfinger), [#45542](https://github.com/servo/servo/pull/45542), [#44483](https://github.com/servo/servo/pull/44483)).
 On top of that, we’ve improved **incremental layout** ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#45411](https://github.com/servo/servo/pull/45411)) and reduced reflows in **IntersectionObserver** ([@jschwe](https://github.com/jschwe), [#45986](https://github.com/servo/servo/pull/45986)).
+
+We’ve started working on **incremental updates** for the **stacking context tree**, and as a side effect, we’ve made some layout-bound microbenchmarks up to 10% faster ([@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#45208](https://github.com/servo/servo/pull/45208)).
 
 We’ve also reduced allocations, copies, GC rooting steps, and other operations in many parts of Servo ([@Narfinger](https://github.com/Narfinger), [@SimonSapin](https://github.com/SimonSapin), [@mrobinson](https://github.com/mrobinson), [@Loirooriol](https://github.com/Loirooriol), [#45506](https://github.com/servo/servo/pull/45506), [#45969](https://github.com/servo/servo/pull/45969), [#45940](https://github.com/servo/servo/pull/45940), [#45760](https://github.com/servo/servo/pull/45760), [#46090](https://github.com/servo/servo/pull/46090), [#45335](https://github.com/servo/servo/pull/45335), [#45413](https://github.com/servo/servo/pull/45413), [#45511](https://github.com/servo/servo/pull/45511)).
 
