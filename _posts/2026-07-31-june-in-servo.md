@@ -164,9 +164,6 @@ Other websites, like Google Maps ([maps.google.com](https://maps.google.com)) an
     </figure>
 </figure>
 
-We’re interested to hear how well your favourite websites run in Servo!
-Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341), and failures [in our GitHub issues](https://github.com/servo/servo/issues).
-
 <style>
     ._spaced {
         margin: 1em 0;
@@ -233,6 +230,9 @@ Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/chan
         }, true);
     }
 </script>
+
+We’re interested to hear how well your favourite websites run in Servo!
+Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341), and failures [in our GitHub issues](https://github.com/servo/servo/issues).
 
 ## Work in progress
 
