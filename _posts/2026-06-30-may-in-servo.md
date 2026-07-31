@@ -7,7 +7,7 @@ summary:    Plus seven new commands for execCommand(), and Sanitizer API now exp
 categories:
 ---
 
-[**Servo 0.3.0**](https://github.com/servo/servo/releases/tag/v0.3.0) contains all of the changes we landed in May, which came out to **391 commits** (March: 534).
+[**Servo 0.3.0**](https://github.com/servo/servo/releases/tag/v0.3.0) contains all of the changes we landed in May, which came out to **391 commits** (April: 534).
 For security fixes, see [**§ Security**](#security).
 
 <figure>
@@ -72,7 +72,8 @@ This release brings a more conformant **abort()** on **IDB­Transaction** ([@Tay
 
 All of the features above are enabled in servoshell’s experimental mode.
 
-We’ve made more progress towards **accessibility** support, including the [**name from contents**](https://w3c.github.io/aria/#namefromcontent) algorithm ([@alice](https://github.com/alice), [@delan](https://github.com/delan), [@mrobinson](https://github.com/mrobinson), [#44439](https://github.com/servo/servo/pull/44439)) and several changes towards **building the accessibility tree incrementally** ([@alice](https://github.com/alice), [@delan](https://github.com/delan), [@mrobinson](https://github.com/mrobinson), [#44766](https://github.com/servo/servo/pull/44766), [#45035](https://github.com/servo/servo/pull/45035), [#45207](https://github.com/servo/servo/pull/45207), [#44768](https://github.com/servo/servo/pull/44768), [#44785](https://github.com/servo/servo/pull/44785), [#44801](https://github.com/servo/servo/pull/44801), [#44767](https://github.com/servo/servo/pull/44767), [#45029](https://github.com/servo/servo/pull/45029)).
+We’ve made more progress towards **accessibility** support, under `--pref accessibility_enabled`.
+This includes the [**name from contents**](https://w3c.github.io/aria/#namefromcontent) algorithm ([@alice](https://github.com/alice), [@delan](https://github.com/delan), [@mrobinson](https://github.com/mrobinson), [#44439](https://github.com/servo/servo/pull/44439)) and several changes towards **building the accessibility tree incrementally** ([@alice](https://github.com/alice), [@delan](https://github.com/delan), [@mrobinson](https://github.com/mrobinson), [#44766](https://github.com/servo/servo/pull/44766), [#45035](https://github.com/servo/servo/pull/45035), [#45207](https://github.com/servo/servo/pull/45207), [#44768](https://github.com/servo/servo/pull/44768), [#44785](https://github.com/servo/servo/pull/44785), [#44801](https://github.com/servo/servo/pull/44801), [#44767](https://github.com/servo/servo/pull/44767), [#45029](https://github.com/servo/servo/pull/45029)).
 The latter is critical for performance in real-world web content.
 
 We’re now working on **SharedWorker** and **ServiceWorker**, under `--pref dom­_sharedworker­_enabled` and `--pref dom­_serviceworker­_enabled` respectively.

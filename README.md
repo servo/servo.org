@@ -36,23 +36,47 @@ The suggested workflow for efficiently triaging commits is as follows:
 
 **Note that the list of nightly builds is cached in tools/runs.json, so if it exists, you will need to delete it to fetch an updated list.**
 
-- [Fetch pull request details](#how-to-list-this-years-pull-request-contributors) for the **last two months** (`2025-01 2025-02`), then [list commits that landed each nightly](#how-to-list-commits-that-landed-in-each-nightly) for **last month** (`/^>>> 2025-02-/,/^>>> 2025-03-/!d`):
+[Fetch pull request details](#how-to-list-this-years-pull-request-contributors) for the **last two months** (`2025-01 2025-02`):
 
 ```
-$ rm tools/runs.json  # Optional: clear cached list of nightly builds
+$ rm tools/runs.json  # New month? Clear the cached list of nightly builds
 $ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-2025-02.json
+```
+
+Generate **commits.txt** by [listing commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly) for **last month** (`/^>>> 2025-02-/,/^>>> 2025-03-/!d`):
+
+```
 $ tools/list-commits-by-nightly.sh /path/to/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
 ```
 
-- Open commits.txt — for the best ergonomics, set the language mode to **Diff**, then **Fold All**
-- For each commit, read the description below to understand its impact (see [§ Hints for writing about changes](#hints-for-writing-about-changes))
-- For each commit to be excluded from the post, prefix the line with `-`
-- For each commit to be included in the post, prefix the line with `+` then:
+Open **commits.txt**.
+For the best ergonomics, set the language mode to **Diff**, then **Fold All**.
+
+Find any commits where the authors are still listed with an email address (you can do a regex search for `@[^,]+@[^,]+`).
+For each of those, open the pull request, and note their GitHub handle in **tools/authors.tsv** by adding a line of the form `<GitHub handle>\t<email address>`.
+
+Regenerate **commits.txt** with the corrected authors:
+
+```
+$ tools/list-commits-by-nightly.sh /path/to/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
+```
+
+**NOTE:** if you’ve already started triaging commits, the command above will blow away your work.
+Save the corrected version to a different file, then use the **--update-commit-data** option in [commit-triage](https://github.com/jdm/commit-triage) to merge the corrected authors into your commits.txt.
+
+For each commit:
+
+- Read the description below to understand its impact (see [§ Hints for writing about changes](#hints-for-writing-about-changes))
+- To exclude the commit from the post, prefix the line with `-`
+- To include the commit in the post, prefix the line with `+` then:
     - Add a line immediately below of the form `    one or more tags` (four spaces, then space-separated tags)
     - To write some notes or additional context, append `; your notes` to that new tags line — be sure to include enough context to write about the change without the hints and description, because those will not be visible after the next step
+
+Old workflow, pre-[commit-triage](https://github.com/jdm/commit-triage):
+
 - Generate the outline: `tools/generate-outline.sh commits.txt > outline.txt`
 - Open outline.txt — for the best ergonomics, set the language mode to **Diff**
-- For each commit, write about it in the blog post, then change the leading `+` to `-`
+- For each commit, write about it in the blog post, then change the leading `+` to `.`
 - When none of the lines start with `+`, you’re done!
 
 **TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time. Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
@@ -433,11 +457,14 @@ dataRows
 
 ## How to calculate new contributors
 
-Update your clone of Servo’s main repo, and replace the gitmailmap(5) with our own table for mapping GitHub handles:
+Before following the steps below, make sure your **tools/authors.tsv** and **commits.txt** have correct GitHub handles for all authors per [§ Writing about commits](#writing-about-commits).
+
+Update your clone of Servo’s main repo, and replace the gitmailmap(5) with our own table for mapping GitHub handles, derived from **tools/authors.tsv** and all of the **@users.noreply.github.com** email addresses in Servo’s git history:
 
 ```sh
 $ git -C /path/to/servo fetch origin
-$ cp servo.mailmap /path/to/servo/.mailmap
+$ < tools/authors.tsv sed -E 's/(.*)\t(.*)/@\1 <\2>/' > /path/to/servo/.mailmap
+$ git -C /path/to/servo log --format=\%aE origin/main | rg --pcre2 '.*@users[.]noreply[.]github[.]com$' | sed -E 's/^([0-9]+[+])?([^@]+)@.*$/@\2 <&>/' | sort -u >> /path/to/servo/.mailmap
 ```
 
 Run this in DevTools against [commit-triage](https://github.com/jdm/commit-triage):
@@ -456,7 +483,7 @@ Now compute the first-time authors, given a “cutoff” commit beyond which any
 
 ```sh
 $ cutoff_commit=v0.2.0
-$ < this-month-authors.txt while read -r author; do tools/is-new-contributor.sh /path/to/servo tools/git-log-authors.txt "$author" "$cutoff_commit"; done
+$ < this-month-authors.txt while read -r author; do tools/is-new-contributor.sh /path/to/servo tools/git-log-authors.txt "$author" "$cutoff_commit"; done | tee first-time-authors.txt
 ```
 
 ## Triaging commits in nightlies for monthly updates

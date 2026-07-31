@@ -24,13 +24,16 @@ printf '%s\t%s\n' "$hash" "$rest"
 
 # equivalent to `git merge-base --is-ancestor "$(git merge-base "$cutoff_commit" origin/main)" "$hash"`
 if git -C "$servo_repo_path" log -n 1 "$cutoff_commit".."$hash" | fgrep -q ''; then
-    echo 'first-time author!'
+    printf '>>> %s is a first-time author!\n' "$author_to_find"
+    # print the primary author’s “github display name (@githubHandle)”.
+    # this may not be the `$author_to_find`, because they may be a coauthor.
+    printf '>>> suggested credit for %s (only correct if primary author): ' "$author_to_find"
+    git -C "$servo_repo_path" log -n 1 "$cutoff_commit".."$hash" --no-mailmap --format='%an (%aN)'
 else
-    echo 'not a first-time author'
+    printf '>>> %s is not a first-time author\n' "$author_to_find"
 fi
 
-# print the author’s “github display name (@githubHandle)”
-git -C "$servo_repo_path" log -n 1 "$cutoff_commit".."$hash" --no-mailmap --format='%an (%aN)'
+# the commands below should have no output if `$author_to_find` is not a first-time author.
 # print the usual git-log(1) output, header only, using the author’s github display name
 git -C "$servo_repo_path" log -n 1 "$cutoff_commit".."$hash" --no-mailmap --format=short
 # print the usual git-log(1) output, in full, using the author’s @githubHandle
