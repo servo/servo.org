@@ -340,7 +340,7 @@ https://github.com/servo/servo/pull/46166	(@kunalmohan, #46166)	script: Pass &mu
     # Testing: Existing tests should cover this functionality
     # Fixes: #45963 
     # 
-https://github.com/servo/servo/pull/46156	(@averyrudelphe@gmail.com, #46156)	script: Migrate `dom/media` to `&mut JSContext` (#46156)
+https://github.com/servo/servo/pull/46156	(@lumiscosity, #46156)	script: Migrate `dom/media` to `&mut JSContext` (#46156)
     ^ commit e334cb9f2761788031caf35d6b0cf428325bac80
     # Mostly trivial thanks to changes which already landed.
     # 
@@ -1853,7 +1853,7 @@ https://github.com/servo/servo/pull/46164	(@veyndan, #46164)	android: Convert na
     # 
     # Testing: There are no automated tests for Android.
     # Fixes: Part of #45715.
-https://github.com/servo/servo/pull/46181	(@dDostalker@foxmail.com, @mrobinson, #46181)	mach: Add necessary space between command-line arguments `windows.py` and handle GStreamer failed installation (#46181)
+https://github.com/servo/servo/pull/46181	(@dDostalker, @mrobinson, #46181)	mach: Add necessary space between command-line arguments `windows.py` and handle GStreamer failed installation (#46181)
     ^ commit 99f114d118d39c9c9598541dbbbca1089db47b72
     # In `windows.py` there was no space between `....msi"` and `TARGETDIR`; and instead they were joined into a single string. `msiexec` treats this entire string as the path to the MSI file and attempts to open it. At the same time, the issue where the "is gstreamer installed" check only looked for `ffi-7.dll` (the runtime), preventing the installation of the devel package if the runtime package was already present—has been fixed.
     # 
@@ -1971,7 +1971,7 @@ https://github.com/servo/servo/pull/46198	(@jschwe, @mukilan, #46198)	mach: Fix 
     # Testing: mach itself is not covered by automated tests 
     # Fixes: #35316
     # 
-https://github.com/servo/servo/pull/46254	(@averyrudelphe@gmail.com, #46254)	script: Migrate `dom/webvtt` to `&mut JSContext` (#46254)
+https://github.com/servo/servo/pull/46254	(@lumiscosity, #46254)	script: Migrate `dom/webvtt` to `&mut JSContext` (#46254)
     ^ commit 2947819ecbba89906b2e76b428c8fef782adff11
     # Spotted these while working on `dom/media`. Comes with the nice bonus of cleaning up the rest of the media element!
     # 
@@ -1979,7 +1979,7 @@ https://github.com/servo/servo/pull/46254	(@averyrudelphe@gmail.com, #46254)	scr
     # Fixes: Part of #40600.
     # 
 >>> 2026-07-05T00:00:51Z
-https://github.com/servo/servo/pull/46256	(@umutcevdetkocak@gmail.com, #46256)	Update stylo (enable scrollbar-color/scrollbar-width behind a pref for the servo engine) (#46256)
+https://github.com/servo/servo/pull/46256	(@UMCEKO, #46256)	Update stylo (enable scrollbar-color/scrollbar-width behind a pref for the servo engine) (#46256)
     ^ commit 77c9f634c59c9f4f6a2e9c734cfd3ad6828cd6c4
     # Points the stylo dependency at servo/stylo#413, which gates `scrollbar-color` and `scrollbar-width` behind the `layout.unimplemented` pref for the servo engine. The pref is disabled in Servo, so no behavior change is expected. This PR exists to let CI validate the stylo change; it will be repointed to stylo main once servo/stylo#413 merges.
     # 
@@ -2075,26 +2075,26 @@ https://github.com/servo/servo/pull/46265	(@TimvdLippe, #46265)	script: Do not c
     # Testing: adds a new crashtest
     # Fixes #46235
     # 
-https://github.com/servo/servo/pull/46267	(@averyrudelphe@gmail.com, #46267)	script: JSContextify `get_cssom_stylesheet` (#46267)
+https://github.com/servo/servo/pull/46267	(@lumiscosity, #46267)	script: JSContextify `get_cssom_stylesheet` (#46267)
     ^ commit b65b17c75338c90084421e9c9ee2d052e8d34c13
     # Started out as cleaning up HTMLLinkElement and HTMLStyleElement, but propagated waaay further than I was expecting. Let me know if I should try to split this further.
     # 
     # Testing: Compilation.
     # Fixes: Part of #40600.
     # 
-https://github.com/servo/servo/pull/46268	(@averyrudelphe@gmail.com, #46268)	script: Migrate `dom/debugger` to `&mut JSContext` (#46268)
+https://github.com/servo/servo/pull/46268	(@lumiscosity, #46268)	script: Migrate `dom/debugger` to `&mut JSContext` (#46268)
     ^ commit 7d67364389e93aab56455c247f34ad546876a64a
     # Trivial thanks to prior work - just migrating constructors.
     # 
     # Testing: Compilation.
     # Fixes: Part of #40600.
-https://github.com/servo/servo/pull/46269	(@averyrudelphe@gmail.com, #46269)	script: Clean up and fully migrate `dom/geometry` to `&mut JSContext` (#46269)
+https://github.com/servo/servo/pull/46269	(@lumiscosity, #46269)	script: Clean up and fully migrate `dom/geometry` to `&mut JSContext` (#46269)
     ^ commit 794e1b44e2366f86cd78167b0c1b37060be28ff5
     # This was already mostly done. `cx` is also moved to the start of the function signature for code style compliance, which is 90% of this PR...
     # 
     # Testing: Compilation.
     # Fixes: Part of #40600.
-https://github.com/servo/servo/pull/46270	(@averyrudelphe@gmail.com, #46270)	script: JSContextify `dom/node/nodelist.rs` (#46270)
+https://github.com/servo/servo/pull/46270	(@lumiscosity, #46270)	script: JSContextify `dom/node/nodelist.rs` (#46270)
     ^ commit ef31db48444f320a43a29dadf8d7391519f6c360
     # Pretty big changelist on this one. Had to tighten some bounds on MutationObserver related things.
     # 
@@ -2131,14 +2131,14 @@ https://github.com/servo/servo/pull/46276	(@cychronex-labs, #46276)	CI: Install 
     # Testing: The github CI actions skipped many tests including Bootstrap dependencies (probably because it ran in self hosted system?). So I tested it on a forked repo and shellcheck warning does not exist
     # 
     # Fixes: #46236 
-https://github.com/servo/servo/pull/46284	(@averyrudelphe@gmail.com, #46284)	script: Migrate `dom/workers` and `dom/permissions` to `&mut JSContext` (#46284)
+https://github.com/servo/servo/pull/46284	(@lumiscosity, #46284)	script: Migrate `dom/workers` and `dom/permissions` to `&mut JSContext` (#46284)
     ^ commit 72aeda382819c10d83884373a5ad8a18abe5a803
     # Not actually 100% done - performance stuff is still passing CanGc, but I'm splitting it into another PR to keep this somewhat reasonably sized.
     # 
     # Testing: Compilation.
     # Fixes: Part of #40600.
     # 
-https://github.com/servo/servo/pull/46285	(@averyrudelphe@gmail.com, #46285)	script: Migrate `dom/document` to `&mut JSContext` (#46285)
+https://github.com/servo/servo/pull/46285	(@lumiscosity, #46285)	script: Migrate `dom/document` to `&mut JSContext` (#46285)
     ^ commit 3c70e4e208802c9cced15c0446727aede6a2efe5
     # Fairly simple thanks to prior work yet again.
     # 
@@ -2421,7 +2421,7 @@ https://github.com/servo/servo/pull/46158	(@jschwe, #46158)	android: Add CI smok
     # Testing:  This adds a CI test. [mach try android](https://github.com/jschwe/servo/actions/runs/28521703322/job/84547350717)
     # Fixes: #40905
     # Fixes: #35255
-https://github.com/servo/servo/pull/42372	(@daniel@meta-sys.info, #42372)	mach: Remove support for installing dependencies via Chocolately (#42372)
+https://github.com/servo/servo/pull/42372	(@dpaoliello, #42372)	mach: Remove support for installing dependencies via Chocolately (#42372)
     ^ commit 3d644f0f9490f17a10e0a42faa91c8d04cb183f2
     # Support for using winget instead of Chocolatey was added in #32836. The support seems to be working well and removes one dependency for almost all Windows developers.
     # 
@@ -2854,7 +2854,7 @@ https://github.com/servo/servo/pull/46323	(@dependabot[bot], @dependabot[bot], #
     # </details>
     # <br />
     # 
-https://github.com/servo/servo/pull/46318	(@averyrudelphe@gmail.com, #46318)	script: Migrate `dom/performance` to `&mut JSContext` (#46318)
+https://github.com/servo/servo/pull/46318	(@lumiscosity, #46318)	script: Migrate `dom/performance` to `&mut JSContext` (#46318)
     ^ commit 0f28c563dacd769fd46e866c21d1ec99686a65ce
     # Looks like my hunch about this one ballooning out of control was correct. Very correct. Ouch.
     # 
@@ -4557,7 +4557,7 @@ https://github.com/servo/servo/pull/46178	(@sagudev, #46178)	webgpu: Update to w
     # Testing: Covered by WebGPU CTS
     # 
 >>> 2026-07-11T23:29:16Z
-https://github.com/servo/servo/pull/45405	(@mu.mostafa98@gmail.com, @mu-mostafa98@gmail.com, @jdm, #45405)	Script: Enable SVG presentation attributes with updated stylo dependency (#45405)
+https://github.com/servo/servo/pull/45405	(@mu-mostafa98, @mu-mostafa98, @jdm, #45405)	Script: Enable SVG presentation attributes with updated stylo dependency (#45405)
     ^ commit 65292aae90ca4c97b8756494d02cc7ff76c68926
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     #   - Add presentation attribute mappings for svg properties.
@@ -5367,7 +5367,7 @@ https://github.com/servo/servo/pull/46462	(@Taym95, #46462)	script: Require root
     # Testing: No new tests covered by ./mach build --use-crown.
     # 
     # Fixes: #44646
-https://github.com/servo/servo/pull/46478	(@run3email@gmail.com, #46478)	webcrypto: Add error messages for `webcrypto` crate. (#46478)
+https://github.com/servo/servo/pull/46478	(@eachra-bawn, #46478)	webcrypto: Add error messages for `webcrypto` crate. (#46478)
     ^ commit 888101ded57a1f08411b55b68cb9d8e1b797ad49
     # Related issue: #40756
     # 
@@ -5798,7 +5798,7 @@ https://github.com/servo/servo/pull/42311	(@sagudev, #42311)	script: WeakReferen
     # Testing: Should be covered by WPT tests
     # Fixes: #42278 
     # 
-https://github.com/servo/servo/pull/46069	(@shubhamg13.work@gmail.com, #46069)	script: Centralize `get_buffer_source_copy/slice` logic (#46069)
+https://github.com/servo/servo/pull/46069	(@shubhamg13, #46069)	script: Centralize `get_buffer_source_copy/slice` logic (#46069)
     ^ commit 4bde37fd9848edfb02bbdbbe1d03fcec27f31fad
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # De-duplicate the logic for `get_buffer_source_copy`
@@ -5872,7 +5872,7 @@ https://github.com/servo/servo/pull/46509	(@simonwuelker, #46509)	script: Popula
     # 
     # Testing: New tests start to pass
     # Fixes https://github.com/servo/servo/issues/46434
-https://github.com/servo/servo/pull/46179	(@shubhamg13.work@gmail.com, #46179)	script: Align `lookup_custom_element_definition` according to specs (#46179)
+https://github.com/servo/servo/pull/46179	(@shubhamg13, #46179)	script: Align `lookup_custom_element_definition` according to specs (#46179)
     ^ commit c8d67da1b0502fb4548962d24c35dbecde4afeaa
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Align `lookup_custom_element_definition` according to specs
@@ -6270,7 +6270,7 @@ https://github.com/servo/servo/pull/46505	(@Loirooriol, @mrobinson, #46505)	layo
     # 
     # Testing: 4 flexbox tests pass. Also adding a basic CSS2 test.
     # 
-https://github.com/servo/servo/pull/46552	(@shubhamg13.work@gmail.com, #46552)	script: Remove duplicate `LargestContentfulPaint` in `Bindings.conf` (#46552)
+https://github.com/servo/servo/pull/46552	(@shubhamg13, #46552)	script: Remove duplicate `LargestContentfulPaint` in `Bindings.conf` (#46552)
     ^ commit 9178db9b89bd1327933ed4bae0a36dd99037e256
     # Remove duplicate `LargestContentfulPaint` in `Bindings.conf`
     # 
@@ -6352,7 +6352,7 @@ https://github.com/servo/servo/pull/46537	(@simonwuelker, #46537)	script: Initia
     # I wasn't sure how to approach this in https://github.com/servo/servo/pull/46509 but it turns out the necessary code already exists, so it is quite trivial. Changes to these descriptors do not yet reflect in the actual @font-face rule.
     # 
     # Testing: This change adds a test
-https://github.com/servo/servo/pull/46550	(@shubhamg13.work@gmail.com, #46550)	script: Use `as_slice_safe` for `get_buffer_source_slice` (#46550)
+https://github.com/servo/servo/pull/46550	(@shubhamg13, #46550)	script: Use `as_slice_safe` for `get_buffer_source_slice` (#46550)
     ^ commit 0461b3d056b60be6ceacd4d69a1b25923d0470de
     # Incorporated changes after https://github.com/servo/mozjs/pull/777
     # 
@@ -6808,7 +6808,7 @@ https://github.com/servo/servo/pull/46572	(@dependabot[bot], @dependabot[bot], #
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46558	(@mu.mostafa98@gmail.com, #46558)	Script: Create DOM element types for SVG shapes, gradients, and structural elements (#46558)
+https://github.com/servo/servo/pull/46558	(@mu-mostafa98, #46558)	Script: Create DOM element types for SVG shapes, gradients, and structural elements (#46558)
     ^ commit c7019855ee7aef2550e8c6b9ffcfb61afe8542cb
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -6987,7 +6987,7 @@ https://github.com/servo/servo/pull/46588	(@mrobinson, #46588)	webxr: Properly d
     # 
     # Testing: This should fix an intermittent crashes in WebXR tests.
     # 
-https://github.com/servo/servo/pull/46208	(@daniel@meta-sys.info, @jschwe, #46208)	Upgrade to WiX 7 (#46208)
+https://github.com/servo/servo/pull/46208	(@dpaoliello, @jschwe, #46208)	Upgrade to WiX 7 (#46208)
     ^ commit 185f0b7fbadef44a83b422413c125e9694141d23
     # [WiX v3 is out of support](https://www.firegiant.com/blog/2025/2/6/wix-v3-and-wix-v4-are-no-longer-in-community-support/), so we need to update the version used to generate Servo's installer.
     # 
@@ -9059,7 +9059,7 @@ https://github.com/servo/servo/pull/46746	(@veyndan, #46746)	android: Move plugi
     # I forgot to also migrate these in #46727.
     # 
     # Testing: There are no automated tests for Android.
-https://github.com/servo/servo/pull/46739	(@apoorva@zulip.com, #46739)	script: Avoid uncollectible cycles from IntersectionObserver.root (#46739)
+https://github.com/servo/servo/pull/46739	(@apoorvapendse, #46739)	script: Avoid uncollectible cycles from IntersectionObserver.root (#46739)
     ^ commit 637289c68609b0d6f451c729ad7f80858cc7d6a6
     # Use an unrooted must_root enum with Dom<T> variants instead of the web IDL binding union for the root field. Dom edges are JSTraceable and traced with the observer, rather than DomRoot values that get registered in STACK_ROOTS and can leak via uncollectible cycles.
     # 
@@ -9470,7 +9470,7 @@ https://github.com/servo/servo/pull/46780	(@servo-wpt-sync, #46780)	Sync WPT wit
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 26-07-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/46770	(@yasha4658@gmail.com, #46770)	fix Borrow Hazard in ResizeObserver::broadcast_active_resize_observations (#46770)
+https://github.com/servo/servo/pull/46770	(@agrawalx, #46770)	fix Borrow Hazard in ResizeObserver::broadcast_active_resize_observations (#46770)
     ^ commit 02b5c62c9b741a4d73e09304dbdc897fedccae99
     # Fix: moved interior mutability into `ResizeObservation` fields so both traversals use `.borrow()` instead of `.borrow_mut()`, 
     # 
@@ -10582,7 +10582,7 @@ https://github.com/servo/servo/pull/46866	(@SimonSapin, #46866)	script: Use `is_
     # 
     # Fixes: https://github.com/servo/servo/issues/46790
     # Testing: adding a new crashtest to WPT, manually checked to crash before the code change
-https://github.com/servo/servo/pull/46868	(@Ms2ger@gmail.com, #46868)	script: Remove Element::set_attribute_from_parser's unused prefix argument (#46868)
+https://github.com/servo/servo/pull/46868	(@Ms2ger, #46868)	script: Remove Element::set_attribute_from_parser's unused prefix argument (#46868)
     ^ commit 13f585c51e8913d78cbb5e0675ab87e7c76d0f12
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # All callers pass `None` for this argument.
@@ -10647,7 +10647,7 @@ https://github.com/servo/servo/pull/46889	(@SimonSapin, @mrobinson, #46889)	Skip
     # 
     # Testing: expecting no behavior change and no change in WPT test results
     # 
-https://github.com/servo/servo/pull/46860	(@klu93@seas.upenn.edu, @klu@dexlabs.xyz, #46860)	dom: Follow the specification more closely when determining form submitter element action (#46860)
+https://github.com/servo/servo/pull/46860	(@kevlu93, @kevlu93, #46860)	dom: Follow the specification more closely when determining form submitter element action (#46860)
     ^ commit a6a78d74c5c8d175216941066277885c727e4c4e
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Aligns the [`action` function](https://github.com/servo/servo/blob/main/components/script/dom/html/htmlformelement.rs#L1578) of `FormSubmitterElement` with the [HTML spec](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#concept-fs-action)
@@ -10872,7 +10872,7 @@ https://github.com/servo/servo/pull/46904	(@dependabot[bot], @dependabot[bot], #
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46828	(@shubhamg13.work@gmail.com, #46828)	script: Expose `id` to `LargestContentfulPaint` (#46828)
+https://github.com/servo/servo/pull/46828	(@shubhamg13, #46828)	script: Expose `id` to `LargestContentfulPaint` (#46828)
     ^ commit 86465d626e3404147ef80e9df548602ee1eb06ec
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -10970,7 +10970,7 @@ https://github.com/servo/servo/pull/46863	(@janeoa, #46863)	canvas: Box the enum
     # Testing: I have no tests
     # 
     # UPD: comments pointed out that the change might be unnecessary, so I documented the warning in the code
-https://github.com/servo/servo/pull/46763	(@spe0678@gmail.com, #46763)	script: Borrow hazard in Sanitizer::AllowElement (#46763)
+https://github.com/servo/servo/pull/46763	(@sungmen, #46763)	script: Borrow hazard in Sanitizer::AllowElement (#46763)
     ^ commit 420afe27ec3976bf679ac4621a7aa4126d08ed2d
     # restrict mutable borrow scope exclude Console::internal_warn.
     # 

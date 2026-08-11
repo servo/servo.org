@@ -52,7 +52,7 @@ $ tools/list-commits-by-nightly.sh /path/to/servo --pulls-json-path=tools/pulls-
 Open **commits.txt**.
 For the best ergonomics, set the language mode to **Diff**, then **Fold All**.
 
-Find any commits where the authors are still listed with an email address (you can do a regex search for `@[^,]+@[^,]+`).
+Find any commits where the authors are still listed with an email address (you can do a regex search for `@[^,\n]+@[^,\n]+`).
 For each of those, open the pull request, and note their GitHub handle in **tools/authors.tsv** by adding a line of the form `<GitHub handle>\t<email address>`.
 
 Regenerate **commits.txt** with the corrected authors:
