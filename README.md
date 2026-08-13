@@ -41,13 +41,12 @@ The suggested workflow for efficiently triaging commits is as follows:
 ```
 $ rm tools/runs.json  # New month? Clear the cached list of nightly builds
 $ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-2025-02.json
+$ mkdir -p cache
 ```
 
 Generate **commits.txt** by [listing commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly) for **last month** (`/^>>> 2025-02-/,/^>>> 2025-03-/!d`):
 
-```
-$ tools/list-commits-by-nightly.sh /path/to/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
-```
+`$ tools/list-commits-by-nightly.sh /path/to/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json --git-show-output-cache-path=cache 2>&1 | tee >(rg '^>>> ' > /dev/stderr) | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt`
 
 Open **commits.txt**.
 For the best ergonomics, set the language mode to **Diff**, then **Fold All**.
@@ -57,31 +56,29 @@ For each of those, open the pull request, and note their GitHub handle in **tool
 
 Regenerate **commits.txt** with the corrected authors:
 
-```
-$ tools/list-commits-by-nightly.sh /path/to/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json 2>&1 | tee /dev/stderr | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt
-```
+`$ tools/list-commits-by-nightly.sh /path/to/servo --pulls-json-path=tools/pulls-2025-01-2025-02.json --git-show-output-cache-path=cache 2>&1 | tee >(rg '^>>> ' > /dev/stderr) | sed '/^>>> 2025-02-/,/^>>> 2025-03-/!d' > commits.txt`
 
 **NOTE:** if you’ve already started triaging commits, the command above will blow away your work.
 Save the corrected version to a different file, then use the **--update-commit-data** option in [commit-triage](https://github.com/jdm/commit-triage) to merge the corrected authors into your commits.txt.
 
-For each commit:
+<details><summary>Old workflow, pre-<a href="https://github.com/jdm/commit-triage">commit-triage</a></summary>
 
 - Read the description below to understand its impact (see [§ Hints for writing about changes](#hints-for-writing-about-changes))
 - To exclude the commit from the post, prefix the line with `-`
 - To include the commit in the post, prefix the line with `+` then:
     - Add a line immediately below of the form `    one or more tags` (four spaces, then space-separated tags)
     - To write some notes or additional context, append `; your notes` to that new tags line — be sure to include enough context to write about the change without the hints and description, because those will not be visible after the next step
-
-Old workflow, pre-[commit-triage](https://github.com/jdm/commit-triage):
-
 - Generate the outline: `tools/generate-outline.sh commits.txt > outline.txt`
 - Open outline.txt — for the best ergonomics, set the language mode to **Diff**
 - For each commit, write about it in the blog post, then change the leading `+` to `.`
 - When none of the lines start with `+`, you’re done!
+</details>
 
-**TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time. Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
+Run [commit-triage](https://github.com/jdm/commit-triage) and go to <http://localhost:8008>, and use the web UI to take notes about the commits:
 
-We’re working on [a new tool](https://github.com/jdm/commit-triage) that will make the triage process even more efficient.
+`$ cargo run -- --sort-by-author --sort-by-notes --sort-by-tags --web-server-port 8008 --git-show-output-cache-path /path/to/servo.org/cache /path/to/servo.org/commits.txt`
+
+**TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time (`--sort-by-author` in commit-triage). Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
 
 ## How to start a local dev server
 
