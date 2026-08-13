@@ -41,7 +41,7 @@ The suggested workflow for efficiently triaging commits is as follows:
 ```
 $ rm tools/runs.json  # New month? Clear the cached list of nightly builds
 $ tools/list-pull-requests.sh servo/servo 2025-01 2025-02 > tools/pulls-2025-01-2025-02.json
-$ mkdir -p cache
+$ mkdir -p cache answers
 ```
 
 Generate **commits.txt** by [listing commits that landed in each nightly](#how-to-list-commits-that-landed-in-each-nightly) for **last month** (`/^>>> 2025-02-/,/^>>> 2025-03-/!d`):
@@ -74,9 +74,13 @@ Save the corrected version to a different file, then use the **--update-commit-d
 - When none of the lines start with `+`, you’re done!
 </details>
 
+Fetch the Highfive answers for labelled pull requests:
+
+`$ tools/list-commits-by-nightly.sh /path/to/servo --pull-numbers-only | tools/filter-has-monthly-update-label.sh tools/pulls-2025-01-2025-02.json | while IFS=$'\t' read -r pull_number url; do tools/get-monthly-update-answer.sh "$url" > "answers/$pull_number"; done`
+
 Run [commit-triage](https://github.com/jdm/commit-triage) and go to <http://localhost:8008>, and use the web UI to take notes about the commits:
 
-`$ cargo run -- --sort-by-author --sort-by-notes --sort-by-tags --web-server-port 8008 --git-show-output-cache-path /path/to/servo.org/cache /path/to/servo.org/commits.txt`
+`$ cargo run -- --sort-by-author --sort-by-notes --sort-by-tags --web-server-port 8008 --git-show-output-cache-path /path/to/servo.org/cache --highfive-answers-path /path/to/servo.org/answers /path/to/servo.org/commits.txt`
 
 **TIP:** if you’re faced with hundreds of commits and it’s a real slog, try triaging the commits of one author at a time (`--sort-by-author` in commit-triage). Each author probably only works on a few things each month, so it’s a lot easier to keep the context of their work in your head.
 
