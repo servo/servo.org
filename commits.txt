@@ -1899,12 +1899,14 @@ https://github.com/servo/servo/pull/46238	(@Narfinger, #46238)	script: Remove cl
     # 
     # Testing: This does not change functionality just performance characteristics.
     # 
-https://github.com/servo/servo/pull/46230	(@simonwuelker, #46230)	script: Update `<select>` shadow tree after call to setValue (#46230)
++https://github.com/servo/servo/pull/46230	(@simonwuelker, #46230)	script: Update `<select>` shadow tree after call to setValue (#46230)
+    dom; fix failure to render new value after set value() on HTMLSelectElement
     ^ commit 30e67d34559a583b5d86b539b4250e7e908a76e0
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Testing: This change adds a test
     # Fixes https://github.com/servo/servo/issues/46212
-https://github.com/servo/servo/pull/45873	(@sagudev, #45873)	webgpu: Support `GPUExternalTexture` (#45873)
++https://github.com/servo/servo/pull/45873	(@sagudev, #45873)	webgpu: Support `GPUExternalTexture` (#45873)
+    dom; impl GPUExternalTexture and importExternalTexture() on GPUDevice, on Windows and macOS (experimental --pref dom_webgpu_enabled)
     ^ commit da153beff5a170686be652a5a8fc18328debc4a6
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # The idea behind `GPUExternalTexture` is that one could use texture from decoder in webgpu (and make it zerocopy). We do not have any texture sharing mechanism in servo yet and so this PR does this using CPU copies. We use `get_current_frame_data` to obtain Snapshot which we then upload to wgpu as normal texture (`PlanarTexture` in the code and that is per HTMLVideoElement so we can just update instead of creating new whole texture - something similar is done in FF) which is then imported as external texture in wgpu. Unfortunately external textures only work on DirectX12 (Windows) and Metal (Mac) so on vulkan (Linux) we throw `Unsupported` dom exception. Nevertheless many tests now pass because they do not fail at missing `GPUExternalTexture` or `importExternalTexture`.
@@ -3022,7 +3024,8 @@ https://github.com/servo/servo/pull/46352	(@jdm, #46352)	script: Throw meaningfu
     # Testing: No testing policy for the content of error messages.
     # Part of #40756
 >>> 2026-07-08T23:52:38Z
-https://github.com/servo/servo/pull/46129	(@Loirooriol, #46129)	Upgrade Stylo to 2026-07-01 (#46129)
++https://github.com/servo/servo/pull/46129	(@Loirooriol, #46129)	Upgrade Stylo to 2026-07-01 (#46129)
+    wip perf style; ‘alpha()’ (experimental --pref layout_css_alpha_color_function_enabled), ‘progress()’ (experimental --pref layout_css_progress_function_enabled), ‘ellipse()’ values ‘{closest,farthest}-corner’ are now experimental --pref layout_css_ellipse_corners_enabled (previously stable) due to spec uncertainty, more conformant handling of ‘rgb(none)’ and other values with missing components, more conformant extended ‘attr()’ (experimental --pref layout_css_attr_enabled), fixed bugs in custom properties, much faster text rendering (with same text and different ‘font-size’, and with variable fonts experimental --pref layout_variable_fonts_enabled)
     ^ commit 54b8a4222096bbc8a96ac9ad7af3bd2513edf2aa
     ^ /!\ contains servoshell changes! does it affect the user experience?
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -4523,7 +4526,8 @@ https://github.com/servo/servo/pull/46430	(@yezhizhen, #46430)	script: Reduce un
     # Testing: Existing tests.
     # 
     # Part of https://github.com/servo/servo/issues/34464
-https://github.com/servo/servo/pull/46407	(@Loirooriol, @mrobinson, #46407)	layout: Properly account for nested PBM of ancestor inline boxes for floats inside inline boxes (#46407)
++https://github.com/servo/servo/pull/46407	(@Loirooriol, @mrobinson, #46407)	layout: Properly account for nested PBM of ancestor inline boxes for floats inside inline boxes (#46407)
+    layout; fix bugs in ‘float’ rendering
     ^ commit c51ff67c07f0b8981546cb70b7484c760760cb99
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # When laying out a float inside an inline formatting context, we still don't know the inline-axis padding/border/margin of its inline box ancestors. Therefore, it gets a tentative position, which needs to be adjusted later.
@@ -4535,7 +4539,8 @@ https://github.com/servo/servo/pull/46407	(@Loirooriol, @mrobinson, #46407)	layo
     # Testing: Adding 2 tests
     # Fixes: #46350
     # 
-https://github.com/servo/servo/pull/45492	(@Psychpsyo, #45492)	layout: add support for box-decoration-break (#45492)
++https://github.com/servo/servo/pull/45492	(@Psychpsyo, #45492)	layout: add support for box-decoration-break (#45492)
+    layout; impl ‘box-decoration-break’ (‘clone’ plus the default ‘slice’), except for bidi-related fragmentation
     ^ commit 4ae4f6b8d493323644ae1e2fa67b3d06ff42187a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This adds initial handling for the `box-decoration-break` CSS property.
@@ -5420,7 +5425,8 @@ https://github.com/servo/servo/pull/46461	(@Gae24, #46461)	script: Bump to mozjs
     # 
     # Testing: It compiles
     # 
-https://github.com/servo/servo/pull/46500	(@Loirooriol, @mrobinson, #46500)	layout: Account for nested inline boxes when adjusting floats in RTL inline layout (#46500)
++https://github.com/servo/servo/pull/46500	(@Loirooriol, @mrobinson, #46500)	layout: Account for nested inline boxes when adjusting floats in RTL inline layout (#46500)
+    layout; fix bugs in ‘float’ rendering
     ^ commit 313b6d5ecc113b08010ce434140db3ca5abcc71c
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Floats are positioned relative to their containing inline formatting context,
@@ -5877,7 +5883,8 @@ https://github.com/servo/servo/pull/46355	(@veyndan, #46355)	android: Remove nee
     # If we for some reason have a third view in the future that takes user input but doesn't handle it itself, it'd be surprising if these were all passed to `ServoView` (as they currently would be).
     # 
     # Testing: There are no automated tests for Android.
-https://github.com/servo/servo/pull/46509	(@simonwuelker, #46509)	script: Populate `document.fonts` with web fonts from CSS (#46509)
++https://github.com/servo/servo/pull/46509	(@simonwuelker, #46509)	script: Populate `document.fonts` with web fonts from CSS (#46509)
+    dom; document.fonts now contains a FontFace for each valid ‘@font-face’
     ^ commit e4a146481f943d3e784605f10ab7a62e094613db
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Previously `document.fonts` only contained font faces explicitly added to it via javascript, but each valid `@font-face` rule should also have an entry here. This fixes intermittency in one test that reads `document.fonts` to wait for web fonts to load, but previously waited on nothing because `document.fonts` was empty.
@@ -5935,7 +5942,8 @@ https://github.com/servo/servo/pull/45703	(@mukilan, @TimvdLippe, @sagudev, #457
     # 
     # Testing: The `try_parser`'s test for the 'full' keyword has been updated. Manually tested in fork that push to main doesn't run the C API job.
     # 
-https://github.com/servo/servo/pull/46539	(@Psychpsyo, #46539)	script: Implement table-related TODO of the delete command (#46539)
++https://github.com/servo/servo/pull/46539	(@Psychpsyo, #46539)	script: Implement table-related TODO of the delete command (#46539)
+    dom; more conformant document.execCommand("delete")
     ^ commit 8cb357041da2bcb12347194e09bab48c9498b5a5
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Takes care of a TODO and gets us a couple associated WPT passes.
@@ -6275,7 +6283,8 @@ https://github.com/servo/servo/pull/46521	(@Narfinger, #46521)	net: Parse proxy 
     # Testing: Tested manually with local proxy server once with auth and once without.
     # Fixes: https://github.com/servo/servo/issues/46507
     # 
-https://github.com/servo/servo/pull/46505	(@Loirooriol, @mrobinson, #46505)	layout: Adjust the static position of abspos inside float in inline layout (#46505)
++https://github.com/servo/servo/pull/46505	(@Loirooriol, @mrobinson, #46505)	layout: Adjust the static position of abspos inside float in inline layout (#46505)
+    layout; fix bugs in ‘float’ rendering
     ^ commit 955cbecf288f9897242051a82a35e255ccea43b9
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # When we decide the position of a float within an inline formatting context, we need to adjust the static position of absolutely positioned elements inside the float.
@@ -6966,7 +6975,8 @@ https://github.com/servo/servo/pull/46585	(@TimvdLippe, #46585)	script: Port Fon
     # Part of #40600
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/45308	(@simonwuelker, #45308)	fonts+layout: Support `font-variant-alternates` (#45308)
++https://github.com/servo/servo/pull/45308	(@simonwuelker, #45308)	fonts+layout: Support `font-variant-alternates` (#45308)
+    layout; impl ‘font-variant-alternates’ and ‘@font-feature-values’ for web fonts on all platforms, as well as local fonts on FreeType platforms only
     ^ commit feaa23c0ae7ed67cee38ed735b6dcddb09ec3eb6
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -7188,7 +7198,8 @@ https://github.com/servo/servo/pull/46587	(@jschwe, @jdm, #46587)	script: Make i
     # Testing: Many new wpt-tests pass, `element-ready-check-containing-iframe.html` changes from FAIL to timeout. [mach try](https://github.com/jschwe/servo/actions/runs/29578113831)
     # Fixes: #45888
     # 
-https://github.com/servo/servo/pull/46383	(@TimvdLippe, #46383)	script: Parse vtt payload for track elements (#46383)
++https://github.com/servo/servo/pull/46383	(@TimvdLippe, #46383)	script: Parse vtt payload for track elements (#46383)
+    dom; parse and load WebVTT text tracks in <track>. exposed via track on HTMLTrackElement, and textTracks on HTMLMediaElement), but no layout yet. test case `data:text/html,<video id=v> <track id=t kind=subtitles src="data:text/vtt;base64,V0VCVlRUCgowCjAwOjAwOjAwLjAwMCAtLT4gMDA6MDA6MTIuMDAwCjx2IFRlc3Q+W1Rlc3RdPC92Pgo="> </video> <script>t.track.mode="hidden"; setTimeout(()=>void alert([t.track.mode,t.readyState,t.track.cues.length,v.textTracks[0]?.cues.length]),500)</script>`
     ^ commit 1123c300b02c1a5cbbde7fc561af4f781033be0b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -7266,7 +7277,8 @@ https://github.com/servo/servo/pull/46620	(@jdm, #46620)	layout: Remove outdated
     # Testing: Pass more WPT tests in `WebCryptoAPI/sign_verify` directory
     # Part-of: #46582
     # 
-https://github.com/servo/servo/pull/46590	(@Loirooriol, @mrobinson, #46590)	layout: Implement block-axis centering for buttons (#46590)
++https://github.com/servo/servo/pull/46590	(@Loirooriol, @mrobinson, #46590)	layout: Implement block-axis centering for buttons (#46590)
+    layout; <button> now centers its contents vertically. test case `data:text/html,<button style=width:9em;height:6em>a`
     ^ commit 5f837eb80b5a7389b96c910c9fd22a8c8f91b2e0
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Mark `<button>` elements and `<input>` that lay out as buttons with a new `FragmentFlags::IS_BUTTON` flag. Then, if they contain a block formatting context, center their contents in the block axis.
@@ -7338,7 +7350,8 @@ https://github.com/servo/servo/pull/46633	(@Gae24, #46633)	script: don't store a
     # 
     # Testing: It compiles
     # 
-https://github.com/servo/servo/pull/46618	(@simonwuelker, #46618)	fonts: Support `font-language-override` (#46618)
++https://github.com/servo/servo/pull/46618	(@simonwuelker, #46618)	fonts: Support `font-language-override` (#46618)
+    dom; impl ‘font-language-override’. test case #47241
     ^ commit b1dafcbdecc5e0d42ef923920ec8d2ca7b81d42d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # 
@@ -7663,7 +7676,8 @@ https://github.com/servo/servo/pull/46656	(@yezhizhen, #46656)	script: Reduce ro
     # 
     # Testing: Just optimization. Covered by linter & automated test.
     # Part of #34464
-https://github.com/servo/servo/pull/46504	(@jdm, #46504)	script: Do not panic when getting contents of detached array buffers. (#46504)
++https://github.com/servo/servo/pull/46504	(@jdm, #46504)	script: Do not panic when getting contents of detached array buffers. (#46504)
+    crash dom; fix crash when accessing detatched ArrayBuffer
     ^ commit 05acee370ae1ab000f54dafce2ce0c517dc8820e
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Updates mozjs to a revision that includes https://github.com/servo/mozjs/pull/780.
@@ -7684,7 +7698,8 @@ https://github.com/servo/servo/pull/46657	(@Narfinger, #46657)	script: Move more
     # 
     # Testing: This is just a refactor so compilation is the test.
     # 
-https://github.com/servo/servo/pull/46640	(@Loirooriol, #46640)	layout: Avoid setting FragmentFlags for HTML elements on pseudo-elements (#46640)
++https://github.com/servo/servo/pull/46640	(@Loirooriol, #46640)	layout: Avoid setting FragmentFlags for HTML elements on pseudo-elements (#46640)
+    layout; fix bugs in ‘::before’ and ‘::after’ rendering
     ^ commit 155ca61937eee241a73b3e9086504db1c764d1be
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # For example, a `::before` originated by a `<button>` was marked with `FragmentFlags::IS_BUTTON`, so its contents were wrongly centered vertically, as if it was another `<button>`.
@@ -9157,7 +9172,8 @@ https://github.com/servo/servo/pull/46747	(@veyndan, #46747)	android: Add back i
     # 
     # Testing: There are no automated tests for Android.
 >>> 2026-07-24T23:27:36Z
-https://github.com/servo/servo/pull/46592	(@nicoburns, #46592)	Implement text-decoration-thickness (#46592)
++https://github.com/servo/servo/pull/46592	(@nicoburns, #46592)	Implement text-decoration-thickness (#46592)
+    layout; impl ‘text-decoration-thickness’
     ^ commit afb9656a386500c409aaaabb4b7799e0f010ef86
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement text-decoration-thickness in Servo.
@@ -10608,7 +10624,8 @@ https://github.com/servo/servo/pull/46839	(@mrobinson, #46839)	layout: Separate 
     # 
     # Fixes: https://github.com/servo/servo/issues/46790
     # Testing: adding a new crashtest to WPT, manually checked to crash before the code change
-https://github.com/servo/servo/pull/46868	(@Ms2ger, #46868)	script: Remove Element::set_attribute_from_parser's unused prefix argument (#46868)
+-https://github.com/servo/servo/pull/46868	(@Ms2ger, #46868)	script: Remove Element::set_attribute_from_parser's unused prefix argument (#46868)
+    ;cleanup; no functional change
     ^ commit 13f585c51e8913d78cbb5e0675ab87e7c76d0f12
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # All callers pass `None` for this argument.
