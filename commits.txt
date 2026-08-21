@@ -265,7 +265,8 @@ https://github.com/servo/servo/pull/45119	(@officialasishkumar, #45119)	script: 
     # automated test suites.
     # Fixes: #44937
     # 
-https://github.com/servo/servo/pull/46128	(@jschwe, #46128)	android: Set AR and RANLIB (#46128)
++https://github.com/servo/servo/pull/46128	(@jschwe, #46128)	android: Set AR and RANLIB (#46128)
+    ports; fix building servoshell for android on macOS
     ^ commit 0e1fe0dfb3776ce3cbe26d7ca77aed456ff86cdb
     # This fixes missing jemalloc symbols when building for android on macos.
     # I'm not sure when this regressed, since building on macos used to work before. 
@@ -274,7 +275,8 @@ https://github.com/servo/servo/pull/46128	(@jschwe, #46128)	android: Set AR and 
     # Testing: We don't build android on macos hosts in CI. But at least this shouldn't regress the linux build.
     # Part of investigating #46115
     # 
-https://github.com/servo/servo/pull/46142	(@jschwe, #46142)	android: Determine default config dir and lower minSdk (#46142)
++https://github.com/servo/servo/pull/46142	(@jschwe, #46142)	android: Determine default config dir and lower minSdk (#46142)
+    servoshell; now runs on android 10+ (sdk 30+), not just android 13+ (sdk 33+). correction: v0.4.0 bumps the minimum sdk version, but before that, servoshell crashed on android <13 anyway
     ^ commit bda37000b2c78ad700256dc1021f2cf613d188f7
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Android 33+ sets the TMPDIR environment variable, but on older versions it's unset. This leads to a crash on older android versions where the fallback is outside the app sandbox (/data/local/tmp). 
@@ -302,7 +304,8 @@ https://github.com/servo/servo/pull/46073	(@shubhamg13, #46073)	script: Define s
     # Part of #40600
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/46139	(@cychronex-labs, #46139)	script: Switch reporting_observer_list to store Dom instead of DomRoot (#46139)
++https://github.com/servo/servo/pull/46139	(@cychronex-labs, #46139)	script: Switch reporting_observer_list to store Dom instead of DomRoot (#46139)
+    perf; reduce GC rooting
     ^ commit 38c789fd59f66b03c546c5a2ce144ee86eaa0978
     # reporting_observer_list now stores Dom instead of DomRoot 
     # 
@@ -901,7 +904,8 @@ https://github.com/servo/servo/pull/46159	(@nicoburns, #46159)	Upgrade to Stylo 
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/45971	(@alice, #45971)	layout: Refactor accessibility tree child node update logic (#45971)
++https://github.com/servo/servo/pull/45971	(@alice, #45971)	layout: Refactor accessibility tree child node update logic (#45971)
+    wip a11y; part of #45578
     ^ commit 28593dc3b33b50f1ce61c7c339eea7af00da8bac
     # - Split basic node creation out of `get_or_create_node()` into `get_or_create_node_with_id()`, which can be called without a DOM node.
     # - Rename `get_children()` to `get_child_ids()` to emphasise that it's not getting actual nodes.
@@ -1882,7 +1886,8 @@ https://github.com/servo/servo/pull/46222	(@jschwe, #46222)	mach: Add debugmozjs
     # Testing: This adds a try parser test covering the change
     # 
     # 
-https://github.com/servo/servo/pull/45798	(@alice, @delan, #45798)	layout: Make accessibility tree an actual tree. (#45798)
++https://github.com/servo/servo/pull/45798	(@alice, @delan, #45798)	layout: Make accessibility tree an actual tree. (#45798)
+    wip a11y; eliminate HashMap lookups when walking accessibility tree (non-experimental --pref accessibility_enabled)
     ^ commit 5b1563ea9c2cb552441f77391abf3bbd2074390e
     # Modify `AccessibilityNode` to have strong references to its children, and a weak reference to its parent.
     # Modify `AccessibilityTree` to have a reference to the root node itself, rather than the root node ID.
@@ -1995,7 +2000,7 @@ https://github.com/servo/servo/pull/46198	(@jschwe, @mukilan, #46198)	mach: Fix 
     # Fixes: Part of #40600.
     # 
 >>> 2026-07-05T00:00:51Z
-https://github.com/servo/servo/pull/46256	(@UMCEKO, #46256)	Update stylo (enable scrollbar-color/scrollbar-width behind a pref for the servo engine) (#46256)
+-https://github.com/servo/servo/pull/46256	(@UMCEKO, #46256)	Update stylo (enable scrollbar-color/scrollbar-width behind a pref for the servo engine) (#46256)
     ^ commit 77c9f634c59c9f4f6a2e9c734cfd3ad6828cd6c4
     # Points the stylo dependency at servo/stylo#413, which gates `scrollbar-color` and `scrollbar-width` behind the `layout.unimplemented` pref for the servo engine. The pref is disabled in Servo, so no behavior change is expected. This PR exists to let CI validate the stylo change; it will be repointed to stylo main once servo/stylo#413 merges.
     # 
@@ -2145,7 +2150,7 @@ https://github.com/servo/servo/pull/46257	(@veyndan, #46257)	android: Convert to
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 05-07-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/46278	(@yezhizhen, #46278)	dom_struct: Stop expecting dead code; script: Remove dead code in servoparser & pointerevent (#46278)
+-https://github.com/servo/servo/pull/46278	(@yezhizhen, #46278)	dom_struct: Stop expecting dead code; script: Remove dead code in servoparser & pointerevent (#46278)
     ^ commit 1a76138f78f5a03049398885566219518d2e4b5f
     # Testing: It compiles with no warning. Updated expected output in UT.
 https://github.com/servo/servo/pull/46276	(@cychronex-labs, #46276)	CI: Install shellcheck dependency for test-scripts (#46276)
@@ -2459,7 +2464,8 @@ https://github.com/servo/servo/pull/42372	(@dpaoliello, #42372)	mach: Remove sup
     # 
     # Testing: Tested locally on my Windows machine. Clean CI run on GitHub hosted runners: <https://github.com/dpaoliello/servo/actions/runs/28690080380/job/85089744042>
     # 
-https://github.com/servo/servo/pull/46301	(@Gae24, #46301)	script: Don't store `DomRoot` inside `Performance` interfaces (#46301)
++https://github.com/servo/servo/pull/46301	(@Gae24, #46301)	script: Don't store `DomRoot` inside `Performance` interfaces (#46301)
+    perf; reduce GC rooting
     ^ commit 788c40476a19a0e9848c0289d9d3918023100b78
     # Extracted from main PR since it required more changes, unused code was also removed.
     # 
@@ -2565,7 +2571,8 @@ https://github.com/servo/servo/pull/46255	(@jschwe, #46255)	script: Avoid creati
     # 
     # Testing: Compilation is the test.
     # 
-https://github.com/servo/servo/pull/46308	(@jschwe, #46308)	android: Support Android 10 and unify API-level definition (#46308)
++https://github.com/servo/servo/pull/46308	(@jschwe, #46308)	android: Support Android 10 and unify API-level definition (#46308)
+    servoshell; now runs on android 10+ (sdk 30+), not just android 13+ (sdk 33+). market share 91.1% vs 68.9%
     ^ commit 9a225202e085dc294c9e13c9fc8461cd2bfff96e
     # Unify the minimum supported API-level definition, by defining it in a new servo.properties file that is read by both gradle and mach, so that we only need to change the value in one place. Downgrade the value to `29` (android 10), which was released in 2019 and covers 91% of devices according to https://apilevels.com/ (vs. 87% for android 11).
     # 
@@ -2597,7 +2604,8 @@ https://github.com/servo/servo/pull/46127	(@mrobinson, #46127)	layout: Clear fra
     # Testing: This change adds a WPT crashtest.
     # Fixes: #46109.
     # 
-https://github.com/servo/servo/pull/46309	(@SimonSapin, @mrobinson, #46309)	layout: Fix `<textarea>` selection hit testing for 2+ words per line (#46309)
++https://github.com/servo/servo/pull/46309	(@SimonSapin, @mrobinson, #46309)	layout: Fix `<textarea>` selection hit testing for 2+ words per line (#46309)
+    input; fix incorrect interactive text selection in <textarea>
     ^ commit f97d5e6d21960ab27ca1efb49b0f914bb9b48703
     # The `distance_to_point_for_glyph_offset` method computes the distance between a point and the nearest edge or corner of a rectangle. It was written with the reasonable assumption that both parameters are in the same coordinate space, but in fact the point had already been transformed to a coordinate space where the rectangle’s origin is at `(0, 0)`, as needed for the child fragments of the fragment this rectangle is for.
     # 
@@ -2932,7 +2940,7 @@ https://github.com/servo/servo/pull/46317	(@veyndan, #46317)	android: Remove usa
     # 
     # Testing: There are no automated tests for Android.
     # Fixes: Part of #45715.
-https://github.com/servo/servo/pull/46331	(@TimvdLippe, #46331)	script: Move html elements into documentmetadata (#46331)
+-https://github.com/servo/servo/pull/46331	(@TimvdLippe, #46331)	script: Move html elements into documentmetadata (#46331)
     ^ commit ef4156baab583a29e49f6f7654502f033383305a
     # 
     # Testing: it compiles
@@ -2962,7 +2970,8 @@ https://github.com/servo/servo/pull/46289	(@TimvdLippe, #46289)	script: Implemen
     # Part of #46288
     # 
     # Testing: new WPT tests passing/running.
-https://github.com/servo/servo/pull/45578	(@alice, @delan, #45578)	layout: Incrementally update accessibility tree based on DOM changes (#45578)
++https://github.com/servo/servo/pull/45578	(@alice, @delan, #45578)	layout: Incrementally update accessibility tree based on DOM changes (#45578)
+    wip a11y; impl incremental accessibility tree building (non-experimental --pref accessibility_enabled)
     ^ commit d2ea1b2ef6569d30249a25b0461adccb8dbc3ff4
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # - Add `layout_api::AccessibilityDamage` to track specific types of DOM changes which impact the accessibility tree.
@@ -3665,7 +3674,8 @@ https://github.com/servo/servo/pull/46357	(@nicoburns, #46357)	Upgrade to Stylo 
     # Specification: <https://wicg.github.io/webcrypto-secure-curves/#x448>
     # Testing: Pass more WPT tests in `WebCryptoAPI` directory
     # Part-of: #46140
-https://github.com/servo/servo/pull/46377	(@SimonSapin, #46377)	Replace `RefCell<bool / u32 / usize>` with `Cell` (#46377)
++https://github.com/servo/servo/pull/46377	(@SimonSapin, #46377)	Replace `RefCell<bool / u32 / usize>` with `Cell` (#46377)
+    perf; stop using RefCell<T: Copy> in favour of Cell<T>. potential clippy lint: <https://github.com/rust-lang/rust-clippy/issues/17380>
     ^ commit 1676e81b5c157852ce3025e2acf3dc1d4e6166b9
     # This avoids the need to store and increment/decrement a borrow counter.
     # 
@@ -4121,7 +4131,7 @@ https://github.com/servo/servo/pull/46401	(@atouchet, #46401)	Unpin some crypto 
     # Testing: Pass new WPT subtests in `getPublicKey.tentative.https.any.js`
     # Part-of: #46140
     # 
-https://github.com/servo/servo/pull/46409	(@yezhizhen, #46409)	ci: Remove vello compilation check from Windows (#46409)
+-https://github.com/servo/servo/pull/46409	(@yezhizhen, #46409)	ci: Remove vello compilation check from Windows (#46409)
     ^ commit 56e9441060c1d4591c817eae2c9bc7f921e7f9e5
     # I added this in #45037. But it is probably a mistake.
     # This adds 10 extra minutes for GitHub hosted runner.
@@ -4133,7 +4143,8 @@ https://github.com/servo/servo/pull/46408	(@Narfinger, #46408)	layout: Use `Vec:
     # 
     # Testing: Equivalent code.
     # 
-https://github.com/servo/servo/pull/46411	(@jdm, @yezhizhen, #46411)	url: Add a fast path for matching about:blank against non about: URLs. (#46411)
++https://github.com/servo/servo/pull/46411	(@jdm, @yezhizhen, #46411)	url: Add a fast path for matching about:blank against non about: URLs. (#46411)
+    perf; faster testing if URL matches about:blank. 1.7% of samples in some cases <https://html.spec.whatwg.org/multipage/#matches-about%3Ablank>
     ^ commit 99447640c00e303566a6b49fe85208373f700f7d
     # While profiling #46368 I saw Url::matches_about_blank taking 1.7% of execution, when there are no about:blank URLs anywhere in the testcase. There's no need to check any other properties of the URL if the scheme is not about:. This change cut time sampled under Url::matches_about_blank from 46ms to 10ms in the testcase.
     # 
@@ -4166,7 +4177,8 @@ https://github.com/servo/servo/pull/46412	(@jdm, #46412)	script: Consolidate Win
     # 
     # Testing: added unit tests on https://github.com/servo/servo/pull/46060/commits/f745046687e462c17481fe572231200cca87f279
     # Fixes:  #42130 
-https://github.com/servo/servo/pull/46349	(@Gae24, #46349)	script: Don't store rooted values inside `ElementInternals` and `FormData` (#46349)
++https://github.com/servo/servo/pull/46349	(@Gae24, #46349)	script: Don't store rooted values inside `ElementInternals` and `FormData` (#46349)
+    perf; reduce GC rooting
     ^ commit bc469fd5c17137373458508f88c3907cd1fcb69a
     # Both `ElementInternals` and `FormData` could potentially own rooted values, to fix this, an unrooted variant was added.
     # 
@@ -4174,7 +4186,8 @@ https://github.com/servo/servo/pull/46349	(@Gae24, #46349)	script: Don't store r
     # Part of #39139
     # 
 >>> 2026-07-11T00:28:28Z
-https://github.com/servo/servo/pull/46419	(@Gae24, #46419)	script: Add unrooted variant of `MessageSource` (#46419)
++https://github.com/servo/servo/pull/46419	(@Gae24, #46419)	script: Add unrooted variant of `MessageSource` (#46419)
+    perf; reduce GC rooting
     ^ commit a78f9e59b717eac7104fd90532ebe7d01c6a6de1
     # Also clean-up `ExtendableMessageEvent`'s code a bit.
     # 
@@ -4509,7 +4522,8 @@ https://github.com/servo/servo/pull/46419	(@Gae24, #46419)	script: Add unrooted 
     # Testing: Manually tested, started both from GUI double-click and console. We still maintain the no-popup behaviour when started from GUI.
     # Fixes: #40996
     # 
-https://github.com/servo/servo/pull/46418	(@Gae24, #46418)	script: Convert `DomRoot` usages to `Dom` inside event types (#46418)
++https://github.com/servo/servo/pull/46418	(@Gae24, #46418)	script: Convert `DomRoot` usages to `Dom` inside event types (#46418)
+    perf; reduce GC rooting
     ^ commit 7fa302d03402388dc1d7cd30fd769f53eca55bdc
     # 
     # Testing: It compiles
@@ -4558,7 +4572,8 @@ https://github.com/servo/servo/pull/46418	(@Gae24, #46418)	script: Convert `DomR
     # Fixes https://github.com/servo/servo/issues/35935
     # Fixes #35520
     # 
-https://github.com/servo/servo/pull/46430	(@yezhizhen, #46430)	script: Reduce unnecessary rooting in `ScriptWindowProxies::insert` (#46430)
++https://github.com/servo/servo/pull/46430	(@yezhizhen, #46430)	script: Reduce unnecessary rooting in `ScriptWindowProxies::insert` (#46430)
+    perf; reduce GC rooting
     ^ commit e055263420eb56ad03cc26505961de0aaab86a10
     # This was pretty ugly too. We were doing `DomRoot::from_ref(&*window_proxy)` on an existing DomRoot.
     # 
@@ -4595,14 +4610,16 @@ https://github.com/servo/servo/pull/46438	(@Narfinger, #46438)	script: Have `SVG
     # 
     # Testing: Compilation is the test.
     # 
-https://github.com/servo/servo/pull/46420	(@Gae24, #46420)	script: avoid `DomRoot` inside `IDBIndex`, `GPUCompilationMessage` and `XRInputSource` (#46420)
++https://github.com/servo/servo/pull/46420	(@Gae24, #46420)	script: avoid `DomRoot` inside `IDBIndex`, `GPUCompilationMessage` and `XRInputSource` (#46420)
+    perf; reduce GC rooting
     ^ commit f4ac64f0b3168ef786878a9823cc0551459a495a
     # 
     # 
     # Testing: It compiles
     # Part of #39139
     # 
-https://github.com/servo/servo/pull/46178	(@sagudev, #46178)	webgpu: Update to wgpu v30 (#46178)
++https://github.com/servo/servo/pull/46178	(@sagudev, #46178)	webgpu: Update to wgpu v30 (#46178)
+    wip dom; more conformant WebGPU (experimental --pref dom_webgpu_enabled)
     ^ commit f0e1fbd2fa4680b1334a7146cf40964122fc0fb0
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # I already baked something before wgpu released, to test that we can use encoders in wgpu's global instead of rolling our own hashmaps or constructing them in content process. We were also able to remove two todos. The only thing that bugs me is `sequence<GPUVertexBufferLayout?> buffers` as we get no option out of it, so something must be wrong with codegen, but this will be investigated separately. Anyway as always the update brings many more passes (and more are expected once we impl transient texture).
@@ -4619,13 +4636,14 @@ https://github.com/servo/servo/pull/46178	(@sagudev, #46178)	webgpu: Update to w
     #   - Add presentation attribute mappings for svg properties.
     # - Point stylo to [PR ](https://github.com/servo/stylo/pull/383) which enables SVG CSS properties
     #     for Servo.
-https://github.com/servo/servo/pull/46446	(@yezhizhen, #46446)	script: Reduce rooting in Headers, Response, Request, FetchContext (#46446)
++https://github.com/servo/servo/pull/46446	(@yezhizhen, #46446)	script: Reduce rooting in Headers, Response, Request, FetchContext (#46446)
+    perf; reduce GC rooting
     ^ commit 25b560f11273c8523140f905825957a0479bc4be
     # Testing: This is just an optimization. Covered by existing tests.
     # 
     # Part of https://github.com/servo/servo/issues/34464
-https://github.com/servo/servo/pull/45979	(@yodalee, #45979)	script: Support font in <text> in svg (#45979)
-    pending; label
++https://github.com/servo/servo/pull/45979	(@yodalee, #45979)	script: Support font in <text> in svg (#45979)
+    svg; inline svg can now use fonts defined in the containing page
     ^ commit df91faee74158bcda49d31cfc95eed7d6d969469
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # In this PR, I create a FontResolver trait, that is responsible for resolve the font used in text tag in svg image. The trait will be pass into `image_cache` with the `FontContext`, together generate the `FontSelectionFn` used in `usvg::Option`.  
@@ -4649,13 +4667,13 @@ https://github.com/servo/servo/pull/45979	(@yodalee, #45979)	script: Support fon
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 12-07-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/46457	(@yezhizhen, #46457)	deny: Ignore `rustybuzz` unmaintained (#46457)
+-https://github.com/servo/servo/pull/46457	(@yezhizhen, #46457)	deny: Ignore `rustybuzz` unmaintained (#46457)
     ^ commit 02dd23d566717f7e07f3b0dd972be6cc2862b5a2
     # `rustybuzz` is unmaintained. Switch to harfrust. Ignore for now.
     # 
     # Fixes: Lint check.
     # Testing: No change to code itself.
-https://github.com/servo/servo/pull/46453	(@Loirooriol, #46453)	fonts-traits: Don't implement Eq for FontTemplateDescriptor (#46453)
+-https://github.com/servo/servo/pull/46453	(@Loirooriol, #46453)	fonts-traits: Don't implement Eq for FontTemplateDescriptor (#46453)
     ^ commit b4303c60296bedfd712f33951fd76a16190734bc
     # The comment seems obsolete: `FontTemplateDescriptor` does not contain floats, and in fact it could just derive `Eq` if the relevant structs in Stylo also derived it.
     # 
@@ -5028,7 +5046,8 @@ https://github.com/servo/servo/pull/46455	(@jschwe, @sagudev, #46455)	deps: Upda
     # 
     # Testing: Dependency updated, covered by existing tests
     # 
-https://github.com/servo/servo/pull/46440	(@mrobinson, #46440)	script: Don't always allocate `NodeRareData` when accessing `WeakRangeVec` (#46440)
++https://github.com/servo/servo/pull/46440	(@mrobinson, #46440)	script: Don't always allocate `NodeRareData` when accessing `WeakRangeVec` (#46440)
+    perf; reduce allocations and memory usage in DOM mutation
     ^ commit 96d984d44ffdf0027ed842244162563685586043
     # Previously the code would eagerly allocate `NodeRareData` when trying to
     # access a Node's `WeakRangeVec` (essentially live ranges) during
@@ -5373,7 +5392,8 @@ https://github.com/servo/servo/pull/46492	(@jschwe, #46492)	ci: Pin versions for
     # Testing: If CI passes its working.
     # Fixes: #46491 
     # 
-https://github.com/servo/servo/pull/45974	(@Narfinger, #45974)	script: Store `DocumentLoader::blocking_loads` in a `HashSet` instead of a `Vec` (#45974)
++https://github.com/servo/servo/pull/45974	(@Narfinger, #45974)	script: Store `DocumentLoader::blocking_loads` in a `HashSet` instead of a `Vec` (#45974)
+    perf; more efficient delaying of ‘load’ events. 0.3% of profiling samples <https://html.spec.whatwg.org/multipage/#delay-the-load-event>
     ^ commit 975b5d92060fbbb9dd0cc5ef70b6177668cd6164
     # This moves the BlockingLoads from Vector to a HashSet. This saves us roughly 0.3% on a sample run of the script thread execution as previously we had to search through the vector. As the LoadBlockers contain urls we use the std HashSet.
     # 
@@ -5396,7 +5416,8 @@ https://github.com/servo/servo/pull/46495	(@simonwuelker, #46495)	script: Flush 
     # Testing: Regressions are covered by existing tests.
     # Part of https://github.com/servo/servo/issues/46434
     # 
-https://github.com/servo/servo/pull/46348	(@alice, #46348)	layout: Avoid extra tree walks when removing accessibility nodes. (#46348)
++https://github.com/servo/servo/pull/46348	(@alice, #46348)	layout: Avoid extra tree walks when removing accessibility nodes. (#46348)
+    wip a11y; faster DOM node removal when accessibility is enabled (non-experimental --pref accessibility_enabled)
     ^ commit bd03913afed98f2b2d5c24e45970a6ee3a8ccba3
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Instead of setting the TreeChange for each node in a removed subtree, just set the TreeChange for the subtree root.
@@ -5405,7 +5426,8 @@ https://github.com/servo/servo/pull/46348	(@alice, #46348)	layout: Avoid extra t
     # 
     # Testing: Adds a new test with more involved sequences of moving and removing nodes.
     # Fixes: #46347
-https://github.com/servo/servo/pull/46498	(@yezhizhen, #46498)	script: Reduce rooting in various places (#46498)
++https://github.com/servo/servo/pull/46498	(@yezhizhen, #46498)	script: Reduce rooting in various places (#46498)
+    perf; reduce GC rooting
     ^ commit 604f357ab789430d6ba8bcaa9d93494ba8bd3083
     # Most of these are just style change, as the functions were just moving `DomRoot`,
     # except for `htmlbuttonelement.rs` and `document_event_handler.rs` where we do avoid new root.
@@ -5420,19 +5442,22 @@ https://github.com/servo/servo/pull/46499	(@mrobinson, #46499)	script_bindings: 
     # 
     # Testing: This should not change behavior, so is covered by existing tests.
     # 
-https://github.com/servo/servo/pull/46462	(@Taym95, #46462)	script: Require rooted handles in HeapBufferSource::new (#46462)
++https://github.com/servo/servo/pull/46462	(@Taym95, #46462)	script: Require rooted handles in HeapBufferSource::new (#46462)
+    perf; reduce GC rooting
     ^ commit c413f8988dce4d45bfcf6c4456dc3adfbe182634
     # Make HeapBufferSource::new take a rooted JS object handle and determine the BufferSource variant internally. 
     # 
     # Testing: No new tests covered by ./mach build --use-crown.
     # 
     # Fixes: #44646
-https://github.com/servo/servo/pull/46478	(@eachra-bawn, #46478)	webcrypto: Add error messages for `webcrypto` crate. (#46478)
++https://github.com/servo/servo/pull/46478	(@eachra-bawn, #46478)	webcrypto: Add error messages for `webcrypto` crate. (#46478)
+    dom; better exception error messages in Web Crypto API
     ^ commit 888101ded57a1f08411b55b68cb9d8e1b797ad49
     # Related issue: #40756
     # 
     # Testing: No new tests.
-https://github.com/servo/servo/pull/46286	(@sagudev, #46286)	webgpu: Support `GPUTextureUsage::TRANSIENT_ATTACHMENT` and `GPUCanvasContext::getConfiguration` (#46286)
++https://github.com/servo/servo/pull/46286	(@sagudev, #46286)	webgpu: Support `GPUTextureUsage::TRANSIENT_ATTACHMENT` and `GPUCanvasContext::getConfiguration` (#46286)
+    wip dom; more conformant WebGPU (experimental --pref dom_webgpu_enabled)
     ^ commit 03a27eb5fe3b605b491a46f21b92e346a83518d7
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # Just some small WebIDL changes with simple corresponding servo changes.
@@ -5835,7 +5860,7 @@ https://github.com/servo/servo/pull/46506	(@mrobinson, #46506)	script_bindings: 
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46496	(@Narfinger, #46496)	layout: Remove some unnecessary mut (#46496)
+-https://github.com/servo/servo/pull/46496	(@Narfinger, #46496)	layout: Remove some unnecessary mut (#46496)
     ^ commit 15cfaef03d8bc3f16a4cc6349b7c7b19fc1d3d98
     # This removes some unnecessary mut. Because of cyclic dependencies they were never marked as unnecessary.
     # 
@@ -6302,7 +6327,8 @@ https://github.com/servo/servo/pull/46526	(@simonwuelker, #46526)	fonts: Dedupli
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46548	(@yezhizhen, #46548)	script: Reduce rooting in Stream (#46548)
++https://github.com/servo/servo/pull/46548	(@yezhizhen, #46548)	script: Reduce rooting in Stream (#46548)
+    perf; reduce GC rooting
     ^ commit ca1ea5572766c6666df930babcd4d8633a5aa588
     # This eliminates creation of new roots at 8 call sites.
     # 
@@ -6376,7 +6402,8 @@ https://github.com/servo/servo/pull/46528	(@Narfinger, #46528)	fonts: Small opti
     # 
     # Testing: If we rely on this behavior WPT should catch the change in functionality. Test run here https://github.com/Narfinger/servo/actions/runs/29414515281
     # 
-https://github.com/servo/servo/pull/46144	(@Narfinger, #46144)	script: Switch GetClientRect and dirty_all_nodes to use unrooted iterators (#46144)
++https://github.com/servo/servo/pull/46144	(@Narfinger, #46144)	script: Switch GetClientRect and dirty_all_nodes to use unrooted iterators (#46144)
+    perf; reduce GC rooting
     ^ commit e5e8d3600cb775dfa7cee44339a69ab74318e2d2
     # Both of these methods can be called a lot on some websites.
     # This uses the unrooted iterators variety for their loop.
@@ -6435,7 +6462,8 @@ https://github.com/servo/servo/pull/46557	(@simonwuelker, #46557)	script: Remove
     # After https://github.com/servo/servo/pull/46541 this method is only used in one place where it can never possibly discover any fonts (that is a leftover from the migration to loading fonts from the `Stylist` instead of the stylesheet).
     # 
     # Testing: Regressions are covered by existing tests, no change in behaviour is intended.
-https://github.com/servo/servo/pull/46385	(@alice, @delan, #46385)	layout: Add statistics for accessibility updates. (#46385)
++https://github.com/servo/servo/pull/46385	(@alice, @delan, #46385)	layout: Add statistics for accessibility updates. (#46385)
+    wip a11y; part of #45578
     ^ commit ad53f3e945c3b2fa69464c43816311cef7c34fda
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # For each accessibility update, track the number of times we call a couple of key methods: 
@@ -6464,7 +6492,8 @@ https://github.com/servo/servo/pull/46559	(@Narfinger, #46559)	deps: Upgrade rus
     # Testing: Compilation and ./mach test-tidy are the tests.
     # Fixes: https://github.com/servo/servo/issues/46540
     # 
-https://github.com/servo/servo/pull/46563	(@Narfinger, #46563)	layout: Minor optimization in flex layout (#46563)
++https://github.com/servo/servo/pull/46563	(@Narfinger, #46563)	layout: Minor optimization in flex layout (#46563)
+    perf; reduce Vec allocations in flex layout. blink perf tests for flex layout improve by up to 3%
     ^ commit 1180606311f21580205750b5afab2e783d443c69
     # This is an optimization in flex layout to not collect the flex_item_fragments when they are only used as iterators again.
     # 
@@ -7040,7 +7069,8 @@ https://github.com/servo/servo/pull/46534	(@Narfinger, #46534)	script: Move more
     # 
     # Testing: New tests start to pass
     # Depends on https://github.com/servo/stylo/pull/377
-https://github.com/servo/servo/pull/46530	(@alice, #46530)	layout:  Avoid potential n² comparisons when updating children of accessibility nodes (#46530)
++https://github.com/servo/servo/pull/46530	(@alice, #46530)	layout:  Avoid potential n² comparisons when updating children of accessibility nodes (#46530)
+    wip a11y; faster DOM child nodes mutations when accessibility is enabled (non-experimental --pref accessibility_enabled)
     ^ commit f50950b705625acc1fc47920936a7fcefd0952dd
     # Previously, we always built a pair of vecs for the new children based on the DOM children, representing the child nodes and their IDs respectively, and then compared the old and new children to set the appropriate `TreeChange` on each added/removed child node.
     # 
@@ -7094,7 +7124,7 @@ https://github.com/servo/servo/pull/46560	(@nicoburns, @mrobinson, #46560)	Use s
     # 
     # Testing: Not sure how to test this
     # 
-https://github.com/servo/servo/pull/46332	(@TimvdLippe, #46332)	script: Move textcontrol and related structs into `dom/html/form_controls` (#46332)
+-https://github.com/servo/servo/pull/46332	(@TimvdLippe, #46332)	script: Move textcontrol and related structs into `dom/html/form_controls` (#46332)
     ^ commit 27f61918dff58b8479d7608ab831d42cd0d5a2dc
     # Part of #38901
     # 
@@ -7129,7 +7159,8 @@ https://github.com/servo/servo/pull/46332	(@TimvdLippe, #46332)	script: Move tex
     # Testing: More web platform tests
     # Fixes: #42452
     # 
-https://github.com/servo/servo/pull/46594	(@Narfinger, @jdm, #46594)	script: Optimize element::has_class() (#46594)
++https://github.com/servo/servo/pull/46594	(@Narfinger, @jdm, #46594)	script: Optimize element::has_class() (#46594)
+    perf; more efficient getElementsByClassName() on Document and Element. profiling samples from 1.2% to 0.1% on thomann.de
     ^ commit 622600e045c2e5ea688a9b19b8671b6f43112817
     # Elements can have many classes and Element::with_attribute will clone the vector. This makes a special function `any_tokenlist_attribute` which is equivalent to `get_tokenlist_attribute(name).iter().any(f)`.
     # 
@@ -7155,7 +7186,8 @@ https://github.com/servo/servo/pull/46594	(@Narfinger, @jdm, #46594)	script: Opt
     # 
     # Testing: This change fixes a WPT test.
     # 
-https://github.com/servo/servo/pull/46598	(@yezhizhen, #46598)	script: Reduce rooting in serialization of `DOMQuad` (#46598)
++https://github.com/servo/servo/pull/46598	(@yezhizhen, #46598)	script: Reduce rooting in serialization of `DOMQuad` (#46598)
+    perf; reduce GC rooting
     ^ commit c3414c70bcc13d2858565fc9ab083545737da653
     # Instead of using JS binding function to pass to closure which creates new root, directly use the `Dom` field.
     # Reduces 4 roots per serialize call.
@@ -7184,7 +7216,8 @@ https://github.com/servo/servo/pull/46601	(@mrobinson, #46601)	paint: Fix a race
     # Testing: This panic happens rarely when I run WebGL tests locally. I ran all
     # tests 5 times and didn't see the panic after this change.
     # 
-https://github.com/servo/servo/pull/46460	(@Gae24, #46460)	script: Don't store rooted values inside `ControlElement` (#46460)
++https://github.com/servo/servo/pull/46460	(@Gae24, #46460)	script: Don't store rooted values inside `ControlElement` (#46460)
+    perf; reduce GC rooting
     ^ commit b72f1049f44bed4b4dddc6a684a1ee721bad86d6
     # Used by `DocumentEmbedderControls`.
     # 
@@ -7311,7 +7344,7 @@ https://github.com/servo/servo/pull/46612	(@veyndan, #46612)	android: Convert to
     ^ commit 789970cc31782ec02603f898bf7ac5c79c8bdb4c
     # Automated downstream sync of changes from upstream as of 19-07-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/46620	(@jdm, #46620)	layout: Remove outdated comment. (#46620)
+-https://github.com/servo/servo/pull/46620	(@jdm, #46620)	layout: Remove outdated comment. (#46620)
     ^ commit e1173b17e779187fb922711f33748d2f23d724b9
     # The relevant unwrap was removed in 7375d09887b75c518dec00528d1d5a5f38d330c4.
     # 
@@ -7356,7 +7389,7 @@ https://github.com/servo/servo/pull/46607	(@sagudev, #46607)	script: Store micro
     # Towards https://github.com/servo/mozjs/issues/687
     # Reviewable per commit.
     # 
-https://github.com/servo/servo/pull/46623	(@jdm, #46623)	script: Remove unused net dependency. (#46623)
+-https://github.com/servo/servo/pull/46623	(@jdm, #46623)	script: Remove unused net dependency. (#46623)
     ^ commit 76dead7bc090ab0d3dc3dc76fa3e320b8e37e311
     # This was left over from earlier changes in #45979.
     # 
@@ -7375,7 +7408,8 @@ https://github.com/servo/servo/pull/46629	(@mrobinson, #46629)	indexeddb: Move h
     # 
     # Testing: This should not change behavior so is covered by existing tests.
     # 
-https://github.com/servo/servo/pull/46632	(@yezhizhen, #46632)	script: Remove unnecessary rooting & conversion in `htmlmediaelement.rs` (#46632)
++https://github.com/servo/servo/pull/46632	(@yezhizhen, #46632)	script: Remove unnecessary rooting & conversion in `htmlmediaelement.rs` (#46632)
+    perf; reduce GC rooting
     ^ commit c6a5b3bb78c50c4acdbbbfda01aa8083f48b588b
     # We were doing `&` -> `DomRoot` -> `Dom` conversion here for no reason.
     # 
@@ -7401,7 +7435,8 @@ https://github.com/servo/servo/pull/46610	(@mrobinson, #46610)	indexeddb: Always
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # Testing: New tests start to pass
-https://github.com/servo/servo/pull/46633	(@Gae24, #46633)	script: don't store a `Window` inside `RefreshRedirectDue` (#46633)
++https://github.com/servo/servo/pull/46633	(@Gae24, #46633)	script: don't store a `Window` inside `RefreshRedirectDue` (#46633)
+    perf; reduce GC rooting
     ^ commit 1cc0c3b26814b69ff1003994f5b75bb823654e43
     # Part of #39139, instead of replacing `DomRoot` with `Dom`, simply remove it and pass down a `GlobalScope` ref when the callback is invoked.
     # Additionally, the generic parameter of `invoke` is removed, since `this` is always a `GlobalScope`.
@@ -7416,7 +7451,8 @@ https://github.com/servo/servo/pull/46633	(@Gae24, #46633)	script: don't store a
     # 
     # Testing: New tests start to pass
     # Depends on https://github.com/servo/stylo/pull/429
-https://github.com/servo/servo/pull/46589	(@alice, #46589)	layout: Improvements to a11y update counters, and some extra tests (#46589)
++https://github.com/servo/servo/pull/46589	(@alice, #46589)	layout: Improvements to a11y update counters, and some extra tests (#46589)
+    wip a11y; part of #45578
     ^ commit 21528287db35548240866311bee6df9c253f33e6
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -7679,7 +7715,8 @@ https://github.com/servo/servo/pull/46589	(@alice, #46589)	layout: Improvements 
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46638	(@Gae24, #46638)	script: Don't store rooted values inside `ElementsFilter` and microtasks (#46638)
++https://github.com/servo/servo/pull/46638	(@Gae24, #46638)	script: Don't store rooted values inside `ElementsFilter` and microtasks (#46638)
+    perf; reduce GC rooting
     ^ commit f5e52e61f3cd176e5662c9ee02eac5a484490161
     # 
     # Testing: It compiles
@@ -7697,7 +7734,7 @@ https://github.com/servo/servo/pull/46636	(@mrobinson, #46636)	script: Close ope
     # 
     # Testing: This fixes flakiness when running the IndexedDB suite locally for me.
     # 
-https://github.com/servo/servo/pull/46653	(@TimvdLippe, #46653)	script: Move htmlinputelement into `script/dom/html/form_controls` (#46653)
+-https://github.com/servo/servo/pull/46653	(@TimvdLippe, #46653)	script: Move htmlinputelement into `script/dom/html/form_controls` (#46653)
     ^ commit 9cf537f2a6fd83ba1bcf90e1c81bf293d0497a2b
     # It also moves the input types into their dedicated folder `input_type/`.
     # Requires some more `pub(crate)` since we were relying on the implicit
@@ -7729,7 +7766,8 @@ https://github.com/servo/servo/pull/46654	(@log101, #46654)	script: replace depr
     # Testing: They pass now. Better yet, none of them crash anymore. There is one new timeout though.
     # 
     # I've also taken the liberty to basically rewrite `forwarddelete-after-editable-slot-element-outside-body.html`, since we failed it and the test case was a complete mess. Apparently the Firefox people got that one from a fuzzer some years ago and decided to just dump it into WPT without any cleanup: https://bugzilla.mozilla.org/show_bug.cgi?id=1706145
-https://github.com/servo/servo/pull/46656	(@yezhizhen, #46656)	script: Reduce rooting in `useractivation.rs` (#46656)
++https://github.com/servo/servo/pull/46656	(@yezhizhen, #46656)	script: Reduce rooting in `useractivation.rs` (#46656)
+    perf; reduce GC rooting
     ^ commit 1984a1fdf3e05769265ba540a5d730f8ace4bfd2
     # Reduces one root creation in `UserActivation`.
     # 
@@ -7778,7 +7816,8 @@ https://github.com/servo/servo/pull/46121	(@Taym95, #46121)	net: Fix CSP trailin
     # 
     # Depends on : https://github.com/rust-ammonia/rust-content-security-policy/pull/72
     # Testing: tests/wpt/meta/content-security-policy/generic/src-trailing-dot.sub.any.js.ini test passing.
-https://github.com/servo/servo/pull/46659	(@Narfinger, @Gae24, #46659)	script: Use NoGC for note_dirty_descendants (#46659)
++https://github.com/servo/servo/pull/46659	(@Narfinger, @Gae24, #46659)	script: Use NoGC for note_dirty_descendants (#46659)
+    perf; faster DOM mutations. up to 0.4%
     ^ commit 3d854845ec4afd468cb34424aa71cdf3c6ff1034
     # Use no_gc for note_dirty_descendants. This should take 0.4% runtime cost away from script in a small slice.
     # 
@@ -8142,7 +8181,8 @@ https://github.com/servo/servo/pull/46663	(@veyndan, #46663)	android: Convert ma
     # 
     # Testing: There are no automated tests for Android.
     # Fixes: #45715
-https://github.com/servo/servo/pull/46595	(@Narfinger, #46595)	layout: Improve paralelization and memory consumption in `InitialFlexBoxLayout::new` (#46595)
++https://github.com/servo/servo/pull/46595	(@Narfinger, #46595)	layout: Improve paralelization and memory consumption in `InitialFlexBoxLayout::new` (#46595)
+    perf; more efficient flex layout. 0.6% faster
     ^ commit b1ae3679c4e3b8746f07a4e5433b159b06be8a92
     # This cause a 0.6% performance improvement in a test case.
     # 
@@ -8156,7 +8196,8 @@ https://github.com/servo/servo/pull/46595	(@Narfinger, #46595)	layout: Improve p
     # 
     # Testing: This should not change behavior so is covered by existing tests.
     # 
-https://github.com/servo/servo/pull/46664	(@SimonSapin, #46664)	script: Reduce GC-rooting in `NodeList` (#46664)
++https://github.com/servo/servo/pull/46664	(@SimonSapin, #46664)	script: Reduce GC-rooting in `NodeList` (#46664)
+    perf; reduce GC rooting
     ^ commit 51b652e805530890a7731ed0fc4f1a233cc4f1ac
     # Pass `&JsContext` in a few more places in order to use `*_no_gc` APIs. This is a follow-up to https://github.com/servo/servo/pull/44435
     # 
@@ -8200,7 +8241,8 @@ https://github.com/servo/servo/pull/46694	(@veyndan, #46694)	android: Remove usa
     # Therefore, we can just directly depend on `ComponentActivity`.
     # 
     # Testing: There are no automated tests for Android.
-https://github.com/servo/servo/pull/46690	(@Gae24, #46690)	script: Don't store rooted values inside `XPathResultValue` (#46690)
++https://github.com/servo/servo/pull/46690	(@Gae24, #46690)	script: Don't store rooted values inside `XPathResultValue` (#46690)
+    perf; reduce GC rooting
     ^ commit 9bc80d2929ecb387d8bd5b7ddcc1488e4262345c
     # Before `XPathResultValue` was wrapped in a `RefCell`, switched to `DomRefCell` to ensure the mutable borrow is safe.
     # 
@@ -8667,7 +8709,8 @@ https://github.com/servo/servo/pull/46700	(@veyndan, #46700)	android: Remove Vie
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46678	(@yezhizhen, #46678)	script: Remove temporary root in `fn is_element_in_view` (#46678)
++https://github.com/servo/servo/pull/46678	(@yezhizhen, #46678)	script: Remove temporary root in `fn is_element_in_view` (#46678)
+    perf; reduce GC rooting
     ^ commit 65a962121b599229c0a2884c7113a67efcc78ca2
     # We were creating a temporary root for comparison.
     # We could just compare raw pointers instead.
@@ -8675,7 +8718,8 @@ https://github.com/servo/servo/pull/46678	(@yezhizhen, #46678)	script: Remove te
     # 
     # Testing: It compiles. 
     # Part of #34464
-https://github.com/servo/servo/pull/46718	(@yezhizhen, #46718)	script: Replace raw pointer comparison with `==` for DOM identity comparison (#46718)
++https://github.com/servo/servo/pull/46718	(@yezhizhen, #46718)	script: Replace raw pointer comparison with `==` for DOM identity comparison (#46718)
+    perf; reduce GC rooting for faster DOM node identity comparison
     ^ commit 28d632742aae6a4bc2c602a43bf0d0379b7196c5
     # As mentioned in https://github.com/servo/servo/pull/46678#issuecomment-5032596960, we should rely on `PartialEq` for all cases, so that we just need to optimize a single point.
     # 
@@ -8832,7 +8876,8 @@ https://github.com/servo/servo/pull/46718	(@yezhizhen, #46718)	script: Replace r
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46699	(@jdm, #46699)	tidy: Limit number of allowed Error::[something](None) uses in script crates. (#46699)
++https://github.com/servo/servo/pull/46699	(@jdm, #46699)	tidy: Limit number of allowed Error::[something](None) uses in script crates. (#46699)
+    dom; better exception error messages. now ratcheted
     ^ commit 7438e93c967456e0d587ed8e9b02716faaf1aa93
     # As agreed on [Zulip](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Expectation.20for.20error.20messages.20in.20PRs), we've been asking contributors to add error messages to new uses of the Error enum in their PRs. To reduce inconsistency in reviews, I propose a ratchet mechanism in our test-tidy checks. By adding a list of explicit counts of allowed exceptions per file, we can prevent introducing new uses in each file and lower the number of allowed exceptions every time a PR like #46478 is opened.
     # 
@@ -9052,7 +9097,8 @@ https://github.com/servo/servo/pull/46727	(@veyndan, #46727)	android: Move depen
     # 
     # Fixes: #46369 
     # 
-https://github.com/servo/servo/pull/46691	(@alice, #46691)	layout: Accessibility code cleanups (#46691)
++https://github.com/servo/servo/pull/46691	(@alice, #46691)	layout: Accessibility code cleanups (#46691)
+    wip a11y; part of #45578
     ^ commit 8cec62a61ef12dd47ea04628f41a9828901fbdca
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # - Move `resolve_local_damage_for_node_and_subtree()` and `update_node_and_descendants_from_dom_node()` on to `AccessibilityNode`;
@@ -9131,7 +9177,8 @@ https://github.com/servo/servo/pull/46725	(@mrobinson, #46725)	Use `ci-runners/a
     # Found this to be missing while doing statistics.
     # 
     # Testing:  New passing WPT.
-https://github.com/servo/servo/pull/46742	(@SimonSapin, #46742)	base: Rework UTF-8/16/32 offset/length wrapper types (#46742)
++https://github.com/servo/servo/pull/46742	(@SimonSapin, #46742)	base: Rework UTF-8/16/32 offset/length wrapper types (#46742)
+    input; part of #46698
     ^ commit cc74ff6ea01bce3ac1febaf695eb90e1a987a11d
     # * Rename `Utf*CodeUnitLength` to `Utf*CodeUnits` since it can be used for offsets as well as lengths
     # * Move free function conversions to methods
@@ -9223,7 +9270,8 @@ https://github.com/servo/servo/pull/46739	(@apoorvapendse, #46739)	script: Avoid
     # Discussion on Zulip realm: [#general > IntersectionObserver should not store a ElementOrDocument](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/IntersectionObserver.20should.20not.20store.20a.20ElementOrDocument/with/609810962) 
     # 
     # *100% human-made* 🙂, unlike the previous #46561.
-https://github.com/servo/servo/pull/46745	(@Gae24, #46745)	script: remove rooted variant of `MessageSource` (#46745)
++https://github.com/servo/servo/pull/46745	(@Gae24, #46745)	script: remove rooted variant of `MessageSource` (#46745)
+    perf; reduce GC rooting
     ^ commit 7ece38fc37a9d6b1781328006f4874e8e5b48a7d
     # We already have a rooted variant of `MessageSourceUnrooted`, `ClientOrServiceWorkerOrMessagePort` from bindings, we can use that one instead of `MessageSource`.
     # 
@@ -9484,14 +9532,16 @@ https://github.com/servo/servo/pull/46743	(@amittenak47, @jdm, #46743)	script: R
     # 
     # Fixes: #46714
     # 
-https://github.com/servo/servo/pull/46726	(@Gae24, #46726)	script: Don't store rooted values inside `TransformerType` (#46726)
++https://github.com/servo/servo/pull/46726	(@Gae24, #46726)	script: Don't store rooted values inside `TransformerType` (#46726)
+    perf; reduce GC rooting
     ^ commit 78f0dfa0d18181314e96fe9a638c7a08f58f26ea
     # 
     # 
     # Testing: It compiles
     # Part of #39139
     # 
-https://github.com/servo/servo/pull/46762	(@mrobinson, #46762)	layout: Simplify the way that document selection is handled in traversals (#46762)
++https://github.com/servo/servo/pull/46762	(@mrobinson, #46762)	layout: Simplify the way that document selection is handled in traversals (#46762)
+    perf; reduce Range-related work done in layout
     ^ commit a2e175a5ca1a7988151ea16c63419b2eeb29a937
     # Instead of eagerly passing the document selection range in the DOM
     # traveral, only fetch it when necessary before pushing text into an
@@ -9525,14 +9575,14 @@ https://github.com/servo/servo/pull/46766	(@veyndan, #46766)	android: Fix back n
     # Testing: There are no automated tests for Android.
     # Fixes: https://github.com/servo/servo/issues/46764
 >>> 2026-07-25T23:34:07Z
-https://github.com/servo/servo/pull/46767	(@atouchet, #46767)	Update rand crates (#46767)
+-https://github.com/servo/servo/pull/46767	(@atouchet, #46767)	Update rand crates (#46767)
     ^ commit 1d51def4cc6345919283f3aa857cddaa59021ceb
     # Update rand crates.
     # 
     # Testing: No tests for Cargo.lock update.
     # 
     # 
-https://github.com/servo/servo/pull/46768	(@yezhizhen, #46768)	ci: Fix ohos bencher error by reverting to `actions/checkout` (#46768)
+-https://github.com/servo/servo/pull/46768	(@yezhizhen, #46768)	ci: Fix ohos bencher error by reverting to `actions/checkout` (#46768)
     ^ commit ce5ba5ec8202957173c507fac3b70e6181485ddf
     # Error earlier was
     # ```
@@ -9560,7 +9610,7 @@ https://github.com/servo/servo/pull/46771	(@veyndan, #46771)	android: Make `JNIS
     # 
     # Testing: There are no automated tests for Android.
 >>> 2026-07-27T23:40:45Z
-https://github.com/servo/servo/pull/46778	(@jdm, #46778)	layout: Expand comment for BoxTreeString. (#46778)
+-https://github.com/servo/servo/pull/46778	(@jdm, #46778)	layout: Expand comment for BoxTreeString. (#46778)
     ^ commit 40c549a2d6bbf67c9813ea25e4882a4f7a71d73c
     # This was supposed to be included in #46756 but got missed.
     # 
@@ -9785,7 +9835,8 @@ https://github.com/servo/servo/pull/46807	(@jdm, #46807)	net: Use generic channe
     # There's no reason to incur IPC serialization for every network response message if we don't need to.
     # 
     # Testing: Existing test coverage suffices.
-https://github.com/servo/servo/pull/46722	(@yezhizhen, #46722)	script: Add benchmark for DOM comparison (#46722)
++https://github.com/servo/servo/pull/46722	(@yezhizhen, #46722)	script: Add benchmark for DOM comparison (#46722)
+    perf; part of #46718
     ^ commit e0363e4892ad6b1e8aafcfc963bac400f1360df7
     # Unlike claimed in https://github.com/servo/servo/pull/46678#issuecomment-5032596960 and https://github.com/servo/servo/pull/46718, the result from benchmark is counter-intuitive.
     # `std::ptr::eq` is actually 15% slower than https://github.com/servo/servo/blob/fc340087b7411d5d736ad8705581baf16b567b1c/components/dom_struct/lib.rs#L154-L156.
@@ -10053,7 +10104,8 @@ https://github.com/servo/servo/pull/46825	(@mukilan, #46825)	ci: Pass the 'force
     # Testing: Not tested as the self-hosted runners are available only for 'servo/servo'
     # 
     # 
-https://github.com/servo/servo/pull/46740	(@alice, #46740)	layout: Resolve accessibility damage in a single tree walk. (#46740)
++https://github.com/servo/servo/pull/46740	(@alice, #46740)	layout: Resolve accessibility damage in a single tree walk. (#46740)
+    wip a11y; eliminate second tree walk when (re)building accessibility tree (non-experimental --pref accessibility_enabled)
     ^ commit 711b48d8755e827ffd216d0e0132dc3d6f34093a
     # Instead of resolving damage on each individual damaged node and then propagating local damage, propagate damage up the tree first and then walk down from the common ancestor of all damaged nodes, and then up to the root.
     # 
@@ -10399,7 +10451,8 @@ https://github.com/servo/servo/pull/46837	(@mrobinson, #46837)	fonts: Apply Harf
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46832	(@yezhizhen, #46832)	script: Implement async FileSystemFileEntry.file() success callback (#46832)
++https://github.com/servo/servo/pull/46832	(@yezhizhen, #46832)	script: Implement async FileSystemFileEntry.file() success callback (#46832)
+    dom; towards impl directory drag-and-drop, <input type=file webkitdirectory>, etc via File and Directory Entries API <https://wicg.github.io/entries-api/>
     ^ commit 15905aca023c981bdf5bdeaee17ea978a16b4029
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # The impl mimics https://github.com/servo/servo/blob/711b48d8755e827ffd216d0e0132dc3d6f34093a/components/script/dom/datatransfer/datatransferitem.rs#L107
@@ -10764,13 +10817,15 @@ https://github.com/servo/servo/pull/46814	(@veyndan, #46814)	android: Replace `s
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # 
     # Testing: This causes WPT subtests related to `Request::duplex` to start passing.
-https://github.com/servo/servo/pull/46889	(@SimonSapin, @mrobinson, #46889)	Skip selection offsets when an entire node is selected (#46889)
++https://github.com/servo/servo/pull/46889	(@SimonSapin, @mrobinson, #46889)	Skip selection offsets when an entire node is selected (#46889)
+    input; part of #46864
     ^ commit 1f3f527e257c92fe7490026805d0abe719c10ebc
     # When many DOM nodes are part of the selection many of them are known to be entirely selected and computing any offset is not needed. Instead of always carrying a range (start/end pair) of offsets, this PR introduces a new `RangeAny` type where both bounds are optional, with a missing bound meaning unbounded on that side. For nodes that are entirely selected, the selection range is unbounded on both sides and no offset computation is needed. The computation skipped includes converting between UTF-8/UTF-16/UTF-32 offsets, and lookups in `OffsetMap` to compensate for whitespace collapsing and `text-transform`.
     # 
     # Testing: expecting no behavior change and no change in WPT test results
     # 
-https://github.com/servo/servo/pull/46860	(@kevlu93, @kevlu93, #46860)	dom: Follow the specification more closely when determining form submitter element action (#46860)
++https://github.com/servo/servo/pull/46860	(@kevlu93, @kevlu93, #46860)	dom: Follow the specification more closely when determining form submitter element action (#46860)
+    web; more conformant <form> submission without <form action>
     ^ commit a6a78d74c5c8d175216941066277885c727e4c4e
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Aligns the [`action` function](https://github.com/servo/servo/blob/main/components/script/dom/html/htmlformelement.rs#L1578) of `FormSubmitterElement` with the [HTML spec](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#concept-fs-action)
@@ -10805,7 +10860,8 @@ https://github.com/servo/servo/pull/46895	(@veyndan, #46895)	android: Make `Serv
     # 
     # Testing: There are no automated tests for Android.
 >>> 2026-07-31T23:51:03Z
-https://github.com/servo/servo/pull/46879	(@yezhizhen, #46879)	script: Implement async FileSystemEntry.getParent() success callback (#46879)
++https://github.com/servo/servo/pull/46879	(@yezhizhen, #46879)	script: Implement async FileSystemEntry.getParent() success callback (#46879)
+    dom; towards impl directory drag-and-drop, <input type=file webkitdirectory>, etc via File and Directory Entries API <https://wicg.github.io/entries-api/>
     ^ commit 72642786377e35775dddcd69364063ea5178a09a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Testing: Added an automated test unlike those existing manual ones. The major difference is, it does not require OS drag-and-drop support, but still tests the full DnD script path programatically.
@@ -11007,7 +11063,8 @@ https://github.com/servo/servo/pull/46879	(@yezhizhen, #46879)	script: Implement
     # Fixes: Part of #42000
     # 
     # 
-https://github.com/servo/servo/pull/46881	(@jdm, #46881)	script: Claim blob URLs before fetching script sources. (#46881)
++https://github.com/servo/servo/pull/46881	(@jdm, #46881)	script: Claim blob URLs before fetching script sources. (#46881)
+    dom; fix more race conditions in Blob API
     ^ commit 9d94d1db1c72416de82035cef5d28d83b6e4a68a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # These changes push forward the blob URL claim migration a bit further, now making it possible for other callers of create_potential_cors_request to be migrated incrementally. The UrlWithBlobClaim type ensures that any blob URL referenced remains valid while the value is alive, even if the blob is revoked.
@@ -11042,7 +11099,8 @@ https://github.com/servo/servo/pull/46881	(@jdm, #46881)	script: Claim blob URLs
     # Testing: It compiles
     # Part of #40600
     # 
-https://github.com/servo/servo/pull/46564	(@Gae24, #46564)	script: Don't store rooted values inside `FocusableArea` (#46564)
++https://github.com/servo/servo/pull/46564	(@Gae24, #46564)	script: Don't store rooted values inside `FocusableArea` (#46564)
+    perf; reduce GC rooting
     ^ commit 6f858371eccbe6478f5f5dc44dab7d0cfed717fc
     # 
     # 
