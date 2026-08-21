@@ -78,6 +78,8 @@ Fetch the Highfive answers for labelled pull requests:
 
 `$ tools/list-commits-by-nightly.sh /path/to/servo --pull-numbers-only | tools/filter-has-monthly-update-label.sh tools/pulls-2025-01-2025-02.json | while IFS=$'\t' read -r pull_number url; do tools/get-monthly-update-answer.sh "$url" > "answers/$pull_number"; done`
 
+**TIP:** to fetch the Highfive answer for a specific pull request later, you can use the shorthand `tools/get-monthly-update-answer.sh <issue number> > answers/<issue number>`, then reload the commit in commit-triage (or restart commit-triage).
+
 Run [commit-triage](https://github.com/jdm/commit-triage) and go to <http://localhost:8008>, and use the web UI to take notes about the commits:
 
 `$ cargo run -- --sort-by-author --sort-by-notes --sort-by-tags --web-server-port 8008 --git-show-output-cache-path /path/to/servo.org/cache --highfive-answers-path /path/to/servo.org/answers /path/to/servo.org/commits.txt`
