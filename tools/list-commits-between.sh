@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# usage: list-commits-between.sh <path/to/servo> <from commit exclusive> <to commit inclusive> [--pulls-json-path=path/to/pulls.json] [--git-show-output-cache-path=path/to/cache]
+# usage: list-commits-between.sh <path/to/servo> <from commit exclusive> <to commit inclusive> [--pulls-json-path=path/to/pulls.json] [--git-show-output-cache-path=path/to/cache] [--pull-numbers-only]
 # requires: git
 set -euo pipefail -o bsdecho -o shwordsplit
 if [ $# -lt 1 ]; then >&2 sed '1d;2s/^# //;2q' "$0"; exit 1; fi
@@ -8,6 +8,7 @@ missing() { >&2 echo "fatal: $1 not found"; exit 1; }
 servo_repo_path=$1; shift
 from_commit_exclusive=$1; shift
 to_commit_inclusive=$1; shift
+pull_numbers_only=false
 while [ $# -gt 0 ]; do
   case "$1" in
   (--pulls-json-path=*)
@@ -16,6 +17,10 @@ while [ $# -gt 0 ]; do
     ;;
   (--git-show-output-cache-path=*)
     git_show_output_cache_path=${${1#--git-show-output-cache-path=}:a}
+    shift
+    ;;
+  (--pull-numbers-only)
+    pull_numbers_only=true
     shift
     ;;
   (*)
@@ -39,6 +44,11 @@ IFS=$'\t'
 git -C "$servo_repo_path" log --reverse --pretty=$'tformat:%H\t%s\t%aE\t%(trailers:key=co-authored-by,valueonly,separator=%x09)' "$from_commit_exclusive".."$to_commit_inclusive" \
 | while read -r hash subject author coauthors; do
     pull_number=$(printf \%s\\n "$subject" | sed -E 's@.*[(]#([^)]+)[)].*@\1@')
+    if [ $pull_numbers_only = true ]; then
+        printf \%s\\n "$pull_number"
+        continue
+    fi
+
     url=https://github.com/servo/servo/pull/$pull_number
     printf '%s\t(' "$url"
     for author in $author $coauthors; do
