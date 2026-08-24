@@ -182,6 +182,17 @@ We’ve continued our long-running effort to use the Rust type system to make Se
 
 A special thanks to the following people for landing their first patch in Servo:
 
+- Umut Cevdet Koçak (@UMCEKO, #46256)
+- Yash Agrawal (@agrawalx, #46770)
+- amittenak47 (@amittenak47, #46743)
+- Apoorva Pendse (@apoorvapendse, #46739)
+- dDostalker (@dDostalker, #46181)
+- Oisín Ó Maolchathail (@eachra-bawn, #46478)
+- Kevin Lu (@kevlu93, #46860)
+- Mohamed Mostafa (@mu-mostafa98, #45405)
+- SeongMan Jeon (@sungmen, #46763)
+- Yoda Lee (@yodalee, #45979)
+
 Interested in helping build a web browser?
 Take a look at our [curated list](https://starters.servo.org) of issues that are good for new contributors!
 
