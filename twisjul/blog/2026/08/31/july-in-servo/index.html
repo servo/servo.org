@@ -254,7 +254,20 @@
   <p><a href="https://github.com/servo/servo/releases/tag/v0.5.0"><strong>Servo 0.5.0</strong></a> contains all of the changes we landed in July, which came out to <strong>488 commits</strong>.
 For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p>
 <p>We’ve shipped several new web platform features:</p>
+<ul>
+<li><strong>‘font-language-override’</strong> (@simonwuelker, #46618)</li>
+</ul>
 <p>Plus a bunch of new DOM APIs:</p>
+<ul>
+<li><a href="https://wicg.github.io/webcrypto-secure-curves/#ed448"><strong>Ed448</strong></a>, <a href="https://wicg.github.io/webcrypto-secure-curves/#x448"><strong>X448</strong></a>, and <a href="https://wicg.github.io/webcrypto-modern-algos/#kmac"><strong>KMAC</strong></a> algorithms in <strong>Subtle­Crypto</strong> (@kkoyung, #46402, #46141, #46180, #46583, #46606, #46622, #46334, #46376)</li>
+<li><strong>‘insert­Horizontal­Rule’</strong>, <strong>‘insert­Image’</strong>, <strong>‘insert­Text’</strong>, and <strong>‘forward­Delete’</strong> commands in <strong>document.exec­Command()</strong> (@Psychpsyo, #46608, #46597, #46538, #46838)</li>
+<li><strong>Animation­Effect</strong> (@simonwuelker, #46677)</li>
+<li><strong>new Touch()</strong> (@yezhizhen, #46741)</li>
+<li><strong>duplex</strong> property on <strong>Request</strong> (@Taym95, #46858)</li>
+<li><strong>effect</strong> property on <strong>Animation</strong> (@simonwuelker, #46677)</li>
+<li><strong>get­Keyframes()</strong> and <strong>set­Keyframes()</strong> on <strong>Keyframe­Effect</strong> (@simonwuelker, #46118)</li>
+<li><strong>id</strong> property on <strong>Largest­Contentful­Paint</strong> (@shubhamg13, #46828)</li>
+</ul>
 <p>This is another big update, so here’s an outline:</p>
 <ul>
 <li>
@@ -379,10 +392,13 @@ Report successes in <a href="https://servo.zulipchat.com/#narrow/channel/263398-
 <h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p><strong>Web­GPU</strong> content can now use <strong>GPU­External­Texture</strong> and <strong>import­External­Texture()</strong> on <strong>GPU­Device</strong>, under <code>--pref dom­_webgpu­_enabled</code> (@sagudev, #45873).</p>
+<p><strong>Indexed­DB</strong> content can now use the <strong>name</strong> property on <strong>IDB­Index</strong>, under <code>--pref dom­_indexeddb­_enabled</code> (@skyz1, #45512).</p>
 <p>All of the features above are enabled in servoshell’s <a href="https://book.servo.org/design-documentation/experimental-features.html#experimental-web-platform-features">experimental mode</a>.</p>
 <h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>We’ve improved the docs for the <a href="https://doc.servo.org/servo/index.html"><code>servo</code></a> crate, and for <a href="https://doc.servo.org/servo/trait.WebViewDelegate.html">Web­View­Delegate</a> (@mukilan, #46193).</p>
 <h2 id="for-users-and-developers" tabindex="-1">For users and developers <a class="header-anchor" href="#for-users-and-developers">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -395,6 +411,23 @@ Report successes in <a href="https://servo.zulipchat.com/#narrow/channel/263398-
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>We’ve fixed a crash regression with memory corruption (@mrobinson, #46316), several dynamic-borrow-related crashes (@Narfinger, @SharanRP, @Taym95, @agrawalx, @amittenak47, @sungmen, #46381, #46384, #46405, #46684, #46452, #46770, #46830, #46763), plus crashes related to:</p>
+<ul>
+<li><strong>&lt;area&gt;</strong> without <strong>&lt;area href&gt;</strong> (@simonwuelker, #46341)</li>
+<li><strong>&lt;progress&gt;</strong> or shadow DOM (@mrobinson, @simonwuelker, #46188)</li>
+<li><strong>&lt;table&gt;</strong> layout (@mrobinson, #46775)</li>
+<li><strong>&lt;td rowspan&gt;</strong> (@mrobinson, #46841)</li>
+<li><strong>&lt;svg&gt;</strong> without <strong>&lt;svg viewBox&gt;</strong> (@Narfinger, @mrobinson, #46199)</li>
+<li><strong>&lt;use&gt;</strong> in SVG (@mrobinson, @Loirooriol, #46261)</li>
+<li><strong>‘animation’</strong> (@mrobinson, @Loirooriol, #46689)</li>
+<li><strong>‘content’</strong> (@Loirooriol, @mrobinson, #46314)</li>
+<li><strong>‘mix-blend-mode’</strong> (@mrobinson, #45624)</li>
+<li><strong>Array­Buffer</strong> (@jdm, #46504)</li>
+<li><strong>adopted­Style­Sheets</strong> on <strong>Document</strong> (@TimvdLippe, #46373)</li>
+<li><strong>exec­Command(<code>&quot;delete&quot;</code>)</strong> on <strong>Document</strong> (@TimvdLippe, #46265)</li>
+<li>removing DOM nodes (@SimonSapin, #46866)</li>
+</ul>
+<p>We’ve continued our long-running effort to use the Rust type system to make Servo’s integration with SpiderMonkey safer and more reliable (@Gae24, @Narfinger, @TimvdLippe, @jdm, @kunalmohan, @lumiscosity, @simonwuelker, #46191, #46777, #46890, #46243, #46248, #46246, #46310, #46312, #46333, #46147, #46150, #46151, #46229, #46262, #46375, #46374, #46529, #46584, #46585, #46593, #46693, #46166, #46156, #46254, #46267, #46268, #46269, #46270, #46284, #46285, #46318, #46435).</p>
 <h2 id="new-contributors" tabindex="-1">New contributors <a class="header-anchor" href="#new-contributors">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
