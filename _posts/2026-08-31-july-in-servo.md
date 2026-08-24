@@ -167,6 +167,8 @@ We’ve fixed a crash regression with memory corruption (@mrobinson, #46316), se
 - **exec­Command(`"delete"`)** on **Document** (@TimvdLippe, #46265)
 - removing DOM nodes (@SimonSapin, #46866)
 
+We’ve continued our long-running effort to use the Rust type system to make Servo’s integration with SpiderMonkey safer and more reliable (@Gae24, @Narfinger, @TimvdLippe, @jdm, @kunalmohan, @lumiscosity, @simonwuelker, #46191, #46777, #46890, #46243, #46248, #46246, #46310, #46312, #46333, #46147, #46150, #46151, #46229, #46262, #46375, #46374, #46529, #46584, #46585, #46593, #46693, #46166, #46156, #46254, #46267, #46268, #46269, #46270, #46284, #46285, #46318, #46435).
+
 ## New contributors
 
 A special thanks to the following people for landing their first patch in Servo:
