@@ -12,7 +12,18 @@ For security fixes, see [**§ Security**](#security).
 
 We’ve shipped several new web platform features:
 
+- **‘font-language-override’** (@simonwuelker, #46618)
+
 Plus a bunch of new DOM APIs:
+
+- [**Ed448**](https://wicg.github.io/webcrypto-secure-curves/#ed448), [**X448**](https://wicg.github.io/webcrypto-secure-curves/#x448), and [**KMAC**](https://wicg.github.io/webcrypto-modern-algos/#kmac) algorithms in **Subtle­Crypto** (@kkoyung, #46402, #46141, #46180, #46583, #46606, #46622, #46334, #46376)
+- **‘insert­Horizontal­Rule’**, **‘insert­Image’**, **‘insert­Text’**, and **‘forward­Delete’** commands in **document.exec­Command()** (@Psychpsyo, #46608, #46597, #46538, #46838)
+- **Animation­Effect** (@simonwuelker, #46677)
+- **new Touch()** (@yezhizhen, #46741)
+- **duplex** property on **Request** (@Taym95, #46858)
+- **effect** property on **Animation** (@simonwuelker, #46677)
+- **get­Keyframes()** and **set­Keyframes()** on **Keyframe­Effect** (@simonwuelker, #46118)
+- **id** property on **Largest­Contentful­Paint** (@shubhamg13, #46828)
 
 This is another big update, so here’s an outline:
 
@@ -122,9 +133,15 @@ Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/chan
 
 ## Work in progress
 
+**Web­GPU** content can now use **GPU­External­Texture** and **import­External­Texture()** on **GPU­Device**, under `--pref dom­_webgpu­_enabled` (@sagudev, #45873).
+
+**Indexed­DB** content can now use the **name** property on **IDB­Index**, under `--pref dom­_indexeddb­_enabled` (@skyz1, #45512).
+
 All of the features above are enabled in servoshell’s [experimental mode](https://book.servo.org/design-documentation/experimental-features.html#experimental-web-platform-features).
 
 ## Embedding API
+
+We’ve improved the docs for the [`servo`](https://doc.servo.org/servo/index.html) crate, and for [Web­View­Delegate](https://doc.servo.org/servo/trait.WebViewDelegate.html) (@mukilan, #46193).
 
 ## For users and developers
 
@@ -133,6 +150,22 @@ All of the features above are enabled in servoshell’s [experimental mode](http
 ## Garbage collection safety
 
 ## Performance and stability
+
+We’ve fixed a crash regression with memory corruption (@mrobinson, #46316), several dynamic-borrow-related crashes (@Narfinger, @SharanRP, @Taym95, @agrawalx, @amittenak47, @sungmen, #46381, #46384, #46405, #46684, #46452, #46770, #46830, #46763), plus crashes related to:
+
+- **&lt;area>** without **&lt;area href>** (@simonwuelker, #46341)
+- **&lt;progress>** or shadow DOM (@mrobinson, @simonwuelker, #46188)
+- **&lt;table>** layout (@mrobinson, #46775)
+- **&lt;td rowspan>** (@mrobinson, #46841)
+- **&lt;svg>** without **&lt;svg viewBox>** (@Narfinger, @mrobinson, #46199)
+- **&lt;use>** in SVG (@mrobinson, @Loirooriol, #46261)
+- **‘animation’** (@mrobinson, @Loirooriol, #46689)
+- **‘content’** (@Loirooriol, @mrobinson, #46314)
+- **‘mix-blend-mode’** (@mrobinson, #45624)
+- **Array­Buffer** (@jdm, #46504)
+- **adopted­Style­Sheets** on **Document** (@TimvdLippe, #46373)
+- **exec­Command(`"delete"`)** on **Document** (@TimvdLippe, #46265)
+- removing DOM nodes (@SimonSapin, #46866)
 
 ## New contributors
 
