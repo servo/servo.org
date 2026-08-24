@@ -255,7 +255,17 @@
 For security fixes, see <a href="#security"><strong>§ Security</strong></a>.</p>
 <p>We’ve shipped several new web platform features:</p>
 <ul>
-<li><strong>‘font-language-override’</strong> (@simonwuelker, #46618)</li>
+<li><strong>‘Cache-Control: stale-while-revalidate’</strong> (@arayaryoma, #46060)</li>
+<li><strong>&lt;path d&gt;</strong> (@mu-mostafa98, #46558)</li>
+<li><strong>&lt;circle cx</strong>, <strong>cy</strong>, <strong>r&gt;</strong> (@mu-mostafa98, #46558)</li>
+<li><strong>&lt;ellipse cx</strong>, <strong>cy</strong>, <strong>rx</strong>, <strong>ry&gt;</strong> (@mu-mostafa98, #46558)</li>
+<li><strong>&lt;image x</strong>, <strong>y</strong>, <strong>width</strong>, <strong>height&gt;</strong> (@mu-mostafa98, #46558)</li>
+<li><strong>&lt;rect x</strong>, <strong>y</strong>, <strong>width</strong>, <strong>height</strong>, <strong>rx</strong>, <strong>ry&gt;</strong> (@mu-mostafa98, #46558)</li>
+<li><strong>‘text-decoration-thickness’</strong> (@nicoburns, #46592)</li>
+<li><strong>‘box-decoration-break’</strong>, for the most part (@Psychpsyo, #45492)</li>
+<li><strong>‘@font-feature-values’</strong>, for the most part (@simonwuelker, #45308)</li>
+<li><strong>‘font-language-override’</strong>, for the most part (@simonwuelker, #46618)</li>
+<li><strong>‘font-variant-alternates’</strong>, for the most part (@simonwuelker, #45308)</li>
 </ul>
 <p>Plus a bunch of new DOM APIs:</p>
 <ul>
@@ -405,12 +415,14 @@ Report successes in <a href="https://servo.zulipchat.com/#narrow/channel/263398-
 <h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>We’re implementing the <strong>SVG DOM</strong>, starting with stub interfaces for <strong>SVG­Element</strong>, SVG­Circle­Element, SVG­Defs­Element, SVG­Ellipse­Element, SVG­Line­Element, SVG­Linear­Gradient­Element, SVG­Path­Element, SVG­Polygon­Element, SVG­Polyline­Element, SVG­Radial­Gradient­Element, SVG­Stop­Element, SVG­Rect­Element, SVG­Symbol­Element, and SVG­Use­Element (@mu-mostafa98, #46558).</p>
 <h2 id="garbage-collection-safety" tabindex="-1">Garbage collection safety <a class="header-anchor" href="#garbage-collection-safety">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>We’ve also reduced allocations, GC rooting steps, and other operations in many parts of Servo (@Narfinger, @mrobinson, @Gae24, @SimonSapin, @Taym95, @cychronex-labs, @yezhizhen, #45758, #46440, #46762, #46301, #46349, #46419, #46418, #46420, #46460, #46633, #46638, #46690, #46745, #46726, #46564, #46144, #46664, #46462, #46139, #46430, #46446, #46498, #46548, #46598, #46632, #46656, #46678, #46718).</p>
 <p>We’ve fixed a crash regression with memory corruption (@mrobinson, #46316), several dynamic-borrow-related crashes (@Narfinger, @SharanRP, @Taym95, @agrawalx, @amittenak47, @sungmen, #46381, #46384, #46405, #46684, #46452, #46770, #46830, #46763), plus crashes related to:</p>
 <ul>
 <li><strong>&lt;area&gt;</strong> without <strong>&lt;area href&gt;</strong> (@simonwuelker, #46341)</li>
