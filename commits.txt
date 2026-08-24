@@ -304,7 +304,7 @@ https://github.com/servo/servo/pull/46073	(@shubhamg13, #46073)	script: Define s
     # Part of #40600
     # 
     # Testing: it compiles
-+https://github.com/servo/servo/pull/46139	(@cychronex-labs, #46139)	script: Switch reporting_observer_list to store Dom instead of DomRoot (#46139)
+.https://github.com/servo/servo/pull/46139	(@cychronex-labs, #46139)	script: Switch reporting_observer_list to store Dom instead of DomRoot (#46139)
     perf; reduce GC rooting
     ^ commit 38c789fd59f66b03c546c5a2ce144ee86eaa0978
     # reporting_observer_list now stores Dom instead of DomRoot 
@@ -2464,7 +2464,7 @@ https://github.com/servo/servo/pull/42372	(@dpaoliello, #42372)	mach: Remove sup
     # 
     # Testing: Tested locally on my Windows machine. Clean CI run on GitHub hosted runners: <https://github.com/dpaoliello/servo/actions/runs/28690080380/job/85089744042>
     # 
-+https://github.com/servo/servo/pull/46301	(@Gae24, #46301)	script: Don't store `DomRoot` inside `Performance` interfaces (#46301)
+.https://github.com/servo/servo/pull/46301	(@Gae24, #46301)	script: Don't store `DomRoot` inside `Performance` interfaces (#46301)
     perf; reduce GC rooting
     ^ commit 788c40476a19a0e9848c0289d9d3918023100b78
     # Extracted from main PR since it required more changes, unused code was also removed.
@@ -4166,7 +4166,7 @@ https://github.com/servo/servo/pull/46412	(@jdm, #46412)	script: Consolidate Win
     # GlobalScope::request_client calls a lot of methods that check if the global is a Window and then call a method on that window's document. To avoid this unnecessary work (as well as adding additional NoGC variants of each method), we can move all of this Window-specific logic into Window. This reduces the time spent in Window::web_font_context from 19% to 14% in the testcase from #46368.
     # 
     # Testing: Existing test coverage suffices.
-+https://github.com/servo/servo/pull/46060	(@arayaryoma, #46060)	net: Support stale-while-revalidate directive (#46060)
+.https://github.com/servo/servo/pull/46060	(@arayaryoma, #46060)	net: Support stale-while-revalidate directive (#46060)
     http; impl ‘Cache-Control: stale-while-revalidate=’
     ^ commit 5d6ea10d8de0a1c986d14ce3126e0c11314da294
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -4177,7 +4177,7 @@ https://github.com/servo/servo/pull/46412	(@jdm, #46412)	script: Consolidate Win
     # 
     # Testing: added unit tests on https://github.com/servo/servo/pull/46060/commits/f745046687e462c17481fe572231200cca87f279
     # Fixes:  #42130 
-+https://github.com/servo/servo/pull/46349	(@Gae24, #46349)	script: Don't store rooted values inside `ElementInternals` and `FormData` (#46349)
+.https://github.com/servo/servo/pull/46349	(@Gae24, #46349)	script: Don't store rooted values inside `ElementInternals` and `FormData` (#46349)
     perf; reduce GC rooting
     ^ commit bc469fd5c17137373458508f88c3907cd1fcb69a
     # Both `ElementInternals` and `FormData` could potentially own rooted values, to fix this, an unrooted variant was added.
@@ -4186,7 +4186,7 @@ https://github.com/servo/servo/pull/46412	(@jdm, #46412)	script: Consolidate Win
     # Part of #39139
     # 
 >>> 2026-07-11T00:28:28Z
-+https://github.com/servo/servo/pull/46419	(@Gae24, #46419)	script: Add unrooted variant of `MessageSource` (#46419)
+.https://github.com/servo/servo/pull/46419	(@Gae24, #46419)	script: Add unrooted variant of `MessageSource` (#46419)
     perf; reduce GC rooting
     ^ commit a78f9e59b717eac7104fd90532ebe7d01c6a6de1
     # Also clean-up `ExtendableMessageEvent`'s code a bit.
@@ -4522,7 +4522,7 @@ https://github.com/servo/servo/pull/46412	(@jdm, #46412)	script: Consolidate Win
     # Testing: Manually tested, started both from GUI double-click and console. We still maintain the no-popup behaviour when started from GUI.
     # Fixes: #40996
     # 
-+https://github.com/servo/servo/pull/46418	(@Gae24, #46418)	script: Convert `DomRoot` usages to `Dom` inside event types (#46418)
+.https://github.com/servo/servo/pull/46418	(@Gae24, #46418)	script: Convert `DomRoot` usages to `Dom` inside event types (#46418)
     perf; reduce GC rooting
     ^ commit 7fa302d03402388dc1d7cd30fd769f53eca55bdc
     # 
@@ -4547,7 +4547,7 @@ https://github.com/servo/servo/pull/46412	(@jdm, #46412)	script: Consolidate Win
     # Testing: This change adds `html/semantics/forms/the-select-element/select-setting-selected-option-from-js-updates-visible-state.html`.
     # Fixes: https://github.com/servo/servo/issues/46356
     # 
-+https://github.com/servo/servo/pull/45758	(@Narfinger, #45758)	net/script: Allow Content-Length header to inform buffers downstream (#45758)
+.https://github.com/servo/servo/pull/45758	(@Narfinger, #45758)	net/script: Allow Content-Length header to inform buffers downstream (#45758)
     perf; reduce allocations in HTTP/1.x fetches
     ^ commit a87625150758fe91a29e7f6553ff2f798b87027e
     ^ /!\ may contain changes to feature flags
@@ -4572,7 +4572,7 @@ https://github.com/servo/servo/pull/46412	(@jdm, #46412)	script: Consolidate Win
     # Fixes https://github.com/servo/servo/issues/35935
     # Fixes #35520
     # 
-+https://github.com/servo/servo/pull/46430	(@yezhizhen, #46430)	script: Reduce unnecessary rooting in `ScriptWindowProxies::insert` (#46430)
+.https://github.com/servo/servo/pull/46430	(@yezhizhen, #46430)	script: Reduce unnecessary rooting in `ScriptWindowProxies::insert` (#46430)
     perf; reduce GC rooting
     ^ commit e055263420eb56ad03cc26505961de0aaab86a10
     # This was pretty ugly too. We were doing `DomRoot::from_ref(&*window_proxy)` on an existing DomRoot.
@@ -4593,7 +4593,7 @@ https://github.com/servo/servo/pull/46412	(@jdm, #46412)	script: Consolidate Win
     # Testing: Adding 2 tests
     # Fixes: #46350
     # 
-+https://github.com/servo/servo/pull/45492	(@Psychpsyo, #45492)	layout: add support for box-decoration-break (#45492)
+.https://github.com/servo/servo/pull/45492	(@Psychpsyo, #45492)	layout: add support for box-decoration-break (#45492)
     layout; impl ‘box-decoration-break’ (‘clone’ plus the default ‘slice’), except for bidi-related fragmentation
     ^ commit 4ae4f6b8d493323644ae1e2fa67b3d06ff42187a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -4610,7 +4610,7 @@ https://github.com/servo/servo/pull/46438	(@Narfinger, #46438)	script: Have `SVG
     # 
     # Testing: Compilation is the test.
     # 
-+https://github.com/servo/servo/pull/46420	(@Gae24, #46420)	script: avoid `DomRoot` inside `IDBIndex`, `GPUCompilationMessage` and `XRInputSource` (#46420)
+.https://github.com/servo/servo/pull/46420	(@Gae24, #46420)	script: avoid `DomRoot` inside `IDBIndex`, `GPUCompilationMessage` and `XRInputSource` (#46420)
     perf; reduce GC rooting
     ^ commit f4ac64f0b3168ef786878a9823cc0551459a495a
     # 
@@ -4636,7 +4636,7 @@ https://github.com/servo/servo/pull/46438	(@Narfinger, #46438)	script: Have `SVG
     #   - Add presentation attribute mappings for svg properties.
     # - Point stylo to [PR ](https://github.com/servo/stylo/pull/383) which enables SVG CSS properties
     #     for Servo.
-+https://github.com/servo/servo/pull/46446	(@yezhizhen, #46446)	script: Reduce rooting in Headers, Response, Request, FetchContext (#46446)
+.https://github.com/servo/servo/pull/46446	(@yezhizhen, #46446)	script: Reduce rooting in Headers, Response, Request, FetchContext (#46446)
     perf; reduce GC rooting
     ^ commit 25b560f11273c8523140f905825957a0479bc4be
     # Testing: This is just an optimization. Covered by existing tests.
@@ -5046,7 +5046,7 @@ https://github.com/servo/servo/pull/46455	(@jschwe, @sagudev, #46455)	deps: Upda
     # 
     # Testing: Dependency updated, covered by existing tests
     # 
-+https://github.com/servo/servo/pull/46440	(@mrobinson, #46440)	script: Don't always allocate `NodeRareData` when accessing `WeakRangeVec` (#46440)
+.https://github.com/servo/servo/pull/46440	(@mrobinson, #46440)	script: Don't always allocate `NodeRareData` when accessing `WeakRangeVec` (#46440)
     perf; reduce allocations and memory usage in DOM mutation
     ^ commit 96d984d44ffdf0027ed842244162563685586043
     # Previously the code would eagerly allocate `NodeRareData` when trying to
@@ -5426,7 +5426,7 @@ https://github.com/servo/servo/pull/46495	(@simonwuelker, #46495)	script: Flush 
     # 
     # Testing: Adds a new test with more involved sequences of moving and removing nodes.
     # Fixes: #46347
-+https://github.com/servo/servo/pull/46498	(@yezhizhen, #46498)	script: Reduce rooting in various places (#46498)
+.https://github.com/servo/servo/pull/46498	(@yezhizhen, #46498)	script: Reduce rooting in various places (#46498)
     perf; reduce GC rooting
     ^ commit 604f357ab789430d6ba8bcaa9d93494ba8bd3083
     # Most of these are just style change, as the functions were just moving `DomRoot`,
@@ -5442,7 +5442,7 @@ https://github.com/servo/servo/pull/46499	(@mrobinson, #46499)	script_bindings: 
     # 
     # Testing: This should not change behavior, so is covered by existing tests.
     # 
-+https://github.com/servo/servo/pull/46462	(@Taym95, #46462)	script: Require rooted handles in HeapBufferSource::new (#46462)
+.https://github.com/servo/servo/pull/46462	(@Taym95, #46462)	script: Require rooted handles in HeapBufferSource::new (#46462)
     perf; reduce GC rooting
     ^ commit c413f8988dce4d45bfcf6c4456dc3adfbe182634
     # Make HeapBufferSource::new take a rooted JS object handle and determine the BufferSource variant internally. 
@@ -6327,7 +6327,7 @@ https://github.com/servo/servo/pull/46526	(@simonwuelker, #46526)	fonts: Dedupli
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/46548	(@yezhizhen, #46548)	script: Reduce rooting in Stream (#46548)
+.https://github.com/servo/servo/pull/46548	(@yezhizhen, #46548)	script: Reduce rooting in Stream (#46548)
     perf; reduce GC rooting
     ^ commit ca1ea5572766c6666df930babcd4d8633a5aa588
     # This eliminates creation of new roots at 8 call sites.
@@ -6402,7 +6402,7 @@ https://github.com/servo/servo/pull/46528	(@Narfinger, #46528)	fonts: Small opti
     # 
     # Testing: If we rely on this behavior WPT should catch the change in functionality. Test run here https://github.com/Narfinger/servo/actions/runs/29414515281
     # 
-+https://github.com/servo/servo/pull/46144	(@Narfinger, #46144)	script: Switch GetClientRect and dirty_all_nodes to use unrooted iterators (#46144)
+.https://github.com/servo/servo/pull/46144	(@Narfinger, #46144)	script: Switch GetClientRect and dirty_all_nodes to use unrooted iterators (#46144)
     perf; reduce GC rooting
     ^ commit e5e8d3600cb775dfa7cee44339a69ab74318e2d2
     # Both of these methods can be called a lot on some websites.
@@ -6909,7 +6909,7 @@ https://github.com/servo/servo/pull/46565	(@veyndan, #46565)	android: Convert om
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/46558	(@mu-mostafa98, #46558)	Script: Create DOM element types for SVG shapes, gradients, and structural elements (#46558)
+.https://github.com/servo/servo/pull/46558	(@mu-mostafa98, #46558)	Script: Create DOM element types for SVG shapes, gradients, and structural elements (#46558)
     dom style; create and expose SVGCircleElement, SVGDefsElement, SVGEllipseElement, SVGGElement, SVGLineElement, SVGLinearGradientElement, SVGPathElement, SVGPolygonElement, SVGPolylineElement, SVGRadialGradientElement, SVGStopElement, SVGRectElement, SVGSymbolElement, SVGUseElement. also impl presentational attributes (mapping from attributes to CSS properties) for <circle cx, cy, r>, <ellipse cx, cy, rx, ry>, <rect x, y, width, height, rx, ry>, <image x, y, width, height>, <path d>
     ^ commit c7019855ee7aef2550e8c6b9ffcfb61afe8542cb
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -7056,7 +7056,7 @@ https://github.com/servo/servo/pull/46534	(@Narfinger, #46534)	script: Move more
     # Part of #40600
     # 
     # Testing: it compiles
-+https://github.com/servo/servo/pull/45308	(@simonwuelker, #45308)	fonts+layout: Support `font-variant-alternates` (#45308)
+.https://github.com/servo/servo/pull/45308	(@simonwuelker, #45308)	fonts+layout: Support `font-variant-alternates` (#45308)
     layout; impl ‘font-variant-alternates’ and ‘@font-feature-values’ for web fonts on all platforms, as well as local fonts on FreeType platforms only
     ^ commit feaa23c0ae7ed67cee38ed735b6dcddb09ec3eb6
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -7186,7 +7186,7 @@ https://github.com/servo/servo/pull/46560	(@nicoburns, @mrobinson, #46560)	Use s
     # 
     # Testing: This change fixes a WPT test.
     # 
-+https://github.com/servo/servo/pull/46598	(@yezhizhen, #46598)	script: Reduce rooting in serialization of `DOMQuad` (#46598)
+.https://github.com/servo/servo/pull/46598	(@yezhizhen, #46598)	script: Reduce rooting in serialization of `DOMQuad` (#46598)
     perf; reduce GC rooting
     ^ commit c3414c70bcc13d2858565fc9ab083545737da653
     # Instead of using JS binding function to pass to closure which creates new root, directly use the `Dom` field.
@@ -7216,7 +7216,7 @@ https://github.com/servo/servo/pull/46601	(@mrobinson, #46601)	paint: Fix a race
     # Testing: This panic happens rarely when I run WebGL tests locally. I ran all
     # tests 5 times and didn't see the panic after this change.
     # 
-+https://github.com/servo/servo/pull/46460	(@Gae24, #46460)	script: Don't store rooted values inside `ControlElement` (#46460)
+.https://github.com/servo/servo/pull/46460	(@Gae24, #46460)	script: Don't store rooted values inside `ControlElement` (#46460)
     perf; reduce GC rooting
     ^ commit b72f1049f44bed4b4dddc6a684a1ee721bad86d6
     # Used by `DocumentEmbedderControls`.
@@ -7408,7 +7408,7 @@ https://github.com/servo/servo/pull/46629	(@mrobinson, #46629)	indexeddb: Move h
     # 
     # Testing: This should not change behavior so is covered by existing tests.
     # 
-+https://github.com/servo/servo/pull/46632	(@yezhizhen, #46632)	script: Remove unnecessary rooting & conversion in `htmlmediaelement.rs` (#46632)
+.https://github.com/servo/servo/pull/46632	(@yezhizhen, #46632)	script: Remove unnecessary rooting & conversion in `htmlmediaelement.rs` (#46632)
     perf; reduce GC rooting
     ^ commit c6a5b3bb78c50c4acdbbbfda01aa8083f48b588b
     # We were doing `&` -> `DomRoot` -> `Dom` conversion here for no reason.
@@ -7435,7 +7435,7 @@ https://github.com/servo/servo/pull/46610	(@mrobinson, #46610)	indexeddb: Always
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
     # Testing: New tests start to pass
-+https://github.com/servo/servo/pull/46633	(@Gae24, #46633)	script: don't store a `Window` inside `RefreshRedirectDue` (#46633)
+.https://github.com/servo/servo/pull/46633	(@Gae24, #46633)	script: don't store a `Window` inside `RefreshRedirectDue` (#46633)
     perf; reduce GC rooting
     ^ commit 1cc0c3b26814b69ff1003994f5b75bb823654e43
     # Part of #39139, instead of replacing `DomRoot` with `Dom`, simply remove it and pass down a `GlobalScope` ref when the callback is invoked.
@@ -7715,7 +7715,7 @@ https://github.com/servo/servo/pull/46610	(@mrobinson, #46610)	indexeddb: Always
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/46638	(@Gae24, #46638)	script: Don't store rooted values inside `ElementsFilter` and microtasks (#46638)
+.https://github.com/servo/servo/pull/46638	(@Gae24, #46638)	script: Don't store rooted values inside `ElementsFilter` and microtasks (#46638)
     perf; reduce GC rooting
     ^ commit f5e52e61f3cd176e5662c9ee02eac5a484490161
     # 
@@ -7766,7 +7766,7 @@ https://github.com/servo/servo/pull/46654	(@log101, #46654)	script: replace depr
     # Testing: They pass now. Better yet, none of them crash anymore. There is one new timeout though.
     # 
     # I've also taken the liberty to basically rewrite `forwarddelete-after-editable-slot-element-outside-body.html`, since we failed it and the test case was a complete mess. Apparently the Firefox people got that one from a fuzzer some years ago and decided to just dump it into WPT without any cleanup: https://bugzilla.mozilla.org/show_bug.cgi?id=1706145
-+https://github.com/servo/servo/pull/46656	(@yezhizhen, #46656)	script: Reduce rooting in `useractivation.rs` (#46656)
+.https://github.com/servo/servo/pull/46656	(@yezhizhen, #46656)	script: Reduce rooting in `useractivation.rs` (#46656)
     perf; reduce GC rooting
     ^ commit 1984a1fdf3e05769265ba540a5d730f8ace4bfd2
     # Reduces one root creation in `UserActivation`.
@@ -8196,7 +8196,7 @@ https://github.com/servo/servo/pull/46663	(@veyndan, #46663)	android: Convert ma
     # 
     # Testing: This should not change behavior so is covered by existing tests.
     # 
-+https://github.com/servo/servo/pull/46664	(@SimonSapin, #46664)	script: Reduce GC-rooting in `NodeList` (#46664)
+.https://github.com/servo/servo/pull/46664	(@SimonSapin, #46664)	script: Reduce GC-rooting in `NodeList` (#46664)
     perf; reduce GC rooting
     ^ commit 51b652e805530890a7731ed0fc4f1a233cc4f1ac
     # Pass `&JsContext` in a few more places in order to use `*_no_gc` APIs. This is a follow-up to https://github.com/servo/servo/pull/44435
@@ -8241,7 +8241,7 @@ https://github.com/servo/servo/pull/46694	(@veyndan, #46694)	android: Remove usa
     # Therefore, we can just directly depend on `ComponentActivity`.
     # 
     # Testing: There are no automated tests for Android.
-+https://github.com/servo/servo/pull/46690	(@Gae24, #46690)	script: Don't store rooted values inside `XPathResultValue` (#46690)
+.https://github.com/servo/servo/pull/46690	(@Gae24, #46690)	script: Don't store rooted values inside `XPathResultValue` (#46690)
     perf; reduce GC rooting
     ^ commit 9bc80d2929ecb387d8bd5b7ddcc1488e4262345c
     # Before `XPathResultValue` was wrapped in a `RefCell`, switched to `DomRefCell` to ensure the mutable borrow is safe.
@@ -8709,7 +8709,7 @@ https://github.com/servo/servo/pull/46700	(@veyndan, #46700)	android: Remove Vie
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/46678	(@yezhizhen, #46678)	script: Remove temporary root in `fn is_element_in_view` (#46678)
+.https://github.com/servo/servo/pull/46678	(@yezhizhen, #46678)	script: Remove temporary root in `fn is_element_in_view` (#46678)
     perf; reduce GC rooting
     ^ commit 65a962121b599229c0a2884c7113a67efcc78ca2
     # We were creating a temporary root for comparison.
@@ -8718,7 +8718,7 @@ https://github.com/servo/servo/pull/46700	(@veyndan, #46700)	android: Remove Vie
     # 
     # Testing: It compiles. 
     # Part of #34464
-+https://github.com/servo/servo/pull/46718	(@yezhizhen, #46718)	script: Replace raw pointer comparison with `==` for DOM identity comparison (#46718)
+.https://github.com/servo/servo/pull/46718	(@yezhizhen, #46718)	script: Replace raw pointer comparison with `==` for DOM identity comparison (#46718)
     perf; reduce GC rooting for faster DOM node identity comparison
     ^ commit 28d632742aae6a4bc2c602a43bf0d0379b7196c5
     # As mentioned in https://github.com/servo/servo/pull/46678#issuecomment-5032596960, we should rely on `PartialEq` for all cases, so that we just need to optimize a single point.
@@ -9270,7 +9270,7 @@ https://github.com/servo/servo/pull/46739	(@apoorvapendse, #46739)	script: Avoid
     # Discussion on Zulip realm: [#general > IntersectionObserver should not store a ElementOrDocument](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/IntersectionObserver.20should.20not.20store.20a.20ElementOrDocument/with/609810962) 
     # 
     # *100% human-made* 🙂, unlike the previous #46561.
-+https://github.com/servo/servo/pull/46745	(@Gae24, #46745)	script: remove rooted variant of `MessageSource` (#46745)
+.https://github.com/servo/servo/pull/46745	(@Gae24, #46745)	script: remove rooted variant of `MessageSource` (#46745)
     perf; reduce GC rooting
     ^ commit 7ece38fc37a9d6b1781328006f4874e8e5b48a7d
     # We already have a rooted variant of `MessageSourceUnrooted`, `ClientOrServiceWorkerOrMessagePort` from bindings, we can use that one instead of `MessageSource`.
@@ -9289,7 +9289,7 @@ https://github.com/servo/servo/pull/46747	(@veyndan, #46747)	android: Add back i
     # 
     # Testing: There are no automated tests for Android.
 >>> 2026-07-24T23:27:36Z
-+https://github.com/servo/servo/pull/46592	(@nicoburns, #46592)	Implement text-decoration-thickness (#46592)
+.https://github.com/servo/servo/pull/46592	(@nicoburns, #46592)	Implement text-decoration-thickness (#46592)
     layout; impl ‘text-decoration-thickness’
     ^ commit afb9656a386500c409aaaabb4b7799e0f010ef86
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -9532,7 +9532,7 @@ https://github.com/servo/servo/pull/46743	(@amittenak47, @jdm, #46743)	script: R
     # 
     # Fixes: #46714
     # 
-+https://github.com/servo/servo/pull/46726	(@Gae24, #46726)	script: Don't store rooted values inside `TransformerType` (#46726)
+.https://github.com/servo/servo/pull/46726	(@Gae24, #46726)	script: Don't store rooted values inside `TransformerType` (#46726)
     perf; reduce GC rooting
     ^ commit 78f0dfa0d18181314e96fe9a638c7a08f58f26ea
     # 
@@ -9540,7 +9540,7 @@ https://github.com/servo/servo/pull/46743	(@amittenak47, @jdm, #46743)	script: R
     # Testing: It compiles
     # Part of #39139
     # 
-+https://github.com/servo/servo/pull/46762	(@mrobinson, #46762)	layout: Simplify the way that document selection is handled in traversals (#46762)
+.https://github.com/servo/servo/pull/46762	(@mrobinson, #46762)	layout: Simplify the way that document selection is handled in traversals (#46762)
     perf; reduce Range-related work done in layout
     ^ commit a2e175a5ca1a7988151ea16c63419b2eeb29a937
     # Instead of eagerly passing the document selection range in the DOM
@@ -11099,7 +11099,7 @@ https://github.com/servo/servo/pull/46895	(@veyndan, #46895)	android: Make `Serv
     # Testing: It compiles
     # Part of #40600
     # 
-+https://github.com/servo/servo/pull/46564	(@Gae24, #46564)	script: Don't store rooted values inside `FocusableArea` (#46564)
+.https://github.com/servo/servo/pull/46564	(@Gae24, #46564)	script: Don't store rooted values inside `FocusableArea` (#46564)
     perf; reduce GC rooting
     ^ commit 6f858371eccbe6478f5f5dc44dab7d0cfed717fc
     # 

@@ -12,7 +12,12 @@ For security fixes, see [**§ Security**](#security).
 
 We’ve shipped several new web platform features:
 
-- **‘font-language-override’** (@simonwuelker, #46618)
+- **‘Cache-Control: stale-while-revalidate’** (@arayaryoma, #46060)
+- **‘text-decoration-thickness’** (@nicoburns, #46592)
+- **‘box-decoration-break’**, for the most part (@Psychpsyo, #45492)
+- **‘@font-feature-values’**, for the most part (@simonwuelker, #45308)
+- **‘font-language-override’**, for the most part (@simonwuelker, #46618)
+- **‘font-variant-alternates’**, for the most part (@simonwuelker, #45308)
 
 Plus a bunch of new DOM APIs:
 
@@ -147,9 +152,13 @@ We’ve improved the docs for the [`servo`](https://doc.servo.org/servo/index.ht
 
 ## More on the web platform
 
+We’re implementing the **SVG DOM**, starting with stub interfaces for **SVG­Element**, SVG­Circle­Element, SVG­Defs­Element, SVG­Ellipse­Element, SVG­Line­Element, SVG­Linear­Gradient­Element, SVG­Path­Element, SVG­Polygon­Element, SVG­Polyline­Element, SVG­Radial­Gradient­Element, SVG­Stop­Element, SVG­Rect­Element, SVG­Symbol­Element, and SVG­Use­Element (@mu-mostafa98, #46558).
+
 ## Garbage collection safety
 
 ## Performance and stability
+
+We’ve also reduced allocations, GC rooting steps, and other operations in many parts of Servo (@Narfinger, @mrobinson, @Gae24, @SimonSapin, @Taym95, @cychronex-labs, @yezhizhen, #45758, #46440, #46762, #46301, #46349, #46419, #46418, #46420, #46460, #46633, #46638, #46690, #46745, #46726, #46564, #46144, #46664, #46462, #46139, #46430, #46446, #46498, #46548, #46598, #46632, #46656, #46678, #46718).
 
 We’ve fixed a crash regression with memory corruption (@mrobinson, #46316), several dynamic-borrow-related crashes (@Narfinger, @SharanRP, @Taym95, @agrawalx, @amittenak47, @sungmen, #46381, #46384, #46405, #46684, #46452, #46770, #46830, #46763), plus crashes related to:
 
