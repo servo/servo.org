@@ -10,6 +10,9 @@ categories:
 [**Servo 0.5.0**](https://github.com/servo/servo/releases/tag/v0.5.0) contains all of the changes we landed in July, which came out to **488 commits**.
 For security fixes, see [**§ Security**](#security).
 
+**DOM text selections** are now visible (@mrobinson, @SimonSapin, #46698, #46864, #46742, #46889, #46126).
+Interactive selection is coming soon!
+
 We’ve shipped several new web platform features:
 
 - **‘Cache-Control: stale-while-revalidate’** (@arayaryoma, #46060)
@@ -29,6 +32,7 @@ Plus a bunch of new DOM APIs:
 - **effect** property on **Animation** (@simonwuelker, #46677)
 - **get­Keyframes()** and **set­Keyframes()** on **Keyframe­Effect** (@simonwuelker, #46118)
 - **id** property on **Largest­Contentful­Paint** (@shubhamg13, #46828)
+- read-only **CSS­Font­Feature­Values­Rule** (@simonwuelker, #46728)
 
 This is another big update, so here’s an outline:
 
@@ -166,9 +170,9 @@ When using the Firefox **DevTools**, the **Console** tab now supports some basic
 
 We’re implementing the **SVG DOM**, starting with stub interfaces for **SVG­Element**, SVG­Circle­Element, SVG­Defs­Element, SVG­Ellipse­Element, SVG­Line­Element, SVG­Linear­Gradient­Element, SVG­Path­Element, SVG­Polygon­Element, SVG­Polyline­Element, SVG­Radial­Gradient­Element, SVG­Stop­Element, SVG­Rect­Element, SVG­Symbol­Element, and SVG­Use­Element (@mu-mostafa98, #46558).
 
-We’ve improved the conformance of **&lt;color> values** (@Loirooriol, #46129).
+We’ve improved the conformance of **&lt;color> values** (@Loirooriol, #46129), **Gamepad­Event** (@log101, #46788), **document.execCommand("delete")** (@Psychpsyo, #46539), the **selector­Text** property on **CSS­Style­Rule** (@simonwuelker, #46687).
 
-We’ve fixed bugs related to **&lt;iframe>** (@jschwe, @jdm, #46587), **&lt;img>** (@yodalee, #46892), **&lt;textarea>** (@SimonSapin, @mrobinson, #46309), **custom properties** (@Loirooriol, #46129), **‘::before’** and **‘::after’** (@Loirooriol, #46640), **‘float’** (@Loirooriol, @mrobinson, #46407, #46500, #46505), **‘@font-face’** (@simonwuelker, #46568, #46271, #46436), **‘position: absolute’** (@simonwuelker, #46358, #46637), the **adopted­Style­Sheets** property on **Shadow­Root** (@simonwuelker, #46738), **delete()** on **Font­Face­Set** (@simonwuelker, #46634), **move­Before()** on **Element** (@mrobinson, #46599), and the **selected** property on **HTML­Option­Element** (@rhit-kapilaar, #46386).
+We’ve fixed bugs related to **&lt;iframe>** (@jschwe, @jdm, #46587), **&lt;img>** (@yodalee, #46892), **&lt;textarea>** (@SimonSapin, @mrobinson, #46309), **custom properties** (@Loirooriol, #46129), **‘::before’** and **‘::after’** (@Loirooriol, #46640), **‘float’** (@Loirooriol, @mrobinson, #46407, #46500, #46505), **‘@font-face’** (@simonwuelker, #46568, #46271, #46436), **‘position: absolute’** (@simonwuelker, #46358, #46637), **Blob** (@jdm, #46881), **IDB­Database** and **IDB­Object­Store** and **IDB­Index** (@mrobinson, #46615), the **adopted­Style­Sheets** property on **Shadow­Root** (@simonwuelker, #46738), **delete()** on **Font­Face­Set** (@simonwuelker, #46634), **move­Before()** on **Element** (@mrobinson, #46599), the **selected** property on **HTML­Option­Element** (@rhit-kapilaar, #46386), and the **value** property on **HTML­Select­Element** (@simonwuelker, #46230).
 
 ## Garbage collection safety
 
