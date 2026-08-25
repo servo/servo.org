@@ -138,6 +138,16 @@ Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/chan
 
 ## Work in progress
 
+The upgrade to Stylo 2026-07-01 brings several changes to built-in **CSS functions** (@Loirooriol, #46129):
+
+- **‘alpha()’** is now supported, under `--pref layout­_css­_alpha­_color­_function­_enabled`
+
+- **‘progress()’** is now supported, under `--pref layout­_css­_progress­_function­_enabled`
+
+- **‘ellipse()’** values **‘closest-corner’** and **‘farthest-corner’** are no longer stable due to spec uncertainty, but they are still experimental, under `--pref layout­_css­_ellipse­_corners­_enabled`
+
+- **‘attr()’** is more conformant, under `--pref layout­_css­_attr­_enabled`
+
 **Web­GPU** content can now use **GPU­External­Texture** and **import­External­Texture()** on **GPU­Device**, under `--pref dom­_webgpu­_enabled` (@sagudev, #45873).
 
 **Indexed­DB** content can now use the **name** property on **IDB­Index**, under `--pref dom­_indexeddb­_enabled` (@skyz1, #45512).
@@ -150,13 +160,21 @@ We’ve improved the docs for the [`servo`](https://doc.servo.org/servo/index.ht
 
 ## For users and developers
 
+When using the Firefox **DevTools**, the **Console** tab now supports some basic **autocomplete** (@freyacodes, #46382).
+
 ## More on the web platform
 
 We’re implementing the **SVG DOM**, starting with stub interfaces for **SVG­Element**, SVG­Circle­Element, SVG­Defs­Element, SVG­Ellipse­Element, SVG­Line­Element, SVG­Linear­Gradient­Element, SVG­Path­Element, SVG­Polygon­Element, SVG­Polyline­Element, SVG­Radial­Gradient­Element, SVG­Stop­Element, SVG­Rect­Element, SVG­Symbol­Element, and SVG­Use­Element (@mu-mostafa98, #46558).
 
+We’ve improved the conformance of **&lt;color> values** (@Loirooriol, #46129).
+
+We’ve fixed bugs related to **&lt;iframe>** (@jschwe, @jdm, #46587), **&lt;img>** (@yodalee, #46892), **&lt;textarea>** (@SimonSapin, @mrobinson, #46309), **custom properties** (@Loirooriol, #46129), **‘::before’** and **‘::after’** (@Loirooriol, #46640), **‘float’** (@Loirooriol, @mrobinson, #46407, #46500, #46505), **‘@font-face’** (@simonwuelker, #46568, #46271, #46436), **‘position: absolute’** (@simonwuelker, #46358, #46637), the **adopted­Style­Sheets** property on **Shadow­Root** (@simonwuelker, #46738), **delete()** on **Font­Face­Set** (@simonwuelker, #46634), **move­Before()** on **Element** (@mrobinson, #46599), and the **selected** property on **HTML­Option­Element** (@rhit-kapilaar, #46386).
+
 ## Garbage collection safety
 
 ## Performance and stability
+
+**Text rendering** is **up to 10x faster** for cases with the same text and different ‘font-size’ (@Loirooriol, #46129).
 
 We’ve also reduced allocations, GC rooting steps, and other operations in many parts of Servo (@Narfinger, @mrobinson, @Gae24, @SimonSapin, @Taym95, @cychronex-labs, @yezhizhen, #45758, #46440, #46762, #46301, #46349, #46419, #46418, #46420, #46460, #46633, #46638, #46690, #46745, #46726, #46564, #46144, #46664, #46462, #46139, #46430, #46446, #46498, #46548, #46598, #46632, #46656, #46678, #46718).
 
