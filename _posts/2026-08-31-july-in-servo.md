@@ -152,27 +152,48 @@ The upgrade to Stylo 2026-07-01 brings several changes to built-in **CSS functio
 
 - **‘attr()’** is more conformant, under `--pref layout­_css­_attr­_enabled`
 
-**Web­GPU** content can now use **GPU­External­Texture** and **import­External­Texture()** on **GPU­Device**, under `--pref dom­_webgpu­_enabled` (@sagudev, #45873).
+**Web­GPU** content can now enjoy better conformance and use **GPU­External­Texture** and **import­External­Texture()** on **GPU­Device**, under `--pref dom­_webgpu­_enabled` (@sagudev, #45873, #46178, #46286).
+<!-- TODO: screenshot in comments -->
 
 **Indexed­DB** content can now use the **name** property on **IDB­Index**, under `--pref dom­_indexeddb­_enabled` (@skyz1, #45512).
 
+**document.fonts** now includes a **Font­Face** for each valid **‘@font-face’**, under `--pref dom­_fontface­_enabled` (@simonwuelker, #46509, #46537).
+
 All of the features above are enabled in servoshell’s [experimental mode](https://book.servo.org/design-documentation/experimental-features.html#experimental-web-platform-features).
+
+We’ve started implementing **WebVTT** for native **subtitles** and **captions**, enabled by default (no `--pref`).
+While they don’t render just yet, we can now fetch each &lt;track src>, parse the WebVTT, and expose cues via the **track** property on **HTML­Track­Element** (@TimvdLippe, #46289, #46383).
+
+August was a big month for **accessibility** in Servo, under `--pref accessibility­_enabled`.
+The focus for this month has been on **performance**, with the accessibility tree now supporting **incremental updates** (@alice, @delan, #45578, #45971, #46589, #46691, #46385), requiring **fewer HashMap lookups** and **tree walks** (@alice, @delan, #45798, #46740, #46348), and allowing for **faster DOM mutations** (@alice, #46348, #46530).
+
+We’ve also started working on the [**File and Directory Entries API**](https://wicg.github.io/entries-api/), to allow users to **select** and **upload entire directories** via **&lt;input type=file>** and **drag-and-drop**.
+To that end, we now have **webkit­Get­As­Entry()** on **Data­Transfer­Item**, plus minimal support for **File­System­Entry**, **File­System­Directory­Entry**, and **File­System­File­Entry**, under `--pref dom­_entries­_api­_enabled` (@yezhizhen, #46456).
 
 ## Embedding API
 
 We’ve improved the docs for the [`servo`](https://doc.servo.org/servo/index.html) crate, and for [Web­View­Delegate](https://doc.servo.org/servo/trait.WebViewDelegate.html) (@mukilan, #46193).
 
+**Breaking change:** [`Servo­Builder`](https://doc.servo.org/servo/struct.ServoBuilder.html)::`webxr­_registry()` has been **removed**.
+Instead use the new [`Servo`](https://doc.servo.org/servo/struct.Servo.html)::[`register­_webxr­_registry`](https://doc.servo.org/servo/struct.Servo.html#method.register_webxr_registry), which is a **lazy** design that has allowed servoshell to **halve its startup time** (@Narfinger, #46494).
+
 ## For users and developers
+
+**servoshell** for **Android** now runs on **Android 10+** (91% market share), not just Android 13+ (68% market share), improving adaptability and reducing waste (@jschwe, #46142, #46308).
+We’ve also fixed a problem with building for Android on macOS (@jschwe, #46128).
+
+**servoshell** for **Windows** is now better behaved when run in a console window, making the command prompt wait until servoshell exits (@yezhizhen, #43010).
 
 When using the Firefox **DevTools**, the **Console** tab now supports some basic **autocomplete** (@freyacodes, #46382).
 
 ## More on the web platform
 
-We’re implementing the **SVG DOM**, starting with stub interfaces for **SVG­Element**, SVG­Circle­Element, SVG­Defs­Element, SVG­Ellipse­Element, SVG­Line­Element, SVG­Linear­Gradient­Element, SVG­Path­Element, SVG­Polygon­Element, SVG­Polyline­Element, SVG­Radial­Gradient­Element, SVG­Stop­Element, SVG­Rect­Element, SVG­Symbol­Element, and SVG­Use­Element (@mu-mostafa98, #46558).
+**Inline SVG** can now use **web fonts** defined in the containing page (@yodalee, #45979).
+We’re also implementing the **SVG DOM**, starting with stub interfaces for **SVG­Element**, SVG­Circle­Element, SVG­Defs­Element, SVG­Ellipse­Element, SVG­Line­Element, SVG­Linear­Gradient­Element, SVG­Path­Element, SVG­Polygon­Element, SVG­Polyline­Element, SVG­Radial­Gradient­Element, SVG­Stop­Element, SVG­Rect­Element, SVG­Symbol­Element, and SVG­Use­Element (@mu-mostafa98, #46558).
 
-We’ve improved the conformance of **&lt;color> values** (@Loirooriol, #46129), **Gamepad­Event** (@log101, #46788), **document.execCommand("delete")** (@Psychpsyo, #46539), the **selector­Text** property on **CSS­Style­Rule** (@simonwuelker, #46687).
+We’ve improved the conformance of **&lt;form>** without **&lt;form action>** (@kevlu93, #46860), **&lt;color> values** (@Loirooriol, #46129), **Gamepad­Event** (@log101, #46788), **document.execCommand("delete")** (@Psychpsyo, #46539), the **selector­Text** property on **CSS­Style­Rule** (@simonwuelker, #46687), and **Set Window Rect** in WebDriver (@janeoa, #46475, #46477).
 
-We’ve fixed bugs related to **&lt;iframe>** (@jschwe, @jdm, #46587), **&lt;img>** (@yodalee, #46892), **&lt;textarea>** (@SimonSapin, @mrobinson, #46309), **custom properties** (@Loirooriol, #46129), **‘::before’** and **‘::after’** (@Loirooriol, #46640), **‘float’** (@Loirooriol, @mrobinson, #46407, #46500, #46505), **‘@font-face’** (@simonwuelker, #46568, #46271, #46436), **‘position: absolute’** (@simonwuelker, #46358, #46637), **Blob** (@jdm, #46881), **IDB­Database** and **IDB­Object­Store** and **IDB­Index** (@mrobinson, #46615), the **adopted­Style­Sheets** property on **Shadow­Root** (@simonwuelker, #46738), **delete()** on **Font­Face­Set** (@simonwuelker, #46634), **move­Before()** on **Element** (@mrobinson, #46599), the **selected** property on **HTML­Option­Element** (@rhit-kapilaar, #46386), and the **value** property on **HTML­Select­Element** (@simonwuelker, #46230).
+We’ve fixed bugs related to **&lt;iframe>** (@jschwe, @jdm, #46587), **&lt;img>** (@yodalee, #46892), **&lt;textarea>** (@SimonSapin, @mrobinson, #46309), **custom properties** (@Loirooriol, #46129), **‘::before’** and **‘::after’** (@Loirooriol, #46640), **‘float’** (@Loirooriol, @mrobinson, #46407, #46500, #46505), **‘@font-face’** (@simonwuelker, #46568, #46271, #46436), **‘position: absolute’** (@simonwuelker, #46358, #46637), **Blob** (@jdm, #46881), **IDB­Database** and **IDB­Object­Store** and **IDB­Index** (@mrobinson, #46615), the **adopted­Style­Sheets** property on **Shadow­Root** (@simonwuelker, #46738), **delete()** on **Font­Face­Set** (@simonwuelker, #46634), **move­Before()** on **Element** (@mrobinson, #46599), **resize­To()** on **Window** (@janeoa, #46477), the **selected** property on **HTML­Option­Element** (@rhit-kapilaar, #46386), and the **value** property on **HTML­Select­Element** (@simonwuelker, #46230).
 
 ## Garbage collection safety
 
