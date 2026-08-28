@@ -70,6 +70,32 @@ If you’re working on a pull request that you think might be interesting for th
 
 ## Real world compat
 
+Most of **Gumroad ([gumroad.com](https://gumroad.com))**, except for the landing page, did not render at all in v0.4.0, but as of v0.5.0, pages like the [**Discover page**](https://gumroad.com/discover) or [**this product page**](https://harrycraft2.gumroad.com/l/theworldslongestcity) render almost perfectly.
+
+<figure class="_spaced">
+    <div class="_peel" style="--default-position: 40%;">
+        <div class="_line">
+            <div class="_left"><div>v0.4.0</div></div>
+            <div class="_right"><div>v0.5.0</div></div>
+        </div>
+        <img src="{{ '/img/blog/2026-08-165201.png' | url }}">
+        <img src="{{ '/img/blog/2026-08-164722.png' | url }}">
+    </div>
+    <figcaption><a href="https://gumroad.com/discover">gumroad.com</a></figcaption>
+</figure>
+
+<figure class="_spaced">
+    <div class="_peel" style="--default-position: 40%;">
+        <div class="_line">
+            <div class="_left"><div>v0.4.0</div></div>
+            <div class="_right"><div>v0.5.0</div></div>
+        </div>
+        <img src="{{ '/img/blog/2026-08-162729.png' | url }}">
+        <img src="{{ '/img/blog/2026-08-162731.png' | url }}">
+    </div>
+    <figcaption><a href="https://harrycraft2.gumroad.com/l/theworldslongestcity">gumroad.com</a></figcaption>
+</figure>
+
 <style>
     ._spaced {
         margin: 1em 0;
