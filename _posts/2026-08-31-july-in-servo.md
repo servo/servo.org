@@ -68,6 +68,9 @@ If you’re working on a pull request that you think might be interesting for th
 
 ## Security
 
+Servo was potentially affected by vulnerabilities in [**quick-xml**](https://crates.io/crates/quick-xml) and [**crossbeam-epoch**](https://crates.io/crates/crossbeam-epoch) that have been fixed in Servo 0.5.0 (@atouchet, @Loirooriol, #46737, #46324).
+For more details, see [RUSTSEC-2026-0194](https://rustsec.org/advisories/RUSTSEC-2026-0194), [RUSTSEC-2026-0195](https://rustsec.org/advisories/RUSTSEC-2026-0195), and [RUSTSEC-2026-0204](https://rustsec.org/advisories/RUSTSEC-2026-0204).
+
 ## Real world compat
 
 Most of **Gumroad ([gumroad.com](https://gumroad.com))**, except for the landing page, did not render at all in v0.4.0, but as of v0.5.0, pages like the [**Discover page**](https://gumroad.com/discover) or [**this product page**](https://harrycraft2.gumroad.com/l/theworldslongestcity) render almost perfectly.
@@ -211,6 +214,8 @@ We’ve also fixed a problem with building for Android on macOS (@jschwe, #46128
 **servoshell** for **Windows** is now better behaved when run in a console window, making the command prompt wait until servoshell exits (@yezhizhen, #43010).
 
 When using the Firefox **DevTools**, the **Console** tab now supports some basic **autocomplete** (@freyacodes, #46382).
+
+We’ve finished modernising servoshell for Android to use Compose UI (@veyndan, #46085, #46164, #46253, #46257, #46317, #46353, #46565, #46612, #46626, #46666, #46663, #46700), and we’re now migrating Servo as a library to use Kotlin (@veyndan, #46817, #46895, #46772).
 
 ## More on the web platform
 
