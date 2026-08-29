@@ -3676,7 +3676,7 @@ https://github.com/servo/servo/pull/46357	(@nicoburns, #46357)	Upgrade to Stylo 
     # Specification: <https://wicg.github.io/webcrypto-secure-curves/#x448>
     # Testing: Pass more WPT tests in `WebCryptoAPI` directory
     # Part-of: #46140
-+https://github.com/servo/servo/pull/46377	(@SimonSapin, #46377)	Replace `RefCell<bool / u32 / usize>` with `Cell` (#46377)
+.https://github.com/servo/servo/pull/46377	(@SimonSapin, #46377)	Replace `RefCell<bool / u32 / usize>` with `Cell` (#46377)
     perf; stop using RefCell<T: Copy> in favour of Cell<T>. potential clippy lint: <https://github.com/rust-lang/rust-clippy/issues/17380>
     ^ commit 1676e81b5c157852ce3025e2acf3dc1d4e6166b9
     # This avoids the need to store and increment/decrement a borrow counter.
@@ -4145,7 +4145,7 @@ https://github.com/servo/servo/pull/46408	(@Narfinger, #46408)	layout: Use `Vec:
     # 
     # Testing: Equivalent code.
     # 
-+https://github.com/servo/servo/pull/46411	(@jdm, @yezhizhen, #46411)	url: Add a fast path for matching about:blank against non about: URLs. (#46411)
+.https://github.com/servo/servo/pull/46411	(@jdm, @yezhizhen, #46411)	url: Add a fast path for matching about:blank against non about: URLs. (#46411)
     perf; faster testing if URL matches about:blank. 1.7% of samples in some cases <https://html.spec.whatwg.org/multipage/#matches-about%3Ablank>
     ^ commit 99447640c00e303566a6b49fe85208373f700f7d
     # While profiling #46368 I saw Url::matches_about_blank taking 1.7% of execution, when there are no about:blank URLs anywhere in the testcase. There's no need to check any other properties of the URL if the scheme is not about:. This change cut time sampled under Url::matches_about_blank from 46ms to 10ms in the testcase.
@@ -5394,7 +5394,7 @@ https://github.com/servo/servo/pull/46492	(@jschwe, #46492)	ci: Pin versions for
     # Testing: If CI passes its working.
     # Fixes: #46491 
     # 
-+https://github.com/servo/servo/pull/45974	(@Narfinger, #45974)	script: Store `DocumentLoader::blocking_loads` in a `HashSet` instead of a `Vec` (#45974)
+.https://github.com/servo/servo/pull/45974	(@Narfinger, #45974)	script: Store `DocumentLoader::blocking_loads` in a `HashSet` instead of a `Vec` (#45974)
     perf; more efficient delaying of ‘load’ events. 0.3% of profiling samples <https://html.spec.whatwg.org/multipage/#delay-the-load-event>
     ^ commit 975b5d92060fbbb9dd0cc5ef70b6177668cd6164
     # This moves the BlockingLoads from Vector to a HashSet. This saves us roughly 0.3% on a sample run of the script thread execution as previously we had to search through the vector. As the LoadBlockers contain urls we use the std HashSet.
@@ -6435,7 +6435,7 @@ https://github.com/servo/servo/pull/46528	(@Narfinger, #46528)	fonts: Small opti
     # Testing: TBD
     # Fixes: #44575 #41448 
     # 
-+https://github.com/servo/servo/pull/46536	(@Loirooriol, #46536)	layout: Treat `<button>` as a widget (#46536)
+.https://github.com/servo/servo/pull/46536	(@Loirooriol, #46536)	layout: Treat `<button>` as a widget (#46536)
     layout; improve rendering of <button> with ‘display’
     ^ commit 6fbb9062b3f46e463d44387491fbe85f21f2cc69
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -6494,7 +6494,7 @@ https://github.com/servo/servo/pull/46559	(@Narfinger, #46559)	deps: Upgrade rus
     # Testing: Compilation and ./mach test-tidy are the tests.
     # Fixes: https://github.com/servo/servo/issues/46540
     # 
-+https://github.com/servo/servo/pull/46563	(@Narfinger, #46563)	layout: Minor optimization in flex layout (#46563)
+.https://github.com/servo/servo/pull/46563	(@Narfinger, #46563)	layout: Minor optimization in flex layout (#46563)
     perf; reduce Vec allocations in flex layout. blink perf tests for flex layout improve by up to 3%
     ^ commit 1180606311f21580205750b5afab2e783d443c69
     # This is an optimization in flex layout to not collect the flex_item_fragments when they are only used as iterators again.
@@ -7161,7 +7161,7 @@ https://github.com/servo/servo/pull/46560	(@nicoburns, @mrobinson, #46560)	Use s
     # Testing: More web platform tests
     # Fixes: #42452
     # 
-+https://github.com/servo/servo/pull/46594	(@Narfinger, @jdm, #46594)	script: Optimize element::has_class() (#46594)
+.https://github.com/servo/servo/pull/46594	(@Narfinger, @jdm, #46594)	script: Optimize element::has_class() (#46594)
     perf; more efficient getElementsByClassName() on Document and Element. profiling samples from 1.2% to 0.1% on thomann.de
     ^ commit 622600e045c2e5ea688a9b19b8671b6f43112817
     # Elements can have many classes and Element::with_attribute will clone the vector. This makes a special function `any_tokenlist_attribute` which is equivalent to `get_tokenlist_attribute(name).iter().any(f)`.
@@ -7369,7 +7369,7 @@ https://github.com/servo/servo/pull/46614	(@log101, #46614)	script: Replace depr
     # Testing: Pass more WPT tests in `WebCryptoAPI/sign_verify` directory
     # Part-of: #46582
     # 
-+https://github.com/servo/servo/pull/46590	(@Loirooriol, @mrobinson, #46590)	layout: Implement block-axis centering for buttons (#46590)
+.https://github.com/servo/servo/pull/46590	(@Loirooriol, @mrobinson, #46590)	layout: Implement block-axis centering for buttons (#46590)
     layout; <button> now centers its contents vertically. test case `data:text/html,<button style=width:9em;height:6em>a`
     ^ commit 5f837eb80b5a7389b96c910c9fd22a8c8f91b2e0
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -7818,7 +7818,7 @@ https://github.com/servo/servo/pull/46121	(@Taym95, #46121)	net: Fix CSP trailin
     # 
     # Depends on : https://github.com/rust-ammonia/rust-content-security-policy/pull/72
     # Testing: tests/wpt/meta/content-security-policy/generic/src-trailing-dot.sub.any.js.ini test passing.
-+https://github.com/servo/servo/pull/46659	(@Narfinger, @Gae24, #46659)	script: Use NoGC for note_dirty_descendants (#46659)
+.https://github.com/servo/servo/pull/46659	(@Narfinger, @Gae24, #46659)	script: Use NoGC for note_dirty_descendants (#46659)
     perf; faster DOM mutations. up to 0.4%
     ^ commit 3d854845ec4afd468cb34424aa71cdf3c6ff1034
     # Use no_gc for note_dirty_descendants. This should take 0.4% runtime cost away from script in a small slice.
@@ -8183,7 +8183,7 @@ https://github.com/servo/servo/pull/46661	(@jschwe, #46661)	image-rs: Remove unn
     # 
     # Testing: There are no automated tests for Android.
     # Fixes: #45715
-+https://github.com/servo/servo/pull/46595	(@Narfinger, #46595)	layout: Improve paralelization and memory consumption in `InitialFlexBoxLayout::new` (#46595)
+.https://github.com/servo/servo/pull/46595	(@Narfinger, #46595)	layout: Improve paralelization and memory consumption in `InitialFlexBoxLayout::new` (#46595)
     perf; more efficient flex layout. 0.6% faster
     ^ commit b1ae3679c4e3b8746f07a4e5433b159b06be8a92
     # This cause a 0.6% performance improvement in a test case.
@@ -9837,7 +9837,7 @@ https://github.com/servo/servo/pull/46807	(@jdm, #46807)	net: Use generic channe
     # There's no reason to incur IPC serialization for every network response message if we don't need to.
     # 
     # Testing: Existing test coverage suffices.
-+https://github.com/servo/servo/pull/46722	(@yezhizhen, #46722)	script: Add benchmark for DOM comparison (#46722)
+.https://github.com/servo/servo/pull/46722	(@yezhizhen, #46722)	script: Add benchmark for DOM comparison (#46722)
     perf; part of #46718
     ^ commit e0363e4892ad6b1e8aafcfc963bac400f1360df7
     # Unlike claimed in https://github.com/servo/servo/pull/46678#issuecomment-5032596960 and https://github.com/servo/servo/pull/46718, the result from benchmark is counter-intuitive.
@@ -10453,7 +10453,7 @@ https://github.com/servo/servo/pull/46837	(@mrobinson, #46837)	fonts: Apply Harf
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/46832	(@yezhizhen, #46832)	script: Implement async FileSystemFileEntry.file() success callback (#46832)
+.https://github.com/servo/servo/pull/46832	(@yezhizhen, #46832)	script: Implement async FileSystemFileEntry.file() success callback (#46832)
     dom; towards impl directory drag-and-drop, <input type=file webkitdirectory>, etc via File and Directory Entries API <https://wicg.github.io/entries-api/>
     ^ commit 15905aca023c981bdf5bdeaee17ea978a16b4029
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -10862,7 +10862,7 @@ https://github.com/servo/servo/pull/46814	(@veyndan, #46814)	android: Replace `s
     # 
     # Testing: There are no automated tests for Android.
 >>> 2026-07-31T23:51:03Z
-+https://github.com/servo/servo/pull/46879	(@yezhizhen, #46879)	script: Implement async FileSystemEntry.getParent() success callback (#46879)
+.https://github.com/servo/servo/pull/46879	(@yezhizhen, #46879)	script: Implement async FileSystemEntry.getParent() success callback (#46879)
     dom; towards impl directory drag-and-drop, <input type=file webkitdirectory>, etc via File and Directory Entries API <https://wicg.github.io/entries-api/>
     ^ commit 72642786377e35775dddcd69364063ea5178a09a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform

@@ -197,7 +197,7 @@ August was a big month for **accessibility** in Servo, under `--pref accessibili
 The focus for this month has been on **performance**, with the accessibility tree now supporting **incremental updates** (@alice, @delan, #45578, #45971, #46589, #46691, #46385), requiring **fewer HashMap lookups** and **tree walks** (@alice, @delan, #45798, #46740, #46348), and allowing for **faster DOM mutations** (@alice, #46348, #46530).
 
 We’ve also started working on the [**File and Directory Entries API**](https://wicg.github.io/entries-api/), to allow users to **select** and **upload entire directories** via **&lt;input type=file>** and **drag-and-drop**.
-To that end, we now have **webkit­Get­As­Entry()** on **Data­Transfer­Item**, plus minimal support for **File­System­Entry**, **File­System­Directory­Entry**, and **File­System­File­Entry**, under `--pref dom­_entries­_api­_enabled` (@yezhizhen, #46456).
+To that end, we now have **webkit­Get­As­Entry()** on **Data­Transfer­Item**, plus minimal support for **File­System­Entry**, **File­System­Directory­Entry**, and **File­System­File­Entry**, under `--pref dom­_entries­_api­_enabled` (@yezhizhen, #46456, #46879, #46832).
 
 ## Embedding API
 
@@ -222,17 +222,18 @@ We’ve finished modernising servoshell for Android to use Compose UI (@veyndan,
 **Inline SVG** can now use **web fonts** defined in the containing page (@yodalee, #45979).
 We’re also implementing the **SVG DOM**, starting with stub interfaces for **SVG­Element**, SVG­Circle­Element, SVG­Defs­Element, SVG­Ellipse­Element, SVG­Line­Element, SVG­Linear­Gradient­Element, SVG­Path­Element, SVG­Polygon­Element, SVG­Polyline­Element, SVG­Radial­Gradient­Element, SVG­Stop­Element, SVG­Rect­Element, SVG­Symbol­Element, and SVG­Use­Element (@mu-mostafa98, #46558).
 
+**&lt;button>** now **vertically centers** its contents (@Loirooriol, @mrobinson, #46590), and behaves better with ‘display: block’ and ‘display: inline’ (@Loirooriol, #46536).
+
 We’ve improved the conformance of **&lt;form>** without **&lt;form action>** (@kevlu93, #46860), **&lt;color> values** (@Loirooriol, #46129), **Gamepad­Event** (@log101, #46788), **document.execCommand("delete")** (@Psychpsyo, #46539), the **selector­Text** property on **CSS­Style­Rule** (@simonwuelker, #46687), and **Set Window Rect** in WebDriver (@janeoa, #46475, #46477).
 
 We’ve fixed bugs related to **&lt;iframe>** (@jschwe, @jdm, #46587), **&lt;img>** (@yodalee, #46892), **&lt;textarea>** (@SimonSapin, @mrobinson, #46309), **custom properties** (@Loirooriol, #46129), **‘::before’** and **‘::after’** (@Loirooriol, #46640), **‘float’** (@Loirooriol, @mrobinson, #46407, #46500, #46505), **‘@font-face’** (@simonwuelker, #46568, #46271, #46436), **‘position: absolute’** (@simonwuelker, #46358, #46637), **Blob** (@jdm, #46881), **IDB­Database** and **IDB­Object­Store** and **IDB­Index** (@mrobinson, #46615), the **adopted­Style­Sheets** property on **Shadow­Root** (@simonwuelker, #46738), **delete()** on **Font­Face­Set** (@simonwuelker, #46634), **move­Before()** on **Element** (@mrobinson, #46599), **resize­To()** on **Window** (@janeoa, #46477), the **selected** property on **HTML­Option­Element** (@rhit-kapilaar, #46386), and the **value** property on **HTML­Select­Element** (@simonwuelker, #46230).
 
-## Garbage collection safety
-
 ## Performance and stability
 
 **Text rendering** is **up to 10x faster** for cases with the same text and different ‘font-size’ (@Loirooriol, #46129).
+**Flex layout** benchmarks are up to **3%** faster, and an improvement to **get­Elements­By­Class­Name()** has made some websites up to **1%** faster (@Narfinger, @jdm, #46563, #46595, #46594).
 
-We’ve also reduced allocations, GC rooting steps, and other operations in many parts of Servo (@Narfinger, @mrobinson, @Gae24, @SimonSapin, @Taym95, @cychronex-labs, @yezhizhen, #45758, #46440, #46762, #46301, #46349, #46419, #46418, #46420, #46460, #46633, #46638, #46690, #46745, #46726, #46564, #46144, #46664, #46462, #46139, #46430, #46446, #46498, #46548, #46598, #46632, #46656, #46678, #46718).
+We’ve also reduced allocations, GC rooting steps, and other operations in many parts of Servo (@jdm, @yezhizhen, @Narfinger, @Gae24, @SimonSapin, @mrobinson, @Taym95, @cychronex-labs, #46411, #46659, #45974, #46377, #45758, #46440, #46762, #46301, #46349, #46419, #46418, #46420, #46460, #46633, #46638, #46690, #46745, #46726, #46564, #46144, #46664, #46462, #46139, #46430, #46446, #46498, #46548, #46598, #46632, #46656, #46678, #46718, #46722).
 
 We’ve fixed a crash regression with memory corruption (@mrobinson, #46316), several dynamic-borrow-related crashes (@Narfinger, @SharanRP, @Taym95, @agrawalx, @amittenak47, @sungmen, #46381, #46384, #46405, #46684, #46452, #46770, #46830, #46763), plus crashes related to:
 
