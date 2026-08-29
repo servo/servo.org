@@ -73,6 +73,20 @@ For more details, see [RUSTSEC-2026-0194](https://rustsec.org/advisories/RUSTSEC
 
 ## Real world compat
 
+The duck on the **DuckDuckGo ([duckduckgo.com](https://duckduckgo.com))** landing page now renders in v0.5.0, after we fixed a preload bug that affected SVG images (@jdm, #46668).
+
+<figure class="_spaced">
+    <div class="_peel" style="--default-position: 22%;">
+        <div class="_line">
+            <div class="_left"><div>v0.4.0</div></div>
+            <div class="_right"><div>v0.5.0</div></div>
+        </div>
+        <img src="{{ '/img/blog/2026-08-143728.png' | url }}">
+        <img src="{{ '/img/blog/2026-08-143737.png' | url }}">
+    </div>
+    <figcaption><a href="https://duckduckgo.com/">duckduckgo.com</a></figcaption>
+</figure>
+
 Most of **Gumroad ([gumroad.com](https://gumroad.com))**, except for the landing page, did not render at all in v0.4.0, but as of v0.5.0, pages like the [**Discover page**](https://gumroad.com/discover) or [**this product page**](https://harrycraft2.gumroad.com/l/theworldslongestcity) render almost perfectly.
 
 <figure class="_spaced">
