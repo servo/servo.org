@@ -194,7 +194,10 @@ The upgrade to Stylo 2026-07-01 brings several changes to built-in **CSS functio
 - **‘attr()’** is more conformant, under `--pref layout­_css­_attr­_enabled`
 
 **Web­GPU** content can now enjoy better conformance and use **GPU­External­Texture** and **import­External­Texture()** on **GPU­Device**, under `--pref dom­_webgpu­_enabled` (@sagudev, #45873, #46178, #46286).
-<!-- TODO: screenshot in comments -->
+
+<figure>
+    <a href="{{ '/img/blog/2026-08-webgpu.png' | url }}"><img src="{{ '/img/blog/2026-08-webgpu.png' | url }}" alt="servoshell 0.5.0 showing four tilted rectangles (in WebGPU), textured with a picture of a dog (which is a frame from an external video)"></a>
+</figure>
 
 **Indexed­DB** content can now use the **name** property on **IDB­Index**, under `--pref dom­_indexeddb­_enabled` (@skyz1, #45512).
 
