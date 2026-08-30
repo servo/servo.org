@@ -50,8 +50,6 @@ This is another big update, so here’s an outline:
 
 - [**More on the web platform**](#more-on-the-web-platform)
 
-- [**Garbage collection safety**](#garbage-collection-safety)
-
 - [**Performance and stability**](#performance-and-stability)
 
 - [**New contributors**](#new-contributors)
@@ -207,7 +205,7 @@ All of the features above are enabled in servoshell’s [experimental mode](http
 We’ve started implementing **WebVTT** for native **subtitles** and **captions**, enabled by default (no `--pref`).
 While they don’t render just yet, we can now fetch each &lt;track src>, parse the WebVTT, and expose cues via the **track** property on **HTML­Track­Element** (@TimvdLippe, #46289, #46383).
 
-August was a big month for **accessibility** in Servo, under `--pref accessibility­_enabled`.
+July was a big month for **accessibility** in Servo, under `--pref accessibility­_enabled`.
 The focus for this month has been on **performance**, with the accessibility tree now supporting **incremental updates** (@alice, @delan, #45578, #45971, #46589, #46691, #46385), requiring **fewer HashMap lookups** and **tree walks** (@alice, @delan, #45798, #46740, #46348), and allowing for **faster DOM mutations** (@alice, #46348, #46530).
 
 We’ve also started working on the [**File and Directory Entries API**](https://wicg.github.io/entries-api/), to allow users to **select** and **upload entire directories** via **&lt;input type=file>** and **drag-and-drop**.
