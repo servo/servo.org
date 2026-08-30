@@ -13,6 +13,10 @@ For security fixes, see [**§ Security**](#security).
 **DOM text selections** are now visible (@mrobinson, @SimonSapin, #46698, #46864, #46742, #46889, #46126).
 Interactive selection is coming soon!
 
+<figure>
+    <a href="{{ '/img/blog/2026-08-diffie.png' | url }}"><img src="{{ '/img/blog/2026-08-diffie.png' | url }}" alt="servoshell 0.5.0 showing several new features: ‘text-decoration-thickness’, ‘box-decoration-break’, web fonts in inline `<svg>`, and DOM selection rendering"></a>
+</figure>
+
 We’ve shipped several new web platform features:
 
 - **‘Cache-Control: stale-while-revalidate’** (@arayaryoma, #46060)
