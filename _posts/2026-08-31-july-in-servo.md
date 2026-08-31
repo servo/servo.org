@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "July in Servo: and more!"
+title:      "July in Servo: more platforms, faster canvas, web fonts in SVG, and more!"
 date:       2026-08-31
-summary:    ao!! wrrrrao!!
+summary:    Plus real world compat improvements on the DuckDuckGo and Gumroad websites.
 categories:
 ---
 
