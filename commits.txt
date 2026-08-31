@@ -241,7 +241,7 @@
     # Specification: <https://wicg.github.io/webcrypto-secure-curves/#ed448>
     # Testing: Covered by WPT tests in `WebCryptoAPI/import_export` directory
     # Part-of: #46140
-https://github.com/servo/servo/pull/46124	(@arayaryoma, #46124)	net: Avoid creating empty cookie map entries on cookie deletion (#46124)
+.https://github.com/servo/servo/pull/46124	(@arayaryoma, #46124)	net: Avoid creating empty cookie map entries on cookie deletion (#46124)
     ^ commit 7903e68378d5e2055681b8a890a69f65a613cc88
     # This change addresses several granular TODO comments regarding minor performance issues caused by the creation of unnecessary empty Vecs. Test utilities such as WebDriver clients delete all cookies from sites. Using `get_mut()` avoids unnecessary heap usage.
     # 
@@ -1906,7 +1906,7 @@ https://github.com/servo/servo/pull/46222	(@jschwe, #46222)	mach: Add debugmozjs
     # Testing: Not required, as this is just a documentation change.
     # 
     # 
-https://github.com/servo/servo/pull/46238	(@Narfinger, #46238)	script: Remove clippy lint by refactoring code and using FxHashSet for intermediate hashset (#46238)
+.https://github.com/servo/servo/pull/46238	(@Narfinger, #46238)	script: Remove clippy lint by refactoring code and using FxHashSet for intermediate hashset (#46238)
     ^ commit 140917a525debad58392f808f23a6194beef3c61
     # This removes the clippy lint by using the HashSet::from_iter construction which is more idiomatic.
     # Additionally, we use FxHashSet for this intermediate HashSet. While FxHashSet can be used to slow down this function with a bad input, so can adding lots of elements which is an easier way.
@@ -2176,7 +2176,7 @@ https://github.com/servo/servo/pull/46272	(@simonwuelker, #46272)	stylo: Don't t
     # 
     # Testing: Compilation.
     # Fixes: Part of #40600.
-https://github.com/servo/servo/pull/46072	(@Narfinger, #46072)	script: Do not clone script data unnecessarily (#46072)
+.https://github.com/servo/servo/pull/46072	(@Narfinger, #46072)	script: Do not clone script data unnecessarily (#46072)
     ^ commit 3fff0bb64929c1eb7f4f2d9f03530ed96823ae52
     # Previously scripts where cloned potentially. encoding_rs spits out a Cow<'_, str> which was previously transformed into an owned string. Now we use the Cow directly as much as possible only cloning when needed by unminify.
     # This, however, decreases the performance for inline script elements (see Step 5a in the diff). Where it previously was a simple clone of a DOMString but now is a transform into a Cow (potentially instantiating + clone).
@@ -2641,7 +2641,7 @@ https://github.com/servo/servo/pull/46311	(@veyndan, #46311)	android: Remove set
     # For these reasons, I think it's worth just deleting the setting.
     # 
     # Testing: There are no automated tests for Android.
-https://github.com/servo/servo/pull/46315	(@jschwe, @mrobinson, #46315)	mach: Fix flaky fail in test-scripts (#46315)
+-https://github.com/servo/servo/pull/46315	(@jschwe, @mrobinson, #46315)	mach: Fix flaky fail in test-scripts (#46315)
     ^ commit 7a050b809e419030f9f33b2e748abbc0ca9b5cd9
     # During tearDownModule, the `shutil.rmtree()` could fail, since it apparently internally does a scan over all files, and the then deletes those files individually.
     # `git` may do maintenance (and this may be more aggressive in the recent 2.55 release, since we didn't see this before), and has a lockfile that it creates and removes. If `shutil.rmtree` sees that lockfile, but git finishes its background maintenance, before rmtree, then the delete operation by rmtree can fail.
@@ -2912,7 +2912,7 @@ https://github.com/servo/servo/pull/46307	(@arayaryoma, @yezhizhen, #46307)	net:
     # The stored expiry was recomputed from the cached response *before* the 304's headers were merged in, so an updated `expires`/`cache-control` returned by the validation was ignored. Merge the headers first, then recompute the expiry.
     # 
     # Testing: updated tests/wpt/meta/fetch/api/basic/conditional-get.any.js.ini and `./mach test-wpt tests/wpt/tests/fetch/api/basic/` is passed.
-https://github.com/servo/servo/pull/46330	(@jdm, #46330)	script: Remove some unnecessary JSContext arguments. (#46330)
+.https://github.com/servo/servo/pull/46330	(@jdm, #46330)	script: Remove some unnecessary JSContext arguments. (#46330)
     ^ commit 9a5bf82a250e82118a260e2612d91320b748227c
     # In Performance methods, we don't need to obtain a new Performance reference when we already have `&self` available.
     # 
@@ -4115,7 +4115,7 @@ https://github.com/servo/servo/pull/46357	(@nicoburns, #46357)	Upgrade to Stylo 
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46401	(@atouchet, #46401)	Unpin some crypto dependencies (#46401)
+-https://github.com/servo/servo/pull/46401	(@atouchet, #46401)	Unpin some crypto dependencies (#46401)
     ^ commit a87a245faf9e4f4059427f0c02a182b92d94c7ba
     # These were previously pinned to pre-release versions but Dependabot doesn't remove the version pin when updating to the stable releases.
     # 
@@ -4139,7 +4139,7 @@ https://github.com/servo/servo/pull/46401	(@atouchet, #46401)	Unpin some crypto 
     # This adds 10 extra minutes for GitHub hosted runner.
     # 
     # See https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Proposal.3A.20Remove.20vello.20backend/near/609241859
-https://github.com/servo/servo/pull/46408	(@Narfinger, #46408)	layout: Use `Vec::clear()` instead of `Vec::truncate(0)` in `table/construct.rs` (#46408)
+.https://github.com/servo/servo/pull/46408	(@Narfinger, #46408)	layout: Use `Vec::clear()` instead of `Vec::truncate(0)` in `table/construct.rs` (#46408)
     ^ commit 38340359538a51ffe95ca18c0e970f3d952b6428
     # This will be a clippy lint in the future. It has the same behavior except that there might be less code executed.
     # 
@@ -4163,7 +4163,7 @@ https://github.com/servo/servo/pull/46408	(@Narfinger, #46408)	layout: Use `Vec:
     # Fixes: #45975
     # Fixes: #36094.
     # Fixes: #35935.
-https://github.com/servo/servo/pull/46412	(@jdm, #46412)	script: Consolidate Window-specific request client logic. (#46412)
+.https://github.com/servo/servo/pull/46412	(@jdm, #46412)	script: Consolidate Window-specific request client logic. (#46412)
     ^ commit e0ed99290bde21788aee5fd2c80fa075b9be86fc
     # GlobalScope::request_client calls a lot of methods that check if the global is a Window and then call a method on that window's document. To avoid this unnecessary work (as well as adding additional NoGC variants of each method), we can move all of this Window-specific logic into Window. This reduces the time spent in Window::web_font_context from 19% to 14% in the testcase from #46368.
     # 
@@ -4606,7 +4606,7 @@ https://github.com/servo/servo/pull/46412	(@jdm, #46412)	script: Consolidate Win
     # 
     # Testing: We now pass some css-break tests. I've also added some new tests for related behavior.
     # 
-https://github.com/servo/servo/pull/46438	(@Narfinger, #46438)	script: Have `SVGSVGElement` store `Uuid` directly instead of the `String` representation of a `Uuid` (#46438)
+.https://github.com/servo/servo/pull/46438	(@Narfinger, #46438)	script: Have `SVGSVGElement` store `Uuid` directly instead of the `String` representation of a `Uuid` (#46438)
     ^ commit 621c816ef3155868103ee79d72af3245228f91c0
     # Storing Uuid directly in svgsvgelement is more efficient than storing an string from an uuid. We also change all downstream occurrences of this.
     # 
@@ -4982,7 +4982,7 @@ https://github.com/servo/servo/pull/42578	(@Narfinger, #42578)	tracing: Implemen
     # 
     # Testing: No automatic test but manual testing showed that it correctly instruments all functions.
     # 
-https://github.com/servo/servo/pull/46410	(@yezhizhen, #46410)	canvas: Enable multithreading in vello_cpu & workaround panic (improve 27% FPS , 7% power efficiency) (#46410)
+.https://github.com/servo/servo/pull/46410	(@yezhizhen, #46410)	canvas: Enable multithreading in vello_cpu & workaround panic (improve 27% FPS , 7% power efficiency) (#46410)
     ^ commit 1208acd4a0db6b0fb27956aa6cd22b1be4e301f3
     # This is a workaround against panic before https://github.com/linebender/vello/pull/1732 can be merged and release a new version.
     # 
@@ -5040,7 +5040,7 @@ https://github.com/servo/servo/pull/46233	(@jschwe, #46233)	deps: Update freetyp
     # 
     # Testing: Covered by existing tests. 
     # Fixes: #39245
-https://github.com/servo/servo/pull/46455	(@jschwe, @sagudev, #46455)	deps: Update mozangle (#46455)
+.https://github.com/servo/servo/pull/46455	(@jschwe, @sagudev, #46455)	deps: Update mozangle (#46455)
     ^ commit 7b703598ec8dc7b0b1408016362e1daa6fc6dcd8
     # mozangle was updated based on the latest upstream ESR (140.12.0, from 115 ESR), which also fixes a number of security issues.
     # 
@@ -5436,7 +5436,7 @@ https://github.com/servo/servo/pull/46495	(@simonwuelker, #46495)	script: Flush 
     # 
     # Testing: This is an optimization that should not change test result.
     # Part of #34464
-https://github.com/servo/servo/pull/46499	(@mrobinson, #46499)	script_bindings: Use `PhantomData` in `UnrootedDom` and implement `Debug` and `Clone` (#46499)
+.https://github.com/servo/servo/pull/46499	(@mrobinson, #46499)	script_bindings: Use `PhantomData` in `UnrootedDom` and implement `Debug` and `Clone` (#46499)
     ^ commit 86c645bf33940764ec9616ef1e13d7850167c65e
     # This decreases the size of `UnrootedDom` from 16 to 8 bytes. In
     # addition, `Debug` and `Clone`are implemented for `UnrootedDom`
@@ -5465,7 +5465,7 @@ https://github.com/servo/servo/pull/46499	(@mrobinson, #46499)	script_bindings: 
     # Just some small WebIDL changes with simple corresponding servo changes.
     # 
     # Testing: WebGPU CTS run
-https://github.com/servo/servo/pull/46437	(@Narfinger, #46437)	layout/script/fonts: Implement size_hint for iterator if easy (#46437)
+.https://github.com/servo/servo/pull/46437	(@Narfinger, #46437)	layout/script/fonts: Implement size_hint for iterator if easy (#46437)
     ^ commit ef9bf46b3204ef287493045adc68bb13be0a6136
     # This implements size_hint for structs that `impl Iterator` if it is reasonably easy to get the size. This allows the compiler to optimize if these structs are collected into an array.
     # 
@@ -5490,7 +5490,7 @@ https://github.com/servo/servo/pull/46437	(@Narfinger, #46437)	layout/script/fon
     # 
     # Testing: We do not really have tests for this, as typically WPT-type tests run in headless mode.
 >>> 2026-07-16T01:20:48Z
-https://github.com/servo/servo/pull/46461	(@Gae24, #46461)	script: Bump to mozjs with safe APIs (#46461)
+.https://github.com/servo/servo/pull/46461	(@Gae24, #46461)	script: Bump to mozjs with safe APIs (#46461)
     ^ commit 97cc7f7abb07b67cf6228b06f350b8e52517df31
     # Switch to safe variants of `describe_scripted_caller` and `error_info_from_exception_stack`.
     # 
@@ -6008,7 +6008,7 @@ https://github.com/servo/servo/pull/46508	(@arayaryoma, #46508)	net: Handle brot
     # stream boundary so they surface as a decompression error.
     # 
     # Testing: add unit tests and updated wpt expectations by running `mach test-wpt tests/wpt/tests/fetch/content-encoding --update-expectations`
-https://github.com/servo/servo/pull/45703	(@mukilan, @TimvdLippe, @sagudev, #45703)	ci: Disable macOS's C API job on push to 'main'. (#45703)
+-https://github.com/servo/servo/pull/45703	(@mukilan, @TimvdLippe, @sagudev, #45703)	ci: Disable macOS's C API job on push to 'main'. (#45703)
     ^ commit 0ffc15177fd03a275cc70fceeb19f3cfa37b4819
     # It seems this could be a bottleneck due to the limited availabily of github runners for macOS. If this doesn't help, we can disable it for macOS on `merge_group` as well.
     # 
@@ -6394,7 +6394,7 @@ https://github.com/servo/servo/pull/46541	(@simonwuelker, #46541)	script: Always
     # Testing: *Describe the new automated tests that cover this change or explain why it doesn't require tests.*
     # Fixes: *Link to an issue this pull request fixes or remove this line if there is no issue.*
     # 
-https://github.com/servo/servo/pull/46528	(@Narfinger, #46528)	fonts: Small optimization in WebFont download handler (#46528)
+.https://github.com/servo/servo/pull/46528	(@Narfinger, #46528)	fonts: Small optimization in WebFont download handler (#46528)
     ^ commit dbd57e71f0cd4441847bad64eed54ed698683abf
     # This makes some small optimization in the webfont download handler.
     # - Switch local_fonts in WebFontDownloadState to use a FxHashMap as the key is atoms.
@@ -8886,14 +8886,14 @@ https://github.com/servo/servo/pull/46694	(@veyndan, #46694)	android: Remove usa
     # Testing: New addition to test-tidy.
     # Fixes: part of #40756
     # 
-https://github.com/servo/servo/pull/46724	(@mrobinson, #46724)	ci: Disable choco / WiX installation on self-hosted runners (#46724)
+-https://github.com/servo/servo/pull/46724	(@mrobinson, #46724)	ci: Disable choco / WiX installation on self-hosted runners (#46724)
     ^ commit c2116c6b6a445fec8c0f674cde71c67acbfc5bea
     # The self-hosted CI runners are now detecting a double WiX installation.
     # This is a minimal attempt to fix that.
     # 
     # Testing: CI changes do not really have tests.
     # 
-https://github.com/servo/servo/pull/46721	(@mrobinson, #46721)	ci: Enable `allow-unsafe-pr-checkout` for WPT runs (#46721)
+-https://github.com/servo/servo/pull/46721	(@mrobinson, #46721)	ci: Enable `allow-unsafe-pr-checkout` for WPT runs (#46721)
     ^ commit 35431d8c62d0b5458e198251508a902d4002942d
     # This works around a new GitHub security requirement. We use
     # `pull_request_target` for try label jobs as they need access to the
@@ -9123,7 +9123,7 @@ https://github.com/servo/servo/pull/46727	(@veyndan, #46727)	android: Move depen
     # Testing: This change adds a WPT crashtest.
     # Fixes: #46335.
     # 
-https://github.com/servo/servo/pull/46725	(@mrobinson, #46725)	Use `ci-runners/actions/checkout` consistently (#46725)
+-https://github.com/servo/servo/pull/46725	(@mrobinson, #46725)	Use `ci-runners/actions/checkout` consistently (#46725)
     ^ commit b895d3dc854acae483435d267b877e8ece513570
     # Instead of only using our custom checkout action sometimes, use it
     # consistently even when there is no chance we'll be running the
@@ -9662,7 +9662,7 @@ https://github.com/servo/servo/pull/46787	(@veyndan, #46787)	android: Remove dup
     # Testing: It compiles
     # Part of #40600 
     # 
-https://github.com/servo/servo/pull/46786	(@jschwe, @sagudev, #46786)	canvas: Adjust memory pressure heuristic (#46786)
+.https://github.com/servo/servo/pull/46786	(@jschwe, @sagudev, #46786)	canvas: Adjust memory pressure heuristic (#46786)
     ^ commit 8fa3fd36e2add4292828c135400929bc10a5029c
     # With the testcase from #45199 memory usage grew to 1.7 GiB before stabilizing. With this patch it stopped at around 1GiB (due to more frequent GCs).
     # We probably should be able to remove at least one of the copies in memory, but thats a bit more effort than making the memory pressure more accurate.
@@ -9824,7 +9824,7 @@ https://github.com/servo/servo/pull/45962	(@jdm, #45962)	wpt: Add missing messag
     # 
     # Testing: Added a test each against frame and global scopes, as well as one test for case-sensitivity
     # Fixes: Part of #39858
-https://github.com/servo/servo/pull/46760	(@mukilan, #46760)	ci: Add support for nightly arm64 linux builds (#46760)
+.https://github.com/servo/servo/pull/46760	(@mukilan, #46760)	ci: Add support for nightly arm64 linux builds (#46760)
     ^ commit df0148093c42dcbe450581abe9a0bf58cd3f691e
     # The common jobs for both x86_64 and arm64 are extracted into a callable workflow `linux-common.yml`.
     # 
@@ -9832,7 +9832,7 @@ https://github.com/servo/servo/pull/46760	(@mukilan, #46760)	ci: Add support for
     # 
     # Fixes: #35023
     # Testing: Validated the CI logic on personal fork. The build artifacts have not been validated manually yet, although one of the fork runs ran the unit tests for arm64 build without issues.
-https://github.com/servo/servo/pull/46807	(@jdm, #46807)	net: Use generic channels for fetch responses. (#46807)
+.https://github.com/servo/servo/pull/46807	(@jdm, #46807)	net: Use generic channels for fetch responses. (#46807)
     ^ commit a93d2865be6110204b25b823697530bee8341229
     # There's no reason to incur IPC serialization for every network response message if we don't need to.
     # 
@@ -10084,7 +10084,7 @@ https://github.com/servo/servo/pull/46816	(@veyndan, #46816)	android: Replace ma
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/46697	(@simonwuelker, #46697)	layout: Fix baseline alignment of horizontal text in column flex container (#46697)
+.https://github.com/servo/servo/pull/46697	(@simonwuelker, #46697)	layout: Fix baseline alignment of horizontal text in column flex container (#46697)
     layout; as titled
     ^ commit d33cbb72255bf3a8dc54e36862723771e8d4d37d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -10095,7 +10095,7 @@ https://github.com/servo/servo/pull/46816	(@veyndan, #46816)	android: Replace ma
     # Testing: New tests start to pass.  `css/css-flexbox/align-items-baseline-column-vert-lr-items.html`regresses - this test uses baselines from vertical text, but we don't support vertical writing modes yet. I've also added a new test as the interaction between `flex-direction: row-reverse` and `direction: rtl` was not covered by WPT.
     # 
     # 
-https://github.com/servo/servo/pull/46825	(@mukilan, #46825)	ci: Pass the 'force-github-hosted-runner' to common linux workflow. (#46825)
+-https://github.com/servo/servo/pull/46825	(@mukilan, #46825)	ci: Pass the 'force-github-hosted-runner' to common linux workflow. (#46825)
     ^ commit 22cca821e7eadd3c0b126534cb2782eaf1316895
     # This was missed in #46760 and was not caught in the fork runs as forks can't use the self-hosted runners. In `servo/servo` repo, the bug caused nightly build job to run with self-hosted x84_64 runners even for arm64 builds.
     # 

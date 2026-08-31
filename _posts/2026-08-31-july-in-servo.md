@@ -7,11 +7,12 @@ summary:    ao!! wrrrrao!!
 categories:
 ---
 
-[**Servo 0.5.0**](https://github.com/servo/servo/releases/tag/v0.5.0) contains all of the changes we landed in July, which came out to **488 commits**.
-For security fixes, see [**§ Security**](#security).
+[**Servo 0.5.0**](https://github.com/servo/servo/releases/tag/v0.5.0) contains all of the changes we landed in July, which came out to **488 commits**, and we now publish binaries for **Linux aarch64** (@mukilan, #46760)!
 
 **DOM text selections** are now visible (@mrobinson, @SimonSapin, #46698, #46864, #46742, #46889, #46126).
 Interactive selection is coming soon!
+
+For security fixes, see [**§ Security**](#security).
 
 <figure>
     <a href="{{ '/img/blog/2026-08-diffie.png' | url }}"><img src="{{ '/img/blog/2026-08-diffie.png' | url }}" alt="servoshell 0.5.0 showing several new features: ‘text-decoration-thickness’, ‘box-decoration-break’, web fonts in inline `<svg>`, and DOM selection rendering"></a>
@@ -72,6 +73,8 @@ If you’re working on a pull request that you think might be interesting for th
 
 Servo was potentially affected by vulnerabilities in [**quick-xml**](https://crates.io/crates/quick-xml) and [**crossbeam-epoch**](https://crates.io/crates/crossbeam-epoch) that have been fixed in Servo 0.5.0 (@atouchet, @Loirooriol, #46737, #46324).
 For more details, see [RUSTSEC-2026-0194](https://rustsec.org/advisories/RUSTSEC-2026-0194), [RUSTSEC-2026-0195](https://rustsec.org/advisories/RUSTSEC-2026-0195), and [RUSTSEC-2026-0204](https://rustsec.org/advisories/RUSTSEC-2026-0204).
+
+We’ve updated **[ANGLE](https://github.com/servo/mozangle)** from a version based on Firefox 115.x ESR ([02755361e26d8](https://hg.mozilla.org/mozilla-unified/file/02755361e26d82768eb1d5f576145e19d7c265cd/gfx/angle)) to a version based on Firefox 140.12.0 ESR ([f8025617e815f](https://github.com/mozilla-firefox/firefox/commit/f8025617e815f21388b40baf189338d31a5f9a0a)), which likely includes many security fixes (@jschwe, @sagudev, #46455, [mozangle#100](https://github.com/servo/mozangle/pull/100)).
 
 ## Real world compat
 
@@ -245,14 +248,17 @@ We’re also implementing the **SVG DOM**, starting with stub interfaces for **S
 
 We’ve improved the conformance of **&lt;form>** without **&lt;form action>** (@kevlu93, #46860), **&lt;color> values** (@Loirooriol, #46129), **Gamepad­Event** (@log101, #46788), **document.execCommand("delete")** (@Psychpsyo, #46539), the **selector­Text** property on **CSS­Style­Rule** (@simonwuelker, #46687), and **Set Window Rect** in WebDriver (@janeoa, #46475, #46477).
 
-We’ve fixed bugs related to **&lt;iframe>** (@jschwe, @jdm, #46587), **&lt;img>** (@yodalee, #46892), **&lt;textarea>** (@SimonSapin, @mrobinson, #46309), **custom properties** (@Loirooriol, #46129), **‘::before’** and **‘::after’** (@Loirooriol, #46640), **‘float’** (@Loirooriol, @mrobinson, #46407, #46500, #46505), **‘@font-face’** (@simonwuelker, #46568, #46271, #46436), **‘position: absolute’** (@simonwuelker, #46358, #46637), **Blob** (@jdm, #46881), **IDB­Database** and **IDB­Object­Store** and **IDB­Index** (@mrobinson, #46615), the **adopted­Style­Sheets** property on **Shadow­Root** (@simonwuelker, #46738), **delete()** on **Font­Face­Set** (@simonwuelker, #46634), **move­Before()** on **Element** (@mrobinson, #46599), **resize­To()** on **Window** (@janeoa, #46477), the **selected** property on **HTML­Option­Element** (@rhit-kapilaar, #46386), and the **value** property on **HTML­Select­Element** (@simonwuelker, #46230).
+We’ve fixed bugs related to **&lt;iframe>** (@jschwe, @jdm, #46587), **&lt;img>** (@yodalee, #46892), **&lt;textarea>** (@SimonSapin, @mrobinson, #46309), **custom properties** (@Loirooriol, #46129), **‘::before’** and **‘::after’** (@Loirooriol, #46640), **‘flex-direction: column’** (@simonwuelker, #46697), **‘float’** (@Loirooriol, @mrobinson, #46407, #46500, #46505), **‘@font-face’** (@simonwuelker, #46568, #46271, #46436), **‘position: absolute’** (@simonwuelker, #46358, #46637), **Blob** (@jdm, #46881), **IDB­Database** and **IDB­Object­Store** and **IDB­Index** (@mrobinson, #46615), the **adopted­Style­Sheets** property on **Shadow­Root** (@simonwuelker, #46738), **delete()** on **Font­Face­Set** (@simonwuelker, #46634), **move­Before()** on **Element** (@mrobinson, #46599), **resize­To()** on **Window** (@janeoa, #46477), the **selected** property on **HTML­Option­Element** (@rhit-kapilaar, #46386), and the **value** property on **HTML­Select­Element** (@simonwuelker, #46230).
 
 ## Performance and stability
 
+**2D canvas** rendering is now **multithreaded**, improving frame rates by **up to 55%** and power consumption per frame by **up to 42%** (@yezhizhen, #46410), and should use a lot less memory too (@jschwe, @sagudev, #46786).
+
 **Text rendering** is **up to 10x faster** for cases with the same text and different ‘font-size’ (@Loirooriol, #46129).
+
 **Flex layout** benchmarks are up to **3%** faster, and an improvement to **get­Elements­By­Class­Name()** has made some websites up to **1%** faster (@Narfinger, @jdm, #46563, #46595, #46594).
 
-We’ve also reduced allocations, GC rooting steps, and other operations in many parts of Servo (@jdm, @yezhizhen, @Narfinger, @Gae24, @SimonSapin, @mrobinson, @Taym95, @cychronex-labs, #46411, #46659, #45974, #46377, #45758, #46440, #46762, #46301, #46349, #46419, #46418, #46420, #46460, #46633, #46638, #46690, #46745, #46726, #46564, #46144, #46664, #46462, #46139, #46430, #46446, #46498, #46548, #46598, #46632, #46656, #46678, #46718, #46722).
+We’ve also reduced memory usage, allocations, GC rooting steps, and other operations in many parts of Servo (@mrobinson, @jdm, @yezhizhen, @Narfinger, @Gae24, @SimonSapin, @Taym95, @cychronex-labs, @arayaryoma, #46499, #46411, #46659, #45974, #46377, #45758, #46440, #46762, #46301, #46349, #46419, #46418, #46420, #46460, #46633, #46638, #46690, #46745, #46726, #46564, #46144, #46664, #46462, #46139, #46430, #46446, #46498, #46548, #46598, #46632, #46656, #46678, #46718, #46722, #46238, #46072, #46408, #46438, #46437, #46528, #46124, #46330, #46412, #46807).
 
 We’ve fixed a crash regression with memory corruption (@mrobinson, #46316), several dynamic-borrow-related crashes (@Narfinger, @SharanRP, @Taym95, @agrawalx, @amittenak47, @sungmen, #46381, #46384, #46405, #46684, #46452, #46770, #46830, #46763), plus crashes related to:
 
@@ -270,7 +276,7 @@ We’ve fixed a crash regression with memory corruption (@mrobinson, #46316), se
 - **exec­Command(`"delete"`)** on **Document** (@TimvdLippe, #46265)
 - removing DOM nodes (@SimonSapin, #46866)
 
-We’ve continued our long-running effort to use the Rust type system to make Servo’s integration with SpiderMonkey safer and more reliable (@Gae24, @Narfinger, @TimvdLippe, @jdm, @kunalmohan, @lumiscosity, @simonwuelker, #46191, #46777, #46890, #46243, #46248, #46246, #46310, #46312, #46333, #46147, #46150, #46151, #46229, #46262, #46375, #46374, #46529, #46584, #46585, #46593, #46693, #46166, #46156, #46254, #46267, #46268, #46269, #46270, #46284, #46285, #46318, #46435).
+We’ve continued our long-running effort to use the Rust type system to make Servo’s integration with SpiderMonkey safer and more reliable (@Gae24, @Narfinger, @TimvdLippe, @jdm, @kunalmohan, @lumiscosity, @simonwuelker, #46191, #46777, #46890, #46243, #46248, #46246, #46310, #46312, #46333, #46147, #46150, #46151, #46229, #46262, #46375, #46374, #46529, #46584, #46585, #46593, #46693, #46166, #46156, #46254, #46267, #46268, #46269, #46270, #46284, #46285, #46318, #46435, #46461).
 
 ## New contributors
 
