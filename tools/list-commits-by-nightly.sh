@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-# usage: list-commits-by-nightly.sh <path/to/servo> [--pulls-json-path=path/to/pulls.json] [--git-show-output-cache-path=path/to/cache]
+# usage: list-commits-by-nightly.sh <path/to/servo> [--pulls-json-path=path/to/pulls.json] [--git-show-output-cache-path=path/to/cache] [--pull-numbers-only]
 # requires: zsh, gh, jq, tac, rg, git
 set -euo pipefail -o bsdecho -o shwordsplit
 if [ $# -lt 1 ]; then >&2 sed '1d;2s/^# //;2q' "$0"; exit 1; fi
@@ -10,6 +10,8 @@ missing() { >&2 echo "fatal: $1 not found"; exit 1; }
 > /dev/null command -v rg || missing rg
 > /dev/null command -v git || missing git
 servo_repo_path=$1; shift
+pull_numbers_only=false
+no_fetch=false
 while [ $# -gt 0 ]; do
   case "$1" in
   (--pulls-json-path=*)
@@ -18,6 +20,10 @@ while [ $# -gt 0 ]; do
     ;;
   (--git-show-output-cache-path=*)
     git_show_output_cache_path=${${1#--git-show-output-cache-path=}:a}
+    shift
+    ;;
+  (--pull-numbers-only)
+    pull_numbers_only=true
     shift
     ;;
   (*)
@@ -82,7 +88,9 @@ fi
 #                          • then leave `minus_commit` unchanged
 unset minus_commit
 < runs.tsv while read -r commit updated; do
-  printf '>>> %s\n' "$updated" | rg .  # make it red if stdout is a tty
+  if [ $pull_numbers_only = false ]; then
+    printf '>>> %s\n' "$updated" | rg .  # make it red if stdout is a tty
+  fi
 
   # Sometimes we build a nightly from something other than the default branch,
   # so we may not have the commits locally.
@@ -109,6 +117,9 @@ unset minus_commit
     fi
     if [ -n "${git_show_output_cache_path+set}" ]; then
       set -- "$@" --git-show-output-cache-path="$git_show_output_cache_path"
+    fi
+    if [ $pull_numbers_only = true ]; then
+      set -- "$@" --pull-numbers-only
     fi
     ./list-commits-between.sh "$servo_repo_path" $minus_commit $commit "$@"
   fi
