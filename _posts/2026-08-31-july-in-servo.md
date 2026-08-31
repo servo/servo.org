@@ -298,14 +298,6 @@ Take a look at our [curated list](https://starters.servo.org) of issues that are
 
 ## Donations
 
-<!--
-7681/month → 7824/month
-- 3585.07/month opencollective
-- 4103.00/month github
-- 135.93/month thanks.dev
-    - 35 → 35 donors
--->
-
 Thanks again for your generous support!
 We are now receiving **7824 USD/month** (+1.8% from June) in recurring donations.
 This helps us cover the cost of our **[speedy](https://ci0.servo.org) [CI](https://ci1.servo.org) [and](https://ci2.servo.org) [benchmarking](https://ci3.servo.org) [servers](https://ci4.servo.org)**, one of our latest **[Outreachy interns](https://www.outreachy.org/alums/2026-05/#:~:text=Servo)**, and funding **[maintainer work]({{ '/blog/2025/09/17/your-donations-at-work-funding-jdm/' | url }})** that helps more people contribute to Servo.
