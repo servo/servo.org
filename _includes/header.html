@@ -3,7 +3,9 @@
     <div class="inner-container">
       <div class="navbar-brand">
         <a href="{{ '/' | url }}">
-          <img src="{{ site.logoMark | url }}" alt="{{ title }}">
+          <!-- dark/light logos -->
+          <img class="logo-light" src="{{ site.logoMark | url }}" alt="{{ title }}">
+          <img class="logo-dark" src="{{ '/svg/servo-color-negative.svg' | url }}" alt="{{ title }}">
         </a>
 
         <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
@@ -54,6 +56,12 @@
             </a>
           {% endif %}
         {% endfor %}
+
+        <!-- Theme toggle btn -->
+        <button id="themeToggle" class="theme-toggle-btn" type="button" aria-label="Toggle theme" title="Toggle dark/light mode">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+          <i class="fas fa-sun"></i>
+        </button>
         {% include "social-buttons.html" %}
       </div>
     </div>
@@ -69,9 +77,16 @@
     hamburger.setAttribute('aria-expanded', !isExpanded);
     menu.classList.toggle('is-active', isExpanded);
   };
-
-  // Toggle on click
   hamburger.addEventListener('click', toggleMenu);
 
-
+  // Theme switch logic
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle?.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') ||'light';
+    const nextTheme = currentTheme == 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    try{
+      localStorage.setItem('theme', nextTheme)
+    } catch (e) {}
+  });
 </script>
