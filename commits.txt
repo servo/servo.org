@@ -58,7 +58,8 @@ https://github.com/servo/servo/pull/46937	(@nicoburns, #46937)	Upgrade to resvg 
     # 
     # Testing: WPT tests
     # 
-https://github.com/servo/servo/pull/46919	(@Gae24, #46919)	script: Don't cache HTTP errors in the module map (#46919)
++https://github.com/servo/servo/pull/46919	(@Gae24, #46919)	script: Don't cache HTTP errors in the module map (#46919)
+    web; we can now retry JS module fetches when fetching fails
     ^ commit f8ab249c71d9d904b093547659cf7b88457dd6b5
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Align Servo with the recent changes done in https://github.com/whatwg/html/pull/10327. Modules that are null due to network errors or MIME type mismatches are now ignored, allowing fetches to be retried. This change also simplifies the implementation by moving away from the previous Promise-based approach.
@@ -437,7 +438,8 @@ https://github.com/servo/servo/pull/46940	(@veyndan, #46940)	android: Remove unu
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46886	(@SimonSapin, #46886)	script: More consistent compareDocumentPosition for disconnected nodes (#46886)
++https://github.com/servo/servo/pull/46886	(@SimonSapin, #46886)	script: More consistent compareDocumentPosition for disconnected nodes (#46886)
+    dom; more conformant compareDocumentPosition() on Node when nodes are not in the same tree
     ^ commit 469f9721e58f65125fe28d88092f275436fcbe6b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # When comparing disconnected nodes by pointer addresses, use stable GC-owned pointers rather than temporary pointers to pointers.
@@ -449,7 +451,8 @@ https://github.com/servo/servo/pull/46951	(@veyndan, #46951)	android: Make `glTh
     # By doing the initialisation steps directly in the constructor's initialisation section, we can make `glThread` final as the Java compiler knows that we only initialise `glThread` on instantiation. Previously, we could've theoretically called `init()` from elsewhere, hence we couldn't make the immutable guarantee to Java.
     # 
     # Testing: There are no automated tests for Android.
-https://github.com/servo/servo/pull/46829	(@mrobinson, #46829)	 layout: Allow shaping across inline box boundaries (#46829)
++https://github.com/servo/servo/pull/46829	(@mrobinson, #46829)	 layout: Allow shaping across inline box boundaries (#46829)
+    layout; we can now shape text across inline box boundaries, e.g. `<span>ff</span>i`
     ^ commit da291ca3c487fa525866776a5bcfdc0c34684a88
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Allow shaping across inline box boundaries by collecting text to shape during
@@ -870,7 +873,7 @@ https://github.com/servo/servo/pull/46988	(@jdm, #46988)	constellation: Do not r
     # Fixes: part of #43149
     # 
 >>> 2026-08-05T23:44:36Z
-https://github.com/servo/servo/pull/46994	(@veyndan, #46994)	android: Inline `InitOptions` (#46994)
+-https://github.com/servo/servo/pull/46994	(@veyndan, #46994)	android: Inline `InitOptions` (#46994)
     ^ commit 8d959efeb696b493de0e7ede89dcfc54a6e25f2b
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # This can be seen as the Rust equivalent to #46916. Wrapping some of these `init()` options in a `struct` and then immediately unwrapping them makes the code harder to following by being a bit obtuse.
@@ -1007,7 +1010,8 @@ https://github.com/servo/servo/pull/47005	(@jdm, #47005)	script: Prevent borrow 
     # Testing: Existing test coverage suffices.
     # Fixes: #47004
     # 
-https://github.com/servo/servo/pull/46980	(@RichardTjokroutomo, @yezhizhen, #46980)	script: Fire `focusin`/`focusout` (#46980)
++https://github.com/servo/servo/pull/46980	(@RichardTjokroutomo, @yezhizhen, #46980)	script: Fire `focusin`/`focusout` (#46980)
+    dom; partial impl ‘focusin’ and ‘focusout’ events, except with <iframe>
     ^ commit c17ddb2cdf641e1935fa175b2199bda059e4ad1b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Add basic support for `focusin`/`focusout` `FocusEvent` type.
@@ -1540,7 +1544,8 @@ https://github.com/servo/servo/pull/47078	(@mrobinson, #47078)	layout: Apply fol
     # 
     # Testing: These changes are covered by the text from #47022.
     # 
-https://github.com/servo/servo/pull/47074	(@jdm, #47074)	script: Do not navigate a newly-opened window to about:blank. (#47074)
++https://github.com/servo/servo/pull/47074	(@jdm, #47074)	script: Do not navigate a newly-opened window to about:blank. (#47074)
+    web; see #46975
     ^ commit d4ed3ed249ed1a5eb182ea317478cd6947cce962
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This improves our conformance with the specification, specifically around the behaviour of `window.open("about:blank")` vs. `window.open()`, both of which should only initialize the about:blank and not perform any subsequent navigation. This is observable by navigating the new window to another URL and checking `window.history.length`; the navigation away from the initial about:blank must always be a replacement navigation. These changes also fix some failures exposed by #47050.
@@ -2151,7 +2156,8 @@ https://github.com/servo/servo/pull/47116	(@RichardTjokroutomo, #47116)	OHOS: Al
     # 
     # Testing: Manual testing.
     # 
-https://github.com/servo/servo/pull/47123	(@shubhamg13, @jdm, #47123)	script: Implement `fully exit fullscreen` steps partially (#47123)
++https://github.com/servo/servo/pull/47123	(@shubhamg13, @jdm, #47123)	script: Implement `fully exit fullscreen` steps partially (#47123)
+    security dom; navigating to a new page now exits fullscreen if it was initiated by web API
     ^ commit 4d6c61c48c1d5a0b86b8685945809047515e982d
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Implement `fully exit fullscreen` steps
@@ -2528,7 +2534,8 @@ https://github.com/servo/servo/pull/47165	(@Narfinger, #47165)	script: Use NoGC 
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47177	(@yezhizhen, @jschwe, #47177)	servo: Add clipboard backend for ohos (#47177)
++https://github.com/servo/servo/pull/47177	(@yezhizhen, @jschwe, #47177)	servo: Add clipboard backend for ohos (#47177)
+    dom; navigator.clipboard.writeText() now works on openharmony
     ^ commit 5c2a3839525ed23d04cf347e28b516bec3c8733f
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Testing: Manually tested. Note that **this only supports setting the clipboard**, as reading requires restricted permission that requires review from AppGallery: See https://developer.huawei.com/consumer/en/doc/harmonyos-guides/restricted-permissions#ohospermissionread_pasteboard.
@@ -2768,7 +2775,8 @@ https://github.com/servo/servo/pull/47214	(@Narfinger, #47214)	net: Use aws-lc-r
     # 
     # Testing: SHA algorithms should be the same, no matter from which crate they come. Subresource integrity should have WPT tests.
     # 
-https://github.com/servo/servo/pull/47224	(@Psychpsyo, #47224)	script: Make inserttext not crash when inserting non-ASCII text (#47224)
++https://github.com/servo/servo/pull/47224	(@Psychpsyo, #47224)	script: Make inserttext not crash when inserting non-ASCII text (#47224)
+    wip crash dom; fix crash in document.execCommand("insertText")
     ^ commit 046da7013f1378d86960a97b25e8fdffe1a23df2
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Fixes an infinite loop when inserting non-ASCII text with inserttext.
@@ -3074,7 +3082,8 @@ https://github.com/servo/servo/pull/47221	(@Narfinger, @yezhizhen, #47221)	layou
     # 
     # Testing: This is equivalent functionality just performance characteristics are different.
     # 
-https://github.com/servo/servo/pull/47050	(@jdm, #47050)	script: Make about:blank documents load synchronously without a parser. (#47050)
++https://github.com/servo/servo/pull/47050	(@jdm, #47050)	script: Make about:blank documents load synchronously without a parser. (#47050)
+    web; see #46975
     ^ commit 7f8f0862de7a020ec0353dc1aa982f95ed2396a2
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This pushes us closer to the specification's model of the document lifecycle by skipping the parser for the initial about:blank document.
@@ -3082,7 +3091,8 @@ https://github.com/servo/servo/pull/47050	(@jdm, #47050)	script: Make about:blan
     # Testing: New passing tests.
     # Fixes: part of #43149
     # 
-https://github.com/servo/servo/pull/47260	(@jdm, #47260)	wpt: Enable srcdoc referrer-policy tests. (#47260)
+-https://github.com/servo/servo/pull/47260	(@jdm, #47260)	wpt: Enable srcdoc referrer-policy tests. (#47260)
+    ;test; test only
     ^ commit b15d0ca3a165d1b51c6757ccb7167e7197c23fe9
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Since we now have much more consistent about:srcdoc support, the tests no longer exhibit the strange failures that made us disable them years ago.
@@ -3096,7 +3106,8 @@ https://github.com/servo/servo/pull/47262	(@jschwe, #47262)	script_webgpu: Enabl
     # 
     # Testing: Building script_webgpu individually is not covered by automatic tests
     # Fixes: #47261
-https://github.com/servo/servo/pull/47266	(@lumiscosity, #47266)	script: Avoid binding link element with empty href (#47266)
++https://github.com/servo/servo/pull/47266	(@lumiscosity, #47266)	script: Avoid binding link element with empty href (#47266)
+    crash; fix crash when <link rel=preload href> is empty (affects gumtree.com.au)
     ^ commit 0d558ccb42e7b570b80c85f3e78bf6048d024841
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This was crashing immediately after with an assert checking if the href isn't empty. As per spec: If the [href](https://html.spec.whatwg.org/multipage/semantics.html#attr-link-href) attribute is present, then its value must be a [valid non-empty URL potentially surrounded by spaces](https://html.spec.whatwg.org/multipage/urls-and-fetching.html#valid-non-empty-url-potentially-surrounded-by-spaces).
@@ -3165,7 +3176,8 @@ https://github.com/servo/servo/pull/47215	(@shubhamg13, #47215)	layout: Wrap up 
     # Testing: WPT Unchanged.
     # Fixes: Part of #42000
     # 
-https://github.com/servo/servo/pull/47270	(@TimvdLippe, @jdm, #47270)	script: Fix iframe name for initial navigation (#47270)
++https://github.com/servo/servo/pull/47270	(@TimvdLippe, @jdm, #47270)	script: Fix iframe name for initial navigation (#47270)
+    dom; fix bug in get name() on Window (window.name)
     ^ commit 80b2c05fb8c0261977d033c70a00d7c50d0192e5
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # During the initial load of an iframe, the name wasn't available yet. Now, we set the name immediately when creating the child navigable, following the spec.
@@ -3180,7 +3192,8 @@ https://github.com/servo/servo/pull/47271	(@TimvdLippe, #47271)	script: Move fil
     # 
     # Testing: it compiles
     # 
-https://github.com/servo/servo/pull/47274	(@jdm, #47274)	wpt: Remove all skipped test files from include.ini (#47274)
+-https://github.com/servo/servo/pull/47274	(@jdm, #47274)	wpt: Remove all skipped test files from include.ini (#47274)
+    ;test; test only
     ^ commit 36965f73dd6edb60daf13c7ee45ed2e2dd1fc5f8
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # It's too easy to forget about these, since they never get run as part of our CI when listed in include.ini. It's better to file issues about tests that have intermittent results so they can benefit from our related tooling.
@@ -3283,13 +3296,15 @@ https://github.com/servo/servo/pull/47277	(@veyndan, #47277)	android: Add button
     # |<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/01bcf224-66bf-46d5-bac7-dae728abbfd6" />|<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/cb669796-8e73-4397-bc1e-9b1b035968c8" />|
     # 
     # Testing: There are no automated tests for Android.
-https://github.com/servo/servo/pull/47286	(@jdm, @TimvdLippe, #47286)	wpt: Ensure javascript: URL produces a load event. (#47286)
+-https://github.com/servo/servo/pull/47286	(@jdm, @TimvdLippe, #47286)	wpt: Ensure javascript: URL produces a load event. (#47286)
+    ;test; test only
     ^ commit b1927851d9412687293691a8b47de312f31c39f6
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Per https://github.com/whatwg/html/issues/12788, the current test relies on Chrome-specific behaviour and causes timeouts in other browsers, even when fetchLater is supported.
     # 
     # https://wpt.fyi/results/fetch/fetch-later/new-window.https.window.html?label=experimental&label=master&aligned
-https://github.com/servo/servo/pull/47288	(@jdm, #47288)	wpt: Make domInteractive timing tests fail better. (#47288)
+-https://github.com/servo/servo/pull/47288	(@jdm, #47288)	wpt: Make domInteractive timing tests fail better. (#47288)
+    ;test; test only
     ^ commit 0be8e7b73fc931ace1eeb5803648365b38722478
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Assertions should only run inside of the WPT step functions, or else the test fails with confusing ERROR/NOTRUN codes.
@@ -3538,7 +3553,8 @@ https://github.com/servo/servo/pull/47307	(@yezhizhen, #47307)	script: Use effic
     # Fix some typo/sentence in `domstring.rs`.
     # 
     # Testing: Covered by existing test.
-https://github.com/servo/servo/pull/47306	(@Psychpsyo, #47306)	script: Make inserttext handle surrogate pairs correctly. (#47306)
++https://github.com/servo/servo/pull/47306	(@Psychpsyo, #47306)	script: Make inserttext handle surrogate pairs correctly. (#47306)
+    wip dom; more conformant document.execCommand("insertText")
     ^ commit 4a2e0234390ca465213bcebb6f5ecc8c6893accb
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Any characters that are longer than one UTF-16 code unit weren't inserted correctly before this. Now they are.
@@ -3637,7 +3653,8 @@ https://github.com/servo/servo/pull/47323	(@Narfinger, #47323)	script: Fix borro
     # 
     # Testing: This is a refactor with safe_borrow_mut enforces that no borrow hazards occur. Additionally, as script_thread is single threaded, no exceptions can occur in between the iter and clear.
     # 
-https://github.com/servo/servo/pull/47293	(@mrobinson, #47293)	constellation: Queue session history traversals (#47293)
++https://github.com/servo/servo/pull/47293	(@mrobinson, #47293)	constellation: Queue session history traversals (#47293)
+    web; more reliable navigation in history
     ^ commit 27775d1d904e8279e135f7fa32b809e659e29a1c
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Instead of running history traversals (moving backward and forward in
@@ -3669,7 +3686,8 @@ https://github.com/servo/servo/pull/47293	(@mrobinson, #47293)	constellation: Qu
     # 
     # Testing: This should not change observable behavior so should be covered by existing tests.
     # 
-https://github.com/servo/servo/pull/47337	(@simonwuelker, #47337)	script: Don't mark script-created `<title>` elements as being actively parsed (#47337)
++https://github.com/servo/servo/pull/47337	(@simonwuelker, #47337)	script: Don't mark script-created `<title>` elements as being actively parsed (#47337)
+    dom; fix bug in set title() on Document (document.title)
     ^ commit 6da8677fda9a9b9e6791a913235a77f5827deca7
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # While a `<title>` element is on the parsers stack of open elements we don't bother notifying the embedder about changes to its content, because it hasn't finished parsing yet. When a `<title>` element is created then we mark it as "parsing" and then when its popped from the stack of open elements then we unset that flag.
@@ -3997,7 +4015,8 @@ https://github.com/servo/servo/pull/45628	(@steigeo, #45628)	script: Use constel
     # Testing: The issue is caused by the embedder not sending a corresponding mouse up event with a mouse down one, so I'm not sure if WPT can enable us to test this.
     # Fixes: Partially fixes #45491, prevents `pointerup`/`pointerdown` events from breaking entirely. 
     # Fixes #47300.
-https://github.com/servo/servo/pull/47362	(@Psychpsyo, #47362)	script: Prevent text editing commands from running in uneditable nodes. (#47362)
++https://github.com/servo/servo/pull/47362	(@Psychpsyo, #47362)	script: Prevent text editing commands from running in uneditable nodes. (#47362)
+    wip crash dom; fix crash in document.execCommand()
     ^ commit b86633c99cc5b0bf9abec4a2e2630a256ab09d1f
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Nothing good can come of trying to run editing commands when the selection boundaries are inside of HTML comment or processing instruction nodes, so this bumps the selection out of those problematic nodes before trying.
@@ -4524,7 +4543,8 @@ https://github.com/servo/servo/pull/47390	(@kkoyung, #47390)	script: Rename MAC-
     # Testing: It compiles.
     # Part-of: #46948
     # 
-https://github.com/servo/servo/pull/46975	(@jdm, #46975)	script: Replace initial about:blank document (#46975)
++https://github.com/servo/servo/pull/46975	(@jdm, #46975)	script: Replace initial about:blank document (#46975)
+    web; more conformant with rules around “initial about:blank”. <iframe> navigation is now much more reliable, always loading about:blank synchronously, then replacing it with whatever non-‘about:blank’ page is being requested. many web platform tests rely on this and were flaky when this wasn’t implemented correctly
     ^ commit ea54c00a1cccc008ac4f6a4f982b0a7b6ebe48a4
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # These changes move away from the 1:1 model for windows and documents and implement initial about:blank document replacement. This means that the concept of a global's active document becomes meaningful, so we need to be more careful about verifying that a particular document is actually relevant in various operations.
@@ -5001,7 +5021,8 @@ https://github.com/servo/servo/pull/47297	(@Narfinger, #47297)	script: Fix borro
     # 
     # Testing: safe_borrow_mut prevents us ffrom introducing new borrow hazards and errors in refactoring should be caught by WPT tests.
     # 
-https://github.com/servo/servo/pull/47429	(@TimvdLippe, #47429)	script: Fix computation of contained nodes in range (#47429)
++https://github.com/servo/servo/pull/47429	(@TimvdLippe, #47429)	script: Fix computation of contained nodes in range (#47429)
+    wip dom; more conformant document.execCommand()
     ^ commit 0d2b9345b0fd97c02238a7b4c6f696b604a3a555
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # `Range::contained_children` only iterates the direct children of range. Instead, we should iterate over all nodes within the range. This was spotted while working on `indent` and the same fix applies for `delete-the-selection`.
@@ -6315,7 +6336,8 @@ https://github.com/servo/servo/pull/47043	(@yezhizhen, #47043)	css: Implement `t
     # Testing: Only new passing. No new failure. All of them are pointerevents tests so demonstrate quite the value.
     # 
     # 
-https://github.com/servo/servo/pull/47426	(@TimvdLippe, @mrobinson, #47426)	script: Reland loading state machine for documents (#47426)
++https://github.com/servo/servo/pull/47426	(@TimvdLippe, @mrobinson, #47426)	script: Reland loading state machine for documents (#47426)
+    web; more reliable navigation
     ^ commit 3143decb37c77aa5a9f7445c73e7a2410a066a97
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This is a reland of #46059 which now reliably works thanks to the changes in #46975. The tests that I updated I all verified locally that they run correct with `--repeat-until-unexpected` for at least 20 runs.
@@ -6632,7 +6654,7 @@ https://github.com/servo/servo/pull/46870	(@amittenak47, @jdm, #46870)	script: I
     # ```
     # 
     # Fixes #46602.
-https://github.com/servo/servo/pull/47636	(@veyndan, #47636)	android: Inline `enableLogs` as always true (#47636)
+-https://github.com/servo/servo/pull/47636	(@veyndan, #47636)	android: Inline `enableLogs` as always true (#47636)
     ^ commit dabc93d1226ff282115a0ff94068e0440ccb239c
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Testing: There are no automated tests for Android.
@@ -6724,7 +6746,7 @@ https://github.com/servo/servo/pull/47650	(@Gae24, #47650)	script: Introduce unr
     # Testing: It compiles
     # Part of #39139 
     # 
-https://github.com/servo/servo/pull/47654	(@veyndan, #47654)	android: Deduplicate experimental mode enablement (#47654)
+-https://github.com/servo/servo/pull/47654	(@veyndan, #47654)	android: Deduplicate experimental mode enablement (#47654)
     ^ commit 1e7f05d735ebe2fab9ccb56883001d8080614c2f
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Testing: There are no automated tests for Android.
