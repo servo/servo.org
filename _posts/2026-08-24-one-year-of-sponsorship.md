@@ -28,5 +28,5 @@ A few pieces of work from this period that stand out to me:
 * supporting another contributor's grant proposal to work on Servo that [was approved!](https://nlnet.nl/project/Servo-Navigation_Downloads/)
 
 This role I've carved out means a lot to me—I've found a healthy balance that allows me to spend time with my family as well as make meaningful contributions to Servo, and I get to spend a lot of time looking for ways to make the project more accessible for others.
-A big thank you to everybody supporting the project and my work!
+A big thank you to everybody supporting the project and my work; each individual monthly donation makes a big difference!
 I'm excited to see what's possible in the coming year.
