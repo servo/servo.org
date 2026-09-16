@@ -2,7 +2,7 @@
 layout:     post
 tags:       blog
 title:      "Your Donations at Work: One Year of Sponsored Servo Development"
-date:       2026-08-24
+date:       2026-09-15
 summary:    Looking back on Servo's first donation-funded role.
 categories:
 ---
@@ -23,7 +23,7 @@ Some highlights from that funded work that I'm proud of:
 On top of that, I spent time diagnosing unexpected failures in others' PRs and fixed numerous intermittent test failures that made merging PRs more difficult for everyone.
 
 A few pieces of work from this period that stand out to me:
-* supporting a [large scale rewrite](https://github.com/servo/servo/issues/40600) of the Servo's JS engine integration to address intermittent panics related to garbage collection—I reviewed lots of pull requests, but also filed many issues that enabled the work addressing the panics to be spread across many other contributors
+* supporting a [large scale rewrite](https://github.com/servo/servo/issues/40600) of Servo's JS engine integration to address intermittent panics related to garbage collection—I reviewed lots of pull requests, but also filed many issues that enabled the work addressing the panics to be spread across many other contributors
 * getting tagged in to help understand test failures, uncovering our [broken window.open behaviour](https://github.com/servo/servo/issues/43149), and eventually making [a lot of flaky tests](https://github.com/servo/servo/pull/46975) more stable
 * supporting another contributor's grant proposal to work on Servo that [was approved!](https://nlnet.nl/project/Servo-Navigation_Downloads/)
 
