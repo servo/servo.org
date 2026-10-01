@@ -6,7 +6,7 @@
           <img src="{{ site.logoMark | url }}" alt="{{ title }}">
         </a>
 
-        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
+        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="Toggle navigation menu" aria-controls="navbar-menu" aria-expanded="false" type="button">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -72,10 +72,14 @@
 
   const toggleMenu = () => {
     const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
-    hamburger.setAttribute('aria-expanded', !isExpanded);
-    menu.classList.toggle('is-active', isExpanded);
+    const nextExpanded = !isExpanded;
+    hamburger.setAttribute('aria-expanded', String(nextExpanded));
+    hamburger.classList.toggle('is-active', nextExpanded);
+    menu.classList.toggle('is-active', nextExpanded);
   };
-  hamburger.addEventListener('click', toggleMenu);
+  if (hamburger && menu) {
+    hamburger.addEventListener('click', toggleMenu);
+  }
 
   // Theme switch logic
   const themeToggle = document.getElementById('themeToggle');
