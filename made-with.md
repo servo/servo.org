@@ -32,6 +32,11 @@ title: Made With Servo
   background-color: #EAEAEA;
 }
 
+[data-theme="dark"] .made-with-item:hover {
+  background-color: #263449;
+  color: var(--text-primary);
+}
+
 .made-with-text {
   padding: 1.25rem;
 }
