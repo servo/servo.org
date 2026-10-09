@@ -16,6 +16,61 @@
     <updated>2026-10-09T00:00:00Z</updated>
     <id>https://servo.org/twisaug/blog/2026/10/09/august-in-servo/</id>
     <content xml:lang="en" type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.6.0&quot;&gt;&lt;strong&gt;Servo 0.6.0&lt;/strong&gt;&lt;/a&gt; contains all of the changes we landed in August, which came out to &lt;strong&gt;417 commits&lt;/strong&gt;!&lt;/p&gt;
+&lt;p&gt;The big news is that we’ve turned on support for &lt;strong&gt;CSS Grid&lt;/strong&gt; by default (@nicoburns, #45621).
+This has had a huge positive impact on the visual appearance of many websites.&lt;/p&gt;
+&lt;p&gt;This release also contains significant improvements to navigation, document loading, and session history, which are some of the &lt;a href=&quot;https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history&quot;&gt;gnarliest&lt;/a&gt; parts of the HTML specification.&lt;/p&gt;
+&lt;p&gt;Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293).&lt;/p&gt;
+&lt;p&gt;Any navigation to &lt;code&gt;about:blank&lt;/code&gt; is now skipped if the initial about:blank document is present .&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;about:blank&lt;/code&gt; documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a &lt;code&gt;readyState&lt;/code&gt; of &lt;code&gt;LOADING&lt;/code&gt; (@mrobinson, #47450).&lt;/p&gt;
+&lt;p&gt;Opening auxiliary windows now waits to dispatch the load event until the initial &lt;code&gt;about:blank&lt;/code&gt; document has been replaced (@jdm, #46975).&lt;/p&gt;
+&lt;p&gt;Whoever knew that &lt;a href=&quot;https://hsivonen.fi/about-blank/&quot;&gt;loading &lt;code&gt;about:blank&lt;/code&gt;&lt;/a&gt; was &lt;a href=&quot;https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow&quot;&gt;so complicated&lt;/a&gt;?&lt;/p&gt;
+&lt;h2 id=&quot;security&quot; tabindex=&quot;-1&quot;&gt;Security &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2026/10/09/august-in-servo/#security&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;real-world-compat&quot; tabindex=&quot;-1&quot;&gt;Real world compat &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2026/10/09/august-in-servo/#real-world-compat&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Panning gestures initiated by touch inputs now lock to the dominant axis (@yezhizhen, #46983).
+This results in more predictable panning when interacting with pages in Servo.&lt;/p&gt;
+&lt;p&gt;We fixed a crash affecting (&lt;a href=&quot;https://gumroad.com.au/&quot;&gt;gumroad.com.au&lt;/a&gt;) (@lumiscosity, #47266).&lt;/p&gt;
+&lt;h2 id=&quot;work-in-progress&quot; tabindex=&quot;-1&quot;&gt;Work in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2026/10/09/august-in-servo/#work-in-progress&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We made a lot of progress on the &lt;strong&gt;&lt;code&gt;LargestContentfulPaint&lt;/code&gt;&lt;/strong&gt; performance metric, implemented behind the &lt;code&gt;largest_contentful_paint_enabled&lt;/code&gt; preference.
+Servo now supports the &lt;code&gt;element&lt;/code&gt; attribute, (@shubhamg13, #46553), URLs for video element posters (@shubhamg13, #43376), accurate size information (@shubhamg13, #43378), painting text nodes (@shubhamg13, #47212), and a conformant &lt;code&gt;loadTime&lt;/code&gt; attribute (@shubhamg13, #47475).&lt;/p&gt;
+&lt;h2 id=&quot;embedding-api&quot; tabindex=&quot;-1&quot;&gt;Embedding API &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2026/10/09/august-in-servo/#embedding-api&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Breaking change:&lt;/strong&gt; &lt;a href=&quot;https://doc.servo.org/servo/struct.WebView.html&quot;&gt;&lt;code&gt;WebView&lt;/code&gt;&lt;/a&gt;::&lt;code&gt;toggle_sampling_profiler&lt;/code&gt; has been removed (@lumiscosity, #47014).
+To perform sampling profiling on Servo, follow the instructions in &lt;a href=&quot;https://book.servo.org/contributing/profiling.html&quot;&gt;the book&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Breaking change:&lt;/strong&gt; The variants of &lt;a href=&quot;https://doc.servo.org/servo/enum.MouseButton.html&quot;&gt;&lt;code&gt;MouseButton&lt;/code&gt;&lt;/a&gt; have been renamed to &lt;code&gt;Primary&lt;/code&gt;, &lt;code&gt;Secondary&lt;/code&gt;, and &lt;code&gt;Auxiliary&lt;/code&gt; (@mrobinson, @SimonSapin, #47327).&lt;/p&gt;
+&lt;p&gt;We’ve added several new Cargo features reflecting common usage patterns:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;default_web_features&lt;/code&gt;, to include optional web platform features in the build (e.g. WebXR and WebGPU) (@jschwe, #44032)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bundled&lt;/code&gt;, to include required resources in the binary (@jschwe, #44032)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;brotli-compression-stream&lt;/code&gt;, enabling support for &lt;code&gt;brotli&lt;/code&gt; content in the &lt;code&gt;CompressionStream&lt;/code&gt;/&lt;code&gt;DecompressionStream&lt;/code&gt; web APIs (@Narfinger, @jdm, #47197)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;webcrypto&lt;/code&gt;, to enable support for the Crypto and WebCrypto web APIs (@Narfinger, #47198)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;webgl&lt;/code&gt;, to enable support for WebGL (@janeoa, #47200)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;for-users-and-developers&quot; tabindex=&quot;-1&quot;&gt;For users and developers &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2026/10/09/august-in-servo/#for-users-and-developers&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Debug builds on Windows can now complete successfully (@jschwe, #47372).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;servoshell&lt;/strong&gt; for &lt;strong&gt;Android&lt;/strong&gt; has had many rough edges filed off as part of modernizing it for the Compose UI (@veyndan, #47656, #47491, #47494, #47697, #46955, #47644, #47652, #47276, #47277, #47299, #47439) and converting its implementation to Kotlin (@veyndan, #46926, #46925, #46951, #46965).
+Library consumers are no longer responsible for implementing pause and resume support (@veyndan, #47555).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;servoshell&lt;/strong&gt; for &lt;strong&gt;OpenHarmony&lt;/strong&gt; now supports external keyboards with US keyboard layouts (@jschwe, #47359).&lt;/p&gt;
+&lt;h2 id=&quot;performance-and-stability&quot; tabindex=&quot;-1&quot;&gt;Performance and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2026/10/09/august-in-servo/#performance-and-stability&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;There were many small changes this month that removed unnecessary allocations (@Narfinger, @jschwe, @yezhizhen, #47264, #47147, #47066, #47249, #47249, #47285, #47307, #47343, #47361, #47395, #47427, #47454, #47474, #47506, #47479, #47530, #47541, #47566, #47509, #47622), as well reduced GC interactions leading to better JS performance (@jdm, @Narfinger, @webbeef, @TimvdLippe, @mrobinson, #47513, #47250, #47158, #47165, #47049, #47251, #47510).&lt;/p&gt;
+&lt;p&gt;There were were also a number of improvements in final binary size (@jschwe, @kkoyung, @Narfinger, @jschwe, #47211, #47214, #47210, #46950).&lt;/p&gt;
+&lt;p&gt;We fixed crashes related to media playback (@calvaris, #46891), the 2d canvas renderer (@yezhizhen, #46915), and resolving fonts variants (@simonwuelker, #47356).&lt;/p&gt;
+&lt;p&gt;We’ve continued our long-running effort to use the Rust type system to make Servo’s integration with SpiderMonkey safer and more reliable (@jdm, @treetmitterglad, @Narfinger, @Gae24, #47398, #47296, #47051, #47005, #47323, #47297, #47322, #47368, #47446).&lt;/p&gt;
+&lt;p&gt;We’re also working on statically preventing &lt;a href=&quot;https://github.com/servo/servo/issues/39139&quot;&gt;a footgun&lt;/a&gt; that can lead to uncollectible GC cycles (@Gae24, #47355, #47650)&lt;/p&gt;
+&lt;h2 id=&quot;more-on-the-web-platform&quot; tabindex=&quot;-1&quot;&gt;More on the web platform &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2026/10/09/august-in-servo/#more-on-the-web-platform&quot;&gt;
+        &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+      &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We upgraded to &lt;a href=&quot;https://github.com/linebender/resvg/blob/main/CHANGELOG.md#0480-2026-07-31&quot;&gt;resvg 0.48&lt;/a&gt;, fixing &lt;strong&gt;many issues with SVG images&lt;/strong&gt; with missing width/height attributes that specified a &lt;code&gt;viewBox&lt;/code&gt; (@nicoburns, #46937).&lt;/p&gt;
 &lt;h2 id=&quot;new-contributors&quot; tabindex=&quot;-1&quot;&gt;New contributors &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisaug/blog/2026/10/09/august-in-servo/#new-contributors&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;

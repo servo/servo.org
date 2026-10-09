@@ -252,6 +252,61 @@
 
 <div class="inner-container blog-content">
   <p><a href="https://github.com/servo/servo/releases/tag/v0.6.0"><strong>Servo 0.6.0</strong></a> contains all of the changes we landed in August, which came out to <strong>417 commits</strong>!</p>
+<p>The big news is that we’ve turned on support for <strong>CSS Grid</strong> by default (@nicoburns, #45621).
+This has had a huge positive impact on the visual appearance of many websites.</p>
+<p>This release also contains significant improvements to navigation, document loading, and session history, which are some of the <a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history">gnarliest</a> parts of the HTML specification.</p>
+<p>Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293).</p>
+<p>Any navigation to <code>about:blank</code> is now skipped if the initial about:blank document is present .</p>
+<p><code>about:blank</code> documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a <code>readyState</code> of <code>LOADING</code> (@mrobinson, #47450).</p>
+<p>Opening auxiliary windows now waits to dispatch the load event until the initial <code>about:blank</code> document has been replaced (@jdm, #46975).</p>
+<p>Whoever knew that <a href="https://hsivonen.fi/about-blank/">loading <code>about:blank</code></a> was <a href="https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow">so complicated</a>?</p>
+<h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<h2 id="real-world-compat" tabindex="-1">Real world compat <a class="header-anchor" href="#real-world-compat">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Panning gestures initiated by touch inputs now lock to the dominant axis (@yezhizhen, #46983).
+This results in more predictable panning when interacting with pages in Servo.</p>
+<p>We fixed a crash affecting (<a href="https://gumroad.com.au">gumroad.com.au</a>) (@lumiscosity, #47266).</p>
+<h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We made a lot of progress on the <strong><code>LargestContentfulPaint</code></strong> performance metric, implemented behind the <code>largest_contentful_paint_enabled</code> preference.
+Servo now supports the <code>element</code> attribute, (@shubhamg13, #46553), URLs for video element posters (@shubhamg13, #43376), accurate size information (@shubhamg13, #43378), painting text nodes (@shubhamg13, #47212), and a conformant <code>loadTime</code> attribute (@shubhamg13, #47475).</p>
+<h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><strong>Breaking change:</strong> <a href="https://doc.servo.org/servo/struct.WebView.html"><code>WebView</code></a>::<code>toggle_sampling_profiler</code> has been removed (@lumiscosity, #47014).
+To perform sampling profiling on Servo, follow the instructions in <a href="https://book.servo.org/contributing/profiling.html">the book</a>.</p>
+<p><strong>Breaking change:</strong> The variants of <a href="https://doc.servo.org/servo/enum.MouseButton.html"><code>MouseButton</code></a> have been renamed to <code>Primary</code>, <code>Secondary</code>, and <code>Auxiliary</code> (@mrobinson, @SimonSapin, #47327).</p>
+<p>We’ve added several new Cargo features reflecting common usage patterns:</p>
+<ul>
+<li><code>default_web_features</code>, to include optional web platform features in the build (e.g. WebXR and WebGPU) (@jschwe, #44032)</li>
+<li><code>bundled</code>, to include required resources in the binary (@jschwe, #44032)</li>
+<li><code>brotli-compression-stream</code>, enabling support for <code>brotli</code> content in the <code>CompressionStream</code>/<code>DecompressionStream</code> web APIs (@Narfinger, @jdm, #47197)</li>
+<li><code>webcrypto</code>, to enable support for the Crypto and WebCrypto web APIs (@Narfinger, #47198)</li>
+<li><code>webgl</code>, to enable support for WebGL (@janeoa, #47200)</li>
+</ul>
+<h2 id="for-users-and-developers" tabindex="-1">For users and developers <a class="header-anchor" href="#for-users-and-developers">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Debug builds on Windows can now complete successfully (@jschwe, #47372).</p>
+<p><strong>servoshell</strong> for <strong>Android</strong> has had many rough edges filed off as part of modernizing it for the Compose UI (@veyndan, #47656, #47491, #47494, #47697, #46955, #47644, #47652, #47276, #47277, #47299, #47439) and converting its implementation to Kotlin (@veyndan, #46926, #46925, #46951, #46965).
+Library consumers are no longer responsible for implementing pause and resume support (@veyndan, #47555).</p>
+<p><strong>servoshell</strong> for <strong>OpenHarmony</strong> now supports external keyboards with US keyboard layouts (@jschwe, #47359).</p>
+<h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>There were many small changes this month that removed unnecessary allocations (@Narfinger, @jschwe, @yezhizhen, #47264, #47147, #47066, #47249, #47249, #47285, #47307, #47343, #47361, #47395, #47427, #47454, #47474, #47506, #47479, #47530, #47541, #47566, #47509, #47622), as well reduced GC interactions leading to better JS performance (@jdm, @Narfinger, @webbeef, @TimvdLippe, @mrobinson, #47513, #47250, #47158, #47165, #47049, #47251, #47510).</p>
+<p>There were were also a number of improvements in final binary size (@jschwe, @kkoyung, @Narfinger, @jschwe, #47211, #47214, #47210, #46950).</p>
+<p>We fixed crashes related to media playback (@calvaris, #46891), the 2d canvas renderer (@yezhizhen, #46915), and resolving fonts variants (@simonwuelker, #47356).</p>
+<p>We’ve continued our long-running effort to use the Rust type system to make Servo’s integration with SpiderMonkey safer and more reliable (@jdm, @treetmitterglad, @Narfinger, @Gae24, #47398, #47296, #47051, #47005, #47323, #47297, #47322, #47368, #47446).</p>
+<p>We’re also working on statically preventing <a href="https://github.com/servo/servo/issues/39139">a footgun</a> that can lead to uncollectible GC cycles (@Gae24, #47355, #47650)</p>
+<h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We upgraded to <a href="https://github.com/linebender/resvg/blob/main/CHANGELOG.md#0480-2026-07-31">resvg 0.48</a>, fixing <strong>many issues with SVG images</strong> with missing width/height attributes that specified a <code>viewBox</code> (@nicoburns, #46937).</p>
 <h2 id="new-contributors" tabindex="-1">New contributors <a class="header-anchor" href="#new-contributors">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
