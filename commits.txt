@@ -1,5 +1,6 @@
 >>> 2026-08-01T23:32:55Z
-https://github.com/servo/servo/pull/46553	(@shubhamg13, #46553)	script: Wire `element` for `LargestContentfulPaint` (#46553)
++https://github.com/servo/servo/pull/46553	(@shubhamg13, #46553)	script: Wire `element` for `LargestContentfulPaint` (#46553)
+    dom; largestcontentfulpaint element API
     ^ commit 3f08ca6d1664a50265140090b7faf3fcb86d82b1
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Wire the logic for `element` on `LargestContentfulPaint` using `OpaqueNode`
@@ -18,7 +19,8 @@ https://github.com/servo/servo/pull/46553	(@shubhamg13, #46553)	script: Wire `el
     # 
     # Testing: tests/wpt/meta/fetch/api/idlharness.https.any.js.ini and tests/wpt/meta/fetch/api/request/request-structure.any.js.ini
     # 
-https://github.com/servo/servo/pull/46926	(@veyndan, #46926)	android: Make `ServoView.GLThread` a static class (#46926)
++https://github.com/servo/servo/pull/46926	(@veyndan, #46926)	android: Make `ServoView.GLThread` a static class (#46926)
+    embedding; android cleanup
     ^ commit d26754353eda205f8ef9bbcb30425f38547828c8
     # Similar to ae3dbaa17d7c6bdd27a300e79a57e30816e798a7, this makes the inner class easier to reason about and makes the future conversion of `ServoView` to Kotlin easier.
     # 
@@ -28,7 +30,7 @@ https://github.com/servo/servo/pull/46926	(@veyndan, #46926)	android: Make `Serv
     ^ commit e7fdc0c794bbff47ad5b338fe46871451966fb2a
     # Automated downstream sync of changes from upstream as of 02-08-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/46923	(@mrobinson, #46923)	More gracefully handle header parsing errors (#46923)
+-https://github.com/servo/servo/pull/46923	(@mrobinson, #46923)	More gracefully handle header parsing errors (#46923)
     ^ commit f4dde2701bacd4972e6cfa319a3f0cbc9be21f64
     # This change is mainly a code health improvement which more gracefully handles
     # the case that a header name or value cannot be parsed. Instead a
@@ -41,14 +43,15 @@ https://github.com/servo/servo/pull/46923	(@mrobinson, #46923)	More gracefully h
     # 
     # Testing: This change shold not modify behavior so should be covered by existing tests.
     # 
-https://github.com/servo/servo/pull/46930	(@sagudev, #46930)	script: Stop using an unforgeable holder for global objects with unforgeable properties (#46930)
+-https://github.com/servo/servo/pull/46930	(@sagudev, #46930)	script: Stop using an unforgeable holder for global objects with unforgeable properties (#46930)
     ^ commit aaacc0e62d5e471091aad9df67f60563b97e70e8
     # Porting https://hg-edge.mozilla.org/mozilla-central/rev/256ea0d0de34 (from FF 51!) to servo
     # 
     # This will help with SM bump I am working on.
     # 
     # Testing: Should be covered by WPT tests
-https://github.com/servo/servo/pull/46937	(@nicoburns, #46937)	Upgrade to resvg v0.48.0 (#46937)
++https://github.com/servo/servo/pull/46937	(@nicoburns, #46937)	Upgrade to resvg v0.48.0 (#46937)
+    layout: better svg support
     ^ commit 89c1ccd8ff4034c69c052065a1208d85bc545f31
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # - Upgrade resvg to v0.48.0
@@ -66,7 +69,8 @@ https://github.com/servo/servo/pull/46937	(@nicoburns, #46937)	Upgrade to resvg 
     # 
     # Testing: New passes, expectations updated
     # 
-https://github.com/servo/servo/pull/46925	(@veyndan, #46925)	android: Convert `Servo` to Kotlin (#46925)
++https://github.com/servo/servo/pull/46925	(@veyndan, #46925)	android: Convert `Servo` to Kotlin (#46925)
+    embedding; android cleanup
     ^ commit 35672cc3d4beb768489f5218e73bee7aff0ddb01
     # Some types in other files have become non-nullable, since with the conversion of `Servo` to Kotlin, the Kotlin compiler can infer that these types are in fact non-nullable.
     # 
@@ -75,7 +79,8 @@ https://github.com/servo/servo/pull/46925	(@veyndan, #46925)	android: Convert `S
     # Testing: There are no automated tests for Android.
     # Fixes: Part of #46701.
 >>> 2026-08-03T23:34:33Z
-https://github.com/servo/servo/pull/46940	(@veyndan, #46940)	android: Remove unused code in `ServoView` (#46940)
+-https://github.com/servo/servo/pull/46940	(@veyndan, #46940)	android: Remove unused code in `ServoView` (#46940)
+    embedding; android cleanup
     ^ commit 2b3d009af9d8763a77a870e249f2700c21ab96e6
     # In preparation for converting this file to Kotlin (see #46701), this removes unused code so we're not migrating dead code.
     # 
@@ -446,7 +451,8 @@ https://github.com/servo/servo/pull/46940	(@veyndan, #46940)	android: Remove unu
     # 
     # Testing: extending WPT to test the relation is anti-commutative (`a < b => b < a`) and manually checking that it fails before the code change
     # 
-https://github.com/servo/servo/pull/46951	(@veyndan, #46951)	android: Make `glThread` immutable (#46951)
++https://github.com/servo/servo/pull/46951	(@veyndan, #46951)	android: Make `glThread` immutable (#46951)
+    embedding; android cleanup
     ^ commit e84dbee53e37fd00171e31f631b407516a2f98ca
     # By doing the initialisation steps directly in the constructor's initialisation section, we can make `glThread` final as the Java compiler knows that we only initialise `glThread` on instantiation. Previously, we could've theoretically called `init()` from elsewhere, hence we couldn't make the immutable guarantee to Java.
     # 
@@ -464,7 +470,7 @@ https://github.com/servo/servo/pull/46951	(@veyndan, #46951)	android: Make `glTh
     # Testing: This causes a good number of WPT tests to start to pass.
     # Fixes: #35397.
     # 
-https://github.com/servo/servo/pull/46836	(@mrobinson, #46836)	font: Expose `ShapedTextSliceType` to clarify different `ShapedTextSlice`s (#46836)
+-https://github.com/servo/servo/pull/46836	(@mrobinson, #46836)	font: Expose `ShapedTextSliceType` to clarify different `ShapedTextSlice`s (#46836)
     ^ commit 72c9b0c8df5e13d76f0e69ba10075fe0feada0bf
     # Instead of using two boolean fields that could encode unreachable
     # behavior, this change makes it so that the `ShapedTextSlice` holds a
@@ -474,12 +480,13 @@ https://github.com/servo/servo/pull/46836	(@mrobinson, #46836)	font: Expose `Sha
     # 
     # Testing: This does not change behavior, so should be covered by existing tests.
     # 
-https://github.com/servo/servo/pull/46955	(@veyndan, #46955)	android: Split `SurfaceHolderCallback` into own class (#46955)
++https://github.com/servo/servo/pull/46955	(@veyndan, #46955)	android: Split `SurfaceHolderCallback` into own class (#46955)
+    embedding; android cleanup
     ^ commit 40dba3dd1f4cef8b442d5768b8cd4861dfc792da
     # Responding to `SurfaceHolder` callback events from `GLThread` is confusing, as these callback events are unrelated to thread management. Splitting these out into two separate classes creates a separation of concerns.
     # 
     # Testing: There are no automated tests for Android.
-https://github.com/servo/servo/pull/46959	(@jschwe, #46959)	mach: Fix windows servoshell version bump regex (#46959)
+-https://github.com/servo/servo/pull/46959	(@jschwe, #46959)	mach: Fix windows servoshell version bump regex (#46959)
     ^ commit 26c53dbddfc03fa3bd989a193dfe2db1ba5a35ef
     # Recent refactoring broke `./mach release`:
     # 
@@ -488,14 +495,15 @@ https://github.com/servo/servo/pull/46959	(@jschwe, #46959)	mach: Fix windows se
     # 
     # Testing: `./mach release` is not covered by automated tests
     # 
-https://github.com/servo/servo/pull/46960	(@eachra-bawn, #46960)	webcrypto: Add remaining error messages. (#46960)
++https://github.com/servo/servo/pull/46960	(@eachra-bawn, #46960)	webcrypto: Add remaining error messages. (#46960)
+    dom; improve error messages
     ^ commit f02ab1bb8f586cccb3927ad3da3c187bbc340b06
     # Part of: #40756
     # 
     # 
     # 
     # 
-https://github.com/servo/servo/pull/46956	(@jschwe, #46956)	release: Validate tag before release workflow (#46956)
+-https://github.com/servo/servo/pull/46956	(@jschwe, #46956)	release: Validate tag before release workflow (#46956)
     ^ commit d908aa399f3162533d806f628295c73de0b0c9ea
     # We should consistently use the `v` prefix for real releases. This doesn't completely prevent issues, since the job just creates a release draft, which can be edited manually before publish, but getting the tag right here, makes it less likely to forget to add the `v` prefix.
     # Motivated by https://github.com/servo/servo/issues/46908.
@@ -746,7 +754,7 @@ https://github.com/servo/servo/pull/46956	(@jschwe, #46956)	release: Validate ta
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46953	(@niyabits, #46953)	crown: allow `std::collections::hash_map::Values` in `unrooted_must_root` lint. (#46953)
+-https://github.com/servo/servo/pull/46953	(@niyabits, #46953)	crown: allow `std::collections::hash_map::Values` in `unrooted_must_root` lint. (#46953)
     ^ commit 75ec1dc635009c3da4ee9cff10339e6532eadded
     # Adds a new case for `is_unrooted_ty` for the `std::collections::hash_map::Values` type.
     # Removes the cases relating to `accountable_refcell` as the crate was removed: https://github.com/servo/servo/issues/44709 
@@ -754,17 +762,18 @@ https://github.com/servo/servo/pull/46953	(@niyabits, #46953)	crown: allow `std:
     # 
     # Testing: Added a new run-pass test to validate all pointer-like types in the std library that we currently allow.
     # Fixes: #46920
-https://github.com/servo/servo/pull/46976	(@kkoyung, #46976)	script: Tidy up comments in `subtlecrypto.rs` (#46976)
+-https://github.com/servo/servo/pull/46976	(@kkoyung, #46976)	script: Tidy up comments in `subtlecrypto.rs` (#46976)
     ^ commit e01c44c0e6a7e3c547baefa820678d28b11aea36
     # - Add spec link to `struct SubtleCrypto` block.
     # - Add missing spec links on algorithm registrations.
     # - Change the regular comments for `DecapsulateOperation` and `GetPublicKeyOperation` to outer documentation comments.
     # 
     # Testing: No test since there is no actual code change.
-https://github.com/servo/servo/pull/46978	(@simonwuelker, #46978)	fonts: Remove manual definition of `FT_LOAD_TARGET_LIGHT` (#46978)
+-https://github.com/servo/servo/pull/46978	(@simonwuelker, #46978)	fonts: Remove manual definition of `FT_LOAD_TARGET_LIGHT` (#46978)
     ^ commit 5bbf8e075acf5824a835603b922199aa3c297ee5
     # The constant is now included in the bindings, so there's no need for us to re-define it ourselves.
-https://github.com/servo/servo/pull/46965	(@veyndan, #46965)	android: Convert `ServoView` to Kotlin (#46965)
++https://github.com/servo/servo/pull/46965	(@veyndan, #46965)	android: Convert `ServoView` to Kotlin (#46965)
+    embedding; android cleanup
     ^ commit d325a76433a5151a1540127f69b8e77b8943188a
     # I've deliberately kept some non-null assertions. They were always there in the Java world, but they weren't explicit. I'm keeping the assertions as converting them to nullable assertions will balloon out the number of decision paths, making this whole class even harder to reason about.
     # 
@@ -817,19 +826,20 @@ https://github.com/servo/servo/pull/46965	(@veyndan, #46965)	android: Convert `S
     # Fixes: #46024.
     # Fixes: #46883.
     # 
-https://github.com/servo/servo/pull/46867	(@jschwe, #46867)	deps: Update bundled harfbuzz to 14.2.1 (#46867)
+-https://github.com/servo/servo/pull/46867	(@jschwe, #46867)	deps: Update bundled harfbuzz to 14.2.1 (#46867)
     ^ commit 679c211fda1cc353b9dbfda908b8be76054abc2a
     # pending crates.io release
     # 
     # Testing: Dependency update, covered by existing tests.
     # 
-https://github.com/servo/servo/pull/46985	(@Narfinger, #46985)	paint: Switch forgotten IpcChannel to GenericChannel (#46985)
+-https://github.com/servo/servo/pull/46985	(@Narfinger, #46985)	paint: Switch forgotten IpcChannel to GenericChannel (#46985)
     ^ commit 655f052f26a6a19438ceaccb40c3cacf6b059608
     # This just switches the channel for profiling exit msg to GenericChannel to be more consistent.
     # 
     # Testing: Does not change functionality.
     # 
-https://github.com/servo/servo/pull/46983	(@yezhizhen, #46983)	paint: Lock touch panning to its initial dominant axis (#46983)
++https://github.com/servo/servo/pull/46983	(@yezhizhen, #46983)	paint: Lock touch panning to its initial dominant axis (#46983)
+    input
     ^ commit 882810b5568a1b7d1e6b10b8443cd0ff870300ad
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Lock a touch pan gesture to the axis dominant at pan-start, for the whole sequence, to match FF/Chrome.
@@ -851,14 +861,15 @@ https://github.com/servo/servo/pull/46983	(@yezhizhen, #46983)	paint: Lock touch
     # 
     # Fixes: https://github.com/servo/servo/issues/46954 which has strange jitter when we pan.
     # 
-https://github.com/servo/servo/pull/46981	(@Narfinger, #46981)	script: Cleanup custom node dirty inclusive ancestor walk (#46981)
++https://github.com/servo/servo/pull/46981	(@Narfinger, #46981)	script: Cleanup custom node dirty inclusive ancestor walk (#46981)
+    perf
     ^ commit 21faece5673d75323f6c3084d0dc96e754b4f8ba
     # This replaces the custom method in Node::dirty to do an inclusive ancestor walk without rooting with our unrooted iterator, cleaning up the code.
     # This requires no_gc to be propagates through places.
     # 
     # Testing: This should not change functionality.
     # 
-https://github.com/servo/servo/pull/41309	(@Narfinger, #41309)	OHOS: More efficient window buffer mode (#41309)
+-https://github.com/servo/servo/pull/41309	(@Narfinger, #41309)	OHOS: More efficient window buffer mode (#41309)
     ^ commit 5ad865393fdef9b45e9c0c17dbc410e2f9b335c5
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # According to https://developer.huawei.com/consumer/en/doc/harmonyos-faqs/faqs-arkgraphics-2d-14 we can enable a performance hint here.
@@ -867,7 +878,7 @@ https://github.com/servo/servo/pull/41309	(@Narfinger, #41309)	OHOS: More effici
     # 
     # Testing: Tested on device and it doesn't crash.
     # 
-https://github.com/servo/servo/pull/46988	(@jdm, #46988)	constellation: Do not request permission for initial about:blank loads. (#46988)
+-https://github.com/servo/servo/pull/46988	(@jdm, #46988)	constellation: Do not request permission for initial about:blank loads. (#46988)
     ^ commit 66d034cfc8cbd9824da5a4a19164f1afb063c678
     # The initial about:blank document is intended to be synchronously available. Our current implementation is too tied to our asynchronous navigation infrastructure, and this gets in the way of the work happening in #46975. This change removes one source of intermittent failures due to timing when a test attempts to navigate the initial about:blank shortly after it is created—when the constellation observes that there is a pending navigation approval for the about:blank, it will silently discard any navigation attempt for the pipeline. I expect to revisit this later after we have decoupled about:blank from our asynchronous navigation infrastructure.
     # 
@@ -974,7 +985,8 @@ https://github.com/servo/servo/pull/46988	(@jdm, #46988)	constellation: Do not r
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/46991	(@jschwe, #46991)	canvas: Limit worker threads for vello_cpu (#46991)
++https://github.com/servo/servo/pull/46991	(@jschwe, #46991)	canvas: Limit worker threads for vello_cpu (#46991)
+    perf; reduce worker threads for canvases
     ^ commit 49fa5106cac95620e985ede1c0ddf744709e6c62
     # The default implementation (as of 0.0.9) spawns too many threads:
     # 
@@ -996,7 +1008,7 @@ https://github.com/servo/servo/pull/46991	(@jschwe, #46991)	canvas: Limit worker
     ^ commit a7a5eff507bf4054c93020d12535ecd80b810087
     # Testing: it compiles
     # Part of #46329
-https://github.com/servo/servo/pull/46986	(@mrobinson, #46986)	script: Only note dirty `Element`s (#46986)
+-https://github.com/servo/servo/pull/46986	(@mrobinson, #46986)	script: Only note dirty `Element`s (#46986)
     ^ commit 61f178247759dfe44416d0d025eec3a73e9123f8
     # In practice this is always the case, except when the `Document` itself
     # is marked. In that case, we just need to do some bookkeeping for removed
@@ -1005,7 +1017,8 @@ https://github.com/servo/servo/pull/46986	(@mrobinson, #46986)	script: Only note
     # 
     # Testing: This should not change behavior so is covered by existing tests.
     # 
-https://github.com/servo/servo/pull/47005	(@jdm, #47005)	script: Prevent borrow hazards in Element::ensure_rare_data. (#47005)
++https://github.com/servo/servo/pull/47005	(@jdm, #47005)	script: Prevent borrow hazards in Element::ensure_rare_data. (#47005)
+    crash
     ^ commit 6e8d1679605b48e4c4181e6411a30cf3623a3589
     # Element::ensure_rare_data returns a dynamic mutable borrow, so by using safe_borrow_mut we can statically prevent multiple lurking borrow hazards. First noticed in an unexpected test failure in #46990.
     # 
@@ -1025,7 +1038,8 @@ https://github.com/servo/servo/pull/47005	(@jdm, #47005)	script: Prevent borrow 
     # Testing: Existing WPT tests. There are some new passing & failling tests. For detail, see https://github.com/servo/servo/pull/46980#issuecomment-5177445471
     # Fixes: part of #46979 
     # 
-https://github.com/servo/servo/pull/46982	(@mrobinson, @SimonSapin, #46982)	layout: Unify the way that selection is represented in the box tree (#46982)
++https://github.com/servo/servo/pull/46982	(@mrobinson, @SimonSapin, #46982)	layout: Unify the way that selection is represented in the box tree (#46982)
+    layout; selection progress
     ^ commit f785b0658aa5d89683ca2e43b107995cbb654f61
     # Previously, document selection and form control selection were handled
     # through different paths in layout. This change makes it so that they
@@ -1036,14 +1050,16 @@ https://github.com/servo/servo/pull/46982	(@mrobinson, @SimonSapin, #46982)	layo
     # Testing: This should not change observable behavior so should be
     # covered by existing tests.
     # 
-https://github.com/servo/servo/pull/46856	(@niyabits, #46856)	script: fix worklet implementation to fetch modules instead of classic scripts (#46856)
++https://github.com/servo/servo/pull/46856	(@niyabits, #46856)	script: fix worklet implementation to fetch modules instead of classic scripts (#46856)
+    dom; audioworklet progress
     ^ commit 086a3d63f099c68749f0510668425c29abb0ebbd
     # Fix the existing Worklet implementation by adding the necessary infrastructure for fetching modules (e.g., implementing task manager on Worklet) and using our implementation of `fetch a worklet/module worker script graph` instead of fetching classic scripts using `load_whole_resource`.    
     # 
     # Testing: Tests in `tests/wpt/mozilla/tests/mozilla/worklets` already cover the changes, some fixes were made to comply with the specs.
     # 
     # Fixes: https://github.com/servo/servo/issues/45306
-https://github.com/servo/servo/pull/46990	(@jdm, @aniebietafia, #46990)	script: Make `performance.timing` a PerformanceTiming object (#46990)
++https://github.com/servo/servo/pull/46990	(@jdm, @aniebietafia, #46990)	script: Make `performance.timing` a PerformanceTiming object (#46990)
+    dom
     ^ commit 68fdd5155964f83342bf7384b4db868f56db49be
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -1053,13 +1069,15 @@ https://github.com/servo/servo/pull/46990	(@jdm, @aniebietafia, #46990)	script: 
     # Fixes: #33334
     # Fixes: #36171
     # 
-https://github.com/servo/servo/pull/46891	(@calvaris, #46891)	media: avoid crash in pulsesink (#46891)
++https://github.com/servo/servo/pull/46891	(@calvaris, #46891)	media: avoid crash in pulsesink (#46891)
+    crash
     ^ commit c03e7adb28a7e554545c8dbb858716dcd8367f80
     # Hold a reference to pulsesink to avoid the crash. Real fix will be in https://gitlab.freedesktop.org/gstreamer/gstreamer/-/merge_requests/12194 .
     # 
     # Fixes: https://github.com/servo/servo/issues/46251
     # 
-https://github.com/servo/servo/pull/47016	(@niyabits, #47016)	script: Move `WorkletThreadPool` intialization out of `ScriptThread` (#47016)
++https://github.com/servo/servo/pull/47016	(@niyabits, #47016)	script: Move `WorkletThreadPool` intialization out of `ScriptThread` (#47016)
+    dom; audioworklet progress
     ^ commit 6ca7f7d5808a7075c17e7cad3cecc926eb9cf0af
     #  This PR is a part of refactoring Worklet for implementing AudioWorklet
     # 
@@ -1071,7 +1089,7 @@ https://github.com/servo/servo/pull/47016	(@niyabits, #47016)	script: Move `Work
     # For the Paint Worklet, the initialization will be done by `Window` in a follow up PR. 
     # 
     # Testing: existing worklet WPT covers the changes. 
-https://github.com/servo/servo/pull/47015	(@mrobinson, @SimonSapin, #47015)	layout: Add `TextFragmentRunData` (#47015)
+-https://github.com/servo/servo/pull/47015	(@mrobinson, @SimonSapin, #47015)	layout: Add `TextFragmentRunData` (#47015)
     ^ commit 8e22026ef30d53b20f8fc8d6cb92b14c8e846d62
     # Add a shared data structure to be used with all `TextFragment`s that
     # are generated by a `TextRun`. The idea here is that no matter how many
@@ -1097,7 +1115,8 @@ https://github.com/servo/servo/pull/47015	(@mrobinson, @SimonSapin, #47015)	layo
     # 
     # Testing: Manual - it compiles and Ctrl+P no longer does anything
     # 
-https://github.com/servo/servo/pull/46950	(@jschwe, #46950)	deps: Do not enable the `webrender` `capture` feature (#46950)
++https://github.com/servo/servo/pull/46950	(@jschwe, #46950)	deps: Do not enable the `webrender` `capture` feature (#46950)
+    perf; binary size
     ^ commit 1df1dba0e1de2726ef142f4a67d179b7321cf5ce
     # The feature isn't needed in production, only for debugging. Since we can't make features conditional on profiles. we disable the capture feature. It can still be enabled if necessary, but that should be rare.
     # This removes ~1MB binary size.
@@ -1123,7 +1142,8 @@ https://github.com/servo/servo/pull/46950	(@jschwe, #46950)	deps: Do not enable 
     # 
     # Testing: This change adds a new WPT test.
     # 
-https://github.com/servo/servo/pull/43376	(@shubhamg13, #43376)	layout: Pass `poster_url` for `LargestContentfulPaint` Entry (#43376)
++https://github.com/servo/servo/pull/43376	(@shubhamg13, #43376)	layout: Pass `poster_url` for `LargestContentfulPaint` Entry (#43376)
+    dom; largestcontentfulpaint url for video element posters
     ^ commit dce660c1921fe1a1e34d96a6535ec34b7073d8fc
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Fetches the `poster_url` from `HTMLVideoElement` and pass it for `LargestContentfulPaint`
@@ -1206,13 +1226,14 @@ https://github.com/servo/servo/pull/43376	(@shubhamg13, #43376)	layout: Pass `po
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47038	(@jschwe, #47038)	fonts: Optimize hasher by using `FxHashMap` in CachedShapeData (#47038)
++https://github.com/servo/servo/pull/47038	(@jschwe, #47038)	fonts: Optimize hasher by using `FxHashMap` in CachedShapeData (#47038)
+    perf
     ^ commit 0d31f6f3ebc6808fa7fd45f88f4a236f101e9cd9
     # For they glyph caches using the faster FxHasher should be fine from a DoS perspective and FxHashMap should probably be the default choice for integer / integer-like keys. For shaped_text we keep the standard hashmap since it contains a web controlled string. I don't expect this change to be measurable (and i didn't attempt to), it's a drive-by change while looking at surrounding code.
     # 
     # Testing: No observable behavior change, so existing tests should suffice.
     # 
-https://github.com/servo/servo/pull/46851	(@shubhamg13, #46851)	wpt: Add tests for LCP element removed after paint (#46851)
+-https://github.com/servo/servo/pull/46851	(@shubhamg13, #46851)	wpt: Add tests for LCP element removed after paint (#46851)
     ^ commit b74b0418b44182a8e82a0544c7a23b868e56cf3c
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Adding new WPT tests for LCP element removed. 
@@ -1223,14 +1244,14 @@ https://github.com/servo/servo/pull/46851	(@shubhamg13, #46851)	wpt: Add tests f
     # 
     # Testing: No Code changes.
     # 
-https://github.com/servo/servo/pull/47040	(@jschwe, @mrobinson, #47040)	ci: Add sccache for faster try wpt builds in forks (#47040)
+-https://github.com/servo/servo/pull/47040	(@jschwe, @mrobinson, #47040)	ci: Add sccache for faster try wpt builds in forks (#47040)
     ^ commit 44ab2c88f0476609576eb6f33f0751ab9aca4d71
     # [trial run (pushed to main)](https://github.com/jschwe/servo/actions/runs/31079634622/job/92545361508) in my fork, shows that the variables take effect, so based on our previous experience it should just work.
     # 
     # Testing: CI changes are not covered by automated tests.
     # Fixes: #46635
     # 
-https://github.com/servo/servo/pull/47039	(@shubhamg13, #47039)	layout: Report LCP only once per element (#47039)
+-https://github.com/servo/servo/pull/47039	(@shubhamg13, #47039)	layout: Report LCP only once per element (#47039)
     ^ commit d32404331defffd789ef4fe468d3e3f28ec1a6dc
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Adds a HashSet for LCP Nodes to check if they are already reported.
@@ -1238,7 +1259,8 @@ https://github.com/servo/servo/pull/47039	(@shubhamg13, #47039)	layout: Report L
     # Testing: Additional WPT
     # Fixes: Part of #42000
     # 
-https://github.com/servo/servo/pull/46958	(@janeoa, @jdm, #46958)	 canvas: report malloc sizeof vello_cpu (#46958)
++https://github.com/servo/servo/pull/46958	(@janeoa, @jdm, #46958)	 canvas: report malloc sizeof vello_cpu (#46958)
+    perf; measure memory usage of canvas backend
     ^ commit fefcb83a2b44ccedcc8bd29bd45d40019561f5a5
     # I've added the `malloc_size_of` as a dependancy, so that we `impl MallocSizeOf for vello_cpu::Pixmap`
     # Added a `memory_report` to the canvas. 
@@ -1261,7 +1283,8 @@ https://github.com/servo/servo/pull/46958	(@janeoa, @jdm, #46958)	 canvas: repor
     # Testing: I have no auto tests, but I did spawn some canvases and saw them being reported. 
     # Fixes: https://github.com/servo/servo/issues/46785
     # 
-https://github.com/servo/servo/pull/47020	(@Loirooriol, #47020)	layout: Fix interaction of margin and stretch size on block-level box inside inline box (#47020)
++https://github.com/servo/servo/pull/47020	(@Loirooriol, #47020)	layout: Fix interaction of margin and stretch size on block-level box inside inline box (#47020)
+    layout
     ^ commit 7b34e567726cf4424ec04f16ddcaa67633eb1b39
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # For the purpose of resolving a stretch size of a block-level in the block axis, sometimes we need to treat margins as zero. The spec said to check a condition on the parent.
@@ -1289,7 +1312,8 @@ https://github.com/servo/servo/pull/47020	(@Loirooriol, #47020)	layout: Fix inte
     # 
     # 
     # 
-https://github.com/servo/servo/pull/47029	(@jschwe, #47029)	fonts: Eagerly memory-map local FreeType fonts (#47029)
++https://github.com/servo/servo/pull/47029	(@jschwe, #47029)	fonts: Eagerly memory-map local FreeType fonts (#47029)
+    perf; freetype font loading
     ^ commit c0c4dbe78f37723f0d1fdbbba8871ded0afee00e
     # Since the font data is memory mapped anyway, we can simply move the memory mapping up and create the `face` via `new_from_memory`. With the bundled freetype new_from_file is not backed with mmap (see #46808).
     # 
@@ -1331,7 +1355,8 @@ https://github.com/servo/servo/pull/47029	(@jschwe, #47029)	fonts: Eagerly memor
     # Testing: No behavior change.
     # 
     # 
-https://github.com/servo/servo/pull/47025	(@mrobinson, @SimonSapin, #47025)	layout: Take `OffsetMap` into account when getting glyph character index (#47025)
++https://github.com/servo/servo/pull/47025	(@mrobinson, @SimonSapin, #47025)	layout: Take `OffsetMap` into account when getting glyph character index (#47025)
+    layout; selection progress
     ^ commit 93b30d41e4414ce3d9214b789f832d9a076531c0
     # When text is transformed by `InlineFormattingContext` construction, we
     # keep an `OffsetMap` to map between indices pre-and-post-transform.
@@ -1342,13 +1367,14 @@ https://github.com/servo/servo/pull/47025	(@mrobinson, @SimonSapin, #47025)	layo
     # 
     # Testing: A Servo-specific WPT test is added for this change as it depends on mouse interaction behavior.
     # 
-https://github.com/servo/servo/pull/47046	(@lumiscosity, #47046)	script: Move srcset-related structs and functions out of HTMLImageElement (#47046)
+-https://github.com/servo/servo/pull/47046	(@lumiscosity, #47046)	script: Move srcset-related structs and functions out of HTMLImageElement (#47046)
     ^ commit 3ee1205e3fcc0cb8c68f79bfda5a5d9a4fc8d82d
     # This is a prerequisite for implementing the `imagesrcset` attribute on `<link>` elements. Not 100% on the final placement of this file or the visibility changes (I just did the simplest changes to get it compiling), some feedback would be appreciated.
     # 
     # Testing: Internal refactoring only - compilation is the test.
     # Fixes: Part of #47024.
-https://github.com/servo/servo/pull/46476	(@Narfinger, @jdm, #46476)	script: Do not load all fonts for SVG font database (#46476)
++https://github.com/servo/servo/pull/46476	(@Narfinger, @jdm, #46476)	script: Do not load all fonts for SVG font database (#46476)
+    perf; improved startup and resolving SVG fonts
     ^ commit b3a63fd3bcb520be56bf25bc89df3b967d53ec64
     # Currently the SVG font database loads all system fonts at the start and also inserts any fonts it loads.
     # This removes both of these.
@@ -1393,7 +1419,8 @@ https://github.com/servo/servo/pull/46476	(@Narfinger, @jdm, #46476)	script: Do 
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/43378	(@shubhamg13, #43378)	layout: Add `effective_visual_size` to `PaintTimingHandler` (#43378)
++https://github.com/servo/servo/pull/43378	(@shubhamg13, #43378)	layout: Add `effective_visual_size` to `PaintTimingHandler` (#43378)
+    dom; largestcontentfulpaint conformance
     ^ commit 30bba6d1fb3da2f408c520a8c372c595f59c3907
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -1402,7 +1429,8 @@ https://github.com/servo/servo/pull/43378	(@shubhamg13, #43378)	layout: Add `eff
     # Testing: More WPT Passed
     # Fixes: Part of #42000
     # 
-https://github.com/servo/servo/pull/46843	(@jschwe, @mrobinson, #46843)	perf: add initial threadboost mechanism (for ohos). (#46843)
++https://github.com/servo/servo/pull/46843	(@jschwe, @mrobinson, #46843)	perf: add initial threadboost mechanism (for ohos). (#46843)
+    embedding; threadboost API and perf improvements on ohos
     ^ commit 290a778fef23a5b4389800c0793ac912b3f5746c
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     ^ /!\ may contain changes to feature flags
@@ -1422,27 +1450,29 @@ https://github.com/servo/servo/pull/46843	(@jschwe, @mrobinson, #46843)	perf: ad
     # Testing: We currently don't measure production performance before merging to main. 
     # 
     # 
-https://github.com/servo/servo/pull/47047	(@jschwe, #47047)	allocator: Enable jemalloc stats feature (#47047)
+-https://github.com/servo/servo/pull/47047	(@jschwe, #47047)	allocator: Enable jemalloc stats feature (#47047)
     ^ commit df0cbe45218f7ab28911a1e6872b79459ab91acb
     # We need to enable this feature to get the jemalloc related statistics in `about:memory`, otherwise they will not appear.
     # 
     # Testing: Not covered by automated tests
     # 
-https://github.com/servo/servo/pull/47048	(@SimonSapin, @mrobinson, @mrobinson, #47048)	Resolve DOM/glyph positions during hit testing (#47048)
++https://github.com/servo/servo/pull/47048	(@SimonSapin, @mrobinson, @mrobinson, #47048)	Resolve DOM/glyph positions during hit testing (#47048)
+    layout; selection progress
     ^ commit bffc115a9ffce4347d69f244e89dcd37a8bbaadd
     # Previously, finding a glyph closest to a viewport point was handled after hit testing, deeper in the `<input>`/`<textarea>` code. Since this will soon need to be shared with interactive update of `Document` selection, this change moves it to hit testing itself. When the hit test hits a `TextFragment` directly, this avoids a `FragmentTree` walk. In general, we should know that some input events will need this information and some will not. For instance, when a mouse button is pressed we likely need it, because selection is ongoing. This allows us to opt in to this extra work when asking for the hit test. This can eventually give us a more faithful update of the "sequential focus navigation starting point" which currently cannot be placed inside of text nodes.
     # 
     # In addition, this change moves away from the "element from point" terminology to "hit test" for the query name. Not everything returned is an `Element`, most obviously text nodes in this case.
     # 
     # Testing: This should not change observable behavior so is covered by existing tests. 
-https://github.com/servo/servo/pull/47049	(@jdm, #47049)	script: Root less in Slottable::find_a_slot. (#47049)
++https://github.com/servo/servo/pull/47049	(@jdm, #47049)	script: Root less in Slottable::find_a_slot. (#47049)
+    perf
     ^ commit 826e2533547e72cd7bbf1064afe5d3f069957136
     # This saves 300ms of 1.6s in the testcase from #47021.
     # 
     # Testing: Existing tests suffice.
     # Fixes: part of #47021.
     # 
-https://github.com/servo/servo/pull/47060	(@TimvdLippe, #47060)	script: Move individual interfaces into subfolders (#47060)
+-https://github.com/servo/servo/pull/47060	(@TimvdLippe, #47060)	script: Move individual interfaces into subfolders (#47060)
     ^ commit 33036ffe35a414338e4ea751f3244c15d530efe8
     # All of these are used in 1 (or very few) place. Therefore, move them to the subfolder where they are used.
     # 
@@ -1454,12 +1484,13 @@ https://github.com/servo/servo/pull/47060	(@TimvdLippe, #47060)	script: Move ind
     # Part of #46329
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/47065	(@TimvdLippe, #47065)	script: Move script modules logic into subfolder (#47065)
+-https://github.com/servo/servo/pull/47065	(@TimvdLippe, #47065)	script: Move script modules logic into subfolder (#47065)
     ^ commit 9fce1ea3392f4f1f4fb4821ff6168734e93d2148
     # This moves the two files related to script modules into a dedicated subfolder. It also splits up the import map logic from `script_module`, since that file is doing too many different things.
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/47066	(@Narfinger, #47066)	script: Remove unnecessary clone on HTMLScriptElement::prepare_the_script_text (#47066)
++https://github.com/servo/servo/pull/47066	(@Narfinger, #47066)	script: Remove unnecessary clone on HTMLScriptElement::prepare_the_script_text (#47066)
+    perf; allocations
     ^ commit 46ff931c783484dae5102f706921e44d1b216591
     # This should not need a clone to compare two domstrings.
     # 
@@ -1470,18 +1501,20 @@ https://github.com/servo/servo/pull/47066	(@Narfinger, #47066)	script: Remove un
     # Part of #46329
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/47051	(@treetmitterglad, #47051)	script: Fix GC borrow hazard in HTMLImageElement::abort_request (#47051)
++https://github.com/servo/servo/pull/47051	(@treetmitterglad, #47051)	script: Fix GC borrow hazard in HTMLImageElement::abort_request (#47051)
+    crash
     ^ commit ce73989df3f11b205d6453f5d5f566b0c6232c8c
     # Rewrote GC handling in the `abort_request` function to prevent potential crashes due to conflicts with the GC during mutable borrows, and to perform immutable borrows when possible.
     # 
     # Testing: Ran `./mach test-wpt tests/wpt/tests/html/semantics/embedded-content/the-img-element/ `, 135/135 passed
     # Fixes: #34107 
-https://github.com/servo/servo/pull/47071	(@TimvdLippe, #47071)	script: Move task related files to `script/tasks/` (#47071)
+-https://github.com/servo/servo/pull/47071	(@TimvdLippe, #47071)	script: Move task related files to `script/tasks/` (#47071)
     ^ commit 1aab9ba9f2e2d8b50fb0311d54b66efa11081ddb
     # Maintain the `task_` prefixes, since files like `manager.rs` are too generic. We did something similar recently with `audio/node.rs` -> `audio/audio_node.rs`.
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/47031	(@nicoburns, #47031)	Upgrade to Taffy v0.13.0 (#47031)
++https://github.com/servo/servo/pull/47031	(@nicoburns, #47031)	Upgrade to Taffy v0.13.0 (#47031)
+    layout; taffy upgrade with fewer crashes and grid bug fixes and performance improvements
     ^ commit de7dfdc367f7f6b552a7d74a6725138dac33a343
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This should fix all CSS Grid panics. And also fixes a number of CSS Grid tests. It also switches grid placement to a sparse grid representation which greatly improves performance on pathologically large grids.
@@ -1505,7 +1538,7 @@ https://github.com/servo/servo/pull/47031	(@nicoburns, #47031)	Upgrade to Taffy 
     # Testing: New passing in WPT. 
     # Fixes: #46580
     # Fixes: #46907
-https://github.com/servo/servo/pull/47076	(@sagudev, @mrobinson, #47076)	chore: Update Rust to 1.97.1 (#47076)
+-https://github.com/servo/servo/pull/47076	(@sagudev, @mrobinson, #47076)	chore: Update Rust to 1.97.1 (#47076)
     ^ commit 39f05ac150c04dbd135e13a9248343235f4b1116
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # Per request in [#general > Updating crown to Rust 1.97 @ 💬](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Updating.20crown.20to.20Rust.201.2E97/near/614775189)
@@ -1536,7 +1569,7 @@ https://github.com/servo/servo/pull/47076	(@sagudev, @mrobinson, #47076)	chore: 
     # 
     # Testing: This change adds a WPT test.
     # 
-https://github.com/servo/servo/pull/47075	(@jdm, #47075)	net: Don't treat usvg_options as a child of the image-cache. (#47075)
+-https://github.com/servo/servo/pull/47075	(@jdm, #47075)	net: Don't treat usvg_options as a child of the image-cache. (#47075)
     ^ commit a1717c9e9b5f228c1aa8e7bf365006cc2069196a
     # about:memory assumes that any path like `a b c` is a component of the path `a b` and contributes to `a b`'s total size. Since that is not the case for the usvg_options part of the image cache, we need to differentiate them.
     # 
@@ -1559,7 +1592,7 @@ https://github.com/servo/servo/pull/47075	(@jdm, #47075)	net: Don't treat usvg_o
     # Testing: New passing tests.
     # Fixes: part of #43149
     # 
-https://github.com/servo/servo/pull/47079	(@lumiscosity, #47079)	script: Move common source set operations into `srcset.rs` (#47079)
+-https://github.com/servo/servo/pull/47079	(@lumiscosity, #47079)	script: Move common source set operations into `srcset.rs` (#47079)
     ^ commit 4e2ad49caae5de92c0125d7b3654bb70579e971e
     # These are shared for `<img>` and `<link>` elements. This PR does not yet introduce the parts of the algorithm specific to `<link>` - that will be left for a follow-up.
     # 
@@ -1584,7 +1617,8 @@ https://github.com/servo/servo/pull/47079	(@lumiscosity, #47079)	script: Move co
     # Part of: https://github.com/servo/servo/issues/34479
     # 
 >>> 2026-08-10T23:47:36Z
-https://github.com/servo/servo/pull/46938	(@TheZoq2, #46938)	Enable the `wayland-data-control` for `arboard` (#46938)
++https://github.com/servo/servo/pull/46938	(@TheZoq2, #46938)	Enable the `wayland-data-control` for `arboard` (#46938)
+    embedding; fixed clipboard integration on wayland
     ^ commit ba14b47a9a63e3e2046c8c58bd83f6ed8e2bdb84
     # Addresses #45470 by enabling the `wayland-data-control` feature as suggested by Gae24. I am not entirely sure what the interaction of this is with the [ext-data-control-v1](https://wayland.app/protocols/ext-data-control-v1) and [wlr-data-control-unstable-v1](https://wayland.app/protocols/wlr-data-control-unstable-v1) features is, I checked the compatibility list and noticed that one of the two isn't supported on kwin, but clipboard does work with kwin on my system.
     # 
@@ -1609,7 +1643,7 @@ https://github.com/servo/servo/pull/46938	(@TheZoq2, #46938)	Enable the `wayland
     # Part of #40600
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/47093	(@atouchet, #47093)	Deduplicate petgraph and fixedbitset (#47093)
+-https://github.com/servo/servo/pull/47093	(@atouchet, #47093)	Deduplicate petgraph and fixedbitset (#47093)
     ^ commit abdd34cfe8fcc2ed1eb25a8f0a916a8f00a12533
     # The dependencies introduced in #46938 weren't updated to the latest releases so it is possible to update them to remove the petgraph and fixedbitset duplicate dependencies.
     # 
@@ -1619,13 +1653,14 @@ https://github.com/servo/servo/pull/47093	(@atouchet, #47093)	Deduplicate petgra
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 09-08-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/47087	(@jschwe, #47087)	deps: Bump mozjs to 0.21.1 (#47087)
+-https://github.com/servo/servo/pull/47087	(@jschwe, #47087)	deps: Bump mozjs to 0.21.1 (#47087)
     ^ commit 44684fac2758f57283df54790294b3c0a8f10156
     # Updates to latest mozjs, containing https://github.com/servo/mozjs/pull/583. 
     # 
     # Testing: Regular mozjs update
     # 
-https://github.com/servo/servo/pull/47081	(@jschwe, #47081)	android / ohos: Respect `device_pixel_ratio_override` in servoshell (#47081)
++https://github.com/servo/servo/pull/47081	(@jschwe, #47081)	android / ohos: Respect `device_pixel_ratio_override` in servoshell (#47081)
+    embedding; support DPI override on android/ohos
     ^ commit e2bcea2a0f65d5768c75d23f9a2b4d60349749db
     ^ /!\ contains servoshell changes! does it affect the user experience?
     # If the servoshell preference is set, it should be respected instead of ignored.
@@ -1634,7 +1669,7 @@ https://github.com/servo/servo/pull/47081	(@jschwe, #47081)	android / ohos: Resp
     # Testing: Not tested. 
     # 
     # 
-https://github.com/servo/servo/pull/47077	(@kkoyung, #47077)	script: Directly convert `KeyAlgorithm` to js value (#47077)
+-https://github.com/servo/servo/pull/47077	(@kkoyung, #47077)	script: Directly convert `KeyAlgorithm` to js value (#47077)
     ^ commit 95333b6101ac8d32e5d6135b82ccfd7b84aaaac8
     # For each of the WebIDL dictionary `KeyAlgorithm` and its derivatives in WebCrypto API, we have a proxy type on top of the binding type generated by `script-bindings`. When we convert them into js value, we used to convert from the proxy type to generated binding type, then to js value.
     # 
@@ -1642,14 +1677,14 @@ https://github.com/servo/servo/pull/47077	(@kkoyung, #47077)	script: Directly co
     # 
     # Testing: Refactoring. Existing tests suffice.
     # Part-of: #46948
-https://github.com/servo/servo/pull/47099	(@jschwe, #47099)	deps: Update mozjs to 0.21.2 (#47099)
+-https://github.com/servo/servo/pull/47099	(@jschwe, #47099)	deps: Update mozjs to 0.21.2 (#47099)
     ^ commit ddd17a91035d29be4329b0fd2717cd1615552a2f
     # Includes https://github.com/servo/mozjs/pull/732 (simple cleanup PR)
     # 
     # Testing: Covered by existing tests
     # 
     # 
-https://github.com/servo/servo/pull/47100	(@TimvdLippe, #47100)	etc: Add comment with command to close issues (#47100)
+-https://github.com/servo/servo/pull/47100	(@TimvdLippe, #47100)	etc: Add comment with command to close issues (#47100)
     ^ commit 1e666b9d50aa023b14c84df7fe70a11e96ca49e3
     # I had to constantly go back to my original PR that introduced the script. Since that's brittle, add the comment in the script itself.
     # 
@@ -1870,7 +1905,8 @@ https://github.com/servo/servo/pull/47100	(@TimvdLippe, #47100)	etc: Add comment
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47064	(@niyabits, #47064)	script: init `WorkletThreadPool` in `Window` (#47064)
++https://github.com/servo/servo/pull/47064	(@niyabits, #47064)	script: init `WorkletThreadPool` in `Window` (#47064)
+    dom; audioworklet progress
     ^ commit c3832920feb3db85e60c4c43f0cb9d04474271f3
     # This PR is a part of refactoring Worklet for implementing AudioWorklet
     # 
@@ -1884,7 +1920,8 @@ https://github.com/servo/servo/pull/47064	(@niyabits, #47064)	script: init `Work
     #  
     # Testing: existing worklet WPT covers the changes.
     # 
-https://github.com/servo/servo/pull/47112	(@kkoyung, #47112)	script: Properly implement usage intersection in `CryptoKey` (#47112)
++https://github.com/servo/servo/pull/47112	(@kkoyung, #47112)	script: Properly implement usage intersection in `CryptoKey` (#47112)
+    dom; webcrypto spec compliance
     ^ commit 56c05f4bd55ece8f33b0e8af1b5f30d316c35409
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # In our current implementation, when we calculate the **usage intersection** of two lists of key usage value, we do not deduplicate and sort the result, which is required by the specification.
@@ -1894,7 +1931,8 @@ https://github.com/servo/servo/pull/47112	(@kkoyung, #47112)	script: Properly im
     # Spec: <https://w3c.github.io/webcrypto/#concept-usage-intersection>
     # Testing: Pass more WPT tests.
     # Part-of: #47096
-https://github.com/servo/servo/pull/47113	(@mukilan, #47113)	build: Configure jemalloc with 64KB page size on linux-arm64 (#47113)
++https://github.com/servo/servo/pull/47113	(@mukilan, #47113)	build: Configure jemalloc with 64KB page size on linux-arm64 (#47113)
+    embedding; create arm64 builds that work on rPI 5
     ^ commit 8446a04aa2ef9c8ceae78af3be51df8a7b8130f3
     # Raspberry Pi OS 13 (used by Pi 5) ships with a kernel that uses 16KB pages on rPI 5 based systems and `jemalloc` requires that it be compiled with a page size that is at least equal to the base size that will be used by the runtime kernel.
     # 
@@ -1907,7 +1945,8 @@ https://github.com/servo/servo/pull/47113	(@mukilan, #47113)	build: Configure je
     # In addition, the Speedometer 3 and Jetstream 2 benchmarks were run using WebKit's run-benchmark script against both 4KB and 64KB builds of servo on rPi 400 and there was negligible difference in metrics. It wasn't possible to get a good idea of memory consumption due to #42769, but the benchmarks completed multiple iterations successfully.
     # 
     # Fixes: #46855
-https://github.com/servo/servo/pull/47069	(@mrobinson, #47069)	layout: Consistently map back to DOM offsets from layout offsets (#47069)
++https://github.com/servo/servo/pull/47069	(@mrobinson, #47069)	layout: Consistently map back to DOM offsets from layout offsets (#47069)
+    layout; selection progress
     ^ commit 0f40e5fb164753c3bea1d6cee96f9301a92e03dc
     # When mapping a character offset in layout text (transformed by white
     # space collapse and `text-transform`) back to the original DOM offset,
@@ -1919,18 +1958,20 @@ https://github.com/servo/servo/pull/47069	(@mrobinson, #47069)	layout: Consisten
     # 
     # Testing: This changes adds a Servo-specific test (edit point selection behavior is unspecified).
     # 
-https://github.com/servo/servo/pull/47124	(@eachra-bawn, #47124)	html: Add error messages (#47124)
++https://github.com/servo/servo/pull/47124	(@eachra-bawn, #47124)	html: Add error messages (#47124)
+    dom; improve error messages
     ^ commit 74a7f95a9f8692de219d4f96410758a6fd92b2d8
     # Part of: #40756
     # 
-https://github.com/servo/servo/pull/47127	(@jdm, #47127)	script: Add error message for invalid selectors. (#47127)
++https://github.com/servo/servo/pull/47127	(@jdm, #47127)	script: Add error message for invalid selectors. (#47127)
+    dom; improve error messages
     ^ commit 4c54c13e4bfa6397a282d971338d894361c5c83e
     # This provides more useful error messages when websites are doing invalid things with selectors.
     # 
     # Testing: No tests for the contents of error messages.
     # Part of #40756
     # 
-https://github.com/servo/servo/pull/46964	(@Narfinger, @jdm, @sagudev, #46964)	script: Move GPUAdapter, GPUSupportedFeatures, GPUSupportedLimits and WGSLLanguageFeatures to script_webgpu (#46964)
+-https://github.com/servo/servo/pull/46964	(@Narfinger, @jdm, @sagudev, #46964)	script: Move GPUAdapter, GPUSupportedFeatures, GPUSupportedLimits and WGSLLanguageFeatures to script_webgpu (#46964)
     ^ commit e4c90343b1e0357baa716c365c81bc9fe3383fc7
     # This moves GPUAdapter, GPUSupportedFeatures, GPUSupportedLimits and WGSLLanguageFeatures to script_webgpu crate.
     # Of note:
@@ -2023,7 +2064,8 @@ https://github.com/servo/servo/pull/46964	(@Narfinger, @jdm, @sagudev, #46964)	s
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47141	(@kkoyung, #47141)	script: Normalize key usages in generateKey operations (#47141)
++https://github.com/servo/servo/pull/47141	(@kkoyung, #47141)	script: Normalize key usages in generateKey operations (#47141)
+    dom; webcrypto spec compliance
     ^ commit 12b604fc48b008989e2d6840a64ad2142f25a169
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # The Web Cryptography API specification and Modern Algorithms in the Web Cryptography API specification have updated to require normalization of key usages during the generateKey operations of symmetric key algorithms, including AES-CTR, AES-CBC, AES-GCM, AES-KW, HMAC, AES-OCB, ChaCha20-Poly1305 and KMAC.
@@ -2147,14 +2189,16 @@ https://github.com/servo/servo/pull/47141	(@kkoyung, #47141)	script: Normalize k
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47130	(@jdm, #47130)	script: Move FontContext into each global that requires it. (#47130)
++https://github.com/servo/servo/pull/47130	(@jdm, #47130)	script: Move FontContext into each global that requires it. (#47130)
+    dom; document replacement
     ^ commit 020175c83d23f20bafd1df709d69f79ba5e31f74
     # In preparation for #46975, we need to ensure that we don't expose an outdated font context if the document is replaced. This fixes a timeout exposed by #46975.
     # 
     # Testing: No behaviour change expected; existing tests suffice.
     # Part of #43149
     # 
-https://github.com/servo/servo/pull/47116	(@RichardTjokroutomo, #47116)	OHOS: Also push `HarmonyOS Sans SC` & `HarmonyOS Sans TC` as candidate fallback fonts when special characters are encountered.  (#47116)
++https://github.com/servo/servo/pull/47116	(@RichardTjokroutomo, #47116)	OHOS: Also push `HarmonyOS Sans SC` & `HarmonyOS Sans TC` as candidate fallback fonts when special characters are encountered.  (#47116)
+    ohos; better font fallback for CJK fonts
     ^ commit eff9ff0bfa47fa046da2231fe0c84d48aee2be5d
     # Currently, `fallback_font_families()` only push `HarmonyOS Sans SC` & `HarmonyOS Sans TC` when a character is a Chinese character (e.g. `你`, `我`, etc.). However, there are also Chinese special characters such as Chinese brackets ( `【】`). These special characters are not considered as Han scripts by `unicode_script`. As a result, these special characters won't be rendered on OHOS devices.
     # 
@@ -2170,7 +2214,8 @@ https://github.com/servo/servo/pull/47116	(@RichardTjokroutomo, #47116)	OHOS: Al
     # 
     # Testing: `tests/webview.rs: test_fullscreen`
     # Fixes: #45157
-https://github.com/servo/servo/pull/47027	(@jschwe, #47027)	threadboost: Fine-tune boosting and explicitly boost webrender threads (#47027)
++https://github.com/servo/servo/pull/47027	(@jschwe, #47027)	threadboost: Fine-tune boosting and explicitly boost webrender threads (#47027)
+    embedding; threadboost API and perf improvements on ohos
     ^ commit a40c8f29010c7f3160db5faf2b4b8e04852be28b
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Follow-up to #46843.
@@ -2182,13 +2227,14 @@ https://github.com/servo/servo/pull/47027	(@jschwe, #47027)	threadboost: Fine-tu
     # Testing: We don't have any automated tests measuring performance or thread placement.
     # 
     # 
-https://github.com/servo/servo/pull/47145	(@Narfinger, #47145)	clippy: Delete not needed .clippy.toml file (#47145)
+-https://github.com/servo/servo/pull/47145	(@Narfinger, #47145)	clippy: Delete not needed .clippy.toml file (#47145)
     ^ commit 9afd4bce84e9252606469c05b4fa9186e08b554e
     # We do not need this anymore as we are past the required time-rs version.
     # 
     # Testing: If the CI is happy, this should work.
     # 
-https://github.com/servo/servo/pull/47147	(@jschwe, #47147)	script: Cache UrlExtraData for about:blank (#47147)
++https://github.com/servo/servo/pull/47147	(@jschwe, #47147)	script: Cache UrlExtraData for about:blank (#47147)
+    perf; allocations
     ^ commit f49ec0ab27e6eccb639d64fecd48628029df9253
     # Instead of parsing `about:blank` every time `parser_context_for_anonymous_content` is called,
     # we cache the value in a LazyLock.
@@ -2209,7 +2255,7 @@ https://github.com/servo/servo/pull/47147	(@jschwe, #47147)	script: Cache UrlExt
     # Testing: Added a test `tests/wpt/tests/css/cssom-view/range-bounding-client-rect-with-shadow-dom.html` since no existing test cover this.
     # Fixes: #47115
     # 
-https://github.com/servo/servo/pull/47045	(@Narfinger, #47045)	pixels: Create Image Decoder trait (#47045)
+-https://github.com/servo/servo/pull/47045	(@Narfinger, #47045)	pixels: Create Image Decoder trait (#47045)
     ^ commit e8ffe8e88ce3fc7ef47f48d9e368be4029bfb51e
     # In the future we want to have platform being able to supply their own way to decode images (either because of resource constraints or because not all formats might make sense).
     # This creates a trait to abstract over this.
@@ -2220,7 +2266,8 @@ https://github.com/servo/servo/pull/47045	(@Narfinger, #47045)	pixels: Create Im
     # 
     # Testing: WPT tests should find anything that is wrong. (https://github.com/Narfinger/servo/actions/runs/31089302869)
     # 
-https://github.com/servo/servo/pull/43819	(@Narfinger, #43819)	net: Implement on disk cache (#43819)
++https://github.com/servo/servo/pull/43819	(@Narfinger, #43819)	net: Implement on disk cache (#43819)
+    net; implement disk cache, off by default
     ^ commit fb04f8f1613717418b3c0d0c48ee2b8eec65fd8d
     ^ /!\ may contain changes to feature flags
     # This implements an on disk cache using the cacache library.
@@ -2242,7 +2289,7 @@ https://github.com/servo/servo/pull/43819	(@Narfinger, #43819)	net: Implement on
     # 
     # Fixes: https://github.com/servo/servo/issues/47012
     # 
-https://github.com/servo/servo/pull/47131	(@jschwe, #47131)	deps: Bump mozjs to 0.21.3 (#47131)
+-https://github.com/servo/servo/pull/47131	(@jschwe, #47131)	deps: Bump mozjs to 0.21.3 (#47131)
     ^ commit c58591ae31b370d769d31105c8f4c125b6af4391
     # Companion PR to  https://github.com/servo/mozjs/pull/789, with a minor build-system refactor and no other changes.
     # 
@@ -2256,7 +2303,8 @@ https://github.com/servo/servo/pull/47131	(@jschwe, #47131)	deps: Bump mozjs to 
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Spec: https://drafts.csswg.org/css-text-4/#valdef-text-transform-full-size-kana
     # Testing: some existing tests from WPT start passing
-https://github.com/servo/servo/pull/47165	(@Narfinger, #47165)	script: Use NoGC for note_dirty_element (#47165)
++https://github.com/servo/servo/pull/47165	(@Narfinger, #47165)	script: Use NoGC for note_dirty_element (#47165)
+    perf
     ^ commit b49e982758bf2993e8720599851787440885224f
     # This uses the NoGC framework for note_dirty_element.
     # This replaces the `inclusive_ancestors_in_flat_tree` with an unrooted variant.
@@ -2552,7 +2600,8 @@ https://github.com/servo/servo/pull/47165	(@Narfinger, #47165)	script: Use NoGC 
     # 
     # Fixes: Ohos port of #47153
     # Co-authored-by: Jonathan Schwender <schwenderjonathan@gmail.com>
-https://github.com/servo/servo/pull/47178	(@kkoyung, #47178)	script: Normalize key usage during importKey operations (#47178)
++https://github.com/servo/servo/pull/47178	(@kkoyung, #47178)	script: Normalize key usage during importKey operations (#47178)
+    dom; webcrypto spec compliance
     ^ commit b8b1070aa2b6cfced7298bff4bb366666e15a895
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # According to WebCrypto API specification, the `SubtleCrypto.deriveKey`, `SubtleCrypto.importKey` and `SubtleCrypto.unwrapKey` methods should set the [[usages]] internal slot of that resultant `CryptoKey` to the normalized value of usages. However, our current implementation does not normalize the usages. This patch aims to fix it.
@@ -2561,7 +2610,8 @@ https://github.com/servo/servo/pull/47178	(@kkoyung, #47178)	script: Normalize k
     # 
     # Testing: Pass more WPT tests.
     # Part-of: #47096
-https://github.com/servo/servo/pull/47158	(@Narfinger, #47158)	script: Use inclusive_ancestors_unrooted in interior of UnrootedFollowingNodeIterator (#47158)
++https://github.com/servo/servo/pull/47158	(@Narfinger, #47158)	script: Use inclusive_ancestors_unrooted in interior of UnrootedFollowingNodeIterator (#47158)
+    perf
     ^ commit 865a9988f91a865b3cce18200feb733847b27f0c
     # This uses inclusive_ancestors_unrooted instead of the rooted variant in the interior of UnrootedFollowingNodeIterator (in next_skipping_children_impl).
     # Additionally, this PR relaxes the PartialEq for UnrootedDom to allow comparing UnrootedDom<'a,T> with UnrootedDom<'b, T>.
@@ -2570,10 +2620,10 @@ https://github.com/servo/servo/pull/47158	(@Narfinger, #47158)	script: Use inclu
     # 
     # Testing: This does not have a specific testcase but inclusive_ancestors_unrooted is tested enough now to be equivalent to the rooted version. So this change should be equivalent.
     # 
-https://github.com/servo/servo/pull/47101	(@TimvdLippe, #47101)	script: Move script_thread and related structs to `script/event_loop` (#47101)
+-https://github.com/servo/servo/pull/47101	(@TimvdLippe, #47101)	script: Move script_thread and related structs to `script/event_loop` (#47101)
     ^ commit 96148a7f022e1b3ba37798f984503276d9eddedd
     # Testing: it compiles
-https://github.com/servo/servo/pull/47196	(@yezhizhen, #47196)	media (ohos): Replace todo! panics with dummy backend (#47196)
+-https://github.com/servo/servo/pull/47196	(@yezhizhen, #47196)	media (ohos): Replace todo! panics with dummy backend (#47196)
     ^ commit b3ee31d291c061a63d361425f691a2abdb924d7f
     # Most of these mimics dummy backend.
     # 
@@ -2591,7 +2641,8 @@ https://github.com/servo/servo/pull/47196	(@yezhizhen, #47196)	media (ohos): Rep
     # Testing: The default is still to include brotli.
     # Fixes: https://github.com/servo/servo/issues/47190
     # 
-https://github.com/servo/servo/pull/47195	(@alice, #47195)	layout: Only update the accessibility tree when updating the rendering. (#47195)
++https://github.com/servo/servo/pull/47195	(@alice, #47195)	layout: Only update the accessibility tree when updating the rendering. (#47195)
+    accessibility; update tree when updating rendering
     ^ commit cbf92217ae6d2f87bd726252bc7176f373058b28
     # In other situations, don't drain accessibility damage or rooted nodes.
     # 
@@ -2611,7 +2662,7 @@ https://github.com/servo/servo/pull/47195	(@alice, #47195)	layout: Only update t
     # Lastly also introduce a convenience method `old_value()` on an `AttributeMutation`, to save me a bit of copy-pasting that was in multiple places.
     # 
     # Testing: newly passing WPT tests
-https://github.com/servo/servo/pull/47167	(@Narfinger, #47167)	net: Respect temporary_storage option for disk_cache (#47167)
+-https://github.com/servo/servo/pull/47167	(@Narfinger, #47167)	net: Respect temporary_storage option for disk_cache (#47167)
     ^ commit 27a317dd69cd43a5dd8ba4607e1a73628c9352fd
     ^ /!\ contains servoshell changes! does it affect the user experience?
     ^ /!\ may contain changes to EXPERIMENTAL_PREFS
@@ -2702,7 +2753,8 @@ https://github.com/servo/servo/pull/47167	(@Narfinger, #47167)	net: Respect temp
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47199	(@niyabits, #47199)	script: abstract the cache logic of `PaintWorklet`'s Worklet Tasks (#47199)
++https://github.com/servo/servo/pull/47199	(@niyabits, #47199)	script: abstract the cache logic of `PaintWorklet`'s Worklet Tasks (#47199)
+    dom; audioworklet progress
     ^ commit 94945c4b5ca30a250607e7db0369424853ed3ec6
     # Simplifies the cache logic of `PaintWorkletTask::DrawAPaintImage` and `PaintWorkletTask::SpeculativelyDrawAPaintImage`,
     # 
@@ -2712,7 +2764,8 @@ https://github.com/servo/servo/pull/47199	(@niyabits, #47199)	script: abstract t
     # 
     # Testing: no testing requires as this patch is a refactor and does not change existing logic
     # 
-https://github.com/servo/servo/pull/47210	(@kkoyung, #47210)	script: Optimize TurboSHAKE support in WebCrypto (#47210)
++https://github.com/servo/servo/pull/47210	(@kkoyung, #47210)	script: Optimize TurboSHAKE support in WebCrypto (#47210)
+    perf; binary size
     ^ commit 42892b088a2ea622cd07786416545f7cd20f76ae
     # The TurboSHAKE algorithm provided by the `turboshake` crate (current latest stable version: 0.7.1) takes the domain separation parameter as a const generic, which requires to be known as compile time. However, the WebCrypto API allows users set it at runtime. Our current implementation maps the user-provided value to const generic via the `seq!`, which results in large `match` blocks and instantiating the generic many times.
     # 
@@ -2772,7 +2825,8 @@ https://github.com/servo/servo/pull/47210	(@kkoyung, #47210)	script: Optimize Tu
     # ---
     # 
     # I made sure that this would still compile with and without webgl, and currently webxr forces webgl as a dependency 
-https://github.com/servo/servo/pull/47214	(@Narfinger, #47214)	net: Use aws-lc-rs for subresource integrity instead of sha2 crate (#47214)
++https://github.com/servo/servo/pull/47214	(@Narfinger, #47214)	net: Use aws-lc-rs for subresource integrity instead of sha2 crate (#47214)
+    perf; binary size
     ^ commit e0b630fe3e03d494d87ff977c91cbe6172dd8dfc
     # This switches the subresource integrity system from the sha2 crate to aws-lc-rs.
     # 
@@ -2791,7 +2845,7 @@ https://github.com/servo/servo/pull/47214	(@Narfinger, #47214)	net: Use aws-lc-r
     # Testing: Less crashes. This uncovers some failures for autolinking and chrome-specific whitespace handling. Autolinking is just not implemented yet and the whitespace handling also has a bunch of failures in Safari and Ladybird. But both of these can be looked at in a subsequent PR.
     # Fixes: https://github.com/servo/servo/issues/47152
     # 
-https://github.com/servo/servo/pull/47223	(@Narfinger, #47223)	paint: Small consolidation of webgl features in paint (#47223)
+-https://github.com/servo/servo/pull/47223	(@Narfinger, #47223)	paint: Small consolidation of webgl features in paint (#47223)
     ^ commit dbf448faa1bcc001616512605e678e82d0398523
     # Consolidate webgl feature in paint under a commond struct saving us a couple of flags.
     # Additionally, shutdown was moved to this struct.
@@ -2993,7 +3047,7 @@ https://github.com/servo/servo/pull/47223	(@Narfinger, #47223)	paint: Small cons
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47234	(@kkoyung, #47234)	script: Simplify internal slots of `CryptoKey` (#47234)
+-https://github.com/servo/servo/pull/47234	(@kkoyung, #47234)	script: Simplify internal slots of `CryptoKey` (#47234)
     ^ commit cb0f70646e7766468b73e3fb366d73b88754f1f1
     # After #47178, the [[extractable]] and [[usages]] internal slots of the `CryptoKey` interface will not change after the key creation. We can take away the `Cell` from the [[extractable]] internal slot and `DomRefCell` from the [[usages]] internal slot to simplify the code.
     # 
@@ -3008,7 +3062,8 @@ https://github.com/servo/servo/pull/47234	(@kkoyung, #47234)	script: Simplify in
     # Testing: modifying existing tests.
     # Fixes: #47156
     # 
-https://github.com/servo/servo/pull/47216	(@yezhizhen, #47216)	webdriver: Support latest "Get Element Tag Name" (#47216)
++https://github.com/servo/servo/pull/47216	(@yezhizhen, #47216)	webdriver: Support latest "Get Element Tag Name" (#47216)
+    webdriver
     ^ commit c5e281afdf8fec12b3f0dbd9ea10739fdf6b9eb9
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This also adds helper `fn qualified_name` to be shared with [tagName](https://dom.spec.whatwg.org/#dom-element-tagname).
@@ -3034,12 +3089,14 @@ https://github.com/servo/servo/pull/47216	(@yezhizhen, #47216)	webdriver: Suppor
     # 
     # Testing: 4 new passing in `preload`, attribute tests on idlharness pass.
     # 
-https://github.com/servo/servo/pull/47250	(@webbeef, #47250)	net: use serde_bytes to serialize ResponseBody (#47250)
++https://github.com/servo/servo/pull/47250	(@webbeef, #47250)	net: use serde_bytes to serialize ResponseBody (#47250)
+    perf; allocations
     ^ commit e6b2f237be64121cf16ed92ea97a78de259d9117
     # That enables postcard to use the more efficient serialize_bytes and deserialize_bytes methods.
     # 
     # Testing: optimization covered by existing tests.
-https://github.com/servo/servo/pull/47251	(@Narfinger, #47251)	script: Small performance improvements in queue_a_mutation_record (#47251)
++https://github.com/servo/servo/pull/47251	(@Narfinger, #47251)	script: Small performance improvements in queue_a_mutation_record (#47251)
+    perf
     ^ commit 2b2dcbd1deefbd8011f0076e045f5f988f8e8141
     # This contains two small optimizations:
     # - Use unrooted iterator as now we can statically guarantee that no GC happens.
@@ -3047,7 +3104,8 @@ https://github.com/servo/servo/pull/47251	(@Narfinger, #47251)	script: Small per
     # 
     # Testing: This is refactor and static guaranteed that no gc can happen.
     # 
-https://github.com/servo/servo/pull/47249	(@Narfinger, #47249)	fonts: Do not copy FontDescriptor needlesly (#47249)
++https://github.com/servo/servo/pull/47249	(@Narfinger, #47249)	fonts: Do not copy FontDescriptor needlesly (#47249)
+    perf
     ^ commit 84908d3bc6cd40546e4fc6ba0310b1be9439e7be
     # Previously, FontTemplateRef::descriptor and identifier cloned the value. This just returns the AtomicRef with some call sites using to_owned() but not all. This should save some amount of work, especially for methods such as descriptor_difference.
     # 
@@ -3055,14 +3113,16 @@ https://github.com/servo/servo/pull/47249	(@Narfinger, #47249)	fonts: Do not cop
     # 
     # Testing: Refactor so no extra test is needed.
     # 
-https://github.com/servo/servo/pull/47248	(@Narfinger, #47248)	net: Add AuthCache and Cookie Storage to memory reporting (#47248)
++https://github.com/servo/servo/pull/47248	(@Narfinger, #47248)	net: Add AuthCache and Cookie Storage to memory reporting (#47248)
+    perf; about:memory
     ^ commit 7a27057feec1d061a884f6ae5e0df86bf0f6e4d0
     # This adds auth cache and cookie storage to memory reporting.
     # Because the cookie storage is complicated we only have a lower approximation for it by only looking at how much the value would have to be allocated.
     # 
     # Testing: Memory reporting does not have automatic tests. Tested manually.
     # 
-https://github.com/servo/servo/pull/47219	(@Narfinger, #47219)	net: Cleanup subresource integrity (#47219)
++https://github.com/servo/servo/pull/47219	(@Narfinger, #47219)	net: Cleanup subresource integrity (#47219)
+    perf; allocations
     ^ commit 863c4eccbc688ee1d914e683d4173ee9e73d684a
     # Needs https://github.com/servo/servo/pull/47214
     # 
@@ -3071,19 +3131,19 @@ https://github.com/servo/servo/pull/47219	(@Narfinger, #47219)	net: Cleanup subr
     # 
     # Testing: WPT test should test subresource integrity (https://github.com/Narfinger/servo/actions/runs/31698050312)
     # 
-https://github.com/servo/servo/pull/47254	(@TimvdLippe, #47254)	script: Move single usage files into subdirectories (#47254)
+-https://github.com/servo/servo/pull/47254	(@TimvdLippe, #47254)	script: Move single usage files into subdirectories (#47254)
     ^ commit f2b524b91b32ec1b6e34a18157d9b377a57f76bc
     # All of these files were only used in a single place. Therefore move them into those relevant directories and reduce visibility.
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/47245	(@Narfinger, #47245)	net: Fix logic error in disk cache pref parsing (#47245)
+-https://github.com/servo/servo/pull/47245	(@Narfinger, #47245)	net: Fix logic error in disk cache pref parsing (#47245)
     ^ commit 5a02d9d6a9bc94c6815f7275561e999e68675086
     # Fix this logic error in disk cache parsing which meant nobody could enable the cache (as an empty string is automatically seen as disabled).
     # 
     # Testing: Manually tested.
     # 
 >>> 2026-08-15T23:27:55Z
-https://github.com/servo/servo/pull/47221	(@Narfinger, @yezhizhen, #47221)	layout: Use phfmap for quotation (#47221)
+-https://github.com/servo/servo/pull/47221	(@Narfinger, @yezhizhen, #47221)	layout: Use phfmap for quotation (#47221)
     ^ commit ca61f0d1d6e52f0fdc814cce6ad9bd187601e7e9
     # Previously we used a normal HashMap initialized at usage. Switching to a phf_map should improve performance. As the data was anyway in the binary, the binary size should not increase.
     # 
@@ -3107,7 +3167,7 @@ https://github.com/servo/servo/pull/47221	(@Narfinger, @yezhizhen, #47221)	layou
     # Testing: new tests are running.
     # Fixes: #24731
     # 
-https://github.com/servo/servo/pull/47262	(@jschwe, #47262)	script_webgpu: Enable webgpu feature on bindings (#47262)
+-https://github.com/servo/servo/pull/47262	(@jschwe, #47262)	script_webgpu: Enable webgpu feature on bindings (#47262)
     ^ commit feaf6534d845203acf550ceecee34cf933363b40
     # script_webgpu requires the webgpu feature in bindings. This worked via feature unification for servo builds, but breaks when building script_webgpu individually.
     # 
@@ -3123,7 +3183,8 @@ https://github.com/servo/servo/pull/47262	(@jschwe, #47262)	script_webgpu: Enabl
     # Fixes: #47024.
     # 
 >>> 2026-08-16T23:21:37Z
-https://github.com/servo/servo/pull/47264	(@yezhizhen, #47264)	url: Avoid allocation when serializing opaque origins (#47264)
++https://github.com/servo/servo/pull/47264	(@yezhizhen, #47264)	url: Avoid allocation when serializing opaque origins (#47264)
+    perf; allocations
     ^ commit 7bea9ed91f287ad0d98e4c612369f3743c25934f
     # For opaque origin, we were cloning `ImmutableOrigin` + creating `Origin` + allocating String, which ends up just as "null": [see here](https://github.com/servo/rust-url/blob/00a6ce58d02f4e0d43c5ca0702c0bedb8b1ebf3a/url/src/origin.rs#L78-L80)
     # 
@@ -3153,7 +3214,8 @@ https://github.com/servo/servo/pull/47264	(@yezhizhen, #47264)	url: Avoid alloca
     # 
     # Fixes: #47144
     # 
-https://github.com/servo/servo/pull/47211	(@jschwe, #47211)	script_bindings: Deduplicate wrap (#47211)
++https://github.com/servo/servo/pull/47211	(@jschwe, #47211)	script_bindings: Deduplicate wrap (#47211)
+    perf; binary size
     ^ commit 9701eef0441b037af8126bd48523f4acffb9505d
     # `wrap` is instantiated many times. Moving most of the code into a non-generic helper, reduces the code size (~370KB in production-stripped).
     # This does move `raw.reflect_with()` and `set_proto_id()`, which are now after `config.has_legacy_unforgeable_members`, but I think that should be fine. But that should be looked at by someone who is more familiar with SM.
@@ -3162,7 +3224,8 @@ https://github.com/servo/servo/pull/47211	(@jschwe, #47211)	script_bindings: Ded
     # Testing: Should be covered by existing WPT-tests.
     # 
     # 
-https://github.com/servo/servo/pull/47226	(@TimvdLippe, #47226)	script: Fix handling of blobs for hyperlinks (#47226)
++https://github.com/servo/servo/pull/47226	(@TimvdLippe, #47226)	script: Fix handling of blobs for hyperlinks (#47226)
+    dom; hyperlinks for blobs
     ^ commit d156d4dded5b8598d95a6dce9c0dcc9915a0f65a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # There were several issues. First of all, setting a `href` attribute didn't trigger the appropriate mutation callback.
@@ -3174,7 +3237,7 @@ https://github.com/servo/servo/pull/47226	(@TimvdLippe, #47226)	script: Fix hand
     # All of this needed `get_url()` for `<a>` and `<area>` to be a `UrlWithBlobClaim`. When I ported that over together with the mutation callback, I ran into double borrow issues. Therefore, I ported the `borrow_mut` to `safe_borrow_mut`, ensuring the `cx.no_gc` checks if no GC happens. Then, the `self.update_href(cx, url.as_ref().unwrap());` was no longer required, since that can be the serialization of the URL.
     # 
     # There's quite a bit going on in this PR, but mostly is mechanical since the same logic was used in all of these places.
-https://github.com/servo/servo/pull/47215	(@shubhamg13, #47215)	layout: Wrap up LCP Image things into PendingImageRecord (#47215)
+-https://github.com/servo/servo/pull/47215	(@shubhamg13, #47215)	layout: Wrap up LCP Image things into PendingImageRecord (#47215)
     ^ commit 68813fb122a7c408972035615416b2a8a24ace76
     # Adding a struct `PendingImageRecord`. 
     # Add complimentary `W3C` spec steps.
@@ -3193,7 +3256,7 @@ https://github.com/servo/servo/pull/47215	(@shubhamg13, #47215)	layout: Wrap up 
     # 
     # Testing: new WPT passes
     # 
-https://github.com/servo/servo/pull/47271	(@TimvdLippe, #47271)	script: Move files into `script/{css,fetch}` (#47271)
+-https://github.com/servo/servo/pull/47271	(@TimvdLippe, #47271)	script: Move files into `script/{css,fetch}` (#47271)
     ^ commit 6e3ac825df322ad3fe002c559eb326a7bb976caf
     # Both `css.rs` and `fetch.rs` should be cleaned up after, since these names don't reflect the behavior they implement. For `css.rs` that should be a single name probably, but for `fetch.rs` that's more tricky. I kept that separate to keep things manageable with reviewing.
     # 
@@ -3206,11 +3269,13 @@ https://github.com/servo/servo/pull/47271	(@TimvdLippe, #47271)	script: Move fil
     # It's too easy to forget about these, since they never get run as part of our CI when listed in include.ini. It's better to file issues about tests that have intermittent results so they can benefit from our related tooling.
     # 
     # Testing: Now running more tests.
-https://github.com/servo/servo/pull/47168	(@eachra-bawn, #47168)	script: Add error messages for `Node` (#47168)
++https://github.com/servo/servo/pull/47168	(@eachra-bawn, #47168)	script: Add error messages for `Node` (#47168)
+    dom; improve error messages
     ^ commit a3d9ed9f0002a21962e48301a10bcb4f51c86a18
     # Part of: #40756
     # 
-https://github.com/servo/servo/pull/47276	(@veyndan, #47276)	android: Remove uninvoked `onRedrawing` callback (#47276)
++https://github.com/servo/servo/pull/47276	(@veyndan, #47276)	android: Remove uninvoked `onRedrawing` callback (#47276)
+    embedding; android cleanup
     ^ commit 59e005c79c5fac6b5fbf804a86a74f6aaa12f6c1
     # The native code never calls this callback, and even if it did, the Android-side just ignores this.
     # 
@@ -3292,7 +3357,8 @@ https://github.com/servo/servo/pull/47276	(@veyndan, #47276)	android: Remove uni
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47277	(@veyndan, #47277)	android: Add button to dismiss alert (#47277)
++https://github.com/servo/servo/pull/47277	(@veyndan, #47277)	android: Add button to dismiss alert (#47277)
+    embedding; android
     ^ commit b527c3620cb356e1887ff69dafc03c7dad4c5cac
     # Adds an explicit button to dismiss dialogs that are created via an `alert()` in JavaScript. The dialog can already be dismissed by hitting the back button or clicking outside the dialog, but this is all very hidden. By adding an "OK" button, there is an explicit way to dismiss the dialog if the other two options weren't self-evident.
     # 
@@ -3315,7 +3381,8 @@ https://github.com/servo/servo/pull/47277	(@veyndan, #47277)	android: Add button
     ^ commit 0be8e7b73fc931ace1eeb5803648365b38722478
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Assertions should only run inside of the WPT step functions, or else the test fails with confusing ERROR/NOTRUN codes.
-https://github.com/servo/servo/pull/47289	(@jdm, #47289)	script: Use global's active document's navigation timing for PerformanceTiming (#47289)
++https://github.com/servo/servo/pull/47289	(@jdm, #47289)	script: Use global's active document's navigation timing for PerformanceTiming (#47289)
+    dom; document replacement
     ^ commit 4f616abe0cb610490b5b4e6f290050102a2724c6
     # #46975 exposes a case where the navigation timing information for documents in iframes is incorrect, because PerformanceTiming is initialized with the timing information for about:blank. We can avoid this by always returning timing information derived from the global's active document instead.
     # 
@@ -3334,7 +3401,8 @@ https://github.com/servo/servo/pull/47289	(@jdm, #47289)	script: Use global's ac
     # I didn’t find an existing Rust crate that exposes the raw `Decomposition_Mapping` field from `UnicodeData.txt`, so this PR adds a python script that parses it manually to generate a Rust file with the desired mappings. The generated file is committed to git, so the script only needs to be run again when updating to a new Unicode version.
     # 
     # Testing: some existing tests from WPT start passing. Some related tests still fail but I believe for reasons related to hanging white space at the end of lines, rather than `text-transform` reasons.
-https://github.com/servo/servo/pull/47285	(@yezhizhen, #47285)	script_bindings: Add efficient ASCII case-insensitive match function for `DOMString` (#47285)
++https://github.com/servo/servo/pull/47285	(@yezhizhen, #47285)	script_bindings: Add efficient ASCII case-insensitive match function for `DOMString` (#47285)
+    perf
     ^ commit 8f652c303d3ce050e2070b0d07d2d33fdca7c085
     # There is actually [spec](https://infra.spec.whatwg.org/#ascii-case-insensitive) for this.
     # But it seems we always do the conversion manually in an inefficient way that allocates a new String.
@@ -3363,7 +3431,7 @@ https://github.com/servo/servo/pull/47285	(@yezhizhen, #47285)	script_bindings: 
     # Testing: CookieStoreManager and ServiceWorkerRegistration.cookies WPT test.
     # 
     # Part of #37674
-https://github.com/servo/servo/pull/47292	(@kkoyung, #47292)	script: Rename `SubtleAlgorithm` and `SubtleKeyAlgorithm` (#47292)
+-https://github.com/servo/servo/pull/47292	(@kkoyung, #47292)	script: Rename `SubtleAlgorithm` and `SubtleKeyAlgorithm` (#47292)
     ^ commit 518078cd6598ce282665cb512372bd95d9f8b8e8
     # Rename the type `SubtleAlgorithm` and `SubtleKeyAlgorithm` to `Algorithm` and `KeyAlgorithm`, respectively.
     # 
@@ -3373,7 +3441,8 @@ https://github.com/servo/servo/pull/47292	(@kkoyung, #47292)	script: Rename `Sub
     # 
     # Testing: It compiles.
     # Part-of: #46948
-https://github.com/servo/servo/pull/47299	(@veyndan, #47299)	android: Convert `alert(string)` dialog to Material 3 (#47299)
++https://github.com/servo/servo/pull/47299	(@veyndan, #47299)	android: Convert `alert(string)` dialog to Material 3 (#47299)
+    embedding; android cleanup
     ^ commit b288e5be5403654f25f65cc09cd5f67edc7a3878
     # Since much of the rest of the app is using the Material 3 design language, this aligns the dialog with the Material 3 design language too for visual consistency.
     # 
@@ -3382,14 +3451,16 @@ https://github.com/servo/servo/pull/47299	(@veyndan, #47299)	android: Convert `a
     # |<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/cb669796-8e73-4397-bc1e-9b1b035968c8"/>|<img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/cedb9f0d-67a2-425d-b338-c42dab921ecf" />|
     # 
     # Testing: There are no automated tests for Android.
-https://github.com/servo/servo/pull/46551	(@shubhamg13, #46551)	script: Align `Node::Adopt` according to Specs (#46551)
++https://github.com/servo/servo/pull/46551	(@shubhamg13, #46551)	script: Align `Node::Adopt` according to Specs (#46551)
+    dom; scoped customelementregistry
     ^ commit 8462c2bb0d706fd96f0fd1d8a5e43c93624f5e5f
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Complement spec steps related with custom element registry.
     # 
     # Testing: Existing WPT
     # Fixes: https://github.com/servo/servo/issues/45603
-https://github.com/servo/servo/pull/47304	(@veyndan, #47304)	android: Remove unused `entryCal` variable (#47304)
++https://github.com/servo/servo/pull/47304	(@veyndan, #47304)	android: Remove unused `entryCal` variable (#47304)
+    embedding; android cleanup
     ^ commit 3b1e4ed2886a25a4f90693eccfe1fcb405d64ea1
     # Testing: There are no automated tests for Android.
 +https://github.com/servo/servo/pull/47198	(@Narfinger, #47198)	script: Feature Flag WebCrypto crate (#47198)
@@ -3554,7 +3625,8 @@ https://github.com/servo/servo/pull/47304	(@veyndan, #47304)	android: Remove unu
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47307	(@yezhizhen, #47307)	script: Use efficient `DOMString` ASCII case-insensitive match functions in more places (#47307)
++https://github.com/servo/servo/pull/47307	(@yezhizhen, #47307)	script: Use efficient `DOMString` ASCII case-insensitive match functions in more places (#47307)
+    perf
     ^ commit 49065a68180c4f8fd59ecd22dc8a9aab16db3769
     # This extends #47285 by using it in more places.
     # Fix some typo/sentence in `domstring.rs`.
@@ -3579,7 +3651,7 @@ https://github.com/servo/servo/pull/47307	(@yezhizhen, #47307)	script: Use effic
     # Testing: Existing tests suffice.
     # Part of #40600
     # 
-https://github.com/servo/servo/pull/47325	(@Narfinger, #47325)	deps: Update h2 dependency (#47325)
+-https://github.com/servo/servo/pull/47325	(@Narfinger, #47325)	deps: Update h2 dependency (#47325)
     ^ commit bac2e246585df7dc8d7f20d1a964a8c88c8788be
     # This updates the h2 dependency so we don't get flagged by cargo deny.
     # 
@@ -3596,7 +3668,7 @@ https://github.com/servo/servo/pull/47325	(@Narfinger, #47325)	deps: Update h2 d
     # 
     # Part of #46242
     # Testing: New integration tests have been added.
-https://github.com/servo/servo/pull/47328	(@kkoyung, #47328)	script: Rename RSA-related structs in WebCrypto (#47328)
+-https://github.com/servo/servo/pull/47328	(@kkoyung, #47328)	script: Rename RSA-related structs in WebCrypto (#47328)
     ^ commit 8185511c1320b226f28c14e60f9431dd11710b0d
     # Rename the following structs:
     # 
@@ -3610,14 +3682,15 @@ https://github.com/servo/servo/pull/47328	(@kkoyung, #47328)	script: Rename RSA-
     # 
     # Testing: It compiles.
     # Part-of: #46948
-https://github.com/servo/servo/pull/47326	(@jschwe, #47326)	mach: Simplify bootstrap (#47326)
+-https://github.com/servo/servo/pull/47326	(@jschwe, #47326)	mach: Simplify bootstrap (#47326)
     ^ commit 480bc117e5044fcd1d492b753644bdf2ebf909a7
     # Since we switched to `uv`, `uv` is responsible for setting up the environment and `mach bootstrap` actually has the full environment available, so we don't need to duplicate the logic anymore.
     # 
     # Testing: `./mach bootstrap` is run on non-selfhosted CI runners. [Try run](https://github.com/jschwe/servo/actions/runs/32124284987) from my fork.
     # 
     # 
-https://github.com/servo/servo/pull/47256	(@jdm, #47256)	Update stylo for clip-path damage change. (#47256)
++https://github.com/servo/servo/pull/47256	(@jdm, #47256)	Update stylo for clip-path damage change. (#47256)
+    layout; repaint after clip-path changes
     ^ commit 48f6de122579de240a7837df02d9b3789e0fc686
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Testing: New reference test.
@@ -3632,7 +3705,8 @@ https://github.com/servo/servo/pull/47256	(@jdm, #47256)	Update stylo for clip-p
     # Testing: More WPTs are passing, while the new failure related to input focus should be falsely passed previously.
     # Fixes: #38259
     # 
-https://github.com/servo/servo/pull/47296	(@Narfinger, #47296)	script: Switch to `safe_borrow_mut` in `CookieStorageManager` and reorder borrows (#47296)
++https://github.com/servo/servo/pull/47296	(@Narfinger, #47296)	script: Switch to `safe_borrow_mut` in `CookieStorageManager` and reorder borrows (#47296)
+    crash
     ^ commit 2a5f73586c331119e1ea880b27156fa15fb59348
     # Fix borrow hazard in cookiestoragemanager and switching to safe methods..
     # 
@@ -3653,7 +3727,8 @@ https://github.com/servo/servo/pull/47296	(@Narfinger, #47296)	script: Switch to
     # 
     # 
     # 
-https://github.com/servo/servo/pull/47323	(@Narfinger, #47323)	script: Fix borrow hazard in uncaught_exception handling (#47323)
++https://github.com/servo/servo/pull/47323	(@Narfinger, #47323)	script: Fix borrow hazard in uncaught_exception handling (#47323)
+    crash
     ^ commit 52bd46cc085dba55a2b696af359c1c4958183dc0
     # This fixes the borrow hazard in notify_about_rejected_promise.
     # 
@@ -3704,7 +3779,8 @@ https://github.com/servo/servo/pull/47323	(@Narfinger, #47323)	script: Fix borro
     # 
     # Testing: This change adds two tests
     # Fixes https://github.com/servo/servo/issues/47319
-https://github.com/servo/servo/pull/47212	(@shubhamg13, #47212)	layout: Consider Text as LCP candidate (#47212)
++https://github.com/servo/servo/pull/47212	(@shubhamg13, #47212)	layout: Consider Text as LCP candidate (#47212)
+    dom; largestcontentfulpaint text
     ^ commit 6de1edc66210fc590a5944233c8be4e44f6521ac
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Since the spec says, for text nodes we need to do union of border box per element.
@@ -3729,7 +3805,8 @@ https://github.com/servo/servo/pull/47212	(@shubhamg13, #47212)	layout: Consider
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # Testing: This only modifies documentation, so no tests are required.
 >>> 2026-08-20T00:38:05Z
-https://github.com/servo/servo/pull/47329	(@mrobinson, @SimonSapin, #47329)	script: Add `DragGesture` and `DragHandler` abstractions (#47329)
++https://github.com/servo/servo/pull/47329	(@mrobinson, @SimonSapin, #47329)	script: Add `DragGesture` and `DragHandler` abstractions (#47329)
+    layout; selection progress
     ^ commit 544c99bc90eb2957959362ba3c47c6fb50ce7b0e
     # This change adds two abstractions that allow drags to be updated even
     # when they extend outside the boundaries of the element that starts them.
@@ -3864,7 +3941,8 @@ https://github.com/servo/servo/pull/47329	(@mrobinson, @SimonSapin, #47329)	scri
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47343	(@yezhizhen, #47343)	layout: Reduce allocation when constructing `InnerOrOuterTextItem` (#47343)
++https://github.com/servo/servo/pull/47343	(@yezhizhen, #47343)	layout: Reduce allocation when constructing `InnerOrOuterTextItem` (#47343)
+    perf; allocations
     ^ commit 09a6a4fe44bafef12de5c3d0f0a3ecf3ee50f3b8
     # Make `InnerOrOuterTextItem::Text` takes Cow instead of owned String.
     # 
@@ -3945,7 +4023,7 @@ https://github.com/servo/servo/pull/47343	(@yezhizhen, #47343)	layout: Reduce al
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47353	(@kkoyung, #47353)	script: Rename EC-related and AES-related structs in WebCrypto (#47353)
+-https://github.com/servo/servo/pull/47353	(@kkoyung, #47353)	script: Rename EC-related and AES-related structs in WebCrypto (#47353)
     ^ commit 2c08527d97378be9dde7bb8dc12f891570ed3cf9
     # Rename the following structs:
     # 
@@ -3965,21 +4043,22 @@ https://github.com/servo/servo/pull/47353	(@kkoyung, #47353)	script: Rename EC-r
     # 
     # Testing: It compiles.
     # Part-of: #46948
-https://github.com/servo/servo/pull/47340	(@Gae24, #47340)	script: Use safe variants of `throw_range_error` and `throw_type_error` (#47340)
+-https://github.com/servo/servo/pull/47340	(@Gae24, #47340)	script: Use safe variants of `throw_range_error` and `throw_type_error` (#47340)
     ^ commit 3d77be2fccac86d7859dee0a5ca5f91a31c53824
     # By switching to `throw_type_error_safe`, the unsafe blocks that wrapped dictionary types creation are no longer required. For the handful of cases where a callback is part of a dictionary, the unsafe blocks are now narrowed to the single function. 
     # Companion PR of https://github.com/servo/mozjs/pull/797
     # 
     # Testing: It compiles
     # 
-https://github.com/servo/servo/pull/47355	(@Gae24, #47355)	script: Don't store rooted value inside `DebuggerGetEnvironmentEvent` (#47355)
++https://github.com/servo/servo/pull/47355	(@Gae24, #47355)	script: Don't store rooted value inside `DebuggerGetEnvironmentEvent` (#47355)
+    perf; removing potential for uncollectible GC cycles
     ^ commit 113679f9fe964a6a2336410b6a3d218a485b6333
     # 
     # 
     # Testing: It compiles
     # Part of #39139 
     # 
-https://github.com/servo/servo/pull/47357	(@Narfinger, #47357)	base: Switch all occurences in generic_channel to use fn use_ipc instead of checking options (#47357)
+-https://github.com/servo/servo/pull/47357	(@Narfinger, #47357)	base: Switch all occurences in generic_channel to use fn use_ipc instead of checking options (#47357)
     ^ commit e7b419402009e97581478ce4f38248be97cd29cd
     # This switches GenericSharedMemory and LazyCallback to use the use_ipc() function for deciding instead of manually checkking opts and prefs.
     # 
@@ -3995,7 +4074,8 @@ https://github.com/servo/servo/pull/47357	(@Narfinger, #47357)	base: Switch all 
     # 
     # Testing: New tests start to pass
     # Part of https://github.com/servo/servo/issues/38800
-https://github.com/servo/servo/pull/47356	(@simonwuelker, #47356)	fonts: Replace AtomicRefCell with RwLock for resolving font variant alternates (#47356)
++https://github.com/servo/servo/pull/47356	(@simonwuelker, #47356)	fonts: Replace AtomicRefCell with RwLock for resolving font variant alternates (#47356)
+    crash
     ^ commit 4a599939e758ef283d35c7c4fb3c5e9c82a3ac23
     # When upgrading the lock from a read lock to a write lock to initialize the map of font variant alternates then we need to wait until all other threads have also dropped their read guards, otherwise we run into panics. `AtomicRefCell` doesn't wait, causing https://github.com/servo/servo/issues/47352. Instead we can use to a `RwLock`.
     # 
@@ -4015,7 +4095,8 @@ https://github.com/servo/servo/pull/47356	(@simonwuelker, #47356)	fonts: Replace
     # Testing: This is not covered by any automatic tests, and I also didn't find an API that allows simulating raw keyboard events (`hdc shell uinput` seems to behave differently to a raw keyboard). This was manually tested on a dayu-200 developer board with a keyboard attached.
     # 
     # 
-https://github.com/servo/servo/pull/45628	(@steigeo, #45628)	script: Use constellation event's mouse button state instead of tracking count (#45628)
++https://github.com/servo/servo/pull/45628	(@steigeo, #45628)	script: Use constellation event's mouse button state instead of tracking count (#45628)
+    input
     ^ commit 808e65262f52955c498fa28230e8932e52428d2f
     # Instead of keeping track of the number of mouse buttons currently pressed from within the document event handler, we use the input event from the constellation as the source of truth for currently pressed mouse buttons. This fixes an issue where the internal count would permanently increase, preventing the firing of `pointerup`/`pointerdown` events.
     # 
@@ -4033,7 +4114,8 @@ https://github.com/servo/servo/pull/45628	(@steigeo, #45628)	script: Use constel
     # Testing: Added 2 new web platform tests
     # Fixes: #47336
     # 
-https://github.com/servo/servo/pull/47364	(@mrobinson, #47364)	fonts: Add Windows support for `PlatformFont::copy_with_variations` (#47364)
++https://github.com/servo/servo/pull/47364	(@mrobinson, #47364)	fonts: Add Windows support for `PlatformFont::copy_with_variations` (#47364)
+    layout; font variations on windows
     ^ commit 1c2d7d145fb5c7b2f573ef97507c4832999c6f47
     # This adds an implementation of this method for Windows, effectively
     # renabling font variations for that platform.
@@ -4041,7 +4123,8 @@ https://github.com/servo/servo/pull/47364	(@mrobinson, #47364)	fonts: Add Window
     # Testing: Tests are not currently run for Windows, but this causes more web platform tests to run on that platform.
     # 
     # 
-https://github.com/servo/servo/pull/47316	(@jdm, #47316)	script: Access HTMLTrackElement attributes inside synchronous section. (#47316)
++https://github.com/servo/servo/pull/47316	(@jdm, #47316)	script: Access HTMLTrackElement attributes inside synchronous section. (#47316)
+    dom; htmltrackelement attribute mutations
     ^ commit 0753df091a51fad6f3289b63a67a677ee17710c9
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # The specification lists the steps that need to happen inside the synchronous section, which means that any changes to the element's attributes will be visible when the stable state is reached. This allows a number of tests to run to completion that were previously timing out because the attribute modifications weren't observed.
@@ -4049,7 +4132,8 @@ https://github.com/servo/servo/pull/47316	(@jdm, #47316)	script: Access HTMLTrac
     # Testing: A bunch of tests no longer time out.
     # Fixes: #47275
     # 
-https://github.com/servo/servo/pull/47354	(@shubhamg13, #47354)	layout: Implement bits of mark_paint_timing (#47354)
++https://github.com/servo/servo/pull/47354	(@shubhamg13, #47354)	layout: Implement bits of mark_paint_timing (#47354)
+    dom; largestcontentfulpaint conformance
     ^ commit 66bac8a96e815f85d78ae805733684b08e0022c0
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Implement bits of mark_paint_timing
@@ -4063,7 +4147,7 @@ https://github.com/servo/servo/pull/47354	(@shubhamg13, #47354)	layout: Implemen
     # Testing: Existing tests suffice.
     # Part of #40600
     # 
-https://github.com/servo/servo/pull/47341	(@mrobinson, #47341)	constellation: Move `pending_changes` to `ConstellationWebView` (#47341)
+-https://github.com/servo/servo/pull/47341	(@mrobinson, #47341)	constellation: Move `pending_changes` to `ConstellationWebView` (#47341)
     ^ commit 24bee0c63ecc023732725b1971766d9ad3cca81f
     # This makes dealing with pending changes a bit more complicated, but once
     # more members of `Constellation` are moved to `ConstellationWebView`,
@@ -4072,7 +4156,7 @@ https://github.com/servo/servo/pull/47341	(@mrobinson, #47341)	constellation: Mo
     # Testing: This should not change observable behavior so should be covered by existing tests.
     # Fixes: This is part of #47294.
     # 
-https://github.com/servo/servo/pull/47369	(@mrobinson, #47369)	constellation: Remove `ScriptToConstellationMessage::SetDocumentState` (#47369)
+-https://github.com/servo/servo/pull/47369	(@mrobinson, #47369)	constellation: Remove `ScriptToConstellationMessage::SetDocumentState` (#47369)
     ^ commit b683b4032cc9bafb781af102081edb477bb1d5f1
     # This was part of the old screenshot architecture which is no more.
     # The message is not sent, so the related type and hash map are completely
@@ -4081,20 +4165,22 @@ https://github.com/servo/servo/pull/47369	(@mrobinson, #47369)	constellation: Re
     # Testing: This does not change behavior so is covered by existing tests.
     # Fixes: This is part of #47294.
     # 
-https://github.com/servo/servo/pull/47371	(@jdm, #47371)	script: Rename post_barrier to reflect its purpose. (#47371)
+-https://github.com/servo/servo/pull/47371	(@jdm, #47371)	script: Rename post_barrier to reflect its purpose. (#47371)
     ^ commit acc63cef0bd48d8cd694c02edf2e20327fcf4b9e
     # The fact that it performs a post_barrier call is less important than the fact that it is setting an entry in the cache of webidl constructor objects.
     # 
     # Testing: Just renaming a function.
 >>> 2026-08-20T23:18:04Z
-https://github.com/servo/servo/pull/47366	(@wood-ghost, #47366)	mime_classifier: fix wrong byte matcher pattern for rar header (#47366)
++https://github.com/servo/servo/pull/47366	(@wood-ghost, #47366)	mime_classifier: fix wrong byte matcher pattern for rar header (#47366)
+    net; sniff rar file headers correctly
     ^ commit 67d568715df9edfdc778cb3b5ebfae28f2eda7cb
     # The wrong byte matcher pattern for rar header is now fixed based on the latest whatwg MIME Sniffing Standard.
     # 
     # Testing:  The original invalid rar test file was changed into a valid one.
     # Fixes: #47365
     # 
-https://github.com/servo/servo/pull/47372	(@jschwe, #47372)	script: Reduce codegen-units to 16 to avoid ICE (#47372)
++https://github.com/servo/servo/pull/47372	(@jschwe, #47372)	script: Reduce codegen-units to 16 to avoid ICE (#47372)
+    build; unbreak debug builds on windows
     ^ commit a95e5a7d3e7087c0c57037bfa1817f035177508d
     # With the default amount of codegen-units (256) the `rlib` size of script increases beyond 4GB, which seems to hit a limit of the COFF format, and causes an ICE in rustc.
     # `codegen-units = 16` fixed the issue, and resulted in an rlib of ~1.2GB, which is well below 4GB.
@@ -4536,7 +4622,7 @@ https://github.com/servo/servo/pull/47372	(@jschwe, #47372)	script: Reduce codeg
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47390	(@kkoyung, #47390)	script: Rename MAC-related structs in WebCrypto (#47390)
+-https://github.com/servo/servo/pull/47390	(@kkoyung, #47390)	script: Rename MAC-related structs in WebCrypto (#47390)
     ^ commit 7576642cae7fc3515bde0e75679d82de9168cf14
     # Rename the following structs:
     # 
@@ -4566,11 +4652,13 @@ https://github.com/servo/servo/pull/47390	(@kkoyung, #47390)	script: Rename MAC-
     # Fixes: https://github.com/servo/servo/issues/24145
     # Fixes: https://github.com/servo/servo/issues/28684
     # 
-https://github.com/servo/servo/pull/47361	(@yezhizhen, #47361)	Reduce owned String creation in various places (#47361)
++https://github.com/servo/servo/pull/47361	(@yezhizhen, #47361)	Reduce owned String creation in various places (#47361)
+    perf; allocations
     ^ commit 27ccefba34d8e2c7260503946116802473f8dd91
     # Testing: No behaviour change. Covered by existing tests.
     # 
-https://github.com/servo/servo/pull/47374	(@jschwe, #47374)	fonts: Fix line height calculation on windows (#47374)
++https://github.com/servo/servo/pull/47374	(@jschwe, #47374)	fonts: Fix line height calculation on windows (#47374)
+    layout; windows font line height
     ^ commit 0d579bd5aab6df3764fad805427254751632a6e4
     # Negative values are allowed for lineGap, so we should do calculation with signed arithmetic. To quote the docs:
     # 
@@ -4582,14 +4670,15 @@ https://github.com/servo/servo/pull/47374	(@jschwe, #47374)	fonts: Fix line heig
     # 
     # Testing: We don't run wpt-tests on windows in CI. Local testing of `css/css-fonts` showed the following diff: https://github.com/servo/servo/commit/f0b62e5904d34057bb1185629a0e6f24beacd9e2. Fixing the crashes in the `font-stretch` test cases.  `font-size-zero-2` appears to be flaky.
     # Fixes: #47367
-https://github.com/servo/servo/pull/47394	(@Gae24, #47394)	script: Small unminify-js clean-up (#47394)
+-https://github.com/servo/servo/pull/47394	(@Gae24, #47394)	script: Small unminify-js clean-up (#47394)
     ^ commit 16e0d8c6223f717a91cf8c31d337728391fd3048
     # The trait‑object parameter for `unminify_js` was mainly needed when we had `ScriptOrigin`.
     # Currently for both classic scripts and modules we are using `ModuleSource`, so convert `ScriptSource` to a helper struct.
     # 
     # Testing: This is a simple refactor, `--unminify-js` shouldn't show any behavioural changes
     # 
-https://github.com/servo/servo/pull/47391	(@moamenhesham0, @mrobinson, #47391)	dom: Add TextEvent support (#47391)
++https://github.com/servo/servo/pull/47391	(@moamenhesham0, @mrobinson, #47391)	dom: Add TextEvent support (#47391)
+    dom; support TextEvent
     ^ commit fe277c8a38301b0de61f301012bb866933ec3946
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -4619,7 +4708,8 @@ https://github.com/servo/servo/pull/47391	(@moamenhesham0, @mrobinson, #47391)	d
     # 
     # Fixes: https://github.com/servo/servo/issues/47246
     # 
-https://github.com/servo/servo/pull/47395	(@jschwe, #47395)	net: Skip needless clone of response bodies if devtools are off (#47395)
++https://github.com/servo/servo/pull/47395	(@jschwe, #47395)	net: Skip needless clone of response bodies if devtools are off (#47395)
+    perf; allocations
     ^ commit 8b3eb30f1b76eabef6a0803eb50bc1f763a6e49c
     # `send_response_values_to_devtools` is also called from send_response_to_devtools, and there it seems we have at least one user that wants to pass in a Vec (without needing to clone), so I'm not sure how to avoid the clone otherwise.
     # 
@@ -4642,7 +4732,8 @@ https://github.com/servo/servo/pull/47395	(@jschwe, #47395)	net: Skip needless c
     # Testing: This change adds a WPT crash test.
     # Fixes: #47333.
     # 
-https://github.com/servo/servo/pull/47334	(@jschwe, #47334)	mach: Let `cargo-ohos` setup the OpenHarmony build environment (#47334)
++https://github.com/servo/servo/pull/47334	(@jschwe, #47334)	mach: Let `cargo-ohos` setup the OpenHarmony build environment (#47334)
+    embedding; require cargo-ohos for ohos builds
     ^ commit 058c55ed4a1aa9ff34af783a982a045ae9792a57
     # Setting up the cross-compiling environment for ohos is a somewhat generic thing. Instead of duplicating the effort in every repository that wants to build for ohos, we now use the `cargo ohos` crate to setup the environment. 
     # In the future we will likely to the same for android with cargo-ndk (tracked in #47181).
@@ -4997,7 +5088,7 @@ https://github.com/servo/servo/pull/47334	(@jschwe, #47334)	mach: Let `cargo-oho
     # 
     # Testing: More passes
     # 
-https://github.com/servo/servo/pull/47418	(@kkoyung, #47418)	script: Conversion of `SubtleEncapsulatedKey` and `SubtleEncapsulatedBits` (#47418)
+-https://github.com/servo/servo/pull/47418	(@kkoyung, #47418)	script: Conversion of `SubtleEncapsulatedKey` and `SubtleEncapsulatedBits` (#47418)
     ^ commit fa5af8b522d7d2069dd5931143153e51b6e346bf
     # We currently have proxy types `SubtleEncapsulatedKey` and `SubtleEncapsulatedBits` on top of the binding types `EncapsulatedKey` and `EncapsulatedBits` generated by script_bindings, respectively. When we convert them into js value, we used to convert from the proxy types to generated binding types, then to js value.
     # 
@@ -5006,24 +5097,27 @@ https://github.com/servo/servo/pull/47418	(@kkoyung, #47418)	script: Conversion 
     # Testing: Refactoring. Existing tests suffice.
     # Part-of: #46948
     # 
-https://github.com/servo/servo/pull/47427	(@yezhizhen, #47427)	script: Remove extra allocation for each face attribute parse (#47427)
++https://github.com/servo/servo/pull/47427	(@yezhizhen, #47427)	script: Remove extra allocation for each face attribute parse (#47427)
+    perf; allocations
     ^ commit e1c7d7377bf069fbd97a2b304cab6e4419395cf4
     # Testing: Existing tests cover this as it is only an optimization.
-https://github.com/servo/servo/pull/47403	(@AbdAlRahmanGad, #47403)	Parse the track url using `encoding_parse_a_url` in `htmltrackelement` (#47403)
+-https://github.com/servo/servo/pull/47403	(@AbdAlRahmanGad, #47403)	Parse the track url using `encoding_parse_a_url` in `htmltrackelement` (#47403)
     ^ commit 5c649014daa1077228de38539776636a71345888
     # Testing: tests run as expected but `track-default-load-timer-during-parser-block.html` now passes sometimes.
     # Fixes: #47375
     # 
-https://github.com/servo/servo/pull/47401	(@TimvdLippe, #47401)	script: Move some individual files into subfolders (#47401)
+-https://github.com/servo/servo/pull/47401	(@TimvdLippe, #47401)	script: Move some individual files into subfolders (#47401)
     ^ commit b54baa327c83b40d5b4904b650c088541c7a4d38
     # These are some files that were used in 1 folder. Additionally, create a new folder for public files. These files are only used in `lib.rs` and publicly exported. The only exception is `jsengine`, which was previously in
     # `script_runtime`, but separated out, since that was also publicly exported.
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/47430	(@jdm, #47430)	script: Clarify various error messages (#47430)
++https://github.com/servo/servo/pull/47430	(@jdm, #47430)	script: Clarify various error messages (#47430)
+    dom; improve error messages
     ^ commit bcee6be168ef23777e8684ebfc91d7d532f53257
     # Testing: We don't test the contents of error messages.
-https://github.com/servo/servo/pull/47297	(@Narfinger, #47297)	script: Fix borrow hazard in stream and rtcp (#47297)
++https://github.com/servo/servo/pull/47297	(@Narfinger, #47297)	script: Fix borrow hazard in stream and rtcp (#47297)
+    crash
     ^ commit f7cd7d88047342e9e2784bd7cb9bbfa72e9d1187
     # This fixes some borrow hazards in rtcpeerconnection where the mutable borrow was unneeded.
     # Additionally, we transform readablebytestreamcontroller to use safe_borrow_mut (wshen cx is available). We fix multiple borrow hazards in this file.
@@ -5041,7 +5135,7 @@ https://github.com/servo/servo/pull/47297	(@Narfinger, #47297)	script: Fix borro
     # Part of #25005
     # 
     # Testing: new WPT passes
-https://github.com/servo/servo/pull/47434	(@jdm, #47434)	script: Restrict navigator.servo to about:memory. (#47434)
+-https://github.com/servo/servo/pull/47434	(@jdm, #47434)	script: Restrict navigator.servo to about:memory. (#47434)
     ^ commit 2d6dcc8e23f690e03502069f0175424036b60078
     # The previous check was too lenient and allowed documents created from srcdoc iframes.
     # 
@@ -5068,12 +5162,14 @@ https://github.com/servo/servo/pull/47434	(@jdm, #47434)	script: Restrict naviga
     # This change adds support for the `CSSFontFaceDescriptors` interface, which is used for a bunch of `@font-face`-related web platform tests. Modifying the descriptors is not supported yet.
     # 
     # Testing: New tests start to pass
-https://github.com/servo/servo/pull/47440	(@yezhizhen, #47440)	layout: Truncate in place for each accessibility label (#47440)
+-https://github.com/servo/servo/pull/47440	(@yezhizhen, #47440)	layout: Truncate in place for each accessibility label (#47440)
+    perf; allocation
     ^ commit ab8543bddbc88c271e73dd18ac93e294ffc738a6
     # `trim` returns a slice. We truncate in place to avoid one owned String creation.
     # 
     # Testing: No behaviour change. Covered by existing tests.
-https://github.com/servo/servo/pull/47438	(@mrobinson, #47438)	script: Only call `Range::report_change` once per mutation (#47438)
++https://github.com/servo/servo/pull/47438	(@mrobinson, #47438)	script: Only call `Range::report_change` once per mutation (#47438)
+    dom; selection
     ^ commit 537ae55eda03686564bca62c6478afb3c5b20d33
     # This change reworks the code a little bit to ensure that
     # `Range::report_change` is only called once per `Range` mutation. This
@@ -5085,7 +5181,7 @@ https://github.com/servo/servo/pull/47438	(@mrobinson, #47438)	script: Only call
     # 
     # Testing: This does not change behavior, so should be covered by existing tests.
     # 
-https://github.com/servo/servo/pull/47441	(@kkoyung, #47441)	script: Rename remaining dictionary structs in WebCrypto (#47441)
+-https://github.com/servo/servo/pull/47441	(@kkoyung, #47441)	script: Rename remaining dictionary structs in WebCrypto (#47441)
     ^ commit bc401dd018eba64f1a9148bcbb480ddcd368d35a
     # Rename the following structs:
     # 
@@ -5104,7 +5200,7 @@ https://github.com/servo/servo/pull/47441	(@kkoyung, #47441)	script: Rename rema
     # 
     # Testing: It compiles.
     # Part-of: #46948
-https://github.com/servo/servo/pull/47443	(@TimvdLippe, #47443)	script: Remove last mentions of `_and_cx` (#47443)
+-https://github.com/servo/servo/pull/47443	(@TimvdLippe, #47443)	script: Remove last mentions of `_and_cx` (#47443)
     ^ commit bd220a152bc059627531b386c9fcc86951eba856
     # While all reflect versions of `_and_cx` were already removed, there were two remaining specific functions in two structs.
     # 
@@ -5137,7 +5233,7 @@ https://github.com/servo/servo/pull/47443	(@TimvdLippe, #47443)	script: Remove l
     # Fixes: #47436.
     # 
 >>> 2026-08-23T23:20:48Z
-https://github.com/servo/servo/pull/47447	(@yezhizhen, #47447)	Revert "layout: Truncate in place for each accessibility label" (#47447)
+-https://github.com/servo/servo/pull/47447	(@yezhizhen, #47447)	Revert "layout: Truncate in place for each accessibility label" (#47447)
     ^ commit b70f159f68eb21b2f464b9a350636d50ab8dcfca
     # Revert servo/servo#47440 as it wrongly keeps the leading whitespace.
 -https://github.com/servo/servo/pull/47451	(@servo-wpt-sync, #47451)	Sync WPT with upstream (23-08-2026) (#47451)
@@ -5145,7 +5241,8 @@ https://github.com/servo/servo/pull/47447	(@yezhizhen, #47447)	Revert "layout: T
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 23-08-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/47452	(@kkoyung, #47452)	script: Add [EnforceRange] to key length in WebCrypto (#47452)
++https://github.com/servo/servo/pull/47452	(@kkoyung, #47452)	script: Add [EnforceRange] to key length in WebCrypto (#47452)
+    dom; webcrypto spec compliance
     ^ commit ac1b09ea4ca7c36f50f2dd89ebf6465cf99fef26
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -5161,7 +5258,8 @@ https://github.com/servo/servo/pull/47452	(@kkoyung, #47452)	script: Add [Enforc
     # https://github.com/web-platform-tests/wpt/pull/62086
     # 
     # Testing: Pass recently added WPT tests.
-https://github.com/servo/servo/pull/47453	(@kkoyung, #47453)	script: Fix the conversion behavior of RsaKeyGenParams (#47453)
++https://github.com/servo/servo/pull/47453	(@kkoyung, #47453)	script: Fix the conversion behavior of RsaKeyGenParams (#47453)
+    dom; webcrypto
     ^ commit 85852ad27f34317ef7207292047e2a18898ffbd2
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # In WebCrypto API specification, the modulusLength member of the RsaKeyGenParams dictionary has the [EnforceRange] extended attribute. We mistakenly set the conversion behavior as `ConversionBehavior::Default` in our code. We change it back to `ConversionBehavior::EnforceRange`.
@@ -5176,7 +5274,7 @@ https://github.com/servo/servo/pull/47453	(@kkoyung, #47453)	script: Fix the con
     # Fixes #46329
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/47444	(@TimvdLippe, #47444)	script: Move runtime files into `script/runtime` (#47444)
+-https://github.com/servo/servo/pull/47444	(@TimvdLippe, #47444)	script: Move runtime files into `script/runtime` (#47444)
     ^ commit a1c26a41807af9b21359f2b9c829b9bebf3b799c
     # It also moves three files into `script/event_loop` since I initially thought they should be in runtime, but they are actually tied to the script_thread instead.
     # 
@@ -5198,7 +5296,8 @@ https://github.com/servo/servo/pull/47444	(@TimvdLippe, #47444)	script: Move run
     # 
     # Testing: This causes one WPT subtest to start passing.
     # 
-https://github.com/servo/servo/pull/47454	(@jschwe, #47454)	net: Shrink `completed_body` allocation when finishing HTTP load (#47454)
++https://github.com/servo/servo/pull/47454	(@jschwe, #47454)	net: Shrink `completed_body` allocation when finishing HTTP load (#47454)
+    perf; memory usage
     ^ commit 5b142580bc1973b6be4b9a747c8b60241ba1705a
     # The responses are cached by our HTTP cache, so shrinking the allocation can save memory by discarding excess capacity. Not all responses are cached, but currently we don't have a way to determine if it is retained by the HTTP cache or not, and it's unclear if adding such a mechanic would save work compared to just always shrinking.  The network loading process already contains a series of potential re-allocations (by growing the `Vec`), so adding another potential reallocation to shrink should be fine.
     # 
@@ -5215,7 +5314,7 @@ https://github.com/servo/servo/pull/47454	(@jschwe, #47454)	net: Shrink `complet
     # 
     # PS: Yes, I do still plan to get to writing `is_collapsed_line_break` at some point.
     # But for now, I want at least something implemented for every editing command. (at least all the ones that are relevant to keyboard input so that once regular DOM content becomes selectable, we can put in a thing that calls them upon user key presses. :) )
-https://github.com/servo/servo/pull/47460	(@TimvdLippe, #47460)	script: Move ElementInternals into `script/dom/html/internals/` (#47460)
+-https://github.com/servo/servo/pull/47460	(@TimvdLippe, #47460)	script: Move ElementInternals into `script/dom/html/internals/` (#47460)
     ^ commit 89da31fa4b547610955a56542a472b564b4b4723
     # I also wanted to remove the final usage from `Element`, but currently it is on `rare_data()`, which means that it is private to `Element`. Maybe we should in the future create a `HTMLElementRareData`?
     # 
@@ -5319,13 +5418,13 @@ https://github.com/servo/servo/pull/47460	(@TimvdLippe, #47460)	script: Move Ele
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47462	(@sagudev, #47462)	media-examples should not depend on servo (#47462)
+-https://github.com/servo/servo/pull/47462	(@sagudev, #47462)	media-examples should not depend on servo (#47462)
     ^ commit e695643184cfccdca55768cd07d90035afe6a212
     # If they do then we need to also compile mozjs in that job and we do not want that. This was done as a hacky way to buble down proper features on deps per https://github.com/servo/servo/pull/46233#discussion_r3839098127, but proper solution is to just enable bundled on freetype-sys.
     # 
     # Testing: CI
     # 
-https://github.com/servo/servo/pull/47470	(@mrobinson, #47470)	media: Stop publishing `servo-media-examples` (#47470)
+-https://github.com/servo/servo/pull/47470	(@mrobinson, #47470)	media: Stop publishing `servo-media-examples` (#47470)
     ^ commit 4830f9f68a9989dab8cf41856c524f33e843a983
     # This crate isn't meant to be published and is pretty much useless to end
     # users.
@@ -5347,12 +5446,14 @@ https://github.com/servo/servo/pull/47470	(@mrobinson, #47470)	media: Stop publi
     # 
     # Testing: This change adds new testing information in `ServoTestUtils` and starts using it in Servos-specific accessibility tests.
     # Fixes #46245 
-https://github.com/servo/servo/pull/47474	(@yezhizhen, #47474)	script: Reduce allocation in cross origin/referrer policy reflection getters (#47474)
++https://github.com/servo/servo/pull/47474	(@yezhizhen, #47474)	script: Reduce allocation in cross origin/referrer policy reflection getters (#47474)
+    perf; allocations
     ^ commit edf7b5c1c002cda164cacefa6c673f8ef5a4d013
     # Similar to https://github.com/servo/servo/pull/47285
     # 
     # Testing: Covered by existing tests.
-https://github.com/servo/servo/pull/47439	(@veyndan, #47439)	android: Add basic Compose UI abstraction for library (#47439)
++https://github.com/servo/servo/pull/47439	(@veyndan, #47439)	android: Add basic Compose UI abstraction for library (#47439)
+    embedding; android compose UI integration
     ^ commit 2c09487545df5d5ad033dae782f234f61561f78f
     # `Servo` acts as the starting point for the introduction of a native Compose UI library component. It is currently a simple abstraction over `ServoView`, but with time, it will absorb everything `ServoView` does.
     # 
@@ -5360,7 +5461,8 @@ https://github.com/servo/servo/pull/47439	(@veyndan, #47439)	android: Add basic 
     # 
     # Testing: There are no automated tests for Android.
     # Fixes: Part of https://github.com/servo/servo/issues/33742.
-https://github.com/servo/servo/pull/47421	(@jschwe, #47421)	ohos: Use clang-19 instead of the SDK clang-15 (#47421)
++https://github.com/servo/servo/pull/47421	(@jschwe, #47421)	ohos: Use clang-19 instead of the SDK clang-15 (#47421)
+    embedding; ohos clang version
     ^ commit b780274a1648b77d8e3e4992184374b1eb85c9dd
     # Spidermonkey 153 will require clang-19 or newer, and there happens to be a prebuilt (preview) version available for ohos.  This PR updates servo (and mozjs via the companion PR) to use clang-19 in advance, so we update independently of the mozjs ESR update. `cargo ohos --download-prebuilt=19` (currenlty only 19 is supported) will download the prebuilt llvm toolchain the first time (by default cached in XDG_CACHE_HOME) and handle setting all the required environment variables to use the custom LLMV together with the SDK sysroot.  Servo will not be using the SDKs `libc++_shared.so`, since SM uses some C++ features which the clang-15 SDK version does not support yet. This has a slightly negative effect on the binary size, since we need to bundle the custom LLVM libc++ (different namespace, so symbols won't conflict). 
     # 
@@ -5368,7 +5470,7 @@ https://github.com/servo/servo/pull/47421	(@jschwe, #47421)	ohos: Use clang-19 i
     # 
     # Testing: We run servoshell on HarmonyOS devices in CI, so this is covered by existing tests
     # Fixes: #47332
-https://github.com/servo/servo/pull/47477	(@alice, @mukilan, #47477)	layout: Rename `needs_accessibility_update` to `force_…` (#47477)
+-https://github.com/servo/servo/pull/47477	(@alice, @mukilan, #47477)	layout: Rename `needs_accessibility_update` to `force_…` (#47477)
     ^ commit 6441459dae925d1a29c4a5d42fccccbfde74bdd4
     # Also:
     # - Skip setting `force_accessibility_update` when adding accessibility damage to DOM nodes. Instead, always update the tree if any accessibility damage is passed in via the reflow request.
@@ -5377,7 +5479,8 @@ https://github.com/servo/servo/pull/47477	(@alice, @mukilan, #47477)	layout: Ren
     # 
     # Testing: Covered by existing tests.
     # Fixes: Part of #47159.
-https://github.com/servo/servo/pull/46910	(@mrobinson, #46910)	layout: Only apply `text-transform: capitalize` to lowercase typographical letter units (#46910)
++https://github.com/servo/servo/pull/46910	(@mrobinson, #46910)	layout: Only apply `text-transform: capitalize` to lowercase typographical letter units (#46910)
+    layout; reduce scope of capitalization
     ^ commit 1b33709aeea9d6cbad5039138d5c2a1c0b5f13f3
     # The specification is pretty clear that the first lowercase typographical
     # letter unit of a word, if lowercase,  should be capitalized, so this
@@ -5387,7 +5490,8 @@ https://github.com/servo/servo/pull/46910	(@mrobinson, #46910)	layout: Only appl
     # I think it's passing on CI, because CI is missing certain fonts that would otherwise
     # make this test fail.
     # 
-https://github.com/servo/servo/pull/47405	(@nicoburns, #47405)	Upgrade to Stylo with `animation-composition` support (#47405)
++https://github.com/servo/servo/pull/47405	(@nicoburns, #47405)	Upgrade to Stylo with `animation-composition` support (#47405)
+    layout; animation-composition support
     ^ commit c3bc20759d19b9c6a951a3cf4c906eaf4d9d400f
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Stylo PR:
@@ -5396,7 +5500,8 @@ https://github.com/servo/servo/pull/47405	(@nicoburns, #47405)	Upgrade to Stylo 
     # Implements `animation-composition` support. Implementation is entirely within Stylo.
     # 
     # Testing: WPT tests (this fixes over 1000 subtests!)
-https://github.com/servo/servo/pull/47491	(@veyndan, #47491)	android: Remove constructor for XML layouts (#47491)
++https://github.com/servo/servo/pull/47491	(@veyndan, #47491)	android: Remove constructor for XML layouts (#47491)
+    embedding; android compose UI integration
     ^ commit 201c46059b2b91439dcf41a731302c9b43a65a89
     # The constructor with the `AttributeSet` argument is needed for XML layouts. Since we're moving towards a Compose UI layout per #33742, we don't need this constructor any more, and removing it makes it explicit that this is no longer supported.
     # 
@@ -5426,7 +5531,8 @@ https://github.com/servo/servo/pull/47491	(@veyndan, #47491)	android: Remove con
     # Testing: This change causes several WPT tests to start passing.
     # 
 >>> 2026-08-25T23:27:07Z
-https://github.com/servo/servo/pull/47449	(@simonwuelker, #47449)	fonts: Resolve ties during web font matching by cascade order of `@font-face` rules (#47449)
++https://github.com/servo/servo/pull/47449	(@simonwuelker, #47449)	fonts: Resolve ties during web font matching by cascade order of `@font-face` rules (#47449)
+    layout; resolve web fonts according to css cascade order
     ^ commit 316924ea01fe232e9b67130bbe46016fae24739e
     # Currently when multiple web fonts tie during font matching then whichever one loaded first wins. This causes obvious intermittent behaviour, and we should instead prefer the one that comes first in the CSS cascade.
     # 
@@ -5749,7 +5855,7 @@ https://github.com/servo/servo/pull/47449	(@simonwuelker, #47449)	fonts: Resolve
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47389	(@shubhamg13, #47389)	layout/script: Let layout own LCP halting logic to preempt unnecessary compute (#47389)
+-https://github.com/servo/servo/pull/47389	(@shubhamg13, #47389)	layout/script: Let layout own LCP halting logic to preempt unnecessary compute (#47389)
     ^ commit 73a3781482db5a0e710423d8cd44e3912a3cf1d3
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
     # This PR spans over following changes
@@ -5766,7 +5872,8 @@ https://github.com/servo/servo/pull/47389	(@shubhamg13, #47389)	layout/script: L
     #   - `test_largest_contentful_paint_js_api_with_mouse_click_and_reload`
     # 
     # Fixes: Part of #42000
-https://github.com/servo/servo/pull/47475	(@shubhamg13, #47475)	script: Return `0` as`loadTime` value for all LCP Entries (#47475)
++https://github.com/servo/servo/pull/47475	(@shubhamg13, #47475)	script: Return `0` as`loadTime` value for all LCP Entries (#47475)
+    dom; largestcontentfulpaint loadTime value for text entries
     ^ commit 1ed4640e9f39feeb8a14ad05295c6e0aaa09394a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # As per the spec loadTime for Text is 0. 
@@ -5778,13 +5885,13 @@ https://github.com/servo/servo/pull/47475	(@shubhamg13, #47475)	script: Return `
     # Fixes: Part of #47315
     # 
     # 
-https://github.com/servo/servo/pull/47508	(@mrobinson, #47508)	ci: Disable `thejerrybao/setup-swap-space` (#47508)
+-https://github.com/servo/servo/pull/47508	(@mrobinson, #47508)	ci: Disable `thejerrybao/setup-swap-space` (#47508)
     ^ commit 47d885615fb767913aa11435aa51690003d62d52
     # This action doesn't exist any longer which has broken CI.
     # 
     # Testing: This changes fixes CI, which is the test.
     # 
-https://github.com/servo/servo/pull/47480	(@alice, #47480)	layout: Refactor how DOM damage is handled during accessibility updates. (#47480)
+-https://github.com/servo/servo/pull/47480	(@alice, #47480)	layout: Refactor how DOM damage is handled during accessibility updates. (#47480)
     ^ commit ad7cc470e03976e4ecbb1f8d357a679196be66fc
     # - Rather than passing in a `VecDeque` of pairs, pass in a map of `OpaqueNode` to a pair of (`ServoLayoutNode`, `AccessibilityDamage`).
     # - Hand the damage off to the `AccessibilityUpdate`, which processes it into two separate maps keyed on `NodeId`:
@@ -5823,7 +5930,8 @@ https://github.com/servo/servo/pull/47480	(@alice, #47480)	layout: Refactor how 
     # Testing: This change includes unit tests and updates WPT results.
     # Fixes: #4409.
     # 
-https://github.com/servo/servo/pull/47510	(@TimvdLippe, #47510)	script: Use UnrootedDom for node variant of NodeOrString in execcommand (#47510)
++https://github.com/servo/servo/pull/47510	(@TimvdLippe, #47510)	script: Use UnrootedDom for node variant of NodeOrString in execcommand (#47510)
+    perf; less work in execcommand
     ^ commit f8dfb29a568cf00489993df74b3a626ba1f1f1be
     # This removes the requirement for the Node to be `DomRoot`. That's possible because `NodeOrString` is used in `is_allowed_child` which does not perform any GC. Hence we can construct the `NoGC` and ensure the node stays unrooted.
     # 
@@ -5844,12 +5952,13 @@ https://github.com/servo/servo/pull/47510	(@TimvdLippe, #47510)	script: Use Unro
     #     
     # Testing: This results in a progression on a decent number of WPT subtests.
     # 
-https://github.com/servo/servo/pull/47494	(@veyndan, #47494)	android: Make `ServoView.client` non-null (#47494)
++https://github.com/servo/servo/pull/47494	(@veyndan, #47494)	android: Make `ServoView.client` non-null (#47494)
+    embedding; android compose UI integration
     ^ commit ca49e5943a62a22c300b36c35e8dd2980057962c
     # This suppresses the `ViewConstructor` lint since, as mentioned in 201c46059b2b91439dcf41a731302c9b43a65a89, we no longer want to promote the usage of `ServoView` via the XML Views.
     # 
     # Testing: There are no automated tests for Android.
-https://github.com/servo/servo/pull/47484	(@Narfinger, #47484)	net: Cleanup variable names in http_network_fetch (#47484)
+-https://github.com/servo/servo/pull/47484	(@Narfinger, #47484)	net: Cleanup variable names in http_network_fetch (#47484)
     ^ commit 38eacf004f7e8e861a520ac129c7cd9cdbc05d1c
     # There are multiple res, res_body and so forth in http_network_fetch. This cleans up at least some of it and gives more descriptive names (according to my understanding).
     # 
@@ -5865,12 +5974,13 @@ https://github.com/servo/servo/pull/47484	(@Narfinger, #47484)	net: Cleanup vari
     # 
     # Testing: newly passing WPT tests
     # 
-https://github.com/servo/servo/pull/47506	(@yezhizhen, #47506)	script: Reduce allocation for "choosing a navigable", execcommand, querycommand* (#47506)
++https://github.com/servo/servo/pull/47506	(@yezhizhen, #47506)	script: Reduce allocation for "choosing a navigable", execcommand, querycommand* (#47506)
+    perf; allocations
     ^ commit c4ff6cb0afdae8e0af6687e47f6bd129a1e92e3b
     # Similar to #47285.
     # 
     # Testing: Covered by existing tests.
-https://github.com/servo/servo/pull/47505	(@kkoyung, #47505)	deps: Bump ocb3 to 0.2 (#47505)
+-https://github.com/servo/servo/pull/47505	(@kkoyung, #47505)	deps: Bump ocb3 to 0.2 (#47505)
     ^ commit 9ec9e425a188755cb457653dee3a3cb43c88c5fd
     # Bump ocb3 from 0.2.0-rc.3 to 0.2.0.
     # 
@@ -5878,20 +5988,22 @@ https://github.com/servo/servo/pull/47505	(@kkoyung, #47505)	deps: Bump ocb3 to 
     # 
     # Testing: No code change.
     # Part-of: #45823
-https://github.com/servo/servo/pull/47513	(@TimvdLippe, @mrobinson, #47513)	script: Make `Range::contained_nodes` take a `&NoGC` (#47513)
++https://github.com/servo/servo/pull/47513	(@TimvdLippe, @mrobinson, #47513)	script: Make `Range::contained_nodes` take a `&NoGC` (#47513)
+    perf; less work in range
     ^ commit 2ef5b9bb9a646a2b0c897753f9e81a20d0ce11b5
     # Part of #25005
     # 
     # Testing: it compiles
     # 
-https://github.com/servo/servo/pull/47514	(@Lfan-ke, #47514)	webdriver: use IsArgumentsObject instead of a hand-rolled arguments check (#47514)
+-https://github.com/servo/servo/pull/47514	(@Lfan-ke, #47514)	webdriver: use IsArgumentsObject instead of a hand-rolled arguments check (#47514)
     ^ commit 5b05da3087cce59dc69b12e660a8ac91ec214213
     # Replaces the hand-rolled `[object Arguments]` string comparison in `is_arguments_object` with the `IsArgumentsObject` wrapper from mozjs, as suggested in the issue.
     # 
     # No behaviour change is expected, so the existing `tests/wpt tests/webdriver/classic` tests should be unaffected and no new tests are added.
     # 
     # Fixes #47448
-https://github.com/servo/servo/pull/46931	(@pylbrecht, #46931)	More granular script thread memory reporting (#46931)
++https://github.com/servo/servo/pull/46931	(@pylbrecht, #46931)	More granular script thread memory reporting (#46931)
+    perf; more precise JS memory usage breakdown in about:memory
     ^ commit b4b6d8c6ae73415717fb39e6db610109ea105ff0
     # So far, all Rust memory for DOM objects ended up in a single category (MallocHeap).
     # 
@@ -5917,7 +6029,8 @@ https://github.com/servo/servo/pull/46931	(@pylbrecht, #46931)	More granular scr
     # Testing: manual
     # Fixes: #44995 
     # 
-https://github.com/servo/servo/pull/47493	(@nicoburns, #47493)	Upgrade to Taffy v0.14.0 (#47493)
++https://github.com/servo/servo/pull/47493	(@nicoburns, #47493)	Upgrade to Taffy v0.14.0 (#47493)
+    layout; taffy upgrade with intrinsic sizing and grid names
     ^ commit 94d656caa875d7cec56979692777dc36606c6b5a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Upgrade to Taffy v0.14.0:
@@ -5961,7 +6074,7 @@ https://github.com/servo/servo/pull/47493	(@nicoburns, #47493)	Upgrade to Taffy 
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47490	(@veyndan, #47490)	android: Stop double-trimming URI before loading (#47490)
+-https://github.com/servo/servo/pull/47490	(@veyndan, #47490)	android: Stop double-trimming URI before loading (#47490)
     ^ commit c4d8c0f7faa80f54932824a190f38ec35d680181
     # We already trim the URI before loading in Rust, so there's no need to pre-do it in Kotlin.
     # 
@@ -5971,7 +6084,8 @@ https://github.com/servo/servo/pull/47490	(@veyndan, #47490)	android: Stop doubl
     # 
     # Testing: There are no automated tests for Android.
     # 
-https://github.com/servo/servo/pull/47301	(@niyabits, @mukilan, #47301)	script: use a trait for the WorkletThreadPool (#47301)
++https://github.com/servo/servo/pull/47301	(@niyabits, @mukilan, #47301)	script: use a trait for the WorkletThreadPool (#47301)
+    dom; audioworklet progress
     ^ commit 8a42026eacc2bee9ba2e5c66d0758dba79dbfe25
     # This PR is a part of refactoring Worklet for implementing AudioWorklet
     # 
@@ -6043,12 +6157,13 @@ https://github.com/servo/servo/pull/47301	(@niyabits, @mukilan, #47301)	script: 
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47532	(@jdm, #47532)	script: Only measure memory for Attr nodes once. (#47532)
++https://github.com/servo/servo/pull/47532	(@jdm, #47532)	script: Only measure memory for Attr nodes once. (#47532)
+    perf; about:memory overcounting
     ^ commit 7d060b53dc67c708c51575962b1e58f2ee38240d
     # Any Attr node measured while traversing the DOM tree should be ignored later when we are scanning the full GC graph.
     # 
     # Testing: No automated tests for about:memory.
-https://github.com/servo/servo/pull/47534	(@jschwe, #47534)	ohos: Set GITHUB_TOKEN for build to avoid rate limits (#47534)
+-https://github.com/servo/servo/pull/47534	(@jschwe, #47534)	ohos: Set GITHUB_TOKEN for build to avoid rate limits (#47534)
     ^ commit 13cd7dcdf316a1b2ee68e8a0059c34292666b9ec
     # We now use `clang-19`, which is download from github releases. To find the release `cargo-ohos` uses the github API, which is rate-limited for anonymous access, which causes spurious errors.
     # Hence we set GITHUB_TOKEN for the build, to allow authenticated API access.
@@ -6057,7 +6172,7 @@ https://github.com/servo/servo/pull/47534	(@jschwe, #47534)	ohos: Set GITHUB_TOK
     # Testing: Since the rate-limiting issue is intermittent, this fix is speculative. [try-run](https://github.com/servo/servo/actions/runs/32944880475/job/98103463411) works.
     # 
     # 
-https://github.com/servo/servo/pull/47157	(@Narfinger, #47157)	script: Move GPU, GPUBindGroup, GPUBindGrouplayout, GPUBuffer, GPUColorWrite and GPUConvert into script_webgpu (#47157)
+-https://github.com/servo/servo/pull/47157	(@Narfinger, #47157)	script: Move GPU, GPUBindGroup, GPUBindGrouplayout, GPUBuffer, GPUColorWrite and GPUConvert into script_webgpu (#47157)
     ^ commit 8b3cef87b8c2d6c3860c91299c810284ceba919a
     # This moves GPU, GPUBuffer, GPUBindGroup, GPUBindGrouplayout, GPUColorWrite, GPUConvert to script_webgpu.
     # This is similar to previous PRs. Of note are a couple of changes:
@@ -6072,7 +6187,8 @@ https://github.com/servo/servo/pull/47157	(@Narfinger, #47157)	script: Move GPU,
     # 
     # Testing: Compilation is the test as no functionality was changed.
     # 
-https://github.com/servo/servo/pull/47425	(@mrobinson, #47425)	script: Align live range update steps with specification (#47425)
++https://github.com/servo/servo/pull/47425	(@mrobinson, #47425)	script: Align live range update steps with specification (#47425)
+    dom; spec compliance of Node.normalize and fewer allocations
     ^ commit 73d0917616a2f200bcf0045241db4292a4d7d899
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This change reworks the live range update steps that show up in various
@@ -6130,7 +6246,8 @@ https://github.com/servo/servo/pull/47425	(@mrobinson, #47425)	script: Align liv
     # Closes: #44580.
     # Fixes: #42343.
     # 
-https://github.com/servo/servo/pull/47479	(@Narfinger, #47479)	script: Allow DOMString to convert efficiently from static strings (#47479)
++https://github.com/servo/servo/pull/47479	(@Narfinger, #47479)	script: Allow DOMString to convert efficiently from static strings (#47479)
+    perf; memory usage
     ^ commit 36cc4ea5e4879e87fc76b0dcc7541cb74d5c1609
     # We allow DOMStrings to efficiently convert from static strings by introducing the DOMString::from_static method.
     # We achieve this by having another entry in our enum that holds the static string. This will safe on memory for DOMStrings that never change.
@@ -6142,14 +6259,15 @@ https://github.com/servo/servo/pull/47479	(@Narfinger, #47479)	script: Allow DOM
     # 
     # Testing: WPT tests should find anything that breaks.
     # 
-https://github.com/servo/servo/pull/47472	(@Narfinger, #47472)	script: Update chardetng (#47472)
+-https://github.com/servo/servo/pull/47472	(@Narfinger, #47472)	script: Update chardetng (#47472)
     ^ commit dc1693f28851f5bb2f3dc3c60fbcb95028d7debc
     # This updates the chardetng dependency with some changes to the API.
     # I followed the documentation on which flags to set.
     # 
     # Testing: WPT run here: https://github.com/Narfinger/servo/actions/runs/32948944638
     # 
-https://github.com/servo/servo/pull/47530	(@yezhizhen, #47530)	script: Reduce String allocation of JS API of fetch `Headers` (#47530)
++https://github.com/servo/servo/pull/47530	(@yezhizhen, #47530)	script: Reduce String allocation of JS API of fetch `Headers` (#47530)
+    perf; allocations
     ^ commit 91eb2b0599c3e67b8506f81aca17059406946071
     # We modify validated name in-place instead.
     # Testing: Covered by existing tests. Tho I have not tested as it's trivial.
@@ -6167,7 +6285,7 @@ https://github.com/servo/servo/pull/47530	(@yezhizhen, #47530)	script: Reduce St
     # Testing: WPT tests
     # 
     # The failing tentative test cases were never truly passing: the ref now actually applies grid baselines.
-https://github.com/servo/servo/pull/47511	(@alice, #47511)	layout: Fold accessibility bounds update into regular tree update. (#47511)
+-https://github.com/servo/servo/pull/47511	(@alice, #47511)	layout: Fold accessibility bounds update into regular tree update. (#47511)
     ^ commit dc43f81f9950542aa88476a9f5c12e61f9c7d583
     # - Ensure we always walk from the document root by inserting "damage" for the root node.
     # - When walking the tree in `update_subtree()`,  always call into `update_children_from_dom_node()`, which now adds the DOM nodes for all child nodes into the `AccessibilityUpdate`'s `dom_node_map`.
@@ -6185,7 +6303,8 @@ https://github.com/servo/servo/pull/47511	(@alice, #47511)	layout: Fold accessib
     # 
     # Testing: safe_borrow_mut enforces the abscence of borrow hazards and WPT should find if there are other problems with the refactor.
     # 
-https://github.com/servo/servo/pull/47541	(@Narfinger, #47541)	net: Instead of Duration use ApproxDuration (#47541)
++https://github.com/servo/servo/pull/47541	(@Narfinger, #47541)	net: Instead of Duration use ApproxDuration (#47541)
+    perf; memory usage
     ^ commit b5624984e487ab8bf6049eb6c02444b318d0a8c5
     # This changes the Duration in CachedResources to ApproxDuration.
     # This saves us a couple of bytes per CachedResources as ApproxDuration only stores the seconds (and Duration has nanosecond precision).
@@ -6195,13 +6314,14 @@ https://github.com/servo/servo/pull/47541	(@Narfinger, #47541)	net: Instead of D
     # 
     # Testing: As the spec only cares about seconds precision and we never used nanosecond precision, the nanosecond Duration part was always zero. Hence, this should not have any effects.
     # 
-https://github.com/servo/servo/pull/47540	(@Narfinger, #47540)	script_bindings: Add docs for make_ascii_lowercase (#47540)
+-https://github.com/servo/servo/pull/47540	(@Narfinger, #47540)	script_bindings: Add docs for make_ascii_lowercase (#47540)
     ^ commit e8b5b8aa1de4c31e9b9cd1dc376a723601fcccbf
     # This just documents the current behavior (which might be unexpected).
     # 
     # Testing: This just changes the documentation.
     # 
-https://github.com/servo/servo/pull/47552	(@mrobinson, #47552)	script_bindings: Add a fast path to `is_platform_object_same_origin` (#47552)
++https://github.com/servo/servo/pull/47552	(@mrobinson, #47552)	script_bindings: Add a fast path to `is_platform_object_same_origin` (#47552)
+    perf
     ^ commit df644dde3a9ad98788578dd2b9481167c09a0ca6
     # If this function will be used more commonly for `WindowProxy`, it should
     # be fast. If two `Realm` objects have pointer equality, they obviously
@@ -6210,7 +6330,8 @@ https://github.com/servo/servo/pull/47552	(@mrobinson, #47552)	script_bindings: 
     # 
     # Testing: This should not change behavior so is covered by existing tests.
     # 
-https://github.com/servo/servo/pull/47542	(@mrobinson, #47542)	script: Handle WebDriver script execution via a native promise handler (#47542)
++https://github.com/servo/servo/pull/47542	(@mrobinson, #47542)	script: Handle WebDriver script execution via a native promise handler (#47542)
+    dom; removed servo-only properties on global object
     ^ commit 17f555b0201632614ad240c72d4c242cb36583ac
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -6232,7 +6353,7 @@ https://github.com/servo/servo/pull/47542	(@mrobinson, #47542)	script: Handle We
     # Part of #47512
     # 
     # Testing: it compiles with Clippy
-https://github.com/servo/servo/pull/47476	(@mrobinson, #47476)	constellation: Move `screenshot_readiness_requests` to `ConstellationWebView` (#47476)
+-https://github.com/servo/servo/pull/47476	(@mrobinson, #47476)	constellation: Move `screenshot_readiness_requests` to `ConstellationWebView` (#47476)
     ^ commit e9724266796cbbab38f9bea8c4b77fff70577b6d
     # This change is part of a series of changes moving various members of
     # `Constellation` to `ConstellationWebView` in order to avoid so much
@@ -6247,13 +6368,13 @@ https://github.com/servo/servo/pull/47476	(@mrobinson, #47476)	constellation: Mo
     # minor behavior changes still properly cause screenshots to appear.
     # 
 >>> 2026-08-28T01:56:43Z
-https://github.com/servo/servo/pull/47433	(@Narfinger, #47433)	deps: Update quick_cache (#47433)
+-https://github.com/servo/servo/pull/47433	(@Narfinger, #47433)	deps: Update quick_cache (#47433)
     ^ commit b88193272420cf1afdb5c16f4884c817120178bd
     # Updating quick_cache with slight changes in api. This changes the hash function in quick_cache to foldhash.
     # 
     # Testing: Dependency upgrade, only pipeline as test needed.
     # 
-https://github.com/servo/servo/pull/47535	(@TimvdLippe, #47535)	script: Move more files from `script/dom/` (#47535)
+-https://github.com/servo/servo/pull/47535	(@TimvdLippe, #47535)	script: Move more files from `script/dom/` (#47535)
     ^ commit 9624ccd28c8f6e3ae0ddd8f601728720ec38be51
     # It's increasingly difficult to figure out naming and locations for these last few remaining files. These moves are my best effort to find a reasonable place.
     # 
@@ -6299,7 +6420,7 @@ https://github.com/servo/servo/pull/47535	(@TimvdLippe, #47535)	script: Move mor
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47419	(@shubhamg13, #47419)	paint: Delete `largest_contentful_paint_calculator` (#47419)
+-https://github.com/servo/servo/pull/47419	(@shubhamg13, #47419)	paint: Delete `largest_contentful_paint_calculator` (#47419)
     ^ commit c038a19febfd7ab687de71caf04cfe180462b70f
     # - Delete `largest_contentful_paint_calculator` as all size calculation is done in layout
     #   - as per spec guidelines
@@ -6316,11 +6437,12 @@ https://github.com/servo/servo/pull/47419	(@shubhamg13, #47419)	paint: Delete `l
     # Fixes: Part of #42000
     # Fixes: #47373
     # 
-https://github.com/servo/servo/pull/47566	(@yezhizhen, #47566)	script: Reduce allocation for `Headers` iterator ops (#47566)
++https://github.com/servo/servo/pull/47566	(@yezhizhen, #47566)	script: Reduce allocation for `Headers` iterator ops (#47566)
+    perf; allocations
     ^ commit b5181acd5291964b5cfa260a745aa84df40f2509
     # 
     # Testing: Covered by existing tests.
-https://github.com/servo/servo/pull/47473	(@mrobinson, #47473)	constellation: Move `pending_viewport_changes` to `ConstellationWebView` (#47473)
+-https://github.com/servo/servo/pull/47473	(@mrobinson, #47473)	constellation: Move `pending_viewport_changes` to `ConstellationWebView` (#47473)
     ^ commit 0a48e298482659817eb50097df23841f2b8e3044
     # This is another change in a series of work to try to reduce the amount
     # of `HashMap` access in `Constellation`. This moves
@@ -6345,7 +6467,8 @@ https://github.com/servo/servo/pull/47473	(@mrobinson, #47473)	constellation: Mo
     # the cross-origin property list.
     # 
     # Testing: This causes a number of WPT tests to start passing.
-https://github.com/servo/servo/pull/47043	(@yezhizhen, #47043)	css: Implement `touch-action` (Except for pan-{up,down,left,right} that Stylo does not support) (#47043)
++https://github.com/servo/servo/pull/47043	(@yezhizhen, #47043)	css: Implement `touch-action` (Except for pan-{up,down,left,right} that Stylo does not support) (#47043)
+    layout; touch-action support
     ^ commit 435dda2ac41e9adc5c8e82430d5ae098ff106c4d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Motivated by #46983 to get this to the end.
@@ -6365,14 +6488,15 @@ https://github.com/servo/servo/pull/47043	(@yezhizhen, #47043)	css: Implement `t
     # 
     # Testing: new WPT passes
     # Fixes: Part of #46859
-https://github.com/servo/servo/pull/47570	(@SimonSapin, #47570)	script: Don’t mark nodes as dirty if they were and remain selected (#47570)
++https://github.com/servo/servo/pull/47570	(@SimonSapin, #47570)	script: Don’t mark nodes as dirty if they were and remain selected (#47570)
+    layout; selection
     ^ commit 670ae8a70801b162e186f81cbb5bdd2d59c39108
     # Part of https://github.com/servo/servo/issues/47392
     # 
     # Testing: expecting no change to existing WPT
     # 
 >>> 2026-08-29T23:11:15Z
-https://github.com/servo/servo/pull/47593	(@jschwe, #47593)	cargo-deny: Allow yanked crates. (#47593)
+-https://github.com/servo/servo/pull/47593	(@jschwe, #47593)	cargo-deny: Allow yanked crates. (#47593)
     ^ commit a8268cd1e5cedc121627d37230c7e48e2cb9e228
     # It's unfortunate that we can't `warn` instead,
     # but that would require more changes in mach which I currently don't have
@@ -6441,13 +6565,13 @@ https://github.com/servo/servo/pull/47593	(@jschwe, #47593)	cargo-deny: Allow ya
     # </details>
     # <br />
     # 
-https://github.com/servo/servo/pull/47598	(@kkoyung, #47598)	deps: Bump argon2 to 0.6 (#47598)
+-https://github.com/servo/servo/pull/47598	(@kkoyung, #47598)	deps: Bump argon2 to 0.6 (#47598)
     ^ commit af4b1f4f875aca47c5db2f5168b2ec9ed3d2d02c
     # Bump argon2 from 0.6.0-rc.8 to 0.6.0.
     # 
     # Testing: No code change.
     # Part-of: #45823
-https://github.com/servo/servo/pull/47596	(@mukilan, #47596)	config: Disable SpiderMonkey's compacting GC by default. (#47596)
+-https://github.com/servo/servo/pull/47596	(@mukilan, #47596)	config: Disable SpiderMonkey's compacting GC by default. (#47596)
     ^ commit 8067519db8c52e6eaabf6a17536e32a634742a53
     ^ /!\ may contain changes to feature flags
     # Based on the issue discovered in #47577, it seem like a compacting GC will break Servo's layout system.
@@ -6456,7 +6580,7 @@ https://github.com/servo/servo/pull/47596	(@mukilan, #47596)	config: Disable Spi
     # 
     # Testing: There are no tests as this shouldn't change existing behaviour - SM doesn't shrink the heap unless we explicitly call the GC API with the relevant option. We don't do that in servo/mozjs, as noted in #47577 .
     # 
-https://github.com/servo/servo/pull/47592	(@atouchet, #47592)	Update chacha20 to 0.10.2 (#47592)
+-https://github.com/servo/servo/pull/47592	(@atouchet, #47592)	Update chacha20 to 0.10.2 (#47592)
     ^ commit 0e3f912e45dda5a355f14b7f3419b6a78cf3214c
     # Update chacha20 to 0.10.2 to unblock CI.
     # 
@@ -6464,7 +6588,7 @@ https://github.com/servo/servo/pull/47592	(@atouchet, #47592)	Update chacha20 to
     # 
     # Fixes: #47583
     # 
-https://github.com/servo/servo/pull/47574	(@xbwwj, #47574)	paint: Remove interior mutability from `PipelineDetails` (#47574)
+-https://github.com/servo/servo/pull/47574	(@xbwwj, #47574)	paint: Remove interior mutability from `PipelineDetails` (#47574)
     ^ commit 9a80a353a823aecfe81404ecd7e5160c5ef81874
     # Remove Cells and RefCells in `PipelineDetails`.
     # 
@@ -6489,7 +6613,8 @@ https://github.com/servo/servo/pull/47574	(@xbwwj, #47574)	paint: Remove interio
     # Testing: This changes causes a decent number of editing subtests to
     # start passing and a single subtest to start failing.
     # 
-https://github.com/servo/servo/pull/47461	(@eachra-bawn, #47461)	script: Supply equivalant `keyCode` values as in Chrome/FF (#47461)
++https://github.com/servo/servo/pull/47461	(@eachra-bawn, #47461)	script: Supply equivalant `keyCode` values as in Chrome/FF (#47461)
+    dom; Event.keyCode values for more keys (function, number pad)
     ^ commit cb9b0804bda615fdd7a679325dfc73b4604889f6
     # Previously, Servo only implemented the [fixed virtual keycodes](https://w3c.github.io/uievents/#fixed-virtual-key-codes) and [optionally fixed virtual keycodes](https://w3c.github.io/uievents/#optionally-fixed-virtual-key-codes). This meant that any other key that was not covered by either of these two, including function keys and numpad keys, returned a '0' for the `keyCode` value.
     # 
@@ -6510,7 +6635,8 @@ https://github.com/servo/servo/pull/47461	(@eachra-bawn, #47461)	script: Supply 
     # Three start failing, but I believe they were falsely passing
     # before.
     # 
-https://github.com/servo/servo/pull/47509	(@Narfinger, #47509)	script/net: Use Bytes/BytesMut instead of Vec<u8> to avoid copying (#47509)
++https://github.com/servo/servo/pull/47509	(@Narfinger, #47509)	script/net: Use Bytes/BytesMut instead of Vec<u8> to avoid copying (#47509)
+    perf; allocations
     ^ commit d72fe5a3bd74a49c72b2557e3bd9810b29361517
     # This switches our usage of Vec<u8> to bytes::Bytes (which we already use partially in the net code).
     # The main change is that ProcessResponseChunk now gives a Bytes instead of Vec<u8>.
@@ -6525,20 +6651,23 @@ https://github.com/servo/servo/pull/47509	(@Narfinger, #47509)	script/net: Use B
     # 
     # Testing: This should just be a refactor as bytes dereferences to [u8]. WPT test should cover anything that is missed.
     # 
-https://github.com/servo/servo/pull/47555	(@veyndan, #47555)	android: Move handling of `ServoView` suspension to library (#47555)
++https://github.com/servo/servo/pull/47555	(@veyndan, #47555)	android: Move handling of `ServoView` suspension to library (#47555)
+    embedding; android suspend/resume support in library
     ^ commit 215f907ad205c0f4eac5d2997bc38fd3f2119477
     # Previously, if implementing a custom Servo chrome using the Servo library, one would need to remember to implement pausing and resuming the web view when the surrounding Activity pauses and resumes. Instead, we can just move that logic to the library so library consumers don't need to worry about it.
     # 
     # Testing: There are no automated tests for Android.
     # Part of: https://github.com/servo/servo/issues/33742
     # 
-https://github.com/servo/servo/pull/47612	(@jdm, #47612)	gstreamer: Filter factories by any matching caps. (#47612)
++https://github.com/servo/servo/pull/47612	(@jdm, #47612)	gstreamer: Filter factories by any matching caps. (#47612)
+    dom; support mp4 media playback
     ^ commit 3ce8a7203978bdd722e3d65b49e3175b08639d15
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Ensuring that all caps match is too strict and means that mp4 is never reported as playable. Webkit has similar checks that look for intersection: https://searchfox.org/wubkat/rev/4bf9d2cf94e5a07bdcb977203ddc27f3752ecaf7/Source/WebCore/platform/graphics/gstreamer/GStreamerRegistryScanner.cpp#322
     # 
     # Testing: Many new passing tests.
-https://github.com/servo/servo/pull/47531	(@jdm, #47531)	script: Automatically classify memory usage for webidl interfaces. (#47531)
++https://github.com/servo/servo/pull/47531	(@jdm, #47531)	script: Automatically classify memory usage for webidl interfaces. (#47531)
+    perf; more precise JS memory usage breakdown in about:memory
     ^ commit 6aa8bf85eaed1f09123e681088bf2d0f6b74b5e0
     # Building on top of #46931, this adds a new `out-of-tree` entry to the DOM memory report which automatically groups all memory for each previously-unmeasured WebIDL interface that is encountered when measuring the objects in the GC graph. Any object measured when traversing the tree is excluded from this, so we won't count any objects twice even if we add new grouping categories.
     # 
@@ -6569,7 +6698,8 @@ https://github.com/servo/servo/pull/47531	(@jdm, #47531)	script: Automatically c
     # also are lacking the special code to ensure that unsalvageable pages can live
     # in the BFCache.
     # 
-https://github.com/servo/servo/pull/47220	(@gterzian, #47220)	serviceworker: start implementing cache interface with in-mem only backend (#47220)
++https://github.com/servo/servo/pull/47220	(@gterzian, #47220)	serviceworker: start implementing cache interface with in-mem only backend (#47220)
+    dom; serviceworker progress
     ^ commit 1462d866b8c47f2904389e59e38be74b125d94a3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -6580,7 +6710,8 @@ https://github.com/servo/servo/pull/47220	(@gterzian, #47220)	serviceworker: sta
     # 
     # Part of: https://github.com/servo/servo/issues/36538
     # 
-https://github.com/servo/servo/pull/47622	(@yezhizhen, #47622)	script: Avoid manual lowercasing in `XMLHttpRequest::GetResponseHeader` (#47622)
++https://github.com/servo/servo/pull/47622	(@yezhizhen, #47622)	script: Avoid manual lowercasing in `XMLHttpRequest::GetResponseHeader` (#47622)
+    perf; allocations
     ^ commit 648f9f31a20a9ceb66cac846848357a3904a0c79
     # This is done manually in [from_str](https://docs.rs/http/latest/http/header/struct.HeaderName.html#method.from_str).
     # What's more, we are allocating a new string here.
@@ -6598,19 +6729,20 @@ https://github.com/servo/servo/pull/47622	(@yezhizhen, #47622)	script: Avoid man
     # Part of #47512
     # 
     # Testing: it compiles
-https://github.com/servo/servo/pull/47610	(@TimvdLippe, #47610)	tidy: Add check that lints are configured in Cargo.toml files (#47610)
+-https://github.com/servo/servo/pull/47610	(@TimvdLippe, #47610)	tidy: Add check that lints are configured in Cargo.toml files (#47610)
     ^ commit cb42ac01c8afcf84d918ee138bcf3f35d9e3209d
     # This adds a tidy check that detects whether lints are correctly inherited in `Cargo.toml` files. This check will eventually be turned on once all `Cargo.toml` inside of `components/` are ported. For now, it only runs for the actual tests, which are also added for this Tidy check.
     # 
     # Part of #47512
     # 
     # Testing: `./mach test-scripts` succeeds
-https://github.com/servo/servo/pull/47626	(@vaibhav8a, #47626)	docs: fix typo implmentation -> implementation (#47626)
+-https://github.com/servo/servo/pull/47626	(@vaibhav8a, #47626)	docs: fix typo implmentation -> implementation (#47626)
     ^ commit 7dc7c82d6c7ff8b3f7b3bfe77974c7e6d3357cbd
     # Corrects the misspelling `implmentation` -> `implementation` in `components/webdriver_server/lib.rs`.
     # 
     # Documentation only, no behaviour change.
-https://github.com/servo/servo/pull/47489	(@sagudev, @Gae24, #47489)	Update mozjs to include SpiderMonkey to 153_0esr_RELEASE (#47489)
++https://github.com/servo/servo/pull/47489	(@sagudev, @Gae24, #47489)	Update mozjs to include SpiderMonkey to 153_0esr_RELEASE (#47489)
+    upgrade; spidermonkey 153 ESR, new clang and ndk requirements
     ^ commit a7b65192d48bd89a16caa63ba82df37c0457f6ad
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ may contain changes to feature flags
@@ -6628,12 +6760,13 @@ https://github.com/servo/servo/pull/47489	(@sagudev, @Gae24, #47489)	Update mozj
     # 
     # Testing: Covered by WPT.
     # 
-https://github.com/servo/servo/pull/47625	(@TimvdLippe, #47625)	clippy: Enable linter configuration for all media and shared crates (#47625)
+-https://github.com/servo/servo/pull/47625	(@TimvdLippe, #47625)	clippy: Enable linter configuration for all media and shared crates (#47625)
     ^ commit af6fb8a40b164d5d88a20684180e0e8ce2df098f
     # Part of #47512
     # 
     # Testing: it compiles with Clippy
-https://github.com/servo/servo/pull/47564	(@simonwuelker, #47564)	script: Return list of matching fonts from `FontFaceSet.load` (#47564)
++https://github.com/servo/servo/pull/47564	(@simonwuelker, #47564)	script: Return list of matching fonts from `FontFaceSet.load` (#47564)
+    dom; FontFaceSet.load returns non-empty list of fonts
     ^ commit a8d5fdaa915d3ac2ad7800ea3d46bad5b343a198
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # `FontFaceSet.load` receives a CSS `font` shorthand and is supposed to query matching faces in the set, wait for all of them to load and then return a list of the corresponding `FontFace` objects. Currently we instead wait for `document.fonts.ready` and return an empty list. This change begins implementing the font query. Font matching is done in a naive manner for now, we simply return all fonts with a matching `font-family`. Its unclear to me how proper matching should be done, as this needs to happen before the font data is available. Still, this is progress.
@@ -6641,7 +6774,8 @@ https://github.com/servo/servo/pull/47564	(@simonwuelker, #47564)	script: Return
     # Testing: New tests start to pass
     # Part of https://github.com/servo/servo/issues/21565
 >>> 2026-08-30T23:10:31Z
-https://github.com/servo/servo/pull/46870	(@amittenak47, @jdm, #46870)	script: Invoke decodeAudioData error callback for detached buffers (#46870)
++https://github.com/servo/servo/pull/46870	(@amittenak47, @jdm, #46870)	script: Invoke decodeAudioData error callback for detached buffers (#46870)
+    dom; BaseAudioContext.decodeAudioData conformance with detached buffers
     ^ commit ba2b2be241fa795fa511ea4be8ce6e8a35f8aaeb
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -6687,14 +6821,15 @@ https://github.com/servo/servo/pull/46870	(@amittenak47, @jdm, #46870)	script: I
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Automated downstream sync of changes from upstream as of 30-08-2026
     # [no-wpt-sync]
-https://github.com/servo/servo/pull/47634	(@veyndan, #47634)	android: Remove needless tint from drawables (#47634)
+-https://github.com/servo/servo/pull/47634	(@veyndan, #47634)	android: Remove needless tint from drawables (#47634)
     ^ commit ef52646d73d83bd1ede5b847461ac79be1b714d1
     # These tints don't seemingly do anything, as setting them to a value like red (`#ff0000`) doesn't change the colour of the drawables at all.
     # 
     # The motivation for removing these is that it's part of the legacy (non-Compose UI) layout system. This only currently works because the codebase depends on AndroidX Preferences (to also be replaced) which transitively pulls in parts of the legacy layout still.
     # 
     # Testing: There are no automated tests for Android.
-https://github.com/servo/servo/pull/47600	(@yezhizhen, #47600)	net: Allow * in Access-Control-Allow-Headers to cover authorization (#47600)
++https://github.com/servo/servo/pull/47600	(@yezhizhen, #47600)	net: Allow * in Access-Control-Allow-Headers to cover authorization (#47600)
+    net; match other browsers for Access-Control-Allow-Headers
     ^ commit 3ed5883cf2fad8f1cd43af4b69d323e8a744e3da
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # [Zulip chat](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/.22authorization.22.20should.20not.20be.20covered.20by.20the.20wildcard.20symbol/with/619720785).
@@ -6711,20 +6846,22 @@ https://github.com/servo/servo/pull/47600	(@yezhizhen, #47600)	net: Allow * in A
     # ---
     # 
     # Spec issue: https://github.com/whatwg/fetch/issues/1919
-https://github.com/servo/servo/pull/47641	(@jdm, #47641)	gstreamer: Use more lenient MIME type parser for canPlayType. (#47641)
++https://github.com/servo/servo/pull/47641	(@jdm, #47641)	gstreamer: Use more lenient MIME type parser for canPlayType. (#47641)
+    dom; less strict mime type parsing for HTMLMediaElement.canPlayType
     ^ commit eabc6c50882ab1105b8a07de09ef2a4dc273fbfe
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # The tests that now pass were using a MIME type like "audio/mp4;codecs", for which the mime crate returns an error because it expects a = following each MIME type parameter name. The data-url crate's MIME type parser handles this the same way as other browsers; there's a parameter named `codecs` with an empty value.
     # 
     # Testing: New passing tests.
-https://github.com/servo/servo/pull/47627	(@mrobinson, #47627)	script_bindings: Put unsafe code in `proxyhandler.rs` into `unsafe` blocks (#47627)
+-https://github.com/servo/servo/pull/47627	(@mrobinson, #47627)	script_bindings: Put unsafe code in `proxyhandler.rs` into `unsafe` blocks (#47627)
     ^ commit 896010a33eb4a92bc98af190d025cf118253df0e
     # This incremental work on making all of Servo pass this compiler lint.
     # 
     # Testing: Compilation is enough to test this change.
     # Fixes: This is part of #35955.
     # 
-https://github.com/servo/servo/pull/47644	(@veyndan, #47644)	android: Move `servo[Args][Log]` to constructor (#47644)
++https://github.com/servo/servo/pull/47644	(@veyndan, #47644)	android: Move `servo[Args][Log]` to constructor (#47644)
+    embedding; android cleanup
     ^ commit 5eeb7bff6fef43bc8ecf45e5096a993ffc248a2b
     # `setServoArgs` currently gives the false impression that it can be invoked after the surface has been created and update the engine with it's arguments. This isn't the case though, since calling `setServoArgs` is a no-op after the surface has been created.
     # 
@@ -6754,7 +6891,8 @@ https://github.com/servo/servo/pull/47644	(@veyndan, #47644)	android: Move `serv
     # Testing: I enabled all the wpt tests for `the-oscillator-node-interface` and `the-periodicwave-interface`
     # Fixes: #22364 #23282 
     # 
-https://github.com/servo/servo/pull/47652	(@veyndan, #47652)	android: Merge `setExperimentalMode` methods (#47652)
++https://github.com/servo/servo/pull/47652	(@veyndan, #47652)	android: Merge `setExperimentalMode` methods (#47652)
+    embedding; android cleanup
     ^ commit b095c0feaeacf3139568041dde2d12211165f65a
     # Currently, calling `setExperimentalModeInit` only works if `ServoView` **has not** initialised `Servo` yet, and calling `setExperimentalMode` only works if `ServoView` **has** already initialised `Servo`.  Calling these functions outside their allowed lifecycles just produces no-ops.
     # 
@@ -6764,7 +6902,8 @@ https://github.com/servo/servo/pull/47652	(@veyndan, #47652)	android: Merge `set
     # 
     # Testing: There are no automated tests for Android.
     # 
-https://github.com/servo/servo/pull/47650	(@Gae24, #47650)	script: Introduce unrooted variant of `GPUCanvasConfiguration` (#47650)
++https://github.com/servo/servo/pull/47650	(@Gae24, #47650)	script: Introduce unrooted variant of `GPUCanvasConfiguration` (#47650)
+    perf; removing potential for uncollectible GC cycles
     ^ commit 6cef732e281fc13bfc06a0d06b16222421d88ab8
     # 
     # Testing: It compiles
@@ -7261,27 +7400,30 @@ https://github.com/servo/servo/pull/47650	(@Gae24, #47650)	script: Introduce unr
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47656	(@veyndan, #47656)	android: Inline `updateSettingsIfNecessary` (#47656)
++https://github.com/servo/servo/pull/47656	(@veyndan, #47656)	android: Inline `updateSettingsIfNecessary` (#47656)
+    embedding; android cleanup
     ^ commit 2614afed150226276e77dc674da3c7e3fbc5eb33
     # Inlining the function unblocks the setting of `experimentalMode` during `ServoView` instantiation since the `updateSettingsIfNecessary` function assumed that `ServoView` was already instantiated. This was described in 5eeb7bff6fef43bc8ecf45e5096a993ffc248a2b in more detail. The actual moving of `experimentalMode` into the `ServoView` constructor will be done in a follow-up PR.
     # 
     # As a self-standing change though, this removes a boolean parameter which is is difficult to understand without looking at the implementation.
     # 
     # Testing: There are no automated tests for Android.
-https://github.com/servo/servo/pull/47664	(@RichardTjokroutomo, #47664)	fonts: handle more CJK special characters (#47664)
++https://github.com/servo/servo/pull/47664	(@RichardTjokroutomo, #47664)	fonts: handle more CJK special characters (#47664)
+    ohos; better font fallback for CJK fonts
     ^ commit b907327420c40bf5bade712a0d5cadced1c3981d
     # Follow up from [#47116](https://github.com/servo/servo/pull/47116), now more CJK blocks are covered by `HarmonyOS Sans SC` & `HarmonyOS Sans TC`.
     # 
     # Testing: Manual testing.
     # 
-https://github.com/servo/servo/pull/47580	(@eachra-bawn, #47580)	script: Add error messages for `webgpu` and `script_webgpu` (#47580)
++https://github.com/servo/servo/pull/47580	(@eachra-bawn, #47580)	script: Add error messages for `webgpu` and `script_webgpu` (#47580)
+    dom; improve error messages
     ^ commit d5fab0cc7a5176c8b5de6998c62f38605508956f
     # This covers all remaining `None`s in `webgpu` and `script_webgpu`.
     # 
     # Testing: Not necessary
     # Fixes: Part of #40756
     # 
-https://github.com/servo/servo/pull/47665	(@jschwe, #47665)	ci: Reduce permissions and exposure in wpt-export workflow (#47665)
+-https://github.com/servo/servo/pull/47665	(@jschwe, #47665)	ci: Reduce permissions and exposure in wpt-export workflow (#47665)
     ^ commit c0d00358569159aad74e3f4051e14a06b5c134a6
     # Reduce the github token permissions to the minimum required (we use a secret for the actual operations).
     # By default the token has all permissions, by specifying permissions explicitly, everything unspecified becomes `None`. Additionally also only pass the required github event to the export.py script, since it doesn't need access to other information (specifically `github.token`).
@@ -7291,7 +7433,7 @@ https://github.com/servo/servo/pull/47665	(@jschwe, #47665)	ci: Reduce permissio
     # Testing: Not tested, but the changes are minimal
     # 
     # 
-https://github.com/servo/servo/pull/47678	(@sagudev, #47678)	Update wgpu 30.0.0 -> 30.0.1 (#47678)
+-https://github.com/servo/servo/pull/47678	(@sagudev, #47678)	Update wgpu 30.0.0 -> 30.0.1 (#47678)
     ^ commit 2c0de779037301028e162d8ee3c2b3ab3289871a
     # Fixes: #47668
     # 
@@ -7549,7 +7691,7 @@ https://github.com/servo/servo/pull/47678	(@sagudev, #47678)	Update wgpu 30.0.0 
     # 
     # 
     # </details>
-https://github.com/servo/servo/pull/47667	(@shubhamg13, #47667)	layout: Add tracing for `Mark Paint Timing` and `Compute New LCP Candidate` (#47667)
+-https://github.com/servo/servo/pull/47667	(@shubhamg13, #47667)	layout: Add tracing for `Mark Paint Timing` and `Compute New LCP Candidate` (#47667)
     ^ commit 08fe62b3a22277bac5ac0621ca95796bec92498f
     # Add tracing for `Mark Paint Timing` and `Compute New LCP Candidate
     # 
@@ -7560,7 +7702,8 @@ https://github.com/servo/servo/pull/47667	(@shubhamg13, #47667)	layout: Add trac
     # Fixes: Part of #42000 
     # Fixes: Part of #42623
     # 
-https://github.com/servo/servo/pull/47670	(@jdm, #47670)	gstreamer: Prefix-match any generic supported codec against the requested codec. (#47670)
++https://github.com/servo/servo/pull/47670	(@jdm, #47670)	gstreamer: Prefix-match any generic supported codec against the requested codec. (#47670)
+    dom; fix codec matching for types like mp4 in HTMLMediaElement.canPlayType
     ^ commit 09625ede55e7ad8cafe9d23e6df9bcc89f4de54d
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # We store values like "mp4*" and perform an exact match against it, but the actual codec values are different (`mp4v.20.8`). This change matches the behaviour of WebKit's codec lookup as well: https://searchfox.org/wubkat/rev/4bf9d2cf94e5a07bdcb977203ddc27f3752ecaf7/Source/WebCore/platform/graphics/gstreamer/GStreamerRegistryScanner.cpp#844
@@ -7568,7 +7711,7 @@ https://github.com/servo/servo/pull/47670	(@jdm, #47670)	gstreamer: Prefix-match
     # Testing: New passing tests.
     # Fixes: #46259
     # 
-https://github.com/servo/servo/pull/47680	(@jschwe, #47680)	ci: Minimize try-label permissions to currently required set (#47680)
+-https://github.com/servo/servo/pull/47680	(@jschwe, #47680)	ci: Minimize try-label permissions to currently required set (#47680)
     ^ commit 764f247d23c725c67caa57b244184b5c45ca077b
     # We should try to get rid of `actions: write` in a follow-up, this PR focuses on encoding the currently required permissions, so everything else is dropped. The `issues: write` permission is apparently not sufficient to remove labels on PRs, despite us using the issues REST API. 
     # 
@@ -7622,14 +7765,14 @@ https://github.com/servo/servo/pull/47680	(@jschwe, #47680)	ci: Minimize try-lab
     # </details>
     # <br />
     # 
-https://github.com/servo/servo/pull/47482	(@Gae24, #47482)	script: Drop `safe` naming from mozjs APIs (#47482)
+-https://github.com/servo/servo/pull/47482	(@Gae24, #47482)	script: Drop `safe` naming from mozjs APIs (#47482)
     ^ commit 0358810805a503bddffb948a2e23f1d96068bc3f
     # Companion PR of https://github.com/servo/mozjs/pull/802, which drops deprecated code and the legacy wrappers.
     # Now that the `safe` variants are the only ones left, some methods have been renamed back to the original names.
     # 
     # Testing: It compiles
     # 
-https://github.com/servo/servo/pull/47669	(@shubhamg13, #47669)	paint: Add tracing for various `cumulative transform` methods (#47669)
+-https://github.com/servo/servo/pull/47669	(@shubhamg13, #47669)	paint: Add tracing for various `cumulative transform` methods (#47669)
     ^ commit 4031c921f8f93930dd76690befa9c5bde5fd3c18
     # Add tracing for various cumulative transform methods
     # 
@@ -7643,14 +7786,15 @@ https://github.com/servo/servo/pull/47669	(@shubhamg13, #47669)	paint: Add traci
     # 
     # Testing: This passes the existing tests for bounds computation (with modifications to test the relevant computed properties), which don't test situations where transforms other than scrolling are applied. It also adds one extra test for the case where scrolling occurs before the accessibility tree is built. #47166 tracks the need to handle CSS transforms, but there may be other situations which are also untested and unhandled. Advice from reviewers on these cases would be very helpful. 
     # Fixes: #47161
-https://github.com/servo/servo/pull/47685	(@leowatts, #47685)	profile_traits: Remove unused IPC bytes channel (#47685)
+-https://github.com/servo/servo/pull/47685	(@leowatts, #47685)	profile_traits: Remove unused IPC bytes channel (#47685)
     ^ commit fdbc3df427ec8fc02298cb97300c262d49fb95af
     # Remove unused IPC bytes channel from `profile_traits`. It is dead code only used by tests.
     # 
     # Testing: No tests required - only removing code
     # Fixes: #47673 
     # 
-https://github.com/servo/servo/pull/47697	(@veyndan, #47697)	android: Require `experimentalMode` in constructor (#47697)
++https://github.com/servo/servo/pull/47697	(@veyndan, #47697)	android: Require `experimentalMode` in constructor (#47697)
+    embedding; android cleanup
     ^ commit 7baa487403e830f3f28f3c7ebc0daff4f4678079
     # Makes it self-evident that passing `experimentalMode` during construction is part of the initialisation phase of the JNI.
     # 
