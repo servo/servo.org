@@ -254,11 +254,15 @@
   <p><a href="https://github.com/servo/servo/releases/tag/v0.6.0"><strong>Servo 0.6.0</strong></a> contains all of the changes we landed in August, which came out to <strong>417 commits</strong>!</p>
 <p>The big news is that we’ve turned on support for <strong>CSS Grid</strong> by default (@nicoburns, #45621).
 This has had a huge positive impact on the visual appearance of many websites.</p>
+<p>TODO: figure</p>
+<p>Another visible change is that <strong>text selection</strong> with the mouse now works!
+This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048, #47048).</p>
+<p>TODO: figure</p>
 <p>This release also contains significant improvements to navigation, document loading, and session history, which are some of the <a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history">gnarliest</a> parts of the HTML specification.</p>
-<p>Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293).</p>
-<p>Any navigation to <code>about:blank</code> is now skipped if the initial about:blank document is present .</p>
-<p><code>about:blank</code> documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a <code>readyState</code> of <code>LOADING</code> (@mrobinson, #47450).</p>
-<p>Opening auxiliary windows now waits to dispatch the load event until the initial <code>about:blank</code> document has been replaced (@jdm, #46975).</p>
+<p>Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293, #47485).
+Meanwhile, any navigation to <code>about:blank</code> is now skipped if the initial about:blank document is present (@jdm, #47074).</p>
+<p><code>about:blank</code> documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a <code>readyState</code> of <code>LOADING</code> (@mrobinson, #47450).
+Opening auxiliary windows will wait to dispatch the load event until the initial <code>about:blank</code> document has been replaced (@jdm, @mrobinson, #47442, #46975).</p>
 <p>Whoever knew that <a href="https://hsivonen.fi/about-blank/">loading <code>about:blank</code></a> was <a href="https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow">so complicated</a>?</p>
 <h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
@@ -272,8 +276,51 @@ This results in more predictable panning when interacting with pages in Servo.</
 <h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>Accessibility support in Servo continues to make great strides; it can be enabled with the <code>--pref accessibility_enabled</code> command line argument.
+Servo now reports positions and sizes for items in the content accessibility tree (@philocalyst, @alice, @mrobinson, #46996), allowing macOS VoiceOver to work more reliably.
+We also report many <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles">ARIA roles</a> for web content elements to accessibility toolkits (@mukilan, #47318).</p>
+<details>
+<summary>Full list of supported roles</summary>
+<ul>
+<li>alert
+<li>banner
+<li>blockquote
+<li>caption
+<li>code
+<li>complementary
+<li>contentinfo
+<li>definition
+<li>deletion
+<li>directory
+<li>document
+<li>emphasis
+<li>feed
+<li>figure
+<li>generic
+<li>insertion
+<li>list
+<li>log
+<li>main
+<li>math
+<li>navigation
+<li>none
+<li>note
+<li>paragraph
+<li>presentation
+<li>rowgroup
+<li>search
+<li>status
+<li>strong
+<li>term
+<li>time
+<li>timer
+</ul>
+</details>
 <p>We made a lot of progress on the <strong><code>LargestContentfulPaint</code></strong> performance metric, implemented behind the <code>largest_contentful_paint_enabled</code> preference.
 Servo now supports the <code>element</code> attribute, (@shubhamg13, #46553), URLs for video element posters (@shubhamg13, #43376), accurate size information (@shubhamg13, #43378), painting text nodes (@shubhamg13, #47212), and a conformant <code>loadTime</code> attribute (@shubhamg13, #47475).</p>
+<p>There was preparatory work for a future <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet"><strong>AudioWorklet</strong></a>** implementation (@niyabits, #46856, #47016, #47016, #47199, #47199).
+See Niya’s <a href="https://text.tchncs.de/niya/wrapping-up-my-work-on-servos-audioworklet">blog post</a> about her Outreachy project for more details!</p>
+<p>We’ve implemented the <strong>CookieStore</strong> interface behind the <code>--pref dom_cookiestore_enabled</code> command line argument (@Taym95, #47044).</p>
 <h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -295,18 +342,54 @@ To perform sampling profiling on Servo, follow the instructions in <a href="http
 <p><strong>servoshell</strong> for <strong>Android</strong> has had many rough edges filed off as part of modernizing it for the Compose UI (@veyndan, #47656, #47491, #47494, #47697, #46955, #47644, #47652, #47276, #47277, #47299, #47439) and converting its implementation to Kotlin (@veyndan, #46926, #46925, #46951, #46965).
 Library consumers are no longer responsible for implementing pause and resume support (@veyndan, #47555).</p>
 <p><strong>servoshell</strong> for <strong>OpenHarmony</strong> now supports external keyboards with US keyboard layouts (@jschwe, #47359).</p>
+<p>Setting the <code>device_pixel_ratio_override</code> preference is no longer ignored on Android and OpenHarmony (@jschwe, #47081).</p>
+<p>Building Servo now requires at least <strong>Clang 19</strong> on all platforms (@jschwe, #47421).
+Additionally, the <code>cargo-ohos</code> tool is now required for building for OpenHarmony (@jschwe, #47334).</p>
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p>There were many small changes this month that removed unnecessary allocations (@Narfinger, @jschwe, @yezhizhen, #47264, #47147, #47066, #47249, #47249, #47285, #47307, #47343, #47361, #47395, #47427, #47454, #47474, #47506, #47479, #47530, #47541, #47566, #47509, #47622), as well reduced GC interactions leading to better JS performance (@jdm, @Narfinger, @webbeef, @TimvdLippe, @mrobinson, #47513, #47250, #47158, #47165, #47049, #47251, #47510).</p>
+<p>On platforms that memory map font data (such as OpenHarmony and macOS), we can now save time that would otherwise be spent loading font files from disk (@jschwe, #47029).</p>
 <p>There were were also a number of improvements in final binary size (@jschwe, @kkoyung, @Narfinger, @jschwe, #47211, #47214, #47210, #46950).</p>
 <p>We fixed crashes related to media playback (@calvaris, #46891), the 2d canvas renderer (@yezhizhen, #46915), and resolving fonts variants (@simonwuelker, #47356).</p>
-<p>We’ve continued our long-running effort to use the Rust type system to make Servo’s integration with SpiderMonkey safer and more reliable (@jdm, @treetmitterglad, @Narfinger, @Gae24, #47398, #47296, #47051, #47005, #47323, #47297, #47322, #47368, #47446).</p>
-<p>We’re also working on statically preventing <a href="https://github.com/servo/servo/issues/39139">a footgun</a> that can lead to uncollectible GC cycles (@Gae24, #47355, #47650)</p>
+<p>We’ve continued our long-running effort to use the Rust type system to make Servo’s integration with SpiderMonkey safer and more reliable (@jdm, @treetmitterglad, @Narfinger, @Gae24, #47398, #47296, #47051, #47005, #47323, #47297, #47322, #47368, #47446, #47317).</p>
+<p>We’re also working on statically preventing <a href="https://github.com/servo/servo/issues/39139">a footgun</a> that can lead to uncollectible GC cycles (@Gae24, #47355, #47650).</p>
+<p>Historically, <code>about:memory</code> has reported all memory usage by Rust implementations of JS APIs as one undifferentiated <code>js/malloc-heap</code> number.
+We now break it down by memory usage of nodes in document trees (@pylbrecht, #46931) and interfaces that are not part of the DOM (@jdm, #47531).</p>
+<p>We’ve added an <strong>experimental threadboost</strong> mechanism (@jschwe, @mrobinson, #46843, #47027) that has been observed to improve Speedometer results by <strong>50%</strong> and allow canvas rendering to reach 60 FPS.
+This is initially enabled for OpenHarmony, but future expansion to other Linux-based platforms is expected.</p>
+<p>We upgraded to SpiderMonkey v153, which brings many new security and crash fixes to Servo’s JavaScript engine integration (@sagudev, @Gae24, #47489).</p>
 <h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p>We upgraded to <a href="https://github.com/linebender/resvg/blob/main/CHANGELOG.md#0480-2026-07-31">resvg 0.48</a>, fixing <strong>many issues with SVG images</strong> with missing width/height attributes that specified a <code>viewBox</code> (@nicoburns, #46937).</p>
+<p>Upgrading to <a href="https://github.com/DioxusLabs/taffy/blob/main/CHANGELOG.md#0130">Taffy 0.14</a> fixed a number of CSS grid-related crashes, support for grid names, better intrinsic sizing, and improved performance (@nicoburns, #47031, #47493).
+We also fixed some issues in the Taffy grid integration for more accurate baselines (@nicoburns, #47518).</p>
+<p>We also upgraded our <code>stylo</code> dependency (@jdm, @nicoburns, @TimvdLippe, #47042, #47256, #47405), giving us:</p>
+<ul>
+<li>accurate incremental layout with <strong>clip-path</strong> changes</li>
+<li>support for the <strong>animation-composition</strong> and <strong>color-scheme</strong> properties</li>
+</ul>
+<p>Our media playback is improved; we fixed several issues around HTMLMediaElement.canPlayType so Servo now reports that MP4 content is playable (@jdm, #47612, #47641, #47670).</p>
+<p>WebAudio content in Servo can now use the <strong>PeriodicWave</strong> node as well as custom oscillator waveforms (@kevlu93, #47492).</p>
+<p>We improved the exception error text for numerous web APIs (@jdm, @eachra-bawn, #46960, #47124, #47168, #47580, #47430, #47127).</p>
+<p>We also fixed issues related to many other APIs, including:</p>
+<ul>
+<li>matching other browsers’ treatment of <strong>Access-Control-Allow-Headers</strong> (@yezhizhen, #47600)</li>
+<li>WebCrypto <strong>CryptoKey</strong> usage checks (@kkoyung, #47112, #47141, #47178) and key lengths (@kkoyung, #47452, #47453)</li>
+<li>the missing <strong>TextEvent</strong> interface (@moamenhesham0, @mrobinson, #47391)</li>
+<li>determining referrers when navigating (@mrobinson, #47487)</li>
+<li>evaluating javascript: URLs (@mrobinson, #47486)</li>
+<li>choosing navigation targets (@mrobinson, #47516)</li>
+<li>interacting with cross origin <code>Window</code> and <code>Location</code> object (@mrobinson, #47549)</li>
+<li>adjusting selections in <code>contenteditable</code> (@mrobinson, #47393, #47581, #47581)</li>
+<li>many edge cases around determining dirty roots for incremental layout (@mrobinson, #46906)</li>
+<li>resolving ties in web font matching (@simonwuelker, #47449)</li>
+<li>implement support for the <code>full-width</code>, <code>math-auto</code>, and <code>full-size-kana</code> values for <strong>text-transform</strong> (@SimonSapin, #47160, #47160, #47225), and improved <code>capitlize</code> (@mrobinson, #46910)</li>
+<li>Range.<strong>getClientBoundingRect()</strong>/<strong>getClientRects</strong>() for empty ranges (@yezhizhen, #47143)</li>
+<li>the <strong>Get Element Tag Name</strong> WebDriver command (@yezhizhen, #47216)</li>
+<li>supporting the <strong>touch-action</strong> CSS property (@yezhizhen, #47043)</li>
+</ul>
 <h2 id="new-contributors" tabindex="-1">New contributors <a class="header-anchor" href="#new-contributors">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -318,15 +401,15 @@ Take a look at our <a href="https://starters.servo.org">curated list</a> of issu
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p>Thanks again for your generous support!
-We are now receiving <strong>??? USD/month</strong> (+???% from July) in recurring donations.
+We are now receiving <strong>8128 USD/month</strong> (+3% from July) in recurring donations.
 This helps us cover the cost of our <strong><a href="https://ci0.servo.org">speedy</a> <a href="https://ci1.servo.org">CI</a> <a href="https://ci2.servo.org">and</a> <a href="https://ci3.servo.org">benchmarking</a> <a href="https://ci4.servo.org">servers</a></strong>, one of our latest <strong><a href="https://www.outreachy.org/alums/2026-05/#:~:text=Servo">Outreachy interns</a></strong>, and funding <strong><a href="/twisaug/blog/2026/09/15/one-year-of-sponsorship/">maintainer work</a></strong> that helps more people contribute to Servo.</p>
-<p>Servo is also on <a href="https://thanks.dev">thanks.dev</a>, and already <strong>?? GitHub users</strong> (?? as July) that depend on Servo are sponsoring us there.
+<p>Servo is also on <a href="https://thanks.dev">thanks.dev</a>, and already <strong>36 GitHub users</strong> (+1 from July) that depend on Servo are sponsoring us there.
 If you use Servo libraries like <a href="https://crates.io/crates/url/reverse_dependencies">url</a>, <a href="https://crates.io/crates/html5ever/reverse_dependencies">html5ever</a>, <a href="https://crates.io/crates/selectors/reverse_dependencies">selectors</a>, or <a href="https://crates.io/crates/cssparser/reverse_dependencies">cssparser</a>, signing up for <a href="https://thanks.dev">thanks.dev</a> could be a good way for you (or your employer) to give back to the community.</p>
 <p>We now have <a href="/twisaug/blog/2025/11/21/sponsorship-tiers/"><strong>sponsorship tiers</strong></a> that allow you or your organisation to donate to the Servo project with public acknowlegement of your support.
 If you’re interested in this kind of sponsorship, please contact us at <a href="mailto:join@servo.org">join@servo.org</a>.</p>
 <figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
     <div style="position: relative; text-align: right;">
-        <div style="position: absolute; right: calc(100% - 100% * 7824 / 10000); padding-right: 0.5em;"><strong>7824</strong> USD/month</div>
+        <div style="position: absolute; right: calc(100% - 100% * 7824 / 10000); padding-right: 0.5em;"><strong>8128</strong> USD/month</div>
         <div style="position: absolute; margin-left: calc(100% * 7824 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
         <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
         <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
