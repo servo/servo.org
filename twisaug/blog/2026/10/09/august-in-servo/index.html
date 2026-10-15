@@ -256,7 +256,7 @@
 This has had a huge positive impact on the visual appearance of many websites.</p>
 <p>TODO: figure</p>
 <p>Another visible change is that <strong>text selection</strong> with the mouse now works!
-This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048).</p>
+This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048, #46963).</p>
 <p>TODO: figure</p>
 <p>This release also contains significant improvements to navigation, document loading, and session history, which are some of the <a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history">gnarliest</a> parts of the HTML specification.</p>
 <p>Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293, #47485).
@@ -268,7 +268,8 @@ For non-about:blank content, we also made the document loading phases more relia
 <h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
-<p>TODO</p>
+<p>We upgraded to <strong>SpiderMonkey v153</strong>, which brings many new security and crash fixes to Servo’s JavaScript engine integration (@sagudev, @Gae24, #47489).</p>
+<p>Navigating away from a document that <strong>activated fullscreen mode</strong> now exits fullscreen mode (@shubhamg13, @jdm, #47123).</p>
 <h2 id="real-world-compat" tabindex="-1">Real world compat <a class="header-anchor" href="#real-world-compat">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -324,7 +325,8 @@ We fixed issues with the <code>inserttext</code> command (@Psychpsyo, #47224, #4
 Servo now supports the <code>element</code> attribute, (@shubhamg13, #46553), URLs for video element posters (@shubhamg13, #43376), accurate size information (@shubhamg13, #43378), painting text nodes (@shubhamg13, #47212), and a conformant <code>loadTime</code> attribute (@shubhamg13, #47475).</p>
 <p>There was preparatory work for a future <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet"><strong>AudioWorklet</strong></a> implementation (@niyabits, #46856, #47016, #47199).
 See Niya’s <a href="https://text.tchncs.de/niya/wrapping-up-my-work-on-servos-audioworklet">blog post</a> about her Outreachy project for more details!</p>
-<p>We’ve implemented the <strong>CookieStore</strong> interface behind the <code>--pref dom_cookiestore_enabled</code> command line argument (@Taym95, #47044).</p>
+<p>We’re continuing work on the <strong>ServiceWorker</strong> feature, which can be enabled with <code>--pref dom_serviceworker_enabled</code>.
+This month we implemented the <strong>CookieStore</strong> interface behind the <code>--pref dom_cookiestore_enabled</code> command line argument (@Taym95, #47044) as well as the <strong>Cache</strong> interface (@gterzian, #47220).</p>
 <p>Servo now supports a <strong>disk-backed HTTP cache</strong> that can be enabled with <code>--pref network_http_disk_cache</code> (@Narfinger, #43819).
 This cache persists between runs, but there is not yet any way to clear it.</p>
 <h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
@@ -347,6 +349,8 @@ To perform sampling profiling on Servo, follow the instructions in <a href="http
 <p>Building Servo now requires at least <strong>Clang 19</strong> on all platforms (@jschwe, #47421).
 Additionally, the <code>cargo-ohos</code> tool is now required for building for OpenHarmony (@jschwe, #47334).</p>
 <p>Debug builds on Windows can now complete successfully (@jschwe, #47372).</p>
+<p>Linux arm64 builds have been customized to work on <strong>Raspberry Pi 5</strong> (@mukilan, #47113).
+Any libservo embedders targeting the same platform will require a similar change if they are using jemalloc.</p>
 <h3 id="servoshell" tabindex="-1">servoshell <a class="header-anchor" href="#servoshell">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h3>
@@ -354,7 +358,8 @@ Additionally, the <code>cargo-ohos</code> tool is now required for building for 
 <p>The macOS command key and Windows logo key is now reported as <code>Meta</code> instead of <code>Super</code> (@eachra-bawn, #47330).</p>
 <p>The <strong>Android</strong> port has had many rough edges filed off as part of modernizing it for the Compose UI (@veyndan, #47656, #47491, #47494, #47697, #46955, #47644, #47652, #47276, #47277, #47299, #47439) and converting its implementation to Kotlin (@veyndan, #46926, #46925, #46951, #46965).
 Library consumers are no longer responsible for implementing pause and resume support (@veyndan, #47555).</p>
-<p>Meanwhile, the <strong>OpenHarmony</strong> now supports external keyboards with US keyboard layouts (@jschwe, #47359).</p>
+<p>Meanwhile, the <strong>OpenHarmony</strong> port now supports external keyboards with US keyboard layouts (@jschwe, #47359).
+Additionally, there are now better fallback font selections for CJK characters (@RichardTjokroutomo, #47116, #47664).</p>
 <p>Setting the <code>device_pixel_ratio_override</code> preference is no longer ignored on Android and OpenHarmony (@jschwe, #47081).</p>
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
@@ -362,14 +367,14 @@ Library consumers are no longer responsible for implementing pause and resume su
 <p>There were many small changes this month that <strong>removed unnecessary allocations</strong> (@Narfinger, @jschwe, @yezhizhen, #47264, #47147, #47066, #47249, #47249, #47285, #47307, #47343, #47361, #47395, #47427, #47454, #47474, #47506, #47479, #47530, #47541, #47566, #47509, #47622), as well <strong>reduced GC interactions</strong> leading to better JS performance (@jdm, @Narfinger, @webbeef, @TimvdLippe, @mrobinson, #47513, #47250, #47158, #47165, #47049, #47251, #47510, #46981).</p>
 <p>On platforms that memory map font data (such as OpenHarmony and macOS), we can now save time that would otherwise be spent loading font files from disk (@jschwe, #47029). Similarly, reading system fonts is no longer in the critical path of starting up the engine (@Narfinger, @jdm, #46476).</p>
 <p>There were were also a number of savings in the final binary size (@jschwe, @kkoyung, @Narfinger, @jschwe, #47211, #47214, #47210, #46950).</p>
-<p>We fixed crashes related to media playback (@calvaris, #46891), the 2d canvas renderer (@yezhizhen, #46915), and resolving fonts variants (@simonwuelker, #47356).</p>
+<p>We fixed crashes related to media playback (@calvaris, #46891), the 2d canvas renderer (@yezhizhen, #46915), fonts with negative line gaps (@jschwe, #47374), and resolving fonts variants (@simonwuelker, #47356).</p>
+<p>Canvas renderer worker threads can now be adjusted by the <code>thread_pool_canvas_workers</code> preference, allowing more performance granularity according to embedder needs. (@jschwe, #46691, #47018)</p>
 <p>We’ve continued our long-running effort to use the Rust type system to make Servo’s integration with SpiderMonkey safer and more reliable (@jdm, @treetmitterglad, @Narfinger, @Gae24, #47398, #47296, #47051, #47005, #47323, #47297, #47322, #47368, #47446, #47317).</p>
 <p>We’re also working on statically preventing <a href="https://github.com/servo/servo/issues/39139">a footgun</a> that can lead to uncollectible GC cycles (@Gae24, #47355, #47650).</p>
 <p>Historically, <code>about:memory</code> has reported all memory usage by Rust implementations of JS APIs as one undifferentiated <code>js/malloc-heap</code> number.
 We now break it down by memory usage of nodes in document trees (@pylbrecht, #46931) and interfaces that are not part of the DOM (@jdm, #47531). We also report memory usage for the network stack’s cookie database (@Narfinger, #47248) and the canvas renderer backend (@janeoa, @jdm, #46958).</p>
 <p>We’ve added an <strong>experimental threadboost</strong> mechanism (@jschwe, @mrobinson, #46843, #47027) that has been observed to improve Speedometer results by <strong>50%</strong> and allow canvas rendering to reach 60 FPS.
 This is initially enabled for OpenHarmony, but future expansion to other Linux-based platforms is expected.</p>
-<p>We upgraded to <strong>SpiderMonkey v153</strong>, which brings many new security and crash fixes to Servo’s JavaScript engine integration (@sagudev, @Gae24, #47489).</p>
 <h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -406,14 +411,27 @@ Additionally, <code>BaseAudioContext.decodeAudioData()</code> invokes the error 
 <li>synthesizing font variations from <code>font-style</code> (@simonwuelker, @mrobinson, #46918, #47364)</li>
 <li>removed nonstandard WebDriver-related properties on the global object (@mrobinson, #47542)</li>
 <li>implemented <code>CSSFontFaceRule.style</code> (@simonwuelker, #47388)</li>
-<li>RAR responses are sniffed correctly (@wood-ghost, #47366)</li>
+<li>sniffing RAR responses correctly (@wood-ghost, #47366)</li>
 <li><code>Attribute</code> nodes created during parsing now have the expected namespace prefix (@Ms2ger, #47030)</li>
+<li>zero-sized margins inside of inline boxes (@Loirooriol, #47020)</li>
+<li>incorrect <code>buttons</code> values in pointer capture transitions (@steigeo, #45628)</li>
+<li>empty lists returned by <code>FontFaceSet.load()</code> (@simonwuelker, #47564)</li>
+<li>cancelling more ongoing network requests when performing a navigation (@mrobinson, #47576)</li>
+<li>adding <code>Request.isReloadNavigation</code> and <code>Request.isHistoryNavigation</code> (@Taym95, @yezhizhen, #46917)</li>
+<li>shaping text across inline boxes (@mrobinson, #46829)</li>
+<li>scrollable overflow for <code>position: sticky</code> (@rayguo17, #43766)</li>
+<li>supporting <code>&lt;meta name=color-scheme&gt;</code> (@TimvdLippe, @jdm, #46993)</li>
+<li>fixing hyperlinks for blob: URLs (@TimvdLippe, #47226)</li>
 </ul>
 <h2 id="new-contributors" tabindex="-1">New contributors <a class="header-anchor" href="#new-contributors">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p>A special thanks to the following people for landing their first patch in Servo:</p>
-<p>TODO</p>
+<ul>
+<li>Moamen Hesham (@moamenhesham0, #47391)</li>
+<li>Miles Wirht (@philocalyst, #46996)</li>
+<li>wood-ghost (@wood-ghost, #47366)</li>
+</ul>
 <p>Interested in helping build a web browser?
 Take a look at our <a href="https://starters.servo.org">curated list</a> of issues that are good for new contributors!</p>
 <h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
