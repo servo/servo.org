@@ -89,40 +89,40 @@ Servo now reports positions and sizes for items in the content accessibility tre
 We also report many [ARIA roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles) for web content elements to accessibility toolkits (@mukilan, #47318).
 <details>
 <summary>Full list of supported roles</summary>
-<ul>
-<li>alert
-<li>banner
-<li>blockquote
-<li>caption
-<li>code
-<li>complementary
-<li>contentinfo
-<li>definition
-<li>deletion
-<li>directory
-<li>document
-<li>emphasis
-<li>feed
-<li>figure
-<li>generic
-<li>insertion
-<li>list
-<li>log
-<li>main
-<li>math
-<li>navigation
-<li>none
-<li>note
-<li>paragraph
-<li>presentation
-<li>rowgroup
-<li>search
-<li>status
-<li>strong
-<li>term
-<li>time
-<li>timer
-</ul>
+
+- alert
+- banner
+- blockquote
+- caption
+- code
+- complementary
+- contentinfo
+- definition
+- deletion
+- directory
+- document
+- emphasis
+- feed
+- figure
+- generic
+- insertion
+- list
+- log
+- main
+- math
+- navigation
+- none
+- note
+- paragraph
+- presentation
+- rowgroup
+- search
+- status
+- strong
+- term
+- time
+- timer
+
 </details>
 
 
