@@ -14,7 +14,7 @@ This has had a huge positive impact on the visual appearance of many websites.
 
 TODO: figure
 
-Another visible change is that **text selection** with the mouse now works!
+Another visible change is that interactive **text selection** now works!
 This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048, #46963).
 
 TODO: figure
@@ -22,7 +22,7 @@ TODO: figure
 This release also contains significant improvements to navigation, document loading, and session history, which are some of the [gnarliest](https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history) parts of the HTML specification.
 
 Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293, #47485).
-Meanwhile, any navigation to `about:blank` is now skipped if the initial about:blank document is present (@jdm, #47074).
+Meanwhile, navigations to `about:blank` are skipped if the initial about:blank document is present (@jdm, #47074).
 
 `about:blank` documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a `readyState` of `LOADING` (@mrobinson, #47450).
 Opening auxiliary windows will wait to dispatch the load event until the initial `about:blank` document has [been replaced](https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow) (@jdm, @mrobinson, #47442, #46975).
@@ -42,8 +42,6 @@ Panning gestures initiated by touch inputs now lock to the dominant axis (@yezhi
 This results in more predictable panning when interacting with pages in Servo.
 
 We fixed a crash affecting ([gumroad.com.au](https://gumroad.com.au)) (@lumiscosity, #47266).
-
-
 
 ## Work in progress
 
