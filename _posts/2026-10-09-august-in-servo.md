@@ -15,7 +15,7 @@ This has had a huge positive impact on the visual appearance of many websites.
 TODO: figure
 
 Another visible change is that **text selection** with the mouse now works!
-This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048, #47048).
+This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048).
 
 TODO: figure
 
@@ -25,11 +25,14 @@ Session history traversals (i.e. navigating backwards or forwards in history) no
 Meanwhile, any navigation to `about:blank` is now skipped if the initial about:blank document is present (@jdm, #47074).
 
 `about:blank` documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a `readyState` of `LOADING` (@mrobinson, #47450).
-Opening auxiliary windows will wait to dispatch the load event until the initial `about:blank` document has been replaced (@jdm, @mrobinson, #47442, #46975).
+Opening auxiliary windows will wait to dispatch the load event until the initial `about:blank` document has [been replaced](https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow) (@jdm, @mrobinson, #47442, #46975).
 
-Whoever knew that [loading `about:blank`](https://hsivonen.fi/about-blank/) was [so complicated](https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow)?
+Whoever knew that loading `about:blank` was [so complicated](https://hsivonen.fi/about-blank/)?
+For non-about:blank content, we also made the document loading phases more reliable (@TimvdLippe, @mrobinson, #47426), improved conformance of `javascript:` URL evaluation and navigation target selection (@mrobinson, #47486, #47516), and addressed longstanding compatibility issues with cross-origin `Window` and `Location` objects (@mrobinson, #47549).
 
 ## Security
+
+TODO
 
 ## Real world compat
 
@@ -83,13 +86,20 @@ We also report many [ARIA roles](https://developer.mozilla.org/en-US/docs/Web/Ac
 </ul>
 </details>
 
-We made a lot of progress on the **`LargestContentfulPaint`** performance metric, implemented behind the `largest_contentful_paint_enabled` preference.
+
+Servo's support for **Document.execCommand()** is rapidly improving, and can be enabled with `--pref dom_exec_command_enabled`.
+We fixed issues with the `inserttext` command (@Psychpsyo, #47224, #47306), editing uneditable content (@Psychpsyo, #47362), computing contained nodes (@TimvdLippe, #47429), adjusting selections in `contenteditable` (@mrobinson, #47393, #47581, #47581), and implemented the `indent` and `insertLineBreak` commands (@Psychpsyo, #47416, #47445).
+
+We made a lot of progress on the **LargestContentfulPaint** performance metric, implemented behind the `--pref largest_contentful_paint_enabled` argument.
 Servo now supports the `element` attribute, (@shubhamg13, #46553), URLs for video element posters (@shubhamg13, #43376), accurate size information (@shubhamg13, #43378), painting text nodes (@shubhamg13, #47212), and a conformant `loadTime` attribute (@shubhamg13, #47475).
 
-There was preparatory work for a future [**AudioWorklet**](https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet)** implementation (@niyabits, #46856, #47016, #47016, #47199, #47199).
+There was preparatory work for a future [**AudioWorklet**](https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet) implementation (@niyabits, #46856, #47016, #47199).
 See Niya's [blog post](https://text.tchncs.de/niya/wrapping-up-my-work-on-servos-audioworklet) about her Outreachy project for more details!
 
 We've implemented the **CookieStore** interface behind the `--pref dom_cookiestore_enabled` command line argument (@Taym95, #47044).
+
+Servo now supports a **disk-backed HTTP cache** that can be enabled with `--pref network_http_disk_cache` (@Narfinger, #43819).
+This cache persists between runs, but there is not yet any way to clear it.
 
 ## Embedding API
 
@@ -107,25 +117,31 @@ We've added several new Cargo features reflecting common usage patterns:
 
 ## For users and developers
 
-Debug builds on Windows can now complete successfully (@jschwe, #47372).
-
-**servoshell** for **Android** has had many rough edges filed off as part of modernizing it for the Compose UI (@veyndan, #47656, #47491, #47494, #47697, #46955, #47644, #47652, #47276, #47277, #47299, #47439) and converting its implementation to Kotlin (@veyndan, #46926, #46925, #46951, #46965).
-Library consumers are no longer responsible for implementing pause and resume support (@veyndan, #47555).
-
-**servoshell** for **OpenHarmony** now supports external keyboards with US keyboard layouts (@jschwe, #47359).
-
-Setting the `device_pixel_ratio_override` preference is no longer ignored on Android and OpenHarmony (@jschwe, #47081).
-
 Building Servo now requires at least **Clang 19** on all platforms (@jschwe, #47421).
 Additionally, the `cargo-ohos` tool is now required for building for OpenHarmony (@jschwe, #47334).
 
+Debug builds on Windows can now complete successfully (@jschwe, #47372).
+
+### servoshell
+
+Under **Wayland** and **OpenHarmony**, we now integrate with the system clipboard (@TheZoq2, @yezhizhen, @jschwe, #46938, #47177).
+
+The macOS command key and Windows logo key is now reported as `Meta` instead of `Super` (@eachra-bawn, #47330).
+
+The **Android** port has had many rough edges filed off as part of modernizing it for the Compose UI (@veyndan, #47656, #47491, #47494, #47697, #46955, #47644, #47652, #47276, #47277, #47299, #47439) and converting its implementation to Kotlin (@veyndan, #46926, #46925, #46951, #46965).
+Library consumers are no longer responsible for implementing pause and resume support (@veyndan, #47555).
+
+Meanwhile, the **OpenHarmony** now supports external keyboards with US keyboard layouts (@jschwe, #47359).
+
+Setting the `device_pixel_ratio_override` preference is no longer ignored on Android and OpenHarmony (@jschwe, #47081).
+
 ## Performance and stability
 
-There were many small changes this month that removed unnecessary allocations (@Narfinger, @jschwe, @yezhizhen, #47264, #47147, #47066, #47249, #47249, #47285, #47307, #47343, #47361, #47395, #47427, #47454, #47474, #47506, #47479, #47530, #47541, #47566, #47509, #47622), as well reduced GC interactions leading to better JS performance (@jdm, @Narfinger, @webbeef, @TimvdLippe, @mrobinson, #47513, #47250, #47158, #47165, #47049, #47251, #47510).
+There were many small changes this month that **removed unnecessary allocations** (@Narfinger, @jschwe, @yezhizhen, #47264, #47147, #47066, #47249, #47249, #47285, #47307, #47343, #47361, #47395, #47427, #47454, #47474, #47506, #47479, #47530, #47541, #47566, #47509, #47622), as well **reduced GC interactions** leading to better JS performance (@jdm, @Narfinger, @webbeef, @TimvdLippe, @mrobinson, #47513, #47250, #47158, #47165, #47049, #47251, #47510, #46981).
 
-On platforms that memory map font data (such as OpenHarmony and macOS), we can now save time that would otherwise be spent loading font files from disk (@jschwe, #47029).
+On platforms that memory map font data (such as OpenHarmony and macOS), we can now save time that would otherwise be spent loading font files from disk (@jschwe, #47029). Similarly, reading system fonts is no longer in the critical path of starting up the engine (@Narfinger, @jdm, #46476).
 
-There were were also a number of improvements in final binary size (@jschwe, @kkoyung, @Narfinger, @jschwe, #47211, #47214, #47210, #46950).
+There were were also a number of savings in the final binary size (@jschwe, @kkoyung, @Narfinger, @jschwe, #47211, #47214, #47210, #46950).
 
 We fixed crashes related to media playback (@calvaris, #46891), the 2d canvas renderer (@yezhizhen, #46915), and resolving fonts variants (@simonwuelker, #47356).
 
@@ -134,46 +150,57 @@ We've continued our long-running effort to use the Rust type system to make Serv
 We're also working on statically preventing [a footgun](https://github.com/servo/servo/issues/39139) that can lead to uncollectible GC cycles (@Gae24, #47355, #47650).
 
 Historically, `about:memory` has reported all memory usage by Rust implementations of JS APIs as one undifferentiated `js/malloc-heap` number.
-We now break it down by memory usage of nodes in document trees (@pylbrecht, #46931) and interfaces that are not part of the DOM (@jdm, #47531).
+We now break it down by memory usage of nodes in document trees (@pylbrecht, #46931) and interfaces that are not part of the DOM (@jdm, #47531). We also report memory usage for the network stack's cookie database (@Narfinger, #47248) and the canvas renderer backend (@janeoa, @jdm, #46958).
 
 We've added an **experimental threadboost** mechanism (@jschwe, @mrobinson, #46843, #47027) that has been observed to improve Speedometer results by **50%** and allow canvas rendering to reach 60 FPS.
 This is initially enabled for OpenHarmony, but future expansion to other Linux-based platforms is expected.
 
-We upgraded to SpiderMonkey v153, which brings many new security and crash fixes to Servo's JavaScript engine integration (@sagudev, @Gae24, #47489).
+We upgraded to **SpiderMonkey v153**, which brings many new security and crash fixes to Servo's JavaScript engine integration (@sagudev, @Gae24, #47489).
 
 ## More on the web platform
 
 We upgraded to [resvg 0.48](https://github.com/linebender/resvg/blob/main/CHANGELOG.md#0480-2026-07-31), fixing **many issues with SVG images** with missing width/height attributes that specified a `viewBox` (@nicoburns, #46937).
 
-Upgrading to [Taffy 0.14](https://github.com/DioxusLabs/taffy/blob/main/CHANGELOG.md#0130) fixed a number of CSS grid-related crashes, support for grid names, better intrinsic sizing, and improved performance (@nicoburns, #47031, #47493).
+Upgrading to [Taffy 0.14](https://github.com/DioxusLabs/taffy/blob/main/CHANGELOG.md#0130) fixed a number of **CSS grid-related crashes**, support for grid names, better intrinsic sizing, and improved performance (@nicoburns, #47031, #47493).
 We also fixed some issues in the Taffy grid integration for more accurate baselines (@nicoburns, #47518).
 
-We also upgraded our `stylo` dependency (@jdm, @nicoburns, @TimvdLippe, #47042, #47256, #47405), giving us:
-* accurate incremental layout with **clip-path** changes
-* support for the **animation-composition** and **color-scheme** properties
+We upgraded our `stylo` dependency (@jdm, @nicoburns, @TimvdLippe, #47042, #47256, #47405), giving us accurate incremental layout with **clip-path** changes and support for the **animation-composition** and **color-scheme** properties.
 
-Our media playback is improved; we fixed several issues around HTMLMediaElement.canPlayType so Servo now reports that MP4 content is playable (@jdm, #47612, #47641, #47670).
+We also implemented `full-width`, `math-auto`, and `full-size-kana` values for **text-transform** (@SimonSapin, #47160, #47160, #47225), and improved `capitalize` (@mrobinson, #46910).
+
+Our media playback has improved; we fixed several issues around `HTMLMediaElement.canPlayType()` that allow Servo to report that MP4 content is playable (@jdm, #47612, #47641, #47670).
+
+Input elements with the `autofocus` property inside of a `<dialog>` now receive focus when that dialog is opened (@skyz1, @mrobinson, #45826).
 
 WebAudio content in Servo can now use the **PeriodicWave** node as well as custom oscillator waveforms (@kevlu93, #47492).
+Additionally, `BaseAudioContext.decodeAudioData()` invokes the error callback when a detached buffer is encountered (@amittenak47, @jdm, #46870).
 
 We improved the exception error text for numerous web APIs (@jdm, @eachra-bawn, #46960, #47124, #47168, #47580, #47430, #47127).
 
 We also fixed issues related to many other APIs, including:
+* firing `focusin` and `focusout` events (@RichardTjokroutomo, @yezhizhen, #46980)
 * matching other browsers' treatment of **Access-Control-Allow-Headers** (@yezhizhen, #47600)
 * WebCrypto **CryptoKey** usage checks (@kkoyung, #47112, #47141, #47178) and key lengths (@kkoyung, #47452, #47453)
 * the missing **TextEvent** interface (@moamenhesham0, @mrobinson, #47391)
 * determining referrers when navigating (@mrobinson, #47487)
-* evaluating javascript: URLs (@mrobinson, #47486)
-* choosing navigation targets (@mrobinson, #47516)
-* interacting with cross origin `Window` and `Location` object (@mrobinson, #47549)
-* adjusting selections in `contenteditable` (@mrobinson, #47393, #47581, #47581)
+* reading `Window.name` inside of iframes (@TimvdLippe, @jdm, #47270)
+* implementing `Location.ancestorOrigins` (@TimvdLippe, @mrobinson, #46056)
 * many edge cases around determining dirty roots for incremental layout (@mrobinson, #46906)
+* edge cases around `Node.compareDocumentPosition` (@SimonSapin, #46886)
 * resolving ties in web font matching (@simonwuelker, #47449)
-* implement support for the `full-width`, `math-auto`, and `full-size-kana` values for **text-transform** (@SimonSapin, #47160, #47160, #47225), and improved `capitlize` (@mrobinson, #46910)
 * Range.**getClientBoundingRect()**/**getClientRects**() for empty ranges (@yezhizhen, #47143)
 * the **Get Element Tag Name** WebDriver command (@yezhizhen, #47216)
 * supporting the **touch-action** CSS property (@yezhizhen, #47043)
-
+* JS module fetching failures can now be retried (@Gae24, #46919)
+* implementing `requestAnimationFrame` in worker globals (@Taym95, #46232)
+* `KeyEvent.keyCode` values for many nonprintable keys now match other browsers (@eachra-bawn, #47461)
+* making `Performance.timing` return a `PerformanceTiming` object (@jdm, @aniebietafia, #46990)
+* preloading image source sets with `<link>` (@lumiscosity, @TimvdLippe, #47103)
+* synthesizing font variations from `font-style` (@simonwuelker, @mrobinson, #46918, #47364)
+* removed nonstandard WebDriver-related properties on the global object (@mrobinson, #47542)
+* implemented `CSSFontFaceRule.style` (@simonwuelker, #47388)
+* RAR responses are sniffed correctly (@wood-ghost, #47366)
+* `Attribute` nodes created during parsing now have the expected namespace prefix (@Ms2ger, #47030)
 
 
 ## New contributors
