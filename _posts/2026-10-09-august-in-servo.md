@@ -84,9 +84,9 @@ We’re interested to hear how well your favourite websites run in Servo! Report
 
 ## Work in progress
 
-Accessibility support in Servo continues to make great strides; it can be enabled with the `--pref accessibility_enabled` command line argument.
-Servo now reports positions and sizes for items in the content accessibility tree (@philocalyst, @alice, @mrobinson, #46996), allowing macOS VoiceOver to work more reliably.
-We also report many [ARIA roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles) for web content elements to accessibility toolkits (@mukilan, #47318).
+**Accessibility support** in Servo continues to make great strides; it can be enabled with the `--pref accessibility_enabled` command line argument.
+Servo now reports **positions and sizes** for items in the content accessibility tree (@philocalyst, @alice, @mrobinson, #46996), allowing macOS VoiceOver to work more reliably.
+We also report many [**ARIA roles**](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles) for web content elements to accessibility toolkits (@mukilan, #47318).
 <details>
 <summary>Full list of supported roles</summary>
 
@@ -127,10 +127,10 @@ We also report many [ARIA roles](https://developer.mozilla.org/en-US/docs/Web/Ac
 
 
 Servo's support for **Document.execCommand()** is rapidly improving, and can be enabled with `--pref dom_exec_command_enabled`.
-We fixed issues with the `inserttext` command (@Psychpsyo, #47224, #47306), editing uneditable content (@Psychpsyo, #47362), computing contained nodes (@TimvdLippe, #47429), adjusting selections in `contenteditable` (@mrobinson, #47393, #47581, #47581), and implemented the `indent` and `insertLineBreak` commands (@Psychpsyo, #47416, #47445).
+We fixed issues with the **inserttext** command (@Psychpsyo, #47224, #47306), editing uneditable content (@Psychpsyo, #47362), computing contained nodes (@TimvdLippe, #47429), adjusting selections in **contenteditable** (@mrobinson, #47393, #47581, #47581), and implemented the **indent** and **insertLineBreak** commands (@Psychpsyo, #47416, #47445).
 
 We made a lot of progress on the **LargestContentfulPaint** performance metric, implemented behind the `--pref largest_contentful_paint_enabled` argument.
-Servo now supports the `element` attribute, (@shubhamg13, #46553), URLs for video element posters (@shubhamg13, #43376), accurate size information (@shubhamg13, #43378), painting text nodes (@shubhamg13, #47212), and a conformant `loadTime` attribute (@shubhamg13, #47475).
+Servo now supports the **element** and **loadTime** attributes, (@shubhamg13, #46553, #47475), URLs for video element posters (@shubhamg13, #43376), accurate size information (@shubhamg13, #43378), painting text nodes (@shubhamg13, #47212).
 
 There was preparatory work for a future [**AudioWorklet**](https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet) implementation (@niyabits, #46856, #47016, #47199).
 See Niya's [blog post](https://text.tchncs.de/niya/wrapping-up-my-work-on-servos-audioworklet) about her Outreachy project for more details!
@@ -171,8 +171,8 @@ Under **Wayland** and **OpenHarmony**, we now integrate with the system clipboar
 
 The macOS command key and Windows logo key is now reported as `Meta` instead of `Super` (@eachra-bawn, #47330).
 
-The **Android** port has had many rough edges filed off as part of modernizing it for the Compose UI (@veyndan, #47656, #47491, #47494, #47697, #46955, #47644, #47652, #47276, #47277, #47299, #47439) and converting its implementation to Kotlin (@veyndan, #46926, #46925, #46951, #46965).
-Library consumers are no longer responsible for implementing pause and resume support (@veyndan, #47555).
+The **Android** port has had many rough edges filed off as part of modernizing it for the **Compose UI** (@veyndan, #47656, #47491, #47494, #47697, #46955, #47644, #47652, #47276, #47277, #47299, #47439) and converting its implementation to Kotlin (@veyndan, #46926, #46925, #46951, #46965).
+Library consumers are no longer responsible for implementing **pause and resume** support (@veyndan, #47555).
 
 Meanwhile, the **OpenHarmony** port now supports external keyboards with US keyboard layouts (@jschwe, #47359).
 Additionally, there are now better fallback font selections for CJK characters (@RichardTjokroutomo, #47116, #47664).
@@ -181,7 +181,8 @@ Setting the `device_pixel_ratio_override` preference is no longer ignored on And
 
 ## Performance and stability
 
-There were many small changes this month that **removed unnecessary allocations** (@Narfinger, @jschwe, @yezhizhen, #47264, #47147, #47066, #47249, #47249, #47285, #47307, #47343, #47361, #47395, #47427, #47454, #47474, #47506, #47479, #47530, #47541, #47566, #47509, #47622), as well **reduced GC interactions** leading to better JS performance (@jdm, @Narfinger, @webbeef, @TimvdLippe, @mrobinson, #47513, #47250, #47158, #47165, #47049, #47251, #47510, #46981).
+There were many small changes this month that **removed unnecessary allocations** (@Narfinger, @jschwe, @yezhizhen, #47264, #47147, #47066, #47249, #47249, #47285, #47307, #47343, #47361, #47395, #47427, #47454, #47474, #47506, #47479, #47530, #47541, #47566, #47509, #47622).
+We also **reduced GC interactions** leading to better JS performance (@jdm, @Narfinger, @webbeef, @TimvdLippe, @mrobinson, #47513, #47250, #47158, #47165, #47049, #47251, #47510, #46981).
 
 On platforms that memory map font data (such as OpenHarmony and macOS), we can now save time that would otherwise be spent loading font files from disk (@jschwe, #47029).
 Similarly, reading system fonts is no longer in the critical path of starting up the engine (@Narfinger, @jdm, #46476).
@@ -192,11 +193,9 @@ We **fixed crashes** related to media playback (@calvaris, #46891), the 2d canva
 
 Canvas renderer worker threads can now be adjusted by the `thread_pool_canvas_workers` preference, allowing more performance granularity according to embedder needs. (@jschwe, #46691, #47018)
 
-We've continued our long-running effort to use the Rust type system to make Servo's integration with SpiderMonkey **safer and more reliable** (@jdm, @treetmitterglad, @Narfinger, @Gae24, #47398, #47296, #47051, #47005, #47323, #47297, #47322, #47368, #47446, #47317).
+We've continued our long-running effort to use the Rust type system to make Servo's integration with SpiderMonkey **safer and more reliable** (@jdm, @treetmitterglad, @Narfinger, @Gae24, #47398, #47296, #47051, #47005, #47323, #47297, #47322, #47368, #47446, #47317). We're also working on statically preventing [a footgun](https://github.com/servo/servo/issues/39139) that can lead to uncollectible GC cycles and leaking memory (@Gae24, #47355, #47650).
 
-We're also working on statically preventing [a footgun](https://github.com/servo/servo/issues/39139) that can lead to uncollectible GC cycles and leaking memory (@Gae24, #47355, #47650).
-
-Historically, `about:memory` has reported all memory usage by Rust implementations of JS APIs as one undifferentiated `js/malloc-heap` number.
+Historically, **about:memory** has reported all memory usage by Rust implementations of JS APIs as one undifferentiated `js/malloc-heap` number.
 We now break it down by memory usage of nodes in document trees (@pylbrecht, #46931) and interfaces that are not part of the DOM (@jdm, #47531). We also report memory usage for the network stack's cookie database (@Narfinger, #47248) and the canvas renderer backend (@janeoa, @jdm, #46958).
 
 We've added an **experimental threadboost** mechanism (@jschwe, @mrobinson, #46843, #47027) that has been observed to improve Speedometer results by **50%** and allow canvas rendering to reach 60 FPS.
@@ -209,7 +208,7 @@ We upgraded to [resvg 0.48](https://github.com/linebender/resvg/blob/main/CHANGE
 Upgrading to [Taffy 0.14](https://github.com/DioxusLabs/taffy/blob/main/CHANGELOG.md#0130) fixed a number of **CSS grid-related crashes**, support for grid names, better intrinsic sizing, and improved performance (@nicoburns, #47031, #47493).
 We also fixed some issues in the Taffy grid integration for more accurate baselines (@nicoburns, #47518).
 
-Our media playback has improved; we fixed several issues around `HTMLMediaElement.canPlayType()` that allow Servo to report that **MP4 content is playable** (@jdm, #47612, #47641, #47670).
+Our media playback has improved; we fixed several issues around **canPlayType()** on **HTMLMediaElement** that allow Servo to report that **MP4 content is playable** (@jdm, #47612, #47641, #47670).
 
 Input elements with the `autofocus` property inside of a `<dialog>` now receive focus when that dialog is opened (@skyz1, @mrobinson, #45826).
 
