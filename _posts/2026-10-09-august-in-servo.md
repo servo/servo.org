@@ -19,6 +19,25 @@ This is the result of lots of work across our script and layout code to ensure i
 
 TODO: figure
 
+We’ve shipped several new web platform features:
+
+- **touch-action** (@yezhizhen, #47043)
+- **animation-composition** (@nicoburns, #47405)
+- **color-scheme** (@TimvdLippe, #47042)
+- **full-width**, **math-auto**, **full-size-kana** values for **text-transform** (@SimonSapin, #47160, #47160, #47225)
+
+Plus a bunch of new DOM APIs:
+
+- **requestAnimationFrame()** on **DedicatedWorkerGlobalScope** (@Taym95, #46232)
+- **ancestorOrigins** on **Location** (@TimvdLippe, @mrobinson, #46056)
+- **imagesrcset** and **imagesizes** on `<link rel=preload as=image>` (@lumiscosity, @TimvdLippe, #47103)
+- **style** on **CSSFontFaceRule** (@simonwuelker, #47388)
+- **isReloadNavigation** and **isHistoryNavigation** on **Request** (@Taym95, @yezhizhen, #46917)
+- **name=color-scheme** on `<meta>` (@TimvdLippe, @jdm, #46993)
+- **focusin** and **focusout** events (@RichardTjokroutomo, @yezhizhen, #46980)
+- **new TextEvent()** (@moamenhesham0, @mrobinson, #47391)
+- **PeriodicWave** and **createPeriodicWave** on **BaseAudioContext** (@kevlu93, #47492)
+
 This release also contains significant improvements to navigation, document loading, and session history, which are some of the [gnarliest](https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history) parts of the HTML specification.
 
 Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293, #47485).
@@ -29,6 +48,24 @@ Opening auxiliary windows will wait to dispatch the load event until the initial
 
 Whoever knew that loading `about:blank` was [so complicated](https://hsivonen.fi/about-blank/)?
 For non-about:blank content, we also made the document loading phases more reliable (@TimvdLippe, @mrobinson, #47426), improved conformance of `javascript:` URL evaluation and navigation target selection (@mrobinson, #47486, #47516), and addressed longstanding compatibility issues with cross-origin `Window` and `Location` objects (@mrobinson, #47549).
+
+This is another big update, so here’s an outline:
+
+- [**Security**](#security)
+
+- [**Real world compat**](#real-world-compat)
+
+- [**Work in progress**](#work-in-progress)
+
+- [**Embedding API**](#embedding-api)
+
+- [**For users and developers**](#for-users-and-developers)
+
+- [**More on the web platform**](#more-on-the-web-platform)
+
+- [**Performance and stability**](#performance-and-stability)
+
+- [**New contributors**](#new-contributors)
 
 ## Security
 
@@ -42,6 +79,8 @@ Panning gestures initiated by touch inputs now lock to the dominant axis (@yezhi
 This results in more predictable panning when interacting with pages in Servo.
 
 We fixed a crash affecting ([gumroad.com.au](https://gumroad.com.au)) (@lumiscosity, #47266).
+
+We’re interested to hear how well your favourite websites run in Servo! Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341), and failures [in our GitHub issues](https://github.com/servo/servo/issues).
 
 ## Work in progress
 
@@ -144,17 +183,18 @@ Setting the `device_pixel_ratio_override` preference is no longer ignored on And
 
 There were many small changes this month that **removed unnecessary allocations** (@Narfinger, @jschwe, @yezhizhen, #47264, #47147, #47066, #47249, #47249, #47285, #47307, #47343, #47361, #47395, #47427, #47454, #47474, #47506, #47479, #47530, #47541, #47566, #47509, #47622), as well **reduced GC interactions** leading to better JS performance (@jdm, @Narfinger, @webbeef, @TimvdLippe, @mrobinson, #47513, #47250, #47158, #47165, #47049, #47251, #47510, #46981).
 
-On platforms that memory map font data (such as OpenHarmony and macOS), we can now save time that would otherwise be spent loading font files from disk (@jschwe, #47029). Similarly, reading system fonts is no longer in the critical path of starting up the engine (@Narfinger, @jdm, #46476).
+On platforms that memory map font data (such as OpenHarmony and macOS), we can now save time that would otherwise be spent loading font files from disk (@jschwe, #47029).
+Similarly, reading system fonts is no longer in the critical path of starting up the engine (@Narfinger, @jdm, #46476).
 
 There were were also a number of savings in the final binary size (@jschwe, @kkoyung, @Narfinger, @jschwe, #47211, #47214, #47210, #46950).
 
-We fixed crashes related to media playback (@calvaris, #46891), the 2d canvas renderer (@yezhizhen, #46915), fonts with negative line gaps (@jschwe, #47374), and resolving fonts variants (@simonwuelker, #47356).
+We **fixed crashes** related to media playback (@calvaris, #46891), the 2d canvas renderer (@yezhizhen, #46915), fonts with negative line gaps (@jschwe, #47374), and resolving fonts variants (@simonwuelker, #47356).
 
 Canvas renderer worker threads can now be adjusted by the `thread_pool_canvas_workers` preference, allowing more performance granularity according to embedder needs. (@jschwe, #46691, #47018)
 
-We've continued our long-running effort to use the Rust type system to make Servo's integration with SpiderMonkey safer and more reliable (@jdm, @treetmitterglad, @Narfinger, @Gae24, #47398, #47296, #47051, #47005, #47323, #47297, #47322, #47368, #47446, #47317).
+We've continued our long-running effort to use the Rust type system to make Servo's integration with SpiderMonkey **safer and more reliable** (@jdm, @treetmitterglad, @Narfinger, @Gae24, #47398, #47296, #47051, #47005, #47323, #47297, #47322, #47368, #47446, #47317).
 
-We're also working on statically preventing [a footgun](https://github.com/servo/servo/issues/39139) that can lead to uncollectible GC cycles (@Gae24, #47355, #47650).
+We're also working on statically preventing [a footgun](https://github.com/servo/servo/issues/39139) that can lead to uncollectible GC cycles and leaking memory (@Gae24, #47355, #47650).
 
 Historically, `about:memory` has reported all memory usage by Rust implementations of JS APIs as one undifferentiated `js/malloc-heap` number.
 We now break it down by memory usage of nodes in document trees (@pylbrecht, #46931) and interfaces that are not part of the DOM (@jdm, #47531). We also report memory usage for the network stack's cookie database (@Narfinger, #47248) and the canvas renderer backend (@janeoa, @jdm, #46958).
@@ -169,52 +209,38 @@ We upgraded to [resvg 0.48](https://github.com/linebender/resvg/blob/main/CHANGE
 Upgrading to [Taffy 0.14](https://github.com/DioxusLabs/taffy/blob/main/CHANGELOG.md#0130) fixed a number of **CSS grid-related crashes**, support for grid names, better intrinsic sizing, and improved performance (@nicoburns, #47031, #47493).
 We also fixed some issues in the Taffy grid integration for more accurate baselines (@nicoburns, #47518).
 
-We upgraded our `stylo` dependency (@jdm, @nicoburns, @TimvdLippe, #47042, #47256, #47405), giving us accurate incremental layout with **clip-path** changes and support for the **animation-composition** and **color-scheme** properties.
-
-We also implemented `full-width`, `math-auto`, and `full-size-kana` values for **text-transform** (@SimonSapin, #47160, #47160, #47225), and improved `capitalize` (@mrobinson, #46910).
-
-Our media playback has improved; we fixed several issues around `HTMLMediaElement.canPlayType()` that allow Servo to report that MP4 content is playable (@jdm, #47612, #47641, #47670).
+Our media playback has improved; we fixed several issues around `HTMLMediaElement.canPlayType()` that allow Servo to report that **MP4 content is playable** (@jdm, #47612, #47641, #47670).
 
 Input elements with the `autofocus` property inside of a `<dialog>` now receive focus when that dialog is opened (@skyz1, @mrobinson, #45826).
-
-WebAudio content in Servo can now use the **PeriodicWave** node as well as custom oscillator waveforms (@kevlu93, #47492).
-Additionally, `BaseAudioContext.decodeAudioData()` invokes the error callback when a detached buffer is encountered (@amittenak47, @jdm, #46870).
 
 We improved the exception error text for numerous web APIs (@jdm, @eachra-bawn, #46960, #47124, #47168, #47580, #47430, #47127).
 
 We also fixed issues related to many other APIs, including:
-* firing `focusin` and `focusout` events (@RichardTjokroutomo, @yezhizhen, #46980)
 * matching other browsers' treatment of **Access-Control-Allow-Headers** (@yezhizhen, #47600)
 * WebCrypto **CryptoKey** usage checks (@kkoyung, #47112, #47141, #47178) and key lengths (@kkoyung, #47452, #47453)
-* the missing **TextEvent** interface (@moamenhesham0, @mrobinson, #47391)
 * determining referrers when navigating (@mrobinson, #47487)
 * reading `Window.name` inside of iframes (@TimvdLippe, @jdm, #47270)
-* implementing `Location.ancestorOrigins` (@TimvdLippe, @mrobinson, #46056)
 * many edge cases around determining dirty roots for incremental layout (@mrobinson, #46906)
 * edge cases around `Node.compareDocumentPosition` (@SimonSapin, #46886)
 * resolving ties in web font matching (@simonwuelker, #47449)
 * Range.**getClientBoundingRect()**/**getClientRects**() for empty ranges (@yezhizhen, #47143)
 * the **Get Element Tag Name** WebDriver command (@yezhizhen, #47216)
-* supporting the **touch-action** CSS property (@yezhizhen, #47043)
 * JS module fetching failures can now be retried (@Gae24, #46919)
-* implementing `requestAnimationFrame` in worker globals (@Taym95, #46232)
-* `KeyEvent.keyCode` values for many nonprintable keys now match other browsers (@eachra-bawn, #47461)
+* `KeyEvent.keyCode` values for many **nonprintable keys** now match other browsers (@eachra-bawn, #47461)
 * making `Performance.timing` return a `PerformanceTiming` object (@jdm, @aniebietafia, #46990)
-* preloading image source sets with `<link>` (@lumiscosity, @TimvdLippe, #47103)
 * synthesizing font variations from `font-style` (@simonwuelker, @mrobinson, #46918, #47364)
 * removed nonstandard WebDriver-related properties on the global object (@mrobinson, #47542)
-* implemented `CSSFontFaceRule.style` (@simonwuelker, #47388)
 * sniffing RAR responses correctly (@wood-ghost, #47366)
 * `Attribute` nodes created during parsing now have the expected namespace prefix (@Ms2ger, #47030)
 * zero-sized margins inside of inline boxes (@Loirooriol, #47020)
 * incorrect `buttons` values in pointer capture transitions (@steigeo, #45628)
 * empty lists returned by `FontFaceSet.load()` (@simonwuelker, #47564)
 * cancelling more ongoing network requests when performing a navigation (@mrobinson, #47576)
-* adding `Request.isReloadNavigation` and `Request.isHistoryNavigation` (@Taym95, @yezhizhen, #46917)
 * shaping text across inline boxes (@mrobinson, #46829)
 * scrollable overflow for `position: sticky` (@rayguo17, #43766)
-* supporting `<meta name=color-scheme>` (@TimvdLippe, @jdm, #46993)
 * fixing hyperlinks for blob: URLs (@TimvdLippe, #47226)
+* improving **text-transform: capitalize** (@mrobinson, #46910)
+* firing the error callback for `BaseAudioContext.decodeAudioData()` (@amittenak47, @jdm, #46870)
 
 ## New contributors
 
