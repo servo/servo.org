@@ -110,10 +110,10 @@ Plus a bunch of new DOM APIs:
 
 - **requestAnimationFrame()** on **DedicatedWorkerGlobalScope** (@Taym95, #46232)
 - **ancestorOrigins** on **Location** (@TimvdLippe, @mrobinson, #46056)
-- **imagesrcset** and **imagesizes** on `<link rel=preload as=image>` (@lumiscosity, @TimvdLippe, #47103)
+- **imagesrcset** and **imagesizes** on `&lt;link rel=preload as=image>` (@lumiscosity, @TimvdLippe, #47103)
 - **style** on **CSSFontFaceRule** (@simonwuelker, #47388)
 - **isReloadNavigation** and **isHistoryNavigation** on **Request** (@Taym95, @yezhizhen, #46917)
-- **name=color-scheme** on `<meta>` (@TimvdLippe, @jdm, #46993)
+- **name=color-scheme** on `&lt;meta>` (@TimvdLippe, @jdm, #46993)
 - **focusin** and **focusout** events (@RichardTjokroutomo, @yezhizhen, #46980)
 - **new TextEvent()** (@moamenhesham0, @mrobinson, #47391)
 - **PeriodicWave** and **createPeriodicWave** on **BaseAudioContext** (@kevlu93, #47492)
@@ -210,7 +210,7 @@ Servo's support for **Document.execCommand()** is rapidly improving, and can be 
 We fixed issues with the **inserttext** command (@Psychpsyo, #47224, #47306), editing uneditable content (@Psychpsyo, #47362), computing contained nodes (@TimvdLippe, #47429), adjusting selections in **contenteditable** (@mrobinson, #47393, #47581, #47581), and implemented the **indent** and **insertLineBreak** commands (@Psychpsyo, #47416, #47445).
 
 We made a lot of progress on the **LargestContentfulPaint** performance metric, implemented behind the `--pref largest_contentful_paint_enabled` argument.
-Servo now supports the **element** and **loadTime** attributes, (@shubhamg13, #46553, #47475), URLs for video element posters (@shubhamg13, #43376), accurate size information (@shubhamg13, #43378), painting text nodes (@shubhamg13, #47212).
+Servo now supports the **element** and **loadTime** attributes, (@shubhamg13, #46553, #47475), URLs for video element posters (@shubhamg13, #43376), accurate size information (@shubhamg13, #43378), and painting text nodes (@shubhamg13, #47212).
 
 There was preparatory work for a future [**AudioWorklet**](https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet) implementation (@niyabits, #46856, #47016, #47199).
 See Niya's [blog post](https://text.tchncs.de/niya/wrapping-up-my-work-on-servos-audioworklet) about her Outreachy project for more details!
@@ -262,6 +262,7 @@ Setting the `device_pixel_ratio_override` preference is no longer ignored on And
 ## Performance and stability
 
 There were many small changes this month that **removed unnecessary allocations** (@Narfinger, @jschwe, @yezhizhen, #47264, #47147, #47066, #47249, #47249, #47285, #47307, #47343, #47361, #47395, #47427, #47454, #47474, #47506, #47479, #47530, #47541, #47566, #47509, #47622).
+
 We also **reduced GC interactions** leading to better JS performance (@jdm, @Narfinger, @webbeef, @TimvdLippe, @mrobinson, #47513, #47250, #47158, #47165, #47049, #47251, #47510, #46981).
 
 On platforms that memory map font data (such as OpenHarmony and macOS), we can now save time that would otherwise be spent loading font files from disk (@jschwe, #47029).
@@ -290,7 +291,7 @@ We also fixed some issues in the Taffy grid integration for more accurate baseli
 
 Our media playback has improved; we fixed several issues around **canPlayType()** on **HTMLMediaElement** that allow Servo to report that **MP4 content is playable** (@jdm, #47612, #47641, #47670).
 
-Input elements with the `autofocus` property inside of a `<dialog>` now receive focus when that dialog is opened (@skyz1, @mrobinson, #45826).
+Input elements with the `autofocus` property inside of a `&lt;dialog>` now receive focus when that dialog is opened (@skyz1, @mrobinson, #45826).
 
 We improved the exception error text for numerous web APIs (@jdm, @eachra-bawn, #46960, #47124, #47168, #47580, #47430, #47127).
 
@@ -298,28 +299,28 @@ We also fixed issues related to many other APIs, including:
 * matching other browsers' treatment of **Access-Control-Allow-Headers** (@yezhizhen, #47600)
 * WebCrypto **CryptoKey** usage checks (@kkoyung, #47112, #47141, #47178) and key lengths (@kkoyung, #47452, #47453)
 * determining referrers when navigating (@mrobinson, #47487)
-* reading `Window.name` inside of iframes (@TimvdLippe, @jdm, #47270)
+* reading **name** on **Window** inside of iframes (@TimvdLippe, @jdm, #47270)
 * many edge cases around determining dirty roots for incremental layout (@mrobinson, #46906)
-* edge cases around `Node.compareDocumentPosition` (@SimonSapin, #46886)
+* edge cases around **compareDocumentPosition** on **Node** (@SimonSapin, #46886)
 * resolving ties in web font matching (@simonwuelker, #47449)
 * Range.**getClientBoundingRect()**/**getClientRects**() for empty ranges (@yezhizhen, #47143)
-* the **Get Element Tag Name** WebDriver command (@yezhizhen, #47216)
 * JS module fetching failures can now be retried (@Gae24, #46919)
 * `KeyEvent.keyCode` values for many **nonprintable keys** now match other browsers (@eachra-bawn, #47461)
-* making `Performance.timing` return a `PerformanceTiming` object (@jdm, @aniebietafia, #46990)
+* making **timing** on **Performance** return a `PerformanceTiming` object (@jdm, @aniebietafia, #46990)
 * synthesizing font variations from `font-style` (@simonwuelker, @mrobinson, #46918, #47364)
+* the **Get Element Tag Name** WebDriver command (@yezhizhen, #47216)
 * removed nonstandard WebDriver-related properties on the global object (@mrobinson, #47542)
 * sniffing RAR responses correctly (@wood-ghost, #47366)
 * `Attribute` nodes created during parsing now have the expected namespace prefix (@Ms2ger, #47030)
+* improving **text-transform: capitalize** (@mrobinson, #46910)
 * zero-sized margins inside of inline boxes (@Loirooriol, #47020)
 * incorrect `buttons` values in pointer capture transitions (@steigeo, #45628)
-* empty lists returned by `FontFaceSet.load()` (@simonwuelker, #47564)
+* empty lists returned by **load()** on **FontFaceSet** (@simonwuelker, #47564)
 * cancelling more ongoing network requests when performing a navigation (@mrobinson, #47576)
 * shaping text across inline boxes (@mrobinson, #46829)
 * scrollable overflow for `position: sticky` (@rayguo17, #43766)
 * fixing hyperlinks for blob: URLs (@TimvdLippe, #47226)
-* improving **text-transform: capitalize** (@mrobinson, #46910)
-* firing the error callback for `BaseAudioContext.decodeAudioData()` (@amittenak47, @jdm, #46870)
+* firing the error callback for **decodeAudioData** on **BaseAudioContext** (@amittenak47, @jdm, #46870)
 
 ## New contributors
 
