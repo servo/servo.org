@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>August in Servo: CSS Grid, text selection, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="August in Servo: CSS Grid, text selection, and more! - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  
+
+  
+  <meta name="description" content="Plus accessibility and navigation improvements.">
+  <meta name="og:description" content="Plus accessibility and navigation improvements.">
+  
+  <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
+  <meta name="author" content="The Servo Project Developers">
+
+  <meta property="og:site_name" content="Servo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/twisaug/svg/servo-color-positive.svg">
+  <meta property="og:image:alt" content="Servo logo">
+  <meta property="og:logo" content="/twisaug/svg/servo-symbol-color-no-container.svg">
+  <meta property="og:url" content="/twisaug/blog/2026/10/09/august-in-servo/">
+
+  <link rel="stylesheet" href="/twisaug/css/style.css">
+  <link rel="shortcut icon" href="/twisaug/svg/servo-symbol-color-no-container.svg">
+  <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+  <link rel="alternate" href="/twisaug/blog/feed.xml" title="Servo Blog" type="application/atom+xml">
+</head>
+
+  <body class="is-page">
+    <main class="is-main">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="inner-container">
+      <div class="navbar-brand">
+        <a href="/twisaug/">
+          <img src="/twisaug/svg/servo-color.svg" alt="August in Servo: CSS Grid, text selection, and more!">
+        </a>
+
+        <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="navbar-menu" id="navbar-menu">
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                Get Involved
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisaug/contributing/"
+                    
+                  >
+                    Contributing
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://book.servo.org"
+                     target="_blank"
+                  >
+                    Servo Book<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisaug/wpt/"
+                    
+                  >
+                    WPT pass rates
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisaug/coc/"
+                    
+                  >
+                    Code of Conduct
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/twisaug/download/"
+              
+            >
+              Download
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="/twisaug/blog/"
+              
+            >
+              Blog
+            </a>
+          
+        
+          
+          
+            <a
+              class="navbar-item"
+              href="https://demo.servo.org/"
+               target="_blank"
+            >
+              Demos<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+            </a>
+          
+        
+          
+          
+            
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a
+                class="navbar-link
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            "
+                href="#"
+                
+              >
+                About
+              </a>
+              <div class="navbar-dropdown">
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisaug/about/"
+                    
+                  >
+                    About Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisaug/made-with/"
+                    
+                  >
+                    Made with Servo
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="https://github.com/servo/project/blob/main/governance/README.md"
+                     target="_blank"
+                  >
+                    Governance<span style="font-size: 0.8em;display:inline-block;margin-left: 4px"><i class="fa-solid fa-up-right-from-square"></i></span>
+                  </a>
+                
+                  <a
+                    class="navbar-item"
+                    href="/twisaug/sponsorship/"
+                    
+                  >
+                    Sponsorship
+                  </a>
+                
+              </div>
+            </div>
+          
+        
+        <div class="navbar-end">
+    
+      <a class="social-link is-github-color" title="GitHub" href="https://github.com/servo/servo">
+        <span class="icon"><i class="fab fa-github"></i></span>
+      </a>
+    
+      <a class="social-link is-mastodon-color" title="Mastodon" href="https://floss.social/@servo" rel="me">
+        <span class="icon"><i class="fab fa-mastodon"></i></span>
+      </a>
+    
+      <a class="social-link is-bluesky-color" title="Bluesky" href="https://bsky.app/profile/servo.org">
+        <span class="icon"><i class="fab fa-bluesky"></i></span>
+      </a>
+    
+      <a class="social-link is-linkedin-color" title="LinkedIn" href="https://www.linkedin.com/company/servo-project/">
+        <span class="icon"><i class="fab fa-linkedin"></i></span>
+      </a>
+    
+</div>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburgerMenu');
+  const menu = document.getElementById('navbar-menu');
+
+  const toggleMenu = () => {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('is-active', isExpanded);
+  };
+
+  // Toggle on click
+  hamburger.addEventListener('click', toggleMenu);
+
+
+</script>
+          <div class="content" id="August in Servo: CSS Grid, text selection, and more!">
+            
+<div class="blog-hero">
+  <div class="container">
+    <div class="inner-container">
+    <h1 class="title">August in Servo: CSS Grid, text selection, and more!</h1>
+      <p class="subtitle">Plus accessibility and navigation improvements.</p>
+      <p class="posted">Posted <span class="tag is-dark">2026-10-09</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="inner-container blog-content">
+  <p><a href="https://github.com/servo/servo/releases/tag/v0.6.0"><strong>Servo 0.6.0</strong></a> contains all of the changes we landed in August, which came out to <strong>417 commits</strong>!</p>
+<p>The big news is that we’ve turned on support for <strong>CSS Grid</strong> by default (@nicoburns, #45621).
+This has had a huge positive impact on the visual appearance of many websites.</p>
+<figure class="_spaced">
+    <div class="_peel" style="--default-position: 22%;">
+        <div class="_line">
+            <div class="_left"><div>v0.5.0</div></div>
+            <div class="_right"><div>v0.6.0</div></div>
+        </div>
+        <img src="/twisaug/img/blog/2026-10-grid-before.png">
+        <img src="/twisaug/img/blog/2026-10-grid-after.png">
+    </div>
+    <figcaption><a href="https://labs.jensimmons.com/">labs.jensimmons.com</a></figcaption>
+</figure>
+<p>Another visible change is that interactive <strong>text selection</strong> now works!
+This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048, #46963).</p>
+<p>TODO: figure</p>
+<p>We’ve shipped several new web platform features:</p>
+<ul>
+<li><strong>touch-action</strong> (@yezhizhen, #47043)</li>
+<li><strong>animation-composition</strong> (@nicoburns, #47405)</li>
+<li><strong>color-scheme</strong> (@TimvdLippe, #47042)</li>
+<li><strong>full-width</strong>, <strong>math-auto</strong>, <strong>full-size-kana</strong> values for <strong>text-transform</strong> (@SimonSapin, #47160, #47160, #47225)</li>
+</ul>
+<p>Plus a bunch of new DOM APIs:</p>
+<ul>
+<li><strong>requestAnimationFrame()</strong> on <strong>DedicatedWorkerGlobalScope</strong> (@Taym95, #46232)</li>
+<li><strong>ancestorOrigins</strong> on <strong>Location</strong> (@TimvdLippe, @mrobinson, #46056)</li>
+<li><strong>imagesrcset</strong> and <strong>imagesizes</strong> on <code>&lt;link rel=preload as=image&gt;</code> (@lumiscosity, @TimvdLippe, #47103)</li>
+<li><strong>style</strong> on <strong>CSSFontFaceRule</strong> (@simonwuelker, #47388)</li>
+<li><strong>isReloadNavigation</strong> and <strong>isHistoryNavigation</strong> on <strong>Request</strong> (@Taym95, @yezhizhen, #46917)</li>
+<li><strong>name=color-scheme</strong> on <code>&lt;meta&gt;</code> (@TimvdLippe, @jdm, #46993)</li>
+<li><strong>focusin</strong> and <strong>focusout</strong> events (@RichardTjokroutomo, @yezhizhen, #46980)</li>
+<li><strong>new TextEvent()</strong> (@moamenhesham0, @mrobinson, #47391)</li>
+<li><strong>PeriodicWave</strong> and <strong>createPeriodicWave</strong> on <strong>BaseAudioContext</strong> (@kevlu93, #47492)</li>
+</ul>
+<p>This release also contains significant improvements to <strong>navigation</strong>, <strong>document loading</strong>, and <strong>session history</strong>, which are some of the <a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history">gnarliest</a> parts of the HTML specification.</p>
+<p>Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293, #47485).
+Meanwhile, navigations to <code>about:blank</code> are skipped if the initial about:blank document is present (@jdm, #47074).</p>
+<p><code>about:blank</code> documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a <code>readyState</code> of <code>LOADING</code> (@mrobinson, #47450).
+Opening auxiliary windows will wait to dispatch the load event until the initial <code>about:blank</code> document has <a href="https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow">been replaced</a> (@jdm, @mrobinson, #47442, #46975).</p>
+<p>Who knew that loading <code>about:blank</code> was <a href="https://hsivonen.fi/about-blank/">so complicated</a>?
+For non-about:blank content, we also made the document loading phases more reliable (@TimvdLippe, @mrobinson, #47426), improved conformance of <code>javascript:</code> URL evaluation and navigation target selection (@mrobinson, #47486, #47516), and addressed longstanding compatibility issues with cross-origin <code>Window</code> and <code>Location</code> objects (@mrobinson, #47549).</p>
+<p>This is another big update, so here’s an outline:</p>
+<ul>
+<li>
+<p><a href="#security"><strong>Security</strong></a></p>
+</li>
+<li>
+<p><a href="#real-world-compat"><strong>Real world compat</strong></a></p>
+</li>
+<li>
+<p><a href="#work-in-progress"><strong>Work in progress</strong></a></p>
+</li>
+<li>
+<p><a href="#embedding-api"><strong>Embedding API</strong></a></p>
+</li>
+<li>
+<p><a href="#for-users-and-developers"><strong>For users and developers</strong></a></p>
+</li>
+<li>
+<p><a href="#more-on-the-web-platform"><strong>More on the web platform</strong></a></p>
+</li>
+<li>
+<p><a href="#performance-and-stability"><strong>Performance and stability</strong></a></p>
+</li>
+<li>
+<p><a href="#new-contributors"><strong>New contributors</strong></a></p>
+</li>
+</ul>
+<h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We upgraded to <strong>SpiderMonkey v153</strong>, which brings many new security and crash fixes to Servo’s JavaScript engine integration (@sagudev, @Gae24, #47489).</p>
+<p>Navigating away from a document that <strong>activated fullscreen mode</strong> now exits fullscreen mode (@shubhamg13, @jdm, #47123).</p>
+<h2 id="real-world-compat" tabindex="-1">Real world compat <a class="header-anchor" href="#real-world-compat">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Panning gestures initiated by touch inputs now lock to the dominant axis (@yezhizhen, #46983).
+This results in more predictable panning when interacting with pages in Servo.</p>
+<p>We fixed a crash affecting (<a href="https://gumroad.com.au">gumroad.com.au</a>) (@lumiscosity, #47266).</p>
+<p>We’re interested to hear how well your favourite websites run in Servo! Report successes in <a href="https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341">this Zulip thread</a>, and failures <a href="https://github.com/servo/servo/issues">in our GitHub issues</a>.</p>
+<h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><strong>Accessibility support</strong> in Servo continues to make great strides; it can be enabled with the <code>--pref accessibility_enabled</code> command line argument.
+Servo now reports <strong>positions and sizes</strong> for items in the content accessibility tree (@philocalyst, @alice, @mrobinson, #46996), allowing macOS VoiceOver to work more reliably.
+We also report many <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles"><strong>ARIA roles</strong></a> for web content elements to accessibility toolkits (@mukilan, #47318).</p>
+<details>
+<summary>Full list of supported roles</summary>
+<ul>
+<li>alert</li>
+<li>banner</li>
+<li>blockquote</li>
+<li>caption</li>
+<li>code</li>
+<li>complementary</li>
+<li>contentinfo</li>
+<li>definition</li>
+<li>deletion</li>
+<li>directory</li>
+<li>document</li>
+<li>emphasis</li>
+<li>feed</li>
+<li>figure</li>
+<li>generic</li>
+<li>insertion</li>
+<li>list</li>
+<li>log</li>
+<li>main</li>
+<li>math</li>
+<li>navigation</li>
+<li>none</li>
+<li>note</li>
+<li>paragraph</li>
+<li>presentation</li>
+<li>rowgroup</li>
+<li>search</li>
+<li>status</li>
+<li>strong</li>
+<li>term</li>
+<li>time</li>
+<li>timer</li>
+</ul>
+</details>
+<p>Servo’s support for <strong>Document.execCommand()</strong> is rapidly improving, and can be enabled with <code>--pref dom_exec_command_enabled</code>.
+We fixed issues with the <strong>inserttext</strong> command (@Psychpsyo, #47224, #47306), editing uneditable content (@Psychpsyo, #47362), computing contained nodes (@TimvdLippe, #47429), adjusting selections in <strong>contenteditable</strong> (@mrobinson, #47393, #47581, #47581), and implemented the <strong>indent</strong> and <strong>insertLineBreak</strong> commands (@Psychpsyo, #47416, #47445).</p>
+<p>We made a lot of progress on the <strong>LargestContentfulPaint</strong> performance metric, implemented behind the <code>--pref largest_contentful_paint_enabled</code> argument.
+Servo now supports the <strong>element</strong> and <strong>loadTime</strong> attributes, (@shubhamg13, #46553, #47475), URLs for video element posters (@shubhamg13, #43376), accurate size information (@shubhamg13, #43378), painting text nodes (@shubhamg13, #47212).</p>
+<p>There was preparatory work for a future <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet"><strong>AudioWorklet</strong></a> implementation (@niyabits, #46856, #47016, #47199).
+See Niya’s <a href="https://text.tchncs.de/niya/wrapping-up-my-work-on-servos-audioworklet">blog post</a> about her Outreachy project for more details!</p>
+<p>We’re continuing work on the <strong>ServiceWorker</strong> feature, which can be enabled with <code>--pref dom_serviceworker_enabled</code>.
+This month we implemented the <strong>CookieStore</strong> interface behind the <code>--pref dom_cookiestore_enabled</code> command line argument (@Taym95, #47044) as well as the <strong>Cache</strong> interface (@gterzian, #47220).</p>
+<p>Servo now supports a <strong>disk-backed HTTP cache</strong> that can be enabled with <code>--pref network_http_disk_cache</code> (@Narfinger, #43819).
+This cache persists between runs, but there is not yet any way to clear it.</p>
+<h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p><strong>Breaking change:</strong> <a href="https://doc.servo.org/servo/struct.WebView.html"><code>WebView</code></a>::<code>toggle_sampling_profiler</code> has been removed (@lumiscosity, #47014).
+To perform sampling profiling on Servo, follow the instructions in <a href="https://book.servo.org/contributing/profiling.html">the book</a>.</p>
+<p><strong>Breaking change:</strong> The variants of <a href="https://doc.servo.org/servo/enum.MouseButton.html"><code>MouseButton</code></a> have been renamed to <code>Primary</code>, <code>Secondary</code>, and <code>Auxiliary</code> (@mrobinson, @SimonSapin, #47327).</p>
+<p>We’ve added several new Cargo features reflecting common usage patterns:</p>
+<ul>
+<li><code>default_web_features</code>, to include optional web platform features in the build (e.g. WebXR and WebGPU) (@jschwe, #44032)</li>
+<li><code>bundled</code>, to include required resources in the binary (@jschwe, #44032)</li>
+<li><code>brotli-compression-stream</code>, enabling support for <code>brotli</code> content in the <code>CompressionStream</code>/<code>DecompressionStream</code> web APIs (@Narfinger, @jdm, #47197)</li>
+<li><code>webcrypto</code>, to enable support for the Crypto and WebCrypto web APIs (@Narfinger, #47198)</li>
+<li><code>webgl</code>, to enable support for WebGL (@janeoa, #47200)</li>
+</ul>
+<h2 id="for-users-and-developers" tabindex="-1">For users and developers <a class="header-anchor" href="#for-users-and-developers">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Building Servo now requires at least <strong>Clang 19</strong> on all platforms (@jschwe, #47421).
+Additionally, the <code>cargo-ohos</code> tool is now required for building for OpenHarmony (@jschwe, #47334).</p>
+<p>Debug builds on Windows can now complete successfully (@jschwe, #47372).</p>
+<p>Linux arm64 builds have been customized to work on <strong>Raspberry Pi 5</strong> (@mukilan, #47113).
+Any libservo embedders targeting the same platform will require a similar change if they are using jemalloc.</p>
+<h3 id="servoshell" tabindex="-1">servoshell <a class="header-anchor" href="#servoshell">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h3>
+<p>Under <strong>Wayland</strong> and <strong>OpenHarmony</strong>, we now integrate with the system clipboard (@TheZoq2, @yezhizhen, @jschwe, #46938, #47177).</p>
+<p>The macOS command key and Windows logo key is now reported as <code>Meta</code> instead of <code>Super</code> (@eachra-bawn, #47330).</p>
+<p>The <strong>Android</strong> port has had many rough edges filed off as part of modernizing it for the <strong>Compose UI</strong> (@veyndan, #47656, #47491, #47494, #47697, #46955, #47644, #47652, #47276, #47277, #47299, #47439) and converting its implementation to Kotlin (@veyndan, #46926, #46925, #46951, #46965).
+Library consumers are no longer responsible for implementing <strong>pause and resume</strong> support (@veyndan, #47555).</p>
+<p>Meanwhile, the <strong>OpenHarmony</strong> port now supports external keyboards with US keyboard layouts (@jschwe, #47359).
+Additionally, there are now better fallback font selections for CJK characters (@RichardTjokroutomo, #47116, #47664).</p>
+<p>Setting the <code>device_pixel_ratio_override</code> preference is no longer ignored on Android and OpenHarmony (@jschwe, #47081).</p>
+<h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>There were many small changes this month that <strong>removed unnecessary allocations</strong> (@Narfinger, @jschwe, @yezhizhen, #47264, #47147, #47066, #47249, #47249, #47285, #47307, #47343, #47361, #47395, #47427, #47454, #47474, #47506, #47479, #47530, #47541, #47566, #47509, #47622).
+We also <strong>reduced GC interactions</strong> leading to better JS performance (@jdm, @Narfinger, @webbeef, @TimvdLippe, @mrobinson, #47513, #47250, #47158, #47165, #47049, #47251, #47510, #46981).</p>
+<p>On platforms that memory map font data (such as OpenHarmony and macOS), we can now save time that would otherwise be spent loading font files from disk (@jschwe, #47029).
+Similarly, reading system fonts is no longer in the critical path of starting up the engine (@Narfinger, @jdm, #46476).</p>
+<p>There were were also a number of savings in the final binary size (@jschwe, @kkoyung, @Narfinger, @jschwe, #47211, #47214, #47210, #46950).</p>
+<p>We <strong>fixed crashes</strong> related to media playback (@calvaris, #46891), the 2d canvas renderer (@yezhizhen, #46915), fonts with negative line gaps (@jschwe, #47374), and resolving fonts variants (@simonwuelker, #47356).</p>
+<p>Canvas renderer worker threads can now be adjusted by the <code>thread_pool_canvas_workers</code> preference, allowing more performance granularity according to embedder needs. (@jschwe, #46691, #47018)</p>
+<p>We’ve continued our long-running effort to use the Rust type system to make Servo’s integration with SpiderMonkey <strong>safer and more reliable</strong> (@jdm, @treetmitterglad, @Narfinger, @Gae24, #47398, #47296, #47051, #47005, #47323, #47297, #47322, #47368, #47446, #47317). We’re also working on statically preventing <a href="https://github.com/servo/servo/issues/39139">a footgun</a> that can lead to uncollectible GC cycles and leaking memory (@Gae24, #47355, #47650).</p>
+<p>Historically, <strong>about:memory</strong> has reported all memory usage by Rust implementations of JS APIs as one undifferentiated <code>js/malloc-heap</code> number.
+We now break it down by memory usage of nodes in document trees (@pylbrecht, #46931) and interfaces that are not part of the DOM (@jdm, #47531). We also report memory usage for the network stack’s cookie database (@Narfinger, #47248) and the canvas renderer backend (@janeoa, @jdm, #46958).</p>
+<p>We’ve added an <strong>experimental threadboost</strong> mechanism (@jschwe, @mrobinson, #46843, #47027) that has been observed to improve Speedometer results by <strong>50%</strong> and allow canvas rendering to reach 60 FPS.
+This is initially enabled for OpenHarmony, but future expansion to other Linux-based platforms is expected.</p>
+<h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We upgraded to <a href="https://github.com/linebender/resvg/blob/main/CHANGELOG.md#0480-2026-07-31">resvg 0.48</a>, fixing <strong>many issues with SVG images</strong> with missing width/height attributes that specified a <code>viewBox</code> (@nicoburns, #46937).</p>
+<p>Upgrading to <a href="https://github.com/DioxusLabs/taffy/blob/main/CHANGELOG.md#0130">Taffy 0.14</a> fixed a number of <strong>CSS grid-related crashes</strong>, support for grid names, better intrinsic sizing, and improved performance (@nicoburns, #47031, #47493).
+We also fixed some issues in the Taffy grid integration for more accurate baselines (@nicoburns, #47518).</p>
+<p>Our media playback has improved; we fixed several issues around <strong>canPlayType()</strong> on <strong>HTMLMediaElement</strong> that allow Servo to report that <strong>MP4 content is playable</strong> (@jdm, #47612, #47641, #47670).</p>
+<p>Input elements with the <code>autofocus</code> property inside of a <code>&lt;dialog&gt;</code> now receive focus when that dialog is opened (@skyz1, @mrobinson, #45826).</p>
+<p>We improved the exception error text for numerous web APIs (@jdm, @eachra-bawn, #46960, #47124, #47168, #47580, #47430, #47127).</p>
+<p>We also fixed issues related to many other APIs, including:</p>
+<ul>
+<li>matching other browsers’ treatment of <strong>Access-Control-Allow-Headers</strong> (@yezhizhen, #47600)</li>
+<li>WebCrypto <strong>CryptoKey</strong> usage checks (@kkoyung, #47112, #47141, #47178) and key lengths (@kkoyung, #47452, #47453)</li>
+<li>determining referrers when navigating (@mrobinson, #47487)</li>
+<li>reading <code>Window.name</code> inside of iframes (@TimvdLippe, @jdm, #47270)</li>
+<li>many edge cases around determining dirty roots for incremental layout (@mrobinson, #46906)</li>
+<li>edge cases around <code>Node.compareDocumentPosition</code> (@SimonSapin, #46886)</li>
+<li>resolving ties in web font matching (@simonwuelker, #47449)</li>
+<li>Range.<strong>getClientBoundingRect()</strong>/<strong>getClientRects</strong>() for empty ranges (@yezhizhen, #47143)</li>
+<li>the <strong>Get Element Tag Name</strong> WebDriver command (@yezhizhen, #47216)</li>
+<li>JS module fetching failures can now be retried (@Gae24, #46919)</li>
+<li><code>KeyEvent.keyCode</code> values for many <strong>nonprintable keys</strong> now match other browsers (@eachra-bawn, #47461)</li>
+<li>making <code>Performance.timing</code> return a <code>PerformanceTiming</code> object (@jdm, @aniebietafia, #46990)</li>
+<li>synthesizing font variations from <code>font-style</code> (@simonwuelker, @mrobinson, #46918, #47364)</li>
+<li>removed nonstandard WebDriver-related properties on the global object (@mrobinson, #47542)</li>
+<li>sniffing RAR responses correctly (@wood-ghost, #47366)</li>
+<li><code>Attribute</code> nodes created during parsing now have the expected namespace prefix (@Ms2ger, #47030)</li>
+<li>zero-sized margins inside of inline boxes (@Loirooriol, #47020)</li>
+<li>incorrect <code>buttons</code> values in pointer capture transitions (@steigeo, #45628)</li>
+<li>empty lists returned by <code>FontFaceSet.load()</code> (@simonwuelker, #47564)</li>
+<li>cancelling more ongoing network requests when performing a navigation (@mrobinson, #47576)</li>
+<li>shaping text across inline boxes (@mrobinson, #46829)</li>
+<li>scrollable overflow for <code>position: sticky</code> (@rayguo17, #43766)</li>
+<li>fixing hyperlinks for blob: URLs (@TimvdLippe, #47226)</li>
+<li>improving <strong>text-transform: capitalize</strong> (@mrobinson, #46910)</li>
+<li>firing the error callback for <code>BaseAudioContext.decodeAudioData()</code> (@amittenak47, @jdm, #46870)</li>
+</ul>
+<h2 id="new-contributors" tabindex="-1">New contributors <a class="header-anchor" href="#new-contributors">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>A special thanks to the following people for landing their first patch in Servo:</p>
+<ul>
+<li>Moamen Hesham (@moamenhesham0, #47391)</li>
+<li>Miles Wirht (@philocalyst, #46996)</li>
+<li>wood-ghost (@wood-ghost, #47366)</li>
+</ul>
+<p>Interested in helping build a web browser?
+Take a look at our <a href="https://starters.servo.org">curated list</a> of issues that are good for new contributors!</p>
+<h2 id="donations" tabindex="-1">Donations <a class="header-anchor" href="#donations">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>Thanks again for your generous support!
+We are now receiving <strong>8128 USD/month</strong> (+3% from July) in recurring donations.
+This helps us cover the cost of our <strong><a href="https://ci0.servo.org">speedy</a> <a href="https://ci1.servo.org">CI</a> <a href="https://ci2.servo.org">and</a> <a href="https://ci3.servo.org">benchmarking</a> <a href="https://ci4.servo.org">servers</a></strong>, one of our latest <strong><a href="https://www.outreachy.org/alums/2026-05/#:~:text=Servo">Outreachy interns</a></strong>, and funding <strong><a href="/twisaug/blog/2026/09/15/one-year-of-sponsorship/">maintainer work</a></strong> that helps more people contribute to Servo.</p>
+<p>Servo is also on <a href="https://thanks.dev">thanks.dev</a>, and already <strong>36 GitHub users</strong> (+1 from July) that depend on Servo are sponsoring us there.
+If you use Servo libraries like <a href="https://crates.io/crates/url/reverse_dependencies">url</a>, <a href="https://crates.io/crates/html5ever/reverse_dependencies">html5ever</a>, <a href="https://crates.io/crates/selectors/reverse_dependencies">selectors</a>, or <a href="https://crates.io/crates/cssparser/reverse_dependencies">cssparser</a>, signing up for <a href="https://thanks.dev">thanks.dev</a> could be a good way for you (or your employer) to give back to the community.</p>
+<p>We now have <a href="/twisaug/blog/2025/11/21/sponsorship-tiers/"><strong>sponsorship tiers</strong></a> that allow you or your organisation to donate to the Servo project with public acknowlegement of your support.
+If you’re interested in this kind of sponsorship, please contact us at <a href="mailto:join@servo.org">join@servo.org</a>.</p>
+<figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
+    <div style="position: relative; text-align: right;">
+        <div style="position: absolute; right: calc(100% - 100% * 8124 / 10000); padding-right: 0.5em;"><strong>8128</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 8124 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
+    </div>
+    <progress value="7824" max="10000" style="transform: scale(3); transform-origin: top left; width: calc(100% / 3);"></progress>
+</div></figure>
+<p>Use of donations is decided transparently via the Technical Steering Committee’s public <strong><a href="https://github.com/servo/project/blob/main/FUNDING_REQUEST.md">funding request process</a></strong>, and active proposals are tracked in <a href="https://github.com/servo/project/issues/187">servo/project#187</a>.
+For more details, head to our <a href="/twisaug/sponsorship/">Sponsorship page</a>.</p>
+<style>
+    kbd {
+        background: #00000020;
+        margin: 0 0.125rem;
+        padding: 0.125rem;
+        border-radius: 0.25rem;
+    }
+    ._correction {
+        max-width: 33em;
+        margin: 1em auto;
+        border-bottom: 1px solid;
+        padding-bottom: 1em;
+    }
+    ._note {
+        margin: 1em 1em;
+        border-left: 1px solid;
+        padding-left: 1em;
+        opacity: 0.75;
+    }
+</style>
+<script>
+    (function makeVideoPlayersClickable() {
+        addEventListener("toggle", event => {
+            const details = event.target.closest("details");
+            if (!details?.open) {
+                return;
+            }
+            const video = details.querySelector("video");
+            if (!video) {
+                return;
+            }
+            if (video.fastSeek) {
+                video.fastSeek(0);
+            } else {
+                video.currentTime = 0;
+            }
+            video.play();
+        }, true);
+    })();
+</script>
+
+  <div>
+    <a href="/twisaug/blog/">Back</a>
+  </div>
+</div>
+
+
+
+          </div>
+    </main>
+    <div class="contact" aria-label="Contact information">
+    <div class="container">
+        <div class="inner-container two-column">
+            <div class="column">
+                <h2>Contact</h2>
+            </div>
+            <div class="column">
+                <ul>
+                    <li><a class="footer-link" href="https://servo.zulipchat.com/">Zulip chat</a></li>
+                    <li><a class="footer-link" href="https://github.com/servo/servo/discussions">GitHub discussions</a></li>
+                    <li><a class="footer-link" href="mailto:info@servo.org">Email: info@servo.org</a></li>
+                    <li><a class="footer-link" href="https://floss.social/@servo">Mastodon</a></li>
+                    <li><a class="footer-link" href="https://bsky.app/profile/servo.org">Bluesky</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer>
+      <div class="footer">
+  <div class="container">
+    <div class="two-column inner-container">
+      <div class="column">
+        <div class="logo"><a href="https://linuxfoundation.eu"><img src="/twisaug/img/lf-europe-logo.png" alt="Linux Foundation Europe logo" width="250"></a></div>
+        <p>&copy; 2026 The Servo Project Developers</p>
+        <p>Copyright &copy; Servo is a project of <a class="footer-link" href="https://linuxfoundation.eu/">Linux Foundation Europe</a>.</p>
+        <p>For website terms of use, trademark policy and other project policies please see <a class="footer-link" href="https://lfprojects.org">https://lfprojects.org</a>.</p>
+        <p>The source code for this website can be found at <a class="footer-link" href="https://github.com/servo/servo.org">https://github.com/servo/servo.org</a>.</p>
+      </div>
+      <div class="column code-of-conduct">
+        <a class="footer-link" href="/twisaug/coc/">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const burger = document.querySelector(".navbar-burger");
+    const menu = document.querySelector(".navbar-menu");
+    burger.onclick = () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    };
+  })();
+</script>
+
+    </footer>
+  </body>
+</html>
