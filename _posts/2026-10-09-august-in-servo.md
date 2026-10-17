@@ -24,6 +24,18 @@ This has had a huge positive impact on the visual appearance of many websites.
     <figcaption><a href="https://labs.jensimmons.com/">labs.jensimmons.com</a></figcaption>
 </figure>
 
+<figure class="_spaced">
+    <div class="_peel" style="--default-position: 22%;">
+        <div class="_line">
+            <div class="_left"><div>v0.5.0</div></div>
+            <div class="_right"><div>v0.6.0</div></div>
+        </div>
+        <img src="{{ '/img/blog/2026-10-grid2-before.png' | url }}">
+        <img src="{{ '/img/blog/2026-10-grid2-after.png' | url }}">
+    </div>
+    <figcaption><a href="https://2026.rustweek.org/">2026.rustweek.org</a></figcaption>
+</figure>
+
 <style>
     ._spaced {
         margin: 1em 0;
