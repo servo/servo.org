@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "August in Servo: ???????"
+title:      "August in Servo: CSS Grid, text selection, and more!"
 date:       2026-10-09
-summary:    who even knows?
+summary:    Plus accessibility and navigation improvements.
 categories:
 ---
 
@@ -12,7 +12,18 @@ categories:
 The big news is that we've turned on support for **CSS Grid** by default (@nicoburns, #45621).
 This has had a huge positive impact on the visual appearance of many websites.
 
-TODO: figure
+<figure class="_spaced">
+    <div class="_peel" style="--default-position: 22%;">
+        <div class="_line">
+            <div class="_left"><div>v0.5.0</div></div>
+            <div class="_right"><div>v0.6.0</div></div>
+        </div>
+        <img src="{{ '/img/blog/2026-10-grid-before.png' | url }}">
+        <img src="{{ '/img/blog/2026-10-grid-after.png' | url }}">
+    </div>
+    <figcaption><a href="https://labs.jensimmons.com/">labs.jensimmons.com</a></figcaption>
+</figure>
+
 
 Another visible change is that interactive **text selection** now works!
 This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048, #46963).
@@ -38,7 +49,7 @@ Plus a bunch of new DOM APIs:
 - **new TextEvent()** (@moamenhesham0, @mrobinson, #47391)
 - **PeriodicWave** and **createPeriodicWave** on **BaseAudioContext** (@kevlu93, #47492)
 
-This release also contains significant improvements to navigation, document loading, and session history, which are some of the [gnarliest](https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history) parts of the HTML specification.
+This release also contains significant improvements to **navigation**, **document loading**, and **session history**, which are some of the [gnarliest](https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history) parts of the HTML specification.
 
 Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293, #47485).
 Meanwhile, navigations to `about:blank` are skipped if the initial about:blank document is present (@jdm, #47074).
@@ -46,7 +57,7 @@ Meanwhile, navigations to `about:blank` are skipped if the initial about:blank d
 `about:blank` documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a `readyState` of `LOADING` (@mrobinson, #47450).
 Opening auxiliary windows will wait to dispatch the load event until the initial `about:blank` document has [been replaced](https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow) (@jdm, @mrobinson, #47442, #46975).
 
-Whoever knew that loading `about:blank` was [so complicated](https://hsivonen.fi/about-blank/)?
+Who knew that loading `about:blank` was [so complicated](https://hsivonen.fi/about-blank/)?
 For non-about:blank content, we also made the document loading phases more reliable (@TimvdLippe, @mrobinson, #47426), improved conformance of `javascript:` URL evaluation and navigation target selection (@mrobinson, #47486, #47516), and addressed longstanding compatibility issues with cross-origin `Window` and `Location` objects (@mrobinson, #47549).
 
 This is another big update, so here’s an outline:
