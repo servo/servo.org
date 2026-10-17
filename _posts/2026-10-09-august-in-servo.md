@@ -203,7 +203,7 @@ We also report many [**ARIA roles**](https://developer.mozilla.org/en-US/docs/We
 - time
 - timer
 
-</details>
+</details><br>
 
 
 Servo's support for **Document.execCommand()** is rapidly improving, and can be enabled with `--pref dom_exec_command_enabled`.
