@@ -28,7 +28,9 @@ This has had a huge positive impact on the visual appearance of many websites.
 Another visible change is that interactive **text selection** now works!
 This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048, #46963).
 
-TODO: figure
+<figure>
+    <a href="{{ '/img/blog/2026-10-select.png' | url }}"><img src="{{ '/img/blog/2026-10-select.png' | url }}" alt="servoshell 0.6.0 showing text selection on an element using CSS perspective"></a>
+</figure>
 
 We’ve shipped several new web platform features:
 
