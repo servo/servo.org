@@ -141,6 +141,8 @@ Opening auxiliary windows will wait to dispatch the load event until the initial
 Who knew that loading `about:blank` was [so complicated](https://hsivonen.fi/about-blank/)?
 For non-about:blank content, we also made the document loading phases more reliable (@TimvdLippe, @mrobinson, #47426), improved conformance of `javascript:` URL evaluation and navigation target selection (@mrobinson, #47486, #47516), and addressed longstanding compatibility issues with cross-origin `Window` and `Location` objects (@mrobinson, #47549).
 
+The upshot to all this work? Pages that open additional windows or include iframes work much more reliably.
+
 This is another big update, so here’s an outline:
 
 - [**Security**](#security)
