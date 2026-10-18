@@ -69,7 +69,7 @@ Navigating away from a document that **activated fullscreen mode** now exits ful
 
 ## Real world compat
 
-CSS Grid enabled by default means that many websites with traditional grid layouts now look correct, like <a href="rustweek.org">rustweek.org</a>.
+CSS Grid enabled by default means that many websites with traditional grid layouts now look correct, like [rustweek.org](https://rustweek.org/).
 
 <figure class="_spaced">
     <div class="_peel" style="--default-position: 22%;">
