@@ -161,7 +161,7 @@ It also makes a lot of websites look better that you wouldn't assume rely on CSS
 Panning gestures initiated by touch inputs now lock to the dominant axis (@yezhizhen, #46983).
 This results in more predictable panning when interacting with pages in Servo.
 
-We fixed a crash affecting ([gumroad.com.au](https://gumroad.com.au)) (@lumiscosity, #47266).
+We fixed a crash affecting [gumroad.com.au](https://gumroad.com.au) (@lumiscosity, #47266).
 
 We’re interested to hear how well your favourite websites run in Servo! Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341), and failures [in our GitHub issues](https://github.com/servo/servo/issues).
 
