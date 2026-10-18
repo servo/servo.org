@@ -35,7 +35,7 @@ Plus a bunch of new DOM APIs:
 - **new TextEvent()** (@moamenhesham0, @mrobinson, #47391)
 - **PeriodicWave** and **createPeriodicWave** on **BaseAudioContext** (@kevlu93, #47492)
 
-This release also contains significant improvements to **navigation**, **document loading**, and **session history**, which are some of the [gnarliest](https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history) parts of the HTML specification. Who knew that loading `about:blank` was [so complicated](https://hsivonen.fi/about-blank/)? The upshot to all this work? Pages that open additional windows or include iframes work much more reliably.
+This release also contains significant improvements to **navigation**, **document loading**, and **session history**, which are some of the [gnarliest](https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history) parts of the HTML specification. Who knew that loading `about:blank` was [so complicated](https://hsivonen.fi/about-blank/)? The upshot to all this work is that pages that open additional windows or include iframes work much more reliably.
 
 This is another big update, so here’s an outline:
 
