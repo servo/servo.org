@@ -10,7 +10,7 @@ categories:
 [**Servo 0.6.0**](https://github.com/servo/servo/releases/tag/v0.6.0) contains all of the changes we landed in August, which came out to **417 commits**!
 
 The big news is that we've turned on support for **CSS Grid** by default (@nicoburns, #45621).
-This has had a huge positive impact on the visual appearance of many websites.
+This has had a huge positive impact on the visual appearance of many websites!
 
 <figure>
     <a href="{{ '/img/blog/2026-10-gary.png' | url }}"><img src="{{ '/img/blog/2026-10-gary.png' | url }}" alt="a black and white cat named Gary showing off new visual web platform features"></a>
