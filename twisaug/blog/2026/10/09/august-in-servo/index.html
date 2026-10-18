@@ -254,17 +254,65 @@
   <p><a href="https://github.com/servo/servo/releases/tag/v0.6.0"><strong>Servo 0.6.0</strong></a> contains all of the changes we landed in August, which came out to <strong>417 commits</strong>!</p>
 <p>The big news is that we’ve turned on support for <strong>CSS Grid</strong> by default (@nicoburns, #45621).
 This has had a huge positive impact on the visual appearance of many websites.</p>
-<figure class="_spaced">
-    <div class="_peel" style="--default-position: 22%;">
-        <div class="_line">
-            <div class="_left"><div>v0.5.0</div></div>
-            <div class="_right"><div>v0.6.0</div></div>
-        </div>
-        <img src="/twisaug/img/blog/2026-10-grid-before.png">
-        <img src="/twisaug/img/blog/2026-10-grid-after.png">
-    </div>
-    <figcaption><a href="https://labs.jensimmons.com/">labs.jensimmons.com</a></figcaption>
+<figure>
+    <a href="/twisaug/img/blog/2026-10-gary.png"><img src="/twisaug/img/blog/2026-10-gary.png" alt="a black and white cat named Gary showing off new visual web platform features"></a>
 </figure>
+<p>We’ve shipped several new web platform features:</p>
+<ul>
+<li><strong>touch-action</strong> (@yezhizhen, #47043)</li>
+<li><strong>animation-composition</strong> (@nicoburns, #47405)</li>
+<li><strong>color-scheme</strong> (@TimvdLippe, #47042)</li>
+<li><strong>full-width</strong>, <strong>math-auto</strong>, <strong>full-size-kana</strong> values for <strong>text-transform</strong> (@SimonSapin, #47160, #47160, #47225)</li>
+</ul>
+<p>Plus a bunch of new DOM APIs:</p>
+<ul>
+<li><strong>requestAnimationFrame()</strong> on <strong>DedicatedWorkerGlobalScope</strong> (@Taym95, #46232)</li>
+<li><strong>ancestorOrigins</strong> on <strong>Location</strong> (@TimvdLippe, @mrobinson, #46056)</li>
+<li><strong>imagesrcset</strong> and <strong>imagesizes</strong> on <code>&lt;link rel=preload as=image&gt;</code> (@lumiscosity, @TimvdLippe, #47103)</li>
+<li><strong>style</strong> on <strong>CSSFontFaceRule</strong> (@simonwuelker, #47388)</li>
+<li><strong>isReloadNavigation</strong> and <strong>isHistoryNavigation</strong> on <strong>Request</strong> (@Taym95, @yezhizhen, #46917)</li>
+<li><strong>name=color-scheme</strong> on <code>&lt;meta&gt;</code> (@TimvdLippe, @jdm, #46993)</li>
+<li><strong>focusin</strong> and <strong>focusout</strong> events (@RichardTjokroutomo, @yezhizhen, #46980)</li>
+<li><strong>new TextEvent()</strong> (@moamenhesham0, @mrobinson, #47391)</li>
+<li><strong>PeriodicWave</strong> and <strong>createPeriodicWave</strong> on <strong>BaseAudioContext</strong> (@kevlu93, #47492)</li>
+</ul>
+<p>This release also contains significant improvements to <strong>navigation</strong>, <strong>document loading</strong>, and <strong>session history</strong>, which are some of the <a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history">gnarliest</a> parts of the HTML specification. Who knew that loading <code>about:blank</code> was <a href="https://hsivonen.fi/about-blank/">so complicated</a>? The upshot to all this work? Pages that open additional windows or include iframes work much more reliably.</p>
+<p>This is another big update, so here’s an outline:</p>
+<ul>
+<li>
+<p><a href="#security"><strong>Security</strong></a></p>
+</li>
+<li>
+<p><a href="#real-world-compat"><strong>Real world compat</strong></a></p>
+</li>
+<li>
+<p><a href="#work-in-progress"><strong>Work in progress</strong></a></p>
+</li>
+<li>
+<p><a href="#embedding-api"><strong>Embedding API</strong></a></p>
+</li>
+<li>
+<p><a href="#for-users-and-developers"><strong>For users and developers</strong></a></p>
+</li>
+<li>
+<p><a href="#more-on-the-web-platform"><strong>More on the web platform</strong></a></p>
+</li>
+<li>
+<p><a href="#performance-and-stability"><strong>Performance and stability</strong></a></p>
+</li>
+<li>
+<p><a href="#new-contributors"><strong>New contributors</strong></a></p>
+</li>
+</ul>
+<h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>We upgraded to <strong>SpiderMonkey v153</strong>, which brings many new security and crash fixes to Servo’s JavaScript engine integration (@sagudev, @Gae24, #47489).</p>
+<p>Navigating away from a document that <strong>activated fullscreen mode</strong> now exits fullscreen mode (@shubhamg13, @jdm, #47123).</p>
+<h2 id="real-world-compat" tabindex="-1">Real world compat <a class="header-anchor" href="#real-world-compat">
+        <span class="icon hashlink"><i class="fas fa-link"></i></span>
+      </a></h2>
+<p>CSS Grid enabled by default means that many websites with traditional grid layouts now look correct, like <a href="rustweek.org">rustweek.org</a>.</p>
 <figure class="_spaced">
     <div class="_peel" style="--default-position: 22%;">
         <div class="_line">
@@ -275,6 +323,18 @@ This has had a huge positive impact on the visual appearance of many websites.</
         <img src="/twisaug/img/blog/2026-10-grid2-after.png">
     </div>
     <figcaption><a href="https://2026.rustweek.org/">2026.rustweek.org</a></figcaption>
+</figure>
+<p>It also makes a lot of websites look better that you wouldn’t assume rely on CSS Grid:</p>
+<figure class="_spaced">
+    <div class="_peel" style="--default-position: 22%;">
+        <div class="_line">
+            <div class="_left"><div>v0.5.0</div></div>
+            <div class="_right"><div>v0.6.0</div></div>
+        </div>
+        <img src="/twisaug/img/blog/2026-10-grid-before.png">
+        <img src="/twisaug/img/blog/2026-10-grid-after.png">
+    </div>
+    <figcaption><a href="https://labs.jensimmons.com/">labs.jensimmons.com</a></figcaption>
 </figure>
 <style>
     ._spaced {
@@ -341,73 +401,6 @@ This has had a huge positive impact on the visual appearance of many websites.</
         }, true);
     }
 </script>
-<p>Another visible change is that interactive <strong>text selection</strong> now works!
-This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048, #46963).</p>
-<figure>
-    <a href="/twisaug/img/blog/2026-10-select.png"><img src="/twisaug/img/blog/2026-10-select.png" alt="servoshell 0.6.0 showing text selection on an element using CSS perspective"></a>
-</figure>
-<p>We’ve shipped several new web platform features:</p>
-<ul>
-<li><strong>touch-action</strong> (@yezhizhen, #47043)</li>
-<li><strong>animation-composition</strong> (@nicoburns, #47405)</li>
-<li><strong>color-scheme</strong> (@TimvdLippe, #47042)</li>
-<li><strong>full-width</strong>, <strong>math-auto</strong>, <strong>full-size-kana</strong> values for <strong>text-transform</strong> (@SimonSapin, #47160, #47160, #47225)</li>
-</ul>
-<p>Plus a bunch of new DOM APIs:</p>
-<ul>
-<li><strong>requestAnimationFrame()</strong> on <strong>DedicatedWorkerGlobalScope</strong> (@Taym95, #46232)</li>
-<li><strong>ancestorOrigins</strong> on <strong>Location</strong> (@TimvdLippe, @mrobinson, #46056)</li>
-<li><strong>imagesrcset</strong> and <strong>imagesizes</strong> on <code>&lt;link rel=preload as=image&gt;</code> (@lumiscosity, @TimvdLippe, #47103)</li>
-<li><strong>style</strong> on <strong>CSSFontFaceRule</strong> (@simonwuelker, #47388)</li>
-<li><strong>isReloadNavigation</strong> and <strong>isHistoryNavigation</strong> on <strong>Request</strong> (@Taym95, @yezhizhen, #46917)</li>
-<li><strong>name=color-scheme</strong> on <code>&lt;meta&gt;</code> (@TimvdLippe, @jdm, #46993)</li>
-<li><strong>focusin</strong> and <strong>focusout</strong> events (@RichardTjokroutomo, @yezhizhen, #46980)</li>
-<li><strong>new TextEvent()</strong> (@moamenhesham0, @mrobinson, #47391)</li>
-<li><strong>PeriodicWave</strong> and <strong>createPeriodicWave</strong> on <strong>BaseAudioContext</strong> (@kevlu93, #47492)</li>
-</ul>
-<p>This release also contains significant improvements to <strong>navigation</strong>, <strong>document loading</strong>, and <strong>session history</strong>, which are some of the <a href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history">gnarliest</a> parts of the HTML specification.</p>
-<p>Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293, #47485).
-Meanwhile, navigations to <code>about:blank</code> are skipped if the initial about:blank document is present (@jdm, #47074).</p>
-<p><code>about:blank</code> documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a <code>readyState</code> of <code>LOADING</code> (@mrobinson, #47450).
-Opening auxiliary windows will wait to dispatch the load event until the initial <code>about:blank</code> document has <a href="https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow">been replaced</a> (@jdm, @mrobinson, #47442, #46975).</p>
-<p>Who knew that loading <code>about:blank</code> was <a href="https://hsivonen.fi/about-blank/">so complicated</a>?
-For non-about:blank content, we also made the document loading phases more reliable (@TimvdLippe, @mrobinson, #47426), improved conformance of <code>javascript:</code> URL evaluation and navigation target selection (@mrobinson, #47486, #47516), and addressed longstanding compatibility issues with cross-origin <code>Window</code> and <code>Location</code> objects (@mrobinson, #47549).</p>
-<p>The upshot to all this work? Pages that open additional windows or include iframes work much more reliably.</p>
-<p>This is another big update, so here’s an outline:</p>
-<ul>
-<li>
-<p><a href="#security"><strong>Security</strong></a></p>
-</li>
-<li>
-<p><a href="#real-world-compat"><strong>Real world compat</strong></a></p>
-</li>
-<li>
-<p><a href="#work-in-progress"><strong>Work in progress</strong></a></p>
-</li>
-<li>
-<p><a href="#embedding-api"><strong>Embedding API</strong></a></p>
-</li>
-<li>
-<p><a href="#for-users-and-developers"><strong>For users and developers</strong></a></p>
-</li>
-<li>
-<p><a href="#more-on-the-web-platform"><strong>More on the web platform</strong></a></p>
-</li>
-<li>
-<p><a href="#performance-and-stability"><strong>Performance and stability</strong></a></p>
-</li>
-<li>
-<p><a href="#new-contributors"><strong>New contributors</strong></a></p>
-</li>
-</ul>
-<h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
-        <span class="icon hashlink"><i class="fas fa-link"></i></span>
-      </a></h2>
-<p>We upgraded to <strong>SpiderMonkey v153</strong>, which brings many new security and crash fixes to Servo’s JavaScript engine integration (@sagudev, @Gae24, #47489).</p>
-<p>Navigating away from a document that <strong>activated fullscreen mode</strong> now exits fullscreen mode (@shubhamg13, @jdm, #47123).</p>
-<h2 id="real-world-compat" tabindex="-1">Real world compat <a class="header-anchor" href="#real-world-compat">
-        <span class="icon hashlink"><i class="fas fa-link"></i></span>
-      </a></h2>
 <p>Panning gestures initiated by touch inputs now lock to the dominant axis (@yezhizhen, #46983).
 This results in more predictable panning when interacting with pages in Servo.</p>
 <p>We fixed a crash affecting (<a href="https://gumroad.com.au">gumroad.com.au</a>) (@lumiscosity, #47266).</p>
@@ -482,6 +475,11 @@ To perform sampling profiling on Servo, follow the instructions in <a href="http
 <h2 id="for-users-and-developers" tabindex="-1">For users and developers <a class="header-anchor" href="#for-users-and-developers">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>One visible change is that interactive <strong>text selection</strong> now works!
+This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048, #46963).</p>
+<figure>
+    <a href="/twisaug/img/blog/2026-10-select.png"><img src="/twisaug/img/blog/2026-10-select.png" alt="servoshell 0.6.0 showing text selection on an element using CSS perspective"></a>
+</figure>
 <p>Building Servo now requires at least <strong>Clang 19</strong> on all platforms (@jschwe, #47421).
 Additionally, the <code>cargo-ohos</code> tool is now required for building for OpenHarmony (@jschwe, #47334).</p>
 <p>Debug builds on Windows can now complete successfully (@jschwe, #47372).</p>
@@ -518,6 +516,11 @@ This is initially enabled for OpenHarmony, but future expansion to other Linux-b
 <p>We upgraded to <a href="https://github.com/linebender/resvg/blob/main/CHANGELOG.md#0480-2026-07-31">resvg 0.48</a>, fixing <strong>many issues with SVG images</strong> with missing width/height attributes that specified a <code>viewBox</code> (@nicoburns, #46937).</p>
 <p>Upgrading to <a href="https://github.com/DioxusLabs/taffy/blob/main/CHANGELOG.md#0130">Taffy 0.14</a> fixed a number of <strong>CSS grid-related crashes</strong>, support for grid names, better intrinsic sizing, and improved performance (@nicoburns, #47031, #47493).
 We also fixed some issues in the Taffy grid integration for more accurate baselines (@nicoburns, #47518).</p>
+<p>Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293, #47485).
+Meanwhile, navigations to <code>about:blank</code> are skipped if the initial about:blank document is present (@jdm, #47074).</p>
+<p><code>about:blank</code> documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a <code>readyState</code> of <code>LOADING</code> (@mrobinson, #47450).
+Opening auxiliary windows will wait to dispatch the load event until the initial <code>about:blank</code> document has <a href="https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow">been replaced</a> (@jdm, @mrobinson, #47442, #46975).</p>
+<p>For non-about:blank content, we also made the document loading phases more reliable (@TimvdLippe, @mrobinson, #47426), improved conformance of <code>javascript:</code> URL evaluation and navigation target selection (@mrobinson, #47486, #47516), and addressed longstanding compatibility issues with cross-origin <code>Window</code> and <code>Location</code> objects (@mrobinson, #47549).</p>
 <p>Our media playback has improved; we fixed several issues around <strong>canPlayType()</strong> on <strong>HTMLMediaElement</strong> that allow Servo to report that <strong>MP4 content is playable</strong> (@jdm, #47612, #47641, #47670).</p>
 <p>Input elements with the <code>autofocus</code> property inside of a <code>&lt;dialog&gt;</code> now receive focus when that dialog is opened (@skyz1, @mrobinson, #45826).</p>
 <p>We improved the exception error text for numerous web APIs (@jdm, @eachra-bawn, #46960, #47124, #47168, #47580, #47430, #47127).</p>
