@@ -7,6 +7,12 @@ summary:    Plus accessibility and navigation improvements.
 categories:
 ---
 
+<style>
+code {
+  white-space: nowrap;
+}
+</style>
+
 [**Servo 0.6.0**](https://github.com/servo/servo/releases/tag/v0.6.0) contains all of the changes we landed in August, which came out to **417 commits**!
 
 The big news is that we've turned on support for **CSS Grid** by default (@nicoburns, #45621).
