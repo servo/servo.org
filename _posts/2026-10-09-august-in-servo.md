@@ -12,17 +12,58 @@ categories:
 The big news is that we've turned on support for **CSS Grid** by default (@nicoburns, #45621).
 This has had a huge positive impact on the visual appearance of many websites.
 
-<figure class="_spaced">
-    <div class="_peel" style="--default-position: 22%;">
-        <div class="_line">
-            <div class="_left"><div>v0.5.0</div></div>
-            <div class="_right"><div>v0.6.0</div></div>
-        </div>
-        <img src="{{ '/img/blog/2026-10-grid-before.png' | url }}">
-        <img src="{{ '/img/blog/2026-10-grid-after.png' | url }}">
-    </div>
-    <figcaption><a href="https://labs.jensimmons.com/">labs.jensimmons.com</a></figcaption>
+<figure>
+    <a href="{{ '/img/blog/2026-10-gary.png' | url }}"><img src="{{ '/img/blog/2026-10-gary.png' | url }}" alt="a black and white cat named Gary showing off new visual web platform features"></a>
 </figure>
+
+We’ve shipped several new web platform features:
+
+- **touch-action** (@yezhizhen, #47043)
+- **animation-composition** (@nicoburns, #47405)
+- **color-scheme** (@TimvdLippe, #47042)
+- **full-width**, **math-auto**, **full-size-kana** values for **text-transform** (@SimonSapin, #47160, #47160, #47225)
+
+Plus a bunch of new DOM APIs:
+
+- **requestAnimationFrame()** on **DedicatedWorkerGlobalScope** (@Taym95, #46232)
+- **ancestorOrigins** on **Location** (@TimvdLippe, @mrobinson, #46056)
+- **imagesrcset** and **imagesizes** on `<link rel=preload as=image>` (@lumiscosity, @TimvdLippe, #47103)
+- **style** on **CSSFontFaceRule** (@simonwuelker, #47388)
+- **isReloadNavigation** and **isHistoryNavigation** on **Request** (@Taym95, @yezhizhen, #46917)
+- **name=color-scheme** on `<meta>` (@TimvdLippe, @jdm, #46993)
+- **focusin** and **focusout** events (@RichardTjokroutomo, @yezhizhen, #46980)
+- **new TextEvent()** (@moamenhesham0, @mrobinson, #47391)
+- **PeriodicWave** and **createPeriodicWave** on **BaseAudioContext** (@kevlu93, #47492)
+
+This release also contains significant improvements to **navigation**, **document loading**, and **session history**, which are some of the [gnarliest](https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history) parts of the HTML specification. Who knew that loading `about:blank` was [so complicated](https://hsivonen.fi/about-blank/)? The upshot to all this work? Pages that open additional windows or include iframes work much more reliably.
+
+This is another big update, so here’s an outline:
+
+- [**Security**](#security)
+
+- [**Real world compat**](#real-world-compat)
+
+- [**Work in progress**](#work-in-progress)
+
+- [**Embedding API**](#embedding-api)
+
+- [**For users and developers**](#for-users-and-developers)
+
+- [**More on the web platform**](#more-on-the-web-platform)
+
+- [**Performance and stability**](#performance-and-stability)
+
+- [**New contributors**](#new-contributors)
+
+## Security
+
+We upgraded to **SpiderMonkey v153**, which brings many new security and crash fixes to Servo's JavaScript engine integration (@sagudev, @Gae24, #47489).
+
+Navigating away from a document that **activated fullscreen mode** now exits fullscreen mode (@shubhamg13, @jdm, #47123).
+
+## Real world compat
+
+CSS Grid enabled by default means that many websites with traditional grid layouts now look correct, like <a href="rustweek.org">rustweek.org</a>.
 
 <figure class="_spaced">
     <div class="_peel" style="--default-position: 22%;">
@@ -34,6 +75,20 @@ This has had a huge positive impact on the visual appearance of many websites.
         <img src="{{ '/img/blog/2026-10-grid2-after.png' | url }}">
     </div>
     <figcaption><a href="https://2026.rustweek.org/">2026.rustweek.org</a></figcaption>
+</figure>
+
+It also makes a lot of websites look better that you wouldn't assume rely on CSS Grid:
+
+<figure class="_spaced">
+    <div class="_peel" style="--default-position: 22%;">
+        <div class="_line">
+            <div class="_left"><div>v0.5.0</div></div>
+            <div class="_right"><div>v0.6.0</div></div>
+        </div>
+        <img src="{{ '/img/blog/2026-10-grid-before.png' | url }}">
+        <img src="{{ '/img/blog/2026-10-grid-after.png' | url }}">
+    </div>
+    <figcaption><a href="https://labs.jensimmons.com/">labs.jensimmons.com</a></figcaption>
 </figure>
 
 <style>
@@ -102,72 +157,6 @@ This has had a huge positive impact on the visual appearance of many websites.
         }, true);
     }
 </script>
-
-
-Another visible change is that interactive **text selection** now works!
-This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048, #46963).
-
-<figure>
-    <a href="{{ '/img/blog/2026-10-select.png' | url }}"><img src="{{ '/img/blog/2026-10-select.png' | url }}" alt="servoshell 0.6.0 showing text selection on an element using CSS perspective"></a>
-</figure>
-
-We’ve shipped several new web platform features:
-
-- **touch-action** (@yezhizhen, #47043)
-- **animation-composition** (@nicoburns, #47405)
-- **color-scheme** (@TimvdLippe, #47042)
-- **full-width**, **math-auto**, **full-size-kana** values for **text-transform** (@SimonSapin, #47160, #47160, #47225)
-
-Plus a bunch of new DOM APIs:
-
-- **requestAnimationFrame()** on **DedicatedWorkerGlobalScope** (@Taym95, #46232)
-- **ancestorOrigins** on **Location** (@TimvdLippe, @mrobinson, #46056)
-- **imagesrcset** and **imagesizes** on `<link rel=preload as=image>` (@lumiscosity, @TimvdLippe, #47103)
-- **style** on **CSSFontFaceRule** (@simonwuelker, #47388)
-- **isReloadNavigation** and **isHistoryNavigation** on **Request** (@Taym95, @yezhizhen, #46917)
-- **name=color-scheme** on `<meta>` (@TimvdLippe, @jdm, #46993)
-- **focusin** and **focusout** events (@RichardTjokroutomo, @yezhizhen, #46980)
-- **new TextEvent()** (@moamenhesham0, @mrobinson, #47391)
-- **PeriodicWave** and **createPeriodicWave** on **BaseAudioContext** (@kevlu93, #47492)
-
-This release also contains significant improvements to **navigation**, **document loading**, and **session history**, which are some of the [gnarliest](https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigation-and-session-history) parts of the HTML specification.
-
-Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293, #47485).
-Meanwhile, navigations to `about:blank` are skipped if the initial about:blank document is present (@jdm, #47074).
-
-`about:blank` documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a `readyState` of `LOADING` (@mrobinson, #47450).
-Opening auxiliary windows will wait to dispatch the load event until the initial `about:blank` document has [been replaced](https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow) (@jdm, @mrobinson, #47442, #46975).
-
-Who knew that loading `about:blank` was [so complicated](https://hsivonen.fi/about-blank/)?
-For non-about:blank content, we also made the document loading phases more reliable (@TimvdLippe, @mrobinson, #47426), improved conformance of `javascript:` URL evaluation and navigation target selection (@mrobinson, #47486, #47516), and addressed longstanding compatibility issues with cross-origin `Window` and `Location` objects (@mrobinson, #47549).
-
-The upshot to all this work? Pages that open additional windows or include iframes work much more reliably.
-
-This is another big update, so here’s an outline:
-
-- [**Security**](#security)
-
-- [**Real world compat**](#real-world-compat)
-
-- [**Work in progress**](#work-in-progress)
-
-- [**Embedding API**](#embedding-api)
-
-- [**For users and developers**](#for-users-and-developers)
-
-- [**More on the web platform**](#more-on-the-web-platform)
-
-- [**Performance and stability**](#performance-and-stability)
-
-- [**New contributors**](#new-contributors)
-
-## Security
-
-We upgraded to **SpiderMonkey v153**, which brings many new security and crash fixes to Servo's JavaScript engine integration (@sagudev, @Gae24, #47489).
-
-Navigating away from a document that **activated fullscreen mode** now exits fullscreen mode (@shubhamg13, @jdm, #47123).
-
-## Real world compat
 
 Panning gestures initiated by touch inputs now lock to the dominant axis (@yezhizhen, #46983).
 This results in more predictable panning when interacting with pages in Servo.
@@ -251,6 +240,13 @@ We've added several new Cargo features reflecting common usage patterns:
 
 ## For users and developers
 
+One visible change is that interactive **text selection** now works!
+This is the result of lots of work across our script and layout code to ensure it respects the actual geometry of the page content (@mrobinson, @SimonSapin, #47022, #47025, #47329, #47358, #46982, #47425, #47438, #47437, #47581, #47070, #47048, #46963).
+
+<figure>
+    <a href="{{ '/img/blog/2026-10-select.png' | url }}"><img src="{{ '/img/blog/2026-10-select.png' | url }}" alt="servoshell 0.6.0 showing text selection on an element using CSS perspective"></a>
+</figure>
+
 Building Servo now requires at least **Clang 19** on all platforms (@jschwe, #47421).
 Additionally, the `cargo-ohos` tool is now required for building for OpenHarmony (@jschwe, #47334).
 
@@ -302,6 +298,14 @@ We upgraded to [resvg 0.48](https://github.com/linebender/resvg/blob/main/CHANGE
 
 Upgrading to [Taffy 0.14](https://github.com/DioxusLabs/taffy/blob/main/CHANGELOG.md#0130) fixed a number of **CSS grid-related crashes**, support for grid names, better intrinsic sizing, and improved performance (@nicoburns, #47031, #47493).
 We also fixed some issues in the Taffy grid integration for more accurate baselines (@nicoburns, #47518).
+
+Session history traversals (i.e. navigating backwards or forwards in history) now wait for any outstanding traversal to complete (@mrobinson, #47293, #47485).
+Meanwhile, navigations to `about:blank` are skipped if the initial about:blank document is present (@jdm, #47074).
+
+`about:blank` documents no longer use the asynchronous HTML parser (@jdm, #47050), and no longer report a `readyState` of `LOADING` (@mrobinson, #47450).
+Opening auxiliary windows will wait to dispatch the load event until the initial `about:blank` document has [been replaced](https://html.spec.whatwg.org/multipage/document-sequences.html#windows%3Awindow) (@jdm, @mrobinson, #47442, #46975).
+
+For non-about:blank content, we also made the document loading phases more reliable (@TimvdLippe, @mrobinson, #47426), improved conformance of `javascript:` URL evaluation and navigation target selection (@mrobinson, #47486, #47516), and addressed longstanding compatibility issues with cross-origin `Window` and `Location` objects (@mrobinson, #47549).
 
 Our media playback has improved; we fixed several issues around **canPlayType()** on **HTMLMediaElement** that allow Servo to report that **MP4 content is playable** (@jdm, #47612, #47641, #47670).
 
