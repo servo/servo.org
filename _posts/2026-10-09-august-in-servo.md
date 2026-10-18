@@ -122,10 +122,10 @@ Plus a bunch of new DOM APIs:
 
 - **requestAnimationFrame()** on **DedicatedWorkerGlobalScope** (@Taym95, #46232)
 - **ancestorOrigins** on **Location** (@TimvdLippe, @mrobinson, #46056)
-- **imagesrcset** and **imagesizes** on `&lt;link rel=preload as=image>` (@lumiscosity, @TimvdLippe, #47103)
+- **imagesrcset** and **imagesizes** on `<link rel=preload as=image>` (@lumiscosity, @TimvdLippe, #47103)
 - **style** on **CSSFontFaceRule** (@simonwuelker, #47388)
 - **isReloadNavigation** and **isHistoryNavigation** on **Request** (@Taym95, @yezhizhen, #46917)
-- **name=color-scheme** on `&lt;meta>` (@TimvdLippe, @jdm, #46993)
+- **name=color-scheme** on `<meta>` (@TimvdLippe, @jdm, #46993)
 - **focusin** and **focusout** events (@RichardTjokroutomo, @yezhizhen, #46980)
 - **new TextEvent()** (@moamenhesham0, @mrobinson, #47391)
 - **PeriodicWave** and **createPeriodicWave** on **BaseAudioContext** (@kevlu93, #47492)
@@ -305,7 +305,7 @@ We also fixed some issues in the Taffy grid integration for more accurate baseli
 
 Our media playback has improved; we fixed several issues around **canPlayType()** on **HTMLMediaElement** that allow Servo to report that **MP4 content is playable** (@jdm, #47612, #47641, #47670).
 
-Input elements with the `autofocus` property inside of a `&lt;dialog>` now receive focus when that dialog is opened (@skyz1, @mrobinson, #45826).
+Input elements with the `autofocus` property inside of a `<dialog>` now receive focus when that dialog is opened (@skyz1, @mrobinson, #45826).
 
 We improved the exception error text for numerous web APIs (@jdm, @eachra-bawn, #46960, #47124, #47168, #47580, #47430, #47127).
 
