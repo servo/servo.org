@@ -350,9 +350,12 @@ We also fixed issues related to many other APIs, including:
 
 A special thanks to the following people for landing their first patch in Servo:
 
+* Frans Skarman ([@TheZoq2](https://github.com/TheZoq2), [#46938](https://github.com/servo/servo/pull/46938))
 * Moamen Hesham ([@moamenhesham0](https://github.com/moamenhesham0), [#47391](https://github.com/servo/servo/pull/47391))
 * Miles Wirht ([@philocalyst](https://github.com/philocalyst), [#46996](https://github.com/servo/servo/pull/46996))
+* Vaibhav Srivastava ([@vaibhav8a](https://github.com/vaibhav8a), [#47626](https://github.com/servo/servo/pull/47626))
 * wood-ghost ([@wood-ghost](https://github.com/wood-ghost), [#47366](https://github.com/servo/servo/pull/47366))
+* 禾可 ([@Lfan-ke](https://github.com/Lfan-ke), [#47514](https://github.com/servo/servo/pull/47514))
 
 Interested in helping build a web browser?
 Take a look at our [curated list](https://starters.servo.org) of issues that are good for new contributors!
