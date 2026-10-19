@@ -169,7 +169,7 @@ This results in more predictable panning when interacting with pages in Servo.
 
 We fixed a crash affecting [gumroad.com.au](https://gumroad.com.au) ([@lumiscosity](https://github.com/lumiscosity), [#47266](https://github.com/servo/servo/pull/47266)).
 
-We’re interested to hear how well your favourite websites run in Servo! Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341), and failures [in our GitHub issues](https://github.com/servo/servo/issues).
+We’re interested to hear how well your favourite websites run in Servo! Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341) or [this Github discussion](https://github.com/servo/servo/discussions/49037), and failures [in our GitHub issues](https://github.com/servo/servo/issues).
 
 ## Work in progress
 
