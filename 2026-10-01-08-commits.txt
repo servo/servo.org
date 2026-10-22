@@ -1,0 +1,2409 @@
+>>> 2026-10-01T23:31:04Z
++https://github.com/servo/servo/pull/48544	(@veyndan, #48544)	android: Remove `SurfaceHolderCallback` dependence on `ServoView` (#48544)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit 216994a53e7e059ef288e56954dcdc8107ab53d8
+    # The logic of `SurfaceHolderCallback` will mostly be retained when converting to Compose, since [we'll utilise `AndroidExternalSurface`](https://developer.android.com/reference/kotlin/androidx/compose/foundation/AndroidExternalSurface.composable#AndroidExternalSurface(androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.unit.IntSize,androidx.compose.foundation.AndroidExternalSurfaceZOrder,kotlin.Boolean,kotlin.Function1)). To make the extraction easier, all dependencies on `ServoView` need to be severed.
+    # 
+    # Retrieving the width and height of the `ServoView` now depends on the values the `SurfaceHolder` gives us. This is useful as it again severs a tie with `ServoView`, but also it's [the same logic that `AndroidExternalSurface` will use when we switch to that](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/foundation/foundation/src/androidMain/kotlin/androidx/compose/foundation/AndroidExternalSurface.android.kt;l=166;drc=ca82cb23d981de8904d52a21ef7072f23ce2e18e?q=file:androidx%2Fcompose%2Ffoundation%2FAndroidExternalSurface.android.kt%20function:AndroidExternalSurface), so we don't have to worry about different sizes being passed in the future.
+    # 
+    # There's technically still a reference to `ServoView` via `frameCallback`. This dependency will be severed in a follow-up.
+    # 
+    # Testing: There are no automated tests for Android.
+    # Part of: #33742
++https://github.com/servo/servo/pull/48518	(@veyndan, #48518)	android: Replace deprecated `onActivityResult` with Activity Result API (#48518)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit c8f362c0aaab92ce727cc984361e8320ac0cfa66
+    # Per [the docs](https://developer.android.com/reference/androidx/activity/ComponentActivity#onActivityResult(kotlin.Int,kotlin.Int,android.content.Intent)), `onActivityResult` is deprecated and has been replaced with the Activity Result API.
+    # 
+    # Testing: There are no automated tests for Android.
+-https://github.com/servo/servo/pull/48546	(@MohamedAli00949, #48546)	script: fix the borrow hazard panics in KeyframeEffect::GetKeyframes (#48546)
+    ^ commit b274bd2c8e23227f535de4c505799ab631206c1e
+    # Fix the borrow hazard panics in `KeyframeEffect::GetKeyframes` by using the `layout` (which is immutable in `cx` instead of other mutable usage) variabute into inner scope of accessing the keyframe declarations, instead of the global scope of the function.
+    # 
+    # Testing: We cannot write a deterministic test for this bug with our current testing infrastructure.
+    # Fixes: #46716
+    # 
+-https://github.com/servo/servo/pull/48290	(@jasonwilliams, #48290)	Enable container timing in WPT (#48290)
+    ^ commit abb886ccdf20337751fb1aea57c4a7d97a39acaf
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This enables testing for the experimental [container timing](https://wpt.fyi/results/container-timing/tentative?label=experimental&label=master&aligned) within WPT
+    # 
+    # Part of https://github.com/servo/servo/pull/46966
++https://github.com/servo/servo/pull/48549	(@yezhizhen, #48549)	script: Reduce alloc when checking if element is nonceable (#48549)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit 7bd56c4f18d1fb834b004bc1adc3bd81d887ca9f
+    # stylo's [helper](https://github.com/servo/stylo/blob/34d25f741765a0bdb894f8271852e633299352d8/style/str.rs#L161) produces a Cow and avoid allocation when the attribute value is already lowercased.
+    # 
+    # Another way to always avoid alloc is to use a window to scan with `eq_ignore_ascii_case`, but with higher time complexity than optimized https://doc.rust-lang.org/src/core/str/mod.rs.html#1382-1383.
+    # 
+    # Testing: Tested build. Rest covered by existing tests.
+-https://github.com/servo/servo/pull/48497	(@SimonSapin, @mrobinson, #48497)	script: Move `handle_mousedown_event` from `VirtualMethods` to `EditingContext` (#48497)
+    ^ commit 3b07503bc6d4641a35b4b14d1b3112b72476ce82
+    # … and add `enum SelectionTarget { Position, Word, Line }` to represent single- v.s. double- v.s. triple-click.
+    # 
+    # Testing: expecting no behavior change except for the unspecified behavior of dragging from an empty `<input>` or `<textarea>` no longer creating a document selection.
+    # Issue: this prepares for the "Document selection should support expanding the selection to word / line with double / triple click" part of https://github.com/servo/servo/issues/36460
+-https://github.com/servo/servo/pull/48251	(@Narfinger, @mrobinson, #48251)	script_bindings: Enforce no_gc for lifetime of byte array in DOMString calls (#48251)
+    ^ commit 8ff539803ee316c63d18c52a00e6ff4eb5d9e03a
+    # As discussed in this zulip thread (https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Is.20domstring.3A.3Aget_latin1_string.20unsafe.3F/with/625372322), get_latin1_string had unsafe behavior. If the bytes array is kept alive while a GC happens, we would point to potentially undefined memory.
+    # This fixes this by bounding the lifetime of the `EncodedBytes` struct with the lifetime of a NoGC token.
+    # For most of the methods we create a new NoGC token, as most of the uses do not escape the function and, hence, will not make a GC happen (as the spidermonkey function called enforces a similar NoGC token).
+    # We add comments to clarify the requirements and why this behavior is safe.
+    # 
+    # In the codebase we had this unsafe behavior once in script/dom/fetch/request.rs in constructor method. Because of the reason Headers() function is used, this was never unsafe.
+    # 
+    # Testing: DOMString has unit tests and WPT will find anything else but this is mostly a change to lifetimes and internal API.
+    # 
+-https://github.com/servo/servo/pull/48555	(@Narfinger, #48555)	script: Rename traverse_preorder_non_rooting to traverse_preorder_unrooted (#48555)
+    ^ commit cc0c73e197c0ab9a713fc8dd5903c9eeea21bd42
+    # The _unrooted name is now more commonly used, so we should be consistent. This just renames the function.
+    # 
+    # Testing: This is just a rename, so compilation is the test.
+    # 
+-https://github.com/servo/servo/pull/48559	(@mrobinson, @Loirooriol, #48559)	layout: Simplify implementation of `box-decoration-break: clone` (#48559)
+    ^ commit 8ff1d0ef8eb542a06c58a5d994e110448b54244d
+    # Previously the code was pushing unused starting and ending inline
+    # box line items to the wrong segments (the new line segment instead of
+    # the the old one, for example). This change makes it so that these loops
+    # are replaced just by width accounting and ensures that the account
+    # reflects the reality of the currently committed segment.
+    # 
+    # Testing: This shouldn't change behavior so is covered by existing tests.
+    # 
++https://github.com/servo/servo/pull/48560	(@mxmgorin, #48560)	webgl: Validate internalformat in getInternalformatParameter (#48560)
+    dom; WebGL 2 conformance fixes
+    ^ commit e4f06d68816ad98dd98909d04744b0291d873f88
+    # This makes `getInternalformatParameter` generate `INVALID_ENUM` and return`null` for an `internalformat` that is not color-, depth-, or stencil-renderable, as required by [OpenGL ES 3.0](https://registry.khronos.org/OpenGL-Refpages/es3.0/html/glGetInternalformativ.xhtml) and the [WebGL 2 spec](https://registry.khronos.org/webgl/specs/latest/2.0/#:~:text=given%20the%20passed%20target%20and%20internalformat). It previously passed any `internalformat` to GL and every enum returned sample counts instead of `null`.
+    # 
+    # Testing: `conformance2/state/gl-object-get-calls.html` now passes the subtest for invalid internal formats.
+    # Fixes: #26128. The WebGL thread panic no longer happens, since the debug check for GL errors now only logs a warning (#30568); the missing validation now prevents the invalid GL call.
++https://github.com/servo/servo/pull/48558	(@Narfinger, #48558)	script: Preallocate timer array (#48558)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit a114cd7f9782363228d0b9e5b1e25e7a09b38d61
+    # This preallocates the timer array on timer fireing and pushes the borrow_mut outside of the loop.
+    # As any website should not have too many timers this (amazon seems to have at most 85), this should not allocate too much space.
+    # 
+    # Testing: This just changes performance characteristics so should not change functionality.
+    # 
++https://github.com/servo/servo/pull/48568	(@Taym95, #48568)	Avoid cloning namespace prefixes during namespace lookup (#48568)
+    perf; Several fixes to avoid unneeded avoid
+    ^ commit 3a01b1e5323fb3167df554de0b0008e87982a668
+    # Avoid cloning namespace prefixes during namespace lookup
+    # 
+    # Testing: No behavior change, existing WPT tests should pass.
+    # 
+    # inspired by https://github.com/servo/servo/pull/48565.
+-https://github.com/servo/servo/pull/48567	(@jdm, #48567)	script: Ensure unminified script source outlives JS compilation. (#48567)
+    ^ commit bb3d550b8c6d8eb1ad6bc9361e05f6add2bf1fb3
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
+    # Compiling JS source code borrows the string data. The code path for transparently unminifying JS caused the source string to be dropped before compiling starts, leading to use-after-free issues.
+    # 
+    # Testing: New unit test added.
+    # Fixes: #48552
+    # 
+-https://github.com/servo/servo/pull/48563	(@Narfinger, #48563)	base: Switch from Box::leak to Box::into_raw (#48563)
+    ^ commit 613461f31b56eabf2709bca555c73d75bd05ec1f
+    # As of the documentation here: https://doc.rust-lang.org/std/boxed/struct.Box.html#method.leak Box::leak should be avoided for cases where the data should not leak. This replaces these usages in the generic channel group of primitives to be into_raw.
+    # 
+    # Testing: This should be equivalent behavior (except safer) but if it is different, normal testing will find it as generic channels are used all over.
+    # 
++https://github.com/servo/servo/pull/48208	(@sahilnyk, #48208)	Fix/devtools object prototype (#48208)
+    devtools; Console: fixed object `<prototype>`
+    ^ commit 9dfc0fb94996f19779d9a38b033fb1181609757c
+    # When an object is printed in Servo DevTools it now sends its actual prototype to Firefox instead of sending the same object again. This stops the `<prototype>` entry from repeating forever.
+    # 
+    # Added a regression test to make sure the prototype does not repeat.
+    # 
+    # Testing: `./mach test-devtools test_console_log_object_prototype_does_not_repeat -N 0`
+    # 
+    # Fixes: #47247
+    # 
+    # <img width="236" height="121" alt="Screenshot from 2026-09-19 14-42-06" src="https://github.com/user-attachments/assets/750f6af9-4568-4623-9401-eb3767aec122" />
+    # 
+-https://github.com/servo/servo/pull/48183	(@gterzian, #48183)	encoding: switch to explicit dom string replacement in text encoder (#48183)
+    ^ commit bd01d19d8cc152311e53d400ffa9555319fefffa
+    # Move js to dom string conversion to a safe ad hoc function mirroring DOMstring but supporting the needs of dom/encodings; remove unnecessary conversion to a primitive.
+    # Document DOMstring::from_js_string and root the string pointer used in it.
+    # 
+    # Testing: no change in behavior.
+    # Fixes: Part of https://github.com/servo/servo/issues/30862
+    # 
++https://github.com/servo/servo/pull/48556	(@leowatts, #48556)	layout: Alter ratio_from_view_box to allow fractional values (#48556)
+    layout; Fix aspect ratio for SVG `viewBox` with fractional values
+    ^ commit 58fee6d54cf3ab598a95d0c9fe6aac59f4e87f28
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # Parse view box constraints with `parse_double` to allow fractional width and height. Note that commas are permitted by the spec which states:
+    # 
+    # > The value of the ‘viewBox’ attribute is a list of four numbers [...] separated by whitespace and/or a comma
+    # 
+    # Testing: Added WPT 
+    # Fixes: #48526 
+    # 
+>>> 2026-10-02T23:24:35Z
++https://github.com/servo/servo/pull/48574	(@veyndan, #48574)	android: Move `FrameCallback` where needed (#48574)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit a7075787345b3dd0b286ba5d086178a3b9199909
+    # Move the `FrameCallback` inheritance to `SurfaceHolderCallback`, as `ServoView` doesn't need to know about this callback. This again reduces the dependency `SurfaceHolderCallback` has on `ServoView`.
+    # 
+    # Testing: There are no automated tests for Android.
+    # Part of: https://github.com/servo/servo/issues/33742
++https://github.com/servo/servo/pull/48573	(@veyndan, #48573)	android: Move URI loading to `ServoNavigator` (#48573)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit 3ba5c32c3a92ccb385daff64d8a559f48a70121c
+    # Similar to #48416 but for reload navigation.
+    # 
+    # Testing: There are no automated tests for Android.
+    # Part of: #33742
+-https://github.com/servo/servo/pull/48577	(@dependabot[bot], @dependabot[bot], #48577)	build: bump btleplug from 0.13.2 to 0.13.3 (#48577)
+    ^ commit 14648eb8933ce0aa9ad79a6ec57675f08237b0b7
+    # Bumps [btleplug](https://github.com/deviceplug/btleplug) from 0.13.2 to 0.13.3.
+    # <details>
+    # <summary>Changelog</summary>
+    # <p><em>Sourced from <a href="https://github.com/deviceplug/btleplug/blob/master/CHANGELOG.md">btleplug's changelog</a>.</em></p>
+    # <blockquote>
+    # <h1>0.13.3 (2026-09-27)</h1>
+    # <h2>Bugfixes</h2>
+    # <ul>
+    # <li>Fix a race between waking and closing Android (<code>droidplug</code>) JNI adapter
+    # closures that could free a closure while another thread was still calling
+    # it. Concurrent wake and close were enough to trigger SIGSEGV/SIGBUS crashes
+    # through <code>fn_adapter_call_internal</code>, which dominated the native crash rate of
+    # Android apps using btleplug. Closures are now reference counted in the
+    # adapter object's handle field, and wake/close access to that field is
+    # serialized on the object monitor, so an in-flight call always holds its own
+    # reference.</li>
+    # <li>Fix CoreBluetooth <code>discover_services()</code> never resolving when service or
+    # characteristic discovery reported an error, when the peripheral had no
+    # services, or when the peripheral was no longer known to the adapter. Service
+    # discovery errors are now returned, and a characteristic discovery error
+    # completes that service without characteristics. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/486">#486</a>)</li>
+    # <li>Fix CoreBluetooth panics on late or unexpected discovery callbacks, such as
+    # characteristics for included services or descriptors arriving after discovery
+    # finished. The panic killed the CoreBluetooth event thread, so every later
+    # operation on the adapter hung. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/487">#487</a>)</li>
+    # <li>Fix concurrent CoreBluetooth <code>connect()</code>, <code>disconnect()</code>, or
+    # <code>discover_services()</code> calls on one peripheral leaving all but the last caller
+    # waiting forever. Every concurrent caller now receives the result. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/488">#488</a>)</li>
+    # <li>Fix CoreBluetooth reads, writes, subscriptions, and descriptor operations
+    # never resolving when services were rediscovered, invalidated by the device, or
+    # when peripherals were cleared. Rediscovery keeps in-flight operations on
+    # attributes that still exist, operations on attributes that disappear fail with
+    # an error, and a services-modified event only drops the invalidated services.
+    # On CoreBluetooth, <code>Central::clear_peripherals()</code> now disconnects any
+    # peripheral that is still connected. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/489">#489</a>)</li>
+    # <li>Fix a Windows deadlock when GATT operations ran concurrently on
+    # characteristics of the same service, for example two <code>subscribe()</code> calls
+    # joined on one task. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/481">#481</a>)</li>
+    # <li>Fix a Windows scanner crash when a nearby device advertised a truncated
+    # service data section. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/482">#482</a>)</li>
+    # <li>Fix 128-bit service data UUIDs being reported byte-reversed on Windows. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/483">#483</a>)</li>
+    # <li>Fix every GATT operation failing on Windows after reconnecting a device whose
+    # connection dropped, until <code>disconnect()</code> was called explicitly. <code>connect()</code> on
+    # an already connected peripheral now returns immediately. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/484">#484</a>)</li>
+    # <li>Fix BlueZ <code>mtu()</code> panicking on BlueZ versions that do not report the MTU
+    # (older than 5.62). The panic also poisoned the peripheral's service cache,
+    # breaking every later operation on it. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/485">#485</a>)</li>
+    # <li>Fix a failed Android service discovery never resolving <code>discover_services()</code>
+    # and permanently blocking the peripheral's command queue. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/491">#491</a>)</li>
+    # <li>Fix an Android disconnect during a descriptor read or write, MTU request, or
+    # RSSI read permanently blocking the peripheral's command queue and suppressing
+    # <code>DeviceDisconnected</code>. Any operation interrupted by a disconnect now fails with
+    # <code>Error::NotConnected</code>; previously writes could report success and reads or
+    # discovery failed with an unrelated JNI error. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/490">#490</a>)</li>
+    # </ul>
+    # <!-- raw HTML omitted -->
+    # </blockquote>
+    # <p>... (truncated)</p>
+    # </details>
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/7fb80f4d48256042642572755e3fee8da151d15d"><code>7fb80f4</code></a> build: Update yanked chacha20 dev dependency to 0.10.2</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/20b9affaceec4f92ee799b81d725c7297ebf4524"><code>20b9aff</code></a> build: Limit published crate contents to the library</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/3adcb142aeea614d4b0738fa726ea40fa630d06b"><code>3adcb14</code></a> doc: Update CHANGELOG for 0.13.3</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/2dc2fc175ebfb9db77a36389e66f233664ca18f1"><code>2dc2fc1</code></a> docs: Remove docs dir for now, need to restructure</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/15b5e12158e9560ab49a2229dfb5e628ac9a0432"><code>15b5e12</code></a> doc: Record cross-platform hardware results and findings; drop timing example</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/f6eed326ab8af6a40f1f8c7dacbcc0e806ae11e0"><code>f6eed32</code></a> fix(droidplug): Retry connections that fail to be established</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/6c3186144c99a81be5688bdb09cc5b28e99ac77f"><code>6c31861</code></a> fix(winrtble): Bound GATT lookups in service-filtered retrieval</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/e7ea6500c9e0e90e7b1daad58e5afb6da6346818"><code>e7ea650</code></a> scripts: Share JDK detection between the Android build and test runs</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/c83e10a94b10e3cae196ba397abe9c22f5f7895b"><code>c83e10a</code></a> scripts: Bring the PowerShell test runner in line with the bash runner</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/450b68f5144dee1ae6f89d15497ae21cf40f4a0a"><code>450b68f</code></a> examples: Add WinRT connected-device retrieval timing diagnostic</li>
+    # <li>Additional commits viewable in <a href="https://github.com/deviceplug/btleplug/compare/0.13.2...0.13.3">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=btleplug&package-manager=cargo&previous-version=0.13.2&new-version=0.13.3)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48578	(@dependabot[bot], @dependabot[bot], #48578)	build: bump tokio-rustls from 0.26.5 to 0.26.6 (#48578)
+    ^ commit d6fda14e71a079abb1dbe53a0ed31eb9f61978b8
+    # Bumps [tokio-rustls](https://github.com/rustls/tokio-rustls) from 0.26.5 to 0.26.6.
+    # <details>
+    # <summary>Release notes</summary>
+    # <p><em>Sourced from <a href="https://github.com/rustls/tokio-rustls/releases">tokio-rustls's releases</a>.</em></p>
+    # <blockquote>
+    # <h2>0.26.6</h2>
+    # <p>0.26.5 added an optimization to batch multiple reads which could swallow some errors. Buffer errors so that they propagate to the caller as soon as the caller next reads from the stream.</p>
+    # <h2>What's Changed</h2>
+    # <ul>
+    # <li>Buffer and propagate errors from transport by <a href="https://github.com/dtolnay"><code>@​dtolnay</code></a> in <a href="https://redirect.github.com/rustls/tokio-rustls/pull/205">rustls/tokio-rustls#205</a></li>
+    # <li>Prepare 0.26.6 by <a href="https://github.com/djc"><code>@​djc</code></a> in <a href="https://redirect.github.com/rustls/tokio-rustls/pull/206">rustls/tokio-rustls#206</a></li>
+    # </ul>
+    # </blockquote>
+    # </details>
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li><a href="https://github.com/rustls/tokio-rustls/commit/8aebb7c9556ea8024c1b974b84a4a6f2e306889a"><code>8aebb7c</code></a> Bump version to 0.26.6</li>
+    # <li><a href="https://github.com/rustls/tokio-rustls/commit/6f8509a2bfca696b2b709f3346086c886620f351"><code>6f8509a</code></a> Rename buffered_err to error</li>
+    # <li><a href="https://github.com/rustls/tokio-rustls/commit/bd0494d27d03a6cee042ccaf953b11e5bef68747"><code>bd0494d</code></a> Buffer and propagate errors from transport</li>
+    # <li><a href="https://github.com/rustls/tokio-rustls/commit/a7813403f55cb777a061a01885487d0ab4dcfb7e"><code>a781340</code></a> Add regression test for issue 204</li>
+    # <li><a href="https://github.com/rustls/tokio-rustls/commit/9d0dae6593daec0f9c44144e9ad7127fe574c8b0"><code>9d0dae6</code></a> build(deps): bump rustls from 0.23.44 to 0.23.45</li>
+    # <li><a href="https://github.com/rustls/tokio-rustls/commit/0ad049ef4620161936ee3216a75c0fcecc4b6dfd"><code>0ad049e</code></a> build(deps): bump rustls from 0.23.43 to 0.23.44</li>
+    # <li><a href="https://github.com/rustls/tokio-rustls/commit/4f913c754aa4171440e50ceb6a160ceebb0d326e"><code>4f913c7</code></a> build(deps): bump rcgen from 0.14.9 to 0.14.10</li>
+    # <li>See full diff in <a href="https://github.com/rustls/tokio-rustls/compare/v/0.26.5...v/0.26.6">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=tokio-rustls&package-manager=cargo&previous-version=0.26.5&new-version=0.26.6)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48579	(@dependabot[bot], @dependabot[bot], #48579)	build: bump wl-clipboard-rs from 0.9.3 to 0.9.4 (#48579)
+    ^ commit 8403f210613ee2811009b9810fb3a529d88bca61
+    # Bumps [wl-clipboard-rs](https://github.com/YaLTeR/wl-clipboard-rs) from 0.9.3 to 0.9.4.
+    # <details>
+    # <summary>Changelog</summary>
+    # <p><em>Sourced from <a href="https://github.com/YaLTeR/wl-clipboard-rs/blob/master/CHANGELOG.md">wl-clipboard-rs's changelog</a>.</em></p>
+    # <blockquote>
+    # <h2>v0.9.4 (28th Sep 2026)</h2>
+    # <ul>
+    # <li>Copy no longer reports an error when the paste destination closes its pipe too early.</li>
+    # <li>Added a <code>watch</code> module that provides a blocking API for monitoring clipboard changes. Create a <code>Watcher</code>, then loop on <code>while let Some(event) = watcher.next_event()? {}</code>. The event contains the new MIME types and lets you receive the clipboard contents if you wish.</li>
+    # <li>Added <code>wl-paste --watch &lt;COMMAND&gt;</code> that works like the C wl-clipboard version. The command is invoked with the new clipboard contents on stdin, and <code>CLIPBOARD_STATE</code> and <code>CLIPBOARD_TYPE</code> environment variables set.</li>
+    # <li>Added <code>wl-copy --sensitive</code> and <code>copy::Options::sensitive()</code> to hint to clipboard managers that copied data is sensitive.</li>
+    # <li>Improved handling of <code>x-kde-passwordManagerHint</code>: it is offered last, requests for it do not count toward <code>serve_requests</code>, and automatic-type pastes prefer other MIME types.</li>
+    # </ul>
+    # </blockquote>
+    # </details>
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li><a href="https://github.com/YaLTeR/wl-clipboard-rs/commit/f74da839b368e6a7c6d2f63acfe48d3d42474001"><code>f74da83</code></a> Bump version to 0.9.4</li>
+    # <li><a href="https://github.com/YaLTeR/wl-clipboard-rs/commit/83a72144676934f3b3d3b633da475d5859f55636"><code>83a7214</code></a> Update dependencies</li>
+    # <li><a href="https://github.com/YaLTeR/wl-clipboard-rs/commit/05d8d34a1b0dcfd80ee5b195d6d3d5ee2b8969a9"><code>05d8d34</code></a> Improve changelog wording</li>
+    # <li><a href="https://github.com/YaLTeR/wl-clipboard-rs/commit/419a541d6fcd8e2961e12f2f9b9927f62a1437a7"><code>419a541</code></a> Fix comment on sensitive(bool)</li>
+    # <li><a href="https://github.com/YaLTeR/wl-clipboard-rs/commit/06b512fdab9c461ec71438c9b739eaaeb5ea447f"><code>06b512f</code></a> Update CHANGELOG</li>
+    # <li><a href="https://github.com/YaLTeR/wl-clipboard-rs/commit/edd603fb9abf4df38fca65b8485d83bac0352b7e"><code>edd603f</code></a> Sort password manager hint last for automatic pastes</li>
+    # <li><a href="https://github.com/YaLTeR/wl-clipboard-rs/commit/f6e51febbff9ebb8fe245cb92c1bb52ef230b8d8"><code>f6e51fe</code></a> Add --sensitive to wl-copy and copy options</li>
+    # <li><a href="https://github.com/YaLTeR/wl-clipboard-rs/commit/a069b8124fcad6a79c1beca593e392492fa86456"><code>a069b81</code></a> Don't count x-kde-passwordManagerHint towards serve_requests</li>
+    # <li><a href="https://github.com/YaLTeR/wl-clipboard-rs/commit/42825932ed406d63c5f385ab8ae0f65f8cbc4c2c"><code>4282593</code></a> Offer x-kde-passwordManagerHint last</li>
+    # <li><a href="https://github.com/YaLTeR/wl-clipboard-rs/commit/35ecef90b171dee6db3066737556b92017b98cca"><code>35ecef9</code></a> Regen README.md</li>
+    # <li>Additional commits viewable in <a href="https://github.com/YaLTeR/wl-clipboard-rs/compare/v0.9.3...v0.9.4">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=wl-clipboard-rs&package-manager=cargo&previous-version=0.9.3&new-version=0.9.4)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48572	(@TimvdLippe, #48572)	script: Introduce helper trait for creating UA Shadow roots (#48572)
+    ^ commit c9c293c6b7533128291becc43511f8f7941f1021
+    # There was a bunch of boilerplate across several elements that
+    # all create their own UA shadow root structure. Instead of
+    # the duplication, the trait now handles these, as well as
+    # an efficient method to create elements. This removes a bunch
+    # of duplicated code and imports.
+    # 
+    # All of this is in preparation of adding more to the media element
+    # UA shadow root for cues.
+    # 
+    # Testing: it compiles
+-https://github.com/servo/servo/pull/48557	(@yezhizhen, #48557)	wpt: Enable web animations for `touch-events` (#48557)
+    ^ commit d04960a38d5c3af9c5eb350d666c0187e0da86a1
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # tests\wpt\tests\touch-events\single-touch.html uses Web Animations API internally, which makes the whole test fail. Enabling the pref now makes it pass 226 out of 227 subtests, same as firefox.
+    # 
+    # The failing "Verify touch events for a single touch drag operation" is same as Firefox, see [wpt.fyi](https://wpt.fyi/results/touch-events/single-touch.html?q=single-touch.html&run_id=5147945233285120&run_id=5129748195049472&run_id=5202134567223296&run_id=5189886863998976):
+    # `→ assert_array_equals: unexpected event ordering lengths differ, expected array ["target0:touchstart", "target0:touchmove", "target0:touchend"] length 3, got ["target0:touchstart", "target0:touchmove", "target0:touchmove", "target0:touchend"] length 4`
+    # 
+    #  I feel the subtest itself is wrong. This is a Chromium specific touch-coalescing assertion added in https://github.com/web-platform-tests/wpt/pull/49320. So I fixed the test as no spec expect such behaviour, which makes Servo/Firefox 227/227.
+-https://github.com/servo/servo/pull/48566	(@yezhizhen, #48566)	webdriver: Remove redundant invalidation check (#48566)
+    ^ commit 9a2382677544e148163738b75aa8a7321706773c
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This is introduced in #37977, which claims the check is out of spec.
+    # But actually such check should be covered in the earlier step [process an input source action sequence](https://w3c.github.io/webdriver/#dfn-process-an-input-source-action-sequence), 
+    # https://github.com/servo/servo/blob/8ff1d0ef8eb542a06c58a5d994e110448b54244d/components/webdriver_server/actions.rs#L1059-L1060
+    # as tick duration is computed from duration of pointer/wheel actions, which goes through the boundary check.
+    # 
+    # With #48143 and https://github.com/w3c/webdriver/pull/1974 landed, this "out of spec check" should now be redundant, if we follow specs correctly in rest of places.
+    # 
+    # Testing: Covered by existing tests. This exposes that we are missing the invalidation for [process a null action](https://w3c.github.io/webdriver/#dfn-process-a-null-action), key with pause, pointermove with duration, and wheel scroll with duration. To be addressed in a follow-up.
++https://github.com/servo/servo/pull/48467	(@mu-mostafa98, @jdm, #48467)	svg: add the data model (#48467)
+    wip svg; New SVG crate: data model for native SVG rendering
+    ^ commit e21d2e4d5886f80d754da0340a788902e788cf3a
+    # Add the svg crate, holding the pure SVG data model that the layout layer builds and the render layer consumes.
+    # 
+    # components/svg/
+    #     ├── lib.rs             
+    #     └── model/
+    #         ├── mod.rs        
+    #         ├── document/       # SvgTree, definitions, viewport
+    #         │   ├── mod.rs          # SvgTree (root + flat def maps)
+    #         │   ├── defs/
+    #         │   │   ├── mod.rs          # DefRef<T>
+    #         │   │   ├── clip_path.rs    # ClipPathDef
+    #         │   │   ├── filter.rs       # FilterDef
+    #         │   │   ├── gradient.rs     # GradientDef (enum)
+    #         │   │   ├── marker.rs       # MarkerDef
+    #         │   │   ├── mask.rs         # MaskDef
+    #         │   │   └── pattern.rs      # PatternDef
+    #         │   └── viewport.rs     # ViewportInfo, SvgViewport, ViewBox, AspectRatio
+    #         ├── element/        # SvgNode and its content kinds
+    #         │   ├── mod.rs          # SvgNode, SvgTag, Container
+    #         │   ├── shape.rs        # Shape + rect/circle/ellipse/line/polyline/polygon/path
+    #         │   ├── text.rs         # TextSpan
+    #         │   └── image.rs        # SvgImage
+    #         ├── style/          # paint-level state
+    #         │   ├── mod.rs          # NodeStyle, RenderHints, PaintOrder, rendering enums
+    #         │   ├── paint.rs        # FillParams, StrokeParams, FillRule, LineCap, LineJoin, MarkerRefs
+    #         │   └── paint_servers.rs# PaintServer
+    #         ├── units.rs        # Id, Length, Opacity
+    #         ├── geometry.rs     # Point, PathData, PathCommand
+    #         └── transform.rs    # TransformOp
+    # 
++https://github.com/servo/servo/pull/47957	(@kevlu93, #47957)	media-audio: Implement DelayNode interface (no cycle handling) (#47957)
+    dom; Web Audio `DelayNode` now supported, no cycle handling
+    ^ commit 12bd2ae9a00e2f27fe891fa8cbbd5f8578bf5be4
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    ^ /!\ contains WebIDL changes! did we ship a new API?
+    # This PR implements the DelayNode interface. In order to simplify the review, it does not implement the "cycle breaking" functionality of DelayNodes in cycles of the audio graph. That has been split off into another branch and will be a separate PR.
+    # 
+    # The DelayNode consists of two internal nodes, both of which implement `AudioNodeEngine`: DelayReader and DelayWriter. Having the two internal nodes will allow the DelayNode to act as a cycle breaker.
+    # 
+    # Testing: Enabled almost all WPT tests in `the-delaynode-interface`, with the exception of `no-dezippering.html`, which relies on OfflineContext implementing `suspend`
+    # Relates to: #22369, issue will be fixed after cycle breaking implemention is merged.
+-https://github.com/servo/servo/pull/47853	(@shubhamg13, #47853)	webgl: Fix clippy warning (#47853)
+    ^ commit 14ccc53154bb48d1daeb6c3d63a58a6f32c0e5db
+    # Fix clippy warning
+    # ```
+    # warning: unneeded `return` statement
+    #     --> components/webgl/webgl_thread.rs:2062:17
+    #      |
+    # 2062 |                 return sender.send(Self::link_program(gl, program_id)).unwrap();
+    # 
+    # ```
+    # 
+    # Testing: Warning Free Compilation
++https://github.com/servo/servo/pull/48571	(@mxmgorin, #48571)	webgl: Initialize framebuffers before blitFramebuffer (#48571)
+    dom; WebGL 2 conformance fixes
+    ^ commit 8bdd959d652373831255d260b27dd6dfd4989d52
+    # This makes `blitFramebuffer` initialize the attachments of both framebuffers before blitting, as required for [WebGL resources](https://registry.khronos.org/webgl/specs/latest/1.0/#:~:text=must%20always%20contain%20initialized%20data), and generate `INVALID_FRAMEBUFFER_OPERATION` when either framebuffer is incomplete, as required by [OpenGL ES 3.0 spec](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf) (4.3.3). Previously the destination was cleared at the next read, discarding the blit, so every multisample resolve read back zeros, and an uninitialized source was copied as is.
+    # 
+    # Testing: `multisample-with-full-sample-counts.html` in `conformance2/` now pass.
+    # 
+-https://github.com/servo/servo/pull/48017	(@mrobinson, #48017)	constellation: Move `BrowsingContextGroup` to `ConstellationWebView` (#48017)
+    ^ commit 1a6ef53a2969f18fa30712ecfe82abd886b55560
+    # This is the first simplification from #47294. It moves
+    # `BrowsingContextGroup` to `ConstellationWebView`. Every WebView has a
+    # single `BrowsingContextGroup`, but this group might be shared between
+    # `WebView`s. This is enforced by keeping groups in an `Rc<RefCell<..>>`
+    # -- the shared ownership reflecting the reality of the specification.
+    # 
+    # In addition, this change fixes a leak of `WebGPU` threads that happened
+    # when a `WebView` was destroyed before shutdown.
+    # 
+    # Testing: This should not change behavior (other than the leak fix, which
+    # is difficult to test) so is covered by existing tests.
+    # Fixes: This is part of #47294.
+    # 
+-https://github.com/servo/servo/pull/48147	(@Gae24, #48147)	script_bindings: Ensure that raw JS types are not wrapped in a `RootedTraceableBox` inside WebIDL dictionaries (#48147)
+    ^ commit e4ab7ad82da23a300b2b54557eb46c93a1085e16
+    # Avoid wrapping _any_ and _object_ dictionaries members in a `RootedTraceableBox`, as dictionaries are already rooted.
+    # 
+    # Testing: It compiles
+    # Part of #48359 
+    # 
+-https://github.com/servo/servo/pull/48581	(@shubhamg13, #48581)	script: Update `connected_to_document` state when disconnecting `IntersectionObserver` (#48581)
+    ^ commit 0ce2ebfef8ba873f93b4988f7fe635f61f982551
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # Due to early check, `IntersectionObserver` is not connected again when unobserved once.
+    # 
+    # Testing: WPT Added
+    # - https://github.com/shubhamg13/servo/actions/runs/36971444553
+    #  
+    #  
+-https://github.com/servo/servo/pull/47988	(@jschwe, #47988)	mach: Support running unit-tests on ohos (#47988)
+    ^ commit cdcf074f32af402eee8b93c05cd2b49958528fc1
+    # - Skip crown unit-tests when cross-compiling
+    # - Skip servoshell unit-tests for ohos, since servoshell pulls in NAPI symbols, which are not available when running as an executable instead of an app.
+    # - Skip tests that rely on files from the repository on ohos.
+    # - Use ohos-test-runner as the test-runner (essentially pushes the test files to the device and executes them there).
+    # - Add concept of subcommand to the cargo-build-like command, since all parameters should be added after the subcomand (in this case `run` from `cargo nextest run`). An alternative could be to have command be `[str]` instead, but then we'd need to update all callers and there are places which string compare against `command`.
+    # - Not all tests pass, some follow-up required, the main goal is getting things running first.
+    # 
+    # Testing: Currently not covered by automated tests for ohos, but existing supported platforms are executed in CI, so regressions should be caught for those platforms. 
+    # 
++https://github.com/servo/servo/pull/48564	(@mrobinson, @Loirooriol, #48564)	layout: Rewind inline box starts at soft wrap line breaks (#48564)
+    layout; Line layout fixes related to soft wrap line breaks
+    ^ commit a6761746030cc7c425fa0c30ba1d03b2739543f6
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # When a soft wrap opportunity triggers a line break, any trailing inline
+    # box starts should move to the next line instead of being included on the
+    # broken line. This is so that the padding, border, and margins of those
+    # inline boxes "stick" to the box content rather than trailing the line
+    # before.
+    # 
+    # Testing: This causes a couple WPT tests to start passing.
+    # 
+-https://github.com/servo/servo/pull/48593	(@Gae24, #48593)	script: Clean up `JSContext` usages for htmlelements (#48593)
+    ^ commit d735c4566c1d0370d537a935d9c271b715a0d5d7
+    # Fix crown's lint `jscontext_first_arg` inside htmlscriptelement.rs, htmlvideoelement.rs, htmlmediaelement.rs, htmlimageelement.rs and htmliframeelement.rs.
+    # 
+    # Testing: It compiles 
+    # 
+>>> 2026-10-04T00:29:54Z
++https://github.com/servo/servo/pull/48598	(@yezhizhen, #48598)	macro: Reduce alloc in `make_enumerated_getter` (#48598)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit b8fc50f07bda81b7147dc5923f6ed5ac9ecf11fb
+    # This one is used quite frequently, and the fix is neat.
+    # 
+    # Testing: Only tested compilation.
++https://github.com/servo/servo/pull/48595	(@veyndan, #48595)	android: Use property delegation for Compose states (#48595)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit 93726c336b0175ca4235d1bd24a625a43789d1c2
+    # By using property delegation for `[Mutable]State` types, we can simplify their variable names and usage.
+    # 
+    # Testing: There are no automated tests for Android.
++https://github.com/servo/servo/pull/48596	(@veyndan, #48596)	android: Remove unused code (#48596)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit e1cba60688c37fed4fefa8bf01710f99b34c2a84
+    ^ /!\ contains servoshell changes! does it affect the user experience?
+    # The `Servo` class will be refactored a bit soon, and having dead code lying around makes that refactoring harder. We can always revive it if it's ever needed in the future.
+    # 
+    # Testing: There are no automated tests for Android.
+-https://github.com/servo/servo/pull/48585	(@yezhizhen, #48585)	webdriver: Invalidate duration of null/key/pointer/wheel action (#48585)
+    ^ commit 8b8ebf0f8782359b677581430db2d36d093bc680
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This follows https://github.com/servo/servo/pull/48566#issuecomment-5934206519 to address revealed issues in implementations.
+    # 
+    # Testing: We now pass `invalid.py` in spec compliant way. Added two subtests for previously uncovered pointermove duration and scroll duration.
++https://github.com/servo/servo/pull/48519	(@dzfrias, #48519)	script: Implement beforeinput (#48519)
+    dom; `beforeinput` now works in text fields and partially in `contenteditable`
+    ^ commit d8f1758d3cb438407598ada688ae64135715b9bf
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This change implements `beforeinput` for most cases in which the `input` event would fire. `beforeinput`, similar to `input`, is generally fired as a result of an editing action. Additionally, the `inputType` is now set when `beforeinput` should fire as a result of an `execCommand` (previously nothing was sent before, which prevented `inputType` from being set in a `contenteditable` context).
+    # 
+    # Passing mach try: https://github.com/dzfrias/servo/actions/runs/36633778067
+    # 
+    # Testing: Many `beforeinput`-related WPT subtests now pass
+-https://github.com/servo/servo/pull/48586	(@TimvdLippe, #48586)	script: Implement UAShadowRoot for input types (#48586)
+    ^ commit b63af609ced4b48ee1a448ce414684d745cd587d
+    # These input types don't operate on themselves, but instead on the input element. Therefore, we need a separate trait that can create and update the UA shadow DOM for an other element.
+    # 
+    # This removes some duplication in handling of widgets and makes it clear what is implemented where.
+    # 
+    # Testing: it compiles
+-https://github.com/servo/servo/pull/48548	(@jdm, #48548)	script: Ensure pending timer callbacks are always reachable from GC roots. (#48548)
+    ^ commit 3ae0049380fefea2f27905663c8ea7031ce801c2
+    # The timer code contained crown warning suppressions that hid the presence of unrooted callbacks after #48315. These changes address that by adding rooted versions of several enums that can be passed around safely as arguments and used when invoking the timer callbacks, and by ensuring that the unrooted versions receive appropriate crown annotations so we can't reintroduce similar issues in the future.
+    # 
+    # The changes that split the JS timer callbacks out from the non-JS timers prevent callers that only care about non-JS timers from having to think about rooting.
+    # 
+    # Testing: New crashtest added.
+    # Fixes: #48538
+    # Closes #48545
+    # Fixes: #20452
+    # 
+-https://github.com/servo/servo/pull/48600	(@Gae24, #48600)	script_bindings: Remove `PromiseJobCallback` (#48600)
+    ^ commit a889b3e99f07d0014a7a7539fe5599d5f3cc931e
+    ^ /!\ contains WebIDL changes! did we ship a new API?
+    # With the microtask changes done when bumping mozjs to ESR 153, this is now unused. 
+    # 
+    # Testing: It compiles
+    # 
++https://github.com/servo/servo/pull/48601	(@veyndan, #48601)	android: Move resume lifecycle callback to Compose (#48601)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit 35c139cd48136dca76e3bad15484daa76e91926c
+    # Long term, this helps with pushing `servoView` into `setContent` (a requirement for #33742). In the short term, this removes a couple of `lateinit`s which could have otherwise throw a unitilisation exception if misused.
+    # 
+    # Testing: There are no automated tests for Android.
++https://github.com/servo/servo/pull/48592	(@veyndan, #48592)	android: Move frame updates to Compose (#48592)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit cdf0a2bf1863ecbc2a4f563b33ef3d73046374d0
+    # A better evolution of a7075787345b3dd0b286ba5d086178a3b9199909, where we just move frame updates directly to Compose.
+    # 
+    # Testing: There are no automated tests for Android.
+    # Part of: #33742
+-https://github.com/servo/servo/pull/48599	(@mrobinson, #48599)	script: Do not consider `width` a relevant `<image>` mutation (#48599)
+    ^ commit 2e584dbf9d1db78e19a3e65c15c519bc2088d95e
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # The specification says that `width` should be considered a relevant
+    # mutation (i.e. one that can trigger new image data loading), but no
+    # other browser does this. This was probably added to the specification
+    # because it used to be used in a `srcset` fallback. No browser
+    # implementat that fallback either (and Servo doesn't support the
+    # correponding attribute). Removing `width` from the list of relevant
+    # mutations fixes test flakiness
+    # 
+    # Testing: This fixes flakiness in
+    # `/_webgl/conformance/textures/misc/texture-upload-size.html`. Before this
+    # change the test would flake almost immediately when run locally, but with
+    # it I was able to run it 20+ times without flaking. Another test starts to fail
+    # correctly as we don't support `sizes='auto'`.
+    # Fixes: #21770.
+    # Fixes: #46882.
+    # 
+-https://github.com/servo/servo/pull/48602	(@mrobinson, #48602)	wpt: Bounce CSP errors to opener immediately in `navigation-support.js` (#48602)
+    ^ commit de7829f1f5c73c86fb9c508a23e100b1434ac72e
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This fixes an issue with the flakiness of this test for engines that do
+    # not fire CSP errors synchronously when opening a WebSocket (Servo and
+    # WebKit namely). A previous version of this test had an immediate
+    # notification, but it was removed in web-platform-tests/wpt#51758. That
+    # commit removed the immediate notification because a violation was added
+    # as a marker. This change restores the immediate notification (leaving
+    # the marker behavior), but does not bounce it if it's not on the list of
+    # violations we are waiting for.
+    # 
+    # Testing: This is a speculative fix for flaky Trusted Types tests. Once this
+    # changes lands we can observe whether or not test results improve.
+    # 
+>>> 2026-10-04T23:56:09Z
+-https://github.com/servo/servo/pull/48614	(@servo-wpt-sync, #48614)	Sync WPT with upstream (04-10-2026) (#48614)
+    ^ commit c8d280378b4e6bccd97a095f57bfc2f50b4df8e9
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # Automated downstream sync of changes from upstream as of 04-10-2026
+    # [no-wpt-sync]
++https://github.com/servo/servo/pull/48265	(@SilvioPilato, #48265)	script: Add support for <input type='image'> (#48265)
+    web; `<input type=image>` is now supported, only missing `width` and `height` IDL attributes
+    ^ commit 89301ede2ed1d34f18f92ece878dc7f76583348f
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This implements`<input type='image'>`:
+    # - the image is shown via the UA shadow tree containing an <img>;
+    # - `width` and `height` get mapped to presentational hints, similarly to other HTML components;
+    # - coordinates are selected from downcasted `MouseEvent` to produce rect relative coordinates;
+    # - I had to add a couple of CSS exclusions to `components/layout/stylesheets/servo.css` to comply with WPT expectations;
+    # - for form submission and other behavioural aspects I tried to comply to the HTML spec;
+    # - for the rest I mostly copied the patterns of the other input components I saw.
+    # - `usemap` is not implemented;
+    # 
+    # Not implemented:
+    # - `height` and `width` IDL attributes (assuming it's out scope, am I correct?)
+    # 
+    # Testing: WPT tests have been run and expectations updated. Specifically:
+    # - `html/semantics/forms/the-input-element/image-click-form-data.html`
+    # - `html/semantics/forms/the-input-element/image01.html`
+    # 
+    # Fixes: #47645
+    # 
++https://github.com/servo/servo/pull/48615	(@yezhizhen, #48615)	script: Reduce alloc in "fetch and process the linked resource" (#48615)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit c699de3d02656331ed1d6e861ccda2344c718ade
+    # We can convert in place.
+    # 
+    # Testing: Tested build.
++https://github.com/servo/servo/pull/48608	(@veyndan, #48608)	android: Move stop navigation to `ServoNavigator` (#48608)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit c2c10bf54f284bf53dc8bb7f562585047a872de6
+    # Similar to #48416 but for stop navigation. It's debatable whether `stop()` should live in `ServoNavigator` or not, since `ServoNavigator` is modelled off of the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation), and `stop()` doesn't exist on it. If we're following the web's lead, it should exist on `Window`, but that's not really a concept in Android at the moment. If it turns out `ServoNavigator()` isn't the correct home for `stop()` though, we can always move it out fairly trivially later.
+    # 
+    # Testing: There are no automated tests for Android.
+    # Part of: #33742
++https://github.com/servo/servo/pull/48604	(@TimvdLippe, #48604)	script: Implement dimension attributes for `<marquee>` (#48604)
+    dom; Support dimension attributes for `<marquee>`, `<img>` margins
+    ^ commit debda92c62a639100446b47d3719bd054f30c186
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    ^ /!\ contains WebIDL changes! did we ship a new API?
+    # Part of #48603
+    # 
+    # Testing: new WPT passes
+    # 
++https://github.com/servo/servo/pull/48485	(@webbeef, #48485)	layout: Layout flex items once when their cross size is known upfront (#48485)
+    perf layout; Flex items layout only once when cross size is known
+    ^ commit b0c20e94ae274e4b0858209c74f92a5675d86ce7
+    #  In a single-line flex container with a definite cross size, the cross
+    #  size of the flex line is the inner cross size of the container, so it's
+    #  known before laying out the items. Still, each item was first laid out to
+    #  find its hypothetical cross size, and stretched items were then laid out
+    #  again with their used cross size.
+    # 
+    # Here instead, when the used cross size of an item doesn't depend on
+    # its layout, we compute it upfront and lay the item out with it directly.
+    # The final phase still checks the used cross size and lays the item out
+    # again if it differs. Items in orthogonal flows keep the previous behavior.
+    # 
+    # Testing: no regression in WPT tests
+    # 
+    # Note: this is my first layout patch and it took me many many attempts to
+    # not regress WPT and testing with casual browsing. This change improves
+    # the speedometer score from 11.6 to 13.9 on my machine. I hope it's
+    # correct but this needs careful review!
++https://github.com/servo/servo/pull/48474	(@Loirooriol, #48474)	stylo: Enable `layout.css.progress-function.enabled` by default (#48474)
+    layout; Enable CSS `progress()` function by default
+    ^ commit 5236638240e58811bb7cdc26dc15a0091a7eda70
+    ^ /!\ contains servoshell changes! does it affect the user experience?
+    ^ /!\ may contain changes to EXPERIMENTAL_PREFS
+    ^ /!\ may contain changes to feature flags
+    # Stylo PR: https://github.com/servo/stylo/pull/471
+    # 
+    # Enables the CSS `progress()` math function: https://drafts.csswg.org/css-values-5/#progress
+    # 
+    # Testing: It was an experimental pref, so tests were already running with it
+    # 
+>>> 2026-10-06T00:03:31Z
+-https://github.com/servo/servo/pull/48623	(@dependabot[bot], @dependabot[bot], #48623)	build: bump ohos-deviceinfo-sys from 0.1.7 to 0.1.8 (#48623)
+    ^ commit 8d22e6c50985f0e9929c63574a081148892acd92
+    # Bumps [ohos-deviceinfo-sys](https://github.com/openharmony-rs/ohos-sys) from 0.1.7 to 0.1.8.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li>See full diff in <a href="https://github.com/openharmony-rs/ohos-sys/compare/ohos-vsync-sys-v0.1.7...ohos-deviceinfo-sys-v0.1.8">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=ohos-deviceinfo-sys&package-manager=cargo&previous-version=0.1.7&new-version=0.1.8)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48624	(@dependabot[bot], @dependabot[bot], #48624)	build: bump ohos-window-manager-sys from 0.1.4 to 0.1.5 (#48624)
+    ^ commit b71a8bcc3ca46d1dd117c10bff5175cc3e467a14
+    # Bumps [ohos-window-manager-sys](https://github.com/openharmony-rs/ohos-sys) from 0.1.4 to 0.1.5.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li>See full diff in <a href="https://github.com/openharmony-rs/ohos-sys/commits/ohos-window-manager-sys-v0.1.5">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=ohos-window-manager-sys&package-manager=cargo&previous-version=0.1.4&new-version=0.1.5)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48627	(@dependabot[bot], @dependabot[bot], #48627)	build: bump ohos-window-sys from 0.1.7 to 0.1.8 (#48627)
+    ^ commit 8cd90b03efb91d3fa6d3a8a185a3693f848abb04
+    # Bumps [ohos-window-sys](https://github.com/openharmony-rs/ohos-sys) from 0.1.7 to 0.1.8.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li>See full diff in <a href="https://github.com/openharmony-rs/ohos-sys/compare/ohos-vsync-sys-v0.1.7...ohos-window-sys-v0.1.8">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=ohos-window-sys&package-manager=cargo&previous-version=0.1.7&new-version=0.1.8)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48628	(@dependabot[bot], @dependabot[bot], #48628)	build: bump hitrace-sys from 0.1.10 to 0.1.11 (#48628)
+    ^ commit d52985f5fb116316e6fe178a20ddbccffc5d7733
+    # Bumps [hitrace-sys](https://github.com/openharmony-rs/ohos-sys) from 0.1.10 to 0.1.11.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li>See full diff in <a href="https://github.com/openharmony-rs/ohos-sys/commits/hitrace-sys-v0.1.11">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=hitrace-sys&package-manager=cargo&previous-version=0.1.10&new-version=0.1.11)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
++https://github.com/servo/servo/pull/48565	(@Narfinger, #48565)	script: Smaller memory improvements (#48565)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit 5c5b73fb8506d4e916ced4585cc76736271528b2
+    # This PR combines 3 small changes into one:
+    # - system_font_serviice, do not clone famiily name needlesly.
+    # - InstrumentedStream, do not clone TlsSecurityInfo and instead take it from a refcell.
+    # - Document::broadcast_active_resize_observations, do not use cloned().
+    # 
+    # These changes are too small to varant separate PRs unless somebody has a strong opinion about iit.
+    # 
+    # Testing: WPT tests should find any reason why the iterator was cloned. The other changes are trivial.
+    # 
+-https://github.com/servo/servo/pull/48468	(@Narfinger, #48468)	script: Move more call from reflect_dom_object_with_cx (#48468)
+    ^ commit 92c30e7703f62701c09c62a1fc57548244f19cd4
+    # This moves more of the calls throughout the codebase from `reflect_dom_object_with_cx` to `reflect_dom_object` which is the equivalent call with rearranged arguments.
+    # 
+    # Testing: Compilation is the test.
+    # 
+-https://github.com/servo/servo/pull/48636	(@yezhizhen, #48636)	paint: Make the GL context current before creating the glow context (#48636)
+    ^ commit 16e4b1591e1fa4a47016643e34d4f259185c5f2f
+    # Our servoshell uses https://github.com/servo/servo/blob/d52985f5fb116316e6fe178a20ddbccffc5d7733/ports/servoshell/Cargo.toml#L153-L154. However, when running unit test for a single crate, this feature is not pulled in.
+    # 
+    # But we should still fix rust code instead of toml, as glow explicitly requires a current context. Right now, surfman leaves the new context current after `create_context` only for some backends. It used to be for WGL too, but probably changed. So we should make this invariant always hold for all backends, even if surfman changes in the future again.
+    # 
+    # Testing: Running unit test for a single crate instead of fully on windows.
+    # Fixes: #48635
+-https://github.com/servo/servo/pull/48645	(@mrobinson, #48645)	net: Add some limits to `hyper`'s open `keep-alive` connections (#48645)
+    ^ commit 56d783a8de46a8b1b8b351eb87ed2cad2e1402c9
+    # This change adds some limits to the number of open connections that
+    # hyper will make. It's an attempt to improve file handle exhaustion on
+    # macOS. While this change doesn't implement the concept of maximum
+    # connections per host (a setting that `hyper` doesn't give us), it
+    # implements a related limit.
+    # 
+    # Testing: It's difficult to test this as, ultimately, behavior is the same as before, but a connection may need to wait longer to be established.
+    # 
+-https://github.com/servo/servo/pull/48648	(@mrobinson, #48648)	script: Raise file handle limits on all Unix platforms (#48648)
+    ^ commit 3867352dfbf473fd643cf0a3474a0532028abe1b
+    # This is an attempt to mitigate issues with file handle exhaustion.
+    # Previously the code was only raising the file handle limit on Linux
+    # platforms, but other browsers do this on all Unix platforms. In addition
+    # to modernizing the code, the limit is now chosen to match the value used
+    # by [Chromium] as well.
+    # 
+    # [Chromium]: https://source.chromium.org/chromium/chromium/src/+/main:content/browser/browser_main_loop.cc;l=589;drc=590f2f0aa86269f99f0c92f8a193cecd262d5681
+    # 
+    # Testing: This kind of change is very difficult to test as it requires really pushing Servo.
+    # 
+-https://github.com/servo/servo/pull/48621	(@mxmgorin, #48621)	canvas: Don't panic in measureText when no font is available (#48621)
+    ^ commit f7114f4bc98453f7139bb546f8c2b448f6ec8120
+    # This makes `measureText()` return zeroed metrics and logs a warning when no font is available, like `fillText()` and `strokeText()` already do. Previously it panicked, killing the script thread of any page that called it on a system with no usable font.
+    # 
+    # Testing: No automated test, as WPT can't run without system fonts. Verified manually with `FONTCONFIG_FILE` pointing to a config with an empty font directory, and on a Linux handheld with no system fonts, where canvas games crashed while loading before this change.
+-https://github.com/servo/servo/pull/48649	(@mrobinson, #48649)	wpt: Raise the file handle limit in Servo code when running WPT (#48649)
+    ^ commit 240a37393a5c2a15e79fda0d405a5a5d63d40f0b
+    # The file handle limit on macOS is very low (256). This means that when
+    # running with normal parallelism on Silicon Mac the WPT harness easily
+    # exhausts the available file handles. The WPT harness creates a lot of
+    # semaphores per-process. This change raises the file handle limit like
+    # Servo does when starting.
+    # 
+    # Testing: We wouldn't see this problem on CI because we already limit parallelism there, but this fixes running `./mach wpt <directory>` for me on my Mac.
+    # 
++https://github.com/servo/servo/pull/48528	(@Loirooriol, #48528)	Upgrade Stylo to 2026-10-01 (#48528)
+    layout; Stylo upgrade Oct 1st, which brings support for `background-blend-mode: plus-lighter`
+    ^ commit 614cd411f84dee57add75365c30058afda0f2845
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This continues  #47942
+    # 
+    # Changelog:
+    # - Upstream: https://github.com/servo/stylo/compare/8301033a29d34d9854af5e2b5d270ff4026dd319...f563b6d2b42e0558371f52c0aae1e00de80c95e8
+    # - Servo fixups: https://github.com/servo/stylo/compare/f2210e7ed863728d0777c8f820b8b95e9e0a61c7...0cb50925b0259e53b953d72d5def3a24caa9ab58
+    # 
+    # Stylo tracking issue: https://github.com/servo/stylo/issues/476
+    # 
+    # Summary of changes:
+    # - Restrict the properties that the `::selection` pseudo-element gets at cascade time (https://bugzil.la/2066814)
+    # - Avoid `unwrap()` in servo `get_attr` and `any_attr_ignore_ns` functions (https://bugzil.la/2069577)
+    #   Unclear if Servo was affected by the panic, or only Blitz.
+    # - Rework the criteria used to determine whether font-family names are quoted (https://bugzil.la/2067259)
+    # - Expose `get_<longhand>()` getters to obtain a reference to the stored value, and rename `clone_<longhand>()` to `slow_clone_<longhand>()` to discourage their use ([D326610](https://phabricator.services.mozilla.com/D326610))
+    # - Accept `background-blend-mode: plus-lighter` ([D326678](https://phabricator.services.mozilla.com/D326678))
+    # - Tweak font-size quantization to prefer snapping to integer appUnit sizes (https://bugzil.la/2073465)
+    # - Avoid panic when lack of context causes computed value errors (https://bugzil.la/2075971)
+    # - Preserve HSL and HWB missing components in computed colors (https://bugzil.la/2071093)
+    # - Performance improvements:
+    #   - Keep rule matching loop tight (https://bugzil.la/2068601)
+    #   - Collect stylesheet invalidations more lazily (https://bugzil.la/2065622)
+    #   - Avoid useless refcount traffic when building invalidation maps (https://bugzil.la/2069426)
+    #     Unclear if Servo improved, or only Gecko.
+    #   - Make selector matching pass elements by value (https://bugzil.la/2069004)
+    # 
+    # Testing: various tests improve
+    # 
++https://github.com/servo/servo/pull/48646	(@Taym95, #48646)	script: Avoid temporary allocation when reading stream chunks (#48646)
+    perf; Several fixes to avoid unneeded avoid
+    ^ commit 05385bc489deca0d618f19b42b99ec02a970cd48
+    # ccopy directly from a rooted Uint8Array slice into the accumulated bytes.
+    # 
+    # Testing: existing WPT test should pass. 
+    # 
+    # Fixes #48632
++https://github.com/servo/servo/pull/48640	(@jdm, #48640)	script: Prioritize converting JS values to interfaces (ie. typed arrays) over sequences. (#48640)
+    perf; Optimization when converting typed arrays in WebIDL
+    ^ commit 4868cd690f458b723321ef29e9f8e9d1335ed21d
+    # The changes in this PR allow us to match the same logic in Gecko (https://searchfox.org/firefox-main/rev/b4b9efb6ee130740a94caf46ffff0625af1d51db/dom/bindings/Codegen.py#13131-13153). This matters because for unions like `Float32ArrayOrUnrestrictedFloatSequence`, trying to convert a typed array to a float sequence succeeds but has terrible performance; prioritizing interface conversions works because the WebIDL parser treats builtin types that are typed arrays as interfaces. Our implementation is different than Gecko because we're not using explicit if/else; just match blocks with failure cases that fall through to the next conversion attempt.
+    # 
+    # Testing: Should only be a performance optimization; any behaviour differences should be caught be existing tests.
+    # Fixes: #48633
+    # Fixes: #48537
+    # 
++https://github.com/servo/servo/pull/48654	(@Taym95, #48654)	Avoid temporary input copies in compression and decompression streams (#48654)
+    perf; Several fixes to avoid unneeded avoid
+    ^ commit 7675e237050a0667409a12e2113a492c99e82958
+    # Avoid temporary input copies in compression and decompression streams
+    # 
+    # Testing: existing WPT test should pass.
+    # 
+    # 
++https://github.com/servo/servo/pull/48651	(@mxmgorin, #48651)	webgl: Read WebGL 2 *_BITS from the draw framebuffer attachments (#48651)
+    dom; WebGL 2 conformance fixes
+    ^ commit a87bf2ca96013dd58f3d423270f431a9f66fe19a
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This makes WebGL 2 `getParameter` read `*_BITS` from the draw framebuffer's attachments, as described in [ES 3.0 (4.4.5)](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf#nameddest=subsection.4.4.5). Previously they were passed to `glGetIntegerv`, which rejects them in the core profile used for WebGL 2, so they returned 0 and left an `INVALID_ENUM` pending.
+    # 
+    # Testing: More subtests pass in `framebuffer-object-attachment.html`. Added `webgl/webgl2-drawing-buffer-bits.html` for the default framebuffer.
+-https://github.com/servo/servo/pull/48643	(@Narfinger, #48643)	script: Move remaining reflect_dom_object_with_cx to reflect_dom_object (#48643)
+    ^ commit 0b365e20bbfededbb47e9f0909b9a9c1afa7f27e
+    # This is mostly a mechanical change to move to `reflect_dom_object`.
+    # Additionally, we changed the initialization of `RTCRtpTransceiver` and `WebGL2RenderingContext` as it used a `&mut cx` in `new_inherited`
+    # 
+    # Testing: Compilation is the test.
+    # 
+-https://github.com/servo/servo/pull/48653	(@alice, #48653)	a11y: Remove unused variables in accessibility integration test. (#48653)
+    ^ commit 4fb72bb730fc64f7c231b240b7a93fc0259273ac
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
+    # Also fix an inaccurate comment.
+    # 
+    # Testing: Just making a test compile without warnings.
+    # Fixes: n/a
++https://github.com/servo/servo/pull/48607	(@veyndan, #48607)	android: Create media notification channel immediately (#48607)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit b08baf7bacc3d07821fc59faf8a6fe67545fadaa
+    # This is a minor benefit, but before when the `mediaSession` was only initialised when a media session had started, the user could only customise the media notifications (via the Servo app settings at the system level, not the in-app settings) if they had already played some media. If not then it'll look like Servo doesn't produce any notifications as no notification channels will be visible. With this change, the user can customise the notifications before ever seeing a notification.
+    # 
+    # Another nice benefit of fixing this papercut is that the code can be tidied up a bit, making `mediaSession` non-null and making the removal of `mediaSession`'s dependence on `servoView` easier in the future.
+    # 
+    # Testing: There are no automated tests for Android.
+    # 
++https://github.com/servo/servo/pull/48569	(@Narfinger, #48569)	script: Create a way to get attribute as str ref (#48569)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit 1351bf1228f916823979f5708d4b409debd29cb3
+    # This implements ffunctionality to get an attribute value as string reference instead of a copied string. This can greatly reduce allocations as many times the resulting string is just use as a references.
+    # 
+    # This PR uses this functionality for two functionalities.
+    # 
+    # Testing: We use the same underlying mechanisms as the string getter with a bit of lifetime wrangling. The function where we replaced the value (get_url_attribute) and set_url_attribute should be tested by WPT. https://github.com/Narfinger/servo/actions/runs/37281054915
+    # 
++https://github.com/servo/servo/pull/48620	(@mxmgorin, #48620)	webgl: Map BACK on the default framebuffer and drop stale errors on swap (#48620)
+    dom; WebGL 2 conformance fixes
+    ^ commit 6c4b00e4c07c095cf6871354732306d188e97f61
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This makes `drawBuffers([BACK])` and `readBuffer(BACK)` on the default framebuffer use `COLOR_ATTACHMENT0`, and makes buffer swaps discard a pending GL error instead of panicking. Previously GL rejected `BACK` for the FBO used by the canvas, so these calls had no effect. In release builds the error also stayed pending until the swap, where surfman failed to create the next surface on macOS.
+    # 
+    # Testing: `conformance2/renderbuffers/readbuffer.html` passes one more subtest. Added `webgl/drawBuffers-back-default-framebuffer.html`, which fails without this change. Also checked on macOS: puzzle.renefloor.nl and wonderforge.pages.dev no longer crash.
+    # Fixes: #48550
++https://github.com/servo/servo/pull/48609	(@veyndan, #48609)	android: Exclusively request focus using Compose (#48609)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit 727157f473d480f5407fa0352fe5edd486c01cec
+    # Removes a couple more usages of `servoView` in preparation for its removal.
+    # 
+    # Testing: There are no automated tests for Android.
+    # Part of: #33742
++https://github.com/servo/servo/pull/48594	(@veyndan, #48594)	android: Use correct flag constant reference (#48594)
+    servoshell; Android: ongoing migration to Jetpack Compose
+    ^ commit 648de26fa313c5cf0d5fa5bdf8c2e74027c6908d
+    # `hideSoftInputFromWindow` should take a flag within the `HIDE_` "namespace" (per the parameter's `@IntDef` annotation).
+    # 
+    # This is a non-functional change, since both `SHOW_IMPLICIT` and `HIDE_IMPLICIT_ONLY` equal the constant `0x0001`. The benefit is purely a DX one, since Android Studio puts a red squiggly under `SHOW_IMPLICIT` because it's _technically_ wrong (even though it compiles fine since the flags are just numbers). It's a minor nuisance, but having to always see a file that has a supposed "error" can get a tad annoying after a while!
+    # 
+    # Testing: There are no automated tests for Android.
+>>> 2026-10-06T23:41:17Z
+-https://github.com/servo/servo/pull/48663	(@dependabot[bot], @dependabot[bot], #48663)	build: bump udmf-sys from 0.1.4 to 0.1.5 (#48663)
+    ^ commit dd9cce92a547e55134f1d967ddc9fecfd08d00f6
+    # Bumps [udmf-sys](https://github.com/openharmony-rs/ohos-sys) from 0.1.4 to 0.1.5.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li>See full diff in <a href="https://github.com/openharmony-rs/ohos-sys/commits/udmf-sys-v0.1.5">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=udmf-sys&package-manager=cargo&previous-version=0.1.4&new-version=0.1.5)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48665	(@dependabot[bot], @dependabot[bot], #48665)	build: bump arkui-sys from 0.3.4 to 0.3.5 (#48665)
+    ^ commit e607401800ee0e8633edc98746a580d3dfab4715
+    # Bumps [arkui-sys](https://github.com/openharmony-rs/ohos-sys) from 0.3.4 to 0.3.5.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li>See full diff in <a href="https://github.com/openharmony-rs/ohos-sys/commits/arkui-sys-v0.3.5">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=arkui-sys&package-manager=cargo&previous-version=0.3.4&new-version=0.3.5)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48664	(@dependabot[bot], @dependabot[bot], #48664)	build: bump x-wing from 0.1.0 to 0.1.1 (#48664)
+    ^ commit 494caf8154c82c1f6b20f7d89dcb5118724e53e6
+    # Bumps [x-wing](https://github.com/RustCrypto/KEMs) from 0.1.0 to 0.1.1.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li><a href="https://github.com/RustCrypto/KEMs/commit/086c295975026cc9fcecc508f38cdcb9a08d4906"><code>086c295</code></a> x-wing v0.1.1 (<a href="https://redirect.github.com/RustCrypto/KEMs/issues/390">#390</a>)</li>
+    # <li><a href="https://github.com/RustCrypto/KEMs/commit/1d535a1178476a55b308efb510f86bdf7fd5330b"><code>1d535a1</code></a> build(deps): bump chacha20 from 0.10.1 to 0.10.2 (<a href="https://redirect.github.com/RustCrypto/KEMs/issues/376">#376</a>)</li>
+    # <li><a href="https://github.com/RustCrypto/KEMs/commit/323de66f0c5aae50860abd4c4f780004bd5cd49d"><code>323de66</code></a> build(deps): bump rstest from 0.26.1 to 0.27.0 (<a href="https://redirect.github.com/RustCrypto/KEMs/issues/380">#380</a>)</li>
+    # <li><a href="https://github.com/RustCrypto/KEMs/commit/075018d88f57eb96b1a233ba1e17b0447bb9b666"><code>075018d</code></a> sntrup: implement <code>kem</code> traits (<a href="https://redirect.github.com/RustCrypto/KEMs/issues/375">#375</a>)</li>
+    # <li><a href="https://github.com/RustCrypto/KEMs/commit/930a3338dd701d812ca33cc0b20bcb8aed839489"><code>930a333</code></a> x-wing: add fallible <code>DecapsulationKeyRejectNonContrib</code> (<a href="https://redirect.github.com/RustCrypto/KEMs/issues/369">#369</a>)</li>
+    # <li><a href="https://github.com/RustCrypto/KEMs/commit/5eeaf46f341dffda03c8e036a50947d811ca6274"><code>5eeaf46</code></a> sntrup: use actions/checkout v7 in CI (<a href="https://redirect.github.com/RustCrypto/KEMs/issues/373">#373</a>)</li>
+    # <li><a href="https://github.com/RustCrypto/KEMs/commit/c78ba44a9f54e94bba83973bd63c823a5d5b3d03"><code>c78ba44</code></a> build(deps): bump aes from 0.9.1 to 0.9.2 (<a href="https://redirect.github.com/RustCrypto/KEMs/issues/368">#368</a>)</li>
+    # <li><a href="https://github.com/RustCrypto/KEMs/commit/f3e8946608fbfe661322154861624b526d2252eb"><code>f3e8946</code></a> Add sntrup-kem (<a href="https://redirect.github.com/RustCrypto/KEMs/issues/334">#334</a>)</li>
+    # <li><a href="https://github.com/RustCrypto/KEMs/commit/5aeedd5d5b4896e501f21e8b03a5011cbab56a3e"><code>5aeedd5</code></a> add kem crate traits and various updates (<a href="https://redirect.github.com/RustCrypto/KEMs/issues/367">#367</a>)</li>
+    # <li><a href="https://github.com/RustCrypto/KEMs/commit/8fb08e48e88f034032f5b14af6fa5f583df20946"><code>8fb08e4</code></a> build(deps): bump hybrid-array from 0.4.13 to 0.4.14 (<a href="https://redirect.github.com/RustCrypto/KEMs/issues/370">#370</a>)</li>
+    # <li>Additional commits viewable in <a href="https://github.com/RustCrypto/KEMs/compare/x-wing/v0.1.0...x-wing/v0.1.1">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=x-wing&package-manager=cargo&previous-version=0.1.0&new-version=0.1.1)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48662	(@dependabot[bot], @dependabot[bot], #48662)	build: bump hilog-sys from 0.1.8 to 0.1.9 (#48662)
+    ^ commit c391d98bae13af05e5f4a3aeb22cfd4547b1fa6d
+    # Bumps [hilog-sys](https://github.com/openharmony-rs/ohos-sys) from 0.1.8 to 0.1.9.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li>See full diff in <a href="https://github.com/openharmony-rs/ohos-sys/compare/ohos-window-sys-v0.1.8...hilog-sys-v0.1.9">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=hilog-sys&package-manager=cargo&previous-version=0.1.8&new-version=0.1.9)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48656	(@jdm, #48656)	script: Ensure underlying sink type passed to writable stream is always rooted. (#48656)
+    ^ commit 85d8ca53082710e2c8b7b1077d38d867526a768f
+    # Testing: Only observable with nondeterministic GC so we can't write a test for it, and we don't run any tests with deterministic GC in CI.
+    # Fixes: #48639
+    # 
++https://github.com/servo/servo/pull/48372	(@sagudev, @jdm, #48372)	webgpu: new buffer content paradigm (#48372)
+    wip webgpu; WebGPU performance and correctness improvements
+    ^ commit 42edcf82ff8dae13d0a808726b2e0ac359dbd50f
+    # First commit just updates WebGPU expectations for main.
+    # 
+    # Per https://github.com/gfx-rs/wgpu/pull/10307 it is actually not safe to read ptr returned from get_mapped_range of write only buffer. The idea of spec-authors is that one has content side buffer which preserves content if buffer is write only mapped. That paradigm is used by firefox and will soon also be used by deno.
+    # 
+    # Firefox uses persistent shared memory for content side buffer, which is allocated for whole buffer size, but populated only for mapped range. We do similarly, but we explicitly pass ownership from script to WGPU thread and back (reuse same shared memory). At any point shared memory handle is alive in at most one thread (in single threaded mode where we do not use actual IPC this is enforced by [`Arc::get_mut`](https://doc.rust-lang.org/std/sync/struct.Arc.html#method.get_mut)). This subsumes https://github.com/servo/servo/pull/34071
+    # 
+    # This PR also adds&updates spec text and aligns code to spec better.
+    # 
+    # TL;DR: this PR gives us both performance and correctness.
+    # 
+    # Testing: CTS and manual performance testing using https://sagudev.github.io/briefcase/webgpu_map_speed.html?write=true  (firefox has ~100ms for both read/write, because that's their polling interval; servo has ~85ms on read and ~420ms on write in 2026-09-26 daily build and ~8ms for both read/write with this PR).
+    # 
+-https://github.com/servo/servo/pull/48667	(@kkoyung, #48667)	script: Move `StructuredData` to script_bindings (#48667)
+    ^ commit f46b5a2173f77197e42ac328a3cf35fc974ee2e3
+    # Move `StructuredData` and its inner types, `StructuredDataReader` and `StructuredDataWriter`, from the `script` crate to the `script_bindings` crate so that they can be used from the new `script_webcrypto` crate.
+    # 
+    # Testing: It compiles.
+    # Part-of: #48666
++https://github.com/servo/servo/pull/48342	(@webbeef, #48342)	script: make range input interactive (#48342)
+    web; `<input type=range>` is now interactive, keyboard support missing yet
+    ^ commit fd5e79082ce71cac6ca9c317b6bfddde11f8332a
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This makes `<input type=range>` actually usable by dragging the thumb. This relies on pointer capture to allow the drag to keep going when you move outside of the widget box. The step value is honored properly. Still to do:
+    # - keyboard support.
+    # - any a11y consideration.
+    # 
+    # Testing: WPT expectations are updated with new passes. A note about the changes in `/pointerevents/pointerevent_range_input.html` :
+    # - "Horizontal drag on a horizontal slider" now passes as expected.
+    # - "Horizontal drag on a vertical slider." now fails, because this relies on vertical writing mode that we don't support well enough. I tried to enable the `layout_writing_mode_enabled` preference but we crash at `assertion left == right failed: Mixed horizontal and vertical writing modes are not supported yet
+    #   left: true
+    #  right: false (thread Script#1, at components/layout/flow/mod.rs:2195)`
+    #  
+    #  So it looks like we used to pass this test for the wrong reasons: not changing the position because we didn't support it at all. Now we don't honor the vertical mode, display the range horizontally instead and fail the test because we drag it.
+    # 
+-https://github.com/servo/servo/pull/48668	(@shubhamg13, #48668)	layout: Pass URL for ResolvedImage to use for LCP. (#48668)
+    ^ commit cb2171a18e78a33eda31dcb20afae214ac0fc478
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # Pass URL for ResolvedImage to use for LCP.
+    # 
+    # Testing: Additional WPT Passed
+    # Fixes: Part of #42000
+    # 
+-https://github.com/servo/servo/pull/48673	(@jschwe, #48673)	mach: Bump required cargo-deny version (#48673)
+    ^ commit 7b814c16a6709fc421896280144ee98917e0473d
+    # This will allows us to use `unused-allowed-org` later, in about 1 week, after self-hosted CI has been rebuilt with this change.
+    # This unblocks https://github.com/servo/servo/pull/46281 and will make doing releases easier.
+    # 
+    # Testing: Dependency update, no new tests required.
+    # 
+    # 
+-https://github.com/servo/servo/pull/48360	(@Narfinger, @jdm, #48360)	script_bindings: Create TracedDOMString and make DOMString RootTraceableBox<TracedDOMString> (#48360)
+    ^ commit 964981f4c6eaa49a1f82700a4fb51afc76c43785
+    # This is the first part of the changes to make DOMString into RootedDOMString and TracedDOMString (similar to Promise).
+    # 
+    # In this change we first move DOMString to be TracedDOMString by removing the RootableBox. DOMString is now a RootableBox<TracedDOMString>.
+    # 
+    # We introduce the usual traced() and root() methods as well as Deref/DerefMut and various adapters from DOMString to TracedDOMString (which holds the majority of the functionality).
+    # 
+    # 
+    # Testing: DOMString is tested by crown and WPT tests extensively.
+    # 
++https://github.com/servo/servo/pull/48671	(@yezhizhen, #48671)	script: Dispatch touch compatibility mouse events synchronously in `ScriptThread` (#48671)
+    dom; Touch support: compatibility fixes for mouse events
+    ^ commit 53f2a80314ba80e40a33cca4bd883fd1a2dfb026
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # Compatibility mouse events for a tap were synthesized by the paint thread as new 
+    # input events after confirmed by script->constellation->embedder->paint, 
+    # so they were processed on a later rendering tick than the touchend that triggered them, making touch tests racy/flaky.
+    # One particular serious case is, the hit-test for compat mouse events happened when the layout state has already changed.
+    # 
+    # This simplifies API as well, by removing unused `render_api` in `notify_input_event_handled` and point in `PendingClick`.
+    # It also simplifies messaging: `simulate_mouse_click` is now removed from paint, which was like
+    # paint -> constellation -> script -> embedder -> paint, and repeated 3 times as we had duplicate hit-test 3 times!
+    # 
+    # Testing: `mouseevents-after-touchend.tentative.html` and `/touch-events/hover-state-caused-by-compatibility-mouse-events.tentative.html` has new passing and no longer intermittent.
+    # WebDriver `perform_actions/pointer_touch.py` has 4 more new failures: this is newly filed #48619 which has
+    # always been there, but previously hidden.
+    # 
+    # Fixes: https://github.com/servo/servo/pull/36957#pullrequestreview-2831267053, performance related concern
+    # Fixes: #40233, incorrect behaviour
+    # ### Intermittent ones
+    # Fixes: https://github.com/servo/servo/issues/46497
+    # Fixes: #42813
+    # Fixes: https://github.com/servo/servo/issues/46781
+    # Fixes: https://github.com/servo/servo/issues/46277
+    # Fixes: #41175
+    # Fixes: #44693
+    # 
+    # And probably some I'm not aware of yet.
+-https://github.com/servo/servo/pull/48657	(@Narfinger, @mrobinson, #48657)	net: Create timer for http2 (#48657)
+    ^ commit fdea66c694d1621ffa456a9738956b583960f790
+    # Hyper does not automatically create a timer, so we create one.
+    # 
+    # Testing: This does not need any tests.
+    # 
++https://github.com/servo/servo/pull/48402	(@kuntal-devrat, #48402)	script: implement IDBCursor update and delete methods (#48402)
+    wip dom; IndexedDB `IDBCursor` `update()` and `delete()` are now implemented, experimental feature `--pref dom_indexeddb_enabled`
+    ^ commit e197b55c2aca997ce5cd5690bffc5c6fd5d4f3ff
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    ^ /!\ contains WebIDL changes! did we ship a new API?
+    # Implement `IDBCursor.prototype.update` and `IDBCursor.prototype.delete` per the W3C Indexed Database API 3.0 specification:
+    # - https://w3c.github.io/IndexedDB/#dom-idbcursor-update
+    # - https://w3c.github.io/IndexedDB/#dom-idbcursor-delete
+    # 
+    # ### Summary of Changes:
+    # - Expose `update` and `delete` in `IDBCursor.webidl`.
+    # - Configure `Bindings.conf` to pass `JSContext` to `Update` and `Delete`.
+    # - Implement `check_transaction_readwrite` helper on `IDBCursor` to enforce that the cursor's transaction is not read-only.
+    # - Implement `Update` on `IDBCursor`: verifies transaction active and read-write status, non-deleted state, `got_value` and `key_only` flags, clones value into target realm, validates inline keys, and runs an asynchronous `PutItem` with `should_overwrite: true`.
+    # - Implement `Delete` on `IDBCursor`: verifies transaction active and read-write status, non-deleted state, and flags, extracts effective key, and runs an asynchronous `RemoveItem`.
+    # - Expose `clone_value_in_target_realm`, `uses_inline_keys`, and `key_path` as `pub(crate)` on `IDBObjectStore`.
+    # - Expose `object_store` and `verify_not_deleted` as `pub(crate)` on `IDBIndex`.
+    # - Update Web Platform Tests expectations for `IDBCursor` `update` and `delete`.
+    # 
+    # Testing: Existing Web Platform Tests for IndexedDB cursor mutation (`tests/wpt/tests/IndexedDB/`).
+    # 
+    # Fixes: Part of #38111
+    # 
+    # Signed-off-by: Devrat Kuntal <rdxdevbhai76@gmail.com>
+    # 
++https://github.com/servo/servo/pull/48677	(@Narfinger, #48677)	script: Support unwrap_or_default on return of get_attribute_str_ref (#48677)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit c3e12ba2f36d0a549db83c2a8bd2fd5debc800bc
+    # Currently, some code uses the following pattern:
+    # `let attr_string = elem.get_attribute_string_value(local_name!("bar")).unwrap_or_default()`.
+    # Returning either the attribute value or an empty string.
+    # 
+    # We want to support this functionality on `AttrStrRef` to keep the flow of code similar with changes from `get_attribute_string_value` to `get_attribute_string_ref`.
+    # 
+    # This implements a way to support this code by returning an empty AttrRef.
+    # 
+    # Testing: Currently there are no automatic tests for this.
+    # 
++https://github.com/servo/servo/pull/48678	(@mxmgorin, #48678)	webgl: Fix vertexAttribIPointer and the attribute type check (#48678)
+    dom; WebGL 2 conformance fixes
+    ^ commit aa92a88c32569964a52935a38cb5c9291d4efc59
+    # This makes `vertexAttribIPointer` reach GL and checks attribute types against the shader based on which `vertexAttrib*` call set them, as described in the [spec](https://registry.khronos.org/webgl/specs/latest/2.0/#ATTRIBUTE_TYPE_MATCH). Previously integer attributes received wrong values, and non-`FLOAT` `vertexAttribPointer` data flagged `INVALID_OPERATION` on every WebGL 2 draw. It also makes `getVertexAttrib` report `VERTEX_ATTRIB_ARRAY_INTEGER`.
+    # 
+    # Testing: Covered by existing tests; more WebGL conformance subtests now pass.
++https://github.com/servo/servo/pull/48605	(@TimvdLippe, #48605)	script: Implement margin dimension attributes for `<img>` (#48605)
+    dom; Support dimension attributes for `<marquee>`, `<img>` margins
+    ^ commit 858163abf4f030075a4ae2acea0e5e170dce7607
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # Part of #48604
+    # 
+    # Testing: new WPT test passes
+>>> 2026-10-07T23:53:18Z
+-https://github.com/servo/servo/pull/48692	(@dependabot[bot], @dependabot[bot], #48692)	build: bump tokio from 1.53.1 to 1.53.2 in the tokio-rs-related group (#48692)
+    ^ commit 164ec114db81f594f6918a8f2a56e5e04767f2df
+    # Bumps the tokio-rs-related group with 1 update: [tokio](https://github.com/tokio-rs/tokio).
+    # 
+    # Updates `tokio` from 1.53.1 to 1.53.2
+    # <details>
+    # <summary>Release notes</summary>
+    # <p><em>Sourced from <a href="https://github.com/tokio-rs/tokio/releases">tokio's releases</a>.</em></p>
+    # <blockquote>
+    # <h2>Tokio v1.53.2</h2>
+    # <h1>1.53.2 (October 3rd, 2026)</h1>
+    # <h3>Fixed</h3>
+    # <ul>
+    # <li>fs: handle integer overflow in buffered relative seek (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8574">#8574</a>)</li>
+    # <li>io: revert &quot;always cleanup <code>AsyncFd</code> registration list on deregister&quot; (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8540">#8540</a>)</li>
+    # <li>process: unregister Windows wait before closing child handle (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8564">#8564</a>)</li>
+    # <li>rt: drop blocking pool mutex before shutting down rejected task (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8562">#8562</a>)</li>
+    # <li>sync: fix mpsc index wraparound in block reclamation (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8546">#8546</a>)</li>
+    # <li>sync: forget mpsc <code>Permit</code> before sending value (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8560">#8560</a>)</li>
+    # <li>sync: validate <code>MAX_PERMITS</code> in <code>Semaphore::acquire</code> (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8548">#8548</a>)</li>
+    # <li>sync: wake broadcast <code>Sender::closed</code> outside mutex (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8558">#8558</a>)</li>
+    # <li>task: drop replaced waker outside lock in <code>JoinSet</code> (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8554">#8554</a>)</li>
+    # <li>time: drop timer lock before dropping waker in <code>clear_entry</code> (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8552">#8552</a>)</li>
+    # <li>time: expire timers directly on shutdown without rotating wheel (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8570">#8570</a>)</li>
+    # </ul>
+    # <h3>Fixed (unstable)</h3>
+    # <ul>
+    # <li>fs: clamp <code>io_uring</code> read length to <code>u32::MAX</code> (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8572">#8572</a>)</li>
+    # <li>rt: ignore <code>current_thread</code> task dumps from other runtimes (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8544">#8544</a>)</li>
+    # <li>rt: preserve <code>io_uring</code> context if a completion waker panics (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8566">#8566</a>)</li>
+    # <li>sync: fix semaphore use-after-free and permit leak on tracing panic (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8542">#8542</a>)</li>
+    # <li>taskdump: restore deferred leaf wakes during capture (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8445">#8445</a>)</li>
+    # <li>time: drop stored waker when cancelling alt timer entry (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8550">#8550</a>)</li>
+    # </ul>
+    # <p><a href="https://redirect.github.com/tokio-rs/tokio/issues/8445">#8445</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8445">tokio-rs/tokio#8445</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8572">#8572</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8572">tokio-rs/tokio#8572</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8540">#8540</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8540">tokio-rs/tokio#8540</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8542">#8542</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8542">tokio-rs/tokio#8542</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8544">#8544</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8544">tokio-rs/tokio#8544</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8546">#8546</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8546">tokio-rs/tokio#8546</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8548">#8548</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8548">tokio-rs/tokio#8548</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8550">#8550</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8550">tokio-rs/tokio#8550</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8552">#8552</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8552">tokio-rs/tokio#8552</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8554">#8554</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8554">tokio-rs/tokio#8554</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8558">#8558</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8558">tokio-rs/tokio#8558</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8560">#8560</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8560">tokio-rs/tokio#8560</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8562">#8562</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8562">tokio-rs/tokio#8562</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8564">#8564</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8564">tokio-rs/tokio#8564</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8566">#8566</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8566">tokio-rs/tokio#8566</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8570">#8570</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8570">tokio-rs/tokio#8570</a>
+    # <a href="https://redirect.github.com/tokio-rs/tokio/issues/8574">#8574</a>: <a href="https://redirect.github.com/tokio-rs/tokio/pull/8574">tokio-rs/tokio#8574</a></p>
+    # </blockquote>
+    # </details>
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li><a href="https://github.com/tokio-rs/tokio/commit/ff0c4068a4ba5f3af0fe3c5657ba42879b6ea599"><code>ff0c406</code></a> chore: prepare Tokio v1.53.2 (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8580">#8580</a>)</li>
+    # <li><a href="https://github.com/tokio-rs/tokio/commit/a762700e41bf027630ba4620cfd80d127b7c801d"><code>a762700</code></a> Merge 'tokio-1.51.5' into 'tokio-1.53.x' (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8577">#8577</a>)</li>
+    # <li><a href="https://github.com/tokio-rs/tokio/commit/ec31a9f62c9426cec415c8c79e0608dd2866bbf7"><code>ec31a9f</code></a> chore: prepare Tokio v1.51.5 (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8579">#8579</a>)</li>
+    # <li><a href="https://github.com/tokio-rs/tokio/commit/625c85108da5ad0d482702a21d7d58a56ea06a48"><code>625c851</code></a> sync: assign semaphore permits before emitting tracing event (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8542">#8542</a>)</li>
+    # <li><a href="https://github.com/tokio-rs/tokio/commit/832dd233293eaa59ba19cc6f5dc4753aab55ac13"><code>832dd23</code></a> sync: avoid leaking semaphore permits on tracing panic (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8542">#8542</a>)</li>
+    # <li><a href="https://github.com/tokio-rs/tokio/commit/826954a2f3b6f595121c38875a5d81ca3e5f6cc6"><code>826954a</code></a> sync: unlink semaphore waiter before emitting tracing event (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8542">#8542</a>)</li>
+    # <li><a href="https://github.com/tokio-rs/tokio/commit/9a479922501eb47102ab844fa40e4b28d1a3c250"><code>9a47992</code></a> process: unregister Windows wait before closing child handle (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8564">#8564</a>)</li>
+    # <li><a href="https://github.com/tokio-rs/tokio/commit/2fc5972b8bd6f51d1ad6df3bcc1a1927d1702663"><code>2fc5972</code></a> fs: handle integer overflow in buffered relative seek (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8574">#8574</a>)</li>
+    # <li><a href="https://github.com/tokio-rs/tokio/commit/85a6d13882e2ccf5c24131b282bab0214b0a493e"><code>85a6d13</code></a> io: revert &quot;always cleanup AsyncFd registration list on deregister&quot; (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8540">#8540</a>)</li>
+    # <li><a href="https://github.com/tokio-rs/tokio/commit/436faa2da3970817653fef98c9abc6c8b4367f51"><code>436faa2</code></a> rt: drop blocking pool mutex before shutting down rejected task (<a href="https://redirect.github.com/tokio-rs/tokio/issues/8562">#8562</a>)</li>
+    # <li>Additional commits viewable in <a href="https://github.com/tokio-rs/tokio/compare/tokio-1.53.1...tokio-1.53.2">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=tokio&package-manager=cargo&previous-version=1.53.1&new-version=1.53.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore <dependency name> major version` will close this group update PR and stop Dependabot creating any more for the specific dependency's major version (unless you unignore this specific dependency's major version or upgrade to it yourself)
+    # - `@dependabot ignore <dependency name> minor version` will close this group update PR and stop Dependabot creating any more for the specific dependency's minor version (unless you unignore this specific dependency's minor version or upgrade to it yourself)
+    # - `@dependabot ignore <dependency name>` will close this group update PR and stop Dependabot creating any more for the specific dependency (unless you unignore this specific dependency or upgrade to it yourself)
+    # - `@dependabot unignore <dependency name>` will remove all of the ignore conditions of the specified dependency
+    # - `@dependabot unignore <dependency name> <ignore condition>` will remove the ignore condition of the specified dependency and ignore conditions
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48693	(@dependabot[bot], @dependabot[bot], #48693)	build: bump ohos-vsync-sys from 0.1.6 to 0.1.7 (#48693)
+    ^ commit d70585349a3dd3ed9ba3ae6766966a5b02d6915a
+    # Bumps [ohos-vsync-sys](https://github.com/openharmony-rs/ohos-sys) from 0.1.6 to 0.1.7.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li>See full diff in <a href="https://github.com/openharmony-rs/ohos-sys/compare/ohos-pasteboard-sys-v0.1.6...ohos-vsync-sys-v0.1.7">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=ohos-vsync-sys&package-manager=cargo&previous-version=0.1.6&new-version=0.1.7)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48696	(@dependabot[bot], @dependabot[bot], #48696)	build: bump xcomponent-sys from 0.4.0 to 0.4.1 (#48696)
+    ^ commit c3eef052a9a6642243f72019ff8360e815c37a56
+    # Bumps [xcomponent-sys](https://github.com/openharmony-rs/ohos-sys) from 0.4.0 to 0.4.1.
+    # <details>
+    # <summary>Changelog</summary>
+    # <p><em>Sourced from <a href="https://github.com/openharmony-rs/ohos-sys/blob/main/CHANGELOG.md">xcomponent-sys's changelog</a>.</em></p>
+    # <blockquote>
+    # <h1>Changelog</h1>
+    # <h2>Unreleased</h2>
+    # <h3>Added</h3>
+    # <ul>
+    # <li>Bindings for API-24, API-25 and API-26 (OpenHarmony 7.0), behind the new <code>api-24</code>,
+    # <code>api-25</code> and <code>api-26</code> features. See the changelogs of the individual crates for details.</li>
+    # <li><code>ohaudio-sys</code>: the <code>audio_session_base</code> module, and the <code>audio_accessory_*</code>,
+    # <code>audio_debugging_manager</code> and <code>audio_device_enhance_manager</code> modules (API-26).
+    # <code>OH_AudioSession_ConcurrencyMode</code> and <code>OH_AudioSession_Strategy</code> moved to <code>audio_session_base</code>
+    # and are re-exported from <code>audio_session_manager</code>.</li>
+    # <li><code>ohos-sys-opaque-types</code>: <code>OHIPCRemoteStub</code>.</li>
+    # <li><code>transient-task</code> — <code>ohos-transient-task-sys</code> (BackgroundTasksKit, <code>libtransient_task.so</code>):
+    # request, query and cancel transient tasks (suspend delays), plus
+    # <code>OH_BackgroundTaskManager_GetTransientTaskInfo</code> at API-20.</li>
+    # <li><code>bundle</code> — <code>ohos-libbundle-sys</code> (BundleManager / native bundle NDK,
+    # <code>libbundle_ndk.z.so</code>): application identity (<code>bundleName</code>, <code>appId</code>,
+    # <code>appIdentifier</code>, fingerprint, compatible device type, debug-mode flag),
+    # main-element discovery, module metadata, and the API-21 file-type intent
+    # discovery flow (<code>OH_NativeBundle_GetAbilityResourceInfo</code>).</li>
+    # </ul>
+    # <h3>Changed</h3>
+    # <ul>
+    # <li>xcomponent 0.4.0: the <code>keyboard-types</code> feature now covers the full key-event
+    # translation (<code>Code</code>, <code>NamedKey</code>, <code>Location</code>, US-layout characters and a
+    # stateful <code>KeyEventConverter</code>), and linking <code>ace_ndk.z</code> is limited to
+    # OpenHarmony targets so the crate's tests run on the host.
+    # The crate MSRV is raised to 1.85.</li>
+    # </ul>
+    # <h2>v0.9.0</h2>
+    # <h3>Added</h3>
+    # <p>New sub-crates, each also re-exported as an umbrella feature on <code>ohos-sys</code>:</p>
+    # <ul>
+    # <li><code>accesstoken</code> — <code>ohos-accesstoken-sys</code> (AbilityAccessControl / AccessToken NDK)</li>
+    # <li><code>asset-store</code> — <code>ohos-asset-store-sys</code> (AssetStoreKit)</li>
+    # <li><code>basic-services-kit</code> — <code>ohos-basic-services-kit-sys</code>, with sub-features
+    # <code>commonevent</code>, <code>battery-info</code>, <code>print</code>, <code>scan</code>, <code>os-account</code>, <code>time-service</code></li>
+    # <li><code>crypto</code> — <code>ohos-crypto-sys</code> (CryptoArchitectureKit)</li>
+    # <li><code>huks</code> — <code>ohos-huks-sys</code> (Universal Keystore Kit)</li>
+    # <li><code>ipckit</code> — <code>ohos-ipckit-sys</code></li>
+    # <li><code>locationkit</code> — <code>ohos-locationkit-sys</code></li>
+    # <li><code>media</code> — <code>ohos-media-sys</code> (Player / Recorder / Transcoder, AVCodec,
+    # demuxer / muxer, screen capture, low-power AV sinks; sub-crate existed
+    # previously, this release adds the umbrella re-export)</li>
+    # <li><code>netmanager</code> / <code>net_ssl</code> / <code>netstack</code> — NetworkKit subsystems
+    # (<code>ohos-netmanager-sys</code>, <code>ohos-net-ssl-sys</code>, <code>ohos-netstack-sys</code>)</li>
+    # <li><code>ohaudio</code> — <code>ohaudio-sys</code></li>
+    # </ul>
+    # <!-- raw HTML omitted -->
+    # </blockquote>
+    # <p>... (truncated)</p>
+    # </details>
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li>See full diff in <a href="https://github.com/openharmony-rs/ohos-sys/compare/ohos-input-sys-v0.4.0...xcomponent-sys-v0.4.1">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=xcomponent-sys&package-manager=cargo&previous-version=0.4.0&new-version=0.4.1)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48695	(@dependabot[bot], @dependabot[bot], #48695)	build: bump async-recursion from 1.1.1 to 1.2.0 (#48695)
+    ^ commit ea35b2dbddc3cc4c2e691dcaf9f81187b3a8f44b
+    # Bumps [async-recursion](https://github.com/dcchut/async-recursion) from 1.1.1 to 1.2.0.
+    # <details>
+    # <summary>Release notes</summary>
+    # <p><em>Sourced from <a href="https://github.com/dcchut/async-recursion/releases">async-recursion's releases</a>.</em></p>
+    # <blockquote>
+    # <h2>v1.2.0</h2>
+    # <h2>What's Changed</h2>
+    # <ul>
+    # <li>Update error output in tests <a href="https://redirect.github.com/dcchut/async-recursion/pull/45">dcchut/async-recursion#45</a></li>
+    # <li>Fixup arg_not_sync test output from 1.90.0 release <a href="https://redirect.github.com/dcchut/async-recursion/pull/46">dcchut/async-recursion#46</a></li>
+    # <li>Resolve double_must_use lint <a href="https://redirect.github.com/dcchut/async-recursion/pull/50">dcchut/async-recursion#50</a></li>
+    # <li>Update syn to v3.0 in <a href="https://redirect.github.com/dcchut/async-recursion/pull/51">dcchut/async-recursion#51</a></li>
+    # </ul>
+    # <p><strong>Full Changelog</strong>: <a href="https://github.com/dcchut/async-recursion/compare/v1.1.1...v1.2.0">https://github.com/dcchut/async-recursion/compare/v1.1.1...v1.2.0</a></p>
+    # </blockquote>
+    # </details>
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li><a href="https://github.com/dcchut/async-recursion/commit/b33ad72c964f403fc28f2ed38dfa658078461ccd"><code>b33ad72</code></a> v1.2.0 (<a href="https://redirect.github.com/dcchut/async-recursion/issues/52">#52</a>)</li>
+    # <li><a href="https://github.com/dcchut/async-recursion/commit/700a632362e1ed50e5b8cb8a8f515cf3bd7218cb"><code>700a632</code></a> Update syn to v3.0 (<a href="https://redirect.github.com/dcchut/async-recursion/issues/51">#51</a>)</li>
+    # <li><a href="https://github.com/dcchut/async-recursion/commit/765d6872d13c17ad8f68c41cb8f3cb52addeca64"><code>765d687</code></a> Resolve double_must_use lint (<a href="https://redirect.github.com/dcchut/async-recursion/issues/50">#50</a>)</li>
+    # <li><a href="https://github.com/dcchut/async-recursion/commit/2f96d312cebc3f09e378fbbd6a47190b299f42f0"><code>2f96d31</code></a> Fixup arg_not_sync test output from 1.90.0 release (<a href="https://redirect.github.com/dcchut/async-recursion/issues/46">#46</a>)</li>
+    # <li><a href="https://github.com/dcchut/async-recursion/commit/ecabb509bc0d62441678ce4352d43a9f47327a7c"><code>ecabb50</code></a> Update error output (<a href="https://redirect.github.com/dcchut/async-recursion/issues/45">#45</a>)</li>
+    # <li>See full diff in <a href="https://github.com/dcchut/async-recursion/compare/v1.1.1...v1.2.0">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=async-recursion&package-manager=cargo&previous-version=1.1.1&new-version=1.2.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48698	(@dependabot[bot], @dependabot[bot], #48698)	build: bump lazy_static from 1.5.0 to 1.5.1 (#48698)
+    ^ commit 7ca9f80268a1d76e698560db82463e7960aa7845
+    # Bumps [lazy_static](https://github.com/rust-lang-nursery/lazy-static.rs) from 1.5.0 to 1.5.1.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li>See full diff in <a href="https://github.com/rust-lang-nursery/lazy-static.rs/commits">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=lazy_static&package-manager=cargo&previous-version=1.5.0&new-version=1.5.1)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48688	(@TimvdLippe, #48688)	script: Dedupe callbacks for handling lenght percentages (#48688)
+    ^ commit 3ec302385a82ef8d21f9ebe358495a5f20d821cd
+    # This reduces some duplication and boilerplate.
+    # 
+    # Testing: no behavioral changes
++https://github.com/servo/servo/pull/48699	(@yezhizhen, #48699)	script: Reset click count when touchend doesn't synthesize mouse events (#48699)
+    dom; Touch support: compatibility fixes for mouse events
+    ^ commit 877b798d8d730233354d1616cc651e6d3a940269
+    # `/touch-events/mouseevents-after-touchend.tentative.html` reveals an general issue that the side-effect of previous subtests remain: a touch sequence that doesn't synthesize compatibility mouse events doesn't reset click count.
+    # 
+    # That may turn two unrelated quick tap/two finger gesture into weird results.
+    # 
+    # Testing: `/touch-events/mouseevents-after-touchend.tentative.html` no longer intermittent.
+    # Fixes:  #46497
+    # 
+-https://github.com/servo/servo/pull/48687	(@jschwe, #48687)	ohos servoshell: Improve error message for load failures (#48687)
+    ^ commit df3525edc0dc7cefa08b8d65d56fc451f887592f
+    # If libservoshell.so fails to load, an exception will be thrown on the
+    #  first access of the servoshell object (since it is undefined).
+    # This has historically confused people, so check and throw a more helpful
+    #  error to point in the right direction.
+    # 
+    # Testing: servoshell on ohos is tested in CI, although this specific improvement is not, since the failure won't happen in CI (normally)
+    # 
++https://github.com/servo/servo/pull/48562	(@Narfinger, #48562)	script: Make srcset creation, update and select_image_source more efficient (#48562)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit 26ceca6901e555cea6ccac28024d6b31cc8aab0f
+    # We make SourceSet more efficient by a couple of smaller optimizations:
+    # - Use SmallVec as most pages seem to have only a SourceSet consisting of one element.
+    # - Create the SourceSet in `create_source_set` only at the end when it is needed to not overwrite and empty source set.
+    # - Use no_gc in update_source_set.
+    # - In `select_image_source_from_source_set`: Preallocate the size of various structs.
+    # 
+    # Testing: WPT run here: https://github.com/Narfinger/servo/actions/runs/37446261940 and there are some unit tests for srcset.
+    # 
+-https://github.com/servo/servo/pull/48542	(@TTyChud, @jschwe, #48542)	ohos: Write the font cache atomically (#48542)
+    ^ commit 3058b7ab31a81958260dbce31abae4aad77fd03d
+    # Writes the OHOS font cache to a temporary file that is then renamed into place.
+    # 
+    # Testing: No automated tests for OHOS; type-checked under `--cfg ohos_mock` and exercised the write, read and cleanup paths in a local harness.
+    # 
+    # Fixes: #48501
+    # 
++https://github.com/servo/servo/pull/48588	(@Narfinger, #48588)	net: Less allocation in net (#48588)
+    api perf; Breaking change: `RequestInterceptor` now gets `ServoUrl` instead of `Url`, this is an optimization to avoid a conversion/allocation
+    ^ commit bf127221f61e67f4e7aabb06c2b9c6592b76cfdb
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
+    # These are two small changes in net code that might lead to less allocations.
+    # - RequestInterceptor now gets the ServoUrl instead of the Url. This saves on converting them (allocation) and also makes the message size smaller. This change, changes the API visible to the embedder.
+    # - tls_config.alpn_protocols does not convert to a string but takes the bytes directly.
+    # 
+    # Testing: These are equivalent changes.
+    # 
+-https://github.com/servo/servo/pull/48684	(@jschwe, #48684)	ohos servoshell: Various ArkUI QoL fixes (#48684)
+    ^ commit 64c4855e7dd2972b216ec622e804f0e1fdf42f7e
+    # Mirrors changes from https://github.com/jschwe/ServoDemo/pull/32/changes. See that PR for the individual commits (DevEco Studio refuses to open the vendored project in this repo, since it only opens folders with a DevEco project at the git root, so for changes like this it's much easier to work in the IDE in the ServoDemo and mirror the changes back here).
+    # 
+    # Main changes:
+    # 
+    # - Give each XComponent a unique ID, instead of the same name.
+    # - `Tabs` apparently destroys and rebuilds all entries when removing one entry, which using `Stack` avoids.
+    # - Use a monotonic counter for the tab ids, to avoid any potential issues with id reuse.
+    # - In a future PR, we would completely switch to id, and remove usage of index, but that requires changes on the Rust side, so I'm splitting that out.
+    # - Fix deprecation warnings
+    # - Fix warning about missing try-catch block
+    # - formatting changes
+    # 
+    # Testing: Tested as part of ohos CI. I believe we don't have anything triggering Toasts right now, so thats not covered.
+    # 
+    # 
++https://github.com/servo/servo/pull/48650	(@Narfinger, #48650)	fonts: make for_each_font_family return &str instead of String (#48650)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit 766a5b258b3874a768c9c3a5fa78a11b18d5bdf5
+    # This changes the callback to be a &str. As we anyway transform this string to lowercase later, we can use a reference instead of a newly created string.  This might just move the allocation from the previous spot to the "to_lowercase".
+    # 
+    # Testing: This should not change observable behavior. Full build here: https://github.com/Narfinger/servo/actions/runs/37467408677
++https://github.com/servo/servo/pull/48680	(@gterzian, #48680)	service worker: add messaging-related event handlers to container. (#48680)
+    wip dom; Support `navigator.serviceWorker.onmessage/onmessageerror` handlers, experimental feature `--pref dom_serviceworker_enabled`
+    ^ commit 041647f5aa135235dda3c1f87ebe51d99f843184
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    ^ /!\ contains WebIDL changes! did we ship a new API?
+    # Add message-related event handlers to `ServiceWorkerContainer`. 
+    # Turn-on the service worker preference by default when running the test suite.
+    # Add spec link for the struct implementing `ServiceWorkerContainer`. 
+    # 
+    # Testing: WPT (but not turned-on in CI yet).
+    # Fixes: part of https://github.com/servo/servo/issues/36538
++https://github.com/servo/servo/pull/48644	(@RichardTjokroutomo, #48644)	grid: Pass the correct min & max values in the case when the container size is not definite (#48644)
+    layout; Grid layout interop improvements
+    ^ commit 23c703fb4d23a0e46e3b1ffc6ce6d10788a76e58
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # When computing child layout of a grid container, if the dimension is not definite (e.g. `height: auto`), pass the correct values instead of calling `LazySize::intrinsic()`. This fixes an old FIXME.
+    # 
+    # Testing: 13 WPT tests begin passing (either fully or partially)
+    # 
++https://github.com/servo/servo/pull/48393	(@Narfinger, #48393)	servoshell: Add benchmark flag for memory report (#48393)
+    servoshell; New command line flag `--memory-output` that turns on memory reports for benchmarking
+    ^ commit c73bea970da4d7de8bfa90c37a0f4675de1124a4
+    ^ /!\ contains servoshell changes! does it affect the user experience?
+    ^ /!\ may contain changes to EXPERIMENTAL_PREFS
+    # This adds a command line argument to measure memory performance. Speedometer score is getting slowed down significantly by the memory measurement which is only used for hitrace-bench runs.
+    # 
+    # Testing: This was tested locally.
+    # 
++https://github.com/servo/servo/pull/48702	(@Taym95, #48702)	FileManager: Avoid file chunk buffer copy (#48702)
+    perf; Several fixes to avoid unneeded avoid
+    ^ commit 41e78002949672ee1af39af5e272ae2b43fc4f57
+    # Testing: No Behavior changed.
+    # 
+    # 
++https://github.com/servo/servo/pull/48675	(@Narfinger, #48675)	script: Move some usages of get_attribute_string_value to get_attribute_string_ref (#48675)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit eb8e57e97dce5101c25f8ef1587d5fe257f8fece
+    # This moves some uses of get_attribute_string_value to the new get_attribute_string_ref, if the returned DOMString is not used.
+    # This should save us some memory of allocating a DOMString and discarding it when we only use comparisons with &str.
+    # 
+    # Testing: WPT test should find any errors in this new machinery. https://github.com/Narfinger/servo/actions/runs/37437278265
+    # 
++https://github.com/servo/servo/pull/48589	(@Narfinger, #48589)	script_bindings: Allow more efficient DOMString clone if it is a JSString (#48589)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit ae22b9ac2366577aecf1b87f47c14d902964003f
+    # This replaces the old code that always converted to rust on clone with copying the pointer if it is a javascript string.
+    # 
+    # Testing: DOMString is extensively tested throughout the engine via WPT tests.
+    # 
+-https://github.com/servo/servo/pull/48715	(@yug105, #48715)	script: Replace nullable mutable DOM pointers with MutNullableDom (#48715)
+    ^ commit 550373841fa21a6e238d38d3c3ace428b5d35a5e
+    # Several DOM objects stored a nullable, mutable pointer as `DomRefCell<Option<Dom<T>>>`. I replaced these with `MutNullableDom<T>`, which is already made for this use case and removes the `.borrow()`, `.as_ref()`, and `.map(DomRoot::from_ref)` boilerplate. There are 11 fields in 8 files. The affected structs are Window, AudioTrack, VideoTrack, TextTrack, VTTCue, ServiceWorkerRegistration, TextInputWidgetShadowTree, and GPUQueue.
+    # 
+    # TextInputWidgetShadowTree derived `Clone`, but `MutNullableDom` does not implement `Clone`, so I removed the derive since nothing was using it and the code still builds. GPUQueue::set_device also no longer needed its `no_gc` parameter because it was only used by `safe_borrow_mut`, so I removed it and updated the one caller in gpudevice.rs. Both changes were discussed on Zulip with Narfinger and jdm: https://servo.zulipchat.com/#narrow/channel/263398-general/topic/MutNullableDom/with/629544110
+    # 
+    # Testing: There is no behavior change, so I did not add new tests. I ran `./mach test-wpt dom/events` and got the same result before and after: 214 expected, plus 3 unexpected `scrollend` passes that were already there. The `webvtt` video tests time out locally because my build uses `--media-stack dummy`, and the 2 region tests also hang on my machine without the TextTrack/VTTCue changes.
+    # 
+    # Fixes: #48553
+-https://github.com/servo/servo/pull/48712	(@TimvdLippe, #48712)	script: Remove click element workaround for elements in UA ShadowRoot (#48712)
+    ^ commit c1cd9a92ba2a0771724b2d8f3029e3745fa264ec
+    # This workaround was originally implemented for #45067 but it is no longer required. Additionally, the newly passing subtest also passes without this workaround.
+    # 
+    # By removing this, we unblock the further migration to UA ShadowRoot for the HTML media element.
+    # 
+    # Testing: no behavior change
+-https://github.com/servo/servo/pull/48718	(@Loirooriol, #48718)	config: Remove `layout_grid_enabled` pref (#48718)
+    ^ commit 461e338cd4e3bcfc57c0a6a0fbc6697b37500d62
+    ^ /!\ contains servoshell changes! does it affect the user experience?
+    ^ /!\ may contain changes to EXPERIMENTAL_PREFS
+    ^ /!\ may contain changes to feature flags
+    # Bumps Stylo to "Remove `layout.grid.enabled` pref", and removes the matching `layout_grid_enabled` here in Servo.
+    # 
+    # Stylo PR: https://github.com/servo/stylo/pull/479
+    # 
+    # Testing: Not needed, no change in behavior
+    # 
++https://github.com/servo/servo/pull/48720	(@Taym95, #48720)	Fetch: Avoid multipart field copy (#48720)
+    perf; Several fixes to avoid unneeded avoid
+    ^ commit caaeab558c0877e3452ebb61c584e1f705900ed2
+    # Testing: No behavior change, existing test pass.
+    # 
++https://github.com/servo/servo/pull/48721	(@Taym95, #48721)	Fetch: Avoid multipart boundary clone (#48721)
+    perf; Several fixes to avoid unneeded avoid
+    ^ commit 75528881dc663854795c40d661112f611595aaba
+    # Testing: No behavior change, existing test pass.
+>>> 2026-10-08T23:26:55Z
+-https://github.com/servo/servo/pull/48729	(@gabrix73, #48729)	script: Add cx argument to stylesheet loading task (#48729)
+    ^ commit c57b5da092f85ee1ed640837ead4fc999b1d03ab
+    # Follow the pattern in line 590 by adding the `cx` argument to the closure in the `ElementStylesheetLoader::Asynchronous` task, allowing the removal of the temporary `unsafe` `temp_cx()` block.
+    # 
+    # Testing: `./mach test-wpt tests/wpt/tests/html/semantics/document-metadata/the-link-element`
+    # Fixes #48710
+-https://github.com/servo/servo/pull/48731	(@dependabot[bot], @dependabot[bot], #48731)	build: bump ohos-pasteboard-sys from 0.1.5 to 0.1.6 (#48731)
+    ^ commit 7bf09ccc9400f74e959fe74b9bfd911c46c25f4d
+    # Bumps [ohos-pasteboard-sys](https://github.com/openharmony-rs/ohos-sys) from 0.1.5 to 0.1.6.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li>See full diff in <a href="https://github.com/openharmony-rs/ohos-sys/compare/udmf-sys-v0.1.5...ohos-pasteboard-sys-v0.1.6">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=ohos-pasteboard-sys&package-manager=cargo&previous-version=0.1.5&new-version=0.1.6)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48732	(@dependabot[bot], @dependabot[bot], #48732)	build: bump mio from 1.2.3 to 1.2.4 (#48732)
+    ^ commit bc4312a6acf905fb5f1dc340e9773482805b4fde
+    # Bumps [mio](https://github.com/tokio-rs/mio) from 1.2.3 to 1.2.4.
+    # <details>
+    # <summary>Changelog</summary>
+    # <p><em>Sourced from <a href="https://github.com/tokio-rs/mio/blob/master/CHANGELOG.md">mio's changelog</a>.</em></p>
+    # <blockquote>
+    # <h1>1.2.4</h1>
+    # <ul>
+    # <li>Fix FreeBSD build with libc v0.2.190.
+    # (<a href="https://redirect.github.com/tokio-rs/mio/pull/2016">tokio-rs/mio#2016</a>).</li>
+    # <li>Fix named pipe use-after-free when I/O fails right after submit
+    # (<a href="https://redirect.github.com/tokio-rs/mio/pull/2014">tokio-rs/mio#2014</a>).</li>
+    # <li>Fix non-blocking socket creation on Haiku
+    # (<a href="https://redirect.github.com/tokio-rs/mio/pull/2015">tokio-rs/mio#2015</a>).</li>
+    # </ul>
+    # </blockquote>
+    # </details>
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li><a href="https://github.com/tokio-rs/mio/commit/79d1417c94e3a45c8bdd796e5422e22e8c488086"><code>79d1417</code></a> Release v1.2.4 (<a href="https://redirect.github.com/tokio-rs/mio/issues/2017">#2017</a>)</li>
+    # <li><a href="https://github.com/tokio-rs/mio/commit/9ad284fd9ff63bf8a53cf5d208f2bfa143be21e2"><code>9ad284f</code></a> Fix non-blocking socket creation on Haiku</li>
+    # <li><a href="https://github.com/tokio-rs/mio/commit/97fdd6c778e630ce0fd3ef78e9cdc6f3c9b11e0c"><code>97fdd6c</code></a> Remove <code>libc::NOTE_PCTRLMASK</code> from <code>std::fmt::Debug</code> output (<a href="https://redirect.github.com/tokio-rs/mio/issues/2016">#2016</a>)</li>
+    # <li><a href="https://github.com/tokio-rs/mio/commit/52097880b257aab42b10f9231a97b4a0da725587"><code>5209788</code></a> Fix named pipe use-after-free when I/O fails right after submit (<a href="https://redirect.github.com/tokio-rs/mio/issues/2014">#2014</a>)</li>
+    # <li>See full diff in <a href="https://github.com/tokio-rs/mio/compare/v1.2.3...v1.2.4">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=mio&package-manager=cargo&previous-version=1.2.3&new-version=1.2.4)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48734	(@dependabot[bot], @dependabot[bot], #48734)	build: bump font-types from 0.12.5 to 0.12.6 (#48734)
+    ^ commit e4b87c2da92c7b4848f36130a04baba58cd00c33
+    # Bumps [font-types](https://github.com/googlefonts/fontations) from 0.12.5 to 0.12.6.
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li><a href="https://github.com/googlefonts/fontations/commit/0e939934004776b1982982428a7ce748e61b0310"><code>0e93993</code></a> Release everything (<a href="https://redirect.github.com/googlefonts/fontations/issues/2193">#2193</a>)</li>
+    # <li><a href="https://github.com/googlefonts/fontations/commit/800f03c91fd4ce30dffbf0a5e3b839e2d8ab9c42"><code>800f03c</code></a> Support static VARC variation axes (<a href="https://redirect.github.com/googlefonts/fontations/issues/2142">#2142</a>)</li>
+    # <li><a href="https://github.com/googlefonts/fontations/commit/5f411f67fc8c621f3f2276f483d54e415c566718"><code>5f411f6</code></a> [font-types] Print fixed-point values as shortest decimal (<a href="https://redirect.github.com/googlefonts/fontations/issues/2191">#2191</a>)</li>
+    # <li><a href="https://github.com/googlefonts/fontations/commit/0e56a7ac03145e714d32bf7a5d9ef70bfbfc5356"><code>0e56a7a</code></a> [read-fonts] accept a null shared tuples offset when count is 0 (<a href="https://redirect.github.com/googlefonts/fontations/issues/2185">#2185</a>)</li>
+    # <li><a href="https://github.com/googlefonts/fontations/commit/d2de08f9fc9404713b6b8fbf5ffaea49e32d93a5"><code>d2de08f</code></a> Preserve 32-bit VARC delta precision during accumulation (<a href="https://redirect.github.com/googlefonts/fontations/issues/2192">#2192</a>)</li>
+    # <li><a href="https://github.com/googlefonts/fontations/commit/66563a3d3284f5479f650e18854f21ee1d0cfad6"><code>66563a3</code></a> [read-fonts] tidy up for release  (<a href="https://redirect.github.com/googlefonts/fontations/issues/2190">#2190</a>)</li>
+    # <li><a href="https://github.com/googlefonts/fontations/commit/6e0a9d397363e17262e70cf9707e1cea6c07eaa4"><code>6e0a9d3</code></a> Use IftTable struct instead of tuple (<a href="https://redirect.github.com/googlefonts/fontations/issues/2189">#2189</a>)</li>
+    # <li><a href="https://github.com/googlefonts/fontations/commit/3f04de5e664d8a9fbcdbeb0c47c5711b251a1e87"><code>3f04de5</code></a> Merge pull request <a href="https://redirect.github.com/googlefonts/fontations/issues/2188">#2188</a> from behdad/varc-off-2026-binary-format</li>
+    # <li><a href="https://github.com/googlefonts/fontations/commit/cdf9ab8b6b18c5b8b05d1c58b2ef816bf88142cd"><code>cdf9ab8</code></a> [read-fonts] new font API: charmap support (<a href="https://redirect.github.com/googlefonts/fontations/issues/2183">#2183</a>)</li>
+    # <li><a href="https://github.com/googlefonts/fontations/commit/23b011a50ae0aebe9745e1e8cafe53a1382c5f83"><code>23b011a</code></a> Merge pull request <a href="https://redirect.github.com/googlefonts/fontations/issues/2186">#2186</a> from metsw24-max/post-checkpoint-slot</li>
+    # <li>Additional commits viewable in <a href="https://github.com/googlefonts/fontations/compare/font-types-v0.12.5...font-types-v0.12.6">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=font-types&package-manager=cargo&previous-version=0.12.5&new-version=0.12.6)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48733	(@dependabot[bot], @dependabot[bot], #48733)	build: bump libc from 0.2.189 to 0.2.190 (#48733)
+    ^ commit 4f597e9dd33fa5e4ef8fbe689a0e97b31260e9be
+    # Bumps [libc](https://github.com/rust-lang/libc) from 0.2.189 to 0.2.190.
+    # <details>
+    # <summary>Release notes</summary>
+    # <p><em>Sourced from <a href="https://github.com/rust-lang/libc/releases">libc's releases</a>.</em></p>
+    # <blockquote>
+    # <h2>0.2.190</h2>
+    # <p>There is now a single config for enabling 64-bit <code>time_t</code>: <code>libc_unstable_time64</code>. This can be set
+    # unconditionally; it opts in to 64-bit <code>time_t</code> on the following platforms that use 32-bit by
+    # default:</p>
+    # <ul>
+    # <li>32-bit Linux-GNU</li>
+    # <li>32-bit Linux-uClibc</li>
+    # <li>32-bit Linux-musl. Note that setting this flag also enables some other changes that happend in
+    # musl v1.2.</li>
+    # <li>32-bit Windows-GNU</li>
+    # <li>ESP-IDF (all targets with this environment are 32-bit)</li>
+    # </ul>
+    # <p>Most other 32-bit platforms are either already using 64-bit <code>time_t</code>, or are considered legacy
+    # and will not be gaining support from their upstream maintainers.</p>
+    # <p>You can enable this using <code>RUSTFLAGS</code>:</p>
+    # <pre lang="sh"><code>RUSTFLAGS='--cfg=libc_unstable_time64' cargo ...
+    # </code></pre>
+    # <p>Note that there may still be some changes to features gated by this config option, hence &quot;unstable&quot;
+    # in its name. In the near future we will rename it to just <code>libc_time64</code>. Until then, please test it
+    # out and report any bugs you find!</p>
+    # <h3>Support</h3>
+    # <ul>
+    # <li>Add initial support for HelenOS (<a href="https://redirect.github.com/rust-lang/libc/pull/4355">#4355</a>)</li>
+    # </ul>
+    # <h3>Added</h3>
+    # <p>We are slowly filling out the <code>Default</code> implementations, to reduce the need for <code>mem::zeroed()</code> in user code:</p>
+    # <ul>
+    # <li>Unix: Implement <code>Default</code> for a number of structs, especially on Apple platforms (<a href="https://redirect.github.com/rust-lang/libc/pull/5576">#5576</a>)</li>
+    # <li>Linux, NetBSD: Give <code>statvfs</code> a <code>Default</code> impl (<a href="https://redirect.github.com/rust-lang/libc/pull/5583">#5583</a>)</li>
+    # <li>Linux: Add <code>Default</code> to a <code>linux/can.rs</code> structs (<a href="https://redirect.github.com/rust-lang/libc/pull/5257">#5257</a>)</li>
+    # </ul>
+    # <p>Other additions:</p>
+    # <ul>
+    # <li>Expose the <code>libc_unstable_time64</code> cfg (<a href="https://redirect.github.com/rust-lang/libc/pull/5411">#5411</a>)</li>
+    # <li>Android, Glibc: Add <code>pthread_gettid_np</code> (<a href="https://redirect.github.com/rust-lang/libc/pull/5359">#5359</a>)</li>
+    # <li>Android: Add <code>RTLD_NEXT</code> (<a href="https://redirect.github.com/rust-lang/libc/pull/5323">#5323</a>)</li>
+    # <li>Android: Add reuseport BPF socket options (<a href="https://redirect.github.com/rust-lang/libc/pull/5366">#5366</a>)</li>
+    # <li>Apple: Add TCP header flags, options and SACK limits (<a href="https://redirect.github.com/rust-lang/libc/pull/5358">#5358</a>)</li>
+    # <li>Apple: Add <code>NET_RT_DUMP2</code> (<a href="https://redirect.github.com/rust-lang/libc/pull/5442">#5442</a>)</li>
+    # <li>Apple: Add <code>posix_spawn_file_actions_add(f)chdir(_np)</code> (<a href="https://redirect.github.com/rust-lang/libc/pull/5558">#5558</a>)</li>
+    # <li>BSD: Add <code>BPF_WORDALIGN</code> (<a href="https://redirect.github.com/rust-lang/libc/pull/5320">#5320</a>)</li>
+    # <li>BSD: Add <code>lchmod</code> and <code>lchflags</code> where supported (<a href="https://redirect.github.com/rust-lang/libc/pull/5400">#5400</a>)</li>
+    # <li>BSD: Add <code>minherit</code> and related constants (<a href="https://redirect.github.com/rust-lang/libc/pull/4849">#4849</a>)</li>
+    # <li>Docs: Add more links to public headers and manual pages (<a href="https://redirect.github.com/rust-lang/libc/pull/5407">#5407</a>), (<a href="https://redirect.github.com/rust-lang/libc/pull/5485">#5485</a>)</li>
+    # </ul>
+    # <!-- raw HTML omitted -->
+    # </blockquote>
+    # <p>... (truncated)</p>
+    # </details>
+    # <details>
+    # <summary>Changelog</summary>
+    # <p><em>Sourced from <a href="https://github.com/rust-lang/libc/blob/0.2.190/CHANGELOG.md">libc's changelog</a>.</em></p>
+    # <blockquote>
+    # <h2><a href="https://github.com/rust-lang/libc/compare/0.2.189...0.2.190">0.2.190</a> - 2026-10-02</h2>
+    # <p>There is now a single config for enabling 64-bit <code>time_t</code>: <code>libc_unstable_time64</code>. This can be set
+    # unconditionally; it opts in to 64-bit <code>time_t</code> on the following platforms that use 32-bit by
+    # default:</p>
+    # <ul>
+    # <li>32-bit Linux-GNU</li>
+    # <li>32-bit Linux-uClibc</li>
+    # <li>32-bit Linux-musl. Note that setting this flag also enables some other changes that happend in
+    # musl v1.2.</li>
+    # <li>32-bit Windows-GNU</li>
+    # <li>ESP-IDF (all targets with this environment are 32-bit)</li>
+    # </ul>
+    # <p>Most other 32-bit platforms are either already using 64-bit <code>time_t</code>, or are considered legacy
+    # and will not be gaining support from their upstream maintainers.</p>
+    # <p>You can enable this using <code>RUSTFLAGS</code>:</p>
+    # <pre lang="sh"><code>RUSTFLAGS='--cfg=libc_unstable_time64' cargo ...
+    # </code></pre>
+    # <p>Note that there may still be some changes to features gated by this config option, hence &quot;unstable&quot;
+    # in its name. In the near future we will rename it to just <code>libc_time64</code>. Until then, please test it
+    # out and report any bugs you find!</p>
+    # <h3>Support</h3>
+    # <ul>
+    # <li>Add initial support for HelenOS (<a href="https://redirect.github.com/rust-lang/libc/pull/4355">#4355</a>)</li>
+    # </ul>
+    # <h3>Added</h3>
+    # <p>We are slowly filling out the <code>Default</code> implementations, to reduce the need for <code>mem::zeroed()</code> in user code:</p>
+    # <ul>
+    # <li>Unix: Implement <code>Default</code> for a number of structs, especially on Apple platforms (<a href="https://redirect.github.com/rust-lang/libc/pull/5576">#5576</a>)</li>
+    # <li>Linux, NetBSD: Give <code>statvfs</code> a <code>Default</code> impl (<a href="https://redirect.github.com/rust-lang/libc/pull/5583">#5583</a>)</li>
+    # <li>Linux: Add <code>Default</code> to a <code>linux/can.rs</code> structs (<a href="https://redirect.github.com/rust-lang/libc/pull/5257">#5257</a>)</li>
+    # </ul>
+    # <p>Other additions:</p>
+    # <ul>
+    # <li>Expose the <code>libc_unstable_time64</code> cfg (<a href="https://redirect.github.com/rust-lang/libc/pull/5411">#5411</a>)</li>
+    # <li>Android, Glibc: Add <code>pthread_gettid_np</code> (<a href="https://redirect.github.com/rust-lang/libc/pull/5359">#5359</a>)</li>
+    # <li>Android: Add <code>RTLD_NEXT</code> (<a href="https://redirect.github.com/rust-lang/libc/pull/5323">#5323</a>)</li>
+    # <li>Android: Add reuseport BPF socket options (<a href="https://redirect.github.com/rust-lang/libc/pull/5366">#5366</a>)</li>
+    # <li>Apple: Add TCP header flags, options and SACK limits (<a href="https://redirect.github.com/rust-lang/libc/pull/5358">#5358</a>)</li>
+    # <li>Apple: Add <code>NET_RT_DUMP2</code> (<a href="https://redirect.github.com/rust-lang/libc/pull/5442">#5442</a>)</li>
+    # <li>Apple: Add <code>posix_spawn_file_actions_add(f)chdir(_np)</code> (<a href="https://redirect.github.com/rust-lang/libc/pull/5558">#5558</a>)</li>
+    # <li>BSD: Add <code>BPF_WORDALIGN</code> (<a href="https://redirect.github.com/rust-lang/libc/pull/5320">#5320</a>)</li>
+    # <li>BSD: Add <code>lchmod</code> and <code>lchflags</code> where supported (<a href="https://redirect.github.com/rust-lang/libc/pull/5400">#5400</a>)</li>
+    # <li>BSD: Add <code>minherit</code> and related constants (<a href="https://redirect.github.com/rust-lang/libc/pull/4849">#4849</a>)</li>
+    # </ul>
+    # <!-- raw HTML omitted -->
+    # </blockquote>
+    # <p>... (truncated)</p>
+    # </details>
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li><a href="https://github.com/rust-lang/libc/commit/7b0ab5528dc7f361f3a0b4c06c2cad9971617f75"><code>7b0ab55</code></a> ci: Rename <code>publish_0.2.yml</code> to <code>release.yaml</code></li>
+    # <li><a href="https://github.com/rust-lang/libc/commit/ac85dde5fc269ab4a8cd935d3f76adf85372677c"><code>ac85dde</code></a> ci: Sync release permissions with <code>main</code></li>
+    # <li><a href="https://github.com/rust-lang/libc/commit/8f8cd2032060e1477c08077cd5f89215384723e2"><code>8f8cd20</code></a> libc: Release 0.2.190</li>
+    # <li><a href="https://github.com/rust-lang/libc/commit/052c6e6a0186eeecf22c743d57c65a9963571241"><code>052c6e6</code></a> changelog: Fix an incorrect commit link</li>
+    # <li><a href="https://github.com/rust-lang/libc/commit/ea19fd7fba435c629ed247de7138d5cdb1dea309"><code>ea19fd7</code></a> test: Remove explicit <code>libc</code> version</li>
+    # <li><a href="https://github.com/rust-lang/libc/commit/6dbf3a29a0a972087b684bc6d6cbf20f92143b66"><code>6dbf3a2</code></a> dragonfly: Move <code>INHERIT_ZERO</code> to the freebsd module</li>
+    # <li><a href="https://github.com/rust-lang/libc/commit/8a64766c8514865dea77cfc3216f5a9dc38c6728"><code>8a64766</code></a> apple: add <code>posix_spawn_file_actions_add(f)chdir(_np)</code></li>
+    # <li><a href="https://github.com/rust-lang/libc/commit/28de5147ff5665b835472f00ead49da71084a593"><code>28de514</code></a> linux, netbsd: Give statvfs a <code>Default</code> impl</li>
+    # <li><a href="https://github.com/rust-lang/libc/commit/a58a95f01d0561e75261052f5d8b3ad188f1ae4e"><code>a58a95f</code></a> cygwin: Change <code>POSIX_SPAWN_*</code> flags to <code>c_short</code></li>
+    # <li><a href="https://github.com/rust-lang/libc/commit/d175264e718db4f216df7aad5f1291fd0ec34139"><code>d175264</code></a> apple: <code>timeval32</code> is exhaustive</li>
+    # <li>Additional commits viewable in <a href="https://github.com/rust-lang/libc/compare/0.2.189...0.2.190">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=libc&package-manager=cargo&previous-version=0.2.189&new-version=0.2.190)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48736	(@dependabot[bot], @dependabot[bot], #48736)	build: bump btleplug from 0.13.3 to 0.13.4 (#48736)
+    ^ commit 43fbdfbb32f7244a06440c3f5ea636f42c07de06
+    # Bumps [btleplug](https://github.com/deviceplug/btleplug) from 0.13.3 to 0.13.4.
+    # <details>
+    # <summary>Changelog</summary>
+    # <p><em>Sourced from <a href="https://github.com/deviceplug/btleplug/blob/master/CHANGELOG.md">btleplug's changelog</a>.</em></p>
+    # <blockquote>
+    # <h1>0.13.4 (2026-10-03)</h1>
+    # <h2>Behavior Changes</h2>
+    # <ul>
+    # <li><strong>Windows Coded PHY scanning is now opt-in</strong>: Scans no longer request the
+    # Coded (long-range) PHY by default, restoring the scanning behavior from
+    # before 0.13.0. Since 0.13.0, scans requested it on every adapter that reported
+    # Coded PHY support, but some of those adapters then stopped delivering most 1M
+    # PHY advertisements, so ordinary nearby devices were never discovered.
+    # Applications that need devices advertising on the Coded PHY should call
+    # <code>Adapter::set_use_coded_phy(true)</code> before <code>start_scan()</code>. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/493">#493</a>)</li>
+    # </ul>
+    # <h2>Features</h2>
+    # <ul>
+    # <li>Add <code>Adapter::set_use_coded_phy()</code> on Windows to opt in to receiving
+    # advertisements on the Coded PHY. It has no effect on adapters that do not
+    # report Coded PHY support, where requesting it would stop scans from reporting
+    # any advertisements. (<a href="https://redirect.github.com/deviceplug/btleplug/issues/493">#493</a>)</li>
+    # </ul>
+    # </blockquote>
+    # </details>
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/5ed67d697a3979f1e2ec93551051f11251a5f6f9"><code>5ed67d6</code></a> doc: Update version/CHANGELOG for 0.13.4</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/3a1b30d1e9219a4903a7a6cfbd08763a4fec9c66"><code>3a1b30d</code></a> test(corebluetooth): Cover unrequested descriptor-driven rediscovery</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/1543eb8b2a7ad11aea01bff4643b1bef56d8ef61"><code>1543eb8</code></a> doc: Fix rustdoc link errors in Error conversion and WinRT docs</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/bc4b1296396595bbc2c805dcf0c01f10fb8b6098"><code>bc4b129</code></a> fix(winrtble): Disable Coded PHY scanning by default</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/7a8397b58295b9d1444cade1e12b42a79dbfe359"><code>7a8397b</code></a> fix(winrtble): Keep the Coded PHY toggle behind the adapter support check</li>
+    # <li><a href="https://github.com/deviceplug/btleplug/commit/aa402e5e8c7cbd2e774a924f5e67113d97c53402"><code>aa402e5</code></a> feat(winrtble): allow overriding Coded PHY support</li>
+    # <li>See full diff in <a href="https://github.com/deviceplug/btleplug/compare/0.13.3...0.13.4">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=btleplug&package-manager=cargo&previous-version=0.13.3&new-version=0.13.4)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48737	(@dependabot[bot], @dependabot[bot], #48737)	build: bump cfg-expr from 0.20.9 to 0.20.10 (#48737)
+    ^ commit bc8d09b2fda429e57ed1c0dcaff82bfea96bfb47
+    # Bumps [cfg-expr](https://github.com/EmbarkStudios/cfg-expr) from 0.20.9 to 0.20.10.
+    # <details>
+    # <summary>Release notes</summary>
+    # <p><em>Sourced from <a href="https://github.com/EmbarkStudios/cfg-expr/releases">cfg-expr's releases</a>.</em></p>
+    # <blockquote>
+    # <h2>0.20.10</h2>
+    # <h3>Changed</h3>
+    # <ul>
+    # <li><a href="https://redirect.github.com/EmbarkStudios/cfg-expr/pull/91">PR#91</a> updated the builtin target list to 1.99.0.</li>
+    # </ul>
+    # </blockquote>
+    # </details>
+    # <details>
+    # <summary>Changelog</summary>
+    # <p><em>Sourced from <a href="https://github.com/EmbarkStudios/cfg-expr/blob/main/CHANGELOG.md">cfg-expr's changelog</a>.</em></p>
+    # <blockquote>
+    # <h2>[0.20.10] - 2026-10-01</h2>
+    # <h3>Changed</h3>
+    # <ul>
+    # <li><a href="https://redirect.github.com/EmbarkStudios/cfg-expr/pull/91">PR#91</a> updated the builtin target list to 1.99.0.</li>
+    # </ul>
+    # </blockquote>
+    # </details>
+    # <details>
+    # <summary>Commits</summary>
+    # <ul>
+    # <li><a href="https://github.com/EmbarkStudios/cfg-expr/commit/66b77bf66089129f7ce8324d7e01be184e36a8a5"><code>66b77bf</code></a> Release 0.20.10</li>
+    # <li><a href="https://github.com/EmbarkStudios/cfg-expr/commit/6889073520540f1d8b95b24797315ff949f570c7"><code>6889073</code></a> Update to rust 1.99.0 (<a href="https://redirect.github.com/EmbarkStudios/cfg-expr/issues/91">#91</a>)</li>
+    # <li>See full diff in <a href="https://github.com/EmbarkStudios/cfg-expr/compare/0.20.9...0.20.10">compare view</a></li>
+    # </ul>
+    # </details>
+    # <br />
+    # 
+    # 
+    # [![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=cfg-expr&package-manager=cargo&previous-version=0.20.9&new-version=0.20.10)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+    # 
+    # Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+    # 
+    # [//]: # (dependabot-automerge-start)
+    # [//]: # (dependabot-automerge-end)
+    # 
+    # ---
+    # 
+    # <details>
+    # <summary>Dependabot commands and options</summary>
+    # <br />
+    # 
+    # You can trigger Dependabot actions by commenting on this PR:
+    # - `@dependabot rebase` will rebase this PR
+    # - `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+    # - `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency
+    # - `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+    # - `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+    # 
+    # 
+    # </details>
+-https://github.com/servo/servo/pull/48716	(@jdm, #48716)	wpt: Run CSS fetching tests (#48716)
+    ^ commit 718f087a42c5a1b99ab702c8c920b7cc982008af
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # These changes enable a new subdirectory and fix some problems that were causing the tests to timeout.
+    # 
+    # Testing: New passing subtest
+-https://github.com/servo/servo/pull/48714	(@jdm, #48714)	script: Prevent post-parsing stylesheet tasks from running on unloaded documents. (#48714)
+    ^ commit fd59630e03e4a569d0df55fd32931f719008d49e
+    # The off-thread stylesheet parsing enqueues a task to run post-parse work on the main script thread, but it does so without using the document's task manager. This means that the task will always run unconditionally, even if the document is unloaded before the task runs. By using the task manager, the task will be instead be cancelled when this happens.
+    # 
+    # Testing: Can't write a deterministic test for this—the window in which the document must be aborted is between the network response finishing and before the stylesheet load event being fired, while the stylesheet source is being parsed on another thread. Refreshed https://www.laika.com/our-films/wildwood a bunch of times without triggering the original panic.
+    # Fixes: #48345
+    # 
+    # 
+    # 
+-https://github.com/servo/servo/pull/48707	(@alice, #48707)	a11y: Refactor how accessibility data gets updated. (#48707)
+    ^ commit 2513f304157c84522f984eed3d0552e6a057f0ba
+    # Combine `accessibility_damage` and `rooted_nodes_for_accessibility_integrity_check` into a `ReflowRequestAccessibility` struct.
+    # 
+    # Add `rooted_nodes` to `AccessibilityContext`, and remove them from `AccessibilityUpdate`.
+    # 
+    # Add an `accesskit_tree` field to `AccessibilityUpdate`, which is set whenever the `tree` value for the `TreeUpdate` needs to be set.
+    # 
+    # Testing: No behaviour change.
+    # Fixes: Part of #47182
++https://github.com/servo/servo/pull/48690	(@dzfrias, #48690)	script: Move composition handling to `EditingAction` (#48690)
+    dom; IME composition fixes
+    ^ commit d2abb3339dd90fba191abd7a8f275927f92cf915
+    ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
+    ^ /!\ contains servoshell changes! does it affect the user experience?
+    # This change moves composition handling into `EditingAction`. Additionally, this change fixes a number of bugs:
+    # 
+    # 1. `input` and `beforeinput` were previously being sent after a `compositionend` 
+    # 2. A final `compositionupdate` was not sent before text was committed
+    # 3. Getting an empty string from winit was not doing anything (such as when pressing escape while composing Chinese using Pinyin)
+    # 4. `insertCompositionText` was not being mapped to for input events
+    # 
+    # There is still a lot of work to do for compositions (and perhaps expanding winit's support for IME), but hopefully those can come in a future PR.
+    # 
+    # Testing: There currently isn't a way to test IME handling.
+    # Fixes: #40509
+    # 
+-https://github.com/servo/servo/pull/48709	(@mrobinson, @SimonSapin, #48709)	script: Add `RootedSelectionBoundary` (#48709)
+    ^ commit 2ac2a5ae39fb3252e125101c03c3c5ec6987cd70
+    # This type is like `SelectionBoundary`, but is rooted, so can be kept on
+    # the stack.
+    # 
+    # Testing: This should not change observable behavior, so is covered by existing tests.
+    # 
+-https://github.com/servo/servo/pull/48682	(@Narfinger, @mrobinson, #48682)	script/net: Cleanup some parts of FetchMetadata metadata extracing and cors checking (#48682)
+    ^ commit 853a63cbc4be30f1c8c0f04134340c40c4170325
+    # This cleans up some parts of FetchMetadata by introducing `to_metadata()` which returns either the metadata or `unsafe_` metadata. The pattern of extracing this was quite common making it difficult to see which parts actually need the filtered metadata.
+    # Additionally, we remove some of the manual checks for cors cross origin. This will hopefully allow us to change the representation of FetchMetadata in the future as currently it is quite inefficient.
+    # 
+    # Testing: All the changes should be tested by WPT (https://github.com/Narfinger/servo/actions/runs/37615359415).
+    # 
+-https://github.com/servo/servo/pull/48738	(@Narfinger, #48738)	base: Update serde_with (#48738)
+    ^ commit ef4d9a29be5a50cd54f20aa5e26c4670ae28e2be
+    # This updates serde_with to a new version. The security issue found by dependabot was never reachable in our code (as we don't use the vulnerable functionality) but better be safe than sorry.
+    # This adds exception to cargo deny for the darling crates which to my understanding are just proc macro crates and would not increase the code size.
+    # 
+    # Testing: Compilation is the test.
+    # 
++https://github.com/servo/servo/pull/47720	(@Narfinger, #47720)	script: Put PolicyContainer in document into an Arc (#47720)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit 0a2e11ea26158dc180bafc7d45dcd294738dc5c0
+    # As the PolicyContainer gets copied a bunch of time, we put it into a Reference Counted structure. As the PolicyContainer is also shared with net/ we need an Arc.
+    # This reduces the allocations 1.6 million to 0.4 million over a roughly 1 minute browser session. We keep the return value of Ref<'_ Arc<PolicyContainer>> to always make the cloning specific.
+    # Additionally, we make extensive use of Arc::make_mut which should almost always succeed.
+    # 
+    # Testing: This just changes the performance characteristics.
+    # 
++https://github.com/servo/servo/pull/48745	(@yezhizhen, #48745)	script: Drop extra clone in several places for `Request` (#48745)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit 8f39418415134a4b1d9df09c98aae8af0055e6c5
+    # This drops some temp var too.
+    # 
+    # Testing: Tested build. Rest is trivial.
++https://github.com/servo/servo/pull/48689	(@mxmgorin, #48689)	webgl: Treat DEPTH_STENCIL_ATTACHMENT as an alias in WebGL 2 (#48689)
+    dom; WebGL 2 conformance fixes
+    ^ commit 4ffea1cc6ae0e11d07e2eecbadde16629b1a1c0e
+    # This makes `DEPTH_STENCIL_ATTACHMENT` an alias for the depth and stencil attachment points in WebGL 2, as described in [spec](https://registry.khronos.org/webgl/specs/latest/2.0/#FBO_ATTACHMENTS). Previously it was a separate attachment point as in WebGL 1, so detaching through it left a separately attached stencil in place.
+    # 
+    # Testing: Covered by existing tests; more WebGL conformance subtests now pass. Manually tested with Ruffle: its wgpu-webgl renderer now renders bitey1.swf, which previously showed a black canvas.
+-https://github.com/servo/servo/pull/48742	(@mrobinson, #48742)	servoshell: Replace `count_threads.c` with a version written in Rust (#48742)
+    ^ commit ab7e8fb13581c6101820dfa6e850d7ca7d1c83c4
+    ^ /!\ contains servoshell changes! does it affect the user experience?
+    # Using `mach2` which is already a workspace dependency we can remove this
+    # bit of C compilation from the macOS build.
+    # 
+    # Testing: This part of the code is untested and very hard to test.
+    # 
++https://github.com/servo/servo/pull/48591	(@mrobinson, #48591)	layout: Better track hanging and removed whitespace in line layout (#48591)
+    layout; Line layout fixes related to hanging and removed whitespaces
+    ^ commit 39e058325ae58d6fe4906b98061a352ad3a96b61
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This change reworks how hanging and removed whitespace are handled in
+    # line layout, making it more principled and fixing a variety of bugs.
+    # Now these two values are tracked separately and more completely
+    # considered across the line layout phases.
+    # 
+    # There is still some work to do here:
+    #  - Hanging white space should be taken into account for justification
+    #    adjustment painting.
+    #  - Hanging white space should be taken into account for overflow.
+    # 
+    # Testing: This causes about 50 tests to start passing and ~10 to
+    # start failing. The newly failing tests are ones that use
+    # `overflow-wrap: anywhere` and `overflow-wrap: anywhere` which
+    # are unsupported by Servo. These passed before by accident.
+    # 
+-https://github.com/servo/servo/pull/47933	(@mrobinson, #47933)	layout: Create separate stacking contexts for elements that establish 3d stacking contexts (#47933)
+    ^ commit 781cf6854eb29a7a629fe2f44cd5c763aec89c9b
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # Gecko separates stacking contexts for dealing with `transform-style:
+    # preserve-3d` and those that apply things like filters. Filters applied
+    # to stacking contexts prevent them from participating in 3d rendering
+    # contexts. This means that we must explicitly track when a stacking
+    # context participates in a 3d rendering context and, in those cases, push
+    # a separate WebRender stacking context for them.
+    # 
+    # Testing: This change fixes a WPT test.
+    # Fixes: #47750.
+    # 
++https://github.com/servo/servo/pull/48752	(@jschwe, #48752)	script: Fix TimerListener leak (#48752)
+    perf; Fixed memory leak where pending `setTimeout()` timers kept closed windows and iframes alive
+    ^ commit 5f65837a45d56f857c099e8c640dbf317ab4a0d1
+    # Fixes a leak, where the Trusted reference would keep windows alive until the Timer expires.
+    # Looking up the global via the pipelineId avoids this. For workers we can keep the direct reference since the timer scheduler is owned by the worker, hence if that is dropped, so is the reference.
+    # 
+    # Testing: We don't have automated tests to prevent leaks. 
+    # Fixes: #48741
+    # 
++https://github.com/servo/servo/pull/48703	(@Narfinger, #48703)	net: Small optimizations in net code (#48703)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit 19956df6e2abc6e9033ccecbc46b7f3123007d48
+    # This PR combines 2 optimizations in net code.
+    # - http_loader use String::from_utf8 instead of into_iter().map(char::from).collect for origin.
+    # - Remove copying of policy container in net code by getting the reference to the policy container more often and in smaller scopes.
+    # 
+    # Testing: WPT test should test this extensively (https://github.com/Narfinger/servo/actions/runs/37780703500).
+    # 
++https://github.com/servo/servo/pull/48750	(@Narfinger, #48750)	script: Move more attribute getting to use AttrStrRef (#48750)
+    perf; Multiple perf improvements, reducing allocations and more things
+    ^ commit 8de25a1ab6b2869f19db0fa42a49ecd420844961
+    # This replaces more of the `get_attribute_string_value` calls with `get_attribute_string_ref`.
+    # 
+    # Testing: These should be equivalent changes but WPT fill find if there are any problems.
+    # 
++https://github.com/servo/servo/pull/48751	(@mxmgorin, #48751)	webgl: Return null from getUniformLocation for uniform block members (#48751)
+    dom; WebGL 2 conformance fixes
+    ^ commit ff28dab69fcd54a99eeb526f07cc71a894ac1451
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # This makes `getUniformLocation` return `null` for members of a named uniform block, as described in [OpenGL ES 3.0 (2.12.6)](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf#page=72). Previously the WebGL thread turned GL's missing location into location 0, and `getUniform` using that location crashed the WebGL thread.
+    # 
+    # Testing: Added a WPT test, which fails without this change.
+-https://github.com/servo/servo/pull/46445	(@Loirooriol, #46445)	layout: Don't paint fragment of inline box containing a block-level (#46445)
+    ^ commit 00728e9363bea8731c0d076373af17fddea17c7e
+    ^ /!\ contains changes to WPT expectations! it probably affects the web platform
+    # When an inline box gets split into multiple fragments because it has a a block-level descendant, no browser paints a box shadow for the fragment of the inline box that only contains the block-level.
+    # 
+    # Testing: Adding a test
+    # Fixes: #46095
+-https://github.com/servo/servo/pull/48652	(@mrobinson, #48652)	layout: Remove the empty `<input>` zero-width space hack (#48652)
+    ^ commit 41498597c395ef2e698d392d39f2fb7307279a48
+    # Servo had a hack where an empty text field always contained a zero-width
+    # space to ensure that it created an inline formatting context. This
+    # changes replaces that hack with a new method called
+    # `text_node_needs_caret_placeholder()` which forces the creation of an
+    # inline formatting context, the insertion of a caret placeholder for
+    # empty text runs, and reserves the line height so that empty text inputs
+    # are at least as tall as one line.
+    # 
+    # Testing: This should not change observable behavior so should be covered by existing tests.
+    # 
