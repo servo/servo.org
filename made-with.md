@@ -33,7 +33,7 @@ title: Made With Servo
 }
 
 [data-theme="dark"] .made-with-item:hover {
-  background-color: #263449;
+  background-color: var(--bg-surface);
   color: var(--text-primary);
 }
 

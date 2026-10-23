@@ -204,7 +204,7 @@ The fees for donations on Open Collective depend on how much you donate in a sin
     z-index: 1;
   }
   [data-theme="dark"] ._donation_fees tr > *:nth-child(1) {
-    background: #1e293b;
+    background: var(--bg-surface);
     color: var(--text-primary);
   }
   ._total {

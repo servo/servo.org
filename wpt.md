@@ -70,11 +70,11 @@ title: WPT Pass Rates
   }
 
   [data-theme="dark"] .wpt-score-page .odd {
-      background-color: #263449;
+      background-color: var(--bg-surface);
   }
 
   [data-theme="dark"] .wpt-score-page #score-table th {
-      border-color: #94a3b8;
+      border-color: var(--text-secondary);
   }
 </style>
 <div class="inner-container wpt-score-page">
