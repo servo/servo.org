@@ -260,9 +260,22 @@ code {
 <p>The developer tools console now <strong>eagerly evaluates</strong> JS inputs, allowing faster feedback (@freyacodes, #47527).</p>
 <p>We’ve shipped new web platform features:</p>
 <p>Plus a bunch of new DOM APIs:</p>
+<ul>
+<li><strong>parentRule</strong> on <strong>CSSRule</strong> and <strong>CSSStyleDeclaration</strong> (@skyz1, #47743)</li>
+<li><strong>version</strong> on <strong>HTMLHtmlElement</strong> (@SilvioPilato, #47786)</li>
+<li><strong>getComposedRanges()</strong> and <strong>direction</strong> on <strong>Selection</strong> (@mrobinson, #47683)</li>
+<li><strong>baseURL</strong> on <strong>CSSStyleSheet</strong> (@Gae24, #47783)</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#loading_non-javascript_resources"><strong>CSS modules</strong></a>(@Gae24, #47813) and <strong>text modules</strong> (@Gae24, #47863)</li>
+<li><strong>getContextAttributes()</strong> on <strong>CanvasRenderingContext2D</strong> and <strong>OffscreenCanvasRenderingContext2D</strong> (@Taym95, #47868)</li>
+<li>the <strong>Content-Language</strong> header (@TimvdLippe, #47930)</li>
+<li><strong>dir</strong> on <strong>Document</strong> (@yezhizhen, #48170)</li>
+<li><strong>SVGAElement</strong>, <strong>SVGPatternElement</strong>, <strong>SVGTSpanElement</strong>, <strong>SVGTextContentElement</strong>, <strong>SVGTextElement</strong>, <strong>SVGTextPositioningElement</strong> (@mu-mostafa98, #48174)</li>
+<li>the <strong>MLKEM768-X25519</strong> algorithm for <strong>WebCrypto</strong> (@kkoyung, #48240, #48282, #48313, #48350)</li>
+</ul>
 <h2 id="security" tabindex="-1">Security <a class="header-anchor" href="#security">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>We upgraded to <strong>SpiderMonkey v153.3</strong> and <strong>mozangle v0.7</strong>, both of which included fixes for security bugs reported upstream (@sagudev, #48176, #47655, #48259).</p>
 <h2 id="real-world-compat" tabindex="-1">Real world compat <a class="header-anchor" href="#real-world-compat">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -270,15 +283,25 @@ code {
 <h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>Our accessibility tree (<code>--pref accessibility_enabled</code>) now <strong>reports geometry bounds</strong> for inline elements (@alice, #47905) and does much less work when responding to DOM changes (@alice, @mrobinson, #47690).
+Additionally, elements with <code>display: none</code> are reported as hidden (@alice, #47772).</p>
+<p>We had lots of conformance improvements for our <strong>WebGL2 implementation</strong> (<code>--pref dom_webgl2_enabled</code>) (@mxmgorin, #48423, #48441, #48470, #48479, #48495, #48473, #48536).</p>
 <h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>There’s a new API for integrating with accessibility tools: <a href="https://doc.servo.org/servo/struct.Servo.html"><code>Servo</code></a>::<a href="https://doc.servo.org/servo/struct.Servo.html#method.forward_accessibility_action"><code>forward_accessibility_action</code></a>.</p>
 <h2 id="for-users-and-developers" tabindex="-1">For users and developers <a class="header-anchor" href="#for-users-and-developers">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>It is now possible to cross-compile the OpenHarmony build from Windows hosts (@jschwe, #48392).</p>
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>We improved performance by removing <strong>unnecessary allocations</strong> (@Narfinger, @TimvdLippe, @yezhizhen, #47689, #47839, #47838, #47982, #48006, #48036, #48099, #48204, #48127, #48218, #48357, #48386, #48422, #48440, #48452, #48508), <strong>preallocating more</strong> when building vectors (@jschwe, @Narfinger, @sagudev, @webbeef, #47455, #47613, #48026, #48398), and <strong>avoiding IPC</strong> in single process mode (@leowatts, @Narfinger, @Uiniel, @TTyChud, #47691, #47718, #48002, #48073, #48476, #48435).</p>
+<p>We also sped up Servo by reducing interactions with the GC (@TimvdLippe, @Narfinger, #47818, #48257) and doing less work when modifying selections (@SimonSapin, #47579), dispatching events (@webbeef, #48078), calculating font metrics (@RichardTjokroutomo, #48238), and indexing window frames (@mrobinson, #47832).</p>
+<p>We <strong>reduced memory usage</strong> in common cases by reusing buffers (@Narfinger, #47751), clearing more page-specific data (@Radeonares32, @Narfinger, @jschwe, @mrobinson, @mxmgorin, #47651, #47806, #47805, #48166, #48295, #48297, #48016), compacting data structures (@Narfinger, @webbeef, @SimonSapin, @mrobinson, #47776, #48039, #48050, #47742, #48301, #48296, #48105), and sharing more buffers (@jdm, #47998).</p>
+<p>We turned on <strong>thread affinity boosting</strong> on Linux, which can improve performance on some CPU architectures (@jschwe, #47058).</p>
+<p>We’re working on statically preventing <a href="https://github.com/servo/servo/issues/39139">a footgun</a> that can lead to uncollectible GC cycles and leaking memory (@Gae24, @jdm, @lumiscosity, @SilvioPilato, @sahilnyk, @TTyChud, @kuntal-devrat, @MohamedAli00949, #47941, #48013, #48021, #48035, #48033, #48051, #48072, #48171, #48209, #48248, #48246, #48264, #48285, #48311, #48408, #48053, #48156, #48186, #48223, #48315, #47872, #47698, #47682, #47735, #47816, #47817, #47794, #47909, #47934, #47935, #47954, #48022, #47955, #48058, #48228, #48247, #48261, #48280, #48302, #48316, #48328, #48346, #48355, #48262, #48377, #48304, #48378).</p>
 <h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
