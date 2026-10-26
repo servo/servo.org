@@ -39,7 +39,10 @@ git -C "$servo_repo_path" fetch https://github.com/servo/servo.git
 default_branch_head=$(cut -f 1 "$servo_repo_path/.git/FETCH_HEAD")
 
 if ! [ -e runs.json ]; then
-  gh api '/repos/servo/servo/actions/workflows/release.yml/runs?status=success&per_page=62' > runs.json
+  gh api '/repos/servo/servo/actions/workflows/release-github.yml/runs?status=success&per_page=62' > runs.json
+  # This is needed due to the change in https://github.com/servo/servo/pull/48395,
+  # to cover all commits in September. After September we could remove next line and this comment.
+  gh api '/repos/servo/servo/actions/workflows/release.yml/runs?status=success&per_page=62' >> runs.json
 fi
 
 # Convert `runs.json` to `runs.tsv` with lines `<head commit>\t<timestamp>`,
