@@ -9,27 +9,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v7
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v7
         with:
           node-version: '24.x'
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cache Node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            npm-${{ runner.os }}-
-            npm-
+          cache: 'npm'
       - name: Install Node modules
-        run: npm install
+        run: npm ci
       - name: Eleventy
         run: |
-          npx eleventy --output='_site/' --pathprefix='/'
+          npx @11ty/eleventy --output='_site/' --pathprefix='/'
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           publish_dir: ./_site
           github_token: ${{ secrets.GITHUB_TOKEN }}

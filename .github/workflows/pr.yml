@@ -14,30 +14,23 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v7
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v7
         with:
           node-version: '24.x'
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cache Node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            npm-${{ runner.os }}-
-            npm-
+          cache: 'npm'
       - name: Install Node modules
-        run: npm install
+        run: npm ci
       - name: Eleventy
         run: |
-          npx eleventy \
+          npx @11ty/eleventy \
             --output='_site/${{ env.HEAD_REF }}' \
             --pathprefix='/${{ env.HEAD_REF }}/'
           LC_TIME=C date > '_site/${{ env.HEAD_REF }}/.stamp'
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
@@ -52,9 +45,9 @@ jobs:
    needs: build
    steps:
      - name: Checkout
-       uses: actions/checkout@v3
+       uses: actions/checkout@v7
      - name: Comment PR
-       uses: thollander/actions-comment-pull-request@v2
+       uses: thollander/actions-comment-pull-request@v3
        with:
          message: |
            Preview link: https://servo.org/${{ env.HEAD_REF }}/
