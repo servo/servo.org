@@ -10,7 +10,7 @@ title: Download
 ## macOS Instructions
 
 * Click the macOS download button above to download the latest build
-* Open the downloaded `servo-latest.dmg` file
+* Open the downloaded `.dmg` file
 * Drag `Servo.app` to the Applications folder
 * Double-click on `Servo.app` to run Servo
 
@@ -22,7 +22,7 @@ title: Download
 
 **Solution**: Right-click `Servo.app` and choose "Open." The dialogue may now allow Servo to be opened.
 
-**Error**: The solution above did not work. 
+**Error**: The solution above did not work.
 
 **Solution**: Go to `System Settings` -> `Privacy and Security`. Scroll down to `Security` (see screenshot below).
 Click on `Open Anyway`. You should be able to run Servo now.
@@ -31,7 +31,7 @@ Click on `Open Anyway`. You should be able to run Servo now.
 
 **Error**: Dialogue stating '“Servo.app” Not Opened'
 
-**Solution** Dismiss the dialogue with "Done" and remove the quarantine attribute from Servo: `xattr -r -d com.apple.quarantine /Applications/Servo.app`
+**Solution**: Dismiss the dialogue with "Done" and remove the quarantine attribute from Servo: `xattr -r -d com.apple.quarantine /Applications/Servo.app`
 
   </div>
   <div class="column">
@@ -39,21 +39,21 @@ Click on `Open Anyway`. You should be able to run Servo now.
 ## Linux Instructions
 
 * Click the Linux download button above to download the latest build
-* Expand the downloaded `.tar.gz` file (`tar zxf servo-latest.tar.gz`)
+* Expand the downloaded `.tar.gz` file (`tar zxf servo-*.tar.gz`)
 * `cd servo`
-* Execute `./servo` to run Servo
+* Execute `./servoshell` to run Servo
 
 ### Troubleshooting
 
-**Error**: `./servo: error while loading shared libraries: libgstwebrtc-1.0.so.0: cannot open shared object file: No such file or directory`
+**Error**: `./servoshell: error while loading shared libraries: libgstwebrtc-1.0.so.0: cannot open shared object file: No such file or directory`
 
 **Solution**: `sudo apt install libgstreamer-plugins-bad1.0-0`
 
-**Error**: `./servo: symbol lookup error: ./servo: undefined symbol: gst_webrtc_data_channel_state_get_type`
+**Error**: `./servoshell: symbol lookup error: ./servoshell: undefined symbol: gst_webrtc_data_channel_state_get_type`
 
 **Solution**: make sure that you have GStreamer version 1.16 (or greater) and gst-plugins-bad version 1.16 (or greater)
 
-**Error**: `./servo: error while loading shared libraries: libunwind-x86_64.so.8: cannot open shared object file: No such file or directory`
+**Error**: `./servoshell: error while loading shared libraries: libunwind-x86_64.so.8: cannot open shared object file: No such file or directory`
 
 **Solution**: make sure that you have libunwind installed
 
