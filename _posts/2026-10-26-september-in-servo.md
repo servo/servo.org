@@ -52,7 +52,7 @@ The [egui.rs](https://www.egui.rs/) demo now works as expected with `--pref dom.
     <a href="{{ '/img/blog/2026-10-egui.png' | url }}"><img src="{{ '/img/blog/2026-10-egui.png' | url }}" alt="http://egui.rs rendering in Servo"></a>
 </figure>
 
-This [Candy Crush](https://jooyouss.github.io/candy-crush/) game.
+This [Candy Crush](https://jooyouss.github.io/candy-crush/) game is now playable.
 
 <figure>
     <a href="{{ '/img/blog/2026-10-candycrush.png' | url }}"><img src="{{ '/img/blog/2026-10-candycrush.png' | url }}" alt="A Candy Crush game rendering in Servo"></a>
@@ -71,8 +71,7 @@ Support for WSIWYG editors (which rely heavily on **`contenteditable`**) is goin
 
 **Closed captioning** for video elements is making progress.
 Text tracks now fire `enter`, `exit`, and `cuechange` events (@TimvdLippe, #47725).
-Media elements now return the full sorted list of text tracks (@TimvdLippe, #47785).
-Adding cues to a text track now sets that track correctly (@TimvdLippe, #48012).
+Media elements now return the full sorted list of text tracks (@TimvdLippe, #47785), and adding cues to a text track now sets that track correctly (@TimvdLippe, #48012).
 Text track objects now reflect the attributes of the associated `<track>` element.
 Text track URLs are now fetched at the correct time (@TimvdLippe, #48325), and active cues are computed correctly (@TimvdLippe, #48305), while text track cues are ordered as expected (@TimvdLippe, #48368).
 Additionally, WebVTT parsing can now recover from errors (@TimvdLippe, #48391).
@@ -86,12 +85,12 @@ We implemented the **getTimeline()** and **setTimeline()** methods for the **Ani
 
 ## Embedding API
 
-There's a new API for integrating with accessibility tools: [`Servo`](https://doc.servo.org/servo/struct.Servo.html)::[`forward_accessibility_action`](https://doc.servo.org/servo/struct.Servo.html#method.forward_accessibility_action) (@alice, @mrobinson, #48512).
+There's a new API for events originating from accessibility tools: [`Servo`](https://doc.servo.org/servo/struct.Servo.html)::[`forward_accessibility_action`](https://doc.servo.org/servo/struct.Servo.html#method.forward_accessibility_action) (@alice, @mrobinson, #48512).
 
 There is also an API to clear session history: [`WebView`](https://doc.servo.org/servo/struct.WebView.html)::[`clear_session_history`](https://doc.servo.org/servo/struct.WebView.html#method.clear_session_history) (@Narfinger, #47483).
 
 The [`WebView`](https://doc.servo.org/servo/struct.WebView.html)::`set_throttled` API has been removed (@mrobinson, #39923).
-Throttling automatically occurs when a WebView is [hidden](https://doc.servo.org/servo/struct.WebView.html#method.hide) and stopped when [shown](https://doc.servo.org/servo/struct.WebView.html#method.show).
+Throttling automatically occurs when a WebView is [hidden](https://doc.servo.org/servo/struct.WebView.html#method.hide) and is stopped when [shown](https://doc.servo.org/servo/struct.WebView.html#method.show).
 
 The [`WebViewDelegate`](https://doc.servo.org/servo/trait.WebViewDelegate.html)::`notify_focus_changed` method was removed, along with the [`Servo`](https://doc.servo.org/servo/struct.Servo.html) methods `focus` and `blur` (@mrobinson, #48364).
 Embedders must call [`WebView`](https://doc.servo.org/servo/struct.WebView.html)::[`set_focused`](https://doc.servo.org/servo/struct.WebView.html#method.set_focused) whenever a WebView has gained or lost system focus.
@@ -125,7 +124,7 @@ Embedder-originating JS (e.g. devtools console or embedding APIs) will always ex
 
 We improved performance by removing **unnecessary allocations** (@Narfinger, @TimvdLippe, @yezhizhen, #47689, #47839, #47838, #47982, #48006, #48036, #48099, #48204, #48127, #48218, #48357, #48386, #48422, #48440, #48452, #48508), **preallocating more** when building vectors (@jschwe, @Narfinger, @sagudev, @webbeef, #47455, #47613, #48026, #48398), and **avoiding IPC** in single process mode (@leowatts, @Narfinger, @Uiniel, @TTyChud, #47691, #47718, #48002, #48073, #48476, #48435).
 
-We also sped up Servo by reducing interactions with the GC (@TimvdLippe, @Narfinger, #47818, #48257, #48396) and doing less work when modifying selections (@SimonSapin, #47579), dispatching events (@webbeef, #48078), calculating font metrics (@RichardTjokroutomo, #48238), and indexing window frames (@mrobinson, #47832).
+We also sped up Servo by reducing interactions with the GC (@TimvdLippe, @Narfinger, #47818, #48257, #48396), and doing less work when modifying selections (@SimonSapin, #47579), dispatching events (@webbeef, #48078), calculating font metrics (@RichardTjokroutomo, #48238), and indexing window frames (@mrobinson, #47832).
 
 We **reduced memory usage** in common cases by reusing buffers (@Narfinger, #47751), clearing more page-specific data (@Radeonares32, @Narfinger, @jschwe, @mrobinson, @mxmgorin, #47651, #47806, #47805, #48166, #48295, #48297, #48016), compacting data structures (@Narfinger, @webbeef, @SimonSapin, @mrobinson, #47776, #48039, #48050, #47742, #48301, #48296, #48105), and sharing more buffers (@jdm, #47998).
 We also fixed a memory leak involving `<audio>` and `<video>` elements (@TTyChud, #48371).
@@ -135,26 +134,27 @@ We turned on **thread affinity boosting** on Linux, which can improve performanc
 We're working on statically preventing [a footgun](https://github.com/servo/servo/issues/39139) that can lead to uncollectible GC cycles and leaking memory (@Gae24, @jdm, @lumiscosity, @SilvioPilato, @sahilnyk, @TTyChud, @kuntal-devrat, @MohamedAli00949, #47941, #48013, #48021, #48035, #48033, #48051, #48072, #48171, #48209, #48248, #48246, #48264, #48285, #48311, #48408, #48053, #48156, #48186, #48223, #48315, #47872, #47698, #47682, #47735, #47816, #47817, #47794, #47909, #47934, #47935, #47954, #48022, #47955, #48058, #48228, #48247, #48261, #48280, #48302, #48316, #48328, #48346, #48355, #48262, #48377, #48304, #48378, #48388, #48432).
 
 We fixed panics in **WebRTC** (@MunishMummadi, #4772), **execCommand()** on **Document** (@TimvdLippe, #47784), `<video>` (@calvaris, #46148), `<iframe>` (@jdm, #48465), **SharedWorker** (@mrobinson, #47940), **ancestorOrigins** on **Document** (@mrobinson, #48009), `about:memory` (@mxmgorin, #47686, #48001), and EGL 1.4 configurations (@mxmgorin, #47803).
+
 We also fixed a very ironic panic triggered by the `about:crash` page that loads when a normal page triggers a panic (@mrobinson, #48055)
 
 The JS console no longer hangs when primitive values as thrown as exceptions (@FatCat560, #47629).
-We also no longer hang on shutdown in multiprocess mode (@Narfinger, #48523), when certain pages use **IntersectionObserver** (@mxmgorin, #47693), when closing a browsing context with pending WebDriver commands (@yezhizhen, #48131, #48172), or when closing **SharedWorker**s (@nicoburns, #48477).
+Servo no longer hangs on shutdown in multiprocess mode (@Narfinger, #48523), when certain pages use **IntersectionObserver** (@mxmgorin, #47693), when closing a browsing context with pending WebDriver commands (@yezhizhen, #48131, #48172), or when closing **SharedWorker**s (@nicoburns, #48477).
 
-`about:memory` got more improvements: we measure more memory for SVG rendering (@Narfinger, @mrobinson, #47061), WebAudio (@jdm, #47996), and identify globals that are leaked (@jdm, #48237).
+`about:memory` got more improvements: we measure more memory for SVG rendering (@Narfinger, @mrobinson, #47061), WebAudio (@jdm, #47996), and identify globals that have been leaked (@jdm, #48237).
 
 ## More on the web platform
 
 CSS images now **delay the `load` event**, leading to more consistent behaviour for engine users performing visual rendering (@TimvdLippe, #48199).
 
-`Window.open()` respects sandbox flags preventing popups (@mrobinson, #47653).
-
-**select()** on a text input now focuses the control (@dzfrias, @mrobinson, #48475).
-
-Interactive selections in documents continued to improve.
+Interactive selections in documents continued to improve!
 They now can span shadow trees (@mrobinson, @SimonSapin, #47931, #47694, #47895), and have consistent heights and positions (@mrobinson, #47937), plus there are new context menu entries to copy and select all (@mrobinson, #48101).
 Additionally, image-based content shows when it is part of a selection (@mrobinson, #48149).
 
+`Window.open()` respects sandbox flags that prevent popups (@mrobinson, #47653).
+
 **LargestContentfulPaint** now reports the **loadTime** for image content (@shubhamg13, #48286), ignores cross-origin frames (@shubhamg13, #48094), ignores invisible text (@shubhamg13, #48010), and reports null elements when they are removed from the tree (@shubhamg13, #48125).
+
+**select()** on a text input now focuses the control (@dzfrias, @mrobinson, #48475).
 
 Our WebDriver server now automates setting permissions (@xbwwj, @yezhizhen, #47623), while sending click events and keyboard actions uses fewer delays (@yezhizhen, #48066).
 
