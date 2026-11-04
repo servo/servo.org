@@ -15,12 +15,16 @@ code {
 
 [**Servo 0.7.0**](https://github.com/servo/servo/releases/tag/v0.7.0) contains all of the changes we landed in September, spanning 527 commits!
 
+<figure>
+    <a href="{{ '/img/blog/2026-10-gary-banner.png' | url }}"><img src="{{ '/img/blog/2026-10-gary-banner.png' | url }}" alt="a black and white cat named Gary showing off new visual web platform features"></a>
+</figure>
+
 The developer tools console now **eagerly evaluates** JS inputs, allowing faster feedback (@freyacodes, #47527).
 
 We've shipped new web platform features:
 * the **:checked** pseudoclass (@skyz1, #47987)
 * the **user-select** property (@SimonSapin, @mrobinson, #48137, #48242)
-* the **<progress>** element (@rayguo17, #46974)
+* the **&lt;progress>** element (@rayguo17, #46974)
 * CSS [typed arithmetic](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Values_and_units/Using_typed_arithmetic) (@Loirooriol, #48338)
 * the **alpha()** CSS function (@Loirooriol, #48344)
 * the **font-width** property (@Loirooriol, #47914)
