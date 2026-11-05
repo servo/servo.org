@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "September in Servo: who knows?"
-date:       2026-10-26
-summary:    ????
+title:      "September in Servo: <progress>, rounded rectangles, and more!"
+date:       2026-11-05
+summary:    Plus new CSS functions and WEbGL2 improvements.
 categories:
 ---
 
