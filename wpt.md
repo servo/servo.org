@@ -68,6 +68,14 @@ title: WPT Pass Rates
     gap: 20px;
     flex-wrap: wrap;
   }
+
+  [data-theme="dark"] .wpt-score-page .odd {
+      background-color: var(--bg-surface);
+  }
+
+  [data-theme="dark"] .wpt-score-page #score-table th {
+      border-color: var(--text-secondary);
+  }
 </style>
 <div class="inner-container wpt-score-page">
   <h1>{{ title }}</h1>
