@@ -11,8 +11,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -29,25 +27,4 @@ jobs:
             --output='_site/${{ env.HEAD_REF }}' \
             --pathprefix='/${{ env.HEAD_REF }}/'
           LC_TIME=C date > '_site/${{ env.HEAD_REF }}/.stamp'
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-          keep_files: true
-      - name: Deploy link
-        run: |
-          echo "Preview link: https://servo.org/${{ env.HEAD_REF }}/" >> $GITHUB_STEP_SUMMARY
-
-  add_preview_link:
-   runs-on: ubuntu-latest
-   name: Comment preview link in the PR
-   needs: build
-   steps:
-     - name: Checkout
-       uses: actions/checkout@v7
-     - name: Comment PR
-       uses: thollander/actions-comment-pull-request@v3
-       with:
-         message: |
-           Preview link: https://servo.org/${{ env.HEAD_REF }}/
+      # TODO: Add site preview when available (https://github.com/actions/deploy-pages#inputs-)

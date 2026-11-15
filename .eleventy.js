@@ -6,7 +6,7 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 module.exports = function(eleventyConfig) {
   eleventyConfig.setTemplateFormats(["md", "njk", "html", "css", "pdf", "liquid"]);
 
-  eleventyConfig.addPassthroughCopy("CNAME");
+  eleventyConfig.addPassthroughCopy(".nojekyll");
   eleventyConfig.addPassthroughCopy({"assets/img": "img"});
   eleventyConfig.addPassthroughCopy({"assets/svg": "svg"});
   eleventyConfig.addPassthroughCopy({"assets/js": "js"});
