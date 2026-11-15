@@ -11,50 +11,20 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v7
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v7
         with:
           node-version: '24.x'
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cache Node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            npm-${{ runner.os }}-
-            npm-
+          cache: 'npm'
       - name: Install Node modules
-        run: npm install
+        run: npm ci
       - name: Eleventy
         run: |
-          npx eleventy \
+          npx @11ty/eleventy \
             --output='_site/${{ env.HEAD_REF }}' \
             --pathprefix='/${{ env.HEAD_REF }}/'
           LC_TIME=C date > '_site/${{ env.HEAD_REF }}/.stamp'
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-          keep_files: true
-      - name: Deploy link
-        run: |
-          echo "Preview link: https://servo.org/${{ env.HEAD_REF }}/" >> $GITHUB_STEP_SUMMARY
-
-  add_preview_link:
-   runs-on: ubuntu-latest
-   name: Comment preview link in the PR
-   needs: build
-   steps:
-     - name: Checkout
-       uses: actions/checkout@v3
-     - name: Comment PR
-       uses: thollander/actions-comment-pull-request@v2
-       with:
-         message: |
-           Preview link: https://servo.org/${{ env.HEAD_REF }}/
+      # TODO: Add site preview when available (https://github.com/actions/deploy-pages#inputs-)

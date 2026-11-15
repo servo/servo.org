@@ -6,31 +6,37 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v7
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v7
         with:
           node-version: '24.x'
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cache Node modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            npm-${{ runner.os }}-
-            npm-
+          cache: 'npm'
       - name: Install Node modules
-        run: npm install
+        run: npm ci
       - name: Eleventy
         run: |
-          npx eleventy --output='_site/' --pathprefix='/'
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+          npx @11ty/eleventy --output='_site/' --pathprefix='/'
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
         with:
-          publish_dir: ./_site
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          cname: servo.org
+          path: ./_site
+          include-hidden-files: true
+          
+  deploy:
+    needs: build
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
