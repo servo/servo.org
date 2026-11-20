@@ -1,5 +1,5 @@
 >>> 2026-10-01T23:31:04Z
-+https://github.com/servo/servo/pull/48544	(@veyndan, #48544)	android: Remove `SurfaceHolderCallback` dependence on `ServoView` (#48544)
+.https://github.com/servo/servo/pull/48544	(@veyndan, #48544)	android: Remove `SurfaceHolderCallback` dependence on `ServoView` (#48544)
     embedding; android cleanup
     ^ commit 216994a53e7e059ef288e56954dcdc8107ab53d8
     # The logic of `SurfaceHolderCallback` will mostly be retained when converting to Compose, since [we'll utilise `AndroidExternalSurface`](https://developer.android.com/reference/kotlin/androidx/compose/foundation/AndroidExternalSurface.composable#AndroidExternalSurface(androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.ui.unit.IntSize,androidx.compose.foundation.AndroidExternalSurfaceZOrder,kotlin.Boolean,kotlin.Function1)). To make the extraction easier, all dependencies on `ServoView` need to be severed.
@@ -10,7 +10,7 @@
     # 
     # Testing: There are no automated tests for Android.
     # Part of: #33742
-+https://github.com/servo/servo/pull/48518	(@veyndan, #48518)	android: Replace deprecated `onActivityResult` with Activity Result API (#48518)
+.https://github.com/servo/servo/pull/48518	(@veyndan, #48518)	android: Replace deprecated `onActivityResult` with Activity Result API (#48518)
     embedding; android cleanup
     ^ commit c8f362c0aaab92ce727cc984361e8320ac0cfa66
     # Per [the docs](https://developer.android.com/reference/androidx/activity/ComponentActivity#onActivityResult(kotlin.Int,kotlin.Int,android.content.Intent)), `onActivityResult` is deprecated and has been replaced with the Activity Result API.
@@ -72,7 +72,7 @@
     # 
     # Testing: This shouldn't change behavior so is covered by existing tests.
     # 
-+https://github.com/servo/servo/pull/48560	(@mxmgorin, #48560)	webgl: Validate internalformat in getInternalformatParameter (#48560)
+.https://github.com/servo/servo/pull/48560	(@mxmgorin, #48560)	webgl: Validate internalformat in getInternalformatParameter (#48560)
     wip; webgl
     ^ commit e4f06d68816ad98dd98909d04744b0291d873f88
     # This makes `getInternalformatParameter` generate `INVALID_ENUM` and return`null` for an `internalformat` that is not color-, depth-, or stencil-renderable, as required by [OpenGL ES 3.0](https://registry.khronos.org/OpenGL-Refpages/es3.0/html/glGetInternalformativ.xhtml) and the [WebGL 2 spec](https://registry.khronos.org/webgl/specs/latest/2.0/#:~:text=given%20the%20passed%20target%20and%20internalformat). It previously passed any `internalformat` to GL and every enum returned sample counts instead of `null`.
@@ -110,7 +110,7 @@
     # 
     # Testing: This should be equivalent behavior (except safer) but if it is different, normal testing will find it as generic channels are used all over.
     # 
-+https://github.com/servo/servo/pull/48208	(@sahilnyk, #48208)	Fix/devtools object prototype (#48208)
+.https://github.com/servo/servo/pull/48208	(@sahilnyk, #48208)	Fix/devtools object prototype (#48208)
     devtools
     ^ commit 9dfc0fb94996f19779d9a38b033fb1181609757c
     # When an object is printed in Servo DevTools it now sends its actual prototype to Firefox instead of sending the same object again. This stops the `<prototype>` entry from repeating forever.
@@ -143,14 +143,14 @@
     # Fixes: #48526 
     # 
 >>> 2026-10-02T23:24:35Z
-+https://github.com/servo/servo/pull/48574	(@veyndan, #48574)	android: Move `FrameCallback` where needed (#48574)
+.https://github.com/servo/servo/pull/48574	(@veyndan, #48574)	android: Move `FrameCallback` where needed (#48574)
     embedding; android cleanup
     ^ commit a7075787345b3dd0b286ba5d086178a3b9199909
     # Move the `FrameCallback` inheritance to `SurfaceHolderCallback`, as `ServoView` doesn't need to know about this callback. This again reduces the dependency `SurfaceHolderCallback` has on `ServoView`.
     # 
     # Testing: There are no automated tests for Android.
     # Part of: https://github.com/servo/servo/issues/33742
-+https://github.com/servo/servo/pull/48573	(@veyndan, #48573)	android: Move URI loading to `ServoNavigator` (#48573)
+.https://github.com/servo/servo/pull/48573	(@veyndan, #48573)	android: Move URI loading to `ServoNavigator` (#48573)
     embedding; android cleanup
     ^ commit 3ba5c32c3a92ccb385daff64d8a559f48a70121c
     # Similar to #48416 but for reload navigation.
@@ -406,7 +406,7 @@
     # With #48143 and https://github.com/w3c/webdriver/pull/1974 landed, this "out of spec check" should now be redundant, if we follow specs correctly in rest of places.
     # 
     # Testing: Covered by existing tests. This exposes that we are missing the invalidation for [process a null action](https://w3c.github.io/webdriver/#dfn-process-a-null-action), key with pause, pointermove with duration, and wheel scroll with duration. To be addressed in a follow-up.
-+https://github.com/servo/servo/pull/48467	(@mu-mostafa98, @jdm, #48467)	svg: add the data model (#48467)
+.https://github.com/servo/servo/pull/48467	(@mu-mostafa98, @jdm, #48467)	svg: add the data model (#48467)
     wip; svg
     ^ commit e21d2e4d5886f80d754da0340a788902e788cf3a
     # Add the svg crate, holding the pure SVG data model that the layout layer builds and the render layer consumes.
@@ -439,7 +439,7 @@
     #         ├── geometry.rs     # Point, PathData, PathCommand
     #         └── transform.rs    # TransformOp
     # 
-+https://github.com/servo/servo/pull/47957	(@kevlu93, #47957)	media-audio: Implement DelayNode interface (no cycle handling) (#47957)
+.https://github.com/servo/servo/pull/47957	(@kevlu93, #47957)	media-audio: Implement DelayNode interface (no cycle handling) (#47957)
     dom; new feature
     ^ commit 12bd2ae9a00e2f27fe891fa8cbbd5f8578bf5be4
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -462,7 +462,7 @@
     # ```
     # 
     # Testing: Warning Free Compilation
-+https://github.com/servo/servo/pull/48571	(@mxmgorin, #48571)	webgl: Initialize framebuffers before blitFramebuffer (#48571)
+.https://github.com/servo/servo/pull/48571	(@mxmgorin, #48571)	webgl: Initialize framebuffers before blitFramebuffer (#48571)
     wip; webgl
     ^ commit 8bdd959d652373831255d260b27dd6dfd4989d52
     # This makes `blitFramebuffer` initialize the attachments of both framebuffers before blitting, as required for [WebGL resources](https://registry.khronos.org/webgl/specs/latest/1.0/#:~:text=must%20always%20contain%20initialized%20data), and generate `INVALID_FRAMEBUFFER_OPERATION` when either framebuffer is incomplete, as required by [OpenGL ES 3.0 spec](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf) (4.3.3). Previously the destination was cleared at the next read, discarding the blit, so every multisample resolve read back zeros, and an uninitialized source was copied as is.
@@ -538,7 +538,7 @@
     # This one is used quite frequently, and the fix is neat.
     # 
     # Testing: Only tested compilation.
-+https://github.com/servo/servo/pull/48595	(@veyndan, #48595)	android: Use property delegation for Compose states (#48595)
+.https://github.com/servo/servo/pull/48595	(@veyndan, #48595)	android: Use property delegation for Compose states (#48595)
     embedding; android cleanup
     ^ commit 93726c336b0175ca4235d1bd24a625a43789d1c2
     # By using property delegation for `[Mutable]State` types, we can simplify their variable names and usage.
@@ -557,7 +557,8 @@
     # This follows https://github.com/servo/servo/pull/48566#issuecomment-5934206519 to address revealed issues in implementations.
     # 
     # Testing: We now pass `invalid.py` in spec compliant way. Added two subtests for previously uncovered pointermove duration and scroll duration.
-+https://github.com/servo/servo/pull/48519	(@dzfrias, #48519)	script: Implement beforeinput (#48519)
+.https://github.com/servo/servo/pull/48519	(@dzfrias, #48519)	script: Implement beforeinput (#48519)
+    dom
     ^ commit d8f1758d3cb438407598ada688ae64135715b9bf
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This change implements `beforeinput` for most cases in which the `input` event would fire. `beforeinput`, similar to `input`, is generally fired as a result of an editing action. Additionally, the `inputType` is now set when `beforeinput` should fire as a result of an `execCommand` (previously nothing was sent before, which prevented `inputType` from being set in a `contenteditable` context).
@@ -591,13 +592,13 @@
     # 
     # Testing: It compiles
     # 
-+https://github.com/servo/servo/pull/48601	(@veyndan, #48601)	android: Move resume lifecycle callback to Compose (#48601)
+.https://github.com/servo/servo/pull/48601	(@veyndan, #48601)	android: Move resume lifecycle callback to Compose (#48601)
     embedding; android cleanup
     ^ commit 35c139cd48136dca76e3bad15484daa76e91926c
     # Long term, this helps with pushing `servoView` into `setContent` (a requirement for #33742). In the short term, this removes a couple of `lateinit`s which could have otherwise throw a unitilisation exception if misused.
     # 
     # Testing: There are no automated tests for Android.
-+https://github.com/servo/servo/pull/48592	(@veyndan, #48592)	android: Move frame updates to Compose (#48592)
+.https://github.com/servo/servo/pull/48592	(@veyndan, #48592)	android: Move frame updates to Compose (#48592)
     embedding; android cleanup
     ^ commit cdf0a2bf1863ecbc2a4f563b33ef3d73046374d0
     # A better evolution of a7075787345b3dd0b286ba5d086178a3b9199909, where we just move frame updates directly to Compose.
@@ -672,7 +673,7 @@
     # We can convert in place.
     # 
     # Testing: Tested build.
-+https://github.com/servo/servo/pull/48608	(@veyndan, #48608)	android: Move stop navigation to `ServoNavigator` (#48608)
+.https://github.com/servo/servo/pull/48608	(@veyndan, #48608)	android: Move stop navigation to `ServoNavigator` (#48608)
     embedding; android cleanup
     ^ commit c2c10bf54f284bf53dc8bb7f562585047a872de6
     # Similar to #48416 but for stop navigation. It's debatable whether `stop()` should live in `ServoNavigator` or not, since `ServoNavigator` is modelled off of the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation), and `stop()` doesn't exist on it. If we're following the web's lead, it should exist on `Window`, but that's not really a concept in Android at the moment. If it turns out `ServoNavigator()` isn't the correct home for `stop()` though, we can always move it out fairly trivially later.
@@ -981,7 +982,7 @@
     # Testing: existing WPT test should pass.
     # 
     # 
-+https://github.com/servo/servo/pull/48651	(@mxmgorin, #48651)	webgl: Read WebGL 2 *_BITS from the draw framebuffer attachments (#48651)
+.https://github.com/servo/servo/pull/48651	(@mxmgorin, #48651)	webgl: Read WebGL 2 *_BITS from the draw framebuffer attachments (#48651)
     wip; webgl
     ^ commit a87bf2ca96013dd58f3d423270f431a9f66fe19a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -1002,7 +1003,7 @@
     # 
     # Testing: Just making a test compile without warnings.
     # Fixes: n/a
-+https://github.com/servo/servo/pull/48607	(@veyndan, #48607)	android: Create media notification channel immediately (#48607)
+.https://github.com/servo/servo/pull/48607	(@veyndan, #48607)	android: Create media notification channel immediately (#48607)
     embedding; android cleanup
     ^ commit b08baf7bacc3d07821fc59faf8a6fe67545fadaa
     # This is a minor benefit, but before when the `mediaSession` was only initialised when a media session had started, the user could only customise the media notifications (via the Servo app settings at the system level, not the in-app settings) if they had already played some media. If not then it'll look like Servo doesn't produce any notifications as no notification channels will be visible. With this change, the user can customise the notifications before ever seeing a notification.
@@ -1020,7 +1021,7 @@
     # 
     # Testing: We use the same underlying mechanisms as the string getter with a bit of lifetime wrangling. The function where we replaced the value (get_url_attribute) and set_url_attribute should be tested by WPT. https://github.com/Narfinger/servo/actions/runs/37281054915
     # 
-+https://github.com/servo/servo/pull/48620	(@mxmgorin, #48620)	webgl: Map BACK on the default framebuffer and drop stale errors on swap (#48620)
+.https://github.com/servo/servo/pull/48620	(@mxmgorin, #48620)	webgl: Map BACK on the default framebuffer and drop stale errors on swap (#48620)
     wip; webgl
     ^ commit 6c4b00e4c07c095cf6871354732306d188e97f61
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -1028,7 +1029,7 @@
     # 
     # Testing: `conformance2/renderbuffers/readbuffer.html` passes one more subtest. Added `webgl/drawBuffers-back-default-framebuffer.html`, which fails without this change. Also checked on macOS: puzzle.renefloor.nl and wonderforge.pages.dev no longer crash.
     # Fixes: #48550
-+https://github.com/servo/servo/pull/48609	(@veyndan, #48609)	android: Exclusively request focus using Compose (#48609)
+.https://github.com/servo/servo/pull/48609	(@veyndan, #48609)	android: Exclusively request focus using Compose (#48609)
     embedding; android cleanup
     ^ commit 727157f473d480f5407fa0352fe5edd486c01cec
     # Removes a couple more usages of `servoView` in preparation for its removal.
@@ -1199,7 +1200,7 @@
     # Testing: Only observable with nondeterministic GC so we can't write a test for it, and we don't run any tests with deterministic GC in CI.
     # Fixes: #48639
     # 
-+https://github.com/servo/servo/pull/48372	(@sagudev, @jdm, #48372)	webgpu: new buffer content paradigm (#48372)
+.https://github.com/servo/servo/pull/48372	(@sagudev, @jdm, #48372)	webgpu: new buffer content paradigm (#48372)
     wip; webgpu
     ^ commit 42edcf82ff8dae13d0a808726b2e0ac359dbd50f
     # First commit just updates WebGPU expectations for main.
@@ -1221,6 +1222,7 @@
     # Testing: It compiles.
     # Part-of: #48666
 .https://github.com/servo/servo/pull/48342	(@webbeef, #48342)	script: make range input interactive (#48342)
+    dom
     ^ commit fd5e79082ce71cac6ca9c317b6bfddde11f8332a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # This makes `<input type=range>` actually usable by dragging the thumb. This relies on pointer capture to allow the drag to keep going when you move outside of the widget box. The step value is honored properly. Still to do:
@@ -1299,7 +1301,7 @@
     # 
     # Testing: This does not need any tests.
     # 
-+https://github.com/servo/servo/pull/48402	(@kuntal-devrat, #48402)	script: implement IDBCursor update and delete methods (#48402)
+.https://github.com/servo/servo/pull/48402	(@kuntal-devrat, #48402)	script: implement IDBCursor update and delete methods (#48402)
     wip; indexeddb
     ^ commit e197b55c2aca997ce5cd5690bffc5c6fd5d4f3ff
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -1316,7 +1318,7 @@
     # 
     # Testing: Currently there are no automatic tests for this.
     # 
-+https://github.com/servo/servo/pull/48678	(@mxmgorin, #48678)	webgl: Fix vertexAttribIPointer and the attribute type check (#48678)
+.https://github.com/servo/servo/pull/48678	(@mxmgorin, #48678)	webgl: Fix vertexAttribIPointer and the attribute type check (#48678)
     wip; webgl
     ^ commit aa92a88c32569964a52935a38cb5c9291d4efc59
     # This makes `vertexAttribIPointer` reach GL and checks attribute types against the shader based on which `vertexAttrib*` call set them, as described in the [spec](https://registry.khronos.org/webgl/specs/latest/2.0/#ATTRIBUTE_TYPE_MATCH). Previously integer attributes received wrong values, and non-`FLOAT` `vertexAttribPointer` data flagged `INVALID_OPERATION` on every WebGL 2 draw. It also makes `getVertexAttrib` report `VERTEX_ATTRIB_ARRAY_INTEGER`.
@@ -1718,7 +1720,7 @@
     # This changes the callback to be a &str. As we anyway transform this string to lowercase later, we can use a reference instead of a newly created string.  This might just move the allocation from the previous spot to the "to_lowercase".
     # 
     # Testing: This should not change observable behavior. Full build here: https://github.com/Narfinger/servo/actions/runs/37467408677
-+https://github.com/servo/servo/pull/48680	(@gterzian, #48680)	service worker: add messaging-related event handlers to container. (#48680)
+.https://github.com/servo/servo/pull/48680	(@gterzian, #48680)	service worker: add messaging-related event handlers to container. (#48680)
     wip
     ^ commit 041647f5aa135235dda3c1f87ebe51d99f843184
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -2297,7 +2299,7 @@
     # This drops some temp var too.
     # 
     # Testing: Tested build. Rest is trivial.
-+https://github.com/servo/servo/pull/48689	(@mxmgorin, #48689)	webgl: Treat DEPTH_STENCIL_ATTACHMENT as an alias in WebGL 2 (#48689)
+.https://github.com/servo/servo/pull/48689	(@mxmgorin, #48689)	webgl: Treat DEPTH_STENCIL_ATTACHMENT as an alias in WebGL 2 (#48689)
     wip; webgl
     ^ commit 4ffea1cc6ae0e11d07e2eecbadde16629b1a1c0e
     # This makes `DEPTH_STENCIL_ATTACHMENT` an alias for the depth and stencil attachment points in WebGL 2, as described in [spec](https://registry.khronos.org/webgl/specs/latest/2.0/#FBO_ATTACHMENTS). Previously it was a separate attachment point as in WebGL 1, so detaching through it left a separately attached stencil in place.
@@ -2369,7 +2371,7 @@
     # 
     # Testing: These should be equivalent changes but WPT fill find if there are any problems.
     # 
-+https://github.com/servo/servo/pull/48751	(@mxmgorin, #48751)	webgl: Return null from getUniformLocation for uniform block members (#48751)
+.https://github.com/servo/servo/pull/48751	(@mxmgorin, #48751)	webgl: Return null from getUniformLocation for uniform block members (#48751)
     wip; webgl
     ^ commit ff28dab69fcd54a99eeb526f07cc71a894ac1451
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -2673,7 +2675,7 @@
     # Fixes: #48619
     # Fixes: #47618
     # 
-+https://github.com/servo/servo/pull/48757	(@veyndan, #48757)	android: Move show/hide keyboard logic into lib (#48757)
+.https://github.com/servo/servo/pull/48757	(@veyndan, #48757)	android: Move show/hide keyboard logic into lib (#48757)
     embedding; android cleanup
     ^ commit 330d3f91a15eac208717f9c87d487b99c6b327c7
     # The immediate win is that `Servo` consumers no longer have to show/hide the keyboard themselves via the callback (though they do still have to write a bit of boilerplate for now). In the longer term, this removes the most stubborn of references to `ServoView`, ultimately making its removal in sight.
@@ -2763,7 +2765,7 @@
     # 
     # Testing: The affected tests pass, and the flaky test now passes with no network.
     # Fixes: #47423
-+https://github.com/servo/servo/pull/48778	(@veyndan, #48778)	android: Stop delegating calls to `Servo` from `ServoView` (#48778)
+.https://github.com/servo/servo/pull/48778	(@veyndan, #48778)	android: Stop delegating calls to `Servo` from `ServoView` (#48778)
     embedding; android cleanup
     ^ commit c9fc08d70a9eca00a3cee2851b34d9ae52d74773
     # With the aim of removing references to `ServoView`, a couple remain where they are just immediately invoking `Servo` functions. In order to remove these references, we can just pass `Servo` in explicitly and call these functions directly ourselves.
@@ -2788,7 +2790,7 @@
     # Part of #22314
     # 
     # Testing: no behavior changes
-+https://github.com/servo/servo/pull/48780	(@veyndan, #48780)	android: Make `ServoView` private to library (#48780)
+.https://github.com/servo/servo/pull/48780	(@veyndan, #48780)	android: Make `ServoView` private to library (#48780)
     embedding; android cleanup
     ^ commit 4b67b7a8e156be61f988d5d6cdcbc2afd08de202
     # `ServoView` is now purely an implementation detail (for now) of the library. Officially closes #33742 as users of the Servo library are now only aware of the Compose UI elements, despite their being more work needed to improve the API of the Servo library.
@@ -2861,7 +2863,7 @@
     # 
     # Testing: minor optimization covered by existing tests.
     # 
-+https://github.com/servo/servo/pull/48786	(@jdm, #48786)	script: Add error messages for XMLHttpRequest. (#48786)
+.https://github.com/servo/servo/pull/48786	(@jdm, #48786)	script: Add error messages for XMLHttpRequest. (#48786)
     dom; improve error messages
     ^ commit 03d9f0a181505682b0ec1d23406479c4711a43db
     # Testing: We don't test exception messages.
@@ -4738,8 +4740,8 @@
     # Testing: Not needed as this only improve perf for the case when font list is already cached on OHOS.
     # Fixes: [#48922](https://github.com/servo/servo/issues/48922)
     # 
-+https://github.com/servo/servo/pull/48883	(@yezhizhen, #48883)	layout: Support text-decoration-line: spelling-error/grammar-error (#48883)
-    css; visual
+.https://github.com/servo/servo/pull/48883	(@yezhizhen, #48883)	layout: Support text-decoration-line: spelling-error/grammar-error (#48883)
+    layout; visual
     ^ commit b2c56fe10b6f793f0ae0c9b46d705fe8374a3eb1
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Stylo PR: https://github.com/servo/stylo/pull/488
@@ -4789,7 +4791,7 @@
     # 
     # Fixes: #48436
     # 
-+https://github.com/servo/servo/pull/48681	(@mxmgorin, #48681)	webgl: Keep the attribute array type when setting a constant attribute (#48681)
+.https://github.com/servo/servo/pull/48681	(@mxmgorin, #48681)	webgl: Keep the attribute array type when setting a constant attribute (#48681)
     wip; webgl
     ^ commit c6947f2558f0cb1ffd7de81d707bd2e3dda2d1e7
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -4877,6 +4879,7 @@
     # Fixes: Part of #42000 
     # 
 .https://github.com/servo/servo/pull/48854	(@CynthiaOketch, #48854)	script: Check for window global in XHR Open_ before throwing InvalidAccessError (#48854)
+    dom
     ^ commit d903779c200d23e35b5b14fec0bf0f2a4a5e760b
     # Per the XHR spec (step 9 of the Open() method), the InvalidAccessError for a
     # nonzero timeout or nonempty response type on a synchronous request should only
@@ -4917,7 +4920,7 @@
     # 
     # Testing: Existing tests
     # Fixes: part of #48849
-+https://github.com/servo/servo/pull/48911	(@mxmgorin, #48911)	webgl: Support the WebGL 2 UNPACK_* pixel store parameters (#48911)
+.https://github.com/servo/servo/pull/48911	(@mxmgorin, #48911)	webgl: Support the WebGL 2 UNPACK_* pixel store parameters (#48911)
     wip; webgl
     ^ commit 2d3c20e10bc41b2418de628561837fdfb756e7aa
     # This adds support for the WebGL 2 `UNPACK_*` row length, image height and skip parameters in `pixelStorei` and `getParameter`, and applies them to texture uploads ([spec](https://registry.khronos.org/webgl/specs/latest/2.0/#PIXEL_STORE_PARAM_CONSTRAINTS)). Previously, `pixelStorei` rejected these parameters with `INVALID_ENUM`.
@@ -4963,7 +4966,7 @@
     # Testing: Existing tests suffice.
     # Fixes: part of #48849
     # 
-+https://github.com/servo/servo/pull/48749	(@gterzian, #48749)	service workers: implement update worker state (#48749)
+.https://github.com/servo/servo/pull/48749	(@gterzian, #48749)	service workers: implement update worker state (#48749)
     wip
     ^ commit 270fe198f82018f9d985c44bcaedc14d2bc6c48a
     # Implement https://w3c.github.io/ServiceWorker/#update-state-algorithm and start using it in the install algorithm. This requires adding a new communication channel from the service worker manager to the constellation, in order to broadcast updates. 
@@ -5204,7 +5207,7 @@
     # Testing: This change adds an automated Servo-specific test with the
     # remaining failing case marked in expectations.
     # 
-+https://github.com/servo/servo/pull/48972	(@mxmgorin, #48972)	webgl: Allow drawing to a framebuffer without a color attachment (#48972)
+.https://github.com/servo/servo/pull/48972	(@mxmgorin, #48972)	webgl: Allow drawing to a framebuffer without a color attachment (#48972)
     wip; webgl
     ^ commit a37da32ff39164518bb1aa0b452bd1737da6df23
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -5911,6 +5914,7 @@
     # 
     # Testing: Some parsing tests fail now, which is good because we don't actually support the feature.
 .https://github.com/servo/servo/pull/48958	(@nicoburns, #48958)	Upgrade to Stylo with text properties enabled behind prefs (#48958)
+    layout
     ^ commit f77e08a91b342ab72a1c1fbf1f773f4be6b66999
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # Upgrades to this Stylo PR:
@@ -6020,7 +6024,7 @@
     # 
     # Testing: This enables tests
     # 
-+https://github.com/servo/servo/pull/48829	(@shubhamg13, #48829)	layout: Initial Implementation of `backdrop-filter` (#48829)
+.https://github.com/servo/servo/pull/48829	(@shubhamg13, #48829)	layout: Initial Implementation of `backdrop-filter` (#48829)
     wip
     ^ commit 471de19e4677c9906a997ba9c7bc445dbccc54d1
     ^ /!\ contains servoshell changes! does it affect the user experience?
@@ -6107,7 +6111,7 @@
     # This switches the DOMString to TracedDOMString in the above listed subfolders if the DOMString appears in a `#[dom_struct]`.
     # 
     # Testing: Compilation is the test.
-+https://github.com/servo/servo/pull/49031	(@TimvdLippe, #49031)	script: Add dimension attributes to `<input>` and `<marquee>` (#49031)
+.https://github.com/servo/servo/pull/49031	(@TimvdLippe, #49031)	script: Add dimension attributes to `<input>` and `<marquee>` (#49031)
     dom
     ^ commit 29ec92b39917bc154b72bdb89391c5c4d53fd190
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -6372,7 +6376,7 @@
     # Testing: Compilation is the test.
     # Fixes: Part of https://github.com/servo/servo/issues/48674
     # 
-+https://github.com/servo/servo/pull/49088	(@Siddhi-sahu, #49088)	devtools: fix shadow roots display in inspector (#49088)
+.https://github.com/servo/servo/pull/49088	(@Siddhi-sahu, #49088)	devtools: fix shadow roots display in inspector (#49088)
     devtools
     ^ commit 291e9572580d35e653ce0547bcb9157cd35b866b
     # earlier, shadow roots appeared in the Inspector but were empty when expanded.
@@ -6418,7 +6422,7 @@
     # <img width="1015" height="597" alt="Zombie URLs before" src="https://github.com/user-attachments/assets/fc4f167f-8870-48ee-b321-dab42d13d3e5" />
     # 
     # 
-+https://github.com/servo/servo/pull/49102	(@gabrielecabrini, #49102)	script: add error messages for Range, Selection, Element, CharacterData and DOMTokenList (#49102)
+.https://github.com/servo/servo/pull/49102	(@gabrielecabrini, #49102)	script: add error messages for Range, Selection, Element, CharacterData and DOMTokenList (#49102)
     dom; improve error messages
     ^ commit ea9d6267b80dd2d77dbbafdb7698eaf92b634884
     # Replace `Error::X(None)` with actual error messages in Range, Selection,
@@ -6467,6 +6471,7 @@
     # Part of #48359
     # 
 .https://github.com/servo/servo/pull/48985	(@sabbCodes, #48985)	script: Implement HTMLBaseElement.target attribute (#48985)
+    dom
     ^ commit b096a9f61ffdfeaa458f46f6f69d5ad1937de6f2
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -6482,7 +6487,7 @@
     # `./mach check` and `./mach test-tidy` both passed w/o errors.
     # 
     # Fixes: #48977 
-+https://github.com/servo/servo/pull/48406	(@webbeef, #48406)	script: complete geolocation DOM api implementation (#48406)
+.https://github.com/servo/servo/pull/48406	(@webbeef, #48406)	script: complete geolocation DOM api implementation (#48406)
     wip
     ^ commit a80dac85a93a268da14903537285ac7485745e03
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
@@ -6853,6 +6858,7 @@
     # also did test the panels they all work though i noticed a small bug where when you reload the page the inspector becomes blank and you have to reconnect the server again  
     # 
 .https://github.com/servo/servo/pull/49023	(@CynthiaOketch, #49023)	script: Enforce the timeout of synchronous XHR in workers (#49023)
+    dom
     ^ commit bf74dd66549fe2a9fdb77db977bd7106a8cc1a6b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     # A synchronous XMLHttpRequest blocked the event loop while waiting for the fetch response, so the timer scheduled for the request's timeout could never fire and the request always completed normally.
@@ -7096,7 +7102,7 @@
     # 
     # Testing: This change adds new failure expectations.
     # 
-+https://github.com/servo/servo/pull/48658	(@kevlu93, @TimvdLippe, #48658)	media-audio: Implement ConvolverNode (#48658)
+.https://github.com/servo/servo/pull/48658	(@kevlu93, @TimvdLippe, #48658)	media-audio: Implement ConvolverNode (#48658)
     dom; new feature
     ^ commit 23d8a9ca5d6c3945c08e94d8d73eb6ae3d4a4b40
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -7134,7 +7140,7 @@
     # Testing: Existing tests suffice. 
     # Fixes: #49053
     # 
-+https://github.com/servo/servo/pull/48590	(@mxmgorin, #48590)	webgl: Validate texStorage against its own targets and limits (#48590)
+.https://github.com/servo/servo/pull/48590	(@mxmgorin, #48590)	webgl: Validate texStorage against its own targets and limits (#48590)
     wip; webgl
     ^ commit 95610d1e41077c313efc5954e55720652a86e307
     # This makes `texStorage2D` and `texStorage3D` validate their arguments according to the OpenGL ES 3.0 spec ([3.8.4](https://registry.khronos.org/OpenGL/specs/es/3.0/es_spec_3.0.pdf#page=149)):
@@ -7300,7 +7306,7 @@
     # </details>
     # <br />
     # 
-+https://github.com/servo/servo/pull/49172	(@TimvdLippe, #49172)	script: Implement dimensions for `<embed>` and `<object>` (#49172)
+.https://github.com/servo/servo/pull/49172	(@TimvdLippe, #49172)	script: Implement dimensions for `<embed>` and `<object>` (#49172)
     dom
     ^ commit b695421cb609d7d3e12c24772216c37ac6aadea3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -7333,7 +7339,7 @@
     # Testing: This flips two tests
     # 
     # 
-+https://github.com/servo/servo/pull/49151	(@willypuzzle, #49151)	net: send CORS preflight requests to devtools network monitor (#39160) (#49151)
+.https://github.com/servo/servo/pull/49151	(@willypuzzle, #49151)	net: send CORS preflight requests to devtools network monitor (#39160) (#49151)
     devtools
     ^ commit f0d9f7e0937cdece9dd53c5f3563b5d70e710f8f
     # Preflight OPTIONS requests were invisible in the network monitor because `cors_preflight_fetch` never notified devtools. Emit the early request, response, and security info events for the preflight, and add a devtools test plus helper utilities to verify the OPTIONS request and its CORS headers show up alongside the actual request.
@@ -7362,7 +7368,7 @@
     # Testing: Adding a new test
     # Fixes: #49109
     # 
-+https://github.com/servo/servo/pull/48631	(@tannal, #48631)	script/dom: Implement basic MathML DOM interfaces and bindings (#48631)
+.https://github.com/servo/servo/pull/48631	(@tannal, #48631)	script/dom: Implement basic MathML DOM interfaces and bindings (#48631)
     wip
     ^ commit 64545cb831e545823e9d6e4789063c654824b442
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -7388,7 +7394,7 @@
     # 
     # Testing: This should improve the Speedometer benchmark.
     # 
-+https://github.com/servo/servo/pull/49146	(@gabrielecabrini, #49146)	script: Add error messages for `window` (#49146)
+.https://github.com/servo/servo/pull/49146	(@gabrielecabrini, #49146)	script: Add error messages for `window` (#49146)
     dom; improve error messages
     ^ commit fa7d5d1d54b1a4cb5c173a3752bc92e1e28b4823
     # This adds error messages for `window`
@@ -8282,7 +8288,7 @@
     # Fixes: servo#44391
     # 
 >>> 2026-10-26T23:26:59Z
-+https://github.com/servo/servo/pull/49266	(@veyndan, #49266)	android: Move deduplication of experimental mode enablement to lib (#49266)
+.https://github.com/servo/servo/pull/49266	(@veyndan, #49266)	android: Move deduplication of experimental mode enablement to lib (#49266)
     embedding; android cleanup
     ^ commit bf98f9be734c238cf52e52614d2726107c1bb6b0
     # By passing in `experimentalModeEnabled` as an argument to the `Servo` Composable, we can key off of `experimentalModeEnabled` to invoke `servo#setExperimentalMode()`, effectively moving the conditional invocation of `setExperimentalMode()` into the library instead of the app code.
@@ -8386,7 +8392,7 @@
     # Testing: This change should not modify behavior so should be covered by existing tests.
     # 
     # 
-+https://github.com/servo/servo/pull/49201	(@mxmgorin, #49201)	webgl: Fix texImage3D size limits for levels and 2D arrays (#49201)
+.https://github.com/servo/servo/pull/49201	(@mxmgorin, #49201)	webgl: Fix texImage3D size limits for levels and 2D arrays (#49201)
     wip; webgl
     ^ commit e89dcffa3ddc093e2617e5851219ed6f16de6db4
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -8459,6 +8465,7 @@
     # Testing: `./mach test-wpt tests/wpt/tests/dom/nodes/` showed no new results. Existing tests suffice.
     # Fixes: #49284 
 .https://github.com/servo/servo/pull/48967	(@skyz1, @TimvdLippe, #48967)	script: basic inertness implementation (#48967)
+    dom
     ^ commit 74d4390985e2627fab992c62ce8f87517ac5fc48
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -8879,7 +8886,7 @@
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/48979	(@sabbCodes, @jdm, #48979)	script: Prevent media elements from being GCed while playing (#48979)
+.https://github.com/servo/servo/pull/48979	(@sabbCodes, @jdm, #48979)	script: Prevent media elements from being GCed while playing (#48979)
     dom; media
     ^ commit 37a706f350ddfafb5672b7ce22d40985d3194fbb
     # Prevent media elements from being GCed while playing by maintaining a rooted trusted self-reference on HTMLMediaElement while actively playing or eligible for autoplay, preventing premature garbage collection per the WHATWG specification.
@@ -9389,7 +9396,7 @@
     # full MathML implementation.
     # Fixes: Part of #42000
     # 
-+https://github.com/servo/servo/pull/49289	(@mxmgorin, #49289)	webgl: Don't throw SecurityError while the image is loading (#49289)
+.https://github.com/servo/servo/pull/49289	(@mxmgorin, #49289)	webgl: Don't throw SecurityError while the image is loading (#49289)
     wip; webgl
     ^ commit fd68d87886475c04d87038195ed3465fdec944a9
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -9412,7 +9419,7 @@
     # Testing: This change does not modify behavior, so existing tests suffice.
     # 
     # Part of #49280
-+https://github.com/servo/servo/pull/49367	(@sabbCodes, #49367)	script: GC media elements after playback ends (#49367)
+.https://github.com/servo/servo/pull/49367	(@sabbCodes, #49367)	script: GC media elements after playback ends (#49367)
     dom; media
     ^ commit 812d2478cca1136811eace29b7ab9ed9ddd5a96c
     # Allowed the GC to collect unreferenced elements by calling `update_keep_alive()` after firing the 'ended' event in `reaches_the_end_steps`. Moved `tests/wpt/mozilla/tests/mozilla/playing_media_no_gc.html` into `tests/wpt/mozilla/tests/memory` directory.
@@ -10097,6 +10104,7 @@
     # 
     # 
 .https://github.com/servo/servo/pull/43561	(@stevennovaryo, @mrobinson, #43561)	paint: Update pinch zoom transformation using dynamic WebRender property (#43561)
+    perf; less work
     ^ commit 148cec920975b36f26207a161aba825f98a1f3bd
     # To handle PinchZoom and other scaling like HiDPI or page zoom, we are using display list reference frame that stores such scale and translation. Because of this, currently we are rebuilding the display list each time we need to update such zoom. For pinch zoom's perspective this would be costly because pinch zoom itself doesn't affects the layout. 
     # 
@@ -10124,7 +10132,7 @@
     # Testing: This change does not modify behavior, so existing tests suffice.
     # 
     # Part of #49280
-+https://github.com/servo/servo/pull/45687	(@Gae24, #45687)	script: Bring back offthread compilation (#45687)
+.https://github.com/servo/servo/pull/45687	(@Gae24, #45687)	script: Bring back offthread compilation (#45687)
     dom; wip off main thread script compilation
     ^ commit e362ae18e7a39ae69782728bc4a93a61d6d06b11
     ^ /!\ may contain changes to feature flags
@@ -10142,6 +10150,7 @@
     # Testing: not needed, no behavior change
     # 
 .https://github.com/servo/servo/pull/48955	(@skyz1, @lukewarlow, @TimvdLippe, #48955)	script: implement CloseWatcher for dialogs (#48955)
+    dom
     ^ commit 32994d0392d3dc2fd97eb72339e48cdfe61ab6ef
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
     ^ /!\ contains WebIDL changes! did we ship a new API?
@@ -10288,7 +10297,7 @@
     # I did this to pave way for #39861 
     # 
     # Part of: #44256
-+https://github.com/servo/servo/pull/49145	(@gabrielecabrini, #49145)	script: Add error messages to `validate_and_extract` (#49145)
+.https://github.com/servo/servo/pull/49145	(@gabrielecabrini, #49145)	script: Add error messages to `validate_and_extract` (#49145)
     dom; improve error messages
     ^ commit 156c388b31ea0157fa49cc2b50ae06d0c20b347d
     # This adds error messages to `validate_and_extract` namespaces

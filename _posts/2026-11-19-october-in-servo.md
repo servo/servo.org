@@ -48,13 +48,53 @@ We’re interested to hear how well your favourite websites run in Servo! Report
 
 ## Work in progress
 
+**WebGL2** support received lots of attention this month, with fixes to **getParameter()**, **drawBuffers()**, **readBuffers()**, **vertexAttribIPointer()**, **DEPTH_STENCIL_ATTACHMENT**, **getUniformLocation()**, **vertexAttrib4x()**, **pixelStorei()**, **texStorage2D()**, **texStorage3D()**, **texImage3D()**, **getInternalformatParameter()**, **blitFramebuffer()**, and **texSubImage2D()** (@mxmgorin, #48651, #48620, #48678, #48689, #48751, #48681, #48911, #48972, #48590, #49201, #49289, #48560, #48571).
+The feature remains gated behind the `dom_webgl2_enabled` preference.
+
+Reading and writing mapped **WebGPU** buffers got a significant speed increase (@sagudev, @jdm, #48372).
+WebGPU can be enabled with the `dom_webgpu_enabled` preference.
+
+JS script compilation can now occur off the main thread when the `dom_script_asynch` preference is enabled (@Gae24, #45687).
+Right now this only applies to non-module scripts.
+
+Initial support for the **backdrop-filter** property has merged (@shubhamg13, #48829).
+This can be enabled with the `layout_css_backdrop_filter_enabled` preference.
+
+ServiceWorkers now fire the `statechange` event when changing states during initialization (@gterzian, #48749).
+ServiceWorkerContainer can listen for `message` and `messageerror` events (@gterzian, #48680).
+Service Workers remain gated behind the `dom_serviceworker_enabled` preference.
+
+The Geolocation API has been implemented (@webbeef, #48406).
+No platform-specific backends to provide the device geolocation data have merged yet, so it remains disabled behind the `dom_geolocation_enabled` preference.
+
+DOM interfaces for MathML elements now exist, gated behind the `mathml_core_enabled` preference (@tannal, #48631).
+There is no MathML-specific layout implemented yet.
+
+A new, native SVG implementation is in progress (@mu-mostafa98, @jdm, #48467).
+This work is still in the early stages, but is intended to replace Servo's dependency on the `resvg` crate to better integrate with page styling and animations.
+
+IndexedDB cursors now support the `update()` and `delete()` methods (@kuntal-devrat, #48402).
+The feature can be enabled with the `dom_indexeddb_enabled` preference.
+
 ## Embedding API
+
+The Android Compose migration is complete, and embedders now only need to interact with the `Servo` library component (@veyndan, #48592, #48601, #48595, #48574, #48609, #48778, #48780, #49266).
+Embedders no longer need to trigger the soft keyboard display; this is controlled by a parameter to the `Servo` component (@veyndan, #48757).
 
 ## For users and developers
 
 Double and triple clicking on selected text will extend the selection to the current word and line, respectively (@mrobinson, @SimonSapin, #48767).
 
 Range inputs can now be dragged with the mouse (@webbeef, #48342).
+
+The developer tools continue to improve:
+* Object prototypes are reported correctly in the JS console (@sahilnyk, #48208)
+* Shadow roots can be inspected in the layout inspector (@Siddhi-sahu, #49088)
+* CORS preflight requests are reported to the network panel (@willypuzzle, #49151)
+
+We improved exception error messages related to the XMLHttpRequest, History, Range, Selection, Element, CharacterData, and DOMTokenList interfaces, and namespaces and attributes (@gabrielecabrini, #49146, #49145, #48786, #49102).
+
+Media elements that start playing outside of a document will no longer be garbage collected until playback finishes (@sabbCodes, @jdm, #49367, #48979).
 
 ## Performance and stability
 
