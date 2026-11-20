@@ -19,13 +19,25 @@ code {
     <a href="{{ '/img/blog/.png' | url }}"><img src="{{ '/img/blog/.png' | url }}" alt="a black and white cat named Gary showing off new visual web platform features"></a>
 </figure>
 
-The developer tools console now **eagerly evaluates** JS inputs, allowing faster feedback ([@freyacodes](https://github.com/freyacodes), [#47527](https://github.com/servo/servo/pull/47527)).
+Servo now renders text track cues over `&lt;video>` elements (@TimvdLippe, #48809)!
 
 We've shipped new web platform features:
-* 
+* the **spelling-error** and **grammar-error** values for **text-decoration-line** (@yezhizhen, #48883)
+* the [**progress()**](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/progress) CSS math function (@Loirooriol, #48474)
+* `&lt;input type=image>` (@SilvioPilato, #48265)
+* the **:focus-visible** pseudoclass (@TimvdLippe, #49255)
+* the **beforeinput** event (@dzfrias, #48519)
+* the **&wbr>** element (@mrobinson, #48755)
+* the **auto** and **stable** values for the **text-wrap-style** property (@nicoburns, #48958)re
+* **inert** trees and the **interactivity** property (@skyz1, @TimvdLippe, #48967)
 
 Plus a bunch of new DOM APIs:
-* 
+* the **DelayNode** and **ConvolverNode** WebAudio nodes (@kevlu93, @TimvdLippe, #48658, #47957)
+* the **timeout** property of **XMLHTTPRequest** in worker globals (@CynthiaOketch, #48854, #49023)
+* the **hspace** and **vspace** attributes on **&lt;img>** (@TimvdLippe, #48605)
+* the **hspace**, **vspace**, **width**, and **height** attributes on **&lt;input>** (@TimvdLippe, #49031)
+* the **target** property of **HTMLBaseElement** (@sabbCodes, #48985)
+* the **CloseWatcher** interface, and the **closedBy** and **requestClose()** members of **HTMLDialogElement** (@skyz1, @lukewarlow, @TimvdLippe, #48955)
 
 ## Security
 
@@ -40,7 +52,13 @@ We’re interested to hear how well your favourite websites run in Servo! Report
 
 ## For users and developers
 
+Double and triple clicking on selected text will extend the selection to the current word and line, respectively (@mrobinson, @SimonSapin, #48767).
+
+Range inputs can now be dragged with the mouse (@webbeef, #48342).
+
 ## Performance and stability
+
+Pinch zoom operations no longer have to rebuild a full display list, making zooming on complex pages much smoother (@stevennovaryo, @mrobinson, #43561).
 
 ## More on the web platform
 
