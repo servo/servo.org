@@ -55,14 +55,43 @@ code {
 &lt;h2 id=&quot;work-in-progress&quot; tabindex=&quot;-1&quot;&gt;Work in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/#work-in-progress&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;WebGL2&lt;/strong&gt; support received lots of attention this month, with fixes to &lt;strong&gt;getParameter()&lt;/strong&gt;, &lt;strong&gt;drawBuffers()&lt;/strong&gt;, &lt;strong&gt;readBuffers()&lt;/strong&gt;, &lt;strong&gt;vertexAttribIPointer()&lt;/strong&gt;, &lt;strong&gt;DEPTH_STENCIL_ATTACHMENT&lt;/strong&gt;, &lt;strong&gt;getUniformLocation()&lt;/strong&gt;, &lt;strong&gt;vertexAttrib4x()&lt;/strong&gt;, &lt;strong&gt;pixelStorei()&lt;/strong&gt;, &lt;strong&gt;texStorage2D()&lt;/strong&gt;, &lt;strong&gt;texStorage3D()&lt;/strong&gt;, &lt;strong&gt;texImage3D()&lt;/strong&gt;, &lt;strong&gt;getInternalformatParameter()&lt;/strong&gt;, &lt;strong&gt;blitFramebuffer()&lt;/strong&gt;, and &lt;strong&gt;texSubImage2D()&lt;/strong&gt; (@mxmgorin, #48651, #48620, #48678, #48689, #48751, #48681, #48911, #48972, #48590, #49201, #49289, #48560, #48571).
+The feature remains gated behind the &lt;code&gt;dom_webgl2_enabled&lt;/code&gt; preference.&lt;/p&gt;
+&lt;p&gt;Reading and writing mapped &lt;strong&gt;WebGPU&lt;/strong&gt; buffers got a significant speed increase (@sagudev, @jdm, #48372).
+WebGPU can be enabled with the &lt;code&gt;dom_webgpu_enabled&lt;/code&gt; preference.&lt;/p&gt;
+&lt;p&gt;JS script compilation can now occur off the main thread when the &lt;code&gt;dom_script_asynch&lt;/code&gt; preference is enabled (@Gae24, #45687).
+Right now this only applies to non-module scripts.&lt;/p&gt;
+&lt;p&gt;Initial support for the &lt;strong&gt;backdrop-filter&lt;/strong&gt; property has merged (@shubhamg13, #48829).
+This can be enabled with the &lt;code&gt;layout_css_backdrop_filter_enabled&lt;/code&gt; preference.&lt;/p&gt;
+&lt;p&gt;ServiceWorkers now fire the &lt;code&gt;statechange&lt;/code&gt; event when changing states during initialization (@gterzian, #48749).
+ServiceWorkerContainer can listen for &lt;code&gt;message&lt;/code&gt; and &lt;code&gt;messageerror&lt;/code&gt; events (@gterzian, #48680).
+Service Workers remain gated behind the &lt;code&gt;dom_serviceworker_enabled&lt;/code&gt; preference.&lt;/p&gt;
+&lt;p&gt;The Geolocation API has been implemented (@webbeef, #48406).
+No platform-specific backends to provide the device geolocation data have merged yet, so it remains disabled behind the &lt;code&gt;dom_geolocation_enabled&lt;/code&gt; preference.&lt;/p&gt;
+&lt;p&gt;DOM interfaces for MathML elements now exist, gated behind the &lt;code&gt;mathml_core_enabled&lt;/code&gt; preference (@tannal, #48631).
+There is no MathML-specific layout implemented yet.&lt;/p&gt;
+&lt;p&gt;A new, native SVG implementation is in progress (@mu-mostafa98, @jdm, #48467).
+This work is still in the early stages, but is intended to replace Servo’s dependency on the &lt;code&gt;resvg&lt;/code&gt; crate to better integrate with page styling and animations.&lt;/p&gt;
+&lt;p&gt;IndexedDB cursors now support the &lt;code&gt;update()&lt;/code&gt; and &lt;code&gt;delete()&lt;/code&gt; methods (@kuntal-devrat, #48402).
+The feature can be enabled with the &lt;code&gt;dom_indexeddb_enabled&lt;/code&gt; preference.&lt;/p&gt;
 &lt;h2 id=&quot;embedding-api&quot; tabindex=&quot;-1&quot;&gt;Embedding API &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/#embedding-api&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The Android Compose migration is complete, and embedders now only need to interact with the &lt;code&gt;Servo&lt;/code&gt; library component (@veyndan, #48592, #48601, #48595, #48574, #48609, #48778, #48780, #49266).
+Embedders no longer need to trigger the soft keyboard display; this is controlled by a parameter to the &lt;code&gt;Servo&lt;/code&gt; component (@veyndan, #48757).&lt;/p&gt;
 &lt;h2 id=&quot;for-users-and-developers&quot; tabindex=&quot;-1&quot;&gt;For users and developers &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/#for-users-and-developers&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Double and triple clicking on selected text will extend the selection to the current word and line, respectively (@mrobinson, @SimonSapin, #48767).&lt;/p&gt;
 &lt;p&gt;Range inputs can now be dragged with the mouse (@webbeef, #48342).&lt;/p&gt;
+&lt;p&gt;The developer tools continue to improve:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Object prototypes are reported correctly in the JS console (@sahilnyk, #48208)&lt;/li&gt;
+&lt;li&gt;Shadow roots can be inspected in the layout inspector (@Siddhi-sahu, #49088)&lt;/li&gt;
+&lt;li&gt;CORS preflight requests are reported to the network panel (@willypuzzle, #49151)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We improved exception error messages related to the XMLHttpRequest, History, Range, Selection, Element, CharacterData, and DOMTokenList interfaces, and namespaces and attributes (@gabrielecabrini, #49146, #49145, #48786, #49102).&lt;/p&gt;
+&lt;p&gt;Media elements that start playing outside of a document will no longer be garbage collected until playback finishes (@sabbCodes, @jdm, #49367, #48979).&lt;/p&gt;
 &lt;h2 id=&quot;performance-and-stability&quot; tabindex=&quot;-1&quot;&gt;Performance and stability &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/#performance-and-stability&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;

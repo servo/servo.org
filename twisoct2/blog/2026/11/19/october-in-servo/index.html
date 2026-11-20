@@ -291,14 +291,43 @@ code {
 <h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p><strong>WebGL2</strong> support received lots of attention this month, with fixes to <strong>getParameter()</strong>, <strong>drawBuffers()</strong>, <strong>readBuffers()</strong>, <strong>vertexAttribIPointer()</strong>, <strong>DEPTH_STENCIL_ATTACHMENT</strong>, <strong>getUniformLocation()</strong>, <strong>vertexAttrib4x()</strong>, <strong>pixelStorei()</strong>, <strong>texStorage2D()</strong>, <strong>texStorage3D()</strong>, <strong>texImage3D()</strong>, <strong>getInternalformatParameter()</strong>, <strong>blitFramebuffer()</strong>, and <strong>texSubImage2D()</strong> (@mxmgorin, #48651, #48620, #48678, #48689, #48751, #48681, #48911, #48972, #48590, #49201, #49289, #48560, #48571).
+The feature remains gated behind the <code>dom_webgl2_enabled</code> preference.</p>
+<p>Reading and writing mapped <strong>WebGPU</strong> buffers got a significant speed increase (@sagudev, @jdm, #48372).
+WebGPU can be enabled with the <code>dom_webgpu_enabled</code> preference.</p>
+<p>JS script compilation can now occur off the main thread when the <code>dom_script_asynch</code> preference is enabled (@Gae24, #45687).
+Right now this only applies to non-module scripts.</p>
+<p>Initial support for the <strong>backdrop-filter</strong> property has merged (@shubhamg13, #48829).
+This can be enabled with the <code>layout_css_backdrop_filter_enabled</code> preference.</p>
+<p>ServiceWorkers now fire the <code>statechange</code> event when changing states during initialization (@gterzian, #48749).
+ServiceWorkerContainer can listen for <code>message</code> and <code>messageerror</code> events (@gterzian, #48680).
+Service Workers remain gated behind the <code>dom_serviceworker_enabled</code> preference.</p>
+<p>The Geolocation API has been implemented (@webbeef, #48406).
+No platform-specific backends to provide the device geolocation data have merged yet, so it remains disabled behind the <code>dom_geolocation_enabled</code> preference.</p>
+<p>DOM interfaces for MathML elements now exist, gated behind the <code>mathml_core_enabled</code> preference (@tannal, #48631).
+There is no MathML-specific layout implemented yet.</p>
+<p>A new, native SVG implementation is in progress (@mu-mostafa98, @jdm, #48467).
+This work is still in the early stages, but is intended to replace Servo’s dependency on the <code>resvg</code> crate to better integrate with page styling and animations.</p>
+<p>IndexedDB cursors now support the <code>update()</code> and <code>delete()</code> methods (@kuntal-devrat, #48402).
+The feature can be enabled with the <code>dom_indexeddb_enabled</code> preference.</p>
 <h2 id="embedding-api" tabindex="-1">Embedding API <a class="header-anchor" href="#embedding-api">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>The Android Compose migration is complete, and embedders now only need to interact with the <code>Servo</code> library component (@veyndan, #48592, #48601, #48595, #48574, #48609, #48778, #48780, #49266).
+Embedders no longer need to trigger the soft keyboard display; this is controlled by a parameter to the <code>Servo</code> component (@veyndan, #48757).</p>
 <h2 id="for-users-and-developers" tabindex="-1">For users and developers <a class="header-anchor" href="#for-users-and-developers">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p>Double and triple clicking on selected text will extend the selection to the current word and line, respectively (@mrobinson, @SimonSapin, #48767).</p>
 <p>Range inputs can now be dragged with the mouse (@webbeef, #48342).</p>
+<p>The developer tools continue to improve:</p>
+<ul>
+<li>Object prototypes are reported correctly in the JS console (@sahilnyk, #48208)</li>
+<li>Shadow roots can be inspected in the layout inspector (@Siddhi-sahu, #49088)</li>
+<li>CORS preflight requests are reported to the network panel (@willypuzzle, #49151)</li>
+</ul>
+<p>We improved exception error messages related to the XMLHttpRequest, History, Range, Selection, Element, CharacterData, and DOMTokenList interfaces, and namespaces and attributes (@gabrielecabrini, #49146, #49145, #48786, #49102).</p>
+<p>Media elements that start playing outside of a document will no longer be garbage collected until playback finishes (@sabbCodes, @jdm, #49367, #48979).</p>
 <h2 id="performance-and-stability" tabindex="-1">Performance and stability <a class="header-anchor" href="#performance-and-stability">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
