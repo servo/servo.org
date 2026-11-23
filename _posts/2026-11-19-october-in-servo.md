@@ -15,12 +15,13 @@ code {
 
 [**Servo 0.8.0**](https://github.com/servo/servo/releases/tag/v0.8.0) contains all of the changes we landed in October, spanning 588 commits (a new record)!
 
+<!-- TODO: text-decoration-line, hspace/vspace, bgcolor?, :focus-visible, image input, inert -->
+
 <figure>
     <a href="{{ '/img/blog/.png' | url }}"><img src="{{ '/img/blog/.png' | url }}" alt="a black and white cat named Gary showing off new visual web platform features"></a>
 </figure>
 
-Servo now renders text track cues over `&lt;video>` elements (@TimvdLippe, #48809)!
-This allows subtitles and captions to work as expected in many cases.
+Servo now renders **subtitles and captions** over `<video>` elements (@TimvdLippe, #48809)!
 
 <figure>
     <video src="{{ '/img/blog/2026-11-cat-caption.mp4' | url }}" autoplay muted loop>Servo 0.8 showing a video playing with captions that change over time</video>
@@ -30,7 +31,7 @@ We've shipped new web platform features:
 * the **spelling-error** and **grammar-error** values for **text-decoration-line** (@yezhizhen, #48883)
 * the [**progress()**](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/progress) CSS math function (@Loirooriol, #48474)
 * `&lt;input type=image>` (@SilvioPilato, #48265)
-* the **:focus-visible** pseudoclass (@TimvdLippe, #49255)
+* the **:focus-visible** pseudoclass (@TimvdLippe, #49255, #49304)
 * the **beforeinput** event (@dzfrias, #48519)
 * the **&lt;wbr>** element (@mrobinson, #48755)
 * the **auto** and **stable** values for the **text-wrap-style** property (@nicoburns, #48958)re
@@ -56,6 +57,10 @@ Flutter web content works much better now that we fixed a serious performance pr
 We’re interested to hear how well your favourite websites run in Servo! Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341) or [this Github discussion](https://github.com/servo/servo/discussions/49037), and failures [in our GitHub issues](https://github.com/servo/servo/issues).
 
 ## Work in progress
+
+With respect to accessibility in Servo, we report many more ARIA roles for DOM elements (@alice, @mrobinson, #48839).
+These can be inspect with the `Get Computed Role` WebDriver command (@lolaodelola, #47339).
+Accessibility integration can be turned on with the `accessibility_enabled` preference.
 
 **WebGL2** support received lots of attention this month, with fixes to **getParameter()**, **drawBuffers()**, **readBuffers()**, **vertexAttribIPointer()**, **DEPTH_STENCIL_ATTACHMENT**, **getUniformLocation()**, **vertexAttrib4x()**, **pixelStorei()**, **texStorage2D()**, **texStorage3D()**, **texImage3D()**, **getInternalformatParameter()**, **blitFramebuffer()**, and **texSubImage2D()** (@mxmgorin, #48651, #48620, #48678, #48689, #48751, #48681, #48911, #48972, #48590, #49201, #49289, #48560, #48571).
 The feature remains gated behind the `dom_webgl2_enabled` preference.
@@ -85,6 +90,15 @@ This work is still in the early stages, but is intended to replace Servo's depen
 IndexedDB cursors now support the `update()` and `delete()` methods (@kuntal-devrat, #48402).
 The feature can be enabled with the `dom_indexeddb_enabled` preference.
 
+Support for **LargestContentfulPaint** performance timing improved, with image URLs (@shubhamg13, #48668), the `loadTime` value (@shubhamg13, #48676), ignoring non-paintable elements (@shubhamg13, #48856, #48898), video URLs (@shubhamg13, #48931), and following containing blocks (@shubhamg13, #48551).
+This work is behind the `largest_contentful_paint_enabled` preference.
+
+We added support for a new performance timing metric: [ContainerTiming](https://w3c.github.io/container-timing/) (@jasonwilliams, #46966).
+This can be enabled with the `container_timing_enabled` preference.
+
+Our support for **adoptedStylesheets** improved along with a new implementation of the [ObservableArray](https://webidl.spec.whatwg.org/#idl-observable-array) specification concept.
+This is current hidden behind the `dom_adoptedstylesheet_enabled` preference.
+
 ## Embedding API
 
 The Android Compose migration is complete, and embedders now only need to interact with the `Servo` library component (@veyndan, #48592, #48601, #48595, #48574, #48609, #48778, #48780, #49266).
@@ -110,7 +124,11 @@ Several preferences were renamed (@nicoburns, #48915):
 
 Double and triple clicking on selected text will extend the selection to the current word and line, respectively (@mrobinson, @SimonSapin, #48767).
 
+Clicking a link with the middle mouse button now opens up the link in a new WebView (@SteveSharonSam, @mrobinson, #46000)
+
 Range inputs can now be dragged with the mouse (@webbeef, #48342).
+
+Command+delete on macOS will delete the preceding line in a text control (@dzfrias, #48781).
 
 The developer tools continue to improve:
 * Object prototypes are reported correctly in the JS console (@sahilnyk, #48208)
@@ -125,7 +143,7 @@ Media elements that start playing outside of a document will no longer be garbag
 
 Pinch zoom operations no longer have to rebuild a full display list, making zooming on complex pages much smoother (@stevennovaryo, @mrobinson, #43561).
 
-We improved performance in many small and focused ways by doing less work during restyling and layout (@SimonSapin, @webbeef, @nicoburns, @mrobinson, #49137, #49100, #48485, #48968), reducing GC interactions (@mrobinson, #48984, #49140, #49195), and delaying work on disconnected trees (@SimonSapin, #49098).
+We improved performance in many small and focused ways by doing less work during restyling and layout (@SimonSapin, @webbeef, @nicoburns, @mrobinson, #49137, #49100, #48485, #48968), reducing GC interactions (@mrobinson, @jschwe, #48984, #49140, #49195, #49425), and delaying work on disconnected trees (@SimonSapin, #49098).
 We also fixed instances of quadratic layout with deep nesting (@nicoburns, #49148) and missing caching (@mrobinson, @Loirooriol, #49164, #49073).
 
 We fixed some intermittent GC panics when notifying ResizeObservers (@mrobinson, #49189), introspecting keyframes (@MohamedAli00949, #48546), setting timers (@jdm, #48548), using writable streams (@jdm, #48656), scrolling iframes after removing them (@mrobinson, #49230).
