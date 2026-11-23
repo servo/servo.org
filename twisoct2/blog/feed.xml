@@ -21,11 +21,11 @@ code {
 }
 &lt;/style&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/servo/servo/releases/tag/v0.8.0&quot;&gt;&lt;strong&gt;Servo 0.8.0&lt;/strong&gt;&lt;/a&gt; contains all of the changes we landed in October, spanning 588 commits (a new record)!&lt;/p&gt;
+&lt;!-- TODO: text-decoration-line, hspace/vspace, bgcolor?, :focus-visible, image input, inert --&gt;
 &lt;figure&gt;
     &lt;a href=&quot;https://servo.org/twisoct2/img/blog/.png&quot;&gt;&lt;img src=&quot;https://servo.org/twisoct2/img/blog/.png&quot; alt=&quot;a black and white cat named Gary showing off new visual web platform features&quot; /&gt;&lt;/a&gt;
 &lt;/figure&gt;
-&lt;p&gt;Servo now renders text track cues over &lt;code&gt;&amp;amp;lt;video&amp;gt;&lt;/code&gt; elements (@TimvdLippe, #48809)!
-This allows subtitles and captions to work as expected in many cases.&lt;/p&gt;
+&lt;p&gt;Servo now renders &lt;strong&gt;subtitles and captions&lt;/strong&gt; over &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; elements (@TimvdLippe, #48809)!&lt;/p&gt;
 &lt;figure&gt;
     &lt;video src=&quot;https://servo.org/twisoct2/img/blog/2026-11-cat-caption.mp4&quot; autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot;&gt;Servo 0.8 showing a video playing with captions that change over time&lt;/video&gt;
 &lt;/figure&gt;
@@ -34,7 +34,7 @@ This allows subtitles and captions to work as expected in many cases.&lt;/p&gt;
 &lt;li&gt;the &lt;strong&gt;spelling-error&lt;/strong&gt; and &lt;strong&gt;grammar-error&lt;/strong&gt; values for &lt;strong&gt;text-decoration-line&lt;/strong&gt; (@yezhizhen, #48883)&lt;/li&gt;
 &lt;li&gt;the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/progress&quot;&gt;&lt;strong&gt;progress()&lt;/strong&gt;&lt;/a&gt; CSS math function (@Loirooriol, #48474)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;&amp;amp;lt;input type=image&amp;gt;&lt;/code&gt; (@SilvioPilato, #48265)&lt;/li&gt;
-&lt;li&gt;the &lt;strong&gt;:focus-visible&lt;/strong&gt; pseudoclass (@TimvdLippe, #49255)&lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;:focus-visible&lt;/strong&gt; pseudoclass (@TimvdLippe, #49255, #49304)&lt;/li&gt;
 &lt;li&gt;the &lt;strong&gt;beforeinput&lt;/strong&gt; event (@dzfrias, #48519)&lt;/li&gt;
 &lt;li&gt;the &lt;strong&gt;&amp;lt;wbr&amp;gt;&lt;/strong&gt; element (@mrobinson, #48755)&lt;/li&gt;
 &lt;li&gt;the &lt;strong&gt;auto&lt;/strong&gt; and &lt;strong&gt;stable&lt;/strong&gt; values for the &lt;strong&gt;text-wrap-style&lt;/strong&gt; property (@nicoburns, #48958)re&lt;/li&gt;
@@ -61,6 +61,9 @@ This allows subtitles and captions to work as expected in many cases.&lt;/p&gt;
 &lt;h2 id=&quot;work-in-progress&quot; tabindex=&quot;-1&quot;&gt;Work in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/#work-in-progress&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;With respect to accessibility in Servo, we report many more ARIA roles for DOM elements (@alice, @mrobinson, #48839).
+These can be inspect with the &lt;code&gt;Get Computed Role&lt;/code&gt; WebDriver command (@lolaodelola, #47339).
+Accessibility integration can be turned on with the &lt;code&gt;accessibility_enabled&lt;/code&gt; preference.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;WebGL2&lt;/strong&gt; support received lots of attention this month, with fixes to &lt;strong&gt;getParameter()&lt;/strong&gt;, &lt;strong&gt;drawBuffers()&lt;/strong&gt;, &lt;strong&gt;readBuffers()&lt;/strong&gt;, &lt;strong&gt;vertexAttribIPointer()&lt;/strong&gt;, &lt;strong&gt;DEPTH_STENCIL_ATTACHMENT&lt;/strong&gt;, &lt;strong&gt;getUniformLocation()&lt;/strong&gt;, &lt;strong&gt;vertexAttrib4x()&lt;/strong&gt;, &lt;strong&gt;pixelStorei()&lt;/strong&gt;, &lt;strong&gt;texStorage2D()&lt;/strong&gt;, &lt;strong&gt;texStorage3D()&lt;/strong&gt;, &lt;strong&gt;texImage3D()&lt;/strong&gt;, &lt;strong&gt;getInternalformatParameter()&lt;/strong&gt;, &lt;strong&gt;blitFramebuffer()&lt;/strong&gt;, and &lt;strong&gt;texSubImage2D()&lt;/strong&gt; (@mxmgorin, #48651, #48620, #48678, #48689, #48751, #48681, #48911, #48972, #48590, #49201, #49289, #48560, #48571).
 The feature remains gated behind the &lt;code&gt;dom_webgl2_enabled&lt;/code&gt; preference.&lt;/p&gt;
 &lt;p&gt;Reading and writing mapped &lt;strong&gt;WebGPU&lt;/strong&gt; buffers got a significant speed increase (@sagudev, @jdm, #48372).
@@ -80,6 +83,12 @@ There is no MathML-specific layout implemented yet.&lt;/p&gt;
 This work is still in the early stages, but is intended to replace Servo’s dependency on the &lt;code&gt;resvg&lt;/code&gt; crate to better integrate with page styling and animations.&lt;/p&gt;
 &lt;p&gt;IndexedDB cursors now support the &lt;code&gt;update()&lt;/code&gt; and &lt;code&gt;delete()&lt;/code&gt; methods (@kuntal-devrat, #48402).
 The feature can be enabled with the &lt;code&gt;dom_indexeddb_enabled&lt;/code&gt; preference.&lt;/p&gt;
+&lt;p&gt;Support for &lt;strong&gt;LargestContentfulPaint&lt;/strong&gt; performance timing improved, with image URLs (@shubhamg13, #48668), the &lt;code&gt;loadTime&lt;/code&gt; value (@shubhamg13, #48676), ignoring non-paintable elements (@shubhamg13, #48856, #48898), video URLs (@shubhamg13, #48931), and following containing blocks (@shubhamg13, #48551).
+This work is behind the &lt;code&gt;largest_contentful_paint_enabled&lt;/code&gt; preference.&lt;/p&gt;
+&lt;p&gt;We added support for a new performance timing metric: &lt;a href=&quot;https://w3c.github.io/container-timing/&quot;&gt;ContainerTiming&lt;/a&gt; (@jasonwilliams, #46966).
+This can be enabled with the &lt;code&gt;container_timing_enabled&lt;/code&gt; preference.&lt;/p&gt;
+&lt;p&gt;Our support for &lt;strong&gt;adoptedStylesheets&lt;/strong&gt; improved along with a new implementation of the &lt;a href=&quot;https://webidl.spec.whatwg.org/#idl-observable-array&quot;&gt;ObservableArray&lt;/a&gt; specification concept.
+This is current hidden behind the &lt;code&gt;dom_adoptedstylesheet_enabled&lt;/code&gt; preference.&lt;/p&gt;
 &lt;h2 id=&quot;embedding-api&quot; tabindex=&quot;-1&quot;&gt;Embedding API &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/#embedding-api&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -103,7 +112,9 @@ Several preferences were renamed (@nicoburns, #48915):&lt;/p&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Double and triple clicking on selected text will extend the selection to the current word and line, respectively (@mrobinson, @SimonSapin, #48767).&lt;/p&gt;
+&lt;p&gt;Clicking a link with the middle mouse button now opens up the link in a new WebView (@SteveSharonSam, @mrobinson, #46000)&lt;/p&gt;
 &lt;p&gt;Range inputs can now be dragged with the mouse (@webbeef, #48342).&lt;/p&gt;
+&lt;p&gt;Command+delete on macOS will delete the preceding line in a text control (@dzfrias, #48781).&lt;/p&gt;
 &lt;p&gt;The developer tools continue to improve:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Object prototypes are reported correctly in the JS console (@sahilnyk, #48208)&lt;/li&gt;
@@ -116,7 +127,7 @@ Several preferences were renamed (@nicoburns, #48915):&lt;/p&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Pinch zoom operations no longer have to rebuild a full display list, making zooming on complex pages much smoother (@stevennovaryo, @mrobinson, #43561).&lt;/p&gt;
-&lt;p&gt;We improved performance in many small and focused ways by doing less work during restyling and layout (@SimonSapin, @webbeef, @nicoburns, @mrobinson, #49137, #49100, #48485, #48968), reducing GC interactions (@mrobinson, #48984, #49140, #49195), and delaying work on disconnected trees (@SimonSapin, #49098).
+&lt;p&gt;We improved performance in many small and focused ways by doing less work during restyling and layout (@SimonSapin, @webbeef, @nicoburns, @mrobinson, #49137, #49100, #48485, #48968), reducing GC interactions (@mrobinson, @jschwe, #48984, #49140, #49195, #49425), and delaying work on disconnected trees (@SimonSapin, #49098).
 We also fixed instances of quadratic layout with deep nesting (@nicoburns, #49148) and missing caching (@mrobinson, @Loirooriol, #49164, #49073).&lt;/p&gt;
 &lt;p&gt;We fixed some intermittent GC panics when notifying ResizeObservers (@mrobinson, #49189), introspecting keyframes (@MohamedAli00949, #48546), setting timers (@jdm, #48548), using writable streams (@jdm, #48656), scrolling iframes after removing them (@mrobinson, #49230).&lt;/p&gt;
 &lt;p&gt;We also fixed numerous other panics and crashes in scrollable and incremental layout (@mrobinson, #49230, #49283), moving nodes around (@mrobinson, #49226), using WebGPU from opaque origins (@gabrielecabrini, #49207), stringifying some WebIDL types (@mrobinson, #49374), using readable streams (@Narfinger, @mrobinson, #49311), clicking disabled file controls (@mrobinson, #49379), rendering giant SVGs (@sabbCodes, #49264), unminifying JS (@jdm, #48567), measuring text (@mxmgorin, #48621), rendering text tracks (@TimvdLippe, @mrobinson, #48827), preparing dialogs (@lukewarlow, #49431), and running delayed tasks in destroyed documents (@mrobinson, @jdm, #49399, #48714).&lt;/p&gt;
