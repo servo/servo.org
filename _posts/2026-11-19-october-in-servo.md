@@ -1,9 +1,9 @@
 ---
 layout:     post
 tags:       blog
-title:      "October in Servo: who even knows?"
+title:      "October in Servo: video captions and inert content"
 date:       2026-11-19
-summary:    ??????????
+summary:    Plus WebAudio nodes, image inputs, and more!
 categories:
 ---
 
@@ -20,6 +20,11 @@ code {
 </figure>
 
 Servo now renders text track cues over `&lt;video>` elements (@TimvdLippe, #48809)!
+This allows subtitles and captions to work as expected in many cases.
+
+<figure>
+    <video src="{{ '/img/blog/2026-11-cat-caption.mp4' | url }}" autoplay muted loop>Servo 0.8 showing a video playing with captions that change over time</video>
+</figure>
 
 We've shipped new web platform features:
 * the **spelling-error** and **grammar-error** values for **text-decoration-line** (@yezhizhen, #48883)
@@ -27,7 +32,7 @@ We've shipped new web platform features:
 * `&lt;input type=image>` (@SilvioPilato, #48265)
 * the **:focus-visible** pseudoclass (@TimvdLippe, #49255)
 * the **beforeinput** event (@dzfrias, #48519)
-* the **&wbr>** element (@mrobinson, #48755)
+* the **&lt;wbr>** element (@mrobinson, #48755)
 * the **auto** and **stable** values for the **text-wrap-style** property (@nicoburns, #48958)re
 * **inert** trees and the **interactivity** property (@skyz1, @TimvdLippe, #48967)
 
@@ -43,6 +48,10 @@ Plus a bunch of new DOM APIs:
 
 
 ## Real world compat
+
+Flutter web content works much better now that we fixed a serious performance problem with typed arrays (@jdm, #48640).
+
+<!-- TODO figure, https://rydmike.com/flexcolorscheme/themesplayground-latest/ -->
 
 We’re interested to hear how well your favourite websites run in Servo! Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341) or [this Github discussion](https://github.com/servo/servo/discussions/49037), and failures [in our GitHub issues](https://github.com/servo/servo/issues).
 
@@ -81,6 +90,22 @@ The feature can be enabled with the `dom_indexeddb_enabled` preference.
 The Android Compose migration is complete, and embedders now only need to interact with the `Servo` library component (@veyndan, #48592, #48601, #48595, #48574, #48609, #48778, #48780, #49266).
 Embedders no longer need to trigger the soft keyboard display; this is controlled by a parameter to the `Servo` component (@veyndan, #48757).
 
+There's a new API method to report the network status of the embedder: [NetworkManager](https://doc.servo.org/servo/struct.NetworkManager.html)::[set_online_state](https://doc.servo.org/servo/struct.NetworkManager.html#method.set_online_state) (@xbwwj, #47568).
+This data is exposed via the [**onLine**](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine) property of the **Navigator** interface in web content.
+
+Embedders can now disable all support for developer tools, which can reduce the size of the final binary (@janeoa, #47255).
+This is controlled by the `devtools` feature and enabled by default; it is also part of the new `default_tooling` feature.
+
+Users of the C API can set preferences that accept f64 and f64 array parameters (@fran6co, #49325), as well as the HiDPI scale factor for each WebView (@fran6co, #49327).
+WebViews can also be resized via the C API (@fran6co, #49326).
+
+The `layout_grid_enabled` preference has been removed, since CSS Grid now defaults to enabled (@Loirooriol, #48718).
+Several preferences were renamed (@nicoburns, #48915):
+* `layout_columns_enabled` -> `layout_css_columns_enabled`
+* `layout_container_queries_enabled` -> `layout_css_container_queries_enabled`
+* `layout_variable_fonts_enabled` -> `layout_css_font_variations_enabled`
+* `layout_writing_mode_enabled` -> `layout_css_writing_mode_enabled`
+
 ## For users and developers
 
 Double and triple clicking on selected text will extend the selection to the current word and line, respectively (@mrobinson, @SimonSapin, #48767).
@@ -99,6 +124,19 @@ Media elements that start playing outside of a document will no longer be garbag
 ## Performance and stability
 
 Pinch zoom operations no longer have to rebuild a full display list, making zooming on complex pages much smoother (@stevennovaryo, @mrobinson, #43561).
+
+We improved performance in many small and focused ways by doing less work during restyling and layout (@SimonSapin, @webbeef, @nicoburns, @mrobinson, #49137, #49100, #48485, #48968), reducing GC interactions (@mrobinson, #48984, #49140, #49195), and delaying work on disconnected trees (@SimonSapin, #49098).
+We also fixed instances of quadratic layout with deep nesting (@nicoburns, #49148) and missing caching (@mrobinson, @Loirooriol, #49164, #49073).
+
+We fixed some intermittent GC panics when notifying ResizeObservers (@mrobinson, #49189), introspecting keyframes (@MohamedAli00949, #48546), setting timers (@jdm, #48548), using writable streams (@jdm, #48656), scrolling iframes after removing them (@mrobinson, #49230).
+
+We also fixed numerous other panics and crashes in scrollable and incremental layout (@mrobinson, #49230, #49283), moving nodes around (@mrobinson, #49226), using WebGPU from opaque origins (@gabrielecabrini, #49207), stringifying some WebIDL types (@mrobinson, #49374), using readable streams (@Narfinger, @mrobinson, #49311), clicking disabled file controls (@mrobinson, #49379), rendering giant SVGs (@sabbCodes, #49264), unminifying JS (@jdm, #48567), measuring text (@mxmgorin, #48621), rendering text tracks (@TimvdLippe, @mrobinson, #48827), preparing dialogs (@lukewarlow, #49431), and running delayed tasks in destroyed documents (@mrobinson, @jdm, #49399, #48714).
+
+Many small-to-medium improvements to reduce allocations were merged (@yezhizhen, @Narfinger, @Taym95, @mrobinson, @Loirooriol, @CynthiaOketch, @sabbCodes, @mxmgorin, #48549, #48558, #48568, #48598, #48615, #48565, #48646, #48654, #48569, #48562, #48588, #48650, #48702, #48675, #48589, #48720, #48721, #47720, #48745, #48703, #48750, #48770, #48789, #48754, #48828, #48838, #48836, #48841, #48843, #48867, #48882, #48842, #48881, #48840, #48899, #48924, #48904, #48949, #48953, #48980, #49028, #48885, #49035, #49038, #49084, #49131, #49125, #48951, #49154, #49160, #49198, #49202, #49194, #49219, #49258, #49275, #49295, #49298, #49300, #49320, #49323, #49313, #49373, #49380, #48969, #48991), and we also reduced memory usage by shrinking some types (@Narfinger, @webbeef, #48954, #48082, #48906).
+
+Memory leaks received a lot of attention this month, covering everything from network requests, to JS modules, to timer tasks, and more (@mrobinson, @SimonSapin, @jschwe, #48952, #48957, #49032, #49049, #49092, #49134, #49139, #49132, #48747, #48752).
+
+We continue to work towards preventing certain sources of memory leaks with static analysis and the Rust type system (@Gae24, @Narfinger, @jdm, #48147, #48360, #48832, #48887, #48913, #48903, #48965, #48905, #48834, #48855, #49083, #49082, #49081, #49096, #49135, #49130).
 
 ## More on the web platform
 

@@ -16,7 +16,7 @@
     # Per [the docs](https://developer.android.com/reference/androidx/activity/ComponentActivity#onActivityResult(kotlin.Int,kotlin.Int,android.content.Intent)), `onActivityResult` is deprecated and has been replaced with the Activity Result API.
     # 
     # Testing: There are no automated tests for Android.
-+https://github.com/servo/servo/pull/48546	(@MohamedAli00949, #48546)	script: fix the borrow hazard panics in KeyframeEffect::GetKeyframes (#48546)
+.https://github.com/servo/servo/pull/48546	(@MohamedAli00949, #48546)	script: fix the borrow hazard panics in KeyframeEffect::GetKeyframes (#48546)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit b274bd2c8e23227f535de4c505799ab631206c1e
     # Fix the borrow hazard panics in `KeyframeEffect::GetKeyframes` by using the `layout` (which is immutable in `cx` instead of other mutable usage) variabute into inner scope of accessing the keyframe declarations, instead of the global scope of the function.
@@ -30,7 +30,7 @@
     # This enables testing for the experimental [container timing](https://wpt.fyi/results/container-timing/tentative?label=experimental&label=master&aligned) within WPT
     # 
     # Part of https://github.com/servo/servo/pull/46966
-+https://github.com/servo/servo/pull/48549	(@yezhizhen, #48549)	script: Reduce alloc when checking if element is nonceable (#48549)
+.https://github.com/servo/servo/pull/48549	(@yezhizhen, #48549)	script: Reduce alloc when checking if element is nonceable (#48549)
     perf; allocations
     ^ commit 7bd56c4f18d1fb834b004bc1adc3bd81d887ca9f
     # stylo's [helper](https://github.com/servo/stylo/blob/34d25f741765a0bdb894f8271852e633299352d8/style/str.rs#L161) produces a Cow and avoid allocation when the attribute value is already lowercased.
@@ -38,7 +38,7 @@
     # Another way to always avoid alloc is to use a window to scan with `eq_ignore_ascii_case`, but with higher time complexity than optimized https://doc.rust-lang.org/src/core/str/mod.rs.html#1382-1383.
     # 
     # Testing: Tested build. Rest covered by existing tests.
-+https://github.com/servo/servo/pull/48497	(@SimonSapin, @mrobinson, #48497)	script: Move `handle_mousedown_event` from `VirtualMethods` to `EditingContext` (#48497)
+-https://github.com/servo/servo/pull/48497	(@SimonSapin, @mrobinson, #48497)	script: Move `handle_mousedown_event` from `VirtualMethods` to `EditingContext` (#48497)
     selection
     ^ commit 3b07503bc6d4641a35b4b14d1b3112b72476ce82
     # … and add `enum SelectionTarget { Position, Word, Line }` to represent single- v.s. double- v.s. triple-click.
@@ -79,7 +79,7 @@
     # 
     # Testing: `conformance2/state/gl-object-get-calls.html` now passes the subtest for invalid internal formats.
     # Fixes: #26128. The WebGL thread panic no longer happens, since the debug check for GL errors now only logs a warning (#30568); the missing validation now prevents the invalid GL call.
-+https://github.com/servo/servo/pull/48558	(@Narfinger, #48558)	script: Preallocate timer array (#48558)
+.https://github.com/servo/servo/pull/48558	(@Narfinger, #48558)	script: Preallocate timer array (#48558)
     perf; allocations
     ^ commit a114cd7f9782363228d0b9e5b1e25e7a09b38d61
     # This preallocates the timer array on timer fireing and pushes the borrow_mut outside of the loop.
@@ -87,7 +87,7 @@
     # 
     # Testing: This just changes performance characteristics so should not change functionality.
     # 
-+https://github.com/servo/servo/pull/48568	(@Taym95, #48568)	Avoid cloning namespace prefixes during namespace lookup (#48568)
+.https://github.com/servo/servo/pull/48568	(@Taym95, #48568)	Avoid cloning namespace prefixes during namespace lookup (#48568)
     perf; allocations
     ^ commit 3a01b1e5323fb3167df554de0b0008e87982a668
     # Avoid cloning namespace prefixes during namespace lookup
@@ -95,7 +95,7 @@
     # Testing: No behavior change, existing WPT tests should pass.
     # 
     # inspired by https://github.com/servo/servo/pull/48565.
-+https://github.com/servo/servo/pull/48567	(@jdm, #48567)	script: Ensure unminified script source outlives JS compilation. (#48567)
+.https://github.com/servo/servo/pull/48567	(@jdm, #48567)	script: Ensure unminified script source outlives JS compilation. (#48567)
     stability; crash fix
     ^ commit bb3d550b8c6d8eb1ad6bc9361e05f6add2bf1fb3
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
@@ -484,7 +484,7 @@
     # is difficult to test) so is covered by existing tests.
     # Fixes: This is part of #47294.
     # 
-+https://github.com/servo/servo/pull/48147	(@Gae24, #48147)	script_bindings: Ensure that raw JS types are not wrapped in a `RootedTraceableBox` inside WebIDL dictionaries (#48147)
+.https://github.com/servo/servo/pull/48147	(@Gae24, #48147)	script_bindings: Ensure that raw JS types are not wrapped in a `RootedTraceableBox` inside WebIDL dictionaries (#48147)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit e4ab7ad82da23a300b2b54557eb46c93a1085e16
     # Avoid wrapping _any_ and _object_ dictionaries members in a `RootedTraceableBox`, as dictionaries are already rooted.
@@ -532,7 +532,7 @@
     # Testing: It compiles 
     # 
 >>> 2026-10-04T00:29:54Z
-+https://github.com/servo/servo/pull/48598	(@yezhizhen, #48598)	macro: Reduce alloc in `make_enumerated_getter` (#48598)
+.https://github.com/servo/servo/pull/48598	(@yezhizhen, #48598)	macro: Reduce alloc in `make_enumerated_getter` (#48598)
     perf; allocations
     ^ commit b8fc50f07bda81b7147dc5923f6ed5ac9ecf11fb
     # This one is used quite frequently, and the fix is neat.
@@ -573,7 +573,7 @@
     # This removes some duplication in handling of widgets and makes it clear what is implemented where.
     # 
     # Testing: it compiles
-+https://github.com/servo/servo/pull/48548	(@jdm, #48548)	script: Ensure pending timer callbacks are always reachable from GC roots. (#48548)
+.https://github.com/servo/servo/pull/48548	(@jdm, #48548)	script: Ensure pending timer callbacks are always reachable from GC roots. (#48548)
     stability; crash fix
     ^ commit 3ae0049380fefea2f27905663c8ea7031ce801c2
     # The timer code contained crown warning suppressions that hid the presence of unrooted callbacks after #48315. These changes address that by adding rooted versions of several enums that can be passed around safely as arguments and used when invoking the timer callbacks, and by ensuring that the unrooted versions receive appropriate crown annotations so we can't reintroduce similar issues in the future.
@@ -645,7 +645,7 @@
     ^ commit c8d280378b4e6bccd97a095f57bfc2f50b4df8e9
     # Automated downstream sync of changes from upstream as of 04-10-2026
     # [no-wpt-sync]
-+https://github.com/servo/servo/pull/48265	(@SilvioPilato, #48265)	script: Add support for <input type='image'> (#48265)
+.https://github.com/servo/servo/pull/48265	(@SilvioPilato, #48265)	script: Add support for <input type='image'> (#48265)
     dom
     ^ commit 89301ede2ed1d34f18f92ece878dc7f76583348f
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -667,7 +667,7 @@
     # 
     # Fixes: #47645
     # 
-+https://github.com/servo/servo/pull/48615	(@yezhizhen, #48615)	script: Reduce alloc in "fetch and process the linked resource" (#48615)
+.https://github.com/servo/servo/pull/48615	(@yezhizhen, #48615)	script: Reduce alloc in "fetch and process the linked resource" (#48615)
     perf; allocations
     ^ commit c699de3d02656331ed1d6e861ccda2344c718ade
     # We can convert in place.
@@ -680,7 +680,7 @@
     # 
     # Testing: There are no automated tests for Android.
     # Part of: #33742
-+https://github.com/servo/servo/pull/48604	(@TimvdLippe, #48604)	script: Implement dimension attributes for `<marquee>` (#48604)
+.https://github.com/servo/servo/pull/48604	(@TimvdLippe, #48604)	script: Implement dimension attributes for `<marquee>` (#48604)
     dom
     ^ commit debda92c62a639100446b47d3719bd054f30c186
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -689,7 +689,7 @@
     # 
     # Testing: new WPT passes
     # 
-+https://github.com/servo/servo/pull/48485	(@webbeef, #48485)	layout: Layout flex items once when their cross size is known upfront (#48485)
+.https://github.com/servo/servo/pull/48485	(@webbeef, #48485)	layout: Layout flex items once when their cross size is known upfront (#48485)
     perf; less work
     ^ commit b0c20e94ae274e4b0858209c74f92a5675d86ce7
     #  In a single-line flex container with a definite cross size, the cross
@@ -862,7 +862,7 @@
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/48565	(@Narfinger, #48565)	script: Smaller memory improvements (#48565)
+.https://github.com/servo/servo/pull/48565	(@Narfinger, #48565)	script: Smaller memory improvements (#48565)
     perf; allocations
     ^ commit 5c5b73fb8506d4e916ced4585cc76736271528b2
     # This PR combines 3 small changes into one:
@@ -910,7 +910,7 @@
     # 
     # Testing: This kind of change is very difficult to test as it requires really pushing Servo.
     # 
-+https://github.com/servo/servo/pull/48621	(@mxmgorin, #48621)	canvas: Don't panic in measureText when no font is available (#48621)
+.https://github.com/servo/servo/pull/48621	(@mxmgorin, #48621)	canvas: Don't panic in measureText when no font is available (#48621)
     stability; crash fix
     ^ commit f7114f4bc98453f7139bb546f8c2b448f6ec8120
     # This makes `measureText()` return zeroed metrics and logs a warning when no font is available, like `fillText()` and `strokeText()` already do. Previously it panicked, killing the script thread of any page that called it on a system with no usable font.
@@ -957,7 +957,7 @@
     # 
     # Testing: various tests improve
     # 
-+https://github.com/servo/servo/pull/48646	(@Taym95, #48646)	script: Avoid temporary allocation when reading stream chunks (#48646)
+.https://github.com/servo/servo/pull/48646	(@Taym95, #48646)	script: Avoid temporary allocation when reading stream chunks (#48646)
     perf; allocations
     ^ commit 05385bc489deca0d618f19b42b99ec02a970cd48
     # ccopy directly from a rooted Uint8Array slice into the accumulated bytes.
@@ -965,7 +965,7 @@
     # Testing: existing WPT test should pass. 
     # 
     # Fixes #48632
-+https://github.com/servo/servo/pull/48640	(@jdm, #48640)	script: Prioritize converting JS values to interfaces (ie. typed arrays) over sequences. (#48640)
+.https://github.com/servo/servo/pull/48640	(@jdm, #48640)	script: Prioritize converting JS values to interfaces (ie. typed arrays) over sequences. (#48640)
     perf; https://rydmike.com/flexcolorscheme/themesplayground-latest/ impacted
     ^ commit 4868cd690f458b723321ef29e9f8e9d1335ed21d
     # The changes in this PR allow us to match the same logic in Gecko (https://searchfox.org/firefox-main/rev/b4b9efb6ee130740a94caf46ffff0625af1d51db/dom/bindings/Codegen.py#13131-13153). This matters because for unions like `Float32ArrayOrUnrestrictedFloatSequence`, trying to convert a typed array to a float sequence succeeds but has terrible performance; prioritizing interface conversions works because the WebIDL parser treats builtin types that are typed arrays as interfaces. Our implementation is different than Gecko because we're not using explicit if/else; just match blocks with failure cases that fall through to the next conversion attempt.
@@ -974,7 +974,7 @@
     # Fixes: #48633
     # Fixes: #48537
     # 
-+https://github.com/servo/servo/pull/48654	(@Taym95, #48654)	Avoid temporary input copies in compression and decompression streams (#48654)
+.https://github.com/servo/servo/pull/48654	(@Taym95, #48654)	Avoid temporary input copies in compression and decompression streams (#48654)
     perf; allocations
     ^ commit 7675e237050a0667409a12e2113a492c99e82958
     # Avoid temporary input copies in compression and decompression streams
@@ -1012,7 +1012,7 @@
     # 
     # Testing: There are no automated tests for Android.
     # 
-+https://github.com/servo/servo/pull/48569	(@Narfinger, #48569)	script: Create a way to get attribute as str ref (#48569)
+.https://github.com/servo/servo/pull/48569	(@Narfinger, #48569)	script: Create a way to get attribute as str ref (#48569)
     perf; allocations
     ^ commit 1351bf1228f916823979f5708d4b409debd29cb3
     # This implements ffunctionality to get an attribute value as string reference instead of a copied string. This can greatly reduce allocations as many times the resulting string is just use as a references.
@@ -1194,7 +1194,7 @@
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/48656	(@jdm, #48656)	script: Ensure underlying sink type passed to writable stream is always rooted. (#48656)
+.https://github.com/servo/servo/pull/48656	(@jdm, #48656)	script: Ensure underlying sink type passed to writable stream is always rooted. (#48656)
     stability; crash fix
     ^ commit 85d8ca53082710e2c8b7b1077d38d867526a768f
     # Testing: Only observable with nondeterministic GC so we can't write a test for it, and we don't run any tests with deterministic GC in CI.
@@ -1254,7 +1254,7 @@
     # Testing: Dependency update, no new tests required.
     # 
     # 
-+https://github.com/servo/servo/pull/48360	(@Narfinger, @jdm, #48360)	script_bindings: Create TracedDOMString and make DOMString RootTraceableBox<TracedDOMString> (#48360)
+.https://github.com/servo/servo/pull/48360	(@Narfinger, @jdm, #48360)	script_bindings: Create TracedDOMString and make DOMString RootTraceableBox<TracedDOMString> (#48360)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit 964981f4c6eaa49a1f82700a4fb51afc76c43785
     # This is the first part of the changes to make DOMString into RootedDOMString and TracedDOMString (similar to Promise).
@@ -1324,7 +1324,7 @@
     # This makes `vertexAttribIPointer` reach GL and checks attribute types against the shader based on which `vertexAttrib*` call set them, as described in the [spec](https://registry.khronos.org/webgl/specs/latest/2.0/#ATTRIBUTE_TYPE_MATCH). Previously integer attributes received wrong values, and non-`FLOAT` `vertexAttribPointer` data flagged `INVALID_OPERATION` on every WebGL 2 draw. It also makes `getVertexAttrib` report `VERTEX_ATTRIB_ARRAY_INTEGER`.
     # 
     # Testing: Covered by existing tests; more WebGL conformance subtests now pass.
-+https://github.com/servo/servo/pull/48605	(@TimvdLippe, #48605)	script: Implement margin dimension attributes for `<img>` (#48605)
+.https://github.com/servo/servo/pull/48605	(@TimvdLippe, #48605)	script: Implement margin dimension attributes for `<img>` (#48605)
     dom
     ^ commit 858163abf4f030075a4ae2acea0e5e170dce7607
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -1668,7 +1668,7 @@
     # 
     # Testing: servoshell on ohos is tested in CI, although this specific improvement is not, since the failure won't happen in CI (normally)
     # 
-+https://github.com/servo/servo/pull/48562	(@Narfinger, #48562)	script: Make srcset creation, update and select_image_source more efficient (#48562)
+.https://github.com/servo/servo/pull/48562	(@Narfinger, #48562)	script: Make srcset creation, update and select_image_source more efficient (#48562)
     perf; allocations
     ^ commit 26ceca6901e555cea6ccac28024d6b31cc8aab0f
     # We make SourceSet more efficient by a couple of smaller optimizations:
@@ -1687,7 +1687,7 @@
     # 
     # Fixes: #48501
     # 
-+https://github.com/servo/servo/pull/48588	(@Narfinger, #48588)	net: Less allocation in net (#48588)
+.https://github.com/servo/servo/pull/48588	(@Narfinger, #48588)	net: Less allocation in net (#48588)
     perf; allocations
     ^ commit bf127221f61e67f4e7aabb06c2b9c6592b76cfdb
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
@@ -1714,7 +1714,7 @@
     # Testing: Tested as part of ohos CI. I believe we don't have anything triggering Toasts right now, so thats not covered.
     # 
     # 
-+https://github.com/servo/servo/pull/48650	(@Narfinger, #48650)	fonts: make for_each_font_family return &str instead of String (#48650)
+.https://github.com/servo/servo/pull/48650	(@Narfinger, #48650)	fonts: make for_each_font_family return &str instead of String (#48650)
     perf; allocations
     ^ commit 766a5b258b3874a768c9c3a5fa78a11b18d5bdf5
     # This changes the callback to be a &str. As we anyway transform this string to lowercase later, we can use a reference instead of a newly created string.  This might just move the allocation from the previous spot to the "to_lowercase".
@@ -1747,13 +1747,13 @@
     # 
     # Testing: This was tested locally.
     # 
-+https://github.com/servo/servo/pull/48702	(@Taym95, #48702)	FileManager: Avoid file chunk buffer copy (#48702)
+.https://github.com/servo/servo/pull/48702	(@Taym95, #48702)	FileManager: Avoid file chunk buffer copy (#48702)
     perf; allocations
     ^ commit 41e78002949672ee1af39af5e272ae2b43fc4f57
     # Testing: No Behavior changed.
     # 
     # 
-+https://github.com/servo/servo/pull/48675	(@Narfinger, #48675)	script: Move some usages of get_attribute_string_value to get_attribute_string_ref (#48675)
+.https://github.com/servo/servo/pull/48675	(@Narfinger, #48675)	script: Move some usages of get_attribute_string_value to get_attribute_string_ref (#48675)
     perf; allocations
     ^ commit eb8e57e97dce5101c25f8ef1587d5fe257f8fece
     # This moves some uses of get_attribute_string_value to the new get_attribute_string_ref, if the returned DOMString is not used.
@@ -1761,7 +1761,7 @@
     # 
     # Testing: WPT test should find any errors in this new machinery. https://github.com/Narfinger/servo/actions/runs/37437278265
     # 
-+https://github.com/servo/servo/pull/48589	(@Narfinger, #48589)	script_bindings: Allow more efficient DOMString clone if it is a JSString (#48589)
+.https://github.com/servo/servo/pull/48589	(@Narfinger, #48589)	script_bindings: Allow more efficient DOMString clone if it is a JSString (#48589)
     perf; allocations
     ^ commit ae22b9ac2366577aecf1b87f47c14d902964003f
     # This replaces the old code that always converted to rust on clone with copying the pointer if it is a javascript string.
@@ -1784,7 +1784,7 @@
     # By removing this, we unblock the further migration to UA ShadowRoot for the HTML media element.
     # 
     # Testing: no behavior change
-+https://github.com/servo/servo/pull/48718	(@Loirooriol, #48718)	config: Remove `layout_grid_enabled` pref (#48718)
+.https://github.com/servo/servo/pull/48718	(@Loirooriol, #48718)	config: Remove `layout_grid_enabled` pref (#48718)
     embedding; removed pref
     ^ commit 461e338cd4e3bcfc57c0a6a0fbc6697b37500d62
     ^ /!\ contains servoshell changes! does it affect the user experience?
@@ -1796,12 +1796,12 @@
     # 
     # Testing: Not needed, no change in behavior
     # 
-+https://github.com/servo/servo/pull/48720	(@Taym95, #48720)	Fetch: Avoid multipart field copy (#48720)
+.https://github.com/servo/servo/pull/48720	(@Taym95, #48720)	Fetch: Avoid multipart field copy (#48720)
     perf; allocations
     ^ commit caaeab558c0877e3452ebb61c584e1f705900ed2
     # Testing: No behavior change, existing test pass.
     # 
-+https://github.com/servo/servo/pull/48721	(@Taym95, #48721)	Fetch: Avoid multipart boundary clone (#48721)
+.https://github.com/servo/servo/pull/48721	(@Taym95, #48721)	Fetch: Avoid multipart boundary clone (#48721)
     perf; allocations
     ^ commit 75528881dc663854795c40d661112f611595aaba
     # Testing: No behavior change, existing test pass.
@@ -2226,7 +2226,7 @@
     # These changes enable a new subdirectory and fix some problems that were causing the tests to timeout.
     # 
     # Testing: New passing subtest
-+https://github.com/servo/servo/pull/48714	(@jdm, #48714)	script: Prevent post-parsing stylesheet tasks from running on unloaded documents. (#48714)
+.https://github.com/servo/servo/pull/48714	(@jdm, #48714)	script: Prevent post-parsing stylesheet tasks from running on unloaded documents. (#48714)
     stability; crash fix for https://www.laika.com/our-films/wildwood
     ^ commit fd59630e03e4a569d0df55fd32931f719008d49e
     # The off-thread stylesheet parsing enqueues a task to run post-parse work on the main script thread, but it does so without using the document's task manager. This means that the task will always run unconditionally, even if the document is unloaded before the task runs. By using the task manager, the task will be instead be cancelled when this happens.
@@ -2284,7 +2284,7 @@
     # 
     # Testing: Compilation is the test.
     # 
-+https://github.com/servo/servo/pull/47720	(@Narfinger, #47720)	script: Put PolicyContainer in document into an Arc (#47720)
+.https://github.com/servo/servo/pull/47720	(@Narfinger, #47720)	script: Put PolicyContainer in document into an Arc (#47720)
     perf; allocations
     ^ commit 0a2e11ea26158dc180bafc7d45dcd294738dc5c0
     # As the PolicyContainer gets copied a bunch of time, we put it into a Reference Counted structure. As the PolicyContainer is also shared with net/ we need an Arc.
@@ -2293,7 +2293,7 @@
     # 
     # Testing: This just changes the performance characteristics.
     # 
-+https://github.com/servo/servo/pull/48745	(@yezhizhen, #48745)	script: Drop extra clone in several places for `Request` (#48745)
+.https://github.com/servo/servo/pull/48745	(@yezhizhen, #48745)	script: Drop extra clone in several places for `Request` (#48745)
     perf; allocations
     ^ commit 8f39418415134a4b1d9df09c98aae8af0055e6c5
     # This drops some temp var too.
@@ -2346,7 +2346,7 @@
     # Testing: This change fixes a WPT test.
     # Fixes: #47750.
     # 
-+https://github.com/servo/servo/pull/48752	(@jschwe, #48752)	script: Fix TimerListener leak (#48752)
+.https://github.com/servo/servo/pull/48752	(@jschwe, #48752)	script: Fix TimerListener leak (#48752)
     perf; memory leak for timers
     ^ commit 5f65837a45d56f857c099e8c640dbf317ab4a0d1
     # Fixes a leak, where the Trusted reference would keep windows alive until the Timer expires.
@@ -2355,7 +2355,7 @@
     # Testing: We don't have automated tests to prevent leaks. 
     # Fixes: #48741
     # 
-+https://github.com/servo/servo/pull/48703	(@Narfinger, #48703)	net: Small optimizations in net code (#48703)
+.https://github.com/servo/servo/pull/48703	(@Narfinger, #48703)	net: Small optimizations in net code (#48703)
     perf; allocations
     ^ commit 19956df6e2abc6e9033ccecbc46b7f3123007d48
     # This PR combines 2 optimizations in net code.
@@ -2364,7 +2364,7 @@
     # 
     # Testing: WPT test should test this extensively (https://github.com/Narfinger/servo/actions/runs/37780703500).
     # 
-+https://github.com/servo/servo/pull/48750	(@Narfinger, #48750)	script: Move more attribute getting to use AttrStrRef (#48750)
+.https://github.com/servo/servo/pull/48750	(@Narfinger, #48750)	script: Move more attribute getting to use AttrStrRef (#48750)
     perf; allocations
     ^ commit 8de25a1ab6b2869f19db0fa42a49ecd420844961
     # This replaces more of the `get_attribute_string_value` calls with `get_attribute_string_ref`.
@@ -2704,7 +2704,7 @@
     ^ commit bcc2d31b21597c3963fa60e75fdda25e78aedfd5
     # 
     # Testing: Existing WPT coverage
-+https://github.com/servo/servo/pull/48719	(@Loirooriol, #48719)	script_bindings: Get values of Stylo's preferences from Stylo (#48719)
+.https://github.com/servo/servo/pull/48719	(@Loirooriol, #48719)	script_bindings: Get values of Stylo's preferences from Stylo (#48719)
     embedding; removed pref
     ^ commit 4b388ed8eaa8df0601e9153568d3b6610e48b82f
     ^ /!\ may contain changes to feature flags
@@ -2752,7 +2752,7 @@
     # Testing: If CI passes, then this should be fine. 
     # 
     # 
-+https://github.com/servo/servo/pull/48770	(@yezhizhen, #48770)	net: Clone supplied MIME type only when necessary (#48770)
+.https://github.com/servo/servo/pull/48770	(@yezhizhen, #48770)	net: Clone supplied MIME type only when necessary (#48770)
     perf; allocations
     ^ commit 27e398616c720df9bf56958668429496529251fe
     # Instead of cloning unconditionally here, we can do it only when necessary.
@@ -2850,7 +2850,7 @@
     # 
     # Testing: It compiles.
     # Part-of: #48666
-+https://github.com/servo/servo/pull/48789	(@yezhizhen, #48789)	net: Reduce a few clones when flitering response (#48789)
+.https://github.com/servo/servo/pull/48789	(@yezhizhen, #48789)	net: Reduce a few clones when flitering response (#48789)
     perf; allocations
     ^ commit 4f6bc5c1a830eb886e0851a25e18b4a7f2b492f7
     # We can reduce a few clones here as they were never mutated or always set to a new value later.
@@ -2977,7 +2977,7 @@
     # Part of #48603
     # 
     # Testing: new WPT tests passes
-+https://github.com/servo/servo/pull/48754	(@Taym95, #48754)	DecompressionStream: Avoid decompression output copy (#48754)
+.https://github.com/servo/servo/pull/48754	(@Taym95, #48754)	DecompressionStream: Avoid decompression output copy (#48754)
     perf; allocations
     ^ commit 58fbd56f01cfa9bb2f9c6d8c17d8ba7c70a70371
     # Testing: No behavior change only memory improvement, covered by existing WPT test. 
@@ -3738,7 +3738,7 @@
     # Also, `style::logical_geometry::Direction` is being removed upstream.
     # 
     # Testing: not needed, no behavior change
-+https://github.com/servo/servo/pull/48828	(@yezhizhen, #48828)	net: Avoid cloning the whole CorsCache when cleaning (#48828)
+.https://github.com/servo/servo/pull/48828	(@yezhizhen, #48828)	net: Avoid cloning the whole CorsCache when cleaning (#48828)
     perf; allocations
     ^ commit 534911157dd923c837308beff38cdc0086a72f2f
     # Instead of cloning the whole vector of cache entry just to filter and reassigning, we can modify in place.
@@ -3761,7 +3761,7 @@
     # Testing: The failure mode is only visible on release branches, with crates.io stylo releases.
     # 
     # 
-+https://github.com/servo/servo/pull/48827	(@TimvdLippe, @mrobinson, #48827)	script: Fix assertion failure when track with no cues is rendered (#48827)
+.https://github.com/servo/servo/pull/48827	(@TimvdLippe, @mrobinson, #48827)	script: Fix assertion failure when track with no cues is rendered (#48827)
     stability; crash fix
     ^ commit c240b77abd0d31ac4a38a7a776739cdf7d5cccd3
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -3769,7 +3769,7 @@
     # 
     # Fixes #48812
     # Testing: This change adds a new crash test.
-+https://github.com/servo/servo/pull/47255	(@janeoa, #47255)	devtools: feature guard (#47255)
+.https://github.com/servo/servo/pull/47255	(@janeoa, #47255)	devtools: feature guard (#47255)
     embedding; binary size + new feature
     ^ commit a0d7a24dc0c41bd39079626e5b8d1f096acb8521
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
@@ -3814,7 +3814,7 @@
     # 
     # Testing: Just restructuring code; covered by existing tests.
     # Fixes: Part of #47182.
-+https://github.com/servo/servo/pull/48838	(@Narfinger, #48838)	url: Faster url to string conversion (#48838)
+.https://github.com/servo/servo/pull/48838	(@Narfinger, #48838)	url: Faster url to string conversion (#48838)
     perf; allocations
     ^ commit 65406b6507b656393bb2791be3b9f4878e5bdcf0
     # Previously we used `String::from(into_url().clone())` as Url is 88 bytes and String only 24 this did a bit of unnecessary copying.
@@ -3823,7 +3823,7 @@
     # 
     # Testing: This should not change functionality.
     # 
-+https://github.com/servo/servo/pull/48836	(@Taym95, #48836)	pixels: avoid snapshot copies in single-process mode (#48836)
+.https://github.com/servo/servo/pull/48836	(@Taym95, #48836)	pixels: avoid snapshot copies in single-process mode (#48836)
     perf; allocations
     ^ commit 6351cf75801ed330d84498594881087092482df1
     # Testing: no behavior change exists in WPT test pass. 
@@ -3860,7 +3860,7 @@
     # 
     # Testing: Test expectations updated
     # 
-+https://github.com/servo/servo/pull/48841	(@Taym95, #48841)	Font: avoid copying memory mapped font data on macOS (#48841)
+.https://github.com/servo/servo/pull/48841	(@Taym95, #48841)	Font: avoid copying memory mapped font data on macOS (#48841)
     perf; allocations
     ^ commit 236847e15e7a1a3495fa05378ac2fd581fd46dc7
     # Testing: no behavior change existing WPT test pass.
@@ -3880,7 +3880,7 @@
     # 
     # Testing: This is equivalent functionality as both regex follow the spec.
     # 
-+https://github.com/servo/servo/pull/48843	(@Narfinger, #48843)	base: Use serde_json::from_reader instead of allocating a string (#48843)
+.https://github.com/servo/servo/pull/48843	(@Narfinger, #48843)	base: Use serde_json::from_reader instead of allocating a string (#48843)
     perf; allocations
     ^ commit 5979b83191aecc9b32b3e61180dd7efa3dbdc1e8
     # This uses a BufReader and serde_json::from_reader to parse the files instead of allocating a new string. This removes a potential panic when the file could be opened but not read from.
@@ -4066,7 +4066,7 @@
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/48832	(@Narfinger, #48832)	script: Use TracedDOMString in dom_structs for audio, bluetooth, characterdata (#48832)
+.https://github.com/servo/servo/pull/48832	(@Narfinger, #48832)	script: Use TracedDOMString in dom_structs for audio, bluetooth, characterdata (#48832)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit afcc7cb50b7c5e72b0ca906161d66c51687e3583
     # This replaces the DOMStrings in `#[dom_struct]`s with TracedDOMString.
@@ -4241,7 +4241,7 @@
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/48867	(@yezhizhen, #48867)	net: Avoid cloning cached headers on HTTP cache hits (#48867)
+.https://github.com/servo/servo/pull/48867	(@yezhizhen, #48867)	net: Avoid cloning cached headers on HTTP cache hits (#48867)
     perf; allocations
     ^ commit 57a263c02cc06d1fce479d59ba2fa699f8d14112
     # This is less straightforward, but `response_headers` is only used in `needs_synchronous_revalidation` branch, which implies the rest.
@@ -4264,7 +4264,7 @@
     # 
     # Testing: Passes additional web platform tests.
     # 
-+https://github.com/servo/servo/pull/48882	(@Narfinger, #48882)	net/devtools: Move RequestId to use UUID directly instead of converting to String (#48882)
+.https://github.com/servo/servo/pull/48882	(@Narfinger, #48882)	net/devtools: Move RequestId to use UUID directly instead of converting to String (#48882)
     perf; allocations
     ^ commit d976443f3410923d965442d37d3aa6af61e1176d
     # This replaces the `request.id.0.to_string()` with the uuid directly. This uses less memory than a string and does not need any extra conversion.
@@ -4329,7 +4329,7 @@
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/48889	(@CynthiaOketch, #48889)	script: Migrate borrow_mut to safe_borrow_mut in FormData (#48889)
+-https://github.com/servo/servo/pull/48889	(@CynthiaOketch, #48889)	script: Migrate borrow_mut to safe_borrow_mut in FormData (#48889)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 53712ca4818fde6d25673a968934b49a72bc44e5
     # Replaced `borrow_mut()` with `safe_borrow_mut(cx.no_gc())` in the
@@ -4337,14 +4337,14 @@
     # all receive `&mut JSContext`.
     # 
     # Part of #48849.
-+https://github.com/servo/servo/pull/48842	(@Narfinger, #48842)	net: Do not force mime type to be serialized for cache (#48842)
+.https://github.com/servo/servo/pull/48842	(@Narfinger, #48842)	net: Do not force mime type to be serialized for cache (#48842)
     perf; allocations
     ^ commit 0da9d282d304c16e549d4f7dcfc73a32373f14b5
     # This just removes the to_string() we had in ContentType in HttpCache.
     # 
     # Testing: This is the same functionality, just performance characteristics change.
     # 
-+https://github.com/servo/servo/pull/48887	(@Narfinger, #48887)	script: Use TracedDOMString ffor datatransfer, file, form, geolocation and globalscope (#48887)
+.https://github.com/servo/servo/pull/48887	(@Narfinger, #48887)	script: Use TracedDOMString ffor datatransfer, file, form, geolocation and globalscope (#48887)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit 3a244b44e313aac982c202637ce90238e0cbfc3d
     # This continues the transformation to have TracedDOMString in dom_structs.
@@ -4366,7 +4366,7 @@
     # This small change makes `WebViewDelegateImpl::reset` properly reset all fields, which is an issue I noticed while writing a different PR.
     # 
     # Testing: Should have no observable change to existing tests.
-+https://github.com/servo/servo/pull/48881	(@Narfinger, #48881)	script_bindings: Make conversion from jsid_to_string of PropertyId, find_enum_value and get_own_property_descriptor use lazy initiated domstring (#48881)
+.https://github.com/servo/servo/pull/48881	(@Narfinger, #48881)	script_bindings: Make conversion from jsid_to_string of PropertyId, find_enum_value and get_own_property_descriptor use lazy initiated domstring (#48881)
     perf; allocations
     ^ commit 87fd096f5c28f60a9ffbad39e1b3ff4fb82d60b9
     # We replace the conversion in script_bindings/conversions::jsid_to_string, to use `DOMString::from_raw_js_string` to store the raw *mut JSString pointer instead of always converting to a rust string.
@@ -4376,7 +4376,7 @@
     # 
     # Testing: WPT tests should find if there are any problems with this (https://github.com/Narfinger/servo/actions/runs/38399104529).
     # 
-+https://github.com/servo/servo/pull/48840	(@Narfinger, #48840)	net: Reduce cloning of `ImmutableOrigin` in `ImageCache` methods (#48840)
+.https://github.com/servo/servo/pull/48840	(@Narfinger, #48840)	net: Reduce cloning of `ImmutableOrigin` in `ImageCache` methods (#48840)
     perf; allocations
     ^ commit 3b0bc6a33330364cad03611f9f654f5f9cb10e30
     # Removes some clones of ImmutableOrigin and only clones it when is actually needed for PendingImage.
@@ -4384,7 +4384,7 @@
     # 
     # 
     # Testing: This does not change functionality.
-+https://github.com/servo/servo/pull/48899	(@yezhizhen, #48899)	net: Avoid cloning response type in main fetch (#48899)
+.https://github.com/servo/servo/pull/48899	(@yezhizhen, #48899)	net: Avoid cloning response type in main fetch (#48899)
     perf; allocations
     ^ commit b03045f53e4ab016ad1c7fd1257790d2956c18ab
     # It was cloned just to work around mutable borrow.
@@ -4446,7 +4446,7 @@
     # 
     # Testing: Dependency update do not require tests apart from successful compilation.
     # 
-+https://github.com/servo/servo/pull/48912	(@Siddhi-sahu, #48912)	script: migrate borrow_mut to safe_borrow_mut in htmloutputelement.rs (#48912)
+-https://github.com/servo/servo/pull/48912	(@Siddhi-sahu, #48912)	script: migrate borrow_mut to safe_borrow_mut in htmloutputelement.rs (#48912)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 97c21f857cee9955d5bea4ddd6d22ed3adc8a6cf
     # Replace uses of `borrow_mut` with `safe_borrow_mut` in `htmloutputelement.rs`. 
@@ -4699,7 +4699,7 @@
     # 
     # </details>
 >>> 2026-10-15T23:55:31Z
-+https://github.com/servo/servo/pull/48915	(@nicoburns, #48915)	Upgrade to Stylo with `layout.unimplemented` replaced (#48915)
+.https://github.com/servo/servo/pull/48915	(@nicoburns, #48915)	Upgrade to Stylo with `layout.unimplemented` replaced (#48915)
     embedding; renamed a bunch of css preferences
     ^ commit 06a86171345cb9297d2ed9802a7f6c1df6a8018a
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
@@ -4728,7 +4728,7 @@
     # 
     # Testing: ```/mach fmt``` and ```/mach test-tidy``` were clean
     # Fixes: Part of #48851 
-+https://github.com/servo/servo/pull/48924	(@yezhizhen, #48924)	net: Reduce chance of alloc when creating cookie (#48924)
+.https://github.com/servo/servo/pull/48924	(@yezhizhen, #48924)	net: Reduce chance of alloc when creating cookie (#48924)
     perf; allocations
     ^ commit 60fc810362fb27cd1304c19378d1c8e5c63a6460
     # For the more frequent case when domain isn't empty, this avoids an allocation, so is strictly better.
@@ -4755,7 +4755,7 @@
     # 
     # Fixes: #48876
     # 
-+https://github.com/servo/servo/pull/48913	(@Gae24, #48913)	script: Don't store a rooted element in `ConstructionStackEntry` (#48913)
+.https://github.com/servo/servo/pull/48913	(@Gae24, #48913)	script: Don't store a rooted element in `ConstructionStackEntry` (#48913)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit 902d15ab9a8e8f2f9e5bff8006d0e61999beacd9
     # 
@@ -4804,7 +4804,7 @@
     # 
     # Testing: No iteration on the set is performed in the code, additionally WPT tests shows all clear (https://github.com/Narfinger/servo/actions/runs/38590076059)
     # 
-+https://github.com/servo/servo/pull/48928	(@Siddhi-sahu, #48928)	script: migrate borrow_mut to safe_borrow_mut in texttracklist.rs (#48928)
+-https://github.com/servo/servo/pull/48928	(@Siddhi-sahu, #48928)	script: migrate borrow_mut to safe_borrow_mut in texttracklist.rs (#48928)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 1d7af7682e2148f758cd0a1ba6fe92c1cd7d1e5c
     # Replace the use of borrow_mut with safe_borrow_mut in texttracklist.rs in add(), remove() still uses borrow_mut() because it has no JSContext available.
@@ -4813,14 +4813,14 @@
     # 
     # Testing:  ./mach check, ./mach fmt, ./mach test-tidy
     # 
-+https://github.com/servo/servo/pull/48857	(@jayant911, #48857)	script: Replace uses of borrow_mut with safe_borrow_mut in PointerEvent. (#48857)
+-https://github.com/servo/servo/pull/48857	(@jayant911, #48857)	script: Replace uses of borrow_mut with safe_borrow_mut in PointerEvent. (#48857)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit db4c301375ef79d892775b364d53e944fd6fd3d3
     # Switching to `safe_borrow_mut` from `borrow_mut` in PointerEvent.
     # 
     # Testing: Existing tests.
     # Fixes: part of #48849
-+https://github.com/servo/servo/pull/48906	(@Narfinger, #48906)	layout: Box AnonymousTableContent::Element (#48906)
+.https://github.com/servo/servo/pull/48906	(@Narfinger, #48906)	layout: Box AnonymousTableContent::Element (#48906)
     perf; allocations
     ^ commit 612a7e36461c6ed496849de9220ebf0ef060c81d
     # This boxes the enum value of AnonymousTableContent::Element. This reduces allocation from 53 Mb to 35 Mb in table builder methods in a non-representative test of `tests/blink_perf_tests/perf_tests/layout/large-table-with-collapsed-borders-and-colspans.html`. The size of the struct goes from 200 to 56 bytes.
@@ -4831,7 +4831,7 @@
     # 
     # Testing: This is equivalent code.
     # 
-+https://github.com/servo/servo/pull/48904	(@Taym95, #48904)	script: Avoid offline audio buffer copies in `AudioBuffer` (#48904)
+.https://github.com/servo/servo/pull/48904	(@Taym95, #48904)	script: Avoid offline audio buffer copies in `AudioBuffer` (#48904)
     perf; allocations
     ^ commit d55d5f2e531ef348cb1ce4ea326e65ebbdec3c3d
     # Testing: no behavior change existing WPT test pass.
@@ -4852,7 +4852,7 @@
     # Fixes: #24385.
     # Closes: #24388.
     # 
-+https://github.com/servo/servo/pull/48082	(@webbeef, #48082)	script: reduce the size of DOM elements (#48082)
+.https://github.com/servo/servo/pull/48082	(@webbeef, #48082)	script: reduce the size of DOM elements (#48082)
     perf; allocations
     ^ commit fb06a100aec9240fcb7079f2188eabed25b7198a
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -4889,7 +4889,7 @@
     # Testing: `tests/wpt/tests/xhr/xmlhttprequest-timeout-worker-synconworker.html` covers this code but this change exposes preexisting implementation issues so no test results change.
     # 
     # Fixes: #48848
-+https://github.com/servo/servo/pull/48937	(@Siddhi-sahu, #48937)	script: migrate borrow_mut to safe_borrow_mut (#48937)
+-https://github.com/servo/servo/pull/48937	(@Siddhi-sahu, #48937)	script: migrate borrow_mut to safe_borrow_mut (#48937)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 5e45a96d60e21b1cf98f9fa08edaff4f77d7af50
     # Replace the uses of borrow_mut with safe_borrow_mut in ValidityState, URLSearchParams, TextTrackCueList.  methods without a &mut JSContext argument are left alone.
@@ -4913,7 +4913,7 @@
     # 
     # Testing: ./mach fmt, ./mach test-tidy, and ./mach check were clean
     # Fixes: Part of #48851 
-+https://github.com/servo/servo/pull/48859	(@jayant911, #48859)	script: Replace uses of borrow_mut with safe_borrow_mut in EventTarget (#48859)
+-https://github.com/servo/servo/pull/48859	(@jayant911, #48859)	script: Replace uses of borrow_mut with safe_borrow_mut in EventTarget (#48859)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit e1d972943c62c2ac347a2203ec8a19717bfd6dc1
     # Replacing uses of borrow_mut with safe_borrow_mut in EventTarget .
@@ -4927,7 +4927,7 @@
     # 
     # Testing: More tests pass in `tex-unpack-params` and in each of six `conformance2/textures/image/tex-2d-*` tests.
     # `tex-unpack-params-with-flip-y-and-premultiply-alpha` no longer crashes, it now throws because the PBO overload of `texSubImage2D` is missing.
-+https://github.com/servo/servo/pull/47568	(@xbwwj, #47568)	Allow embedders to report online/offline changes (#47568)
+.https://github.com/servo/servo/pull/47568	(@xbwwj, #47568)	Allow embedders to report online/offline changes (#47568)
     embedding
     ^ commit 00e7faa71a559c302fc6208746a4a9f8b312bd89
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
@@ -4958,7 +4958,7 @@
     # Closes: #37133.
     # Testing: This gets a few WPT tests and subtests passing.
     # 
-+https://github.com/servo/servo/pull/48946	(@BlessedOneKobo, #48946)	script: switch to safe_borrow_mut in HTMLFormElement (#48946)
+-https://github.com/servo/servo/pull/48946	(@BlessedOneKobo, #48946)	script: switch to safe_borrow_mut in HTMLFormElement (#48946)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 05771fea2d927bbd24ac107f5bcda14b766ef91c
     # Ensure that borrow hazards cannot be accidentally introduced in `HTMLFormElement` by switching from `borrow_mut` to `safe_borrow_mut`
@@ -4995,7 +4995,7 @@
     # 
     # Testing: Existing tests are enough to verify no behaviour change.
     # Fixes: Part of #48851
-+https://github.com/servo/servo/pull/48903	(@Narfinger, #48903)	script: Change to TracedDOMString in serviceworker, shadowroot, trustedtypes, webgl, webrtc, webvtt, window, workers, xpath (#48903)
+.https://github.com/servo/servo/pull/48903	(@Narfinger, #48903)	script: Change to TracedDOMString in serviceworker, shadowroot, trustedtypes, webgl, webrtc, webvtt, window, workers, xpath (#48903)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit 1984c92d457e10646552d363a783780f3e3aa080
     # Change to TracedDOMString in the above subfolders of script.
@@ -5022,7 +5022,7 @@
     # > If the property’s axis is not parallel with either left↔right axis, this value behaves as [start](https://drafts.csswg.org/css-align/#valdef-self-position-start). Currently, the only case where the property’s axis is not parallel with either left↔right axis is in a column flexbox.
     # 
     # Testing: Existing tests.
-+https://github.com/servo/servo/pull/48950	(@BlessedOneKobo, #48950)	script: switch to safe_borrow_mut in form input types (#48950)
+-https://github.com/servo/servo/pull/48950	(@BlessedOneKobo, #48950)	script: switch to safe_borrow_mut in form input types (#48950)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 911b417b59c4242d9855d29cf17f29c233137eee
     # Migrate uses of `borrow_mut` to `safe_borrow_mut` in file input types:
@@ -5036,14 +5036,14 @@
     # Testing: Existing tests suffice.
     # Fixes: part of #48849 
     # 
-+https://github.com/servo/servo/pull/48949	(@yezhizhen, #48949)	net: Hold ref instead of owned String in `SriEntry` (#48949)
+.https://github.com/servo/servo/pull/48949	(@yezhizhen, #48949)	net: Hold ref instead of owned String in `SriEntry` (#48949)
     perf; allocations
     ^ commit 18165255dc23f8b5089d876b31df1e965bc8b10f
     # This can just be an slice, like the other field.
     # 
     # Testing: Tested build.
     # 
-+https://github.com/servo/servo/pull/48952	(@mrobinson, #48952)	script: Fix a memory leak with module scripts (#48952)
+.https://github.com/servo/servo/pull/48952	(@mrobinson, #48952)	script: Fix a memory leak with module scripts (#48952)
     perf; leak
     ^ commit fb11f484542fd9e2af6357187827f94e8d93c727
     # Module scripts were storing a rooted copy of their `GlobalScope` via
@@ -5101,7 +5101,7 @@
     # Fixes: #23038
     # Part of https://github.com/servo/servo/issues/11709
     # 
-+https://github.com/servo/servo/pull/48953	(@Narfinger, #48953)	script: Make PerformanceResourceTiming InitiatorType::LocalName an actual LocalName (#48953)
+.https://github.com/servo/servo/pull/48953	(@Narfinger, #48953)	script: Make PerformanceResourceTiming InitiatorType::LocalName an actual LocalName (#48953)
     perf; allocations
     ^ commit 9abaf6066dd24770fb2cacd2b259b7a26127f1b9
     # This replaces InitiatorType::LocalName in PerformanceResourceTiming.
@@ -5109,7 +5109,7 @@
     # 
     # Testing: This does not change behavior just allocations.
     # 
-+https://github.com/servo/servo/pull/48960	(@BlessedOneKobo, #48960)	script: switch to safe_borrow_mut in form controls (#48960)
+-https://github.com/servo/servo/pull/48960	(@BlessedOneKobo, #48960)	script: switch to safe_borrow_mut in form controls (#48960)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit b69c86e906099bfea1d1bc5d33fcd1d90a92e6af
     # Migrate uses of `borrow_mut` to `safe_borrow_mut` in form controls:
@@ -5143,7 +5143,7 @@
     # Testing: This fixes some tests related to grid and transform computed style.
     # 
     # 
-+https://github.com/servo/servo/pull/48968	(@mrobinson, #48968)	script: Only try to stop animations for nodes that have ever animated (#48968)
+.https://github.com/servo/servo/pull/48968	(@mrobinson, #48968)	script: Only try to stop animations for nodes that have ever animated (#48968)
     perf; speedup
     ^ commit dd0c3216c3b5b36aa2304617af69bcdbf822e565
     # For every node removal we were checking to see if it was in the list of
@@ -5156,7 +5156,7 @@
     # Testing: This should eliminate about 2.4% of the time in an `innerHTML`
     # microbenchmark in Speedometer 3.1.
     # 
-+https://github.com/servo/servo/pull/48966	(@BlessedOneKobo, #48966)	script: switch to safe_borrow_mut in indexeddb (#48966)
+-https://github.com/servo/servo/pull/48966	(@BlessedOneKobo, #48966)	script: switch to safe_borrow_mut in indexeddb (#48966)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 4d8f745ac46feb851312771cc5ed6b44866e7f9e
     # Migrate uses of `borrow_mut` to `safe_borrow_mut` in indexeddb:
@@ -5170,7 +5170,7 @@
     # Testing: Existing tests suffice.
     # Fixes: part of #48849 
     # 
-+https://github.com/servo/servo/pull/48965	(@Narfinger, #48965)	script: Move to traceddomstring in webgpu (#48965)
+.https://github.com/servo/servo/pull/48965	(@Narfinger, #48965)	script: Move to traceddomstring in webgpu (#48965)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit 6345c9a16941e76955a2154116f810cad4f0832e
     # This moves from DOMString to TracedDOMString in script_webgpu. Additionally, we push down the implementation of to_jsval to TracedDOMString and implement it for DOMString.
@@ -5178,7 +5178,7 @@
     # 
     # Testing: This is just a refactor, no functionality changed.
     # 
-+https://github.com/servo/servo/pull/48957	(@mrobinson, #48957)	script: Handle dropping `TrustedPromise` (#48957)
+.https://github.com/servo/servo/pull/48957	(@mrobinson, #48957)	script: Handle dropping `TrustedPromise` (#48957)
     perf; leak
     ^ commit 4ba7263c55803faf7a341dd7aeda81f82d23f6a8
     # When debugging memory leaks that appeared in automated testing with
@@ -5214,7 +5214,7 @@
     # This change allows drawing and clearing a framebuffer with no color attachment, such as a depth-only framebuffer. Previously, these operations failed with `INVALID_OPERATION`. The WebGL specification requires this error only when reading from a missing attachment ([spec](https://registry.khronos.org/webgl/specs/latest/1.0/#READING_FROM_MISSING_ATTACHMENT)), so the check now applies only to `readPixels` and `copyTex[Sub]Image2D`. As a side effect, depth-only and stencil-only framebuffers are now lazily initialized.
     # 
     # Testing: More subtests of the multisampled depth and stencil renderbuffer initialization tests now pass. Added a new WPT test that covers drawing, clearing, and reading.
-+https://github.com/servo/servo/pull/48969	(@mxmgorin, #48969)	layout: Reuse one glyph buffer across text fragments (#48969)
+.https://github.com/servo/servo/pull/48969	(@mxmgorin, #48969)	layout: Reuse one glyph buffer across text fragments (#48969)
     perf; less work
     ^ commit 22e048831ff503d3456eddd8f7944f17f3d9a9c3
     # This makes display list construction reuse a single buffer across text fragments. Previously, `glyphs()` allocated a new `Vec<GlyphInstance>` for every text fragment, only to copy it into the WebRender display list.
@@ -5241,7 +5241,7 @@
     # This small change removes an `InputEventType` that is not used, and doesn't map to anything in the specification. Looking at the blame, it looks like it was used in `ClipboardEventReaction`, which has since been removed.
     # 
     # Testing: It compiles.
-+https://github.com/servo/servo/pull/48975	(@BlessedOneKobo, #48975)	script: switch to safe_borrow_mut in RTCPeerConnection (#48975)
+-https://github.com/servo/servo/pull/48975	(@BlessedOneKobo, #48975)	script: switch to safe_borrow_mut in RTCPeerConnection (#48975)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 72a2804c4aadb6239b1105e36b7620999aad5e99
     # Migrate uses of `borrow_mut` to `safe_borrow_mut` in `RTCPeerConnection`
@@ -5273,7 +5273,7 @@
     # Fixes: #40819.
     # Fixes: #44408.
     # 
-+https://github.com/servo/servo/pull/48954	(@Narfinger, #48954)	script: Reduce size of `HtmlInputElement` by boxing `WebDriverResponse` (#48954)
+.https://github.com/servo/servo/pull/48954	(@Narfinger, #48954)	script: Reduce size of `HtmlInputElement` by boxing `WebDriverResponse` (#48954)
     perf; allocations
     ^ commit ebe5d1b784beaac5567c84f1e89cc6da61217447
     # This reduces HTMLInputElement size by 16 bytes by boxing the PendiingWebDriverResponse. This is probably not making any real performance changes but it is an easy thing to do.
@@ -5296,7 +5296,7 @@
     # Similar to b582e637febf3c9fdb4f87e8440dda34c3cd93ae but for Android as well. To check on only the `checked-release` profile was mimicked from https://github.com/servo/servo/commit/b582e637febf3c9fdb4f87e8440dda34c3cd93ae.
     # 
     # Testing: [CI failed](https://github.com/veyndan/servo/actions/runs/38954916932) when only the Rust flag is enabled. [CI passed](https://github.com/veyndan/servo/actions/runs/38965485836) when the Rust flag is enabled and the warnings are fixed.
-+https://github.com/servo/servo/pull/48980	(@yezhizhen, #48980)	net: Remove redundant clone in `HstsList::push` (#48980)
+.https://github.com/servo/servo/pull/48980	(@yezhizhen, #48980)	net: Remove redundant clone in `HstsList::push` (#48980)
     perf; allocations
     ^ commit 932020604aa2e48fdbabb8b42e6686174cf7d723
     # I suspect this could have been removed in the refactor 9 years ago but missed. Probably before the refactor, it avoids "borrow after move" issue.
@@ -5320,7 +5320,7 @@
     # Testing: No behaviour change. `./mach test-tidy` and `./mach test-unit` both pass, and the build has no new warnings.
     # 
     # Fixes: Part of #48851 (`JS_GetProperty`)
-+https://github.com/servo/servo/pull/48984	(@mrobinson, #48984)	script: Do less rooting when getting owner `Document` and downcasting (#48984)
+.https://github.com/servo/servo/pull/48984	(@mrobinson, #48984)	script: Do less rooting when getting owner `Document` and downcasting (#48984)
     perf; less work
     ^ commit 2473af37d77bcb4fa574d713e76bfe30cd959735
     # This change reduces the amount of rooting on some hot paths in `script`.
@@ -5885,14 +5885,14 @@
     # 
     # Testing: existing WPT tests
     # 
-+https://github.com/servo/servo/pull/49014	(@gabrielecabrini, #49014)	script: migrate borrow_mut to safe_borrow_mut in HTMLDialogElement (#49014)
+-https://github.com/servo/servo/pull/49014	(@gabrielecabrini, #49014)	script: migrate borrow_mut to safe_borrow_mut in HTMLDialogElement (#49014)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit a861f45324129ac1e8a746db1fc536a0d6df9a4c
     # Replace `DomRefCell::borrow_mut()` with `safe_borrow_mut(cx.no_gc())` in `HTMLDialogElement::close_the_dialog` and `HTMLDialogElement::SetReturnValue`. The compiler can now check that no GC happens while `return_value` is mutably borrowed.
     # 
     # Testing: No behaviour change, so no new tests are needed
     # Part of: #48849 
-+https://github.com/servo/servo/pull/49013	(@Siddhi-sahu, #49013)	migrate fontface (#49013)
+-https://github.com/servo/servo/pull/49013	(@Siddhi-sahu, #49013)	migrate fontface (#49013)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 23564ef62e2d898dee75d161bf62cb4d5cb89daf
     # migrate use of  borrow_mut to safe_borrow_mut in Load(). 
@@ -5940,13 +5940,13 @@
     # 
     # Testing: This covers https://wpt.live/custom-elements/reactions/customized-builtins/HTMLModElement.html and the tests related to cite and datetime in http://wpt.live/html/dom/idlharness.https.html and http://wpt.live/html/dom/reflection-misc.html.
     # 
-+https://github.com/servo/servo/pull/49028	(@yezhizhen, #49028)	script/devtools: Drop some extra clone  (#49028)
+.https://github.com/servo/servo/pull/49028	(@yezhizhen, #49028)	script/devtools: Drop some extra clone  (#49028)
     perf; allocations
     ^ commit 54d8e3d274535c147fb3ab32e2e02f12880ec624
     # One in `job_queue_microtask_checkpoint` which cloned vector of rooted GlobalScope, the other in devtools.
     # 
     # Testing: Tested build. Rest covered by CI tests.
-+https://github.com/servo/servo/pull/49019	(@gabrielecabrini, #49019)	script: migrate more borrow_mut calls to safe_borrow_mut (#49019)
+-https://github.com/servo/servo/pull/49019	(@gabrielecabrini, #49019)	script: migrate more borrow_mut calls to safe_borrow_mut (#49019)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit a5ee46d3c7d21a340181cf9126edda022e55fcd3
     # Replace `DomRefCell::borrow_mut()` with `safe_borrow_mut(cx.no_gc())` in
@@ -5996,7 +5996,7 @@
     # Testing: tests/wpt/tests/html/semantics/embedded-content/the-img-element/img-src-encoding-parse.html
     # Fixes: #49010 
     # 
-+https://github.com/servo/servo/pull/48885	(@Narfinger, @mrobinson, #48885)	script: For PerformanceEntry, lazily convert url to string (#48885)
+.https://github.com/servo/servo/pull/48885	(@Narfinger, @mrobinson, #48885)	script: For PerformanceEntry, lazily convert url to string (#48885)
     perf; allocations
     ^ commit ba062b6cca9035b744438afeb18ef2becf04f92f
     # Currently whenever we create a PerformanceEntry (from fetching resources), we sometimes take a url and convert it to a DOMString.
@@ -6035,21 +6035,21 @@
     # Stylo: https://github.com/servo/stylo/pull/485
     # 
     # Testing: WPT Passed
-+https://github.com/servo/servo/pull/48905	(@Narfinger, #48905)	script: Change event_loop/ to TracedDOMString (#48905)
+.https://github.com/servo/servo/pull/48905	(@Narfinger, #48905)	script: Change event_loop/ to TracedDOMString (#48905)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit 6114b4042f1bec7a9240960d390daa14f8b78c83
     # Mechanical replacement of DOMString with TracedDOMString for event_loop/.
     # 
     # Testing: Compilation is the test.
     # 
-+https://github.com/servo/servo/pull/49035	(@Narfinger, #49035)	script: Use DOMString::from_static for HTMLDetailsElement DefaultSummary (#49035)
+.https://github.com/servo/servo/pull/49035	(@Narfinger, #49035)	script: Use DOMString::from_static for HTMLDetailsElement DefaultSummary (#49035)
     perf; allocations
     ^ commit d48b1476ecf92c6ea83e40f75bc9aad4606a8fbf
     # This replaces the const DEFAULT_SUMMARY with a static, allowing us to use the more efficient DOMString::from_static which does almost no allocation. This should save us roughly 800 bytes of allocation from a random developer.mozilla.org website.
     # 
     # Testing: Compilation is the test.
     # 
-+https://github.com/servo/servo/pull/49038	(@Taym95, #49038)	storage: Avoid redundant copies and skip setting identical values (#49038)
+.https://github.com/servo/servo/pull/49038	(@Taym95, #49038)	storage: Avoid redundant copies and skip setting identical values (#49038)
     perf; allocations
     ^ commit 0d03c7bb9e558dd5f0c769208e7f778b85d3021b
     # Testing: no behavior change existing WPT test pass.
@@ -6105,7 +6105,7 @@
     # Testing: No behavior change. `./mach check` and `./mach test-tidy` both passed.
     # 
     # Fixes: Part of #48851 (`GetPropertyKeys`)
-+https://github.com/servo/servo/pull/48834	(@Narfinger, #48834)	script: Switch from DOMString to TracedDOMString for credentialmanagment, datatransfer,debugger,event (#48834)
+.https://github.com/servo/servo/pull/48834	(@Narfinger, #48834)	script: Switch from DOMString to TracedDOMString for credentialmanagment, datatransfer,debugger,event (#48834)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit e90c08a3c9fc97857386f6bb16466621d2f00bdd
     # This switches the DOMString to TracedDOMString in the above listed subfolders if the DOMString appears in a `#[dom_struct]`.
@@ -6119,7 +6119,7 @@
     # Part of #48603
     # 
     # Testing: new WPT test passes
-+https://github.com/servo/servo/pull/48809	(@TimvdLippe, #48809)	script: Render cues for a `<video>` (#48809)
+.https://github.com/servo/servo/pull/48809	(@TimvdLippe, #48809)	script: Render cues for a `<video>` (#48809)
     layout; video cues
     ^ commit d4f43258ddaffc5a0c0cc905775dcd4835aadb03
     # This is the first PR that can render cues on screen for a `<video>` element. All the preceding PRs were necessary to correctly handle tracks. Now, we use the HTML from a cue to add that to the DOM whenever a cue is active.
@@ -6162,7 +6162,7 @@
     # 
     # Testing: no behavior change
 >>> 2026-10-21T00:00:32Z
-+https://github.com/servo/servo/pull/49032	(@mrobinson, #49032)	script: Ensure that captured fetch state is traced (#49032)
+.https://github.com/servo/servo/pull/49032	(@mrobinson, #49032)	script: Ensure that captured fetch state is traced (#49032)
     perf; leak
     ^ commit 51d111766b2103fe1396047e4ea1393d3703c3cf
     # When launching a fetch via the `fetch()` method, various bits of state
@@ -6259,7 +6259,7 @@
     # Other tests were also clean
     # 
     # Fixes: #49041 
-+https://github.com/servo/servo/pull/48855	(@Gae24, #48855)	script: Ensure that `PendingScript`, `HTMLScriptElement` and `ModuleTree` don't store rooted values (#48855)
+.https://github.com/servo/servo/pull/48855	(@Gae24, #48855)	script: Ensure that `PendingScript`, `HTMLScriptElement` and `ModuleTree` don't store rooted values (#48855)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit ccd3c1fc482e7bd40ee3fac53a31715aef66a12d
     # Ensure that classic and module scripts don't contain any rooted values since they can be part of types that lives on the heap; instead wrap them in a `RootedTraceableBox` when on the stack.
@@ -6267,7 +6267,7 @@
     # Testing: Covered by existing tests
     # Fixes: #38458
     # 
-+https://github.com/servo/servo/pull/48991	(@mxmgorin, #48991)	layout: Reuse the unbreakable segment's line item buffer (#48991)
+.https://github.com/servo/servo/pull/48991	(@mxmgorin, #48991)	layout: Reuse the unbreakable segment's line item buffer (#48991)
     perf; less work
     ^ commit 16d7503d60410b35055364295e1b45b90c4408b3
     # This makes inline layout reuse the unbreakable segment's line-item buffer instead of allocating a new every time a segment is committed to the line (as it has since #48398).  This removes about one allocation per segment commit.
@@ -6275,7 +6275,7 @@
     # On Blink's `layout/chapter-reflow.html` benchmark, the change in layout time on desktop is within run-to-run noise. On a Cortex-A55 handheld (RK3566), the benchmark score improves by 1.9% (median), with every pair between 0.4% and 4.1%.
     # 
     # Testing: No behavior changes; existing WPT tests cover this.
-+https://github.com/servo/servo/pull/49083	(@Narfinger, #49083)	script: Move html/ to TracedDOMString (#49083)
+.https://github.com/servo/servo/pull/49083	(@Narfinger, #49083)	script: Move html/ to TracedDOMString (#49083)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit e240216c9438f83a543dc1fda864c753e9df9dce
     # This moves the html subfolder (except customstateset) to TracedDOMString.
@@ -6289,7 +6289,7 @@
     # 
     # Testing: This just changes reporting of memory which does not have automatic tests.
     # 
-+https://github.com/servo/servo/pull/49084	(@yezhizhen, #49084)	paint: Avoid cloning full image when reading framebuffer to image (#49084)
+.https://github.com/servo/servo/pull/49084	(@yezhizhen, #49084)	paint: Avoid cloning full image when reading framebuffer to image (#49084)
     perf; allocations
     ^ commit 5d93f1a6f5d087efd9de0cb6d9fba97b7e6fa64f
     # The whole image was cloned twice: one full image clone, and then every row is cloned once.
@@ -6309,7 +6309,7 @@
     # 
     # Testing: This should not change observable behavior so is covered by existing tests.
     # 
-+https://github.com/servo/servo/pull/49073	(@Loirooriol, #49073)	layout: Optimize flex column layout by caching default content block size (#49073)
+.https://github.com/servo/servo/pull/49073	(@Loirooriol, #49073)	layout: Optimize flex column layout by caching default content block size (#49073)
     perf; speedup
     ^ commit f07470d3911ec462fb4d14fc55c11a0c30cbe80c
     # We already cache layout results, but only for the last size that we used to lay out. However, in a flex column layout, we were typically laying out the items multiple times: first with a `SizeConstraint::default()` block size, and later with the final block size. This meant that we lost the cache for `SizeConstraint::default()`, so if something changed and we needed a new layout, we weren't able to use the cache at all. This patch allows caching the default content block size separately. Therefore, we will be able to reuse that value even after laying out into the final size.
@@ -6348,7 +6348,7 @@
     # 
     # Fixes: #49060
     # 
-+https://github.com/servo/servo/pull/49049	(@mrobinson, @SimonSapin, #49049)	script: Clear `FetchThread` callbacks when tearing down `Document` (#49049)
+.https://github.com/servo/servo/pull/49049	(@mrobinson, @SimonSapin, #49049)	script: Clear `FetchThread` callbacks when tearing down `Document` (#49049)
     perf; leak
     ^ commit db49f29188c0eb4ebf7336dc341a21b1522dd37d
     # When a `Document` is being destroyed, ensure that any outstanding
@@ -6360,7 +6360,7 @@
     # 
     # Testing: This change fixes a Servo-style WPT leak test.
     # 
-+https://github.com/servo/servo/pull/49082	(@Narfinger, #49082)	script: Move document, node, reporting, security, testing to TracedDOMString (#49082)
+.https://github.com/servo/servo/pull/49082	(@Narfinger, #49082)	script: Move document, node, reporting, security, testing to TracedDOMString (#49082)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit 430a9e1b66373d0fc5a1f0ca075a659a1d1a60a7
     # Move the above mentioned DOMStrings to TracedDOMString.
@@ -6368,7 +6368,7 @@
     # Testing: Compilation is the test.
     # Fixes: Part of https://github.com/servo/servo/issues/48674
     # 
-+https://github.com/servo/servo/pull/49081	(@Narfinger, #49081)	script: Move to TracedDOMString for attributes, css, document, mutationobserver (#49081)
+.https://github.com/servo/servo/pull/49081	(@Narfinger, #49081)	script: Move to TracedDOMString for attributes, css, document, mutationobserver (#49081)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit 8fd4f4d575a804c9371560c6123f53e97f38bc08
     # This moves the uncomplicated parts of the above folders to use TracedDOMString in the dom_structs.
@@ -6405,7 +6405,7 @@
     # Testing: covered by `tests/wpt/tests/html/webappapis/dynamic-markup-insertion/opening-the-input-stream`
     # 
     # Fixes: #47916
-+https://github.com/servo/servo/pull/48747	(@jschwe, #48747)	script: Drop tasks for closed pipelines (#48747)
+.https://github.com/servo/servo/pull/48747	(@jschwe, #48747)	script: Drop tasks for closed pipelines (#48747)
     perf; leak related to closed documents
     ^ commit 98817dbcff5c6eae94dc575134e533e3e5297e6c
     # Dropping tasks of exited pipelines avoids memory leaks, in cases where the task keeps something alive.
@@ -6462,7 +6462,7 @@
     # 
     # Testing: Adding a new test
     # Part of #49107
-+https://github.com/servo/servo/pull/49096	(@Gae24, #49096)	script_bindings: Avoid additional rooting for objects sequence when it's a dictionary member (#49096)
+.https://github.com/servo/servo/pull/49096	(@Gae24, #49096)	script_bindings: Avoid additional rooting for objects sequence when it's a dictionary member (#49096)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit 9bda58e781831fa70ffba1c4069aff40f8bc14ad
     # Currently inside dictionaries a sequence of objects has type `Vec<RootedTraceableBox<Heap<*mut JSObject>>>`, we can avoid the additional rooting and make it a `Vec<Box<Heap<*mut JSObject>>>` by propagating `isMember` value inside `getJSToNativeConversionInfo`.
@@ -6759,7 +6759,7 @@
     # </details>
     # <br />
     # 
-+https://github.com/servo/servo/pull/49092	(@mrobinson, @SimonSapin, #49092)	script: Terminate `DedicatedWorker` fetch groups when tearing down (#49092)
+.https://github.com/servo/servo/pull/49092	(@mrobinson, @SimonSapin, #49092)	script: Terminate `DedicatedWorker` fetch groups when tearing down (#49092)
     perf; leak
     ^ commit 7536f434969ff66f9d342197fbb55a6e1fe75177
     # This fixes lingering memory leaks in ongoing fetches when a worker
@@ -6826,7 +6826,7 @@
     # Testing: We test ohos build and running in CI. 
     # 
     # 
-+https://github.com/servo/servo/pull/49100	(@SimonSapin, #49100)	Skip Stylo element snapshot for disconnected elements (#49100)
+.https://github.com/servo/servo/pull/49100	(@SimonSapin, #49100)	Skip Stylo element snapshot for disconnected elements (#49100)
     perf; less work
     ^ commit 5a9ef14f076fb6bd474209923c4d234edd8b280d
     # `ServoElementSnapshot` keeps track of information Stylo needs for incremental restyling. It is normally updated whenever an attribute is changed, added, etc. For elements not connected to a document however, this snapshot is not used since style is not computed. When/if the element is connected later, it will get a full restyle at that point.
@@ -6869,7 +6869,7 @@
     # 
     # Fixes: #48933
     # 
-+https://github.com/servo/servo/pull/49134	(@mrobinson, #49134)	script: Remove a leak in `FileReaderResult` (#49134)
+.https://github.com/servo/servo/pull/49134	(@mrobinson, #49134)	script: Remove a leak in `FileReaderResult` (#49134)
     perf; leak
     ^ commit 280756410861b4047f2cc488b8761ee8638f7527
     # Instead of storing a `RootedTraceableBox` in `FileReaderResult` (a
@@ -6878,7 +6878,7 @@
     # Testing: This change adds a Servo leak test.
     # Closes: #38453
     # 
-+https://github.com/servo/servo/pull/49131	(@Taym95, #49131)	Avoid cloning Fetch body bytes for conversions that only need a slice (#49131)
+.https://github.com/servo/servo/pull/49131	(@Taym95, #49131)	Avoid cloning Fetch body bytes for conversions that only need a slice (#49131)
     perf; allocations
     ^ commit 4582ff9fc8ad851e84b082bf4aee89184cdcb776
     # small improvement win
@@ -6891,7 +6891,7 @@
     # 
     # Testing: No behavioral change. Existing WPT test pass.
     # 
-+https://github.com/servo/servo/pull/49137	(@nicoburns, #49137)	style: Implement `may_have_animations` optimization (#49137)
+.https://github.com/servo/servo/pull/49137	(@nicoburns, #49137)	style: Implement `may_have_animations` optimization (#49137)
     perf; less work
     ^ commit 92cfba19fcc030028587d18d0862eca8af5560c0
     # Adds an optimization to style-driven animations (CSS animations and transitions), that avoids taking an expensive contended RwLock (`DocumentAnimationSet::sets`) where it is known that an element cannot have style-driven animations. This is a conservative fast-path which falls back to the full check when the `may_have_animations` flag is true. But this still saves a lot of time in practice as most elements are never animated.
@@ -6924,7 +6924,7 @@
     # 
     # Testing: WPT animation/transition tests
     # 
-+https://github.com/servo/servo/pull/49098	(@SimonSapin, #49098)	Don’t update shadow DOM of disconnected <input> (#49098)
+.https://github.com/servo/servo/pull/49098	(@SimonSapin, #49098)	Don’t update shadow DOM of disconnected <input> (#49098)
     perf; less work
     ^ commit 170743882c605342b89030af564dbd4e143e87ff
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -6964,7 +6964,7 @@
     # Testing: Adding a new test, and an existing subtest passes
     # Part of #49107
     # 
-+https://github.com/servo/servo/pull/49148	(@nicoburns, #49148)	layout: Fix quadratic blowup in flexbox wrapping code (#49148)
+.https://github.com/servo/servo/pull/49148	(@nicoburns, #49148)	layout: Fix quadratic blowup in flexbox wrapping code (#49148)
     perf; less work
     ^ commit 45239034aa3ab13be922de93a5349ea20c996163
     # Fix quadratic blowup in Flexbox wrapping code. The issue was in the use of `Vec::split_off` which allocates a new vector *for the tail* every time it's used. The new code still allocates a `Vec` for each line, but avoids reallocating a `Vec` for every remaining item (which can often be a much larger number than the number of items in the line.
@@ -6982,7 +6982,7 @@
     # 
     # Testing: WPT tests
     # 
-+https://github.com/servo/servo/pull/49125	(@yezhizhen, #49125)	net: Take borrow when matching Request method for CorsCache (#49125)
+.https://github.com/servo/servo/pull/49125	(@yezhizhen, #49125)	net: Take borrow when matching Request method for CorsCache (#49125)
     perf; allocations
     ^ commit 908d125f87cdaf609adf4c0de2a73adcf2d672fd
     # All of these can just take a borrow in param, and only clone in one case.
@@ -7000,7 +7000,7 @@
     # 
     # Testing: This should not change behavior so existing WPT tests should suffice.
     # 
-+https://github.com/servo/servo/pull/49140	(@mrobinson, #49140)	script: Do less rooting of `Document` (#49140)
+.https://github.com/servo/servo/pull/49140	(@mrobinson, #49140)	script: Do less rooting of `Document` (#49140)
     perf; less work
     ^ commit 0a8b1347122072dbda602266da7ecb8b673342cf
     # This greatly reduces the amount of rooting that happens in hot paths at
@@ -7034,7 +7034,7 @@
     # 
     # Testing: This should not change behavior, so existing tests should suffice.
     # 
-+https://github.com/servo/servo/pull/49139	(@mrobinson, #49139)	script: Remove a rooting cycle in fetch body transmission (#49139)
+.https://github.com/servo/servo/pull/49139	(@mrobinson, #49139)	script: Remove a rooting cycle in fetch body transmission (#49139)
     perf; leak
     ^ commit 964f0ebbe4cece0c11b6f4878bfa93b2a7eeccd3
     # When sending bodies of fetch requests, the code was unecessarily storing
@@ -7049,14 +7049,14 @@
     # 
     # Testing: This change adds a new leak test (with some expected failures).
     # 
-+https://github.com/servo/servo/pull/48951	(@Narfinger, #48951)	script: Use DOMString in CharacterData::SetData instead of using the reference (#48951)
+.https://github.com/servo/servo/pull/48951	(@Narfinger, #48951)	script: Use DOMString in CharacterData::SetData instead of using the reference (#48951)
     perf; allocations
     ^ commit eef32883d784fd2a1d41df62867142ca45b50d5e
     # This, by slightly reordering the code, uses the domstring instead of copying it by reference into a string.
     # 
     # Testing: This should be an equivalent code change but WPT will find if there are any changes. (https://github.com/Narfinger/servo/actions/runs/39219052293)
     # 
-+https://github.com/servo/servo/pull/49135	(@Narfinger, #49135)	script: Store `TracedDOMString` in `FileReaderResult` (#49135)
+.https://github.com/servo/servo/pull/49135	(@Narfinger, #49135)	script: Store `TracedDOMString` in `FileReaderResult` (#49135)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit f4032175240c50a8bf2060d4471382b128299876
     # With the changes here https://github.com/servo/servo/pull/49134/ FileReaderResult should now have a TracedDOMString.
@@ -7066,7 +7066,7 @@
     # 
     # Testing: Compilation is the test.
     # 
-+https://github.com/servo/servo/pull/49130	(@Narfinger, #49130)	script: Finish TracedDOMString move with indexeddb, performance and miscellaneous (#49130)
+.https://github.com/servo/servo/pull/49130	(@Narfinger, #49130)	script: Finish TracedDOMString move with indexeddb, performance and miscellaneous (#49130)
     stability; part of https://github.com/servo/servo/issues/39139
     ^ commit 2190554aaa6990416dd92851fcd8240ac63ee750
     # This replaces DOMString with TracedDOMString in indexed, performance and miscellaneous files.
@@ -7081,14 +7081,14 @@
     # 
     # Testing: Compilation is the test.
     # 
-+https://github.com/servo/servo/pull/49154	(@Loirooriol, #49154)	layout: Avoid collecting an unnecessary vector in multiline flexbox (#49154)
+.https://github.com/servo/servo/pull/49154	(@Loirooriol, #49154)	layout: Avoid collecting an unnecessary vector in multiline flexbox (#49154)
     perf; allocations
     ^ commit 0e00168dcdb1365f081691c9c24d2a7c700d9961
     # `do_initial_flex_line_layout()` can just take the original vector. Then if the flex container is single line, map and collect like previously. But if it's multiline, then we can just iterate, avoiding that one collection of the entire vector of items.
     # 
     # Testing: not needed, no behavior change
     # 
-+https://github.com/servo/servo/pull/49160	(@yezhizhen, #49160)	net: Remove redundant clone when loading data: url scheme (#49160)
+.https://github.com/servo/servo/pull/49160	(@yezhizhen, #49160)	net: Remove redundant clone when loading data: url scheme (#49160)
     perf; allocations
     ^ commit 7cef98a5a6afc3f23752f964ce5a9a00bc82826f
     # The clone was to workaround borrow after moving url into response. 
@@ -7347,7 +7347,7 @@
     # Testing: Added a test_cors_preflight in devtools_tests. It test that the devtool shows the option preflight call in case of cors necessity. It is made of three parts: helpers in utils, the test itself and a html file that conditionally calls a cors protected url if a right parameter is passed as query string.
     # Fixes: #39160 
     # 
-+https://github.com/servo/servo/pull/49164	(@mrobinson, #49164)	layout: Use `IndependentFormattingContext::content_block_size_under_default_constraint` in grid (#49164)
+.https://github.com/servo/servo/pull/49164	(@mrobinson, #49164)	layout: Use `IndependentFormattingContext::content_block_size_under_default_constraint` in grid (#49164)
     perf; nested grid speedup
     ^ commit ecb5ebf0e94dfd763b9533d56634f48204970631
     # This lets grid use the cached content block size under default
@@ -7384,7 +7384,7 @@
     # Part of #2165 and #49078, a little :-)
     # 
     # 
-+https://github.com/servo/servo/pull/49195	(@mrobinson, #49195)	script: Do not root nodes in the `static_node_list` during insertion (#49195)
+.https://github.com/servo/servo/pull/49195	(@mrobinson, #49195)	script: Do not root nodes in the `static_node_list` during insertion (#49195)
     perf; speedup
     ^ commit 8e93faff82af044699f8c96a0a0840f336790e51
     # This avoids rooting every singe node in the list in exchange for holding
@@ -7410,7 +7410,7 @@
     # Testing: Adding a new test
     # Part of #49107
     # 
-+https://github.com/servo/servo/pull/49198	(@yezhizhen, #49198)	net: Reduce alloc when parsing header MIME  (#49198)
+.https://github.com/servo/servo/pull/49198	(@yezhizhen, #49198)	net: Reduce alloc when parsing header MIME  (#49198)
     perf; allocations
     ^ commit e1c78a0e48e9c4ca98354b609a00fbfa89c1c819
     # ~We could have just moved the constructed temp variables instead of alloc again.~
@@ -7418,7 +7418,7 @@
     # We refactored the logic here to reduce clone and make things clearer.
     # 
     # Testing: It builds.
-+https://github.com/servo/servo/pull/49132	(@mrobinson, #49132)	script: Clear the `GlobalScope` module map when tearing down (#49132)
+.https://github.com/servo/servo/pull/49132	(@mrobinson, #49132)	script: Clear the `GlobalScope` module map when tearing down (#49132)
     perf; leak
     ^ commit 43618a6e7678fe07a7f55890c9fd55fbe4c6cd8b
     # This fixes a leak that happens when tearing down a `Document` that still
@@ -7428,7 +7428,7 @@
     # 
     # Testing: This fixes two Servo leak subtests.
     # 
-+https://github.com/servo/servo/pull/49202	(@Narfinger, #49202)	script: Use `SmallVec` for temporary allocation in `serialize_html_fragment` (#49202)
+.https://github.com/servo/servo/pull/49202	(@Narfinger, #49202)	script: Use `SmallVec` for temporary allocation in `serialize_html_fragment` (#49202)
     perf; allocations
     ^ commit 4e089ab846d495fe5e041995e17a14182ddb8f97
     # This uses a smallvec for the temporary allocation we have in serialize_html_element for the case of SerializeShadowRoot.
@@ -7458,7 +7458,7 @@
     # 
     # Fixes: #48970
     # Supersedes and closes #49054
-+https://github.com/servo/servo/pull/49194	(@Taym95, #49194)	CompressionStream: Avoid compression output copy (#49194)
+.https://github.com/servo/servo/pull/49194	(@Taym95, #49194)	CompressionStream: Avoid compression output copy (#49194)
     perf; allocations
     ^ commit 581d527a8c594309e9881ed06934acb1e5108a01
     # same as https://github.com/servo/servo/pull/48754
@@ -7486,7 +7486,7 @@
     # 0.7.5. got yanked
     # 
     # Testing: no behavior change
-+https://github.com/servo/servo/pull/49189	(@mrobinson, #49189)	script: Do not borrow `ResizeObservers` mutably when gathering (#49189)
+.https://github.com/servo/servo/pull/49189	(@mrobinson, #49189)	script: Do not borrow `ResizeObservers` mutably when gathering (#49189)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 040e2840d4caca878d3b344c0981cf27a079935c
     # Previously this code was doing an unnecessary `borrow_mut()` while
@@ -7518,7 +7518,7 @@
     # 
     # Fixes: [#33322](https://github.com/servo/servo/issues/33322) and part of [#41426](https://github.com/servo/servo/issues/41426)
     # 
-+https://github.com/servo/servo/pull/49219	(@yezhizhen, #49219)	net: Reduce allocations when listing local directory (#49219)
+.https://github.com/servo/servo/pull/49219	(@yezhizhen, #49219)	net: Reduce allocations when listing local directory (#49219)
     perf; allocations
     ^ commit 7740b3a2416762015834d5188878cc42d5ed432c
     # Instead of pushing a formatted String which allocates, we can just use `write!`.
@@ -7533,7 +7533,7 @@
     # Testing: WPT tests
     # Fixes: https://github.com/servo/servo/issues/49209
     # 
-+https://github.com/servo/servo/pull/49230	(@mrobinson, #49230)	script: Do not try to scroll discarded browsing contexts (#49230)
+.https://github.com/servo/servo/pull/49230	(@mrobinson, #49230)	script: Do not try to scroll discarded browsing contexts (#49230)
     stability; crash fix
     ^ commit 683a5643514436fd21c60d8e11db4a9afb3364c0
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -7580,7 +7580,7 @@
     # 
     # Testing: No behavioral. Existing tests suffice.
     # Part-of: #49215
-+https://github.com/servo/servo/pull/49250	(@BlessedOneKobo, #49250)	script: switch to safe_borrow_mut in HTMLLinkElement (#49250)
+-https://github.com/servo/servo/pull/49250	(@BlessedOneKobo, #49250)	script: switch to safe_borrow_mut in HTMLLinkElement (#49250)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 8ae70ab1de12a1d7c25fec9d25742e70d07639c4
     # Migrate uses of `borrow_mut` to `safe_borrow_mut` in `HTMLLinkElement`
@@ -7895,7 +7895,7 @@
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/49257	(@BlessedOneKobo, #49257)	script: switch to safe_borrow_mut in HTMLStyleElement (#49257)
+-https://github.com/servo/servo/pull/49257	(@BlessedOneKobo, #49257)	script: switch to safe_borrow_mut in HTMLStyleElement (#49257)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 18f534711cf569073a8c67b5e37ad0e8a5640796
     # Migrate uses of `borrow_mut` to `safe_borrow_mut` in `HTMLStyleElement`
@@ -8195,7 +8195,7 @@
     # Testing: Adding test
     # Fixes: #49235
     # 
-+https://github.com/servo/servo/pull/49258	(@yezhizhen, #49258)	script/net: Avoid intermediate String when appending to String (#49258)
+.https://github.com/servo/servo/pull/49258	(@yezhizhen, #49258)	script/net: Avoid intermediate String when appending to String (#49258)
     perf; allocations
     ^ commit 6b73eb3cdb3f07b9b4acc9fa6e30f28127515e04
     ^ /!\ contains libservo or embedder_traits changes! does it affect our public API?
@@ -8302,21 +8302,21 @@
     # Follow-up to #47042
     # 
     # Testing: https://github.com/TimvdLippe/servo/pull/3#issuecomment-5896847789
-+https://github.com/servo/servo/pull/49271	(@BlessedOneKobo, #49271)	script: switch to safe_borrow_mut in HTMLCanvasElement (#49271)
+-https://github.com/servo/servo/pull/49271	(@BlessedOneKobo, #49271)	script: switch to safe_borrow_mut in HTMLCanvasElement (#49271)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 2d559e24651aeb4f31927d56fe4447603686c721
     # Migrate uses of `borrow_mut` to `safe_borrow_mut` in `HTMLCanvasElement`
     # 
     # Testing: Existing tests suffice.
     # Fixes: part of #48849 
-+https://github.com/servo/servo/pull/49272	(@BlessedOneKobo, #49272)	script: switch to safe_borrow_mut in HTMLImageElement (#49272)
+-https://github.com/servo/servo/pull/49272	(@BlessedOneKobo, #49272)	script: switch to safe_borrow_mut in HTMLImageElement (#49272)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit ef774fc63621bd31f38fa0e5b0af93263954b068
     # Migrate uses of `borrow_mut` to `safe_borrow_mut` in `HTMLImageElement`
     # 
     # Testing: Existing tests suffice.
     # Fixes: part of #48849 
-+https://github.com/servo/servo/pull/49273	(@BlessedOneKobo, #49273)	script: switch to safe_borrow_mut in HTMLVideoElement (#49273)
+-https://github.com/servo/servo/pull/49273	(@BlessedOneKobo, #49273)	script: switch to safe_borrow_mut in HTMLVideoElement (#49273)
     stability; part of https://github.com/servo/servo/issues/40600
     ^ commit 1eaf377e6a8aa9016d68b2811bf9a0358d96068a
     # Migrate uses of `borrow_mut` to `safe_borrow_mut` in `HTMLVideoElement`
@@ -8338,7 +8338,7 @@
     # 
     # Testing: Refactoring only, existing script and lifecycle tests apply.
     # Fixes: #49103 
-+https://github.com/servo/servo/pull/49275	(@yezhizhen, #49275)	net: Avoid cloning PathBuf (#49275)
+.https://github.com/servo/servo/pull/49275	(@yezhizhen, #49275)	net: Avoid cloning PathBuf (#49275)
     perf; allocations
     ^ commit e70d6360303a83890de1f36a655bb8b516fed451
     # These just take [AsRef](https://doc.rust-lang.org/beta/std/convert/trait.AsRef.html)<[Path](https://doc.rust-lang.org/beta/std/path/struct.Path.html)>, so there is no need to clone.
@@ -8429,7 +8429,7 @@
     # Testing: No behaviour change; existing tests suffice.
     # Fixes: #49281 
     # 
-+https://github.com/servo/servo/pull/49295	(@yezhizhen, #49295)	net: Sort `HeaderName`s in place (#49295)
+.https://github.com/servo/servo/pull/49295	(@yezhizhen, #49295)	net: Sort `HeaderName`s in place (#49295)
     perf; allocations
     ^ commit a916dfc23f3b20f5a72698970aaa0fed15ea5580
     # We really shouldn't clone the vector as we already own it.
@@ -8449,7 +8449,7 @@
     # Returning a mutable collection is usually not a good idea. This change also gets rid of a warning in Android Studio stating a similar thing.
     # 
     # Testing: There are no automated tests for Android.
-+https://github.com/servo/servo/pull/49298	(@CynthiaOketch, #49298)	script: Use DOMString::from_static in queue_dialog_toggle_event_task (#49298)
+.https://github.com/servo/servo/pull/49298	(@CynthiaOketch, #49298)	script: Use DOMString::from_static in queue_dialog_toggle_event_task (#49298)
     perf; allocations
     ^ commit 5c90cc8a2cd1066653783b94c132fa17d736ea05
     # All callers of `queue_dialog_toggle_event_task` pass static strings, so the argument types now say so and the toggle event is built with `DOMString::from_static` instead of copying the string data.
@@ -8457,7 +8457,7 @@
     # Testing: No behaviour change; existing tests suffice.
     # Fixes: #49285
     # 
-+https://github.com/servo/servo/pull/49300	(@sabbCodes, #49300)	script: Use DOMString::from_static for MutationRecord::new_inherited (#49300)
+.https://github.com/servo/servo/pull/49300	(@sabbCodes, #49300)	script: Use DOMString::from_static for MutationRecord::new_inherited (#49300)
     perf; allocations
     ^ commit 9fa537cc213845b9ab2d86b9551490a0be49b05c
     # Changed the parameter to `&'static str` and used `DOMString::from_static` to avoid copying and heap-allocating string data when creating mutation records.
@@ -8478,7 +8478,7 @@
     # Testing: Passes additional web platform tests.
     # Fixes: #19746 
     # 
-+https://github.com/servo/servo/pull/49287	(@mrobinson, #49287)	layout: Do not paint collapsed box fragments (#49287)
+.https://github.com/servo/servo/pull/49287	(@mrobinson, #49287)	layout: Do not paint collapsed box fragments (#49287)
     stability; crash fix
     ^ commit 578ca9485f89cbac3f50e78aa422dae454e8de1b
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -8489,7 +8489,7 @@
     # Testing: This change adds a WPT crashtest.
     # Fixes: #49220.
     # 
-+https://github.com/servo/servo/pull/49283	(@mrobinson, #49283)	layout: Properly clear cached widget layouts (#49283)
+.https://github.com/servo/servo/pull/49283	(@mrobinson, #49283)	layout: Properly clear cached widget layouts (#49283)
     stability; crash fix
     ^ commit 5ee5e04d9c694adcbb9e932b5c283fac84d30926
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -8514,7 +8514,7 @@
     # 
     # Testing: This change adds two WPT tests.
     # 
-+https://github.com/servo/servo/pull/49226	(@mrobinson, #49226)	script: Do not run the insertion steps as part of the moving steps (#49226)
+.https://github.com/servo/servo/pull/49226	(@mrobinson, #49226)	script: Do not run the insertion steps as part of the moving steps (#49226)
     stability; crash fix
     ^ commit d9e7d63eada7d9859cc60072de98bc8c5347d1d2
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -8553,7 +8553,7 @@
     # 
     # Testing: This should not change functionality, just performance characteristics as UnrootedDom enforces rooting correctness.
     # 
-+https://github.com/servo/servo/pull/49325	(@fran6co@gmail.com, #49325)	capi: get and set f64 and f64 array preferences (#49325)
+.https://github.com/servo/servo/pull/49325	(@fran6co, #49325)	capi: get and set f64 and f64 array preferences (#49325)
     embedding; c api
     ^ commit 471f5decafec4c2cbf7d3004db4ea10823548d8d
     # Want to set `shell_background_color_rgba` to be able to set the background to transparent to make it possible to composite with video.
@@ -8997,7 +8997,7 @@
     # 
     # Testing: `./mach test-wpt tests/wpt/webgl/tests/conformance/ tests/wpt/webgl/tests/conformance2/` on macOS. compared them against the main baseline from the #49274 run . 9 crashes, all on the WebGL thread. Not the code this pr touches.
     # Part of #49178
-+https://github.com/servo/servo/pull/49320	(@Taym95, #49320)	webaudio: Reduce decode audio allocations (#49320)
+.https://github.com/servo/servo/pull/49320	(@Taym95, #49320)	webaudio: Reduce decode audio allocations (#49320)
     perf; allocations
     ^ commit 6d3c9c30951d019d997e364fee133669ba234679
     # move decoded audio channels into the existing AudioBuffer::new_with_channel_data() constructor instead of allocating buffers and cloning each channel.
@@ -9169,7 +9169,7 @@
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/49323	(@Narfinger, #49323)	script_bindings/script: Allow more efficient DOMString::from for Atom types (#49323)
+.https://github.com/servo/servo/pull/49323	(@Narfinger, #49323)	script_bindings/script: Allow more efficient DOMString::from for Atom types (#49323)
     perf; allocations
     ^ commit f11cd251576ed17de51c0221776b3b57996e7ad0
     # This implements another category for DOMStringType, namely atom (which has 4 different atom types). This allows more efficient conversion from these Atom types to DOMString.
@@ -9341,7 +9341,7 @@
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/49207	(@gabrielecabrini, #49207)	constellation: Reply to WebGPU requests from opaque origins (#49207)
+.https://github.com/servo/servo/pull/49207	(@gabrielecabrini, #49207)	constellation: Reply to WebGPU requests from opaque origins (#49207)
     stability; crash fix
     ^ commit 36d88bca2ae6307e4739b55f3f9f4a8bae2ea16e
     # `handle_wgpu_request` returned early when the source pipeline URL had no
@@ -9373,7 +9373,7 @@
     # Fixes: #49170.
     # 
     # 
-+https://github.com/servo/servo/pull/49313	(@yezhizhen, #49313)	net: Avoid cloning headers twice when filtering response (#49313)
+.https://github.com/servo/servo/pull/49313	(@yezhizhen, #49313)	net: Avoid cloning headers twice when filtering response (#49313)
     perf; allocations
     ^ commit daaf1697b8cc3580c98f18d7b233598fd0601bd0
     # We can drain the headers in response before cloning, and then move it back in the end, since we've already been crafting new headers in every branch later with old ones discarded earlier.
@@ -9443,7 +9443,7 @@
     # Testing: WPT tests
     # Fixes: https://github.com/servo/servo/issues/49142
     # 
-+https://github.com/servo/servo/pull/49327	(@fran6co@gmail.com, #49327)	capi: get and set the WebView HiDPI scale factor (#49327)
+.https://github.com/servo/servo/pull/49327	(@fran6co, #49327)	capi: get and set the WebView HiDPI scale factor (#49327)
     embedding; c api
     ^ commit eb0cfac1aee2d70135b4817c370396e2ce25488c
     # Be able to follow the app HiDPI scale
@@ -9502,7 +9502,7 @@
     # 
     # 
     # </details>
-+https://github.com/servo/servo/pull/49373	(@Taym95, #49373)	webaudio: Avoid copying audio samples when constructing buffer source nodes (#49373)
+.https://github.com/servo/servo/pull/49373	(@Taym95, #49373)	webaudio: Avoid copying audio samples when constructing buffer source nodes (#49373)
     perf; allocations
     ^ commit 6913c812ca9560b4c1cca71a66cc793a8de13d74
     # webaudio: Avoid copying audio samples when constructing buffer source nodes
@@ -9536,7 +9536,7 @@
     # Testing: This change does not modify behavior, so existing tests suffice.
     # Part of #49280 
     # 
-+https://github.com/servo/servo/pull/49374	(@mrobinson, #49374)	script: No longer rely on the incumbent global when getting JSON attributes (#49374)
+.https://github.com/servo/servo/pull/49374	(@mrobinson, #49374)	script: No longer rely on the incumbent global when getting JSON attributes (#49374)
     stability; crash fix
     ^ commit 1c7330c14ace176afecf61b2d262295edded4494
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -10059,7 +10059,7 @@
     # 
     # Testing: This change gets some more WPT tests to not CRASH.
     # 
-+https://github.com/servo/servo/pull/49380	(@yezhizhen, #49380)	net: Reduce clone for image cache load/response notification (#49380)
+.https://github.com/servo/servo/pull/49380	(@yezhizhen, #49380)	net: Reduce clone for image cache load/response notification (#49380)
     perf; allocations
     ^ commit a42c47fe114cf0b904815b71d5215362b4d5f188
     # If we ever used `as_ref` but we want owned data in the end, we would have to clone. This PR avoids that.
@@ -10092,7 +10092,7 @@
     # 
     # Testing: CI is green
     # 
-+https://github.com/servo/servo/pull/49326	(@franciscof@bolt6.ai, #49326)	capi: add servo_webview_resize (#49326)
+.https://github.com/servo/servo/pull/49326	(@fran6co, #49326)	capi: add servo_webview_resize (#49326)
     embedding; c api
     ^ commit b7510ccc138346150ae2e7d9743ea931cbe4d197
     # When embedding servo into another system, it's useful to be able to resize the webview (for example if it's in a window and that window gets resized)
@@ -10112,7 +10112,7 @@
     # 
     # Testing: Manual test with `/visual-viewport/` WPTs.
     # 
-+https://github.com/servo/servo/pull/49311	(@Narfinger, @mrobinson, #49311)	script: Enter realm in `ByteTeeReadIntoRequestMicrotask::handler` and `ByteTeeReadRequestMicrotask::handler` (#49311)
+.https://github.com/servo/servo/pull/49311	(@Narfinger, @mrobinson, #49311)	script: Enter realm in `ByteTeeReadIntoRequestMicrotask::handler` and `ByteTeeReadRequestMicrotask::handler` (#49311)
     stability; crash fix
     ^ commit 3d540af5d195d5af71b5cb4ac1416178aff9a4c4
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -10179,7 +10179,7 @@
     # 
     # Testing: No behaviour changes expected (pref is off)
     # 
-+https://github.com/servo/servo/pull/49379	(@mrobinson, #49379)	script: Remove the `<input type=file>` button activation workaround (#49379)
+.https://github.com/servo/servo/pull/49379	(@mrobinson, #49379)	script: Remove the `<input type=file>` button activation workaround (#49379)
     stability; crash fix
     ^ commit 5daca8588b16781b28fde02bd8212b310c8b65c9
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -10238,7 +10238,7 @@
     # 
     # Testing: There is no testing for formatting of wpt files except tidy.
     # 
-+https://github.com/servo/servo/pull/49264	(@sabbCodes, #49264)	net: Cap natural_size fallback by MAX_SVG_PIXMAP_DIMENSION (#49264)
+.https://github.com/servo/servo/pull/49264	(@sabbCodes, #49264)	net: Cap natural_size fallback by MAX_SVG_PIXMAP_DIMENSION (#49264)
     stability; crash fix
     ^ commit feb0435bf36665fd9dc340b9b0ba9ce7695458a1
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -10266,7 +10266,7 @@
     # Note: seeks and resumed downloads call `fetch_request` again and take a new claim, so if the page revokes the URL after the first load, those refetches will still fail. Happy to handle that in a follow-up if wanted.
     # 
     # Fixes: Part of #48892
-+https://github.com/servo/servo/pull/49431	(@lukewarlow, #49431)	script: Fix failing close watcher assertion in dialog element. (#49431)
+.https://github.com/servo/servo/pull/49431	(@lukewarlow, #49431)	script: Fix failing close watcher assertion in dialog element. (#49431)
     stability; crash fix
     ^ commit ecff0688464c71e8c72d2d527944c54512a08887
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
@@ -10309,7 +10309,7 @@
     # Turn comments into doc comments and change nonstandard use of `unused_doc_comments` with macros.
     # 
     # Part of: #48319 
-+https://github.com/servo/servo/pull/49399	(@mrobinson, #49399)	script: Cancel and do not run tasks for replaced documents (#49399)
+.https://github.com/servo/servo/pull/49399	(@mrobinson, #49399)	script: Cancel and do not run tasks for replaced documents (#49399)
     stability; crash fix
     ^ commit 933673cc30707689aa8e9fb11ae842206c45756e
     ^ /!\ contains changes to WPT expectations! it probably affects the web platform
