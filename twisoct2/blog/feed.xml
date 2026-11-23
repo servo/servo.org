@@ -11,7 +11,7 @@
     <email>info@servo.org</email>
   </author>
   <entry>
-    <title>October in Servo: who even knows?</title>
+    <title>October in Servo: video captions and inert content</title>
     <link href="https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/"/>
     <updated>2026-11-19T00:00:00Z</updated>
     <id>https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/</id>
@@ -24,7 +24,11 @@ code {
 &lt;figure&gt;
     &lt;a href=&quot;https://servo.org/twisoct2/img/blog/.png&quot;&gt;&lt;img src=&quot;https://servo.org/twisoct2/img/blog/.png&quot; alt=&quot;a black and white cat named Gary showing off new visual web platform features&quot; /&gt;&lt;/a&gt;
 &lt;/figure&gt;
-&lt;p&gt;Servo now renders text track cues over &lt;code&gt;&amp;amp;lt;video&amp;gt;&lt;/code&gt; elements (@TimvdLippe, #48809)!&lt;/p&gt;
+&lt;p&gt;Servo now renders text track cues over &lt;code&gt;&amp;amp;lt;video&amp;gt;&lt;/code&gt; elements (@TimvdLippe, #48809)!
+This allows subtitles and captions to work as expected in many cases.&lt;/p&gt;
+&lt;figure&gt;
+    &lt;video src=&quot;https://servo.org/twisoct2/img/blog/2026-11-cat-caption.mp4&quot; autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot;&gt;Servo 0.8 showing a video playing with captions that change over time&lt;/video&gt;
+&lt;/figure&gt;
 &lt;p&gt;We’ve shipped new web platform features:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;the &lt;strong&gt;spelling-error&lt;/strong&gt; and &lt;strong&gt;grammar-error&lt;/strong&gt; values for &lt;strong&gt;text-decoration-line&lt;/strong&gt; (@yezhizhen, #48883)&lt;/li&gt;
@@ -32,7 +36,7 @@ code {
 &lt;li&gt;&lt;code&gt;&amp;amp;lt;input type=image&amp;gt;&lt;/code&gt; (@SilvioPilato, #48265)&lt;/li&gt;
 &lt;li&gt;the &lt;strong&gt;:focus-visible&lt;/strong&gt; pseudoclass (@TimvdLippe, #49255)&lt;/li&gt;
 &lt;li&gt;the &lt;strong&gt;beforeinput&lt;/strong&gt; event (@dzfrias, #48519)&lt;/li&gt;
-&lt;li&gt;the &lt;strong&gt;&amp;amp;wbr&amp;gt;&lt;/strong&gt; element (@mrobinson, #48755)&lt;/li&gt;
+&lt;li&gt;the &lt;strong&gt;&amp;lt;wbr&amp;gt;&lt;/strong&gt; element (@mrobinson, #48755)&lt;/li&gt;
 &lt;li&gt;the &lt;strong&gt;auto&lt;/strong&gt; and &lt;strong&gt;stable&lt;/strong&gt; values for the &lt;strong&gt;text-wrap-style&lt;/strong&gt; property (@nicoburns, #48958)re&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;inert&lt;/strong&gt; trees and the &lt;strong&gt;interactivity&lt;/strong&gt; property (@skyz1, @TimvdLippe, #48967)&lt;/li&gt;
 &lt;/ul&gt;
@@ -51,6 +55,8 @@ code {
 &lt;h2 id=&quot;real-world-compat&quot; tabindex=&quot;-1&quot;&gt;Real world compat &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/#real-world-compat&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Flutter web content works much better now that we fixed a serious performance problem with typed arrays (@jdm, #48640).&lt;/p&gt;
+&lt;!-- TODO figure, https://rydmike.com/flexcolorscheme/themesplayground-latest/ --&gt;
 &lt;p&gt;We’re interested to hear how well your favourite websites run in Servo! Report successes in &lt;a href=&quot;https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341&quot;&gt;this Zulip thread&lt;/a&gt; or &lt;a href=&quot;https://github.com/servo/servo/discussions/49037&quot;&gt;this Github discussion&lt;/a&gt;, and failures &lt;a href=&quot;https://github.com/servo/servo/issues&quot;&gt;in our GitHub issues&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;work-in-progress&quot; tabindex=&quot;-1&quot;&gt;Work in progress &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/#work-in-progress&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
@@ -79,6 +85,20 @@ The feature can be enabled with the &lt;code&gt;dom_indexeddb_enabled&lt;/code&g
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The Android Compose migration is complete, and embedders now only need to interact with the &lt;code&gt;Servo&lt;/code&gt; library component (@veyndan, #48592, #48601, #48595, #48574, #48609, #48778, #48780, #49266).
 Embedders no longer need to trigger the soft keyboard display; this is controlled by a parameter to the &lt;code&gt;Servo&lt;/code&gt; component (@veyndan, #48757).&lt;/p&gt;
+&lt;p&gt;There’s a new API method to report the network status of the embedder: &lt;a href=&quot;https://doc.servo.org/servo/struct.NetworkManager.html&quot;&gt;NetworkManager&lt;/a&gt;::&lt;a href=&quot;https://doc.servo.org/servo/struct.NetworkManager.html#method.set_online_state&quot;&gt;set_online_state&lt;/a&gt; (@xbwwj, #47568).
+This data is exposed via the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine&quot;&gt;&lt;strong&gt;onLine&lt;/strong&gt;&lt;/a&gt; property of the &lt;strong&gt;Navigator&lt;/strong&gt; interface in web content.&lt;/p&gt;
+&lt;p&gt;Embedders can now disable all support for developer tools, which can reduce the size of the final binary (@janeoa, #47255).
+This is controlled by the &lt;code&gt;devtools&lt;/code&gt; feature and enabled by default; it is also part of the new &lt;code&gt;default_tooling&lt;/code&gt; feature.&lt;/p&gt;
+&lt;p&gt;Users of the C API can set preferences that accept f64 and f64 array parameters (@fran6co, #49325), as well as the HiDPI scale factor for each WebView (@fran6co, #49327).
+WebViews can also be resized via the C API (@fran6co, #49326).&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;layout_grid_enabled&lt;/code&gt; preference has been removed, since CSS Grid now defaults to enabled (@Loirooriol, #48718).
+Several preferences were renamed (@nicoburns, #48915):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;layout_columns_enabled&lt;/code&gt; -&amp;gt; &lt;code&gt;layout_css_columns_enabled&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;layout_container_queries_enabled&lt;/code&gt; -&amp;gt; &lt;code&gt;layout_css_container_queries_enabled&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;layout_variable_fonts_enabled&lt;/code&gt; -&amp;gt; &lt;code&gt;layout_css_font_variations_enabled&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;layout_writing_mode_enabled&lt;/code&gt; -&amp;gt; &lt;code&gt;layout_css_writing_mode_enabled&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&quot;for-users-and-developers&quot; tabindex=&quot;-1&quot;&gt;For users and developers &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/#for-users-and-developers&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
@@ -96,6 +116,13 @@ Embedders no longer need to trigger the soft keyboard display; this is controlle
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Pinch zoom operations no longer have to rebuild a full display list, making zooming on complex pages much smoother (@stevennovaryo, @mrobinson, #43561).&lt;/p&gt;
+&lt;p&gt;We improved performance in many small and focused ways by doing less work during restyling and layout (@SimonSapin, @webbeef, @nicoburns, @mrobinson, #49137, #49100, #48485, #48968), reducing GC interactions (@mrobinson, #48984, #49140, #49195), and delaying work on disconnected trees (@SimonSapin, #49098).
+We also fixed instances of quadratic layout with deep nesting (@nicoburns, #49148) and missing caching (@mrobinson, @Loirooriol, #49164, #49073).&lt;/p&gt;
+&lt;p&gt;We fixed some intermittent GC panics when notifying ResizeObservers (@mrobinson, #49189), introspecting keyframes (@MohamedAli00949, #48546), setting timers (@jdm, #48548), using writable streams (@jdm, #48656), scrolling iframes after removing them (@mrobinson, #49230).&lt;/p&gt;
+&lt;p&gt;We also fixed numerous other panics and crashes in scrollable and incremental layout (@mrobinson, #49230, #49283), moving nodes around (@mrobinson, #49226), using WebGPU from opaque origins (@gabrielecabrini, #49207), stringifying some WebIDL types (@mrobinson, #49374), using readable streams (@Narfinger, @mrobinson, #49311), clicking disabled file controls (@mrobinson, #49379), rendering giant SVGs (@sabbCodes, #49264), unminifying JS (@jdm, #48567), measuring text (@mxmgorin, #48621), rendering text tracks (@TimvdLippe, @mrobinson, #48827), preparing dialogs (@lukewarlow, #49431), and running delayed tasks in destroyed documents (@mrobinson, @jdm, #49399, #48714).&lt;/p&gt;
+&lt;p&gt;Many small-to-medium improvements to reduce allocations were merged (@yezhizhen, @Narfinger, @Taym95, @mrobinson, @Loirooriol, @CynthiaOketch, @sabbCodes, @mxmgorin, #48549, #48558, #48568, #48598, #48615, #48565, #48646, #48654, #48569, #48562, #48588, #48650, #48702, #48675, #48589, #48720, #48721, #47720, #48745, #48703, #48750, #48770, #48789, #48754, #48828, #48838, #48836, #48841, #48843, #48867, #48882, #48842, #48881, #48840, #48899, #48924, #48904, #48949, #48953, #48980, #49028, #48885, #49035, #49038, #49084, #49131, #49125, #48951, #49154, #49160, #49198, #49202, #49194, #49219, #49258, #49275, #49295, #49298, #49300, #49320, #49323, #49313, #49373, #49380, #48969, #48991), and we also reduced memory usage by shrinking some types (@Narfinger, @webbeef, #48954, #48082, #48906).&lt;/p&gt;
+&lt;p&gt;Memory leaks received a lot of attention this month, covering everything from network requests, to JS modules, to timer tasks, and more (@mrobinson, @SimonSapin, @jschwe, #48952, #48957, #49032, #49049, #49092, #49134, #49139, #49132, #48747, #48752).&lt;/p&gt;
+&lt;p&gt;We continue to work towards preventing certain sources of memory leaks with static analysis and the Rust type system (@Gae24, @Narfinger, @jdm, #48147, #48360, #48832, #48887, #48913, #48903, #48965, #48905, #48834, #48855, #49083, #49082, #49081, #49096, #49135, #49130).&lt;/p&gt;
 &lt;h2 id=&quot;more-on-the-web-platform&quot; tabindex=&quot;-1&quot;&gt;More on the web platform &lt;a class=&quot;header-anchor&quot; href=&quot;https://servo.org/twisoct2/blog/2026/11/19/october-in-servo/#more-on-the-web-platform&quot;&gt;
         &lt;span class=&quot;icon hashlink&quot;&gt;&lt;i class=&quot;fas fa-link&quot;&gt;&lt;/i&gt;&lt;/span&gt;
       &lt;/a&gt;&lt;/h2&gt;

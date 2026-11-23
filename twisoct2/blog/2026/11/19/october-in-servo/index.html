@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>October in Servo: who even knows? - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
-  <meta property="og:title" content="October in Servo: who even knows? - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
+  <title>October in Servo: video captions and inert content - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.</title>
+  <meta property="og:title" content="October in Servo: video captions and inert content - Servo aims to empower developers with a lightweight, high-performance alternative for embedding web technologies in applications.">
   
 
   
-  <meta name="description" content="??????????">
-  <meta name="og:description" content="??????????">
+  <meta name="description" content="Plus WebAudio nodes, image inputs, and more!">
+  <meta name="og:description" content="Plus WebAudio nodes, image inputs, and more!">
   
   <meta name="keywords" content="servo, servo engine, servo rendering engine, web engine, web rendering engine, web browser, web browser engine, rust">
   <meta name="author" content="The Servo Project Developers">
@@ -35,7 +35,7 @@
     <div class="inner-container">
       <div class="navbar-brand">
         <a href="/twisoct2/">
-          <img src="/twisoct2/svg/servo-color.svg" alt="October in Servo: who even knows?">
+          <img src="/twisoct2/svg/servo-color.svg" alt="October in Servo: video captions and inert content">
         </a>
 
         <button id="hamburgerMenu" class="navbar-burger" data-target="navbar-menu" aria-label="menu" aria-expanded="false" type="button">
@@ -238,13 +238,13 @@
 
 
 </script>
-          <div class="content" id="October in Servo: who even knows?">
+          <div class="content" id="October in Servo: video captions and inert content">
             
 <div class="blog-hero">
   <div class="container">
     <div class="inner-container">
-    <h1 class="title">October in Servo: who even knows?</h1>
-      <p class="subtitle">??????????</p>
+    <h1 class="title">October in Servo: video captions and inert content</h1>
+      <p class="subtitle">Plus WebAudio nodes, image inputs, and more!</p>
       <p class="posted">Posted <span class="tag is-dark">2026-11-19</span></p>
     </div>
   </div>
@@ -260,7 +260,11 @@ code {
 <figure>
     <a href="/twisoct2/img/blog/.png"><img src="/twisoct2/img/blog/.png" alt="a black and white cat named Gary showing off new visual web platform features"></a>
 </figure>
-<p>Servo now renders text track cues over <code>&amp;lt;video&gt;</code> elements (@TimvdLippe, #48809)!</p>
+<p>Servo now renders text track cues over <code>&amp;lt;video&gt;</code> elements (@TimvdLippe, #48809)!
+This allows subtitles and captions to work as expected in many cases.</p>
+<figure>
+    <video src="/twisoct2/img/blog/2026-11-cat-caption.mp4" autoplay muted loop>Servo 0.8 showing a video playing with captions that change over time</video>
+</figure>
 <p>We’ve shipped new web platform features:</p>
 <ul>
 <li>the <strong>spelling-error</strong> and <strong>grammar-error</strong> values for <strong>text-decoration-line</strong> (@yezhizhen, #48883)</li>
@@ -268,7 +272,7 @@ code {
 <li><code>&amp;lt;input type=image&gt;</code> (@SilvioPilato, #48265)</li>
 <li>the <strong>:focus-visible</strong> pseudoclass (@TimvdLippe, #49255)</li>
 <li>the <strong>beforeinput</strong> event (@dzfrias, #48519)</li>
-<li>the <strong>&amp;wbr&gt;</strong> element (@mrobinson, #48755)</li>
+<li>the <strong>&lt;wbr&gt;</strong> element (@mrobinson, #48755)</li>
 <li>the <strong>auto</strong> and <strong>stable</strong> values for the <strong>text-wrap-style</strong> property (@nicoburns, #48958)re</li>
 <li><strong>inert</strong> trees and the <strong>interactivity</strong> property (@skyz1, @TimvdLippe, #48967)</li>
 </ul>
@@ -287,6 +291,8 @@ code {
 <h2 id="real-world-compat" tabindex="-1">Real world compat <a class="header-anchor" href="#real-world-compat">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
+<p>Flutter web content works much better now that we fixed a serious performance problem with typed arrays (@jdm, #48640).</p>
+<!-- TODO figure, https://rydmike.com/flexcolorscheme/themesplayground-latest/ -->
 <p>We’re interested to hear how well your favourite websites run in Servo! Report successes in <a href="https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341">this Zulip thread</a> or <a href="https://github.com/servo/servo/discussions/49037">this Github discussion</a>, and failures <a href="https://github.com/servo/servo/issues">in our GitHub issues</a>.</p>
 <h2 id="work-in-progress" tabindex="-1">Work in progress <a class="header-anchor" href="#work-in-progress">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
@@ -315,6 +321,20 @@ The feature can be enabled with the <code>dom_indexeddb_enabled</code> preferenc
       </a></h2>
 <p>The Android Compose migration is complete, and embedders now only need to interact with the <code>Servo</code> library component (@veyndan, #48592, #48601, #48595, #48574, #48609, #48778, #48780, #49266).
 Embedders no longer need to trigger the soft keyboard display; this is controlled by a parameter to the <code>Servo</code> component (@veyndan, #48757).</p>
+<p>There’s a new API method to report the network status of the embedder: <a href="https://doc.servo.org/servo/struct.NetworkManager.html">NetworkManager</a>::<a href="https://doc.servo.org/servo/struct.NetworkManager.html#method.set_online_state">set_online_state</a> (@xbwwj, #47568).
+This data is exposed via the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine"><strong>onLine</strong></a> property of the <strong>Navigator</strong> interface in web content.</p>
+<p>Embedders can now disable all support for developer tools, which can reduce the size of the final binary (@janeoa, #47255).
+This is controlled by the <code>devtools</code> feature and enabled by default; it is also part of the new <code>default_tooling</code> feature.</p>
+<p>Users of the C API can set preferences that accept f64 and f64 array parameters (@fran6co, #49325), as well as the HiDPI scale factor for each WebView (@fran6co, #49327).
+WebViews can also be resized via the C API (@fran6co, #49326).</p>
+<p>The <code>layout_grid_enabled</code> preference has been removed, since CSS Grid now defaults to enabled (@Loirooriol, #48718).
+Several preferences were renamed (@nicoburns, #48915):</p>
+<ul>
+<li><code>layout_columns_enabled</code> -&gt; <code>layout_css_columns_enabled</code></li>
+<li><code>layout_container_queries_enabled</code> -&gt; <code>layout_css_container_queries_enabled</code></li>
+<li><code>layout_variable_fonts_enabled</code> -&gt; <code>layout_css_font_variations_enabled</code></li>
+<li><code>layout_writing_mode_enabled</code> -&gt; <code>layout_css_writing_mode_enabled</code></li>
+</ul>
 <h2 id="for-users-and-developers" tabindex="-1">For users and developers <a class="header-anchor" href="#for-users-and-developers">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
@@ -332,6 +352,13 @@ Embedders no longer need to trigger the soft keyboard display; this is controlle
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
 <p>Pinch zoom operations no longer have to rebuild a full display list, making zooming on complex pages much smoother (@stevennovaryo, @mrobinson, #43561).</p>
+<p>We improved performance in many small and focused ways by doing less work during restyling and layout (@SimonSapin, @webbeef, @nicoburns, @mrobinson, #49137, #49100, #48485, #48968), reducing GC interactions (@mrobinson, #48984, #49140, #49195), and delaying work on disconnected trees (@SimonSapin, #49098).
+We also fixed instances of quadratic layout with deep nesting (@nicoburns, #49148) and missing caching (@mrobinson, @Loirooriol, #49164, #49073).</p>
+<p>We fixed some intermittent GC panics when notifying ResizeObservers (@mrobinson, #49189), introspecting keyframes (@MohamedAli00949, #48546), setting timers (@jdm, #48548), using writable streams (@jdm, #48656), scrolling iframes after removing them (@mrobinson, #49230).</p>
+<p>We also fixed numerous other panics and crashes in scrollable and incremental layout (@mrobinson, #49230, #49283), moving nodes around (@mrobinson, #49226), using WebGPU from opaque origins (@gabrielecabrini, #49207), stringifying some WebIDL types (@mrobinson, #49374), using readable streams (@Narfinger, @mrobinson, #49311), clicking disabled file controls (@mrobinson, #49379), rendering giant SVGs (@sabbCodes, #49264), unminifying JS (@jdm, #48567), measuring text (@mxmgorin, #48621), rendering text tracks (@TimvdLippe, @mrobinson, #48827), preparing dialogs (@lukewarlow, #49431), and running delayed tasks in destroyed documents (@mrobinson, @jdm, #49399, #48714).</p>
+<p>Many small-to-medium improvements to reduce allocations were merged (@yezhizhen, @Narfinger, @Taym95, @mrobinson, @Loirooriol, @CynthiaOketch, @sabbCodes, @mxmgorin, #48549, #48558, #48568, #48598, #48615, #48565, #48646, #48654, #48569, #48562, #48588, #48650, #48702, #48675, #48589, #48720, #48721, #47720, #48745, #48703, #48750, #48770, #48789, #48754, #48828, #48838, #48836, #48841, #48843, #48867, #48882, #48842, #48881, #48840, #48899, #48924, #48904, #48949, #48953, #48980, #49028, #48885, #49035, #49038, #49084, #49131, #49125, #48951, #49154, #49160, #49198, #49202, #49194, #49219, #49258, #49275, #49295, #49298, #49300, #49320, #49323, #49313, #49373, #49380, #48969, #48991), and we also reduced memory usage by shrinking some types (@Narfinger, @webbeef, #48954, #48082, #48906).</p>
+<p>Memory leaks received a lot of attention this month, covering everything from network requests, to JS modules, to timer tasks, and more (@mrobinson, @SimonSapin, @jschwe, #48952, #48957, #49032, #49049, #49092, #49134, #49139, #49132, #48747, #48752).</p>
+<p>We continue to work towards preventing certain sources of memory leaks with static analysis and the Rust type system (@Gae24, @Narfinger, @jdm, #48147, #48360, #48832, #48887, #48913, #48903, #48965, #48905, #48834, #48855, #49083, #49082, #49081, #49096, #49135, #49130).</p>
 <h2 id="more-on-the-web-platform" tabindex="-1">More on the web platform <a class="header-anchor" href="#more-on-the-web-platform">
         <span class="icon hashlink"><i class="fas fa-link"></i></span>
       </a></h2>
