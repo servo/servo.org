@@ -158,11 +158,20 @@ We continue to work towards preventing certain sources of memory leaks with stat
 
 ## More on the web platform
 
+We fixed bugs related to the CORS preflight cache (@sabbCodes, #49055, #49252), fetch metadata (@TimvdLippe, @mrobinson, #48793), HTTP cache revalidation (@mrobinson, @jdm, #48927), image load timing (@mrobinson, @TimvdLippe, #48902, #48790, #48599), touch events (@yezhizhen, #48671, #48699, #48701), cloning and moving input elements (@skyz1, @mrobinson, #48845, #48069), the `:indeterminate` pseudoclass (@skyz1, #48070), stylesheet introspection (@mrobinson, #48935), mutating ranges (@gabrielecabrini, #49072), blob URLs (@rogerkorantenng, #49074, #48989, #49206), form controls (@mrobinson, @lukewarlow, @jdm, #49163, #49225, #48513), the `mapping` property of `Gamepad` (@msub2, #49381), `beforeinput` events (@dzfrias, #48825), image dimensions (@TimvdLippe, #49085), table appearance attributes (@Loirooriol, #49120, #49108, #49156, #49150), IME events (@dzfrias, #48690), reconnecting `IntersectionObserver` (@shubhamg13, #48581), and root elements (@TimvdLippe, #48514).
+
+We also addressed layout issues related to soft wrap line breaks (@mrobinson, @Loirooriol, #48564), grid and flex layouts with indefinite dimensions (@RichardTjokroutomo, @rayguo17, @nicoburns, #48670, #48644, #49232), hanging whitespace (@mrobinson, @Loirooriol, #48591, #48753), `preserve-3d` handling (@mrobinson, #47933), inline block splits (@Loirooriol, #46445), video controls (@rayguo17, #44956), `display: contents` (@Loirooriol, #48784, #48785), `justify-contents` (@yezhizhen, #48746, #48988), absolute positioning (@mrobinson, @Loirooriol, #48846), `<progress>` (@Loirooriol, #49143), `text-transform: capitalize` (@jschwe, #48901), incremental table layout (@Loirooriol, #49176), `width: stretch` (@Loirooriol, #49239, #49237), backface visibility (@mrobinson, #49196), flex gaps (@yezhizhen, #49335), `perspective` (@mrobinson, #49174), quirks mode (@Loirooriol, #48942, #39869, #48978, #49211), SVG viewboxes (@leowatts, #48556), ISO-8859-8 documents (@TTyChud, #48444), and table borders (@adoublebarrel, @mrobinson, #47684).
+
 ## New contributors
 
 A special thanks to the following people for landing their first patch in Servo:
 
-* 
+* Gab Virebent (@gabrix73, #48729)
+* Lola (@lolaodelola, #47339)
+* Amriteshkumar Yadav (@Amrit-04, #48772)
+* Alexander Bransby-Sharples (@adoublebarrel, #47684)
+* Joseph Zhao (@programskillforverification, #49375)
+* Sharadhi-v98 (@Sharadhi-v98, #49302)
 
 Interested in helping build a web browser?
 Take a look at our [curated list](https://starters.servo.org) of issues that are good for new contributors!
@@ -170,10 +179,10 @@ Take a look at our [curated list](https://starters.servo.org) of issues that are
 ## Donations
 
 Thanks again for your generous support!
-We are now receiving **8144 USD/month** (+1% from August) in recurring donations.
-This helps us cover the cost of our **[speedy](https://ci0.servo.org) [CI](https://ci1.servo.org) [and](https://ci2.servo.org) [benchmarking](https://ci3.servo.org) [servers](https://ci4.servo.org)**, one of our latest **[Outreachy interns](https://www.outreachy.org/alums/2026-05/#:~:text=Servo)**, and funding **[maintainer work]({{ '/blog/2026/09/15/one-year-of-sponsorship/' | url }})** that helps more people contribute to Servo.
+We are now receiving **8057 USD/month** (-2% from September) in recurring donations.
+This helps us cover the cost of our **[speedy](https://ci0.servo.org) [CI](https://ci1.servo.org) [and](https://ci2.servo.org) [benchmarking](https://ci3.servo.org) [servers](https://ci4.servo.org)**, one of our latest **[Outreachy interns](https://www.outreachy.org/alums/2026-05/#:~:text=Servo)**, and funding **[maintainer work]({{ '/blog/2026/09/15/one-year-of-sponsorship/' | url }})** that helps more people contribute to Servo, as well as **[feature development](https://github.com/servo/project/issues/252)**.
 
-Servo is also on [thanks.dev](https://thanks.dev), and already **37 GitHub users** (+1 from August) that depend on Servo are sponsoring us there.
+Servo is also on [thanks.dev](https://thanks.dev), and already **37 GitHub users** (+0 from September) that depend on Servo are sponsoring us there.
 If you use Servo libraries like [url](https://crates.io/crates/url/reverse_dependencies), [html5ever](https://crates.io/crates/html5ever/reverse_dependencies), [selectors](https://crates.io/crates/selectors/reverse_dependencies), or [cssparser](https://crates.io/crates/cssparser/reverse_dependencies), signing up for [thanks.dev](https://thanks.dev) could be a good way for you (or your employer) to give back to the community.
 
 We now have [**sponsorship tiers**]({{ '/blog/2025/11/21/sponsorship-tiers/' | url }}) that allow you or your organisation to donate to the Servo project with public acknowlegement of your support.
@@ -181,8 +190,8 @@ If you’re interested in this kind of sponsorship, please contact us at [join@s
 
 <figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
     <div style="position: relative; text-align: right;">
-        <div style="position: absolute; right: calc(100% - 100% * 8144 / 10000); padding-right: 0.5em;"><strong>8128</strong> USD/month</div>
-        <div style="position: absolute; margin-left: calc(100% * 8144 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
+        <div style="position: absolute; right: calc(100% - 100% * 8057 / 10000); padding-right: 0.5em;"><strong>8128</strong> USD/month</div>
+        <div style="position: absolute; margin-left: calc(100% * 8057 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
         <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
         <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
     </div>
