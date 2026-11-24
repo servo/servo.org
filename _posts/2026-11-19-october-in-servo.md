@@ -30,11 +30,11 @@ Servo now renders **subtitles and captions** over `<video>` elements (@TimvdLipp
 We've shipped new web platform features:
 * the **spelling-error** and **grammar-error** values for **text-decoration-line** (@yezhizhen, #48883)
 * the [**progress()**](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/progress) CSS math function (@Loirooriol, #48474)
-* `&lt;input type=image>` (@SilvioPilato, #48265)
+* **&lt;input type=image>** (@SilvioPilato, #48265)
 * the **:focus-visible** pseudoclass (@TimvdLippe, #49255, #49304)
 * the **beforeinput** event (@dzfrias, #48519)
 * the **&lt;wbr>** element (@mrobinson, #48755)
-* the **auto** and **stable** values for the **text-wrap-style** property (@nicoburns, #48958)re
+* the **auto** and **stable** values for the **text-wrap-style** property (@nicoburns, #48958)
 * **inert** trees and the **interactivity** property (@skyz1, @TimvdLippe, #48967)
 
 Plus a bunch of new DOM APIs:
@@ -45,24 +45,23 @@ Plus a bunch of new DOM APIs:
 * the **target** property of **HTMLBaseElement** (@sabbCodes, #48985)
 * the **CloseWatcher** interface, and the **closedBy** and **requestClose()** members of **HTMLDialogElement** (@skyz1, @lukewarlow, @TimvdLippe, #48955)
 
-## Security
-
-
 ## Real world compat
 
-Flutter web content works much better now that we fixed a serious performance problem with typed arrays (@jdm, #48640).
+Flutter web content no longer hangs now that we fixed a serious performance problem with typed arrays (@jdm, #48640). [Example](https://flutter.syncfusion.com/#/range-selector/default)
 
-<!-- TODO figure, https://rydmike.com/flexcolorscheme/themesplayground-latest/ -->
+<figure>
+    <a href="{{ '/img/blog/2026-11-flutter.png' | url }}"><img src="{{ '/img/blog/2026-11-flutter.png' | url }}" alt="a flutter web app showcasing interactive graphs"></a>
+</figure>
 
 We’re interested to hear how well your favourite websites run in Servo! Report successes in [this Zulip thread](https://servo.zulipchat.com/#narrow/channel/263398-general/topic/Servo.20web.20compat.20success.20stories/with/612898341) or [this Github discussion](https://github.com/servo/servo/discussions/49037), and failures [in our GitHub issues](https://github.com/servo/servo/issues).
 
 ## Work in progress
 
 With respect to accessibility in Servo, we report many more ARIA roles for DOM elements (@alice, @mrobinson, #48839).
-These can be inspect with the `Get Computed Role` WebDriver command (@lolaodelola, #47339).
+These can be inspected with the `Get Computed Role` WebDriver command (@lolaodelola, #47339).
 Accessibility integration can be turned on with the `accessibility_enabled` preference.
 
-**WebGL2** support received lots of attention this month, with fixes to **getParameter()**, **drawBuffers()**, **readBuffers()**, **vertexAttribIPointer()**, **DEPTH_STENCIL_ATTACHMENT**, **getUniformLocation()**, **vertexAttrib4x()**, **pixelStorei()**, **texStorage2D()**, **texStorage3D()**, **texImage3D()**, **getInternalformatParameter()**, **blitFramebuffer()**, and **texSubImage2D()** (@mxmgorin, #48651, #48620, #48678, #48689, #48751, #48681, #48911, #48972, #48590, #49201, #49289, #48560, #48571).
+**WebGL2** support received lots of attention this month, with fixes to `getParameter()`, `drawBuffers()`, `readBuffers()`, `vertexAttribIPointer()`, `DEPTH_STENCIL_ATTACHMENT`, `getUniformLocation()`, `vertexAttrib4x()`, `pixelStorei()`, `texStorage2D()`, `texStorage3D()`, `texImage3D()`, `getInternalformatParameter()`, `blitFramebuffer()`, and `texSubImage2D()` (@mxmgorin, #48651, #48620, #48678, #48689, #48751, #48681, #48911, #48972, #48590, #49201, #49289, #48560, #48571).
 The feature remains gated behind the `dom_webgl2_enabled` preference.
 
 Reading and writing mapped **WebGPU** buffers got a significant speed increase (@sagudev, @jdm, #48372).
@@ -76,28 +75,28 @@ This can be enabled with the `layout_css_backdrop_filter_enabled` preference.
 
 ServiceWorkers now fire the `statechange` event when changing states during initialization (@gterzian, #48749).
 ServiceWorkerContainer can listen for `message` and `messageerror` events (@gterzian, #48680).
-Service Workers remain gated behind the `dom_serviceworker_enabled` preference.
+**Service Workers** remain gated behind the `dom_serviceworker_enabled` preference.
 
-The Geolocation API has been implemented (@webbeef, #48406).
+The **Geolocation** API has been implemented (@webbeef, #48406).
 No platform-specific backends to provide the device geolocation data have merged yet, so it remains disabled behind the `dom_geolocation_enabled` preference.
 
-DOM interfaces for MathML elements now exist, gated behind the `mathml_core_enabled` preference (@tannal, #48631).
+DOM interfaces for **MathML** elements now exist, gated behind the `mathml_core_enabled` preference (@tannal, #48631).
 There is no MathML-specific layout implemented yet.
 
-A new, native SVG implementation is in progress (@mu-mostafa98, @jdm, #48467).
+A new, native **SVG** implementation is in progress (@mu-mostafa98, @jdm, #48467).
 This work is still in the early stages, but is intended to replace Servo's dependency on the `resvg` crate to better integrate with page styling and animations.
 
-IndexedDB cursors now support the `update()` and `delete()` methods (@kuntal-devrat, #48402).
+**IndexedDB** cursors now support the `update()` and `delete()` methods (@kuntal-devrat, #48402).
 The feature can be enabled with the `dom_indexeddb_enabled` preference.
 
 Support for **LargestContentfulPaint** performance timing improved, with image URLs (@shubhamg13, #48668), the `loadTime` value (@shubhamg13, #48676), ignoring non-paintable elements (@shubhamg13, #48856, #48898), video URLs (@shubhamg13, #48931), and following containing blocks (@shubhamg13, #48551).
 This work is behind the `largest_contentful_paint_enabled` preference.
 
-We added support for a new performance timing metric: [ContainerTiming](https://w3c.github.io/container-timing/) (@jasonwilliams, #46966).
+We added support for a new performance timing metric: **[ContainerTiming](https://w3c.github.io/container-timing/)** (@jasonwilliams, #46966).
 This can be enabled with the `container_timing_enabled` preference.
 
-Our support for **adoptedStylesheets** improved along with a new implementation of the [ObservableArray](https://webidl.spec.whatwg.org/#idl-observable-array) specification concept.
-This is current hidden behind the `dom_adoptedstylesheet_enabled` preference.
+Our support for **adoptedStylesheets** improved along with a new implementation of the [ObservableArray](https://webidl.spec.whatwg.org/#idl-observable-array) specification concept (@jerensl, @arihant2math, #48506).
+This is currently hidden behind the `dom_adoptedstylesheet_enabled` preference.
 
 ## Embedding API
 
@@ -126,7 +125,7 @@ Double and triple clicking on selected text will extend the selection to the cur
 
 Clicking a link with the middle mouse button now opens up the link in a new WebView (@SteveSharonSam, @mrobinson, #46000)
 
-Range inputs can now be dragged with the mouse (@webbeef, #48342).
+Range inputs can be dragged with the mouse (@webbeef, #48342).
 
 Command+delete on macOS will delete the preceding line in a text control (@dzfrias, #48781).
 
@@ -141,18 +140,19 @@ Media elements that start playing outside of a document will no longer be garbag
 
 ## Performance and stability
 
-Pinch zoom operations no longer have to rebuild a full display list, making zooming on complex pages much smoother (@stevennovaryo, @mrobinson, #43561).
+Pinch zoom operations no longer have to rebuild a full display list, making **zooming complex pages** much smoother (@stevennovaryo, @mrobinson, #43561).
 
-We improved performance in many small and focused ways by doing less work during restyling and layout (@SimonSapin, @webbeef, @nicoburns, @mrobinson, #49137, #49100, #48485, #48968), reducing GC interactions (@mrobinson, @jschwe, #48984, #49140, #49195, #49425), and delaying work on disconnected trees (@SimonSapin, #49098).
+We improved performance in many small and focused ways by doing **less work** during restyling and layout (@SimonSapin, @webbeef, @nicoburns, @mrobinson, #49137, #49100, #48485, #48968), reducing **GC interactions** (@mrobinson, @jschwe, #48984, #49140, #49195, #49425), and delaying work on disconnected trees (@SimonSapin, #49098).
 We also fixed instances of quadratic layout with deep nesting (@nicoburns, #49148) and missing caching (@mrobinson, @Loirooriol, #49164, #49073).
 
-We fixed some intermittent GC panics when notifying ResizeObservers (@mrobinson, #49189), introspecting keyframes (@MohamedAli00949, #48546), setting timers (@jdm, #48548), using writable streams (@jdm, #48656), scrolling iframes after removing them (@mrobinson, #49230).
+We fixed some intermittent GC panics when notifying ResizeObservers (@mrobinson, #49189), introspecting keyframes (@MohamedAli00949, #48546), setting timers (@jdm, #48548), using writable streams (@jdm, #48656), and scrolling iframes after removing them (@mrobinson, #49230).
 
-We also fixed numerous other panics and crashes in scrollable and incremental layout (@mrobinson, #49230, #49283), moving nodes around (@mrobinson, #49226), using WebGPU from opaque origins (@gabrielecabrini, #49207), stringifying some WebIDL types (@mrobinson, #49374), using readable streams (@Narfinger, @mrobinson, #49311), clicking disabled file controls (@mrobinson, #49379), rendering giant SVGs (@sabbCodes, #49264), unminifying JS (@jdm, #48567), measuring text (@mxmgorin, #48621), rendering text tracks (@TimvdLippe, @mrobinson, #48827), preparing dialogs (@lukewarlow, #49431), and running delayed tasks in destroyed documents (@mrobinson, @jdm, #49399, #48714).
+We also fixed numerous other **panics and crashes** in scrollable and incremental layout (@mrobinson, #49230, #49283), moving nodes around (@mrobinson, #49226), using WebGPU from opaque origins (@gabrielecabrini, #49207), stringifying some WebIDL types (@mrobinson, #49374), using readable streams (@Narfinger, @mrobinson, #49311), clicking disabled file controls (@mrobinson, #49379), rendering giant SVGs (@sabbCodes, #49264), unminifying JS (@jdm, #48567), measuring text (@mxmgorin, #48621), rendering text tracks (@TimvdLippe, @mrobinson, #48827), preparing dialogs (@lukewarlow, #49431), and running delayed tasks in destroyed documents (@mrobinson, @jdm, #49399, #48714).
 
-Many small-to-medium improvements to reduce allocations were merged (@yezhizhen, @Narfinger, @Taym95, @mrobinson, @Loirooriol, @CynthiaOketch, @sabbCodes, @mxmgorin, #48549, #48558, #48568, #48598, #48615, #48565, #48646, #48654, #48569, #48562, #48588, #48650, #48702, #48675, #48589, #48720, #48721, #47720, #48745, #48703, #48750, #48770, #48789, #48754, #48828, #48838, #48836, #48841, #48843, #48867, #48882, #48842, #48881, #48840, #48899, #48924, #48904, #48949, #48953, #48980, #49028, #48885, #49035, #49038, #49084, #49131, #49125, #48951, #49154, #49160, #49198, #49202, #49194, #49219, #49258, #49275, #49295, #49298, #49300, #49320, #49323, #49313, #49373, #49380, #48969, #48991), and we also reduced memory usage by shrinking some types (@Narfinger, @webbeef, #48954, #48082, #48906).
+Many small-to-medium improvements to **reduce allocations** were merged (@yezhizhen, @Narfinger, @Taym95, @mrobinson, @Loirooriol, @CynthiaOketch, @sabbCodes, @mxmgorin, #48549, #48558, #48568, #48598, #48615, #48565, #48646, #48654, #48569, #48562, #48588, #48650, #48702, #48675, #48589, #48720, #48721, #47720, #48745, #48703, #48750, #48770, #48789, #48754, #48828, #48838, #48836, #48841, #48843, #48867, #48882, #48842, #48881, #48840, #48899, #48924, #48904, #48949, #48953, #48980, #49028, #48885, #49035, #49038, #49084, #49131, #49125, #48951, #49154, #49160, #49198, #49202, #49194, #49219, #49258, #49275, #49295, #49298, #49300, #49320, #49323, #49313, #49373, #49380, #48969, #48991).
+We also **reduced memory usage** by shrinking some types (@Narfinger, @webbeef, #48954, #48082, #48906).
 
-Memory leaks received a lot of attention this month, covering everything from network requests, to JS modules, to timer tasks, and more (@mrobinson, @SimonSapin, @jschwe, #48952, #48957, #49032, #49049, #49092, #49134, #49139, #49132, #48747, #48752).
+**Memory leaks** received a lot of attention this month, covering everything from network requests, to JS modules, to timer tasks, and more (@mrobinson, @SimonSapin, @jschwe, #48952, #48957, #49032, #49049, #49092, #49134, #49139, #49132, #48747, #48752).
 
 We continue to work towards preventing certain sources of memory leaks with static analysis and the Rust type system (@Gae24, @Narfinger, @jdm, #48147, #48360, #48832, #48887, #48913, #48903, #48965, #48905, #48834, #48855, #49083, #49082, #49081, #49096, #49135, #49130).
 
@@ -160,7 +160,7 @@ We continue to work towards preventing certain sources of memory leaks with stat
 
 We fixed bugs related to the CORS preflight cache (@sabbCodes, #49055, #49252), fetch metadata (@TimvdLippe, @mrobinson, #48793), HTTP cache revalidation (@mrobinson, @jdm, #48927), image load timing (@mrobinson, @TimvdLippe, #48902, #48790, #48599), touch events (@yezhizhen, #48671, #48699, #48701), cloning and moving input elements (@skyz1, @mrobinson, #48845, #48069), the `:indeterminate` pseudoclass (@skyz1, #48070), stylesheet introspection (@mrobinson, #48935), mutating ranges (@gabrielecabrini, #49072), blob URLs (@rogerkorantenng, #49074, #48989, #49206), form controls (@mrobinson, @lukewarlow, @jdm, #49163, #49225, #48513), the `mapping` property of `Gamepad` (@msub2, #49381), `beforeinput` events (@dzfrias, #48825), image dimensions (@TimvdLippe, #49085), table appearance attributes (@Loirooriol, #49120, #49108, #49156, #49150), IME events (@dzfrias, #48690), reconnecting `IntersectionObserver` (@shubhamg13, #48581), and root elements (@TimvdLippe, #48514).
 
-We also addressed layout issues related to soft wrap line breaks (@mrobinson, @Loirooriol, #48564), grid and flex layouts with indefinite dimensions (@RichardTjokroutomo, @rayguo17, @nicoburns, #48670, #48644, #49232), hanging whitespace (@mrobinson, @Loirooriol, #48591, #48753), `preserve-3d` handling (@mrobinson, #47933), inline block splits (@Loirooriol, #46445), video controls (@rayguo17, #44956), `display: contents` (@Loirooriol, #48784, #48785), `justify-contents` (@yezhizhen, #48746, #48988), absolute positioning (@mrobinson, @Loirooriol, #48846), `<progress>` (@Loirooriol, #49143), `text-transform: capitalize` (@jschwe, #48901), incremental table layout (@Loirooriol, #49176), `width: stretch` (@Loirooriol, #49239, #49237), backface visibility (@mrobinson, #49196), flex gaps (@yezhizhen, #49335), `perspective` (@mrobinson, #49174), quirks mode (@Loirooriol, #48942, #39869, #48978, #49211), SVG viewboxes (@leowatts, #48556), ISO-8859-8 documents (@TTyChud, #48444), and table borders (@adoublebarrel, @mrobinson, #47684).
+We also addressed layout issues related to soft wrap line breaks (@mrobinson, @Loirooriol, #48564), grid and flex layouts with indefinite dimensions (@RichardTjokroutomo, @rayguo17, @nicoburns, #48670, #48644, #49232), hanging whitespace (@mrobinson, @Loirooriol, #48591, #48753), `preserve-3d` (@mrobinson, #47933), inline block splits (@Loirooriol, #46445), video controls (@rayguo17, #44956), `display: contents` (@Loirooriol, #48784, #48785), `justify-contents` (@yezhizhen, #48746, #48988), absolute positioning (@mrobinson, @Loirooriol, #48846), `<progress>` (@Loirooriol, #49143), `text-transform: capitalize` (@jschwe, #48901), incremental table layout (@Loirooriol, #49176), `width: stretch` (@Loirooriol, #49239, #49237), backface visibility (@mrobinson, #49196), flex gaps (@yezhizhen, #49335), `perspective` (@mrobinson, #49174), quirks mode (@Loirooriol, #48942, #39869, #48978, #49211), SVG viewboxes (@leowatts, #48556), ISO-8859-8 documents (@TTyChud, #48444), and table borders (@adoublebarrel, @mrobinson, #47684).
 
 ## New contributors
 
@@ -190,7 +190,7 @@ If you’re interested in this kind of sponsorship, please contact us at [join@s
 
 <figure class="_fig" style="width: 100%; margin: 1em 0;"><div class="_flex" style="height: calc(1lh + 3em); flex-flow: column nowrap; text-align: left;">
     <div style="position: relative; text-align: right;">
-        <div style="position: absolute; right: calc(100% - 100% * 8057 / 10000); padding-right: 0.5em;"><strong>8128</strong> USD/month</div>
+        <div style="position: absolute; right: calc(100% - 100% * 8057 / 10000); padding-right: 0.5em;"><strong>8057</strong> USD/month</div>
         <div style="position: absolute; margin-left: calc(100% * 8057 / 10000); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
         <div style="position: absolute; margin-left: calc(100% - 0.5em); height: calc(1lh + 1.5em); border-left: 1px solid;"></div>
         <div style="padding-right: 1em;"><strong>10000</strong><!-- USD/month --></div>
