@@ -2,7 +2,7 @@
 layout:     post
 tags:       blog
 title:      "October in Servo: video captions and inert content"
-date:       2026-11-19
+date:       2026-11-25
 summary:    Plus WebAudio nodes, image inputs, and more!
 categories:
 ---
@@ -15,10 +15,8 @@ code {
 
 [**Servo 0.8.0**](https://github.com/servo/servo/releases/tag/v0.8.0) contains all of the changes we landed in October, spanning 588 commits (a new record)!
 
-<!-- TODO: text-decoration-line, hspace/vspace, bgcolor?, :focus-visible, image input, inert -->
-
 <figure>
-    <a href="{{ '/img/blog/.png' | url }}"><img src="{{ '/img/blog/.png' | url }}" alt="a black and white cat named Gary showing off new visual web platform features"></a>
+    <a href="{{ '/img/blog/2026-11-gary.png' | url }}"><img src="{{ '/img/blog/2026-11-gary.png' | url }}" alt="a black and white cat named Gary showing off new visual web platform features"></a>
 </figure>
 
 Servo now renders **subtitles and captions** over `<video>` elements (@TimvdLippe, #48809)!
