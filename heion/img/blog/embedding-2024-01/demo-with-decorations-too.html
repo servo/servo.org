@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      * {
+        cursor: none !important;
+      }
+      html {
+        overflow: hidden;
+      }
+      body {
+        --x: 0;
+        --y: 0;
+      }
+      main {
+        position: absolute;
+        inset: 58px 32px 34px 32px;
+      }
+      .pointer {
+        position: absolute;
+        inset: 0;
+        z-index: 20;
+        background: no-repeat
+          calc((var(--x) - var(--xHot)) * 1px)
+          calc((var(--y) - var(--yHot)) * 1px);
+        --xHot: 0;
+        --yHot: 0;
+      }
+      .pointer.linux {
+        background-image: url(cursor/linux.png);
+        --xHot: 8;
+        --yHot: 1;
+      }
+      .pointer.windows {
+        background-image: url(cursor/windows.png);
+        --xHot: 0;
+        --yHot: 0;
+      }
+      .pointer.macos {
+        background-image: url(cursor/macos.png);
+        --xHot: 3;
+        --yHot: 0;
+      }
+      .decoration {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+      }
+      /* .decoration.windows {
+        background-image: url(decoration/windows.png);
+        background-position: -128px -32px;
+      } */
+      .decoration * {
+        position: absolute;
+        inset: 0;
+      }
+      .decoration .d1,
+      .decoration .d2a,
+      .decoration .d3,
+      .decoration .d7,
+      .decoration .d9 {
+        background: no-repeat;
+      }
+      .decoration .d2,
+      .decoration .d8 {
+        background: repeat-x;
+      }
+      .decoration .d4,
+      .decoration .d6 {
+        background: repeat-y;
+      }
+      .decoration .d1 {
+        background-position: left -128px top -32px;
+      }
+      .decoration .d2 {
+        background-position: center top -32px;
+      }
+      .decoration .d2a {
+        background-position: center top -32px;
+      }
+      .decoration .d3 {
+        background-position: right -128px top -32px;
+      }
+      .decoration .d4 {
+        background-position: left -128px center;
+      }
+      .decoration .d6 {
+        background-position: right -128px center;
+      }
+      .decoration .d7 {
+        background-position: left -128px bottom -56px;
+      }
+      .decoration .d8 {
+        background-position: center bottom -56px;
+      }
+      .decoration .d9 {
+        background-position: right -128px bottom -56px;
+      }
+      .decoration.windows .d1 {
+        background-image: url(decoration/windows1.png);
+      }
+      .decoration.windows .d2 {
+        background-image: url(decoration/windows2.png);
+      }
+      .decoration.windows .d3 {
+        background-image: url(decoration/windows3.png);
+      }
+      .decoration.windows .d4 {
+        background-image: url(decoration/windows4.png);
+      }
+      .decoration.windows .d6 {
+        background-image: url(decoration/windows6.png);
+      }
+      .decoration.windows .d7 {
+        background-image: url(decoration/windows7.png);
+      }
+      .decoration.windows .d8 {
+        background-image: url(decoration/windows8.png);
+      }
+      .decoration.windows .d9 {
+        background-image: url(decoration/windows9.png);
+      }
+      .decoration.macos .d1 {
+        background-image: url(decoration/macos1.png);
+      }
+      .decoration.macos .d2 {
+        background-image: url(decoration/macos2.png);
+        inset: 0 calc(193px - 128px) 0 calc(223px - 128px);
+      }
+      .decoration.macos .d3 {
+        background-image: url(decoration/macos3.png);
+      }
+      .decoration.macos .d4 {
+        background-image: url(decoration/macos4.png);
+        inset: calc(123px - 32px) 0 calc(123px - 56px) 0;
+      }
+      .decoration.macos .d6 {
+        background-image: url(decoration/macos6.png);
+        inset: calc(123px - 32px) 0 calc(123px - 56px) 0;
+      }
+      .decoration.macos .d7 {
+        background-image: url(decoration/macos7.png);
+      }
+      .decoration.macos .d8 {
+        background-image: url(decoration/macos8.png);
+        inset: 0 calc(193px - 128px) 0 calc(193px - 128px);
+      }
+      .decoration.macos .d9 {
+        background-image: url(decoration/macos9.png);
+      }
+      .decoration.linux .d1 {
+        background-image: url(decoration/linux1.png);
+      }
+      .decoration.linux .d2 {
+        background-image: url(decoration/linux2.png);
+      }
+      .decoration.linux .d2a {
+        background-image: url(decoration/linux2a.png);
+      }
+      .decoration.linux .d3 {
+        background-image: url(decoration/linux3.png);
+      }
+      .decoration.linux .d4 {
+        background-image: url(decoration/linux4.png);
+      }
+      .decoration.linux .d6 {
+        background-image: url(decoration/linux6.png);
+      }
+      .decoration.linux .d7 {
+        background-image: url(decoration/linux7.png);
+      }
+      .decoration.linux .d8 {
+        background-image: url(decoration/linux8.png);
+      }
+      .decoration.linux .d9 {
+        background-image: url(decoration/linux9.png);
+      }
+
+      html {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      .bg {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(-45deg, #f5b23f, #3cc8e7, #d8f931, #26e6b9);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .text-container {
+        position: relative;
+        display: inline-block;
+        top: 100px;
+        left: 40px;
+      }
+      .text {
+        cursor: default;
+        position: relative;
+        color: #fff;
+        line-height: 50px;
+        font-weight: bold;
+        font-size: 50px;
+        font-family: 'Courier New';
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      .text-bg {
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 5px;
+      }
+      .spotlight {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: radial-gradient(
+          50px 50px at center center,
+          transparent,
+          transparent 100px,
+          rgba(0, 0, 0, 0.05) 150px
+        );
+        opacity: 1;
+        z-index: 1;
+      }
+      .traffic-light-area {
+        display: block;
+        height: 30px;
+        width: 62px;
+        background: #0000007e;
+        user-select: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding-left: 10px;
+        border-radius: 0 0 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="traffic-light-area"></div> -->
+    <div id="spotlight" class="spotlight"></div>
+    <main>
+      <div class="text-container">
+        <span id="text-prefix" class="text">Hello </span>
+        <span id="text-name" class="text text-bg"></span>
+        <span id="cursor" class="text">_</span>
+      </div>
+      <div class="bg"></div>
+    </main>
+    <div class="decoration">
+      <div class="d2"></div>
+      <div class="d4"></div>
+      <div class="d6"></div>
+      <div class="d8"></div>
+
+      <div class="d3"></div>
+      <div class="d7"></div>
+
+      <div class="d9"></div>
+
+      <div class="d2a"></div>
+
+      <div class="d1"></div>
+    </div>
+    <div class="pointer"></div>
+    <script>
+      /* Spotlight */
+      const spotlightEl = document.getElementById('spotlight');
+      function handleMouseMove(event) {
+        const { clientX, clientY } = event;
+        spotlightEl.style =
+          'background:radial-gradient(50px 50px at ' +
+          clientX +
+          'px ' +
+          clientY +
+          'px, transparent, transparent 100px, rgba(0,0,0,0.05) 150px)';
+        document.body.style.setProperty("--x", clientX);
+        document.body.style.setProperty("--y", clientY);
+        document.title = `(${clientX},${clientY})`;
+      }
+      document.addEventListener('mousemove', handleMouseMove);
+      addEventListener("resize", () => {
+        document.title = `${innerWidth}x${innerHeight}`;
+      });
+
+      /* Typing Effect */
+      async function startCarosel() {
+        const textNameEl = document.getElementById('text-name');
+        const texts = ['Tauri.', 'Servo.', 'World!'];
+        const colors = ['#ffc131', '#3cc8e7', '#ffffff'];
+        let textIdx = 0;
+
+        const decoration = document.querySelector(".decoration");
+        const pointer = document.querySelector(".pointer");
+        const platforms = ["windows", "macos", "linux"];
+        while (true) {
+          decoration.className = `decoration ${platforms[textIdx]}`;
+          pointer.className = `pointer ${platforms[textIdx]}`;
+
+          const text = texts[textIdx];
+
+          updateNameColor(textNameEl, colors[textIdx]);
+          await type(texts[textIdx], textNameEl);
+          let blinkTimerId = blinkCursor();
+          await sleep(3200);
+          cleanCursor(blinkTimerId);
+          await backspace(textNameEl);
+          await sleep(500);
+
+          textIdx = (textIdx + 1) % texts.length;
+        }
+      }
+
+      async function type(text, el, delay = 100) {
+        el.classList.add('text-bg');
+        for (const ch of text) {
+          await sleep(delay);
+          el.innerHTML += ch;
+        }
+      }
+
+      async function backspace(el) {
+        let text = el.innerHTML;
+        while (text.length > 0) {
+          await sleep(60);
+          text = text.slice(0, -1);
+          el.innerHTML = text;
+        }
+        el.classList.remove('text-bg');
+      }
+
+      function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      function blinkCursor() {
+        const cursor = document.getElementById('cursor');
+        return setInterval(() => {
+          if (cursor.innerHTML === '_') {
+            cursor.innerHTML = '';
+          } else {
+            cursor.innerHTML = '_';
+          }
+        }, 500);
+      }
+
+      function cleanCursor(timerId) {
+        clearTimeout(timerId);
+        const cursor = document.getElementById('cursor');
+        cursor.innerHTML = '_';
+      }
+
+      function updateNameColor(el, color) {
+        el.style.color = color;
+      }
+
+      startCarosel();
+    </script>
+  </body>
+</html>
